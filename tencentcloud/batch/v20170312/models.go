@@ -1,0 +1,2271 @@
+// Copyright (c) 2017-2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package v20170312
+
+import (
+    "encoding/json"
+
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+)
+
+type Activity struct {
+
+	// Activity ID
+	ActivityId *string `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Compute node ID
+	ComputeNodeId *string `json:"ComputeNodeId,omitempty" name:"ComputeNodeId"`
+
+	// Compute node activity type: creation or termination
+	ComputeNodeActivityType *string `json:"ComputeNodeActivityType,omitempty" name:"ComputeNodeActivityType"`
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+	// Cause
+	Cause *string `json:"Cause,omitempty" name:"Cause"`
+
+	// Active status
+	ActivityState *string `json:"ActivityState,omitempty" name:"ActivityState"`
+
+	// State reason
+	StateReason *string `json:"StateReason,omitempty" name:"StateReason"`
+
+	// Activity start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Activity end time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// CVM instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type AgentRunningMode struct {
+
+	// Scenario type. Windows is supported
+	Scene *string `json:"Scene,omitempty" name:"Scene"`
+
+	// The user that runs the Agent
+	User *string `json:"User,omitempty" name:"User"`
+
+	// The session that runs the Agent
+	Session *string `json:"Session,omitempty" name:"Session"`
+}
+
+type AnonymousComputeEnv struct {
+
+	// Compute environment management type
+	EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+
+	// Compute environment's specific parameters
+	EnvData *EnvData `json:"EnvData,omitempty" name:"EnvData"`
+
+	// Data disk mounting option
+	MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks" list`
+
+	// Agent running mode; applicable for Windows
+	AgentRunningMode *AgentRunningMode `json:"AgentRunningMode,omitempty" name:"AgentRunningMode"`
+}
+
+type Application struct {
+
+	// Task execution command
+	Command *string `json:"Command,omitempty" name:"Command"`
+
+	// Delivery form of the application. Value range: PACKAGE, LOCAL, which refer to remotely stored software package and local compute environment, respectively.
+	DeliveryForm *string `json:"DeliveryForm,omitempty" name:"DeliveryForm"`
+
+	// Remote storage path of the application package
+	PackagePath *string `json:"PackagePath,omitempty" name:"PackagePath"`
+
+	// Relevant configuration of the Docker used by the application. In case that the Docker configuration is used, "LOCAL" DeliveryForm means that the application software inside the Docker image is used directly and run in Docker mode; "PACKAGE" DeliveryForm means that the remote application package is run in Docker mode after being injected into the Docker image. To avoid compatibility issues with different versions of Docker, the Docker installation package and relevant dependencies are taken care of by BatchCompute. For custom images where Docker has already been installed, uninstall Docker first and then use the Docker feature.
+	Docker *Docker `json:"Docker,omitempty" name:"Docker"`
+}
+
+type Authentication struct {
+
+	// Authentication scenario such as COS
+	Scene *string `json:"Scene,omitempty" name:"Scene"`
+
+	// SecretId
+	SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
+
+	// SecretKey
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+}
+
+type ComputeEnvCreateInfo struct {
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+	// Compute environment name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnvName *string `json:"EnvName,omitempty" name:"EnvName"`
+
+	// Compute environment description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnvDescription *string `json:"EnvDescription,omitempty" name:"EnvDescription"`
+
+	// Compute environment type. Only "MANAGED" type is supported
+	EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+
+	// Compute environment parameter
+	EnvData *EnvData `json:"EnvData,omitempty" name:"EnvData"`
+
+	// Data disk mounting option
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks" list`
+
+	// Input mapping
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings" list`
+
+	// Authorization information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications" list`
+
+	// Notification information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Notifications []*Notification `json:"Notifications,omitempty" name:"Notifications" list`
+
+	// Number of desired compute nodes
+	DesiredComputeNodeCount *uint64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
+}
+
+type ComputeEnvData struct {
+
+	// List of CVM instance types
+	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+}
+
+type ComputeEnvView struct {
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+	// Compute environment name
+	EnvName *string `json:"EnvName,omitempty" name:"EnvName"`
+
+	// Location information
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Compute node statistical metrics
+	ComputeNodeMetrics *ComputeNodeMetrics `json:"ComputeNodeMetrics,omitempty" name:"ComputeNodeMetrics"`
+
+	// Compute environment type
+	EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+
+	// Number of desired compute nodes
+	DesiredComputeNodeCount *uint64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
+}
+
+type ComputeNode struct {
+
+	// Compute node ID
+	ComputeNodeId *string `json:"ComputeNodeId,omitempty" name:"ComputeNodeId"`
+
+	// Compute node instance ID. In a CVM scenario, this parameter is the CVM InstanceId
+	ComputeNodeInstanceId *string `json:"ComputeNodeInstanceId,omitempty" name:"ComputeNodeInstanceId"`
+
+	// Compute node state
+	ComputeNodeState *string `json:"ComputeNodeState,omitempty" name:"ComputeNodeState"`
+
+	// Number of CPU cores
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory size in GiB
+	Mem *uint64 `json:"Mem,omitempty" name:"Mem"`
+
+	// Resource creation time
+	ResourceCreatedTime *string `json:"ResourceCreatedTime,omitempty" name:"ResourceCreatedTime"`
+
+	// Available capacity of the compute node when running TaskInstance. 0 means that the compute node is busy.
+	TaskInstanceNumAvailable *uint64 `json:"TaskInstanceNumAvailable,omitempty" name:"TaskInstanceNumAvailable"`
+
+	// BatchCompute Agent version
+	AgentVersion *string `json:"AgentVersion,omitempty" name:"AgentVersion"`
+
+	// Private IP of the instance
+	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+
+	// Public IP of the instance
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+}
+
+type ComputeNodeMetrics struct {
+
+	// Number of compute nodes that have been submitted
+	SubmittedCount *uint64 `json:"SubmittedCount,omitempty" name:"SubmittedCount"`
+
+	// Number of compute nodes that are being created
+	CreatingCount *uint64 `json:"CreatingCount,omitempty" name:"CreatingCount"`
+
+	// Number of compute nodes that failed to be created
+	CreationFailedCount *uint64 `json:"CreationFailedCount,omitempty" name:"CreationFailedCount"`
+
+	// Number of compute nodes that have been created
+	CreatedCount *uint64 `json:"CreatedCount,omitempty" name:"CreatedCount"`
+
+	// Number of running compute nodes
+	RunningCount *uint64 `json:"RunningCount,omitempty" name:"RunningCount"`
+
+	// Number of compute nodes that are being terminated
+	DeletingCount *uint64 `json:"DeletingCount,omitempty" name:"DeletingCount"`
+
+	// Number of exceptional compute nodes
+	AbnormalCount *uint64 `json:"AbnormalCount,omitempty" name:"AbnormalCount"`
+}
+
+type CreateComputeEnvRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment information
+	ComputeEnv *NamedComputeEnv `json:"ComputeEnv,omitempty" name:"ComputeEnv"`
+
+	// Location information
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// The string used to guarantee the idempotency of the request, which is generated by the user and must be unique for different requests. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+}
+
+func (r *CreateComputeEnvRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateComputeEnvRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateComputeEnvResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Compute environment ID
+		EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateComputeEnvResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateComputeEnvResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateTaskTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Task template name
+	TaskTemplateName *string `json:"TaskTemplateName,omitempty" name:"TaskTemplateName"`
+
+	// Task template content with the same parameter requirements as the task
+	TaskTemplateInfo *Task `json:"TaskTemplateInfo,omitempty" name:"TaskTemplateInfo"`
+
+	// Task template description
+	TaskTemplateDescription *string `json:"TaskTemplateDescription,omitempty" name:"TaskTemplateDescription"`
+}
+
+func (r *CreateTaskTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateTaskTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateTaskTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task template ID
+		TaskTemplateId *string `json:"TaskTemplateId,omitempty" name:"TaskTemplateId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateTaskTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateTaskTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DataDisk struct {
+
+	// The data disk size in GB. The minimum increment is 10 GB. Different types of data disks have different value ranges. For details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/213/11518). The default value is 0, indicating that no data disk is purchased. For more information, see the CVM documentation.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// The data disk type. For more information about the limits on different data disk types, see [Instance Specifications](/document/product/213/2177). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Data disk ID. Data disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter currently.
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// Whether to terminate the data disk when its CVM is terminated. Valid values:
+	// <li>TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.
+	// <li>FALSE: retain the data disk when its CVM is terminated.<br>
+	// Default value: TRUE<br>
+	// Currently this parameter is only used in the `RunInstances` API.
+	// Note: This field may return null, indicating that no valid value is found.
+	DeleteWithInstance *bool `json:"DeleteWithInstance,omitempty" name:"DeleteWithInstance"`
+
+	// Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.
+	// Note: This field may return null, indicating that no valid value is found.
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+}
+
+type DeleteComputeEnvRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+}
+
+func (r *DeleteComputeEnvRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteComputeEnvRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteComputeEnvResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteComputeEnvResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteComputeEnvResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteJobRequest struct {
+	*tchttp.BaseRequest
+
+	// Job ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *DeleteJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteJobRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteJobResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteJobResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteTaskTemplatesRequest struct {
+	*tchttp.BaseRequest
+
+	// This API is used to delete task template information.
+	TaskTemplateIds []*string `json:"TaskTemplateIds,omitempty" name:"TaskTemplateIds" list`
+}
+
+func (r *DeleteTaskTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteTaskTemplatesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteTaskTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteTaskTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteTaskTemplatesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type Dependence struct {
+
+	// Dependency start task name |
+	StartTask *string `json:"StartTask,omitempty" name:"StartTask"`
+
+	// Dependency end task name |
+	EndTask *string `json:"EndTask,omitempty" name:"EndTask"`
+}
+
+type DescribeAvailableCvmInstanceTypesRequest struct {
+	*tchttp.BaseRequest
+
+	// Filter.
+	// <li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
+	// <li> instance-family - String - Required: No - (Filter) Filter by model family such as S1, I1, and M1.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeAvailableCvmInstanceTypesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAvailableCvmInstanceTypesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAvailableCvmInstanceTypesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Array of model configurations
+		InstanceTypeConfigSet []*InstanceTypeConfig `json:"InstanceTypeConfigSet,omitempty" name:"InstanceTypeConfigSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAvailableCvmInstanceTypesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAvailableCvmInstanceTypesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeComputeEnvActivitiesRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter
+	// <li> compute-node-id - String - Required: No - (Filter) Filter by compute node ID.</li>
+	Filters *Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeComputeEnvActivitiesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeComputeEnvActivitiesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeComputeEnvActivitiesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of activities in the compute environment
+		ActivitySet []*Activity `json:"ActivitySet,omitempty" name:"ActivitySet" list`
+
+		// Number of activities
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeComputeEnvActivitiesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeComputeEnvActivitiesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeComputeEnvCreateInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+}
+
+func (r *DescribeComputeEnvCreateInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeComputeEnvCreateInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeComputeEnvCreateInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Compute environment ID
+		EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+		// Compute environment name
+		EnvName *string `json:"EnvName,omitempty" name:"EnvName"`
+
+		// Compute environment description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+		EnvDescription *string `json:"EnvDescription,omitempty" name:"EnvDescription"`
+
+		// Compute environment type. Only "MANAGED" type is supported
+		EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+
+		// Compute environment parameter
+		EnvData *EnvData `json:"EnvData,omitempty" name:"EnvData"`
+
+		// Data disk mounting option
+		MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks" list`
+
+		// Input mapping
+		InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings" list`
+
+		// Authorization information
+		Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications" list`
+
+		// Notification information
+		Notifications []*Notification `json:"Notifications,omitempty" name:"Notifications" list`
+
+		// Number of desired compute nodes
+		DesiredComputeNodeCount *int64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeComputeEnvCreateInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeComputeEnvCreateInfoResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeComputeEnvCreateInfosRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvIds []*string `json:"EnvIds,omitempty" name:"EnvIds" list`
+
+	// Filter
+	// <li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
+	// <li> env-id - String - Required: No - (Filter) Filter by compute environment ID.</li>
+	// <li> env-name - String - Required: No - (Filter) Filter by compute environment name.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeComputeEnvCreateInfosRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeComputeEnvCreateInfosRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeComputeEnvCreateInfosResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of compute environments
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of compute environment creation information
+		ComputeEnvCreateInfoSet []*ComputeEnvCreateInfo `json:"ComputeEnvCreateInfoSet,omitempty" name:"ComputeEnvCreateInfoSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeComputeEnvCreateInfosResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeComputeEnvCreateInfosResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeComputeEnvRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+}
+
+func (r *DescribeComputeEnvRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeComputeEnvRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeComputeEnvResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Compute environment ID
+		EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+		// Compute environment name
+		EnvName *string `json:"EnvName,omitempty" name:"EnvName"`
+
+		// Location information
+		Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+		// Compute environment creation time
+		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+		// List of compute nodes
+		ComputeNodeSet []*ComputeNode `json:"ComputeNodeSet,omitempty" name:"ComputeNodeSet" list`
+
+		// Compute node statistical metrics
+		ComputeNodeMetrics *ComputeNodeMetrics `json:"ComputeNodeMetrics,omitempty" name:"ComputeNodeMetrics"`
+
+		// Number of desired compute nodes
+		DesiredComputeNodeCount *uint64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
+
+		// Compute environment type
+		EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeComputeEnvResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeComputeEnvResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeComputeEnvsRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvIds []*string `json:"EnvIds,omitempty" name:"EnvIds" list`
+
+	// Filter
+	// <li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
+	// <li> env-id - String - Required: No - (Filter) Filter by compute environment ID.</li>
+	// <li> env-name - String - Required: No - (Filter) Filter by compute environment name.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeComputeEnvsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeComputeEnvsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeComputeEnvsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of compute environments
+		ComputeEnvSet []*ComputeEnvView `json:"ComputeEnvSet,omitempty" name:"ComputeEnvSet" list`
+
+		// Number of compute environments
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeComputeEnvsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeComputeEnvsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCvmZoneInstanceConfigInfosRequest struct {
+	*tchttp.BaseRequest
+
+	// Filter.
+	// <li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
+	// <li> instance-family - String - Required: No - (Filter) Filter by model family such as S1, I1, and M1.</li>
+	// <li> instance-type - String - Required: No - (Filter) Filter by model.</li>
+	// <li> instance-charge-type - String - Required: No - (Filter) Filter by instance billing method. ( POSTPAID_BY_HOUR: pay-as-you-go | SPOTPAID: bidding.)  </li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeCvmZoneInstanceConfigInfosRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCvmZoneInstanceConfigInfosRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCvmZoneInstanceConfigInfosResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of model configurations in the availability zone.
+		InstanceTypeQuotaSet []*InstanceTypeQuotaItem `json:"InstanceTypeQuotaSet,omitempty" name:"InstanceTypeQuotaSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCvmZoneInstanceConfigInfosResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCvmZoneInstanceConfigInfosResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceCategoriesRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeInstanceCategoriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceCategoriesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceCategoriesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of CVM instance categories
+		InstanceCategorySet []*InstanceCategoryItem `json:"InstanceCategorySet,omitempty" name:"InstanceCategorySet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceCategoriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceCategoriesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeJobRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *DescribeJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeJobRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeJobResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Instance ID
+		JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+		// Instance name
+		JobName *string `json:"JobName,omitempty" name:"JobName"`
+
+		// Information of availability zone
+		Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+		// Instance priority
+		Priority *int64 `json:"Priority,omitempty" name:"Priority"`
+
+		// Instance state
+		JobState *string `json:"JobState,omitempty" name:"JobState"`
+
+		// Creation time
+		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+		// End time
+		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+		// Task view information
+		TaskSet []*TaskView `json:"TaskSet,omitempty" name:"TaskSet" list`
+
+		// Information of the dependency among tasks
+		DependenceSet []*Dependence `json:"DependenceSet,omitempty" name:"DependenceSet" list`
+
+		// Task statistical metrics
+		TaskMetrics *TaskMetrics `json:"TaskMetrics,omitempty" name:"TaskMetrics"`
+
+		// Task instance statistical metrics
+		TaskInstanceMetrics *TaskInstanceView `json:"TaskInstanceMetrics,omitempty" name:"TaskInstanceMetrics"`
+
+		// Instance failure reason
+		StateReason *string `json:"StateReason,omitempty" name:"StateReason"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeJobResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeJobSubmitInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *DescribeJobSubmitInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeJobSubmitInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeJobSubmitInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Instance ID
+		JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+		// Instance name
+		JobName *string `json:"JobName,omitempty" name:"JobName"`
+
+		// Instance description
+		JobDescription *string `json:"JobDescription,omitempty" name:"JobDescription"`
+
+		// Job priority. Tasks (Task) and task instances (TaskInstance) inherit the priority of the job
+		Priority *int64 `json:"Priority,omitempty" name:"Priority"`
+
+		// Task information
+		Tasks []*Task `json:"Tasks,omitempty" name:"Tasks" list`
+
+		// Dependency information
+		Dependences []*Dependence `json:"Dependences,omitempty" name:"Dependences" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeJobSubmitInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeJobSubmitInfoResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeJobsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	JobIds []*string `json:"JobIds,omitempty" name:"JobIds" list`
+
+	// Filter
+	// <li> job-id - String - Required: No - (Filter) Filter by job ID.</li>
+	// <li> job-name - String - Required: No - (Filter) Filter by job name.</li>
+	// <li> job-state - String - Required: No - (Filter) Filter by job state.</li>
+	// <li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeJobsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeJobsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeJobsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of instances
+		JobSet []*JobView `json:"JobSet,omitempty" name:"JobSet" list`
+
+		// Number of eligible instances
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeJobsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeJobsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTaskLogsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// Job name
+	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+	// Set of task instances
+	TaskInstanceIndexes []*uint64 `json:"TaskInstanceIndexes,omitempty" name:"TaskInstanceIndexes" list`
+
+	// Starting task instance
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of task instances
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeTaskLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTaskLogsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTaskLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of task instances
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Set of task instance log details
+		TaskInstanceLogSet []*TaskInstanceLog `json:"TaskInstanceLogSet,omitempty" name:"TaskInstanceLogSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTaskLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTaskLogsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// Task name
+	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 100. Maximum value: 1,000.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter as detailed below:
+	// <li> task-instance-type - String - Required: No - (Filter) Filter by task instance state. (SUBMITTED: submitted; PENDING: pending; RUNNABLE: runnable; STARTING: starting; RUNNING: running; SUCCEED: succeeded; FAILED: failed; FAILED_INTERRUPTED: instance retained after failure).</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTaskRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Instance ID
+		JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+		// Job name
+		TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+		// Job state
+		TaskState *string `json:"TaskState,omitempty" name:"TaskState"`
+
+		// Creation time
+		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+		// End time
+		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+		// Total number of task instances
+		TaskInstanceTotalCount *int64 `json:"TaskInstanceTotalCount,omitempty" name:"TaskInstanceTotalCount"`
+
+		// Task instance information
+		TaskInstanceSet []*TaskInstanceView `json:"TaskInstanceSet,omitempty" name:"TaskInstanceSet" list`
+
+		// Task instance statistical metrics
+		TaskInstanceMetrics *TaskInstanceMetrics `json:"TaskInstanceMetrics,omitempty" name:"TaskInstanceMetrics"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTaskResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTaskTemplatesRequest struct {
+	*tchttp.BaseRequest
+
+	// Job template ID
+	TaskTemplateIds []*string `json:"TaskTemplateIds,omitempty" name:"TaskTemplateIds" list`
+
+	// Filter
+	// <li> task-template-name - String - Required: No - (Filter) Filter by task template name.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeTaskTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTaskTemplatesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTaskTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of job templates
+		TaskTemplateSet []*TaskTemplateView `json:"TaskTemplateSet,omitempty" name:"TaskTemplateSet" list`
+
+		// Number of job templates
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTaskTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTaskTemplatesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type Docker struct {
+
+	// Docker Hub username or Tencent Registry username
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Docker Hub password or Tencent Registry password
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// For Docker Hub, enter "[user/repo]:[tag]"; for Tencent Registry, enter "ccr.ccs.tencentyun.com/[namespace/repo]:[tag]"
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// For Docker Hub, this can be left blank, but please ensure public network access is present. For Tencent Registry, the server address is "ccr.ccs.tencentyun.com"
+	Server *string `json:"Server,omitempty" name:"Server"`
+}
+
+type EnhancedService struct {
+
+	// Enables cloud security service. If this parameter is not specified, the cloud security service will be enabled by default.
+	SecurityService *RunSecurityServiceEnabled `json:"SecurityService,omitempty" name:"SecurityService"`
+
+	// Enables cloud monitor service. If this parameter is not specified, the cloud monitor service will be enabled by default.
+	MonitorService *RunMonitorServiceEnabled `json:"MonitorService,omitempty" name:"MonitorService"`
+}
+
+type EnvData struct {
+
+	// CVM instance type, which cannot be present together with InstanceTypes or InstanceTypeOptions at the same time.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// CVM image ID
+	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
+
+	// Information of the instance's system disk configuration
+	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
+
+	// Information of the instance's data disk configuration
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+
+	// Information of the VPC configuration, which cannot be specified together with Zones and VirtualPrivateClouds.
+	VirtualPrivateCloud *VirtualPrivateCloud `json:"VirtualPrivateCloud,omitempty" name:"VirtualPrivateCloud"`
+
+	// Information of the public network bandwidth configuration
+	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
+
+	// CVM instance display name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance login settings
+	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
+
+	// Security group of the instance
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+
+	// Enhanced service. This parameter is used to specify whether to enable Cloud Security, Cloud Monitoring and other services. If this parameter is not specified, Cloud Monitoring and Cloud Security will be enabled by default.
+	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
+
+	// CVM instance billing method <br><li>POSTPAID_BY_HOUR: pay-as-you-go by the hour <br><li>SPOTPAID: bidding <br>Default value: POSTPAID_BY_HOUR.
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Market-related options of the instance, such as parameters related to spot instance
+	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitempty" name:"InstanceMarketOptions"`
+
+	// List of CVM instance types, which cannot be present together with InstanceType or InstanceTypeOptions at the same time. After the field is specified, the system will try creating compute nodes in the order of the models until successful creation and then stop the traversal process. Up to 10 models are supported.
+	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+
+	// CVM instance model configuration, which cannot be present together with InstanceType or InstanceTypes at the same time.
+	InstanceTypeOptions *InstanceTypeOptions `json:"InstanceTypeOptions,omitempty" name:"InstanceTypeOptions"`
+
+	// List of availability zones (creation of CVM instances across availability zones is supported), which cannot be specified together with VirtualPrivateCloud or VirtualPrivateClouds at the same time.
+	Zones []*string `json:"Zones,omitempty" name:"Zones" list`
+
+	// List of VPCs (creation of CVM instances across VPCs is supported), which cannot be specified together with VirtualPrivateCloud or Zones at the same time.
+	VirtualPrivateClouds []*VirtualPrivateCloud `json:"VirtualPrivateClouds,omitempty" name:"VirtualPrivateClouds" list`
+}
+
+type EnvVar struct {
+
+	// Environment variable name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Environment variable value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type EventConfig struct {
+
+	// Event type. Value range: <br/><li>"JOB_RUNNING": the job is running, applicable to "SubmitJob". </li><li>"JOB_SUCCEED: the job succeeded, applicable to "SubmitJob". </li><li>"JOB_FAILED": the job failed, applicable to "SubmitJob". </li><li>"JOB_FAILED_INTERRUPTED": the job failed and the instance is retained, applicable to "SubmitJob". </li><li>"TASK_RUNNING": the task is running, applicable to "SubmitJob". </li><li>"TASK_SUCCEED": the task succeeded, applicable to "SubmitJob". </li><li>"TASK_FAILED": the task failed, applicable to "SubmitJob". </li><li>"TASK_FAILED_INTERRUPTED": the task failed and the instance is retained, applicable to "SubmitJob". </li><li>"TASK_INSTANCE_RUNNING": the task instance is running, applicable to "SubmitJob". </li><li>"TASK_INSTANCE_SUCCEED": the task instance succeeded, applicable to "SubmitJob". </li><li>"TASK_INSTANCE_FAILED": the task instance failed, applicable to "SubmitJob". </li><li>"TASK_INSTANCE_FAILED_INTERRUPTED": the task instance failed and the instance is retained, applicable to "SubmitJob". </li><li>"COMPUTE_ENV_CREATED": the compute environment has been created, applicable to "CreateComputeEnv". </li><li>"COMPUTE_ENV_DELETED": the compute environment has been deleted, applicable to "CreateComputeEnv". </li><li>"COMPUTE_NODE_CREATED": the compute node has been created, applicable to "CreateComputeEnv" and "SubmitJob". </li><li>"COMPUTE_NODE_CREATION_FAILED": the compute node creation failed, applicable to "CreateComputeEnv" and "SubmitJob". </li><li>"COMPUTE_NODE_RUNNING": the compute node is running, applicable to "CreateComputeEnv" and "SubmitJob". </li><li>"COMPUTE_NODE_ABNORMAL": the compute node is exceptional, applicable to "CreateComputeEnv" and "SubmitJob". </li><li>"COMPUTE_NODE_DELETING": the compute node has been deleted, applicable to "CreateComputeEnv" and "SubmitJob". </li>
+	EventName *string `json:"EventName,omitempty" name:"EventName"`
+
+	// Custom key-value pair
+	EventVars []*EventVar `json:"EventVars,omitempty" name:"EventVars" list`
+}
+
+type EventVar struct {
+
+	// Custom key
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Custom value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type Externals struct {
+
+	// Release address
+	// Note: This field may return null, indicating that no valid value is found.
+	ReleaseAddress *bool `json:"ReleaseAddress,omitempty" name:"ReleaseAddress"`
+
+	// Unsupported network types
+	// Note: This field may return null, indicating that no valid value is found.
+	UnsupportNetworks []*string `json:"UnsupportNetworks,omitempty" name:"UnsupportNetworks" list`
+
+	// Attributes of local HDD storage
+	// Note: This field may return null, indicating that no valid value is found.
+	StorageBlockAttr *StorageBlock `json:"StorageBlockAttr,omitempty" name:"StorageBlockAttr"`
+}
+
+type Filter struct {
+
+	// Filters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Filter values.
+	Values []*string `json:"Values,omitempty" name:"Values" list`
+}
+
+type InputMapping struct {
+
+	// Source path
+	SourcePath *string `json:"SourcePath,omitempty" name:"SourcePath"`
+
+	// Destination path
+	DestinationPath *string `json:"DestinationPath,omitempty" name:"DestinationPath"`
+
+	// Mounting configuration item parameter
+	MountOptionParameter *string `json:"MountOptionParameter,omitempty" name:"MountOptionParameter"`
+}
+
+type InstanceCategoryItem struct {
+
+	// Instance type name
+	InstanceCategory *string `json:"InstanceCategory,omitempty" name:"InstanceCategory"`
+
+	// List of instance families
+	InstanceFamilySet []*string `json:"InstanceFamilySet,omitempty" name:"InstanceFamilySet" list`
+}
+
+type InstanceMarketOptionsRequest struct {
+	*tchttp.BaseRequest
+
+	// Options related to bidding
+	SpotOptions *SpotMarketOptions `json:"SpotOptions,omitempty" name:"SpotOptions"`
+
+	// Market option type. Currently `spot` is the only supported value.
+	MarketType *string `json:"MarketType,omitempty" name:"MarketType"`
+}
+
+func (r *InstanceMarketOptionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InstanceMarketOptionsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InstanceTypeConfig struct {
+
+	// Memory size in GB.
+	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+
+	// Number of CPU cores.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Instance model.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Availability zone.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance model family.
+	InstanceFamily *string `json:"InstanceFamily,omitempty" name:"InstanceFamily"`
+}
+
+type InstanceTypeOptions struct {
+
+	// Number of CPU cores.
+	CPU *uint64 `json:"CPU,omitempty" name:"CPU"`
+
+	// Memory size in GB.
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance model category. Value range: "ALL", "GENERAL", "GENERAL_2", "GENERAL_3", "COMPUTE", "COMPUTE_2", and "COMPUTE_3". Default value: "ALL".
+	InstanceCategories []*string `json:"InstanceCategories,omitempty" name:"InstanceCategories" list`
+}
+
+type InstanceTypeQuotaItem struct {
+
+	// Availability zone.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance model.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Instance billing method. Valid values: <br><li>`PREPAID`: prepaid, i.e., monthly subscription <br><li>`POSTPAID_BY_HOUR`: pay-as-you-go <br><li>`CDHPAID`: you are only billed for the [CDH](https://cloud.tencent.com/document/product/416) instances, not the CVMs running on the CDHs. <br><li>`SPOTPAID`: you are billed based on your bid.
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// ENI type. For example, 25 represents an ENI of 25 GB.
+	NetworkCard *int64 `json:"NetworkCard,omitempty" name:"NetworkCard"`
+
+	// Additional data.
+	// Note: This field may return null, indicating that no valid value is found.
+	Externals *Externals `json:"Externals,omitempty" name:"Externals"`
+
+	// Number of CPU cores of an instance model.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Instance memory capacity; unit: `GB`.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance model family.
+	InstanceFamily *string `json:"InstanceFamily,omitempty" name:"InstanceFamily"`
+
+	// Model name.
+	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
+
+	// List of local disk specifications. If the parameter returns null, it means that local disks cannot be created.
+	LocalDiskTypeList []*LocalDiskType `json:"LocalDiskTypeList,omitempty" name:"LocalDiskTypeList" list`
+
+	// Whether an instance model is available. Valid values: <br><li>SELL: available <br><li>SOLD_OUT: sold out
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Price of an instance model.
+	Price *ItemPrice `json:"Price,omitempty" name:"Price"`
+}
+
+type InternetAccessible struct {
+
+	// Network billing method. Valid values: <br><li>BANDWIDTH_PREPAID: prepaid; billed by bandwidth <br><li>TRAFFIC_POSTPAID_BY_HOUR: pay-as-you-go; billed by traffic on an hourly basis <br><li>BANDWIDTH_POSTPAID_BY_HOUR: pay-as-you-go; billed by bandwidth on an hourly basis <br><li>BANDWIDTH_PACKAGE: for bandwidth package users <br>Default value: same as the instance billing method for non-bandwidth package users.
+	InternetChargeType *string `json:"InternetChargeType,omitempty" name:"InternetChargeType"`
+
+	// The maximum outbound bandwidth of the public network, in Mbps. The default value is 0 Mbps. The upper limit of bandwidth varies for different models. For more information, see [Purchase Network Bandwidth](https://cloud.tencent.com/document/product/213/12523).
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Whether to assign a public IP. Valid values: <br><li>TRUE: Assign a public IP <br><li>FALSE: Do not assign a public IP <br><br>If the public network bandwidth is greater than 0 Mbps, you can choose whether to assign a public IP; by default a public IP will be assigned. If the public network bandwidth is 0 Mbps, you will not be able to assign a public IP.
+	PublicIpAssigned *bool `json:"PublicIpAssigned,omitempty" name:"PublicIpAssigned"`
+
+	// Bandwidth package ID. To obatin the IDs, you can call [`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209) and look for the `BandwidthPackageId` fields in the response.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+}
+
+type ItemPrice struct {
+
+	// Subsequent unit price (in RMB).
+	// Note: This field may return null, indicating that no valid value is found.
+	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
+
+	// Subsequent billing unit. Valid values: <br><li>HOUR: bill by hour. Scenarios using this billing unit include: pay as you go for instances on an hourly basis (`POSTPAID_BY_HOUR`), and pay as you go for bandwidth on an hourly basis (`BANDWIDTH_POSTPAID_BY_HOUR`). <br><li>GB: bill by traffic in GB. Scenarios using this billing unit include: pay as you go for traffic on an hourly basis (`TRAFFIC_POSTPAID_BY_HOUR`).
+	// Note: This field may return null, indicating that no valid value is found.
+	ChargeUnit *string `json:"ChargeUnit,omitempty" name:"ChargeUnit"`
+
+	// Original price of a prepaid instance (in RMB).
+	// Note: This field may return null, indicating that no valid value is found.
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discount price of a prepaid instance (in RMB).
+	// Note: This field may return null, indicating that no valid value is found.
+	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+}
+
+type Job struct {
+
+	// Job information
+	Tasks []*Task `json:"Tasks,omitempty" name:"Tasks" list`
+
+	// Instance name
+	JobName *string `json:"JobName,omitempty" name:"JobName"`
+
+	// Instance description
+	JobDescription *string `json:"JobDescription,omitempty" name:"JobDescription"`
+
+	// Instance priority. Tasks (Task) and task instances (TaskInstance) inherit the priority of the instance
+	Priority *uint64 `json:"Priority,omitempty" name:"Priority"`
+
+	// Dependency information
+	Dependences []*Dependence `json:"Dependences,omitempty" name:"Dependences" list`
+
+	// Notification information
+	Notifications []*Notification `json:"Notifications,omitempty" name:"Notifications" list`
+
+	// This is the dependency of the subsequent task on the previous task if there is a dependent relationship between them. Value range: PRE_TASK_SUCCEED, PRE_TASK_AT_LEAST_PARTLY_SUCCEED, PRE_TASK_FINISHED. Default value: PRE_TASK_SUCCEED.
+	TaskExecutionDependOn *string `json:"TaskExecutionDependOn,omitempty" name:"TaskExecutionDependOn"`
+
+	// Indicates which policy will be used in case that CVM instance creation fails. Value range: FAILED, RUNNABLE. FAILED indicates that the CVM instance creation failure will be processed as an execution failure, while RUNNABLE indicates that the failure will be processed as "keep waiting". Default value: FAILED. StateIfCreateCvmFailed is not valid for submitted jobs for which a compute environment is specified.
+	StateIfCreateCvmFailed *string `json:"StateIfCreateCvmFailed,omitempty" name:"StateIfCreateCvmFailed"`
+}
+
+type JobView struct {
+
+	// Instance ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// Instance name
+	JobName *string `json:"JobName,omitempty" name:"JobName"`
+
+	// Instance state
+	JobState *string `json:"JobState,omitempty" name:"JobState"`
+
+	// Instance priority
+	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
+
+	// Location information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// End time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Task statistical metrics
+	TaskMetrics *TaskMetrics `json:"TaskMetrics,omitempty" name:"TaskMetrics"`
+}
+
+type LocalDiskType struct {
+
+	// Type of a local disk.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Attributes of a local disk.
+	PartitionType *string `json:"PartitionType,omitempty" name:"PartitionType"`
+
+	// Minimum size of a local disk.
+	MinSize *int64 `json:"MinSize,omitempty" name:"MinSize"`
+
+	// Maximum size of a local disk.
+	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
+
+	// 
+	Required *string `json:"Required,omitempty" name:"Required"`
+}
+
+type LoginSettings struct {
+
+	// Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-16 characters long and contain at least one character from two of the following categories: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-16 characters long and contain at least one character from three of the following categories: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
+	// Note: This field may return null, indicating that no valid value is found.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
+	// Note: This field may return null, indicating that no valid value is found.
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+
+	// Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
+	// Note: This field may return null, indicating that no valid value is found.
+	KeepImageLogin *string `json:"KeepImageLogin,omitempty" name:"KeepImageLogin"`
+}
+
+type ModifyComputeEnvRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+	// Number of desired compute nodes
+	DesiredComputeNodeCount *int64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
+
+	// Compute environment name
+	EnvName *string `json:"EnvName,omitempty" name:"EnvName"`
+
+	// Compute environment description
+	EnvDescription *string `json:"EnvDescription,omitempty" name:"EnvDescription"`
+
+	// Compute environment attributes
+	EnvData *ComputeEnvData `json:"EnvData,omitempty" name:"EnvData"`
+}
+
+func (r *ModifyComputeEnvRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyComputeEnvRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyComputeEnvResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyComputeEnvResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyComputeEnvResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyTaskTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Job template ID
+	TaskTemplateId *string `json:"TaskTemplateId,omitempty" name:"TaskTemplateId"`
+
+	// Job template name
+	TaskTemplateName *string `json:"TaskTemplateName,omitempty" name:"TaskTemplateName"`
+
+	// Job template description
+	TaskTemplateDescription *string `json:"TaskTemplateDescription,omitempty" name:"TaskTemplateDescription"`
+
+	// Job template information
+	TaskTemplateInfo *Task `json:"TaskTemplateInfo,omitempty" name:"TaskTemplateInfo"`
+}
+
+func (r *ModifyTaskTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyTaskTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyTaskTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyTaskTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyTaskTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type MountDataDisk struct {
+
+	// Mounting point. For Linux, this parameter should be a valid path. For Windows, this parameter should be a system disk letter such as "H:\\"
+	LocalPath *string `json:"LocalPath,omitempty" name:"LocalPath"`
+
+	// File system type. For Linux, "EXT3" and "EXT4" are supported and the default value is "EXT3". For Windows, only "NTFS" is supported
+	FileSystemType *string `json:"FileSystemType,omitempty" name:"FileSystemType"`
+}
+
+type NamedComputeEnv struct {
+
+	// Compute environment name
+	EnvName *string `json:"EnvName,omitempty" name:"EnvName"`
+
+	// Number of desired compute nodes
+	DesiredComputeNodeCount *int64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
+
+	// Compute environment description
+	EnvDescription *string `json:"EnvDescription,omitempty" name:"EnvDescription"`
+
+	// Compute environment management type
+	EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+
+	// Compute environment's specific parameters
+	EnvData *EnvData `json:"EnvData,omitempty" name:"EnvData"`
+
+	// Data disk mounting option
+	MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks" list`
+
+	// Authorization information
+	Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications" list`
+
+	// Input mapping information
+	InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings" list`
+
+	// Agent running mode; applicable for Windows
+	AgentRunningMode *AgentRunningMode `json:"AgentRunningMode,omitempty" name:"AgentRunningMode"`
+
+	// Notification information
+	Notifications *Notification `json:"Notifications,omitempty" name:"Notifications"`
+
+	// Inactive node processing policy. Default value: RECREATE, which means that instance resources will be re-created periodically for compute nodes where instance creation fails or is abnormally returned.
+	ActionIfComputeNodeInactive *string `json:"ActionIfComputeNodeInactive,omitempty" name:"ActionIfComputeNodeInactive"`
+}
+
+type Notification struct {
+
+	// CMQ topic name which should be valid and associated with a subscription
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Event configuration
+	EventConfigs []*EventConfig `json:"EventConfigs,omitempty" name:"EventConfigs" list`
+}
+
+type OutputMapping struct {
+
+	// Source path
+	SourcePath *string `json:"SourcePath,omitempty" name:"SourcePath"`
+
+	// Destination path
+	DestinationPath *string `json:"DestinationPath,omitempty" name:"DestinationPath"`
+}
+
+type OutputMappingConfig struct {
+
+	// Storage type. Only COS is supported
+	Scene *string `json:"Scene,omitempty" name:"Scene"`
+
+	// Number of parallel workers
+	WorkerNum *int64 `json:"WorkerNum,omitempty" name:"WorkerNum"`
+
+	// Size of a worker part, in MB.
+	WorkerPartSize *int64 `json:"WorkerPartSize,omitempty" name:"WorkerPartSize"`
+}
+
+type Placement struct {
+
+	// ID of the [Availability Zone](/document/product/213/9452#zone) where the instance resides. To obtain the availability zone IDs, you can call [DescribeZones](/document/api/213/9455) and look for the `Zone` fields in the response.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// ID of the project to which the instance belongs. To obtain the project IDs, you can call [DescribeProject](/document/api/378/4400) and look for the `projectId` fields in the response. If this parameter is not specified, the default project will be used.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
+	HostIds []*string `json:"HostIds,omitempty" name:"HostIds" list`
+
+	// Master host IP used to create the CVM
+	HostIps []*string `json:"HostIps,omitempty" name:"HostIps" list`
+}
+
+type RedirectInfo struct {
+
+	// Standard output redirection path
+	StdoutRedirectPath *string `json:"StdoutRedirectPath,omitempty" name:"StdoutRedirectPath"`
+
+	// Standard error redirection path
+	StderrRedirectPath *string `json:"StderrRedirectPath,omitempty" name:"StderrRedirectPath"`
+
+	// Standard output redirection file name, which supports three placeholders: ${BATCH_JOB_ID}, ${BATCH_TASK_NAME}, and ${BATCH_TASK_INSTANCE_INDEX}
+	StdoutRedirectFileName *string `json:"StdoutRedirectFileName,omitempty" name:"StdoutRedirectFileName"`
+
+	// Standard error redirection file name, which supports three placeholders: ${BATCH_JOB_ID}, ${BATCH_TASK_NAME}, and ${BATCH_TASK_INSTANCE_INDEX}
+	StderrRedirectFileName *string `json:"StderrRedirectFileName,omitempty" name:"StderrRedirectFileName"`
+}
+
+type RedirectLocalInfo struct {
+
+	// Standard output redirection local path
+	StdoutLocalPath *string `json:"StdoutLocalPath,omitempty" name:"StdoutLocalPath"`
+
+	// Standard error redirection local path
+	StderrLocalPath *string `json:"StderrLocalPath,omitempty" name:"StderrLocalPath"`
+
+	// Standard output redirection local file name, which supports three placeholders: ${BATCH_JOB_ID}, ${BATCH_TASK_NAME}, and ${BATCH_TASK_INSTANCE_INDEX}
+	StdoutLocalFileName *string `json:"StdoutLocalFileName,omitempty" name:"StdoutLocalFileName"`
+
+	// Standard error redirection local file name, which supports three placeholders: ${BATCH_JOB_ID}, ${BATCH_TASK_NAME}, and ${BATCH_TASK_INSTANCE_INDEX}
+	StderrLocalFileName *string `json:"StderrLocalFileName,omitempty" name:"StderrLocalFileName"`
+}
+
+type RetryJobsRequest struct {
+	*tchttp.BaseRequest
+
+	// List of instance IDs.
+	JobIds []*string `json:"JobIds,omitempty" name:"JobIds" list`
+}
+
+func (r *RetryJobsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RetryJobsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RetryJobsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RetryJobsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RetryJobsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RunMonitorServiceEnabled struct {
+
+	// Whether to enable [Cloud Monitor](/document/product/248). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+}
+
+type RunSecurityServiceEnabled struct {
+
+	// Whether to enable [Cloud Security](/document/product/296). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+}
+
+type SpotMarketOptions struct {
+
+	// Bidding price
+	MaxPrice *string `json:"MaxPrice,omitempty" name:"MaxPrice"`
+
+	// Bidding request type. Currently only "one-time" is supported.
+	SpotInstanceType *string `json:"SpotInstanceType,omitempty" name:"SpotInstanceType"`
+}
+
+type StorageBlock struct {
+
+	// Local HDD storage type. Value: LOCAL_PRO.
+	// Note: This field may return null, indicating that no valid value is found.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Minimum capacity of local HDD storage
+	// Note: This field may return null, indicating that no valid value is found.
+	MinSize *int64 `json:"MinSize,omitempty" name:"MinSize"`
+
+	// Maximum capacity of local HDD storage
+	// Note: This field may return null, indicating that no valid value is found.
+	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
+}
+
+type SubmitJobRequest struct {
+	*tchttp.BaseRequest
+
+	// Location information of the submitted job. This parameter allows you to specify information such as the availability zone of the CVM instance with which the job is associated.
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// Job information
+	Job *Job `json:"Job,omitempty" name:"Job"`
+
+	// The string used to guarantee the idempotency of the request, which is generated by the user and must be unique for different requests. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+}
+
+func (r *SubmitJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SubmitJobRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SubmitJobResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// When a job is submitted through this API, this parameter is returned and indicates the job ID. Returning the list of job IDs does not mean that the job is parsed/executed successfully. The job state can be queried using the DescribeJob API.
+		JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SubmitJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SubmitJobResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SystemDisk struct {
+
+	// The system disk type. For more information about the limits on system disk types, see [Instance Types](/document/product/213/2177). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><br>Default value: CLOUD_BASIC.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// System disk ID. System disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter currently.
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// System disk size; unit: GB; default value: 50 GB.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+}
+
+type Task struct {
+
+	// Application information
+	Application *Application `json:"Application,omitempty" name:"Application"`
+
+	// Job name, which should be unique within instance
+	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+	// Number of running task instances
+	TaskInstanceNum *uint64 `json:"TaskInstanceNum,omitempty" name:"TaskInstanceNum"`
+
+	// Compute environment information. One (and only one) parameter must be specified for ComputeEnv and EnvId.
+	ComputeEnv *AnonymousComputeEnv `json:"ComputeEnv,omitempty" name:"ComputeEnv"`
+
+	// Compute environment ID. One (and only one) parameter must be specified for ComputeEnv and EnvId.
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+	// Redirection information
+	RedirectInfo *RedirectInfo `json:"RedirectInfo,omitempty" name:"RedirectInfo"`
+
+	// Local redirection information
+	RedirectLocalInfo *RedirectLocalInfo `json:"RedirectLocalInfo,omitempty" name:"RedirectLocalInfo"`
+
+	// Input mapping
+	InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings" list`
+
+	// Output mapping
+	OutputMappings []*OutputMapping `json:"OutputMappings,omitempty" name:"OutputMappings" list`
+
+	// Output mapping configuration
+	OutputMappingConfigs []*OutputMappingConfig `json:"OutputMappingConfigs,omitempty" name:"OutputMappingConfigs" list`
+
+	// Custom environment variable
+	EnvVars []*EnvVar `json:"EnvVars,omitempty" name:"EnvVars" list`
+
+	// Authorization information
+	Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications" list`
+
+	// The processing method after the TaskInstance fails; Value range: TERMINATE (default), INTERRUPT, FAST_INTERRUPT.
+	FailedAction *string `json:"FailedAction,omitempty" name:"FailedAction"`
+
+	// The maximum number of retries after the task fails. Default value: 0
+	MaxRetryCount *uint64 `json:"MaxRetryCount,omitempty" name:"MaxRetryCount"`
+
+	// Timeout period in seconds after the task starts. Defaults value: 86,400
+	Timeout *uint64 `json:"Timeout,omitempty" name:"Timeout"`
+
+	// The maximum number of concurrent tasks. There is no limit by default.
+	MaxConcurrentNum *uint64 `json:"MaxConcurrentNum,omitempty" name:"MaxConcurrentNum"`
+
+	// Restarts the compute node after the task is completed. This is suitable for specifying the compute environment for task execution.
+	RestartComputeNode *bool `json:"RestartComputeNode,omitempty" name:"RestartComputeNode"`
+
+	// Maximum number of retry attempts after failing to create computing resources such as the CVM in the task launch process. Default value: 0.
+	ResourceMaxRetryCount *uint64 `json:"ResourceMaxRetryCount,omitempty" name:"ResourceMaxRetryCount"`
+}
+
+type TaskInstanceLog struct {
+
+	// Task instance
+	TaskInstanceIndex *uint64 `json:"TaskInstanceIndex,omitempty" name:"TaskInstanceIndex"`
+
+	// Standard output log (Base64-encoded)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StdoutLog *string `json:"StdoutLog,omitempty" name:"StdoutLog"`
+
+	// Standard error log (Base64-encoded)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StderrLog *string `json:"StderrLog,omitempty" name:"StderrLog"`
+
+	// Standard output redirection path
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StdoutRedirectPath *string `json:"StdoutRedirectPath,omitempty" name:"StdoutRedirectPath"`
+
+	// Standard error redirection path
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StderrRedirectPath *string `json:"StderrRedirectPath,omitempty" name:"StderrRedirectPath"`
+
+	// Standard output redirection file name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StdoutRedirectFileName *string `json:"StdoutRedirectFileName,omitempty" name:"StdoutRedirectFileName"`
+
+	// Standard error redirection file name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StderrRedirectFileName *string `json:"StderrRedirectFileName,omitempty" name:"StderrRedirectFileName"`
+}
+
+type TaskInstanceMetrics struct {
+
+	// Submitted count
+	SubmittedCount *int64 `json:"SubmittedCount,omitempty" name:"SubmittedCount"`
+
+	// Pending count
+	PendingCount *int64 `json:"PendingCount,omitempty" name:"PendingCount"`
+
+	// Runnable count
+	RunnableCount *int64 `json:"RunnableCount,omitempty" name:"RunnableCount"`
+
+	// Starting count
+	StartingCount *int64 `json:"StartingCount,omitempty" name:"StartingCount"`
+
+	// Running count
+	RunningCount *int64 `json:"RunningCount,omitempty" name:"RunningCount"`
+
+	// Succeed count
+	SucceedCount *int64 `json:"SucceedCount,omitempty" name:"SucceedCount"`
+
+	// FailedInterrupted count
+	FailedInterruptedCount *int64 `json:"FailedInterruptedCount,omitempty" name:"FailedInterruptedCount"`
+
+	// Failed count
+	FailedCount *int64 `json:"FailedCount,omitempty" name:"FailedCount"`
+}
+
+type TaskInstanceView struct {
+
+	// Task instance index
+	TaskInstanceIndex *int64 `json:"TaskInstanceIndex,omitempty" name:"TaskInstanceIndex"`
+
+	// Task instance state
+	TaskInstanceState *string `json:"TaskInstanceState,omitempty" name:"TaskInstanceState"`
+
+	// Exit code after application execution is completed
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExitCode *int64 `json:"ExitCode,omitempty" name:"ExitCode"`
+
+	// Task instance state reason. If the task instance fails, the reason for the failure will be logged.
+	StateReason *string `json:"StateReason,omitempty" name:"StateReason"`
+
+	// The InstanceId of the compute node (e.g., CVM instance) where the task instance is running. This field is empty if the task instance is not running or has already been completed and will change when the task instance is retried
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ComputeNodeInstanceId *string `json:"ComputeNodeInstanceId,omitempty" name:"ComputeNodeInstanceId"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Start time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LaunchTime *string `json:"LaunchTime,omitempty" name:"LaunchTime"`
+
+	// Running start time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RunningTime *string `json:"RunningTime,omitempty" name:"RunningTime"`
+
+	// End time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Redirection information
+	RedirectInfo *RedirectInfo `json:"RedirectInfo,omitempty" name:"RedirectInfo"`
+
+	// Task instance state reason details. If the task instance fails, the reason for the failure will be logged
+	StateDetailedReason *string `json:"StateDetailedReason,omitempty" name:"StateDetailedReason"`
+}
+
+type TaskMetrics struct {
+
+	// Submitted count
+	SubmittedCount *int64 `json:"SubmittedCount,omitempty" name:"SubmittedCount"`
+
+	// Pending count
+	PendingCount *int64 `json:"PendingCount,omitempty" name:"PendingCount"`
+
+	// Runnable count
+	RunnableCount *int64 `json:"RunnableCount,omitempty" name:"RunnableCount"`
+
+	// Starting count
+	StartingCount *int64 `json:"StartingCount,omitempty" name:"StartingCount"`
+
+	// Running count
+	RunningCount *int64 `json:"RunningCount,omitempty" name:"RunningCount"`
+
+	// Succeed count
+	SucceedCount *int64 `json:"SucceedCount,omitempty" name:"SucceedCount"`
+
+	// FailedInterrupted count
+	FailedInterruptedCount *int64 `json:"FailedInterruptedCount,omitempty" name:"FailedInterruptedCount"`
+
+	// Failed count
+	FailedCount *int64 `json:"FailedCount,omitempty" name:"FailedCount"`
+}
+
+type TaskTemplateView struct {
+
+	// Task template ID
+	TaskTemplateId *string `json:"TaskTemplateId,omitempty" name:"TaskTemplateId"`
+
+	// Task template name
+	TaskTemplateName *string `json:"TaskTemplateName,omitempty" name:"TaskTemplateName"`
+
+	// Task template description
+	TaskTemplateDescription *string `json:"TaskTemplateDescription,omitempty" name:"TaskTemplateDescription"`
+
+	// Task template information
+	TaskTemplateInfo *Task `json:"TaskTemplateInfo,omitempty" name:"TaskTemplateInfo"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
+type TaskView struct {
+
+	// Task name
+	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+	// Task state
+	TaskState *string `json:"TaskState,omitempty" name:"TaskState"`
+
+	// Create time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// End time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+type TerminateComputeNodeRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+	// Compute node ID
+	ComputeNodeId *string `json:"ComputeNodeId,omitempty" name:"ComputeNodeId"`
+}
+
+func (r *TerminateComputeNodeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TerminateComputeNodeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TerminateComputeNodeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *TerminateComputeNodeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TerminateComputeNodeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TerminateComputeNodesRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+	// List of compute node IDs
+	ComputeNodeIds []*string `json:"ComputeNodeIds,omitempty" name:"ComputeNodeIds" list`
+}
+
+func (r *TerminateComputeNodesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TerminateComputeNodesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TerminateComputeNodesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *TerminateComputeNodesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TerminateComputeNodesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TerminateJobRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *TerminateJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TerminateJobRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TerminateJobResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *TerminateJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TerminateJobResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TerminateTaskInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// Task name
+	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+	// Task instance index
+	TaskInstanceIndex *int64 `json:"TaskInstanceIndex,omitempty" name:"TaskInstanceIndex"`
+}
+
+func (r *TerminateTaskInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TerminateTaskInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TerminateTaskInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *TerminateTaskInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TerminateTaskInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type VirtualPrivateCloud struct {
+
+	// 
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID in the format `subnet-xxx`. To obtain valid subnet IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/subnet?rid=1) or call [DescribeSubnets](/document/api/215/15784) and look for the `unSubnetId` fields in the response. If you specify `DEFAULT` for both `SubnetId` and `VpcId` when creating an instance, the default VPC will be used.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Whether to use an instance as a public gateway. An instance can be used as a public gateway only when it has a public IP and resides in a VPC. Valid values: <br><li>TRUE: use the instance as a public gateway <br><li>FALSE: do not use the instance as a public gateway <br><br>Default value: FALSE.
+	AsVpcGateway *bool `json:"AsVpcGateway,omitempty" name:"AsVpcGateway"`
+
+	// Array of VPC subnet IPs. You can use this parameter when creating instances or modifying VPC attributes of instances. Currently you can specify multiple IPs in one subnet only when creating multiple instances at the same time.
+	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+
+	// 
+	Ipv6AddressCount *uint64 `json:"Ipv6AddressCount,omitempty" name:"Ipv6AddressCount"`
+}
