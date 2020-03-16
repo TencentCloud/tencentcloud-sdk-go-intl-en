@@ -22,6 +22,9 @@ import (
 
 type AssociateTargetGroupsRequest struct {
 	*tchttp.BaseRequest
+
+	// Association array
+	Associations []*TargetGroupAssociation `json:"Associations,omitempty" name:"Associations" list`
 }
 
 func (r *AssociateTargetGroupsRequest) ToJsonString() string {
@@ -49,6 +52,39 @@ func (r *AssociateTargetGroupsResponse) ToJsonString() string {
 
 func (r *AssociateTargetGroupsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type AssociationItem struct {
+
+	// ID of associated CLB instance
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// ID of associated listener
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// ID of associated forwarding rule
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+
+	// Protocol type of associated listener, such as HTTP or TCP
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Port of associated listener
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Domain name of associated forwarding rule
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// URL of associated forwarding rule
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// CLB instance name
+	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
+
+	// Listener name
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 }
 
 type AutoRewriteRequest struct {
@@ -274,6 +310,16 @@ type BatchTarget struct {
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 }
 
+type CertIdRelatedWithLoadBalancers struct {
+
+	// Certificate ID
+	CertId *string `json:"CertId,omitempty" name:"CertId"`
+
+	// List of CLB instances associated with certificate
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	LoadBalancers []*LoadBalancer `json:"LoadBalancers,omitempty" name:"LoadBalancers" list`
+}
+
 type CertificateInput struct {
 
 	// Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication)
@@ -437,6 +483,20 @@ type ClassicalTargetInfo struct {
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 }
 
+type ClusterItem struct {
+
+	// Unique cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Cluster AZ, such as ap-guangzhou-1
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+}
+
 type CreateListenerRequest struct {
 	*tchttp.BaseRequest
 
@@ -455,7 +515,7 @@ type CreateListenerRequest struct {
 	// Health check parameter, which is applicable only to TCP/UDP/TCP_SSL listeners
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Certificate information. This parameter is applicable only to HTTPS/TCP_SSL listeners.
+	// Certificate information. This parameter is applicable only to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled.
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Session persistence time in seconds. Value range: 30-3,600. The default value is 0, indicating that session persistence is not enabled. This parameter is applicable only to TCP/UDP listeners.
@@ -516,13 +576,13 @@ type CreateLoadBalancerRequest struct {
 	// Network ID of the backend target server of CLB, which can be obtained through the DescribeVpcEx API. If this parameter is not passed in, it will default to a basic network ("0").
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// A subnet ID must be specified when you purchase a private network CLB instance in a VPC, and the VIP of this instance will be generated in this subnet. This parameter is not supported in other cases.
+	// A subnet ID must be specified when you purchase a private network CLB instance in a VPC, and the VIP of this instance will be generated in this subnet.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// ID of the project to which a CLB instance belongs, which can be obtained through the DescribeProject API. If this parameter is not passed in, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// IP version. Value range: IPv4, IPv6. Default value: IPv4. This parameter is applicable only to public network CLB.
+	// IP version. Valid values: IPv4, IPv6, IPv6FullChain. Default value: IPv4. This parameter is applicable only to public network CLB instances.
 	AddressIPVersion *string `json:"AddressIPVersion,omitempty" name:"AddressIPVersion"`
 
 	// Number of CLBs to be created. Default value: 1.
@@ -535,8 +595,11 @@ type CreateLoadBalancerRequest struct {
 	// Specifies an AZ ID for creating a CLB instance, such as ap-guangzhou-1, which is applicable only to public network CLB.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// CLB network billing method. This parameter is applicable only to public network CLB, and takes effect only for users whose bandwidth is managed in IP and CLB.
+	// CLB network billing mode. This parameter is applicable only to public network CLB instances.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
+
+	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
+	VipIsp *string `json:"VipIsp,omitempty" name:"VipIsp"`
 
 	// Tags a CLB instance when purchasing it
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
@@ -598,6 +661,9 @@ type CreateRuleResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
+		// Array of unique IDs of created forwarding rules
+		LocationIds []*string `json:"LocationIds,omitempty" name:"LocationIds" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -614,6 +680,18 @@ func (r *CreateRuleResponse) FromJsonString(s string) error {
 
 type CreateTargetGroupRequest struct {
 	*tchttp.BaseRequest
+
+	// Target group name (up to 50 characters)
+	TargetGroupName *string `json:"TargetGroupName,omitempty" name:"TargetGroupName"`
+
+	// `vpcid` attribute of a target group. If this parameter is left empty, the default VPC will be used.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Default port of a target group, which can be used for subsequently added servers.
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Real server bound to a target group
+	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
 func (r *CreateTargetGroupRequest) ToJsonString() string {
@@ -628,6 +706,9 @@ func (r *CreateTargetGroupRequest) FromJsonString(s string) error {
 type CreateTargetGroupResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// ID generated after target group creation
+		TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -805,6 +886,9 @@ func (r *DeleteRuleResponse) FromJsonString(s string) error {
 
 type DeleteTargetGroupsRequest struct {
 	*tchttp.BaseRequest
+
+	// Target group ID array
+	TargetGroupIds []*string `json:"TargetGroupIds,omitempty" name:"TargetGroupIds" list`
 }
 
 func (r *DeleteTargetGroupsRequest) ToJsonString() string {
@@ -836,6 +920,12 @@ func (r *DeleteTargetGroupsResponse) FromJsonString(s string) error {
 
 type DeregisterTargetGroupInstancesRequest struct {
 	*tchttp.BaseRequest
+
+	// Target group ID
+	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
+
+	// Information of server to be unbound
+	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
 func (r *DeregisterTargetGroupInstancesRequest) ToJsonString() string {
@@ -1149,6 +1239,10 @@ type DescribeListenersResponse struct {
 		// List of listeners
 		Listeners []*Listener `json:"Listeners,omitempty" name:"Listeners" list`
 
+		// Total number of listeners
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1165,6 +1259,9 @@ func (r *DescribeListenersResponse) FromJsonString(s string) error {
 
 type DescribeLoadBalancerListByCertIdRequest struct {
 	*tchttp.BaseRequest
+
+	// Server or client certificate ID
+	CertIds []*string `json:"CertIds,omitempty" name:"CertIds" list`
 }
 
 func (r *DescribeLoadBalancerListByCertIdRequest) ToJsonString() string {
@@ -1179,6 +1276,9 @@ func (r *DescribeLoadBalancerListByCertIdRequest) FromJsonString(s string) error
 type DescribeLoadBalancerListByCertIdResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Certificate ID and list of CLB instances associated with it
+		CertSet []*CertIdRelatedWithLoadBalancers `json:"CertSet,omitempty" name:"CertSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1225,7 +1325,7 @@ type DescribeLoadBalancersRequest struct {
 	// Data offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of CLB instances to be returned. Default value: 20.
+	// Number of returned CLB instances. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Sort by parameter. Value range: LoadBalancerName, CreateTime, Domain, LoadBalancerType.
@@ -1332,6 +1432,15 @@ func (r *DescribeRewriteResponse) FromJsonString(s string) error {
 
 type DescribeTargetGroupInstancesRequest struct {
 	*tchttp.BaseRequest
+
+	// Filter. Currently, only filtering by `TargetGroupId`, `BindIP`, or `InstanceId` is supported.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Number of displayed results. Default value: 20
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Display offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
 func (r *DescribeTargetGroupInstancesRequest) ToJsonString() string {
@@ -1346,6 +1455,15 @@ func (r *DescribeTargetGroupInstancesRequest) FromJsonString(s string) error {
 type DescribeTargetGroupInstancesResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Number of results in current query
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Information of the bound server
+		TargetGroupInstanceSet []*TargetGroupBackend `json:"TargetGroupInstanceSet,omitempty" name:"TargetGroupInstanceSet" list`
+
+		// Actual statistics, which are not affected by `Limit`, `Offset`, and `CAM`.
+		RealCount *uint64 `json:"RealCount,omitempty" name:"RealCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1363,6 +1481,18 @@ func (r *DescribeTargetGroupInstancesResponse) FromJsonString(s string) error {
 
 type DescribeTargetGroupListRequest struct {
 	*tchttp.BaseRequest
+
+	// Target group ID array
+	TargetGroupIds []*string `json:"TargetGroupIds,omitempty" name:"TargetGroupIds" list`
+
+	// Filter array, which is exclusive of `TargetGroupIds`. Valid values: TargetGroupVpcId, TargetGroupName. Target group ID will be used first.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Starting display offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Limit of the number of displayed results. Default value: 20
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
 func (r *DescribeTargetGroupListRequest) ToJsonString() string {
@@ -1377,6 +1507,12 @@ func (r *DescribeTargetGroupListRequest) FromJsonString(s string) error {
 type DescribeTargetGroupListResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Number of displayed results
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Information set of displayed target groups
+		TargetGroupSet []*TargetGroupInfo `json:"TargetGroupSet,omitempty" name:"TargetGroupSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1394,6 +1530,18 @@ func (r *DescribeTargetGroupListResponse) FromJsonString(s string) error {
 
 type DescribeTargetGroupsRequest struct {
 	*tchttp.BaseRequest
+
+	// Target group ID, which is exclusive of `Filters`.
+	TargetGroupIds []*string `json:"TargetGroupIds,omitempty" name:"TargetGroupIds" list`
+
+	// Limit of the number of displayed results. Default value: 20
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Starting display offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter array, which is exclusive of `TargetGroupIds`. Valid values: TargetGroupVpcId, TargetGroupName
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
 func (r *DescribeTargetGroupsRequest) ToJsonString() string {
@@ -1408,6 +1556,12 @@ func (r *DescribeTargetGroupsRequest) FromJsonString(s string) error {
 type DescribeTargetGroupsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Number of displayed results
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Information set of displayed target groups
+		TargetGroupSet []*TargetGroupInfo `json:"TargetGroupSet,omitempty" name:"TargetGroupSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1547,6 +1701,9 @@ func (r *DescribeTaskStatusResponse) FromJsonString(s string) error {
 
 type DisassociateTargetGroupsRequest struct {
 	*tchttp.BaseRequest
+
+	// Array of rules to be unbound
+	Associations []*TargetGroupAssociation `json:"Associations,omitempty" name:"Associations" list`
 }
 
 func (r *DisassociateTargetGroupsRequest) ToJsonString() string {
@@ -1577,6 +1734,18 @@ func (r *DisassociateTargetGroupsResponse) FromJsonString(s string) error {
 }
 
 type ExclusiveCluster struct {
+
+	// Layer-4 dedicated cluster list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	L4Clusters []*ClusterItem `json:"L4Clusters,omitempty" name:"L4Clusters" list`
+
+	// Layer-7 dedicated cluster list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	L7Clusters []*ClusterItem `json:"L7Clusters,omitempty" name:"L7Clusters" list`
+
+	// vpcgw cluster
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ClassicalCluster *ClusterItem `json:"ClassicalCluster,omitempty" name:"ClassicalCluster"`
 }
 
 type ExtraInfo struct {
@@ -1588,6 +1757,15 @@ type ExtraInfo struct {
 	// TgwGroup name
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TgwGroupName *string `json:"TgwGroupName,omitempty" name:"TgwGroupName"`
+}
+
+type Filter struct {
+
+	// Filter name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Filter value array
+	Values []*string `json:"Values,omitempty" name:"Values" list`
 }
 
 type HealthCheck struct {
@@ -1853,8 +2031,8 @@ type LoadBalancer struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AnycastZone *string `json:"AnycastZone,omitempty" name:"AnycastZone"`
 
-	// IP version. Value range: ipv4, ipv6
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// IP version. Valid values: ipv4, ipv6
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	AddressIPVersion *string `json:"AddressIPVersion,omitempty" name:"AddressIPVersion"`
 
 	// VPC ID in a numeric form
@@ -1917,15 +2095,31 @@ type LoadBalancer struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
 
-	// Whether a real server opens the traffic from a CLB instance to the internet by default
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether a real server opens the traffic from a CLB instance to the internet
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	LoadBalancerPassToTarget *bool `json:"LoadBalancerPassToTarget,omitempty" name:"LoadBalancerPassToTarget"`
 
-	// 
+	// Private network dedicated cluster
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
 
-	// 
+	// This field is meaningful only when the IP address version is `ipv6`. Valid values: IPv6Nat64, IPv6FullChain
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	IPv6Mode *string `json:"IPv6Mode,omitempty" name:"IPv6Mode"`
+
+	// Whether to enable SnatPro
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SnatPro *bool `json:"SnatPro,omitempty" name:"SnatPro"`
+
+	// SnatIp list after SnatPro load balancing is enabled
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps" list`
+
+	// 
+	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
+
+	// 
+	IsBlock *bool `json:"IsBlock,omitempty" name:"IsBlock"`
 }
 
 type LoadBalancerHealth struct {
@@ -2148,8 +2342,14 @@ type ModifyLoadBalancerAttributesRequest struct {
 	// Region information of the real server bound to a CLB.
 	TargetRegionInfo *TargetRegionInfo `json:"TargetRegionInfo,omitempty" name:"TargetRegionInfo"`
 
-	// Network billing parameter. Note: The maximum outbound bandwidth can be modified, but the network billing method cannot be modified.
+	// Network billing parameter
 	InternetChargeInfo *InternetAccessible `json:"InternetChargeInfo,omitempty" name:"InternetChargeInfo"`
+
+	// Whether the target opens traffic from CLB to the internet. If yes (true), only security groups on CLB will be verified; if no (false), security groups on both CLB and backend instance need to be verified.
+	LoadBalancerPassToTarget *bool `json:"LoadBalancerPassToTarget,omitempty" name:"LoadBalancerPassToTarget"`
+
+	// Whether to enable SnatPro
+	SnatPro *bool `json:"SnatPro,omitempty" name:"SnatPro"`
 }
 
 func (r *ModifyLoadBalancerAttributesRequest) ToJsonString() string {
@@ -2165,7 +2365,8 @@ type ModifyLoadBalancerAttributesResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// 
+		// This parameter can be used to query whether CLB billing mode switch is successful.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 		DealName *string `json:"DealName,omitempty" name:"DealName"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2240,6 +2441,15 @@ func (r *ModifyRuleResponse) FromJsonString(s string) error {
 
 type ModifyTargetGroupAttributeRequest struct {
 	*tchttp.BaseRequest
+
+	// Target group ID
+	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
+
+	// New name of target group
+	TargetGroupName *string `json:"TargetGroupName,omitempty" name:"TargetGroupName"`
+
+	// New default port of target group
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
 }
 
 func (r *ModifyTargetGroupAttributeRequest) ToJsonString() string {
@@ -2271,6 +2481,12 @@ func (r *ModifyTargetGroupAttributeResponse) FromJsonString(s string) error {
 
 type ModifyTargetGroupInstancesPortRequest struct {
 	*tchttp.BaseRequest
+
+	// Target group ID
+	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
+
+	// Array of servers for which to modify port
+	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
 func (r *ModifyTargetGroupInstancesPortRequest) ToJsonString() string {
@@ -2302,6 +2518,12 @@ func (r *ModifyTargetGroupInstancesPortResponse) FromJsonString(s string) error 
 
 type ModifyTargetGroupInstancesWeightRequest struct {
 	*tchttp.BaseRequest
+
+	// Target group ID
+	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
+
+	// Array of servers for which to modify weight
+	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
 func (r *ModifyTargetGroupInstancesWeightRequest) ToJsonString() string {
@@ -2437,6 +2659,12 @@ func (r *ModifyTargetWeightResponse) FromJsonString(s string) error {
 
 type RegisterTargetGroupInstancesRequest struct {
 	*tchttp.BaseRequest
+
+	// Target group ID
+	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
+
+	// Server instance array
+	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
 func (r *RegisterTargetGroupInstancesRequest) ToJsonString() string {
@@ -2671,22 +2899,22 @@ type RuleInput struct {
 	// They represent weighted round robin, least connections, and IP hash, respectively. Default value: WRR.
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
-	// Forwarding protocol between CLB and real server. Currently, HTTP is supported
+	// Forwarding protocol between the CLB instance and real server. Currently, HTTP/HTTPS/TRPC are supported.
 	ForwardType *string `json:"ForwardType,omitempty" name:"ForwardType"`
 
 	// Whether to set this domain name as the default domain name. Note: Only one default domain name can be set under one listener.
 	DefaultServer *bool `json:"DefaultServer,omitempty" name:"DefaultServer"`
 
-	// Whether to enable Http2. Note: Http2 can be enabled only for HTTPS domain names.
+	// Whether to enable HTTP/2. Note: HTTP/2 can be enabled only for HTTPS domain names.
 	Http2 *bool `json:"Http2,omitempty" name:"Http2"`
 
 	// Target real server type. NODE: binding a general node; TARGETGROUP: binding a target group.
 	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
 
-	// 
+	// TRPC callee server route, which is required when `ForwardType` is `TRPC`.
 	TrpcCallee *string `json:"TrpcCallee,omitempty" name:"TrpcCallee"`
 
-	// 
+	// TRPC calling service API, which is required when `ForwardType` is `TRPC`.
 	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
 }
 
@@ -2753,10 +2981,12 @@ type RuleOutput struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WafDomainId *string `json:"WafDomainId,omitempty" name:"WafDomainId"`
 
-	// 
+	// TRPC callee server route, which is valid when `ForwardType` is `TRPC`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	TrpcCallee *string `json:"TrpcCallee,omitempty" name:"TrpcCallee"`
 
-	// 
+	// TRPC calling service API, which is valid when `ForwardType` is `TRPC`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
 }
 
@@ -2854,6 +3084,15 @@ func (r *SetSecurityGroupForLoadbalancersResponse) FromJsonString(s string) erro
     return json.Unmarshal([]byte(s), &r)
 }
 
+type SnatIp struct {
+
+	// Unique VPC subnet ID, such as `subnet-12345678`.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// IP address, such as 192.168.0.1
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+}
+
 type TagInfo struct {
 
 	// Tag key
@@ -2884,6 +3123,100 @@ type Target struct {
 	// This parameter must be passed in when you bind an ENI, which represents the IP address of the ENI. The ENI has to be bound to a CVM instance first before it can be bound to a CLB instance. Note: Either InstanceId or EniIp must be passed in. To bind an ENI, you need to submit a ticket for application first.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EniIp *string `json:"EniIp,omitempty" name:"EniIp"`
+}
+
+type TargetGroupAssociation struct {
+
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Target group ID
+	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
+
+	// Forwarding rule ID
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+}
+
+type TargetGroupBackend struct {
+
+	// Target group ID
+	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
+
+	// Real server type. Valid values: CVM, ENI (coming soon)
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Unique real server ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Listening port of real server
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Forwarding weight of real server. Value range: [0, 100]. Default value: 10.
+	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
+
+	// Public IP of real server
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+
+	// Private IP of real server
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+
+	// Real server instance name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Real server binding time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RegisteredTime *string `json:"RegisteredTime,omitempty" name:"RegisteredTime"`
+
+	// Unique ENI ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	EniId *string `json:"EniId,omitempty" name:"EniId"`
+}
+
+type TargetGroupInfo struct {
+
+	// Target group ID
+	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
+
+	// `vpcid` of target group
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Target group name
+	TargetGroupName *string `json:"TargetGroupName,omitempty" name:"TargetGroupName"`
+
+	// Default port of target group
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Target group creation time
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Target group modification time
+	UpdatedTime *string `json:"UpdatedTime,omitempty" name:"UpdatedTime"`
+
+	// Array of associated rules
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AssociatedRule []*AssociationItem `json:"AssociatedRule,omitempty" name:"AssociatedRule" list`
+}
+
+type TargetGroupInstance struct {
+
+	// Private IP of target group instance
+	BindIP *string `json:"BindIP,omitempty" name:"BindIP"`
+
+	// Port of target group instance
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Weight of target group instance
+	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
+
+	// New port of target group instance
+	NewPort *uint64 `json:"NewPort,omitempty" name:"NewPort"`
 }
 
 type TargetHealth struct {

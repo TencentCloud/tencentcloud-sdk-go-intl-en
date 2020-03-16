@@ -43,6 +43,37 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewAttachInstancesRequest() (request *AttachInstancesRequest) {
+    request = &AttachInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("batch", APIVersion, "AttachInstances")
+    return
+}
+
+func NewAttachInstancesResponse() (response *AttachInstancesResponse) {
+    response = &AttachInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to add existing instances to the compute environment.
+// Considerations: <br/>
+// 1. The instance should not be in the batch compute system.<br/>
+// 2. The instance status should be “running”.<br/>
+// 3. It supports dedicated CVMs and pay-as-you-go instances that billed on an hourly basis. Spot instances are not supported.<b/>
+// 
+// For instances added to the compute environment, their UserData will be reset and the operating systems will be reinstalled.
+func (c *Client) AttachInstances(request *AttachInstancesRequest) (response *AttachInstancesResponse, err error) {
+    if request == nil {
+        request = NewAttachInstancesRequest()
+    }
+    response = NewAttachInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateComputeEnvRequest() (request *CreateComputeEnvRequest) {
     request = &CreateComputeEnvRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -516,6 +547,31 @@ func (c *Client) DescribeTaskTemplates(request *DescribeTaskTemplatesRequest) (r
         request = NewDescribeTaskTemplatesRequest()
     }
     response = NewDescribeTaskTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDetachInstancesRequest() (request *DetachInstancesRequest) {
+    request = &DetachInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("batch", APIVersion, "DetachInstances")
+    return
+}
+
+func NewDetachInstancesResponse() (response *DetachInstancesResponse) {
+    response = &DetachInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to remove instances that from compute environment. 
+func (c *Client) DetachInstances(request *DetachInstancesRequest) (response *DetachInstancesResponse, err error) {
+    if request == nil {
+        request = NewDetachInstancesRequest()
+    }
+    response = NewDetachInstancesResponse()
     err = c.Send(request, response)
     return
 }

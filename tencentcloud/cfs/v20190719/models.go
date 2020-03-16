@@ -103,6 +103,9 @@ type CreateCfsFileSystemRequest struct {
 
 	// Custom file system name
 	FsName *string `json:"FsName,omitempty" name:"FsName"`
+
+	// File system tag
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags" list`
 }
 
 func (r *CreateCfsFileSystemRequest) ToJsonString() string {
@@ -489,6 +492,9 @@ type DescribeCfsFileSystemsResponse struct {
 		// File system information
 		FileSystems []*FileSystemInfo `json:"FileSystems,omitempty" name:"FileSystems" list`
 
+		// Total number of file systems
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -808,6 +814,61 @@ func (r *SignUpCfsServiceResponse) ToJsonString() string {
 }
 
 func (r *SignUpCfsServiceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TagInfo struct {
+
+	// Tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type UpdateCfsFileSystemNameRequest struct {
+	*tchttp.BaseRequest
+
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Custom file system name
+	FsName *string `json:"FsName,omitempty" name:"FsName"`
+}
+
+func (r *UpdateCfsFileSystemNameRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateCfsFileSystemNameRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateCfsFileSystemNameResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Custom file system name
+		CreationToken *string `json:"CreationToken,omitempty" name:"CreationToken"`
+
+		// File system ID
+		FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+		// Custom file system name
+		FsName *string `json:"FsName,omitempty" name:"FsName"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateCfsFileSystemNameResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateCfsFileSystemNameResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

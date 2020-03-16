@@ -958,7 +958,7 @@ func NewSetFlagResponse() (response *SetFlagResponse) {
     return
 }
 
-// This API is used to set user login, sensitive operations and async login.
+// This API is used to set account verification for login and sensitive operation protection.
 func (c *Client) SetFlag(request *SetFlagRequest) (response *SetFlagResponse, err error) {
     if request == nil {
         request = NewSetFlagRequest()

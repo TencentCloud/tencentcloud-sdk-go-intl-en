@@ -97,6 +97,43 @@ type Application struct {
 	Docker *Docker `json:"Docker,omitempty" name:"Docker"`
 }
 
+type AttachInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+	// List of instances that added to the compute environment
+	Instances []*Instance `json:"Instances,omitempty" name:"Instances" list`
+}
+
+func (r *AttachInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AttachInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AttachInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AttachInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AttachInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type Authentication struct {
 
 	// Authentication scenario such as COS
@@ -343,6 +380,14 @@ type DataDisk struct {
 	// Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.
 	// Note: This field may return null, indicating that no valid value is found.
 	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// Specifies whether the data disk is encrypted. Values: 
+	// <li>TRUE: encrypted
+	// <li>FALSE: not encrypted<br>
+	// Default value: FALSE<br>
+	// Currently, this parameter is only used in the `RunInstances` API.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Encrypt *bool `json:"Encrypt,omitempty" name:"Encrypt"`
 }
 
 type DeleteComputeEnvRequest struct {
@@ -1195,6 +1240,43 @@ func (r *DescribeTaskTemplatesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DetachInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Compute environment ID
+	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
+
+	// Instance ID list
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+}
+
+func (r *DetachInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DetachInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DetachInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DetachInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DetachInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type Docker struct {
 
 	// Docker Hub username or Tencent Registry username
@@ -1333,6 +1415,18 @@ type InputMapping struct {
 	MountOptionParameter *string `json:"MountOptionParameter,omitempty" name:"MountOptionParameter"`
 }
 
+type Instance struct {
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Image ID.
+	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
+
+	// Instance login settings.
+	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
+}
+
 type InstanceCategoryItem struct {
 
 	// Instance type name
@@ -1429,6 +1523,10 @@ type InstanceTypeQuotaItem struct {
 
 	// Price of an instance model.
 	Price *ItemPrice `json:"Price,omitempty" name:"Price"`
+
+	// Details of sold out items
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SoldOutReason *string `json:"SoldOutReason,omitempty" name:"SoldOutReason"`
 }
 
 type InternetAccessible struct {
@@ -1542,15 +1640,12 @@ type LocalDiskType struct {
 type LoginSettings struct {
 
 	// Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-16 characters long and contain at least one character from two of the following categories: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-16 characters long and contain at least one character from three of the following categories: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
-	// Note: This field may return null, indicating that no valid value is found.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
-	// Note: This field may return null, indicating that no valid value is found.
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 
 	// Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
-	// Note: This field may return null, indicating that no valid value is found.
 	KeepImageLogin *string `json:"KeepImageLogin,omitempty" name:"KeepImageLogin"`
 }
 
@@ -1686,6 +1781,9 @@ type NamedComputeEnv struct {
 
 	// Inactive node processing policy. Default value: RECREATE, which means that instance resources will be re-created periodically for compute nodes where instance creation fails or is abnormally returned.
 	ActionIfComputeNodeInactive *string `json:"ActionIfComputeNodeInactive,omitempty" name:"ActionIfComputeNodeInactive"`
+
+	// When the instances are failed to be created or returned because of exceptions, the related compute node will retry to create instances periodically. This parameter specifies the maximum retry attempts. The max value is 11 and the default value is 7.
+	ResourceMaxRetryCount *int64 `json:"ResourceMaxRetryCount,omitempty" name:"ResourceMaxRetryCount"`
 }
 
 type Notification struct {

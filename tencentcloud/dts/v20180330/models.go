@@ -112,7 +112,7 @@ type CreateMigrateJobRequest struct {
 	// Source instance database type, which currently supports MySQL, Redis, MongoDB, PostgreSQL, MariaDB, and Percona. For more information on the supported types in a specific region, see the migration task creation page in the console.
 	SrcDatabaseType *string `json:"SrcDatabaseType,omitempty" name:"SrcDatabaseType"`
 
-	// Source instance access type. Value range: extranet (public network), cvm (CVM-created instance), dcg (Direct Connect-enabled instance), vpncloud (Tencent Cloud VPN-enabled instance), cdb (TencentDB instance), ccn (CCN instances)
+	// Source instance access type. Valid values: extranet (public network), cvm (CVM-based self-created instance), dcg (Direct Connect-enabled instance), vpncloud (Tencent Cloud VPN-enabled instance), cdb (TencentDB instance), ccn (CCN instance)
 	SrcAccessType *string `json:"SrcAccessType,omitempty" name:"SrcAccessType"`
 
 	// Source instance information, which is correlated with the migration task type
@@ -574,10 +574,10 @@ type MigrateDetailInfo struct {
 	// Progress of the current step, such as:
 	CurrentStepProgress *string `json:"CurrentStepProgress,omitempty" name:"CurrentStepProgress"`
 
-	// Master/slave difference in MB
+	// Master/slave lag in MB, which is valid during incremental sync and currently supported by TencentDB for Redis and MySQL
 	MasterSlaveDistance *int64 `json:"MasterSlaveDistance,omitempty" name:"MasterSlaveDistance"`
 
-	// Master/slave difference in seconds
+	// Master/slave lag in seconds, which is valid during incremental sync and currently supported by TencentDB for MySQL
 	SecondsBehindMaster *int64 `json:"SecondsBehindMaster,omitempty" name:"SecondsBehindMaster"`
 
 	// Step information
@@ -687,6 +687,10 @@ type MigrateStepDetailInfo struct {
 
 	// Step status. Value range: 0 (default), 1 (succeeded), 2 (failed), 3 (in progress), 4 (not started)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Start time of current step in the format of `yyyy-mm-dd hh:mm:ss`. This field is meaningless if it does not exist or is empty
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 }
 
 type ModifyMigrateJobRequest struct {
@@ -701,13 +705,13 @@ type ModifyMigrateJobRequest struct {
 	// Migration task configuration options
 	MigrateOption *MigrateOption `json:"MigrateOption,omitempty" name:"MigrateOption"`
 
-	// Source instance access type. Value range: extranet (public network), cvm (CVM-created instance), dcg (Direct Connect-enabled instance), vpncloud (Tencent Cloud VPN-enabled instance), vpnselfbuild (self-built VPN-enabled instance), cdb (TencentDB instance)
+	// Source instance access type. Valid values: extranet (public network), cvm (CVM-based self-created instance), dcg (Direct Connect-enabled instance), vpncloud (Tencent Cloud VPN-enabled instance), cdb (TencentDB instance)
 	SrcAccessType *string `json:"SrcAccessType,omitempty" name:"SrcAccessType"`
 
 	// Source instance information, which is correlated with the migration task type
 	SrcInfo *SrcInfo `json:"SrcInfo,omitempty" name:"SrcInfo"`
 
-	// Target instance access type. Value range: extranet (public network), cvm (CVM-created instance), dcg (Direct Connect-enabled instance), vpncloud (Tencent Cloud VPN-enabled instance), vpnselfbuild (self-built VPN-enabled instance), cdb (TencentDB instance). Currently, only "cdb" is supported.
+	// Target instance access type. Valid values: extranet (public network), cvm (CVM-based self-created instance), dcg (Direct Connect-enabled instance), vpncloud (Tencent Cloud VPN-enabled instance), cdb (TencentDB instance). Currently, only `cdb` is supported
 	DstAccessType *string `json:"DstAccessType,omitempty" name:"DstAccessType"`
 
 	// Target instance information. The region where the target instance is located cannot be modified.
@@ -816,7 +820,7 @@ type SrcInfo struct {
 	// Alibaba Cloud ApsaraDB for RDS instance ID, which is applicable if the source database is an Alibaba Cloud ApsaraDB for RDS 5.6/5.7 instance
 	RdsInstanceId *string `json:"RdsInstanceId,omitempty" name:"RdsInstanceId"`
 
-	// Short CVM instance ID in the format of ins-olgl39y8. It is the same as the instance ID displayed on the CVM Console page. For CVM-created instances, this field needs to be passed in.
+	// Short CVM instance ID in the format of `ins-olgl39y8`. It is the same as the instance ID displayed on the CVM Console page. For CVM-based self-created instances, this field needs to be passed in
 	CvmInstanceId *string `json:"CvmInstanceId,omitempty" name:"CvmInstanceId"`
 
 	// Direct Connect gateway ID in the format of dcg-0rxtqqxb

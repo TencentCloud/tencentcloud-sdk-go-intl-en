@@ -35,7 +35,7 @@ type AddUserRequest struct {
 	// Whether or not to generate keys for sub-users. 0: No; 1: Yes.
 	UseApi *uint64 `json:"UseApi,omitempty" name:"UseApi"`
 
-	// Sub-user’s console login password. If no password rules have been set, the default rules require the password to have at least 8 characters, at least one lowercase letter, one uppercase letter, one number, and one special character. This value is valid only when the sub-user is allowed to log in to the console. If no value is specified, and console login is allowed, the system will automatically generate a password. The automatically generated passwords are 32 characters long and contain letters (both upper and lower cases), numbers, and special characters. 
+	// Sub-user's console login password. If no password rules have been set, the password must have a minimum of 8 characters containing uppercase letters, lowercase letters, digits, and special characters by default. This parameter will be valid only when the sub-user is allowed to log in to the console. If it is not specified and console login is allowed, the system will automatically generate a random 32-character password that contains uppercase letters, lowercase letters, digits, and special characters.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// If the sub-user needs to reset their password when they next log in to the console. 0: No; 1: Yes.
@@ -217,8 +217,12 @@ type AttachPolicyInfo struct {
 	// 
 	OperateUinType *uint64 `json:"OperateUinType,omitempty" name:"OperateUinType"`
 
-	// 
+	// Queries if the policy has been deactivated
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Deactived *uint64 `json:"Deactived,omitempty" name:"Deactived"`
+
+	// 
+	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail" list`
 }
 
 type AttachRolePolicyRequest struct {
@@ -316,8 +320,12 @@ type AttachedPolicyOfRole struct {
 	// Policy creation method. 1: indicates the policy was created based on product function or item permission; other values indicate the policy was created based on the policy syntax
 	CreateMode *uint64 `json:"CreateMode,omitempty" name:"CreateMode"`
 
-	// 
+	// Queries if the policy has been deactivated
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Deactived *uint64 `json:"Deactived,omitempty" name:"Deactived"`
+
+	// 
+	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail" list`
 }
 
 type ConsumeCustomMFATokenRequest struct {
@@ -400,7 +408,7 @@ type CreatePolicyRequest struct {
 	// Policy name
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 
-	// Policy document
+	// Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
 	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
 
 	// Policy description
@@ -420,7 +428,7 @@ type CreatePolicyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Newly added policy ID
+		// ID of newly added policy
 		PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -449,8 +457,11 @@ type CreateRoleRequest struct {
 	// Role description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// If login is allowed
+	// Whether login is allowed. 1: yes, 0: no
 	ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
+
+	// 
+	SessionDuration *uint64 `json:"SessionDuration,omitempty" name:"SessionDuration"`
 }
 
 func (r *CreateRoleRequest) ToJsonString() string {
@@ -1114,7 +1125,7 @@ type GetUserResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Sub-user user ID
+		// Sub-user UIN
 		Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
 
 		// Sub-user username
@@ -1215,7 +1226,7 @@ type GroupMemberInfo struct {
 type ListAttachedGroupPoliciesRequest struct {
 	*tchttp.BaseRequest
 
-	// User Group ID
+	// User group ID
 	TargetGroupId *uint64 `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
 
 	// Page number, which starts from 1. Default is 1
@@ -1531,13 +1542,16 @@ type ListPoliciesResponse struct {
 		// Total number of policies
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
 
-		// Policy array. Each item in the array has the fields `policyId`, `policyName`, `addTime`, `type`, `description`, and `createMode` 
-	// `policyId`: Policy ID 
-	// `policyName`: Policy name
-	// `addTime`: Time policy created
-	// `type`: 1 is custom policy; 2 is preset policy 
-	// `description`: Policy description 
-	// `createMode`: 1 indicates a policy created based on business permissions, while other values indicate that the policy syntax can be viewed and the policy can be updated using the policy syntax.
+		// Policy array. Each array contains fields including `policyId`, `policyName`, `addTime`, `type`, `description`, and `createMode`. 
+	// policyId: policy ID 
+	// policyName: policy name
+	// addTime: policy creation time
+	// type: 1: custom policy, 2: preset policy 
+	// description: policy description 
+	// createMode: 1 indicates a policy created based on business permissions, while other values indicate that the policy syntax can be viewed and the policy can be updated using the policy syntax
+	// Attachments: number of associated users
+	// ServiceType: the product the policy is associated with
+	// IsAttached: this value should not be null when querying if a marked entity has been associated with a policy. 0 indicates that no policy has been associated, and 1 indicates that a policy has been associated
 		List []*StrategyInfo `json:"List,omitempty" name:"List" list`
 
 		// Reserved field
@@ -1707,7 +1721,7 @@ type OffsiteFlag struct {
 	// WeChat notification
 	NotifyWechat *uint64 `json:"NotifyWechat,omitempty" name:"NotifyWechat"`
 
-	// 
+	// Alert
 	Tips *uint64 `json:"Tips,omitempty" name:"Tips"`
 }
 
@@ -1767,6 +1781,13 @@ type RoleInfo struct {
 
 	// If login is allowed for the role
 	ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
+
+	// User role. Valid values: user, system
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RoleType *string `json:"RoleType,omitempty" name:"RoleType"`
+
+	// 
+	SessionDuration *uint64 `json:"SessionDuration,omitempty" name:"SessionDuration"`
 }
 
 type SAMLProviderInfo struct {
@@ -1862,8 +1883,12 @@ type StrategyInfo struct {
 	// 
 	IsAttached *uint64 `json:"IsAttached,omitempty" name:"IsAttached"`
 
-	// 
+	// Queries if the policy has been deactivated
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Deactived *uint64 `json:"Deactived,omitempty" name:"Deactived"`
+
+	// 
+	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail" list`
 }
 
 type SubAccountInfo struct {
@@ -1985,7 +2010,7 @@ type UpdatePolicyRequest struct {
 	// Policy description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Policy document
+	// Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
 	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
 }
 
@@ -2108,7 +2133,7 @@ type UpdateUserRequest struct {
 	// Whether or not the sub-user is allowed to log in to the console. 0: No; 1: Yes.
 	ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
 
-	// Sub-user’s console login password. If no password rules have been set, the default rules require the password to have at least 8 characters, at least one lowercase letter, one uppercase letter, one number, and one special character. This value is valid only when the sub-user is allowed to log in to the console. If no value is specified, and console login is allowed, the system will automatically generate a password. The automatically generated passwords are 32 characters long and contain letters (both upper and lower cases), numbers, and special characters.
+	// Sub-user's console login password. If no password rules have been set, the password must have a minimum of 8 characters containing uppercase letters, lowercase letters, digits, and special characters by default. This parameter will be valid only when the sub-user is allowed to log in to the console. If it is not specified and console login is allowed, the system will automatically generate a random 32-character password that contains uppercase letters, lowercase letters, digits, and special characters.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// If the sub-user needs to reset their password when they next log in to the console. 0: No; 1: Yes.

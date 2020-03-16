@@ -33,6 +33,9 @@ type AccountCreateInfo struct {
 
 	// Account remarks
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether it is an admin account. Default value: no
+	IsAdmin *bool `json:"IsAdmin,omitempty" name:"IsAdmin"`
 }
 
 type AccountDetail struct {
@@ -336,7 +339,7 @@ type CreateMigrationRequest struct {
 	// Migration type (1: structure migration, 2: data migration, 3: incremental sync)
 	MigrateType *uint64 `json:"MigrateType,omitempty" name:"MigrateType"`
 
-	// Type of migration source. 1: TencentDB for SQL Server, 2: CVM-based self-created SQL Server database, 4: SQL Server backup restoration, 5: SQL Server backup restoration (through COS)
+	// Migration source type. 1: TencentDB for SQL Server, 2: CVM-based self-created SQL Server database; 3: SQL Server backup restoration, 4: SQL Server backup restoration (in COS mode)
 	SourceType *uint64 `json:"SourceType,omitempty" name:"SourceType"`
 
 	// Migration source
@@ -558,7 +561,7 @@ type DealInfo struct {
 	// Number of items
 	Count *uint64 `json:"Count,omitempty" name:"Count"`
 
-	// ID of associated flow, which can be used to query flow execution status
+	// ID of associated flow, which can be used to query the flow execution status
 	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
 
 	// This field is required only for an order that creates an instance, indicating the ID of the instance created by the order
@@ -694,7 +697,7 @@ type DescribeAccountsRequest struct {
 	// Number of results per page. Value range: 1–100. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page number start value, which starts at 0. Default value: 0
+	// Page number. Default value: 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
@@ -746,10 +749,10 @@ type DescribeBackupsRequest struct {
 	// Instance ID in the format of mssql-njj2mtpl
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Number of results per page. Default value: 20. Maximum value: 100
+	// Number of results per page. Value range: 1–100. Default value: 20
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset. Default value: 0
+	// Page number. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 
@@ -807,10 +810,10 @@ type DescribeDBInstancesRequest struct {
 	// <li>12: restarting</li>
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-	// Number of pages. Default value: 0
+	// Page number. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of entries per page. Default value: 50
+	// Number of results per page. Value range: 1–100. Default value: 100
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// One or more instance IDs in the format of mssql-si2823jyl
@@ -859,10 +862,10 @@ type DescribeDBsRequest struct {
 	// Instance ID
 	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet" list`
 
-	// Number of results per page. Maximum value: 100. Default value: 20
+	// Number of results per page. Value range: 1–100. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page number, starting at 0
+	// Page number. Default value: 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
@@ -968,7 +971,7 @@ type DescribeMigrationDetailResponse struct {
 		// Migration task region
 		Region *string `json:"Region,omitempty" name:"Region"`
 
-		// Type of migration source. 1: TencentDB for SQL Server, 2: CVM-based self-created SQL Server database, 4: SQL Server backup restoration, 5: SQL Server backup restoration (through COS)
+		// Migration source type. 1: TencentDB for SQL Server, 2: CVM-based self-created SQL Server database; 3: SQL Server backup restoration, 4: SQL Server backup restoration (in COS mode)
 		SourceType *int64 `json:"SourceType,omitempty" name:"SourceType"`
 
 		// Migration task creation time
@@ -1021,10 +1024,10 @@ type DescribeMigrationsRequest struct {
 	// Migration task name (fuzzy match)
 	MigrateName *string `json:"MigrateName,omitempty" name:"MigrateName"`
 
-	// Number of results per page
+	// Number of results per page. Value range: 1–100. Default value: 100
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Specifies to query the results on which page
+	// Page number. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// The query results are sorted by keyword. Valid values: name, createTime, startTime, endTime, status
@@ -1236,10 +1239,10 @@ type DescribeSlowlogsRequest struct {
 	// Query end time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Number of results per page. Default value: 20. Maximum value: 100
+	// Number of results per page. Value range: 1–100. Default value: 20
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page number start value, which starts at 0. Default value: 0
+	// Page number. Default value: 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
@@ -1443,7 +1446,7 @@ type MigrateDetail struct {
 
 type MigrateSource struct {
 
-	// ID of source instance in the format of mssql-si2823jyl, which is used when `MigrateType` is 1 (TencentDB for SQL Server)
+	// Source instance ID in the format of `mssql-si2823jyl`, which is used when `MigrateType` is 1 (TencentDB for SQL Server)
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// ID of source CVM instance, which is used when `MigrateType` is 2 (CVM-based self-created SQL Server database)
@@ -1500,7 +1503,7 @@ type MigrateTask struct {
 	// Migration task region
 	Region *string `json:"Region,omitempty" name:"Region"`
 
-	// Type of migration source. 1: TencentDB for SQL Server, 2: CVM-based self-created SQL Server database, 4: SQL Server backup restoration, 5: SQL Server backup restoration (through COS)
+	// Migration source type. 1: TencentDB for SQL Server, 2: CVM-based self-created SQL Server database; 3: SQL Server backup restoration, 4: SQL Server backup restoration (in COS mode)
 	SourceType *int64 `json:"SourceType,omitempty" name:"SourceType"`
 
 	// Migration task creation time
@@ -1774,7 +1777,7 @@ type ModifyMigrationRequest struct {
 	// New migration type (1: structure migration, 2: data migration, 3: incremental sync). If this parameter is left empty, no modification will be made
 	MigrateType *uint64 `json:"MigrateType,omitempty" name:"MigrateType"`
 
-	// Type of migration source. 1: TencentDB for SQL Server, 2: CVM-based self-created SQL Server database, 4: SQL Server backup restoration, 5: SQL Server backup restoration (through COS). If this parameter is left empty, no modification will be made
+	// Migration source type. 1: TencentDB for SQL Server, 2: CVM-based self-created SQL Server database; 3: SQL Server backup restoration, 4: SQL Server backup restoration (in COS mode). If this parameter is left empty, no modification will be made
 	SourceType *uint64 `json:"SourceType,omitempty" name:"SourceType"`
 
 	// Migration source. If this parameter is left empty, no modification will be made

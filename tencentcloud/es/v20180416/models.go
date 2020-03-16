@@ -50,7 +50,8 @@ type CreateInstanceRequest struct {
 	// Instance name, which can contain 1 to 50 English letters, Chinese characters, digits, dashes (-), or underscores (_)
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Number of nodes (2-50)
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Number of nodes (2–50)
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
 	// Billing mode <li>POSTPAID_BY_HOUR: Pay-as-you-go hourly </li>Default value: POSTPAID_BY_HOUR
@@ -62,12 +63,15 @@ type CreateInstanceRequest struct {
 	// This parameter is not used on the global website
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
+	// This parameter has been disused. Please use `NodeInfoList`
 	// Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
 	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
 
-	// Node disk type <li>CLOUD_SSD: SSD cloud disk </li><li>CLOUD_PREMIUM: Premium cloud disk </li>Default value: CLOUD_SSD
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Node storage type <li>CLOUD_SSD: SSD cloud storage </li><li>CLOUD_PREMIUM: premium cloud storage </li>Default value: CLOUD_SSD
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
+	// This parameter has been disused. Please use `NodeInfoList`
 	// Node disk size in GB
 	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
@@ -80,15 +84,19 @@ type CreateInstanceRequest struct {
 	// List of voucher IDs (only one voucher can be specified at a time currently)
 	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
 
-	// Whether to create a dedicated master node <li>true: Yes </li><li>false: No </li>Default value: false
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Whether to create a dedicated master node <li>true: yes </li><li>false: no </li>Default value: false
 	EnableDedicatedMaster *bool `json:"EnableDedicatedMaster,omitempty" name:"EnableDedicatedMaster"`
 
-	// Number of dedicated master nodes (only 3 and 5 are supported. This value must be passed in if `EnableDedicatedMaster` is true)
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Number of dedicated master nodes (only 3 and 5 are supported. This value must be passed in if `EnableDedicatedMaster` is `true`)
 	MasterNodeNum *uint64 `json:"MasterNodeNum,omitempty" name:"MasterNodeNum"`
 
-	// Dedicated master node type, which must be passed in if `EnableDedicatedMaster` is true <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Dedicated master node type, which must be passed in if `EnableDedicatedMaster` is `true` <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
 	MasterNodeType *string `json:"MasterNodeType,omitempty" name:"MasterNodeType"`
 
+	// This parameter has been disused. Please use `NodeInfoList`
 	// Dedicated master node disk size in GB, which is optional. If passed in, it can only be 50 and cannot be customized currently
 	MasterNodeDiskSize *uint64 `json:"MasterNodeDiskSize,omitempty" name:"MasterNodeDiskSize"`
 
@@ -104,13 +112,13 @@ type CreateInstanceRequest struct {
 	// License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
 	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
 
-	// 
+	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size
 	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList" list`
 
-	// 
+	// Node tag information list
 	TagList []*TagInfo `json:"TagList,omitempty" name:"TagList" list`
 
-	// 
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
 	BasicSecurityType *uint64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
 }
 
@@ -202,10 +210,10 @@ type DescribeInstancesRequest struct {
 	// Sorting order <li>0: ascending </li><li>1: descending </li>If orderByKey is passed in but orderByType is not, ascending order is used by default
 	OrderByType *uint64 `json:"OrderByType,omitempty" name:"OrderByType"`
 
-	// 
+	// Node tag information list
 	TagList []*TagInfo `json:"TagList,omitempty" name:"TagList" list`
 
-	// 
+	// VPC VIP list
 	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
 }
 
@@ -273,6 +281,12 @@ type EsDictionaryInfo struct {
 }
 
 type EsPublicAcl struct {
+
+	// Access blacklist
+	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList" list`
+
+	// Access whitelist
+	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList" list`
 }
 
 type InstanceInfo struct {
@@ -382,8 +396,8 @@ type InstanceInfo struct {
 	// License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
 	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
 
-	// Whether it is a hot/warm cluster <li> true: yes </li><li>false: no</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether it is a hot/warm cluster <li>true: yes </li><li>false: no</li>
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	EnableHotWarmMode *bool `json:"EnableHotWarmMode,omitempty" name:"EnableHotWarmMode"`
 
 	// Warm node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
@@ -550,7 +564,8 @@ type UpdateInstanceRequest struct {
 	// Instance name, which can contain 1 to 50 English letters, Chinese characters, digits, dashes (-), or underscores (_)
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Number of nodes (2-50)
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Number of nodes (2–50)
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
 	// Configuration item (JSON string). Only the following items are supported currently: <li>action.destructive_requires_name</li><li>indices.fielddata.cache.size</li><li>indices.query.bool.max_clause_count</li>
@@ -562,18 +577,23 @@ type UpdateInstanceRequest struct {
 	// Access control list
 	EsAcl *EsAcl `json:"EsAcl,omitempty" name:"EsAcl"`
 
+	// This parameter has been disused. Please use `NodeInfoList`
 	// Disk size in GB
 	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
+	// This parameter has been disused. Please use `NodeInfoList`
 	// Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
 	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
 
+	// This parameter has been disused. Please use `NodeInfoList`
 	// Number of dedicated master nodes (only 3 and 5 are supported)
 	MasterNodeNum *uint64 `json:"MasterNodeNum,omitempty" name:"MasterNodeNum"`
 
+	// This parameter has been disused. Please use `NodeInfoList`
 	// Dedicated master node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
 	MasterNodeType *string `json:"MasterNodeType,omitempty" name:"MasterNodeType"`
 
+	// This parameter has been disused. Please use `NodeInfoList`
 	// Dedicated master node disk size in GB. This is 50 GB by default and currently cannot be customized
 	MasterNodeDiskSize *uint64 `json:"MasterNodeDiskSize,omitempty" name:"MasterNodeDiskSize"`
 
@@ -583,19 +603,19 @@ type UpdateInstanceRequest struct {
 	// Auto-backup to COS
 	CosBackup *CosBackup `json:"CosBackup,omitempty" name:"CosBackup"`
 
-	// 
+	// Node information list. You can pass in only the nodes to be updated and their corresponding specification information. Supported operations include: <li>modifying the number of nodes in the same type </li><li>modifying the specification and disk size of nodes in the same type </li><li>adding a node type (you must also specify the node type, quantity, specification, disk, etc.) </li>The above operations can only be performed one at a time, and the disk type cannot be modified
 	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList" list`
 
-	// 
+	// Public network access status
 	PublicAccess *string `json:"PublicAccess,omitempty" name:"PublicAccess"`
 
-	// 
+	// Public network ACL
 	EsPublicAcl *EsPublicAcl `json:"EsPublicAcl,omitempty" name:"EsPublicAcl"`
 
-	// 
+	// Public network access status of Kibana
 	KibanaPublicAccess *string `json:"KibanaPublicAccess,omitempty" name:"KibanaPublicAccess"`
 
-	// 
+	// Private network access status of Kibana
 	KibanaPrivateAccess *string `json:"KibanaPrivateAccess,omitempty" name:"KibanaPrivateAccess"`
 }
 
@@ -641,7 +661,7 @@ type UpgradeInstanceRequest struct {
 	// Target X-Pack edition: <li>OSS: Open-source Edition </li><li>basic: Basic Edition </li>Currently only used for v5.6.4 to v6.x upgrade. Default value: basic
 	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
 
-	// 
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
 	BasicSecurityType *uint64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
 }
 
@@ -687,10 +707,10 @@ type UpgradeLicenseRequest struct {
 	// List of voucher IDs (only one voucher can be specified at a time currently)
 	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
 
-	// 
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
 	BasicSecurityType *uint64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
 
-	// 
+	// Whether to force restart <li>true: yes </li><li>false: no </li>Default value: false
 	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
 }
 

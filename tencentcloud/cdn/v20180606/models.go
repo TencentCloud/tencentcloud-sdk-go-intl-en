@@ -26,7 +26,7 @@ type AddCdnDomainRequest struct {
 	// Domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Business type of acceleration domain name
+	// Acceleration domain name service type
 	// web: static acceleration
 	// download: download acceleration
 	// media: streaming media VOD acceleration
@@ -35,7 +35,7 @@ type AddCdnDomainRequest struct {
 	// Origin server configuration
 	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
 
-	// Project ID, which is 0 by default, indicating **Default Project**
+	// Project ID. Default value: 0, indicating `Default Project`
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// IP blacklist/whitelist configuration
@@ -53,13 +53,13 @@ type AddCdnDomainRequest struct {
 	// Bandwidth cap configuration
 	BandwidthAlert *BandwidthAlert `json:"BandwidthAlert,omitempty" name:"BandwidthAlert"`
 
-	// Range origin-pull configuration
+	// Range GETs configuration
 	RangeOriginPull *RangeOriginPull `json:"RangeOriginPull,omitempty" name:"RangeOriginPull"`
 
 	// 301/302 origin-pull follow-redirect configuration
 	FollowRedirect *FollowRedirect `json:"FollowRedirect,omitempty" name:"FollowRedirect"`
 
-	// Error code redirect configuration (This feature is in beta test and not fully available yet.)
+	// Error code redirect configuration (This feature is in beta and not generally available yet.)
 	ErrorPage *ErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
 
 	// Request header configuration
@@ -86,7 +86,7 @@ type AddCdnDomainRequest struct {
 	// Cross-border linkage optimization configuration
 	OriginPullOptimization *OriginPullOptimization `json:"OriginPullOptimization,omitempty" name:"OriginPullOptimization"`
 
-	// Https acceleration configuration
+	// HTTPS acceleration configuration
 	Https *Https `json:"Https,omitempty" name:"Https"`
 
 	// Timestamp hotlink protection configuration
@@ -101,22 +101,25 @@ type AddCdnDomainRequest struct {
 	// Referer hotlink protection configuration
 	Referer *Referer `json:"Referer,omitempty" name:"Referer"`
 
-	// Browser cache configuration (This feature is in beta test and not fully available yet.)
+	// Browser cache configuration (This feature is in beta and not generally available yet.)
 	MaxAge *MaxAge `json:"MaxAge,omitempty" name:"MaxAge"`
 
-	// Ipv6 configuration (This feature is in beta test and not fully available yet.)
+	// IPv6 configuration (This feature is in beta and not generally available yet.)
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
-	// Specific configuration for region attributes
-	// Applicable to use cases where the configuration of accelerating domain names inside mainland China is inconsistent with the configuration outside mainland China.
+	// Specific region configuration
+	// Applicable to cases where the acceleration domain name configuration differs for regions in and outside mainland China.
 	SpecificConfig *SpecificConfig `json:"SpecificConfig,omitempty" name:"SpecificConfig"`
 
 	// Domain name acceleration region
 	// mainland: acceleration inside mainland China
 	// overseas: acceleration outside mainland China
 	// global: global acceleration
-	// To use overseas acceleration and global acceleration, you need to enable the overseas acceleration service first
+	// Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
 	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// 
+	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
 }
 
 func (r *AddCdnDomainRequest) ToJsonString() string {
@@ -149,20 +152,20 @@ func (r *AddCdnDomainResponse) FromJsonString(s string) error {
 type AdvanceCacheRule struct {
 
 	// Rule types:
-	// all: all files take effect
-	// file: specified file suffixes take effect
-	// directory: specified paths take effect
-	// path: specified absolute paths take effect
-	// default: the cache rules when the origin server has not returned max-age
+	// `all`: effective for all files
+	// `file`: effective for specified file suffixes
+	// `directory`: effective for specified paths
+	// `path`: effective for specified absolute paths
+	// `default`: the cache rules when the origin server has not returned max-age
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CacheType *string `json:"CacheType,omitempty" name:"CacheType"`
 
-	// Matching content under the corresponding types:
-	// For "all", enter an asterisk (*).
-	// For "file", enter the suffix, such as jpg, txt.
-	// For "directory", enter the path, such as /xxx/test/.
-	// For "path", enter the corresponding absolute path, such as /xxx/test.html.
-	// For "default", enter "no max-age".
+	// Content for each CacheType:
+	// For `all`, enter an asterisk (*).
+	// For `file`, enter the suffix, such as jpg, txt.
+	// For `directory`, enter the path, such as /xxx/test/.
+	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+	// For `default`, enter "no max-age".
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CacheContents []*string `json:"CacheContents,omitempty" name:"CacheContents" list`
 
@@ -181,15 +184,15 @@ type AdvancedCache struct {
 	// Forced cache configuration
 	// on: enabled
 	// off: disabled
-	// When it is enabled, if the origin server returns no-cache, no-store headers, node caching will still be performed according to the cache expiration rules.
-	// It is disabled by default
+	// When this is enabled, if the origin server returns no-cache, no-store headers, node caching will still be performed according to the cache expiration rules.
+	// This is disabled by default
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitempty" name:"IgnoreCacheControl"`
 
 	// Ignore the Set-Cookie header of an origin server
 	// on: enabled
 	// off: disabled
-	// It is disabled by default
+	// This is disabled by default
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IgnoreSetCookie *string `json:"IgnoreSetCookie,omitempty" name:"IgnoreSetCookie"`
 }
@@ -199,14 +202,14 @@ type Authentication struct {
 	// Hotlink protection configuration switch
 	// on: enabled
 	// off: disabled
-	// When it is enabled, only one mode needs to be configured. Other modes need to be set to null.
+	// When this is enabled, one mode needs to be configured. Other modes need to be set to null.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// Timestamp hotlink protection mode A configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TypeA *AuthenticationTypeA `json:"TypeA,omitempty" name:"TypeA"`
 
-	// Timestamp hotlink protection mode B configuration (the mode B backend is being upgraded and the configuration is currently not supported)
+	// Timestamp hotlink protection mode B configuration (mode B is being upgraded and is currently not supported)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TypeB *AuthenticationTypeB `json:"TypeB,omitempty" name:"TypeB"`
 
@@ -226,20 +229,20 @@ type AuthenticationTypeA struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-	// Signature parameter name configuration
+	// Signature parameter name
 	// Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
 	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
 
-	// Signature expiration time settings
+	// Signature expiration time
 	// Unit: second. The maximum value is 31536000.
 	ExpireTime *int64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-	// File extension list settings for authentication/no authentication
+	// File extension list settings determining if authentication should be performed
 	// If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
 
-	// whitelist: indicating that all types apart from the FileExtensions list are authenticated
-	// blacklist: indicating that only the types in the FileExtensions list are authenticated
+	// whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 }
 
@@ -250,16 +253,16 @@ type AuthenticationTypeB struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-	// Signature expiration time settings
+	// Signature expiration time
 	// Unit: second. The maximum value is 31536000.
 	ExpireTime *int64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-	// File extension list settings for authentication/no authentication
+	// File extension list settings determining if authentication should be performed
 	// If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
 
-	// whitelist: indicating that all types apart from the FileExtensions list are authenticated
-	// blacklist: indicating that only the types in the FileExtensions list are authenticated
+	// whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 }
 
@@ -270,16 +273,16 @@ type AuthenticationTypeC struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-	// Signature expiration time settings
+	// Signature expiration time
 	// Unit: second. The maximum value is 31536000.
 	ExpireTime *int64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-	// File extension list settings for authentication/no authentication
+	// File extension list settings determining if authentication should be performed
 	// If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
 
-	// whitelist: indicating that all types apart from the FileExtensions list are authenticated
-	// blacklist: indicating that only the types in the FileExtensions list are authenticated
+	// whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 }
 
@@ -290,23 +293,23 @@ type AuthenticationTypeD struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-	// Signature expiration time settings
+	// Signature expiration time
 	// Unit: second. The maximum value is 31536000.
 	ExpireTime *int64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-	// File extension list settings for authentication/no authentication
+	// File extension list settings determining if authentication should be performed
 	// If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
 
-	// whitelist: indicating that all types apart from the FileExtensions list are authenticated
-	// blacklist: indicating that only the types in the FileExtensions list are authenticated
+	// whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
-	// Signature parameter name configuration
+	// Signature parameter name
 	// Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
 	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
 
-	// Timestamp parameter name settings
+	// Timestamp parameter name
 	// Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
 	TimeParam *string `json:"TimeParam,omitempty" name:"TimeParam"`
 
@@ -314,6 +317,9 @@ type AuthenticationTypeD struct {
 	// dec: decimal
 	// hex: hexadecimal
 	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+}
+
+type AwsPrivateAccess struct {
 }
 
 type BandwidthAlert struct {
@@ -327,9 +333,9 @@ type BandwidthAlert struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BpsThreshold *int64 `json:"BpsThreshold,omitempty" name:"BpsThreshold"`
 
-	// Operation after threshold is reached
-	// RESOLVE_DNS_TO_ORIGIN: directly origin-pull. It is only supported for domain names of external origin.
-	// RETURN_404: return 404 to all requests.
+	// Action taken when threshold is reached
+	// RESOLVE_DNS_TO_ORIGIN: requests will be forwarded to the origin server. This is only supported for domain names of external origin.
+	// RETURN_404: a 404 error will be returned for all requests.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CounterMeasure *string `json:"CounterMeasure,omitempty" name:"CounterMeasure"`
 
@@ -352,13 +358,13 @@ type BriefDomain struct {
 	// Domain name CNAME.
 	Cname *string `json:"Cname,omitempty" name:"Cname"`
 
-	// Domain name status. pending: under review; rejected: review failed; processing: review succeeded and under deployment; online: enabled; offline: disabled; deleted: deleted.
+	// Domain name status. Values include `pending`: under review; `rejected`: failed to pass review; `processing`: passed review and under deployment; `online`: enabled; `offline`: disabled; `deleted`: deleted.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Domain name business type. web: static acceleration; download: download acceleration; media: streaming media acceleration.
+	// Domain name service type. `web`: static acceleration; `download`: download acceleration; `media`: streaming media acceleration.
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// Domain name creation time.
@@ -370,13 +376,13 @@ type BriefDomain struct {
 	// Origin server configuration details.
 	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
 
-	// Domain name block status, including normal, overdue, quota, malicious, ddos, idle, unlicensed, capping, and readonly.
+	// Domain name block status. Values include `normal`, `overdue`, `quota`, `malicious`, `ddos`, `idle`, `unlicensed`, `capping`, and `readonly`.
 	Disable *string `json:"Disable,omitempty" name:"Disable"`
 
-	// Acceleration region, including mainland, overseas, and global.
+	// Acceleration region. Values include `mainland`, `overseas`, and `global`.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// Domain name lock status. normal: not locked; mainland: locked in mainland China; overseas: locked outside mainland China; global: locked globally.
+	// Domain name lock status. Values include `normal`: not locked; `mainland`: locked in mainland China; `overseas`: locked outside mainland China; `global`: locked globally.
 	Readonly *string `json:"Readonly,omitempty" name:"Readonly"`
 }
 
@@ -386,7 +392,7 @@ type Cache struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SimpleCache *SimpleCache `json:"SimpleCache,omitempty" name:"SimpleCache"`
 
-	// Advanced cache expiration time configuration (This feature is in beta test and not fully available yet.)
+	// Advanced cache expiration configuration (This feature is in beta and not generally available yet.)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AdvancedCache *AdvancedCache `json:"AdvancedCache,omitempty" name:"AdvancedCache"`
 }
@@ -413,17 +419,17 @@ type CacheOptResult struct {
 type CappingRule struct {
 
 	// Rule types:
-	// all: all files take effect
-	// file: specified file suffixes take effect
-	// directory: specified paths take effect
-	// path: specified absolute paths take effect
+	// `all`: effective for all files
+	// `file`: effective for specified file suffixes
+	// `directory`: effective for specified paths
+	// `path`: effective for specified absolute paths
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
-	// Matching content under the corresponding types for RuleType: 
-	// For "all", enter an asterisk (*).
-	// For "file", enter the suffix, such as jpg, txt.
-	// For "directory", enter the path, such as /xxx/test/.
-	// For "path", enter the corresponding absolute path, such as /xxx/test.html.
+	// Content for each RuleType: 
+	// For `all`, enter an asterisk (*).
+	// For `file`, enter the suffix, such as jpg, txt.
+	// For `directory`, enter the path, such as /xxx/test/.
+	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
 
 	// Downstream speed value settings (in KB/s)
@@ -492,12 +498,12 @@ type ClientCert struct {
 	CertName *string `json:"CertName,omitempty" name:"CertName"`
 
 	// Certificate expiration time
-	// When it is used as an input parameter, it can be left blank.
+	// When this is used as an input parameter, it can be left blank.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
 	// Certificate issuance time
-	// When it is used as an input parameter, it can be left blank.
+	// When this is used as an input parameter, it can be left blank.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeployTime *string `json:"DeployTime,omitempty" name:"DeployTime"`
 }
@@ -523,7 +529,7 @@ type Compression struct {
 
 type CompressionRule struct {
 
-	// true: must be set as true, to enable compression
+	// true: must be set as true, enables compression
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Compress *bool `json:"Compress,omitempty" name:"Compress"`
 
@@ -543,7 +549,7 @@ type CompressionRule struct {
 
 	// File compression algorithm
 	// gzip: specifies Gzip compression
-	// brotli: It can be enabled when the Gzip compression is specified
+	// brotli: this can be enabled when the Gzip compression is specified
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Algorithms []*string `json:"Algorithms,omitempty" name:"Algorithms" list`
 }
@@ -552,7 +558,7 @@ type DeleteCdnDomainRequest struct {
 	*tchttp.BaseRequest
 
 	// Domain name
-	// The domain name status should be **Disabled**
+	// The domain name status should be `Disabled`
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
 
@@ -628,13 +634,13 @@ type DescribeCdnDataRequest struct {
 	// You can set it to true to return the details for each Domain (the statusCode metric is currently not supported)
 	Detail *bool `json:"Detail,omitempty" name:"Detail"`
 
-	// Specifies an ISP when you query the CDN data within Mainland China. If it is left blank, all ISPs will be queried.
+	// Specifies an ISP when you query the CDN data within Mainland China. If this is left blank, all ISPs will be queried.
 	// To view ISP codes, see [ISP Code Mappings](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
 	// If you have specified an ISP, you cannot specify a province or an IP protocol for the same query.
 	Isp *int64 `json:"Isp,omitempty" name:"Isp"`
 
-	// Specifies a province when you query the CDN data within Mainland China. If it is left blank, all provinces will be queried.
-	// Specifies a country/region when you query the CDN data outside Mainland China. If it is left blank, all countries/regions will be queried.
+	// Specifies a province when you query the CDN data within Mainland China. If this is left blank, all provinces will be queried.
+	// Specifies a country/region when you query the CDN data outside Mainland China. If this is left blank, all countries/regions will be queried.
 	// To view codes of provinces or countries/regions, see [Province Code Mappings](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
 	// If you have specified a province for your query on CDN data within mainland China, you cannot specify an ISP or an IP protocol for the same query.
 	District *int64 `json:"District,omitempty" name:"District"`
@@ -802,10 +808,10 @@ func (r *DescribeCdnIpResponse) FromJsonString(s string) error {
 type DescribeDomainsConfigRequest struct {
 	*tchttp.BaseRequest
 
-	// Offset for paged queries. Default value: 0 (the first page).
+	// Offset for paginated queries. Default value: 0 (the first page).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Limit on paged queries. Default value: 100. Maximum value: 1000.
+	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Query condition filter, complex type.
@@ -832,7 +838,7 @@ type DescribeDomainsConfigResponse struct {
 		Domains []*DetailDomain `json:"Domains,omitempty" name:"Domains" list`
 
 		// The number of domain names that matched the query conditions
-	// Used for paged queries
+	// Used for paginated queries
 		TotalNumber *int64 `json:"TotalNumber,omitempty" name:"TotalNumber"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -852,10 +858,10 @@ func (r *DescribeDomainsConfigResponse) FromJsonString(s string) error {
 type DescribeDomainsRequest struct {
 	*tchttp.BaseRequest
 
-	// Offset for paged queries. Default value: 0 (the first page).
+	// Offset for paginated queries. Default value: 0 (the first page).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Limit on paged queries. Default value: 100. Maximum value: 1000.
+	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Query condition filter, complex type.
@@ -879,7 +885,7 @@ type DescribeDomainsResponse struct {
 		Domains []*BriefDomain `json:"Domains,omitempty" name:"Domains" list`
 
 		// The number of domain names that matched the query conditions
-	// Used for paged queries
+	// Used for paginated queries
 		TotalNumber *int64 `json:"TotalNumber,omitempty" name:"TotalNumber"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1298,10 +1304,10 @@ func (r *DescribePushTasksResponse) FromJsonString(s string) error {
 type DescribeUrlViolationsRequest struct {
 	*tchttp.BaseRequest
 
-	// Offset for paged queries. Default value: 0 (the first page).
+	// Offset for paginated queries. Default value: 0 (the first page).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Limit on paged queries. Default value: 100.
+	// Limit on paginated queries. Default value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Specified domain name query
@@ -1321,7 +1327,7 @@ type DescribeUrlViolationsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Details of violating URLs
+		// Details of URLs in violation
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		UrlRecordList []*ViolationUrl `json:"UrlRecordList,omitempty" name:"UrlRecordList" list`
 
@@ -1357,13 +1363,13 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Cname *string `json:"Cname,omitempty" name:"Cname"`
 
-	// Domain name status. pending: under review; rejected: review failed; processing: review succeeded and under deployment; online: enabled; offline: disabled; deleted: deleted.
+	// Domain name status. Values include `pending`: under review; `rejected`: failed to pass review; `processing`: passed review and under deployment; `online`: enabled; `offline`: disabled; `deleted`: deleted.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Domain name business type. web: static acceleration; download: download acceleration; media: streaming media acceleration.
+	// Domain name service type. `web`: static acceleration; `download`: download acceleration; `media`: streaming media acceleration.
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// Domain name creation time.
@@ -1395,7 +1401,7 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BandwidthAlert *BandwidthAlert `json:"BandwidthAlert,omitempty" name:"BandwidthAlert"`
 
-	// Range origin-pull configuration.
+	// Range GETs configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RangeOriginPull *RangeOriginPull `json:"RangeOriginPull,omitempty" name:"RangeOriginPull"`
 
@@ -1451,7 +1457,7 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Seo *Seo `json:"Seo,omitempty" name:"Seo"`
 
-	// Domain name block status, including normal, overdue, quota, malicious, ddos, idle, unlicensed, capping, and readonly.
+	// Domain name block status. Values include `normal`, `overdue`, `quota`, `malicious`, `ddos`, `idle`, `unlicensed`, `capping`, and `readonly`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Disable *string `json:"Disable,omitempty" name:"Disable"`
 
@@ -1471,7 +1477,7 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
-	// Whether it is compatible with configurations in old versions.
+	// Old configuration compatibility check
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Compatibility *Compatibility `json:"Compatibility,omitempty" name:"Compatibility"`
 
@@ -1479,17 +1485,20 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SpecificConfig *SpecificConfig `json:"SpecificConfig,omitempty" name:"SpecificConfig"`
 
-	// Acceleration region, including mainland, overseas, and global.
+	// Acceleration region. Values include `mainland`, `overseas`, and `global`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// Domain name lock status. normal: not locked; mainland: locked in mainland China; overseas: locked outside mainland China; global: locked globally.
+	// Domain name lock status. Values include `normal`: not locked; `mainland`: locked in mainland China; `overseas`: locked outside mainland China; `global`: locked globally.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Readonly *string `json:"Readonly,omitempty" name:"Readonly"`
 
 	// Origin-pull timeout configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
+
+	// 
+	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
 }
 
 type DisableCachesRequest struct {
@@ -1537,20 +1546,20 @@ type DomainFilter struct {
 	// - origin: master origin server.
 	// - domain: domain name.
 	// - resourceId: domain name id.
-	// - status: domain name status, online, offline, or processing.
-	// - serviceType: service type, web, download, or media.
+	// - status: domain name status. Values include `online`, `offline`, or `processing`.
+	// - serviceType: service type. Values include `web`, `download`, or `media`.
 	// - projectId: project ID.
-	// - domainType: master origin server type, cname indicates external origin, COS indicates COS origin.
+	// - domainType: master origin server type, `cname` indicates external origin, `COS` indicates COS origin.
 	// - fullUrlCache: full-path cache, which can be on or off.
 	// - https: whether to configure HTTPS, which can be on, off or processing.
-	// - originPullProtocol: origin-pull protocol type. It supports HTTP, follow, or HTTPS.
+	// - originPullProtocol: origin-pull protocol type. HTTP, follow, or HTTPS are supported.
 	// - tagKey: tag key.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter field value.
 	Value []*string `json:"Value,omitempty" name:"Value" list`
 
-	// Whether to enable fuzzy query. Only origin or domain is supported for the filter field name.
+	// Whether to enable fuzzy query. Only `origin` or `domain` is supported for the filter field name.
 	// When fuzzy query is enabled, the maximum Value length is 1. When fuzzy query is disabled, the maximum Value length is 5.
 	Fuzzy *bool `json:"Fuzzy,omitempty" name:"Fuzzy"`
 }
@@ -1641,15 +1650,15 @@ type ErrorPage struct {
 type ErrorPageRule struct {
 
 	// Status code
-	// It supports 400, 403, 404, 500.
+	// Supports 400, 403, 404, 500.
 	StatusCode *int64 `json:"StatusCode,omitempty" name:"StatusCode"`
 
 	// Redirect status code settings
-	// It supports 301 or 302.
+	// Supports 301 or 302.
 	RedirectCode *int64 `json:"RedirectCode,omitempty" name:"RedirectCode"`
 
 	// Redirect URL
-	// It requires a full redirect path, such as https://www.test.com/error.html.
+	// Requires a full redirect path, such as https://www.test.com/error.html.
 	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
 }
 
@@ -1676,7 +1685,7 @@ type ForceRedirect struct {
 	RedirectType *string `json:"RedirectType,omitempty" name:"RedirectType"`
 
 	// Status code returned for forced redirect 
-	// It supports 301, 302.
+	// Supports 301, 302.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitempty" name:"RedirectStatusCode"`
 }
@@ -1743,7 +1752,7 @@ func (r *GetDisableRecordsResponse) FromJsonString(s string) error {
 type HttpHeaderPathRule struct {
 
 	// HTTP header setting method
-	// add: add header. If a header exists, then there will be a repeated header.
+	// add: add header. If a header exists, then there will be a duplicated header.
 	// set: only supports origin-pull header configuration. If a header exists, it will be overwritten. If one does not exist, then the header will be added.
 	// del: delete header
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1754,24 +1763,24 @@ type HttpHeaderPathRule struct {
 	HeaderName *string `json:"HeaderName,omitempty" name:"HeaderName"`
 
 	// HTTP header value. Up to 1000 characters can be set.
-	// It is not required when Mode is del
-	// It is required when Mode is add/set
+	// Not required when Mode is del
+	// Required when Mode is add/set
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	HeaderValue *string `json:"HeaderValue,omitempty" name:"HeaderValue"`
 
 	// Rule types:
-	// all: all files take effect
-	// file: specified file suffixes take effect
-	// directory: specified paths take effect
-	// path: specified absolute paths take effect
+	// `all`: effective for all files
+	// `file`: effective for specified file suffixes
+	// `directory`: effective for specified paths
+	// `path`: effective for specified absolute paths
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
-	// Matching content under the corresponding types for RuleType:
-	// For "all", enter an asterisk (*).
-	// For "file", enter the suffix, such as jpg, txt.
-	// For "directory", enter the path, such as /xxx/test/.
-	// For "path", enter the corresponding absolute path, such as /xxx/test.html.
+	// Content for each RuleType:
+	// For `all`, enter an asterisk (*).
+	// For `file`, enter the suffix, such as jpg, txt.
+	// For `directory`, enter the path, such as /xxx/test/.
+	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
 }
@@ -1787,21 +1796,21 @@ type Https struct {
 	// HTTP2 configuration switch
 	// on: enabled
 	// off: disabled
-	// The first time HTTPS acceleration is enabled, it will enable HTTP2 configuration by default.
+	// Enabling HTTPS acceleration for the first time will enable HTTP2 configuration by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Http2 *string `json:"Http2,omitempty" name:"Http2"`
 
 	// OCSP configuration switch
 	// on: enabled
 	// off: disabled
-	// It is disabled by default
+	// This is disabled by default
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OcspStapling *string `json:"OcspStapling,omitempty" name:"OcspStapling"`
 
 	// Client certificate authentication feature
 	// on: enabled
 	// off: disabled
-	// It is disabled by default. If it is enabled, you need to upload the client certificate information. This configuration is in beta test and not fully available yet.
+	// This is disabled by default. The client certificate information is needed when enabled. This is still in beta and not generally available yet.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VerifyClient *string `json:"VerifyClient,omitempty" name:"VerifyClient"`
 
@@ -1816,13 +1825,13 @@ type Https struct {
 	// Spdy configuration switch
 	// on: enabled
 	// off: disabled
-	// It is disabled by default
+	// This is disabled by default
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Spdy *string `json:"Spdy,omitempty" name:"Spdy"`
 
 	// HTTPS certificate deployment status
 	// closed: already closed
-	// deploying: being deployed
+	// deploying: in deployment
 	// deployed: successfully deployed
 	// failed: deployment failed
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1843,7 +1852,7 @@ type IpFilter struct {
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
 	// IP blacklist/whitelist list
-	// It supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
+	// Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
 	// Up to 50 whitelists or blacklists can be entered
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
@@ -1856,15 +1865,15 @@ type IpFreqLimit struct {
 	// off: disabled
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Sets the number limit of request per second
-	// 514 will be returned to the requests that exceed the limit
+	// Sets the limited number of requests per second
+	// 514 will be returned for requests that exceed the limit
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Qps *int64 `json:"Qps,omitempty" name:"Qps"`
 }
 
 type Ipv6 struct {
 
-	// Whether to enable the IPv6 feature for a domain name, which can be on or off.
+	// Whether to enable the IPv6 feature for a domain name. Values include `on` or `off`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
@@ -1873,14 +1882,14 @@ type ListTopDataRequest struct {
 	*tchttp.BaseRequest
 
 	// Query start date. Example: 2018-09-09.
-	// It only supports data query at daily granularity. The date information in the input parameter is the start date.
-	// Returns data generated at or after 00:00:00 on the start date.
-	// It only supports querying of data within 90 days.
+	// Only supports data query at daily granularity. The date in the input parameter is used as the start date.
+	// Data generated at or after 00:00:00 on the start date will be returned.
+	// Only data from the last 90 days will be queried.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Query end date. Example: 2018-09-10
-	// It only supports data query at daily granularity. The date information in the input parameter is the end date.
-	// Returns data generated before or at 23:59:59 on the end date.
+	// Only supports data query at daily granularity. The date in the input parameter is used as the end date.
+	// Data generated before or at 23:59:59 on the end date will be returned.
 	// EndTime must be greater than or equal to StartTime
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
@@ -2027,7 +2036,7 @@ type MainlandConfig struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginPullOptimization *OriginPullOptimization `json:"OriginPullOptimization,omitempty" name:"OriginPullOptimization"`
 
-	// Range origin-pull configuration.
+	// Range GETs configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RangeOriginPull *RangeOriginPull `json:"RangeOriginPull,omitempty" name:"RangeOriginPull"`
 
@@ -2051,7 +2060,7 @@ type MainlandConfig struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Seo *Seo `json:"Seo,omitempty" name:"Seo"`
 
-	// Domain name business type. web: static acceleration; download: download acceleration; media: streaming media acceleration.
+	// Domain name service type. `web`: static acceleration; `download`: download acceleration; `media`: streaming media acceleration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
@@ -2089,20 +2098,20 @@ type MaxAge struct {
 type MaxAgeRule struct {
 
 	// Rule types:
-	// all: all files take effect
-	// file: specified file suffixes take effect
-	// directory: specified paths take effect
-	// path: specified absolute paths take effect
+	// `all`: effective for all files
+	// `file`: effective for specified file suffixes
+	// `directory`: effective for specified paths
+	// `path`: effective for specified absolute paths
 	MaxAgeType *string `json:"MaxAgeType,omitempty" name:"MaxAgeType"`
 
-	// Matching content under the corresponding types for MaxAgeType:
-	// For "all", enter an asterisk (*).
-	// For "file", enter the suffix, such as jpg, txt.
-	// For "directory", enter the path, such as /xxx/test/.
-	// For "path", enter the corresponding absolute path, such as /xxx/test.html.
+	// Content for each MaxAgeType:
+	// For `all`, enter an asterisk (*).
+	// For `file`, enter the suffix, such as jpg, txt.
+	// For `directory`, enter the path, such as /xxx/test/.
+	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 	MaxAgeContents []*string `json:"MaxAgeContents,omitempty" name:"MaxAgeContents" list`
 
-	// MaxAge time settings (in seconds)
+	// MaxAge time (in seconds)
 	MaxAgeTime *int64 `json:"MaxAgeTime,omitempty" name:"MaxAgeTime"`
 }
 
@@ -2114,34 +2123,34 @@ type Origin struct {
 	Origins []*string `json:"Origins,omitempty" name:"Origins" list`
 
 	// Master origin server type
-	// The following types are supported in input parameters:
+	// The following types are supported for input parameters:
 	// domain: domain name type
 	// cos: COS origin
-	// ip: IP list is used as origin server
+	// ip: IP list used as origin server
 	// ipv6: origin server list is a single IPv6 address
 	// ip_ipv6: origin server list is multiple IPv4 addresses and an IPv6 address
 	// The following types of output parameters are added:
-	// image: cloud Infinite origin
-	// ftp: historical FTP origin, which is no longer maintained.
-	// When modifying Origins, you need to enter the corresponding OriginType.
-	// The IPv6 feature is not fully available yet. To use this feature, you need to apply for it first.
+	// image: Cloud Infinite origin
+	// ftp: legacy FTP origin, which is no longer maintained.
+	// When modifying `Origins`, you need to enter the corresponding OriginType.
+	// The IPv6 feature is not generally available yet. Please send in a whitelist application to use this feature.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-	// Host header used when pulling the master origin server. If the Host header is not entered, it will be the acceleration domain name by default.
-	// If a wildcard domain name is accessed, then the Host header is the sub-domain name during the access by default.
+	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+	// If a wildcard domain name is accessed, then the sub-domain name during the access will be used by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServerName *string `json:"ServerName,omitempty" name:"ServerName"`
 
-	// When OriginType is COS, you can specify whether to allow access to private buckets.
-	// Note: to enable this configuration, you need to authorize the CDN to access this private bucket first.
+	// When OriginType is COS, you can specify if access to private buckets is allowed.
+	// Note: to enable this configuration, you need to first grant CDN access to the private bucket.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CosPrivateAccess *string `json:"CosPrivateAccess,omitempty" name:"CosPrivateAccess"`
 
 	// Origin-pull protocol configuration
 	// http: forced HTTP origin-pull
 	// follow: protocol follow origin-pull
-	// https: forced HTTPS origin-pull. It only supports origin server port 443 for origin-pull.
+	// https: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginPullProtocol *string `json:"OriginPullProtocol,omitempty" name:"OriginPullProtocol"`
 
@@ -2152,12 +2161,12 @@ type Origin struct {
 
 	// Backup origin server type, which supports the following types:
 	// domain: domain name type
-	// ip: IP list is used as origin server
+	// ip: IP list used as origin server
 	// When modifying BackupOrigins, you need to enter the corresponding BackupOriginType.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupOriginType *string `json:"BackupOriginType,omitempty" name:"BackupOriginType"`
 
-	// Host header used when pulling the backup origin server. If the Host header is not entered, it will be the ServerName of master origin server by default.
+	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupServerName *string `json:"BackupServerName,omitempty" name:"BackupServerName"`
 }
@@ -2249,7 +2258,7 @@ type OverseaConfig struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginPullOptimization *OriginPullOptimization `json:"OriginPullOptimization,omitempty" name:"OriginPullOptimization"`
 
-	// Range origin-pull configuration.
+	// Range GETs configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RangeOriginPull *RangeOriginPull `json:"RangeOriginPull,omitempty" name:"RangeOriginPull"`
 
@@ -2273,7 +2282,7 @@ type OverseaConfig struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Seo *Seo `json:"Seo,omitempty" name:"Seo"`
 
-	// Domain name business type. web: static acceleration; download: download acceleration; media: streaming media acceleration.
+	// Domain name service type. `web`: static acceleration; `download`: download acceleration; `media`: streaming media acceleration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
@@ -2495,17 +2504,17 @@ type Referer struct {
 type RefererRule struct {
 
 	// Rule types:
-	// all: all files take effect
-	// file: specified file suffixes take effect
-	// directory: specified paths take effect
-	// path: specified absolute paths take effect
+	// `all`: effective for all files
+	// `file`: effective for specified file suffixes
+	// `directory`: effective for specified paths
+	// `path`: effective for specified absolute paths
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
-	// Matching content under the corresponding types for RuleType:
-	// For "all", enter an asterisk (*).
-	// For "file", enter the suffix, such as jpg, txt.
-	// For "directory", enter the path, such as /xxx/test/.
-	// For "path", enter the corresponding absolute path, such as /xxx/test.html.
+	// Content for each RuleType:
+	// For `all`, enter an asterisk (*).
+	// For `file`, enter the suffix, such as jpg, txt.
+	// For `directory`, enter the path, such as /xxx/test/.
+	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
 
 	// Referer configuration types
@@ -2601,32 +2610,32 @@ type Seo struct {
 type ServerCert struct {
 
 	// Server certificate ID
-	// It is auto-generated when the certificate is being hosted by the SSL Certificate Service
+	// This is auto-generated when the certificate is being hosted by the SSL Certificate Service
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CertId *string `json:"CertId,omitempty" name:"CertId"`
 
 	// Server certificate name
-	// It is auto-generated when the certificate is being hosted by the SSL Certificate Service
+	// This is auto-generated when the certificate is being hosted by the SSL Certificate Service
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CertName *string `json:"CertName,omitempty" name:"CertName"`
 
 	// Server certificate information
-	// It is required when uploading an external certificate, which should contain the complete certificate chain.
+	// This is required when uploading an external certificate, which should contain the complete certificate chain.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Certificate *string `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Server key information
-	// It is required when uploading an external certificate.
+	// This is required when uploading an external certificate.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
 
 	// Certificate expiration time
-	// When it is used as an input parameter, it can be left blank.
+	// Can be left blank when used as an input parameter
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
 	// Certificate issuance time
-	// When it is used as an input parameter, it can be left blank.
+	// Can be left blank when used as an input parameter
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeployTime *string `json:"DeployTime,omitempty" name:"DeployTime"`
 
@@ -2644,29 +2653,29 @@ type SimpleCache struct {
 	// Follows origin server Cache-Control: max-age configurations
 	// on: enabled
 	// off: disabled
-	// If it is enabled, resources that do not match CacheRules rules will be cached by the node according to the max-age value returned by the origin server. Resources that match CacheRules rules will be cached on the node according to the cache expiration time set in CacheRules.
-	// It conflicts with CompareMaxAge. They cannot be enabled at the same time.
+	// If this is enabled, resources that do not match CacheRules rules will be cached by the node according to the max-age value returned by the origin server. Resources that match CacheRules rules will be cached on the node according to the cache expiration time set in CacheRules.
+	// This conflicts with CompareMaxAge. The two cannot be enabled at the same time.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FollowOrigin *string `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 
 	// Forced cache
 	// on: enabled
 	// off: disabled
-	// It is disabled by default. If it is enabled, no-store and no-cache resources returned from the origin server will be cached according to CacheRules rules.
+	// This is disabled by default. If enabled, `no-store` and `no-cache` resources returned from the origin server will be cached according to CacheRules rules.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitempty" name:"IgnoreCacheControl"`
 
 	// Ignores the Set-Cookie header of the origin server
 	// on: enabled
 	// off: disabled
-	// It is disabled by default
+	// This is disabled by default
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IgnoreSetCookie *string `json:"IgnoreSetCookie,omitempty" name:"IgnoreSetCookie"`
 
-	// Advanced cache expiration configuration. If it is enabled, the max-age value returned by the origin server will be compared with the cache expiration time set in CacheRules, and the smallest value will be cached on the node.
+	// Advanced cache expiration configuration. If this is enabled, the max-age value returned by the origin server will be compared with the cache expiration time set in CacheRules, and the smallest value will be cached on the node.
 	// on: enabled
 	// off: disabled
-	// It is disabled by default
+	// This is disabled by default
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CompareMaxAge *string `json:"CompareMaxAge,omitempty" name:"CompareMaxAge"`
 }
@@ -2674,19 +2683,19 @@ type SimpleCache struct {
 type SimpleCacheRule struct {
 
 	// Rule types:
-	// all: all files take effect
-	// file: specified file suffixes take effect
-	// directory: specified paths take effect
-	// path: specified absolute paths take effect
+	// `all`: effective for all files
+	// `file`: effective for specified file suffixes
+	// `directory`: effective for specified paths
+	// `path`: effective for specified absolute paths
 	// index: home page
 	CacheType *string `json:"CacheType,omitempty" name:"CacheType"`
 
-	// Matching content under the corresponding types for CacheType
-	// For "all", enter an asterisk (*).
-	// For "file", enter the suffix, such as jpg, txt.
-	// For "directory", enter the path, such as /xxx/test/.
-	// For "path", enter the corresponding absolute path, such as /xxx/test.html.
-	// For "index", enter a backslash (/).
+	// Content for each CacheType:
+	// For `all`, enter an asterisk (*).
+	// For `file`, enter the suffix, such as jpg, txt.
+	// For `directory`, enter the path, such as /xxx/test/.
+	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+	// For `index`, enter a backslash (/).
 	CacheContents []*string `json:"CacheContents,omitempty" name:"CacheContents" list`
 
 	// Cache expiration time settings
@@ -2696,12 +2705,12 @@ type SimpleCacheRule struct {
 
 type Sort struct {
 
-	// Sorting field, which currently supports:
-	// createTime, domain name creation time.
-	// certExpireTime, certificate expiration time.
+	// Fields that can be sorted. Currently supports:
+	// `createTime`: domain name creation time.
+	// `certExpireTime`: certificate expiration time.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
-	// asc/desc, which is desc by default.
+	// `asc` or `desc`. Default: `desc`.
 	Sequence *string `json:"Sequence,omitempty" name:"Sequence"`
 }
 
@@ -2720,7 +2729,7 @@ type StartCdnDomainRequest struct {
 	*tchttp.BaseRequest
 
 	// Domain name
-	// The domain name status should be **Disabled**
+	// The domain name status should be `Disabled`
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
 
@@ -2880,13 +2889,13 @@ type UpdateDomainConfigRequest struct {
 	// Bandwidth cap configuration
 	BandwidthAlert *BandwidthAlert `json:"BandwidthAlert,omitempty" name:"BandwidthAlert"`
 
-	// Range origin-pull configuration
+	// Range GETs configuration
 	RangeOriginPull *RangeOriginPull `json:"RangeOriginPull,omitempty" name:"RangeOriginPull"`
 
 	// 301/302 origin-pull follow-redirect configuration
 	FollowRedirect *FollowRedirect `json:"FollowRedirect,omitempty" name:"FollowRedirect"`
 
-	// Error code redirect configuration (This feature is in beta test and not fully available yet.)
+	// Error code redirect configuration (This feature is in beta and not generally available yet.)
 	ErrorPage *ErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
 
 	// Request header configuration
@@ -2928,7 +2937,7 @@ type UpdateDomainConfigRequest struct {
 	// Referer hotlink protection configuration
 	Referer *Referer `json:"Referer,omitempty" name:"Referer"`
 
-	// Browser cache configuration (This feature is in beta test and not fully available yet.)
+	// Browser cache configuration (This feature is in beta and not generally available yet.)
 	MaxAge *MaxAge `json:"MaxAge,omitempty" name:"MaxAge"`
 
 	// Domain name service type
@@ -2937,8 +2946,8 @@ type UpdateDomainConfigRequest struct {
 	// media: streaming media VOD acceleration
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
-	// Specific configuration for region attributes
-	// Applicable to use cases where the configuration of accelerating domain names inside mainland China is inconsistent with the configuration outside mainland China.
+	// Specific region configuration
+	// Applicable to cases where the acceleration domain name configuration differs for regions in and outside mainland China.
 	SpecificConfig *SpecificConfig `json:"SpecificConfig,omitempty" name:"SpecificConfig"`
 
 	// Domain name acceleration region
@@ -2946,6 +2955,12 @@ type UpdateDomainConfigRequest struct {
 	// overseas: acceleration outside mainland China
 	// global: global acceleration
 	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// 
+	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
+
+	// 
+	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {
@@ -3044,16 +3059,16 @@ type ViolationUrl struct {
 	// ID
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 
-	// Origin access URL for violating resources
+	// Origin access URL of the resource in violation
 	RealUrl *string `json:"RealUrl,omitempty" name:"RealUrl"`
 
-	// Snapshot path, which is used in the console to show the violating content snapshot.
+	// Snapshot path. This is used to display a snapshot of the content in violation on the console.
 	DownloadUrl *string `json:"DownloadUrl,omitempty" name:"DownloadUrl"`
 
-	// Current status of violating resources
+	// Current status of the resources in violation
 	// forbid: blocked
 	// release: unblocked
-	// delay: handling delayed
+	// delay: processing delayed 
 	// reject: appeal dismissed. The status is still blocked.
 	// complain: appeal in process
 	UrlStatus *string `json:"UrlStatus,omitempty" name:"UrlStatus"`

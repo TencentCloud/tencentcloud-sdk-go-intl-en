@@ -58,8 +58,8 @@ func NewAssociateTargetGroupsResponse() (response *AssociateTargetGroupsResponse
     return
 }
 
-// 监听器或转发规则绑定目标组。
-// 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+// This API is used to bind target groups to CLB listeners (layer-4 protocol) or forwarding rules (layer-7 protocol).
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
 func (c *Client) AssociateTargetGroups(request *AssociateTargetGroupsRequest) (response *AssociateTargetGroupsResponse, err error) {
     if request == nil {
         request = NewAssociateTargetGroupsRequest()
@@ -134,8 +134,8 @@ func NewBatchModifyTargetWeightResponse() (response *BatchModifyTargetWeightResp
     return
 }
 
-// This API (BatchModifyTargetWeight) is used to batch modify the forwarding weights of real servers bound to a listener. Currently, it only supports HTTP/HTTPS listeners.
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+// This API is used to modify the forwarding weights of real servers bound to a CLB listener in batches. It supports layer-4 and layer-7 CLB listeners but not Classic CLB.
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
 func (c *Client) BatchModifyTargetWeight(request *BatchModifyTargetWeightRequest) (response *BatchModifyTargetWeightResponse, err error) {
     if request == nil {
         request = NewBatchModifyTargetWeightRequest()
@@ -160,7 +160,7 @@ func NewBatchRegisterTargetsResponse() (response *BatchRegisterTargetsResponse) 
     return
 }
 
-// This API is used to bind CVM instances or ENIs in batches. It supports cross-region binding and only layer-4 (TCP/UDP) protocols.
+// This API is used to bind CVM instances or ENIs in batches. It supports cross-region binding and layer-4 and layer-7 (TCP, UDP, HTTP, HTTPS) protocols.
 func (c *Client) BatchRegisterTargets(request *BatchRegisterTargetsRequest) (response *BatchRegisterTargetsResponse, err error) {
     if request == nil {
         request = NewBatchRegisterTargetsRequest()
@@ -264,7 +264,7 @@ func NewCreateTargetGroupResponse() (response *CreateTargetGroupResponse) {
     return
 }
 
-// 创建目标组。（目标组功能正在灰度中，需要开通白名单支持）
+// This API is used to create a target group. (The target group feature is currently in beta test. To try it out, submit a ticket for application.)
 func (c *Client) CreateTargetGroup(request *CreateTargetGroupRequest) (response *CreateTargetGroupResponse, err error) {
     if request == nil {
         request = NewCreateTargetGroupRequest()
@@ -392,7 +392,7 @@ func NewDeleteTargetGroupsResponse() (response *DeleteTargetGroupsResponse) {
     return
 }
 
-// 删除目标组
+// This API is used to delete a target group.
 func (c *Client) DeleteTargetGroups(request *DeleteTargetGroupsRequest) (response *DeleteTargetGroupsResponse, err error) {
     if request == nil {
         request = NewDeleteTargetGroupsRequest()
@@ -417,8 +417,8 @@ func NewDeregisterTargetGroupInstancesResponse() (response *DeregisterTargetGrou
     return
 }
 
-// 将服务器从目标组中解绑。
-// 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+// This API is used to unbind a server from a target group.
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
 func (c *Client) DeregisterTargetGroupInstances(request *DeregisterTargetGroupInstancesRequest) (response *DeregisterTargetGroupInstancesResponse, err error) {
     if request == nil {
         request = NewDeregisterTargetGroupInstancesRequest()
@@ -595,7 +595,7 @@ func NewDescribeListenersResponse() (response *DescribeListenersResponse) {
     return
 }
 
-// This API (DescribeListeners) is used to get the list of listeners by CLB IDs, listener protocol, or port. If no filter is specified, the default number (20) of listeners for the instance will be returned.
+// This API is used to get the list of listeners by CLB instance ID, listener protocol, or port. If no filter is specified, all listeners under the CLB instance will be returned.
 func (c *Client) DescribeListeners(request *DescribeListenersRequest) (response *DescribeListenersResponse, err error) {
     if request == nil {
         request = NewDescribeListenersRequest()
@@ -620,7 +620,7 @@ func NewDescribeLoadBalancerListByCertIdResponse() (response *DescribeLoadBalanc
     return
 }
 
-// 根据证书ID查询其在一个地域中所关联到负载均衡实例列表
+// This API is used to query the list of CLB instances associated with a certificate in a region by certificate ID.
 func (c *Client) DescribeLoadBalancerListByCertId(request *DescribeLoadBalancerListByCertIdRequest) (response *DescribeLoadBalancerListByCertIdResponse, err error) {
     if request == nil {
         request = NewDescribeLoadBalancerListByCertIdRequest()
@@ -645,7 +645,7 @@ func NewDescribeLoadBalancersResponse() (response *DescribeLoadBalancersResponse
     return
 }
 
-// This API is used to query the list of CLB instances.
+// This API is used to query the list of CLB instances in a region.
 func (c *Client) DescribeLoadBalancers(request *DescribeLoadBalancersRequest) (response *DescribeLoadBalancersResponse, err error) {
     if request == nil {
         request = NewDescribeLoadBalancersRequest()
@@ -695,7 +695,7 @@ func NewDescribeTargetGroupInstancesResponse() (response *DescribeTargetGroupIns
     return
 }
 
-// 获取目标组绑定的服务器信息
+// This API is used to get the information of servers bound to a target group.
 func (c *Client) DescribeTargetGroupInstances(request *DescribeTargetGroupInstancesRequest) (response *DescribeTargetGroupInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeTargetGroupInstancesRequest()
@@ -720,7 +720,7 @@ func NewDescribeTargetGroupListResponse() (response *DescribeTargetGroupListResp
     return
 }
 
-// 获取目标组列表
+// This API is used to get the target group list.
 func (c *Client) DescribeTargetGroupList(request *DescribeTargetGroupListRequest) (response *DescribeTargetGroupListResponse, err error) {
     if request == nil {
         request = NewDescribeTargetGroupListRequest()
@@ -745,7 +745,7 @@ func NewDescribeTargetGroupsResponse() (response *DescribeTargetGroupsResponse) 
     return
 }
 
-// 查询目标组信息
+// This API is used to query the target group information.
 func (c *Client) DescribeTargetGroups(request *DescribeTargetGroupsRequest) (response *DescribeTargetGroupsResponse, err error) {
     if request == nil {
         request = NewDescribeTargetGroupsRequest()
@@ -845,8 +845,8 @@ func NewDisassociateTargetGroupsResponse() (response *DisassociateTargetGroupsRe
     return
 }
 
-// 解除规则的目标组关联关系。
-// 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+// This API is used to unbind target groups from a rule.
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
 func (c *Client) DisassociateTargetGroups(request *DisassociateTargetGroupsRequest) (response *DisassociateTargetGroupsResponse, err error) {
     if request == nil {
         request = NewDisassociateTargetGroupsRequest()
@@ -1025,7 +1025,7 @@ func NewModifyTargetGroupAttributeResponse() (response *ModifyTargetGroupAttribu
     return
 }
 
-// 修改目标组的名称或者默认端口属性
+// This API is used to rename a target group or modify its default port attribute.
 func (c *Client) ModifyTargetGroupAttribute(request *ModifyTargetGroupAttributeRequest) (response *ModifyTargetGroupAttributeResponse, err error) {
     if request == nil {
         request = NewModifyTargetGroupAttributeRequest()
@@ -1050,8 +1050,8 @@ func NewModifyTargetGroupInstancesPortResponse() (response *ModifyTargetGroupIns
     return
 }
 
-// 批量修改目标组服务器端口。
-// 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+// This API is used to modify server ports of a target group in batches.
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
 func (c *Client) ModifyTargetGroupInstancesPort(request *ModifyTargetGroupInstancesPortRequest) (response *ModifyTargetGroupInstancesPortResponse, err error) {
     if request == nil {
         request = NewModifyTargetGroupInstancesPortRequest()
@@ -1076,8 +1076,8 @@ func NewModifyTargetGroupInstancesWeightResponse() (response *ModifyTargetGroupI
     return
 }
 
-// 批量修改目标组的服务器权重。
-// 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+// This API is used to modify server weights of a target group in batches.
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
 func (c *Client) ModifyTargetGroupInstancesWeight(request *ModifyTargetGroupInstancesWeightRequest) (response *ModifyTargetGroupInstancesWeightResponse, err error) {
     if request == nil {
         request = NewModifyTargetGroupInstancesWeightRequest()
@@ -1154,8 +1154,8 @@ func NewRegisterTargetGroupInstancesResponse() (response *RegisterTargetGroupIns
     return
 }
 
-// 注册服务器到目标组。
-// 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+// This API is used to register servers to a target group.
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
 func (c *Client) RegisterTargetGroupInstances(request *RegisterTargetGroupInstancesRequest) (response *RegisterTargetGroupInstancesResponse, err error) {
     if request == nil {
         request = NewRegisterTargetGroupInstancesRequest()

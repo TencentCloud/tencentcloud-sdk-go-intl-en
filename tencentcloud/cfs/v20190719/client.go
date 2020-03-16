@@ -393,6 +393,31 @@ func (c *Client) SignUpCfsService(request *SignUpCfsServiceRequest) (response *S
     return
 }
 
+func NewUpdateCfsFileSystemNameRequest() (request *UpdateCfsFileSystemNameRequest) {
+    request = &UpdateCfsFileSystemNameRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cfs", APIVersion, "UpdateCfsFileSystemName")
+    return
+}
+
+func NewUpdateCfsFileSystemNameResponse() (response *UpdateCfsFileSystemNameResponse) {
+    response = &UpdateCfsFileSystemNameResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to update a file system name.
+func (c *Client) UpdateCfsFileSystemName(request *UpdateCfsFileSystemNameRequest) (response *UpdateCfsFileSystemNameResponse, err error) {
+    if request == nil {
+        request = NewUpdateCfsFileSystemNameRequest()
+    }
+    response = NewUpdateCfsFileSystemNameResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateCfsFileSystemPGroupRequest() (request *UpdateCfsFileSystemPGroupRequest) {
     request = &UpdateCfsFileSystemPGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
