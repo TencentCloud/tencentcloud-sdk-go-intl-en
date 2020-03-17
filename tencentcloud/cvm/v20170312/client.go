@@ -464,6 +464,31 @@ func (c *Client) DescribeImportImageOs(request *DescribeImportImageOsRequest) (r
     return
 }
 
+func NewDescribeInstanceFamilyConfigsRequest() (request *DescribeInstanceFamilyConfigsRequest) {
+    request = &DescribeInstanceFamilyConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstanceFamilyConfigs")
+    return
+}
+
+func NewDescribeInstanceFamilyConfigsResponse() (response *DescribeInstanceFamilyConfigsResponse) {
+    response = &DescribeInstanceFamilyConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of model families that are available for the current user and in the current region.
+func (c *Client) DescribeInstanceFamilyConfigs(request *DescribeInstanceFamilyConfigsRequest) (response *DescribeInstanceFamilyConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceFamilyConfigsRequest()
+    }
+    response = NewDescribeInstanceFamilyConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceTypeConfigsRequest() (request *DescribeInstanceTypeConfigsRequest) {
     request = &DescribeInstanceTypeConfigsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -711,6 +736,31 @@ func (c *Client) DescribeZoneInstanceConfigInfos(request *DescribeZoneInstanceCo
         request = NewDescribeZoneInstanceConfigInfosRequest()
     }
     response = NewDescribeZoneInstanceConfigInfosResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
+    request = &DescribeZonesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cvm", APIVersion, "DescribeZones")
+    return
+}
+
+func NewDescribeZonesResponse() (response *DescribeZonesResponse) {
+    response = &DescribeZonesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query availability zones.
+func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *DescribeZonesResponse, err error) {
+    if request == nil {
+        request = NewDescribeZonesRequest()
+    }
+    response = NewDescribeZonesResponse()
     err = c.Send(request, response)
     return
 }

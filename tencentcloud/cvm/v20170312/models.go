@@ -355,6 +355,14 @@ type DataDisk struct {
 	// Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.
 	// Note: This field may return null, indicating that no valid value is found.
 	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// Specifies whether the data disk is encrypted. Values: 
+	// <li>TRUE: encrypted
+	// <li>FALSE: not encrypted<br>
+	// Default value: FALSE<br>
+	// Currently, this parameter is only used in the `RunInstances` API.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Encrypt *bool `json:"Encrypt,omitempty" name:"Encrypt"`
 }
 
 type DeleteDisasterRecoverGroupsRequest struct {
@@ -770,6 +778,40 @@ func (r *DescribeImportImageOsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeInstanceFamilyConfigsRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeInstanceFamilyConfigsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceFamilyConfigsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceFamilyConfigsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of instance model families
+		InstanceFamilyConfigSet []*InstanceFamilyConfig `json:"InstanceFamilyConfigSet,omitempty" name:"InstanceFamilyConfigSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceFamilyConfigsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceFamilyConfigsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeInstanceTypeConfigsRequest struct {
 	*tchttp.BaseRequest
 
@@ -1162,6 +1204,43 @@ func (r *DescribeZoneInstanceConfigInfosResponse) ToJsonString() string {
 }
 
 func (r *DescribeZoneInstanceConfigInfosResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeZonesRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeZonesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeZonesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeZonesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of availability zones.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of availability zones.
+		ZoneSet []*ZoneInfo `json:"ZoneSet,omitempty" name:"ZoneSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeZonesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeZonesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1880,6 +1959,16 @@ type Instance struct {
 
 	// 
 	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitempty" name:"LatestOperationRequestId"`
+
+	// ID of a spread placement group.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DisasterRecoverGroupId *string `json:"DisasterRecoverGroupId,omitempty" name:"DisasterRecoverGroupId"`
+
+	// 
+	IPv6Addresses *string `json:"IPv6Addresses,omitempty" name:"IPv6Addresses"`
+
+	// 
+	CamRoleName *string `json:"CamRoleName,omitempty" name:"CamRoleName"`
 }
 
 type InstanceChargePrepaid struct {
@@ -1889,6 +1978,15 @@ type InstanceChargePrepaid struct {
 
 	// Auto renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+}
+
+type InstanceFamilyConfig struct {
+
+	// Full name of the model family.
+	InstanceFamilyName *string `json:"InstanceFamilyName,omitempty" name:"InstanceFamilyName"`
+
+	// Acronym of the model family.
+	InstanceFamily *string `json:"InstanceFamily,omitempty" name:"InstanceFamily"`
 }
 
 type InstanceMarketOptionsRequest struct {
@@ -1978,6 +2076,10 @@ type InstanceTypeQuotaItem struct {
 
 	// Price of an instance model.
 	Price *ItemPrice `json:"Price,omitempty" name:"Price"`
+
+	// Details of sold out items
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SoldOutReason *string `json:"SoldOutReason,omitempty" name:"SoldOutReason"`
 }
 
 type InternetAccessible struct {
@@ -2070,8 +2172,8 @@ type LocalDiskType struct {
 
 type LoginSettings struct {
 
-	// Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-16 characters long and contain at least one character from two of the following categories: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-16 characters long and contain at least one character from three of the following categories: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
-	// Note: This field may return null, indicating that no valid value is found.
+	// Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-30 characters long and contain at least two of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-30 characters long and contain at least three of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
@@ -2764,7 +2866,7 @@ type RunInstancesRequest struct {
 	// Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response. If this parameter is not specified, the instance will be associated with default security groups.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 
-	// Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Monitor and Cloud Security. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
+	// Specifies whether to enable services Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. But for custom images and images from market place, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
 
 	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. <br>For more information, see “How to ensure idempotency”.
@@ -3081,4 +3183,58 @@ type VirtualPrivateCloud struct {
 
 	// 
 	Ipv6AddressCount *uint64 `json:"Ipv6AddressCount,omitempty" name:"Ipv6AddressCount"`
+}
+
+type ZoneInfo struct {
+
+	// Availability zone name. For example, ap-guangzhou-3.
+	// Names of availability zones throughout the entire network:
+	// <li> ap-chongqing-1 </li>
+	// <li> ap-seoul-1 </li>
+	// <li> ap-chengdu-1 </li>
+	// <li> ap-chengdu-2 </li>
+	// <li> ap-hongkong-1 </li>
+	// <li> ap-hongkong-2 </li>
+	// <li> ap-shenzhen-fsi-1 </li>
+	// <li> ap-shenzhen-fsi-2 </li>
+	// <li> ap-shenzhen-fsi-3 </li>
+	// <li> ap-guangzhou-1 (sold out)</li>
+	// <li> ap-guangzhou-2 (sold out)</li>
+	// <li> ap-guangzhou-3 </li>
+	// <li> ap-guangzhou-4 </li>
+	// <li> ap-tokyo-1 </li>
+	// <li> ap-singapore-1 </li>
+	// <li> ap-shanghai-fsi-1 </li>
+	// <li> ap-shanghai-fsi-2 </li>
+	// <li> ap-shanghai-fsi-3 </li>
+	// <li> ap-bangkok-1 </li>
+	// <li> ap-shanghai-1 (sold out) </li>
+	// <li> ap-shanghai-2 </li>
+	// <li> ap-shanghai-3 </li>
+	// <li> ap-shanghai-4 </li>
+	// <li> ap-mumbai-1 </li>
+	// <li> ap-mumbai-2 </li>
+	// <li> eu-moscow-1 </li>
+	// <li> ap-beijing-1 </li>
+	// <li> ap-beijing-2 </li>
+	// <li> ap-beijing-3 </li>
+	// <li> ap-beijing-4 </li>
+	// <li> na-siliconvalley-1 </li>
+	// <li> na-siliconvalley-2 </li>
+	// <li> eu-frankfurt-1 </li>
+	// <li> na-toronto-1 </li>
+	// <li> na-ashburn-1 </li>
+	// <li> na-ashburn-2 </li>
+	// <li> ap-nanjing-1 </li>
+	// <li> ap-nanjing-2 </li>
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Availability zone description, such as Guangzhou Zone 3.
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// Availability zone ID
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Availability zone state. Valid values: `AVAILABLE`, available; `UNAVAILABLE`, unavailable.
+	ZoneState *string `json:"ZoneState,omitempty" name:"ZoneState"`
 }

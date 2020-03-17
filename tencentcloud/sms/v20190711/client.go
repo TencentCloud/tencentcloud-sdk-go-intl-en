@@ -183,7 +183,7 @@ func NewDescribeSmsSignListResponse() (response *DescribeSmsSignListResponse) {
     return
 }
 
-// >⚠️注意：个人认证用户不支持使用 API 查询短信签名，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)。
+// > ⚠️ Note: Individually authenticated users do not support querying SMS signatures using the API, see Understanding [Basic Introduction to Real Name Authentication] (https://cloud.tencent.com/document/product/378/3629).
 func (c *Client) DescribeSmsSignList(request *DescribeSmsSignListRequest) (response *DescribeSmsSignListResponse, err error) {
     if request == nil {
         request = NewDescribeSmsSignListRequest()
@@ -208,7 +208,7 @@ func NewDescribeSmsTemplateListResponse() (response *DescribeSmsTemplateListResp
     return
 }
 
-// >⚠️注意：个人认证用户不支持使用 API 查询短信正文模版，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)。
+// > ⚠️ Note: Individual authentication users do not support querying the SMS text template using the API, please refer to [Basic Introduction to Real Name Authentication] (https://cloud.tencent.com/document/product/378/3629).
 func (c *Client) DescribeSmsTemplateList(request *DescribeSmsTemplateListRequest) (response *DescribeSmsTemplateListResponse, err error) {
     if request == nil {
         request = NewDescribeSmsTemplateListRequest()

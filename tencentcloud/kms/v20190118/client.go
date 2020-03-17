@@ -43,6 +43,56 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewAsymmetricRsaDecryptRequest() (request *AsymmetricRsaDecryptRequest) {
+    request = &AsymmetricRsaDecryptRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "AsymmetricRsaDecrypt")
+    return
+}
+
+func NewAsymmetricRsaDecryptResponse() (response *AsymmetricRsaDecryptResponse) {
+    response = &AsymmetricRsaDecryptResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 使用指定的RSA非对称密钥的私钥进行数据解密，密文必须是使用对应公钥加密的。处于Enabled 状态的非对称密钥才能进行解密操作。
+func (c *Client) AsymmetricRsaDecrypt(request *AsymmetricRsaDecryptRequest) (response *AsymmetricRsaDecryptResponse, err error) {
+    if request == nil {
+        request = NewAsymmetricRsaDecryptRequest()
+    }
+    response = NewAsymmetricRsaDecryptResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAsymmetricSm2DecryptRequest() (request *AsymmetricSm2DecryptRequest) {
+    request = &AsymmetricSm2DecryptRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "AsymmetricSm2Decrypt")
+    return
+}
+
+func NewAsymmetricSm2DecryptResponse() (response *AsymmetricSm2DecryptResponse) {
+    response = &AsymmetricSm2DecryptResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 使用指定的SM2非对称密钥的私钥进行数据解密，密文必须是使用对应公钥加密的。处于Enabled 状态的非对称密钥才能进行解密操作。传入的密文的长度不能超过256字节。
+func (c *Client) AsymmetricSm2Decrypt(request *AsymmetricSm2DecryptRequest) (response *AsymmetricSm2DecryptResponse, err error) {
+    if request == nil {
+        request = NewAsymmetricSm2DecryptRequest()
+    }
+    response = NewAsymmetricSm2DecryptResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCancelKeyDeletionRequest() (request *CancelKeyDeletionRequest) {
     request = &CancelKeyDeletionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -58,7 +108,7 @@ func NewCancelKeyDeletionResponse() (response *CancelKeyDeletionResponse) {
     return
 }
 
-// 取消CMK的计划删除操作
+// Cancel the scheduled deletion of CMK
 func (c *Client) CancelKeyDeletion(request *CancelKeyDeletionRequest) (response *CancelKeyDeletionResponse, err error) {
     if request == nil {
         request = NewCancelKeyDeletionRequest()
@@ -83,7 +133,7 @@ func NewCreateKeyResponse() (response *CreateKeyResponse) {
     return
 }
 
-// 创建用户管理数据密钥的主密钥CMK（Custom Master Key）。
+// Create a master key CMK (Custom Master Key) for user management data keys
 func (c *Client) CreateKey(request *CreateKeyRequest) (response *CreateKeyResponse, err error) {
     if request == nil {
         request = NewCreateKeyRequest()
@@ -108,7 +158,7 @@ func NewDecryptResponse() (response *DecryptResponse) {
     return
 }
 
-// 本接口用于解密密文，得到明文数据。
+// This API is used to decrypt the ciphertext and obtain the plaintext data.
 func (c *Client) Decrypt(request *DecryptRequest) (response *DecryptResponse, err error) {
     if request == nil {
         request = NewDecryptRequest()
@@ -143,6 +193,56 @@ func (c *Client) DeleteImportedKeyMaterial(request *DeleteImportedKeyMaterialReq
     return
 }
 
+func NewDescribeKeyRequest() (request *DescribeKeyRequest) {
+    request = &DescribeKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "DescribeKey")
+    return
+}
+
+func NewDescribeKeyResponse() (response *DescribeKeyResponse) {
+    response = &DescribeKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 用于获取指定KeyId的主密钥属性详情信息。
+func (c *Client) DescribeKey(request *DescribeKeyRequest) (response *DescribeKeyResponse, err error) {
+    if request == nil {
+        request = NewDescribeKeyRequest()
+    }
+    response = NewDescribeKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeKeysRequest() (request *DescribeKeysRequest) {
+    request = &DescribeKeysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "DescribeKeys")
+    return
+}
+
+func NewDescribeKeysResponse() (response *DescribeKeysResponse) {
+    response = &DescribeKeysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 该接口用于批量获取主密钥属性信息。
+func (c *Client) DescribeKeys(request *DescribeKeysRequest) (response *DescribeKeysResponse, err error) {
+    if request == nil {
+        request = NewDescribeKeysRequest()
+    }
+    response = NewDescribeKeysResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisableKeyRequest() (request *DisableKeyRequest) {
     request = &DisableKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -158,7 +258,7 @@ func NewDisableKeyResponse() (response *DisableKeyResponse) {
     return
 }
 
-// 本接口用于禁用一个主密钥，处于禁用状态的Key无法用于加密、解密操作。
+// This API is used to disable a master key. The disabled key cannot be used for encryption and decryption operations.
 func (c *Client) DisableKey(request *DisableKeyRequest) (response *DisableKeyResponse, err error) {
     if request == nil {
         request = NewDisableKeyRequest()
@@ -183,7 +283,7 @@ func NewDisableKeyRotationResponse() (response *DisableKeyRotationResponse) {
     return
 }
 
-// 对指定的CMK禁止密钥轮换功能。
+// Disabled key rotation for the specified CMK.
 func (c *Client) DisableKeyRotation(request *DisableKeyRotationRequest) (response *DisableKeyRotationResponse, err error) {
     if request == nil {
         request = NewDisableKeyRotationRequest()
@@ -208,7 +308,7 @@ func NewDisableKeysResponse() (response *DisableKeysResponse) {
     return
 }
 
-// 该接口用于批量禁止CMK的使用。
+// This API is used to batch prohibit the use of CMK.
 func (c *Client) DisableKeys(request *DisableKeysRequest) (response *DisableKeysResponse, err error) {
     if request == nil {
         request = NewDisableKeysRequest()
@@ -233,7 +333,7 @@ func NewEnableKeyResponse() (response *EnableKeyResponse) {
     return
 }
 
-// 用于启用一个指定的CMK。
+// Enable a specified CMK.
 func (c *Client) EnableKey(request *EnableKeyRequest) (response *EnableKeyResponse, err error) {
     if request == nil {
         request = NewEnableKeyRequest()
@@ -258,7 +358,7 @@ func NewEnableKeyRotationResponse() (response *EnableKeyRotationResponse) {
     return
 }
 
-// 对指定的CMK开启密钥轮换功能。
+// Turn on the key rotation function for the specified CMK.
 func (c *Client) EnableKeyRotation(request *EnableKeyRotationRequest) (response *EnableKeyRotationResponse, err error) {
     if request == nil {
         request = NewEnableKeyRotationRequest()
@@ -283,7 +383,7 @@ func NewEnableKeysResponse() (response *EnableKeysResponse) {
     return
 }
 
-// 该接口用于批量启用CMK。
+// This API is used to enable CMK in batches.
 func (c *Client) EnableKeys(request *EnableKeysRequest) (response *EnableKeysResponse, err error) {
     if request == nil {
         request = NewEnableKeysRequest()
@@ -308,7 +408,7 @@ func NewEncryptResponse() (response *EncryptResponse) {
     return
 }
 
-// 本接口用于加密最多为4KB任意数据，可用于加密数据库密码，RSA Key，或其它较小的敏感信息。对于应用的数据加密，使用GenerateDataKey生成的DataKey进行本地数据的加解密操作
+// This API is used to encrypt any data up to 4KB. It can be used to encrypt database passwords, RSA Key, or other small sensitive information. For application data encryption, use the DataKey generated by GenerateDataKey to perform local data encryption and decryption operations
 func (c *Client) Encrypt(request *EncryptRequest) (response *EncryptResponse, err error) {
     if request == nil {
         request = NewEncryptRequest()
@@ -333,7 +433,7 @@ func NewGenerateDataKeyResponse() (response *GenerateDataKeyResponse) {
     return
 }
 
-// 本接口生成一个数据密钥，您可以用这个密钥进行本地数据的加密。
+// This API generates a data key, which you can use to encrypt local data.
 func (c *Client) GenerateDataKey(request *GenerateDataKeyRequest) (response *GenerateDataKeyResponse, err error) {
     if request == nil {
         request = NewGenerateDataKeyRequest()
@@ -383,7 +483,7 @@ func NewGetKeyRotationStatusResponse() (response *GetKeyRotationStatusResponse) 
     return
 }
 
-// 查询指定的CMK是否开启了密钥轮换功能。
+// Query whether the specified CMK has the key rotation function.
 func (c *Client) GetKeyRotationStatus(request *GetKeyRotationStatusRequest) (response *GetKeyRotationStatusResponse, err error) {
     if request == nil {
         request = NewGetKeyRotationStatusRequest()
@@ -418,6 +518,31 @@ func (c *Client) GetParametersForImport(request *GetParametersForImportRequest) 
     return
 }
 
+func NewGetPublicKeyRequest() (request *GetPublicKeyRequest) {
+    request = &GetPublicKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "GetPublicKey")
+    return
+}
+
+func NewGetPublicKeyResponse() (response *GetPublicKeyResponse) {
+    response = &GetPublicKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 该接口用户获取 KeyUsage为ASYMMETRIC_DECRYPT_RSA_2048 和 ASYMMETRIC_DECRYPT_SM2 的非对称密钥的公钥信息，使用该公钥用户可在本地进行数据加密，使用该公钥加密的数据只能通过KMS使用对应的私钥进行解密。只有处于Enabled状态的非对称密钥才可能获取公钥。
+func (c *Client) GetPublicKey(request *GetPublicKeyRequest) (response *GetPublicKeyResponse, err error) {
+    if request == nil {
+        request = NewGetPublicKeyRequest()
+    }
+    response = NewGetPublicKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetServiceStatusRequest() (request *GetServiceStatusRequest) {
     request = &GetServiceStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -433,7 +558,7 @@ func NewGetServiceStatusResponse() (response *GetServiceStatusResponse) {
     return
 }
 
-// 用于查询该用户是否已开通KMS服务
+// Used to query whether the user has activated the KMS service.
 func (c *Client) GetServiceStatus(request *GetServiceStatusRequest) (response *GetServiceStatusResponse, err error) {
     if request == nil {
         request = NewGetServiceStatusRequest()
@@ -469,6 +594,31 @@ func (c *Client) ImportKeyMaterial(request *ImportKeyMaterialRequest) (response 
     return
 }
 
+func NewListAlgorithmsRequest() (request *ListAlgorithmsRequest) {
+    request = &ListAlgorithmsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "ListAlgorithms")
+    return
+}
+
+func NewListAlgorithmsResponse() (response *ListAlgorithmsResponse) {
+    response = &ListAlgorithmsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 列出当前Region支持的加密方式
+func (c *Client) ListAlgorithms(request *ListAlgorithmsRequest) (response *ListAlgorithmsResponse, err error) {
+    if request == nil {
+        request = NewListAlgorithmsRequest()
+    }
+    response = NewListAlgorithmsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListKeyDetailRequest() (request *ListKeyDetailRequest) {
     request = &ListKeyDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -484,7 +634,7 @@ func NewListKeyDetailResponse() (response *ListKeyDetailResponse) {
     return
 }
 
-// 根据指定Offset和Limit获取主密钥列表详情。
+// Get the master key list details according to the specified Offset and Limit.
 func (c *Client) ListKeyDetail(request *ListKeyDetailRequest) (response *ListKeyDetailResponse, err error) {
     if request == nil {
         request = NewListKeyDetailRequest()
@@ -534,7 +684,7 @@ func NewReEncryptResponse() (response *ReEncryptResponse) {
     return
 }
 
-// 使用指定CMK对密文重新加密。
+// Re-encrypt the ciphertext using the specified CMK.
 func (c *Client) ReEncrypt(request *ReEncryptRequest) (response *ReEncryptResponse, err error) {
     if request == nil {
         request = NewReEncryptRequest()
@@ -559,7 +709,7 @@ func NewScheduleKeyDeletionResponse() (response *ScheduleKeyDeletionResponse) {
     return
 }
 
-// CMK计划删除接口，用于指定CMK删除的时间，可选时间区间为[7,30]天
+// CMK planned deletion API, used to specify the time of CMK deletion, the optional time interval is [7,30] days
 func (c *Client) ScheduleKeyDeletion(request *ScheduleKeyDeletionRequest) (response *ScheduleKeyDeletionResponse, err error) {
     if request == nil {
         request = NewScheduleKeyDeletionRequest()
