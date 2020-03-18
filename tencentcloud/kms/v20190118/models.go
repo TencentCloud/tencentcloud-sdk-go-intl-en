@@ -20,8 +20,26 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AlgorithmInfo struct {
+
+	// Algorithm identification
+	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
+
+	// The name of the algorithm
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
+}
+
 type AsymmetricRsaDecryptRequest struct {
 	*tchttp.BaseRequest
+
+	// CMK unique identifier
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Encrypted ciphertext using PublicKey, Base64 encoded
+	Ciphertext *string `json:"Ciphertext,omitempty" name:"Ciphertext"`
+
+	// Corresponding algorithm when using public key encryption: currently supports RSAES_PKCS1_V1_5, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
 }
 
 func (r *AsymmetricRsaDecryptRequest) ToJsonString() string {
@@ -36,6 +54,12 @@ func (r *AsymmetricRsaDecryptRequest) FromJsonString(s string) error {
 type AsymmetricRsaDecryptResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// CMK unique identifier
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+		// Decrypted plaintext, base64 encoded
+		Plaintext *string `json:"Plaintext,omitempty" name:"Plaintext"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -53,6 +77,12 @@ func (r *AsymmetricRsaDecryptResponse) FromJsonString(s string) error {
 
 type AsymmetricSm2DecryptRequest struct {
 	*tchttp.BaseRequest
+
+	// CMK unique identifier
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Encrypted ciphertext using PublicKey, Base64 encoded. The cipher text cannot exceed 256 bytes.
+	Ciphertext *string `json:"Ciphertext,omitempty" name:"Ciphertext"`
 }
 
 func (r *AsymmetricSm2DecryptRequest) ToJsonString() string {
@@ -67,6 +97,12 @@ func (r *AsymmetricSm2DecryptRequest) FromJsonString(s string) error {
 type AsymmetricSm2DecryptResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// CMK unique identifier
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+		// Decrypted plaintext, base64 encoded
+		Plaintext *string `json:"Plaintext,omitempty" name:"Plaintext"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -116,13 +152,13 @@ func (r *CancelKeyDeletionResponse) FromJsonString(s string) error {
 type CreateKeyRequest struct {
 	*tchttp.BaseRequest
 
-	// 
+	// As an alias that is easier to identify and easier to understand, the key must not be empty, a combination of 1-60 alphanumeric characters-_, and the first character must be a letter or number. The kms- prefix is used for cloud product usage. Alias is not repeatable.
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
 	// 
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// 
+	// Purpose of the specified key, Default "ENCRYPT_DECRYPT" Indicates the creation of a symmetric encryption and decryption key, other supported uses "ASYMMETRIC_DECRYPT_RSA_2048" means creating an RSA2048 asymmetric key for encryption and decryption,"ASYMMETRIC_DECRYPT_SM2" means creating a SM2 asymmetric key for encryption and decryption
 	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
 
 	// Specifies the key type. Default value: 1. Valid value: 1 - default type, indicating that the CMK is created by KMS; 2 - EXTERNAL type, indicating that you need to import key material. For more information, please see the `GetParametersForImport` and `ImportKeyMaterial` API documents.
@@ -229,6 +265,9 @@ func (r *DeleteImportedKeyMaterialResponse) FromJsonString(s string) error {
 
 type DescribeKeyRequest struct {
 	*tchttp.BaseRequest
+
+	// CMK globally unique identifier
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 func (r *DescribeKeyRequest) ToJsonString() string {
@@ -243,6 +282,10 @@ func (r *DescribeKeyRequest) FromJsonString(s string) error {
 type DescribeKeyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Key attribute information 
+	//  Note: This field may return null, indicating that a valid value cannot be taken.
+		KeyMetadata *KeyMetadata `json:"KeyMetadata,omitempty" name:"KeyMetadata"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -260,6 +303,9 @@ func (r *DescribeKeyResponse) FromJsonString(s string) error {
 
 type DescribeKeysRequest struct {
 	*tchttp.BaseRequest
+
+	// Query the CMK ID list. Batch query supports up to 100 KeyIds at a time.
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 }
 
 func (r *DescribeKeysRequest) ToJsonString() string {
@@ -274,6 +320,10 @@ func (r *DescribeKeysRequest) FromJsonString(s string) error {
 type DescribeKeysResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// List of attribute information returned 
+	//  Note: This field may return null, indicating that a valid value could not be taken.
+		KeyMetadatas []*KeyMetadata `json:"KeyMetadatas,omitempty" name:"KeyMetadatas" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -686,6 +736,9 @@ func (r *GetParametersForImportResponse) FromJsonString(s string) error {
 
 type GetPublicKeyRequest struct {
 	*tchttp.BaseRequest
+
+	// The unique identifier of the CMK.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 func (r *GetPublicKeyRequest) ToJsonString() string {
@@ -700,6 +753,15 @@ func (r *GetPublicKeyRequest) FromJsonString(s string) error {
 type GetPublicKeyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// CThe unique identifier of the CMK.
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+		// Base64-encoded public key content.
+		PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
+
+		// Public key content in PEM format.
+		PublicKeyPem *string `json:"PublicKeyPem,omitempty" name:"PublicKeyPem"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -789,6 +851,53 @@ func (r *ImportKeyMaterialResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type KeyMetadata struct {
+
+	// 
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// 
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+
+	// 
+	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// 
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport.
+	KeyState *string `json:"KeyState,omitempty" name:"KeyState"`
+
+	// CMK usage, the value is: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2
+	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
+
+	// CMK type. 2: FIPS-compliant; 4: SM-CRYPTO
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// 
+	CreatorUin *uint64 `json:"CreatorUin,omitempty" name:"CreatorUin"`
+
+	// 
+	KeyRotationEnabled *bool `json:"KeyRotationEnabled,omitempty" name:"KeyRotationEnabled"`
+
+	// 
+	Owner *string `json:"Owner,omitempty" name:"Owner"`
+
+	// 
+	NextRotateTime *uint64 `json:"NextRotateTime,omitempty" name:"NextRotateTime"`
+
+	// 
+	DeletionDate *uint64 `json:"DeletionDate,omitempty" name:"DeletionDate"`
+
+	// CMK key material type. TENCENT_KMS: created by KMS; EXTERNAL: imported by user.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Origin *string `json:"Origin,omitempty" name:"Origin"`
+
+	// It’s valid when `Origin` is `EXTERNAL`, indicating the expiration date of key material. 0 means valid forever.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ValidTo *uint64 `json:"ValidTo,omitempty" name:"ValidTo"`
+}
+
 type ListAlgorithmsRequest struct {
 	*tchttp.BaseRequest
 }
@@ -805,6 +914,12 @@ func (r *ListAlgorithmsRequest) FromJsonString(s string) error {
 type ListAlgorithmsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Symmetric encryption algorithms supported in this region
+		SymmetricAlgorithms []*AlgorithmInfo `json:"SymmetricAlgorithms,omitempty" name:"SymmetricAlgorithms" list`
+
+		// Asymmetric encryption algorithms supported in this region
+		AsymmetricAlgorithms []*AlgorithmInfo `json:"AsymmetricAlgorithms,omitempty" name:"AsymmetricAlgorithms" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -826,7 +941,7 @@ type ListKeyDetailRequest struct {
 	// 
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// 
+	// The meaning is the same as the Limit of the SQL query, which means that a maximum of Limit elements are obtained this time. The default value is 10 and the maximum value is 200
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// 
@@ -843,6 +958,9 @@ type ListKeyDetailRequest struct {
 
 	// Filters by CMK type. "TENCENT_KMS" indicates to filter CMKs whose key materials are created by KMS; "EXTERNAL" indicates to filter CMKs of `EXTERNAL` type whose key materials are imported by users; "ALL" or empty indicates to filter CMKs of both types. This value is case-sensitive.
 	Origin *string `json:"Origin,omitempty" name:"Origin"`
+
+	// Filter according to CMK's KeyUsage. If it is empty, it means to filter all. The available parameters are: ENCRYPT_DECRYPT or ASYMMETRIC_DECRYPT_RSA_2048 or ASYMMETRIC_DECRYPT_SM2.
+	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
 }
 
 func (r *ListKeyDetailRequest) ToJsonString() string {
@@ -857,6 +975,13 @@ func (r *ListKeyDetailRequest) FromJsonString(s string) error {
 type ListKeyDetailResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// 
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of attribute information returned. 
+	//  Note: This field may return null, which means that a valid value cannot be taken.
+		KeyMetadatas []*KeyMetadata `json:"KeyMetadatas,omitempty" name:"KeyMetadatas" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -998,6 +1123,12 @@ func (r *UpdateAliasResponse) FromJsonString(s string) error {
 
 type UpdateKeyDescriptionRequest struct {
 	*tchttp.BaseRequest
+
+	// 
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// CMK ID that needs to be modified
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 func (r *UpdateKeyDescriptionRequest) ToJsonString() string {

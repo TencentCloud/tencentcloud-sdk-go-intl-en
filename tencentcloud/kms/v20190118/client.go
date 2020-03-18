@@ -58,7 +58,7 @@ func NewAsymmetricRsaDecryptResponse() (response *AsymmetricRsaDecryptResponse) 
     return
 }
 
-// 使用指定的RSA非对称密钥的私钥进行数据解密，密文必须是使用对应公钥加密的。处于Enabled 状态的非对称密钥才能进行解密操作。
+// Use the private key of the specified RSA asymmetric key for data decryption. The ciphertext must be encrypted using the corresponding public key. An asymmetric key must be in the Enabled state for decryption.
 func (c *Client) AsymmetricRsaDecrypt(request *AsymmetricRsaDecryptRequest) (response *AsymmetricRsaDecryptResponse, err error) {
     if request == nil {
         request = NewAsymmetricRsaDecryptRequest()
@@ -83,7 +83,7 @@ func NewAsymmetricSm2DecryptResponse() (response *AsymmetricSm2DecryptResponse) 
     return
 }
 
-// 使用指定的SM2非对称密钥的私钥进行数据解密，密文必须是使用对应公钥加密的。处于Enabled 状态的非对称密钥才能进行解密操作。传入的密文的长度不能超过256字节。
+// Use the private key of the specified SM2 asymmetric key for data decryption. The ciphertext must be encrypted using the corresponding public key. An asymmetric key must be in the Enabled state for decryption. The length of the incoming ciphertext cannot exceed 256 bytes.
 func (c *Client) AsymmetricSm2Decrypt(request *AsymmetricSm2DecryptRequest) (response *AsymmetricSm2DecryptResponse, err error) {
     if request == nil {
         request = NewAsymmetricSm2DecryptRequest()
@@ -208,7 +208,7 @@ func NewDescribeKeyResponse() (response *DescribeKeyResponse) {
     return
 }
 
-// 用于获取指定KeyId的主密钥属性详情信息。
+// Used to get the master key attribute details of the specified KeyId.
 func (c *Client) DescribeKey(request *DescribeKeyRequest) (response *DescribeKeyResponse, err error) {
     if request == nil {
         request = NewDescribeKeyRequest()
@@ -233,7 +233,7 @@ func NewDescribeKeysResponse() (response *DescribeKeysResponse) {
     return
 }
 
-// 该接口用于批量获取主密钥属性信息。
+// This API is used to obtain master key attribute information in batches.
 func (c *Client) DescribeKeys(request *DescribeKeysRequest) (response *DescribeKeysResponse, err error) {
     if request == nil {
         request = NewDescribeKeysRequest()
@@ -533,7 +533,7 @@ func NewGetPublicKeyResponse() (response *GetPublicKeyResponse) {
     return
 }
 
-// 该接口用户获取 KeyUsage为ASYMMETRIC_DECRYPT_RSA_2048 和 ASYMMETRIC_DECRYPT_SM2 的非对称密钥的公钥信息，使用该公钥用户可在本地进行数据加密，使用该公钥加密的数据只能通过KMS使用对应的私钥进行解密。只有处于Enabled状态的非对称密钥才可能获取公钥。
+// The user of this interface obtains the public key information of the asymmetric keys whose KeyUsage is ASYMMETRIC_DECRYPT_RSA_2048 and ASYMMETRIC_DECRYPT_SM2. Users can use this public key to encrypt data locally, and the data encrypted with this public key can only be decrypted by using the corresponding private key through KMS. Only an asymmetric key in the Enabled state can obtain a public key.
 func (c *Client) GetPublicKey(request *GetPublicKeyRequest) (response *GetPublicKeyResponse, err error) {
     if request == nil {
         request = NewGetPublicKeyRequest()
@@ -609,7 +609,7 @@ func NewListAlgorithmsResponse() (response *ListAlgorithmsResponse) {
     return
 }
 
-// 列出当前Region支持的加密方式
+// List the encryption methods supported by the current region
 func (c *Client) ListAlgorithms(request *ListAlgorithmsRequest) (response *ListAlgorithmsResponse, err error) {
     if request == nil {
         request = NewListAlgorithmsRequest()
