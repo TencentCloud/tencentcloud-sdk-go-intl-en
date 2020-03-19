@@ -108,7 +108,7 @@ func NewCreateClusterAsGroupResponse() (response *CreateClusterAsGroupResponse) 
     return
 }
 
-// 为已经存在的集群创建伸缩组
+// Create a scaling group for an existing cluster
 func (c *Client) CreateClusterAsGroup(request *CreateClusterAsGroupRequest) (response *CreateClusterAsGroupResponse, err error) {
     if request == nil {
         request = NewCreateClusterAsGroupRequest()
@@ -133,7 +133,7 @@ func NewCreateClusterEndpointResponse() (response *CreateClusterEndpointResponse
     return
 }
 
-// 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+// Create a cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
 func (c *Client) CreateClusterEndpoint(request *CreateClusterEndpointRequest) (response *CreateClusterEndpointResponse, err error) {
     if request == nil {
         request = NewCreateClusterEndpointRequest()
@@ -158,7 +158,7 @@ func NewCreateClusterEndpointVipResponse() (response *CreateClusterEndpointVipRe
     return
 }
 
-// 创建托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
+// Create an external network access port for the managed cluster (the old way, only the external network port for the managed cluster is supported)
 func (c *Client) CreateClusterEndpointVip(request *CreateClusterEndpointVipRequest) (response *CreateClusterEndpointVipResponse, err error) {
     if request == nil {
         request = NewCreateClusterEndpointVipRequest()
@@ -258,7 +258,7 @@ func NewDeleteClusterAsGroupsResponse() (response *DeleteClusterAsGroupsResponse
     return
 }
 
-// 删除集群伸缩组
+// Delete a cluster scaling group
 func (c *Client) DeleteClusterAsGroups(request *DeleteClusterAsGroupsRequest) (response *DeleteClusterAsGroupsResponse, err error) {
     if request == nil {
         request = NewDeleteClusterAsGroupsRequest()
@@ -283,7 +283,7 @@ func NewDeleteClusterEndpointResponse() (response *DeleteClusterEndpointResponse
     return
 }
 
-// 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+// Delete the cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
 func (c *Client) DeleteClusterEndpoint(request *DeleteClusterEndpointRequest) (response *DeleteClusterEndpointResponse, err error) {
     if request == nil {
         request = NewDeleteClusterEndpointRequest()
@@ -308,7 +308,7 @@ func NewDeleteClusterEndpointVipResponse() (response *DeleteClusterEndpointVipRe
     return
 }
 
-// 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
+// Delete the external network access port of the managed cluster (the old way, only the external network port of the managed cluster is supported)
 func (c *Client) DeleteClusterEndpointVip(request *DeleteClusterEndpointVipRequest) (response *DeleteClusterEndpointVipResponse, err error) {
     if request == nil {
         request = NewDeleteClusterEndpointVipRequest()
@@ -408,7 +408,7 @@ func NewDescribeClusterEndpointStatusResponse() (response *DescribeClusterEndpoi
     return
 }
 
-// 查询集群访问端口状态(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+// Query cluster access port status (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
 func (c *Client) DescribeClusterEndpointStatus(request *DescribeClusterEndpointStatusRequest) (response *DescribeClusterEndpointStatusResponse, err error) {
     if request == nil {
         request = NewDescribeClusterEndpointStatusRequest()
@@ -433,7 +433,7 @@ func NewDescribeClusterEndpointVipStatusResponse() (response *DescribeClusterEnd
     return
 }
 
-// 查询集群开启端口流程状态(仅支持托管集群外网端口)
+// Query cluster open port process status (only supports external ports of the managed cluster)
 func (c *Client) DescribeClusterEndpointVipStatus(request *DescribeClusterEndpointVipStatusRequest) (response *DescribeClusterEndpointVipStatusResponse, err error) {
     if request == nil {
         request = NewDescribeClusterEndpointVipStatusRequest()
@@ -633,7 +633,7 @@ func NewModifyClusterEndpointSPResponse() (response *ModifyClusterEndpointSPResp
     return
 }
 
-// 修改托管集群外网端口的安全策略（老的方式，仅支持托管集群外网端口）
+// Modify the security policy of the external port of the managed cluster (the old way, only the external port of the managed cluster is supported)
 func (c *Client) ModifyClusterEndpointSP(request *ModifyClusterEndpointSPRequest) (response *ModifyClusterEndpointSPResponse, err error) {
     if request == nil {
         request = NewModifyClusterEndpointSPRequest()
