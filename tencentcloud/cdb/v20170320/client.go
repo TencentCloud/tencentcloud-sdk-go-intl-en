@@ -93,6 +93,31 @@ func (c *Client) AssociateSecurityGroups(request *AssociateSecurityGroupsRequest
     return
 }
 
+func NewBalanceRoGroupLoadRequest() (request *BalanceRoGroupLoadRequest) {
+    request = &BalanceRoGroupLoadRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "BalanceRoGroupLoad")
+    return
+}
+
+func NewBalanceRoGroupLoadResponse() (response *BalanceRoGroupLoadResponse) {
+    response = &BalanceRoGroupLoadResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to rebalance the loads of instances in an RO group. Please note that the database connections to those instances will be interrupted transiently; therefore, you should ensure that your application can reconnect to the databases. This operation should be performed with caution.
+func (c *Client) BalanceRoGroupLoad(request *BalanceRoGroupLoadRequest) (response *BalanceRoGroupLoadResponse, err error) {
+    if request == nil {
+        request = NewBalanceRoGroupLoadRequest()
+    }
+    response = NewBalanceRoGroupLoadResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCloseWanServiceRequest() (request *CloseWanServiceRequest) {
     request = &CloseWanServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -497,6 +522,56 @@ func (c *Client) DescribeBackupDatabases(request *DescribeBackupDatabasesRequest
     return
 }
 
+func NewDescribeBackupOverviewRequest() (request *DescribeBackupOverviewRequest) {
+    request = &DescribeBackupOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeBackupOverview")
+    return
+}
+
+func NewDescribeBackupOverviewResponse() (response *DescribeBackupOverviewResponse) {
+    response = &DescribeBackupOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the backup overview of a user. It will return the user's current total number of backups, total capacity used by backups, capacity in the free tier, and paid capacity (all capacity values are in bytes).
+func (c *Client) DescribeBackupOverview(request *DescribeBackupOverviewRequest) (response *DescribeBackupOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupOverviewRequest()
+    }
+    response = NewDescribeBackupOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBackupSummariesRequest() (request *DescribeBackupSummariesRequest) {
+    request = &DescribeBackupSummariesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeBackupSummaries")
+    return
+}
+
+func NewDescribeBackupSummariesResponse() (response *DescribeBackupSummariesResponse) {
+    response = &DescribeBackupSummariesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the statistics of backups. It will return the capacity used by backups at the instance level and the number and used capacity of data backups and log backups of each instance (all capacity values are in bytes).
+func (c *Client) DescribeBackupSummaries(request *DescribeBackupSummariesRequest) (response *DescribeBackupSummariesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupSummariesRequest()
+    }
+    response = NewDescribeBackupSummariesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBackupTablesRequest() (request *DescribeBackupTablesRequest) {
     request = &DescribeBackupTablesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -545,6 +620,31 @@ func (c *Client) DescribeBackups(request *DescribeBackupsRequest) (response *Des
         request = NewDescribeBackupsRequest()
     }
     response = NewDescribeBackupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBinlogBackupOverviewRequest() (request *DescribeBinlogBackupOverviewRequest) {
+    request = &DescribeBinlogBackupOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeBinlogBackupOverview")
+    return
+}
+
+func NewDescribeBinlogBackupOverviewResponse() (response *DescribeBinlogBackupOverviewResponse) {
+    response = &DescribeBinlogBackupOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the log backup overview of a user in the current region.
+func (c *Client) DescribeBinlogBackupOverview(request *DescribeBinlogBackupOverviewRequest) (response *DescribeBinlogBackupOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeBinlogBackupOverviewRequest()
+    }
+    response = NewDescribeBinlogBackupOverviewResponse()
     err = c.Send(request, response)
     return
 }
@@ -795,6 +895,31 @@ func (c *Client) DescribeDBZoneConfig(request *DescribeDBZoneConfigRequest) (res
         request = NewDescribeDBZoneConfigRequest()
     }
     response = NewDescribeDBZoneConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDataBackupOverviewRequest() (request *DescribeDataBackupOverviewRequest) {
+    request = &DescribeDataBackupOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeDataBackupOverview")
+    return
+}
+
+func NewDescribeDataBackupOverviewResponse() (response *DescribeDataBackupOverviewResponse) {
+    response = &DescribeDataBackupOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the data backup overview of a user in the current region.
+func (c *Client) DescribeDataBackupOverview(request *DescribeDataBackupOverviewRequest) (response *DescribeDataBackupOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeDataBackupOverviewRequest()
+    }
+    response = NewDescribeDataBackupOverviewResponse()
     err = c.Send(request, response)
     return
 }
@@ -1598,6 +1723,31 @@ func (c *Client) ModifyParamTemplate(request *ModifyParamTemplateRequest) (respo
         request = NewModifyParamTemplateRequest()
     }
     response = NewModifyParamTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRoGroupInfoRequest() (request *ModifyRoGroupInfoRequest) {
+    request = &ModifyRoGroupInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "ModifyRoGroupInfo")
+    return
+}
+
+func NewModifyRoGroupInfoResponse() (response *ModifyRoGroupInfoResponse) {
+    response = &ModifyRoGroupInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to update the information of a TencentDB RO group, such as configuring an instance removal policy in case of excessive delay and setting read weights of RO instances.
+func (c *Client) ModifyRoGroupInfo(request *ModifyRoGroupInfoRequest) (response *ModifyRoGroupInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyRoGroupInfoRequest()
+    }
+    response = NewModifyRoGroupInfoResponse()
     err = c.Send(request, response)
     return
 }

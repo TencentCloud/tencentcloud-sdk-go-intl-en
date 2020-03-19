@@ -292,7 +292,7 @@ type DCDBInstanceInfo struct {
 	// Numeric ID of a VPC
 	VpcId *int64 `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Subnet Digital ID
+	// Subnet数字ID
 	SubnetId *int64 `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// Status description

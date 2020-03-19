@@ -69,6 +69,389 @@ func (r *AddDelayLiveStreamResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type AddLiveDomainRequest struct {
+	*tchttp.BaseRequest
+
+	// Domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Domain name type.
+	// 0: push domain name.
+	// 1: playback domain name.
+	DomainType *uint64 `json:"DomainType,omitempty" name:"DomainType"`
+
+	// Pull domain name type:
+	// 1: Mainland China.
+	// 2: global.
+	// 3: outside Mainland China.
+	// Default value: 1.
+	PlayType *uint64 `json:"PlayType,omitempty" name:"PlayType"`
+
+	// Whether it is LCB:
+	// 0: LVB,
+	// 1: LCB.
+	// Default value: 0.
+	IsDelayLive *int64 `json:"IsDelayLive,omitempty" name:"IsDelayLive"`
+}
+
+func (r *AddLiveDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AddLiveDomainRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AddLiveDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AddLiveDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AddLiveDomainResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AddLiveWatermarkRequest struct {
+	*tchttp.BaseRequest
+
+	// Watermark image URL.
+	PictureUrl *string `json:"PictureUrl,omitempty" name:"PictureUrl"`
+
+	// Watermark name.
+	WatermarkName *string `json:"WatermarkName,omitempty" name:"WatermarkName"`
+
+	// Display position: X-axis offset.
+	XPosition *int64 `json:"XPosition,omitempty" name:"XPosition"`
+
+	// Display position: Y-axis offset.
+	YPosition *int64 `json:"YPosition,omitempty" name:"YPosition"`
+
+	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+	Height *int64 `json:"Height,omitempty" name:"Height"`
+}
+
+func (r *AddLiveWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AddLiveWatermarkRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AddLiveWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Watermark ID.
+		WatermarkId *uint64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AddLiveWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AddLiveWatermarkResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type BindLiveDomainCertRequest struct {
+	*tchttp.BaseRequest
+
+	// Certificate ID, which can be obtained through the `CreateLiveCert` API.
+	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
+
+	// Playback domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Status. 0: off, 1: on.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+}
+
+func (r *BindLiveDomainCertRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *BindLiveDomainCertRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type BindLiveDomainCertResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BindLiveDomainCertResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *BindLiveDomainCertResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CallBackRuleInfo struct {
+
+	// Rule creation time.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Rule update time.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Push domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Push path.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+}
+
+type CallBackTemplateInfo struct {
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Template name.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Stream starting callback URL.
+	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitempty" name:"StreamBeginNotifyUrl"`
+
+	// Stream ending callback URL.
+	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitempty" name:"StreamEndNotifyUrl"`
+
+	// Stream mixing callback URL.
+	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitempty" name:"StreamMixNotifyUrl"`
+
+	// Recording callback URL.
+	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitempty" name:"RecordNotifyUrl"`
+
+	// Screencapturing callback URL.
+	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitempty" name:"SnapshotNotifyUrl"`
+
+	// Porn detection callback URL.
+	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitempty" name:"PornCensorshipNotifyUrl"`
+
+	// Callback authentication key.
+	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
+}
+
+type CertInfo struct {
+
+	// Certificate ID.
+	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
+
+	// Certificate name.
+	CertName *string `json:"CertName,omitempty" name:"CertName"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Creation time in UTC format.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Certificate content.
+	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
+
+	// Certificate type.
+	// 0: Tencent Cloud-hosted certificate
+	// 1: user-added certificate.
+	CertType *int64 `json:"CertType,omitempty" name:"CertType"`
+
+	// Certificate expiration time in UTC format.
+	CertExpireTime *string `json:"CertExpireTime,omitempty" name:"CertExpireTime"`
+
+	// List of domain names that use this certificate.
+	DomainList []*string `json:"DomainList,omitempty" name:"DomainList" list`
+}
+
+type CreateLiveCallbackRuleRequest struct {
+	*tchttp.BaseRequest
+
+	// Push domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *CreateLiveCallbackRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveCallbackRuleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLiveCallbackRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateLiveCallbackRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveCallbackRuleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLiveCallbackTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Template name, which is a non-empty string.
+	// Maximum length: 255 bytes.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Description.
+	// Maximum length: 1,024 bytes.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Stream starting callback URL,
+	// Protocol-related document: [Event Message Notification](/document/product/267/32744).
+	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitempty" name:"StreamBeginNotifyUrl"`
+
+	// Stream ending callback URL,
+	// Protocol-related document: [Event Message Notification](/document/product/267/32744).
+	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitempty" name:"StreamEndNotifyUrl"`
+
+	// Recording callback URL,
+	// Protocol-related document: [Event Message Notification](/document/product/267/32744).
+	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitempty" name:"RecordNotifyUrl"`
+
+	// Screencapturing callback URL,
+	// Protocol-related document: [Event Message Notification](/document/product/267/32744).
+	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitempty" name:"SnapshotNotifyUrl"`
+
+	// Porn detection callback URL,
+	// Protocol-related document: [Event Message Notification](/document/product/267/32741).
+	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitempty" name:"PornCensorshipNotifyUrl"`
+
+	// Callback key, which is shared by callback URLs. For more information on authentication callback, please see the callback format document
+	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
+}
+
+func (r *CreateLiveCallbackTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveCallbackTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLiveCallbackTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Template ID.
+		TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateLiveCallbackTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveCallbackTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLiveCertRequest struct {
+	*tchttp.BaseRequest
+
+	// Certificate type. 0: user-added certificate, 1: Tencent Cloud-hosted certificate.
+	// Note: if the certificate type is 0, `HttpsCrt` and `HttpsKey` are required;
+	// If the certificate type is 1, the certificate corresponding to `CloudCertId` will be used first. If `CloudCertId` is empty, `HttpsCrt` and `HttpsKey` will be used.
+	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
+
+	// Certificate name.
+	CertName *string `json:"CertName,omitempty" name:"CertName"`
+
+	// Certificate content, i.e., public key.
+	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
+
+	// Private key.
+	HttpsKey *string `json:"HttpsKey,omitempty" name:"HttpsKey"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Tencent Cloud-hosted certificate ID.
+	CloudCertId *string `json:"CloudCertId,omitempty" name:"CloudCertId"`
+}
+
+func (r *CreateLiveCertRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveCertRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLiveCertResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Certificate ID
+		CertId *int64 `json:"CertId,omitempty" name:"CertId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateLiveCertResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveCertResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateLiveRecordRequest struct {
 	*tchttp.BaseRequest
 
@@ -256,13 +639,121 @@ func (r *CreateLiveRecordTemplateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateLiveSnapshotRuleRequest struct {
+	*tchttp.BaseRequest
+
+	// Push domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// Stream name.
+	// Note: if this parameter is a non-empty string, the rule will take effect only for the particular stream.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+}
+
+func (r *CreateLiveSnapshotRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveSnapshotRuleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLiveSnapshotRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateLiveSnapshotRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveSnapshotRuleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLiveSnapshotTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Template name, which is a non-empty string.
+	// Maximum length: 255 bytes.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// COS `AppId`.
+	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
+
+	// COS bucket name.
+	CosBucket *string `json:"CosBucket,omitempty" name:"CosBucket"`
+
+	// COS region.
+	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
+
+	// Description.
+	// Maximum length: 1,024 bytes.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Screencapturing interval in seconds. Default value: 10s.
+	// Value range: 5–600s.
+	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
+
+	// Screenshot width. Default value: 0 (original width).
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Screenshot height. Default value: 0 (original height).
+	Height *int64 `json:"Height,omitempty" name:"Height"`
+
+	// Whether to enable porn detection. 0: no, 1: yes. Default value: 0
+	PornFlag *int64 `json:"PornFlag,omitempty" name:"PornFlag"`
+}
+
+func (r *CreateLiveSnapshotTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveSnapshotTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLiveSnapshotTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Template ID.
+		TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateLiveSnapshotTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveSnapshotTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateLiveTranscodeRuleRequest struct {
 	*tchttp.BaseRequest
 
 	// Playback domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. If you only bind a domain name, leave this parameter empty.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Stream name. If only the domain name or path is bound, leave this parameter blank.
@@ -356,10 +847,10 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Whether to not exceed the original frame rate. 0: no; 1: yes. Default value: 0.
 	FpsToOrig *int64 `json:"FpsToOrig,omitempty" name:"FpsToOrig"`
 
-	// Whether it is a TESHD template. 0: no; 1: yes. Default value: 0.
+	// Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
 	AiTransCode *int64 `json:"AiTransCode,omitempty" name:"AiTransCode"`
 
-	// VideoBitrate minus TESHD bitrate. Value range: 0.1–0.5.
+	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
 }
 
@@ -393,6 +884,49 @@ func (r *CreateLiveTranscodeTemplateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateLiveWatermarkRuleRequest struct {
+	*tchttp.BaseRequest
+
+	// Push domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// Stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// Watermark ID, which is the `WatermarkId` returned by the [AddLiveWatermark](/document/product/267/30154) API.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *CreateLiveWatermarkRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveWatermarkRuleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLiveWatermarkRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateLiveWatermarkRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLiveWatermarkRuleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DelayInfo struct {
 
 	// Push domain name.
@@ -421,6 +955,148 @@ type DelayInfo struct {
 	// -1: Expired,
 	// 1: Effective.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
+}
+
+type DeleteLiveCallbackRuleRequest struct {
+	*tchttp.BaseRequest
+
+	// Push domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+}
+
+func (r *DeleteLiveCallbackRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveCallbackRuleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveCallbackRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLiveCallbackRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveCallbackRuleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveCallbackTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *DeleteLiveCallbackTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveCallbackTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveCallbackTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLiveCallbackTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveCallbackTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveCertRequest struct {
+	*tchttp.BaseRequest
+
+	// Certificate ID.
+	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
+}
+
+func (r *DeleteLiveCertRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveCertRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveCertResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLiveCertResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveCertResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveDomainRequest struct {
+	*tchttp.BaseRequest
+
+	// Domain name to be deleted.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Type. 0: push, 1: playback.
+	DomainType *uint64 `json:"DomainType,omitempty" name:"DomainType"`
+}
+
+func (r *DeleteLiveDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveDomainRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLiveDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveDomainResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type DeleteLiveRecordRequest struct {
@@ -537,6 +1213,80 @@ func (r *DeleteLiveRecordTemplateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteLiveSnapshotRuleRequest struct {
+	*tchttp.BaseRequest
+
+	// Push domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// Stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+}
+
+func (r *DeleteLiveSnapshotRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveSnapshotRuleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveSnapshotRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLiveSnapshotRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveSnapshotRuleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveSnapshotTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *DeleteLiveSnapshotTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveSnapshotTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveSnapshotTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLiveSnapshotTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveSnapshotTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteLiveTranscodeRuleRequest struct {
 	*tchttp.BaseRequest
 
@@ -618,6 +1368,256 @@ func (r *DeleteLiveTranscodeTemplateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteLiveWatermarkRequest struct {
+	*tchttp.BaseRequest
+
+	// Watermark ID.
+	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
+}
+
+func (r *DeleteLiveWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveWatermarkRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLiveWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveWatermarkResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveWatermarkRuleRequest struct {
+	*tchttp.BaseRequest
+
+	// Push domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Push path.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// Stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+}
+
+func (r *DeleteLiveWatermarkRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveWatermarkRuleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLiveWatermarkRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLiveWatermarkRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLiveWatermarkRuleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveCallbackRulesRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeLiveCallbackRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveCallbackRulesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveCallbackRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Rule information list.
+		Rules []*CallBackRuleInfo `json:"Rules,omitempty" name:"Rules" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveCallbackRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveCallbackRulesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveCallbackTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *DescribeLiveCallbackTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveCallbackTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveCallbackTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Callback template information.
+		Template *CallBackTemplateInfo `json:"Template,omitempty" name:"Template"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveCallbackTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveCallbackTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveCallbackTemplatesRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeLiveCallbackTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveCallbackTemplatesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveCallbackTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Template information list.
+		Templates []*CallBackTemplateInfo `json:"Templates,omitempty" name:"Templates" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveCallbackTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveCallbackTemplatesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveCertRequest struct {
+	*tchttp.BaseRequest
+
+	// Certificate ID.
+	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
+}
+
+func (r *DescribeLiveCertRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveCertRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveCertResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Certificate information.
+		CertInfo *CertInfo `json:"CertInfo,omitempty" name:"CertInfo"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveCertResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveCertResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveCertsRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeLiveCertsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveCertsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveCertsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Certificate information list.
+		CertInfoSet []*CertInfo `json:"CertInfoSet,omitempty" name:"CertInfoSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveCertsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveCertsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeLiveDelayInfoListRequest struct {
 	*tchttp.BaseRequest
 }
@@ -649,6 +1649,135 @@ func (r *DescribeLiveDelayInfoListResponse) ToJsonString() string {
 }
 
 func (r *DescribeLiveDelayInfoListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveDomainCertRequest struct {
+	*tchttp.BaseRequest
+
+	// Playback domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+}
+
+func (r *DescribeLiveDomainCertRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveDomainCertRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveDomainCertResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Certificate information.
+		DomainCertInfo *DomainCertInfo `json:"DomainCertInfo,omitempty" name:"DomainCertInfo"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveDomainCertResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveDomainCertResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveDomainRequest struct {
+	*tchttp.BaseRequest
+
+	// Domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+}
+
+func (r *DescribeLiveDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveDomainRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Domain name information.
+		DomainInfo *DomainInfo `json:"DomainInfo,omitempty" name:"DomainInfo"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveDomainResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveDomainsRequest struct {
+	*tchttp.BaseRequest
+
+	// Filter by domain name status. 0: disabled, 1: enabled.
+	DomainStatus *uint64 `json:"DomainStatus,omitempty" name:"DomainStatus"`
+
+	// Filter by domain name type. 0: push. 1: playback
+	DomainType *uint64 `json:"DomainType,omitempty" name:"DomainType"`
+
+	// Number of entries per page. Value range: 10–100. Default value: 10.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Page number to get. Value range: 1–100000. Default value: 1.
+	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// 0: LVB, 1: LCB. Default value: 0.
+	IsDelayLive *uint64 `json:"IsDelayLive,omitempty" name:"IsDelayLive"`
+
+	// Domain name prefix.
+	DomainPrefix *string `json:"DomainPrefix,omitempty" name:"DomainPrefix"`
+}
+
+func (r *DescribeLiveDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveDomainsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of results.
+		AllCount *uint64 `json:"AllCount,omitempty" name:"AllCount"`
+
+		// List of domain name details.
+		DomainList []*DomainInfo `json:"DomainList,omitempty" name:"DomainList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveDomainsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -888,6 +2017,111 @@ func (r *DescribeLiveRecordTemplatesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeLiveSnapshotRulesRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeLiveSnapshotRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveSnapshotRulesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveSnapshotRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Rule list.
+		Rules []*RuleInfo `json:"Rules,omitempty" name:"Rules" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveSnapshotRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveSnapshotRulesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveSnapshotTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *DescribeLiveSnapshotTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveSnapshotTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveSnapshotTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Screencapturing template information.
+		Template *SnapshotTemplateInfo `json:"Template,omitempty" name:"Template"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveSnapshotTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveSnapshotTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveSnapshotTemplatesRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeLiveSnapshotTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveSnapshotTemplatesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveSnapshotTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Screencapturing template list.
+		Templates []*SnapshotTemplateInfo `json:"Templates,omitempty" name:"Templates" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveSnapshotTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveSnapshotTemplatesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeLiveStreamEventListRequest struct {
 	*tchttp.BaseRequest
 
@@ -985,10 +2219,10 @@ func (r *DescribeLiveStreamEventListResponse) FromJsonString(s string) error {
 type DescribeLiveStreamOnlineListRequest struct {
 	*tchttp.BaseRequest
 
-	// Push domain name.
+	// Push domain name. If you use multiple paths, enter the `DomainName`.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. If you use multiple paths, enter the `AppName`.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Page number to get. Default value: 1.
@@ -1272,6 +2506,187 @@ func (r *DescribeLiveTranscodeTemplatesResponse) FromJsonString(s string) error 
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeLiveWatermarkRequest struct {
+	*tchttp.BaseRequest
+
+	// Watermark ID.
+	WatermarkId *uint64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
+}
+
+func (r *DescribeLiveWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveWatermarkRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Watermark information.
+		Watermark *WatermarkInfo `json:"Watermark,omitempty" name:"Watermark"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveWatermarkResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveWatermarkRulesRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeLiveWatermarkRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveWatermarkRulesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveWatermarkRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Watermarking rule list.
+		Rules []*RuleInfo `json:"Rules,omitempty" name:"Rules" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveWatermarkRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveWatermarkRulesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveWatermarksRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeLiveWatermarksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveWatermarksRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveWatermarksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of watermarks.
+		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+		// Watermark information list.
+		WatermarkList []*WatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveWatermarksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLiveWatermarksResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DomainCertInfo struct {
+
+	// Certificate ID.
+	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
+
+	// Certificate name.
+	CertName *string `json:"CertName,omitempty" name:"CertName"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Creation time in UTC format.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Certificate content.
+	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
+
+	// Certificate type.
+	// 0: user-added certificate
+	// 1: Tencent Cloud-hosted certificate.
+	CertType *int64 `json:"CertType,omitempty" name:"CertType"`
+
+	// Certificate expiration time in UTC format.
+	CertExpireTime *string `json:"CertExpireTime,omitempty" name:"CertExpireTime"`
+
+	// Domain name that uses this certificate.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Certificate status
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+}
+
+type DomainInfo struct {
+
+	// LVB domain name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Domain name type. 0: push, 1: playback
+	Type *uint64 `json:"Type,omitempty" name:"Type"`
+
+	// Domain name status. 0: disabled, 1: enabled.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Whether there is a CNAME record pointing to a fixed rule. 0: no, 1: yes.
+	BCName *uint64 `json:"BCName,omitempty" name:"BCName"`
+
+	// Domain name corresponding to the CNAME record
+	TargetDomain *string `json:"TargetDomain,omitempty" name:"TargetDomain"`
+
+	// Playback region. This parameter is valid only if `Type` is 1.
+	// 1: Mainland China, 2: global, 3: outside Mainland China.
+	PlayType *int64 `json:"PlayType,omitempty" name:"PlayType"`
+
+	// 0: LVB,
+	// 1: LCB.
+	IsDelayLive *int64 `json:"IsDelayLive,omitempty" name:"IsDelayLive"`
+
+	// Information of currently used CNAME record
+	CurrentCName *string `json:"CurrentCName,omitempty" name:"CurrentCName"`
+
+	// Whether it is a leased domain name
+	RentTag *int64 `json:"RentTag,omitempty" name:"RentTag"`
+
+	// Expiration time of leased domain name
+	RentExpireTime *string `json:"RentExpireTime,omitempty" name:"RentExpireTime"`
+
+	// 
+	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitempty" name:"IsMiniProgramLive"`
+}
+
 type DropLiveStreamRequest struct {
 	*tchttp.BaseRequest
 
@@ -1309,6 +2724,74 @@ func (r *DropLiveStreamResponse) ToJsonString() string {
 }
 
 func (r *DropLiveStreamResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableLiveDomainRequest struct {
+	*tchttp.BaseRequest
+
+	// LVB domain name to be enabled.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+}
+
+func (r *EnableLiveDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableLiveDomainRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableLiveDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *EnableLiveDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableLiveDomainResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ForbidLiveDomainRequest struct {
+	*tchttp.BaseRequest
+
+	// LVB domain name to be disabled.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+}
+
+func (r *ForbidLiveDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ForbidLiveDomainRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ForbidLiveDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ForbidLiveDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ForbidLiveDomainResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1381,6 +2864,153 @@ type HlsSpecialParam struct {
 	FlowContinueDuration *uint64 `json:"FlowContinueDuration,omitempty" name:"FlowContinueDuration"`
 }
 
+type ModifyLiveCallbackTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Template name.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Stream starting callback URL.
+	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitempty" name:"StreamBeginNotifyUrl"`
+
+	// Stream ending callback URL.
+	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitempty" name:"StreamEndNotifyUrl"`
+
+	// Recording callback URL.
+	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitempty" name:"RecordNotifyUrl"`
+
+	// Screencapturing callback URL.
+	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitempty" name:"SnapshotNotifyUrl"`
+
+	// Porn detection callback URL.
+	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitempty" name:"PornCensorshipNotifyUrl"`
+
+	// Callback key, which is shared by callback URLs. For more information on authentication callback, please see the callback format document.
+	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
+}
+
+func (r *ModifyLiveCallbackTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyLiveCallbackTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLiveCallbackTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLiveCallbackTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyLiveCallbackTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLiveCertRequest struct {
+	*tchttp.BaseRequest
+
+	// Certificate ID.
+	CertId *string `json:"CertId,omitempty" name:"CertId"`
+
+	// Certificate type. 0: user-added certificate, 1: Tencent Cloud-hosted certificate.
+	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
+
+	// Certificate name.
+	CertName *string `json:"CertName,omitempty" name:"CertName"`
+
+	// Certificate content, i.e., public key.
+	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
+
+	// Private key.
+	HttpsKey *string `json:"HttpsKey,omitempty" name:"HttpsKey"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *ModifyLiveCertRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyLiveCertRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLiveCertResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLiveCertResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyLiveCertResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLiveDomainCertRequest struct {
+	*tchttp.BaseRequest
+
+	// Playback domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Certificate ID.
+	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
+
+	// Status. 0: off, 1: on.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+}
+
+func (r *ModifyLiveDomainCertRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyLiveDomainCertRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLiveDomainCertResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLiveDomainCertResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyLiveDomainCertResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyLivePlayAuthKeyRequest struct {
 	*tchttp.BaseRequest
 
@@ -1424,6 +3054,43 @@ func (r *ModifyLivePlayAuthKeyResponse) ToJsonString() string {
 }
 
 func (r *ModifyLivePlayAuthKeyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLivePlayDomainRequest struct {
+	*tchttp.BaseRequest
+
+	// Playback domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Pull domain name type. 1: Mainland China. 2: global, 3: outside Mainland China
+	PlayType *int64 `json:"PlayType,omitempty" name:"PlayType"`
+}
+
+func (r *ModifyLivePlayDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyLivePlayDomainRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLivePlayDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLivePlayDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyLivePlayDomainResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1528,6 +3195,70 @@ func (r *ModifyLiveRecordTemplateResponse) ToJsonString() string {
 }
 
 func (r *ModifyLiveRecordTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLiveSnapshotTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Template name.
+	// Maximum length: 255 bytes.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Description.
+	// Maximum length: 1,024 bytes.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Screencapturing interval in seconds. Default value: 10s.
+	// Value range: 5–600s.
+	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
+
+	// Screenshot width. Default value: 0 (original width).
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Screenshot height. Default value: 0 (original height).
+	Height *int64 `json:"Height,omitempty" name:"Height"`
+
+	// Whether to enable porn detection. 0: no, 1: yes.
+	PornFlag *int64 `json:"PornFlag,omitempty" name:"PornFlag"`
+
+	// COS `AppId`.
+	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
+
+	// COS bucket name.
+	CosBucket *string `json:"CosBucket,omitempty" name:"CosBucket"`
+
+	// COS region.
+	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
+}
+
+func (r *ModifyLiveSnapshotTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyLiveSnapshotTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLiveSnapshotTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLiveSnapshotTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyLiveSnapshotTemplateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1677,6 +3408,9 @@ type RecordParam struct {
 
 	// Whether to enable recording in the current format. 0: no; 1: yes. Default value: 0.
 	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+
+	// VOD subapplication ID.
+	VodSubAppId *int64 `json:"VodSubAppId,omitempty" name:"VodSubAppId"`
 }
 
 type RecordTemplateInfo struct {
@@ -1812,6 +3546,39 @@ type RuleInfo struct {
 
 	// Stream name.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+}
+
+type SnapshotTemplateInfo struct {
+
+	// Template ID.
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Template name.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Screencapturing interval in seconds. Value range: 5–300s.
+	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
+
+	// Screenshot width. Value range: 0–3000. 0: original width and fit to the original aspect ratio
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Screenshot height. Value range: 0–2,000. 0: original height and fit to the original aspect ratio
+	Height *int64 `json:"Height,omitempty" name:"Height"`
+
+	// Whether to enable porn detection. 0: no, 1: yes.
+	PornFlag *int64 `json:"PornFlag,omitempty" name:"PornFlag"`
+
+	// COS `AppId`.
+	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
+
+	// COS bucket name.
+	CosBucket *string `json:"CosBucket,omitempty" name:"CosBucket"`
+
+	// COS region.
+	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
+
+	// Template description
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type StopLiveRecordRequest struct {
@@ -1998,4 +3765,120 @@ type TemplateInfo struct {
 
 	// VideoBitrate minus TESHD bitrate. Value range: 0.1–0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
+}
+
+type UnBindLiveDomainCertRequest struct {
+	*tchttp.BaseRequest
+
+	// Playback domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+}
+
+func (r *UnBindLiveDomainCertRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UnBindLiveDomainCertRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UnBindLiveDomainCertResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UnBindLiveDomainCertResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UnBindLiveDomainCertResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateLiveWatermarkRequest struct {
+	*tchttp.BaseRequest
+
+	// Watermark ID.
+	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
+
+	// Watermark image URL.
+	PictureUrl *string `json:"PictureUrl,omitempty" name:"PictureUrl"`
+
+	// Display position: X-axis offset.
+	XPosition *int64 `json:"XPosition,omitempty" name:"XPosition"`
+
+	// Display position: Y-axis offset.
+	YPosition *int64 `json:"YPosition,omitempty" name:"YPosition"`
+
+	// Watermark name.
+	WatermarkName *string `json:"WatermarkName,omitempty" name:"WatermarkName"`
+
+	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+	Height *int64 `json:"Height,omitempty" name:"Height"`
+}
+
+func (r *UpdateLiveWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateLiveWatermarkRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateLiveWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateLiveWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateLiveWatermarkResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type WatermarkInfo struct {
+
+	// Watermark ID.
+	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
+
+	// Watermark image URL.
+	PictureUrl *string `json:"PictureUrl,omitempty" name:"PictureUrl"`
+
+	// Display position: X-axis offset.
+	XPosition *int64 `json:"XPosition,omitempty" name:"XPosition"`
+
+	// Display position: Y-axis offset.
+	YPosition *int64 `json:"YPosition,omitempty" name:"YPosition"`
+
+	// Watermark name.
+	WatermarkName *string `json:"WatermarkName,omitempty" name:"WatermarkName"`
+
+	// Current status. 0: not used. 1: in use.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Watermark width
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Watermark height
+	Height *int64 `json:"Height,omitempty" name:"Height"`
 }

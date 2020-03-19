@@ -118,7 +118,7 @@ type AddCdnDomainRequest struct {
 	// Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// 
+	// Origin-pull timeout configuration
 	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
 }
 
@@ -346,43 +346,65 @@ type BandwidthAlert struct {
 
 type BriefDomain struct {
 
-	// Domain name ID.
+	// Domain name ID
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
-	// Tencent Cloud account ID.
+	// Tencent Cloud account ID
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
 
-	// CDN acceleration domain name.
+	// Acceleration domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain name CNAME.
+	// CNAME address of domain name
 	Cname *string `json:"Cname,omitempty" name:"Cname"`
 
-	// Domain name status. Values include `pending`: under review; `rejected`: failed to pass review; `processing`: passed review and under deployment; `online`: enabled; `offline`: disabled; `deleted`: deleted.
+	// Acceleration service status
+	// rejected: the domain name is rejected due to expiration/deregistration of its ICP filing
+	// processing: deploying
+	// online: activated
+	// offline: disabled
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Project ID.
+	// Project ID, which can be viewed on the Tencent Cloud project management page
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Domain name service type. `web`: static acceleration; `download`: download acceleration; `media`: streaming media acceleration.
+	// Domain name service type
+	// web: static acceleration
+	// download: download acceleration
+	// media: streaming VOD acceleration
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
-	// Domain name creation time.
+	// Domain name creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Domain name update time.
+	// Last modified time of domain name
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// Origin server configuration details.
+	// Origin server configuration details
 	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
 
-	// Domain name block status. Values include `normal`, `overdue`, `quota`, `malicious`, `ddos`, `idle`, `unlicensed`, `capping`, and `readonly`.
+	// Domain name block status
+	// normal: normal
+	// overdue: the domain name has been disabled due to account arrears. The acceleration service can be resumed after the account is topped up.
+	// malicious: the acceleration service has been forcibly disabled due to detection of malicious behavior.
+	// ddos: the acceleration service has been disabled due to large-scale DDoS attacks to the domain name
+	// idle: no operations or data has been detected for more than 90 days. The domain name is determined to be inactive which automatically disables the acceleration service. You can restart the service.
+	// unlicensed: the acceleration service has been automatically disabled as the domain name has no ICP filing or its ICP filing is deregistered. Service can be resumed after an ICP filing is obtained.
+	// capping: the configured upper limit for bandwidth has been reached.
+	// readonly: the domain name has a special configuration and has been locked.
 	Disable *string `json:"Disable,omitempty" name:"Disable"`
 
-	// Acceleration region. Values include `mainland`, `overseas`, and `global`.
+	// Acceleration region
+	// mainland: acceleration in Mainland China
+	// overseas: acceleration outside Mainland China
+	// global: global acceleration
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// Domain name lock status. Values include `normal`: not locked; `mainland`: locked in mainland China; `overseas`: locked outside mainland China; `global`: locked globally.
+	// Domain name lock status
+	// normal: not locked
+	// mainland: locked in Mainland China
+	// overseas: locked outside Mainland China
+	// global: locked globally
 	Readonly *string `json:"Readonly,omitempty" name:"Readonly"`
 }
 
@@ -460,29 +482,38 @@ type CdnData struct {
 
 type CdnIp struct {
 
-	// IP of the node.
+	// IP to be queried
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
-	// Whether the IP is a Tencent Cloud CDN cache node. `yes`: it is a Tencent Cloud CDN cache node; `no`: it is not.
+	// IP ownership:
+	// yes: Tencent Cloud CDN node
+	// no: non-Tencent Cloud CDN node
 	Platform *string `json:"Platform,omitempty" name:"Platform"`
 
-	// District/country where the node is located. `unknown`: the node location is unknown.
+	// Node district/country
+	// unknown: unknown node location
 	Location *string `json:"Location,omitempty" name:"Location"`
 
-	// Activation and deactivation history of the node.
+	// Node activation and deactivation history
 	History []*CdnIpHistory `json:"History,omitempty" name:"History" list`
 
-	// Service region of the node. `mainland`: Mainland China; `overseas`: outside Mainland China; `unknown`: unknown
+	// Node region
+	// mainland: cache node in Mainland China
+	// overseas: cache node outside Mainland China
+	// unknown: service region unknown
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 type CdnIpHistory struct {
 
-	// Node status. `online`: activated; `offline`: deactivated
+	// Operation type
+	// online: node is online
+	// offline: node is offline
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Operation time. If its value is `null`, it means there is no status change record.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Operation time corresponding to operation type
+	// If this value is null, there are no status change records
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Datetime *string `json:"Datetime,omitempty" name:"Datetime"`
 }
 
@@ -1350,146 +1381,168 @@ func (r *DescribeUrlViolationsResponse) FromJsonString(s string) error {
 
 type DetailDomain struct {
 
-	// Domain name ID.
+	// Domain name ID
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
-	// Tencent Cloud account ID.
+	// Tencent Cloud account ID
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
 
-	// Accelerated domain name.
+	// Acceleration domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain name CNAME.
+	// CNAME address of domain name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Cname *string `json:"Cname,omitempty" name:"Cname"`
 
-	// Domain name status. Values include `pending`: under review; `rejected`: failed to pass review; `processing`: passed review and under deployment; `online`: enabled; `offline`: disabled; `deleted`: deleted.
+	// Acceleration service status
+	// rejected: the domain name is rejected due to expiration/deregistration of its ICP filing
+	// processing: deploying
+	// online: activated
+	// offline: disabled
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Project ID.
+	// Project ID, which can be viewed on the Tencent Cloud project management page
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Domain name service type. `web`: static acceleration; `download`: download acceleration; `media`: streaming media acceleration.
+	// Domain name service type
+	// web: static acceleration
+	// download: download acceleration
+	// media: streaming VOD acceleration
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
-	// Domain name creation time.
+	// Domain name creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Domain name update time.
+	// Last modified time of domain name
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// Origin server configuration.
+	// Origin server configuration
 	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
 
-	// IP blacklist/whitelist configuration.
+	// IP blacklist/whitelist configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
-	// IP access limit configuration.
+	// IP access frequency limit configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IpFreqLimit *IpFreqLimit `json:"IpFreqLimit,omitempty" name:"IpFreqLimit"`
 
-	// Status code cache configuration.
+	// Status code cache configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StatusCodeCache *StatusCodeCache `json:"StatusCodeCache,omitempty" name:"StatusCodeCache"`
 
-	// Smart compression configuration.
+	// Smart compression configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Compression *Compression `json:"Compression,omitempty" name:"Compression"`
 
-	// Bandwidth cap configuration.
+	// Bandwidth cap configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BandwidthAlert *BandwidthAlert `json:"BandwidthAlert,omitempty" name:"BandwidthAlert"`
 
-	// Range GETs configuration.
+	// Range GETs configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RangeOriginPull *RangeOriginPull `json:"RangeOriginPull,omitempty" name:"RangeOriginPull"`
 
-	// 301 and 302 automatic origin-pull follow-redirect configuration.
+	// 301/302 origin-pull follow-redirect configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FollowRedirect *FollowRedirect `json:"FollowRedirect,omitempty" name:"FollowRedirect"`
 
-	// Error code redirect configuration.
+	// Custom error page configuration (in beta)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ErrorPage *ErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
 
-	// Origin-pull request header configuration.
+	// Custom request header configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RequestHeader *RequestHeader `json:"RequestHeader,omitempty" name:"RequestHeader"`
 
-	// Origin server response header configuration.
+	// Custom response header configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ResponseHeader *ResponseHeader `json:"ResponseHeader,omitempty" name:"ResponseHeader"`
 
-	// Download speed configuration.
+	// Single-link downstream speed limit configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DownstreamCapping *DownstreamCapping `json:"DownstreamCapping,omitempty" name:"DownstreamCapping"`
 
-	// Node cache configuration.
+	// Configuration of cache with/without parameter
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CacheKey *CacheKey `json:"CacheKey,omitempty" name:"CacheKey"`
 
-	// Follows origin server cache header configuration.
+	// Origin server header cache configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ResponseHeaderCache *ResponseHeaderCache `json:"ResponseHeaderCache,omitempty" name:"ResponseHeaderCache"`
 
-	// Video dragging configuration.
+	// Video dragging configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VideoSeek *VideoSeek `json:"VideoSeek,omitempty" name:"VideoSeek"`
 
-	// Cache rules configuration.
+	// Node cache expiration rule configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Cache *Cache `json:"Cache,omitempty" name:"Cache"`
 
-	// Cross-border optimization configuration.
+	// Cross-border linkage optimization configuration (in beta)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginPullOptimization *OriginPullOptimization `json:"OriginPullOptimization,omitempty" name:"OriginPullOptimization"`
 
-	// HTTPS configuration.
+	// HTTPS acceleration configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Https *Https `json:"Https,omitempty" name:"Https"`
 
-	// Timestamp hotlink protection configuration.
+	// Timestamp hotlink protection configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Authentication *Authentication `json:"Authentication,omitempty" name:"Authentication"`
 
-	// SEO configuration.
+	// SEO configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Seo *Seo `json:"Seo,omitempty" name:"Seo"`
 
-	// Domain name block status. Values include `normal`, `overdue`, `quota`, `malicious`, `ddos`, `idle`, `unlicensed`, `capping`, and `readonly`.
+	// Domain name block status
+	// normal: normal
+	// overdue: the domain name has been disabled due to account arrears. The acceleration service can be resumed after the account is topped up.
+	// malicious: the acceleration service has been forcibly disabled due to detection of malicious behavior.
+	// ddos: the acceleration service has been disabled due to large-scale DDoS attacks to the domain name
+	// idle: no operations or data has been detected for more than 90 days. The domain name is determined to be inactive which automatically disables the acceleration service. You can restart the service.
+	// unlicensed: the acceleration service has been automatically disabled as the domain name has no ICP filing or its ICP filing is deregistered. Service can be resumed after an ICP filing is obtained.
+	// capping: the configured upper limit for bandwidth has been reached.
+	// readonly: the domain name has a special configuration and has been locked.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Disable *string `json:"Disable,omitempty" name:"Disable"`
 
-	// Access protocol forced redirect configuration.
+	// Access protocol forced redirect configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
 
-	// Hotlink protection configuration.
+	// Referer hotlink protection configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Referer *Referer `json:"Referer,omitempty" name:"Referer"`
 
-	// Browser cache rules configuration.
+	// Browser cache expiration rule configuration (in beta)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MaxAge *MaxAge `json:"MaxAge,omitempty" name:"MaxAge"`
 
-	// IPv6 configuration.
+	// IPv6 configuration (in beta)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
-	// Old configuration compatibility check
+	// Backwards compatibility configuration (compatibility field for internal use)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Compatibility *Compatibility `json:"Compatibility,omitempty" name:"Compatibility"`
 
-	// Specific configuration by region.
+	// Region-specific configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SpecificConfig *SpecificConfig `json:"SpecificConfig,omitempty" name:"SpecificConfig"`
 
-	// Acceleration region. Values include `mainland`, `overseas`, and `global`.
+	// Acceleration region
+	// mainland: acceleration in Mainland China
+	// overseas: acceleration outside Mainland China
+	// global: global acceleration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// Domain name lock status. Values include `normal`: not locked; `mainland`: locked in mainland China; `overseas`: locked outside mainland China; `global`: locked globally.
+	// Domain name lock status
+	// normal: not locked
+	// mainland: locked in Mainland China
+	// overseas: locked outside Mainland China
+	// global: locked globally
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Readonly *string `json:"Readonly,omitempty" name:"Readonly"`
 
@@ -2956,7 +3009,7 @@ type UpdateDomainConfigRequest struct {
 	// global: global acceleration
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// 
+	// Origin-pull timeout configuration
 	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
 
 	// 

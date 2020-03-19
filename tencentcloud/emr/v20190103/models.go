@@ -32,6 +32,69 @@ type COSSettings struct {
 	LogOnCosPath *string `json:"LogOnCosPath,omitempty" name:"LogOnCosPath"`
 }
 
+type CdbInfo struct {
+
+	// Database instance
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Database IP
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Database port
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Database memory specification
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MemSize *int64 `json:"MemSize,omitempty" name:"MemSize"`
+
+	// Database disk specification
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Service flag
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Service *string `json:"Service,omitempty" name:"Service"`
+
+	// Expiration time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Application time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApplyTime *string `json:"ApplyTime,omitempty" name:"ApplyTime"`
+
+	// Payment type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PayType *int64 `json:"PayType,omitempty" name:"PayType"`
+
+	// Expiration flag
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ExpireFlag *bool `json:"ExpireFlag,omitempty" name:"ExpireFlag"`
+
+	// Database status
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Renewal flag
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsAutoRenew *int64 `json:"IsAutoRenew,omitempty" name:"IsAutoRenew"`
+
+	// Database string
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SerialNo *string `json:"SerialNo,omitempty" name:"SerialNo"`
+
+	// ZoneId
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// RegionId
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+}
+
 type ClusterInstancesInfo struct {
 
 	// ID
@@ -78,7 +141,34 @@ type ClusterInstancesInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SubnetId *int64 `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Status
+	// Instance status code. Value range:
+	// <li>2: cluster running</li>
+	// <li>3: creating cluster.</li>
+	// <li>4: scaling out cluster.</li>
+	// <li>5: adding router node in cluster.</li>
+	// <li>6: installing component in cluster.</li>
+	// <li>7: cluster executing command.</li>
+	// <li>8: restarting service.</li>
+	// <li>9: entering maintenance.</li>
+	// <li>10: suspending service.</li>
+	// <li>11: exiting maintenance.</li>
+	// <li>12: exiting suspension.</li>
+	// <li>13: delivering configuration.</li>
+	// <li>14: terminating cluster.</li>
+	// <li>15: terminating core node.</li>
+	// <li>16: terminating task node.</li>
+	// <li>17: terminating router node.</li>
+	// <li>18: changing webproxy password.</li>
+	// <li>19: isolating cluster.</li>
+	// <li>20: resuming cluster.</li>
+	// <li>21: repossessing cluster.</li>
+	// <li>22: waiting for configuration adjustment.</li>
+	// <li>23: cluster isolated.</li>
+	// <li>24: removing node.</li>
+	// <li>33: waiting for refund.</li>
+	// <li>34: refunded.</li>
+	// <li>301: creation failed.</li>
+	// <li>302: scale-out failed.</li>
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
@@ -134,8 +224,12 @@ type ClusterInstancesInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
-	// 
+	// Hive metadata
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	HiveMetaDb *string `json:"HiveMetaDb,omitempty" name:"HiveMetaDb"`
+
+	// 
+	ServiceClass *string `json:"ServiceClass,omitempty" name:"ServiceClass"`
 }
 
 type CreateInstanceRequest struct {
@@ -197,7 +291,7 @@ type CreateInstanceRequest struct {
 	// Bootstrap script settings.
 	PreExecutedFileSettings []*PreExecuteFileSettings `json:"PreExecutedFileSettings,omitempty" name:"PreExecutedFileSettings" list`
 
-	// Auto-renewal flag. Valid values:
+	// Whether auto-renewal is enabled. Valid values:
 	// <li>0: auto-renewal not enabled.</li>
 	// <li>1: auto-renewal enabled.</li>
 	AutoRenew *uint64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
@@ -224,6 +318,21 @@ type CreateInstanceRequest struct {
 
 	// List of spread placement group IDs. Only one can be specified currently.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds" list`
+
+	// CBS disk encryption at the cluster level. 0: not encrypted, 1: encrypted
+	CbsEncrypt *uint64 `json:"CbsEncrypt,omitempty" name:"CbsEncrypt"`
+
+	// Hive-shared metadatabase type. Valid values:
+	// <li>EMR_DEFAULT_META: the cluster creates one by default.</li>
+	// <li>EMR_EXIST_META: the cluster uses the specified EMR-MetaDB instance.</li>
+	// <li>USER_CUSTOM_META: the cluster uses a custom MetaDB instance.</li>
+	MetaType *string `json:"MetaType,omitempty" name:"MetaType"`
+
+	// EMR-MetaDB instance
+	UnifyMetaInstanceId *string `json:"UnifyMetaInstanceId,omitempty" name:"UnifyMetaInstanceId"`
+
+	// Custom MetaDB instance information
+	MetaDBInfo *CustomMetaInfo `json:"MetaDBInfo,omitempty" name:"MetaDBInfo"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -250,6 +359,80 @@ func (r *CreateInstanceResponse) ToJsonString() string {
 }
 
 func (r *CreateInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CustomMetaInfo struct {
+
+	// JDBC connection to custom MetaDB instance beginning with `jdbc:mysql://`
+	MetaDataJdbcUrl *string `json:"MetaDataJdbcUrl,omitempty" name:"MetaDataJdbcUrl"`
+
+	// Custom MetaDB instance username
+	MetaDataUser *string `json:"MetaDataUser,omitempty" name:"MetaDataUser"`
+
+	// Custom MetaDB instance password
+	MetaDataPass *string `json:"MetaDataPass,omitempty" name:"MetaDataPass"`
+}
+
+type DescribeClusterNodesRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster instance ID in the format of emr-xxxxxxxx
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Node flag. Valid values:
+	// <li>all: gets the information of nodes in all types except TencentDB information.</li>
+	// <li>master: gets master node information.</li>
+	// <li>core: gets core node information.</li>
+	// <li>task: gets task node information.</li>
+	// <li>common: gets common node information.</li>
+	// <li>router: gets router node information.</li>
+	// <li>db: gets TencentDB information in normal status.</li>
+	// Note: only the above values are supported for the time being. Entering other values will cause errors.
+	NodeFlag *string `json:"NodeFlag,omitempty" name:"NodeFlag"`
+
+	// Page number. Default value: 0, indicating the first page.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results per page. Default value: 100. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeClusterNodesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterNodesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterNodesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of queried nodes
+		TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
+
+		// List of node details
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		NodeList []*NodeHardwareInfo `json:"NodeList,omitempty" name:"NodeList" list`
+
+		// List of tag keys owned by user
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterNodesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterNodesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -424,6 +607,25 @@ type InquiryPriceCreateInstanceRequest struct {
 
 	// Configuration information of VPC. This parameter is used to specify the VPC ID, subnet ID, etc.
 	VPCSettings *VPCSettings `json:"VPCSettings,omitempty" name:"VPCSettings"`
+
+	// Hive-shared metadatabase type. Valid values:
+	// <li>EMR_DEFAULT_META: the cluster creates one by default.</li>
+	// <li>EMR_EXIST_META: the cluster uses the specified EMR-MetaDB instance.</li>
+	// <li>USER_CUSTOM_META: the cluster uses a custom MetaDB instance.</li>
+	MetaType *string `json:"MetaType,omitempty" name:"MetaType"`
+
+	// EMR-MetaDB instance
+	UnifyMetaInstanceId *string `json:"UnifyMetaInstanceId,omitempty" name:"UnifyMetaInstanceId"`
+
+	// Custom MetaDB instance information
+	MetaDBInfo *CustomMetaInfo `json:"MetaDBInfo,omitempty" name:"MetaDBInfo"`
+
+	// Product ID. Different product IDs represent different EMR product versions. Valid values:
+	// <li>1: EMR v1.3.1.</li>
+	// <li>2: EMR v2.0.1.</li>
+	// <li>4: EMR v2.1.0.</li>
+	// <li>7: EMR v3.0.0.</li>
+	ProductId *uint64 `json:"ProductId,omitempty" name:"ProductId"`
 }
 
 func (r *InquiryPriceCreateInstanceRequest) ToJsonString() string {
@@ -703,6 +905,21 @@ type MultiDisk struct {
 	Count *int64 `json:"Count,omitempty" name:"Count"`
 }
 
+type MultiDiskMC struct {
+
+	// Number of cloud disks in this type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Disk type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Cloud disk size
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+}
+
 type NewResourceSpec struct {
 
 	// Describes master node resource
@@ -728,6 +945,152 @@ type NewResourceSpec struct {
 
 	// Number of common nodes
 	CommonCount *int64 `json:"CommonCount,omitempty" name:"CommonCount"`
+}
+
+type NodeHardwareInfo struct {
+
+	// User `APPID`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Serial number
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SerialNo *string `json:"SerialNo,omitempty" name:"SerialNo"`
+
+	// Machine instance ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	OrderNo *string `json:"OrderNo,omitempty" name:"OrderNo"`
+
+	// Public IP bound to master node
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	WanIp *string `json:"WanIp,omitempty" name:"WanIp"`
+
+	// Node type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Flag *int64 `json:"Flag,omitempty" name:"Flag"`
+
+	// Node specification
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Spec *string `json:"Spec,omitempty" name:"Spec"`
+
+	// Number of node cores
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CpuNum *int64 `json:"CpuNum,omitempty" name:"CpuNum"`
+
+	// Node memory size
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MemSize *int64 `json:"MemSize,omitempty" name:"MemSize"`
+
+	// Node memory description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MemDesc *string `json:"MemDesc,omitempty" name:"MemDesc"`
+
+	// Node region
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Node AZ
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Application time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApplyTime *string `json:"ApplyTime,omitempty" name:"ApplyTime"`
+
+	// Release time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FreeTime *string `json:"FreeTime,omitempty" name:"FreeTime"`
+
+	// Disk size
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DiskSize *string `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Node description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NameTag *string `json:"NameTag,omitempty" name:"NameTag"`
+
+	// Services deployed on node
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Services *string `json:"Services,omitempty" name:"Services"`
+
+	// Disk type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	StorageType *int64 `json:"StorageType,omitempty" name:"StorageType"`
+
+	// System disk size
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RootSize *int64 `json:"RootSize,omitempty" name:"RootSize"`
+
+	// Payment type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ChargeType *int64 `json:"ChargeType,omitempty" name:"ChargeType"`
+
+	// Database IP
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CdbIp *string `json:"CdbIp,omitempty" name:"CdbIp"`
+
+	// Database port
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CdbPort *int64 `json:"CdbPort,omitempty" name:"CdbPort"`
+
+	// Disk capacity
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	HwDiskSize *int64 `json:"HwDiskSize,omitempty" name:"HwDiskSize"`
+
+	// Disk capacity description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	HwDiskSizeDesc *string `json:"HwDiskSizeDesc,omitempty" name:"HwDiskSizeDesc"`
+
+	// Memory capacity
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	HwMemSize *int64 `json:"HwMemSize,omitempty" name:"HwMemSize"`
+
+	// Memory capacity description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	HwMemSizeDesc *string `json:"HwMemSizeDesc,omitempty" name:"HwMemSizeDesc"`
+
+	// Expiration time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Node resource ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	EmrResourceId *string `json:"EmrResourceId,omitempty" name:"EmrResourceId"`
+
+	// Renewal flag
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsAutoRenew *int64 `json:"IsAutoRenew,omitempty" name:"IsAutoRenew"`
+
+	// Device flag
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DeviceClass *string `json:"DeviceClass,omitempty" name:"DeviceClass"`
+
+	// Support for configuration adjustment
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Mutable *int64 `json:"Mutable,omitempty" name:"Mutable"`
+
+	// Multi-cloud disk
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MCMultiDisk []*MultiDiskMC `json:"MCMultiDisk,omitempty" name:"MCMultiDisk" list`
+
+	// Database information
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CdbNodeInfo *CdbInfo `json:"CdbNodeInfo,omitempty" name:"CdbNodeInfo"`
+
+	// Private IP
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Whether this node can be terminated. 1: yes, 0: no
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Destroyable *int64 `json:"Destroyable,omitempty" name:"Destroyable"`
+
+	// Tags bound to node
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// 
+	AutoFlag *int64 `json:"AutoFlag,omitempty" name:"AutoFlag"`
 }
 
 type OutterResource struct {
@@ -990,10 +1353,12 @@ type ScaleOutInstanceResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
-		// 
+		// Scaling workflow ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
 
-		// 
+		// Big order number.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 		BillId *string `json:"BillId,omitempty" name:"BillId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

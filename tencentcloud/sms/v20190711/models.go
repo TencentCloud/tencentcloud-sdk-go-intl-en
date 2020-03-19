@@ -339,8 +339,41 @@ type DeleteTemplateStatus struct {
 	DeleteTime *uint64 `json:"DeleteTime,omitempty" name:"DeleteTime"`
 }
 
+type DescribeSignListStatus struct {
+
+	// Signature ID
+	SignId *uint64 `json:"SignId,omitempty" name:"SignId"`
+
+	// Whether it is Global SMS. Valid values:
+	// 0: Mainland China SMS.
+	// 1: Global SMS
+	International *uint64 `json:"International,omitempty" name:"International"`
+
+	// Signature application status. Valid values:
+	// 0: approved.
+	// -1: rejected or failed.
+	StatusCode *int64 `json:"StatusCode,omitempty" name:"StatusCode"`
+
+	// Review reply, i.e., response given by the reviewer, which is usually the reason for rejection.
+	ReviewReply *string `json:"ReviewReply,omitempty" name:"ReviewReply"`
+
+	// Signature name.
+	SignName *string `json:"SignName,omitempty" name:"SignName"`
+
+	// Application submission time in the format of UNIX timestamp in seconds.
+	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
 type DescribeSmsSignListRequest struct {
 	*tchttp.BaseRequest
+
+	// Signature ID array.
+	SignIdSet []*uint64 `json:"SignIdSet,omitempty" name:"SignIdSet" list`
+
+	// Whether it is Global SMS:
+	// 0: Mainland China SMS.
+	// 1: Global SMS.
+	International *uint64 `json:"International,omitempty" name:"International"`
 }
 
 func (r *DescribeSmsSignListRequest) ToJsonString() string {
@@ -355,6 +388,9 @@ func (r *DescribeSmsSignListRequest) FromJsonString(s string) error {
 type DescribeSmsSignListResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Response for getting signature information
+		DescribeSignListStatusSet []*DescribeSignListStatus `json:"DescribeSignListStatusSet,omitempty" name:"DescribeSignListStatusSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -372,6 +408,14 @@ func (r *DescribeSmsSignListResponse) FromJsonString(s string) error {
 
 type DescribeSmsTemplateListRequest struct {
 	*tchttp.BaseRequest
+
+	// Template ID array.
+	TemplateIdSet []*uint64 `json:"TemplateIdSet,omitempty" name:"TemplateIdSet" list`
+
+	// Whether it is Global SMS:
+	// 0: Mainland China SMS.
+	// 1: Global SMS.
+	International *uint64 `json:"International,omitempty" name:"International"`
 }
 
 func (r *DescribeSmsTemplateListRequest) ToJsonString() string {
@@ -387,6 +431,9 @@ type DescribeSmsTemplateListResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
+		// Response for getting SMS signature information
+		DescribeTemplateStatusSet []*DescribeTemplateListStatus `json:"DescribeTemplateStatusSet,omitempty" name:"DescribeTemplateStatusSet" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -399,6 +446,31 @@ func (r *DescribeSmsTemplateListResponse) ToJsonString() string {
 
 func (r *DescribeSmsTemplateListResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTemplateListStatus struct {
+
+	// Template ID
+	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Whether it is Global SMS. Valid values:
+	// 0: Mainland China SMS.
+	// 1: Global SMS
+	International *uint64 `json:"International,omitempty" name:"International"`
+
+	// Signature application status. Valid values:
+	// 0: approved.
+	// -1: rejected or failed.
+	StatusCode *int64 `json:"StatusCode,omitempty" name:"StatusCode"`
+
+	// Review reply, i.e., response given by the reviewer, which is usually the reason for rejection.
+	ReviewReply *string `json:"ReviewReply,omitempty" name:"ReviewReply"`
+
+	// Template name.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Application submission time in the format of UNIX timestamp in seconds.
+	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 type ModifySignStatus struct {
@@ -786,7 +858,8 @@ func (r *PullSmsSendStatusResponse) FromJsonString(s string) error {
 type SendSmsRequest struct {
 	*tchttp.BaseRequest
 
-	// Target mobile numbers in the e.164 standard (+[country/region code][mobile number]), such as +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number). Up to 200 mobile numbers are supported.
+	// Target mobile number in the e.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Mainland China mobile numbers or all global mobile numbers).
+	// Example: +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
 	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet" list`
 
 	// Template ID. You must enter the ID of an approved template, which can be viewed in the [SMS Console](https://console.cloud.tencent.com/sms/smslist).

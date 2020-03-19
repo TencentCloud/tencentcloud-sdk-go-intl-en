@@ -221,10 +221,10 @@ func (r *CreateInstanceAccountResponse) FromJsonString(s string) error {
 type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// ID of the AZ where the instance resides
+	// AZ ID of instance
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Instance type. 2: Redis 2.8 master-slave edition; 3: Redis 3.2 master-slave edition (CKV master-slave edition); 4: Redis 3.2 cluster edition (CKV cluster edition); 5: Redis 2.8 standalone edition; 6: Redis 4.0 master-slave edition; 7: Redis 4.0 cluster edition
+	// Instance type. 2: Redis 2.8 Master-Slave Edition, 3: Redis 3.2 Master-Slave Edition (CKV Master-Slave Edition), 4: Redis 3.2 Cluster Edition (CKV Cluster Edition), 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Slave Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Slave Edition, 9: Redis 5.0 Cluster Edition,
 	TypeId *uint64 `json:"TypeId,omitempty" name:"TypeId"`
 
 	// Instance capacity in MB. The actual value is subject to the specifications returned by the purchasable specification querying API |
@@ -257,7 +257,7 @@ type CreateInstancesRequest struct {
 	// Array of security group IDs
 	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitempty" name:"SecurityGroupIdList" list`
 
-	// User-defined port. If this parameter is left blank, 6379 will be used by default
+	// User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024,65535]
 	VPort *uint64 `json:"VPort,omitempty" name:"VPort"`
 
 	// Number of instance shards. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, Redis 2.8 standalone edition, and Redis 4.0 master-slave edition
@@ -407,7 +407,7 @@ type DescribeBackupUrlRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup ID, which can be queried through the DescribeInstanceBackups API
+	// Backup ID, which can be queried through the `DescribeInstanceBackups` API
 	BackupId *string `json:"BackupId,omitempty" name:"BackupId"`
 }
 
@@ -1139,11 +1139,14 @@ type DescribeInstancesRequest struct {
 	// Billing method. postpaid: pay-as-you-go; prepaid: monthly subscription
 	BillingMode *string `json:"BillingMode,omitempty" name:"BillingMode"`
 
-	// Instance type. 1: legacy Redis cluster edition; 2: Redis 2.8 master-slave edition; 3: CKV master-slave edition; 4: CKV cluster edition; 5: Redis 2.8 standalone edition; 6: Redis 4.0 master-slave edition; 7: Redis 4.0 cluster edition
+	// Instance type. 1: legacy Redis Cluster Edition, 2: Redis 2.8 Master-Slave Edition, 3: CKV Master-Slave Edition, 4: CKV Cluster Edition, 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Slave Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Slave Edition, 9: Redis 5.0 Cluster Edition,
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
 	// Search keywords, which can be instance ID, instance name, or complete IP
 	SearchKeys []*string `json:"SearchKeys,omitempty" name:"SearchKeys" list`
+
+	// Internal parameter, which can be ignored
+	TypeList []*int64 `json:"TypeList,omitempty" name:"TypeList" list`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -1897,6 +1900,33 @@ type InstanceSet struct {
 	// Whether an instance is password-free. true: yes; false: no
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	NoAuth *bool `json:"NoAuth,omitempty" name:"NoAuth"`
+
+	// Number of client connections
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ClientLimit *int64 `json:"ClientLimit,omitempty" name:"ClientLimit"`
+
+	// DTS status (internal parameter, which can be ignored)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DtsStatus *int64 `json:"DtsStatus,omitempty" name:"DtsStatus"`
+
+	// Upper shard bandwidth limit in MB
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NetLimit *int64 `json:"NetLimit,omitempty" name:"NetLimit"`
+
+	// Password-free instance flag (internal parameter, which can be ignored)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PasswordFree *int64 `json:"PasswordFree,omitempty" name:"PasswordFree"`
+
+	// Read-only instance flag (internal parameter, which can be ignored)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ReadOnly *int64 `json:"ReadOnly,omitempty" name:"ReadOnly"`
+
+	// Internal parameter, which can be ignored
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Vip6 *string `json:"Vip6,omitempty" name:"Vip6"`
+
+	// 
+	RemainBandwidthDuration *string `json:"RemainBandwidthDuration,omitempty" name:"RemainBandwidthDuration"`
 }
 
 type InstanceSlowlogDetail struct {
@@ -2193,15 +2223,24 @@ type ModifyInstanceRequest struct {
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
-	// New name of an instance
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	// New name of instance
+	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames" list`
 
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Auto-renewal flag. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
+	// Auto-renewal flag. 0: default status (manual renewal), 1: auto-renewal enabled, 2: auto-renewal disabled
+	AutoRenews []*int64 `json:"AutoRenews,omitempty" name:"AutoRenews" list`
+
+	// Disused
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Disused
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Disused
 	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 }
 
@@ -2394,7 +2433,7 @@ type RenewInstanceResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Transaction Id
+		// Transaction ID
 		DealId *string `json:"DealId,omitempty" name:"DealId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

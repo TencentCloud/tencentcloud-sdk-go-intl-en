@@ -68,6 +68,31 @@ func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *Creat
     return
 }
 
+func NewDescribeClusterNodesRequest() (request *DescribeClusterNodesRequest) {
+    request = &DescribeClusterNodesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeClusterNodes")
+    return
+}
+
+func NewDescribeClusterNodesResponse() (response *DescribeClusterNodesResponse) {
+    response = &DescribeClusterNodesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the information of a hardware node.
+func (c *Client) DescribeClusterNodes(request *DescribeClusterNodesRequest) (response *DescribeClusterNodesResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterNodesRequest()
+    }
+    response = NewDescribeClusterNodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
     request = &DescribeInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -233,7 +258,7 @@ func NewTerminateInstanceResponse() (response *TerminateInstanceResponse) {
     return
 }
 
-// This API is used to terminate EMR instance.
+// This API is used to terminate an EMR instance. It is only supported in the official paid edition of EMR.
 func (c *Client) TerminateInstance(request *TerminateInstanceRequest) (response *TerminateInstanceResponse, err error) {
     if request == nil {
         request = NewTerminateInstanceRequest()

@@ -208,6 +208,73 @@ type BackupItem struct {
 	Table *string `json:"Table,omitempty" name:"Table"`
 }
 
+type BackupSummaryItem struct {
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of automatic data backups of an instance.
+	AutoBackupCount *int64 `json:"AutoBackupCount,omitempty" name:"AutoBackupCount"`
+
+	// Capacity of automatic data backups of an instance.
+	AutoBackupVolume *int64 `json:"AutoBackupVolume,omitempty" name:"AutoBackupVolume"`
+
+	// Number of manual data backups of an instance.
+	ManualBackupCount *int64 `json:"ManualBackupCount,omitempty" name:"ManualBackupCount"`
+
+	// Capacity of manual data backups of an instance.
+	ManualBackupVolume *int64 `json:"ManualBackupVolume,omitempty" name:"ManualBackupVolume"`
+
+	// Total number of data backups of an instance (including automatic backups and manual backups).
+	DataBackupCount *int64 `json:"DataBackupCount,omitempty" name:"DataBackupCount"`
+
+	// Total capacity of data backups of an instance.
+	DataBackupVolume *int64 `json:"DataBackupVolume,omitempty" name:"DataBackupVolume"`
+
+	// Number of log backups of an instance.
+	BinlogBackupCount *int64 `json:"BinlogBackupCount,omitempty" name:"BinlogBackupCount"`
+
+	// Capacity of log backups of an instance.
+	BinlogBackupVolume *int64 `json:"BinlogBackupVolume,omitempty" name:"BinlogBackupVolume"`
+
+	// Total capacity of backups of an instance (including data backups and log backups).
+	BackupVolume *int64 `json:"BackupVolume,omitempty" name:"BackupVolume"`
+}
+
+type BalanceRoGroupLoadRequest struct {
+	*tchttp.BaseRequest
+
+	// RO group ID in the format of `cdbrg-c1nl9rpv`.
+	RoGroupId *string `json:"RoGroupId,omitempty" name:"RoGroupId"`
+}
+
+func (r *BalanceRoGroupLoadRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *BalanceRoGroupLoadRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type BalanceRoGroupLoadResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BalanceRoGroupLoadResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *BalanceRoGroupLoadResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type BinlogInfo struct {
 
 	// Binlog backup filename
@@ -1022,6 +1089,104 @@ func (r *DescribeBackupDatabasesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeBackupOverviewRequest struct {
+	*tchttp.BaseRequest
+
+	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *DescribeBackupOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBackupOverviewRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of backups of a user in the current region (including data backups and log backups).
+		BackupCount *int64 `json:"BackupCount,omitempty" name:"BackupCount"`
+
+		// Total capacity of backups of a user in the current region.
+		BackupVolume *int64 `json:"BackupVolume,omitempty" name:"BackupVolume"`
+
+		// Paid capacity of backups of a user in the current region, i.e., capacity that exceeds the free tier.
+		BillingVolume *int64 `json:"BillingVolume,omitempty" name:"BillingVolume"`
+
+		// Backup capacity in the free tier of a user in the current region.
+		FreeVolume *int64 `json:"FreeVolume,omitempty" name:"FreeVolume"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBackupOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBackupOverviewResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupSummariesRequest struct {
+	*tchttp.BaseRequest
+
+	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Pagination offset.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Paginated query limit. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Sorting criterion. Valid values: BackupVolume (backup capacity), DataBackupVolume (data backup capacity), BinlogBackupVolume (log backup capacity), AutoBackupVolume (automatic backup capacity), ManualBackupVolume (manual backup capacity).
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: ASC (ascending), DESC (descending).
+	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+}
+
+func (r *DescribeBackupSummariesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBackupSummariesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupSummariesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Statistical items of instance backup.
+		Items []*BackupSummaryItem `json:"Items,omitempty" name:"Items" list`
+
+		// Total number of instance backups.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBackupSummariesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBackupSummariesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeBackupTablesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1120,6 +1285,46 @@ func (r *DescribeBackupsResponse) ToJsonString() string {
 }
 
 func (r *DescribeBackupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBinlogBackupOverviewRequest struct {
+	*tchttp.BaseRequest
+
+	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *DescribeBinlogBackupOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBinlogBackupOverviewRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBinlogBackupOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total capacity of log backups in bytes.
+		BinlogBackupVolume *int64 `json:"BinlogBackupVolume,omitempty" name:"BinlogBackupVolume"`
+
+		// Total number of log backups.
+		BinlogBackupCount *int64 `json:"BinlogBackupCount,omitempty" name:"BinlogBackupCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBinlogBackupOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBinlogBackupOverviewResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1616,6 +1821,58 @@ func (r *DescribeDBZoneConfigResponse) ToJsonString() string {
 }
 
 func (r *DescribeDBZoneConfigResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDataBackupOverviewRequest struct {
+	*tchttp.BaseRequest
+
+	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *DescribeDataBackupOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDataBackupOverviewRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDataBackupOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total capacity of data backups in bytes in the current region (including automatic backups and manual backups).
+		DataBackupVolume *int64 `json:"DataBackupVolume,omitempty" name:"DataBackupVolume"`
+
+		// Total number of data backups in the current region.
+		DataBackupCount *int64 `json:"DataBackupCount,omitempty" name:"DataBackupCount"`
+
+		// Total capacity of automatic backups in the current region.
+		AutoBackupVolume *int64 `json:"AutoBackupVolume,omitempty" name:"AutoBackupVolume"`
+
+		// Total number of automatic backups in the current region.
+		AutoBackupCount *int64 `json:"AutoBackupCount,omitempty" name:"AutoBackupCount"`
+
+		// Total capacity of manual backups in the current region.
+		ManualBackupVolume *int64 `json:"ManualBackupVolume,omitempty" name:"ManualBackupVolume"`
+
+		// Total number of manual backups in the current region.
+		ManualBackupCount *int64 `json:"ManualBackupCount,omitempty" name:"ManualBackupCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDataBackupOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDataBackupOverviewResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3412,6 +3669,49 @@ func (r *ModifyParamTemplateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyRoGroupInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// RO group ID.
+	RoGroupId *string `json:"RoGroupId,omitempty" name:"RoGroupId"`
+
+	// RO group details.
+	RoGroupInfo *RoGroupAttr `json:"RoGroupInfo,omitempty" name:"RoGroupInfo"`
+
+	// Weights of instances in RO group. If the weighting mode of an RO group is changed to custom mode, this parameter must be set, and a weight value needs to be set for each RO instance.
+	RoWeightValues []*RoWeightValue `json:"RoWeightValues,omitempty" name:"RoWeightValues" list`
+
+	// Whether to rebalance the loads of RO instances in the RO group. Supported values include `1` (yes) and `0` (no). The default value is `0`. Please note that if this value is set to `1`, connections to the RO instances in the RO group will be interrupted transiently; therefore, you should ensure that your application can reconnect to the databases.
+	IsBalanceRoLoad *int64 `json:"IsBalanceRoLoad,omitempty" name:"IsBalanceRoLoad"`
+}
+
+func (r *ModifyRoGroupInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyRoGroupInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyRoGroupInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyRoGroupInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyRoGroupInfoResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyTimeWindowRequest struct {
 	*tchttp.BaseRequest
 
@@ -3769,6 +4069,24 @@ type RoGroup struct {
 	RoGroupZone *string `json:"RoGroupZone,omitempty" name:"RoGroupZone"`
 }
 
+type RoGroupAttr struct {
+
+	// RO group name.
+	RoGroupName *string `json:"RoGroupName,omitempty" name:"RoGroupName"`
+
+	// Maximum delay threshold for RO instances in seconds. Minimum value: 1. Please note that this value will take effect only if an instance removal policy is enabled in the RO group.
+	RoMaxDelayTime *int64 `json:"RoMaxDelayTime,omitempty" name:"RoMaxDelayTime"`
+
+	// Whether to enable instance removal. Valid values: 1 (enabled), 0 (not enabled). Please note that if instance removal is enabled, the delay threshold parameter (`RoMaxDelayTime`) must be set.
+	RoOfflineDelay *int64 `json:"RoOfflineDelay,omitempty" name:"RoOfflineDelay"`
+
+	// Minimum number of instances to be retained, which can be set to any value less than or equal to the number of RO instances in the RO group. Please note that if this value is set to be greater than the number of RO instances, no removal will be performed, and if it is set to 0, all instances with an excessive delay will be removed.
+	MinRoInGroup *int64 `json:"MinRoInGroup,omitempty" name:"MinRoInGroup"`
+
+	// Weighting mode. Supported values include `system` (automatically assigned by the system) and `custom` (defined by user). Please note that if the `custom` mode is selected, the RO instance weight configuration parameter (RoWeightValues) must be set.
+	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+}
+
 type RoInstanceInfo struct {
 
 	// Master instance ID corresponding to the RO group
@@ -3857,6 +4175,15 @@ type RoVipInfo struct {
 
 	// VIP of the read-only instance
 	RoVip *string `json:"RoVip,omitempty" name:"RoVip"`
+}
+
+type RoWeightValue struct {
+
+	// RO instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Weight value. Value range: [0, 100].
+	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 }
 
 type RollbackDBName struct {

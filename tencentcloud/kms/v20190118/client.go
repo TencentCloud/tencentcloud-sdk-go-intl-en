@@ -58,7 +58,7 @@ func NewAsymmetricRsaDecryptResponse() (response *AsymmetricRsaDecryptResponse) 
     return
 }
 
-// Use the private key of the specified RSA asymmetric key for data decryption. The ciphertext must be encrypted using the corresponding public key. An asymmetric key must be in the Enabled state for decryption.
+// This API is used to decrypt data with the specified private key that is encrypted with RSA asymmetric cryptographic algorithm. The ciphertext must be encrypted with the corresponding public key. The asymmetric key must be in `Enabled` state for decryption.
 func (c *Client) AsymmetricRsaDecrypt(request *AsymmetricRsaDecryptRequest) (response *AsymmetricRsaDecryptResponse, err error) {
     if request == nil {
         request = NewAsymmetricRsaDecryptRequest()
@@ -83,7 +83,7 @@ func NewAsymmetricSm2DecryptResponse() (response *AsymmetricSm2DecryptResponse) 
     return
 }
 
-// Use the private key of the specified SM2 asymmetric key for data decryption. The ciphertext must be encrypted using the corresponding public key. An asymmetric key must be in the Enabled state for decryption. The length of the incoming ciphertext cannot exceed 256 bytes.
+// This API is used to decrypt data with the specified private key that is encrypted with SM2 asymmetric cryptographic algorithm. The ciphertext must be encrypted with the corresponding public key. The asymmetric key must be in `Enabled` state for decryption. The length of the ciphertext passed in cannot exceed 256 bytes.
 func (c *Client) AsymmetricSm2Decrypt(request *AsymmetricSm2DecryptRequest) (response *AsymmetricSm2DecryptResponse, err error) {
     if request == nil {
         request = NewAsymmetricSm2DecryptRequest()
@@ -208,7 +208,7 @@ func NewDescribeKeyResponse() (response *DescribeKeyResponse) {
     return
 }
 
-// Used to get the master key attribute details of the specified KeyId.
+// This API is used to get the attribute details of the CMK with a specified `KeyId`.
 func (c *Client) DescribeKey(request *DescribeKeyRequest) (response *DescribeKeyResponse, err error) {
     if request == nil {
         request = NewDescribeKeyRequest()
@@ -233,7 +233,7 @@ func NewDescribeKeysResponse() (response *DescribeKeysResponse) {
     return
 }
 
-// This API is used to obtain master key attribute information in batches.
+// This API is used to get the attribute information of CMKs in batches.
 func (c *Client) DescribeKeys(request *DescribeKeysRequest) (response *DescribeKeysResponse, err error) {
     if request == nil {
         request = NewDescribeKeysRequest()
@@ -533,7 +533,7 @@ func NewGetPublicKeyResponse() (response *GetPublicKeyResponse) {
     return
 }
 
-// The user of this interface obtains the public key information of the asymmetric keys whose KeyUsage is ASYMMETRIC_DECRYPT_RSA_2048 and ASYMMETRIC_DECRYPT_SM2. Users can use this public key to encrypt data locally, and the data encrypted with this public key can only be decrypted by using the corresponding private key through KMS. Only an asymmetric key in the Enabled state can obtain a public key.
+// This API is used to get the information of the public key that is encrypted with the asymmetric cryptographic algorithm and of which the `KeyUsage` is `ASYMMETRIC_DECRYPT_RSA_2048` or `ASYMMETRIC_DECRYPT_SM2`. This public key can be used to encrypt data locally, and the data encrypted with it can only be decrypted with the corresponding private key through KMS. The public key can only be obtained from the asymmetric key in `Enabled` state.
 func (c *Client) GetPublicKey(request *GetPublicKeyRequest) (response *GetPublicKeyResponse, err error) {
     if request == nil {
         request = NewGetPublicKeyRequest()
@@ -609,7 +609,7 @@ func NewListAlgorithmsResponse() (response *ListAlgorithmsResponse) {
     return
 }
 
-// List the encryption methods supported by the current region
+// This API is used to list the encryption methods supported in the current region.
 func (c *Client) ListAlgorithms(request *ListAlgorithmsRequest) (response *ListAlgorithmsResponse, err error) {
     if request == nil {
         request = NewListAlgorithmsRequest()

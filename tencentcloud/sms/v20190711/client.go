@@ -58,7 +58,8 @@ func NewAddSmsSignResponse() (response *AddSmsSignResponse) {
     return
 }
 
-// This API is used to add an SMS signature.
+// This API is used to add an SMS signature. Please read the [Tencent Cloud SMS Signature Review Standards](https://cloud.tencent.com/document/product/382/39022) before starting an application.
+// >⚠️ Note: individual users cannot use this API to apply for SMS signatures. For more information, please see [Identity Verification Overview](https://cloud.tencent.com/document/product/378/3629). If your account identity is individual, please log in to the console to apply for SMS signatures. For detailed directions, please see [Creating SMS Signatures](https://cloud.tencent.com/document/product/382/36136#Sign).
 func (c *Client) AddSmsSign(request *AddSmsSignRequest) (response *AddSmsSignResponse, err error) {
     if request == nil {
         request = NewAddSmsSignRequest()
@@ -83,7 +84,8 @@ func NewAddSmsTemplateResponse() (response *AddSmsTemplateResponse) {
     return
 }
 
-// This API is used to add an SMS template.
+// This API is used to add an SMS template. Please read the [Tencent Cloud SMS Body Template Review Standards](https://cloud.tencent.com/document/product/382/39023) before starting an application.
+// >⚠️ Note: individual users cannot use this API to apply for SMS body templates. For more information, please see [Identity Verification Overview](https://cloud.tencent.com/document/product/378/3629). If your account identity is individual, please log in to the console to apply for SMS body templates. For detailed directions, please see [Creating SMS Body Templates](https://cloud.tencent.com/document/product/382/36136#Template).
 func (c *Client) AddSmsTemplate(request *AddSmsTemplateRequest) (response *AddSmsTemplateResponse, err error) {
     if request == nil {
         request = NewAddSmsTemplateRequest()
@@ -133,7 +135,7 @@ func NewDeleteSmsSignResponse() (response *DeleteSmsSignResponse) {
     return
 }
 
-// This API is used to delete an SMS signature.
+// >⚠️ Note: individual users cannot use this API to delete SMS signatures. For more information, please see [Identity Verification Overview](https://cloud.tencent.com/document/product/378/3629). You can log in to the console to delete SMS signatures. For detailed directions, please see the notes on deleting SMS signatures in [SMS Signature Operations](https://cloud.tencent.com/document/product/382/36136#Sign).
 func (c *Client) DeleteSmsSign(request *DeleteSmsSignRequest) (response *DeleteSmsSignResponse, err error) {
     if request == nil {
         request = NewDeleteSmsSignRequest()
@@ -158,7 +160,7 @@ func NewDeleteSmsTemplateResponse() (response *DeleteSmsTemplateResponse) {
     return
 }
 
-// This API is used to delete an SMS template.
+// >⚠️ Note: individual users cannot use this API to delete SMS body templates. For more information, please see [Identity Verification Overview](https://cloud.tencent.com/document/product/378/3629). You can log in to the console to delete SMS body templates. For detailed directions, please see the notes on deleting SMS body templates in [SMS Body Template Operations](https://cloud.tencent.com/document/product/382/36136#Template).
 func (c *Client) DeleteSmsTemplate(request *DeleteSmsTemplateRequest) (response *DeleteSmsTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteSmsTemplateRequest()
@@ -183,7 +185,7 @@ func NewDescribeSmsSignListResponse() (response *DescribeSmsSignListResponse) {
     return
 }
 
-// > ⚠️ Note: Individually authenticated users do not support querying SMS signatures using the API, see Understanding [Basic Introduction to Real Name Authentication] (https://cloud.tencent.com/document/product/378/3629).
+// >⚠️ Note: individual users cannot use this API to query SMS signatures. For more information, please see [Identity Verification Overview](https://cloud.tencent.com/document/product/378/3629).
 func (c *Client) DescribeSmsSignList(request *DescribeSmsSignListRequest) (response *DescribeSmsSignListResponse, err error) {
     if request == nil {
         request = NewDescribeSmsSignListRequest()
@@ -208,7 +210,7 @@ func NewDescribeSmsTemplateListResponse() (response *DescribeSmsTemplateListResp
     return
 }
 
-// > ⚠️ Note: Individual authentication users do not support querying the SMS text template using the API, please refer to [Basic Introduction to Real Name Authentication] (https://cloud.tencent.com/document/product/378/3629).
+// >⚠️ Note: individual users cannot use this API to query SMS body templates. For more information, please see [Identity Verification Overview](https://cloud.tencent.com/document/product/378/3629).
 func (c *Client) DescribeSmsTemplateList(request *DescribeSmsTemplateListRequest) (response *DescribeSmsTemplateListResponse, err error) {
     if request == nil {
         request = NewDescribeSmsTemplateListRequest()
@@ -233,7 +235,9 @@ func NewModifySmsSignResponse() (response *ModifySmsSignResponse) {
     return
 }
 
-// This API is used to modify an SMS signature.
+// This API is used to modify an SMS signature. Please read the [Tencent Cloud SMS Signature Review Standards](https://cloud.tencent.com/document/product/382/39022) before making a modification.
+// >- ⚠️ Note: individual users cannot use this API to modify SMS signatures. For more information, please see [Identity Verification Overview](https://cloud.tencent.com/document/product/378/3629). If your account identity is individual, you can log in to the console to modify SMS signatures.
+// >- Modifications can be made only if the signature status is **pending review** or **rejected**. **Approved** signatures cannot be modified.
 func (c *Client) ModifySmsSign(request *ModifySmsSignRequest) (response *ModifySmsSignResponse, err error) {
     if request == nil {
         request = NewModifySmsSignRequest()
@@ -258,7 +262,9 @@ func NewModifySmsTemplateResponse() (response *ModifySmsTemplateResponse) {
     return
 }
 
-// This API is used to modify an SMS template.
+// This API is used to modify an SMS body template. Please read the [Tencent Cloud SMS Body Template Review Standards](https://cloud.tencent.com/document/product/382/39023) before making a modification.
+// >- ⚠️ Note: individual users cannot use this API to modify SMS body templates. For more information, please see [Identity Verification Overview](https://cloud.tencent.com/document/product/378/3629). If your account identity is individual, you can log in to the console to modify SMS body templates.
+// >- Modifications can be made only if the body template status is **pending review** or **rejected**. **Approved** body templates cannot be modified.
 func (c *Client) ModifySmsTemplate(request *ModifySmsTemplateRequest) (response *ModifySmsTemplateResponse, err error) {
     if request == nil {
         request = NewModifySmsTemplateRequest()

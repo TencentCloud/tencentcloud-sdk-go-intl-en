@@ -70,6 +70,159 @@ func (c *Client) AddDelayLiveStream(request *AddDelayLiveStreamRequest) (respons
     return
 }
 
+func NewAddLiveDomainRequest() (request *AddLiveDomainRequest) {
+    request = &AddLiveDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "AddLiveDomain")
+    return
+}
+
+func NewAddLiveDomainResponse() (response *AddLiveDomainResponse) {
+    response = &AddLiveDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to add a domain name. Only one domain name can be submitted at a time, and it must have an ICP filing.
+func (c *Client) AddLiveDomain(request *AddLiveDomainRequest) (response *AddLiveDomainResponse, err error) {
+    if request == nil {
+        request = NewAddLiveDomainRequest()
+    }
+    response = NewAddLiveDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAddLiveWatermarkRequest() (request *AddLiveWatermarkRequest) {
+    request = &AddLiveWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "AddLiveWatermark")
+    return
+}
+
+func NewAddLiveWatermarkResponse() (response *AddLiveWatermarkResponse) {
+    response = &AddLiveWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// After a watermark is added and a watermark ID is successfully returned, you need to call the [CreateLiveWatermarkRule](/document/product/267/32629) API and bind the watermark ID to the stream.
+func (c *Client) AddLiveWatermark(request *AddLiveWatermarkRequest) (response *AddLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewAddLiveWatermarkRequest()
+    }
+    response = NewAddLiveWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBindLiveDomainCertRequest() (request *BindLiveDomainCertRequest) {
+    request = &BindLiveDomainCertRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "BindLiveDomainCert")
+    return
+}
+
+func NewBindLiveDomainCertResponse() (response *BindLiveDomainCertResponse) {
+    response = &BindLiveDomainCertResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to bind a domain name certificate.
+// Note: you need to call the `CreateLiveCert` API first to add a certificate. After getting the certificate ID, call this API for binding.
+func (c *Client) BindLiveDomainCert(request *BindLiveDomainCertRequest) (response *BindLiveDomainCertResponse, err error) {
+    if request == nil {
+        request = NewBindLiveDomainCertRequest()
+    }
+    response = NewBindLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateLiveCallbackRuleRequest() (request *CreateLiveCallbackRuleRequest) {
+    request = &CreateLiveCallbackRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "CreateLiveCallbackRule")
+    return
+}
+
+func NewCreateLiveCallbackRuleResponse() (response *CreateLiveCallbackRuleResponse) {
+    response = &CreateLiveCallbackRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// To create a callback rule, you need to first call the [CreateLiveCallbackTemplate](/document/product/267/32637) API to create a callback template and bind the returned template ID to the domain name/path.
+// <br>Callback protocol-related document: [Event Message Notification](/document/product/267/32744).
+func (c *Client) CreateLiveCallbackRule(request *CreateLiveCallbackRuleRequest) (response *CreateLiveCallbackRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveCallbackRuleRequest()
+    }
+    response = NewCreateLiveCallbackRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateLiveCallbackTemplateRequest() (request *CreateLiveCallbackTemplateRequest) {
+    request = &CreateLiveCallbackTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "CreateLiveCallbackTemplate")
+    return
+}
+
+func NewCreateLiveCallbackTemplateResponse() (response *CreateLiveCallbackTemplateResponse) {
+    response = &CreateLiveCallbackTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// After a callback template is created and a template ID is successfully returned, you need to call the [CreateLiveCallbackRule](/document/product/267/32638) API and bind the template ID to the domain name/path.
+// <br>Callback protocol-related document: [Event Message Notification](/document/product/267/32744).
+func (c *Client) CreateLiveCallbackTemplate(request *CreateLiveCallbackTemplateRequest) (response *CreateLiveCallbackTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveCallbackTemplateRequest()
+    }
+    response = NewCreateLiveCallbackTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateLiveCertRequest() (request *CreateLiveCertRequest) {
+    request = &CreateLiveCertRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "CreateLiveCert")
+    return
+}
+
+func NewCreateLiveCertResponse() (response *CreateLiveCertResponse) {
+    response = &CreateLiveCertResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to add a certificate.
+func (c *Client) CreateLiveCert(request *CreateLiveCertRequest) (response *CreateLiveCertResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveCertRequest()
+    }
+    response = NewCreateLiveCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLiveRecordRequest() (request *CreateLiveRecordRequest) {
     request = &CreateLiveRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -98,7 +251,8 @@ func NewCreateLiveRecordResponse() (response *CreateLiveRecordResponse) {
 // 
 // - Precautions
 //   1. The API call timeout period should be set to more than 3 seconds; otherwise, retries and frequent calls may result in repeated recording tasks.
-//   2. Subject to the audio and video file formats (FLV/MP4/HLS), the video codec of H.264 and audio codec of ACC are supported.
+//   2. Subject to the audio and video file formats (FLV/MP4/HLS), the video codec of H.264 and audio codec of AAC are supported.
+//   3. In order to avoid malicious or non-subjective frequent API requests, the maximum number of tasks that can be created in scheduled recording mode is limited: up to 4,000 tasks can be created per day (excluding deleted ones), and up to 400 ones can run concurrently. If you need a higher upper limit, please submit a ticket for application.
 func (c *Client) CreateLiveRecord(request *CreateLiveRecordRequest) (response *CreateLiveRecordResponse, err error) {
     if request == nil {
         request = NewCreateLiveRecordRequest()
@@ -160,6 +314,58 @@ func (c *Client) CreateLiveRecordTemplate(request *CreateLiveRecordTemplateReque
     return
 }
 
+func NewCreateLiveSnapshotRuleRequest() (request *CreateLiveSnapshotRuleRequest) {
+    request = &CreateLiveSnapshotRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "CreateLiveSnapshotRule")
+    return
+}
+
+func NewCreateLiveSnapshotRuleResponse() (response *CreateLiveSnapshotRuleResponse) {
+    response = &CreateLiveSnapshotRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// To create a screencapturing rule, you need to first call the [CreateLiveSnapshotTemplate](/document/product/267/32624) API to create a screencapturing template and bind the returned template ID to the stream.
+// <br>Screencapturing-related document: [LVB Screencapturing](/document/product/267/32737).
+func (c *Client) CreateLiveSnapshotRule(request *CreateLiveSnapshotRuleRequest) (response *CreateLiveSnapshotRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveSnapshotRuleRequest()
+    }
+    response = NewCreateLiveSnapshotRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateLiveSnapshotTemplateRequest() (request *CreateLiveSnapshotTemplateRequest) {
+    request = &CreateLiveSnapshotTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "CreateLiveSnapshotTemplate")
+    return
+}
+
+func NewCreateLiveSnapshotTemplateResponse() (response *CreateLiveSnapshotTemplateResponse) {
+    response = &CreateLiveSnapshotTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// After a screencapturing template is created and a template ID is successfully returned, you need to call the [CreateLiveSnapshotRule](/document/product/267/32625) API and bind the template ID to the stream.
+// <br>Screencapturing-related document: [LVB Screencapturing](/document/product/267/32737).
+func (c *Client) CreateLiveSnapshotTemplate(request *CreateLiveSnapshotTemplateRequest) (response *CreateLiveSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveSnapshotTemplateRequest()
+    }
+    response = NewCreateLiveSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLiveTranscodeRuleRequest() (request *CreateLiveTranscodeRuleRequest) {
     request = &CreateLiveTranscodeRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -208,6 +414,131 @@ func (c *Client) CreateLiveTranscodeTemplate(request *CreateLiveTranscodeTemplat
         request = NewCreateLiveTranscodeTemplateRequest()
     }
     response = NewCreateLiveTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateLiveWatermarkRuleRequest() (request *CreateLiveWatermarkRuleRequest) {
+    request = &CreateLiveWatermarkRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "CreateLiveWatermarkRule")
+    return
+}
+
+func NewCreateLiveWatermarkRuleResponse() (response *CreateLiveWatermarkRuleResponse) {
+    response = &CreateLiveWatermarkRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// To create a watermarking rule, you need to first call the [AddLiveWatermark](/document/product/267/30154) API to add a watermark and bind the returned watermark ID to the stream.
+func (c *Client) CreateLiveWatermarkRule(request *CreateLiveWatermarkRuleRequest) (response *CreateLiveWatermarkRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveWatermarkRuleRequest()
+    }
+    response = NewCreateLiveWatermarkRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLiveCallbackRuleRequest() (request *DeleteLiveCallbackRuleRequest) {
+    request = &DeleteLiveCallbackRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DeleteLiveCallbackRule")
+    return
+}
+
+func NewDeleteLiveCallbackRuleResponse() (response *DeleteLiveCallbackRuleResponse) {
+    response = &DeleteLiveCallbackRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a callback rule.
+func (c *Client) DeleteLiveCallbackRule(request *DeleteLiveCallbackRuleRequest) (response *DeleteLiveCallbackRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveCallbackRuleRequest()
+    }
+    response = NewDeleteLiveCallbackRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLiveCallbackTemplateRequest() (request *DeleteLiveCallbackTemplateRequest) {
+    request = &DeleteLiveCallbackTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DeleteLiveCallbackTemplate")
+    return
+}
+
+func NewDeleteLiveCallbackTemplateResponse() (response *DeleteLiveCallbackTemplateResponse) {
+    response = &DeleteLiveCallbackTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API deletes a callback template.
+func (c *Client) DeleteLiveCallbackTemplate(request *DeleteLiveCallbackTemplateRequest) (response *DeleteLiveCallbackTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveCallbackTemplateRequest()
+    }
+    response = NewDeleteLiveCallbackTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLiveCertRequest() (request *DeleteLiveCertRequest) {
+    request = &DeleteLiveCertRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DeleteLiveCert")
+    return
+}
+
+func NewDeleteLiveCertResponse() (response *DeleteLiveCertResponse) {
+    response = &DeleteLiveCertResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a certificate corresponding to the domain name.
+func (c *Client) DeleteLiveCert(request *DeleteLiveCertRequest) (response *DeleteLiveCertResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveCertRequest()
+    }
+    response = NewDeleteLiveCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLiveDomainRequest() (request *DeleteLiveDomainRequest) {
+    request = &DeleteLiveDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DeleteLiveDomain")
+    return
+}
+
+func NewDeleteLiveDomainResponse() (response *DeleteLiveDomainResponse) {
+    response = &DeleteLiveDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete an added LVB domain name.
+func (c *Client) DeleteLiveDomain(request *DeleteLiveDomainRequest) (response *DeleteLiveDomainResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveDomainRequest()
+    }
+    response = NewDeleteLiveDomainResponse()
     err = c.Send(request, response)
     return
 }
@@ -287,6 +618,56 @@ func (c *Client) DeleteLiveRecordTemplate(request *DeleteLiveRecordTemplateReque
     return
 }
 
+func NewDeleteLiveSnapshotRuleRequest() (request *DeleteLiveSnapshotRuleRequest) {
+    request = &DeleteLiveSnapshotRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DeleteLiveSnapshotRule")
+    return
+}
+
+func NewDeleteLiveSnapshotRuleResponse() (response *DeleteLiveSnapshotRuleResponse) {
+    response = &DeleteLiveSnapshotRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a screencapturing rule.
+func (c *Client) DeleteLiveSnapshotRule(request *DeleteLiveSnapshotRuleRequest) (response *DeleteLiveSnapshotRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveSnapshotRuleRequest()
+    }
+    response = NewDeleteLiveSnapshotRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLiveSnapshotTemplateRequest() (request *DeleteLiveSnapshotTemplateRequest) {
+    request = &DeleteLiveSnapshotTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DeleteLiveSnapshotTemplate")
+    return
+}
+
+func NewDeleteLiveSnapshotTemplateResponse() (response *DeleteLiveSnapshotTemplateResponse) {
+    response = &DeleteLiveSnapshotTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a screencapturing template.
+func (c *Client) DeleteLiveSnapshotTemplate(request *DeleteLiveSnapshotTemplateRequest) (response *DeleteLiveSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveSnapshotTemplateRequest()
+    }
+    response = NewDeleteLiveSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLiveTranscodeRuleRequest() (request *DeleteLiveTranscodeRuleRequest) {
     request = &DeleteLiveTranscodeRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -337,6 +718,181 @@ func (c *Client) DeleteLiveTranscodeTemplate(request *DeleteLiveTranscodeTemplat
     return
 }
 
+func NewDeleteLiveWatermarkRequest() (request *DeleteLiveWatermarkRequest) {
+    request = &DeleteLiveWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DeleteLiveWatermark")
+    return
+}
+
+func NewDeleteLiveWatermarkResponse() (response *DeleteLiveWatermarkResponse) {
+    response = &DeleteLiveWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a watermark.
+func (c *Client) DeleteLiveWatermark(request *DeleteLiveWatermarkRequest) (response *DeleteLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveWatermarkRequest()
+    }
+    response = NewDeleteLiveWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLiveWatermarkRuleRequest() (request *DeleteLiveWatermarkRuleRequest) {
+    request = &DeleteLiveWatermarkRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DeleteLiveWatermarkRule")
+    return
+}
+
+func NewDeleteLiveWatermarkRuleResponse() (response *DeleteLiveWatermarkRuleResponse) {
+    response = &DeleteLiveWatermarkRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a watermarking rule.
+func (c *Client) DeleteLiveWatermarkRule(request *DeleteLiveWatermarkRuleRequest) (response *DeleteLiveWatermarkRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveWatermarkRuleRequest()
+    }
+    response = NewDeleteLiveWatermarkRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveCallbackRulesRequest() (request *DescribeLiveCallbackRulesRequest) {
+    request = &DescribeLiveCallbackRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveCallbackRules")
+    return
+}
+
+func NewDescribeLiveCallbackRulesResponse() (response *DescribeLiveCallbackRulesResponse) {
+    response = &DescribeLiveCallbackRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the callback rule list.
+func (c *Client) DescribeLiveCallbackRules(request *DescribeLiveCallbackRulesRequest) (response *DescribeLiveCallbackRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveCallbackRulesRequest()
+    }
+    response = NewDescribeLiveCallbackRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveCallbackTemplateRequest() (request *DescribeLiveCallbackTemplateRequest) {
+    request = &DescribeLiveCallbackTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveCallbackTemplate")
+    return
+}
+
+func NewDescribeLiveCallbackTemplateResponse() (response *DescribeLiveCallbackTemplateResponse) {
+    response = &DescribeLiveCallbackTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get a single callback template.
+func (c *Client) DescribeLiveCallbackTemplate(request *DescribeLiveCallbackTemplateRequest) (response *DescribeLiveCallbackTemplateResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveCallbackTemplateRequest()
+    }
+    response = NewDescribeLiveCallbackTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveCallbackTemplatesRequest() (request *DescribeLiveCallbackTemplatesRequest) {
+    request = &DescribeLiveCallbackTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveCallbackTemplates")
+    return
+}
+
+func NewDescribeLiveCallbackTemplatesResponse() (response *DescribeLiveCallbackTemplatesResponse) {
+    response = &DescribeLiveCallbackTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the callback template list.
+func (c *Client) DescribeLiveCallbackTemplates(request *DescribeLiveCallbackTemplatesRequest) (response *DescribeLiveCallbackTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveCallbackTemplatesRequest()
+    }
+    response = NewDescribeLiveCallbackTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveCertRequest() (request *DescribeLiveCertRequest) {
+    request = &DescribeLiveCertRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveCert")
+    return
+}
+
+func NewDescribeLiveCertResponse() (response *DescribeLiveCertResponse) {
+    response = &DescribeLiveCertResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get certificate information.
+func (c *Client) DescribeLiveCert(request *DescribeLiveCertRequest) (response *DescribeLiveCertResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveCertRequest()
+    }
+    response = NewDescribeLiveCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveCertsRequest() (request *DescribeLiveCertsRequest) {
+    request = &DescribeLiveCertsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveCerts")
+    return
+}
+
+func NewDescribeLiveCertsResponse() (response *DescribeLiveCertsResponse) {
+    response = &DescribeLiveCertsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the certificate information list.
+func (c *Client) DescribeLiveCerts(request *DescribeLiveCertsRequest) (response *DescribeLiveCertsResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveCertsRequest()
+    }
+    response = NewDescribeLiveCertsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveDelayInfoListRequest() (request *DescribeLiveDelayInfoListRequest) {
     request = &DescribeLiveDelayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -358,6 +914,81 @@ func (c *Client) DescribeLiveDelayInfoList(request *DescribeLiveDelayInfoListReq
         request = NewDescribeLiveDelayInfoListRequest()
     }
     response = NewDescribeLiveDelayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveDomainRequest() (request *DescribeLiveDomainRequest) {
+    request = &DescribeLiveDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomain")
+    return
+}
+
+func NewDescribeLiveDomainResponse() (response *DescribeLiveDomainResponse) {
+    response = &DescribeLiveDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the LVB domain name information.
+func (c *Client) DescribeLiveDomain(request *DescribeLiveDomainRequest) (response *DescribeLiveDomainResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainRequest()
+    }
+    response = NewDescribeLiveDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveDomainCertRequest() (request *DescribeLiveDomainCertRequest) {
+    request = &DescribeLiveDomainCertRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomainCert")
+    return
+}
+
+func NewDescribeLiveDomainCertResponse() (response *DescribeLiveDomainCertResponse) {
+    response = &DescribeLiveDomainCertResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the domain name certificate information.
+func (c *Client) DescribeLiveDomainCert(request *DescribeLiveDomainCertRequest) (response *DescribeLiveDomainCertResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainCertRequest()
+    }
+    response = NewDescribeLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveDomainsRequest() (request *DescribeLiveDomainsRequest) {
+    request = &DescribeLiveDomainsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomains")
+    return
+}
+
+func NewDescribeLiveDomainsResponse() (response *DescribeLiveDomainsResponse) {
+    response = &DescribeLiveDomainsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query domain names by domain name status and type.
+func (c *Client) DescribeLiveDomains(request *DescribeLiveDomainsRequest) (response *DescribeLiveDomainsResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainsRequest()
+    }
+    response = NewDescribeLiveDomainsResponse()
     err = c.Send(request, response)
     return
 }
@@ -508,6 +1139,81 @@ func (c *Client) DescribeLiveRecordTemplates(request *DescribeLiveRecordTemplate
         request = NewDescribeLiveRecordTemplatesRequest()
     }
     response = NewDescribeLiveRecordTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveSnapshotRulesRequest() (request *DescribeLiveSnapshotRulesRequest) {
+    request = &DescribeLiveSnapshotRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveSnapshotRules")
+    return
+}
+
+func NewDescribeLiveSnapshotRulesResponse() (response *DescribeLiveSnapshotRulesResponse) {
+    response = &DescribeLiveSnapshotRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the screencapturing rule list.
+func (c *Client) DescribeLiveSnapshotRules(request *DescribeLiveSnapshotRulesRequest) (response *DescribeLiveSnapshotRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveSnapshotRulesRequest()
+    }
+    response = NewDescribeLiveSnapshotRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveSnapshotTemplateRequest() (request *DescribeLiveSnapshotTemplateRequest) {
+    request = &DescribeLiveSnapshotTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveSnapshotTemplate")
+    return
+}
+
+func NewDescribeLiveSnapshotTemplateResponse() (response *DescribeLiveSnapshotTemplateResponse) {
+    response = &DescribeLiveSnapshotTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get a single screencapturing template.
+func (c *Client) DescribeLiveSnapshotTemplate(request *DescribeLiveSnapshotTemplateRequest) (response *DescribeLiveSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveSnapshotTemplateRequest()
+    }
+    response = NewDescribeLiveSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveSnapshotTemplatesRequest() (request *DescribeLiveSnapshotTemplatesRequest) {
+    request = &DescribeLiveSnapshotTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveSnapshotTemplates")
+    return
+}
+
+func NewDescribeLiveSnapshotTemplatesResponse() (response *DescribeLiveSnapshotTemplatesResponse) {
+    response = &DescribeLiveSnapshotTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the screencapturing template list.
+func (c *Client) DescribeLiveSnapshotTemplates(request *DescribeLiveSnapshotTemplatesRequest) (response *DescribeLiveSnapshotTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveSnapshotTemplatesRequest()
+    }
+    response = NewDescribeLiveSnapshotTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -690,6 +1396,81 @@ func (c *Client) DescribeLiveTranscodeTemplates(request *DescribeLiveTranscodeTe
     return
 }
 
+func NewDescribeLiveWatermarkRequest() (request *DescribeLiveWatermarkRequest) {
+    request = &DescribeLiveWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveWatermark")
+    return
+}
+
+func NewDescribeLiveWatermarkResponse() (response *DescribeLiveWatermarkResponse) {
+    response = &DescribeLiveWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the information of a single watermark.
+func (c *Client) DescribeLiveWatermark(request *DescribeLiveWatermarkRequest) (response *DescribeLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveWatermarkRequest()
+    }
+    response = NewDescribeLiveWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveWatermarkRulesRequest() (request *DescribeLiveWatermarkRulesRequest) {
+    request = &DescribeLiveWatermarkRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveWatermarkRules")
+    return
+}
+
+func NewDescribeLiveWatermarkRulesResponse() (response *DescribeLiveWatermarkRulesResponse) {
+    response = &DescribeLiveWatermarkRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the watermarking rule list.
+func (c *Client) DescribeLiveWatermarkRules(request *DescribeLiveWatermarkRulesRequest) (response *DescribeLiveWatermarkRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveWatermarkRulesRequest()
+    }
+    response = NewDescribeLiveWatermarkRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveWatermarksRequest() (request *DescribeLiveWatermarksRequest) {
+    request = &DescribeLiveWatermarksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveWatermarks")
+    return
+}
+
+func NewDescribeLiveWatermarksResponse() (response *DescribeLiveWatermarksResponse) {
+    response = &DescribeLiveWatermarksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the watermark list.
+func (c *Client) DescribeLiveWatermarks(request *DescribeLiveWatermarksRequest) (response *DescribeLiveWatermarksResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveWatermarksRequest()
+    }
+    response = NewDescribeLiveWatermarksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDropLiveStreamRequest() (request *DropLiveStreamRequest) {
     request = &DropLiveStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -711,6 +1492,56 @@ func (c *Client) DropLiveStream(request *DropLiveStreamRequest) (response *DropL
         request = NewDropLiveStreamRequest()
     }
     response = NewDropLiveStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableLiveDomainRequest() (request *EnableLiveDomainRequest) {
+    request = &EnableLiveDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "EnableLiveDomain")
+    return
+}
+
+func NewEnableLiveDomainResponse() (response *EnableLiveDomainResponse) {
+    response = &EnableLiveDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to enable a disabled LVB domain name.
+func (c *Client) EnableLiveDomain(request *EnableLiveDomainRequest) (response *EnableLiveDomainResponse, err error) {
+    if request == nil {
+        request = NewEnableLiveDomainRequest()
+    }
+    response = NewEnableLiveDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewForbidLiveDomainRequest() (request *ForbidLiveDomainRequest) {
+    request = &ForbidLiveDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "ForbidLiveDomain")
+    return
+}
+
+func NewForbidLiveDomainResponse() (response *ForbidLiveDomainResponse) {
+    response = &ForbidLiveDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to disable an LVB domain name.
+func (c *Client) ForbidLiveDomain(request *ForbidLiveDomainRequest) (response *ForbidLiveDomainResponse, err error) {
+    if request == nil {
+        request = NewForbidLiveDomainRequest()
+    }
+    response = NewForbidLiveDomainResponse()
     err = c.Send(request, response)
     return
 }
@@ -740,6 +1571,81 @@ func (c *Client) ForbidLiveStream(request *ForbidLiveStreamRequest) (response *F
     return
 }
 
+func NewModifyLiveCallbackTemplateRequest() (request *ModifyLiveCallbackTemplateRequest) {
+    request = &ModifyLiveCallbackTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "ModifyLiveCallbackTemplate")
+    return
+}
+
+func NewModifyLiveCallbackTemplateResponse() (response *ModifyLiveCallbackTemplateResponse) {
+    response = &ModifyLiveCallbackTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a callback template.
+func (c *Client) ModifyLiveCallbackTemplate(request *ModifyLiveCallbackTemplateRequest) (response *ModifyLiveCallbackTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveCallbackTemplateRequest()
+    }
+    response = NewModifyLiveCallbackTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLiveCertRequest() (request *ModifyLiveCertRequest) {
+    request = &ModifyLiveCertRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "ModifyLiveCert")
+    return
+}
+
+func NewModifyLiveCertResponse() (response *ModifyLiveCertResponse) {
+    response = &ModifyLiveCertResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a certificate.
+func (c *Client) ModifyLiveCert(request *ModifyLiveCertRequest) (response *ModifyLiveCertResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveCertRequest()
+    }
+    response = NewModifyLiveCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLiveDomainCertRequest() (request *ModifyLiveDomainCertRequest) {
+    request = &ModifyLiveDomainCertRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "ModifyLiveDomainCert")
+    return
+}
+
+func NewModifyLiveDomainCertResponse() (response *ModifyLiveDomainCertResponse) {
+    response = &ModifyLiveDomainCertResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the domain name and certificate binding information.
+func (c *Client) ModifyLiveDomainCert(request *ModifyLiveDomainCertRequest) (response *ModifyLiveDomainCertResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveDomainCertRequest()
+    }
+    response = NewModifyLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyLivePlayAuthKeyRequest() (request *ModifyLivePlayAuthKeyRequest) {
     request = &ModifyLivePlayAuthKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -761,6 +1667,31 @@ func (c *Client) ModifyLivePlayAuthKey(request *ModifyLivePlayAuthKeyRequest) (r
         request = NewModifyLivePlayAuthKeyRequest()
     }
     response = NewModifyLivePlayAuthKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLivePlayDomainRequest() (request *ModifyLivePlayDomainRequest) {
+    request = &ModifyLivePlayDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "ModifyLivePlayDomain")
+    return
+}
+
+func NewModifyLivePlayDomainResponse() (response *ModifyLivePlayDomainResponse) {
+    response = &ModifyLivePlayDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a playback domain name.
+func (c *Client) ModifyLivePlayDomain(request *ModifyLivePlayDomainRequest) (response *ModifyLivePlayDomainResponse, err error) {
+    if request == nil {
+        request = NewModifyLivePlayDomainRequest()
+    }
+    response = NewModifyLivePlayDomainResponse()
     err = c.Send(request, response)
     return
 }
@@ -811,6 +1742,31 @@ func (c *Client) ModifyLiveRecordTemplate(request *ModifyLiveRecordTemplateReque
         request = NewModifyLiveRecordTemplateRequest()
     }
     response = NewModifyLiveRecordTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLiveSnapshotTemplateRequest() (request *ModifyLiveSnapshotTemplateRequest) {
+    request = &ModifyLiveSnapshotTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "ModifyLiveSnapshotTemplate")
+    return
+}
+
+func NewModifyLiveSnapshotTemplateResponse() (response *ModifyLiveSnapshotTemplateResponse) {
+    response = &ModifyLiveSnapshotTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the screencapturing template configuration.
+func (c *Client) ModifyLiveSnapshotTemplate(request *ModifyLiveSnapshotTemplateRequest) (response *ModifyLiveSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveSnapshotTemplateRequest()
+    }
+    response = NewModifyLiveSnapshotTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -911,6 +1867,56 @@ func (c *Client) StopLiveRecord(request *StopLiveRecordRequest) (response *StopL
         request = NewStopLiveRecordRequest()
     }
     response = NewStopLiveRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnBindLiveDomainCertRequest() (request *UnBindLiveDomainCertRequest) {
+    request = &UnBindLiveDomainCertRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "UnBindLiveDomainCert")
+    return
+}
+
+func NewUnBindLiveDomainCertResponse() (response *UnBindLiveDomainCertResponse) {
+    response = &UnBindLiveDomainCertResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to unbind a domain name certificate.
+func (c *Client) UnBindLiveDomainCert(request *UnBindLiveDomainCertRequest) (response *UnBindLiveDomainCertResponse, err error) {
+    if request == nil {
+        request = NewUnBindLiveDomainCertRequest()
+    }
+    response = NewUnBindLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateLiveWatermarkRequest() (request *UpdateLiveWatermarkRequest) {
+    request = &UpdateLiveWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "UpdateLiveWatermark")
+    return
+}
+
+func NewUpdateLiveWatermarkResponse() (response *UpdateLiveWatermarkResponse) {
+    response = &UpdateLiveWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to update a watermark.
+func (c *Client) UpdateLiveWatermark(request *UpdateLiveWatermarkRequest) (response *UpdateLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewUpdateLiveWatermarkRequest()
+    }
+    response = NewUpdateLiveWatermarkResponse()
     err = c.Send(request, response)
     return
 }

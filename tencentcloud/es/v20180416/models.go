@@ -35,7 +35,7 @@ type CreateInstanceRequest struct {
 	// Availability Zone
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Instance version ("5.6.4" or "6.4.3")
+	// Instance version ("5.6.4", "6.4.3", "6.8.2", or "7.5.1")
 	EsVersion *string `json:"EsVersion,omitempty" name:"EsVersion"`
 
 	// VPC ID

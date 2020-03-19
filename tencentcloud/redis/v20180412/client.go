@@ -933,7 +933,7 @@ func NewModifyInstanceResponse() (response *ModifyInstanceResponse) {
     return
 }
 
-// This API is used to modify instance information (renaming an instance is supported currently).
+// This API is used to modify instance information.
 func (c *Client) ModifyInstance(request *ModifyInstanceRequest) (response *ModifyInstanceResponse, err error) {
     if request == nil {
         request = NewModifyInstanceRequest()
