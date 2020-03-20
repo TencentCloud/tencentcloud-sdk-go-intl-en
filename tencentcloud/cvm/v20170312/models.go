@@ -133,7 +133,7 @@ type AssociateSecurityGroupsRequest struct {
 	// ID of the security group to be associated, such as `sg-efil73jd`. Only one security group can be associated.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 
-	// ID(s) of the instance(s) to be associated，such as `ins-lesecurk`. You can specify multiple instances.
+	// ID(s) of the instance(s) to be associated, such as `ins-lesecurk`. You can specify multiple instances.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
@@ -1290,7 +1290,7 @@ type DisassociateSecurityGroupsRequest struct {
 	// ID of the security group to be disassociated, such as `sg-efil73jd`. Only one security group can be disassociated.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 
-	// ID(s) of the instance(s) to be disassociated，such as `ins-lesecurk`. You can specify multiple instances.
+	// ID(s) of the instance(s) to be disassociated, such as `ins-lesecurk`. You can specify multiple instances.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
