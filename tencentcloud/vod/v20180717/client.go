@@ -165,7 +165,7 @@ func NewCreateAIAnalysisTemplateResponse() (response *CreateAIAnalysisTemplateRe
     return
 }
 
-// This API is used to create a custom video content analysis template. Up to 50 ones can be created.
+// This API is used to create a custom video content analysis template. Up to 50 templates can be created.
 func (c *Client) CreateAIAnalysisTemplate(request *CreateAIAnalysisTemplateRequest) (response *CreateAIAnalysisTemplateResponse, err error) {
     if request == nil {
         request = NewCreateAIAnalysisTemplateRequest()
@@ -196,6 +196,34 @@ func (c *Client) CreateAnimatedGraphicsTemplate(request *CreateAnimatedGraphicsT
         request = NewCreateAnimatedGraphicsTemplateRequest()
     }
     response = NewCreateAnimatedGraphicsTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateClassRequest() (request *CreateClassRequest) {
+    request = &CreateClassRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "CreateClass")
+    return
+}
+
+func NewCreateClassResponse() (response *CreateClassResponse) {
+    response = &CreateClassResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// * This API is used to categorize media assets for management;
+// * It does not affect the categories of existing media assets. If you want to modify the category of a media asset, call the [ModifyMediaInfo](/document/product/266/31762) API.
+// * There can be up to 4 levels of categories.
+// * One category can have up to 500 subcategories under it.
+func (c *Client) CreateClass(request *CreateClassRequest) (response *CreateClassResponse, err error) {
+    if request == nil {
+        request = NewCreateClassRequest()
+    }
+    response = NewCreateClassResponse()
     err = c.Send(request, response)
     return
 }
@@ -240,7 +268,7 @@ func NewCreateProcedureTemplateResponse() (response *CreateProcedureTemplateResp
     return
 }
 
-// This API is used to create a custom task flow template. Up to 50 ones can be created.
+// This API is used to create a custom task flow template. Up to 50 templates can be created.
 func (c *Client) CreateProcedureTemplate(request *CreateProcedureTemplateRequest) (response *CreateProcedureTemplateResponse, err error) {
     if request == nil {
         request = NewCreateProcedureTemplateRequest()
@@ -315,7 +343,7 @@ func NewCreateTranscodeTemplateResponse() (response *CreateTranscodeTemplateResp
     return
 }
 
-// This API is used to create a custom transcoding template. Up to 100 ones can be created.
+// This API is used to create a custom transcoding template. Up to 100 templates can be created.
 func (c *Client) CreateTranscodeTemplate(request *CreateTranscodeTemplateRequest) (response *CreateTranscodeTemplateResponse, err error) {
     if request == nil {
         request = NewCreateTranscodeTemplateRequest()
@@ -340,7 +368,7 @@ func NewCreateWatermarkTemplateResponse() (response *CreateWatermarkTemplateResp
     return
 }
 
-// This API is used to create a custom watermarking template. Up to 1,000 ones can be created.
+// This API is used to create a custom watermarking template. Up to 1,000 templates can be created.
 func (c *Client) CreateWatermarkTemplate(request *CreateWatermarkTemplateRequest) (response *CreateWatermarkTemplateResponse, err error) {
     if request == nil {
         request = NewCreateWatermarkTemplateRequest()
@@ -791,6 +819,33 @@ func (c *Client) DescribeMediaInfos(request *DescribeMediaInfosRequest) (respons
     return
 }
 
+func NewDescribeMediaProcessUsageDataRequest() (request *DescribeMediaProcessUsageDataRequest) {
+    request = &DescribeMediaProcessUsageDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeMediaProcessUsageData")
+    return
+}
+
+func NewDescribeMediaProcessUsageDataResponse() (response *DescribeMediaProcessUsageDataResponse) {
+    response = &DescribeMediaProcessUsageDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the information of video processing usage within the specified time range.
+//    1. Statistics on video processing for the last 365 days can be queried.
+//    2. The query time range cannot be more than 90 days.
+func (c *Client) DescribeMediaProcessUsageData(request *DescribeMediaProcessUsageDataRequest) (response *DescribeMediaProcessUsageDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeMediaProcessUsageDataRequest()
+    }
+    response = NewDescribeMediaProcessUsageDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProcedureTemplatesRequest() (request *DescribeProcedureTemplatesRequest) {
     request = &DescribeProcedureTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -894,6 +949,60 @@ func (c *Client) DescribeSnapshotByTimeOffsetTemplates(request *DescribeSnapshot
     return
 }
 
+func NewDescribeStorageDataRequest() (request *DescribeStorageDataRequest) {
+    request = &DescribeStorageDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeStorageData")
+    return
+}
+
+func NewDescribeStorageDataResponse() (response *DescribeStorageDataResponse) {
+    response = &DescribeStorageDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the storage capacity usage and number of files.
+func (c *Client) DescribeStorageData(request *DescribeStorageDataRequest) (response *DescribeStorageDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeStorageDataRequest()
+    }
+    response = NewDescribeStorageDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStorageDetailsRequest() (request *DescribeStorageDetailsRequest) {
+    request = &DescribeStorageDetailsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeStorageDetails")
+    return
+}
+
+func NewDescribeStorageDetailsResponse() (response *DescribeStorageDetailsResponse) {
+    response = &DescribeStorageDetailsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the used VOD storage capacity in bytes within the specified time range.
+//    1. Only storage capacity usage data for the last 365 days can be queried.
+//    2. The query time range cannot be more than 90 days;
+//    3. The query time range at the minute granularity cannot be more than 5 days;
+//    4. The query time range at the hour granularity cannot be more than 10 days.
+func (c *Client) DescribeStorageDetails(request *DescribeStorageDetailsRequest) (response *DescribeStorageDetailsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStorageDetailsRequest()
+    }
+    response = NewDescribeStorageDetailsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSubAppIdsRequest() (request *DescribeSubAppIdsRequest) {
     request = &DescribeSubAppIdsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -909,7 +1018,7 @@ func NewDescribeSubAppIdsResponse() (response *DescribeSubAppIdsResponse) {
     return
 }
 
-// This API is used to get the list of subapplications to which the current account has permissions, including primary applications. If the subapplication feature has not been enabled, this API will return 
+// This API is used to get the list of subapplications to which the current account has permissions, including primary applications. If the subapplication feature has not been enabled, this API will return. 
 //  `FailedOperation`.
 func (c *Client) DescribeSubAppIds(request *DescribeSubAppIdsRequest) (response *DescribeSubAppIdsResponse, err error) {
     if request == nil {
@@ -1135,7 +1244,7 @@ func NewLiveRealTimeClipResponse() (response *LiveRealTimeClipResponse) {
 // ### Persistent clipping
 // In persistent clipping mode, the clipped video is saved as an independent video file with a `FileId`, and its lifecycle is not subject to the source LVB recording video (even if the source video is deleted, the clipped video will not be affected in any way). It can be further processed (transcoded, published on WeChat, etc.).
 // 
-// An example is as follows: for a complete football match, the source LVB recording video may be up to 2 hours in length. You want to store this video for only 2 months for the purpose of cost savings. However, you want to specify a longer retention period for the "highlights" video created by live clipping, and perform additional VOD operations on it such as transcoding and release on WeChat. In this case, you need to choose the persistent clipping mode of live clipping.
+// An example is as follows: for a complete football match, the source LVB recording video may be up to 2 hours in length. You want to store this video for only 2 months for the purpose of cost savings. However, you want to specify a longer retention period for the "highlights" video created by live clipping and perform additional VOD operations on it such as transcoding and release on WeChat. In this case, you need to choose the persistent clipping mode of live clipping.
 // 
 // The advantage of persistent clipping is that the clipped video has a lifecycle independent of the source recording video and can be managed independently and stored persistently.
 // 
@@ -1658,7 +1767,7 @@ func NewWeChatMiniProgramPublishResponse() (response *WeChatMiniProgramPublishRe
     return
 }
 
-// This API is used to publish a VOD video in WeChat Mini Program for playback in the WeChat Mini Program player.
+// This API is used to publish a VOD video on WeChat Mini Program for playback in the WeChat Mini Program player.
 func (c *Client) WeChatMiniProgramPublish(request *WeChatMiniProgramPublishRequest) (response *WeChatMiniProgramPublishResponse, err error) {
     if request == nil {
         request = NewWeChatMiniProgramPublishRequest()

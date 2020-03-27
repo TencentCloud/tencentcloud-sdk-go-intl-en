@@ -169,6 +169,13 @@ type AdaptiveDynamicStreamingTemplate struct {
 	// List of audio track templates.
 	AudioTrackTemplateSet []*AudioTrackTemplateInfo `json:"AudioTrackTemplateSet,omitempty" name:"AudioTrackTemplateSet" list`
 
+	// Adaptive bitstream format. Valid value:
+	// <li>HLS.</li>
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Parameter information of input stream for adaptive bitrate streaming. Up to 10 streams can be input.
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+
 	// Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
 	// <li>0: no,</li>
 	// <li>1: yes.</li>
@@ -184,6 +191,20 @@ type AdaptiveDynamicStreamingTemplate struct {
 
 	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type AdaptiveStreamTemplate struct {
+
+	// Video parameter information.
+	Video *VideoTemplateInfo `json:"Video,omitempty" name:"Video"`
+
+	// Audio parameter information.
+	Audio *AudioTemplateInfo `json:"Audio,omitempty" name:"Audio"`
+
+	// Whether to remove audio stream. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	RemoveAudio *uint64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
 }
 
 type AiAnalysisResult struct {
@@ -933,18 +954,15 @@ type AiReviewPoliticalAsrTaskInput struct {
 type AiReviewPoliticalAsrTaskOutput struct {
 
 	// Score of ASR-detected politically sensitive information in speech between 0 and 100.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Suggestion for ASR-detected politically sensitive information in speech. Valid values:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain ASR-detected politically sensitive information in speech.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
@@ -966,7 +984,6 @@ type AiReviewPoliticalOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain OCR-detected politically sensitive information in text.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
@@ -1009,18 +1026,15 @@ type AiReviewPornAsrTaskInput struct {
 type AiReviewPornAsrTaskOutput struct {
 
 	// Score of ASR-detected porn information in speech between 0 and 100.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Suggestion for ASR-detected porn information in speech. Valid values:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the ASR-detected porn information in speech.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
@@ -1033,18 +1047,15 @@ type AiReviewPornOcrTaskInput struct {
 type AiReviewPornOcrTaskOutput struct {
 
 	// Score of OCR-detected porn information in text between 0 and 100.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Suggestion for OCR-detected porn information in text. Valid values:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the OCR-detected porn information in text.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
@@ -1098,7 +1109,6 @@ type AiReviewProhibitedAsrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the ASR-detected prohibited information in speech.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
@@ -1120,7 +1130,6 @@ type AiReviewProhibitedOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the OCR-detected prohibited information in text.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
@@ -1358,6 +1367,9 @@ type AiReviewTaskTerrorismResult struct {
 }
 
 type AiReviewTerrorismOcrTaskInput struct {
+
+	// Terrorism information detection template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewTerrorismOcrTaskOutput struct {
@@ -1372,7 +1384,6 @@ type AiReviewTerrorismOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain OCR-detected terrorism information in text.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
@@ -1526,7 +1537,7 @@ type ApplyUploadResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Bucket, which is used as the `bucket_name` in the URL of the upload API.
+		// Storage bucket, which is used as the `bucket_name` in the URL of the upload API.
 		StorageBucket *string `json:"StorageBucket,omitempty" name:"StorageBucket"`
 
 		// Storage region, which is used as the `Region` in the `Host` of the upload API.
@@ -1665,7 +1676,7 @@ type AudioTrackItem struct {
 	// Source of media file for audio material, which can be an ID of a VOD file or URL of another file.
 	SourceMedia *string `json:"SourceMedia,omitempty" name:"SourceMedia"`
 
-	// Starting time of audio segment in material file in seconds. Default value: 0, which means to start capturing from the beginning position of the material.
+	// Start time of audio segment in material file in seconds. Default value: 0, which means to start capturing from the beginning position of the material.
 	SourceMediaStartTime *float64 `json:"SourceMediaStartTime,omitempty" name:"SourceMediaStartTime"`
 
 	// Audio segment duration in seconds. By default, the length of the material will be used, which means that the entire material will be captured.
@@ -2131,7 +2142,8 @@ type ContentReviewTemplateItem struct {
 	// Control parameter of prohibited information detection. Prohibited information includes:
 	// <li>Abusive;</li>
 	// <li>Drug-related.</li>
-	// Note: this parameter is not supported yet
+	// Note: this parameter is not supported yet.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProhibitedConfigure *ProhibitedConfigureInfo `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
 	// Custom content audit control parameter.
@@ -2324,6 +2336,49 @@ func (r *CreateAnimatedGraphicsTemplateResponse) ToJsonString() string {
 }
 
 func (r *CreateAnimatedGraphicsTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateClassRequest struct {
+	*tchttp.BaseRequest
+
+	// Parent category ID. For a first-level category, enter `-1`.
+	ParentId *int64 `json:"ParentId,omitempty" name:"ParentId"`
+
+	// Category name. Length limit: 1–64 characters.
+	ClassName *string `json:"ClassName,omitempty" name:"ClassName"`
+
+	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *CreateClassRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateClassRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateClassResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Category ID
+		ClassId *uint64 `json:"ClassId,omitempty" name:"ClassId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateClassResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateClassResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3108,7 +3163,7 @@ type DescribeAIAnalysisTemplatesRequest struct {
 	// Unique ID filter of video content analysis templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
 
-	// Paged offset. Default value: 0.
+	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
@@ -3157,7 +3212,7 @@ type DescribeAIRecognitionTemplatesRequest struct {
 	// Unique ID filter of video content recognition templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
 
-	// Paged offset. Default value: 0.
+	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
@@ -3365,10 +3420,10 @@ func (r *DescribeAudioTrackTemplatesResponse) FromJsonString(s string) error {
 type DescribeCDNUsageDataRequest struct {
 	*tchttp.BaseRequest
 
-	// Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be after the start date.
+	// End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). The end date must be after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// CDN statistics type. Valid values:
@@ -3431,7 +3486,7 @@ type DescribeContentReviewTemplatesRequest struct {
 	// Unique ID filter of content audit templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
 
-	// Paged offset. Default value: 0.
+	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
@@ -3586,6 +3641,53 @@ func (r *DescribeMediaInfosResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeMediaProcessUsageDataRequest struct {
+	*tchttp.BaseRequest
+
+	// Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Type of video processing task to be queried. Valid value: Transcode. Default value: Transcode.
+	// <li>Transcode: transcoding</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeMediaProcessUsageDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaProcessUsageDataRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaProcessUsageDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Overview of video processing statistics, which displays the overview and details of queried tasks.
+		MediaProcessDataSet []*TaskStatData `json:"MediaProcessDataSet,omitempty" name:"MediaProcessDataSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeMediaProcessUsageDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaProcessUsageDataResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeProcedureTemplatesRequest struct {
 	*tchttp.BaseRequest
 
@@ -3597,7 +3699,7 @@ type DescribeProcedureTemplatesRequest struct {
 	// <li>Custom: custom task flow template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Paged offset. Default value: 0.
+	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
@@ -3643,10 +3745,10 @@ func (r *DescribeProcedureTemplatesResponse) FromJsonString(s string) error {
 type DescribeReviewDetailsRequest struct {
 	*tchttp.BaseRequest
 
-	// Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be after the start date.
+	// End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). The end date must be after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -3797,6 +3899,110 @@ func (r *DescribeSnapshotByTimeOffsetTemplatesResponse) FromJsonString(s string)
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeStorageDataRequest struct {
+	*tchttp.BaseRequest
+
+	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeStorageDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeStorageDataRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStorageDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of current media files.
+		MediaCount *uint64 `json:"MediaCount,omitempty" name:"MediaCount"`
+
+		// Total current storage capacity in bytes.
+		TotalStorage *uint64 `json:"TotalStorage,omitempty" name:"TotalStorage"`
+
+		// Current Standard_IA storage capacity in bytes.
+		InfrequentStorage *uint64 `json:"InfrequentStorage,omitempty" name:"InfrequentStorage"`
+
+		// Current Standard storage capacity in bytes.
+		StandardStorage *uint64 `json:"StandardStorage,omitempty" name:"StandardStorage"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStorageDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeStorageDataResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStorageDetailsRequest struct {
+	*tchttp.BaseRequest
+
+	// Start time in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in ISO 8601 format, which must be after the start time. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Query time interval. Valid values:
+	// <li>Minute: once per minute.</li>
+	// <li>Hour: once per hour.</li>
+	// <li>Day: once per day.</li>
+	// The default value is determined by the time span. `Minute` will be used if the time span is less than 1 hour, `Hour` if less than or equal to 7 days, and `Day` if more than 7 days.
+	Interval *string `json:"Interval,omitempty" name:"Interval"`
+
+	// Storage class to be queried. Valid values:
+	// <li>TotalStorage: total storage capacity.</li>
+	// <li>StandardStorage: Standard storage.</li>
+	// <li>InfrequentStorage: Standard_IA storage.</li>
+	// Default value: TotalStorage.
+	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
+
+	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeStorageDetailsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeStorageDetailsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStorageDetailsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Storage statistics. One data entry per minute/hour/day.
+		Data []*StatDataItem `json:"Data,omitempty" name:"Data" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStorageDetailsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeStorageDetailsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSubAppIdsRequest struct {
 	*tchttp.BaseRequest
 }
@@ -3858,7 +4064,7 @@ type DescribeTaskDetailResponse struct {
 	// <li>Procedure: video processing task;</li>
 	// <li>EditMedia: video editing task;</li>
 	// <li>WechatPublish: release on WeChat task;</li>
-	// <li>WechatMiniProgramPublish: release in WeChat Mini Program task;</li>
+	// <li>WechatMiniProgramPublish: release on WeChat Mini Program task;</li>
 	// <li>ComposeMedia: media file composing task;</li>
 	// <li>PullUpload: media file pulling for upload task.</li>
 	// 
@@ -3876,13 +4082,13 @@ type DescribeTaskDetailResponse struct {
 	// <li>FINISH: completed.</li>
 		Status *string `json:"Status,omitempty" name:"Status"`
 
-		// Creation time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+		// Creation time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
 		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-		// Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+		// Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
 		BeginProcessTime *string `json:"BeginProcessTime,omitempty" name:"BeginProcessTime"`
 
-		// End time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+		// End time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
 		FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 
 		// Video processing task information. This field has a value only when `TaskType` is `Procedure`.
@@ -3925,7 +4131,7 @@ type DescribeTaskDetailResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CreateImageSpriteTask *CreateImageSpriteTask2017 `json:"CreateImageSpriteTask,omitempty" name:"CreateImageSpriteTask"`
 
-		// Release in WeChat Mini Program task information. This field has a value only when `TaskType` is `WechatMiniProgramPublish`.
+		// Release on WeChat Mini Program task information. This field has a value only when `TaskType` is `WechatMiniProgramPublish`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		WechatMiniProgramPublishTask *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishTask,omitempty" name:"WechatMiniProgramPublishTask"`
 
@@ -3964,7 +4170,7 @@ type DescribeTranscodeTemplatesRequest struct {
 	// <li>TEHD: TESHD template.</li>
 	TEHDType *string `json:"TEHDType,omitempty" name:"TEHDType"`
 
-	// Paged offset. Default value: 0.
+	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
@@ -4073,7 +4279,7 @@ type DescribeWatermarkTemplatesRequest struct {
 	// <li>text: text watermark.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Paged offset. Default value: 0.
+	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of returned entries
@@ -4174,6 +4380,9 @@ type EditMediaRequest struct {
 
 	// Identifies the source context which is used to pass through the user request information. The `EditMediaComplete` callback and task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// Task priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
 
 	// ID used for task deduplication. If there was a request with the same ID in the last day, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
@@ -4330,7 +4539,7 @@ type EventContent struct {
 	// <li>EditMediaComplete: video editing completion;</li>
 	// <li>WechatPublishComplete: release on WeChat completion;</li>
 	// <li>ComposeMediaComplete: media file composing completion;</li>
-	// <li>WechatMiniProgramPublishComplete: release in WeChat Mini Program completion.</li>
+	// <li>WechatMiniProgramPublishComplete: release on WeChat Mini Program completion.</li>
 	// <b>Event types compatible with v2017:</b>
 	// <li>TranscodeComplete: video transcoding completion;</li>
 	// <li>ConcatComplete: video splicing completion;</li>
@@ -4387,7 +4596,7 @@ type EventContent struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ComposeMediaCompleteEvent *ComposeMediaTask `json:"ComposeMediaCompleteEvent,omitempty" name:"ComposeMediaCompleteEvent"`
 
-	// Release in WeChat Mini Program task completion event, which is valid if the event type is `WechatMiniProgramPublishComplete`.
+	// Release on WeChat Mini Program task completion event, which is valid if the event type is `WechatMiniProgramPublishComplete`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WechatMiniProgramPublishCompleteEvent *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishCompleteEvent,omitempty" name:"WechatMiniProgramPublishCompleteEvent"`
 }
@@ -4738,16 +4947,16 @@ type LiveRealTimeClipRequest struct {
 	// [LVB code](https://cloud.tencent.com/document/product/267/5959) of a stream.
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
 
-	// Start time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Start time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// End time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Whether to clip persistently. 0: no, 1: yes. Default: no.
 	IsPersistence *int64 `json:"IsPersistence,omitempty" name:"IsPersistence"`
 
-	// Storage expiration time of video generated by persistent clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). `9999-12-31T23:59:59Z` means `never expire`. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter will be valid only when `IsPersistence` is 1. By default, the video will never expire.
+	// Storage expiration time of video generated by persistent clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). `9999-12-31T23:59:59Z` means `never expire`. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter will be valid only when `IsPersistence` is 1. By default, the video will never expire.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
 	// VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://cloud.tencent.com/document/product/266/9759). This parameter will be valid only when `IsPersistence` is 1.
@@ -4756,10 +4965,10 @@ type LiveRealTimeClipRequest struct {
 	// Whether the metadata of clipped video needs to be returned. 0: no, 1: yes. Default value: no.
 	MetaDataRequired *uint64 `json:"MetaDataRequired,omitempty" name:"MetaDataRequired"`
 
-	// 
+	// Domain name used for live clipping. Time shifting must be enabled in LVB.
 	Host *string `json:"Host,omitempty" name:"Host"`
 
-	// 
+	// Reserved field. Do not enter a value for it.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
 	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -5325,7 +5534,7 @@ type MediaMiniProgramReviewInfo struct {
 
 type MediaMiniProgramReviewInfoItem struct {
 
-	// Template ID, which is the ID of the transcoding template corresponding to the video published in WeChat Mini Program. 0 represents the source video.
+	// Template ID, which is the ID of the transcoding template corresponding to the video published on WeChat Mini Program. 0 represents the source video.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// Video metadata.
@@ -5335,7 +5544,7 @@ type MediaMiniProgramReviewInfoItem struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Status of video release in WeChat Mini Program
+	// Status of video release on WeChat Mini Program
 	// <li>Pass: succeeded.</li>
 	// <li>Rejected: rejected.</li>
 	ReviewResult *string `json:"ReviewResult,omitempty" name:"ReviewResult"`
@@ -6422,7 +6631,7 @@ type MosaicInput struct {
 	// Blur height. % and px formats are supported:
 	// <li>If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
 	// <li>If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.</li>
-	// Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original blur image.
+	// Default value: 10%.
 	Height *string `json:"Height,omitempty" name:"Height"`
 
 	// Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame.
@@ -7019,8 +7228,8 @@ func (r *PullEventsResponse) FromJsonString(s string) error {
 type PullUploadRequest struct {
 	*tchttp.BaseRequest
 
-	// URL of the media to be pulled. HLS and Dash formats are not supported for pull currently.
-	// For the supported extensions, please see [File Types](https://cloud.tencent.com/document/product/266/9760#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
+	// URL of the media to be pulled. Media files in HLS and Dash formats cannot be pulled currently.
+	// For the supported extensions, please see [Media Types](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
 	MediaUrl *string `json:"MediaUrl,omitempty" name:"MediaUrl"`
 
 	// Media name.
@@ -7032,7 +7241,7 @@ type PullUploadRequest struct {
 	// Subsequent task for media. For more information, please see [Specifying Task Flow After Upload](https://cloud.tencent.com/document/product/266/9759).
 	Procedure *string `json:"Procedure,omitempty" name:"Procedure"`
 
-	// Expiration time of media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Expiration time of media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
 	// Specifies upload region. This is only applicable to users that have special requirements for the upload region (currently, only Beijing, Shanghai, and Chongqing regions are supported).
@@ -7297,12 +7506,12 @@ type SearchMediaRequest struct {
 
 	// Start time in the creation time range.
 	// <li>After or at the start time.</li>
-	// <li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).</li>
+	// <li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).</li>
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time in the creation time range.
 	// <li>Before the end time.</li>
-	// <li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).</li>
+	// <li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).</li>
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Media file source. For valid values, please see [SourceType](https://cloud.tencent.com/document/product/266/31773#MediaSourceData).
@@ -7386,7 +7595,7 @@ type SimpleHlsClipRequest struct {
 	// End offset time of clipping in seconds. Default value: 0, which means to clip till the end of the video. A negative number indicates how many seconds from the end of the video clipping will end. For example, -10 means that clipping will end at the 10th second from the end.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
-	// 
+	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7532,6 +7741,15 @@ type SortBy struct {
 
 	// Sorting order. Valid values: Asc (ascending), Desc (descending)
 	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
+type SpecificationDataItem struct {
+
+	// Task specification.
+	Specification *string `json:"Specification,omitempty" name:"Specification"`
+
+	// Statistics.
+	Data []*TaskStatDataItem `json:"Data,omitempty" name:"Data" list`
 }
 
 type StatDataItem struct {
@@ -7712,6 +7930,67 @@ type TagConfigureInfoForUpdate struct {
 	// <li>ON: enables intelligent tagging task;</li>
 	// <li>OFF: disables intelligent tagging task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type TaskStatData struct {
+
+	// Task type
+	// <li>Transcode: transcoding</li>
+	// <li>Snapshot: screencapturing</li>
+	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
+
+	// Task statistics overview.
+	// <li>Transcode: usage in seconds</li>
+	Summary []*TaskStatDataItem `json:"Summary,omitempty" name:"Summary" list`
+
+	// Detailed statistics of tasks with different specifications.
+	// Transcoding specification:
+	// <li>Remuxing: remuxing</li>
+	// <li>Audio: audio transcoding</li>
+	// <li>Standard.H264.SD: H.264 SD transcoding</li>
+	// <li>Standard.H264.HD: H.264 HD transcoding</li>
+	// <li>Standard.H264.FHD: H.264 FHD transcoding</li>
+	// <li>Standard.H264.2K: H.264 2K transcoding</li>
+	// <li>Standard.H264.4K: H.264 4K transcoding</li>
+	// <li>Standard.H265.SD: H.265 SD transcoding</li>
+	// <li>Standard.H265.HD: H.265 HD transcoding</li>
+	// <li>Standard.H265.FHD: H.265 FHD transcoding</li>
+	// <li>Standard.H265.2K: H.265 2K transcoding</li>
+	// <li>Standard.H265.4K: H.265 4K transcoding</li>
+	// <li>TESHD-10.H264.SD: H.264 SD TESHD transcoding</li>
+	// <li>TESHD-10.H264.HD: H.264 HD TESHD transcoding</li>
+	// <li>TESHD-10.H264.FHD: H.264 FHD TESHD transcoding</li>
+	// <li>TESHD-10.H264.2K: H.264 2K TESHD transcoding</li>
+	// <li>TESHD-10.H264.4K: H.264 4K TESHD transcoding</li>
+	// <li>TESHD-10.H265.SD: H.265 SD TESHD transcoding</li>
+	// <li>TESHD-10.H265.HD: H.265 HD TESHD transcoding</li>
+	// <li>TESHD-10.H265.FHD: H.265 FHD TESHD transcoding</li>
+	// <li>TESHD-10.H265.2K: H.265 2K TESHD transcoding</li>
+	// <li>TESHD-10.H265.4K: H.265 4K TESHD transcoding</li>
+	// <li>Edit.Audio: audio editing</li>
+	// <li>Edit.H264.SD: H.264 SD video editing</li>
+	// <li>Edit.H264.HD: H.264 HD video editing</li>
+	// <li>Edit.H264.FHD: H.264 FHD video editing</li>
+	// <li>Edit.H264.2K: H.264 2K video editing</li>
+	// <li>Edit.H264.4K: H.264 4K video editing</li>
+	// <li>Edit.H265.SD: H.265 SD video editing</li>
+	// <li>Edit.H265.HD: H.265 HD video editing</li>
+	// <li>Edit.H265.FHD: H.265 FHD video editing</li>
+	// <li>Edit.H265.2K: H.265 2K video editing</li>
+	// <li>Edit.H265.4K: H.265 4K video editing</li>
+	Details []*SpecificationDataItem `json:"Details,omitempty" name:"Details" list`
+}
+
+type TaskStatDataItem struct {
+
+	// Start time of data time range in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Number of tasks.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Task usage.
+	Usage *int64 `json:"Usage,omitempty" name:"Usage"`
 }
 
 type TempCertificate struct {
@@ -8155,7 +8434,7 @@ type VideoTrackItem struct {
 	// Source of media material for video segment, which can be an ID of a VOD file or URL of another file.
 	SourceMedia *string `json:"SourceMedia,omitempty" name:"SourceMedia"`
 
-	// Starting time of video segment in material file in seconds. Default value: 0.
+	// Start time of video segment in material file in seconds. Default value: 0.
 	SourceMediaStartTime *float64 `json:"SourceMediaStartTime,omitempty" name:"SourceMediaStartTime"`
 
 	// Video segment duration in seconds. By default, the length of the video material will be used, which means that the entire material will be captured. If the source file is an image, `Duration` needs to be greater than 0.
@@ -8428,7 +8707,7 @@ type WechatMiniProgramPublishTask struct {
 	// ID of the transcoding template corresponding to the published video. 0 represents the source video.
 	SourceDefinition *uint64 `json:"SourceDefinition,omitempty" name:"SourceDefinition"`
 
-	// Status of video release in WeChat Mini Program. Valid values:
+	// Status of video release on WeChat Mini Program. Valid values:
 	// <li>Pass: successfully published;</li>
 	// <li>Failed: failed to publish;</li>
 	// <li>Rejected: rejected.</li>
