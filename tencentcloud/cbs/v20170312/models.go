@@ -938,7 +938,7 @@ type Disk struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
-	// This field is only applicable when the instance is already mounted to the cloud disk, and both the instance and the cloud disk use monthly subscription. <br><li>true: Expiration time of cloud disk is earlier than that of the instance.<br><li>false: Expiration time of cloud disk is later than that of the instance.
+	// This field is only applicable when the instance is already mounted to the cloud disk, and both the instance and the cloud disk use monthly subscription. <br><li>true: Expiration time of cloud disk is earlier than that of the instance.<br><li>false:Expiration time of cloud disk is later than that of the instance.
 	// Note: This field may return null, indicating that no valid value was found.
 	DeadlineError *bool `json:"DeadlineError,omitempty" name:"DeadlineError"`
 
@@ -1076,6 +1076,49 @@ type Filter struct {
 	Values []*string `json:"Values,omitempty" name:"Values" list`
 }
 
+type GetSnapOverviewRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *GetSnapOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetSnapOverviewRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetSnapOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The total snapshot size of the user
+		TotalSize *float64 `json:"TotalSize,omitempty" name:"TotalSize"`
+
+		// The total billed snapshot size of the user
+		RealTradeSize *float64 `json:"RealTradeSize,omitempty" name:"RealTradeSize"`
+
+		// Free tier of snapshot
+		FreeQuota *float64 `json:"FreeQuota,omitempty" name:"FreeQuota"`
+
+		// Total number of snapshots
+		TotalNums *int64 `json:"TotalNums,omitempty" name:"TotalNums"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetSnapOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetSnapOverviewResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type Image struct {
 
 	// Image instance ID.
@@ -1134,52 +1177,6 @@ func (r *InquiryPriceCreateDisksResponse) ToJsonString() string {
 }
 
 func (r *InquiryPriceCreateDisksResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type InquiryPriceRenewDisksRequest struct {
-	*tchttp.BaseRequest
-
-	// ID of the cloud disk, which can be queried via the API [DescribeDisks](/document/product/362/16315).
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
-
-	// Relevant parameter settings for the prepaid mode (i.e., monthly subscription). The monthly subscription cloud disk purchase usage period can be specified using this parameter. If this parameter is specified as CurInstanceDeadline, then it will be renewed according to the aligned CVM expiration time. If it is a batch renewal price query, then this parameter will correspond to the Disks parameter, and the element quantity needs to be kept the same.
-	DiskChargePrepaids []*DiskChargePrepaid `json:"DiskChargePrepaids,omitempty" name:"DiskChargePrepaids" list`
-
-	// Specify the new expiration time of the cloud disk, in such format as 2017-12-17 00:00:00. The parameters `NewDeadline` and `DiskChargePrepaids` are two options to specify the inquiry length, and you must specify at least one.
-	NewDeadline *string `json:"NewDeadline,omitempty" name:"NewDeadline"`
-
-	// ID of project the cloud disk belongs to. If selected, it can only be used for authentication.
-	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
-}
-
-func (r *InquiryPriceRenewDisksRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *InquiryPriceRenewDisksRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type InquiryPriceRenewDisksResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Describes the price of renewing the cloud disk.
-		DiskPrice *PrepayPrice `json:"DiskPrice,omitempty" name:"DiskPrice"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *InquiryPriceRenewDisksResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *InquiryPriceRenewDisksResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1321,80 +1318,6 @@ func (r *ModifyDiskAttributesResponse) ToJsonString() string {
 }
 
 func (r *ModifyDiskAttributesResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyDisksChargeTypeRequest struct {
-	*tchttp.BaseRequest
-
-	// The ID(s) of one or multiple cloud disks to be operated. The maximum number of cloud disks per request is 100.
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
-
-	// 
-	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitempty" name:"DiskChargePrepaid"`
-}
-
-func (r *ModifyDisksChargeTypeRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *ModifyDisksChargeTypeRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyDisksChargeTypeResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ModifyDisksChargeTypeResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *ModifyDisksChargeTypeResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyDisksRenewFlagRequest struct {
-	*tchttp.BaseRequest
-
-	// IDs of one or more cloud disks to be operated.
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
-
-	// Cloud disk renewal flag. Value range: <br><li>NOTIFY_AND_AUTO_RENEW: Notify expiry and renew automatically. <br><li>NOTIFY_AND_MANUAL_RENEW: Notify expiry but do not renew automatically. <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify expiry nor renew automatically.
-	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
-}
-
-func (r *ModifyDisksRenewFlagRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *ModifyDisksRenewFlagRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyDisksRenewFlagResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ModifyDisksRenewFlagResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *ModifyDisksRenewFlagResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

@@ -133,7 +133,7 @@ type AssociateSecurityGroupsRequest struct {
 	// ID of the security group to be associated, such as `sg-efil73jd`. Only one security group can be associated.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 
-	// ID(s) of the instance(s) to be associated, such as `ins-lesecurk`. You can specify multiple instances.
+	// ID(s) of the instance(s) to be associated，such as `ins-lesecurk`. You can specify multiple instances.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
@@ -335,13 +335,13 @@ func (r *CreateKeyPairResponse) FromJsonString(s string) error {
 
 type DataDisk struct {
 
-	// The data disk size in GB. The minimum increment is 10 GB. Different types of data disks have different value ranges. For details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/213/11518). The default value is 0, indicating that no data disk is purchased. For more information, see the CVM documentation.
+	// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [Storage Overview](https://cloud.tencent.com/document/product/213/4952). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
-	// The data disk type. For more information about the limits on different data disk types, see [Instance Specifications](/document/product/213/2177). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
+	// The type of the data disk. For more information regarding data disk types and limits, refer to [Storage Overview](https://cloud.tencent.com/document/product/213/4952). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for `ResizeInstanceDisk`.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
-	// Data disk ID. Data disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter currently.
+	// Data disk ID. Data disks of the type `LOCAL_BASIC` or `LOCAL_SSD` do not have IDs and do not support this parameter.
 	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
 
 	// Whether to terminate the data disk when its CVM is terminated. Valid values:
@@ -356,12 +356,12 @@ type DataDisk struct {
 	// Note: This field may return null, indicating that no valid value is found.
 	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
 
-	// Specifies whether the data disk is encrypted. Values: 
+	// Specifies whether the data disk is encrypted. Valid values: 
 	// <li>TRUE: encrypted
 	// <li>FALSE: not encrypted<br>
 	// Default value: FALSE<br>
-	// Currently, this parameter is only used in the `RunInstances` API.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// This parameter is only used with `RunInstances`.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Encrypt *bool `json:"Encrypt,omitempty" name:"Encrypt"`
 }
 
@@ -1290,7 +1290,7 @@ type DisassociateSecurityGroupsRequest struct {
 	// ID of the security group to be disassociated, such as `sg-efil73jd`. Only one security group can be disassociated.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 
-	// ID(s) of the instance(s) to be disassociated, such as `ins-lesecurk`. You can specify multiple instances.
+	// ID(s) of the instance(s) to be disassociated，such as `ins-lesecurk`. You can specify multiple instances.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
@@ -1895,7 +1895,7 @@ type Instance struct {
 	// Instance name
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Instance billing method. Valid values: <br><li>`PREPAID`: prepaid, i.e., monthly subscription <br><li>`POSTPAID_BY_HOUR`: pay-as-you-go <br><li>`CDHPAID`: you are only billed for the CDH instances, not the CVMs running on the CDHs. <br><li>`SPOTPAID`: you are billed based on your bid.
+	// Instance billing plan. Valid values:<br><li>`POSTPAID_BY_HOUR`: pay after use. You are billed by the hour, by traffic.<br><li>`CDHPAID`: `CDH` billing plan. Applicable to `CDH` only, not the instances on the host.<br>
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 
 	// Information on the system disk of the instance
@@ -1920,13 +1920,14 @@ type Instance struct {
 	// `ID` of the image used to create the instance.
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
-	// Auto renewal flag. Valid values: <br><li>`NOTIFY_AND_MANUAL_RENEW`: notify upon expiration, but do not renew automatically <br><li>`NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically <br><li>`DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically.
+	// Auto renewal flag. Valid values: <br><li>`NOTIFY_AND_MANUAL_RENEW`: notify upon expiration, but do not renew automatically <br><li>`NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically <br><li>`DISABLE_NOTIFY_AND_MANUAL_RENEW`: do not notify upon expiration and do not renew automatically.
+	// <br><li>Note: this parameter is `null` for postpaid instances.
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
 	// Creation time following the `ISO8601` standard and using `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// Expiration time following the `ISO8601` standard and using `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
+	// Expiration time in UTC format following the `ISO8601` standard: `YYYY-MM-DDThh:mm:ssZ`. Note: this parameter is `null` for postpaid instances.
 	ExpiredTime *string `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
 
 	// Operating system name.
@@ -1961,13 +1962,15 @@ type Instance struct {
 	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitempty" name:"LatestOperationRequestId"`
 
 	// ID of a spread placement group.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	DisasterRecoverGroupId *string `json:"DisasterRecoverGroupId,omitempty" name:"DisasterRecoverGroupId"`
 
-	// 
-	IPv6Addresses *string `json:"IPv6Addresses,omitempty" name:"IPv6Addresses"`
+	// IPv6 address of the instance.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	IPv6Addresses []*string `json:"IPv6Addresses,omitempty" name:"IPv6Addresses" list`
 
-	// 
+	// CAM role name.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	CamRoleName *string `json:"CamRoleName,omitempty" name:"CamRoleName"`
 }
 
@@ -1990,22 +1993,12 @@ type InstanceFamilyConfig struct {
 }
 
 type InstanceMarketOptionsRequest struct {
-	*tchttp.BaseRequest
 
 	// Options related to bidding
 	SpotOptions *SpotMarketOptions `json:"SpotOptions,omitempty" name:"SpotOptions"`
 
 	// Market option type. Currently `spot` is the only supported value.
 	MarketType *string `json:"MarketType,omitempty" name:"MarketType"`
-}
-
-func (r *InstanceMarketOptionsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *InstanceMarketOptionsRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
 }
 
 type InstanceStatus struct {
@@ -2036,6 +2029,9 @@ type InstanceTypeConfig struct {
 
 	// Memory capacity; unit: `GB`.
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Number of FPGA cores; unit: core.
+	FPGA *int64 `json:"FPGA,omitempty" name:"FPGA"`
 }
 
 type InstanceTypeQuotaItem struct {
@@ -2046,7 +2042,7 @@ type InstanceTypeQuotaItem struct {
 	// Instance model.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
-	// Instance billing method. Valid values: <br><li>`PREPAID`: prepaid, i.e., monthly subscription <br><li>`POSTPAID_BY_HOUR`: pay-as-you-go <br><li>`CDHPAID`: you are only billed for the [CDH](https://cloud.tencent.com/document/product/416) instances, not the CVMs running on the CDHs. <br><li>`SPOTPAID`: you are billed based on your bid.
+	// Instance billing plan. Valid values: <br><li>POSTPAID_BY_HOUR: pay after use. You are billed for your traffic by the hour.<br><li>`CDHPAID`: [`CDH`](https://cloud.tencent.com/document/product/416) billing plan. Applicable to `CDH` only, not the instances on the host.
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 
 	// ENI type. For example, 25 represents an ENI of 25 GB.
@@ -2077,14 +2073,14 @@ type InstanceTypeQuotaItem struct {
 	// Price of an instance model.
 	Price *ItemPrice `json:"Price,omitempty" name:"Price"`
 
-	// Details of sold out items
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Details of out-of-stock items
+	// Note: this field may return null, indicating that no valid value is obtained.
 	SoldOutReason *string `json:"SoldOutReason,omitempty" name:"SoldOutReason"`
 }
 
 type InternetAccessible struct {
 
-	// Network billing method. Valid values: <br><li>BANDWIDTH_PREPAID: prepaid; billed by bandwidth <br><li>TRAFFIC_POSTPAID_BY_HOUR: pay-as-you-go; billed by traffic on an hourly basis <br><li>BANDWIDTH_POSTPAID_BY_HOUR: pay-as-you-go; billed by bandwidth on an hourly basis <br><li>BANDWIDTH_PACKAGE: for bandwidth package users <br>Default value: same as the instance billing method for non-bandwidth package users.
+	// Network connection billing plan. Valid value: <br><li>TRAFFIC_POSTPAID_BY_HOUR: pay after use. You are billed for your traffic, by the hour.
 	InternetChargeType *string `json:"InternetChargeType,omitempty" name:"InternetChargeType"`
 
 	// The maximum outbound bandwidth of the public network, in Mbps. The default value is 0 Mbps. The upper limit of bandwidth varies for different models. For more information, see [Purchase Network Bandwidth](https://cloud.tencent.com/document/product/213/12523).
@@ -2108,21 +2104,45 @@ type InternetChargeTypeConfig struct {
 
 type ItemPrice struct {
 
-	// Subsequent unit price (in RMB).
-	// Note: This field may return null, indicating that no valid value is found.
+	// The original unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to the unit price for the usage between 0 and ∞ hours.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
 
-	// Subsequent billing unit. Valid values: <br><li>HOUR: bill by hour. Scenarios using this billing unit include: pay as you go for instances on an hourly basis (`POSTPAID_BY_HOUR`), and pay as you go for bandwidth on an hourly basis (`BANDWIDTH_POSTPAID_BY_HOUR`). <br><li>GB: bill by traffic in GB. Scenarios using this billing unit include: pay as you go for traffic on an hourly basis (`TRAFFIC_POSTPAID_BY_HOUR`).
-	// Note: This field may return null, indicating that no valid value is found.
+	// Billing unit for pay-as-you-go mode. Valid values: <br><li>HOUR: billed on an hourly basis. It's used for hourly postpaid instances (`POSTPAID_BY_HOUR`). <br><li>GB: bill by traffic in GB. It's used for postpaid products that are billed by the hourly traffic (`TRAFFIC_POSTPAID_BY_HOUR`).
+	// Note: this field may return null, indicating that no valid value is obtained.
 	ChargeUnit *string `json:"ChargeUnit,omitempty" name:"ChargeUnit"`
 
-	// Original price of a prepaid instance (in RMB).
-	// Note: This field may return null, indicating that no valid value is found.
+	// The original price of a pay-in-advance instance, in USD.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
 
-	// Discount price of a prepaid instance (in RMB).
-	// Note: This field may return null, indicating that no valid value is found.
+	// Discount price of a prepaid instance, in USD.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+
+	// Percentage of the original price. For example, if you enter "20", the discounted price will be 20% of the original price.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	Discount *uint64 `json:"Discount,omitempty" name:"Discount"`
+
+	// The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to the unit price for the usage between 0 and ∞ hours.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
+
+	// Original unit price for the usage between 96 to 360 hours in USD. It's applicable to pay-as-you-go mode.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	UnitPriceSecondStep *float64 `json:"UnitPriceSecondStep,omitempty" name:"UnitPriceSecondStep"`
+
+	// Discounted unit price for the usage between 96 to 360 hours in USD. It's applicable to pay-as-you-go mode.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	UnitPriceDiscountSecondStep *float64 `json:"UnitPriceDiscountSecondStep,omitempty" name:"UnitPriceDiscountSecondStep"`
+
+	// Original unit price for the usage after 360 hours in USD. It's applicable to pay-as-you-go mode.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	UnitPriceThirdStep *float64 `json:"UnitPriceThirdStep,omitempty" name:"UnitPriceThirdStep"`
+
+	// Discounted unit price for the usage after 360 hours in USD. It's applicable to pay-as-you-go mode.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	UnitPriceDiscountThirdStep *float64 `json:"UnitPriceDiscountThirdStep,omitempty" name:"UnitPriceDiscountThirdStep"`
 }
 
 type KeyPair struct {
@@ -2172,12 +2192,12 @@ type LocalDiskType struct {
 
 type LoginSettings struct {
 
-	// Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-30 characters long and contain at least two of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-30 characters long and contain at least three of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-30 characters long and contain at least two of the following types: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-30 characters long and contain at least three of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
-	// Note: This field may return null, indicating that no valid value is found.
+	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://cloud.tencent.com/document/api/213/15699) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 
 	// Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
@@ -2504,7 +2524,7 @@ func (r *ModifyKeyPairAttributeResponse) FromJsonString(s string) error {
 
 type OperationCountLimit struct {
 
-	// Operations on an instance.
+	// Instance operation. Valid values: <br><li>`INSTANCE_DEGRADE`: downgrade an instance<br><li>`INTERNET_CHARGE_TYPE_CHANGE`: modify the billing plan of the network connection
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
 
 	// Instance ID.
@@ -2531,7 +2551,7 @@ type OsVersion struct {
 
 type Placement struct {
 
-	// ID of the [Availability Zone](/document/product/213/9452#zone) where the instance resides. To obtain the availability zone IDs, you can call [DescribeZones](/document/api/213/9455) and look for the `Zone` fields in the response.
+	// The ID of [availability zone](https://cloud.tencent.com/document/product/213/15753#ZoneInfo) where the instance locates. It can obtained in the `Zone` field returned by [DescribeZones](https://cloud.tencent.com/document/213/15707) API.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// ID of the project to which the instance belongs. To obtain the project IDs, you can call [DescribeProject](/document/api/378/4400) and look for the `projectId` fields in the response. If this parameter is not specified, the default project will be used.
@@ -2542,6 +2562,9 @@ type Placement struct {
 
 	// Master host IP used to create the CVM
 	HostIps []*string `json:"HostIps,omitempty" name:"HostIps" list`
+
+	// 
+	HostId *string `json:"HostId,omitempty" name:"HostId"`
 }
 
 type Price struct {
@@ -2789,7 +2812,7 @@ type ResizeInstanceDisksRequest struct {
 	// Instance ID. To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Configuration of data disks to be expanded. Currently you can only use the API to expand non-elastic data disks whose [disk type](/document/api/213/9452#block_device) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`. You can use [`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315) to check whether a disk is elastic. If the `Portable` field in the response is `false`, it means that the disk is not elastic. Data disk capacity unit: GB; minimum increment: 10 GB. For more information on selecting the data disk type, see the product overview on cloud disks. Available data disk types are subject to the instance type (`InstanceType`). In addition, the maximum capacity allowed for expansion varies by data disk type.
+	// Configuration of data disks to be expanded. Currently you can only use the API to expand non-elastic data disks whose [disk type](/document/api/213/9452#block_device) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`. You can use [`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315) to check whether a disk is elastic. If the `Portable` field in the response is `false`, it means that the disk is not elastic. Data disk capacity unit: GB; minimum increment: 10 GB. For more information on selecting the data disk type, see the [product overview on cloud disks](https://cloud.tencent.com/document/product/362/2353). Available data disk types are subject to the instance type (`InstanceType`). In addition, the maximum capacity allowed for expansion varies by data disk type.
 	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
 
 	// Whether to force shut down a running instances. It is recommended to manually shut down a running instance before resetting the user password. Valid values: <br><li>TRUE: force shut down an instance after a normal shutdown fails. <br><li>FALSE: do not force shut down an instance after a normal shutdown fails. <br><br>Default value: FALSE. <br><br>A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force shut down a CVM when it cannot be shut down normally.
@@ -2866,7 +2889,7 @@ type RunInstancesRequest struct {
 	// Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response. If this parameter is not specified, the instance will be associated with default security groups.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 
-	// Specifies whether to enable services Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. But for custom images and images from market place, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
+	// Specifies whether to enable services such as Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. However, for custom images and images from the marketplace, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
 
 	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. <br>For more information, see “How to ensure idempotency”.
@@ -3105,7 +3128,7 @@ func (r *SyncImagesResponse) FromJsonString(s string) error {
 
 type SystemDisk struct {
 
-	// The system disk type. For more information about the limits on system disk types, see [Instance Types](/document/product/213/2177). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><br>Default value: CLOUD_BASIC.
+	// System disk type. For more information on system disk types and their limits, refer to [Storage Overview](https://cloud.tencent.com/document/product/213/4952). Valid values: <br><li>LOCAL_BASIC: Local disk <br><li>LOCAL_SSD: Local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium cloud disk <br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: LOCAL_BASIC.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// System disk ID. System disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter currently.
@@ -3187,8 +3210,8 @@ type VirtualPrivateCloud struct {
 
 type ZoneInfo struct {
 
-	// Availability zone name. For example, ap-guangzhou-3.
-	// Names of availability zones throughout the entire network:
+	// Availability zone name, such as ap-guangzhou-3.
+	// The following is a list of all availability zones:
 	// <li> ap-chongqing-1 </li>
 	// <li> ap-seoul-1 </li>
 	// <li> ap-chengdu-1 </li>
@@ -3235,6 +3258,6 @@ type ZoneInfo struct {
 	// Availability zone ID
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Availability zone state. Valid values: `AVAILABLE`, available; `UNAVAILABLE`, unavailable.
+	// Availability zone status. Valid values: `AVAILABLE`: available; `UNAVAILABLE`: unavailable.
 	ZoneState *string `json:"ZoneState,omitempty" name:"ZoneState"`
 }

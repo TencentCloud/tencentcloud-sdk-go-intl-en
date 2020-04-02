@@ -703,6 +703,9 @@ type FileSystemInfo struct {
 
 	// Key used for encryption, which can be the key ID or ARN
 	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+
+	// Application ID
+	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
 }
 
 type MountInfo struct {

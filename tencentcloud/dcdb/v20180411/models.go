@@ -209,7 +209,7 @@ type CreateAccountResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Instance Id, which is passed through from the input parameters.
+		// Instance ID, which is passed through from the input parameters.
 		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 		// Username, which is passed through from the input parameters.
@@ -277,7 +277,7 @@ type DCDBInstanceInfo struct {
 	// Instance name
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// APPID
+	// AppID
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
 
 	// Project ID
@@ -340,7 +340,7 @@ type DCDBInstanceInfo struct {
 	// Temporary instance flag. 0: non-temporary instance
 	IsTmp *int64 `json:"IsTmp,omitempty" name:"IsTmp"`
 
-	// Exclusive cluster ID. If this parameter is left empty, the instance is a non-dedicated cluster instance
+	// Dedicated cluster ID. If this parameter is empty, the instance is a non-dedicated cluster instance
 	ExclusterId *string `json:"ExclusterId,omitempty" name:"ExclusterId"`
 
 	// VPC ID in string type
@@ -349,7 +349,7 @@ type DCDBInstanceInfo struct {
 	// VPC subnet ID in string type
 	UniqueSubnetId *string `json:"UniqueSubnetId,omitempty" name:"UniqueSubnetId"`
 
-	// Numeric ID of an instance (this field is obsolete and should not be depended on)
+	// Numeric ID of instance (this field is obsolete and should not be depended on)
 	Id *uint64 `json:"Id,omitempty" name:"Id"`
 
 	// Domain name for public network access, which can be resolved by the public network
@@ -385,6 +385,9 @@ type DCDBInstanceInfo struct {
 
 	// Whether the instance supports audit. 1: yes; 0: no
 	IsAuditSupported *uint64 `json:"IsAuditSupported,omitempty" name:"IsAuditSupported"`
+
+	// Number of CPU cores
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
 }
 
 type DCDBShardInfo struct {
@@ -460,6 +463,9 @@ type DCDBShardInfo struct {
 	// List of slave AZs of a shard
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ShardSlaveZones []*string `json:"ShardSlaveZones,omitempty" name:"ShardSlaveZones" list`
+
+	// Number of CPU cores
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 }
 
 type Database struct {
@@ -550,7 +556,7 @@ type DescribeAccountPrivilegesRequest struct {
 	// Type. Valid values: table; view; proc; func; \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be queried (i.e., `db.\*`), in which case the `Object` parameter will be ignored
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Type name. For example, if `Type` = table, it indicates a specific table name; if both `DbName` and `Type` are specific names, `Object` indicates a specific object name and cannot be `\*` or empty
+	// Type name. For example, if `Type` is table, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty
 	Object *string `json:"Object,omitempty" name:"Object"`
 
 	// If `Type` = table and `ColName` is `\*`, the permissions of the table will be queried; if `ColName` is a specific field name, the permissions of the corresponding field will be queried
@@ -863,7 +869,7 @@ type DescribeDCDBShardsRequest struct {
 	// Instance ID in the format of dcdbt-ow728lmc.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// List of shard IDs.
+	// Shard ID list.
 	ShardInstanceIds []*string `json:"ShardInstanceIds,omitempty" name:"ShardInstanceIds" list`
 
 	// Offset. Default value: 0
@@ -1084,7 +1090,7 @@ type GrantAccountPrivilegesRequest struct {
 	// Type. Valid values: table; view; proc; func; \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be set (i.e., `db.\*`), in which case the `Object` parameter will be ignored
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Type name. For example, if `Type` = table, it indicates a specific table name; if both `DbName` and `Type` are specific names, `Object` indicates a specific object name and cannot be `\*` or empty
+	// Type name. For example, if `Type` is table, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty
 	Object *string `json:"Object,omitempty" name:"Object"`
 
 	// If `Type` = table and `ColName` is `\*`, the permissions will be granted to the table; if `ColName` is a specific field name, the permissions will be granted to the field
@@ -1121,7 +1127,7 @@ func (r *GrantAccountPrivilegesResponse) FromJsonString(s string) error {
 type InitDCDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// List of IDs of instances to be initialized. The ID is in the format of dcdbt-ow728lmc and can be obtained through the `DescribeDCDBInstances` API.
+	// List of IDs of instances to be initialized. The ID is in the format of `dcdbt-ow728lmc` and can be obtained through the `DescribeDCDBInstances` API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 	// List of parameters. Valid values: character_set_server (character set; required); lower_case_table_names (table name case sensitivity; required; 0: case-sensitive; 1: case-insensitive); innodb_page_size (InnoDB data page; default size: 16 KB); sync_mode (sync mode; 0: async; 1: strong sync; 2: downgradable strong sync; default value: strong sync).
@@ -1409,6 +1415,9 @@ type ParamDesc struct {
 
 	// Parameter constraint
 	Constraint *ParamConstraint `json:"Constraint,omitempty" name:"Constraint"`
+
+	// Whether a value has been set. false: no, true: yes
+	HaveSetValue *bool `json:"HaveSetValue,omitempty" name:"HaveSetValue"`
 }
 
 type ParamModifyResult struct {
@@ -1491,6 +1500,9 @@ type ShardInfo struct {
 
 	// Product type ID (this field is obsolete and should not be depended on)
 	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
+
+	// Number of CPU cores
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
 }
 
 type TableColumn struct {

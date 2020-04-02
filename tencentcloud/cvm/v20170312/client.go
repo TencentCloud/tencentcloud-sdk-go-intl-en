@@ -479,7 +479,7 @@ func NewDescribeInstanceFamilyConfigsResponse() (response *DescribeInstanceFamil
     return
 }
 
-// This API is used to query the list of model families that are available for the current user and in the current region.
+// This API is used to query a list of model families available to the current user in the current region.
 func (c *Client) DescribeInstanceFamilyConfigs(request *DescribeInstanceFamilyConfigsRequest) (response *DescribeInstanceFamilyConfigsResponse, err error) {
     if request == nil {
         request = NewDescribeInstanceFamilyConfigsRequest()

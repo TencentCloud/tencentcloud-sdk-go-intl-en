@@ -118,6 +118,25 @@ type Cluster struct {
 
 	// 
 	Property *string `json:"Property,omitempty" name:"Property"`
+
+	// Number of master nodes currently in the cluster
+	ClusterMaterNodeNum *uint64 `json:"ClusterMaterNodeNum,omitempty" name:"ClusterMaterNodeNum"`
+
+	// ID of the image used by the cluster
+	// Note: this field may return null, indicating that no valid value is obtained.
+	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
+
+	// OsCustomizeType
+	// Note: this field may return null, indicating that no valid value is obtained.
+	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
+
+	// Runtime environment of the cluster. Values can be `docker` or `containerd`.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	ContainerRuntime *string `json:"ContainerRuntime,omitempty" name:"ContainerRuntime"`
+
+	// Creation time
+	// Note: this field may return null, indicating that no valid value is obtained.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 }
 
 type ClusterAdvancedSettings struct {
@@ -133,6 +152,15 @@ type ClusterAdvancedSettings struct {
 
 	// 
 	NodeNameType *string `json:"NodeNameType,omitempty" name:"NodeNameType"`
+
+	// Cluster custom parameter
+	ExtraArgs *ClusterExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
+
+	// Cluster network type, which can be GR (Global Router) or VPC-CNI. The default value is GR.
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// Whether a cluster in VPC-CNI mode uses dynamic IP addresses. The default value is FALSE, which indicates that static IP addresses are used.
+	IsNonStaticIpMode *bool `json:"IsNonStaticIpMode,omitempty" name:"IsNonStaticIpMode"`
 }
 
 type ClusterBasicSettings struct {
@@ -178,6 +206,30 @@ type ClusterCIDRSettings struct {
 
 	// Maximum number of cluster services
 	MaxClusterServiceNum *uint64 `json:"MaxClusterServiceNum,omitempty" name:"MaxClusterServiceNum"`
+
+	// The CIDR block used to assign cluster service IP addresses. It must conflict with neither the VPC CIDR block nor with CIDR blocks of other clusters in the same VPC instance. The IP range must be within the private network IP range, such as 10.1.0.0/14, 192.168.0.1/18, and 172.16.0.0/16.
+	ServiceCIDR *string `json:"ServiceCIDR,omitempty" name:"ServiceCIDR"`
+
+	// Subnet ID of the ENI in VPC-CNI network mode
+	EniSubnetIds []*string `json:"EniSubnetIds,omitempty" name:"EniSubnetIds" list`
+
+	// Repossession time of ENI IP addresses in VPC-CNI network mode, whose range is [300,15768000)
+	ClaimExpiredSeconds *int64 `json:"ClaimExpiredSeconds,omitempty" name:"ClaimExpiredSeconds"`
+}
+
+type ClusterExtraArgs struct {
+
+	// kube-apiserver custom parameter
+	// Note: this field may return null, indicating that no valid value is obtained.
+	KubeAPIServer []*string `json:"KubeAPIServer,omitempty" name:"KubeAPIServer" list`
+
+	// kube-controller-manager custom parameter
+	// Note: this field may return null, indicating that no valid value is obtained.
+	KubeControllerManager []*string `json:"KubeControllerManager,omitempty" name:"KubeControllerManager" list`
+
+	// kube-scheduler custom parameter
+	// Note: this field may return null, indicating that no valid value is obtained.
+	KubeScheduler []*string `json:"KubeScheduler,omitempty" name:"KubeScheduler" list`
 }
 
 type ClusterNetworkSettings struct {
@@ -364,7 +416,7 @@ type CreateClusterRequest struct {
 	// Configuration information of an existing instance
 	ExistedInstancesForNode []*ExistedInstancesForNode `json:"ExistedInstancesForNode,omitempty" name:"ExistedInstancesForNode" list`
 
-	// 
+	// CVM type and the corresponding data disk mounting configuration information.
 	InstanceDataDiskMountSettings []*InstanceDataDiskMountSetting `json:"InstanceDataDiskMountSettings,omitempty" name:"InstanceDataDiskMountSettings" list`
 }
 
@@ -442,6 +494,21 @@ func (r *CreateClusterRouteTableResponse) FromJsonString(s string) error {
 }
 
 type DataDisk struct {
+
+	// 
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// File system (ext3/ext4/xfs)
+	FileSystem *string `json:"FileSystem,omitempty" name:"FileSystem"`
+
+	// 
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Whether to automatically format and mount the disk
+	AutoFormatAndMount *bool `json:"AutoFormatAndMount,omitempty" name:"AutoFormatAndMount"`
+
+	// 
+	MountTarget *string `json:"MountTarget,omitempty" name:"MountTarget"`
 }
 
 type DeleteClusterAsGroupsRequest struct {
@@ -1163,6 +1230,9 @@ type ExistedInstancesForNode struct {
 
 	// Reinstallation parameter of existing instances
 	ExistedInstancesPara *ExistedInstancesPara `json:"ExistedInstancesPara,omitempty" name:"ExistedInstancesPara"`
+
+	// Advanced node setting, which overrides the InstanceAdvancedSettings item set at the cluster level (currently valid for the ExtraArgs node custom parameter only)
+	InstanceAdvancedSettingsOverride *InstanceAdvancedSettings `json:"InstanceAdvancedSettingsOverride,omitempty" name:"InstanceAdvancedSettingsOverride"`
 }
 
 type ExistedInstancesPara struct {
@@ -1208,6 +1278,17 @@ type Instance struct {
 
 	// Instance status (running, initializing, or failed)
 	InstanceState *string `json:"InstanceState,omitempty" name:"InstanceState"`
+
+	// Whether the instance is drained
+	// Note: this field may return null, indicating that no valid value is obtained.
+	DrainStatus *string `json:"DrainStatus,omitempty" name:"DrainStatus"`
+
+	// Node settings
+	// Note: this field may return null, indicating that no valid value is obtained.
+	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
+
+	// Creation time
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 }
 
 type InstanceAdvancedSettings struct {
@@ -1229,22 +1310,47 @@ type InstanceAdvancedSettings struct {
 
 	// 
 	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+
+	// Information about node custom parameters
+	ExtraArgs *InstanceExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
 }
 
 type InstanceDataDiskMountSetting struct {
+
+	// CVM instance type
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Data disk mounting information
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+
+	// Availability zone where the CVM instance is located
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+}
+
+type InstanceExtraArgs struct {
+
+	// Kubelet custom parameter
+	// Note: this field may return null, indicating that no valid value is obtained.
+	Kubelet []*string `json:"Kubelet,omitempty" name:"Kubelet" list`
 }
 
 type Label struct {
+
+	// 
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// 
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type LoginSettings struct {
 
-	// Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-16 characters long and contain at least one character from two of the following categories: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-16 characters long and contain at least one character from three of the following categories: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
-	// Note: This field may return null, indicating that no valid value is found.
+	// Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-30 characters long and contain at least two of the following types: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-30 characters long and contain at least three of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
-	// Note: This field may return null, indicating that no valid value is found.
+	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://cloud.tencent.com/document/api/213/15699) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 
 	// Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
@@ -1332,6 +1438,9 @@ type RunInstancesForNode struct {
 
 	// Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://cloud.tencent.com/document/product/213/15730). Pass any parameter other than common parameters. ImageId will be replaced with the image corresponding to the TKE cluster operating system.
 	RunInstancesPara []*string `json:"RunInstancesPara,omitempty" name:"RunInstancesPara" list`
+
+	// An advanced node setting. This parameter overrides the InstanceAdvancedSettings item set at the cluster level and corresponds to RunInstancesPara in a one-to-one sequential manner (currently valid for the ExtraArgs node custom parameter only).
+	InstanceAdvancedSettingsOverrides []*InstanceAdvancedSettings `json:"InstanceAdvancedSettingsOverrides,omitempty" name:"InstanceAdvancedSettingsOverrides" list`
 }
 
 type RunMonitorServiceEnabled struct {
@@ -1347,4 +1456,10 @@ type RunSecurityServiceEnabled struct {
 }
 
 type TagSpecification struct {
+
+	// 
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// 
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }

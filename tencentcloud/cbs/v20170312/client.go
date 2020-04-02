@@ -535,6 +535,31 @@ func (c *Client) DetachDisks(request *DetachDisksRequest) (response *DetachDisks
     return
 }
 
+func NewGetSnapOverviewRequest() (request *GetSnapOverviewRequest) {
+    request = &GetSnapOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cbs", APIVersion, "GetSnapOverview")
+    return
+}
+
+func NewGetSnapOverviewResponse() (response *GetSnapOverviewResponse) {
+    response = &GetSnapOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get snapshot overview information.
+func (c *Client) GetSnapOverview(request *GetSnapOverviewRequest) (response *GetSnapOverviewResponse, err error) {
+    if request == nil {
+        request = NewGetSnapOverviewRequest()
+    }
+    response = NewGetSnapOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquiryPriceCreateDisksRequest() (request *InquiryPriceCreateDisksRequest) {
     request = &InquiryPriceCreateDisksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -558,34 +583,6 @@ func (c *Client) InquiryPriceCreateDisks(request *InquiryPriceCreateDisksRequest
         request = NewInquiryPriceCreateDisksRequest()
     }
     response = NewInquiryPriceCreateDisksResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewInquiryPriceRenewDisksRequest() (request *InquiryPriceRenewDisksRequest) {
-    request = &InquiryPriceRenewDisksRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cbs", APIVersion, "InquiryPriceRenewDisks")
-    return
-}
-
-func NewInquiryPriceRenewDisksResponse() (response *InquiryPriceRenewDisksResponse) {
-    response = &InquiryPriceRenewDisksResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// This API is used to query the price of renewing one or more cloud disks.
-// 
-// * You can query the price for renewing cloud disks together with their bound instances. To do so, you need to specify `CurInstanceDeadline` in the [DiskChargePrepaid](/document/product/362/15669#DiskChargePrepaid) parameter, In this case, the API will query the price for renewing the cloud disk to the expiration time of the bound instance.
-// * You can specify different renewal lengths for multiple cloud disks in a single request. In such cases, the price returned will be the total price of renewing multiple cloud disks.
-func (c *Client) InquiryPriceRenewDisks(request *InquiryPriceRenewDisksRequest) (response *InquiryPriceRenewDisksResponse, err error) {
-    if request == nil {
-        request = NewInquiryPriceRenewDisksRequest()
-    }
-    response = NewInquiryPriceRenewDisksResponse()
     err = c.Send(request, response)
     return
 }
@@ -666,62 +663,6 @@ func (c *Client) ModifyDiskAttributes(request *ModifyDiskAttributesRequest) (res
         request = NewModifyDiskAttributesRequest()
     }
     response = NewModifyDiskAttributesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyDisksChargeTypeRequest() (request *ModifyDisksChargeTypeRequest) {
-    request = &ModifyDisksChargeTypeRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cbs", APIVersion, "ModifyDisksChargeType")
-    return
-}
-
-func NewModifyDisksChargeTypeResponse() (response *ModifyDisksChargeTypeResponse) {
-    response = &ModifyDisksChargeTypeResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// API domain name: cbs.tencentcloudapi.com.
-// 
-// This API is used to change the billing mode of cloud disks.
-// 
-// You can only use this API to change the billing method from `POSTPAID_BY_HOUR` to `PREPAID`.
-// This API does not support non-elastic cloud disks. Please use `modifyinstanceschargetype` API to convert CVM instances and the bound non-elastic cloud disks. 
-// Default API request frequency limit: 10 times/second.
-func (c *Client) ModifyDisksChargeType(request *ModifyDisksChargeTypeRequest) (response *ModifyDisksChargeTypeResponse, err error) {
-    if request == nil {
-        request = NewModifyDisksChargeTypeRequest()
-    }
-    response = NewModifyDisksChargeTypeResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyDisksRenewFlagRequest() (request *ModifyDisksRenewFlagRequest) {
-    request = &ModifyDisksRenewFlagRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cbs", APIVersion, "ModifyDisksRenewFlag")
-    return
-}
-
-func NewModifyDisksRenewFlagResponse() (response *ModifyDisksRenewFlagResponse) {
-    response = &ModifyDisksRenewFlagResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// This API (ModifyDisksRenewFlag) is used to modify the renewal flag of the cloud disk, which supports batch modification.
-func (c *Client) ModifyDisksRenewFlag(request *ModifyDisksRenewFlagRequest) (response *ModifyDisksRenewFlagResponse, err error) {
-    if request == nil {
-        request = NewModifyDisksRenewFlagRequest()
-    }
-    response = NewModifyDisksRenewFlagResponse()
     err = c.Send(request, response)
     return
 }

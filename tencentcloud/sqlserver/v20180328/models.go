@@ -258,6 +258,9 @@ type CreateDBInstancesRequest struct {
 
 	// SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). The version purchasable varies by region and can be queried by calling the `DescribeProductConfig` API. If this parameter is left empty, 2008R2 will be used by default.
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Auto-renewal flag. 0: normal renewal, 1: auto-renewal. Default value: 1.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 }
 
 func (r *CreateDBInstancesRequest) ToJsonString() string {
@@ -275,6 +278,9 @@ type CreateDBInstancesResponse struct {
 
 		// Order name
 		DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+		// Order name array
+		DealNames []*string `json:"DealNames,omitempty" name:"DealNames" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -512,6 +518,12 @@ type DBInstance struct {
 
 	// Billing ID
 	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
+
+	// Unique string-type ID of instance VPC in the format of `vpc-xxx`, which is an empty string if the basic network is used
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Unique string-type ID of instance subnet in the format of `subnet-xxx`, which is an empty string if the basic network is used
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
 }
 
 type DBPrivilege struct {
@@ -821,6 +833,12 @@ type DescribeDBInstancesRequest struct {
 
 	// Retrieves billing type. 0: pay-as-you-go
 	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Unique string-type ID of instance VPC in the format of `vpc-xxx`. If an empty string ("") is passed in, filtering will be made by basic network.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Unique string-type ID of instance subnet in the format of `subnet-xxx`. If an empty string ("") is passed in, filtering will be made by basic network.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {

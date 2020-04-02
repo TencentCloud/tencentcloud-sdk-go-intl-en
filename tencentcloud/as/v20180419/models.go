@@ -1783,7 +1783,6 @@ type InstanceChargePrepaid struct {
 }
 
 type InstanceMarketOptionsRequest struct {
-	*tchttp.BaseRequest
 
 	// Bidding-related options
 	SpotOptions *SpotMarketOptions `json:"SpotOptions,omitempty" name:"SpotOptions"`
@@ -1791,15 +1790,6 @@ type InstanceMarketOptionsRequest struct {
 	// Market option type. Currently, this only supports the value "spot"
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MarketType *string `json:"MarketType,omitempty" name:"MarketType"`
-}
-
-func (r *InstanceMarketOptionsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *InstanceMarketOptionsRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
 }
 
 type InstanceTag struct {

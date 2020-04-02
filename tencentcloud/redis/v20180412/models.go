@@ -1925,7 +1925,8 @@ type InstanceSet struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Vip6 *string `json:"Vip6,omitempty" name:"Vip6"`
 
-	// 
+	// Internal parameter, which can be ignored
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	RemainBandwidthDuration *string `json:"RemainBandwidthDuration,omitempty" name:"RemainBandwidthDuration"`
 }
 

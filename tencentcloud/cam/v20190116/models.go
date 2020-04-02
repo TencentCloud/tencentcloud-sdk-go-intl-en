@@ -221,7 +221,8 @@ type AttachPolicyInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Deactived *uint64 `json:"Deactived,omitempty" name:"Deactived"`
 
-	// 
+	// List of deprecated products
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail" list`
 }
 
@@ -320,12 +321,17 @@ type AttachedPolicyOfRole struct {
 	// Policy creation method. 1: indicates the policy was created based on product function or item permission; other values indicate the policy was created based on the policy syntax
 	CreateMode *uint64 `json:"CreateMode,omitempty" name:"CreateMode"`
 
-	// Queries if the policy has been deactivated
+	// Whether the product has been deprecated (0: no; 1: yes)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Deactived *uint64 `json:"Deactived,omitempty" name:"Deactived"`
 
-	// 
+	// List of deprecated products
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail" list`
+
+	// Policy description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type ConsumeCustomMFATokenRequest struct {
@@ -460,7 +466,7 @@ type CreateRoleRequest struct {
 	// Whether login is allowed. 1: yes, 0: no
 	ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
 
-	// 
+	// The maximum validity period of the temporary key for creating a role (range: 0-43200)
 	SessionDuration *uint64 `json:"SessionDuration,omitempty" name:"SessionDuration"`
 }
 
@@ -682,6 +688,9 @@ type DeleteUserRequest struct {
 
 	// Sub-user username
 	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether to forcibly delete the sub-user. The default input parameter is `0`. `0`: do not delete the user if the user has undeleted API keys; `1`: first delete the API keys then delete the user if the user has undeleted API keys. To delete API keys, you need to have cam:DeleteApiKey permission, which enables you to delete both enabled and disabled API keys. If you do not have this permission, you will not be able to delete API keys and the user.
+	Force *uint64 `json:"Force,omitempty" name:"Force"`
 }
 
 func (r *DeleteUserRequest) ToJsonString() string {
@@ -1786,8 +1795,12 @@ type RoleInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RoleType *string `json:"RoleType,omitempty" name:"RoleType"`
 
-	// 
+	// Valid period
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	SessionDuration *uint64 `json:"SessionDuration,omitempty" name:"SessionDuration"`
+
+	// 
+	DeletionTaskId *string `json:"DeletionTaskId,omitempty" name:"DeletionTaskId"`
 }
 
 type SAMLProviderInfo struct {
@@ -1887,8 +1900,12 @@ type StrategyInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Deactived *uint64 `json:"Deactived,omitempty" name:"Deactived"`
 
-	// 
+	// List of deprecated products
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail" list`
+
+	// 
+	IsServiceLinkedPolicy *uint64 `json:"IsServiceLinkedPolicy,omitempty" name:"IsServiceLinkedPolicy"`
 }
 
 type SubAccountInfo struct {

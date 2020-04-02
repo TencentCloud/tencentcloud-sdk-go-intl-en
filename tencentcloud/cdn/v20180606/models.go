@@ -320,6 +320,17 @@ type AuthenticationTypeD struct {
 }
 
 type AwsPrivateAccess struct {
+
+	// Switch, which can be set to on or off.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Access ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
+
+	// Key.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 }
 
 type BandwidthAlert struct {
@@ -1550,7 +1561,8 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
 
-	// 
+	// S3 bucket origin access authentication configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
 }
 
@@ -3012,7 +3024,7 @@ type UpdateDomainConfigRequest struct {
 	// Origin-pull timeout configuration
 	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
 
-	// 
+	// Origin access authentication for S3 bucket
 	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
 }
 

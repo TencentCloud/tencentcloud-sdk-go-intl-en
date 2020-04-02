@@ -1930,6 +1930,10 @@ type ListenerBackend struct {
 	// List of real servers bound to a listener (applicable only to TCP/UDP/TCP_SSL listeners)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Targets []*Backend `json:"Targets,omitempty" name:"Targets" list`
+
+	// Ending port in port range if port range is supported; 0 if port range is not supported
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	EndPort *int64 `json:"EndPort,omitempty" name:"EndPort"`
 }
 
 type ListenerHealth struct {
@@ -2115,11 +2119,16 @@ type LoadBalancer struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps" list`
 
-	// 
+	// Performance guarantee specification
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
-	// 
+	// Whether VIP is blocked
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsBlock *bool `json:"IsBlock,omitempty" name:"IsBlock"`
+
+	// 
+	IsBlockTime *string `json:"IsBlockTime,omitempty" name:"IsBlockTime"`
 }
 
 type LoadBalancerHealth struct {
