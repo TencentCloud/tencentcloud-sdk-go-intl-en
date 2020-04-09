@@ -593,6 +593,56 @@ func (c *Client) DescribeExistedInstances(request *DescribeExistedInstancesReque
     return
 }
 
+func NewDescribeImagesRequest() (request *DescribeImagesRequest) {
+    request = &DescribeImagesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeImages")
+    return
+}
+
+func NewDescribeImagesResponse() (response *DescribeImagesResponse) {
+    response = &DescribeImagesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get image information.
+func (c *Client) DescribeImages(request *DescribeImagesRequest) (response *DescribeImagesResponse, err error) {
+    if request == nil {
+        request = NewDescribeImagesRequest()
+    }
+    response = NewDescribeImagesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
+    request = &DescribeRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeRegions")
+    return
+}
+
+func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
+    response = &DescribeRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain all regions supported by TKE.
+func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *DescribeRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRegionsRequest()
+    }
+    response = NewDescribeRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRouteTableConflictsRequest() (request *DescribeRouteTableConflictsRequest) {
     request = &DescribeRouteTableConflictsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -614,6 +664,31 @@ func (c *Client) DescribeRouteTableConflicts(request *DescribeRouteTableConflict
         request = NewDescribeRouteTableConflictsRequest()
     }
     response = NewDescribeRouteTableConflictsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyClusterAttributeRequest() (request *ModifyClusterAttributeRequest) {
+    request = &ModifyClusterAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterAttribute")
+    return
+}
+
+func NewModifyClusterAttributeResponse() (response *ModifyClusterAttributeResponse) {
+    response = &ModifyClusterAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify cluster attributes.
+func (c *Client) ModifyClusterAttribute(request *ModifyClusterAttributeRequest) (response *ModifyClusterAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyClusterAttributeRequest()
+    }
+    response = NewModifyClusterAttributeResponse()
     err = c.Send(request, response)
     return
 }

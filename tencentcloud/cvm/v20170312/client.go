@@ -715,6 +715,31 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
     return
 }
 
+func NewDescribeReservedInstancesRequest() (request *DescribeReservedInstancesRequest) {
+    request = &DescribeReservedInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cvm", APIVersion, "DescribeReservedInstances")
+    return
+}
+
+func NewDescribeReservedInstancesResponse() (response *DescribeReservedInstancesResponse) {
+    response = &DescribeReservedInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to list reserved instances the user has purchased.
+func (c *Client) DescribeReservedInstances(request *DescribeReservedInstancesRequest) (response *DescribeReservedInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeReservedInstancesRequest()
+    }
+    response = NewDescribeReservedInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeZoneInstanceConfigInfosRequest() (request *DescribeZoneInstanceConfigInfosRequest) {
     request = &DescribeZoneInstanceConfigInfosRequest{
         BaseRequest: &tchttp.BaseRequest{},

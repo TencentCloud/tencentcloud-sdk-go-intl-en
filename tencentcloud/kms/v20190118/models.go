@@ -959,7 +959,7 @@ type ListKeyDetailRequest struct {
 	// Filters by CMK type. "TENCENT_KMS" indicates to filter CMKs whose key materials are created by KMS; "EXTERNAL" indicates to filter CMKs of `EXTERNAL` type whose key materials are imported by users; "ALL" or empty indicates to filter CMKs of both types. This value is case-sensitive.
 	Origin *string `json:"Origin,omitempty" name:"Origin"`
 
-	// Filter by `KeyUsage` of CMKs. If this parameter is left empty, it means to filter all CMKs. Valid values: ENCRYPT_DECRYPT, ASYMMETRIC_DECRYPT_RSA_2048, ASYMMETRIC_DECRYPT_SM2
+	// Filter by `KeyUsage` of CMKs. Valid values: `ALL` (filter all CMKs), `ENCRYPT_DECRYPT` (it will be used when the parameter is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`.
 	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
 }
 

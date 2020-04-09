@@ -106,6 +106,9 @@ type Address struct {
 
 	// Whether the EIP is automatically released after being unbound. `True` indicates the EIP will be automatically released after being unbound. `False` indicates the EIP will not be automatically released after being unbound.
 	CascadeRelease *bool `json:"CascadeRelease,omitempty" name:"CascadeRelease"`
+
+	// Type of the protocol used in EIP ALG
+	EipAlgType *AlgType `json:"EipAlgType,omitempty" name:"EipAlgType"`
 }
 
 type AddressTemplate struct {
@@ -136,6 +139,18 @@ type AddressTemplateGroup struct {
 
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// IP address template instance
+	AddressTemplateSet []*AddressTemplateItem `json:"AddressTemplateSet,omitempty" name:"AddressTemplateSet" list`
+}
+
+type AddressTemplateItem struct {
+
+	// Start address
+	From *string `json:"From,omitempty" name:"From"`
+
+	// End address
+	To *string `json:"To,omitempty" name:"To"`
 }
 
 type AddressTemplateSpecification struct {
@@ -145,6 +160,15 @@ type AddressTemplateSpecification struct {
 
 	// The ID of the IP address group, such as `ipmg-2uw6ujo6`.
 	AddressGroupId *string `json:"AddressGroupId,omitempty" name:"AddressGroupId"`
+}
+
+type AlgType struct {
+
+	// Whether FTP ALG is enabled
+	Ftp *bool `json:"Ftp,omitempty" name:"Ftp"`
+
+	// Whether SIP ALG is enabled
+	Sip *bool `json:"Sip,omitempty" name:"Sip"`
 }
 
 type AllocateAddressesRequest struct {
@@ -177,14 +201,21 @@ type AllocateAddressesRequest struct {
 	// <ul style="margin:0"><li>For a user who has activated the AIA whitelist, possible values are:<ul><li>AnycastEIP: an Anycast EIP address. For more information, see [Anycast Internet Acceleration](https://cloud.tencent.com/document/product/644).</li></ul>Note: Only certain regions support Anycast EIPs.</li></ul>
 	AddressType *string `json:"AddressType,omitempty" name:"AddressType"`
 
-	// The Anycast publishing region.
-	// <ul style="margin:0"><li>For a user who has activated the AIA whitelist, possible values are:<ul><li>ANYCAST_ZONE_GLOBAL: the global publishing region (the global AIA whitelist must be activated additionally.) </li><li>ANYCAST_ZONE_OVERSEAS: the publishing regions outside Mainland China </li></ul>Default: ANYCAST_ZONE_OVERSEAS.</li></ul>
+	// Anycast publishing region
+	// <ul style="margin:0"><li>Valid for users who have activated AIA. Values:<ul><li>ANYCAST_ZONE_GLOBAL: global publishing region </li><li>ANYCAST_ZONE_OVERSEAS: overseas publishing region</li><li><b>**[Disused]**</b> ANYCAST_ZONE_A: publishing region A (updated to ANYCAST_ZONE_GLOBAL)</li><li><b>**[Disused]**</b> ANYCAST_ZONE_B: publishing region B (updated to ANYCAST_ZONE_GLOBAL)</li></ul>Default: ANYCAST_ZONE_OVERSEAS.</li></ul>
 	AnycastZone *string `json:"AnycastZone,omitempty" name:"AnycastZone"`
 
-	// Whether the Anycast EIP can be bound to Cloud Load Balancer (CLB) instances.
-	// <ul style="margin:0"><li>For a user who has activated the AIA whitelist, possible values are:<ul><li>TRUE: the Anycast EIP can be bound to CLB instances.</li>
-	// <li>FALSE: the Anycast EIP can be bound to CVMs, NAT gateways, and HA virtual IP addresses.</li></ul>Default: FALSE.</li></ul>
+	// <b>**[Disused]**</b>
+	// Whether the Anycast EIP can be bound to CLB instances.
+	// <ul style="margin:0"><li>Valid for users who have activated the AIA. Values:<ul><li>TRUE: the Anycast EIP can be bound to CLB instances.</li>
+	// <li>FALSE: the Anycast EIP can be bound to CVMs, NAT gateways, and HAVIPs.</li></ul>Default: FALSE.</li></ul>
 	ApplicableForCLB *bool `json:"ApplicableForCLB,omitempty" name:"ApplicableForCLB"`
+
+	// 
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// 
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 }
 
 func (r *AllocateAddressesRequest) ToJsonString() string {
@@ -340,6 +371,49 @@ func (r *AssignIpv6SubnetCidrBlockResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type AssignPrivateIpAddressesRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The information of the specified private IPs. You can specify a maximum of 10 each time.
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+
+	// The number of private IP addresses that is newly applied for. The total number of private IP addresses cannot exceed the quota.
+	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
+}
+
+func (r *AssignPrivateIpAddressesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AssignPrivateIpAddressesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AssignPrivateIpAddressesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The detailed information of the Private IP.
+		PrivateIpAddressSet []*PrivateIpAddressSpecification `json:"PrivateIpAddressSet,omitempty" name:"PrivateIpAddressSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AssignPrivateIpAddressesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AssignPrivateIpAddressesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type AssistantCidr struct {
 
 	// The `ID` of a `VPC` instance, such as `vpc-6v2ht8q5`.
@@ -399,6 +473,43 @@ func (r *AssociateAddressResponse) ToJsonString() string {
 }
 
 func (r *AssociateAddressResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AssociateNetworkAclSubnetsRequest struct {
+	*tchttp.BaseRequest
+
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Array of subnet instance IDs. Example: [subnet-12345678]
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+}
+
+func (r *AssociateNetworkAclSubnetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AssociateNetworkAclSubnetsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AssociateNetworkAclSubnetsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AssociateNetworkAclSubnetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AssociateNetworkAclSubnetsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -546,6 +657,9 @@ type CCN struct {
 	// The limit type. INTER_REGION_LIMIT is the limit between regions. OUTER_REGION_LIMIT is a region egress limit.
 	// Note: This field may return null, indicating no valid value.
 	BandwidthLimitType *string `json:"BandwidthLimitType,omitempty" name:"BandwidthLimitType"`
+
+	// Tag key-value pairs.
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
 }
 
 type CcnAttachedInstance struct {
@@ -828,6 +942,9 @@ type CreateCcnRequest struct {
 
 	// The bandwidth limit type. OUTER_REGION_LIMIT: regional outbound limit. INTER_REGION_LIMIT: inter-regional limit. Default: OUTER_REGION_LIMIT.
 	BandwidthLimitType *string `json:"BandwidthLimitType,omitempty" name:"BandwidthLimitType"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateCcnRequest) ToJsonString() string {
@@ -1043,6 +1160,9 @@ type CreateNatGatewayRequest struct {
 
 	// The availability zone, such as `ap-guangzhou-1`.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateNatGatewayRequest) ToJsonString() string {
@@ -1143,6 +1263,46 @@ func (r *CreateNetDetectResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateNetworkAclRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of the DescribeVpcs API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Name of the network ACL. The maximum length is 60 bytes.
+	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
+}
+
+func (r *CreateNetworkAclRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateNetworkAclRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateNetworkAclResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Network ACL instance
+		NetworkAcl *NetworkAcl `json:"NetworkAcl,omitempty" name:"NetworkAcl"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateNetworkAclResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateNetworkAclResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateNetworkInterfaceRequest struct {
 	*tchttp.BaseRequest
 
@@ -1209,6 +1369,9 @@ type CreateRouteTableRequest struct {
 
 	// The route table name. The maximum length is 60 characters.
 	RouteTableName *string `json:"RouteTableName,omitempty" name:"RouteTableName"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateRouteTableRequest) ToJsonString() string {
@@ -1330,8 +1493,11 @@ type CreateSecurityGroupRequest struct {
 	// The remarks for the security group. The maximum length is 100 characters.
 	GroupDescription *string `json:"GroupDescription,omitempty" name:"GroupDescription"`
 
-	// The project id is 0 by default. You can query this in the project management page of the Qcloud console.
+	// Project ID. The default is 0. You can query it on the project management page of the Qcloud console.
 	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateSecurityGroupRequest) ToJsonString() string {
@@ -1458,6 +1624,9 @@ type CreateSubnetRequest struct {
 
 	// The ID of the availability zone in which the subnet resides. You can set up disaster recovery across availability zones by choosing different availability zones for different subnets.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateSubnetRequest) ToJsonString() string {
@@ -1498,6 +1667,9 @@ type CreateSubnetsRequest struct {
 
 	// The subnet object list.
 	Subnets []*SubnetInput `json:"Subnets,omitempty" name:"Subnets" list`
+
+	// Bound tags. Note that the collection of tags here is shared by all subnet objects in the list. You cannot specify tags for each subnet. Example: [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateSubnetsRequest) ToJsonString() string {
@@ -1547,6 +1719,9 @@ type CreateVpcRequest struct {
 
 	// Domain name
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateVpcRequest) ToJsonString() string {
@@ -1985,6 +2160,40 @@ func (r *DeleteNetDetectResponse) ToJsonString() string {
 }
 
 func (r *DeleteNetDetectResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteNetworkAclRequest struct {
+	*tchttp.BaseRequest
+
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+}
+
+func (r *DeleteNetworkAclRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteNetworkAclRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteNetworkAclResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteNetworkAclResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteNetworkAclResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3202,6 +3411,58 @@ func (r *DescribeNetDetectsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeNetworkAclsRequest struct {
+	*tchttp.BaseRequest
+
+	// Array of network ACL instance IDs, such as [acl-12345678]. Up to 100 instances are allowed for each request. This parameter does not support specifying `NetworkAclIds` and `Filters` at the same time.
+	NetworkAclIds []*string `json:"NetworkAclIds,omitempty" name:"NetworkAclIds" list`
+
+	// Filter condition. `NetworkAclIds` and `Filters` cannot be specified at the same time.
+	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as vpc-12345678.</li>
+	// <li>network-acl-id - String - (Filter condition) Network ACL instance ID, such as acl-12345678.</li>
+	// <li>network-acl-name - String - (Filter condition) Network ACL instance name.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Offset. Default: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Returned quantity. Default: 20. Value range: 1-100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeNetworkAclsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeNetworkAclsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeNetworkAclsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of instance details.
+		NetworkAclSet []*NetworkAcl `json:"NetworkAclSet,omitempty" name:"NetworkAclSet" list`
+
+		// Number of eligible instances.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeNetworkAclsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeNetworkAclsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeNetworkInterfaceLimitRequest struct {
 	*tchttp.BaseRequest
 
@@ -3225,7 +3486,7 @@ type DescribeNetworkInterfaceLimitResponse struct {
 		// ENI quota
 		EniQuantity *int64 `json:"EniQuantity,omitempty" name:"EniQuantity"`
 
-		// The quota of IP addresses that can be allocated to each ENI.
+		// Quota of IP addresses that can be allocated to each ENI.
 		EniPrivateIpAddressQuantity *int64 `json:"EniPrivateIpAddressQuantity,omitempty" name:"EniPrivateIpAddressQuantity"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3239,6 +3500,118 @@ func (r *DescribeNetworkInterfaceLimitResponse) ToJsonString() string {
 }
 
 func (r *DescribeNetworkInterfaceLimitResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeNetworkInterfacesRequest struct {
+	*tchttp.BaseRequest
+
+	// Queries the ID of the ENI instance, such as `eni-pxir56ns`. Each request can have a maximum of 100 instances. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
+	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds" list`
+
+	// Filter condition. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
+	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
+	// <li>subnet-id - String - (Filter condition) Subnet instance ID, such as `subnet-f49l6u0z`.</li>
+	// <li>network-interface-id - String - (Filter condition) ENI instance ID, such as `eni-5k56k7k7`.</li>
+	// <li>attachment.instance-id - String - (Filter condition) CVM instance ID, such as `ins-3nqpdn3i`.</li>
+	// <li>groups.security-group-id - String - (Filter condition) Instance ID of the security group, such as `sg-f9ekbxeq`.</li>
+	// <li>network-interface-name - String - (Filter condition) ENI instance name.</li>
+	// <li>network-interface-description - String - (Filter condition) ENI instance description.</li>
+	// <li>address-ip - String - (Filter condition) Private IPv4 address.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeNetworkInterfacesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeNetworkInterfacesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeNetworkInterfacesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of instance details.
+		NetworkInterfaceSet []*NetworkInterface `json:"NetworkInterfaceSet,omitempty" name:"NetworkInterfaceSet" list`
+
+		// The number of instances meeting the filter condition.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeNetworkInterfacesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeNetworkInterfacesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRouteTablesRequest struct {
+	*tchttp.BaseRequest
+
+	// The route table instance ID, such as `rtb-azd4dt1c`.
+	RouteTableIds []*string `json:"RouteTableIds,omitempty" name:"RouteTableIds" list`
+
+	// Filter condition. `RouteTableIds` and `Filters` cannot be speified at the same time.
+	// <li>route-table-id - String - (Filter condition) Route table instance ID.</li>
+	// <li>route-table-name - String - (Filter condition) Route table name.</li>
+	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
+	// <li>association.main - String - (Filter condition) Whether it is the main route table.</li>
+	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+	// <li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key is replaced with the specific tag key. For usage, refer to case 2.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Offset.
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of request objects.
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeRouteTablesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRouteTablesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRouteTablesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of instances meeting the filter condition.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Route table object.
+		RouteTableSet []*RouteTable `json:"RouteTableSet,omitempty" name:"RouteTableSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRouteTablesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRouteTablesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3717,12 +4090,12 @@ type DescribeVpnConnectionsRequest struct {
 	// The instance ID of the VPN tunnel, such as `vpnx-f49l6u0z`. Each request can have a maximum of 100 instances. `VpnConnectionIds` and `Filters` cannot be specified at the same time.
 	VpnConnectionIds []*string `json:"VpnConnectionIds,omitempty" name:"VpnConnectionIds" list`
 
-	// The filter condition. For details, see the Instance Filter Conditions Table. The upper limit for `Filters` in each request is 10 and 5 for `Filter.Values`. `VpnConnectionIds` and `Filters` cannot be specified at the same time.
-	// <li>vpc-id - String - The VPC instance ID, such as `vpc-0a36uwkr`.</li>
-	// <li>vpn-gateway-id - String - The VPN gateway instance ID, such as `vpngw-p4lmqawn`.</li>
-	// <li>customer-gateway-id - String - The customer gateway instance ID, such as `cgw-l4rblw63`.</li>
-	// <li>vpn-connection-name - String - The connection name, such as `test-vpn`.</li>
-	// <li>vpn-connection-id - String - The connection instance ID, such as `vpnx-5p7vkch8"`.</li>
+	// Filter condition. In each request, the upper limit for `Filters` is 10 and 5 for `Filter.Values`. `VpnConnectionIds` and `Filters` cannot be specified at the same time.
+	// <li>vpc-id - String - VPC instance ID, such as `vpc-0a36uwkr`.</li>
+	// <li>vpn-gateway-id - String - VPN gateway instance ID, such as `vpngw-p4lmqawn`.</li>
+	// <li>customer-gateway-id - String - Customer gateway instance ID, such as `cgw-l4rblw63`.</li>
+	// <li>vpn-connection-name - String - Connection name, such as `test-vpn`.</li>
+	// <li>vpn-connection-id - String - Connection instance ID, such as `vpnx-5p7vkch8"`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// The Offset. The default value is 0. For more information about Offset, see the relevant section in the API Introduction.
@@ -4079,6 +4452,43 @@ func (r *DisassociateNatGatewayAddressResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DisassociateNetworkAclSubnetsRequest struct {
+	*tchttp.BaseRequest
+
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Array of subnet instance IDs. Example: [subnet-12345678].
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+}
+
+func (r *DisassociateNetworkAclSubnetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisassociateNetworkAclSubnetsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DisassociateNetworkAclSubnetsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DisassociateNetworkAclSubnetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisassociateNetworkAclSubnetsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DownloadCustomerGatewayConfigurationRequest struct {
 	*tchttp.BaseRequest
 
@@ -4231,6 +4641,9 @@ type HaVip struct {
 
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Identifier for businesses that use HAVIP.
+	Business *string `json:"Business,omitempty" name:"Business"`
 }
 
 type HaVipAssociateAddressIpRequest struct {
@@ -4759,6 +5172,12 @@ func (r *ModifyCcnAttributeResponse) FromJsonString(s string) error {
 
 type ModifyCcnRegionBandwidthLimitsTypeRequest struct {
 	*tchttp.BaseRequest
+
+	// CCN instance ID.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// CCN bandwidth limit type. INTER_REGION_LIMIT: limit between regions. OUTER_REGION_LIMIT: region egress limit.
+	BandwidthLimitType *string `json:"BandwidthLimitType,omitempty" name:"BandwidthLimitType"`
 }
 
 func (r *ModifyCcnRegionBandwidthLimitsTypeRequest) ToJsonString() string {
@@ -4998,6 +5417,80 @@ func (r *ModifyNetDetectResponse) ToJsonString() string {
 }
 
 func (r *ModifyNetDetectResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNetworkAclAttributeRequest struct {
+	*tchttp.BaseRequest
+
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Name of the network ACL. The maximum length is 60 bytes.
+	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
+}
+
+func (r *ModifyNetworkAclAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyNetworkAclAttributeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNetworkAclAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyNetworkAclAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyNetworkAclAttributeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNetworkAclEntriesRequest struct {
+	*tchttp.BaseRequest
+
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Network ACL rule set.
+	NetworkAclEntrySet *NetworkAclEntrySet `json:"NetworkAclEntrySet,omitempty" name:"NetworkAclEntrySet"`
+}
+
+func (r *ModifyNetworkAclEntriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyNetworkAclEntriesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNetworkAclEntriesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyNetworkAclEntriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyNetworkAclEntriesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5562,7 +6055,7 @@ type NetDetect struct {
 	// The array of detection source IPv4 addresses automatically allocated by the system. The length is 2.
 	DetectSourceIp []*string `json:"DetectSourceIp,omitempty" name:"DetectSourceIp" list`
 
-	// The type of the next hop. Currently supported types are:
+	// Type of the next hop. Currently supported types are:
 	// VPN: VPN gateway;
 	// DIRECTCONNECT: direct connect gateway;
 	// PEERCONNECTION: peering connection;
@@ -5570,7 +6063,7 @@ type NetDetect struct {
 	// NORMAL_CVM: normal CVM.
 	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
 
-	// The next-hop destination gateway. The value is related to NextHopType.
+	// Next-hop destination gateway. The value is related to NextHopType.
 	// If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
 	// If NextHopType is set to DIRECTCONNECT, the value of this parameter is the direct connect gateway ID, such as dcg-12345678.
 	// If NextHopType is set to PEERCONNECTION, the value of this parameter is the peering connection ID, such as pcx-12345678.
@@ -5618,6 +6111,63 @@ type NetDetectState struct {
 
 	// The array of network detection destination IP verification results.
 	NetDetectIpStateSet []*NetDetectIpState `json:"NetDetectIpStateSet,omitempty" name:"NetDetectIpStateSet" list`
+}
+
+type NetworkAcl struct {
+
+	// `ID` of the `VPC` instance.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// `ID` of the network ACL instance.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Name of the network ACL. The maximum length is 60 bytes.
+	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
+
+	// Creation time.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Array of subnets associated with the network ACL.
+	SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet" list`
+
+	// Inbound rules of the network ACL.
+	IngressEntries []*NetworkAclEntry `json:"IngressEntries,omitempty" name:"IngressEntries" list`
+
+	// Outbound rules of the network ACL.
+	EgressEntries []*NetworkAclEntry `json:"EgressEntries,omitempty" name:"EgressEntries" list`
+}
+
+type NetworkAclEntry struct {
+
+	// Modification time.
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// Protocol. Valid values: TCP, UDP, and ICMP.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Port (all, a single port, or a port range).
+	Port *string `json:"Port,omitempty" name:"Port"`
+
+	// IP range or IP address (mutually exclusive).
+	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
+
+	// CIDR block or IPv6 address (mutually exclusive).
+	Ipv6CidrBlock *string `json:"Ipv6CidrBlock,omitempty" name:"Ipv6CidrBlock"`
+
+	// ACCEPT or DROP.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// Rule description, which is up to 100 bytes.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+type NetworkAclEntrySet struct {
+
+	// Inbound rules.
+	Ingress []*NetworkAclEntry `json:"Ingress,omitempty" name:"Ingress" list`
+
+	// Outbound rules.
+	Egress []*NetworkAclEntry `json:"Egress,omitempty" name:"Egress" list`
 }
 
 type NetworkInterface struct {
@@ -6159,15 +6709,15 @@ type Route struct {
 	// Destination IP range, such as 112.20.51.0/24. Values cannot be in the VPC IP range.
 	DestinationCidrBlock *string `json:"DestinationCidrBlock,omitempty" name:"DestinationCidrBlock"`
 
-	// The type of the next hop. Currently supported types include:
-	// CVM: Public gateway-type CVM;
+	// Type of the next hop. Currently supported types are:
+	// CVM: CVM of the public gateway type;
 	// VPN: VPN gateway;
-	// DIRECTCONNECT: Direct connect gateway;
-	// PEERCONNECTION: Peering connection;
+	// DIRECTCONNECT: direct connect gateway;
+	// PEERCONNECTION: peering connection;
 	// SSLVPN: sslvpn gateway;
 	// NAT: NAT gateway; 
-	// NORMAL_CVM: Normal CVM;
-	// EIP: The public IP of the CVM;
+	// NORMAL_CVM: normal CVM;
+	// EIP: public IP address of the CVM;
 	// CCN: Cloud Connect Network.
 	GatewayType *string `json:"GatewayType,omitempty" name:"GatewayType"`
 
@@ -6190,6 +6740,9 @@ type Route struct {
 	// CCN: CCN route. The system delivers by default. It cannot be edited or deleted.
 	// Users can only add and operate USER-type routes.
 	RouteType *string `json:"RouteType,omitempty" name:"RouteType"`
+
+	// Route table instance ID, such as rtb-azd4dt1c.
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 }
 
 type RouteTable struct {
@@ -6214,6 +6767,9 @@ type RouteTable struct {
 
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Tag key-value pairs.
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
 }
 
 type RouteTableAssociation struct {
@@ -6244,6 +6800,9 @@ type SecurityGroup struct {
 
 	// Security group creation time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Tag key-value pairs.
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
 }
 
 type SecurityGroupAssociationStatistics struct {
@@ -6355,6 +6914,9 @@ type ServiceTemplateGroup struct {
 
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Protocol port template instance information.
+	ServiceTemplateSet []*ServiceTemplate `json:"ServiceTemplateSet,omitempty" name:"ServiceTemplateSet" list`
 }
 
 type ServiceTemplateSpecification struct {
@@ -6443,6 +7005,12 @@ type Subnet struct {
 
 	// Whether it is a `SNAT` address pool subnet.
 	IsRemoteVpcSnat *bool `json:"IsRemoteVpcSnat,omitempty" name:"IsRemoteVpcSnat"`
+
+	// Total number of subnet `IP` addresses.
+	TotalIpAddressCount *uint64 `json:"TotalIpAddressCount,omitempty" name:"TotalIpAddressCount"`
+
+	// Tag key-value pairs
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
 }
 
 type SubnetInput struct {
@@ -6785,7 +7353,7 @@ type VpnGateway struct {
 	// Gateway instance name.
 	VpnGatewayName *string `json:"VpnGatewayName,omitempty" name:"VpnGatewayName"`
 
-	// Gateway instance type: 'IPSEC' and 'SSL'.
+	// Gateway instance type. Valid values: 'IPSEC', 'SSL', and 'CCN'.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Gateway instance status. 'PENDING': Creating; 'DELETING': Deleting; 'AVAILABLE': Running.
@@ -6823,6 +7391,12 @@ type VpnGateway struct {
 
 	// Gateway bandwidth quota information.
 	VpnGatewayQuotaSet []*VpnGatewayQuota `json:"VpnGatewayQuotaSet,omitempty" name:"VpnGatewayQuotaSet" list`
+
+	// Gateway instance version.
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// CCN instance ID when the value of Type is CCN.
+	NetworkInstanceId *string `json:"NetworkInstanceId,omitempty" name:"NetworkInstanceId"`
 }
 
 type VpnGatewayQuota struct {

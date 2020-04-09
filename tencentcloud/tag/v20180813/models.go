@@ -568,6 +568,10 @@ type TagResource struct {
 
 	// Tag value MD5 value.
 	TagValueMd5 *string `json:"TagValueMd5,omitempty" name:"TagValueMd5"`
+
+	// Resource type
+	// Note: this field may return null, indicating that no valid values found.
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 }
 
 type TagWithDelete struct {

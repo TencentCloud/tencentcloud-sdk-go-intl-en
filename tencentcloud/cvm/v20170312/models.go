@@ -1162,6 +1162,69 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeReservedInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Dry run. The default is false.
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://cloud.tencent.com/document/api/213/15688).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. The default value is 20. The maximum is 100. For more information on `Limit`, see the relevant sections in API [Overview](https://cloud.tencent.com/document/api/213/15688).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// <li><strong>zone</strong></li>
+	// <p style="padding-left: 30px;">Filters by the **<strong>availability zones</strong>** in which reserved instances can be purchased. For example, "ap-guangzhou-1".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/6091">list of availability zones</a></p>
+	// <li><strong>duration</strong></li>
+	// <p style="padding-left: 30px;">Filters by reserved instance **<strong>validity</strong>** (in seconds). For example, 31536000.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Unit: second</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: 31536000 (1 year) | 94608000 (3 years)</p>
+	// <li><strong>instance-type</strong></li>
+	// <p style="padding-left: 30px;">Filters by **<strong>specifications of reserved instances</strong>**. For example, "S3.MEDIUM4".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/11518">list of reserved instance specifiations</a></p>
+	// <li><strong>offering-type</strong></li>
+	// <p style="padding-left: 30px;">Filters by **<strong>payment method</strong>**. For example, "All Upfront".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: All Upfront</p>
+	// <li><strong>product-description</strong></li>
+	// <p style="padding-left: 30px;">Filters by the **<strong>operating system</strong>** of the reserved instance. For example, "linux".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: linux</p>
+	// <li><strong>reserved-instances-id</strong></li>
+	// <p style="padding-left: 30px;">Filters by **<strong>reserved instance ID</strong>. Reserved instance IDs take the form "650c138f-ae7e-4750-952a-96841d6e9fc1".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
+	// <li><strong>state</strong></li>
+	// <p style="padding-left: 30px;">Filters by **<strong>reserved instance status</strong>. For example, "active".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required</p><p style="padding-left: 30px;">Valid values: "active" (created) | "pending" (waiting to be created) | "retired" (expired)</p>
+	// Each request can have up to 10 `Filters` and 5 `Filters.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeReservedInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeReservedInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReservedInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of eligible reserved instances.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of eligible reserved instances.
+		ReservedInstancesSet []*ReservedInstances `json:"ReservedInstancesSet,omitempty" name:"ReservedInstancesSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeReservedInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeReservedInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeZoneInstanceConfigInfosRequest struct {
 	*tchttp.BaseRequest
 
@@ -2626,6 +2689,49 @@ type RegionInfo struct {
 
 	// Whether the region is available
 	RegionState *string `json:"RegionState,omitempty" name:"RegionState"`
+}
+
+type ReservedInstances struct {
+
+	// The ID of the purchased reserved instance, taking the form 650c138f-ae7e-4750-952a-96841d6e9fc1.
+	ReservedInstancesId *string `json:"ReservedInstancesId,omitempty" name:"ReservedInstancesId"`
+
+	// The type of the reserved instance. For example, S3.MEDIUM4.
+	// Returned value: <a href="https://cloud.tencent.com/document/product/213/11518">list of reserved instance types</a>
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Availability zones in which the reserved instance can be purchased. For example, "ap-guangzhou-1".
+	// Returned values: <a href="https://cloud.tencent.com/document/product/213/6091">list of availability zones</a>
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Start time of the reserved instance billing, taking the form of 2019-10-23 00:00:00.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the reserved instance, taking the form of 2019-10-23 00:00:00
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The **validity** of the reserved instance in seconds, which is the purchased usage period. For example, 31536000.
+	// Measurement unit: second.
+	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
+
+	// The number of reserved instances that have been purchased. For example, 10.
+	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// The operating system of the reserved instance. For example, "linux".
+	// Returned value: linux.
+	ProductDescription *string `json:"ProductDescription,omitempty" name:"ProductDescription"`
+
+	// The status of the reserved instance. For example, "active".
+	// Returned value: "active" (created) | "pending" (waiting to be created) | "retired" (expired).
+	State *string `json:"State,omitempty" name:"State"`
+
+	// The currency in which the reserved instance is billed. The ISO 4217 standard currency codes are used. For example, USD.
+	// Returned value: USD.
+	CurrencyCode *string `json:"CurrencyCode,omitempty" name:"CurrencyCode"`
+
+	// The payment method of the reserved instance. For example, "All Upfront".
+	// Returned value: All Upfront.
+	OfferingType *string `json:"OfferingType,omitempty" name:"OfferingType"`
 }
 
 type ResetInstanceRequest struct {

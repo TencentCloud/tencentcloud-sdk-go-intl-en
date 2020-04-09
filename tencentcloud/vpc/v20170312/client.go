@@ -180,6 +180,34 @@ func (c *Client) AssignIpv6SubnetCidrBlock(request *AssignIpv6SubnetCidrBlockReq
     return
 }
 
+func NewAssignPrivateIpAddressesRequest() (request *AssignPrivateIpAddressesRequest) {
+    request = &AssignPrivateIpAddressesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "AssignPrivateIpAddresses")
+    return
+}
+
+func NewAssignPrivateIpAddressesResponse() (response *AssignPrivateIpAddressesResponse) {
+    response = &AssignPrivateIpAddressesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (AssignPrivateIpAddresses) is used for the ENI to apply for private IPs.
+// * An ENI can only be bound with a limited number of IPs. For more information about resource limits, see<a href="/document/product/576/18527">ENI use limits</a>.
+// * You can specify the private IP you want to apply for. It cannot be the primary IP, which already exists and cannot be modified. The private IP must be in the same subnet as the ENI, and cannot be occupied.
+// * You can apply for more than one secondary private IP on the ENI. The API will return the specified number of secondary private IPs in the subnet IP range of the ENI.
+func (c *Client) AssignPrivateIpAddresses(request *AssignPrivateIpAddressesRequest) (response *AssignPrivateIpAddressesResponse, err error) {
+    if request == nil {
+        request = NewAssignPrivateIpAddressesRequest()
+    }
+    response = NewAssignPrivateIpAddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAssociateAddressRequest() (request *AssociateAddressRequest) {
     request = &AssociateAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -207,6 +235,31 @@ func (c *Client) AssociateAddress(request *AssociateAddressRequest) (response *A
         request = NewAssociateAddressRequest()
     }
     response = NewAssociateAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAssociateNetworkAclSubnetsRequest() (request *AssociateNetworkAclSubnetsRequest) {
+    request = &AssociateNetworkAclSubnetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "AssociateNetworkAclSubnets")
+    return
+}
+
+func NewAssociateNetworkAclSubnetsResponse() (response *AssociateNetworkAclSubnetsResponse) {
+    response = &AssociateNetworkAclSubnetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to associate a network ACL with subnets in a VPC instance.
+func (c *Client) AssociateNetworkAclSubnets(request *AssociateNetworkAclSubnetsRequest) (response *AssociateNetworkAclSubnetsResponse, err error) {
+    if request == nil {
+        request = NewAssociateNetworkAclSubnetsRequest()
+    }
+    response = NewAssociateNetworkAclSubnetsResponse()
     err = c.Send(request, response)
     return
 }
@@ -252,9 +305,9 @@ func NewAttachClassicLinkVpcResponse() (response *AttachClassicLinkVpcResponse) 
     return
 }
 
-// This API (AttachClassicLinkVpc) is used to create a Classiclink between a VPC and a basic network device.
-// * The VPC and the basic network device must be in the same region.
-// * For the difference between VPCs and basic networks, see VPC product documentation-<a href="https://cloud.tencent.com/document/product/215/535#2.-.E7.A7.81.E6.9C.89.E7.BD.91.E7.BB.9C.E4.B8.8E.E5.9F.BA.E7.A1.80.E7.BD.91.E7.BB.9C">VPCs and basic networks</a>.
+// This API is used to create a Classiclink between a VPC instance and a basic network device.
+// * The VPC instance and the basic network device must be in the same region.
+// * For differences between VPC and basic networks, see <a href="https://cloud.tencent.com/document/product/215/30720">VPC and Basic Networks</a>.
 func (c *Client) AttachClassicLinkVpc(request *AttachClassicLinkVpcRequest) (response *AttachClassicLinkVpcResponse, err error) {
     if request == nil {
         request = NewAttachClassicLinkVpcRequest()
@@ -279,11 +332,11 @@ func NewAttachNetworkInterfaceResponse() (response *AttachNetworkInterfaceRespon
     return
 }
 
-// This API (AttachNetworkInterface) is used to bind an ENI to a CVM.
-// * One CVM can be bound to multiple ENIs, but only one primary ENI. For more information on the limits, see <a href="https://cloud.tencent.com/document/product/215/6513">ENI use limits</a>.
+// This API is used to bind an ENI to a CVM.
+// * One CVM can be bound to multiple ENIs, but only one primary ENI. For more information on the limits, see <a href="https://cloud.tencent.com/document/product/576/18527">ENI Use Limits</a>.
 // * An ENI can only be bound to one CVM at a time.
-// * Only CVMs in running or shutdown status can be bound to an ENI. For more information about CVM status, see <a href="https://cloud.tencent.com/document/api/213/9452#instance_state">Tencent CVM information</a>.
-// * An ENI can only be bound to a CVM in VPC, and the CVM must reside in the same availability zone as the subnet of the ENI.
+// * Only CVMs in the running or shutdown state can be bound to an ENI. For more information on CVM states, see <a href="https://cloud.tencent.com/document/api/213/9452#InstanceStatus">Tencent CVM Information</a>.
+// * An ENI can only be bound to a CVM in a VPC instance, and the CVM must reside in the same availability zone as the subnet of the ENI.
 func (c *Client) AttachNetworkInterface(request *AttachNetworkInterfaceRequest) (response *AttachNetworkInterfaceResponse, err error) {
     if request == nil {
         request = NewAttachNetworkInterfaceRequest()
@@ -383,8 +436,9 @@ func NewCreateCcnResponse() (response *CreateCcnResponse) {
     return
 }
 
-// This API (CreateCcn) is used to create a Cloud Connect Network (CCN).<br />
-// Each account can only create a limited number of CCN instances. For more information, see the product documentation. If you need to create more instances, please contact the online customer service.
+// This API is used to create a Cloud Connect Network (CCN).<br />
+// * You can bind a tag when creating a CCN instance. The tag list in the response indicates the tags that have been successfully added.
+// Each account can only create a limited number of CCN instances. For more information, see product documentation. To create more instances, contact the online customer service.
 func (c *Client) CreateCcn(request *CreateCcnRequest) (response *CreateCcnResponse, err error) {
     if request == nil {
         request = NewCreateCcnRequest()
@@ -552,6 +606,32 @@ func (c *Client) CreateNetDetect(request *CreateNetDetectRequest) (response *Cre
     return
 }
 
+func NewCreateNetworkAclRequest() (request *CreateNetworkAclRequest) {
+    request = &CreateNetworkAclRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateNetworkAcl")
+    return
+}
+
+func NewCreateNetworkAclResponse() (response *CreateNetworkAclResponse) {
+    response = &CreateNetworkAclResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a <a href="https://cloud.tencent.com/document/product/215/20088">network ACL</a>.
+// * The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` after creation to set rules for the network ACL as needed.
+func (c *Client) CreateNetworkAcl(request *CreateNetworkAclRequest) (response *CreateNetworkAclResponse, err error) {
+    if request == nil {
+        request = NewCreateNetworkAclRequest()
+    }
+    response = NewCreateNetworkAclResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateNetworkInterfaceRequest() (request *CreateNetworkInterfaceRequest) {
     request = &CreateNetworkInterfaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -597,8 +677,9 @@ func NewCreateRouteTableResponse() (response *CreateRouteTableResponse) {
     return
 }
 
-// This API (CreateRouteTable) is used to create a route table.
-// * After the VPC has been created, the system will create a default route table with which all newly created subnets will be associated. By default, you can use this route table to manage your routing policies. If you have multiple routing policies, you can call the API for creating route table to create more route tables to manage your routing policies.
+// This API is used to create a route table.
+// * After the VPC instance has been created, the system creates a default route table with which all newly created subnets will be associated. By default, you can use this route table to manage your routing policies. If you have multiple routing policies, you can call the API for creating route tables to create more route tables to manage these routing policies.
+// * You can bind a tag when creating a route table. The tag list in the response indicates the tags that have been successfully added.
 func (c *Client) CreateRouteTable(request *CreateRouteTableRequest) (response *CreateRouteTableResponse, err error) {
     if request == nil {
         request = NewCreateRouteTableRequest()
@@ -649,9 +730,10 @@ func NewCreateSecurityGroupResponse() (response *CreateSecurityGroupResponse) {
     return
 }
 
-// This API (CreateSecurityGroup) is used to create security groups (SecurityGroup).
-// * <a href="https://cloud.tencent.com/document/product/213/500#2.-.E5.AE.89.E5.85.A8.E7.BB.84.E7.9A.84.E9.99.90.E5.88.B6">Security group limits</a> for each project in each region under each account.
-// * Both the inbound and outbound rules for a newly created security group are Deny All by default. You need to call CreateSecurityGroupPolicies to set the security group rules according to your needs.
+// This API is used to create a security group (SecurityGroup).
+// * Note the <a href="https://cloud.tencent.com/document/product/213/12453">maximum number of security groups</a> per project in each region under each account.
+// * Both the inbound and outbound rules for a newly created security group are "Deny All" by default. You need to call CreateSecurityGroupPolicies to set security group rules based on your needs.
+// * You can bind a tag when creating a security group. The tag list in the response indicates the tags that have been successfully added.
 func (c *Client) CreateSecurityGroup(request *CreateSecurityGroupRequest) (response *CreateSecurityGroupResponse, err error) {
     if request == nil {
         request = NewCreateSecurityGroupRequest()
@@ -761,12 +843,13 @@ func NewCreateSubnetResponse() (response *CreateSubnetResponse) {
     return
 }
 
-// This API (CreateSubnet) is used to create subnets.
-// * You must create a VPC before creating a subnet.
-// * After the subnet is successfully created, its IP address range cannot be modified. The subnet IP address range must fall within the VPC IP address range. They can be the same if the VPC has only one subnet. We recommend that you keep the subnet IP address range within the VPC IP address range to reserve IP address ranges for other subnets.
+// This API is used to create a subnet.
+// * You must create a VPC instance before creating a subnet.
+// * After the subnet is successfully created, its IP address range cannot be modified. The subnet IP address range must fall within the VPC IP address range. They can be the same if the VPC instance has only one subnet. We recommend that you keep the subnet IP address range within the VPC IP address range to reserve IP address ranges for other subnets.
 // * The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses).
-// * IP address ranges of different subnets cannot overlap with each other within the same VPC.
+// * IP address ranges of different subnets cannot overlap with each other within the same VPC instance.
 // * A subnet is automatically associated with the default route table once created.
+// * You can bind a tag when creating a subnet. The tag list in the response indicates the tags that have been successfully added.
 func (c *Client) CreateSubnet(request *CreateSubnetRequest) (response *CreateSubnetResponse, err error) {
     if request == nil {
         request = NewCreateSubnetRequest()
@@ -791,12 +874,13 @@ func NewCreateSubnetsResponse() (response *CreateSubnetsResponse) {
     return
 }
 
-// This API (CreateSubnets) is used to create subnets in batches.
-// * You must create a VPC before creating a subnet.
+// This API is used to create subnets in batches.
+// * You must create a VPC instance before creating a subnet.
 // * After the subnet is successfully created, its IP address range cannot be modified. The subnet IP address range must fall within the VPC IP address range. They can be the same if the VPC has only one subnet. We recommend that you keep the subnet IP address range within the VPC IP address range to reserve IP address ranges for other subnets.
 // * The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses).
-// * IP address ranges of different subnets cannot overlap with each other within the same VPC.
+// * IP address ranges of different subnets cannot overlap with each other within the same VPC instance.
 // * A subnet is automatically associated with the default route table once created.
+// * You can bind a tag when creating a subnet. The tag list in the response indicates the tags that have been successfully added.
 func (c *Client) CreateSubnets(request *CreateSubnetsRequest) (response *CreateSubnetsResponse, err error) {
     if request == nil {
         request = NewCreateSubnetsRequest()
@@ -821,9 +905,10 @@ func NewCreateVpcResponse() (response *CreateVpcResponse) {
     return
 }
 
-// This API (CreateVpc) is used to create a VPC.
-// * The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses). For more information, please see corresponding documents about VPC IP address ranges.
-// * The number of VPCs that can be created in a region is limited. For more information, please see <a href="https://intl.cloud.tencent.com/doc/product/215/537" title="VPC use limits">VPC use limits</a>. To request more resources, please contact the online customer service.
+// This API is used to create a VPC instance.
+// * The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses). For more information, see the corresponding documents about VPC IP address ranges.
+// * The number of VPC instances that can be created in a region is limited. For more information, see <a href="https://intl.cloud.tencent.com/doc/product/215/537" title="VPC Use Limits">VPC Use Limits</a>. To request more resources, contact the online customer service.
+// * You can bind a tag when creating a VPC instance. The tag list in the response indicates the tags that have been successfully added.
 func (c *Client) CreateVpc(request *CreateVpcRequest) (response *CreateVpcResponse, err error) {
     if request == nil {
         request = NewCreateVpcRequest()
@@ -1083,6 +1168,31 @@ func (c *Client) DeleteNetDetect(request *DeleteNetDetectRequest) (response *Del
         request = NewDeleteNetDetectRequest()
     }
     response = NewDeleteNetDetectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteNetworkAclRequest() (request *DeleteNetworkAclRequest) {
+    request = &DeleteNetworkAclRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteNetworkAcl")
+    return
+}
+
+func NewDeleteNetworkAclResponse() (response *DeleteNetworkAclResponse) {
+    response = &DeleteNetworkAclResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a network ACL.
+func (c *Client) DeleteNetworkAcl(request *DeleteNetworkAclRequest) (response *DeleteNetworkAclResponse, err error) {
+    if request == nil {
+        request = NewDeleteNetworkAclRequest()
+    }
+    response = NewDeleteNetworkAclResponse()
     err = c.Send(request, response)
     return
 }
@@ -1774,6 +1884,31 @@ func (c *Client) DescribeNetDetects(request *DescribeNetDetectsRequest) (respons
     return
 }
 
+func NewDescribeNetworkAclsRequest() (request *DescribeNetworkAclsRequest) {
+    request = &DescribeNetworkAclsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNetworkAcls")
+    return
+}
+
+func NewDescribeNetworkAclsResponse() (response *DescribeNetworkAclsResponse) {
+    response = &DescribeNetworkAclsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query a list of network ACLs.
+func (c *Client) DescribeNetworkAcls(request *DescribeNetworkAclsRequest) (response *DescribeNetworkAclsResponse, err error) {
+    if request == nil {
+        request = NewDescribeNetworkAclsRequest()
+    }
+    response = NewDescribeNetworkAclsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeNetworkInterfaceLimitRequest() (request *DescribeNetworkInterfaceLimitRequest) {
     request = &DescribeNetworkInterfaceLimitRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1789,12 +1924,62 @@ func NewDescribeNetworkInterfaceLimitResponse() (response *DescribeNetworkInterf
     return
 }
 
-// This API (DescribeNetworkInterfaceLimit) is used to query the ENI quota based on the CVM instance ID. It returns the ENI quota to which the CVM instance can be bound and the IP address quota that can be allocated to each ENI.
+// This API is used to query the ENI quota based on the CVM instance ID. It returns the ENI quota to which the CVM instance can be bound and the IP address quota that can be allocated to each ENI.
 func (c *Client) DescribeNetworkInterfaceLimit(request *DescribeNetworkInterfaceLimitRequest) (response *DescribeNetworkInterfaceLimitResponse, err error) {
     if request == nil {
         request = NewDescribeNetworkInterfaceLimitRequest()
     }
     response = NewDescribeNetworkInterfaceLimitResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNetworkInterfacesRequest() (request *DescribeNetworkInterfacesRequest) {
+    request = &DescribeNetworkInterfacesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNetworkInterfaces")
+    return
+}
+
+func NewDescribeNetworkInterfacesResponse() (response *DescribeNetworkInterfacesResponse) {
+    response = &DescribeNetworkInterfacesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeNetworkInterfaces) is used to query the ENI list.
+func (c *Client) DescribeNetworkInterfaces(request *DescribeNetworkInterfacesRequest) (response *DescribeNetworkInterfacesResponse, err error) {
+    if request == nil {
+        request = NewDescribeNetworkInterfacesRequest()
+    }
+    response = NewDescribeNetworkInterfacesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRouteTablesRequest() (request *DescribeRouteTablesRequest) {
+    request = &DescribeRouteTablesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeRouteTables")
+    return
+}
+
+func NewDescribeRouteTablesResponse() (response *DescribeRouteTablesResponse) {
+    response = &DescribeRouteTablesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+//  This API (DescribeRouteTables) is used to query route tables.
+func (c *Client) DescribeRouteTables(request *DescribeRouteTablesRequest) (response *DescribeRouteTablesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRouteTablesRequest()
+    }
+    response = NewDescribeRouteTablesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2256,6 +2441,31 @@ func (c *Client) DisassociateNatGatewayAddress(request *DisassociateNatGatewayAd
     return
 }
 
+func NewDisassociateNetworkAclSubnetsRequest() (request *DisassociateNetworkAclSubnetsRequest) {
+    request = &DisassociateNetworkAclSubnetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DisassociateNetworkAclSubnets")
+    return
+}
+
+func NewDisassociateNetworkAclSubnetsResponse() (response *DisassociateNetworkAclSubnetsResponse) {
+    response = &DisassociateNetworkAclSubnetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to disassociate a network ACL from subnets in a VPC instance.
+func (c *Client) DisassociateNetworkAclSubnets(request *DisassociateNetworkAclSubnetsRequest) (response *DisassociateNetworkAclSubnetsResponse, err error) {
+    if request == nil {
+        request = NewDisassociateNetworkAclSubnetsRequest()
+    }
+    response = NewDisassociateNetworkAclSubnetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDownloadCustomerGatewayConfigurationRequest() (request *DownloadCustomerGatewayConfigurationRequest) {
     request = &DownloadCustomerGatewayConfigurationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2577,7 +2787,7 @@ func NewModifyCcnRegionBandwidthLimitsTypeResponse() (response *ModifyCcnRegionB
     return
 }
 
-// This API (ModifyCcnRegionBandwidthlimitsType) is used to modify the bandwidth limits policy of the postpaid Ccn instances.
+// This API is used to modify the bandwidth limit policy of a postpaid CCN instance.
 func (c *Client) ModifyCcnRegionBandwidthLimitsType(request *ModifyCcnRegionBandwidthLimitsTypeRequest) (response *ModifyCcnRegionBandwidthLimitsTypeResponse, err error) {
     if request == nil {
         request = NewModifyCcnRegionBandwidthLimitsTypeRequest()
@@ -2708,6 +2918,56 @@ func (c *Client) ModifyNetDetect(request *ModifyNetDetectRequest) (response *Mod
         request = NewModifyNetDetectRequest()
     }
     response = NewModifyNetDetectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNetworkAclAttributeRequest() (request *ModifyNetworkAclAttributeRequest) {
+    request = &ModifyNetworkAclAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNetworkAclAttribute")
+    return
+}
+
+func NewModifyNetworkAclAttributeResponse() (response *ModifyNetworkAclAttributeResponse) {
+    response = &ModifyNetworkAclAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the attributes of a network ACL.
+func (c *Client) ModifyNetworkAclAttribute(request *ModifyNetworkAclAttributeRequest) (response *ModifyNetworkAclAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyNetworkAclAttributeRequest()
+    }
+    response = NewModifyNetworkAclAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNetworkAclEntriesRequest() (request *ModifyNetworkAclEntriesRequest) {
+    request = &ModifyNetworkAclEntriesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNetworkAclEntries")
+    return
+}
+
+func NewModifyNetworkAclEntriesResponse() (response *ModifyNetworkAclEntriesResponse) {
+    response = &ModifyNetworkAclEntriesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify (add or delete) the inbound and outbound rules of a network ACL.
+func (c *Client) ModifyNetworkAclEntries(request *ModifyNetworkAclEntriesRequest) (response *ModifyNetworkAclEntriesResponse, err error) {
+    if request == nil {
+        request = NewModifyNetworkAclEntriesRequest()
+    }
+    response = NewModifyNetworkAclEntriesResponse()
     err = c.Send(request, response)
     return
 }

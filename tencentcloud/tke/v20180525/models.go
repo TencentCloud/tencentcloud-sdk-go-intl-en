@@ -1113,6 +1113,84 @@ func (r *DescribeExistedInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeImagesRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeImagesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeImagesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeImagesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of images
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Image information list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ImageInstanceSet []*ImageInstance `json:"ImageInstanceSet,omitempty" name:"ImageInstanceSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeImagesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeImagesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRegionsRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeRegionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRegionsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRegionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of regions
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// ## Region List
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		RegionInstanceSet []*RegionInstance `json:"RegionInstanceSet,omitempty" name:"RegionInstanceSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRegionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRegionsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeRouteTableConflictsRequest struct {
 	*tchttp.BaseRequest
 
@@ -1258,11 +1336,30 @@ type ExistedInstancesPara struct {
 
 type Filter struct {
 
-	// Attribute name. If more than one Filter exists, the logical relationship between these Filters is AND.
+	// Filters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Attribute value. If there are multiple Values for one Filter, the logical relationship between the Values under the same Filter is OR.
+	// Filter values.
 	Values []*string `json:"Values,omitempty" name:"Values" list`
+}
+
+type ImageInstance struct {
+
+	// Image alias
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+
+	// Operating system name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	OsName *string `json:"OsName,omitempty" name:"OsName"`
+
+	// Image ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
+
+	// Container image tag, **DOCKER_CUSTOMIZE** (container customized tag), **GENERAL** (general tag, default value)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
 }
 
 type Instance struct {
@@ -1358,6 +1455,61 @@ type LoginSettings struct {
 	KeepImageLogin *string `json:"KeepImageLogin,omitempty" name:"KeepImageLogin"`
 }
 
+type ModifyClusterAttributeRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Project of the Cluster
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Cluster description
+	ClusterDesc *string `json:"ClusterDesc,omitempty" name:"ClusterDesc"`
+}
+
+func (r *ModifyClusterAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterAttributeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyClusterAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Project of the Cluster
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+		// Cluster name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+		// Cluster description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ClusterDesc *string `json:"ClusterDesc,omitempty" name:"ClusterDesc"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyClusterAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterAttributeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyClusterEndpointSPRequest struct {
 	*tchttp.BaseRequest
 }
@@ -1387,6 +1539,33 @@ func (r *ModifyClusterEndpointSPResponse) ToJsonString() string {
 
 func (r *ModifyClusterEndpointSPResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type RegionInstance struct {
+
+	// Region name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+
+	// Region ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Region status
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Status of region-related features (return all attributes in JSON format)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FeatureGates *string `json:"FeatureGates,omitempty" name:"FeatureGates"`
+
+	// Region abbreviation
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+
+	// Whitelisted location
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
 type RouteInfo struct {

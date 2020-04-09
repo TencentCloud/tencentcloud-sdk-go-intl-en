@@ -1352,6 +1352,10 @@ type DescribeLoadBalancersRequest struct {
 
 	// Master AZ, such as "100001" (Guangzhou Zone 1)
 	MasterZone *string `json:"MasterZone,omitempty" name:"MasterZone"`
+
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`. Detailed filter conditions:
+	// <li> internet-charge-type - Type: String - Required: No - Filter by CLB network billing mode, including `TRAFFIC_POSTPAID_BY_HOUR`</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
 func (r *DescribeLoadBalancersRequest) ToJsonString() string {
@@ -2127,7 +2131,8 @@ type LoadBalancer struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsBlock *bool `json:"IsBlock,omitempty" name:"IsBlock"`
 
-	// 
+	// Time blocked or unblocked
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsBlockTime *string `json:"IsBlockTime,omitempty" name:"IsBlockTime"`
 }
 
@@ -2417,8 +2422,14 @@ type ModifyRuleRequest struct {
 	// Session persistence time
 	SessionExpireTime *int64 `json:"SessionExpireTime,omitempty" name:"SessionExpireTime"`
 
-	// Forwarding protocol between CLB instance and real server. Value range: HTTP, HTTPS. Default value: HTTP
+	// Forwarding protocol between CLB instance and real server. Default value: HTTP. Valid values: HTTP, HTTPS, TRPC.
 	ForwardType *string `json:"ForwardType,omitempty" name:"ForwardType"`
+
+	// TRPC callee server route, which is required when `ForwardType` is `TRPC`.
+	TrpcCallee *string `json:"TrpcCallee,omitempty" name:"TrpcCallee"`
+
+	// TRPC calling service API, which is required when `ForwardType` is `TRPC`.
+	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
 }
 
 func (r *ModifyRuleRequest) ToJsonString() string {
