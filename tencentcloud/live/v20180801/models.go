@@ -458,7 +458,7 @@ type CreateLiveRecordRequest struct {
 	// Stream name.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
-	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Push domain name. This parameter must be set for multi-domain name push.
@@ -469,7 +469,7 @@ type CreateLiveRecordRequest struct {
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Recording end time, which is China standard time and should be URL-encoded (RFC3986). For example, the encoding of 2017-01-01 10:30:01 is 2017-01-01+10%3a30%3a01.
-	// In scheduled recording mode, this field must be set; in real-time video recording mode, this field is optional. If the recording is set to real-time video recording mode through the Highlight parameter, the end time set should not be more than 30 minutes after the current time. If the set end time is more than 30 minutes after the current time, earlier than the current time or left blank, the actual end time will be 30 minutes after the current time.
+	// In scheduled recording mode, this field must be set; in real-time video recording mode, this field is optional. If the recording is set to real-time video recording mode through the `Highlight` parameter, the set end time should not be more than 30 minutes after the current time. If the set end time is more than 30 minutes after the current time, earlier than the current time, or left empty, the actual end time will be 30 minutes after the current time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Recording type.
@@ -488,17 +488,17 @@ type CreateLiveRecordRequest struct {
 	// 1: Real-time video recording mode is enabled. See [Sample 2](#.E7.A4.BA.E4.BE.8B2-.E5.88.9B.E5.BB.BA.E5.AE.9E.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1).
 	Highlight *int64 `json:"Highlight,omitempty" name:"Highlight"`
 
-	// Mark for enabling A+B=C mixed stream recording.
+	// Flag for enabling A+B=C mixed stream recording.
 	// 0: A+B=C mixed stream recording is not enabled **(default)**.
 	// 1: A+B=C mixed stream recording is enabled.
 	// In both scheduled and real-time video recording modes, this parameter is valid.
 	MixStream *int64 `json:"MixStream,omitempty" name:"MixStream"`
 
 	// Recording stream parameter. The following parameters are supported currently:
-	// record_interval: Recording interval in seconds. Value range: 1,800–7,200
-	// storage_time: Recording file duration in seconds
-	// eg. record_interval=3600&storage_time=2592000
-	// Note: The parameter needs url encode.
+	// record_interval: recording interval in seconds. Value range: 1800-7200.
+	// storage_time: recording file storage duration in seconds.
+	// Example: record_interval=3600&storage_time=2592000.
+	// Note: the parameter needs to be URL-encoded.
 	// In both scheduled and real-time video recording modes, this parameter is valid.
 	StreamParam *string `json:"StreamParam,omitempty" name:"StreamParam"`
 }
@@ -516,7 +516,7 @@ type CreateLiveRecordResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Task ID, which uniquely identifies the recording task globally.
+		// Task ID, which uniquely identifies a recording task globally.
 		TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1290,7 +1290,7 @@ func (r *DeleteLiveSnapshotTemplateResponse) FromJsonString(s string) error {
 type DeleteLiveTranscodeRuleRequest struct {
 	*tchttp.BaseRequest
 
-	// Push domain name.
+	// Playback domain name.
 	// For transcoding at the domain name level, domain name+AppName+StreamName uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
@@ -2683,7 +2683,9 @@ type DomainInfo struct {
 	// Expiration time of leased domain name
 	RentExpireTime *string `json:"RentExpireTime,omitempty" name:"RentExpireTime"`
 
-	// 
+	// 0: LVB,
+	// 1: LVB on WeChat Mini Program.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitempty" name:"IsMiniProgramLive"`
 }
 
@@ -3493,7 +3495,7 @@ type ResumeLiveStreamRequest struct {
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
-	// Your acceleration domain name.
+	// Your push domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
 	// Stream name.

@@ -1967,13 +1967,13 @@ type DescribeListenerStatisticsRequest struct {
 	// End time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Statistical metric name list. It supports: ["InBandwidth", "OutBandwidth", "Concurrent", "InPackets", "OutPackets"]
+	// Statistical metric name list. It supports:["InBandwidth", "OutBandwidth", "Concurrent", "InPackets", "OutPackets"]
 	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
 
 	// Monitoring granularity. It currently supports: 300, 3,600, and 86,400. Unit: seconds.
 	// Time range: ≤ 1 day, supported minimum granularity: 300 seconds;
-	// Time range: ≤ 7 days, supported minimum granularity: 3,600 seconds;
-	// Time range: > 7 days, supported minimum granularity: 86,400 seconds;
+	// Time range：≤ 7 days, supported minimum granularity:3,600 seconds;
+	// Time range: ＞7 days, supported minimum granularity:86,400 seconds;
 	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
 }
 
@@ -3074,6 +3074,10 @@ type DomainErrorPageInfo struct {
 	// Configured response body (excluding HTTP header)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Body *string `json:"Body,omitempty" name:"Body"`
+
+	// Rule status. 0: success
+	// Note: this field may return null, indicating that no valid value is obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
 type DomainRuleSet struct {
@@ -4313,6 +4317,10 @@ type ProxyInfo struct {
 	// Whether security groups are supported.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SupportSecurity *int64 `json:"SupportSecurity,omitempty" name:"SupportSecurity"`
+
+	// Billing mode. 0: bill by bandwidth; 1: bill by traffic
+	// Note: this field may return null, indicating that no valid value is obtained.
+	BillingType *int64 `json:"BillingType,omitempty" name:"BillingType"`
 }
 
 type ProxySimpleInfo struct {

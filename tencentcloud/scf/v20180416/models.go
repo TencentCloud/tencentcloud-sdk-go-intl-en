@@ -265,7 +265,7 @@ type CreateTriggerRequest struct {
 	// Trigger type. Currently, COS, CMQ, timer, and ckafka triggers are supported.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Parameter corresponding to the trigger. For a timer trigger, it should be a Linux cron expression; for a COS trigger, it should be a JSON string ({"event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}), where `event` is the triggered COS event, `Prefix` in the `filter` is the corresponding file prefix filter, and `Suffix` is the corresponding suffix filter, and the `filter` can be left blank if not needed; for other triggers, please see the description of the specific trigger.
+	// For parameters of triggers, see [Trigger Description](https://cloud.tencent.com/document/product/583/39901)
 	TriggerDesc *string `json:"TriggerDesc,omitempty" name:"TriggerDesc"`
 
 	// Function namespace
@@ -557,6 +557,14 @@ type FunctionVersion struct {
 	// Version description
 	// Note: This field may return null, indicating that no valid values is found.
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// The creation time
+	// Note: This field may return null, indicating that no valid value was found.
+	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
+
+	// Update time
+	// Note: This field may return null, indicating that no valid value was found.
+	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
 }
 
 type GetFunctionAddressRequest struct {
@@ -813,7 +821,8 @@ type GetFunctionResponse struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 		PublicNetConfig *PublicNetConfigOut `json:"PublicNetConfig,omitempty" name:"PublicNetConfig"`
 
-		// 
+		// Whether Ons is enabled
+	// Note: This field may return null, indicating that no valid value was found.
 		OnsEnable *string `json:"OnsEnable,omitempty" name:"OnsEnable"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -905,10 +914,11 @@ type LayerVersionInfo struct {
 	// Layer name
 	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
 
-	// Current status of a layer. Valid values:
-	// publishing
-	// available
-	// unavailable
+	// The status of the layer version. Values can be: 
+	// `Active`: normal
+	// `Publishing`: publishing
+	// `PublishFailed`: failed to publish
+	// `Deleted`: deleted
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -1362,13 +1372,13 @@ type UpdateFunctionConfigurationRequest struct {
 	// Whether to enable L5 access. TRUE: enable; FALSE: not enable
 	L5Enable *string `json:"L5Enable,omitempty" name:"L5Enable"`
 
-	// List of layer versions with which a function will be associated. Layers will be overwritten sequentially in the order in the list.
+	// List of layer versions that bound with the function. Files with the same name will be overridden by the bound layer versions according to the ascending order in the list. 
 	Layers []*LayerVersionSimple `json:"Layers,omitempty" name:"Layers" list`
 
 	// Information of a dead letter queue associated with a function
 	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitempty" name:"DeadLetterConfig"`
 
-	// 
+	// Whether to enable Ons access. TRUE: enable; FALSE: not enable
 	OnsEnable *string `json:"OnsEnable,omitempty" name:"OnsEnable"`
 }
 

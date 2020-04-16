@@ -51,7 +51,6 @@ type AclResponse struct {
 	// ACL list
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AclList []*Acl `json:"AclList,omitempty" name:"AclList" list`
-	} `json:"Response"`
 }
 
 type AppIdResponse struct {
@@ -62,7 +61,6 @@ type AppIdResponse struct {
 	// List of eligible `AppId`
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AppIdList []*int64 `json:"AppIdList,omitempty" name:"AppIdList" list`
-	} `json:"Response"`
 }
 
 type Assignment struct {
@@ -148,7 +146,6 @@ type ConsumerGroupResponse struct {
 	// List of monitored groups
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	GroupListForMonitor []*Group `json:"GroupListForMonitor,omitempty" name:"GroupListForMonitor" list`
-	} `json:"Response"`
 }
 
 type ConsumerGroupTopic struct {
@@ -1264,7 +1261,6 @@ type GroupInfoResponse struct {
 
 	// Kafka consumer group
 	Group *string `json:"Group,omitempty" name:"Group"`
-	} `json:"Response"`
 }
 
 type GroupInfoTopics struct {
@@ -1307,7 +1303,6 @@ type GroupOffsetResponse struct {
 	// Array of partitions in the topic, where each element is a JSON object
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TopicList []*GroupOffsetTopic `json:"TopicList,omitempty" name:"TopicList" list`
-	} `json:"Response"`
 }
 
 type GroupOffsetTopic struct {
@@ -1329,7 +1324,6 @@ type GroupResponse struct {
 	// GroupList
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	GroupList []*DescribeGroup `json:"GroupList,omitempty" name:"GroupList" list`
-	} `json:"Response"`
 }
 
 type Instance struct {
@@ -1433,7 +1427,6 @@ type InstanceAttributesResponse struct {
 	// Sale type
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Cvm *int64 `json:"Cvm,omitempty" name:"Cvm"`
-	} `json:"Response"`
 }
 
 type InstanceConfigDO struct {
@@ -1527,7 +1520,6 @@ type InstanceDetailResponse struct {
 
 	// List of eligible instance details
 	InstanceList []*InstanceDetail `json:"InstanceList,omitempty" name:"InstanceList" list`
-	} `json:"Response"`
 }
 
 type InstanceResponse struct {
@@ -1539,7 +1531,6 @@ type InstanceResponse struct {
 	// Total number of eligible results
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-	} `json:"Response"`
 }
 
 type JgwOperateResponse struct {
@@ -1553,7 +1544,6 @@ type JgwOperateResponse struct {
 	// Data returned by an operation, which may contain `flowId`, etc.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Data *OperateResponseData `json:"Data,omitempty" name:"Data"`
-	} `json:"Response"`
 }
 
 type ModifyGroupOffsetsRequest struct {
@@ -1865,7 +1855,6 @@ type TopicAttributesResponse struct {
 
 	// Partition details
 	Partitions []*TopicPartitionDO `json:"Partitions,omitempty" name:"Partitions" list`
-	} `json:"Response"`
 }
 
 type TopicDetail struct {
@@ -1918,7 +1907,6 @@ type TopicDetailResponse struct {
 
 	// Number of all eligible topic details
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-	} `json:"Response"`
 }
 
 type TopicPartitionDO struct {
@@ -1970,7 +1958,6 @@ type UserResponse struct {
 
 	// Total number of eligible users
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-	} `json:"Response"`
 }
 
 type VipEntity struct {

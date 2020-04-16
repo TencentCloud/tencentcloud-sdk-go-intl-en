@@ -229,7 +229,7 @@ type AttachPolicyInfo struct {
 type AttachRolePolicyRequest struct {
 	*tchttp.BaseRequest
 
-	// Policy ID
+	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// Role ID, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
@@ -237,6 +237,9 @@ type AttachRolePolicyRequest struct {
 
 	// Role name, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
 	AttachRoleName *string `json:"AttachRoleName,omitempty" name:"AttachRoleName"`
+
+	// Policy name. Either `PolicyId` or `PolicyName` must be entered
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 }
 
 func (r *AttachRolePolicyRequest) ToJsonString() string {
@@ -804,7 +807,7 @@ func (r *DetachGroupPolicyResponse) FromJsonString(s string) error {
 type DetachRolePolicyRequest struct {
 	*tchttp.BaseRequest
 
-	// Policy ID
+	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// Role ID, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
@@ -812,6 +815,9 @@ type DetachRolePolicyRequest struct {
 
 	// Role name, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
 	DetachRoleName *string `json:"DetachRoleName,omitempty" name:"DetachRoleName"`
+
+	// Policy name. Either `PolicyId` or `PolicyName` must be entered
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 }
 
 func (r *DetachRolePolicyRequest) ToJsonString() string {
@@ -1438,6 +1444,9 @@ type ListGroupsForUserRequest struct {
 
 	// Page number; default is 1
 	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Sub-account UIN
+	SubUin *uint64 `json:"SubUin,omitempty" name:"SubUin"`
 }
 
 func (r *ListGroupsForUserRequest) ToJsonString() string {
@@ -1791,7 +1800,7 @@ type RoleInfo struct {
 	// If login is allowed for the role
 	ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
 
-	// User role. Valid values: user, system
+	// User role. Valid values: `user`, `system`, `service_linked`
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RoleType *string `json:"RoleType,omitempty" name:"RoleType"`
 
@@ -1799,7 +1808,8 @@ type RoleInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SessionDuration *uint64 `json:"SessionDuration,omitempty" name:"SessionDuration"`
 
-	// 
+	// Task identifier for deleting a service-linked role 
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeletionTaskId *string `json:"DeletionTaskId,omitempty" name:"DeletionTaskId"`
 }
 
@@ -1833,7 +1843,7 @@ type SetFlagRequest struct {
 	// Remote login settings
 	OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
 
-	// If MFA requires top-up
+	// Whether or not to reset MFA
 	NeedResetMfa *uint64 `json:"NeedResetMfa,omitempty" name:"NeedResetMfa"`
 }
 
@@ -1904,7 +1914,8 @@ type StrategyInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail" list`
 
-	// 
+	// The deletion task identifier used to check the deletion status of the service-linked role
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsServiceLinkedPolicy *uint64 `json:"IsServiceLinkedPolicy,omitempty" name:"IsServiceLinkedPolicy"`
 }
 
@@ -2012,49 +2023,6 @@ func (r *UpdateGroupResponse) ToJsonString() string {
 }
 
 func (r *UpdateGroupResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type UpdatePolicyRequest struct {
-	*tchttp.BaseRequest
-
-	// Policy ID
-	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
-
-	// Policy name
-	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
-
-	// Policy description
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
-	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
-}
-
-func (r *UpdatePolicyRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *UpdatePolicyRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type UpdatePolicyResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *UpdatePolicyResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *UpdatePolicyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

@@ -220,6 +220,39 @@ func (c *Client) CreateDBImportJob(request *CreateDBImportJobRequest) (response 
     return
 }
 
+func NewCreateDBInstanceHourRequest() (request *CreateDBInstanceHourRequest) {
+    request = &CreateDBInstanceHourRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "CreateDBInstanceHour")
+    return
+}
+
+func NewCreateDBInstanceHourResponse() (response *CreateDBInstanceHourResponse) {
+    response = &CreateDBInstanceHourResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a pay-as-you-go TencentDB instance (which can be a master, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, and quantity.
+// 
+// This is an async API. You can also use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the instance details. If the `Status` value of an instance is 1 and `TaskStatus` is 0, the instance has been successfully delivered.
+// 
+// 1. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported instance specifications first and then use the [DescribeDBPrice](https://cloud.tencent.com/document/api/236/18566) API to query the prices of the supported instances;
+// 2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months;
+// 3. MySQL v5.5, v5.6, and v5.7 are supported;
+// 4. Master instances, read-only instances, and disaster recovery instances can be created;
+// 5. If `Port`, `ParamList`, or `Password` is set in the input parameters, the instance will be initialized.
+func (c *Client) CreateDBInstanceHour(request *CreateDBInstanceHourRequest) (response *CreateDBInstanceHourResponse, err error) {
+    if request == nil {
+        request = NewCreateDBInstanceHourRequest()
+    }
+    response = NewCreateDBInstanceHourResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDeployGroupRequest() (request *CreateDeployGroupRequest) {
     request = &CreateDeployGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -310,7 +343,7 @@ func NewDeleteBackupResponse() (response *DeleteBackupResponse) {
     return
 }
 
-// This API (DeleteBackup) is used to delete a TencentDB instance backup.
+// This API is used to delete a database backup. It can only delete manually initiated backups.
 func (c *Client) DeleteBackup(request *DeleteBackupRequest) (response *DeleteBackupResponse, err error) {
     if request == nil {
         request = NewDeleteBackupRequest()
@@ -1024,6 +1057,31 @@ func (c *Client) DescribeDeviceMonitorInfo(request *DescribeDeviceMonitorInfoReq
     return
 }
 
+func NewDescribeErrorLogDataRequest() (request *DescribeErrorLogDataRequest) {
+    request = &DescribeErrorLogDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeErrorLogData")
+    return
+}
+
+func NewDescribeErrorLogDataResponse() (response *DescribeErrorLogDataResponse) {
+    response = &DescribeErrorLogDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the details of instance error logs by search criteria. You can only query error logs within a month.
+func (c *Client) DescribeErrorLogData(request *DescribeErrorLogDataRequest) (response *DescribeErrorLogDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeErrorLogDataRequest()
+    }
+    response = NewDescribeErrorLogDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceParamRecordsRequest() (request *DescribeInstanceParamRecordsRequest) {
     request = &DescribeInstanceParamRecordsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1149,6 +1207,31 @@ func (c *Client) DescribeProjectSecurityGroups(request *DescribeProjectSecurityG
     return
 }
 
+func NewDescribeRoGroupsRequest() (request *DescribeRoGroupsRequest) {
+    request = &DescribeRoGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeRoGroups")
+    return
+}
+
+func NewDescribeRoGroupsResponse() (response *DescribeRoGroupsResponse) {
+    response = &DescribeRoGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the information of all RO groups of a TencentDB instance.
+func (c *Client) DescribeRoGroups(request *DescribeRoGroupsRequest) (response *DescribeRoGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRoGroupsRequest()
+    }
+    response = NewDescribeRoGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRollbackRangeTimeRequest() (request *DescribeRollbackRangeTimeRequest) {
     request = &DescribeRollbackRangeTimeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1170,6 +1253,31 @@ func (c *Client) DescribeRollbackRangeTime(request *DescribeRollbackRangeTimeReq
         request = NewDescribeRollbackRangeTimeRequest()
     }
     response = NewDescribeRollbackRangeTimeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSlowLogDataRequest() (request *DescribeSlowLogDataRequest) {
+    request = &DescribeSlowLogDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeSlowLogData")
+    return
+}
+
+func NewDescribeSlowLogDataResponse() (response *DescribeSlowLogDataResponse) {
+    response = &DescribeSlowLogDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to search for slow logs of an instance by criteria. You can only view slow logs within a month.
+func (c *Client) DescribeSlowLogData(request *DescribeSlowLogDataRequest) (response *DescribeSlowLogDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowLogDataRequest()
+    }
+    response = NewDescribeSlowLogDataResponse()
     err = c.Send(request, response)
     return
 }
@@ -1320,6 +1428,31 @@ func (c *Client) DescribeTimeWindow(request *DescribeTimeWindowRequest) (respons
         request = NewDescribeTimeWindowRequest()
     }
     response = NewDescribeTimeWindowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUploadedFilesRequest() (request *DescribeUploadedFilesRequest) {
+    request = &DescribeUploadedFilesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeUploadedFiles")
+    return
+}
+
+func NewDescribeUploadedFilesResponse() (response *DescribeUploadedFilesResponse) {
+    response = &DescribeUploadedFilesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of user-imported SQL files.
+func (c *Client) DescribeUploadedFiles(request *DescribeUploadedFilesRequest) (response *DescribeUploadedFilesResponse, err error) {
+    if request == nil {
+        request = NewDescribeUploadedFilesRequest()
+    }
+    response = NewDescribeUploadedFilesResponse()
     err = c.Send(request, response)
     return
 }
@@ -1858,6 +1991,31 @@ func (c *Client) OpenWanService(request *OpenWanServiceRequest) (response *OpenW
     return
 }
 
+func NewReleaseIsolatedDBInstancesRequest() (request *ReleaseIsolatedDBInstancesRequest) {
+    request = &ReleaseIsolatedDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "ReleaseIsolatedDBInstances")
+    return
+}
+
+func NewReleaseIsolatedDBInstancesResponse() (response *ReleaseIsolatedDBInstancesResponse) {
+    response = &ReleaseIsolatedDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to deisolate an isolated TencentDB instance.
+func (c *Client) ReleaseIsolatedDBInstances(request *ReleaseIsolatedDBInstancesRequest) (response *ReleaseIsolatedDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewReleaseIsolatedDBInstancesRequest()
+    }
+    response = NewReleaseIsolatedDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRestartDBInstancesRequest() (request *RestartDBInstancesRequest) {
     request = &RestartDBInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1958,6 +2116,31 @@ func (c *Client) SwitchForUpgrade(request *SwitchForUpgradeRequest) (response *S
         request = NewSwitchForUpgradeRequest()
     }
     response = NewSwitchForUpgradeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeDBInstanceRequest() (request *UpgradeDBInstanceRequest) {
+    request = &UpgradeDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "UpgradeDBInstance")
+    return
+}
+
+func NewUpgradeDBInstanceResponse() (response *UpgradeDBInstanceResponse) {
+    response = &UpgradeDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to upgrade or downgrade a TencentDB instance, which can be a master instance, disaster recovery instance, or read-only instance.
+func (c *Client) UpgradeDBInstance(request *UpgradeDBInstanceRequest) (response *UpgradeDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewUpgradeDBInstanceRequest()
+    }
+    response = NewUpgradeDBInstanceResponse()
     err = c.Send(request, response)
     return
 }

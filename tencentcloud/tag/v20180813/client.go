@@ -168,6 +168,31 @@ func (c *Client) DescribeResourceTagsByResourceIds(request *DescribeResourceTags
     return
 }
 
+func NewDescribeResourceTagsByTagKeysRequest() (request *DescribeResourceTagsByTagKeysRequest) {
+    request = &DescribeResourceTagsByTagKeysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "DescribeResourceTagsByTagKeys")
+    return
+}
+
+func NewDescribeResourceTagsByTagKeysResponse() (response *DescribeResourceTagsByTagKeysResponse) {
+    response = &DescribeResourceTagsByTagKeysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get resource tags based on tag keys.
+func (c *Client) DescribeResourceTagsByTagKeys(request *DescribeResourceTagsByTagKeysRequest) (response *DescribeResourceTagsByTagKeysResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourceTagsByTagKeysRequest()
+    }
+    response = NewDescribeResourceTagsByTagKeysResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeResourcesByTagsRequest() (request *DescribeResourcesByTagsRequest) {
     request = &DescribeResourcesByTagsRequest{
         BaseRequest: &tchttp.BaseRequest{},

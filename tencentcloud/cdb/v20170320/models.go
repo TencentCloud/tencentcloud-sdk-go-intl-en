@@ -517,6 +517,121 @@ func (r *CreateDBImportJobResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateDBInstanceHourRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of instances. Value range: 1–100. Default value: 1.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Instance memory size in MB. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported memory specifications.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported disk specifications.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// MySQL version. Valid values: 5.5, 5.6, 5.7. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported instance versions.
+	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+
+	// VPC ID. If this parameter is not passed in, the basic network will be selected by default. Please use the [DescribeVpcs](/document/api/215/15778) API to query the VPCs.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the [DescribeSubnets](/document/api/215/15784) API to query the subnet lists.
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Project ID. If this is left empty, the default project will be used. Please use the [DescribeProject](https://cloud.tencent.com/document/product/378/4400) API to get the project ID.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// AZ information. By default, the system will automatically select an AZ. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported AZs.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance ID, which is required and the same as the master instance ID when purchasing read-only or disaster recovery instances. Please use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the instance IDs.
+	MasterInstanceId *string `json:"MasterInstanceId,omitempty" name:"MasterInstanceId"`
+
+	// Instance type. Valid values: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+
+	// AZ information of the master instance, which is required for purchasing disaster recovery instances.
+	MasterRegion *string `json:"MasterRegion,omitempty" name:"MasterRegion"`
+
+	// Custom port. Value range: [1024-65535].
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Sets the root account password. Rule: the password can contain 8–64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// List of parameters in the format of `ParamList.0.Name=auto_increment&ParamList.0.Value=1`. You can use the [DescribeDefaultParams](https://cloud.tencent.com/document/api/236/32662) API to query the configurable parameters.
+	ParamList []*ParamInfo `json:"ParamList,omitempty" name:"ParamList" list`
+
+	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0. This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
+
+	// Multi-AZ. Valid value: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+	DeployMode *int64 `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// AZ information of slave database 1, which is the `Zone` value by default. This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+
+	// AZ information of slave database 2, which is empty by default. This parameter can be specified when purchasing strong sync master instances and is meaningless for other types of instances.
+	BackupZone *string `json:"BackupZone,omitempty" name:"BackupZone"`
+
+	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://cloud.tencent.com/document/api/236/15850) API to query the security group details of a project.
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
+
+	// Read-only instance information. This parameter must be passed in when purchasing read-only instances.
+	RoGroup *RoGroup `json:"RoGroup,omitempty" name:"RoGroup"`
+
+	// This field is meaningless when purchasing pay-as-you-go instances.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Instance name.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance tag information.
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags" list`
+
+	// Placement group ID.
+	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
+
+	// A string that is used to guarantee the idempotency of the request, which is generated by the user and must be unique in each request on the same day. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// 
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+}
+
+func (r *CreateDBInstanceHourRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateDBInstanceHourResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Short order ID.
+		DealIds []*string `json:"DealIds,omitempty" name:"DealIds" list`
+
+		// Instance ID list
+		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateDBInstanceHourResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateDBInstanceHourResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateDeployGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -531,6 +646,9 @@ type CreateDeployGroupRequest struct {
 
 	// Upper limit of instances on one physical machine as defined in affinity policy 1 of placement group.
 	LimitNum *int64 `json:"LimitNum,omitempty" name:"LimitNum"`
+
+	// Model attribute of placement group. Valid values: SH12+SH02, TS85.
+	DevClass []*string `json:"DevClass,omitempty" name:"DevClass" list`
 }
 
 func (r *CreateDeployGroupRequest) ToJsonString() string {
@@ -2064,6 +2182,62 @@ func (r *DescribeDeviceMonitorInfoResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeErrorLogDataRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start timestamp.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End timestamp.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// List of keywords to match. Up to 15 keywords are supported.
+	KeyWords []*string `json:"KeyWords,omitempty" name:"KeyWords" list`
+
+	// Number of results to be returned per page. Maximum value: 400.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeErrorLogDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeErrorLogDataRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeErrorLogDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible entries.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Returned result.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Items []*ErrlogItem `json:"Items,omitempty" name:"Items" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeErrorLogDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeErrorLogDataResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeInstanceParamRecordsRequest struct {
 	*tchttp.BaseRequest
 
@@ -2273,6 +2447,43 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeRoGroupsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of `cdb-c1nl9rpv` or `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeRoGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRoGroupsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRoGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// RO group information array. An instance can be associated with multiple RO groups.
+		RoGroups []*RoGroup `json:"RoGroups,omitempty" name:"RoGroups" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRoGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRoGroupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeRollbackRangeTimeRequest struct {
 	*tchttp.BaseRequest
 
@@ -2310,6 +2521,74 @@ func (r *DescribeRollbackRangeTimeResponse) ToJsonString() string {
 }
 
 func (r *DescribeRollbackRangeTimeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSlowLogDataRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start timestamp.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End timestamp.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Client Host list.
+	UserHosts []*string `json:"UserHosts,omitempty" name:"UserHosts" list`
+
+	// Client username list.
+	UserNames []*string `json:"UserNames,omitempty" name:"UserNames" list`
+
+	// Accessed database list.
+	DataBases []*string `json:"DataBases,omitempty" name:"DataBases" list`
+
+	// Sort by field. Valid values: Timestamp, QueryTime, LockTime, RowsExamined, RowsSent.
+	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+
+	// Sorting order. Valid values: ASC (ascending), DESC (descending).
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned at a time. Maximum value: 400.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeSlowLogDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSlowLogDataRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSlowLogDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible entries.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Queried results.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Items []*SlowLogItem `json:"Items,omitempty" name:"Items" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSlowLogDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSlowLogDataResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2642,6 +2921,52 @@ func (r *DescribeTimeWindowResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeUploadedFilesRequest struct {
+	*tchttp.BaseRequest
+
+	// File path. `OwnerUin` information of the root account should be entered in this field.
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// Record offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned for a single request. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeUploadedFilesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeUploadedFilesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUploadedFilesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible SQL files.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of returned SQL files.
+		Items []*SqlFileInfo `json:"Items,omitempty" name:"Items" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeUploadedFilesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeUploadedFilesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeviceCpuInfo struct {
 
 	// Average instance CPU utilization
@@ -2753,7 +3078,12 @@ type DrInfo struct {
 	// Region information
 	Region *string `json:"Region,omitempty" name:"Region"`
 
-	// Instance synchronization status
+	// Instance sync status. Possible returned values include:
+	// 0 - disaster recovery not synced;
+	// 1 - disaster recovery syncing;
+	// 2 - disaster recovery synced successfully;
+	// 3 - disaster recovery sync failed;
+	// 4 - repairing disaster recovery sync;
 	SyncStatus *int64 `json:"SyncStatus,omitempty" name:"SyncStatus"`
 
 	// Instance name
@@ -2761,6 +3091,17 @@ type DrInfo struct {
 
 	// Instance type
 	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+}
+
+type ErrlogItem struct {
+
+	// Error occurrence time.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// Error details
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
 type ImportRecord struct {
@@ -2997,6 +3338,10 @@ type InstanceInfo struct {
 	// Placement group ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
+
+	// AZ ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
 }
 
 type InstanceRebootTime struct {
@@ -3980,6 +4325,55 @@ type RegionSellConf struct {
 	ZonesConf []*ZoneSellConf `json:"ZonesConf,omitempty" name:"ZonesConf" list`
 }
 
+type ReleaseIsolatedDBInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Array of instance IDs in the format of `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the ID, whose value is the `InstanceId` value in the output parameters.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+}
+
+func (r *ReleaseIsolatedDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ReleaseIsolatedDBInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ReleaseIsolatedDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Deisolation result set.
+		Items []*ReleaseResult `json:"Items,omitempty" name:"Items" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ReleaseIsolatedDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ReleaseIsolatedDBInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ReleaseResult struct {
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Result value of instance deisolation. A returned value of 0 indicates success.
+	Code *int64 `json:"Code,omitempty" name:"Code"`
+
+	// Error message for instance deisolation.
+	Message *string `json:"Message,omitempty" name:"Message"`
+}
+
 type RestartDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -4304,6 +4698,9 @@ type SellConfig struct {
 
 	// Status value
 	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Tag value
+	Tag *int64 `json:"Tag,omitempty" name:"Tag"`
 }
 
 type SellType struct {
@@ -4371,6 +4768,74 @@ type SlowLogInfo struct {
 
 	// Log type. Value range: slowlog (slow log)
 	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type SlowLogItem struct {
+
+	// SQL execution time.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// SQL execution duration.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	QueryTime *float64 `json:"QueryTime,omitempty" name:"QueryTime"`
+
+	// SQL statement.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
+
+	// Client address.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UserHost *string `json:"UserHost,omitempty" name:"UserHost"`
+
+	// Username.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// Database name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// Lock duration.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	LockTime *float64 `json:"LockTime,omitempty" name:"LockTime"`
+
+	// Number of scanned rows.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RowsExamined *int64 `json:"RowsExamined,omitempty" name:"RowsExamined"`
+
+	// Number of rows in result set.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RowsSent *int64 `json:"RowsSent,omitempty" name:"RowsSent"`
+
+	// SQL template.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SqlTemplate *string `json:"SqlTemplate,omitempty" name:"SqlTemplate"`
+
+	// SQL statement MD5.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Md5 *string `json:"Md5,omitempty" name:"Md5"`
+}
+
+type SqlFileInfo struct {
+
+	// Upload time
+	UploadTime *string `json:"UploadTime,omitempty" name:"UploadTime"`
+
+	// Upload progress
+	UploadInfo *UploadInfo `json:"UploadInfo,omitempty" name:"UploadInfo"`
+
+	// Filename
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// File size in bytes
+	FileSize *int64 `json:"FileSize,omitempty" name:"FileSize"`
+
+	// Whether upload is finished. Valid values: 0 (not completed), 1 (completed)
+	IsUploadFinished *int64 `json:"IsUploadFinished,omitempty" name:"IsUploadFinished"`
+
+	// File ID
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
 }
 
 type StartBatchRollbackRequest struct {
@@ -4620,6 +5085,82 @@ func (r *UpgradeDBInstanceEngineVersionResponse) FromJsonString(s string) error 
     return json.Unmarshal([]byte(s), &r)
 }
 
+type UpgradeDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of `cdb-c1nl9rpv` or `cdbro-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the ID, whose value is the `InstanceId` value in output parameters.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Memory size in MB after upgrade. To ensure that the `Memory` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the specifications of the memory that can be upgraded to.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Disk size in GB after upgrade. To ensure that the `Volume` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the specifications of the disk that can be upgraded to.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). This parameter can be specified when upgrading master instances and is meaningless for read-only or disaster recovery instances.
+	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
+
+	// Deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when upgrading master instances and is meaningless for read-only or disaster recovery instances.
+	DeployMode *int64 `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// AZ information of slave database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading master instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the supported AZs.
+	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+
+	// Version of master instance database engine. Valid values: 5.5, 5.6, 5.7.
+	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+
+	// Mode of switch to new instance. Valid values: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://cloud.tencent.com/document/product/236/15864) API to trigger the process.
+	WaitSwitch *int64 `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
+
+	// AZ information of slave database 2, which is empty by default. This parameter can be specified when upgrading master instances and is meaningless for read-only or disaster recovery instances.
+	BackupZone *string `json:"BackupZone,omitempty" name:"BackupZone"`
+
+	// Instance type. Valid values: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+}
+
+func (r *UpgradeDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Order ID.
+		DealIds []*string `json:"DealIds,omitempty" name:"DealIds" list`
+
+		// Async task request ID, which can be used to query the execution result of an async task.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpgradeDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpgradeDBInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UploadInfo struct {
+
+	// Number of parts of file
+	AllSliceNum *int64 `json:"AllSliceNum,omitempty" name:"AllSliceNum"`
+
+	// Number of completed parts
+	CompleteNum *int64 `json:"CompleteNum,omitempty" name:"CompleteNum"`
+}
+
 type ZoneConf struct {
 
 	// AZ deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
@@ -4678,4 +5219,11 @@ type ZoneSellConf struct {
 
 	// Information of the supported disaster recovery AZ
 	DrZone []*string `json:"DrZone,omitempty" name:"DrZone" list`
+
+	// Whether cross-AZ read-only access is supported
+	IsSupportRemoteRo *bool `json:"IsSupportRemoteRo,omitempty" name:"IsSupportRemoteRo"`
+
+	// Information of supported cross-AZ read-only zone
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RemoteRoZone []*string `json:"RemoteRoZone,omitempty" name:"RemoteRoZone" list`
 }
