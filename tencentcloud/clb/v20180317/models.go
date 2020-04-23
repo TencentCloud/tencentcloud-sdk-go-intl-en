@@ -2936,6 +2936,9 @@ type RuleInput struct {
 
 	// TRPC calling service API, which is required when `ForwardType` is `TRPC`.
 	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
+
+	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names
+	Quic *bool `json:"Quic,omitempty" name:"Quic"`
 }
 
 type RuleOutput struct {
@@ -3008,6 +3011,10 @@ type RuleOutput struct {
 	// TRPC calling service API, which is valid when `ForwardType` is `TRPC`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
+
+	// QUIC status
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	QuicStatus *string `json:"QuicStatus,omitempty" name:"QuicStatus"`
 }
 
 type RuleTargets struct {
@@ -3024,6 +3031,46 @@ type RuleTargets struct {
 	// Real server information
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Targets []*Backend `json:"Targets,omitempty" name:"Targets" list`
+}
+
+type SetLoadBalancerClsLogRequest struct {
+	*tchttp.BaseRequest
+
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// CLS logset ID
+	LogSetId *string `json:"LogSetId,omitempty" name:"LogSetId"`
+
+	// CLS log topic ID
+	LogTopicId *string `json:"LogTopicId,omitempty" name:"LogTopicId"`
+}
+
+func (r *SetLoadBalancerClsLogRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetLoadBalancerClsLogRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SetLoadBalancerClsLogResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SetLoadBalancerClsLogResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetLoadBalancerClsLogResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type SetLoadBalancerSecurityGroupsRequest struct {

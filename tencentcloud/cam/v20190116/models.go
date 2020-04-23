@@ -1017,6 +1017,14 @@ type GetPolicyResponse struct {
 	// Note: This field may return null, indicating that no valid value was found.
 		PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
 
+		// Remarks
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		PresetAlias *string `json:"PresetAlias,omitempty" name:"PresetAlias"`
+
+		// Whether it is a service-linked policy
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		IsServiceLinkedRolePolicy *uint64 `json:"IsServiceLinkedRolePolicy,omitempty" name:"IsServiceLinkedRolePolicy"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1382,6 +1390,49 @@ func (r *ListAttachedUserPoliciesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ListCollaboratorsRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of entries per page. Default value: 20
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination start value. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *ListCollaboratorsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListCollaboratorsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListCollaboratorsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number
+		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+		// Collaborator information
+		Data []*SubAccountInfo `json:"Data,omitempty" name:"Data" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListCollaboratorsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListCollaboratorsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ListEntitiesForPolicyRequest struct {
 	*tchttp.BaseRequest
 
@@ -1707,42 +1758,6 @@ func (r *ListUsersResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type LoginActionFlag struct {
-
-	// Mobile phone
-	Phone *uint64 `json:"Phone,omitempty" name:"Phone"`
-
-	// Hard token
-	Token *uint64 `json:"Token,omitempty" name:"Token"`
-
-	// Soft token
-	Stoken *uint64 `json:"Stoken,omitempty" name:"Stoken"`
-
-	// WeChat
-	Wechat *uint64 `json:"Wechat,omitempty" name:"Wechat"`
-
-	// Custom
-	Custom *uint64 `json:"Custom,omitempty" name:"Custom"`
-}
-
-type OffsiteFlag struct {
-
-	// Verification identifier
-	VerifyFlag *uint64 `json:"VerifyFlag,omitempty" name:"VerifyFlag"`
-
-	// Phone notification
-	NotifyPhone *uint64 `json:"NotifyPhone,omitempty" name:"NotifyPhone"`
-
-	// Email notification
-	NotifyEmail *int64 `json:"NotifyEmail,omitempty" name:"NotifyEmail"`
-
-	// WeChat notification
-	NotifyWechat *uint64 `json:"NotifyWechat,omitempty" name:"NotifyWechat"`
-
-	// Alert
-	Tips *uint64 `json:"Tips,omitempty" name:"Tips"`
-}
-
 type RemoveUserFromGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -1826,52 +1841,6 @@ type SAMLProviderInfo struct {
 
 	// Time SAML identity provider last modified
 	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
-}
-
-type SetFlagRequest struct {
-	*tchttp.BaseRequest
-
-	// Set user UIN
-	OpUin *uint64 `json:"OpUin,omitempty" name:"OpUin"`
-
-	// Login settings
-	LoginFlag *LoginActionFlag `json:"LoginFlag,omitempty" name:"LoginFlag"`
-
-	// Sensitive operation settings
-	ActionFlag *LoginActionFlag `json:"ActionFlag,omitempty" name:"ActionFlag"`
-
-	// Remote login settings
-	OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
-
-	// Whether or not to reset MFA
-	NeedResetMfa *uint64 `json:"NeedResetMfa,omitempty" name:"NeedResetMfa"`
-}
-
-func (r *SetFlagRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *SetFlagRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type SetFlagResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *SetFlagResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *SetFlagResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
 }
 
 type StrategyInfo struct {
@@ -2023,6 +1992,46 @@ func (r *UpdateGroupResponse) ToJsonString() string {
 }
 
 func (r *UpdateGroupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateRoleConsoleLoginRequest struct {
+	*tchttp.BaseRequest
+
+	// Whether login is allowed. 1: yes, 0: no
+	ConsoleLogin *int64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
+
+	// Role ID
+	RoleId *int64 `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
+func (r *UpdateRoleConsoleLoginRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateRoleConsoleLoginRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateRoleConsoleLoginResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateRoleConsoleLoginResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateRoleConsoleLoginResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

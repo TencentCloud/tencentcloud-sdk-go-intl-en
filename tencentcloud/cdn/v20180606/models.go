@@ -550,6 +550,39 @@ type ClientCert struct {
 	DeployTime *string `json:"DeployTime,omitempty" name:"DeployTime"`
 }
 
+type ClsLogObject struct {
+
+	// Topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Log time
+	Timestamp *string `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// Log content
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Capture path
+	Filename *string `json:"Filename,omitempty" name:"Filename"`
+
+	// Log source device
+	Source *string `json:"Source,omitempty" name:"Source"`
+}
+
+type ClsSearchLogs struct {
+
+	// Cursor for more search results
+	Context *string `json:"Context,omitempty" name:"Context"`
+
+	// Whether all search results have been returned
+	Listover *bool `json:"Listover,omitempty" name:"Listover"`
+
+	// Log content information
+	Results []*ClsLogObject `json:"Results,omitempty" name:"Results" list`
+}
+
 type Compatibility struct {
 
 	// Compatibility flag status code.
@@ -596,6 +629,49 @@ type CompressionRule struct {
 	Algorithms []*string `json:"Algorithms,omitempty" name:"Algorithms" list`
 }
 
+type CreateClsLogTopicRequest struct {
+	*tchttp.BaseRequest
+
+	// Log topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Connection channel. Default value: cdn
+	Channel *string `json:"Channel,omitempty" name:"Channel"`
+
+	// Domain name region information
+	DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitempty" name:"DomainAreaConfigs" list`
+}
+
+func (r *CreateClsLogTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateClsLogTopicRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateClsLogTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateClsLogTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateClsLogTopicResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteCdnDomainRequest struct {
 	*tchttp.BaseRequest
 
@@ -628,6 +704,46 @@ func (r *DeleteCdnDomainResponse) ToJsonString() string {
 }
 
 func (r *DeleteCdnDomainResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteClsLogTopicRequest struct {
+	*tchttp.BaseRequest
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Connection channel. Default value: cdn
+	Channel *string `json:"Channel,omitempty" name:"Channel"`
+}
+
+func (r *DeleteClsLogTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteClsLogTopicRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteClsLogTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteClsLogTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteClsLogTopicResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -844,6 +960,48 @@ func (r *DescribeCdnIpResponse) ToJsonString() string {
 }
 
 func (r *DescribeCdnIpResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCertDomainsRequest struct {
+	*tchttp.BaseRequest
+
+	// Base64-encoded string of certificate in PEM format
+	Cert *string `json:"Cert,omitempty" name:"Cert"`
+}
+
+func (r *DescribeCertDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCertDomainsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCertDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of domain names connected to CDN
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+
+		// List of CDN domain names with certificates configured
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		CertifiedDomains []*string `json:"CertifiedDomains,omitempty" name:"CertifiedDomains" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCertDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCertDomainsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1605,6 +1763,55 @@ func (r *DisableCachesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DisableClsLogTopicRequest struct {
+	*tchttp.BaseRequest
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Connection channel. Default value: cdn
+	Channel *string `json:"Channel,omitempty" name:"Channel"`
+}
+
+func (r *DisableClsLogTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisableClsLogTopicRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DisableClsLogTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DisableClsLogTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisableClsLogTopicResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DomainAreaConfig struct {
+
+	// Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Region list, where the element can be `mainland/overseas`
+	Area []*string `json:"Area,omitempty" name:"Area" list`
+}
+
 type DomainFilter struct {
 
 	// Filter field name, the list supported is as follows:
@@ -1696,6 +1903,46 @@ func (r *EnableCachesResponse) ToJsonString() string {
 }
 
 func (r *EnableCachesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableClsLogTopicRequest struct {
+	*tchttp.BaseRequest
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Connection channel. Default value: cdn
+	Channel *string `json:"Channel,omitempty" name:"Channel"`
+}
+
+func (r *EnableClsLogTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableClsLogTopicRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableClsLogTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *EnableClsLogTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableClsLogTopicResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1943,6 +2190,109 @@ type Ipv6 struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type ListClsLogTopicsRequest struct {
+	*tchttp.BaseRequest
+
+	// Connection channel. Default value: cdn
+	Channel *string `json:"Channel,omitempty" name:"Channel"`
+}
+
+func (r *ListClsLogTopicsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListClsLogTopicsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListClsLogTopicsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Logset information
+		Logset *LogSetInfo `json:"Logset,omitempty" name:"Logset"`
+
+		// Log topic information list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Topics []*TopicInfo `json:"Topics,omitempty" name:"Topics" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListClsLogTopicsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListClsLogTopicsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListClsTopicDomainsRequest struct {
+	*tchttp.BaseRequest
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Connection channel. Default value: cdn
+	Channel *string `json:"Channel,omitempty" name:"Channel"`
+}
+
+func (r *ListClsTopicDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListClsTopicDomainsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListClsTopicDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Developer ID
+		AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+
+		// Channel
+		Channel *string `json:"Channel,omitempty" name:"Channel"`
+
+		// Logset ID
+		LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+		// Log topic ID
+		TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+		// Domain name region configuration, which may contain deleted domain names. If this is to be used in `ManageClsTopicDomains` API, you need to exclude deleted domain names by using the `ListCdnDomains` API.
+		DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitempty" name:"DomainAreaConfigs" list`
+
+		// Log topic name
+		TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+		// Last modified time of log topic
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListClsTopicDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListClsTopicDomainsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ListTopDataRequest struct {
 	*tchttp.BaseRequest
 
@@ -2037,6 +2387,34 @@ func (r *ListTopDataResponse) ToJsonString() string {
 
 func (r *ListTopDataResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type LogSetInfo struct {
+
+	// Developer ID
+	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Channel
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Channel *string `json:"Channel,omitempty" name:"Channel"`
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Logset name
+	LogsetName *string `json:"LogsetName,omitempty" name:"LogsetName"`
+
+	// Whether it is the default logset
+	IsDefault *uint64 `json:"IsDefault,omitempty" name:"IsDefault"`
+
+	// Log retention period in days
+	LogsetSavePeriod *uint64 `json:"LogsetSavePeriod,omitempty" name:"LogsetSavePeriod"`
+
+	// Creation date
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Region
+	Region *string `json:"Region,omitempty" name:"Region"`
 }
 
 type MainlandConfig struct {
@@ -2136,6 +2514,49 @@ type MainlandConfig struct {
 	// Video dragging configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VideoSeek *VideoSeek `json:"VideoSeek,omitempty" name:"VideoSeek"`
+}
+
+type ManageClsTopicDomainsRequest struct {
+	*tchttp.BaseRequest
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Connection channel. Default value: cdn
+	Channel *string `json:"Channel,omitempty" name:"Channel"`
+
+	// Domain name region configuration. Note: if this field is empty, it means to unbind all domain names from the corresponding topic
+	DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitempty" name:"DomainAreaConfigs" list`
+}
+
+func (r *ManageClsTopicDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ManageClsTopicDomainsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ManageClsTopicDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ManageClsTopicDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ManageClsTopicDomainsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type MapInfo struct {
@@ -2663,6 +3084,67 @@ type ResponseHeaderCache struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type SearchClsLogRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of logset to be queried
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// List of IDs of log topics to be queried, separated by commas
+	TopicIds *string `json:"TopicIds,omitempty" name:"TopicIds"`
+
+	// Start time of log to be queried in the format of `YYYY-mm-dd HH:MM:SS`
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of log to be queried in the format of `YYYY-mm-dd HH:MM:SS`
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Number of logs to be returned at a time. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Connection channel. Default value: cdn
+	Channel *string `json:"Channel,omitempty" name:"Channel"`
+
+	// Content to be queried. For more information, please visit https://cloud.tencent.com/document/product/614/16982
+	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// This field is used when loading more results. Pass through the last `context` value returned to get more log content. Up to 10,000 logs can be obtained through the cursor. Please narrow down the time range as much as possible.
+	Context *string `json:"Context,omitempty" name:"Context"`
+
+	// Sorting by log time. Valid values: asc (ascending), desc (descending). Default value: desc
+	Sort *string `json:"Sort,omitempty" name:"Sort"`
+}
+
+func (r *SearchClsLogRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SearchClsLogRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SearchClsLogResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Query result
+		Logs *ClsSearchLogs `json:"Logs,omitempty" name:"Logs"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SearchClsLogResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SearchClsLogResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type Seo struct {
 
 	// SEO configuration switch
@@ -2925,6 +3407,22 @@ type TopDetailData struct {
 
 	// Data value
 	Value *float64 `json:"Value,omitempty" name:"Value"`
+}
+
+type TopicInfo struct {
+
+	// Topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Whether to enable publishing
+	Enabled *int64 `json:"Enabled,omitempty" name:"Enabled"`
+
+	// Creation time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 type UpdateDomainConfigRequest struct {

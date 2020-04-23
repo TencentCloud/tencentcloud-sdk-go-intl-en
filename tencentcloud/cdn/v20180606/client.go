@@ -68,6 +68,31 @@ func (c *Client) AddCdnDomain(request *AddCdnDomainRequest) (response *AddCdnDom
     return
 }
 
+func NewCreateClsLogTopicRequest() (request *CreateClsLogTopicRequest) {
+    request = &CreateClsLogTopicRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "CreateClsLogTopic")
+    return
+}
+
+func NewCreateClsLogTopicResponse() (response *CreateClsLogTopicResponse) {
+    response = &CreateClsLogTopicResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a log topic. Note: up to 10 log topics can be created under one logset.
+func (c *Client) CreateClsLogTopic(request *CreateClsLogTopicRequest) (response *CreateClsLogTopicResponse, err error) {
+    if request == nil {
+        request = NewCreateClsLogTopicRequest()
+    }
+    response = NewCreateClsLogTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCdnDomainRequest() (request *DeleteCdnDomainRequest) {
     request = &DeleteCdnDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -89,6 +114,31 @@ func (c *Client) DeleteCdnDomain(request *DeleteCdnDomainRequest) (response *Del
         request = NewDeleteCdnDomainRequest()
     }
     response = NewDeleteCdnDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteClsLogTopicRequest() (request *DeleteClsLogTopicRequest) {
+    request = &DeleteClsLogTopicRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DeleteClsLogTopic")
+    return
+}
+
+func NewDeleteClsLogTopicResponse() (response *DeleteClsLogTopicResponse) {
+    response = &DeleteClsLogTopicResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a log topic. Note: when a log topic is deleted, all logs of the domain names bound to it will no longer be published to the topic, and the logs previously published to the topic will be deleted. This action will take effect within 5–15 minutes.
+func (c *Client) DeleteClsLogTopic(request *DeleteClsLogTopicRequest) (response *DeleteClsLogTopicResponse, err error) {
+    if request == nil {
+        request = NewDeleteClsLogTopicRequest()
+    }
+    response = NewDeleteClsLogTopicResponse()
     err = c.Send(request, response)
     return
 }
@@ -173,6 +223,31 @@ func (c *Client) DescribeCdnIp(request *DescribeCdnIpRequest) (response *Describ
         request = NewDescribeCdnIpRequest()
     }
     response = NewDescribeCdnIpResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCertDomainsRequest() (request *DescribeCertDomainsRequest) {
+    request = &DescribeCertDomainsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DescribeCertDomains")
+    return
+}
+
+func NewDescribeCertDomainsResponse() (response *DescribeCertDomainsResponse) {
+    response = &DescribeCertDomainsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to verify an SSL certificate and extract the domain names. It will then return the list of domain names connected to CDN and the list of domain names with the certificate configured.
+func (c *Client) DescribeCertDomains(request *DescribeCertDomainsRequest) (response *DescribeCertDomainsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCertDomainsRequest()
+    }
+    response = NewDescribeCertDomainsResponse()
     err = c.Send(request, response)
     return
 }
@@ -442,6 +517,31 @@ func (c *Client) DisableCaches(request *DisableCachesRequest) (response *Disable
     return
 }
 
+func NewDisableClsLogTopicRequest() (request *DisableClsLogTopicRequest) {
+    request = &DisableClsLogTopicRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DisableClsLogTopic")
+    return
+}
+
+func NewDisableClsLogTopicResponse() (response *DisableClsLogTopicResponse) {
+    response = &DisableClsLogTopicResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5–15 minutes.
+func (c *Client) DisableClsLogTopic(request *DisableClsLogTopicRequest) (response *DisableClsLogTopicResponse, err error) {
+    if request == nil {
+        request = NewDisableClsLogTopicRequest()
+    }
+    response = NewDisableClsLogTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableCachesRequest() (request *EnableCachesRequest) {
     request = &EnableCachesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -467,6 +567,31 @@ func (c *Client) EnableCaches(request *EnableCachesRequest) (response *EnableCac
     return
 }
 
+func NewEnableClsLogTopicRequest() (request *EnableClsLogTopicRequest) {
+    request = &EnableClsLogTopicRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "EnableClsLogTopic")
+    return
+}
+
+func NewEnableClsLogTopicResponse() (response *EnableClsLogTopicResponse) {
+    response = &EnableClsLogTopicResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to start publishing to a log topic. Note: after a log topic is enabled, all logs of the domain names bound to the topic will be published to it. This action will take effect within 5–15 minutes.
+func (c *Client) EnableClsLogTopic(request *EnableClsLogTopicRequest) (response *EnableClsLogTopicResponse, err error) {
+    if request == nil {
+        request = NewEnableClsLogTopicRequest()
+    }
+    response = NewEnableClsLogTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetDisableRecordsRequest() (request *GetDisableRecordsRequest) {
     request = &GetDisableRecordsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -488,6 +613,56 @@ func (c *Client) GetDisableRecords(request *GetDisableRecordsRequest) (response 
         request = NewGetDisableRecordsRequest()
     }
     response = NewGetDisableRecordsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListClsLogTopicsRequest() (request *ListClsLogTopicsRequest) {
+    request = &ListClsLogTopicsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "ListClsLogTopics")
+    return
+}
+
+func NewListClsLogTopicsResponse() (response *ListClsLogTopicsResponse) {
+    response = &ListClsLogTopicsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to display the list of log topics. Note: a logset can contain up to 10 log topics.
+func (c *Client) ListClsLogTopics(request *ListClsLogTopicsRequest) (response *ListClsLogTopicsResponse, err error) {
+    if request == nil {
+        request = NewListClsLogTopicsRequest()
+    }
+    response = NewListClsLogTopicsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListClsTopicDomainsRequest() (request *ListClsTopicDomainsRequest) {
+    request = &ListClsTopicDomainsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "ListClsTopicDomains")
+    return
+}
+
+func NewListClsTopicDomainsResponse() (response *ListClsTopicDomainsResponse) {
+    response = &ListClsTopicDomainsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the list of domain names bound to a log topic.
+func (c *Client) ListClsTopicDomains(request *ListClsTopicDomainsRequest) (response *ListClsTopicDomainsResponse, err error) {
+    if request == nil {
+        request = NewListClsTopicDomainsRequest()
+    }
+    response = NewListClsTopicDomainsResponse()
     err = c.Send(request, response)
     return
 }
@@ -521,6 +696,31 @@ func (c *Client) ListTopData(request *ListTopDataRequest) (response *ListTopData
         request = NewListTopDataRequest()
     }
     response = NewListTopDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewManageClsTopicDomainsRequest() (request *ManageClsTopicDomainsRequest) {
+    request = &ManageClsTopicDomainsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "ManageClsTopicDomains")
+    return
+}
+
+func NewManageClsTopicDomainsResponse() (response *ManageClsTopicDomainsResponse) {
+    response = &ManageClsTopicDomainsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to manage the list of domain names bound to a log topic.
+func (c *Client) ManageClsTopicDomains(request *ManageClsTopicDomainsRequest) (response *ManageClsTopicDomainsResponse, err error) {
+    if request == nil {
+        request = NewManageClsTopicDomainsRequest()
+    }
+    response = NewManageClsTopicDomainsResponse()
     err = c.Send(request, response)
     return
 }
@@ -600,6 +800,31 @@ func (c *Client) PushUrlsCache(request *PushUrlsCacheRequest) (response *PushUrl
         request = NewPushUrlsCacheRequest()
     }
     response = NewPushUrlsCacheResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSearchClsLogRequest() (request *SearchClsLogRequest) {
+    request = &SearchClsLogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "SearchClsLog")
+    return
+}
+
+func NewSearchClsLogResponse() (response *SearchClsLogResponse) {
+    response = &SearchClsLogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to search for CLS logs. Search filters can be set to today, 24 hours (one of the last 7 days), and the last 7 days.
+func (c *Client) SearchClsLog(request *SearchClsLogRequest) (response *SearchClsLogResponse, err error) {
+    if request == nil {
+        request = NewSearchClsLogRequest()
+    }
+    response = NewSearchClsLogResponse()
     err = c.Send(request, response)
     return
 }

@@ -743,6 +743,31 @@ func (c *Client) ListAttachedUserPolicies(request *ListAttachedUserPoliciesReque
     return
 }
 
+func NewListCollaboratorsRequest() (request *ListCollaboratorsRequest) {
+    request = &ListCollaboratorsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "ListCollaborators")
+    return
+}
+
+func NewListCollaboratorsResponse() (response *ListCollaboratorsResponse) {
+    response = &ListCollaboratorsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the collaborator list.
+func (c *Client) ListCollaborators(request *ListCollaboratorsRequest) (response *ListCollaboratorsResponse, err error) {
+    if request == nil {
+        request = NewListCollaboratorsRequest()
+    }
+    response = NewListCollaboratorsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListEntitiesForPolicyRequest() (request *ListEntitiesForPolicyRequest) {
     request = &ListEntitiesForPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -943,31 +968,6 @@ func (c *Client) RemoveUserFromGroup(request *RemoveUserFromGroupRequest) (respo
     return
 }
 
-func NewSetFlagRequest() (request *SetFlagRequest) {
-    request = &SetFlagRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cam", APIVersion, "SetFlag")
-    return
-}
-
-func NewSetFlagResponse() (response *SetFlagResponse) {
-    response = &SetFlagResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// This API is used to set account verification for login and sensitive operation protection.
-func (c *Client) SetFlag(request *SetFlagRequest) (response *SetFlagResponse, err error) {
-    if request == nil {
-        request = NewSetFlagRequest()
-    }
-    response = NewSetFlagResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewUpdateAssumeRolePolicyRequest() (request *UpdateAssumeRolePolicyRequest) {
     request = &UpdateAssumeRolePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1014,6 +1014,31 @@ func (c *Client) UpdateGroup(request *UpdateGroupRequest) (response *UpdateGroup
         request = NewUpdateGroupRequest()
     }
     response = NewUpdateGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateRoleConsoleLoginRequest() (request *UpdateRoleConsoleLoginRequest) {
+    request = &UpdateRoleConsoleLoginRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "UpdateRoleConsoleLogin")
+    return
+}
+
+func NewUpdateRoleConsoleLoginResponse() (response *UpdateRoleConsoleLoginResponse) {
+    response = &UpdateRoleConsoleLoginResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a role’s login permissions.
+func (c *Client) UpdateRoleConsoleLogin(request *UpdateRoleConsoleLoginRequest) (response *UpdateRoleConsoleLoginResponse, err error) {
+    if request == nil {
+        request = NewUpdateRoleConsoleLoginRequest()
+    }
+    response = NewUpdateRoleConsoleLoginResponse()
     err = c.Send(request, response)
     return
 }
