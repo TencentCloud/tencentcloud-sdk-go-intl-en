@@ -116,6 +116,9 @@ type CreateDirectConnectTunnelRequest struct {
 
 	// CustomerAddress: User-side IP address.
 	CustomerAddress *string `json:"CustomerAddress,omitempty" name:"CustomerAddress"`
+
+	// TencentBackupAddress, i.e., Tencent-side standby IP address
+	TencentBackupAddress *string `json:"TencentBackupAddress,omitempty" name:"TencentBackupAddress"`
 }
 
 func (r *CreateDirectConnectTunnelRequest) ToJsonString() string {
@@ -389,28 +392,28 @@ type DirectConnect struct {
 
 type DirectConnectTunnel struct {
 
-	// Dedicated tunnel ID.
+	// Dedicated tunnel ID
 	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitempty" name:"DirectConnectTunnelId"`
 
 	// Connection ID.
 	DirectConnectId *string `json:"DirectConnectId,omitempty" name:"DirectConnectId"`
 
-	// Dedicated tunnel status.
-	// AVAILABLE: Ready or connected.
-	// PENDING: Applying.
-	// ALLOCATING: Configuring.
-	// ALLOCATED: Configured.
-	// ALTERING: Modifying.
-	// DELETING: Deleting.
-	// DELETED: Deleted.
-	// COMFIRMING: To be accepted.
-	// REJECTED: Rejected.
+	// Dedicated tunnel status
+	// AVAILABLE: ready or connected
+	// PENDING: applying
+	// ALLOCATING: configuring
+	// ALLOCATED: configured
+	// ALTERING: modifying
+	// DELETING: deleting
+	// DELETED: deleted
+	// CONFIRMING: to be accepted
+	// REJECTED: rejected
 	State *string `json:"State,omitempty" name:"State"`
 
 	// Connection owner, i.e., developer account ID.
 	DirectConnectOwnerAccount *string `json:"DirectConnectOwnerAccount,omitempty" name:"DirectConnectOwnerAccount"`
 
-	// Dedicated tunnel owner, i.e., developer account ID.
+	// Dedicated tunnel owner, i.e., developer account ID
 	OwnerAccount *string `json:"OwnerAccount,omitempty" name:"OwnerAccount"`
 
 	// Network type. Valid values: VPC, BMVPC, CCN.
@@ -435,7 +438,7 @@ type DirectConnectTunnel struct {
 	// User-side IP range.
 	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitempty" name:"RouteFilterPrefixes" list`
 
-	// VLAN of a dedicated tunnel.
+	// Dedicated tunnel `Vlan`
 	Vlan *int64 `json:"Vlan,omitempty" name:"Vlan"`
 
 	// TencentAddress: Tencent-side IP address.
@@ -444,16 +447,16 @@ type DirectConnectTunnel struct {
 	// CustomerAddress: User-side IP address.
 	CustomerAddress *string `json:"CustomerAddress,omitempty" name:"CustomerAddress"`
 
-	// Dedicated tunnel name.
+	// Dedicated tunnel name
 	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitempty" name:"DirectConnectTunnelName"`
 
-	// Creation time of a dedicated tunnel.
+	// Dedicated tunnel creation time
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// Bandwidth value of a dedicated tunnel.
+	// Dedicated tunnel bandwidth value
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
-	// Tag value of a dedicated tunnel.
+	// Dedicated tunnel tag value
 	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
 
 	// Associated custom network probe ID
@@ -476,7 +479,7 @@ type DirectConnectTunnel struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BfdEnable *int64 `json:"BfdEnable,omitempty" name:"BfdEnable"`
 
-	// Access point type of a dedicated tunnel.
+	// Dedicated tunnel access point type
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AccessPointType *string `json:"AccessPointType,omitempty" name:"AccessPointType"`
 
@@ -487,6 +490,10 @@ type DirectConnectTunnel struct {
 	// VPC name.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+
+	// TencentBackupAddress, i.e., Tencent-side standby IP address
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TencentBackupAddress *string `json:"TencentBackupAddress,omitempty" name:"TencentBackupAddress"`
 }
 
 type Filter struct {
@@ -521,6 +528,9 @@ type ModifyDirectConnectTunnelAttributeRequest struct {
 
 	// Bandwidth value of a dedicated tunnel in Mbps.
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Tencent-side standby IP address
+	TencentBackupAddress *string `json:"TencentBackupAddress,omitempty" name:"TencentBackupAddress"`
 }
 
 func (r *ModifyDirectConnectTunnelAttributeRequest) ToJsonString() string {

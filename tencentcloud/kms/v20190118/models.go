@@ -192,6 +192,55 @@ func (r *CreateKeyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateWhiteBoxKeyRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique alias that makes a key more recognizable and understandable. This parameter should be 1 to 60 letters, digits, `-`, and `_`; it must begin with a letter or digit and cannot be left empty.
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+
+	// All algorithm types for creating keys. Valid values: AES_256, SM4
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
+
+	// Key description of up to 1024 bytes
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *CreateWhiteBoxKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateWhiteBoxKeyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateWhiteBoxKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Base64-encoded encryption key
+		EncryptKey *string `json:"EncryptKey,omitempty" name:"EncryptKey"`
+
+		// Base64-encoded decryption key
+		DecryptKey *string `json:"DecryptKey,omitempty" name:"DecryptKey"`
+
+		// Globally unique white-box key ID
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateWhiteBoxKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateWhiteBoxKeyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DecryptRequest struct {
 	*tchttp.BaseRequest
 
@@ -260,6 +309,40 @@ func (r *DeleteImportedKeyMaterialResponse) ToJsonString() string {
 }
 
 func (r *DeleteImportedKeyMaterialResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteWhiteBoxKeyRequest struct {
+	*tchttp.BaseRequest
+
+	// Globally unique white-box key ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+}
+
+func (r *DeleteWhiteBoxKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteWhiteBoxKeyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteWhiteBoxKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteWhiteBoxKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteWhiteBoxKeyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -336,6 +419,151 @@ func (r *DescribeKeysResponse) ToJsonString() string {
 }
 
 func (r *DescribeKeysResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWhiteBoxDecryptKeyRequest struct {
+	*tchttp.BaseRequest
+
+	// Globally unique white-box key ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+}
+
+func (r *DescribeWhiteBoxDecryptKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeWhiteBoxDecryptKeyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWhiteBoxDecryptKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Base64-encoded white-box decryption key
+		DecryptKey *string `json:"DecryptKey,omitempty" name:"DecryptKey"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeWhiteBoxDecryptKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeWhiteBoxDecryptKeyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWhiteBoxKeyDetailsRequest struct {
+	*tchttp.BaseRequest
+
+	// Filter: key status. 0: disabled, 1: enabled
+	KeyStatus *int64 `json:"KeyStatus,omitempty" name:"KeyStatus"`
+}
+
+func (r *DescribeWhiteBoxKeyDetailsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeWhiteBoxKeyDetailsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWhiteBoxKeyDetailsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// White-box key information list
+		KeyInfos []*WhiteboxKeyInfo `json:"KeyInfos,omitempty" name:"KeyInfos" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeWhiteBoxKeyDetailsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeWhiteBoxKeyDetailsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWhiteBoxKeyRequest struct {
+	*tchttp.BaseRequest
+
+	// Globally unique white-box key ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+}
+
+func (r *DescribeWhiteBoxKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeWhiteBoxKeyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWhiteBoxKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// White-box key information
+		KeyInfo *WhiteboxKeyInfo `json:"KeyInfo,omitempty" name:"KeyInfo"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeWhiteBoxKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeWhiteBoxKeyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWhiteBoxServiceStatusRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeWhiteBoxServiceStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeWhiteBoxServiceStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWhiteBoxServiceStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether the user's white-box key service is available
+		ServiceEnabled *bool `json:"ServiceEnabled,omitempty" name:"ServiceEnabled"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeWhiteBoxServiceStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeWhiteBoxServiceStatusResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -432,6 +660,74 @@ func (r *DisableKeysResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DisableWhiteBoxKeyRequest struct {
+	*tchttp.BaseRequest
+
+	// Globally unique white-box key ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+}
+
+func (r *DisableWhiteBoxKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisableWhiteBoxKeyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DisableWhiteBoxKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DisableWhiteBoxKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisableWhiteBoxKeyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DisableWhiteBoxKeysRequest struct {
+	*tchttp.BaseRequest
+
+	// List of globally unique white-box key IDs. Note: you should make sure that all provided `KeyId` values are in valid format, unique, and actually exist. Up to 50 ones are allowed.
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+}
+
+func (r *DisableWhiteBoxKeysRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisableWhiteBoxKeysRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DisableWhiteBoxKeysResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DisableWhiteBoxKeysResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisableWhiteBoxKeysResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type EnableKeyRequest struct {
 	*tchttp.BaseRequest
 }
@@ -522,6 +818,120 @@ func (r *EnableKeysResponse) ToJsonString() string {
 }
 
 func (r *EnableKeysResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableWhiteBoxKeyRequest struct {
+	*tchttp.BaseRequest
+
+	// Globally unique white-box key ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+}
+
+func (r *EnableWhiteBoxKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableWhiteBoxKeyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableWhiteBoxKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *EnableWhiteBoxKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableWhiteBoxKeyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableWhiteBoxKeysRequest struct {
+	*tchttp.BaseRequest
+
+	// List of globally unique white-box key IDs. Note: you should make sure that all provided `KeyId` values are in valid format, unique, and actually exist. Up to 50 ones are allowed.
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+}
+
+func (r *EnableWhiteBoxKeysRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableWhiteBoxKeysRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableWhiteBoxKeysResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *EnableWhiteBoxKeysResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableWhiteBoxKeysResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EncryptByWhiteBoxRequest struct {
+	*tchttp.BaseRequest
+
+	// Globally unique white-box key ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Base64-encoded text to be encrypted. The size of the original text cannot exceed 4 KB.
+	PlainText *string `json:"PlainText,omitempty" name:"PlainText"`
+
+	// Base64-encoded initialization vector of 16 bytes, which will be used by the encryption algorithm. If this parameter is not passed in, the backend service will generate a random one. You should save this value as a parameter for decryption.
+	InitializationVector *string `json:"InitializationVector,omitempty" name:"InitializationVector"`
+}
+
+func (r *EncryptByWhiteBoxRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EncryptByWhiteBoxRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EncryptByWhiteBoxResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Base64-encoded initialization vector, which will be used by the encryption algorithm. If this parameter is passed in by the caller, it will be returned as-is; otherwise, the backend service will generate a random one and return it.
+		InitializationVector *string `json:"InitializationVector,omitempty" name:"InitializationVector"`
+
+		// Base64-encoded ciphertext after encryption
+		CipherText *string `json:"CipherText,omitempty" name:"CipherText"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *EncryptByWhiteBoxResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EncryptByWhiteBoxResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1156,4 +1566,40 @@ func (r *UpdateKeyDescriptionResponse) ToJsonString() string {
 
 func (r *UpdateKeyDescriptionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type WhiteboxKeyInfo struct {
+
+	// Globally unique white-box key ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Unique alias that makes a key more recognizable and understandable. This parameter should be 1 to 60 letters, digits, `-`, and `_`; it must begin with a letter or digit and cannot be left empty.
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+
+	// Creator
+	CreatorUin *uint64 `json:"CreatorUin,omitempty" name:"CreatorUin"`
+
+	// Key description information
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Key creation time in Unix timestamp
+	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// White-box key status. Valid values: Enabled, Disabled
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Creator
+	OwnerUin *uint64 `json:"OwnerUin,omitempty" name:"OwnerUin"`
+
+	// Key algorithm type
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
+
+	// Base64-encoded white-box encryption key
+	EncryptKey *string `json:"EncryptKey,omitempty" name:"EncryptKey"`
+
+	// Base64-encoded white-box decryption key
+	DecryptKey *string `json:"DecryptKey,omitempty" name:"DecryptKey"`
+
+	// 
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 }

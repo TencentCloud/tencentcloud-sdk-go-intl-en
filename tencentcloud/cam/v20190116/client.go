@@ -1018,6 +1018,31 @@ func (c *Client) UpdateGroup(request *UpdateGroupRequest) (response *UpdateGroup
     return
 }
 
+func NewUpdatePolicyRequest() (request *UpdatePolicyRequest) {
+    request = &UpdatePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "UpdatePolicy")
+    return
+}
+
+func NewUpdatePolicyResponse() (response *UpdatePolicyResponse) {
+    response = &UpdatePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (UpdatePolicy) is used to update a policy.
+func (c *Client) UpdatePolicy(request *UpdatePolicyRequest) (response *UpdatePolicyResponse, err error) {
+    if request == nil {
+        request = NewUpdatePolicyRequest()
+    }
+    response = NewUpdatePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateRoleConsoleLoginRequest() (request *UpdateRoleConsoleLoginRequest) {
     request = &UpdateRoleConsoleLoginRequest{
         BaseRequest: &tchttp.BaseRequest{},

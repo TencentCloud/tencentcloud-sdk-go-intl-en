@@ -43,6 +43,31 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewActivateSubscribeRequest() (request *ActivateSubscribeRequest) {
+    request = &ActivateSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "ActivateSubscribe")
+    return
+}
+
+func NewActivateSubscribeResponse() (response *ActivateSubscribeResponse) {
+    response = &ActivateSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to configure a data subscription, which can be called only for subscription instances in unconfigured status.
+func (c *Client) ActivateSubscribe(request *ActivateSubscribeRequest) (response *ActivateSubscribeResponse, err error) {
+    if request == nil {
+        request = NewActivateSubscribeRequest()
+    }
+    response = NewActivateSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCompleteMigrateJobRequest() (request *CompleteMigrateJobRequest) {
     request = &CompleteMigrateJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -120,6 +145,31 @@ func (c *Client) CreateMigrateJob(request *CreateMigrateJobRequest) (response *C
         request = NewCreateMigrateJobRequest()
     }
     response = NewCreateMigrateJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSubscribeRequest() (request *CreateSubscribeRequest) {
+    request = &CreateSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "CreateSubscribe")
+    return
+}
+
+func NewCreateSubscribeResponse() (response *CreateSubscribeResponse) {
+    response = &CreateSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a data subscription instance.
+func (c *Client) CreateSubscribe(request *CreateSubscribeRequest) (response *CreateSubscribeResponse, err error) {
+    if request == nil {
+        request = NewCreateSubscribeRequest()
+    }
+    response = NewCreateSubscribeResponse()
     err = c.Send(request, response)
     return
 }
@@ -226,6 +276,31 @@ func (c *Client) DeleteSyncJob(request *DeleteSyncJobRequest) (response *DeleteS
     return
 }
 
+func NewDescribeAsyncRequestInfoRequest() (request *DescribeAsyncRequestInfoRequest) {
+    request = &DescribeAsyncRequestInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "DescribeAsyncRequestInfo")
+    return
+}
+
+func NewDescribeAsyncRequestInfoResponse() (response *DescribeAsyncRequestInfoResponse) {
+    response = &DescribeAsyncRequestInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the execution result of a task.
+func (c *Client) DescribeAsyncRequestInfo(request *DescribeAsyncRequestInfoRequest) (response *DescribeAsyncRequestInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeAsyncRequestInfoRequest()
+    }
+    response = NewDescribeAsyncRequestInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMigrateCheckJobRequest() (request *DescribeMigrateCheckJobRequest) {
     request = &DescribeMigrateCheckJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -275,6 +350,81 @@ func (c *Client) DescribeMigrateJobs(request *DescribeMigrateJobsRequest) (respo
         request = NewDescribeMigrateJobsRequest()
     }
     response = NewDescribeMigrateJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRegionConfRequest() (request *DescribeRegionConfRequest) {
+    request = &DescribeRegionConfRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "DescribeRegionConf")
+    return
+}
+
+func NewDescribeRegionConfResponse() (response *DescribeRegionConfResponse) {
+    response = &DescribeRegionConfResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the purchasable subscription instance regions.
+func (c *Client) DescribeRegionConf(request *DescribeRegionConfRequest) (response *DescribeRegionConfResponse, err error) {
+    if request == nil {
+        request = NewDescribeRegionConfRequest()
+    }
+    response = NewDescribeRegionConfResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSubscribeConfRequest() (request *DescribeSubscribeConfRequest) {
+    request = &DescribeSubscribeConfRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "DescribeSubscribeConf")
+    return
+}
+
+func NewDescribeSubscribeConfResponse() (response *DescribeSubscribeConfResponse) {
+    response = &DescribeSubscribeConfResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the subscription instance configuration.
+func (c *Client) DescribeSubscribeConf(request *DescribeSubscribeConfRequest) (response *DescribeSubscribeConfResponse, err error) {
+    if request == nil {
+        request = NewDescribeSubscribeConfRequest()
+    }
+    response = NewDescribeSubscribeConfResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSubscribesRequest() (request *DescribeSubscribesRequest) {
+    request = &DescribeSubscribesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "DescribeSubscribes")
+    return
+}
+
+func NewDescribeSubscribesResponse() (response *DescribeSubscribesResponse) {
+    response = &DescribeSubscribesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the information list of data subscription instances. Pagination is enabled by default with 20 results returned each time.
+func (c *Client) DescribeSubscribes(request *DescribeSubscribesRequest) (response *DescribeSubscribesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSubscribesRequest()
+    }
+    response = NewDescribeSubscribesResponse()
     err = c.Send(request, response)
     return
 }
@@ -334,6 +484,31 @@ func (c *Client) DescribeSyncJobs(request *DescribeSyncJobsRequest) (response *D
     return
 }
 
+func NewIsolateSubscribeRequest() (request *IsolateSubscribeRequest) {
+    request = &IsolateSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "IsolateSubscribe")
+    return
+}
+
+func NewIsolateSubscribeResponse() (response *IsolateSubscribeResponse) {
+    response = &IsolateSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to isolate an hourly billed subscription instance. After this API is called, the instance will become unavailable and billing will stop for it.
+func (c *Client) IsolateSubscribe(request *IsolateSubscribeRequest) (response *IsolateSubscribeResponse, err error) {
+    if request == nil {
+        request = NewIsolateSubscribeRequest()
+    }
+    response = NewIsolateSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyMigrateJobRequest() (request *ModifyMigrateJobRequest) {
     request = &ModifyMigrateJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -362,6 +537,106 @@ func (c *Client) ModifyMigrateJob(request *ModifyMigrateJobRequest) (response *M
     return
 }
 
+func NewModifySubscribeConsumeTimeRequest() (request *ModifySubscribeConsumeTimeRequest) {
+    request = &ModifySubscribeConsumeTimeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeConsumeTime")
+    return
+}
+
+func NewModifySubscribeConsumeTimeResponse() (response *ModifySubscribeConsumeTimeResponse) {
+    response = &ModifySubscribeConsumeTimeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the consumption time point of a data subscription channel.
+func (c *Client) ModifySubscribeConsumeTime(request *ModifySubscribeConsumeTimeRequest) (response *ModifySubscribeConsumeTimeResponse, err error) {
+    if request == nil {
+        request = NewModifySubscribeConsumeTimeRequest()
+    }
+    response = NewModifySubscribeConsumeTimeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySubscribeNameRequest() (request *ModifySubscribeNameRequest) {
+    request = &ModifySubscribeNameRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeName")
+    return
+}
+
+func NewModifySubscribeNameResponse() (response *ModifySubscribeNameResponse) {
+    response = &ModifySubscribeNameResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to rename a data subscription instance.
+func (c *Client) ModifySubscribeName(request *ModifySubscribeNameRequest) (response *ModifySubscribeNameResponse, err error) {
+    if request == nil {
+        request = NewModifySubscribeNameRequest()
+    }
+    response = NewModifySubscribeNameResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySubscribeObjectsRequest() (request *ModifySubscribeObjectsRequest) {
+    request = &ModifySubscribeObjectsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeObjects")
+    return
+}
+
+func NewModifySubscribeObjectsResponse() (response *ModifySubscribeObjectsResponse) {
+    response = &ModifySubscribeObjectsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the subscription rule of a data subscription channel.
+func (c *Client) ModifySubscribeObjects(request *ModifySubscribeObjectsRequest) (response *ModifySubscribeObjectsResponse, err error) {
+    if request == nil {
+        request = NewModifySubscribeObjectsRequest()
+    }
+    response = NewModifySubscribeObjectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySubscribeVipVportRequest() (request *ModifySubscribeVipVportRequest) {
+    request = &ModifySubscribeVipVportRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeVipVport")
+    return
+}
+
+func NewModifySubscribeVipVportResponse() (response *ModifySubscribeVipVportResponse) {
+    response = &ModifySubscribeVipVportResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the IP and port number of a data subscription instance.
+func (c *Client) ModifySubscribeVipVport(request *ModifySubscribeVipVportRequest) (response *ModifySubscribeVipVportResponse, err error) {
+    if request == nil {
+        request = NewModifySubscribeVipVportRequest()
+    }
+    response = NewModifySubscribeVipVportResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifySyncJobRequest() (request *ModifySyncJobRequest) {
     request = &ModifySyncJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -385,6 +660,56 @@ func (c *Client) ModifySyncJob(request *ModifySyncJobRequest) (response *ModifyS
         request = NewModifySyncJobRequest()
     }
     response = NewModifySyncJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOfflineIsolatedSubscribeRequest() (request *OfflineIsolatedSubscribeRequest) {
+    request = &OfflineIsolatedSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "OfflineIsolatedSubscribe")
+    return
+}
+
+func NewOfflineIsolatedSubscribeResponse() (response *OfflineIsolatedSubscribeResponse) {
+    response = &OfflineIsolatedSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to deactivate an isolated data subscription instance.
+func (c *Client) OfflineIsolatedSubscribe(request *OfflineIsolatedSubscribeRequest) (response *OfflineIsolatedSubscribeResponse, err error) {
+    if request == nil {
+        request = NewOfflineIsolatedSubscribeRequest()
+    }
+    response = NewOfflineIsolatedSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResetSubscribeRequest() (request *ResetSubscribeRequest) {
+    request = &ResetSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "ResetSubscribe")
+    return
+}
+
+func NewResetSubscribeResponse() (response *ResetSubscribeResponse) {
+    response = &ResetSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to reset a data subscription instance. Once reset, an activated instance can be bound to other database instances through the `ActivateSubscribe` API.
+func (c *Client) ResetSubscribe(request *ResetSubscribeRequest) (response *ResetSubscribeResponse, err error) {
+    if request == nil {
+        request = NewResetSubscribeRequest()
+    }
+    response = NewResetSubscribeResponse()
     err = c.Send(request, response)
     return
 }

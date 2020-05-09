@@ -466,6 +466,31 @@ func (c *Client) DescribePushTasks(request *DescribePushTasksRequest) (response 
     return
 }
 
+func NewDescribeReportDataRequest() (request *DescribeReportDataRequest) {
+    request = &DescribeReportDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DescribeReportData")
+    return
+}
+
+func NewDescribeReportDataResponse() (response *DescribeReportDataResponse) {
+    response = &DescribeReportDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the daily/weekly/monthly report data at domain name/project levels.
+func (c *Client) DescribeReportData(request *DescribeReportDataRequest) (response *DescribeReportDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeReportDataRequest()
+    }
+    response = NewDescribeReportDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUrlViolationsRequest() (request *DescribeUrlViolationsRequest) {
     request = &DescribeUrlViolationsRequest{
         BaseRequest: &tchttp.BaseRequest{},

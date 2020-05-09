@@ -64,6 +64,9 @@ type Activity struct {
 
 	// Brief description of the scaling activity status.
 	StatusMessageSimplified *string `json:"StatusMessageSimplified,omitempty" name:"StatusMessageSimplified"`
+
+	// Result of the lifecycle hook action in the scaling activity
+	LifecycleActionResultSet []*LifecycleActionResultInfo `json:"LifecycleActionResultSet,omitempty" name:"LifecycleActionResultSet" list`
 }
 
 type ActivtyRelatedInstance struct {
@@ -535,7 +538,7 @@ type CreateNotificationConfigurationRequest struct {
 	// <li>REPLACE_UNHEALTHY_INSTANCE_FAILED: unhealthy instance replacement failed</li>
 	NotificationTypes []*string `json:"NotificationTypes,omitempty" name:"NotificationTypes" list`
 
-	// Array of String | Notification group ID, which is the set of user group IDs and can be queried through the [DescribeUserGroup API](https://cloud.tencent.com/document/api/378/4404).
+	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://cloud.tencent.com/document/product/598/34589) API.
 	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds" list`
 }
 
@@ -657,7 +660,7 @@ type CreateScalingPolicyRequest struct {
 	// Cooldown period in seconds. Default value: 300 seconds.
 	Cooldown *uint64 `json:"Cooldown,omitempty" name:"Cooldown"`
 
-	// Array of String | Notification group ID, which is the set of user group IDs and can be queried through the [DescribeUserGroup API](https://cloud.tencent.com/document/api/378/4404).
+	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://cloud.tencent.com/document/product/598/34589) API.
 	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds" list`
 }
 
@@ -1895,6 +1898,24 @@ type LaunchConfiguration struct {
 	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitempty" name:"HostNameSettings"`
 }
 
+type LifecycleActionResultInfo struct {
+
+	// ID of the lifecycle hook
+	LifecycleHookId *string `json:"LifecycleHookId,omitempty" name:"LifecycleHookId"`
+
+	// ID of the instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether the notification is sent to CMQ successfully
+	NotificationResult *string `json:"NotificationResult,omitempty" name:"NotificationResult"`
+
+	// Result of the lifecyle hook action. Values: CONTINUE, ABANDON
+	LifecycleActionResult *string `json:"LifecycleActionResult,omitempty" name:"LifecycleActionResult"`
+
+	// Cause of the result
+	ResultReason *string `json:"ResultReason,omitempty" name:"ResultReason"`
+}
+
 type LifecycleHook struct {
 
 	// Lifecycle hook ID
@@ -2213,7 +2234,7 @@ type ModifyNotificationConfigurationRequest struct {
 	// <li>REPLACE_UNHEALTHY_INSTANCE_FAILED: unhealthy instance replacement failed</li>
 	NotificationTypes []*string `json:"NotificationTypes,omitempty" name:"NotificationTypes" list`
 
-	// Array of String | Notification group ID, which is the set of user group IDs and can be queried through the [DescribeUserGroup API](https://cloud.tencent.com/document/api/378/4404).
+	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://cloud.tencent.com/document/product/598/34589) API.
 	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds" list`
 }
 
@@ -2265,7 +2286,7 @@ type ModifyScalingPolicyRequest struct {
 	// Alarm monitoring metric.
 	MetricAlarm *MetricAlarm `json:"MetricAlarm,omitempty" name:"MetricAlarm"`
 
-	// Array of String | Notification group ID, which is the set of user group IDs and can be queried through the [DescribeUserGroup API](https://cloud.tencent.com/document/api/378/4404).
+	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://cloud.tencent.com/document/product/598/34589) API.
 	// If you want to clear the user group, you need to pass in the specific string "NULL" to the list.
 	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds" list`
 }

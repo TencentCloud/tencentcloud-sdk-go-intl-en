@@ -146,6 +146,57 @@ func (c *Client) BindLiveDomainCert(request *BindLiveDomainCertRequest) (respons
     return
 }
 
+func NewCancelCommonMixStreamRequest() (request *CancelCommonMixStreamRequest) {
+    request = &CancelCommonMixStreamRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "CancelCommonMixStream")
+    return
+}
+
+func NewCancelCommonMixStreamResponse() (response *CancelCommonMixStreamResponse) {
+    response = &CancelCommonMixStreamResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to cancel a stream mix. It can be used basically in the same way as `mix_streamv2.cancel_mix_stream`.
+func (c *Client) CancelCommonMixStream(request *CancelCommonMixStreamRequest) (response *CancelCommonMixStreamResponse, err error) {
+    if request == nil {
+        request = NewCancelCommonMixStreamRequest()
+    }
+    response = NewCancelCommonMixStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCommonMixStreamRequest() (request *CreateCommonMixStreamRequest) {
+    request = &CreateCommonMixStreamRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "CreateCommonMixStream")
+    return
+}
+
+func NewCreateCommonMixStreamResponse() (response *CreateCommonMixStreamResponse) {
+    response = &CreateCommonMixStreamResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a general stream mix. It can be used basically in the same way as the legacy `mix_streamv2.cancel_mix_stream` API.
+// Note: currently, up to 16 streams can be mixed.
+func (c *Client) CreateCommonMixStream(request *CreateCommonMixStreamRequest) (response *CreateCommonMixStreamResponse, err error) {
+    if request == nil {
+        request = NewCreateCommonMixStreamRequest()
+    }
+    response = NewCreateCommonMixStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLiveCallbackRuleRequest() (request *CreateLiveCallbackRuleRequest) {
     request = &CreateLiveCallbackRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -187,8 +238,8 @@ func NewCreateLiveCallbackTemplateResponse() (response *CreateLiveCallbackTempla
     return
 }
 
-// After a callback template is created and a template ID is successfully returned, you need to call the [CreateLiveCallbackRule](/document/product/267/32638) API and bind the template ID to the domain name/path.
-// <br>Callback protocol-related document: [Event Message Notification](/document/product/267/32744).
+// This API is used to create a callback template. After a template ID is successfully returned, you need to call the [CreateLiveCallbackRule](/document/product/267/32638) API to bind the template ID to the domain name/path.
+// <br>Callback protocol document: [Event Message Notification](/document/product/267/32744).
 func (c *Client) CreateLiveCallbackTemplate(request *CreateLiveCallbackTemplateRequest) (response *CreateLiveCallbackTemplateResponse, err error) {
     if request == nil {
         request = NewCreateLiveCallbackTemplateRequest()
@@ -329,8 +380,9 @@ func NewCreateLiveSnapshotRuleResponse() (response *CreateLiveSnapshotRuleRespon
     return
 }
 
-// To create a screencapturing rule, you need to first call the [CreateLiveSnapshotTemplate](/document/product/267/32624) API to create a screencapturing template and bind the returned template ID to the stream.
-// <br>Screencapturing-related document: [LVB Screencapturing](/document/product/267/32737).
+// This API is used to create a screencapturing rule. You need to first call the [CreateLiveSnapshotTemplate](/document/product/267/32624) API to create a screencapturing template to bind the returned template ID to the stream.
+// <br>Screencapturing document: [LVB Screencapturing](/document/product/267/32737).
+// Note: only one screencapturing template can be associated with one domain name.
 func (c *Client) CreateLiveSnapshotRule(request *CreateLiveSnapshotRuleRequest) (response *CreateLiveSnapshotRuleResponse, err error) {
     if request == nil {
         request = NewCreateLiveSnapshotRuleRequest()
@@ -1008,7 +1060,7 @@ func NewDescribeLiveForbidStreamListResponse() (response *DescribeLiveForbidStre
     return
 }
 
-// This API is used to get the list of forbidden streams.
+// This API is used to get the forbidden stream list.
 func (c *Client) DescribeLiveForbidStreamList(request *DescribeLiveForbidStreamListRequest) (response *DescribeLiveForbidStreamListResponse, err error) {
     if request == nil {
         request = NewDescribeLiveForbidStreamListRequest()
@@ -1133,7 +1185,7 @@ func NewDescribeLiveRecordTemplatesResponse() (response *DescribeLiveRecordTempl
     return
 }
 
-// This API is used to get the list of recording templates.
+// This API is used to get the recording template list.
 func (c *Client) DescribeLiveRecordTemplates(request *DescribeLiveRecordTemplatesRequest) (response *DescribeLiveRecordTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeLiveRecordTemplatesRequest()
@@ -1260,7 +1312,7 @@ func NewDescribeLiveStreamOnlineListResponse() (response *DescribeLiveStreamOnli
     return
 }
 
-// This API is used to return the list of live streams.
+// This API is used to return the live stream list.
 func (c *Client) DescribeLiveStreamOnlineList(request *DescribeLiveStreamOnlineListRequest) (response *DescribeLiveStreamOnlineListResponse, err error) {
     if request == nil {
         request = NewDescribeLiveStreamOnlineListRequest()
@@ -1386,7 +1438,7 @@ func NewDescribeLiveTranscodeTemplatesResponse() (response *DescribeLiveTranscod
     return
 }
 
-// This API is used to get the list of transcoding templates.
+// This API is used to get the transcoding template list.
 func (c *Client) DescribeLiveTranscodeTemplates(request *DescribeLiveTranscodeTemplatesRequest) (response *DescribeLiveTranscodeTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeLiveTranscodeTemplatesRequest()

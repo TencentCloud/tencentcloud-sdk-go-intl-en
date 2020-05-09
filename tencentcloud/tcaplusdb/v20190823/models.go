@@ -1558,6 +1558,10 @@ type TableInfoNew struct {
 	// Sort order of SORTLIST-type tables
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SortRule *int64 `json:"SortRule,omitempty" name:"SortRule"`
+
+	// Distributed index information of table
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DbClusterInfoStruct *string `json:"DbClusterInfoStruct,omitempty" name:"DbClusterInfoStruct"`
 }
 
 type TableResultNew struct {

@@ -186,6 +186,125 @@ func (r *DeleteInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeInstanceLogsRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Log type. Default value: 1
+	// <li>1: master log</li>
+	// <li>2: search slow log</li>
+	// <li>3: index slow log</li>
+	// <li>4: GC log</li>
+	LogType *uint64 `json:"LogType,omitempty" name:"LogType"`
+
+	// Search keyword, which supports LUCENE syntax, such as `level:WARN`, `ip:1.1.1.1`, and `message:test-index`
+	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+
+	// Log start time in the format of YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Log end time in the format of YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Pagination start value. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Default value: 100. Maximum value: 100
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Time sorting order. Default value: 0
+	// <li>0: descending</li>
+	// <li>1: ascending</li>
+	OrderByType *uint64 `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeInstanceLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceLogsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of returned logs
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Log details list
+		InstanceLogList []*InstanceLog `json:"InstanceLogList,omitempty" name:"InstanceLogList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceLogsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceOperationsRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time, such as "2019-03-07 16:30:39"
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time, such as "2019-03-30 20:18:03"
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Pagination start value
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeInstanceOperationsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceOperationsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceOperationsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of operation records
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Operation history
+		Operations []*Operation `json:"Operations,omitempty" name:"Operations" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceOperationsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceOperationsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -464,6 +583,42 @@ type InstanceInfo struct {
 	SecurityType *uint64 `json:"SecurityType,omitempty" name:"SecurityType"`
 }
 
+type InstanceLog struct {
+
+	// Log time
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Log level
+	Level *string `json:"Level,omitempty" name:"Level"`
+
+	// Cluster node IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Log content
+	Message *string `json:"Message,omitempty" name:"Message"`
+}
+
+type KeyValue struct {
+
+	// Key
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type LocalDiskInfo struct {
+
+	// Local disk type <li>LOCAL_SATA: big data </li><li>NVME_SSD: high IO</li>
+	LocalDiskType *string `json:"LocalDiskType,omitempty" name:"LocalDiskType"`
+
+	// Size of a single local disk
+	LocalDiskSize *uint64 `json:"LocalDiskSize,omitempty" name:"LocalDiskSize"`
+
+	// Number of local disks
+	LocalDiskCount *uint64 `json:"LocalDiskCount,omitempty" name:"LocalDiskCount"`
+}
+
 type MasterNodeInfo struct {
 
 	// Whether to enable the dedicated master node
@@ -507,6 +662,46 @@ type NodeInfo struct {
 
 	// Node disk size in GB
 	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Local disk information
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	LocalDiskInfo *LocalDiskInfo `json:"LocalDiskInfo,omitempty" name:"LocalDiskInfo"`
+
+	// Number of node disks
+	DiskCount *uint64 `json:"DiskCount,omitempty" name:"DiskCount"`
+}
+
+type Operation struct {
+
+	// Unique operation ID
+	Id *uint64 `json:"Id,omitempty" name:"Id"`
+
+	// Operation start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Operation type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Operation details
+	Detail *OperationDetail `json:"Detail,omitempty" name:"Detail"`
+
+	// Operation result
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// Workflow task information
+	Tasks []*TaskDetail `json:"Tasks,omitempty" name:"Tasks" list`
+
+	// Operation progress
+	Progress *float64 `json:"Progress,omitempty" name:"Progress"`
+}
+
+type OperationDetail struct {
+
+	// Original instance configuration information
+	OldInfo []*KeyValue `json:"OldInfo,omitempty" name:"OldInfo" list`
+
+	// Updated instance configuration information
+	NewInfo []*KeyValue `json:"NewInfo,omitempty" name:"NewInfo" list`
 }
 
 type RestartInstanceRequest struct {
@@ -546,6 +741,33 @@ func (r *RestartInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type SubTaskDetail struct {
+
+	// Subtask name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Subtask result
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// Subtask error message
+	ErrMsg *string `json:"ErrMsg,omitempty" name:"ErrMsg"`
+
+	// Subtask type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Subtask status. 0: processing, 1: succeeded, -1: failed
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Name of the index for which the check for upgrade failed
+	FailedIndices []*string `json:"FailedIndices,omitempty" name:"FailedIndices" list`
+
+	// Subtask end time
+	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
+
+	// Subtask level. 1: warning, 2: failed
+	Level *int64 `json:"Level,omitempty" name:"Level"`
+}
+
 type TagInfo struct {
 
 	// Tag key
@@ -553,6 +775,21 @@ type TagInfo struct {
 
 	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type TaskDetail struct {
+
+	// Task name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Task progress
+	Progress *float64 `json:"Progress,omitempty" name:"Progress"`
+
+	// Task completion time
+	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
+
+	// Subtask
+	SubTasks []*SubTaskDetail `json:"SubTasks,omitempty" name:"SubTasks" list`
 }
 
 type UpdateInstanceRequest struct {
@@ -617,6 +854,9 @@ type UpdateInstanceRequest struct {
 
 	// Private network access status of Kibana
 	KibanaPrivateAccess *string `json:"KibanaPrivateAccess,omitempty" name:"KibanaPrivateAccess"`
+
+	// Enables or disables user authentication for ES Basic Edition v6.8 and above
+	BasicSecurityType *int64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
 }
 
 func (r *UpdateInstanceRequest) ToJsonString() string {
@@ -652,7 +892,7 @@ type UpgradeInstanceRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Target ES version
+	// Target ES version. Valid values: 6.4.3, 6.8.2, 7.5.1
 	EsVersion *string `json:"EsVersion,omitempty" name:"EsVersion"`
 
 	// Whether to check for upgrade only. Default value: false

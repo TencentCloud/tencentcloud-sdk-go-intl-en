@@ -1995,6 +1995,49 @@ func (r *UpdateGroupResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type UpdatePolicyRequest struct {
+	*tchttp.BaseRequest
+
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Policy description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
+	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
+}
+
+func (r *UpdatePolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdatePolicyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdatePolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdatePolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdatePolicyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type UpdateRoleConsoleLoginRequest struct {
 	*tchttp.BaseRequest
 

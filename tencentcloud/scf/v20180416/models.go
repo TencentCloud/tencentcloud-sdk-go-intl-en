@@ -859,6 +859,9 @@ type InvokeRequest struct {
 
 	// Namespace
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Traffic routing config in json format, e.g., {"k":"v"}. Please note that both "k" and "v" must be strings. Up to 1024 bytes allowed.
+	RoutingKey *string `json:"RoutingKey,omitempty" name:"RoutingKey"`
 }
 
 func (r *InvokeRequest) ToJsonString() string {
@@ -1047,11 +1050,23 @@ func (r *ListNamespacesResponse) FromJsonString(s string) error {
 type ListVersionByFunctionRequest struct {
 	*tchttp.BaseRequest
 
-	// Function ID
+	// Function Name
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
-	// Namespace
+	// The namespace where the function locates
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Data offset. The default value is `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Return data length. The default value is `20`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// It specifies whether to return the results in ascending or descending order. The value is `ASC` or `DESC`.
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// It specifies the sorting order of the results according to a specified field, such as `AddTime`, `ModTime`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 }
 
 func (r *ListVersionByFunctionRequest) ToJsonString() string {
@@ -1073,6 +1088,10 @@ type ListVersionByFunctionResponse struct {
 		// Function version list
 	// Note: This field may return null, indicating that no valid values is found.
 		Versions []*FunctionVersion `json:"Versions,omitempty" name:"Versions" list`
+
+		// Total number of function versions
+	// Note: This field may return null, indicating that no valid value was found.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

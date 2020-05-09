@@ -1501,6 +1501,69 @@ func (r *DescribePushTasksResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeReportDataRequest struct {
+	*tchttp.BaseRequest
+
+	// Query start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Report type
+	// daily: daily report
+	// weekly: weekly report
+	// monthly: monthly report
+	ReportType *string `json:"ReportType,omitempty" name:"ReportType"`
+
+	// Domain name acceleration region
+	// mainland: in Mainland China
+	// overseas: outside Mainland China
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of data entries. Default value: 1000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filters by project ID
+	Project *int64 `json:"Project,omitempty" name:"Project"`
+}
+
+func (r *DescribeReportDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeReportDataRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReportDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Domain name-level data details.
+		DomainReport []*ReportData `json:"DomainReport,omitempty" name:"DomainReport" list`
+
+		// Project-level data details
+		ProjectReport []*ReportData `json:"ProjectReport,omitempty" name:"ProjectReport" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeReportDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeReportDataResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeUrlViolationsRequest struct {
 	*tchttp.BaseRequest
 
@@ -1722,6 +1785,16 @@ type DetailDomain struct {
 	// S3 bucket origin access authentication configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
+
+	// SCDN configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitempty" name:"SecurityConfig"`
+
+	// 
+	ImageOptimization *ImageOptimization `json:"ImageOptimization,omitempty" name:"ImageOptimization"`
+
+	// 
+	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
 }
 
 type DisableCachesRequest struct {
@@ -3026,6 +3099,27 @@ type RegionMapRelation struct {
 	SubRegionIdList []*int64 `json:"SubRegionIdList,omitempty" name:"SubRegionIdList" list`
 }
 
+type ReportData struct {
+
+	// Project ID/domain name ID.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Project name/domain name.
+	Resource *string `json:"Resource,omitempty" name:"Resource"`
+
+	// Total traffic/max bandwidth in bytes and bps, respectively.
+	Value *int64 `json:"Value,omitempty" name:"Value"`
+
+	// Percentage of individual resource out of all resources.
+	Percentage *float64 `json:"Percentage,omitempty" name:"Percentage"`
+
+	// Total billable traffic/max billable bandwidth in bytes and bps, respectively.
+	BillingValue *int64 `json:"BillingValue,omitempty" name:"BillingValue"`
+
+	// Percentage of billable amount out of total amount.
+	BillingPercentage *float64 `json:"BillingPercentage,omitempty" name:"BillingPercentage"`
+}
+
 type RequestHeader struct {
 
 	// Custom request header configuration switch
@@ -3143,6 +3237,12 @@ func (r *SearchClsLogResponse) ToJsonString() string {
 
 func (r *SearchClsLogResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type SecurityConfig struct {
+
+	// on|off
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
 type Seo struct {

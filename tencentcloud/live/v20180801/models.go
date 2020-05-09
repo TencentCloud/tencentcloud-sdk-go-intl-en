@@ -23,7 +23,7 @@ import (
 type AddDelayLiveStreamRequest struct {
 	*tchttp.BaseRequest
 
-	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Push domain name.
@@ -92,6 +92,12 @@ type AddLiveDomainRequest struct {
 	// 1: LCB.
 	// Default value: 0.
 	IsDelayLive *int64 `json:"IsDelayLive,omitempty" name:"IsDelayLive"`
+
+	// Whether it is LVB on Mini Program.
+	// 0: LVB.
+	// 1: LVB on Mini Program.
+	// Default value: 0.
+	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitempty" name:"IsMiniProgramLive"`
 }
 
 func (r *AddLiveDomainRequest) ToJsonString() string {
@@ -130,16 +136,16 @@ type AddLiveWatermarkRequest struct {
 	// Watermark name.
 	WatermarkName *string `json:"WatermarkName,omitempty" name:"WatermarkName"`
 
-	// Display position: X-axis offset.
+	// Display position: X-axis offset. Default value: 0.
 	XPosition *int64 `json:"XPosition,omitempty" name:"XPosition"`
 
-	// Display position: Y-axis offset.
+	// Display position: Y-axis offset. Default value: 0.
 	YPosition *int64 `json:"YPosition,omitempty" name:"YPosition"`
 
-	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+	// Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 }
 
@@ -245,7 +251,7 @@ type CallBackTemplateInfo struct {
 	// Stream starting callback URL.
 	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitempty" name:"StreamBeginNotifyUrl"`
 
-	// Stream ending callback URL.
+	// Interruption callback URL.
 	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitempty" name:"StreamEndNotifyUrl"`
 
 	// Stream mixing callback URL.
@@ -262,6 +268,40 @@ type CallBackTemplateInfo struct {
 
 	// Callback authentication key.
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
+}
+
+type CancelCommonMixStreamRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of stream mix session (from applying for stream mix to canceling stream mix).
+	MixStreamSessionId *string `json:"MixStreamSessionId,omitempty" name:"MixStreamSessionId"`
+}
+
+func (r *CancelCommonMixStreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CancelCommonMixStreamRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CancelCommonMixStreamResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CancelCommonMixStreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CancelCommonMixStreamResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type CertInfo struct {
@@ -281,8 +321,8 @@ type CertInfo struct {
 	// Certificate content.
 	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
 
-	// Certificate type.
-	// 0: Tencent Cloud-hosted certificate
+	// Certificate type:
+	// 0: Tencent Cloud-hosted certificate.
 	// 1: user-added certificate.
 	CertType *int64 `json:"CertType,omitempty" name:"CertType"`
 
@@ -291,6 +331,193 @@ type CertInfo struct {
 
 	// List of domain names that use this certificate.
 	DomainList []*string `json:"DomainList,omitempty" name:"DomainList" list`
+}
+
+type CommonMixControlParams struct {
+
+	// Valid values: [0,1].
+	// If 1 is entered, when the layer resolution in the parameter is different from the actual video resolution, the video will be automatically cropped according to the resolution set by the layer.
+	UseMixCropCenter *int64 `json:"UseMixCropCenter,omitempty" name:"UseMixCropCenter"`
+}
+
+type CommonMixCropParams struct {
+
+	// Crop width. Value range: [0,3000].
+	CropWidth *float64 `json:"CropWidth,omitempty" name:"CropWidth"`
+
+	// Crop height. Value range: [0,3000].
+	CropHeight *float64 `json:"CropHeight,omitempty" name:"CropHeight"`
+
+	// Starting crop X coordinate. Value range: [0,3000].
+	CropStartLocationX *float64 `json:"CropStartLocationX,omitempty" name:"CropStartLocationX"`
+
+	// Starting crop Y coordinate. Value range: [0,3000].
+	CropStartLocationY *float64 `json:"CropStartLocationY,omitempty" name:"CropStartLocationY"`
+}
+
+type CommonMixInputParam struct {
+
+	// Input stream name of up to 80 bytes, which is a string containing letters, digits, and underscores.
+	InputStreamName *string `json:"InputStreamName,omitempty" name:"InputStreamName"`
+
+	// Input stream layout parameter.
+	LayoutParams *CommonMixLayoutParams `json:"LayoutParams,omitempty" name:"LayoutParams"`
+
+	// Input stream crop parameter.
+	CropParams *CommonMixCropParams `json:"CropParams,omitempty" name:"CropParams"`
+}
+
+type CommonMixLayoutParams struct {
+
+	// Input layer. Value range: [1,16].
+	// 1) For `image_layer` of background stream (i.e., main host video image or canvas), enter 1.
+	// 2) For audio stream mix, this parameter is also required.
+	ImageLayer *int64 `json:"ImageLayer,omitempty" name:"ImageLayer"`
+
+	// Input type. Value range: [0,5].
+	// If this parameter is left empty, 0 will be used by default.
+	// 0: the input stream is audio/video.
+	// 2: the input stream is image.
+	// 3: the input stream is canvas. 
+	// 4: the input stream is audio.
+	// 5: the input stream is pure video.
+	InputType *int64 `json:"InputType,omitempty" name:"InputType"`
+
+	// Output width of input video image. Value range:
+	// Pixel: [0,3000]
+	// Percentage: [0.01,0.99]
+	// If this parameter is left empty, the input stream width will be used by default.
+	// If percentage is used, the expected output is (percentage * background width).
+	ImageWidth *float64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
+
+	// Output height of input video image. Value range:
+	// Pixel: [0,3000]
+	// Percentage: [0.01,0.99]
+	// If this parameter is left empty, the input stream height will be used by default.
+	// If percentage is used, the expected output is (percentage * background height).
+	ImageHeight *float64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
+
+	// X-axis offset of input in output video image. Value range:
+	// Pixel: [0,3000]
+	// Percentage: [0.01,0.99]
+	// If this parameter is left empty, 0 will be used by default.
+	// Horizontal offset from the top-left corner of main host background video image. 
+	// If percentage is used, the expected output is (percentage * background width).
+	LocationX *float64 `json:"LocationX,omitempty" name:"LocationX"`
+
+	// Y-axis offset of input in output video image. Value range:
+	// Pixel: [0,3000]
+	// Percentage: [0.01,0.99]
+	// If this parameter is left empty, 0 will be used by default.
+	// Vertical offset from the top-left corner of main host background video image. 
+	// If percentage is used, the expected output is (percentage * background width)
+	LocationY *float64 `json:"LocationY,omitempty" name:"LocationY"`
+
+	// When `InputType` is 3 (canvas), this value indicates the canvas color.
+	// Commonly used colors include:
+	// Red: 0xcc0033.
+	// Yellow: 0xcc9900.
+	// Green: 0xcccc33.
+	// Blue: 0x99CCFF.
+	// Black: 0x000000.
+	// White: 0xFFFFFF.
+	// Gray: 0x999999
+	Color *string `json:"Color,omitempty" name:"Color"`
+
+	// When `InputType` is 2 (image), this value is the watermark ID.
+	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
+}
+
+type CommonMixOutputParams struct {
+
+	// Output stream name.
+	OutputStreamName *string `json:"OutputStreamName,omitempty" name:"OutputStreamName"`
+
+	// Output stream type. Valid values: [0,1].
+	// If this parameter is left empty, 0 will be used by default.
+	// If the output stream is a stream in the input stream list, enter 0.
+	// If you want the stream mix result to be a new stream, enter 1.
+	// If this value is 1, `output_stream_id` cannot appear in `input_stram_list`, and there cannot be a stream with the same ID on the LVB backend.
+	OutputStreamType *int64 `json:"OutputStreamType,omitempty" name:"OutputStreamType"`
+
+	// Output stream bitrate. Value range: [1,50000].
+	// If this parameter is left empty, the system will automatically determine.
+	OutputStreamBitRate *int64 `json:"OutputStreamBitRate,omitempty" name:"OutputStreamBitRate"`
+
+	// Output stream GOP size. Value range: [1,10].
+	// If this parameter is left empty, the system will automatically determine.
+	OutputStreamGop *int64 `json:"OutputStreamGop,omitempty" name:"OutputStreamGop"`
+
+	// Output stream frame rate. Value range: [1,60].
+	// If this parameter is left empty, the system will automatically determine.
+	OutputStreamFrameRate *int64 `json:"OutputStreamFrameRate,omitempty" name:"OutputStreamFrameRate"`
+
+	// Output stream audio bitrate. Value range: [1,500]
+	// If this parameter is left empty, the system will automatically determine.
+	OutputAudioBitRate *int64 `json:"OutputAudioBitRate,omitempty" name:"OutputAudioBitRate"`
+
+	// Output stream audio sample rate. Valid values: [96000, 88200, 64000, 48000, 44100, 32000,24000, 22050, 16000, 12000, 11025, 8000].
+	// If this parameter is left empty, the system will automatically determine.
+	OutputAudioSampleRate *int64 `json:"OutputAudioSampleRate,omitempty" name:"OutputAudioSampleRate"`
+
+	// Output stream audio sound channel. Valid values: [1,2].
+	// If this parameter is left empty, the system will automatically determine.
+	OutputAudioChannels *int64 `json:"OutputAudioChannels,omitempty" name:"OutputAudioChannels"`
+
+	// SEI information in output stream. If there are no special needs, leave it empty.
+	MixSei *string `json:"MixSei,omitempty" name:"MixSei"`
+}
+
+type CreateCommonMixStreamRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of stream mix session (from applying for stream mix to canceling stream mix).
+	MixStreamSessionId *string `json:"MixStreamSessionId,omitempty" name:"MixStreamSessionId"`
+
+	// Input stream list for stream mix.
+	InputStreamList []*CommonMixInputParam `json:"InputStreamList,omitempty" name:"InputStreamList" list`
+
+	// Output stream parameter for stream mix.
+	OutputParams *CommonMixOutputParams `json:"OutputParams,omitempty" name:"OutputParams"`
+
+	// Input template ID. If this parameter is set, the output will be generated according to the default template layout, and there is no need to enter the custom position parameters.
+	// If this parameter is left empty, 0 will be used by default.
+	// For two input sources, 10, 20, 30, 40, and 50 are supported.
+	// For three input sources, 310, 390, and 391 are supported.
+	// For four input sources, 410 is supported.
+	// For five input sources, 510 and 590 are supported.
+	// For six input sources, 610 is supported.
+	MixStreamTemplateId *int64 `json:"MixStreamTemplateId,omitempty" name:"MixStreamTemplateId"`
+
+	// Special control parameter for stream mix. If there are no special needs, leave it empty.
+	ControlParams *CommonMixControlParams `json:"ControlParams,omitempty" name:"ControlParams"`
+}
+
+func (r *CreateCommonMixStreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateCommonMixStreamRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateCommonMixStreamResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateCommonMixStreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateCommonMixStreamResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateLiveCallbackRuleRequest struct {
@@ -336,35 +563,38 @@ func (r *CreateLiveCallbackRuleResponse) FromJsonString(s string) error {
 type CreateLiveCallbackTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Template name, which is a non-empty string.
+	// Template name.
 	// Maximum length: 255 bytes.
+	// Only letters, digits, underscores, and hyphens can be contained.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
 	// Description.
 	// Maximum length: 1,024 bytes.
+	// Only letters, digits, underscores, and hyphens can be contained.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Stream starting callback URL,
-	// Protocol-related document: [Event Message Notification](/document/product/267/32744).
+	// Protocol document: [Event Message Notification](/document/product/267/32744).
 	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitempty" name:"StreamBeginNotifyUrl"`
 
-	// Stream ending callback URL,
-	// Protocol-related document: [Event Message Notification](/document/product/267/32744).
+	// Interruption callback URL,
+	// Protocol document: [Event Message Notification](/document/product/267/32744).
 	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitempty" name:"StreamEndNotifyUrl"`
 
 	// Recording callback URL,
-	// Protocol-related document: [Event Message Notification](/document/product/267/32744).
+	// Protocol document: [Event Message Notification](/document/product/267/32744).
 	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitempty" name:"RecordNotifyUrl"`
 
 	// Screencapturing callback URL,
-	// Protocol-related document: [Event Message Notification](/document/product/267/32744).
+	// Protocol document: [Event Message Notification](/document/product/267/32744).
 	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitempty" name:"SnapshotNotifyUrl"`
 
 	// Porn detection callback URL,
-	// Protocol-related document: [Event Message Notification](/document/product/267/32741).
+	// Protocol document: [Event Message Notification](/document/product/267/32741).
 	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitempty" name:"PornCensorshipNotifyUrl"`
 
-	// Callback key, which is shared by callback URLs. For more information on authentication callback, please see the callback format document
+	// Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
+	// [Event Message Notification](/document/product/267/32744).
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
 }
 
@@ -580,7 +810,7 @@ func (r *CreateLiveRecordRuleResponse) FromJsonString(s string) error {
 type CreateLiveRecordTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Template name, which is a non-empty string.
+	// Template name. Only letters, digits, underscores, and hyphens can be contained.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
 	// Message description
@@ -598,7 +828,8 @@ type CreateLiveRecordTemplateRequest struct {
 	// AAC recording parameter, which is set when AAC recording is enabled.
 	AacParam *RecordParam `json:"AacParam,omitempty" name:"AacParam"`
 
-	// 0: LVB,
+	// LVB type. Default value: 0.
+	// 0: LVB.
 	// 1: LCB.
 	IsDelayLive *int64 `json:"IsDelayLive,omitempty" name:"IsDelayLive"`
 
@@ -686,11 +917,12 @@ func (r *CreateLiveSnapshotRuleResponse) FromJsonString(s string) error {
 type CreateLiveSnapshotTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Template name, which is a non-empty string.
+	// Template name.
 	// Maximum length: 255 bytes.
+	// Only letters, digits, underscores, and hyphens can be contained.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
-	// COS `AppId`.
+	// COS application ID.
 	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
 
 	// COS bucket name.
@@ -701,6 +933,7 @@ type CreateLiveSnapshotTemplateRequest struct {
 
 	// Description.
 	// Maximum length: 1,024 bytes.
+	// Only letters, digits, underscores, and hyphens can be contained.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Screencapturing interval in seconds. Default value: 10s.
@@ -715,6 +948,12 @@ type CreateLiveSnapshotTemplateRequest struct {
 
 	// Whether to enable porn detection. 0: no, 1: yes. Default value: 0
 	PornFlag *int64 `json:"PornFlag,omitempty" name:"PornFlag"`
+
+	// COS bucket folder prefix.
+	CosPrefix *string `json:"CosPrefix,omitempty" name:"CosPrefix"`
+
+	// COS filename.
+	CosFileName *string `json:"CosFileName,omitempty" name:"CosFileName"`
 }
 
 func (r *CreateLiveSnapshotTemplateRequest) ToJsonString() string {
@@ -932,7 +1171,8 @@ type DelayInfo struct {
 	// Push domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+	// Push path, which is the same as the 
+	//  `AppName` in push and playback addresses and is `live` by default.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Stream name.
@@ -941,19 +1181,19 @@ type DelayInfo struct {
 	// Delay time in seconds.
 	DelayInterval *uint64 `json:"DelayInterval,omitempty" name:"DelayInterval"`
 
-	// Creation time in UTC format.
-	// Note: Beijing time is 8 hours ahead of UTC.
-	// Example: 2019-06-18T12:00:00Z (20:00:00, June 18, 2019, Beijing time).
+	// Creation time in UTC time.
+	// Note: the difference between UTC time and Beijing time is 8 hours.
+	// Example: 2019-06-18T12:00:00Z (i.e., June 18, 2019 20:00:00 Beijing time).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Expiration time in UTC format.
-	// Note: Beijing time is 8 hours ahead of UTC.
-	// Example: 2019-06-18T12:00:00Z (20:00:00, June 18, 2019, Beijing time).
+	// Expiration time in UTC time.
+	// Note: the difference between UTC time and Beijing time is 8 hours.
+	// Example: 2019-06-18T12:00:00Z (i.e., June 18, 2019 20:00:00 Beijing time).
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-	// Current status,
-	// -1: Expired,
-	// 1: Effective.
+	// Current status:
+	// -1: expired.
+	// 1: in effect.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
@@ -998,6 +1238,8 @@ type DeleteLiveCallbackTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
+	// 1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](/document/product/267/32637) API call.
+	// 2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](/document/product/267/32632) API.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -1105,7 +1347,8 @@ type DeleteLiveRecordRequest struct {
 	// Stream name.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
-	// Task ID, which uniquely identifies the recording task globally.
+	// Task ID, which uniquely identifies a recording task globally.
+	// Get the `TaskId` from the returned value of the [CreateLiveRecord](/document/product/267/30148) API.
 	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
 }
 
@@ -1257,6 +1500,8 @@ type DeleteLiveSnapshotTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
+	// 1. Get from the returned value of the [CreateLiveSnapshotTemplate](/document/product/267/32624) API call.
+	// 2. You can query the list of created screencapturing templates through the [DescribeLiveSnapshotTemplates](/document/product/267/32619) API.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -1338,6 +1583,8 @@ type DeleteLiveTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
+	// 1. Get the template ID in the returned value of the [CreateLiveTranscodeTemplate](/document/product/267/32646) API call.
+	// 2. You can query the list of created templates through the [DescribeLiveTranscodeTemplates](/document/product/267/32641) API.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -1372,6 +1619,7 @@ type DeleteLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
 
 	// Watermark ID.
+	// Get the watermark ID in the returned value of the [AddLiveWatermark](/document/product/267/30154) API call.
 	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
 }
 
@@ -1408,7 +1656,7 @@ type DeleteLiveWatermarkRuleRequest struct {
 	// Push domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Push path.
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Stream name.
@@ -1480,6 +1728,8 @@ type DescribeLiveCallbackTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
+	// 1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](/document/product/267/32637) API call.
+	// 2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](/document/product/267/32632) API.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -1983,7 +2233,9 @@ func (r *DescribeLiveRecordTemplateResponse) FromJsonString(s string) error {
 type DescribeLiveRecordTemplatesRequest struct {
 	*tchttp.BaseRequest
 
-	// Whether it is an LCB template
+	// Whether it is an LCB template. Default value: 0.
+	// 0: LVB.
+	// 1: LCB.
 	IsDelayLive *int64 `json:"IsDelayLive,omitempty" name:"IsDelayLive"`
 }
 
@@ -2055,6 +2307,7 @@ type DescribeLiveSnapshotTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
+	// Template ID returned by the [CreateLiveSnapshotTemplate](/document/product/267/32624) API call.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -2296,7 +2549,7 @@ type DescribeLiveStreamPublishedListRequest struct {
 	// This supports querying data in the past 60 days.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default. Fuzzy match is not supported.
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. Fuzzy match is not supported.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Page number to get.
@@ -2439,6 +2692,7 @@ type DescribeLiveTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
+	// Note: get the template ID in the returned value of the [CreateLiveTranscodeTemplate](/document/product/267/32646) API call.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -2648,43 +2902,52 @@ type DomainCertInfo struct {
 
 type DomainInfo struct {
 
-	// LVB domain name
+	// LVB domain name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Domain name type. 0: push, 1: playback
+	// Domain name type:
+	// 0: push.
+	// 1: playback.
 	Type *uint64 `json:"Type,omitempty" name:"Type"`
 
-	// Domain name status. 0: disabled, 1: enabled.
+	// Domain name status:
+	// 0: deactivated.
+	// 1: activated.
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
-	// Creation time
+	// Creation time.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Whether there is a CNAME record pointing to a fixed rule. 0: no, 1: yes.
+	// Whether there is a CNAME record pointing to a fixed rule domain name:
+	// 0: no.
+	// 1: yes.
 	BCName *uint64 `json:"BCName,omitempty" name:"BCName"`
 
-	// Domain name corresponding to the CNAME record
+	// Domain name corresponding to CNAME record.
 	TargetDomain *string `json:"TargetDomain,omitempty" name:"TargetDomain"`
 
 	// Playback region. This parameter is valid only if `Type` is 1.
-	// 1: Mainland China, 2: global, 3: outside Mainland China.
+	// 1: in Mainland China.
+	// 2: global.
+	// 3: outside Mainland China.
 	PlayType *int64 `json:"PlayType,omitempty" name:"PlayType"`
 
-	// 0: LVB,
+	// Whether it is LCB:
+	// 0: LVB.
 	// 1: LCB.
 	IsDelayLive *int64 `json:"IsDelayLive,omitempty" name:"IsDelayLive"`
 
-	// Information of currently used CNAME record
+	// Information of currently used CNAME record.
 	CurrentCName *string `json:"CurrentCName,omitempty" name:"CurrentCName"`
 
-	// Whether it is a leased domain name
+	// Disused parameter, which can be ignored.
 	RentTag *int64 `json:"RentTag,omitempty" name:"RentTag"`
 
-	// Expiration time of leased domain name
+	// Disused parameter, which can be ignored.
 	RentExpireTime *string `json:"RentExpireTime,omitempty" name:"RentExpireTime"`
 
-	// 0: LVB,
-	// 1: LVB on WeChat Mini Program.
+	// 0: LVB.
+	// 1: LVB on Mini Program.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitempty" name:"IsMiniProgramLive"`
 }
@@ -2881,7 +3144,7 @@ type ModifyLiveCallbackTemplateRequest struct {
 	// Stream starting callback URL.
 	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitempty" name:"StreamBeginNotifyUrl"`
 
-	// Stream ending callback URL.
+	// Interruption callback URL.
 	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitempty" name:"StreamEndNotifyUrl"`
 
 	// Recording callback URL.
@@ -2893,7 +3156,8 @@ type ModifyLiveCallbackTemplateRequest struct {
 	// Porn detection callback URL.
 	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitempty" name:"PornCensorshipNotifyUrl"`
 
-	// Callback key, which is shared by callback URLs. For more information on authentication callback, please see the callback format document.
+	// Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
+	// [Event Message Notification](/document/product/267/32744).
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
 }
 
@@ -3160,7 +3424,7 @@ type ModifyLiveRecordTemplateRequest struct {
 	// HLS recording parameter, which is set when HLS recording is enabled.
 	HlsParam *RecordParam `json:"HlsParam,omitempty" name:"HlsParam"`
 
-	// Mp4 recording parameter, which is set when Mp4 recording is enabled.
+	// MP4 recording parameter, which is set when MP4 recording is enabled.
 	Mp4Param *RecordParam `json:"Mp4Param,omitempty" name:"Mp4Param"`
 
 	// AAC recording parameter, which is set when AAC recording is enabled.
@@ -3169,7 +3433,7 @@ type ModifyLiveRecordTemplateRequest struct {
 	// Custom HLS recording parameter.
 	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitempty" name:"HlsSpecialParam"`
 
-	// Mp3 recording parameter, which is set when Mp3 recording is enabled.
+	// MP3 recording parameter, which is set when MP3 recording is enabled.
 	Mp3Param *RecordParam `json:"Mp3Param,omitempty" name:"Mp3Param"`
 }
 
@@ -3224,10 +3488,12 @@ type ModifyLiveSnapshotTemplateRequest struct {
 	// Screenshot height. Default value: 0 (original height).
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
-	// Whether to enable porn detection. 0: no, 1: yes.
+	// Whether to enable porn detection. Default value: 0.
+	// 0: do not enable.
+	// 1: enable.
 	PornFlag *int64 `json:"PornFlag,omitempty" name:"PornFlag"`
 
-	// COS `AppId`.
+	// COS application ID.
 	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
 
 	// COS bucket name.
@@ -3235,6 +3501,12 @@ type ModifyLiveSnapshotTemplateRequest struct {
 
 	// COS region.
 	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
+
+	// COS bucket folder prefix.
+	CosPrefix *string `json:"CosPrefix,omitempty" name:"CosPrefix"`
+
+	// COS filename.
+	CosFileName *string `json:"CosFileName,omitempty" name:"CosFileName"`
 }
 
 func (r *ModifyLiveSnapshotTemplateRequest) ToJsonString() string {
@@ -3278,16 +3550,18 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// aac/mp3.
 	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
 
-	// Audio bitrate. Value range: 0–500. Default value: 0.
+	// Audio bitrate. Default value: 0.
+	// Value range: 0–500.
 	AudioBitrate *int64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
 	// Template description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Video bitrate. Value range: 100–8,000
+	// Video bitrate. Value range: 100–8000 Kbps.
+	// Note: the bitrate value must be a multiple of 100.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
-	// Width. Value range: 0–3,000
+	// Width. Value range: 0-3000.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
 	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
@@ -3296,16 +3570,17 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Whether to keep the audio. 0: no; 1: yes. Default value: 1.
 	NeedAudio *int64 `json:"NeedAudio,omitempty" name:"NeedAudio"`
 
-	// Height. Value range: 0–3,000
+	// Height. Value range: 0-3000.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
-	// Frame rate. Value range: 0–200
+	// Frame rate. Value range: 0–200.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Keyframe interval in seconds. Value range: 0–50
+	// Keyframe interval in seconds. Value range: 0–50.
 	Gop *int64 `json:"Gop,omitempty" name:"Gop"`
 
-	// Rotation angle. Valid values: 0, 90, 180, 270
+	// Rotation angle.
+	// 0, 90, 180, 270.
 	Rotate *int64 `json:"Rotate,omitempty" name:"Rotate"`
 
 	// Encoding quality:
@@ -3321,7 +3596,7 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Whether to not exceed the original frame rate. 0: no; 1: yes. Default value: 0.
 	FpsToOrig *int64 `json:"FpsToOrig,omitempty" name:"FpsToOrig"`
 
-	// VideoBitrate minus TESHD bitrate. Value range: 0.1–0.5.
+	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
 }
 
@@ -3357,7 +3632,9 @@ type PlayAuthKeyInfo struct {
 	// Domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Whether to enable. 0: disabled; 1: enabled.
+	// Whether to enable:
+	// 0: disable.
+	// 1: enable.
 	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
 
 	// Authentication key.
@@ -3366,14 +3643,14 @@ type PlayAuthKeyInfo struct {
 	// Validity period in seconds.
 	AuthDelta *uint64 `json:"AuthDelta,omitempty" name:"AuthDelta"`
 
-	// Authentication BackKey.
+	// Authentication `BackKey`.
 	AuthBackKey *string `json:"AuthBackKey,omitempty" name:"AuthBackKey"`
 }
 
 type PublishTime struct {
 
-	// Push time
-	// In UTC format, for example: 2018-06-29T19:00:00Z.
+	// Push time.
+	// In UTC format, such as 2018-06-29T19:00:00Z.
 	PublishTime *string `json:"PublishTime,omitempty" name:"PublishTime"`
 }
 
@@ -3388,7 +3665,7 @@ type PushAuthKeyInfo struct {
 	// Master authentication key.
 	MasterAuthKey *string `json:"MasterAuthKey,omitempty" name:"MasterAuthKey"`
 
-	// Backup authentication key.
+	// Standby authentication key.
 	BackupAuthKey *string `json:"BackupAuthKey,omitempty" name:"BackupAuthKey"`
 
 	// Validity period in seconds.
@@ -3398,21 +3675,24 @@ type PushAuthKeyInfo struct {
 type RecordParam struct {
 
 	// Recording interval.
-	// In seconds. Default value: 1,800.
-	// Value range: 300–7,200.
-	// This parameter is not valid for HLS, and a file is generated from push start to push end when HLS is recorded.
+	// In seconds. Default value: 1800.
+	// Value range: 300–7200.
+	// This parameter is not valid for HLS, and a file will be generated from push start to interruption during HLS recording.
 	RecordInterval *int64 `json:"RecordInterval,omitempty" name:"RecordInterval"`
 
-	// Recording storage duration.
-	// In seconds. Value range: 0–93,312,000.
-	// 0 represents permanent storage.
+	// Recording storage period.
+	// In seconds. Value range: 0–93312000.
+	// 0: permanent storage.
 	StorageTime *int64 `json:"StorageTime,omitempty" name:"StorageTime"`
 
-	// Whether to enable recording in the current format. 0: no; 1: yes. Default value: 0.
+	// Whether to enable recording in the current format. Default value: 0. 0: no, 1: yes.
 	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
 
 	// VOD subapplication ID.
 	VodSubAppId *int64 `json:"VodSubAppId,omitempty" name:"VodSubAppId"`
+
+	// 
+	VodFileName *string `json:"VodFileName,omitempty" name:"VodFileName"`
 }
 
 type RecordTemplateInfo struct {
@@ -3432,7 +3712,7 @@ type RecordTemplateInfo struct {
 	// HLS recording parameter.
 	HlsParam *RecordParam `json:"HlsParam,omitempty" name:"HlsParam"`
 
-	// Mp4 recording parameter.
+	// MP4 recording parameter.
 	Mp4Param *RecordParam `json:"Mp4Param,omitempty" name:"Mp4Param"`
 
 	// AAC recording parameter.
@@ -3442,10 +3722,10 @@ type RecordTemplateInfo struct {
 	// 1: LCB.
 	IsDelayLive *int64 `json:"IsDelayLive,omitempty" name:"IsDelayLive"`
 
-	// Custom HLS recording parameter.
+	// Custom HLS recording parameter
 	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitempty" name:"HlsSpecialParam"`
 
-	// Mp3 recording parameter.
+	// MP3 recording parameter.
 	Mp3Param *RecordParam `json:"Mp3Param,omitempty" name:"Mp3Param"`
 }
 
@@ -3558,19 +3838,21 @@ type SnapshotTemplateInfo struct {
 	// Template name.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
-	// Screencapturing interval in seconds. Value range: 5–300s.
+	// Screencapturing interval. Value range: 5–300s.
 	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
 
-	// Screenshot width. Value range: 0–3000. 0: original width and fit to the original aspect ratio
+	// Screenshot width. Value range: 0–3000. 
+	// 0: original width and fit to the original ratio.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Screenshot height. Value range: 0–2,000. 0: original height and fit to the original aspect ratio
+	// Screenshot height. Value range: 0–2000.
+	// 0: original height and fit to the original ratio.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
 	// Whether to enable porn detection. 0: no, 1: yes.
 	PornFlag *int64 `json:"PornFlag,omitempty" name:"PornFlag"`
 
-	// COS `AppId`.
+	// COS application ID.
 	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
 
 	// COS bucket name.
@@ -3579,8 +3861,16 @@ type SnapshotTemplateInfo struct {
 	// COS region.
 	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
 
-	// Template description
+	// Template description.
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// COS bucket folder prefix.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CosPrefix *string `json:"CosPrefix,omitempty" name:"CosPrefix"`
+
+	// COS filename.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CosFileName *string `json:"CosFileName,omitempty" name:"CosFileName"`
 }
 
 type StopLiveRecordRequest struct {
@@ -3632,13 +3922,11 @@ type StreamEventInfo struct {
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
 	// Push start time.
-	// In UTC format.
-	// Example: 2019-01-07T12:00:00Z.
+	// In UTC format, such as 2019-01-07T12:00:00Z.
 	StreamStartTime *string `json:"StreamStartTime,omitempty" name:"StreamStartTime"`
 
 	// Push end time.
-	// In UTC format.
-	// Example: 2019-01-07T15:00:00Z.
+	// In UTC format, such as 2019-01-07T15:00:00Z.
 	StreamEndTime *string `json:"StreamEndTime,omitempty" name:"StreamEndTime"`
 
 	// Stop reason.
@@ -3666,13 +3954,11 @@ type StreamName struct {
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
 	// Push start time.
-	// In UTC format.
-	// Example: 2019-01-07T12:00:00Z.
+	// In UTC format, such as 2019-01-07T12:00:00Z.
 	StreamStartTime *string `json:"StreamStartTime,omitempty" name:"StreamStartTime"`
 
 	// Push end time.
-	// In UTC format.
-	// Example: 2019-01-07T15:00:00Z.
+	// In UTC format, such as 2019-01-07T15:00:00Z.
 	StreamEndTime *string `json:"StreamEndTime,omitempty" name:"StreamEndTime"`
 
 	// Stop reason.
@@ -3709,33 +3995,32 @@ type TemplateInfo struct {
 	// h264/h265.
 	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
 
-	// Video bitrate in Kbps. Value range: 100–8,000
+	// Video bitrate. Value range: 100–8000 Kbps.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
-	// Audio encoding format: AAC/MP3
-	// aac/mp3.
+	// Audio codec. Valid values: aac, mp3.
 	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
 
-	// Audio bitrate. Value range: 0–500
+	// Audio bitrate. Value range: 0–500 Kbps.
 	AudioBitrate *int64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
-	// Width. Value range: 0–3,000
+	// Width. Value range: 0–3000.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Height. Value range: 0–3,000
+	// Height. Value range: 0–3000.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
-	// Frame rate. Value range: 0–200
+	// Frame rate. Value range: 0–200 FPS.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Keyframe interval in seconds. Value range: 1–50
+	// Keyframe interval. Value range: 1–50s.
 	Gop *int64 `json:"Gop,omitempty" name:"Gop"`
 
-	// Rotation angle. Valid values: 0, 90, 180, 270
+	// Rotation angle. Valid values: 0, 90, 180, 270.
 	Rotate *int64 `json:"Rotate,omitempty" name:"Rotate"`
 
-	// Encoding quality:
-	// baseline/main/high.
+	// Encoding quality. Valid values:
+	// baseline, main, high.
 	Profile *string `json:"Profile,omitempty" name:"Profile"`
 
 	// Whether to not exceed the original bitrate. 0: no; 1: yes.
@@ -3756,16 +4041,16 @@ type TemplateInfo struct {
 	// Template ID.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Template name
+	// Template name.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
-	// Template description
+	// Template description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Whether it is a TESHD template. 0: no; 1: yes. Default value: 0.
+	// Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
 	AiTransCode *int64 `json:"AiTransCode,omitempty" name:"AiTransCode"`
 
-	// VideoBitrate minus TESHD bitrate. Value range: 0.1–0.5.
+	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
 }
 
@@ -3807,24 +4092,25 @@ type UpdateLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
 
 	// Watermark ID.
+	// Get the watermark ID in the returned value of the [AddLiveWatermark](/document/product/267/30154) API call.
 	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
 
 	// Watermark image URL.
 	PictureUrl *string `json:"PictureUrl,omitempty" name:"PictureUrl"`
 
-	// Display position: X-axis offset.
+	// Display position: X-axis offset. Default value: 0.
 	XPosition *int64 `json:"XPosition,omitempty" name:"XPosition"`
 
-	// Display position: Y-axis offset.
+	// Display position: Y-axis offset. Default value: 0.
 	YPosition *int64 `json:"YPosition,omitempty" name:"YPosition"`
 
 	// Watermark name.
 	WatermarkName *string `json:"WatermarkName,omitempty" name:"WatermarkName"`
 
-	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+	// Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 }
 
@@ -3878,9 +4164,9 @@ type WatermarkInfo struct {
 	// Creation time.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Watermark width
+	// Watermark width.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Watermark height
+	// Watermark height.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 }

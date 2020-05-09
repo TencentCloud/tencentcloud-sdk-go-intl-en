@@ -93,6 +93,56 @@ func (c *Client) DeleteInstance(request *DeleteInstanceRequest) (response *Delet
     return
 }
 
+func NewDescribeInstanceLogsRequest() (request *DescribeInstanceLogsRequest) {
+    request = &DescribeInstanceLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("es", APIVersion, "DescribeInstanceLogs")
+    return
+}
+
+func NewDescribeInstanceLogsResponse() (response *DescribeInstanceLogsResponse) {
+    response = &DescribeInstanceLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the eligible ES cluster logs in the current region.
+func (c *Client) DescribeInstanceLogs(request *DescribeInstanceLogsRequest) (response *DescribeInstanceLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceLogsRequest()
+    }
+    response = NewDescribeInstanceLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceOperationsRequest() (request *DescribeInstanceOperationsRequest) {
+    request = &DescribeInstanceOperationsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("es", APIVersion, "DescribeInstanceOperations")
+    return
+}
+
+func NewDescribeInstanceOperationsResponse() (response *DescribeInstanceOperationsResponse) {
+    response = &DescribeInstanceOperationsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the operation history of an instance by specified criteria.
+func (c *Client) DescribeInstanceOperations(request *DescribeInstanceOperationsRequest) (response *DescribeInstanceOperationsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceOperationsRequest()
+    }
+    response = NewDescribeInstanceOperationsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
     request = &DescribeInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},

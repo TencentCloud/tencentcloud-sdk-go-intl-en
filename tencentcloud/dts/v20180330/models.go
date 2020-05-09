@@ -20,6 +20,58 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type ActivateSubscribeRequest struct {
+	*tchttp.BaseRequest
+
+	// Subscription instance ID.
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+
+	// Database Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Data subscription type. 0: full instance subscription, 1: data subscription, 2: structure subscription, 3: data subscription and structure subscription
+	SubscribeObjectType *int64 `json:"SubscribeObjectType,omitempty" name:"SubscribeObjectType"`
+
+	// Subscription object
+	Objects *SubscribeObject `json:"Objects,omitempty" name:"Objects"`
+
+	// Subnet of data subscription service, which is the subnet of the database instance by default.
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Subscription service port. Default value: 7507
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+}
+
+func (r *ActivateSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ActivateSubscribeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ActivateSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Data subscription configuration task ID.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ActivateSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ActivateSubscribeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CompleteMigrateJobRequest struct {
 	*tchttp.BaseRequest
 
@@ -166,6 +218,56 @@ func (r *CreateMigrateJobResponse) ToJsonString() string {
 }
 
 func (r *CreateMigrateJobResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateSubscribeRequest struct {
+	*tchttp.BaseRequest
+
+	// Subscribed database type. Currently, MySQL is supported
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Instance billing mode, which is always 1 (hourly billing),
+	PayType *int64 `json:"PayType,omitempty" name:"PayType"`
+
+	// Purchase duration in months, which is required if `PayType` is 0. Maximum value: 120 (this field is not required of global site users and is better to be hidden)
+	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
+
+	// Quantity. Default value: 1. Maximum value: 10
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Whether to auto-renew. Default value: 0. This flag does not take effect for hourly billed instances (this field should be hidden from global site users)
+	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+}
+
+func (r *CreateSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateSubscribeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Data subscription instance ID array
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		SubscribeIds []*string `json:"SubscribeIds,omitempty" name:"SubscribeIds" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateSubscribeResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -334,6 +436,46 @@ func (r *DeleteSyncJobResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeAsyncRequestInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Task ID
+	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+}
+
+func (r *DescribeAsyncRequestInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAsyncRequestInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAsyncRequestInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task execution result information
+		Info *string `json:"Info,omitempty" name:"Info"`
+
+		// Task execution status. Valid values: success, failed, running
+		Status *string `json:"Status,omitempty" name:"Status"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAsyncRequestInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAsyncRequestInfoResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeMigrateCheckJobRequest struct {
 	*tchttp.BaseRequest
 
@@ -435,6 +577,219 @@ func (r *DescribeMigrateJobsResponse) ToJsonString() string {
 }
 
 func (r *DescribeMigrateJobsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRegionConfRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeRegionConfRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRegionConfRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRegionConfResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of purchasable regions
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Purchasable region details
+		Items []*SubscribeRegionConf `json:"Items,omitempty" name:"Items" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRegionConfResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRegionConfResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSubscribeConfRequest struct {
+	*tchttp.BaseRequest
+
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+}
+
+func (r *DescribeSubscribeConfRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSubscribeConfRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSubscribeConfResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Subscription instance ID
+		SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+
+		// Subscription instance name
+		SubscribeName *string `json:"SubscribeName,omitempty" name:"SubscribeName"`
+
+		// Subscription channel
+		ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+		// Subscribed database type
+		Product *string `json:"Product,omitempty" name:"Product"`
+
+		// Subscribed instance
+		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+		// Subscribed instance status. Valid values: running, offline, isolate
+		InstanceStatus *string `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
+
+		// Subscription instance status. Valid values: unconfigure, configuring, configured
+		SubsStatus *string `json:"SubsStatus,omitempty" name:"SubsStatus"`
+
+		// Subscription instance lifecycle status. Valid values: normal, isolating, isolated, offlining
+		Status *string `json:"Status,omitempty" name:"Status"`
+
+		// Subscription instance creation time
+		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+		// Subscription instance isolation time
+		IsolateTime *string `json:"IsolateTime,omitempty" name:"IsolateTime"`
+
+		// Subscription instance expiration time
+		ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+		// Subscription instance deactivation time
+		OfflineTime *string `json:"OfflineTime,omitempty" name:"OfflineTime"`
+
+		// Consumption starting time point of subscription instance
+		ConsumeStartTime *string `json:"ConsumeStartTime,omitempty" name:"ConsumeStartTime"`
+
+		// Subscription instance billing mode. 1: hourly billing
+		PayType *int64 `json:"PayType,omitempty" name:"PayType"`
+
+		// Subscription channel VIP
+		Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+		// Subscription channel port
+		Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+		// Subscription channel `VpcId`
+		UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+		// Subscription channel `SubnetId`
+		UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+		// Current SDK consumption time point
+		SdkConsumedTime *string `json:"SdkConsumedTime,omitempty" name:"SdkConsumedTime"`
+
+		// Subscription SDK IP address
+		SdkHost *string `json:"SdkHost,omitempty" name:"SdkHost"`
+
+		// Subscription object type. 0: full instance subscription, 1: DDL data subscription, 2: DML structure subscription, 3: DDL data subscription + DML structure subscription
+		SubscribeObjectType *int64 `json:"SubscribeObjectType,omitempty" name:"SubscribeObjectType"`
+
+		// Subscription object, which is an empty array if `SubscribeObjectType` is 0
+		SubscribeObjects []*SubscribeObject `json:"SubscribeObjects,omitempty" name:"SubscribeObjects" list`
+
+		// Modification time
+		ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+		// Region
+		Region *string `json:"Region,omitempty" name:"Region"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSubscribeConfResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSubscribeConfResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSubscribesRequest struct {
+	*tchttp.BaseRequest
+
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+
+	// Data subscription instance name
+	SubscribeName *string `json:"SubscribeName,omitempty" name:"SubscribeName"`
+
+	// ID of bound database instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Data subscription instance channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Billing mode filter. Default value: 1 (pay-as-you-go)
+	PayType *string `json:"PayType,omitempty" name:"PayType"`
+
+	// Subscribed database product, such as MySQL
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Data subscription instance status. Valid values: creating, normal, isolating, isolated, offlining
+	Status []*string `json:"Status,omitempty" name:"Status" list`
+
+	// Data subscription instance configuration status. Valid values: unconfigure, configuring, configured
+	SubsStatus []*string `json:"SubsStatus,omitempty" name:"SubsStatus" list`
+
+	// Starting offset of returned results
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned at a time
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Sorting order. Valid values: DESC, ASC. Default value: DESC, indicating descending by creation time
+	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+}
+
+func (r *DescribeSubscribesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSubscribesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSubscribesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible instances.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Information list of data subscription instances
+		Items []*SubscribeInfo `json:"Items,omitempty" name:"Items" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSubscribesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSubscribesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -560,6 +915,49 @@ type DstInfo struct {
 	ReadOnly *int64 `json:"ReadOnly,omitempty" name:"ReadOnly"`
 }
 
+type ErrorInfo struct {
+
+	// Specific error log, including error code and error message
+	ErrorLog *string `json:"ErrorLog,omitempty" name:"ErrorLog"`
+
+	// Help document URL corresponding to error
+	HelpDoc *string `json:"HelpDoc,omitempty" name:"HelpDoc"`
+}
+
+type IsolateSubscribeRequest struct {
+	*tchttp.BaseRequest
+
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+}
+
+func (r *IsolateSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *IsolateSubscribeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type IsolateSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *IsolateSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *IsolateSubscribeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type MigrateDetailInfo struct {
 
 	// Total number of steps
@@ -630,6 +1028,9 @@ type MigrateJobInfo struct {
 
 	// Task details
 	Detail *MigrateDetailInfo `json:"Detail,omitempty" name:"Detail"`
+
+	// Prompt message for task error, which is not null or empty when an error occurs with the task
+	ErrorInfo []*ErrorInfo `json:"ErrorInfo,omitempty" name:"ErrorInfo" list`
 }
 
 type MigrateOption struct {
@@ -755,6 +1156,166 @@ func (r *ModifyMigrateJobResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifySubscribeConsumeTimeRequest struct {
+	*tchttp.BaseRequest
+
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+
+	// Consumption starting time point in the format of `Y-m-d h:m:s`, i.e., the starting time point for data subscription. Value range: within the last 24 hours
+	ConsumeStartTime *string `json:"ConsumeStartTime,omitempty" name:"ConsumeStartTime"`
+}
+
+func (r *ModifySubscribeConsumeTimeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifySubscribeConsumeTimeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifySubscribeConsumeTimeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifySubscribeConsumeTimeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifySubscribeConsumeTimeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifySubscribeNameRequest struct {
+	*tchttp.BaseRequest
+
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+
+	// Data subscription instance name. Length limit: [1,60]
+	SubscribeName *string `json:"SubscribeName,omitempty" name:"SubscribeName"`
+}
+
+func (r *ModifySubscribeNameRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifySubscribeNameRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifySubscribeNameResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifySubscribeNameResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifySubscribeNameResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifySubscribeObjectsRequest struct {
+	*tchttp.BaseRequest
+
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+
+	// Data subscription type. Valid values: 0 (full instance subscription), 1 (data subscription), 2 (structure subscription), 3 (data subscription + structure subscription)
+	SubscribeObjectType *int64 `json:"SubscribeObjectType,omitempty" name:"SubscribeObjectType"`
+
+	// Information of subscribed table
+	Objects []*SubscribeObject `json:"Objects,omitempty" name:"Objects" list`
+}
+
+func (r *ModifySubscribeObjectsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifySubscribeObjectsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifySubscribeObjectsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifySubscribeObjectsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifySubscribeObjectsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifySubscribeVipVportRequest struct {
+	*tchttp.BaseRequest
+
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+
+	// Specified destination subnet. If this parameter is passed in, `DstIp` must be in the destination subnet
+	DstUniqSubnetId *string `json:"DstUniqSubnetId,omitempty" name:"DstUniqSubnetId"`
+
+	// Target IP. Either this field or `DstPort` must be passed in
+	DstIp *string `json:"DstIp,omitempty" name:"DstIp"`
+
+	// Target port. Value range: [1025-65535]
+	DstPort *int64 `json:"DstPort,omitempty" name:"DstPort"`
+}
+
+func (r *ModifySubscribeVipVportRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifySubscribeVipVportRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifySubscribeVipVportResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifySubscribeVipVportResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifySubscribeVipVportResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifySyncJobRequest struct {
 	*tchttp.BaseRequest
 
@@ -797,6 +1358,74 @@ func (r *ModifySyncJobResponse) ToJsonString() string {
 }
 
 func (r *ModifySyncJobResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type OfflineIsolatedSubscribeRequest struct {
+	*tchttp.BaseRequest
+
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+}
+
+func (r *OfflineIsolatedSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *OfflineIsolatedSubscribeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type OfflineIsolatedSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *OfflineIsolatedSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *OfflineIsolatedSubscribeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ResetSubscribeRequest struct {
+	*tchttp.BaseRequest
+
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+}
+
+func (r *ResetSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ResetSubscribeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ResetSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ResetSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ResetSubscribeResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -952,6 +1581,110 @@ func (r *StopMigrateJobResponse) ToJsonString() string {
 
 func (r *StopMigrateJobResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type SubscribeInfo struct {
+
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitempty" name:"SubscribeId"`
+
+	// Data subscription instance name
+	SubscribeName *string `json:"SubscribeName,omitempty" name:"SubscribeName"`
+
+	// ID of channel bound to data subscription instance
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Name of product bound to data subscription instance
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// ID of database instance bound to data subscription instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Status of database instance bound to data subscription instance
+	InstanceStatus *string `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
+
+	// Data subscription instance configuration status. Valid values: unconfigure, configuring, configured
+	SubsStatus *string `json:"SubsStatus,omitempty" name:"SubsStatus"`
+
+	// Last modified time
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Isolation time
+	IsolateTime *string `json:"IsolateTime,omitempty" name:"IsolateTime"`
+
+	// Expiration time
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Deactivation time
+	OfflineTime *string `json:"OfflineTime,omitempty" name:"OfflineTime"`
+
+	// Last modified consumption starting time point. If it has never been modified, this field is 0
+	ConsumeStartTime *string `json:"ConsumeStartTime,omitempty" name:"ConsumeStartTime"`
+
+	// Data subscription instance region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Billing mode. 1: pay-as-you-go
+	PayType *int64 `json:"PayType,omitempty" name:"PayType"`
+
+	// Data subscription instance VIP
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Data subscription instance Vport
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Unique ID of the VPC where the data subscription instance VIP resides
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Unique ID of the subnet where the data subscription instance VIP resides
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Data subscription instance status. Valid values: creating, normal, isolating, isolated, offlining, offline
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Timestamp of the last message confirmed by the SDK. If the SDK keeps consuming, this field can also be used as the current consumption time point of the SDK
+	SdkConsumedTime *string `json:"SdkConsumedTime,omitempty" name:"SdkConsumedTime"`
+}
+
+type SubscribeObject struct {
+
+	// Data subscription object type. 0: database, 1: database table
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ObjectsType *int64 `json:"ObjectsType,omitempty" name:"ObjectsType"`
+
+	// Name of subscribed database
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// Array of table names in subscribed database
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TableNames []*string `json:"TableNames,omitempty" name:"TableNames" list`
+}
+
+type SubscribeRegionConf struct {
+
+	// Region name, such as Guangzhou
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+
+	// Region ID, such as ap-guangzhou
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Region name, such as South China
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Whether it is the default region. 0: no, 1: yes
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsDefaultRegion *int64 `json:"IsDefaultRegion,omitempty" name:"IsDefaultRegion"`
+
+	// Purchasable status of current region. 1: normal, 2: beta test, 3: not purchasable
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
 type SyncCheckStepInfo struct {
