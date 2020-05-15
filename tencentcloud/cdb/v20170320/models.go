@@ -1670,6 +1670,57 @@ func (r *DescribeDBInstanceGTIDResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDBInstanceInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDBInstanceInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBInstanceInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBInstanceInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Instance ID.
+		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+		// Instance name.
+		InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+		// Whether encryption is enabled. YES: enabled, NO: not enabled.
+		Encryption *string `json:"Encryption,omitempty" name:"Encryption"`
+
+		// Encryption key ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+		// Key region.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		KeyRegion *string `json:"KeyRegion,omitempty" name:"KeyRegion"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBInstanceInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBInstanceInfoResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeDBInstanceRebootTimeRequest struct {
 	*tchttp.BaseRequest
 
@@ -2524,6 +2575,56 @@ func (r *DescribeRollbackRangeTimeResponse) ToJsonString() string {
 }
 
 func (r *DescribeRollbackRangeTimeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRollbackTaskDetailRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID, which is the same as the instance ID displayed in the TencentDB Console. You can use the [DescribeDBInstances API](https://cloud.tencent.com/document/api/236/15872) to query the ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Async task ID.
+	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// Pagination parameter, i.e., the number of entries to be returned for a single request. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeRollbackTaskDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRollbackTaskDetailRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRollbackTaskDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible entries.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Rollback task details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Items []*RollbackTask `json:"Items,omitempty" name:"Items" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRollbackTaskDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRollbackTaskDetailResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4590,15 +4691,18 @@ type RoWeightValue struct {
 type RollbackDBName struct {
 
 	// Original database name before rollback
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
 
 	// New database name after rollback
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	NewDatabaseName *string `json:"NewDatabaseName,omitempty" name:"NewDatabaseName"`
 }
 
 type RollbackInstancesInfo struct {
 
 	// TencentDB instance ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Rollback policy. Value range: table, db, full. Default value: full. Table: expedited rollback mode, where only the selected table-level backups and binlogs are imported; for cross-table rollback, if the associated tables are not selected simultaneously, the rollback will fail; the parameter `Databases` must be empty under this mode. db: fast rollback mode, where only the selected database-level backups and binlogs are imported; for cross-database rollback, if the associated databases are not selected simultaneously, the rollback will fail. full: ordinary rollback mode, which imports all the backups and binlogs of the instance at a relatively low speed.
@@ -4608,28 +4712,56 @@ type RollbackInstancesInfo struct {
 	RollbackTime *string `json:"RollbackTime,omitempty" name:"RollbackTime"`
 
 	// Information of the databases to be rolled back, which means rollback at the database level
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Databases []*RollbackDBName `json:"Databases,omitempty" name:"Databases" list`
 
 	// Information of the tables to be rolled back, which means rollback at the table level
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Tables []*RollbackTables `json:"Tables,omitempty" name:"Tables" list`
 }
 
 type RollbackTableName struct {
 
 	// Original table name before rollback
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	TableName *string `json:"TableName,omitempty" name:"TableName"`
 
 	// New table name after rollback
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	NewTableName *string `json:"NewTableName,omitempty" name:"NewTableName"`
 }
 
 type RollbackTables struct {
 
 	// Database name
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Database *string `json:"Database,omitempty" name:"Database"`
 
 	// Table details
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Table []*RollbackTableName `json:"Table,omitempty" name:"Table" list`
+}
+
+type RollbackTask struct {
+
+	// Task execution information.
+	Info *string `json:"Info,omitempty" name:"Info"`
+
+	// Task execution result. Valid values: INITIAL: initializing, RUNNING: running, SUCCESS: succeeded, FAILED: failed, KILLED: terminated, REMOVED: deleted, PAUSED: paused.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Task execution progress. Value range: [0,100].
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+
+	// Task start time.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Task end time.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Rollback task details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Detail []*RollbackInstancesInfo `json:"Detail,omitempty" name:"Detail" list`
 }
 
 type RollbackTimeRange struct {

@@ -913,6 +913,12 @@ type DstInfo struct {
 
 	// Only valid for MySQL currently. For instance-level migration, the value range is: 1 (read-only), 0 (read/write)
 	ReadOnly *int64 `json:"ReadOnly,omitempty" name:"ReadOnly"`
+
+	// Target database account
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Target database password
+	Password *string `json:"Password,omitempty" name:"Password"`
 }
 
 type ErrorInfo struct {
@@ -966,10 +972,10 @@ type MigrateDetailInfo struct {
 	// Current step
 	StepNow *int64 `json:"StepNow,omitempty" name:"StepNow"`
 
-	// Overall progress, such as:
+	// Overall progress, such as "10"
 	Progress *string `json:"Progress,omitempty" name:"Progress"`
 
-	// Progress of the current step, such as:
+	// Progress of current step, such as "1"
 	CurrentStepProgress *string `json:"CurrentStepProgress,omitempty" name:"CurrentStepProgress"`
 
 	// Master/slave lag in MB, which is valid during incremental sync and currently supported by TencentDB for Redis and MySQL

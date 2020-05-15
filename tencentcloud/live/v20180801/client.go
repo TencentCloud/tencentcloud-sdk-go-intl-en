@@ -736,6 +736,7 @@ func NewDeleteLiveTranscodeRuleResponse() (response *DeleteLiveTranscodeRuleResp
 }
 
 // This API is used to delete a transcoding rule.
+// `DomainName+AppName+StreamName+TemplateId` uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. `TemplateId` is required. Even if other parameters are empty, you still need to pass in an empty string to make a strong match.
 func (c *Client) DeleteLiveTranscodeRule(request *DeleteLiveTranscodeRuleRequest) (response *DeleteLiveTranscodeRuleResponse, err error) {
     if request == nil {
         request = NewDeleteLiveTranscodeRuleRequest()
@@ -816,6 +817,56 @@ func (c *Client) DeleteLiveWatermarkRule(request *DeleteLiveWatermarkRuleRequest
         request = NewDeleteLiveWatermarkRuleRequest()
     }
     response = NewDeleteLiveWatermarkRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBillBandwidthAndFluxListRequest() (request *DescribeBillBandwidthAndFluxListRequest) {
+    request = &DescribeBillBandwidthAndFluxListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeBillBandwidthAndFluxList")
+    return
+}
+
+func NewDescribeBillBandwidthAndFluxListResponse() (response *DescribeBillBandwidthAndFluxListResponse) {
+    response = &DescribeBillBandwidthAndFluxListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the data of billable LVB bandwidth and traffic.
+func (c *Client) DescribeBillBandwidthAndFluxList(request *DescribeBillBandwidthAndFluxListRequest) (response *DescribeBillBandwidthAndFluxListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillBandwidthAndFluxListRequest()
+    }
+    response = NewDescribeBillBandwidthAndFluxListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeGroupProIspPlayInfoListRequest() (request *DescribeGroupProIspPlayInfoListRequest) {
+    request = &DescribeGroupProIspPlayInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeGroupProIspPlayInfoList")
+    return
+}
+
+func NewDescribeGroupProIspPlayInfoListResponse() (response *DescribeGroupProIspPlayInfoListResponse) {
+    response = &DescribeGroupProIspPlayInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the downstream playback data by district and ISP.
+func (c *Client) DescribeGroupProIspPlayInfoList(request *DescribeGroupProIspPlayInfoListRequest) (response *DescribeGroupProIspPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeGroupProIspPlayInfoListRequest()
+    }
+    response = NewDescribeGroupProIspPlayInfoListResponse()
     err = c.Send(request, response)
     return
 }
@@ -1519,6 +1570,81 @@ func (c *Client) DescribeLiveWatermarks(request *DescribeLiveWatermarksRequest) 
         request = NewDescribeLiveWatermarksRequest()
     }
     response = NewDescribeLiveWatermarksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProIspPlaySumInfoListRequest() (request *DescribeProIspPlaySumInfoListRequest) {
+    request = &DescribeProIspPlaySumInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeProIspPlaySumInfoList")
+    return
+}
+
+func NewDescribeProIspPlaySumInfoListResponse() (response *DescribeProIspPlaySumInfoListResponse) {
+    response = &DescribeProIspPlaySumInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the average traffic per second, total traffic, and number of total requests by ISP and district in a certain period of time.
+func (c *Client) DescribeProIspPlaySumInfoList(request *DescribeProIspPlaySumInfoListRequest) (response *DescribeProIspPlaySumInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeProIspPlaySumInfoListRequest()
+    }
+    response = NewDescribeProIspPlaySumInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamDayPlayInfoListRequest() (request *DescribeStreamDayPlayInfoListRequest) {
+    request = &DescribeStreamDayPlayInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeStreamDayPlayInfoList")
+    return
+}
+
+func NewDescribeStreamDayPlayInfoListResponse() (response *DescribeStreamDayPlayInfoListResponse) {
+    response = &DescribeStreamDayPlayInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the playback data of each stream at the day level, including the total traffic.
+func (c *Client) DescribeStreamDayPlayInfoList(request *DescribeStreamDayPlayInfoListRequest) (response *DescribeStreamDayPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamDayPlayInfoListRequest()
+    }
+    response = NewDescribeStreamDayPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPushInfoListRequest() (request *DescribeStreamPushInfoListRequest) {
+    request = &DescribeStreamPushInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeStreamPushInfoList")
+    return
+}
+
+func NewDescribeStreamPushInfoListResponse() (response *DescribeStreamPushInfoListResponse) {
+    response = &DescribeStreamPushInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and encoding format of audio and video files.
+func (c *Client) DescribeStreamPushInfoList(request *DescribeStreamPushInfoListRequest) (response *DescribeStreamPushInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPushInfoListRequest()
+    }
+    response = NewDescribeStreamPushInfoListResponse()
     err = c.Send(request, response)
     return
 }

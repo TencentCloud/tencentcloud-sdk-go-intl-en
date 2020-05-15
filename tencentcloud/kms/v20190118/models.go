@@ -1004,10 +1004,10 @@ type GenerateDataKeyResponse struct {
 		// 
 		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
-		// 
+		// Plaintext of the generated data key. The plaintext is Base64-encoded and can be used locally after having it Base64-decoded.
 		Plaintext *string `json:"Plaintext,omitempty" name:"Plaintext"`
 
-		// Base64-encoded ciphertext that is encrypted by `DataKey`. You should keep the ciphertext private.
+		// Ciphertext of the data key, which should be kept by yourself. KMS does not host user data keys. You can call the `Decrypt` API to get the plaintext of the data key from `CiphertextBlob`.
 		CiphertextBlob *string `json:"CiphertextBlob,omitempty" name:"CiphertextBlob"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1306,6 +1306,9 @@ type KeyMetadata struct {
 	// It’s valid when `Origin` is `EXTERNAL`, indicating the expiration date of key material. 0 means valid forever.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ValidTo *uint64 `json:"ValidTo,omitempty" name:"ValidTo"`
+
+	// Resource ID in the format of `creatorUin/$creatorUin/$keyId`.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 }
 
 type ListAlgorithmsRequest struct {
@@ -1600,6 +1603,6 @@ type WhiteboxKeyInfo struct {
 	// Base64-encoded white-box decryption key
 	DecryptKey *string `json:"DecryptKey,omitempty" name:"DecryptKey"`
 
-	// 
+	// Resource ID in the format of `creatorUin/$creatorUin/$keyId`.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 }

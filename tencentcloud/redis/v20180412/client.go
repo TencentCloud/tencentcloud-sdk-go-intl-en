@@ -433,7 +433,7 @@ func NewDescribeInstanceMonitorTookDistResponse() (response *DescribeInstanceMon
     return
 }
 
-// This API is used to query the big key size distribution of an instance
+// This API is used to query the distribution of instance access duration.
 func (c *Client) DescribeInstanceMonitorTookDist(request *DescribeInstanceMonitorTookDistRequest) (response *DescribeInstanceMonitorTookDistResponse, err error) {
     if request == nil {
         request = NewDescribeInstanceMonitorTookDistRequest()

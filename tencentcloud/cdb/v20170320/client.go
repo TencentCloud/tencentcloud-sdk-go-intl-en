@@ -807,6 +807,31 @@ func (c *Client) DescribeDBInstanceGTID(request *DescribeDBInstanceGTIDRequest) 
     return
 }
 
+func NewDescribeDBInstanceInfoRequest() (request *DescribeDBInstanceInfoRequest) {
+    request = &DescribeDBInstanceInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBInstanceInfo")
+    return
+}
+
+func NewDescribeDBInstanceInfoResponse() (response *DescribeDBInstanceInfoResponse) {
+    response = &DescribeDBInstanceInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the basic information of an instance (instance ID, instance name, and whether encryption is enabled).
+func (c *Client) DescribeDBInstanceInfo(request *DescribeDBInstanceInfoRequest) (response *DescribeDBInstanceInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceInfoRequest()
+    }
+    response = NewDescribeDBInstanceInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBInstanceRebootTimeRequest() (request *DescribeDBInstanceRebootTimeRequest) {
     request = &DescribeDBInstanceRebootTimeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1253,6 +1278,31 @@ func (c *Client) DescribeRollbackRangeTime(request *DescribeRollbackRangeTimeReq
         request = NewDescribeRollbackRangeTimeRequest()
     }
     response = NewDescribeRollbackRangeTimeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRollbackTaskDetailRequest() (request *DescribeRollbackTaskDetailRequest) {
+    request = &DescribeRollbackTaskDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeRollbackTaskDetail")
+    return
+}
+
+func NewDescribeRollbackTaskDetailResponse() (response *DescribeRollbackTaskDetailResponse) {
+    response = &DescribeRollbackTaskDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the details of a TencentDB instance rollback task.
+func (c *Client) DescribeRollbackTaskDetail(request *DescribeRollbackTaskDetailRequest) (response *DescribeRollbackTaskDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeRollbackTaskDetailRequest()
+    }
+    response = NewDescribeRollbackTaskDetailResponse()
     err = c.Send(request, response)
     return
 }

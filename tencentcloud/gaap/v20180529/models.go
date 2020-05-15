@@ -147,7 +147,11 @@ type BindRealServer struct {
 	// Origin server weight
 	RealServerWeight *int64 `json:"RealServerWeight,omitempty" name:"RealServerWeight"`
 
-	// 
+	// Origin server health check status. Valid values:
+	// 0: normal;
+	// 1: exceptional.
+	// If health check is not enabled, this status will always be normal.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	RealServerStatus *int64 `json:"RealServerStatus,omitempty" name:"RealServerStatus"`
 
 	// Origin server port number
@@ -829,6 +833,9 @@ type CreateProxyRequest struct {
 	// ID of the replicated connection. Only a running connection can be replicated.
 	// The connection is to be replicated if this parameter is set.
 	ClonedProxyId *string `json:"ClonedProxyId,omitempty" name:"ClonedProxyId"`
+
+	// Billing mode (0: bill-by-bandwidth, 1: bill-by-traffic. Default value: bill-by-bandwidth)
+	BillingType *int64 `json:"BillingType,omitempty" name:"BillingType"`
 }
 
 func (r *CreateProxyRequest) ToJsonString() string {
@@ -3197,12 +3204,12 @@ type HTTPListener struct {
 	// Listener protocol
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Listener status:
+	// Listener status. Valid values:
 	// 0: running;
 	// 1: creating;
 	// 2: terminating;
 	// 3: adjusting origin server;
-	// 4: modifying configuration.
+	// 4: adjusting configuration.
 	ListenerStatus *uint64 `json:"ListenerStatus,omitempty" name:"ListenerStatus"`
 }
 
@@ -3220,12 +3227,12 @@ type HTTPSListener struct {
 	// Listener protocol. The value is `HTTP`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Listener status:
+	// Listener status. Valid values:
 	// 0: running;
 	// 1: creating;
 	// 2: terminating;
 	// 3: adjusting origin server;
-	// 4: modifying configuration.
+	// 4: adjusting configuration.
 	ListenerStatus *uint64 `json:"ListenerStatus,omitempty" name:"ListenerStatus"`
 
 	// Server SSL certificate ID of the listener
@@ -3289,6 +3296,9 @@ type InquiryPriceCreateProxyRequest struct {
 
 	// Upper limit of connection concurrence, which indicates a number of simultaneous online connections. Unit: 10,000 connections. It’s a new parameter.
 	Concurrent *int64 `json:"Concurrent,omitempty" name:"Concurrent"`
+
+	// Billing mode (0: bill-by-bandwidth, 1: bill-by-traffic. Default value: bill-by-bandwidth)
+	BillingType *int64 `json:"BillingType,omitempty" name:"BillingType"`
 }
 
 func (r *InquiryPriceCreateProxyRequest) ToJsonString() string {
@@ -3304,17 +3314,26 @@ type InquiryPriceCreateProxyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Basic cost of connection (unit: CNY/day).
+		// Basic price of connection in USD/day.
 		ProxyDailyPrice *float64 `json:"ProxyDailyPrice,omitempty" name:"ProxyDailyPrice"`
 
-		// Connection bandwidth price gradient.
+		// Tiered price of connection bandwidth.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 		BandwidthUnitPrice []*BandwidthPriceGradient `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice" list`
 
-		// Discounted basic cost of connection (unit: CNY/day).
+		// Discounted basic price of connection in USD/day.
 		DiscountProxyDailyPrice *float64 `json:"DiscountProxyDailyPrice,omitempty" name:"DiscountProxyDailyPrice"`
 
 		// Currency, which supports CNY, USD, etc.
 		Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+		// Connection traffic price in USD/GB.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		FlowUnitPrice *float64 `json:"FlowUnitPrice,omitempty" name:"FlowUnitPrice"`
+
+		// Discounted connection traffic price in USD/GB.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		DiscountFlowUnitPrice *float64 `json:"DiscountFlowUnitPrice,omitempty" name:"DiscountFlowUnitPrice"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3739,6 +3758,9 @@ type ModifyProxyConfigurationRequest struct {
 
 	// Connection instance ID; It’s a new parameter.
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Billing mode (0: bill-by-bandwidth, 1: bill-by-traffic. Default value: bill-by-bandwidth)
+	BillingType *int64 `json:"BillingType,omitempty" name:"BillingType"`
 }
 
 func (r *ModifyProxyConfigurationRequest) ToJsonString() string {
@@ -4162,7 +4184,7 @@ type ProxyGroupDetail struct {
 	// 0: running normally;
 	// 1: creating;
 	// 4: terminating;
-	// 11. Migrating.
+	// 11: migrating;
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Owner UIN
@@ -4215,11 +4237,11 @@ type ProxyGroupInfo struct {
 	RealServerRegionInfo *RegionDetail `json:"RealServerRegionInfo,omitempty" name:"RealServerRegionInfo"`
 
 	// Connection group status.
-	// Where:
+	// Valid values:
 	// 0: running;
 	// 1: creating;
 	// 4: terminating;
-	// 11: connection migrating.
+	// 11: migrating connection;
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Tag list.
@@ -4259,16 +4281,17 @@ type ProxyInfo struct {
 	// Concurrence. Unit: requests/second.
 	Concurrent *int64 `json:"Concurrent,omitempty" name:"Concurrent"`
 
-	// Connection status:
+	// Connection status. Valid values:
 	// RUNNING: running;
 	// CREATING: creating;
 	// DESTROYING: terminating;
 	// OPENING: enabling;
 	// CLOSING: disabling;
 	// CLOSED: disabled;
-	// ADJUSTING: adjusting configuration
-	// ISOLATING: isolating (it’s triggered when the account is in arrears);
-	// ISOLATED: isolated (it’s triggered when the account is in arrears);
+	// ADJUSTING: adjusting configuration;
+	// ISOLATING: isolating;
+	// ISOLATED: isolated;
+	// CLONING: copying;
 	// UNKNOWN: unknown status.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -4341,14 +4364,14 @@ type ProxyStatus struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Connection status.
-	// Where:
+	// Valid values:
 	// RUNNING: running;
 	// CREATING: creating;
 	// DESTROYING: terminating;
 	// OPENING: enabling;
 	// CLOSING: disabling;
 	// CLOSED: disabled;
-	// ADJUSTING: adjusting configuration
+	// ADJUSTING: adjusting configuration;
 	// ISOLATING: isolating;
 	// ISOLATED: isolated;
 	// UNKNOWN: unknown status.
@@ -4390,7 +4413,7 @@ type RealServerStatus struct {
 	// Origin server ID.
 	RealServerId *string `json:"RealServerId,omitempty" name:"RealServerId"`
 
-	// 0: not bound; 1: bound to rules or listeners.
+	// 0: not bound, 1: bound to rule or listener.
 	BindStatus *int64 `json:"BindStatus,omitempty" name:"BindStatus"`
 
 	// ID of the connection bound to this origin server. This string is empty if they are not bound.
@@ -4482,10 +4505,10 @@ type RuleInfo struct {
 	// Forwarding policy of the origin server
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
-	// Health check identifier: 1 (enable), 0 (disable).
+	// Whether health check is enabled. 1: enabled, 0: disabled
 	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Origin server status. 0: running; 1: creating; 2: terminating; 3: binding or unbinding; 4: updating configuration
+	// Rule status. 0: running, 1: creating, 2: terminating, 3: binding/unbinding origin server, 4: updating configuration
 	RuleStatus *uint64 `json:"RuleStatus,omitempty" name:"RuleStatus"`
 
 	// Health check parameters
@@ -4494,7 +4517,9 @@ type RuleInfo struct {
 	// Bound origin server information
 	RealServerSet []*BindRealServer `json:"RealServerSet,omitempty" name:"RealServerSet" list`
 
-	// Origin server binding status. 0: normal; 1: origin server IP exception; 2: origin server domain name resolution exception.
+	// Origin server service status. 0: exceptional, 1: normal
+	// If health check is not enabled, this status will always be normal.
+	// As long as one origin server is exceptional, this status will be exceptional. Please view `RealServerSet` for the status of specific origin servers.
 	BindStatus *uint64 `json:"BindStatus,omitempty" name:"BindStatus"`
 
 	// The ‘host’ carried in the request forwarded from the connection to the origin server. `default` indicates directly forwarding the received “host”.
@@ -4651,7 +4676,7 @@ type TCPListener struct {
 	// Listener protocol: TCP.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Listener status:
+	// Listener status. Valid values:
 	// 0: running;
 	// 1: creating;
 	// 2: terminating;
@@ -4659,10 +4684,10 @@ type TCPListener struct {
 	// 4: adjusting configuration.
 	ListenerStatus *uint64 `json:"ListenerStatus,omitempty" name:"ListenerStatus"`
 
-	// Origin server access policy of listeners:
+	// Origin server access policy of listener. Valid values:
 	// rr: round robin;
 	// wrr: weighted round robin;
-	// lc: least connections.
+	// lc: least connection.
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Response timeout of origin server health check (unit: seconds).
@@ -4671,13 +4696,13 @@ type TCPListener struct {
 	// Time interval of origin server health check (unit: seconds).
 	DelayLoop *uint64 `json:"DelayLoop,omitempty" name:"DelayLoop"`
 
-	// Whether to enable the listener health check:
-	// 0: disable;
-	// 1: enable.
+	// Whether health check is enabled for listener. Valid values:
+	// 0: disabled;
+	// 1: enabled
 	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Status of the origin server bound to listeners:
-	// 0: exception;
+	// Status of origin server bound to listener. Valid values:
+	// 0: exceptional;
 	// 1: normal.
 	BindStatus *uint64 `json:"BindStatus,omitempty" name:"BindStatus"`
 
@@ -4731,7 +4756,7 @@ type UDPListener struct {
 	// Listener protocol: UDP.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Listener status:
+	// Listener status. Valid values:
 	// 0: running;
 	// 1: creating;
 	// 2: terminating;
@@ -4742,7 +4767,7 @@ type UDPListener struct {
 	// Origin server access policy of listeners
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
-	// Origin server binding status of listeners. 0: normal; 1: IP exception; 2: domain name resolution exception.
+	// Status of origin server bound to listener. 0: normal, 1: exceptional IP, 2: exceptional domain name resolution
 	BindStatus *uint64 `json:"BindStatus,omitempty" name:"BindStatus"`
 
 	// Information of the origin server bound to listeners

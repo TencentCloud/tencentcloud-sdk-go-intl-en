@@ -179,6 +179,21 @@ func (r *AddLiveWatermarkResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type BillDataInfo struct {
+
+	// Time point in the format of yyyy-mm-dd HH:MM:SS.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Bandwidth in Mbps.
+	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Traffic in MB.
+	Flux *float64 `json:"Flux,omitempty" name:"Flux"`
+
+	// 
+	PeakTime *string `json:"PeakTime,omitempty" name:"PeakTime"`
+}
+
 type BindLiveDomainCertRequest struct {
 	*tchttp.BaseRequest
 
@@ -304,6 +319,24 @@ func (r *CancelCommonMixStreamResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CdnPlayStatData struct {
+
+	// Time point in the format of yyyy-mm-dd HH:MM:SS.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Bandwidth in Mbps.
+	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Traffic in MB.
+	Flux *float64 `json:"Flux,omitempty" name:"Flux"`
+
+	// Number of new requests.
+	Request *uint64 `json:"Request,omitempty" name:"Request"`
+
+	// Number of concurrent connections.
+	Online *uint64 `json:"Online,omitempty" name:"Online"`
+}
+
 type CertInfo struct {
 
 	// Certificate ID.
@@ -342,16 +375,16 @@ type CommonMixControlParams struct {
 
 type CommonMixCropParams struct {
 
-	// Crop width. Value range: [0,3000].
+	// Crop width. Value range: [0,2000].
 	CropWidth *float64 `json:"CropWidth,omitempty" name:"CropWidth"`
 
-	// Crop height. Value range: [0,3000].
+	// Crop height. Value range: [0,2000].
 	CropHeight *float64 `json:"CropHeight,omitempty" name:"CropHeight"`
 
-	// Starting crop X coordinate. Value range: [0,3000].
+	// Starting crop X coordinate. Value range: [0,2000].
 	CropStartLocationX *float64 `json:"CropStartLocationX,omitempty" name:"CropStartLocationX"`
 
-	// Starting crop Y coordinate. Value range: [0,3000].
+	// Starting crop Y coordinate. Value range: [0,2000].
 	CropStartLocationY *float64 `json:"CropStartLocationY,omitempty" name:"CropStartLocationY"`
 }
 
@@ -384,21 +417,21 @@ type CommonMixLayoutParams struct {
 	InputType *int64 `json:"InputType,omitempty" name:"InputType"`
 
 	// Output width of input video image. Value range:
-	// Pixel: [0,3000]
+	// Pixel: [0,2000]
 	// Percentage: [0.01,0.99]
 	// If this parameter is left empty, the input stream width will be used by default.
 	// If percentage is used, the expected output is (percentage * background width).
 	ImageWidth *float64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
 
 	// Output height of input video image. Value range:
-	// Pixel: [0,3000]
+	// Pixel: [0,2000]
 	// Percentage: [0.01,0.99]
 	// If this parameter is left empty, the input stream height will be used by default.
 	// If percentage is used, the expected output is (percentage * background height).
 	ImageHeight *float64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
 
 	// X-axis offset of input in output video image. Value range:
-	// Pixel: [0,3000]
+	// Pixel: [0,2000]
 	// Percentage: [0.01,0.99]
 	// If this parameter is left empty, 0 will be used by default.
 	// Horizontal offset from the top-left corner of main host background video image. 
@@ -406,7 +439,7 @@ type CommonMixLayoutParams struct {
 	LocationX *float64 `json:"LocationX,omitempty" name:"LocationX"`
 
 	// Y-axis offset of input in output video image. Value range:
-	// Pixel: [0,3000]
+	// Pixel: [0,2000]
 	// Percentage: [0.01,0.99]
 	// If this parameter is left empty, 0 will be used by default.
 	// Vertical offset from the top-left corner of main host background video image. 
@@ -1536,19 +1569,15 @@ type DeleteLiveTranscodeRuleRequest struct {
 	*tchttp.BaseRequest
 
 	// Playback domain name.
-	// For transcoding at the domain name level, domain name+AppName+StreamName uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	// Domain name+AppName+StreamName+TemplateId uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
+	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Stream name.
-	// Domain name+AppName+StreamName+TemplateId uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
 	// Template ID.
-	// Domain name+AppName+StreamName+TemplateId uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -1687,6 +1716,130 @@ func (r *DeleteLiveWatermarkRuleResponse) ToJsonString() string {
 }
 
 func (r *DeleteLiveWatermarkRuleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBillBandwidthAndFluxListRequest struct {
+	*tchttp.BaseRequest
+
+	// Start time point in the format of yyyy-mm-dd HH:MM:SS.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// LVB playback domain name. If it is left blank, the full data will be queried.
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+
+	// Value range:
+	// Mainland: Query data for Mainland China,
+	// Oversea: Query data for regions outside Mainland China.
+	// Default: Query data for all regions.
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
+
+	// Data granularity. Supported granularity:
+	// 5: 5-minute granularity (the query interval should be within 1 day),
+	// 60: 1-hour granularity (the query interval should be within one month),
+	// 1440: 1-day granularity (the query interval should be within one month).
+	// Default value: 5.
+	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeBillBandwidthAndFluxListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBillBandwidthAndFluxListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBillBandwidthAndFluxListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Time point of peak bandwidth value in the format of yyyy-mm-dd HH:MM:SS.
+		PeakBandwidthTime *string `json:"PeakBandwidthTime,omitempty" name:"PeakBandwidthTime"`
+
+		// Bandwidth in Mbps.
+		PeakBandwidth *float64 `json:"PeakBandwidth,omitempty" name:"PeakBandwidth"`
+
+		// Time point of the 95th percentile bandwidth value in the format of yyyy-mm-dd HH:MM:SS.
+		P95PeakBandwidthTime *string `json:"P95PeakBandwidthTime,omitempty" name:"P95PeakBandwidthTime"`
+
+		// 95th percentile bandwidth in Mbps.
+		P95PeakBandwidth *float64 `json:"P95PeakBandwidth,omitempty" name:"P95PeakBandwidth"`
+
+		// Total traffic in MB.
+		SumFlux *float64 `json:"SumFlux,omitempty" name:"SumFlux"`
+
+		// Detailed data information.
+		DataInfoList []*BillDataInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBillBandwidthAndFluxListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBillBandwidthAndFluxListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeGroupProIspPlayInfoListRequest struct {
+	*tchttp.BaseRequest
+
+	// Start time point in the format of yyyy-mm-dd HH:MM:SS.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time point in the format of yyyy-mm-dd HH:MM:SS
+	// The time interval is (0, 3 hours]. Data for the past month can be queried.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Playback domain name. If it is blank by default, the full data will be queried.
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+
+	// List of districts. If it is blank by default, data of all districts will be returned.
+	ProvinceNames []*string `json:"ProvinceNames,omitempty" name:"ProvinceNames" list`
+
+	// List of ISPs. If it is blank by default, data of all ISPs will be returned.
+	IspNames []*string `json:"IspNames,omitempty" name:"IspNames" list`
+
+	// Within or outside Mainland China. Value range: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If it is blank, data for all regions will be queried.
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
+}
+
+func (r *DescribeGroupProIspPlayInfoListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeGroupProIspPlayInfoListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeGroupProIspPlayInfoListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Data content.
+		DataInfoList []*GroupProIspDataInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeGroupProIspPlayInfoListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeGroupProIspPlayInfoListResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2868,6 +3021,202 @@ func (r *DescribeLiveWatermarksResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeProIspPlaySumInfoListRequest struct {
+	*tchttp.BaseRequest
+
+	// Start time (Beijing time).
+	// In the format of yyyy-mm-dd HH:MM:SS.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time (Beijing time).
+	// In the format of yyyy-mm-dd HH:MM:SS.
+	// Note: EndTime and StartTime only support querying data on the past day.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistics type. Value range: "Province", "Isp".
+	StatType *string `json:"StatType,omitempty" name:"StatType"`
+
+	// If it is blank by default, the full data will be queried.
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+
+	// Page number.
+	// Value range: [1,1000],
+	// Default value: 1.
+	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// Number of entries per page. Value range: [1,1000],
+	// Default value: 20.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// 
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
+
+	// 
+	OutLanguage *string `json:"OutLanguage,omitempty" name:"OutLanguage"`
+}
+
+func (r *DescribeProIspPlaySumInfoListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeProIspPlaySumInfoListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProIspPlaySumInfoListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total traffic.
+		TotalFlux *float64 `json:"TotalFlux,omitempty" name:"TotalFlux"`
+
+		// Total number of requests.
+		TotalRequest *uint64 `json:"TotalRequest,omitempty" name:"TotalRequest"`
+
+		// Statistics type.
+		StatType *string `json:"StatType,omitempty" name:"StatType"`
+
+		// Number of results per page.
+		PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+
+		// Page number.
+		PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
+
+		// Total number of results.
+		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+		// Total number of pages.
+		TotalPage *uint64 `json:"TotalPage,omitempty" name:"TotalPage"`
+
+		// List of aggregated playback data by ISP or district.
+		DataInfoList []*ProIspPlaySumInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+
+		// Average bandwidth.
+		AvgFluxPerSecond *float64 `json:"AvgFluxPerSecond,omitempty" name:"AvgFluxPerSecond"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeProIspPlaySumInfoListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeProIspPlaySumInfoListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamDayPlayInfoListRequest struct {
+	*tchttp.BaseRequest
+
+	// Date,
+	// In the format of YYYY-mm-dd.
+	DayTime *string `json:"DayTime,omitempty" name:"DayTime"`
+
+	// Playback domain name.
+	PlayDomain *string `json:"PlayDomain,omitempty" name:"PlayDomain"`
+
+	// Page number. Value range: [1,10]. Default value: 1.
+	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// Number of entries per page. Value range: [100,1000]. Default value: 1,000.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeStreamDayPlayInfoListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeStreamDayPlayInfoListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamDayPlayInfoListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Playback data information list.
+		DataInfoList []*PlayDataInfoByStream `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+
+		// Total number.
+		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+		// Total number of pages.
+		TotalPage *uint64 `json:"TotalPage,omitempty" name:"TotalPage"`
+
+		// Page number where the current data resides.
+		PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
+
+		// Number of entries per page.
+		PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStreamDayPlayInfoListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeStreamDayPlayInfoListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamPushInfoListRequest struct {
+	*tchttp.BaseRequest
+
+	// Stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// Start time point in the format of yyyy-mm-dd HH:MM:SS.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time point in the format of yyyy-mm-dd HH:MM:SS. The maximum time interval is 6 hours. Data in the past 6 days can be queried.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Push domain name.
+	PushDomain *string `json:"PushDomain,omitempty" name:"PushDomain"`
+
+	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+}
+
+func (r *DescribeStreamPushInfoListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeStreamPushInfoListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamPushInfoListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Returned data list.
+		DataInfoList []*PushQualityData `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStreamPushInfoListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeStreamPushInfoListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DomainCertInfo struct {
 
 	// Certificate ID.
@@ -3121,6 +3470,18 @@ type ForbidStreamInfo struct {
 
 	// Forbidding expiration time.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+}
+
+type GroupProIspDataInfo struct {
+
+	// District.
+	ProvinceName *string `json:"ProvinceName,omitempty" name:"ProvinceName"`
+
+	// ISP.
+	IspName *string `json:"IspName,omitempty" name:"IspName"`
+
+	// Detailed data at the minute level.
+	DetailInfoList []*CdnPlayStatData `json:"DetailInfoList,omitempty" name:"DetailInfoList" list`
 }
 
 type HlsSpecialParam struct {
@@ -3647,6 +4008,30 @@ type PlayAuthKeyInfo struct {
 	AuthBackKey *string `json:"AuthBackKey,omitempty" name:"AuthBackKey"`
 }
 
+type PlayDataInfoByStream struct {
+
+	// Stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// Total traffic in MB.
+	TotalFlux *float64 `json:"TotalFlux,omitempty" name:"TotalFlux"`
+}
+
+type ProIspPlaySumInfo struct {
+
+	// District/ISP.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Total traffic in MB.
+	TotalFlux *float64 `json:"TotalFlux,omitempty" name:"TotalFlux"`
+
+	// Total number of requests.
+	TotalRequest *uint64 `json:"TotalRequest,omitempty" name:"TotalRequest"`
+
+	// Average download traffic in MB.
+	AvgFluxPerSecond *float64 `json:"AvgFluxPerSecond,omitempty" name:"AvgFluxPerSecond"`
+}
+
 type PublishTime struct {
 
 	// Push time.
@@ -3672,26 +4057,77 @@ type PushAuthKeyInfo struct {
 	AuthDelta *uint64 `json:"AuthDelta,omitempty" name:"AuthDelta"`
 }
 
+type PushQualityData struct {
+
+	// Data time in the format of %Y-%m-%d %H:%M:%S.%ms and accurate down to the millisecond level.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Push domain name.
+	PushDomain *string `json:"PushDomain,omitempty" name:"PushDomain"`
+
+	// Push path.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// Push client IP.
+	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
+
+	// Push start time in the format of %Y-%m-%d %H:%M:%S.%ms and accurate down to the millisecond level.
+	BeginPushTime *string `json:"BeginPushTime,omitempty" name:"BeginPushTime"`
+
+	// Resolution information.
+	Resolution *string `json:"Resolution,omitempty" name:"Resolution"`
+
+	// Video encoding format.
+	VCodec *string `json:"VCodec,omitempty" name:"VCodec"`
+
+	// Audio encoding format.
+	ACodec *string `json:"ACodec,omitempty" name:"ACodec"`
+
+	// Push serial number, which uniquely identifies a push.
+	Sequence *string `json:"Sequence,omitempty" name:"Sequence"`
+
+	// Video frame rate.
+	VideoFps *uint64 `json:"VideoFps,omitempty" name:"VideoFps"`
+
+	// Video bitrate in bps.
+	VideoRate *uint64 `json:"VideoRate,omitempty" name:"VideoRate"`
+
+	// Audio frame rate.
+	AudioFps *uint64 `json:"AudioFps,omitempty" name:"AudioFps"`
+
+	// Audio bitrate in bps.
+	AudioRate *uint64 `json:"AudioRate,omitempty" name:"AudioRate"`
+
+	// Local elapsed time in milliseconds. The greater the difference between audio/video elapsed time and local elapsed time, the poorer the push quality and the more serious the upstream lag.
+	LocalTs *uint64 `json:"LocalTs,omitempty" name:"LocalTs"`
+
+	// Video elapsed time in milliseconds.
+	VideoTs *uint64 `json:"VideoTs,omitempty" name:"VideoTs"`
+
+	// Audio elapsed time in milliseconds.
+	AudioTs *uint64 `json:"AudioTs,omitempty" name:"AudioTs"`
+}
+
 type RecordParam struct {
 
 	// Recording interval.
-	// In seconds. Default value: 1800.
-	// Value range: 300–7200.
-	// This parameter is not valid for HLS, and a file will be generated from push start to interruption during HLS recording.
+	// In seconds. Default value: 1,800.
+	// Value range: 300–7,200.
+	// This parameter is not valid for HLS, and a file is generated from push start to push end when HLS is recorded.
 	RecordInterval *int64 `json:"RecordInterval,omitempty" name:"RecordInterval"`
 
-	// Recording storage period.
-	// In seconds. Value range: 0–93312000.
-	// 0: permanent storage.
+	// Recording storage duration.
+	// In seconds. Value range: 0–93,312,000.
+	// 0 represents permanent storage.
 	StorageTime *int64 `json:"StorageTime,omitempty" name:"StorageTime"`
 
-	// Whether to enable recording in the current format. Default value: 0. 0: no, 1: yes.
+	// Whether to enable recording in the current format. 0: no; 1: yes. Default value: 0.
 	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
 
 	// VOD subapplication ID.
 	VodSubAppId *int64 `json:"VodSubAppId,omitempty" name:"VodSubAppId"`
 
-	// 
+	// Recording filename.
 	VodFileName *string `json:"VodFileName,omitempty" name:"VodFileName"`
 }
 

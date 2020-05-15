@@ -228,8 +228,17 @@ type ClusterInstancesInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	HiveMetaDb *string `json:"HiveMetaDb,omitempty" name:"HiveMetaDb"`
 
-	// 
+	// Cluster type: EMR, CLICKHOUSE, DRUID
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceClass *string `json:"ServiceClass,omitempty" name:"ServiceClass"`
+
+	// Alias serialization of all nodes in cluster
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AliasInfo *string `json:"AliasInfo,omitempty" name:"AliasInfo"`
+
+	// Cluster version ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ProductId *int64 `json:"ProductId,omitempty" name:"ProductId"`
 }
 
 type CreateInstanceRequest struct {
@@ -245,7 +254,11 @@ type CreateInstanceRequest struct {
 	// Configuration information of VPC. This parameter is used to specify the VPC ID, subnet ID, etc.
 	VPCSettings *VPCSettings `json:"VPCSettings,omitempty" name:"VPCSettings"`
 
-	// List of deployed components. Different `ProductIds` correspond to components on different versions. For example, when `ProductId` is 4, this parameter can be `Software.0=hadoop-2.8.4&Software.1=zookeeper-3.4.9`; when `ProductId` is 2, this parameter can be `Software.0=hadoop-2.7.3&Software.1=zookeeper-3.4.9`.
+	// List of deployed components. Different required components need to be selected for different EMR product IDs (i.e., `ProductId`; for specific meanings, please see the `ProductId` field in the input parameter):
+	// <li>When `ProductId` is 1, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
+	// <li>When `ProductId` is 2, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
+	// <li>When `ProductId` is 4, the required components include hadoop-2.8.4, knox-1.2.0, and zookeeper-3.4.9</li>
+	// <li>When `ProductId` is 7, the required components include hadoop-3.1.2, knox-1.2.0, and zookeeper-3.4.9</li>
 	Software []*string `json:"Software,omitempty" name:"Software" list`
 
 	// Node resource specification.
@@ -269,7 +282,8 @@ type CreateInstanceRequest struct {
 	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
 
 	// Purchase duration of instance, which needs to be used together with `TimeUnit`.
-	// <li>When `PayMode` is 0, `TimeSpan` can only be 3,600.</li>
+	// <li>When `TimeUnit` is `s`, this parameter can only be filled with 3600, indicating a pay-as-you-go instance.</li>
+	// <li>When `TimeUnit` is `m`, the number entered in this parameter indicates the purchase duration of the monthly-subscription instance; for example, 1 means one month</li>
 	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
 	// Time unit of instance purchase duration. Valid values:
@@ -582,6 +596,8 @@ type InquiryPriceCreateInstanceRequest struct {
 	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
 
 	// Purchase duration of instance, which needs to be used together with `TimeUnit`.
+	// <li>When `TimeUnit` is `s`, this parameter can only be filled with 3600, indicating a pay-as-you-go instance.</li>
+	// <li>When `TimeUnit` is `m`, the number entered in this parameter indicates the purchase duration of the monthly-subscription instance; for example, 1 means one month</li>
 	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
 	// Node specification queried for price.
@@ -599,7 +615,11 @@ type InquiryPriceCreateInstanceRequest struct {
 	// <li>1: enables high availability of node.</li>
 	SupportHA *uint64 `json:"SupportHA,omitempty" name:"SupportHA"`
 
-	// List of deployed components.
+	// List of deployed components. Different required components need to be selected for different EMR product IDs (i.e., `ProductId`; for specific meanings, please see the `ProductId` field in the input parameter):
+	// <li>When `ProductId` is 1, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
+	// <li>When `ProductId` is 2, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
+	// <li>When `ProductId` is 4, the required components include hadoop-2.8.4, knox-1.2.0, and zookeeper-3.4.9</li>
+	// <li>When `ProductId` is 7, the required components include hadoop-3.1.2, knox-1.2.0, and zookeeper-3.4.9</li>
 	Software []*string `json:"Software,omitempty" name:"Software" list`
 
 	// Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
@@ -1089,7 +1109,8 @@ type NodeHardwareInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
-	// 
+	// Whether it is an automatically scalable node. 0: general node, 1: automatically scalable node.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	AutoFlag *int64 `json:"AutoFlag,omitempty" name:"AutoFlag"`
 }
 
@@ -1134,7 +1155,7 @@ type OutterResource struct {
 
 type Placement struct {
 
-	// ID of the project to which the instance belongs. You can call the `DescribeProject` API and see the `projectId` field in the response to get the value of this parameter. If it is left empty, the default project will be used.
+	// ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` field in the return value of the `DescribeProject` API. If 0 is entered, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// AZ where the instance resides, such as ap-guangzhou-1. You can call the `DescribeZones` API and see the `Zone` field to get the value of this parameter.
@@ -1225,6 +1246,14 @@ type PriceResource struct {
 	// Tag
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// Number of disks
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DiskNum *int64 `json:"DiskNum,omitempty" name:"DiskNum"`
+
+	// Number of local disks
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	LocalDiskNum *int64 `json:"LocalDiskNum,omitempty" name:"LocalDiskNum"`
 }
 
 type Resource struct {

@@ -2134,6 +2134,10 @@ type LoadBalancer struct {
 	// Time blocked or unblocked
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsBlockTime *string `json:"IsBlockTime,omitempty" name:"IsBlockTime"`
+
+	// Whether the IP type is the local BGP
+	// Note: this field may return null, indicating that no valid values can be obtained
+	LocalBgp *bool `json:"LocalBgp,omitempty" name:"LocalBgp"`
 }
 
 type LoadBalancerHealth struct {

@@ -196,7 +196,7 @@ func NewAssignPrivateIpAddressesResponse() (response *AssignPrivateIpAddressesRe
 }
 
 // This API (AssignPrivateIpAddresses) is used for the ENI to apply for private IPs.
-// * An ENI can only be bound with a limited number of IPs. For more information about resource limits, see<a href="/document/product/576/18527">ENI use limits</a>.
+// * An ENI can only be bound with a limited number of IP addresses. For more information about resource limits, see <a href="/document/product/576/18527">ENI Use Limits</a>.
 // * You can specify the private IP you want to apply for. It cannot be the primary IP, which already exists and cannot be modified. The private IP must be in the same subnet as the ENI, and cannot be occupied.
 // * You can apply for more than one secondary private IP on the ENI. The API will return the specified number of secondary private IPs in the subnet IP range of the ENI.
 func (c *Client) AssignPrivateIpAddresses(request *AssignPrivateIpAddressesRequest) (response *AssignPrivateIpAddressesResponse, err error) {
@@ -260,6 +260,31 @@ func (c *Client) AssociateNetworkAclSubnets(request *AssociateNetworkAclSubnetsR
         request = NewAssociateNetworkAclSubnetsRequest()
     }
     response = NewAssociateNetworkAclSubnetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAssociateNetworkInterfaceSecurityGroupsRequest() (request *AssociateNetworkInterfaceSecurityGroupsRequest) {
+    request = &AssociateNetworkInterfaceSecurityGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "AssociateNetworkInterfaceSecurityGroups")
+    return
+}
+
+func NewAssociateNetworkInterfaceSecurityGroupsResponse() (response *AssociateNetworkInterfaceSecurityGroupsResponse) {
+    response = &AssociateNetworkInterfaceSecurityGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (AssociateNetworkInterfaceSecurityGroups) is used to attach a security group to an ENI.
+func (c *Client) AssociateNetworkInterfaceSecurityGroups(request *AssociateNetworkInterfaceSecurityGroupsRequest) (response *AssociateNetworkInterfaceSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewAssociateNetworkInterfaceSecurityGroupsRequest()
+    }
+    response = NewAssociateNetworkInterfaceSecurityGroupsResponse()
     err = c.Send(request, response)
     return
 }
@@ -346,6 +371,34 @@ func (c *Client) AttachNetworkInterface(request *AttachNetworkInterfaceRequest) 
     return
 }
 
+func NewCheckAssistantCidrRequest() (request *CheckAssistantCidrRequest) {
+    request = &CheckAssistantCidrRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CheckAssistantCidr")
+    return
+}
+
+func NewCheckAssistantCidrResponse() (response *CheckAssistantCidrResponse) {
+    response = &CheckAssistantCidrResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (CheckAssistantCidr) is used to check overlapping of a secondary CIDR block with inventory routing, peering connection (opposite VPC CIDR block), and any other resources. If an overlap is present, the overlapped resources are returned. (To use this API that is in Beta, please submit a ticket.)
+// * Check whether the secondary CIDR block overlaps with a primary or secondary CIDR block of the current VPC.
+// * Check whether the secondary CIDR block overlaps with the routing destination of the current VPC.
+// * Check whether the secondary CIDR block is peer-connected to the current VPC, and whether it overlaps with a main or secondary CIDR block of the opposite VPC.
+func (c *Client) CheckAssistantCidr(request *CheckAssistantCidrRequest) (response *CheckAssistantCidrResponse, err error) {
+    if request == nil {
+        request = NewCheckAssistantCidrRequest()
+    }
+    response = NewCheckAssistantCidrResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCheckNetDetectStateRequest() (request *CheckNetDetectStateRequest) {
     request = &CheckNetDetectStateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -421,6 +474,31 @@ func (c *Client) CreateAddressTemplateGroup(request *CreateAddressTemplateGroupR
     return
 }
 
+func NewCreateAssistantCidrRequest() (request *CreateAssistantCidrRequest) {
+    request = &CreateAssistantCidrRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateAssistantCidr")
+    return
+}
+
+func NewCreateAssistantCidrResponse() (response *CreateAssistantCidrResponse) {
+    response = &CreateAssistantCidrResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (CreateAssistantCidr) is used to batch create secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+func (c *Client) CreateAssistantCidr(request *CreateAssistantCidrRequest) (response *CreateAssistantCidrResponse, err error) {
+    if request == nil {
+        request = NewCreateAssistantCidrRequest()
+    }
+    response = NewCreateAssistantCidrResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCcnRequest() (request *CreateCcnRequest) {
     request = &CreateCcnRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -444,6 +522,31 @@ func (c *Client) CreateCcn(request *CreateCcnRequest) (response *CreateCcnRespon
         request = NewCreateCcnRequest()
     }
     response = NewCreateCcnResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCustomerGatewayRequest() (request *CreateCustomerGatewayRequest) {
+    request = &CreateCustomerGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateCustomerGateway")
+    return
+}
+
+func NewCreateCustomerGatewayResponse() (response *CreateCustomerGatewayResponse) {
+    response = &CreateCustomerGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (CreateCustomerGateway) is used to create customer gateways.
+func (c *Client) CreateCustomerGateway(request *CreateCustomerGatewayRequest) (response *CreateCustomerGatewayResponse, err error) {
+    if request == nil {
+        request = NewCreateCustomerGatewayRequest()
+    }
+    response = NewCreateCustomerGatewayResponse()
     err = c.Send(request, response)
     return
 }
@@ -778,6 +881,44 @@ func (c *Client) CreateSecurityGroupPolicies(request *CreateSecurityGroupPolicie
     return
 }
 
+func NewCreateSecurityGroupWithPoliciesRequest() (request *CreateSecurityGroupWithPoliciesRequest) {
+    request = &CreateSecurityGroupWithPoliciesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateSecurityGroupWithPolicies")
+    return
+}
+
+func NewCreateSecurityGroupWithPoliciesResponse() (response *CreateSecurityGroupWithPoliciesResponse) {
+    response = &CreateSecurityGroupWithPoliciesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (CreateSecurityGroupWithPolicies) is used to create security groups, and add security group policies.
+// * Note the<a href="https://cloud.tencent.com/document/product/213/12453">maximum number of security groups</a>per project in each region under each account.
+// * Both the inbound and outbound policies for a newly created security group are Deny All by default. You need to call CreateSecurityGroupPolicies to set security group policies according to your needs.
+// 
+// Description:
+// * `Version`: Indicates the version number of a security group policy, which will automatically increment by 1 every time you update the security policy, to prevent the expiration of the updated policies. If this field is left empty, any conflicts will be ignored.
+// * `Protocol`: Values can be TCP, UDP, ICMP, ICMPV6, GRE, or ALL.
+// * `CidrBlock`:  A CIDR block in the correct format. In a basic network, if a CidrBlock contains private IPs on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.
+// * `Ipv6CidrBlock`: An IPv6 CIDR block in the correct format. In a basic network, if an Ipv6CidrBlock contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.
+// * `SecurityGroupId`: ID of the security group. It can be in the same project as the security group to be modified, including the ID of the security group itself, to represent private IP addresses of all CVMs under the security group. If this field is used, the policy will change without manual modification according to the CVM associated with the policy ID while being used to match network messages.
+// * `Port`: A single port number, or a port range in the format of “8000-8010”. The Port field is accepted only if the value of the `Protocol` field is `TCP` or `UDP`. Otherwise Protocol and Port are mutually exclusive. 
+// * `Action`: Values can be `ACCEPT` or `DROP`.
+// * CidrBlock, Ipv6CidrBlock, SecurityGroupId, and AddressTemplate are exclusive and cannot be entered at the same time. “Protocol + Port” and ServiceTemplate are mutually exclusive and cannot be entered at the same time.
+// * Only policies in one direction can be created in each request. If you need to specify the `PolicyIndex` parameter, the indexes of policies must be consistent.
+func (c *Client) CreateSecurityGroupWithPolicies(request *CreateSecurityGroupWithPoliciesRequest) (response *CreateSecurityGroupWithPoliciesResponse, err error) {
+    if request == nil {
+        request = NewCreateSecurityGroupWithPoliciesRequest()
+    }
+    response = NewCreateSecurityGroupWithPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateServiceTemplateRequest() (request *CreateServiceTemplateRequest) {
     request = &CreateServiceTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1018,6 +1159,31 @@ func (c *Client) DeleteAddressTemplateGroup(request *DeleteAddressTemplateGroupR
     return
 }
 
+func NewDeleteAssistantCidrRequest() (request *DeleteAssistantCidrRequest) {
+    request = &DeleteAssistantCidrRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteAssistantCidr")
+    return
+}
+
+func NewDeleteAssistantCidrResponse() (response *DeleteAssistantCidrResponse) {
+    response = &DeleteAssistantCidrResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DeleteAssistantCidr) is used to delete secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+func (c *Client) DeleteAssistantCidr(request *DeleteAssistantCidrRequest) (response *DeleteAssistantCidrResponse, err error) {
+    if request == nil {
+        request = NewDeleteAssistantCidrRequest()
+    }
+    response = NewDeleteAssistantCidrResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCcnRequest() (request *DeleteCcnRequest) {
     request = &DeleteCcnRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1041,6 +1207,31 @@ func (c *Client) DeleteCcn(request *DeleteCcnRequest) (response *DeleteCcnRespon
         request = NewDeleteCcnRequest()
     }
     response = NewDeleteCcnResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCustomerGatewayRequest() (request *DeleteCustomerGatewayRequest) {
+    request = &DeleteCustomerGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteCustomerGateway")
+    return
+}
+
+func NewDeleteCustomerGatewayResponse() (response *DeleteCustomerGatewayResponse) {
+    response = &DeleteCustomerGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DeleteCustomerGateway) is used to delete customer gateways.
+func (c *Client) DeleteCustomerGateway(request *DeleteCustomerGatewayRequest) (response *DeleteCustomerGatewayResponse, err error) {
+    if request == nil {
+        request = NewDeleteCustomerGatewayRequest()
+    }
+    response = NewDeleteCustomerGatewayResponse()
     err = c.Send(request, response)
     return
 }
@@ -1607,6 +1798,31 @@ func (c *Client) DescribeAddresses(request *DescribeAddressesRequest) (response 
     return
 }
 
+func NewDescribeAssistantCidrRequest() (request *DescribeAssistantCidrRequest) {
+    request = &DescribeAssistantCidrRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeAssistantCidr")
+    return
+}
+
+func NewDescribeAssistantCidrResponse() (response *DescribeAssistantCidrResponse) {
+    response = &DescribeAssistantCidrResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeAssistantCidr) is used to query a list of secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+func (c *Client) DescribeAssistantCidr(request *DescribeAssistantCidrRequest) (response *DescribeAssistantCidrResponse, err error) {
+    if request == nil {
+        request = NewDescribeAssistantCidrRequest()
+    }
+    response = NewDescribeAssistantCidrResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCcnAttachedInstancesRequest() (request *DescribeCcnAttachedInstancesRequest) {
     request = &DescribeCcnAttachedInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1707,6 +1923,56 @@ func (c *Client) DescribeClassicLinkInstances(request *DescribeClassicLinkInstan
     return
 }
 
+func NewDescribeCustomerGatewayVendorsRequest() (request *DescribeCustomerGatewayVendorsRequest) {
+    request = &DescribeCustomerGatewayVendorsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeCustomerGatewayVendors")
+    return
+}
+
+func NewDescribeCustomerGatewayVendorsResponse() (response *DescribeCustomerGatewayVendorsResponse) {
+    response = &DescribeCustomerGatewayVendorsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeCustomerGatewayVendors) is used to query the information of supported customer gateway vendors.
+func (c *Client) DescribeCustomerGatewayVendors(request *DescribeCustomerGatewayVendorsRequest) (response *DescribeCustomerGatewayVendorsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerGatewayVendorsRequest()
+    }
+    response = NewDescribeCustomerGatewayVendorsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCustomerGatewaysRequest() (request *DescribeCustomerGatewaysRequest) {
+    request = &DescribeCustomerGatewaysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeCustomerGateways")
+    return
+}
+
+func NewDescribeCustomerGatewaysResponse() (response *DescribeCustomerGatewaysResponse) {
+    response = &DescribeCustomerGatewaysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeCustomerGateways) is used to query the customer gateway list.
+func (c *Client) DescribeCustomerGateways(request *DescribeCustomerGatewaysRequest) (response *DescribeCustomerGatewaysResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerGatewaysRequest()
+    }
+    response = NewDescribeCustomerGatewaysResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDirectConnectGatewayCcnRoutesRequest() (request *DescribeDirectConnectGatewayCcnRoutesRequest) {
     request = &DescribeDirectConnectGatewayCcnRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1755,6 +2021,31 @@ func (c *Client) DescribeGatewayFlowMonitorDetail(request *DescribeGatewayFlowMo
         request = NewDescribeGatewayFlowMonitorDetailRequest()
     }
     response = NewDescribeGatewayFlowMonitorDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeGatewayFlowQosRequest() (request *DescribeGatewayFlowQosRequest) {
+    request = &DescribeGatewayFlowQosRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeGatewayFlowQos")
+    return
+}
+
+func NewDescribeGatewayFlowQosResponse() (response *DescribeGatewayFlowQosResponse) {
+    response = &DescribeGatewayFlowQosResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeGatewayFlowQos) is used to query the QoS bandwidth limit of inbound IP flow in a gateway.
+func (c *Client) DescribeGatewayFlowQos(request *DescribeGatewayFlowQosRequest) (response *DescribeGatewayFlowQosResponse, err error) {
+    if request == nil {
+        request = NewDescribeGatewayFlowQosRequest()
+    }
+    response = NewDescribeGatewayFlowQosResponse()
     err = c.Send(request, response)
     return
 }
@@ -1924,7 +2215,7 @@ func NewDescribeNetworkInterfaceLimitResponse() (response *DescribeNetworkInterf
     return
 }
 
-// This API is used to query the ENI quota based on the CVM instance ID. It returns the ENI quota to which the CVM instance can be bound and the IP address quota that can be allocated to each ENI.
+// This API (DescribeNetworkInterfaceLimit) is used to query the ENI quota based on the ID of CVM instance or ENI. It returns the ENI quota to which the CVM instance can be bound and the IP address quota that can be allocated to the ENI.
 func (c *Client) DescribeNetworkInterfaceLimit(request *DescribeNetworkInterfaceLimitRequest) (response *DescribeNetworkInterfaceLimitResponse, err error) {
     if request == nil {
         request = NewDescribeNetworkInterfaceLimitRequest()
@@ -2030,6 +2321,31 @@ func (c *Client) DescribeSecurityGroupPolicies(request *DescribeSecurityGroupPol
         request = NewDescribeSecurityGroupPoliciesRequest()
     }
     response = NewDescribeSecurityGroupPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSecurityGroupReferencesRequest() (request *DescribeSecurityGroupReferencesRequest) {
+    request = &DescribeSecurityGroupReferencesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeSecurityGroupReferences")
+    return
+}
+
+func NewDescribeSecurityGroupReferencesResponse() (response *DescribeSecurityGroupReferencesResponse) {
+    response = &DescribeSecurityGroupReferencesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeSecurityGroupReferences) is used to query referred security groups.
+func (c *Client) DescribeSecurityGroupReferences(request *DescribeSecurityGroupReferencesRequest) (response *DescribeSecurityGroupReferencesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityGroupReferencesRequest()
+    }
+    response = NewDescribeSecurityGroupReferencesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2159,6 +2475,31 @@ func (c *Client) DescribeTaskResult(request *DescribeTaskResultRequest) (respons
     return
 }
 
+func NewDescribeVpcInstancesRequest() (request *DescribeVpcInstancesRequest) {
+    request = &DescribeVpcInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcInstances")
+    return
+}
+
+func NewDescribeVpcInstancesResponse() (response *DescribeVpcInstancesResponse) {
+    response = &DescribeVpcInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+//  This API (DescribeVpcInstances) is used to query a list of VCM instances on VPC.
+func (c *Client) DescribeVpcInstances(request *DescribeVpcInstancesRequest) (response *DescribeVpcInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeVpcInstancesRequest()
+    }
+    response = NewDescribeVpcInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeVpcIpv6AddressesRequest() (request *DescribeVpcIpv6AddressesRequest) {
     request = &DescribeVpcIpv6AddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2211,6 +2552,31 @@ func (c *Client) DescribeVpcPrivateIpAddresses(request *DescribeVpcPrivateIpAddr
     return
 }
 
+func NewDescribeVpcResourceDashboardRequest() (request *DescribeVpcResourceDashboardRequest) {
+    request = &DescribeVpcResourceDashboardRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcResourceDashboard")
+    return
+}
+
+func NewDescribeVpcResourceDashboardResponse() (response *DescribeVpcResourceDashboardResponse) {
+    response = &DescribeVpcResourceDashboardResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the VPC resource information.
+func (c *Client) DescribeVpcResourceDashboard(request *DescribeVpcResourceDashboardRequest) (response *DescribeVpcResourceDashboardResponse, err error) {
+    if request == nil {
+        request = NewDescribeVpcResourceDashboardRequest()
+    }
+    response = NewDescribeVpcResourceDashboardResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeVpcsRequest() (request *DescribeVpcsRequest) {
     request = &DescribeVpcsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2257,6 +2623,31 @@ func (c *Client) DescribeVpnConnections(request *DescribeVpnConnectionsRequest) 
         request = NewDescribeVpnConnectionsRequest()
     }
     response = NewDescribeVpnConnectionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeVpnGatewayCcnRoutesRequest() (request *DescribeVpnGatewayCcnRoutesRequest) {
+    request = &DescribeVpnGatewayCcnRoutesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpnGatewayCcnRoutes")
+    return
+}
+
+func NewDescribeVpnGatewayCcnRoutesResponse() (response *DescribeVpnGatewayCcnRoutesResponse) {
+    response = &DescribeVpnGatewayCcnRoutesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeVpnGatewayCcnRoutes) is used to query VPN gateway-based CCN routes.
+func (c *Client) DescribeVpnGatewayCcnRoutes(request *DescribeVpnGatewayCcnRoutesRequest) (response *DescribeVpnGatewayCcnRoutesResponse, err error) {
+    if request == nil {
+        request = NewDescribeVpnGatewayCcnRoutesRequest()
+    }
+    response = NewDescribeVpnGatewayCcnRoutesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2387,6 +2778,31 @@ func (c *Client) DisableCcnRoutes(request *DisableCcnRoutesRequest) (response *D
     return
 }
 
+func NewDisableGatewayFlowMonitorRequest() (request *DisableGatewayFlowMonitorRequest) {
+    request = &DisableGatewayFlowMonitorRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DisableGatewayFlowMonitor")
+    return
+}
+
+func NewDisableGatewayFlowMonitorResponse() (response *DisableGatewayFlowMonitorResponse) {
+    response = &DisableGatewayFlowMonitorResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DisableGatewayFlowMonitor) is used to disable gateway flow monitor.
+func (c *Client) DisableGatewayFlowMonitor(request *DisableGatewayFlowMonitorRequest) (response *DisableGatewayFlowMonitorResponse, err error) {
+    if request == nil {
+        request = NewDisableGatewayFlowMonitorRequest()
+    }
+    response = NewDisableGatewayFlowMonitorResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisassociateAddressRequest() (request *DisassociateAddressRequest) {
     request = &DisassociateAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2466,6 +2882,31 @@ func (c *Client) DisassociateNetworkAclSubnets(request *DisassociateNetworkAclSu
     return
 }
 
+func NewDisassociateNetworkInterfaceSecurityGroupsRequest() (request *DisassociateNetworkInterfaceSecurityGroupsRequest) {
+    request = &DisassociateNetworkInterfaceSecurityGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DisassociateNetworkInterfaceSecurityGroups")
+    return
+}
+
+func NewDisassociateNetworkInterfaceSecurityGroupsResponse() (response *DisassociateNetworkInterfaceSecurityGroupsResponse) {
+    response = &DisassociateNetworkInterfaceSecurityGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DisassociateNetworkInterfaceSecurityGroups) is used to detach (or fully detach if possible) a security group from an ENI.
+func (c *Client) DisassociateNetworkInterfaceSecurityGroups(request *DisassociateNetworkInterfaceSecurityGroupsRequest) (response *DisassociateNetworkInterfaceSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewDisassociateNetworkInterfaceSecurityGroupsRequest()
+    }
+    response = NewDisassociateNetworkInterfaceSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDownloadCustomerGatewayConfigurationRequest() (request *DownloadCustomerGatewayConfigurationRequest) {
     request = &DownloadCustomerGatewayConfigurationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2513,6 +2954,31 @@ func (c *Client) EnableCcnRoutes(request *EnableCcnRoutesRequest) (response *Ena
         request = NewEnableCcnRoutesRequest()
     }
     response = NewEnableCcnRoutesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableGatewayFlowMonitorRequest() (request *EnableGatewayFlowMonitorRequest) {
+    request = &EnableGatewayFlowMonitorRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "EnableGatewayFlowMonitor")
+    return
+}
+
+func NewEnableGatewayFlowMonitorResponse() (response *EnableGatewayFlowMonitorResponse) {
+    response = &EnableGatewayFlowMonitorResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (EnableGatewayFlowMonitor) is used to enable gateway flow monitor.
+func (c *Client) EnableGatewayFlowMonitor(request *EnableGatewayFlowMonitorRequest) (response *EnableGatewayFlowMonitorResponse, err error) {
+    if request == nil {
+        request = NewEnableGatewayFlowMonitorRequest()
+    }
+    response = NewEnableGatewayFlowMonitorResponse()
     err = c.Send(request, response)
     return
 }
@@ -2590,6 +3056,56 @@ func (c *Client) InquiryPriceCreateVpnGateway(request *InquiryPriceCreateVpnGate
         request = NewInquiryPriceCreateVpnGatewayRequest()
     }
     response = NewInquiryPriceCreateVpnGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceRenewVpnGatewayRequest() (request *InquiryPriceRenewVpnGatewayRequest) {
+    request = &InquiryPriceRenewVpnGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "InquiryPriceRenewVpnGateway")
+    return
+}
+
+func NewInquiryPriceRenewVpnGatewayResponse() (response *InquiryPriceRenewVpnGatewayResponse) {
+    response = &InquiryPriceRenewVpnGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (InquiryPriceRenewVpnGateway) is used to query the price for VPN gateway renewal. Currently, only querying prices for IPSEC-type gateways is supported.
+func (c *Client) InquiryPriceRenewVpnGateway(request *InquiryPriceRenewVpnGatewayRequest) (response *InquiryPriceRenewVpnGatewayResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceRenewVpnGatewayRequest()
+    }
+    response = NewInquiryPriceRenewVpnGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceResetVpnGatewayInternetMaxBandwidthRequest() (request *InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest) {
+    request = &InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "InquiryPriceResetVpnGatewayInternetMaxBandwidth")
+    return
+}
+
+func NewInquiryPriceResetVpnGatewayInternetMaxBandwidthResponse() (response *InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse) {
+    response = &InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (InquiryPriceResetVpnGatewayInternetMaxBandwidth) is used to query the price for adjusting the bandwidth cap of a VPN gateway.
+func (c *Client) InquiryPriceResetVpnGatewayInternetMaxBandwidth(request *InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest) (response *InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceResetVpnGatewayInternetMaxBandwidthRequest()
+    }
+    response = NewInquiryPriceResetVpnGatewayInternetMaxBandwidthResponse()
     err = c.Send(request, response)
     return
 }
@@ -2672,6 +3188,33 @@ func (c *Client) ModifyAddressAttribute(request *ModifyAddressAttributeRequest) 
     return
 }
 
+func NewModifyAddressInternetChargeTypeRequest() (request *ModifyAddressInternetChargeTypeRequest) {
+    request = &ModifyAddressInternetChargeTypeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyAddressInternetChargeType")
+    return
+}
+
+func NewModifyAddressInternetChargeTypeResponse() (response *ModifyAddressInternetChargeTypeResponse) {
+    response = &ModifyAddressInternetChargeTypeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to adjust the network billing mode of an EIP. Please note that it's available to users whose network fees are billed on IPs but not CVMs.
+// * The network billing mode can be switched between `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
+// * The network billing mode for each EIP be changed for up to twice.
+func (c *Client) ModifyAddressInternetChargeType(request *ModifyAddressInternetChargeTypeRequest) (response *ModifyAddressInternetChargeTypeResponse, err error) {
+    if request == nil {
+        request = NewModifyAddressInternetChargeTypeRequest()
+    }
+    response = NewModifyAddressInternetChargeTypeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAddressTemplateAttributeRequest() (request *ModifyAddressTemplateAttributeRequest) {
     request = &ModifyAddressTemplateAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2747,6 +3290,31 @@ func (c *Client) ModifyAddressesBandwidth(request *ModifyAddressesBandwidthReque
     return
 }
 
+func NewModifyAssistantCidrRequest() (request *ModifyAssistantCidrRequest) {
+    request = &ModifyAssistantCidrRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyAssistantCidr")
+    return
+}
+
+func NewModifyAssistantCidrResponse() (response *ModifyAssistantCidrResponse) {
+    response = &ModifyAssistantCidrResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (ModifyAssistantCidr) is used to batch modify (e.g. add and delete) secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+func (c *Client) ModifyAssistantCidr(request *ModifyAssistantCidrRequest) (response *ModifyAssistantCidrResponse, err error) {
+    if request == nil {
+        request = NewModifyAssistantCidrRequest()
+    }
+    response = NewModifyAssistantCidrResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyCcnAttributeRequest() (request *ModifyCcnAttributeRequest) {
     request = &ModifyCcnAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2793,6 +3361,56 @@ func (c *Client) ModifyCcnRegionBandwidthLimitsType(request *ModifyCcnRegionBand
         request = NewModifyCcnRegionBandwidthLimitsTypeRequest()
     }
     response = NewModifyCcnRegionBandwidthLimitsTypeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCustomerGatewayAttributeRequest() (request *ModifyCustomerGatewayAttributeRequest) {
+    request = &ModifyCustomerGatewayAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyCustomerGatewayAttribute")
+    return
+}
+
+func NewModifyCustomerGatewayAttributeResponse() (response *ModifyCustomerGatewayAttributeResponse) {
+    response = &ModifyCustomerGatewayAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (ModifyCustomerGatewayAttribute) is used to modify the customer gateway information.
+func (c *Client) ModifyCustomerGatewayAttribute(request *ModifyCustomerGatewayAttributeRequest) (response *ModifyCustomerGatewayAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyCustomerGatewayAttributeRequest()
+    }
+    response = NewModifyCustomerGatewayAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyGatewayFlowQosRequest() (request *ModifyGatewayFlowQosRequest) {
+    request = &ModifyGatewayFlowQosRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyGatewayFlowQos")
+    return
+}
+
+func NewModifyGatewayFlowQosResponse() (response *ModifyGatewayFlowQosResponse) {
+    response = &ModifyGatewayFlowQosResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (ModifyGatewayFlowQos) is used to adjust the QoS bandwidth limit in a gateway.
+func (c *Client) ModifyGatewayFlowQos(request *ModifyGatewayFlowQosRequest) (response *ModifyGatewayFlowQosResponse, err error) {
+    if request == nil {
+        request = NewModifyGatewayFlowQosRequest()
+    }
+    response = NewModifyGatewayFlowQosResponse()
     err = c.Send(request, response)
     return
 }
@@ -3257,6 +3875,31 @@ func (c *Client) ModifyVpnGatewayAttribute(request *ModifyVpnGatewayAttributeReq
     return
 }
 
+func NewModifyVpnGatewayCcnRoutesRequest() (request *ModifyVpnGatewayCcnRoutesRequest) {
+    request = &ModifyVpnGatewayCcnRoutesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpnGatewayCcnRoutes")
+    return
+}
+
+func NewModifyVpnGatewayCcnRoutesResponse() (response *ModifyVpnGatewayCcnRoutesResponse) {
+    response = &ModifyVpnGatewayCcnRoutesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (ModifyVpnGatewayCcnRoutes) is used to modify VPN gateway-based CCN routes.
+func (c *Client) ModifyVpnGatewayCcnRoutes(request *ModifyVpnGatewayCcnRoutesRequest) (response *ModifyVpnGatewayCcnRoutesResponse, err error) {
+    if request == nil {
+        request = NewModifyVpnGatewayCcnRoutesRequest()
+    }
+    response = NewModifyVpnGatewayCcnRoutesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRejectAttachCcnInstancesRequest() (request *RejectAttachCcnInstancesRequest) {
     request = &RejectAttachCcnInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3305,6 +3948,31 @@ func (c *Client) ReleaseAddresses(request *ReleaseAddressesRequest) (response *R
         request = NewReleaseAddressesRequest()
     }
     response = NewReleaseAddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewVpnGatewayRequest() (request *RenewVpnGatewayRequest) {
+    request = &RenewVpnGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "RenewVpnGateway")
+    return
+}
+
+func NewRenewVpnGatewayResponse() (response *RenewVpnGatewayResponse) {
+    response = &RenewVpnGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (RenewVpnGateway) is used to renew prepaid (monthly subscription) VPN gateways. Currently, only IPSEC gateways are supported.
+func (c *Client) RenewVpnGateway(request *RenewVpnGatewayRequest) (response *RenewVpnGatewayResponse, err error) {
+    if request == nil {
+        request = NewRenewVpnGatewayRequest()
+    }
+    response = NewRenewVpnGatewayResponse()
     err = c.Send(request, response)
     return
 }
