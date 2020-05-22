@@ -857,6 +857,9 @@ type UpdateInstanceRequest struct {
 
 	// Enables or disables user authentication for ES Basic Edition v6.8 and above
 	BasicSecurityType *int64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
+
+	// Kibana private port
+	KibanaPrivatePort *uint64 `json:"KibanaPrivatePort,omitempty" name:"KibanaPrivatePort"`
 }
 
 func (r *UpdateInstanceRequest) ToJsonString() string {

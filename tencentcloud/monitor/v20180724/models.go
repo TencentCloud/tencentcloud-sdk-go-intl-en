@@ -515,7 +515,7 @@ type DescribeBasicAlarmListRequest struct {
 	// Filter by instance group ID.
 	InstanceGroupIds []*int64 `json:"InstanceGroupIds,omitempty" name:"InstanceGroupIds" list`
 
-	// 
+	// Filtering by metric names
 	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
 }
 
@@ -1787,7 +1787,7 @@ type ReceiverInfo struct {
 	// Recipient type. Valid values: group and user.
 	ReceiverType *string `json:"ReceiverType,omitempty" name:"ReceiverType"`
 
-	// Id
+	// ReceiverId
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 
 	// Call alarm notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is reported) and RECOVER (indicating that a notice is sent when the alarm is cleared).

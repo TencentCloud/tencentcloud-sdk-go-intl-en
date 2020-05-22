@@ -846,6 +846,31 @@ func (c *Client) DescribeBillBandwidthAndFluxList(request *DescribeBillBandwidth
     return
 }
 
+func NewDescribeConcurrentRecordStreamNumRequest() (request *DescribeConcurrentRecordStreamNumRequest) {
+    request = &DescribeConcurrentRecordStreamNumRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeConcurrentRecordStreamNum")
+    return
+}
+
+func NewDescribeConcurrentRecordStreamNumResponse() (response *DescribeConcurrentRecordStreamNumResponse) {
+    response = &DescribeConcurrentRecordStreamNumResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the number of concurrent recording channels, which is applicable to LCB and LVB.
+func (c *Client) DescribeConcurrentRecordStreamNum(request *DescribeConcurrentRecordStreamNumRequest) (response *DescribeConcurrentRecordStreamNumResponse, err error) {
+    if request == nil {
+        request = NewDescribeConcurrentRecordStreamNumRequest()
+    }
+    response = NewDescribeConcurrentRecordStreamNumResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGroupProIspPlayInfoListRequest() (request *DescribeGroupProIspPlayInfoListRequest) {
     request = &DescribeGroupProIspPlayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1589,7 +1614,7 @@ func NewDescribeProIspPlaySumInfoListResponse() (response *DescribeProIspPlaySum
     return
 }
 
-// This API is used to query the average traffic per second, total traffic, and number of total requests by ISP and district in a certain period of time.
+// This API is used to query the average traffic per second, total traffic, and number of total requests by country/region, district, and ISP in a certain period of time.
 func (c *Client) DescribeProIspPlaySumInfoList(request *DescribeProIspPlaySumInfoListRequest) (response *DescribeProIspPlaySumInfoListResponse, err error) {
     if request == nil {
         request = NewDescribeProIspPlaySumInfoListRequest()
@@ -1639,7 +1664,7 @@ func NewDescribeStreamPushInfoListResponse() (response *DescribeStreamPushInfoLi
     return
 }
 
-// This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and encoding format of audio and video files.
+// This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and codec of audio and video files.
 func (c *Client) DescribeStreamPushInfoList(request *DescribeStreamPushInfoListRequest) (response *DescribeStreamPushInfoListResponse, err error) {
     if request == nil {
         request = NewDescribeStreamPushInfoListRequest()

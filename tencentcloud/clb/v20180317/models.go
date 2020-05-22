@@ -93,10 +93,10 @@ type AutoRewriteRequest struct {
 	// CLB instance ID
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// HTTPS:443 listener ID
+	// `HTTPS:443` listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
-	// Domain name to be redirected under an HTTPS:443 listener
+	// The domain name to be redirected under the listener `HTTPS:443`. If it is left empty, all domain names under the listener `HTTPS:443` will be configured with redirects.
 	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
 }
 
@@ -855,6 +855,9 @@ type DeleteRuleRequest struct {
 
 	// Forwarding path of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified
 	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// A listener must be configured with a default domain name. If you need to delete the default domain name, you can specify another one as the new default domain name.
+	NewDefaultServerDomain *string `json:"NewDefaultServerDomain,omitempty" name:"NewDefaultServerDomain"`
 }
 
 func (r *DeleteRuleRequest) ToJsonString() string {
@@ -2220,6 +2223,9 @@ type ModifyDomainAttributesRequest struct {
 
 	// Whether to set this domain name as the default domain name. Note: Only one default domain name can be set under one listener.
 	DefaultServer *bool `json:"DefaultServer,omitempty" name:"DefaultServer"`
+
+	// A listener must be configured with a default domain name. If you need to disable the default domain name, you must specify another one as the new default domain name.
+	NewDefaultServerDomain *string `json:"NewDefaultServerDomain,omitempty" name:"NewDefaultServerDomain"`
 }
 
 func (r *ModifyDomainAttributesRequest) ToJsonString() string {

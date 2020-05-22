@@ -655,6 +655,9 @@ type DeleteClusterRequest struct {
 
 	// Policy used to delete an instance in the cluster: terminate (terminates the instance. Only available for instances on pay-as-you-go CVMs); retain (only removes it from the cluster. The instance will be retained.)
 	InstanceDeleteMode *string `json:"InstanceDeleteMode,omitempty" name:"InstanceDeleteMode"`
+
+	// Specifies the policy to deal with resources in the cluster when the cluster is deleted. It only supports CBS now. The default policy is to retain CBS disks.
+	ResourceDeleteOptions []*ResourceDeleteOption `json:"ResourceDeleteOptions,omitempty" name:"ResourceDeleteOptions" list`
 }
 
 func (r *DeleteClusterRequest) ToJsonString() string {
@@ -989,6 +992,13 @@ type DescribeClusterSecurityResponse struct {
 
 		// Cluster’s access policy group
 		SecurityPolicy []*string `json:"SecurityPolicy,omitempty" name:"SecurityPolicy" list`
+
+		// Cluster Kubeconfig file
+	// Note: This field may return null, indicating that no valid value was found.
+		Kubeconfig *string `json:"Kubeconfig,omitempty" name:"Kubeconfig"`
+
+		// 
+		JnsGwEndpoint *string `json:"JnsGwEndpoint,omitempty" name:"JnsGwEndpoint"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1386,6 +1396,16 @@ type Instance struct {
 
 	// Creation time
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Node private IP
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	LanIP *string `json:"LanIP,omitempty" name:"LanIP"`
+
+	// 
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// 
+	AutoscalingGroupId *string `json:"AutoscalingGroupId,omitempty" name:"AutoscalingGroupId"`
 }
 
 type InstanceAdvancedSettings struct {
@@ -1566,6 +1586,15 @@ type RegionInstance struct {
 	// Whitelisted location
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
+type ResourceDeleteOption struct {
+
+	// Resource type, for example `CBS`
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Specifies the policy to deal with resources in the cluster when the cluster is deleted. It can be `terminate` or `retain`.
+	DeleteMode *string `json:"DeleteMode,omitempty" name:"DeleteMode"`
 }
 
 type RouteInfo struct {
