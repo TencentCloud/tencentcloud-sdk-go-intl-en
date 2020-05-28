@@ -454,6 +454,50 @@ func (r *CreatePolicyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreatePolicyVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The policy document to use as the content for the new version
+	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
+
+	// Specifies whether to set this version as the default version
+	SetAsDefault *bool `json:"SetAsDefault,omitempty" name:"SetAsDefault"`
+}
+
+func (r *CreatePolicyVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreatePolicyVersionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreatePolicyVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Policy version ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreatePolicyVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreatePolicyVersionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateRoleRequest struct {
 	*tchttp.BaseRequest
 
@@ -547,6 +591,49 @@ func (r *CreateSAMLProviderResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateServiceLinkedRoleRequest struct {
+	*tchttp.BaseRequest
+
+	// Authorized service, i.e., Tencent Cloud service entity with this role attached.
+	QCSServiceName []*string `json:"QCSServiceName,omitempty" name:"QCSServiceName" list`
+
+	// Custom suffix. A string you provide, which is combined with the service-provided prefix to form the complete role name.
+	CustomSuffix *string `json:"CustomSuffix,omitempty" name:"CustomSuffix"`
+
+	// Role description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *CreateServiceLinkedRoleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateServiceLinkedRoleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateServiceLinkedRoleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Role ID
+		RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateServiceLinkedRoleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateServiceLinkedRoleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -612,6 +699,43 @@ func (r *DeletePolicyResponse) ToJsonString() string {
 }
 
 func (r *DeletePolicyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeletePolicyVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy version ID
+	VersionId []*uint64 `json:"VersionId,omitempty" name:"VersionId" list`
+}
+
+func (r *DeletePolicyVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeletePolicyVersionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeletePolicyVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeletePolicyVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeletePolicyVersionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -683,6 +807,43 @@ func (r *DeleteSAMLProviderResponse) ToJsonString() string {
 }
 
 func (r *DeleteSAMLProviderResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteServiceLinkedRoleRequest struct {
+	*tchttp.BaseRequest
+
+	// Name of the service-linked role to be deleted.
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
+func (r *DeleteServiceLinkedRoleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteServiceLinkedRoleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteServiceLinkedRoleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Deletion task identifier, which can be used to check the status of a service-linked role deletion.
+		DeletionTaskId *string `json:"DeletionTaskId,omitempty" name:"DeletionTaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteServiceLinkedRoleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteServiceLinkedRoleResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1039,6 +1200,47 @@ func (r *GetPolicyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type GetPolicyVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy version ID
+	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
+}
+
+func (r *GetPolicyVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetPolicyVersionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetPolicyVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Policy version details
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		PolicyVersion *PolicyVersionDetail `json:"PolicyVersion,omitempty" name:"PolicyVersion"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetPolicyVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetPolicyVersionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type GetRoleRequest struct {
 	*tchttp.BaseRequest
 
@@ -1125,6 +1327,54 @@ func (r *GetSAMLProviderResponse) ToJsonString() string {
 }
 
 func (r *GetSAMLProviderResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetServiceLinkedRoleDeletionStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Deletion task ID
+	DeletionTaskId *string `json:"DeletionTaskId,omitempty" name:"DeletionTaskId"`
+}
+
+func (r *GetServiceLinkedRoleDeletionStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetServiceLinkedRoleDeletionStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetServiceLinkedRoleDeletionStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Status: NOT_STARTED, IN_PROGRESS, SUCCEEDED, FAILED
+		Status *string `json:"Status,omitempty" name:"Status"`
+
+		// Reasons why the deletion failed.
+		Reason *string `json:"Reason,omitempty" name:"Reason"`
+
+		// Service type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+		// Service name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetServiceLinkedRoleDeletionStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetServiceLinkedRoleDeletionStatusResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1641,6 +1891,44 @@ func (r *ListPoliciesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ListPolicyVersionsRequest struct {
+	*tchttp.BaseRequest
+
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
+func (r *ListPolicyVersionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListPolicyVersionsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListPolicyVersionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Policy version list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Versions []*PolicyVersionItem `json:"Versions,omitempty" name:"Versions" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListPolicyVersionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListPolicyVersionsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ListSAMLProvidersRequest struct {
 	*tchttp.BaseRequest
 }
@@ -1758,6 +2046,52 @@ func (r *ListUsersResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type LoginActionMfaFlag struct {
+
+	// Mobile phone
+	Phone *uint64 `json:"Phone,omitempty" name:"Phone"`
+
+	// Soft token
+	Stoken *uint64 `json:"Stoken,omitempty" name:"Stoken"`
+
+	// WeChat
+	Wechat *uint64 `json:"Wechat,omitempty" name:"Wechat"`
+}
+
+type PolicyVersionDetail struct {
+
+	// Policy version ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
+
+	// Policy version creation time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreateDate *string `json:"CreateDate,omitempty" name:"CreateDate"`
+
+	// Whether it is the operative version. 0: no, 1: yes
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsDefaultVersion *uint64 `json:"IsDefaultVersion,omitempty" name:"IsDefaultVersion"`
+
+	// Policy syntax text
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Document *string `json:"Document,omitempty" name:"Document"`
+}
+
+type PolicyVersionItem struct {
+
+	// Policy version ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
+
+	// Policy version creation time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreateDate *string `json:"CreateDate,omitempty" name:"CreateDate"`
+
+	// Whether it is the operative version. 0: no, 1: yes
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsDefaultVersion *int64 `json:"IsDefaultVersion,omitempty" name:"IsDefaultVersion"`
+}
+
 type RemoveUserFromGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -1841,6 +2175,83 @@ type SAMLProviderInfo struct {
 
 	// Time SAML identity provider last modified
 	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+}
+
+type SetDefaultPolicyVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy version ID
+	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
+}
+
+func (r *SetDefaultPolicyVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetDefaultPolicyVersionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SetDefaultPolicyVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SetDefaultPolicyVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetDefaultPolicyVersionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SetMfaFlagRequest struct {
+	*tchttp.BaseRequest
+
+	// Sets user UIN
+	OpUin *uint64 `json:"OpUin,omitempty" name:"OpUin"`
+
+	// Sets login protection
+	LoginFlag *LoginActionMfaFlag `json:"LoginFlag,omitempty" name:"LoginFlag"`
+
+	// Sets operation protection
+	ActionFlag *LoginActionMfaFlag `json:"ActionFlag,omitempty" name:"ActionFlag"`
+}
+
+func (r *SetMfaFlagRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetMfaFlagRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SetMfaFlagResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SetMfaFlagResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetMfaFlagResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type StrategyInfo struct {
@@ -2001,14 +2412,17 @@ type UpdatePolicyRequest struct {
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
-	// Policy name
+	// Policy Name
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 
 	// Policy description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
+	// Policy documentation, for example: `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the service that is authorized to use the role. For more information about this parameter, see **RoleInfo** under **Output Parameters** in the [GetRole](https://cloud.tencent.com/document/product/598/36221).
 	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
+
+	// Preset policy remark
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
 }
 
 func (r *UpdatePolicyRequest) ToJsonString() string {
@@ -2023,6 +2437,10 @@ func (r *UpdatePolicyRequest) FromJsonString(s string) error {
 type UpdatePolicyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Policy ID
+	// Note: This field may return null, indicating that no valid value was found.
+		PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

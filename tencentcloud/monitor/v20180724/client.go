@@ -370,6 +370,31 @@ func (c *Client) ModifyAlarmReceivers(request *ModifyAlarmReceiversRequest) (res
     return
 }
 
+func NewModifyPolicyGroupRequest() (request *ModifyPolicyGroupRequest) {
+    request = &ModifyPolicyGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "ModifyPolicyGroup")
+    return
+}
+
+func NewModifyPolicyGroupResponse() (response *ModifyPolicyGroupResponse) {
+    response = &ModifyPolicyGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to update policy group.
+func (c *Client) ModifyPolicyGroup(request *ModifyPolicyGroupRequest) (response *ModifyPolicyGroupResponse, err error) {
+    if request == nil {
+        request = NewModifyPolicyGroupRequest()
+    }
+    response = NewModifyPolicyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewPutMonitorDataRequest() (request *PutMonitorDataRequest) {
     request = &PutMonitorDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -385,11 +410,11 @@ func NewPutMonitorDataResponse() (response *PutMonitorDataResponse) {
     return
 }
 
-// This API is used to customize monitoring data to be reported. The default API request rate limit is 50 requests/sec.
+// The default API request rate limit is 50 requests/sec.
 // The default upper limit on metrics of a single tenant is 100.
 // A maximum of 30 metric/value pairs can be reported at a time. When an error is returned for a request, no metrics/values in the request will be saved.
 // 
-// The reporting timestamp is the timestamp when you want to save the data. It is recommended that you construct a timestamp at integer minutes.
+// The reporting timestamp is the timestamp when you want to save the data. We recommend that you construct a timestamp at integer minutes.
 // The time range of a timestamp is from 300 seconds before the current time to the current time.
 // The data of the same IP metric/value pair must be reported by minute in chronological order.
 func (c *Client) PutMonitorData(request *PutMonitorDataRequest) (response *PutMonitorDataResponse, err error) {
@@ -416,7 +441,7 @@ func NewSendCustomAlarmMsgResponse() (response *SendCustomAlarmMsgResponse) {
     return
 }
 
-// This API is used to send a custom alarm message.
+// This API is used to send a custom alarm notification.
 func (c *Client) SendCustomAlarmMsg(request *SendCustomAlarmMsgRequest) (response *SendCustomAlarmMsgResponse, err error) {
     if request == nil {
         request = NewSendCustomAlarmMsgRequest()

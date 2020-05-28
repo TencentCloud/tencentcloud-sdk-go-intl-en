@@ -74,6 +74,32 @@ func (c *Client) CopyFunction(request *CopyFunctionRequest) (response *CopyFunct
     return
 }
 
+func NewCreateAliasRequest() (request *CreateAliasRequest) {
+    request = &CreateAliasRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "CreateAlias")
+    return
+}
+
+func NewCreateAliasResponse() (response *CreateAliasResponse) {
+    response = &CreateAliasResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create an alias for a function version. You can use the alias to mark a specific function version such as DEV/RELEASE. You can also modify the version pointed to by the alias at any time.
+// An alias must point to a master version and can point to an additional version at the same time. If you specify an alias when invoking a function, the request will be sent to the versions pointed to by the alias. You can configure the ratio between the master version and additional version during request sending.
+func (c *Client) CreateAlias(request *CreateAliasRequest) (response *CreateAliasResponse, err error) {
+    if request == nil {
+        request = NewCreateAliasRequest()
+    }
+    response = NewCreateAliasResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateFunctionRequest() (request *CreateFunctionRequest) {
     request = &CreateFunctionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -149,6 +175,31 @@ func (c *Client) CreateTrigger(request *CreateTriggerRequest) (response *CreateT
     return
 }
 
+func NewDeleteAliasRequest() (request *DeleteAliasRequest) {
+    request = &DeleteAliasRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "DeleteAlias")
+    return
+}
+
+func NewDeleteAliasResponse() (response *DeleteAliasResponse) {
+    response = &DeleteAliasResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete an alias of a function version.
+func (c *Client) DeleteAlias(request *DeleteAliasRequest) (response *DeleteAliasResponse, err error) {
+    if request == nil {
+        request = NewDeleteAliasRequest()
+    }
+    response = NewDeleteAliasResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteFunctionRequest() (request *DeleteFunctionRequest) {
     request = &DeleteFunctionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -170,6 +221,31 @@ func (c *Client) DeleteFunction(request *DeleteFunctionRequest) (response *Delet
         request = NewDeleteFunctionRequest()
     }
     response = NewDeleteFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLayerVersionRequest() (request *DeleteLayerVersionRequest) {
+    request = &DeleteLayerVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "DeleteLayerVersion")
+    return
+}
+
+func NewDeleteLayerVersionResponse() (response *DeleteLayerVersionResponse) {
+    response = &DeleteLayerVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a specified version of a specified layer. The deleted version cannot be associated with a function, but the deletion does not affect functions that are referencing this layer.
+func (c *Client) DeleteLayerVersion(request *DeleteLayerVersionRequest) (response *DeleteLayerVersionResponse, err error) {
+    if request == nil {
+        request = NewDeleteLayerVersionRequest()
+    }
+    response = NewDeleteLayerVersionResponse()
     err = c.Send(request, response)
     return
 }
@@ -220,6 +296,31 @@ func (c *Client) DeleteTrigger(request *DeleteTriggerRequest) (response *DeleteT
         request = NewDeleteTriggerRequest()
     }
     response = NewDeleteTriggerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetAliasRequest() (request *GetAliasRequest) {
+    request = &GetAliasRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "GetAlias")
+    return
+}
+
+func NewGetAliasResponse() (response *GetAliasResponse) {
+    response = &GetAliasResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the alias details such as the name, description, version, and routing information.
+func (c *Client) GetAlias(request *GetAliasRequest) (response *GetAliasResponse, err error) {
+    if request == nil {
+        request = NewGetAliasRequest()
+    }
+    response = NewGetAliasResponse()
     err = c.Send(request, response)
     return
 }
@@ -299,6 +400,31 @@ func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *Get
     return
 }
 
+func NewGetLayerVersionRequest() (request *GetLayerVersionRequest) {
+    request = &GetLayerVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "GetLayerVersion")
+    return
+}
+
+func NewGetLayerVersionResponse() (response *GetLayerVersionResponse) {
+    response = &GetLayerVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the layer version details, including links used to download files in the layer.
+func (c *Client) GetLayerVersion(request *GetLayerVersionRequest) (response *GetLayerVersionResponse, err error) {
+    if request == nil {
+        request = NewGetLayerVersionRequest()
+    }
+    response = NewGetLayerVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInvokeRequest() (request *InvokeRequest) {
     request = &InvokeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -320,6 +446,31 @@ func (c *Client) Invoke(request *InvokeRequest) (response *InvokeResponse, err e
         request = NewInvokeRequest()
     }
     response = NewInvokeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListAliasesRequest() (request *ListAliasesRequest) {
+    request = &ListAliasesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "ListAliases")
+    return
+}
+
+func NewListAliasesResponse() (response *ListAliasesResponse) {
+    response = &ListAliasesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to return the list of all aliases under a function. You can filter them by the specific function version.
+func (c *Client) ListAliases(request *ListAliasesRequest) (response *ListAliasesResponse, err error) {
+    if request == nil {
+        request = NewListAliasesRequest()
+    }
+    response = NewListAliasesResponse()
     err = c.Send(request, response)
     return
 }
@@ -349,6 +500,56 @@ func (c *Client) ListFunctions(request *ListFunctionsRequest) (response *ListFun
     return
 }
 
+func NewListLayerVersionsRequest() (request *ListLayerVersionsRequest) {
+    request = &ListLayerVersionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "ListLayerVersions")
+    return
+}
+
+func NewListLayerVersionsResponse() (response *ListLayerVersionsResponse) {
+    response = &ListLayerVersionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the information of all versions of a specified layer.
+func (c *Client) ListLayerVersions(request *ListLayerVersionsRequest) (response *ListLayerVersionsResponse, err error) {
+    if request == nil {
+        request = NewListLayerVersionsRequest()
+    }
+    response = NewListLayerVersionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListLayersRequest() (request *ListLayersRequest) {
+    request = &ListLayersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "ListLayers")
+    return
+}
+
+func NewListLayersResponse() (response *ListLayersResponse) {
+    response = &ListLayersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to return the list of all layers, including the information of the latest version of each layer. You can filter them by the compatible runtime.
+func (c *Client) ListLayers(request *ListLayersRequest) (response *ListLayersResponse, err error) {
+    if request == nil {
+        request = NewListLayersRequest()
+    }
+    response = NewListLayersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListNamespacesRequest() (request *ListNamespacesRequest) {
     request = &ListNamespacesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -370,6 +571,31 @@ func (c *Client) ListNamespaces(request *ListNamespacesRequest) (response *ListN
         request = NewListNamespacesRequest()
     }
     response = NewListNamespacesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListTriggersRequest() (request *ListTriggersRequest) {
+    request = &ListTriggersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "ListTriggers")
+    return
+}
+
+func NewListTriggersResponse() (response *ListTriggersResponse) {
+    response = &ListTriggersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the function trigger list.
+func (c *Client) ListTriggers(request *ListTriggersRequest) (response *ListTriggersResponse, err error) {
+    if request == nil {
+        request = NewListTriggersRequest()
+    }
+    response = NewListTriggersResponse()
     err = c.Send(request, response)
     return
 }
@@ -399,6 +625,31 @@ func (c *Client) ListVersionByFunction(request *ListVersionByFunctionRequest) (r
     return
 }
 
+func NewPublishLayerVersionRequest() (request *PublishLayerVersionRequest) {
+    request = &PublishLayerVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "PublishLayerVersion")
+    return
+}
+
+func NewPublishLayerVersionResponse() (response *PublishLayerVersionResponse) {
+    response = &PublishLayerVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a version for a layer by using the given .zip file or COS object. Each time this API is called with the same layer name, a new version will be generated.
+func (c *Client) PublishLayerVersion(request *PublishLayerVersionRequest) (response *PublishLayerVersionResponse, err error) {
+    if request == nil {
+        request = NewPublishLayerVersionRequest()
+    }
+    response = NewPublishLayerVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewPublishVersionRequest() (request *PublishVersionRequest) {
     request = &PublishVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -420,6 +671,31 @@ func (c *Client) PublishVersion(request *PublishVersionRequest) (response *Publi
         request = NewPublishVersionRequest()
     }
     response = NewPublishVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAliasRequest() (request *UpdateAliasRequest) {
+    request = &UpdateAliasRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "UpdateAlias")
+    return
+}
+
+func NewUpdateAliasResponse() (response *UpdateAliasResponse) {
+    response = &UpdateAliasResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to update the configuration of an alias.
+func (c *Client) UpdateAlias(request *UpdateAliasRequest) (response *UpdateAliasResponse, err error) {
+    if request == nil {
+        request = NewUpdateAliasRequest()
+    }
+    response = NewUpdateAliasResponse()
     err = c.Send(request, response)
     return
 }

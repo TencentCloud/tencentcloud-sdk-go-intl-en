@@ -436,6 +436,10 @@ type CacheKey struct {
 	// on: enable full-path cache (i.e., disable parameter filter)
 	// off: disable full-path cache (i.e., enable parameter filter)
 	FullUrlCache *string `json:"FullUrlCache,omitempty" name:"FullUrlCache"`
+
+	// Whether the cache ignores letter case
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CaseSensitive *string `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
 }
 
 type CacheOptResult struct {
@@ -658,6 +662,10 @@ type CreateClsLogTopicResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
+		// Topic ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+		TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -879,7 +887,7 @@ type DescribeCdnDomainLogsRequest struct {
 	// End time, such as `2019-09-04 12:00:00`
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Offset for paged queries. Default value: 0 (the first page)
+	// Offset for paginated queries. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Limit on paged queries. Default value: 100. Maximum value: 1,000
@@ -891,6 +899,10 @@ type DescribeCdnDomainLogsRequest struct {
 	// `global`: specifies to return a download link of logs on acceleration within Mainland China and a link of logs on acceleration outside Mainland China.
 	// Default value: `mainland`.
 	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// The type of log to be downloaded.
+	// access: access logs
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
 }
 
 func (r *DescribeCdnDomainLogsRequest) ToJsonString() string {
@@ -1058,7 +1070,7 @@ func (r *DescribeDomainsConfigResponse) FromJsonString(s string) error {
 type DescribeDomainsRequest struct {
 	*tchttp.BaseRequest
 
-	// Offset for paginated queries. Default value: 0 (the first page).
+	// Offset for paginated queries. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
@@ -1374,7 +1386,7 @@ type DescribePurgeTasksRequest struct {
 	// You must specify either a task ID or a starting time for your query.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
-	// Offset for paged queries. Default value: 0 (the first page)
+	// Offset for paginated queries. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Limit on paged queries. Default value: 20
@@ -1447,7 +1459,7 @@ type DescribePushTasksRequest struct {
 	// Specifies a keyword for your query. Please enter a domain name or a complete URL beginning with `http(s)://`
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
-	// Offset for paged queries. Default value: 0 (the first page)
+	// Offset for paginated queries. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Limit on paged queries. Default value: 20
@@ -1567,7 +1579,7 @@ func (r *DescribeReportDataResponse) FromJsonString(s string) error {
 type DescribeUrlViolationsRequest struct {
 	*tchttp.BaseRequest
 
-	// Offset for paginated queries. Default value: 0 (the first page).
+	// Offset for paginated queries. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Limit on paginated queries. Default value: 100.
@@ -1790,10 +1802,12 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitempty" name:"SecurityConfig"`
 
-	// 
+	// `ImageOptimization` configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	ImageOptimization *ImageOptimization `json:"ImageOptimization,omitempty" name:"ImageOptimization"`
 
-	// 
+	// `UA` blacklist/whitelist Configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
 }
 
@@ -2092,7 +2106,7 @@ type GetDisableRecordsRequest struct {
 	// enable: The URL is enabled (unblocked) and can be normally accessed
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Offset for paged queries. Default value: 0 (the first page)
+	// Offset for paginated queries. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Limit on paged queries. Default value: 20
@@ -2132,6 +2146,27 @@ func (r *GetDisableRecordsResponse) ToJsonString() string {
 
 func (r *GetDisableRecordsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type GuetzliAdapter struct {
+
+	// Switch. Valid values: on, off
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type Hsts struct {
+
+	// Whether to enable. Valid values: on, off.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// `MaxAge` value.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MaxAge *int64 `json:"MaxAge,omitempty" name:"MaxAge"`
+
+	// Whether to include subdomain names. Valid values: on, off.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IncludeSubDomains *string `json:"IncludeSubDomains,omitempty" name:"IncludeSubDomains"`
 }
 
 type HttpHeaderPathRule struct {
@@ -2221,6 +2256,29 @@ type Https struct {
 	// failed: deployment failed
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SslStatus *string `json:"SslStatus,omitempty" name:"SslStatus"`
+
+	// TLS version list. Valid values:
+	// TLSv1.0, TLSv1.1, TLSv1.2
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TlsVersion []*string `json:"TlsVersion,omitempty" name:"TlsVersion" list`
+
+	// 
+	Hsts *Hsts `json:"Hsts,omitempty" name:"Hsts"`
+}
+
+type ImageOptimization struct {
+
+	// `WebpAdapter` configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	WebpAdapter *WebpAdapter `json:"WebpAdapter,omitempty" name:"WebpAdapter"`
+
+	// `TpgAdapter` configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TpgAdapter *TpgAdapter `json:"TpgAdapter,omitempty" name:"TpgAdapter"`
+
+	// `GuetzliAdapter` configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	GuetzliAdapter *GuetzliAdapter `json:"GuetzliAdapter,omitempty" name:"GuetzliAdapter"`
 }
 
 type IpFilter struct {
@@ -2381,13 +2439,13 @@ type ListTopDataRequest struct {
 	// EndTime must be greater than or equal to StartTime
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Objects to be sorted. Valid values:
-	// `url`: sorts access URLs with query string parameters included. Supported filters are `flux` and `request`.
-	// `path`: sorts access URLs with query string parameters excluded. Supported filters are `flux` and `request`. You need to be whitelisted before using this feature.
-	// `district`: sorts provinces or countries/regions. Supported filters are `flux` and `request`.
-	// `isp`: sorts ISPs. Supported filters are `flux` and `request`.
-	// `host`: sorts domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, `2XX`, `3XX`, `4XX`, `5XX` and `statusCode`.
-	// `originHost`: sorts by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, `origin_2XX`, `origin_3XX`, `oringin_4XX`, `origin_5XX` and `OriginStatusCode`
+	// Object representing the sort criteria. The following objects are supported:
+	// url: sorts by access URL (including the query string). Supported filters are `flux` and `request`
+	// path: sorts by access URL (excluding the query string). Supported filters are `flux` and `request` (whitelist-based feature)
+	// district: sorts by district. Supported filters are `flux` and `request`
+	// isp: sorts by ISP. Supported filters are `flux` and `request`
+	// host: sorts by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, 2XX, 3XX, 4XX, 5XX, and `statusCode`
+	// originHost: sorts by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, `origin_2XX`, `origin_3XX`, `origin_4XX`, `origin_5XX`, and `OriginStatusCode`
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
 
 	// Metric name used for sorting:
@@ -2414,8 +2472,8 @@ type ListTopDataRequest struct {
 	// Please note that if domain names are specified, this parameter will be ignored.
 	Project *int64 `json:"Project,omitempty" name:"Project"`
 
-	// Default value: `false`, indicating that results for all domain names are returned together when you query multiple domain names.
-	// If `Metric` is `Url`, `Path`, `District`, or `Isp` and `Filter` is `flux` or `request`, you can set this parameter to `true`, indicating that results for each domain name are returned.
+	// Default is `false` for multi–domain name queries, which returns sorted results of all domain names. 
+	// If `Metric` is `url`, `path`, `district`, or `isp` and `Filter` is `flux` or `request`, it can be set to `true` to return the sorted results of each domain.
 	Detail *bool `json:"Detail,omitempty" name:"Detail"`
 
 	// When Filter is `statusCode` or `OriginStatusCode`, enter a code to query and sort results.
@@ -2426,9 +2484,9 @@ type ListTopDataRequest struct {
 	// `overseas`: specifies to query CDN data outside Mainland China. Supported metrics are `url`, `district`, `host`, and `originHost`. If `Metric` is `originHost`, supported filters are `flux`, `request`, and `bandwidth`.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// Specifies a region type for the query. If it is left blank, data on the service region will be queried. This parameter is only valid when `Area` is `overseas` and `Metric` is `District` or `Host`.
-	// `server`: specifies to query data on the service region where Tencent Cloud CDN nodes are located;
-	// `client`: specifies to query data on the client region where the request devices are located; if `Metric` is `Host`, supported filters are `flux`, `request`, and `bandwidth`.
+	// The region type can be specified only when you query CDN data outside Mainland China and `Metric` is `district` or `host`; if you leave it empty, data of the service region will be queried (only applicable when `Area` is `overseas` and `Metric` is `district` or `host`)
+	// server: specifies to query data of service region (where a CDN node is located)
+	// client: specifies to query data of the client region (where a user request device is located). If `Metric` is `host`, `Filter` can only be `flux`, `request`, or `bandwidth`
 	AreaType *string `json:"AreaType,omitempty" name:"AreaType"`
 }
 
@@ -3525,6 +3583,13 @@ type TopicInfo struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
+type TpgAdapter struct {
+
+	// Switch. Valid values: on, off
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
 type UpdateDomainConfigRequest struct {
 	*tchttp.BaseRequest
 
@@ -3709,6 +3774,40 @@ type UrlRecord struct {
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
+type UserAgentFilter struct {
+
+	// Switch. Valid values: on, off
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// UA blacklist/whitelist effect rule list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FilterRules []*UserAgentFilterRule `json:"FilterRules,omitempty" name:"FilterRules" list`
+}
+
+type UserAgentFilterRule struct {
+
+	// Effective access path type
+	// all: all access paths are effective
+	// file: effective by file extension
+	// directory: effective by directory
+	// path: effective by full access path
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Effective access paths
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+
+	// `UserAgent` list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UserAgents []*string `json:"UserAgents,omitempty" name:"UserAgents" list`
+
+	// Blacklist or whitelist. Valid values: blacklist, whitelist
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+}
+
 type VideoSeek struct {
 
 	// Video dragging switch
@@ -3741,4 +3840,11 @@ type ViolationUrl struct {
 
 	// Update time
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type WebpAdapter struct {
+
+	// Switch. Valid values: on, off
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }

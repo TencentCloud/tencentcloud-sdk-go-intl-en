@@ -29,6 +29,31 @@ type AccessInfo struct {
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 }
 
+type Alias struct {
+
+	// Master version of alias
+	FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
+
+	// Alias name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Routing information of alias
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RoutingConfig *RoutingConfig `json:"RoutingConfig,omitempty" name:"RoutingConfig"`
+
+	// Description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Creation time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
+
+	// Update time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
+}
+
 type Code struct {
 
 	// COS bucket name
@@ -134,6 +159,55 @@ func (r *CopyFunctionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateAliasRequest struct {
+	*tchttp.BaseRequest
+
+	// Alias name, which must be unique in the function, can contain 1–64 letters, digits, `_`, and `-`, and must begin with a letter
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Master version of alias
+	FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
+
+	// Function namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Request routing configuration of alias
+	RoutingConfig *RoutingConfig `json:"RoutingConfig,omitempty" name:"RoutingConfig"`
+
+	// Alias description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *CreateAliasRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAliasRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAliasResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateAliasResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAliasResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateFunctionRequest struct {
 	*tchttp.BaseRequest
 
@@ -149,16 +223,16 @@ type CreateFunctionRequest struct {
 	// Function description. It can contain up to 1,000 characters including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Memory size of a running function. The value ranges from 128 MB (default) to 1,536 MB with a granularity of 128 MB.
+	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128–3,072 MB in increments of 128 MB
 	MemorySize *int64 `json:"MemorySize,omitempty" name:"MemorySize"`
 
-	// The longest function running time. The unit is second (s). The value ranges from 1 to 300 seconds. The default value is 3 seconds.
+	// Maximum execution duration of function in seconds. Value range: 1–900 seconds. Default value: 3 seconds
 	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 
 	// Function environment variable
 	Environment *Environment `json:"Environment,omitempty" name:"Environment"`
 
-	// Function running environment. Currently, only Python 2.7 (default), Python 3.6, Nodejs 6.10, PHP 5, PHP 7, Golang 1, and Java 8 are supported.
+	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, PHP5, PHP7, Golang1, Java8. Default value: Python2.7
 	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
 
 	// Function VPC configuration
@@ -187,6 +261,9 @@ type CreateFunctionRequest struct {
 
 	// Dead letter queue parameter
 	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitempty" name:"DeadLetterConfig"`
+
+	// Public network access configuration
+	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitempty" name:"PublicNetConfig"`
 }
 
 func (r *CreateFunctionRequest) ToJsonString() string {
@@ -320,6 +397,46 @@ type DeadLetterConfig struct {
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 }
 
+type DeleteAliasRequest struct {
+	*tchttp.BaseRequest
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Alias name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Function namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *DeleteAliasRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteAliasRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteAliasResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteAliasResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteAliasResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteFunctionRequest struct {
 	*tchttp.BaseRequest
 
@@ -354,6 +471,43 @@ func (r *DeleteFunctionResponse) ToJsonString() string {
 }
 
 func (r *DeleteFunctionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLayerVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Layer name
+	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
+
+	// Version number
+	LayerVersion *int64 `json:"LayerVersion,omitempty" name:"LayerVersion"`
+}
+
+func (r *DeleteLayerVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLayerVersionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLayerVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLayerVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLayerVersionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -438,6 +592,12 @@ func (r *DeleteTriggerResponse) ToJsonString() string {
 
 func (r *DeleteTriggerResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type EipConfigIn struct {
+
+	// Status of the EIP. Values: ['ENABLE','DISABLE']
+	EipStatus *string `json:"EipStatus,omitempty" name:"EipStatus"`
 }
 
 type EipConfigOut struct {
@@ -565,6 +725,67 @@ type FunctionVersion struct {
 	// Update time
 	// Note: This field may return null, indicating that no valid value was found.
 	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
+}
+
+type GetAliasRequest struct {
+	*tchttp.BaseRequest
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Alias name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Function namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *GetAliasRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetAliasRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetAliasResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Master version of alias
+		FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
+
+		// Alias name
+		Name *string `json:"Name,omitempty" name:"Name"`
+
+		// Routing information of alias
+		RoutingConfig *RoutingConfig `json:"RoutingConfig,omitempty" name:"RoutingConfig"`
+
+		// Alias description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Description *string `json:"Description,omitempty" name:"Description"`
+
+		// Creation time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
+
+		// Update time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetAliasResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetAliasResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type GetFunctionAddressRequest struct {
@@ -839,6 +1060,74 @@ func (r *GetFunctionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type GetLayerVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Layer name
+	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
+
+	// Version number
+	LayerVersion *int64 `json:"LayerVersion,omitempty" name:"LayerVersion"`
+}
+
+func (r *GetLayerVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetLayerVersionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetLayerVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Compatible runtimes
+		CompatibleRuntimes []*string `json:"CompatibleRuntimes,omitempty" name:"CompatibleRuntimes" list`
+
+		// SHA256 encoding of file on layer version
+		CodeSha256 *string `json:"CodeSha256,omitempty" name:"CodeSha256"`
+
+		// Download address of file on layer version
+		Location *string `json:"Location,omitempty" name:"Location"`
+
+		// Version creation time
+		AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
+
+		// Version description
+		Description *string `json:"Description,omitempty" name:"Description"`
+
+		// License information
+		LicenseInfo *string `json:"LicenseInfo,omitempty" name:"LicenseInfo"`
+
+		// Version number
+		LayerVersion *int64 `json:"LayerVersion,omitempty" name:"LayerVersion"`
+
+		// Layer name
+		LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
+
+		// Current status of specific layer version. Valid values:
+	// Active: normal
+	// Publishing: publishing
+	// PublishFailed: publishing failed
+	// Deleted: deleted
+		Status *string `json:"Status,omitempty" name:"Status"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetLayerVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetLayerVersionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type InvokeRequest struct {
 	*tchttp.BaseRequest
 
@@ -934,6 +1223,59 @@ type LayerVersionSimple struct {
 	LayerVersion *int64 `json:"LayerVersion,omitempty" name:"LayerVersion"`
 }
 
+type ListAliasesRequest struct {
+	*tchttp.BaseRequest
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Function namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// If this parameter is provided, only aliases associated with this function version will be returned
+	FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
+
+	// Data offset. Default value: 0
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned. Default value: 20
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *ListAliasesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListAliasesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListAliasesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Alias list
+		Aliases []*Alias `json:"Aliases,omitempty" name:"Aliases" list`
+
+		// Total number of aliases
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListAliasesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListAliasesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ListFunctionsRequest struct {
 	*tchttp.BaseRequest
 
@@ -998,6 +1340,95 @@ func (r *ListFunctionsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ListLayerVersionsRequest struct {
+	*tchttp.BaseRequest
+
+	// Layer name
+	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
+
+	// Compatible runtimes
+	CompatibleRuntime []*string `json:"CompatibleRuntime,omitempty" name:"CompatibleRuntime" list`
+}
+
+func (r *ListLayerVersionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListLayerVersionsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListLayerVersionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Layer version list
+		LayerVersions []*LayerVersionInfo `json:"LayerVersions,omitempty" name:"LayerVersions" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListLayerVersionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListLayerVersionsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListLayersRequest struct {
+	*tchttp.BaseRequest
+
+	// Compatible runtimes
+	CompatibleRuntime *string `json:"CompatibleRuntime,omitempty" name:"CompatibleRuntime"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query key, which fuzzily matches the name
+	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+}
+
+func (r *ListLayersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListLayersRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListLayersResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Layer list
+		Layers []*LayerVersionInfo `json:"Layers,omitempty" name:"Layers" list`
+
+		// Total number of layers
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListLayersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListLayersResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ListNamespacesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1044,6 +1475,65 @@ func (r *ListNamespacesResponse) ToJsonString() string {
 }
 
 func (r *ListNamespacesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListTriggersRequest struct {
+	*tchttp.BaseRequest
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Namespace. Default value: default
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Data offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned. Default value: 20
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Indicates by which field to sort the returned results. Valid values: AddTime, ModTime. Default value: ModTime
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// * Qualifier:
+	// Function version, i.e., alias
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *ListTriggersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListTriggersRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListTriggersResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of triggers
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Trigger list
+		Triggers []*TriggerInfo `json:"Triggers,omitempty" name:"Triggers" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListTriggersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListTriggersResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1152,6 +1642,15 @@ type Namespace struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
+type PublicNetConfigIn struct {
+
+	// Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
+	PublicNetStatus *string `json:"PublicNetStatus,omitempty" name:"PublicNetStatus"`
+
+	// EIP configuration
+	EipConfig *EipConfigIn `json:"EipConfig,omitempty" name:"EipConfig"`
+}
+
 type PublicNetConfigOut struct {
 
 	// Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
@@ -1159,6 +1658,55 @@ type PublicNetConfigOut struct {
 
 	// EIP configuration
 	EipConfig *EipConfigOut `json:"EipConfig,omitempty" name:"EipConfig"`
+}
+
+type PublishLayerVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Layer name, which can contain 1–64 English letters, digits, hyphens, and underscores, must begin with a letter, and cannot end with a hyphen or underscore
+	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
+
+	// Runtimes compatible with layer. Multiple choices are allowed. The valid values of this parameter correspond to the valid values of the `Runtime` of the function.
+	CompatibleRuntimes []*string `json:"CompatibleRuntimes,omitempty" name:"CompatibleRuntimes" list`
+
+	// Layer file source or content
+	Content *Code `json:"Content,omitempty" name:"Content"`
+
+	// Layer version description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Software license of layer
+	LicenseInfo *string `json:"LicenseInfo,omitempty" name:"LicenseInfo"`
+}
+
+func (r *PublishLayerVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PublishLayerVersionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PublishLayerVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Version number of the layer created in this request
+		LayerVersion *int64 `json:"LayerVersion,omitempty" name:"LayerVersion"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *PublishLayerVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PublishLayerVersionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type PublishVersionRequest struct {
@@ -1252,6 +1800,15 @@ type Result struct {
 	InvokeResult *int64 `json:"InvokeResult,omitempty" name:"InvokeResult"`
 }
 
+type RoutingConfig struct {
+
+	// Additional version with random weight-based routing
+	AdditionalVersionWeights []*VersionWeight `json:"AdditionalVersionWeights,omitempty" name:"AdditionalVersionWeights" list`
+
+	// Additional version with rule-based routing
+	AddtionVersionMatchs []*VersionMatch `json:"AddtionVersionMatchs,omitempty" name:"AddtionVersionMatchs" list`
+}
+
 type Tag struct {
 
 	// Tag key
@@ -1283,6 +1840,89 @@ type Trigger struct {
 
 	// Custom parameter
 	CustomArgument *string `json:"CustomArgument,omitempty" name:"CustomArgument"`
+
+	// Trigger status
+	AvailableStatus *string `json:"AvailableStatus,omitempty" name:"AvailableStatus"`
+}
+
+type TriggerInfo struct {
+
+	// Enablement switch
+	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+
+	// Function version or alias
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+	// Trigger name
+	TriggerName *string `json:"TriggerName,omitempty" name:"TriggerName"`
+
+	// Trigger type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Detailed configuration of trigger
+	TriggerDesc *string `json:"TriggerDesc,omitempty" name:"TriggerDesc"`
+
+	// Whether the trigger is available
+	AvailableStatus *string `json:"AvailableStatus,omitempty" name:"AvailableStatus"`
+
+	// Custom parameter
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CustomArgument *string `json:"CustomArgument,omitempty" name:"CustomArgument"`
+
+	// Trigger creation time
+	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
+
+	// Trigger last modified time
+	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
+}
+
+type UpdateAliasRequest struct {
+	*tchttp.BaseRequest
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Alias name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Master version of alias
+	FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
+
+	// Function namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Routing information of alias, which is required if you need to specify an additional version for the alias.
+	RoutingConfig *RoutingConfig `json:"RoutingConfig,omitempty" name:"RoutingConfig"`
+
+	// Alias description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *UpdateAliasRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateAliasRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateAliasResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateAliasResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateAliasResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type UpdateFunctionCodeRequest struct {
@@ -1358,13 +1998,13 @@ type UpdateFunctionConfigurationRequest struct {
 	// Function description. It can contain up to 1,000 characters, including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Memory size when the function is running. The value ranges from 128 MB (default) to 1,536 MB.
+	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128–3,072 MB in increments of 128 MB.
 	MemorySize *int64 `json:"MemorySize,omitempty" name:"MemorySize"`
 
-	// The longest function running time. The unit is second (s). The value ranges from 1 to 300 seconds. The default value is 3 seconds.
+	// Maximum execution duration of function in seconds. Value range: 1–900 seconds. Default value: 3 seconds
 	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 
-	// Function running environment. Currently, only Python 2.7, Python 3.6, Nodejs 6.10, PHP 5, PHP 7, Golang 1, and Java 8 are supported.
+	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, PHP5, PHP7, Golang1, Java8
 	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
 
 	// Function environment variable
@@ -1397,8 +2037,8 @@ type UpdateFunctionConfigurationRequest struct {
 	// Information of a dead letter queue associated with a function
 	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitempty" name:"DeadLetterConfig"`
 
-	// Whether to enable Ons access. TRUE: enable; FALSE: not enable
-	OnsEnable *string `json:"OnsEnable,omitempty" name:"OnsEnable"`
+	// Public network access configuration
+	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitempty" name:"PublicNetConfig"`
 }
 
 func (r *UpdateFunctionConfigurationRequest) ToJsonString() string {
@@ -1472,6 +2112,37 @@ type Variable struct {
 
 	// Variable value
 	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type VersionMatch struct {
+
+	// Function version name
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// Matching rule key. When the API is called, pass in the `key` to route the request to the specified version based on the matching rule
+	// Header method:
+	// Enter "invoke.headers.User" for `key` and pass in `RoutingKey:{"User":"value"}` when invoking a function through `invoke` for invocation based on rule matching
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Match method. Valid values:
+	// range: range match
+	// exact: exact string match
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Rule requirements for range match:
+	// It should be described in an open or closed range, i.e., `(a,b)` or `[a,b]`, where both a and b are integers
+	// Rule requirements for exact match:
+	// Exact string match
+	Expression *string `json:"Expression,omitempty" name:"Expression"`
+}
+
+type VersionWeight struct {
+
+	// Function version name
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// Version weight
+	Weight *float64 `json:"Weight,omitempty" name:"Weight"`
 }
 
 type VpcConfig struct {

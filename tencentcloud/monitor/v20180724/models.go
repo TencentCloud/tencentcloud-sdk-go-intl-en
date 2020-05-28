@@ -41,7 +41,7 @@ type BindingPolicyObjectRequest struct {
 	// Policy group ID.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Required. It is fixed to monitor.
+	// Required. The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
 	// Instance group ID.
@@ -89,19 +89,19 @@ type CreatePolicyGroupCondition struct {
 	// Alarm sending period in seconds. The value <0 indicates that no alarm will be triggered. The value 0 indicates that an alarm is triggered only once. The value >0 indicates that an alarm is triggered at the interval of triggerTime.
 	AlarmNotifyPeriod *int64 `json:"AlarmNotifyPeriod,omitempty" name:"AlarmNotifyPeriod"`
 
-	// Comparative type. The value 1 indicates greater than. The value 2 indicates greater than or equal to. The value 3 indicates smaller than. The value 4 indicates smaller than or equal to. The value 5 indicates equal to. The value 6 indicates not equal to. This parameter may not be set if a default comparative type is set for a metric.
+	// Comparative type. The value 1 indicates greater than. The value 2 indicates greater than or equal to. The value 3 indicates smaller than. The value 4 indicates smaller than or equal to. The value 5 indicates equal to. The value 6 indicates not equal to. This parameter is optional if a default comparative type is configured for the metric.
 	CalcType *int64 `json:"CalcType,omitempty" name:"CalcType"`
 
-	// Comparative value. This parameter may not be set if a metric has no requirement.
+	// Comparative value. This parameter is optional if the metric has no requirement.
 	CalcValue *float64 `json:"CalcValue,omitempty" name:"CalcValue"`
 
-	// Data statistics period in seconds. This parameter may not be set if a metric has a default value.
+	// Data aggregation period in seconds. This parameter is optional if the metric has a default value.
 	CalcPeriod *int64 `json:"CalcPeriod,omitempty" name:"CalcPeriod"`
 
 	// Number of consecutive periods after which an alarm will be triggered.
 	ContinuePeriod *int64 `json:"ContinuePeriod,omitempty" name:"ContinuePeriod"`
 
-	// If a metric is created based on a template, the RuleId of the metric in the template must be input.
+	// If a metric is created based on a template, the RuleId of the metric in the template must be passed in.
 	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
 }
 
@@ -113,10 +113,10 @@ type CreatePolicyGroupEventCondition struct {
 	// Alarm sending and converging type. The value 0 indicates that alarms are sent consecutively. The value 1 indicates that alarms are sent exponentially.
 	AlarmNotifyType *int64 `json:"AlarmNotifyType,omitempty" name:"AlarmNotifyType"`
 
-	// Alarm sending period in seconds. The value <0 indicates that no alarm will be triggered. The value 0 indicates that an alarm will be triggered only once. The value >0 indicates that an alarm will be triggered at the interval of triggerTime.
+	// Alarm sending period in seconds. The value <0 indicates that no alarm will be triggered. The value 0 indicates that an alarm is triggered only once. The value >0 indicates that an alarm is triggered at the interval of triggerTime.
 	AlarmNotifyPeriod *int64 `json:"AlarmNotifyPeriod,omitempty" name:"AlarmNotifyPeriod"`
 
-	// If a metric is created based on a template, the RuleId of the metric in the template must be input.
+	// If a metric is created based on a template, the RuleId of the metric in the template must be passed in.
 	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
 }
 
@@ -129,7 +129,7 @@ type CreatePolicyGroupRequest struct {
 	// The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Name of the view to which the policy group belongs. If the policy group is created based on a template, this parameter may not be set.
+	// Name of the view to which the policy group belongs. If the policy group is created based on a template, this parameter is optional.
 	ViewName *string `json:"ViewName,omitempty" name:"ViewName"`
 
 	// ID of the project to which the policy group belongs, which will be used for authentication.
@@ -144,19 +144,19 @@ type CreatePolicyGroupRequest struct {
 	// Remarks of the policy group.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Insertion time in the format of Unix timestamp. If you do not set this parameter, the background processing time is used.
+	// Insertion time in the format of Unix timestamp. If this parameter is not configured, the backend processing time is used.
 	InsertTime *int64 `json:"InsertTime,omitempty" name:"InsertTime"`
 
-	// Alarm threshold rule in the policy group.
+	// Alarm threshold rules in the policy group.
 	Conditions []*CreatePolicyGroupCondition `json:"Conditions,omitempty" name:"Conditions" list`
 
 	// Event alarm rules in the policy group.
 	EventConditions []*CreatePolicyGroupEventCondition `json:"EventConditions,omitempty" name:"EventConditions" list`
 
-	// Whether to invoke at the background. Only when the value is 1, the rules in the background pull policy template are filled into the Conditions and EventConditions fields.
+	// Whether it is a backend call. If the value is 1, rules from the policy template will be used to fill in the `Conditions` and `EventConditions` fields.
 	BackEndCall *int64 `json:"BackEndCall,omitempty" name:"BackEndCall"`
 
-	// The “AND” and “OR” rules for alarm metrics. The value 0 indicates “OR”, which means that an alarm will be reported when any rule is met. The value 1 indicates “AND”, which means that an alarm will be reported only when all rules are met.
+	// The “AND” and “OR” rules for alarm metrics. The value 0 indicates “OR”, which means that an alarm will be triggered when any rule is met. The value 1 indicates “AND”, which means that an alarm will be triggered only when all rules are met.
 	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
 }
 
@@ -277,10 +277,10 @@ type DescribeAccidentEventListAlarms struct {
 type DescribeAccidentEventListRequest struct {
 	*tchttp.BaseRequest
 
-	// API module name. The value for the current API is monitor.
+	// API component name. The value for the current API is monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Start time, which is the timestamp one day earlier by default.
+	// Start time, which is the timestamp one day prior by default.
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time, which is the current timestamp by default.
@@ -295,13 +295,13 @@ type DescribeAccidentEventListRequest struct {
 	// Sorting rule by UpdateTime. Valid values: asc and desc.
 	UpdateTimeOrder *string `json:"UpdateTimeOrder,omitempty" name:"UpdateTimeOrder"`
 
-	// Sorting rule by OccurTime. Valid values: asc or desc. Sorting by UpdateTimeOrder takes a higher priority.
+	// Sorting rule by OccurTime. Valid values: asc or desc. Sorting by UpdateTimeOrder takes priority.
 	OccurTimeOrder *string `json:"OccurTimeOrder,omitempty" name:"OccurTimeOrder"`
 
 	// Filter by event type. The value 1 indicates service issues. The value 2 indicates other subscriptions.
 	AccidentType []*int64 `json:"AccidentType,omitempty" name:"AccidentType" list`
 
-	// Filter by event. The value 1 indicates CVM storage issues. The value 2 indicates CVM network connection issues. The value 3 indicates that the CVM runs exceptionally. The value 202 indicates that an ISP network jitter occurs.
+	// Filter by event. The value 1 indicates CVM storage issues. The value 2 indicates CVM network connection issues. The value 3 indicates that the CVM has an exception. The value 202 indicates that an ISP network jitter occurs.
 	AccidentEvent []*int64 `json:"AccidentEvent,omitempty" name:"AccidentEvent" list`
 
 	// Filter by event status. The value 0 indicates that the event has been recovered. The value 1 indicates that the event has not been recovered.
@@ -482,10 +482,10 @@ type DescribeBasicAlarmListAlarms struct {
 type DescribeBasicAlarmListRequest struct {
 	*tchttp.BaseRequest
 
-	// API module name. The value for the current API is monitor.
+	// API component name. The value for the current API is monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Start time, which is the timestamp one day ago by default.
+	// Start time, which is the timestamp one day prior by default.
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time, which is the current timestamp by default.
@@ -654,7 +654,7 @@ type DescribeBindingPolicyObjectListResponse struct {
 		// Number of object instances that are not shielded.
 		NoShieldedSum *int64 `json:"NoShieldedSum,omitempty" name:"NoShieldedSum"`
 
-		// Bound instance group information. You do not need to set this parameter if no instance group is bound.
+		// Bound instance group information. This parameter is not configured if no instance group is bound.
 	// Note: This field may return null, indicating that no valid value was found.
 		InstanceGroup *DescribeBindingPolicyObjectListInstanceGroup `json:"InstanceGroup,omitempty" name:"InstanceGroup"`
 
@@ -767,7 +767,7 @@ type DescribePolicyConditionListConfigManualContinueTime struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	Default *int64 `json:"Default,omitempty" name:"Default"`
 
-	// Optional duration in seconds.
+	// Custom durations in seconds.
 	// Note: This field may return null, indicating that no valid value was found.
 	Keys []*int64 `json:"Keys,omitempty" name:"Keys" list`
 
@@ -781,7 +781,7 @@ type DescribePolicyConditionListConfigManualPeriod struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	Default *int64 `json:"Default,omitempty" name:"Default"`
 
-	// Optional period in seconds.
+	// Custom periods in seconds.
 	// Note: This field may return null, indicating that no valid value was found.
 	Keys []*int64 `json:"Keys,omitempty" name:"Keys" list`
 
@@ -795,7 +795,7 @@ type DescribePolicyConditionListConfigManualPeriodNum struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	Default *int64 `json:"Default,omitempty" name:"Default"`
 
-	// Number of optional periods.
+	// Number of custom periods.
 	// Note: This field may return null, indicating that no valid value was found.
 	Keys []*int64 `json:"Keys,omitempty" name:"Keys" list`
 
@@ -813,7 +813,7 @@ type DescribePolicyConditionListConfigManualStatType struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	P10 *string `json:"P10,omitempty" name:"P10"`
 
-	// Data aggregation method in a period of 1 second.
+	// Data aggregation method in a period of 1 minute.
 	// Note: This field may return null, indicating that no valid value was found.
 	P60 *string `json:"P60,omitempty" name:"P60"`
 
@@ -849,7 +849,7 @@ type DescribePolicyConditionListEventMetric struct {
 	// Whether to recover.
 	NeedRecovered *bool `json:"NeedRecovered,omitempty" name:"NeedRecovered"`
 
-	// Event type, which is a reserved field. At present, it is fixed to 2.
+	// Event type, which is a reserved field. Currently, it is fixed to 2.
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 }
 
@@ -889,7 +889,7 @@ type DescribePolicyConditionListResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// List of Alarm policy conditions.
+		// List of alarm policy conditions.
 		Conditions []*DescribePolicyConditionListCondition `json:"Conditions,omitempty" name:"Conditions" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -923,7 +923,7 @@ type DescribePolicyGroupInfoCondition struct {
 	// Metric name.
 	MetricShowName *string `json:"MetricShowName,omitempty" name:"MetricShowName"`
 
-	// Data statistics period in seconds.
+	// Data aggregation period in seconds.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
 	// Metric ID.
@@ -1004,7 +1004,7 @@ type DescribePolicyGroupInfoEventCondition struct {
 
 type DescribePolicyGroupInfoReceiverInfo struct {
 
-	// List of alarm receiver group IDs.
+	// List of alarm recipient group IDs.
 	ReceiverGroupList []*int64 `json:"ReceiverGroupList,omitempty" name:"ReceiverGroupList" list`
 
 	// List of alarm recipient IDs.
@@ -1019,29 +1019,29 @@ type DescribePolicyGroupInfoReceiverInfo struct {
 	// Recipient type. Valid values: group and user.
 	ReceiverType *string `json:"ReceiverType,omitempty" name:"ReceiverType"`
 
-	// Alarm notification type. Valid values: "SMS", "SITE", "EMAIL", "CALL", and "WECHAT".
+	// Alarm notification method. Valid values: "SMS", "SITE", "EMAIL", "CALL", and "WECHAT".
 	NotifyWay []*string `json:"NotifyWay,omitempty" name:"NotifyWay" list`
 
-	// Uid of the alarm call receiver.
+	// Uid of the alarm call recipient.
 	// Note: This field may return null, indicating that no valid value was found.
 	UidList []*int64 `json:"UidList,omitempty" name:"UidList" list`
 
 	// Number of alarm call rounds.
 	RoundNumber *int64 `json:"RoundNumber,omitempty" name:"RoundNumber"`
 
-	// Round interval of alarm calls in seconds.
+	// Intervals of alarm call rounds in seconds.
 	RoundInterval *int64 `json:"RoundInterval,omitempty" name:"RoundInterval"`
 
-	// Person interval of alarm calls in seconds.
+	// Alarm call intervals for individuals in seconds.
 	PersonInterval *int64 `json:"PersonInterval,omitempty" name:"PersonInterval"`
 
 	// Whether to send an alarm call delivery notice. The value 0 indicates that no notice needs to be sent. The value 1 indicates that a notice needs to be sent.
 	NeedSendNotice *int64 `json:"NeedSendNotice,omitempty" name:"NeedSendNotice"`
 
-	// Alarm call notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is reported) and RECOVER (indicating that a notice is sent when the alarm is cleared).
+	// Alarm call notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is triggered) and RECOVER (indicating that a notice is sent when the alarm is recovered).
 	SendFor []*string `json:"SendFor,omitempty" name:"SendFor" list`
 
-	// Notification method when an alarm is cleared. Valid value: SMS.
+	// Notification method when an alarm is recovered. Valid value: SMS.
 	RecoverNotify []*string `json:"RecoverNotify,omitempty" name:"RecoverNotify" list`
 
 	// Alarm language.
@@ -1093,10 +1093,10 @@ type DescribePolicyGroupInfoResponse struct {
 		// Uin that was last edited.
 		LastEditUin *string `json:"LastEditUin,omitempty" name:"LastEditUin"`
 
-		// Last update time.
+		// Last edited time.
 		UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-		// Regions that support this policy.
+		// Regions supported by this policy.
 		Region []*string `json:"Region,omitempty" name:"Region" list`
 
 		// List of policy type dimensions.
@@ -1122,7 +1122,7 @@ type DescribePolicyGroupInfoResponse struct {
 	// Note: This field may return null, indicating that no valid value was found.
 		ConditionsTemp *DescribePolicyGroupInfoConditionTpl `json:"ConditionsTemp,omitempty" name:"ConditionsTemp"`
 
-		// Whether the policy can be set as the default policy.
+		// Whether the policy can be configured as the default policy.
 		CanSetDefault *bool `json:"CanSetDefault,omitempty" name:"CanSetDefault"`
 
 		// Whether the “AND” rule is used.
@@ -1157,10 +1157,10 @@ type DescribePolicyGroupListGroup struct {
 	// Policy view name.
 	ViewName *string `json:"ViewName,omitempty" name:"ViewName"`
 
-	// Uin that is last edited.
+	// Uin that was last edited.
 	LastEditUin *string `json:"LastEditUin,omitempty" name:"LastEditUin"`
 
-	// Last update time.
+	// Last modified time.
 	UpdateTime *int64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Creation time.
@@ -1175,7 +1175,7 @@ type DescribePolicyGroupListGroup struct {
 	// Whether it is the default policy. The value 0 indicates that it is not the default policy. The value 1 indicates that it is the default policy.
 	IsDefault *int64 `json:"IsDefault,omitempty" name:"IsDefault"`
 
-	// Whether the policy can be set as the default policy.
+	// Whether the policy can be configured as the default policy.
 	CanSetDefault *bool `json:"CanSetDefault,omitempty" name:"CanSetDefault"`
 
 	// Parent policy group ID.
@@ -1207,7 +1207,7 @@ type DescribePolicyGroupListGroup struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	InstanceGroup *DescribePolicyGroupListGroupInstanceGroup `json:"InstanceGroup,omitempty" name:"InstanceGroup"`
 
-	// The “AND” or “OR” rule. The value 0 indicates the “OR” rule (indicating that an alarm will be reported if any rule reaches the threshold condition). The value 1 indicates the “AND” rule (indicating that an alarm will be reported when all rules reach the threshold conditions).
+	// The “AND” or “OR” rule. The value 0 indicates the “OR” rule (indicating that an alarm will be triggered if any rule meets the threshold condition). The value 1 indicates the “AND” rule (indicating that an alarm will be triggered when all rules meet the threshold conditions).
 	// Note: This field may return null, indicating that no valid value was found.
 	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
 }
@@ -1220,7 +1220,7 @@ type DescribePolicyGroupListGroupInstanceGroup struct {
 	// Policy type view name.
 	ViewName *string `json:"ViewName,omitempty" name:"ViewName"`
 
-	// Uin that is last edited.
+	// Uin that was last edited.
 	LastEditUin *string `json:"LastEditUin,omitempty" name:"LastEditUin"`
 
 	// Instance group name.
@@ -1331,11 +1331,11 @@ type DescribeProductEventListEvents struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
 
-	// Chinese event name.
+	// Event name in Chinese.
 	// Note: This field may return null, indicating that no valid value was found.
 	EventCName *string `json:"EventCName,omitempty" name:"EventCName"`
 
-	// English event name.
+	// Event name in English.
 	// Note: This field may return null, indicating that no valid value was found.
 	EventEName *string `json:"EventEName,omitempty" name:"EventEName"`
 
@@ -1343,11 +1343,11 @@ type DescribeProductEventListEvents struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	EventName *string `json:"EventName,omitempty" name:"EventName"`
 
-	// Chinese product name.
+	// Product name in Chinese.
 	// Note: This field may return null, indicating that no valid value was found.
 	ProductCName *string `json:"ProductCName,omitempty" name:"ProductCName"`
 
-	// English product name.
+	// Product name in English.
 	// Note: This field may return null, indicating that no valid value was found.
 	ProductEName *string `json:"ProductEName,omitempty" name:"ProductEName"`
 
@@ -1410,11 +1410,11 @@ type DescribeProductEventListEvents struct {
 
 type DescribeProductEventListEventsDimensions struct {
 
-	// English dimension name.
+	// Dimension name in English.
 	// Note: This field may return null, indicating that no valid value was found.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
-	// Chinese dimension name.
+	// Dimension name in Chinese.
 	// Note: This field may return null, indicating that no valid value was found.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -1444,7 +1444,7 @@ type DescribeProductEventListOverView struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	UnConfigAlarmAmount *int64 `json:"UnConfigAlarmAmount,omitempty" name:"UnConfigAlarmAmount"`
 
-	// Number of exceptional events.
+	// Number of events with exceptions.
 	// Note: This field may return null, indicating that no valid value was found.
 	UnNormalEventAmount *int64 `json:"UnNormalEventAmount,omitempty" name:"UnNormalEventAmount"`
 
@@ -1456,7 +1456,7 @@ type DescribeProductEventListOverView struct {
 type DescribeProductEventListRequest struct {
 	*tchttp.BaseRequest
 
-	// API module name. It is fixed to monitor.
+	// API component name. It is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
 	// Filter by product type. For example, “cvm” indicates Cloud Virtual Machine.
@@ -1474,7 +1474,7 @@ type DescribeProductEventListRequest struct {
 	// Filter by region, such as by gz.
 	RegionList []*string `json:"RegionList,omitempty" name:"RegionList" list`
 
-	// Filter by event type. Valid values: ["status_change","abnormal"], which indicate events whose statuses have changed and exceptional events respectively.
+	// Filter by event type. Valid values: ["status_change","abnormal"], which indicate events whose statuses have changed and events with exceptions respectively.
 	Type []*string `json:"Type,omitempty" name:"Type" list`
 
 	// Filter by event status. Valid values: ["recover","alarm","-"], which indicate that an event has been recovered, has not been recovered, and has no status respectively.
@@ -1489,7 +1489,7 @@ type DescribeProductEventListRequest struct {
 	// Sorting by update time. The value ASC indicates the ascending order. The value DESC indicates the descending order. The default value is DESC.
 	TimeOrder *string `json:"TimeOrder,omitempty" name:"TimeOrder"`
 
-	// Start time, which is the timestamp one day ago by default.
+	// Start time, which is the timestamp one day prior by default.
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time, which is the current timestamp by default.
@@ -1690,7 +1690,7 @@ type ModifyAlarmReceiversRequest struct {
 	// Required. The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// New recipient information. If this parameter is not set, all recipients will be deleted.
+	// New recipient information. If this parameter is not configured, all recipients will be deleted.
 	ReceiverInfos []*ReceiverInfo `json:"ReceiverInfos,omitempty" name:"ReceiverInfos" list`
 }
 
@@ -1718,6 +1718,106 @@ func (r *ModifyAlarmReceiversResponse) ToJsonString() string {
 }
 
 func (r *ModifyAlarmReceiversResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyPolicyGroupCondition struct {
+
+	// Metric ID.
+	MetricId *int64 `json:"MetricId,omitempty" name:"MetricId"`
+
+	// Comparative type. The value 1 indicates greater than. The value 2 indicates greater than or equal to. The value 3 indicates smaller than. The value 4 indicates smaller than or equal to. The value 5 indicates equal to. The value 6 indicates not equal to.
+	CalcType *int64 `json:"CalcType,omitempty" name:"CalcType"`
+
+	// Threshold.
+	CalcValue *string `json:"CalcValue,omitempty" name:"CalcValue"`
+
+	// Data period of the detected metric.
+	CalcPeriod *int64 `json:"CalcPeriod,omitempty" name:"CalcPeriod"`
+
+	// Number of consecutive periods.
+	ContinuePeriod *int64 `json:"ContinuePeriod,omitempty" name:"ContinuePeriod"`
+
+	// Alarm sending and convergence type. The value 0 indicates that alarms are sent consecutively. The value 1 indicates that alarms are sent exponentially.
+	AlarmNotifyType *int64 `json:"AlarmNotifyType,omitempty" name:"AlarmNotifyType"`
+
+	// Alarm sending period in seconds. If the value is less than 0, no alarm will be triggered. If the value is 0, an alarm will be triggered only once. If the value is greater than 0, an alarm will be triggered at the interval of triggerTime.
+	AlarmNotifyPeriod *int64 `json:"AlarmNotifyPeriod,omitempty" name:"AlarmNotifyPeriod"`
+
+	// Rule ID. No filling means new addition while filling in ruleId means to modify existing rules.
+	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
+}
+
+type ModifyPolicyGroupEventCondition struct {
+
+	// Event ID.
+	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+
+	// Alarm sending and convergence type. The value 0 indicates that alarms are sent consecutively. The value 1 indicates that alarms are sent exponentially.
+	AlarmNotifyType *int64 `json:"AlarmNotifyType,omitempty" name:"AlarmNotifyType"`
+
+	// Alarm sending period in seconds. If the value is less than 0, no alarm will be triggered. If the value is 0, an alarm will be triggered only once. If the value is greater than 0, an alarm will be triggered at the interval of triggerTime.
+	AlarmNotifyPeriod *int64 `json:"AlarmNotifyPeriod,omitempty" name:"AlarmNotifyPeriod"`
+
+	// Rule ID. No filling means new addition while filling in ruleId means to modify existing rules.
+	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
+}
+
+type ModifyPolicyGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// The value is fixed to monitor.
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Policy group ID.
+	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Alarm type.
+	ViewName *string `json:"ViewName,omitempty" name:"ViewName"`
+
+	// Policy group name.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// The “AND” and “OR” rules for metric alarms. The value 1 indicates “AND”, which means that an alarm will be triggered only when all rules are met. The value 0 indicates “OR”, which means that an alarm will be triggered when any rule is met.
+	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
+
+	// Metric alarm condition rules. No filling indicates that all existing metric alarm condition rules will be deleted.
+	Conditions []*ModifyPolicyGroupCondition `json:"Conditions,omitempty" name:"Conditions" list`
+
+	// Event alarm conditions. No filling indicates that all existing event alarm conditions will be deleted.
+	EventConditions []*ModifyPolicyGroupEventCondition `json:"EventConditions,omitempty" name:"EventConditions" list`
+
+	// Template-based policy group ID.
+	ConditionTempGroupId *int64 `json:"ConditionTempGroupId,omitempty" name:"ConditionTempGroupId"`
+}
+
+func (r *ModifyPolicyGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyPolicyGroupRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyPolicyGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Policy group ID.
+		GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyPolicyGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyPolicyGroupResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1781,7 +1881,7 @@ type ReceiverInfo struct {
 	// End time of the alarm period. The meaning is the same as that of StartTime.
 	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Alarm notification type. Valid values: "SMS", "SITE", "EMAIL", "CALL", and "WECHAT".
+	// Alarm notification method. Valid values: "SMS", "SITE", "EMAIL", "CALL", and "WECHAT".
 	NotifyWay []*string `json:"NotifyWay,omitempty" name:"NotifyWay" list`
 
 	// Recipient type. Valid values: group and user.
@@ -1790,22 +1890,22 @@ type ReceiverInfo struct {
 	// ReceiverId
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 
-	// Call alarm notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is reported) and RECOVER (indicating that a notice is sent when the alarm is cleared).
+	// Alarm call notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is triggered) and RECOVER (indicating that a notice is sent when the alarm is recovered).
 	SendFor []*string `json:"SendFor,omitempty" name:"SendFor" list`
 
-	// Uid of the alarm call receiver.
+	// Uid of the alarm call recipient.
 	UidList []*int64 `json:"UidList,omitempty" name:"UidList" list`
 
 	// Number of alarm call rounds.
 	RoundNumber *int64 `json:"RoundNumber,omitempty" name:"RoundNumber"`
 
-	// Person interval of alarm calls in seconds.
+	// Alarm call intervals for individuals in seconds.
 	PersonInterval *int64 `json:"PersonInterval,omitempty" name:"PersonInterval"`
 
-	// Round interval of alarm calls in seconds.
+	// Intervals of alarm call rounds in seconds.
 	RoundInterval *int64 `json:"RoundInterval,omitempty" name:"RoundInterval"`
 
-	// Notification method when an alarm is cleared. Valid value: SMS.
+	// Notification method when an alarm is recovered. Valid value: SMS.
 	RecoverNotify []*string `json:"RecoverNotify,omitempty" name:"RecoverNotify" list`
 
 	// Whether to send an alarm call delivery notice. The value 0 indicates that no notice needs to be sent. The value 1 indicates that a notice needs to be sent.
@@ -1824,7 +1924,7 @@ type ReceiverInfo struct {
 type SendCustomAlarmMsgRequest struct {
 	*tchttp.BaseRequest
 
-	// API module name. The value for the current API is monitor.
+	// API component name. The value for the current API is monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
 	// Message policy ID, which is configured on the custom message page of Cloud Monitor.

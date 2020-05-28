@@ -243,6 +243,31 @@ func (c *Client) CreatePolicy(request *CreatePolicyRequest) (response *CreatePol
     return
 }
 
+func NewCreatePolicyVersionRequest() (request *CreatePolicyVersionRequest) {
+    request = &CreatePolicyVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "CreatePolicyVersion")
+    return
+}
+
+func NewCreatePolicyVersionResponse() (response *CreatePolicyVersionResponse) {
+    response = &CreatePolicyVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to add a policy version. After creating a policy version, you can easily change the policy by changing the policy version.
+func (c *Client) CreatePolicyVersion(request *CreatePolicyVersionRequest) (response *CreatePolicyVersionResponse, err error) {
+    if request == nil {
+        request = NewCreatePolicyVersionRequest()
+    }
+    response = NewCreatePolicyVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRoleRequest() (request *CreateRoleRequest) {
     request = &CreateRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -289,6 +314,31 @@ func (c *Client) CreateSAMLProvider(request *CreateSAMLProviderRequest) (respons
         request = NewCreateSAMLProviderRequest()
     }
     response = NewCreateSAMLProviderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateServiceLinkedRoleRequest() (request *CreateServiceLinkedRoleRequest) {
+    request = &CreateServiceLinkedRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "CreateServiceLinkedRole")
+    return
+}
+
+func NewCreateServiceLinkedRoleResponse() (response *CreateServiceLinkedRoleResponse) {
+    response = &CreateServiceLinkedRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a service-linked role.
+func (c *Client) CreateServiceLinkedRole(request *CreateServiceLinkedRoleRequest) (response *CreateServiceLinkedRoleResponse, err error) {
+    if request == nil {
+        request = NewCreateServiceLinkedRoleRequest()
+    }
+    response = NewCreateServiceLinkedRoleResponse()
     err = c.Send(request, response)
     return
 }
@@ -343,6 +393,31 @@ func (c *Client) DeletePolicy(request *DeletePolicyRequest) (response *DeletePol
     return
 }
 
+func NewDeletePolicyVersionRequest() (request *DeletePolicyVersionRequest) {
+    request = &DeletePolicyVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "DeletePolicyVersion")
+    return
+}
+
+func NewDeletePolicyVersionResponse() (response *DeletePolicyVersionResponse) {
+    response = &DeletePolicyVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a policy version of a policy.
+func (c *Client) DeletePolicyVersion(request *DeletePolicyVersionRequest) (response *DeletePolicyVersionResponse, err error) {
+    if request == nil {
+        request = NewDeletePolicyVersionRequest()
+    }
+    response = NewDeletePolicyVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteRoleRequest() (request *DeleteRoleRequest) {
     request = &DeleteRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -389,6 +464,31 @@ func (c *Client) DeleteSAMLProvider(request *DeleteSAMLProviderRequest) (respons
         request = NewDeleteSAMLProviderRequest()
     }
     response = NewDeleteSAMLProviderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteServiceLinkedRoleRequest() (request *DeleteServiceLinkedRoleRequest) {
+    request = &DeleteServiceLinkedRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "DeleteServiceLinkedRole")
+    return
+}
+
+func NewDeleteServiceLinkedRoleResponse() (response *DeleteServiceLinkedRoleResponse) {
+    response = &DeleteServiceLinkedRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a service-linked role.
+func (c *Client) DeleteServiceLinkedRole(request *DeleteServiceLinkedRoleRequest) (response *DeleteServiceLinkedRoleResponse, err error) {
+    if request == nil {
+        request = NewDeleteServiceLinkedRoleRequest()
+    }
+    response = NewDeleteServiceLinkedRoleResponse()
     err = c.Send(request, response)
     return
 }
@@ -593,6 +693,31 @@ func (c *Client) GetPolicy(request *GetPolicyRequest) (response *GetPolicyRespon
     return
 }
 
+func NewGetPolicyVersionRequest() (request *GetPolicyVersionRequest) {
+    request = &GetPolicyVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "GetPolicyVersion")
+    return
+}
+
+func NewGetPolicyVersionResponse() (response *GetPolicyVersionResponse) {
+    response = &GetPolicyVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query policy version details.
+func (c *Client) GetPolicyVersion(request *GetPolicyVersionRequest) (response *GetPolicyVersionResponse, err error) {
+    if request == nil {
+        request = NewGetPolicyVersionRequest()
+    }
+    response = NewGetPolicyVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetRoleRequest() (request *GetRoleRequest) {
     request = &GetRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -639,6 +764,31 @@ func (c *Client) GetSAMLProvider(request *GetSAMLProviderRequest) (response *Get
         request = NewGetSAMLProviderRequest()
     }
     response = NewGetSAMLProviderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetServiceLinkedRoleDeletionStatusRequest() (request *GetServiceLinkedRoleDeletionStatusRequest) {
+    request = &GetServiceLinkedRoleDeletionStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "GetServiceLinkedRoleDeletionStatus")
+    return
+}
+
+func NewGetServiceLinkedRoleDeletionStatusResponse() (response *GetServiceLinkedRoleDeletionStatusResponse) {
+    response = &GetServiceLinkedRoleDeletionStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the status of the service-linked role deletion based on the `TaskId`
+func (c *Client) GetServiceLinkedRoleDeletionStatus(request *GetServiceLinkedRoleDeletionStatusRequest) (response *GetServiceLinkedRoleDeletionStatusResponse, err error) {
+    if request == nil {
+        request = NewGetServiceLinkedRoleDeletionStatusRequest()
+    }
+    response = NewGetServiceLinkedRoleDeletionStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -858,12 +1008,37 @@ func NewListPoliciesResponse() (response *ListPoliciesResponse) {
     return
 }
 
-// This API (ListPolicies) is used to query the list of policies.
+// This API is used to query the policy list.
 func (c *Client) ListPolicies(request *ListPoliciesRequest) (response *ListPoliciesResponse, err error) {
     if request == nil {
         request = NewListPoliciesRequest()
     }
     response = NewListPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListPolicyVersionsRequest() (request *ListPolicyVersionsRequest) {
+    request = &ListPolicyVersionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "ListPolicyVersions")
+    return
+}
+
+func NewListPolicyVersionsResponse() (response *ListPolicyVersionsResponse) {
+    response = &ListPolicyVersionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the list of policy versions.
+func (c *Client) ListPolicyVersions(request *ListPolicyVersionsRequest) (response *ListPolicyVersionsResponse, err error) {
+    if request == nil {
+        request = NewListPolicyVersionsRequest()
+    }
+    response = NewListPolicyVersionsResponse()
     err = c.Send(request, response)
     return
 }
@@ -968,6 +1143,56 @@ func (c *Client) RemoveUserFromGroup(request *RemoveUserFromGroupRequest) (respo
     return
 }
 
+func NewSetDefaultPolicyVersionRequest() (request *SetDefaultPolicyVersionRequest) {
+    request = &SetDefaultPolicyVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "SetDefaultPolicyVersion")
+    return
+}
+
+func NewSetDefaultPolicyVersionResponse() (response *SetDefaultPolicyVersionResponse) {
+    response = &SetDefaultPolicyVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to set the operative policy version.
+func (c *Client) SetDefaultPolicyVersion(request *SetDefaultPolicyVersionRequest) (response *SetDefaultPolicyVersionResponse, err error) {
+    if request == nil {
+        request = NewSetDefaultPolicyVersionRequest()
+    }
+    response = NewSetDefaultPolicyVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetMfaFlagRequest() (request *SetMfaFlagRequest) {
+    request = &SetMfaFlagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "SetMfaFlag")
+    return
+}
+
+func NewSetMfaFlagResponse() (response *SetMfaFlagResponse) {
+    response = &SetMfaFlagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to set account verification for login and sensitive operations for sub-users.
+func (c *Client) SetMfaFlag(request *SetMfaFlagRequest) (response *SetMfaFlagResponse, err error) {
+    if request == nil {
+        request = NewSetMfaFlagRequest()
+    }
+    response = NewSetMfaFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateAssumeRolePolicyRequest() (request *UpdateAssumeRolePolicyRequest) {
     request = &UpdateAssumeRolePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1033,7 +1258,8 @@ func NewUpdatePolicyResponse() (response *UpdatePolicyResponse) {
     return
 }
 
-// This API (UpdatePolicy) is used to update a policy.
+// This API is used to update a policy.
+// This API will update the default version of an existing policy instead of creating a new one. If no policy exists, a default version will be created.
 func (c *Client) UpdatePolicy(request *UpdatePolicyRequest) (response *UpdatePolicyResponse, err error) {
     if request == nil {
         request = NewUpdatePolicyRequest()
