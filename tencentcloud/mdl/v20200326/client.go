@@ -218,6 +218,81 @@ func (c *Client) DescribeMediaLiveChannel(request *DescribeMediaLiveChannelReque
     return
 }
 
+func NewDescribeMediaLiveChannelAlertsRequest() (request *DescribeMediaLiveChannelAlertsRequest) {
+    request = &DescribeMediaLiveChannelAlertsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveChannelAlerts")
+    return
+}
+
+func NewDescribeMediaLiveChannelAlertsResponse() (response *DescribeMediaLiveChannelAlertsResponse) {
+    response = &DescribeMediaLiveChannelAlertsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the channel alarm information.
+func (c *Client) DescribeMediaLiveChannelAlerts(request *DescribeMediaLiveChannelAlertsRequest) (response *DescribeMediaLiveChannelAlertsResponse, err error) {
+    if request == nil {
+        request = NewDescribeMediaLiveChannelAlertsRequest()
+    }
+    response = NewDescribeMediaLiveChannelAlertsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMediaLiveChannelInputStatisticsRequest() (request *DescribeMediaLiveChannelInputStatisticsRequest) {
+    request = &DescribeMediaLiveChannelInputStatisticsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveChannelInputStatistics")
+    return
+}
+
+func NewDescribeMediaLiveChannelInputStatisticsResponse() (response *DescribeMediaLiveChannelInputStatisticsResponse) {
+    response = &DescribeMediaLiveChannelInputStatisticsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the input statistics.
+func (c *Client) DescribeMediaLiveChannelInputStatistics(request *DescribeMediaLiveChannelInputStatisticsRequest) (response *DescribeMediaLiveChannelInputStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeMediaLiveChannelInputStatisticsRequest()
+    }
+    response = NewDescribeMediaLiveChannelInputStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMediaLiveChannelOutputStatisticsRequest() (request *DescribeMediaLiveChannelOutputStatisticsRequest) {
+    request = &DescribeMediaLiveChannelOutputStatisticsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveChannelOutputStatistics")
+    return
+}
+
+func NewDescribeMediaLiveChannelOutputStatisticsResponse() (response *DescribeMediaLiveChannelOutputStatisticsResponse) {
+    response = &DescribeMediaLiveChannelOutputStatisticsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the output statistics of a channel.
+func (c *Client) DescribeMediaLiveChannelOutputStatistics(request *DescribeMediaLiveChannelOutputStatisticsRequest) (response *DescribeMediaLiveChannelOutputStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeMediaLiveChannelOutputStatisticsRequest()
+    }
+    response = NewDescribeMediaLiveChannelOutputStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMediaLiveChannelsRequest() (request *DescribeMediaLiveChannelsRequest) {
     request = &DescribeMediaLiveChannelsRequest{
         BaseRequest: &tchttp.BaseRequest{},

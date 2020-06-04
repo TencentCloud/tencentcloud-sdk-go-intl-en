@@ -59,12 +59,15 @@ type AddExistedInstancesResponse struct {
 	Response *struct {
 
 		// IDs of failed nodes
+	// Note: This field may return null, indicating that no valid value was found.
 		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds" list`
 
 		// IDs of successful nodes
+	// Note: This field may return null, indicating that no valid value was found.
 		SuccInstanceIds []*string `json:"SuccInstanceIds,omitempty" name:"SuccInstanceIds" list`
 
 		// IDs of (successful or failed) nodes that timed out
+	// Note: This field may return null, indicating that no valid value was found.
 		TimeoutInstanceIds []*string `json:"TimeoutInstanceIds,omitempty" name:"TimeoutInstanceIds" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -161,6 +164,9 @@ type ClusterAdvancedSettings struct {
 
 	// Whether a cluster in VPC-CNI mode uses dynamic IP addresses. The default value is FALSE, which indicates that static IP addresses are used.
 	IsNonStaticIpMode *bool `json:"IsNonStaticIpMode,omitempty" name:"IsNonStaticIpMode"`
+
+	// Indicates whether to enable deletion protection
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
 }
 
 type ClusterBasicSettings struct {
@@ -495,19 +501,24 @@ func (r *CreateClusterRouteTableResponse) FromJsonString(s string) error {
 
 type DataDisk struct {
 
-	// 
+	// Disk type
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// File system (ext3/ext4/xfs)
+	// Note: This field may return null, indicating that no valid value was found.
 	FileSystem *string `json:"FileSystem,omitempty" name:"FileSystem"`
 
-	// 
+	// Disk size (G)
+	// Note: This field may return null, indicating that no valid value was found.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
-	// Whether to automatically format and mount the disk
+	// Whether the disk is auto-formatted and mounted
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	AutoFormatAndMount *bool `json:"AutoFormatAndMount,omitempty" name:"AutoFormatAndMount"`
 
-	// 
+	// Mounting directory
+	// Note: This field may return null, indicating that no valid value was found.
 	MountTarget *string `json:"MountTarget,omitempty" name:"MountTarget"`
 }
 
@@ -632,6 +643,18 @@ func (r *DeleteClusterInstancesRequest) FromJsonString(s string) error {
 type DeleteClusterInstancesResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// IDs of deleted instances
+	// Note: This field may return null, indicating that no valid value was found.
+		SuccInstanceIds []*string `json:"SuccInstanceIds,omitempty" name:"SuccInstanceIds" list`
+
+		// IDs of instances failed to be deleted
+	// Note: This field may return null, indicating that no valid value was found.
+		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds" list`
+
+		// IDs of instances that cannot be found
+	// Note: This field may return null, indicating that no valid value was found.
+		NotFoundInstanceIds []*string `json:"NotFoundInstanceIds,omitempty" name:"NotFoundInstanceIds" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -991,13 +1014,15 @@ type DescribeClusterSecurityResponse struct {
 		PgwEndpoint *string `json:"PgwEndpoint,omitempty" name:"PgwEndpoint"`
 
 		// Cluster’s access policy group
+	// Note: This field may return null, indicating that no valid value was found.
 		SecurityPolicy []*string `json:"SecurityPolicy,omitempty" name:"SecurityPolicy" list`
 
 		// Cluster Kubeconfig file
 	// Note: This field may return null, indicating that no valid value was found.
 		Kubeconfig *string `json:"Kubeconfig,omitempty" name:"Kubeconfig"`
 
-		// 
+		// Access address of the cluster JnsGw
+	// Note: This field may return null, indicating that no valid value was found.
 		JnsGwEndpoint *string `json:"JnsGwEndpoint,omitempty" name:"JnsGwEndpoint"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1287,13 +1312,6 @@ type ExistedInstance struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// Instance’s billing mode. Value range:
-	// PREPAID: Prepaid (Monthly Subscription)
-	// POSTPAID_BY_HOUR: Postpaid (Pay-as-you-go)
-	// CDHPAID: CDH-paid. Only CDH is charged and instances on the CDH do not incur fees.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
-
 	// Instance’s number of CPU cores. Unit: cores.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CPU *uint64 `json:"CPU,omitempty" name:"CPU"`
@@ -1309,6 +1327,14 @@ type ExistedInstance struct {
 	// Instance model.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Auto scaling group ID
+	// Note: This field may return null, indicating that no valid value was found.
+	AutoscalingGroupId *string `json:"AutoscalingGroupId,omitempty" name:"AutoscalingGroupId"`
+
+	// Instance billing method. Valid values: POSTPAID_BY_HOUR (pay-as-you-go hourly); CDHPAID (billed based on CDH, i.e., only CDH is billed but not the instances on CDH)
+	// Note: This field may return null, indicating that no valid value was found.
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 }
 
 type ExistedInstancesForNode struct {
@@ -1401,34 +1427,42 @@ type Instance struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	LanIP *string `json:"LanIP,omitempty" name:"LanIP"`
 
-	// 
+	// Resource pool ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
 
-	// 
+	// ID of the auto-scaling group
+	// Note: this field may return null, indicating that no valid value is obtained.
 	AutoscalingGroupId *string `json:"AutoscalingGroupId,omitempty" name:"AutoscalingGroupId"`
 }
 
 type InstanceAdvancedSettings struct {
 
 	// Data disk mount point. By default, no data disk is mounted. Data disks in ext3, ext4, or XFS file system formats will be mounted directly, while data disks in other file systems and unformatted data disks will automatically be formatted as ext4 and then mounted. Please back up your data in advance. This setting is only applicable to CVMs with a single data disk.
+	// Note: This field may return null, indicating that no valid value was found.
 	MountTarget *string `json:"MountTarget,omitempty" name:"MountTarget"`
 
 	// Specified value of dockerd --graph. Default value: /var/lib/docker
+	// Note: This field may return null, indicating that no valid value was found.
 	DockerGraphPath *string `json:"DockerGraphPath,omitempty" name:"DockerGraphPath"`
 
 	// Base64-encoded user script, which will be executed after the K8s component starts running. You need to ensure the reentrant and retry logic of the script. The script and its log files can be viewed at the node path: /data/ccs_userscript/. If you want to initialize nodes before adding them to the scheduling list, you can use this parameter together with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to enable the node for scheduling.
+	// Note: This field may return null, indicating that no valid value was found.
 	UserScript *string `json:"UserScript,omitempty" name:"UserScript"`
 
 	// Sets whether the added node is schedulable. 0 (default): schedulable; other values: unschedulable. After node initialization is completed, you can run kubectl uncordon nodename to enable this node for scheduling.
 	Unschedulable *int64 `json:"Unschedulable,omitempty" name:"Unschedulable"`
 
-	// 
+	// Node label array
+	// Note: This field may return null, indicating that no valid value was found.
 	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
 
-	// 
+	// Data disk information
+	// Note: This field may return null, indicating that no valid value was found.
 	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
 
 	// Information about node custom parameters
+	// Note: This field may return null, indicating that no valid value was found.
 	ExtraArgs *InstanceExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
 }
 

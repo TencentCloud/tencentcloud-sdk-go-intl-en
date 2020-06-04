@@ -36,6 +36,19 @@ type AudioPidSelectionInfo struct {
 	Pid *uint64 `json:"Pid,omitempty" name:"Pid"`
 }
 
+type AudioPipelineInputStatistics struct {
+
+	// Audio FPS.
+	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
+
+	// Audio bitrate in bps.
+	Rate *uint64 `json:"Rate,omitempty" name:"Rate"`
+
+	// Audio `Pid`, which is available only if the input is `rtp/udp`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
+}
+
 type AudioSelectorInfo struct {
 
 	// Audio name, which can contain 1–32 letters, digits, and underscores.
@@ -64,6 +77,15 @@ type AudioTemplateInfo struct {
 	LanguageCode *string `json:"LanguageCode,omitempty" name:"LanguageCode"`
 }
 
+type ChannelAlertInfos struct {
+
+	// Alarm details of pipeline 0 under this channel.
+	Pipeline0 []*ChannelPipelineAlerts `json:"Pipeline0,omitempty" name:"Pipeline0" list`
+
+	// Alarm details of pipeline 1 under this channel.
+	Pipeline1 []*ChannelPipelineAlerts `json:"Pipeline1,omitempty" name:"Pipeline1" list`
+}
+
 type ChannelInfo struct {
 
 	// Channel ID.
@@ -88,6 +110,41 @@ type ChannelInfo struct {
 	// Video transcoding template array.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates" list`
+}
+
+type ChannelInputStatistics struct {
+
+	// Input ID.
+	InputId *string `json:"InputId,omitempty" name:"InputId"`
+
+	// Input statistics.
+	Statistics *InputStatistics `json:"Statistics,omitempty" name:"Statistics"`
+}
+
+type ChannelOutputsStatistics struct {
+
+	// Output group name.
+	OutputGroupName *string `json:"OutputGroupName,omitempty" name:"OutputGroupName"`
+
+	// Output group statistics.
+	Statistics *OutputsStatistics `json:"Statistics,omitempty" name:"Statistics"`
+}
+
+type ChannelPipelineAlerts struct {
+
+	// Alarm start time in UTC time.
+	SetTime *string `json:"SetTime,omitempty" name:"SetTime"`
+
+	// Alarm end time in UTC time.
+	// This time is available only after the alarm ends.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ClearTime *string `json:"ClearTime,omitempty" name:"ClearTime"`
+
+	// Alarm type.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Alarm details.
+	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
 type CreateMediaLiveChannelRequest struct {
@@ -338,6 +395,133 @@ func (r *DeleteMediaLiveInputSecurityGroupResponse) ToJsonString() string {
 }
 
 func (r *DeleteMediaLiveInputSecurityGroupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaLiveChannelAlertsRequest struct {
+	*tchttp.BaseRequest
+
+	// Channel ID.
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+}
+
+func (r *DescribeMediaLiveChannelAlertsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaLiveChannelAlertsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaLiveChannelAlertsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Alarm information of two pipelines under this channel.
+		Infos *ChannelAlertInfos `json:"Infos,omitempty" name:"Infos"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeMediaLiveChannelAlertsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaLiveChannelAlertsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaLiveChannelInputStatisticsRequest struct {
+	*tchttp.BaseRequest
+
+	// Channel ID.
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Statistics start time, which is one hour ago by default. Maximum value: the last 7 days.
+	// UTC time, such as `2020-01-01T12:00:00Z`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time, which is one hour after `StartTime` by default.
+	// UTC time, such as `2020-01-01T12:00:00Z`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeMediaLiveChannelInputStatisticsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaLiveChannelInputStatisticsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaLiveChannelInputStatisticsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Channel input statistics array.
+		Infos []*ChannelInputStatistics `json:"Infos,omitempty" name:"Infos" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeMediaLiveChannelInputStatisticsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaLiveChannelInputStatisticsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaLiveChannelOutputStatisticsRequest struct {
+	*tchttp.BaseRequest
+
+	// Channel ID.
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Statistics start time, which is one hour ago by default. Maximum value: the last 7 days.
+	// UTC time, such as `2020-01-01T12:00:00Z`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time, which is one hour after `StartTime` by default.
+	// UTC time, such as `2020-01-01T12:00:00Z`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeMediaLiveChannelOutputStatisticsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaLiveChannelOutputStatisticsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaLiveChannelOutputStatisticsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Channel output information.
+		Infos []*ChannelOutputsStatistics `json:"Infos,omitempty" name:"Infos" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeMediaLiveChannelOutputStatisticsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaLiveChannelOutputStatisticsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -663,6 +847,15 @@ type InputSettingInfo struct {
 	InputAddress *string `json:"InputAddress,omitempty" name:"InputAddress"`
 }
 
+type InputStatistics struct {
+
+	// Input statistics of pipeline 0.
+	Pipeline0 []*PipelineInputStatistics `json:"Pipeline0,omitempty" name:"Pipeline0" list`
+
+	// Input statistics of pipeline 1.
+	Pipeline1 []*PipelineInputStatistics `json:"Pipeline1,omitempty" name:"Pipeline1" list`
+}
+
 type ModifyMediaLiveChannelRequest struct {
 	*tchttp.BaseRequest
 
@@ -839,6 +1032,47 @@ type OutputInfo struct {
 	Scte35Settings *Scte35SettingsInfo `json:"Scte35Settings,omitempty" name:"Scte35Settings"`
 }
 
+type OutputsStatistics struct {
+
+	// Output information of pipeline 0.
+	Pipeline0 []*PipelineOutputStatistics `json:"Pipeline0,omitempty" name:"Pipeline0" list`
+
+	// Output information of pipeline 1.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Pipeline1 []*PipelineOutputStatistics `json:"Pipeline1,omitempty" name:"Pipeline1" list`
+}
+
+type PipelineInputStatistics struct {
+
+	// Data timestamp in seconds.
+	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// Input bandwidth in bps.
+	NetworkIn *uint64 `json:"NetworkIn,omitempty" name:"NetworkIn"`
+
+	// Video information array.
+	// For `rtp/udp` input, the quantity is the number of `Pid` of the input video.
+	// For other inputs, the quantity is 1.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Video []*VideoPipelineInputStatistics `json:"Video,omitempty" name:"Video" list`
+
+	// Audio information array.
+	// For `rtp/udp` input, the quantity is the number of `Pid` of the input audio.
+	// For other inputs, the quantity is 1.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Audio []*AudioPipelineInputStatistics `json:"Audio,omitempty" name:"Audio" list`
+}
+
+type PipelineOutputStatistics struct {
+
+	// Timestamp.
+	// In seconds, indicating data time.
+	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// Output bandwidth in bps.
+	NetworkOut *uint64 `json:"NetworkOut,omitempty" name:"NetworkOut"`
+}
+
 type Scte35SettingsInfo struct {
 
 	// Whether to pass through SCTE-35 information. Valid values: NO_PASSTHROUGH/PASSTHROUGH. Default value: NO_PASSTHROUGH.
@@ -911,6 +1145,19 @@ func (r *StopMediaLiveChannelResponse) ToJsonString() string {
 
 func (r *StopMediaLiveChannelResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type VideoPipelineInputStatistics struct {
+
+	// Video FPS.
+	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
+
+	// Video bitrate in bps.
+	Rate *uint64 `json:"Rate,omitempty" name:"Rate"`
+
+	// Video `Pid`, which is available only if the input is `rtp/udp`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
 }
 
 type VideoTemplateInfo struct {

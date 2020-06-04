@@ -1423,6 +1423,9 @@ type ModifyDBInstanceNameResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
+		// Instance ID
+		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`

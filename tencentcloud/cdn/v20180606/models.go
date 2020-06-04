@@ -3413,6 +3413,7 @@ type Sort struct {
 	// Fields that can be sorted. Currently supports:
 	// `createTime`: domain name creation time.
 	// `certExpireTime`: certificate expiration time.
+	// Default value: createTime.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
 	// `asc` or `desc`. Default: `desc`.
