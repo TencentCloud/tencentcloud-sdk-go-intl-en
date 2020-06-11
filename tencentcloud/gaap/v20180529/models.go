@@ -3204,12 +3204,12 @@ type HTTPListener struct {
 	// Listener protocol
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Listener status. Valid values:
+	// Listener status:
 	// 0: running;
 	// 1: creating;
 	// 2: terminating;
 	// 3: adjusting origin server;
-	// 4: adjusting configuration.
+	// 4: modifying configuration.
 	ListenerStatus *uint64 `json:"ListenerStatus,omitempty" name:"ListenerStatus"`
 }
 
@@ -3227,12 +3227,12 @@ type HTTPSListener struct {
 	// Listener protocol. The value is `HTTP`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Listener status. Valid values:
+	// Listener status:
 	// 0: running;
 	// 1: creating;
 	// 2: terminating;
 	// 3: adjusting origin server;
-	// 4: adjusting configuration.
+	// 4: modifying configuration.
 	ListenerStatus *uint64 `json:"ListenerStatus,omitempty" name:"ListenerStatus"`
 
 	// Server SSL certificate ID of the listener
@@ -4237,11 +4237,11 @@ type ProxyGroupInfo struct {
 	RealServerRegionInfo *RegionDetail `json:"RealServerRegionInfo,omitempty" name:"RealServerRegionInfo"`
 
 	// Connection group status.
-	// Valid values:
+	// Where:
 	// 0: running;
 	// 1: creating;
 	// 4: terminating;
-	// 11: migrating connection;
+	// 11: connection migrating.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Tag list.
@@ -4281,17 +4281,16 @@ type ProxyInfo struct {
 	// Concurrence. Unit: requests/second.
 	Concurrent *int64 `json:"Concurrent,omitempty" name:"Concurrent"`
 
-	// Connection status. Valid values:
+	// Connection status:
 	// RUNNING: running;
 	// CREATING: creating;
 	// DESTROYING: terminating;
 	// OPENING: enabling;
 	// CLOSING: disabling;
 	// CLOSED: disabled;
-	// ADJUSTING: adjusting configuration;
-	// ISOLATING: isolating;
-	// ISOLATED: isolated;
-	// CLONING: copying;
+	// ADJUSTING: adjusting configuration
+	// ISOLATING: isolating (it’s triggered when the account is in arrears);
+	// ISOLATED: isolated (it’s triggered when the account is in arrears);
 	// UNKNOWN: unknown status.
 	Status *string `json:"Status,omitempty" name:"Status"`
 

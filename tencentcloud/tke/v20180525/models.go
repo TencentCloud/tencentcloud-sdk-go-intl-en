@@ -264,6 +264,21 @@ type ClusterNetworkSettings struct {
 
 type CreateClusterAsGroupRequest struct {
 	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The pass-through parameters for scaling group creation, in the format of a JSON string. For more information, see the [CreateAutoScalingGroup](https://cloud.tencent.com/document/api/377/20440) API. The **LaunchConfigurationId** is created with the LaunchConfigurePara parameter, which does not support data entry.
+	AutoScalingGroupPara *string `json:"AutoScalingGroupPara,omitempty" name:"AutoScalingGroupPara"`
+
+	// The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://cloud.tencent.com/document/api/377/20447) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it’s set through the **UserScript**.
+	LaunchConfigurePara *string `json:"LaunchConfigurePara,omitempty" name:"LaunchConfigurePara"`
+
+	// Advanced configuration information of the node
+	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
+
+	// Node label array
+	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
 }
 
 func (r *CreateClusterAsGroupRequest) ToJsonString() string {
@@ -278,6 +293,12 @@ func (r *CreateClusterAsGroupRequest) FromJsonString(s string) error {
 type CreateClusterAsGroupResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Launch configuration ID
+		LaunchConfigurationId *string `json:"LaunchConfigurationId,omitempty" name:"LaunchConfigurationId"`
+
+		// Scaling group ID
+		AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -295,6 +316,15 @@ func (r *CreateClusterAsGroupResponse) FromJsonString(s string) error {
 
 type CreateClusterEndpointRequest struct {
 	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The ID of the subnet where the cluster’s port is located (only needs to be entered when the non-public network access is enabled, and must be within the subnet of the cluster’s VPC). 
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Whether public network access is enabled or not (True = public network access, FALSE = private network access, with the default value as FALSE).
+	IsExtranet *bool `json:"IsExtranet,omitempty" name:"IsExtranet"`
 }
 
 func (r *CreateClusterEndpointRequest) ToJsonString() string {
@@ -326,6 +356,12 @@ func (r *CreateClusterEndpointResponse) FromJsonString(s string) error {
 
 type CreateClusterEndpointVipRequest struct {
 	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Security policy opens single IP or CIDR to the Internet (for example: “192.168.1.0/24”, with “reject all” as the default).
+	SecurityPolicies []*string `json:"SecurityPolicies,omitempty" name:"SecurityPolicies" list`
 }
 
 func (r *CreateClusterEndpointVipRequest) ToJsonString() string {
@@ -340,6 +376,9 @@ func (r *CreateClusterEndpointVipRequest) FromJsonString(s string) error {
 type CreateClusterEndpointVipResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Request job’s FlowId
+		RequestFlowId *int64 `json:"RequestFlowId,omitempty" name:"RequestFlowId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -524,6 +563,15 @@ type DataDisk struct {
 
 type DeleteClusterAsGroupsRequest struct {
 	*tchttp.BaseRequest
+
+	// The cluster ID, obtained through the [DescribeClusters](https://cloud.tencent.com/document/api/457/31862) API.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster scaling group ID list
+	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds" list`
+
+	// Whether to keep nodes in the scaling group. Default to **false** (not keep)
+	KeepInstance *bool `json:"KeepInstance,omitempty" name:"KeepInstance"`
 }
 
 func (r *DeleteClusterAsGroupsRequest) ToJsonString() string {
@@ -555,6 +603,12 @@ func (r *DeleteClusterAsGroupsResponse) FromJsonString(s string) error {
 
 type DeleteClusterEndpointRequest struct {
 	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Whether public network access is enabled or not (True = public network access, FALSE = private network access, with the default value as FALSE).
+	IsExtranet *bool `json:"IsExtranet,omitempty" name:"IsExtranet"`
 }
 
 func (r *DeleteClusterEndpointRequest) ToJsonString() string {
@@ -586,6 +640,9 @@ func (r *DeleteClusterEndpointResponse) FromJsonString(s string) error {
 
 type DeleteClusterEndpointVipRequest struct {
 	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
 
 func (r *DeleteClusterEndpointVipRequest) ToJsonString() string {
@@ -645,15 +702,12 @@ type DeleteClusterInstancesResponse struct {
 	Response *struct {
 
 		// IDs of deleted instances
-	// Note: This field may return null, indicating that no valid value was found.
 		SuccInstanceIds []*string `json:"SuccInstanceIds,omitempty" name:"SuccInstanceIds" list`
 
 		// IDs of instances failed to be deleted
-	// Note: This field may return null, indicating that no valid value was found.
 		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds" list`
 
 		// IDs of instances that cannot be found
-	// Note: This field may return null, indicating that no valid value was found.
 		NotFoundInstanceIds []*string `json:"NotFoundInstanceIds,omitempty" name:"NotFoundInstanceIds" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -786,6 +840,12 @@ func (r *DeleteClusterRouteTableResponse) FromJsonString(s string) error {
 
 type DescribeClusterEndpointStatusRequest struct {
 	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Whether public network access is enabled or not (True = public network access, FALSE = private network access, with the default value as FALSE).
+	IsExtranet *bool `json:"IsExtranet,omitempty" name:"IsExtranet"`
 }
 
 func (r *DescribeClusterEndpointStatusRequest) ToJsonString() string {
@@ -800,6 +860,9 @@ func (r *DescribeClusterEndpointStatusRequest) FromJsonString(s string) error {
 type DescribeClusterEndpointStatusResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Queries cluster access port status (Created = successfully enabled; Creating = in the process of being enabled; NotFound = not enabled).
+		Status *string `json:"Status,omitempty" name:"Status"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -817,6 +880,9 @@ func (r *DescribeClusterEndpointStatusResponse) FromJsonString(s string) error {
 
 type DescribeClusterEndpointVipStatusRequest struct {
 	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
 
 func (r *DescribeClusterEndpointVipStatusRequest) ToJsonString() string {
@@ -831,6 +897,12 @@ func (r *DescribeClusterEndpointVipStatusRequest) FromJsonString(s string) error
 type DescribeClusterEndpointVipStatusResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Port operation status (Creating = in the process of creation; CreateFailed = creation has failed; Created = creation completed; Deleting = in the process of deletion; DeletedFailed = deletion has failed; Deleted = deletion completed; NotFound = operation not found)
+		Status *string `json:"Status,omitempty" name:"Status"`
+
+		// Reason for operation failure
+		ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1566,6 +1638,12 @@ func (r *ModifyClusterAttributeResponse) FromJsonString(s string) error {
 
 type ModifyClusterEndpointSPRequest struct {
 	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Security policy opens single IP or CIDR block to the Internet (for example: “192.168.1.0/24”, with “reject all” as the default).
+	SecurityPolicies []*string `json:"SecurityPolicies,omitempty" name:"SecurityPolicies" list`
 }
 
 func (r *ModifyClusterEndpointSPRequest) ToJsonString() string {
@@ -1695,6 +1773,15 @@ type RunSecurityServiceEnabled struct {
 
 	// Whether to enable [Cloud Security](/document/product/296). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
 	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+}
+
+type Tag struct {
+
+	// Tag key.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Tag value.
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type TagSpecification struct {

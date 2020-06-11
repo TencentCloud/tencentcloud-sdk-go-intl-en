@@ -43,6 +43,156 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewDescribeCallDetailRequest() (request *DescribeCallDetailRequest) {
+    request = &DescribeCallDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeCallDetail")
+    return
+}
+
+func NewDescribeCallDetailResponse() (response *DescribeCallDetailResponse) {
+    response = &DescribeCallDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the user list and user call quality data in a specified time period. It can query data of up to 6 users for the last 5 days, and the query time range cannot exceed 1 hour.
+func (c *Client) DescribeCallDetail(request *DescribeCallDetailRequest) (response *DescribeCallDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeCallDetailRequest()
+    }
+    response = NewDescribeCallDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeHistoryScaleRequest() (request *DescribeHistoryScaleRequest) {
+    request = &DescribeHistoryScaleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeHistoryScale")
+    return
+}
+
+func NewDescribeHistoryScaleResponse() (response *DescribeHistoryScaleResponse) {
+    response = &DescribeHistoryScaleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the number of historical rooms and users for the last 5 days. It can query once per minute.
+func (c *Client) DescribeHistoryScale(request *DescribeHistoryScaleRequest) (response *DescribeHistoryScaleResponse, err error) {
+    if request == nil {
+        request = NewDescribeHistoryScaleRequest()
+    }
+    response = NewDescribeHistoryScaleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRealtimeNetworkRequest() (request *DescribeRealtimeNetworkRequest) {
+    request = &DescribeRealtimeNetworkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRealtimeNetwork")
+    return
+}
+
+func NewDescribeRealtimeNetworkResponse() (response *DescribeRealtimeNetworkResponse) {
+    response = &DescribeRealtimeNetworkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query real-time network status for the last 24 hours according to `sdkappid`, including upstream and downstream packet losses. The query time range cannot exceed 1 hour.
+func (c *Client) DescribeRealtimeNetwork(request *DescribeRealtimeNetworkRequest) (response *DescribeRealtimeNetworkResponse, err error) {
+    if request == nil {
+        request = NewDescribeRealtimeNetworkRequest()
+    }
+    response = NewDescribeRealtimeNetworkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRealtimeQualityRequest() (request *DescribeRealtimeQualityRequest) {
+    request = &DescribeRealtimeQualityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRealtimeQuality")
+    return
+}
+
+func NewDescribeRealtimeQualityResponse() (response *DescribeRealtimeQualityResponse) {
+    response = &DescribeRealtimeQualityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query real-time quality data for the last 24 hours according to `sdkappid`, including the room entry success rate, instant playback rate of the first frame, audio lag rate, and video lag rate. The query time range cannot exceed 1 hour.
+func (c *Client) DescribeRealtimeQuality(request *DescribeRealtimeQualityRequest) (response *DescribeRealtimeQualityResponse, err error) {
+    if request == nil {
+        request = NewDescribeRealtimeQualityRequest()
+    }
+    response = NewDescribeRealtimeQualityResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRealtimeScaleRequest() (request *DescribeRealtimeScaleRequest) {
+    request = &DescribeRealtimeScaleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRealtimeScale")
+    return
+}
+
+func NewDescribeRealtimeScaleResponse() (response *DescribeRealtimeScaleResponse) {
+    response = &DescribeRealtimeScaleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the real-time scale for the last 24 hours according to `sdkappid`. The query time range cannot exceed 1 hour.
+func (c *Client) DescribeRealtimeScale(request *DescribeRealtimeScaleRequest) (response *DescribeRealtimeScaleResponse, err error) {
+    if request == nil {
+        request = NewDescribeRealtimeScaleRequest()
+    }
+    response = NewDescribeRealtimeScaleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRoomInformationRequest() (request *DescribeRoomInformationRequest) {
+    request = &DescribeRoomInformationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRoomInformation")
+    return
+}
+
+func NewDescribeRoomInformationResponse() (response *DescribeRoomInformationResponse) {
+    response = &DescribeRoomInformationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the room list for the last 5 days according to `sdkappid`. It returns 10 calls by default and up to 100 calls at a time.
+func (c *Client) DescribeRoomInformation(request *DescribeRoomInformationRequest) (response *DescribeRoomInformationResponse, err error) {
+    if request == nil {
+        request = NewDescribeRoomInformationRequest()
+    }
+    response = NewDescribeRoomInformationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDismissRoomRequest() (request *DismissRoomRequest) {
     request = &DismissRoomRequest{
         BaseRequest: &tchttp.BaseRequest{},

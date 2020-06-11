@@ -44,13 +44,13 @@ type AllocateHostsRequest struct {
 	// Configuration of prepaid instances. You can use the parameter to specify the attributes of prepaid instances, such as the subscription period and the auto-renewal plan. This parameter is required for prepaid instances.
 	HostChargePrepaid *ChargePrepaid `json:"HostChargePrepaid,omitempty" name:"HostChargePrepaid"`
 
-	// The billing method of an instance. Currently only `PREPAID` is supported.
+	// Instance billing model, only monthly or yearly subscription supported. Default value: `PREPAID'.
 	HostChargeType *string `json:"HostChargeType,omitempty" name:"HostChargeType"`
 
 	// CDH instance model. Default value: `HS1`.
 	HostType *string `json:"HostType,omitempty" name:"HostType"`
 
-	// The quantity of CDH instances you want to purchase.
+	// Quantity of CDH instances purchased. Default value: 1.
 	HostCount *uint64 `json:"HostCount,omitempty" name:"HostCount"`
 
 	// Tag description. You can specify the parameter to associate a tag with an instance.
@@ -133,7 +133,7 @@ type AssociateSecurityGroupsRequest struct {
 	// ID of the security group to be associated, such as `sg-efil73jd`. Only one security group can be associated.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 
-	// ID(s) of the instance(s) to be associated，such as `ins-lesecurk`. You can specify multiple instances.
+	// ID of the instance bound in the format of ins-lesecurk. You can specify up to 100 instances in each request.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
@@ -237,7 +237,7 @@ type CreateImageRequest struct {
 	// Image name
 	ImageName *string `json:"ImageName,omitempty" name:"ImageName"`
 
-	// The ID of the instance used to create an image
+	// Instance ID used to create an image.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Image description
@@ -249,13 +249,13 @@ type CreateImageRequest struct {
 	// Whether to enable Sysprep when creating a Windows image
 	Sysprep *string `json:"Sysprep,omitempty" name:"Sysprep"`
 
-	// The ID of the data disk used to create an image
+	// Specified data disk ID included in the full image created from the instance.
 	DataDiskIds []*string `json:"DataDiskIds,omitempty" name:"DataDiskIds" list`
 
-	// The ID of the snapshot used to create an image. A system disk snapshot must be included.
+	// Specified snapshot ID used to create an image. A system disk snapshot must be included. It cannot be passed together with `InstanceId`.
 	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds" list`
 
-	// Verifies the validity of the request without affecting the resources involved.
+	// Success status of this request, without affecting the resources involved
 	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
 }
 
@@ -368,7 +368,7 @@ type DataDisk struct {
 type DeleteDisasterRecoverGroupsRequest struct {
 	*tchttp.BaseRequest
 
-	// List of spread placement group IDs, which can be obtained by calling the [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810) API.
+	// ID list of spread placement groups, obtainable via the [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810) API. You can operate up to 100 spread placement groups in each request.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds" list`
 }
 
@@ -516,7 +516,7 @@ func (r *DescribeDisasterRecoverGroupQuotaResponse) FromJsonString(s string) err
 type DescribeDisasterRecoverGroupsRequest struct {
 	*tchttp.BaseRequest
 
-	// List of spread placement group IDs.
+	// ID list of spread placement groups. You can operate up to 100 spread placement groups in each request.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds" list`
 
 	// Name of a spread placement group. Fuzzy match is supported.
@@ -565,12 +565,17 @@ func (r *DescribeDisasterRecoverGroupsResponse) FromJsonString(s string) error {
 type DescribeHostsRequest struct {
 	*tchttp.BaseRequest
 
-	// Filters.
-	// <li> `zone` - String - Optional - Filter results by availability zone.</li>
-	// <li> `project-id` - Integer - Optional - Filter results by project ID. You can call `DescribeProject` or log in to the console to view the list of existing projects. You can also create a new project by calling `AddProject`.</li>
-	// <li> `host-id` - String - Optional - Filter results by CDH ID. CDH IDs are in the format of `host-11112222`.</li>
-	// <li> `host-name` - String - Optional - Filter results by CDH instance name.</li>
-	// <li> `host-state` - String - Optional - Filter results by CDH instance state. (PENDING: creating | LAUNCH_FAILURE: creation failed | RUNNING: running | EXPIRED: expired)</li>
+	// <li><strong>zone</strong></li>
+	// <p style="padding-left: 30px;">Filter results by **<strong>availability zones</strong>**. For example, availability zone: ap-guangzhou-1;</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/6091">list of availability zones</a></p>
+	// <li><strong>project-id</strong></li>
+	// <p style="padding-left: 30px;">Filter results by **<strong>project ID</strong>**. You can query the existing project list through the [DescribeProject](https://cloud.tencent.com/document/api/378/4400) API or [CVM console](https://console.cloud.tencent.com/cvm/index), or create a project by calling the [AddProject](https://cloud.tencent.com/document/api/378/4398) API. For example, project ID: 1002189;</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Required: no</p>
+	// <li><strong>host-id</strong></li>
+	// <p style="padding-left: 30px;">Filter results by **<strong>[CDH](https://cloud.tencent.com/document/product/416) ID</strong>**. For example, [CDH](https://cloud.tencent.com/document/product/416) ID: host-xxxxxxxx;</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
+	// <li><strong>state</strong></li>
+	// <p style="padding-left: 30px;">Filter results by **<strong>CDH instance name</strong>**. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
+	// <li><strong>state</strong></li>
+	// <p style="padding-left: 30px;">Filter results by **<strong>CDH instance status </strong>**. (PENDING: creating | LAUNCH_FAILURE: creation failed | RUNNING: running | EXPIRED: expired)</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
+	// Each request can have up to 10 `Filters` and 5 `Filters.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Offset; default value: 0.
@@ -815,9 +820,10 @@ func (r *DescribeInstanceFamilyConfigsResponse) FromJsonString(s string) error {
 type DescribeInstanceTypeConfigsRequest struct {
 	*tchttp.BaseRequest
 
-	// Filters.
-	// <li> `zone` - String - Optional - Filter results by [availability zone](https://cloud.tencent.com/document/product/213/15753#ZoneInfo).</li>
-	// <li> `instance-family` - String - Optional - Filter results by instance model family, such as `S1`, `I1`, and `M1`.</li>
+	// <li><strong>zone</strong></li>
+	// <p style="padding-left: 30px;">Filter results by **<strong>availability zones</strong>**. For example, availability zone: ap-guangzhou-1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/6091">list of availability zones</a></p>
+	// <li><strong>instance-family</strong></li>
+	// <p style="padding-left: 30px;">Filter results by **<strong>instance models</strong>**. For example, instance models: S1, I1 and M1.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Required: no</p>
 	// Each request can have up to 10 `Filters` and 1 `Filters.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
@@ -892,7 +898,7 @@ func (r *DescribeInstanceVncUrlResponse) FromJsonString(s string) error {
 type DescribeInstancesOperationLimitRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID(s). To obtain the instance IDs, you can call [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The instance ID format is `ins-xxxxxxxx`. For more information on the format of this parameter, see the `id.N` section of [API Introduction](https://cloud.tencent.com/document/api/213/15688)). The maximum number of instance IDs in each request is 100.
+	// Query by instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API. For example, instance ID: ins-xxxxxxxx. (For the specific format, refer to section `ids.N` of the API [Introduction](https://cloud.tencent.com/document/api/213/15688).) You can query up to 100 instances in each request.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 	// Operation on the instance(s).
@@ -933,7 +939,7 @@ func (r *DescribeInstancesOperationLimitResponse) FromJsonString(s string) error
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID(s) in the format of `ins-xxxxxxxx`. For more information on the format of this parameter, see the `id.N` section of [API Introduction](https://cloud.tencent.com/document/api/213/15688). The maximum number of instances in each request is 100. You cannot specify `InstanceIds` and `Filters` at the same time.
+	// Query by instance ID(s). For example, instance ID: `ins-xxxxxxxx`. For the specific format, refer to section `Ids.N` of the API [Introduction](https://cloud.tencent.com/document/api/213/15688). You can query up to 100 instances in each request. However, `InstanceIds` and `Filters` cannot be specified at the same time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 	// Filters.
@@ -997,7 +1003,7 @@ func (r *DescribeInstancesResponse) FromJsonString(s string) error {
 type DescribeInstancesStatusRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID(s) in the format of `ins-xxxxxxxx`. For more information on the format of this parameter, see the `id.N` section of [API Introduction](https://cloud.tencent.com/document/api/213/15688). The maximum number of instances in each request is 100.
+	// Query by instance ID(s). For example, instance ID: `ins-xxxxxxxx`. For the specific format, refer to section `Ids.N` of the API [Introduction](https://cloud.tencent.com/document/api/213/15688). You can query up to 100 instances in each request.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 	// Offset; default value: 0. For more information on `Offset`, see the corresponding section in API [Introduction](https://intl.cloud.tencent.com/document/product/377).
@@ -1023,7 +1029,7 @@ type DescribeInstancesStatusResponse struct {
 		// Number of instance states meeting the filtering conditions.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// List of [instance states](https://cloud.tencent.com/document/api/213/15728).
+		// [Instance status](https://cloud.tencent.com/document/api/213/15728) list.
 		InstanceStatusSet []*InstanceStatus `json:"InstanceStatusSet,omitempty" name:"InstanceStatusSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1159,6 +1165,77 @@ func (r *DescribeRegionsResponse) ToJsonString() string {
 }
 
 func (r *DescribeRegionsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReservedInstancesOfferingsRequest struct {
+	*tchttp.BaseRequest
+
+	// Dry run. Default value: false.
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://cloud.tencent.com/document/api/213/15688).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant sections in API [Introduction](https://cloud.tencent.com/document/api/213/15688).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The maximum duration as a filter, 
+	// in seconds.
+	// Default value: 94608000.
+	MaxDuration *int64 `json:"MaxDuration,omitempty" name:"MaxDuration"`
+
+	// The minimum duration as a filter, 
+	// in seconds.
+	// Default value: 2592000.
+	MinDuration *int64 `json:"MinDuration,omitempty" name:"MinDuration"`
+
+	// <li><strong>zone</strong></li>
+	// <p style="padding-left: 30px;">Filters by the **<strong>availability zones</strong>** in which the Reserved Instances can be purchased, such as ap-guangzhou-1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/6091">Availability Zones</a></p>
+	// <li><strong>duration</strong></li>
+	// <p style="padding-left: 30px;">Filters by the **<strong>duration</strong>** of the Reserved Instance, in seconds. For example, 31536000.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Unit: second</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: 31536000 (1 year) | 94608000 (3 years)</p>
+	// <li><strong>instance-type</strong></li>
+	// <p style="padding-left: 30px;">Filters by **<strong>type of the Reserved Instance</strong>**, such as S3.MEDIUM4..</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/11518">Instance Types</a></p>
+	// <li><strong>offering-type</strong></li>
+	// <p style="padding-left: 30px;">Filters by **<strong>payment term</strong>**, such as All Upfront.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: All Upfront</p>
+	// <li><strong>product-description</strong></li>
+	// <p style="padding-left: 30px;">Filters by the **<strong>platform description </strong>** (operating system) of the Reserved Instance, such as linux.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: linux</p>
+	// <li><strong>reserved-instances-offering-id</strong></li>
+	// <p style="padding-left: 30px;">Filters by **<strong>Reserved Instance ID</strong>, in the form of 650c138f-ae7e-4750-952a-96841d6e9fc1.</p><p style="padding-left: 30px;">Type: StringString</p><p style="padding-left: 30px;">Required: no</p>
+	// Each request can have up to 10 `Filters` and 5 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeReservedInstancesOfferingsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeReservedInstancesOfferingsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReservedInstancesOfferingsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of Reserved Instances that meet the condition.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The list of Reserved Instances that meet the condition.
+		ReservedInstancesOfferingsSet []*ReservedInstancesOffering `json:"ReservedInstancesOfferingsSet,omitempty" name:"ReservedInstancesOfferingsSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeReservedInstancesOfferingsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeReservedInstancesOfferingsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1425,8 +1502,8 @@ type Externals struct {
 	// Note: This field may return null, indicating that no valid value is found.
 	ReleaseAddress *bool `json:"ReleaseAddress,omitempty" name:"ReleaseAddress"`
 
-	// Unsupported network types
-	// Note: This field may return null, indicating that no valid value is found.
+	// Not supported network. Value: <br><li>BASIC: classic network<br><li>VPC1.0: VPC1.0
+	// Note: This field may return null, indicating that no valid value was found.
 	UnsupportNetworks []*string `json:"UnsupportNetworks,omitempty" name:"UnsupportNetworks" list`
 
 	// Attributes of local HDD storage
@@ -1767,10 +1844,10 @@ func (r *InquiryPriceResetInstancesInternetMaxBandwidthResponse) FromJsonString(
 type InquiryPriceResetInstancesTypeRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The maximum number of instances in each request is 1.
+	// Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API. The maximum number of instances in each request is 1.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
-	// Instance model. Different resource specifications are specified for different models. For specific values, see the instance resource specification table. You can also obtain the latest specification list by calling the API for querying the list of instance resource specifications.
+	// Instance model. Resources vary with the instance model. Specific values can be found in the tables of [Instance Types] (https://cloud.tencent.com/document/product/213/11518) or in the latest specifications via the [DescribeInstanceTypeConfigs] (https://cloud.tencent.com/document/product/213/15749) API.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
@@ -1880,7 +1957,7 @@ type InquiryPriceRunInstancesRequest struct {
 	// Number of instances to be purchased. Value range: [1, 100]; default value: 1. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on quota, see [CVM instance purchase limit](https://intl.cloud.tencent.com/document/product/213/2664).
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
 
-	// Instance name to be displayed. <br><li>If this parameter is not specified, "Unnamed" will be displayed by default. </li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`. </li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and the instance name body is `server_`, the instance names will be `server_1` and `server_2`.
+	// Instance name to be displayed.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and name them as `server_`, the instance names will be displayed as `server_1` and `server_2`.</li><li>The instance name contains up to 60 characters (including pattern strings).
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
@@ -2183,9 +2260,9 @@ type ItemPrice struct {
 	// Note: this field may return null, indicating that no valid value is obtained.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 
-	// Percentage of the original price. For example, if you enter "20", the discounted price will be 20% of the original price.
-	// Note: this field may return null, indicating that no valid value is obtained.
-	Discount *uint64 `json:"Discount,omitempty" name:"Discount"`
+	// Percentage of the original price. For example, if you enter "20.0", the discounted price will be 20% of the original price.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
 
 	// The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to the unit price for the usage between 0 and ∞ hours.
 	// Note: this field may return null, indicating that no valid value is obtained.
@@ -2316,6 +2393,9 @@ type ModifyHostsAttributeRequest struct {
 
 	// Auto renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+
+	// Project ID. You can create a project by using the [AddProject](https://cloud.tencent.com/doc/api/403/4398) API and obtain its ID from the response parameter `projectId` of the [`DescribeProject`](https://cloud.tencent.com/document/product/378/4400) API. Subsequently, the project ID can be used to filter results when you query instances by calling the [DescribeHosts](https://cloud.tencent.com/document/api/213/16474) API.
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
 func (r *ModifyHostsAttributeRequest) ToJsonString() string {
@@ -2468,10 +2548,10 @@ func (r *ModifyInstancesAttributeResponse) FromJsonString(s string) error {
 type ModifyInstancesProjectRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
+	// Instance IDs. To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. You can operate up to 100 instances in each request.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
-	// Project ID. You can create a project by calling [AddProject](https://cloud.tencent.com/doc/api/403/4398). When calling [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) to query instances, the project IDs can be used to filter the results.
+	// Project ID. You can create a project by using the [AddProject](https://cloud.tencent.com/doc/api/403/4398) API and obtain its ID from the response parameter `projectId` of the [`DescribeProject`](https://cloud.tencent.com/document/product/378/4400) API. Subsequently, the project ID can be used to filter results when you query instances by calling the [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
@@ -2639,10 +2719,56 @@ type Price struct {
 	BandwidthPrice *ItemPrice `json:"BandwidthPrice,omitempty" name:"BandwidthPrice"`
 }
 
+type PurchaseReservedInstancesOfferingRequest struct {
+	*tchttp.BaseRequest
+
+	// The number of the Reserved Instance you are purchasing.
+	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// The ID of the Reserved Instance.
+	ReservedInstancesOfferingId *string `json:"ReservedInstancesOfferingId,omitempty" name:"ReservedInstancesOfferingId"`
+
+	// Dry run
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.<br>For more information, see Ensuring Idempotency.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+}
+
+func (r *PurchaseReservedInstancesOfferingRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PurchaseReservedInstancesOfferingRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PurchaseReservedInstancesOfferingResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// 
+		ReservedInstanceId *string `json:"ReservedInstanceId,omitempty" name:"ReservedInstanceId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *PurchaseReservedInstancesOfferingResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PurchaseReservedInstancesOfferingResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type RebootInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
+	// Instance IDs. To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. You can operate up to 100 instances in each request.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 	// Whether to force restart an instance after a normal restart fails. Valid values: <br><li>TRUE: force restart an instance after a normal restart fails <br><li>FALSE: do not force restart an instance after a normal restart fails <br><br>Default value: FALSE.
@@ -2734,17 +2860,56 @@ type ReservedInstances struct {
 	OfferingType *string `json:"OfferingType,omitempty" name:"OfferingType"`
 }
 
+type ReservedInstancesOffering struct {
+
+	// The availability zones in which the Reserved Instance can be purchased, such as ap-guangzhou-1.
+	// Valid value: <a href="https://cloud.tencent.com/document/product/213/6091">Availability Zones</a>
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The currency of the Reserved Instance you are purchasing. It's specified using ISO 4217 standard currency.
+	// Valid value: USD.
+	CurrencyCode *string `json:"CurrencyCode,omitempty" name:"CurrencyCode"`
+
+	// The **duration** of the Reserved Instance in seconds, which is the purchased usage period. For example, 31536000.
+	// Unit: second
+	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
+
+	// The purchase price of the Reserved Instance, such as 4000.0.
+	// Unit: this field uses the currency code specified in `currencyCode`, and only supports “USD” at this time.
+	FixedPrice *float64 `json:"FixedPrice,omitempty" name:"FixedPrice"`
+
+	// The instance type on which the Reserved Instance can be used, such as S3.MEDIUM4.
+	// Valid value: <a href="https://cloud.tencent.com/product/cvm/instances">Instance Types</a>
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// The payment term of the Reserved Instance, such as All Upfront.
+	// Valid value: All Upfront.
+	OfferingType *string `json:"OfferingType,omitempty" name:"OfferingType"`
+
+	// The ID of the Reserved Instance offering, such as 650c138f-ae7e-4750-952a-96841d6e9fc1.
+	ReservedInstancesOfferingId *string `json:"ReservedInstancesOfferingId,omitempty" name:"ReservedInstancesOfferingId"`
+
+	// The platform description (operating system) of the Reserved Instance, such as linux.
+	// Valid value: linux.
+	ProductDescription *string `json:"ProductDescription,omitempty" name:"ProductDescription"`
+
+	// The hourly usage price of the Reserved Instance, such as 0.0.
+	// Currently, the only supported payment is “All Upfront”, so the default value of `UsagePrice` is 0 USD/hr.
+	// Unit: USD/hr. This field uses the currency code specified in `currencyCode`, and only supports “USD” at this time.
+	UsagePrice *float64 `json:"UsagePrice,omitempty" name:"UsagePrice"`
+}
+
 type ResetInstanceRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID. To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// [Image](/document/product/213/4940) ID in the format of `img-xxx`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For IDs of `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information; for IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://cloud.tencent.com/document/api/213/15715) and look for `ImageId` in the response.</li>
-	// <br>The current image will be used by default.
+	// Specified effective [image](https://cloud.tencent.com/document/product/213/4940) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways:<br/><li>for IDs of `public images`, `custom images`, and `shared images`, log in to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE); for IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list).</li><li>Call the API [DescribeImages](https://cloud.tencent.com/document/api/213/15715) and look for `ImageId` in the response.</li>
+	// <br>Default value: current image.
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
-	// Configuration of the system disk of the instance. For instances with a cloud disk as the system disk, you can expand the system disk by using this parameter to specify the new capacity after reinstallation. If the parameter is not specified, the system disk capacity remains unchanged by default. You can only expand the capacity of the system disk; reducing its capacity is not supported. When reinstalling the system, you can only modify the capacity of the system disk, not the type.
+	// System disk configurations in the instance. For instances with a cloud disk as the system disk, you can expand the capacity of the system disk to the specified value after re-installation by using this parameter. If the parameter is not specified, lower system disk capacity will be automatically expanded to the image size, and extra disk costs are generated. You can only expand but cannot reduce the system disk capacity. By re-installing the system, you only modify the system disk capacity, but not the type.
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
 	// Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
@@ -2753,7 +2918,7 @@ type ResetInstanceRequest struct {
 	// Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Monitor and Cloud Security. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
 
-	// You can use this parameter to specify a new HostName for the instance when reinstalling the system.
+	// Host name of the CVM, editable during the system reinstallation. <br><li>Periods (.) or hyphens (-) cannot be the start or end of a host name or appear consecutively in a host name.<br><li>For Windows instances, the host name must consist of 2-15 characters , including uppercase and lowercase letters, numbers, or hyphens (-). It cannot contain periods (.) or contain only numbers.<br><li>For other instances, such as Linux instances, the host name must consist of 2-60 characters, including multiple periods (.), and allows uppercase and lowercase letters, numbers, or hyphens (-) between any two periods (.).
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
 }
 
@@ -2833,12 +2998,12 @@ type ResetInstancesPasswordRequest struct {
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
-	// Login password of the instance(s). The password requirements vary among different operating systems:
-	// For a Linux instance, the password must be 8 to 30 characters in length; password with more than 12 characters is recommended. It cannot begin with "/", and must contain at least one character from three of the following categories: <br><li>Lowercase letters: [a-z]<br><li>Uppercase letters: [A-Z]<br><li>Numbers: 0-9<br><li>Special characters: ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/:
-	// For a Windows CVM, the password must be 12 to 30 characters in length. It cannot begin with "/" or contain your username. It must contain at least one character from three of the following categories: <br><li>Lowercase letters: [a-z]<br><li>Uppercase letters: [A-Z]<br><li>Numbers: 0-9<br><li>Special characters: ()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/:<br><li>If the specified instances include both `Linux` and `Windows` instances, you will need to follow the password requirements for `Windows` instances.
+	// Login password of the instance. The rule of password complexity varies with operating systems:
+	// For a Linux instance, the password must be 8 to 30 characters in length; password with more than 12 characters is recommended. It cannot begin with "/", and must contain at least three types of the following:<br><li>Lowercase letters: [a-z]<br><li>Uppercase letters: [A-Z]<br><li>Numbers: 0-9<br><li>Special characters: ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/
+	// For a Windows CVM, the password must be 12 to 30 characters in length. It cannot begin with "/" or contain your username. It must contain at least three types of the following:<br><li>Lowercase letters: [a-z]<br><li>Uppercase letters: [A-Z]<br><li>Numbers: 0-9<br><li>Special characters: ()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<li>If the specified instances include both `Linux` and `Windows` instances, you need to follow the password requirements for `Windows` instances.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// Operating system username of the instance for which you want to reset the password. The length of the username cannot exceed 64 characters.
+	// Username of the instance operating system for which the password needs to be reset. This parameter is limited to 64 characters.
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 
 	// Whether to force shut down a running instances. It is recommended to manually shut down a running instance before resetting the user password. Valid values: <br><li>TRUE: force shut down an instance after a normal shutdown fails. <br><li>FALSE: do not force shut down an instance after a normal shutdown fails. <br><br>Default value: FALSE. <br><br>A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force shut down a CVM when it cannot be shut down normally.
@@ -2875,13 +3040,13 @@ func (r *ResetInstancesPasswordResponse) FromJsonString(s string) error {
 type ResetInstancesTypeRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The maximum number of instances in each request is 1.
+	// Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API. The maximum number of instances for each request is 1.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 	// Instance model. Different resource specifications are specified for different models. For specific values, call [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749) to get the latest specification list or refer to [Instance Types](https://cloud.tencent.com/document/product/213/11518).
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
-	// Whether to force shut down a running instances. It is recommended to manually shut down a running instance before resetting the user password. Valid values: <br><li>TRUE: force shut down an instance after a normal shutdown fails. <br><li>FALSE: do not force shut down an instance after a normal shutdown fails. <br><br>Default value: FALSE. <br><br>A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force shut down a CVM when it cannot be shut down normally.
+	// Forced shutdown of a running instances. We recommend you firstly try to shut down a running instance manually. Valid values: <br><li>TRUE: forced shutdown of an instance after a normal shutdown fails.<br><li>FALSE: no forced shutdown of an instance after a normal shutdown fails.<br><br>Default value: FALSE.<br><br>A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force a CVM to shut off if the normal shutdown fails.
 	ForceStop *bool `json:"ForceStop,omitempty" name:"ForceStop"`
 }
 
@@ -2986,7 +3151,7 @@ type RunInstancesRequest struct {
 	// The number of instances to be purchased. Value range: [1, 100]; default value: 1. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on the quota, see [CVM instance purchase limit](https://intl.cloud.tencent.com/document/product/213/2664).
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
 
-	// Instance name to be displayed. <br><li>If this parameter is not specified, "Unnamed" will be displayed by default. </li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`. </li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and the instance name body is `server_`, the instance names will be `server_1` and `server_2`.
+	// Instance name to be displayed.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and name them as `server_`, the instance names will be displayed as `server_1` and `server_2`.</li><li>The instance name contains up to 60 characters (including pattern strings).
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
