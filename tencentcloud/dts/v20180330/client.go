@@ -790,3 +790,28 @@ func (c *Client) StopMigrateJob(request *StopMigrateJobRequest) (response *StopM
     err = c.Send(request, response)
     return
 }
+
+func NewSwitchDrToMasterRequest() (request *SwitchDrToMasterRequest) {
+    request = &SwitchDrToMasterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dts", APIVersion, "SwitchDrToMaster")
+    return
+}
+
+func NewSwitchDrToMasterResponse() (response *SwitchDrToMasterResponse) {
+    response = &SwitchDrToMasterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to promote a disaster recovery instance to a master instance, which will stop sync from the original master instance and end the master/slave relationship.
+func (c *Client) SwitchDrToMaster(request *SwitchDrToMasterRequest) (response *SwitchDrToMasterResponse, err error) {
+    if request == nil {
+        request = NewSwitchDrToMasterRequest()
+    }
+    response = NewSwitchDrToMasterResponse()
+    err = c.Send(request, response)
+    return
+}

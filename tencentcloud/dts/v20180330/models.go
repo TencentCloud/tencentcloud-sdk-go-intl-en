@@ -1693,6 +1693,46 @@ type SubscribeRegionConf struct {
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
+type SwitchDrToMasterRequest struct {
+	*tchttp.BaseRequest
+
+	// Disaster recovery instance information
+	DstInfo *SyncInstanceInfo `json:"DstInfo,omitempty" name:"DstInfo"`
+
+	// Database type (such as MySQL)
+	DatabaseType *string `json:"DatabaseType,omitempty" name:"DatabaseType"`
+}
+
+func (r *SwitchDrToMasterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SwitchDrToMasterRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SwitchDrToMasterResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Backend async task request ID
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SwitchDrToMasterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SwitchDrToMasterResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type SyncCheckStepInfo struct {
 
 	// Step number

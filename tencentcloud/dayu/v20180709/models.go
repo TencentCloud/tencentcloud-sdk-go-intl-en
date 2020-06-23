@@ -3935,6 +3935,52 @@ func (r *DescribeRuleSetsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeSchedulingDomainListRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of items in a page. Returned results are not paged if you enter “0”.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Starting offset of the page. Value: (number of pages - 1) * items per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// (Optional) Filter by specific domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
+func (r *DescribeSchedulingDomainListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSchedulingDomainListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSchedulingDomainListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of scheduling domain names
+		Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+		// List of scheduling domain names
+		DomainList []*SchedulingDomain `json:"DomainList,omitempty" name:"DomainList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSchedulingDomainListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSchedulingDomainListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSecIndexRequest struct {
 	*tchttp.BaseRequest
 }
@@ -6109,6 +6155,42 @@ type ResourceIp struct {
 
 	// Resource IP array
 	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+}
+
+type SchedulingDomain struct {
+
+	// Scheduling domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// List of BGP IPs
+	BGPIpList []*string `json:"BGPIpList,omitempty" name:"BGPIpList" list`
+
+	// List of CTCC IPs
+	CTCCIpList []*string `json:"CTCCIpList,omitempty" name:"CTCCIpList" list`
+
+	// List of CUCC IPs
+	CUCCIpList []*string `json:"CUCCIpList,omitempty" name:"CUCCIpList" list`
+
+	// List of CMCC IPs
+	CMCCIpList []*string `json:"CMCCIpList,omitempty" name:"CMCCIpList" list`
+
+	// List of IPs outside Mainland China
+	OverseaIpList []*string `json:"OverseaIpList,omitempty" name:"OverseaIpList" list`
+
+	// Scheduling method. It only supports `priority` now.
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// The creation time.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// 
+	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
+
+	// Status
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Modification time
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
 }
 
 type SuccessCode struct {

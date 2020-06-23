@@ -88,7 +88,7 @@ type ApiIdStatus struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Whether to enable debugging on purchase.
+	// Whether to enable debugging after purchase.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsDebugAfterCharge *bool `json:"IsDebugAfterCharge,omitempty" name:"IsDebugAfterCharge"`
 
@@ -119,15 +119,15 @@ type ApiIdStatus struct {
 
 type ApiInfo struct {
 
-	// Unique ID of API's service.
+	// Unique service ID of API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Name of API's service.
+	// Service name of API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 
-	// Description of API's service.
+	// Service description of API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
 
@@ -175,7 +175,7 @@ type ApiInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OauthConfig *OauthConfig `json:"OauthConfig,omitempty" name:"OauthConfig"`
 
-	// Whether to enable debugging on purchase (reserved for the marketplace).
+	// Whether to enable debugging after purchase (reserved field for the marketplace).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsDebugAfterCharge *bool `json:"IsDebugAfterCharge,omitempty" name:"IsDebugAfterCharge"`
 
@@ -187,11 +187,11 @@ type ApiInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
 
-	// Successful response sample of custom response configuration.
+	// Sample response for successful custom response configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ResponseSuccessExample *string `json:"ResponseSuccessExample,omitempty" name:"ResponseSuccessExample"`
 
-	// Response failure sample of custom response configuration.
+	// Sample response for failed custom response configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ResponseFailExample *string `json:"ResponseFailExample,omitempty" name:"ResponseFailExample"`
 
@@ -199,7 +199,7 @@ type ApiInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ResponseErrorCodes []*ErrorCodes `json:"ResponseErrorCodes,omitempty" name:"ResponseErrorCodes" list`
 
-	// Frontend request parameters.
+	// Frontend request parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RequestParameters []*ReqParameter `json:"RequestParameters,omitempty" name:"RequestParameters" list`
 
@@ -215,71 +215,71 @@ type ApiInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceConfig *ServiceConfig `json:"ServiceConfig,omitempty" name:"ServiceConfig"`
 
-	// API backend service parameters.
+	// API backend service parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters" list`
 
-	// Constant parameters.
+	// Constant parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters" list`
 
-	// Returned information of API backend mocking. This parameter is required when `ServiceType` is `Mock`.
+	// Returned message of API backend Mock, which is required if `ServiceType` is `Mock`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceMockReturnMessage *string `json:"ServiceMockReturnMessage,omitempty" name:"ServiceMockReturnMessage"`
 
-	// SCF function name. This parameter takes effect when the backend type is `SCF`.
+	// SCF function name, which takes effect if the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceScfFunctionName *string `json:"ServiceScfFunctionName,omitempty" name:"ServiceScfFunctionName"`
 
-	// SCF function namespace. This parameter takes effect when the backend type is `SCF`.
+	// SCF function namespace, which takes effect if the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceScfFunctionNamespace *string `json:"ServiceScfFunctionNamespace,omitempty" name:"ServiceScfFunctionNamespace"`
 
-	// SCF function version. This parameter takes effect when the backend type is `SCF`.
+	// SCF function version, which takes effect if the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceScfFunctionQualifier *string `json:"ServiceScfFunctionQualifier,omitempty" name:"ServiceScfFunctionQualifier"`
 
-	// Whether to enable integrated response.
+	// Whether integrated response is enabled.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceScfIsIntegratedResponse *bool `json:"ServiceScfIsIntegratedResponse,omitempty" name:"ServiceScfIsIntegratedResponse"`
 
-	// SCF WebSocket registration function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`
+	// SCF WebSocket registration function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceWebsocketRegisterFunctionName *string `json:"ServiceWebsocketRegisterFunctionName,omitempty" name:"ServiceWebsocketRegisterFunctionName"`
 
-	// SCF WebSocket registration function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket registration function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceWebsocketRegisterFunctionNamespace *string `json:"ServiceWebsocketRegisterFunctionNamespace,omitempty" name:"ServiceWebsocketRegisterFunctionNamespace"`
 
-	// SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceWebsocketRegisterFunctionQualifier *string `json:"ServiceWebsocketRegisterFunctionQualifier,omitempty" name:"ServiceWebsocketRegisterFunctionQualifier"`
 
-	// SCF WebSocket cleanup function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket cleanup function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceWebsocketCleanupFunctionName *string `json:"ServiceWebsocketCleanupFunctionName,omitempty" name:"ServiceWebsocketCleanupFunctionName"`
 
-	// SCF WebSocket cleanup function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket cleanup function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceWebsocketCleanupFunctionNamespace *string `json:"ServiceWebsocketCleanupFunctionNamespace,omitempty" name:"ServiceWebsocketCleanupFunctionNamespace"`
 
-	// SCF WebSocket cleanup function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket cleanup function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceWebsocketCleanupFunctionQualifier *string `json:"ServiceWebsocketCleanupFunctionQualifier,omitempty" name:"ServiceWebsocketCleanupFunctionQualifier"`
 
-	// WebSocket pushback address.
+	// WebSocket callback address.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	InternalDomain *string `json:"InternalDomain,omitempty" name:"InternalDomain"`
 
-	// SCF WebSocket transfer function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceWebsocketTransportFunctionName *string `json:"ServiceWebsocketTransportFunctionName,omitempty" name:"ServiceWebsocketTransportFunctionName"`
 
-	// SCF WebSocket transfer function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceWebsocketTransportFunctionNamespace *string `json:"ServiceWebsocketTransportFunctionNamespace,omitempty" name:"ServiceWebsocketTransportFunctionNamespace"`
 
-	// SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceWebsocketTransportFunctionQualifier *string `json:"ServiceWebsocketTransportFunctionQualifier,omitempty" name:"ServiceWebsocketTransportFunctionQualifier"`
 
@@ -287,15 +287,15 @@ type ApiInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MicroServices []*MicroService `json:"MicroServices,omitempty" name:"MicroServices" list`
 
-	// Microservice detailed information.
+	// Microservice details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MicroServicesInfo []*int64 `json:"MicroServicesInfo,omitempty" name:"MicroServicesInfo" list`
 
-	// Microservice load balancing configuration.
+	// Load balancing configuration of microservice.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceTsfLoadBalanceConf *TsfLoadBalanceConfResp `json:"ServiceTsfLoadBalanceConf,omitempty" name:"ServiceTsfLoadBalanceConf"`
 
-	// Microservice health check configuration.
+	// Health check configuration of microservice.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceTsfHealthCheckConf *HealthCheckConf `json:"ServiceTsfHealthCheckConf,omitempty" name:"ServiceTsfHealthCheckConf"`
 
@@ -421,7 +421,7 @@ type BindEnvironmentRequest struct {
 	// List of unique IDs of the usage plans to be bound.
 	UsagePlanIds []*string `json:"UsagePlanIds,omitempty" name:"UsagePlanIds" list`
 
-	// Binding type. Valid values: API, SERVICE (default value).
+	// Binding type. Valid values: API, SERVICE. Default value: SERVICE.
 	BindType *string `json:"BindType,omitempty" name:"BindType"`
 
 	// Environment to be bound.
@@ -430,7 +430,7 @@ type BindEnvironmentRequest struct {
 	// Unique ID of the service to be bound.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Unique API ID array. This parameter will be required when `bindType` is `API`.
+	// Unique API ID array, which is required if `bindType` is `API`.
 	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
 }
 
@@ -468,13 +468,13 @@ func (r *BindEnvironmentResponse) FromJsonString(s string) error {
 type BindIPStrategyRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of the service of the IP policy to be bound.
+	// Unique service ID of the IP policy to be bound.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Unique ID of the IP policy to be bound.
 	StrategyId *string `json:"StrategyId,omitempty" name:"StrategyId"`
 
-	// Environment to be bound to IP policy
+	// Environment to be bound to IP policy.
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
 	// List of APIs to be bound to IP policy.
@@ -562,22 +562,22 @@ type BindSubDomainRequest struct {
 	// Custom domain name to be bound.
 	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
 
-	// Protocols supported by service. Valid values: http, https, http&https.
+	// Protocol supported by service. Valid values: http, https, http&https.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Network type. Valid values: INNER, OUTER.
+	// Network type. Valid values: OUTER, INNER.
 	NetType *string `json:"NetType,omitempty" name:"NetType"`
 
-	// Whether to use the default path mapping. The default value is `true`. If the value is `false`, the custom path mapping will be used and `PathMappingSet` is required.
+	// Whether the default path mapping is used. The default value is `true`. If the value is `false`, the custom path mapping will be used and `PathMappingSet` will be required in this case.
 	IsDefaultMapping *bool `json:"IsDefaultMapping,omitempty" name:"IsDefaultMapping"`
 
 	// Default domain name.
 	NetSubDomain *string `json:"NetSubDomain,omitempty" name:"NetSubDomain"`
 
-	// Unique ID of the certificate of the custom domain name to be bound. The certificate can be uploaded only when `Protocol` is `https` or `http&https`.
+	// Unique certificate ID of the custom domain name to be bound. The certificate can be uploaded if `Protocol` is `https` or `http&https`.
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
-	// Custom domain name path mapping. It can contain up to 3 `Environment` parameters which can be set to only `test`, `prepub`, or `release`.
+	// Custom domain name path mapping. It can contain up to 3 `Environment` values which can be set to only `test`, `prepub`, and `release`, respectively.
 	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet" list`
 }
 
@@ -610,16 +610,16 @@ func (r *BindSubDomainResponse) FromJsonString(s string) error {
 
 type ConstantParameter struct {
 
-	// Constant parameter name. This parameter takes effect only when `ServiceType` is `HTTP`.
+	// Constant parameter name, which is used only if `ServiceType` is `HTTP`.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Constant parameter description. This parameter takes effect only when `ServiceType` is `HTTP`.
+	// Constant parameter description, which is used only if `ServiceType` is `HTTP`.
 	Desc *string `json:"Desc,omitempty" name:"Desc"`
 
-	// Constant parameter location. This parameter takes effect only when `ServiceType` is `HTTP`.
+	// Constant parameter position, which is used only if `ServiceType` is `HTTP`.
 	Position *string `json:"Position,omitempty" name:"Position"`
 
-	// Constant parameter default value. This parameter takes effect only when `ServiceType` is `HTTP`.
+	// Default value of constant parameter, which is used only if `ServiceType` is `HTTP`.
 	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
 }
 
@@ -632,10 +632,10 @@ type CreateApiKeyRequest struct {
 	// Key type. Valid values: auto, manual (custom key). Default value: auto.
 	AccessKeyType *string `json:"AccessKeyType,omitempty" name:"AccessKeyType"`
 
-	// Custom key ID, which is required when `AccessKeyType` is `manual`. It can contain 5 to 50 letters, digits, and underscores.
+	// Custom key ID, which is required if `AccessKeyType` is `manual`. It can contain 5–50 letters, digits, and underscores.
 	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
 
-	// Custom key, which is required when `AccessKeyType` is `manual`. It can contain 10 to 50 letters, digits, and underscores.
+	// Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10–50 letters, digits, and underscores.
 	AccessKeySecret *string `json:"AccessKeySecret,omitempty" name:"AccessKeySecret"`
 }
 
@@ -673,7 +673,7 @@ func (r *CreateApiKeyResponse) FromJsonString(s string) error {
 type CreateApiRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of API's service.
+	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// API backend service type. Valid values: HTTP, MOCK, TSF, CLB, SCF, WEBSOCKET, TARGET (in beta test).
@@ -703,25 +703,25 @@ type CreateApiRequest struct {
 	// Whether to enable CORS.
 	EnableCORS *bool `json:"EnableCORS,omitempty" name:"EnableCORS"`
 
-	// Constant parameters.
+	// Constant parameter.
 	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters" list`
 
-	// Frontend request parameters.
+	// Frontend request parameter.
 	RequestParameters []*RequestParameter `json:"RequestParameters,omitempty" name:"RequestParameters" list`
 
-	// This field takes effect when `AuthType` is `OAUTH`. NORMAL: business API. OAUTH: authorization API.
+	// This field is valid if `AuthType` is `OAUTH`. NORMAL: business API; OAUTH: authorization API.
 	ApiBusinessType *string `json:"ApiBusinessType,omitempty" name:"ApiBusinessType"`
 
-	// Returned information of API backend mocking. This parameter is required when `ServiceType` is `Mock`.
+	// Returned message of API backend Mock, which is required if `ServiceType` is `Mock`.
 	ServiceMockReturnMessage *string `json:"ServiceMockReturnMessage,omitempty" name:"ServiceMockReturnMessage"`
 
 	// List of microservices bound to API.
 	MicroServices []*MicroServiceReq `json:"MicroServices,omitempty" name:"MicroServices" list`
 
-	// Microservice load balancing configuration.
+	// Load balancing configuration of microservice.
 	ServiceTsfLoadBalanceConf *TsfLoadBalanceConfResp `json:"ServiceTsfLoadBalanceConf,omitempty" name:"ServiceTsfLoadBalanceConf"`
 
-	// Microservice health check configuration.
+	// Health check configuration of microservice.
 	ServiceTsfHealthCheckConf *HealthCheckConf `json:"ServiceTsfHealthCheckConf,omitempty" name:"ServiceTsfHealthCheckConf"`
 
 	// `target` type backend resource information (in beta test).
@@ -733,70 +733,70 @@ type CreateApiRequest struct {
 	// `target` health check configuration (in beta test).
 	TargetServicesHealthCheckConf *HealthCheckConf `json:"TargetServicesHealthCheckConf,omitempty" name:"TargetServicesHealthCheckConf"`
 
-	// SCF function name. This parameter takes effect when the backend type is `SCF`.
+	// SCF function name, which takes effect if the backend type is `SCF`.
 	ServiceScfFunctionName *string `json:"ServiceScfFunctionName,omitempty" name:"ServiceScfFunctionName"`
 
-	// SCF WebSocket registration function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket registration function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketRegisterFunctionName *string `json:"ServiceWebsocketRegisterFunctionName,omitempty" name:"ServiceWebsocketRegisterFunctionName"`
 
-	// SCF WebSocket cleanup function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket cleanup function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketCleanupFunctionName *string `json:"ServiceWebsocketCleanupFunctionName,omitempty" name:"ServiceWebsocketCleanupFunctionName"`
 
-	// SCF WebSocket transfer function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketTransportFunctionName *string `json:"ServiceWebsocketTransportFunctionName,omitempty" name:"ServiceWebsocketTransportFunctionName"`
 
-	// SCF function namespace. This parameter takes effect when the backend type is `SCF`.
+	// SCF function namespace, which takes effect if the backend type is `SCF`.
 	ServiceScfFunctionNamespace *string `json:"ServiceScfFunctionNamespace,omitempty" name:"ServiceScfFunctionNamespace"`
 
-	// SCF function version. This parameter takes effect when the backend type is `SCF`.
+	// SCF function version, which takes effect if the backend type is `SCF`.
 	ServiceScfFunctionQualifier *string `json:"ServiceScfFunctionQualifier,omitempty" name:"ServiceScfFunctionQualifier"`
 
-	// SCF WebSocket registration function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket registration function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketRegisterFunctionNamespace *string `json:"ServiceWebsocketRegisterFunctionNamespace,omitempty" name:"ServiceWebsocketRegisterFunctionNamespace"`
 
-	// SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketRegisterFunctionQualifier *string `json:"ServiceWebsocketRegisterFunctionQualifier,omitempty" name:"ServiceWebsocketRegisterFunctionQualifier"`
 
-	// SCF WebSocket transfer function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketTransportFunctionNamespace *string `json:"ServiceWebsocketTransportFunctionNamespace,omitempty" name:"ServiceWebsocketTransportFunctionNamespace"`
 
-	// SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketTransportFunctionQualifier *string `json:"ServiceWebsocketTransportFunctionQualifier,omitempty" name:"ServiceWebsocketTransportFunctionQualifier"`
 
-	// SCF WebSocket cleanup function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket cleanup function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketCleanupFunctionNamespace *string `json:"ServiceWebsocketCleanupFunctionNamespace,omitempty" name:"ServiceWebsocketCleanupFunctionNamespace"`
 
-	// SCF WebSocket cleanup function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket cleanup function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketCleanupFunctionQualifier *string `json:"ServiceWebsocketCleanupFunctionQualifier,omitempty" name:"ServiceWebsocketCleanupFunctionQualifier"`
 
-	// Whether to enable response integration. This parameter takes effect when the backend type is `SCF`.
+	// Whether to enable response integration, which takes effect if the backend type is `SCF`.
 	ServiceScfIsIntegratedResponse *bool `json:"ServiceScfIsIntegratedResponse,omitempty" name:"ServiceScfIsIntegratedResponse"`
 
-	// Billing after debugging starts (reserved for marketplace).
+	// Billing after debugging starts (reserved field for marketplace).
 	IsDebugAfterCharge *bool `json:"IsDebugAfterCharge,omitempty" name:"IsDebugAfterCharge"`
 
-	// Whether to delete the custom response configuration error codes. If the value is left empty or `False`, the error codes will not be deleted. If the value is `True`, all custom response configuration error codes of the API will be deleted.
+	// Whether to delete the error codes for custom response configuration. If the value is left empty or `False`, the error codes will not be deleted. If the value is `True`, all custom response configuration error codes of the API will be deleted.
 	IsDeleteResponseErrorCodes *bool `json:"IsDeleteResponseErrorCodes,omitempty" name:"IsDeleteResponseErrorCodes"`
 
 	// Return type.
 	ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
 
-	// Successful response sample of custom response configuration.
+	// Sample response for successful custom response configuration.
 	ResponseSuccessExample *string `json:"ResponseSuccessExample,omitempty" name:"ResponseSuccessExample"`
 
-	// Response failure sample of custom response configuration.
+	// Sample response for failed custom response configuration.
 	ResponseFailExample *string `json:"ResponseFailExample,omitempty" name:"ResponseFailExample"`
 
 	// API backend service configuration.
 	ServiceConfig *ServiceConfig `json:"ServiceConfig,omitempty" name:"ServiceConfig"`
 
-	// Unique ID of associated authorization API. This parameter takes effect only when `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
+	// Unique ID of associated authorization API, which takes effect only if `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
 	AuthRelationApiId *string `json:"AuthRelationApiId,omitempty" name:"AuthRelationApiId"`
 
-	// API backend service parameters.
+	// API backend service parameter.
 	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters" list`
 
-	// OAuth configuration. This parameter takes effect when `AuthType` is `OAUTH`.
+	// OAuth configuration, which takes effect if `AuthType` is `OAUTH`.
 	OauthConfig *OauthConfig `json:"OauthConfig,omitempty" name:"OauthConfig"`
 
 	// Custom error code configuration.
@@ -921,10 +921,10 @@ type CreateServiceRequest struct {
 	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
 	ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
 
-	// Network type list, which is used to specify the supported network types. `INNER` indicates access over private network, and `OUTER` indicates access over public network. The default value is `OUTER`.
+	// Network type list, which is used to specify the supported network types. INNER: private network access; OUTER: public network access. Default value: OUTER.
 	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes" list`
 
-	// IP version number. Valid values: IPv4 (default value), IPv6
+	// IP version number. Valid values: IPv4, IPv6. Default value: IPv4.
 	IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
 
 	// Cluster name, which is reserved and used by the `tsf serverless` type.
@@ -959,13 +959,13 @@ type CreateServiceResponse struct {
 		// Default public network domain name.
 		OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
 
-		// Default domain name of VPC private network
+		// Default private network domain name of VPC
 		InnerSubDomain *string `json:"InnerSubDomain,omitempty" name:"InnerSubDomain"`
 
 		// Service creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 		CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-		// Network type list. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
+		// Network type list. INNER: private network access; OUTER: public network access.
 		NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes" list`
 
 		// IP version number.
@@ -1074,7 +1074,7 @@ func (r *DeleteApiKeyResponse) FromJsonString(s string) error {
 type DeleteApiRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of API's service.
+	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Unique API ID.
@@ -1115,7 +1115,7 @@ func (r *DeleteApiResponse) FromJsonString(s string) error {
 type DeleteIPStrategyRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of the service of the IP policy to be deleted.
+	// Unique service ID of the IP policy to be deleted.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Unique ID of the IP policy to be deleted.
@@ -1200,7 +1200,7 @@ type DeleteServiceSubDomainMappingRequest struct {
 	// Custom domain name bound to service.
 	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
 
-	// Name of the environment whose mapping is to be deleted. Valid values: test (testing environment), prepub (pre-publish environment), release (release environment).
+	// Name of the environment whose mapping is to be deleted. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
 	Environment *string `json:"Environment,omitempty" name:"Environment"`
 }
 
@@ -1348,7 +1348,7 @@ type DesApisStatus struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 
-	// API type. Valid values (general API), TSF (microservice API).
+	// API type. Valid values: NORMAL (general API), TSF (microservice API).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ApiType *string `json:"ApiType,omitempty" name:"ApiType"`
 
@@ -1356,7 +1356,7 @@ type DesApisStatus struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Whether to enable debugging on purchase (reserved for the marketplace)
+	// Whether to enable debugging after purchase (reserved field for the marketplace)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsDebugAfterCharge *bool `json:"IsDebugAfterCharge,omitempty" name:"IsDebugAfterCharge"`
 
@@ -1364,15 +1364,15 @@ type DesApisStatus struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AuthType *string `json:"AuthType,omitempty" name:"AuthType"`
 
-	// OAuth API type. This parameter takes effect when `AuthType` is `OAUTH`. Valid values: NORMAL (business API), OAUTH (authorization API).
+	// OAuth API type, which is valid if `AuthType` is `OAUTH`. Valid values: NORMAL (business API), OAUTH (authorization API).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ApiBusinessType *string `json:"ApiBusinessType,omitempty" name:"ApiBusinessType"`
 
-	// Unique ID of associated authorization API. This parameter takes effect only when `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
+	// Unique ID of associated authorization API, which takes effect only if `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AuthRelationApiId *string `json:"AuthRelationApiId,omitempty" name:"AuthRelationApiId"`
 
-	// OAuth configuration information. This parameter takes effect when `AuthType` is `OAUTH`.
+	// OAuth configuration information, which takes effect if `AuthType` is `OAUTH`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OauthConfig *OauthConfig `json:"OauthConfig,omitempty" name:"OauthConfig"`
 
@@ -1396,7 +1396,7 @@ type DesApisStatus struct {
 type DescribeApiEnvironmentStrategyRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of the service of API.
+	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Environment list.
@@ -1405,7 +1405,7 @@ type DescribeApiEnvironmentStrategyRequest struct {
 	// Unique API ID.
 	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100.
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -1484,7 +1484,7 @@ func (r *DescribeApiKeyResponse) FromJsonString(s string) error {
 type DescribeApiRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of API's service.
+	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Unique API ID.
@@ -1527,7 +1527,7 @@ type DescribeApiUsagePlanRequest struct {
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100.
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -1580,17 +1580,20 @@ type DescribeLogSearchRequest struct {
 	// Exact search by `apiid` or `reqid`
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
-	// Number of logs returned at a time. Up to 100 logs can be returned at a time
+	// Number of logs to be returned at a time. Maximum value: 100
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Subsequent content can be obtained based on the `ConText` returned last time. Up to 10,000 data entries can be obtained
 	ConText *string `json:"ConText,omitempty" name:"ConText"`
 
-	// Log sorting by time in ascending order (asc) or descending order (desc). The default value is `desc`
+	// Sorting by time. Valid values: asc (ascending), desc (descending). Default value: desc
 	Sort *string `json:"Sort,omitempty" name:"Sort"`
 
-	// Fuzzy search of logs by keyword
+	// Fuzzy search for log by keyword
 	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// 
+	LogQuerys []*LogQuery `json:"LogQuerys,omitempty" name:"LogQuerys" list`
 }
 
 func (r *DescribeLogSearchRequest) ToJsonString() string {
@@ -1609,7 +1612,7 @@ type DescribeLogSearchResponse struct {
 		// Cursor for getting more search results. If the value is `""`, there will be no subsequent results
 		ConText *string `json:"ConText,omitempty" name:"ConText"`
 
-		// The returned result contains zero or multiple logs, which are in the following format:
+		// The returned result contains any number of logs, which are in the following format:
 	// '[$app_id][$env_name][$service_id][$http_host][$api_id][$uri][$scheme][rsp_st:$status][ups_st:$upstream_status]'
 	// '[cip:$remote_addr][uip:$upstream_addr][vip:$server_addr][rsp_len:$bytes_sent][req_len:$request_length]'
 	// '[req_t:$request_time][ups_rsp_t:$upstream_response_time][ups_conn_t:$upstream_connect_time][ups_head_t:$upstream_header_time]’
@@ -1624,22 +1627,22 @@ type DescribeLogSearchResponse struct {
 	// uri: request path.
 	// scheme: HTTP/HTTPS protocol.
 	// rsp_st: request response status code.
-	// ups_st: backend business server response status code (if the request is passed through to the backend, this variable will not be empty. If the request is blocked in API Gateway, this variable will be `-`).
+	// ups_st: backend business server response status code (if the request is passed through to the backend, this variable will not be empty. If the request is blocked in API Gateway, this variable will be displayed as `-`).
 	// cip: client IP.
 	// uip: backend business service (upstream) IP.
 	// vip: VIP requested to be accessed.
 	// rsp_len: response length.
 	// req_len: request length.
 	// req_t: total request response time.
-	// ups_rsp_t: total backend response time (time between connection establishment by API Gateway and backend response reception).
-	// ups_conn_t: time when the backend business server is successfully connected.
-	// ups_head_t: time when the backend response head arrives.
+	// ups_rsp_t: total backend response time (time between connection establishment by API Gateway and backend response receipt).
+	// ups_conn_t: time when the backend business server is successfully connected to.
+	// ups_head_t: time when the backend response header arrives.
 	// err_msg: error message.
-	// tcp_rtt: client TCP connection information. RTT (Round Trip Time) consists of three parts: link propagation delay, end system processing delay, queuing and processing delay in router cache.
+	// tcp_rtt: client TCP connection information. RTT (Round Trip Time) consists of three parts: link propagation delay, end system processing delay, and queuing delay in router cache.
 	// req_id: request ID.
 		LogSet []*string `json:"LogSet,omitempty" name:"LogSet" list`
 
-		// Number of logs returned for a search (`TotalCount <= Limit`)
+		// Number of logs returned for one search (`TotalCount <= Limit`)
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1662,7 +1665,7 @@ type DescribeServiceEnvironmentListRequest struct {
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100.
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -1709,7 +1712,7 @@ type DescribeServiceEnvironmentReleaseHistoryRequest struct {
 	// Environment name.
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100.
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -1753,7 +1756,7 @@ type DescribeServiceEnvironmentStrategyRequest struct {
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100.
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -1797,7 +1800,7 @@ type DescribeServiceReleaseVersionRequest struct {
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100.
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -1868,7 +1871,7 @@ type DescribeServiceResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
 
-		// Protocols supported by service. Valid values: http, https, http&https.
+		// Protocol supported by service. Valid values: http, https, http&https.
 		Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 		// Service creation time.
@@ -1880,16 +1883,16 @@ type DescribeServiceResponse struct {
 		// Self-deployed cluster name.
 		ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
 
-		// Network type list. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
+		// Network type list. INNER: private network access; OUTER: public network access.
 		NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes" list`
 
-		// Private network access subdomain name.
+		// Subdomain name for private network access.
 		InternalSubDomain *string `json:"InternalSubDomain,omitempty" name:"InternalSubDomain"`
 
-		// Public network access subdomain name.
+		// Subdomain name for public network access.
 		OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
 
-		// Port number for HTTP access over private network.
+		// Service port number for HTTP access over private network.
 		InnerHttpPort *int64 `json:"InnerHttpPort,omitempty" name:"InnerHttpPort"`
 
 		// Port number for HTTPS access over private network.
@@ -1981,7 +1984,7 @@ type DescribeServiceSubDomainsRequest struct {
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100.
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -2001,7 +2004,7 @@ type DescribeServiceSubDomainsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Custom service domain names.
+		// Custom service domain name query.
 		Result *DomainSets `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2024,7 +2027,7 @@ type DescribeServiceUsagePlanRequest struct {
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100.
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -2068,10 +2071,10 @@ type DescribeUsagePlanEnvironmentsRequest struct {
 	// Unique ID of the usage plan to be queried.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
-	// Binding type. Valid values: API, SERVICE (default value).
+	// Binding type. Valid values: API, SERVICE. Default value: SERVICE.
 	BindType *string `json:"BindType,omitempty" name:"BindType"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100.
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -2153,7 +2156,7 @@ type DescribeUsagePlanSecretIdsRequest struct {
 	// Unique ID of bound usage plan.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100.
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -2231,11 +2234,32 @@ func (r *DisableApiKeyResponse) FromJsonString(s string) error {
 
 type DocumentSDK struct {
 
-	// Download link of generated file. Generated documents are stored in COS.
+	// Download link of generated file. Generated documents will be stored in COS.
 	DocumentURL *string `json:"DocumentURL,omitempty" name:"DocumentURL"`
 
-	// Download link of generated SDK file. Generated SDKs are stored in COS.
+	// Download link of generated SDK file. Generated SDK files will be stored in COS.
 	SdkURL *string `json:"SdkURL,omitempty" name:"SdkURL"`
+}
+
+type DomainSetList struct {
+
+	// Domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Domain name resolution status. True: success; Flase: failure.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Certificate ID.
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Whether the default path mapping is used.
+	IsDefaultMapping *bool `json:"IsDefaultMapping,omitempty" name:"IsDefaultMapping"`
+
+	// Custom domain name protocol type.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Network type. Valid values: INNER, OUTER.
+	NetType *string `json:"NetType,omitempty" name:"NetType"`
 }
 
 type DomainSets struct {
@@ -2293,7 +2317,7 @@ type Environment struct {
 	// Access path.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Release status. 1: released. 0: not released.
+	// Release status. 1: published. 0: not published.
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
 	// Running version.
@@ -2319,7 +2343,7 @@ type ErrorCodes struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Msg *string `json:"Msg,omitempty" name:"Msg"`
 
-	// Remarks of the custom response configuration error code.
+	// Custom response configuration error code remarks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Desc *string `json:"Desc,omitempty" name:"Desc"`
 
@@ -2347,7 +2371,7 @@ type GenerateApiDocumentRequest struct {
 	// Unique service ID of the document to be created.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Environment of the service for which the SDK is to be created.
+	// Environment of the service for which to create an SDK.
 	GenEnvironment *string `json:"GenEnvironment,omitempty" name:"GenEnvironment"`
 
 	// Programming language of the SDK to be created. Currently, only Python and JavaScript are supported.
@@ -2367,7 +2391,7 @@ type GenerateApiDocumentResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// API documentation and SDK link.
+		// API document and SDK link.
 		Result *DocumentSDK `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2386,7 +2410,7 @@ func (r *GenerateApiDocumentResponse) FromJsonString(s string) error {
 
 type HealthCheckConf struct {
 
-	// Whether to enable health check.
+	// Whether health check is enabled.
 	IsHealthCheck *bool `json:"IsHealthCheck,omitempty" name:"IsHealthCheck"`
 
 	// Health check threshold.
@@ -2521,7 +2545,7 @@ type ModifyApiIncrementRequest struct {
 	// Authorization type of the API to be modified (you can select `OAUTH`, i.e., authorization API)
 	BusinessType *string `json:"BusinessType,omitempty" name:"BusinessType"`
 
-	// Public key value to be modified of OAuth API
+	// Public key value to be modified by OAuth API
 	PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
 
 	// OAuth API redirect address
@@ -2558,7 +2582,7 @@ func (r *ModifyApiIncrementResponse) FromJsonString(s string) error {
 type ModifyApiRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of API's service.
+	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// API backend service type. Valid values: HTTP, MOCK, TSF, CLB, SCF, WEBSOCKET, TARGET (in beta test).
@@ -2576,13 +2600,13 @@ type ModifyApiRequest struct {
 	// Custom API description.
 	ApiDesc *string `json:"ApiDesc,omitempty" name:"ApiDesc"`
 
-	// API type. Valid values: NORMAL (default value), TSF.
+	// API type. Valid values: NORMAL, TSF. Default value: NORMAL.
 	ApiType *string `json:"ApiType,omitempty" name:"ApiType"`
 
-	// API authentication type. Valid values: SECRET, NONE (default), OAUTH.
+	// API authentication type. Valid values: SECRET, NONE, OAUTH. Default value: NONE.
 	AuthType *string `json:"AuthType,omitempty" name:"AuthType"`
 
-	// Whether signature authentication is required. `True` indicates yes while `False` indicates no. This parameter is to be disused.
+	// Whether signature authentication is required. True: yes; False: no. This parameter is to be disused.
 	AuthRequired *bool `json:"AuthRequired,omitempty" name:"AuthRequired"`
 
 	// API backend service timeout period in seconds.
@@ -2591,28 +2615,28 @@ type ModifyApiRequest struct {
 	// API frontend request type, such as HTTP, HTTPS, or HTTP and HTTPS.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Whether to enable CORS. `True` indicates yes while `False` indicates no.
+	// Whether to enable CORS. True: yes; False: no.
 	EnableCORS *bool `json:"EnableCORS,omitempty" name:"EnableCORS"`
 
-	// Constant parameters.
+	// Constant parameter.
 	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters" list`
 
-	// Frontend request parameters.
+	// Frontend request parameter.
 	RequestParameters []*ReqParameter `json:"RequestParameters,omitempty" name:"RequestParameters" list`
 
-	// This field takes effect when `AuthType` is `OAUTH`. NORMAL: business API. OAUTH: authorization API.
+	// This field is valid if `AuthType` is `OAUTH`. NORMAL: business API; OAUTH: authorization API.
 	ApiBusinessType *string `json:"ApiBusinessType,omitempty" name:"ApiBusinessType"`
 
-	// Returned information of API backend mocking. This parameter is required when `ServiceType` is `Mock`.
+	// Returned message of API backend Mock, which is required if `ServiceType` is `Mock`.
 	ServiceMockReturnMessage *string `json:"ServiceMockReturnMessage,omitempty" name:"ServiceMockReturnMessage"`
 
 	// List of microservices bound to API.
 	MicroServices []*MicroServiceReq `json:"MicroServices,omitempty" name:"MicroServices" list`
 
-	// Microservice load balancing configuration.
+	// Load balancing configuration of microservice.
 	ServiceTsfLoadBalanceConf *TsfLoadBalanceConfResp `json:"ServiceTsfLoadBalanceConf,omitempty" name:"ServiceTsfLoadBalanceConf"`
 
-	// Microservice health check configuration.
+	// Health check configuration of microservice.
 	ServiceTsfHealthCheckConf *HealthCheckConf `json:"ServiceTsfHealthCheckConf,omitempty" name:"ServiceTsfHealthCheckConf"`
 
 	// `target` type load balancing configuration (in beta test).
@@ -2621,73 +2645,73 @@ type ModifyApiRequest struct {
 	// `target` health check configuration (in beta test).
 	TargetServicesHealthCheckConf *HealthCheckConf `json:"TargetServicesHealthCheckConf,omitempty" name:"TargetServicesHealthCheckConf"`
 
-	// SCF function name. This parameter takes effect when the backend type is `SCF`.
+	// SCF function name, which takes effect if the backend type is `SCF`.
 	ServiceScfFunctionName *string `json:"ServiceScfFunctionName,omitempty" name:"ServiceScfFunctionName"`
 
-	// SCF WebSocket registration function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket registration function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketRegisterFunctionName *string `json:"ServiceWebsocketRegisterFunctionName,omitempty" name:"ServiceWebsocketRegisterFunctionName"`
 
-	// SCF WebSocket cleanup function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket cleanup function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketCleanupFunctionName *string `json:"ServiceWebsocketCleanupFunctionName,omitempty" name:"ServiceWebsocketCleanupFunctionName"`
 
-	// SCF WebSocket transfer function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketTransportFunctionName *string `json:"ServiceWebsocketTransportFunctionName,omitempty" name:"ServiceWebsocketTransportFunctionName"`
 
-	// SCF function namespace. This parameter takes effect when the backend type is `SCF`.
+	// SCF function namespace, which takes effect if the backend type is `SCF`.
 	ServiceScfFunctionNamespace *string `json:"ServiceScfFunctionNamespace,omitempty" name:"ServiceScfFunctionNamespace"`
 
-	// SCF function version. This parameter takes effect when the backend type is `SCF`.
+	// SCF function version, which takes effect if the backend type is `SCF`.
 	ServiceScfFunctionQualifier *string `json:"ServiceScfFunctionQualifier,omitempty" name:"ServiceScfFunctionQualifier"`
 
-	// SCF WebSocket registration function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket registration function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketRegisterFunctionNamespace *string `json:"ServiceWebsocketRegisterFunctionNamespace,omitempty" name:"ServiceWebsocketRegisterFunctionNamespace"`
 
-	// SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketRegisterFunctionQualifier *string `json:"ServiceWebsocketRegisterFunctionQualifier,omitempty" name:"ServiceWebsocketRegisterFunctionQualifier"`
 
-	// SCF WebSocket transfer function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketTransportFunctionNamespace *string `json:"ServiceWebsocketTransportFunctionNamespace,omitempty" name:"ServiceWebsocketTransportFunctionNamespace"`
 
-	// SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketTransportFunctionQualifier *string `json:"ServiceWebsocketTransportFunctionQualifier,omitempty" name:"ServiceWebsocketTransportFunctionQualifier"`
 
-	// SCF WebSocket cleanup function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket cleanup function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketCleanupFunctionNamespace *string `json:"ServiceWebsocketCleanupFunctionNamespace,omitempty" name:"ServiceWebsocketCleanupFunctionNamespace"`
 
-	// SCF WebSocket cleanup function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	// SCF WebSocket cleanup function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 	ServiceWebsocketCleanupFunctionQualifier *string `json:"ServiceWebsocketCleanupFunctionQualifier,omitempty" name:"ServiceWebsocketCleanupFunctionQualifier"`
 
-	// Whether to enable response integration. This parameter takes effect when the backend type is `SCF`.
+	// Whether to enable response integration, which takes effect if the backend type is `SCF`.
 	ServiceScfIsIntegratedResponse *bool `json:"ServiceScfIsIntegratedResponse,omitempty" name:"ServiceScfIsIntegratedResponse"`
 
-	// Billing after debugging starts (reserved for marketplace).
+	// Billing after debugging starts (reserved field for marketplace).
 	IsDebugAfterCharge *bool `json:"IsDebugAfterCharge,omitempty" name:"IsDebugAfterCharge"`
 
 	// Tag.
 	TagSpecifications *Tag `json:"TagSpecifications,omitempty" name:"TagSpecifications"`
 
-	// Whether to delete the custom response configuration error codes. If the value is left empty or `False`, the error codes will not be deleted. If the value is `True`, all custom response configuration error codes of the API will be deleted.
+	// Whether to delete the error codes for custom response configuration. If the value is left empty or `False`, the error codes will not be deleted. If the value is `True`, all custom response configuration error codes of the API will be deleted.
 	IsDeleteResponseErrorCodes *bool `json:"IsDeleteResponseErrorCodes,omitempty" name:"IsDeleteResponseErrorCodes"`
 
 	// Return type.
 	ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
 
-	// Successful response sample of custom response configuration.
+	// Sample response for successful custom response configuration.
 	ResponseSuccessExample *string `json:"ResponseSuccessExample,omitempty" name:"ResponseSuccessExample"`
 
-	// Response failure sample of custom response configuration.
+	// Sample response for failed custom response configuration.
 	ResponseFailExample *string `json:"ResponseFailExample,omitempty" name:"ResponseFailExample"`
 
 	// API backend service configuration.
 	ServiceConfig *ServiceConfig `json:"ServiceConfig,omitempty" name:"ServiceConfig"`
 
-	// Unique ID of associated authorization API. This parameter takes effect only when `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
+	// Unique ID of associated authorization API, which takes effect only if `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
 	AuthRelationApiId *string `json:"AuthRelationApiId,omitempty" name:"AuthRelationApiId"`
 
-	// API backend service parameters.
+	// API backend service parameter.
 	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters" list`
 
-	// OAuth configuration. This parameter takes effect when `AuthType` is `OAUTH`.
+	// OAuth configuration, which takes effect if `AuthType` is `OAUTH`.
 	OauthConfig *OauthConfig `json:"OauthConfig,omitempty" name:"OauthConfig"`
 
 	// Custom error code configuration.
@@ -2724,7 +2748,7 @@ func (r *ModifyApiResponse) FromJsonString(s string) error {
 type ModifyIPStrategyRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of the service of the policy to be modified.
+	// Unique service ID of the policy to be modified.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Unique ID of the policy to be modified.
@@ -2815,16 +2839,16 @@ type ModifyServiceRequest struct {
 	// Unique ID of the service to be modified.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Modified service name.
+	// Service name after modification.
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 
-	// Modified service description.
+	// Service description after modification.
 	ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
 
-	// Modified service frontend request type, such as `http`, `https`, and `http&https`.
+	// Service frontend request type after modification, such as `http`, `https`, and `http&https`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Network type list, which is used to specify the supported network types. `INNER` indicates access over private network, and `OUTER` indicates access over public network. The default value is `OUTER`.
+	// Network type list, which is used to specify the supported network types. INNER: private network access; OUTER: public network access. Default value: OUTER.
 	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes" list`
 }
 
@@ -2861,19 +2885,19 @@ type ModifySubDomainRequest struct {
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Custom domain name for which the path mapping is to be modified.
+	// Custom domain name whose path mapping is to be modified.
 	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
 
-	// Whether to change to the default path mapping. true: use the default path mapping. false: use the custom path mapping.
+	// Whether to change to the default path mapping. true: use the default path mapping; false: use the custom path mapping.
 	IsDefaultMapping *bool `json:"IsDefaultMapping,omitempty" name:"IsDefaultMapping"`
 
-	// Certificate ID, which is required when the HTTPS protocol is included.
+	// Certificate ID, which is required if the HTTPS protocol is included.
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
-	// Modified custom domain name protocol type. Valid values: http, https, http&https.
+	// Custom domain name protocol type after modification. Valid values: http, https, http&https.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Modified path mapping list.
+	// Path mapping list after modification.
 	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet" list`
 
 	// Network type. Valid values: INNER, OUTER.
@@ -2916,10 +2940,10 @@ type ModifyUsagePlanRequest struct {
 	// Unique usage plan ID.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
-	// Modified custom usage plan name.
+	// Custom usage plan name after modification.
 	UsagePlanName *string `json:"UsagePlanName,omitempty" name:"UsagePlanName"`
 
-	// Modified custom usage plan description.
+	// Custom usage plan description after modification.
 	UsagePlanDesc *string `json:"UsagePlanDesc,omitempty" name:"UsagePlanDesc"`
 
 	// Total number of requests allowed. Valid values: -1, [1,99999999]. The default value is `-1`, which indicates no limit.
@@ -2987,7 +3011,7 @@ type ReleaseService struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ReleaseDesc *string `json:"ReleaseDesc,omitempty" name:"ReleaseDesc"`
 
-	// Release version ID.
+	// Published version ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ReleaseVersion *string `json:"ReleaseVersion,omitempty" name:"ReleaseVersion"`
 }
@@ -2998,7 +3022,7 @@ type ReleaseServiceRequest struct {
 	// Unique ID of the service to be published.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Name of the environment to be published. Valid values: test (testing environment), prepub (pre-publish environment), release (release environment).
+	// Name of the environment to be published. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
 	// Release description.
@@ -3038,6 +3062,27 @@ func (r *ReleaseServiceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ReqParameter struct {
+
+	// API frontend parameter name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// API frontend parameter position, such as `head`. Valid values: head, query, path.
+	Position *string `json:"Position,omitempty" name:"Position"`
+
+	// API frontend parameter type, such as `String` and `int`.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Default value of API frontend parameter.
+	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
+
+	// Whether the API frontend parameter is required. True: yes; False: no.
+	Required *bool `json:"Required,omitempty" name:"Required"`
+
+	// API frontend parameter remarks.
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+}
+
 type RequestConfig struct {
 
 	// API path, such as `/path`.
@@ -3055,7 +3100,7 @@ type RequestParameter struct {
 	// Description
 	Desc *string `json:"Desc,omitempty" name:"Desc"`
 
-	// Parameter location
+	// Parameter position
 	Position *string `json:"Position,omitempty" name:"Position"`
 
 	// Parameter type
@@ -3064,7 +3109,7 @@ type RequestParameter struct {
 	// Default value
 	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
 
-	// Required
+	// Whether it is required
 	Required *bool `json:"Required,omitempty" name:"Required"`
 }
 
@@ -3076,7 +3121,7 @@ type ResponseErrorCodeReq struct {
 	// Custom response configuration error message.
 	Msg *string `json:"Msg,omitempty" name:"Msg"`
 
-	// Remarks of the custom response configuration error code.
+	// Custom response configuration error code remarks.
 	Desc *string `json:"Desc,omitempty" name:"Desc"`
 
 	// Custom error code conversion.
@@ -3088,19 +3133,19 @@ type ResponseErrorCodeReq struct {
 
 type ServiceConfig struct {
 
-	// Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+	// Backend type, which takes effect when VPC is enabled. Currently, only `clb` is supported.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// Unique VPC ID.
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 
-	// API backend service URL. This parameter is required when `ServiceType` is `HTTP`.
+	// API backend service URL, which is required if `ServiceType` is `HTTP`.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// API backend service path, such as `/path`. If `ServiceType` is `HTTP`, this parameter will be required. The frontend and backend paths can be different.
+	// API backend service path, such as `/path`, which is required if `ServiceType` is `HTTP`. The frontend and backend paths can be different.
 	Path *string `json:"Path,omitempty" name:"Path"`
 
-	// API backend service request method, such as `GET`. If `ServiceType` is `HTTP`, this parameter will be required. The frontend and backend methods can be different
+	// API backend service request method, such as `GET`, which is required if `ServiceType` is `HTTP`. The frontend and backend methods can be different
 	Method *string `json:"Method,omitempty" name:"Method"`
 }
 
@@ -3110,7 +3155,7 @@ type ServiceEnvironmentSet struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// List of environments bound to service
+	// List of environments bound to service.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	EnvironmentList []*Environment `json:"EnvironmentList,omitempty" name:"EnvironmentList" list`
 }
@@ -3126,7 +3171,7 @@ type ServiceEnvironmentStrategy struct {
 	// Release status.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-	// Release version ID.
+	// Published version number.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VersionName *string `json:"VersionName,omitempty" name:"VersionName"`
 
@@ -3136,7 +3181,7 @@ type ServiceEnvironmentStrategy struct {
 
 type ServiceEnvironmentStrategyStatus struct {
 
-	// Throttling policy number.
+	// Number of throttling policies.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -3147,38 +3192,38 @@ type ServiceEnvironmentStrategyStatus struct {
 
 type ServiceParameter struct {
 
-	// API backend service parameter name. This parameter takes effect only when `ServiceType` is `HTTP`. Frontend and backend parameter names can be different.
+	// API backend service parameter name, which is used only if `ServiceType` is `HTTP`. The frontend and backend parameter names can be different.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// API backend service parameter position, such as `head`. This parameter takes effect only when `ServiceType` is `HTTP`.
+	// Position of API backend service parameter, such as `head`, which is used only if `ServiceType` is `HTTP`. The positions of frontend and backend parameters can be different.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Position *string `json:"Position,omitempty" name:"Position"`
 
-	// Position of the API frontend parameter corresponding to backend service parameter, such as `head`. This parameter takes effect only when `ServiceType` is `HTTP`.
+	// Position of the API frontend parameter corresponding to the backend service parameter, such as `head`, which is used only if `ServiceType` is `HTTP`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RelevantRequestParameterPosition *string `json:"RelevantRequestParameterPosition,omitempty" name:"RelevantRequestParameterPosition"`
 
-	// Name of the API frontend parameter corresponding to backend service parameter. This parameter takes effect only when `ServiceType` is `HTTP`.
+	// Name of the API frontend parameter corresponding to the backend service parameter, which is used only if `ServiceType` is `HTTP`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RelevantRequestParameterName *string `json:"RelevantRequestParameterName,omitempty" name:"RelevantRequestParameterName"`
 
-	// API backend service parameter default value. This parameter takes effect only when `ServiceType` is `HTTP`.
+	// Default value of API backend service parameter, which is used only if `ServiceType` is `HTTP`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
 
-	// API backend service parameter remarks. This parameter takes effect only when `ServiceType` is `HTTP`.
+	// API backend service parameter remarks, which is used only if `ServiceType` is `HTTP`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RelevantRequestParameterDesc *string `json:"RelevantRequestParameterDesc,omitempty" name:"RelevantRequestParameterDesc"`
 
-	// API backend service parameter type. This parameter takes effect only when `ServiceType` is `HTTP`.
+	// API backend service parameter type, which is used only if `ServiceType` is `HTTP`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RelevantRequestParameterType *string `json:"RelevantRequestParameterType,omitempty" name:"RelevantRequestParameterType"`
 }
 
 type ServiceReleaseHistory struct {
 
-	// Total number of release versions.
+	// Total number of published versions.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -3204,7 +3249,7 @@ type ServiceReleaseHistoryInfo struct {
 
 type ServiceReleaseVersion struct {
 
-	// Total number of release versions.
+	// Total number of published versions.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -3215,7 +3260,7 @@ type ServiceReleaseVersion struct {
 
 type ServiceSubDomainMappings struct {
 
-	// Whether to use the default path mapping. true: use the default path mapping. false: use the custom path mapping (`PathMappingSet` is required).
+	// Whether the default path mapping is used. true: use the default path mapping; false: use the custom path mapping (`PathMappingSet` is required in this case).
 	IsDefaultMapping *bool `json:"IsDefaultMapping,omitempty" name:"IsDefaultMapping"`
 
 	// Custom path mapping list.
@@ -3262,7 +3307,7 @@ type TargetServicesReq struct {
 
 type TsfLoadBalanceConfResp struct {
 
-	// Whether to enable load balancing.
+	// Whether load balancing is enabled.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsLoadBalance *bool `json:"IsLoadBalance,omitempty" name:"IsLoadBalance"`
 
@@ -3270,7 +3315,7 @@ type TsfLoadBalanceConfResp struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Method *string `json:"Method,omitempty" name:"Method"`
 
-	// Whether to enable session persistence.
+	// Whether session persistence is enabled.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SessionStickRequired *bool `json:"SessionStickRequired,omitempty" name:"SessionStickRequired"`
 
@@ -3282,7 +3327,7 @@ type TsfLoadBalanceConfResp struct {
 type UnBindEnvironmentRequest struct {
 	*tchttp.BaseRequest
 
-	// Binding type. Valid values: API, SERVICE (default value).
+	// Binding type. Valid values: API, SERVICE. Default value: SERVICE.
 	BindType *string `json:"BindType,omitempty" name:"BindType"`
 
 	// List of unique IDs of the usage plans to be bound.
@@ -3294,7 +3339,7 @@ type UnBindEnvironmentRequest struct {
 	// Unique ID of the service to be unbound.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Unique API ID array. This parameter will be required when `BindType` is `API`.
+	// Unique API ID array, which is required if `BindType` is `API`.
 	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
 }
 
@@ -3463,7 +3508,7 @@ type UnReleaseServiceRequest struct {
 	// Unique ID of the service to be deactivated.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Name of the environment to be deactivated. Valid values: test (testing environment), prepub (pre-publish environment), release (release environment).
+	// Name of the environment to be deactivated. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
 	// List of APIs to be deactivated, which is a reserved field.
@@ -3504,10 +3549,10 @@ func (r *UnReleaseServiceResponse) FromJsonString(s string) error {
 type UpdateApiKeyRequest struct {
 	*tchttp.BaseRequest
 
-	// ID of the key to be updated.
+	// ID of the key to be changed.
 	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
 
-	// Key to be updated, which is required when a custom key is updated. It can contain 10 to 50 letters, digits, and underscores.
+	// Key to be updated, which is required when a custom key is updated. It can contain 10–50 letters, digits, and underscores.
 	AccessKeySecret *string `json:"AccessKeySecret,omitempty" name:"AccessKeySecret"`
 }
 
@@ -3524,7 +3569,7 @@ type UpdateApiKeyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Changed key details.
+		// Key details after change.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Result *ApiKey `json:"Result,omitempty" name:"Result"`
 
@@ -3545,10 +3590,10 @@ func (r *UpdateApiKeyResponse) FromJsonString(s string) error {
 type UpdateServiceRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of the service to be switch to.
+	// Unique ID of the service to be switch.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Name of the environment to be switched to. Valid values: test (testing environment), prepub (pre-publish environment), release (release environment).
+	// Name of the environment to be switched to. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
 	// Number of the version to be switched to.
@@ -3613,6 +3658,17 @@ type UsagePlan struct {
 	ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
 }
 
+type UsagePlanBindEnvironment struct {
+
+	// Environment name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Unique service ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+}
+
 type UsagePlanBindSecret struct {
 
 	// Key ID.
@@ -3661,7 +3717,7 @@ type UsagePlanEnvironment struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Method *string `json:"Method,omitempty" name:"Method"`
 
-	// Name of the bound environment.
+	// Name of bound environment.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Environment *string `json:"Environment,omitempty" name:"Environment"`
 
@@ -3673,7 +3729,7 @@ type UsagePlanEnvironment struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MaxRequestNum *int64 `json:"MaxRequestNum,omitempty" name:"MaxRequestNum"`
 
-	// Maximum requests per second.
+	// Maximum number of requests per second.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MaxRequestNumPreSec *int64 `json:"MaxRequestNumPreSec,omitempty" name:"MaxRequestNumPreSec"`
 
@@ -3696,7 +3752,62 @@ type UsagePlanEnvironmentStatus struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// Environment status of the services bound to usage plan.
+	// Environment status of services bound to usage plan.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	EnvironmentList []*UsagePlanEnvironment `json:"EnvironmentList,omitempty" name:"EnvironmentList" list`
+}
+
+type UsagePlanInfo struct {
+
+	// Unique usage plan ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
+
+	// Usage plan name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UsagePlanName *string `json:"UsagePlanName,omitempty" name:"UsagePlanName"`
+
+	// Usage plan description.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UsagePlanDesc *string `json:"UsagePlanDesc,omitempty" name:"UsagePlanDesc"`
+
+	// Number of initialization calls.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InitQuota *int64 `json:"InitQuota,omitempty" name:"InitQuota"`
+
+	// Limit of requests per second.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MaxRequestNumPreSec *int64 `json:"MaxRequestNumPreSec,omitempty" name:"MaxRequestNumPreSec"`
+
+	// Maximum number of calls.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MaxRequestNum *int64 `json:"MaxRequestNum,omitempty" name:"MaxRequestNum"`
+
+	// Whether to hide.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsHide *int64 `json:"IsHide,omitempty" name:"IsHide"`
+
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
+
+	// Number of bound keys.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	BindSecretIdTotalCount *int64 `json:"BindSecretIdTotalCount,omitempty" name:"BindSecretIdTotalCount"`
+
+	// Details of bound keys.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	BindSecretIds []*string `json:"BindSecretIds,omitempty" name:"BindSecretIds" list`
+
+	// Number of bound environments.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	BindEnvironmentTotalCount *int64 `json:"BindEnvironmentTotalCount,omitempty" name:"BindEnvironmentTotalCount"`
+
+	// Details of bound environments.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	BindEnvironments []*UsagePlanBindEnvironment `json:"BindEnvironments,omitempty" name:"BindEnvironments" list`
 }

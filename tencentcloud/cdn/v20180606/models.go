@@ -436,10 +436,6 @@ type CacheKey struct {
 	// on: enable full-path cache (i.e., disable parameter filter)
 	// off: disable full-path cache (i.e., enable parameter filter)
 	FullUrlCache *string `json:"FullUrlCache,omitempty" name:"FullUrlCache"`
-
-	// Whether the cache ignores letter case
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	CaseSensitive *string `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
 }
 
 type CacheOptResult struct {
@@ -2155,20 +2151,6 @@ type GuetzliAdapter struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
-type Hsts struct {
-
-	// Whether to enable. Valid values: on, off.
-	Switch *string `json:"Switch,omitempty" name:"Switch"`
-
-	// `MaxAge` value.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MaxAge *int64 `json:"MaxAge,omitempty" name:"MaxAge"`
-
-	// Whether to include subdomain names. Valid values: on, off.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	IncludeSubDomains *string `json:"IncludeSubDomains,omitempty" name:"IncludeSubDomains"`
-}
-
 type HttpHeaderPathRule struct {
 
 	// HTTP header setting method
@@ -2256,14 +2238,6 @@ type Https struct {
 	// failed: deployment failed
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SslStatus *string `json:"SslStatus,omitempty" name:"SslStatus"`
-
-	// TLS version list. Valid values:
-	// TLSv1.0, TLSv1.1, TLSv1.2
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	TlsVersion []*string `json:"TlsVersion,omitempty" name:"TlsVersion" list`
-
-	// 
-	Hsts *Hsts `json:"Hsts,omitempty" name:"Hsts"`
 }
 
 type ImageOptimization struct {

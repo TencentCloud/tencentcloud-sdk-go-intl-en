@@ -45,7 +45,6 @@ type AudioPipelineInputStatistics struct {
 	Rate *uint64 `json:"Rate,omitempty" name:"Rate"`
 
 	// Audio `Pid`, which is available only if the input is `rtp/udp`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
 }
 
@@ -137,7 +136,6 @@ type ChannelPipelineAlerts struct {
 
 	// Alarm end time in UTC time.
 	// This time is available only after the alarm ends.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	ClearTime *string `json:"ClearTime,omitempty" name:"ClearTime"`
 
 	// Alarm type.
@@ -282,18 +280,6 @@ func (r *CreateMediaLiveInputSecurityGroupResponse) ToJsonString() string {
 
 func (r *CreateMediaLiveInputSecurityGroupResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
-}
-
-type DashRemuxSettingsInfo struct {
-
-	// Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
-	SegmentDuration *uint64 `json:"SegmentDuration,omitempty" name:"SegmentDuration"`
-
-	// Number of segments. Value range: [1,30]. Default value: 5.
-	SegmentNumber *uint64 `json:"SegmentNumber,omitempty" name:"SegmentNumber"`
-
-	// Whether to enable multi-period. Valid values: CLOSE/OPEN. Default value: CLOSE.
-	PeriodTriggers *string `json:"PeriodTriggers,omitempty" name:"PeriodTriggers"`
 }
 
 type DeleteMediaLiveChannelRequest struct {
@@ -448,6 +434,9 @@ type DescribeMediaLiveChannelInputStatisticsRequest struct {
 	// Statistics end time, which is one hour after `StartTime` by default.
 	// UTC time, such as `2020-01-01T12:00:00Z`.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// 
+	Period *string `json:"Period,omitempty" name:"Period"`
 }
 
 func (r *DescribeMediaLiveChannelInputStatisticsRequest) ToJsonString() string {
@@ -493,6 +482,9 @@ type DescribeMediaLiveChannelOutputStatisticsRequest struct {
 	// Statistics end time, which is one hour after `StartTime` by default.
 	// UTC time, such as `2020-01-01T12:00:00Z`.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// 
+	Period *string `json:"Period,omitempty" name:"Period"`
 }
 
 func (r *DescribeMediaLiveChannelOutputStatisticsRequest) ToJsonString() string {
@@ -740,50 +732,6 @@ func (r *DescribeMediaLiveInputsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type DestinationInfo struct {
-
-	// Relay destination address. Length limit: [1,512].
-	OutputUrl *string `json:"OutputUrl,omitempty" name:"OutputUrl"`
-
-	// Authentication key. Length limit: [1,128].
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	AuthKey *string `json:"AuthKey,omitempty" name:"AuthKey"`
-
-	// Authentication username. Length limit: [1,128].
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Username *string `json:"Username,omitempty" name:"Username"`
-
-	// Authentication password. Length limit: [1,128].
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Password *string `json:"Password,omitempty" name:"Password"`
-}
-
-type DrmSettingsInfo struct {
-
-	// Whether to enable DRM encryption. Valid value: CLOSE/OPEN. Default value: CLOSE.
-	// Currently, this is supported only for HLS/DASH/HLS_ARCHIVE/DASH_ARCHIVE.
-	State *string `json:"State,omitempty" name:"State"`
-
-	// `ContentId` of DRM encryption, which will be automatically created if this parameter is left empty.
-	// For more information on the custom creation method, please visit https://cloud.tencent.com/document/product/1000/40960
-	ContentId *string `json:"ContentId,omitempty" name:"ContentId"`
-}
-
-type HlsRemuxSettingsInfo struct {
-
-	// Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
-	SegmentDuration *uint64 `json:"SegmentDuration,omitempty" name:"SegmentDuration"`
-
-	// Number of segments. Value range: [1,30]. Default value: 5.
-	SegmentNumber *uint64 `json:"SegmentNumber,omitempty" name:"SegmentNumber"`
-
-	// Whether to enable PDT insertion. Valid values: CLOSE/OPEN. Default value: CLOSE.
-	PdtInsertion *string `json:"PdtInsertion,omitempty" name:"PdtInsertion"`
-
-	// PDT duration in seconds. Value range: (0,3000]. Default value: 600.
-	PdtDuration *uint64 `json:"PdtDuration,omitempty" name:"PdtDuration"`
-}
-
 type InputInfo struct {
 
 	// Input region.
@@ -985,60 +933,12 @@ func (r *ModifyMediaLiveInputSecurityGroupResponse) FromJsonString(s string) err
     return json.Unmarshal([]byte(s), &r)
 }
 
-type OutputGroupsInfo struct {
-
-	// Channel output group name, which can contain 1–32 letters, digits, and underscores and must be unique at the channel level.
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Output protocol type.
-	// Valid values: HLS/DASH/RTP/RTMP/HLS_ARCHIVE/DASH_ARCHIVE.
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// Output information.
-	// Quantity limit: [1,1] for RTMP/RTP; [1,10] for HLS/DASH.
-	Outputs []*OutputInfo `json:"Outputs,omitempty" name:"Outputs" list`
-
-	// Relay destination address. Quantity limit: [1,2].
-	Destinations []*DestinationInfo `json:"Destinations,omitempty" name:"Destinations" list`
-
-	// HLS protocol configuration information, which takes effect only for HLS/HLS_ARCHIVE.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	HlsRemuxSettings *HlsRemuxSettingsInfo `json:"HlsRemuxSettings,omitempty" name:"HlsRemuxSettings"`
-
-	// DASH protocol configuration information, which takes effect only for DASH/DSAH_ARCHIVE.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	DashRemuxSettings *DashRemuxSettingsInfo `json:"DashRemuxSettings,omitempty" name:"DashRemuxSettings"`
-
-	// DRM configuration information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	DrmSettings *DrmSettingsInfo `json:"DrmSettings,omitempty" name:"DrmSettings"`
-}
-
-type OutputInfo struct {
-
-	// Output name.
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Audio transcoding template name array.
-	// Quantity limit: [0,1] for RTMP; [0,20] for others.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	AudioTemplateNames []*string `json:"AudioTemplateNames,omitempty" name:"AudioTemplateNames" list`
-
-	// Video transcoding template name array. Quantity limit: [0,1].
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	VideoTemplateNames []*string `json:"VideoTemplateNames,omitempty" name:"VideoTemplateNames" list`
-
-	// SCTE-35 information configuration.
-	Scte35Settings *Scte35SettingsInfo `json:"Scte35Settings,omitempty" name:"Scte35Settings"`
-}
-
 type OutputsStatistics struct {
 
 	// Output information of pipeline 0.
 	Pipeline0 []*PipelineOutputStatistics `json:"Pipeline0,omitempty" name:"Pipeline0" list`
 
 	// Output information of pipeline 1.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Pipeline1 []*PipelineOutputStatistics `json:"Pipeline1,omitempty" name:"Pipeline1" list`
 }
 
@@ -1053,13 +953,11 @@ type PipelineInputStatistics struct {
 	// Video information array.
 	// For `rtp/udp` input, the quantity is the number of `Pid` of the input video.
 	// For other inputs, the quantity is 1.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Video []*VideoPipelineInputStatistics `json:"Video,omitempty" name:"Video" list`
 
 	// Audio information array.
 	// For `rtp/udp` input, the quantity is the number of `Pid` of the input audio.
 	// For other inputs, the quantity is 1.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Audio []*AudioPipelineInputStatistics `json:"Audio,omitempty" name:"Audio" list`
 }
 
@@ -1071,12 +969,6 @@ type PipelineOutputStatistics struct {
 
 	// Output bandwidth in bps.
 	NetworkOut *uint64 `json:"NetworkOut,omitempty" name:"NetworkOut"`
-}
-
-type Scte35SettingsInfo struct {
-
-	// Whether to pass through SCTE-35 information. Valid values: NO_PASSTHROUGH/PASSTHROUGH. Default value: NO_PASSTHROUGH.
-	Behavior *string `json:"Behavior,omitempty" name:"Behavior"`
 }
 
 type StartMediaLiveChannelRequest struct {
@@ -1156,7 +1048,6 @@ type VideoPipelineInputStatistics struct {
 	Rate *uint64 `json:"Rate,omitempty" name:"Rate"`
 
 	// Video `Pid`, which is available only if the input is `rtp/udp`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
 }
 

@@ -68,6 +68,31 @@ func (c *Client) CloseDBExtranetAccess(request *CloseDBExtranetAccessRequest) (r
     return
 }
 
+func NewCreateDBInstancesRequest() (request *CreateDBInstancesRequest) {
+    request = &CreateDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateDBInstances")
+    return
+}
+
+func NewCreateDBInstancesResponse() (response *CreateDBInstancesResponse) {
+    response = &CreateDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create one or more TencentDB for PostgreSQL instances.
+func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response *CreateDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewCreateDBInstancesRequest()
+    }
+    response = NewCreateDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAccountsRequest() (request *DescribeAccountsRequest) {
     request = &DescribeAccountsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -164,6 +189,31 @@ func (c *Client) DescribeDBInstanceAttribute(request *DescribeDBInstanceAttribut
         request = NewDescribeDBInstanceAttributeRequest()
     }
     response = NewDescribeDBInstanceAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBInstancesRequest() (request *DescribeDBInstancesRequest) {
+    request = &DescribeDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeDBInstances")
+    return
+}
+
+func NewDescribeDBInstancesResponse() (response *DescribeDBInstancesResponse) {
+    response = &DescribeDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the details of one or more instances.
+func (c *Client) DescribeDBInstances(request *DescribeDBInstancesRequest) (response *DescribeDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstancesRequest()
+    }
+    response = NewDescribeDBInstancesResponse()
     err = c.Send(request, response)
     return
 }
@@ -514,6 +564,31 @@ func (c *Client) RestartDBInstance(request *RestartDBInstanceRequest) (response 
         request = NewRestartDBInstanceRequest()
     }
     response = NewRestartDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeDBInstanceRequest() (request *UpgradeDBInstanceRequest) {
+    request = &UpgradeDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "UpgradeDBInstance")
+    return
+}
+
+func NewUpgradeDBInstanceResponse() (response *UpgradeDBInstanceResponse) {
+    response = &UpgradeDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to upgrade an instance.
+func (c *Client) UpgradeDBInstance(request *UpgradeDBInstanceRequest) (response *UpgradeDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewUpgradeDBInstanceRequest()
+    }
+    response = NewUpgradeDBInstanceResponse()
     err = c.Send(request, response)
     return
 }

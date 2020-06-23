@@ -129,8 +129,8 @@ type Cluster struct {
 	// Note: this field may return null, indicating that no valid value is obtained.
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
-	// OsCustomizeType
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Container image tag
+	// Note: This field may return null, indicating that no valid value was found.
 	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
 
 	// Runtime environment of the cluster. Values can be `docker` or `containerd`.
@@ -140,6 +140,10 @@ type Cluster struct {
 	// Creation time
 	// Note: this field may return null, indicating that no valid value is obtained.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Whether Deletion Protection is enabled
+	// Note: this field may return null, indicating that no valid value is obtained.
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
 }
 
 type ClusterAdvancedSettings struct {
@@ -164,9 +168,6 @@ type ClusterAdvancedSettings struct {
 
 	// Whether a cluster in VPC-CNI mode uses dynamic IP addresses. The default value is FALSE, which indicates that static IP addresses are used.
 	IsNonStaticIpMode *bool `json:"IsNonStaticIpMode,omitempty" name:"IsNonStaticIpMode"`
-
-	// Indicates whether to enable deletion protection
-	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
 }
 
 type ClusterBasicSettings struct {

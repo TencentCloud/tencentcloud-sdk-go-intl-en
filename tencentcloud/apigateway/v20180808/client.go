@@ -441,8 +441,8 @@ func NewDemoteServiceUsagePlanResponse() (response *DemoteServiceUsagePlanRespon
 }
 
 // This API is used to demote a usage plan of a service in an environment to the API level.
-// To make authentication and throttling for a service take effect, you need to bind a usage plan to it. This API is used to query all usage plans bound to the service.
-// This operation will be denied if there are no APIs under a service.
+//  
+// This operation will be denied if there are no APIs under the service.
 // This operation will also be denied if the current environment has not been published.
 func (c *Client) DemoteServiceUsagePlan(request *DemoteServiceUsagePlanRequest) (response *DemoteServiceUsagePlanResponse, err error) {
     if request == nil {
@@ -468,7 +468,7 @@ func NewDescribeApiResponse() (response *DescribeApiResponse) {
     return
 }
 
-// This API is used to query the detailed information of an API deployed in API Gateway.
+// This API is used to query the details of an API deployed in API Gateway.
 func (c *Client) DescribeApi(request *DescribeApiRequest) (response *DescribeApiResponse, err error) {
     if request == nil {
         request = NewDescribeApiRequest()
@@ -518,8 +518,8 @@ func NewDescribeApiKeyResponse() (response *DescribeApiKeyResponse) {
     return
 }
 
-// This API is used to query key details.
-// After creating an API key, you can query its details using this API which will display its key.
+// This API is used to query the details of a key.
+// After creating an API key, you can query its details by using this API.
 func (c *Client) DescribeApiKey(request *DescribeApiKeyRequest) (response *DescribeApiKeyResponse, err error) {
     if request == nil {
         request = NewDescribeApiKeyRequest()
@@ -545,7 +545,7 @@ func NewDescribeApiUsagePlanResponse() (response *DescribeApiUsagePlanResponse) 
 }
 
 // This API is used to query the details of API usage plans in a service.
-// To make authentication and throttling for a service takes effect, you need to bind usage plans to it. This API is used to query all usage plans bound to a service and APIs under it.
+// To make authentication and throttling for a service take effect, you need to bind a usage plan to it. This API is used to query all usage plans bound to a service and APIs under it.
 func (c *Client) DescribeApiUsagePlan(request *DescribeApiUsagePlanRequest) (response *DescribeApiUsagePlanResponse, err error) {
     if request == nil {
         request = NewDescribeApiUsagePlanRequest()
@@ -645,8 +645,8 @@ func NewDescribeServiceEnvironmentReleaseHistoryResponse() (response *DescribeSe
     return
 }
 
-// This API is used to query the release history of a service environment.
-// A service can only be used when it is published to an environment after creation. This API is used to query the release history of an environment under a service.
+// This API is used to query the release history in a service environment.
+// A service can only be used when it is published to an environment after creation. This API is used to query the release history in an environment under a service.
 func (c *Client) DescribeServiceEnvironmentReleaseHistory(request *DescribeServiceEnvironmentReleaseHistoryRequest) (response *DescribeServiceEnvironmentReleaseHistoryResponse, err error) {
     if request == nil {
         request = NewDescribeServiceEnvironmentReleaseHistoryRequest()
@@ -671,7 +671,7 @@ func NewDescribeServiceEnvironmentStrategyResponse() (response *DescribeServiceE
     return
 }
 
-// This API is used to display service throttling policies.
+// This API is used to display a service throttling policy.
 func (c *Client) DescribeServiceEnvironmentStrategy(request *DescribeServiceEnvironmentStrategyRequest) (response *DescribeServiceEnvironmentStrategyResponse, err error) {
     if request == nil {
         request = NewDescribeServiceEnvironmentStrategyRequest()
@@ -723,7 +723,7 @@ func NewDescribeServiceSubDomainMappingsResponse() (response *DescribeServiceSub
 }
 
 // This API is used to query the path mappings of a custom domain name.
-// In API Gateway, you can bind a custom domain name to a service and map the paths for it. You can custom different path mappings to up to 3 environments under the service. This API is used to query the list of path mappings of a custom domain name bound to a service.
+// In API Gateway, you can bind a custom domain name to a service and map its paths. You can customize different path mappings to up to 3 environments under the service. This API is used to query the list of path mappings of a custom domain name bound to a service.
 func (c *Client) DescribeServiceSubDomainMappings(request *DescribeServiceSubDomainMappingsRequest) (response *DescribeServiceSubDomainMappingsResponse, err error) {
     if request == nil {
         request = NewDescribeServiceSubDomainMappingsRequest()
@@ -775,7 +775,7 @@ func NewDescribeServiceUsagePlanResponse() (response *DescribeServiceUsagePlanRe
 }
 
 // This API is used to query the details of usage plans in a service.
-// To make authentication and throttling for a service take effect, you need to bind a usage plan to it. This API is used to query all usage plans bound to the service.
+// To make authentication and throttling for a service take effect, you need to bind a usage plan to it. This API is used to query all usage plans bound to a service.
 func (c *Client) DescribeServiceUsagePlan(request *DescribeServiceUsagePlanRequest) (response *DescribeServiceUsagePlanResponse, err error) {
     if request == nil {
         request = NewDescribeServiceUsagePlanRequest()
@@ -877,7 +877,7 @@ func NewDisableApiKeyResponse() (response *DisableApiKeyResponse) {
     return
 }
 
-// This API is used to disable an API key pair.
+// This API is used to disable an API key.
 func (c *Client) DisableApiKey(request *DisableApiKeyRequest) (response *DisableApiKeyResponse, err error) {
     if request == nil {
         request = NewDisableApiKeyRequest()
@@ -902,7 +902,7 @@ func NewEnableApiKeyResponse() (response *EnableApiKeyResponse) {
     return
 }
 
-// This API is used to enable a disabled API key pair.
+// This API is used to enable a disabled API key.
 func (c *Client) EnableApiKey(request *EnableApiKeyRequest) (response *EnableApiKeyResponse, err error) {
     if request == nil {
         request = NewEnableApiKeyRequest()
@@ -927,7 +927,7 @@ func NewGenerateApiDocumentResponse() (response *GenerateApiDocumentResponse) {
     return
 }
 
-// This API is used to automatically generate API documentation and SDKs. A document and an SDK will be generated for each environment under each service, respectively.
+// This API is used to automatically generate API documents and SDKs. One document and one SDK will be generated for each environment under each service, respectively.
 func (c *Client) GenerateApiDocument(request *GenerateApiDocumentRequest) (response *GenerateApiDocumentResponse, err error) {
     if request == nil {
         request = NewGenerateApiDocumentRequest()
@@ -1002,7 +1002,7 @@ func NewModifyApiIncrementResponse() (response *ModifyApiIncrementResponse) {
     return
 }
 
-// This API is used to incrementally update an API and mainly called by programs (different from `ModifyApi`, which requires full API parameters be passed in and is suitable for being used with the console).
+// This API is used to incrementally update an API and mainly called by programs (different from `ModifyApi`, which requires that full API parameters be passed in and is suitable for use in the console).
 func (c *Client) ModifyApiIncrement(request *ModifyApiIncrementRequest) (response *ModifyApiIncrementResponse, err error) {
     if request == nil {
         request = NewModifyApiIncrementRequest()
@@ -1052,7 +1052,7 @@ func NewModifyServiceResponse() (response *ModifyServiceResponse) {
     return
 }
 
-// This API is used to modify the relevant information of a service. After a service is created, its name, description, and service type all can be modified.
+// This API is used to modify the relevant information of a service. After a service is created, its name, description, and service type can be modified.
 func (c *Client) ModifyService(request *ModifyServiceRequest) (response *ModifyServiceResponse, err error) {
     if request == nil {
         request = NewModifyServiceRequest()
@@ -1102,7 +1102,7 @@ func NewModifySubDomainResponse() (response *ModifySubDomainResponse) {
     return
 }
 
-// This API is used to modify the path mapping in the custom domain name settings of the service. The path mapping rule can be modified before it is bound to the custom domain name.
+// This API is used to modify the path mapping in the custom domain name settings of a service. The path mapping rule can be modified before it is bound to the custom domain name.
 func (c *Client) ModifySubDomain(request *ModifySubDomainRequest) (response *ModifySubDomainResponse, err error) {
     if request == nil {
         request = NewModifySubDomainRequest()
@@ -1254,7 +1254,7 @@ func NewUnBindSubDomainResponse() (response *UnBindSubDomainResponse) {
 }
 
 // This API is used to unbind a custom domain name.
-// After binding a custom domain name to a service using API Gateway, you can use this API to unbind it.
+// After binding a custom domain name to a service by using API Gateway, you can use this API to unbind it.
 func (c *Client) UnBindSubDomain(request *UnBindSubDomainRequest) (response *UnBindSubDomainResponse, err error) {
     if request == nil {
         request = NewUnBindSubDomainRequest()
@@ -1280,7 +1280,7 @@ func NewUnReleaseServiceResponse() (response *UnReleaseServiceResponse) {
 }
 
 // This API is used to deactivate a service.
-// Only when a service is published to an environment can its APIs be called by callers. You can call this API to deactivate a service from the release environment. Once deactivated, the service cannot be called.
+// Only after a service is published to an environment can its APIs be called. You can call this API to deactivate a service in the release environment. Once deactivated, the service cannot be called.
 func (c *Client) UnReleaseService(request *UnReleaseServiceRequest) (response *UnReleaseServiceResponse, err error) {
     if request == nil {
         request = NewUnReleaseServiceRequest()
@@ -1330,7 +1330,7 @@ func NewUpdateServiceResponse() (response *UpdateServiceResponse) {
     return
 }
 
-// This API is used to switch the running version published in an environment of a service to a specified version. After you create a service by using API Gateway and publish it to an environment, multiple versions will be generated during development. In this case, you can call this API to switch versions.
+// This API is used to switch the running version of a service published in an environment to a specified version. After you create a service by using API Gateway and publish it to an environment, multiple versions will be generated during development. In this case, you can call this API to switch versions.
 func (c *Client) UpdateService(request *UpdateServiceRequest) (response *UpdateServiceResponse, err error) {
     if request == nil {
         request = NewUpdateServiceRequest()

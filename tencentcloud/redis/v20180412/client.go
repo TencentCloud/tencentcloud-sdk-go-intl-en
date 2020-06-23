@@ -1118,6 +1118,31 @@ func (c *Client) StartupInstance(request *StartupInstanceRequest) (response *Sta
     return
 }
 
+func NewSwitchInstanceVipRequest() (request *SwitchInstanceVipRequest) {
+    request = &SwitchInstanceVipRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "SwitchInstanceVip")
+    return
+}
+
+func NewSwitchInstanceVipResponse() (response *SwitchInstanceVipResponse) {
+    response = &SwitchInstanceVipResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to swap the VIPs of instances for instance disaster recovery switch in scenarios where cross-AZ disaster recovery is supported through DTS. After the VIPs of the source and target instances are swapped, the target instance can be written into and the DTS sync task between them will be disconnected.
+func (c *Client) SwitchInstanceVip(request *SwitchInstanceVipRequest) (response *SwitchInstanceVipResponse, err error) {
+    if request == nil {
+        request = NewSwitchInstanceVipRequest()
+    }
+    response = NewSwitchInstanceVipResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpgradeInstanceRequest() (request *UpgradeInstanceRequest) {
     request = &UpgradeInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},

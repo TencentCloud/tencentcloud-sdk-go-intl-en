@@ -1385,8 +1385,8 @@ type Externals struct {
 	// Note: This field may return null, indicating that no valid value is found.
 	ReleaseAddress *bool `json:"ReleaseAddress,omitempty" name:"ReleaseAddress"`
 
-	// Unsupported network types
-	// Note: This field may return null, indicating that no valid value is found.
+	// Not supported network. Value: <br><li>BASIC: classic network<br><li>VPC1.0: VPC1.0
+	// Note: This field may return null, indicating that no valid value was found.
 	UnsupportNetworks []*string `json:"UnsupportNetworks,omitempty" name:"UnsupportNetworks" list`
 
 	// Attributes of local HDD storage
@@ -1552,9 +1552,9 @@ type ItemPrice struct {
 	// Note: this field may return null, indicating that no valid value is obtained.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 
-	// Percentage of the original price. For example, if you enter "20", the discounted price will be 20% of the original price.
-	// Note: this field may return null, indicating that no valid value is obtained.
-	Discount *uint64 `json:"Discount,omitempty" name:"Discount"`
+	// Percentage of the original price. For example, if you enter "20.0", the discounted price will be 20% of the original price.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
 
 	// The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to the unit price for the usage between 0 and ∞ hours.
 	// Note: this field may return null, indicating that no valid value is obtained.

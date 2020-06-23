@@ -193,6 +193,56 @@ func (c *Client) DescribeDBInstances(request *DescribeDBInstancesRequest) (respo
     return
 }
 
+func NewDescribeSlowLogPatternsRequest() (request *DescribeSlowLogPatternsRequest) {
+    request = &DescribeSlowLogPatternsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeSlowLogPatterns")
+    return
+}
+
+func NewDescribeSlowLogPatternsResponse() (response *DescribeSlowLogPatternsResponse) {
+    response = &DescribeSlowLogPatternsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the slow log statistics of a database instance.
+func (c *Client) DescribeSlowLogPatterns(request *DescribeSlowLogPatternsRequest) (response *DescribeSlowLogPatternsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowLogPatternsRequest()
+    }
+    response = NewDescribeSlowLogPatternsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSlowLogsRequest() (request *DescribeSlowLogsRequest) {
+    request = &DescribeSlowLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeSlowLogs")
+    return
+}
+
+func NewDescribeSlowLogsResponse() (response *DescribeSlowLogsResponse) {
+    response = &DescribeSlowLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the slow log information of a TencentDB instance. Only slow logs for the last 7 days can be queried.
+func (c *Client) DescribeSlowLogs(request *DescribeSlowLogsRequest) (response *DescribeSlowLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowLogsRequest()
+    }
+    response = NewDescribeSlowLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSpecInfoRequest() (request *DescribeSpecInfoRequest) {
     request = &DescribeSpecInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -214,6 +264,31 @@ func (c *Client) DescribeSpecInfo(request *DescribeSpecInfoRequest) (response *D
         request = NewDescribeSpecInfoRequest()
     }
     response = NewDescribeSpecInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewFlushInstanceRouterConfigRequest() (request *FlushInstanceRouterConfigRequest) {
+    request = &FlushInstanceRouterConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "FlushInstanceRouterConfig")
+    return
+}
+
+func NewFlushInstanceRouterConfigResponse() (response *FlushInstanceRouterConfigResponse) {
+    response = &FlushInstanceRouterConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to run the `FlushRouterConfig` command on all mongos instances.
+func (c *Client) FlushInstanceRouterConfig(request *FlushInstanceRouterConfigRequest) (response *FlushInstanceRouterConfigResponse, err error) {
+    if request == nil {
+        request = NewFlushInstanceRouterConfigRequest()
+    }
+    response = NewFlushInstanceRouterConfigResponse()
     err = c.Send(request, response)
     return
 }

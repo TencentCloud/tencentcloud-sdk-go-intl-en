@@ -78,6 +78,91 @@ func (r *CloseDBExtranetAccessResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateDBInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
+
+	// PostgreSQL kernel version. Currently, only two versions are supported: 9.3.5 and 9.5.4.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Instance capacity size in GB.
+	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Number of instances purchased at a time. Value range: 1–100.
+	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Instance billing type.
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Whether to automatically use vouchers. 1: yes, 0: no. Default value: no.
+	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list (only one voucher can be specified currently).
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
+
+	// VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Renewal flag. 0: normal renewal (default), 1: auto-renewal.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// 
+	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// 
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+func (r *CreateDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateDBInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Order number list. Each instance corresponds to an order number.
+		DealNames []*string `json:"DealNames,omitempty" name:"DealNames" list`
+
+		// 
+		BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+		// 
+		DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateDBInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DBBackup struct {
 
 	// Unique backup file ID
@@ -409,6 +494,58 @@ func (r *DescribeDBInstanceAttributeResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDBInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Filter. Valid values: db-instance-id, db-instance-name
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Number of entries returned per page. Default value: 10.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number, starting from 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// 
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// 
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of instances found.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Instance details set.
+		DBInstanceSet []*DBInstance `json:"DBInstanceSet,omitempty" name:"DBInstanceSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeDBSlowlogsRequest struct {
 	*tchttp.BaseRequest
 
@@ -686,6 +823,15 @@ type ErrLogDetail struct {
 
 	// Error message
 	ErrMsg *string `json:"ErrMsg,omitempty" name:"ErrMsg"`
+}
+
+type Filter struct {
+
+	// Filter name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// One or more filter values.
+	Values []*string `json:"Values,omitempty" name:"Values" list`
 }
 
 type InitDBInstancesRequest struct {
@@ -1153,6 +1299,61 @@ type SpecItemInfo struct {
 
 	// Machine type
 	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type UpgradeDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance memory size in GB after upgrade
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB after upgrade
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Instance ID in the format of postgres-lnp6j617
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Whether to automatically use vouchers. 1: yes, 0: no. Default value: no
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list (only one voucher can be specified currently)
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
+
+	// 
+	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+}
+
+func (r *UpgradeDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Transaction name.
+		DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+		// 
+		BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpgradeDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpgradeDBInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type Xlog struct {

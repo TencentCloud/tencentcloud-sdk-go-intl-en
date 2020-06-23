@@ -68,6 +68,31 @@ func (c *Client) AcceptAttachCcnInstances(request *AcceptAttachCcnInstancesReque
     return
 }
 
+func NewAddBandwidthPackageResourcesRequest() (request *AddBandwidthPackageResourcesRequest) {
+    request = &AddBandwidthPackageResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "AddBandwidthPackageResources")
+    return
+}
+
+func NewAddBandwidthPackageResourcesResponse() (response *AddBandwidthPackageResourcesResponse) {
+    response = &AddBandwidthPackageResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to add bandwidth package resources. This includes [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
+func (c *Client) AddBandwidthPackageResources(request *AddBandwidthPackageResourcesRequest) (response *AddBandwidthPackageResourcesResponse, err error) {
+    if request == nil {
+        request = NewAddBandwidthPackageResourcesRequest()
+    }
+    response = NewAddBandwidthPackageResourcesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAllocateAddressesRequest() (request *AllocateAddressesRequest) {
     request = &AllocateAddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -235,6 +260,31 @@ func (c *Client) AssociateAddress(request *AssociateAddressRequest) (response *A
         request = NewAssociateAddressRequest()
     }
     response = NewAssociateAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAssociateNatGatewayAddressRequest() (request *AssociateNatGatewayAddressRequest) {
+    request = &AssociateNatGatewayAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "AssociateNatGatewayAddress")
+    return
+}
+
+func NewAssociateNatGatewayAddressResponse() (response *AssociateNatGatewayAddressResponse) {
+    response = &AssociateNatGatewayAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (AssociateNatGatewayAddress) is used to bind a NAT gateway to an Elastic IP (EIP).
+func (c *Client) AssociateNatGatewayAddress(request *AssociateNatGatewayAddressRequest) (response *AssociateNatGatewayAddressResponse, err error) {
+    if request == nil {
+        request = NewAssociateNatGatewayAddressRequest()
+    }
+    response = NewAssociateNatGatewayAddressResponse()
     err = c.Send(request, response)
     return
 }
@@ -499,6 +549,31 @@ func (c *Client) CreateAssistantCidr(request *CreateAssistantCidrRequest) (respo
     return
 }
 
+func NewCreateBandwidthPackageRequest() (request *CreateBandwidthPackageRequest) {
+    request = &CreateBandwidthPackageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateBandwidthPackage")
+    return
+}
+
+func NewCreateBandwidthPackageResponse() (response *CreateBandwidthPackageResponse) {
+    response = &CreateBandwidthPackageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to support the creation of [Device bandwidth packages](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
+func (c *Client) CreateBandwidthPackage(request *CreateBandwidthPackageRequest) (response *CreateBandwidthPackageResponse, err error) {
+    if request == nil {
+        request = NewCreateBandwidthPackageRequest()
+    }
+    response = NewCreateBandwidthPackageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCcnRequest() (request *CreateCcnRequest) {
     request = &CreateCcnRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -584,6 +659,31 @@ func (c *Client) CreateDefaultVpc(request *CreateDefaultVpcRequest) (response *C
     return
 }
 
+func NewCreateDirectConnectGatewayRequest() (request *CreateDirectConnectGatewayRequest) {
+    request = &CreateDirectConnectGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateDirectConnectGateway")
+    return
+}
+
+func NewCreateDirectConnectGatewayResponse() (response *CreateDirectConnectGatewayResponse) {
+    response = &CreateDirectConnectGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (CreateDirectConnectGateway) is used to create a Direct Connect gateway.
+func (c *Client) CreateDirectConnectGateway(request *CreateDirectConnectGatewayRequest) (response *CreateDirectConnectGatewayResponse, err error) {
+    if request == nil {
+        request = NewCreateDirectConnectGatewayRequest()
+    }
+    response = NewCreateDirectConnectGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDirectConnectGatewayCcnRoutesRequest() (request *CreateDirectConnectGatewayCcnRoutesRequest) {
     request = &CreateDirectConnectGatewayCcnRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -605,6 +705,31 @@ func (c *Client) CreateDirectConnectGatewayCcnRoutes(request *CreateDirectConnec
         request = NewCreateDirectConnectGatewayCcnRoutesRequest()
     }
     response = NewCreateDirectConnectGatewayCcnRoutesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateFlowLogRequest() (request *CreateFlowLogRequest) {
+    request = &CreateFlowLogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateFlowLog")
+    return
+}
+
+func NewCreateFlowLogResponse() (response *CreateFlowLogResponse) {
+    response = &CreateFlowLogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (CreateFlowLog) is used to create flow logs.
+func (c *Client) CreateFlowLog(request *CreateFlowLogRequest) (response *CreateFlowLogResponse, err error) {
+    if request == nil {
+        request = NewCreateFlowLogRequest()
+    }
+    response = NewCreateFlowLogResponse()
     err = c.Send(request, response)
     return
 }
@@ -863,15 +988,19 @@ func NewCreateSecurityGroupPoliciesResponse() (response *CreateSecurityGroupPoli
 
 // This API is used to create security group policies (SecurityGroupPolicy).
 // 
-// * The `Version` field indicates the version number of a security group policy, which will automatically increment by 1 every time you update the security policy, to prevent the expiration of the updated routing policies. If this field is left empty, any conflicts will be ignored.
-// * The value of the `Protocol` field can be TCP, UDP, ICMP, ICMPV6, GRE, or ALL.
-// * The `CidrBlock` field allows you to enter any string that conforms to the CIDR format. (More details) In a basic network, if a CidrBlock contains private IP addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.
-// * The `Ipv6CidrBlock` field allows you to enter any string that conforms to the IPv6 CIDR format. (More details) In a basic network, if an Ipv6CidrBlock contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.
-// * The SecurityGroupId field allows you to enter the IDs of security groups that are in the same project as the security group to be modified, including the ID of the security group itself, to represent private IP addresses of all CVMs under the security group. If this field is used, the policy will change without manual modification according to the CVM associated with the policy ID while being used to match network messages.
-// * The Port field allows you to enter a single port number, or two port numbers separated by a minus sign to represent a port range, such as 80 or 8000-8010. The Port field is accepted only if the value of the Protocol field is TCP or UDP. In other words, if the value of the Protocol field is not TCP or UDP, Protocol and Port are exclusive and cannot be entered at the same time, otherwise an error will occur with the API.
-// * The Action field only allows you to enter ACCEPT or DROP.
-// * CidrBlock, Ipv6CidrBlock, SecurityGroupId, and AddressTemplate are exclusive and cannot be entered at the same time. Protocol + Port and ServiceTemplate are mutually exclusive and cannot be entered at the same time.
-// * Only policies in one direction can be created in each request. If you need to specify the PolicyIndex parameter, the indexes of policies must be consistent.
+// For parameters of SecurityGroupPolicySet,
+// </ul>
+// <li>`Version`: the version number of a security group policy, which automatically increases by one each time you update the security policy, to prevent expiration of the updated routing policies. If it is left empty, any conflicts will be ignored.</li>
+// <li>When creating the `Egress` and `Ingress` polices,<ul>
+// <li>`Protocol`: allows TCP, UDP, ICMP, ICMPV6, GRE, or ALL.</li>
+// <li>*`CidrBlock`: a CIDR block in the correct format. In a classic network, if a `CidrBlock` contains private IPs on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
+// <li>`Ipv6CidrBlock`: an IPv6 CIDR block in the correct format. In a classic network, if an `Ipv6CidrBlock` contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
+// <li>`SecurityGroupId`: ID of the security group. It can be in the same project as the security group to be modified, including the ID of the security group itself, to represent private IPs of all CVMs under the security group. If this field is used, the policy will change without manual modification according to the CVM associated with the group ID while being used to match network messages.</li>
+// <li>`Port`: a single port number such as 80, or a port range in the format of “8000-8010”. You may use this field only if the `Protocol` field takes the value `TCP` or `UDP`. Otherwise `Protocol` and `Port` are mutually exclusive.</li>
+// <li>`Action`: only allows `ACCEPT` or `DROP`.</li>
+// <li>`CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are mutually exclusive. `Protocol` + `Port`and `ServiceTemplate` are mutually exclusive.</li>
+// <li>You can only create policies in one direction in each request. To specify the `PolicyIndex` parameter, use the same index number in policies.</li>
+// </ul></li></ul>
 func (c *Client) CreateSecurityGroupPolicies(request *CreateSecurityGroupPoliciesRequest) (response *CreateSecurityGroupPoliciesResponse, err error) {
     if request == nil {
         request = NewCreateSecurityGroupPoliciesRequest()
@@ -1184,6 +1313,31 @@ func (c *Client) DeleteAssistantCidr(request *DeleteAssistantCidrRequest) (respo
     return
 }
 
+func NewDeleteBandwidthPackageRequest() (request *DeleteBandwidthPackageRequest) {
+    request = &DeleteBandwidthPackageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteBandwidthPackage")
+    return
+}
+
+func NewDeleteBandwidthPackageResponse() (response *DeleteBandwidthPackageResponse) {
+    response = &DeleteBandwidthPackageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to support the deletion of shared bandwidth packages, including [Device bandwidth packages](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85).
+func (c *Client) DeleteBandwidthPackage(request *DeleteBandwidthPackageRequest) (response *DeleteBandwidthPackageResponse, err error) {
+    if request == nil {
+        request = NewDeleteBandwidthPackageRequest()
+    }
+    response = NewDeleteBandwidthPackageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCcnRequest() (request *DeleteCcnRequest) {
     request = &DeleteCcnRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1236,6 +1390,34 @@ func (c *Client) DeleteCustomerGateway(request *DeleteCustomerGatewayRequest) (r
     return
 }
 
+func NewDeleteDirectConnectGatewayRequest() (request *DeleteDirectConnectGatewayRequest) {
+    request = &DeleteDirectConnectGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteDirectConnectGateway")
+    return
+}
+
+func NewDeleteDirectConnectGatewayResponse() (response *DeleteDirectConnectGatewayResponse) {
+    response = &DeleteDirectConnectGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DeleteDirectConnectGateway) is used to delete Direct Connect gateways.
+// <li>For a NAT gateway, NAT and ACL rules will be cleaned upon the deletion of a Direct Connect gateway.
+// <li>After the deletion of a Direct Connect gateway, the routing policy associated with the gateway in the route table will also be deleted.
+// This API is completed asynchronously. If you need to query the async job execution results, please use the `RequestId` returned by this API to query the `QueryTask` API.
+func (c *Client) DeleteDirectConnectGateway(request *DeleteDirectConnectGatewayRequest) (response *DeleteDirectConnectGatewayResponse, err error) {
+    if request == nil {
+        request = NewDeleteDirectConnectGatewayRequest()
+    }
+    response = NewDeleteDirectConnectGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteDirectConnectGatewayCcnRoutesRequest() (request *DeleteDirectConnectGatewayCcnRoutesRequest) {
     request = &DeleteDirectConnectGatewayCcnRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1257,6 +1439,31 @@ func (c *Client) DeleteDirectConnectGatewayCcnRoutes(request *DeleteDirectConnec
         request = NewDeleteDirectConnectGatewayCcnRoutesRequest()
     }
     response = NewDeleteDirectConnectGatewayCcnRoutesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteFlowLogRequest() (request *DeleteFlowLogRequest) {
+    request = &DeleteFlowLogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteFlowLog")
+    return
+}
+
+func NewDeleteFlowLogResponse() (response *DeleteFlowLogResponse) {
+    response = &DeleteFlowLogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DeleteFlowLog) is used to delete flow logs.
+func (c *Client) DeleteFlowLog(request *DeleteFlowLogRequest) (response *DeleteFlowLogResponse, err error) {
+    if request == nil {
+        request = NewDeleteFlowLogRequest()
+    }
+    response = NewDeleteFlowLogResponse()
     err = c.Send(request, response)
     return
 }
@@ -1823,6 +2030,56 @@ func (c *Client) DescribeAssistantCidr(request *DescribeAssistantCidrRequest) (r
     return
 }
 
+func NewDescribeBandwidthPackageQuotaRequest() (request *DescribeBandwidthPackageQuotaRequest) {
+    request = &DescribeBandwidthPackageQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeBandwidthPackageQuota")
+    return
+}
+
+func NewDescribeBandwidthPackageQuotaResponse() (response *DescribeBandwidthPackageQuotaResponse) {
+    response = &DescribeBandwidthPackageQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the account’s maximum number of bandwidth packages and their usage in the current region.
+func (c *Client) DescribeBandwidthPackageQuota(request *DescribeBandwidthPackageQuotaRequest) (response *DescribeBandwidthPackageQuotaResponse, err error) {
+    if request == nil {
+        request = NewDescribeBandwidthPackageQuotaRequest()
+    }
+    response = NewDescribeBandwidthPackageQuotaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBandwidthPackagesRequest() (request *DescribeBandwidthPackagesRequest) {
+    request = &DescribeBandwidthPackagesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeBandwidthPackages")
+    return
+}
+
+func NewDescribeBandwidthPackagesResponse() (response *DescribeBandwidthPackagesResponse) {
+    response = &DescribeBandwidthPackagesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query bandwidth package information, including the unique ID of the bandwidth package, the type, the billing mode, the name, and the resource information.
+func (c *Client) DescribeBandwidthPackages(request *DescribeBandwidthPackagesRequest) (response *DescribeBandwidthPackagesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBandwidthPackagesRequest()
+    }
+    response = NewDescribeBandwidthPackagesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCcnAttachedInstancesRequest() (request *DescribeCcnAttachedInstancesRequest) {
     request = &DescribeCcnAttachedInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1994,6 +2251,81 @@ func (c *Client) DescribeDirectConnectGatewayCcnRoutes(request *DescribeDirectCo
         request = NewDescribeDirectConnectGatewayCcnRoutesRequest()
     }
     response = NewDescribeDirectConnectGatewayCcnRoutesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDirectConnectGatewaysRequest() (request *DescribeDirectConnectGatewaysRequest) {
+    request = &DescribeDirectConnectGatewaysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeDirectConnectGateways")
+    return
+}
+
+func NewDescribeDirectConnectGatewaysResponse() (response *DescribeDirectConnectGatewaysResponse) {
+    response = &DescribeDirectConnectGatewaysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeDirectConnectGateways) is used to query Direct Connect gateways.
+func (c *Client) DescribeDirectConnectGateways(request *DescribeDirectConnectGatewaysRequest) (response *DescribeDirectConnectGatewaysResponse, err error) {
+    if request == nil {
+        request = NewDescribeDirectConnectGatewaysRequest()
+    }
+    response = NewDescribeDirectConnectGatewaysResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeFlowLogRequest() (request *DescribeFlowLogRequest) {
+    request = &DescribeFlowLogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeFlowLog")
+    return
+}
+
+func NewDescribeFlowLogResponse() (response *DescribeFlowLogResponse) {
+    response = &DescribeFlowLogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeFlowLog) is used to query flow log instance information.
+func (c *Client) DescribeFlowLog(request *DescribeFlowLogRequest) (response *DescribeFlowLogResponse, err error) {
+    if request == nil {
+        request = NewDescribeFlowLogRequest()
+    }
+    response = NewDescribeFlowLogResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeFlowLogsRequest() (request *DescribeFlowLogsRequest) {
+    request = &DescribeFlowLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeFlowLogs")
+    return
+}
+
+func NewDescribeFlowLogsResponse() (response *DescribeFlowLogsResponse) {
+    response = &DescribeFlowLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeFlowLogs) is used to query and obtain the flow log set.
+func (c *Client) DescribeFlowLogs(request *DescribeFlowLogsRequest) (response *DescribeFlowLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeFlowLogsRequest()
+    }
+    response = NewDescribeFlowLogsResponse()
     err = c.Send(request, response)
     return
 }
@@ -3315,6 +3647,31 @@ func (c *Client) ModifyAssistantCidr(request *ModifyAssistantCidrRequest) (respo
     return
 }
 
+func NewModifyBandwidthPackageAttributeRequest() (request *ModifyBandwidthPackageAttributeRequest) {
+    request = &ModifyBandwidthPackageAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyBandwidthPackageAttribute")
+    return
+}
+
+func NewModifyBandwidthPackageAttributeResponse() (response *ModifyBandwidthPackageAttributeResponse) {
+    response = &ModifyBandwidthPackageAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify bandwidth package attributes, including the bandwidth package name, and so on.
+func (c *Client) ModifyBandwidthPackageAttribute(request *ModifyBandwidthPackageAttributeRequest) (response *ModifyBandwidthPackageAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyBandwidthPackageAttributeRequest()
+    }
+    response = NewModifyBandwidthPackageAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyCcnAttributeRequest() (request *ModifyCcnAttributeRequest) {
     request = &ModifyCcnAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3386,6 +3743,56 @@ func (c *Client) ModifyCustomerGatewayAttribute(request *ModifyCustomerGatewayAt
         request = NewModifyCustomerGatewayAttributeRequest()
     }
     response = NewModifyCustomerGatewayAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDirectConnectGatewayAttributeRequest() (request *ModifyDirectConnectGatewayAttributeRequest) {
+    request = &ModifyDirectConnectGatewayAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyDirectConnectGatewayAttribute")
+    return
+}
+
+func NewModifyDirectConnectGatewayAttributeResponse() (response *ModifyDirectConnectGatewayAttributeResponse) {
+    response = &ModifyDirectConnectGatewayAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (ModifyDirectConnectGatewayAttribute) is used to modify the Direct Connect gateway attributes.
+func (c *Client) ModifyDirectConnectGatewayAttribute(request *ModifyDirectConnectGatewayAttributeRequest) (response *ModifyDirectConnectGatewayAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyDirectConnectGatewayAttributeRequest()
+    }
+    response = NewModifyDirectConnectGatewayAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyFlowLogAttributeRequest() (request *ModifyFlowLogAttributeRequest) {
+    request = &ModifyFlowLogAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyFlowLogAttribute")
+    return
+}
+
+func NewModifyFlowLogAttributeResponse() (response *ModifyFlowLogAttributeResponse) {
+    response = &ModifyFlowLogAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (ModifyFlowLogAttribute) is used to modify flow log attributes.
+func (c *Client) ModifyFlowLogAttribute(request *ModifyFlowLogAttributeRequest) (response *ModifyFlowLogAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyFlowLogAttributeRequest()
+    }
+    response = NewModifyFlowLogAttributeResponse()
     err = c.Send(request, response)
     return
 }
@@ -3705,17 +4112,22 @@ func NewModifySecurityGroupPoliciesResponse() (response *ModifySecurityGroupPoli
     return
 }
 
-// This API (ModifySecurityGroupPolicies) is used to reset the egress and ingress policies (SecurityGroupPolicy) of a security group.
+// This API is used to reset the egress and ingress policies (SecurityGroupPolicy) of a security group.
 // 
-// * This API deletes all the current egress and ingress policies, and then adds new Egress and Ingress policies. It does not support custom PolicyIndex indexes.
-// * If SecurityGroupPolicySet.Version is set to 0, all policies will be cleared, and Egress and Ingress will be ignored.
-// * The value of the Protocol field can be TCP, UDP, ICMP, ICMPV6, GRE, or ALL.
-// * The CidrBlock field allows you to enter any string that conforms to the CIDR format. (More details) In a basic network, if a CidrBlock contains private IP addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.
-// * The Ipv6CidrBlock field allows you to enter any string that conforms to the IPv6 CIDR format. (More details) In a basic network, if an Ipv6CidrBlock contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.
-// * The SecurityGroupId field allows you to enter the IDs of security groups that are in the same project as the security group to be modified, including the ID of the security group itself, to represent private IP addresses of all CVMs under the security group. If this field is used, this policy will change without manual modification according to the CVM associated with the policy ID while being used to match network messages.
-// * The Port field allows you to enter a single port number, or two port numbers separated by a minus sign to represent a port range, such as 80 or 8000-8010. The Port field can be used only when the value of the Protocol field is TCP or UDP.
-// * The Action field only allows you to enter ACCEPT or DROP.
-// * CidrBlock, Ipv6CidrBlock, SecurityGroupId, and AddressTemplate are exclusive and cannot be entered at the same time. Protocol + Port and ServiceTemplate are mutually exclusive and cannot be entered at the same time.
+// </ul>
+// <li>This API deletes all the existing egress and ingress policies, and then adds `Egress` and `Ingress policies`. It does not support custom indexes `PolicyIndex`.</li>
+// <li>For parameters of SecurityGroupPolicySet,<ul>
+// 	<li>If `SecurityGroupPolicySet.Version` is set to 0, all policies will be cleared, and `Egress` and `Ingress` will be ignored.</li>
+// 	<li>If `SecurityGroupPolicySet.Version` is not set to 0, add `Egress` and `Ingress` policies:<ul>
+// 		<li>`Protocol`: allows TCP, UDP, ICMP, ICMPV6, GRE, or ALL.</li>
+// 		<li>`CidrBlock`: a CIDR block in the correct format. In a classic network, if a `CidrBlock` contains private IPs on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
+// 		<li>`Ipv6CidrBlock`: an IPv6 CIDR block in the correct format. In a classic network, if an `Ipv6CidrBlock` contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
+// 		<li>`SecurityGroupId`: ID of the security group. It can be in the same project as the security group to be modified, including the ID of the security group itself, to represent private IPs of all CVMs under the security group. If this field is used, the policy will change without manual modification according to the CVM associated with the policy ID while being used to match network messages.</li>
+// 		<li>`Port`: a single port number such as 80, or a port range in the format of “8000-8010”. You may use this field only if the `Protocol` field takes the value `TCP` or `UDP`.</li>
+// 		<li>`Action`: only allows ACCEPT or DROP.</li>
+// 		<li>`CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are mutually exclusive. `Protocol` + `Port` and `ServiceTemplate` are mutually exclusive.</li>
+// </ul></li></ul></li>
+// </ul>
 func (c *Client) ModifySecurityGroupPolicies(request *ModifySecurityGroupPoliciesRequest) (response *ModifySecurityGroupPoliciesResponse, err error) {
     if request == nil {
         request = NewModifySecurityGroupPoliciesRequest()
@@ -3948,6 +4360,31 @@ func (c *Client) ReleaseAddresses(request *ReleaseAddressesRequest) (response *R
         request = NewReleaseAddressesRequest()
     }
     response = NewReleaseAddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRemoveBandwidthPackageResourcesRequest() (request *RemoveBandwidthPackageResourcesRequest) {
+    request = &RemoveBandwidthPackageResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "RemoveBandwidthPackageResources")
+    return
+}
+
+func NewRemoveBandwidthPackageResourcesResponse() (response *RemoveBandwidthPackageResourcesResponse) {
+    response = &RemoveBandwidthPackageResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete bandwidth package resources. This includes [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
+func (c *Client) RemoveBandwidthPackageResources(request *RemoveBandwidthPackageResourcesRequest) (response *RemoveBandwidthPackageResourcesResponse, err error) {
+    if request == nil {
+        request = NewRemoveBandwidthPackageResourcesRequest()
+    }
+    response = NewRemoveBandwidthPackageResourcesResponse()
     err = c.Send(request, response)
     return
 }

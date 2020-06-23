@@ -421,6 +421,31 @@ func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response 
     return
 }
 
+func NewDescribeProjectsRequest() (request *DescribeProjectsRequest) {
+    request = &DescribeProjectsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "DescribeProjects")
+    return
+}
+
+func NewDescribeProjectsResponse() (response *DescribeProjectsResponse) {
+    response = &DescribeProjectsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the project list.
+func (c *Client) DescribeProjects(request *DescribeProjectsRequest) (response *DescribeProjectsResponse, err error) {
+    if request == nil {
+        request = NewDescribeProjectsRequest()
+    }
+    response = NewDescribeProjectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGrantAccountPrivilegesRequest() (request *GrantAccountPrivilegesRequest) {
     request = &GrantAccountPrivilegesRequest{
         BaseRequest: &tchttp.BaseRequest{},

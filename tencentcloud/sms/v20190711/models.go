@@ -344,9 +344,9 @@ type DescribeSignListStatus struct {
 	// Signature ID
 	SignId *uint64 `json:"SignId,omitempty" name:"SignId"`
 
-	// Whether it is Global SMS:
+	// Whether it is Global SMS. Valid values:
 	// 0: Mainland China SMS.
-	// 1: Global SMS.
+	// 1: Global SMS
 	International *uint64 `json:"International,omitempty" name:"International"`
 
 	// Signature application status. Valid values:
@@ -453,9 +453,9 @@ type DescribeTemplateListStatus struct {
 	// Template ID
 	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Whether it is Global SMS:
+	// Whether it is Global SMS. Valid values:
 	// 0: Mainland China SMS.
-	// 1: Global SMS.
+	// 1: Global SMS
 	International *uint64 `json:"International,omitempty" name:"International"`
 
 	// Signature application status. Valid values:

@@ -2637,6 +2637,55 @@ func (r *StartupInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type SwitchInstanceVipRequest struct {
+	*tchttp.BaseRequest
+
+	// Source instance ID
+	SrcInstanceId *string `json:"SrcInstanceId,omitempty" name:"SrcInstanceId"`
+
+	// Target instance ID
+	DstInstanceId *string `json:"DstInstanceId,omitempty" name:"DstInstanceId"`
+
+	// The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than TimeDelay, the VIP will not be switched. It is recommended to set an acceptable value based on the actual business conditions.
+	TimeDelay *int64 `json:"TimeDelay,omitempty" name:"TimeDelay"`
+
+	// Whether to force the switch when DTS is disconnected. 1: yes; 0: no
+	ForceSwitch *int64 `json:"ForceSwitch,omitempty" name:"ForceSwitch"`
+
+	// now: switch now; syncComplete: switch after sync is completed
+	SwitchTime *string `json:"SwitchTime,omitempty" name:"SwitchTime"`
+}
+
+func (r *SwitchInstanceVipRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SwitchInstanceVipRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SwitchInstanceVipResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SwitchInstanceVipResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SwitchInstanceVipResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type TaskInfoDetail struct {
 
 	// Task ID

@@ -232,7 +232,7 @@ type CreateFunctionRequest struct {
 	// Function environment variable
 	Environment *Environment `json:"Environment,omitempty" name:"Environment"`
 
-	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, PHP5, PHP7, Golang1, Java8. Default value: Python2.7
+	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Golang1 and Java8. Default value: Python2.7
 	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
 
 	// Function VPC configuration
@@ -707,6 +707,9 @@ type FunctionLog struct {
 
 	// Log source
 	Source *string `json:"Source,omitempty" name:"Source"`
+
+	// Number of retries
+	RetryNum *uint64 `json:"RetryNum,omitempty" name:"RetryNum"`
 }
 
 type FunctionVersion struct {
@@ -2004,7 +2007,7 @@ type UpdateFunctionConfigurationRequest struct {
 	// Maximum execution duration of function in seconds. Value range: 1–900 seconds. Default value: 3 seconds
 	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 
-	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, PHP5, PHP7, Golang1, Java8
+	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Golang1 and Java8
 	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
 
 	// Function environment variable

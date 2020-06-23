@@ -505,6 +505,46 @@ func (r *DeleteTablesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeClusterTagsRequest struct {
+	*tchttp.BaseRequest
+
+	// The list of cluster IDs
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds" list`
+}
+
+func (r *DescribeClusterTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterTagsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The information list of cluster tags
+		Rows []*TagsInfoOfCluster `json:"Rows,omitempty" name:"Rows" list`
+
+		// The number of returned results
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterTagsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeClustersRequest struct {
 	*tchttp.BaseRequest
 
@@ -643,6 +683,49 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeTableGroupTagsRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where table group tags need to be queried
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of IDs of the table groups whose tags need to be queried
+	TableGroupIds []*string `json:"TableGroupIds,omitempty" name:"TableGroupIds" list`
+}
+
+func (r *DescribeTableGroupTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTableGroupTagsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTableGroupTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The information list of table group tags
+		Rows []*TagsInfoOfTableGroup `json:"Rows,omitempty" name:"Rows" list`
+
+		// The number of returned results
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTableGroupTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTableGroupTagsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeTableGroupsRequest struct {
 	*tchttp.BaseRequest
 
@@ -692,6 +775,49 @@ func (r *DescribeTableGroupsResponse) ToJsonString() string {
 }
 
 func (r *DescribeTableGroupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTableTagsRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where a table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Table list
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables" list`
+}
+
+func (r *DescribeTableTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTableTagsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTableTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The total number of returned results
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The information list of table tags
+		Rows []*TagsInfoOfTable `json:"Rows,omitempty" name:"Rows" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTableTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTableTagsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1039,6 +1165,49 @@ func (r *ModifyClusterPasswordResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyClusterTagsRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster whose tags need to be modified
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tags to add or modify
+	ReplaceTags []*TagInfoUnit `json:"ReplaceTags,omitempty" name:"ReplaceTags" list`
+
+	// Tags to delete
+	DeleteTags []*TagInfoUnit `json:"DeleteTags,omitempty" name:"DeleteTags" list`
+}
+
+func (r *ModifyClusterTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterTagsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyClusterTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyClusterTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterTagsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyTableGroupNameRequest struct {
 	*tchttp.BaseRequest
 
@@ -1076,6 +1245,52 @@ func (r *ModifyTableGroupNameResponse) ToJsonString() string {
 }
 
 func (r *ModifyTableGroupNameResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyTableGroupTagsRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where table group tags need to be modified
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The ID of the table group whose tags need to be modified
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// The list of tags to add or modify
+	ReplaceTags []*TagInfoUnit `json:"ReplaceTags,omitempty" name:"ReplaceTags" list`
+
+	// Tags to delete
+	DeleteTags []*TagInfoUnit `json:"DeleteTags,omitempty" name:"DeleteTags" list`
+}
+
+func (r *ModifyTableGroupTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyTableGroupTagsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyTableGroupTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyTableGroupTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyTableGroupTagsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1162,6 +1377,55 @@ func (r *ModifyTableQuotasResponse) ToJsonString() string {
 }
 
 func (r *ModifyTableQuotasResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyTableTagsRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where table tags need to be modified
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tables whose tags need to be modified
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables" list`
+
+	// The list of tags to add or modify
+	ReplaceTags []*TagInfoUnit `json:"ReplaceTags,omitempty" name:"ReplaceTags" list`
+
+	// The list of tags to delete
+	DeleteTags []*TagInfoUnit `json:"DeleteTags,omitempty" name:"DeleteTags" list`
+}
+
+func (r *ModifyTableTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyTableTagsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyTableTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The total number of returned results
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Returned results
+		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyTableTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyTableTagsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1558,10 +1822,6 @@ type TableInfoNew struct {
 	// Sort order of SORTLIST-type tables
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SortRule *int64 `json:"SortRule,omitempty" name:"SortRule"`
-
-	// Distributed index information of table
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	DbClusterInfoStruct *string `json:"DbClusterInfoStruct,omitempty" name:"DbClusterInfoStruct"`
 }
 
 type TableResultNew struct {
@@ -1644,6 +1904,60 @@ type TableRollbackResultNew struct {
 	// Total number of keys contained in key file
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalKeyNum *uint64 `json:"TotalKeyNum,omitempty" name:"TotalKeyNum"`
+}
+
+type TagInfoUnit struct {
+
+	// Tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type TagsInfoOfCluster struct {
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Tag information
+	Tags []*TagInfoUnit `json:"Tags,omitempty" name:"Tags" list`
+
+	// Error message
+	Error *ErrorInfo `json:"Error,omitempty" name:"Error"`
+}
+
+type TagsInfoOfTable struct {
+
+	// Table instance ID
+	TableInstanceId *string `json:"TableInstanceId,omitempty" name:"TableInstanceId"`
+
+	// Table name
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Table group ID
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Tag information
+	Tags []*TagInfoUnit `json:"Tags,omitempty" name:"Tags" list`
+
+	// Error message
+	Error *ErrorInfo `json:"Error,omitempty" name:"Error"`
+}
+
+type TagsInfoOfTableGroup struct {
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Table group ID
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Tag information
+	Tags []*TagInfoUnit `json:"Tags,omitempty" name:"Tags" list`
+
+	// Error message
+	Error *ErrorInfo `json:"Error,omitempty" name:"Error"`
 }
 
 type TaskInfoNew struct {

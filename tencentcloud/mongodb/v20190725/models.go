@@ -399,6 +399,116 @@ func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeSlowLogPatternsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of `cmgo-p8vnipr5`, which is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-01 10:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-02 12:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Threshold of slow log execution time in milliseconds. Minimum value: 100. Slow logs whose execution time exceeds the threshold will be returned.
+	SlowMS *uint64 `json:"SlowMS,omitempty" name:"SlowMS"`
+
+	// Offset. Minimum value: 0. Maximum value: 10000. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Minimum value: 1. Maximum value: 100. Default value: 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeSlowLogPatternsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSlowLogPatternsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSlowLogPatternsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of slow logs
+		Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+		// Slow log statistics
+		SlowLogPatterns []*SlowLogPattern `json:"SlowLogPatterns,omitempty" name:"SlowLogPatterns" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSlowLogPatternsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSlowLogPatternsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSlowLogsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of `cmgo-p8vnipr5`, which is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-01 10:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-02 12:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Threshold of slow log execution time in milliseconds. Minimum value: 100. Slow logs whose execution time exceeds the threshold will be returned.
+	SlowMS *uint64 `json:"SlowMS,omitempty" name:"SlowMS"`
+
+	// Offset. Minimum value: 0. Maximum value: 10000. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Minimum value: 1. Maximum value: 100. Default value: 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeSlowLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSlowLogsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSlowLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of slow logs
+		Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+		// Slow log details
+		SlowLogs []*string `json:"SlowLogs,omitempty" name:"SlowLogs" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSlowLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSlowLogsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSpecInfoRequest struct {
 	*tchttp.BaseRequest
 
@@ -433,6 +543,40 @@ func (r *DescribeSpecInfoResponse) ToJsonString() string {
 }
 
 func (r *DescribeSpecInfoResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type FlushInstanceRouterConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *FlushInstanceRouterConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *FlushInstanceRouterConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type FlushInstanceRouterConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *FlushInstanceRouterConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *FlushInstanceRouterConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -735,6 +879,21 @@ type ShardInfo struct {
 
 	// Shard physical ID
 	RealReplicaSetId *string `json:"RealReplicaSetId,omitempty" name:"RealReplicaSetId"`
+}
+
+type SlowLogPattern struct {
+
+	// Slow log pattern
+	Pattern *string `json:"Pattern,omitempty" name:"Pattern"`
+
+	// Maximum execution time
+	MaxTime *uint64 `json:"MaxTime,omitempty" name:"MaxTime"`
+
+	// Average execution time
+	AverageTime *uint64 `json:"AverageTime,omitempty" name:"AverageTime"`
+
+	// Number of slow logs in this pattern
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
 }
 
 type SpecItem struct {
