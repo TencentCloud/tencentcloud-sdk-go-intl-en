@@ -20,6 +20,18 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AccessKey struct {
+
+	// Access key ID
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+
+	// Key status. Valid values: Active (activated), Inactive (not activated)
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
 type AddUserRequest struct {
 	*tchttp.BaseRequest
 
@@ -1494,6 +1506,44 @@ type GroupMemberInfo struct {
 
 	// If the user is the main message recipient
 	IsReceiverOwner *uint64 `json:"IsReceiverOwner,omitempty" name:"IsReceiverOwner"`
+}
+
+type ListAccessKeysRequest struct {
+	*tchttp.BaseRequest
+
+	// `UIN` of the specified user. If this parameter is left empty, access keys of the current user will be listed by default
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+}
+
+func (r *ListAccessKeysRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListAccessKeysRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListAccessKeysResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Access key list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		AccessKeys []*AccessKey `json:"AccessKeys,omitempty" name:"AccessKeys" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListAccessKeysResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListAccessKeysResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type ListAttachedGroupPoliciesRequest struct {

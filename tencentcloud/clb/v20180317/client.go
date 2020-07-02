@@ -223,6 +223,31 @@ func (c *Client) CreateLoadBalancer(request *CreateLoadBalancerRequest) (respons
     return
 }
 
+func NewCreateLoadBalancerSnatIpsRequest() (request *CreateLoadBalancerSnatIpsRequest) {
+    request = &CreateLoadBalancerSnatIpsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "CreateLoadBalancerSnatIps")
+    return
+}
+
+func NewCreateLoadBalancerSnatIpsResponse() (response *CreateLoadBalancerSnatIpsResponse) {
+    response = &CreateLoadBalancerSnatIpsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 针对SnatPro负载均衡，这个接口用于添加SnatIp，如果负载均衡没有开启SnatPro，添加SnatIp后会自动开启
+func (c *Client) CreateLoadBalancerSnatIps(request *CreateLoadBalancerSnatIpsRequest) (response *CreateLoadBalancerSnatIpsResponse, err error) {
+    if request == nil {
+        request = NewCreateLoadBalancerSnatIpsRequest()
+    }
+    response = NewCreateLoadBalancerSnatIpsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRuleRequest() (request *CreateRuleRequest) {
     request = &CreateRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -322,6 +347,57 @@ func (c *Client) DeleteLoadBalancer(request *DeleteLoadBalancerRequest) (respons
         request = NewDeleteLoadBalancerRequest()
     }
     response = NewDeleteLoadBalancerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLoadBalancerListenersRequest() (request *DeleteLoadBalancerListenersRequest) {
+    request = &DeleteLoadBalancerListenersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "DeleteLoadBalancerListeners")
+    return
+}
+
+func NewDeleteLoadBalancerListenersResponse() (response *DeleteLoadBalancerListenersResponse) {
+    response = &DeleteLoadBalancerListenersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 该接口支持删除负载均衡的多个监听器。
+// 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+func (c *Client) DeleteLoadBalancerListeners(request *DeleteLoadBalancerListenersRequest) (response *DeleteLoadBalancerListenersResponse, err error) {
+    if request == nil {
+        request = NewDeleteLoadBalancerListenersRequest()
+    }
+    response = NewDeleteLoadBalancerListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLoadBalancerSnatIpsRequest() (request *DeleteLoadBalancerSnatIpsRequest) {
+    request = &DeleteLoadBalancerSnatIpsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "DeleteLoadBalancerSnatIps")
+    return
+}
+
+func NewDeleteLoadBalancerSnatIpsResponse() (response *DeleteLoadBalancerSnatIpsResponse) {
+    response = &DeleteLoadBalancerSnatIpsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 对于SnatPro的负载均衡，这个接口用于删除SnatIp
+func (c *Client) DeleteLoadBalancerSnatIps(request *DeleteLoadBalancerSnatIpsRequest) (response *DeleteLoadBalancerSnatIpsResponse, err error) {
+    if request == nil {
+        request = NewDeleteLoadBalancerSnatIpsRequest()
+    }
+    response = NewDeleteLoadBalancerSnatIpsResponse()
     err = c.Send(request, response)
     return
 }
@@ -476,6 +552,56 @@ func (c *Client) DeregisterTargetsFromClassicalLB(request *DeregisterTargetsFrom
         request = NewDeregisterTargetsFromClassicalLBRequest()
     }
     response = NewDeregisterTargetsFromClassicalLBResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBlockIPListRequest() (request *DescribeBlockIPListRequest) {
+    request = &DescribeBlockIPListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "DescribeBlockIPList")
+    return
+}
+
+func NewDescribeBlockIPListResponse() (response *DescribeBlockIPListResponse) {
+    response = &DescribeBlockIPListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 查询一个负载均衡所封禁的IP列表（黑名单）。（接口灰度中，如需使用请提工单）
+func (c *Client) DescribeBlockIPList(request *DescribeBlockIPListRequest) (response *DescribeBlockIPListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlockIPListRequest()
+    }
+    response = NewDescribeBlockIPListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBlockIPTaskRequest() (request *DescribeBlockIPTaskRequest) {
+    request = &DescribeBlockIPTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "DescribeBlockIPTask")
+    return
+}
+
+func NewDescribeBlockIPTaskResponse() (response *DescribeBlockIPTaskResponse) {
+    response = &DescribeBlockIPTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 根据 ModifyBlockIPList 接口返回的异步任务的ID，查询封禁IP（黑名单）异步任务的执行状态。（接口灰度中，如需使用请提工单）
+func (c *Client) DescribeBlockIPTask(request *DescribeBlockIPTaskRequest) (response *DescribeBlockIPTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlockIPTaskRequest()
+    }
+    response = NewDescribeBlockIPTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -877,6 +1003,32 @@ func (c *Client) ManualRewrite(request *ManualRewriteRequest) (response *ManualR
         request = NewManualRewriteRequest()
     }
     response = NewManualRewriteResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyBlockIPListRequest() (request *ModifyBlockIPListRequest) {
+    request = &ModifyBlockIPListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "ModifyBlockIPList")
+    return
+}
+
+func NewModifyBlockIPListResponse() (response *ModifyBlockIPListResponse) {
+    response = &ModifyBlockIPListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
+// （接口灰度中，如需使用请提工单）
+func (c *Client) ModifyBlockIPList(request *ModifyBlockIPListRequest) (response *ModifyBlockIPListResponse, err error) {
+    if request == nil {
+        request = NewModifyBlockIPListRequest()
+    }
+    response = NewModifyBlockIPListResponse()
     err = c.Send(request, response)
     return
 }

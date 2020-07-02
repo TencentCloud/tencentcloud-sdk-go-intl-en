@@ -1028,6 +1028,43 @@ func (r *DescribeInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeRouteRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeRouteRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRouteRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRouteResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Returned result set of route information
+		Result *RouteResponse `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRouteResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRouteResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeTopicAttributesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1791,6 +1828,40 @@ type PartitionOffset struct {
 	// Offset, such as 100
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+type Route struct {
+
+	// Instance connection method
+	// 0: PLAINTEXT (plaintext method, which does not carry user information and is supported for legacy versions and Community Edition)
+	// 1: SASL_PLAINTEXT (plaintext method, which authenticates the login through SASL before data start and is supported only for Community Edition)
+	// 2: SSL (SSL-encrypted communication, which does not carry user information and is supported for legacy versions and Community Edition)
+	// 3: SASL_SSL (SSL-encrypted communication, which authenticates the login through SASL before data start and is supported only for Community Edition)
+	AccessType *int64 `json:"AccessType,omitempty" name:"AccessType"`
+
+	// Route ID
+	RouteId *int64 `json:"RouteId,omitempty" name:"RouteId"`
+
+	// VIP network type (1: public network TGW; 2: classic network; 3: VPC; 4: Tencent Cloud-supported environment (generally used for internal instances); 5: SSL public network access; 6: BM VPC)
+	VipType *int64 `json:"VipType,omitempty" name:"VipType"`
+
+	// Virtual IP list
+	VipList []*VipEntity `json:"VipList,omitempty" name:"VipList" list`
+
+	// Domain name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Domain name port
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DomainPort *int64 `json:"DomainPort,omitempty" name:"DomainPort"`
+}
+
+type RouteResponse struct {
+
+	// Route information list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Routers []*Route `json:"Routers,omitempty" name:"Routers" list`
 }
 
 type SubscribedInfo struct {

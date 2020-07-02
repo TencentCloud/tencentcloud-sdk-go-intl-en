@@ -123,8 +123,11 @@ type CreateDBInstancesRequest struct {
 	// 
 	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
 
-	// 
+	// Instance name (which will be supported in the future)
 	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// 
+	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitempty" name:"NeedSupportIpv6"`
 }
 
 func (r *CreateDBInstancesRequest) ToJsonString() string {
@@ -359,7 +362,7 @@ type DescribeDBBackupsRequest struct {
 	// Query end time in the format of 2018-06-10 17:06:38
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Number of entries returned per page for backup list. Default value: 20. Minimum value: 1. Maximum value: 100.
+	// Number of entries to be returned per page for backup list. Default value: 20. Minimum value: 1. Maximum value: 100. (If this parameter is left empty or 0, the default value will be used)
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number for data return in paged query. Pagination starts from 0. Default value: 0.
@@ -659,6 +662,43 @@ func (r *DescribeDBXlogsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDatabasesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
+func (r *DescribeDatabasesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDatabasesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDatabasesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Database information
+		Items []*string `json:"Items,omitempty" name:"Items" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDatabasesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeOrdersRequest struct {
 	*tchttp.BaseRequest
 
@@ -810,6 +850,40 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DestroyDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the instance to be deleted
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
+func (r *DestroyDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DestroyDBInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DestroyDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DestroyDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DestroyDBInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ErrLogDetail struct {
 
 	// Username
@@ -877,6 +951,107 @@ func (r *InitDBInstancesResponse) ToJsonString() string {
 }
 
 func (r *InitDBInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquiryPriceCreateDBInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
+
+	// Storage capacity size in GB.
+	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Number of instances. Maximum value: 100. If you need to create more instances at a time, please contact customer service.
+	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
+	Pid *uint64 `json:"Pid,omitempty" name:"Pid"`
+
+	// Instance billing type. Valid value: POSTPAID_BY_HOUR (pay-as-you-go)
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+}
+
+func (r *InquiryPriceCreateDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquiryPriceCreateDBInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquiryPriceCreateDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Original price in 0.01 CNY.
+		OriginalPrice *uint64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+		// Discounted price in 0.01 CNY.
+		Price *uint64 `json:"Price,omitempty" name:"Price"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquiryPriceCreateDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquiryPriceCreateDBInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquiryPriceRenewDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Renewal duration in months. Maximum value: 48
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+}
+
+func (r *InquiryPriceRenewDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquiryPriceRenewDBInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquiryPriceRenewDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total cost before discount; for example, 24650 indicates 246.5 CNY
+		OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+		// Actual amount payable; for example, 24650 indicates 246.5 CNY
+		Price *int64 `json:"Price,omitempty" name:"Price"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquiryPriceRenewDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquiryPriceRenewDBInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1167,6 +1342,52 @@ type RegionInfo struct {
 	RegionState *string `json:"RegionState,omitempty" name:"RegionState"`
 }
 
+type RenewInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of `postgres-6fego161`
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Renewal duration in months
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Whether to automatically use vouchers. 1: yes, 0: no. Default value: 0
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list (only one voucher can be specified currently)
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
+}
+
+func (r *RenewInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RenewInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RenewInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Order name
+		DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RenewInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RenewInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ResetAccountPasswordRequest struct {
 	*tchttp.BaseRequest
 
@@ -1241,6 +1462,46 @@ func (r *RestartDBInstanceResponse) ToJsonString() string {
 }
 
 func (r *RestartDBInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SetAutoRenewFlagRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID array
+	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet" list`
+
+	// Renewal flag. 0: normal renewal, 1: auto-renewal, 2: no renewal upon expiration
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+}
+
+func (r *SetAutoRenewFlagRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetAutoRenewFlagRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SetAutoRenewFlagResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of successfully set instances
+		Count *int64 `json:"Count,omitempty" name:"Count"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SetAutoRenewFlagResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetAutoRenewFlagResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

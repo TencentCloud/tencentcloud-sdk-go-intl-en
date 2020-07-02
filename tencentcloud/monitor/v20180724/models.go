@@ -938,20 +938,20 @@ type DescribePolicyGroupInfoCondition struct {
 	// Alarm sending and converging type. The value 0 indicates that alarms are sent consecutively. The value 1 indicates that alarms are sent exponentially.
 	AlarmNotifyType *int64 `json:"AlarmNotifyType,omitempty" name:"AlarmNotifyType"`
 
-	// Alarm sending period in seconds. The value <0 indicates that no alarm will be triggered. The value 0 indicates that an alarm is triggered only once. The value >0 indicates that an alarm is triggered at the interval of triggerTime.
+	// Alarm sending period in seconds. If the value is less than 0, no alarm will be triggered. If the value is 0, an alarm will be triggered only once. If the value is greater than 0, an alarm will be triggered at the interval of `triggerTime`.
 	AlarmNotifyPeriod *int64 `json:"AlarmNotifyPeriod,omitempty" name:"AlarmNotifyPeriod"`
 
 	// Comparative type. The value 1 indicates greater than. The value 2 indicates greater than or equal to. The value 3 indicates smaller than. The value 4 indicates smaller than or equal to. The value 5 indicates equal to. The value 6 indicates not equal to. The value 7 indicates day-on-day increase. The value 8 indicates day-on-day decrease. The value 9 indicates week-on-week increase. The value 10 indicates week-on-week decrease. The value 11 indicates periodical increase. The value 12 indicates periodical decrease.
-	// Note: This field may return null, indicating that no valid value was found.
 	CalcType *int64 `json:"CalcType,omitempty" name:"CalcType"`
 
 	// Threshold.
-	// Note: This field may return null, indicating that no valid value was found.
 	CalcValue *string `json:"CalcValue,omitempty" name:"CalcValue"`
 
 	// Duration at which an alarm will be triggered in seconds.
-	// Note: This field may return null, indicating that no valid value was found.
 	ContinueTime *int64 `json:"ContinueTime,omitempty" name:"ContinueTime"`
+
+	// Alarm metric name.
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 }
 
 type DescribePolicyGroupInfoConditionTpl struct {

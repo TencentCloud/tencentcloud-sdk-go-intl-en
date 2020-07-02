@@ -818,6 +818,31 @@ func (c *Client) GetUser(request *GetUserRequest) (response *GetUserResponse, er
     return
 }
 
+func NewListAccessKeysRequest() (request *ListAccessKeysRequest) {
+    request = &ListAccessKeysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "ListAccessKeys")
+    return
+}
+
+func NewListAccessKeysResponse() (response *ListAccessKeysResponse) {
+    response = &ListAccessKeysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to list the access keys associated with a specified CAM user.
+func (c *Client) ListAccessKeys(request *ListAccessKeysRequest) (response *ListAccessKeysResponse, err error) {
+    if request == nil {
+        request = NewListAccessKeysRequest()
+    }
+    response = NewListAccessKeysResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListAttachedGroupPoliciesRequest() (request *ListAttachedGroupPoliciesRequest) {
     request = &ListAttachedGroupPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},

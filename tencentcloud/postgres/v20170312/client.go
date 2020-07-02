@@ -268,6 +268,31 @@ func (c *Client) DescribeDBXlogs(request *DescribeDBXlogsRequest) (response *Des
     return
 }
 
+func NewDescribeDatabasesRequest() (request *DescribeDatabasesRequest) {
+    request = &DescribeDatabasesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeDatabases")
+    return
+}
+
+func NewDescribeDatabasesResponse() (response *DescribeDatabasesResponse) {
+    response = &DescribeDatabasesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to pull the list of databases.
+func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response *DescribeDatabasesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDatabasesRequest()
+    }
+    response = NewDescribeDatabasesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeOrdersRequest() (request *DescribeOrdersRequest) {
     request = &DescribeOrdersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -368,6 +393,31 @@ func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *Describ
     return
 }
 
+func NewDestroyDBInstanceRequest() (request *DestroyDBInstanceRequest) {
+    request = &DestroyDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DestroyDBInstance")
+    return
+}
+
+func NewDestroyDBInstanceResponse() (response *DestroyDBInstanceResponse) {
+    response = &DestroyDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to terminate the instance corresponding to a specified `DBInstanceId`.
+func (c *Client) DestroyDBInstance(request *DestroyDBInstanceRequest) (response *DestroyDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewDestroyDBInstanceRequest()
+    }
+    response = NewDestroyDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInitDBInstancesRequest() (request *InitDBInstancesRequest) {
     request = &InitDBInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -389,6 +439,56 @@ func (c *Client) InitDBInstances(request *InitDBInstancesRequest) (response *Ini
         request = NewInitDBInstancesRequest()
     }
     response = NewInitDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceCreateDBInstancesRequest() (request *InquiryPriceCreateDBInstancesRequest) {
+    request = &InquiryPriceCreateDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "InquiryPriceCreateDBInstances")
+    return
+}
+
+func NewInquiryPriceCreateDBInstancesResponse() (response *InquiryPriceCreateDBInstancesResponse) {
+    response = &InquiryPriceCreateDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the purchase price of one or multiple instances.
+func (c *Client) InquiryPriceCreateDBInstances(request *InquiryPriceCreateDBInstancesRequest) (response *InquiryPriceCreateDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceCreateDBInstancesRequest()
+    }
+    response = NewInquiryPriceCreateDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceRenewDBInstanceRequest() (request *InquiryPriceRenewDBInstanceRequest) {
+    request = &InquiryPriceRenewDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "InquiryPriceRenewDBInstance")
+    return
+}
+
+func NewInquiryPriceRenewDBInstanceResponse() (response *InquiryPriceRenewDBInstanceResponse) {
+    response = &InquiryPriceRenewDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the renewal price of an instance.
+func (c *Client) InquiryPriceRenewDBInstance(request *InquiryPriceRenewDBInstanceRequest) (response *InquiryPriceRenewDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceRenewDBInstanceRequest()
+    }
+    response = NewInquiryPriceRenewDBInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -518,6 +618,31 @@ func (c *Client) OpenDBExtranetAccess(request *OpenDBExtranetAccessRequest) (res
     return
 }
 
+func NewRenewInstanceRequest() (request *RenewInstanceRequest) {
+    request = &RenewInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "RenewInstance")
+    return
+}
+
+func NewRenewInstanceResponse() (response *RenewInstanceResponse) {
+    response = &RenewInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to renew an instance.
+func (c *Client) RenewInstance(request *RenewInstanceRequest) (response *RenewInstanceResponse, err error) {
+    if request == nil {
+        request = NewRenewInstanceRequest()
+    }
+    response = NewRenewInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResetAccountPasswordRequest() (request *ResetAccountPasswordRequest) {
     request = &ResetAccountPasswordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -564,6 +689,31 @@ func (c *Client) RestartDBInstance(request *RestartDBInstanceRequest) (response 
         request = NewRestartDBInstanceRequest()
     }
     response = NewRestartDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetAutoRenewFlagRequest() (request *SetAutoRenewFlagRequest) {
+    request = &SetAutoRenewFlagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "SetAutoRenewFlag")
+    return
+}
+
+func NewSetAutoRenewFlagResponse() (response *SetAutoRenewFlagResponse) {
+    response = &SetAutoRenewFlagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to set auto-renewal.
+func (c *Client) SetAutoRenewFlag(request *SetAutoRenewFlagRequest) (response *SetAutoRenewFlagResponse, err error) {
+    if request == nil {
+        request = NewSetAutoRenewFlagRequest()
+    }
+    response = NewSetAutoRenewFlagResponse()
     err = c.Send(request, response)
     return
 }

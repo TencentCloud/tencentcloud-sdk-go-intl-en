@@ -296,6 +296,74 @@ func (r *DescribeResourceTagsByTagKeysResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeResourceTagsRequest struct {
+	*tchttp.BaseRequest
+
+	// Creator `uin`
+	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+
+	// Resource region.
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Service type.
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Resource prefix
+	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
+
+	// Unique resource ID
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Data offset. Default value: 0. It must be an integer multiple of the `Limit` parameter
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Default value: 15
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Whether it is a COS resource ID
+	CosResourceId *uint64 `json:"CosResourceId,omitempty" name:"CosResourceId"`
+}
+
+func (r *DescribeResourceTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeResourceTagsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeResourceTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of results
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Data offset.
+		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+		// Number of entries per page.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+		// Resource tag
+		Rows []*TagResource `json:"Rows,omitempty" name:"Rows" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeResourceTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeResourceTagsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeResourcesByTagsRequest struct {
 	*tchttp.BaseRequest
 

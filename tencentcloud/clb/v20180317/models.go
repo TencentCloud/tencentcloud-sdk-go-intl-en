@@ -310,6 +310,18 @@ type BatchTarget struct {
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 }
 
+type BlockedIP struct {
+
+	// 黑名单IP
+	IP *string `json:"IP,omitempty" name:"IP"`
+
+	// 加入黑名单的时间
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// 过期时间
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+}
+
 type CertIdRelatedWithLoadBalancers struct {
 
 	// Certificate ID
@@ -635,6 +647,43 @@ func (r *CreateLoadBalancerResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateLoadBalancerSnatIpsRequest struct {
+	*tchttp.BaseRequest
+
+	// 负载均衡唯一性Id，如lb-12345678
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// 添加SnatIp信息，可指定Ip申请，或者指定子网自动申请
+	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps" list`
+}
+
+func (r *CreateLoadBalancerSnatIpsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLoadBalancerSnatIpsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLoadBalancerSnatIpsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateLoadBalancerSnatIpsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateLoadBalancerSnatIpsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateRuleRequest struct {
 	*tchttp.BaseRequest
 
@@ -761,6 +810,43 @@ func (r *DeleteListenerResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteLoadBalancerListenersRequest struct {
+	*tchttp.BaseRequest
+
+	// 负载均衡实例 ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// 指定删除的监听器ID数组，若不填则删除负载均衡的所有监听器
+	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
+}
+
+func (r *DeleteLoadBalancerListenersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLoadBalancerListenersRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLoadBalancerListenersResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLoadBalancerListenersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLoadBalancerListenersResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteLoadBalancerRequest struct {
 	*tchttp.BaseRequest
 
@@ -792,6 +878,43 @@ func (r *DeleteLoadBalancerResponse) ToJsonString() string {
 }
 
 func (r *DeleteLoadBalancerResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLoadBalancerSnatIpsRequest struct {
+	*tchttp.BaseRequest
+
+	// 负载均衡唯一Id，如lb-12345678
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// 删除SnatIp地址数组
+	Ips []*string `json:"Ips,omitempty" name:"Ips" list`
+}
+
+func (r *DeleteLoadBalancerSnatIpsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLoadBalancerSnatIpsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLoadBalancerSnatIpsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLoadBalancerSnatIpsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteLoadBalancerSnatIpsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1041,6 +1164,92 @@ func (r *DeregisterTargetsResponse) ToJsonString() string {
 }
 
 func (r *DeregisterTargetsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBlockIPListRequest struct {
+	*tchttp.BaseRequest
+
+	// 负载均衡实例 ID。
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// 数据偏移量，默认为 0。
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// 返回IP的最大个数，默认为 100000。
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeBlockIPListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBlockIPListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBlockIPListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// 返回的IP的数量
+		BlockedIPCount *uint64 `json:"BlockedIPCount,omitempty" name:"BlockedIPCount"`
+
+		// 获取用户真实IP的字段
+		ClientIPField *string `json:"ClientIPField,omitempty" name:"ClientIPField"`
+
+		// 加入了12360黑名单的IP列表
+		BlockedIPList []*BlockedIP `json:"BlockedIPList,omitempty" name:"BlockedIPList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBlockIPListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBlockIPListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBlockIPTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// ModifyBlockIPList 接口返回的异步任务的ID。
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeBlockIPTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBlockIPTaskRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBlockIPTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// 1 running，2 fail，6 succ
+		Status *int64 `json:"Status,omitempty" name:"Status"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBlockIPTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBlockIPTaskResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2197,6 +2406,64 @@ func (r *ManualRewriteResponse) ToJsonString() string {
 }
 
 func (r *ManualRewriteResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyBlockIPListRequest struct {
+	*tchttp.BaseRequest
+
+	// 负载均衡实例ID
+	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds" list`
+
+	// 操作类型，可取：
+	// <li> add_customized_field（首次设置header，开启黑名单功能）</li>
+	// <li> set_customized_field（修改header）</li>
+	// <li> del_customized_field（删除header）</li>
+	// <li> add_blocked（添加黑名单）</li>
+	// <li> del_blocked（删除黑名单）</li>
+	// <li> flush_blocked（清空黑名单）</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// 客户端真实IP存放的header字段名
+	ClientIPField *string `json:"ClientIPField,omitempty" name:"ClientIPField"`
+
+	// 封禁IP列表，单次操作数组最大长度支持200000
+	BlockIPList []*string `json:"BlockIPList,omitempty" name:"BlockIPList" list`
+
+	// 过期时间，单位秒，默认值3600
+	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// 添加IP的策略，可取：fifo（如果黑名单容量已满，新加入黑名单的IP采用先进先出策略）
+	AddStrategy *string `json:"AddStrategy,omitempty" name:"AddStrategy"`
+}
+
+func (r *ModifyBlockIPListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyBlockIPListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyBlockIPListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// 异步任务的ID
+		JodId *string `json:"JodId,omitempty" name:"JodId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyBlockIPListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyBlockIPListResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

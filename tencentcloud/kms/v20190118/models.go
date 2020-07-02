@@ -120,6 +120,9 @@ func (r *AsymmetricSm2DecryptResponse) FromJsonString(s string) error {
 
 type CancelKeyDeletionRequest struct {
 	*tchttp.BaseRequest
+
+	// Unique ID of the CMK for which to cancel schedule deletion
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 func (r *CancelKeyDeletionRequest) ToJsonString() string {
@@ -134,6 +137,9 @@ func (r *CancelKeyDeletionRequest) FromJsonString(s string) error {
 type CancelKeyDeletionResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Unique ID of the CMK for which the schedule deletion is canceled
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -177,6 +183,30 @@ func (r *CreateKeyRequest) FromJsonString(s string) error {
 type CreateKeyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Globally unique CMK ID
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+		// Alias that makes a key more recognizable and understandable
+		Alias *string `json:"Alias,omitempty" name:"Alias"`
+
+		// Key creation time in UNIX timestamp format
+		CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+		// CMK description
+		Description *string `json:"Description,omitempty" name:"Description"`
+
+		// CMK status
+		KeyState *string `json:"KeyState,omitempty" name:"KeyState"`
+
+		// CMK usage
+		KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
+
+		// Tag operation return code. 0: success; 1: internal error; 2: business processing error
+		TagCode *uint64 `json:"TagCode,omitempty" name:"TagCode"`
+
+		// Tag operation return information
+		TagMsg *string `json:"TagMsg,omitempty" name:"TagMsg"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -263,6 +293,12 @@ func (r *DecryptRequest) FromJsonString(s string) error {
 type DecryptResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Globally unique CMK ID
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+		// Decrypted plaintext. This field is Base64-encoded. In order to get the original plaintext, the Base64-decoding is needed
+		Plaintext *string `json:"Plaintext,omitempty" name:"Plaintext"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -459,6 +495,43 @@ func (r *DescribeWhiteBoxDecryptKeyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeWhiteBoxDeviceFingerprintsRequest struct {
+	*tchttp.BaseRequest
+
+	// 白盒密钥ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+}
+
+func (r *DescribeWhiteBoxDeviceFingerprintsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeWhiteBoxDeviceFingerprintsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeWhiteBoxDeviceFingerprintsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// 设备指纹列表
+		DeviceFingerprints []*DeviceFingerprint `json:"DeviceFingerprints,omitempty" name:"DeviceFingerprints" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeWhiteBoxDeviceFingerprintsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeWhiteBoxDeviceFingerprintsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeWhiteBoxKeyDetailsRequest struct {
 	*tchttp.BaseRequest
 
@@ -567,8 +640,20 @@ func (r *DescribeWhiteBoxServiceStatusResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DeviceFingerprint struct {
+
+	// 指纹信息，由设备指纹采集工具采集获得，格式满足正则表达式：^[0-9a-f]{8}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{16}$
+	Identity *string `json:"Identity,omitempty" name:"Identity"`
+
+	// 描述信息，如：IP，设备名称等，最大1024字节
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type DisableKeyRequest struct {
 	*tchttp.BaseRequest
+
+	// Unique CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 func (r *DisableKeyRequest) ToJsonString() string {
@@ -600,6 +685,9 @@ func (r *DisableKeyResponse) FromJsonString(s string) error {
 
 type DisableKeyRotationRequest struct {
 	*tchttp.BaseRequest
+
+	// Unique CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 func (r *DisableKeyRotationRequest) ToJsonString() string {
@@ -631,6 +719,9 @@ func (r *DisableKeyRotationResponse) FromJsonString(s string) error {
 
 type DisableKeysRequest struct {
 	*tchttp.BaseRequest
+
+	// List of IDs of the CMKs to be disabled in batches. Up to 100 CMKs are supported at a time
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 }
 
 func (r *DisableKeysRequest) ToJsonString() string {
@@ -730,6 +821,9 @@ func (r *DisableWhiteBoxKeysResponse) FromJsonString(s string) error {
 
 type EnableKeyRequest struct {
 	*tchttp.BaseRequest
+
+	// Unique CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 func (r *EnableKeyRequest) ToJsonString() string {
@@ -761,6 +855,9 @@ func (r *EnableKeyResponse) FromJsonString(s string) error {
 
 type EnableKeyRotationRequest struct {
 	*tchttp.BaseRequest
+
+	// Unique CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 func (r *EnableKeyRotationRequest) ToJsonString() string {
@@ -792,6 +889,9 @@ func (r *EnableKeyRotationResponse) FromJsonString(s string) error {
 
 type EnableKeysRequest struct {
 	*tchttp.BaseRequest
+
+	// List of IDs of the CMKs to be enabled in batches. Up to 100 CMKs are supported at a time
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 }
 
 func (r *EnableKeysRequest) ToJsonString() string {
@@ -937,6 +1037,15 @@ func (r *EncryptByWhiteBoxResponse) FromJsonString(s string) error {
 
 type EncryptRequest struct {
 	*tchttp.BaseRequest
+
+	// Globally unique ID of the CMK generated by calling the `CreateKey` API
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Encrypted plaintext data. This field must be Base64-encoded. The maximum size of the original data is 4 KB
+	Plaintext *string `json:"Plaintext,omitempty" name:"Plaintext"`
+
+	// JSON string of key-value pair. If this parameter is specified, the same parameter needs to be provided when the `Decrypt` API is called. It is up to 1,024 characters
+	EncryptionContext *string `json:"EncryptionContext,omitempty" name:"EncryptionContext"`
 }
 
 func (r *EncryptRequest) ToJsonString() string {
@@ -1063,6 +1172,9 @@ func (r *GenerateRandomResponse) FromJsonString(s string) error {
 
 type GetKeyRotationStatusRequest struct {
 	*tchttp.BaseRequest
+
+	// Unique CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 func (r *GetKeyRotationStatusRequest) ToJsonString() string {
@@ -1077,6 +1189,9 @@ func (r *GetKeyRotationStatusRequest) FromJsonString(s string) error {
 type GetKeyRotationStatusResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Whether key rotation is enabled
+		KeyRotationEnabled *bool `json:"KeyRotationEnabled,omitempty" name:"KeyRotationEnabled"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1204,6 +1319,12 @@ type GetServiceStatusResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
+		// Whether the KMS service has been activated. true: activated
+		ServiceEnabled *bool `json:"ServiceEnabled,omitempty" name:"ServiceEnabled"`
+
+		// Service unavailability type. 0: not purchased; 1: normal; 2: suspended due to arrears; 3: resource released
+		InvalidType *int64 `json:"InvalidType,omitempty" name:"InvalidType"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1259,6 +1380,12 @@ func (r *ImportKeyMaterialResponse) ToJsonString() string {
 
 func (r *ImportKeyMaterialResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type Key struct {
+
+	// Globally unique CMK ID.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 type KeyMetadata struct {
@@ -1412,6 +1539,15 @@ func (r *ListKeyDetailResponse) FromJsonString(s string) error {
 
 type ListKeysRequest struct {
 	*tchttp.BaseRequest
+
+	// This parameter has the same meaning of the `Offset` in an SQL query, indicating that this acquisition starts from the "No. Offset value" element of the array arranged in a certain order. The default value is 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// This parameter has the same meaning of the `Limit` in an SQL query, indicating that up to `Limit` value elements can be obtained in this request. The default value is 10 and the maximum value is 200
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter by creator role. 0 (default value): the CMK is created by the user; 1: the CMK is created automatically by an authorized Tencent Cloud service
+	Role *uint64 `json:"Role,omitempty" name:"Role"`
 }
 
 func (r *ListKeysRequest) ToJsonString() string {
@@ -1427,6 +1563,12 @@ type ListKeysResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
+		// CMK list array
+		Keys []*Key `json:"Keys,omitempty" name:"Keys" list`
+
+		// Total number of CMKs
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1441,8 +1583,57 @@ func (r *ListKeysResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type OverwriteWhiteBoxDeviceFingerprintsRequest struct {
+	*tchttp.BaseRequest
+
+	// 白盒密钥ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// 设备指纹列表，如果列表为空，则表示删除该密钥对应的所有指纹信息。列表最大长度不超过200。
+	DeviceFingerprints []*DeviceFingerprint `json:"DeviceFingerprints,omitempty" name:"DeviceFingerprints" list`
+}
+
+func (r *OverwriteWhiteBoxDeviceFingerprintsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *OverwriteWhiteBoxDeviceFingerprintsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type OverwriteWhiteBoxDeviceFingerprintsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *OverwriteWhiteBoxDeviceFingerprintsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *OverwriteWhiteBoxDeviceFingerprintsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ReEncryptRequest struct {
 	*tchttp.BaseRequest
+
+	// Ciphertext to be re-encrypted
+	CiphertextBlob *string `json:"CiphertextBlob,omitempty" name:"CiphertextBlob"`
+
+	// CMK used for re-encryption. If this parameter is empty, the ciphertext will be re-encrypted by using the original CMK (as long as the key is not rotated, the ciphertext will not be refreshed)
+	DestinationKeyId *string `json:"DestinationKeyId,omitempty" name:"DestinationKeyId"`
+
+	// JSON string of the key-value pair used during ciphertext encryption by `CiphertextBlob`. If not used during encryption, this parameter will be empty
+	SourceEncryptionContext *string `json:"SourceEncryptionContext,omitempty" name:"SourceEncryptionContext"`
+
+	// JSON string of the key-value pair used during re-encryption. If this field is used, the same string should be entered when the returned new ciphertext is decrypted
+	DestinationEncryptionContext *string `json:"DestinationEncryptionContext,omitempty" name:"DestinationEncryptionContext"`
 }
 
 func (r *ReEncryptRequest) ToJsonString() string {
@@ -1457,6 +1648,18 @@ func (r *ReEncryptRequest) FromJsonString(s string) error {
 type ReEncryptResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Re-encrypted ciphertext
+		CiphertextBlob *string `json:"CiphertextBlob,omitempty" name:"CiphertextBlob"`
+
+		// CMK used for re-encryption
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+		// CMK used by ciphertext before re-encryption
+		SourceKeyId *string `json:"SourceKeyId,omitempty" name:"SourceKeyId"`
+
+		// `true` indicates that the ciphertext has been re-encrypted. When re-encryption is initiated by using the same CMK, as long as the CMK is not rotated, no actual re-encryption will be performed, and the original ciphertext will be returned
+		ReEncrypted *bool `json:"ReEncrypted,omitempty" name:"ReEncrypted"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1474,6 +1677,12 @@ func (r *ReEncryptResponse) FromJsonString(s string) error {
 
 type ScheduleKeyDeletionRequest struct {
 	*tchttp.BaseRequest
+
+	// Unique CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Schedule deletion time range. Value range: [7,30]
+	PendingWindowInDays *uint64 `json:"PendingWindowInDays,omitempty" name:"PendingWindowInDays"`
 }
 
 func (r *ScheduleKeyDeletionRequest) ToJsonString() string {
@@ -1488,6 +1697,12 @@ func (r *ScheduleKeyDeletionRequest) FromJsonString(s string) error {
 type ScheduleKeyDeletionResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Schedule deletion execution time
+		DeletionDate *uint64 `json:"DeletionDate,omitempty" name:"DeletionDate"`
+
+		// Unique ID of the CMK scheduled for deletion
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1505,6 +1720,12 @@ func (r *ScheduleKeyDeletionResponse) FromJsonString(s string) error {
 
 type UpdateAliasRequest struct {
 	*tchttp.BaseRequest
+
+	// New alias containing 1–60 characters or digits
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+
+	// Globally unique CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
 func (r *UpdateAliasRequest) ToJsonString() string {

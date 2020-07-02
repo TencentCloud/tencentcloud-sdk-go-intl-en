@@ -143,6 +143,31 @@ func (c *Client) DeleteTag(request *DeleteTagRequest) (response *DeleteTagRespon
     return
 }
 
+func NewDescribeResourceTagsRequest() (request *DescribeResourceTagsRequest) {
+    request = &DescribeResourceTagsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "DescribeResourceTags")
+    return
+}
+
+func NewDescribeResourceTagsResponse() (response *DescribeResourceTagsResponse) {
+    response = &DescribeResourceTagsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the tags associated with a resource.
+func (c *Client) DescribeResourceTags(request *DescribeResourceTagsRequest) (response *DescribeResourceTagsResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourceTagsRequest()
+    }
+    response = NewDescribeResourceTagsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeResourceTagsByResourceIdsRequest() (request *DescribeResourceTagsByResourceIdsRequest) {
     request = &DescribeResourceTagsByResourceIdsRequest{
         BaseRequest: &tchttp.BaseRequest{},
