@@ -238,7 +238,7 @@ func NewCreateLoadBalancerSnatIpsResponse() (response *CreateLoadBalancerSnatIps
     return
 }
 
-// 针对SnatPro负载均衡，这个接口用于添加SnatIp，如果负载均衡没有开启SnatPro，添加SnatIp后会自动开启
+// This API is used to add a SNAT IP for a SnatPro CLB instance. If SnatPro is not enabled for CLB, it will be automatically enabled after the SNAT IP is added.
 func (c *Client) CreateLoadBalancerSnatIps(request *CreateLoadBalancerSnatIpsRequest) (response *CreateLoadBalancerSnatIpsResponse, err error) {
     if request == nil {
         request = NewCreateLoadBalancerSnatIpsRequest()
@@ -366,8 +366,8 @@ func NewDeleteLoadBalancerListenersResponse() (response *DeleteLoadBalancerListe
     return
 }
 
-// 该接口支持删除负载均衡的多个监听器。
-// 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+// This API is used to delete multiple listeners of a CLB instance.
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
 func (c *Client) DeleteLoadBalancerListeners(request *DeleteLoadBalancerListenersRequest) (response *DeleteLoadBalancerListenersResponse, err error) {
     if request == nil {
         request = NewDeleteLoadBalancerListenersRequest()
@@ -392,7 +392,7 @@ func NewDeleteLoadBalancerSnatIpsResponse() (response *DeleteLoadBalancerSnatIps
     return
 }
 
-// 对于SnatPro的负载均衡，这个接口用于删除SnatIp
+// This API is used to delete a SNAT IP for a SnatPro CLB instance.
 func (c *Client) DeleteLoadBalancerSnatIps(request *DeleteLoadBalancerSnatIpsRequest) (response *DeleteLoadBalancerSnatIpsResponse, err error) {
     if request == nil {
         request = NewDeleteLoadBalancerSnatIpsRequest()
@@ -571,7 +571,7 @@ func NewDescribeBlockIPListResponse() (response *DescribeBlockIPListResponse) {
     return
 }
 
-// 查询一个负载均衡所封禁的IP列表（黑名单）。（接口灰度中，如需使用请提工单）
+// This API is used to query the list of blocked IPs (blacklist) of a CLB instance. (This API is in beta test. To use it, please submit a ticket.)
 func (c *Client) DescribeBlockIPList(request *DescribeBlockIPListRequest) (response *DescribeBlockIPListResponse, err error) {
     if request == nil {
         request = NewDescribeBlockIPListRequest()
@@ -596,7 +596,7 @@ func NewDescribeBlockIPTaskResponse() (response *DescribeBlockIPTaskResponse) {
     return
 }
 
-// 根据 ModifyBlockIPList 接口返回的异步任务的ID，查询封禁IP（黑名单）异步任务的执行状态。（接口灰度中，如需使用请提工单）
+// This API is used to query the execution status of an async IP blocking (blacklisting) task by the async task ID returned by the `ModifyBlockIPList` API. (This API is in beta test. To use it, please submit a ticket.)
 func (c *Client) DescribeBlockIPTask(request *DescribeBlockIPTaskRequest) (response *DescribeBlockIPTaskResponse, err error) {
     if request == nil {
         request = NewDescribeBlockIPTaskRequest()
@@ -1022,8 +1022,8 @@ func NewModifyBlockIPListResponse() (response *ModifyBlockIPListResponse) {
     return
 }
 
-// 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
-// （接口灰度中，如需使用请提工单）
+// This API is used to modify the client IP blacklist of a CLB instance. One forwarding rule supports blocking up to 2,000,000 IPs. One blacklist can contain up to 2,000,000 entries.
+// (This API is in beta test. To use it, please submit a ticket.)
 func (c *Client) ModifyBlockIPList(request *ModifyBlockIPListRequest) (response *ModifyBlockIPListResponse, err error) {
     if request == nil {
         request = NewModifyBlockIPListRequest()

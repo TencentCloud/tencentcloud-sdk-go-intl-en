@@ -58,9 +58,9 @@ func NewBindEnvironmentResponse() (response *BindEnvironmentResponse) {
     return
 }
 
-// This API is used to bind a usage plan to a service environment.
+// This API is used to bind a usage plan to a service or API.
 // After you publish a service to an environment, if the API requires authentication and can be called only when it is bound to a usage plan, you can use this API to bind a usage plan to the specified environment.
-// Currently, a usage plan can be bound to an API; however, under the same service, usage plans bound to a service and usage plans bound to an API cannot coexist. Therefore, in an environment to which a service-level usage plan has already been bound, please use the `DemoteServiceUsagePlan` API to demote it.
+// Currently, a usage plan can be bound to an API; however, under the same service, usage plans bound to a service and usage plans bound to an API cannot coexist. Therefore, in an environment to which a service-level usage plan has already been bound, please use the `DemoteServiceUsagePlan` API to degrade it.
 func (c *Client) BindEnvironment(request *BindEnvironmentRequest) (response *BindEnvironmentResponse, err error) {
     if request == nil {
         request = NewBindEnvironmentRequest()
@@ -440,8 +440,7 @@ func NewDemoteServiceUsagePlanResponse() (response *DemoteServiceUsagePlanRespon
     return
 }
 
-// This API is used to demote a usage plan of a service in an environment to the API level.
-//  
+// This API is used to degrade a usage plan of a service in an environment to the API level.
 // This operation will be denied if there are no APIs under the service.
 // This operation will also be denied if the current environment has not been published.
 func (c *Client) DemoteServiceUsagePlan(request *DemoteServiceUsagePlanRequest) (response *DemoteServiceUsagePlanResponse, err error) {
@@ -529,6 +528,32 @@ func (c *Client) DescribeApiKey(request *DescribeApiKeyRequest) (response *Descr
     return
 }
 
+func NewDescribeApiKeysStatusRequest() (request *DescribeApiKeysStatusRequest) {
+    request = &DescribeApiKeysStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiKeysStatus")
+    return
+}
+
+func NewDescribeApiKeysStatusResponse() (response *DescribeApiKeysStatusResponse) {
+    response = &DescribeApiKeysStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of keys.
+// If you have created multiple API key pairs, you can use this API to query the information of one or more keys. This API does not display the `secretKey`.
+func (c *Client) DescribeApiKeysStatus(request *DescribeApiKeysStatusRequest) (response *DescribeApiKeysStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiKeysStatusRequest()
+    }
+    response = NewDescribeApiKeysStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApiUsagePlanRequest() (request *DescribeApiUsagePlanRequest) {
     request = &DescribeApiUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -551,6 +576,106 @@ func (c *Client) DescribeApiUsagePlan(request *DescribeApiUsagePlanRequest) (res
         request = NewDescribeApiUsagePlanRequest()
     }
     response = NewDescribeApiUsagePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApisStatusRequest() (request *DescribeApisStatusRequest) {
+    request = &DescribeApisStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApisStatus")
+    return
+}
+
+func NewDescribeApisStatusResponse() (response *DescribeApisStatusResponse) {
+    response = &DescribeApisStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to view a certain API or the list of all APIs under a service and relevant information.
+func (c *Client) DescribeApisStatus(request *DescribeApisStatusRequest) (response *DescribeApisStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApisStatusRequest()
+    }
+    response = NewDescribeApisStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeIPStrategyRequest() (request *DescribeIPStrategyRequest) {
+    request = &DescribeIPStrategyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeIPStrategy")
+    return
+}
+
+func NewDescribeIPStrategyResponse() (response *DescribeIPStrategyResponse) {
+    response = &DescribeIPStrategyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query IP policy details.
+func (c *Client) DescribeIPStrategy(request *DescribeIPStrategyRequest) (response *DescribeIPStrategyResponse, err error) {
+    if request == nil {
+        request = NewDescribeIPStrategyRequest()
+    }
+    response = NewDescribeIPStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeIPStrategyApisStatusRequest() (request *DescribeIPStrategyApisStatusRequest) {
+    request = &DescribeIPStrategyApisStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeIPStrategyApisStatus")
+    return
+}
+
+func NewDescribeIPStrategyApisStatusResponse() (response *DescribeIPStrategyApisStatusResponse) {
+    response = &DescribeIPStrategyApisStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of APIs to which an IP policy can be bound, i.e., the difference set between all APIs under the service and the APIs already bound to the policy.
+func (c *Client) DescribeIPStrategyApisStatus(request *DescribeIPStrategyApisStatusRequest) (response *DescribeIPStrategyApisStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeIPStrategyApisStatusRequest()
+    }
+    response = NewDescribeIPStrategyApisStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeIPStrategysStatusRequest() (request *DescribeIPStrategysStatusRequest) {
+    request = &DescribeIPStrategysStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeIPStrategysStatus")
+    return
+}
+
+func NewDescribeIPStrategysStatusResponse() (response *DescribeIPStrategysStatusResponse) {
+    response = &DescribeIPStrategysStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of service IP policies.
+func (c *Client) DescribeIPStrategysStatus(request *DescribeIPStrategysStatusRequest) (response *DescribeIPStrategysStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeIPStrategysStatusRequest()
+    }
+    response = NewDescribeIPStrategysStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -785,6 +910,31 @@ func (c *Client) DescribeServiceUsagePlan(request *DescribeServiceUsagePlanReque
     return
 }
 
+func NewDescribeServicesStatusRequest() (request *DescribeServicesStatusRequest) {
+    request = &DescribeServicesStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServicesStatus")
+    return
+}
+
+func NewDescribeServicesStatusResponse() (response *DescribeServicesStatusResponse) {
+    response = &DescribeServicesStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of one or more services and return relevant domain name, time, and other information.
+func (c *Client) DescribeServicesStatus(request *DescribeServicesStatusRequest) (response *DescribeServicesStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeServicesStatusRequest()
+    }
+    response = NewDescribeServicesStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUsagePlanRequest() (request *DescribeUsagePlanRequest) {
     request = &DescribeUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -858,6 +1008,31 @@ func (c *Client) DescribeUsagePlanSecretIds(request *DescribeUsagePlanSecretIdsR
         request = NewDescribeUsagePlanSecretIdsRequest()
     }
     response = NewDescribeUsagePlanSecretIdsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUsagePlansStatusRequest() (request *DescribeUsagePlansStatusRequest) {
+    request = &DescribeUsagePlansStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeUsagePlansStatus")
+    return
+}
+
+func NewDescribeUsagePlansStatusResponse() (response *DescribeUsagePlansStatusResponse) {
+    response = &DescribeUsagePlansStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of usage plans.
+func (c *Client) DescribeUsagePlansStatus(request *DescribeUsagePlansStatusRequest) (response *DescribeUsagePlansStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeUsagePlansStatusRequest()
+    }
+    response = NewDescribeUsagePlansStatusResponse()
     err = c.Send(request, response)
     return
 }

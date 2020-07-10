@@ -208,7 +208,7 @@ type CreateMediaLiveInputRequest struct {
 	// Only one security group can be associated.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 
-	// Input settings information, two sets of which need to be configured for RTMP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
+	// Input settings information, one or two sets of which need to be configured for RTMP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
 	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings" list`
 }
 
@@ -280,6 +280,18 @@ func (r *CreateMediaLiveInputSecurityGroupResponse) ToJsonString() string {
 
 func (r *CreateMediaLiveInputSecurityGroupResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type DashRemuxSettingsInfo struct {
+
+	// Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
+	SegmentDuration *uint64 `json:"SegmentDuration,omitempty" name:"SegmentDuration"`
+
+	// Number of segments. Value range: [1,30]. Default value: 5.
+	SegmentNumber *uint64 `json:"SegmentNumber,omitempty" name:"SegmentNumber"`
+
+	// Whether to enable multi-period. Valid values: CLOSE/OPEN. Default value: CLOSE.
+	PeriodTriggers *string `json:"PeriodTriggers,omitempty" name:"PeriodTriggers"`
 }
 
 type DeleteMediaLiveChannelRequest struct {
@@ -435,7 +447,7 @@ type DescribeMediaLiveChannelInputStatisticsRequest struct {
 	// UTC time, such as `2020-01-01T12:00:00Z`.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// 
+	// Data interval. Valid values: 5s, 1min, 5min, 15min. Default value: 1min.
 	Period *string `json:"Period,omitempty" name:"Period"`
 }
 
@@ -483,7 +495,7 @@ type DescribeMediaLiveChannelOutputStatisticsRequest struct {
 	// UTC time, such as `2020-01-01T12:00:00Z`.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// 
+	// Data interval. Valid values: 5s, 1min, 5min, 15min. Default value: 1min.
 	Period *string `json:"Period,omitempty" name:"Period"`
 }
 
@@ -732,6 +744,82 @@ func (r *DescribeMediaLiveInputsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DestinationInfo struct {
+
+	// Relay destination address. Length limit: [1,512].
+	OutputUrl *string `json:"OutputUrl,omitempty" name:"OutputUrl"`
+
+	// Authentication key. Length limit: [1,128].
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AuthKey *string `json:"AuthKey,omitempty" name:"AuthKey"`
+
+	// Authentication username. Length limit: [1,128].
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Authentication password. Length limit: [1,128].
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
+type DrmKey struct {
+
+	// DRM key, which is a 32-bit hexadecimal string.
+	// Note: uppercase letters in the string will be automatically converted to lowercase ones.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Required for Widevine encryption. Valid values: SD, HD, UHD1, UHD2, AUDIO, ALL.
+	// ALL refers to all tracks. If this parameter is set to ALL, no other tracks can be added.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Track *string `json:"Track,omitempty" name:"Track"`
+
+	// Required for Widevine encryption. It is a 32-bit hexadecimal string.
+	// Note: uppercase letters in the string will be automatically converted to lowercase ones.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Required when FairPlay uses the AES encryption method. It is a 32-bit hexadecimal string.
+	// For more information about this parameter, please see: 
+	// https://tools.ietf.org/html/rfc3826
+	// Note: uppercase letters in the string will be automatically converted to lowercase ones.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Iv *string `json:"Iv,omitempty" name:"Iv"`
+}
+
+type DrmSettingsInfo struct {
+
+	// 
+	State *string `json:"State,omitempty" name:"State"`
+
+	// When `Scheme` is set to TencentDRM, this parameter should be set to the `ContentId` of DRM encryption, and if this parameter is left empty, a `ContentId` will be automatically created. For more information, please see [here](https://cloud.tencent.com/document/product/1000/40960).
+	// When `Scheme` is set to CustomDRMKeys, this parameter is required and should be specified by the user.
+	ContentId *string `json:"ContentId,omitempty" name:"ContentId"`
+
+	// Valid values: TencentDRM, CustomDRMKeys. If this parameter is left empty, TencentDRM will be used by default.
+	// TencentDRM refers to Tencent digital rights management (DRM) encryption. For more information, please see [here](https://cloud.tencent.com/solution/drm).
+	// CustomDRMKeys refers to an encryption key customized by the user.
+	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
+
+	// The key customized by the content user, which is required when `Scheme` is set to CustomDRMKeys.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Keys []*DrmKey `json:"Keys,omitempty" name:"Keys" list`
+}
+
+type HlsRemuxSettingsInfo struct {
+
+	// Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
+	SegmentDuration *uint64 `json:"SegmentDuration,omitempty" name:"SegmentDuration"`
+
+	// Number of segments. Value range: [1,30]. Default value: 5.
+	SegmentNumber *uint64 `json:"SegmentNumber,omitempty" name:"SegmentNumber"`
+
+	// Whether to enable PDT insertion. Valid values: CLOSE/OPEN. Default value: CLOSE.
+	PdtInsertion *string `json:"PdtInsertion,omitempty" name:"PdtInsertion"`
+
+	// PDT duration in seconds. Value range: (0,3000]. Default value: 600.
+	PdtDuration *uint64 `json:"PdtDuration,omitempty" name:"PdtDuration"`
+}
+
 type InputInfo struct {
 
 	// Input region.
@@ -804,6 +892,12 @@ type InputStatistics struct {
 	Pipeline1 []*PipelineInputStatistics `json:"Pipeline1,omitempty" name:"Pipeline1" list`
 }
 
+type MediaPackageSettingsInfo struct {
+
+	// Media packaging ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type ModifyMediaLiveChannelRequest struct {
 	*tchttp.BaseRequest
 
@@ -864,6 +958,12 @@ type ModifyMediaLiveInputRequest struct {
 
 	// List of IDs of bound security groups.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+
+	// Input settings information.
+	// One or two sets of settings need to be configured for RTMP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
+	// This parameter can be left empty for RTP_PUSH and UDP_PUSH.
+	// Note: if it is left empty or the array is empty, the original `InputSettings` value will be used.
+	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings" list`
 }
 
 func (r *ModifyMediaLiveInputRequest) ToJsonString() string {
@@ -933,6 +1033,53 @@ func (r *ModifyMediaLiveInputSecurityGroupResponse) FromJsonString(s string) err
     return json.Unmarshal([]byte(s), &r)
 }
 
+type OutputGroupsInfo struct {
+
+	// 
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Output protocol type.
+	// Valid values: HLS, DASH, HLS_ARCHIVE, HLS_MEDIA_PACKAGE, DASH_MEDIA_PACKAGE.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// 
+	Outputs []*OutputInfo `json:"Outputs,omitempty" name:"Outputs" list`
+
+	// 
+	Destinations []*DestinationInfo `json:"Destinations,omitempty" name:"Destinations" list`
+
+	// 
+	HlsRemuxSettings *HlsRemuxSettingsInfo `json:"HlsRemuxSettings,omitempty" name:"HlsRemuxSettings"`
+
+	// 
+	DashRemuxSettings *DashRemuxSettingsInfo `json:"DashRemuxSettings,omitempty" name:"DashRemuxSettings"`
+
+	// 
+	DrmSettings *DrmSettingsInfo `json:"DrmSettings,omitempty" name:"DrmSettings"`
+
+	// Configuration information of media packaging, which is required when `Type` is set to MediaPackage.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MediaPackageSettings *MediaPackageSettingsInfo `json:"MediaPackageSettings,omitempty" name:"MediaPackageSettings"`
+}
+
+type OutputInfo struct {
+
+	// Output name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Audio transcoding template name array.
+	// Quantity limit: [0,1] for RTMP; [0,20] for others.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AudioTemplateNames []*string `json:"AudioTemplateNames,omitempty" name:"AudioTemplateNames" list`
+
+	// Video transcoding template name array. Quantity limit: [0,1].
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	VideoTemplateNames []*string `json:"VideoTemplateNames,omitempty" name:"VideoTemplateNames" list`
+
+	// SCTE-35 information configuration.
+	Scte35Settings *Scte35SettingsInfo `json:"Scte35Settings,omitempty" name:"Scte35Settings"`
+}
+
 type OutputsStatistics struct {
 
 	// Output information of pipeline 0.
@@ -969,6 +1116,12 @@ type PipelineOutputStatistics struct {
 
 	// Output bandwidth in bps.
 	NetworkOut *uint64 `json:"NetworkOut,omitempty" name:"NetworkOut"`
+}
+
+type Scte35SettingsInfo struct {
+
+	// Whether to pass through SCTE-35 information. Valid values: NO_PASSTHROUGH/PASSTHROUGH. Default value: NO_PASSTHROUGH.
+	Behavior *string `json:"Behavior,omitempty" name:"Behavior"`
 }
 
 type StartMediaLiveChannelRequest struct {

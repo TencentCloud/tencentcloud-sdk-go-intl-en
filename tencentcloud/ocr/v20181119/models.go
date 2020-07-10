@@ -73,6 +73,95 @@ func (r *BankCardOCRResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type Coord struct {
+
+	// Horizontal coordinate
+	X *int64 `json:"X,omitempty" name:"X"`
+
+	// Vertical coordinate
+	Y *int64 `json:"Y,omitempty" name:"Y"`
+}
+
+type GeneralBasicOCRRequest struct {
+	*tchttp.BaseRequest
+
+	// Base64-encoded value of image.
+	// The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// URL address of image.
+	// The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
+	// You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// Reserved field.
+	Scene *string `json:"Scene,omitempty" name:"Scene"`
+
+	// Language to be recognized.
+	// The language can be automatically recognized or manually specified. Chinese-English mix (`zh`) is selected by default. Mixed characters in English and each supported language can be recognized together.
+	// Valid values:
+	// zh\auto\jap\kor\nspa\fre\ger\por\nvie\may\rus\ita\nhol\swe\fin\dan\nnor\hun\tha\lat
+	// Value meanings:
+	// Chinese-English mix, automatic recognition, Japanese, Korean,
+	// Spanish, French, German, Portuguese,
+	// Vietnamese, Malay, Russian, Italian,
+	// Dutch, Swedish, Finnish, Danish,
+	// Norwegian, Hungarian, Thai, Latin.
+	LanguageType *string `json:"LanguageType,omitempty" name:"LanguageType"`
+}
+
+func (r *GeneralBasicOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GeneralBasicOCRRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GeneralBasicOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Information of recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
+		TextDetections []*TextDetection `json:"TextDetections,omitempty" name:"TextDetections" list`
+
+		// Detected language. For more information on the supported languages, please see the description of the `LanguageType` input parameter.
+		Language *string `json:"Language,omitempty" name:"Language"`
+
+		// Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://cloud.tencent.com/document/product/866/45139">How to Correct Tilted Text</a>
+		Angel *float64 `json:"Angel,omitempty" name:"Angel"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GeneralBasicOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GeneralBasicOCRResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ItemCoord struct {
+
+	// X-coordinate of top-left point
+	X *int64 `json:"X,omitempty" name:"X"`
+
+	// Y-coordinate of top-left point
+	Y *int64 `json:"Y,omitempty" name:"Y"`
+
+	// Width
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Height
+	Height *int64 `json:"Height,omitempty" name:"Height"`
+}
+
 type MLIDCardOCRRequest struct {
 	*tchttp.BaseRequest
 
@@ -227,4 +316,24 @@ func (r *MLIDPassportOCRResponse) ToJsonString() string {
 
 func (r *MLIDPassportOCRResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type TextDetection struct {
+
+	// Recognized text line content
+	DetectedText *string `json:"DetectedText,omitempty" name:"DetectedText"`
+
+	// Confidence. Value range: 0–100
+	Confidence *int64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// Text line coordinates, which are represented as 4 vertex coordinates
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Polygon []*Coord `json:"Polygon,omitempty" name:"Polygon" list`
+
+	// Extended field.
+	// The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains `ParagNo`.
+	AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`
+
+	// Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`
+	ItemPolygon *ItemCoord `json:"ItemPolygon,omitempty" name:"ItemPolygon"`
 }

@@ -498,7 +498,7 @@ func (r *DescribeWhiteBoxDecryptKeyResponse) FromJsonString(s string) error {
 type DescribeWhiteBoxDeviceFingerprintsRequest struct {
 	*tchttp.BaseRequest
 
-	// 白盒密钥ID
+	// White-box key ID
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
@@ -515,7 +515,7 @@ type DescribeWhiteBoxDeviceFingerprintsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// 设备指纹列表
+		// Device fingerprint list
 		DeviceFingerprints []*DeviceFingerprint `json:"DeviceFingerprints,omitempty" name:"DeviceFingerprints" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -642,10 +642,11 @@ func (r *DescribeWhiteBoxServiceStatusResponse) FromJsonString(s string) error {
 
 type DeviceFingerprint struct {
 
-	// 指纹信息，由设备指纹采集工具采集获得，格式满足正则表达式：^[0-9a-f]{8}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{16}$
+	// Fingerprint information collected by device fingerprint collector. Its format must satisfy the following regular expression: ^[0-9a-f]{8}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{16}$
 	Identity *string `json:"Identity,omitempty" name:"Identity"`
 
-	// 描述信息，如：IP，设备名称等，最大1024字节
+	// Description, such as IP and device name. Length limit: 1,024 bytes
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
@@ -1586,10 +1587,10 @@ func (r *ListKeysResponse) FromJsonString(s string) error {
 type OverwriteWhiteBoxDeviceFingerprintsRequest struct {
 	*tchttp.BaseRequest
 
-	// 白盒密钥ID
+	// White-box key ID
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
-	// 设备指纹列表，如果列表为空，则表示删除该密钥对应的所有指纹信息。列表最大长度不超过200。
+	// Device fingerprint list. If the list is empty, it means to delete all fingerprint information corresponding to the key. There can be up to 200 entries in the list.
 	DeviceFingerprints []*DeviceFingerprint `json:"DeviceFingerprints,omitempty" name:"DeviceFingerprints" list`
 }
 

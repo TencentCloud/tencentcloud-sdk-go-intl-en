@@ -933,6 +933,9 @@ type SendStatus struct {
 
 	// SMS request error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Country code or region code, such as CN and US. If the country code or region code is not obtained, the returned value will be 'DEF' by default. For more information on the supported list, see price overview for non-Mainland China regions.
+	IsoCode *string `json:"IsoCode,omitempty" name:"IsoCode"`
 }
 
 type SendStatusStatistics struct {

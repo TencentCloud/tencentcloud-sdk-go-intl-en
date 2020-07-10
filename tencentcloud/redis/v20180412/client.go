@@ -43,6 +43,31 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsRequest) {
+    request = &AssociateSecurityGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "AssociateSecurityGroups")
+    return
+}
+
+func NewAssociateSecurityGroupsResponse() (response *AssociateSecurityGroupsResponse) {
+    response = &AssociateSecurityGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to associate security groups with specified instances.
+func (c *Client) AssociateSecurityGroups(request *AssociateSecurityGroupsRequest) (response *AssociateSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewAssociateSecurityGroupsRequest()
+    }
+    response = NewAssociateSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCleanUpInstanceRequest() (request *CleanUpInstanceRequest) {
     request = &CleanUpInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -218,6 +243,31 @@ func (c *Client) DescribeBackupUrl(request *DescribeBackupUrlRequest) (response 
     return
 }
 
+func NewDescribeDBSecurityGroupsRequest() (request *DescribeDBSecurityGroupsRequest) {
+    request = &DescribeDBSecurityGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeDBSecurityGroups")
+    return
+}
+
+func NewDescribeDBSecurityGroupsResponse() (response *DescribeDBSecurityGroupsResponse) {
+    response = &DescribeDBSecurityGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the security group details of an instance.
+func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsRequest) (response *DescribeDBSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSecurityGroupsRequest()
+    }
+    response = NewDescribeDBSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceAccountRequest() (request *DescribeInstanceAccountRequest) {
     request = &DescribeInstanceAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -264,6 +314,31 @@ func (c *Client) DescribeInstanceBackups(request *DescribeInstanceBackupsRequest
         request = NewDescribeInstanceBackupsRequest()
     }
     response = NewDescribeInstanceBackupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceDTSInfoRequest() (request *DescribeInstanceDTSInfoRequest) {
+    request = &DescribeInstanceDTSInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeInstanceDTSInfo")
+    return
+}
+
+func NewDescribeInstanceDTSInfoResponse() (response *DescribeInstanceDTSInfoResponse) {
+    response = &DescribeInstanceDTSInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the DTS task details of an instance.
+func (c *Client) DescribeInstanceDTSInfo(request *DescribeInstanceDTSInfoRequest) (response *DescribeInstanceDTSInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceDTSInfoRequest()
+    }
+    response = NewDescribeInstanceDTSInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -668,6 +743,31 @@ func (c *Client) DescribeProjectSecurityGroup(request *DescribeProjectSecurityGr
     return
 }
 
+func NewDescribeProjectSecurityGroupsRequest() (request *DescribeProjectSecurityGroupsRequest) {
+    request = &DescribeProjectSecurityGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeProjectSecurityGroups")
+    return
+}
+
+func NewDescribeProjectSecurityGroupsResponse() (response *DescribeProjectSecurityGroupsResponse) {
+    response = &DescribeProjectSecurityGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the security group details of a project.
+func (c *Client) DescribeProjectSecurityGroups(request *DescribeProjectSecurityGroupsRequest) (response *DescribeProjectSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeProjectSecurityGroupsRequest()
+    }
+    response = NewDescribeProjectSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSlowLogRequest() (request *DescribeSlowLogRequest) {
     request = &DescribeSlowLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -818,6 +918,31 @@ func (c *Client) DisableReplicaReadonly(request *DisableReplicaReadonlyRequest) 
     return
 }
 
+func NewDisassociateSecurityGroupsRequest() (request *DisassociateSecurityGroupsRequest) {
+    request = &DisassociateSecurityGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DisassociateSecurityGroups")
+    return
+}
+
+func NewDisassociateSecurityGroupsResponse() (response *DisassociateSecurityGroupsResponse) {
+    response = &DisassociateSecurityGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to unassociate security groups from instances in batches.
+func (c *Client) DisassociateSecurityGroups(request *DisassociateSecurityGroupsRequest) (response *DisassociateSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewDisassociateSecurityGroupsRequest()
+    }
+    response = NewDisassociateSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableReplicaReadonlyRequest() (request *EnableReplicaReadonlyRequest) {
     request = &EnableReplicaReadonlyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -914,6 +1039,31 @@ func (c *Client) ModifyAutoBackupConfig(request *ModifyAutoBackupConfigRequest) 
         request = NewModifyAutoBackupConfigRequest()
     }
     response = NewModifyAutoBackupConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDBInstanceSecurityGroupsRequest() (request *ModifyDBInstanceSecurityGroupsRequest) {
+    request = &ModifyDBInstanceSecurityGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "ModifyDBInstanceSecurityGroups")
+    return
+}
+
+func NewModifyDBInstanceSecurityGroupsResponse() (response *ModifyDBInstanceSecurityGroupsResponse) {
+    response = &ModifyDBInstanceSecurityGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the security groups associated with an instance.
+func (c *Client) ModifyDBInstanceSecurityGroups(request *ModifyDBInstanceSecurityGroupsRequest) (response *ModifyDBInstanceSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceSecurityGroupsRequest()
+    }
+    response = NewModifyDBInstanceSecurityGroupsResponse()
     err = c.Send(request, response)
     return
 }

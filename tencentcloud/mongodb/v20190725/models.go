@@ -191,6 +191,91 @@ func (r *CreateDBInstanceHourResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of slave nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
+	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Instance memory size in GB.
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB.
+	Volume *uint64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition.
+	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
+
+	// Number of instances. Minimum value: 1. Maximum value: 10.
+	GoodsNum *uint64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Instance region name in the format of ap-guangzhou-2.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Server type. Valid values: HIO (high IO), HIO10G (10-gigabit high IO).
+	MachineCode *string `json:"MachineCode,omitempty" name:"MachineCode"`
+
+	// Instance type. Valid values: REPLSET (replica set), SHARD (sharded cluster).
+	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// Number of replica sets. To create a replica set instance, set this parameter to 1; to create a shard instance, see the parameters returned by the `DescribeSpecInfo` API.
+	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
+
+	// Project ID. If this parameter is not set, the default project will be used.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// VPC ID. If this parameter is not set, the classic network will be used. Please use the `DescribeVpcs` API to query the VPC list.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the `DescribeSubnets` API to query the subnet list.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Instance password. If this parameter is not set, you need to set an instance password through the `SetPassword` API after creating an instance. The password can only contain 8–16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()`.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Instance tag information.
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
+
+	// Auto-renewal flag. Valid values: 0 (auto-renewal not enabled), 1 (auto-renewal enabled). Default value: 0.
+	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+}
+
+func (r *CreateDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Order ID.
+		DealId *string `json:"DealId,omitempty" name:"DealId"`
+
+		// List of IDs of created instances.
+		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateDBInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DBInstanceInfo struct {
 
 	// Instance ID
@@ -198,6 +283,19 @@ type DBInstanceInfo struct {
 
 	// Region information
 	Region *string `json:"Region,omitempty" name:"Region"`
+}
+
+type DBInstancePrice struct {
+
+	// Unit price.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
+
+	// Original price.
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discounted price.
+	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 }
 
 type DescribeBackupAccessRequest struct {
@@ -320,6 +418,52 @@ func (r *DescribeDBBackupsResponse) ToJsonString() string {
 }
 
 func (r *DescribeDBBackupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBInstanceDealRequest struct {
+	*tchttp.BaseRequest
+
+	// Order ID. It is returned by the `CreateDBInstance` and other APIs.
+	DealId *string `json:"DealId,omitempty" name:"DealId"`
+}
+
+func (r *DescribeDBInstanceDealRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBInstanceDealRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBInstanceDealResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Order status. Valid values: 1 (unpaid), 2 (paid), 3 (delivering), 4 (delivered), 5 (delivery failed), 6 (refunded), 7 (order closed), 8 (order closed because it failed to be paid within timeout period).
+		Status *int64 `json:"Status,omitempty" name:"Status"`
+
+		// Original price of the order.
+		OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+		// Discounted price of the order.
+		DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+
+		// Operation performed by the order. Valid values: purchase, renew, upgrade, downgrade, refund.
+		Action *string `json:"Action,omitempty" name:"Action"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBInstanceDealResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBInstanceDealResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -578,6 +722,167 @@ func (r *FlushInstanceRouterConfigResponse) ToJsonString() string {
 
 func (r *FlushInstanceRouterConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePriceCreateDBInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance region name in the format of ap-guangzhou-2.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of slave nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
+	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Instance memory size in GB.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition.
+	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
+
+	// Server type. Valid values: HIO (high IO), HIO10G (10-gigabit high IO), STDS5 (standard).
+	MachineCode *string `json:"MachineCode,omitempty" name:"MachineCode"`
+
+	// Number of instances. Minimum value: 1. Maximum value: 10.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Instance type. Valid values: REPLSET (replica set), SHARD (sharded cluster), STANDALONE (single-node).
+	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// Number of replica sets. To create a replica set instance, set this parameter to 1; to create a shard instance, see the parameters returned by the `DescribeSpecInfo` API; to create a single-node instance, set this parameter to 0.
+	ReplicateSetNum *int64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
+}
+
+func (r *InquirePriceCreateDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquirePriceCreateDBInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePriceCreateDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Price.
+		Price *DBInstancePrice `json:"Price,omitempty" name:"Price"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquirePriceCreateDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquirePriceCreateDBInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePriceModifyDBInstanceSpecRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed in the TencentDB Console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance memory size in GB after specification adjustment.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB after specification adjustment.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+}
+
+func (r *InquirePriceModifyDBInstanceSpecRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquirePriceModifyDBInstanceSpecRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePriceModifyDBInstanceSpecResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Price.
+		Price *DBInstancePrice `json:"Price,omitempty" name:"Price"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquirePriceModifyDBInstanceSpecResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquirePriceModifyDBInstanceSpecResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePriceRenewDBInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed in the TencentDB Console. This API supports operations on up to 5 instances at a time.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+
+	// The parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set automatic renewal, and other attributes of the monthly subscription instance.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+}
+
+func (r *InquirePriceRenewDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquirePriceRenewDBInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePriceRenewDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Price.
+		Price *DBInstancePrice `json:"Price,omitempty" name:"Price"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquirePriceRenewDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquirePriceRenewDBInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InstanceChargePrepaid struct {
+
+	// Purchased usage period (in month). Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. Default value: 1.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Auto-renewal flag. Valid values:
+	// NOTIFY_AND_AUTO_RENEW: notify expiration and renew automatically
+	// NOTIFY_AND_MANUAL_RENEW: notify expiration but not renew automatically
+	// DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify expiration nor renew automatically
+	// 
+	// Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis when the account balance is sufficient.
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 }
 
 type InstanceDetail struct {
@@ -851,6 +1156,43 @@ func (r *RenameInstanceResponse) ToJsonString() string {
 }
 
 func (r *RenameInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RenewDBInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// IDs of one or more instances to be operated. The value can be obtained from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 100 instances can be requested at a time.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+
+	// The parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set automatic renewal, and other attributes of the monthly subscription instance. This parameter is mandatory in monthly subscription.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+}
+
+func (r *RenewDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RenewDBInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RenewDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RenewDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RenewDBInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

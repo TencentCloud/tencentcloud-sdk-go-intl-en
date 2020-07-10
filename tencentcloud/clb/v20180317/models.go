@@ -312,13 +312,13 @@ type BatchTarget struct {
 
 type BlockedIP struct {
 
-	// 黑名单IP
+	// Blacklisted IP
 	IP *string `json:"IP,omitempty" name:"IP"`
 
-	// 加入黑名单的时间
+	// Blacklisted time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// 过期时间
+	// Expiration time
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 }
 
@@ -539,6 +539,9 @@ type CreateListenerRequest struct {
 
 	// Whether to enable the SNI feature. This parameter is applicable only to HTTPS listeners
 	SniSwitch *int64 `json:"SniSwitch,omitempty" name:"SniSwitch"`
+
+	// Target real server type. `NODE`: binding a general node; `TARGETGROUP`: binding a target group.
+	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
 }
 
 func (r *CreateListenerRequest) ToJsonString() string {
@@ -650,10 +653,10 @@ func (r *CreateLoadBalancerResponse) FromJsonString(s string) error {
 type CreateLoadBalancerSnatIpsRequest struct {
 	*tchttp.BaseRequest
 
-	// 负载均衡唯一性Id，如lb-12345678
+	// Unique CLB instance ID, such as lb-12345678
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// 添加SnatIp信息，可指定Ip申请，或者指定子网自动申请
+	// Information of the SNAT IP to be added. You can apply for a specified IP or apply for an automatically assigned IP by specifying a subnet.
 	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps" list`
 }
 
@@ -813,10 +816,10 @@ func (r *DeleteListenerResponse) FromJsonString(s string) error {
 type DeleteLoadBalancerListenersRequest struct {
 	*tchttp.BaseRequest
 
-	// 负载均衡实例 ID
+	// CLB instance ID
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// 指定删除的监听器ID数组，若不填则删除负载均衡的所有监听器
+	// Array of IDs of the listeners to be deleted. If this parameter is left empty, all listeners of the CLB instance will be deleted.
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
 }
 
@@ -884,10 +887,10 @@ func (r *DeleteLoadBalancerResponse) FromJsonString(s string) error {
 type DeleteLoadBalancerSnatIpsRequest struct {
 	*tchttp.BaseRequest
 
-	// 负载均衡唯一Id，如lb-12345678
+	// Unique CLB instance ID, such as lb-12345678
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// 删除SnatIp地址数组
+	// Array of the SNAT IP addresses to be deleted
 	Ips []*string `json:"Ips,omitempty" name:"Ips" list`
 }
 
@@ -1170,13 +1173,13 @@ func (r *DeregisterTargetsResponse) FromJsonString(s string) error {
 type DescribeBlockIPListRequest struct {
 	*tchttp.BaseRequest
 
-	// 负载均衡实例 ID。
+	// CLB instance ID.
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// 数据偏移量，默认为 0。
+	// Data offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// 返回IP的最大个数，默认为 100000。
+	// Maximum number of IPs to be returned. Default value: 100,000.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -1193,13 +1196,13 @@ type DescribeBlockIPListResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// 返回的IP的数量
+		// Number of returned IPs
 		BlockedIPCount *uint64 `json:"BlockedIPCount,omitempty" name:"BlockedIPCount"`
 
-		// 获取用户真实IP的字段
+		// Field for getting real client IP
 		ClientIPField *string `json:"ClientIPField,omitempty" name:"ClientIPField"`
 
-		// 加入了12360黑名单的IP列表
+		// List of IPs added to blacklist 12360
 		BlockedIPList []*BlockedIP `json:"BlockedIPList,omitempty" name:"BlockedIPList" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1219,7 +1222,7 @@ func (r *DescribeBlockIPListResponse) FromJsonString(s string) error {
 type DescribeBlockIPTaskRequest struct {
 	*tchttp.BaseRequest
 
-	// ModifyBlockIPList 接口返回的异步任务的ID。
+	// Async task ID returned by the `ModifyBlockIPList` API
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
@@ -1236,7 +1239,7 @@ type DescribeBlockIPTaskResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// 1 running，2 fail，6 succ
+		// 1: running; 2: failed; 6: succeeded
 		Status *int64 `json:"Status,omitempty" name:"Status"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2412,28 +2415,28 @@ func (r *ManualRewriteResponse) FromJsonString(s string) error {
 type ModifyBlockIPListRequest struct {
 	*tchttp.BaseRequest
 
-	// 负载均衡实例ID
+	// CLB instance ID
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds" list`
 
-	// 操作类型，可取：
-	// <li> add_customized_field（首次设置header，开启黑名单功能）</li>
-	// <li> set_customized_field（修改header）</li>
-	// <li> del_customized_field（删除header）</li>
-	// <li> add_blocked（添加黑名单）</li>
-	// <li> del_blocked（删除黑名单）</li>
-	// <li> flush_blocked（清空黑名单）</li>
+	// Operation type. Valid values:
+	// <li> add_customized_field (sets header initially to enable the blacklist feature)</li>
+	// <li> set_customized_field (modifies header)</li>
+	// <li> del_customized_field (deletes header)</li>
+	// <li> add_blocked (adds IPs to blacklist)</li>
+	// <li> del_blocked (deletes IPs from blacklist)</li>
+	// <li> flush_blocked (clears blacklist)</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// 客户端真实IP存放的header字段名
+	// Header field that stores real client IPs
 	ClientIPField *string `json:"ClientIPField,omitempty" name:"ClientIPField"`
 
-	// 封禁IP列表，单次操作数组最大长度支持200000
+	// List of blocked IPs. The array can contain up to 200,000 entries in one operation.
 	BlockIPList []*string `json:"BlockIPList,omitempty" name:"BlockIPList" list`
 
-	// 过期时间，单位秒，默认值3600
+	// Expiration time in seconds. Default value: 3600
 	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-	// 添加IP的策略，可取：fifo（如果黑名单容量已满，新加入黑名单的IP采用先进先出策略）
+	// IP adding policy. Valid value: fifo (if a blacklist is full, new IPs added to the blacklist will adopt the first-in first-out policy)
 	AddStrategy *string `json:"AddStrategy,omitempty" name:"AddStrategy"`
 }
 
@@ -2450,7 +2453,7 @@ type ModifyBlockIPListResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// 异步任务的ID
+		// Async task ID
 		JodId *string `json:"JodId,omitempty" name:"JodId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

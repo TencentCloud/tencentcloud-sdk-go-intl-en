@@ -47,6 +47,46 @@ type Account struct {
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
+type AssociateSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+
+	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// ID of the security group to be associated in the format of sg-efil73jd.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// ID(s) of the instance(s) to be associated in the format of ins-lesecurk. You can specify multiple instances.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+}
+
+func (r *AssociateSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AssociateSecurityGroupsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AssociateSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AssociateSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AssociateSecurityGroupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type BigKeyInfo struct {
 
 	// Database
@@ -181,7 +221,7 @@ type CreateInstanceAccountRequest struct {
 	// Routing policy. Enter `master` for master node or `replication` for slave node
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy" list`
 
-	// Read/write policy. Enter `r` for read-only, `w` for write-only, or `rw` for read/write
+	// Read/write policy. Valid values: r (read-only), rw (read/write).
 	Privilege *string `json:"Privilege,omitempty" name:"Privilege"`
 
 	// Sub-account description information
@@ -224,7 +264,7 @@ type CreateInstancesRequest struct {
 	// AZ ID of instance
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Instance type. 2: Redis 2.8 Master-Slave Edition, 3: Redis 3.2 Master-Slave Edition (CKV Master-Slave Edition), 4: Redis 3.2 Cluster Edition (CKV Cluster Edition), 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Slave Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Slave Edition, 9: Redis 5.0 Cluster Edition,
+	// Instance type. Valid values: 2 (Redis 2.8 memory edition in standard architecture), 3 (Redis 3.2 memory edition in standard architecture), 4 (CKV 3.2 memory edition in standard architecture), 6 (Redis 4.0 memory edition in standard architecture), 7 (Redis 4.0 memory edition in cluster architecture), 8 (Redis 5.0 memory edition in standard architecture), 9 (Redis 5.0 memory edition in cluster architecture).
 	TypeId *uint64 `json:"TypeId,omitempty" name:"TypeId"`
 
 	// Instance capacity in MB. The actual value is subject to the specifications returned by the purchasable specification querying API |
@@ -239,7 +279,7 @@ type CreateInstancesRequest struct {
 	// Billing method. 0: pay as you go
 	BillingMode *int64 `json:"BillingMode,omitempty" name:"BillingMode"`
 
-	// Instance password. Rules: 1. It can contain 8-16 characters; 2. It must contain at least two of the following three types of characters: letters, digits, and special characters !@^*(). (When creating a password-free instance, you can leave this field along and it will be ignored.)
+	// Instance password. It can contain 8-30 characters and must contain at least two of the following types of characters: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/). It cannot stat with the symbol (/).
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// VPC ID such as vpc-sad23jfdfk. If this parameter is not passed in, the basic network will be selected by default. Please use the VPC list querying API to query.
@@ -260,19 +300,19 @@ type CreateInstancesRequest struct {
 	// User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024,65535]
 	VPort *uint64 `json:"VPort,omitempty" name:"VPort"`
 
-	// Number of instance shards. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, Redis 2.8 standalone edition, and Redis 4.0 master-slave edition
+	// Number of shards in an instance. This parameter is required for cluster edition instances. Valid values: 3, 5, 8, 12, 16, 24, 32, 64, 96, 128.
 	RedisShardNum *int64 `json:"RedisShardNum,omitempty" name:"RedisShardNum"`
 
-	// Number of instance replicas. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, and Redis 2.8 standalone edition
+	// Number of replicas in an instance. Redis 2.8 standard edition and CKV standard edition support 1 replica. Standard/cluster edition 4.0 and 5.0 support 1-5 replicas.
 	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitempty" name:"RedisReplicasNum"`
 
-	// Whether to support read-only replicas. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, and Redis 2.8 standalone edition |
+	// Whether to support read-only replicas. Neither Redis 2.8 standard edition nor CKV standard edition supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the master node and read requests will be distributed on slave nodes. To enable read-only replicas, we recommend you create 2 or more replicas.
 	ReplicasReadonly *bool `json:"ReplicasReadonly,omitempty" name:"ReplicasReadonly"`
 
-	// Instance name
+	// Instance name. It contains only letters, digits, underscores, and dashes with a length of up to 60 characters.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Whether to support the password-free feature. Value range: true (password-free instance); false (password-enabled instance). Default value: false
+	// Whether to support the password-free feature. Valid values: true (password-free instance), false (password-enabled instance). Default value: false. Only instances in a VPC support the password-free access.
 	NoAuth *bool `json:"NoAuth,omitempty" name:"NoAuth"`
 }
 
@@ -447,6 +487,46 @@ func (r *DescribeBackupUrlResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDBSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+
+	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB Console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDBSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBSecurityGroupsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Security group rules.
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBSecurityGroupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeInstanceAccountRequest struct {
 	*tchttp.BaseRequest
 
@@ -548,6 +628,107 @@ func (r *DescribeInstanceBackupsResponse) ToJsonString() string {
 
 func (r *DescribeInstanceBackupsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceDTSInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeInstanceDTSInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceDTSInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceDTSInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// DTS task ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+		// DTS task name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		JobName *string `json:"JobName,omitempty" name:"JobName"`
+
+		// Task status. Valid values: 1 (Creating), 3 (Checking), 4 (CheckPass), 5 (CheckNotPass), 7 (Running), 8 (ReadyComplete), 9 (Success), 10 (Failed), 11 (Stopping), 12 (Completing)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Status *int64 `json:"Status,omitempty" name:"Status"`
+
+		// Status description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
+
+		// Synchronization latency in bytes
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+		// Disconnection time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		CutDownTime *string `json:"CutDownTime,omitempty" name:"CutDownTime"`
+
+		// Source instance information
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		SrcInfo *DescribeInstanceDTSInstanceInfo `json:"SrcInfo,omitempty" name:"SrcInfo"`
+
+		// Target instance information
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		DstInfo *DescribeInstanceDTSInstanceInfo `json:"DstInfo,omitempty" name:"DstInfo"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceDTSInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceDTSInfoResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceDTSInstanceInfo struct {
+
+	// Region ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Instance ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Repository ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SetId *int64 `json:"SetId,omitempty" name:"SetId"`
+
+	// Availability zone ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Instance type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Instance name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance access address
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Status
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
 type DescribeInstanceDealDetailRequest struct {
@@ -1259,6 +1440,58 @@ func (r *DescribeProjectSecurityGroupResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeProjectSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+
+	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Project ID.
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of security groups to be pulled.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Search criteria. You can enter a security group ID or name.
+	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+}
+
+func (r *DescribeProjectSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeProjectSecurityGroupsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProjectSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Security group rules.
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+
+		// Total number of the security groups meeting the condition.
+		Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeProjectSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSlowLogRequest struct {
 	*tchttp.BaseRequest
 
@@ -1538,6 +1771,46 @@ func (r *DisableReplicaReadonlyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DisassociateSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+
+	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Security group ID.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Instance ID list, which is an array of one or more instance IDs.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+}
+
+func (r *DisassociateSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisassociateSecurityGroupsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DisassociateSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DisassociateSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisassociateSecurityGroupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type EnableReplicaReadonlyRequest struct {
 	*tchttp.BaseRequest
 
@@ -1588,6 +1861,33 @@ type HotKeyInfo struct {
 
 	// Count
 	Count *int64 `json:"Count,omitempty" name:"Count"`
+}
+
+type Inbound struct {
+
+	// Policy. Valid values: ACCEPT, DROP.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// All the addresses that the address group ID represents.
+	AddressModule *string `json:"AddressModule,omitempty" name:"AddressModule"`
+
+	// Source IP or IP address range, such as 192.168.0.0/16.
+	CidrIp *string `json:"CidrIp,omitempty" name:"CidrIp"`
+
+	// Description.
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+
+	// Network protocol, such as UDP and TCP, etc.
+	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
+
+	// Port.
+	PortRange *string `json:"PortRange,omitempty" name:"PortRange"`
+
+	// All the protocols and ports that the service group ID represents.
+	ServiceModule *string `json:"ServiceModule,omitempty" name:"ServiceModule"`
+
+	// All the addresses that the security group ID represents.
+	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
 type InstanceClusterNode struct {
@@ -2122,6 +2422,46 @@ func (r *ModifyAutoBackupConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyDBInstanceSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+
+	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// The ID list of the security groups to be modified, which is an array of one or more security group IDs.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+
+	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB Console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *ModifyDBInstanceSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyDBInstanceSecurityGroupsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDBInstanceSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDBInstanceSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyDBInstanceSecurityGroupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyInstanceAccountRequest struct {
 	*tchttp.BaseRequest
 
@@ -2333,6 +2673,33 @@ func (r *ModifyNetworkConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type Outbound struct {
+
+	// Policy. Valid values: ACCEPT, DROP.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// All the addresses that the address group ID represents.
+	AddressModule *string `json:"AddressModule,omitempty" name:"AddressModule"`
+
+	// Source IP or IP address range, such as 192.168.0.0/16.
+	CidrIp *string `json:"CidrIp,omitempty" name:"CidrIp"`
+
+	// Description.
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+
+	// Network protocol, such as UDP and TCP, etc.
+	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
+
+	// Port.
+	PortRange *string `json:"PortRange,omitempty" name:"PortRange"`
+
+	// All the protocols and ports that the service group ID represents.
+	ServiceModule *string `json:"ServiceModule,omitempty" name:"ServiceModule"`
+
+	// All the addresses that the security group ID represents.
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type ProductConf struct {
 
 	// Product type. 2: Redis master-slave edition; 3: CKV master-slave edition; 4: CKV cluster edition; 5: Redis standalone edition; 7: Redis cluster edition
@@ -2540,6 +2907,30 @@ func (r *RestoreInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type SecurityGroup struct {
+
+	// Creation time in the format of yyyy-mm-dd hh:mm:ss.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Project ID.
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Security group ID.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Security group name.
+	SecurityGroupName *string `json:"SecurityGroupName,omitempty" name:"SecurityGroupName"`
+
+	// Security group remarks.
+	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitempty" name:"SecurityGroupRemark"`
+
+	// Outbound rule.
+	Outbound []*Outbound `json:"Outbound,omitempty" name:"Outbound" list`
+
+	// Inbound rule.
+	Inbound []*Inbound `json:"Inbound,omitempty" name:"Inbound" list`
+}
+
 type SecurityGroupDetail struct {
 
 	// Project ID
@@ -2640,19 +3031,19 @@ func (r *StartupInstanceResponse) FromJsonString(s string) error {
 type SwitchInstanceVipRequest struct {
 	*tchttp.BaseRequest
 
-	// Source instance ID
+	// Source instance ID.
 	SrcInstanceId *string `json:"SrcInstanceId,omitempty" name:"SrcInstanceId"`
 
-	// Target instance ID
+	// Target instance ID.
 	DstInstanceId *string `json:"DstInstanceId,omitempty" name:"DstInstanceId"`
 
-	// The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than TimeDelay, the VIP will not be switched. It is recommended to set an acceptable value based on the actual business conditions.
+	// The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than `TimeDelay`, the VIP will not be switched. We recommend setting an acceptable value based on the actual business conditions.
 	TimeDelay *int64 `json:"TimeDelay,omitempty" name:"TimeDelay"`
 
-	// Whether to force the switch when DTS is disconnected. 1: yes; 0: no
+	// Whether to force the switch when DTS is disconnected. Valid values: 1 (yes), 0 (no).
 	ForceSwitch *int64 `json:"ForceSwitch,omitempty" name:"ForceSwitch"`
 
-	// now: switch now; syncComplete: switch after sync is completed
+	// Valid values: now (switch now), syncComplete (switch after sync is completed).
 	SwitchTime *string `json:"SwitchTime,omitempty" name:"SwitchTime"`
 }
 

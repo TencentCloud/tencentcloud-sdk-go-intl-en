@@ -495,6 +495,39 @@ func (c *Client) CreateLiveWatermarkRule(request *CreateLiveWatermarkRuleRequest
     return
 }
 
+func NewCreateRecordTaskRequest() (request *CreateRecordTaskRequest) {
+    request = &CreateRecordTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "CreateRecordTask")
+    return
+}
+
+func NewCreateRecordTaskResponse() (response *CreateRecordTaskResponse) {
+    response = &CreateRecordTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 创建一个在指定时间启动、结束的录制任务，并使用指定录制模板ID对应的配置进行录制。
+// - 使用前提
+// 1. 录制文件存放于点播平台，所以用户如需使用录制功能，需首先自行开通点播服务。
+// 2. 录制文件存放后相关费用（含存储以及下行播放流量）按照点播平台计费方式收取，具体请参考 对应文档。
+// - 注意事项
+// 1. 断流会结束当前录制并生成录制文件。在结束时间到达之前任务仍然有效，期间只要正常推流都会正常录制，与是否多次推、断流无关。
+// 2. 使用上避免创建时间段相互重叠的录制任务。若同一条流当前存在多个时段重叠的任务，为避免重复录制系统将启动最多3个录制任务。
+// 3. 创建的录制任务记录在平台侧只保留3个月。
+// 4. 当前录制任务管理API（CreateRecordTask/StopRecordTask/DeleteRecordTask）与旧API（CreateLiveRecord/StopLiveRecord/DeleteLiveRecord）不兼容，两套接口不能混用。
+func (c *Client) CreateRecordTask(request *CreateRecordTaskRequest) (response *CreateRecordTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateRecordTaskRequest()
+    }
+    response = NewCreateRecordTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLiveCallbackRuleRequest() (request *DeleteLiveCallbackRuleRequest) {
     request = &DeleteLiveCallbackRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -821,6 +854,56 @@ func (c *Client) DeleteLiveWatermarkRule(request *DeleteLiveWatermarkRuleRequest
     return
 }
 
+func NewDeleteRecordTaskRequest() (request *DeleteRecordTaskRequest) {
+    request = &DeleteRecordTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DeleteRecordTask")
+    return
+}
+
+func NewDeleteRecordTaskResponse() (response *DeleteRecordTaskResponse) {
+    response = &DeleteRecordTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 删除录制任务配置。删除操作不影响正在运行当中的任务，仅对删除之后新的推流有效。
+func (c *Client) DeleteRecordTask(request *DeleteRecordTaskRequest) (response *DeleteRecordTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteRecordTaskRequest()
+    }
+    response = NewDeleteRecordTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllStreamPlayInfoListRequest() (request *DescribeAllStreamPlayInfoListRequest) {
+    request = &DescribeAllStreamPlayInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeAllStreamPlayInfoList")
+    return
+}
+
+func NewDescribeAllStreamPlayInfoListResponse() (response *DescribeAllStreamPlayInfoListResponse) {
+    response = &DescribeAllStreamPlayInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 输入某个时间点（1分钟维度），查询该时间点所有流的下行信息。
+func (c *Client) DescribeAllStreamPlayInfoList(request *DescribeAllStreamPlayInfoListRequest) (response *DescribeAllStreamPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllStreamPlayInfoListRequest()
+    }
+    response = NewDescribeAllStreamPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillBandwidthAndFluxListRequest() (request *DescribeBillBandwidthAndFluxListRequest) {
     request = &DescribeBillBandwidthAndFluxListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -892,6 +975,32 @@ func (c *Client) DescribeGroupProIspPlayInfoList(request *DescribeGroupProIspPla
         request = NewDescribeGroupProIspPlayInfoListRequest()
     }
     response = NewDescribeGroupProIspPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeHttpStatusInfoListRequest() (request *DescribeHttpStatusInfoListRequest) {
+    request = &DescribeHttpStatusInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeHttpStatusInfoList")
+    return
+}
+
+func NewDescribeHttpStatusInfoListResponse() (response *DescribeHttpStatusInfoListResponse) {
+    response = &DescribeHttpStatusInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the number of each playback HTTP status code at a 5-minute granularity in a certain period of time.
+// Note: Data can be queried one hour after it is generated. For example, data between 10:00 and 10:59 cannot be queried until 12:00.
+func (c *Client) DescribeHttpStatusInfoList(request *DescribeHttpStatusInfoListRequest) (response *DescribeHttpStatusInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeHttpStatusInfoListRequest()
+    }
+    response = NewDescribeHttpStatusInfoListResponse()
     err = c.Send(request, response)
     return
 }
@@ -1092,6 +1201,31 @@ func (c *Client) DescribeLiveDomainCert(request *DescribeLiveDomainCertRequest) 
         request = NewDescribeLiveDomainCertRequest()
     }
     response = NewDescribeLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveDomainPlayInfoListRequest() (request *DescribeLiveDomainPlayInfoListRequest) {
+    request = &DescribeLiveDomainPlayInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomainPlayInfoList")
+    return
+}
+
+func NewDescribeLiveDomainPlayInfoListResponse() (response *DescribeLiveDomainPlayInfoListResponse) {
+    response = &DescribeLiveDomainPlayInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the real-time downstream playback data at the domain name level.
+func (c *Client) DescribeLiveDomainPlayInfoList(request *DescribeLiveDomainPlayInfoListRequest) (response *DescribeLiveDomainPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainPlayInfoListRequest()
+    }
+    response = NewDescribeLiveDomainPlayInfoListResponse()
     err = c.Send(request, response)
     return
 }
@@ -1424,6 +1558,31 @@ func (c *Client) DescribeLiveStreamPublishedList(request *DescribeLiveStreamPubl
     return
 }
 
+func NewDescribeLiveStreamPushInfoListRequest() (request *DescribeLiveStreamPushInfoListRequest) {
+    request = &DescribeLiveStreamPushInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveStreamPushInfoList")
+    return
+}
+
+func NewDescribeLiveStreamPushInfoListResponse() (response *DescribeLiveStreamPushInfoListResponse) {
+    response = &DescribeLiveStreamPushInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the push information of all real-time streams, including client IP, server IP, frame rate, bitrate, domain name, and push start time.
+func (c *Client) DescribeLiveStreamPushInfoList(request *DescribeLiveStreamPushInfoListRequest) (response *DescribeLiveStreamPushInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveStreamPushInfoListRequest()
+    }
+    response = NewDescribeLiveStreamPushInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveStreamStateRequest() (request *DescribeLiveStreamStateRequest) {
     request = &DescribeLiveStreamStateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1445,6 +1604,32 @@ func (c *Client) DescribeLiveStreamState(request *DescribeLiveStreamStateRequest
         request = NewDescribeLiveStreamStateRequest()
     }
     response = NewDescribeLiveStreamStateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveTranscodeDetailInfoRequest() (request *DescribeLiveTranscodeDetailInfoRequest) {
+    request = &DescribeLiveTranscodeDetailInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveTranscodeDetailInfo")
+    return
+}
+
+func NewDescribeLiveTranscodeDetailInfoResponse() (response *DescribeLiveTranscodeDetailInfoResponse) {
+    response = &DescribeLiveTranscodeDetailInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the transcoding details on a day.
+// Note: Only the detailed data for one of the past 30 days can be queried currently.
+func (c *Client) DescribeLiveTranscodeDetailInfo(request *DescribeLiveTranscodeDetailInfoRequest) (response *DescribeLiveTranscodeDetailInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveTranscodeDetailInfoRequest()
+    }
+    response = NewDescribeLiveTranscodeDetailInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -1599,6 +1784,57 @@ func (c *Client) DescribeLiveWatermarks(request *DescribeLiveWatermarksRequest) 
     return
 }
 
+func NewDescribePlayErrorCodeDetailInfoListRequest() (request *DescribePlayErrorCodeDetailInfoListRequest) {
+    request = &DescribePlayErrorCodeDetailInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribePlayErrorCodeDetailInfoList")
+    return
+}
+
+func NewDescribePlayErrorCodeDetailInfoListResponse() (response *DescribePlayErrorCodeDetailInfoListResponse) {
+    response = &DescribePlayErrorCodeDetailInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the information of downstream playback error codes, i.e., the occurrences of each HTTP error code (4xx and 5xx) at a 1-minute granularity in a certain period of time.
+// 
+func (c *Client) DescribePlayErrorCodeDetailInfoList(request *DescribePlayErrorCodeDetailInfoListRequest) (response *DescribePlayErrorCodeDetailInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribePlayErrorCodeDetailInfoListRequest()
+    }
+    response = NewDescribePlayErrorCodeDetailInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePlayErrorCodeSumInfoListRequest() (request *DescribePlayErrorCodeSumInfoListRequest) {
+    request = &DescribePlayErrorCodeSumInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribePlayErrorCodeSumInfoList")
+    return
+}
+
+func NewDescribePlayErrorCodeSumInfoListResponse() (response *DescribePlayErrorCodeSumInfoListResponse) {
+    response = &DescribePlayErrorCodeSumInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the information of downstream playback error codes.
+func (c *Client) DescribePlayErrorCodeSumInfoList(request *DescribePlayErrorCodeSumInfoListRequest) (response *DescribePlayErrorCodeSumInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribePlayErrorCodeSumInfoListRequest()
+    }
+    response = NewDescribePlayErrorCodeSumInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProIspPlaySumInfoListRequest() (request *DescribeProIspPlaySumInfoListRequest) {
     request = &DescribeProIspPlaySumInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1620,6 +1856,56 @@ func (c *Client) DescribeProIspPlaySumInfoList(request *DescribeProIspPlaySumInf
         request = NewDescribeProIspPlaySumInfoListRequest()
     }
     response = NewDescribeProIspPlaySumInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProvinceIspPlayInfoListRequest() (request *DescribeProvinceIspPlayInfoListRequest) {
+    request = &DescribeProvinceIspPlayInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeProvinceIspPlayInfoList")
+    return
+}
+
+func NewDescribeProvinceIspPlayInfoListResponse() (response *DescribeProvinceIspPlayInfoListResponse) {
+    response = &DescribeProvinceIspPlayInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the downstream playback data of an ISP in a district, including bandwidth, traffic, number of requests, and number of concurrent connections.
+func (c *Client) DescribeProvinceIspPlayInfoList(request *DescribeProvinceIspPlayInfoListRequest) (response *DescribeProvinceIspPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeProvinceIspPlayInfoListRequest()
+    }
+    response = NewDescribeProvinceIspPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeScreenShotSheetNumListRequest() (request *DescribeScreenShotSheetNumListRequest) {
+    request = &DescribeScreenShotSheetNumListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeScreenShotSheetNumList")
+    return
+}
+
+func NewDescribeScreenShotSheetNumListResponse() (response *DescribeScreenShotSheetNumListResponse) {
+    response = &DescribeScreenShotSheetNumListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 接口用来查询直播增值业务--截图的张数
+func (c *Client) DescribeScreenShotSheetNumList(request *DescribeScreenShotSheetNumListRequest) (response *DescribeScreenShotSheetNumListResponse, err error) {
+    if request == nil {
+        request = NewDescribeScreenShotSheetNumListRequest()
+    }
+    response = NewDescribeScreenShotSheetNumListResponse()
     err = c.Send(request, response)
     return
 }
@@ -1649,6 +1935,32 @@ func (c *Client) DescribeStreamDayPlayInfoList(request *DescribeStreamDayPlayInf
     return
 }
 
+func NewDescribeStreamPlayInfoListRequest() (request *DescribeStreamPlayInfoListRequest) {
+    request = &DescribeStreamPlayInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeStreamPlayInfoList")
+    return
+}
+
+func NewDescribeStreamPlayInfoListResponse() (response *DescribeStreamPlayInfoListResponse) {
+    response = &DescribeStreamPlayInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the playback data and supports querying the playback details by stream name and aggregated data by playback domain name.
+// Note: To query by AppName, you need to submit a ticket for application.
+func (c *Client) DescribeStreamPlayInfoList(request *DescribeStreamPlayInfoListRequest) (response *DescribeStreamPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPlayInfoListRequest()
+    }
+    response = NewDescribeStreamPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamPushInfoListRequest() (request *DescribeStreamPushInfoListRequest) {
     request = &DescribeStreamPushInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1670,6 +1982,56 @@ func (c *Client) DescribeStreamPushInfoList(request *DescribeStreamPushInfoListR
         request = NewDescribeStreamPushInfoListRequest()
     }
     response = NewDescribeStreamPushInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTopClientIpSumInfoListRequest() (request *DescribeTopClientIpSumInfoListRequest) {
+    request = &DescribeTopClientIpSumInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeTopClientIpSumInfoList")
+    return
+}
+
+func NewDescribeTopClientIpSumInfoListResponse() (response *DescribeTopClientIpSumInfoListResponse) {
+    response = &DescribeTopClientIpSumInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the information of the top n client IPs in a certain period of time (top 1,000 is supported currently).
+func (c *Client) DescribeTopClientIpSumInfoList(request *DescribeTopClientIpSumInfoListRequest) (response *DescribeTopClientIpSumInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopClientIpSumInfoListRequest()
+    }
+    response = NewDescribeTopClientIpSumInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeVisitTopSumInfoListRequest() (request *DescribeVisitTopSumInfoListRequest) {
+    request = &DescribeVisitTopSumInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeVisitTopSumInfoList")
+    return
+}
+
+func NewDescribeVisitTopSumInfoListResponse() (response *DescribeVisitTopSumInfoListResponse) {
+    response = &DescribeVisitTopSumInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the information of the top n domain names and stream IDs in a certain period of time (top 1,000 is supported currently).
+func (c *Client) DescribeVisitTopSumInfoList(request *DescribeVisitTopSumInfoListRequest) (response *DescribeVisitTopSumInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeVisitTopSumInfoListRequest()
+    }
+    response = NewDescribeVisitTopSumInfoListResponse()
     err = c.Send(request, response)
     return
 }
@@ -2070,6 +2432,31 @@ func (c *Client) StopLiveRecord(request *StopLiveRecordRequest) (response *StopL
         request = NewStopLiveRecordRequest()
     }
     response = NewStopLiveRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopRecordTaskRequest() (request *StopRecordTaskRequest) {
+    request = &StopRecordTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "StopRecordTask")
+    return
+}
+
+func NewStopRecordTaskResponse() (response *StopRecordTaskResponse) {
+    response = &StopRecordTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// 提前结束录制，并中止运行中的录制任务。任务被成功中止后将不再启动。
+func (c *Client) StopRecordTask(request *StopRecordTaskRequest) (response *StopRecordTaskResponse, err error) {
+    if request == nil {
+        request = NewStopRecordTaskRequest()
+    }
+    response = NewStopRecordTaskResponse()
     err = c.Send(request, response)
     return
 }

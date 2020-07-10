@@ -77,6 +77,9 @@ type CloseDBExtranetAccessRequest struct {
 
 	// ID of an instance for which to disable public network access. The ID is in the format of dcdbt-ow728lmc and can be obtained through the `DescribeDCDBInstances` API.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether IPv6 is used. Default value: 0
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 }
 
 func (r *CloseDBExtranetAccessRequest) ToJsonString() string {
@@ -1384,6 +1387,9 @@ type OpenDBExtranetAccessRequest struct {
 
 	// ID of an instance for which to enable public network access. The ID is in the format of dcdbt-ow728lmc.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether IPv6 is used. Default value: 0
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 }
 
 func (r *OpenDBExtranetAccessRequest) ToJsonString() string {

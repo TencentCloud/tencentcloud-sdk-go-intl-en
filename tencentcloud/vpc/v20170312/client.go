@@ -83,7 +83,7 @@ func NewAddBandwidthPackageResourcesResponse() (response *AddBandwidthPackageRes
     return
 }
 
-// This API is used to add bandwidth package resources. This includes [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
+// This API is used to add a bandwidth package resource including [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
 func (c *Client) AddBandwidthPackageResources(request *AddBandwidthPackageResourcesRequest) (response *AddBandwidthPackageResourcesResponse, err error) {
     if request == nil {
         request = NewAddBandwidthPackageResourcesRequest()
@@ -279,7 +279,7 @@ func NewAssociateNatGatewayAddressResponse() (response *AssociateNatGatewayAddre
     return
 }
 
-// This API (AssociateNatGatewayAddress) is used to bind a NAT gateway to an Elastic IP (EIP).
+// This API is used to bind a NAT Gateway to an Elastic IP (EIP).
 func (c *Client) AssociateNatGatewayAddress(request *AssociateNatGatewayAddressRequest) (response *AssociateNatGatewayAddressResponse, err error) {
     if request == nil {
         request = NewAssociateNatGatewayAddressRequest()
@@ -524,6 +524,36 @@ func (c *Client) CreateAddressTemplateGroup(request *CreateAddressTemplateGroupR
     return
 }
 
+func NewCreateAndAttachNetworkInterfaceRequest() (request *CreateAndAttachNetworkInterfaceRequest) {
+    request = &CreateAndAttachNetworkInterfaceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateAndAttachNetworkInterface")
+    return
+}
+
+func NewCreateAndAttachNetworkInterfaceResponse() (response *CreateAndAttachNetworkInterfaceResponse) {
+    response = &CreateAndAttachNetworkInterfaceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create an ENI and bind it to a CVM.
+// * You can specify private IP addresses and a primary IP when creating an ENI. The specified private IP must be idle and in the same subnet as the ENI.
+// * When creating an ENI, you can specify the number of private IP addresses that you want to apply for. The system will randomly generate private IP addresses.
+// * An ENI can only be bound to a limited number of IP addresses. For more information about resource limits, see <a href="/document/product/576/18527">ENI Use Limits</a>.
+// * You can bind an existing security group when creating an ENI.
+// * You can bind a tag when creating an ENI. The tag list in the response indicates the tags that have been successfully added.
+func (c *Client) CreateAndAttachNetworkInterface(request *CreateAndAttachNetworkInterfaceRequest) (response *CreateAndAttachNetworkInterfaceResponse, err error) {
+    if request == nil {
+        request = NewCreateAndAttachNetworkInterfaceRequest()
+    }
+    response = NewCreateAndAttachNetworkInterfaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAssistantCidrRequest() (request *CreateAssistantCidrRequest) {
     request = &CreateAssistantCidrRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -564,7 +594,7 @@ func NewCreateBandwidthPackageResponse() (response *CreateBandwidthPackageRespon
     return
 }
 
-// This API is used to support the creation of [Device bandwidth packages](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
+// This API is used to create [device bandwidth packages](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
 func (c *Client) CreateBandwidthPackage(request *CreateBandwidthPackageRequest) (response *CreateBandwidthPackageResponse, err error) {
     if request == nil {
         request = NewCreateBandwidthPackageRequest()
@@ -674,7 +704,7 @@ func NewCreateDirectConnectGatewayResponse() (response *CreateDirectConnectGatew
     return
 }
 
-// This API (CreateDirectConnectGateway) is used to create a Direct Connect gateway.
+// This API is used to create a direct connect gateway.
 func (c *Client) CreateDirectConnectGateway(request *CreateDirectConnectGatewayRequest) (response *CreateDirectConnectGatewayResponse, err error) {
     if request == nil {
         request = NewCreateDirectConnectGatewayRequest()
@@ -724,7 +754,7 @@ func NewCreateFlowLogResponse() (response *CreateFlowLogResponse) {
     return
 }
 
-// This API (CreateFlowLog) is used to create flow logs.
+// This API is used to create a flow log.
 func (c *Client) CreateFlowLog(request *CreateFlowLogRequest) (response *CreateFlowLogResponse, err error) {
     if request == nil {
         request = NewCreateFlowLogRequest()
@@ -1328,7 +1358,7 @@ func NewDeleteBandwidthPackageResponse() (response *DeleteBandwidthPackageRespon
     return
 }
 
-// This API is used to support the deletion of shared bandwidth packages, including [Device bandwidth packages](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85).
+// This API is used to delete bandwidth packages, including [device bandwidth packages](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85).
 func (c *Client) DeleteBandwidthPackage(request *DeleteBandwidthPackageRequest) (response *DeleteBandwidthPackageResponse, err error) {
     if request == nil {
         request = NewDeleteBandwidthPackageRequest()
@@ -1405,10 +1435,10 @@ func NewDeleteDirectConnectGatewayResponse() (response *DeleteDirectConnectGatew
     return
 }
 
-// This API (DeleteDirectConnectGateway) is used to delete Direct Connect gateways.
-// <li>For a NAT gateway, NAT and ACL rules will be cleaned upon the deletion of a Direct Connect gateway.
-// <li>After the deletion of a Direct Connect gateway, the routing policy associated with the gateway in the route table will also be deleted.
-// This API is completed asynchronously. If you need to query the async job execution results, please use the `RequestId` returned by this API to query the `QueryTask` API.
+// This API is used to delete a direct connect gateway.
+// <li>For a NAT gateway, NAT and ACL rules will be cleared upon the deletion of a direct connect gateway.
+// <li>After the deletion of a direct connect gateway, the routing policy associated with the gateway in the route table will also be deleted.
+// This API is completed asynchronously. If you need to query the async job execution results, please use the `RequestId` returned by this API to poll the `QueryTask` API.
 func (c *Client) DeleteDirectConnectGateway(request *DeleteDirectConnectGatewayRequest) (response *DeleteDirectConnectGatewayResponse, err error) {
     if request == nil {
         request = NewDeleteDirectConnectGatewayRequest()
@@ -1458,7 +1488,7 @@ func NewDeleteFlowLogResponse() (response *DeleteFlowLogResponse) {
     return
 }
 
-// This API (DeleteFlowLog) is used to delete flow logs.
+// This API is used to delete a flow log.
 func (c *Client) DeleteFlowLog(request *DeleteFlowLogRequest) (response *DeleteFlowLogResponse, err error) {
     if request == nil {
         request = NewDeleteFlowLogRequest()
@@ -2045,7 +2075,7 @@ func NewDescribeBandwidthPackageQuotaResponse() (response *DescribeBandwidthPack
     return
 }
 
-// This API is used to query the account’s maximum number of bandwidth packages and their usage in the current region.
+// This API is used to query the maximum and used number of bandwidth packages under the account in the current region.
 func (c *Client) DescribeBandwidthPackageQuota(request *DescribeBandwidthPackageQuotaRequest) (response *DescribeBandwidthPackageQuotaResponse, err error) {
     if request == nil {
         request = NewDescribeBandwidthPackageQuotaRequest()
@@ -2270,7 +2300,7 @@ func NewDescribeDirectConnectGatewaysResponse() (response *DescribeDirectConnect
     return
 }
 
-// This API (DescribeDirectConnectGateways) is used to query Direct Connect gateways.
+// This API is used to query direct connect gateways.
 func (c *Client) DescribeDirectConnectGateways(request *DescribeDirectConnectGatewaysRequest) (response *DescribeDirectConnectGatewaysResponse, err error) {
     if request == nil {
         request = NewDescribeDirectConnectGatewaysRequest()
@@ -2295,7 +2325,7 @@ func NewDescribeFlowLogResponse() (response *DescribeFlowLogResponse) {
     return
 }
 
-// This API (DescribeFlowLog) is used to query flow log instance information.
+// This API is used to query flow log instance information.
 func (c *Client) DescribeFlowLog(request *DescribeFlowLogRequest) (response *DescribeFlowLogResponse, err error) {
     if request == nil {
         request = NewDescribeFlowLogRequest()
@@ -2320,7 +2350,7 @@ func NewDescribeFlowLogsResponse() (response *DescribeFlowLogsResponse) {
     return
 }
 
-// This API (DescribeFlowLogs) is used to query and obtain the flow log set.
+// This API is used to query and obtain the flow log set.
 func (c *Client) DescribeFlowLogs(request *DescribeFlowLogsRequest) (response *DescribeFlowLogsResponse, err error) {
     if request == nil {
         request = NewDescribeFlowLogsRequest()
@@ -3315,6 +3345,31 @@ func (c *Client) EnableGatewayFlowMonitor(request *EnableGatewayFlowMonitorReque
     return
 }
 
+func NewGetCcnRegionBandwidthLimitsRequest() (request *GetCcnRegionBandwidthLimitsRequest) {
+    request = &GetCcnRegionBandwidthLimitsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "GetCcnRegionBandwidthLimits")
+    return
+}
+
+func NewGetCcnRegionBandwidthLimitsResponse() (response *GetCcnRegionBandwidthLimitsResponse) {
+    response = &GetCcnRegionBandwidthLimitsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the CCN bandwidth limits across regions. The monthly-subscribed CCN only supports the cross-region bandwidth limit, while the pay-as-you-go CCN supports both the cross-region and region egress bandwidth limit. Note: currently, this feature is in beta test. To use it, please [contact sales](https://intl.cloud.tencent.com/contact-sales).
+func (c *Client) GetCcnRegionBandwidthLimits(request *GetCcnRegionBandwidthLimitsRequest) (response *GetCcnRegionBandwidthLimitsResponse, err error) {
+    if request == nil {
+        request = NewGetCcnRegionBandwidthLimitsRequest()
+    }
+    response = NewGetCcnRegionBandwidthLimitsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewHaVipAssociateAddressIpRequest() (request *HaVipAssociateAddressIpRequest) {
     request = &HaVipAssociateAddressIpRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3662,7 +3717,7 @@ func NewModifyBandwidthPackageAttributeResponse() (response *ModifyBandwidthPack
     return
 }
 
-// This API is used to modify bandwidth package attributes, including the bandwidth package name, and so on.
+// This API is used to modify the attributes of a bandwidth package, including the bandwidth package name, and so on.
 func (c *Client) ModifyBandwidthPackageAttribute(request *ModifyBandwidthPackageAttributeRequest) (response *ModifyBandwidthPackageAttributeResponse, err error) {
     if request == nil {
         request = NewModifyBandwidthPackageAttributeRequest()
@@ -3762,7 +3817,7 @@ func NewModifyDirectConnectGatewayAttributeResponse() (response *ModifyDirectCon
     return
 }
 
-// This API (ModifyDirectConnectGatewayAttribute) is used to modify the Direct Connect gateway attributes.
+// This API is used to modify the attributes of a direct connect gateway.
 func (c *Client) ModifyDirectConnectGatewayAttribute(request *ModifyDirectConnectGatewayAttributeRequest) (response *ModifyDirectConnectGatewayAttributeResponse, err error) {
     if request == nil {
         request = NewModifyDirectConnectGatewayAttributeRequest()
@@ -3787,7 +3842,7 @@ func NewModifyFlowLogAttributeResponse() (response *ModifyFlowLogAttributeRespon
     return
 }
 
-// This API (ModifyFlowLogAttribute) is used to modify flow log attributes.
+// This API is used to modify the attributes of a flow log.
 func (c *Client) ModifyFlowLogAttribute(request *ModifyFlowLogAttributeRequest) (response *ModifyFlowLogAttributeResponse, err error) {
     if request == nil {
         request = NewModifyFlowLogAttributeRequest()
@@ -4379,7 +4434,7 @@ func NewRemoveBandwidthPackageResourcesResponse() (response *RemoveBandwidthPack
     return
 }
 
-// This API is used to delete bandwidth package resources. This includes [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
+// This API is used to delete a bandwidth package resource, including [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
 func (c *Client) RemoveBandwidthPackageResources(request *RemoveBandwidthPackageResourcesRequest) (response *RemoveBandwidthPackageResourcesResponse, err error) {
     if request == nil {
         request = NewRemoveBandwidthPackageResourcesRequest()

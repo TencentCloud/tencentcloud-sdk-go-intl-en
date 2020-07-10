@@ -333,7 +333,7 @@ func NewDescribeWhiteBoxDeviceFingerprintsResponse() (response *DescribeWhiteBox
     return
 }
 
-// 获取指定密钥的设备指纹列表
+// This API is used to get the device fingerprint list of a specified key.
 func (c *Client) DescribeWhiteBoxDeviceFingerprints(request *DescribeWhiteBoxDeviceFingerprintsRequest) (response *DescribeWhiteBoxDeviceFingerprintsResponse, err error) {
     if request == nil {
         request = NewDescribeWhiteBoxDeviceFingerprintsRequest()
@@ -984,7 +984,7 @@ func NewOverwriteWhiteBoxDeviceFingerprintsResponse() (response *OverwriteWhiteB
     return
 }
 
-// 覆盖指定密钥的设备指纹信息
+// This API is used to overwrite the device fingerprint information of a specified key.
 func (c *Client) OverwriteWhiteBoxDeviceFingerprints(request *OverwriteWhiteBoxDeviceFingerprintsRequest) (response *OverwriteWhiteBoxDeviceFingerprintsResponse, err error) {
     if request == nil {
         request = NewOverwriteWhiteBoxDeviceFingerprintsRequest()

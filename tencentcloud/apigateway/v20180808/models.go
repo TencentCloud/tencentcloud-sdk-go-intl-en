@@ -332,6 +332,17 @@ type ApiKey struct {
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 }
 
+type ApiKeysStatus struct {
+
+	// Number of eligible API keys.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// API key list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiKeySet []*ApiKey `json:"ApiKeySet,omitempty" name:"ApiKeySet" list`
+}
+
 type ApiRequestConfig struct {
 
 	// path
@@ -413,6 +424,15 @@ type ApiUsagePlanSet struct {
 	// List of usage plans bound to API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ApiUsagePlanList []*ApiUsagePlan `json:"ApiUsagePlanList,omitempty" name:"ApiUsagePlanList" list`
+}
+
+type ApisStatus struct {
+
+	// Number of eligible APIs.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// API list.
+	ApiIdStatusSet []*DesApisStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet" list`
 }
 
 type BindEnvironmentRequest struct {
@@ -1481,6 +1501,50 @@ func (r *DescribeApiKeyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeApiKeysStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: AccessKeyId, AccessKeySecret, SecretName, NotUsagePlanId, Status, KeyWord (match with `name` or `path`).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeApiKeysStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeApiKeysStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiKeysStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Key list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *ApiKeysStatus `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeApiKeysStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeApiKeysStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeApiRequest struct {
 	*tchttp.BaseRequest
 
@@ -1565,6 +1629,199 @@ func (r *DescribeApiUsagePlanResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeApisStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique service ID of API.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// API filter. Valid values: ApiId, ApiName, ApiPath, ApiType, AuthRelationApiId, AuthType, ApiBuniessType, NotUsagePlanId, Environment, Tags (whose values are the list of `$tag_key:tag_value`), TagKeys (whose values are the list of tag keys).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeApisStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeApisStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApisStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of API details.
+		Result *ApisStatus `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeApisStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeApisStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIPStrategyApisStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique policy ID.
+	StrategyId *string `json:"StrategyId,omitempty" name:"StrategyId"`
+
+	// Policy environment.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: ApiPath, ApiName, KeyWord (fuzzy search by `Path` and `Name`).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeIPStrategyApisStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIPStrategyApisStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIPStrategyApisStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of APIs bound to environment.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *IPStrategyApiStatus `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeIPStrategyApisStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIPStrategyApisStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIPStrategyRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique IP policy ID.
+	StrategyId *string `json:"StrategyId,omitempty" name:"StrategyId"`
+
+	// Environment associated with policy.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter, which is a reserved field. Filtering is not supported currently.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeIPStrategyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIPStrategyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIPStrategyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// IP policy details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *IPStrategy `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeIPStrategyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIPStrategyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIPStrategysStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Filter. Valid values: StrategyName.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeIPStrategysStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIPStrategysStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIPStrategysStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of eligible policies.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *IPStrategysStatus `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeIPStrategysStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIPStrategysStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeLogSearchRequest struct {
 	*tchttp.BaseRequest
 
@@ -1577,7 +1834,7 @@ type DescribeLogSearchRequest struct {
 	// Service ID
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// Exact search by `apiid` or `reqid`
+	// Reserved field
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Number of logs to be returned at a time. Maximum value: 100
@@ -1589,10 +1846,20 @@ type DescribeLogSearchRequest struct {
 	// Sorting by time. Valid values: asc (ascending), desc (descending). Default value: desc
 	Sort *string `json:"Sort,omitempty" name:"Sort"`
 
-	// Fuzzy search for log by keyword
+	// Reserved field
 	Query *string `json:"Query,omitempty" name:"Query"`
 
+	// Search criterion. Valid values:
+	// req_id: "="
+	// api_id: "="
+	// cip: "="
+	// uip: ":"
+	// err_msg: ":"
+	// rsp_st: "=", "!=", ":", ">", "<"
+	// req_t: ">=", "<="
 	// 
+	// Note:
+	// ":" indicates included, and "!=" indicates not equal to. For the meanings of fields, please see the `LogSet` description of the output parameter
 	LogQuerys []*LogQuery `json:"LogQuerys,omitempty" name:"LogQuerys" list`
 }
 
@@ -2065,6 +2332,50 @@ func (r *DescribeServiceUsagePlanResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeServicesStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: ServiceId, ServiceName, NotUsagePlanId, Environment, IpVersion.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeServicesStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeServicesStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeServicesStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Service list query result.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *ServicesStatus `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeServicesStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeServicesStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeUsagePlanEnvironmentsRequest struct {
 	*tchttp.BaseRequest
 
@@ -2194,6 +2505,50 @@ func (r *DescribeUsagePlanSecretIdsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeUsagePlansStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Usage plan filter. Valid values: UsagePlanId, UsagePlanName, NotServiceId, NotApiId, Environment.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeUsagePlansStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeUsagePlansStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUsagePlansStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Usage plan list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *UsagePlansStatus `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeUsagePlansStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeUsagePlansStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DisableApiKeyRequest struct {
 	*tchttp.BaseRequest
 
@@ -2246,7 +2601,7 @@ type DomainSetList struct {
 	// Domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Domain name resolution status. True: success; Flase: failure.
+	// Domain name resolution status. True: success; False: failure.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Certificate ID.
@@ -2460,6 +2815,64 @@ type IPStrategy struct {
 	// Bound API details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BindApis []*DesApisStatus `json:"BindApis,omitempty" name:"BindApis" list`
+}
+
+type IPStrategyApi struct {
+
+	// Unique API ID.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// Custom API name.
+	ApiName *string `json:"ApiName,omitempty" name:"ApiName"`
+
+	// API type. Valid values: NORMAL (general API), TSF (microservice API).
+	ApiType *string `json:"ApiType,omitempty" name:"ApiType"`
+
+	// API path, such as `/path`.
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// API request method, such as `GET`.
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Unique ID of another policy bound to API.
+	OtherIPStrategyId *string `json:"OtherIPStrategyId,omitempty" name:"OtherIPStrategyId"`
+
+	// Environment bound to API.
+	OtherEnvironmentName *string `json:"OtherEnvironmentName,omitempty" name:"OtherEnvironmentName"`
+}
+
+type IPStrategyApiStatus struct {
+
+	// Number of APIs bound to environment.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Details of APIs bound to environment.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiIdStatusSet []*IPStrategyApi `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet" list`
+}
+
+type IPStrategysStatus struct {
+
+	// Number of policies.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Policy list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	StrategySet []*IPStrategy `json:"StrategySet,omitempty" name:"StrategySet" list`
+}
+
+type LogQuery struct {
+
+	// Search field
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Operator
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// Search value
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type MicroService struct {
@@ -3131,6 +3544,69 @@ type ResponseErrorCodeReq struct {
 	NeedConvert *bool `json:"NeedConvert,omitempty" name:"NeedConvert"`
 }
 
+type Service struct {
+
+	// Port for HTTPS access over private network.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InnerHttpsPort *int64 `json:"InnerHttpsPort,omitempty" name:"InnerHttpsPort"`
+
+	// Custom service description.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
+
+	// Service frontend request type, such as `http`, `https`, and `http&https`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
+
+	// Network types supported by service.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes" list`
+
+	// Dedicated cluster name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
+
+	// Unique service ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// IP version.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
+
+	// List of published environments, such as test, prepub, and release.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AvailableEnvironments []*string `json:"AvailableEnvironments,omitempty" name:"AvailableEnvironments" list`
+
+	// Custom service name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Public domain name assigned by the system for this service.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
+
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Port for HTTP access over private network.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InnerHttpPort *uint64 `json:"InnerHttpPort,omitempty" name:"InnerHttpPort"`
+
+	// Private domain name automatically assigned by the system for this service.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InnerSubDomain *string `json:"InnerSubDomain,omitempty" name:"InnerSubDomain"`
+
+	// Billing status of service.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TradeIsolateStatus *int64 `json:"TradeIsolateStatus,omitempty" name:"TradeIsolateStatus"`
+}
+
 type ServiceConfig struct {
 
 	// Backend type, which takes effect when VPC is enabled. Currently, only `clb` is supported.
@@ -3276,6 +3752,17 @@ type ServiceUsagePlanSet struct {
 	// List of usage plans bound to service.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceUsagePlanList []*ApiUsagePlan `json:"ServiceUsagePlanList,omitempty" name:"ServiceUsagePlanList" list`
+}
+
+type ServicesStatus struct {
+
+	// Total number of services in list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Service list details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceSet []*Service `json:"ServiceSet,omitempty" name:"ServiceSet" list`
 }
 
 type Tag struct {
@@ -3810,4 +4297,46 @@ type UsagePlanInfo struct {
 	// Details of bound environments.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BindEnvironments []*UsagePlanBindEnvironment `json:"BindEnvironments,omitempty" name:"BindEnvironments" list`
+}
+
+type UsagePlanStatusInfo struct {
+
+	// Unique usage plan ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
+
+	// Custom usage plan name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UsagePlanName *string `json:"UsagePlanName,omitempty" name:"UsagePlanName"`
+
+	// Custom usage plan description.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UsagePlanDesc *string `json:"UsagePlanDesc,omitempty" name:"UsagePlanDesc"`
+
+	// Maximum number of requests per second.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MaxRequestNumPreSec *int64 `json:"MaxRequestNumPreSec,omitempty" name:"MaxRequestNumPreSec"`
+
+	// Total number of requests allowed. `-1` indicates no limit.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MaxRequestNum *int64 `json:"MaxRequestNum,omitempty" name:"MaxRequestNum"`
+
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
+}
+
+type UsagePlansStatus struct {
+
+	// Number of eligible usage plans.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Usage plan list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UsagePlanStatusSet []*UsagePlanStatusInfo `json:"UsagePlanStatusSet,omitempty" name:"UsagePlanStatusSet" list`
 }

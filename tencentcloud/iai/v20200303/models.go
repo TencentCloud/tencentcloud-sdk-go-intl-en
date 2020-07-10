@@ -918,28 +918,27 @@ type FaceHairAttributesInfo struct {
 
 type FaceInfo struct {
 
-	// Horizontal coordinate of the top-left corner of face frame.
-	// The face frame encompasses the facial features and is extended accordingly. If it is larger than the image, the coordinates will be negative. 
-	// If you want to capture a complete face, you can set the negative coordinates to 0 if the `completeness` score meets the requirement.
+	// 人脸框左上角横坐标。
+	// 人脸框包含人脸五官位置并在此基础上进行一定的扩展，若人脸框超出图片范围，会导致坐标负值。 
+	// 若需截取完整人脸，可以在完整分completeness满足需求的情况下，将负值坐标取0。
 	X *int64 `json:"X,omitempty" name:"X"`
 
-	// Vertical coordinate of the top-left corner of face frame. 
-	// The face frame encompasses the facial features and is extended accordingly. If it is larger than the image, the coordinates will be negative. 
-	// If you want to capture a complete face, you can set the negative coordinates to 0 if the `completeness` score meets the requirement.
+	// 人脸框左上角纵坐标。 
+	// 人脸框包含人脸五官位置并在此基础上进行一定的扩展，若人脸框超出图片范围，会导致坐标负值。 
+	// 若需截取完整人脸，可以在完整分completeness满足需求的情况下，将负值坐标取0。
 	Y *int64 `json:"Y,omitempty" name:"Y"`
 
-	// Face frame width.
+	// 人脸框宽度。
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Face frame height.
+	// 人脸框高度。
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
-	// Face attributes, including gender, age, expression, 
-	// beauty, glass, mask, hair, and pose (pitch, roll, yaw). Valid information will be returned only if `NeedFaceAttributes` is set to 1.
+	// 人脸属性信息，包含性别( gender )、年龄( age )、表情( expression )、 
+	// 魅力( beauty )、眼镜( glass )、口罩（mask）、头发（hair）和姿态 (pitch，roll，yaw )。只有当 NeedFaceAttributes 设为 1 时才返回有效信息。
 	FaceAttributesInfo *FaceAttributesInfo `json:"FaceAttributesInfo,omitempty" name:"FaceAttributesInfo"`
 
-	// Face quality information, including score, sharpness, brightness, and completeness. Valid information will be returned only if `NeedFaceDetection` is set to 1.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 人脸质量信息，包含质量分（score）、模糊分（sharpness）、光照分（brightness）、遮挡分（completeness）。只有当NeedFaceDetection设为1时才返回有效信息。
 	FaceQualityInfo *FaceQualityInfo `json:"FaceQualityInfo,omitempty" name:"FaceQualityInfo"`
 }
 

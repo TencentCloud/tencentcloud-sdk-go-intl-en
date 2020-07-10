@@ -68,6 +68,31 @@ func (c *Client) AssignProject(request *AssignProjectRequest) (response *AssignP
     return
 }
 
+func NewCreateDBInstanceRequest() (request *CreateDBInstanceRequest) {
+    request = &CreateDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "CreateDBInstance")
+    return
+}
+
+func NewCreateDBInstanceResponse() (response *CreateDBInstanceResponse) {
+    response = &CreateDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a monthly subscription TencentDB for MongoDB instance. The purchasable specifications supported by this API can be obtained through the `DescribeSpecInfo` API.
+func (c *Client) CreateDBInstance(request *CreateDBInstanceRequest) (response *CreateDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateDBInstanceRequest()
+    }
+    response = NewCreateDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBInstanceHourRequest() (request *CreateDBInstanceHourRequest) {
     request = &CreateDBInstanceHourRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -164,6 +189,31 @@ func (c *Client) DescribeDBBackups(request *DescribeDBBackupsRequest) (response 
         request = NewDescribeDBBackupsRequest()
     }
     response = NewDescribeDBBackupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBInstanceDealRequest() (request *DescribeDBInstanceDealRequest) {
+    request = &DescribeDBInstanceDealRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeDBInstanceDeal")
+    return
+}
+
+func NewDescribeDBInstanceDealResponse() (response *DescribeDBInstanceDealResponse) {
+    response = &DescribeDBInstanceDealResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get details of purchase, renewal, and specification adjustment orders of a MongoDB instance.
+func (c *Client) DescribeDBInstanceDeal(request *DescribeDBInstanceDealRequest) (response *DescribeDBInstanceDealResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceDealRequest()
+    }
+    response = NewDescribeDBInstanceDealResponse()
     err = c.Send(request, response)
     return
 }
@@ -293,6 +343,81 @@ func (c *Client) FlushInstanceRouterConfig(request *FlushInstanceRouterConfigReq
     return
 }
 
+func NewInquirePriceCreateDBInstancesRequest() (request *InquirePriceCreateDBInstancesRequest) {
+    request = &InquirePriceCreateDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "InquirePriceCreateDBInstances")
+    return
+}
+
+func NewInquirePriceCreateDBInstancesResponse() (response *InquirePriceCreateDBInstancesResponse) {
+    response = &InquirePriceCreateDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query price of instance creation. The `region` parameter must be passed in this API, otherwise verification will fail. This API allows queries only for purchasable instance specifications.
+func (c *Client) InquirePriceCreateDBInstances(request *InquirePriceCreateDBInstancesRequest) (response *InquirePriceCreateDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceCreateDBInstancesRequest()
+    }
+    response = NewInquirePriceCreateDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquirePriceModifyDBInstanceSpecRequest() (request *InquirePriceModifyDBInstanceSpecRequest) {
+    request = &InquirePriceModifyDBInstanceSpecRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "InquirePriceModifyDBInstanceSpec")
+    return
+}
+
+func NewInquirePriceModifyDBInstanceSpecResponse() (response *InquirePriceModifyDBInstanceSpecResponse) {
+    response = &InquirePriceModifyDBInstanceSpecResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query price of instance specification adjustment.
+func (c *Client) InquirePriceModifyDBInstanceSpec(request *InquirePriceModifyDBInstanceSpecRequest) (response *InquirePriceModifyDBInstanceSpecResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceModifyDBInstanceSpecRequest()
+    }
+    response = NewInquirePriceModifyDBInstanceSpecResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquirePriceRenewDBInstancesRequest() (request *InquirePriceRenewDBInstancesRequest) {
+    request = &InquirePriceRenewDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "InquirePriceRenewDBInstances")
+    return
+}
+
+func NewInquirePriceRenewDBInstancesResponse() (response *InquirePriceRenewDBInstancesResponse) {
+    response = &InquirePriceRenewDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the renewal price of a monthly subscription instance.
+func (c *Client) InquirePriceRenewDBInstances(request *InquirePriceRenewDBInstancesRequest) (response *InquirePriceRenewDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceRenewDBInstancesRequest()
+    }
+    response = NewInquirePriceRenewDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewIsolateDBInstanceRequest() (request *IsolateDBInstanceRequest) {
     request = &IsolateDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -389,6 +514,31 @@ func (c *Client) RenameInstance(request *RenameInstanceRequest) (response *Renam
         request = NewRenameInstanceRequest()
     }
     response = NewRenameInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewDBInstancesRequest() (request *RenewDBInstancesRequest) {
+    request = &RenewDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "RenewDBInstances")
+    return
+}
+
+func NewRenewDBInstancesResponse() (response *RenewDBInstancesResponse) {
+    response = &RenewDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to renew a monthly subscription TencentDB instance. Only monthly subscription instances are supported, while pay-as-you-go instances do not need to be renewed.
+func (c *Client) RenewDBInstances(request *RenewDBInstancesRequest) (response *RenewDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewRenewDBInstancesRequest()
+    }
+    response = NewRenewDBInstancesResponse()
     err = c.Send(request, response)
     return
 }
