@@ -642,7 +642,7 @@ func (r *DescribeWhiteBoxServiceStatusResponse) FromJsonString(s string) error {
 
 type DeviceFingerprint struct {
 
-	// Fingerprint information collected by device fingerprint collector. Its format must satisfy the following regular expression: ^[0-9a-f]{8}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{16}$
+	// Fingerprint information collected by device fingerprint collector. Its format must be in the following regular expression: ^[0-9a-f]{8}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{16}$
 	Identity *string `json:"Identity,omitempty" name:"Identity"`
 
 	// Description, such as IP and device name. Length limit: 1,024 bytes

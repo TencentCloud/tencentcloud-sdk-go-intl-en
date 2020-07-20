@@ -20,6 +20,36 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AIAnalysisTemplateItem struct {
+
+	// Unique ID of intelligent analysis template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Intelligent analysis template name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Intelligent analysis template description.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Control parameter of intelligent categorization task.
+	ClassificationConfigure *ClassificationConfigureInfo `json:"ClassificationConfigure,omitempty" name:"ClassificationConfigure"`
+
+	// Control parameter of intelligent tagging task.
+	TagConfigure *TagConfigureInfo `json:"TagConfigure,omitempty" name:"TagConfigure"`
+
+	// Control parameter of intelligent cover generating task.
+	CoverConfigure *CoverConfigureInfo `json:"CoverConfigure,omitempty" name:"CoverConfigure"`
+
+	// Control parameter of intelligent frame-specific tagging task.
+	FrameTagConfigure *FrameTagConfigureInfo `json:"FrameTagConfigure,omitempty" name:"FrameTagConfigure"`
+
+	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/862/37710#52).
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/862/37710#52).
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
 type AIRecognitionTemplateItem struct {
 
 	// Unique ID of a video content recognition template.
@@ -58,10 +88,248 @@ type AIRecognitionTemplateItem struct {
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
+type AdaptiveDynamicStreamingInfoItem struct {
+
+	// Adaptive bitrate streaming specification.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Container format. Valid values: HLS, MPEG-DASH.
+	Package *string `json:"Package,omitempty" name:"Package"`
+
+	// Playback address.
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// Storage location of adaptive bitrate streaming files.
+	Storage *TaskOutputStorage `json:"Storage,omitempty" name:"Storage"`
+}
+
+type AdaptiveDynamicStreamingTaskInput struct {
+
+	// Adaptive bitrate streaming template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// List of up to 10 image or text watermarks.
+	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+
+	// Target bucket of an output file after transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// The relative or absolute output path of the manifest file after transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
+	OutputObjectPath *string `json:"OutputObjectPath,omitempty" name:"OutputObjectPath"`
+
+	// The relative output path of the substream file after transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+	SubStreamObjectName *string `json:"SubStreamObjectName,omitempty" name:"SubStreamObjectName"`
+
+	// The relative output path of the segment file after transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+	SegmentObjectName *string `json:"SegmentObjectName,omitempty" name:"SegmentObjectName"`
+}
+
+type AdaptiveDynamicStreamingTemplate struct {
+
+	// Unique ID of an adaptive bitrate streaming template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Template type. Valid values:
+	// <li>Preset: preset template;</li>
+	// <li>Custom: custom template.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Name of an adaptive bitrate streaming template.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Description of an adaptive bitrate streaming template.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Adaptive bitrate streaming format. Valid values:
+	// <li>HLS;</li>
+	// <li>MPEG-DASH.</li>
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Parameter information of input streams for transcoding to adaptive bitrate streaming. Up to 10 streams can be input.
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+
+	// Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	DisableHigherVideoBitrate *uint64 `json:"DisableHigherVideoBitrate,omitempty" name:"DisableHigherVideoBitrate"`
+
+	// Whether to prohibit transcoding from low resolution to high resolution. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	DisableHigherVideoResolution *uint64 `json:"DisableHigherVideoResolution,omitempty" name:"DisableHigherVideoResolution"`
+
+	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type AdaptiveStreamTemplate struct {
+
+	// Video parameter information.
+	Video *VideoTemplateInfo `json:"Video,omitempty" name:"Video"`
+
+	// Audio parameter information.
+	Audio *AudioTemplateInfo `json:"Audio,omitempty" name:"Audio"`
+
+	// Whether to remove audio stream. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	RemoveAudio *uint64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
+
+	// Whether to remove video stream. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	RemoveVideo *uint64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+}
+
 type AiAnalysisResult struct {
+
+	// 
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// 
+	ClassificationTask *AiAnalysisTaskClassificationResult `json:"ClassificationTask,omitempty" name:"ClassificationTask"`
+
+	// 
+	CoverTask *AiAnalysisTaskCoverResult `json:"CoverTask,omitempty" name:"CoverTask"`
+
+	// 
+	TagTask *AiAnalysisTaskTagResult `json:"TagTask,omitempty" name:"TagTask"`
+
+	// 
+	FrameTagTask *AiAnalysisTaskFrameTagResult `json:"FrameTagTask,omitempty" name:"FrameTagTask"`
+}
+
+type AiAnalysisTaskClassificationInput struct {
+
+	// Intelligent video categorization template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskClassificationOutput struct {
+
+	// List of intelligently generated video categories.
+	ClassificationSet []*MediaAiAnalysisClassificationItem `json:"ClassificationSet,omitempty" name:"ClassificationSet" list`
+}
+
+type AiAnalysisTaskClassificationResult struct {
+
+	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Error code. 0: success; other values: failure.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Input of intelligent categorization task.
+	Input *AiAnalysisTaskClassificationInput `json:"Input,omitempty" name:"Input"`
+
+	// Output of intelligent categorization task.
+	Output *AiAnalysisTaskClassificationOutput `json:"Output,omitempty" name:"Output"`
+}
+
+type AiAnalysisTaskCoverInput struct {
+
+	// Intelligent video cover generating template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskCoverOutput struct {
+
+	// List of intelligently generated covers.
+	CoverSet []*MediaAiAnalysisCoverItem `json:"CoverSet,omitempty" name:"CoverSet" list`
+
+	// Storage location of intelligently generated cover.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+}
+
+type AiAnalysisTaskCoverResult struct {
+
+	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Error code. 0: success; other values: failure.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Input of intelligent cover generating task.
+	Input *AiAnalysisTaskCoverInput `json:"Input,omitempty" name:"Input"`
+
+	// Output of intelligent cover generating task.
+	Output *AiAnalysisTaskCoverOutput `json:"Output,omitempty" name:"Output"`
+}
+
+type AiAnalysisTaskFrameTagInput struct {
+
+	// Intelligent frame-specific video tagging template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskFrameTagOutput struct {
+
+	// List of frame-specific video tags.
+	SegmentSet []*MediaAiAnalysisFrameTagSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+}
+
+type AiAnalysisTaskFrameTagResult struct {
+
+	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Error code. 0: success; other values: failure.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Input of intelligent frame-specific tagging task.
+	Input *AiAnalysisTaskFrameTagInput `json:"Input,omitempty" name:"Input"`
+
+	// Output of intelligent frame-specific tagging task.
+	Output *AiAnalysisTaskFrameTagOutput `json:"Output,omitempty" name:"Output"`
 }
 
 type AiAnalysisTaskInput struct {
+
+	// 
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskTagInput struct {
+
+	// Intelligent video tagging template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskTagOutput struct {
+
+	// List of intelligently generated video tags.
+	TagSet []*MediaAiAnalysisTagItem `json:"TagSet,omitempty" name:"TagSet" list`
+}
+
+type AiAnalysisTaskTagResult struct {
+
+	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Error code. 0: success; other values: failure.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Input of intelligent tagging task.
+	Input *AiAnalysisTaskTagInput `json:"Input,omitempty" name:"Input"`
+
+	// Output of intelligent tagging task.
+	Output *AiAnalysisTaskTagOutput `json:"Output,omitempty" name:"Output"`
 }
 
 type AiContentReviewResult struct {
@@ -498,9 +766,11 @@ type AiReviewPoliticalTaskOutput struct {
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tag of the detected politically sensitive information in video. Valid values:
-	// <li>politician: Politically sensitive figure.</li>
-	// <li>violation_photo: Violating photo.</li>
+	// Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/862/37615#AiReviewPoliticalTaskOutput) and this parameter is as follows:
+	// violation_photo:
+	// <li>violation_photo: violating photo.</li>
+	// Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
+	// <li>politician: politically sensitive figure.</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// List of video segments that contain the detected politically sensitive information.
@@ -982,9 +1252,8 @@ type AudioTemplateInfo struct {
 	// <li>libmp3lame;</li>
 	// <li>ac3.</li>
 	// When the outer `Container` parameter is `mp4` or `flv`, the valid values include:
-	// <li>libfdk_aac: More suitable for mp4;</li>
-	// <li>libmp3lame: More suitable for flv;</li>
-	// <li>mp2.</li>
+	// <li>libfdk_aac: more suitable for mp4;</li>
+	// <li>libmp3lame: more suitable for flv.</li>
 	// When the outer `Container` parameter is `hls`, the valid values include:
 	// <li>libfdk_aac;</li>
 	// <li>libmp3lame.</li>
@@ -1046,6 +1315,22 @@ type AudioTemplateInfoForUpdate struct {
 	AudioChannel *int64 `json:"AudioChannel,omitempty" name:"AudioChannel"`
 }
 
+type ClassificationConfigureInfo struct {
+
+	// Switch of intelligent categorization task. Valid values:
+	// <li>ON: enables intelligent categorization task;</li>
+	// <li>OFF: disables intelligent categorization task.</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type ClassificationConfigureInfoForUpdate struct {
+
+	// Switch of intelligent categorization task. Valid values:
+	// <li>ON: enables intelligent categorization task;</li>
+	// <li>OFF: disables intelligent categorization task.</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
 type ContentReviewTemplateItem struct {
 
 	// Unique ID of a content audit template.
@@ -1068,6 +1353,12 @@ type ContentReviewTemplateItem struct {
 	// Politically sensitive information detection control parameter.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
+
+	// Control parameter of prohibited information detection. Prohibited information includes:
+	// <li>Abusive;</li>
+	// <li>Drug-related.</li>
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ProhibitedConfigure *ProhibitedConfigureInfo `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
 	// Custom content audit control parameter.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -1114,6 +1405,74 @@ type CosOutputStorage struct {
 
 	// Region of the target bucket of a video processing output file, such as `ap-chongqing`. If this parameter is left empty, the parameter of the upper folder will be inherited.
 	Region *string `json:"Region,omitempty" name:"Region"`
+}
+
+type CoverConfigureInfo struct {
+
+	// Switch of intelligent cover generating task. Valid values:
+	// <li>ON: enables intelligent cover generating task;</li>
+	// <li>OFF: disables intelligent cover generating task.</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type CoverConfigureInfoForUpdate struct {
+
+	// Switch of intelligent cover generating task. Valid values:
+	// <li>ON: enables intelligent cover generating task;</li>
+	// <li>OFF: disables intelligent cover generating task.</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type CreateAIAnalysisTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Video content analysis template name. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Video content analysis template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Control parameter of intelligent categorization task.
+	ClassificationConfigure *ClassificationConfigureInfo `json:"ClassificationConfigure,omitempty" name:"ClassificationConfigure"`
+
+	// Control parameter of intelligent tagging task.
+	TagConfigure *TagConfigureInfo `json:"TagConfigure,omitempty" name:"TagConfigure"`
+
+	// Control parameter of intelligent cover generating task.
+	CoverConfigure *CoverConfigureInfo `json:"CoverConfigure,omitempty" name:"CoverConfigure"`
+
+	// Control parameter of intelligent frame-specific tagging task.
+	FrameTagConfigure *FrameTagConfigureInfo `json:"FrameTagConfigure,omitempty" name:"FrameTagConfigure"`
+}
+
+func (r *CreateAIAnalysisTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAIAnalysisTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAIAnalysisTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Unique ID of video content analysis template.
+		Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateAIAnalysisTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAIAnalysisTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateAIRecognitionTemplateRequest struct {
@@ -1168,6 +1527,67 @@ func (r *CreateAIRecognitionTemplateResponse) ToJsonString() string {
 }
 
 func (r *CreateAIRecognitionTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAdaptiveDynamicStreamingTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Adaptive bitrate streaming format. Valid values:
+	// <li>HLS,</li>
+	// <li>MPEG-DASH.</li>
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Parameter information of output substreams for transcoding to adaptive bitrate streaming. Up to 10 substreams can be output.
+	// Note: the frame rate of each substream must be consistent; otherwise, the frame rate of the first substream is used as the output frame rate.
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+
+	// Template name. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	// Default value: 0.
+	DisableHigherVideoBitrate *uint64 `json:"DisableHigherVideoBitrate,omitempty" name:"DisableHigherVideoBitrate"`
+
+	// Whether to prohibit transcoding from low resolution to high resolution. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	// Default value: 0.
+	DisableHigherVideoResolution *uint64 `json:"DisableHigherVideoResolution,omitempty" name:"DisableHigherVideoResolution"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
+func (r *CreateAdaptiveDynamicStreamingTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAdaptiveDynamicStreamingTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Unique ID of an adaptive bitrate streaming template.
+		Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateAdaptiveDynamicStreamingTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1764,6 +2184,40 @@ func (r *CreateWorkflowResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteAIAnalysisTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of video content analysis template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+func (r *DeleteAIAnalysisTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteAIAnalysisTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteAIAnalysisTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteAIAnalysisTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteAIAnalysisTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteAIRecognitionTemplateRequest struct {
 	*tchttp.BaseRequest
 
@@ -1795,6 +2249,40 @@ func (r *DeleteAIRecognitionTemplateResponse) ToJsonString() string {
 }
 
 func (r *DeleteAIRecognitionTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteAdaptiveDynamicStreamingTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of an adaptive bitrate streaming template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+func (r *DeleteAdaptiveDynamicStreamingTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteAdaptiveDynamicStreamingTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteAdaptiveDynamicStreamingTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2138,6 +2626,52 @@ func (r *DeleteWorkflowResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeAIAnalysisTemplatesRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID filter of video content analysis templates. Array length limit: 10.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+
+	// Pagination offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeAIAnalysisTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAIAnalysisTemplatesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAIAnalysisTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible entries.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of video content analysis template details.
+		AIAnalysisTemplateSet []*AIAnalysisTemplateItem `json:"AIAnalysisTemplateSet,omitempty" name:"AIAnalysisTemplateSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAIAnalysisTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAIAnalysisTemplatesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeAIRecognitionTemplatesRequest struct {
 	*tchttp.BaseRequest
 
@@ -2181,6 +2715,57 @@ func (r *DescribeAIRecognitionTemplatesResponse) ToJsonString() string {
 }
 
 func (r *DescribeAIRecognitionTemplatesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID filter of adaptive bitrate streaming templates. Array length limit: 100.
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+
+	// Pagination offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Template type filter. Valid values:
+	// <li>Preset: preset template;</li>
+	// <li>Custom: custom template.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+func (r *DescribeAdaptiveDynamicStreamingTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAdaptiveDynamicStreamingTemplatesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAdaptiveDynamicStreamingTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible entries.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of adaptive bitrate streaming template details.
+		AdaptiveDynamicStreamingTemplateSet []*AdaptiveDynamicStreamingTemplate `json:"AdaptiveDynamicStreamingTemplateSet,omitempty" name:"AdaptiveDynamicStreamingTemplateSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2329,6 +2914,43 @@ func (r *DescribeImageSpriteTemplatesResponse) ToJsonString() string {
 }
 
 func (r *DescribeImageSpriteTemplatesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaMetaDataRequest struct {
+	*tchttp.BaseRequest
+
+	// Input information of file for metadata getting.
+	InputInfo *MediaInputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
+}
+
+func (r *DescribeMediaMetaDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaMetaDataRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaMetaDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Media metadata.
+		MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeMediaMetaDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaMetaDataResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2877,6 +3499,73 @@ func (r *DisableWorkflowResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type EditMediaFileInfo struct {
+
+	// Video input information.
+	InputInfo *MediaInputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
+
+	// Start time offset of video clipping in seconds.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// End time offset of video clipping in seconds.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+}
+
+type EditMediaRequest struct {
+	*tchttp.BaseRequest
+
+	// Information of input video file.
+	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitempty" name:"FileInfos" list`
+
+	// Target storage of video processing output file.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// Target path of video processing output file.
+	OutputObjectPath *string `json:"OutputObjectPath,omitempty" name:"OutputObjectPath"`
+
+	// Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+
+	// Task priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+}
+
+func (r *EditMediaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EditMediaRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EditMediaResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Video editing task ID, which can be used to query the status of an editing task.
+		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *EditMediaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EditMediaResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type EnableWorkflowRequest struct {
 	*tchttp.BaseRequest
 
@@ -2964,6 +3653,22 @@ type FaceConfigureInfoForUpdate struct {
 	// <li>UserDefine: Custom figure library.</li>
 	// <li>All: Both default and custom figure libraries will be used.</li>
 	FaceLibrary *string `json:"FaceLibrary,omitempty" name:"FaceLibrary"`
+}
+
+type FrameTagConfigureInfo struct {
+
+	// Switch of intelligent frame-specific tagging task. Valid values:
+	// <li>ON: enables intelligent frame-specific tagging task;</li>
+	// <li>OFF: disables intelligent frame-specific tagging task.</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type FrameTagConfigureInfoForUpdate struct {
+
+	// Switch of intelligent frame-specific tagging task. Valid values:
+	// <li>ON: enables intelligent frame-specific tagging task;</li>
+	// <li>OFF: disables intelligent frame-specific tagging task.</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
 type ImageSpriteTaskInput struct {
@@ -3086,6 +3791,40 @@ type ImageWatermarkTemplate struct {
 }
 
 type LiveStreamAiRecognitionResultInfo struct {
+
+	// 
+	ResultSet []*LiveStreamAiRecognitionResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
+}
+
+type LiveStreamAiRecognitionResultItem struct {
+
+	// Result type. Valid values:
+	// <li>FaceRecognition: face recognition,</li>
+	// <li>AsrWordsRecognition: speech keyword recognition,</li>
+	// <li>OcrWordsRecognition: text keyword recognition,</li>
+	// <li>AsrFullTextRecognition: full speech recognition,</li>
+	// <li>OcrFullTextRecognition: full text recognition.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Face recognition result, which is valid when `Type` is
+	// `FaceRecognition`.
+	FaceRecognitionResultSet []*LiveStreamFaceRecognitionResult `json:"FaceRecognitionResultSet,omitempty" name:"FaceRecognitionResultSet" list`
+
+	// Speech keyword recognition result, which is valid when `Type` is
+	// `AsrWordsRecognition`.
+	AsrWordsRecognitionResultSet []*LiveStreamAsrWordsRecognitionResult `json:"AsrWordsRecognitionResultSet,omitempty" name:"AsrWordsRecognitionResultSet" list`
+
+	// Text keyword recognition result, which is valid when `Type` is
+	// `OcrWordsRecognition`.
+	OcrWordsRecognitionResultSet []*LiveStreamOcrWordsRecognitionResult `json:"OcrWordsRecognitionResultSet,omitempty" name:"OcrWordsRecognitionResultSet" list`
+
+	// Full speech recognition result, which is valid when `Type` is
+	// `AsrFullTextRecognition`.
+	AsrFullTextRecognitionResultSet []*LiveStreamAsrFullTextRecognitionResult `json:"AsrFullTextRecognitionResultSet,omitempty" name:"AsrFullTextRecognitionResultSet" list`
+
+	// Full text recognition result, which is valid when `Type` is
+	// `OcrFullTextRecognition`.
+	OcrFullTextRecognitionResultSet []*LiveStreamOcrFullTextRecognitionResult `json:"OcrFullTextRecognitionResultSet,omitempty" name:"OcrFullTextRecognitionResultSet" list`
 }
 
 type LiveStreamAiReviewImagePoliticalResult struct {
@@ -3242,6 +3981,97 @@ type LiveStreamAiReviewVoicePornResult struct {
 	Label *string `json:"Label,omitempty" name:"Label"`
 }
 
+type LiveStreamAsrFullTextRecognitionResult struct {
+
+	// Recognized text.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// Start PTS time of recognized segment in seconds.
+	StartPtsTime *float64 `json:"StartPtsTime,omitempty" name:"StartPtsTime"`
+
+	// End PTS time of recognized segment in seconds.
+	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
+
+	// Confidence of recognized segment. Value range: 0–100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+}
+
+type LiveStreamAsrWordsRecognitionResult struct {
+
+	// Speech keyword.
+	Word *string `json:"Word,omitempty" name:"Word"`
+
+	// Start PTS time of recognized segment in seconds.
+	StartPtsTime *float64 `json:"StartPtsTime,omitempty" name:"StartPtsTime"`
+
+	// End PTS time of recognized segment in seconds.
+	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
+
+	// Confidence of recognized segment. Value range: 0–100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+}
+
+type LiveStreamFaceRecognitionResult struct {
+
+	// Unique ID of figure.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Figure name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Figure library type, indicating to which figure library the recognized figure belongs:
+	// <li>Default: default figure library</li><li>UserDefine: custom figure library</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Start PTS time of recognized segment in seconds.
+	StartPtsTime *float64 `json:"StartPtsTime,omitempty" name:"StartPtsTime"`
+
+	// End PTS time of recognized segment in seconds.
+	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
+
+	// Confidence of recognized segment. Value range: 0–100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+}
+
+type LiveStreamOcrFullTextRecognitionResult struct {
+
+	// Speech text.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// Start PTS time of recognized segment in seconds.
+	StartPtsTime *float64 `json:"StartPtsTime,omitempty" name:"StartPtsTime"`
+
+	// End PTS time of recognized segment in seconds.
+	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
+
+	// Confidence of recognized segment. Value range: 0–100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+}
+
+type LiveStreamOcrWordsRecognitionResult struct {
+
+	// Text keyword.
+	Word *string `json:"Word,omitempty" name:"Word"`
+
+	// Start PTS time of recognized segment in seconds.
+	StartPtsTime *float64 `json:"StartPtsTime,omitempty" name:"StartPtsTime"`
+
+	// End PTS time of recognized segment in seconds.
+	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
+
+	// Confidence of recognized segment. Value range: 0–100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+	AreaCoords []*int64 `json:"AreaCoords,omitempty" name:"AreaCoords" list`
+}
+
 type LiveStreamProcessErrorInfo struct {
 
 	// Error code:
@@ -3286,6 +4116,92 @@ type LiveStreamTaskNotifyConfig struct {
 
 	// This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+}
+
+type ManageTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// Operation type. Valid values:
+	// <li>Abort: terminates task.</li>
+	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
+
+	// Video processing task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+func (r *ManageTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ManageTaskRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ManageTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ManageTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ManageTaskResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type MediaAiAnalysisClassificationItem struct {
+
+	// Name of intelligently generated category.
+	Classification *string `json:"Classification,omitempty" name:"Classification"`
+
+	// Confidence of intelligently generated category between 0 and 100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+}
+
+type MediaAiAnalysisCoverItem struct {
+
+	// Storage path of intelligently generated cover.
+	CoverPath *string `json:"CoverPath,omitempty" name:"CoverPath"`
+
+	// Confidence of intelligently generated cover between 0 and 100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+}
+
+type MediaAiAnalysisFrameTagItem struct {
+
+	// Frame-specific tag name.
+	Tag *string `json:"Tag,omitempty" name:"Tag"`
+
+	// Confidence of intelligently generated frame-specific tag between 0 and 100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+}
+
+type MediaAiAnalysisFrameTagSegmentItem struct {
+
+	// Start time offset of frame-specific tag.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// End time offset of frame-specific tag.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+
+	// List of tags in time period.
+	TagSet []*MediaAiAnalysisFrameTagItem `json:"TagSet,omitempty" name:"TagSet" list`
+}
+
+type MediaAiAnalysisTagItem struct {
+
+	// Tag name.
+	Tag *string `json:"Tag,omitempty" name:"Tag"`
+
+	// Confidence of tag between 0 and 100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 }
 
 type MediaAnimatedGraphicsItem struct {
@@ -3533,6 +4449,25 @@ type MediaMetaData struct {
 	AudioDuration *float64 `json:"AudioDuration,omitempty" name:"AudioDuration"`
 }
 
+type MediaProcessTaskAdaptiveDynamicStreamingResult struct {
+
+	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Error code. 0: success; other values: failure.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Input of an adaptive bitrate streaming task.
+	Input *AdaptiveDynamicStreamingTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// Output of an adaptive bitrate streaming task.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Output *AdaptiveDynamicStreamingInfoItem `json:"Output,omitempty" name:"Output"`
+}
+
 type MediaProcessTaskAnimatedGraphicResult struct {
 
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
@@ -3593,6 +4528,9 @@ type MediaProcessTaskInput struct {
 
 	// List of image sprite generating tasks.
 	ImageSpriteTaskSet []*ImageSpriteTaskInput `json:"ImageSpriteTaskSet,omitempty" name:"ImageSpriteTaskSet" list`
+
+	// List of adaptive bitrate streaming tasks.
+	AdaptiveDynamicStreamingTaskSet []*AdaptiveDynamicStreamingTaskInput `json:"AdaptiveDynamicStreamingTaskSet,omitempty" name:"AdaptiveDynamicStreamingTaskSet" list`
 }
 
 type MediaProcessTaskResult struct {
@@ -3626,6 +4564,10 @@ type MediaProcessTaskResult struct {
 	// Query result of an image sprite generating task, which is valid when task type is `ImageSprite`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageSpriteTask *MediaProcessTaskImageSpriteResult `json:"ImageSpriteTask,omitempty" name:"ImageSpriteTask"`
+
+	// Query result of an adaptive bitrate streaming task, which is valid if the task type is `AdaptiveDynamicStreaming`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AdaptiveDynamicStreamingTask *MediaProcessTaskAdaptiveDynamicStreamingResult `json:"AdaptiveDynamicStreamingTask,omitempty" name:"AdaptiveDynamicStreamingTask"`
 }
 
 type MediaProcessTaskSampleSnapshotResult struct {
@@ -3809,6 +4751,58 @@ type MediaVideoStreamItem struct {
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 }
 
+type ModifyAIAnalysisTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of video content analysis template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Video content analysis template name. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Video content analysis template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Control parameter of intelligent categorization task.
+	ClassificationConfigure *ClassificationConfigureInfoForUpdate `json:"ClassificationConfigure,omitempty" name:"ClassificationConfigure"`
+
+	// Control parameter of intelligent tagging task.
+	TagConfigure *TagConfigureInfoForUpdate `json:"TagConfigure,omitempty" name:"TagConfigure"`
+
+	// Control parameter of intelligent cover generating task.
+	CoverConfigure *CoverConfigureInfoForUpdate `json:"CoverConfigure,omitempty" name:"CoverConfigure"`
+
+	// Control parameter of intelligent frame-specific tagging task.
+	FrameTagConfigure *FrameTagConfigureInfoForUpdate `json:"FrameTagConfigure,omitempty" name:"FrameTagConfigure"`
+}
+
+func (r *ModifyAIAnalysisTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAIAnalysisTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAIAnalysisTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyAIAnalysisTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAIAnalysisTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyAIRecognitionTemplateRequest struct {
 	*tchttp.BaseRequest
 
@@ -3861,6 +4855,65 @@ func (r *ModifyAIRecognitionTemplateResponse) ToJsonString() string {
 }
 
 func (r *ModifyAIRecognitionTemplateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of an adaptive bitrate streaming template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Template name. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Adaptive bitrate streaming format. Valid values:
+	// <li>HLS,</li>
+	// <li>MPEG-DASH.</li>
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	DisableHigherVideoBitrate *uint64 `json:"DisableHigherVideoBitrate,omitempty" name:"DisableHigherVideoBitrate"`
+
+	// Whether to prohibit transcoding from low resolution to high resolution. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	DisableHigherVideoResolution *uint64 `json:"DisableHigherVideoResolution,omitempty" name:"DisableHigherVideoResolution"`
+
+	// Parameter information of input streams for transcoding to adaptive bitrate streaming. Up to 10 streams can be input.
+	// Note: the frame rate of each stream must be consistent; otherwise, the frame rate of the first stream is used as the output frame rate.
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
+func (r *ModifyAdaptiveDynamicStreamingTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAdaptiveDynamicStreamingTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyAdaptiveDynamicStreamingTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4610,11 +5663,15 @@ type PoliticalImgReviewTemplateInfo struct {
 	// <li>OFF: Disables a politically sensitive information detection in image task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tag for politically sensitive information detection in image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>violation_photo: Violating photo;</li>
-	// <li>politician: Politically sensitive figure;</li>
-	// <li>entertainment: Entertainment celebrity;</li>
-	// <li>sport: Sports celebrity.</li>
+	// Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
+	// <li>violation_photo: violating photo;</li>
+	// <li>politician: sensitive figure;</li>
+	// <li>entertainment: entertainment celebrity;</li>
+	// <li>sport: sports figure;</li>
+	// <li>entrepreneur: business figure;</li>
+	// <li>scholar: educator;</li>
+	// <li>celebrity: public-known figure;</li>
+	// <li>military: military figure.</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0–100.
@@ -4631,11 +5688,15 @@ type PoliticalImgReviewTemplateInfoForUpdate struct {
 	// <li>OFF: Disables a politically sensitive information detection in image task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tag for politically sensitive information detection in image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>violation_photo: Violating photo;</li>
-	// <li>politician: Politically sensitive figure;</li>
-	// <li>entertainment: Entertainment celebrity;</li>
-	// <li>sport: Sports celebrity.</li>
+	// Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
+	// <li>violation_photo: violating photo;</li>
+	// <li>politician: sensitive figure;</li>
+	// <li>entertainment: entertainment celebrity;</li>
+	// <li>sport: sports figure;</li>
+	// <li>entrepreneur: business figure;</li>
+	// <li>scholar: educator;</li>
+	// <li>celebrity: public-known figure;</li>
+	// <li>military: military figure.</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
@@ -4923,10 +5984,94 @@ func (r *ProcessMediaResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ProhibitedAsrReviewTemplateInfo struct {
+
+	// 
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// 
+	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
+
+	// 
+	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
+}
+
+type ProhibitedConfigureInfo struct {
+
+	// 
+	AsrReviewInfo *ProhibitedAsrReviewTemplateInfo `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
+
+	// 
+	OcrReviewInfo *ProhibitedOcrReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
+}
+
+type ProhibitedOcrReviewTemplateInfo struct {
+
+	// 
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// 
+	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
+
+	// 
+	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
+}
+
+type RawImageWatermarkInput struct {
+
+	// Input content of watermark image. JPEG and PNG images are supported.
+	ImageContent *MediaInputInfo `json:"ImageContent,omitempty" name:"ImageContent"`
+
+	// Watermark width. % and px formats are supported:
+	// <li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
+	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+	// Default value: 10%.
+	Width *string `json:"Width,omitempty" name:"Width"`
+
+	// Watermark height. % and px formats are supported:
+	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.</li>
+	// Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+	Height *string `json:"Height,omitempty" name:"Height"`
+}
+
 type RawTranscodeParameter struct {
+
+	// 
+	Container *string `json:"Container,omitempty" name:"Container"`
+
+	// 
+	RemoveVideo *int64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+
+	// 
+	RemoveAudio *int64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
+
+	// 
+	VideoTemplate *VideoTemplateInfo `json:"VideoTemplate,omitempty" name:"VideoTemplate"`
+
+	// 
+	AudioTemplate *AudioTemplateInfo `json:"AudioTemplate,omitempty" name:"AudioTemplate"`
+
+	// 
+	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
 }
 
 type RawWatermarkParameter struct {
+
+	// 
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// 
+	CoordinateOrigin *string `json:"CoordinateOrigin,omitempty" name:"CoordinateOrigin"`
+
+	// 
+	XPos *string `json:"XPos,omitempty" name:"XPos"`
+
+	// 
+	YPos *string `json:"YPos,omitempty" name:"YPos"`
+
+	// 
+	ImageTemplate *RawImageWatermarkInput `json:"ImageTemplate,omitempty" name:"ImageTemplate"`
 }
 
 type ResetWorkflowRequest struct {
@@ -5227,6 +6372,22 @@ type TEHDConfigForUpdate struct {
 
 	// Maximum bitrate. If this parameter is left empty, no modification will be made.
 	MaxVideoBitrate *uint64 `json:"MaxVideoBitrate,omitempty" name:"MaxVideoBitrate"`
+}
+
+type TagConfigureInfo struct {
+
+	// Switch of intelligent tagging task. Valid values:
+	// <li>ON: enables intelligent tagging task;</li>
+	// <li>OFF: disables intelligent tagging task.</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type TagConfigureInfoForUpdate struct {
+
+	// Switch of intelligent tagging task. Valid values:
+	// <li>ON: enables intelligent tagging task;</li>
+	// <li>OFF: disables intelligent tagging task.</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
 type TaskNotifyConfig struct {

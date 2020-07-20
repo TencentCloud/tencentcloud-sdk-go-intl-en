@@ -43,6 +43,31 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewCreateAIAnalysisTemplateRequest() (request *CreateAIAnalysisTemplateRequest) {
+    request = &CreateAIAnalysisTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "CreateAIAnalysisTemplate")
+    return
+}
+
+func NewCreateAIAnalysisTemplateResponse() (response *CreateAIAnalysisTemplateResponse) {
+    response = &CreateAIAnalysisTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a custom content analysis template. Up to 50 templates can be created.
+func (c *Client) CreateAIAnalysisTemplate(request *CreateAIAnalysisTemplateRequest) (response *CreateAIAnalysisTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateAIAnalysisTemplateRequest()
+    }
+    response = NewCreateAIAnalysisTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAIRecognitionTemplateRequest() (request *CreateAIRecognitionTemplateRequest) {
     request = &CreateAIRecognitionTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -64,6 +89,31 @@ func (c *Client) CreateAIRecognitionTemplate(request *CreateAIRecognitionTemplat
         request = NewCreateAIRecognitionTemplateRequest()
     }
     response = NewCreateAIRecognitionTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAdaptiveDynamicStreamingTemplateRequest() (request *CreateAdaptiveDynamicStreamingTemplateRequest) {
+    request = &CreateAdaptiveDynamicStreamingTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "CreateAdaptiveDynamicStreamingTemplate")
+    return
+}
+
+func NewCreateAdaptiveDynamicStreamingTemplateResponse() (response *CreateAdaptiveDynamicStreamingTemplateResponse) {
+    response = &CreateAdaptiveDynamicStreamingTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create up to 100 adaptive bitrate streaming templates.
+func (c *Client) CreateAdaptiveDynamicStreamingTemplate(request *CreateAdaptiveDynamicStreamingTemplateRequest) (response *CreateAdaptiveDynamicStreamingTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateAdaptiveDynamicStreamingTemplateRequest()
+    }
+    response = NewCreateAdaptiveDynamicStreamingTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -328,6 +378,33 @@ func (c *Client) CreateWorkflow(request *CreateWorkflowRequest) (response *Creat
     return
 }
 
+func NewDeleteAIAnalysisTemplateRequest() (request *DeleteAIAnalysisTemplateRequest) {
+    request = &DeleteAIAnalysisTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "DeleteAIAnalysisTemplate")
+    return
+}
+
+func NewDeleteAIAnalysisTemplateResponse() (response *DeleteAIAnalysisTemplateResponse) {
+    response = &DeleteAIAnalysisTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a custom content analysis template.
+// 
+// Note: templates with an ID below 10000 are preset and cannot be deleted.
+func (c *Client) DeleteAIAnalysisTemplate(request *DeleteAIAnalysisTemplateRequest) (response *DeleteAIAnalysisTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteAIAnalysisTemplateRequest()
+    }
+    response = NewDeleteAIAnalysisTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAIRecognitionTemplateRequest() (request *DeleteAIRecognitionTemplateRequest) {
     request = &DeleteAIRecognitionTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -349,6 +426,31 @@ func (c *Client) DeleteAIRecognitionTemplate(request *DeleteAIRecognitionTemplat
         request = NewDeleteAIRecognitionTemplateRequest()
     }
     response = NewDeleteAIRecognitionTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteAdaptiveDynamicStreamingTemplateRequest() (request *DeleteAdaptiveDynamicStreamingTemplateRequest) {
+    request = &DeleteAdaptiveDynamicStreamingTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "DeleteAdaptiveDynamicStreamingTemplate")
+    return
+}
+
+func NewDeleteAdaptiveDynamicStreamingTemplateResponse() (response *DeleteAdaptiveDynamicStreamingTemplateResponse) {
+    response = &DeleteAdaptiveDynamicStreamingTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete an adaptive bitrate streaming template.
+func (c *Client) DeleteAdaptiveDynamicStreamingTemplate(request *DeleteAdaptiveDynamicStreamingTemplateRequest) (response *DeleteAdaptiveDynamicStreamingTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteAdaptiveDynamicStreamingTemplateRequest()
+    }
+    response = NewDeleteAdaptiveDynamicStreamingTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -603,6 +705,31 @@ func (c *Client) DeleteWorkflow(request *DeleteWorkflowRequest) (response *Delet
     return
 }
 
+func NewDescribeAIAnalysisTemplatesRequest() (request *DescribeAIAnalysisTemplatesRequest) {
+    request = &DescribeAIAnalysisTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeAIAnalysisTemplates")
+    return
+}
+
+func NewDescribeAIAnalysisTemplatesResponse() (response *DescribeAIAnalysisTemplatesResponse) {
+    response = &DescribeAIAnalysisTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the list of content analysis templates based on unique template ID. The returned result includes all eligible custom and preset video content analysis templates.
+func (c *Client) DescribeAIAnalysisTemplates(request *DescribeAIAnalysisTemplatesRequest) (response *DescribeAIAnalysisTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAIAnalysisTemplatesRequest()
+    }
+    response = NewDescribeAIAnalysisTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAIRecognitionTemplatesRequest() (request *DescribeAIRecognitionTemplatesRequest) {
     request = &DescribeAIRecognitionTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -624,6 +751,31 @@ func (c *Client) DescribeAIRecognitionTemplates(request *DescribeAIRecognitionTe
         request = NewDescribeAIRecognitionTemplatesRequest()
     }
     response = NewDescribeAIRecognitionTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAdaptiveDynamicStreamingTemplatesRequest() (request *DescribeAdaptiveDynamicStreamingTemplatesRequest) {
+    request = &DescribeAdaptiveDynamicStreamingTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeAdaptiveDynamicStreamingTemplates")
+    return
+}
+
+func NewDescribeAdaptiveDynamicStreamingTemplatesResponse() (response *DescribeAdaptiveDynamicStreamingTemplatesResponse) {
+    response = &DescribeAdaptiveDynamicStreamingTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of adaptive bitrate streaming templates and supports paginated queries by filters.
+func (c *Client) DescribeAdaptiveDynamicStreamingTemplates(request *DescribeAdaptiveDynamicStreamingTemplatesRequest) (response *DescribeAdaptiveDynamicStreamingTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAdaptiveDynamicStreamingTemplatesRequest()
+    }
+    response = NewDescribeAdaptiveDynamicStreamingTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -699,6 +851,31 @@ func (c *Client) DescribeImageSpriteTemplates(request *DescribeImageSpriteTempla
         request = NewDescribeImageSpriteTemplatesRequest()
     }
     response = NewDescribeImageSpriteTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMediaMetaDataRequest() (request *DescribeMediaMetaDataRequest) {
+    request = &DescribeMediaMetaDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeMediaMetaData")
+    return
+}
+
+func NewDescribeMediaMetaDataResponse() (response *DescribeMediaMetaDataResponse) {
+    response = &DescribeMediaMetaDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the metadata of media, such as video image width/height, codec, length, and frame rate.
+func (c *Client) DescribeMediaMetaData(request *DescribeMediaMetaDataRequest) (response *DescribeMediaMetaDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeMediaMetaDataRequest()
+    }
+    response = NewDescribeMediaMetaDataResponse()
     err = c.Send(request, response)
     return
 }
@@ -955,6 +1132,35 @@ func (c *Client) DisableWorkflow(request *DisableWorkflowRequest) (response *Dis
     return
 }
 
+func NewEditMediaRequest() (request *EditMediaRequest) {
+    request = &EditMediaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "EditMedia")
+    return
+}
+
+func NewEditMediaResponse() (response *EditMediaResponse) {
+    response = &EditMediaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to edit a video (by clipping, splicing, etc.) to generate a new VOD video. Editing features include:
+// 
+// 1. Clipping a file to generate a new video;
+// 2. Splicing multiple files to generate a new video;
+// 3. Clipping multiple files and then splicing the clips to generate a new video.
+func (c *Client) EditMedia(request *EditMediaRequest) (response *EditMediaResponse, err error) {
+    if request == nil {
+        request = NewEditMediaRequest()
+    }
+    response = NewEditMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableWorkflowRequest() (request *EnableWorkflowRequest) {
     request = &EnableWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -980,6 +1186,59 @@ func (c *Client) EnableWorkflow(request *EnableWorkflowRequest) (response *Enabl
     return
 }
 
+func NewManageTaskRequest() (request *ManageTaskRequest) {
+    request = &ManageTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "ManageTask")
+    return
+}
+
+func NewManageTaskResponse() (response *ManageTaskResponse) {
+    response = &ManageTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to manage an initiated task.
+// > Note: currently, you can only terminate an ongoing live stream processing task.
+func (c *Client) ManageTask(request *ManageTaskRequest) (response *ManageTaskResponse, err error) {
+    if request == nil {
+        request = NewManageTaskRequest()
+    }
+    response = NewManageTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAIAnalysisTemplateRequest() (request *ModifyAIAnalysisTemplateRequest) {
+    request = &ModifyAIAnalysisTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "ModifyAIAnalysisTemplate")
+    return
+}
+
+func NewModifyAIAnalysisTemplateResponse() (response *ModifyAIAnalysisTemplateResponse) {
+    response = &ModifyAIAnalysisTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a custom content analysis template.
+// 
+// Note: templates with an ID below 10000 are preset and cannot be modified.
+func (c *Client) ModifyAIAnalysisTemplate(request *ModifyAIAnalysisTemplateRequest) (response *ModifyAIAnalysisTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyAIAnalysisTemplateRequest()
+    }
+    response = NewModifyAIAnalysisTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAIRecognitionTemplateRequest() (request *ModifyAIRecognitionTemplateRequest) {
     request = &ModifyAIRecognitionTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1001,6 +1260,31 @@ func (c *Client) ModifyAIRecognitionTemplate(request *ModifyAIRecognitionTemplat
         request = NewModifyAIRecognitionTemplateRequest()
     }
     response = NewModifyAIRecognitionTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAdaptiveDynamicStreamingTemplateRequest() (request *ModifyAdaptiveDynamicStreamingTemplateRequest) {
+    request = &ModifyAdaptiveDynamicStreamingTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "ModifyAdaptiveDynamicStreamingTemplate")
+    return
+}
+
+func NewModifyAdaptiveDynamicStreamingTemplateResponse() (response *ModifyAdaptiveDynamicStreamingTemplateResponse) {
+    response = &ModifyAdaptiveDynamicStreamingTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify an adaptive bitrate streaming template.
+func (c *Client) ModifyAdaptiveDynamicStreamingTemplate(request *ModifyAdaptiveDynamicStreamingTemplateRequest) (response *ModifyAdaptiveDynamicStreamingTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyAdaptiveDynamicStreamingTemplateRequest()
+    }
+    response = NewModifyAdaptiveDynamicStreamingTemplateResponse()
     err = c.Send(request, response)
     return
 }

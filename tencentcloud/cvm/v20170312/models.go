@@ -363,6 +363,12 @@ type DataDisk struct {
 	// This parameter is only used with `RunInstances`.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Encrypt *bool `json:"Encrypt,omitempty" name:"Encrypt"`
+
+	// ID of the custom CMK in the format of “UUID” or “kms-abcd1234”. This parameter is used to encrypt cloud disks.
+	// 
+	// Currently, this parameter is only used in the `RunInstances` API.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
 }
 
 type DeleteDisasterRecoverGroupsRequest struct {
@@ -2216,6 +2222,27 @@ type InstanceTypeQuotaItem struct {
 	// Details of out-of-stock items
 	// Note: this field may return null, indicating that no valid value is obtained.
 	SoldOutReason *string `json:"SoldOutReason,omitempty" name:"SoldOutReason"`
+
+	// 
+	InstanceBandwidth *float64 `json:"InstanceBandwidth,omitempty" name:"InstanceBandwidth"`
+
+	// 
+	InstancePps *int64 `json:"InstancePps,omitempty" name:"InstancePps"`
+
+	// 
+	StorageBlockAmount *int64 `json:"StorageBlockAmount,omitempty" name:"StorageBlockAmount"`
+
+	// 
+	CpuType *string `json:"CpuType,omitempty" name:"CpuType"`
+
+	// Number of GPUs of the instance.
+	Gpu *int64 `json:"Gpu,omitempty" name:"Gpu"`
+
+	// Number of FPGAs of the instance.
+	Fpga *int64 `json:"Fpga,omitempty" name:"Fpga"`
+
+	// Descriptive information of the instance.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
 type InternetAccessible struct {

@@ -68,6 +68,34 @@ func (c *Client) AcceptDirectConnectTunnel(request *AcceptDirectConnectTunnelReq
     return
 }
 
+func NewCreateDirectConnectRequest() (request *CreateDirectConnectRequest) {
+    request = &CreateDirectConnectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "CreateDirectConnect")
+    return
+}
+
+func NewCreateDirectConnectResponse() (response *CreateDirectConnectResponse) {
+    response = &CreateDirectConnectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to apply for a connection.
+// When calling this API, please note that:
+// You need to complete identity verification for your account; otherwise, you cannot apply for a connection;
+// If there is any connection in arrears under your account, you cannot apply for more connections.
+func (c *Client) CreateDirectConnect(request *CreateDirectConnectRequest) (response *CreateDirectConnectResponse, err error) {
+    if request == nil {
+        request = NewCreateDirectConnectRequest()
+    }
+    response = NewCreateDirectConnectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDirectConnectTunnelRequest() (request *CreateDirectConnectTunnelRequest) {
     request = &CreateDirectConnectTunnelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -93,6 +121,32 @@ func (c *Client) CreateDirectConnectTunnel(request *CreateDirectConnectTunnelReq
     return
 }
 
+func NewDeleteDirectConnectRequest() (request *DeleteDirectConnectRequest) {
+    request = &DeleteDirectConnectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "DeleteDirectConnect")
+    return
+}
+
+func NewDeleteDirectConnectResponse() (response *DeleteDirectConnectResponse) {
+    response = &DeleteDirectConnectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a connection.
+// Only connected connections can be deleted.
+func (c *Client) DeleteDirectConnect(request *DeleteDirectConnectRequest) (response *DeleteDirectConnectResponse, err error) {
+    if request == nil {
+        request = NewDeleteDirectConnectRequest()
+    }
+    response = NewDeleteDirectConnectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteDirectConnectTunnelRequest() (request *DeleteDirectConnectTunnelRequest) {
     request = &DeleteDirectConnectTunnelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -114,6 +168,31 @@ func (c *Client) DeleteDirectConnectTunnel(request *DeleteDirectConnectTunnelReq
         request = NewDeleteDirectConnectTunnelRequest()
     }
     response = NewDeleteDirectConnectTunnelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAccessPointsRequest() (request *DescribeAccessPointsRequest) {
+    request = &DescribeAccessPointsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "DescribeAccessPoints")
+    return
+}
+
+func NewDescribeAccessPointsResponse() (response *DescribeAccessPointsResponse) {
+    response = &DescribeAccessPointsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query connection access points.
+func (c *Client) DescribeAccessPoints(request *DescribeAccessPointsRequest) (response *DescribeAccessPointsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccessPointsRequest()
+    }
+    response = NewDescribeAccessPointsResponse()
     err = c.Send(request, response)
     return
 }
@@ -164,6 +243,31 @@ func (c *Client) DescribeDirectConnects(request *DescribeDirectConnectsRequest) 
         request = NewDescribeDirectConnectsRequest()
     }
     response = NewDescribeDirectConnectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDirectConnectAttributeRequest() (request *ModifyDirectConnectAttributeRequest) {
+    request = &ModifyDirectConnectAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "ModifyDirectConnectAttribute")
+    return
+}
+
+func NewModifyDirectConnectAttributeResponse() (response *ModifyDirectConnectAttributeResponse) {
+    response = &ModifyDirectConnectAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify connection attributes.
+func (c *Client) ModifyDirectConnectAttribute(request *ModifyDirectConnectAttributeRequest) (response *ModifyDirectConnectAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyDirectConnectAttributeRequest()
+    }
+    response = NewModifyDirectConnectAttributeResponse()
     err = c.Send(request, response)
     return
 }

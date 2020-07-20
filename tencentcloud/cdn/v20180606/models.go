@@ -20,6 +20,41 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AccessControl struct {
+
+	// Whether to enable request header and request URL access control. Valid values: on, off
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Request header and request URL access rule
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AccessControlRules []*AccessControlRule `json:"AccessControlRules,omitempty" name:"AccessControlRules" list`
+
+	// Returned status code
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+}
+
+type AccessControlRule struct {
+
+	// requestHeader: access control over request header
+	// url: access control over access URL
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Blocked content
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RuleContent *string `json:"RuleContent,omitempty" name:"RuleContent"`
+
+	// on: regular match
+	// off: exact match
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Regex *string `json:"Regex,omitempty" name:"Regex"`
+
+	// This parameter is required only if `RuleType` is `requestHeader`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RuleHeader *string `json:"RuleHeader,omitempty" name:"RuleHeader"`
+}
+
 type AddCdnDomainRequest struct {
 	*tchttp.BaseRequest
 
@@ -436,6 +471,30 @@ type CacheKey struct {
 	// on: enable full-path cache (i.e., disable parameter filter)
 	// off: disable full-path cache (i.e., enable parameter filter)
 	FullUrlCache *string `json:"FullUrlCache,omitempty" name:"FullUrlCache"`
+
+	// Whether caches are case insensitive
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IgnoreCase *string `json:"IgnoreCase,omitempty" name:"IgnoreCase"`
+
+	// Request parameter contained in `CacheKey`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	QueryString *QueryStringKey `json:"QueryString,omitempty" name:"QueryString"`
+
+	// Cookie contained in `CacheKey`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Cookie *CookieKey `json:"Cookie,omitempty" name:"Cookie"`
+
+	// Request header contained in `CacheKey`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Header *HeaderKey `json:"Header,omitempty" name:"Header"`
+
+	// Custom string contained in `CacheKey`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CacheTag *CacheTagKey `json:"CacheTag,omitempty" name:"CacheTag"`
+
+	// Request protocol contained in `CacheKey`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Scheme *SchemeKey `json:"Scheme,omitempty" name:"Scheme"`
 }
 
 type CacheOptResult struct {
@@ -447,6 +506,17 @@ type CacheOptResult struct {
 	// List of failed URLs
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FailUrls []*string `json:"FailUrls,omitempty" name:"FailUrls" list`
+}
+
+type CacheTagKey struct {
+
+	// Whether to use `CacheTag` as part of `CacheKey`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Value of custom `CacheTag`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type CappingRule struct {
@@ -629,6 +699,17 @@ type CompressionRule struct {
 	Algorithms []*string `json:"Algorithms,omitempty" name:"Algorithms" list`
 }
 
+type CookieKey struct {
+
+	// Whether to use `Cookie` as part of `CacheKey`. Valid values: on, off
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Used cookies (separated by ';')
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
 type CreateClsLogTopicRequest struct {
 	*tchttp.BaseRequest
 
@@ -751,6 +832,90 @@ func (r *DeleteClsLogTopicResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeBillingDataRequest struct {
+	*tchttp.BaseRequest
+
+	// Query start time, e.g., 2018-09-04 10:40:00. The returned result will be later than or equal to the specified time
+	// The time will be rounded forward based on the granularity parameter `Interval`. For example, if the query start time is 2018-09-04 10:40:00 and the query time granularity is 1-hour, the time for the first returned entry will be 2018-09-04 10:00:00
+	// The range between the start time and end time should be less than or equal to 90 days
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time, e.g. 2018-09-04 10:40:00. The returned result will be earlier than or equal to the specified time
+	// The time will be rounded forward based on the granularity parameter `Interval`. For example, if the query end time is 2018-09-04 10:40:00 and the query time granularity is 1-hour, the time for the last returned entry will be 2018-09-04 10:00:00
+	// The range between the start time and end time should be less than or equal to 90 days
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Time granularity, which can be:
+	// min: 1-minute. The query range should be less than or equal to 24 hours
+	// 5min: 5-minute. The query range should be less than or equal to 31 days
+	// hour: 1-hour. The query range should be less than or equal to 31 days
+	// day: 1-day. The query period should be greater than 31 days
+	// 
+	// Currently, data query at 1-minute granularity is not supported if the `Area` field is `overseas`
+	Interval *string `json:"Interval,omitempty" name:"Interval"`
+
+	// Domain name whose billing data is to be queried
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Project ID, which can be viewed [here](https://console.cloud.tencent.com/project)
+	// If the `Domain` parameter is populated with specific domain name information, then the billing data of this domain name instead of the specified project will be returned
+	Project *int64 `json:"Project,omitempty" name:"Project"`
+
+	// Acceleration region whose billing data is to be queried:
+	// mainland: in the mainland of China
+	// overseas: outside the mainland of China
+	// If this parameter is left empty, `mainland` will be used by default
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Country/region to be queried if `Area` is `overseas`
+	// For district or country/region codes, please see [District Code Mappings](https://cloud.tencent.com/document/product/228/6316#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
+	// If this parameter is left empty, all countries/regions will be queried
+	District *int64 `json:"District,omitempty" name:"District"`
+
+	// Billing statistics type
+	// flux: bill-by-traffic
+	// bandwidth: bill-by-bandwidth
+	// Default value: `bandwidth`
+	Metric *string `json:"Metric,omitempty" name:"Metric"`
+}
+
+func (r *DescribeBillingDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBillingDataRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBillingDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Time granularity, which is specified by the parameter passed in during the query:
+	// min: 1-minute
+	// 5min: 5-minute
+	// hour: 1-hour
+	// day: 1-day
+		Interval *string `json:"Interval,omitempty" name:"Interval"`
+
+		// Data details
+		Data []*ResourceBillingData `json:"Data,omitempty" name:"Data" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBillingDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBillingDataResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeCdnDataRequest struct {
 	*tchttp.BaseRequest
 
@@ -816,11 +981,12 @@ type DescribeCdnDataRequest struct {
 	// Specifies the data source to be queried, which can be seen as the whitelist function.
 	DataSource *string `json:"DataSource,omitempty" name:"DataSource"`
 
-	// Specifies an IP protocol; if it is left blank, all IP protocols will be queried.
-	// `all`: All protocols
-	// `ipv4`: IPv4
-	// `ipv6`: IPv6
+	// Specified IP protocol to be queried. If this parameter is left empty, all protocols will be queried
+	// all: all protocols
+	// ipv4: specifies to query IPv4 metrics
+	// ipv6: specifies to query IPv6 metrics
 	// If the IP protocol to be queried is specified, the district and ISP cannot be specified at the same time
+	// Note: non-IPv6 whitelisted users cannot specify `ipv4` and `ipv6` for query
 	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
 
 	// Specifies a service region. If this value is left blank, CDN data within Mainland China will be queried.
@@ -1110,6 +1276,52 @@ func (r *DescribeDomainsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeIpStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Acceleration domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Node type.
+	// edge: edge server
+	// last: intermediate server
+	// If this parameter is left empty, edge server information will be returned by default
+	Layer *string `json:"Layer,omitempty" name:"Layer"`
+}
+
+func (r *DescribeIpStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIpStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIpStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Node list
+		Ips []*IpStatus `json:"Ips,omitempty" name:"Ips" list`
+
+		// Total number of nodes
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeIpStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIpStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeIpVisitRequest struct {
 	*tchttp.BaseRequest
 
@@ -1244,8 +1456,9 @@ type DescribeOriginDataRequest struct {
 	// Specifies the list of domain names to be queried; up to 30 domain names can be queried at a time.
 	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
 
-	// Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
-	// Please note that if domain names are specified, this parameter will be ignored.
+	// Project ID, which can be viewed [here](https://console.cloud.tencent.com/project)
+	// If the domain name is not specified, the specified project will be queried. Up to 30 acceleration domain names can be queried at a time
+	// If the domain name information is specified, the domain name will prevail
 	Project *int64 `json:"Project,omitempty" name:"Project"`
 
 	// Time granularity; valid values:
@@ -1364,6 +1577,43 @@ func (r *DescribePayTypeResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribePurgeQuotaRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribePurgeQuotaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribePurgeQuotaRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePurgeQuotaResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// URL purge usage and quota.
+		UrlPurge []*Quota `json:"UrlPurge,omitempty" name:"UrlPurge" list`
+
+		// Directory purge usage and quota.
+		PathPurge []*Quota `json:"PathPurge,omitempty" name:"PathPurge" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribePurgeQuotaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribePurgeQuotaResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribePurgeTasksRequest struct {
 	*tchttp.BaseRequest
 
@@ -1436,6 +1686,40 @@ func (r *DescribePurgeTasksResponse) ToJsonString() string {
 }
 
 func (r *DescribePurgeTasksResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePushQuotaRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribePushQuotaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribePushQuotaRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePushQuotaResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// URL prefetch usage and quota.
+		UrlPush []*Quota `json:"UrlPush,omitempty" name:"UrlPush" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribePushQuotaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribePushQuotaResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1512,16 +1796,16 @@ func (r *DescribePushTasksResponse) FromJsonString(s string) error {
 type DescribeReportDataRequest struct {
 	*tchttp.BaseRequest
 
-	// Query start time
+	// Query start time in the format of `yyyy-MM-dd`
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Query end time
+	// Query end time in the format of `yyyy-MM-dd`
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Report type
 	// daily: daily report
-	// weekly: weekly report
-	// monthly: monthly report
+	// weekly: weekly report (Monday to Sunday)
+	// monthly: monthly report (calendar month)
 	ReportType *string `json:"ReportType,omitempty" name:"ReportType"`
 
 	// Domain name acceleration region
@@ -1794,17 +2078,18 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
 
-	// SCDN configuration
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitempty" name:"SecurityConfig"`
 
-	// `ImageOptimization` configuration
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 
 	ImageOptimization *ImageOptimization `json:"ImageOptimization,omitempty" name:"ImageOptimization"`
 
-	// `UA` blacklist/whitelist Configuration
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 
 	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
+
+	// Access control
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AccessControl *AccessControl `json:"AccessControl,omitempty" name:"AccessControl"`
 }
 
 type DisableCachesRequest struct {
@@ -2151,6 +2436,31 @@ type GuetzliAdapter struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type HeaderKey struct {
+
+	// Whether to use it as part of `CacheKey`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Array of headers that make up the `CacheKey` (separated by ';')
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type Hsts struct {
+
+	// Whether to enable. Valid values: on, off.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// `MaxAge` value.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MaxAge *int64 `json:"MaxAge,omitempty" name:"MaxAge"`
+
+	// Whether to include subdomain names. Valid values: on, off.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IncludeSubDomains *string `json:"IncludeSubDomains,omitempty" name:"IncludeSubDomains"`
+}
+
 type HttpHeaderPathRule struct {
 
 	// HTTP header setting method
@@ -2238,6 +2548,9 @@ type Https struct {
 	// failed: deployment failed
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SslStatus *string `json:"SslStatus,omitempty" name:"SslStatus"`
+
+	// 
+	Hsts *Hsts `json:"Hsts,omitempty" name:"Hsts"`
 }
 
 type ImageOptimization struct {
@@ -2286,6 +2599,26 @@ type IpFreqLimit struct {
 	// 514 will be returned for requests that exceed the limit
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Qps *int64 `json:"Qps,omitempty" name:"Qps"`
+}
+
+type IpStatus struct {
+
+	// Node IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Node region
+	District *string `json:"District,omitempty" name:"District"`
+
+	// Node ISP
+	Isp *string `json:"Isp,omitempty" name:"Isp"`
+
+	// Node city
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Node status
+	// online: the node is online; scheduling service running
+	// offline: the node is offline
+	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type Ipv6 struct {
@@ -2401,16 +2734,16 @@ func (r *ListClsTopicDomainsResponse) FromJsonString(s string) error {
 type ListTopDataRequest struct {
 	*tchttp.BaseRequest
 
-	// Query start date. Example: 2018-09-09.
+	// Query start time in the format of `yyyy-MM-dd HH:mm:ss`
 	// Only supports data query at daily granularity. The date in the input parameter is used as the start date.
-	// Data generated at or after 00:00:00 on the start date will be returned.
-	// Only data from the last 90 days will be queried.
+	// Data generated after or at 00:00:00 on the start date will be returned
+	// Only data for the last 90 days can be queried
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Query end date. Example: 2018-09-10
+	// Query end time in the format of `yyyy-MM-dd HH:mm:ss`
 	// Only supports data query at daily granularity. The date in the input parameter is used as the end date.
-	// Data generated before or at 23:59:59 on the end date will be returned.
-	// EndTime must be greater than or equal to StartTime
+	// Data generated before or at 23:59:59 on the end date will be returned
+	// `EndTime` must be later than or equal to `StartTime`
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Object representing the sort criteria. The following objects are supported:
@@ -2760,6 +3093,10 @@ type Origin struct {
 	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupServerName *string `json:"BackupServerName,omitempty" name:"BackupServerName"`
+
+	// Origin-pull path
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	BasePath *string `json:"BasePath,omitempty" name:"BasePath"`
 }
 
 type OriginPullOptimization struct {
@@ -3072,6 +3409,40 @@ func (r *PushUrlsCacheResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type QueryStringKey struct {
+
+	// Whether to use `QueryString` as part of `CacheKey`. Valid values: on, off
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Whether to sort again
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Reorder *string `json:"Reorder,omitempty" name:"Reorder"`
+
+	// Include/exclude query parameters. Valid values: `includeAll`, `excludeAll`, `includeCustom`, `excludeAll`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// Array of included/excluded URL parameters (separated by ';')
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type Quota struct {
+
+	// Quota limit for one batch submission request.
+	Batch *int64 `json:"Batch,omitempty" name:"Batch"`
+
+	// Daily submission quota limit.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// Remaining daily submission quota.
+	Available *int64 `json:"Available,omitempty" name:"Available"`
+
+	// Quota region.
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
 type RangeOriginPull struct {
 
 	// Range GETs configuration switch
@@ -3164,6 +3535,19 @@ type RequestHeader struct {
 	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules" list`
 }
 
+type ResourceBillingData struct {
+
+	// Resource name, which is categorized as follows based on different query conditions:
+	// Specific domain name: domain name details
+	// multiDomains: aggregated details of multiple domain names
+	// Project ID: displays the ID of the specified project to be queried
+	// all: the details at the account level
+	Resource *string `json:"Resource,omitempty" name:"Resource"`
+
+	// Billing data details
+	BillingData []*CdnData `json:"BillingData,omitempty" name:"BillingData" list`
+}
+
 type ResourceData struct {
 
 	// Resource name, which is classified as follows based on different query conditions:
@@ -3207,6 +3591,24 @@ type ResponseHeaderCache struct {
 	// Origin server header cache switch
 	// on: enabled
 	// off: disabled
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type Revalidate struct {
+
+	// Whether to always forward to the origin server for verification. Valid values: on, off
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Forwards to the origin server for verification only for specific request path
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitempty" name:"Path"`
+}
+
+type SchemeKey struct {
+
+	// Whether to use the scheme as part of the cache key. Valid values: on, off
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -3357,6 +3759,10 @@ type SimpleCache struct {
 	// This is disabled by default
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CompareMaxAge *string `json:"CompareMaxAge,omitempty" name:"CompareMaxAge"`
+
+	// Always forwards to the origin server for verification
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Revalidate *Revalidate `json:"Revalidate,omitempty" name:"Revalidate"`
 }
 
 type SimpleCacheRule struct {
@@ -3370,11 +3776,11 @@ type SimpleCacheRule struct {
 	CacheType *string `json:"CacheType,omitempty" name:"CacheType"`
 
 	// Content for each CacheType:
-	// For `all`, enter an asterisk (*).
-	// For `file`, enter the suffix, such as jpg, txt.
-	// For `directory`, enter the path, such as /xxx/test/.
-	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
-	// For `index`, enter a backslash (/).
+	// Enter `*` for `all`
+	// Enter an extension for `file`, such as `jpg` or `txt`
+	// Enter a path for `directory`, such as `/xxx/test`
+	// Enter an absolute path for `path`, such as `/xxx/test.html`
+	// Enter `/` for `index`
 	CacheContents []*string `json:"CacheContents,omitempty" name:"CacheContents" list`
 
 	// Cache expiration time settings
@@ -3571,7 +3977,7 @@ type UpdateDomainConfigRequest struct {
 	// Domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Project ID
+	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Origin server configuration
@@ -3664,6 +4070,9 @@ type UpdateDomainConfigRequest struct {
 
 	// Origin access authentication for S3 bucket
 	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
+
+	// UA blacklist/whitelist Configuration
+	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {

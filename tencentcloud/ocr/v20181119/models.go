@@ -207,8 +207,9 @@ type MLIDCardOCRResponse struct {
 		Sex *string `json:"Sex,omitempty" name:"Sex"`
 
 		// Alarm code
-	// -9103 Alarm for photographed document
-	// -9102 Alarm for photocopied document
+	// -9103	Alarm for photographed document
+	// -9102	Alarm for photocopied document
+	// -9106       Alarm for covered card
 		Warn []*int64 `json:"Warn,omitempty" name:"Warn" list`
 
 		// Identity photo
@@ -224,6 +225,15 @@ type MLIDCardOCRResponse struct {
 	//     }
 	// }
 		AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`
+
+		// Certificate types
+	// MyKad: Malaysian Identity Card
+	// MyPR: Malaysia Permanent Resident Identity Card
+	// MyTentera: Malaysian Armed Forces Identity Card
+	// MyKAS: Malaysian Temporary Resident Identity Card
+	// POLIS: Royal Malaysia Police Identity Card
+	// IKAD: Malaysia Temporary Employment Visit Pass
+		Type *string `json:"Type,omitempty" name:"Type"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

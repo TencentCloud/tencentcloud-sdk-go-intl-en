@@ -120,6 +120,33 @@ func (c *Client) CreateAutoScalingGroup(request *CreateAutoScalingGroupRequest) 
     return
 }
 
+func NewCreateAutoScalingGroupFromInstanceRequest() (request *CreateAutoScalingGroupFromInstanceRequest) {
+    request = &CreateAutoScalingGroupFromInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("as", APIVersion, "CreateAutoScalingGroupFromInstance")
+    return
+}
+
+func NewCreateAutoScalingGroupFromInstanceResponse() (response *CreateAutoScalingGroupFromInstanceResponse) {
+    response = &CreateAutoScalingGroupFromInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create launch configurations and scaling groups from an instance.
+// 
+// Note: the pay-as-you-go instance in the scaling group that is created from a monthly-subscribed instance can be expanded.
+func (c *Client) CreateAutoScalingGroupFromInstance(request *CreateAutoScalingGroupFromInstanceRequest) (response *CreateAutoScalingGroupFromInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateAutoScalingGroupFromInstanceRequest()
+    }
+    response = NewCreateAutoScalingGroupFromInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLaunchConfigurationRequest() (request *CreateLaunchConfigurationRequest) {
     request = &CreateLaunchConfigurationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1097,6 +1124,62 @@ func (c *Client) SetInstancesProtection(request *SetInstancesProtectionRequest) 
         request = NewSetInstancesProtectionRequest()
     }
     response = NewSetInstancesProtectionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartAutoScalingInstancesRequest() (request *StartAutoScalingInstancesRequest) {
+    request = &StartAutoScalingInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("as", APIVersion, "StartAutoScalingInstances")
+    return
+}
+
+func NewStartAutoScalingInstancesResponse() (response *StartAutoScalingInstancesResponse) {
+    response = &StartAutoScalingInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to launch CVM instances in the scaling group.
+// * After the instance is launched and in the `IN_SERVICE` status, the desired capacity increases, but the desired capacity cannot exceed the maximum value.
+// * This API supports batch operation. Up to 100 instances can be launched in each request.
+func (c *Client) StartAutoScalingInstances(request *StartAutoScalingInstancesRequest) (response *StartAutoScalingInstancesResponse, err error) {
+    if request == nil {
+        request = NewStartAutoScalingInstancesRequest()
+    }
+    response = NewStartAutoScalingInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopAutoScalingInstancesRequest() (request *StopAutoScalingInstancesRequest) {
+    request = &StopAutoScalingInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("as", APIVersion, "StopAutoScalingInstances")
+    return
+}
+
+func NewStopAutoScalingInstancesResponse() (response *StopAutoScalingInstancesResponse) {
+    response = &StopAutoScalingInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to shut down CVM instances in the scaling group.
+// * Use the `SOFT_FIRST` shutdown, which means the CVM will be forcibly shut down if the soft shutdown fails.
+// * Shutting down instances in the `IN_SERVICE` status will reduce the desired capacity, but the desired capacity cannot be less than the minimum value.
+// * To use the `STOP_CHARGING` shutdown, the instances you want to shut down must satisfy the conditions of [no charges when shut down](https://cloud.tencent.com/document/product/213/19918).
+// * This API supports batch operation. Up to 100 instances can be shut down in each request.
+func (c *Client) StopAutoScalingInstances(request *StopAutoScalingInstancesRequest) (response *StopAutoScalingInstancesResponse, err error) {
+    if request == nil {
+        request = NewStopAutoScalingInstancesRequest()
+    }
+    response = NewStopAutoScalingInstancesResponse()
     err = c.Send(request, response)
     return
 }

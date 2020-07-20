@@ -393,6 +393,56 @@ func (c *Client) DeleteClusterRouteTable(request *DeleteClusterRouteTableRequest
     return
 }
 
+func NewDescribeClusterAsGroupOptionRequest() (request *DescribeClusterAsGroupOptionRequest) {
+    request = &DescribeClusterAsGroupOptionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterAsGroupOption")
+    return
+}
+
+func NewDescribeClusterAsGroupOptionResponse() (response *DescribeClusterAsGroupOptionResponse) {
+    response = &DescribeClusterAsGroupOptionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// Cluster auto scaling configuration
+func (c *Client) DescribeClusterAsGroupOption(request *DescribeClusterAsGroupOptionRequest) (response *DescribeClusterAsGroupOptionResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterAsGroupOptionRequest()
+    }
+    response = NewDescribeClusterAsGroupOptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterAsGroupsRequest() (request *DescribeClusterAsGroupsRequest) {
+    request = &DescribeClusterAsGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterAsGroups")
+    return
+}
+
+func NewDescribeClusterAsGroupsResponse() (response *DescribeClusterAsGroupsResponse) {
+    response = &DescribeClusterAsGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// Cluster-associated scaling group list
+func (c *Client) DescribeClusterAsGroups(request *DescribeClusterAsGroupsRequest) (response *DescribeClusterAsGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterAsGroupsRequest()
+    }
+    response = NewDescribeClusterAsGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClusterEndpointStatusRequest() (request *DescribeClusterEndpointStatusRequest) {
     request = &DescribeClusterEndpointStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -664,6 +714,31 @@ func (c *Client) DescribeRouteTableConflicts(request *DescribeRouteTableConflict
         request = NewDescribeRouteTableConflictsRequest()
     }
     response = NewDescribeRouteTableConflictsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyClusterAsGroupAttributeRequest() (request *ModifyClusterAsGroupAttributeRequest) {
+    request = &ModifyClusterAsGroupAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterAsGroupAttribute")
+    return
+}
+
+func NewModifyClusterAsGroupAttributeResponse() (response *ModifyClusterAsGroupAttributeResponse) {
+    response = &ModifyClusterAsGroupAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// Modify cluster scaling group attributes
+func (c *Client) ModifyClusterAsGroupAttribute(request *ModifyClusterAsGroupAttributeRequest) (response *ModifyClusterAsGroupAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyClusterAsGroupAttributeRequest()
+    }
+    response = NewModifyClusterAsGroupAttributeResponse()
     err = c.Send(request, response)
     return
 }

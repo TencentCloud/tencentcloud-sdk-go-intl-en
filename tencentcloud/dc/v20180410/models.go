@@ -54,6 +54,27 @@ func (r *AcceptDirectConnectTunnelResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type AccessPoint struct {
+
+	// Access point name.
+	AccessPointName *string `json:"AccessPointName,omitempty" name:"AccessPointName"`
+
+	// Unique access point ID.
+	AccessPointId *string `json:"AccessPointId,omitempty" name:"AccessPointId"`
+
+	// Access point status. Valid values: available, unavailable.
+	State *string `json:"State,omitempty" name:"State"`
+
+	// Access point location.
+	Location *string `json:"Location,omitempty" name:"Location"`
+
+	// List of ISPs supported by access point.
+	LineOperator []*string `json:"LineOperator,omitempty" name:"LineOperator" list`
+
+	// ID of the region that manages the access point.
+	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
+}
+
 type BgpPeer struct {
 
 	// User-side BGP Asn.
@@ -61,6 +82,89 @@ type BgpPeer struct {
 
 	// User-side BGP key.
 	AuthKey *string `json:"AuthKey,omitempty" name:"AuthKey"`
+}
+
+type CreateDirectConnectRequest struct {
+	*tchttp.BaseRequest
+
+	// Connection name.
+	DirectConnectName *string `json:"DirectConnectName,omitempty" name:"DirectConnectName"`
+
+	// Access point of connection.
+	// You can call `DescribeAccessPoints` to get the region ID. The selected access point must exist and be available.
+	AccessPointId *string `json:"AccessPointId,omitempty" name:"AccessPointId"`
+
+	// ISP that provides connections. Valid values: ChinaTelecom (China Telecom), ChinaMobile (China Mobile), ChinaUnicom (China Unicom), In-houseWiring (in-house wiring), ChinaOther (other Chinese ISPs), InternationalOperator (international ISPs).
+	LineOperator *string `json:"LineOperator,omitempty" name:"LineOperator"`
+
+	// Local IDC location.
+	Location *string `json:"Location,omitempty" name:"Location"`
+
+	// Port type of connection. Valid values: 100Base-T (100-Megabit electrical Ethernet interface), 1000Base-T (1-Gigabit electrical Ethernet interface), 1000Base-LX (1-Gigabit single-module optical Ethernet interface; 10 KM), 10GBase-T (10-Gigabit electrical Ethernet interface), 10GBase-LR (10-Gigabit single-module optical Ethernet interface; 10 KM). Default value: 1000Base-LX.
+	PortType *string `json:"PortType,omitempty" name:"PortType"`
+
+	// Circuit code of connection, which is provided by the ISP or connection provider.
+	CircuitCode *string `json:"CircuitCode,omitempty" name:"CircuitCode"`
+
+	// Connection port bandwidth in Mbps. Value range: [2,10240]. Default value: 1000.
+	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// ID of redundant connection.
+	RedundantDirectConnectId *string `json:"RedundantDirectConnectId,omitempty" name:"RedundantDirectConnectId"`
+
+	// VLAN for connection debugging, which is enabled and automatically assigned by default.
+	Vlan *int64 `json:"Vlan,omitempty" name:"Vlan"`
+
+	// Tencent-side IP address for connection debugging, which is automatically assigned by default.
+	TencentAddress *string `json:"TencentAddress,omitempty" name:"TencentAddress"`
+
+	// User-side IP address for connection debugging, which is automatically assigned by default.
+	CustomerAddress *string `json:"CustomerAddress,omitempty" name:"CustomerAddress"`
+
+	// Name of connection applicant, which is obtained from the account system by default.
+	CustomerName *string `json:"CustomerName,omitempty" name:"CustomerName"`
+
+	// Email address of connection applicant, which is obtained from the account system by default.
+	CustomerContactMail *string `json:"CustomerContactMail,omitempty" name:"CustomerContactMail"`
+
+	// Contact number of connection applicant, which is obtained from the account system by default.
+	CustomerContactNumber *string `json:"CustomerContactNumber,omitempty" name:"CustomerContactNumber"`
+
+	// Fault reporting contact person.
+	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitempty" name:"FaultReportContactPerson"`
+
+	// Fault reporting contact number.
+	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitempty" name:"FaultReportContactNumber"`
+}
+
+func (r *CreateDirectConnectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateDirectConnectRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateDirectConnectResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Connection ID.
+		DirectConnectIdSet []*string `json:"DirectConnectIdSet,omitempty" name:"DirectConnectIdSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateDirectConnectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateDirectConnectResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateDirectConnectTunnelRequest struct {
@@ -151,6 +255,40 @@ func (r *CreateDirectConnectTunnelResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteDirectConnectRequest struct {
+	*tchttp.BaseRequest
+
+	// Connection ID.
+	DirectConnectId *string `json:"DirectConnectId,omitempty" name:"DirectConnectId"`
+}
+
+func (r *DeleteDirectConnectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteDirectConnectRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteDirectConnectResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteDirectConnectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteDirectConnectResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteDirectConnectTunnelRequest struct {
 	*tchttp.BaseRequest
 
@@ -182,6 +320,54 @@ func (r *DeleteDirectConnectTunnelResponse) ToJsonString() string {
 }
 
 func (r *DeleteDirectConnectTunnelResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAccessPointsRequest struct {
+	*tchttp.BaseRequest
+
+	// Access point region, which can be queried through `DescribeRegions`.
+	// 
+	// You can call `DescribeRegions` to get the region ID.
+	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeAccessPointsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAccessPointsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAccessPointsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Access point information.
+		AccessPointSet []*AccessPoint `json:"AccessPointSet,omitempty" name:"AccessPointSet" list`
+
+		// Number of eligible access points.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAccessPointsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAccessPointsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -388,6 +574,10 @@ type DirectConnect struct {
 	// Billing status
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ChargeState *string `json:"ChargeState,omitempty" name:"ChargeState"`
+
+	// Connection activation time.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 }
 
 type DirectConnectTunnel struct {
@@ -503,6 +693,70 @@ type Filter struct {
 
 	// Filter values of the field.
 	Values []*string `json:"Values,omitempty" name:"Values" list`
+}
+
+type ModifyDirectConnectAttributeRequest struct {
+	*tchttp.BaseRequest
+
+	// Connection ID.
+	DirectConnectId *string `json:"DirectConnectId,omitempty" name:"DirectConnectId"`
+
+	// Connection name.
+	DirectConnectName *string `json:"DirectConnectName,omitempty" name:"DirectConnectName"`
+
+	// Circuit code of connection, which is provided by the ISP or connection provider.
+	CircuitCode *string `json:"CircuitCode,omitempty" name:"CircuitCode"`
+
+	// VLAN for connection debugging.
+	Vlan *int64 `json:"Vlan,omitempty" name:"Vlan"`
+
+	// Tencent-side IP address for connection debugging.
+	TencentAddress *string `json:"TencentAddress,omitempty" name:"TencentAddress"`
+
+	// User-side IP address for connection debugging.
+	CustomerAddress *string `json:"CustomerAddress,omitempty" name:"CustomerAddress"`
+
+	// Name of connection applicant, which is obtained from the account system by default.
+	CustomerName *string `json:"CustomerName,omitempty" name:"CustomerName"`
+
+	// Email address of connection applicant, which is obtained from the account system by default.
+	CustomerContactMail *string `json:"CustomerContactMail,omitempty" name:"CustomerContactMail"`
+
+	// Contact number of connection applicant, which is obtained from the account system by default.
+	CustomerContactNumber *string `json:"CustomerContactNumber,omitempty" name:"CustomerContactNumber"`
+
+	// Fault reporting contact person.
+	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitempty" name:"FaultReportContactPerson"`
+
+	// Fault reporting contact number.
+	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitempty" name:"FaultReportContactNumber"`
+}
+
+func (r *ModifyDirectConnectAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyDirectConnectAttributeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDirectConnectAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDirectConnectAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyDirectConnectAttributeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyDirectConnectTunnelAttributeRequest struct {

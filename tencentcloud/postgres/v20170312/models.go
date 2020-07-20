@@ -46,6 +46,9 @@ type CloseDBExtranetAccessRequest struct {
 
 	// Instance ID in the format of postgres-6r233v55
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Whether to disable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+	IsIpv6 *int64 `json:"IsIpv6,omitempty" name:"IsIpv6"`
 }
 
 func (r *CloseDBExtranetAccessRequest) ToJsonString() string {
@@ -126,7 +129,7 @@ type CreateDBInstancesRequest struct {
 	// Instance name (which will be supported in the future)
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// 
+	// Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no)
 	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitempty" name:"NeedSupportIpv6"`
 }
 
@@ -216,7 +219,7 @@ type DBInstance struct {
 	// VPC ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// SubnetId
+	// Subnet ID
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// Instance ID
@@ -225,7 +228,7 @@ type DBInstance struct {
 	// Instance name
 	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
 
-	// Instance status
+	// Instance status. Valid values: applying, init (to be initialized), initing (initializing), running, limited run, isolated, recycling, recycled, job running, offline, migrating, expanding, readonly, restarting
 	DBInstanceStatus *string `json:"DBInstanceStatus,omitempty" name:"DBInstanceStatus"`
 
 	// Assigned instance memory size in GB
@@ -275,6 +278,15 @@ type DBInstance struct {
 
 	// Machine type
 	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// 
+	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+
+	// 
+	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
+
+	// Whether the instance supports IPv6 address access. Valid values: 1 (yes), 0 (no)
+	SupportIpv6 *uint64 `json:"SupportIpv6,omitempty" name:"SupportIpv6"`
 }
 
 type DBInstanceNetInfo struct {
@@ -282,13 +294,13 @@ type DBInstanceNetInfo struct {
 	// DNS domain name
 	Address *string `json:"Address,omitempty" name:"Address"`
 
-	// Ip
+	// IP address
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
 	// Connection port address
 	Port *uint64 `json:"Port,omitempty" name:"Port"`
 
-	// Network type. 1: inner (private network address), 2: public (public network address)
+	// Network type. Valid values: inner (private address of classic network), private (private address of VPC), public (public address of classic network/VPC)
 	NetType *string `json:"NetType,omitempty" name:"NetType"`
 
 	// Network connection status
@@ -1274,6 +1286,9 @@ type OpenDBExtranetAccessRequest struct {
 
 	// Instance ID in the format of postgres-hez4fh0v
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Whether to enable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+	IsIpv6 *int64 `json:"IsIpv6,omitempty" name:"IsIpv6"`
 }
 
 func (r *OpenDBExtranetAccessRequest) ToJsonString() string {
@@ -1648,4 +1663,7 @@ type ZoneInfo struct {
 
 	// Availability status. UNAVAILABLE: unavailable, AVAILABLE: available
 	ZoneState *string `json:"ZoneState,omitempty" name:"ZoneState"`
+
+	// Whether the availability zone supports IPv6 address access
+	ZoneSupportIpv6 *uint64 `json:"ZoneSupportIpv6,omitempty" name:"ZoneSupportIpv6"`
 }

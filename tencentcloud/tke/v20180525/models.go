@@ -84,6 +84,15 @@ func (r *AddExistedInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type AutoScalingGroupRange struct {
+
+	// Minimum number of pods in a scaling group
+	MinSize *int64 `json:"MinSize,omitempty" name:"MinSize"`
+
+	// Maximum number of pods in a scaling group
+	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
+}
+
 type Cluster struct {
 
 	// Cluster ID
@@ -168,6 +177,99 @@ type ClusterAdvancedSettings struct {
 
 	// Whether a cluster in VPC-CNI mode uses dynamic IP addresses. The default value is FALSE, which indicates that static IP addresses are used.
 	IsNonStaticIpMode *bool `json:"IsNonStaticIpMode,omitempty" name:"IsNonStaticIpMode"`
+
+	// 
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
+
+	// Cluster network proxy model
+	KubeProxyMode *string `json:"KubeProxyMode,omitempty" name:"KubeProxyMode"`
+}
+
+type ClusterAsGroup struct {
+
+	// Scaling group ID
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
+
+	// Scaling group status (enabled, enabling, disabled, disabling, updating, deleting, scaleDownEnabling, scaleDownDisabling)
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Whether the node is set to unschedulable
+	// Note: this field may return null, indicating that no valid value was found.
+	IsUnschedulable *bool `json:"IsUnschedulable,omitempty" name:"IsUnschedulable"`
+
+	// Scaling group label list
+	// Note: this field may return null, indicating that no valid value was found.
+	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
+
+	// Creation time
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+}
+
+type ClusterAsGroupAttribute struct {
+
+	// Scaling group ID
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
+
+	// Whether it is enabled
+	AutoScalingGroupEnabled *bool `json:"AutoScalingGroupEnabled,omitempty" name:"AutoScalingGroupEnabled"`
+
+	// Maximum and minimum number of pods in a scaling group
+	AutoScalingGroupRange *AutoScalingGroupRange `json:"AutoScalingGroupRange,omitempty" name:"AutoScalingGroupRange"`
+}
+
+type ClusterAsGroupOption struct {
+
+	// Whether to enable scale-down
+	// Note: this field may return null, indicating that no valid value was found.
+	IsScaleDownEnabled *bool `json:"IsScaleDownEnabled,omitempty" name:"IsScaleDownEnabled"`
+
+	// Scale-up selection algorithm when there are multiple scaling groups (random: random selection. most-pods: pod with the most types. least-waste: least waste of resources. The default value is random.)
+	// Note: this field may return null, indicating that no valid value was found.
+	Expander *string `json:"Expander,omitempty" name:"Expander"`
+
+	// Max concurrent scale-down volume
+	// Note: this field may return null, indicating that no valid value was found.
+	MaxEmptyBulkDelete *int64 `json:"MaxEmptyBulkDelete,omitempty" name:"MaxEmptyBulkDelete"`
+
+	// Number of minutes after cluster scale-up when the system starts judging whether to perform scale-down
+	// Note: this field may return null, indicating that no valid value was found.
+	ScaleDownDelay *int64 `json:"ScaleDownDelay,omitempty" name:"ScaleDownDelay"`
+
+	// Number of consecutive minutes of idleness after which the node is subject to scale-down (default value: 10)
+	// Note: this field may return null, indicating that no valid value was found.
+	ScaleDownUnneededTime *int64 `json:"ScaleDownUnneededTime,omitempty" name:"ScaleDownUnneededTime"`
+
+	// Percentage of node resource usage below which the node is considered to be idle (default value: 50)
+	// Note: this field may return null, indicating that no valid value was found.
+	ScaleDownUtilizationThreshold *int64 `json:"ScaleDownUtilizationThreshold,omitempty" name:"ScaleDownUtilizationThreshold"`
+
+	// Whether to skip scale-down for nodes with local storage pods (default value: False)
+	// Note: this field may return null, indicating that no valid value was found.
+	SkipNodesWithLocalStorage *bool `json:"SkipNodesWithLocalStorage,omitempty" name:"SkipNodesWithLocalStorage"`
+
+	// Whether to skip scale-down for nodes with pods in the kube-system namespace that are not managed by DaemonSet (default value: False)
+	// Note: this field may return null, indicating that no valid value was found.
+	SkipNodesWithSystemPods *bool `json:"SkipNodesWithSystemPods,omitempty" name:"SkipNodesWithSystemPods"`
+
+	// Whether to ignore DaemonSet pods by default when calculating resource usage (default value: False: do not ignore)
+	// Note: this field may return null, indicating that no valid value was found.
+	IgnoreDaemonSetsUtilization *bool `json:"IgnoreDaemonSetsUtilization,omitempty" name:"IgnoreDaemonSetsUtilization"`
+
+	// Number at which CA health detection is triggered (default value: 3). After the number specified in OkTotalUnreadyCount is exceeded, CA will perform health detection.
+	// Note: this field may return null, indicating that no valid value was found.
+	OkTotalUnreadyCount *int64 `json:"OkTotalUnreadyCount,omitempty" name:"OkTotalUnreadyCount"`
+
+	// Max percentage of unready nodes. After the max percentage is exceeded, CA will stop operation.
+	// Note: this field may return null, indicating that no valid value was found.
+	MaxTotalUnreadyPercentage *int64 `json:"MaxTotalUnreadyPercentage,omitempty" name:"MaxTotalUnreadyPercentage"`
+
+	// Amount of time before unready nodes become eligible for scale-down
+	// Note: this field may return null, indicating that no valid value was found.
+	ScaleDownUnreadyTime *int64 `json:"ScaleDownUnreadyTime,omitempty" name:"ScaleDownUnreadyTime"`
+
+	// Waiting time before CA deletes nodes that are not registered in Kubernetes
+	// Note: this field may return null, indicating that no valid value was found.
+	UnregisteredNodeRemovalTime *int64 `json:"UnregisteredNodeRemovalTime,omitempty" name:"UnregisteredNodeRemovalTime"`
 }
 
 type ClusterBasicSettings struct {
@@ -836,6 +938,93 @@ func (r *DeleteClusterRouteTableResponse) ToJsonString() string {
 }
 
 func (r *DeleteClusterRouteTableResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterAsGroupOptionRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeClusterAsGroupOptionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterAsGroupOptionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterAsGroupOptionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Cluster auto scaling attributes
+	// Note: this field may return null, indicating that no valid value was found.
+		ClusterAsGroupOption *ClusterAsGroupOption `json:"ClusterAsGroupOption,omitempty" name:"ClusterAsGroupOption"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterAsGroupOptionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterAsGroupOptionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterAsGroupsRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Scaling group ID list. If this value is null, it indicates that all cluster-associated scaling groups are pulled.
+	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds" list`
+
+	// Offset. This value defaults to 0. For more information on Offset, see the relevant sections in API [Overview](https://cloud.tencent.com/document/api/213/15688).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. This value defaults to 20. The maximum is 100. For more information on Limit, see the relevant sections in API [Overview](https://cloud.tencent.com/document/api/213/15688).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeClusterAsGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterAsGroupsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterAsGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of scaling groups associated with the cluster
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Cluster-associated scaling group list
+		ClusterAsGroupSet []*ClusterAsGroup `json:"ClusterAsGroupSet,omitempty" name:"ClusterAsGroupSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterAsGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterAsGroupsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1580,6 +1769,43 @@ type LoginSettings struct {
 	// Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
 	// Note: This field may return null, indicating that no valid value is found.
 	KeepImageLogin *string `json:"KeepImageLogin,omitempty" name:"KeepImageLogin"`
+}
+
+type ModifyClusterAsGroupAttributeRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster-associated scaling group attributes
+	ClusterAsGroupAttribute *ClusterAsGroupAttribute `json:"ClusterAsGroupAttribute,omitempty" name:"ClusterAsGroupAttribute"`
+}
+
+func (r *ModifyClusterAsGroupAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterAsGroupAttributeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyClusterAsGroupAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyClusterAsGroupAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterAsGroupAttributeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyClusterAttributeRequest struct {

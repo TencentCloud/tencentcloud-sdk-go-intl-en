@@ -143,6 +143,31 @@ func (c *Client) DeleteClsLogTopic(request *DeleteClsLogTopicRequest) (response 
     return
 }
 
+func NewDescribeBillingDataRequest() (request *DescribeBillingDataRequest) {
+    request = &DescribeBillingDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DescribeBillingData")
+    return
+}
+
+func NewDescribeBillingDataResponse() (response *DescribeBillingDataResponse) {
+    response = &DescribeBillingDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query billing data details.
+func (c *Client) DescribeBillingData(request *DescribeBillingDataRequest) (response *DescribeBillingDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillingDataRequest()
+    }
+    response = NewDescribeBillingDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCdnDataRequest() (request *DescribeCdnDataRequest) {
     request = &DescribeCdnDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -302,6 +327,31 @@ func (c *Client) DescribeDomainsConfig(request *DescribeDomainsConfigRequest) (r
     return
 }
 
+func NewDescribeIpStatusRequest() (request *DescribeIpStatusRequest) {
+    request = &DescribeIpStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DescribeIpStatus")
+    return
+}
+
+func NewDescribeIpStatusResponse() (response *DescribeIpStatusResponse) {
+    response = &DescribeIpStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the status of the edge servers and intermediate nodes on the domain name acceleration platform. Note: edge servers are not generally available. This API can only be used by whitelisted accounts.
+func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *DescribeIpStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeIpStatusRequest()
+    }
+    response = NewDescribeIpStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIpVisitRequest() (request *DescribeIpVisitRequest) {
     request = &DescribeIpVisitRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -415,6 +465,31 @@ func (c *Client) DescribePayType(request *DescribePayTypeRequest) (response *Des
     return
 }
 
+func NewDescribePurgeQuotaRequest() (request *DescribePurgeQuotaRequest) {
+    request = &DescribePurgeQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DescribePurgeQuota")
+    return
+}
+
+func NewDescribePurgeQuotaResponse() (response *DescribePurgeQuotaResponse) {
+    response = &DescribePurgeQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the purge usage quota and daily available usage for an account.
+func (c *Client) DescribePurgeQuota(request *DescribePurgeQuotaRequest) (response *DescribePurgeQuotaResponse, err error) {
+    if request == nil {
+        request = NewDescribePurgeQuotaRequest()
+    }
+    response = NewDescribePurgeQuotaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePurgeTasksRequest() (request *DescribePurgeTasksRequest) {
     request = &DescribePurgeTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -436,6 +511,31 @@ func (c *Client) DescribePurgeTasks(request *DescribePurgeTasksRequest) (respons
         request = NewDescribePurgeTasksRequest()
     }
     response = NewDescribePurgeTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePushQuotaRequest() (request *DescribePushQuotaRequest) {
+    request = &DescribePushQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DescribePushQuota")
+    return
+}
+
+func NewDescribePushQuotaResponse() (response *DescribePushQuotaResponse) {
+    response = &DescribePushQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the prefetch quota and daily available usage.
+func (c *Client) DescribePushQuota(request *DescribePushQuotaRequest) (response *DescribePushQuotaResponse, err error) {
+    if request == nil {
+        request = NewDescribePushQuotaRequest()
+    }
+    response = NewDescribePushQuotaResponse()
     err = c.Send(request, response)
     return
 }

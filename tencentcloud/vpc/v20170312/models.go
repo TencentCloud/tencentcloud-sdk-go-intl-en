@@ -75,13 +75,13 @@ type AddBandwidthPackageResourcesRequest struct {
 	// The unique ID of the bandwidth package, such as 'bwp-xxxx'.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
-	// The type of the bandwidth package. Valid value: 'BGP'. Internal resources will be represented by 'BGP IP'.
+	// The network type of the bandwidth package. Valid value: `BGP`, indicating that the internal resource is a BGP IP.
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
-	// The resource type, including 'Address' and 'LoadBalance'.
+	// The resource type, including `Address` and `LoadBalance`.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// The protocol type of the bandwidth package. Valid values: 'ipv4' and 'ipv6'.
+	// The protocol type of the bandwidth package. Valid values: `ipv4` and `ipv6`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 }
 
@@ -543,10 +543,10 @@ type AssociateNatGatewayAddressRequest struct {
 	// The number of EIPs you want to apply for. The system will create the same number of EIPs as you require. Either `AddressCount` or `PublicAddresses` must be passed in.
 	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
 
-	// The EIP array bound to the NAT gateway. Either `AddressCount` or `PublicAddresses` must be passed in.
+	// Array of the EIPs bound to the NAT gateway. Either `AddressCount` or `PublicAddresses` must be passed in.
 	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
 
-	// The EIP zone. This is passed in when EIP is automatically assigned.
+	// The availability zone of the EIP, which is passed in when the EIP is automatically assigned.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
@@ -874,29 +874,8 @@ type CcnAttachedInstance struct {
 
 type CcnBandwidthInfo struct {
 
-	// The CCN ID that the bandwidth belongs to.
-	// Note: this field may return null, indicating that no valid value was found.
-	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
-
-	// The creation time of the instance.
-	// Note: this field may return null, indicating that no valid value was found.
-	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
-
-	// The expiration time of the instance.
-	// Note: this field may return null, indicating that no valid value was found.
-	ExpiredTime *string `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
-
-	// The unique ID of the bandwidth instance.
-	// Note: this field may return null, indicating that no valid value was found.
-	RegionFlowControlId *string `json:"RegionFlowControlId,omitempty" name:"RegionFlowControlId"`
-
-	// The billing flag.
-	// Note: this field may return null, indicating that no valid value was found.
+	// 
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
-
-	// The information of bandwidth regions and bandwidth caps.
-	// Note: this field may return null, indicating that no valid value was found.
-	CcnRegionBandwidthLimit *CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimit,omitempty" name:"CcnRegionBandwidthLimit"`
 }
 
 type CcnInstance struct {
@@ -1576,7 +1555,7 @@ type CreateFlowLogRequest struct {
 	// The unique ID of the resource.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
-	// The collection type of the flow log. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
+	// Type of the flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
 	TrafficType *string `json:"TrafficType,omitempty" name:"TrafficType"`
 
 	// The storage ID of the flow log.
@@ -3743,10 +3722,10 @@ type DescribeBandwidthPackagesRequest struct {
 	// <li> resource.address-ip - String - Required: No - (Filter condition) Filter by the bandwidth package resource IP.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
-	// Queries the bandwidth package offset.
+	// Offset of the query results
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Queries the limit on the number of bandwidth packages.
+	// Max number of the bandwidth packages to be returned.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -3766,7 +3745,7 @@ type DescribeBandwidthPackagesResponse struct {
 		// The number of eligible bandwidth packages.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// The description of the bandwidth packages.
+		// Detail information of the bandwidth package.
 		BandwidthPackageSet []*BandwidthPackage `json:"BandwidthPackageSet,omitempty" name:"BandwidthPackageSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4148,23 +4127,23 @@ func (r *DescribeDirectConnectGatewayCcnRoutesResponse) FromJsonString(s string)
 type DescribeDirectConnectGatewaysRequest struct {
 	*tchttp.BaseRequest
 
-	// The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.
+	// The unique ID of the direct connect gateway, such as `dcg-9o233uri`.
 	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds" list`
 
-	// Filter condition. `DirectConnectGatewayIds` and `Filters` cannot be specified at the same time..
-	// <li>direct-connect-gateway-id - String - The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.</li>
+	// Filter condition. `DirectConnectGatewayIds` and `Filters` cannot be specified at the same time.
+	// <li>direct-connect-gateway-id - String - The unique ID of the direct connect gateway, such as `dcg-9o233uri`.</li>
 	// <li>direct-connect-gateway-name - String - The name of the direct connect gateway. The default is fuzzy query.</li>
-	// <li>direct-connect-gateway-ip - String - The `IP` of the direct connect gateway.</li>
+	// <li>direct-connect-gateway-ip - String - The IP of the direct connect gateway.</li>
 	// <li>gateway-type - String - The gateway type. Valid values: `NORMAL` (Standard type), `NAT` (NAT type).</li>
 	// <li>network-type- String - The network type. Valid values: `VPC` (VPC type), `CCN` (CCN type).</li>
-	// <li>ccn-id - String - The `ID` of the CCN where the direct connect gateway resides.</li>
-	// <li>vpc-id - String - The `ID` of the VPC where the direct connect gateway resides.</li>
+	// <li>ccn-id - String - The ID of the CCN where the direct connect gateway resides.</li>
+	// <li>vpc-id - String - The ID of the VPC where the direct connect gateway resides.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// The offset.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// The returned quantity.
+	// Max number of results returned
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -4253,13 +4232,13 @@ type DescribeFlowLogsRequest struct {
 	// The name of the flow log instance.
 	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
 
-	// The type of resource to which the flow log belongs. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
+	// The resource type of the flow log. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
 	// The unique ID of the resource.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
-	// The collection type of the flow log. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
+	// Type of flow logs to be collected. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
 	TrafficType *string `json:"TrafficType,omitempty" name:"TrafficType"`
 
 	// The storage ID of the flow log.
@@ -4271,13 +4250,13 @@ type DescribeFlowLogsRequest struct {
 	// Order by field. Valid values: 'flowLogName' and 'createTime'. Default value: 'createTime'.
 	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
 
-	// In ascending (asc) or descending (desc) order. Default value: 'desc'.
+	// In ascending (`asc`) or descending (`desc`) order. Default value: 'desc'.
 	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
 
 	// The offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// The number of rows per page. Default vaue: 10.
+	// The number of rows per page. Default value: 10.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter condition. `FlowLogIds` and `Filters` cannot be specified at the same time.
@@ -5794,13 +5773,13 @@ func (r *DetachNetworkInterfaceResponse) FromJsonString(s string) error {
 
 type DirectConnectGateway struct {
 
-	// The direct connect gateway `ID`.
+	// The direct connect gateway ID.
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
 	// The direct connect gateway name.
 	DirectConnectGatewayName *string `json:"DirectConnectGatewayName,omitempty" name:"DirectConnectGatewayName"`
 
-	// The `ID` of the `VPC` instance associated with the direct connect gateway.
+	// The ID of the VPC instance associated with the direct connect gateway.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The associated network type:
@@ -5808,9 +5787,9 @@ type DirectConnectGateway struct {
 	// <li>`CCN` - CCN</li>
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
-	// The `ID` of the associated network instance:
-	// <li>When the `NetworkType` is `VPC`, this value is the VPC instance `ID`</li>
-	// <li>When the `NetworkType` is `CCN`, this value is the CCN instance `ID`</li>
+	// The ID of the associated network instance:
+	// <li>When the `NetworkType` is `VPC`, this value is the VPC instance ID</li>
+	// <li>When the `NetworkType` is `CCN`, this value is the CCN instance ID</li>
 	NetworkInstanceId *string `json:"NetworkInstanceId,omitempty" name:"NetworkInstanceId"`
 
 	// The gateway type:
@@ -5825,7 +5804,7 @@ type DirectConnectGateway struct {
 	// The direct connect gateway IP.
 	DirectConnectGatewayIp *string `json:"DirectConnectGatewayIp,omitempty" name:"DirectConnectGatewayIp"`
 
-	// The `ID` of the `CCN` instance associated with the direct connect gateway.
+	// The ID of the CCN instance associated with the direct connect gateway.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// The route-learning type of the CCN:
@@ -6226,13 +6205,13 @@ type FlowLog struct {
 	// The name of the flow log instance.
 	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
 
-	// The type of resource to which the flow log belongs. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
+	// The resource type of the flow log. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
 	// The unique ID of the resource.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
-	// The collection type of the flow log. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
+	// Type of flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
 	TrafficType *string `json:"TrafficType,omitempty" name:"TrafficType"`
 
 	// The storage ID of the flow log.
@@ -6292,7 +6271,7 @@ type GetCcnRegionBandwidthLimitsRequest struct {
 	// <li>dregion - String - (Filter condition) Filter by the destination region, such as 'ap-shanghai-bm'.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
-	// The sorting condition. Valid values: 'BandwidthLimit' and 'ExpireTime'.
+	// The sorting condition. Valid values: `BandwidthLimit` and `ExpireTime`.
 	SortedBy *string `json:"SortedBy,omitempty" name:"SortedBy"`
 
 	// The offset.
@@ -6318,7 +6297,7 @@ type GetCcnRegionBandwidthLimitsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The CCN outbound bandwidths in each region.
+		// The outbound bandwidth limits of regions in a CCN instance.
 	// Note: this field may return null, indicating that no valid value was found.
 		CcnBandwidthSet []*CcnBandwidthInfo `json:"CcnBandwidthSet,omitempty" name:"CcnBandwidthSet" list`
 
@@ -7186,7 +7165,7 @@ func (r *ModifyCustomerGatewayAttributeResponse) FromJsonString(s string) error 
 type ModifyDirectConnectGatewayAttributeRequest struct {
 	*tchttp.BaseRequest
 
-	// The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.
+	// The unique ID of the direct connect gateway, such as `dcg-9o233uri`.
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
 	// The direct connect gateway name. You can enter any name within 60 characters.
@@ -7229,13 +7208,13 @@ type ModifyFlowLogAttributeRequest struct {
 	// The VPC ID or the unified ID. We recommend you use the unified ID.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// The unique ID of the flow log.
+	// The unique ID of the flow log collector.
 	FlowLogId *string `json:"FlowLogId,omitempty" name:"FlowLogId"`
 
-	// The name of the flow log instance.
+	// The name of the flow log collector.
 	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
 
-	// The description of the flow log instance.
+	// The description of the flow log collector.
 	FlowLogDescription *string `json:"FlowLogDescription,omitempty" name:"FlowLogDescription"`
 }
 
@@ -7275,7 +7254,7 @@ type ModifyGatewayFlowQosRequest struct {
 	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
-	// Bandwidth limit value. Valid values: >0, limited to a specified Mbps; 0, completely limited; -1, no bandwidth limit.
+	// Bandwidth limit value in Mbps. Valid values: >0: set the limit to the specified value. 0: block all traffic. -1: no bandwidth limit.
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
 	// CVM private IP addresses with limited bandwidth.
@@ -8516,13 +8495,13 @@ func (r *ReleaseAddressesResponse) FromJsonString(s string) error {
 type RemoveBandwidthPackageResourcesRequest struct {
 	*tchttp.BaseRequest
 
-	// The unique ID of the bandwidth package, such as 'bwp-xxxx'.
+	// The unique ID of the bandwidth package, such as `bwp-xxxx`.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
-	// The resource type. Valid values: 'Address' and 'LoadBalance'.
+	// The resource type. Valid values: `Address` and `LoadBalance`.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// The resource IP, such as 'eip-xxxx' and 'lb-xxxx'.
+	// The resource IP, such as `eip-xxxx` and `lb-xxxx`.
 	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
 }
 
@@ -8931,10 +8910,10 @@ func (r *ResetVpnGatewayInternetMaxBandwidthResponse) FromJsonString(s string) e
 
 type Resource struct {
 
-	// The bandwidth package resource type, including 'Address', and 'LoadBalance'
+	// The bandwidth package resource type, including `Address`, and `LoadBalance`
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// The bandwidth package ID, such as 'eip-xxxx' and 'lb-xxxx'.
+	// The bandwidth package ID, such as `eip-xxxx` and `lb-xxxx`.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
 	// The bandwidth package resource IP.
@@ -9369,7 +9348,7 @@ type Subnet struct {
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// The number of available `IPv4`.
+	// The number of available IPv4 addresses
 	AvailableIpAddressCount *uint64 `json:"AvailableIpAddressCount,omitempty" name:"AvailableIpAddressCount"`
 
 	// The `IPv6` `CIDR` of the subnet.
@@ -9381,7 +9360,7 @@ type Subnet struct {
 	// Whether it is a `SNAT` address pool subnet.
 	IsRemoteVpcSnat *bool `json:"IsRemoteVpcSnat,omitempty" name:"IsRemoteVpcSnat"`
 
-	// The total number of `IPv4` in the subnet.
+	// The total number of IPv4 addresses in the subnet.
 	TotalIpAddressCount *uint64 `json:"TotalIpAddressCount,omitempty" name:"TotalIpAddressCount"`
 
 	// Tag key-value pairs

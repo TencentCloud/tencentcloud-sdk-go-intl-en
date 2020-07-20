@@ -270,6 +270,58 @@ func (r *CompleteLifecycleActionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateAutoScalingGroupFromInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// The scaling group name. It must be unique under your account. The name can only contain Chinese characters, English letters, numbers, underscore, hyphen “-” and periods. It cannot exceed 55 bytes.
+	AutoScalingGroupName *string `json:"AutoScalingGroupName,omitempty" name:"AutoScalingGroupName"`
+
+	// The instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The maximum number of instances. Value range: 0-2000.
+	MinSize *int64 `json:"MinSize,omitempty" name:"MinSize"`
+
+	// The minimum number of instances. Value range: 0-2000.
+	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
+
+	// The desired capacity. Its value must be greater than the minimum and smaller than the maximum.
+	DesiredCapacity *int64 `json:"DesiredCapacity,omitempty" name:"DesiredCapacity"`
+
+	// Whether to inherit the instance tag. Default value: False
+	InheritInstanceTag *bool `json:"InheritInstanceTag,omitempty" name:"InheritInstanceTag"`
+}
+
+func (r *CreateAutoScalingGroupFromInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAutoScalingGroupFromInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAutoScalingGroupFromInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The scaling group ID.
+		AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateAutoScalingGroupFromInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAutoScalingGroupFromInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateAutoScalingGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -328,7 +380,7 @@ type CreateAutoScalingGroupRequest struct {
 	// If an availability zone or subnet in Zones/SubnetIds does not exist, a verification error will be reported regardless of the value of ZonesCheckPolicy.
 	ZonesCheckPolicy *string `json:"ZonesCheckPolicy,omitempty" name:"ZonesCheckPolicy"`
 
-	// List of tag descriptions. This parameter is used to bind a tag to an auto scaling group as well as the corresponding resource instances.
+	// List of tag descriptions. This parameter is used to bind a tag to a scaling group as well as corresponding resource instances. Each scaling group can have up to 30 tags.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
 	// Service settings such as unhealthy instance replacement.
@@ -336,6 +388,9 @@ type CreateAutoScalingGroupRequest struct {
 
 	// 
 	Ipv6AddressCount *int64 `json:"Ipv6AddressCount,omitempty" name:"Ipv6AddressCount"`
+
+	// 
+	MultiZoneSubnetPolicy *string `json:"MultiZoneSubnetPolicy,omitempty" name:"MultiZoneSubnetPolicy"`
 }
 
 func (r *CreateAutoScalingGroupRequest) ToJsonString() string {
@@ -1659,6 +1714,9 @@ type ExecuteScalingPolicyRequest struct {
 
 	// Whether to check if the auto scaling group is in the cooldown period. Default value: false
 	HonorCooldown *bool `json:"HonorCooldown,omitempty" name:"HonorCooldown"`
+
+	// Trigger source that executes a scaling policy. Valid values: API and CLOUD_MONITOR. Default value: API. The value `CLOUD_MONITOR` is specific to the Cloud Monitor service.
+	TriggerSource *string `json:"TriggerSource,omitempty" name:"TriggerSource"`
 }
 
 func (r *ExecuteScalingPolicyRequest) ToJsonString() string {
@@ -1817,6 +1875,10 @@ type InternetAccessible struct {
 	// Whether to assign a public IP. Value range: <br><li>TRUE: Assign a public IP <br><li>FALSE: Do not assign a public IP <br><br>If the public network bandwidth is greater than 0 Mbps, you are free to choose whether to enable the public IP (which is enabled by default). If the public network bandwidth is 0 Mbps, no public IP will be allowed to be assigned.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PublicIpAssigned *bool `json:"PublicIpAssigned,omitempty" name:"PublicIpAssigned"`
+
+	// Bandwidth package ID. You can obtain the parameter value from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) API.
+	// Note: this field may return null, indicating that no valid value was found.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 }
 
 type LaunchConfiguration struct {
@@ -2604,6 +2666,92 @@ type SpotMarketOptions struct {
 	// Bid request type. Currently, only "one-time" type is supported. Default value: one-time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SpotInstanceType *string `json:"SpotInstanceType,omitempty" name:"SpotInstanceType"`
+}
+
+type StartAutoScalingInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// The scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
+
+	// The list of the CVM instances you want to launch.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+}
+
+func (r *StartAutoScalingInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StartAutoScalingInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StartAutoScalingInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The scaling activity ID.
+		ActivityId *string `json:"ActivityId,omitempty" name:"ActivityId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *StartAutoScalingInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StartAutoScalingInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StopAutoScalingInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// The scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
+
+	// The list of the CVM instances you want to shut down.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+
+	// Whether the shutdown instances will be charged. Valid values:  
+	// KEEP_CHARGING: keep charging after shutdown.  
+	// STOP_CHARGING: stop charging after shutdown.
+	// Default value: KEEP_CHARGING.
+	StoppedMode *string `json:"StoppedMode,omitempty" name:"StoppedMode"`
+}
+
+func (r *StopAutoScalingInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StopAutoScalingInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StopAutoScalingInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The scaling activity ID.
+		ActivityId *string `json:"ActivityId,omitempty" name:"ActivityId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *StopAutoScalingInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StopAutoScalingInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type SystemDisk struct {
