@@ -2183,13 +2183,13 @@ type DomainAreaConfig struct {
 type DomainFilter struct {
 
 	// Filter field name, the list supported is as follows:
-	// - origin: master origin server.
+	// - origin: main origin server.
 	// - domain: domain name.
 	// - resourceId: domain name id.
 	// - status: domain name status. Values include `online`, `offline`, or `processing`.
 	// - serviceType: service type. Values include `web`, `download`, or `media`.
 	// - projectId: project ID.
-	// - domainType: master origin server type, `cname` indicates external origin, `COS` indicates COS origin.
+	// - domainType: main origin server type, `cname` indicates external origin, `COS` indicates COS origin.
 	// - fullUrlCache: full-path cache, which can be on or off.
 	// - https: whether to configure HTTPS, which can be on, off or processing.
 	// - originPullProtocol: origin-pull protocol type. HTTP, follow, or HTTPS are supported.
@@ -3041,12 +3041,12 @@ type MaxAgeRule struct {
 
 type Origin struct {
 
-	// Master origin server list
+	// Main origin server list
 	// When modifying the origin server, you need to enter the corresponding OriginType.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Origins []*string `json:"Origins,omitempty" name:"Origins" list`
 
-	// Master origin server type
+	// Main origin server type
 	// The following types are supported for input parameters:
 	// domain: domain name type
 	// cos: COS origin
@@ -3061,7 +3061,7 @@ type Origin struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+	// Host header used when accessing the main origin server. If left empty, the acceleration domain name will be used by default.
 	// If a wildcard domain name is accessed, then the sub-domain name during the access will be used by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServerName *string `json:"ServerName,omitempty" name:"ServerName"`
@@ -3090,7 +3090,7 @@ type Origin struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupOriginType *string `json:"BackupOriginType,omitempty" name:"BackupOriginType"`
 
-	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+	// Host header used when accessing the backup origin server. If left empty, the ServerName of main origin server will be used by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupServerName *string `json:"BackupServerName,omitempty" name:"BackupServerName"`
 

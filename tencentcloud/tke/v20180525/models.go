@@ -131,7 +131,7 @@ type Cluster struct {
 	// 
 	Property *string `json:"Property,omitempty" name:"Property"`
 
-	// Number of master nodes currently in the cluster
+	// Number of main nodes currently in the cluster
 	ClusterMaterNodeNum *uint64 `json:"ClusterMaterNodeNum,omitempty" name:"ClusterMaterNodeNum"`
 
 	// ID of the image used by the cluster

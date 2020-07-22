@@ -144,16 +144,16 @@ func (r *AssociateSecurityGroupsResponse) FromJsonString(s string) error {
 
 type BackupConfig struct {
 
-	// Replication mode of slave database 2. Value range: async, semi-sync
+	// Replication mode of subordinate database 2. Value range: async, semi-sync
 	ReplicationMode *string `json:"ReplicationMode,omitempty" name:"ReplicationMode"`
 
-	// Name of the AZ of slave database 2, such as ap-shanghai-1
+	// Name of the AZ of subordinate database 2, such as ap-shanghai-1
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Private IP address of slave database 2
+	// Private IP address of subordinate database 2
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
-	// Access port of slave database 2
+	// Access port of subordinate database 2
 	Vport *uint64 `json:"Vport,omitempty" name:"Vport"`
 }
 
@@ -544,34 +544,34 @@ type CreateDBInstanceHourRequest struct {
 	// AZ information. By default, the system will automatically select an AZ. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported AZs.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Instance ID, which is required and the same as the master instance ID when purchasing read-only or disaster recovery instances. Please use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the instance IDs.
-	MasterInstanceId *string `json:"MasterInstanceId,omitempty" name:"MasterInstanceId"`
+	// Instance ID, which is required and the same as the main instance ID when purchasing read-only or disaster recovery instances. Please use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the instance IDs.
+	MainInstanceId *string `json:"MainInstanceId,omitempty" name:"MainInstanceId"`
 
-	// Instance type. Valid values: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	// Instance type. Valid values: main (main instance), dr (disaster recovery instance), ro (read-only instance). Default value: main.
 	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
 
-	// AZ information of the master instance, which is required for purchasing disaster recovery instances.
-	MasterRegion *string `json:"MasterRegion,omitempty" name:"MasterRegion"`
+	// AZ information of the main instance, which is required for purchasing disaster recovery instances.
+	MainRegion *string `json:"MainRegion,omitempty" name:"MainRegion"`
 
 	// Custom port. Value range: [1024-65535].
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
-	// Sets the root account password. Rule: the password can contain 8–64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+	// Sets the root account password. Rule: the password can contain 8–64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing main instances and is meaningless for read-only or disaster recovery instances.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// List of parameters in the format of `ParamList.0.Name=auto_increment&ParamList.0.Value=1`. You can use the [DescribeDefaultParams](https://cloud.tencent.com/document/api/236/32662) API to query the configurable parameters.
 	ParamList []*ParamInfo `json:"ParamList,omitempty" name:"ParamList" list`
 
-	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0. This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0. This parameter can be specified when purchasing main instances and is meaningless for read-only or disaster recovery instances.
 	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
 
-	// Multi-AZ. Valid value: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+	// Multi-AZ. Valid value: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when purchasing main instances and is meaningless for read-only or disaster recovery instances.
 	DeployMode *int64 `json:"DeployMode,omitempty" name:"DeployMode"`
 
-	// AZ information of slave database 1, which is the `Zone` value by default. This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
-	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+	// AZ information of subordinate database 1, which is the `Zone` value by default. This parameter can be specified when purchasing main instances and is meaningless for read-only or disaster recovery instances.
+	SubordinateZone *string `json:"SubordinateZone,omitempty" name:"SubordinateZone"`
 
-	// AZ information of slave database 2, which is empty by default. This parameter can be specified when purchasing strong sync master instances and is meaningless for other types of instances.
+	// AZ information of subordinate database 2, which is empty by default. This parameter can be specified when purchasing strong sync main instances and is meaningless for other types of instances.
 	BackupZone *string `json:"BackupZone,omitempty" name:"BackupZone"`
 
 	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://cloud.tencent.com/document/api/236/15850) API to query the security group details of a project.
@@ -735,7 +735,7 @@ type DBSwitchInfo struct {
 	// Switch time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-09-03 01:34:31
 	SwitchTime *string `json:"SwitchTime,omitempty" name:"SwitchTime"`
 
-	// Switch type. Value range: TRANSFER (data migration), MASTER2SLAVE (master/slave switch), RECOVERY (master/slave recovery)
+	// Switch type. Value range: TRANSFER (data migration), MASTER2SLAVE (main/subordinate switch), RECOVERY (main/subordinate recovery)
 	SwitchType *string `json:"SwitchType,omitempty" name:"SwitchType"`
 }
 
@@ -1604,19 +1604,19 @@ type DescribeDBInstanceConfigResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Data protection mode of the master instance. Value range: 0 (async replication), 1 (semi-sync replication), 2 (strong sync replication).
+		// Data protection mode of the main instance. Value range: 0 (async replication), 1 (semi-sync replication), 2 (strong sync replication).
 		ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
 
-		// Master instance deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
+		// Main instance deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
 		DeployMode *int64 `json:"DeployMode,omitempty" name:"DeployMode"`
 
 		// Instance AZ information in the format of "ap-shanghai-1".
 		Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-		// Configuration information of the slave database.
-		SlaveConfig *SlaveConfig `json:"SlaveConfig,omitempty" name:"SlaveConfig"`
+		// Configuration information of the subordinate database.
+		SubordinateConfig *SubordinateConfig `json:"SubordinateConfig,omitempty" name:"SubordinateConfig"`
 
-		// Configuration information of slave database 2 of a strong sync instance.
+		// Configuration information of subordinate database 2 of a strong sync instance.
 		BackupConfig *BackupConfig `json:"BackupConfig,omitempty" name:"BackupConfig"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1767,7 +1767,7 @@ type DescribeDBInstancesRequest struct {
 	// Project ID. You can use the [project list querying API](https://cloud.tencent.com/document/product/378/4400) to query the project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Instance type. Value range: 1 (master), 2 (disaster recovery), 3 (read-only).
+	// Instance type. Value range: 1 (main), 2 (disaster recovery), 3 (read-only).
 	InstanceTypes []*uint64 `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
 
 	// Private IP address of the instance.
@@ -1791,7 +1791,7 @@ type DescribeDBInstancesRequest struct {
 	// Instance name.
 	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames" list`
 
-	// Instance task status. Value range: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - activating slave <br>4 - public network access enabled <br>5 - batch operation in progress <br>6 - rolling back <br>7 - public network access not enabled <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built instance <br>13 - dropping table <br>14 - creating and syncing disaster recovery instance <br>15 - pending upgrade and switch <br>16 - upgrade and switch in progress <br>17 - upgrade and switch completed
+	// Instance task status. Value range: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - activating subordinate <br>4 - public network access enabled <br>5 - batch operation in progress <br>6 - rolling back <br>7 - public network access not enabled <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built instance <br>13 - dropping table <br>14 - creating and syncing disaster recovery instance <br>15 - pending upgrade and switch <br>16 - upgrade and switch in progress <br>17 - upgrade and switch completed
 	TaskStatus []*uint64 `json:"TaskStatus,omitempty" name:"TaskStatus" list`
 
 	// Version of the instance database engine. Value range: 5.1, 5.5, 5.6, 5.7.
@@ -1830,14 +1830,14 @@ type DescribeDBInstancesRequest struct {
 	// Initialization flag. Value range: 0 (not initialized), 1 (initialized).
 	InitFlag *int64 `json:"InitFlag,omitempty" name:"InitFlag"`
 
-	// Whether instances corresponding to the disaster recovery relationship are included. Valid values: 0 (not included), 1 (included). Default value: 1. If a master instance is pulled, the data of the disaster recovery relationship will be in the `DrInfo` field. If a disaster recovery instance is pulled, the data of the disaster recovery relationship will be in the `MasterInfo` field. The disaster recovery relationship contains only partial basic data. To get the detailed data, you need to call an API to pull it.
+	// Whether instances corresponding to the disaster recovery relationship are included. Valid values: 0 (not included), 1 (included). Default value: 1. If a main instance is pulled, the data of the disaster recovery relationship will be in the `DrInfo` field. If a disaster recovery instance is pulled, the data of the disaster recovery relationship will be in the `MainInfo` field. The disaster recovery relationship contains only partial basic data. To get the detailed data, you need to call an API to pull it.
 	WithDr *int64 `json:"WithDr,omitempty" name:"WithDr"`
 
 	// Whether read-only instances are included. Valid values: 0 (not included), 1 (included). Default value: 1.
 	WithRo *int64 `json:"WithRo,omitempty" name:"WithRo"`
 
-	// Whether master instances are included. Valid values: 0 (not included), 1 (included). Default value: 1.
-	WithMaster *int64 `json:"WithMaster,omitempty" name:"WithMaster"`
+	// Whether main instances are included. Valid values: 0 (not included), 1 (included). Default value: 1.
+	WithMain *int64 `json:"WithMain,omitempty" name:"WithMain"`
 
 	// Placement group ID list.
 	DeployGroupIds []*string `json:"DeployGroupIds,omitempty" name:"DeployGroupIds" list`
@@ -2908,7 +2908,7 @@ type DescribeTasksRequest struct {
 	// 8 - enabling GTID of a TencentDB instance;
 	// 9 - upgrading a read-only instance;
 	// 10 - rolling back databases in batches;
-	// 11 - upgrading a master instance;
+	// 11 - upgrading a main instance;
 	// 12 - deleting a TencentDB table;
 	// 13 - promoting a disaster recovery instance.
 	TaskTypes []*int64 `json:"TaskTypes,omitempty" name:"TaskTypes" list`
@@ -3338,9 +3338,9 @@ type InstanceInfo struct {
 	// VPC ID, such as 51102
 	VpcId *int64 `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Information of a slave server
+	// Information of a subordinate server
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SlaveInfo *SlaveInfo `json:"SlaveInfo,omitempty" name:"SlaveInfo"`
+	SubordinateInfo *SubordinateInfo `json:"SubordinateInfo,omitempty" name:"SubordinateInfo"`
 
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -3361,7 +3361,7 @@ type InstanceInfo struct {
 	// Subnet ID, such as 2333
 	SubnetId *int64 `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance type. Value range: 1 (master), 2 (disaster recovery), 3 (read-only)
+	// Instance type. Value range: 1 (main), 2 (disaster recovery), 3 (read-only)
 	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
 
 	// Project ID
@@ -3376,12 +3376,12 @@ type InstanceInfo struct {
 	// AZ deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ)
 	DeployMode *int64 `json:"DeployMode,omitempty" name:"DeployMode"`
 
-	// Instance task status. 0 - no task; 1 - upgrading; 2 - importing data; 3 - activating slave; 4 - enabling public network access; 5 - batch operation in progress; 6 - rolling back; 7 - disabling public network access; 8 - changing password; 9 - renaming instance; 10 - restarting; 12 - migrating self-built instance; 13 - dropping table; 14 - creating and syncing disaster recovery instance; 15 - pending upgrade and switch; 16 - upgrade and switch in progress; 17 - upgrade and switch completed
+	// Instance task status. 0 - no task; 1 - upgrading; 2 - importing data; 3 - activating subordinate; 4 - enabling public network access; 5 - batch operation in progress; 6 - rolling back; 7 - disabling public network access; 8 - changing password; 9 - renaming instance; 10 - restarting; 12 - migrating self-built instance; 13 - dropping table; 14 - creating and syncing disaster recovery instance; 15 - pending upgrade and switch; 16 - upgrade and switch in progress; 17 - upgrade and switch completed
 	TaskStatus *int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
 
-	// Details of a master instance
+	// Details of a main instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MasterInfo *MasterInfo `json:"MasterInfo,omitempty" name:"MasterInfo"`
+	MainInfo *MainInfo `json:"MainInfo,omitempty" name:"MainInfo"`
 
 	// Instance type. Value range: HA (High-Availability Edition), FE (Finance Edition), BASIC (Basic Edition)
 	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
@@ -3510,7 +3510,7 @@ func (r *IsolateDBInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type MasterInfo struct {
+type MainInfo struct {
 
 	// Region information
 	Region *string `json:"Region,omitempty" name:"Region"`
@@ -4530,7 +4530,7 @@ type RoGroup struct {
 	// Read-only group name.
 	RoGroupName *string `json:"RoGroupName,omitempty" name:"RoGroupName"`
 
-	// Whether to enable the function of isolating an instance that exceeds the latency threshold. If it is enabled, when the latency between the read-only instance and the master instance exceeds the latency threshold, the read-only instance will be isolated. Valid values: 1 (enabled), 0 (not enabled)
+	// Whether to enable the function of isolating an instance that exceeds the latency threshold. If it is enabled, when the latency between the read-only instance and the main instance exceeds the latency threshold, the read-only instance will be isolated. Valid values: 1 (enabled), 0 (not enabled)
 	RoOfflineDelay *int64 `json:"RoOfflineDelay,omitempty" name:"RoOfflineDelay"`
 
 	// Latency threshold
@@ -4591,8 +4591,8 @@ type RoGroupAttr struct {
 
 type RoInstanceInfo struct {
 
-	// Master instance ID corresponding to the RO group
-	MasterInstanceId *string `json:"MasterInstanceId,omitempty" name:"MasterInstanceId"`
+	// Main instance ID corresponding to the RO group
+	MainInstanceId *string `json:"MainInstanceId,omitempty" name:"MainInstanceId"`
 
 	// RO instance status in the RO group. Value range: online, offline
 	RoStatus *string `json:"RoStatus,omitempty" name:"RoStatus"`
@@ -4615,7 +4615,7 @@ type RoInstanceInfo struct {
 	// RO instance status. Value range: 0 (creating), 1 (running), 4 (deleting)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-	// Instance type. Value range: 1 (master), 2 (disaster recovery), 3 (read-only)
+	// Instance type. Value range: 1 (main), 2 (disaster recovery), 3 (read-only)
 	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
 
 	// RO instance name
@@ -4624,7 +4624,7 @@ type RoInstanceInfo struct {
 	// Pay-as-you-go billing status. Value range: 1 (normal), 2 (in arrears)
 	HourFeeStatus *int64 `json:"HourFeeStatus,omitempty" name:"HourFeeStatus"`
 
-	// RO instance task status. Value range: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - activating slave <br>4 - public network access enabled <br>5 - batch operation in progress <br>6 - rolling back <br>7 - public network access not enabled <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built instance <br>13 - dropping table <br>14 - creating and syncing disaster recovery instance
+	// RO instance task status. Value range: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - activating subordinate <br>4 - public network access enabled <br>5 - batch operation in progress <br>6 - rolling back <br>7 - public network access not enabled <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built instance <br>13 - dropping table <br>14 - creating and syncing disaster recovery instance
 	TaskStatus *int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
 
 	// RO instance memory size in MB
@@ -4854,26 +4854,26 @@ type SellType struct {
 	Configs []*SellConfig `json:"Configs,omitempty" name:"Configs" list`
 }
 
-type SlaveConfig struct {
+type SubordinateConfig struct {
 
-	// Replication mode of the slave database. Value range: async, semi-sync
+	// Replication mode of the subordinate database. Value range: async, semi-sync
 	ReplicationMode *string `json:"ReplicationMode,omitempty" name:"ReplicationMode"`
 
-	// AZ name of the slave database, such as ap-shanghai-1
+	// AZ name of the subordinate database, such as ap-shanghai-1
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
-type SlaveInfo struct {
+type SubordinateInfo struct {
 
-	// Information of slave server 1
-	First *SlaveInstanceInfo `json:"First,omitempty" name:"First"`
+	// Information of subordinate server 1
+	First *SubordinateInstanceInfo `json:"First,omitempty" name:"First"`
 
-	// Information of slave server 2
+	// Information of subordinate server 2
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Second *SlaveInstanceInfo `json:"Second,omitempty" name:"Second"`
+	Second *SubordinateInstanceInfo `json:"Second,omitempty" name:"Second"`
 }
 
-type SlaveInstanceInfo struct {
+type SubordinateInstanceInfo struct {
 
 	// Port number
 	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
@@ -5162,7 +5162,7 @@ type TaskDetail struct {
 	// "OPEN GTID" - enabling GTID of a TencentDB instance;
 	// "UPGRADE RO" - upgrading a read-only instance;
 	// "BATCH ROLLBACK" - rolling back databases in batches;
-	// "UPGRADE MASTER" - upgrading a master instance;
+	// "UPGRADE MASTER" - upgrading a main instance;
 	// "DROP TABLES" - dropping a TencentDB table;
 	// "SWITCH DR TO MASTER" - promoting a disaster recovery instance.
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
@@ -5187,7 +5187,7 @@ type UpgradeDBInstanceEngineVersionRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Version of master instance database engine. Value range: 5.6, 5.7
+	// Version of main instance database engine. Value range: 5.6, 5.7
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
 	// Mode of switch to a new instance. Value range: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [switching to new instance API](https://cloud.tencent.com/document/product/236/15864) to trigger the process.
@@ -5236,25 +5236,25 @@ type UpgradeDBInstanceRequest struct {
 	// Disk size in GB after upgrade. To ensure that the `Volume` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the specifications of the disk that can be upgraded to.
 	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
 
-	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). This parameter can be specified when upgrading master instances and is meaningless for read-only or disaster recovery instances.
+	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). This parameter can be specified when upgrading main instances and is meaningless for read-only or disaster recovery instances.
 	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
 
-	// Deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when upgrading master instances and is meaningless for read-only or disaster recovery instances.
+	// Deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when upgrading main instances and is meaningless for read-only or disaster recovery instances.
 	DeployMode *int64 `json:"DeployMode,omitempty" name:"DeployMode"`
 
-	// AZ information of slave database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading master instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the supported AZs.
-	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+	// AZ information of subordinate database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading main instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the supported AZs.
+	SubordinateZone *string `json:"SubordinateZone,omitempty" name:"SubordinateZone"`
 
-	// Version of master instance database engine. Valid values: 5.5, 5.6, 5.7.
+	// Version of main instance database engine. Valid values: 5.5, 5.6, 5.7.
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
 	// Mode of switch to new instance. Valid values: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://cloud.tencent.com/document/product/236/15864) API to trigger the process.
 	WaitSwitch *int64 `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
 
-	// AZ information of slave database 2, which is empty by default. This parameter can be specified when upgrading master instances and is meaningless for read-only or disaster recovery instances.
+	// AZ information of subordinate database 2, which is empty by default. This parameter can be specified when upgrading main instances and is meaningless for read-only or disaster recovery instances.
 	BackupZone *string `json:"BackupZone,omitempty" name:"BackupZone"`
 
-	// Instance type. Valid values: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	// Instance type. Valid values: main (main instance), dr (disaster recovery instance), ro (read-only instance). Default value: main.
 	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
 }
 
@@ -5305,11 +5305,11 @@ type ZoneConf struct {
 	// AZ deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
 	DeployMode []*int64 `json:"DeployMode,omitempty" name:"DeployMode" list`
 
-	// AZ where the master instance is located
-	MasterZone []*string `json:"MasterZone,omitempty" name:"MasterZone" list`
+	// AZ where the main instance is located
+	MainZone []*string `json:"MainZone,omitempty" name:"MainZone" list`
 
 	// AZ where salve database 1 is located when the instance is deployed in multi-AZ mode
-	SlaveZone []*string `json:"SlaveZone,omitempty" name:"SlaveZone" list`
+	SubordinateZone []*string `json:"SubordinateZone,omitempty" name:"SubordinateZone" list`
 
 	// AZ where salve database 2 is located when the instance is deployed in multi-AZ mode
 	BackupZone []*string `json:"BackupZone,omitempty" name:"BackupZone" list`

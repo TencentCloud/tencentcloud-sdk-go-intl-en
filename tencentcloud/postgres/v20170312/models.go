@@ -243,10 +243,10 @@ type DBInstance struct {
 	// Purchasable specification ID
 	DBInstanceClass *string `json:"DBInstanceClass,omitempty" name:"DBInstanceClass"`
 
-	// Instance type. 1: primary (master instance), 2: readonly (read-only instance), 3: guard (disaster recovery instance), 4: temp (temp instance)
+	// Instance type. 1: primary (main instance), 2: readonly (read-only instance), 3: guard (disaster recovery instance), 4: temp (temp instance)
 	DBInstanceType *string `json:"DBInstanceType,omitempty" name:"DBInstanceType"`
 
-	// Instance edition. Currently, only `standard` edition (dual-server high-availability one-master-one-slave edition) is supported
+	// Instance edition. Currently, only `standard` edition (dual-server high-availability one-main-one-subordinate edition) is supported
 	DBInstanceVersion *string `json:"DBInstanceVersion,omitempty" name:"DBInstanceVersion"`
 
 	// Instance database character set

@@ -188,13 +188,13 @@ type CreateAccountRequest struct {
 	// Account password, which can contain 6–32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the slave will be used first, and if it is unavailable, the master will be used; 2: the slave will be used first, and if it is unavailable, the operation will fail.
+	// Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the subordinate will be used first, and if it is unavailable, the main will be used; 2: the subordinate will be used first, and if it is unavailable, the operation will fail.
 	ReadOnly *int64 `json:"ReadOnly,omitempty" name:"ReadOnly"`
 
 	// Account remarks, which can contain 0–256 letters, digits, and common symbols.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Determines whether the slave is unavailable based on the passed-in time
+	// Determines whether the subordinate is unavailable based on the passed-in time
 	DelayThresh *int64 `json:"DelayThresh,omitempty" name:"DelayThresh"`
 }
 
@@ -254,10 +254,10 @@ type DBAccount struct {
 	// Last updated time
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// Read-only flag. 0: no; 1: for the account's SQL requests, the slave will be used first, and if it is unavailable, the master will be used; 2: the slave will be used first, and if it is unavailable, the operation will fail.
+	// Read-only flag. 0: no; 1: for the account's SQL requests, the subordinate will be used first, and if it is unavailable, the main will be used; 2: the subordinate will be used first, and if it is unavailable, the operation will fail.
 	ReadOnly *int64 `json:"ReadOnly,omitempty" name:"ReadOnly"`
 
-	// This field is meaningful for read-only accounts, indicating to select a slave where the master/slave delay is below this value
+	// This field is meaningful for read-only accounts, indicating to select a subordinate where the main/subordinate delay is below this value
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DelayThresh *int64 `json:"DelayThresh,omitempty" name:"DelayThresh"`
 }
@@ -351,7 +351,7 @@ type DBInstance struct {
 	// Original ID of instance (this field is obsolete and should not be depended on)
 	OriginSerialId *string `json:"OriginSerialId,omitempty" name:"OriginSerialId"`
 
-	// Number of nodes. 2: one master and one slave, 3: one master and two slaves
+	// Number of nodes. 2: one main and one subordinate, 3: one main and two subordinates
 	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
 
 	// Whether it is a temp instance. 0: no, non-zero value: yes
@@ -786,7 +786,7 @@ type DescribeDBPerformanceDetailsRequest struct {
 	// End date in the format of `yyyy-mm-dd`
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Name of pulled metric. Valid values: long_query, select_total, update_total, insert_total, delete_total, mem_hit_rate, disk_iops, conn_active, is_master_switched, slave_delay
+	// Name of pulled metric. Valid values: long_query, select_total, update_total, insert_total, delete_total, mem_hit_rate, disk_iops, conn_active, is_main_switched, subordinate_delay
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 }
 
@@ -803,16 +803,16 @@ type DescribeDBPerformanceDetailsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Master node performance monitoring data
-		Master *PerformanceMonitorSet `json:"Master,omitempty" name:"Master"`
+		// Main node performance monitoring data
+		Main *PerformanceMonitorSet `json:"Main,omitempty" name:"Main"`
 
-		// Slave 1 performance monitoring data
+		// Subordinate 1 performance monitoring data
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Slave1 *PerformanceMonitorSet `json:"Slave1,omitempty" name:"Slave1"`
+		Subordinate1 *PerformanceMonitorSet `json:"Subordinate1,omitempty" name:"Subordinate1"`
 
-		// Slave 2 performance monitoring data. If the instance is one-master-one-slave, it does not have this field
+		// Subordinate 2 performance monitoring data. If the instance is one-main-one-subordinate, it does not have this field
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Slave2 *PerformanceMonitorSet `json:"Slave2,omitempty" name:"Slave2"`
+		Subordinate2 *PerformanceMonitorSet `json:"Subordinate2,omitempty" name:"Subordinate2"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -840,7 +840,7 @@ type DescribeDBPerformanceRequest struct {
 	// End date in the format of `yyyy-mm-dd`
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Name of pulled metric. Valid values: long_query, select_total, update_total, insert_total, delete_total, mem_hit_rate, disk_iops, conn_active, is_master_switched, slave_delay
+	// Name of pulled metric. Valid values: long_query, select_total, update_total, insert_total, delete_total, mem_hit_rate, disk_iops, conn_active, is_main_switched, subordinate_delay
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 }
 
@@ -881,11 +881,11 @@ type DescribeDBPerformanceResponse struct {
 		// Number of active connections
 		ConnActive *MonitorData `json:"ConnActive,omitempty" name:"ConnActive"`
 
-		// Whether master/slave switch occurred. 1: yes, 0: no
-		IsMasterSwitched *MonitorData `json:"IsMasterSwitched,omitempty" name:"IsMasterSwitched"`
+		// Whether main/subordinate switch occurred. 1: yes, 0: no
+		IsMainSwitched *MonitorData `json:"IsMainSwitched,omitempty" name:"IsMainSwitched"`
 
-		// Master/slave delay
-		SlaveDelay *MonitorData `json:"SlaveDelay,omitempty" name:"SlaveDelay"`
+		// Main/subordinate delay
+		SubordinateDelay *MonitorData `json:"SubordinateDelay,omitempty" name:"SubordinateDelay"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -930,16 +930,16 @@ type DescribeDBResourceUsageDetailsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Master node resource usage monitoring node
-		Master *ResourceUsageMonitorSet `json:"Master,omitempty" name:"Master"`
+		// Main node resource usage monitoring node
+		Main *ResourceUsageMonitorSet `json:"Main,omitempty" name:"Main"`
 
-		// Slave 1 resource usage monitoring node
+		// Subordinate 1 resource usage monitoring node
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Slave1 *ResourceUsageMonitorSet `json:"Slave1,omitempty" name:"Slave1"`
+		Subordinate1 *ResourceUsageMonitorSet `json:"Subordinate1,omitempty" name:"Subordinate1"`
 
-		// Slave 2 resource usage monitoring node
+		// Subordinate 2 resource usage monitoring node
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Slave2 *ResourceUsageMonitorSet `json:"Slave2,omitempty" name:"Slave2"`
+		Subordinate2 *ResourceUsageMonitorSet `json:"Subordinate2,omitempty" name:"Subordinate2"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1037,8 +1037,8 @@ type DescribeDBSlowLogsRequest struct {
 	// Sorting order. Valid values: desc, asc
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 
-	// Whether to query slow queries of the slave. 0: master, 1: slave
-	Slave *int64 `json:"Slave,omitempty" name:"Slave"`
+	// Whether to query slow queries of the subordinate. 0: main, 1: subordinate
+	Subordinate *int64 `json:"Subordinate,omitempty" name:"Subordinate"`
 }
 
 func (r *DescribeDBSlowLogsRequest) ToJsonString() string {
@@ -1676,8 +1676,8 @@ type PerformanceMonitorSet struct {
 	// Cache hit rate
 	MemHitRate *MonitorData `json:"MemHitRate,omitempty" name:"MemHitRate"`
 
-	// Master/slave delay
-	SlaveDelay *MonitorData `json:"SlaveDelay,omitempty" name:"SlaveDelay"`
+	// Main/subordinate delay
+	SubordinateDelay *MonitorData `json:"SubordinateDelay,omitempty" name:"SubordinateDelay"`
 
 	// Number of SELECT operations
 	SelectTotal *MonitorData `json:"SelectTotal,omitempty" name:"SelectTotal"`
@@ -1691,8 +1691,8 @@ type PerformanceMonitorSet struct {
 	// Number of INSERT operations
 	InsertTotal *MonitorData `json:"InsertTotal,omitempty" name:"InsertTotal"`
 
-	// Whether master/slave switch occurred. 1: yes, 0: no
-	IsMasterSwitched *MonitorData `json:"IsMasterSwitched,omitempty" name:"IsMasterSwitched"`
+	// Whether main/subordinate switch occurred. 1: yes, 0: no
+	IsMainSwitched *MonitorData `json:"IsMainSwitched,omitempty" name:"IsMainSwitched"`
 }
 
 type ResetAccountPasswordRequest struct {

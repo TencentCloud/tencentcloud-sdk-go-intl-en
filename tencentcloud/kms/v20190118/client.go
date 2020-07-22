@@ -133,7 +133,7 @@ func NewCreateKeyResponse() (response *CreateKeyResponse) {
     return
 }
 
-// Create a master key CMK (Custom Master Key) for user management data keys
+// Create a main key CMK (Custom Main Key) for user management data keys
 func (c *Client) CreateKey(request *CreateKeyRequest) (response *CreateKeyResponse, err error) {
     if request == nil {
         request = NewCreateKeyRequest()
@@ -433,7 +433,7 @@ func NewDisableKeyResponse() (response *DisableKeyResponse) {
     return
 }
 
-// This API is used to disable a master key. The disabled key cannot be used for encryption and decryption operations.
+// This API is used to disable a main key. The disabled key cannot be used for encryption and decryption operations.
 func (c *Client) DisableKey(request *DisableKeyRequest) (response *DisableKeyResponse, err error) {
     if request == nil {
         request = NewDisableKeyRequest()
@@ -934,7 +934,7 @@ func NewListKeyDetailResponse() (response *ListKeyDetailResponse) {
     return
 }
 
-// Get the master key list details according to the specified Offset and Limit.
+// Get the main key list details according to the specified Offset and Limit.
 func (c *Client) ListKeyDetail(request *ListKeyDetailRequest) (response *ListKeyDetailResponse, err error) {
     if request == nil {
         request = NewListKeyDetailRequest()

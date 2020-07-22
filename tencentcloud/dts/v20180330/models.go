@@ -978,11 +978,11 @@ type MigrateDetailInfo struct {
 	// Progress of current step, such as "1"
 	CurrentStepProgress *string `json:"CurrentStepProgress,omitempty" name:"CurrentStepProgress"`
 
-	// Master/slave lag in MB, which is valid during incremental sync and currently supported by TencentDB for Redis and MySQL
-	MasterSlaveDistance *int64 `json:"MasterSlaveDistance,omitempty" name:"MasterSlaveDistance"`
+	// Main/subordinate lag in MB, which is valid during incremental sync and currently supported by TencentDB for Redis and MySQL
+	MainSubordinateDistance *int64 `json:"MainSubordinateDistance,omitempty" name:"MainSubordinateDistance"`
 
-	// Master/slave lag in seconds, which is valid during incremental sync and currently supported by TencentDB for MySQL
-	SecondsBehindMaster *int64 `json:"SecondsBehindMaster,omitempty" name:"SecondsBehindMaster"`
+	// Main/subordinate lag in seconds, which is valid during incremental sync and currently supported by TencentDB for MySQL
+	SecondsBehindMain *int64 `json:"SecondsBehindMain,omitempty" name:"SecondsBehindMain"`
 
 	// Step information
 	StepInfo []*MigrateStepDetailInfo `json:"StepInfo,omitempty" name:"StepInfo" list`
@@ -1062,9 +1062,9 @@ type MigrateOption struct {
 	// Additional parameters for different databases, which are described in JSON format. 
 	// The following parameters can be defined for Redis: 
 	// { 
-	// 	"ClientOutputBufferHardLimit":512, 	Hard capacity limit of slave buffer (MB) 
-	// 	"ClientOutputBufferSoftLimit":512, 	Soft capacity limit of slave buffer (MB) 
-	// 	"ClientOutputBufferPersistTime":60, Soft limit duration of slave buffer (s) 
+	// 	"ClientOutputBufferHardLimit":512, 	Hard capacity limit of subordinate buffer (MB) 
+	// 	"ClientOutputBufferSoftLimit":512, 	Soft capacity limit of subordinate buffer (MB) 
+	// 	"ClientOutputBufferPersistTime":60, Soft limit duration of subordinate buffer (s) 
 	// 	"ReplBacklogSize":512, 	Circular buffer capacity limit (MB) 
 	// 	"ReplTimeout":120, 		Replication timeout period (s) 
 	// }
@@ -1693,7 +1693,7 @@ type SubscribeRegionConf struct {
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
-type SwitchDrToMasterRequest struct {
+type SwitchDrToMainRequest struct {
 	*tchttp.BaseRequest
 
 	// Disaster recovery instance information
@@ -1703,16 +1703,16 @@ type SwitchDrToMasterRequest struct {
 	DatabaseType *string `json:"DatabaseType,omitempty" name:"DatabaseType"`
 }
 
-func (r *SwitchDrToMasterRequest) ToJsonString() string {
+func (r *SwitchDrToMainRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *SwitchDrToMasterRequest) FromJsonString(s string) error {
+func (r *SwitchDrToMainRequest) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type SwitchDrToMasterResponse struct {
+type SwitchDrToMainResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -1724,12 +1724,12 @@ type SwitchDrToMasterResponse struct {
 	} `json:"Response"`
 }
 
-func (r *SwitchDrToMasterResponse) ToJsonString() string {
+func (r *SwitchDrToMainResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *SwitchDrToMasterResponse) FromJsonString(s string) error {
+func (r *SwitchDrToMainResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1762,11 +1762,11 @@ type SyncDetailInfo struct {
 	// Progress of the current step
 	CurrentStepProgress *string `json:"CurrentStepProgress,omitempty" name:"CurrentStepProgress"`
 
-	// Master/slave delay in MB
-	MasterSlaveDistance *int64 `json:"MasterSlaveDistance,omitempty" name:"MasterSlaveDistance"`
+	// Main/subordinate delay in MB
+	MainSubordinateDistance *int64 `json:"MainSubordinateDistance,omitempty" name:"MainSubordinateDistance"`
 
-	// Master/slave delay in seconds
-	SecondsBehindMaster *int64 `json:"SecondsBehindMaster,omitempty" name:"SecondsBehindMaster"`
+	// Main/subordinate delay in seconds
+	SecondsBehindMain *int64 `json:"SecondsBehindMain,omitempty" name:"SecondsBehindMain"`
 
 	// Step information
 	StepInfo []*SyncStepDetailInfo `json:"StepInfo,omitempty" name:"StepInfo" list`
