@@ -450,7 +450,7 @@ type DBInstance struct {
 	// Instance VPC subnet ID, which will be 0 if the basic network is used
 	SubnetId *int64 `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance status. Valid values: <li>1: applying </li> <li>2: running </li> <li>3: restrictedly running (master/slave switching) </li> <li>4: isolated </li> <li>5: repossessing </li> <li>6: repossessed </li> <li>7: task running (e.g., backing up or rolling back the instance) </li> <li>8: decommissioned </li> <li>9: scaling </li> <li>10: migrating </li> <li>11: read-only </li> <li>12: restarting </li>
+	// Instance status. Valid values: <li>1: applying </li> <li>2: running </li> <li>3: restrictedly running (main/subordinate switching) </li> <li>4: isolated </li> <li>5: repossessing </li> <li>6: repossessed </li> <li>7: task running (e.g., backing up or rolling back the instance) </li> <li>8: decommissioned </li> <li>9: scaling </li> <li>10: migrating </li> <li>11: read-only </li> <li>12: restarting </li>
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Instance access IP
@@ -810,7 +810,7 @@ type DescribeDBInstancesRequest struct {
 	// Instance status. Valid values:
 	// <li>1: applying</li>
 	// <li>2: running</li>
-	// <li>3: running restrictedly (master/slave switching)</li>
+	// <li>3: running restrictedly (main/subordinate switching)</li>
 	// <li>4: isolated</li>
 	// <li>5: repossessing</li>
 	// <li>6: repossessed</li>

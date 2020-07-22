@@ -38,7 +38,7 @@ type Account struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Privilege *string `json:"Privilege,omitempty" name:"Privilege"`
 
-	// Routing policy. master: master node; replication: slave node
+	// Routing policy. main: main node; replication: subordinate node
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy" list`
 
@@ -218,7 +218,7 @@ type CreateInstanceAccountRequest struct {
 	// Sub-account password
 	AccountPassword *string `json:"AccountPassword,omitempty" name:"AccountPassword"`
 
-	// Routing policy. Enter `master` for master node or `replication` for slave node
+	// Routing policy. Enter `main` for main node or `replication` for subordinate node
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy" list`
 
 	// Read/write policy. Valid values: r (read-only), rw (read/write).
@@ -306,7 +306,7 @@ type CreateInstancesRequest struct {
 	// Number of replicas in an instance. Redis 2.8 standard edition and CKV standard edition support 1 replica. Standard/cluster edition 4.0 and 5.0 support 1-5 replicas.
 	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitempty" name:"RedisReplicasNum"`
 
-	// Whether to support read-only replicas. Neither Redis 2.8 standard edition nor CKV standard edition supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the master node and read requests will be distributed on slave nodes. To enable read-only replicas, we recommend you create 2 or more replicas.
+	// Whether to support read-only replicas. Neither Redis 2.8 standard edition nor CKV standard edition supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the main node and read requests will be distributed on subordinate nodes. To enable read-only replicas, we recommend you create 2 or more replicas.
 	ReplicasReadonly *bool `json:"ReplicasReadonly,omitempty" name:"ReplicasReadonly"`
 
 	// Instance name. It contains only letters, digits, underscores, and dashes with a length of up to 60 characters.
@@ -1229,8 +1229,8 @@ type DescribeInstanceShardsRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Whether to filter out the slave node information
-	FilterSlave *bool `json:"FilterSlave,omitempty" name:"FilterSlave"`
+	// Whether to filter out the subordinate node information
+	FilterSubordinate *bool `json:"FilterSubordinate,omitempty" name:"FilterSubordinate"`
 }
 
 func (r *DescribeInstanceShardsRequest) ToJsonString() string {
@@ -1311,7 +1311,7 @@ type DescribeInstancesRequest struct {
 	// Instance status. 0: to be initialized; 1: in process; 2: running; -2: isolated; -3: to be deleted
 	Status []*int64 `json:"Status,omitempty" name:"Status" list`
 
-	// Type edition. 1: standalone edition; 2: master-slave edition; 3: cluster edition
+	// Type edition. 1: standalone edition; 2: main-subordinate edition; 3: cluster edition
 	TypeVersion *int64 `json:"TypeVersion,omitempty" name:"TypeVersion"`
 
 	// Engine information: Redis-2.8, Redis-4.0, CKV
@@ -1323,7 +1323,7 @@ type DescribeInstancesRequest struct {
 	// Billing method. postpaid: pay-as-you-go; prepaid: monthly subscription
 	BillingMode *string `json:"BillingMode,omitempty" name:"BillingMode"`
 
-	// Instance type. 1: legacy Redis Cluster Edition, 2: Redis 2.8 Master-Slave Edition, 3: CKV Master-Slave Edition, 4: CKV Cluster Edition, 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Slave Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Slave Edition, 9: Redis 5.0 Cluster Edition,
+	// Instance type. 1: legacy Redis Cluster Edition, 2: Redis 2.8 Main-Subordinate Edition, 3: CKV Main-Subordinate Edition, 4: CKV Cluster Edition, 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Main-Subordinate Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Main-Subordinate Edition, 9: Redis 5.0 Cluster Edition,
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
 	// Search keywords, which can be instance ID, instance name, or complete IP
@@ -1817,7 +1817,7 @@ type EnableReplicaReadonlyRequest struct {
 	// Serial ID of an instance
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Account routing policy. If `master` or `replication` is entered, it means to route to the master or slave node; if this is left blank, it means to write into the master node and read from the slave node by default
+	// Account routing policy. If `main` or `replication` is entered, it means to route to the main or subordinate node; if this is left blank, it means to write into the main node and read from the subordinate node by default
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy" list`
 }
 
@@ -1898,7 +1898,7 @@ type InstanceClusterNode struct {
 	// ID of the runtime node of an instance
 	RunId *string `json:"RunId,omitempty" name:"RunId"`
 
-	// Cluster role. 0: master; 1: slave
+	// Cluster role. 0: main; 1: subordinate
 	Role *int64 `json:"Role,omitempty" name:"Role"`
 
 	// Node status. 0: readwrite; 1: read; 2: backup
@@ -2135,7 +2135,7 @@ type InstanceSet struct {
 	// This field has been disused
 	SizeUsed *float64 `json:"SizeUsed,omitempty" name:"SizeUsed"`
 
-	// Instance type. 1: Redis 2.8 cluster edition; 2: Redis 2.8 master-slave edition; 3: CKV master-slave edition (Redis 3.2); 4: CKV cluster edition (Redis 3.2); 5: Redis 2.8 standalone edition; 6: Redis 4.0 master-slave edition; 7: Redis 4.0 cluster edition
+	// Instance type. 1: Redis 2.8 cluster edition; 2: Redis 2.8 main-subordinate edition; 3: CKV main-subordinate edition (Redis 3.2); 4: CKV cluster edition (Redis 3.2); 5: Redis 2.8 standalone edition; 6: Redis 4.0 main-subordinate edition; 7: Redis 4.0 cluster edition
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
 	// Whether to set the auto-renewal flag for an instance. 1: auto-renewal set; 0: auto-renewal not set
@@ -2147,7 +2147,7 @@ type InstanceSet struct {
 	// Engine: Redis community edition, Tencent Cloud CKV
 	Engine *string `json:"Engine,omitempty" name:"Engine"`
 
-	// Product type: Redis 2.8 cluster edition, Redis 2.8 master-slave edition, Redis 3.2 master-slave edition (CKV master-slave edition), Redis 3.2 cluster edition (CKV cluster edition), Redis 2.8 standalone edition, Redis 4.0 cluster edition
+	// Product type: Redis 2.8 cluster edition, Redis 2.8 main-subordinate edition, Redis 3.2 main-subordinate edition (CKV main-subordinate edition), Redis 3.2 cluster edition (CKV cluster edition), Redis 2.8 standalone edition, Redis 4.0 cluster edition
 	ProductType *string `json:"ProductType,omitempty" name:"ProductType"`
 
 	// VPC ID, such as vpc-fk33jsf43kgv
@@ -2189,8 +2189,8 @@ type InstanceSet struct {
 	// Isolation time
 	CloseTime *string `json:"CloseTime,omitempty" name:"CloseTime"`
 
-	// Read weight of a slave node
-	SlaveReadWeight *int64 `json:"SlaveReadWeight,omitempty" name:"SlaveReadWeight"`
+	// Read weight of a subordinate node
+	SubordinateReadWeight *int64 `json:"SubordinateReadWeight,omitempty" name:"SubordinateReadWeight"`
 
 	// Instance tag information
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2477,7 +2477,7 @@ type ModifyInstanceAccountRequest struct {
 	// Sub-account description information
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Sub-account routing policy. Enter `master` to route to the master node or `slave` to route to the slave node
+	// Sub-account routing policy. Enter `main` to route to the main node or `subordinate` to route to the subordinate node
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy" list`
 
 	// Sub-account read/write policy. Enter `r` for read-only, `w` for write-only, or `rw` for read/write
@@ -2702,10 +2702,10 @@ type Outbound struct {
 
 type ProductConf struct {
 
-	// Product type. 2: Redis master-slave edition; 3: CKV master-slave edition; 4: CKV cluster edition; 5: Redis standalone edition; 7: Redis cluster edition
+	// Product type. 2: Redis main-subordinate edition; 3: CKV main-subordinate edition; 4: CKV cluster edition; 5: Redis standalone edition; 7: Redis cluster edition
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
-	// Product name: Redis master-slave edition, CKV master-slave edition, CKV cluster edition, Redis standalone edition, or Redis cluster edition
+	// Product name: Redis main-subordinate edition, CKV main-subordinate edition, CKV cluster edition, Redis standalone edition, or Redis cluster edition
 	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
 
 	// Minimum purchasable quantity
@@ -3164,10 +3164,10 @@ type UpgradeInstanceRequest struct {
 	// Shard size in MB
 	MemSize *uint64 `json:"MemSize,omitempty" name:"MemSize"`
 
-	// Number of shards. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, and Redis 2.8 standalone edition
+	// Number of shards. This parameter can be left blank for Redis 2.8 main-subordinate edition, CKV main-subordinate edition, and Redis 2.8 standalone edition
 	RedisShardNum *uint64 `json:"RedisShardNum,omitempty" name:"RedisShardNum"`
 
-	// Number of replicas. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, and Redis 2.8 standalone edition
+	// Number of replicas. This parameter can be left blank for Redis 2.8 main-subordinate edition, CKV main-subordinate edition, and Redis 2.8 standalone edition
 	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitempty" name:"RedisReplicasNum"`
 }
 

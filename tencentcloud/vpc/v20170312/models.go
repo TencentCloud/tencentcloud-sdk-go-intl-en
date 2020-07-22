@@ -7904,7 +7904,7 @@ type ModifyVpcAttributeRequest struct {
 	// Whether multicast is enabled. `true`: Enabled. `false`: Off.
 	EnableMulticast *string `json:"EnableMulticast,omitempty" name:"EnableMulticast"`
 
-	// DNS address. A maximum of 4 addresses is supported. The first one is master server by default, and the rest are slave servers.
+	// DNS address. A maximum of 4 addresses is supported. The first one is main server by default, and the rest are subordinate servers.
 	DnsServers []*string `json:"DnsServers,omitempty" name:"DnsServers" list`
 
 	// Domain name

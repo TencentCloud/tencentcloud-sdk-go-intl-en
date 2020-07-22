@@ -235,14 +235,14 @@ func NewCreateDBInstanceHourResponse() (response *CreateDBInstanceHourResponse) 
     return
 }
 
-// This API is used to create a pay-as-you-go TencentDB instance (which can be a master, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, and quantity.
+// This API is used to create a pay-as-you-go TencentDB instance (which can be a main, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, and quantity.
 // 
 // This is an async API. You can also use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the instance details. If the `Status` value of an instance is 1 and `TaskStatus` is 0, the instance has been successfully delivered.
 // 
 // 1. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported instance specifications first and then use the [DescribeDBPrice](https://cloud.tencent.com/document/api/236/18566) API to query the prices of the supported instances;
 // 2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months;
 // 3. MySQL v5.5, v5.6, and v5.7 are supported;
-// 4. Master instances, read-only instances, and disaster recovery instances can be created;
+// 4. Main instances, read-only instances, and disaster recovery instances can be created;
 // 5. If `Port`, `ParamList`, or `Password` is set in the input parameters, the instance will be initialized.
 func (c *Client) CreateDBInstanceHour(request *CreateDBInstanceHourRequest) (response *CreateDBInstanceHourResponse, err error) {
     if request == nil {
@@ -872,7 +872,7 @@ func NewDescribeDBInstancesResponse() (response *DescribeDBInstancesResponse) {
     return
 }
 
-// This API (DescribeDBInstances) is used to query the list of TencentDB instances (which can be master, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, access address, and instance status.
+// This API (DescribeDBInstances) is used to query the list of TencentDB instances (which can be main, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, access address, and instance status.
 func (c *Client) DescribeDBInstances(request *DescribeDBInstancesRequest) (response *DescribeDBInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeDBInstancesRequest()
@@ -2084,7 +2084,7 @@ func NewRestartDBInstancesResponse() (response *RestartDBInstancesResponse) {
 // This API (RestartDBInstances) is used to restart TencentDB instances.
 // 
 // Note:
-// 1. This API only supports restarting master instances.
+// 1. This API only supports restarting main instances.
 // 2. The instance status must be normal, and no other async tasks are in progress.
 func (c *Client) RestartDBInstances(request *RestartDBInstancesRequest) (response *RestartDBInstancesResponse, err error) {
     if request == nil {
@@ -2160,7 +2160,7 @@ func NewSwitchForUpgradeResponse() (response *SwitchForUpgradeResponse) {
     return
 }
 
-// This API (SwitchForUpgrade) is used to switch to a new instance. You can initiate this process when the master instance being upgraded is pending switch.
+// This API (SwitchForUpgrade) is used to switch to a new instance. You can initiate this process when the main instance being upgraded is pending switch.
 func (c *Client) SwitchForUpgrade(request *SwitchForUpgradeRequest) (response *SwitchForUpgradeResponse, err error) {
     if request == nil {
         request = NewSwitchForUpgradeRequest()
@@ -2185,7 +2185,7 @@ func NewUpgradeDBInstanceResponse() (response *UpgradeDBInstanceResponse) {
     return
 }
 
-// This API is used to upgrade or downgrade a TencentDB instance, which can be a master instance, disaster recovery instance, or read-only instance.
+// This API is used to upgrade or downgrade a TencentDB instance, which can be a main instance, disaster recovery instance, or read-only instance.
 func (c *Client) UpgradeDBInstance(request *UpgradeDBInstanceRequest) (response *UpgradeDBInstanceResponse, err error) {
     if request == nil {
         request = NewUpgradeDBInstanceRequest()
@@ -2210,7 +2210,7 @@ func NewUpgradeDBInstanceEngineVersionResponse() (response *UpgradeDBInstanceEng
     return
 }
 
-// This API (UpgradeDBInstanceEngineVersion) is used to upgrade the version of a TencentDB instance, which can be a master instance, disaster recovery instance, or read-only instance.
+// This API (UpgradeDBInstanceEngineVersion) is used to upgrade the version of a TencentDB instance, which can be a main instance, disaster recovery instance, or read-only instance.
 func (c *Client) UpgradeDBInstanceEngineVersion(request *UpgradeDBInstanceEngineVersionRequest) (response *UpgradeDBInstanceEngineVersionResponse, err error) {
     if request == nil {
         request = NewUpgradeDBInstanceEngineVersionRequest()

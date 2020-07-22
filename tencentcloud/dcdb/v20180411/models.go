@@ -188,13 +188,13 @@ type CreateAccountRequest struct {
 	// Account password, which can contain 6–32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the slave will be used first, and if it is unavailable, the master will be used; 2: the slave will be used first, and if it is unavailable, the operation will fail; 3: only the slave will be read from.
+	// Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the subordinate will be used first, and if it is unavailable, the main will be used; 2: the subordinate will be used first, and if it is unavailable, the operation will fail; 3: only the subordinate will be read from.
 	ReadOnly *int64 `json:"ReadOnly,omitempty" name:"ReadOnly"`
 
 	// Account remarks, which can contain 0–256 letters, digits, and common symbols.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// If the slave delay exceeds the set value of this parameter, the slave will be deemed to have failed.
+	// If the subordinate delay exceeds the set value of this parameter, the subordinate will be deemed to have failed.
 	// It is recommended that this parameter be set to a value greater than 10. This parameter takes effect when `ReadOnly` is 1 or 2.
 	DelayThresh *int64 `json:"DelayThresh,omitempty" name:"DelayThresh"`
 }
@@ -255,10 +255,10 @@ type DBAccount struct {
 	// Last updated time
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// Read-only flag. 0: no; 1: for the account's SQL requests, the slave will be used first, and if it is unavailable, the master will be used; 2: the slave will be used first, and if it is unavailable, the operation will fail.
+	// Read-only flag. 0: no; 1: for the account's SQL requests, the subordinate will be used first, and if it is unavailable, the main will be used; 2: the subordinate will be used first, and if it is unavailable, the operation will fail.
 	ReadOnly *int64 `json:"ReadOnly,omitempty" name:"ReadOnly"`
 
-	// If the slave delay exceeds the set value of this parameter, the slave will be deemed to have failed.
+	// If the subordinate delay exceeds the set value of this parameter, the subordinate will be deemed to have failed.
 	// It is recommended that this parameter be set to a value greater than 10. This parameter takes effect when `ReadOnly` is 1 or 2.
 	DelayThresh *int64 `json:"DelayThresh,omitempty" name:"DelayThresh"`
 }
@@ -337,7 +337,7 @@ type DCDBInstanceInfo struct {
 	// Shard details
 	ShardDetail []*ShardInfo `json:"ShardDetail,omitempty" name:"ShardDetail" list`
 
-	// Number of nodes. 2: one master and one slave; 3: one master and two slaves
+	// Number of nodes. 2: one main and one subordinate; 3: one main and two subordinates
 	NodeCount *int64 `json:"NodeCount,omitempty" name:"NodeCount"`
 
 	// Temporary instance flag. 0: non-temporary instance
@@ -437,7 +437,7 @@ type DCDBShardInfo struct {
 	// Expiration time
 	PeriodEndTime *string `json:"PeriodEndTime,omitempty" name:"PeriodEndTime"`
 
-	// Number of nodes. 2: one master and one slave; 3: one master and two slaves
+	// Number of nodes. 2: one main and one subordinate; 3: one main and two subordinates
 	NodeCount *int64 `json:"NodeCount,omitempty" name:"NodeCount"`
 
 	// Storage utilization in %
@@ -459,13 +459,13 @@ type DCDBShardInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Paymode *string `json:"Paymode,omitempty" name:"Paymode"`
 
-	// Master AZ of a shard
+	// Main AZ of a shard
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ShardMasterZone *string `json:"ShardMasterZone,omitempty" name:"ShardMasterZone"`
+	ShardMainZone *string `json:"ShardMainZone,omitempty" name:"ShardMainZone"`
 
-	// List of slave AZs of a shard
+	// List of subordinate AZs of a shard
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ShardSlaveZones []*string `json:"ShardSlaveZones,omitempty" name:"ShardSlaveZones" list`
+	ShardSubordinateZones []*string `json:"ShardSubordinateZones,omitempty" name:"ShardSubordinateZones" list`
 
 	// Number of CPU cores
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
@@ -1571,7 +1571,7 @@ type ShardInfo struct {
 	// Numeric ID of a shard
 	ShardId *int64 `json:"ShardId,omitempty" name:"ShardId"`
 
-	// Number of nodes. 2: one master and one slave; 3: one master and two slaves
+	// Number of nodes. 2: one main and one subordinate; 3: one main and two subordinates
 	NodeCount *int64 `json:"NodeCount,omitempty" name:"NodeCount"`
 
 	// Product type ID (this field is obsolete and should not be depended on)

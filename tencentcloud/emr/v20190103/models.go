@@ -184,9 +184,9 @@ type ClusterInstancesInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Config *EmrProductConfigOutter `json:"Config,omitempty" name:"Config"`
 
-	// Public IP of master node
+	// Public IP of main node
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MasterIp *string `json:"MasterIp,omitempty" name:"MasterIp"`
+	MainIp *string `json:"MainIp,omitempty" name:"MainIp"`
 
 	// EMR version
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -313,10 +313,10 @@ type CreateInstanceRequest struct {
 	// Client token.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
-	// Whether to enable public IP access for master node. Valid values:
-	// <li>NEED_MASTER_WAN: enables public IP for master node.</li>
-	// <li>NOT_NEED_MASTER_WAN: does not enable.</li>Public IP is enabled for master node by default.
-	NeedMasterWan *string `json:"NeedMasterWan,omitempty" name:"NeedMasterWan"`
+	// Whether to enable public IP access for main node. Valid values:
+	// <li>NEED_MASTER_WAN: enables public IP for main node.</li>
+	// <li>NOT_NEED_MASTER_WAN: does not enable.</li>Public IP is enabled for main node by default.
+	NeedMainWan *string `json:"NeedMainWan,omitempty" name:"NeedMainWan"`
 
 	// Whether to enable remote public network login, i.e., port 22. When `SgId` is not empty, this parameter does not take effect.
 	RemoteLoginAtCreate *int64 `json:"RemoteLoginAtCreate,omitempty" name:"RemoteLoginAtCreate"`
@@ -396,7 +396,7 @@ type DescribeClusterNodesRequest struct {
 
 	// Node flag. Valid values:
 	// <li>all: gets the information of nodes in all types except TencentDB information.</li>
-	// <li>master: gets master node information.</li>
+	// <li>main: gets main node information.</li>
 	// <li>core: gets core node information.</li>
 	// <li>task: gets task node information.</li>
 	// <li>common: gets common node information.</li>
@@ -527,9 +527,9 @@ type EmrProductConfigOutter struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SoftInfo []*string `json:"SoftInfo,omitempty" name:"SoftInfo" list`
 
-	// Number of master nodes
+	// Number of main nodes
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MasterNodeSize *int64 `json:"MasterNodeSize,omitempty" name:"MasterNodeSize"`
+	MainNodeSize *int64 `json:"MainNodeSize,omitempty" name:"MainNodeSize"`
 
 	// Number of core nodes
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -543,9 +543,9 @@ type EmrProductConfigOutter struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ComNodeSize *int64 `json:"ComNodeSize,omitempty" name:"ComNodeSize"`
 
-	// Master node resource
+	// Main node resource
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MasterResource *OutterResource `json:"MasterResource,omitempty" name:"MasterResource"`
+	MainResource *OutterResource `json:"MainResource,omitempty" name:"MainResource"`
 
 	// Core node resource
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -942,8 +942,8 @@ type MultiDiskMC struct {
 
 type NewResourceSpec struct {
 
-	// Describes master node resource
-	MasterResourceSpec *Resource `json:"MasterResourceSpec,omitempty" name:"MasterResourceSpec"`
+	// Describes main node resource
+	MainResourceSpec *Resource `json:"MainResourceSpec,omitempty" name:"MainResourceSpec"`
 
 	// Describes core node resource
 	CoreResourceSpec *Resource `json:"CoreResourceSpec,omitempty" name:"CoreResourceSpec"`
@@ -951,8 +951,8 @@ type NewResourceSpec struct {
 	// Describes task node resource
 	TaskResourceSpec *Resource `json:"TaskResourceSpec,omitempty" name:"TaskResourceSpec"`
 
-	// Number of master nodes
-	MasterCount *int64 `json:"MasterCount,omitempty" name:"MasterCount"`
+	// Number of main nodes
+	MainCount *int64 `json:"MainCount,omitempty" name:"MainCount"`
 
 	// Number of core nodes
 	CoreCount *int64 `json:"CoreCount,omitempty" name:"CoreCount"`
@@ -981,7 +981,7 @@ type NodeHardwareInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OrderNo *string `json:"OrderNo,omitempty" name:"OrderNo"`
 
-	// Public IP bound to master node
+	// Public IP bound to main node
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WanIp *string `json:"WanIp,omitempty" name:"WanIp"`
 

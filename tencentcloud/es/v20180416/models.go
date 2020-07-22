@@ -85,20 +85,20 @@ type CreateInstanceRequest struct {
 	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Whether to create a dedicated master node <li>true: yes </li><li>false: no </li>Default value: false
-	EnableDedicatedMaster *bool `json:"EnableDedicatedMaster,omitempty" name:"EnableDedicatedMaster"`
+	// Whether to create a dedicated main node <li>true: yes </li><li>false: no </li>Default value: false
+	EnableDedicatedMain *bool `json:"EnableDedicatedMain,omitempty" name:"EnableDedicatedMain"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Number of dedicated master nodes (only 3 and 5 are supported. This value must be passed in if `EnableDedicatedMaster` is `true`)
-	MasterNodeNum *uint64 `json:"MasterNodeNum,omitempty" name:"MasterNodeNum"`
+	// Number of dedicated main nodes (only 3 and 5 are supported. This value must be passed in if `EnableDedicatedMain` is `true`)
+	MainNodeNum *uint64 `json:"MainNodeNum,omitempty" name:"MainNodeNum"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Dedicated master node type, which must be passed in if `EnableDedicatedMaster` is `true` <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
-	MasterNodeType *string `json:"MasterNodeType,omitempty" name:"MasterNodeType"`
+	// Dedicated main node type, which must be passed in if `EnableDedicatedMain` is `true` <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+	MainNodeType *string `json:"MainNodeType,omitempty" name:"MainNodeType"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Dedicated master node disk size in GB, which is optional. If passed in, it can only be 50 and cannot be customized currently
-	MasterNodeDiskSize *uint64 `json:"MasterNodeDiskSize,omitempty" name:"MasterNodeDiskSize"`
+	// Dedicated main node disk size in GB, which is optional. If passed in, it can only be 50 and cannot be customized currently
+	MainNodeDiskSize *uint64 `json:"MainNodeDiskSize,omitempty" name:"MainNodeDiskSize"`
 
 	// ClusterName in the cluster configuration file, which is the instance ID by default and currently cannot be customized
 	ClusterNameInConf *string `json:"ClusterNameInConf,omitempty" name:"ClusterNameInConf"`
@@ -193,7 +193,7 @@ type DescribeInstanceLogsRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Log type. Default value: 1
-	// <li>1: master log</li>
+	// <li>1: main log</li>
 	// <li>2: search slow log</li>
 	// <li>3: index slow log</li>
 	// <li>4: GC log</li>
@@ -500,8 +500,8 @@ type InstanceInfo struct {
 	// IK analyzer configuration
 	IkConfig *EsDictionaryInfo `json:"IkConfig,omitempty" name:"IkConfig"`
 
-	// Dedicated master node configuration
-	MasterNodeInfo *MasterNodeInfo `json:"MasterNodeInfo,omitempty" name:"MasterNodeInfo"`
+	// Dedicated main node configuration
+	MainNodeInfo *MainNodeInfo `json:"MainNodeInfo,omitempty" name:"MainNodeInfo"`
 
 	// Auto-backup to COS configuration
 	CosBackup *CosBackup `json:"CosBackup,omitempty" name:"CosBackup"`
@@ -619,28 +619,28 @@ type LocalDiskInfo struct {
 	LocalDiskCount *uint64 `json:"LocalDiskCount,omitempty" name:"LocalDiskCount"`
 }
 
-type MasterNodeInfo struct {
+type MainNodeInfo struct {
 
-	// Whether to enable the dedicated master node
-	EnableDedicatedMaster *bool `json:"EnableDedicatedMaster,omitempty" name:"EnableDedicatedMaster"`
+	// Whether to enable the dedicated main node
+	EnableDedicatedMain *bool `json:"EnableDedicatedMain,omitempty" name:"EnableDedicatedMain"`
 
-	// Dedicated master node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
-	MasterNodeType *string `json:"MasterNodeType,omitempty" name:"MasterNodeType"`
+	// Dedicated main node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+	MainNodeType *string `json:"MainNodeType,omitempty" name:"MainNodeType"`
 
-	// Number of dedicated master nodes
-	MasterNodeNum *uint64 `json:"MasterNodeNum,omitempty" name:"MasterNodeNum"`
+	// Number of dedicated main nodes
+	MainNodeNum *uint64 `json:"MainNodeNum,omitempty" name:"MainNodeNum"`
 
-	// Number of CPU cores of the dedicated master node
-	MasterNodeCpuNum *uint64 `json:"MasterNodeCpuNum,omitempty" name:"MasterNodeCpuNum"`
+	// Number of CPU cores of the dedicated main node
+	MainNodeCpuNum *uint64 `json:"MainNodeCpuNum,omitempty" name:"MainNodeCpuNum"`
 
-	// Memory size of the dedicated master node in GB
-	MasterNodeMemSize *uint64 `json:"MasterNodeMemSize,omitempty" name:"MasterNodeMemSize"`
+	// Memory size of the dedicated main node in GB
+	MainNodeMemSize *uint64 `json:"MainNodeMemSize,omitempty" name:"MainNodeMemSize"`
 
-	// Disk size of the dedicated master node in GB
-	MasterNodeDiskSize *uint64 `json:"MasterNodeDiskSize,omitempty" name:"MasterNodeDiskSize"`
+	// Disk size of the dedicated main node in GB
+	MainNodeDiskSize *uint64 `json:"MainNodeDiskSize,omitempty" name:"MainNodeDiskSize"`
 
-	// Disk type of the dedicated master node
-	MasterNodeDiskType *string `json:"MasterNodeDiskType,omitempty" name:"MasterNodeDiskType"`
+	// Disk type of the dedicated main node
+	MainNodeDiskType *string `json:"MainNodeDiskType,omitempty" name:"MainNodeDiskType"`
 }
 
 type NodeInfo struct {
@@ -653,7 +653,7 @@ type NodeInfo struct {
 
 	// Node type <li>hotData: hot data node</li>
 	// <li>warmData: warm data node</li>
-	// <li>dedicatedMaster: dedicated master node</li>
+	// <li>dedicatedMain: dedicated main node</li>
 	// Default value: hotData
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -823,16 +823,16 @@ type UpdateInstanceRequest struct {
 	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Number of dedicated master nodes (only 3 and 5 are supported)
-	MasterNodeNum *uint64 `json:"MasterNodeNum,omitempty" name:"MasterNodeNum"`
+	// Number of dedicated main nodes (only 3 and 5 are supported)
+	MainNodeNum *uint64 `json:"MainNodeNum,omitempty" name:"MainNodeNum"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Dedicated master node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
-	MasterNodeType *string `json:"MasterNodeType,omitempty" name:"MasterNodeType"`
+	// Dedicated main node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+	MainNodeType *string `json:"MainNodeType,omitempty" name:"MainNodeType"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Dedicated master node disk size in GB. This is 50 GB by default and currently cannot be customized
-	MasterNodeDiskSize *uint64 `json:"MasterNodeDiskSize,omitempty" name:"MasterNodeDiskSize"`
+	// Dedicated main node disk size in GB. This is 50 GB by default and currently cannot be customized
+	MainNodeDiskSize *uint64 `json:"MainNodeDiskSize,omitempty" name:"MainNodeDiskSize"`
 
 	// Whether to force restart during configuration update <li>true: Yes </li><li>false: No </li>This needs to be set only for EsConfig. Default value: false
 	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`

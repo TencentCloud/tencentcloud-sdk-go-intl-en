@@ -791,27 +791,27 @@ func (c *Client) StopMigrateJob(request *StopMigrateJobRequest) (response *StopM
     return
 }
 
-func NewSwitchDrToMasterRequest() (request *SwitchDrToMasterRequest) {
-    request = &SwitchDrToMasterRequest{
+func NewSwitchDrToMainRequest() (request *SwitchDrToMainRequest) {
+    request = &SwitchDrToMainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("dts", APIVersion, "SwitchDrToMaster")
+    request.Init().WithApiInfo("dts", APIVersion, "SwitchDrToMain")
     return
 }
 
-func NewSwitchDrToMasterResponse() (response *SwitchDrToMasterResponse) {
-    response = &SwitchDrToMasterResponse{
+func NewSwitchDrToMainResponse() (response *SwitchDrToMainResponse) {
+    response = &SwitchDrToMainResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// This API is used to promote a disaster recovery instance to a master instance, which will stop sync from the original master instance and end the master/slave relationship.
-func (c *Client) SwitchDrToMaster(request *SwitchDrToMasterRequest) (response *SwitchDrToMasterResponse, err error) {
+// This API is used to promote a disaster recovery instance to a main instance, which will stop sync from the original main instance and end the main/subordinate relationship.
+func (c *Client) SwitchDrToMain(request *SwitchDrToMainRequest) (response *SwitchDrToMainResponse, err error) {
     if request == nil {
-        request = NewSwitchDrToMasterRequest()
+        request = NewSwitchDrToMainRequest()
     }
-    response = NewSwitchDrToMasterResponse()
+    response = NewSwitchDrToMainResponse()
     err = c.Send(request, response)
     return
 }

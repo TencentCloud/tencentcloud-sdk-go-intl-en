@@ -134,7 +134,7 @@ func NewModifyAppStatusResponse() (response *ModifyAppStatusResponse) {
     return
 }
 
-// This API is used to change the status of an application's master switch.
+// This API is used to change the status of an application's main switch.
 func (c *Client) ModifyAppStatus(request *ModifyAppStatusRequest) (response *ModifyAppStatusResponse, err error) {
     if request == nil {
         request = NewModifyAppStatusRequest()
