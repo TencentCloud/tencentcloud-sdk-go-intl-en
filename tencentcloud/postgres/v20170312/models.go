@@ -93,7 +93,7 @@ type CreateDBInstancesRequest struct {
 	// Instance capacity size in GB.
 	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
 
-	// Number of instances purchased at a time. Value range: 1–100.
+	// Number of instances purchased at a time. Value range: 1-100.
 	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
 
 	// Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
@@ -313,7 +313,7 @@ type DescribeAccountsRequest struct {
 	// Instance ID in the format of postgres-6fego161
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
-	// Number of entries returned per page. Default value: 20. Value range: 1–100.
+	// Number of entries returned per page. Default value: 20. Value range: 1-100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number for data return in paged query. Pagination starts from 0
@@ -432,7 +432,7 @@ type DescribeDBErrlogsRequest struct {
 	// Search keyword
 	SearchKeys []*string `json:"SearchKeys,omitempty" name:"SearchKeys" list`
 
-	// Number of entries returned per page. Value range: 1–100
+	// Number of entries returned per page. Value range: 1-100
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number for data return in paged query. Pagination starts from 0
@@ -582,7 +582,7 @@ type DescribeDBSlowlogsRequest struct {
 	// Sorting order. desc: descending, asc: ascending
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 
-	// Number of entries returned per page. Value range: 1–100. Default value: 20.
+	// Number of entries returned per page. Value range: 1-100. Default value: 20.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number for data return in paged query. Pagination starts from 0
@@ -637,7 +637,7 @@ type DescribeDBXlogsRequest struct {
 	// Page number for data return in paged query. Pagination starts from 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of entries returned per page in paged query. Value range: 1–100.
+	// Number of entries returned per page in paged query. Value range: 1-100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -1648,6 +1648,9 @@ type Xlog struct {
 
 	// Download address on public network
 	ExternalAddr *string `json:"ExternalAddr,omitempty" name:"ExternalAddr"`
+
+	// 
+	Size *int64 `json:"Size,omitempty" name:"Size"`
 }
 
 type ZoneInfo struct {
@@ -1664,6 +1667,6 @@ type ZoneInfo struct {
 	// Availability status. UNAVAILABLE: unavailable, AVAILABLE: available
 	ZoneState *string `json:"ZoneState,omitempty" name:"ZoneState"`
 
-	// Whether the availability zone supports IPv6 address access
+	// Whether the AZ supports IPv6 address access
 	ZoneSupportIpv6 *uint64 `json:"ZoneSupportIpv6,omitempty" name:"ZoneSupportIpv6"`
 }

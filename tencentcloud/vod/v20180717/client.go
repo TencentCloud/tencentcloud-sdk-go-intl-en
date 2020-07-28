@@ -175,6 +175,56 @@ func (c *Client) CreateAIAnalysisTemplate(request *CreateAIAnalysisTemplateReque
     return
 }
 
+func NewCreateAIRecognitionTemplateRequest() (request *CreateAIRecognitionTemplateRequest) {
+    request = &CreateAIRecognitionTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAIRecognitionTemplate")
+    return
+}
+
+func NewCreateAIRecognitionTemplateResponse() (response *CreateAIRecognitionTemplateResponse) {
+    response = &CreateAIRecognitionTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a custom video content recognition template. Up to 50 templates can be created.
+func (c *Client) CreateAIRecognitionTemplate(request *CreateAIRecognitionTemplateRequest) (response *CreateAIRecognitionTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateAIRecognitionTemplateRequest()
+    }
+    response = NewCreateAIRecognitionTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAdaptiveDynamicStreamingTemplateRequest() (request *CreateAdaptiveDynamicStreamingTemplateRequest) {
+    request = &CreateAdaptiveDynamicStreamingTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "CreateAdaptiveDynamicStreamingTemplate")
+    return
+}
+
+func NewCreateAdaptiveDynamicStreamingTemplateResponse() (response *CreateAdaptiveDynamicStreamingTemplateResponse) {
+    response = &CreateAdaptiveDynamicStreamingTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create an adaptive bitrate streaming template. Up to 100 templates can be created.
+func (c *Client) CreateAdaptiveDynamicStreamingTemplate(request *CreateAdaptiveDynamicStreamingTemplateRequest) (response *CreateAdaptiveDynamicStreamingTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateAdaptiveDynamicStreamingTemplateRequest()
+    }
+    response = NewCreateAdaptiveDynamicStreamingTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAnimatedGraphicsTemplateRequest() (request *CreateAnimatedGraphicsTemplateRequest) {
     request = &CreateAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -228,6 +278,31 @@ func (c *Client) CreateClass(request *CreateClassRequest) (response *CreateClass
     return
 }
 
+func NewCreateContentReviewTemplateRequest() (request *CreateContentReviewTemplateRequest) {
+    request = &CreateContentReviewTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "CreateContentReviewTemplate")
+    return
+}
+
+func NewCreateContentReviewTemplateResponse() (response *CreateContentReviewTemplateResponse) {
+    response = &CreateContentReviewTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a custom video content audit template. Up to 50 templates can be created.
+func (c *Client) CreateContentReviewTemplate(request *CreateContentReviewTemplateRequest) (response *CreateContentReviewTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateContentReviewTemplateRequest()
+    }
+    response = NewCreateContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateImageSpriteTemplateRequest() (request *CreateImageSpriteTemplateRequest) {
     request = &CreateImageSpriteTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -249,6 +324,31 @@ func (c *Client) CreateImageSpriteTemplate(request *CreateImageSpriteTemplateReq
         request = NewCreateImageSpriteTemplateRequest()
     }
     response = NewCreateImageSpriteTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreatePersonSampleRequest() (request *CreatePersonSampleRequest) {
+    request = &CreatePersonSampleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "CreatePersonSample")
+    return
+}
+
+func NewCreatePersonSampleResponse() (response *CreatePersonSampleResponse) {
+    response = &CreatePersonSampleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a figure sample for video processing operations such as content recognition and audit using the face recognition technology.
+func (c *Client) CreatePersonSample(request *CreatePersonSampleRequest) (response *CreatePersonSampleResponse, err error) {
+    if request == nil {
+        request = NewCreatePersonSampleRequest()
+    }
+    response = NewCreatePersonSampleResponse()
     err = c.Send(request, response)
     return
 }
@@ -328,6 +428,56 @@ func (c *Client) CreateSnapshotByTimeOffsetTemplate(request *CreateSnapshotByTim
     return
 }
 
+func NewCreateSubAppIdRequest() (request *CreateSubAppIdRequest) {
+    request = &CreateSubAppIdRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "CreateSubAppId")
+    return
+}
+
+func NewCreateSubAppIdResponse() (response *CreateSubAppIdResponse) {
+    response = &CreateSubAppIdResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a VOD subapplication.
+func (c *Client) CreateSubAppId(request *CreateSubAppIdRequest) (response *CreateSubAppIdResponse, err error) {
+    if request == nil {
+        request = NewCreateSubAppIdRequest()
+    }
+    response = NewCreateSubAppIdResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSuperPlayerConfigRequest() (request *CreateSuperPlayerConfigRequest) {
+    request = &CreateSuperPlayerConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "CreateSuperPlayerConfig")
+    return
+}
+
+func NewCreateSuperPlayerConfigResponse() (response *CreateSuperPlayerConfigResponse) {
+    response = &CreateSuperPlayerConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a superplayer configuration. Up to 100 configurations can be created.
+func (c *Client) CreateSuperPlayerConfig(request *CreateSuperPlayerConfigRequest) (response *CreateSuperPlayerConfigResponse, err error) {
+    if request == nil {
+        request = NewCreateSuperPlayerConfigRequest()
+    }
+    response = NewCreateSuperPlayerConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateTranscodeTemplateRequest() (request *CreateTranscodeTemplateRequest) {
     request = &CreateTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -374,6 +524,31 @@ func (c *Client) CreateWatermarkTemplate(request *CreateWatermarkTemplateRequest
         request = NewCreateWatermarkTemplateRequest()
     }
     response = NewCreateWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateWordSamplesRequest() (request *CreateWordSamplesRequest) {
+    request = &CreateWordSamplesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "CreateWordSamples")
+    return
+}
+
+func NewCreateWordSamplesResponse() (response *CreateWordSamplesResponse) {
+    response = &CreateWordSamplesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create keyword samples in batches for video processing operations such as content recognition and audit by using the OCR and ASR technologies.
+func (c *Client) CreateWordSamples(request *CreateWordSamplesRequest) (response *CreateWordSamplesResponse, err error) {
+    if request == nil {
+        request = NewCreateWordSamplesRequest()
+    }
+    response = NewCreateWordSamplesResponse()
     err = c.Send(request, response)
     return
 }
@@ -430,6 +605,31 @@ func (c *Client) DeleteAIRecognitionTemplate(request *DeleteAIRecognitionTemplat
     return
 }
 
+func NewDeleteAdaptiveDynamicStreamingTemplateRequest() (request *DeleteAdaptiveDynamicStreamingTemplateRequest) {
+    request = &DeleteAdaptiveDynamicStreamingTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteAdaptiveDynamicStreamingTemplate")
+    return
+}
+
+func NewDeleteAdaptiveDynamicStreamingTemplateResponse() (response *DeleteAdaptiveDynamicStreamingTemplateResponse) {
+    response = &DeleteAdaptiveDynamicStreamingTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete an adaptive bitrate streaming template.
+func (c *Client) DeleteAdaptiveDynamicStreamingTemplate(request *DeleteAdaptiveDynamicStreamingTemplateRequest) (response *DeleteAdaptiveDynamicStreamingTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteAdaptiveDynamicStreamingTemplateRequest()
+    }
+    response = NewDeleteAdaptiveDynamicStreamingTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAnimatedGraphicsTemplateRequest() (request *DeleteAnimatedGraphicsTemplateRequest) {
     request = &DeleteAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -455,6 +655,57 @@ func (c *Client) DeleteAnimatedGraphicsTemplate(request *DeleteAnimatedGraphicsT
     return
 }
 
+func NewDeleteClassRequest() (request *DeleteClassRequest) {
+    request = &DeleteClassRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteClass")
+    return
+}
+
+func NewDeleteClassResponse() (response *DeleteClassResponse) {
+    response = &DeleteClassResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// * A category can be deleted only if it has no subcategories and associated media files;
+// * Otherwise, [delete the media files](/document/product/266/31764) and subcategories first before deleting the category.
+func (c *Client) DeleteClass(request *DeleteClassRequest) (response *DeleteClassResponse, err error) {
+    if request == nil {
+        request = NewDeleteClassRequest()
+    }
+    response = NewDeleteClassResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteContentReviewTemplateRequest() (request *DeleteContentReviewTemplateRequest) {
+    request = &DeleteContentReviewTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteContentReviewTemplate")
+    return
+}
+
+func NewDeleteContentReviewTemplateResponse() (response *DeleteContentReviewTemplateResponse) {
+    response = &DeleteContentReviewTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a custom video content audit template.
+func (c *Client) DeleteContentReviewTemplate(request *DeleteContentReviewTemplateRequest) (response *DeleteContentReviewTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteContentReviewTemplateRequest()
+    }
+    response = NewDeleteContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteImageSpriteTemplateRequest() (request *DeleteImageSpriteTemplateRequest) {
     request = &DeleteImageSpriteTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -476,6 +727,57 @@ func (c *Client) DeleteImageSpriteTemplate(request *DeleteImageSpriteTemplateReq
         request = NewDeleteImageSpriteTemplateRequest()
     }
     response = NewDeleteImageSpriteTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteMediaRequest() (request *DeleteMediaRequest) {
+    request = &DeleteMediaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteMedia")
+    return
+}
+
+func NewDeleteMediaResponse() (response *DeleteMediaResponse) {
+    response = &DeleteMediaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// * This API is used to delete a media file and its corresponding files generated by video processing (such as transcoded videos, image sprites, screenshots, and videos published on WeChat);
+// * The transcoded video files or video files published on WeChat can be deleted separately for a specified video ID.
+func (c *Client) DeleteMedia(request *DeleteMediaRequest) (response *DeleteMediaResponse, err error) {
+    if request == nil {
+        request = NewDeleteMediaRequest()
+    }
+    response = NewDeleteMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeletePersonSampleRequest() (request *DeletePersonSampleRequest) {
+    request = &DeletePersonSampleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DeletePersonSample")
+    return
+}
+
+func NewDeletePersonSampleResponse() (response *DeletePersonSampleResponse) {
+    response = &DeletePersonSampleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a figure sample based on figure ID.
+func (c *Client) DeletePersonSample(request *DeletePersonSampleRequest) (response *DeletePersonSampleResponse, err error) {
+    if request == nil {
+        request = NewDeletePersonSampleRequest()
+    }
+    response = NewDeletePersonSampleResponse()
     err = c.Send(request, response)
     return
 }
@@ -555,6 +857,57 @@ func (c *Client) DeleteSnapshotByTimeOffsetTemplate(request *DeleteSnapshotByTim
     return
 }
 
+func NewDeleteSuperPlayerConfigRequest() (request *DeleteSuperPlayerConfigRequest) {
+    request = &DeleteSuperPlayerConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteSuperPlayerConfig")
+    return
+}
+
+func NewDeleteSuperPlayerConfigResponse() (response *DeleteSuperPlayerConfigResponse) {
+    response = &DeleteSuperPlayerConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a superplayer configuration.  
+// *Note: preset player configurations cannot be deleted.*
+func (c *Client) DeleteSuperPlayerConfig(request *DeleteSuperPlayerConfigRequest) (response *DeleteSuperPlayerConfigResponse, err error) {
+    if request == nil {
+        request = NewDeleteSuperPlayerConfigRequest()
+    }
+    response = NewDeleteSuperPlayerConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteTranscodeTemplateRequest() (request *DeleteTranscodeTemplateRequest) {
+    request = &DeleteTranscodeTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteTranscodeTemplate")
+    return
+}
+
+func NewDeleteTranscodeTemplateResponse() (response *DeleteTranscodeTemplateResponse) {
+    response = &DeleteTranscodeTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a custom transcoding template.
+func (c *Client) DeleteTranscodeTemplate(request *DeleteTranscodeTemplateRequest) (response *DeleteTranscodeTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteTranscodeTemplateRequest()
+    }
+    response = NewDeleteTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteWatermarkTemplateRequest() (request *DeleteWatermarkTemplateRequest) {
     request = &DeleteWatermarkTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -576,6 +929,31 @@ func (c *Client) DeleteWatermarkTemplate(request *DeleteWatermarkTemplateRequest
         request = NewDeleteWatermarkTemplateRequest()
     }
     response = NewDeleteWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteWordSamplesRequest() (request *DeleteWordSamplesRequest) {
+    request = &DeleteWordSamplesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteWordSamples")
+    return
+}
+
+func NewDeleteWordSamplesResponse() (response *DeleteWordSamplesResponse) {
+    response = &DeleteWordSamplesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete keyword samples in batches.
+func (c *Client) DeleteWordSamples(request *DeleteWordSamplesRequest) (response *DeleteWordSamplesResponse, err error) {
+    if request == nil {
+        request = NewDeleteWordSamplesRequest()
+    }
+    response = NewDeleteWordSamplesResponse()
     err = c.Send(request, response)
     return
 }
@@ -655,6 +1033,31 @@ func (c *Client) DescribeAdaptiveDynamicStreamingTemplates(request *DescribeAdap
     return
 }
 
+func NewDescribeAllClassRequest() (request *DescribeAllClassRequest) {
+    request = &DescribeAllClassRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeAllClass")
+    return
+}
+
+func NewDescribeAllClassResponse() (response *DescribeAllClassResponse) {
+    response = &DescribeAllClassResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// * This API is used to get the information of all categories.
+func (c *Client) DescribeAllClass(request *DescribeAllClassRequest) (response *DescribeAllClassResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllClassRequest()
+    }
+    response = NewDescribeAllClassResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAnimatedGraphicsTemplatesRequest() (request *DescribeAnimatedGraphicsTemplatesRequest) {
     request = &DescribeAnimatedGraphicsTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -676,31 +1079,6 @@ func (c *Client) DescribeAnimatedGraphicsTemplates(request *DescribeAnimatedGrap
         request = NewDescribeAnimatedGraphicsTemplatesRequest()
     }
     response = NewDescribeAnimatedGraphicsTemplatesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAudioTrackTemplatesRequest() (request *DescribeAudioTrackTemplatesRequest) {
-    request = &DescribeAudioTrackTemplatesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vod", APIVersion, "DescribeAudioTrackTemplates")
-    return
-}
-
-func NewDescribeAudioTrackTemplatesResponse() (response *DescribeAudioTrackTemplatesResponse) {
-    response = &DescribeAudioTrackTemplatesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// This API is used to query the list of transcoding to adaptive bitrate streaming audio track templates and supports paged queries by filters.
-func (c *Client) DescribeAudioTrackTemplates(request *DescribeAudioTrackTemplatesRequest) (response *DescribeAudioTrackTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAudioTrackTemplatesRequest()
-    }
-    response = NewDescribeAudioTrackTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -842,6 +1220,31 @@ func (c *Client) DescribeMediaProcessUsageData(request *DescribeMediaProcessUsag
         request = NewDescribeMediaProcessUsageDataRequest()
     }
     response = NewDescribeMediaProcessUsageDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePersonSamplesRequest() (request *DescribePersonSamplesRequest) {
+    request = &DescribePersonSamplesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribePersonSamples")
+    return
+}
+
+func NewDescribePersonSamplesResponse() (response *DescribePersonSamplesResponse) {
+    response = &DescribePersonSamplesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the information of figure samples and supports paginated queries by figure ID, name, and tag.
+func (c *Client) DescribePersonSamples(request *DescribePersonSamplesRequest) (response *DescribePersonSamplesResponse, err error) {
+    if request == nil {
+        request = NewDescribePersonSamplesRequest()
+    }
+    response = NewDescribePersonSamplesResponse()
     err = c.Send(request, response)
     return
 }
@@ -1029,6 +1432,31 @@ func (c *Client) DescribeSubAppIds(request *DescribeSubAppIdsRequest) (response 
     return
 }
 
+func NewDescribeSuperPlayerConfigsRequest() (request *DescribeSuperPlayerConfigsRequest) {
+    request = &DescribeSuperPlayerConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeSuperPlayerConfigs")
+    return
+}
+
+func NewDescribeSuperPlayerConfigsResponse() (response *DescribeSuperPlayerConfigsResponse) {
+    response = &DescribeSuperPlayerConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of superplayer configurations and supports paginated queries by filters.
+func (c *Client) DescribeSuperPlayerConfigs(request *DescribeSuperPlayerConfigsRequest) (response *DescribeSuperPlayerConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSuperPlayerConfigsRequest()
+    }
+    response = NewDescribeSuperPlayerConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTaskDetailRequest() (request *DescribeTaskDetailRequest) {
     request = &DescribeTaskDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1050,6 +1478,33 @@ func (c *Client) DescribeTaskDetail(request *DescribeTaskDetailRequest) (respons
         request = NewDescribeTaskDetailRequest()
     }
     response = NewDescribeTaskDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
+    request = &DescribeTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeTasks")
+    return
+}
+
+func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
+    response = &DescribeTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// * This API is used to query the task list;
+// * If there are many data entries in the list, one single call of the API may not be able to pull the entire list. The `ScrollToken` parameter can be used to pull the list in batches;
+// * Only tasks in the last three days (72 hours) can be queried.
+func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *DescribeTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeTasksRequest()
+    }
+    response = NewDescribeTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -1079,31 +1534,6 @@ func (c *Client) DescribeTranscodeTemplates(request *DescribeTranscodeTemplatesR
     return
 }
 
-func NewDescribeVideoTrackTemplatesRequest() (request *DescribeVideoTrackTemplatesRequest) {
-    request = &DescribeVideoTrackTemplatesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vod", APIVersion, "DescribeVideoTrackTemplates")
-    return
-}
-
-func NewDescribeVideoTrackTemplatesResponse() (response *DescribeVideoTrackTemplatesResponse) {
-    response = &DescribeVideoTrackTemplatesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// This API is used to query the list of transcoding to adaptive bitrate streaming video track templates and supports paged queries by filters.
-func (c *Client) DescribeVideoTrackTemplates(request *DescribeVideoTrackTemplatesRequest) (response *DescribeVideoTrackTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeVideoTrackTemplatesRequest()
-    }
-    response = NewDescribeVideoTrackTemplatesResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeWatermarkTemplatesRequest() (request *DescribeWatermarkTemplatesRequest) {
     request = &DescribeWatermarkTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1125,6 +1555,31 @@ func (c *Client) DescribeWatermarkTemplates(request *DescribeWatermarkTemplatesR
         request = NewDescribeWatermarkTemplatesRequest()
     }
     response = NewDescribeWatermarkTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeWordSamplesRequest() (request *DescribeWordSamplesRequest) {
+    request = &DescribeWordSamplesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeWordSamples")
+    return
+}
+
+func NewDescribeWordSamplesResponse() (response *DescribeWordSamplesResponse) {
+    response = &DescribeWordSamplesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to perform paginated queries of keyword sample information by use case, keyword, and tag.
+func (c *Client) DescribeWordSamples(request *DescribeWordSamplesRequest) (response *DescribeWordSamplesResponse, err error) {
+    if request == nil {
+        request = NewDescribeWordSamplesRequest()
+    }
+    response = NewDescribeWordSamplesResponse()
     err = c.Send(request, response)
     return
 }
@@ -1205,7 +1660,7 @@ func NewForbidMediaDistributionResponse() (response *ForbidMediaDistributionResp
 }
 
 // * After a media file is forbidden, except previewing it in the VOD Console, accessing the URLs of its various resources (such as source file, output files, and screenshots) in other scenarios will return error 403.
-//   It takes about 5–10 minutes for a forbidding/unblocking operation to take effect across the entire network.
+//   It takes about 5-10 minutes for a forbidding/unblocking operation to take effect across the entire network.
 func (c *Client) ForbidMediaDistribution(request *ForbidMediaDistributionRequest) (response *ForbidMediaDistributionResponse, err error) {
     if request == nil {
         request = NewForbidMediaDistributionRequest()
@@ -1290,6 +1745,56 @@ func (c *Client) ModifyAIAnalysisTemplate(request *ModifyAIAnalysisTemplateReque
     return
 }
 
+func NewModifyAIRecognitionTemplateRequest() (request *ModifyAIRecognitionTemplateRequest) {
+    request = &ModifyAIRecognitionTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyAIRecognitionTemplate")
+    return
+}
+
+func NewModifyAIRecognitionTemplateResponse() (response *ModifyAIRecognitionTemplateResponse) {
+    response = &ModifyAIRecognitionTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a custom video content recognition template.
+func (c *Client) ModifyAIRecognitionTemplate(request *ModifyAIRecognitionTemplateRequest) (response *ModifyAIRecognitionTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyAIRecognitionTemplateRequest()
+    }
+    response = NewModifyAIRecognitionTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAdaptiveDynamicStreamingTemplateRequest() (request *ModifyAdaptiveDynamicStreamingTemplateRequest) {
+    request = &ModifyAdaptiveDynamicStreamingTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyAdaptiveDynamicStreamingTemplate")
+    return
+}
+
+func NewModifyAdaptiveDynamicStreamingTemplateResponse() (response *ModifyAdaptiveDynamicStreamingTemplateResponse) {
+    response = &ModifyAdaptiveDynamicStreamingTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify an adaptive bitrate streaming template.
+func (c *Client) ModifyAdaptiveDynamicStreamingTemplate(request *ModifyAdaptiveDynamicStreamingTemplateRequest) (response *ModifyAdaptiveDynamicStreamingTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyAdaptiveDynamicStreamingTemplateRequest()
+    }
+    response = NewModifyAdaptiveDynamicStreamingTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAnimatedGraphicsTemplateRequest() (request *ModifyAnimatedGraphicsTemplateRequest) {
     request = &ModifyAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1315,6 +1820,56 @@ func (c *Client) ModifyAnimatedGraphicsTemplate(request *ModifyAnimatedGraphicsT
     return
 }
 
+func NewModifyClassRequest() (request *ModifyClassRequest) {
+    request = &ModifyClassRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyClass")
+    return
+}
+
+func NewModifyClassResponse() (response *ModifyClassResponse) {
+    response = &ModifyClassResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the category of a media file.
+func (c *Client) ModifyClass(request *ModifyClassRequest) (response *ModifyClassResponse, err error) {
+    if request == nil {
+        request = NewModifyClassRequest()
+    }
+    response = NewModifyClassResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyContentReviewTemplateRequest() (request *ModifyContentReviewTemplateRequest) {
+    request = &ModifyContentReviewTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyContentReviewTemplate")
+    return
+}
+
+func NewModifyContentReviewTemplateResponse() (response *ModifyContentReviewTemplateResponse) {
+    response = &ModifyContentReviewTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a custom video content audit template.
+func (c *Client) ModifyContentReviewTemplate(request *ModifyContentReviewTemplateRequest) (response *ModifyContentReviewTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyContentReviewTemplateRequest()
+    }
+    response = NewModifyContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyImageSpriteTemplateRequest() (request *ModifyImageSpriteTemplateRequest) {
     request = &ModifyImageSpriteTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1336,6 +1891,56 @@ func (c *Client) ModifyImageSpriteTemplate(request *ModifyImageSpriteTemplateReq
         request = NewModifyImageSpriteTemplateRequest()
     }
     response = NewModifyImageSpriteTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMediaInfoRequest() (request *ModifyMediaInfoRequest) {
+    request = &ModifyMediaInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyMediaInfo")
+    return
+}
+
+func NewModifyMediaInfoResponse() (response *ModifyMediaInfoResponse) {
+    response = &ModifyMediaInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the attributes of a media file, including category, name, description, tag, expiration time, timestamp information, and video cover.
+func (c *Client) ModifyMediaInfo(request *ModifyMediaInfoRequest) (response *ModifyMediaInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyMediaInfoRequest()
+    }
+    response = NewModifyMediaInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyPersonSampleRequest() (request *ModifyPersonSampleRequest) {
+    request = &ModifyPersonSampleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyPersonSample")
+    return
+}
+
+func NewModifyPersonSampleResponse() (response *ModifyPersonSampleResponse) {
+    response = &ModifyPersonSampleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify figure sample information based on figure ID, such as modifying the name and description and adding/deleting/resetting a face or tag. There should be at least one image left after the face deletion operation; otherwise, please use the reset operation.
+func (c *Client) ModifyPersonSample(request *ModifyPersonSampleRequest) (response *ModifyPersonSampleResponse, err error) {
+    if request == nil {
+        request = NewModifyPersonSampleRequest()
+    }
+    response = NewModifyPersonSampleResponse()
     err = c.Send(request, response)
     return
 }
@@ -1440,6 +2045,31 @@ func (c *Client) ModifySubAppIdStatus(request *ModifySubAppIdStatusRequest) (res
     return
 }
 
+func NewModifySuperPlayerConfigRequest() (request *ModifySuperPlayerConfigRequest) {
+    request = &ModifySuperPlayerConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ModifySuperPlayerConfig")
+    return
+}
+
+func NewModifySuperPlayerConfigResponse() (response *ModifySuperPlayerConfigResponse) {
+    response = &ModifySuperPlayerConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a superplayer configuration.
+func (c *Client) ModifySuperPlayerConfig(request *ModifySuperPlayerConfigRequest) (response *ModifySuperPlayerConfigResponse, err error) {
+    if request == nil {
+        request = NewModifySuperPlayerConfigRequest()
+    }
+    response = NewModifySuperPlayerConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyTranscodeTemplateRequest() (request *ModifyTranscodeTemplateRequest) {
     request = &ModifyTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1486,6 +2116,56 @@ func (c *Client) ModifyWatermarkTemplate(request *ModifyWatermarkTemplateRequest
         request = NewModifyWatermarkTemplateRequest()
     }
     response = NewModifyWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyWordSampleRequest() (request *ModifyWordSampleRequest) {
+    request = &ModifyWordSampleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyWordSample")
+    return
+}
+
+func NewModifyWordSampleResponse() (response *ModifyWordSampleResponse) {
+    response = &ModifyWordSampleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the use case and tag of a keyword. The keyword itself cannot be modified, but you can delete it and create another one if needed.
+func (c *Client) ModifyWordSample(request *ModifyWordSampleRequest) (response *ModifyWordSampleResponse, err error) {
+    if request == nil {
+        request = NewModifyWordSampleRequest()
+    }
+    response = NewModifyWordSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewParseStreamingManifestRequest() (request *ParseStreamingManifestRequest) {
+    request = &ParseStreamingManifestRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ParseStreamingManifest")
+    return
+}
+
+func NewParseStreamingManifestResponse() (response *ParseStreamingManifestResponse) {
+    response = &ParseStreamingManifestResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to parse the index file content and return the list of segment files to be uploaded when an HLS video is uploaded. A segment file path must be a relative path of the current directory or subdirectory instead of a URL or absolute path.
+func (c *Client) ParseStreamingManifest(request *ParseStreamingManifestRequest) (response *ParseStreamingManifestResponse, err error) {
+    if request == nil {
+        request = NewParseStreamingManifestRequest()
+    }
+    response = NewParseStreamingManifestResponse()
     err = c.Send(request, response)
     return
 }
@@ -1573,6 +2253,8 @@ func NewProcessMediaByUrlResponse() (response *ProcessMediaByUrlResponse) {
 // 1. Intelligent content audit (detection of porn, terrorism, and politically sensitive information);
 // 2. Intelligent content analysis (tag, category, cover, and frame-specific tag);
 // 3. Intelligent content recognition (opening and closing credits, face, full text, text keyword, full speech, speech keyword, and object).
+// 
+// If the event notification is used, its type is [Task Flow Status Change](https://cloud.tencent.com/document/product/266/9636).
 func (c *Client) ProcessMediaByUrl(request *ProcessMediaByUrlRequest) (response *ProcessMediaByUrlResponse, err error) {
     if request == nil {
         request = NewProcessMediaByUrlRequest()

@@ -111,17 +111,17 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// List of up to 10 image or text watermarks.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
 
-	// Target bucket of an output file after transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+	// Target bucket of an output file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// The relative or absolute output path of the manifest file after transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
+	// The relative or absolute output path of the manifest file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
 	OutputObjectPath *string `json:"OutputObjectPath,omitempty" name:"OutputObjectPath"`
 
-	// The relative output path of the substream file after transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+	// The relative output path of the substream file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
 	SubStreamObjectName *string `json:"SubStreamObjectName,omitempty" name:"SubStreamObjectName"`
 
-	// The relative output path of the segment file after transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+	// The relative output path of the segment file after being transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
 	SegmentObjectName *string `json:"SegmentObjectName,omitempty" name:"SegmentObjectName"`
 }
 
@@ -378,6 +378,15 @@ type AiContentReviewResult struct {
 	// Query result of an OCR-based politically sensitive information detection in text task in video content audit, which is valid when task type is `Political.Ocr`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PoliticalOcrTask *AiReviewTaskPoliticalOcrResult `json:"PoliticalOcrTask,omitempty" name:"PoliticalOcrTask"`
+
+	// 
+	TerrorismOcrTask *AiReviewTaskTerrorismOcrResult `json:"TerrorismOcrTask,omitempty" name:"TerrorismOcrTask"`
+
+	// 
+	ProhibitedAsrTask *AiReviewTaskProhibitedAsrResult `json:"ProhibitedAsrTask,omitempty" name:"ProhibitedAsrTask"`
+
+	// 
+	ProhibitedOcrTask *AiReviewTaskProhibitedOcrResult `json:"ProhibitedOcrTask,omitempty" name:"ProhibitedOcrTask"`
 }
 
 type AiContentReviewTaskInput struct {
@@ -463,7 +472,7 @@ type AiRecognitionTaskAsrFullTextResultOutput struct {
 
 type AiRecognitionTaskAsrFullTextSegmentItem struct {
 
-	// Confidence of a recognition segment. Value range: 0–100.
+	// Confidence of a recognition segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Start time offset of a recognition segment in seconds.
@@ -524,7 +533,7 @@ type AiRecognitionTaskAsrWordsSegmentItem struct {
 	// End time offset of a recognition segment in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
-	// Confidence of a recognition segment. Value range: 0–100.
+	// Confidence of a recognition segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 }
 
@@ -584,7 +593,7 @@ type AiRecognitionTaskFaceSegmentItem struct {
 	// End time offset of a recognition segment in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
-	// Confidence of a recognition segment. Value range: 0–100.
+	// Confidence of a recognition segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
@@ -642,7 +651,7 @@ type AiRecognitionTaskOcrFullTextSegmentItem struct {
 
 type AiRecognitionTaskOcrFullTextSegmentTextItem struct {
 
-	// Confidence of a recognition segment. Value range: 0–100.
+	// Confidence of a recognition segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
@@ -700,7 +709,7 @@ type AiRecognitionTaskOcrWordsSegmentItem struct {
 	// End time offset of a recognition segment in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
-	// Confidence of a recognition segment. Value range: 0–100.
+	// Confidence of a recognition segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
@@ -770,7 +779,7 @@ type AiReviewPoliticalTaskOutput struct {
 	// violation_photo:
 	// <li>violation_photo: violating photo.</li>
 	// Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
-	// <li>politician: politically sensitive figure.</li>
+	// <li>politician: political figure.</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// List of video segments that contain the detected politically sensitive information.
@@ -845,6 +854,42 @@ type AiReviewPornTaskOutput struct {
 
 	// List of video segments that contain the detected porn information.
 	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+}
+
+type AiReviewProhibitedAsrTaskInput struct {
+
+	// 
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiReviewProhibitedAsrTaskOutput struct {
+
+	// 
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// 
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// 
+	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+}
+
+type AiReviewProhibitedOcrTaskInput struct {
+
+	// 
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiReviewProhibitedOcrTaskOutput struct {
+
+	// 
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// 
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// 
+	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
 type AiReviewTaskPoliticalAsrResult struct {
@@ -965,6 +1010,60 @@ type AiReviewTaskPornResult struct {
 	Output *AiReviewPornTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
+type AiReviewTaskProhibitedAsrResult struct {
+
+	// 
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// 
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// 
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// 
+	Input *AiReviewProhibitedAsrTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// 
+	Output *AiReviewProhibitedAsrTaskOutput `json:"Output,omitempty" name:"Output"`
+}
+
+type AiReviewTaskProhibitedOcrResult struct {
+
+	// 
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// 
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// 
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// 
+	Input *AiReviewProhibitedOcrTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// 
+	Output *AiReviewProhibitedOcrTaskOutput `json:"Output,omitempty" name:"Output"`
+}
+
+type AiReviewTaskTerrorismOcrResult struct {
+
+	// 
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// 
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// 
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// 
+	Input *AiReviewTerrorismOcrTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// 
+	Output *AiReviewTerrorismOcrTaskOutput `json:"Output,omitempty" name:"Output"`
+}
+
 type AiReviewTaskTerrorismResult struct {
 
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
@@ -982,6 +1081,24 @@ type AiReviewTaskTerrorismResult struct {
 	// Output of a terrorism information detection task during content audit.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *AiReviewTerrorismTaskOutput `json:"Output,omitempty" name:"Output"`
+}
+
+type AiReviewTerrorismOcrTaskInput struct {
+
+	// 
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiReviewTerrorismOcrTaskOutput struct {
+
+	// 
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// 
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// 
+	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
 type AiReviewTerrorismTaskInput struct {
@@ -1594,6 +1711,9 @@ func (r *CreateAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string
 type CreateAnimatedGraphicsTemplateRequest struct {
 	*tchttp.BaseRequest
 
+	// Video frame rate in Hz. Value range: [1, 30].
+	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
+
 	// Maximum value of the width (or long side) of an animated image in px. Value range: 0 and [128, 4,096].
 	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
 	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
@@ -1610,8 +1730,8 @@ type CreateAnimatedGraphicsTemplateRequest struct {
 	// Default value: 0.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// Video frame rate in Hz. Value range: [1, 30].
-	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
+	// 
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Animated image format. Valid values: gif; webp. Default value: gif.
 	Format *string `json:"Format,omitempty" name:"Format"`
@@ -1674,6 +1794,9 @@ type CreateContentReviewTemplateRequest struct {
 	// Politically sensitive information detection control parameter.
 	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
+	// 
+	ProhibitedConfigure *ProhibitedConfigureInfo `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
+
 	// Custom content audit control parameter.
 	UserDefineConfigure *UserDefineConfigureInfo `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
 }
@@ -1711,12 +1834,6 @@ func (r *CreateContentReviewTemplateResponse) FromJsonString(s string) error {
 type CreateImageSpriteTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Subimage width of an image sprite in px. Value range: [128, 4,096].
-	Width *uint64 `json:"Width,omitempty" name:"Width"`
-
-	// Subimage height of an image sprite in px. Value range: [128, 4,096].
-	Height *uint64 `json:"Height,omitempty" name:"Height"`
-
 	// Sampling type. Valid values:
 	// <li>Percent: By percent.</li>
 	// <li>Time: By time interval.</li>
@@ -1735,6 +1852,21 @@ type CreateImageSpriteTemplateRequest struct {
 
 	// Name of an image sprite generating template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Subimage width of an image sprite in px. Value range: [128, 4,096].
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Subimage height of an image sprite in px. Value range: [128, 4,096].
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// 
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// 
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
+
+	// 
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
 }
 
 func (r *CreateImageSpriteTemplateRequest) ToJsonString() string {
@@ -1773,10 +1905,6 @@ type CreatePersonSampleRequest struct {
 	// Name of a figure. Length limit: 20 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a face image. Only JPEG and PNG images are supported. Array length limit: 5 images.
-	// Note: The image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
-	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents" list`
-
 	// Figure sample use case. Valid values:
 	// 1. Recognition: It is used for content recognition, equivalent to `Recognition.Face`.
 	// 2. Review: It is used for content audit, equivalent to `Review.Face`.
@@ -1785,6 +1913,10 @@ type CreatePersonSampleRequest struct {
 
 	// Figure description. Length limit: 1,024 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a face image. Only JPEG and PNG images are supported. Array length limit: 5 images.
+	// Note: The image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
+	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents" list`
 
 	// Figure tag
 	// <li>Array length limit: 20 tags;</li>
@@ -1828,12 +1960,6 @@ func (r *CreatePersonSampleResponse) FromJsonString(s string) error {
 type CreateSampleSnapshotTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Image width in px. Value range: [128, 4,096].
-	Width *uint64 `json:"Width,omitempty" name:"Width"`
-
-	// Image height in px. Value range: [128, 4,096].
-	Height *uint64 `json:"Height,omitempty" name:"Height"`
-
 	// Sampled screencapturing type. Valid values:
 	// <li>Percent: By percent.</li>
 	// <li>Time: By time interval.</li>
@@ -1847,11 +1973,23 @@ type CreateSampleSnapshotTemplateRequest struct {
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// Image width in px. Value range: [128, 4,096].
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Image height in px. Value range: [128, 4,096].
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// 
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
 	// Image format. Valid values: jpg; png. Default value: jpg.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// 
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
 }
 
 func (r *CreateSampleSnapshotTemplateRequest) ToJsonString() string {
@@ -1887,20 +2025,26 @@ func (r *CreateSampleSnapshotTemplateResponse) FromJsonString(s string) error {
 type CreateSnapshotByTimeOffsetTemplateRequest struct {
 	*tchttp.BaseRequest
 
+	// Name of a time point screencapturing template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
 	// Image width in px. Value range: [128, 4,096].
 	Width *uint64 `json:"Width,omitempty" name:"Width"`
 
 	// Image height in px. Value range: [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// Name of a time point screencapturing template. Length limit: 64 characters.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	// 
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Image format. Valid values: jpg; png. Default value: jpg.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// 
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
 }
 
 func (r *CreateSnapshotByTimeOffsetTemplateRequest) ToJsonString() string {
@@ -3160,6 +3304,9 @@ type DescribeTaskDetailResponse struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 		WorkflowTask *WorkflowTask `json:"WorkflowTask,omitempty" name:"WorkflowTask"`
 
+		// 
+		EditMediaTask *EditMediaTask `json:"EditMediaTask,omitempty" name:"EditMediaTask"`
+
 		// Information of a live stream processing task. This field has a value only when `TaskType` is `LiveStreamProcessTask`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 		LiveStreamProcessTask *LiveStreamProcessTask `json:"LiveStreamProcessTask,omitempty" name:"LiveStreamProcessTask"`
@@ -3526,7 +3673,7 @@ type EditMediaRequest struct {
 	// Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
 
-	// Task priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
+	// Task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
@@ -3564,6 +3711,42 @@ func (r *EditMediaResponse) ToJsonString() string {
 
 func (r *EditMediaResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type EditMediaTask struct {
+
+	// 
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// 
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// 
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// 
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// 
+	Input *EditMediaTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// 
+	Output *EditMediaTaskOutput `json:"Output,omitempty" name:"Output"`
+}
+
+type EditMediaTaskInput struct {
+
+	// 
+	FileInfoSet []*EditMediaFileInfo `json:"FileInfoSet,omitempty" name:"FileInfoSet" list`
+}
+
+type EditMediaTaskOutput struct {
+
+	// 
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// 
+	Path *string `json:"Path,omitempty" name:"Path"`
 }
 
 type EnableWorkflowRequest struct {
@@ -3607,7 +3790,7 @@ type FaceConfigureInfo struct {
 	// <li>OFF: Disables an intelligent face recognition task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100. Default value: 95.
+	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100. Default value: 95.
 	Score *float64 `json:"Score,omitempty" name:"Score"`
 
 	// Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the default figures will be returned. Valid values:
@@ -3635,7 +3818,7 @@ type FaceConfigureInfoForUpdate struct {
 	// <li>OFF: Disables an intelligent face recognition task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
+	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100.
 	Score *float64 `json:"Score,omitempty" name:"Score"`
 
 	// Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the default figures will be returned. Valid values:
@@ -3736,6 +3919,9 @@ type ImageSpriteTemplate struct {
 	// <li>black: Fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
 	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
+
+	// 
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
 }
 
 type ImageWatermarkInput struct {
@@ -3992,7 +4178,7 @@ type LiveStreamAsrFullTextRecognitionResult struct {
 	// End PTS time of recognized segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Confidence of recognized segment. Value range: 0–100.
+	// Confidence of recognized segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 }
 
@@ -4007,7 +4193,7 @@ type LiveStreamAsrWordsRecognitionResult struct {
 	// End PTS time of recognized segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Confidence of recognized segment. Value range: 0–100.
+	// Confidence of recognized segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 }
 
@@ -4029,7 +4215,7 @@ type LiveStreamFaceRecognitionResult struct {
 	// End PTS time of recognized segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Confidence of recognized segment. Value range: 0–100.
+	// Confidence of recognized segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
@@ -4047,7 +4233,7 @@ type LiveStreamOcrFullTextRecognitionResult struct {
 	// End PTS time of recognized segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Confidence of recognized segment. Value range: 0–100.
+	// Confidence of recognized segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
@@ -4065,7 +4251,7 @@ type LiveStreamOcrWordsRecognitionResult struct {
 	// End PTS time of recognized segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Confidence of recognized segment. Value range: 0–100.
+	// Confidence of recognized segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
@@ -4327,7 +4513,28 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// Name of a politically sensitive figure or violating photo.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Tag of politically sensitive information detection result of a suspected segment.
+	// Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/862/37615#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+	// violation_photo:
+	// <li>violation_photo: violating photo.</li>
+	// politician:
+	// <li>nation_politician: head of state/government;</li>
+	// <li>province_politician: province/state leader;</li>
+	// <li>bureau_politician: ministry leader;</li>
+	// <li>county_politician: county/city leader;</li>
+	// <li>rural_politician: town leader;</li>
+	// <li>sensitive_politician: politically sensitive figure.</li>
+	// entertainment:
+	// <li>sensitive_entertainment: sensitive entertainment celebrity.</li>
+	// sport:
+	// <li>sensitive_sport: sensitive sports figure.</li>
+	// entrepreneur:
+	// <li>sensitive_entrepreneur: sensitive business figure.</li>
+	// scholar:
+	// <li>sensitive_scholar: sensitive educator.</li>
+	// celebrity:
+	// <li>sensitive_celebrity: sensitive well-known figure.</li>
+	// military:
+	// <li>sensitive_military: militarily sensitive figure.</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// URL of a suspected image (which will not be permanently stored
@@ -4942,6 +5149,9 @@ type ModifyAnimatedGraphicsTemplateRequest struct {
 	// Default value: 0.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
+	// 
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
 	// Animated image format. Valid values: gif, webp.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
@@ -5003,6 +5213,9 @@ type ModifyContentReviewTemplateRequest struct {
 	// Politically sensitive information detection control parameter.
 	PoliticalConfigure *PoliticalConfigureInfoForUpdate `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
+	// 
+	ProhibitedConfigure *ProhibitedConfigureInfoForUpdate `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
+
 	// Custom content audit control parameter.
 	UserDefineConfigure *UserDefineConfigureInfoForUpdate `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
 }
@@ -5049,6 +5262,9 @@ type ModifyImageSpriteTemplateRequest struct {
 	// Subimage height of an image sprite in px. Value range: [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
+	// 
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
 	// Sampling type. Valid values:
 	// <li>Percent: By percent.</li>
 	// <li>Time: By time interval.</li>
@@ -5064,6 +5280,12 @@ type ModifyImageSpriteTemplateRequest struct {
 
 	// Subimage column count of an image sprite.
 	ColumnCount *uint64 `json:"ColumnCount,omitempty" name:"ColumnCount"`
+
+	// 
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
+
+	// 
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
 }
 
 func (r *ModifyImageSpriteTemplateRequest) ToJsonString() string {
@@ -5167,6 +5389,9 @@ type ModifySampleSnapshotTemplateRequest struct {
 	// Image height in px. Value range: [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
+	// 
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
 	// Sampled screencapturing type. Valid values:
 	// <li>Percent: By percent.</li>
 	// <li>Time: By time interval.</li>
@@ -5182,6 +5407,9 @@ type ModifySampleSnapshotTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// 
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
 }
 
 func (r *ModifySampleSnapshotTemplateRequest) ToJsonString() string {
@@ -5226,11 +5454,17 @@ type ModifySnapshotByTimeOffsetTemplateRequest struct {
 	// Image height in px. Value range: [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
+	// 
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
 	// Image format. Valid values: jpg, png.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// 
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
 }
 
 func (r *ModifySnapshotByTimeOffsetTemplateRequest) ToJsonString() string {
@@ -5439,6 +5673,30 @@ func (r *ModifyWordSampleResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type MosaicInput struct {
+
+	// 
+	CoordinateOrigin *string `json:"CoordinateOrigin,omitempty" name:"CoordinateOrigin"`
+
+	// 
+	XPos *string `json:"XPos,omitempty" name:"XPos"`
+
+	// 
+	YPos *string `json:"YPos,omitempty" name:"YPos"`
+
+	// 
+	Width *string `json:"Width,omitempty" name:"Width"`
+
+	// 
+	Height *string `json:"Height,omitempty" name:"Height"`
+
+	// 
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// 
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+}
+
 type NumberFormat struct {
 
 	// Start value of the `{number}` variable. Default value: 0.
@@ -5581,6 +5839,9 @@ type ParseNotificationResponse struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 		WorkflowTaskEvent *WorkflowTask `json:"WorkflowTaskEvent,omitempty" name:"WorkflowTaskEvent"`
 
+		// 
+		EditMediaTaskEvent *EditMediaTask `json:"EditMediaTaskEvent,omitempty" name:"EditMediaTaskEvent"`
+
 		// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
 		SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
@@ -5608,10 +5869,10 @@ type PoliticalAsrReviewTemplateInfo struct {
 	// <li>OFF: Disables a politically sensitive information detection in speech task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5622,10 +5883,10 @@ type PoliticalAsrReviewTemplateInfoForUpdate struct {
 	// <li>OFF: Disables a politically sensitive information detection in speech task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5665,19 +5926,19 @@ type PoliticalImgReviewTemplateInfo struct {
 
 	// Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
 	// <li>violation_photo: violating photo;</li>
-	// <li>politician: sensitive figure;</li>
+	// <li>politician: political figure;</li>
 	// <li>entertainment: entertainment celebrity;</li>
 	// <li>sport: sports figure;</li>
 	// <li>entrepreneur: business figure;</li>
 	// <li>scholar: educator;</li>
-	// <li>celebrity: public-known figure;</li>
+	// <li>celebrity: well-known figure;</li>
 	// <li>military: military figure.</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5690,19 +5951,19 @@ type PoliticalImgReviewTemplateInfoForUpdate struct {
 
 	// Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
 	// <li>violation_photo: violating photo;</li>
-	// <li>politician: sensitive figure;</li>
+	// <li>politician: political figure;</li>
 	// <li>entertainment: entertainment celebrity;</li>
 	// <li>sport: sports figure;</li>
 	// <li>entrepreneur: business figure;</li>
 	// <li>scholar: educator;</li>
-	// <li>celebrity: public-known figure;</li>
+	// <li>celebrity: well-known figure;</li>
 	// <li>military: military figure.</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5713,10 +5974,10 @@ type PoliticalOcrReviewTemplateInfo struct {
 	// <li>OFF: Disables a politically sensitive information detection in text task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5727,10 +5988,10 @@ type PoliticalOcrReviewTemplateInfoForUpdate struct {
 	// <li>OFF: Disables a politically sensitive information detection in text task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5741,10 +6002,10 @@ type PornAsrReviewTemplateInfo struct {
 	// <li>OFF: Disables a porn information detection in speech task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5755,10 +6016,10 @@ type PornAsrReviewTemplateInfoForUpdate struct {
 	// <li>OFF: Disables a porn information detection in speech task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5803,10 +6064,10 @@ type PornImgReviewTemplateInfo struct {
 	// <li>sexy: Sexiness.</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 0 will be used by default. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 0 will be used by default. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5824,10 +6085,10 @@ type PornImgReviewTemplateInfoForUpdate struct {
 	// <li>sexy: Sexiness.</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5838,10 +6099,10 @@ type PornOcrReviewTemplateInfo struct {
 	// <li>OFF: Disables a porn information detection in text task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5852,10 +6113,10 @@ type PornOcrReviewTemplateInfoForUpdate struct {
 	// <li>OFF: Disables a porn information detection in text task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -5996,6 +6257,18 @@ type ProhibitedAsrReviewTemplateInfo struct {
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
+type ProhibitedAsrReviewTemplateInfoForUpdate struct {
+
+	// 
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// 
+	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
+
+	// 
+	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
+}
+
 type ProhibitedConfigureInfo struct {
 
 	// 
@@ -6005,7 +6278,28 @@ type ProhibitedConfigureInfo struct {
 	OcrReviewInfo *ProhibitedOcrReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
+type ProhibitedConfigureInfoForUpdate struct {
+
+	// 
+	AsrReviewInfo *ProhibitedAsrReviewTemplateInfoForUpdate `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
+
+	// 
+	OcrReviewInfo *ProhibitedOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
+}
+
 type ProhibitedOcrReviewTemplateInfo struct {
+
+	// 
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// 
+	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
+
+	// 
+	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
+}
+
+type ProhibitedOcrReviewTemplateInfoForUpdate struct {
 
 	// 
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
@@ -6226,6 +6520,9 @@ type SnapshotByTimeOffsetTaskInput struct {
 	// ID of a time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// 
+	ExtTimeOffsetSet []*string `json:"ExtTimeOffsetSet,omitempty" name:"ExtTimeOffsetSet" list`
+
 	// List of time points of screenshots in <font color=red>seconds</font>.
 	TimeOffsetSet []*float64 `json:"TimeOffsetSet,omitempty" name:"TimeOffsetSet" list`
 
@@ -6443,12 +6740,18 @@ type TerrorismConfigureInfo struct {
 	// Control parameter of a terrorism information detection in image task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImgReviewInfo *TerrorismImgReviewTemplateInfo `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
+
+	// 
+	OcrReviewInfo *TerrorismOcrReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type TerrorismConfigureInfoForUpdate struct {
 
 	// Control parameter of a terrorism information detection in image task.
 	ImgReviewInfo *TerrorismImgReviewTemplateInfoForUpdate `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
+
+	// 
+	OcrReviewInfo *TerrorismOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type TerrorismImgReviewTemplateInfo struct {
@@ -6469,10 +6772,10 @@ type TerrorismImgReviewTemplateInfo struct {
 	// <li>terrorists: Terrorists.</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 80 will be used by default. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 80 will be used by default. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -6494,10 +6797,34 @@ type TerrorismImgReviewTemplateInfoForUpdate struct {
 	// <li>terrorists: Terrorists.</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
+	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
+}
+
+type TerrorismOcrReviewTemplateInfo struct {
+
+	// 
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// 
+	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
+
+	// 
+	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
+}
+
+type TerrorismOcrReviewTemplateInfoForUpdate struct {
+
+	// 
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// 
+	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
+
+	// 
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -6551,6 +6878,9 @@ type TranscodeTaskInput struct {
 	// List of up to 10 image or text watermarks.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+
+	// 
+	MosaicSet []*MosaicInput `json:"MosaicSet,omitempty" name:"MosaicSet" list`
 
 	// Target bucket of an output file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -6633,10 +6963,10 @@ type UserDefineAsrTextReviewTemplateInfo struct {
 	// There can be up to 10 tags, each with a length limit of 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -6651,10 +6981,10 @@ type UserDefineAsrTextReviewTemplateInfoForUpdate struct {
 	// There can be up to 10 tags, each with a length limit of 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -6696,10 +7026,10 @@ type UserDefineFaceReviewTemplateInfo struct {
 	// There can be up to 10 tags, each with a length limit of 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -6714,10 +7044,10 @@ type UserDefineFaceReviewTemplateInfoForUpdate struct {
 	// There can be up to 10 tags, each with a length limit of 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -6732,10 +7062,10 @@ type UserDefineOcrTextReviewTemplateInfo struct {
 	// There can be up to 10 tags, each with a length limit of 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -6750,10 +7080,10 @@ type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
 	// There can be up to 10 tags, each with a length limit of 16 characters.
 	LabelSet *string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0-100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -6795,6 +7125,9 @@ type VideoTemplateInfo struct {
 	// Default value: 0.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
+	// 
+	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
+
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 	// <li> stretch: Stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
 	// <li>black: Fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
@@ -6832,6 +7165,9 @@ type VideoTemplateInfoForUpdate struct {
 
 	// Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// 
+	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 	// <li> stretch: Stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>

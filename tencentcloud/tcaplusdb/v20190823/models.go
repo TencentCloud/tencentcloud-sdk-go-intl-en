@@ -107,6 +107,10 @@ type ClusterInfo struct {
 	// If `PasswordStatus` is `unmodifiable`, the old password has not expired, and this field will display its expiration time; otherwise, this field will be empty
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OldPasswordExpireTime *string `json:"OldPasswordExpireTime,omitempty" name:"OldPasswordExpireTime"`
+
+	// TcaplusDB SDK connection parameter for accessing IPv6 addresses
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiAccessIpv6 *string `json:"ApiAccessIpv6,omitempty" name:"ApiAccessIpv6"`
 }
 
 type CompareIdlFilesRequest struct {
@@ -219,8 +223,14 @@ type CreateClusterRequest struct {
 	// ID of the subnet instance bound to a cluster in the format of `subnet-pxir56ns`
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Cluster access password, which must contain lowercase letters (a–z), uppercase letters (A–Z), and digits (0–9).
+	// Cluster access password, which must contain lowercase letters (a-z), uppercase letters (A-Z), and digits (0-9).
 	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// 
+	ResourceTags []*TagInfoUnit `json:"ResourceTags,omitempty" name:"ResourceTags" list`
+
+	// Whether to enable IPv6 address access for clusters
+	Ipv6Enable *int64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
 }
 
 func (r *CreateClusterRequest) ToJsonString() string {
@@ -264,6 +274,9 @@ type CreateTableGroupRequest struct {
 
 	// Table group ID, which can be customized but must be unique in one cluster. If it is not specified, the auto-increment mode will be used.
 	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// 
+	ResourceTags []*TagInfoUnit `json:"ResourceTags,omitempty" name:"ResourceTags" list`
 }
 
 func (r *CreateTableGroupRequest) ToJsonString() string {
@@ -307,6 +320,9 @@ type CreateTablesRequest struct {
 
 	// Information list of tables to be created
 	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables" list`
+
+	// 
+	ResourceTags []*TagInfoUnit `json:"ResourceTags,omitempty" name:"ResourceTags" list`
 }
 
 func (r *CreateTablesRequest) ToJsonString() string {
@@ -559,6 +575,9 @@ type DescribeClustersRequest struct {
 
 	// Number of returned results in query list. Default value: 20
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Whether to enable IPv6 address access
+	Ipv6Enable *int64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
 }
 
 func (r *DescribeClustersRequest) ToJsonString() string {
@@ -1131,7 +1150,7 @@ type ModifyClusterPasswordRequest struct {
 	// Expected expiration time of old cluster password
 	OldPasswordExpireTime *string `json:"OldPasswordExpireTime,omitempty" name:"OldPasswordExpireTime"`
 
-	// New cluster password, which must contain lowercase letters (a–z), uppercase letters (A–Z), and digits (0–9).
+	// New cluster password, which must contain lowercase letters (a-z), uppercase letters (A-Z), and digits (0-9).
 	NewPassword *string `json:"NewPassword,omitempty" name:"NewPassword"`
 
 	// Update mode. 1: updates password, 2: updates old password expiration time. Default value: 1
@@ -1603,6 +1622,9 @@ type RegionInfo struct {
 
 	// Region ID
 	RegionId *uint64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Whether to support IPv6 address access. Valid values: 0 (support), 1 (not support)
+	Ipv6Enable *uint64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
 }
 
 type RollbackTablesRequest struct {
@@ -1751,7 +1773,7 @@ type TableInfoNew struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TableGroupName *string `json:"TableGroupName,omitempty" name:"TableGroupName"`
 
-	// JSON string of table’s primary key field structure
+	// JSON string of table's primary key field structure
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	KeyStruct *string `json:"KeyStruct,omitempty" name:"KeyStruct"`
 
@@ -1799,7 +1821,7 @@ type TableInfoNew struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// Table’s last modified time
+	// Table's last modified time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UpdatedTime *string `json:"UpdatedTime,omitempty" name:"UpdatedTime"`
 
@@ -1822,6 +1844,9 @@ type TableInfoNew struct {
 	// Sort order of SORTLIST-type tables
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SortRule *int64 `json:"SortRule,omitempty" name:"SortRule"`
+
+	// 
+	DbClusterInfoStruct *string `json:"DbClusterInfoStruct,omitempty" name:"DbClusterInfoStruct"`
 }
 
 type TableResultNew struct {

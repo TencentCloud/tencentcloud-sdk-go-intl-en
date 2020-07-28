@@ -356,25 +356,25 @@ type ColumnPrivilege struct {
 
 type CommonTimeWindow struct {
 
-	// Time window on Monday in the format of 02:00–06:00
+	// Time window on Monday in the format of 02:00-06:00
 	Monday *string `json:"Monday,omitempty" name:"Monday"`
 
-	// Time window on Tuesday in the format of 02:00–06:00
+	// Time window on Tuesday in the format of 02:00-06:00
 	Tuesday *string `json:"Tuesday,omitempty" name:"Tuesday"`
 
-	// Time window on Wednesday in the format of 02:00–06:00
+	// Time window on Wednesday in the format of 02:00-06:00
 	Wednesday *string `json:"Wednesday,omitempty" name:"Wednesday"`
 
-	// Time window on Thursday in the format of 02:00–06:00
+	// Time window on Thursday in the format of 02:00-06:00
 	Thursday *string `json:"Thursday,omitempty" name:"Thursday"`
 
-	// Time window on Friday in the format of 02:00–06:00
+	// Time window on Friday in the format of 02:00-06:00
 	Friday *string `json:"Friday,omitempty" name:"Friday"`
 
-	// Time window on Saturday in the format of 02:00–06:00
+	// Time window on Saturday in the format of 02:00-06:00
 	Saturday *string `json:"Saturday,omitempty" name:"Saturday"`
 
-	// Time window on Sunday in the format of 02:00–06:00
+	// Time window on Sunday in the format of 02:00-06:00
 	Sunday *string `json:"Sunday,omitempty" name:"Sunday"`
 }
 
@@ -520,7 +520,7 @@ func (r *CreateDBImportJobResponse) FromJsonString(s string) error {
 type CreateDBInstanceHourRequest struct {
 	*tchttp.BaseRequest
 
-	// Number of instances. Value range: 1–100. Default value: 1.
+	// Number of instances. Value range: 1-100. Default value: 1.
 	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
 
 	// Instance memory size in MB. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported memory specifications.
@@ -556,7 +556,7 @@ type CreateDBInstanceHourRequest struct {
 	// Custom port. Value range: [1024-65535].
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
-	// Sets the root account password. Rule: the password can contain 8–64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+	// Sets the root account password. Rule: the password can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// List of parameters in the format of `ParamList.0.Name=auto_increment&ParamList.0.Value=1`. You can use the [DescribeDefaultParams](https://cloud.tencent.com/document/api/236/32662) API to query the configurable parameters.
@@ -3755,7 +3755,7 @@ type ModifyBackupConfigRequest struct {
 	// Backup file retention period in days. Value range: 7-732.
 	ExpireDays *int64 `json:"ExpireDays,omitempty" name:"ExpireDays"`
 
-	// (This parameter will be disused. The `BackupTimeWindow` parameter is recommended.) Backup time range in the format of 02:00–06:00, with the start time and end time on the hour. Valid values: 00:00–12:00, 02:00–06:00, 06:00–10:00, 10:00–14:00, 14:00–18:00, 18:00–22:00, 22:00–02:00.
+	// (This parameter will be disused. The `BackupTimeWindow` parameter is recommended.) Backup time range in the format of 02:00-06:00, with the start time and end time on the hour. Valid values: 00:00-12:00, 02:00-06:00, 06:00-10:00, 10:00-14:00, 14:00-18:00, 18:00-22:00, 22:00-02:00.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Automatic backup mode. Only `physical` (physical cold backup) is supported
@@ -3924,7 +3924,7 @@ type ModifyDBInstanceVipVportRequest struct {
 	// Unified subnet ID.
 	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
 
-	// Repossession duration in hours for old IP in the original network when changing from the basic network to VPC or changing the VPC subnet. Value range: 0–168 hours. Default value: 24 hours.
+	// Repossession duration in hours for old IP in the original network when changing from the basic network to VPC or changing the VPC subnet. Value range: 0-168 hours. Default value: 24 hours.
 	ReleaseDuration *int64 `json:"ReleaseDuration,omitempty" name:"ReleaseDuration"`
 }
 
@@ -3967,6 +3967,12 @@ type ModifyInstanceParamRequest struct {
 
 	// List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value).
 	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList" list`
+
+	// 
+	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// 
+	WaitSwitch *int64 `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
 }
 
 func (r *ModifyInstanceParamRequest) ToJsonString() string {
@@ -5192,6 +5198,9 @@ type UpgradeDBInstanceEngineVersionRequest struct {
 
 	// Mode of switch to a new instance. Value range: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [switching to new instance API](https://cloud.tencent.com/document/product/236/15864) to trigger the process.
 	WaitSwitch *int64 `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
+
+	// Whether to upgrade kernel minor version. Valid values: 1 (upgrade kernel minor version), 0 (upgrade database engine).
+	UpgradeSubversion *int64 `json:"UpgradeSubversion,omitempty" name:"UpgradeSubversion"`
 }
 
 func (r *UpgradeDBInstanceEngineVersionRequest) ToJsonString() string {

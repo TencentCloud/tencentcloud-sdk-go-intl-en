@@ -169,6 +169,31 @@ func (c *Client) CloseProxies(request *CloseProxiesRequest) (response *CloseProx
     return
 }
 
+func NewCloseProxyGroupRequest() (request *CloseProxyGroupRequest) {
+    request = &CloseProxyGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gaap", APIVersion, "CloseProxyGroup")
+    return
+}
+
+func NewCloseProxyGroupResponse() (response *CloseProxyGroupResponse) {
+    response = &CloseProxyGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to disable a connection group. Once disabled, the connection group will no longer generate traffic, but the basic connection configuration fees will still be incurred every day.
+func (c *Client) CloseProxyGroup(request *CloseProxyGroupRequest) (response *CloseProxyGroupResponse, err error) {
+    if request == nil {
+        request = NewCloseProxyGroupRequest()
+    }
+    response = NewCloseProxyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCloseSecurityPolicyRequest() (request *CloseSecurityPolicyRequest) {
     request = &CloseSecurityPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -895,6 +920,31 @@ func (c *Client) DescribeDomainErrorPageInfo(request *DescribeDomainErrorPageInf
     return
 }
 
+func NewDescribeDomainErrorPageInfoByIdsRequest() (request *DescribeDomainErrorPageInfoByIdsRequest) {
+    request = &DescribeDomainErrorPageInfoByIdsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gaap", APIVersion, "DescribeDomainErrorPageInfoByIds")
+    return
+}
+
+func NewDescribeDomainErrorPageInfoByIdsResponse() (response *DescribeDomainErrorPageInfoByIdsResponse) {
+    response = &DescribeDomainErrorPageInfoByIdsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the corresponding error response by a custom error ID.
+func (c *Client) DescribeDomainErrorPageInfoByIds(request *DescribeDomainErrorPageInfoByIdsRequest) (response *DescribeDomainErrorPageInfoByIdsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDomainErrorPageInfoByIdsRequest()
+    }
+    response = NewDescribeDomainErrorPageInfoByIdsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGroupAndStatisticsProxyRequest() (request *DescribeGroupAndStatisticsProxyRequest) {
     request = &DescribeGroupAndStatisticsProxyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1260,7 +1310,7 @@ func NewDescribeRealServerStatisticsResponse() (response *DescribeRealServerStat
     return
 }
 
-// This API (DescribeRealServerStatistics) is used to query the statistics of an origin server’s health check results. Origin server status displayed as 1: normal, or 0: exceptional. The queried origin server must be bound to a listener or rule. The bound listener or rule ID must be specified when querying. This API supports displaying origin server status statistics for the past 1, 3, 6, 12, and 24 hours, with a granularity of 1 minute.
+// This API (DescribeRealServerStatistics) is used to query the statistics of an origin server's health check results. Origin server status displayed as 1: normal, or 0: exceptional. The queried origin server must be bound to a listener or rule. The bound listener or rule ID must be specified when querying. This API supports displaying origin server status statistics for the past 1, 3, 6, 12, and 24 hours, with a granularity of 1 minute.
 func (c *Client) DescribeRealServerStatistics(request *DescribeRealServerStatisticsRequest) (response *DescribeRealServerStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeRealServerStatisticsRequest()
@@ -1992,6 +2042,31 @@ func (c *Client) OpenProxies(request *OpenProxiesRequest) (response *OpenProxies
         request = NewOpenProxiesRequest()
     }
     response = NewOpenProxiesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOpenProxyGroupRequest() (request *OpenProxyGroupRequest) {
+    request = &OpenProxyGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gaap", APIVersion, "OpenProxyGroup")
+    return
+}
+
+func NewOpenProxyGroupResponse() (response *OpenProxyGroupResponse) {
+    response = &OpenProxyGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to enable all connections in a connection group.
+func (c *Client) OpenProxyGroup(request *OpenProxyGroupRequest) (response *OpenProxyGroupResponse, err error) {
+    if request == nil {
+        request = NewOpenProxyGroupRequest()
+    }
+    response = NewOpenProxyGroupResponse()
     err = c.Send(request, response)
     return
 }

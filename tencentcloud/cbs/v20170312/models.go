@@ -185,7 +185,7 @@ type CreateAutoSnapshotPolicyRequest struct {
 	// The policy for executing the scheduled snapshot.
 	Policy []*Policy `json:"Policy,omitempty" name:"Policy" list`
 
-	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is “Not named”. The maximum length cannot exceed 60 bytes.
+	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
 	AutoSnapshotPolicyName *string `json:"AutoSnapshotPolicyName,omitempty" name:"AutoSnapshotPolicyName"`
 
 	// Whether or not the scheduled snapshot policy is activated. FALSE: Not activated. TRUE: Activated. The default value is TRUE.
@@ -246,7 +246,7 @@ type CreateDisksRequest struct {
 	// The location of the instance. The availability zone and the project that the instance belongs to can be specified using this parameter. If the project is not specified, it will be created under the default project.
 	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
 
-	// The displayed name of the cloud disk. If it is left empty, the default is “Not named”. The maximum length cannot exceed 60 bytes.
+	// The displayed name of the cloud disk. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
 	DiskName *string `json:"DiskName,omitempty" name:"DiskName"`
 
 	// If the number of cloud disks to be created is left empty, the default is 1. There is a limit to the maximum number of cloud disks that can be created for a single request. For more information, please see [CBS Use Limits](https://cloud.tencent.com/doc/product/362/5145).
@@ -572,10 +572,10 @@ type DescribeDiskOperationLogsRequest struct {
 	// <li>disk-id - Array of String - Required or not: Yes - Filter by cloud disk ID, with maximum of 10 cloud disk IDs able to be specified per request.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
-	// The start time of the operation logs to be queried, for example: “2019-11-22 00:00:00"
+	// The start time of the operation logs to be queried, for example: '2019-11-22 00:00:00"
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// The end time of the operation logs to be queried, for example: “2019-11-22 23:59:59"
+	// The end time of the operation logs to be queried, for example: '2019-11-22 23:59:59"
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
@@ -711,10 +711,10 @@ type DescribeSnapshotOperationLogsRequest struct {
 	// <li>snapshot-id - Array of String - Required or not: Yes - Filter by snapshot ID, with maximum of 10 snapshot IDs able to be specified per request.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
-	// The start time of the operation logs to be queried, for example: “2019-11-22 00:00:00"
+	// The start time of the operation logs to be queried, for example: '2019-11-22 00:00:00"
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// The end time of the operation logs to be queried, for example: “2019-11-22 23:59:59"
+	// The end time of the operation logs to be queried, for example: '2019-11-22 23:59:59"
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
@@ -977,7 +977,7 @@ type Disk struct {
 	// Whether or not cloud disk is shareable cloud disk.
 	Shareable *bool `json:"Shareable,omitempty" name:"Shareable"`
 
-	// For non-shareable cloud disks, this parameter is null. For shareable cloud disks, this parameters indicates this cloud disk’s Instance IDs currently mounted to the CVM.
+	// For non-shareable cloud disks, this parameter is null. For shareable cloud disks, this parameters indicates this cloud disk's Instance IDs currently mounted to the CVM.
 	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList" list`
 
 	// The total number of snapshots of the cloud disk.
@@ -1232,7 +1232,7 @@ type ModifyAutoSnapshotPolicyAttributeRequest struct {
 	// The policy for executing the scheduled snapshot.
 	Policy []*Policy `json:"Policy,omitempty" name:"Policy" list`
 
-	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is “Not named”. The maximum length cannot exceed 60 bytes.
+	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
 	AutoSnapshotPolicyName *string `json:"AutoSnapshotPolicyName,omitempty" name:"AutoSnapshotPolicyName"`
 
 	// Whether or not the scheduled snapshot policy is activated. FALSE: Not activated. TRUE: Activated. The default value is TRUE.

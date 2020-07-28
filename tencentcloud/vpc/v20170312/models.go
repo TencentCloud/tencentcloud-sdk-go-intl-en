@@ -812,7 +812,7 @@ type CCN struct {
 	// The instance status. 'ISOLATED': Being isolated (instance is in arrears and service is suspended). 'AVAILABLE': Operating.
 	State *string `json:"State,omitempty" name:"State"`
 
-	// The instance service quality. ’PT’: Platinum , 'AU': Gold, 'AG': Silver.
+	// The instance service quality. 'PT': Platinum , 'AU': Gold, 'AG': Silver.
 	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
 
 	// The billing method. POSTPAID indicates postpaid.
@@ -874,8 +874,29 @@ type CcnAttachedInstance struct {
 
 type CcnBandwidthInfo struct {
 
-	// 
+	// The CCN ID that the bandwidth belongs to.
+	// Note: this field may return null, indicating that no valid value was found.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The creation time of the instance.
+	// Note: this field may return null, indicating that no valid value was found.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// The expiration time of the instance.
+	// Note: this field may return null, indicating that no valid value was found.
+	ExpiredTime *string `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
+
+	// The unique ID of the bandwidth instance.
+	// Note: this field may return null, indicating that no valid value was found.
+	RegionFlowControlId *string `json:"RegionFlowControlId,omitempty" name:"RegionFlowControlId"`
+
+	// The billing flag.
+	// Note: this field may return null, indicating that no valid value was found.
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+
+	// The information of bandwidth regions and bandwidth caps.
+	// Note: this field may return null, indicating that no valid value was found.
+	CcnRegionBandwidthLimit *CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimit,omitempty" name:"CcnRegionBandwidthLimit"`
 }
 
 type CcnInstance struct {
@@ -1329,7 +1350,7 @@ type CreateCcnRequest struct {
 	// The description of the CCN. The maximum length is 100 characters.
 	CcnDescription *string `json:"CcnDescription,omitempty" name:"CcnDescription"`
 
-	// CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is ‘AU’.
+	// CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.
 	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
 
 	// The billing method. POSTPAID: postpaid by traffic. Default: POSTPAID.
@@ -1543,7 +1564,7 @@ func (r *CreateDirectConnectGatewayResponse) FromJsonString(s string) error {
 type CreateFlowLogRequest struct {
 	*tchttp.BaseRequest
 
-	// The VPC ID or the unified ID. We recommend you use the unified ID.
+	// ID of the VPC instance
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The name of the flow log instance.
@@ -2501,7 +2522,7 @@ type CvmInstance struct {
 	// Number of CPU cores in an instance (in core).
 	CPU *uint64 `json:"CPU,omitempty" name:"CPU"`
 
-	// Instance’s memory capacity. Unit: GB.
+	// Instance's memory capacity. Unit: GB.
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
 	// The creation time.
@@ -2810,7 +2831,7 @@ func (r *DeleteDirectConnectGatewayResponse) FromJsonString(s string) error {
 type DeleteFlowLogRequest struct {
 	*tchttp.BaseRequest
 
-	// The VPC ID or the unified ID. We recommend you use the unified ID.
+	// ID of the VPC instance
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The unique ID of the flow log.
@@ -4183,7 +4204,7 @@ func (r *DescribeDirectConnectGatewaysResponse) FromJsonString(s string) error {
 type DescribeFlowLogRequest struct {
 	*tchttp.BaseRequest
 
-	// The VPC ID or the unified ID. We recommend you use the unified ID.
+	// ID of the VPC instance
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The unique ID of the flow log.
@@ -4223,7 +4244,7 @@ func (r *DescribeFlowLogResponse) FromJsonString(s string) error {
 type DescribeFlowLogsRequest struct {
 	*tchttp.BaseRequest
 
-	// The VPC ID or the unified ID. We recommend you use the unified ID.
+	// ID of the VPC instance
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The unique ID of the flow log.
@@ -4793,7 +4814,7 @@ type DescribeNetworkInterfacesRequest struct {
 	// <li>address-ip - String - (Filter condition) Private IPv4 address.</li>
 	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
 	// <li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
-	// <li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is ‘true’, filter only the primary ENI. If the value is ‘false’, filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
+	// <li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is 'true', filter only the primary ENI. If the value is 'false', filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Offset. Default value: 0.
@@ -6196,7 +6217,7 @@ type FilterObject struct {
 
 type FlowLog struct {
 
-	// The VPC ID or the unified ID. We recommend you use the unified ID.
+	// ID of the VPC instance
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The unique ID of the flow log.
@@ -7205,16 +7226,16 @@ func (r *ModifyDirectConnectGatewayAttributeResponse) FromJsonString(s string) e
 type ModifyFlowLogAttributeRequest struct {
 	*tchttp.BaseRequest
 
-	// The VPC ID or the unified ID. We recommend you use the unified ID.
+	// ID of the VPC instance
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// The unique ID of the flow log collector.
+	// The unique ID of the flow log.
 	FlowLogId *string `json:"FlowLogId,omitempty" name:"FlowLogId"`
 
-	// The name of the flow log collector.
+	// The name of the flow log.
 	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
 
-	// The description of the flow log collector.
+	// The description of the flow log.
 	FlowLogDescription *string `json:"FlowLogDescription,omitempty" name:"FlowLogDescription"`
 }
 
@@ -8077,7 +8098,7 @@ type NatGateway struct {
 
 	// The status of the NAT gateway.
 	//  'PENDING': Creating, 'DELETING': Deleting, 'AVAILABLE': Operating, 'UPDATING': Upgrading,
-	// ‘FAILED’: Failed.
+	// 'FAILED': Failed.
 	State *string `json:"State,omitempty" name:"State"`
 
 	// The maximum outbound bandwidth of the gateway. Unit: Mbps.
@@ -8380,7 +8401,7 @@ type PrivateIpAddressSpecification struct {
 	// Public IP address.
 	PublicIpAddress *string `json:"PublicIpAddress,omitempty" name:"PublicIpAddress"`
 
-	// EIP instance ID, such as `eip-11112222`。
+	// EIP instance ID, such as `eip-11112222`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
 	// Private IP description.

@@ -273,16 +273,16 @@ func (r *CompleteLifecycleActionResponse) FromJsonString(s string) error {
 type CreateAutoScalingGroupFromInstanceRequest struct {
 	*tchttp.BaseRequest
 
-	// The scaling group name. It must be unique under your account. The name can only contain Chinese characters, English letters, numbers, underscore, hyphen “-” and periods. It cannot exceed 55 bytes.
+	// The scaling group name. It must be unique under your account. The name can only contain letters, numbers, underscore, hyphen “-” and periods. It cannot exceed 55 bytes.
 	AutoScalingGroupName *string `json:"AutoScalingGroupName,omitempty" name:"AutoScalingGroupName"`
 
 	// The instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// The maximum number of instances. Value range: 0-2000.
+	// The minimum number of instances. Value range: 0 - 2000.
 	MinSize *int64 `json:"MinSize,omitempty" name:"MinSize"`
 
-	// The minimum number of instances. Value range: 0-2000.
+	// The maximum number of instances. Value range: 0 - 2000.
 	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
 
 	// The desired capacity. Its value must be greater than the minimum and smaller than the maximum.
@@ -380,7 +380,7 @@ type CreateAutoScalingGroupRequest struct {
 	// If an availability zone or subnet in Zones/SubnetIds does not exist, a verification error will be reported regardless of the value of ZonesCheckPolicy.
 	ZonesCheckPolicy *string `json:"ZonesCheckPolicy,omitempty" name:"ZonesCheckPolicy"`
 
-	// List of tag descriptions. This parameter is used to bind a tag to a scaling group as well as corresponding resource instances. Each scaling group can have up to 30 tags.
+	// List of tag descriptions. In this parameter, you can specify the tags to be bound with a scaling group as well as corresponding resource instances. Each scaling group can have up to 30 tags.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
 	// Service settings such as unhealthy instance replacement.
@@ -488,6 +488,12 @@ type CreateLaunchConfigurationRequest struct {
 
 	// CVM HostName settings.
 	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitempty" name:"HostNameSettings"`
+
+	// 
+	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitempty" name:"InstanceNameSettings"`
+
+	// 
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 }
 
 func (r *CreateLaunchConfigurationRequest) ToJsonString() string {
@@ -538,7 +544,7 @@ type CreateLifecycleHookRequest struct {
 	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-3,600. Default value: 300
 	HeartbeatTimeout *int64 `json:"HeartbeatTimeout,omitempty" name:"HeartbeatTimeout"`
 
-	// Additional information sent by Auto Scaling to the notification target. Default value is “”. Maximum length is 1024 characters.
+	// Additional information sent by Auto Scaling to the notification target. Default value is ''. Maximum length is 1024 characters.
 	NotificationMetadata *string `json:"NotificationMetadata,omitempty" name:"NotificationMetadata"`
 
 	// Notification target
@@ -1715,7 +1721,7 @@ type ExecuteScalingPolicyRequest struct {
 	// Whether to check if the auto scaling group is in the cooldown period. Default value: false
 	HonorCooldown *bool `json:"HonorCooldown,omitempty" name:"HonorCooldown"`
 
-	// Trigger source that executes a scaling policy. Valid values: API and CLOUD_MONITOR. Default value: API. The value `CLOUD_MONITOR` is specific to the Cloud Monitor service.
+	// Source that triggers the scaling policy. Valid values: API and CLOUD_MONITOR. Default value: API. The value `CLOUD_MONITOR` is specific to the Cloud Monitor service.
 	TriggerSource *string `json:"TriggerSource,omitempty" name:"TriggerSource"`
 }
 
@@ -1853,6 +1859,15 @@ type InstanceMarketOptionsRequest struct {
 	MarketType *string `json:"MarketType,omitempty" name:"MarketType"`
 }
 
+type InstanceNameSettings struct {
+
+	// 
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// 
+	InstanceNameStyle *string `json:"InstanceNameStyle,omitempty" name:"InstanceNameStyle"`
+}
+
 type InstanceTag struct {
 
 	// Tag key
@@ -1876,7 +1891,7 @@ type InternetAccessible struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PublicIpAssigned *bool `json:"PublicIpAssigned,omitempty" name:"PublicIpAssigned"`
 
-	// Bandwidth package ID. You can obtain the parameter value from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) API.
+	// Bandwidth package ID. You can obtain the ID from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) API.
 	// Note: this field may return null, indicating that no valid value was found.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 }
@@ -1958,6 +1973,12 @@ type LaunchConfiguration struct {
 
 	// CVM HostName settings.
 	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitempty" name:"HostNameSettings"`
+
+	// 
+	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitempty" name:"InstanceNameSettings"`
+
+	// 
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 }
 
 type LifecycleActionResultInfo struct {
@@ -2112,6 +2133,9 @@ type ModifyAutoScalingGroupRequest struct {
 
 	// 
 	Ipv6AddressCount *int64 `json:"Ipv6AddressCount,omitempty" name:"Ipv6AddressCount"`
+
+	// 
+	MultiZoneSubnetPolicy *string `json:"MultiZoneSubnetPolicy,omitempty" name:"MultiZoneSubnetPolicy"`
 }
 
 func (r *ModifyAutoScalingGroupRequest) ToJsonString() string {
@@ -2616,6 +2640,9 @@ type ServiceSettings struct {
 
 	// Enables unhealthy instance replacement. If this feature is enabled, AS will replace instances that are flagged as unhealthy by Cloud Monitor. If this parameter is not specified, the value will be False by default.
 	ReplaceMonitorUnhealthy *bool `json:"ReplaceMonitorUnhealthy,omitempty" name:"ReplaceMonitorUnhealthy"`
+
+	// 
+	ScalingMode *string `json:"ScalingMode,omitempty" name:"ScalingMode"`
 }
 
 type SetInstancesProtectionRequest struct {
@@ -2674,7 +2701,7 @@ type StartAutoScalingInstancesRequest struct {
 	// The scaling group ID.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
-	// The list of the CVM instances you want to launch.
+	// The list of the CVM instances you want to start up.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
@@ -2850,6 +2877,12 @@ type UpgradeLaunchConfigurationRequest struct {
 
 	// CVM HostName settings.
 	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitempty" name:"HostNameSettings"`
+
+	// 
+	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitempty" name:"InstanceNameSettings"`
+
+	// 
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 }
 
 func (r *UpgradeLaunchConfigurationRequest) ToJsonString() string {

@@ -108,7 +108,7 @@ func NewCreateAdaptiveDynamicStreamingTemplateResponse() (response *CreateAdapti
     return
 }
 
-// This API is used to create up to 100 adaptive bitrate streaming templates.
+// This API is used to create an adaptive bitrate streaming template. Up up to 100 such templates can be created.
 func (c *Client) CreateAdaptiveDynamicStreamingTemplate(request *CreateAdaptiveDynamicStreamingTemplateRequest) (response *CreateAdaptiveDynamicStreamingTemplateResponse, err error) {
     if request == nil {
         request = NewCreateAdaptiveDynamicStreamingTemplateRequest()
