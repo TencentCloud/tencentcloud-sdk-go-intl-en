@@ -179,22 +179,22 @@ type CreateAccountRequest struct {
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Login username, which can contain 1–32 letters, digits, underscores, and hyphens.
+	// Login username, which can contain 1-32 letters, digits, underscores, and hyphens.
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 
 	// Host that can be logged in to, which is in the same format as the host of the MySQL account and supports wildcards, such as %, 10.%, and 10.20.%.
 	Host *string `json:"Host,omitempty" name:"Host"`
 
-	// Account password, which can contain 6–32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+	// Account password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the slave will be used first, and if it is unavailable, the master will be used; 2: the slave will be used first, and if it is unavailable, the operation will fail.
+	// Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the secondary will be used first, and if it is unavailable, the primary will be used; 2: the secondary will be used first, and if it is unavailable, the operation will fail.
 	ReadOnly *int64 `json:"ReadOnly,omitempty" name:"ReadOnly"`
 
-	// Account remarks, which can contain 0–256 letters, digits, and common symbols.
+	// Account remarks, which can contain 0-256 letters, digits, and common symbols.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Determines whether the slave is unavailable based on the passed-in time
+	// Determines whether the secondary is unavailable based on the passed-in time
 	DelayThresh *int64 `json:"DelayThresh,omitempty" name:"DelayThresh"`
 }
 
@@ -254,10 +254,10 @@ type DBAccount struct {
 	// Last updated time
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// Read-only flag. 0: no; 1: for the account's SQL requests, the slave will be used first, and if it is unavailable, the master will be used; 2: the slave will be used first, and if it is unavailable, the operation will fail.
+	// Read-only flag. 0: no; 1: for the account's SQL requests, the secondary will be used first, and if it is unavailable, the primary will be used; 2: the secondary will be used first, and if it is unavailable, the operation will fail.
 	ReadOnly *int64 `json:"ReadOnly,omitempty" name:"ReadOnly"`
 
-	// This field is meaningful for read-only accounts, indicating to select a slave where the master/slave delay is below this value
+	// This field is meaningful for read-only accounts, indicating to select a secondary where the primary/secondary delay is below this value
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DelayThresh *int64 `json:"DelayThresh,omitempty" name:"DelayThresh"`
 }
@@ -351,7 +351,7 @@ type DBInstance struct {
 	// Original ID of instance (this field is obsolete and should not be depended on)
 	OriginSerialId *string `json:"OriginSerialId,omitempty" name:"OriginSerialId"`
 
-	// Number of nodes. 2: one master and one slave, 3: one master and two slaves
+	// Number of nodes. 2: one primary and one secondary, 3: one primary and two secondaries
 	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
 
 	// Whether it is a temp instance. 0: no, non-zero value: yes
@@ -810,7 +810,7 @@ type DescribeDBPerformanceDetailsResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Slave1 *PerformanceMonitorSet `json:"Slave1,omitempty" name:"Slave1"`
 
-		// Slave 2 performance monitoring data. If the instance is one-master-one-slave, it does not have this field
+		// Slave 2 performance monitoring data. If the instance is one-primary-one-secondary, it does not have this field
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Slave2 *PerformanceMonitorSet `json:"Slave2,omitempty" name:"Slave2"`
 
@@ -881,10 +881,10 @@ type DescribeDBPerformanceResponse struct {
 		// Number of active connections
 		ConnActive *MonitorData `json:"ConnActive,omitempty" name:"ConnActive"`
 
-		// Whether master/slave switch occurred. 1: yes, 0: no
+		// Whether primary/secondary switch occurred. 1: yes, 0: no
 		IsMasterSwitched *MonitorData `json:"IsMasterSwitched,omitempty" name:"IsMasterSwitched"`
 
-		// Master/slave delay
+		// primary/secondary delay
 		SlaveDelay *MonitorData `json:"SlaveDelay,omitempty" name:"SlaveDelay"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1037,7 +1037,7 @@ type DescribeDBSlowLogsRequest struct {
 	// Sorting order. Valid values: desc, asc
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 
-	// Whether to query slow queries of the slave. 0: master, 1: slave
+	// Whether to query slow queries of the secondary. 0: primary, 1: secondary
 	Slave *int64 `json:"Slave,omitempty" name:"Slave"`
 }
 
@@ -1329,7 +1329,7 @@ type ModifyAccountDescriptionRequest struct {
 	// Access host allowed for user. An account is uniquely identified by username and host.
 	Host *string `json:"Host,omitempty" name:"Host"`
 
-	// New account remarks, which can contain 0–256 characters.
+	// New account remarks, which can contain 0-256 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
@@ -1676,7 +1676,7 @@ type PerformanceMonitorSet struct {
 	// Cache hit rate
 	MemHitRate *MonitorData `json:"MemHitRate,omitempty" name:"MemHitRate"`
 
-	// Master/slave delay
+	// Primary/Secondary delay
 	SlaveDelay *MonitorData `json:"SlaveDelay,omitempty" name:"SlaveDelay"`
 
 	// Number of SELECT operations
@@ -1691,7 +1691,7 @@ type PerformanceMonitorSet struct {
 	// Number of INSERT operations
 	InsertTotal *MonitorData `json:"InsertTotal,omitempty" name:"InsertTotal"`
 
-	// Whether master/slave switch occurred. 1: yes, 0: no
+	// Whether primary/Secondary switch occurred. 1: yes, 0: no
 	IsMasterSwitched *MonitorData `json:"IsMasterSwitched,omitempty" name:"IsMasterSwitched"`
 }
 
@@ -1707,7 +1707,7 @@ type ResetAccountPasswordRequest struct {
 	// Access host allowed for user. An account is uniquely identified by username and host.
 	Host *string `json:"Host,omitempty" name:"Host"`
 
-	// New password, which can contain 6–32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+	// New password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
 	Password *string `json:"Password,omitempty" name:"Password"`
 }
 

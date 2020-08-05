@@ -808,7 +808,7 @@ func NewDescribeCCIpAllowDenyResponse() (response *DescribeCCIpAllowDenyResponse
     return
 }
 
-// This API is used to get the CC IP blacklist/whitelist.
+// This API is used to get the CC IP blocklist/allowlist.
 func (c *Client) DescribeCCIpAllowDeny(request *DescribeCCIpAllowDenyRequest) (response *DescribeCCIpAllowDenyResponse, err error) {
     if request == nil {
         request = NewDescribeCCIpAllowDenyRequest()
@@ -883,7 +883,7 @@ func NewDescribeCCUrlAllowResponse() (response *DescribeCCUrlAllowResponse) {
     return
 }
 
-// This API is used to get the CC URL whitelist.
+// This API is used to get the CC URL allowlist.
 func (c *Client) DescribeCCUrlAllow(request *DescribeCCUrlAllowRequest) (response *DescribeCCUrlAllowResponse, err error) {
     if request == nil {
         request = NewDescribeCCUrlAllowRequest()
@@ -1933,7 +1933,7 @@ func NewModifyCCIpAllowDenyResponse() (response *ModifyCCIpAllowDenyResponse) {
     return
 }
 
-// This API is used to add/remove a CC IP to/from the blacklist/whitelist.
+// This API is used to add/remove a CC IP to/from the blocklist/allowlist.
 func (c *Client) ModifyCCIpAllowDeny(request *ModifyCCIpAllowDenyRequest) (response *ModifyCCIpAllowDenyResponse, err error) {
     if request == nil {
         request = NewModifyCCIpAllowDenyRequest()
@@ -2058,7 +2058,7 @@ func NewModifyCCUrlAllowResponse() (response *ModifyCCUrlAllowResponse) {
     return
 }
 
-// This API is used to add/remove a CC URL to/from the whitelist.
+// This API is used to add/remove a CC URL to/from the allowlist.
 func (c *Client) ModifyCCUrlAllow(request *ModifyCCUrlAllowRequest) (response *ModifyCCUrlAllowResponse, err error) {
     if request == nil {
         request = NewModifyCCUrlAllowRequest()
@@ -2464,6 +2464,56 @@ func (c *Client) ModifyNetReturnSwitch(request *ModifyNetReturnSwitchRequest) (r
         request = NewModifyNetReturnSwitchRequest()
     }
     response = NewModifyNetReturnSwitchResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNewDomainRulesRequest() (request *ModifyNewDomainRulesRequest) {
+    request = &ModifyNewDomainRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dayu", APIVersion, "ModifyNewDomainRules")
+    return
+}
+
+func NewModifyNewDomainRulesResponse() (response *ModifyNewDomainRulesResponse) {
+    response = &ModifyNewDomainRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify layer-7 forwarding rules.
+func (c *Client) ModifyNewDomainRules(request *ModifyNewDomainRulesRequest) (response *ModifyNewDomainRulesResponse, err error) {
+    if request == nil {
+        request = NewModifyNewDomainRulesRequest()
+    }
+    response = NewModifyNewDomainRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNewL4RuleRequest() (request *ModifyNewL4RuleRequest) {
+    request = &ModifyNewL4RuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dayu", APIVersion, "ModifyNewL4Rule")
+    return
+}
+
+func NewModifyNewL4RuleResponse() (response *ModifyNewL4RuleResponse) {
+    response = &ModifyNewL4RuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify layer-4 forwarding rules.
+func (c *Client) ModifyNewL4Rule(request *ModifyNewL4RuleRequest) (response *ModifyNewL4RuleResponse, err error) {
+    if request == nil {
+        request = NewModifyNewL4RuleRequest()
+    }
+    response = NewModifyNewL4RuleResponse()
     err = c.Send(request, response)
     return
 }

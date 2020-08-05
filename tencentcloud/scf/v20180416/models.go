@@ -31,7 +31,7 @@ type AccessInfo struct {
 
 type Alias struct {
 
-	// Master version of alias
+	// Master version pointed to by the alias
 	FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
 
 	// Alias name
@@ -52,6 +52,45 @@ type Alias struct {
 	// Update time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
+}
+
+type CfsConfig struct {
+
+	// File system information list
+	CfsInsList []*CfsInsInfo `json:"CfsInsList,omitempty" name:"CfsInsList" list`
+}
+
+type CfsInsInfo struct {
+
+	// User ID
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// User group ID
+	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+
+	// CFS instance ID
+	CfsId *string `json:"CfsId,omitempty" name:"CfsId"`
+
+	// File system mount target ID
+	MountInsId *string `json:"MountInsId,omitempty" name:"MountInsId"`
+
+	// Local mount target
+	LocalMountDir *string `json:"LocalMountDir,omitempty" name:"LocalMountDir"`
+
+	// Remote mount target
+	RemoteMountDir *string `json:"RemoteMountDir,omitempty" name:"RemoteMountDir"`
+
+	// File system IP
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
+
+	// VPC ID of file system
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MountVpcId *string `json:"MountVpcId,omitempty" name:"MountVpcId"`
+
+	// VPC subnet ID of file system
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MountSubnetId *string `json:"MountSubnetId,omitempty" name:"MountSubnetId"`
 }
 
 type Code struct {
@@ -162,13 +201,13 @@ func (r *CopyFunctionResponse) FromJsonString(s string) error {
 type CreateAliasRequest struct {
 	*tchttp.BaseRequest
 
-	// Alias name, which must be unique in the function, can contain 1–64 letters, digits, `_`, and `-`, and must begin with a letter
+	// Alias name, which must be unique in the function, can contain 1 to 64 letters, digits, `_`, and `-`, and must begin with a letter
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Function name
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
-	// Master version of alias
+	// Master version pointed to by the alias
 	FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
 
 	// Function namespace
@@ -217,16 +256,16 @@ type CreateFunctionRequest struct {
 	// Function code. Note: You cannot specify `Cos` and `ZipFile` at the same time.
 	Code *Code `json:"Code,omitempty" name:"Code"`
 
-	// Name of the handler, which is in the “file name.handler name” form. Use periods (.) to separate a file name and function name. The file name and function name must start and end with a letter and can contain 2 to 60 characters, including letters, digits, hyphens (-), and underscores (_).
+	// Name of the handler, which is in the 'file name.handler name' form. Use periods (.) to separate a file name and function name. The file name and function name must start and end with a letter and can contain 2 to 60 characters, including letters, digits, hyphens (-), and underscores (_).
 	Handler *string `json:"Handler,omitempty" name:"Handler"`
 
 	// Function description. It can contain up to 1,000 characters including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128–3,072 MB in increments of 128 MB
+	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3072 MB in increments of 128 MB
 	MemorySize *int64 `json:"MemorySize,omitempty" name:"MemorySize"`
 
-	// Maximum execution duration of function in seconds. Value range: 1–900 seconds. Default value: 3 seconds
+	// Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
 	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 
 	// Function environment variable
@@ -264,6 +303,9 @@ type CreateFunctionRequest struct {
 
 	// Public network access configuration
 	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitempty" name:"PublicNetConfig"`
+
+	// File system configuration parameter, which is used for the function to mount the file system
+	CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
 }
 
 func (r *CreateFunctionRequest) ToJsonString() string {
@@ -756,7 +798,7 @@ type GetAliasResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Master version of alias
+		// Master version pointed to by the alias
 		FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
 
 		// Alias name
@@ -1049,6 +1091,18 @@ type GetFunctionResponse struct {
 	// Note: This field may return null, indicating that no valid value was found.
 		OnsEnable *string `json:"OnsEnable,omitempty" name:"OnsEnable"`
 
+		// File system configuration parameter, which is used for the function to mount the file system
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
+
+		// Function billing status
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		AvailableStatus *string `json:"AvailableStatus,omitempty" name:"AvailableStatus"`
+
+		// Function version
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1089,10 +1143,10 @@ type GetLayerVersionResponse struct {
 		// Compatible runtimes
 		CompatibleRuntimes []*string `json:"CompatibleRuntimes,omitempty" name:"CompatibleRuntimes" list`
 
-		// SHA256 encoding of file on layer version
+		// SHA256 encoding of version file on the layer
 		CodeSha256 *string `json:"CodeSha256,omitempty" name:"CodeSha256"`
 
-		// Download address of file on layer version
+		// Download address of version file on the layer
 		Location *string `json:"Location,omitempty" name:"Location"`
 
 		// Version creation time
@@ -1235,7 +1289,7 @@ type ListAliasesRequest struct {
 	// Function namespace
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
-	// If this parameter is provided, only aliases associated with this function version will be returned
+	// If this parameter is provided, only aliases associated with this function version will be returned.
 	FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
 
 	// Data offset. Default value: 0
@@ -1503,7 +1557,7 @@ type ListTriggersRequest struct {
 	Order *string `json:"Order,omitempty" name:"Order"`
 
 	// * Qualifier:
-	// Function version, i.e., alias
+	// Function version, alias
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
@@ -1666,7 +1720,7 @@ type PublicNetConfigOut struct {
 type PublishLayerVersionRequest struct {
 	*tchttp.BaseRequest
 
-	// Layer name, which can contain 1–64 English letters, digits, hyphens, and underscores, must begin with a letter, and cannot end with a hyphen or underscore
+	// Layer name, which can contain 1-64 English letters, digits, hyphens, and underscores, must begin with a letter, and cannot end with a hyphen or underscore
 	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
 
 	// Runtimes compatible with layer. Multiple choices are allowed. The valid values of this parameter correspond to the valid values of the `Runtime` of the function.
@@ -1850,7 +1904,7 @@ type Trigger struct {
 
 type TriggerInfo struct {
 
-	// Enablement switch
+	// Whether to enable
 	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
 
 	// Function version or alias
@@ -1888,7 +1942,7 @@ type UpdateAliasRequest struct {
 	// Alias name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Master version of alias
+	// Master version pointed to by the alias
 	FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
 
 	// Function namespace
@@ -2001,10 +2055,10 @@ type UpdateFunctionConfigurationRequest struct {
 	// Function description. It can contain up to 1,000 characters, including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128–3,072 MB in increments of 128 MB.
+	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3,072 MB in increments of 128 MB.
 	MemorySize *int64 `json:"MemorySize,omitempty" name:"MemorySize"`
 
-	// Maximum execution duration of function in seconds. Value range: 1–900 seconds. Default value: 3 seconds
+	// Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
 	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 
 	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Golang1 and Java8
@@ -2042,6 +2096,9 @@ type UpdateFunctionConfigurationRequest struct {
 
 	// Public network access configuration
 	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitempty" name:"PublicNetConfig"`
+
+	// File system configuration input parameter, which is used for the function to bind the file system
+	CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
 }
 
 func (r *UpdateFunctionConfigurationRequest) ToJsonString() string {

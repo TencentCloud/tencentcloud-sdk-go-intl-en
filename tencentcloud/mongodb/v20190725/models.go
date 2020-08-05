@@ -148,7 +148,7 @@ type CreateDBInstanceHourRequest struct {
 	// VPC subnet ID. If VpcId is set, then SubnetId will be required
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance password. If this parameter is not set, you need to set an instance password through the password setting API after creating an instance. The password can only contain 8–16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()` |
+	// Instance password. If this parameter is not set, you need to set an instance password through the password setting API after creating an instance. The password can only contain 8-16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()` |
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// Project ID. If this parameter is not set, the default project will be used
@@ -156,6 +156,15 @@ type CreateDBInstanceHourRequest struct {
 
 	// Instance tag information
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
+
+	// 
+	Clone *int64 `json:"Clone,omitempty" name:"Clone"`
+
+	// 
+	Father *string `json:"Father,omitempty" name:"Father"`
+
+	// 
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
 }
 
 func (r *CreateDBInstanceHourRequest) ToJsonString() string {
@@ -194,7 +203,7 @@ func (r *CreateDBInstanceHourResponse) FromJsonString(s string) error {
 type CreateDBInstanceRequest struct {
 	*tchttp.BaseRequest
 
-	// Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of slave nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
+	// Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of secondary nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
 	// Instance memory size in GB.
@@ -233,7 +242,7 @@ type CreateDBInstanceRequest struct {
 	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the `DescribeSubnets` API to query the subnet list.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance password. If this parameter is not set, you need to set an instance password through the `SetPassword` API after creating an instance. The password can only contain 8–16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()`.
+	// Instance password. If this parameter is not set, you need to set an instance password through the `SetPassword` API after creating an instance. The password can only contain 8-16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()`.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// Instance tag information.
@@ -241,6 +250,18 @@ type CreateDBInstanceRequest struct {
 
 	// Auto-renewal flag. Valid values: 0 (auto-renewal not enabled), 1 (auto-renewal enabled). Default value: 0.
 	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// 
+	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// 
+	Clone *int64 `json:"Clone,omitempty" name:"Clone"`
+
+	// 
+	Father *string `json:"Father,omitempty" name:"Father"`
+
+	// 
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
 }
 
 func (r *CreateDBInstanceRequest) ToJsonString() string {
@@ -349,6 +370,12 @@ type DescribeClientConnectionsRequest struct {
 
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// 
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// 
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
 func (r *DescribeClientConnectionsRequest) ToJsonString() string {
@@ -366,6 +393,9 @@ type DescribeClientConnectionsResponse struct {
 
 		// Client connection information, including client IP and number of connections
 		Clients []*ClientConnection `json:"Clients,omitempty" name:"Clients" list`
+
+		// 
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -491,7 +521,7 @@ type DescribeDBInstancesRequest struct {
 	// Billing type. Valid value: 0 (pay-as-you-go)
 	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
 
-	// Number of results to be returned for a single request. Valid values: 1–100. Default value: 20
+	// Number of results to be returned for a single request. Valid values: 1-100. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0
@@ -730,7 +760,7 @@ type InquirePriceCreateDBInstancesRequest struct {
 	// Instance region name in the format of ap-guangzhou-2.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of slave nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
+	// Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of secondary nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
 	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
 	// Instance memory size in GB.
@@ -947,7 +977,7 @@ type InstanceDetail struct {
 	// Instance machine type
 	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
 
-	// Number of slave nodes of an instance
+	// Number of secondary nodes of an instance
 	SecondaryNum *uint64 `json:"SecondaryNum,omitempty" name:"SecondaryNum"`
 
 	// Number of instance shards
@@ -977,7 +1007,7 @@ type InstanceDetail struct {
 	// Information of temp instances
 	CloneInstances []*DBInstanceInfo `json:"CloneInstances,omitempty" name:"CloneInstances" list`
 
-	// Information of associated instances. For a promoted instance, this field represents information of its temp instance; for a temp instance, this field represents information of its promoted instance; and for a read-only/disaster recovery instance, this field represents information of its master instance
+	// Information of associated instances. For a promoted instance, this field represents information of its temp instance; for a temp instance, this field represents information of its promoted instance; and for a read-only/disaster recovery instance, this field represents information of its primary instance
 	RelatedInstance *DBInstanceInfo `json:"RelatedInstance,omitempty" name:"RelatedInstance"`
 
 	// Instance tag information set
@@ -1216,7 +1246,7 @@ type ShardInfo struct {
 	// Shard oplog size in MB
 	OplogSize *uint64 `json:"OplogSize,omitempty" name:"OplogSize"`
 
-	// Number of slave nodes of a shard
+	// Number of secondary nodes of a shard
 	SecondaryNum *uint64 `json:"SecondaryNum,omitempty" name:"SecondaryNum"`
 
 	// Shard physical ID
@@ -1282,10 +1312,10 @@ type SpecItem struct {
 	// Cluster type. Valid values: 1 (sharding cluster), 0 (replica set cluster)
 	ClusterType *uint64 `json:"ClusterType,omitempty" name:"ClusterType"`
 
-	// Minimum number of slave nodes in a replica set
+	// Minimum number of secondary nodes in a replica set
 	MinNodeNum *uint64 `json:"MinNodeNum,omitempty" name:"MinNodeNum"`
 
-	// Maximum number of slave nodes in a replica set
+	// Maximum number of secondary nodes in a replica set
 	MaxNodeNum *uint64 `json:"MaxNodeNum,omitempty" name:"MaxNodeNum"`
 
 	// Minimum number of shards
@@ -1294,10 +1324,10 @@ type SpecItem struct {
 	// Maximum number of shards
 	MaxReplicateSetNum *uint64 `json:"MaxReplicateSetNum,omitempty" name:"MaxReplicateSetNum"`
 
-	// Minimum number of slave nodes in a shard
+	// Minimum number of secondary nodes in a shard
 	MinReplicateSetNodeNum *uint64 `json:"MinReplicateSetNodeNum,omitempty" name:"MinReplicateSetNodeNum"`
 
-	// Maximum number of slave nodes in a shard
+	// Maximum number of secondary nodes in a shard
 	MaxReplicateSetNodeNum *uint64 `json:"MaxReplicateSetNodeNum,omitempty" name:"MaxReplicateSetNodeNum"`
 
 	// Server type. Valid values: 0 (HIO), 4 (HIO10G)

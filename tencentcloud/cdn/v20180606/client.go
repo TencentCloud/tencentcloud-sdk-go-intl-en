@@ -133,7 +133,7 @@ func NewDeleteClsLogTopicResponse() (response *DeleteClsLogTopicResponse) {
     return
 }
 
-// This API is used to delete a log topic. Note: when a log topic is deleted, all logs of the domain names bound to it will no longer be published to the topic, and the logs previously published to the topic will be deleted. This action will take effect within 5–15 minutes.
+// This API is used to delete a log topic. Note: when a log topic is deleted, all logs of the domain names bound to it will no longer be published to the topic, and the logs previously published to the topic will be deleted. This action will take effect within 5-15 minutes.
 func (c *Client) DeleteClsLogTopic(request *DeleteClsLogTopicRequest) (response *DeleteClsLogTopicResponse, err error) {
     if request == nil {
         request = NewDeleteClsLogTopicRequest()
@@ -342,7 +342,7 @@ func NewDescribeIpStatusResponse() (response *DescribeIpStatusResponse) {
     return
 }
 
-// This API is used to query the status of the edge servers and intermediate nodes on the domain name acceleration platform. Note: edge servers are not generally available. This API can only be used by whitelisted accounts.
+// This API is used to query the status of the edge servers and intermediate nodes on the domain name acceleration platform. Note: edge servers are not generally available. This API can only be used by allowlisted accounts.
 func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *DescribeIpStatusResponse, err error) {
     if request == nil {
         request = NewDescribeIpStatusRequest()
@@ -657,7 +657,7 @@ func NewDisableClsLogTopicResponse() (response *DisableClsLogTopicResponse) {
     return
 }
 
-// This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5–15 minutes.
+// This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5-15 minutes.
 func (c *Client) DisableClsLogTopic(request *DisableClsLogTopicRequest) (response *DisableClsLogTopicResponse, err error) {
     if request == nil {
         request = NewDisableClsLogTopicRequest()
@@ -707,7 +707,7 @@ func NewEnableClsLogTopicResponse() (response *EnableClsLogTopicResponse) {
     return
 }
 
-// This API is used to start publishing to a log topic. Note: after a log topic is enabled, all logs of the domain names bound to the topic will be published to it. This action will take effect within 5–15 minutes.
+// This API is used to start publishing to a log topic. Note: after a log topic is enabled, all logs of the domain names bound to the topic will be published to it. This action will take effect within 5-15 minutes.
 func (c *Client) EnableClsLogTopic(request *EnableClsLogTopicRequest) (response *EnableClsLogTopicResponse, err error) {
     if request == nil {
         request = NewEnableClsLogTopicRequest()

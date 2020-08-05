@@ -270,7 +270,7 @@ type CreateInstanceRequest struct {
 	SupportHA *uint64 `json:"SupportHA,omitempty" name:"SupportHA"`
 
 	// Instance name.
-	// <li>Length limit: 6–36 characters.</li>
+	// <li>Length limit: 6-36 characters.</li>
 	// <li>Only letters, numbers, dashes (-), and underscores (_) are supported.</li>
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
@@ -410,6 +410,12 @@ type DescribeClusterNodesRequest struct {
 
 	// Number of returned results per page. Default value: 100. Maximum value: 100
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// 
+	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
+
+	// 
+	SearchFields []*SearchItem `json:"SearchFields,omitempty" name:"SearchFields" list`
 }
 
 func (r *DescribeClusterNodesRequest) ToJsonString() string {
@@ -435,6 +441,9 @@ type DescribeClusterNodesResponse struct {
 		// List of tag keys owned by user
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+
+		// 
+		HardwareResourceTypeList []*string `json:"HardwareResourceTypeList,omitempty" name:"HardwareResourceTypeList" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1109,9 +1118,11 @@ type NodeHardwareInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
-	// Whether it is an automatically scalable node. 0: general node, 1: automatically scalable node.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 
 	AutoFlag *int64 `json:"AutoFlag,omitempty" name:"AutoFlag"`
+
+	// 
+	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
 }
 
 type OutterResource struct {
@@ -1160,6 +1171,27 @@ type Placement struct {
 
 	// AZ where the instance resides, such as ap-guangzhou-1. You can call the `DescribeZones` API and see the `Zone` field to get the value of this parameter.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+}
+
+type PodSpec struct {
+
+	// 
+	ResourceProviderIdentifier *string `json:"ResourceProviderIdentifier,omitempty" name:"ResourceProviderIdentifier"`
+
+	// 
+	ResourceProviderType *string `json:"ResourceProviderType,omitempty" name:"ResourceProviderType"`
+
+	// 
+	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
+
+	// 
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// 
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// 
+	DataVolumes []*string `json:"DataVolumes,omitempty" name:"DataVolumes" list`
 }
 
 type PreExecuteFileSettings struct {
@@ -1356,6 +1388,12 @@ type ScaleOutInstanceRequest struct {
 
 	// List of tags bound to added nodes.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// 
+	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
+
+	// 
+	PodSpec *PodSpec `json:"PodSpec,omitempty" name:"PodSpec"`
 }
 
 func (r *ScaleOutInstanceRequest) ToJsonString() string {
@@ -1402,6 +1440,15 @@ func (r *ScaleOutInstanceResponse) ToJsonString() string {
 
 func (r *ScaleOutInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type SearchItem struct {
+
+	// 
+	SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
+
+	// 
+	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
 }
 
 type Tag struct {

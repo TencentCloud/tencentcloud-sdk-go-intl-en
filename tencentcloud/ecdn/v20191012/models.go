@@ -35,7 +35,7 @@ type AddEcdnDomainRequest struct {
 	// Project ID. Default value: 0.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// IP blacklist/whitelist configuration.
+	// IP block/allowlist configuration.
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
 	// IP access limit configuration.
@@ -414,9 +414,9 @@ type DescribeEcdnStatisticsRequest struct {
 
 	// Time granularity, which can be:
 	// 1 day	 1, 5, 15, 30, 60, 120, 240, 1440 
-	// 2–3 days 15, 30, 60, 120, 240, 1440
-	// 4–7 days 30, 60, 120, 240, 1440
-	// 8–90 days	 60, 120, 240, 1440
+	// 2-3 days 15, 30, 60, 120, 240, 1440
+	// 4-7 days 30, 60, 120, 240, 1440
+	// 8-90 days	 60, 120, 240, 1440
 	Interval *int64 `json:"Interval,omitempty" name:"Interval"`
 
 	// Specifies the list of domain names to be queried
@@ -644,7 +644,7 @@ type DomainDetailInfo struct {
 	// Origin server configuration.
 	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
 
-	// IP blacklist/whitelist configuration.
+	// IP blocklist/allowlist configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
@@ -743,6 +743,18 @@ type ForceRedirect struct {
 	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitempty" name:"RedirectStatusCode"`
 }
 
+type Hsts struct {
+
+	// 
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// 
+	MaxAge *int64 `json:"MaxAge,omitempty" name:"MaxAge"`
+
+	// 
+	IncludeSubDomains *string `json:"IncludeSubDomains,omitempty" name:"IncludeSubDomains"`
+}
+
 type HttpHeaderPathRule struct {
 
 	// HTTP header setting method. Valid values: add (add header), set (set header), del (delete header).
@@ -800,18 +812,21 @@ type Https struct {
 	// HTTPS certificate deployment status. Valid values: closed (disabled), deploying (deploying), deployed (deployment succeeded), failed (deployment failed). This parameter cannot be used as an input parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SslStatus *string `json:"SslStatus,omitempty" name:"SslStatus"`
+
+	// 
+	Hsts *Hsts `json:"Hsts,omitempty" name:"Hsts"`
 }
 
 type IpFilter struct {
 
-	// IP blacklist/whitelist switch. Valid values: on, off.
+	// IP blocklist/allowlist switch. Valid values: on, off.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// IP blacklist/whitelist type. Valid values: whitelist, blacklist.
+	// IP blocklist/allowlist type. Valid values: whitelist, blacklist.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
-	// IP blacklist/whitelist list.
+	// IP blocklist/allowlist list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
 }
@@ -1119,7 +1134,7 @@ type UpdateDomainConfigRequest struct {
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// IP blacklist/whitelist configuration.
+	// IP blocklist/allowlist configuration.
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
 	// IP access limit configuration.

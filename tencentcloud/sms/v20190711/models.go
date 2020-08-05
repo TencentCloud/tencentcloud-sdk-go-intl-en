@@ -666,6 +666,9 @@ type PullSmsReplyStatusByPhoneNumberRequest struct {
 
 	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
 	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
+
+	// 
+	EndDateTime *uint64 `json:"EndDateTime,omitempty" name:"EndDateTime"`
 }
 
 func (r *PullSmsReplyStatusByPhoneNumberRequest) ToJsonString() string {
@@ -783,6 +786,9 @@ type PullSmsSendStatusByPhoneNumberRequest struct {
 
 	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
 	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
+
+	// 
+	EndDateTime *uint64 `json:"EndDateTime,omitempty" name:"EndDateTime"`
 }
 
 func (r *PullSmsSendStatusByPhoneNumberRequest) ToJsonString() string {

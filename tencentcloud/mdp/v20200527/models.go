@@ -287,11 +287,11 @@ func (r *DescribeMediaPackageChannelsResponse) FromJsonString(s string) error {
 
 type EndpointAuthInfo struct {
 
-	// The security group whitelist in CIDR format.
+	// The security group allowlist in CIDR format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList" list`
 
-	// The security group blacklist in CIDR format.
+	// The security group blocklist in CIDR format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList" list`
 

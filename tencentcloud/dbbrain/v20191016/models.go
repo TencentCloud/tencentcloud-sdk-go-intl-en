@@ -134,6 +134,55 @@ func (r *DescribeDBDiagHistoryResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDBSpaceStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Query period in days. The end date is the current date and the query period is 7 days by default.
+	RangeDays *int64 `json:"RangeDays,omitempty" name:"RangeDays"`
+}
+
+func (r *DescribeDBSpaceStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBSpaceStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBSpaceStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Disk usage growth in MB.
+		Growth *int64 `json:"Growth,omitempty" name:"Growth"`
+
+		// Available disk space in MB.
+		Remain *int64 `json:"Remain,omitempty" name:"Remain"`
+
+		// Total disk space in MB.
+		Total *int64 `json:"Total,omitempty" name:"Total"`
+
+		// Estimated number of available days.
+		AvailableDays *int64 `json:"AvailableDays,omitempty" name:"AvailableDays"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBSpaceStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBSpaceStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSlowLogTimeSeriesStatsRequest struct {
 	*tchttp.BaseRequest
 
@@ -241,6 +290,98 @@ func (r *DescribeSlowLogTopSqlsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeTopSpaceTableTimeSeriesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of returned top tables. Default value: 20. Maximum value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize. Default value: PhysicalFileSize.
+	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+
+	// Start date. It can be as early as 6 days before the current date, and defaults to 6 days before the end date.
+	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+
+	// End date. It can be as early as 6 days before the current date, and defaults to the current date.
+	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+}
+
+func (r *DescribeTopSpaceTableTimeSeriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTopSpaceTableTimeSeriesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTopSpaceTableTimeSeriesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Time series list of the returned space statistics of top tables.
+		TopSpaceTableTimeSeries []*TableSpaceTimeSeries `json:"TopSpaceTableTimeSeries,omitempty" name:"TopSpaceTableTimeSeries" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTopSpaceTableTimeSeriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTopSpaceTableTimeSeriesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTopSpaceTablesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of returned top tables. Default value: 20. Maximum value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize. Default value: PhysicalFileSize.
+	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+}
+
+func (r *DescribeTopSpaceTablesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTopSpaceTablesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTopSpaceTablesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of the returned space statistics of top tables.
+		TopSpaceTables []*TableSpaceData `json:"TopSpaceTables,omitempty" name:"TopSpaceTables" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTopSpaceTablesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTopSpaceTablesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DiagHistoryEventItem struct {
 
 	// Diagnosis type.
@@ -275,6 +416,28 @@ type DiagHistoryEventItem struct {
 	// Region
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Region *string `json:"Region,omitempty" name:"Region"`
+}
+
+type MonitorFloatMetric struct {
+
+	// Metric name.
+	Metric *string `json:"Metric,omitempty" name:"Metric"`
+
+	// Metric unit.
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// Metric value.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Values []*float64 `json:"Values,omitempty" name:"Values" list`
+}
+
+type MonitorFloatMetricSeriesData struct {
+
+	// Monitoring metric.
+	Series []*MonitorFloatMetric `json:"Series,omitempty" name:"Series" list`
+
+	// Timestamp corresponding to monitoring metric.
+	Timestamp []*int64 `json:"Timestamp,omitempty" name:"Timestamp" list`
 }
 
 type MonitorMetric struct {
@@ -360,6 +523,54 @@ type SlowLogTopSqlItem struct {
 
 	// Ratio of total number of returned rows
 	RowsSentRatio *float64 `json:"RowsSentRatio,omitempty" name:"RowsSentRatio"`
+}
+
+type TableSpaceData struct {
+
+	// Table name.
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Database name.
+	TableSchema *string `json:"TableSchema,omitempty" name:"TableSchema"`
+
+	// Database table storage engine.
+	Engine *string `json:"Engine,omitempty" name:"Engine"`
+
+	// Data space in MB.
+	DataLength *float64 `json:"DataLength,omitempty" name:"DataLength"`
+
+	// Index space in MB.
+	IndexLength *float64 `json:"IndexLength,omitempty" name:"IndexLength"`
+
+	// Fragmented space in MB.
+	DataFree *float64 `json:"DataFree,omitempty" name:"DataFree"`
+
+	// Total space usage in MB.
+	TotalLength *float64 `json:"TotalLength,omitempty" name:"TotalLength"`
+
+	// Fragmented rate (%).
+	FragRatio *float64 `json:"FragRatio,omitempty" name:"FragRatio"`
+
+	// Number of rows.
+	TableRows *int64 `json:"TableRows,omitempty" name:"TableRows"`
+
+	// Size in MB of the physical file exclusive to a table.
+	PhysicalFileSize *float64 `json:"PhysicalFileSize,omitempty" name:"PhysicalFileSize"`
+}
+
+type TableSpaceTimeSeries struct {
+
+	// Table name.
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Database name.
+	TableSchema *string `json:"TableSchema,omitempty" name:"TableSchema"`
+
+	// Database table storage engine.
+	Engine *string `json:"Engine,omitempty" name:"Engine"`
+
+	// Monitoring metric data in a unit of time interval.
+	SeriesData *MonitorFloatMetricSeriesData `json:"SeriesData,omitempty" name:"SeriesData"`
 }
 
 type TimeSlice struct {

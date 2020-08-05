@@ -58,7 +58,7 @@ func NewAddLoginWhiteListResponse() (response *AddLoginWhiteListResponse) {
     return
 }
 
-// This API is used to add a whitelist rule.
+// This API is used to add a allowlist rule.
 func (c *Client) AddLoginWhiteList(request *AddLoginWhiteListRequest) (response *AddLoginWhiteListResponse, err error) {
     if request == nil {
         request = NewAddLoginWhiteListRequest()
@@ -233,7 +233,7 @@ func NewDeleteLoginWhiteListResponse() (response *DeleteLoginWhiteListResponse) 
     return
 }
 
-// This API is used to delete a whitelist rule.
+// This API is used to delete a allowlist rule.
 func (c *Client) DeleteLoginWhiteList(request *DeleteLoginWhiteListRequest) (response *DeleteLoginWhiteListResponse, err error) {
     if request == nil {
         request = NewDeleteLoginWhiteListRequest()
@@ -658,7 +658,7 @@ func NewDescribeLoginWhiteListResponse() (response *DescribeLoginWhiteListRespon
     return
 }
 
-// This API is used to get the list of login whitelist entries.
+// This API is used to get the list of login allowlist entries.
 func (c *Client) DescribeLoginWhiteList(request *DescribeLoginWhiteListRequest) (response *DescribeLoginWhiteListResponse, err error) {
     if request == nil {
         request = NewDescribeLoginWhiteListRequest()
@@ -1583,7 +1583,7 @@ func NewModifyLoginWhiteListResponse() (response *ModifyLoginWhiteListResponse) 
     return
 }
 
-// This API is used to edit a whitelist rule.
+// This API is used to edit a allowlist rule.
 func (c *Client) ModifyLoginWhiteList(request *ModifyLoginWhiteListRequest) (response *ModifyLoginWhiteListResponse, err error) {
     if request == nil {
         request = NewModifyLoginWhiteListRequest()

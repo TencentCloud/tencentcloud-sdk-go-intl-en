@@ -1002,7 +1002,7 @@ type CreateLiveSnapshotTemplateRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Screencapturing interval in seconds. Default value: 10s.
-	// Value range: 5–600s.
+	// Value range: 5-600s.
 	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
 
 	// Screenshot width. Default value: 0 (original width).
@@ -1100,7 +1100,7 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Template name, such as 900 900p. This can be only a combination of letters and digits.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
-	// Video bitrate. Value range: 100–8,000.
+	// Video bitrate. Value range: 100-8,000.
 	// Note: The bitrate must be a multiple of 100.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
@@ -1111,7 +1111,7 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Note: This parameter will take effect later.
 	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
 
-	// Audio bitrate. Value range: 0–500. Default value: 0.
+	// Audio bitrate. Value range: 0-500. Default value: 0.
 	AudioBitrate *int64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
 	// Template description.
@@ -1154,7 +1154,7 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
 	AiTransCode *int64 `json:"AiTransCode,omitempty" name:"AiTransCode"`
 
-	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
+	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
 }
 
@@ -2477,10 +2477,10 @@ type DescribeLiveDomainsRequest struct {
 	// Filter by domain name type. 0: push. 1: playback
 	DomainType *uint64 `json:"DomainType,omitempty" name:"DomainType"`
 
-	// Number of entries per page. Value range: 10–100. Default value: 10.
+	// Number of entries per page. Value range: 10-100. Default value: 10.
 	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 
-	// Page number to get. Value range: 1–100000. Default value: 1.
+	// Page number to get. Value range: 1-100000. Default value: 1.
 	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
 
 	// 0: LVB, 1: LCB. Default value: 0.
@@ -4868,7 +4868,7 @@ type ModifyLiveSnapshotTemplateRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Screencapturing interval in seconds. Default value: 10s.
-	// Value range: 5–600s.
+	// Value range: 5-600s.
 	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
 
 	// Screenshot width. Default value: 0 (original width).
@@ -4940,13 +4940,13 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
 
 	// Audio bitrate. Default value: 0.
-	// Value range: 0–500.
+	// Value range: 0-500.
 	AudioBitrate *int64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
 	// Template description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Video bitrate. Value range: 100–8000 Kbps.
+	// Video bitrate. Value range: 100-8000 Kbps.
 	// Note: the bitrate value must be a multiple of 100.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
@@ -4962,10 +4962,10 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Height. Value range: 0-3000.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
-	// Frame rate. Value range: 0–200.
+	// Frame rate. Value range: 0-200.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Keyframe interval in seconds. Value range: 0–50.
+	// Keyframe interval in seconds. Value range: 0-50.
 	Gop *int64 `json:"Gop,omitempty" name:"Gop"`
 
 	// Rotation angle.
@@ -4985,7 +4985,7 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Whether to not exceed the original frame rate. 0: no; 1: yes. Default value: 0.
 	FpsToOrig *int64 `json:"FpsToOrig,omitempty" name:"FpsToOrig"`
 
-	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
+	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
 }
 
@@ -5290,12 +5290,12 @@ type RecordParam struct {
 
 	// Recording interval.
 	// In seconds. Default value: 1800.
-	// Value range: 300–7200.
+	// Value range: 300-7200.
 	// This parameter is not valid for HLS, and a file will be generated from push start to interruption during HLS recording.
 	RecordInterval *int64 `json:"RecordInterval,omitempty" name:"RecordInterval"`
 
 	// Recording storage period.
-	// In seconds. Value range: 0–93312000.
+	// In seconds. Value range: 0-93312000.
 	// 0: permanent storage.
 	StorageTime *int64 `json:"StorageTime,omitempty" name:"StorageTime"`
 
@@ -5470,14 +5470,14 @@ type SnapshotTemplateInfo struct {
 	// Template name.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
-	// Screencapturing interval. Value range: 5–300s.
+	// Screencapturing interval. Value range: 5-300s.
 	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
 
-	// Screenshot width. Value range: 0–3000. 
+	// Screenshot width. Value range: 0-3000. 
 	// 0: original width and fit to the original ratio.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Screenshot height. Value range: 0–2000.
+	// Screenshot height. Value range: 0-2000.
 	// 0: original height and fit to the original ratio.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
@@ -5661,25 +5661,25 @@ type TemplateInfo struct {
 	// h264/h265.
 	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
 
-	// Video bitrate. Value range: 100–8000 Kbps.
+	// Video bitrate. Value range: 100-8000 Kbps.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
 	// Audio codec. Valid values: aac, mp3.
 	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
 
-	// Audio bitrate. Value range: 0–500 Kbps.
+	// Audio bitrate. Value range: 0-500 Kbps.
 	AudioBitrate *int64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
-	// Width. Value range: 0–3000.
+	// Width. Value range: 0-3000.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Height. Value range: 0–3000.
+	// Height. Value range: 0-3000.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
-	// Frame rate. Value range: 0–200 FPS.
+	// Frame rate. Value range: 0-200 FPS.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Keyframe interval. Value range: 1–50s.
+	// Keyframe interval. Value range: 1-50s.
 	Gop *int64 `json:"Gop,omitempty" name:"Gop"`
 
 	// Rotation angle. Valid values: 0, 90, 180, 270.
@@ -5716,7 +5716,7 @@ type TemplateInfo struct {
 	// Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
 	AiTransCode *int64 `json:"AiTransCode,omitempty" name:"AiTransCode"`
 
-	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
+	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
 }
 

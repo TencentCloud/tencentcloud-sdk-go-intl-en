@@ -1228,7 +1228,7 @@ type DescribeLoginWhiteListResponse struct {
 		// Total number of records
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// Login whitelist array
+		// Login allowlist array
 		LoginWhiteLists []*LoginWhiteLists `json:"LoginWhiteLists,omitempty" name:"LoginWhiteLists" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2005,6 +2005,21 @@ type DescribeSecurityTrendsResponse struct {
 		// Baseline statistics array.
 		BaseLines []*SecurityTrend `json:"BaseLines,omitempty" name:"BaseLines" list`
 
+		// 
+		MaliciousRequests []*SecurityTrend `json:"MaliciousRequests,omitempty" name:"MaliciousRequests" list`
+
+		// 
+		HighRiskBashs []*SecurityTrend `json:"HighRiskBashs,omitempty" name:"HighRiskBashs" list`
+
+		// 
+		ReverseShells []*SecurityTrend `json:"ReverseShells,omitempty" name:"ReverseShells" list`
+
+		// 
+		PrivilegeEscalations []*SecurityTrend `json:"PrivilegeEscalations,omitempty" name:"PrivilegeEscalations" list`
+
+		// 
+		CyberAttacks []*SecurityTrend `json:"CyberAttacks,omitempty" name:"CyberAttacks" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -2058,6 +2073,12 @@ func (r *DescribeTagMachinesResponse) FromJsonString(s string) error {
 
 type DescribeTagsRequest struct {
 	*tchttp.BaseRequest
+
+	// 
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// 
+	MachineRegion *string `json:"MachineRegion,omitempty" name:"MachineRegion"`
 }
 
 func (r *DescribeTagsRequest) ToJsonString() string {
@@ -2899,6 +2920,12 @@ type LoginWhiteLists struct {
 
 	// Server IP
 	HostIp *string `json:"HostIp,omitempty" name:"HostIp"`
+
+	// 
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// 
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type LoginWhiteListsRule struct {
@@ -2915,11 +2942,17 @@ type LoginWhiteListsRule struct {
 	// Whether this rule is applied to all servers under the current account
 	IsGlobal *bool `json:"IsGlobal,omitempty" name:"IsGlobal"`
 
-	// Server for which the whitelist takes effect
+	// Server for which the allowlist takes effect
 	HostIp *string `json:"HostIp,omitempty" name:"HostIp"`
 
 	// Rule ID, used for rule updating
 	Id *uint64 `json:"Id,omitempty" name:"Id"`
+
+	// 
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// 
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type Machine struct {
@@ -2965,6 +2998,18 @@ type Machine struct {
 
 	// Tag information
 	Tag []*MachineTag `json:"Tag,omitempty" name:"Tag" list`
+
+	// 
+	BaselineNum *int64 `json:"BaselineNum,omitempty" name:"BaselineNum"`
+
+	// 
+	CyberAttackNum *int64 `json:"CyberAttackNum,omitempty" name:"CyberAttackNum"`
+
+	// 
+	SecurityStatus *string `json:"SecurityStatus,omitempty" name:"SecurityStatus"`
+
+	// 
+	InvasionNum *int64 `json:"InvasionNum,omitempty" name:"InvasionNum"`
 }
 
 type MachineTag struct {
@@ -2974,6 +3019,9 @@ type MachineTag struct {
 
 	// Tag name
 	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// 
+	TagId *uint64 `json:"TagId,omitempty" name:"TagId"`
 }
 
 type MaliciousRequest struct {
@@ -3524,6 +3572,9 @@ type SecurityDynamic struct {
 
 	// Security event message.
 	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// 
+	SecurityLevel *string `json:"SecurityLevel,omitempty" name:"SecurityLevel"`
 }
 
 type SecurityTrend struct {

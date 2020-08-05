@@ -93,6 +93,31 @@ func (c *Client) DescribeDBDiagHistory(request *DescribeDBDiagHistoryRequest) (r
     return
 }
 
+func NewDescribeDBSpaceStatusRequest() (request *DescribeDBSpaceStatusRequest) {
+    request = &DescribeDBSpaceStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeDBSpaceStatus")
+    return
+}
+
+func NewDescribeDBSpaceStatusResponse() (response *DescribeDBSpaceStatusResponse) {
+    response = &DescribeDBSpaceStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the overview of instance space usage during a specified time period, including disk usage growth (MB), available disk space (MB), total disk space (MB), and estimated number of available days.
+func (c *Client) DescribeDBSpaceStatus(request *DescribeDBSpaceStatusRequest) (response *DescribeDBSpaceStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSpaceStatusRequest()
+    }
+    response = NewDescribeDBSpaceStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSlowLogTimeSeriesStatsRequest() (request *DescribeSlowLogTimeSeriesStatsRequest) {
     request = &DescribeSlowLogTimeSeriesStatsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -139,6 +164,56 @@ func (c *Client) DescribeSlowLogTopSqls(request *DescribeSlowLogTopSqlsRequest) 
         request = NewDescribeSlowLogTopSqlsRequest()
     }
     response = NewDescribeSlowLogTopSqlsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTopSpaceTableTimeSeriesRequest() (request *DescribeTopSpaceTableTimeSeriesRequest) {
+    request = &DescribeTopSpaceTableTimeSeriesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeTopSpaceTableTimeSeries")
+    return
+}
+
+func NewDescribeTopSpaceTableTimeSeriesResponse() (response *DescribeTopSpaceTableTimeSeriesResponse) {
+    response = &DescribeTopSpaceTableTimeSeriesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the daily space data of top tables consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The return results are sorted by size by default.
+func (c *Client) DescribeTopSpaceTableTimeSeries(request *DescribeTopSpaceTableTimeSeriesRequest) (response *DescribeTopSpaceTableTimeSeriesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopSpaceTableTimeSeriesRequest()
+    }
+    response = NewDescribeTopSpaceTableTimeSeriesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTopSpaceTablesRequest() (request *DescribeTopSpaceTablesRequest) {
+    request = &DescribeTopSpaceTablesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeTopSpaceTables")
+    return
+}
+
+func NewDescribeTopSpaceTablesResponse() (response *DescribeTopSpaceTablesResponse) {
+    response = &DescribeTopSpaceTablesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query real-time space statistics of top tables of an instance. The return results are sorted by size by default.
+func (c *Client) DescribeTopSpaceTables(request *DescribeTopSpaceTablesRequest) (response *DescribeTopSpaceTablesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopSpaceTablesRequest()
+    }
+    response = NewDescribeTopSpaceTablesResponse()
     err = c.Send(request, response)
     return
 }

@@ -268,6 +268,31 @@ func (c *Client) DescribeMediaLiveChannelInputStatistics(request *DescribeMediaL
     return
 }
 
+func NewDescribeMediaLiveChannelLogsRequest() (request *DescribeMediaLiveChannelLogsRequest) {
+    request = &DescribeMediaLiveChannelLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveChannelLogs")
+    return
+}
+
+func NewDescribeMediaLiveChannelLogsResponse() (response *DescribeMediaLiveChannelLogsResponse) {
+    response = &DescribeMediaLiveChannelLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query MediaLive channel logs, such as push event logs.
+func (c *Client) DescribeMediaLiveChannelLogs(request *DescribeMediaLiveChannelLogsRequest) (response *DescribeMediaLiveChannelLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeMediaLiveChannelLogsRequest()
+    }
+    response = NewDescribeMediaLiveChannelLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMediaLiveChannelOutputStatisticsRequest() (request *DescribeMediaLiveChannelOutputStatisticsRequest) {
     request = &DescribeMediaLiveChannelOutputStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},

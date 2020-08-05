@@ -172,7 +172,7 @@ type CreateAclRequest struct {
 	// ACL operation mode. 0: UNKNOWN, 1: ANY, 2: ALL, 3: READ, 4: WRITE, 5: CREATE, 6: DELETE, 7: ALTER, 8: DESCRIBE, 9: CLUSTER_ACTION, 10: DESCRIBE_CONFIGS, 11: ALTER_CONFIGS
 	Operation *int64 `json:"Operation,omitempty" name:"Operation"`
 
-	// Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to whitelist), and other fields will be used for future ACLs compatible with open-source Kafka
+	// Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to allowlist), and other fields will be used for future ACLs compatible with open-source Kafka
 	PermissionType *int64 `json:"PermissionType,omitempty" name:"PermissionType"`
 
 	// The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
@@ -264,7 +264,7 @@ type CreateTopicIpWhiteListRequest struct {
 	// Topic name
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// IP whitelist list
+	// IP allowlist list
 	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList" list`
 }
 
@@ -281,7 +281,7 @@ type CreateTopicIpWhiteListResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Result of deleting topic IP whitelist
+		// Result of deleting topic IP allowlist
 		Result *JgwOperateResponse `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -313,10 +313,10 @@ type CreateTopicRequest struct {
 	// Number of replicas, which cannot be higher than the number of brokers. Maximum value: 3
 	ReplicaNum *int64 `json:"ReplicaNum,omitempty" name:"ReplicaNum"`
 
-	// IP whitelist switch. 1: enabled, 0: disabled. Default value: 0
+	// IP allowlist switch. 1: enabled, 0: disabled. Default value: 0
 	EnableWhiteList *int64 `json:"EnableWhiteList,omitempty" name:"EnableWhiteList"`
 
-	// IP whitelist list for quota limit, which is required if `enableWhileList` is 1
+	// IP allowlist list for quota limit, which is required if `enableWhileList` is 1
 	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList" list`
 
 	// Log cleanup policy, which is `delete` by default. `delete`: logs will be deleted by save time; `compact`: logs will be compressed by key; `compact, delete`: logs will be compressed by key and deleted by save time.
@@ -432,7 +432,7 @@ type DeleteAclRequest struct {
 	// ACL operation mode. 0: UNKNOWN, 1: ANY, 2: ALL, 3: READ, 4: WRITE, 5: CREATE, 6: DELETE, 7: ALTER, 8: DESCRIBE, 9: CLUSTER_ACTION, 10: DESCRIBE_CONFIGS, 11: ALTER_CONFIGS, 12: IDEMPOTEN_WRITE. Currently, CKafka only supports `READ` and `WRITE`, and other values will be used for future ACLs compatible with open-source Kafka
 	Operation *int64 `json:"Operation,omitempty" name:"Operation"`
 
-	// Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to whitelist), and other fields will be used for future ACLs compatible with open-source Kafka
+	// Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to allowlist), and other fields will be used for future ACLs compatible with open-source Kafka
 	PermissionType *int64 `json:"PermissionType,omitempty" name:"PermissionType"`
 
 	// The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
@@ -481,7 +481,7 @@ type DeleteTopicIpWhiteListRequest struct {
 	// Topic name
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// IP whitelist list
+	// IP allowlist list
 	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList" list`
 }
 
@@ -498,7 +498,7 @@ type DeleteTopicIpWhiteListResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Result of deleting topic IP whitelist
+		// Result of deleting topic IP allowlist
 		Result *JgwOperateResponse `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1754,7 +1754,7 @@ type ModifyTopicAttributesRequest struct {
 	// Topic remarks string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
 	Note *string `json:"Note,omitempty" name:"Note"`
 
-	// IP whitelist switch. 1: enabled, 0: disabled.
+	// IP allowlist switch. 1: enabled, 0: disabled.
 	EnableWhiteList *int64 `json:"EnableWhiteList,omitempty" name:"EnableWhiteList"`
 
 	// Default value: 1.
@@ -1915,10 +1915,10 @@ type TopicAttributesResponse struct {
 	// Number of partitions
 	PartitionNum *int64 `json:"PartitionNum,omitempty" name:"PartitionNum"`
 
-	// IP whitelist switch. 1: enabled, 0: disabled
+	// IP allowlist switch. 1: enabled, 0: disabled
 	EnableWhiteList *int64 `json:"EnableWhiteList,omitempty" name:"EnableWhiteList"`
 
-	// IP whitelist list
+	// IP allowlist list
 	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList" list`
 
 	// Topic configuration array
@@ -1949,10 +1949,10 @@ type TopicDetail struct {
 	// Creation time
 	CreateTime *int64 `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Whether to enable IP authentication whitelist. true: yes, false: no
+	// Whether to enable IP authentication allowlist. true: yes, false: no
 	EnableWhiteList *bool `json:"EnableWhiteList,omitempty" name:"EnableWhiteList"`
 
-	// Number of IPs in IP whitelist
+	// Number of IPs in IP allowlist
 	IpWhiteListCount *int64 `json:"IpWhiteListCount,omitempty" name:"IpWhiteListCount"`
 
 	// COS bucket for data backup: address of the destination COS bucket

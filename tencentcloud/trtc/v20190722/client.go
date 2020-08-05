@@ -43,6 +43,56 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewCreateTroubleInfoRequest() (request *CreateTroubleInfoRequest) {
+    request = &CreateTroubleInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "CreateTroubleInfo")
+    return
+}
+
+func NewCreateTroubleInfoResponse() (response *CreateTroubleInfoResponse) {
+    response = &CreateTroubleInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create exception information.
+func (c *Client) CreateTroubleInfo(request *CreateTroubleInfoRequest) (response *CreateTroubleInfoResponse, err error) {
+    if request == nil {
+        request = NewCreateTroubleInfoRequest()
+    }
+    response = NewCreateTroubleInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAbnormalEventRequest() (request *DescribeAbnormalEventRequest) {
+    request = &DescribeAbnormalEventRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeAbnormalEvent")
+    return
+}
+
+func NewDescribeAbnormalEventResponse() (response *DescribeAbnormalEventResponse) {
+    response = &DescribeAbnormalEventResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query users’ exceptional experience events according to `SDKAppID` and return the exceptional experience ID and possible causes. It queries data in last 24 hours, and the query period is up to 1 hour which can start and end on different days. For more information about exceptional experience ID mapping, please see here.
+func (c *Client) DescribeAbnormalEvent(request *DescribeAbnormalEventRequest) (response *DescribeAbnormalEventResponse, err error) {
+    if request == nil {
+        request = NewDescribeAbnormalEventRequest()
+    }
+    response = NewDescribeAbnormalEventResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCallDetailRequest() (request *DescribeCallDetailRequest) {
     request = &DescribeCallDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -58,12 +108,37 @@ func NewDescribeCallDetailResponse() (response *DescribeCallDetailResponse) {
     return
 }
 
-// This API is used to query the user list and user call quality data in a specified time period. It can query data of up to 6 users for the last 5 days, and the query time range cannot exceed 1 hour.
+// This API is used to query the user list and user call quality data in a specified time period. It queries data of up to 6 users in the last 5 days. The query period is up to 1 hour, which must start and end on the same day.
 func (c *Client) DescribeCallDetail(request *DescribeCallDetailRequest) (response *DescribeCallDetailResponse, err error) {
     if request == nil {
         request = NewDescribeCallDetailRequest()
     }
     response = NewDescribeCallDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDetailEventRequest() (request *DescribeDetailEventRequest) {
+    request = &DescribeDetailEventRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeDetailEvent")
+    return
+}
+
+func NewDescribeDetailEventResponse() (response *DescribeDetailEventResponse) {
+    response = &DescribeDetailEventResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query detailed events of a user such as room entry/exit and video enablement/disablement during a call. It can query data for the last 5 days.
+func (c *Client) DescribeDetailEvent(request *DescribeDetailEventRequest) (response *DescribeDetailEventResponse, err error) {
+    if request == nil {
+        request = NewDescribeDetailEventRequest()
+    }
+    response = NewDescribeDetailEventResponse()
     err = c.Send(request, response)
     return
 }
@@ -83,7 +158,7 @@ func NewDescribeHistoryScaleResponse() (response *DescribeHistoryScaleResponse) 
     return
 }
 
-// This API is used to query the number of historical rooms and users for the last 5 days. It can query once per minute.
+// This API is used to query the daily numbers of rooms and users under a specified `sdkqppid`. It can query data once per minute for the last 5 days. If a day has not ended, the numbers of rooms and users on the day cannot be queried.
 func (c *Client) DescribeHistoryScale(request *DescribeHistoryScaleRequest) (response *DescribeHistoryScaleResponse, err error) {
     if request == nil {
         request = NewDescribeHistoryScaleRequest()
@@ -239,6 +314,69 @@ func (c *Client) RemoveUser(request *RemoveUserRequest) (response *RemoveUserRes
         request = NewRemoveUserRequest()
     }
     response = NewRemoveUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartMCUMixTranscodeRequest() (request *StartMCUMixTranscodeRequest) {
+    request = &StartMCUMixTranscodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "StartMCUMixTranscode")
+    return
+}
+
+func NewStartMCUMixTranscodeResponse() (response *StartMCUMixTranscodeResponse) {
+    response = &StartMCUMixTranscodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to enable On-Cloud MixTranscoding and specify the layout position of each channel of video image in the mixed video image.
+// 
+// There may be multiple channels of audio/video streams in a TRTC room. You can call this API to request the Tencent Cloud server to combine multiple channels of video images into one channel, specify the position of each channel, and mix the multiple channels of audio so as to output one channel of audio/video stream for easier recording and live streaming.
+// 
+// You can use this API to perform the following operations:
+// - Set the image and audio quality parameters of the final live stream, including video resolution, video bitrate, video frame rate, and audio quality.
+// - Set the image layout, i.e., positions of all channels of images. You only need to set the layout once when enabling On-Cloud MixTranscoding, and the layout engine will automatically arrange the video images in the configured layout in subsequent operations.
+// - Set the recording file name for future playback.
+// - Set the CDN live stream ID for live streaming over CDN.
+// 
+// Currently, the following layout templates are supported:
+// - Floating template: the entire screen will be covered by the video image of the first user who enters the room, and the video images of other users will be displayed as small images in horizontal rows from the bottom-left corner in room entry sequence. The screen can contain up to 4 lines with 4 small images each row, which float over the big image. Up to 1 big image and 15 small images are supported. If a user sends audio only, the user will still use an image spot.
+// - 9-grid template: the screen is divided into user video images with the same dimensions. The more the users, the smaller the image dimensions. Up to 16 images are supported. If a user sends audio only, the user will still use an image spot.
+// - Screen sharing template: it is suitable for video conferencing and online education. The shared screen (or camera of the anchor) is always displayed in the big image on the left of the screen, and the video images of other users are vertically displayed on the right in up to 2 columns with up to 8 small images in each column. Up to 1 big image and 15 small images are supported. If a user sends audio only, the user will still use an image spot.
+func (c *Client) StartMCUMixTranscode(request *StartMCUMixTranscodeRequest) (response *StartMCUMixTranscodeResponse, err error) {
+    if request == nil {
+        request = NewStartMCUMixTranscodeRequest()
+    }
+    response = NewStartMCUMixTranscodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopMCUMixTranscodeRequest() (request *StopMCUMixTranscodeRequest) {
+    request = &StopMCUMixTranscodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "StopMCUMixTranscode")
+    return
+}
+
+func NewStopMCUMixTranscodeResponse() (response *StopMCUMixTranscodeResponse) {
+    response = &StopMCUMixTranscodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to end On-Cloud MixTranscoding.
+func (c *Client) StopMCUMixTranscode(request *StopMCUMixTranscodeRequest) (response *StopMCUMixTranscodeResponse, err error) {
+    if request == nil {
+        request = NewStopMCUMixTranscodeRequest()
+    }
+    response = NewStopMCUMixTranscodeResponse()
     err = c.Send(request, response)
     return
 }

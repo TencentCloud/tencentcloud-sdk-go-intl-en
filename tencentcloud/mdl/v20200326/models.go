@@ -50,7 +50,7 @@ type AudioPipelineInputStatistics struct {
 
 type AudioSelectorInfo struct {
 
-	// Audio name, which can contain 1–32 letters, digits, and underscores.
+	// Audio name, which can contain 1-32 letters, digits, and underscores.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Audio `Pid` selection.
@@ -62,7 +62,7 @@ type AudioTemplateInfo struct {
 	// Only `AttachedInputs.AudioSelectors.Name` can be selected. This parameter is required for RTP_PUSH and UDP_PUSH.
 	AudioSelectorName *string `json:"AudioSelectorName,omitempty" name:"AudioSelectorName"`
 
-	// Audio transcoding template name, which can contain 1–20 letters and digits.
+	// Audio transcoding template name, which can contain 1-20 letters and digits.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Audio codec. Valid value: AAC. Default value: AAC.
@@ -148,7 +148,7 @@ type ChannelPipelineAlerts struct {
 type CreateMediaLiveChannelRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel name, which can contain 1–32 letters, digits, and underscores and must be unique at the region level.
+	// Channel name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Associated media input. Quantity limit: [1,1].
@@ -197,7 +197,7 @@ func (r *CreateMediaLiveChannelResponse) FromJsonString(s string) error {
 type CreateMediaLiveInputRequest struct {
 	*tchttp.BaseRequest
 
-	// Media input name, which can contain 1–32 letters, digits, and underscores and must be unique at the region level.
+	// Media input name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Media input type.
@@ -248,7 +248,7 @@ type CreateMediaLiveInputSecurityGroupRequest struct {
 	// Input security group name, which can contain letters, digits, and underscores and must be unique at the region level.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// List of whitelist entries. Quantity limit: [1,10].
+	// List of allowlist entries. Quantity limit: [1,10].
 	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist" list`
 }
 
@@ -478,6 +478,51 @@ func (r *DescribeMediaLiveChannelInputStatisticsResponse) ToJsonString() string 
 }
 
 func (r *DescribeMediaLiveChannelInputStatisticsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaLiveChannelLogsRequest struct {
+	*tchttp.BaseRequest
+
+	// Channel ID.
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Log start time, which is one hour ago by default. Maximum value: the last 7 days.
+	// UTC time, such as `2020-01-01T12:00:00Z`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Log end time, which is one hour after `StartTime` by default.
+	// UTC time, such as `2020-01-01T12:00:00Z`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeMediaLiveChannelLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaLiveChannelLogsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMediaLiveChannelLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Pipeline push information.
+		Infos *PipelineLogInfo `json:"Infos,omitempty" name:"Infos"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeMediaLiveChannelLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMediaLiveChannelLogsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -853,7 +898,7 @@ type InputSecurityGroupInfo struct {
 	// Input security group name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// List of whitelist entries.
+	// List of allowlist entries.
 	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist" list`
 
 	// List of bound input streams.
@@ -866,11 +911,11 @@ type InputSecurityGroupInfo struct {
 
 type InputSettingInfo struct {
 
-	// Application name, which is used for RTMP_PUSH and can contain 1–32 letters and digits.
+	// Application name, which is used for RTMP_PUSH and can contain 1-32 letters and digits.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
-	// Stream name, which is used for RTMP_PUSH and can contain 1–32 letters and digits.
+	// Stream name, which is used for RTMP_PUSH and can contain 1-32 letters and digits.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
@@ -892,6 +937,26 @@ type InputStatistics struct {
 	Pipeline1 []*PipelineInputStatistics `json:"Pipeline1,omitempty" name:"Pipeline1" list`
 }
 
+type LogInfo struct {
+
+	// Log type.
+	// It contains the value of `StreamStart` which refers to the push information.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Time when the log is printed.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Log details.
+	Message *LogMessageInfo `json:"Message,omitempty" name:"Message"`
+}
+
+type LogMessageInfo struct {
+
+	// Push information.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	StreamInfo *StreamInfo `json:"StreamInfo,omitempty" name:"StreamInfo"`
+}
+
 type MediaPackageSettingsInfo struct {
 
 	// Media packaging ID.
@@ -904,7 +969,7 @@ type ModifyMediaLiveChannelRequest struct {
 	// Channel ID.
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Channel name, which can contain 1–32 letters, digits, and underscores and must be unique at the region level.
+	// Channel name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Associated media input. Quantity limit: [1,1].
@@ -953,7 +1018,7 @@ type ModifyMediaLiveInputRequest struct {
 	// Media input ID.
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Media input name, which can contain 1–32 letters, digits, and underscores and must be unique at the region level.
+	// Media input name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// List of IDs of bound security groups.
@@ -999,10 +1064,10 @@ type ModifyMediaLiveInputSecurityGroupRequest struct {
 	// Input security group ID.
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Input security group name, which can contain 1–32 letters, digits, and underscores and must be unique at the region level.
+	// Input security group name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// List of whitelist entries. Up to 10 entries are allowed.
+	// List of allowlist entries. Up to 10 entries are allowed.
 	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist" list`
 }
 
@@ -1108,6 +1173,17 @@ type PipelineInputStatistics struct {
 	Audio []*AudioPipelineInputStatistics `json:"Audio,omitempty" name:"Audio" list`
 }
 
+type PipelineLogInfo struct {
+
+	// Log information of pipeline 0.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Pipeline0 []*LogInfo `json:"Pipeline0,omitempty" name:"Pipeline0" list`
+
+	// Log information of pipeline 1.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Pipeline1 []*LogInfo `json:"Pipeline1,omitempty" name:"Pipeline1" list`
+}
+
 type PipelineOutputStatistics struct {
 
 	// Timestamp.
@@ -1192,6 +1268,78 @@ func (r *StopMediaLiveChannelResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type StreamAudioInfo struct {
+
+	// Audio `Pid`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
+
+	// Audio codec.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Codec *string `json:"Codec,omitempty" name:"Codec"`
+
+	// Audio frame rate.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
+
+	// Audio bitrate.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Rate *int64 `json:"Rate,omitempty" name:"Rate"`
+
+	// Audio sample rate.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SampleRate *int64 `json:"SampleRate,omitempty" name:"SampleRate"`
+}
+
+type StreamInfo struct {
+
+	// Client IP.
+	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
+
+	// Video information of pushed streams.
+	Video []*StreamVideoInfo `json:"Video,omitempty" name:"Video" list`
+
+	// Audio information of pushed streams.
+	Audio []*StreamAudioInfo `json:"Audio,omitempty" name:"Audio" list`
+
+	// SCTE-35 information of pushed streams.
+	Scte35 []*StreamScte35Info `json:"Scte35,omitempty" name:"Scte35" list`
+}
+
+type StreamScte35Info struct {
+
+	// SCTE-35 `Pid`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
+}
+
+type StreamVideoInfo struct {
+
+	// Video `Pid`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
+
+	// Video codec.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Codec *string `json:"Codec,omitempty" name:"Codec"`
+
+	// Video frame rate.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
+
+	// Video bitrate.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Rate *int64 `json:"Rate,omitempty" name:"Rate"`
+
+	// Video width.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Video height.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Height *int64 `json:"Height,omitempty" name:"Height"`
+}
+
 type VideoPipelineInputStatistics struct {
 
 	// Video FPS.
@@ -1206,7 +1354,7 @@ type VideoPipelineInputStatistics struct {
 
 type VideoTemplateInfo struct {
 
-	// Video transcoding template name, which can contain 1–20 letters and digits.
+	// Video transcoding template name, which can contain 1-20 letters and digits.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Video codec. Valid values: H264/H265. If this parameter is left empty, the original value will be used.

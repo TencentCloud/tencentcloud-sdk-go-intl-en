@@ -558,7 +558,7 @@ func NewDescribeUinInWhitelistResponse() (response *DescribeUinInWhitelistRespon
     return
 }
 
-// This API is used to query whether the current user is in the whitelist and control whether the user can create TDR-type apps or tables.
+// This API is used to query whether the current user is in the allowlist and control whether the user can create TDR-type apps or tables.
 func (c *Client) DescribeUinInWhitelist(request *DescribeUinInWhitelistRequest) (response *DescribeUinInWhitelistResponse, err error) {
     if request == nil {
         request = NewDescribeUinInWhitelistRequest()

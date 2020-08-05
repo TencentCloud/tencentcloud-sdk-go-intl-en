@@ -123,7 +123,7 @@ type CCFrequencyRule struct {
 	// Reference period in seconds. Valid values: [10, 30, 60]
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
-	// Number of access requests. Value range: [1–10000]
+	// Number of access requests. Value range: [1-10000]
 	ReqNumber *uint64 `json:"ReqNumber,omitempty" name:"ReqNumber"`
 
 	// Action take. Valid values: ["alg" (CAPTCHA), "drop" (blocking)]
@@ -189,7 +189,7 @@ type CCRuleConfig struct {
 	// Reference period in seconds. Valid values: [10, 30, 60]
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
-	// Number of access requests. Value range: [1–10000]
+	// Number of access requests. Value range: [1-10000]
 	ReqNumber *uint64 `json:"ReqNumber,omitempty" name:"ReqNumber"`
 
 	// Action take. Valid values: ["alg" (CAPTCHA), "drop" (blocking)]
@@ -315,7 +315,7 @@ type CreateCCFrequencyRulesRequest struct {
 	// Reference period in seconds. Valid values: [10, 30, 60]
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
-	// Number of access requests. Value range: [1–10000]
+	// Number of access requests. Value range: [1-10000]
 	ReqNumber *uint64 `json:"ReqNumber,omitempty" name:"ReqNumber"`
 
 	// Action take. Valid values: ["alg" (CAPTCHA), "drop" (blocking)]
@@ -528,7 +528,7 @@ type CreateDDoSPolicyRequest struct {
 	// Ports to be closed. If no ports are to be closed, enter an empty array
 	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits" list`
 
-	// IP blacklist/whitelist. Enter an empty array if there is no IP blacklist/whitelist
+	// IP blocklist/allowlist. Enter an empty array if there is no IP blocklist/allowlist
 	IpAllowDenys []*IpBlackWhite `json:"IpAllowDenys,omitempty" name:"IpAllowDenys" list`
 
 	// Packet filter. Enter an empty array if there are no packets to filter
@@ -795,7 +795,7 @@ type CreateL7RuleCertRequest struct {
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
-	// Anti-DDoS instance ID
+	// The resource instance ID, such as the ID of an Anti-DDoS Advanced instance or the ID of an Anti-DDoS Ultimate instance.
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Rule ID
@@ -1236,7 +1236,7 @@ type DDosPolicy struct {
 	// Packet filter
 	PacketFilters []*DDoSPolicyPacketFilter `json:"PacketFilters,omitempty" name:"PacketFilters" list`
 
-	// IP blacklist/whitelist
+	// IP blocklist/allowlist
 	IpBlackWhiteLists []*IpBlackWhite `json:"IpBlackWhiteLists,omitempty" name:"IpBlackWhiteLists" list`
 
 	// Policy ID
@@ -1958,8 +1958,8 @@ type DescribeCCIpAllowDenyRequest struct {
 	// Anti-DDoS instance ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Blacklist or whitelist. Valid values: [white (whitelist), black (blacklist)]
-	// Note: this array can only have one value. It cannot get the blacklist and whitelist at the same time
+	// Blocklist or allowlist. Valid values: [white (allowlist), black (blocklist)]
+	// Note: this array can only have one value. It cannot get the blocklist and allowlist at the same time
 	Type []*string `json:"Type,omitempty" name:"Type" list`
 
 	// Pagination parameter
@@ -1991,10 +1991,10 @@ type DescribeCCIpAllowDenyResponse struct {
 		// Number of records
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-		// Returned Blacklist/whitelist record,
+		// Returned Blocklist/allowlist record,
 	// If "Key":"ip", "Value": IP;
 	// If "Key":"domain", "Value": domain name.
-	// If "Key":"type", "Value" can be `white` (whitelist) or `black` (blacklist).
+	// If "Key":"type", "Value" can be `white` (allowlist) or `black` (blocklist).
 	// If "Key":"protocol", "Value": CC protection protocol (HTTP or HTTPS);
 		RecordList []*KeyValueRecord `json:"RecordList,omitempty" name:"RecordList" list`
 
@@ -2150,7 +2150,7 @@ type DescribeCCUrlAllowRequest struct {
 	// Anti-DDoS instance ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Blacklist or whitelist. Valid value: [white (whitelist)]. Currently, only whitelist is supported.
+	// Blocklist or allowlist. Valid value: [white (allowlist)]. Currently, only allowlist is supported.
 	// Note: this array can only have one value which can only be `white`
 	Type []*string `json:"Type,omitempty" name:"Type" list`
 
@@ -2183,10 +2183,10 @@ type DescribeCCUrlAllowResponse struct {
 		// Total number of records
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-		// Returned Blacklist/whitelist record,
+		// Returned Blocklist/allowlist record,
 	// If "Key":"url", "Value": URL;
 	// If "Key":"domain", "Value": domain name.
-	// If "Key":"type", "Value" can be `white` (whitelist) or `black` (blacklist).
+	// If "Key":"type", "Value" can be `white` (allowlist) or `black` (blocklist).
 	// If "Key":"protocol", "Value": CC protection type (HTTP protection or HTTPS domain name protection);
 		RecordList []*KeyValueRecord `json:"RecordList,omitempty" name:"RecordList" list`
 
@@ -3938,7 +3938,7 @@ func (r *DescribeRuleSetsResponse) FromJsonString(s string) error {
 type DescribeSchedulingDomainListRequest struct {
 	*tchttp.BaseRequest
 
-	// Number of items in a page. Returned results are not paged if you enter “0”.
+	// Number of items in a page. Returned results are not paged if you enter '0'.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Starting offset of the page. Value: (number of pages - 1) * items per page
@@ -4340,7 +4340,7 @@ type IpBlackWhite struct {
 	// IP address
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
-	// Blacklist/whitelist type. Valid values: [black, white]
+	// Blocklist/allowlist type. Valid values: [black, white]
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
@@ -4573,6 +4573,10 @@ type L7RuleEntry struct {
 
 	// 
 	HttpsToHttpEnable *uint64 `json:"HttpsToHttpEnable,omitempty" name:"HttpsToHttpEnable"`
+
+	// Access port number.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	VirtualPort *uint64 `json:"VirtualPort,omitempty" name:"VirtualPort"`
 }
 
 type L7RuleHealth struct {
@@ -4666,7 +4670,7 @@ type ModifyCCFrequencyRulesRequest struct {
 	// Reference period in seconds. Valid values: [10, 30, 60]
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
-	// Number of access requests. Value range: [1–10000]
+	// Number of access requests. Value range: [1-10000]
 	ReqNumber *uint64 `json:"ReqNumber,omitempty" name:"ReqNumber"`
 
 	// Action take. Valid values: ["alg" (CAPTCHA), "drop" (blocking)]
@@ -4819,10 +4823,10 @@ type ModifyCCIpAllowDenyRequest struct {
 	// add: add, delete: delete
 	Method *string `json:"Method,omitempty" name:"Method"`
 
-	// Blacklist/whitelist type. Valid values: [white (whitelist), black (blacklist)]
+	// Blocklist/allowlist type. Valid values: [white (allowlist), black (blocklist)]
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Blacklisted/whitelisted IP array
+	// Blocklisted/whitelisted IP array
 	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
 
 	// CC protection type, which is optional. Valid values: [http (HTTP CC protection), https (HTTPS CC protection)]; if this field is left empty, HTTPS CC protection will be used by default; if `https` is entered, the `Domain` and `RuleId` fields are required;
@@ -5100,7 +5104,7 @@ type ModifyCCUrlAllowRequest struct {
 	// add: add, delete: delete
 	Method *string `json:"Method,omitempty" name:"Method"`
 
-	// Blacklist/whitelist type. Valid value: [white (whitelist)]
+	// Blocklist/allowlist type. Valid value: [white (allowlist)]
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// URL array. URL format:
@@ -5543,7 +5547,7 @@ type ModifyDDoSPolicyRequest struct {
 	// Port disablement. If no ports are to be disabled, enter an empty array
 	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits" list`
 
-	// IP blacklist/whitelist. Enter an empty array if there is no IP blacklist/whitelist
+	// IP blocklist/allowlist. Enter an empty array if there is no IP blocklist/allowlist
 	IpAllowDenys []*IpBlackWhite `json:"IpAllowDenys,omitempty" name:"IpAllowDenys" list`
 
 	// Packet filter. Enter an empty array if there are no packets to filter
@@ -6017,6 +6021,92 @@ func (r *ModifyNetReturnSwitchResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyNewDomainRulesRequest struct {
+	*tchttp.BaseRequest
+
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Domain name forwarding rule.
+	Rule *NewL7RuleEntry `json:"Rule,omitempty" name:"Rule"`
+}
+
+func (r *ModifyNewDomainRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyNewDomainRulesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNewDomainRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Success code.
+		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyNewDomainRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyNewDomainRulesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNewL4RuleRequest struct {
+	*tchttp.BaseRequest
+
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Forwarding rule.
+	Rule *L4RuleEntry `json:"Rule,omitempty" name:"Rule"`
+}
+
+func (r *ModifyNewL4RuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyNewL4RuleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNewL4RuleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Success code.
+		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyNewL4RuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyNewL4RuleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyResBindDDoSPolicyRequest struct {
 	*tchttp.BaseRequest
 
@@ -6104,6 +6194,82 @@ func (r *ModifyResourceRenewFlagResponse) ToJsonString() string {
 
 func (r *ModifyResourceRenewFlagResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type NewL7RuleEntry struct {
+
+	// Forwarding protocol. Valid values: `http` and `https`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Forwarding domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Forwarding method. Valid values: `1` (by domain name); `2` (by IP).
+	SourceType *uint64 `json:"SourceType,omitempty" name:"SourceType"`
+
+	// Session persistence duration, in seconds.
+	KeepTime *uint64 `json:"KeepTime,omitempty" name:"KeepTime"`
+
+	// List of sources
+	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList" list`
+
+	// Load balancing method. Valid value: `1` (weighed polling).
+	LbType *uint64 `json:"LbType,omitempty" name:"LbType"`
+
+	// Whether session persistence is enabled. Valid values: `0` (disabled) and `1` (enabled).
+	KeepEnable *uint64 `json:"KeepEnable,omitempty" name:"KeepEnable"`
+
+	// Rule ID. This field is not required for adding a rule, but is required for modifying or deleting a rule.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Certificate source. When the forwarding protocol is HTTPS, this field must be set to `2` (Tencent Cloud managed certificate), and for HTTP protocol, it can be set to `0`.
+	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
+
+	// When the certificate source is Tencent Cloud managed certificate, this field must be set to the ID of the managed certificate.
+	SSLId *string `json:"SSLId,omitempty" name:"SSLId"`
+
+	// [Disused] When the certificate is an external certificate, the certificate content should be provided here. 
+	Cert *string `json:"Cert,omitempty" name:"Cert"`
+
+	// [Disused] When the certificate is an external certificate, the certificate key should be provided here. 
+	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
+
+	// Rule description.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Rule status. Valid values: `0` (the rule was successfully configured), `1` (configuring the rule), `2` (rule configuration failed), `3` (deleting the rule), `5` (failed to delete rule), `6` (rule awaiting configuration), `7` (rule awaiting deletion), and `8` (rule awaiting certificate configuration).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// CC protection status. Valid values: `0` (disabled) and `1` (enabled).
+	CCStatus *uint64 `json:"CCStatus,omitempty" name:"CCStatus"`
+
+	// CC protection status based on HTTPS. Valid values: `0` (disabled) and `1` (enabled).
+	CCEnable *uint64 `json:"CCEnable,omitempty" name:"CCEnable"`
+
+	// CC protection threshold based on HTTPS.
+	CCThreshold *uint64 `json:"CCThreshold,omitempty" name:"CCThreshold"`
+
+	// CC protection level based on HTTPS.
+	CCLevel *string `json:"CCLevel,omitempty" name:"CCLevel"`
+
+	// Region code.
+	Region *uint64 `json:"Region,omitempty" name:"Region"`
+
+	// Anti-DDoS instance ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Anti-DDoS instance IP address.
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Modification time.
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disabled) and `1` (enabled). The default value is disabled.
+	HttpsToHttpEnable *uint64 `json:"HttpsToHttpEnable,omitempty" name:"HttpsToHttpEnable"`
+
+	// Access port number.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	VirtualPort *uint64 `json:"VirtualPort,omitempty" name:"VirtualPort"`
 }
 
 type OrderBy struct {

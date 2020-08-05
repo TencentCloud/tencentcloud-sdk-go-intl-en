@@ -213,6 +213,15 @@ type ComputeEnvView struct {
 
 	// Number of desired compute nodes
 	DesiredComputeNodeCount *uint64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
+
+	// 
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// 
+	NextAction *string `json:"NextAction,omitempty" name:"NextAction"`
+
+	// 
+	AttachedComputeNodeCount *uint64 `json:"AttachedComputeNodeCount,omitempty" name:"AttachedComputeNodeCount"`
 }
 
 type ComputeNode struct {
@@ -246,6 +255,12 @@ type ComputeNode struct {
 
 	// Public IP of the instance
 	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+
+	// 
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// 
+	ResourceOrigin *string `json:"ResourceOrigin,omitempty" name:"ResourceOrigin"`
 }
 
 type ComputeNodeMetrics struct {
@@ -388,6 +403,12 @@ type DataDisk struct {
 	// This parameter is only used with `RunInstances`.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Encrypt *bool `json:"Encrypt,omitempty" name:"Encrypt"`
+
+	// ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.
+	// 
+	// Currently, this parameter is only used in the `RunInstances` API.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
 }
 
 type DeleteComputeEnvRequest struct {
@@ -750,6 +771,15 @@ type DescribeComputeEnvResponse struct {
 
 		// Compute environment type
 		EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+
+		// 
+		ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+		// 
+		NextAction *string `json:"NextAction,omitempty" name:"NextAction"`
+
+		// 
+		AttachedComputeNodeCount *uint64 `json:"AttachedComputeNodeCount,omitempty" name:"AttachedComputeNodeCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1517,6 +1547,27 @@ type InstanceTypeQuotaItem struct {
 	// Details of out-of-stock items
 	// Note: this field may return null, indicating that no valid value is obtained.
 	SoldOutReason *string `json:"SoldOutReason,omitempty" name:"SoldOutReason"`
+
+	// 
+	InstanceBandwidth *float64 `json:"InstanceBandwidth,omitempty" name:"InstanceBandwidth"`
+
+	// 
+	InstancePps *int64 `json:"InstancePps,omitempty" name:"InstancePps"`
+
+	// 
+	StorageBlockAmount *int64 `json:"StorageBlockAmount,omitempty" name:"StorageBlockAmount"`
+
+	// 
+	CpuType *string `json:"CpuType,omitempty" name:"CpuType"`
+
+	// Number of GPUs of the instance.
+	Gpu *int64 `json:"Gpu,omitempty" name:"Gpu"`
+
+	// Number of FPGAs of the instance.
+	Fpga *int64 `json:"Fpga,omitempty" name:"Fpga"`
+
+	// Descriptive information of the instance.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
 type InternetAccessible struct {
@@ -1536,7 +1587,7 @@ type InternetAccessible struct {
 
 type ItemPrice struct {
 
-	// The original unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to the unit price for the usage between 0 and ∞ hours.
+	// The original unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to that the unit price for unlimited usage.
 	// Note: this field may return null, indicating that no valid value is obtained.
 	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
 
@@ -1556,7 +1607,7 @@ type ItemPrice struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
 
-	// The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to the unit price for the usage between 0 and ∞ hours.
+	// The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to that the unit price for unlimited usage.
 	// Note: this field may return null, indicating that no valid value is obtained.
 	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
 

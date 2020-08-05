@@ -73,7 +73,7 @@ type AddCdnDomainRequest struct {
 	// Project ID. Default value: 0, indicating `Default Project`
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// IP blacklist/whitelist configuration
+	// IP blocklist/allowlist configuration
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
 	// IP access limit configuration
@@ -276,7 +276,7 @@ type AuthenticationTypeA struct {
 	// If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
 
-	// whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 }
@@ -296,7 +296,7 @@ type AuthenticationTypeB struct {
 	// If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
 
-	// whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 }
@@ -316,7 +316,7 @@ type AuthenticationTypeC struct {
 	// If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
 
-	// whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 }
@@ -336,7 +336,7 @@ type AuthenticationTypeD struct {
 	// If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
 
-	// whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
@@ -978,7 +978,7 @@ type DescribeCdnDataRequest struct {
 	// https: specifies the HTTPS metric to be queried
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Specifies the data source to be queried, which can be seen as the whitelist function.
+	// Specifies the data source to be queried, which can be seen as the allowlist function.
 	DataSource *string `json:"DataSource,omitempty" name:"DataSource"`
 
 	// Specified IP protocol to be queried. If this parameter is left empty, all protocols will be queried
@@ -986,7 +986,7 @@ type DescribeCdnDataRequest struct {
 	// ipv4: specifies to query IPv4 metrics
 	// ipv6: specifies to query IPv6 metrics
 	// If the IP protocol to be queried is specified, the district and ISP cannot be specified at the same time
-	// Note: non-IPv6 whitelisted users cannot specify `ipv4` and `ipv6` for query
+	// Note: non-IPv6 allowlisted users cannot specify `ipv4` and `ipv6` for query
 	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
 
 	// Specifies a service region. If this value is left blank, CDN data within Mainland China will be queried.
@@ -1943,7 +1943,7 @@ type DetailDomain struct {
 	// Origin server configuration
 	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
 
-	// IP blacklist/whitelist configuration
+	// IP blocklist/allowlist configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
@@ -2183,13 +2183,13 @@ type DomainAreaConfig struct {
 type DomainFilter struct {
 
 	// Filter field name, the list supported is as follows:
-	// - origin: master origin server.
+	// - origin: primary origin server.
 	// - domain: domain name.
 	// - resourceId: domain name id.
 	// - status: domain name status. Values include `online`, `offline`, or `processing`.
 	// - serviceType: service type. Values include `web`, `download`, or `media`.
 	// - projectId: project ID.
-	// - domainType: master origin server type, `cname` indicates external origin, `COS` indicates COS origin.
+	// - domainType: primary origin server type, `cname` indicates external origin, `COS` indicates COS origin.
 	// - fullUrlCache: full-path cache, which can be on or off.
 	// - https: whether to configure HTTPS, which can be on, off or processing.
 	// - originPullProtocol: origin-pull protocol type. HTTP, follow, or HTTPS are supported.
@@ -2570,20 +2570,20 @@ type ImageOptimization struct {
 
 type IpFilter struct {
 
-	// IP blacklist/whitelist configuration switch
+	// IP blocklist/allowlist configuration switch
 	// on: enabled
 	// off: disabled
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// IP blacklist/whitelist type
-	// whitelist: whitelist
-	// blacklist: blacklist
+	// IP blocklist/allowlist type
+	// whitelist: allowlist
+	// blacklist: blocklist
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
-	// IP blacklist/whitelist list
+	// IP blocklist/allowlist list
 	// Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
-	// Up to 50 whitelists or blacklists can be entered
+	// Up to 50 allowlists or blocklists can be entered
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
 }
@@ -2748,7 +2748,7 @@ type ListTopDataRequest struct {
 
 	// Object representing the sort criteria. The following objects are supported:
 	// url: sorts by access URL (including the query string). Supported filters are `flux` and `request`
-	// path: sorts by access URL (excluding the query string). Supported filters are `flux` and `request` (whitelist-based feature)
+	// path: sorts by access URL (excluding the query string). Supported filters are `flux` and `request` (allowlist-based feature)
 	// district: sorts by district. Supported filters are `flux` and `request`
 	// isp: sorts by ISP. Supported filters are `flux` and `request`
 	// host: sorts by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, 2XX, 3XX, 4XX, 5XX, and `statusCode`
@@ -2779,7 +2779,7 @@ type ListTopDataRequest struct {
 	// Please note that if domain names are specified, this parameter will be ignored.
 	Project *int64 `json:"Project,omitempty" name:"Project"`
 
-	// Default is `false` for multi–domain name queries, which returns sorted results of all domain names. 
+	// Default is `false` for multi-domain name queries, which returns sorted results of all domain names. 
 	// If `Metric` is `url`, `path`, `district`, or `isp` and `Filter` is `flux` or `request`, it can be set to `true` to return the sorted results of each domain.
 	Detail *bool `json:"Detail,omitempty" name:"Detail"`
 
@@ -2897,7 +2897,7 @@ type MainlandConfig struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Https *Https `json:"Https,omitempty" name:"Https"`
 
-	// IP blacklist/whitelist configuration.
+	// IP blocklist/allowlist configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
@@ -3046,7 +3046,7 @@ type Origin struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Origins []*string `json:"Origins,omitempty" name:"Origins" list`
 
-	// Master origin server type
+	// Primary origin server type
 	// The following types are supported for input parameters:
 	// domain: domain name type
 	// cos: COS origin
@@ -3057,11 +3057,11 @@ type Origin struct {
 	// image: Cloud Infinite origin
 	// ftp: legacy FTP origin, which is no longer maintained.
 	// When modifying `Origins`, you need to enter the corresponding OriginType.
-	// The IPv6 feature is not generally available yet. Please send in a whitelist application to use this feature.
+	// The IPv6 feature is not generally available yet. Please send in a allowlist application to use this feature.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+	// Host header used when accessing the primary origin server. If left empty, the acceleration domain name will be used by default.
 	// If a wildcard domain name is accessed, then the sub-domain name during the access will be used by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServerName *string `json:"ServerName,omitempty" name:"ServerName"`
@@ -3090,7 +3090,7 @@ type Origin struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupOriginType *string `json:"BackupOriginType,omitempty" name:"BackupOriginType"`
 
-	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+	// Host header used when accessing the backup origin server. If left empty, the ServerName of primary origin server will be used by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupServerName *string `json:"BackupServerName,omitempty" name:"BackupServerName"`
 
@@ -3166,7 +3166,7 @@ type OverseaConfig struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Https *Https `json:"Https,omitempty" name:"Https"`
 
-	// IP blacklist/whitelist configuration.
+	// IP blocklist/allowlist configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
@@ -3298,6 +3298,13 @@ type PurgeUrlsCacheRequest struct {
 
 	// List of URLs. The protocol header such as "http://" or "https://" needs to be included.
 	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
+
+	// Purging region
+	// The acceleration region of the acceleration domain name will be purged if this parameter is not passed in
+	// If `mainland` is passed in, only the content cached on nodes in the Chinese mainland will be purged
+	// If `overseas` is passed in, only the content cached on nodes outside the Chinese mainland will be purged
+	// The specified purging region should match the domain name acceleration region
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 func (r *PurgeUrlsCacheRequest) ToJsonString() string {
@@ -3453,12 +3460,12 @@ type RangeOriginPull struct {
 
 type Referer struct {
 
-	// Referer blacklist/whitelist configuration switch
+	// Referer blocklist/allowlist configuration switch
 	// on: enabled
 	// off: disabled
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Referer blacklist/whitelist configuration rule
+	// Referer blocklist/allowlist configuration rule
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RefererRules []*RefererRule `json:"RefererRules,omitempty" name:"RefererRules" list`
 }
@@ -3480,8 +3487,8 @@ type RefererRule struct {
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
 
 	// Referer configuration types
-	// whitelist: whitelist
-	// blacklist: blacklist
+	// whitelist: allowlist
+	// blacklist: blocklist
 	RefererType *string `json:"RefererType,omitempty" name:"RefererType"`
 
 	// Referer content list
@@ -3740,9 +3747,9 @@ type SimpleCache struct {
 	FollowOrigin *string `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 
 	// Forced cache
-	// on: enabled
-	// off: disabled
-	// This is disabled by default. If enabled, `no-store` and `no-cache` resources returned from the origin server will be cached according to CacheRules rules.
+	// on: enable
+	// off: disable
+	// This is disabled by default. If enabled, the `no-store` and `no-cache` resources returned from the origin server will be cached according to `CacheRules` rules.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitempty" name:"IgnoreCacheControl"`
 
@@ -3983,7 +3990,7 @@ type UpdateDomainConfigRequest struct {
 	// Origin server configuration
 	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
 
-	// IP blacklist/whitelist configuration
+	// IP blocklist/allowlist configuration
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
 	// IP access limit configuration
@@ -4071,7 +4078,7 @@ type UpdateDomainConfigRequest struct {
 	// Origin access authentication for S3 bucket
 	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
 
-	// UA blacklist/whitelist Configuration
+	// UA blocklist/allowlist Configuration
 	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
 }
 
@@ -4164,7 +4171,7 @@ type UserAgentFilter struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// UA blacklist/whitelist effect rule list
+	// UA blocklist/allowlist effect rule list
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FilterRules []*UserAgentFilterRule `json:"FilterRules,omitempty" name:"FilterRules" list`
 }
@@ -4187,7 +4194,7 @@ type UserAgentFilterRule struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UserAgents []*string `json:"UserAgents,omitempty" name:"UserAgents" list`
 
-	// Blacklist or whitelist. Valid values: blacklist, whitelist
+	// blocklist or allowlist. Valid values: blacklist, whitelist
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 }

@@ -51,7 +51,7 @@ type CreateInstanceRequest struct {
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Number of nodes (2–50)
+	// Number of nodes (2-50)
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
 	// Billing mode <li>POSTPAID_BY_HOUR: Pay-as-you-go hourly </li>Default value: POSTPAID_BY_HOUR
@@ -85,19 +85,19 @@ type CreateInstanceRequest struct {
 	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Whether to create a dedicated master node <li>true: yes </li><li>false: no </li>Default value: false
+	// Whether to create a dedicated primary node <li>true: yes </li><li>false: no </li>Default value: false
 	EnableDedicatedMaster *bool `json:"EnableDedicatedMaster,omitempty" name:"EnableDedicatedMaster"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Number of dedicated master nodes (only 3 and 5 are supported. This value must be passed in if `EnableDedicatedMaster` is `true`)
+	// Number of dedicated primary nodes (only 3 and 5 are supported. This value must be passed in if `EnableDedicatedMaster` is `true`)
 	MasterNodeNum *uint64 `json:"MasterNodeNum,omitempty" name:"MasterNodeNum"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Dedicated master node type, which must be passed in if `EnableDedicatedMaster` is `true` <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+	// Dedicated primary node type, which must be passed in if `EnableDedicatedMaster` is `true` <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
 	MasterNodeType *string `json:"MasterNodeType,omitempty" name:"MasterNodeType"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Dedicated master node disk size in GB, which is optional. If passed in, it can only be 50 and cannot be customized currently
+	// Dedicated primary node disk size in GB, which is optional. If passed in, it can only be 50 and cannot be customized currently
 	MasterNodeDiskSize *uint64 `json:"MasterNodeDiskSize,omitempty" name:"MasterNodeDiskSize"`
 
 	// ClusterName in the cluster configuration file, which is the instance ID by default and currently cannot be customized
@@ -193,7 +193,7 @@ type DescribeInstanceLogsRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Log type. Default value: 1
-	// <li>1: master log</li>
+	// <li>1: primary log</li>
 	// <li>2: search slow log</li>
 	// <li>3: index slow log</li>
 	// <li>4: GC log</li>
@@ -383,10 +383,10 @@ type DictInfo struct {
 
 type EsAcl struct {
 
-	// Kibana access blacklist
+	// Kibana access blocklist
 	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList" list`
 
-	// Kibana access whitelist
+	// Kibana access allowlist
 	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList" list`
 }
 
@@ -397,14 +397,23 @@ type EsDictionaryInfo struct {
 
 	// List of stop words
 	Stopwords []*DictInfo `json:"Stopwords,omitempty" name:"Stopwords" list`
+
+	// 
+	QQDict []*DictInfo `json:"QQDict,omitempty" name:"QQDict" list`
+
+	// 
+	Synonym []*DictInfo `json:"Synonym,omitempty" name:"Synonym" list`
+
+	// 
+	UpdateType *string `json:"UpdateType,omitempty" name:"UpdateType"`
 }
 
 type EsPublicAcl struct {
 
-	// Access blacklist
+	// Access blocklist
 	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList" list`
 
-	// Access whitelist
+	// Access allowlist
 	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList" list`
 }
 
@@ -500,7 +509,7 @@ type InstanceInfo struct {
 	// IK analyzer configuration
 	IkConfig *EsDictionaryInfo `json:"IkConfig,omitempty" name:"IkConfig"`
 
-	// Dedicated master node configuration
+	// Dedicated primary node configuration
 	MasterNodeInfo *MasterNodeInfo `json:"MasterNodeInfo,omitempty" name:"MasterNodeInfo"`
 
 	// Auto-backup to COS configuration
@@ -621,25 +630,25 @@ type LocalDiskInfo struct {
 
 type MasterNodeInfo struct {
 
-	// Whether to enable the dedicated master node
+	// Whether to enable the dedicated primary node
 	EnableDedicatedMaster *bool `json:"EnableDedicatedMaster,omitempty" name:"EnableDedicatedMaster"`
 
-	// Dedicated master node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+	// Dedicated primary node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
 	MasterNodeType *string `json:"MasterNodeType,omitempty" name:"MasterNodeType"`
 
-	// Number of dedicated master nodes
+	// Number of dedicated primary nodes
 	MasterNodeNum *uint64 `json:"MasterNodeNum,omitempty" name:"MasterNodeNum"`
 
-	// Number of CPU cores of the dedicated master node
+	// Number of CPU cores of the dedicated primary node
 	MasterNodeCpuNum *uint64 `json:"MasterNodeCpuNum,omitempty" name:"MasterNodeCpuNum"`
 
-	// Memory size of the dedicated master node in GB
+	// Memory size of the dedicated primary node in GB
 	MasterNodeMemSize *uint64 `json:"MasterNodeMemSize,omitempty" name:"MasterNodeMemSize"`
 
-	// Disk size of the dedicated master node in GB
+	// Disk size of the dedicated primary node in GB
 	MasterNodeDiskSize *uint64 `json:"MasterNodeDiskSize,omitempty" name:"MasterNodeDiskSize"`
 
-	// Disk type of the dedicated master node
+	// Disk type of the dedicated primary node
 	MasterNodeDiskType *string `json:"MasterNodeDiskType,omitempty" name:"MasterNodeDiskType"`
 }
 
@@ -653,7 +662,7 @@ type NodeInfo struct {
 
 	// Node type <li>hotData: hot data node</li>
 	// <li>warmData: warm data node</li>
-	// <li>dedicatedMaster: dedicated master node</li>
+	// <li>dedicatedMaster: dedicated primary node</li>
 	// Default value: hotData
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -669,6 +678,9 @@ type NodeInfo struct {
 
 	// Number of node disks
 	DiskCount *uint64 `json:"DiskCount,omitempty" name:"DiskCount"`
+
+	// 
+	DiskEncrypt *uint64 `json:"DiskEncrypt,omitempty" name:"DiskEncrypt"`
 }
 
 type Operation struct {
@@ -802,13 +814,13 @@ type UpdateInstanceRequest struct {
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Number of nodes (2–50)
+	// Number of nodes (2-50)
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
 	// Configuration item (JSON string). Only the following items are supported currently: <li>action.destructive_requires_name</li><li>indices.fielddata.cache.size</li><li>indices.query.bool.max_clause_count</li>
 	EsConfig *string `json:"EsConfig,omitempty" name:"EsConfig"`
 
-	// Password of the default user “elastic“, which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
+	// Password of the default user 'elastic', which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// Access control list
@@ -823,15 +835,15 @@ type UpdateInstanceRequest struct {
 	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Number of dedicated master nodes (only 3 and 5 are supported)
+	// Number of dedicated primary nodes (only 3 and 5 are supported)
 	MasterNodeNum *uint64 `json:"MasterNodeNum,omitempty" name:"MasterNodeNum"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Dedicated master node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+	// Dedicated primary node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
 	MasterNodeType *string `json:"MasterNodeType,omitempty" name:"MasterNodeType"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
-	// Dedicated master node disk size in GB. This is 50 GB by default and currently cannot be customized
+	// Dedicated primary node disk size in GB. This is 50 GB by default and currently cannot be customized
 	MasterNodeDiskSize *uint64 `json:"MasterNodeDiskSize,omitempty" name:"MasterNodeDiskSize"`
 
 	// Whether to force restart during configuration update <li>true: Yes </li><li>false: No </li>This needs to be set only for EsConfig. Default value: false
@@ -860,6 +872,9 @@ type UpdateInstanceRequest struct {
 
 	// Kibana private port
 	KibanaPrivatePort *uint64 `json:"KibanaPrivatePort,omitempty" name:"KibanaPrivatePort"`
+
+	// 
+	ScaleType *int64 `json:"ScaleType,omitempty" name:"ScaleType"`
 }
 
 func (r *UpdateInstanceRequest) ToJsonString() string {

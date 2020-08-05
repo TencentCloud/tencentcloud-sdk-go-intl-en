@@ -133,7 +133,7 @@ func NewCreateTopicIpWhiteListResponse() (response *CreateTopicIpWhiteListRespon
     return
 }
 
-// This API is used to create a topic IP whitelist.
+// This API is used to create a topic IP allowlist.
 func (c *Client) CreateTopicIpWhiteList(request *CreateTopicIpWhiteListRequest) (response *CreateTopicIpWhiteListResponse, err error) {
     if request == nil {
         request = NewCreateTopicIpWhiteListRequest()
@@ -233,7 +233,7 @@ func NewDeleteTopicIpWhiteListResponse() (response *DeleteTopicIpWhiteListRespon
     return
 }
 
-// This API is used to delete a topic IP whitelist.
+// This API is used to delete a topic IP allowlist.
 func (c *Client) DeleteTopicIpWhiteList(request *DeleteTopicIpWhiteListRequest) (response *DeleteTopicIpWhiteListResponse, err error) {
     if request == nil {
         request = NewDeleteTopicIpWhiteListRequest()

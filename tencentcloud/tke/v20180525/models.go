@@ -131,7 +131,7 @@ type Cluster struct {
 	// 
 	Property *string `json:"Property,omitempty" name:"Property"`
 
-	// Number of master nodes currently in the cluster
+	// Number of primary nodes currently in the cluster
 	ClusterMaterNodeNum *uint64 `json:"ClusterMaterNodeNum,omitempty" name:"ClusterMaterNodeNum"`
 
 	// ID of the image used by the cluster
@@ -190,7 +190,7 @@ type ClusterAsGroup struct {
 	// Scaling group ID
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
-	// Scaling group status (enabled, enabling, disabled, disabling, updating, deleting, scaleDownEnabling, scaleDownDisabling)
+	// Scaling group status (`enabled`, `enabling`, `disabled`, `disabling`, `updating`, `deleting`, `scaleDownEnabling`, `scaleDownDisabling`)
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Whether the node is set to unschedulable
@@ -219,23 +219,23 @@ type ClusterAsGroupAttribute struct {
 
 type ClusterAsGroupOption struct {
 
-	// Whether to enable scale-down
+	// Whether to enable scale-in
 	// Note: this field may return null, indicating that no valid value was found.
 	IsScaleDownEnabled *bool `json:"IsScaleDownEnabled,omitempty" name:"IsScaleDownEnabled"`
 
-	// Scale-up selection algorithm when there are multiple scaling groups (random: random selection. most-pods: pod with the most types. least-waste: least waste of resources. The default value is random.)
+	// The scale-out method when there are multiple scaling groups. `random`: select a random scaling group. `most-pods`: choose the scaling group that can schedule the most pods. `least-waste`: select the scaling group that can ensure the fewest remaining resources after Pod scheduling.. The default value is `random`.)
 	// Note: this field may return null, indicating that no valid value was found.
 	Expander *string `json:"Expander,omitempty" name:"Expander"`
 
-	// Max concurrent scale-down volume
+	// Max concurrent scale-in volume
 	// Note: this field may return null, indicating that no valid value was found.
 	MaxEmptyBulkDelete *int64 `json:"MaxEmptyBulkDelete,omitempty" name:"MaxEmptyBulkDelete"`
 
-	// Number of minutes after cluster scale-up when the system starts judging whether to perform scale-down
+	// Number of minutes after cluster scale-out when the system starts judging whether to perform scale-in
 	// Note: this field may return null, indicating that no valid value was found.
 	ScaleDownDelay *int64 `json:"ScaleDownDelay,omitempty" name:"ScaleDownDelay"`
 
-	// Number of consecutive minutes of idleness after which the node is subject to scale-down (default value: 10)
+	// Number of consecutive minutes of idleness after which the node is subject to scale-in (default value: 10)
 	// Note: this field may return null, indicating that no valid value was found.
 	ScaleDownUnneededTime *int64 `json:"ScaleDownUnneededTime,omitempty" name:"ScaleDownUnneededTime"`
 
@@ -243,11 +243,11 @@ type ClusterAsGroupOption struct {
 	// Note: this field may return null, indicating that no valid value was found.
 	ScaleDownUtilizationThreshold *int64 `json:"ScaleDownUtilizationThreshold,omitempty" name:"ScaleDownUtilizationThreshold"`
 
-	// Whether to skip scale-down for nodes with local storage pods (default value: False)
+	// During scale-in, ignore nodes with local storage pods (default value: False)
 	// Note: this field may return null, indicating that no valid value was found.
 	SkipNodesWithLocalStorage *bool `json:"SkipNodesWithLocalStorage,omitempty" name:"SkipNodesWithLocalStorage"`
 
-	// Whether to skip scale-down for nodes with pods in the kube-system namespace that are not managed by DaemonSet (default value: False)
+	// During scale-in, ignore nodes with pods in the kube-system namespace that are not managed by DaemonSet (default value: False)
 	// Note: this field may return null, indicating that no valid value was found.
 	SkipNodesWithSystemPods *bool `json:"SkipNodesWithSystemPods,omitempty" name:"SkipNodesWithSystemPods"`
 
@@ -263,7 +263,7 @@ type ClusterAsGroupOption struct {
 	// Note: this field may return null, indicating that no valid value was found.
 	MaxTotalUnreadyPercentage *int64 `json:"MaxTotalUnreadyPercentage,omitempty" name:"MaxTotalUnreadyPercentage"`
 
-	// Amount of time before unready nodes become eligible for scale-down
+	// Amount of time before unready nodes become eligible for scale-in
 	// Note: this field may return null, indicating that no valid value was found.
 	ScaleDownUnreadyTime *int64 `json:"ScaleDownUnreadyTime,omitempty" name:"ScaleDownUnreadyTime"`
 
@@ -304,7 +304,7 @@ type ClusterBasicSettings struct {
 
 type ClusterCIDRSettings struct {
 
-	// CIDR used to assign container and service IPs for the cluster. It cannot conflict with the VPC’s CIDR or the CIDRs of other clusters in the same VPC
+	// CIDR used to assign container and service IPs for the cluster. It cannot conflict with the VPC's CIDR or the CIDRs of other clusters in the same VPC
 	ClusterCIDR *string `json:"ClusterCIDR,omitempty" name:"ClusterCIDR"`
 
 	// Whether to ignore ClusterCIDR conflict errors, which are not ignored by default
@@ -343,7 +343,7 @@ type ClusterExtraArgs struct {
 
 type ClusterNetworkSettings struct {
 
-	// CIDR used to assign container and service IPs for the cluster. It cannot conflict with the VPC’s CIDR or the CIDRs of other clusters in the same VPC.
+	// CIDR used to assign container and service IPs for the cluster. It cannot conflict with the VPC's CIDR or the CIDRs of other clusters in the same VPC.
 	ClusterCIDR *string `json:"ClusterCIDR,omitempty" name:"ClusterCIDR"`
 
 	// Whether to ignore ClusterCIDR conflict errors. It defaults to not ignore.
@@ -374,7 +374,7 @@ type CreateClusterAsGroupRequest struct {
 	// The pass-through parameters for scaling group creation, in the format of a JSON string. For more information, see the [CreateAutoScalingGroup](https://cloud.tencent.com/document/api/377/20440) API. The **LaunchConfigurationId** is created with the LaunchConfigurePara parameter, which does not support data entry.
 	AutoScalingGroupPara *string `json:"AutoScalingGroupPara,omitempty" name:"AutoScalingGroupPara"`
 
-	// The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://cloud.tencent.com/document/api/377/20447) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it’s set through the **UserScript**.
+	// The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://cloud.tencent.com/document/api/377/20447) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it's set through the **UserScript**.
 	LaunchConfigurePara *string `json:"LaunchConfigurePara,omitempty" name:"LaunchConfigurePara"`
 
 	// Advanced configuration information of the node
@@ -423,7 +423,7 @@ type CreateClusterEndpointRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// The ID of the subnet where the cluster’s port is located (only needs to be entered when the non-public network access is enabled, and must be within the subnet of the cluster’s VPC). 
+	// The ID of the subnet where the cluster's port is located (only needs to be entered when the non-public network access is enabled, and must be within the subnet of the cluster's VPC). 
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// Whether public network access is enabled or not (True = public network access, FALSE = private network access, with the default value as FALSE).
@@ -463,7 +463,7 @@ type CreateClusterEndpointVipRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Security policy opens single IP or CIDR to the Internet (for example: “192.168.1.0/24”, with “reject all” as the default).
+	// Security policy opens single IP or CIDR to the Internet (for example: '192.168.1.0/24', with 'reject all' as the default).
 	SecurityPolicies []*string `json:"SecurityPolicies,omitempty" name:"SecurityPolicies" list`
 }
 
@@ -480,7 +480,7 @@ type CreateClusterEndpointVipResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Request job’s FlowId
+		// Request job's FlowId
 		RequestFlowId *int64 `json:"RequestFlowId,omitempty" name:"RequestFlowId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1257,25 +1257,25 @@ type DescribeClusterSecurityResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Cluster’s account name
+		// Cluster's account name
 		UserName *string `json:"UserName,omitempty" name:"UserName"`
 
-		// Cluster’s password
+		// Cluster's password
 		Password *string `json:"Password,omitempty" name:"Password"`
 
-		// Cluster’s access CA certificate
+		// Cluster's access CA certificate
 		CertificationAuthority *string `json:"CertificationAuthority,omitempty" name:"CertificationAuthority"`
 
-		// Cluster’s access address
+		// Cluster's access address
 		ClusterExternalEndpoint *string `json:"ClusterExternalEndpoint,omitempty" name:"ClusterExternalEndpoint"`
 
 		// Domain name accessed by the cluster
 		Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-		// Cluster’s endpoint address
+		// Cluster's endpoint address
 		PgwEndpoint *string `json:"PgwEndpoint,omitempty" name:"PgwEndpoint"`
 
-		// Cluster’s access policy group
+		// Cluster's access policy group
 	// Note: This field may return null, indicating that no valid value was found.
 		SecurityPolicy []*string `json:"SecurityPolicy,omitempty" name:"SecurityPolicy" list`
 
@@ -1357,10 +1357,10 @@ type DescribeExistedInstancesRequest struct {
 	// Cluster ID. Enter the `ClusterId` field returned when you call the DescribeClusters API (Only VPC ID obtained through `ClusterId` need filtering conditions. When comparing statuses, the nodes on all clusters in this region will be used for comparison. You cannot specify `InstanceIds` and `ClusterId` at the same time.)
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Query by one or more instance ID(s). Instance ID format: ins-xxxxxxxx. (Refer to section ID.N of the API overview for this parameter’s specific format.) Up to 100 instances are allowed for each request. You cannot specify InstanceIds and Filters at the same time.
+	// Query by one or more instance ID(s). Instance ID format: ins-xxxxxxxx. (Refer to section ID.N of the API overview for this parameter's specific format.) Up to 100 instances are allowed for each request. You cannot specify InstanceIds and Filters at the same time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
-	// Filter condition. For fields and other information, see [the DescribeInstances API](https://cloud.tencent.com/document/api/213/15728). If a ClusterId has been set, then the cluster’s VPC ID will be attached as a query field. In this situation, if a "vpc-id" is specified in Filter, then the specified VPC ID must be consistent with the cluster’s VPC ID.
+	// Filter condition. For fields and other information, see [the DescribeInstances API](https://cloud.tencent.com/document/api/213/15728). If a ClusterId has been set, then the cluster's VPC ID will be attached as a query field. In this situation, if a "vpc-id" is specified in Filter, then the specified VPC ID must be consistent with the cluster's VPC ID.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Filter by instance IP (Supports both private and public IPs)
@@ -1562,11 +1562,11 @@ type ExistedInstance struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// List of private IPs of the instance’s primary ENI.
+	// List of private IPs of the instance's primary ENI.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
 
-	// List of public IPs of the instance’s primary ENI.
+	// List of public IPs of the instance's primary ENI.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
 
@@ -1574,11 +1574,11 @@ type ExistedInstance struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// Instance’s number of CPU cores. Unit: cores.
+	// Instance's number of CPU cores. Unit: cores.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CPU *uint64 `json:"CPU,omitempty" name:"CPU"`
 
-	// Instance’s memory capacity. Unit: GB.
+	// Instance's memory capacity. Unit: GB.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
@@ -1869,7 +1869,7 @@ type ModifyClusterEndpointSPRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Security policy opens single IP or CIDR block to the Internet (for example: “192.168.1.0/24”, with “reject all” as the default).
+	// Security policy opens single IP or CIDR block to the Internet (for example: '192.168.1.0/24', with 'reject all' as the default).
 	SecurityPolicies []*string `json:"SecurityPolicies,omitempty" name:"SecurityPolicies" list`
 }
 

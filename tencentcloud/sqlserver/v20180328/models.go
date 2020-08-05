@@ -261,6 +261,24 @@ type CreateDBInstancesRequest struct {
 
 	// Auto-renewal flag. 0: normal renewal, 1: auto-renewal. Default value: 1.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// 
+	SecurityGroupList []*string `json:"SecurityGroupList,omitempty" name:"SecurityGroupList" list`
+
+	// 
+	Weekly []*int64 `json:"Weekly,omitempty" name:"Weekly" list`
+
+	// 
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// 
+	Span *int64 `json:"Span,omitempty" name:"Span"`
+
+	// 
+	HAType *string `json:"HAType,omitempty" name:"HAType"`
+
+	// 
+	MultiZones *bool `json:"MultiZones,omitempty" name:"MultiZones"`
 }
 
 func (r *CreateDBInstancesRequest) ToJsonString() string {
@@ -450,7 +468,7 @@ type DBInstance struct {
 	// Instance VPC subnet ID, which will be 0 if the basic network is used
 	SubnetId *int64 `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance status. Valid values: <li>1: applying </li> <li>2: running </li> <li>3: restrictedly running (master/slave switching) </li> <li>4: isolated </li> <li>5: repossessing </li> <li>6: repossessed </li> <li>7: task running (e.g., backing up or rolling back the instance) </li> <li>8: decommissioned </li> <li>9: scaling </li> <li>10: migrating </li> <li>11: read-only </li> <li>12: restarting </li>
+	// Instance status. Valid values: <li>1: applying </li> <li>2: running </li> <li>3: restrictedly running (primary/secondary switching) </li> <li>4: isolated </li> <li>5: repossessing </li> <li>6: repossessed </li> <li>7: task running (e.g., backing up or rolling back the instance) </li> <li>8: decommissioned </li> <li>9: scaling </li> <li>10: migrating </li> <li>11: read-only </li> <li>12: restarting </li>
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Instance access IP
@@ -524,6 +542,18 @@ type DBInstance struct {
 
 	// Unique string-type ID of instance subnet in the format of `subnet-xxx`, which is an empty string if the basic network is used
 	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// 
+	IsolateOperator *string `json:"IsolateOperator,omitempty" name:"IsolateOperator"`
+
+	// 
+	SubFlag *string `json:"SubFlag,omitempty" name:"SubFlag"`
+
+	// 
+	ROFlag *string `json:"ROFlag,omitempty" name:"ROFlag"`
+
+	// 
+	HAFlag *string `json:"HAFlag,omitempty" name:"HAFlag"`
 }
 
 type DBPrivilege struct {
@@ -706,7 +736,7 @@ type DescribeAccountsRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Number of results per page. Value range: 1–100. Default value: 20
+	// Number of results per page. Value range: 1-100. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number. Default value: 0
@@ -761,7 +791,7 @@ type DescribeBackupsRequest struct {
 	// Instance ID in the format of mssql-njj2mtpl
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Number of results per page. Value range: 1–100. Default value: 20
+	// Number of results per page. Value range: 1-100. Default value: 20
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number. Default value: 0
@@ -810,7 +840,7 @@ type DescribeDBInstancesRequest struct {
 	// Instance status. Valid values:
 	// <li>1: applying</li>
 	// <li>2: running</li>
-	// <li>3: running restrictedly (master/slave switching)</li>
+	// <li>3: running restrictedly (primary/secondary switching)</li>
 	// <li>4: isolated</li>
 	// <li>5: repossessing</li>
 	// <li>6: repossessed</li>
@@ -825,7 +855,7 @@ type DescribeDBInstancesRequest struct {
 	// Page number. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results per page. Value range: 1–100. Default value: 100
+	// Number of results per page. Value range: 1-100. Default value: 100
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// One or more instance IDs in the format of mssql-si2823jyl
@@ -880,7 +910,7 @@ type DescribeDBsRequest struct {
 	// Instance ID
 	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet" list`
 
-	// Number of results per page. Value range: 1–100. Default value: 20
+	// Number of results per page. Value range: 1-100. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number. Default value: 0
@@ -1042,7 +1072,7 @@ type DescribeMigrationsRequest struct {
 	// Migration task name (fuzzy match)
 	MigrateName *string `json:"MigrateName,omitempty" name:"MigrateName"`
 
-	// Number of results per page. Value range: 1–100. Default value: 100
+	// Number of results per page. Value range: 1-100. Default value: 100
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number. Default value: 0
@@ -1257,7 +1287,7 @@ type DescribeSlowlogsRequest struct {
 	// Query end time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Number of results per page. Value range: 1–100. Default value: 20
+	// Number of results per page. Value range: 1-100. Default value: 20
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number. Default value: 0
@@ -1349,14 +1379,23 @@ type InquiryPriceCreateDBInstancesRequest struct {
 	// Billing type. Valid value: POSTPAID.
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 
-	// Length of purchase in months. Value range: 1–48. Default value: 1
+	// Length of purchase in months. Value range: 1-48. Default value: 1
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
-	// Number of instances purchased at a time. Value range: 1–100. Default value: 1
+	// Number of instances purchased at a time. Value range: 1-100. Default value: 1
 	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
 
 	// SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). Default value: 2008R2.
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// 
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// 
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// 
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
 }
 
 func (r *InquiryPriceCreateDBInstancesRequest) ToJsonString() string {
@@ -1403,6 +1442,9 @@ type InquiryPriceUpgradeDBInstanceRequest struct {
 
 	// Storage capacity after instance upgrade in GB, which cannot be smaller than the current instance storage capacity
 	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// 
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 }
 
 func (r *InquiryPriceUpgradeDBInstanceRequest) ToJsonString() string {
@@ -2178,6 +2220,9 @@ type UpgradeDBInstanceRequest struct {
 
 	// Voucher ID (currently, only one voucher can be used per order)
 	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
+
+	// 
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {

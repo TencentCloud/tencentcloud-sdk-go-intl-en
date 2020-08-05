@@ -158,7 +158,7 @@ func (r *CancelKeyDeletionResponse) FromJsonString(s string) error {
 type CreateKeyRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique alias that makes a key more recognizable and understandable. This parameter cannot be empty, can contain 1–60 letters, digits, `-`, and `_`, and must begin with a letter or digit. The `kms-` prefix is used for Tencent Cloud products.
+	// Unique alias that makes a key more recognizable and understandable. This parameter cannot be empty, can contain 1-60 letters, digits, `-`, and `_`, and must begin with a letter or digit. The `kms-` prefix is used for Tencent Cloud products.
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
 	// 
@@ -169,6 +169,9 @@ type CreateKeyRequest struct {
 
 	// Specifies the key type. Default value: 1. Valid value: 1 - default type, indicating that the CMK is created by KMS; 2 - EXTERNAL type, indicating that you need to import key material. For more information, please see the `GetParametersForImport` and `ImportKeyMaterial` API documents.
 	Type *uint64 `json:"Type,omitempty" name:"Type"`
+
+	// 
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateKeyRequest) ToJsonString() string {
@@ -233,6 +236,9 @@ type CreateWhiteBoxKeyRequest struct {
 
 	// Key description of up to 1024 bytes
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// 
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateWhiteBoxKeyRequest) ToJsonString() string {
@@ -256,6 +262,12 @@ type CreateWhiteBoxKeyResponse struct {
 
 		// Globally unique white-box key ID
 		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+		// 
+		TagCode *uint64 `json:"TagCode,omitempty" name:"TagCode"`
+
+		// 
+		TagMsg *string `json:"TagMsg,omitempty" name:"TagMsg"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1352,7 +1364,7 @@ type ImportKeyMaterialRequest struct {
 	// Specifies the CMK into which to import key material, which must be the same as the one specified by `GetParametersForImport`.
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
-	// Unix timestamp of the key material’s expiration time. If this value is empty or 0, the key material will never expire. To specify the expiration time, it should be later than the current time. Maximum value: 2147443200.
+	// Unix timestamp of the key material's expiration time. If this value is empty or 0, the key material will never expire. To specify the expiration time, it should be later than the current time. Maximum value: 2147443200.
 	ValidTo *uint64 `json:"ValidTo,omitempty" name:"ValidTo"`
 }
 
@@ -1431,7 +1443,7 @@ type KeyMetadata struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Origin *string `json:"Origin,omitempty" name:"Origin"`
 
-	// It’s valid when `Origin` is `EXTERNAL`, indicating the expiration date of key material. 0 means valid forever.
+	// It's valid when `Origin` is `EXTERNAL`, indicating the expiration date of key material. 0 means valid forever.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ValidTo *uint64 `json:"ValidTo,omitempty" name:"ValidTo"`
 
@@ -1719,10 +1731,19 @@ func (r *ScheduleKeyDeletionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type Tag struct {
+
+	// 
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// 
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
 type UpdateAliasRequest struct {
 	*tchttp.BaseRequest
 
-	// New alias containing 1–60 characters or digits
+	// New alias containing 1-60 characters or digits
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
 	// Globally unique CMK ID
