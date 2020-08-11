@@ -118,6 +118,46 @@ func (r *AsymmetricSm2DecryptResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type BindCloudResourceRequest struct {
+	*tchttp.BaseRequest
+
+	// CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Unique ID of a Tencent Cloud service
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Resource/instance ID, which is stored as a string and defined by the caller based on the Tencent Cloud service’s features.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+}
+
+func (r *BindCloudResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *BindCloudResourceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type BindCloudResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BindCloudResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *BindCloudResourceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CancelKeyDeletionRequest struct {
 	*tchttp.BaseRequest
 
@@ -1738,6 +1778,46 @@ type Tag struct {
 
 	// 
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type UnbindCloudResourceRequest struct {
+	*tchttp.BaseRequest
+
+	// CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Unique ID of a Tencent Cloud service
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Resource/instance ID, which is stored as a string and defined by the caller based on the Tencent Cloud service’s features.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+}
+
+func (r *UnbindCloudResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UnbindCloudResourceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UnbindCloudResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UnbindCloudResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UnbindCloudResourceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type UpdateAliasRequest struct {

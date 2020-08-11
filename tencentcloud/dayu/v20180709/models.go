@@ -967,6 +967,52 @@ func (r *CreateNetReturnResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateNewL7RulesUploadRequest struct {
+	*tchttp.BaseRequest
+
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Resource ID list.
+	IdList []*string `json:"IdList,omitempty" name:"IdList" list`
+
+	// Resource IP address list.
+	VipList []*string `json:"VipList,omitempty" name:"VipList" list`
+
+	// Rule list.
+	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules" list`
+}
+
+func (r *CreateNewL7RulesUploadRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateNewL7RulesUploadRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateNewL7RulesUploadResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Success code.
+		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateNewL7RulesUploadResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateNewL7RulesUploadResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateUnblockIpRequest struct {
 	*tchttp.BaseRequest
 

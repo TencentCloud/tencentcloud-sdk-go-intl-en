@@ -995,7 +995,7 @@ type AiReviewPoliticalTaskOutput struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+	// Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/34187#PoliticalImgReviewTemplateInfo?from_cn_redirect=1) and this parameter is as follows:
 	// violation_photo:
 	// <li>violation_photo: violating photo.</li>
 	// Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
@@ -3123,10 +3123,12 @@ type CreateSuperPlayerConfigRequest struct {
 	// <li>MinEdgeLength: 4320, Name: 8K.</li>
 	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitempty" name:"ResolutionNames" list`
 
-	// 
+	// Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// 
+	// Scheme used for playback. If it is left empty or set to `Default`, the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used. Other valid values:
+	// <li>HTTP;</li>
+	// <li>HTTPS.</li>
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 
 	// Template description. Length limit: 256 characters.
@@ -5630,7 +5632,7 @@ type FaceConfigureInfo struct {
 	// <li>OFF: disables intelligent face recognition task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100. Default value: 95.
+	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100. Default value: 95.
 	Score *float64 `json:"Score,omitempty" name:"Score"`
 
 	// Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the default figures will be returned. Valid values:
@@ -5653,28 +5655,19 @@ type FaceConfigureInfo struct {
 
 type FaceConfigureInfoForUpdate struct {
 
-	// Switch of face recognition task. Valid values:
-	// <li>ON: enables intelligent face recognition task;</li>
-	// <li>OFF: disables intelligent face recognition task.</li>
+	// 
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
+	// 
 	Score *float64 `json:"Score,omitempty" name:"Score"`
 
-	// Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the default figures will be returned. Valid values:
-	// <li>entertainment: entertainment celebrity;</li>
-	// <li>sport: sports celebrity;</li>
-	// <li>politician: politically sensitive figure.</li>
+	// 
 	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet" list`
 
-	// Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// 
 	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet" list`
 
-	// Figure library. Valid values:
-	// <li>Default: default figure library;</li>
-	// <li>UserDefine: custom figure library.</li>
-	// <li>All: both default and custom figure libraries will be used.</li>
+	// 
 	FaceLibrary *string `json:"FaceLibrary,omitempty" name:"FaceLibrary"`
 }
 
@@ -5902,15 +5895,15 @@ type ImageWatermarkInput struct {
 	ImageContent *string `json:"ImageContent,omitempty" name:"ImageContent"`
 
 	// Watermark width. % and px formats are supported:
-	// <li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+	// <li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+	// <li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
 	// Default value: 10%.
 	Width *string `json:"Width,omitempty" name:"Width"`
 
 	// Watermark height. % and px formats are supported:
-	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
-	// Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
+	// Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
 	Height *string `json:"Height,omitempty" name:"Height"`
 }
 
@@ -5920,14 +5913,14 @@ type ImageWatermarkInputForUpdate struct {
 	ImageContent *string `json:"ImageContent,omitempty" name:"ImageContent"`
 
 	// Watermark width. % and px formats are supported:
-	// <li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+	// <li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+	// <li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
 	Width *string `json:"Width,omitempty" name:"Width"`
 
 	// Watermark height. % and px formats are supported:
-	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
-	// `0px` means that `Height` will be proportionally scaled according to the video width.
+	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
+	// Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
 	Height *string `json:"Height,omitempty" name:"Height"`
 }
 
@@ -6342,7 +6335,8 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// <li>bureau_politician: ministry leader;</li>
 	// <li>county_politician: county/city leader;</li>
 	// <li>rural_politician: town leader;</li>
-	// <li>sensitive_politician: politically sensitive figure.</li>
+	// <li>sensitive_politician: politically sensitive figure;</li>
+	// <li>foreign_politician: head of a foreign country/government.</li>
 	// entertainment:
 	// <li>sensitive_entertainment: sensitive entertainment celebrity.</li>
 	// sport:
@@ -6352,7 +6346,8 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// scholar:
 	// <li>sensitive_scholar: sensitive educator.</li>
 	// celebrity:
-	// <li>sensitive_celebrity: sensitive well-known figure.</li>
+	// <li>sensitive_celebrity: sensitive well-known figure;</li>
+	// <li>historical_celebrity: well-known historical figures.</li>
 	// military:
 	// <li>sensitive_military: militarily sensitive figure.</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
@@ -7932,10 +7927,13 @@ type ModifySuperPlayerConfigRequest struct {
 	// Display name of player for substreams with different resolutions.
 	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitempty" name:"ResolutionNames" list`
 
-	// 
+	// Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// 
+	// Scheme used for playback. Valid values:
+	// <li>Default: the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used;</li>
+	// <li>HTTP;</li>
+	// <li>HTTPS.</li>
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 
 	// Template description. Length limit: 256 characters.
@@ -8384,10 +8382,13 @@ type PlayerConfig struct {
 	// Last modified time of player configuration in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// 
+	// Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// 
+	// Scheme used for playback. Valid values:
+	// <li>Default: the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used;</li>
+	// <li>HTTP;</li>
+	// <li>HTTPS.</li>
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 
 	// Template description.
@@ -9076,7 +9077,7 @@ type PullUploadRequest struct {
 	*tchttp.BaseRequest
 
 	// URL of the media to be pulled. Supported media format: HLS; unsupported media format: DASH.
-	// For more information about supported extensions, please see [Media Types](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
+	// For more information about supported extensions, please see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B?from_cn_redirect=1).
 	MediaUrl *string `json:"MediaUrl,omitempty" name:"MediaUrl"`
 
 	// Media name.
@@ -9091,7 +9092,9 @@ type PullUploadRequest struct {
 	// Expiration time of media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-	// Specifies upload region. This is only applicable to users that have special requirements for the upload region (currently, only Beijing, Shanghai, and Chongqing regions are supported).
+	// Specifies upload region. This is only applicable to users that have special requirements for the upload region:
+	// <li>If it is left empty, the upload region is your [default region](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4);</li>
+	// <li>If it is specified, please make sure that the upload region has been [enabled for storage](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4).</li>
 	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
 
 	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [CreateClass](https://cloud.tencent.com/document/product/266/7812) API.
@@ -9109,7 +9112,7 @@ type PullUploadRequest struct {
 	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
-	// Source context, which is used to pass through the user request information. The [upload callback](/document/product/266/7830) API will return the value of this field. It can contain up to 250 characters.
+	// Source context, which is used to pass through the user request information. The [upload callback](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) API will return the value of this field. It can contain up to 250 characters.
 	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
 }
 

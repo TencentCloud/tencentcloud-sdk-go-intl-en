@@ -2254,7 +2254,7 @@ func NewProcessMediaByUrlResponse() (response *ProcessMediaByUrlResponse) {
 // 2. Intelligent content analysis (tag, category, cover, and frame-specific tag);
 // 3. Intelligent content recognition (opening and closing credits, face, full text, text keyword, full speech, speech keyword, and object).
 // 
-// If the event notification is used, its type is [Task Flow Status Change](https://cloud.tencent.com/document/product/266/9636).
+// If the event notification is used, its type is [Task Flow Status Change](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
 func (c *Client) ProcessMediaByUrl(request *ProcessMediaByUrlRequest) (response *ProcessMediaByUrlResponse, err error) {
     if request == nil {
         request = NewProcessMediaByUrlRequest()

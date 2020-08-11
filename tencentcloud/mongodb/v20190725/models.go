@@ -157,13 +157,13 @@ type CreateDBInstanceHourRequest struct {
 	// Instance tag information
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
 
-	// 
+	// Valid values: 1 (regular instance), 2 (temp instance), 3 (read-only instance), 4 (disaster recovery instance).
 	Clone *int64 `json:"Clone,omitempty" name:"Clone"`
 
-	// 
+	// Parent instance ID. It is required if the `Clone` is 3 or 4.
 	Father *string `json:"Father,omitempty" name:"Father"`
 
-	// 
+	// Security group.
 	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
 }
 
@@ -212,7 +212,7 @@ type CreateDBInstanceRequest struct {
 	// Instance disk size in GB.
 	Volume *uint64 `json:"Volume,omitempty" name:"Volume"`
 
-	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition.
+	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition.
 	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
 
 	// Number of instances. Minimum value: 1. Maximum value: 10.
@@ -224,13 +224,13 @@ type CreateDBInstanceRequest struct {
 	// Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
-	// Server type. Valid values: HIO (high IO), HIO10G (10-gigabit high IO).
+	// Server type. Valid values: HIO (high IO), HIO10G (10-gigabit high IO), STDS5 (standard).
 	MachineCode *string `json:"MachineCode,omitempty" name:"MachineCode"`
 
-	// Instance type. Valid values: REPLSET (replica set), SHARD (sharded cluster).
+	// Instance type. Valid values: REPLSET (replica set), SHARD (sharded cluster), STANDALONE (single-node).
 	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
 
-	// Number of replica sets. To create a replica set instance, set this parameter to 1; to create a shard instance, see the parameters returned by the `DescribeSpecInfo` API.
+	// Number of replica sets. To create a replica set instance, set this parameter to 1; to create a shard instance, see the parameters returned by the `DescribeSpecInfo` API; to create a single-node instance, set this parameter to 0.
 	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
 
 	// Project ID. If this parameter is not set, the default project will be used.
@@ -251,16 +251,16 @@ type CreateDBInstanceRequest struct {
 	// Auto-renewal flag. Valid values: 0 (auto-renewal not enabled), 1 (auto-renewal enabled). Default value: 0.
 	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
-	// 
+	// Whether to automatically use a voucher. Valid values: 1 (yes), 0 (no). Default value: 0.
 	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
-	// 
+	// Valid values: 1 (regular instance), 2 (temp instance), 3 (read-only instance), 4 (disaster recovery instance).
 	Clone *int64 `json:"Clone,omitempty" name:"Clone"`
 
-	// 
+	// Primary instance ID. It is required for read-only and disaster recovery instances.
 	Father *string `json:"Father,omitempty" name:"Father"`
 
-	// 
+	// Security group.
 	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
 }
 

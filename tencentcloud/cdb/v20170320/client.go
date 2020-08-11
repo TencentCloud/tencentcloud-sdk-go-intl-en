@@ -303,6 +303,31 @@ func (c *Client) CreateParamTemplate(request *CreateParamTemplateRequest) (respo
     return
 }
 
+func NewCreateRoInstanceIpRequest() (request *CreateRoInstanceIpRequest) {
+    request = &CreateRoInstanceIpRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "CreateRoInstanceIp")
+    return
+}
+
+func NewCreateRoInstanceIpResponse() (response *CreateRoInstanceIpResponse) {
+    response = &CreateRoInstanceIpResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a VIP exclusive to a TencentDB read-only instance.
+func (c *Client) CreateRoInstanceIp(request *CreateRoInstanceIpRequest) (response *CreateRoInstanceIpResponse, err error) {
+    if request == nil {
+        request = NewCreateRoInstanceIpRequest()
+    }
+    response = NewCreateRoInstanceIpResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAccountsRequest() (request *DeleteAccountsRequest) {
     request = &DeleteAccountsRequest{
         BaseRequest: &tchttp.BaseRequest{},

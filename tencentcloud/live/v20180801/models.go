@@ -180,6 +180,17 @@ func (r *AddLiveWatermarkResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type BandwidthInfo struct {
+
+	// Format of return value:
+	// yyyy-mm-dd HH:MM:SS
+	// The time accuracy matches with the query granularity.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Bandwidth.
+	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+}
+
 type BillDataInfo struct {
 
 	// Time point in the format of `yyyy-mm-dd HH:MM:SS`.
@@ -391,9 +402,11 @@ type ClientIpPlaySumInfo struct {
 
 type CommonMixControlParams struct {
 
-	// Valid values: [0,1].
-	// If 1 is entered, when the layer resolution in the parameter is different from the actual video resolution, the video will be automatically cropped according to the resolution set by the layer.
+	// 
 	UseMixCropCenter *int64 `json:"UseMixCropCenter,omitempty" name:"UseMixCropCenter"`
+
+	// 
+	AllowCopy *int64 `json:"AllowCopy,omitempty" name:"AllowCopy"`
 }
 
 type CommonMixCropParams struct {
@@ -1118,6 +1131,7 @@ type CreateLiveTranscodeTemplateRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Width. Default value: 0.
+	// Value range: [0-3000].
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
 	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
@@ -1127,6 +1141,7 @@ type CreateLiveTranscodeTemplateRequest struct {
 	NeedAudio *int64 `json:"NeedAudio,omitempty" name:"NeedAudio"`
 
 	// Height. Default value: 0.
+	// Value range: [0-3000].
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
 	// Frame rate. Default value: 0.
@@ -2027,6 +2042,46 @@ func (r *DescribeConcurrentRecordStreamNumResponse) ToJsonString() string {
 }
 
 func (r *DescribeConcurrentRecordStreamNumResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDeliverBandwidthListRequest struct {
+	*tchttp.BaseRequest
+
+	// Start time in the format of "%Y-%m-%d %H:%M:%S".
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in the format of "%Y-%m-%d %H:%M:%S". Data in the last 3 months can be queried, and the query period is up to 1 month.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeDeliverBandwidthListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDeliverBandwidthListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDeliverBandwidthListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Billable bandwidth of live stream relaying.
+		DataInfoList []*BandwidthInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDeliverBandwidthListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDeliverBandwidthListResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4514,7 +4569,7 @@ type HttpStatusInfo struct {
 type ModifyLiveCallbackTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Template ID.
+	// Template ID returned by the `DescribeLiveCallbackTemplates` API.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
 	// Template name.

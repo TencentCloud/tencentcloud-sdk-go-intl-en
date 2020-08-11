@@ -693,6 +693,31 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
     return
 }
 
+func NewDescribeMaintenanceWindowRequest() (request *DescribeMaintenanceWindowRequest) {
+    request = &DescribeMaintenanceWindowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeMaintenanceWindow")
+    return
+}
+
+func NewDescribeMaintenanceWindowResponse() (response *DescribeMaintenanceWindowResponse) {
+    response = &DescribeMaintenanceWindowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query instance maintenance window. The maintenance window specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business.
+func (c *Client) DescribeMaintenanceWindow(request *DescribeMaintenanceWindowRequest) (response *DescribeMaintenanceWindowResponse, err error) {
+    if request == nil {
+        request = NewDescribeMaintenanceWindowRequest()
+    }
+    response = NewDescribeMaintenanceWindowResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProductInfoRequest() (request *DescribeProductInfoRequest) {
     request = &DescribeProductInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1143,6 +1168,31 @@ func (c *Client) ModifyInstanceParams(request *ModifyInstanceParamsRequest) (res
     return
 }
 
+func NewModifyMaintenanceWindowRequest() (request *ModifyMaintenanceWindowRequest) {
+    request = &ModifyMaintenanceWindowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "ModifyMaintenanceWindow")
+    return
+}
+
+func NewModifyMaintenanceWindowResponse() (response *ModifyMaintenanceWindowResponse) {
+    response = &ModifyMaintenanceWindowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify instance maintenance window. The maintenance window specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business. Note: if the compatible version upgrade or architecture upgrade task has been initiated for an instance, its maintenance window cannot be modified.
+func (c *Client) ModifyMaintenanceWindow(request *ModifyMaintenanceWindowRequest) (response *ModifyMaintenanceWindowResponse, err error) {
+    if request == nil {
+        request = NewModifyMaintenanceWindowRequest()
+    }
+    response = NewModifyMaintenanceWindowResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyNetworkConfigRequest() (request *ModifyNetworkConfigRequest) {
     request = &ModifyNetworkConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1314,6 +1364,31 @@ func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *Upg
         request = NewUpgradeInstanceRequest()
     }
     response = NewUpgradeInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeInstanceVersionRequest() (request *UpgradeInstanceVersionRequest) {
+    request = &UpgradeInstanceVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "UpgradeInstanceVersion")
+    return
+}
+
+func NewUpgradeInstanceVersionResponse() (response *UpgradeInstanceVersionResponse) {
+    response = &UpgradeInstanceVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to upgrade compatible instance version (for example, from Redis 2.8 to 4.0), or upgrade instance architecture (for example, from standard architecture to cluster architecture).
+func (c *Client) UpgradeInstanceVersion(request *UpgradeInstanceVersionRequest) (response *UpgradeInstanceVersionResponse, err error) {
+    if request == nil {
+        request = NewUpgradeInstanceVersionRequest()
+    }
+    response = NewUpgradeInstanceVersionResponse()
     err = c.Send(request, response)
     return
 }

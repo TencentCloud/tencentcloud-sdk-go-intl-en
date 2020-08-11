@@ -170,6 +170,31 @@ func (c *Client) BatchRegisterTargets(request *BatchRegisterTargetsRequest) (res
     return
 }
 
+func NewCreateClsLogSetRequest() (request *CreateClsLogSetRequest) {
+    request = &CreateClsLogSetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "CreateClsLogSet")
+    return
+}
+
+func NewCreateClsLogSetResponse() (response *CreateClsLogSetResponse) {
+    response = &CreateClsLogSetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a CLB exclusive logset for storing CLB logs.
+func (c *Client) CreateClsLogSet(request *CreateClsLogSetRequest) (response *CreateClsLogSetResponse, err error) {
+    if request == nil {
+        request = NewCreateClsLogSetRequest()
+    }
+    response = NewCreateClsLogSetResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateListenerRequest() (request *CreateListenerRequest) {
     request = &CreateListenerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -295,6 +320,31 @@ func (c *Client) CreateTargetGroup(request *CreateTargetGroupRequest) (response 
         request = NewCreateTargetGroupRequest()
     }
     response = NewCreateTargetGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateTopicRequest() (request *CreateTopicRequest) {
+    request = &CreateTopicRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "CreateTopic")
+    return
+}
+
+func NewCreateTopicResponse() (response *CreateTopicResponse) {
+    response = &CreateTopicResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a topic with the full-text index and key-value index enabled by default. The creation will fail if there is no CLB exclusive logset.
+func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
+    if request == nil {
+        request = NewCreateTopicRequest()
+    }
+    response = NewCreateTopicResponse()
     err = c.Send(request, response)
     return
 }
@@ -702,6 +752,31 @@ func (c *Client) DescribeClassicalLBTargets(request *DescribeClassicalLBTargetsR
         request = NewDescribeClassicalLBTargetsRequest()
     }
     response = NewDescribeClassicalLBTargetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClsLogSetRequest() (request *DescribeClsLogSetRequest) {
+    request = &DescribeClsLogSetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "DescribeClsLogSet")
+    return
+}
+
+func NewDescribeClsLogSetResponse() (response *DescribeClsLogSetResponse) {
+    response = &DescribeClsLogSetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the CLB exclusive logset of a user.
+func (c *Client) DescribeClsLogSet(request *DescribeClsLogSetRequest) (response *DescribeClsLogSetResponse, err error) {
+    if request == nil {
+        request = NewDescribeClsLogSetRequest()
+    }
+    response = NewDescribeClsLogSetResponse()
     err = c.Send(request, response)
     return
 }

@@ -153,6 +153,32 @@ func (c *Client) GeneralBasicOCR(request *GeneralBasicOCRRequest) (response *Gen
     return
 }
 
+func NewHKIDCardOCRRequest() (request *HKIDCardOCRRequest) {
+    request = &HKIDCardOCRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ocr", APIVersion, "HKIDCardOCR")
+    return
+}
+
+func NewHKIDCardOCRResponse() (response *HKIDCardOCRResponse) {
+    response = &HKIDCardOCRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to recognize key fields on the photo side of a Hong Kong (China) identity card, including name in Chinese, name in English, telecode for name, date of birth, gender, document symbol, date of the first issue, date of the last receipt, identity card number, and permanent residency attribute. It can check for card authenticity and crop the identity photo.
+// This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://cloud.tencent.com/about/connect).
+func (c *Client) HKIDCardOCR(request *HKIDCardOCRRequest) (response *HKIDCardOCRResponse, err error) {
+    if request == nil {
+        request = NewHKIDCardOCRRequest()
+    }
+    response = NewHKIDCardOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewMLIDCardOCRRequest() (request *MLIDCardOCRRequest) {
     request = &MLIDCardOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},

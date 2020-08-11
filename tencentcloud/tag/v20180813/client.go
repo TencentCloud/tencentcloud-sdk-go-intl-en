@@ -68,6 +68,31 @@ func (c *Client) AddResourceTag(request *AddResourceTagRequest) (response *AddRe
     return
 }
 
+func NewAttachResourcesTagRequest() (request *AttachResourcesTagRequest) {
+    request = &AttachResourcesTagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "AttachResourcesTag")
+    return
+}
+
+func NewAttachResourcesTagResponse() (response *AttachResourcesTagResponse) {
+    response = &AttachResourcesTagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to associate a tag with multiple resources.
+func (c *Client) AttachResourcesTag(request *AttachResourcesTagRequest) (response *AttachResourcesTagResponse, err error) {
+    if request == nil {
+        request = NewAttachResourcesTagRequest()
+    }
+    response = NewAttachResourcesTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateTagRequest() (request *CreateTagRequest) {
     request = &CreateTagRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -193,6 +218,31 @@ func (c *Client) DescribeResourceTagsByResourceIds(request *DescribeResourceTags
     return
 }
 
+func NewDescribeResourceTagsByResourceIdsSeqRequest() (request *DescribeResourceTagsByResourceIdsSeqRequest) {
+    request = &DescribeResourceTagsByResourceIdsSeqRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "DescribeResourceTagsByResourceIdsSeq")
+    return
+}
+
+func NewDescribeResourceTagsByResourceIdsSeqResponse() (response *DescribeResourceTagsByResourceIdsSeqResponse) {
+    response = &DescribeResourceTagsByResourceIdsSeqResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to view the tags associated with a resource in sequence.
+func (c *Client) DescribeResourceTagsByResourceIdsSeq(request *DescribeResourceTagsByResourceIdsSeqRequest) (response *DescribeResourceTagsByResourceIdsSeqResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourceTagsByResourceIdsSeqRequest()
+    }
+    response = NewDescribeResourceTagsByResourceIdsSeqResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeResourceTagsByTagKeysRequest() (request *DescribeResourceTagsByTagKeysRequest) {
     request = &DescribeResourceTagsByTagKeysRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -239,6 +289,31 @@ func (c *Client) DescribeResourcesByTags(request *DescribeResourcesByTagsRequest
         request = NewDescribeResourcesByTagsRequest()
     }
     response = NewDescribeResourcesByTagsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeResourcesByTagsUnionRequest() (request *DescribeResourcesByTagsUnionRequest) {
+    request = &DescribeResourcesByTagsUnionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "DescribeResourcesByTagsUnion")
+    return
+}
+
+func NewDescribeResourcesByTagsUnionResponse() (response *DescribeResourcesByTagsUnionResponse) {
+    response = &DescribeResourcesByTagsUnionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query resource list by tags.
+func (c *Client) DescribeResourcesByTagsUnion(request *DescribeResourcesByTagsUnionRequest) (response *DescribeResourcesByTagsUnionResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourcesByTagsUnionRequest()
+    }
+    response = NewDescribeResourcesByTagsUnionResponse()
     err = c.Send(request, response)
     return
 }
@@ -293,6 +368,31 @@ func (c *Client) DescribeTagValues(request *DescribeTagValuesRequest) (response 
     return
 }
 
+func NewDescribeTagValuesSeqRequest() (request *DescribeTagValuesSeqRequest) {
+    request = &DescribeTagValuesSeqRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "DescribeTagValuesSeq")
+    return
+}
+
+func NewDescribeTagValuesSeqResponse() (response *DescribeTagValuesSeqResponse) {
+    response = &DescribeTagValuesSeqResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query tag values in a created tag list.
+func (c *Client) DescribeTagValuesSeq(request *DescribeTagValuesSeqRequest) (response *DescribeTagValuesSeqResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagValuesSeqRequest()
+    }
+    response = NewDescribeTagValuesSeqResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTagsRequest() (request *DescribeTagsRequest) {
     request = &DescribeTagsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -318,6 +418,56 @@ func (c *Client) DescribeTags(request *DescribeTagsRequest) (response *DescribeT
     return
 }
 
+func NewDescribeTagsSeqRequest() (request *DescribeTagsSeqRequest) {
+    request = &DescribeTagsSeqRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "DescribeTagsSeq")
+    return
+}
+
+func NewDescribeTagsSeqResponse() (response *DescribeTagsSeqResponse) {
+    response = &DescribeTagsSeqResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the created tag lists.
+func (c *Client) DescribeTagsSeq(request *DescribeTagsSeqRequest) (response *DescribeTagsSeqResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagsSeqRequest()
+    }
+    response = NewDescribeTagsSeqResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDetachResourcesTagRequest() (request *DetachResourcesTagRequest) {
+    request = &DetachResourcesTagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "DetachResourcesTag")
+    return
+}
+
+func NewDetachResourcesTagResponse() (response *DetachResourcesTagResponse) {
+    response = &DetachResourcesTagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to unbind a tag from multiple resources.
+func (c *Client) DetachResourcesTag(request *DetachResourcesTagRequest) (response *DetachResourcesTagResponse, err error) {
+    if request == nil {
+        request = NewDetachResourcesTagRequest()
+    }
+    response = NewDetachResourcesTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyResourceTagsRequest() (request *ModifyResourceTagsRequest) {
     request = &ModifyResourceTagsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -339,6 +489,31 @@ func (c *Client) ModifyResourceTags(request *ModifyResourceTagsRequest) (respons
         request = NewModifyResourceTagsRequest()
     }
     response = NewModifyResourceTagsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyResourcesTagValueRequest() (request *ModifyResourcesTagValueRequest) {
+    request = &ModifyResourcesTagValueRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "ModifyResourcesTagValue")
+    return
+}
+
+func NewModifyResourcesTagValueResponse() (response *ModifyResourcesTagValueResponse) {
+    response = &ModifyResourcesTagValueResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the tag value corresponding to a tag key associated with multiple resources.
+func (c *Client) ModifyResourcesTagValue(request *ModifyResourcesTagValueRequest) (response *ModifyResourcesTagValueResponse, err error) {
+    if request == nil {
+        request = NewModifyResourcesTagValueRequest()
+    }
+    response = NewModifyResourcesTagValueResponse()
     err = c.Send(request, response)
     return
 }

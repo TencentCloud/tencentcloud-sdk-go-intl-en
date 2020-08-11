@@ -93,6 +93,31 @@ func (c *Client) AsymmetricSm2Decrypt(request *AsymmetricSm2DecryptRequest) (res
     return
 }
 
+func NewBindCloudResourceRequest() (request *BindCloudResourceRequest) {
+    request = &BindCloudResourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "BindCloudResource")
+    return
+}
+
+func NewBindCloudResourceResponse() (response *BindCloudResourceResponse) {
+    response = &BindCloudResourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to bind a key with a Tencent Cloud resource. If the key has been set to be expired automatically, the setting will be canceled to ensure that the key will not be invalid automatically. If the key and the resource has already been bound, the call will still be successful.
+func (c *Client) BindCloudResource(request *BindCloudResourceRequest) (response *BindCloudResourceResponse, err error) {
+    if request == nil {
+        request = NewBindCloudResourceRequest()
+    }
+    response = NewBindCloudResourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCancelKeyDeletionRequest() (request *CancelKeyDeletionRequest) {
     request = &CancelKeyDeletionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1040,6 +1065,31 @@ func (c *Client) ScheduleKeyDeletion(request *ScheduleKeyDeletionRequest) (respo
         request = NewScheduleKeyDeletionRequest()
     }
     response = NewScheduleKeyDeletionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnbindCloudResourceRequest() (request *UnbindCloudResourceRequest) {
+    request = &UnbindCloudResourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "UnbindCloudResource")
+    return
+}
+
+func NewUnbindCloudResourceResponse() (response *UnbindCloudResourceResponse) {
+    response = &UnbindCloudResourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to unbind a key with a Tencent Cloud resource, indicating that the Tencent Cloud resource will not use the key any longer.
+func (c *Client) UnbindCloudResource(request *UnbindCloudResourceRequest) (response *UnbindCloudResourceResponse, err error) {
+    if request == nil {
+        request = NewUnbindCloudResourceRequest()
+    }
+    response = NewUnbindCloudResourceResponse()
     err = c.Send(request, response)
     return
 }

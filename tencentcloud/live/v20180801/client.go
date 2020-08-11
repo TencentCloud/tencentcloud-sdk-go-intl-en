@@ -187,8 +187,9 @@ func NewCreateCommonMixStreamResponse() (response *CreateCommonMixStreamResponse
     return
 }
 
-// This API is used to create a general stream mix. It can be used basically in the same way as the legacy `mix_streamv2.cancel_mix_stream` API.
+// This API is used to create a general stream mix. It can be used basically in the same way as the legacy `mix_streamv2.start_mix_stream_advanced` API.
 // Note: currently, up to 16 streams can be mixed.
+// Best practice: https://cloud.tencent.com/document/product/267/45566
 func (c *Client) CreateCommonMixStream(request *CreateCommonMixStreamRequest) (response *CreateCommonMixStreamResponse, err error) {
     if request == nil {
         request = NewCreateCommonMixStreamRequest()
@@ -956,6 +957,31 @@ func (c *Client) DescribeConcurrentRecordStreamNum(request *DescribeConcurrentRe
     return
 }
 
+func NewDescribeDeliverBandwidthListRequest() (request *DescribeDeliverBandwidthListRequest) {
+    request = &DescribeDeliverBandwidthListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeDeliverBandwidthList")
+    return
+}
+
+func NewDescribeDeliverBandwidthListResponse() (response *DescribeDeliverBandwidthListResponse) {
+    response = &DescribeDeliverBandwidthListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the billable bandwidth of live stream relaying in the last 3 months. The query period is up to 31 days.
+func (c *Client) DescribeDeliverBandwidthList(request *DescribeDeliverBandwidthListRequest) (response *DescribeDeliverBandwidthListResponse, err error) {
+    if request == nil {
+        request = NewDescribeDeliverBandwidthListRequest()
+    }
+    response = NewDescribeDeliverBandwidthListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGroupProIspPlayInfoListRequest() (request *DescribeGroupProIspPlayInfoListRequest) {
     request = &DescribeGroupProIspPlayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1524,7 +1550,8 @@ func NewDescribeLiveStreamOnlineListResponse() (response *DescribeLiveStreamOnli
     return
 }
 
-// This API is used to return the live stream list.
+// This API is used to return a list of live streams. It queries the information of live streams after they are pushed successfully.
+// Note: this API can query up to 20,000 streams. If you want to query more than 20,000 streams, please contact after-sales service.
 func (c *Client) DescribeLiveStreamOnlineList(request *DescribeLiveStreamOnlineListRequest) (response *DescribeLiveStreamOnlineListResponse, err error) {
     if request == nil {
         request = NewDescribeLiveStreamOnlineListRequest()

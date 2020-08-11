@@ -730,6 +730,58 @@ func (r *CreateParamTemplateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateRoInstanceIpRequest struct {
+	*tchttp.BaseRequest
+
+	// Read-only instance ID in the format of "cdbro-3i70uj0k". Its value is the same as the read-only instance ID in the TencentDB Console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Subnet descriptor, such as "subnet-1typ0s7d".
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// VPC descriptor, such as "vpc-xxx". If this field is passed in, `UniqSubnetId` will be required.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+}
+
+func (r *CreateRoInstanceIpRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateRoInstanceIpRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateRoInstanceIpResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// VPC ID of the read-only instance.
+		RoVpcId *int64 `json:"RoVpcId,omitempty" name:"RoVpcId"`
+
+		// Subnet ID of the read-only instance.
+		RoSubnetId *int64 `json:"RoSubnetId,omitempty" name:"RoSubnetId"`
+
+		// Private IP address of the read-only instance.
+		RoVip *string `json:"RoVip,omitempty" name:"RoVip"`
+
+		// Private port number of the read-only instance.
+		RoVport *int64 `json:"RoVport,omitempty" name:"RoVport"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateRoInstanceIpResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateRoInstanceIpResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DBSwitchInfo struct {
 
 	// Switch time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-09-03 01:34:31

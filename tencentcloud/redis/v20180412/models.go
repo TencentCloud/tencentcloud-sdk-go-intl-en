@@ -1366,6 +1366,46 @@ func (r *DescribeInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeMaintenanceWindowRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeMaintenanceWindowRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMaintenanceWindowRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMaintenanceWindowResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Start time of the maintenance window, such as 17:00.
+		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+		// End time of the maintenance window, such as 19:00.
+		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeMaintenanceWindowResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMaintenanceWindowResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeProductInfoRequest struct {
 	*tchttp.BaseRequest
 }
@@ -2615,6 +2655,49 @@ func (r *ModifyInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyMaintenanceWindowRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time of the maintenance window, such as 17:00
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the maintenance window, such as 19:00
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+func (r *ModifyMaintenanceWindowRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyMaintenanceWindowRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyMaintenanceWindowResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Modification status. Valid values: success, failed.
+		Status *string `json:"Status,omitempty" name:"Status"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyMaintenanceWindowResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyMaintenanceWindowResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyNetworkConfigRequest struct {
 	*tchttp.BaseRequest
 
@@ -3198,6 +3281,49 @@ func (r *UpgradeInstanceResponse) ToJsonString() string {
 }
 
 func (r *UpgradeInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeInstanceVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Target instance type. Its value is the same as the `Type` parameter of the `CreateInstances` API.
+	TargetInstanceType *string `json:"TargetInstanceType,omitempty" name:"TargetInstanceType"`
+
+	// Switch mode. Valid values: 1 (switch during the maintenance window), 2 (switch immediately).
+	SwitchOption *int64 `json:"SwitchOption,omitempty" name:"SwitchOption"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *UpgradeInstanceVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpgradeInstanceVersionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeInstanceVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Order ID
+		DealId *string `json:"DealId,omitempty" name:"DealId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpgradeInstanceVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpgradeInstanceVersionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

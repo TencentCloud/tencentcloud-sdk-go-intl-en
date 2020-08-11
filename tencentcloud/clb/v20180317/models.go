@@ -509,6 +509,46 @@ type ClusterItem struct {
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
+type CreateClsLogSetRequest struct {
+	*tchttp.BaseRequest
+
+	// Logset retention period in days; max value: 90
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Logset name, which must be unique among all CLS logsets; default value: clb_logset
+	LogsetName *string `json:"LogsetName,omitempty" name:"LogsetName"`
+}
+
+func (r *CreateClsLogSetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateClsLogSetRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateClsLogSetResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Logset ID.
+		LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateClsLogSetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateClsLogSetResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateListenerRequest struct {
 	*tchttp.BaseRequest
 
@@ -773,6 +813,46 @@ func (r *CreateTargetGroupResponse) ToJsonString() string {
 }
 
 func (r *CreateTargetGroupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateTopicRequest struct {
+	*tchttp.BaseRequest
+
+	// Log topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// The number of topic partitions, which changes as partitions are split or merged. Each log topic can have up to 50 partitions. If this parameter is not passed in, 1 partition will be created by default and up to 10 partitions are allowed to be created.
+	PartitionCount *uint64 `json:"PartitionCount,omitempty" name:"PartitionCount"`
+}
+
+func (r *CreateTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateTopicRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Log topic ID
+		TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateTopicResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1419,6 +1499,40 @@ func (r *DescribeClassicalLBTargetsResponse) ToJsonString() string {
 }
 
 func (r *DescribeClassicalLBTargetsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClsLogSetRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeClsLogSetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClsLogSetRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClsLogSetResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Logset ID
+		LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClsLogSetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClsLogSetResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

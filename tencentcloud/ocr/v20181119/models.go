@@ -147,6 +147,106 @@ func (r *GeneralBasicOCRResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type HKIDCardOCRRequest struct {
+	*tchttp.BaseRequest
+
+	// Whether to check for authenticity.
+	DetectFake *bool `json:"DetectFake,omitempty" name:"DetectFake"`
+
+	// Whether to return identity photo.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitempty" name:"ReturnHeadImage"`
+
+	// Base64-encoded value of image.
+	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
+	// Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// URL of the image.
+	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
+	// Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+func (r *HKIDCardOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *HKIDCardOCRRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type HKIDCardOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Name in Chinese
+		CnName *string `json:"CnName,omitempty" name:"CnName"`
+
+		// Name in English
+		EnName *string `json:"EnName,omitempty" name:"EnName"`
+
+		// Telecode for the name in Chinese
+		TelexCode *string `json:"TelexCode,omitempty" name:"TelexCode"`
+
+		// Gender. Valid values: Male, Female
+		Sex *string `json:"Sex,omitempty" name:"Sex"`
+
+		// Date of birth
+		Birthday *string `json:"Birthday,omitempty" name:"Birthday"`
+
+		// Permanent identity card.
+	// 0: non-permanent;
+	// 1: permanent;
+	// -1: unknown.
+		Permanent *int64 `json:"Permanent,omitempty" name:"Permanent"`
+
+		// Identity card number
+		IdNum *string `json:"IdNum,omitempty" name:"IdNum"`
+
+		// Document symbol, i.e., the symbol under the date of birth, such as "***AZ"
+		Symbol *string `json:"Symbol,omitempty" name:"Symbol"`
+
+		// First issue date
+		FirstIssueDate *string `json:"FirstIssueDate,omitempty" name:"FirstIssueDate"`
+
+		// Last receipt date
+		CurrentIssueDate *string `json:"CurrentIssueDate,omitempty" name:"CurrentIssueDate"`
+
+		// Authenticity check.
+	// 0: unable to judge (because the image is blurred, incomplete, reflective, too dark, etc.);
+	// 1: forged;
+	// 2: authentic.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		FakeDetectResult *int64 `json:"FakeDetectResult,omitempty" name:"FakeDetectResult"`
+
+		// Base64-encoded identity photo
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		HeadImage *string `json:"HeadImage,omitempty" name:"HeadImage"`
+
+		// Multiple alarm codes. If the ID card is spoofed, photocopied, or doctored, the corresponding alarm code will be returned.
+	// -9102: alarm for photocopied document
+	// -9103: alarm for spoofed document
+	// -9104: alarm for doctored document
+	// -9105: alarm for forged document
+		WarningCode []*int64 `json:"WarningCode,omitempty" name:"WarningCode" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *HKIDCardOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *HKIDCardOCRResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ItemCoord struct {
 
 	// X-coordinate of top-left point
@@ -333,7 +433,7 @@ type TextDetection struct {
 	// Recognized text line content
 	DetectedText *string `json:"DetectedText,omitempty" name:"DetectedText"`
 
-	// Confidence. Value range: 0–100
+	// Confidence. Value range: 0-100
 	Confidence *int64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Text line coordinates, which are represented as 4 vertex coordinates

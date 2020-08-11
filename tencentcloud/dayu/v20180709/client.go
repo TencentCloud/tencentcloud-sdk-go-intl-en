@@ -418,6 +418,31 @@ func (c *Client) CreateNetReturn(request *CreateNetReturnRequest) (response *Cre
     return
 }
 
+func NewCreateNewL7RulesUploadRequest() (request *CreateNewL7RulesUploadRequest) {
+    request = &CreateNewL7RulesUploadRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dayu", APIVersion, "CreateNewL7RulesUpload")
+    return
+}
+
+func NewCreateNewL7RulesUploadResponse() (response *CreateNewL7RulesUploadResponse) {
+    response = &CreateNewL7RulesUploadResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to batch upload Layer-7 forwarding rules.
+func (c *Client) CreateNewL7RulesUpload(request *CreateNewL7RulesUploadRequest) (response *CreateNewL7RulesUploadResponse, err error) {
+    if request == nil {
+        request = NewCreateNewL7RulesUploadRequest()
+    }
+    response = NewCreateNewL7RulesUploadResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateUnblockIpRequest() (request *CreateUnblockIpRequest) {
     request = &CreateUnblockIpRequest{
         BaseRequest: &tchttp.BaseRequest{},
