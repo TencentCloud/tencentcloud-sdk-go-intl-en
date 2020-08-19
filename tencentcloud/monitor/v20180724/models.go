@@ -156,7 +156,7 @@ type CreatePolicyGroupRequest struct {
 	// Whether it is a backend call. If the value is 1, rules from the policy template will be used to fill in the `Conditions` and `EventConditions` fields.
 	BackEndCall *int64 `json:"BackEndCall,omitempty" name:"BackEndCall"`
 
-	// The “AND” and “OR” rules for alarm metrics. The value 0 indicates “OR”, which means that an alarm will be triggered when any rule is met. The value 1 indicates “AND”, which means that an alarm will be triggered only when all rules are met.
+	// The 'AND' and 'OR' rules for alarm metrics. The value 0 indicates 'OR', which means that an alarm will be triggered when any rule is met. The value 1 indicates 'AND', which means that an alarm will be triggered only when all rules are met.
 	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
 }
 
@@ -352,10 +352,10 @@ func (r *DescribeAccidentEventListResponse) FromJsonString(s string) error {
 type DescribeBaseMetricsRequest struct {
 	*tchttp.BaseRequest
 
-	// Service namespace. Different Tencent Cloud services have different namespaces. For more information on service namespaces, see the monitoring API documentation of each product. For example, you can see [CVM Monitoring APIs](https://cloud.tencent.com/document/api/248/30385) for the namespace of CVM.
+	// Service namespace. Tencent Cloud services have different namespaces. For more information on service namespaces, see the monitoring metric documentation of each service. For example, see [CVM Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6843?from_cn_redirect=1) for the namespace of CVM
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
-	// Metric name. Different Tencent Cloud services have different metric names. For more information on service metric names, see the monitoring API documentation of each product. For example, you can see the [CVM Monitoring APIs](https://cloud.tencent.com/document/api/248/30385) for the metric names of CVM.
+	// Metric name. Tencent Cloud services have different metric names. For more information on metric names, see the monitoring metric documentation of each service. For example, see [CVM Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6843?from_cn_redirect=1) for the metric names of CVM
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 }
 
@@ -979,7 +979,7 @@ type DescribePolicyGroupInfoConditionTpl struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	InsertTime *int64 `json:"InsertTime,omitempty" name:"InsertTime"`
 
-	// Whether the “AND” rule is used.
+	// Whether the 'AND' rule is used.
 	// Note: This field may return null, indicating that no valid value was found.
 	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
 }
@@ -1010,7 +1010,7 @@ type DescribePolicyGroupInfoReceiverInfo struct {
 	// List of alarm recipient IDs.
 	ReceiverUserList []*int64 `json:"ReceiverUserList,omitempty" name:"ReceiverUserList" list`
 
-	// Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates “10:0:0”.
+	// Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates '10:0:0'.
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time of the alarm period. The meaning is the same as that of StartTime.
@@ -1125,7 +1125,7 @@ type DescribePolicyGroupInfoResponse struct {
 		// Whether the policy can be configured as the default policy.
 		CanSetDefault *bool `json:"CanSetDefault,omitempty" name:"CanSetDefault"`
 
-		// Whether the “AND” rule is used.
+		// Whether the 'AND' rule is used.
 	// Note: This field may return null, indicating that no valid value was found.
 		IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
 
@@ -1207,7 +1207,7 @@ type DescribePolicyGroupListGroup struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	InstanceGroup *DescribePolicyGroupListGroupInstanceGroup `json:"InstanceGroup,omitempty" name:"InstanceGroup"`
 
-	// The “AND” or “OR” rule. The value 0 indicates the “OR” rule (indicating that an alarm will be triggered if any rule meets the threshold condition). The value 1 indicates the “AND” rule (indicating that an alarm will be triggered when all rules meet the threshold conditions).
+	// The 'AND' or 'OR' rule. The value 0 indicates the 'OR' rule (indicating that an alarm will be triggered if any rule meets the threshold condition). The value 1 indicates the 'AND' rule (indicating that an alarm will be triggered when all rules meet the threshold conditions).
 	// Note: This field may return null, indicating that no valid value was found.
 	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
 }
@@ -1278,8 +1278,11 @@ type DescribePolicyGroupListRequest struct {
 	// Template-based policy group IDs, which are separated by commas.
 	ConditionTempGroupId *string `json:"ConditionTempGroupId,omitempty" name:"ConditionTempGroupId"`
 
-	// Filter by recipient or recipient group. The value “user” indicates by recipient. The value “group” indicates by recipient group.
+	// Filter by recipient or recipient group. The value 'user' indicates by recipient. The value 'group' indicates by recipient group.
 	ReceiverType *string `json:"ReceiverType,omitempty" name:"ReceiverType"`
+
+	// Filter conditions. Whether the alarm policy has been enabled or disabled
+	IsOpen *bool `json:"IsOpen,omitempty" name:"IsOpen"`
 }
 
 func (r *DescribePolicyGroupListRequest) ToJsonString() string {
@@ -1459,7 +1462,7 @@ type DescribeProductEventListRequest struct {
 	// API component name. It is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Filter by product type. For example, “cvm” indicates Cloud Virtual Machine.
+	// Filter by product type. For example, 'cvm' indicates Cloud Virtual Machine.
 	ProductName []*string `json:"ProductName,omitempty" name:"ProductName" list`
 
 	// Filter by product name. For example, "guest_reboot" indicates server restart.
@@ -1558,10 +1561,10 @@ type DimensionsDesc struct {
 type GetMonitorDataRequest struct {
 	*tchttp.BaseRequest
 
-	// Namespace. Each Tencent Cloud product has a namespace
+	// Namespace. For detailed namespace descriptions of each Tencent Cloud service, see the corresponding [Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1) documentation
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
-	// Metric name. For detailed metric descriptions of each Tencent Cloud product, see the corresponding [Monitoring API](https://cloud.tencent.com/document/product/248/30384) document
+	// Metric name. For detailed metric descriptions of each Tencent Cloud service, see the corresponding [Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1) documentation
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 	// Combination of instance object dimensions
@@ -1778,7 +1781,7 @@ type ModifyPolicyGroupRequest struct {
 	// Policy group name.
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
-	// The “AND” and “OR” rules for metric alarms. The value 1 indicates “AND”, which means that an alarm will be triggered only when all rules are met. The value 0 indicates “OR”, which means that an alarm will be triggered when any rule is met.
+	// The 'AND' and 'OR' rules for metric alarms. The value 1 indicates 'AND', which means that an alarm will be triggered only when all rules are met. The value 0 indicates 'OR', which means that an alarm will be triggered when any rule is met.
 	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
 
 	// Metric alarm condition rules. No filling indicates that all existing metric alarm condition rules will be deleted.
@@ -1875,7 +1878,7 @@ func (r *PutMonitorDataResponse) FromJsonString(s string) error {
 
 type ReceiverInfo struct {
 
-	// Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates “10:0:0”.
+	// Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates '10:0:0'.
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time of the alarm period. The meaning is the same as that of StartTime.

@@ -888,7 +888,7 @@ type CreateIPStrategyRequest struct {
 	// Custom policy name.
 	StrategyName *string `json:"StrategyName,omitempty" name:"StrategyName"`
 
-	// Policy type. Valid values: WHITE (whitelist), BLACK (blacklist).
+	// Policy type. Valid values: WHITE (allowlist), BLACK (blocklist).
 	StrategyType *string `json:"StrategyType,omitempty" name:"StrategyType"`
 
 	// Policy details.
@@ -938,7 +938,7 @@ type CreateServiceRequest struct {
 	// Custom service description.
 	ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
 
-	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	// Dedicated cluster name, which is used to specify the dedicated cluster where the service is to be created.
 	ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
 
 	// Network type list, which is used to specify the supported network types. INNER: private network access; OUTER: public network access. Default value: OUTER.
@@ -2147,7 +2147,7 @@ type DescribeServiceResponse struct {
 		// Service modification time.
 		ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
 
-		// Self-deployed cluster name.
+		// Dedicated cluster name.
 		ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
 
 		// Network type list. INNER: private network access; OUTER: public network access.
@@ -2190,6 +2190,9 @@ type DescribeServiceResponse struct {
 		// Reserved field.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		SetId *int64 `json:"SetId,omitempty" name:"SetId"`
+
+		// 
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2788,7 +2791,7 @@ type IPStrategy struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StrategyName *string `json:"StrategyName,omitempty" name:"StrategyName"`
 
-	// Policy type. Valid values: WHITE (whitelist), BLACK (blacklist).
+	// Policy type. Valid values: WHITE (allowlist), BLACK (blocklist).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StrategyType *string `json:"StrategyType,omitempty" name:"StrategyType"`
 
@@ -3605,6 +3608,9 @@ type Service struct {
 	// Billing status of service.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TradeIsolateStatus *int64 `json:"TradeIsolateStatus,omitempty" name:"TradeIsolateStatus"`
+
+	// 
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 type ServiceConfig struct {

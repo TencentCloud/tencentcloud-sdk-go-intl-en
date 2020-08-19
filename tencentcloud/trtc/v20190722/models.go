@@ -163,7 +163,7 @@ func (r *DescribeAbnormalEventResponse) FromJsonString(s string) error {
 type DescribeCallDetailRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://cloud.tencent.com/document/product/647/44050).
+	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
 	CommId *string `json:"CommId,omitempty" name:"CommId"`
 
 	// Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 5 days.
@@ -234,7 +234,7 @@ func (r *DescribeCallDetailResponse) FromJsonString(s string) error {
 type DescribeDetailEventRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://cloud.tencent.com/document/product/647/44050).
+	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
 	CommId *string `json:"CommId,omitempty" name:"CommId"`
 
 	// Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 5 days.
@@ -487,10 +487,10 @@ type DescribeRoomInformationRequest struct {
 	// Room ID of uint type
 	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
 
-	// Page index. If it is left empty, 10 entries will be returned by default.
+	// Page index starting from 0 (if either `PageNumber` or `PageSize` is left empty, 10 data entries will be returned by default)
 	PageNumber *string `json:"PageNumber,omitempty" name:"PageNumber"`
 
-	// Page size. Maximum value: 100. If it is left empty, 10 entries will be returned by default.
+	// Number of entries per page (if either `PageNumber` or `PageSize` is left empty, 10 data entries will be returned by default. Maximum value: 100)
 	PageSize *string `json:"PageSize,omitempty" name:"PageSize"`
 }
 
@@ -618,7 +618,7 @@ type EventMessage struct {
 	// Event reporting time in the format of UNIX timestamp, such as 1589891188801ms
 	Time *uint64 `json:"Time,omitempty" name:"Time"`
 
-	// Event ID. Events divide into SDK events and WebRTC events. For more information, please see Appendix - Event ID Mapping Table at https://cloud.tencent.com/document/product/647/44916
+	// Event ID. Events divide into SDK events and WebRTC events. For more information, please see Appendix - Event ID Mapping Table at https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
 	EventId *uint64 `json:"EventId,omitempty" name:"EventId"`
 
 	// First event parameter, such as video resolution width
@@ -630,16 +630,16 @@ type EventMessage struct {
 
 type LayoutParams struct {
 
-	// On-Cloud MixTranscoding layout template ID. 0: floating template (default value); 1: 9-grid template; 2: screen sharing template
+	// On-cloud stream mix layout template ID. 0: floating template (default value); 1: grid template; 2: screen sharing template; 3: picture-in-picture template.
 	Template *uint64 `json:"Template,omitempty" name:"Template"`
 
-	// ID of the user in the big image on the left, which takes effect in the screen sharing template
+	// ID of the user in the big image, which takes effect in a screen sharing, floating, or picture-in-picture template.
 	MainVideoUserId *string `json:"MainVideoUserId,omitempty" name:"MainVideoUserId"`
 
-	// Stream type of the big image on the left, which takes effect in the screen sharing template. 0: camera; 1: screen sharing. If a web user's stream is displayed in the big image on the left, enter 0 for this parameter
+	// Stream type of the big image, which takes effect in a screen sharing, floating, or picture-in-picture template. 0: camera; 1: screen sharing. If a web user's stream is displayed in the big image on the left, enter 0 for this parameter.
 	MainVideoStreamType *uint64 `json:"MainVideoStreamType,omitempty" name:"MainVideoStreamType"`
 
-	// 
+	// Layout parameter of the small image, which takes effect in a picture-in-picture template.
 	SmallVideoLayoutParams *SmallVideoLayoutParams `json:"SmallVideoLayoutParams,omitempty" name:"SmallVideoLayoutParams"`
 }
 
@@ -763,22 +763,22 @@ type ScaleInfomation struct {
 
 type SmallVideoLayoutParams struct {
 
-	// 
+	// ID of the user in the small image.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// 
+	// Stream type of the small image. 0: camera; 1: screen sharing. If a web user's stream is displayed in the small image, enter 0 for this parameter.
 	StreamType *uint64 `json:"StreamType,omitempty" name:"StreamType"`
 
-	// 
+	// Output width of the small image in pixels. If this parameter is left empty, 0 will be used by default.
 	ImageWidth *uint64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
 
-	// 
+	// Output height of the small image in pixels. If this parameter is left empty, 0 will be used by default.
 	ImageHeight *uint64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
 
-	// 
+	// Output X-axis offset of the small image in pixels. The sum of `LocationX` and `ImageWidth` cannot exceed the total width of the output mixed stream. If this parameter is left empty, 0 will be used by default.
 	LocationX *uint64 `json:"LocationX,omitempty" name:"LocationX"`
 
-	// 
+	// Output Y-axis offset of the small image in pixels. The sum of `LocationY` and `ImageHeight` cannot exceed the total height of the output mixed stream. If this parameter is left empty, 0 will be used by default.
 	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
 }
 
@@ -885,7 +885,7 @@ type UserInformation struct {
 	// 
 	JoinTs *uint64 `json:"JoinTs,omitempty" name:"JoinTs"`
 
-	// 
+	// The time when the user exits the room. If the user is still in the room, the current time will be returned
 	LeaveTs *uint64 `json:"LeaveTs,omitempty" name:"LeaveTs"`
 
 	// 

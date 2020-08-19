@@ -50,10 +50,10 @@ type AIAnalysisTemplateItem struct {
 	// Control parameter of an intelligent highlight generating task.
 	HighlightConfigure *HighlightsConfigureInfo `json:"HighlightConfigure,omitempty" name:"HighlightConfigure"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -103,10 +103,10 @@ type AIRecognitionTemplateItem struct {
 	// Screencapturing interval in seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -175,10 +175,10 @@ type AdaptiveDynamicStreamingTemplate struct {
 	// <li>1: yes.</li>
 	DisableHigherVideoResolution *uint64 `json:"DisableHigherVideoResolution,omitempty" name:"DisableHigherVideoResolution"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -995,7 +995,7 @@ type AiReviewPoliticalTaskOutput struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/34187#PoliticalImgReviewTemplateInfo?from_cn_redirect=1) and this parameter is as follows:
+	// Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
 	// violation_photo:
 	// <li>violation_photo: violating photo.</li>
 	// Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
@@ -1471,10 +1471,10 @@ type AiSamplePerson struct {
 	// Use case.
 	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet" list`
 
-	// Creation time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -1498,10 +1498,10 @@ type AiSampleWord struct {
 	// Keyword use case.
 	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet" list`
 
-	// Creation time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -1575,48 +1575,48 @@ type AnimatedGraphicsTemplate struct {
 	// Image quality.
 	Quality *float64 `json:"Quality,omitempty" name:"Quality"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
 type ApplyUploadRequest struct {
 	*tchttp.BaseRequest
 
-	// Media type. For the detailed valid values, please see [Upload Overview](/document/product/266/9760#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
+	// Media type. For the detailed valid values, please see [Upload Overview](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
 	MediaType *string `json:"MediaType,omitempty" name:"MediaType"`
 
 	// Media name.
 	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
 
-	// Cover type. For the detailed valid values, please see [Upload Overview](/document/product/266/9760#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
+	// Cover type. For the detailed valid values, please see [Upload Overview](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
 	CoverType *string `json:"CoverType,omitempty" name:"CoverType"`
 
-	// Subsequent task operation on a media file, i.e., after a media file is uploaded, task flow operations will be initiated automatically. This parameter value is a task flow template name. VOD supports [creating task flow templates](/document/product/266/33819) and naming the templates.
+	// Subsequent task operation on a media file, i.e., after a media file is uploaded, task flow operations will be initiated automatically. This parameter value is a task flow template name. VOD supports [creating task flow templates](https://intl.cloud.tencent.com/document/product/266/33819?from_cn_redirect=1) and naming the templates.
 	Procedure *string `json:"Procedure,omitempty" name:"Procedure"`
 
-	// Expiration time of a media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Expiration time of a media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
 	// Specifies upload region. This is only applicable to users that have special requirements for the upload region.
 	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
 
-	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](/document/product/266/7812) API.
+	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 	// <li>Default value: 0, which means "Other".</li>
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
-	// Source context, which is used to pass through the user request information. The [upload callback](/document/product/266/7830) API will return the value of this field. It can contain up to 250 characters.
+	// Source context, which is used to pass through the user request information. The [upload callback](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) API will return the value of this field. It can contain up to 250 characters.
 	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
 
-	// Session context, which is used to pass through the user request information. If the `Procedure` parameter is specified, the [task flow status change callback](/document/product/266/9636) API will return the value of this field. It can contain up to 1,000 characters.
+	// Session context, which is used to pass through the user request information. If the `Procedure` parameter is specified, the [task flow status change callback](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) API will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
 	// 
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -1910,7 +1910,7 @@ type CommitUploadRequest struct {
 	// VOD session, which takes the returned value (VodSessionKey) of the `ApplyUpload` API.
 	VodSessionKey *string `json:"VodSessionKey,omitempty" name:"VodSessionKey"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -1960,11 +1960,11 @@ type ComposeMediaOutput struct {
 	// Description, which can contain up to 128 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](/document/product/266/7812) API.
+	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 	// <li>Default value: 0, which means "Other".</li>
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
-	// Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
 	// Container. Valid values: mp4, mp3. mp3 is for audio files.
@@ -2009,7 +2009,7 @@ type ComposeMediaRequest struct {
 	// 
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2100,11 +2100,11 @@ type ComposeMediaTaskOutput struct {
 	// Filename of up to 64 characters.
 	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
 
-	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](/document/product/266/7812) API.
+	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 	// <li>Default value: 0, which means "Other".</li>
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
-	// Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 }
 
@@ -2145,14 +2145,14 @@ type ConcatTask2017 struct {
 type ConfirmEventsRequest struct {
 	*tchttp.BaseRequest
 
-	// Event handler, i.e., the `EventSet. EventHandle` field in the output parameters of the [event notification pulling](/document/product/266/33433) API.
+	// Event handler, i.e., the `EventSet. EventHandle` field in the output parameters of the [event notification pulling](https://intl.cloud.tencent.com/document/product/266/33433?from_cn_redirect=1) API.
 	// Array length limit: 16.
 	EventHandles []*string `json:"EventHandles,omitempty" name:"EventHandles" list`
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2224,10 +2224,10 @@ type ContentReviewTemplateItem struct {
 	// Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -2297,7 +2297,7 @@ type CreateAIAnalysisTemplateRequest struct {
 	// Control parameter of an intelligent highlight generating task.
 	HighlightConfigure *HighlightsConfigureInfo `json:"HighlightConfigure,omitempty" name:"HighlightConfigure"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2367,7 +2367,7 @@ type CreateAIRecognitionTemplateRequest struct {
 	// Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2435,7 +2435,7 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2509,7 +2509,7 @@ type CreateAnimatedGraphicsTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2552,7 +2552,7 @@ type CreateClassRequest struct {
 	// Category name. Length limit: 1-64 characters.
 	ClassName *string `json:"ClassName,omitempty" name:"ClassName"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2620,7 +2620,7 @@ type CreateContentReviewTemplateRequest struct {
 	// Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2673,7 +2673,7 @@ type CreateImageSpriteTask2017 struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
-	// Image sprite specification. For more information, please see [Image Sprite Generating Template](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Image sprite specification. For more information, please see [Image Sprite Generating Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -2743,7 +2743,7 @@ type CreateImageSpriteTemplateRequest struct {
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2801,7 +2801,7 @@ type CreatePersonSampleRequest struct {
 	// <li>Tag length limit: 128 characters.</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2859,7 +2859,7 @@ type CreateProcedureTemplateRequest struct {
 	// Type parameter of AI-based content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2934,7 +2934,7 @@ type CreateSampleSnapshotTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -3010,7 +3010,7 @@ type CreateSnapshotByTimeOffsetTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -3123,10 +3123,10 @@ type CreateSuperPlayerConfigRequest struct {
 	// <li>MinEdgeLength: 4320, Name: 8K.</li>
 	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitempty" name:"ResolutionNames" list`
 
-	// Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
+	// Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Scheme used for playback. If it is left empty or set to `Default`, the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used. Other valid values:
+	// Scheme used for playback. If it is left empty or set to `Default`, the scheme configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used. Other valid values:
 	// <li>HTTP;</li>
 	// <li>HTTPS.</li>
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
@@ -3134,7 +3134,7 @@ type CreateSuperPlayerConfigRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3198,7 +3198,7 @@ type CreateTranscodeTemplateRequest struct {
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3276,7 +3276,7 @@ type CreateWatermarkTemplateRequest struct {
 	// SVG watermarking template. This field is required when `Type` is `svg` and is invalid when `Type` is `image` or `text`.
 	SvgTemplate *SvgWatermarkInput `json:"SvgTemplate,omitempty" name:"SvgTemplate"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3330,7 +3330,7 @@ type CreateWordSamplesRequest struct {
 	// Keyword. Array length limit: 100.
 	Words []*AiSampleWordInfo `json:"Words,omitempty" name:"Words" list`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3367,7 +3367,7 @@ type DeleteAIAnalysisTemplateRequest struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3404,7 +3404,7 @@ type DeleteAIRecognitionTemplateRequest struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3441,7 +3441,7 @@ type DeleteAdaptiveDynamicStreamingTemplateRequest struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3478,7 +3478,7 @@ type DeleteAnimatedGraphicsTemplateRequest struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3515,7 +3515,7 @@ type DeleteClassRequest struct {
 	// Category ID
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3552,7 +3552,7 @@ type DeleteContentReviewTemplateRequest struct {
 	// Unique ID of content audit template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3589,7 +3589,7 @@ type DeleteImageSpriteTemplateRequest struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3629,7 +3629,7 @@ type DeleteMediaRequest struct {
 	// Content to be deleted. The default value is "[]", which indicates to delete the media file and all its corresponding files generated by video processing.
 	DeleteParts []*MediaDeleteItem `json:"DeleteParts,omitempty" name:"DeleteParts" list`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3666,7 +3666,7 @@ type DeletePersonSampleRequest struct {
 	// Figure ID.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3703,7 +3703,7 @@ type DeleteProcedureTemplateRequest struct {
 	// Task flow name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3740,7 +3740,7 @@ type DeleteSampleSnapshotTemplateRequest struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3777,7 +3777,7 @@ type DeleteSnapshotByTimeOffsetTemplateRequest struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3814,7 +3814,7 @@ type DeleteSuperPlayerConfigRequest struct {
 	// Player configuration name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3851,7 +3851,7 @@ type DeleteTranscodeTemplateRequest struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3888,7 +3888,7 @@ type DeleteWatermarkTemplateRequest struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3925,7 +3925,7 @@ type DeleteWordSamplesRequest struct {
 	// Keyword. Array length limit: 100 words.
 	Keywords []*string `json:"Keywords,omitempty" name:"Keywords" list`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3968,7 +3968,7 @@ type DescribeAIAnalysisTemplatesRequest struct {
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4017,7 +4017,7 @@ type DescribeAIRecognitionTemplatesRequest struct {
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4071,7 +4071,7 @@ type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4111,7 +4111,7 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) FromJsonString(s str
 type DescribeAllClassRequest struct {
 	*tchttp.BaseRequest
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4163,7 +4163,7 @@ type DescribeAnimatedGraphicsTemplatesRequest struct {
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4203,10 +4203,10 @@ func (r *DescribeAnimatedGraphicsTemplatesResponse) FromJsonString(s string) err
 type DescribeCDNUsageDataRequest struct {
 	*tchttp.BaseRequest
 
-	// Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Start date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). The end date must be after the start date.
+	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The end date must be after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// CDN statistics type. Valid values:
@@ -4225,7 +4225,7 @@ type DescribeCDNUsageDataRequest struct {
 	// List of domain names. The usage data of up to 20 domain names can be queried at a time. You can specify multiple domain names and query their combined usage data. The usage data of all domain names will be returned by default.
 	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames" list`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	// When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin. In this case, only 1-day granularity is supported.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
@@ -4275,7 +4275,7 @@ type DescribeContentReviewTemplatesRequest struct {
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4329,7 +4329,7 @@ type DescribeImageSpriteTemplatesRequest struct {
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4385,7 +4385,7 @@ type DescribeMediaInfosRequest struct {
 	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
 	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4425,17 +4425,17 @@ func (r *DescribeMediaInfosResponse) FromJsonString(s string) error {
 type DescribeMediaProcessUsageDataRequest struct {
 	*tchttp.BaseRequest
 
-	// Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Start date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
+	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Type of video processing task to be queried. Valid value: Transcode. Default value: Transcode.
 	// <li>Transcode: transcoding</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4495,7 +4495,7 @@ type DescribePersonSamplesRequest struct {
 	// Number of entries to be returned. Default value: 100. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4549,7 +4549,7 @@ type DescribeProcedureTemplatesRequest struct {
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4589,13 +4589,13 @@ func (r *DescribeProcedureTemplatesResponse) FromJsonString(s string) error {
 type DescribeReviewDetailsRequest struct {
 	*tchttp.BaseRequest
 
-	// Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Start date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). The end date must be after the start date.
+	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The end date must be after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4652,7 +4652,7 @@ type DescribeSampleSnapshotTemplatesRequest struct {
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4706,7 +4706,7 @@ type DescribeSnapshotByTimeOffsetTemplatesRequest struct {
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4746,7 +4746,7 @@ func (r *DescribeSnapshotByTimeOffsetTemplatesResponse) FromJsonString(s string)
 type DescribeStorageDataRequest struct {
 	*tchttp.BaseRequest
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4792,10 +4792,10 @@ func (r *DescribeStorageDataResponse) FromJsonString(s string) error {
 type DescribeStorageDetailsRequest struct {
 	*tchttp.BaseRequest
 
-	// Start time in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Start time in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time in ISO 8601 format, which must be after the start time. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// End time in ISO 8601 format, which must be after the start time. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Query time interval. Valid values:
@@ -4812,7 +4812,7 @@ type DescribeStorageDetailsRequest struct {
 	// Default value: TotalStorage.
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	// When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
@@ -4898,7 +4898,7 @@ type DescribeSuperPlayerConfigsRequest struct {
 	// <li>Custom: custom configuration.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4941,7 +4941,7 @@ type DescribeTaskDetailRequest struct {
 	// Video processing task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4980,13 +4980,13 @@ type DescribeTaskDetailResponse struct {
 	// <li>FINISH: completed.</li>
 		Status *string `json:"Status,omitempty" name:"Status"`
 
-		// Creation time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+		// Creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-		// Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+		// Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 		BeginProcessTime *string `json:"BeginProcessTime,omitempty" name:"BeginProcessTime"`
 
-		// End time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+		// End time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 		FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 
 		// Video processing task information. This field has a value only when `TaskType` is `Procedure`.
@@ -5062,7 +5062,7 @@ type DescribeTasksRequest struct {
 	// Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.
 	ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5126,7 +5126,7 @@ type DescribeTranscodeTemplatesRequest struct {
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5183,7 +5183,7 @@ type DescribeWatermarkTemplatesRequest struct {
 	// <li>Maximum value: 100.</li>
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5247,7 +5247,7 @@ type DescribeWordSamplesRequest struct {
 	// Number of entries to be returned. Default value: 100. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5318,11 +5318,11 @@ type EditMediaOutputConfig struct {
 	// Output file format. Valid values: mp4, hls. Default value: mp4.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](/document/product/266/7812) API.
+	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 	// <li>Default value: 0, which means "Other".</li>
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
-	// Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 }
 
@@ -5343,7 +5343,7 @@ type EditMediaRequest struct {
 	// <li>20: the input with the highest bitrate will be used as the benchmark;</li>
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Task flow template](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name, which should be entered if you want to perform a task flow on the generated new video.
+	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name, which should be entered if you want to perform a task flow on the generated new video.
 	ProcedureName *string `json:"ProcedureName,omitempty" name:"ProcedureName"`
 
 	// Configuration of file generated after editing.
@@ -5358,7 +5358,7 @@ type EditMediaRequest struct {
 	// ID used for task deduplication. If there was a request with the same ID in the last day, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5397,11 +5397,11 @@ type EditMediaStreamInfo struct {
 	// ID of recorded stream
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
 
-	// Start time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Start time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
@@ -5481,12 +5481,12 @@ type EditMediaTaskOutput struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
 
-	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](/document/product/266/7812) API.
+	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 	// <li>Default value: 0, which means "Other".</li>
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
-	// Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 }
@@ -5590,7 +5590,7 @@ type ExecuteFunctionRequest struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5655,19 +5655,28 @@ type FaceConfigureInfo struct {
 
 type FaceConfigureInfoForUpdate struct {
 
-	// 
+	// Switch of face recognition task. Valid values:
+	// <li>ON: enables intelligent face recognition task;</li>
+	// <li>OFF: disables intelligent face recognition task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// 
+	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
 	Score *float64 `json:"Score,omitempty" name:"Score"`
 
-	// 
+	// Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the default figures will be returned. Valid values:
+	// <li>entertainment: entertainment celebrity;</li>
+	// <li>sport: sports celebrity;</li>
+	// <li>politician: politically sensitive figure.</li>
 	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet" list`
 
-	// 
+	// Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
+	// There can be up to 10 tags, each with a length limit of 16 characters.
 	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet" list`
 
-	// 
+	// Figure library. Valid values:
+	// <li>Default: default figure library;</li>
+	// <li>UserDefine: custom figure library.</li>
+	// <li>All: both default and custom figure libraries will be used.</li>
 	FaceLibrary *string `json:"FaceLibrary,omitempty" name:"FaceLibrary"`
 }
 
@@ -5703,7 +5712,7 @@ type ForbidMediaDistributionRequest struct {
 	// forbid: forbids, recover: unblocks.
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5856,10 +5865,10 @@ type ImageSpriteTemplate struct {
 	// Subimage column count of an image sprite.
 	ColumnCount *uint64 `json:"ColumnCount,omitempty" name:"ColumnCount"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -5944,22 +5953,22 @@ type ImageWatermarkTemplate struct {
 type LiveRealTimeClipRequest struct {
 	*tchttp.BaseRequest
 
-	// [LVB code](https://cloud.tencent.com/document/product/267/5959) of a stream.
+	// [LVB code](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) of a stream.
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
 
-	// Start time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Start time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Whether to clip persistently. 0: no, 1: yes. Default: no.
 	IsPersistence *int64 `json:"IsPersistence,omitempty" name:"IsPersistence"`
 
-	// Storage expiration time of video generated by persistent clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). `9999-12-31T23:59:59Z` means `never expire`. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter will be valid only when `IsPersistence` is 1. By default, the video will never expire.
+	// Storage expiration time of video generated by persistent clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). `9999-12-31T23:59:59Z` means `never expire`. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter will be valid only when `IsPersistence` is 1. By default, the video will never expire.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-	// VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://cloud.tencent.com/document/product/266/9759). This parameter will be valid only when `IsPersistence` is 1.
+	// VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1). This parameter will be valid only when `IsPersistence` is 1.
 	Procedure *string `json:"Procedure,omitempty" name:"Procedure"`
 
 	// Whether the metadata of clipped video needs to be returned. 0: no, 1: yes. Default value: no.
@@ -5971,7 +5980,7 @@ type LiveRealTimeClipRequest struct {
 	// Reserved field. Do not enter a value for it.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -6103,7 +6112,7 @@ type MediaAnimatedGraphicsItem struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Animated image generating template ID. For more information, please see [Animated Image Generating Parameter Template](https://cloud.tencent.com/document/product/266/33481#.3Cspan-id-.3D-.22zdt.22.3E.3C.2Fspan.3E.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Animated image generating template ID. For more information, please see [Animated Image Generating Parameter Template](https://intl.cloud.tencent.com/document/product/266/33481?from_cn_redirect=1#.3Cspan-id-.3D-.22zdt.22.3E.3C.2Fspan.3E.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6165,15 +6174,15 @@ type MediaBasicInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Creation time of media file in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of media file in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last update time of media file (by an operation that triggers updating of media file information such as modifying video attributes or initiating video processing) in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last update time of media file (by an operation that triggers updating of media file information such as modifying video attributes or initiating video processing) in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// Expiration time of media file in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. `9999-12-31T23:59:59Z` means "never expire".
+	// Expiration time of media file in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. `9999-12-31T23:59:59Z` means "never expire".
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
@@ -6205,7 +6214,7 @@ type MediaBasicInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SourceInfo *MediaSourceData `json:"SourceInfo,omitempty" name:"SourceInfo"`
 
-	// Storage region of media file, such as ap-guangzhou. For more information, please see [Region List](https://cloud.tencent.com/document/api/213/15692#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
+	// Storage region of media file, such as ap-guangzhou. For more information, please see [Region List](https://intl.cloud.tencent.com/document/api/213/15692?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
 
@@ -6302,7 +6311,7 @@ type MediaContentReviewOcrTextSegmentItem struct {
 	// and will be deleted after `PicUrlExpireTime`).
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Expiration time of suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -6326,7 +6335,7 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// Name of a politically sensitive figure or violating photo.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+	// Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
 	// violation_photo:
 	// <li>violation_photo: violating photo.</li>
 	// politician:
@@ -6362,7 +6371,7 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// This field has been disused. Please use `PicUrlExpireTime`.
 	PicUrlExpireTimeStamp *int64 `json:"PicUrlExpireTimeStamp,omitempty" name:"PicUrlExpireTimeStamp"`
 
-	// Expiration time of suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -6393,7 +6402,7 @@ type MediaContentReviewSegmentItem struct {
 	// This field has been disused. Please use `PicUrlExpireTime`.
 	PicUrlExpireTimeStamp *int64 `json:"PicUrlExpireTimeStamp,omitempty" name:"PicUrlExpireTimeStamp"`
 
-	// Expiration time of suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -6404,7 +6413,7 @@ type MediaDeleteItem struct {
 	// <li>WechatPublishFiles: deletes files published on WeChat.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// ID of the template for which to delete the videos of the type specified by the `Type` parameter. For the template definition, please see [Transcoding Template](https://cloud.tencent.com/document/product/266/33478#.3Cspan-id-.3D-.22zm.22-.3E.3C.2Fspan.3E.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+	// ID of the template for which to delete the videos of the type specified by the `Type` parameter. For the template definition, please see [Transcoding Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.3Cspan-id-.3D-.22zm.22-.3E.3C.2Fspan.3E.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
 	// Default value: 0, which indicates to delete all videos of the type specified by the `Type` parameter.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -6418,7 +6427,7 @@ type MediaImageSpriteInfo struct {
 
 type MediaImageSpriteItem struct {
 
-	// Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6871,7 +6880,7 @@ type MediaSampleSnapshotInfo struct {
 
 type MediaSampleSnapshotItem struct {
 
-	// Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6905,7 +6914,7 @@ type MediaSnapshotByTimeOffsetInfo struct {
 
 type MediaSnapshotByTimeOffsetItem struct {
 
-	// Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -7004,7 +7013,7 @@ type MediaTranscodeItem struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://cloud.tencent.com/document/product/266/33478#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+	// Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -7105,7 +7114,7 @@ type ModifyAIAnalysisTemplateRequest struct {
 	// Control parameter of an intelligent highlight generating task.
 	HighlightConfigure *HighlightsConfigureInfoForUpdate `json:"HighlightConfigure,omitempty" name:"HighlightConfigure"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7175,7 +7184,7 @@ type ModifyAIRecognitionTemplateRequest struct {
 	// Frame capturing interval in seconds. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7236,7 +7245,7 @@ type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7310,7 +7319,7 @@ type ModifyAnimatedGraphicsTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7350,7 +7359,7 @@ type ModifyClassRequest struct {
 	// Category name, which can contain 1–64 characters.
 	ClassName *string `json:"ClassName,omitempty" name:"ClassName"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7418,7 +7427,7 @@ type ModifyContentReviewTemplateRequest struct {
 	// <li>OFF: no.</li>
 	ReviewWallSwitch *string `json:"ReviewWallSwitch,omitempty" name:"ReviewWallSwitch"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7495,7 +7504,7 @@ type ModifyImageSpriteTemplateRequest struct {
 	// 
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7541,7 +7550,7 @@ type ModifyMediaInfoRequest struct {
 	// Media file category ID.
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
-	// Media file expiration time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). The value `9999-12-31T23:59:59Z` indicates that the media file never expires. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted.
+	// Media file expiration time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The value `9999-12-31T23:59:59Z` indicates that the media file never expires. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
 	// String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) the video cover image file (such as .jpeg or .png file). Only .gif, .jpeg, and .png image formats are supported.
@@ -7567,7 +7576,7 @@ type ModifyMediaInfoRequest struct {
 	// In the same request, `ClearTags` and `AddTags` cannot be present at the same time.
 	ClearTags *int64 `json:"ClearTags,omitempty" name:"ClearTags"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7626,7 +7635,7 @@ type ModifyPersonSampleRequest struct {
 	// Tag operation information.
 	TagOperationInfo *AiSampleTagOperation `json:"TagOperationInfo,omitempty" name:"TagOperationInfo"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7710,7 +7719,7 @@ type ModifySampleSnapshotTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -7786,7 +7795,7 @@ type ModifySnapshotByTimeOffsetTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -7927,11 +7936,11 @@ type ModifySuperPlayerConfigRequest struct {
 	// Display name of player for substreams with different resolutions.
 	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitempty" name:"ResolutionNames" list`
 
-	// Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
+	// Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Scheme used for playback. Valid values:
-	// <li>Default: the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used;</li>
+	// <li>Default: the scheme configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used;</li>
 	// <li>HTTP;</li>
 	// <li>HTTPS.</li>
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
@@ -7939,7 +7948,7 @@ type ModifySuperPlayerConfigRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -8004,7 +8013,7 @@ type ModifyTranscodeTemplateRequest struct {
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -8073,7 +8082,7 @@ type ModifyWatermarkTemplateRequest struct {
 	// SVG watermarking template. This field is only valid for SVG watermarking templates.
 	SvgTemplate *SvgWatermarkInputForUpdate `json:"SvgTemplate,omitempty" name:"SvgTemplate"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -8128,7 +8137,7 @@ type ModifyWordSampleRequest struct {
 	// Tag operation information.
 	TagOperationInfo *AiSampleTagOperation `json:"TagOperationInfo,omitempty" name:"TagOperationInfo"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -8376,17 +8385,17 @@ type PlayerConfig struct {
 	// Display name of player for substreams with different resolutions.
 	ResolutionNameSet []*ResolutionNameInfo `json:"ResolutionNameSet,omitempty" name:"ResolutionNameSet" list`
 
-	// Creation time of player configuration in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of player configuration in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of player configuration in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time of player configuration in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
+	// Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Scheme used for playback. Valid values:
-	// <li>Default: the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used;</li>
+	// <li>Default: the scheme configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used;</li>
 	// <li>HTTP;</li>
 	// <li>HTTPS.</li>
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
@@ -8672,20 +8681,20 @@ type ProcedureTask struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 
 	// Media file ID.
-	// <li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `FileId` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
-	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Id` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
+	// <li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `FileId` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
+	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Id` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
 	// Media filename
-	// <li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `BasicInfo.Name` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
-	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Name` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
+	// <li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `BasicInfo.Name` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
+	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Name` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
 	// Media file address
-	// <li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `BasicInfo.MediaUrl` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
-	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Url` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
+	// <li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `BasicInfo.MediaUrl` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
+	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Url` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
 	FileUrl *string `json:"FileUrl,omitempty" name:"FileUrl"`
 
 	// Source video metadata.
@@ -8760,10 +8769,10 @@ type ProcedureTemplate struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MiniProgramPublishTask *WechatMiniProgramPublishTaskInput `json:"MiniProgramPublishTask,omitempty" name:"MiniProgramPublishTask"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -8773,7 +8782,7 @@ type ProcessMediaByProcedureRequest struct {
 	// Media file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
-	// [Task flow template](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
+	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
 	ProcedureName *string `json:"ProcedureName,omitempty" name:"ProcedureName"`
 
 	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
@@ -8791,7 +8800,7 @@ type ProcessMediaByProcedureRequest struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -8855,7 +8864,7 @@ type ProcessMediaByUrlRequest struct {
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -8892,7 +8901,7 @@ func (r *ProcessMediaByUrlResponse) FromJsonString(s string) error {
 type ProcessMediaRequest struct {
 	*tchttp.BaseRequest
 
-	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](/document/product/266/7830) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
 	// Parameter of video processing task.
@@ -8922,7 +8931,7 @@ type ProcessMediaRequest struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -9038,7 +9047,7 @@ type PullEventsRequest struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -9077,7 +9086,7 @@ type PullUploadRequest struct {
 	*tchttp.BaseRequest
 
 	// URL of the media to be pulled. Supported media format: HLS; unsupported media format: DASH.
-	// For more information about supported extensions, please see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B?from_cn_redirect=1).
+	// For more information about supported extensions, please see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
 	MediaUrl *string `json:"MediaUrl,omitempty" name:"MediaUrl"`
 
 	// Media name.
@@ -9086,18 +9095,18 @@ type PullUploadRequest struct {
 	// URL of video cover to be pulled. Only gif, jpeg, and png formats are supported.
 	CoverUrl *string `json:"CoverUrl,omitempty" name:"CoverUrl"`
 
-	// Subsequent task for media. For more information, please see [Specifying Task Flow After Upload](https://cloud.tencent.com/document/product/266/9759).
+	// Subsequent task for media. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1).
 	Procedure *string `json:"Procedure,omitempty" name:"Procedure"`
 
-	// Expiration time of media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Expiration time of media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
 	// Specifies upload region. This is only applicable to users that have special requirements for the upload region:
-	// <li>If it is left empty, the upload region is your [default region](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4);</li>
-	// <li>If it is specified, please make sure that the upload region has been [enabled for storage](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4).</li>
+	// <li>If it is left empty, the upload region is your [default region](https://intl.cloud.tencent.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4);</li>
+	// <li>If it is specified, please make sure that the upload region has been [enabled for storage](https://intl.cloud.tencent.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4).</li>
 	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
 
-	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [CreateClass](https://cloud.tencent.com/document/product/266/7812) API.
+	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
 	// The source context which is used to pass through the user request information. After `Procedure` is specified, the task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
@@ -9109,7 +9118,7 @@ type PullUploadRequest struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Source context, which is used to pass through the user request information. The [upload callback](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) API will return the value of this field. It can contain up to 250 characters.
@@ -9191,7 +9200,7 @@ type PushUrlCacheRequest struct {
 	// List of prefetched URLs. Up to 20 ones can be specified at a time.
 	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -9243,7 +9252,7 @@ type ResetProcedureTemplateRequest struct {
 	// Type parameter of AI-based content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -9340,10 +9349,10 @@ type SampleSnapshotTemplate struct {
 	// Sampling interval.
 	SampleInterval *uint64 `json:"SampleInterval,omitempty" name:"SampleInterval"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -9371,18 +9380,18 @@ type SearchMediaRequest struct {
 
 	// Start time in the creation time range.
 	// <li>After or at the start time.</li>
-	// <li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).</li>
+	// <li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time in the creation time range.
 	// <li>Before the end time.</li>
-	// <li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).</li>
+	// <li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Media file source. For valid values, please see [SourceType](https://cloud.tencent.com/document/product/266/31773#MediaSourceData).
+	// Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
 	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
 
-	// [LVB code](https://cloud.tencent.com/document/product/267/5959) of a stream.
+	// [LVB code](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) of a stream.
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
 
 	// Unique ID of LVB recording file.
@@ -9407,7 +9416,7 @@ type SearchMediaRequest struct {
 	// <li>Image: image file</li>
 	Categories []*string `json:"Categories,omitempty" name:"Categories" list`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -9474,7 +9483,7 @@ type SimpleHlsClipRequest struct {
 	// End offset time of clipping in seconds. Default value: 0, which means to clip till the end of the video. A negative number indicates how many seconds from the end of the video clipping will end. For example, -10 means that clipping will end at the 10th second from the end.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -9536,7 +9545,7 @@ type SnapshotByTimeOffsetTask2017 struct {
 	// Screenshot file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
-	// screenshot specification. For more information, please see [Parameter Template for Time Point Screencapturing](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// screenshot specification. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// Result information of screencapturing.
@@ -9601,10 +9610,10 @@ type SnapshotByTimeOffsetTemplate struct {
 	// Image format.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -9636,7 +9645,7 @@ type SpecificationDataItem struct {
 
 type StatDataItem struct {
 
-	// Start time of data time range in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
+	// Start time of data time range in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
 	// <li>For data at hourly level, `2019-08-22T00:00:00+08:00` indicates the statistics between 00:00 and 01:00 AM on August 22, 2019.</li>
 	// <li>For data at daily level, `2019-08-22T00:00:00+08:00` indicates statistics on August 22, 2019.</li>
 	Time *string `json:"Time,omitempty" name:"Time"`
@@ -9708,7 +9717,7 @@ type SubAppIdInfo struct {
 	// Subapplication overview.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Subapplication creation time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Subapplication creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Subapplication status. Valid values:
@@ -9831,13 +9840,13 @@ type TaskSimpleInfo struct {
 	// <li>ImageSprites: image sprite generating task.</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
-	// Creation time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). If the task has not been started yet, this field will be empty.
+	// Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). If the task has not been started yet, this field will be empty.
 	BeginProcessTime *string `json:"BeginProcessTime,omitempty" name:"BeginProcessTime"`
 
-	// End time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). If the task has not been completed yet, this field will be empty.
+	// End time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). If the task has not been completed yet, this field will be empty.
 	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 
 	// ID used for deduplication if there was a request with the same ID in the last seven days.
@@ -9898,7 +9907,7 @@ type TaskStatData struct {
 
 type TaskStatDataItem struct {
 
-	// Start time of data time range in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
+	// Start time of data time range in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
 	Time *string `json:"Time,omitempty" name:"Time"`
 
 	// Number of tasks.
@@ -10065,7 +10074,7 @@ type TranscodePlayInfo2017 struct {
 	// Playback address.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://cloud.tencent.com/document/product/266/33478#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+	// Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// Sum of the average bitrate of a video stream and that of an audio stream in bps.
@@ -10175,10 +10184,10 @@ type TranscodeTemplate struct {
 	// <li>PureAudio: audio container that can contain only audio stream.</li>
 	ContainerType *string `json:"ContainerType,omitempty" name:"ContainerType"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -10589,10 +10598,10 @@ type WatermarkTemplate struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SvgTemplate *SvgWatermarkInput `json:"SvgTemplate,omitempty" name:"SvgTemplate"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Origin position. Valid values:
@@ -10612,7 +10621,7 @@ type WeChatMiniProgramPublishRequest struct {
 	// ID of the transcoding template corresponding to the published video. 0 represents the source video.
 	SourceDefinition *int64 `json:"SourceDefinition,omitempty" name:"SourceDefinition"`
 
-	// [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 

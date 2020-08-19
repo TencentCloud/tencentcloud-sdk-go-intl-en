@@ -398,13 +398,13 @@ type EsDictionaryInfo struct {
 	// List of stop words
 	Stopwords []*DictInfo `json:"Stopwords,omitempty" name:"Stopwords" list`
 
-	// 
+	// QQ dictionary list
 	QQDict []*DictInfo `json:"QQDict,omitempty" name:"QQDict" list`
 
-	// 
+	// Synonym dictionary list
 	Synonym []*DictInfo `json:"Synonym,omitempty" name:"Synonym" list`
 
-	// 
+	// Update dictionary type
 	UpdateType *string `json:"UpdateType,omitempty" name:"UpdateType"`
 }
 
@@ -679,7 +679,7 @@ type NodeInfo struct {
 	// Number of node disks
 	DiskCount *uint64 `json:"DiskCount,omitempty" name:"DiskCount"`
 
-	// 
+	// Whether to encrypt node disk. 0: no (default); 1: yes.
 	DiskEncrypt *uint64 `json:"DiskEncrypt,omitempty" name:"DiskEncrypt"`
 }
 
@@ -873,7 +873,7 @@ type UpdateInstanceRequest struct {
 	// Kibana private port
 	KibanaPrivatePort *uint64 `json:"KibanaPrivatePort,omitempty" name:"KibanaPrivatePort"`
 
-	// 
+	// 0: scaling in blue/green deployment mode without cluster restart (default); 1: scaling by unmounting disk with rolling cluster restart
 	ScaleType *int64 `json:"ScaleType,omitempty" name:"ScaleType"`
 }
 
@@ -901,6 +901,49 @@ func (r *UpdateInstanceResponse) ToJsonString() string {
 }
 
 func (r *UpdateInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdatePluginsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// List of names of the plugins to be installed
+	InstallPluginList []*string `json:"InstallPluginList,omitempty" name:"InstallPluginList" list`
+
+	// List of names of the plugins to be uninstalled
+	RemovePluginList []*string `json:"RemovePluginList,omitempty" name:"RemovePluginList" list`
+
+	// Whether to force restart
+	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+}
+
+func (r *UpdatePluginsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdatePluginsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdatePluginsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdatePluginsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdatePluginsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

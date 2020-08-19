@@ -43,10 +43,10 @@ type AIAnalysisTemplateItem struct {
 	// Control parameter of intelligent frame-specific tagging task.
 	FrameTagConfigure *FrameTagConfigureInfo `json:"FrameTagConfigure,omitempty" name:"FrameTagConfigure"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/862/37710#52).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/862/37710#52).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -81,10 +81,10 @@ type AIRecognitionTemplateItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AsrWordsConfigure *AsrWordsConfigureInfo `json:"AsrWordsConfigure,omitempty" name:"AsrWordsConfigure"`
 
-	// Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -159,10 +159,10 @@ type AdaptiveDynamicStreamingTemplate struct {
 	// <li>1: yes.</li>
 	DisableHigherVideoResolution *uint64 `json:"DisableHigherVideoResolution,omitempty" name:"DisableHigherVideoResolution"`
 
-	// Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -775,7 +775,7 @@ type AiReviewPoliticalTaskOutput struct {
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/862/37615#AiReviewPoliticalTaskOutput) and this parameter is as follows:
+	// Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#AiReviewPoliticalTaskOutput) and this parameter is as follows:
 	// violation_photo:
 	// <li>violation_photo: violating photo.</li>
 	// Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
@@ -1191,10 +1191,10 @@ type AiSamplePerson struct {
 	// Use case.
 	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet" list`
 
-	// Creation time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -1218,10 +1218,10 @@ type AiSampleWord struct {
 	// Keyword use case.
 	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet" list`
 
-	// Creation time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -1302,10 +1302,10 @@ type AnimatedGraphicsTemplate struct {
 	// Image quality.
 	Quality *float64 `json:"Quality,omitempty" name:"Quality"`
 
-	// Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -1481,10 +1481,10 @@ type ContentReviewTemplateItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UserDefineConfigure *UserDefineConfigureInfo `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
 
-	// Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -3291,13 +3291,13 @@ type DescribeTaskDetailResponse struct {
 	// <li>FINISH: Completed.</li>
 		Status *string `json:"Status,omitempty" name:"Status"`
 
-		// Creation time of a task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+		// Creation time of a task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-		// Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+		// Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 		BeginProcessTime *string `json:"BeginProcessTime,omitempty" name:"BeginProcessTime"`
 
-		// End time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+		// End time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 		FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 
 		// Information of a video processing task. This field has a value only when `TaskType` is `WorkflowTask`.
@@ -3323,6 +3323,9 @@ type DescribeTaskDetailResponse struct {
 
 		// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 		SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+		// Extended information field, used in specific scenarios.
+		ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3673,7 +3676,7 @@ type EditMediaRequest struct {
 	// Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
 
-	// Task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+	// Task priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
@@ -3908,10 +3911,10 @@ type ImageSpriteTemplate struct {
 	// Subimage column count of an image sprite.
 	ColumnCount *uint64 `json:"ColumnCount,omitempty" name:"ColumnCount"`
 
-	// Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -3930,15 +3933,15 @@ type ImageWatermarkInput struct {
 	ImageContent *string `json:"ImageContent,omitempty" name:"ImageContent"`
 
 	// Watermark width. % and px formats are supported:
-	// <li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+	// <li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+	// <li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
 	// Default value: 10%.
 	Width *string `json:"Width,omitempty" name:"Width"`
 
 	// Watermark height. % and px formats are supported:
-	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
-	// Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
+	// Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
 	Height *string `json:"Height,omitempty" name:"Height"`
 }
 
@@ -3948,14 +3951,14 @@ type ImageWatermarkInputForUpdate struct {
 	ImageContent *string `json:"ImageContent,omitempty" name:"ImageContent"`
 
 	// Watermark width. % and px formats are supported:
-	// <li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+	// <li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+	// <li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
 	Width *string `json:"Width,omitempty" name:"Width"`
 
 	// Watermark height. % and px formats are supported:
-	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
-	// `0px` means that `Height` will be proportionally scaled according to the video width.
+	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
+	// Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
 	Height *string `json:"Height,omitempty" name:"Height"`
 }
 
@@ -3970,8 +3973,8 @@ type ImageWatermarkTemplate struct {
 	Width *string `json:"Width,omitempty" name:"Width"`
 
 	// Watermark height. % and px formats are supported:
-	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px;</li>
+	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels.</li>
 	// `0px` means that `Height` will be proportionally scaled according to the video width.
 	Height *string `json:"Height,omitempty" name:"Height"`
 }
@@ -4045,7 +4048,7 @@ type LiveStreamAiReviewImagePoliticalResult struct {
 	// and will be deleted after `PicUrlExpireTime`).
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -4077,7 +4080,7 @@ type LiveStreamAiReviewImagePornResult struct {
 	// and will be deleted after `PicUrlExpireTime`).
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -4113,7 +4116,7 @@ type LiveStreamAiReviewImageTerrorismResult struct {
 	// and will be deleted after `PicUrlExpireTime`).
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -4178,7 +4181,7 @@ type LiveStreamAsrFullTextRecognitionResult struct {
 	// End PTS time of recognized segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Confidence of recognized segment. Value range: 0-100.
+	// Confidence of recognized segment. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 }
 
@@ -4193,7 +4196,7 @@ type LiveStreamAsrWordsRecognitionResult struct {
 	// End PTS time of recognized segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Confidence of recognized segment. Value range: 0-100.
+	// Confidence of recognized segment. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 }
 
@@ -4215,7 +4218,7 @@ type LiveStreamFaceRecognitionResult struct {
 	// End PTS time of recognized segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Confidence of recognized segment. Value range: 0-100.
+	// Confidence of recognized segment. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
@@ -4233,7 +4236,7 @@ type LiveStreamOcrFullTextRecognitionResult struct {
 	// End PTS time of recognized segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Confidence of recognized segment. Value range: 0-100.
+	// Confidence of recognized segment. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
@@ -4251,7 +4254,7 @@ type LiveStreamOcrWordsRecognitionResult struct {
 	// End PTS time of recognized segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Confidence of recognized segment. Value range: 0-100.
+	// Confidence of recognized segment. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
@@ -4398,7 +4401,7 @@ type MediaAnimatedGraphicsItem struct {
 	// Path to a generated animated image file.
 	Path *string `json:"Path,omitempty" name:"Path"`
 
-	// ID of an animated image generating template. For more information, please see [Animated Image Generating Parameter Template](https://cloud.tencent.com/document/product/266/33481#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// ID of an animated image generating template. For more information, please see [Animated Image Generating Parameter Template](https://intl.cloud.tencent.com/document/product/266/33481?from_cn_redirect=1#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// Animated image format, such as gif.
@@ -4489,7 +4492,7 @@ type MediaContentReviewOcrTextSegmentItem struct {
 	// and will be deleted after `PicUrlExpireTime`).
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -4513,7 +4516,7 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// Name of a politically sensitive figure or violating photo.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/862/37615#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+	// Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
 	// violation_photo:
 	// <li>violation_photo: violating photo.</li>
 	// politician:
@@ -4523,6 +4526,7 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// <li>county_politician: county/city leader;</li>
 	// <li>rural_politician: town leader;</li>
 	// <li>sensitive_politician: politically sensitive figure.</li>
+	// <li>foreign_politician: head of a foreign country/government.</li>
 	// entertainment:
 	// <li>sensitive_entertainment: sensitive entertainment celebrity.</li>
 	// sport:
@@ -4532,7 +4536,8 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// scholar:
 	// <li>sensitive_scholar: sensitive educator.</li>
 	// celebrity:
-	// <li>sensitive_celebrity: sensitive well-known figure.</li>
+	// <li>sensitive_celebrity: sensitive well-known figure;</li>
+	// <li>historical_celebrity: well-known historical figure.</li>
 	// military:
 	// <li>sensitive_military: militarily sensitive figure.</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
@@ -4544,7 +4549,7 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// Zone coordinates (at the pixel level) of a politically sensitive figure or violating photo: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
 
-	// Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -4572,13 +4577,13 @@ type MediaContentReviewSegmentItem struct {
 	//  and will be deleted after `PicUrlExpireTime`).
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
 }
 
 type MediaImageSpriteItem struct {
 
-	// Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// Subimage height of an image sprite.
@@ -4847,7 +4852,7 @@ type MediaProcessTaskTranscodeResult struct {
 
 type MediaSampleSnapshotItem struct {
 
-	// Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// Sample type. Valid values:
@@ -4872,7 +4877,7 @@ type MediaSampleSnapshotItem struct {
 
 type MediaSnapshotByTimeOffsetItem struct {
 
-	// Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// Information set of screenshots of the same specification. Each element represents a screenshot.
@@ -4902,7 +4907,7 @@ type MediaTranscodeItem struct {
 	// Path to an output video file.
 	Path *string `json:"Path,omitempty" name:"Path"`
 
-	// Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://cloud.tencent.com/document/product/266/33478#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+	// Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// Sum of the average bitrate of a video stream and that of an audio stream in bps.
@@ -5506,7 +5511,7 @@ type ModifyTranscodeTemplateRequest struct {
 	// Name of a transcoding template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Template description. Length limit: 256 bytes.
+	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// Whether to remove video data. Valid values:
@@ -6500,10 +6505,10 @@ type SampleSnapshotTemplate struct {
 	// Sampling interval.
 	SampleInterval *uint64 `json:"SampleInterval,omitempty" name:"SampleInterval"`
 
-	// Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -6583,10 +6588,10 @@ type SnapshotByTimeOffsetTemplate struct {
 	// Image format.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
-	// Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -6725,13 +6730,13 @@ type TaskSimpleInfo struct {
 	// <li> LiveProcessTask: Live stream processing task.</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
-	// Creation time of a task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of a task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). If the task has not been started yet, this field will be `0000-00-00T00:00:00Z`.
+	// Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). If the task has not been started yet, this field will be `0000-00-00T00:00:00Z`.
 	BeginProcessTime *string `json:"BeginProcessTime,omitempty" name:"BeginProcessTime"`
 
-	// End time of a task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). If the task has not been completed yet, this field will be `0000-00-00T00:00:00Z`.
+	// End time of a task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). If the task has not been completed yet, this field will be `0000-00-00T00:00:00Z`.
 	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 }
 
@@ -6886,7 +6891,7 @@ type TranscodeTaskInput struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// Path to a master output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
+	// Path to a primary output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
 	OutputObjectPath *string `json:"OutputObjectPath,omitempty" name:"OutputObjectPath"`
 
 	// Path to an output file part (the path to ts during transcoding to HLS), which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}_{number}.{format}`.
@@ -6945,10 +6950,10 @@ type TranscodeTemplate struct {
 	// <li>PureAudio: Audio container format that can contain only audio stream.</li>
 	ContainerType *string `json:"ContainerType,omitempty" name:"ContainerType"`
 
-	// Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -7241,10 +7246,10 @@ type WatermarkTemplate struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SvgTemplate *SvgWatermarkInput `json:"SvgTemplate,omitempty" name:"SvgTemplate"`
 
-	// Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Origin position. Valid values:
@@ -7300,10 +7305,10 @@ type WorkflowInfo struct {
 	// Target directory of a video processing output file, such as `/movie/201907/`.
 	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
 
-	// Creation time of a workflow in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Creation time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Last modified time of a workflow in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modified time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 

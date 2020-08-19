@@ -151,10 +151,10 @@ type CreateOrganizationResponse struct {
 		// Organization ID
 		OrgId *uint64 `json:"OrgId,omitempty" name:"OrgId"`
 
-		// Creator’s name
+		// Creator's name
 		Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
 
-		// Creator’s email address
+		// Creator's email address
 		Mail *string `json:"Mail,omitempty" name:"Mail"`
 
 		// Organization type
@@ -422,10 +422,10 @@ type GetOrganizationResponse struct {
 		// Creator UIN
 		HostUin *uint64 `json:"HostUin,omitempty" name:"HostUin"`
 
-		// Creator’s name
+		// Creator's name
 		Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
 
-		// Creator’s email address
+		// Creator's email address
 		Mail *string `json:"Mail,omitempty" name:"Mail"`
 
 		// Organization type
@@ -665,10 +665,10 @@ type OrgInvitation struct {
 	// Creator UIN
 	HostUin *uint64 `json:"HostUin,omitempty" name:"HostUin"`
 
-	// Creator’s name
+	// Creator's name
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
 
-	// Creator’s email address
+	// Creator's email address
 	HostMail *string `json:"HostMail,omitempty" name:"HostMail"`
 
 	// Invitation status. `-1`: expired; `0`: normal; `1`: accepted; `2`: invalid; `3`: cancelled

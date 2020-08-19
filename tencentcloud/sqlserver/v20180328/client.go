@@ -668,6 +668,31 @@ func (c *Client) ModifyAccountRemark(request *ModifyAccountRemarkRequest) (respo
     return
 }
 
+func NewModifyBackupStrategyRequest() (request *ModifyBackupStrategyRequest) {
+    request = &ModifyBackupStrategyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyBackupStrategy")
+    return
+}
+
+func NewModifyBackupStrategyResponse() (response *ModifyBackupStrategyResponse) {
+    response = &ModifyBackupStrategyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the backup policy.
+func (c *Client) ModifyBackupStrategy(request *ModifyBackupStrategyRequest) (response *ModifyBackupStrategyResponse, err error) {
+    if request == nil {
+        request = NewModifyBackupStrategyRequest()
+    }
+    response = NewModifyBackupStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstanceNameRequest() (request *ModifyDBInstanceNameRequest) {
     request = &ModifyDBInstanceNameRequest{
         BaseRequest: &tchttp.BaseRequest{},

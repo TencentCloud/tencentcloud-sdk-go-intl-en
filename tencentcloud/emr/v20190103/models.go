@@ -411,10 +411,10 @@ type DescribeClusterNodesRequest struct {
 	// Number of returned results per page. Default value: 100. Maximum value: 100
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// 
+	// Resource type. Valid values: all, host, pod. Default value: all
 	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
 
-	// 
+	// Searchable field
 	SearchFields []*SearchItem `json:"SearchFields,omitempty" name:"SearchFields" list`
 }
 
@@ -442,7 +442,8 @@ type DescribeClusterNodesResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
 
-		// 
+		// Resource type list
+	// Note: this field may return null, indicating that no valid values can be obtained.
 		HardwareResourceTypeList []*string `json:"HardwareResourceTypeList,omitempty" name:"HardwareResourceTypeList" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1121,7 +1122,8 @@ type NodeHardwareInfo struct {
 	// 
 	AutoFlag *int64 `json:"AutoFlag,omitempty" name:"AutoFlag"`
 
-	// 
+	// Resource type. Valid values: host, pod
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
 }
 
@@ -1175,22 +1177,22 @@ type Placement struct {
 
 type PodSpec struct {
 
-	// 
+	// Identifier of external resource provider, such as "cls-a1cd23fa".
 	ResourceProviderIdentifier *string `json:"ResourceProviderIdentifier,omitempty" name:"ResourceProviderIdentifier"`
 
-	// 
+	// Type of external resource provider, such as "tke". Currently, only "tke" is supported.
 	ResourceProviderType *string `json:"ResourceProviderType,omitempty" name:"ResourceProviderType"`
 
-	// 
+	// Purpose of the resource, i.e., node type, which currently can only be "TASK".
 	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
 
-	// 
+	// Number of CPU cores.
 	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// 
+	// Memory size in GB.
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
-	// 
+	// Mount point of resource for host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod.
 	DataVolumes []*string `json:"DataVolumes,omitempty" name:"DataVolumes" list`
 }
 
@@ -1389,10 +1391,10 @@ type ScaleOutInstanceRequest struct {
 	// List of tags bound to added nodes.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
-	// 
+	// Resource type selected for expansion. Valid values: host (general CVM resource), pod (resource provided by TKE cluster)
 	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
 
-	// 
+	// Specified information such as pod specification and source for expansion with pod resources
 	PodSpec *PodSpec `json:"PodSpec,omitempty" name:"PodSpec"`
 }
 
@@ -1444,10 +1446,10 @@ func (r *ScaleOutInstanceResponse) FromJsonString(s string) error {
 
 type SearchItem struct {
 
-	// 
+	// Searchable type
 	SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
 
-	// 
+	// Searchable value
 	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
 }
 

@@ -85,10 +85,10 @@ type AddUserResponse struct {
 		// If the combination of input parameters indicates that a random password should be generated, the generated password is returned
 		Password *string `json:"Password,omitempty" name:"Password"`
 
-		// Sub-user’s key ID
+		// Sub-user's key ID
 		SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
 
-		// Sub-user’s secret key
+		// Sub-user's secret key
 		SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
 		// Sub-user UID
@@ -220,7 +220,8 @@ type AttachPolicyInfo struct {
 	// 
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// 
+	// Root account of the operator associating the policy
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	OperateOwnerUin *string `json:"OperateOwnerUin,omitempty" name:"OperateOwnerUin"`
 
 	// 
@@ -429,7 +430,7 @@ type CreatePolicyRequest struct {
 	// Policy name
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 
-	// Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
+	// Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://intl.cloud.tencent.com/document/product/598/36221?from_cn_redirect=1) API
 	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
 
 	// Policy description
@@ -751,6 +752,43 @@ func (r *DeletePolicyVersionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteRolePermissionsBoundaryRequest struct {
+	*tchttp.BaseRequest
+
+	// Role ID (either it or the role name must be entered)
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name (either it or the role ID must be entered)
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
+func (r *DeleteRolePermissionsBoundaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteRolePermissionsBoundaryRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteRolePermissionsBoundaryResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteRolePermissionsBoundaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteRolePermissionsBoundaryResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteRoleRequest struct {
 	*tchttp.BaseRequest
 
@@ -856,6 +894,40 @@ func (r *DeleteServiceLinkedRoleResponse) ToJsonString() string {
 }
 
 func (r *DeleteServiceLinkedRoleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteUserPermissionsBoundaryRequest struct {
+	*tchttp.BaseRequest
+
+	// Sub-account `Uin`
+	TargetUin *int64 `json:"TargetUin,omitempty" name:"TargetUin"`
+}
+
+func (r *DeleteUserPermissionsBoundaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteUserPermissionsBoundaryRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteUserPermissionsBoundaryResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteUserPermissionsBoundaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteUserPermissionsBoundaryResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2142,6 +2214,83 @@ type PolicyVersionItem struct {
 	IsDefaultVersion *int64 `json:"IsDefaultVersion,omitempty" name:"IsDefaultVersion"`
 }
 
+type PutRolePermissionsBoundaryRequest struct {
+	*tchttp.BaseRequest
+
+	// Policy ID
+	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Role ID (either it or the role name must be entered)
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name (either it or the role ID must be entered)
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
+func (r *PutRolePermissionsBoundaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutRolePermissionsBoundaryRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PutRolePermissionsBoundaryResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *PutRolePermissionsBoundaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutRolePermissionsBoundaryResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PutUserPermissionsBoundaryRequest struct {
+	*tchttp.BaseRequest
+
+	// Sub-account `Uin`
+	TargetUin *int64 `json:"TargetUin,omitempty" name:"TargetUin"`
+
+	// Policy ID
+	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
+func (r *PutUserPermissionsBoundaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutUserPermissionsBoundaryRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PutUserPermissionsBoundaryResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *PutUserPermissionsBoundaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutUserPermissionsBoundaryResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type RemoveUserFromGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -2459,16 +2608,16 @@ func (r *UpdateGroupResponse) FromJsonString(s string) error {
 type UpdatePolicyRequest struct {
 	*tchttp.BaseRequest
 
-	// Policy ID
+	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
-	// Policy Name
+	// Policy name. Either `PolicyName` or `PolicyId` must be entered
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 
 	// Policy description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Policy documentation, for example: `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the service that is authorized to use the role. For more information about this parameter, see **RoleInfo** under **Output Parameters** in the [GetRole](https://cloud.tencent.com/document/product/598/36221).
+	// Policy documentation, for example: `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the service that is authorized to use the role. For more information about this parameter, see **RoleInfo** under **Output Parameters** in the [GetRole](https://intl.cloud.tencent.com/document/product/598/36221?from_cn_redirect=1).
 	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
 
 	// Preset policy remark
@@ -2488,8 +2637,8 @@ type UpdatePolicyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Policy ID
-	// Note: This field may return null, indicating that no valid value was found.
+		// Policy ID, which will be returned only if the input parameter is `PolicyName`
+	// Note: this field may return null, indicating that no valid values can be obtained.
 		PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

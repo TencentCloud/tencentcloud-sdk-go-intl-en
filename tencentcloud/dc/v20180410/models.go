@@ -56,23 +56,27 @@ func (r *AcceptDirectConnectTunnelResponse) FromJsonString(s string) error {
 
 type AccessPoint struct {
 
-	// Access point name.
+	// 
 	AccessPointName *string `json:"AccessPointName,omitempty" name:"AccessPointName"`
 
-	// Unique access point ID.
+	// 
 	AccessPointId *string `json:"AccessPointId,omitempty" name:"AccessPointId"`
 
-	// Access point status. Valid values: available, unavailable.
+	// 
 	State *string `json:"State,omitempty" name:"State"`
 
-	// Access point location.
+	// 
 	Location *string `json:"Location,omitempty" name:"Location"`
 
-	// List of ISPs supported by access point.
+	// 
 	LineOperator []*string `json:"LineOperator,omitempty" name:"LineOperator" list`
 
-	// ID of the region that manages the access point.
+	// 
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	AvailablePortType []*string `json:"AvailablePortType,omitempty" name:"AvailablePortType" list`
 }
 
 type BgpPeer struct {
@@ -97,14 +101,14 @@ type CreateDirectConnectRequest struct {
 	// ISP that provides connections. Valid values: ChinaTelecom (China Telecom), ChinaMobile (China Mobile), ChinaUnicom (China Unicom), In-houseWiring (in-house wiring), ChinaOther (other Chinese ISPs), InternationalOperator (international ISPs).
 	LineOperator *string `json:"LineOperator,omitempty" name:"LineOperator"`
 
-	// Local IDC location.
-	Location *string `json:"Location,omitempty" name:"Location"`
-
 	// Port type of connection. Valid values: 100Base-T (100-Megabit electrical Ethernet interface), 1000Base-T (1-Gigabit electrical Ethernet interface), 1000Base-LX (1-Gigabit single-module optical Ethernet interface; 10 KM), 10GBase-T (10-Gigabit electrical Ethernet interface), 10GBase-LR (10-Gigabit single-module optical Ethernet interface; 10 KM). Default value: 1000Base-LX.
 	PortType *string `json:"PortType,omitempty" name:"PortType"`
 
 	// Circuit code of connection, which is provided by the ISP or connection provider.
 	CircuitCode *string `json:"CircuitCode,omitempty" name:"CircuitCode"`
+
+	// Local IDC location.
+	Location *string `json:"Location,omitempty" name:"Location"`
 
 	// Connection port bandwidth in Mbps. Value range: [2,10240]. Default value: 1000.
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
@@ -135,6 +139,9 @@ type CreateDirectConnectRequest struct {
 
 	// Fault reporting contact number.
 	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitempty" name:"FaultReportContactNumber"`
+
+	// Whether the connection applicant has signed the service agreement. Default value: true.
+	SignLaw *bool `json:"SignLaw,omitempty" name:"SignLaw"`
 }
 
 func (r *CreateDirectConnectRequest) ToJsonString() string {
@@ -459,6 +466,10 @@ type DescribeDirectConnectsResponse struct {
 		// Number of eligible connection lists.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
+		// Whether all connections under the account have the service agreement signed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		AllSignLaw *bool `json:"AllSignLaw,omitempty" name:"AllSignLaw"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -575,35 +586,38 @@ type DirectConnect struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ChargeState *string `json:"ChargeState,omitempty" name:"ChargeState"`
 
-	// Connection activation time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Whether the connection has the service agreement signed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	SignLaw *bool `json:"SignLaw,omitempty" name:"SignLaw"`
 }
 
 type DirectConnectTunnel struct {
 
-	// Dedicated tunnel ID
+	// Dedicated tunnel ID.
 	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitempty" name:"DirectConnectTunnelId"`
 
 	// Connection ID.
 	DirectConnectId *string `json:"DirectConnectId,omitempty" name:"DirectConnectId"`
 
-	// Dedicated tunnel status
-	// AVAILABLE: ready or connected
-	// PENDING: applying
-	// ALLOCATING: configuring
-	// ALLOCATED: configured
-	// ALTERING: modifying
-	// DELETING: deleting
-	// DELETED: deleted
-	// CONFIRMING: to be accepted
-	// REJECTED: rejected
+	// Dedicated tunnel status.
+	// AVAILABLE: Ready or connected.
+	// PENDING: Applying.
+	// ALLOCATING: Configuring.
+	// ALLOCATED: Configured.
+	// ALTERING: Modifying.
+	// DELETING: Deleting.
+	// DELETED: Deleted.
+	// COMFIRMING: To be accepted.
+	// REJECTED: Rejected.
 	State *string `json:"State,omitempty" name:"State"`
 
 	// Connection owner, i.e., developer account ID.
 	DirectConnectOwnerAccount *string `json:"DirectConnectOwnerAccount,omitempty" name:"DirectConnectOwnerAccount"`
 
-	// Dedicated tunnel owner, i.e., developer account ID
+	// Dedicated tunnel owner, i.e., developer account ID.
 	OwnerAccount *string `json:"OwnerAccount,omitempty" name:"OwnerAccount"`
 
 	// Network type. Valid values: VPC, BMVPC, CCN.
@@ -628,7 +642,7 @@ type DirectConnectTunnel struct {
 	// User-side IP range.
 	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitempty" name:"RouteFilterPrefixes" list`
 
-	// Dedicated tunnel `Vlan`
+	// VLAN of a dedicated tunnel.
 	Vlan *int64 `json:"Vlan,omitempty" name:"Vlan"`
 
 	// TencentAddress: Tencent-side IP address.
@@ -637,16 +651,16 @@ type DirectConnectTunnel struct {
 	// CustomerAddress: User-side IP address.
 	CustomerAddress *string `json:"CustomerAddress,omitempty" name:"CustomerAddress"`
 
-	// Dedicated tunnel name
+	// Dedicated tunnel name.
 	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitempty" name:"DirectConnectTunnelName"`
 
-	// Dedicated tunnel creation time
+	// Creation time of a dedicated tunnel.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// Dedicated tunnel bandwidth value
+	// Bandwidth value of a dedicated tunnel.
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
-	// Dedicated tunnel tag value
+	// Tag value of a dedicated tunnel.
 	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
 
 	// Associated custom network probe ID
@@ -669,7 +683,7 @@ type DirectConnectTunnel struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BfdEnable *int64 `json:"BfdEnable,omitempty" name:"BfdEnable"`
 
-	// Dedicated tunnel access point type
+	// Access point type of a dedicated tunnel.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AccessPointType *string `json:"AccessPointType,omitempty" name:"AccessPointType"`
 
@@ -681,9 +695,12 @@ type DirectConnectTunnel struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
 
-	// TencentBackupAddress, i.e., Tencent-side standby IP address
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 
 	TencentBackupAddress *string `json:"TencentBackupAddress,omitempty" name:"TencentBackupAddress"`
+
+	// Whether the connection associated with the dedicated tunnel has the service agreement signed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	SignLaw *bool `json:"SignLaw,omitempty" name:"SignLaw"`
 }
 
 type Filter struct {
@@ -730,6 +747,9 @@ type ModifyDirectConnectAttributeRequest struct {
 
 	// Fault reporting contact number.
 	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitempty" name:"FaultReportContactNumber"`
+
+	// Whether the connection applicant has signed the service agreement.
+	SignLaw *bool `json:"SignLaw,omitempty" name:"SignLaw"`
 }
 
 func (r *ModifyDirectConnectAttributeRequest) ToJsonString() string {

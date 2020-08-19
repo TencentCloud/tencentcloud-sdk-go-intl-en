@@ -242,7 +242,7 @@ type AllocateAddressesRequest struct {
 	InternetServiceProvider *string `json:"InternetServiceProvider,omitempty" name:"InternetServiceProvider"`
 
 	// The EIP billing method.
-	// <ul style="margin:0"><li>For a user who has activated bandwidth billing by IP allowlist, possible values are:<ul><li>BANDWIDTH_PACKAGE: paid by the [bandwidth package](https://cloud.tencent.com/document/product/684/15255) (The bandwidth sharing allowlist must be activated additionally.)</li>
+	// <ul style="margin:0"><li>For a user who has activated bandwidth billing by IP allowlist, possible values are:<ul><li>BANDWIDTH_PACKAGE: paid by the [bandwidth package](https://intl.cloud.tencent.com/document/product/684/15255?from_cn_redirect=1) (The bandwidth sharing allowlist must be activated additionally.)</li>
 	// <li>BANDWIDTH_POSTPAID_BY_HOUR: bandwidth postpaid by hour</li>
 	// <li>TRAFFIC_POSTPAID_BY_HOUR: traffic postpaid by hour</li></ul>Default: TRAFFIC_POSTPAID_BY_HOUR</li>.
 	// <li>For users who do not use bill-by-bandwidth billing mode, InternetChargeType is consistent with that of the instance bound to the EIP. Therefore, it is unnecessary to pass in this parameter.</li></ul>
@@ -256,7 +256,7 @@ type AllocateAddressesRequest struct {
 	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 
 	// The EIP type. Default: EIP.
-	// <ul style="margin:0"><li>For a user who has activated the AIA allowlist, possible values are:<ul><li>AnycastEIP: an Anycast EIP address. For more information, see [Anycast Internet Acceleration](https://cloud.tencent.com/document/product/644).</li></ul>Note: Only certain regions support Anycast EIPs.</li></ul>
+	// <ul style="margin:0"><li>For a user who has activated the AIA allowlist, possible values are:<ul><li>AnycastEIP: an Anycast EIP address. For more information, see [Anycast Internet Acceleration](https://intl.cloud.tencent.com/document/product/644?from_cn_redirect=1).</li></ul>Note: Only certain regions support Anycast EIPs.</li></ul>
 	AddressType *string `json:"AddressType,omitempty" name:"AddressType"`
 
 	// Anycast publishing region
@@ -292,7 +292,7 @@ type AllocateAddressesResponse struct {
 		// List of the unique IDs of the requested EIPs.
 		AddressSet []*string `json:"AddressSet,omitempty" name:"AddressSet" list`
 
-		// The Async task ID. You can use the [DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271) API to query the task status.
+		// The Async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
 		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -494,13 +494,13 @@ type AssociateAddressRequest struct {
 	// The unique ID of the EIP, such as `eip-11112222`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
-	// The ID of the instance to be bound, such as `ins-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API.
+	// The ID of the instance to be bound, such as `ins-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// The ID of the ENI to be bonud, such as `eni-11112222`. `NetworkInterfaceId` and `InstanceId` cannot be specified at the same time. You can query the ENI ID by logging into the [Console](https://console.cloud.tencent.com/vpc/eni). You can also obtain the parameter value from the `networkInterfaceId` field in the returned result of [DescribeNetworkInterfaces](https://cloud.tencent.com/document/api/215/15817) API.
+	// The ID of the ENI to be bonud, such as `eni-11112222`. `NetworkInterfaceId` and `InstanceId` cannot be specified at the same time. You can query the ENI ID by logging into the [Console](https://console.cloud.tencent.com/vpc/eni). You can also obtain the parameter value from the `networkInterfaceId` field in the returned result of [DescribeNetworkInterfaces](https://intl.cloud.tencent.com/document/api/215/15817?from_cn_redirect=1) API.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
-	// The private IP to be bound. If you specify `NetworkInterfaceId`, then you must also specify `PrivateIpAddress`, indicating the EIP is bound to the specified private IP of the specified ENI. At the same time, you must ensure the specified `PrivateIpAddress` is a private IP on the `NetworkInterfaceId`. You can query the private IP of the specified ENI by logging into the [Console](https://console.cloud.tencent.com/vpc/eni). You can also obtain the parameter value from the `privateIpAddress` field in the returned result of [DescribeNetworkInterfaces](https://cloud.tencent.com/document/api/215/15817) API.
+	// The private IP to be bound. If you specify `NetworkInterfaceId`, then you must also specify `PrivateIpAddress`, indicating the EIP is bound to the specified private IP of the specified ENI. At the same time, you must ensure the specified `PrivateIpAddress` is a private IP on the `NetworkInterfaceId`. You can query the private IP of the specified ENI by logging into the [Console](https://console.cloud.tencent.com/vpc/eni). You can also obtain the parameter value from the `privateIpAddress` field in the returned result of [DescribeNetworkInterfaces](https://intl.cloud.tencent.com/document/api/215/15817?from_cn_redirect=1) API.
 	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
 }
 
@@ -517,7 +517,7 @@ type AssociateAddressResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The async task ID. You can use the [DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271) API to query the task status.
+		// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
 		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -812,7 +812,7 @@ type CCN struct {
 	// The instance status. 'ISOLATED': Being isolated (instance is in arrears and service is suspended). 'AVAILABLE': Operating.
 	State *string `json:"State,omitempty" name:"State"`
 
-	// The instance service quality. 'PT': Platinum , 'AU': Gold, 'AG': Silver.
+	// The instance service quality. ’PT’: Platinum , 'AU': Gold, 'AG': Silver.
 	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
 
 	// The billing method. POSTPAID indicates postpaid.
@@ -894,7 +894,7 @@ type CcnBandwidthInfo struct {
 	// Note: this field may return null, indicating that no valid value was found.
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
-	// The information of bandwidth regions and bandwidth caps.
+	// The information of the bandwidth regions and bandwidth caps. The parameter is only returned for the cross-region limit mode, but not for egress limit.
 	// Note: this field may return null, indicating that no valid value was found.
 	CcnRegionBandwidthLimit *CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimit,omitempty" name:"CcnRegionBandwidthLimit"`
 }
@@ -1725,6 +1725,9 @@ type CreateNatGatewayRequest struct {
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// Subnet of the NAT gateway
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }
 
 func (r *CreateNatGatewayRequest) ToJsonString() string {
@@ -4442,11 +4445,12 @@ type DescribeHaVipsRequest struct {
 	HaVipIds []*string `json:"HaVipIds,omitempty" name:"HaVipIds" list`
 
 	// Filter condition. `HaVipIds` and `Filters` cannot be specified at the same time.
-	// <li>havip-id - String - The unique `ID` of the `HAVIP`, such as `havip-9o233uri`.</li>
-	// <li>havip-name - String - `HAVIP` name.</li>
-	// <li>vpc-id - String - The `ID` of the VPC where `HAVIP` is located.</li>
-	// <li>subnet-id - String - The `ID` of the subnet where `HAVIP` is located.</li>
-	// <li>address-ip - String - The `EIP` to which `HAVIP` is bound.</li>
+	// li>havip-id - String - The unique ID of the HAVIP, such as `havip-9o233uri`.</li>
+	// <li>havip-name - String - HAVIP name.</li>
+	// <li>vpc-id - String - VPC ID of the HAVIP.</li>
+	// <li>subnet-id - String - Subnet ID of the HAVIP.</li>
+	// <li>vip - String - Virtual IP address of the HAVIP.</li>
+	// <li>address-ip - String - Bound EIP.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Offset
@@ -4807,14 +4811,15 @@ type DescribeNetworkInterfacesRequest struct {
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
 	// <li>subnet-id - String - (Filter condition) Subnet instance ID, such as `subnet-f49l6u0z`.</li>
 	// <li>network-interface-id - String - (Filter condition) ENI instance ID, such as `eni-5k56k7k7`.</li>
-	// <li>attachment.instance-id - String - (Filter condition) CVM instance ID, such as `ins-3nqpdn3i`.</li>
-	// <li>groups.security-group-id - String - (Filter condition) Instance ID of the security group, such as `sg-f9ekbxeq`.</li>
+	// <li>attachment.instance-id - String - (Filter condition) ID of the bound CVM instance, such as `ins-3nqpdn3i`.</li>
+	// <li>groups.security-group-id - String - (Filter condition) ID of the bound security group, such as `sg-f9ekbxeq`.</li>
 	// <li>network-interface-name - String - (Filter condition) ENI instance name.</li>
 	// <li>network-interface-description - String - (Filter condition) ENI instance description.</li>
-	// <li>address-ip - String - (Filter condition) Private IPv4 address.</li>
-	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
-	// <li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
-	// <li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is 'true', filter only the primary ENI. If the value is 'false', filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
+	// <li>address-ip - String - (Filter condition) Private IPv4 address. A single IP will be fuzzily matched with the suffix, while multiple IPs will be exactly matched. It can be used with `ip-exact-match` to query and exactly match a single IP.</li>
+	// <li>ip-exact-match - Boolean - (Filter condition) Exact match by private IPv4 address. The first value will be returned if multiple values are found.</li>
+	// <li>tag-key - String - Required: no - (Filter condition) Filter by tag key. See Example 2 for the detailed usage.</li>
+	// <li>tag:tag-key - String - Required: no - (Filter condition) Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
+	// <li>is-primary - Boolean - Required: no - (Filter condition) Filter based on whether it is a primary ENI. If the value is `true`, filter only the primary ENI. If the value is `false`, filter only the secondary ENI. If this parameter is not specified, filter the both.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Offset. Default value: 0.
@@ -5794,13 +5799,13 @@ func (r *DetachNetworkInterfaceResponse) FromJsonString(s string) error {
 
 type DirectConnectGateway struct {
 
-	// The direct connect gateway ID.
+	// Direct Connect `ID`.
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
-	// The direct connect gateway name.
+	// Direct Connect gateway name.
 	DirectConnectGatewayName *string `json:"DirectConnectGatewayName,omitempty" name:"DirectConnectGatewayName"`
 
-	// The ID of the VPC instance associated with the direct connect gateway.
+	// The `ID` of the `VPC` instance associated with the Direct Connect gateway.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The associated network type:
@@ -5808,24 +5813,24 @@ type DirectConnectGateway struct {
 	// <li>`CCN` - CCN</li>
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
-	// The ID of the associated network instance:
-	// <li>When the `NetworkType` is `VPC`, this value is the VPC instance ID</li>
-	// <li>When the `NetworkType` is `CCN`, this value is the CCN instance ID</li>
+	// The `ID` of the associated network instance:
+	// <li>When the NetworkType is `VPC`, this value is the VPC instance `ID`</li>
+	// <li>When the NetworkType is `CCN`, this value is the CCN instance `ID`</li>
 	NetworkInstanceId *string `json:"NetworkInstanceId,omitempty" name:"NetworkInstanceId"`
 
-	// The gateway type:
+	// Gateway type:
 	// <li>NORMAL - Standard type. Note: CCN only supports the standard type</li>
-	// <li>NAT type</li>
-	// The NAT type supports network address translation. The specified type cannot be modified. A VPC can create one NAT direct connect gateway and one non-NAT direct connect gateway
+	// <li>NAT - NAT type</li>
+	// NAT type supports network address switch configuration. After the type is confirmed, it cannot be modified. A VPC can create one NAT-type Direct Connect gateway and one non-NAT-type Direct Connect gateway
 	GatewayType *string `json:"GatewayType,omitempty" name:"GatewayType"`
 
-	// The creation time.
+	// Creation Time.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// The direct connect gateway IP.
+	// Direct Connect gateway IP.
 	DirectConnectGatewayIp *string `json:"DirectConnectGatewayIp,omitempty" name:"DirectConnectGatewayIp"`
 
-	// The ID of the CCN instance associated with the direct connect gateway.
+	// The `ID` of the `CCN` instance associated with the Direct Connect gateway.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// The route-learning type of the CCN:
@@ -5833,11 +5838,15 @@ type DirectConnectGateway struct {
 	// <li>`STATIC` - Static, that is, user-configured.</li>
 	CcnRouteType *string `json:"CcnRouteType,omitempty" name:"CcnRouteType"`
 
-	// Whether the BGP is enabled.
+	// Whether BGP is enabled.
 	EnableBGP *bool `json:"EnableBGP,omitempty" name:"EnableBGP"`
 
-	// Whether the `community` attribute of the BGP is enabled.
+	// 
 	EnableBGPCommunity *bool `json:"EnableBGPCommunity,omitempty" name:"EnableBGPCommunity"`
+
+	// ID of the NAT gateway bound.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 }
 
 type DirectConnectGatewayCcnRoute struct {
@@ -5932,7 +5941,7 @@ type DisassociateAddressRequest struct {
 	// The unique ID of the EIP, such as `eip-11112222`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
-	// Whether a common public IP is assigned after the EIP is unbound. Value range:<br><li>TRUE: Indicates that after the EIP is unbound, a common public IP is assigned.<br><li>FALSE: Indicates that after the EIP is unbound, a common public IP is not assigned.<br>Default value: FALSE.<br><br>The parameter can be specified only under the following conditions:<br><li>It can only be specified when you unbind an EIP from the primary private IP of the primary ENI.<br><li>After an EIP is unbound, you can assign public IPs to an account up to 10 times per day. For more information, use the [DescribeAddressQuota] (https://cloud.tencent.com/document/api/213/1378) API.
+	// Whether a common public IP is assigned after the EIP is unbound. Value range:<br><li>TRUE: Indicates that after the EIP is unbound, a common public IP is assigned.<br><li>FALSE: Indicates that after the EIP is unbound, a common public IP is not assigned.<br>Default value: FALSE.<br><br>The parameter can be specified only under the following conditions:<br><li>It can only be specified when you unbind an EIP from the primary private IP of the primary ENI.<br><li>After an EIP is unbound, you can assign public IPs to an account up to 10 times per day. For more information, use the [DescribeAddressQuota] (https://intl.cloud.tencent.com/document/api/213/1378?from_cn_redirect=1) API.
 	ReallocateNormalPublicIp *bool `json:"ReallocateNormalPublicIp,omitempty" name:"ReallocateNormalPublicIp"`
 }
 
@@ -5949,7 +5958,7 @@ type DisassociateAddressResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The async task ID. You can use the [DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271) API to query the task status.
+		// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
 		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6968,7 +6977,7 @@ type ModifyAddressesBandwidthResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The async task ID. You can use the [DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271) API to query the task status.
+		// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
 		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8098,7 +8107,7 @@ type NatGateway struct {
 
 	// The status of the NAT gateway.
 	//  'PENDING': Creating, 'DELETING': Deleting, 'AVAILABLE': Operating, 'UPDATING': Upgrading,
-	// 'FAILED': Failed.
+	// ‘FAILED’: Failed.
 	State *string `json:"State,omitempty" name:"State"`
 
 	// The maximum outbound bandwidth of the gateway. Unit: Mbps.
@@ -8496,7 +8505,7 @@ type ReleaseAddressesResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The async task ID. You can use the [DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271) API to query the task status.
+		// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
 		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -9091,7 +9100,7 @@ type Route struct {
 	// Important note: When the GatewayType is EIP, the GatewayId has a fixed value `0`
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
-	// The ID of the routing policy.
+	// Routing policy ID. The IPv4 routing policy will have a meaningful value, while the IPv6 routing policy is always 0. We recommend using the unique ID `RouteItemId` for the routing policy.
 	RouteId *uint64 `json:"RouteId,omitempty" name:"RouteId"`
 
 	// The description of the routing policy.
@@ -9131,7 +9140,7 @@ type RouteTable struct {
 	// The association relationships of the route table.
 	AssociationSet []*RouteTableAssociation `json:"AssociationSet,omitempty" name:"AssociationSet" list`
 
-	// Route table policy set.
+	// IPv4 routing policy set.
 	RouteSet []*Route `json:"RouteSet,omitempty" name:"RouteSet" list`
 
 	// Whether it is the default route table.
@@ -9417,7 +9426,7 @@ type Tag struct {
 type TransformAddressRequest struct {
 	*tchttp.BaseRequest
 
-	// The ID of the instance with a common public IP to be operated on, such as `ins-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://cloud.tencent.com/document/api/213/9389) API.
+	// The ID of the instance with a common public IP to be operated on, such as `ins-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/9389?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 

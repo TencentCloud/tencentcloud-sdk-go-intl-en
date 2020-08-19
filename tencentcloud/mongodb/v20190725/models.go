@@ -112,6 +112,49 @@ type ClientConnection struct {
 	Count *uint64 `json:"Count,omitempty" name:"Count"`
 }
 
+type CreateBackupDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Valid values: 0 (logical backup), 1 (physical backup)
+	BackupMethod *int64 `json:"BackupMethod,omitempty" name:"BackupMethod"`
+
+	// Backup remarks
+	BackupRemark *string `json:"BackupRemark,omitempty" name:"BackupRemark"`
+}
+
+func (r *CreateBackupDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateBackupDBInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateBackupDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The status of the queried backup process.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateBackupDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateBackupDBInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateDBInstanceHourRequest struct {
 	*tchttp.BaseRequest
 
@@ -317,6 +360,43 @@ type DBInstancePrice struct {
 
 	// Discounted price.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+}
+
+type DescribeAsyncRequestInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Async request ID
+	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+}
+
+func (r *DescribeAsyncRequestInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAsyncRequestInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAsyncRequestInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Status.
+		Status *string `json:"Status,omitempty" name:"Status"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAsyncRequestInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAsyncRequestInfoResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeBackupAccessRequest struct {
@@ -1223,6 +1303,49 @@ func (r *RenewDBInstancesResponse) ToJsonString() string {
 }
 
 func (r *RenewDBInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ResetDBInstancePasswordRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance account name
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// New password
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
+func (r *ResetDBInstancePasswordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ResetDBInstancePasswordRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ResetDBInstancePasswordResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async request ID, which is used to query the running status of the process.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ResetDBInstancePasswordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ResetDBInstancePasswordResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
