@@ -181,8 +181,17 @@ type ClusterAdvancedSettings struct {
 	// 
 	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
 
-	// Cluster network proxy model
+	// 
 	KubeProxyMode *string `json:"KubeProxyMode,omitempty" name:"KubeProxyMode"`
+
+	// Indicates whether to enable auditing
+	AuditEnabled *bool `json:"AuditEnabled,omitempty" name:"AuditEnabled"`
+
+	// Specifies the ID of logset to which the audit logs are uploaded.
+	AuditLogsetId *string `json:"AuditLogsetId,omitempty" name:"AuditLogsetId"`
+
+	// Specifies the ID of topic to which the audit logs are uploaded.
+	AuditLogTopicId *string `json:"AuditLogTopicId,omitempty" name:"AuditLogTopicId"`
 }
 
 type ClusterAsGroup struct {
@@ -328,8 +337,8 @@ type ClusterCIDRSettings struct {
 
 type ClusterExtraArgs struct {
 
-	// kube-apiserver custom parameter
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// kube-apiserver custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	KubeAPIServer []*string `json:"KubeAPIServer,omitempty" name:"KubeAPIServer" list`
 
 	// kube-controller-manager custom parameter
@@ -371,10 +380,10 @@ type CreateClusterAsGroupRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// The pass-through parameters for scaling group creation, in the format of a JSON string. For more information, see the [CreateAutoScalingGroup](https://cloud.tencent.com/document/api/377/20440) API. The **LaunchConfigurationId** is created with the LaunchConfigurePara parameter, which does not support data entry.
+	// The pass-through parameters for scaling group creation, in the format of a JSON string. For more information, see the [CreateAutoScalingGroup](https://intl.cloud.tencent.com/document/api/377/20440?from_cn_redirect=1) API. The **LaunchConfigurationId** is created with the LaunchConfigurePara parameter, which does not support data entry.
 	AutoScalingGroupPara *string `json:"AutoScalingGroupPara,omitempty" name:"AutoScalingGroupPara"`
 
-	// The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://cloud.tencent.com/document/api/377/20447) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it's set through the **UserScript**.
+	// The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://intl.cloud.tencent.com/document/api/377/20447?from_cn_redirect=1) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it's set through the **UserScript**.
 	LaunchConfigurePara *string `json:"LaunchConfigurePara,omitempty" name:"LaunchConfigurePara"`
 
 	// Advanced configuration information of the node
@@ -503,7 +512,7 @@ type CreateClusterInstancesRequest struct {
 	// Cluster ID. Enter the ClusterId field returned by the DescribeClusters API
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the [RunInstances](https://cloud.tencent.com/document/product/213/15730) API.
+	// Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the [RunInstances](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API.
 	RunInstancePara *string `json:"RunInstancePara,omitempty" name:"RunInstancePara"`
 
 	// Additional parameter to be set for the instance
@@ -549,7 +558,7 @@ type CreateClusterRequest struct {
 	// Cluster type. Managed cluster: MANAGED_CLUSTER; self-deployed cluster: INDEPENDENT_CLUSTER.
 	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
 
-	// Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://cloud.tencent.com/document/product/213/15730).
+	// Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1).
 	RunInstancesForNode []*RunInstancesForNode `json:"RunInstancesForNode,omitempty" name:"RunInstancesForNode" list`
 
 	// Basic configuration information of the cluster
@@ -667,7 +676,7 @@ type DataDisk struct {
 type DeleteClusterAsGroupsRequest struct {
 	*tchttp.BaseRequest
 
-	// The cluster ID, obtained through the [DescribeClusters](https://cloud.tencent.com/document/api/457/31862) API.
+	// The cluster ID, obtained through the [DescribeClusters](https://intl.cloud.tencent.com/document/api/457/31862?from_cn_redirect=1) API.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// Cluster scaling group ID list
@@ -988,10 +997,10 @@ type DescribeClusterAsGroupsRequest struct {
 	// Scaling group ID list. If this value is null, it indicates that all cluster-associated scaling groups are pulled.
 	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds" list`
 
-	// Offset. This value defaults to 0. For more information on Offset, see the relevant sections in API [Overview](https://cloud.tencent.com/document/api/213/15688).
+	// Offset. This value defaults to 0. For more information on Offset, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of returned results. This value defaults to 20. The maximum is 100. For more information on Limit, see the relevant sections in API [Overview](https://cloud.tencent.com/document/api/213/15688).
+	// Number of returned results. This value defaults to 20. The maximum is 100. For more information on Limit, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -1202,6 +1211,9 @@ type DescribeClusterRoutesRequest struct {
 
 	// Route table name.
 	RouteTableName *string `json:"RouteTableName,omitempty" name:"RouteTableName"`
+
+	// Filtering conditions, which are optional. Currently, only filtering by GatewayIP is supported.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
 func (r *DescribeClusterRoutesRequest) ToJsonString() string {
@@ -1360,7 +1372,7 @@ type DescribeExistedInstancesRequest struct {
 	// Query by one or more instance ID(s). Instance ID format: ins-xxxxxxxx. (Refer to section ID.N of the API overview for this parameter's specific format.) Up to 100 instances are allowed for each request. You cannot specify InstanceIds and Filters at the same time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
-	// Filter condition. For fields and other information, see [the DescribeInstances API](https://cloud.tencent.com/document/api/213/15728). If a ClusterId has been set, then the cluster's VPC ID will be attached as a query field. In this situation, if a "vpc-id" is specified in Filter, then the specified VPC ID must be consistent with the cluster's VPC ID.
+	// Filter condition. For fields and other information, see [the DescribeInstances API](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). If a ClusterId has been set, then the cluster's VPC ID will be attached as a query field. In this situation, if a "vpc-id" is specified in Filter, then the specified VPC ID must be consistent with the cluster's VPC ID.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Filter by instance IP (Supports both private and public IPs)
@@ -1369,10 +1381,10 @@ type DescribeExistedInstancesRequest struct {
 	// Filter by instance name
 	VagueInstanceName *string `json:"VagueInstanceName,omitempty" name:"VagueInstanceName"`
 
-	// Offset. Default value: 0. For more information on Offset, see the relevant section in the API [Introduction](https://cloud.tencent.com/document/api/213/15688).
+	// Offset. Default value: 0. For more information on Offset, see the relevant section in the API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100. For more information on Limit, see the relevant section in the API [Introduction](https://cloud.tencent.com/document/api/213/15688).
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on Limit, see the relevant section in the API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -1742,8 +1754,8 @@ type InstanceDataDiskMountSetting struct {
 
 type InstanceExtraArgs struct {
 
-	// Kubelet custom parameter
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Kubelet custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Kubelet []*string `json:"Kubelet,omitempty" name:"Kubelet" list`
 }
 
@@ -1762,7 +1774,7 @@ type LoginSettings struct {
 	// Note: this field may return null, indicating that no valid value is obtained.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://cloud.tencent.com/document/api/213/15699) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
+	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
 	// Note: this field may return null, indicating that no valid value is obtained.
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 
@@ -1983,7 +1995,7 @@ type RunInstancesForNode struct {
 	// Node role. Values: MASTER_ETCD, WORKER. You only need to specify MASTER_ETCD when creating a self-deployed cluster (INDEPENDENT_CLUSTER).
 	NodeRole *string `json:"NodeRole,omitempty" name:"NodeRole"`
 
-	// Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://cloud.tencent.com/document/product/213/15730). Pass any parameter other than common parameters. ImageId will be replaced with the image corresponding to the TKE cluster operating system.
+	// Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1). Pass any parameter other than common parameters. ImageId will be replaced with the image corresponding to the TKE cluster operating system.
 	RunInstancesPara []*string `json:"RunInstancesPara,omitempty" name:"RunInstancesPara" list`
 
 	// An advanced node setting. This parameter overrides the InstanceAdvancedSettings item set at the cluster level and corresponds to RunInstancesPara in a one-to-one sequential manner (currently valid for the ExtraArgs node custom parameter only).
@@ -1992,13 +2004,13 @@ type RunInstancesForNode struct {
 
 type RunMonitorServiceEnabled struct {
 
-	// Whether to enable [Cloud Monitor](/document/product/248). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
+	// Whether to enable [Cloud Monitor](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
 	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
 }
 
 type RunSecurityServiceEnabled struct {
 
-	// Whether to enable [Cloud Security](/document/product/296). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
+	// Whether to enable [Cloud Security](https://intl.cloud.tencent.com/document/product/296?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
 	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
 }
 

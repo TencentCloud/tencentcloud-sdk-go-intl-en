@@ -131,6 +131,9 @@ type CreateDBInstancesRequest struct {
 
 	// Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no)
 	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitempty" name:"NeedSupportIpv6"`
+
+	// The information of tags to be associated with instances. This parameter is left empty by default.
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList" list`
 }
 
 func (r *CreateDBInstancesRequest) ToJsonString() string {
@@ -219,7 +222,7 @@ type DBInstance struct {
 	// VPC ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// SubnetId
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// Instance ID
@@ -228,7 +231,7 @@ type DBInstance struct {
 	// Instance name
 	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
 
-	// Instance status. Valid values: applying, init (to be initialized), initing (initializing), running, limited run, isolated, recycling, recycled, job running, offline, migrating, expanding, readonly, restarting
+	// Instance status
 	DBInstanceStatus *string `json:"DBInstanceStatus,omitempty" name:"DBInstanceStatus"`
 
 	// Assigned instance memory size in GB
@@ -243,10 +246,10 @@ type DBInstance struct {
 	// Purchasable specification ID
 	DBInstanceClass *string `json:"DBInstanceClass,omitempty" name:"DBInstanceClass"`
 
-	// Instance type. 1: primary (primary instance), 2: readonly (read-only instance), 3: guard (disaster recovery instance), 4: temp (temp instance)
+	// Instance type. 1: primary (master instance), 2: readonly (read-only instance), 3: guard (disaster recovery instance), 4: temp (temp instance)
 	DBInstanceType *string `json:"DBInstanceType,omitempty" name:"DBInstanceType"`
 
-	// Instance edition. Currently, only `standard` edition (dual-server high-availability one-primary-one-secondary edition) is supported
+	// Instance edition. Currently, only `standard` edition (dual-server high-availability one-master-one-slave edition) is supported
 	DBInstanceVersion *string `json:"DBInstanceVersion,omitempty" name:"DBInstanceVersion"`
 
 	// Instance database character set
@@ -285,8 +288,12 @@ type DBInstance struct {
 	// 
 	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
 
-	// Whether the instance supports IPv6 address access. Valid values: 1 (yes), 0 (no)
+	// 
 	SupportIpv6 *uint64 `json:"SupportIpv6,omitempty" name:"SupportIpv6"`
+
+	// The information of tags associated with instances.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList" list`
 }
 
 type DBInstanceNetInfo struct {
@@ -294,13 +301,13 @@ type DBInstanceNetInfo struct {
 	// DNS domain name
 	Address *string `json:"Address,omitempty" name:"Address"`
 
-	// IP address
+	// Ip
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
 	// Connection port address
 	Port *uint64 `json:"Port,omitempty" name:"Port"`
 
-	// Network type. Valid values: inner (private address of classic network), private (private address of VPC), public (public address of classic network/VPC)
+	// Network type. 1: inner (private network address), 2: public (public network address)
 	NetType *string `json:"NetType,omitempty" name:"NetType"`
 
 	// Network connection status
@@ -512,7 +519,7 @@ func (r *DescribeDBInstanceAttributeResponse) FromJsonString(s string) error {
 type DescribeDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// Filter. Valid values: db-instance-id, db-instance-name
+	// Filter condition. Valid values: db-instance-id, db-instance-name, db-project-id, db-pay-mode, db-tag-key.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Number of entries returned per page. Default value: 10.
@@ -1575,6 +1582,15 @@ type SpecItemInfo struct {
 
 	// Machine type
 	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type Tag struct {
+
+	// Tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type UpgradeDBInstanceRequest struct {

@@ -243,6 +243,31 @@ func (c *Client) DescribeAvailableZoneInfo(request *DescribeAvailableZoneInfoReq
     return
 }
 
+func NewDescribeCfsFileSystemClientsRequest() (request *DescribeCfsFileSystemClientsRequest) {
+    request = &DescribeCfsFileSystemClientsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cfs", APIVersion, "DescribeCfsFileSystemClients")
+    return
+}
+
+func NewDescribeCfsFileSystemClientsResponse() (response *DescribeCfsFileSystemClientsResponse) {
+    response = &DescribeCfsFileSystemClientsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query clients on which this file system is mounted. To do so, the client needs to have the CFS monitoring plugin installed.
+func (c *Client) DescribeCfsFileSystemClients(request *DescribeCfsFileSystemClientsRequest) (response *DescribeCfsFileSystemClientsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCfsFileSystemClientsRequest()
+    }
+    response = NewDescribeCfsFileSystemClientsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCfsFileSystemsRequest() (request *DescribeCfsFileSystemsRequest) {
     request = &DescribeCfsFileSystemsRequest{
         BaseRequest: &tchttp.BaseRequest{},

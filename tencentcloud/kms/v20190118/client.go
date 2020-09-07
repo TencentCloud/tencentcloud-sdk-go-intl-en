@@ -43,6 +43,31 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewArchiveKeyRequest() (request *ArchiveKeyRequest) {
+    request = &ArchiveKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "ArchiveKey")
+    return
+}
+
+func NewArchiveKeyResponse() (response *ArchiveKeyResponse) {
+    response = &ArchiveKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to archive keys. The archived keys can only be used for decryption but not encryption.
+func (c *Client) ArchiveKey(request *ArchiveKeyRequest) (response *ArchiveKeyResponse, err error) {
+    if request == nil {
+        request = NewArchiveKeyRequest()
+    }
+    response = NewArchiveKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAsymmetricRsaDecryptRequest() (request *AsymmetricRsaDecryptRequest) {
     request = &AsymmetricRsaDecryptRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -114,6 +139,31 @@ func (c *Client) BindCloudResource(request *BindCloudResourceRequest) (response 
         request = NewBindCloudResourceRequest()
     }
     response = NewBindCloudResourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCancelKeyArchiveRequest() (request *CancelKeyArchiveRequest) {
+    request = &CancelKeyArchiveRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "CancelKeyArchive")
+    return
+}
+
+func NewCancelKeyArchiveResponse() (response *CancelKeyArchiveResponse) {
+    response = &CancelKeyArchiveResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to unarchive keys. If a key is unarchived, its status will be `Enabled`.
+func (c *Client) CancelKeyArchive(request *CancelKeyArchiveRequest) (response *CancelKeyArchiveResponse, err error) {
+    if request == nil {
+        request = NewCancelKeyArchiveRequest()
+    }
+    response = NewCancelKeyArchiveResponse()
     err = c.Send(request, response)
     return
 }
@@ -864,6 +914,31 @@ func (c *Client) GetPublicKey(request *GetPublicKeyRequest) (response *GetPublic
         request = NewGetPublicKeyRequest()
     }
     response = NewGetPublicKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetRegionsRequest() (request *GetRegionsRequest) {
+    request = &GetRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("kms", APIVersion, "GetRegions")
+    return
+}
+
+func NewGetRegionsResponse() (response *GetRegionsResponse) {
+    response = &GetRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the list of supported regions.
+func (c *Client) GetRegions(request *GetRegionsRequest) (response *GetRegionsResponse, err error) {
+    if request == nil {
+        request = NewGetRegionsRequest()
+    }
+    response = NewGetRegionsResponse()
     err = c.Send(request, response)
     return
 }

@@ -771,7 +771,7 @@ func NewDescribeClsLogSetResponse() (response *DescribeClsLogSetResponse) {
     return
 }
 
-// This API is used to obtain the CLB exclusive logset of a user.
+// This API is used to get the CLB dedicated logset.
 func (c *Client) DescribeClsLogSet(request *DescribeClsLogSetRequest) (response *DescribeClsLogSetResponse, err error) {
     if request == nil {
         request = NewDescribeClsLogSetRequest()
@@ -852,6 +852,56 @@ func (c *Client) DescribeLoadBalancers(request *DescribeLoadBalancersRequest) (r
         request = NewDescribeLoadBalancersRequest()
     }
     response = NewDescribeLoadBalancersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLoadBalancersDetailRequest() (request *DescribeLoadBalancersDetailRequest) {
+    request = &DescribeLoadBalancersDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "DescribeLoadBalancersDetail")
+    return
+}
+
+func NewDescribeLoadBalancersDetailResponse() (response *DescribeLoadBalancersDetailResponse) {
+    response = &DescribeLoadBalancersDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query CLB instance details, including listener, rules, and target real servers.
+func (c *Client) DescribeLoadBalancersDetail(request *DescribeLoadBalancersDetailRequest) (response *DescribeLoadBalancersDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeLoadBalancersDetailRequest()
+    }
+    response = NewDescribeLoadBalancersDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeQuotaRequest() (request *DescribeQuotaRequest) {
+    request = &DescribeQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "DescribeQuota")
+    return
+}
+
+func NewDescribeQuotaResponse() (response *DescribeQuotaResponse) {
+    response = &DescribeQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query various quotas in the current region.
+func (c *Client) DescribeQuota(request *DescribeQuotaRequest) (response *DescribeQuotaResponse, err error) {
+    if request == nil {
+        request = NewDescribeQuotaRequest()
+    }
+    response = NewDescribeQuotaResponse()
     err = c.Send(request, response)
     return
 }

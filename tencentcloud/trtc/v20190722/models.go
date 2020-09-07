@@ -641,6 +641,9 @@ type LayoutParams struct {
 
 	// Layout parameter of the small image, which takes effect in a picture-in-picture template.
 	SmallVideoLayoutParams *SmallVideoLayoutParams `json:"SmallVideoLayoutParams,omitempty" name:"SmallVideoLayoutParams"`
+
+	// You can set the layout parameter as 1 or 0 in the screen sharing template. 1: big image on the right and small images on the left, 0: big image on the left and small images on the right. The default value is 0. 
+	MainVideoRightAlign *uint64 `json:"MainVideoRightAlign,omitempty" name:"MainVideoRightAlign"`
 }
 
 type OutputParams struct {

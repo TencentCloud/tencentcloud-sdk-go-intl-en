@@ -435,6 +435,39 @@ func (r *PauseOnlineRecordResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type RecordControl struct {
+
+	// It specifies whether to enable RecordControl. Valid values: true (yes); false (no).
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+
+	// A global parameter generally used in conjunction with `StreamControls` that specifies whether to disable recording. Valid values:
+	// 
+	// true: no stream is recorded.
+	// false: all streams are recorded. Default value: false.
+	// 
+	// The setting in this parameter is applied to all streams. However, if `StreamControls` is passed in, the parameters in `StreamControls` will take precedence.
+	DisableRecord *bool `json:"DisableRecord,omitempty" name:"DisableRecord"`
+
+	// A global parameter generally used in conjunction with `StreamControls` that specifies whether to disable audio recording over all streams. Valid values:
+	// 
+	// true: no audio recording of any streams.
+	// false: audio recording of all streams. Default value: false.
+	// 
+	// The setting in this parameter is applied to all streams. However, if `StreamControls` is passed in, the parameters in `StreamControls` will take precedence.
+	DisableAudio *bool `json:"DisableAudio,omitempty" name:"DisableAudio"`
+
+	// A global parameter generally used in conjunction with `StreamControls` that specifies whether to record low-resolution videos only. Valid values:
+	// 
+	// true: only records low-resolution videos for all streams. Please ensure that the up-streaming end pushes the low-resolution videos. Otherwise, the recorded video may be black.
+	// false: high-resolution video recording of all streams. Default value: false.
+	// 
+	// The setting in this parameter is applied to all streams. However, if `StreamControls` is passed in, the parameters in `StreamControls` will take precedence.
+	PullSmallVideo *bool `json:"PullSmallVideo,omitempty" name:"PullSmallVideo"`
+
+	// Parameters over specific streams, which take priority over global configurations. If it’s empty, all streams are recorded according to the global configurations. 
+	StreamControls []*StreamControl `json:"StreamControls,omitempty" name:"StreamControls" list`
+}
+
 type ResumeOnlineRecordRequest struct {
 	*tchttp.BaseRequest
 
@@ -478,7 +511,7 @@ type SetOnlineRecordCallbackKeyRequest struct {
 	// SdkAppId of the application
 	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Authentication key of the real-time recording callback. It is a string of up to 64 characters. If it is specified as null, the existing callback authentication key is deleted.
+	// Authentication key for the real-time recording callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information, please [see here](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
 }
 
@@ -515,7 +548,7 @@ type SetOnlineRecordCallbackRequest struct {
 	// SdkAppId of the customer
 	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Callback address of the real-time recording task result. If it is specified as null, the set callback address is deleted. The callback address only supports the HTTP or HTTPS protocol, and therefore the callback address must start with http:// or https://.
+	// Callback address of the real-time recording task result. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
 }
 
@@ -552,7 +585,7 @@ type SetTranscodeCallbackKeyRequest struct {
 	// SdkAppId of the application
 	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Authentication key of the document transcoding callback. It is a string of up to 64 characters. If it is specified as null, the existing callback authentication key is deleted.
+	// Authentication key for the document transcoding callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information about callback authentication, please [see here](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
 }
 
@@ -589,7 +622,8 @@ type SetTranscodeCallbackRequest struct {
 	// SdkAppId of the customer
 	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Callback address for the document transcoding progress. If it is specified as null, the set callback address is deleted. The callback address only supports the HTTP or HTTPS protocol, and therefore the callback address must start with http:// or https://.
+	// Callback address for the document transcoding progress. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`.
+	// For more information about the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
 }
 
@@ -636,7 +670,7 @@ type StartOnlineRecordRequest struct {
 	// Signature corresponding to RecordUserId
 	RecordUserSig *string `json:"RecordUserSig,omitempty" name:"RecordUserSig"`
 
-	// IM group ID of the whiteboard. By default, it is the same as the room ID.
+	// (Disused) IM group ID of the whiteboard. By default, it is the same as the room ID.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
 	// Real-time recording video splicing parameter
@@ -658,6 +692,9 @@ type StartOnlineRecordRequest struct {
 
 	// Whether to return the audio-only recording file of different streams in the result callback. The file format is mp3.
 	AudioFileNeeded *bool `json:"AudioFileNeeded,omitempty" name:"AudioFileNeeded"`
+
+	// A group of real-time recording parameters. It specifies the streams to be recorded, whether to disable the audio recording, and whether to record only low-resolution videos, etc.
+	RecordControl *RecordControl `json:"RecordControl,omitempty" name:"RecordControl"`
 }
 
 func (r *StartOnlineRecordRequest) ToJsonString() string {
@@ -727,21 +764,58 @@ func (r *StopOnlineRecordResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type StreamLayout struct {
-
-	// Stream layout configuration
-	LayoutParams *LayoutParams `json:"LayoutParams,omitempty" name:"LayoutParams"`
+type StreamControl struct {
 
 	// Video stream ID
-	// Description of possible stream ID values:
-	// 1. tic_record_user: the current picture is used to display the whiteboard video stream.
-	// 2. tic_substream: the current picture is used to display the auxiliary video stream.
-	// 3. Specific user ID: the current picture is used to display the video stream of a specific user.
-	// 4. Left empty: the current picture is vacant for new video stream.
+	// Description of the possible video stream ID values:
+	// 1. `tic_record_user`: the whiteboard video stream
+	// 2. `tic_substream`: the auxiliary video stream
+	// 3. Specific user ID: the video stream of the specified user
+	// 
+	// The actual recording uses the prefix match of the video stream ID. The real stream becomes the specified stream once its ID prefix matches with the stream ID.
+	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
+
+	// Whether to disable recording over the stream.
+	// 
+	// true: does not record this stream. This stream will not be included in the final recording file.
+	// false: records this stream. This stream will be included in the final recording file.
+	// 
+	// Default value: false
+	DisableRecord *bool `json:"DisableRecord,omitempty" name:"DisableRecord"`
+
+	// Whether to disable the audio recording of the stream.
+	// 
+	// true: does not record the audio of the stream. In the final recording file, this stream will be soundless.
+	// false: the stream has both video and audio recording.
+	// 
+	// Default value: false
+	DisableAudio *bool `json:"DisableAudio,omitempty" name:"DisableAudio"`
+
+	// Whether to only record low-resolution stream videos.
+	// 
+	// true: records only low-resolution videos. In this case, please make sure that the client pushes low-resolution videos upstream. Otherwise, the recorded video may be black. 
+	// false: records only high-resolution videos.
+	// 
+	// Default value: false
+	PullSmallVideo *bool `json:"PullSmallVideo,omitempty" name:"PullSmallVideo"`
+}
+
+type StreamLayout struct {
+
+	// 
+	LayoutParams *LayoutParams `json:"LayoutParams,omitempty" name:"LayoutParams"`
+
+	// 
 	InputStreamId *string `json:"InputStreamId,omitempty" name:"InputStreamId"`
 
-	// Background color, which is black by default. Its format is RGB, for example, "#FF0000" for the red color.
+	// 
 	BackgroundColor *string `json:"BackgroundColor,omitempty" name:"BackgroundColor"`
+
+	// Video filling mode.
+	// 
+	// 0: self-adaption mode. Scales the video proportionally to completely display it in the specified area. In this mode, there may be black bars.
+	// 1: full-screen mode. Scales the video to make it fill the entire specified area. In this mode, no black bars will appear, but the video may not be displayed fully.
+	FillMode *int64 `json:"FillMode,omitempty" name:"FillMode"`
 }
 
 type VideoInfo struct {
@@ -764,16 +838,17 @@ type VideoInfo struct {
 	// Video file ID
 	VideoId *string `json:"VideoId,omitempty" name:"VideoId"`
 
-	// Video stream type 
-	// - 0: camera video 
-	// - 1: screen-sharing video
-	// - 2: whiteboard video 
-	// - 3: mixed stream video
-	// - 4: audio-only (mp3)
+	// Video stream type - 0: camera video - 1: screen-sharing video - 2: whiteboard video - 3: mixed stream video - 4: audio-only (mp3)
 	VideoType *int64 `json:"VideoType,omitempty" name:"VideoType"`
 
 	// ID of the user to which the camera video or screen-sharing video belongs (whiteboard video: null, mixed stream video: tic_mixstream_<Room ID>_<Mixed stream layout type>, auxiliary video: tic_substream_user ID)
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Width of the video resolution.
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Height of the video resolution.
+	Height *int64 `json:"Height,omitempty" name:"Height"`
 }
 
 type Whiteboard struct {

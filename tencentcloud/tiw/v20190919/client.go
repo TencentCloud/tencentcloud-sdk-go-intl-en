@@ -233,7 +233,7 @@ func NewSetOnlineRecordCallbackResponse() (response *SetOnlineRecordCallbackResp
     return
 }
 
-// This API is used to set the real-time recording callback address.
+// This API is used to set the real-time recording callback address. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
 func (c *Client) SetOnlineRecordCallback(request *SetOnlineRecordCallbackRequest) (response *SetOnlineRecordCallbackResponse, err error) {
     if request == nil {
         request = NewSetOnlineRecordCallbackRequest()
@@ -258,7 +258,7 @@ func NewSetOnlineRecordCallbackKeyResponse() (response *SetOnlineRecordCallbackK
     return
 }
 
-// This API is used to set the authentication key for the real-time recording callback.
+// This API is used to set the callback authentication key for real-time recording. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
 func (c *Client) SetOnlineRecordCallbackKey(request *SetOnlineRecordCallbackKeyRequest) (response *SetOnlineRecordCallbackKeyResponse, err error) {
     if request == nil {
         request = NewSetOnlineRecordCallbackKeyRequest()
@@ -283,7 +283,7 @@ func NewSetTranscodeCallbackResponse() (response *SetTranscodeCallbackResponse) 
     return
 }
 
-// This API is used to set the document transcoding callback address.
+// This API is used to set the callback address for document transcoding. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
 func (c *Client) SetTranscodeCallback(request *SetTranscodeCallbackRequest) (response *SetTranscodeCallbackResponse, err error) {
     if request == nil {
         request = NewSetTranscodeCallbackRequest()
@@ -308,7 +308,7 @@ func NewSetTranscodeCallbackKeyResponse() (response *SetTranscodeCallbackKeyResp
     return
 }
 
-// This API is used to set the authentication key for the document transcoding callback.
+// This API is used to set the callback authentication key for document transcoding. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
 func (c *Client) SetTranscodeCallbackKey(request *SetTranscodeCallbackKeyRequest) (response *SetTranscodeCallbackKeyResponse, err error) {
     if request == nil {
         request = NewSetTranscodeCallbackKeyRequest()

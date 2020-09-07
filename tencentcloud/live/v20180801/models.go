@@ -38,7 +38,7 @@ type AddDelayLiveStreamRequest struct {
 	// Expiration time of the configured delayed playback in UTC format, such as 2018-11-29T19:00:00Z.
 	// Notes:
 	// 1. The configuration will expire after 7 days by default and can last up to 7 days.
-	// 2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// 2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 }
 
@@ -405,7 +405,8 @@ type CommonMixControlParams struct {
 	// 
 	UseMixCropCenter *int64 `json:"UseMixCropCenter,omitempty" name:"UseMixCropCenter"`
 
-	// 
+	// Value range: [0,1].
+	// If this parameter is set to 1, when both `InputStreamList` and `OutputParams.OutputStreamType` are set to 1, you can copy a stream instead of canceling it.
 	AllowCopy *int64 `json:"AllowCopy,omitempty" name:"AllowCopy"`
 }
 
@@ -652,28 +653,32 @@ type CreateLiveCallbackTemplateRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Stream starting callback URL,
-	// Protocol document: [Event Message Notification](/document/product/267/32744).
+	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitempty" name:"StreamBeginNotifyUrl"`
 
 	// Interruption callback URL,
-	// Protocol document: [Event Message Notification](/document/product/267/32744).
+	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitempty" name:"StreamEndNotifyUrl"`
 
 	// Recording callback URL,
-	// Protocol document: [Event Message Notification](/document/product/267/32744).
+	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitempty" name:"RecordNotifyUrl"`
 
 	// Screencapturing callback URL,
-	// Protocol document: [Event Message Notification](/document/product/267/32744).
+	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitempty" name:"SnapshotNotifyUrl"`
 
 	// Porn detection callback URL,
-	// Protocol document: [Event Message Notification](/document/product/267/32741).
+	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32741?from_cn_redirect=1).
 	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitempty" name:"PornCensorshipNotifyUrl"`
 
 	// Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
-	// [Event Message Notification](/document/product/267/32744).
+	// [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
+
+	// Stream mixing callback URL,
+	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
+	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitempty" name:"StreamMixNotifyUrl"`
 }
 
 func (r *CreateLiveCallbackTemplateRequest) ToJsonString() string {
@@ -1004,6 +1009,7 @@ type CreateLiveSnapshotTemplateRequest struct {
 	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
 
 	// COS bucket name.
+	// Note: the value of `CosBucket` cannot contain `-[appid]`.
 	CosBucket *string `json:"CosBucket,omitempty" name:"CosBucket"`
 
 	// COS region.
@@ -1015,7 +1021,7 @@ type CreateLiveSnapshotTemplateRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Screencapturing interval in seconds. Default value: 10s.
-	// Value range: 5-600s.
+	// Value range: 5-300s.
 	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
 
 	// Screenshot width. Default value: 0 (original width).
@@ -1027,10 +1033,16 @@ type CreateLiveSnapshotTemplateRequest struct {
 	// Whether to enable porn detection. 0: no, 1: yes. Default value: 0
 	PornFlag *int64 `json:"PornFlag,omitempty" name:"PornFlag"`
 
-	// COS bucket folder prefix.
+	// COS Bucket folder prefix.
+	// If no value is entered, the default value
+	// `/{Year}-{Month}-{Day}`
+	// will be used.
 	CosPrefix *string `json:"CosPrefix,omitempty" name:"CosPrefix"`
 
 	// COS filename.
+	// If no value is entered, the default value 
+	// `{StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}`
+	// will be used.
 	CosFileName *string `json:"CosFileName,omitempty" name:"CosFileName"`
 }
 
@@ -1169,7 +1181,10 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
 	AiTransCode *int64 `json:"AiTransCode,omitempty" name:"AiTransCode"`
 
-	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
+	// Bitrate compression ratio of top speed codec video.
+	// Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
+	// 
+	// Value range: 0.0-0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
 }
 
@@ -1215,7 +1230,7 @@ type CreateLiveWatermarkRuleRequest struct {
 	// Stream name.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
-	// Watermark ID, which is the `WatermarkId` returned by the [AddLiveWatermark](/document/product/267/30154) API.
+	// Watermark ID, which is the `WatermarkId` returned by the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -1396,8 +1411,8 @@ type DeleteLiveCallbackTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
-	// 1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](/document/product/267/32637) API call.
-	// 2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](/document/product/267/32632) API.
+	// 1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API call.
+	// 2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](https://intl.cloud.tencent.com/document/product/267/32632?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -1657,8 +1672,8 @@ type DeleteLiveSnapshotTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
-	// 1. Get from the returned value of the [CreateLiveSnapshotTemplate](/document/product/267/32624) API call.
-	// 2. You can query the list of created screencapturing templates through the [DescribeLiveSnapshotTemplates](/document/product/267/32619) API.
+	// 1. Get from the returned value of the [CreateLiveSnapshotTemplate](https://intl.cloud.tencent.com/document/product/267/32624?from_cn_redirect=1) API call.
+	// 2. You can query the list of created screencapturing templates through the [DescribeLiveSnapshotTemplates](https://intl.cloud.tencent.com/document/product/267/32619?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -1736,8 +1751,8 @@ type DeleteLiveTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
-	// 1. Get the template ID in the returned value of the [CreateLiveTranscodeTemplate](/document/product/267/32646) API call.
-	// 2. You can query the list of created templates through the [DescribeLiveTranscodeTemplates](/document/product/267/32641) API.
+	// 1. Get the template ID in the returned value of the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API call.
+	// 2. You can query the list of created templates through the [DescribeLiveTranscodeTemplates](https://intl.cloud.tencent.com/document/product/267/32641?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -1772,7 +1787,7 @@ type DeleteLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
 
 	// Watermark ID.
-	// Watermark ID obtained in the returned value of the [AddLiveWatermark](/document/product/267/30154) API call.
+	// Watermark ID obtained in the returned value of the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API call.
 	// Watermark ID returned by the `DescribeLiveWatermarks` API.
 	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
 }
@@ -2141,14 +2156,13 @@ func (r *DescribeGroupProIspPlayInfoListResponse) FromJsonString(s string) error
 type DescribeHttpStatusInfoListRequest struct {
 	*tchttp.BaseRequest
 
-	// Start time (Beijing time),
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
-	// `StartTime` cannot be more than 3 months ago.
+	// Start time (Beijing time).
+	// Format: yyyy-mm-dd HH:MM:SS.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time),
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
-	// Note: `EndTime` and `StartTime` only support querying data for the last day.
+	// End time (Beijing time).
+	// Format: yyyy-mm-dd HH:MM:SS.
+	// Note: data in the last 3 months can be queried and the query period is up to 1 day.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name list.
@@ -2223,8 +2237,8 @@ type DescribeLiveCallbackTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
-	// 1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](/document/product/267/32637) API call.
-	// 2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](/document/product/267/32632) API.
+	// 1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API call.
+	// 2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](https://intl.cloud.tencent.com/document/product/267/32632?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -2854,7 +2868,7 @@ type DescribeLiveSnapshotTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
-	// Template ID returned by the [CreateLiveSnapshotTemplate](/document/product/267/32624) API call.
+	// Template ID returned by the [CreateLiveSnapshotTemplate](https://intl.cloud.tencent.com/document/product/267/32624?from_cn_redirect=1) API call.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -3376,7 +3390,7 @@ type DescribeLiveTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
-	// Note: get the template ID in the returned value of the [CreateLiveTranscodeTemplate](/document/product/267/32646) API call.
+	// Note: get the template ID in the returned value of the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API call.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -3714,10 +3728,10 @@ type DescribeProIspPlaySumInfoListRequest struct {
 	// Note: `EndTime` and `StartTime` only support querying data for the last day.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Statistics type. Valid values: Province, Isp, CountryOrArea.
+	// Statistics type. Valid values: Province (district), Isp (ISP), CountryOrArea (country or region).
 	StatType *string `json:"StatType,omitempty" name:"StatType"`
 
-	// If this parameter is left empty, full data will be queried.
+	// Playback domain name list. If it is left empty, it refers to all playback domain names.
 	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
 
 	// Page number. Value range: [1,1000]. Default value: 1.
@@ -3984,9 +3998,9 @@ type DescribeStreamPlayInfoListRequest struct {
 	// If this parameter is left empty, full playback data will be queried.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
-	// Push path, which is the same as the `AppName` in the playback address, subject to exact match, and valid if `StreamName` is passed in.
-	// If this parameter is left empty, full playback data will be queried.
-	// Note: to query by `AppName`, you need to submit a ticket for application.
+	// Push address. Its value is the same as the `AppName` in playback address. It supports exact match, and takes effect only when `StreamName` is passed at the same time.
+	// If it is left empty, the full playback data will be queried.
+	// Note: to query by `AppName`, you need to submit a ticket first. After your application succeeds, it will take about 5 business days (subject to the time in the reply) for the configuration to take effect.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 }
 
@@ -4197,7 +4211,7 @@ type DescribeVisitTopSumInfoListResponse struct {
 		// Bandwidth metric. Valid values: "Domain", "StreamId".
 		TopIndex *string `json:"TopIndex,omitempty" name:"TopIndex"`
 
-		// Sorting metric. Valid values: "AvgFluxPerSecond", "TotalRequest" (default), "TotalFlux".
+		// Sorting metric. Valid values: AvgFluxPerSecond (sort by average traffic per second), TotalRequest (sort by total requests), TotalFlux (sort by total traffic). Default value: TotalRequest.
 		OrderParam *string `json:"OrderParam,omitempty" name:"OrderParam"`
 
 		// Total number of results.
@@ -4459,7 +4473,7 @@ type ForbidLiveStreamRequest struct {
 	// Time to resume the stream in UTC format, such as 2018-11-29T19:00:00Z.
 	// Notes:
 	// 1. The duration of forbidding is 7 days by default and can be up to 90 days.
-	// 2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// 2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	ResumeTime *string `json:"ResumeTime,omitempty" name:"ResumeTime"`
 
 	// Reason for forbidding.
@@ -4521,7 +4535,8 @@ type GroupProIspDataInfo struct {
 
 type HlsSpecialParam struct {
 
-	// HLS timeout period.
+	// Timeout period for restarting an interrupted HLS push.
+	// Value range: [0, 1,800].
 	FlowContinueDuration *uint64 `json:"FlowContinueDuration,omitempty" name:"FlowContinueDuration"`
 }
 
@@ -4594,7 +4609,7 @@ type ModifyLiveCallbackTemplateRequest struct {
 	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitempty" name:"PornCensorshipNotifyUrl"`
 
 	// Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
-	// [Event Message Notification](/document/product/267/32744).
+	// [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
 }
 
@@ -4923,7 +4938,7 @@ type ModifyLiveSnapshotTemplateRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Screencapturing interval in seconds. Default value: 10s.
-	// Value range: 5-600s.
+	// Value range: 5-300s.
 	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
 
 	// Screenshot width. Default value: 0 (original width).
@@ -4941,6 +4956,7 @@ type ModifyLiveSnapshotTemplateRequest struct {
 	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
 
 	// COS bucket name.
+	// Note: the value of `CosBucket` cannot contain `-[appid]`.
 	CosBucket *string `json:"CosBucket,omitempty" name:"CosBucket"`
 
 	// COS region.
@@ -5040,7 +5056,10 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Whether to not exceed the original frame rate. 0: no; 1: yes. Default value: 0.
 	FpsToOrig *int64 `json:"FpsToOrig,omitempty" name:"FpsToOrig"`
 
-	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
+	// Bitrate compression ratio of top speed codec video.
+	// Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
+	// 
+	// Value range: 0.0-0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
 }
 
@@ -5858,7 +5877,7 @@ type UpdateLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
 
 	// Watermark ID.
-	// Get the watermark ID in the returned value of the [AddLiveWatermark](/document/product/267/30154) API call.
+	// Get the watermark ID in the returned value of the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API call.
 	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
 
 	// Watermark image URL.

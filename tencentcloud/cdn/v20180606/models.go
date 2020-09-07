@@ -694,7 +694,7 @@ type CompressionRule struct {
 
 	// File compression algorithm
 	// gzip: specifies Gzip compression
-	// brotli: this can be enabled when the Gzip compression is specified
+	// brotli: specifies Brotli compression
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Algorithms []*string `json:"Algorithms,omitempty" name:"Algorithms" list`
 }
@@ -868,7 +868,7 @@ type DescribeBillingDataRequest struct {
 	Area *string `json:"Area,omitempty" name:"Area"`
 
 	// Country/region to be queried if `Area` is `overseas`
-	// For district or country/region codes, please see [District Code Mappings](https://cloud.tencent.com/document/product/228/6316#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
+	// For district or country/region codes, please see [District Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
 	// If this parameter is left empty, all countries/regions will be queried
 	District *int64 `json:"District,omitempty" name:"District"`
 
@@ -962,13 +962,13 @@ type DescribeCdnDataRequest struct {
 	Detail *bool `json:"Detail,omitempty" name:"Detail"`
 
 	// Specifies an ISP when you query the CDN data within Mainland China. If this is left blank, all ISPs will be queried.
-	// To view ISP codes, see [ISP Code Mappings](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
+	// To view ISP codes, see [ISP Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
 	// If you have specified an ISP, you cannot specify a province or an IP protocol for the same query.
 	Isp *int64 `json:"Isp,omitempty" name:"Isp"`
 
 	// Specifies a province when you query the CDN data within Mainland China. If this is left blank, all provinces will be queried.
 	// Specifies a country/region when you query the CDN data outside Mainland China. If this is left blank, all countries/regions will be queried.
-	// To view codes of provinces or countries/regions, see [Province Code Mappings](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
+	// To view codes of provinces or countries/regions, see [Province Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
 	// If you have specified a province for your query on CDN data within mainland China, you cannot specify an ISP or an IP protocol for the same query.
 	District *int64 `json:"District,omitempty" name:"District"`
 
@@ -1182,7 +1182,7 @@ func (r *DescribeCertDomainsResponse) FromJsonString(s string) error {
 type DescribeDomainsConfigRequest struct {
 	*tchttp.BaseRequest
 
-	// Offset for paginated queries. Default value: 0 (the first page).
+	// Offset for paginated queries. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
@@ -1943,7 +1943,7 @@ type DetailDomain struct {
 	// Origin server configuration
 	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
 
-	// IP blocklist/allowlist configuration
+	// IP blacklist/whitelist configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
@@ -2087,9 +2087,22 @@ type DetailDomain struct {
 	// 
 	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
 
-	// Access control
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 
 	AccessControl *AccessControl `json:"AccessControl,omitempty" name:"AccessControl"`
+
+	// Whether to support advanced configuration items
+	// on: supported
+	// off: not supported
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Advance *string `json:"Advance,omitempty" name:"Advance"`
+
+	// URL redirect configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UrlRedirect *UrlRedirect `json:"UrlRedirect,omitempty" name:"UrlRedirect"`
+
+	// Access port configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AccessPort []*int64 `json:"AccessPort,omitempty" name:"AccessPort" list`
 }
 
 type DisableCachesRequest struct {
@@ -3046,7 +3059,7 @@ type Origin struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Origins []*string `json:"Origins,omitempty" name:"Origins" list`
 
-	// Primary origin server type
+	// Master origin server type
 	// The following types are supported for input parameters:
 	// domain: domain name type
 	// cos: COS origin
@@ -3057,11 +3070,11 @@ type Origin struct {
 	// image: Cloud Infinite origin
 	// ftp: legacy FTP origin, which is no longer maintained.
 	// When modifying `Origins`, you need to enter the corresponding OriginType.
-	// The IPv6 feature is not generally available yet. Please send in a allowlist application to use this feature.
+	// The IPv6 feature is not generally available yet. Please send in a whitelist application to use this feature.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-	// Host header used when accessing the primary origin server. If left empty, the acceleration domain name will be used by default.
+	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
 	// If a wildcard domain name is accessed, then the sub-domain name during the access will be used by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServerName *string `json:"ServerName,omitempty" name:"ServerName"`
@@ -3090,13 +3103,9 @@ type Origin struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupOriginType *string `json:"BackupOriginType,omitempty" name:"BackupOriginType"`
 
-	// Host header used when accessing the backup origin server. If left empty, the ServerName of primary origin server will be used by default.
+	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupServerName *string `json:"BackupServerName,omitempty" name:"BackupServerName"`
-
-	// Origin-pull path
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	BasePath *string `json:"BasePath,omitempty" name:"BasePath"`
 }
 
 type OriginPullOptimization struct {
@@ -3384,6 +3393,9 @@ type PushUrlsCacheRequest struct {
 	// `global`: prefetches resources to global nodes
 	// Default value: `mainland`. You can prefetch a URL to nodes in a region provided that CDN service has been enabled for the domain name in the URL in the region.
 	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// If this parameter is `middle` or left empty, prefetch will be performed onto the intermediate node
+	Layer *string `json:"Layer,omitempty" name:"Layer"`
 }
 
 func (r *PushUrlsCacheRequest) ToJsonString() string {
@@ -3640,7 +3652,7 @@ type SearchClsLogRequest struct {
 	// Connection channel. Default value: cdn
 	Channel *string `json:"Channel,omitempty" name:"Channel"`
 
-	// Content to be queried. For more information, please visit https://cloud.tencent.com/document/product/614/16982
+	// Content to be queried. For more information, please visit https://intl.cloud.tencent.com/document/product/614/16982?from_cn_redirect=1
 	Query *string `json:"Query,omitempty" name:"Query"`
 
 	// This field is used when loading more results. Pass through the last `context` value returned to get more log content. Up to 10,000 logs can be obtained through the cursor. Please narrow down the time range as much as possible.
@@ -4080,6 +4092,15 @@ type UpdateDomainConfigRequest struct {
 
 	// UA blocklist/allowlist Configuration
 	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
+
+	// Access control
+	AccessControl *AccessControl `json:"AccessControl,omitempty" name:"AccessControl"`
+
+	// URL redirect configuration
+	UrlRedirect *UrlRedirect `json:"UrlRedirect,omitempty" name:"UrlRedirect"`
+
+	// Access port configuration
+	AccessPort []*int64 `json:"AccessPort,omitempty" name:"AccessPort" list`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {
@@ -4163,6 +4184,30 @@ type UrlRecord struct {
 	// Update time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type UrlRedirect struct {
+
+	// URL redirect configuration switch
+	// on: enabled
+	// off: disabled
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// URL redirect rule, which is required if `Switch` is `on`. There can be up to 10 rules.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PathRules []*UrlRedirectRule `json:"PathRules,omitempty" name:"PathRules" list`
+}
+
+type UrlRedirectRule struct {
+
+	// Redirect status code. Valid values: 301, 302
+	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitempty" name:"RedirectStatusCode"`
+
+	// Pattern of the URL to be matched, which can contain up to 1,024 characters. Full-path match and regex match are supported.
+	Pattern *string `json:"Pattern,omitempty" name:"Pattern"`
+
+	// Target URL, which must begin with `/` and can contain up to 1,024 characters.
+	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
 }
 
 type UserAgentFilter struct {

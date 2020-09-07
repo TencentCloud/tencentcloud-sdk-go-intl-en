@@ -582,6 +582,9 @@ type CreateListenerRequest struct {
 
 	// Target real server type. `NODE`: binding a general node; `TARGETGROUP`: binding a target group.
 	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
+
+	// Session persistence type. Valid values: Normal: the default session persistence type; QUIC_CID: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+	SessionType *string `json:"SessionType,omitempty" name:"SessionType"`
 }
 
 func (r *CreateListenerRequest) ToJsonString() string {
@@ -658,6 +661,9 @@ type CreateLoadBalancerRequest struct {
 
 	// Tags a CLB instance when purchasing it
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
+
+	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 }
 
 func (r *CreateLoadBalancerRequest) ToJsonString() string {
@@ -1623,6 +1629,69 @@ func (r *DescribeLoadBalancerListByCertIdResponse) FromJsonString(s string) erro
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeLoadBalancersDetailRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of CLB instance lists returned. Default value: 20; maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Starting offset of the CLB instance list returned. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// List of fields to be returned. The `LoadBalancerId` and `LoadBalancerName` are returned by default.
+	Fields []*string `json:"Fields,omitempty" name:"Fields" list`
+
+	// Target type. Valid values: NODE and GROUP. If the list of fields contains `TargetId`, `TargetAddress`, `TargetPort`, `TargetWeight` and other fields, `Target` of the target group or non-target group must be exported.
+	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
+
+	// Filter condition of querying lists describing CLB instance details:
+	// <li> loadbalancer-id - String - Required: no - (Filter condition) CLB instance ID, such as "lb-12345678". </li>
+	// <li> project-id - String - Required: no - (Filter condition) Project ID, such as "0" and "123".</li>
+	// <li> network - String - Required: no - (Filter condition) Network type of the CLB instance, such as "Public" and "Private".</li>
+	// <li> vip - String - Required: no - (Filter condition) CLB instance VIP, such as "1.1.1.1" and "2204::22:3". </li>
+	// <li> target-ip - String - Required: no - (Filter condition) Private IP of the target real servers, such as"1.1.1.1" and "2203::214:4".</li>
+	// <li> vpcid - String - Required: no - (Filter condition) Identifier of the VPC instance to which the CLB instance belongs, such as "vpc-12345678".</li>
+	// <li> zone - String - Required: no - (Filter condition) Availability zone where the CLB instance resides, such as "ap-guangzhou-1".</li>
+	// <li> tag-key - String - Required: no - (Filter condition) Tag key of the CLB instance, such as "name".</li>
+	// <li> tag:* - String - Required: no - (Filter condition) CLB instance tag, followed by tag key after the colon ':'. For example, use {"Name": "tag:name","Values": ["zhangsan", "lisi"]} to filter the tag key “name” with the tag value “zhangsan” and “lisi”.</li>
+	// <li> fuzzy-search - String - Required: no - (Filter condition) Fuzzy search for CLB instance VIP and CLB instance name, such as "1.1".</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeLoadBalancersDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLoadBalancersDetailRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLoadBalancersDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of lists describing CLB instance details.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of CLB instance details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		LoadBalancerDetailSet []*LoadBalancerDetail `json:"LoadBalancerDetailSet,omitempty" name:"LoadBalancerDetailSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLoadBalancersDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLoadBalancersDetailResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeLoadBalancersRequest struct {
 	*tchttp.BaseRequest
 
@@ -1717,6 +1786,40 @@ func (r *DescribeLoadBalancersResponse) ToJsonString() string {
 }
 
 func (r *DescribeLoadBalancersResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeQuotaRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeQuotaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeQuotaRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeQuotaResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Quota list
+		QuotaSet []*Quota `json:"QuotaSet,omitempty" name:"QuotaSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeQuotaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeQuotaResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2243,6 +2346,14 @@ type Listener struct {
 	// Basic information of a bound target group. This field will be returned when a target group is bound to a listener.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TargetGroup *BasicTargetGroupInfo `json:"TargetGroup,omitempty" name:"TargetGroup"`
+
+	// Session persistence type. Valid values: Normal: the default session persistence type; QUIC_CID: session persistence by QUIC connection ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SessionType *string `json:"SessionType,omitempty" name:"SessionType"`
+
+	// Whether a persistent connection is enabled (This parameter can only be configured in HTTP/HTTPS listeners)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	KeepaliveEnable *int64 `json:"KeepaliveEnable,omitempty" name:"KeepaliveEnable"`
 }
 
 type ListenerBackend struct {
@@ -2444,11 +2555,11 @@ type LoadBalancer struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IPv6Mode *string `json:"IPv6Mode,omitempty" name:"IPv6Mode"`
 
-	// Whether to enable SnatPro
+	// Whether to enable SnatPro.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SnatPro *bool `json:"SnatPro,omitempty" name:"SnatPro"`
 
-	// SnatIp list after SnatPro load balancing is enabled
+	// `SnatIp` list after SnatPro load balancing is enabled.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps" list`
 
@@ -2464,9 +2575,139 @@ type LoadBalancer struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsBlockTime *string `json:"IsBlockTime,omitempty" name:"IsBlockTime"`
 
-	// Whether the IP type is the local BGP
-	// Note: this field may return null, indicating that no valid values can be obtained
+	// 
 	LocalBgp *bool `json:"LocalBgp,omitempty" name:"LocalBgp"`
+
+	// Dedicated layer-7 tag.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterTag *string `json:"ClusterTag,omitempty" name:"ClusterTag"`
+
+	// If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with an IPv4 and an IPv6 CVM instance simultaneously.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MixIpTarget *bool `json:"MixIpTarget,omitempty" name:"MixIpTarget"`
+}
+
+type LoadBalancerDetail struct {
+
+	// CLB instance ID.
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// CLB instance name.
+	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
+
+	// CLB instance network type:
+	// Public: public network; Private: private network.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	LoadBalancerType *string `json:"LoadBalancerType,omitempty" name:"LoadBalancerType"`
+
+	// CLB instance status, including:
+	// 0: creating; 1: running.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// CLB instance VIP.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// IPv6 VIP address of the CLB instance.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIPv6 *string `json:"AddressIPv6,omitempty" name:"AddressIPv6"`
+
+	// IP version of the CLB instance. Valid values: IPv4, IPv6.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIPVersion *string `json:"AddressIPVersion,omitempty" name:"AddressIPVersion"`
+
+	// IPv6 address type of the CLB instance. Valid values: IPv6Nat64, IPv6FullChain.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IPv6Mode *string `json:"IPv6Mode,omitempty" name:"IPv6Mode"`
+
+	// Availability zone where the CLB instance resides.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// ISP to which the CLB IP address belongs.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AddressIsp *string `json:"AddressIsp,omitempty" name:"AddressIsp"`
+
+	// ID of the VPC instance to which the CLB instance belongs.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// ID of the project to which the CLB instance belongs. 0: default project.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// CLB instance creation time.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// CLB instance billing mode.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
+
+	// CLB instance network attribute.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NetworkAttributes *InternetAccessible `json:"NetworkAttributes,omitempty" name:"NetworkAttributes"`
+
+	// Pay-as-you-go attribute of the CLB instance.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PrepaidAttributes *LBChargePrepaid `json:"PrepaidAttributes,omitempty" name:"PrepaidAttributes"`
+
+	// Reserved field, which can be ignored generally.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ExtraInfo *ExtraInfo `json:"ExtraInfo,omitempty" name:"ExtraInfo"`
+
+	// Custom configuration ID at the CLB instance level.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
+
+	// CLB instance tag information.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
+
+	// CLB listener ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Listener protocol.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Listener port.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Forwarding rule ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+
+	// Domain name of the forwarding rule.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Forwarding rule path.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// ID of target real servers.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TargetId *string `json:"TargetId,omitempty" name:"TargetId"`
+
+	// Address of target real servers.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TargetAddress *string `json:"TargetAddress,omitempty" name:"TargetAddress"`
+
+	// Listening port of target real servers.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TargetPort *uint64 `json:"TargetPort,omitempty" name:"TargetPort"`
+
+	// Forwarding weight of target real servers.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TargetWeight *uint64 `json:"TargetWeight,omitempty" name:"TargetWeight"`
+
+	// 0: not isolated; 1: isolated.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Isolation *uint64 `json:"Isolation,omitempty" name:"Isolation"`
 }
 
 type LoadBalancerHealth struct {
@@ -3071,6 +3312,24 @@ func (r *ModifyTargetWeightResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type Quota struct {
+
+	// Quota name. Valid values:
+	// <li> TOTAL_OPEN_CLB_QUOTA: quota of public network CLB instances in the current region</li>
+	// <li> TOTAL_INTERNAL_CLB_QUOTA: quota of private network CLB instances in the current region</li>
+	// <li> TOTAL_LISTENER_QUOTA: quota of listeners under one CLB instance</li>
+	// <li> TOTAL_LISTENER_RULE_QUOTA: quota of forwarding rules under one listener</li>
+	// <li> TOTAL_TARGET_BIND_QUOTA: quota of CVM instances can be bound under one forwarding rule</li>
+	QuotaId *string `json:"QuotaId,omitempty" name:"QuotaId"`
+
+	// Currently used quantity. If it is `null`, it is meaningless.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	QuotaCurrent *int64 `json:"QuotaCurrent,omitempty" name:"QuotaCurrent"`
+
+	// Quota limit.
+	QuotaLimit *int64 `json:"QuotaLimit,omitempty" name:"QuotaLimit"`
+}
+
 type RegisterTargetGroupInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -3303,7 +3562,7 @@ type RuleInput struct {
 	// Session persistence time in seconds. Value range: 30-3,600. Setting it to 0 indicates that session persistence is disabled.
 	SessionExpireTime *int64 `json:"SessionExpireTime,omitempty" name:"SessionExpireTime"`
 
-	// Health check information
+	// Health check information. For more information, please see [Health Check](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1)
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
 	// Certificate information

@@ -52,8 +52,11 @@ type AvailableType struct {
 	// Protocol and sale details
 	Protocols []*AvailableProtoStatus `json:"Protocols,omitempty" name:"Protocols" list`
 
-	// Storage class. Valid values: SD (standard), HP (high-performance)
+	// Storage class. Valid values: `SD` (standard storage) and `HP` (high-performance storage)
 	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Indicates whether prepaid is supported. `true`: yes; `false`: no
+	Prepayment *bool `json:"Prepayment,omitempty" name:"Prepayment"`
 }
 
 type AvailableZone struct {
@@ -77,7 +80,7 @@ type AvailableZone struct {
 type CreateCfsFileSystemRequest struct {
 	*tchttp.BaseRequest
 
-	// AZ name, such as "ap-beijing-1". For the list of regions and AZs, please see [Overview](https://cloud.tencent.com/document/product/582/13225)
+	// AZ name, such as "ap-beijing-1". For the list of regions and AZs, please see [Overview](https://intl.cloud.tencent.com/document/product/582/13225?from_cn_redirect=1)
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// Network type. Valid values: VPC (VPC), BASIC (basic network)
@@ -162,10 +165,10 @@ func (r *CreateCfsFileSystemResponse) FromJsonString(s string) error {
 type CreateCfsPGroupRequest struct {
 	*tchttp.BaseRequest
 
-	// Permission group name, which can contain 1–64 Chinese characters, letters, numbers, underscores, or dashes
+	// Permission group name, which can contain 1-64 Chinese characters, letters, numbers, underscores, or dashes
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Permission group description, which can contain 1–255 characters
+	// Permission group description, which can contain 1-255 characters
 	DescInfo *string `json:"DescInfo,omitempty" name:"DescInfo"`
 }
 
@@ -220,7 +223,7 @@ type CreateCfsRuleRequest struct {
 	// You can enter a single IP or IP range, such as 10.1.10.11 or 10.10.1.0/24. The default visiting address is `*`, indicating that all IPs are allowed. Please note that you need to enter the CVM instance's private IP here.
 	AuthClientIp *string `json:"AuthClientIp,omitempty" name:"AuthClientIp"`
 
-	// Rule priority. Value range: 1–100. 1 represents the highest priority, while 100 the lowest
+	// Rule priority. Value range: 1-100. 1 represents the highest priority, while 100 the lowest
 	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
 
 	// Read/write permission. Valid values: RO (read-only), RW (read & write). Default value: RO
@@ -463,6 +466,43 @@ func (r *DescribeAvailableZoneInfoResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeCfsFileSystemClientsRequest struct {
+	*tchttp.BaseRequest
+
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+}
+
+func (r *DescribeCfsFileSystemClientsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCfsFileSystemClientsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCfsFileSystemClientsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Client list
+		ClientList []*FileSystemClient `json:"ClientList,omitempty" name:"ClientList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCfsFileSystemClientsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCfsFileSystemClientsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeCfsFileSystemsRequest struct {
 	*tchttp.BaseRequest
 
@@ -654,6 +694,27 @@ func (r *DescribeMountTargetsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type FileSystemClient struct {
+
+	// IP address of the file system
+	CfsVip *string `json:"CfsVip,omitempty" name:"CfsVip"`
+
+	// Client IP
+	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
+
+	// File system VPCID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Name of the availability zone, e.g. ap-beijing-1. For more information, see regions and availability zones in the Overview document
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// AZ name
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// Path in which the file system is mounted to the client
+	MountDirectory *string `json:"MountDirectory,omitempty" name:"MountDirectory"`
+}
+
 type FileSystemInfo struct {
 
 	// Creation time
@@ -686,7 +747,7 @@ type FileSystemInfo struct {
 	// File system storage class
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
-	// Prepaid storage pack bound to a file system (not supported currently)
+	// Prepaid storage pack bound with the file system
 	StorageResourcePkg *string `json:"StorageResourcePkg,omitempty" name:"StorageResourcePkg"`
 
 	// Prepaid bandwidth pack bound to a file system (not supported currently)
@@ -706,6 +767,9 @@ type FileSystemInfo struct {
 
 	// Application ID
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+
+	// The upper limit on the file system’s throughput, which is determined based on its current usage, and bound resource packs for both storage and throughput
+	BandwidthLimit *float64 `json:"BandwidthLimit,omitempty" name:"BandwidthLimit"`
 }
 
 type MountInfo struct {
@@ -782,7 +846,7 @@ type PGroupRuleInfo struct {
 	// User permission. all_squash: any visiting user will be mapped to an anonymous user or user group; no_all_squash: a visiting user will be first matched with a local user, and if the match fails, it will be mapped to an anonymous user or user group; root_squash: a visiting root user will be mapped to an anonymous user or user group; no_root_squash: a visiting root user will be allowed to maintain root account permissions.
 	UserPermission *string `json:"UserPermission,omitempty" name:"UserPermission"`
 
-	// Rule priority. Value range: 1–100. 1 represents the highest priority, while 100 the lowest
+	// Rule priority. Value range: 1-100. 1 represents the highest priority, while 100 the lowest
 	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
 }
 
@@ -921,7 +985,7 @@ func (r *UpdateCfsFileSystemPGroupResponse) FromJsonString(s string) error {
 type UpdateCfsFileSystemSizeLimitRequest struct {
 	*tchttp.BaseRequest
 
-	// File system capacity limit in GB. Value range: 0–1,073,741,824. If 0 is entered, no limit will be imposed on the file system capacity.
+	// File system capacity limit in GB. Value range: 0-1,073,741,824. If 0 is entered, no limit will be imposed on the file system capacity.
 	FsLimit *uint64 `json:"FsLimit,omitempty" name:"FsLimit"`
 
 	// File system ID
@@ -961,10 +1025,10 @@ type UpdateCfsPGroupRequest struct {
 	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
-	// Permission group name, which can contain 1–64 Chinese characters, letters, numbers, underscores, or dashes
+	// Permission group name, which can contain 1-64 Chinese characters, letters, numbers, underscores, or dashes
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Permission group description, which can contain 1–255 characters
+	// Permission group description, which can contain 1-255 characters
 	DescInfo *string `json:"DescInfo,omitempty" name:"DescInfo"`
 }
 
@@ -1022,7 +1086,7 @@ type UpdateCfsRuleRequest struct {
 	// User permission. Valid values: all_squash, no_all_squash, root_squash, no_root_squash. Specifically, all_squash: any visiting user will be mapped to an anonymous user or user group; no_all_squash: a visiting user will be first matched with a local user, and if the match fails, it will be mapped to an anonymous user or user group; root_squash: a visiting root user will be mapped to an anonymous user or user group; no_root_squash: a visiting root user will be allowed to maintain root account permissions. Default value: root_squash.
 	UserPermission *string `json:"UserPermission,omitempty" name:"UserPermission"`
 
-	// Rule priority. Value range: 1–100. 1 represents the highest priority, while 100 the lowest
+	// Rule priority. Value range: 1-100. 1 represents the highest priority, while 100 the lowest
 	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
 }
 

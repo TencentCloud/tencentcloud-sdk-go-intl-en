@@ -534,6 +534,46 @@ func (r *AssociateAddressResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type AssociateDirectConnectGatewayNatGatewayRequest struct {
+	*tchttp.BaseRequest
+
+	// The direct connect gateway ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The NAT Gateway ID.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The ID of the VPC instance, which can be obtained from the `VpcId` field in response of the `DescribeVpcs` API.
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+}
+
+func (r *AssociateDirectConnectGatewayNatGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AssociateDirectConnectGatewayNatGatewayRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AssociateDirectConnectGatewayNatGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AssociateDirectConnectGatewayNatGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AssociateDirectConnectGatewayNatGatewayResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type AssociateNatGatewayAddressRequest struct {
 	*tchttp.BaseRequest
 
@@ -825,6 +865,9 @@ type CCN struct {
 
 	// Tag key-value pairs.
 	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+
+	// Whether the CCN route priority feature is supported. Valid values: False: do not support; True: support.
+	RoutePriorityFlag *bool `json:"RoutePriorityFlag,omitempty" name:"RoutePriorityFlag"`
 }
 
 type CcnAttachedInstance struct {
@@ -870,6 +913,9 @@ type CcnAttachedInstance struct {
 
 	// The UIN (root account) to which the CCN belongs.
 	CcnUin *string `json:"CcnUin,omitempty" name:"CcnUin"`
+
+	// General location of the associated instance, such as CHINA_MAINLAND.
+	InstanceArea *string `json:"InstanceArea,omitempty" name:"InstanceArea"`
 }
 
 type CcnBandwidthInfo struct {
@@ -961,6 +1007,18 @@ type CcnRoute struct {
 
 	// The UIN (root account) to which the associated instance belongs
 	InstanceUin *string `json:"InstanceUin,omitempty" name:"InstanceUin"`
+
+	// Additional status of the route
+	ExtraState *string `json:"ExtraState,omitempty" name:"ExtraState"`
+
+	// Whether it is a dynamic route
+	IsBgp *bool `json:"IsBgp,omitempty" name:"IsBgp"`
+
+	// Route priority
+	RoutePriority *uint64 `json:"RoutePriority,omitempty" name:"RoutePriority"`
+
+	// Next hop port name (associated instance’s port name)
+	InstanceExtraName *string `json:"InstanceExtraName,omitempty" name:"InstanceExtraName"`
 }
 
 type CheckAssistantCidrRequest struct {
@@ -1401,6 +1459,9 @@ type CreateCustomerGatewayRequest struct {
 
 	// Customer gateway public IP.
 	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateCustomerGatewayRequest) ToJsonString() string {
@@ -2391,6 +2452,9 @@ type CreateVpnConnectionRequest struct {
 
 	// IPSec configuration. The IPSec secure session configuration is provided by Tencent Cloud.
 	IPSECOptionsSpecification *IPSECOptionsSpecification `json:"IPSECOptionsSpecification,omitempty" name:"IPSECOptionsSpecification"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateVpnConnectionRequest) ToJsonString() string {
@@ -2446,6 +2510,9 @@ type CreateVpnGatewayRequest struct {
 
 	// VPN gateway type. Value: `CCN`, indicates CCN-type VPN gateway
 	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateVpnGatewayRequest) ToJsonString() string {
@@ -4559,7 +4626,8 @@ type DescribeNatGatewaysRequest struct {
 	// Filter condition. `NatGatewayIds` and `Filters` cannot be specified at the same time.
 	// <li>nat-gateway-id - String - (Filter condition) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
 	// <li>vpc-id - String - (Filter condition) The unique ID of the VPC, such as `vpc-123xx454`.</li>
-	// <li>nat-gateway-name - String - (Filter condition) The ID of the protocol port template instance, such as `test_nat`.</li>
+	// <li>nat-gateway-name - String - (Filter condition) The name of the protocol port template instance, such as `test_nat`.</li>
+	// <li>tag-key - String - (Filter condition) The tag key, such as `test-key`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Offset. The default value is 0.
@@ -5975,13 +6043,53 @@ func (r *DisassociateAddressResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DisassociateDirectConnectGatewayNatGatewayRequest struct {
+	*tchttp.BaseRequest
+
+	// The direct connect gateway ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The NAT Gateway ID.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The ID of the VPC instance, which can be obtained from the `VpcId` field in response of the `DescribeVpcs` API.
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+}
+
+func (r *DisassociateDirectConnectGatewayNatGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisassociateDirectConnectGatewayNatGatewayRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DisassociateDirectConnectGatewayNatGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DisassociateDirectConnectGatewayNatGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisassociateDirectConnectGatewayNatGatewayResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DisassociateNatGatewayAddressRequest struct {
 	*tchttp.BaseRequest
 
 	// The ID of the NAT gateway, such as `nat-df45454`.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
-	// The array of EIPs bound to the NAT gateway.
+	// Array of the EIPs to be unbound from the NAT gateway.
 	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
 }
 
@@ -8130,6 +8238,15 @@ type NatGateway struct {
 
 	// The availability zone in which the NAT gateway is located.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// 
+	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds" list`
+
+	// 
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Tag key-value pair.
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
 }
 
 type NatGatewayAddress struct {
@@ -9215,10 +9332,10 @@ type SecurityGroupAssociationStatistics struct {
 
 type SecurityGroupPolicy struct {
 
-	// Security group policy index number.
+	// The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
 	PolicyIndex *int64 `json:"PolicyIndex,omitempty" name:"PolicyIndex"`
 
-	// Protocol. Values: TCP, UDP, ICMP
+	// Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Port (all, discrete port, range).

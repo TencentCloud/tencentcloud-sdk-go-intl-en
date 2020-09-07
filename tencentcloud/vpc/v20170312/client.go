@@ -264,6 +264,31 @@ func (c *Client) AssociateAddress(request *AssociateAddressRequest) (response *A
     return
 }
 
+func NewAssociateDirectConnectGatewayNatGatewayRequest() (request *AssociateDirectConnectGatewayNatGatewayRequest) {
+    request = &AssociateDirectConnectGatewayNatGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "AssociateDirectConnectGatewayNatGateway")
+    return
+}
+
+func NewAssociateDirectConnectGatewayNatGatewayResponse() (response *AssociateDirectConnectGatewayNatGatewayResponse) {
+    response = &AssociateDirectConnectGatewayNatGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to bind a direct connect gateway with a NAT gateway,  and direct its default route to the NAT Gateway.
+func (c *Client) AssociateDirectConnectGatewayNatGateway(request *AssociateDirectConnectGatewayNatGatewayRequest) (response *AssociateDirectConnectGatewayNatGatewayResponse, err error) {
+    if request == nil {
+        request = NewAssociateDirectConnectGatewayNatGatewayRequest()
+    }
+    response = NewAssociateDirectConnectGatewayNatGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAssociateNatGatewayAddressRequest() (request *AssociateNatGatewayAddressRequest) {
     request = &AssociateNatGatewayAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3190,6 +3215,31 @@ func (c *Client) DisassociateAddress(request *DisassociateAddressRequest) (respo
         request = NewDisassociateAddressRequest()
     }
     response = NewDisassociateAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDisassociateDirectConnectGatewayNatGatewayRequest() (request *DisassociateDirectConnectGatewayNatGatewayRequest) {
+    request = &DisassociateDirectConnectGatewayNatGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DisassociateDirectConnectGatewayNatGateway")
+    return
+}
+
+func NewDisassociateDirectConnectGatewayNatGatewayResponse() (response *DisassociateDirectConnectGatewayNatGatewayResponse) {
+    response = &DisassociateDirectConnectGatewayNatGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to unbind a direct connect gateway from a NAT Gateway. After unbinding, the direct connect gateway cannot access internet through the NAT Gateway.
+func (c *Client) DisassociateDirectConnectGatewayNatGateway(request *DisassociateDirectConnectGatewayNatGatewayRequest) (response *DisassociateDirectConnectGatewayNatGatewayResponse, err error) {
+    if request == nil {
+        request = NewDisassociateDirectConnectGatewayNatGatewayRequest()
+    }
+    response = NewDisassociateDirectConnectGatewayNatGatewayResponse()
     err = c.Send(request, response)
     return
 }

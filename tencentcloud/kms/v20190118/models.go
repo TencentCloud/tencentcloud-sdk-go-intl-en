@@ -29,6 +29,40 @@ type AlgorithmInfo struct {
 	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
 }
 
+type ArchiveKeyRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+}
+
+func (r *ArchiveKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ArchiveKeyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ArchiveKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ArchiveKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ArchiveKeyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type AsymmetricRsaDecryptRequest struct {
 	*tchttp.BaseRequest
 
@@ -155,6 +189,40 @@ func (r *BindCloudResourceResponse) ToJsonString() string {
 }
 
 func (r *BindCloudResourceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CancelKeyArchiveRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique CMK ID
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+}
+
+func (r *CancelKeyArchiveRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CancelKeyArchiveRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CancelKeyArchiveResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CancelKeyArchiveResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CancelKeyArchiveResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -589,6 +657,15 @@ type DescribeWhiteBoxKeyDetailsRequest struct {
 
 	// Filter: key status. 0: disabled, 1: enabled
 	KeyStatus *int64 `json:"KeyStatus,omitempty" name:"KeyStatus"`
+
+	// This parameter has the same meaning of the `Offset` in an SQL query, indicating that this acquisition starts from the "No. Offset value" element of the array arranged in a certain order. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// This parameter has the same meaning of the `Limit` in an SQL query, indicating that up to `Limit` value elements can be obtained in this request. The default value is 0, indicating not to paginate.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Tag filter condition
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
 }
 
 func (r *DescribeWhiteBoxKeyDetailsRequest) ToJsonString() string {
@@ -606,6 +683,10 @@ type DescribeWhiteBoxKeyDetailsResponse struct {
 
 		// White-box key information list
 		KeyInfos []*WhiteboxKeyInfo `json:"KeyInfos,omitempty" name:"KeyInfos" list`
+
+		// Total number of keys
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1355,6 +1436,41 @@ func (r *GetPublicKeyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type GetRegionsRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *GetRegionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetRegionsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetRegionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The list of supported regions
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Regions []*string `json:"Regions,omitempty" name:"Regions" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetRegionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetRegionsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type GetServiceStatusRequest struct {
 	*tchttp.BaseRequest
 }
@@ -1455,7 +1571,7 @@ type KeyMetadata struct {
 	// 
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport.
+	// CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport, Archived.
 	KeyState *string `json:"KeyState,omitempty" name:"KeyState"`
 
 	// CMK purpose. Valid values: ENCRYPT_DECRYPT, ASYMMETRIC_DECRYPT_RSA_2048, ASYMMETRIC_DECRYPT_SM2
@@ -1543,7 +1659,7 @@ type ListKeyDetailRequest struct {
 	// 
 	OrderType *uint64 `json:"OrderType,omitempty" name:"OrderType"`
 
-	// Filters by CMK status. 0: all CMKs; 1: CMKs in `Enabled` status only; 2: CMKs in `Disabled` status only; 3: CMKs in `PendingDelete` status only (i.e., keys with schedule deletion enabled); 4: CMKs in `PendingImport` status only.
+	// Filters by CMK status. 0: all CMKs; 1: CMKs in `Enabled` status only; 2: CMKs in `Disabled` status only; 3: CMKs in `PendingDelete` status only (i.e., keys with schedule deletion enabled); 4: CMKs in `PendingImport` status only; 5: CMKs in `Archived` status only.
 	KeyState *uint64 `json:"KeyState,omitempty" name:"KeyState"`
 
 	// 
@@ -1554,6 +1670,9 @@ type ListKeyDetailRequest struct {
 
 	// Filter by `KeyUsage` of CMKs. Valid values: `ALL` (filter all CMKs), `ENCRYPT_DECRYPT` (it will be used when the parameter is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`.
 	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
+
+	// Tag filter condition
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
 }
 
 func (r *ListKeyDetailRequest) ToJsonString() string {
@@ -1780,6 +1899,15 @@ type Tag struct {
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
+type TagFilter struct {
+
+	// Tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue []*string `json:"TagValue,omitempty" name:"TagValue" list`
+}
+
 type UnbindCloudResourceRequest struct {
 	*tchttp.BaseRequest
 
@@ -1896,36 +2024,40 @@ func (r *UpdateKeyDescriptionResponse) FromJsonString(s string) error {
 
 type WhiteboxKeyInfo struct {
 
-	// Globally unique white-box key ID
+	// 
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
-	// Unique alias that makes a key more recognizable and understandable. This parameter should be 1 to 60 letters, digits, `-`, and `_`; it must begin with a letter or digit and cannot be left empty.
+	// 
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
-	// Creator
+	// 
 	CreatorUin *uint64 `json:"CreatorUin,omitempty" name:"CreatorUin"`
 
-	// Key description information
+	// 
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Key creation time in Unix timestamp
+	// 
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// White-box key status. Valid values: Enabled, Disabled
+	// 
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Creator
+	// 
 	OwnerUin *uint64 `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
-	// Key algorithm type
+	// 
 	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
 
-	// Base64-encoded white-box encryption key
+	// 
 	EncryptKey *string `json:"EncryptKey,omitempty" name:"EncryptKey"`
 
-	// Base64-encoded white-box decryption key
+	// 
 	DecryptKey *string `json:"DecryptKey,omitempty" name:"DecryptKey"`
 
-	// Resource ID in the format of `creatorUin/$creatorUin/$keyId`.
+	// 
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Whether there is a device fingerprint bound to the current key
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DeviceFingerprintBind *bool `json:"DeviceFingerprintBind,omitempty" name:"DeviceFingerprintBind"`
 }
