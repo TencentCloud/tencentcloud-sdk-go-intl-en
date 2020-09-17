@@ -1331,6 +1331,9 @@ type DescribeInstancesRequest struct {
 
 	// Internal parameter, which can be ignored
 	TypeList []*int64 `json:"TypeList,omitempty" name:"TypeList" list`
+
+	// Internal parameter, which can be ignored
+	MonitorVersion *string `json:"MonitorVersion,omitempty" name:"MonitorVersion"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -2271,6 +2274,14 @@ type InstanceSet struct {
 	// Internal parameter, which can be ignored
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RemainBandwidthDuration *string `json:"RemainBandwidthDuration,omitempty" name:"RemainBandwidthDuration"`
+
+	// Disk size of the Tendis instance
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Monitoring granularity type. Valid values: 1m (monitoring at 1-minute granularity), 5s (monitoring at 5-second granularity)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MonitorVersion *string `json:"MonitorVersion,omitempty" name:"MonitorVersion"`
 }
 
 type InstanceSlowlogDetail struct {

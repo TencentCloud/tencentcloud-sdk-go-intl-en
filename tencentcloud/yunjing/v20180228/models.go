@@ -1352,10 +1352,10 @@ type DescribeMachinesRequest struct {
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Filter.
-	// <li>Keywords - String - Required: No - Query keywords</li>
-	// <li>Status - String - Required: No - Agent status (OFFLINE: offline, ONLINE: online)</li>
-	// <li>Version - String  Required: No - Current CWP edition (PRO_VERSION: Pro, BASIC_VERSION: Basic)</li>
-	// Each filter supports only one value. Query with multiple values in "OR" relationship is not supported for the time being
+	// <li>Keywords - String - Required: no - Query keywords </li>
+	// <li>Status - String - Required: no - CWP client status (valid values: OFFLINE, ONLINE, UNINSTALLED)</li>
+	// <li>Version - String - Required: no - Current CWP version (valid values: PRO_VERSION, BASIC_VERSION)</li>
+	// Each filter can have only one value but does not support "OR" queries with multiple values
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
@@ -2005,19 +2005,19 @@ type DescribeSecurityTrendsResponse struct {
 		// Baseline statistics array.
 		BaseLines []*SecurityTrend `json:"BaseLines,omitempty" name:"BaseLines" list`
 
-		// 
+		// Statistics array of malicious requests.
 		MaliciousRequests []*SecurityTrend `json:"MaliciousRequests,omitempty" name:"MaliciousRequests" list`
 
-		// 
+		// Statistics array of high-risk commands.
 		HighRiskBashs []*SecurityTrend `json:"HighRiskBashs,omitempty" name:"HighRiskBashs" list`
 
-		// 
+		// Statistics array of reverse shells.
 		ReverseShells []*SecurityTrend `json:"ReverseShells,omitempty" name:"ReverseShells" list`
 
-		// 
+		// Statistics array of local privilege escalations.
 		PrivilegeEscalations []*SecurityTrend `json:"PrivilegeEscalations,omitempty" name:"PrivilegeEscalations" list`
 
-		// 
+		// Statistics array of network attacks.
 		CyberAttacks []*SecurityTrend `json:"CyberAttacks,omitempty" name:"CyberAttacks" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2074,10 +2074,12 @@ func (r *DescribeTagMachinesResponse) FromJsonString(s string) error {
 type DescribeTagsRequest struct {
 	*tchttp.BaseRequest
 
-	// 
+	// CVM instance type.
+	// <li>CVM: CVM</li>
+	// <li>BM: CPM</li>
 	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
 
-	// 
+	// Server region, such as `ap-guangzhou` and `ap-shanghai`
 	MachineRegion *string `json:"MachineRegion,omitempty" name:"MachineRegion"`
 }
 
@@ -2772,6 +2774,9 @@ type ExportNonlocalLoginPlacesResponse struct {
 		// Download address for exported file.
 		DownloadUrl *string `json:"DownloadUrl,omitempty" name:"DownloadUrl"`
 
+		// Export task ID
+		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -2921,10 +2926,10 @@ type LoginWhiteLists struct {
 	// Server IP
 	HostIp *string `json:"HostIp,omitempty" name:"HostIp"`
 
-	// 
+	// Start time
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// 
+	// End time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
@@ -2948,10 +2953,10 @@ type LoginWhiteListsRule struct {
 	// Rule ID, used for rule updating
 	Id *uint64 `json:"Id,omitempty" name:"Id"`
 
-	// 
+	// Start time
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// 
+	// End time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
@@ -2999,17 +3004,23 @@ type Machine struct {
 	// Tag information
 	Tag []*MachineTag `json:"Tag,omitempty" name:"Tag" list`
 
-	// 
+	// Number of baseline risks.
 	BaselineNum *int64 `json:"BaselineNum,omitempty" name:"BaselineNum"`
 
-	// 
+	// Number of network risks.
 	CyberAttackNum *int64 `json:"CyberAttackNum,omitempty" name:"CyberAttackNum"`
 
-	// 
+	// Risk status.
+	// <li>SAFE: safe</li>
+	// <li>RISK: at risk</li>
+	// <li>UNKNOWN: unknown</li>
 	SecurityStatus *string `json:"SecurityStatus,omitempty" name:"SecurityStatus"`
 
-	// 
+	// Number of intrusions
 	InvasionNum *int64 `json:"InvasionNum,omitempty" name:"InvasionNum"`
+
+	// Region information
+	RegionInfo *RegionInfo `json:"RegionInfo,omitempty" name:"RegionInfo"`
 }
 
 type MachineTag struct {
@@ -3020,7 +3031,7 @@ type MachineTag struct {
 	// Tag name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// 
+	// Tag ID
 	TagId *uint64 `json:"TagId,omitempty" name:"TagId"`
 }
 
@@ -3520,6 +3531,21 @@ func (r *RecoverMalwaresResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type RegionInfo struct {
+
+	// Region, such as `ap-guangzhou`, `ap-shanghai` and `ap-beijing`
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Region name, such as `South China (Guangzhou)`, `East China (Shanghai)`, and `North China (Beijing)`
+	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+
+	// Region ID
+	RegionId *uint64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Region code, such as `gz`, `sh`, and `bj`
+	RegionCode *string `json:"RegionCode,omitempty" name:"RegionCode"`
+}
+
 type RescanImpactedHostRequest struct {
 	*tchttp.BaseRequest
 
@@ -3573,7 +3599,11 @@ type SecurityDynamic struct {
 	// Security event message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// 
+	// Security event level.
+	// <li>RISK: severe</li>
+	// <li>HIGH: high</li>
+	// <li>NORMAL: medium</li>
+	// <li>LOW: low</li>
 	SecurityLevel *string `json:"SecurityLevel,omitempty" name:"SecurityLevel"`
 }
 

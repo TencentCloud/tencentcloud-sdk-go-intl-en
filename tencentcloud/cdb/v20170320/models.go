@@ -305,7 +305,7 @@ type BinlogInfo struct {
 type CloseWanServiceRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -523,28 +523,28 @@ type CreateDBInstanceHourRequest struct {
 	// Number of instances. Value range: 1-100. Default value: 1.
 	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
 
-	// Instance memory size in MB. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported memory specifications.
+	// Instance memory size in MB. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported memory specifications.
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Instance disk size in GB. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported disk specifications.
+	// Instance disk size in GB. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported disk specifications.
 	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
 
-	// MySQL version. Valid values: 5.5, 5.6, 5.7. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported instance versions.
+	// MySQL version. Valid values: 5.5, 5.6, 5.7. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported instance versions.
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
-	// VPC ID. If this parameter is not passed in, the basic network will be selected by default. Please use the [DescribeVpcs](/document/api/215/15778) API to query the VPCs.
+	// VPC ID. If this parameter is not passed in, the basic network will be selected by default. Please use the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API to query the VPCs.
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the [DescribeSubnets](/document/api/215/15784) API to query the subnet lists.
+	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
 	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
 
-	// Project ID. If this is left empty, the default project will be used. Please use the [DescribeProject](https://cloud.tencent.com/document/product/378/4400) API to get the project ID.
+	// Project ID. If this is left empty, the default project will be used. Please use the [DescribeProject](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API to get the project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// AZ information. By default, the system will automatically select an AZ. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported AZs.
+	// AZ information. By default, the system will automatically select an AZ. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported AZs.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Instance ID, which is required and the same as the primary instance ID when purchasing read-only or disaster recovery instances. Please use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the instance IDs.
+	// Instance ID, which is required and the same as the primary instance ID when purchasing read-only or disaster recovery instances. Please use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance IDs.
 	MasterInstanceId *string `json:"MasterInstanceId,omitempty" name:"MasterInstanceId"`
 
 	// Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
@@ -559,7 +559,7 @@ type CreateDBInstanceHourRequest struct {
 	// Sets the root account password. Rule: the password can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// List of parameters in the format of `ParamList.0.Name=auto_increment&ParamList.0.Value=1`. You can use the [DescribeDefaultParams](https://cloud.tencent.com/document/api/236/32662) API to query the configurable parameters.
+	// List of parameters in the format of `ParamList.0.Name=auto_increment&ParamList.0.Value=1`. You can use the [DescribeDefaultParams](https://intl.cloud.tencent.com/document/api/236/32662?from_cn_redirect=1) API to query the configurable parameters.
 	ParamList []*ParamInfo `json:"ParamList,omitempty" name:"ParamList" list`
 
 	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
@@ -574,7 +574,7 @@ type CreateDBInstanceHourRequest struct {
 	// AZ information of secondary database 2, which is empty by default. This parameter can be specified when purchasing strong sync primary instances and is meaningless for other types of instances.
 	BackupZone *string `json:"BackupZone,omitempty" name:"BackupZone"`
 
-	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://cloud.tencent.com/document/api/236/15850) API to query the security group details of a project.
+	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API to query the security group details of a project.
 	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
 
 	// Read-only instance information. This parameter must be passed in when purchasing read-only instances.
@@ -852,7 +852,7 @@ type DeleteBackupRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup task ID, which is the task ID returned by the [TencentDB instance backup creating API](https://cloud.tencent.com/document/api/236/15844).
+	// Backup task ID, which is the task ID returned by the [TencentDB instance backup creating API](https://intl.cloud.tencent.com/document/api/236/15844?from_cn_redirect=1).
 	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
 }
 
@@ -1602,7 +1602,7 @@ func (r *DescribeDBImportRecordsResponse) FromJsonString(s string) error {
 type DescribeDBInstanceCharsetRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -1688,7 +1688,7 @@ func (r *DescribeDBInstanceConfigResponse) FromJsonString(s string) error {
 type DescribeDBInstanceGTIDRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -1816,7 +1816,7 @@ func (r *DescribeDBInstanceRebootTimeResponse) FromJsonString(s string) error {
 type DescribeDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// Project ID. You can use the [project list querying API](https://cloud.tencent.com/document/product/378/4400) to query the project ID.
+	// Project ID. You can use the [project list querying API](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) to query the project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Instance type. Value range: 1 (primary), 2 (disaster recovery), 3 (read-only).
@@ -2347,7 +2347,7 @@ func (r *DescribeErrorLogDataResponse) FromJsonString(s string) error {
 type DescribeInstanceParamRecordsRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Pagination offset.
@@ -2393,7 +2393,7 @@ func (r *DescribeInstanceParamRecordsResponse) FromJsonString(s string) error {
 type DescribeInstanceParamsRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -2676,7 +2676,7 @@ func (r *DescribeRollbackRangeTimeResponse) FromJsonString(s string) error {
 type DescribeRollbackTaskDetailRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID, which is the same as the instance ID displayed in the TencentDB Console. You can use the [DescribeDBInstances API](https://cloud.tencent.com/document/api/236/15872) to query the ID.
+	// Instance ID, which is the same as the instance ID displayed in the TencentDB Console. You can use the [DescribeDBInstances API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Async task ID.
@@ -2987,7 +2987,7 @@ func (r *DescribeTagsOfInstanceIdsResponse) FromJsonString(s string) error {
 type DescribeTasksRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// ID of an async task request, i.e., `AsyncRequestId` returned by relevant TencentDB operations.
@@ -3366,7 +3366,7 @@ type Inbound struct {
 type InitDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 	// New password of the instance. Rule: It can only contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special characters (!@#$%^*()).
@@ -3570,7 +3570,7 @@ type InstanceRollbackRangeTime struct {
 type IsolateDBInstanceRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -3893,7 +3893,7 @@ func (r *ModifyBackupConfigResponse) FromJsonString(s string) error {
 type ModifyDBInstanceNameRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Instance name.
@@ -3930,7 +3930,7 @@ func (r *ModifyDBInstanceNameResponse) FromJsonString(s string) error {
 type ModifyDBInstanceProjectRequest struct {
 	*tchttp.BaseRequest
 
-	// Array of instance IDs in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Array of instance IDs in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 	// Project ID.
@@ -4004,7 +4004,7 @@ func (r *ModifyDBInstanceSecurityGroupsResponse) FromJsonString(s string) error 
 type ModifyDBInstanceVipVportRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Destination IP. Either this parameter or `DstPort` must be passed in.
@@ -4380,7 +4380,7 @@ func (r *OpenDBInstanceGTIDResponse) FromJsonString(s string) error {
 type OpenWanServiceRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -4537,7 +4537,7 @@ type RegionSellConf struct {
 type ReleaseIsolatedDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// Array of instance IDs in the format of `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the ID, whose value is the `InstanceId` value in the output parameters.
+	// Array of instance IDs in the format of `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in the output parameters.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
@@ -5285,13 +5285,13 @@ type TaskDetail struct {
 type UpgradeDBInstanceEngineVersionRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Version of primary instance database engine. Value range: 5.6, 5.7
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
-	// Mode of switch to a new instance. Value range: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [switching to new instance API](https://cloud.tencent.com/document/product/236/15864) to trigger the process.
+	// Mode of switch to a new instance. Value range: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [switching to new instance API](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) to trigger the process.
 	WaitSwitch *int64 `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
 
 	// Whether to upgrade kernel minor version. Valid values: 1 (upgrade kernel minor version), 0 (upgrade database engine).
@@ -5311,7 +5311,7 @@ type UpgradeDBInstanceEngineVersionResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Async task ID. The task execution result can be queried using the [async task execution result querying API](https://cloud.tencent.com/document/api/236/20410).
+		// Async task ID. The task execution result can be queried using the [async task execution result querying API](https://intl.cloud.tencent.com/document/api/236/20410?from_cn_redirect=1).
 		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5331,13 +5331,13 @@ func (r *UpgradeDBInstanceEngineVersionResponse) FromJsonString(s string) error 
 type UpgradeDBInstanceRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of `cdb-c1nl9rpv` or `cdbro-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of `cdb-c1nl9rpv` or `cdbro-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Memory size in MB after upgrade. To ensure that the `Memory` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the specifications of the memory that can be upgraded to.
+	// Memory size in MB after upgrade. To ensure that the `Memory` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the specifications of the memory that can be upgraded to.
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Disk size in GB after upgrade. To ensure that the `Volume` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the specifications of the disk that can be upgraded to.
+	// Disk size in GB after upgrade. To ensure that the `Volume` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the specifications of the disk that can be upgraded to.
 	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
 
 	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
@@ -5346,13 +5346,13 @@ type UpgradeDBInstanceRequest struct {
 	// Deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
 	DeployMode *int64 `json:"DeployMode,omitempty" name:"DeployMode"`
 
-	// AZ information of secondary database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading primary instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the supported AZs.
+	// AZ information of secondary database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading primary instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the supported AZs.
 	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
 
 	// Version of primary instance database engine. Valid values: 5.5, 5.6, 5.7.
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
-	// Mode of switch to new instance. Valid values: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://cloud.tencent.com/document/product/236/15864) API to trigger the process.
+	// Mode of switch to new instance. Valid values: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) API to trigger the process.
 	WaitSwitch *int64 `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
 
 	// AZ information of secondary database 2, which is empty by default. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.

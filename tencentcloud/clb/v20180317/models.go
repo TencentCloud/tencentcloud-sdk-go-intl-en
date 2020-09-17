@@ -2575,7 +2575,7 @@ type LoadBalancer struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsBlockTime *string `json:"IsBlockTime,omitempty" name:"IsBlockTime"`
 
-	// 
+	// Whether the IP type is the local BGP
 	LocalBgp *bool `json:"LocalBgp,omitempty" name:"LocalBgp"`
 
 	// Dedicated layer-7 tag.

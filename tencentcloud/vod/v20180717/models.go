@@ -1851,6 +1851,19 @@ type Canvas struct {
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 }
 
+type CdnLogInfo struct {
+
+	// Log date in the format of `yyyy-MM-dd`, such as 2018-03-01.
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Log name in the format of date and time-domain name,
+	// such as 2018120101-test.vod2.mqcloud.com.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Log download link, which is valid for 24 hours.
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
 type ClassificationConfigureInfo struct {
 
 	// Switch of intelligent categorization task. Valid values:
@@ -4263,6 +4276,57 @@ func (r *DescribeCDNUsageDataResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeCdnLogsRequest struct {
+	*tchttp.BaseRequest
+
+	// Domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Start time for log acquisition in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F), which must be after the start time.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeCdnLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCdnLogsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCdnLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Log download list for CDN nodes in Mainland China.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		DomesticCdnLogs []*CdnLogInfo `json:"DomesticCdnLogs,omitempty" name:"DomesticCdnLogs" list`
+
+		// Log download list for CDN nodes outside Mainland China. If global acceleration is not enabled for the domain name, ignore this parameter.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		OverseaCdnLogs []*CdnLogInfo `json:"OverseaCdnLogs,omitempty" name:"OverseaCdnLogs" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCdnLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCdnLogsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeContentReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
 
@@ -5910,9 +5974,9 @@ type ImageWatermarkInput struct {
 	Width *string `json:"Width,omitempty" name:"Width"`
 
 	// Watermark height. % and px formats are supported:
-	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
-	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
-	// Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
+	// Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
 	Height *string `json:"Height,omitempty" name:"Height"`
 }
 
@@ -5927,9 +5991,8 @@ type ImageWatermarkInputForUpdate struct {
 	Width *string `json:"Width,omitempty" name:"Width"`
 
 	// Watermark height. % and px formats are supported:
-	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
-	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
-	// Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
 	Height *string `json:"Height,omitempty" name:"Height"`
 }
 
@@ -5945,7 +6008,7 @@ type ImageWatermarkTemplate struct {
 
 	// Watermark height. % and px formats are supported:
 	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px;</li>
+	// <li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px;</li>
 	// `0px` means that `Height` will be proportionally scaled according to the video width.
 	Height *string `json:"Height,omitempty" name:"Height"`
 }
@@ -6055,6 +6118,10 @@ type MediaAiAnalysisFrameTagItem struct {
 
 	// Frame-specific tag name.
 	Tag *string `json:"Tag,omitempty" name:"Tag"`
+
+	// Category list of frame-specific tag names. `CategorySet.N` indicates the N+1-level category.
+	// For example, if the `Tag` is "tower", and `CategorySet` contains two elements (`CategorySet.0` is "scene", and `CategorySet.1` is "architecture"), then the frame-specific tag is "tower", the first-level category is "scene", and the second-level category is "architecture".
+	CategorySet []*string `json:"CategorySet,omitempty" name:"CategorySet" list`
 
 	// Confidence of intelligently generated frame-specific tag between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
@@ -7991,7 +8058,7 @@ type ModifyTranscodeTemplateRequest struct {
 	// Transcoding template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Template description. Length limit: 256 bytes.
+	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// Whether to remove video data. Valid values:
@@ -8681,20 +8748,20 @@ type ProcedureTask struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 
 	// Media file ID.
-	// <li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `FileId` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
-	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Id` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
+	// <li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `FileId` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
+	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Id` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
 	// Media filename
-	// <li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `BasicInfo.Name` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
-	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Name` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
+	// <li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `BasicInfo.Name` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
+	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Name` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
 	// Media file address
-	// <li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `BasicInfo.MediaUrl` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
-	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Url` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
+	// <li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `BasicInfo.MediaUrl` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
+	// <li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Url` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
 	FileUrl *string `json:"FileUrl,omitempty" name:"FileUrl"`
 
 	// Source video metadata.
@@ -9367,39 +9434,60 @@ type SampleSnapshotTemplate struct {
 type SearchMediaRequest struct {
 	*tchttp.BaseRequest
 
-	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
-	Text *string `json:"Text,omitempty" name:"Text"`
-
 	// Tag set, which matches any element in the set.
 	// <li>Tag length limit: 8 characters.</li>
 	// <li>Array length limit: 10.</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
 
-	// Category ID set, which matches the categories of the specified IDs and all subcategories. Array length limit: 10.
+	// Category ID set. The categories of the specified IDs and all subcategories in the set are matched.
+	// <li>Array length limit: 10.</li>
 	ClassIds []*int64 `json:"ClassIds,omitempty" name:"ClassIds" list`
 
-	// Start time in the creation time range.
-	// <li>After or at the start time.</li>
-	// <li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	// [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) set. Any element in the set can be matched.
+	// <li>Array length limit: 10.</li>
+	StreamIds []*string `json:"StreamIds,omitempty" name:"StreamIds" list`
 
-	// End time in the creation time range.
-	// <li>Before the end time.</li>
-	// <li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	// Unique ID of LVB recording file. Any element in the set can be matched.
+	// <li>Array length limit: 10.</li>
+	Vids []*string `json:"Vids,omitempty" name:"Vids" list`
 
-	// Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
-	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+	// Media file source set. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+	// <li>Array length limit: 10.</li>
+	SourceTypes []*string `json:"SourceTypes,omitempty" name:"SourceTypes" list`
 
-	// [LVB code](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) of a stream.
-	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
+	// File type. Any element in the set can be matched.
+	// <li>Video: video file</li>
+	// <li>Audio: audio file</li>
+	// <li>Image: image file</li>
+	Categories []*string `json:"Categories,omitempty" name:"Categories" list`
 
-	// Unique ID of LVB recording file.
-	Vid *string `json:"Vid,omitempty" name:"Vid"`
+	// Matches files created within the time period.
+	// <li>Includes specified start and end points in time.</li>
+	CreateTime *TimeRange `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// File ID set. Any element in the set can be matched.
+	// <li>Array length limit: 10.</li>
+	// <li>ID length limit: 40 characters.</li>
+	FileIds []*string `json:"FileIds,omitempty" name:"FileIds" list`
+
+	// Filename set. Filenames of media files are fuzzily matched. The higher the match rate, the higher-ranked the result.
+	// <li>Filename length limit: 40 characters.</li>
+	// <li>Array length limit: 10.</li>
+	Names []*string `json:"Names,omitempty" name:"Names" list`
+
+	// Filename prefix, which matches the filenames of media files.
+	// <li>Filename prefix length limit: 20 characters.</li>
+	// <li>Array length limit: 10.</li>
+	NamePrefixes []*string `json:"NamePrefixes,omitempty" name:"NamePrefixes" list`
+
+	// File description set. Any element in the set can be matched.
+	// <li>Description length limit: 100 characters.</li>
+	// <li>Array length limit: 10.</li>
+	Descriptions []*string `json:"Descriptions,omitempty" name:"Descriptions" list`
 
 	// Sorting order.
-	// <li>Valid value of `Sort.Field`: CreateTime</li>
-	// <li>If `Text` is specified for the search, the results will be sorted by the match rate, and this field will not take effect</li>
+	// <li>Valid value of `Sort.Field`: CreateTime.</li>
+	// <li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
 	Sort *SortBy `json:"Sort,omitempty" name:"Sort"`
 
 	// <div id="p_offset">Start offset of a paged return. Default value: 0. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
@@ -9410,14 +9498,51 @@ type SearchMediaRequest struct {
 	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// File type:
-	// <li>Video: video file</li>
-	// <li>Audio: audio file</li>
-	// <li>Image: image file</li>
-	Categories []*string `json:"Categories,omitempty" name:"Categories" list`
+	// Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
+	// <li>basicInfo (basic video information).</li>
+	// <li>metaData (video metadata).</li>
+	// <li>transcodeInfo (result information of video transcoding).</li>
+	// <li>animatedGraphicsInfo (result information of animated image generating task).</li>
+	// <li>imageSpriteInfo (image sprite information).</li>
+	// <li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
+	// <li>sampleSnapshotInfo (sampled screenshot information).</li>
+	// <li>keyFrameDescInfo (timestamp information).</li>
+	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
+	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
+	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// (This is not recommended. `StreamIds` should be used instead)
+	// [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1).
+	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
+
+	// (This is not recommended. `Vids` should be used instead)
+	// Unique ID of LVB recording file.
+	Vid *string `json:"Vid,omitempty" name:"Vid"`
+
+	// (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
+	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// (This is not recommended. `CreateTime` should be used instead)
+	// Start time in the creation time range.
+	// <li>After or at the start time.</li>
+	// <li>If `CreateTime.After` also exists, it will be used first.</li>
+	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// (This is not recommended. `CreateTime` should be used instead)
+	// End time in the creation time range.
+	// <li>Before the end time.</li>
+	// <li>If `CreateTime.Before` also exists, it will be used first.</li>
+	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// (This is not recommended. `SourceTypes` should be used instead)
+	// Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
 }
 
 func (r *SearchMediaRequest) ToJsonString() string {
@@ -9437,7 +9562,7 @@ type SearchMediaResponse struct {
 	// <li>Maximum value: 5000. If the number of eligible entries is greater than 5,000, this field will return 5,000 instead of the actual number.</li>
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// List of media file information, only including the basic information (BasicInfo).
+		// Media file information list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		MediaInfoSet []*MediaInfo `json:"MediaInfoSet,omitempty" name:"MediaInfoSet" list`
 
@@ -10067,6 +10192,17 @@ type TextWatermarkTemplateInputForUpdate struct {
 	// <li>0: completely transparent</li>
 	// <li>1: completely opaque</li>
 	FontAlpha *float64 `json:"FontAlpha,omitempty" name:"FontAlpha"`
+}
+
+type TimeRange struct {
+
+	// <li>After or at this time (start time).</li>
+	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+	After *string `json:"After,omitempty" name:"After"`
+
+	// <li>Before or at this time (end time).</li>
+	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+	Before *string `json:"Before,omitempty" name:"Before"`
 }
 
 type TranscodePlayInfo2017 struct {

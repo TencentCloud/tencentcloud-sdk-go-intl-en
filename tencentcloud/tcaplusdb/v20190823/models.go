@@ -226,7 +226,7 @@ type CreateClusterRequest struct {
 	// Cluster access password, which must contain lowercase letters (a-z), uppercase letters (A-Z), and digits (0-9).
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// 
+	// Cluster tag list
 	ResourceTags []*TagInfoUnit `json:"ResourceTags,omitempty" name:"ResourceTags" list`
 
 	// Whether to enable IPv6 address access for clusters
@@ -275,7 +275,7 @@ type CreateTableGroupRequest struct {
 	// Table group ID, which can be customized but must be unique in one cluster. If it is not specified, the auto-increment mode will be used.
 	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
 
-	// 
+	// Table group tag list
 	ResourceTags []*TagInfoUnit `json:"ResourceTags,omitempty" name:"ResourceTags" list`
 }
 
@@ -321,7 +321,7 @@ type CreateTablesRequest struct {
 	// Information list of tables to be created
 	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables" list`
 
-	// 
+	// Table tag list
 	ResourceTags []*TagInfoUnit `json:"ResourceTags,omitempty" name:"ResourceTags" list`
 }
 
@@ -1845,7 +1845,7 @@ type TableInfoNew struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SortRule *int64 `json:"SortRule,omitempty" name:"SortRule"`
 
-	// 
+	// Distributed index information of table
 	DbClusterInfoStruct *string `json:"DbClusterInfoStruct,omitempty" name:"DbClusterInfoStruct"`
 }
 

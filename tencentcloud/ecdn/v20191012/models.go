@@ -745,13 +745,13 @@ type ForceRedirect struct {
 
 type Hsts struct {
 
-	// 
+	// Whether to enable. Valid values: on, off.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// 
+	// `MaxAge` value.
 	MaxAge *int64 `json:"MaxAge,omitempty" name:"MaxAge"`
 
-	// 
+	// Whether to include subdomain names. Valid values: on, off.
 	IncludeSubDomains *string `json:"IncludeSubDomains,omitempty" name:"IncludeSubDomains"`
 }
 
@@ -813,7 +813,7 @@ type Https struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SslStatus *string `json:"SslStatus,omitempty" name:"SslStatus"`
 
-	// 
+	// Hsts configuration.
 	Hsts *Hsts `json:"Hsts,omitempty" name:"Hsts"`
 }
 

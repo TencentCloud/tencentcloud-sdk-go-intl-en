@@ -802,13 +802,18 @@ type StreamControl struct {
 
 type StreamLayout struct {
 
-	// 
+	// Stream layout configuration
 	LayoutParams *LayoutParams `json:"LayoutParams,omitempty" name:"LayoutParams"`
 
-	// 
+	// Video stream ID
+	// Description of the possible video stream ID values:
+	// 1. tic_record_user: the current picture is used to display the whiteboard video stream.
+	// 2. tic_substream: the current picture is used to display the auxiliary video stream.
+	// 3. Specific user ID: the current picture is used to display the video stream of a specific user.
+	// 4.Left empty: the current picture is vacant for new video stream.
 	InputStreamId *string `json:"InputStreamId,omitempty" name:"InputStreamId"`
 
-	// 
+	// Background color in RGB format, such as "#FF0000" for red. The default color is black. 
 	BackgroundColor *string `json:"BackgroundColor,omitempty" name:"BackgroundColor"`
 
 	// Video filling mode.

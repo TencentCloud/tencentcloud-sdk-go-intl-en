@@ -158,6 +158,17 @@ type Address struct {
 
 	// The ISP of an EIP/Elastic IP, with possible return values currently including "CMCC", "CTCC", "CUCC" and "BGP"
 	InternetServiceProvider *string `json:"InternetServiceProvider,omitempty" name:"InternetServiceProvider"`
+
+	// Whether the EIP is in a local BGP.
+	LocalBgp *bool `json:"LocalBgp,omitempty" name:"LocalBgp"`
+
+	// Bandwidth value of EIP. The EIP for the bill-by-CVM account will return `null`.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	Bandwidth *uint64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Network billing mode of EIP. The EIP for the bill-by-CVM account will return `null`.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	InternetChargeType *string `json:"InternetChargeType,omitempty" name:"InternetChargeType"`
 }
 
 type AddressChargePrepaid struct {
@@ -805,6 +816,46 @@ func (r *AttachNetworkInterfaceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type AuditCrossBorderComplianceRequest struct {
+	*tchttp.BaseRequest
+
+	// Service provider. Valid values: `UNICOM`.
+	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
+
+	// Unique ID of compliance review form.
+	ComplianceId *uint64 `json:"ComplianceId,omitempty" name:"ComplianceId"`
+
+	// Audit behavior. Valid values: `APPROVED` and `DENY`.
+	AuditBehavior *string `json:"AuditBehavior,omitempty" name:"AuditBehavior"`
+}
+
+func (r *AuditCrossBorderComplianceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AuditCrossBorderComplianceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AuditCrossBorderComplianceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AuditCrossBorderComplianceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AuditCrossBorderComplianceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type BandwidthPackage struct {
 
 	// The unique ID of the bandwidth package.
@@ -1047,7 +1098,7 @@ type CheckAssistantCidrResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// 
+		// Array of conflict resources.
 		ConflictSourceSet []*ConflictSource `json:"ConflictSourceSet,omitempty" name:"ConflictSourceSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1645,6 +1696,9 @@ type CreateFlowLogRequest struct {
 
 	// The description of the flow log instance
 	FlowLogDescription *string `json:"FlowLogDescription,omitempty" name:"FlowLogDescription"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateFlowLogRequest) ToJsonString() string {
@@ -2545,6 +2599,75 @@ func (r *CreateVpnGatewayResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CrossBorderCompliance struct {
+
+	// Service provider. Valid values: `UNICOM`.
+	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
+
+	// ID of compliance review form.
+	ComplianceId *uint64 `json:"ComplianceId,omitempty" name:"ComplianceId"`
+
+	// Full company name.
+	Company *string `json:"Company,omitempty" name:"Company"`
+
+	// Unified Social Credit Code.
+	UniformSocialCreditCode *string `json:"UniformSocialCreditCode,omitempty" name:"UniformSocialCreditCode"`
+
+	// Legal person.
+	LegalPerson *string `json:"LegalPerson,omitempty" name:"LegalPerson"`
+
+	// Issuing authority.
+	IssuingAuthority *string `json:"IssuingAuthority,omitempty" name:"IssuingAuthority"`
+
+	// Business License.
+	BusinessLicense *string `json:"BusinessLicense,omitempty" name:"BusinessLicense"`
+
+	// Business address.
+	BusinessAddress *string `json:"BusinessAddress,omitempty" name:"BusinessAddress"`
+
+	// Zip code.
+	PostCode *uint64 `json:"PostCode,omitempty" name:"PostCode"`
+
+	// Operator.
+	Manager *string `json:"Manager,omitempty" name:"Manager"`
+
+	// Operator ID card number.
+	ManagerId *string `json:"ManagerId,omitempty" name:"ManagerId"`
+
+	// Operator ID card.
+	ManagerIdCard *string `json:"ManagerIdCard,omitempty" name:"ManagerIdCard"`
+
+	// Operator address.
+	ManagerAddress *string `json:"ManagerAddress,omitempty" name:"ManagerAddress"`
+
+	// Operator phone number.
+	ManagerTelephone *string `json:"ManagerTelephone,omitempty" name:"ManagerTelephone"`
+
+	// Email.
+	Email *string `json:"Email,omitempty" name:"Email"`
+
+	// Service handling form.
+	ServiceHandlingForm *string `json:"ServiceHandlingForm,omitempty" name:"ServiceHandlingForm"`
+
+	// Authorization letter.
+	AuthorizationLetter *string `json:"AuthorizationLetter,omitempty" name:"AuthorizationLetter"`
+
+	// Information security commitment.
+	SafetyCommitment *string `json:"SafetyCommitment,omitempty" name:"SafetyCommitment"`
+
+	// Service start date.
+	ServiceStartDate *string `json:"ServiceStartDate,omitempty" name:"ServiceStartDate"`
+
+	// Service end date.
+	ServiceEndDate *string `json:"ServiceEndDate,omitempty" name:"ServiceEndDate"`
+
+	// Status. Valid values: `PENDING`, `APPROVED`, and `DENY`.
+	State *string `json:"State,omitempty" name:"State"`
+
+	// Creation time of the review form.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+}
+
 type CustomerGateway struct {
 
 	// The unique ID of the customer gateway
@@ -2598,7 +2721,7 @@ type CvmInstance struct {
 	// The creation time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// 
+	// Instance type.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
 	// Instance ENI quota (including primary ENIs).
@@ -4075,6 +4198,91 @@ func (r *DescribeClassicLinkInstancesResponse) ToJsonString() string {
 }
 
 func (r *DescribeClassicLinkInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCrossBorderComplianceRequest struct {
+	*tchttp.BaseRequest
+
+	// (Exact match) Service provider. Valid values: `UNICOM`.
+	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
+
+	// (Exact match) ID of compliance review form.
+	ComplianceId *uint64 `json:"ComplianceId,omitempty" name:"ComplianceId"`
+
+	// (Fuzzy match) Company name.
+	Company *string `json:"Company,omitempty" name:"Company"`
+
+	// (Fuzzy match) Unified Social Credit Code.
+	UniformSocialCreditCode *string `json:"UniformSocialCreditCode,omitempty" name:"UniformSocialCreditCode"`
+
+	// (Fuzzy match) Legal person.
+	LegalPerson *string `json:"LegalPerson,omitempty" name:"LegalPerson"`
+
+	// (Fuzzy match) Issuing authority.
+	IssuingAuthority *string `json:"IssuingAuthority,omitempty" name:"IssuingAuthority"`
+
+	// (Fuzzy match) Business address.
+	BusinessAddress *string `json:"BusinessAddress,omitempty" name:"BusinessAddress"`
+
+	// (Exact match) Zip code.
+	PostCode *uint64 `json:"PostCode,omitempty" name:"PostCode"`
+
+	// (Fuzzy match) Operator.
+	Manager *string `json:"Manager,omitempty" name:"Manager"`
+
+	// (Exact match) Operator ID card number.
+	ManagerId *string `json:"ManagerId,omitempty" name:"ManagerId"`
+
+	// (Fuzzy match) Operator address.
+	ManagerAddress *string `json:"ManagerAddress,omitempty" name:"ManagerAddress"`
+
+	// (Exact match) Operator phone number.
+	ManagerTelephone *string `json:"ManagerTelephone,omitempty" name:"ManagerTelephone"`
+
+	// (Exact match) Email.
+	Email *string `json:"Email,omitempty" name:"Email"`
+
+	// (Exact match) Service start date, such as `2020-07-28`.
+	ServiceStartDate *string `json:"ServiceStartDate,omitempty" name:"ServiceStartDate"`
+
+	// (Exact match) Service end date, such as `2020-07-28`.
+	ServiceEndDate *string `json:"ServiceEndDate,omitempty" name:"ServiceEndDate"`
+
+	// (Exact match) Status. Valid values: `PENDING`, `APPROVED`, and `DENY`.
+	State *string `json:"State,omitempty" name:"State"`
+}
+
+func (r *DescribeCrossBorderComplianceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCrossBorderComplianceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCrossBorderComplianceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of compliance review forms.
+		CrossBorderComplianceSet []*CrossBorderCompliance `json:"CrossBorderComplianceSet,omitempty" name:"CrossBorderComplianceSet" list`
+
+		// Total number of compliance review forms.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCrossBorderComplianceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCrossBorderComplianceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5909,7 +6117,7 @@ type DirectConnectGateway struct {
 	// Whether BGP is enabled.
 	EnableBGP *bool `json:"EnableBGP,omitempty" name:"EnableBGP"`
 
-	// 
+	// Whether to enable BGP's `community` attribute. Valid values: enable, disable
 	EnableBGPCommunity *bool `json:"EnableBGPCommunity,omitempty" name:"EnableBGPCommunity"`
 
 	// ID of the NAT gateway bound.
@@ -8239,10 +8447,10 @@ type NatGateway struct {
 	// The availability zone in which the NAT gateway is located.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// 
+	// IDs of direct connect gateway associated.
 	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds" list`
 
-	// 
+	// Subnet ID.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// Tag key-value pair.
@@ -9162,7 +9370,7 @@ type ResourceDashboard struct {
 	// Oracle.
 	Oracle *uint64 `json:"Oracle,omitempty" name:"Oracle"`
 
-	// 
+	// ElasticSearch Service.
 	ElasticSearch *uint64 `json:"ElasticSearch,omitempty" name:"ElasticSearch"`
 
 	// Blockchain service.

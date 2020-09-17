@@ -626,7 +626,7 @@ type ModifyTemplateStatus struct {
 
 type PullSmsReplyStatus struct {
 
-	// SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://cloud.tencent.com/document/product/382/3773).
+	// SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1).
 	ExtendCode *string `json:"ExtendCode,omitempty" name:"ExtendCode"`
 
 	// Country (or region) code.
@@ -667,7 +667,7 @@ type PullSmsReplyStatusByPhoneNumberRequest struct {
 	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
 	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
 
-	// 
+	// Pull end time in UNIX timestamp accurate to seconds.
 	EndDateTime *uint64 `json:"EndDateTime,omitempty" name:"EndDateTime"`
 }
 
@@ -787,7 +787,7 @@ type PullSmsSendStatusByPhoneNumberRequest struct {
 	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
 	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
 
-	// 
+	// Pull end time in UNIX timestamp accurate to seconds.
 	EndDateTime *uint64 `json:"EndDateTime,omitempty" name:"EndDateTime"`
 }
 
@@ -880,13 +880,13 @@ type SendSmsRequest struct {
 	// Template parameter. If there is no template parameter, leave this parameter blank.
 	TemplateParamSet []*string `json:"TemplateParamSet,omitempty" name:"TemplateParamSet" list`
 
-	// SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://cloud.tencent.com/document/product/382/3773).
+	// SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1).
 	ExtendCode *string `json:"ExtendCode,omitempty" name:"ExtendCode"`
 
 	// User session content, which can carry context information such as user-side ID and will be returned as-is by the server.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// `senderid` for Global SMS, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://cloud.tencent.com/document/product/382/3773) for assistance. This parameter should be empty for Mainland China SMS.
+	// `senderid` for Global SMS, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1) for assistance. This parameter should be empty for Mainland China SMS.
 	SenderId *string `json:"SenderId,omitempty" name:"SenderId"`
 }
 
@@ -928,7 +928,7 @@ type SendStatus struct {
 	// Mobile number in the e.164 standard (+[country/region code][mobile number]), such as +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
 	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
 
-	// Number of billable SMS messages. For billing rules, please see [Billing Policy](https://cloud.tencent.com/document/product/382/36135).
+	// Number of billable SMS messages. For billing rules, please see [Billing Policy](https://intl.cloud.tencent.com/document/product/382/36135?from_cn_redirect=1).
 	Fee *uint64 `json:"Fee,omitempty" name:"Fee"`
 
 	// User session content.

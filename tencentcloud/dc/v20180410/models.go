@@ -56,22 +56,22 @@ func (r *AcceptDirectConnectTunnelResponse) FromJsonString(s string) error {
 
 type AccessPoint struct {
 
-	// 
+	// Access point name.
 	AccessPointName *string `json:"AccessPointName,omitempty" name:"AccessPointName"`
 
-	// 
+	// Unique ID of access point.
 	AccessPointId *string `json:"AccessPointId,omitempty" name:"AccessPointId"`
 
-	// 
+	// Access point status. Valid values: available, unavailable.
 	State *string `json:"State,omitempty" name:"State"`
 
-	// 
+	// Access point location.
 	Location *string `json:"Location,omitempty" name:"Location"`
 
-	// 
+	// Supported ISP list of access pint.
 	LineOperator []*string `json:"LineOperator,omitempty" name:"LineOperator" list`
 
-	// 
+	// Region ID where the access point resides.
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 
 	// Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.
@@ -586,7 +586,7 @@ type DirectConnect struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ChargeState *string `json:"ChargeState,omitempty" name:"ChargeState"`
 
-	// 
+	// Connection activation time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Whether the connection has the service agreement signed.
@@ -695,7 +695,7 @@ type DirectConnectTunnel struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
 
-	// 
+	// Backup IP address on the Tencent side.
 	TencentBackupAddress *string `json:"TencentBackupAddress,omitempty" name:"TencentBackupAddress"`
 
 	// Whether the connection associated with the dedicated tunnel has the service agreement signed.

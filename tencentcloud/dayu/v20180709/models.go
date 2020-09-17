@@ -2130,6 +2130,9 @@ type DescribeCCTrendRequest struct {
 
 	// Resource instance ID. If `Business` is `basic`, this field is not required (because Anti-DDoS Basic has no resource instance)
 	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// (Optional) Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
 
 func (r *DescribeCCTrendRequest) ToJsonString() string {
@@ -3279,7 +3282,7 @@ type DescribeDDoSTrendResponse struct {
 		// Statistics end time
 		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-		// Value array
+		// Value array. The unit for attack traffic bandwidth is Mbps, and that for the packet rate is pps.
 		Data []*uint64 `json:"Data,omitempty" name:"Data" list`
 
 		// Number of values
@@ -4617,7 +4620,7 @@ type L7RuleEntry struct {
 	// HTTPS CC protection level
 	CCLevel *string `json:"CCLevel,omitempty" name:"CCLevel"`
 
-	// 
+	// Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disabled) and `1` (enabled). The default value is disabled.
 	HttpsToHttpEnable *uint64 `json:"HttpsToHttpEnable,omitempty" name:"HttpsToHttpEnable"`
 
 	// Access port number.
@@ -5104,7 +5107,7 @@ type ModifyCCThresholdRequest struct {
 	// ISP line (only provided for Anti-DDoS Basic), which is optional. (If the device type to be queried is a NAT server, this parameter should be 5)
 	BasicIspCode *uint64 `json:"BasicIspCode,omitempty" name:"BasicIspCode"`
 
-	// 
+	// This optional field must be specified when HTTPS protocol is used.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
 

@@ -82,7 +82,7 @@ type Coord struct {
 	Y *int64 `json:"Y,omitempty" name:"Y"`
 }
 
-type GeneralBasicOCRRequest struct {
+type GeneralAccurateOCRRequest struct {
 	*tchttp.BaseRequest
 
 	// Base64-encoded value of image.
@@ -92,7 +92,54 @@ type GeneralBasicOCRRequest struct {
 
 	// URL address of image.
 	// The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
-	// You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+func (r *GeneralAccurateOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GeneralAccurateOCRRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GeneralAccurateOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Information of recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
+		TextDetections []*TextDetection `json:"TextDetections,omitempty" name:"TextDetections" list`
+
+		// Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation.
+		Angel *float64 `json:"Angel,omitempty" name:"Angel"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GeneralAccurateOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GeneralAccurateOCRResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GeneralBasicOCRRequest struct {
+	*tchttp.BaseRequest
+
+	// Base64-encoded value of image/PDF.
+	// The image/PDF cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// URL address of image/PDF.
+	// The image/PDF cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
+	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 
 	// Reserved field.
@@ -101,14 +148,25 @@ type GeneralBasicOCRRequest struct {
 	// Language to be recognized.
 	// The language can be automatically recognized or manually specified. Chinese-English mix (`zh`) is selected by default. Mixed characters in English and each supported language can be recognized together.
 	// Valid values:
-	// zh\auto\jap\kor\nspa\fre\ger\por\nvie\may\rus\ita\nhol\swe\fin\dan\nnor\hun\tha\lat
+	// zh\auto\jap\kor\
+	// spa\fre\ger\por\
+	// vie\may\rus\ita\
+	// hol\swe\fin\dan\
+	// nor\hun\tha\lat\ara
 	// Value meanings:
 	// Chinese-English mix, automatic recognition, Japanese, Korean,
 	// Spanish, French, German, Portuguese,
 	// Vietnamese, Malay, Russian, Italian,
 	// Dutch, Swedish, Finnish, Danish,
-	// Norwegian, Hungarian, Thai, Latin.
+	// Norwegian, Hungarian, Thai, Latin,
+	// Arabic.
 	LanguageType *string `json:"LanguageType,omitempty" name:"LanguageType"`
+
+	// Whether to enable PDF recognition. Default value: false. After this feature is enabled, both images and PDF files can be recognized at the same time.
+	IsPdf *bool `json:"IsPdf,omitempty" name:"IsPdf"`
+
+	// Page number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF and the value of the `IsPdf` parameter is `true`. Default value: 1.
+	PdfPageNumber *uint64 `json:"PdfPageNumber,omitempty" name:"PdfPageNumber"`
 }
 
 func (r *GeneralBasicOCRRequest) ToJsonString() string {
@@ -130,8 +188,11 @@ type GeneralBasicOCRResponse struct {
 		// Detected language. For more information on the supported languages, please see the description of the `LanguageType` input parameter.
 		Language *string `json:"Language,omitempty" name:"Language"`
 
-		// Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://cloud.tencent.com/document/product/866/45139">How to Correct Tilted Text</a>
+		// Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>
 		Angel *float64 `json:"Angel,omitempty" name:"Angel"`
+
+		// Total number of PDF pages to be returned if the image is a PDF. Default value: 0
+		PdfPageSize *int64 `json:"PdfPageSize,omitempty" name:"PdfPageSize"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -335,6 +396,9 @@ type MLIDCardOCRResponse struct {
 	// IKAD: Malaysia Temporary Employment Visit Pass
 		Type *string `json:"Type,omitempty" name:"Type"`
 
+		// Date of birth (currently, this field is only supported for IKAD)
+		Birthday *string `json:"Birthday,omitempty" name:"Birthday"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -352,11 +416,10 @@ func (r *MLIDCardOCRResponse) FromJsonString(s string) error {
 type MLIDPassportOCRRequest struct {
 	*tchttp.BaseRequest
 
-	// Base64-encoded value of the image. The image cannot exceed 7 MB in size after being Base64-encoded. A resolution of 500x800 or above is recommended. Supported formats include PNG, JPG, JPEG, and BMP. It is recommended that the card part occupies more than 2/3 of the image.
-	// Either the `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+	// Base64-encoded value of image. The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 500x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies more than 2/3 area of the image.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
 
-	// Whether to return an image
+	// Whether to return an image. Default value: false
 	RetImage *bool `json:"RetImage,omitempty" name:"RetImage"`
 }
 
@@ -428,6 +491,56 @@ func (r *MLIDPassportOCRResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type TableOCRRequest struct {
+	*tchttp.BaseRequest
+
+	// Base64-encoded value of image.
+	// Supported image formats: PNG, JPG, JPEG. GIF is not supported at present.
+	// Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// URL address of image.
+	// Supported image formats: PNG, JPG, JPEG. GIF is not supported at present.
+	// Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+	// You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+func (r *TableOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TableOCRRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TableOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Recognized text. For more information, please click the link on the left.
+		TextDetections []*TextTable `json:"TextDetections,omitempty" name:"TextDetections" list`
+
+		// Base64-encoded Excel data.
+		Data *string `json:"Data,omitempty" name:"Data"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *TableOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TableOCRResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type TextDetection struct {
 
 	// Recognized text line content
@@ -446,4 +559,34 @@ type TextDetection struct {
 
 	// Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`
 	ItemPolygon *ItemCoord `json:"ItemPolygon,omitempty" name:"ItemPolygon"`
+}
+
+type TextTable struct {
+
+	// Column index of the top-left corner of the cell
+	ColTl *int64 `json:"ColTl,omitempty" name:"ColTl"`
+
+	// Row index of the top-left corner of the cell
+	RowTl *int64 `json:"RowTl,omitempty" name:"RowTl"`
+
+	// Column index of the bottom-right corner of the cell
+	ColBr *int64 `json:"ColBr,omitempty" name:"ColBr"`
+
+	// Row index of the bottom-right corner of the cell
+	RowBr *int64 `json:"RowBr,omitempty" name:"RowBr"`
+
+	// Cell text
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// Cell type. Valid values: body, header, footer
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Confidence. Value range: 0–100
+	Confidence *int64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// Text line coordinates, which are represented as 4 vertex coordinates
+	Polygon []*Coord `json:"Polygon,omitempty" name:"Polygon" list`
+
+	// Extended field
+	AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`
 }

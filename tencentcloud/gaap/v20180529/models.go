@@ -4753,7 +4753,7 @@ type SecurityPolicyRuleOut struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// 
+	// Security policy ID
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 

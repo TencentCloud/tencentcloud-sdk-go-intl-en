@@ -351,7 +351,7 @@ type DBInstance struct {
 	// Original ID of instance (this field is obsolete and should not be depended on)
 	OriginSerialId *string `json:"OriginSerialId,omitempty" name:"OriginSerialId"`
 
-	// Number of nodes. 2: one primary and one secondary, 3: one primary and two secondaries
+	// Number of nodes. 2: one master and one slave, 3: one master and two slaves
 	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
 
 	// Whether it is a temp instance. 0: no, non-zero value: yes

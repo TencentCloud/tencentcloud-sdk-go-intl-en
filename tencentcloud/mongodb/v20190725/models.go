@@ -451,10 +451,10 @@ type DescribeClientConnectionsRequest struct {
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// 
+	// The number of records that will be returned. Default value: 10,000.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// 
+	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
@@ -474,7 +474,7 @@ type DescribeClientConnectionsResponse struct {
 		// Client connection information, including client IP and number of connections
 		Clients []*ClientConnection `json:"Clients,omitempty" name:"Clients" list`
 
-		// 
+		// The total number of records that meet the query condition, which can be used for paginated queries.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

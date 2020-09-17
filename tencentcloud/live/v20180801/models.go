@@ -402,7 +402,8 @@ type ClientIpPlaySumInfo struct {
 
 type CommonMixControlParams struct {
 
-	// 
+	// Value range: [0,1]. 
+	// If 1 is entered, when the layer resolution in the parameter is different from the actual video resolution, the video will be automatically cropped according to the resolution set by the layer.
 	UseMixCropCenter *int64 `json:"UseMixCropCenter,omitempty" name:"UseMixCropCenter"`
 
 	// Value range: [0,1].

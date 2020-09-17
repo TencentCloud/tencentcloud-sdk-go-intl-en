@@ -446,6 +446,33 @@ func (c *Client) AttachNetworkInterface(request *AttachNetworkInterfaceRequest) 
     return
 }
 
+func NewAuditCrossBorderComplianceRequest() (request *AuditCrossBorderComplianceRequest) {
+    request = &AuditCrossBorderComplianceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "AuditCrossBorderCompliance")
+    return
+}
+
+func NewAuditCrossBorderComplianceResponse() (response *AuditCrossBorderComplianceResponse) {
+    response = &AuditCrossBorderComplianceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used by the service provider to perform a compliance audit.
+// * To call this API, the service provider needs to prove identity and provide `APPID` to audit the compliance review forms received.
+// * The review form can be changed between the `APPROVED` and `DENY` status.
+func (c *Client) AuditCrossBorderCompliance(request *AuditCrossBorderComplianceRequest) (response *AuditCrossBorderComplianceResponse, err error) {
+    if request == nil {
+        request = NewAuditCrossBorderComplianceRequest()
+    }
+    response = NewAuditCrossBorderComplianceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCheckAssistantCidrRequest() (request *CheckAssistantCidrRequest) {
     request = &CheckAssistantCidrRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2231,6 +2258,32 @@ func (c *Client) DescribeClassicLinkInstances(request *DescribeClassicLinkInstan
         request = NewDescribeClassicLinkInstancesRequest()
     }
     response = NewDescribeClassicLinkInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCrossBorderComplianceRequest() (request *DescribeCrossBorderComplianceRequest) {
+    request = &DescribeCrossBorderComplianceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeCrossBorderCompliance")
+    return
+}
+
+func NewDescribeCrossBorderComplianceResponse() (response *DescribeCrossBorderComplianceResponse) {
+    response = &DescribeCrossBorderComplianceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the compliance review form created.
+// The service provider can query all review forms created by any `APPID` under the service. Other users can only query their own review forms.
+func (c *Client) DescribeCrossBorderCompliance(request *DescribeCrossBorderComplianceRequest) (response *DescribeCrossBorderComplianceResponse, err error) {
+    if request == nil {
+        request = NewDescribeCrossBorderComplianceRequest()
+    }
+    response = NewDescribeCrossBorderComplianceResponse()
     err = c.Send(request, response)
     return
 }

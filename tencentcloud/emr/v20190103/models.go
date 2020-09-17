@@ -598,6 +598,13 @@ type EmrProductConfigOutter struct {
 	CbsEncrypt *int64 `json:"CbsEncrypt,omitempty" name:"CbsEncrypt"`
 }
 
+type HostVolumeContext struct {
+
+	// Directory in the pod for mounting the host, which is the mount point of resources for the host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	VolumePath *string `json:"VolumePath,omitempty" name:"VolumePath"`
+}
+
 type InquiryPriceCreateInstanceRequest struct {
 	*tchttp.BaseRequest
 
@@ -995,7 +1002,8 @@ type NodeHardwareInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WanIp *string `json:"WanIp,omitempty" name:"WanIp"`
 
-	// Node type
+	// Node type. 0: common node; 1: master node;
+	// 2: core node; 3: task node
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Flag *int64 `json:"Flag,omitempty" name:"Flag"`
 
@@ -1119,7 +1127,7 @@ type NodeHardwareInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
-	// 
+	// Wether the node is auto-scaling. 0 means common node. 1 means auto-scaling node.
 	AutoFlag *int64 `json:"AutoFlag,omitempty" name:"AutoFlag"`
 
 	// Resource type. Valid values: host, pod
@@ -1166,6 +1174,17 @@ type OutterResource struct {
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
+type PersistentVolumeContext struct {
+
+	// Disk size in GB
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Disk type. Valid values: CLOUD_PREMIUM, CLOUD_SSD
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+}
+
 type Placement struct {
 
 	// ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` field in the return value of the `DescribeProject` API. If 0 is entered, the default project will be used.
@@ -1192,8 +1211,29 @@ type PodSpec struct {
 	// Memory size in GB.
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Mount point of resource for host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod.
+	// Mount point of resource for host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod. (This parameter has been disused)
 	DataVolumes []*string `json:"DataVolumes,omitempty" name:"DataVolumes" list`
+
+	// EKS cluster - CPU type. Valid values: "intel", "amd"
+	CpuType *string `json:"CpuType,omitempty" name:"CpuType"`
+
+	// Pod node data directory mounting information.
+	PodVolumes []*PodVolume `json:"PodVolumes,omitempty" name:"PodVolumes" list`
+}
+
+type PodVolume struct {
+
+	// Storage type. Valid values: "pvc", "hostpath".
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	VolumeType *string `json:"VolumeType,omitempty" name:"VolumeType"`
+
+	// This field will take effect if `VolumeType` is `pvc`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PVCVolume *PersistentVolumeContext `json:"PVCVolume,omitempty" name:"PVCVolume"`
+
+	// This field will take effect if `VolumeType` is `hostpath`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	HostVolume *HostVolumeContext `json:"HostVolume,omitempty" name:"HostVolume"`
 }
 
 type PreExecuteFileSettings struct {
