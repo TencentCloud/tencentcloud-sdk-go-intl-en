@@ -217,17 +217,17 @@ type AttachPolicyInfo struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	PolicyType *string `json:"PolicyType,omitempty" name:"PolicyType"`
 
-	// 
+	// Policy remarks
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
 	// Root account of the operator associating the policy
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OperateOwnerUin *string `json:"OperateOwnerUin,omitempty" name:"OperateOwnerUin"`
 
-	// 
+	// The ID of the account associating the policy. If `UinType` is 0, this indicates that this is a sub-account `UIN`. If `UinType` is 1, this indicates this is a role ID
 	OperateUin *string `json:"OperateUin,omitempty" name:"OperateUin"`
 
-	// 
+	// If `UinType` is 0, `OperateUin` indicates that this is a sub-account `UIN`. If `UinType` is 1, `OperateUin` indicates that this is a role ID
 	OperateUinType *uint64 `json:"OperateUinType,omitempty" name:"OperateUinType"`
 
 	// Queries if the policy has been deactivated
@@ -1009,6 +1009,46 @@ func (r *DescribeRoleListResponse) ToJsonString() string {
 }
 
 func (r *DescribeRoleListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSafeAuthFlagRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeSafeAuthFlagRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSafeAuthFlagRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSafeAuthFlagResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Login protection settings
+		LoginFlag *LoginActionFlag `json:"LoginFlag,omitempty" name:"LoginFlag"`
+
+		// Sensitive operation protection settings
+		ActionFlag *LoginActionFlag `json:"ActionFlag,omitempty" name:"ActionFlag"`
+
+		// Unusual login location protection settings
+		OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSafeAuthFlagResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSafeAuthFlagResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2168,6 +2208,24 @@ func (r *ListUsersResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type LoginActionFlag struct {
+
+	// Phone
+	Phone *uint64 `json:"Phone,omitempty" name:"Phone"`
+
+	// Hard token
+	Token *uint64 `json:"Token,omitempty" name:"Token"`
+
+	// Soft token
+	Stoken *uint64 `json:"Stoken,omitempty" name:"Stoken"`
+
+	// WeChat
+	Wechat *uint64 `json:"Wechat,omitempty" name:"Wechat"`
+
+	// Custom
+	Custom *uint64 `json:"Custom,omitempty" name:"Custom"`
+}
+
 type LoginActionMfaFlag struct {
 
 	// Mobile phone
@@ -2178,6 +2236,24 @@ type LoginActionMfaFlag struct {
 
 	// WeChat
 	Wechat *uint64 `json:"Wechat,omitempty" name:"Wechat"`
+}
+
+type OffsiteFlag struct {
+
+	// Verification flag
+	VerifyFlag *uint64 `json:"VerifyFlag,omitempty" name:"VerifyFlag"`
+
+	// Phone notification
+	NotifyPhone *uint64 `json:"NotifyPhone,omitempty" name:"NotifyPhone"`
+
+	// Email notification
+	NotifyEmail *int64 `json:"NotifyEmail,omitempty" name:"NotifyEmail"`
+
+	// WeChat notification
+	NotifyWechat *uint64 `json:"NotifyWechat,omitempty" name:"NotifyWechat"`
+
+	// Alert
+	Tips *uint64 `json:"Tips,omitempty" name:"Tips"`
 }
 
 type PolicyVersionDetail struct {
@@ -2482,7 +2558,7 @@ type StrategyInfo struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
-	// 
+	// This value should not be null when querying whether a marked entity has been associated with a policy. 0 indicates that no policy has been associated, while 1 indicates that a policy has been associated
 	IsAttached *uint64 `json:"IsAttached,omitempty" name:"IsAttached"`
 
 	// Queries if the policy has been deactivated

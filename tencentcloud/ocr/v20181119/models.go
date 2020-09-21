@@ -92,7 +92,7 @@ type GeneralAccurateOCRRequest struct {
 
 	// URL address of image.
 	// The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
-	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 }
 
@@ -109,7 +109,7 @@ type GeneralAccurateOCRResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Information of recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
+		// Information on recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
 		TextDetections []*TextDetection `json:"TextDetections,omitempty" name:"TextDetections" list`
 
 		// Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation.
@@ -139,7 +139,7 @@ type GeneralBasicOCRRequest struct {
 
 	// URL address of image/PDF.
 	// The image/PDF cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
-	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 
 	// Reserved field.
@@ -188,10 +188,10 @@ type GeneralBasicOCRResponse struct {
 		// Detected language. For more information on the supported languages, please see the description of the `LanguageType` input parameter.
 		Language *string `json:"Language,omitempty" name:"Language"`
 
-		// Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>
+		// Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>.
 		Angel *float64 `json:"Angel,omitempty" name:"Angel"`
 
-		// Total number of PDF pages to be returned if the image is a PDF. Default value: 0
+		// Total number of PDF pages to be returned if the image is a PDF. Default value: 0.
 		PdfPageSize *int64 `json:"PdfPageSize,omitempty" name:"PdfPageSize"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -310,10 +310,10 @@ func (r *HKIDCardOCRResponse) FromJsonString(s string) error {
 
 type ItemCoord struct {
 
-	// X-coordinate of top-left point
+	// X-coordinate of top-left point.
 	X *int64 `json:"X,omitempty" name:"X"`
 
-	// Y-coordinate of top-left point
+	// Y-coordinate of top-left point.
 	Y *int64 `json:"Y,omitempty" name:"Y"`
 
 	// Width
@@ -396,7 +396,7 @@ type MLIDCardOCRResponse struct {
 	// IKAD: Malaysia Temporary Employment Visit Pass
 		Type *string `json:"Type,omitempty" name:"Type"`
 
-		// Date of birth (currently, this field is only supported for IKAD)
+		// Date of birth (currently, this field is only supported for IKAD).
 		Birthday *string `json:"Birthday,omitempty" name:"Birthday"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -419,7 +419,7 @@ type MLIDPassportOCRRequest struct {
 	// Base64-encoded value of image. The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 500x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies more than 2/3 area of the image.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
 
-	// Whether to return an image. Default value: false
+	// Whether to return an image. Default value: false.
 	RetImage *bool `json:"RetImage,omitempty" name:"RetImage"`
 }
 
@@ -503,7 +503,7 @@ type TableOCRRequest struct {
 	// URL address of image.
 	// Supported image formats: PNG, JPG, JPEG. GIF is not supported at present.
 	// Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-	// You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 	// The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 }
@@ -543,13 +543,13 @@ func (r *TableOCRResponse) FromJsonString(s string) error {
 
 type TextDetection struct {
 
-	// Recognized text line content
+	// Recognized text line content.
 	DetectedText *string `json:"DetectedText,omitempty" name:"DetectedText"`
 
-	// Confidence. Value range: 0-100
+	// Confidence. Value range: 0–100.
 	Confidence *int64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Text line coordinates, which are represented as 4 vertex coordinates
+	// Text line coordinates, which are represented as 4 vertex coordinates.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Polygon []*Coord `json:"Polygon,omitempty" name:"Polygon" list`
 
@@ -557,22 +557,22 @@ type TextDetection struct {
 	// The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains `ParagNo`.
 	AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`
 
-	// Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`
+	// Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`.
 	ItemPolygon *ItemCoord `json:"ItemPolygon,omitempty" name:"ItemPolygon"`
 }
 
 type TextTable struct {
 
-	// Column index of the top-left corner of the cell
+	// Column index of the top-left corner of the cell.
 	ColTl *int64 `json:"ColTl,omitempty" name:"ColTl"`
 
-	// Row index of the top-left corner of the cell
+	// Row index of the top-left corner of the cell.
 	RowTl *int64 `json:"RowTl,omitempty" name:"RowTl"`
 
-	// Column index of the bottom-right corner of the cell
+	// Column index of the bottom-right corner of the cell.
 	ColBr *int64 `json:"ColBr,omitempty" name:"ColBr"`
 
-	// Row index of the bottom-right corner of the cell
+	// Row index of the bottom-right corner of the cell.
 	RowBr *int64 `json:"RowBr,omitempty" name:"RowBr"`
 
 	// Cell text
@@ -584,7 +584,7 @@ type TextTable struct {
 	// Confidence. Value range: 0–100
 	Confidence *int64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Text line coordinates, which are represented as 4 vertex coordinates
+	// Text line coordinates, which are represented as 4 vertex coordinates.
 	Polygon []*Coord `json:"Polygon,omitempty" name:"Polygon" list`
 
 	// Extended field

@@ -123,7 +123,7 @@ type CreateDBInstancesRequest struct {
 	// Renewal flag. 0: normal renewal (default), 1: auto-renewal.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
-	// 
+	// Activity ID
 	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
 
 	// Instance name (which will be supported in the future)
@@ -152,10 +152,10 @@ type CreateDBInstancesResponse struct {
 		// Order number list. Each instance corresponds to an order number.
 		DealNames []*string `json:"DealNames,omitempty" name:"DealNames" list`
 
-		// 
+		// Bill ID of frozen fees
 		BillId *string `json:"BillId,omitempty" name:"BillId"`
 
-		// 
+		// ID set of instances which have been created successfully. The parameter value will be returned only when the billing mode is postpaid.
 		DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -282,13 +282,13 @@ type DBInstance struct {
 	// Machine type
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// 
+	// User `AppId`
 	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
 
-	// 
+	// Instance `Uid`
 	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
 
-	// 
+	// Whether the instance supports IPv6 address access. Valid values: 1 (yes), 0 (no)
 	SupportIpv6 *uint64 `json:"SupportIpv6,omitempty" name:"SupportIpv6"`
 
 	// The information of tags associated with instances.
@@ -528,10 +528,10 @@ type DescribeDBInstancesRequest struct {
 	// Page number, starting from 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// 
+	// Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
-	// 
+	// In ascending or descending order
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 }
 
@@ -1611,7 +1611,7 @@ type UpgradeDBInstanceRequest struct {
 	// Voucher ID list (only one voucher can be specified currently)
 	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
 
-	// 
+	// Activity ID
 	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
 }
 
@@ -1631,7 +1631,7 @@ type UpgradeDBInstanceResponse struct {
 		// Transaction name.
 		DealName *string `json:"DealName,omitempty" name:"DealName"`
 
-		// 
+		// Bill ID of frozen fees
 		BillId *string `json:"BillId,omitempty" name:"BillId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1665,7 +1665,7 @@ type Xlog struct {
 	// Download address on public network
 	ExternalAddr *string `json:"ExternalAddr,omitempty" name:"ExternalAddr"`
 
-	// 
+	// Backup file size
 	Size *int64 `json:"Size,omitempty" name:"Size"`
 }
 

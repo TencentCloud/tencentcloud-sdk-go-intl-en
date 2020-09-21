@@ -833,15 +833,16 @@ type DrmKey struct {
 
 type DrmSettingsInfo struct {
 
-	// 
+	// Whether to enable DRM encryption. Valid value: CLOSE/OPEN. Default value: CLOSE.
+	// Currently, this is supported only for HLS/DASH/HLS_ARCHIVE/DASH_ARCHIVE.
 	State *string `json:"State,omitempty" name:"State"`
 
-	// When `Scheme` is set to TencentDRM, this parameter should be set to the `ContentId` of DRM encryption, and if this parameter is left empty, a `ContentId` will be automatically created. For more information, please see [here](https://cloud.tencent.com/document/product/1000/40960).
+	// When `Scheme` is set to TencentDRM, this parameter should be set to the `ContentId` of DRM encryption, and if this parameter is left empty, a `ContentId` will be automatically created. For more information, please see [here](https://intl.cloud.tencent.com/document/product/1000/40960?from_cn_redirect=1).
 	// When `Scheme` is set to CustomDRMKeys, this parameter is required and should be specified by the user.
 	ContentId *string `json:"ContentId,omitempty" name:"ContentId"`
 
 	// Valid values: TencentDRM, CustomDRMKeys. If this parameter is left empty, TencentDRM will be used by default.
-	// TencentDRM refers to Tencent digital rights management (DRM) encryption. For more information, please see [here](https://cloud.tencent.com/solution/drm).
+	// TencentDRM refers to Tencent digital rights management (DRM) encryption. For more information, please see [here](https://intl.cloud.tencent.com/solution/drm?from_cn_redirect=1).
 	// CustomDRMKeys refers to an encryption key customized by the user.
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 
@@ -1100,26 +1101,27 @@ func (r *ModifyMediaLiveInputSecurityGroupResponse) FromJsonString(s string) err
 
 type OutputGroupsInfo struct {
 
-	// 
+	// Channel output group name, which can contain 1–32 letters, digits, and underscores and must be unique at the channel level.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Output protocol type.
 	// Valid values: HLS, DASH, HLS_ARCHIVE, HLS_MEDIA_PACKAGE, DASH_MEDIA_PACKAGE.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// 
+	// Output information.
+	// Quantity limit: [1,1] for RTMP/RTP; [1,10] for HLS/DASH.
 	Outputs []*OutputInfo `json:"Outputs,omitempty" name:"Outputs" list`
 
-	// 
+	// Relay destination address. Quantity limit: [1,2].
 	Destinations []*DestinationInfo `json:"Destinations,omitempty" name:"Destinations" list`
 
-	// 
+	// HLS protocol configuration information, which takes effect only for HLS/HLS_ARCHIVE.
 	HlsRemuxSettings *HlsRemuxSettingsInfo `json:"HlsRemuxSettings,omitempty" name:"HlsRemuxSettings"`
 
-	// 
+	// DASH protocol configuration information, which takes effect only for DASH/DSAH_ARCHIVE.
 	DashRemuxSettings *DashRemuxSettingsInfo `json:"DashRemuxSettings,omitempty" name:"DashRemuxSettings"`
 
-	// 
+	// DRM configuration information.
 	DrmSettings *DrmSettingsInfo `json:"DrmSettings,omitempty" name:"DrmSettings"`
 
 	// Configuration information of media packaging, which is required when `Type` is set to MediaPackage.

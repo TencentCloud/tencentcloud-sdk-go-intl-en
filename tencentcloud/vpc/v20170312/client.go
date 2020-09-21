@@ -462,8 +462,8 @@ func NewAuditCrossBorderComplianceResponse() (response *AuditCrossBorderComplian
 }
 
 // This API is used by the service provider to perform a compliance audit.
-// * To call this API, the service provider needs to prove identity and provide `APPID` to audit the compliance review forms received.
-// * The review form can be changed between the `APPROVED` and `DENY` status.
+// * This API is only provided for service providers to audit compliance review requests received. Tencent Cloud will verify the identity of the service provider by the `APPID`. 
+// * The status of the review request can be changed between `APPROVED` and `DENY`.
 func (c *Client) AuditCrossBorderCompliance(request *AuditCrossBorderComplianceRequest) (response *AuditCrossBorderComplianceResponse, err error) {
     if request == nil {
         request = NewAuditCrossBorderComplianceRequest()
@@ -2277,8 +2277,8 @@ func NewDescribeCrossBorderComplianceResponse() (response *DescribeCrossBorderCo
     return
 }
 
-// This API is used to query the compliance review form created.
-// The service provider can query all review forms created by any `APPID` under the service. Other users can only query their own review forms.
+// This API is used to query the compliance review requests created by the user. 
+// A service provider can query all review requests created by any `APPID` under its account. Other users can only query their own review requests.
 func (c *Client) DescribeCrossBorderCompliance(request *DescribeCrossBorderComplianceRequest) (response *DescribeCrossBorderComplianceResponse, err error) {
     if request == nil {
         request = NewDescribeCrossBorderComplianceRequest()

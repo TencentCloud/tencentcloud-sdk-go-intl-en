@@ -80,15 +80,15 @@ type CfsInsInfo struct {
 	// Remote mount target
 	RemoteMountDir *string `json:"RemoteMountDir,omitempty" name:"RemoteMountDir"`
 
-	// File system IP
+	// File system IP, which is not required when you configure CFS.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
 
-	// VPC ID of file system
+	// VPC ID of file system, which is not required when you configure CFS.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MountVpcId *string `json:"MountVpcId,omitempty" name:"MountVpcId"`
 
-	// VPC subnet ID of file system
+	// VPC subnet ID of file system, which is not required when you configure CFS.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MountSubnetId *string `json:"MountSubnetId,omitempty" name:"MountSubnetId"`
 }
@@ -306,6 +306,9 @@ type CreateFunctionRequest struct {
 
 	// File system configuration parameter, which is used for the function to mount the file system
 	CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
+
+	// Timeout period for function initialization
+	InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
 }
 
 func (r *CreateFunctionRequest) ToJsonString() string {
@@ -384,7 +387,7 @@ type CreateTriggerRequest struct {
 	// Trigger type. Currently, COS, CMQ, timer, and ckafka triggers are supported.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// For parameters of triggers, see [Trigger Description](https://cloud.tencent.com/document/product/583/39901)
+	// For parameters of triggers, see [Trigger Description](https://intl.cloud.tencent.com/document/product/583/39901?from_cn_redirect=1)
 	TriggerDesc *string `json:"TriggerDesc,omitempty" name:"TriggerDesc"`
 
 	// Function namespace
@@ -1044,7 +1047,7 @@ type GetFunctionResponse struct {
 		// Whether to install dependencies automatically
 		InstallDependency *string `json:"InstallDependency,omitempty" name:"InstallDependency"`
 
-		// Function status
+		// Function status. For valid values and status change process, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1)
 		Status *string `json:"Status,omitempty" name:"Status"`
 
 		// Status description
@@ -1095,13 +1098,16 @@ type GetFunctionResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
 
-		// Function billing status
+		// Function billing status. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.87.BD.E6.95.B0.E8.AE.A1.E8.B4.B9.E7.8A.B6.E6.80.81)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		AvailableStatus *string `json:"AvailableStatus,omitempty" name:"AvailableStatus"`
 
 		// Function version
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+		// Timeout period for function initialization
+		InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1263,11 +1269,7 @@ type LayerVersionInfo struct {
 	// Layer name
 	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
 
-	// The status of the layer version. Values can be: 
-	// `Active`: normal
-	// `Publishing`: publishing
-	// `PublishFailed`: failed to publish
-	// `Deleted`: deleted
+	// Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81)
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -2099,6 +2101,9 @@ type UpdateFunctionConfigurationRequest struct {
 
 	// File system configuration input parameter, which is used for the function to bind the file system
 	CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
+
+	// Timeout period for function initialization. Default value: 15 seconds
+	InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
 }
 
 func (r *UpdateFunctionConfigurationRequest) ToJsonString() string {

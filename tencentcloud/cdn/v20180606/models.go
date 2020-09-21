@@ -2078,16 +2078,16 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
 
-	// 
+	// SCDN configuration
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitempty" name:"SecurityConfig"`
 
-	// 
+	// Image Optimization configuration
 	ImageOptimization *ImageOptimization `json:"ImageOptimization,omitempty" name:"ImageOptimization"`
 
-	// 
+	// `UA` blocklist/allowlist configuration
 	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
 
-	// 
+	// Access control
 	AccessControl *AccessControl `json:"AccessControl,omitempty" name:"AccessControl"`
 
 	// Whether to support advanced configuration items
@@ -2103,6 +2103,9 @@ type DetailDomain struct {
 	// Access port configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AccessPort []*int64 `json:"AccessPort,omitempty" name:"AccessPort" list`
+
+	// 
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
 }
 
 type DisableCachesRequest struct {
@@ -2562,7 +2565,7 @@ type Https struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SslStatus *string `json:"SslStatus,omitempty" name:"SslStatus"`
 
-	// 
+	// HSTS configuration
 	Hsts *Hsts `json:"Hsts,omitempty" name:"Hsts"`
 }
 
@@ -3933,6 +3936,15 @@ type SummarizedData struct {
 
 	// Aggregate data value
 	Value *float64 `json:"Value,omitempty" name:"Value"`
+}
+
+type Tag struct {
+
+	// 
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// 
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type TimestampData struct {

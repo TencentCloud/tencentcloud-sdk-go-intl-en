@@ -593,6 +593,31 @@ func (c *Client) DescribeRoleList(request *DescribeRoleListRequest) (response *D
     return
 }
 
+func NewDescribeSafeAuthFlagRequest() (request *DescribeSafeAuthFlagRequest) {
+    request = &DescribeSafeAuthFlagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "DescribeSafeAuthFlag")
+    return
+}
+
+func NewDescribeSafeAuthFlagResponse() (response *DescribeSafeAuthFlagResponse) {
+    response = &DescribeSafeAuthFlagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the security settings.
+func (c *Client) DescribeSafeAuthFlag(request *DescribeSafeAuthFlagRequest) (response *DescribeSafeAuthFlagResponse, err error) {
+    if request == nil {
+        request = NewDescribeSafeAuthFlagRequest()
+    }
+    response = NewDescribeSafeAuthFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDetachGroupPolicyRequest() (request *DetachGroupPolicyRequest) {
     request = &DetachGroupPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},

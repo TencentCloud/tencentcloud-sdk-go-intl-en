@@ -1613,7 +1613,7 @@ type ApplyUploadRequest struct {
 	// Session context, which is used to pass through the user request information. If the `Procedure` parameter is specified, the [task flow status change callback](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) API will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// 
+	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
 	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -2016,10 +2016,10 @@ type ComposeMediaRequest struct {
 	// Canvas used for composing video file.
 	Canvas *Canvas `json:"Canvas,omitempty" name:"Canvas"`
 
-	// 
+	// This parameter is used to pass through user request information. `ComposeMediaComplete` callback will return the value of this field. It contains up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// 
+	// This parameter is used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is null or an empty string, the above operation will not be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -2725,7 +2725,7 @@ type CreateImageSpriteTemplateRequest struct {
 	// Name of an image sprite generating template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// 
+	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -2857,7 +2857,7 @@ type CreateProcedureTemplateRequest struct {
 	// Task flow name (up to 20 characters).
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// 
+	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// Parameter of video processing task.
@@ -5941,7 +5941,7 @@ type ImageSpriteTemplate struct {
 	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
-	// 
+	// Template description.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 }
 
@@ -6292,7 +6292,10 @@ type MediaBasicInfo struct {
 	// Unique ID of an LVB recording file.
 	Vid *string `json:"Vid,omitempty" name:"Vid"`
 
-	// 
+	// File type:
+	// <li>Video: video file</li>
+	// <li>Audio: audio file</li>
+	// <li>Image: image file</li>
 	Category *string `json:"Category,omitempty" name:"Category"`
 
 	// File status. Valid values: Normal, Forbidden.
@@ -7568,7 +7571,7 @@ type ModifyImageSpriteTemplateRequest struct {
 	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
-	// 
+	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -8813,7 +8816,7 @@ type ProcedureTemplate struct {
 	// <li>Custom: custom task flow template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// 
+	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// Parameter of video processing task.
@@ -9304,7 +9307,7 @@ type ResetProcedureTemplateRequest struct {
 	// Task flow name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// 
+	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// Parameter of video processing task.
@@ -9682,7 +9685,9 @@ type SnapshotByTimeOffsetTaskInput struct {
 	// Time point screencapturing template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// 
+	// The list of screenshot time points. “s” and “%” formats are supported:
+	// <li>When a time point string ends with “s”, its unit is second. For example, “3.5 s” means the 3.5th second of the video;</li>
+	// <li>When a time point string ends with “%”, it is marked with corresponding percentage of the video’s duration. For example, “10%” means that the time point is at the 10% of the video’s entire duration.</li>
 	ExtTimeOffsetSet []*string `json:"ExtTimeOffsetSet,omitempty" name:"ExtTimeOffsetSet" list`
 
 	// List of time points for screencapturing in <font color=red>milliseconds</font>.

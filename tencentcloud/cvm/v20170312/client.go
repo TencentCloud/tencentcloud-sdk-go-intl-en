@@ -741,6 +741,31 @@ func (c *Client) DescribeReservedInstances(request *DescribeReservedInstancesReq
     return
 }
 
+func NewDescribeReservedInstancesConfigInfosRequest() (request *DescribeReservedInstancesConfigInfosRequest) {
+    request = &DescribeReservedInstancesConfigInfosRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cvm", APIVersion, "DescribeReservedInstancesConfigInfos")
+    return
+}
+
+func NewDescribeReservedInstancesConfigInfosResponse() (response *DescribeReservedInstancesConfigInfosResponse) {
+    response = &DescribeReservedInstancesConfigInfosResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to describe reserved instance (RI) offerings. Currently, RIs are only offered to beta users.
+func (c *Client) DescribeReservedInstancesConfigInfos(request *DescribeReservedInstancesConfigInfosRequest) (response *DescribeReservedInstancesConfigInfosResponse, err error) {
+    if request == nil {
+        request = NewDescribeReservedInstancesConfigInfosRequest()
+    }
+    response = NewDescribeReservedInstancesConfigInfosResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeReservedInstancesOfferingsRequest() (request *DescribeReservedInstancesOfferingsRequest) {
     request = &DescribeReservedInstancesOfferingsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -762,6 +787,31 @@ func (c *Client) DescribeReservedInstancesOfferings(request *DescribeReservedIns
         request = NewDescribeReservedInstancesOfferingsRequest()
     }
     response = NewDescribeReservedInstancesOfferingsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSpotTypeConfigRequest() (request *DescribeSpotTypeConfigRequest) {
+    request = &DescribeSpotTypeConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cvm", APIVersion, "DescribeSpotTypeConfig")
+    return
+}
+
+func NewDescribeSpotTypeConfigResponse() (response *DescribeSpotTypeConfigResponse) {
+    response = &DescribeSpotTypeConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query spot instances that are available for purchase.
+func (c *Client) DescribeSpotTypeConfig(request *DescribeSpotTypeConfigRequest) (response *DescribeSpotTypeConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeSpotTypeConfigRequest()
+    }
+    response = NewDescribeSpotTypeConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -921,6 +971,31 @@ func (c *Client) ImportKeyPair(request *ImportKeyPairRequest) (response *ImportK
         request = NewImportKeyPairRequest()
     }
     response = NewImportKeyPairResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquirePricePurchaseReservedInstancesOfferingRequest() (request *InquirePricePurchaseReservedInstancesOfferingRequest) {
+    request = &InquirePricePurchaseReservedInstancesOfferingRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cvm", APIVersion, "InquirePricePurchaseReservedInstancesOffering")
+    return
+}
+
+func NewInquirePricePurchaseReservedInstancesOfferingResponse() (response *InquirePricePurchaseReservedInstancesOfferingResponse) {
+    response = &InquirePricePurchaseReservedInstancesOfferingResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the price of reserved instances. It only supports querying purchasable reserved instance offerings. Currently, RIs are only offered to beta users.
+func (c *Client) InquirePricePurchaseReservedInstancesOffering(request *InquirePricePurchaseReservedInstancesOfferingRequest) (response *InquirePricePurchaseReservedInstancesOfferingResponse, err error) {
+    if request == nil {
+        request = NewInquirePricePurchaseReservedInstancesOfferingRequest()
+    }
+    response = NewInquirePricePurchaseReservedInstancesOfferingResponse()
     err = c.Send(request, response)
     return
 }

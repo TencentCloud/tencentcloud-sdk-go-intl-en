@@ -4365,10 +4365,13 @@ type MediaAiAnalysisCoverItem struct {
 
 type MediaAiAnalysisFrameTagItem struct {
 
-	// Frame-specific tag name.
+	// 
 	Tag *string `json:"Tag,omitempty" name:"Tag"`
 
-	// Confidence of intelligently generated frame-specific tag between 0 and 100.
+	// 
+	CategorySet []*string `json:"CategorySet,omitempty" name:"CategorySet" list`
+
+	// 
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 }
 

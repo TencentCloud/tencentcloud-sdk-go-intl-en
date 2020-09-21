@@ -822,7 +822,7 @@ type AuditCrossBorderComplianceRequest struct {
 	// Service provider. Valid values: `UNICOM`.
 	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
 
-	// Unique ID of compliance review form.
+	// Unique ID of compliance review request.
 	ComplianceId *uint64 `json:"ComplianceId,omitempty" name:"ComplianceId"`
 
 	// Audit behavior. Valid values: `APPROVED` and `DENY`.
@@ -2604,7 +2604,7 @@ type CrossBorderCompliance struct {
 	// Service provider. Valid values: `UNICOM`.
 	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
 
-	// ID of compliance review form.
+	// ID of compliance review request.
 	ComplianceId *uint64 `json:"ComplianceId,omitempty" name:"ComplianceId"`
 
 	// Full company name.
@@ -2619,7 +2619,7 @@ type CrossBorderCompliance struct {
 	// Issuing authority.
 	IssuingAuthority *string `json:"IssuingAuthority,omitempty" name:"IssuingAuthority"`
 
-	// Business License.
+	// Business license.
 	BusinessLicense *string `json:"BusinessLicense,omitempty" name:"BusinessLicense"`
 
 	// Business address.
@@ -4207,7 +4207,7 @@ type DescribeCrossBorderComplianceRequest struct {
 	// (Exact match) Service provider. Valid values: `UNICOM`.
 	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
 
-	// (Exact match) ID of compliance review form.
+	// (Exact match) ID of compliance review request.
 	ComplianceId *uint64 `json:"ComplianceId,omitempty" name:"ComplianceId"`
 
 	// (Fuzzy match) Company name.
@@ -4266,10 +4266,10 @@ type DescribeCrossBorderComplianceResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// List of compliance review forms.
+		// List of compliance review requests.
 		CrossBorderComplianceSet []*CrossBorderCompliance `json:"CrossBorderComplianceSet,omitempty" name:"CrossBorderComplianceSet" list`
 
-		// Total number of compliance review forms.
+		// Total number of compliance review requests.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

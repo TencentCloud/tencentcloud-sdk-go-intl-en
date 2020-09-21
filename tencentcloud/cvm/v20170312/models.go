@@ -166,7 +166,7 @@ func (r *AssociateSecurityGroupsResponse) FromJsonString(s string) error {
 
 type ChargePrepaid struct {
 
-	// 
+	// Purchased usage period, in month. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
 	// Auto renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>Default value: NOTIFY_AND_AUTO_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
@@ -338,7 +338,7 @@ type DataDisk struct {
 	// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
-	// The type of the data disk. For more information regarding data disk types and limits, refer to [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for `ResizeInstanceDisk`.
+	// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Data disk ID. Data disks of the type `LOCAL_BASIC` or `LOCAL_SSD` do not have IDs and do not support this parameter.
@@ -1174,6 +1174,60 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeReservedInstancesConfigInfosRequest struct {
+	*tchttp.BaseRequest
+
+	// zone
+	// Filters by the availability zones in which the reserved instance can be purchased, such as `ap-guangzhou-1`.
+	// Type: String
+	// Required: no
+	// Valid values: list of regions/availability zones
+	// 
+	// product-description
+	// Filters by the platform description (operating system) of the reserved instance, such as `linux`.
+	// Type: String
+	// Required: no
+	// Valid value: linux
+	// 
+	// duration
+	// Filters by the **validity** of the reserved instance, which is the purchased usage period. For example, `31536000`.
+	// Type: Integer
+	// Unit: second
+	// Required: no
+	// Valid values: 31536000 (1 year), 94608000 (3 years)
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeReservedInstancesConfigInfosRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeReservedInstancesConfigInfosRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReservedInstancesConfigInfosResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Static configurations of the reserved instance.
+		ReservedInstanceConfigInfos []*ReservedInstanceConfigInfoItem `json:"ReservedInstanceConfigInfos,omitempty" name:"ReservedInstanceConfigInfos" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeReservedInstancesConfigInfosResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeReservedInstancesConfigInfosResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeReservedInstancesOfferingsRequest struct {
 	*tchttp.BaseRequest
 
@@ -1258,20 +1312,23 @@ type DescribeReservedInstancesRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// <li><strong>zone</strong></li>
-	// <p style="padding-left: 30px;">Filters by the **<strong>availability zones</strong>** in which reserved instances can be purchased. For example, "ap-guangzhou-1".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">list of availability zones</a></p>
+	// <p style="padding-left: 30px;">Filters by <strong>availability zone</strong> in which the reserved instances can be purchased, such as ap-guangzhou-1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Availability Zones</a></p>
 	// <li><strong>duration</strong></li>
-	// <p style="padding-left: 30px;">Filters by reserved instance **<strong>validity</strong>** (in seconds). For example, 31536000.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Unit: second</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: 31536000 (1 year) | 94608000 (3 years)</p>
+	// <p style="padding-left: 30px;">Filters by the <strong>validity</strong> of the reserved instance, in seconds. For example, `31536000`.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Unit: second</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: 31536000 (1 year) | 94608000 (3 years)</p>
 	// <li><strong>instance-type</strong></li>
-	// <p style="padding-left: 30px;">Filters by **<strong>specifications of reserved instances</strong>**. For example, "S3.MEDIUM4".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">list of reserved instance specifiations</a></p>
+	// <p style="padding-left: 30px;">Filters by <strong>reserved instance specification</strong>, such as `S3.MEDIUM4`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Specifications</a></p>
+	// <li><strong>instance-family</strong></li>
+	// <p style="padding-left: 30px;">Filters by <strong>type of the reserved instance</strong>, such as `S3`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Types</a></p>
 	// <li><strong>offering-type</strong></li>
-	// <p style="padding-left: 30px;">Filters by **<strong>payment method</strong>**. For example, "All Upfront".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: All Upfront</p>
+	// <li><strong>offering-type</strong></li>
+	// <p style="padding-left: 30px;">Filters by <strong>payment method</strong>, such as `All Upfront`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: All Upfront</p>
 	// <li><strong>product-description</strong></li>
-	// <p style="padding-left: 30px;">Filters by the **<strong>operating system</strong>** of the reserved instance. For example, "linux".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: linux</p>
+	// <p style="padding-left: 30px;">Filters by the <strong>platform description</strong> (operating system) of the reserved instance, such as `linux`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: linux</p>
 	// <li><strong>reserved-instances-id</strong></li>
-	// <p style="padding-left: 30px;">Filters by **<strong>reserved instance ID</strong>. Reserved instance IDs take the form "650c138f-ae7e-4750-952a-96841d6e9fc1".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
+	// <p style="padding-left: 30px;">Filters by <strong>reserved instance ID</strong> in the form of 650c138f-ae7e-4750-952a-96841d6e9fc1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
 	// <li><strong>state</strong></li>
-	// <p style="padding-left: 30px;">Filters by **<strong>reserved instance status</strong>. For example, "active".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required</p><p style="padding-left: 30px;">Valid values: "active" (created) | "pending" (waiting to be created) | "retired" (expired)</p>
-	// Each request can have up to 10 `Filters` and 5 `Filters.Values`.
+	// <p style="padding-left: 30px;">Filters by <strong>reserved instance status</strong>. For example, “active”.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required</p><p style="padding-left: 30px;">Valid values: active (created) | pending (waiting to be created) | retired (expired)</p>
+	// Each request can have up to 10 `Filters` and 5 `Filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
@@ -1305,6 +1362,37 @@ func (r *DescribeReservedInstancesResponse) ToJsonString() string {
 }
 
 func (r *DescribeReservedInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSpotTypeConfigRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeSpotTypeConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSpotTypeConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSpotTypeConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSpotTypeConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSpotTypeConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1589,7 +1677,7 @@ type HostResource struct {
 	// Avilable disk size of the CDH instance; unit: GiB
 	DiskAvailable *uint64 `json:"DiskAvailable,omitempty" name:"DiskAvailable"`
 
-	// 
+	// CDH instance disk type.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 }
 
@@ -1752,6 +1840,55 @@ func (r *ImportKeyPairResponse) ToJsonString() string {
 }
 
 func (r *ImportKeyPairResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePricePurchaseReservedInstancesOfferingRequest struct {
+	*tchttp.BaseRequest
+
+	// The number of the reserved instances you are purchasing.
+	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// The ID of the reserved instance offering.
+	ReservedInstancesOfferingId *string `json:"ReservedInstancesOfferingId,omitempty" name:"ReservedInstancesOfferingId"`
+
+	// Dry run.
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.<br>For more information, see Ensuring Idempotency.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Reserved instance name.<br><li>The RI name defaults to “unnamed” if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
+	ReservedInstanceName *string `json:"ReservedInstanceName,omitempty" name:"ReservedInstanceName"`
+}
+
+func (r *InquirePricePurchaseReservedInstancesOfferingRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquirePricePurchaseReservedInstancesOfferingRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePricePurchaseReservedInstancesOfferingResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Price of the reserved instance with specified configuration.
+		Price *ReservedInstancePrice `json:"Price,omitempty" name:"Price"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquirePricePurchaseReservedInstancesOfferingResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquirePricePurchaseReservedInstancesOfferingResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2101,16 +2238,16 @@ type Instance struct {
 	// Valid values: <br><li>KEEP_CHARGING: billing continues after shutdown <br><li>STOP_CHARGING: billing stops after shutdown <li>NOT_APPLICABLE: the instance is not shut down or stopping billing after shutdown is not applicable to the instance. <br>
 	StopChargingMode *string `json:"StopChargingMode,omitempty" name:"StopChargingMode"`
 
-	// 
+	// Globally unique ID of the instance.
 	Uuid *string `json:"Uuid,omitempty" name:"Uuid"`
 
-	// 
+	// Last operation of the instance, such as StopInstances or ResetInstance.
 	LatestOperation *string `json:"LatestOperation,omitempty" name:"LatestOperation"`
 
-	// 
+	// The latest operation status of the instance. Valid values:<br><li>SUCCESS: operation succeeded<br><li>OPERATING: operation in progress<br><li>FAILED: operation failed
 	LatestOperationState *string `json:"LatestOperationState,omitempty" name:"LatestOperationState"`
 
-	// 
+	// Unique request ID for the last operation of the instance.
 	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitempty" name:"LatestOperationRequestId"`
 
 	// ID of a spread placement group.
@@ -2237,16 +2374,16 @@ type InstanceTypeQuotaItem struct {
 	// Note: this field may return null, indicating that no valid value is obtained.
 	SoldOutReason *string `json:"SoldOutReason,omitempty" name:"SoldOutReason"`
 
-	// 
+	// Private network bandwidth, in Gbps.
 	InstanceBandwidth *float64 `json:"InstanceBandwidth,omitempty" name:"InstanceBandwidth"`
 
-	// 
+	// The max packet sending and receiving capability (in 10k PPS).
 	InstancePps *int64 `json:"InstancePps,omitempty" name:"InstancePps"`
 
-	// 
+	// Number of local storage blocks.
 	StorageBlockAmount *int64 `json:"StorageBlockAmount,omitempty" name:"StorageBlockAmount"`
 
-	// 
+	// CPU type.
 	CpuType *string `json:"CpuType,omitempty" name:"CpuType"`
 
 	// Number of GPUs of the instance.
@@ -2367,7 +2504,7 @@ type LocalDiskType struct {
 	// Maximum size of a local disk.
 	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
 
-	// 
+	// Whether a local disk is required during purchase. Valid values:<br><li>REQUIRED: required<br><li>OPTIONAL: optional
 	Required *string `json:"Required,omitempty" name:"Required"`
 }
 
@@ -2747,7 +2884,7 @@ type Placement struct {
 	// Master host IP used to create the CVM
 	HostIps []*string `json:"HostIps,omitempty" name:"HostIps" list`
 
-	// 
+	// The ID of the CDH to which the instance belongs, only used as an output parameter.
 	HostId *string `json:"HostId,omitempty" name:"HostId"`
 }
 
@@ -2774,6 +2911,9 @@ type PurchaseReservedInstancesOfferingRequest struct {
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.<br>For more information, see Ensuring Idempotency.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Reserved instance name.<br><li>The RI name defaults to “unnamed” if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
+	ReservedInstanceName *string `json:"ReservedInstanceName,omitempty" name:"ReservedInstanceName"`
 }
 
 func (r *PurchaseReservedInstancesOfferingRequest) ToJsonString() string {
@@ -2858,13 +2998,126 @@ type RegionInfo struct {
 	RegionState *string `json:"RegionState,omitempty" name:"RegionState"`
 }
 
+type ReservedInstanceConfigInfoItem struct {
+
+	// Abbreviation name of the instance type.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Full name of the instance type.
+	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
+
+	// Priority.
+	Order *int64 `json:"Order,omitempty" name:"Order"`
+
+	// List of instance families.
+	InstanceFamilies []*ReservedInstanceFamilyItem `json:"InstanceFamilies,omitempty" name:"InstanceFamilies" list`
+}
+
+type ReservedInstanceFamilyItem struct {
+
+	// Instance family.
+	InstanceFamily *string `json:"InstanceFamily,omitempty" name:"InstanceFamily"`
+
+	// Priority.
+	Order *int64 `json:"Order,omitempty" name:"Order"`
+
+	// List of instance types.
+	InstanceTypes []*ReservedInstanceTypeItem `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+}
+
+type ReservedInstancePrice struct {
+
+	// Original upfront price, in USD.
+	OriginalFixedPrice *float64 `json:"OriginalFixedPrice,omitempty" name:"OriginalFixedPrice"`
+
+	// Discounted upfront price, in USD.
+	DiscountFixedPrice *float64 `json:"DiscountFixedPrice,omitempty" name:"DiscountFixedPrice"`
+
+	// Original usage price, in USD/hr.
+	OriginalUsagePrice *float64 `json:"OriginalUsagePrice,omitempty" name:"OriginalUsagePrice"`
+
+	// Discounted usage price, in USD/hr.
+	DiscountUsagePrice *float64 `json:"DiscountUsagePrice,omitempty" name:"DiscountUsagePrice"`
+}
+
+type ReservedInstancePriceItem struct {
+
+	// Payment method. Valid values: All Upfront, Partial Upfront, and No Upfront.
+	OfferingType *string `json:"OfferingType,omitempty" name:"OfferingType"`
+
+	// Total upfront price, in USD.
+	FixedPrice *float64 `json:"FixedPrice,omitempty" name:"FixedPrice"`
+
+	// Total usage price, in USD/hr.
+	UsagePrice *float64 `json:"UsagePrice,omitempty" name:"UsagePrice"`
+
+	// The ID of the reserved instance offering.
+	ReservedInstancesOfferingId *string `json:"ReservedInstancesOfferingId,omitempty" name:"ReservedInstancesOfferingId"`
+
+	// The availability zone in which the reserved instance can be purchased.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The **validity** of the reserved instance in seconds, which is the purchased usage period. For example, `31536000`.
+	// Unit: second
+	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
+
+	// The operating system of the reserved instance, such as `linux`.
+	// Valid value: linux.
+	ProductDescription *string `json:"ProductDescription,omitempty" name:"ProductDescription"`
+}
+
+type ReservedInstanceTypeItem struct {
+
+	// Instance type.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Number of CPU cores.
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory size.
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Number of GPU cores.
+	Gpu *uint64 `json:"Gpu,omitempty" name:"Gpu"`
+
+	// Number of FPGA cores.
+	Fpga *uint64 `json:"Fpga,omitempty" name:"Fpga"`
+
+	// Number of storage blocks.
+	StorageBlock *uint64 `json:"StorageBlock,omitempty" name:"StorageBlock"`
+
+	// Number of ENIs.
+	NetworkCard *uint64 `json:"NetworkCard,omitempty" name:"NetworkCard"`
+
+	// Maximum bandwidth.
+	MaxBandwidth *float64 `json:"MaxBandwidth,omitempty" name:"MaxBandwidth"`
+
+	// CPU frequency.
+	Frequency *string `json:"Frequency,omitempty" name:"Frequency"`
+
+	// CPU type.
+	CpuModelName *string `json:"CpuModelName,omitempty" name:"CpuModelName"`
+
+	// Packet forwarding rate.
+	Pps *uint64 `json:"Pps,omitempty" name:"Pps"`
+
+	// Other information.
+	Externals *Externals `json:"Externals,omitempty" name:"Externals"`
+
+	// Remarks.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Price information about the reserved instance.
+	Prices []*ReservedInstancePriceItem `json:"Prices,omitempty" name:"Prices" list`
+}
+
 type ReservedInstances struct {
 
 	// The ID of the purchased reserved instance, taking the form 650c138f-ae7e-4750-952a-96841d6e9fc1.
 	ReservedInstancesId *string `json:"ReservedInstancesId,omitempty" name:"ReservedInstancesId"`
 
-	// The type of the reserved instance. For example, S3.MEDIUM4.
-	// Returned value: <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">list of reserved instance types</a>
+	// Reserved instance specification, such as `S3.MEDIUM4`.
+	// Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Specifications</a>
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
 	// Availability zones in which the reserved instance can be purchased. For example, "ap-guangzhou-1".
@@ -2899,6 +3152,10 @@ type ReservedInstances struct {
 	// The payment method of the reserved instance. For example, "All Upfront".
 	// Returned value: All Upfront.
 	OfferingType *string `json:"OfferingType,omitempty" name:"OfferingType"`
+
+	// Reserved instance type, such as `S3`.
+	// Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Types</a>
+	InstanceFamily *string `json:"InstanceFamily,omitempty" name:"InstanceFamily"`
 }
 
 type ReservedInstancesOffering struct {
@@ -3183,7 +3440,7 @@ type RunInstancesRequest struct {
 	// The configuration information of instance data disks. If this parameter is not specified, no data disk will be purchased by default. When purchasing, you can specify 21 data disks, which can contain at most 1 LOCAL_BASIC data disk or LOCAL_SSD data disk, and at most 20 CLOUD_BASIC data disks, CLOUD_PREMIUM data disks, or CLOUD_SSD data disks.
 	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
 
-	// VPC configurations. You can use this parameter to specify the VPC ID, subnet ID, etc. If this parameter is not specified, the basic network will be used by default. If a VPC IP is specified in this parameter, it will represent the primary ENI IP of each instance. The value of `InstanceCount` must be the same as the number of VPC IPs.
+	// Configuration information of VPC. This parameter is used to specify VPC ID and subnet ID, etc. If this parameter is not specified, the classic network is used by default. If a VPC IP is specified in this parameter, it indicates the primary ENI IP of each instance. The value of parameter InstanceCount must be same as the number of VPC IPs, which cannot be greater than 20.
 	VirtualPrivateCloud *VirtualPrivateCloud `json:"VirtualPrivateCloud,omitempty" name:"VirtualPrivateCloud"`
 
 	// Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
@@ -3507,7 +3764,7 @@ func (r *TerminateInstancesResponse) FromJsonString(s string) error {
 
 type VirtualPrivateCloud struct {
 
-	// 
+	// VPC ID in the format of `vpc-xxx`. To obtain valid VPC IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/vpc?rid=1) or call the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API and look for the `unVpcId` fields in the response. If you specify `DEFAULT` for both `VpcId` and `SubnetId` when creating an instance, the default VPC will be used.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// VPC subnet ID in the format `subnet-xxx`. To obtain valid subnet IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/subnet?rid=1) or call [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) and look for the `unSubnetId` fields in the response. If you specify `DEFAULT` for both `SubnetId` and `VpcId` when creating an instance, the default VPC will be used.
@@ -3519,7 +3776,7 @@ type VirtualPrivateCloud struct {
 	// Array of VPC subnet IPs. You can use this parameter when creating instances or modifying VPC attributes of instances. Currently you can specify multiple IPs in one subnet only when creating multiple instances at the same time.
 	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
 
-	// 
+	// Number of IPv6 addresses randomly generated for the ENI.
 	Ipv6AddressCount *uint64 `json:"Ipv6AddressCount,omitempty" name:"Ipv6AddressCount"`
 }
 
