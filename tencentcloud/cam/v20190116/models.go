@@ -157,6 +157,10 @@ type AttachEntityOfPolicy struct {
 
 	// Type of entity association. 1: Associate by users; 2: Associate by User Groups
 	RelatedType *uint64 `json:"RelatedType,omitempty" name:"RelatedType"`
+
+	// Policy association time
+	// Note: this field may return `null`, indicating that no valid value was found.
+	AttachmentTime *string `json:"AttachmentTime,omitempty" name:"AttachmentTime"`
 }
 
 type AttachGroupPolicyRequest struct {
@@ -1012,6 +1016,49 @@ func (r *DescribeRoleListResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeSafeAuthFlagCollRequest struct {
+	*tchttp.BaseRequest
+
+	// Sub-account
+	SubUin *uint64 `json:"SubUin,omitempty" name:"SubUin"`
+}
+
+func (r *DescribeSafeAuthFlagCollRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSafeAuthFlagCollRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSafeAuthFlagCollResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Login protection settings
+		LoginFlag *LoginActionFlag `json:"LoginFlag,omitempty" name:"LoginFlag"`
+
+		// Sensitive operation protection settings
+		ActionFlag *LoginActionFlag `json:"ActionFlag,omitempty" name:"ActionFlag"`
+
+		// Suspicious login location protection settings
+		OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSafeAuthFlagCollResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSafeAuthFlagCollResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSafeAuthFlagRequest struct {
 	*tchttp.BaseRequest
 }
@@ -1035,7 +1082,7 @@ type DescribeSafeAuthFlagResponse struct {
 		// Sensitive operation protection settings
 		ActionFlag *LoginActionFlag `json:"ActionFlag,omitempty" name:"ActionFlag"`
 
-		// Unusual login location protection settings
+		// Suspicious login location protection settings
 		OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

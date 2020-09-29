@@ -1183,6 +1183,9 @@ type PersistentVolumeContext struct {
 	// Disk type. Valid values: CLOUD_PREMIUM, CLOUD_SSD
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// 
+	DiskNum *int64 `json:"DiskNum,omitempty" name:"DiskNum"`
 }
 
 type Placement struct {
@@ -1211,7 +1214,7 @@ type PodSpec struct {
 	// Memory size in GB.
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Mount point of resource for host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod. (This parameter has been disused)
+	// Mount point of resources for the host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod. (This parameter has been disused)
 	DataVolumes []*string `json:"DataVolumes,omitempty" name:"DataVolumes" list`
 
 	// EKS cluster - CPU type. Valid values: "intel", "amd"

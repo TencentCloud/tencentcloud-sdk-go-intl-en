@@ -109,6 +109,9 @@ type BandwidthPriceGradient struct {
 
 	// Bandwidth unit price within the bandwidth range. Unit: CNY/Mbps/day.
 	BandwidthUnitPrice *float64 `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice"`
+
+	// Discounted bandwidth price in CNY/Mbps/day.
+	DiscountBandwidthUnitPrice *float64 `json:"DiscountBandwidthUnitPrice,omitempty" name:"DiscountBandwidthUnitPrice"`
 }
 
 type BindListenerRealServersRequest struct {
@@ -2529,11 +2532,20 @@ type DescribeRealServerStatisticsRequest struct {
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
+	// Layer-7 rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
 	// Statistics duration. Unit: hours. It only supports querying statistics for the past 1, 3, 6, 12, and 24 hours.
 	WithinTime *uint64 `json:"WithinTime,omitempty" name:"WithinTime"`
 
-	// Rule ID
-	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+	// Statistics start time, such as 2020-08-19 00:00:00
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time, such as 2020-08-19 23:59:59
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistics granularity in seconds. Only 1-minute (60-second) and 5-minute (300-second) granularities are supported
+	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
 }
 
 func (r *DescribeRealServerStatisticsRequest) ToJsonString() string {
@@ -2549,8 +2561,11 @@ type DescribeRealServerStatisticsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Origin server status statistics
+		// Origin server status statistics of specified listener
 		StatisticsData []*StatisticsDataInfo `json:"StatisticsData,omitempty" name:"StatisticsData" list`
+
+		// Status statistics of multiple origin servers
+		RsStatisticsData []*MetricStatisticsInfo `json:"RsStatisticsData,omitempty" name:"RsStatisticsData" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4421,6 +4436,10 @@ type ProxyGroupInfo struct {
 	// Creation time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Whether the connection group contains a Microsoft connection
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ProxyType *uint64 `json:"ProxyType,omitempty" name:"ProxyType"`
 }
 
 type ProxyIdDict struct {
@@ -4526,6 +4545,10 @@ type ProxyInfo struct {
 	// Configuration change time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ModifyConfigTime *uint64 `json:"ModifyConfigTime,omitempty" name:"ModifyConfigTime"`
+
+	// Connection type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ProxyType *uint64 `json:"ProxyType,omitempty" name:"ProxyType"`
 }
 
 type ProxySimpleInfo struct {

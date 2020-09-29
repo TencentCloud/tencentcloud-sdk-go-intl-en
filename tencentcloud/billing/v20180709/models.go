@@ -94,10 +94,10 @@ type BillDetail struct {
 	// Component list
 	ComponentSet []*BillDetailComponent `json:"ComponentSet,omitempty" name:"ComponentSet" list`
 
-	// Payer’s UIN
+	// Payer's UIN
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 
-	// User’s UIN
+	// User's UIN
 	OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
 	// Operator's UIN
@@ -107,14 +107,17 @@ type BillDetail struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tags []*BillTagInfo `json:"Tags,omitempty" name:"Tags" list`
 
-	// 
+	// Product name/code (optional)
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 
-	// 
+	// Subproduct name/code (optional)
 	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
 
-	// 
+	// Transaction type/code (optional)
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// 
+	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 }
 
 type BillDetailComponent struct {
@@ -167,13 +170,13 @@ type BillDetailComponent struct {
 	// Amount paid in trial credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
 
-	// 
+	// Component type/code (optional)
 	ItemCode *string `json:"ItemCode,omitempty" name:"ItemCode"`
 
-	// 
+	// Component name/code (optional)
 	ComponentCode *string `json:"ComponentCode,omitempty" name:"ComponentCode"`
 
-	// 
+	// Contract price
 	ContractPrice *string `json:"ContractPrice,omitempty" name:"ContractPrice"`
 }
 
@@ -182,7 +185,7 @@ type BillResourceSummary struct {
 	// Product name: major categories of Tencent Cloud services, e.g. CVM and TencentDB for MySQL
 	BusinessCodeName *string `json:"BusinessCodeName,omitempty" name:"BusinessCodeName"`
 
-	// Sub-product name: sub-categories of Tencent Cloud services, such as CVM-Standard S1; if no subproduct name is obtained, “-” is returned.
+	// Sub-product name: sub-categories of Tencent Cloud services, such as CVM-Standard S1; if no subproduct name is obtained, '-' is returned.
 	ProductCodeName *string `json:"ProductCodeName,omitempty" name:"ProductCodeName"`
 
 	// Billing mode
@@ -264,11 +267,20 @@ type BillResourceSummary struct {
 	// Payer UIN
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 
-	// Resource owner UIN; “-” is returned if no value is obtained
+	// Resource owner UIN; '-' is returned if no value is obtained
 	OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
-	// Operator UIN; “-” is returned if no value is obtained
+	// Operator UIN; '-' is returned if no value is obtained
 	OperateUin *string `json:"OperateUin,omitempty" name:"OperateUin"`
+
+	// 
+	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
+
+	// 
+	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
+
+	// 
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
 }
 
 type BillTagInfo struct {
@@ -356,6 +368,9 @@ type DescribeBillDetailRequest struct {
 
 	// Queries information on a specified resource
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// 
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 }
 
 func (r *DescribeBillDetailRequest) ToJsonString() string {
@@ -410,6 +425,9 @@ type DescribeBillResourceSummaryRequest struct {
 	// Indicates whether or not the total number of records of accessing the list is required, used for frontend pages.
 	// 1 = yes, 0 = no
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitempty" name:"NeedRecordNum"`
+
+	// 
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 }
 
 func (r *DescribeBillResourceSummaryRequest) ToJsonString() string {
@@ -449,7 +467,7 @@ func (r *DescribeBillResourceSummaryResponse) FromJsonString(s string) error {
 type DescribeBillSummaryByPayModeRequest struct {
 	*tchttp.BaseRequest
 
-	// Query bill data user’s UIN
+	// Query bill data user's UIN
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 
 	// Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
@@ -496,7 +514,7 @@ func (r *DescribeBillSummaryByPayModeResponse) FromJsonString(s string) error {
 type DescribeBillSummaryByProductRequest struct {
 	*tchttp.BaseRequest
 
-	// Queries bill data user’s UIN
+	// Queries bill data user's UIN
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 
 	// Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
@@ -547,7 +565,7 @@ func (r *DescribeBillSummaryByProductResponse) FromJsonString(s string) error {
 type DescribeBillSummaryByProjectRequest struct {
 	*tchttp.BaseRequest
 
-	// Queries bill data user’s UIN
+	// Queries bill data user's UIN
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 
 	// Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
@@ -594,7 +612,7 @@ func (r *DescribeBillSummaryByProjectResponse) FromJsonString(s string) error {
 type DescribeBillSummaryByRegionRequest struct {
 	*tchttp.BaseRequest
 
-	// Queries bill data user’s UIN
+	// Queries bill data user's UIN
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 
 	// Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.

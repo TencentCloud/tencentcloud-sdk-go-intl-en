@@ -187,19 +187,24 @@ type AdaptiveStreamTemplate struct {
 
 type AiAnalysisResult struct {
 
-	// 
+	// Task type. Valid values:
+	// <li>Classification: intelligent categorization</li>
+	// <li>Cover: intelligent cover generating</li>
+	// <li>Tag: intelligent tagging</li>
+	// <li>FrameTag: intelligent frame-specific tagging</li>
+	// <li>Highlight: intelligent highlight generating</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// 
+	// Query result of intelligent categorization task in video content analysis, which is valid if task type is `Classification`.
 	ClassificationTask *AiAnalysisTaskClassificationResult `json:"ClassificationTask,omitempty" name:"ClassificationTask"`
 
-	// 
+	// Query result of intelligent cover generating task in video content analysis, which is valid if task type is `Cover`.
 	CoverTask *AiAnalysisTaskCoverResult `json:"CoverTask,omitempty" name:"CoverTask"`
 
-	// 
+	// Query result of intelligent tagging task in video content analysis, which is valid if task type is `Tag`.
 	TagTask *AiAnalysisTaskTagResult `json:"TagTask,omitempty" name:"TagTask"`
 
-	// 
+	// Query result of intelligent frame-specific tagging task in video content analysis, which is valid if task type is `FrameTag`.
 	FrameTagTask *AiAnalysisTaskFrameTagResult `json:"FrameTagTask,omitempty" name:"FrameTagTask"`
 }
 
@@ -298,7 +303,7 @@ type AiAnalysisTaskFrameTagResult struct {
 
 type AiAnalysisTaskInput struct {
 
-	// 
+	// Video content analysis template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
@@ -345,10 +350,10 @@ type AiContentReviewResult struct {
 	// <li>Political.Ocr: OCR-based politically sensitive information detection in text</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// 
+	// Sample rate, which indicates the number of video frames captured per second for audit
 	SampleRate *float64 `json:"SampleRate,omitempty" name:"SampleRate"`
 
-	// 
+	// Audited video duration in seconds.
 	Duration *float64 `json:"Duration,omitempty" name:"Duration"`
 
 	// Query result of an intelligent porn information detection in image task in video content audit, which is valid when task type is `Porn`.
@@ -379,13 +384,13 @@ type AiContentReviewResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PoliticalOcrTask *AiReviewTaskPoliticalOcrResult `json:"PoliticalOcrTask,omitempty" name:"PoliticalOcrTask"`
 
-	// 
+	// Query result of OCR-based terrorism information detection in text task in video content audit, which is valid if task type is `Terrorism.Ocr`.
 	TerrorismOcrTask *AiReviewTaskTerrorismOcrResult `json:"TerrorismOcrTask,omitempty" name:"TerrorismOcrTask"`
 
-	// 
+	// Query result of ASR-based prohibited information detection in speech task in video content audit, which is valid if task type is `Prohibited.Asr`.
 	ProhibitedAsrTask *AiReviewTaskProhibitedAsrResult `json:"ProhibitedAsrTask,omitempty" name:"ProhibitedAsrTask"`
 
-	// 
+	// Query result of OCR-based prohibited information detection in text task in video content audit, which is valid if task type is `Prohibited.Ocr`.
 	ProhibitedOcrTask *AiReviewTaskProhibitedOcrResult `json:"ProhibitedOcrTask,omitempty" name:"ProhibitedOcrTask"`
 }
 
@@ -858,37 +863,43 @@ type AiReviewPornTaskOutput struct {
 
 type AiReviewProhibitedAsrTaskInput struct {
 
-	// 
+	// Prohibited information detection template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewProhibitedAsrTaskOutput struct {
 
-	// 
+	// Score of ASR-detected prohibited information in speech between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// 
+	// Suggestion for ASR-detected prohibited information in speech. Valid values:
+	// <li>pass.</li>
+	// <li>review.</li>
+	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// 
+	// List of video segments that contain the ASR-detected prohibited information in speech.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
 type AiReviewProhibitedOcrTaskInput struct {
 
-	// 
+	// Prohibited information detection template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewProhibitedOcrTaskOutput struct {
 
-	// 
+	// Score of OCR-detected prohibited information in text between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// 
+	// Suggestion for OCR-detected prohibited information in text. Valid values:
+	// <li>pass.</li>
+	// <li>review.</li>
+	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// 
+	// List of video segments that contain the OCR-detected prohibited information in text.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
@@ -1012,55 +1023,64 @@ type AiReviewTaskPornResult struct {
 
 type AiReviewTaskProhibitedAsrResult struct {
 
-	// 
+	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// 
+	// Error code. 0: success; other values: failure.
+	// <li>40000: invalid input parameter. Please check it;</li>
+	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+	// <li>70000: internal service error. Please try again.</li>
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
-	// 
+	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// 
+	// Input of ASR-based prohibited information detection in speech task in content audit
 	Input *AiReviewProhibitedAsrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// 
+	// Output of ASR-based prohibited information detection in speech task in content audit
 	Output *AiReviewProhibitedAsrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
 type AiReviewTaskProhibitedOcrResult struct {
 
-	// 
+	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// 
+	// Error code. 0: success; other values: failure.
+	// <li>40000: invalid input parameter. Please check it;</li>
+	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+	// <li>70000: internal service error. Please try again.</li>
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
-	// 
+	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// 
+	// Input of OCR-based prohibited information detection in text task in content audit
 	Input *AiReviewProhibitedOcrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// 
+	// Output of OCR-based prohibited information detection in text task in content audit
 	Output *AiReviewProhibitedOcrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
 type AiReviewTaskTerrorismOcrResult struct {
 
-	// 
+	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// 
+	// Error code. 0: success; other values: failure.
+	// <li>40000: invalid input parameter. Please check it;</li>
+	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+	// <li>70000: internal service error. Please try again.</li>
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
-	// 
+	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// 
+	// Input of OCR-based terrorism information detection in text task in content audit.
 	Input *AiReviewTerrorismOcrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// 
+	// Output of OCR-based terrorism information detection in text task in content audit.
 	Output *AiReviewTerrorismOcrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1085,19 +1105,22 @@ type AiReviewTaskTerrorismResult struct {
 
 type AiReviewTerrorismOcrTaskInput struct {
 
-	// 
+	// Terrorism information detection template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewTerrorismOcrTaskOutput struct {
 
-	// 
+	// Score of OCR-detected terrorism information in text between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// 
+	// Suggestion for OCR-detected terrorism information in text. Valid values:
+	// <li>pass.</li>
+	// <li>review.</li>
+	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// 
+	// List of video segments that contain OCR-detected terrorism information in text.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
 }
 
@@ -1730,7 +1753,10 @@ type CreateAnimatedGraphicsTemplateRequest struct {
 	// Default value: 0.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Animated image format. Valid values: gif; webp. Default value: gif.
@@ -1794,7 +1820,10 @@ type CreateContentReviewTemplateRequest struct {
 	// Politically sensitive information detection control parameter.
 	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
-	// 
+	// Control parameter of prohibited information detection. Prohibited information includes:
+	// <li>Abusive;</li>
+	// <li>Drug-related.</li>
+	// Note: this parameter is not supported yet.
 	ProhibitedConfigure *ProhibitedConfigureInfo `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
 	// Custom content audit control parameter.
@@ -1859,13 +1888,19 @@ type CreateImageSpriteTemplateRequest struct {
 	// Subimage height of an image sprite in px. Value range: [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// 
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
-	// 
+	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 }
 
@@ -1979,7 +2014,10 @@ type CreateSampleSnapshotTemplateRequest struct {
 	// Image height in px. Value range: [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Image format. Valid values: jpg; png. Default value: jpg.
@@ -1988,7 +2026,12 @@ type CreateSampleSnapshotTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// 
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// <li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+	// <li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 }
 
@@ -2034,7 +2077,10 @@ type CreateSnapshotByTimeOffsetTemplateRequest struct {
 	// Image height in px. Value range: [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Image format. Valid values: jpg; png. Default value: jpg.
@@ -2043,7 +2089,12 @@ type CreateSnapshotByTimeOffsetTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// 
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// <li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+	// <li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 }
 
@@ -2285,7 +2336,7 @@ type CreateWorkflowRequest struct {
 	// Type parameter of a video content audit task.
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
-	// 
+	// Video content analysis task parameter.
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitempty" name:"AiAnalysisTask"`
 
 	// Type parameter of a video content recognition task.
@@ -3304,7 +3355,7 @@ type DescribeTaskDetailResponse struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 		WorkflowTask *WorkflowTask `json:"WorkflowTask,omitempty" name:"WorkflowTask"`
 
-		// 
+		// Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
 		EditMediaTask *EditMediaTask `json:"EditMediaTask,omitempty" name:"EditMediaTask"`
 
 		// Information of a live stream processing task. This field has a value only when `TaskType` is `LiveStreamProcessTask`.
@@ -3718,37 +3769,41 @@ func (r *EditMediaResponse) FromJsonString(s string) error {
 
 type EditMediaTask struct {
 
-	// 
+	// Task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
-	// 
+	// Task status. Valid values:
+	// <li>PROCESSING: processing;</li>
+	// <li>FINISH: completed.</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// 
+	// Error code
+	// <li>0: success;</li>
+	// <li>Other values: failure.</li>
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
-	// 
+	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// 
+	// Input of video editing task.
 	Input *EditMediaTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// 
+	// Output of video editing task.
 	Output *EditMediaTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
 type EditMediaTaskInput struct {
 
-	// 
+	// Information of input video file.
 	FileInfoSet []*EditMediaFileInfo `json:"FileInfoSet,omitempty" name:"FileInfoSet" list`
 }
 
 type EditMediaTaskOutput struct {
 
-	// 
+	// Target storage of edited file.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// 
+	// Path of edited video file.
 	Path *string `json:"Path,omitempty" name:"Path"`
 }
 
@@ -3896,7 +3951,10 @@ type ImageSpriteTemplate struct {
 	// Subimage height of an image sprite.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Sampling type.
@@ -3923,7 +3981,7 @@ type ImageSpriteTemplate struct {
 	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
-	// 
+	// Template description.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 }
 
@@ -3981,7 +4039,7 @@ type ImageWatermarkTemplate struct {
 
 type LiveStreamAiRecognitionResultInfo struct {
 
-	// 
+	// Content recognition result list.
 	ResultSet []*LiveStreamAiRecognitionResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
 }
 
@@ -4365,13 +4423,13 @@ type MediaAiAnalysisCoverItem struct {
 
 type MediaAiAnalysisFrameTagItem struct {
 
-	// 
+	// Frame-specific tag name.
 	Tag *string `json:"Tag,omitempty" name:"Tag"`
 
 	// 
 	CategorySet []*string `json:"CategorySet,omitempty" name:"CategorySet" list`
 
-	// 
+	// Confidence of intelligently generated frame-specific tag between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 }
 
@@ -5157,7 +5215,10 @@ type ModifyAnimatedGraphicsTemplateRequest struct {
 	// Default value: 0.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Animated image format. Valid values: gif, webp.
@@ -5221,7 +5282,10 @@ type ModifyContentReviewTemplateRequest struct {
 	// Politically sensitive information detection control parameter.
 	PoliticalConfigure *PoliticalConfigureInfoForUpdate `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
-	// 
+	// Control parameter of prohibited information detection. Prohibited information includes:
+	// <li>Abusive;</li>
+	// <li>Drug-related.</li>
+	// Note: this parameter is not supported yet.
 	ProhibitedConfigure *ProhibitedConfigureInfoForUpdate `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
 	// Custom content audit control parameter.
@@ -5270,7 +5334,10 @@ type ModifyImageSpriteTemplateRequest struct {
 	// Subimage height of an image sprite in px. Value range: [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Sampling type. Valid values:
@@ -5289,10 +5356,13 @@ type ModifyImageSpriteTemplateRequest struct {
 	// Subimage column count of an image sprite.
 	ColumnCount *uint64 `json:"ColumnCount,omitempty" name:"ColumnCount"`
 
-	// 
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
-	// 
+	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 }
 
@@ -5397,7 +5467,10 @@ type ModifySampleSnapshotTemplateRequest struct {
 	// Image height in px. Value range: [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Sampled screencapturing type. Valid values:
@@ -5416,7 +5489,12 @@ type ModifySampleSnapshotTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// 
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// <li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+	// <li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 }
 
@@ -5462,7 +5540,10 @@ type ModifySnapshotByTimeOffsetTemplateRequest struct {
 	// Image height in px. Value range: [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Image format. Valid values: jpg, png.
@@ -5471,7 +5552,12 @@ type ModifySnapshotByTimeOffsetTemplateRequest struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// 
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// <li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+	// <li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 }
 
@@ -5683,25 +5769,45 @@ func (r *ModifyWordSampleResponse) FromJsonString(s string) error {
 
 type MosaicInput struct {
 
-	// 
+	// Origin position, which currently can only be:
+	// <li>TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.</li>
+	// Default value: TopLeft.
 	CoordinateOrigin *string `json:"CoordinateOrigin,omitempty" name:"CoordinateOrigin"`
 
-	// 
+	// The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported:
+	// <li>If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;</li>
+	// <li>If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.</li>
+	// Default value: 0 px.
 	XPos *string `json:"XPos,omitempty" name:"XPos"`
 
-	// 
+	// Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported:
+	// <li>If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.</li>
+	// Default value: 0 px.
 	YPos *string `json:"YPos,omitempty" name:"YPos"`
 
-	// 
+	// Blur width. % and px formats are supported:
+	// <li>If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
+	// <li>If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.</li>
+	// Default value: 10%.
 	Width *string `json:"Width,omitempty" name:"Width"`
 
-	// 
+	// Blur height. % and px formats are supported:
+	// <li>If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.</li>
+	// Default value: 10%.
 	Height *string `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame.
+	// <li>If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame;</li>
+	// <li>If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame;</li>
+	// <li>If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.</li>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
-	// 
+	// End time offset of blur in seconds.
+	// <li>If this parameter is left empty or 0 is entered, the blur will exist till the last video frame;</li>
+	// <li>If this value is greater than 0 (e.g., n), the blur will exist till second n;</li>
+	// <li>If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.</li>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 }
 
@@ -5796,7 +5902,7 @@ type ParseLiveStreamProcessNotificationResponse struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 		AiReviewResultInfo *LiveStreamAiReviewResultInfo `json:"AiReviewResultInfo,omitempty" name:"AiReviewResultInfo"`
 
-		// 
+		// Content recognition result, which is valid if `NotificationType` is `AiRecognitionResult`.
 		AiRecognitionResultInfo *LiveStreamAiRecognitionResultInfo `json:"AiRecognitionResultInfo,omitempty" name:"AiRecognitionResultInfo"`
 
 		// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
@@ -5847,7 +5953,7 @@ type ParseNotificationResponse struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 		WorkflowTaskEvent *WorkflowTask `json:"WorkflowTaskEvent,omitempty" name:"WorkflowTaskEvent"`
 
-		// 
+		// Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
 		EditMediaTaskEvent *EditMediaTask `json:"EditMediaTaskEvent,omitempty" name:"EditMediaTaskEvent"`
 
 		// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
@@ -6146,7 +6252,7 @@ type ProcessLiveStreamRequest struct {
 	// Type parameter of a video content audit task.
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
-	// 
+	// Type parameter of video content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
@@ -6204,7 +6310,7 @@ type ProcessMediaRequest struct {
 	// Type parameter of a video content audit task.
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
-	// 
+	// Video content analysis task parameter.
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitempty" name:"AiAnalysisTask"`
 
 	// Type parameter of a video content recognition task.
@@ -6255,67 +6361,75 @@ func (r *ProcessMediaResponse) FromJsonString(s string) error {
 
 type ProhibitedAsrReviewTemplateInfo struct {
 
-	// 
+	// Switch of prohibited information detection in speech task. Valid values:
+	// <li>ON: enables prohibited information detection in speech task;</li>
+	// <li>OFF: disables prohibited information detection in speech task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// 
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// 
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type ProhibitedAsrReviewTemplateInfoForUpdate struct {
 
-	// 
+	// Switch of prohibited information detection in speech task. Valid values:
+	// <li>ON: enables prohibited information detection in speech task;</li>
+	// <li>OFF: disables prohibited information detection in speech task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// 
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// 
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type ProhibitedConfigureInfo struct {
 
-	// 
+	// Control parameter of prohibited information detection in speech.
 	AsrReviewInfo *ProhibitedAsrReviewTemplateInfo `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
-	// 
+	// Control parameter of prohibited information detection in text.
 	OcrReviewInfo *ProhibitedOcrReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type ProhibitedConfigureInfoForUpdate struct {
 
-	// 
+	// Control parameter of prohibited information detection in speech.
 	AsrReviewInfo *ProhibitedAsrReviewTemplateInfoForUpdate `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
-	// 
+	// Control parameter of prohibited information detection in text.
 	OcrReviewInfo *ProhibitedOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type ProhibitedOcrReviewTemplateInfo struct {
 
-	// 
+	// Switch of prohibited information detection in text task. Valid values:
+	// <li>ON: enables prohibited information detection in text task;</li>
+	// <li>OFF: disables prohibited information detection in text task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// 
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// 
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type ProhibitedOcrReviewTemplateInfoForUpdate struct {
 
-	// 
+	// Switch of prohibited information detection in text task. Valid values:
+	// <li>ON: enables prohibited information detection in text task;</li>
+	// <li>OFF: disables prohibited information detection in text task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// 
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// 
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -6339,40 +6453,55 @@ type RawImageWatermarkInput struct {
 
 type RawTranscodeParameter struct {
 
-	// 
+	// Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
 	Container *string `json:"Container,omitempty" name:"Container"`
 
-	// 
+	// Whether to remove video data. Valid values:
+	// <li>0: retain;</li>
+	// <li>1: remove.</li>
+	// Default value: 0.
 	RemoveVideo *int64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
 
-	// 
+	// Whether to remove audio data. Valid values:
+	// <li>0: retain;</li>
+	// <li>1: remove.</li>
+	// Default value: 0.
 	RemoveAudio *int64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
 
-	// 
+	// Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
 	VideoTemplate *VideoTemplateInfo `json:"VideoTemplate,omitempty" name:"VideoTemplate"`
 
-	// 
+	// Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
 	AudioTemplate *AudioTemplateInfo `json:"AudioTemplate,omitempty" name:"AudioTemplate"`
 
-	// 
+	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
 }
 
 type RawWatermarkParameter struct {
 
-	// 
+	// Watermark type. Valid values:
+	// <li>image: image watermark.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// 
+	// Origin position, which currently can only be:
+	// <li>TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.</li>
+	// Default value: TopLeft.
 	CoordinateOrigin *string `json:"CoordinateOrigin,omitempty" name:"CoordinateOrigin"`
 
-	// 
+	// The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:
+	// <li>If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;</li>
+	// <li>If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.</li>
+	// Default value: 0 px.
 	XPos *string `json:"XPos,omitempty" name:"XPos"`
 
-	// 
+	// The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:
+	// <li>If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.</li>
+	// Default value: 0 px.
 	YPos *string `json:"YPos,omitempty" name:"YPos"`
 
-	// 
+	// Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
 	ImageTemplate *RawImageWatermarkInput `json:"ImageTemplate,omitempty" name:"ImageTemplate"`
 }
 
@@ -6400,7 +6529,7 @@ type ResetWorkflowRequest struct {
 	// Type parameter of a video content audit task.
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
-	// 
+	// Video content analysis task parameter.
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitempty" name:"AiAnalysisTask"`
 
 	// Type parameter of a video content recognition task.
@@ -6528,7 +6657,9 @@ type SnapshotByTimeOffsetTaskInput struct {
 	// ID of a time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// 
+	// List of screenshot time points in the format of `s` or `%`:
+	// <li>If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second;</li>
+	// <li>If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.</li>
 	ExtTimeOffsetSet []*string `json:"ExtTimeOffsetSet,omitempty" name:"ExtTimeOffsetSet" list`
 
 	// List of time points of screenshots in <font color=red>seconds</font>.
@@ -6749,7 +6880,7 @@ type TerrorismConfigureInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImgReviewInfo *TerrorismImgReviewTemplateInfo `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// 
+	// Control parameter of terrorism information detection in text task.
 	OcrReviewInfo *TerrorismOcrReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
@@ -6758,7 +6889,7 @@ type TerrorismConfigureInfoForUpdate struct {
 	// Control parameter of a terrorism information detection in image task.
 	ImgReviewInfo *TerrorismImgReviewTemplateInfoForUpdate `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// 
+	// Control parameter of terrorism information detection in text task.
 	OcrReviewInfo *TerrorismOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
@@ -6814,25 +6945,29 @@ type TerrorismImgReviewTemplateInfoForUpdate struct {
 
 type TerrorismOcrReviewTemplateInfo struct {
 
-	// 
+	// Switch of terrorism information detection in text task. Valid values:
+	// <li>ON: enables terrorism information detection in text task;</li>
+	// <li>OFF: disables terrorism information detection in text task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// 
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// 
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type TerrorismOcrReviewTemplateInfoForUpdate struct {
 
-	// 
+	// Switch of terrorism information detection in text task. Valid values:
+	// <li>ON: enables terrorism information detection in text task;</li>
+	// <li>OFF: disables terrorism information detection in text task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// 
+	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// 
+	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -6880,14 +7015,15 @@ type TranscodeTaskInput struct {
 	// ID of a video transcoding template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// 
+	// Custom video transcoding parameter, which is valid if `Definition` is 0.
+	// This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the transcoding parameter preferably.
 	RawParameter *RawTranscodeParameter `json:"RawParameter,omitempty" name:"RawParameter"`
 
 	// List of up to 10 image or text watermarks.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
 
-	// 
+	// List of blurs. Up to 10 ones can be supported.
 	MosaicSet []*MosaicInput `json:"MosaicSet,omitempty" name:"MosaicSet" list`
 
 	// Target bucket of an output file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
@@ -7133,7 +7269,8 @@ type VideoTemplateInfo struct {
 	// Default value: 0.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Frame interval between I keyframes. Value range: 0 and [1,100000].
+	// If this parameter is 0 or left empty, the system will automatically set the GOP length.
 	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -7174,7 +7311,7 @@ type VideoTemplateInfoForUpdate struct {
 	// Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Frame interval between I keyframes. Value range: 0 and [1,100000]. If this parameter is 0, the system will automatically set the GOP length.
 	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
@@ -7189,7 +7326,8 @@ type WatermarkInput struct {
 	// ID of a watermarking template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// 
+	// Custom watermark parameter, which is valid if `Definition` is 0.
+	// This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.
 	RawParameter *RawWatermarkParameter `json:"RawParameter,omitempty" name:"RawParameter"`
 
 	// Text content of up to 100 characters. This field is required only when the watermark type is text.
@@ -7291,7 +7429,7 @@ type WorkflowInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
-	// 
+	// Video content analysis task parameter.
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitempty" name:"AiAnalysisTask"`
 
 	// Type parameter of a video content recognition task.
@@ -7345,7 +7483,7 @@ type WorkflowTask struct {
 	// Execution status and result of a video content audit task.
 	AiContentReviewResultSet []*AiContentReviewResult `json:"AiContentReviewResultSet,omitempty" name:"AiContentReviewResultSet" list`
 
-	// 
+	// Execution status and result of video content analysis task.
 	AiAnalysisResultSet []*AiAnalysisResult `json:"AiAnalysisResultSet,omitempty" name:"AiAnalysisResultSet" list`
 
 	// Execution status and result of a video content recognition task.

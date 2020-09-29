@@ -155,6 +155,9 @@ type AddCdnDomainRequest struct {
 
 	// Origin-pull timeout configuration
 	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
+
+	// Tag configuration
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
 }
 
 func (r *AddCdnDomainRequest) ToJsonString() string {
@@ -463,6 +466,69 @@ type Cache struct {
 	// Advanced cache expiration configuration (This feature is in beta and not generally available yet.)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AdvancedCache *AdvancedCache `json:"AdvancedCache,omitempty" name:"AdvancedCache"`
+
+	// Advanced path cache configuration
+	// Note: this field may return null, indicating that no valid value is obtained.
+	RuleCache []*RuleCache `json:"RuleCache,omitempty" name:"RuleCache" list`
+}
+
+type CacheConfigCache struct {
+
+	// Cache configuration switch
+	// on: enable
+	// off: disable
+	// Note: this field may return null, indicating that no valid value is obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Cache expiration time settings
+	// Unit: second. The maximum value is 365 days.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	CacheTime *int64 `json:"CacheTime,omitempty" name:"CacheTime"`
+
+	// Advanced cache expiration configuration. If this is enabled, the max-age value returned by the origin server will be compared with the cache expiration time set in CacheRules, and the smallest value will be cached on the node.
+	// on: enable
+	// off: disable
+	// This is disabled by default.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	CompareMaxAge *string `json:"CompareMaxAge,omitempty" name:"CompareMaxAge"`
+
+	// Force cache
+	// on: enable
+	// off: disable
+	// This is disabled by default. If enabled, the `no-store` and `no-cache` resources returned from the origin server will be cached according to `CacheRules` rules.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitempty" name:"IgnoreCacheControl"`
+
+	// Ignore the Set-Cookie header of an origin server.
+	// on: enable
+	// off: disable
+	// This is disabled by default.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	IgnoreSetCookie *string `json:"IgnoreSetCookie,omitempty" name:"IgnoreSetCookie"`
+}
+
+type CacheConfigFollowOrigin struct {
+
+	// Follow origin server switch configuration
+	// on: enable
+	// off: disable
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type CacheConfigNoCache struct {
+
+	// No cache configuration switch
+	// on: enable
+	// off: disable
+	// Note: this field may return null, indicating that no valid value is obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Always forwards to the origin server for verification
+	// on: enable
+	// off: disable
+	// This is disabled by default.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	Revalidate *string `json:"Revalidate,omitempty" name:"Revalidate"`
 }
 
 type CacheKey struct {
@@ -495,6 +561,10 @@ type CacheKey struct {
 	// Request protocol contained in `CacheKey`
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Scheme *SchemeKey `json:"Scheme,omitempty" name:"Scheme"`
+
+	// Path-based cache key configuration
+	// Note: this field may return null, indicating that no valid value is obtained.
+	KeyRules []*KeyRule `json:"KeyRules,omitempty" name:"KeyRules" list`
 }
 
 type CacheOptResult struct {
@@ -2104,7 +2174,8 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AccessPort []*int64 `json:"AccessPort,omitempty" name:"AccessPort" list`
 
-	// 
+	// Tag configuration
+	// Note: this field may return null, indicating that no valid value is obtained.
 	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
 }
 
@@ -2642,6 +2713,43 @@ type Ipv6 struct {
 	// Whether to enable the IPv6 feature for a domain name. Values include `on` or `off`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type KeyRule struct {
+
+	// Content for each CacheType:
+	// For `file`, enter the suffix, such as jpg, txt.
+	// For `directory`, enter the path, such as /xxx/test/.
+	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+	// For `index`, enter a backslash (/).
+	// Note: this field may return null, indicating that no valid value is obtained.
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+
+	// Rule types:
+	// `file`: effective for specified file suffixes
+	// `directory`: effective for specified paths
+	// `path`: effective for specified absolute paths
+	// `index`: home page
+	// Note: this field may return null, indicating that no valid value is obtained.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Whether to enable full-path cache
+	// on: enable full-path cache (i.e., disable parameter filter)
+	// off: disable full-path cache (i.e., enable parameter filter)
+	// Note: this field may return null, indicating that no valid value is obtained.
+	FullUrlCache *string `json:"FullUrlCache,omitempty" name:"FullUrlCache"`
+
+	// Whether caches are case insensitive
+	// Note: this field may return null, indicating that no valid value is obtained.
+	IgnoreCase *string `json:"IgnoreCase,omitempty" name:"IgnoreCase"`
+
+	// Request parameter contained in `CacheKey`
+	// Note: this field may return null, indicating that no valid value is obtained.
+	QueryString *RuleQueryString `json:"QueryString,omitempty" name:"QueryString"`
+
+	// Path cache key tag, the value "user" is passed.
+	// Note: this field may return null, indicating that no valid value is obtained.
+	RuleTag *string `json:"RuleTag,omitempty" name:"RuleTag"`
 }
 
 type ListClsLogTopicsRequest struct {
@@ -3627,6 +3735,61 @@ type Revalidate struct {
 	Path *string `json:"Path,omitempty" name:"Path"`
 }
 
+type RuleCache struct {
+
+	// Content for each CacheType:
+	// For `all`, enter an asterisk (*).
+	// For `file`, enter the suffix, such as jpg, txt.
+	// For `directory`, enter the path, such as /xxx/test/.
+	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+	// For `index`, enter a backslash (/).
+	// Note: this field may return null, indicating that no valid value is obtained.
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+
+	// Rule types:
+	// `all`: effective for all files
+	// `file`: effective for specified file suffixes
+	// `directory`: effective for specified paths
+	// `path`: effective for specified absolute paths
+	// `index`: home page
+	// Note: this field may return null, indicating that no valid value is obtained.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Cache configuration
+	// Note: this field may return null, indicating that no valid value is obtained.
+	CacheConfig *RuleCacheConfig `json:"CacheConfig,omitempty" name:"CacheConfig"`
+}
+
+type RuleCacheConfig struct {
+
+	// Cache configuration
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Cache *CacheConfigCache `json:"Cache,omitempty" name:"Cache"`
+
+	// No cache configuration
+	// Note: this field may return null, indicating that no valid value is obtained.
+	NoCache *CacheConfigNoCache `json:"NoCache,omitempty" name:"NoCache"`
+
+	// Follows the origin server configuration
+	// Note: this field may return null, indicating that no valid value is obtained.
+	FollowOrigin *CacheConfigFollowOrigin `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
+}
+
+type RuleQueryString struct {
+
+	// Whether to use `QueryString` as part of `CacheKey`. Valid values: on, off
+	// Note: this field may return null, indicating that no valid value is obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// `includeCustom` will retain partial query strings
+	// Note: this field may return null, indicating that no valid value is obtained.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// Array of included/excluded query strings (separated by ';')
+	// Note: this field may return null, indicating that no valid value is obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
 type SchemeKey struct {
 
 	// Whether to use the scheme as part of the cache key. Valid values: on, off
@@ -3940,10 +4103,12 @@ type SummarizedData struct {
 
 type Tag struct {
 
-	// 
+	// Tag key
+	// Note: this field may return null, indicating that no valid value is obtained.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
-	// 
+	// Tag value.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 

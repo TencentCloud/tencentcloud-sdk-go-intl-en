@@ -608,12 +608,37 @@ func NewDescribeSafeAuthFlagResponse() (response *DescribeSafeAuthFlagResponse) 
     return
 }
 
-// This API is used to query the security settings.
+// This API is used to query security settings.
 func (c *Client) DescribeSafeAuthFlag(request *DescribeSafeAuthFlagRequest) (response *DescribeSafeAuthFlagResponse, err error) {
     if request == nil {
         request = NewDescribeSafeAuthFlagRequest()
     }
     response = NewDescribeSafeAuthFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSafeAuthFlagCollRequest() (request *DescribeSafeAuthFlagCollRequest) {
+    request = &DescribeSafeAuthFlagCollRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "DescribeSafeAuthFlagColl")
+    return
+}
+
+func NewDescribeSafeAuthFlagCollResponse() (response *DescribeSafeAuthFlagCollResponse) {
+    response = &DescribeSafeAuthFlagCollResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query security settings.
+func (c *Client) DescribeSafeAuthFlagColl(request *DescribeSafeAuthFlagCollRequest) (response *DescribeSafeAuthFlagCollResponse, err error) {
+    if request == nil {
+        request = NewDescribeSafeAuthFlagCollRequest()
+    }
+    response = NewDescribeSafeAuthFlagCollResponse()
     err = c.Send(request, response)
     return
 }

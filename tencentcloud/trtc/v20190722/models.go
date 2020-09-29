@@ -193,6 +193,12 @@ type DescribeCallDetailRequest struct {
 	// bigvWidth: upstream/downstream resolution in width;
 	// bigvHeight: upstream/downstream resolution in height.
 	DataType []*string `json:"DataType,omitempty" name:"DataType" list`
+
+	// Page index starting from 0. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned by default.
+	PageNumber *string `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// Number of entries per page. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned by default. When `DataType` and all `UserId`s are not null, `PageSize` is up to 6. When `DataType` and all `UserId`s are null, `PageSize` is up to 100.
+	PageSize *string `json:"PageSize,omitempty" name:"PageSize"`
 }
 
 func (r *DescribeCallDetailRequest) ToJsonString() string {
@@ -566,7 +572,7 @@ func (r *DismissRoomResponse) FromJsonString(s string) error {
 
 type EncodeParams struct {
 
-	// Output stream audio sample rate for stream mix. Valid values: 48000, 44100, 32000,24000, 22050, 16000, 12000, 11025, 8000.
+	// Output stream audio sample rate for stream mix in Hz. Valid values: 48000, 44100, 32000, 24000, 16000, 12000, 8000.
 	AudioSampleRate *uint64 `json:"AudioSampleRate,omitempty" name:"AudioSampleRate"`
 
 	// Output stream audio bitrate in Kbps for On-Cloud MixTranscoding. Value range: [8, 500].
@@ -644,6 +650,9 @@ type LayoutParams struct {
 
 	// You can set the layout parameter as 1 or 0 in the screen sharing template. 1: big image on the right and small images on the left, 0: big image on the left and small images on the right. The default value is 0. 
 	MainVideoRightAlign *uint64 `json:"MainVideoRightAlign,omitempty" name:"MainVideoRightAlign"`
+
+	// 
+	MixVideoUids []*string `json:"MixVideoUids,omitempty" name:"MixVideoUids" list`
 }
 
 type OutputParams struct {
@@ -879,27 +888,27 @@ type TimeValue struct {
 
 type UserInformation struct {
 
-	// 
+	// Room ID
 	RoomStr *string `json:"RoomStr,omitempty" name:"RoomStr"`
 
-	// 
+	// User ID
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// 
+	// The time when the user enters the room
 	JoinTs *uint64 `json:"JoinTs,omitempty" name:"JoinTs"`
 
 	// The time when the user exits the room. If the user is still in the room, the current time will be returned
 	LeaveTs *uint64 `json:"LeaveTs,omitempty" name:"LeaveTs"`
 
-	// 
+	// Device type
 	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
 
-	// 
+	// SDK version number
 	SdkVersion *string `json:"SdkVersion,omitempty" name:"SdkVersion"`
 
-	// 
+	// Client IP
 	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
 
-	// 
+	// Determine whether a user has left the room
 	Finished *bool `json:"Finished,omitempty" name:"Finished"`
 }

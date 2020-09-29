@@ -157,30 +157,6 @@ type ConsumerGroupTopic struct {
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
-type ConsumerRecord struct {
-
-	// Topic name.
-	Topic *string `json:"Topic,omitempty" name:"Topic"`
-
-	// Partition ID.
-	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
-
-	// Offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Message key.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	Key *string `json:"Key,omitempty" name:"Key"`
-
-	// Message value.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	Value *string `json:"Value,omitempty" name:"Value"`
-
-	// Message timestamp.
-	// Note: this field may return `null`, indicating that no valid value was found.
-	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
-}
-
 type CreateAclRequest struct {
 	*tchttp.BaseRequest
 
@@ -1268,150 +1244,6 @@ func (r *DescribeUserResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type FetchMessageByOffsetRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Topic name.
-	Topic *string `json:"Topic,omitempty" name:"Topic"`
-
-	// Partition ID.
-	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
-
-	// Offset information.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-}
-
-func (r *FetchMessageByOffsetRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *FetchMessageByOffsetRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type FetchMessageByOffsetResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned results.
-		Result *ConsumerRecord `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *FetchMessageByOffsetResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *FetchMessageByOffsetResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type FetchMessageListByOffsetRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Topic name.
-	Topic *string `json:"Topic,omitempty" name:"Topic"`
-
-	// Partition ID.
-	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
-
-	// Offset information.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Maximum number of records that can be queried. Default value: 20.
-	SinglePartitionRecordNumber *int64 `json:"SinglePartitionRecordNumber,omitempty" name:"SinglePartitionRecordNumber"`
-}
-
-func (r *FetchMessageListByOffsetRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *FetchMessageListByOffsetRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type FetchMessageListByOffsetResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned results.
-		Result []*ConsumerRecord `json:"Result,omitempty" name:"Result" list`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *FetchMessageListByOffsetResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *FetchMessageListByOffsetResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type FetchMessageListByTimestampRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Topic name.
-	Topic *string `json:"Topic,omitempty" name:"Topic"`
-
-	// Partition ID.
-	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
-
-	// Query start time. It is a 13-digit timestamp.
-	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
-
-	// Maximum number of records that can be queried. Default value: 20.
-	SinglePartitionRecordNumber *int64 `json:"SinglePartitionRecordNumber,omitempty" name:"SinglePartitionRecordNumber"`
-}
-
-func (r *FetchMessageListByTimestampRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *FetchMessageListByTimestampRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type FetchMessageListByTimestampResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned results.
-		Result []*ConsumerRecord `json:"Result,omitempty" name:"Result" list`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *FetchMessageListByTimestampResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *FetchMessageListByTimestampResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
 type Filter struct {
 
 	// Field to be filtered.
@@ -1637,7 +1469,8 @@ type InstanceAttributesResponse struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
-	// 
+	// Features supported by the instance. `FEATURE_SUBNET_ACL` indicates that the ACL policy supports setting subnets. 
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Features []*string `json:"Features,omitempty" name:"Features" list`
 }
 
@@ -2051,6 +1884,10 @@ type SubscribedInfo struct {
 	// Partition offset information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PartitionOffset []*PartitionOffset `json:"PartitionOffset,omitempty" name:"PartitionOffset" list`
+
+	// ID of the subscribed topic. 
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 }
 
 type Tag struct {

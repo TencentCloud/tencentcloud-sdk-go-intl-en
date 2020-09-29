@@ -191,6 +191,9 @@ type CreateBackupRequest struct {
 
 	// Instance ID in the format of mssql-i1z41iwd
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup name. If this parameter is left empty, a backup name in the format of "Instance ID_Backup start timestamp" will be automatically generated.
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
 }
 
 func (r *CreateBackupRequest) ToJsonString() string {
@@ -377,6 +380,9 @@ type CreateMigrationRequest struct {
 
 	// Database objects to be migrated. This parameter is not used for offline migration (SourceType=4 or SourceType=5)
 	MigrateDBSet []*MigrateDB `json:"MigrateDBSet,omitempty" name:"MigrateDBSet" list`
+
+	// Restore the databases listed in `ReNameRestoreDatabase` and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format. This parameter takes effect only when `SourceType=5`.
+	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore" list`
 }
 
 func (r *CreateMigrationRequest) ToJsonString() string {
@@ -803,6 +809,18 @@ type DescribeBackupsRequest struct {
 
 	// Page number. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter by backup name. If this parameter is left empty, backup name will not be used in filtering.
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+
+	// Filter by backup policy. Valid values: 0 (instance backup), 1 (multi-database backup). If this parameter is left empty, backup policy will not be used in filtering.
+	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
+
+	// Filter by backup mode. Valid values: 0 (automatic backup on a regular basis), 1 (manual backup performed by the user at any time). If this parameter is left empty, backup mode will not be used in filtering.
+	BackupWay *int64 `json:"BackupWay,omitempty" name:"BackupWay"`
+
+	// Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
+	BackupId *uint64 `json:"BackupId,omitempty" name:"BackupId"`
 }
 
 func (r *DescribeBackupsRequest) ToJsonString() string {
@@ -1582,7 +1600,7 @@ type MigrateTask struct {
 	// Migration task end time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Migration task status (1: initializing, 4: migrating, 5: migration failed, 6: migration succeeded)
+	// Migration task status (1: initializing, 4: migrating, 5: migration failed, 6: migration succeeded, 7: suspended, 8: deleted, 9: suspending, 10: completing, 11: suspension failed, 12: completion failed)
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
 	// Information
@@ -1951,6 +1969,16 @@ type RegionInfo struct {
 	RegionState *string `json:"RegionState,omitempty" name:"RegionState"`
 }
 
+type RenameRestoreDatabase struct {
+
+	// Database name. If the `OldName` database does not exist, a failure will be returned.
+	// It can be left empty in offline migration tasks.
+	OldName *string `json:"OldName,omitempty" name:"OldName"`
+
+	// New database name. If this parameter is left empty, the restored database will be renamed in the default format. If this parameter is left empty in offline migration tasks, the restored database will be named `OldName`. `OldName` and `NewName` cannot be both empty.
+	NewName *string `json:"NewName,omitempty" name:"NewName"`
+}
+
 type ResetAccountPasswordRequest struct {
 	*tchttp.BaseRequest
 
@@ -2036,6 +2064,12 @@ type RestoreInstanceRequest struct {
 
 	// Backup file ID, which can be obtained through the `Id` field in the returned value of the `DescribeBackups` API
 	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+
+	// ID of the target instance to which the backup is restored. The target instance should be under the same `APPID`. If this parameter is left empty, ID of the source instance will be used.
+	TargetInstanceId *string `json:"TargetInstanceId,omitempty" name:"TargetInstanceId"`
+
+	// Restore the databases listed in `ReNameRestoreDatabase` and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format.
+	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore" list`
 }
 
 func (r *RestoreInstanceRequest) ToJsonString() string {
@@ -2082,6 +2116,12 @@ type RollbackInstanceRequest struct {
 
 	// Target time point for rollback
 	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// ID of the target instance to which the backup is restored. The target instance should be under the same `APPID`. If this parameter is left empty, ID of the source instance will be used.
+	TargetInstanceId *string `json:"TargetInstanceId,omitempty" name:"TargetInstanceId"`
+
+	// Rename the databases listed in `ReNameRestoreDatabase`. This parameter takes effect only when `Type = 1` which indicates that backup rollback supports renaming databases. If it is left empty, databases will be renamed in the default format and the `DBs` parameter specifies the databases to be restored.
+	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore" list`
 }
 
 func (r *RollbackInstanceRequest) ToJsonString() string {

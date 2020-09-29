@@ -1123,28 +1123,35 @@ func (r *CreateLiveTranscodeRuleResponse) FromJsonString(s string) error {
 type CreateLiveTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Template name, such as 900 900p. This can be only a combination of letters and digits.
+	// Template name, such as “900p”. This can be only a combination of letters and digits.
+	// Length limit:
+	//   Standard transcoding: 1-10 characters
+	//   Top speed codec transcoding: 3-10 characters
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
-	// Video bitrate. Value range: 100-8,000.
-	// Note: The bitrate must be a multiple of 100.
+	// Video bitrate in Kbps. Value range: 100-8,000.
+	// Note: the transcoding template requires that bitrate should be unique, yet the final saved bitrate may be different from the input bitrate.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
-	// Video encoding format. Valid values: h264, h265. Default value: h264.
-	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
-
-	// Audio encoding in ACC format. Default value: original audio format.
-	// Note: This parameter will take effect later.
+	// Audio codec: acc by default.
+	// Note: this parameter is unsupported now.
 	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
 
-	// Audio bitrate. Value range: 0-500. Default value: 0.
+	// Audio bitrate. Default value: 0.
+	// Value range: 0-500.
 	AudioBitrate *int64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
+
+	// Video codec: `h264/h265/origin`. Default value: `h264`.
+	// 
+	// origin: original codec as the output codec
+	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
 
 	// Template description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Width. Default value: 0.
-	// Value range: [0-3000].
+	// Value range: 0-3,000
+	// It must be a multiple of 2. The original width is 0
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
 	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
@@ -1154,16 +1161,20 @@ type CreateLiveTranscodeTemplateRequest struct {
 	NeedAudio *int64 `json:"NeedAudio,omitempty" name:"NeedAudio"`
 
 	// Height. Default value: 0.
-	// Value range: [0-3000].
+	// Value range: 0-3,000
+	// It must be a multiple of 2. The original height is 0
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
 	// Frame rate. Default value: 0.
+	// Value range: 0-60
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Keyframe interval in seconds. Original interval by default
+	// Keyframe interval in seconds. Default value: original interval
+	// Value range: 2-6
 	Gop *int64 `json:"Gop,omitempty" name:"Gop"`
 
-	// Whether to rotate. 0: no; 1: yes. Default value: 0.
+	// Rotation angle. Default value: 0.
+	// Valid values: 0, 90, 180, 270
 	Rotate *int64 `json:"Rotate,omitempty" name:"Rotate"`
 
 	// Encoding quality:
@@ -1187,6 +1198,9 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// 
 	// Value range: 0.0-0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
+
+	// This parameter is used to define whether the short side is the video height. 0: no, 1: yes. The default value is 0.
+	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
 }
 
 func (r *CreateLiveTranscodeTemplateRequest) ToJsonString() string {
@@ -1274,10 +1288,10 @@ type CreateRecordTaskRequest struct {
 	// Push path.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
-	// Recording task end time in UNIX timestamp, which must be after `StartTime` and within 24 hours from the current time.
+	// The recording end time in UNIX timestamp format. The “EndTime” should be later than “StartTime”. Normally the duration between “EndTime” and “StartTime” is up to 24 hours.
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Recording task start time in UNIX timestamp. If this parameter is left empty, it indicates to start recording immediately. It must be within 24 hours from the current time.
+	// The recording start time in UNIX timestamp format. If the “StartTime” is not entered, recording will start immediately after the API is successfully called. Normally the “StartTime” should be within 6 days from current time.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Push type. Default value: 0. Valid values:
@@ -1288,7 +1302,7 @@ type CreateRecordTaskRequest struct {
 	// Recording template ID, which is the returned value of `CreateLiveRecordTemplate`. If this parameter is left empty or incorrect, the stream will be recorded in HLS format and retained permanently by default.
 	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Extended field, which is empty by default.
+	// Extension field which is not defined now. It is empty by default.
 	Extension *string `json:"Extension,omitempty" name:"Extension"`
 }
 
@@ -1305,7 +1319,7 @@ type CreateRecordTaskResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Task ID, which uniquely identifies the recording task globally.
+		// `TaskId`, which is a globally unique task ID. If the `TaskId` is returned, that means the recording task has been successfully created.
 		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3355,6 +3369,12 @@ func (r *DescribeLiveTranscodeDetailInfoResponse) FromJsonString(s string) error
 
 type DescribeLiveTranscodeRulesRequest struct {
 	*tchttp.BaseRequest
+
+	// 
+	TemplateIds []*int64 `json:"TemplateIds,omitempty" name:"TemplateIds" list`
+
+	// 
+	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames" list`
 }
 
 func (r *DescribeLiveTranscodeRulesRequest) ToJsonString() string {
@@ -5003,12 +5023,13 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Template ID.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Video encoding format:
-	// h264/h265.
+	// Video codec: `h264/h265/origin`. Default value: `h264`.
+	// 
+	// origin: original codec as the output codec
 	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
 
-	// Audio encoding format:
-	// aac/mp3.
+	// Audio codec: acc by default.
+	// Note: this parameter is unsupported now.
 	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
 
 	// Audio bitrate. Default value: 0.
@@ -5018,11 +5039,12 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Template description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Video bitrate. Value range: 100-8000 Kbps.
-	// Note: the bitrate value must be a multiple of 100.
+	// Video bitrate in Kbps. Value range: 100-8,000.
+	// Note: the transcoding template requires that the bitrate should be unique, yet the final saved bitrate may be different from the input bitrate.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
-	// Width. Value range: 0-3000.
+	// Width in pixels. Value range: 0-3,000.
+	// It must be a multiple of 2. The original width is 0
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
 	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
@@ -5031,17 +5053,20 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Whether to keep the audio. 0: no; 1: yes. Default value: 1.
 	NeedAudio *int64 `json:"NeedAudio,omitempty" name:"NeedAudio"`
 
-	// Height. Value range: 0-3000.
+	// Height in pixels. Value range: 0-3,000.
+	// It must be a multiple of 2. The original height is 0
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
-	// Frame rate. Value range: 0-200.
+	// Frame rate in fps. Default value: 0.
+	// Value range: 0-60
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Keyframe interval in seconds. Value range: 0-50.
+	// Keyframe interval in seconds.
+	// Value range: 2-6
 	Gop *int64 `json:"Gop,omitempty" name:"Gop"`
 
-	// Rotation angle.
-	// 0, 90, 180, 270.
+	// Rotation angle. Default value: 0.
+	// Valid values: 0, 90, 180, 270
 	Rotate *int64 `json:"Rotate,omitempty" name:"Rotate"`
 
 	// Encoding quality:
@@ -5062,6 +5087,9 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// 
 	// Value range: 0.0-0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
+
+	// This parameter is used to define whether the short side is the video height. 0: no, 1: yes. The default value is 0.
+	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
 }
 
 func (r *ModifyLiveTranscodeTemplateRequest) ToJsonString() string {
