@@ -2137,6 +2137,31 @@ func (c *Client) DescribeBandwidthPackageQuota(request *DescribeBandwidthPackage
     return
 }
 
+func NewDescribeBandwidthPackageResourcesRequest() (request *DescribeBandwidthPackageResourcesRequest) {
+    request = &DescribeBandwidthPackageResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeBandwidthPackageResources")
+    return
+}
+
+func NewDescribeBandwidthPackageResourcesResponse() (response *DescribeBandwidthPackageResourcesResponse) {
+    response = &DescribeBandwidthPackageResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query resources in a bandwidth package based on the unique package ID. You can filter the result by specifying conditions and paginate the query results.
+func (c *Client) DescribeBandwidthPackageResources(request *DescribeBandwidthPackageResourcesRequest) (response *DescribeBandwidthPackageResourcesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBandwidthPackageResourcesRequest()
+    }
+    response = NewDescribeBandwidthPackageResourcesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBandwidthPackagesRequest() (request *DescribeBandwidthPackagesRequest) {
     request = &DescribeBandwidthPackagesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3770,7 +3795,7 @@ func NewModifyAddressesBandwidthResponse() (response *ModifyAddressesBandwidthRe
     return
 }
 
-// This API (ModifyAddressesBandwidth) is used to adjust [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) bandwidth, including the postpaid EIP, prepaid EIP and bandwidth package EIP.
+// This API is used to adjust the bandwidth of [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1), including EIP billed on a pay-as-you-go, monthly subscription, and bandwidth package basis.
 func (c *Client) ModifyAddressesBandwidth(request *ModifyAddressesBandwidthRequest) (response *ModifyAddressesBandwidthResponse, err error) {
     if request == nil {
         request = NewModifyAddressesBandwidthRequest()

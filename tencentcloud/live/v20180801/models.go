@@ -191,6 +191,24 @@ type BandwidthInfo struct {
 	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 }
 
+type BillAreaInfo struct {
+
+	// Region name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Detailed country information
+	Countrys []*BillCountryInfo `json:"Countrys,omitempty" name:"Countrys" list`
+}
+
+type BillCountryInfo struct {
+
+	// Country
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Detailed bandwidth information
+	BandInfoList []*BillDataInfo `json:"BandInfoList,omitempty" name:"BandInfoList" list`
+}
+
 type BillDataInfo struct {
 
 	// Time point in the format of `yyyy-mm-dd HH:MM:SS`.
@@ -1129,8 +1147,9 @@ type CreateLiveTranscodeTemplateRequest struct {
 	//   Top speed codec transcoding: 3-10 characters
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
-	// Video bitrate in Kbps. Value range: 100-8,000.
-	// Note: the transcoding template requires that bitrate should be unique, yet the final saved bitrate may be different from the input bitrate.
+	// Video bitrate. Value range: 0–8,000 Kbps.
+	// If the value is 0, the original bitrate will be retained.
+	// Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
 	// Audio codec: acc by default.
@@ -1166,11 +1185,12 @@ type CreateLiveTranscodeTemplateRequest struct {
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
 	// Frame rate. Default value: 0.
-	// Value range: 0-60
+	// Range: 0-60 Fps.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Keyframe interval in seconds. Default value: original interval
-	// Value range: 2-6
+	// Keyframe interval, unit: second.
+	// Original interval by default
+	// Range: 2-6
 	Gop *int64 `json:"Gop,omitempty" name:"Gop"`
 
 	// Rotation angle. Default value: 0.
@@ -1181,13 +1201,19 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// baseline/main/high. Default value: baseline.
 	Profile *string `json:"Profile,omitempty" name:"Profile"`
 
-	// Whether to not exceed the original bitrate. 0: no; 1: yes. Default value: 0.
+	// Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
+	// 0: no, 1: yes
+	// Default value: 0.
 	BitrateToOrig *int64 `json:"BitrateToOrig,omitempty" name:"BitrateToOrig"`
 
-	// Whether to not exceed the original height. 0: no; 1: yes. Default value: 0.
+	// Whether to use the original height when the set height is higher than the original height.
+	// 0: no, 1: yes
+	// Default value: 0.
 	HeightToOrig *int64 `json:"HeightToOrig,omitempty" name:"HeightToOrig"`
 
-	// Whether to not exceed the original frame rate. 0: no; 1: yes. Default value: 0.
+	// Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
+	// 0: no, 1: yes
+	// Default value: 0.
 	FpsToOrig *int64 `json:"FpsToOrig,omitempty" name:"FpsToOrig"`
 
 	// Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
@@ -1948,13 +1974,56 @@ func (r *DescribeAllStreamPlayInfoListResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeAreaBillBandwidthAndFluxListRequest struct {
+	*tchttp.BaseRequest
+
+	// Start time point in the format of yyyy-mm-dd HH:MM:SS.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 1 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// LVB playback domain name. If it is left blank, the full data will be queried.
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+}
+
+func (r *DescribeAreaBillBandwidthAndFluxListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAreaBillBandwidthAndFluxListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAreaBillBandwidthAndFluxListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Detailed data information.
+		DataInfoList []*BillAreaInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAreaBillBandwidthAndFluxListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAreaBillBandwidthAndFluxListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeBillBandwidthAndFluxListRequest struct {
 	*tchttp.BaseRequest
 
 	// Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time point in the format of `yyyy-mm-dd HH:MM:SS`. The difference between the start time and end time cannot be greater than 31 days.
+	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 3 years can be queried.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// LVB playback domain name. If this parameter is left empty, full data will be queried.
@@ -2536,6 +2605,7 @@ type DescribeLiveDomainResponse struct {
 	Response *struct {
 
 		// Domain name information.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 		DomainInfo *DomainInfo `json:"DomainInfo,omitempty" name:"DomainInfo"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2772,7 +2842,7 @@ func (r *DescribeLiveRecordRulesResponse) FromJsonString(s string) error {
 type DescribeLiveRecordTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Template ID obtained through the `DescribeRecordTemplates` API.
+	// Template ID obtained by [DescribeLiveRecordTemplates](https://intl.cloud.tencent.com/document/product/267/32609?from_cn_redirect=1).
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
@@ -3370,10 +3440,10 @@ func (r *DescribeLiveTranscodeDetailInfoResponse) FromJsonString(s string) error
 type DescribeLiveTranscodeRulesRequest struct {
 	*tchttp.BaseRequest
 
-	// 
+	// An array of template IDs to be filtered.
 	TemplateIds []*int64 `json:"TemplateIds,omitempty" name:"TemplateIds" list`
 
-	// 
+	// An array of domain names to be filtered.
 	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames" list`
 }
 
@@ -3944,8 +4014,8 @@ func (r *DescribeScreenShotSheetNumListResponse) FromJsonString(s string) error 
 type DescribeStreamDayPlayInfoListRequest struct {
 	*tchttp.BaseRequest
 
-	// Date in the format of `YYYY-mm-dd`.
-	// Data is available at 3 AM the next day. You are recommended to query the latest data after this time point.
+	// Date in the format of YYYY-mm-dd
+	// Data is available at 3am Beijing Time the next day. You are recommended to query the latest data after this time point. Data in the last 3 months can be queried.
 	DayTime *string `json:"DayTime,omitempty" name:"DayTime"`
 
 	// Playback domain name.
@@ -4003,12 +4073,11 @@ func (r *DescribeStreamDayPlayInfoListResponse) FromJsonString(s string) error {
 type DescribeStreamPlayInfoListRequest struct {
 	*tchttp.BaseRequest
 
-	// Start time (Beijing time) in the format of `yyyy-mm-dd HH:MM:SS`,
-	// The start time cannot be more than 30 days after the current time.
+	// Start time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time) in the format of `yyyy-mm-dd HH:MM:SS`.
-	// The end time and start time must be on the same day.
+	// End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
+	// The end time and start time must be on the same day. Data in the last 3 days can be queried.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name,
@@ -5039,8 +5108,9 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Template description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Video bitrate in Kbps. Value range: 100-8,000.
-	// Note: the transcoding template requires that the bitrate should be unique, yet the final saved bitrate may be different from the input bitrate.
+	// Video bitrate. Value range: 0–8,000 Kbps.
+	// If the value is 0, the original bitrate will be retained.
+	// Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
 	// Width in pixels. Value range: 0-3,000.
@@ -5073,13 +5143,19 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// baseline/main/high.
 	Profile *string `json:"Profile,omitempty" name:"Profile"`
 
-	// Whether to not exceed the original bitrate. 0: no; 1: yes. Default value: 0.
+	// Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
+	// 0: no, 1: yes
+	// Default value: 0.
 	BitrateToOrig *int64 `json:"BitrateToOrig,omitempty" name:"BitrateToOrig"`
 
-	// Whether to not exceed the original height. 0: no; 1: yes. Default value: 0.
+	// Whether to use the original height when the set height is higher than the original height.
+	// 0: no, 1: yes
+	// Default value: 0.
 	HeightToOrig *int64 `json:"HeightToOrig,omitempty" name:"HeightToOrig"`
 
-	// Whether to not exceed the original frame rate. 0: no; 1: yes. Default value: 0.
+	// Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
+	// 0: no, 1: yes
+	// Default value: 0.
 	FpsToOrig *int64 `json:"FpsToOrig,omitempty" name:"FpsToOrig"`
 
 	// Bitrate compression ratio of top speed codec video.
@@ -5760,45 +5836,64 @@ type StreamOnlineInfo struct {
 
 type TemplateInfo struct {
 
-	// Video encoding format:
-	// h264/h265.
+	// Codec: h264/h265/origin. Default value: h264.
+	// 
+	// origin: keep the original codec.
 	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
 
-	// Video bitrate. Value range: 100-8000 Kbps.
+	// Video bitrate. Value range: 0–8,000 Kbps.
+	// If the value is 0, the original bitrate will be retained.
+	// Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
-	// Audio codec. Valid values: aac, mp3.
+	// Audio codec: aac. Default value: aac.
+	// Note: This parameter will not take effect for now and will be supported soon.
 	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
 
-	// Audio bitrate. Value range: 0-500 Kbps.
+	// Audio bitrate. Value range: 0–500 Kbps.
+	// 0 by default.
 	AudioBitrate *int64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
-	// Width. Value range: 0-3000.
+	// Width. Default value: 0.
+	// Value range: [0-3,000].
+	// The value must be a multiple of 2. The original width is 0.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Height. Value range: 0-3000.
+	// Height. Default value: 0.
+	// Value range: [0-3,000].
+	// The value must be a multiple of 2. The original width is 0.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
-	// Frame rate. Value range: 0-200 FPS.
+	// Frame rate. Default value: 0.
+	// Range: 0-60 Fps.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Keyframe interval. Value range: 1-50s.
+	// Keyframe interval, unit: second.
+	// Original interval by default
+	// Range: 2-6
 	Gop *int64 `json:"Gop,omitempty" name:"Gop"`
 
-	// Rotation angle. Valid values: 0, 90, 180, 270.
+	// Rotation angle. Default value: 0.
+	// Value range: 0, 90, 180, 270
 	Rotate *int64 `json:"Rotate,omitempty" name:"Rotate"`
 
-	// Encoding quality. Valid values:
-	// baseline, main, high.
+	// Encoding quality:
+	// baseline/main/high. Default value: baseline.
 	Profile *string `json:"Profile,omitempty" name:"Profile"`
 
-	// Whether to not exceed the original bitrate. 0: no; 1: yes.
+	// Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
+	// 0: no, 1: yes
+	// Default value: 0.
 	BitrateToOrig *int64 `json:"BitrateToOrig,omitempty" name:"BitrateToOrig"`
 
-	// Whether to not exceed the original height. 0: no; 1: yes.
+	// Whether to use the original height when the set height is higher than the original height.
+	// 0: no, 1: yes
+	// Default value: 0.
 	HeightToOrig *int64 `json:"HeightToOrig,omitempty" name:"HeightToOrig"`
 
-	// Whether to not exceed the original frame rate. 0: no; 1: yes.
+	// Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
+	// 0: no, 1: yes
+	// Default value: 0.
 	FpsToOrig *int64 `json:"FpsToOrig,omitempty" name:"FpsToOrig"`
 
 	// Whether to keep the video. 0: no; 1: yes.
@@ -5819,8 +5914,15 @@ type TemplateInfo struct {
 	// Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
 	AiTransCode *int64 `json:"AiTransCode,omitempty" name:"AiTransCode"`
 
-	// `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
+	// Bitrate compression ratio of top speed code video.
+	// Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
+	// 
+	// Value range: 0.0-0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
+
+	// Whether to take the shorter side as height. 0: no, 1: yes. Default value: 0.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
 }
 
 type TimeValue struct {

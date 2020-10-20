@@ -518,6 +518,31 @@ func (c *Client) DescribeClusterInstances(request *DescribeClusterInstancesReque
     return
 }
 
+func NewDescribeClusterKubeconfigRequest() (request *DescribeClusterKubeconfigRequest) {
+    request = &DescribeClusterKubeconfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterKubeconfig")
+    return
+}
+
+func NewDescribeClusterKubeconfigResponse() (response *DescribeClusterKubeconfigResponse) {
+    response = &DescribeClusterKubeconfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the cluster kubeconfig file. Different sub-accounts have their own kubeconfig files. The kubeconfig file contains the kube-apiserver client certificate of the corresponding sub-account. By default, the client certificate is created when this API is called for the first time, and the certificate is valid for 20 years with no permissions granted. For the cluster owner or primary account, the cluster-admin permission is granted by default.
+func (c *Client) DescribeClusterKubeconfig(request *DescribeClusterKubeconfigRequest) (response *DescribeClusterKubeconfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterKubeconfigRequest()
+    }
+    response = NewDescribeClusterKubeconfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClusterRouteTablesRequest() (request *DescribeClusterRouteTablesRequest) {
     request = &DescribeClusterRouteTablesRequest{
         BaseRequest: &tchttp.BaseRequest{},

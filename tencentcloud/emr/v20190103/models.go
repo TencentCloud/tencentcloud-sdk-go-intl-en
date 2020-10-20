@@ -1184,7 +1184,8 @@ type PersistentVolumeContext struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
-	// 
+	// Number of disks
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	DiskNum *int64 `json:"DiskNum,omitempty" name:"DiskNum"`
 }
 
@@ -1439,6 +1440,15 @@ type ScaleOutInstanceRequest struct {
 
 	// Specified information such as pod specification and source for expansion with pod resources
 	PodSpec *PodSpec `json:"PodSpec,omitempty" name:"PodSpec"`
+
+	// Machine group name selected for ClickHouse cluster scaling-out
+	ClickHouseClusterName *string `json:"ClickHouseClusterName,omitempty" name:"ClickHouseClusterName"`
+
+	// Machine group type selected for ClickHouse cluster scaling-out. new: creates a group; old: selects an existing group
+	ClickHouseClusterType *string `json:"ClickHouseClusterType,omitempty" name:"ClickHouseClusterType"`
+
+	// YARN node label specified for rule-based scaling-out
+	YarnNodeLabel *string `json:"YarnNodeLabel,omitempty" name:"YarnNodeLabel"`
 }
 
 func (r *ScaleOutInstanceRequest) ToJsonString() string {

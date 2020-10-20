@@ -269,7 +269,7 @@ type CreateKeyRequest struct {
 	// Unique alias that makes a key more recognizable and understandable. This parameter cannot be empty, can contain 1-60 letters, digits, `-`, and `_`, and must begin with a letter or digit. The `kms-` prefix is used for Tencent Cloud products.
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
-	// 
+	// CMK description of up to 1,024 bytes in length
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Key purpose. The default value is `ENCRYPT_DECRYPT` (creating a symmetric key for encryption and decryption). Other valid values include `ASYMMETRIC_DECRYPT_RSA_2048` (creating an RSA2048 asymmetric key for encryption and decryption) and `ASYMMETRIC_DECRYPT_SM2` (creating an SM2 asymmetric key for encryption and decryption).
@@ -278,7 +278,7 @@ type CreateKeyRequest struct {
 	// Specifies the key type. Default value: 1. Valid value: 1 - default type, indicating that the CMK is created by KMS; 2 - EXTERNAL type, indicating that you need to import key material. For more information, please see the `GetParametersForImport` and `ImportKeyMaterial` API documents.
 	Type *uint64 `json:"Type,omitempty" name:"Type"`
 
-	// 
+	// Tag list
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
@@ -345,7 +345,7 @@ type CreateWhiteBoxKeyRequest struct {
 	// Key description of up to 1024 bytes
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// 
+	// Tag list
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
@@ -371,10 +371,10 @@ type CreateWhiteBoxKeyResponse struct {
 		// Globally unique white-box key ID
 		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
-		// 
+		// Tag operation return code. 0: success; 1: internal error; 2: business processing error
 		TagCode *uint64 `json:"TagCode,omitempty" name:"TagCode"`
 
-		// 
+		// Tag operation return message
 		TagMsg *string `json:"TagMsg,omitempty" name:"TagMsg"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -397,7 +397,7 @@ type DecryptRequest struct {
 	// The ciphertext data to be decrypted.
 	CiphertextBlob *string `json:"CiphertextBlob,omitempty" name:"CiphertextBlob"`
 
-	// 
+	// JSON string of key-value pair. If this parameter is specified for `Encrypt`, the same parameter needs to be provided when the `Decrypt` API is called. The maximum length is 1,024 bytes.
 	EncryptionContext *string `json:"EncryptionContext,omitempty" name:"EncryptionContext"`
 }
 
@@ -1198,7 +1198,7 @@ type EncryptResponse struct {
 		// Base64-encoded encrypted ciphertext
 		CiphertextBlob *string `json:"CiphertextBlob,omitempty" name:"CiphertextBlob"`
 
-		// 
+		// Globally unique ID of the CMK used for encryption
 		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1218,7 +1218,7 @@ func (r *EncryptResponse) FromJsonString(s string) error {
 type GenerateDataKeyRequest struct {
 	*tchttp.BaseRequest
 
-	// 
+	// Globally unique CMK ID
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
 	// Specifies the encryption algorithm and size of the `DataKey`. Valid values: AES_128, AES_256. Either `KeySpec` or `NumberOfBytes` must be specified.
@@ -1227,7 +1227,7 @@ type GenerateDataKeyRequest struct {
 	// Length of the `DataKey`. If both `NumberOfBytes` and `KeySpec` are specified, `NumberOfBytes` will prevail. Minimum value: 1; maximum value: 1024. Either `KeySpec` or `NumberOfBytes` must be specified.
 	NumberOfBytes *uint64 `json:"NumberOfBytes,omitempty" name:"NumberOfBytes"`
 
-	// 
+	// JSON string of key-value pair. If this field is used, the same string should be entered when the returned `DataKey` is decrypted.
 	EncryptionContext *string `json:"EncryptionContext,omitempty" name:"EncryptionContext"`
 }
 
@@ -1244,7 +1244,7 @@ type GenerateDataKeyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// 
+		// Globally unique CMK ID
 		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
 		// Plaintext of the generated data key. The plaintext is Base64-encoded and can be used locally after having it Base64-decoded.
@@ -1559,16 +1559,16 @@ type Key struct {
 
 type KeyMetadata struct {
 
-	// 
+	// Globally unique CMK ID
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
-	// 
+	// Alias that makes a key more recognizable and understandable
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
-	// 
+	// Key creation time
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// 
+	// CMK description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport, Archived.
@@ -1580,19 +1580,19 @@ type KeyMetadata struct {
 	// CMK type. 2: FIPS-compliant; 4: SM-CRYPTO
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
-	// 
+	// Creator
 	CreatorUin *uint64 `json:"CreatorUin,omitempty" name:"CreatorUin"`
 
-	// 
+	// Whether key rotation is enabled
 	KeyRotationEnabled *bool `json:"KeyRotationEnabled,omitempty" name:"KeyRotationEnabled"`
 
-	// 
+	// CMK creator. The value of this parameter is `user` if the CMK is created by the user, or the corresponding service name if it is created automatically by an authorized Tencent Cloud service.
 	Owner *string `json:"Owner,omitempty" name:"Owner"`
 
-	// 
+	// Time of next rotation if key rotation is enabled
 	NextRotateTime *uint64 `json:"NextRotateTime,omitempty" name:"NextRotateTime"`
 
-	// 
+	// Scheduled deletion time
 	DeletionDate *uint64 `json:"DeletionDate,omitempty" name:"DeletionDate"`
 
 	// CMK key material type. TENCENT_KMS: created by KMS; EXTERNAL: imported by user.
@@ -1647,22 +1647,22 @@ func (r *ListAlgorithmsResponse) FromJsonString(s string) error {
 type ListKeyDetailRequest struct {
 	*tchttp.BaseRequest
 
-	// 
+	// This parameter has the same meaning of the `Offset` in an SQL query, indicating that this acquisition starts from the "No. Offset value" element of the array arranged in a certain order. The default value is 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// This parameter has the same meaning of the `Limit` in an SQL query, indicating that up to `Limit` value elements can be obtained in this request. The default value is 10 and the maximum value is 200.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// 
+	// Filters by creator role. 0 (default value): the CMK is created by the user; 1: the CMK is created automatically by an authorized Tencent Cloud service.
 	Role *uint64 `json:"Role,omitempty" name:"Role"`
 
-	// 
+	// Sorts by CMK creation time. 0: descending; 1: ascending
 	OrderType *uint64 `json:"OrderType,omitempty" name:"OrderType"`
 
 	// Filters by CMK status. 0: all CMKs; 1: CMKs in `Enabled` status only; 2: CMKs in `Disabled` status only; 3: CMKs in `PendingDelete` status only (i.e., keys with schedule deletion enabled); 4: CMKs in `PendingImport` status only; 5: CMKs in `Archived` status only.
 	KeyState *uint64 `json:"KeyState,omitempty" name:"KeyState"`
 
-	// 
+	// Performs a fuzzy query by `KeyId` or `Alias`
 	SearchKeyAlias *string `json:"SearchKeyAlias,omitempty" name:"SearchKeyAlias"`
 
 	// Filters by CMK type. "TENCENT_KMS" indicates to filter CMKs whose key materials are created by KMS; "EXTERNAL" indicates to filter CMKs of `EXTERNAL` type whose key materials are imported by users; "ALL" or empty indicates to filter CMKs of both types. This value is case-sensitive.
@@ -1688,7 +1688,7 @@ type ListKeyDetailResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// 
+		// Total number of CMKs
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of returned attribute information.
@@ -1892,10 +1892,10 @@ func (r *ScheduleKeyDeletionResponse) FromJsonString(s string) error {
 
 type Tag struct {
 
-	// 
+	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
-	// 
+	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
@@ -1988,7 +1988,7 @@ func (r *UpdateAliasResponse) FromJsonString(s string) error {
 type UpdateKeyDescriptionRequest struct {
 	*tchttp.BaseRequest
 
-	// 
+	// New description of up to 1,024 bytes in length
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// ID of the CMK for which to modify the description
@@ -2024,37 +2024,37 @@ func (r *UpdateKeyDescriptionResponse) FromJsonString(s string) error {
 
 type WhiteboxKeyInfo struct {
 
-	// 
+	// Globally unique white-box key ID
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
-	// 
+	// Unique alias that makes a key more recognizable and understandable. This parameter cannot be empty, can contain 1 to 60 letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit.
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
-	// 
+	// Creator
 	CreatorUin *uint64 `json:"CreatorUin,omitempty" name:"CreatorUin"`
 
-	// 
+	// Key description information
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// 
+	// Key creation time in Unix timestamp
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// 
+	// White-box key status. Valid values: Enabled, Disabled
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// 
+	// Creator
 	OwnerUin *uint64 `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
-	// 
+	// Key algorithm type
 	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
 
-	// 
+	// Base64-encoded white-box encryption key
 	EncryptKey *string `json:"EncryptKey,omitempty" name:"EncryptKey"`
 
-	// 
+	// Base64-encoded white-box decryption key
 	DecryptKey *string `json:"DecryptKey,omitempty" name:"DecryptKey"`
 
-	// 
+	// Resource ID in the format of `creatorUin/$creatorUin/$keyId`
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
 	// Whether there is a device fingerprint bound to the current key

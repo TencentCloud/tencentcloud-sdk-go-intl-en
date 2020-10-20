@@ -2538,13 +2538,13 @@ type DescribeRealServerStatisticsRequest struct {
 	// Statistics duration. Unit: hours. It only supports querying statistics for the past 1, 3, 6, 12, and 24 hours.
 	WithinTime *uint64 `json:"WithinTime,omitempty" name:"WithinTime"`
 
-	// Statistics start time, such as 2020-08-19 00:00:00
+	// Statistics start time, such as `2020-08-19 00:00:00`
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Statistics end time, such as 2020-08-19 23:59:59
+	// Statistics end time, such as `2020-08-19 23:59:59`
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Statistics granularity in seconds. Only 1-minute (60-second) and 5-minute (300-second) granularities are supported
+	// Statistics granularity in seconds. Only 1-minute (60-second) and 5-minute (300-second) granularities are supported.
 	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
 }
 

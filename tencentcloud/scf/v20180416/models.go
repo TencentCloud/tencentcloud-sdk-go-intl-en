@@ -1109,6 +1109,10 @@ type GetFunctionResponse struct {
 		// Timeout period for function initialization
 		InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
 
+		// Cause of function failure
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		StatusReasons []*StatusReason `json:"StatusReasons,omitempty" name:"StatusReasons" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1866,6 +1870,15 @@ type RoutingConfig struct {
 
 	// Additional version with rule-based routing
 	AddtionVersionMatchs []*VersionMatch `json:"AddtionVersionMatchs,omitempty" name:"AddtionVersionMatchs" list`
+}
+
+type StatusReason struct {
+
+	// Error code
+	ErrorCode *string `json:"ErrorCode,omitempty" name:"ErrorCode"`
+
+	// Error message
+	ErrorMessage *string `json:"ErrorMessage,omitempty" name:"ErrorMessage"`
 }
 
 type Tag struct {

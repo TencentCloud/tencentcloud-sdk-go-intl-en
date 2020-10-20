@@ -1,0 +1,128 @@
+// Copyright (c) 2017-2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package v20200819
+
+import (
+    "encoding/json"
+
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+)
+
+type SendEmailRequest struct {
+	*tchttp.BaseRequest
+
+	// Sender
+	FromAddress *string `json:"FromAddress,omitempty" name:"FromAddress"`
+
+	// Recipient
+	ToAddress *string `json:"ToAddress,omitempty" name:"ToAddress"`
+
+	// Email summary
+	Subject *string `json:"Subject,omitempty" name:"Subject"`
+
+	// Sender name
+	FromName *string `json:"FromName,omitempty" name:"FromName"`
+
+	// Reply-to address
+	ReplyAddress *string `json:"ReplyAddress,omitempty" name:"ReplyAddress"`
+
+	// The body of an HTML email
+	HtmlContent *string `json:"HtmlContent,omitempty" name:"HtmlContent"`
+
+	// The body of a plain-text email
+	TextContent *string `json:"TextContent,omitempty" name:"TextContent"`
+}
+
+func (r *SendEmailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SendEmailRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SendEmailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The result of creating an email task
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SendEmailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SendEmailResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SendTemplatedEmailRequest struct {
+	*tchttp.BaseRequest
+
+	// Sender address.
+	FromAddress *string `json:"FromAddress,omitempty" name:"FromAddress"`
+
+	// Recipient address. Up to 100 recipient addresses are supported. Multiple addresses should be separated by semicolons (;).
+	ToAddress *string `json:"ToAddress,omitempty" name:"ToAddress"`
+
+	// The name of the template created in advance.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Template variable value, which is a JSON string.
+	TemplateValue *string `json:"TemplateValue,omitempty" name:"TemplateValue"`
+
+	// Sender name.
+	FromName *string `json:"FromName,omitempty" name:"FromName"`
+
+	// Reply-to address.
+	ReplyAddress *string `json:"ReplyAddress,omitempty" name:"ReplyAddress"`
+}
+
+func (r *SendTemplatedEmailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SendTemplatedEmailRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SendTemplatedEmailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The result of creating a template email task
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SendTemplatedEmailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SendTemplatedEmailResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}

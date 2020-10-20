@@ -237,7 +237,7 @@ func (r *CreateAutoSnapshotPolicyResponse) FromJsonString(s string) error {
 type CreateDisksRequest struct {
 	*tchttp.BaseRequest
 
-	// Type of hard disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
+	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Cloud disk billing method. POSTPAID_BY_HOUR: pay as you go by hour<br><li>CDCPAID: Billed together with the bound dedicated cluster<br>For information about the pricing of each method, see the cloud disk [Pricing Overview](https://intl.cloud.tencent.com/document/product/362/2413?from_cn_redirect=1).
@@ -312,6 +312,9 @@ type CreateSnapshotRequest struct {
 
 	// Snapshot name. If it is left empty, the new snapshot name is "Not named" by default.
 	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+
+	// Expiration time of the snapshot. The snapshot will be automatically deleted upon expiration.
+	Deadline *string `json:"Deadline,omitempty" name:"Deadline"`
 }
 
 func (r *CreateSnapshotRequest) ToJsonString() string {
@@ -519,7 +522,7 @@ type DescribeDiskConfigQuotaRequest struct {
 	// Billing mode. Value range: <br><li>POSTPAID_BY_HOUR: postpaid.
 	DiskChargeType *string `json:"DiskChargeType,omitempty" name:"DiskChargeType"`
 
-	// Type of hard disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
+	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD
 	DiskTypes []*string `json:"DiskTypes,omitempty" name:"DiskTypes" list`
 
 	// The system disk or data disk. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
@@ -1330,8 +1333,11 @@ type ModifySnapshotAttributeRequest struct {
 	// Name of new snapshot. Maximum length is 60 bytes.
 	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
 
-	// The retention time of the snapshot. FALSE: non-permanent retention; TRUE: permanent retention. You can only modify non-permanent snapshots to permanent snapshots.
+	// Snapshot retention mode. Valid values: `FALSE`: non-permanent retention; `TRUE`: permanent retention.
 	IsPermanent *bool `json:"IsPermanent,omitempty" name:"IsPermanent"`
+
+	// Expiration time of the snapshot. Setting this parameter will set the snapshot retention mode to `FALSE` (non-permanent retention) and the snapshot will be automatically deleted upon expiration.
+	Deadline *string `json:"Deadline,omitempty" name:"Deadline"`
 }
 
 func (r *ModifySnapshotAttributeRequest) ToJsonString() string {

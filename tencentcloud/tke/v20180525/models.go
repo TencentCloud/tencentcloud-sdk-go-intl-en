@@ -41,7 +41,7 @@ type AddExistedInstancesRequest struct {
 	// Security group to which the instance belongs. This parameter can be obtained from the `sgId` field returned by DescribeSecurityGroups. If this parameter is not specified, the default security group is bound. (Currently, you can only set a single sgId)
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 
-	// 
+	// When reinstalling the system, you can specify the HostName of the modified instance (when the cluster is in HostName mode, this parameter is required, and the rule name is the same as the [Create CVM Instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API HostName except for uppercase letters not being supported.
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
 }
 
@@ -122,13 +122,13 @@ type Cluster struct {
 	// ID of the project to which the cluster belongs
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// 
+	// Tag description list.
 	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification" list`
 
-	// 
+	// Cluster status (Running, Creating, or Abnormal)
 	ClusterStatus *string `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
 
-	// 
+	// Cluster attributes (including a map of different cluster attributes, with attribute fields including NodeNameType (lan-ip mode and hostname mode, with lan-ip mode as default))
 	Property *string `json:"Property,omitempty" name:"Property"`
 
 	// Number of primary nodes currently in the cluster
@@ -166,7 +166,7 @@ type ClusterAdvancedSettings struct {
 	// Type of runtime component used by the cluster. The types include "docker" and "containerd". Default value: docker
 	ContainerRuntime *string `json:"ContainerRuntime,omitempty" name:"ContainerRuntime"`
 
-	// 
+	// NodeName type for a node in a cluster (This includes the two forms of **hostname** and **lan-ip**, with the default as **lan-ip**. If **hostname** is used, you need to set the HostName parameter when creating a node, and the InstanceName needs to be the same as the HostName.)
 	NodeNameType *string `json:"NodeNameType,omitempty" name:"NodeNameType"`
 
 	// Cluster custom parameter
@@ -178,10 +178,10 @@ type ClusterAdvancedSettings struct {
 	// Whether a cluster in VPC-CNI mode uses dynamic IP addresses. The default value is FALSE, which indicates that static IP addresses are used.
 	IsNonStaticIpMode *bool `json:"IsNonStaticIpMode,omitempty" name:"IsNonStaticIpMode"`
 
-	// 
+	// Indicates whether to enable cluster deletion protection.
 	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
 
-	// 
+	// Cluster network proxy model
 	KubeProxyMode *string `json:"KubeProxyMode,omitempty" name:"KubeProxyMode"`
 
 	// Indicates whether to enable auditing
@@ -301,13 +301,13 @@ type ClusterBasicSettings struct {
 	// ID of the project to which the new resources in the cluster belong.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// 
+	// Tag description list. This parameter is used to bind a tag to a resource instance. Currently, a tag can only be bound to cluster instances.
 	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification" list`
 
-	// 
+	// Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
 	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
 
-	// 
+	// Whether to enable the node’s default security group (default: `No`, Aphla feature)
 	NeedWorkSecurityGroup *bool `json:"NeedWorkSecurityGroup,omitempty" name:"NeedWorkSecurityGroup"`
 }
 
@@ -512,7 +512,7 @@ type CreateClusterInstancesRequest struct {
 	// Cluster ID. Enter the ClusterId field returned by the DescribeClusters API
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the [RunInstances](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API.
+	// Pass-through parameter for CVM creation in the format of a JSON string. To ensure the idempotence of requests for adding cluster nodes, you need to add the ClientToken field in this parameter. For more information, see the documentation for [RunInstances](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API.
 	RunInstancePara *string `json:"RunInstancePara,omitempty" name:"RunInstancePara"`
 
 	// Additional parameter to be set for the instance
@@ -575,6 +575,9 @@ type CreateClusterRequest struct {
 
 	// CVM type and the corresponding data disk mounting configuration information.
 	InstanceDataDiskMountSettings []*InstanceDataDiskMountSetting `json:"InstanceDataDiskMountSettings,omitempty" name:"InstanceDataDiskMountSettings" list`
+
+	// Information of the add-on to be installed
+	ExtensionAddons []*ExtensionAddon `json:"ExtensionAddons,omitempty" name:"ExtensionAddons" list`
 }
 
 func (r *CreateClusterRequest) ToJsonString() string {
@@ -796,7 +799,7 @@ type DeleteClusterInstancesRequest struct {
 	// Policy used to delete an instance in the cluster: `terminate` (terminates the instance. Only available for pay-as-you-go CVMs); `retain` (only removes it from the cluster. The instance will be retained.)
 	InstanceDeleteMode *string `json:"InstanceDeleteMode,omitempty" name:"InstanceDeleteMode"`
 
-	// 
+	// Whether or not there is forced deletion (when a node is initialized, the parameters can be specified as TRUE)
 	ForceDelete *bool `json:"ForceDelete,omitempty" name:"ForceDelete"`
 }
 
@@ -1132,7 +1135,7 @@ type DescribeClusterInstancesRequest struct {
 	// List of instance IDs to be obtained. This parameter is empty by default, which indicates that all instances in the cluster will be pulled.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
-	// 
+	// Node role. Valid values are MASTER, WORKER, ETCD, MASTER_ETCD, and ALL. Default value: WORKER.
 	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
 }
 
@@ -1166,6 +1169,43 @@ func (r *DescribeClusterInstancesResponse) ToJsonString() string {
 }
 
 func (r *DescribeClusterInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterKubeconfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeClusterKubeconfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterKubeconfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterKubeconfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Sub-account kubeconfig file, used to access the cluster kube-apiserver directly
+		Kubeconfig *string `json:"Kubeconfig,omitempty" name:"Kubeconfig"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterKubeconfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterKubeconfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1640,8 +1680,17 @@ type ExistedInstancesPara struct {
 	// Security group to which the instance belongs. This parameter can be obtained from the sgId field in the returned values of DescribeSecurityGroups. If this parameter is not specified, the default security group is bound. (Currently, you can only set a single sgId)
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 
-	// 
+	// When reinstalling the system, you can specify the HostName of the modified instance (when the cluster is in HostName mode, this parameter is required, and the rule name is the same as the [Create CVM Instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API HostName except for uppercase letters not being supported.
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
+}
+
+type ExtensionAddon struct {
+
+	// Add-on name
+	AddonName *string `json:"AddonName,omitempty" name:"AddonName"`
+
+	// Add-on information (description of the add-on resource object in JSON string format)
+	AddonParam *string `json:"AddonParam,omitempty" name:"AddonParam"`
 }
 
 type Filter struct {
@@ -1713,7 +1762,8 @@ type Instance struct {
 type InstanceAdvancedSettings struct {
 
 	// Data disk mount point. By default, no data disk is mounted. Data disks in ext3, ext4, or XFS file system formats will be mounted directly, while data disks in other file systems and unformatted data disks will automatically be formatted as ext4 and then mounted. Please back up your data in advance. This setting is only applicable to CVMs with a single data disk.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Note: in multi-disk scenarios, use the DataDisks data structure below to set the corresponding information, such as cloud disk type, cloud disk size, mount path, and whether to perform formatting.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	MountTarget *string `json:"MountTarget,omitempty" name:"MountTarget"`
 
 	// Specified value of dockerd --graph. Default value: /var/lib/docker
@@ -1731,8 +1781,8 @@ type InstanceAdvancedSettings struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
 
-	// Data disk information
-	// Note: This field may return null, indicating that no valid value was found.
+	// Mounting information of multiple data disks. Ensure that the CVM purchase parameter specifies the information required for the purchase of multiple data disks. If the purchase of multiple data disks is also set in DataDisks under RunInstancesPara of the CreateClusterInstances API for adding nodes, you can refer to the example of adding cluster nodes (multiple data disks) for the CreateClusterInstances API.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
 
 	// Information about node custom parameters
@@ -1761,10 +1811,10 @@ type InstanceExtraArgs struct {
 
 type Label struct {
 
-	// 
+	// Name in map list
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// 
+	// Value in map list
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
@@ -2025,9 +2075,9 @@ type Tag struct {
 
 type TagSpecification struct {
 
-	// 
+	// The type of resource that the tag is bound to. The type currently supported is `cluster`.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// 
+	// List of tag pairs
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }

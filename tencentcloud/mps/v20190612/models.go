@@ -3730,7 +3730,7 @@ type EditMediaRequest struct {
 	// Task priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
@@ -3838,6 +3838,46 @@ func (r *EnableWorkflowResponse) ToJsonString() string {
 }
 
 func (r *EnableWorkflowResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ExecuteFunctionRequest struct {
+	*tchttp.BaseRequest
+
+	// Name of called backend API.
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// API parameter. Parameter format will depend on the actual function definition.
+	FunctionArg *string `json:"FunctionArg,omitempty" name:"FunctionArg"`
+}
+
+func (r *ExecuteFunctionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ExecuteFunctionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ExecuteFunctionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Packed string, which will vary according to the custom API.
+		Result *string `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ExecuteFunctionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ExecuteFunctionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6322,7 +6362,7 @@ type ProcessMediaRequest struct {
 	// Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
@@ -7239,7 +7279,7 @@ type VideoTemplateInfo struct {
 	// Currently, a resolution within 640*480p must be specified for H.265.
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
-	// Video frame rate in Hz. Value range: [0, 60].
+	// Video frame rate in Hz. Value range: [0, 100].
 	// If the value is 0, the frame rate will be the same as that of the source video.
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 
@@ -7288,7 +7328,7 @@ type VideoTemplateInfoForUpdate struct {
 	// Currently, a resolution within 640*480p must be specified for H.265.
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
-	// Video frame rate in Hz. Value range: [0, 60].
+	// Video frame rate in Hz. Value range: [0, 100].
 	// If the value is 0, the frame rate will be the same as that of the source video.
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 

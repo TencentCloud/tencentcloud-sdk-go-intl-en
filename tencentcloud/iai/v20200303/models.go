@@ -29,22 +29,22 @@ type AnalyzeDenseLandmarksRequest struct {
 	Mode *uint64 `json:"Mode,omitempty" name:"Mode"`
 
 	// Base64-encoded image data, which cannot exceed 5 MB.  
-	// The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
-	// .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
 	Image *string `json:"Image,omitempty" name:"Image"`
 
 	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.  
-	// The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
 	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
-	// You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.  
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.  
 	// The download speed and stability of non-Tencent Cloud URLs may be low.  
-	// .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Algorithm model version used by the Face Recognition service. You can enter only `3.0` for this API.
 	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 
-	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image is not rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
 	NeedRotateDetection *int64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
 }
 
@@ -720,10 +720,10 @@ func (r *DeletePersonResponse) FromJsonString(s string) error {
 
 type DenseFaceShape struct {
 
-	// Horizontal coordinate of the top-left corner of face frame.
+	// X-coordinate of the top-left vertex of the face frame.
 	X *int64 `json:"X,omitempty" name:"X"`
 
-	// Vertical coordinate of the top-left corner of face frame.
+	// Y-coordinate of the top-left vertex of the face frame.
 	Y *int64 `json:"Y,omitempty" name:"Y"`
 
 	// Face frame width.
@@ -732,46 +732,46 @@ type DenseFaceShape struct {
 	// Face frame height.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
-	// XX points that describe the left eye.
+	// XX points that outline the left eye.
 	LeftEye []*Point `json:"LeftEye,omitempty" name:"LeftEye" list`
 
-	// XX points that describe the right eye.
+	// XX points that outline the right eye.
 	RightEye []*Point `json:"RightEye,omitempty" name:"RightEye" list`
 
-	// XX points that describe the left eyebrow.
+	// XX points that outline the left eyebrow.
 	LeftEyeBrow []*Point `json:"LeftEyeBrow,omitempty" name:"LeftEyeBrow" list`
 
-	// XX points that describe the right eyebrow.
+	// XX points that outline the right eyebrow.
 	RightEyeBrow []*Point `json:"RightEyeBrow,omitempty" name:"RightEyeBrow" list`
 
-	// XX points that describe the outer contour of the mouth, which are returned from left anticlockwise.
+	// XX points that outline the outer contour of the mouth, which are returned from left anticlockwise.
 	MouthOutside []*Point `json:"MouthOutside,omitempty" name:"MouthOutside" list`
 
-	// XX points that describe the inner contour of the mouth, which are returned from left anticlockwise.
+	// XX points that outline the inner contour of the mouth, which are returned from left anticlockwise.
 	MouthInside []*Point `json:"MouthInside,omitempty" name:"MouthInside" list`
 
-	// XX points that describe the nose.
+	// XX points that outline the nose.
 	Nose []*Point `json:"Nose,omitempty" name:"Nose" list`
 
-	// XX points that describe the left pupil.
+	// XX points that outline the left pupil.
 	LeftPupil []*Point `json:"LeftPupil,omitempty" name:"LeftPupil" list`
 
-	// XX points that describe the right pupil.
+	// XX points that outline the right pupil.
 	RightPupil []*Point `json:"RightPupil,omitempty" name:"RightPupil" list`
 
-	// XX points that describe the midline.
+	// XX points that outline the midline.
 	CentralAxis []*Point `json:"CentralAxis,omitempty" name:"CentralAxis" list`
 
-	// XX points that describe the chin.
+	// XX points that outline the chin.
 	Chin []*Point `json:"Chin,omitempty" name:"Chin" list`
 
-	// XX points that describe the left eye bag.
+	// XX points that outline the left eye bag.
 	LeftEyeBags []*Point `json:"LeftEyeBags,omitempty" name:"LeftEyeBags" list`
 
-	// XX points that describe the right eye bag.
+	// XX points that outline the right eye bag.
 	RightEyeBags []*Point `json:"RightEyeBags,omitempty" name:"RightEyeBags" list`
 
-	// XX points that describe the forehead.
+	// XX points that outline the forehead.
 	Forehead []*Point `json:"Forehead,omitempty" name:"Forehead" list`
 }
 
@@ -784,29 +784,29 @@ type DetectFaceAttributesRequest struct {
 	MaxFaceNum *uint64 `json:"MaxFaceNum,omitempty" name:"MaxFaceNum"`
 
 	// Base64-encoded image data, which cannot exceed 5 MB.
-	// The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats. 
-	// .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats. 
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
 	Image *string `json:"Image,omitempty" name:"Image"`
 
 	// Image URL. 
 	// The image cannot exceed 5 MB in size after being Base64-encoded. 
-	// The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
 	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used. 
-	// You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
 	// The download speed and stability of non-Tencent Cloud URLs may be low. 
-	// .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Whether to return attributes such as age, gender, and emotion. 
 	// Valid values (case-insensitive): None, Age, Beauty, Emotion, Eye, Eyebrow, 
 	// Gender, Hair, Hat, Headpose, Mask, Mouth, Moustache, Nose, Shape, Skin, Smile. 
-	// `None` indicates that no attributes need to be returned, which is the default value. 
+	// Default value: None, indicating that no attributes need to be returned. 
 	// You need to combine the attributes into a string and separate them with commas. The sequence of the attributes is not limited. 
 	// For more information on the attributes, please see the output parameters as described below. 
 	// The face attribute information of up to 5 largest faces in the image will be returned, and `AttributesInfo` of the 6th and rest faces is meaningless.
 	FaceAttributesType *string `json:"FaceAttributesType,omitempty" name:"FaceAttributesType"`
 
-	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image is not rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
 	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
 
 	// Algorithm model version used by the Face Recognition service. You can enter only `3.0` for this API.
@@ -937,6 +937,62 @@ func (r *DetectFaceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DetectLiveFaceAccurateRequest struct {
+	*tchttp.BaseRequest
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats. 
+	// The recommended image aspect ratio is 3:4 (generally, the aspect ratio of images taken by mobile phones).
+	// The face must be greater than 100*100 px in size.
+	// Supported image formats are PNG, JPG, JPEG, and BMP. GIF is currently not supported.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` of the image must be provided; if both are provided, only `Url` will be used. 
+	// The recommended image aspect ratio is 3:4 (generally, the aspect ratio of images taken by mobile phones).
+	// The face must be greater than 100*100 px in size.
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	// Supported image formats are PNG, JPG, JPEG, and BMP. GIF is currently not supported.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Algorithm model version used for face recognition. Valid value: 3.0
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+}
+
+func (r *DetectLiveFaceAccurateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DetectLiveFaceAccurateRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DetectLiveFaceAccurateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Liveness score. Value range: [0, 100]. You can set several thresholds such as 5, 10, 40, 70 and 90 to determine whether the image is photographed. We recommend using the threshold 40.
+		Score *float64 `json:"Score,omitempty" name:"Score"`
+
+		// Algorithm model version used for face recognition.
+		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DetectLiveFaceAccurateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DetectLiveFaceAccurateResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DetectLiveFaceRequest struct {
 	*tchttp.BaseRequest
 
@@ -1001,11 +1057,11 @@ func (r *DetectLiveFaceResponse) FromJsonString(s string) error {
 type Eye struct {
 
 	// Whether glasses are worn.
-	// The `Type` values of the `AttributeItem` include: 0: no glasses; 1: general glasses; 2: sunglasses
+	// The `Type` values of the `AttributeItem` include: 0: no glasses; 1: general glasses; 2: sunglasses.
 	Glass *AttributeItem `json:"Glass,omitempty" name:"Glass"`
 
 	// Whether the eyes are open.
-	// The `Type` values of the `AttributeItem` include: 0: open; 1: closed
+	// The `Type` values of the `AttributeItem` include: 0: open; 1: closed.
 	EyeOpen *AttributeItem `json:"EyeOpen,omitempty" name:"EyeOpen"`
 
 	// Whether the person has double eyelids.
@@ -1089,7 +1145,7 @@ type FaceDetailAttributesInfo struct {
 	Beauty *int64 `json:"Beauty,omitempty" name:"Beauty"`
 
 	// Emotion, including relaxed, happy, surprised, angry, sad, disgusted, and scared. 
-	// The `Type` values of the `AttributeItem` include: 0: relaxed; 1: happy; 2: surprised; 3: angry; 4: sad; 5: disgusted; 6: scared
+	// The `Type` values of the `AttributeItem` include: 0: relaxed; 1: happy; 2: surprised; 3: angry; 4: sad; 5: disgusted; 6: scared.
 	// If `FaceAttributesType` does not include `Emotion` or more than 5 faces are detected, this parameter will still be returned but meaningless.
 	Emotion *AttributeItem `json:"Emotion,omitempty" name:"Emotion"`
 
@@ -1133,7 +1189,7 @@ type FaceDetailAttributesInfo struct {
 	Moustache *AttributeItem `json:"Moustache,omitempty" name:"Moustache"`
 
 	// Nose information. 
-	// The `Type` values of the `AttributeItem` include: 0: upturned nose; 1: aquiline nose; 2: general nose; 3: bulbous nose
+	// The `Type` values of the `AttributeItem` include: 0: upturned nose; 1: aquiline nose; 2: general nose; 3: bulbous nose.
 	// If `FaceAttributesType` does not include `Nose` or more than 5 faces are detected, this parameter will still be returned but meaningless.
 	Nose *AttributeItem `json:"Nose,omitempty" name:"Nose"`
 
@@ -1154,14 +1210,14 @@ type FaceDetailAttributesInfo struct {
 
 type FaceDetailInfo struct {
 
-	// Position of detected face frame.
+	// Position of the detected face frame.
 	FaceRect *FaceRect `json:"FaceRect,omitempty" name:"FaceRect"`
 
 	// Face attribute information. According to the types specified in `FaceAttributesType`, the following face attributes will be returned: age (Age), beauty score (Beauty), 
 	// emotion (Emotion), eye information (Eye), eyebrow information (Eyebrow), gender (Gender), 
 	// hair information (Hair), hat information (Hat), pose (Headpose), mask information (Mask), mouth information (Mouse), beard information (Moustache), 
-	// nose information (Nose), face shape (Shape), skin color (Skin), and smile information (Smile).  
-	// If no types are specified in `FaceAttributesType`, the detailed items returned by `FaceDetailAttributesInfo` will be meaningless.
+	// nose information (Nose), face shape (Shape), skin color (Skin), and smile information (Smile), etc.  
+	// If no types are specified in `FaceAttributesType`, the detailed items returned by `FaceDetaiAttributesInfo` will be meaningless.
 	FaceDetailAttributesInfo *FaceDetailAttributesInfo `json:"FaceDetailAttributesInfo,omitempty" name:"FaceDetailAttributesInfo"`
 }
 
@@ -1646,7 +1702,7 @@ type GroupInfo struct {
 type Hair struct {
 
 	// Hair length information.
-	// The `Type` values of the `AttributeItem` include: 0: shaved head, 1: short hair, 2: medium hair, 3: long hair, 4: braid.
+	// The `Type` values of the `AttributeItem` include: 0: bald, 1: short hair, 2: medium hair, 3: long hair, 4: braid.
 	Length *AttributeItem `json:"Length,omitempty" name:"Length"`
 
 	// Bang information.
@@ -1807,7 +1863,7 @@ func (r *ModifyPersonGroupInfoResponse) FromJsonString(s string) error {
 type Mouth struct {
 
 	// Whether the mouth is open.
-	// The `Type` values of the `AttributeItem` include: 0: open; 1: closed.
+	// The `Type` values of the `AttributeItem` include: 0: closed; 1: open.
 	MouthOpen *AttributeItem `json:"MouthOpen,omitempty" name:"MouthOpen"`
 }
 

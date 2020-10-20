@@ -517,12 +517,13 @@ func NewCreateRecordTaskResponse() (response *CreateRecordTaskResponse) {
 // This API is used to create a recording task that starts and ends at specified times and records by using the configuration corresponding to a specified recording template ID.
 // - Prerequisites
 // 1. Recording files are stored on the VOD platform, so if you need to use the recording feature, you must first activate the VOD service.
-// 2. After the recording files are stored, applicable fees (including storage fees and downstream playback traffic fees) will be charged according to the VOD billing mode. For more information, please see the corresponding document.
+// 2. After the recording files are stored, applicable fees (including storage fees and downstream playback traffic fees) are charged according to the VOD billing method. For details, see the [corresponding document](https://intl.cloud.tencent.com/document/product/266/2837?from_cn_redirect=1).
 // - Precautions
-// 1. An interruption will end the current recording and generate a recording file. The task will still be valid before the end time expires, and as long as the stream is pushed normally during the period, it will record normally, regardless of whether the push is interrupted or restarted multiple times.
-// 2. Creating recording tasks with overlapping time periods must be avoided. If there are multiple tasks with overlapping time periods for the same stream, the system will start three recording tasks at most to avoid repeated recording.
+// 1. An interruption will end the current recording and generate a recording file. The task will still be valid before the end time expires, and the stream will be recorded within this period as long as it is pushed, regardless of whether the push is interrupted or restarted multiple times.
+// 2. Avoid creating recording tasks with overlapping time periods. If there are multiple tasks with overlapping time periods for the same stream, the system will start three recording tasks at most to avoid repeated recording.
 // 3. The record of a created recording task will be retained for 3 months on the platform.
-// 4. The current recording task management APIs (CreateRecordTask/StopRecordTask/DeleteRecordTask) are not compatible with the legacy APIs (CreateLiveRecord/StopLiveRecord/DeleteLiveRecord), and they cannot be mixed.
+// 4. The current recording task management APIs (CreateRecordTask/StopRecordTask/DeleteRecordTask) are not compatible with the legacy APIs (CreateLiveRecord/StopLiveRecord/DeleteLiveRecord), and they cannot be used together.
+// 5. Do not create recording tasks and push streams at the same time, or recording tasks might not take effect and be delayed. Wait at least 3 seconds between each action.
 func (c *Client) CreateRecordTask(request *CreateRecordTaskRequest) (response *CreateRecordTaskResponse, err error) {
     if request == nil {
         request = NewCreateRecordTaskRequest()
@@ -904,6 +905,31 @@ func (c *Client) DescribeAllStreamPlayInfoList(request *DescribeAllStreamPlayInf
         request = NewDescribeAllStreamPlayInfoListRequest()
     }
     response = NewDescribeAllStreamPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAreaBillBandwidthAndFluxListRequest() (request *DescribeAreaBillBandwidthAndFluxListRequest) {
+    request = &DescribeAreaBillBandwidthAndFluxListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeAreaBillBandwidthAndFluxList")
+    return
+}
+
+func NewDescribeAreaBillBandwidthAndFluxListResponse() (response *DescribeAreaBillBandwidthAndFluxListResponse) {
+    response = &DescribeAreaBillBandwidthAndFluxListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the billable LVB bandwidth and traffic data outside Chinese mainland.
+func (c *Client) DescribeAreaBillBandwidthAndFluxList(request *DescribeAreaBillBandwidthAndFluxListRequest) (response *DescribeAreaBillBandwidthAndFluxListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAreaBillBandwidthAndFluxListRequest()
+    }
+    response = NewDescribeAreaBillBandwidthAndFluxListResponse()
     err = c.Send(request, response)
     return
 }
@@ -2480,7 +2506,7 @@ func NewStopRecordTaskResponse() (response *StopRecordTaskResponse) {
     return
 }
 
-// This API is used to end a recording prematurely and terminate the running recording task. After the task is successfully terminated, it will no longer start.
+// This API is used to end a recording prematurely and terminate an ongoing recording task. After the task is successfully terminated, it will not restart.
 func (c *Client) StopRecordTask(request *StopRecordTaskRequest) (response *StopRecordTaskResponse, err error) {
     if request == nil {
         request = NewStopRecordTaskRequest()

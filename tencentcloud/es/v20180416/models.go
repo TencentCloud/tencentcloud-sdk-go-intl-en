@@ -120,6 +120,9 @@ type CreateInstanceRequest struct {
 
 	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
 	BasicSecurityType *uint64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
+
+	// Scenario template type. 0: not enabled; 1: general; 2: log; 3: search
+	SceneType *int64 `json:"SceneType,omitempty" name:"SceneType"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -590,6 +593,10 @@ type InstanceInfo struct {
 	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SecurityType *uint64 `json:"SecurityType,omitempty" name:"SecurityType"`
+
+	// Scenario template type. 0: not enabled; 1: general scenario; 2: log scenario; 3: search scenario
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SceneType *int64 `json:"SceneType,omitempty" name:"SceneType"`
 }
 
 type InstanceLog struct {
@@ -753,6 +760,46 @@ func (r *RestartInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type RestartNodesRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Node name list
+	NodeNames []*string `json:"NodeNames,omitempty" name:"NodeNames" list`
+
+	// Whether to force restart
+	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+}
+
+func (r *RestartNodesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RestartNodesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RestartNodesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RestartNodesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RestartNodesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type SubTaskDetail struct {
 
 	// Subtask name
@@ -817,7 +864,7 @@ type UpdateInstanceRequest struct {
 	// Number of nodes (2-50)
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
-	// Configuration item (JSON string). Only the following items are supported currently: <li>action.destructive_requires_name</li><li>indices.fielddata.cache.size</li><li>indices.query.bool.max_clause_count</li>
+	// Configuration item (JSON string)
 	EsConfig *string `json:"EsConfig,omitempty" name:"EsConfig"`
 
 	// Password of the default user 'elastic', which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
@@ -875,6 +922,12 @@ type UpdateInstanceRequest struct {
 
 	// 0: scaling in blue/green deployment mode without cluster restart (default); 1: scaling by unmounting disk with rolling cluster restart
 	ScaleType *int64 `json:"ScaleType,omitempty" name:"ScaleType"`
+
+	// Multi-AZ deployment
+	MultiZoneInfo []*ZoneDetail `json:"MultiZoneInfo,omitempty" name:"MultiZoneInfo" list`
+
+	// Scenario template type. -1: not enabled; 1: general; 2: log; 3: search
+	SceneType *int64 `json:"SceneType,omitempty" name:"SceneType"`
 }
 
 func (r *UpdateInstanceRequest) ToJsonString() string {
@@ -964,6 +1017,9 @@ type UpgradeInstanceRequest struct {
 
 	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
 	BasicSecurityType *uint64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
+
+	// Upgrade mode. <li>scale: blue/green deployment</li><li>restart: rolling restart</li>Default value: scale
+	UpgradeMode *string `json:"UpgradeMode,omitempty" name:"UpgradeMode"`
 }
 
 func (r *UpgradeInstanceRequest) ToJsonString() string {

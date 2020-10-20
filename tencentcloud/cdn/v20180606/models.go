@@ -322,6 +322,12 @@ type AuthenticationTypeC struct {
 	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+	// Timestamp settings
+	// dec: decimal
+	// hex: hexadecimal
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
 }
 
 type AuthenticationTypeD struct {
@@ -1357,6 +1363,12 @@ type DescribeIpStatusRequest struct {
 	// last: intermediate server
 	// If this parameter is left empty, edge server information will be returned by default
 	Layer *string `json:"Layer,omitempty" name:"Layer"`
+
+	// Region to be queried.
+	// mainland: domestic nodes
+	// overseas: overseas nodes
+	// global: global nodes
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 func (r *DescribeIpStatusRequest) ToJsonString() string {

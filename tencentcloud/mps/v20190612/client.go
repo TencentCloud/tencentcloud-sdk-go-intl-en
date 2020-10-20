@@ -1186,6 +1186,31 @@ func (c *Client) EnableWorkflow(request *EnableWorkflowRequest) (response *Enabl
     return
 }
 
+func NewExecuteFunctionRequest() (request *ExecuteFunctionRequest) {
+    request = &ExecuteFunctionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mps", APIVersion, "ExecuteFunction")
+    return
+}
+
+func NewExecuteFunctionResponse() (response *ExecuteFunctionResponse) {
+    response = &ExecuteFunctionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is only used in unique custom development scenarios. Unless requested by Media Processing Service customer service, please do not call it.
+func (c *Client) ExecuteFunction(request *ExecuteFunctionRequest) (response *ExecuteFunctionResponse, err error) {
+    if request == nil {
+        request = NewExecuteFunctionRequest()
+    }
+    response = NewExecuteFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewManageTaskRequest() (request *ManageTaskRequest) {
     request = &ManageTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
