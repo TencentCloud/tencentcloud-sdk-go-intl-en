@@ -183,6 +183,10 @@ type ComputeEnvCreateInfo struct {
 
 	// Number of desired compute nodes
 	DesiredComputeNodeCount *uint64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
+
+	// Tag list of the compute environment.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 type ComputeEnvData struct {
@@ -222,6 +226,10 @@ type ComputeEnvView struct {
 
 	// Number of compute nodes added to the compute environment by the user
 	AttachedComputeNodeCount *uint64 `json:"AttachedComputeNodeCount,omitempty" name:"AttachedComputeNodeCount"`
+
+	// Tag list bound to the compute environment.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 type ComputeNode struct {
@@ -342,6 +350,9 @@ type CreateTaskTemplateRequest struct {
 
 	// Task template description
 	TaskTemplateDescription *string `json:"TaskTemplateDescription,omitempty" name:"TaskTemplateDescription"`
+
+	// Tag list. By setting this parameter, you can bind tags to a task template. Each task template supports up to 10 tags.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateTaskTemplateRequest) ToJsonString() string {
@@ -663,6 +674,10 @@ type DescribeComputeEnvCreateInfoResponse struct {
 		// Number of desired compute nodes
 		DesiredComputeNodeCount *int64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
 
+		// Tag list bound to the compute environment.
+	// Note: This field may return `null`, indicating that no valid value was found.
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -782,6 +797,10 @@ type DescribeComputeEnvResponse struct {
 		// Number of compute nodes added to the compute environment by the user
 		AttachedComputeNodeCount *uint64 `json:"AttachedComputeNodeCount,omitempty" name:"AttachedComputeNodeCount"`
 
+		// Tag list bound to the compute environment.
+	// Note: This field may return `null`, indicating that no valid value was found.
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -802,10 +821,15 @@ type DescribeComputeEnvsRequest struct {
 	// Compute environment ID
 	EnvIds []*string `json:"EnvIds,omitempty" name:"EnvIds" list`
 
-	// Filter
-	// <li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
-	// <li> env-id - String - Required: No - (Filter) Filter by compute environment ID.</li>
-	// <li> env-name - String - Required: No - (Filter) Filter by compute environment name.</li>
+	// Filter.
+	// <li> `zone` - String - Optional - Filter by availability zone.</li>
+	// <li> `env-id` - String - Optional - Filter by compute environment ID.</li>
+	// <li> `env-name` - String - Optional - Filter by compute environment name.</li>
+	// <li> `resource-type` - String - Optional - Filter by compute resource type, which can be CVM or CPM (BM).</li>
+	// <li> `tag-key` - String - Optional - Filter by tag key.</li>
+	// </li>`tag-value` - String - Optional - Filter by tag value.</li>
+	// <li> `tag:tag-key` - String - Optional - Filter by tag key-value pair. The tag-key should be replaced by a specified tag key.</li>
+	// It cannot be specified together with the `EnvIds` parameter.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Offset
@@ -974,10 +998,17 @@ type DescribeJobResponse struct {
 		TaskMetrics *TaskMetrics `json:"TaskMetrics,omitempty" name:"TaskMetrics"`
 
 		// Task instance statistical metrics
-		TaskInstanceMetrics *TaskInstanceView `json:"TaskInstanceMetrics,omitempty" name:"TaskInstanceMetrics"`
+		TaskInstanceMetrics *TaskInstanceMetrics `json:"TaskInstanceMetrics,omitempty" name:"TaskInstanceMetrics"`
 
 		// Instance failure reason
 		StateReason *string `json:"StateReason,omitempty" name:"StateReason"`
+
+		// Tag list bound to the job.
+	// Note: This field may return `null`, indicating that no valid value was found.
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+		// 
+		NextAction *string `json:"NextAction,omitempty" name:"NextAction"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1031,6 +1062,10 @@ type DescribeJobSubmitInfoResponse struct {
 		// Dependency information
 		Dependences []*Dependence `json:"Dependences,omitempty" name:"Dependences" list`
 
+		// Tag list bound to the job.
+	// Note: This field may return `null`, indicating that no valid value was found.
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1051,11 +1086,15 @@ type DescribeJobsRequest struct {
 	// Instance ID
 	JobIds []*string `json:"JobIds,omitempty" name:"JobIds" list`
 
-	// Filter
-	// <li> job-id - String - Required: No - (Filter) Filter by job ID.</li>
-	// <li> job-name - String - Required: No - (Filter) Filter by job name.</li>
-	// <li> job-state - String - Required: No - (Filter) Filter by job state.</li>
-	// <li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
+	// Filter.
+	// <li> `job-id` - String - Optional - Filter by job ID.</li>
+	// <li> `job-name` - String - Optional - Filter by job name.</li>
+	// <li> `job-state` - String - Optional - Filter by job state.</li>
+	// <li> `zone` - String - Optional - Filter by availability zone.</li>
+	// <li> `tag-key` - String - Optional - Filter by tag key.</li>
+	// <li> `tag-value` - String - Optional - Filter by tag value.</li>
+	// <li> `tag:tag-key` - String - Optional - Filter by tag key-value pair. The tag-key should be replaced by a specified tag key.</li>
+	// It cannot be specified together with the `JobIds` parameter.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Offset
@@ -1227,8 +1266,12 @@ type DescribeTaskTemplatesRequest struct {
 	// Job template ID
 	TaskTemplateIds []*string `json:"TaskTemplateIds,omitempty" name:"TaskTemplateIds" list`
 
-	// Filter
-	// <li> task-template-name - String - Required: No - (Filter) Filter by task template name.</li>
+	// Filter.
+	// <li> `task-template-name` - String - Optional - Filter by task template name.</li>
+	// <li> `tag-key` - String - Optional - Filter by tag key.</li>
+	// <li> `tag-value` - String - Optional - Filter by tag value.</li>
+	// <li> `tag:tag-key` - String - Optional - Filter by tag key-value pair. The tag-key should be replaced by a specified tag key.</li>
+	// It cannot be specified together with the `TaskTemplateIds` parameter.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Offset
@@ -1654,6 +1697,9 @@ type Job struct {
 
 	// Indicates which policy will be used in case that CVM instance creation fails. Value range: FAILED, RUNNABLE. FAILED indicates that the CVM instance creation failure will be processed as an execution failure, while RUNNABLE indicates that the failure will be processed as "keep waiting". Default value: FAILED. StateIfCreateCvmFailed is not valid for submitted jobs for which a compute environment is specified.
 	StateIfCreateCvmFailed *string `json:"StateIfCreateCvmFailed,omitempty" name:"StateIfCreateCvmFailed"`
+
+	// Tag list. By setting this parameter, you can bind tags to a job. Each job supports up to 10 tags.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 type JobView struct {
@@ -1683,6 +1729,10 @@ type JobView struct {
 
 	// Task statistical metrics
 	TaskMetrics *TaskMetrics `json:"TaskMetrics,omitempty" name:"TaskMetrics"`
+
+	// Tag list bound to the job.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 type LocalDiskType struct {
@@ -1850,6 +1900,9 @@ type NamedComputeEnv struct {
 
 	// When the instances are failed to be created or returned because of exceptions, the related compute node will retry to create instances periodically. This parameter specifies the maximum retry attempts. The max value is 11 and the default value is 7.
 	ResourceMaxRetryCount *int64 `json:"ResourceMaxRetryCount,omitempty" name:"ResourceMaxRetryCount"`
+
+	// Tag list. By setting this parameter, you can bind tags to a compute environment. Each compute environment supports up to 10 tags.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 type Notification struct {
@@ -2045,7 +2098,7 @@ func (r *SubmitJobResponse) FromJsonString(s string) error {
 
 type SystemDisk struct {
 
-	// System disk type. For more information on system disk types and their limits, refer to [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: Local disk <br><li>LOCAL_SSD: Local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium cloud disk <br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: LOCAL_BASIC.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><br>The disk type currently in stock will be used by default.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// System disk ID. System disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter currently.
@@ -2053,6 +2106,17 @@ type SystemDisk struct {
 
 	// System disk size; unit: GB; default value: 50 GB.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+}
+
+type Tag struct {
+
+	// Tag key.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Tag value.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type Task struct {
@@ -2253,6 +2317,10 @@ type TaskTemplateView struct {
 
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Tag list bound to the task template.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 type TaskView struct {

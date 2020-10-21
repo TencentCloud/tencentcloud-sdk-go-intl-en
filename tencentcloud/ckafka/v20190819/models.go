@@ -1614,6 +1614,9 @@ type ModifyGroupOffsetsRequest struct {
 
 	// Position of the offset that needs to be reset. When `strategy` is 2, this field is required
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// List of partitions that need to be reset. If the topics parameter is not specified, reset partitions in the corresponding partition list of all topics. If the topics parameter is specified, reset partitions of the corresponding partition list of the specified topic list.
+	Partitions []*int64 `json:"Partitions,omitempty" name:"Partitions" list`
 }
 
 func (r *ModifyGroupOffsetsRequest) ToJsonString() string {
