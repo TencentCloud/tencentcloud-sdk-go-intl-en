@@ -888,6 +888,12 @@ type BandwidthPackage struct {
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 }
 
+type BandwidthPackageBillBandwidth struct {
+
+	// Current billable usage, in Mbps
+	BandwidthUsage *uint64 `json:"BandwidthUsage,omitempty" name:"BandwidthUsage"`
+}
+
 type CCN struct {
 
 	// The unique ID of the CCN
@@ -3888,6 +3894,43 @@ func (r *DescribeAssistantCidrResponse) ToJsonString() string {
 }
 
 func (r *DescribeAssistantCidrResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBandwidthPackageBillUsageRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of the pay-as-you-go bandwidth package.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+}
+
+func (r *DescribeBandwidthPackageBillUsageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBandwidthPackageBillUsageRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBandwidthPackageBillUsageResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Current billable usage.
+		BandwidthPackageBillBandwidthSet []*BandwidthPackageBillBandwidth `json:"BandwidthPackageBillBandwidthSet,omitempty" name:"BandwidthPackageBillBandwidthSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBandwidthPackageBillUsageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBandwidthPackageBillUsageResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7323,7 +7366,7 @@ func (r *ModifyAddressTemplateGroupAttributeResponse) FromJsonString(s string) e
 type ModifyAddressesBandwidthRequest struct {
 	*tchttp.BaseRequest
 
-	// The unique ID of the EIP, such as 'eip-xxxx'.
+	// List of EIP IDs, such as “eip-xxxx”.
 	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds" list`
 
 	// Target bandwidth value adjustment

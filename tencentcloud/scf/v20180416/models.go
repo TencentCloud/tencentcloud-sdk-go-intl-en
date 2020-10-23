@@ -309,6 +309,9 @@ type CreateFunctionRequest struct {
 
 	// Timeout period for function initialization
 	InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
+
+	// Tag parameter of the function. It is an array of key-value pairs.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateFunctionRequest) ToJsonString() string {
@@ -398,6 +401,9 @@ type CreateTriggerRequest struct {
 
 	// Initial enabling status of the trigger. `OPEN` indicates enabled, and `CLOSE` indicates disabled.
 	Enable *string `json:"Enable,omitempty" name:"Enable"`
+
+	// Custom argument, supporting only the timer trigger.
+	CustomArgument *string `json:"CustomArgument,omitempty" name:"CustomArgument"`
 }
 
 func (r *CreateTriggerRequest) ToJsonString() string {
@@ -918,7 +924,7 @@ type GetFunctionLogsRequest struct {
 	// Query date, for example, 2017-05-16 20:59:59. The date must be within one day of the start time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Service log related parameter. `Offset` on the first page is a null string. Enter other pages based on SearchContext in the response field.
+	// This field is disused.
 	SearchContext *LogSearchContext `json:"SearchContext,omitempty" name:"SearchContext"`
 }
 
@@ -941,7 +947,7 @@ type GetFunctionLogsResponse struct {
 		// Function log information
 		Data []*FunctionLog `json:"Data,omitempty" name:"Data" list`
 
-		// Parameter on the log service page
+		// This field is disused.
 		SearchContext *LogSearchContext `json:"SearchContext,omitempty" name:"SearchContext"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

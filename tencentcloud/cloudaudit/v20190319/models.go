@@ -22,7 +22,7 @@ import (
 
 type AttributeKeyDetail struct {
 
-	// Chinese label
+	// Tag
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// Input box type
@@ -34,7 +34,7 @@ type AttributeKeyDetail struct {
 	// Initial display
 	Starter *string `json:"Starter,omitempty" name:"Starter"`
 
-	// AttributeKey value
+	// `AttributeKey` value
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
@@ -43,7 +43,7 @@ type AuditSummary struct {
 	// Tracking set name
 	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
 
-	// Tracking set status. Value range: 1 (enabled), 0 (disabled)
+	// Tracking set status. Valid values: 1: enabled, 0: disabled
 	AuditStatus *int64 `json:"AuditStatus,omitempty" name:"AuditStatus"`
 
 	// COS bucket name
@@ -74,34 +74,43 @@ type CosRegionInfo struct {
 type CreateAuditRequest struct {
 	*tchttp.BaseRequest
 
-	// Tracking set name, which can contain 3-128 ASCII letters (a-z; A-Z), digits (0-9), and underscores (_).
+	// Tracking set name, which can contain 3–128 ASCII letters (a–z; A–Z), digits (0–9), and underscores (_).
 	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
 
-	// User-defined COS bucket name, which can only contain 1-40 lowercase letters (a-z), digits (0-9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
+	// User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
 	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
 
-	// COS region. Supported regions can be queried using the ListCosEnableRegion API.
+	// COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
 	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
 
-	// Whether to create a COS bucket. 1: yes; 0: no.
+	// Whether to create a COS bucket. Valid values: 1: yes; 0: no.
 	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitempty" name:"IsCreateNewBucket"`
 
-	// Whether to enable CMQ message notification. 1: yes; 0: no. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
+	// Whether to enable CMQ message notification. Valid values: 1: yes; 0: no. Currently, only CMQ is supported for message queue services. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
 	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
 
-	// Manages the read/write attribute of an event. Value range: 1 (read-only), 2 (write-only), 3 (read/write).
+	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
 	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitempty" name:"ReadWriteAttribute"`
 
-	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of IsEnableCmqNotify is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
+	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
 	CmqQueueName *string `json:"CmqQueueName,omitempty" name:"CmqQueueName"`
 
-	// Region where the queue is located. Supported CMQ regions can be queried using the ListCmqEnableRegion API. This field is required if the value of IsEnableCmqNotify is 1.
+	// Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
 	CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
 
-	// Whether to create a queue. 1: yes; 0: no. This field is required if the value of IsEnableCmqNotify is 1.
+	// Whether to create a queue. Valid values: 1: yes; 0: no. This field is required if the value of `IsEnableCmqNotify` is 1.
 	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitempty" name:"IsCreateNewQueue"`
 
-	// Prefix of a log file, which can only contain 3-40 ASCII letters (a-z; A-Z) and digits (0-9). It can be left empty and is the account ID by default.
+	// Whether to enable KMS encryption. Valid values: 1: yes, 0: no. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
+	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitempty" name:"IsEnableKmsEncry"`
+
+	// Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained via the `ListKeyAliasByRegion` API. CloudAudit will not verify the validity of the `KeyId`. Please enter it with caution to avoid consequent data loss.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// KMS region. Currently supported regions can be obtained via the `ListKmsEnableRegion` API. This must be the same as the COS region.
+	KmsRegion *string `json:"KmsRegion,omitempty" name:"KmsRegion"`
+
+	// Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9). It can be left empty and is set to the account ID by default.
 	LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
 }
 
@@ -118,10 +127,10 @@ type CreateAuditResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Whether creation is successful.
+		// Indicates if the creation was successful
 		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -155,10 +164,10 @@ type DeleteAuditResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Whether deletion is successful
+		// Indicates if the deletion was successful
 		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -195,31 +204,43 @@ type DescribeAuditResponse struct {
 		// Tracking set name.
 		AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
 
-		// Tracking set status. Value range: 1 (enabled), 0 (disabled).
+		// Tracking set status. Valid values: 1: enabled, 0: disabled.
 		AuditStatus *int64 `json:"AuditStatus,omitempty" name:"AuditStatus"`
 
 		// Queue name.
 		CmqQueueName *string `json:"CmqQueueName,omitempty" name:"CmqQueueName"`
 
-		// Region where the queue is located.
+		// Queue region.
 		CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
 
 		// COS bucket name.
 		CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
 
-		// Region where the COS bucket is located.
+		// COS bucket region.
 		CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
 
-		// Whether to enable CMQ message notification. 1: yes; 0: no.
+		// Whether to enable CMQ message notification. Valid values: 1: yes; 0: no.
 		IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
+
+		// Whether to enable KMS encryption. Valid values: 1: yes, 0: no. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
+		IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitempty" name:"IsEnableKmsEncry"`
+
+		// Globally unique CMK ID.
+		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+		// CMK alias.
+		KmsAlias *string `json:"KmsAlias,omitempty" name:"KmsAlias"`
+
+		// KMS region.
+		KmsRegion *string `json:"KmsRegion,omitempty" name:"KmsRegion"`
 
 		// Log prefix.
 		LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
 
-		// Manages the read/write attribute of an event. Value range: 1 (read-only), 2 (write-only), 3 (read/write)
+		// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write)
 		ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitempty" name:"ReadWriteAttribute"`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -253,7 +274,7 @@ type Event struct {
 	// Event name
 	EventName *string `json:"EventName,omitempty" name:"EventName"`
 
-	// Description of event name
+	// Chinese description of event name (please use this field as required; if you are using other languages, ignore this field)
 	EventNameCn *string `json:"EventNameCn,omitempty" name:"EventNameCn"`
 
 	// Event region
@@ -268,7 +289,10 @@ type Event struct {
 	// Request ID
 	RequestID *string `json:"RequestID,omitempty" name:"RequestID"`
 
-	// Description of resource type
+	// Resource region
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Chinese description of resource type (please use this field as required; if you are using other languages, ignore this field)
 	ResourceTypeCn *string `json:"ResourceTypeCn,omitempty" name:"ResourceTypeCn"`
 
 	// Certificate ID
@@ -284,7 +308,7 @@ type Event struct {
 type GetAttributeKeyRequest struct {
 	*tchttp.BaseRequest
 
-	// Website type. Value range: zh, en. Default value: zh
+	// Website type. Valid values: zh, en. If this parameter is left empty, `zh` will be used by default
 	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
 }
 
@@ -301,10 +325,10 @@ type GetAttributeKeyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// AttributeKey value range
+		// Valid values range of `AttributeKey`
 		AttributeKeyDetails []*AttributeKeyDetail `json:"AttributeKeyDetails,omitempty" name:"AttributeKeyDetails" list`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -338,7 +362,7 @@ type InquireAuditCreditResponse struct {
 		// Number of tracking sets that can be created
 		AuditAmount *int64 `json:"AuditAmount,omitempty" name:"AuditAmount"`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -369,10 +393,10 @@ type ListAuditsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Queries the summary set of tracking sets
+		// Set of queried tracking set summaries
 		AuditSummarys []*AuditSummary `json:"AuditSummarys,omitempty" name:"AuditSummarys" list`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -389,7 +413,7 @@ func (r *ListAuditsResponse) FromJsonString(s string) error {
 type ListCmqEnableRegionRequest struct {
 	*tchttp.BaseRequest
 
-	// Website type. zh: Mainland China (default); en: outside Mainland China.
+	// Website type. Valid values: zh (Chinese mainland); en (outside Chinese mainland). Default value: zh
 	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
 }
 
@@ -409,7 +433,7 @@ type ListCmqEnableRegionResponse struct {
 		// CloudAudit-enabled CMQ AZs
 		EnableRegions []*CmqRegionInfo `json:"EnableRegions,omitempty" name:"EnableRegions" list`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -426,7 +450,7 @@ func (r *ListCmqEnableRegionResponse) FromJsonString(s string) error {
 type ListCosEnableRegionRequest struct {
 	*tchttp.BaseRequest
 
-	// Website type. zh: Mainland China (default); en: outside Mainland China.
+	// Website type. Valid values: zh (Chinese mainland); en (outside Chinese mainland). Default value: zh
 	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
 }
 
@@ -446,7 +470,7 @@ type ListCosEnableRegionResponse struct {
 		// CloudAudit-enabled COS AZs
 		EnableRegions []*CosRegionInfo `json:"EnableRegions,omitempty" name:"EnableRegions" list`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -472,8 +496,11 @@ type LookUpEventsRequest struct {
 	// Search criteria
 	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitempty" name:"LookupAttributes" list`
 
-	// Maximum number of logs that can be returned
+	// Maximum number of logs to be returned
 	MaxResults *int64 `json:"MaxResults,omitempty" name:"MaxResults"`
+
+	// CloudAudit mode. Valid values: standard, quick. Default value: standard
+	Mode *string `json:"Mode,omitempty" name:"Mode"`
 
 	// Credential for viewing more logs
 	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
@@ -501,7 +528,7 @@ type LookUpEventsResponse struct {
 		// Credential for viewing more logs
 		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -517,7 +544,7 @@ func (r *LookUpEventsResponse) FromJsonString(s string) error {
 
 type LookupAttribute struct {
 
-	// AttributeKey value range: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, EventId
+	// Valid values of `AttributeKey`: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, EventId
 	AttributeKey *string `json:"AttributeKey,omitempty" name:"AttributeKey"`
 
 	// AttributeValue
@@ -553,10 +580,10 @@ type StartLoggingResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Whether it is successfully enabled
+		// Indicates if the tracking set was enabled successfully
 		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -590,10 +617,10 @@ type StopLoggingResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Whether it is successfully disabled
+		// Indicates if the tracking set was disabled successfully
 		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
@@ -613,31 +640,40 @@ type UpdateAuditRequest struct {
 	// Tracking set name
 	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
 
-	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of IsEnableCmqNotify is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
+	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
 	CmqQueueName *string `json:"CmqQueueName,omitempty" name:"CmqQueueName"`
 
-	// Region where the queue is located. Supported CMQ regions can be queried using the ListCmqEnableRegion API. This field is required if the value of IsEnableCmqNotify is 1.
+	// Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
 	CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
 
-	// User-defined COS bucket name, which can only contain 1-40 lowercase letters (a-z), digits (0-9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
+	// User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
 	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
 
-	// COS region. Supported regions can be queried using the ListCosEnableRegion API.
+	// COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
 	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
 
-	// Whether to create a COS bucket. 1: yes; 0: no.
+	// Whether to create a COS bucket. Valid values: 1: yes; 0: no.
 	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitempty" name:"IsCreateNewBucket"`
 
-	// Whether to create a queue. 1: yes; 0: no. This field is required if the value of IsEnableCmqNotify is 1.
+	// Whether to create a queue. Valid values: 1: yes; 0: no. This field is required if the value of `IsEnableCmqNotify` is 1.
 	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitempty" name:"IsCreateNewQueue"`
 
-	// Whether to enable CMQ message notification. 1: yes; 0: no. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
+	// Whether to enable CMQ message notification. Valid values: 1: yes; 0: no. Currently, only CMQ is supported for message queue services. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
 	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
 
-	// Prefix of a log file, which can only contain 3-40 ASCII letters (a-z; A-Z) and digits (0-9).
+	// Whether to enable KMS encryption. Valid values: 1: yes, 0: no. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
+	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitempty" name:"IsEnableKmsEncry"`
+
+	// Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained via the `ListKeyAliasByRegion` API. CloudAudit will not verify the validity of the `KeyId`. Please enter it with caution to avoid consequent data loss.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// KMS region. Currently supported regions can be obtained via the `ListKmsEnableRegion` API. This must be the same as the COS region.
+	KmsRegion *string `json:"KmsRegion,omitempty" name:"KmsRegion"`
+
+	// Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9).
 	LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
 
-	// Manages the read/write attribute of an event. Value range: 1 (read-only), 2 (write-only), 3 (read/write).
+	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
 	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitempty" name:"ReadWriteAttribute"`
 }
 
@@ -654,10 +690,10 @@ type UpdateAuditResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Whether update is successful
+		// Indicates if the update was completed successfully
 		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
 
-		// Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }

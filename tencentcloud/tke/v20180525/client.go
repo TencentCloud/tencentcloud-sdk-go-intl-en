@@ -43,6 +43,31 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewAcquireClusterAdminRoleRequest() (request *AcquireClusterAdminRoleRequest) {
+    request = &AcquireClusterAdminRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "AcquireClusterAdminRole")
+    return
+}
+
+func NewAcquireClusterAdminRoleResponse() (response *AcquireClusterAdminRoleResponse) {
+    response = &AcquireClusterAdminRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API can be called to acquire the ClusterRole tke:admin. By setting a CAM policy, you can grant permission of this API to a sub-account that has higher permission in CAM. In this way, this sub-account can call this API directly to acquire the admin role of a Kubernetes cluster.
+func (c *Client) AcquireClusterAdminRole(request *AcquireClusterAdminRoleRequest) (response *AcquireClusterAdminRoleResponse, err error) {
+    if request == nil {
+        request = NewAcquireClusterAdminRoleRequest()
+    }
+    response = NewAcquireClusterAdminRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAddExistedInstancesRequest() (request *AddExistedInstancesRequest) {
     request = &AddExistedInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},

@@ -227,6 +227,31 @@ func (c *Client) DescribeEcdnStatistics(request *DescribeEcdnStatisticsRequest) 
     return
 }
 
+func NewDescribeIpStatusRequest() (request *DescribeIpStatusRequest) {
+    request = &DescribeIpStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ecdn", APIVersion, "DescribeIpStatus")
+    return
+}
+
+func NewDescribeIpStatusResponse() (response *DescribeIpStatusResponse) {
+    response = &DescribeIpStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the detailed node information of the acceleration platform to which the domain name is connected.
+func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *DescribeIpStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeIpStatusRequest()
+    }
+    response = NewDescribeIpStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePurgeQuotaRequest() (request *DescribePurgeQuotaRequest) {
     request = &DescribePurgeQuotaRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -292,7 +317,7 @@ func NewPurgePathCacheResponse() (response *PurgePathCacheResponse) {
     return
 }
 
-// This API is used to batch purge cache directories. One purge task ID will be returned for each submission.
+// This API is used to purge cache directories in batches. One purge task ID will be returned for each submission.
 func (c *Client) PurgePathCache(request *PurgePathCacheRequest) (response *PurgePathCacheResponse, err error) {
     if request == nil {
         request = NewPurgePathCacheRequest()

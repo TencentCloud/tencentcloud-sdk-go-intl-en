@@ -89,10 +89,10 @@ type Cache struct {
 	// Caching configuration rule array.
 	CacheRules []*CacheRule `json:"CacheRules,omitempty" name:"CacheRules" list`
 
-	// Whether to follow origin server's `Cache-Control: max-age` configuration
-	// on: enable.
-	// off: disable.
-	// After this feature is enabled, resources that do not match the `CacheRules` rule will be cached on nodes according to the `max-age` value returned by the origin server, while resources that match the `CacheRules` rule will be cached on nodes according to the cache expiration time set in `CacheRules`.
+	// Whether to follow the `Cache-Control: max-age` configuration on the origin server (this feature is only available to users on the allowlist).
+	// on: enable
+	// off: disable
+	// If it is enabled, resources that do not match `CacheRules` will be cached on node according to the `max-age` value returned by the origin server, while resources that match `CacheRules` will be cached on node according to the cache expiration time set in `CacheRules`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FollowOrigin *string `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 }
@@ -459,6 +459,52 @@ func (r *DescribeEcdnStatisticsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeIpStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Acceleration domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Target region of the query:
+	// mainland: nodes in Mainland China
+	// overseas: nodes outside Mainland China
+	// global: global nodes
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
+func (r *DescribeIpStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIpStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIpStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Node list
+		Ips []*IpStatus `json:"Ips,omitempty" name:"Ips" list`
+
+		// Total number of nodes
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeIpStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIpStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribePurgeQuotaRequest struct {
 	*tchttp.BaseRequest
 }
@@ -749,9 +795,11 @@ type Hsts struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// `MaxAge` value.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	MaxAge *int64 `json:"MaxAge,omitempty" name:"MaxAge"`
 
 	// Whether to include subdomain names. Valid values: on, off.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	IncludeSubDomains *string `json:"IncludeSubDomains,omitempty" name:"IncludeSubDomains"`
 }
 
@@ -813,7 +861,8 @@ type Https struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SslStatus *string `json:"SslStatus,omitempty" name:"SslStatus"`
 
-	// Hsts configuration.
+	// HSTS configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Hsts *Hsts `json:"Hsts,omitempty" name:"Hsts"`
 }
 
@@ -839,6 +888,26 @@ type IpFreqLimit struct {
 	// Number of requests per second.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Qps *int64 `json:"Qps,omitempty" name:"Qps"`
+}
+
+type IpStatus struct {
+
+	// Node IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Node region
+	District *string `json:"District,omitempty" name:"District"`
+
+	// Node ISP
+	Isp *string `json:"Isp,omitempty" name:"Isp"`
+
+	// Node city
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Node status
+	// online: the node is online and scheduling normally
+	// offline: the node is offline
+	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type Origin struct {

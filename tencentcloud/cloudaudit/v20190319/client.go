@@ -58,7 +58,11 @@ func NewCreateAuditResponse() (response *CreateAuditResponse) {
     return
 }
 
-// This API is used to create a tracking set.
+// Parameter requirements:
+// 1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `cosBucketName` are required.
+// 2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
+// 3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
+// 4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
 func (c *Client) CreateAudit(request *CreateAuditRequest) (response *CreateAuditResponse, err error) {
     if request == nil {
         request = NewCreateAuditRequest()
@@ -133,7 +137,7 @@ func NewGetAttributeKeyResponse() (response *GetAttributeKeyResponse) {
     return
 }
 
-// This API is used to query the value range of AttributeKey.
+// This API is used to query the valid values range of `AttributeKey`.
 func (c *Client) GetAttributeKey(request *GetAttributeKeyRequest) (response *GetAttributeKeyResponse, err error) {
     if request == nil {
         request = NewGetAttributeKeyRequest()
@@ -158,7 +162,7 @@ func NewInquireAuditCreditResponse() (response *InquireAuditCreditResponse) {
     return
 }
 
-// This API is used to query the maximum number of tracking sets that can be created.
+// This API is used to query the number of tracking sets that can be created.
 func (c *Client) InquireAuditCredit(request *InquireAuditCreditRequest) (response *InquireAuditCreditResponse, err error) {
     if request == nil {
         request = NewInquireAuditCreditRequest()
@@ -208,7 +212,7 @@ func NewListCmqEnableRegionResponse() (response *ListCmqEnableRegionResponse) {
     return
 }
 
-// This API is used to query the CloudAudit-enabled CMQ AZs.
+// This API is used to query CloudAudit-enabled CMQ AZs.
 func (c *Client) ListCmqEnableRegion(request *ListCmqEnableRegionRequest) (response *ListCmqEnableRegionResponse, err error) {
     if request == nil {
         request = NewListCmqEnableRegionRequest()
@@ -233,7 +237,7 @@ func NewListCosEnableRegionResponse() (response *ListCosEnableRegionResponse) {
     return
 }
 
-// This API is used to query the CloudAudit-enabled COS AZs.
+// This API is used to query CloudAudit-enabled COS AZs.
 func (c *Client) ListCosEnableRegion(request *ListCosEnableRegionRequest) (response *ListCosEnableRegionResponse, err error) {
     if request == nil {
         request = NewListCosEnableRegionRequest()
@@ -334,9 +338,10 @@ func NewUpdateAuditResponse() (response *UpdateAuditResponse) {
 }
 
 // Parameter requirements:
-// 1. If the value of IsCreateNewBucket exists, cosRegion and cosBucketName are required.
-// 2. If the value of IsEnableCmqNotify is 1, IsCreateNewQueue, CmqRegion, and CmqQueueName are required.
-// 3. If the value of IsEnableCmqNotify is 0, IsCreateNewQueue, CmqRegion, and CmqQueueName cannot be passed in.
+// 1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `cosBucketName` are required.
+// 2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
+// 3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
+// 4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
 func (c *Client) UpdateAudit(request *UpdateAuditRequest) (response *UpdateAuditResponse, err error) {
     if request == nil {
         request = NewUpdateAuditRequest()

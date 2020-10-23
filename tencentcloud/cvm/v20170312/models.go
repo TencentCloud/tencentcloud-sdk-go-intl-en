@@ -3027,16 +3027,16 @@ type ReservedInstanceFamilyItem struct {
 
 type ReservedInstancePrice struct {
 
-	// Original upfront price, in USD.
+	// Original upfront payment, in USD.
 	OriginalFixedPrice *float64 `json:"OriginalFixedPrice,omitempty" name:"OriginalFixedPrice"`
 
-	// Discounted upfront price, in USD.
+	// Discounted upfront payment, in USD.
 	DiscountFixedPrice *float64 `json:"DiscountFixedPrice,omitempty" name:"DiscountFixedPrice"`
 
-	// Original usage price, in USD/hr.
+	// Original subsequent unit price, in USD/hr.
 	OriginalUsagePrice *float64 `json:"OriginalUsagePrice,omitempty" name:"OriginalUsagePrice"`
 
-	// Discounted usage price, in USD/hr.
+	// Discounted subsequent unit price, in USD/hr.
 	DiscountUsagePrice *float64 `json:"DiscountUsagePrice,omitempty" name:"DiscountUsagePrice"`
 }
 
@@ -3045,10 +3045,10 @@ type ReservedInstancePriceItem struct {
 	// Payment method. Valid values: All Upfront, Partial Upfront, and No Upfront.
 	OfferingType *string `json:"OfferingType,omitempty" name:"OfferingType"`
 
-	// Total upfront price, in USD.
+	// Upfront payment, in USD.
 	FixedPrice *float64 `json:"FixedPrice,omitempty" name:"FixedPrice"`
 
-	// Total usage price, in USD/hr.
+	// Subsequent unit price, in USD/hr.
 	UsagePrice *float64 `json:"UsagePrice,omitempty" name:"UsagePrice"`
 
 	// The ID of the reserved instance offering.
@@ -3086,7 +3086,7 @@ type ReservedInstanceTypeItem struct {
 	// Number of storage blocks.
 	StorageBlock *uint64 `json:"StorageBlock,omitempty" name:"StorageBlock"`
 
-	// Number of ENIs.
+	// Number of NICs.
 	NetworkCard *uint64 `json:"NetworkCard,omitempty" name:"NetworkCard"`
 
 	// Maximum bandwidth.
@@ -3703,7 +3703,7 @@ func (r *SyncImagesResponse) FromJsonString(s string) error {
 
 type SystemDisk struct {
 
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><br>The disk type currently in stock will be used by default.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><br>The disk type currently in stock will be used by default. 
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// System disk ID. System disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter currently.
