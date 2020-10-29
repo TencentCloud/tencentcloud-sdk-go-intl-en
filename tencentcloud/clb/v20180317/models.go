@@ -665,8 +665,17 @@ type CreateLoadBalancerRequest struct {
 	// Tags a CLB instance when purchasing it
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
 
+	// 
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Exclusive cluster information.
+	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
+
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Tag for the STGW exclusive cluster.
+	ClusterTag *string `json:"ClusterTag,omitempty" name:"ClusterTag"`
 }
 
 func (r *CreateLoadBalancerRequest) ToJsonString() string {
