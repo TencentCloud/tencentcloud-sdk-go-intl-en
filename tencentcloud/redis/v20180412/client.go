@@ -58,7 +58,7 @@ func NewAssociateSecurityGroupsResponse() (response *AssociateSecurityGroupsResp
     return
 }
 
-// This API is used to associate security groups with specified instances.
+// This API is used to associate a security group with instances in batches.
 func (c *Client) AssociateSecurityGroups(request *AssociateSecurityGroupsRequest) (response *AssociateSecurityGroupsResponse, err error) {
     if request == nil {
         request = NewAssociateSecurityGroupsRequest()
@@ -158,7 +158,7 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
     return
 }
 
-// This API is used to create a Redis instance.
+// This API is used to create Redis instances.
 func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *CreateInstancesResponse, err error) {
     if request == nil {
         request = NewCreateInstancesRequest()
@@ -568,6 +568,31 @@ func (c *Client) DescribeInstanceMonitorTopNCmdTook(request *DescribeInstanceMon
     return
 }
 
+func NewDescribeInstanceNodeInfoRequest() (request *DescribeInstanceNodeInfoRequest) {
+    request = &DescribeInstanceNodeInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeInstanceNodeInfo")
+    return
+}
+
+func NewDescribeInstanceNodeInfoResponse() (response *DescribeInstanceNodeInfoResponse) {
+    response = &DescribeInstanceNodeInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query instance node information.
+func (c *Client) DescribeInstanceNodeInfo(request *DescribeInstanceNodeInfoRequest) (response *DescribeInstanceNodeInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceNodeInfoRequest()
+    }
+    response = NewDescribeInstanceNodeInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceParamRecordsRequest() (request *DescribeInstanceParamRecordsRequest) {
     request = &DescribeInstanceParamRecordsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -789,6 +814,31 @@ func (c *Client) DescribeProjectSecurityGroups(request *DescribeProjectSecurityG
         request = NewDescribeProjectSecurityGroupsRequest()
     }
     response = NewDescribeProjectSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProxySlowLogRequest() (request *DescribeProxySlowLogRequest) {
+    request = &DescribeProxySlowLogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeProxySlowLog")
+    return
+}
+
+func NewDescribeProxySlowLogResponse() (response *DescribeProxySlowLogResponse) {
+    response = &DescribeProxySlowLogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query proxy slow logs.
+func (c *Client) DescribeProxySlowLog(request *DescribeProxySlowLogRequest) (response *DescribeProxySlowLogResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxySlowLogRequest()
+    }
+    response = NewDescribeProxySlowLogResponse()
     err = c.Send(request, response)
     return
 }

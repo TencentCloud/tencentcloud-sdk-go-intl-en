@@ -261,19 +261,19 @@ func (r *CreateInstanceAccountResponse) FromJsonString(s string) error {
 type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// AZ ID of instance
+	// Availability zone ID of the instance. For more information, please see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Instance type. Valid values: 2 (Redis 2.8 memory edition in standard architecture), 3 (Redis 3.2 memory edition in standard architecture), 4 (CKV 3.2 memory edition in standard architecture), 6 (Redis 4.0 memory edition in standard architecture), 7 (Redis 4.0 memory edition in cluster architecture), 8 (Redis 5.0 memory edition in standard architecture), 9 (Redis 5.0 memory edition in cluster architecture).
+	// Instance type. Valid values: 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture).
 	TypeId *uint64 `json:"TypeId,omitempty" name:"TypeId"`
 
-	// Instance capacity in MB. The actual value is subject to the specifications returned by the purchasable specification querying API |
+	// Instance capacity in MB. The value should be a multiple of 1,024 and is subject to the specifications returned by the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
 	MemSize *uint64 `json:"MemSize,omitempty" name:"MemSize"`
 
-	// Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the purchasable specification querying API
+	// Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
 	GoodsNum *uint64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
 
-	// Length of purchase in months, which is required when creating a monthly subscribed instances. Value range: [1,2,3,4,5,6,7,8,9,10,11,12,24,36]. For pay-as-you-go instances, enter 1
+	// Purchased usage period in months. which is required when creating an instance. For pay-as-you-go instances, the valid value is 1; for monthly subscription instances, the value range is [1,2,3,4,5,6,7,8,9,10,11,12,24,36].
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
 	// Billing method. 0: pay as you go
@@ -282,34 +282,34 @@ type CreateInstancesRequest struct {
 	// Instance password. It can contain 8-30 characters and must contain at least two of the following types of characters: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/). It cannot stat with the symbol (/).
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// VPC ID such as vpc-sad23jfdfk. If this parameter is not passed in, the basic network will be selected by default. Please use the VPC list querying API to query.
+	// VPC ID, such as "vpc-sad23jfdfk". If this parameter is not passed in, the classic network will be selected by default. The parameter value can be queried by the `DescribeVpcs` API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// In a basic network, subnetId is invalid. In a VPC subnet, the value is the subnet ID, such as subnet-fdj24n34j2
+	// In a classic network, `subnetId` is invalid. In a VPC subnet, the value can be queried by the `DescribeSubnets` API, such as "subnet-fdj24n34j2".
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Project ID. The value is subject to the projectId returned by user account > user account-related querying APIs > project list
+	// Project ID. The value is subject to the `projectId` returned by the `DescribeProject` API.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Auto-renewal flag. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
+	// Auto-renewal flag. Valid values: 0 (default status, indicating manual renewal), 1 (auto-renewal enabled), 2 (auto-renewal disabled)
 	AutoRenew *uint64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 
 	// Array of security group IDs
 	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitempty" name:"SecurityGroupIdList" list`
 
-	// User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024,65535]
+	// User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024, 65535].
 	VPort *uint64 `json:"VPort,omitempty" name:"VPort"`
 
-	// Number of shards in an instance. This parameter is required for cluster edition instances. Valid values: 3, 5, 8, 12, 16, 24, 32, 64, 96, 128.
+	// Number of shards in an instance. This parameter is required for instances in cluster architecture. Value range: [3,5,8,12,16,24,32,64,96,128].
 	RedisShardNum *int64 `json:"RedisShardNum,omitempty" name:"RedisShardNum"`
 
 	// Number of replicas in an instance. Redis 2.8 standard edition and CKV standard edition support 1 replica. Standard/cluster edition 4.0 and 5.0 support 1-5 replicas.
 	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitempty" name:"RedisReplicasNum"`
 
-	// Whether to support read-only replicas. Neither Redis 2.8 standard edition nor CKV standard edition supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the primary node and read requests will be distributed on secondary nodes. To enable read-only replicas, we recommend you create 2 or more replicas.
+	// Whether to support read-only replicas. Neither Redis 2.8 in standard architecture nor CKV in standard architecture supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the master node and read requests will be distributed on the replica nodes. To enable read-only replicas, we recommend that you create 2 or more replicas.
 	ReplicasReadonly *bool `json:"ReplicasReadonly,omitempty" name:"ReplicasReadonly"`
 
-	// Instance name. It contains only letters, digits, underscores, and dashes with a length of up to 60 characters.
+	// Instance name. It contains only letters, digits, and symbols (-_) with a length of up to 60 characters.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Whether to support the password-free feature. Valid values: true (password-free instance), false (password-enabled instance). Default value: false. Only instances in a VPC support the password-free access.
@@ -490,7 +490,7 @@ func (r *DescribeBackupUrlResponse) FromJsonString(s string) error {
 type DescribeDBSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
-	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	// Database engine name. For this API, its value is `redis`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB Console.
@@ -734,7 +734,7 @@ type DescribeInstanceDTSInstanceInfo struct {
 type DescribeInstanceDealDetailRequest struct {
 	*tchttp.BaseRequest
 
-	// Array of order IDs
+	// Array of order IDs. It is the same as the response parameter `DealId` in the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
 	DealIds []*string `json:"DealIds,omitempty" name:"DealIds" list`
 }
 
@@ -1088,6 +1088,67 @@ func (r *DescribeInstanceMonitorTopNCmdTookResponse) ToJsonString() string {
 }
 
 func (r *DescribeInstanceMonitorTopNCmdTookResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceNodeInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// List size
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeInstanceNodeInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceNodeInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceNodeInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of proxy nodes
+		ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+
+		// Proxy node information
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Proxy []*ProxyNodes `json:"Proxy,omitempty" name:"Proxy" list`
+
+		// The number of redis nodes
+		RedisCount *int64 `json:"RedisCount,omitempty" name:"RedisCount"`
+
+		// Redis node information
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Redis []*RedisNodes `json:"Redis,omitempty" name:"Redis" list`
+
+		// The number of tendis nodes
+		TendisCount *int64 `json:"TendisCount,omitempty" name:"TendisCount"`
+
+		// Tendis node information
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Tendis []*TendisNodes `json:"Tendis,omitempty" name:"Tendis" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceNodeInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceNodeInfoResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1532,6 +1593,61 @@ func (r *DescribeProjectSecurityGroupsResponse) ToJsonString() string {
 }
 
 func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProxySlowLogRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Slow query threshold in microseconds
+	MinQueryTime *int64 `json:"MinQueryTime,omitempty" name:"MinQueryTime"`
+
+	// Page size
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset, which is an integral multiple of `Limit`
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeProxySlowLogRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeProxySlowLogRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProxySlowLogResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of slow queries
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Slow query details
+		InstanceProxySlowLogDetail []*InstanceProxySlowlogDetail `json:"InstanceProxySlowLogDetail,omitempty" name:"InstanceProxySlowLogDetail" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeProxySlowLogResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeProxySlowLogResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2125,6 +2241,24 @@ type InstanceParamHistory struct {
 	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
 }
 
+type InstanceProxySlowlogDetail struct {
+
+	// Slow query duration
+	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
+
+	// Client address
+	Client *string `json:"Client,omitempty" name:"Client"`
+
+	// Command
+	Command *string `json:"Command,omitempty" name:"Command"`
+
+	// Command line details
+	CommandLine *string `json:"CommandLine,omitempty" name:"CommandLine"`
+
+	// Execution duration
+	ExecuteTime *string `json:"ExecuteTime,omitempty" name:"ExecuteTime"`
+}
+
 type InstanceSecurityGroupDetail struct {
 
 	// Instance ID
@@ -2178,7 +2312,7 @@ type InstanceSet struct {
 	// This field has been disused
 	SizeUsed *float64 `json:"SizeUsed,omitempty" name:"SizeUsed"`
 
-	// Instance type. 1: Redis 2.8 cluster edition; 2: Redis 2.8 primary-secondary edition; 3: CKV primary-secondary edition (Redis 3.2); 4: CKV cluster edition (Redis 3.2); 5: Redis 2.8 standalone edition; 6: Redis 4.0 primary-secondary edition; 7: Redis 4.0 cluster edition
+	// Instance type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture).
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
 	// Whether to set the auto-renewal flag for an instance. 1: auto-renewal set; 0: auto-renewal not set
@@ -2190,7 +2324,7 @@ type InstanceSet struct {
 	// Engine: Redis community edition, Tencent Cloud CKV
 	Engine *string `json:"Engine,omitempty" name:"Engine"`
 
-	// Product type: Redis 2.8 cluster edition, Redis 2.8 primary-secondary edition, Redis 3.2 primary-secondary edition (CKV primary-secondary edition), Redis 3.2 cluster edition (CKV cluster edition), Redis 2.8 standalone edition, Redis 4.0 cluster edition
+	// Instance type. Valid values: standalone (standard edition), cluster (cluster edition)
 	ProductType *string `json:"ProductType,omitempty" name:"ProductType"`
 
 	// VPC ID, such as vpc-fk33jsf43kgv
@@ -2836,6 +2970,13 @@ type ProductConf struct {
 	EnableRepicaReadOnly *bool `json:"EnableRepicaReadOnly,omitempty" name:"EnableRepicaReadOnly"`
 }
 
+type ProxyNodes struct {
+
+	// Node ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+}
+
 type RedisBackupSet struct {
 
 	// Backup start time
@@ -2855,6 +2996,18 @@ type RedisBackupSet struct {
 
 	// Whether a backup is locked. 0: no; 1: yes
 	Locked *int64 `json:"Locked,omitempty" name:"Locked"`
+}
+
+type RedisNodes struct {
+
+	// Node ID
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+
+	// Node role
+	NodeRole *string `json:"NodeRole,omitempty" name:"NodeRole"`
+
+	// Shard ID
+	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
 }
 
 type RegionConf struct {
@@ -3210,6 +3363,15 @@ type TaskInfoDetail struct {
 	Result *int64 `json:"Result,omitempty" name:"Result"`
 }
 
+type TendisNodes struct {
+
+	// Node ID
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+
+	// Node role
+	NodeRole *string `json:"NodeRole,omitempty" name:"NodeRole"`
+}
+
 type TradeDealDetail struct {
 
 	// Order ID, which is used when a TencentCloud API is called
@@ -3298,7 +3460,7 @@ func (r *UpgradeInstanceResponse) FromJsonString(s string) error {
 type UpgradeInstanceVersionRequest struct {
 	*tchttp.BaseRequest
 
-	// Target instance type. Its value is the same as the `Type` parameter of the `CreateInstances` API.
+	// The target instance type to which the instance will change. It is the same as the `TypeId` parameter in the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
 	TargetInstanceType *string `json:"TargetInstanceType,omitempty" name:"TargetInstanceType"`
 
 	// Switch mode. Valid values: 1 (switch during the maintenance window), 2 (switch immediately).

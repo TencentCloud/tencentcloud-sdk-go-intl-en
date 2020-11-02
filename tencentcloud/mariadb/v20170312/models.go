@@ -395,6 +395,46 @@ type DBInstance struct {
 
 	// Number of CPU cores of instance
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// IPv6 flag for an instance
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Ipv6Flag *uint64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
+
+	// Private network IPv6 address
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Vipv6 *string `json:"Vipv6,omitempty" name:"Vipv6"`
+
+	// Public network IPv6 address
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	WanVipv6 *string `json:"WanVipv6,omitempty" name:"WanVipv6"`
+
+	// Public network IPv6 port
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	WanPortIpv6 *uint64 `json:"WanPortIpv6,omitempty" name:"WanPortIpv6"`
+
+	// Public network IPv6 status
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	WanStatusIpv6 *uint64 `json:"WanStatusIpv6,omitempty" name:"WanStatusIpv6"`
+
+	// Database engine
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DbEngine *string `json:"DbEngine,omitempty" name:"DbEngine"`
+
+	// Database version
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
+
+	// DCN flag. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DcnFlag *int64 `json:"DcnFlag,omitempty" name:"DcnFlag"`
+
+	// DCN status. Valid values: 0 (null), 1 (creating), 2 (syncing), 3 (disconnected)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DcnStatus *int64 `json:"DcnStatus,omitempty" name:"DcnStatus"`
+
+	// The number of DCN disaster recovery instances
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DcnDstNum *int64 `json:"DcnDstNum,omitempty" name:"DcnDstNum"`
 }
 
 type DBParamValue struct {
@@ -644,6 +684,12 @@ type DescribeDBInstancesRequest struct {
 
 	// Filters instances by dedicated cluster ID in the format of `dbdc-4ih6uct9`
 	ExclusterIds []*string `json:"ExclusterIds,omitempty" name:"ExclusterIds" list`
+
+	// Tag key used in queries
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+
+	// Instance types used in filtering. Valid values: 1 (dedicated instance), 2 (primary instance), 3 (disaster recovery instance). Multiple values should be separated by commas.
+	FilterInstanceType *string `json:"FilterInstanceType,omitempty" name:"FilterInstanceType"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {

@@ -659,6 +659,10 @@ type CdnIp struct {
 	// overseas: cache node outside Mainland China
 	// unknown: service region unknown
 	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// City where the node resides
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	City *string `json:"City,omitempty" name:"City"`
 }
 
 type CdnIpHistory struct {
@@ -2596,6 +2600,18 @@ type HttpHeaderPathRule struct {
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
 }
 
+type HttpHeaderRule struct {
+
+	// HTTP header setting method. Valid values: `add` (add header), `set` (set header) or `del` (delete header).
+	HeaderMode *string `json:"HeaderMode,omitempty" name:"HeaderMode"`
+
+	// HTTP header name
+	HeaderName *string `json:"HeaderName,omitempty" name:"HeaderName"`
+
+	// HTTP header value
+	HeaderValue *string `json:"HeaderValue,omitempty" name:"HeaderValue"`
+}
+
 type Https struct {
 
 	// HTTPS configuration switch
@@ -2685,6 +2701,41 @@ type IpFilter struct {
 	// Up to 50 allowlists or blocklists can be entered
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
+
+	// IP blocklist/allowlist path-based configuration. This feature is only available to selected beta customers.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	FilterRules []*IpFilterPathRule `json:"FilterRules,omitempty" name:"FilterRules" list`
+}
+
+type IpFilterPathRule struct {
+
+	// IP blocklist/allowlist type
+	// `whitelist`: allowlist IPs
+	// `blacklist`: blocklist IPs
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+	// IP blocklist/allowlist list
+	// Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
+	// Up to 50 allowlists or blocklists can be entered.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
+
+	// Rule types:
+	// `all`: effective for all files
+	// `file`: effective for specified file suffixes
+	// `directory`: effective for specified paths
+	// `path`: effective for specified absolute paths
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Content for each RuleType:
+	// For `all`, enter an asterisk (*).
+	// For `file`, enter the suffix, such as jpg, txt.
+	// For `directory`, enter the path, such as /xxx/test/.
+	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
 }
 
 type IpFreqLimit struct {
@@ -3229,6 +3280,13 @@ type Origin struct {
 	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupServerName *string `json:"BackupServerName,omitempty" name:"BackupServerName"`
+
+	// 
+	BasePath *string `json:"BasePath,omitempty" name:"BasePath"`
+
+	// Path-based origin-pull configuration rules
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	PathRules []*PathRule `json:"PathRules,omitempty" name:"PathRules" list`
 }
 
 type OriginPullOptimization struct {
@@ -3353,6 +3411,37 @@ type OverseaConfig struct {
 	// Video dragging configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VideoSeek *VideoSeek `json:"VideoSeek,omitempty" name:"VideoSeek"`
+}
+
+type PathRule struct {
+
+	// Whether regex match is used.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Regex *bool `json:"Regex,omitempty" name:"Regex"`
+
+	// URL path
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// Origin-pull server when the path matches.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Origin *string `json:"Origin,omitempty" name:"Origin"`
+
+	// Origin-pull host when the path matches.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	ServerName *string `json:"ServerName,omitempty" name:"ServerName"`
+
+	// The region of origin server. Valid values: `CN` (mainland China), `OV` (outside mainland China)
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	OriginArea *string `json:"OriginArea,omitempty" name:"OriginArea"`
+
+	// Origin-pull URI path when the path matches.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	ForwardUri *string `json:"ForwardUri,omitempty" name:"ForwardUri"`
+
+	// Origin-pull header setting when the path matches.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	RequestHeaders []*HttpHeaderRule `json:"RequestHeaders,omitempty" name:"RequestHeaders" list`
 }
 
 type PurgePathCacheRequest struct {
