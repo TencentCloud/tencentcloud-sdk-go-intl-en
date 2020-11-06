@@ -597,6 +597,12 @@ type CreateDBInstanceHourRequest struct {
 
 	// Instance type. Valid values: HA (High-Availability Edition), BASIC (Basic Edition). If this parameter is not specified, High-Availability Edition will be used by default.
 	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Parameter template ID.
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+
+	// The array of alarm policy IDs.
+	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitempty" name:"AlarmPolicyList" list`
 }
 
 func (r *CreateDBInstanceHourRequest) ToJsonString() string {
@@ -1758,6 +1764,10 @@ type DescribeDBInstanceInfoResponse struct {
 		// Key region.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		KeyRegion *string `json:"KeyRegion,omitempty" name:"KeyRegion"`
+
+		// The default region of the KMS service currently used by the TencentDB backend service.
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		DefaultKmsRegion *string `json:"DefaultKmsRegion,omitempty" name:"DefaultKmsRegion"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3197,6 +3207,9 @@ type DeviceDiskInfo struct {
 
 	// Average number of write operations completed by the disk per second * 100. For example, if the value is 30,001, the average number of write operations completed by the disk per second is 30,001/100=300.01.
 	Write []*int64 `json:"Write,omitempty" name:"Write" list`
+
+	// Disk capacity. Each value is comprised of two data, with the first data representing the used capacity and the second one representing the total disk capacity.
+	CapacityRatio []*int64 `json:"CapacityRatio,omitempty" name:"CapacityRatio" list`
 }
 
 type DeviceMemInfo struct {
@@ -5251,6 +5264,7 @@ type TaskDetail struct {
 	// "KILLED" - terminated;
 	// "REMOVED" - deleted;
 	// "PAUSED" - paused.
+	// "WAITING" - waiting (which can be canceled)
 	TaskStatus *string `json:"TaskStatus,omitempty" name:"TaskStatus"`
 
 	// Instance task type. Valid values:
