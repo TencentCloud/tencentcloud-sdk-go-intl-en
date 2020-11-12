@@ -1007,7 +1007,8 @@ type DescribeJobResponse struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
-		// 
+		// Next action
+	// Note: This field may return `null`, indicating that no valid value was found.
 		NextAction *string `json:"NextAction,omitempty" name:"NextAction"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2098,7 +2099,7 @@ func (r *SubmitJobResponse) FromJsonString(s string) error {
 
 type SystemDisk struct {
 
-	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><br>The disk type currently in stock will be used by default.
+	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><br>The disk type currently in stock will be used by default. 
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// System disk ID. System disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter currently.
