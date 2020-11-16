@@ -104,6 +104,10 @@ type AddExistedInstancesResponse struct {
 	// Note: This field may return null, indicating that no valid value was found.
 		TimeoutInstanceIds []*string `json:"TimeoutInstanceIds,omitempty" name:"TimeoutInstanceIds" list`
 
+		// Causes of the failure to add a node to a cluster
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		FailedReasons []*string `json:"FailedReasons,omitempty" name:"FailedReasons" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -118,6 +122,46 @@ func (r *AddExistedInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type AddNodeToNodePoolRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Node ID
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+}
+
+func (r *AddNodeToNodePoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AddNodeToNodePoolRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AddNodeToNodePoolResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AddNodeToNodePoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AddNodeToNodePoolResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type AutoScalingGroupRange struct {
 
 	// Minimum number of pods in a scaling group
@@ -125,6 +169,21 @@ type AutoScalingGroupRange struct {
 
 	// Maximum number of pods in a scaling group
 	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
+}
+
+type AutoscalingAdded struct {
+
+	// Number of nodes that are being added
+	Joining *int64 `json:"Joining,omitempty" name:"Joining"`
+
+	// Number of nodes that are being initialized
+	Initializing *int64 `json:"Initializing,omitempty" name:"Initializing"`
+
+	// Number of normal nodes
+	Normal *int64 `json:"Normal,omitempty" name:"Normal"`
+
+	// Total number of nodes
+	Total *int64 `json:"Total,omitempty" name:"Total"`
 }
 
 type Cluster struct {
@@ -226,6 +285,9 @@ type ClusterAdvancedSettings struct {
 
 	// Specifies the ID of topic to which the audit logs are uploaded.
 	AuditLogTopicId *string `json:"AuditLogTopicId,omitempty" name:"AuditLogTopicId"`
+
+	// Specifies whether the VPC CNI type is multi-IP ENI or or independent ENI.
+	VpcCniType *string `json:"VpcCniType,omitempty" name:"VpcCniType"`
 }
 
 type ClusterAsGroup struct {
@@ -583,6 +645,104 @@ func (r *CreateClusterInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateClusterNodePoolFromExistingAsgRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Scaling group ID
+	AutoscalingGroupId *string `json:"AutoscalingGroupId,omitempty" name:"AutoscalingGroupId"`
+}
+
+func (r *CreateClusterNodePoolFromExistingAsgRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateClusterNodePoolFromExistingAsgRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateClusterNodePoolFromExistingAsgResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Node pool ID
+		NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateClusterNodePoolFromExistingAsgResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateClusterNodePoolFromExistingAsgResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateClusterNodePoolRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// AS group parameters
+	AutoScalingGroupPara *string `json:"AutoScalingGroupPara,omitempty" name:"AutoScalingGroupPara"`
+
+	// Running parameters
+	LaunchConfigurePara *string `json:"LaunchConfigurePara,omitempty" name:"LaunchConfigurePara"`
+
+	// Sample parameters
+	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
+
+	// Indicates whether to enable auto scaling
+	EnableAutoscale *bool `json:"EnableAutoscale,omitempty" name:"EnableAutoscale"`
+
+	// Node pool name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Labels
+	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
+
+	// Taints
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints" list`
+}
+
+func (r *CreateClusterNodePoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateClusterNodePoolRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateClusterNodePoolResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Node pool ID
+		NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateClusterNodePoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateClusterNodePoolResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateClusterRequest struct {
 	*tchttp.BaseRequest
 
@@ -870,6 +1030,46 @@ func (r *DeleteClusterInstancesResponse) ToJsonString() string {
 }
 
 func (r *DeleteClusterInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteClusterNodePoolRequest struct {
+	*tchttp.BaseRequest
+
+	// ClusterId of a node pool
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// IDs of node pools to delete
+	NodePoolIds []*string `json:"NodePoolIds,omitempty" name:"NodePoolIds" list`
+
+	// Indicates whether nodes in a node pool are retained when the node pool is deleted. (The nodes are removed from the cluster. However, the corresponding instances will not be terminated.)
+	KeepInstance *bool `json:"KeepInstance,omitempty" name:"KeepInstance"`
+}
+
+func (r *DeleteClusterNodePoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteClusterNodePoolRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteClusterNodePoolResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteClusterNodePoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteClusterNodePoolResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1240,6 +1440,87 @@ func (r *DescribeClusterKubeconfigResponse) ToJsonString() string {
 }
 
 func (r *DescribeClusterKubeconfigResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterNodePoolDetailRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+}
+
+func (r *DescribeClusterNodePoolDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterNodePoolDetailRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterNodePoolDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Node pool details
+		NodePool *NodePool `json:"NodePool,omitempty" name:"NodePool"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterNodePoolDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterNodePoolDetailResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterNodePoolsRequest struct {
+	*tchttp.BaseRequest
+
+	// ClusterId (cluster ID)
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeClusterNodePoolsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterNodePoolsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterNodePoolsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// NodePools (node pool list)
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		NodePoolSet []*NodePool `json:"NodePoolSet,omitempty" name:"NodePoolSet" list`
+
+		// Total resources
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterNodePoolsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeClusterNodePoolsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1867,6 +2148,21 @@ type LoginSettings struct {
 	KeepImageLogin *string `json:"KeepImageLogin,omitempty" name:"KeepImageLogin"`
 }
 
+type ManuallyAdded struct {
+
+	// Number of nodes that are being added
+	Joining *int64 `json:"Joining,omitempty" name:"Joining"`
+
+	// Number of nodes that are being initialized
+	Initializing *int64 `json:"Initializing,omitempty" name:"Initializing"`
+
+	// Number of normal nodes
+	Normal *int64 `json:"Normal,omitempty" name:"Normal"`
+
+	// Total number of nodes
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+}
+
 type ModifyClusterAsGroupAttributeRequest struct {
 	*tchttp.BaseRequest
 
@@ -1996,6 +2292,117 @@ func (r *ModifyClusterEndpointSPResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyClusterNodePoolRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Maximum number of nodes
+	MaxNodesNum *int64 `json:"MaxNodesNum,omitempty" name:"MaxNodesNum"`
+
+	// Minimum number of nodes
+	MinNodesNum *int64 `json:"MinNodesNum,omitempty" name:"MinNodesNum"`
+
+	// Labels
+	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
+
+	// Taints
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints" list`
+
+	// Indicates whether auto scaling is enabled.
+	EnableAutoscale *bool `json:"EnableAutoscale,omitempty" name:"EnableAutoscale"`
+}
+
+func (r *ModifyClusterNodePoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterNodePoolRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyClusterNodePoolResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyClusterNodePoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterNodePoolResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type NodeCountSummary struct {
+
+	// Nodes that are manually managed
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	ManuallyAdded *ManuallyAdded `json:"ManuallyAdded,omitempty" name:"ManuallyAdded"`
+
+	// Nodes that are automatically managed
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	AutoscalingAdded *AutoscalingAdded `json:"AutoscalingAdded,omitempty" name:"AutoscalingAdded"`
+}
+
+type NodePool struct {
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Node pool name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Cluster instance ID
+	ClusterInstanceId *string `json:"ClusterInstanceId,omitempty" name:"ClusterInstanceId"`
+
+	// Status
+	LifeState *string `json:"LifeState,omitempty" name:"LifeState"`
+
+	// Launch configuration ID
+	LaunchConfigurationId *string `json:"LaunchConfigurationId,omitempty" name:"LaunchConfigurationId"`
+
+	// Auto-scaling group ID
+	AutoscalingGroupId *string `json:"AutoscalingGroupId,omitempty" name:"AutoscalingGroupId"`
+
+	// Labels
+	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
+
+	// Array of taint
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints" list`
+
+	// Node list
+	NodeCountSummary *NodeCountSummary `json:"NodeCountSummary,omitempty" name:"NodeCountSummary"`
+
+	// 
+	AutoscalingGroupStatus *string `json:"AutoscalingGroupStatus,omitempty" name:"AutoscalingGroupStatus"`
+
+	// Maximum number of nodes
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	MaxNodesNum *int64 `json:"MaxNodesNum,omitempty" name:"MaxNodesNum"`
+
+	// Minimum number of nodes
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	MinNodesNum *int64 `json:"MinNodesNum,omitempty" name:"MinNodesNum"`
+
+	// Desired number of nodes
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	DesiredNodesNum *int64 `json:"DesiredNodesNum,omitempty" name:"DesiredNodesNum"`
+}
+
 type RegionInstance struct {
 
 	// Region name
@@ -2021,6 +2428,46 @@ type RegionInstance struct {
 	// Whitelisted location
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
+type RemoveNodeFromNodePoolRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Node ID list
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+}
+
+func (r *RemoveNodeFromNodePoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RemoveNodeFromNodePoolRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RemoveNodeFromNodePoolResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RemoveNodeFromNodePoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RemoveNodeFromNodePoolResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type ResourceDeleteOption struct {
@@ -2114,4 +2561,16 @@ type TagSpecification struct {
 
 	// List of tag pairs
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+}
+
+type Taint struct {
+
+	// Key of the taint
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Value of the taint
+	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// Effect of the taint
+	Effect *string `json:"Effect,omitempty" name:"Effect"`
 }

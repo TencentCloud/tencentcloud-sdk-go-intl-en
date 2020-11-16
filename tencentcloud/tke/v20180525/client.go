@@ -93,6 +93,31 @@ func (c *Client) AddExistedInstances(request *AddExistedInstancesRequest) (respo
     return
 }
 
+func NewAddNodeToNodePoolRequest() (request *AddNodeToNodePoolRequest) {
+    request = &AddNodeToNodePoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "AddNodeToNodePool")
+    return
+}
+
+func NewAddNodeToNodePoolResponse() (response *AddNodeToNodePoolResponse) {
+    response = &AddNodeToNodePoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to move nodes in a cluster to a node pool.
+func (c *Client) AddNodeToNodePool(request *AddNodeToNodePoolRequest) (response *AddNodeToNodePoolResponse, err error) {
+    if request == nil {
+        request = NewAddNodeToNodePoolRequest()
+    }
+    response = NewAddNodeToNodePoolResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateClusterRequest() (request *CreateClusterRequest) {
     request = &CreateClusterRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -214,6 +239,56 @@ func (c *Client) CreateClusterInstances(request *CreateClusterInstancesRequest) 
         request = NewCreateClusterInstancesRequest()
     }
     response = NewCreateClusterInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateClusterNodePoolRequest() (request *CreateClusterNodePoolRequest) {
+    request = &CreateClusterNodePoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "CreateClusterNodePool")
+    return
+}
+
+func NewCreateClusterNodePoolResponse() (response *CreateClusterNodePoolResponse) {
+    response = &CreateClusterNodePoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a node pool.
+func (c *Client) CreateClusterNodePool(request *CreateClusterNodePoolRequest) (response *CreateClusterNodePoolResponse, err error) {
+    if request == nil {
+        request = NewCreateClusterNodePoolRequest()
+    }
+    response = NewCreateClusterNodePoolResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateClusterNodePoolFromExistingAsgRequest() (request *CreateClusterNodePoolFromExistingAsgRequest) {
+    request = &CreateClusterNodePoolFromExistingAsgRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "CreateClusterNodePoolFromExistingAsg")
+    return
+}
+
+func NewCreateClusterNodePoolFromExistingAsgResponse() (response *CreateClusterNodePoolFromExistingAsgResponse) {
+    response = &CreateClusterNodePoolFromExistingAsgResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to upgrade a scaling group to a node pool.
+func (c *Client) CreateClusterNodePoolFromExistingAsg(request *CreateClusterNodePoolFromExistingAsgRequest) (response *CreateClusterNodePoolFromExistingAsgResponse, err error) {
+    if request == nil {
+        request = NewCreateClusterNodePoolFromExistingAsgRequest()
+    }
+    response = NewCreateClusterNodePoolFromExistingAsgResponse()
     err = c.Send(request, response)
     return
 }
@@ -364,6 +439,31 @@ func (c *Client) DeleteClusterInstances(request *DeleteClusterInstancesRequest) 
         request = NewDeleteClusterInstancesRequest()
     }
     response = NewDeleteClusterInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteClusterNodePoolRequest() (request *DeleteClusterNodePoolRequest) {
+    request = &DeleteClusterNodePoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterNodePool")
+    return
+}
+
+func NewDeleteClusterNodePoolResponse() (response *DeleteClusterNodePoolResponse) {
+    response = &DeleteClusterNodePoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a node pool.
+func (c *Client) DeleteClusterNodePool(request *DeleteClusterNodePoolRequest) (response *DeleteClusterNodePoolResponse, err error) {
+    if request == nil {
+        request = NewDeleteClusterNodePoolRequest()
+    }
+    response = NewDeleteClusterNodePoolResponse()
     err = c.Send(request, response)
     return
 }
@@ -564,6 +664,56 @@ func (c *Client) DescribeClusterKubeconfig(request *DescribeClusterKubeconfigReq
         request = NewDescribeClusterKubeconfigRequest()
     }
     response = NewDescribeClusterKubeconfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterNodePoolDetailRequest() (request *DescribeClusterNodePoolDetailRequest) {
+    request = &DescribeClusterNodePoolDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterNodePoolDetail")
+    return
+}
+
+func NewDescribeClusterNodePoolDetailResponse() (response *DescribeClusterNodePoolDetailResponse) {
+    response = &DescribeClusterNodePoolDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query detailed information of a node pool.
+func (c *Client) DescribeClusterNodePoolDetail(request *DescribeClusterNodePoolDetailRequest) (response *DescribeClusterNodePoolDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterNodePoolDetailRequest()
+    }
+    response = NewDescribeClusterNodePoolDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterNodePoolsRequest() (request *DescribeClusterNodePoolsRequest) {
+    request = &DescribeClusterNodePoolsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterNodePools")
+    return
+}
+
+func NewDescribeClusterNodePoolsResponse() (response *DescribeClusterNodePoolsResponse) {
+    response = &DescribeClusterNodePoolsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the node pool list
+func (c *Client) DescribeClusterNodePools(request *DescribeClusterNodePoolsRequest) (response *DescribeClusterNodePoolsResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterNodePoolsRequest()
+    }
+    response = NewDescribeClusterNodePoolsResponse()
     err = c.Send(request, response)
     return
 }
@@ -839,6 +989,56 @@ func (c *Client) ModifyClusterEndpointSP(request *ModifyClusterEndpointSPRequest
         request = NewModifyClusterEndpointSPRequest()
     }
     response = NewModifyClusterEndpointSPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyClusterNodePoolRequest() (request *ModifyClusterNodePoolRequest) {
+    request = &ModifyClusterNodePoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterNodePool")
+    return
+}
+
+func NewModifyClusterNodePoolResponse() (response *ModifyClusterNodePoolResponse) {
+    response = &ModifyClusterNodePoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to edit a node pool.
+func (c *Client) ModifyClusterNodePool(request *ModifyClusterNodePoolRequest) (response *ModifyClusterNodePoolResponse, err error) {
+    if request == nil {
+        request = NewModifyClusterNodePoolRequest()
+    }
+    response = NewModifyClusterNodePoolResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRemoveNodeFromNodePoolRequest() (request *RemoveNodeFromNodePoolRequest) {
+    request = &RemoveNodeFromNodePoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "RemoveNodeFromNodePool")
+    return
+}
+
+func NewRemoveNodeFromNodePoolResponse() (response *RemoveNodeFromNodePoolResponse) {
+    response = &RemoveNodeFromNodePoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to remove a node from a node pool but retain it in the cluster.
+func (c *Client) RemoveNodeFromNodePool(request *RemoveNodeFromNodePoolRequest) (response *RemoveNodeFromNodePoolResponse, err error) {
+    if request == nil {
+        request = NewRemoveNodeFromNodePoolRequest()
+    }
+    response = NewRemoveNodeFromNodePoolResponse()
     err = c.Send(request, response)
     return
 }
