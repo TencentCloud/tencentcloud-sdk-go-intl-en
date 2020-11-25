@@ -100,8 +100,11 @@ type DescribeDBDiagHistoryRequest struct {
 	// Start time, such as "2019-09-10 12:13:14".
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time, such as "2019-09-11 12:13:14".
+	// End time, such as "2019-09-11 12:13:14". The interval between the end time and the start time can be up to 2 days.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// 
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribeDBDiagHistoryRequest) ToJsonString() string {
@@ -189,11 +192,14 @@ type DescribeSlowLogTimeSeriesStatsRequest struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Start time.
+	// Start time, such as "2019-09-10 12:13:14".
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time.
+	// End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// 
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribeSlowLogTimeSeriesStatsRequest) ToJsonString() string {
@@ -238,10 +244,10 @@ type DescribeSlowLogTopSqlsRequest struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Start time.
+	// Start time, such as "2019-09-10 12:13:14".
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time.
+	// End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Sorting key. Valid values: QueryTime, ExecTimes, RowsSent, LockTime, RowsExamined.
@@ -255,6 +261,12 @@ type DescribeSlowLogTopSqlsRequest struct {
 
 	// Offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Database name array.
+	SchemaList []*SchemaItem `json:"SchemaList,omitempty" name:"SchemaList" list`
+
+	// 
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribeSlowLogTopSqlsRequest) ToJsonString() string {
@@ -302,11 +314,14 @@ type DescribeTopSpaceTableTimeSeriesRequest struct {
 	// Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize. Default value: PhysicalFileSize.
 	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
 
-	// Start date. It can be as early as 6 days before the current date, and defaults to 6 days before the end date.
+	// Start date. It can be as early as 29 days before the current date, and defaults to 6 days before the end date.
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
 
-	// End date. It can be as early as 6 days before the current date, and defaults to the current date.
+	// End date. It can be as early as 29 days before the current date, and defaults to the current date.
 	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+
+	// 
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribeTopSpaceTableTimeSeriesRequest) ToJsonString() string {
@@ -367,6 +382,9 @@ type DescribeTopSpaceTablesResponse struct {
 
 		// List of the returned space statistics of top tables.
 		TopSpaceTables []*TableSpaceData `json:"TopSpaceTables,omitempty" name:"TopSpaceTables" list`
+
+		// Timestamp (in seconds) identifying when the tablespace data is collected.
+		Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -462,6 +480,12 @@ type MonitorMetricSeriesData struct {
 	Timestamp []*int64 `json:"Timestamp,omitempty" name:"Timestamp" list`
 }
 
+type SchemaItem struct {
+
+	// Database name
+	Schema *string `json:"Schema,omitempty" name:"Schema"`
+}
+
 type SlowLogTopSqlItem struct {
 
 	// Total SQL lock wait time
@@ -509,7 +533,7 @@ type SlowLogTopSqlItem struct {
 	// SQL with parameter (random)
 	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
 
-	// Schema
+	// Database name
 	Schema *string `json:"Schema,omitempty" name:"Schema"`
 
 	// Ratio of total duration

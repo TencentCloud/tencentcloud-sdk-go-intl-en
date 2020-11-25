@@ -952,6 +952,9 @@ type CreateServiceRequest struct {
 
 	// User type, which is reserved and can be used by `serverless` users.
 	AppIdType *string `json:"AppIdType,omitempty" name:"AppIdType"`
+
+	// Tag information.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateServiceRequest) ToJsonString() string {
@@ -982,7 +985,7 @@ type CreateServiceResponse struct {
 		// Default private network domain name of VPC
 		InnerSubDomain *string `json:"InnerSubDomain,omitempty" name:"InnerSubDomain"`
 
-		// Service creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+		// Service creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
 		CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 		// Network type list. INNER: private network access; OUTER: public network access.
@@ -2191,7 +2194,8 @@ type DescribeServiceResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		SetId *int64 `json:"SetId,omitempty" name:"SetId"`
 
-		// 
+		// Tags bound to a service.
+	// Note: this field may return null, indicating that no valid values found.
 		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3483,7 +3487,7 @@ type ReqParameter struct {
 	// API frontend parameter name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// API frontend parameter position, such as `head`. Valid values: head, query, path.
+	// Position of the API frontend parameter, such as the header. Supported values: `header`, `query`, and `path`.
 	Position *string `json:"Position,omitempty" name:"Position"`
 
 	// API frontend parameter type, such as `String` and `int`.
@@ -3609,7 +3613,8 @@ type Service struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TradeIsolateStatus *int64 `json:"TradeIsolateStatus,omitempty" name:"TradeIsolateStatus"`
 
-	// 
+	// Tags bound to a service.
+	// Note: this field may return null, indicating that no valid values found.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 

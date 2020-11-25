@@ -264,10 +264,11 @@ type CreateInstancesRequest struct {
 	// Availability zone ID of the instance. For more information, please see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Instance type. Valid values: 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture).
+	// Instance type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture).
 	TypeId *uint64 `json:"TypeId,omitempty" name:"TypeId"`
 
-	// Instance capacity in MB. The value should be a multiple of 1,024 and is subject to the specifications returned by the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
+	// Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
+	// If `TypeId` indicates the standard architecture, `MemSize` indicates the total memory capacity of an instance; if `TypeId` indicates the cluster architecture, `MemSize` indicates the memory capacity per shard.
 	MemSize *uint64 `json:"MemSize,omitempty" name:"MemSize"`
 
 	// Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
@@ -279,7 +280,9 @@ type CreateInstancesRequest struct {
 	// Billing method. 0: pay as you go
 	BillingMode *int64 `json:"BillingMode,omitempty" name:"BillingMode"`
 
-	// Instance password. It can contain 8-30 characters and must contain at least two of the following types of characters: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/). It cannot stat with the symbol (/).
+	// Instance password. If the input parameter `NoAuth` is `true` and a VPC is used, the `Password` is optional; otherwise, it is required.
+	// If the instance type parameter `TypeId` indicates Redis 2.8, 4.0, or 5.0, the password cannot start with "/" and must contain 8-30 characters which are comprised of at least two of the following: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
+	// If the instance type parameter `TypeId` indicates CKV 3.2, the password contains 8-30 characters which must be comprised of only letters and digits.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// VPC ID, such as "vpc-sad23jfdfk". If this parameter is not passed in, the classic network will be selected by default. The parameter value can be queried by the `DescribeVpcs` API.
@@ -314,6 +317,9 @@ type CreateInstancesRequest struct {
 
 	// Whether to support the password-free feature. Valid values: true (password-free instance), false (password-enabled instance). Default value: false. Only instances in a VPC support the password-free access.
 	NoAuth *bool `json:"NoAuth,omitempty" name:"NoAuth"`
+
+	// 
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet" list`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -484,6 +490,82 @@ func (r *DescribeBackupUrlResponse) ToJsonString() string {
 }
 
 func (r *DescribeBackupUrlResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCommonDBInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// List of instance VIPs
+	VpcIds []*int64 `json:"VpcIds,omitempty" name:"VpcIds" list`
+
+	// List of subnet IDs
+	SubnetIds []*int64 `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+
+	// List of billing modes. Valid values: `0` (monthly subscription), `1` (pay-as-you-go)
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// List of instance IDs
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+
+	// List of instance names
+	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames" list`
+
+	// List of instance status
+	Status []*string `json:"Status,omitempty" name:"Status" list`
+
+	// Sort field
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sort order
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// List of instance VIPs
+	Vips []*string `json:"Vips,omitempty" name:"Vips" list`
+
+	// List of unique VPC IDs
+	UniqVpcIds []*string `json:"UniqVpcIds,omitempty" name:"UniqVpcIds" list`
+
+	// List of unique subnet IDs
+	UniqSubnetIds []*string `json:"UniqSubnetIds,omitempty" name:"UniqSubnetIds" list`
+
+	// Quantity limit. The default value `100` is recommended.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeCommonDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCommonDBInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCommonDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Instance quantity
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Instance information
+		InstanceDetails []*RedisCommonInstanceList `json:"InstanceDetails,omitempty" name:"InstanceDetails" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCommonDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCommonDBInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2996,6 +3078,63 @@ type RedisBackupSet struct {
 
 	// Whether a backup is locked. 0: no; 1: yes
 	Locked *int64 `json:"Locked,omitempty" name:"Locked"`
+}
+
+type RedisCommonInstanceList struct {
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// User ID
+	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Project ID of the instance
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Instance region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Instance availability zone
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance network ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Instance status. Valid values: `0` (creating), `1` (running)
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Instance network IP
+	Vips []*string `json:"Vips,omitempty" name:"Vips" list`
+
+	// Instance network port
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Instance creation time
+	Createtime *string `json:"Createtime,omitempty" name:"Createtime"`
+
+	// Billing mode. Valid values: `0` (pay-as-you-go), `1` (monthly subscription)
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Network type. Valid values: `0` (classic network), `1` (VPC)
+	NetType *int64 `json:"NetType,omitempty" name:"NetType"`
+}
+
+type RedisNodeInfo struct {
+
+	// 
+	NodeType *int64 `json:"NodeType,omitempty" name:"NodeType"`
+
+	// 
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// 
+	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
 }
 
 type RedisNodes struct {

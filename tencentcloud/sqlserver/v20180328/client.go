@@ -818,6 +818,31 @@ func (c *Client) ModifyMigration(request *ModifyMigrationRequest) (response *Mod
     return
 }
 
+func NewRecycleDBInstanceRequest() (request *RecycleDBInstanceRequest) {
+    request = &RecycleDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "RecycleDBInstance")
+    return
+}
+
+func NewRecycleDBInstanceResponse() (response *RecycleDBInstanceResponse) {
+    response = &RecycleDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to manually repossess a deactivated SQL Server instance.
+func (c *Client) RecycleDBInstance(request *RecycleDBInstanceRequest) (response *RecycleDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewRecycleDBInstanceRequest()
+    }
+    response = NewRecycleDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResetAccountPasswordRequest() (request *ResetAccountPasswordRequest) {
     request = &ResetAccountPasswordRequest{
         BaseRequest: &tchttp.BaseRequest{},

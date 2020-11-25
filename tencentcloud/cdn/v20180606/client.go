@@ -83,7 +83,7 @@ func NewCreateClsLogTopicResponse() (response *CreateClsLogTopicResponse) {
     return
 }
 
-// This API is used to create a log topic. Note: up to 10 log topics can be created under one logset.
+// This API is used to create a log topic. Up to 10 log topics can be created under one logset.
 func (c *Client) CreateClsLogTopic(request *CreateClsLogTopicRequest) (response *CreateClsLogTopicResponse, err error) {
     if request == nil {
         request = NewCreateClsLogTopicRequest()

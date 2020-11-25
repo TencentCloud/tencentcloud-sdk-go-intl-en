@@ -55,6 +55,12 @@ type AddEcdnDomainRequest struct {
 
 	// Forced access protocol redirection configuration.
 	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
+
+	// Tag bound to a domain name.
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
+
+	// 
+	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
 }
 
 func (r *AddEcdnDomainRequest) ToJsonString() string {
@@ -729,6 +735,13 @@ type DomainDetailInfo struct {
 	// Domain name lock status. normal: not locked; global: globally locked.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Readonly *string `json:"Readonly,omitempty" name:"Readonly"`
+
+	// Domain name tag.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
+
+	// 
+	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
 }
 
 type DomainFilter struct {
@@ -1181,6 +1194,17 @@ func (r *StopEcdnDomainResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type Tag struct {
+
+	// Tag key.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
 type TimestampData struct {
 
 	// Statistical time point in forward rounding mode
@@ -1253,4 +1277,13 @@ func (r *UpdateDomainConfigResponse) ToJsonString() string {
 
 func (r *UpdateDomainConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type WebSocket struct {
+
+	// 
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// 
+	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 }

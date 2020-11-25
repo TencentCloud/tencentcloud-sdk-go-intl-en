@@ -3419,11 +3419,11 @@ type PathRule struct {
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Regex *bool `json:"Regex,omitempty" name:"Regex"`
 
-	// URL path
+	// The matched URL path
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Path *string `json:"Path,omitempty" name:"Path"`
 
-	// Origin-pull server when the path matches.
+	// Origin-pull server when the path matches. COS source with private read/write is not supported.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Origin *string `json:"Origin,omitempty" name:"Origin"`
 

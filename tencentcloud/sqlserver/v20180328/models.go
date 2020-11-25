@@ -63,6 +63,9 @@ type AccountDetail struct {
 
 	// Information of read and write permissions of this account on relevant databases
 	Dbs []*DBPrivilege `json:"Dbs,omitempty" name:"Dbs" list`
+
+	// Whether it is an admin account
+	IsAdmin *bool `json:"IsAdmin,omitempty" name:"IsAdmin"`
 }
 
 type AccountPassword struct {
@@ -516,7 +519,7 @@ type DBInstance struct {
 	// Instance renewal flag
 	RenewFlag *int64 `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
-	// Instance high availability status. 1: dual-server high-availability, 2: single-server
+	// High-availability instance type. Valid values: 1 (dual-server high-availability), 2 (standalone), 3 (multi-AZ), 4 (multi-AZ cluster), 5 (cluster), 9 (used for Tencent’s business)
 	Model *int64 `json:"Model,omitempty" name:"Model"`
 
 	// Instance region name, such as ap-guangzhou
@@ -1951,6 +1954,43 @@ func (r *ModifyMigrationResponse) ToJsonString() string {
 }
 
 func (r *ModifyMigrationResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RecycleDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *RecycleDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RecycleDBInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RecycleDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RecycleDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RecycleDBInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

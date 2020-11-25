@@ -194,6 +194,11 @@ type AdaptiveStreamTemplate struct {
 	// <li>0: no,</li>
 	// <li>1: yes.</li>
 	RemoveAudio *uint64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
+
+	// Whether to remove a video stream. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	RemoveVideo *uint64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
 }
 
 type AiAnalysisResult struct {
@@ -1747,9 +1752,10 @@ type AudioTemplateInfo struct {
 	SampleRate *uint64 `json:"SampleRate,omitempty" name:"SampleRate"`
 
 	// Audio channel system. Valid values:
-	// <li>1: mono</li>
-	// <li>2: dual</li>
-	// <li>6: stereo</li>
+	// <li>1: Mono-channel</li>
+	// <li>2: Dual-channel</li>
+	// <li>6: Stereo</li>
+	// You cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).
 	// Default value: 2.
 	AudioChannel *int64 `json:"AudioChannel,omitempty" name:"AudioChannel"`
 }
@@ -1785,15 +1791,19 @@ type AudioTemplateInfoForUpdate struct {
 	SampleRate *uint64 `json:"SampleRate,omitempty" name:"SampleRate"`
 
 	// Audio channel system. Valid values:
-	// <li>1: mono</li>
-	// <li>2: dual</li>
-	// <li>6: stereo</li>
+	// <li>1: Mono-channel</li>
+	// <li>2: Dual-channel</li>
+	// <li>6: Stereo</li>
+	// You cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).
 	AudioChannel *int64 `json:"AudioChannel,omitempty" name:"AudioChannel"`
 }
 
 type AudioTrackItem struct {
 
-	// Source of media file for audio material, which can be an ID of a VOD file or URL of another file.
+	// Source of media material for audio segment, which can be:
+	// <li>VOD media file ID;</li>
+	// <li>Download URL of other media files.</li>
+	// Note: when a download URL of other media files is used as the material source and access control (such as hotlink protection) is enabled, the URL needs to carry access control parameters (such as hotlink protection signature).
 	SourceMedia *string `json:"SourceMedia,omitempty" name:"SourceMedia"`
 
 	// Start time of audio segment in material file in seconds. Default value: 0, which means to start capturing from the beginning position of the material.
@@ -2007,7 +2017,7 @@ type ComposeMediaOutput struct {
 type ComposeMediaRequest struct {
 	*tchttp.BaseRequest
 
-	// List of input media tracks, i.e., information of multiple tracks composed of video, audio, image, and other materials. Multiple input tracks are aligned with the output media file on the time axis. The materials of each track at the same time point on the time axis will be superimposed. Specifically, videos or images will be superimposed for video image by track order, where a material with a higher track order will be more on top, while audio materials will be mixed.
+	// List of input media tracks, i.e., information of multiple tracks composed of video, audio, image, and other materials. <li>Multiple input tracks are aligned with the output media file on the time axis. </li><li>The materials of each track at the same time point on the time axis will be superimposed. Specifically, videos or images will be superimposed for video image by track order, where a material with a higher track order will be more on top, while audio materials will be mixed. </li><li>Up to 10 tracks are supported for each type (video, audio, or image).</li>
 	Tracks []*MediaTrack `json:"Tracks,omitempty" name:"Tracks" list`
 
 	// Information of output media file.
@@ -2019,7 +2029,7 @@ type ComposeMediaRequest struct {
 	// This parameter is used to pass through user request information. `ComposeMediaComplete` callback will return the value of this field. It contains up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// This parameter is used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is null or an empty string, the above operation will not be performed.
+	// ID used for task deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -4495,8 +4505,13 @@ type DescribeMediaProcessUsageDataRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Type of video processing task to be queried. Valid value: Transcode. Default value: Transcode.
-	// <li>Transcode: transcoding</li>
+	// This API is used to query video processing task types. The following types are supported now:
+	// <li> Transcoding: Basic transcoding</li>
+	// <li> Transcoding-TESHD: TESHD transcoding</li>
+	// <li> Editing: Video editing</li>
+	// <li> AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
+	// <li> ContentAudit: content audit</li>
+	// <li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing (not recommended)</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -4913,6 +4928,9 @@ func (r *DescribeStorageDetailsResponse) FromJsonString(s string) error {
 
 type DescribeSubAppIdsRequest struct {
 	*tchttp.BaseRequest
+
+	// Tag information. You can query the list of subapplications with specified tags.
+	Tags []*ResourceTag `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *DescribeSubAppIdsRequest) ToJsonString() string {
@@ -5419,8 +5437,11 @@ type EditMediaRequest struct {
 	// Task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
 
-	// ID used for task deduplication. If there was a request with the same ID in the last day, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+	// ID used for task deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// Reserved field for special purposes.
+	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -7950,9 +7971,11 @@ type ModifySubAppIdStatusRequest struct {
 	// Subapplication ID.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
-	// Subapplication status. Valid values:
-	// <li>On: enabled</li>
-	// <li>Off: disabled</li>
+	// Subapplication status. Valid strings include:
+	// <li>On: to enable the subapplication.</li>
+	// <li>Off: to disable the subapplication.</li>
+	// <li>Destroyed: to terminate the subapplication. </li>
+	// You cannot enable a subapplication when its status is “Destroying”. You can enable it after it was terminated.
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -8864,7 +8887,7 @@ type ProcessMediaByProcedureRequest struct {
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// ID used for deduplication. If there was a request with the same ID on the last day, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
 	// Reserved field for special purposes.
@@ -8907,7 +8930,7 @@ func (r *ProcessMediaByProcedureResponse) FromJsonString(s string) error {
 type ProcessMediaByUrlRequest struct {
 	*tchttp.BaseRequest
 
-	// Information of input video, including video's URL, name, and custom ID.
+	// This API is<font color='red'>disused</font>. We recommend using an alternative API. For more information, see API overview.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
 
 	// Information of COS path to output file.
@@ -8931,7 +8954,7 @@ type ProcessMediaByUrlRequest struct {
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -8995,7 +9018,7 @@ type ProcessMediaRequest struct {
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
 	// Reserved field for special purposes.
@@ -9182,7 +9205,7 @@ type PullUploadRequest struct {
 	// The source context which is used to pass through the user request information. After `Procedure` is specified, the task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
 	// Reserved field for special purposes.
@@ -9360,6 +9383,15 @@ type ResolutionNameInfo struct {
 
 	// Display name.
 	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type ResourceTag struct {
+
+	// Tag key.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type SampleSnapshotTaskInput struct {
@@ -9790,7 +9822,10 @@ type StatDataItem struct {
 
 type StickerTrackItem struct {
 
-	// Source of media file for sticker material, which can be an ID of a VOD file or URL of another file.
+	// Source of media material for sticker segment, which can be:
+	// <li>VOD media file ID;</li>
+	// <li>Download URL of other media files.</li>
+	// Note: when a download URL of other media files is used as the material source and access control (such as hotlink protection) is enabled, the URL needs to carry access control parameters (such as hotlink protection signature).
 	SourceMedia *string `json:"SourceMedia,omitempty" name:"SourceMedia"`
 
 	// Sticker duration in seconds.
@@ -9850,9 +9885,11 @@ type SubAppIdInfo struct {
 	// Subapplication creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Subapplication status. Valid values:
+	// Subapplication status. Valid strings include:
 	// <li>On: enabled;</li>
 	// <li>Off: disabled.</li>
+	// <li>Destroying: terminating. </li>
+	// <li>Destroyed: terminated. </li>
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -9988,13 +10025,16 @@ type TaskSimpleInfo struct {
 
 type TaskStatData struct {
 
-	// Task type
-	// <li>Transcode: transcoding</li>
-	// <li>Snapshot: screencapturing</li>
+	// Task type.
+	// <li> Transcoding: basic transcoding</li>
+	// <li> Transcoding-TESHD: TESHD transcoding</li>
+	// <li> Editing: Video editing</li>
+	// <li> AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
+	// <li> ContentAudit: content audit</li>
+	// <li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing (not recommended)</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
-	// Task statistics overview.
-	// <li>Transcode: usage in seconds</li>
+	// Task statistics overview (usage unit: second).
 	Summary []*TaskStatDataItem `json:"Summary,omitempty" name:"Summary" list`
 
 	// Detailed statistics of tasks with different specifications.
@@ -10275,6 +10315,18 @@ type TranscodeTaskInput struct {
 
 	// List of blurs. Up to 10 ones can be supported.
 	MosaicSet []*MosaicInput `json:"MosaicSet,omitempty" name:"MosaicSet" list`
+
+	// Start time offset of a transcoded video, in seconds.
+	// <li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
+	// <li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
+	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// End time offset of a transcoded video, in seconds.
+	// <li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
+	// <li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
+	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 }
 
 type TranscodeTemplate struct {
@@ -10528,7 +10580,7 @@ type VideoTemplateInfo struct {
 	// Currently, a resolution within 640x480 must be specified for H.265. and the `av1` container only supports mp4.
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
-	// Video frame rate in Hz. Value range: [0, 60].
+	// Video frame rate in Hz. Value range: [0,100].
 	// If the value is 0, the frame rate will be the same as that of the source video.
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 
@@ -10561,12 +10613,18 @@ type VideoTemplateInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding;</li>
+	// <li>black: keep the image's aspect ratio unchanged and fill the uncovered area with black color.</li>
+	// <li>white: keep the image's aspect ratio unchanged and fill the uncovered area with white color.</li>
+	// <li>gauss: keep the image's aspect ratio unchanged and apply Gaussian blur to the uncovered area.</li>
 	// Default value: black.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
+
+	// Video Constant Rate Factor (CRF). Value range: 1-51.
+	// If this parameter is specified, CRF will be used to control video bitrate for transcoding and the original video bitrate will not be used.
+	// We don’t recommend specifying this parameter if you have no special requirements.
+	Vcrf *uint64 `json:"Vcrf,omitempty" name:"Vcrf"`
 }
 
 type VideoTemplateInfoForUpdate struct {
@@ -10578,7 +10636,7 @@ type VideoTemplateInfoForUpdate struct {
 	// Currently, a resolution within 640x480 must be specified for H.265. and the `av1` container only supports mp4.
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
-	// Video frame rate in Hz. Value range: [0, 60].
+	// Video frame rate in Hz. Value range: [0,100].
 	// If the value is 0, the frame rate will be the same as that of the source video.
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 
@@ -10602,15 +10660,23 @@ type VideoTemplateInfoForUpdate struct {
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-	// Default value: black.
+	// <li> stretch: stretch video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding;</li>
+	// <li>black: keep the image's aspect ratio unchanged and fill the uncovered area with black color.</li>
+	// <li>white: keep the image's aspect ratio unchanged and fill the uncovered area with white color.</li>
+	// <li>gauss: keep the image's aspect ratio unchanged and apply Gaussian blur to the uncovered area.</li>
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
+
+	// Video Constant Rate Factor (CRF). Value range: 1-51. This parameter will be disabled if you enter 0.
+	// We don’t recommend specifying this parameter if you have no special requirements.
+	Vcrf *uint64 `json:"Vcrf,omitempty" name:"Vcrf"`
 }
 
 type VideoTrackItem struct {
 
-	// Source of media material for video segment, which can be an ID of a VOD file or URL of another file.
+	// Source of media material for video segment, which can be:
+	// <li>VOD media file ID;</li>
+	// <li>Download URL of other media files.</li>
+	// Note: when a download URL of other media files is used as the material source and access control (such as hotlink protection) is enabled, the URL needs to carry access control parameters (such as hotlink protection signature).
 	SourceMedia *string `json:"SourceMedia,omitempty" name:"SourceMedia"`
 
 	// Start time of video segment in material file in seconds. Default value: 0.
@@ -10679,12 +10745,12 @@ type WatermarkInput struct {
 	// Watermarking template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// Text content of up to 100 characters. This needs to be entered only when the watermark type is text.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Text content, which contains up to 100 characters. This field is required only when the watermark type is text.
+	// VOD does not support adding text watermarks on screenshots.
 	TextContent *string `json:"TextContent,omitempty" name:"TextContent"`
 
-	// SVG content of up to 2,000,000 characters. This needs to be entered only when the watermark type is `SVG`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// SVG content, which contains up to 2,000,000 characters. This field is required only when the watermark type is SVG.
+	// VOD does not support adding SVG watermarks on screenshots.
 	SvgContent *string `json:"SvgContent,omitempty" name:"SvgContent"`
 
 	// Start time offset of a watermark in seconds. If this parameter is left blank or 0 is entered, the watermark will appear upon the first video frame.
