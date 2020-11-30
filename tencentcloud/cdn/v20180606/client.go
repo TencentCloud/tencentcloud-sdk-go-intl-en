@@ -919,8 +919,7 @@ func NewPushUrlsCacheResponse() (response *PushUrlsCacheResponse) {
 }
 
 // This API is used to cache specified URL resources to CDN nodes. You can specify acceleration regions for the prefetch.
-// By default, a maximum of 1,000 URLs can be prefetched per day either within or outside Mainland China, and up to 20 tasks can be submitted at a time.
-// This API is in beta test and not fully available yet. Please stay tuned.
+// By default, a maximum of 1000 URLs can be prefetched per day either within or outside Chinese mainland, and up to 20 tasks can be submitted at a time.
 func (c *Client) PushUrlsCache(request *PushUrlsCacheRequest) (response *PushUrlsCacheResponse, err error) {
     if request == nil {
         request = NewPushUrlsCacheRequest()

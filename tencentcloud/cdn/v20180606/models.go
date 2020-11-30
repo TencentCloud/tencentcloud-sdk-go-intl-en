@@ -2566,11 +2566,10 @@ type Hsts struct {
 
 type HttpHeaderPathRule struct {
 
-	// HTTP header setting method
-	// add: add header. If a header exists, then there will be a duplicated header.
-	// set: only supports origin-pull header configuration. If a header exists, it will be overwritten. If one does not exist, then the header will be added.
-	// del: delete header
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// HTTP header setting methods
+	// `add`: add header. If a header already exists, then there will be a duplicated header.
+	// `del`: delete header.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	HeaderMode *string `json:"HeaderMode,omitempty" name:"HeaderMode"`
 
 	// HTTP header name. Up to 100 characters can be set.
@@ -3454,6 +3453,9 @@ type PurgePathCacheRequest struct {
 	// `flush`: purges updated resources
 	// `delete`: purges all resources
 	FlushType *string `json:"FlushType,omitempty" name:"FlushType"`
+
+	// Whether to encode Chinese characters before purge.
+	UrlEncode *bool `json:"UrlEncode,omitempty" name:"UrlEncode"`
 }
 
 func (r *PurgePathCacheRequest) ToJsonString() string {
@@ -3526,6 +3528,9 @@ type PurgeUrlsCacheRequest struct {
 	// If `overseas` is passed in, only the content cached on nodes outside the Chinese mainland will be purged
 	// The specified purging region should match the domain name acceleration region
 	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Whether to encode Chinese characters before purge.
+	UrlEncode *bool `json:"UrlEncode,omitempty" name:"UrlEncode"`
 }
 
 func (r *PurgeUrlsCacheRequest) ToJsonString() string {
