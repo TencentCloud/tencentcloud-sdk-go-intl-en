@@ -392,7 +392,7 @@ type DCDBInstanceInfo struct {
 	// Number of CPU cores
 	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// IPv6 flag for an instance
+	// Indicates whether the instance uses IPv6
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Ipv6Flag *uint64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 
@@ -412,7 +412,7 @@ type DCDBInstanceInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WanStatusIpv6 *uint64 `json:"WanStatusIpv6,omitempty" name:"WanStatusIpv6"`
 
-	// DCN flag. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
+	// DCN type. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DcnFlag *int64 `json:"DcnFlag,omitempty" name:"DcnFlag"`
 
@@ -945,7 +945,7 @@ type DescribeDCDBShardsResponse struct {
 		// Shard information list
 		Shards []*DCDBShardInfo `json:"Shards,omitempty" name:"Shards" list`
 
-		// Disaster recovery flag. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
+		// DCN type. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		DcnFlag *int64 `json:"DcnFlag,omitempty" name:"DcnFlag"`
 

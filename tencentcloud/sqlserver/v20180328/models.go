@@ -519,7 +519,7 @@ type DBInstance struct {
 	// Instance renewal flag
 	RenewFlag *int64 `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
-	// High-availability instance type. Valid values: 1 (dual-server high-availability), 2 (standalone), 3 (multi-AZ), 4 (multi-AZ cluster), 5 (cluster), 9 (used for Tencent’s business)
+	// High-availability instance type. Valid values: 1 (dual-server high-availability), 2 (standalone), 3 (multi-AZ), 4 (multi-AZ cluster), 5 (cluster), 9 (private consumption)
 	Model *int64 `json:"Model,omitempty" name:"Model"`
 
 	// Instance region name, such as ap-guangzhou

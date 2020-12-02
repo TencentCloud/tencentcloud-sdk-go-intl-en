@@ -172,6 +172,64 @@ func (r *CreateDBInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateServerlessDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Availability zone ID. Only ap-shanghai-2, ap-beijing-1, and ap-guangzhou-2 are supported during the beta test.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance name. The value must be unique for the same account.
+	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
+
+	// Kernel version of a PostgreSQL instance. Currently, only 10.4 is supported.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Database character set of a PostgreSQL instance. Currently, only UTF-8 is supported.
+	DBCharset *string `json:"DBCharset,omitempty" name:"DBCharset"`
+
+	// Project ID.
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Array of tags to be bound with the instance
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList" list`
+}
+
+func (r *CreateServerlessDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateServerlessDBInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateServerlessDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Instance ID, such as "postgres-xxxxx". The value must be globally unique.
+		DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateServerlessDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateServerlessDBInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DBBackup struct {
 
 	// Unique backup file ID
@@ -294,6 +352,18 @@ type DBInstance struct {
 	// The information of tags associated with instances.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TagList []*Tag `json:"TagList,omitempty" name:"TagList" list`
+
+	// Primary instance information, which is returned only when the instance is read-only
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitempty" name:"MasterDBInstanceId"`
+
+	// Number of read-only instances
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ReadOnlyInstanceNum *int64 `json:"ReadOnlyInstanceNum,omitempty" name:"ReadOnlyInstanceNum"`
+
+	// The status of a instance in a read-only group
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	StatusInReadonlyGroup *string `json:"StatusInReadonlyGroup,omitempty" name:"StatusInReadonlyGroup"`
 }
 
 type DBInstanceNetInfo struct {
@@ -312,6 +382,43 @@ type DBInstanceNetInfo struct {
 
 	// Network connection status
 	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
+type DeleteServerlessDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance name. Either instance name or instance ID (or both) must be passed in. If both are passed in, the instance ID will prevail.
+	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
+
+	// Instance ID. Either instance name or instance ID (or both) must be passed in. If both are passed in, the instance ID will prevail.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
+func (r *DeleteServerlessDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteServerlessDBInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteServerlessDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteServerlessDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteServerlessDBInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeAccountsRequest struct {
@@ -829,6 +936,59 @@ func (r *DescribeRegionsResponse) ToJsonString() string {
 }
 
 func (r *DescribeRegionsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeServerlessDBInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Query conditions
+	Filter []*Filter `json:"Filter,omitempty" name:"Filter" list`
+
+	// The number of queries
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The offset value
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting metric. Currently, only "CreateTime" (instance creation time) is supported.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Ascending and descending are supported.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeServerlessDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeServerlessDBInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeServerlessDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of query results
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Query results
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		DBInstanceSet []*ServerlessDBInstance `json:"DBInstanceSet,omitempty" name:"DBInstanceSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeServerlessDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeServerlessDBInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1485,6 +1645,107 @@ func (r *RestartDBInstanceResponse) ToJsonString() string {
 
 func (r *RestartDBInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type ServerlessDBAccount struct {
+
+	// Username
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBUser *string `json:"DBUser,omitempty" name:"DBUser"`
+
+	// Password
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBPassword *string `json:"DBPassword,omitempty" name:"DBPassword"`
+
+	// The maximum number of connections
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBConnLimit *int64 `json:"DBConnLimit,omitempty" name:"DBConnLimit"`
+}
+
+type ServerlessDBInstance struct {
+
+	// Instance ID, which is the unique identifier
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
+
+	// Instance status
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBInstanceStatus *string `json:"DBInstanceStatus,omitempty" name:"DBInstanceStatus"`
+
+	// Region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Availability zone
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Project ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// VPC ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Character set
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBCharset *string `json:"DBCharset,omitempty" name:"DBCharset"`
+
+	// Database version
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Creation time
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Instance network information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBInstanceNetInfo []*ServerlessDBInstanceNetInfo `json:"DBInstanceNetInfo,omitempty" name:"DBInstanceNetInfo" list`
+
+	// Instance account information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBAccountSet []*ServerlessDBAccount `json:"DBAccountSet,omitempty" name:"DBAccountSet" list`
+
+	// Information of the databases in an instance
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBDatabaseList []*string `json:"DBDatabaseList,omitempty" name:"DBDatabaseList" list`
+
+	// The array of tags bound to an instance
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList" list`
+}
+
+type ServerlessDBInstanceNetInfo struct {
+
+	// Address
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// IP address
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Port number
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Status
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Network type
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NetType *string `json:"NetType,omitempty" name:"NetType"`
 }
 
 type SetAutoRenewFlagRequest struct {

@@ -93,6 +93,56 @@ func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response 
     return
 }
 
+func NewCreateServerlessDBInstanceRequest() (request *CreateServerlessDBInstanceRequest) {
+    request = &CreateServerlessDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateServerlessDBInstance")
+    return
+}
+
+func NewCreateServerlessDBInstanceResponse() (response *CreateServerlessDBInstanceResponse) {
+    response = &CreateServerlessDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a PostgreSQL for Serverless instance. If the creation succeeds, the instance ID will be returned.
+func (c *Client) CreateServerlessDBInstance(request *CreateServerlessDBInstanceRequest) (response *CreateServerlessDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateServerlessDBInstanceRequest()
+    }
+    response = NewCreateServerlessDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteServerlessDBInstanceRequest() (request *DeleteServerlessDBInstanceRequest) {
+    request = &DeleteServerlessDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DeleteServerlessDBInstance")
+    return
+}
+
+func NewDeleteServerlessDBInstanceResponse() (response *DeleteServerlessDBInstanceResponse) {
+    response = &DeleteServerlessDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a PostgreSQL for Serverless instance.
+func (c *Client) DeleteServerlessDBInstance(request *DeleteServerlessDBInstanceRequest) (response *DeleteServerlessDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewDeleteServerlessDBInstanceRequest()
+    }
+    response = NewDeleteServerlessDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAccountsRequest() (request *DescribeAccountsRequest) {
     request = &DescribeAccountsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -364,6 +414,31 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
         request = NewDescribeRegionsRequest()
     }
     response = NewDescribeRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeServerlessDBInstancesRequest() (request *DescribeServerlessDBInstancesRequest) {
+    request = &DescribeServerlessDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeServerlessDBInstances")
+    return
+}
+
+func NewDescribeServerlessDBInstancesResponse() (response *DescribeServerlessDBInstancesResponse) {
+    response = &DescribeServerlessDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the details of one or more PostgreSQL for Serverless instances.
+func (c *Client) DescribeServerlessDBInstances(request *DescribeServerlessDBInstancesRequest) (response *DescribeServerlessDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeServerlessDBInstancesRequest()
+    }
+    response = NewDescribeServerlessDBInstancesResponse()
     err = c.Send(request, response)
     return
 }
