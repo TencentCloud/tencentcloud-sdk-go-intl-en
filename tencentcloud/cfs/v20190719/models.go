@@ -109,6 +109,9 @@ type CreateCfsFileSystemRequest struct {
 
 	// File system tag
 	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags" list`
+
+	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. This string is valid for 2 hours.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 }
 
 func (r *CreateCfsFileSystemRequest) ToJsonString() string {

@@ -979,10 +979,10 @@ type CreateServiceResponse struct {
 		// Custom service description.
 		ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
 
-		// Default public network domain name.
+		// Default public domain name.
 		OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
 
-		// Default private network domain name of VPC
+		// Default VPC domain name.
 		InnerSubDomain *string `json:"InnerSubDomain,omitempty" name:"InnerSubDomain"`
 
 		// Service creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.

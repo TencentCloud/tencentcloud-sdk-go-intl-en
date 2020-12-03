@@ -1494,6 +1494,21 @@ type GetServiceStatusResponse struct {
 		// Service unavailability type. 0: not purchased; 1: normal; 2: suspended due to arrears; 3: resource released
 		InvalidType *int64 `json:"InvalidType,omitempty" name:"InvalidType"`
 
+		// 0: Basic Edition, 1: Ultimate Edition
+		UserLevel *uint64 `json:"UserLevel,omitempty" name:"UserLevel"`
+
+		// Ultimate Edition expiration time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ProExpireTime *uint64 `json:"ProExpireTime,omitempty" name:"ProExpireTime"`
+
+		// Whether to automatically renew Ultimate Edition. 0: no, 1: yes
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ProRenewFlag *uint64 `json:"ProRenewFlag,omitempty" name:"ProRenewFlag"`
+
+		// Unique ID of the Ultimate Edition purchase record. If the Ultimate Edition is not activated, the returned value will be null.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ProResourceId *string `json:"ProResourceId,omitempty" name:"ProResourceId"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`

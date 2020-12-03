@@ -28,6 +28,9 @@ type DescribeDBDiagEventRequest struct {
 
 	// Event ID, which can be obtained through the `DescribeDBDiagHistory` API.
 	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribeDBDiagEventRequest) ToJsonString() string {
@@ -103,7 +106,7 @@ type DescribeDBDiagHistoryRequest struct {
 	// End time, such as "2019-09-11 12:13:14". The interval between the end time and the start time can be up to 2 days.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// 
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
@@ -145,6 +148,9 @@ type DescribeDBSpaceStatusRequest struct {
 
 	// Query period in days. The end date is the current date and the query period is 7 days by default.
 	RangeDays *int64 `json:"RangeDays,omitempty" name:"RangeDays"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribeDBSpaceStatusRequest) ToJsonString() string {
@@ -198,7 +204,7 @@ type DescribeSlowLogTimeSeriesStatsRequest struct {
 	// End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// 
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
@@ -265,7 +271,7 @@ type DescribeSlowLogTopSqlsRequest struct {
 	// Database name array.
 	SchemaList []*SchemaItem `json:"SchemaList,omitempty" name:"SchemaList" list`
 
-	// 
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
@@ -320,7 +326,7 @@ type DescribeTopSpaceTableTimeSeriesRequest struct {
 	// End date. It can be as early as 29 days before the current date, and defaults to the current date.
 	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
 
-	// 
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
@@ -365,6 +371,9 @@ type DescribeTopSpaceTablesRequest struct {
 
 	// Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize. Default value: PhysicalFileSize.
 	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribeTopSpaceTablesRequest) ToJsonString() string {
@@ -383,7 +392,7 @@ type DescribeTopSpaceTablesResponse struct {
 		// List of the returned space statistics of top tables.
 		TopSpaceTables []*TableSpaceData `json:"TopSpaceTables,omitempty" name:"TopSpaceTables" list`
 
-		// Timestamp (in seconds) identifying when the tablespace data is collected.
+		// Timestamp (in seconds) of tablespace data collect points
 		Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

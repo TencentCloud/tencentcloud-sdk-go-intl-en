@@ -22,10 +22,10 @@ import (
 
 type CreateInput struct {
 
-	// Input name, which can contain 1–32 letters, digits, and underscores.
+	// Input name, which can contain 1 to 32 letters, digits, and underscores.
 	InputName *string `json:"InputName,omitempty" name:"InputName"`
 
-	// Input protocol. Valid values: [SRT|RTP].
+	// Input protocol. Valid values: SRT, RTP.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Input description. Length: [0, 255].
@@ -52,13 +52,13 @@ type CreateInputRTPSettings struct {
 
 type CreateInputSRTSettings struct {
 
-	// Stream ID, which can contain 0–512 letters, digits, and special symbols (.#!:&,=_-).
+	// Stream ID, which can contain 0 to 512 letters, digits, and special characters (.#!:&,=_-).
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
 
 	// Latency in ms. Default value: 0. Value range: [0, 3000].
 	Latency *int64 `json:"Latency,omitempty" name:"Latency"`
 
-	// Receipt latency in ms. Default value: 120. Value range: [0, 3000].
+	// Receive latency in ms. Default value: 120. Value range: [0, 3000].
 	RecvLatency *int64 `json:"RecvLatency,omitempty" name:"RecvLatency"`
 
 	// Peer latency in ms. Default value: 0. Value range: [0, 3000].
@@ -70,7 +70,7 @@ type CreateInputSRTSettings struct {
 	// Decryption key, which is empty by default, indicating not to encrypt. Only ASCII codes can be filled. Length: [10, 79].
 	Passphrase *string `json:"Passphrase,omitempty" name:"Passphrase"`
 
-	// Key length. Default value: 0. Valid values: [0|16|24|32].
+	// Key length. Default value: 0. Valid values: 0, 16, 24, 32.
 	PbKeyLen *int64 `json:"PbKeyLen,omitempty" name:"PbKeyLen"`
 }
 
@@ -80,7 +80,7 @@ type CreateMediaConnectFlowRequest struct {
 	// Flow name.
 	FlowName *string `json:"FlowName,omitempty" name:"FlowName"`
 
-	// Maximum bandwidth in bps. Valid values: [10000000, 20000000, 50000000].
+	// Maximum bandwidth in bps. Valid values: 10000000, 20000000, 50000000.
 	MaxBandwidth *int64 `json:"MaxBandwidth,omitempty" name:"MaxBandwidth"`
 
 	// Flow input group.
@@ -123,7 +123,7 @@ type CreateMediaConnectOutputRequest struct {
 	// Flow ID.
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
-	// Output configuration of flow.
+	// Output configuration of a flow.
 	Output *CreateOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -183,7 +183,7 @@ type CreateOutput struct {
 
 type CreateOutputRTMPSettings struct {
 
-	// Push destination address. 1–2 addresses can be entered.
+	// Push destination address. You can enter one or two addresses.
 	Destinations []*CreateOutputRtmpSettingsDestinations `json:"Destinations,omitempty" name:"Destinations" list`
 
 	// RTMP chunk size. Value range: [4096, 40960].
@@ -192,7 +192,7 @@ type CreateOutputRTMPSettings struct {
 
 type CreateOutputRTPSettings struct {
 
-	// Push destination address. 1–2 addresses can be entered.
+	// Push destination address. You can enter one or two addresses.
 	Destinations *CreateOutputRTPSettingsDestinations `json:"Destinations,omitempty" name:"Destinations"`
 
 	// Only `none` can be entered.
@@ -222,7 +222,7 @@ type CreateOutputRtmpSettingsDestinations struct {
 
 type CreateOutputSrtSettings struct {
 
-	// Push destination address. Please configure 1–2 addresses.
+	// Push destination address. Please configure one or two addresses.
 	Destinations []*CreateOutputSrtSettingsDestinations `json:"Destinations,omitempty" name:"Destinations" list`
 
 	// Stream ID of SRT push.
@@ -231,7 +231,7 @@ type CreateOutputSrtSettings struct {
 	// Total latency of SRT push.
 	Latency *int64 `json:"Latency,omitempty" name:"Latency"`
 
-	// Receipt latency of SRT push.
+	// Receive latency of SRT push.
 	RecvLatency *int64 `json:"RecvLatency,omitempty" name:"RecvLatency"`
 
 	// Peer latency of SRT push.
@@ -399,7 +399,7 @@ type DescribeInputSRTSettings struct {
 	// Latency.
 	Latency *int64 `json:"Latency,omitempty" name:"Latency"`
 
-	// Receipt latency.
+	// Receive latency.
 	RecvLatency *int64 `json:"RecvLatency,omitempty" name:"RecvLatency"`
 
 	// Peer latency.
@@ -435,7 +435,7 @@ type DescribeMediaConnectFlowResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Configuration information of flow.
+		// Configuration information of a flow.
 		Info *DescribeFlow `json:"Info,omitempty" name:"Info"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -475,7 +475,7 @@ type DescribeMediaConnectFlowsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Configuration information list of flow.
+		// Configuration information list of a flow.
 		Infos []*DescribeFlow `json:"Infos,omitempty" name:"Infos" list`
 
 		// Number of current pages.
@@ -586,7 +586,7 @@ type DescribeOutputSRTSettings struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Latency *int64 `json:"Latency,omitempty" name:"Latency"`
 
-	// Receipt latency.
+	// Receive latency.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RecvLatency *int64 `json:"RecvLatency,omitempty" name:"RecvLatency"`
 
@@ -765,7 +765,7 @@ type ModifyOutput struct {
 	// Output description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Output push protocol. Valid values: SRT|RTMP.
+	// Output push protocol. Valid values: SRT, RTMP.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Configuration of SRT push.

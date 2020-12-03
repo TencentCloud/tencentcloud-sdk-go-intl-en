@@ -59,7 +59,7 @@ type AddEcdnDomainRequest struct {
 	// Tag bound to a domain name.
 	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
 
-	// 
+	// WebSocket configuration.
 	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
 }
 
@@ -736,11 +736,12 @@ type DomainDetailInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Readonly *string `json:"Readonly,omitempty" name:"Readonly"`
 
-	// Domain name tag.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// Domain name tag
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
 
-	// 
+	// WebSocket configuration.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
 }
 
@@ -1250,6 +1251,9 @@ type UpdateDomainConfigRequest struct {
 
 	// Domain name acceleration region. Valid values: mainland (acceleration in Mainland China), overseas (acceleration outside Mainland China), global (global acceleration).
 	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// WebSocket configuration.
+	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {
@@ -1281,9 +1285,10 @@ func (r *UpdateDomainConfigResponse) FromJsonString(s string) error {
 
 type WebSocket struct {
 
-	// 
+	// WebSocket configuration switch, which can be `on` or `off`.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// 
+	// Sets timeout period in seconds. Maximum value: 65
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 }
