@@ -186,6 +186,69 @@ type AutoscalingAdded struct {
 	Total *int64 `json:"Total,omitempty" name:"Total"`
 }
 
+type CheckInstancesUpgradeAbleRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Specify the node list to check. If it’s not passed in, all nodes of the cluster will be checked.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+
+	// Upgrade type
+	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filtering
+	Filter []*Filter `json:"Filter,omitempty" name:"Filter" list`
+}
+
+func (r *CheckInstancesUpgradeAbleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CheckInstancesUpgradeAbleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CheckInstancesUpgradeAbleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The current minor version of cluster Master
+		ClusterVersion *string `json:"ClusterVersion,omitempty" name:"ClusterVersion"`
+
+		// The latest minor version of cluster Master corresponding major version
+		LatestVersion *string `json:"LatestVersion,omitempty" name:"LatestVersion"`
+
+		// List of nodes that can be upgraded
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		UpgradeAbleInstances []*UpgradeAbleInstancesItem `json:"UpgradeAbleInstances,omitempty" name:"UpgradeAbleInstances" list`
+
+		// Total number
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		Total *int64 `json:"Total,omitempty" name:"Total"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CheckInstancesUpgradeAbleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CheckInstancesUpgradeAbleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type Cluster struct {
 
 	// Cluster ID
@@ -2582,4 +2645,90 @@ type Taint struct {
 
 	// Effect of the taint
 	Effect *string `json:"Effect,omitempty" name:"Effect"`
+}
+
+type UpgradeAbleInstancesItem struct {
+
+	// Node ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The current version of the node
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// The latest minor version of the current version
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	LatestVersion *string `json:"LatestVersion,omitempty" name:"LatestVersion"`
+}
+
+type UpgradeClusterInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// create: starting an upgrade task
+	// pause: pausing the task
+	// resume: continuing the task
+	// abort: stopping the task
+	Operation *string `json:"Operation,omitempty" name:"Operation"`
+
+	// Upgrade type. It’s only required when `Operation` is set as `create`.
+	// reset: the reinstallation and upgrade of major version
+	// hot: the hot upgrade of minor version
+	// major: in-place upgrade of major version
+	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
+
+	// List of nodes that need to upgrade
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+
+	// This parameter is used when the node joins the cluster again. Refer to the API of creating one or more cluster nodes.
+	ResetParam *UpgradeNodeResetParam `json:"ResetParam,omitempty" name:"ResetParam"`
+
+	// Whether to skip the pre-upgrade check of the node
+	SkipPreCheck *bool `json:"SkipPreCheck,omitempty" name:"SkipPreCheck"`
+
+	// The maximum tolerable proportion of unavailable pods
+	MaxNotReadyPercent *float64 `json:"MaxNotReadyPercent,omitempty" name:"MaxNotReadyPercent"`
+}
+
+func (r *UpgradeClusterInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpgradeClusterInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeClusterInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpgradeClusterInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpgradeClusterInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeNodeResetParam struct {
+
+	// Additional parameters set for the instance
+	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
+
+	// Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Security and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
+	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
+
+	// Node login information. For now, it only supports Password or a single KeyIds
+	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
+
+	// Security group to which the instance belongs. This parameter can be obtained from the `sgId` field in the response of `DescribeSecurityGroups`. If this parameter is not specified, the default security group is bound. (Currently, you can only set a single sgId.)
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 }

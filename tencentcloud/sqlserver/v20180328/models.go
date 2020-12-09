@@ -195,7 +195,7 @@ type CreateBackupRequest struct {
 	// Instance ID in the format of mssql-i1z41iwd
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup name. If this parameter is left empty, a backup name in the format of "Instance ID_Backup start timestamp" will be automatically generated.
+	// Backup name. If this parameter is left empty, a backup name in the format of "[Instance ID]_[Backup start timestamp]" will be automatically generated.
 	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
 }
 
@@ -384,7 +384,7 @@ type CreateMigrationRequest struct {
 	// Database objects to be migrated. This parameter is not used for offline migration (SourceType=4 or SourceType=5)
 	MigrateDBSet []*MigrateDB `json:"MigrateDBSet,omitempty" name:"MigrateDBSet" list`
 
-	// Restore the databases listed in `ReNameRestoreDatabase` and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format. This parameter takes effect only when `SourceType=5`.
+	// Restore and rename the databases listed in `ReNameRestoreDatabase`. If this parameter is left empty, all restored databases will be renamed in the default format. This parameter takes effect only when `SourceType=5`.
 	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore" list`
 }
 
@@ -1191,6 +1191,9 @@ type DescribeProductConfigRequest struct {
 
 	// AZ ID in the format of ap-guangzhou-1
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The type of instances to be purchased. Valid values: HA (High-Availability Edition, including dual-server high availability and AlwaysOn cluster), RO (read-only replica), SI (Basic Edition)
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
 func (r *DescribeProductConfigRequest) ToJsonString() string {
@@ -2303,6 +2306,12 @@ type SpecInfo struct {
 
 	// Billing mode under this specification. POST: pay-as-you-go
 	PayModeStatus *string `json:"PayModeStatus,omitempty" name:"PayModeStatus"`
+
+	// Instance type. Valid values: HA (High-Availability Edition, including dual-server high availability and AlwaysOn cluster), RO (read-only replica), SI (Basic Edition)
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Whether multi-AZ deployment is supported. Valid values: MultiZones (only multi-AZ deployment is supported), SameZones (only single-AZ deployment is supported), ALL (both deployments are supported)
+	MultiZonesStatus *string `json:"MultiZonesStatus,omitempty" name:"MultiZonesStatus"`
 }
 
 type TerminateDBInstanceRequest struct {

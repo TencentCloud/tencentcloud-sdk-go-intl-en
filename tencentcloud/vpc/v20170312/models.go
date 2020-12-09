@@ -1313,7 +1313,7 @@ type CreateAndAttachNetworkInterfaceRequest struct {
 	// The subnet instance ID of the ENI, such as 'subnet-0ap8nwca'.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// The CVM instance ID.
+	// CVM instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// The information of the specified private IPs. You can specify a maximum of 10 IPs each time.
@@ -1476,7 +1476,7 @@ type CreateCcnRequest struct {
 	// The billing method. POSTPAID: postpaid by traffic. Default: POSTPAID.
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 
-	// The bandwidth limit type. OUTER_REGION_LIMIT: regional outbound limit. INTER_REGION_LIMIT: inter-regional limit. Default: OUTER_REGION_LIMIT.
+	// The bandwidth limit type. Valid values: OUTER_REGION_LIMIT: region outbound bandwidth limit; INTER_REGION_LIMIT: inter-region bandwidth limit. Default value: OUTER_REGION_LIMIT. Monthly-subscribed CCN instances only support inter-region bandwidth limit, while pay-as-you-go CCN instances support the both bandwidth limit types.
 	BandwidthLimitType *string `json:"BandwidthLimitType,omitempty" name:"BandwidthLimitType"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
@@ -2726,7 +2726,7 @@ type CvmInstance struct {
 	// Number of CPU cores in an instance (in core).
 	CPU *uint64 `json:"CPU,omitempty" name:"CPU"`
 
-	// Instance's memory capacity. Unit: GB.
+	// Instance’s memory capacity. Unit: GB.
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
 	// The creation time.
@@ -4867,6 +4867,46 @@ func (r *DescribeHaVipsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeIpGeolocationDatabaseUrlRequest struct {
+	*tchttp.BaseRequest
+
+	// Protocol type of the IP location database. Valid values: `ipv4` and `ipv6`.
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+func (r *DescribeIpGeolocationDatabaseUrlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIpGeolocationDatabaseUrlRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIpGeolocationDatabaseUrlResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Download link of the IP location database.
+		DownLoadUrl *string `json:"DownLoadUrl,omitempty" name:"DownLoadUrl"`
+
+		// Link expiration time in UTC format following the ISO8601 standard.
+		ExpiredAt *string `json:"ExpiredAt,omitempty" name:"ExpiredAt"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeIpGeolocationDatabaseUrlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIpGeolocationDatabaseUrlResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest struct {
 	*tchttp.BaseRequest
 
@@ -5186,15 +5226,14 @@ type DescribeNetworkInterfacesRequest struct {
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
 	// <li>subnet-id - String - (Filter condition) Subnet instance ID, such as `subnet-f49l6u0z`.</li>
 	// <li>network-interface-id - String - (Filter condition) ENI instance ID, such as `eni-5k56k7k7`.</li>
-	// <li>attachment.instance-id - String - (Filter condition) ID of the bound CVM instance, such as `ins-3nqpdn3i`.</li>
-	// <li>groups.security-group-id - String - (Filter condition) ID of the bound security group, such as `sg-f9ekbxeq`.</li>
+	// <li>attachment.instance-id - String - (Filter condition) CVM instance ID, such as `ins-3nqpdn3i`.</li>
+	// <li>groups.security-group-id - String - (Filter condition) Instance ID of the security group, such as `sg-f9ekbxeq`.</li>
 	// <li>network-interface-name - String - (Filter condition) ENI instance name.</li>
 	// <li>network-interface-description - String - (Filter condition) ENI instance description.</li>
-	// <li>address-ip - String - (Filter condition) Private IPv4 address. A single IP will be fuzzily matched with the suffix, while multiple IPs will be exactly matched. It can be used with `ip-exact-match` to query and exactly match a single IP.</li>
-	// <li>ip-exact-match - Boolean - (Filter condition) Exact match by private IPv4 address. The first value will be returned if multiple values are found.</li>
-	// <li>tag-key - String - Required: no - (Filter condition) Filter by tag key. See Example 2 for the detailed usage.</li>
-	// <li>tag:tag-key - String - Required: no - (Filter condition) Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
-	// <li>is-primary - Boolean - Required: no - (Filter condition) Filter based on whether it is a primary ENI. If the value is `true`, filter only the primary ENI. If the value is `false`, filter only the secondary ENI. If this parameter is not specified, filter the both.</li>
+	// <li>address-ip - String - (Filter condition) Private IPv4 address.</li>
+	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
+	// <li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
+	// <li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is ‘true’, filter only the primary ENI. If the value is ‘false’, filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Offset. Default value: 0.
@@ -6683,10 +6722,10 @@ type GatewayFlowMonitorDetail struct {
 	// Outbound packets.
 	OutPkg *uint64 `json:"OutPkg,omitempty" name:"OutPkg"`
 
-	// Inbound bandwidth, unit: `Byte`.
+	// Inbound traffic, in Byte.
 	InTraffic *uint64 `json:"InTraffic,omitempty" name:"InTraffic"`
 
-	// Outbound bandwidth, unit: `Byte`.
+	// Outbound traffic, in Byte.
 	OutTraffic *uint64 `json:"OutTraffic,omitempty" name:"OutTraffic"`
 }
 
@@ -7699,7 +7738,7 @@ type ModifyGatewayFlowQosRequest struct {
 	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
-	// Bandwidth limit value in Mbps. Valid values: >0: set the limit to the specified value. 0: block all traffic. -1: no bandwidth limit.
+	// Bandwidth limit value.
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
 	// CVM private IP addresses with limited bandwidth.
@@ -9142,6 +9181,9 @@ type ReplaceSecurityGroupPolicyRequest struct {
 
 	// Security group policy set object.
 	SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+
+	// (Optional) The old policy set of the security group, which is used for log records.
+	OriginalSecurityGroupPolicySet *SecurityGroupPolicySet `json:"OriginalSecurityGroupPolicySet,omitempty" name:"OriginalSecurityGroupPolicySet"`
 }
 
 func (r *ReplaceSecurityGroupPolicyRequest) ToJsonString() string {

@@ -833,7 +833,7 @@ func NewRecycleDBInstanceResponse() (response *RecycleDBInstanceResponse) {
     return
 }
 
-// This API is used to manually repossess a deactivated SQL Server instance.
+// This API is used to return a deactivated SQL Server instance.
 func (c *Client) RecycleDBInstance(request *RecycleDBInstanceRequest) (response *RecycleDBInstanceResponse, err error) {
     if request == nil {
         request = NewRecycleDBInstanceRequest()
@@ -983,7 +983,7 @@ func NewTerminateDBInstanceResponse() (response *TerminateDBInstanceResponse) {
     return
 }
 
-// This API is used to manually terminate a pay-as-you-go instance.
+// This API is used to isolate an instance to move it into a recycle bin.
 func (c *Client) TerminateDBInstance(request *TerminateDBInstanceRequest) (response *TerminateDBInstanceResponse, err error) {
     if request == nil {
         request = NewTerminateDBInstanceRequest()
