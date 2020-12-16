@@ -213,6 +213,185 @@ type AdvanceCacheRule struct {
 	CacheTime *int64 `json:"CacheTime,omitempty" name:"CacheTime"`
 }
 
+type AdvancedAuthentication struct {
+
+	// Hotlink protection configuration switch (which can be on or off). If it is enabled, only one mode can and must be configured, while other modes are null.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Timestamp hotlink protection advanced configuration mode A
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TypeA *AdvancedAuthenticationTypeA `json:"TypeA,omitempty" name:"TypeA"`
+
+	// Timestamp hotlink protection advanced configuration mode B
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TypeB *AdvancedAuthenticationTypeB `json:"TypeB,omitempty" name:"TypeB"`
+
+	// Timestamp hotlink protection advanced configuration mode C
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TypeC *AdvancedAuthenticationTypeC `json:"TypeC,omitempty" name:"TypeC"`
+
+	// Timestamp hotlink protection advanced configuration mode D
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TypeD *AdvancedAuthenticationTypeD `json:"TypeD,omitempty" name:"TypeD"`
+
+	// Timestamp hotlink protection advanced configuration mode E
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TypeE *AdvancedAuthenticationTypeE `json:"TypeE,omitempty" name:"TypeE"`
+
+	// Timestamp hotlink protection advanced configuration mode F
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TypeF *AdvancedAuthenticationTypeF `json:"TypeF,omitempty" name:"TypeF"`
+}
+
+type AdvancedAuthenticationTypeA struct {
+
+	// Key used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+	// Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
+
+	// Time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	TimeParam *string `json:"TimeParam,omitempty" name:"TimeParam"`
+
+	// Expiration time in seconds
+	ExpireTime *int64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Whether the expiration time parameter is required
+	ExpireTimeRequired *bool `json:"ExpireTimeRequired,omitempty" name:"ExpireTimeRequired"`
+
+	// URL composition, e.g., `${private_key}${schema}${host}${full_uri}`.
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Time format. Valid values: dec (decimal), hex (hexadecimal).
+	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+
+	// Status code returned when the authentication failed
+	FailCode *int64 `json:"FailCode,omitempty" name:"FailCode"`
+
+	// Status code returned when the URL expired
+	ExpireCode *int64 `json:"ExpireCode,omitempty" name:"ExpireCode"`
+
+	// List of URLs to be authenticated
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+
+	// Reserved field
+	Transformation *int64 `json:"Transformation,omitempty" name:"Transformation"`
+}
+
+type AdvancedAuthenticationTypeB struct {
+
+	// Alpha key name
+	KeyAlpha *string `json:"KeyAlpha,omitempty" name:"KeyAlpha"`
+
+	// Beta key name
+	KeyBeta *string `json:"KeyBeta,omitempty" name:"KeyBeta"`
+
+	// Gamma key name
+	KeyGamma *string `json:"KeyGamma,omitempty" name:"KeyGamma"`
+
+	// Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
+
+	// Time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	TimeParam *string `json:"TimeParam,omitempty" name:"TimeParam"`
+
+	// Expiration time in seconds
+	ExpireTime *int64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Time format. Valid values: dec (decimal), hex (hexadecimal).
+	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+
+	// Status code returned when the authentication failed
+	FailCode *int64 `json:"FailCode,omitempty" name:"FailCode"`
+
+	// Status code returned when the URL expired
+	ExpireCode *int64 `json:"ExpireCode,omitempty" name:"ExpireCode"`
+
+	// List of URLs to be authenticated
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+}
+
+type AdvancedAuthenticationTypeC struct {
+
+	// Access key
+	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
+
+	// Authentication key
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+}
+
+type AdvancedAuthenticationTypeD struct {
+
+	// Key used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+	// Alternative key used for authentication after the authentication key (`SecretKey`) failed
+	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
+
+	// Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
+
+	// Time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	TimeParam *string `json:"TimeParam,omitempty" name:"TimeParam"`
+
+	// Expiration time in seconds
+	ExpireTime *int64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Time format. Valid values: dec (decimal), hex (hexadecimal).
+	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+}
+
+type AdvancedAuthenticationTypeE struct {
+
+	// Key used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+	// Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
+
+	// ACL signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AclSignParam *string `json:"AclSignParam,omitempty" name:"AclSignParam"`
+
+	// Start time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	StartTimeParam *string `json:"StartTimeParam,omitempty" name:"StartTimeParam"`
+
+	// Expiration time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ExpireTimeParam *string `json:"ExpireTimeParam,omitempty" name:"ExpireTimeParam"`
+
+	// Time format (dec)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+}
+
+type AdvancedAuthenticationTypeF struct {
+
+	// Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
+
+	// Time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TimeParam *string `json:"TimeParam,omitempty" name:"TimeParam"`
+
+	// Transaction field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TransactionParam *string `json:"TransactionParam,omitempty" name:"TransactionParam"`
+
+	// CMK used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+	// Alternative key used for signature calculation, which is used after the CMK fails in authentication. It allows 6 to 32 bytes of letters and digits.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
+}
+
 type AdvancedCache struct {
 
 	// Cache expiration rule
@@ -1217,6 +1396,43 @@ func (r *DescribeCdnIpResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeCdnOriginIpRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeCdnOriginIpRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCdnOriginIpRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCdnOriginIpResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Intermediate node IP details
+		Ips []*OriginIp `json:"Ips,omitempty" name:"Ips" list`
+
+		// Number of intermediate node IPs
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCdnOriginIpResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCdnOriginIpResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeCertDomainsRequest struct {
 	*tchttp.BaseRequest
 
@@ -2129,8 +2345,8 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MaxAge *MaxAge `json:"MaxAge,omitempty" name:"MaxAge"`
 
-	// IPv6 configuration (in beta)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// IPv6 origin-pull configuration (in beta)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
 	// Backwards compatibility configuration (compatibility field for internal use)
@@ -2193,6 +2409,14 @@ type DetailDomain struct {
 	// Tag configuration
 	// Note: this field may return null, indicating that no valid value is obtained.
 	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
+
+	// Timestamp hotlink protection advanced configuration (allowlist feature)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AdvancedAuthentication *AdvancedAuthentication `json:"AdvancedAuthentication,omitempty" name:"AdvancedAuthentication"`
+
+	// Origin-pull authentication advanced configuration (allowlist feature)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	OriginAuthentication *OriginAuthentication `json:"OriginAuthentication,omitempty" name:"OriginAuthentication"`
 }
 
 type DisableCachesRequest struct {
@@ -3208,21 +3432,26 @@ type MaxAge struct {
 type MaxAgeRule struct {
 
 	// Rule types:
-	// `all`: effective for all files
-	// `file`: effective for specified file suffixes
-	// `directory`: effective for specified paths
-	// `path`: effective for specified absolute paths
+	// `all`: effective for all files.
+	// `file`: effective for specified file suffixes.
+	// `directory`: effective for specified paths.
+	// `path`: effective for specified absolute paths.
+	// `index`: effective for specified homepages.
 	MaxAgeType *string `json:"MaxAgeType,omitempty" name:"MaxAgeType"`
 
-	// Content for each MaxAgeType:
-	// For `all`, enter an asterisk (*).
-	// For `file`, enter the suffix, such as jpg, txt.
-	// For `directory`, enter the path, such as /xxx/test/.
-	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+	// Content for each `MaxAgeType`:
+	// For `all`, enter a wildcard `*`.
+	// For `file`, enter the suffix, e.g., `jpg` or `txt`.
+	// For `directory`, enter the path, e.g., `/xxx/test/`.
+	// For `path`, enter the absolute path, e.g., `/xxx/test.html`.
+	// For `index`, enter a forward slash `/`.
 	MaxAgeContents []*string `json:"MaxAgeContents,omitempty" name:"MaxAgeContents" list`
 
 	// MaxAge time (in seconds)
 	MaxAgeTime *int64 `json:"MaxAgeTime,omitempty" name:"MaxAgeTime"`
+
+	// 
+	FollowOrigin *string `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 }
 
 type Origin struct {
@@ -3286,6 +3515,30 @@ type Origin struct {
 	// Path-based origin-pull configuration rules
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	PathRules []*PathRule `json:"PathRules,omitempty" name:"PathRules" list`
+}
+
+type OriginAuthentication struct {
+
+	// Authentication switch, which can be on or off.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Authentication type configuration A
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TypeA *OriginAuthenticationTypeA `json:"TypeA,omitempty" name:"TypeA"`
+}
+
+type OriginAuthenticationTypeA struct {
+
+	// Key used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+}
+
+type OriginIp struct {
+
+	// Intermediate IP range/intermediate IP. The IP range information is returned by default.
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
 }
 
 type OriginPullOptimization struct {
@@ -3418,24 +3671,24 @@ type PathRule struct {
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Regex *bool `json:"Regex,omitempty" name:"Regex"`
 
-	// The matched URL path
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// Matched URL. Only URLs are supported, while parameters are not. The exact match is used by default. In regex match, up to 5 wildcards `*` are supported. The URL can contain up to 1,024 characters.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Path *string `json:"Path,omitempty" name:"Path"`
 
-	// Origin-pull server when the path matches. COS source with private read/write is not supported.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// Origin server when the path matches. COS origin with private read/write is not supported. The default origin server will be used by default when this field is left empty.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Origin *string `json:"Origin,omitempty" name:"Origin"`
 
-	// Origin-pull host when the path matches.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// Origin server host header when the path matches. The default `ServerName` will be used by default when this field is left empty.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ServerName *string `json:"ServerName,omitempty" name:"ServerName"`
 
-	// The region of origin server. Valid values: `CN` (mainland China), `OV` (outside mainland China)
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// Origin server region. Valid values: CN (the Chinese mainland), OV (outside the Chinese mainland).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginArea *string `json:"OriginArea,omitempty" name:"OriginArea"`
 
-	// Origin-pull URI path when the path matches.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// Origin server URI path when the path matches, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ForwardUri *string `json:"ForwardUri,omitempty" name:"ForwardUri"`
 
 	// Origin-pull header setting when the path matches.
@@ -3843,22 +4096,24 @@ type Revalidate struct {
 
 type RuleCache struct {
 
-	// Content for each CacheType:
-	// For `all`, enter an asterisk (*).
-	// For `file`, enter the suffix, such as jpg, txt.
-	// For `directory`, enter the path, such as /xxx/test/.
-	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
-	// For `index`, enter a backslash (/).
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Content for each `CacheType`:
+	// For `all`, enter a wildcard `*`.
+	// For `file`, enter the suffix, e.g., `jpg` or `txt`.
+	// For `directory`, enter the path, e.g., `/xxx/test/`.
+	// For `path`, enter the absolute path, e.g., `/xxx/test.html`.
+	// For `index`, enter a forward slash `/`.
+	// For `default`, enter `no max-age`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
 
 	// Rule types:
-	// `all`: effective for all files
-	// `file`: effective for specified file suffixes
-	// `directory`: effective for specified paths
-	// `path`: effective for specified absolute paths
-	// `index`: home page
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// `all`: effective for all files.
+	// `file`: effective for specified file suffixes.
+	// `directory`: effective for specified paths.
+	// `path`: effective for specified absolute paths.
+	// `index`: homepage.
+	// `default`: effective when the origin server does not have the `max-age` value.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
 	// Cache configuration
@@ -4384,6 +4639,12 @@ type UpdateDomainConfigRequest struct {
 
 	// Access port configuration
 	AccessPort []*int64 `json:"AccessPort,omitempty" name:"AccessPort" list`
+
+	// Timestamp hotlink protection advanced configuration (allowlist feature)
+	AdvancedAuthentication *AdvancedAuthentication `json:"AdvancedAuthentication,omitempty" name:"AdvancedAuthentication"`
+
+	// Origin-pull authentication advanced configuration (allowlist feature)
+	OriginAuthentication *OriginAuthentication `json:"OriginAuthentication,omitempty" name:"OriginAuthentication"`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {
@@ -4486,11 +4747,14 @@ type UrlRedirectRule struct {
 	// Redirect status code. Valid values: 301, 302
 	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitempty" name:"RedirectStatusCode"`
 
-	// Pattern of the URL to be matched, which can contain up to 1,024 characters. Full-path match and regex match are supported.
+	// URL to be matched. Only URLs are supported, while parameters are not. The exact match is used by default. In regex match, up to 5 wildcards `*` are supported. The URL can contain up to 1,024 characters.
 	Pattern *string `json:"Pattern,omitempty" name:"Pattern"`
 
-	// Target URL, which must begin with `/` and can contain up to 1,024 characters.
+	// Target URL, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
 	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
+
+	// 
+	RedirectHost *string `json:"RedirectHost,omitempty" name:"RedirectHost"`
 }
 
 type UserAgentFilter struct {

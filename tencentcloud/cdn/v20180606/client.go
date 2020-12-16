@@ -253,6 +253,31 @@ func (c *Client) DescribeCdnIp(request *DescribeCdnIpRequest) (response *Describ
     return
 }
 
+func NewDescribeCdnOriginIpRequest() (request *DescribeCdnOriginIpRequest) {
+    request = &DescribeCdnOriginIpRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DescribeCdnOriginIp")
+    return
+}
+
+func NewDescribeCdnOriginIpResponse() (response *DescribeCdnOriginIpResponse) {
+    response = &DescribeCdnOriginIpResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the IP information of CDN intermediate nodes. Note: the relevant allowlist needs to be enabled for this API.
+func (c *Client) DescribeCdnOriginIp(request *DescribeCdnOriginIpRequest) (response *DescribeCdnOriginIpResponse, err error) {
+    if request == nil {
+        request = NewDescribeCdnOriginIpRequest()
+    }
+    response = NewDescribeCdnOriginIpResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCertDomainsRequest() (request *DescribeCertDomainsRequest) {
     request = &DescribeCertDomainsRequest{
         BaseRequest: &tchttp.BaseRequest{},

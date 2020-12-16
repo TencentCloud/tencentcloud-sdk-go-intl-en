@@ -23,12 +23,14 @@ import (
 type LivenessCompareRequest struct {
 	*tchttp.BaseRequest
 
-	// Base64 value of a photo for face comparison;
-	// Base64-encoded image data is up to 3 MB. Only JPG and PNG formats are supported.
+	// Base64 string of the image for face comparison.
+	// The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
+	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
 
-	// Base64 value of a video for liveness detection;
-	// The size after Base64-encoding cannot exceed 5 MB. MP4, AVI, and FLV formats are supported.
+	// Base64 string of the video for liveness detection.
+	// The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
+	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
 	VideoBase64 *string `json:"VideoBase64,omitempty" name:"VideoBase64"`
 
 	// Liveness detection type. Valid values: LIP/ACTION/SILENT.
@@ -68,6 +70,9 @@ type LivenessCompareResponse struct {
 
 		// Service result description.
 		Description *string `json:"Description,omitempty" name:"Description"`
+
+		// 
+		BestFrameList []*string `json:"BestFrameList,omitempty" name:"BestFrameList" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

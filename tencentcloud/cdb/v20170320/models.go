@@ -56,25 +56,25 @@ type AddTimeWindowRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Time period available for maintenance on Monday in the format of 10:00-12:00. Each period lasts from half an hour to three hours, with the start time and end time aligned by half-hour. Up to two time periods can be set. The same rule applies below.
+	// Maintenance window on Monday. The format should be 10:00-12:00. You can set multiple time windows on a day. Each time window lasts from half an hour to three hours, and must start and end on the hour or half hour. At least one time window is required in a week. The same rule applies to the following parameters.
 	Monday []*string `json:"Monday,omitempty" name:"Monday" list`
 
-	// Maintenance time window on Tuesday
+	// Maintenance window on Tuesday. At least one time window is required in a week.
 	Tuesday []*string `json:"Tuesday,omitempty" name:"Tuesday" list`
 
-	// Maintenance time window on Wednesday
+	// Maintenance window on Wednesday. At least one time window is required in a week.
 	Wednesday []*string `json:"Wednesday,omitempty" name:"Wednesday" list`
 
-	// Maintenance time window on Thursday
+	// Maintenance window on Thursday. At least one time window is required in a week.
 	Thursday []*string `json:"Thursday,omitempty" name:"Thursday" list`
 
-	// Maintenance time window on Friday
+	// Maintenance window on Friday. At least one time window is required in a week.
 	Friday []*string `json:"Friday,omitempty" name:"Friday" list`
 
-	// Maintenance time window on Saturday
+	// Maintenance window on Saturday. At least one time window is required in a week.
 	Saturday []*string `json:"Saturday,omitempty" name:"Saturday" list`
 
-	// Maintenance time window on Sunday
+	// Maintenance window on Sunday. At least one time window is required in a week.
 	Sunday []*string `json:"Sunday,omitempty" name:"Sunday" list`
 }
 
@@ -302,6 +302,33 @@ type BinlogInfo struct {
 	BinlogFinishTime *string `json:"BinlogFinishTime,omitempty" name:"BinlogFinishTime"`
 }
 
+type CloneItem struct {
+
+	// ID of the original instance in a clone task
+	SrcInstanceId *string `json:"SrcInstanceId,omitempty" name:"SrcInstanceId"`
+
+	// ID of the cloned instance in a clone task
+	DstInstanceId *string `json:"DstInstanceId,omitempty" name:"DstInstanceId"`
+
+	// Clone task ID
+	CloneJobId *int64 `json:"CloneJobId,omitempty" name:"CloneJobId"`
+
+	// The policy used in a clone task. Valid values: `timepoint` (roll back to a specific point in time), `backupset` (roll back by using a specific backup file).
+	RollbackStrategy *string `json:"RollbackStrategy,omitempty" name:"RollbackStrategy"`
+
+	// The point in time to which the cloned instance will be rolled back
+	RollbackTargetTime *string `json:"RollbackTargetTime,omitempty" name:"RollbackTargetTime"`
+
+	// Task start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Task end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Task status. Valid values: `initial`, `running`, `wait_complete`, `success`, `failed`.
+	TaskStatus *string `json:"TaskStatus,omitempty" name:"TaskStatus"`
+}
+
 type CloseWanServiceRequest struct {
 	*tchttp.BaseRequest
 
@@ -465,6 +492,89 @@ func (r *CreateBackupResponse) ToJsonString() string {
 }
 
 func (r *CreateBackupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateCloneInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the instance to be cloned from
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// To roll back the cloned instance to a specific point in time, set this parameter to a value in the format of "yyyy-mm-dd hh:mm:ss".
+	SpecifiedRollbackTime *string `json:"SpecifiedRollbackTime,omitempty" name:"SpecifiedRollbackTime"`
+
+	// To roll back the cloned instance to a specific physical backup file, set this parameter to the ID of the physical backup file. The ID can be obtained by the [DescribeBackups](https://intl.cloud.tencent.com/document/api/236/15842?from_cn_redirect=1) API.
+	SpecifiedBackupId *int64 `json:"SpecifiedBackupId,omitempty" name:"SpecifiedBackupId"`
+
+	// VPC ID, which can be obtained by the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API. If this parameter is left empty, the classic network will be used by default.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// VPC subnet ID, which can be obtained by the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API. If `UniqVpcId` is set, `UniqSubnetId` will be required.
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Memory of the cloned instance in MB, which should be equal to (by default) or larger than that of the original instance
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Disk capacity of the cloned instance in GB, which should be equal to (by default) or larger than that of the original instance
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Name of the cloned instance
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Security group parameter, which can be obtained by the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
+
+	// Information of the cloned instance tag
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags" list`
+
+	// CPU core quantity of the cloned instance, which is equal to or larger than that of the original instance
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0.
+	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
+
+	// Multi-AZ or single-AZ. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0.
+	DeployMode *int64 `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// Availability zone information of replica 1 of the cloned instance, which is the same as the value of `Zone` of the original instance by default
+	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+
+	// Availability zone information of replica 2 of the cloned instance, 
+	// which is left empty by default. Specify this parameter when cloning a strong sync source instance.
+	BackupZone *string `json:"BackupZone,omitempty" name:"BackupZone"`
+
+	// Type of the cloned instance. Valid values: `HA` (High-Availability Edition), `EXCLUSIVE` (dedicated). Default value: `HA`.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+}
+
+func (r *CreateCloneInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateCloneInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateCloneInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// LimitAsync task request ID, which can be used to query the execution result of an async task
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateCloneInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateCloneInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1553,6 +1663,52 @@ func (r *DescribeBinlogsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeCloneListRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the original instance. This parameter is used to query the clone task list of a specific original instance.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Paginated query offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of results per page in paginated queries
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeCloneListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCloneListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCloneListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of results which meet the conditions
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Clone task list
+		Items []*CloneItem `json:"Items,omitempty" name:"Items" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCloneListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCloneListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeDBImportRecordsRequest struct {
 	*tchttp.BaseRequest
 
@@ -2313,7 +2469,7 @@ type DescribeErrorLogDataRequest struct {
 	// List of keywords to match. Up to 15 keywords are supported.
 	KeyWords []*string `json:"KeyWords,omitempty" name:"KeyWords" list`
 
-	// Number of results to be returned per page. Maximum value: 400.
+	// The number of results per page in paginated queries. Default value: 100. Maximum value: 400.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -2763,7 +2919,7 @@ type DescribeSlowLogDataRequest struct {
 	// Offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned at a time. Maximum value: 400.
+	// The number of results per page in paginated queries. Default value: 100. Maximum value: 400.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -5159,6 +5315,43 @@ func (r *StopDBImportJobResponse) ToJsonString() string {
 }
 
 func (r *StopDBImportJobResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StopRollbackRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the instance whose rollback task is canceled
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *StopRollbackRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StopRollbackRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StopRollbackResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task request ID
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *StopRollbackResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StopRollbackResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

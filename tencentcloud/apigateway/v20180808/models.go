@@ -306,6 +306,10 @@ type ApiInfo struct {
 	// Information of tags bound to API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// Environment information published for API.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Environments []*string `json:"Environments,omitempty" name:"Environments" list`
 }
 
 type ApiKey struct {
@@ -696,13 +700,13 @@ type CreateApiRequest struct {
 	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
-	// API backend service type. Valid values: HTTP, MOCK, TSF, CLB, SCF, WEBSOCKET, TARGET (in beta test).
+	// API backend service type. Valid values: HTTP, MOCK, TSF, SCF, WEBSOCKET, TARGET (in beta test).
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// API backend service timeout period in seconds.
 	ServiceTimeout *int64 `json:"ServiceTimeout,omitempty" name:"ServiceTimeout"`
 
-	// API frontend request type, such as HTTP, HTTPS, or HTTP and HTTPS.
+	// API frontend request protocol. Valid values: HTTPS, WEBSOCKET.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Request frontend configuration.
@@ -929,7 +933,7 @@ func (r *CreateIPStrategyResponse) FromJsonString(s string) error {
 type CreateServiceRequest struct {
 	*tchttp.BaseRequest
 
-	// Custom service name. If this parameter is left empty, the system will automatically generate a unique name.
+	// Custom service name.
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 
 	// Service frontend request type, such as `http`, `https`, and `http&https`.

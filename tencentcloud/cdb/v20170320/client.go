@@ -193,6 +193,31 @@ func (c *Client) CreateBackup(request *CreateBackupRequest) (response *CreateBac
     return
 }
 
+func NewCreateCloneInstanceRequest() (request *CreateCloneInstanceRequest) {
+    request = &CreateCloneInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "CreateCloneInstance")
+    return
+}
+
+func NewCreateCloneInstanceResponse() (response *CreateCloneInstanceResponse) {
+    response = &CreateCloneInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a clone of a specific instance, and roll back the clone by using a physical backup file of the instance or roll back the clone to a point in time.
+func (c *Client) CreateCloneInstance(request *CreateCloneInstanceRequest) (response *CreateCloneInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateCloneInstanceRequest()
+    }
+    response = NewCreateCloneInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBImportJobRequest() (request *CreateDBImportJobRequest) {
     request = &CreateDBImportJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -728,6 +753,31 @@ func (c *Client) DescribeBinlogs(request *DescribeBinlogsRequest) (response *Des
         request = NewDescribeBinlogsRequest()
     }
     response = NewDescribeBinlogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCloneListRequest() (request *DescribeCloneListRequest) {
+    request = &DescribeCloneListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeCloneList")
+    return
+}
+
+func NewDescribeCloneListResponse() (response *DescribeCloneListResponse) {
+    response = &DescribeCloneListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the clone task list of an instance.
+func (c *Client) DescribeCloneList(request *DescribeCloneListRequest) (response *DescribeCloneListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCloneListRequest()
+    }
+    response = NewDescribeCloneListResponse()
     err = c.Send(request, response)
     return
 }
@@ -2191,6 +2241,31 @@ func (c *Client) StopDBImportJob(request *StopDBImportJobRequest) (response *Sto
         request = NewStopDBImportJobRequest()
     }
     response = NewStopDBImportJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopRollbackRequest() (request *StopRollbackRequest) {
+    request = &StopRollbackRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "StopRollback")
+    return
+}
+
+func NewStopRollbackResponse() (response *StopRollbackResponse) {
+    response = &StopRollbackResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to cancel a rollback task in progress, and returns an async task ID. You can use the `DescribeAsyncRequestInfo` API to query the result of cancellation.
+func (c *Client) StopRollback(request *StopRollbackRequest) (response *StopRollbackResponse, err error) {
+    if request == nil {
+        request = NewStopRollbackRequest()
+    }
+    response = NewStopRollbackResponse()
     err = c.Send(request, response)
     return
 }

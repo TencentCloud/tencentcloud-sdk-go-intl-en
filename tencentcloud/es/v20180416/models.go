@@ -760,6 +760,40 @@ func (r *RestartInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type RestartKibanaRequest struct {
+	*tchttp.BaseRequest
+
+	// ES instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *RestartKibanaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RestartKibanaRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RestartKibanaResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RestartKibanaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RestartKibanaResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type RestartNodesRequest struct {
 	*tchttp.BaseRequest
 
@@ -864,7 +898,7 @@ type UpdateInstanceRequest struct {
 	// Number of nodes (2-50)
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
-	// Configuration item (JSON string)
+	// ES configuration item (JSON string)
 	EsConfig *string `json:"EsConfig,omitempty" name:"EsConfig"`
 
 	// Password of the default user 'elastic', which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
@@ -928,6 +962,9 @@ type UpdateInstanceRequest struct {
 
 	// Scenario template type. -1: not enabled; 1: general; 2: log; 3: search
 	SceneType *int64 `json:"SceneType,omitempty" name:"SceneType"`
+
+	// Kibana configuration item (JSON string)
+	KibanaConfig *string `json:"KibanaConfig,omitempty" name:"KibanaConfig"`
 }
 
 func (r *UpdateInstanceRequest) ToJsonString() string {
