@@ -2035,6 +2035,56 @@ func (c *Client) ModifyRoGroupInfo(request *ModifyRoGroupInfoRequest) (response 
     return
 }
 
+func NewModifyRoReplicationDelayRequest() (request *ModifyRoReplicationDelayRequest) {
+    request = &ModifyRoReplicationDelayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "ModifyRoReplicationDelay")
+    return
+}
+
+func NewModifyRoReplicationDelayResponse() (response *ModifyRoReplicationDelayResponse) {
+    response = &ModifyRoReplicationDelayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the replication delay of a delayed RO replica.
+func (c *Client) ModifyRoReplicationDelay(request *ModifyRoReplicationDelayRequest) (response *ModifyRoReplicationDelayResponse, err error) {
+    if request == nil {
+        request = NewModifyRoReplicationDelayRequest()
+    }
+    response = NewModifyRoReplicationDelayResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRoTypeRequest() (request *ModifyRoTypeRequest) {
+    request = &ModifyRoTypeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "ModifyRoType")
+    return
+}
+
+func NewModifyRoTypeResponse() (response *ModifyRoTypeResponse) {
+    response = &ModifyRoTypeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to change a general RO replica to delayed RO replica.
+func (c *Client) ModifyRoType(request *ModifyRoTypeRequest) (response *ModifyRoTypeResponse, err error) {
+    if request == nil {
+        request = NewModifyRoTypeRequest()
+    }
+    response = NewModifyRoTypeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyTimeWindowRequest() (request *ModifyTimeWindowRequest) {
     request = &ModifyTimeWindowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2220,6 +2270,31 @@ func (c *Client) StartBatchRollback(request *StartBatchRollbackRequest) (respons
     return
 }
 
+func NewStartDelayReplicationRequest() (request *StartDelayReplicationRequest) {
+    request = &StartDelayReplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "StartDelayReplication")
+    return
+}
+
+func NewStartDelayReplicationResponse() (response *StartDelayReplicationResponse) {
+    response = &StartDelayReplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to start delayed replication on a delayed RO replica.
+func (c *Client) StartDelayReplication(request *StartDelayReplicationRequest) (response *StartDelayReplicationResponse, err error) {
+    if request == nil {
+        request = NewStartDelayReplicationRequest()
+    }
+    response = NewStartDelayReplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopDBImportJobRequest() (request *StopDBImportJobRequest) {
     request = &StopDBImportJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2241,6 +2316,31 @@ func (c *Client) StopDBImportJob(request *StopDBImportJobRequest) (response *Sto
         request = NewStopDBImportJobRequest()
     }
     response = NewStopDBImportJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopDelayReplicationRequest() (request *StopDelayReplicationRequest) {
+    request = &StopDelayReplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "StopDelayReplication")
+    return
+}
+
+func NewStopDelayReplicationResponse() (response *StopDelayReplicationResponse) {
+    response = &StopDelayReplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to stop delayed replication on a delayed RO replica.
+func (c *Client) StopDelayReplication(request *StopDelayReplicationRequest) (response *StopDelayReplicationResponse, err error) {
+    if request == nil {
+        request = NewStopDelayReplicationRequest()
+    }
+    response = NewStopDelayReplicationResponse()
     err = c.Send(request, response)
     return
 }

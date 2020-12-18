@@ -578,6 +578,52 @@ type BandwidthAlert struct {
 	LastTriggerTime *string `json:"LastTriggerTime,omitempty" name:"LastTriggerTime"`
 }
 
+type BotCookie struct {
+
+	// Valid values: `on` and `off`.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Rule type, which can only be `all` currently.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Rule value. Valid value: `*`.
+	RuleValue []*string `json:"RuleValue,omitempty" name:"RuleValue" list`
+
+	// Action. Valid values: `monitor`, `intercept`, `redirect`, and `captcha`.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// Redirection target page
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
+
+	// Update time
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type BotJavaScript struct {
+
+	// Valid values: `on` and `off`.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Rule type, which can only be `file` currently.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Rule value. Valid values: `html` and `htm`.
+	RuleValue []*string `json:"RuleValue,omitempty" name:"RuleValue" list`
+
+	// Action. Valid values: `monitor`, `intercept`, `redirect`, and `captcha`.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// Redirection target page
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
+
+	// Update time
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
 type BriefDomain struct {
 
 	// Domain name ID
@@ -2889,6 +2935,10 @@ type Https struct {
 
 	// HSTS configuration
 	Hsts *Hsts `json:"Hsts,omitempty" name:"Hsts"`
+
+	// TLS version settings, which only support certain advanced domain names. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TlsVersion []*string `json:"TlsVersion,omitempty" name:"TlsVersion" list`
 }
 
 type ImageOptimization struct {
@@ -3441,16 +3491,19 @@ type MaxAgeRule struct {
 
 	// Content for each `MaxAgeType`:
 	// For `all`, enter a wildcard `*`.
-	// For `file`, enter the suffix, e.g., `jpg` or `txt`.
-	// For `directory`, enter the path, e.g., `/xxx/test/`.
-	// For `path`, enter the absolute path, e.g., `/xxx/test.html`.
+	// For `file`, enter a suffix, e.g., `jpg` or `txt`.
+	// For `directory`, enter a path, e.g., `/xxx/test/`.
+	// For `path`, enter an absolute path, e.g., `/xxx/test.html`.
 	// For `index`, enter a forward slash `/`.
+	// Note: the rule `all` cannot be deleted. It follows origin by default and can be modified.
 	MaxAgeContents []*string `json:"MaxAgeContents,omitempty" name:"MaxAgeContents" list`
 
 	// MaxAge time (in seconds)
+	// Note: the value `0` means not to cache.
 	MaxAgeTime *int64 `json:"MaxAgeTime,omitempty" name:"MaxAgeTime"`
 
-	// 
+	// Whether to follow the origin server. Valid values: `on` and `off`. If it's on, `MaxAgeTime` is ignored.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	FollowOrigin *string `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 }
 
@@ -3667,11 +3720,13 @@ type OverseaConfig struct {
 
 type PathRule struct {
 
-	// Whether regex match is used.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// Whether to enable wildcard match (`*`).
+	// false: disable
+	// true: enable
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Regex *bool `json:"Regex,omitempty" name:"Regex"`
 
-	// Matched URL. Only URLs are supported, while parameters are not. The exact match is used by default. In regex match, up to 5 wildcards `*` are supported. The URL can contain up to 1,024 characters.
+	// Matched URL. Only URLs are supported, while parameters are not. The exact match is used by default. If wildcard match is enabled, up to 5 wildcards are supported. The URL can contain up to 1,024 characters.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Path *string `json:"Path,omitempty" name:"Path"`
 
@@ -3683,11 +3738,14 @@ type PathRule struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ServerName *string `json:"ServerName,omitempty" name:"ServerName"`
 
-	// Origin server region. Valid values: CN (the Chinese mainland), OV (outside the Chinese mainland).
+	// Origin server region. Valid values: `CN` and `OV`.
+	// CN: the Chinese mainland
+	// OV: outside the Chinese mainland
+	// Default value: `CN`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginArea *string `json:"OriginArea,omitempty" name:"OriginArea"`
 
-	// Origin server URI path when the path matches, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
+	// Origin server URI path when the path matches, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the match path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ForwardUri *string `json:"ForwardUri,omitempty" name:"ForwardUri"`
 
@@ -4149,6 +4207,158 @@ type RuleQueryString struct {
 	// Array of included/excluded query strings (separated by ';')
 	// Note: this field may return null, indicating that no valid value is obtained.
 	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type ScdnAclConfig struct {
+
+	// Whether to enable. Valid values: `on` and `off`.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// ACL rule group, which is required when the access control is on.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ScriptData []*ScdnAclGroup `json:"ScriptData,omitempty" name:"ScriptData" list`
+
+	// Error page configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ErrorPage *ScdnErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
+}
+
+type ScdnAclGroup struct {
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Specific configurations
+	Configure []*ScdnAclRule `json:"Configure,omitempty" name:"Configure" list`
+
+	// Rule action, which is generally `refuse`.
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// Whether the rule is effective. Valid values: `active` and `inactive`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
+type ScdnAclRule struct {
+
+	// Match keywords. Valid values: `params`, `url`, `ip`, `referer`, and `user-agent`.
+	MatchKey *string `json:"MatchKey,omitempty" name:"MatchKey"`
+
+	// Logical operator. Valid values: `exclude`, `include`, `notequal`, `equal`, `len-less`, `len-equal`, and `len-more`.
+	LogiOperator *string `json:"LogiOperator,omitempty" name:"LogiOperator"`
+
+	// Match value
+	MatchValue *string `json:"MatchValue,omitempty" name:"MatchValue"`
+}
+
+type ScdnBotConfig struct {
+
+	// Valid values: `on` and `off`.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Bot cookie policy
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BotCookie []*BotCookie `json:"BotCookie,omitempty" name:"BotCookie" list`
+
+	// Bot JS policy
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BotJavaScript []*BotJavaScript `json:"BotJavaScript,omitempty" name:"BotJavaScript" list`
+}
+
+type ScdnCCRules struct {
+
+	// Rule types:
+	// `all`: effective for all files.
+	// `file`: effective for specified file suffixes.
+	// `directory`: effective for specified paths.
+	// `path`: effective for specified absolute paths.
+	// `index`: effective for web homepages and root directories.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Rule value (blocking condition)
+	RuleValue []*string `json:"RuleValue,omitempty" name:"RuleValue" list`
+
+	// IP access limit rule
+	Qps *uint64 `json:"Qps,omitempty" name:"Qps"`
+
+	// Detection granularity
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DetectionTime *uint64 `json:"DetectionTime,omitempty" name:"DetectionTime"`
+
+	// Frequency threshold
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FrequencyLimit *uint64 `json:"FrequencyLimit,omitempty" name:"FrequencyLimit"`
+
+	// Whether to block or redirect requests from suspicious IPs. Valid values: `on` and `off`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PunishmentSwitch *string `json:"PunishmentSwitch,omitempty" name:"PunishmentSwitch"`
+
+	// Suspicious IP restriction duration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PunishmentTime *uint64 `json:"PunishmentTime,omitempty" name:"PunishmentTime"`
+
+	// Action. Valid values: `intercept` and `redirect`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// The redirection target URL used when the `Action` is `redirect`
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
+}
+
+type ScdnConfig struct {
+
+	// Valid values: `on` and `off`.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Custom CC attack defense rule
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Rules []*ScdnCCRules `json:"Rules,omitempty" name:"Rules" list`
+}
+
+type ScdnDdosConfig struct {
+
+	// Whether to enable DDoS defense. Valid values: `on` and `off`.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type ScdnErrorPage struct {
+
+	// Status code
+	RedirectCode *int64 `json:"RedirectCode,omitempty" name:"RedirectCode"`
+
+	// Redirection URL
+	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
+}
+
+type ScdnWafConfig struct {
+
+	// Whether to enable WAF. Valid values: `on` and `off`.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// WAF protection mode. Valid values: `intercept` and `observe`. Default value: `intercept`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Mode *string `json:"Mode,omitempty" name:"Mode"`
+
+	// Redirection error page
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ErrorPage *ScdnErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
+
+	// Whether to enable Web shell blocking. Valid values: `on` and `off`. Default value: `off`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	WebShellSwitch *string `json:"WebShellSwitch,omitempty" name:"WebShellSwitch"`
+
+	// Attack blocking rules
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Rules []*ScdnWafRule `json:"Rules,omitempty" name:"Rules" list`
+}
+
+type ScdnWafRule struct {
+
+	// Attack type
+	AttackType *string `json:"AttackType,omitempty" name:"AttackType"`
+
+	// Defense action. Valid value: `observe`.
+	Operate *string `json:"Operate,omitempty" name:"Operate"`
 }
 
 type SchemeKey struct {
@@ -4711,6 +4921,58 @@ func (r *UpdatePayTypeResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type UpdateScdnDomainRequest struct {
+	*tchttp.BaseRequest
+
+	// Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// WAF configuration
+	Waf *ScdnWafConfig `json:"Waf,omitempty" name:"Waf"`
+
+	// Custom defense policy configuration
+	Acl *ScdnAclConfig `json:"Acl,omitempty" name:"Acl"`
+
+	// CC attack defense configurations. CC attack defense is enabled by default.
+	CC *ScdnConfig `json:"CC,omitempty" name:"CC"`
+
+	// DDoS defense configuration. DDoS defense is enabled by default.
+	Ddos *ScdnDdosConfig `json:"Ddos,omitempty" name:"Ddos"`
+
+	// Bot defense configuration
+	Bot *ScdnBotConfig `json:"Bot,omitempty" name:"Bot"`
+}
+
+func (r *UpdateScdnDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateScdnDomainRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateScdnDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Result of the request. `Success` indicates that the configurations are updated.
+		Result *string `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateScdnDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateScdnDomainResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type UrlRecord struct {
 
 	// Status (disable: blocked; enable: unblocked)
@@ -4753,7 +5015,8 @@ type UrlRedirectRule struct {
 	// Target URL, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
 	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
 
-	// 
+	// Target host. It should be a standard domain name starting with `http://` or `https://`. If it is left empty, “http://[current domain name]” will be used by default.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	RedirectHost *string `json:"RedirectHost,omitempty" name:"RedirectHost"`
 }
 

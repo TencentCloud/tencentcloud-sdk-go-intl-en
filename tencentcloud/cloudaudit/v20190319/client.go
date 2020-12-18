@@ -43,310 +43,202 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
-func NewCreateAuditRequest() (request *CreateAuditRequest) {
-    request = &CreateAuditRequest{
+func NewCreateRecorderRequest() (request *CreateRecorderRequest) {
+    request = &CreateRecorderRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "CreateAudit")
+    request.Init().WithApiInfo("cloudaudit", APIVersion, "CreateRecorder")
     return
 }
 
-func NewCreateAuditResponse() (response *CreateAuditResponse) {
-    response = &CreateAuditResponse{
+func NewCreateRecorderResponse() (response *CreateRecorderResponse) {
+    response = &CreateRecorderResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// Parameter requirements:
-// 1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `cosBucketName` are required.
-// 2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
-// 3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
-// 4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
-func (c *Client) CreateAudit(request *CreateAuditRequest) (response *CreateAuditResponse, err error) {
+// This API is used to create resource recorders to detect and record resource configuration changes.
+func (c *Client) CreateRecorder(request *CreateRecorderRequest) (response *CreateRecorderResponse, err error) {
     if request == nil {
-        request = NewCreateAuditRequest()
+        request = NewCreateRecorderRequest()
     }
-    response = NewCreateAuditResponse()
+    response = NewCreateRecorderResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDeleteAuditRequest() (request *DeleteAuditRequest) {
-    request = &DeleteAuditRequest{
+func NewDeleteRecorderRequest() (request *DeleteRecorderRequest) {
+    request = &DeleteRecorderRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "DeleteAudit")
+    request.Init().WithApiInfo("cloudaudit", APIVersion, "DeleteRecorder")
     return
 }
 
-func NewDeleteAuditResponse() (response *DeleteAuditResponse) {
-    response = &DeleteAuditResponse{
+func NewDeleteRecorderResponse() (response *DeleteRecorderResponse) {
+    response = &DeleteRecorderResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// This API is used to delete a tracking set.
-func (c *Client) DeleteAudit(request *DeleteAuditRequest) (response *DeleteAuditResponse, err error) {
+// This API is used to delete resource recorders. After deletion, resource configuration changes will not be recorded.
+func (c *Client) DeleteRecorder(request *DeleteRecorderRequest) (response *DeleteRecorderResponse, err error) {
     if request == nil {
-        request = NewDeleteAuditRequest()
+        request = NewDeleteRecorderRequest()
     }
-    response = NewDeleteAuditResponse()
+    response = NewDeleteRecorderResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeAuditRequest() (request *DescribeAuditRequest) {
-    request = &DescribeAuditRequest{
+func NewDescribeDiscoveredResourceRequest() (request *DescribeDiscoveredResourceRequest) {
+    request = &DescribeDiscoveredResourceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "DescribeAudit")
+    request.Init().WithApiInfo("cloudaudit", APIVersion, "DescribeDiscoveredResource")
     return
 }
 
-func NewDescribeAuditResponse() (response *DescribeAuditResponse) {
-    response = &DescribeAuditResponse{
+func NewDescribeDiscoveredResourceResponse() (response *DescribeDiscoveredResourceResponse) {
+    response = &DescribeDiscoveredResourceResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// This API is used to query the details of a tracking set.
-func (c *Client) DescribeAudit(request *DescribeAuditRequest) (response *DescribeAuditResponse, err error) {
+// This API is used to view the basic information of discovered resources.
+func (c *Client) DescribeDiscoveredResource(request *DescribeDiscoveredResourceRequest) (response *DescribeDiscoveredResourceResponse, err error) {
     if request == nil {
-        request = NewDescribeAuditRequest()
+        request = NewDescribeDiscoveredResourceRequest()
     }
-    response = NewDescribeAuditResponse()
+    response = NewDescribeDiscoveredResourceResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewGetAttributeKeyRequest() (request *GetAttributeKeyRequest) {
-    request = &GetAttributeKeyRequest{
+func NewDescribeRecorderRequest() (request *DescribeRecorderRequest) {
+    request = &DescribeRecorderRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "GetAttributeKey")
+    request.Init().WithApiInfo("cloudaudit", APIVersion, "DescribeRecorder")
     return
 }
 
-func NewGetAttributeKeyResponse() (response *GetAttributeKeyResponse) {
-    response = &GetAttributeKeyResponse{
+func NewDescribeRecorderResponse() (response *DescribeRecorderResponse) {
+    response = &DescribeRecorderResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// This API is used to query the valid values range of `AttributeKey`.
-func (c *Client) GetAttributeKey(request *GetAttributeKeyRequest) (response *GetAttributeKeyResponse, err error) {
+// This API is used to display current configurations and status of a recorder.
+func (c *Client) DescribeRecorder(request *DescribeRecorderRequest) (response *DescribeRecorderResponse, err error) {
     if request == nil {
-        request = NewGetAttributeKeyRequest()
+        request = NewDescribeRecorderRequest()
     }
-    response = NewGetAttributeKeyResponse()
+    response = NewDescribeRecorderResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewInquireAuditCreditRequest() (request *InquireAuditCreditRequest) {
-    request = &InquireAuditCreditRequest{
+func NewGetConfigurationItemsRequest() (request *GetConfigurationItemsRequest) {
+    request = &GetConfigurationItemsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "InquireAuditCredit")
+    request.Init().WithApiInfo("cloudaudit", APIVersion, "GetConfigurationItems")
     return
 }
 
-func NewInquireAuditCreditResponse() (response *InquireAuditCreditResponse) {
-    response = &InquireAuditCreditResponse{
+func NewGetConfigurationItemsResponse() (response *GetConfigurationItemsResponse) {
+    response = &GetConfigurationItemsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// This API is used to query the number of tracking sets that can be created.
-func (c *Client) InquireAuditCredit(request *InquireAuditCreditRequest) (response *InquireAuditCreditResponse, err error) {
+// This API is used to get the list of resource configuration items and display resource configuration changes in chronological order.
+func (c *Client) GetConfigurationItems(request *GetConfigurationItemsRequest) (response *GetConfigurationItemsResponse, err error) {
     if request == nil {
-        request = NewInquireAuditCreditRequest()
+        request = NewGetConfigurationItemsRequest()
     }
-    response = NewInquireAuditCreditResponse()
+    response = NewGetConfigurationItemsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewListAuditsRequest() (request *ListAuditsRequest) {
-    request = &ListAuditsRequest{
+func NewListDiscoveredResourcesRequest() (request *ListDiscoveredResourcesRequest) {
+    request = &ListDiscoveredResourcesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "ListAudits")
+    request.Init().WithApiInfo("cloudaudit", APIVersion, "ListDiscoveredResources")
     return
 }
 
-func NewListAuditsResponse() (response *ListAuditsResponse) {
-    response = &ListAuditsResponse{
+func NewListDiscoveredResourcesResponse() (response *ListDiscoveredResourcesResponse) {
+    response = &ListDiscoveredResourcesResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// This API is used to query the summary of tracking sets.
-func (c *Client) ListAudits(request *ListAuditsRequest) (response *ListAuditsResponse, err error) {
+// This API is used to view the list of discovered resources.
+func (c *Client) ListDiscoveredResources(request *ListDiscoveredResourcesRequest) (response *ListDiscoveredResourcesResponse, err error) {
     if request == nil {
-        request = NewListAuditsRequest()
+        request = NewListDiscoveredResourcesRequest()
     }
-    response = NewListAuditsResponse()
+    response = NewListDiscoveredResourcesResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewListCmqEnableRegionRequest() (request *ListCmqEnableRegionRequest) {
-    request = &ListCmqEnableRegionRequest{
+func NewListSupportResourceTypesRequest() (request *ListSupportResourceTypesRequest) {
+    request = &ListSupportResourceTypesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "ListCmqEnableRegion")
+    request.Init().WithApiInfo("cloudaudit", APIVersion, "ListSupportResourceTypes")
     return
 }
 
-func NewListCmqEnableRegionResponse() (response *ListCmqEnableRegionResponse) {
-    response = &ListCmqEnableRegionResponse{
+func NewListSupportResourceTypesResponse() (response *ListSupportResourceTypesResponse) {
+    response = &ListSupportResourceTypesResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// This API is used to query CloudAudit-enabled CMQ AZs.
-func (c *Client) ListCmqEnableRegion(request *ListCmqEnableRegionRequest) (response *ListCmqEnableRegionResponse, err error) {
+// This API is used to query the list of all CFA supported resource types.
+func (c *Client) ListSupportResourceTypes(request *ListSupportResourceTypesRequest) (response *ListSupportResourceTypesResponse, err error) {
     if request == nil {
-        request = NewListCmqEnableRegionRequest()
+        request = NewListSupportResourceTypesRequest()
     }
-    response = NewListCmqEnableRegionResponse()
+    response = NewListSupportResourceTypesResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewListCosEnableRegionRequest() (request *ListCosEnableRegionRequest) {
-    request = &ListCosEnableRegionRequest{
+func NewUpdateRecorderRequest() (request *UpdateRecorderRequest) {
+    request = &UpdateRecorderRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "ListCosEnableRegion")
+    request.Init().WithApiInfo("cloudaudit", APIVersion, "UpdateRecorder")
     return
 }
 
-func NewListCosEnableRegionResponse() (response *ListCosEnableRegionResponse) {
-    response = &ListCosEnableRegionResponse{
+func NewUpdateRecorderResponse() (response *UpdateRecorderResponse) {
+    response = &UpdateRecorderResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// This API is used to query CloudAudit-enabled COS AZs.
-func (c *Client) ListCosEnableRegion(request *ListCosEnableRegionRequest) (response *ListCosEnableRegionResponse, err error) {
+// This API is used to modify the resources to monitor, recorder name, and other recorder configurations.
+func (c *Client) UpdateRecorder(request *UpdateRecorderRequest) (response *UpdateRecorderResponse, err error) {
     if request == nil {
-        request = NewListCosEnableRegionRequest()
+        request = NewUpdateRecorderRequest()
     }
-    response = NewListCosEnableRegionResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewLookUpEventsRequest() (request *LookUpEventsRequest) {
-    request = &LookUpEventsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "LookUpEvents")
-    return
-}
-
-func NewLookUpEventsResponse() (response *LookUpEventsResponse) {
-    response = &LookUpEventsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// This API is used to search for operation logs to help query relevant operation information.
-func (c *Client) LookUpEvents(request *LookUpEventsRequest) (response *LookUpEventsResponse, err error) {
-    if request == nil {
-        request = NewLookUpEventsRequest()
-    }
-    response = NewLookUpEventsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewStartLoggingRequest() (request *StartLoggingRequest) {
-    request = &StartLoggingRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "StartLogging")
-    return
-}
-
-func NewStartLoggingResponse() (response *StartLoggingResponse) {
-    response = &StartLoggingResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// This API is used to enable a tracking set.
-func (c *Client) StartLogging(request *StartLoggingRequest) (response *StartLoggingResponse, err error) {
-    if request == nil {
-        request = NewStartLoggingRequest()
-    }
-    response = NewStartLoggingResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewStopLoggingRequest() (request *StopLoggingRequest) {
-    request = &StopLoggingRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "StopLogging")
-    return
-}
-
-func NewStopLoggingResponse() (response *StopLoggingResponse) {
-    response = &StopLoggingResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// This API is used to disable a tracking set.
-func (c *Client) StopLogging(request *StopLoggingRequest) (response *StopLoggingResponse, err error) {
-    if request == nil {
-        request = NewStopLoggingRequest()
-    }
-    response = NewStopLoggingResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewUpdateAuditRequest() (request *UpdateAuditRequest) {
-    request = &UpdateAuditRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "UpdateAudit")
-    return
-}
-
-func NewUpdateAuditResponse() (response *UpdateAuditResponse) {
-    response = &UpdateAuditResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// Parameter requirements:
-// 1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `cosBucketName` are required.
-// 2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
-// 3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
-// 4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
-func (c *Client) UpdateAudit(request *UpdateAuditRequest) (response *UpdateAuditResponse, err error) {
-    if request == nil {
-        request = NewUpdateAuditRequest()
-    }
-    response = NewUpdateAuditResponse()
+    response = NewUpdateRecorderResponse()
     err = c.Send(request, response)
     return
 }

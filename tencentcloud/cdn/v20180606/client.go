@@ -1080,3 +1080,28 @@ func (c *Client) UpdatePayType(request *UpdatePayTypeRequest) (response *UpdateP
     err = c.Send(request, response)
     return
 }
+
+func NewUpdateScdnDomainRequest() (request *UpdateScdnDomainRequest) {
+    request = &UpdateScdnDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "UpdateScdnDomain")
+    return
+}
+
+func NewUpdateScdnDomainResponse() (response *UpdateScdnDomainResponse) {
+    response = &UpdateScdnDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify security configurations of SCDN acceleration domain names.
+func (c *Client) UpdateScdnDomain(request *UpdateScdnDomainRequest) (response *UpdateScdnDomainResponse, err error) {
+    if request == nil {
+        request = NewUpdateScdnDomainRequest()
+    }
+    response = NewUpdateScdnDomainResponse()
+    err = c.Send(request, response)
+    return
+}

@@ -129,7 +129,7 @@ func (r *AutoRewriteResponse) FromJsonString(s string) error {
 
 type Backend struct {
 
-	// Real server type. Value range: CVM, ENI (coming soon)
+	// Real server type. Valid values: CVM, ENI.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Unique ID of a real server, which can be obtained from the unInstanceId field in the return of the DescribeInstances API
@@ -665,14 +665,23 @@ type CreateLoadBalancerRequest struct {
 	// Tags a CLB instance when purchasing it
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
 
-	// 
+	// Applies for CLB instances for a specified VIP
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// 
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
 	// Exclusive cluster information.
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Whether Binding IPs of other VPCs feature switch
+	SnatPro *bool `json:"SnatPro,omitempty" name:"SnatPro"`
+
+	// Creates `SnatIp` when the binding IPs of other VPCs feature is enabled
+	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps" list`
 
 	// Tag for the STGW exclusive cluster.
 	ClusterTag *string `json:"ClusterTag,omitempty" name:"ClusterTag"`
@@ -2519,8 +2528,8 @@ type LoadBalancer struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-	// CLB instance billing mode
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Billing mode of CLB instance. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay as you go).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
 
 	// CLB instance network attributes
@@ -2597,6 +2606,10 @@ type LoadBalancer struct {
 	// If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with an IPv4 and an IPv6 CVM instance simultaneously.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MixIpTarget *bool `json:"MixIpTarget,omitempty" name:"MixIpTarget"`
+
+	// Availability zone of a VPC-based private network CLB instance
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Zones []*string `json:"Zones,omitempty" name:"Zones" list`
 }
 
 type LoadBalancerDetail struct {
@@ -3840,23 +3853,25 @@ type TagInfo struct {
 type Target struct {
 
 	// Listening port of a real server
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: this parameter is required when binding a CVM or ENI.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
 	// Real server type. Value range: CVM (Cloud Virtual Machine), ENI (Elastic Network Interface). This parameter does not take effect currently as an input parameter.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Unique ID of a CVM instance, which needs to be passed in when binding a CVM instance and can be obtained from the InstanceId field in the return of the DescribeInstances API.
-	// Note: Either InstanceId or EniIp must be passed in.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Unique ID of a CVM instance, which is required when binding a CVM instance. It can be obtained from the `InstanceId` field in the response of the `DescribeInstances` API.
+	// Note: either `InstanceId` or `EniIp` must be passed in.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Forwarding weight of a real server. Value range: [0, 100]. Default value: 10.
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 
-	// This parameter must be passed in when you bind an ENI, which represents the IP address of the ENI. The ENI has to be bound to a CVM instance first before it can be bound to a CLB instance. Note: Either InstanceId or EniIp must be passed in. To bind an ENI, you need to submit a ticket for application first.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// IP of an ENI, which is required when binding an ENI. To bind an ENI with a CLB, you must bind it with a CVM first.
+	// Note: either `InstanceId` or `EniIp` must be passed in. Binding ENI is now only available to beta users. Please submit a ticket to apply for it if necessary. 
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	EniIp *string `json:"EniIp,omitempty" name:"EniIp"`
 }
 

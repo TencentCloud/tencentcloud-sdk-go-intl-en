@@ -20,689 +20,523 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
-type AttributeKeyDetail struct {
+type ConfigurationItems struct {
 
-	// Tag
-	Label *string `json:"Label,omitempty" name:"Label"`
+	// Time of getting a configuration item
+	ConfigurationItemCaptureTime *string `json:"ConfigurationItemCaptureTime,omitempty" name:"ConfigurationItemCaptureTime"`
 
-	// Input box type
-	LabelType *string `json:"LabelType,omitempty" name:"LabelType"`
+	// Resource relationship list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Relationships *string `json:"Relationships,omitempty" name:"Relationships"`
 
-	// Display sort order
-	Order *int64 `json:"Order,omitempty" name:"Order"`
+	// This parameter takes effect only when `DiffMode` is set to `true`. When the input parameter `ChronologicalOrder` of the `GetConfigurationItems` API is set to `Forward`, details of the configuration item before the first one (if not a creation configuration item) will be returned. When this parameter is set to `Reverse`, details of the configuration item after the last one (if not a resource deletion configuration item) will be returned.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	LastItemInfo *string `json:"LastItemInfo,omitempty" name:"LastItemInfo"`
 
-	// Initial display
-	Starter *string `json:"Starter,omitempty" name:"Starter"`
+	// List of events associated with the configuration changes
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RelatedEvents []*RelatedEvent `json:"RelatedEvents,omitempty" name:"RelatedEvents" list`
 
-	// `AttributeKey` value
-	Value *string `json:"Value,omitempty" name:"Value"`
+	// Resource type
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Configuration item ID
+	ConfigurationStateId *string `json:"ConfigurationStateId,omitempty" name:"ConfigurationStateId"`
+
+	// Resource creation time
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceCreateTime *string `json:"ResourceCreateTime,omitempty" name:"ResourceCreateTime"`
+
+	// CFA version
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// Resource region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// 
+	Configuration *string `json:"Configuration,omitempty" name:"Configuration"`
+
+	// Resource name
+	ResourceAlias *string `json:"ResourceAlias,omitempty" name:"ResourceAlias"`
+
+	// Configuration item status. Valid values: OK, ResourceDiscovered, ResourceNotRecorded, ResourceDeleted, ResourceDeletedNotRecorded.
+	ConfigurationItemStatus *string `json:"ConfigurationItemStatus,omitempty" name:"ConfigurationItemStatus"`
 }
 
-type AuditSummary struct {
-
-	// Tracking set name
-	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
-
-	// Tracking set status. Valid values: 1: enabled, 0: disabled
-	AuditStatus *int64 `json:"AuditStatus,omitempty" name:"AuditStatus"`
-
-	// COS bucket name
-	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
-
-	// Log prefix
-	LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
-}
-
-type CmqRegionInfo struct {
-
-	// CMQ region
-	CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
-
-	// Region description
-	CmqRegionName *string `json:"CmqRegionName,omitempty" name:"CmqRegionName"`
-}
-
-type CosRegionInfo struct {
-
-	// COS region
-	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
-
-	// Region description
-	CosRegionName *string `json:"CosRegionName,omitempty" name:"CosRegionName"`
-}
-
-type CreateAuditRequest struct {
+type CreateRecorderRequest struct {
 	*tchttp.BaseRequest
 
-	// Tracking set name, which can contain 3–128 ASCII letters (a–z; A–Z), digits (0–9), and underscores (_).
-	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
+	// Role name authorized to CFA
+	Role *string `json:"Role,omitempty" name:"Role"`
 
-	// User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
-	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
+	// Whether to select all supported resource types. Valid values: true (default), false.
+	AllSupported *bool `json:"AllSupported,omitempty" name:"AllSupported"`
 
-	// COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
-	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
+	// Whether to enable the resource recorder. Valid values: true (default), false.
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
 
-	// Whether to create a COS bucket. Valid values: 1: yes; 0: no.
-	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitempty" name:"IsCreateNewBucket"`
-
-	// Whether to enable CMQ message notification. Valid values: 1: yes; 0: no. Currently, only CMQ is supported for message queue services. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
-	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
-
-	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
-	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitempty" name:"ReadWriteAttribute"`
-
-	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
-	CmqQueueName *string `json:"CmqQueueName,omitempty" name:"CmqQueueName"`
-
-	// Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
-	CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
-
-	// Whether to create a queue. Valid values: 1: yes; 0: no. This field is required if the value of `IsEnableCmqNotify` is 1.
-	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitempty" name:"IsCreateNewQueue"`
-
-	// Whether to enable KMS encryption. Valid values: 1: yes, 0: no. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
-	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitempty" name:"IsEnableKmsEncry"`
-
-	// Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained via the `ListKeyAliasByRegion` API. CloudAudit will not verify the validity of the `KeyId`. Please enter it with caution to avoid consequent data loss.
-	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
-
-	// KMS region. Currently supported regions can be obtained via the `ListKmsEnableRegion` API. This must be the same as the COS region.
-	KmsRegion *string `json:"KmsRegion,omitempty" name:"KmsRegion"`
-
-	// Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9). It can be left empty and is set to the account ID by default.
-	LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
+	// Resource recorder name. Default name: default.
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
-func (r *CreateAuditRequest) ToJsonString() string {
+func (r *CreateRecorderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *CreateAuditRequest) FromJsonString(s string) error {
+func (r *CreateRecorderRequest) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateAuditResponse struct {
+type CreateRecorderResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Indicates if the creation was successful
-		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
+		// Whether the recorder was created successfully
+		IsSuccess *bool `json:"IsSuccess,omitempty" name:"IsSuccess"`
 
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *CreateAuditResponse) ToJsonString() string {
+func (r *CreateRecorderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *CreateAuditResponse) FromJsonString(s string) error {
+func (r *CreateRecorderResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteAuditRequest struct {
+type DeleteRecorderRequest struct {
 	*tchttp.BaseRequest
-
-	// Tracking set name
-	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
 }
 
-func (r *DeleteAuditRequest) ToJsonString() string {
+func (r *DeleteRecorderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *DeleteAuditRequest) FromJsonString(s string) error {
+func (r *DeleteRecorderRequest) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteAuditResponse struct {
+type DeleteRecorderResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Indicates if the deletion was successful
-		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
+		// Whether the recorder was deleted successfully
+		IsSuccess *bool `json:"IsSuccess,omitempty" name:"IsSuccess"`
 
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *DeleteAuditResponse) ToJsonString() string {
+func (r *DeleteRecorderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *DeleteAuditResponse) FromJsonString(s string) error {
+func (r *DeleteRecorderResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeAuditRequest struct {
+type DescribeDiscoveredResourceRequest struct {
 	*tchttp.BaseRequest
-
-	// Tracking set name
-	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
-}
-
-func (r *DescribeAuditRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *DescribeAuditRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAuditResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Tracking set name.
-		AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
-
-		// Tracking set status. Valid values: 1: enabled, 0: disabled.
-		AuditStatus *int64 `json:"AuditStatus,omitempty" name:"AuditStatus"`
-
-		// Queue name.
-		CmqQueueName *string `json:"CmqQueueName,omitempty" name:"CmqQueueName"`
-
-		// Queue region.
-		CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
-
-		// COS bucket name.
-		CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
-
-		// COS bucket region.
-		CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
-
-		// Whether to enable CMQ message notification. Valid values: 1: yes; 0: no.
-		IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
-
-		// Whether to enable KMS encryption. Valid values: 1: yes, 0: no. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
-		IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitempty" name:"IsEnableKmsEncry"`
-
-		// Globally unique CMK ID.
-		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
-
-		// CMK alias.
-		KmsAlias *string `json:"KmsAlias,omitempty" name:"KmsAlias"`
-
-		// KMS region.
-		KmsRegion *string `json:"KmsRegion,omitempty" name:"KmsRegion"`
-
-		// Log prefix.
-		LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
-
-		// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write)
-		ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitempty" name:"ReadWriteAttribute"`
-
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeAuditResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *DescribeAuditResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type Event struct {
-
-	// Resource pair
-	Resources *Resource `json:"Resources,omitempty" name:"Resources"`
-
-	// Root account ID
-	AccountID *int64 `json:"AccountID,omitempty" name:"AccountID"`
-
-	// Log details
-	CloudAuditEvent *string `json:"CloudAuditEvent,omitempty" name:"CloudAuditEvent"`
-
-	// Authentication error code
-	ErrorCode *int64 `json:"ErrorCode,omitempty" name:"ErrorCode"`
-
-	// Log ID
-	EventId *string `json:"EventId,omitempty" name:"EventId"`
-
-	// Event name
-	EventName *string `json:"EventName,omitempty" name:"EventName"`
-
-	// Chinese description of event name (please use this field as required; if you are using other languages, ignore this field)
-	EventNameCn *string `json:"EventNameCn,omitempty" name:"EventNameCn"`
-
-	// Event region
-	EventRegion *string `json:"EventRegion,omitempty" name:"EventRegion"`
-
-	// Request source
-	EventSource *string `json:"EventSource,omitempty" name:"EventSource"`
-
-	// Event time
-	EventTime *string `json:"EventTime,omitempty" name:"EventTime"`
 
 	// Request ID
-	RequestID *string `json:"RequestID,omitempty" name:"RequestID"`
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+}
+
+func (r *DescribeDiscoveredResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDiscoveredResourceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDiscoveredResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Last update time
+		LastUpdateTime *string `json:"LastUpdateTime,omitempty" name:"LastUpdateTime"`
+
+		// Resource type
+		ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+		// Resource ID
+		ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+		// Resource creation time
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+		// Tag details
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Tag *string `json:"Tag,omitempty" name:"Tag"`
+
+		// Current resource configuration details
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ResourceInfo *string `json:"ResourceInfo,omitempty" name:"ResourceInfo"`
+
+		// Resource region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+		// Resource alias
+		ResourceAlias *string `json:"ResourceAlias,omitempty" name:"ResourceAlias"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDiscoveredResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDiscoveredResourceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRecorderRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeRecorderRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRecorderRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRecorderResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether to enable the recorder. Valid values: true (enable), false (disable).
+		Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+		// Recorder name
+		Name *string `json:"Name,omitempty" name:"Name"`
+
+		// Last error message of the recorder, which corresponds to `LastErrorCode`.
+		LastErrorMessage *string `json:"LastErrorMessage,omitempty" name:"LastErrorMessage"`
+
+		// The status of the recorder when it recorded information last time. Valid values: PENDING, OK, FAILED.
+		LastStatus *string `json:"LastStatus,omitempty" name:"LastStatus"`
+
+		// List of the resource types monitored by the recorder
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ResourceTypes []*RecordResourceType `json:"ResourceTypes,omitempty" name:"ResourceTypes" list`
+
+		// Time when the recorder was enabled last time
+		LastStartTime *string `json:"LastStartTime,omitempty" name:"LastStartTime"`
+
+		// Last error code of the recorder
+		LastErrorCode *string `json:"LastErrorCode,omitempty" name:"LastErrorCode"`
+
+		// Time when the recorder was disabled last time
+		LastStopTime *string `json:"LastStopTime,omitempty" name:"LastStopTime"`
+
+		// Whether to monitor all currently supported resource types. Valid values: true (yes), false (no).
+		AllSupported *bool `json:"AllSupported,omitempty" name:"AllSupported"`
+
+		// Recorder creation time
+		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+		// Role name authorized to CFA
+		Role *string `json:"Role,omitempty" name:"Role"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRecorderResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeRecorderResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetConfigurationItemsRequest struct {
+	*tchttp.BaseRequest
+
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Chronological order. Valid values: Reverse, Forward (default).
+	ChronologicalOrder *string `json:"ChronologicalOrder,omitempty" name:"ChronologicalOrder"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Whether to enable `DiffMode`. Valid values: true, false (default).
+	DiffMode *bool `json:"DiffMode,omitempty" name:"DiffMode"`
+
+	// Returned number. default: 10, maximum: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+func (r *GetConfigurationItemsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetConfigurationItemsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetConfigurationItemsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Resource configuration item list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ConfigurationItems []*ConfigurationItems `json:"ConfigurationItems,omitempty" name:"ConfigurationItems" list`
+
+		// Total number
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetConfigurationItemsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetConfigurationItemsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListDiscoveredResourcesRequest struct {
+	*tchttp.BaseRequest
+
+	// Resource type
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Returned number. default: 20, maximum: 200.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Resource region
 	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
 
-	// Chinese description of resource type (please use this field as required; if you are using other languages, ignore this field)
-	ResourceTypeCn *string `json:"ResourceTypeCn,omitempty" name:"ResourceTypeCn"`
+	// Offset. Default: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Certificate ID
-	SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
-
-	// Source IP
-	SourceIPAddress *string `json:"SourceIPAddress,omitempty" name:"SourceIPAddress"`
-
-	// Username
-	Username *string `json:"Username,omitempty" name:"Username"`
+	// Whether the resource is deleted
+	IsDeleted *bool `json:"IsDeleted,omitempty" name:"IsDeleted"`
 }
 
-type GetAttributeKeyRequest struct {
-	*tchttp.BaseRequest
-
-	// Website type. Valid values: zh, en. If this parameter is left empty, `zh` will be used by default
-	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
-}
-
-func (r *GetAttributeKeyRequest) ToJsonString() string {
+func (r *ListDiscoveredResourcesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *GetAttributeKeyRequest) FromJsonString(s string) error {
+func (r *ListDiscoveredResourcesRequest) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type GetAttributeKeyResponse struct {
+type ListDiscoveredResourcesResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Valid values range of `AttributeKey`
-		AttributeKeyDetails []*AttributeKeyDetail `json:"AttributeKeyDetails,omitempty" name:"AttributeKeyDetails" list`
+		// Total number
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
+		// Resource list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Resources []*Resources `json:"Resources,omitempty" name:"Resources" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *GetAttributeKeyResponse) ToJsonString() string {
+func (r *ListDiscoveredResourcesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *GetAttributeKeyResponse) FromJsonString(s string) error {
+func (r *ListDiscoveredResourcesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type InquireAuditCreditRequest struct {
+type ListSupportResourceTypesRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *InquireAuditCreditRequest) ToJsonString() string {
+func (r *ListSupportResourceTypesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *InquireAuditCreditRequest) FromJsonString(s string) error {
+func (r *ListSupportResourceTypesRequest) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type InquireAuditCreditResponse struct {
+type ListSupportResourceTypesResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Number of tracking sets that can be created
-		AuditAmount *int64 `json:"AuditAmount,omitempty" name:"AuditAmount"`
+		// List of supported resource types
+		ResourceTypes []*SupportResourceType `json:"ResourceTypes,omitempty" name:"ResourceTypes" list`
 
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *InquireAuditCreditResponse) ToJsonString() string {
+func (r *ListSupportResourceTypesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *InquireAuditCreditResponse) FromJsonString(s string) error {
+func (r *ListSupportResourceTypesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type ListAuditsRequest struct {
-	*tchttp.BaseRequest
-}
+type RecordResourceType struct {
 
-func (r *ListAuditsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
+	// CAM policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 
-func (r *ListAuditsRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
+	// Modification time of resource types for monitoring
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-type ListAuditsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Set of queried tracking set summaries
-		AuditSummarys []*AuditSummary `json:"AuditSummarys,omitempty" name:"AuditSummarys" list`
-
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ListAuditsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *ListAuditsResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type ListCmqEnableRegionRequest struct {
-	*tchttp.BaseRequest
-
-	// Website type. Valid values: zh (Chinese mainland); en (outside Chinese mainland). Default value: zh
-	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
-}
-
-func (r *ListCmqEnableRegionRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *ListCmqEnableRegionRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type ListCmqEnableRegionResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// CloudAudit-enabled CMQ AZs
-		EnableRegions []*CmqRegionInfo `json:"EnableRegions,omitempty" name:"EnableRegions" list`
-
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ListCmqEnableRegionResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *ListCmqEnableRegionResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type ListCosEnableRegionRequest struct {
-	*tchttp.BaseRequest
-
-	// Website type. Valid values: zh (Chinese mainland); en (outside Chinese mainland). Default value: zh
-	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
-}
-
-func (r *ListCosEnableRegionRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *ListCosEnableRegionRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type ListCosEnableRegionResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// CloudAudit-enabled COS AZs
-		EnableRegions []*CosRegionInfo `json:"EnableRegions,omitempty" name:"EnableRegions" list`
-
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ListCosEnableRegionResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *ListCosEnableRegionResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type LookUpEventsRequest struct {
-	*tchttp.BaseRequest
-
-	// End time
-	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Start time
-	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
-
-	// Search criteria
-	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitempty" name:"LookupAttributes" list`
-
-	// Maximum number of logs to be returned
-	MaxResults *int64 `json:"MaxResults,omitempty" name:"MaxResults"`
-
-	// CloudAudit mode. Valid values: standard, quick. Default value: standard
-	Mode *string `json:"Mode,omitempty" name:"Mode"`
-
-	// Credential for viewing more logs
-	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
-}
-
-func (r *LookUpEventsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *LookUpEventsRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type LookUpEventsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Logset
-		Events []*Event `json:"Events,omitempty" name:"Events" list`
-
-		// Whether the logset ends
-		ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
-
-		// Credential for viewing more logs
-		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
-
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *LookUpEventsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *LookUpEventsResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type LookupAttribute struct {
-
-	// Valid values of `AttributeKey`: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, EventId
-	AttributeKey *string `json:"AttributeKey,omitempty" name:"AttributeKey"`
-
-	// AttributeValue
-	AttributeValue *string `json:"AttributeValue,omitempty" name:"AttributeValue"`
-}
-
-type Resource struct {
-
-	// Resource name
-	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
+	// Service
+	Service *string `json:"Service,omitempty" name:"Service"`
 
 	// Resource type
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Service name
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Resource type name
+	ResourceTypeName *string `json:"ResourceTypeName,omitempty" name:"ResourceTypeName"`
 }
 
-type StartLoggingRequest struct {
+type RelatedEvent struct {
+
+	// Event name
+	EventName *string `json:"EventName,omitempty" name:"EventName"`
+
+	// Operation time
+	EventTime *string `json:"EventTime,omitempty" name:"EventTime"`
+
+	// ID of the operator account
+	OperateUin *uint64 `json:"OperateUin,omitempty" name:"OperateUin"`
+
+	// CloudAudit event ID
+	EventReqId *string `json:"EventReqId,omitempty" name:"EventReqId"`
+}
+
+type Resources struct {
+
+	// Resource type
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Resource creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Resource region
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Resource alias
+	ResourceAlias *string `json:"ResourceAlias,omitempty" name:"ResourceAlias"`
+
+	// Whether the resource is deleted
+	IsDeleted *bool `json:"IsDeleted,omitempty" name:"IsDeleted"`
+}
+
+type SupportResourceType struct {
+
+	// Resource type
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// CAM policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Service name
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Resource type name in Chinese
+	ResourceTypeName *string `json:"ResourceTypeName,omitempty" name:"ResourceTypeName"`
+
+	// Service
+	Service *string `json:"Service,omitempty" name:"Service"`
+}
+
+type UpdateRecorderRequest struct {
 	*tchttp.BaseRequest
 
-	// Tracking set name
-	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
+	// Whether to select all currently supported resource types
+	AllSupported *bool `json:"AllSupported,omitempty" name:"AllSupported"`
+
+	// Whether to enable the recorder. Valid values: true (enable), false (disable).
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+	// Recorder name after modification
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
-func (r *StartLoggingRequest) ToJsonString() string {
+func (r *UpdateRecorderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *StartLoggingRequest) FromJsonString(s string) error {
+func (r *UpdateRecorderRequest) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
-type StartLoggingResponse struct {
+type UpdateRecorderResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Indicates if the tracking set was enabled successfully
-		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
+		// Whether the modification is successful
+		IsSuccess *bool `json:"IsSuccess,omitempty" name:"IsSuccess"`
 
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *StartLoggingResponse) ToJsonString() string {
+func (r *UpdateRecorderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
-func (r *StartLoggingResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type StopLoggingRequest struct {
-	*tchttp.BaseRequest
-
-	// Tracking set name
-	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
-}
-
-func (r *StopLoggingRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *StopLoggingRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type StopLoggingResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Indicates if the tracking set was disabled successfully
-		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
-
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *StopLoggingResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *StopLoggingResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type UpdateAuditRequest struct {
-	*tchttp.BaseRequest
-
-	// Tracking set name
-	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
-
-	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
-	CmqQueueName *string `json:"CmqQueueName,omitempty" name:"CmqQueueName"`
-
-	// Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
-	CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
-
-	// User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
-	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
-
-	// COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
-	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
-
-	// Whether to create a COS bucket. Valid values: 1: yes; 0: no.
-	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitempty" name:"IsCreateNewBucket"`
-
-	// Whether to create a queue. Valid values: 1: yes; 0: no. This field is required if the value of `IsEnableCmqNotify` is 1.
-	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitempty" name:"IsCreateNewQueue"`
-
-	// Whether to enable CMQ message notification. Valid values: 1: yes; 0: no. Currently, only CMQ is supported for message queue services. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
-	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
-
-	// Whether to enable KMS encryption. Valid values: 1: yes, 0: no. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
-	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitempty" name:"IsEnableKmsEncry"`
-
-	// Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained via the `ListKeyAliasByRegion` API. CloudAudit will not verify the validity of the `KeyId`. Please enter it with caution to avoid consequent data loss.
-	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
-
-	// KMS region. Currently supported regions can be obtained via the `ListKmsEnableRegion` API. This must be the same as the COS region.
-	KmsRegion *string `json:"KmsRegion,omitempty" name:"KmsRegion"`
-
-	// Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9).
-	LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
-
-	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
-	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitempty" name:"ReadWriteAttribute"`
-}
-
-func (r *UpdateAuditRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *UpdateAuditRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type UpdateAuditResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Indicates if the update was completed successfully
-		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
-
-		// Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *UpdateAuditResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *UpdateAuditResponse) FromJsonString(s string) error {
+func (r *UpdateRecorderResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }

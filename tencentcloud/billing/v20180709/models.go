@@ -467,14 +467,14 @@ func (r *DescribeBillResourceSummaryResponse) FromJsonString(s string) error {
 type DescribeBillSummaryByPayModeRequest struct {
 	*tchttp.BaseRequest
 
-	// Query bill data user's UIN
-	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
-
-	// Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
+	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// Only ending in the current month is supported, and it must be the same month as the BeginTime. For example, 2018-09-30 23:59:59.
+	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Query bill data user's UIN
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
 func (r *DescribeBillSummaryByPayModeRequest) ToJsonString() string {
@@ -514,14 +514,14 @@ func (r *DescribeBillSummaryByPayModeResponse) FromJsonString(s string) error {
 type DescribeBillSummaryByProductRequest struct {
 	*tchttp.BaseRequest
 
-	// Queries bill data user's UIN
-	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
-
-	// Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
+	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// Only ending in the current month is supported, and it must be the same month as the BeginTime. For example, 2018-09-30 23:59:59.
+	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Queries bill data user's UIN
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
 func (r *DescribeBillSummaryByProductRequest) ToJsonString() string {
@@ -565,14 +565,14 @@ func (r *DescribeBillSummaryByProductResponse) FromJsonString(s string) error {
 type DescribeBillSummaryByProjectRequest struct {
 	*tchttp.BaseRequest
 
-	// Queries bill data user's UIN
-	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
-
-	// Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
+	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// Only ending in the current month is supported, and it must be the same month as the BeginTime. For example, 2018-09-30 23:59:59.
+	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Queries bill data user's UIN
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
 func (r *DescribeBillSummaryByProjectRequest) ToJsonString() string {
@@ -612,14 +612,14 @@ func (r *DescribeBillSummaryByProjectResponse) FromJsonString(s string) error {
 type DescribeBillSummaryByRegionRequest struct {
 	*tchttp.BaseRequest
 
-	// Queries bill data user's UIN
-	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
-
-	// Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
+	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// Only ending in the current month is supported, and it must be the same month as the BeginTime. For example, 2018-09-30 23:59:59.
+	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Queries bill data user's UIN
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
 func (r *DescribeBillSummaryByRegionRequest) ToJsonString() string {
@@ -659,17 +659,17 @@ func (r *DescribeBillSummaryByRegionResponse) FromJsonString(s string) error {
 type DescribeBillSummaryByTagRequest struct {
 	*tchttp.BaseRequest
 
-	// Payer UIN
-	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
-
-	// Currently the period to be queried must start from a time point in the current month, and the starting time and the end time must be in the same month. Example: 2018-09-01 00:00:00.
+	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// Currently the period to be queried must end at a time point in the current month, and the starting time and the end time must be in the same month. Example: 2018-09-30 23:59:59.
+	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Cost allocation tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Payer UIN
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
 func (r *DescribeBillSummaryByTagRequest) ToJsonString() string {

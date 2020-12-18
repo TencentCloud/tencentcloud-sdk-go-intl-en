@@ -4435,6 +4435,86 @@ func (r *ModifyRoGroupInfoResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyRoReplicationDelayRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Replication delay in seconds. Value range: 1 to 259200.
+	ReplicationDelay *int64 `json:"ReplicationDelay,omitempty" name:"ReplicationDelay"`
+}
+
+func (r *ModifyRoReplicationDelayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyRoReplicationDelayRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyRoReplicationDelayResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyRoReplicationDelayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyRoReplicationDelayResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyRoTypeRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The original type of an RO replica. Valid values: `NORMAL` (do not support delayed replication), `DELAY_REPLICATION` (support delayed replication).
+	SrcRoInstType *string `json:"SrcRoInstType,omitempty" name:"SrcRoInstType"`
+
+	// The target type of an RO replica. Valid values: `NORMAL` (do not support delayed replication), `DELAY_REPLICATION` (support delayed replication).
+	DstRoInstType *string `json:"DstRoInstType,omitempty" name:"DstRoInstType"`
+
+	// Replication delay in seconds. This parameter is required when a regular RO replica is switched to a delayed one. Value range: 1 to 259200.
+	ReplicationDelay *int64 `json:"ReplicationDelay,omitempty" name:"ReplicationDelay"`
+}
+
+func (r *ModifyRoTypeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyRoTypeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyRoTypeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyRoTypeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyRoTypeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyTimeWindowRequest struct {
 	*tchttp.BaseRequest
 
@@ -5284,6 +5364,53 @@ func (r *StartBatchRollbackResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type StartDelayReplicationRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Delayed replication mode. Valid values: `DEFAULT` (replicate according to the specified replication delay), `GTID` (replicate according to the specified GTID), `DUE_TIME` (replicate according to the specified point in time).
+	DelayReplicationType *string `json:"DelayReplicationType,omitempty" name:"DelayReplicationType"`
+
+	// Specified point in time. Default value: 0. The maximum value cannot be later than the current time.
+	DueTime *int64 `json:"DueTime,omitempty" name:"DueTime"`
+
+	// Specified GITD. This parameter is required when the delayed replication mode is `GTID`.
+	Gtid *string `json:"Gtid,omitempty" name:"Gtid"`
+}
+
+func (r *StartDelayReplicationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StartDelayReplicationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StartDelayReplicationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Delayed replication task ID. This parameter will be returned if `DelayReplicationType` is not `DEFAULT`. It can be used to view the status of the delayed replication task.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *StartDelayReplicationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StartDelayReplicationResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type StopDBImportJobRequest struct {
 	*tchttp.BaseRequest
 
@@ -5315,6 +5442,40 @@ func (r *StopDBImportJobResponse) ToJsonString() string {
 }
 
 func (r *StopDBImportJobResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StopDelayReplicationRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *StopDelayReplicationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StopDelayReplicationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StopDelayReplicationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *StopDelayReplicationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StopDelayReplicationResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
