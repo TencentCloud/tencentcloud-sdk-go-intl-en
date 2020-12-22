@@ -253,10 +253,10 @@ type CreateFunctionRequest struct {
 	// Name of the new function. The name can contain 2 to 60 characters, including English letters, digits, hyphens (-), and underscores (_). The name must start with a letter and cannot end with a hyphen or underscore.
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
-	// Function code. Note: You cannot specify `Cos` and `ZipFile` at the same time.
+	// Function code. Note: `COS`, `ZipFile`, and `DemoId` cannot be specified at the same time.
 	Code *Code `json:"Code,omitempty" name:"Code"`
 
-	// Name of the handler, which is in the 'file name.handler name' form. Use periods (.) to separate a file name and function name. The file name and function name must start and end with a letter and can contain 2 to 60 characters, including letters, digits, hyphens (-), and underscores (_).
+	// Function handler name. It supports the format of "file name.handler name" where the file name and handler name are separated with a "." (for Java, it is in the format of "package name.class name::handler name"). File and handler names can contain 2–60 letters, digits, underscores, and dashes and must start and end with letters
 	Handler *string `json:"Handler,omitempty" name:"Handler"`
 
 	// Function description. It can contain up to 1,000 characters including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
@@ -271,7 +271,7 @@ type CreateFunctionRequest struct {
 	// Function environment variable
 	Environment *Environment `json:"Environment,omitempty" name:"Environment"`
 
-	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Golang1 and Java8. Default value: Python2.7
+	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime. Default value: Python2.7
 	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
 
 	// Function VPC configuration
@@ -292,7 +292,7 @@ type CreateFunctionRequest struct {
 	// Function type. The default value is `Event`. Enter `Event` if you need to create a trigger function. Enter `HTTP` if you need to create an HTTP function service.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Code source, including ZipFile, Cos, Demo, TempCos, and Git. This field is required if the source is Git.
+	// Code source. Valid values: ZipFile, Cos, Demo
 	CodeSource *string `json:"CodeSource,omitempty" name:"CodeSource"`
 
 	// List of layer versions to be associate with the function. Layers will be overwritten sequentially in the order in the list.
@@ -705,7 +705,7 @@ type Function struct {
 	// Namespace
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
-	// Function status
+	// Function status. For valid values and status change process, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1)
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Function status details
@@ -719,6 +719,17 @@ type Function struct {
 
 	// Function type. The value is `HTTP` or `Event`.
 	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Cause of function failure
+	StatusReasons []*StatusReason `json:"StatusReasons,omitempty" name:"StatusReasons" list`
+
+	// Sum of provisioned concurrence memory for all function versions
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TotalProvisionedConcurrencyMem *uint64 `json:"TotalProvisionedConcurrencyMem,omitempty" name:"TotalProvisionedConcurrencyMem"`
+
+	// Reserved memory for function concurrence
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ReservedConcurrencyMem *uint64 `json:"ReservedConcurrencyMem,omitempty" name:"ReservedConcurrencyMem"`
 }
 
 type FunctionLog struct {
@@ -1921,6 +1932,15 @@ type Trigger struct {
 
 	// Trigger status
 	AvailableStatus *string `json:"AvailableStatus,omitempty" name:"AvailableStatus"`
+
+	// Minimum resource ID of trigger
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Trigger-Function binding status
+	BindStatus *string `json:"BindStatus,omitempty" name:"BindStatus"`
+
+	// Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console
+	TriggerAttribute *string `json:"TriggerAttribute,omitempty" name:"TriggerAttribute"`
 }
 
 type TriggerInfo struct {
@@ -1952,6 +1972,15 @@ type TriggerInfo struct {
 
 	// Trigger last modified time
 	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
+
+	// Minimum resource ID of trigger
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Trigger-Function binding status
+	BindStatus *string `json:"BindStatus,omitempty" name:"BindStatus"`
+
+	// Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console
+	TriggerAttribute *string `json:"TriggerAttribute,omitempty" name:"TriggerAttribute"`
 }
 
 type UpdateAliasRequest struct {
@@ -2036,7 +2065,7 @@ type UpdateFunctionCodeRequest struct {
 	// Function code
 	Code *Code `json:"Code,omitempty" name:"Code"`
 
-	// Source mode of code. Valid values: `ZipFile`, `Cos`, `Inline`, `TempCos` and `Git`. This field must be specified if the source is Git
+	// Code source. Valid values: ZipFile, Cos, Inline
 	CodeSource *string `json:"CodeSource,omitempty" name:"CodeSource"`
 }
 
@@ -2082,7 +2111,7 @@ type UpdateFunctionConfigurationRequest struct {
 	// Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
 	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 
-	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Golang1 and Java8
+	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime
 	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
 
 	// Function environment variable
@@ -2103,7 +2132,7 @@ type UpdateFunctionConfigurationRequest struct {
 	// CLS Topic ID to which logs are shipped
 	ClsTopicId *string `json:"ClsTopicId,omitempty" name:"ClsTopicId"`
 
-	// It specifies whether to synchronously release a new version during the update. The default value is `FALSE`, indicating not to release a new version.
+	// It specifies whether to synchronously publish a new version during the update. The default value is `FALSE`, indicating not to publish a new version
 	Publish *string `json:"Publish,omitempty" name:"Publish"`
 
 	// Whether to enable L5 access. TRUE: enable; FALSE: not enable
@@ -2118,7 +2147,7 @@ type UpdateFunctionConfigurationRequest struct {
 	// Public network access configuration
 	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitempty" name:"PublicNetConfig"`
 
-	// File system configuration input parameter, which is used for the function to bind the file system
+	// File system configuration input parameter, which is used for the function to bind the CFS file system
 	CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
 
 	// Timeout period for function initialization. Default value: 15 seconds

@@ -317,8 +317,11 @@ type CreateInstancesRequest struct {
 	// Whether to support the password-free feature. Valid values: true (password-free instance), false (password-enabled instance). Default value: false. Only instances in a VPC support the password-free access.
 	NoAuth *bool `json:"NoAuth,omitempty" name:"NoAuth"`
 
-	// 
+	// Node information of an instance. Currently, information about the node type (master or replica) and node availability zone can be passed in. This parameter is not required for instances deployed in a single availability zone.
 	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet" list`
+
+	// The tag bound with the instance to be purchased
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags" list`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -356,10 +359,16 @@ func (r *CreateInstancesResponse) FromJsonString(s string) error {
 
 type DelayDistribution struct {
 
-	// Distribution ladder
+	// Delay distribution. The mapping between delay range and `Ladder` value is as follows:
+	// [0ms,1ms]: 1;
+	// [1ms,5ms]: 5;
+	// [5ms,10ms]: 10;
+	// [10ms,50ms]: 50;
+	// [50ms,200ms]: 200;
+	// [200ms,∞]: -1.
 	Ladder *int64 `json:"Ladder,omitempty" name:"Ladder"`
 
-	// Size
+	// The number of commands whose delay falls within the current delay range
 	Size *int64 `json:"Size,omitempty" name:"Size"`
 
 	// Modification time
@@ -1405,6 +1414,46 @@ func (r *DescribeInstanceShardsResponse) ToJsonString() string {
 }
 
 func (r *DescribeInstanceShardsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceZoneInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID, such as crs-6ubhgouj
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeInstanceZoneInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceZoneInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceZoneInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of instance node groups
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The list of instance node groups
+		ReplicaGroups []*ReplicaGroup `json:"ReplicaGroups,omitempty" name:"ReplicaGroups" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceZoneInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInstanceZoneInfoResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3011,10 +3060,10 @@ type Outbound struct {
 
 type ProductConf struct {
 
-	// Product type. 2: Redis primary-secondary edition; 3: CKV primary-secondary edition; 4: CKV cluster edition; 5: Redis standalone edition; 7: Redis cluster edition
+	// Product type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture), `10` (Redis 4.0 Hybrid Storage Edition (Tendis)).
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
-	// Product name: Redis primary-secondary edition, CKV primary-secondary edition, CKV cluster edition, Redis standalone edition, or Redis cluster edition
+	// Product name: Redis Master-Replica Edition, CKV Master-Replica Edition, CKV Cluster Edition, Redis Standalone Edition, Redis Cluster Edition, Tendis Hybrid Storage Edition
 	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
 
 	// Minimum purchasable quantity
@@ -3124,15 +3173,30 @@ type RedisCommonInstanceList struct {
 	NetType *int64 `json:"NetType,omitempty" name:"NetType"`
 }
 
+type RedisNode struct {
+
+	// The number of keys on a node
+	Keys *int64 `json:"Keys,omitempty" name:"Keys"`
+
+	// Distribution of node slots
+	Slot *string `json:"Slot,omitempty" name:"Slot"`
+
+	// Node ID
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+
+	// Node status
+	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
 type RedisNodeInfo struct {
 
-	// 
+	// Node type. Valid values: `0` (master node), `1` (replica node)
 	NodeType *int64 `json:"NodeType,omitempty" name:"NodeType"`
 
-	// 
+	// ID of the availability zone of the master or replica node
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// 
+	// ID of the master or replica node, which is not required when creating an instance
 	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
 }
 
@@ -3206,6 +3270,24 @@ func (r *RenewInstanceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ReplicaGroup struct {
+
+	// Node group ID
+	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Node group name
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Node availability zone ID, such as ap-guangzhou-1
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Node group type. Valid values: `master` (master node group), `replica` (replica node group)
+	Role *string `json:"Role,omitempty" name:"Role"`
+
+	// The list of nodes in a node group
+	RedisNodes []*RedisNode `json:"RedisNodes,omitempty" name:"RedisNodes" list`
+}
+
 type ResetPasswordRequest struct {
 	*tchttp.BaseRequest
 
@@ -3247,6 +3329,15 @@ func (r *ResetPasswordResponse) ToJsonString() string {
 
 func (r *ResetPasswordResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type ResourceTag struct {
+
+	// Tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type RestoreInstanceRequest struct {

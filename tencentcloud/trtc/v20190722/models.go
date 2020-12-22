@@ -166,7 +166,7 @@ type DescribeCallDetailRequest struct {
 	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
 	CommId *string `json:"CommId,omitempty" name:"CommId"`
 
-	// Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 5 days.
+	// Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
@@ -243,7 +243,7 @@ type DescribeDetailEventRequest struct {
 	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
 	CommId *string `json:"CommId,omitempty" name:"CommId"`
 
-	// Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 5 days.
+	// Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
@@ -484,7 +484,7 @@ type DescribeRoomInformationRequest struct {
 	// User `sdkappid`
 	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 5 days.
+	// Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
@@ -533,6 +533,65 @@ func (r *DescribeRoomInformationResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeUserInformationRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
+	CommId *string `json:"CommId,omitempty" name:"CommId"`
+
+	// Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time in the format of UNIX timestamp (e.g. 1588031999s).
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// User `SDKAppID` (e.g. 1400188366).
+	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The array of user IDs for query. You can enter up to 6 user IDs. If it is left empty, data of 6 users will be returned.
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds" list`
+
+	// Page index starting from 0. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned.
+	PageNumber *string `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// Number of entries per page. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned. `PageSize` is up to 100.
+	PageSize *string `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeUserInformationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeUserInformationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUserInformationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of users whose information will be returned
+		Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+		// User information list
+	// Note: this field may return `null`, indicating that no valid value was found.
+		UserList []*UserInformation `json:"UserList,omitempty" name:"UserList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeUserInformationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeUserInformationResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DismissRoomRequest struct {
 	*tchttp.BaseRequest
 
@@ -572,13 +631,13 @@ func (r *DismissRoomResponse) FromJsonString(s string) error {
 
 type EncodeParams struct {
 
-	// Output stream audio sample rate for stream mix in Hz. Valid values: 48000, 44100, 32000, 24000, 16000, 12000, 8000.
+	// Output stream audio sample rate for On-Cloud MixTranscoding in Hz. Valid values: 48000, 44100, 32000, 24000, 16000, 12000, 8000.
 	AudioSampleRate *uint64 `json:"AudioSampleRate,omitempty" name:"AudioSampleRate"`
 
 	// Output stream audio bitrate in Kbps for On-Cloud MixTranscoding. Value range: [8, 500].
 	AudioBitrate *uint64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
-	// Number of output stream audio sound channels for On-Cloud MixTranscoding. Value range: [1, 2].
+	// Number of sound channels of output stream for On-Cloud MixTranscoding. Valid values: 1, 2. 1 represents mono-channel, and 2 represents dual-channel.
 	AudioChannels *uint64 `json:"AudioChannels,omitempty" name:"AudioChannels"`
 
 	// Output stream width in pixels for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [0, 1920].
@@ -590,7 +649,7 @@ type EncodeParams struct {
 	// Output stream bitrate in Kbps for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [1, 10000].
 	VideoBitrate *uint64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
-	// Output stream frame rate for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [6, 12, 15, 24, 30, 48, 60]. If the frame rate lies outside the valid value range, it will be automatically modified to a value within the range.
+	// Output stream frame rate for On-Cloud MixTranscoding in FPS. This parameter is required for audio/video outputs. Value range: [1, 60].
 	VideoFramerate *uint64 `json:"VideoFramerate,omitempty" name:"VideoFramerate"`
 
 	// Output stream GOP in seconds for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [1, 5].
@@ -636,7 +695,7 @@ type EventMessage struct {
 
 type LayoutParams struct {
 
-	// On-cloud stream mix layout template ID. 0: floating template (default value); 1: grid template; 2: screen sharing template; 3: picture-in-picture template.
+	// On-cloud stream mix layout template ID. 0: floating template (default value); 1: grid template; 2: screen sharing template; 3: picture-in-picture template; 4: custom template.
 	Template *uint64 `json:"Template,omitempty" name:"Template"`
 
 	// ID of the user in the big image, which takes effect in a screen sharing, floating, or picture-in-picture template.
@@ -653,6 +712,9 @@ type LayoutParams struct {
 
 	// A user list, which takes effect for floating, grid, or screen sharing templates. When the user list has been set, the stream mix output for users in this user list will include both audio and video; the stream mix output for users not in the list will only include audio. Up to 16 users can be set.
 	MixVideoUids []*string `json:"MixVideoUids,omitempty" name:"MixVideoUids" list`
+
+	// Valid in custom template, used to specify the video image position of a user in mixed streams.
+	PresetLayoutConfig []*PresetLayoutConfig `json:"PresetLayoutConfig,omitempty" name:"PresetLayoutConfig" list`
 }
 
 type OutputParams struct {
@@ -668,6 +730,33 @@ type OutputParams struct {
 
 	// Value range: [0, 1]. If it is 0, the recording template configured in the console will be used; if it is 1, streams are recorded as .mp3 files.
 	RecordAudioOnly *uint64 `json:"RecordAudioOnly,omitempty" name:"RecordAudioOnly"`
+}
+
+type PresetLayoutConfig struct {
+
+	// Used to assign users to preset positions; if not assigned, users will occupy the positions set in `PresetLayoutConfig` in room entry sequence.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Stream type of the user when a specified user is assigned to the image. 0: camera; 1: screen sharing. Set this parameter to 0 when the small image is occupied by a web user.
+	StreamType *uint64 `json:"StreamType,omitempty" name:"StreamType"`
+
+	// Width of the output image in pixels. If this parameter is not set, 0 is used by default.
+	ImageWidth *uint64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
+
+	// Height of the output image in pixels. If this parameter is not set, 0 is used by default.
+	ImageHeight *uint64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
+
+	// X offset of the output image in pixels. The sum of `LocationX` and `ImageWidth` cannot exceed the total width of the mixed stream. If this parameter is not set, 0 is used by default.
+	LocationX *uint64 `json:"LocationX,omitempty" name:"LocationX"`
+
+	// Y offset of the output image in pixels. The sum of `LocationY` and `ImageHeight` cannot exceed the total height of the mixed stream. If this parameter is not set, 0 is used by default.
+	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
+
+	// Z-order of the image in pixels. If this parameter is not set, 0 is used by default.
+	ZOrder *uint64 `json:"ZOrder,omitempty" name:"ZOrder"`
+
+	// Render mode of the output image. 0: cropping; 1: scaling. If this parameter is not set, 0 is used by default.
+	RenderMode *uint64 `json:"RenderMode,omitempty" name:"RenderMode"`
 }
 
 type QualityData struct {

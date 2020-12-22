@@ -1652,6 +1652,9 @@ type CreateDirectConnectGatewayRequest struct {
 	// <li>NORMAL - (Default) Standard type. Note: CCN only supports the standard type</li>
 	// <li>NAT - NAT type</li>NAT gateway supports network address translation. The specified type cannot be modified. A VPC can create one NAT direct connect gateway and one non-NAT direct connect gateway
 	GatewayType *string `json:"GatewayType,omitempty" name:"GatewayType"`
+
+	// CCN route publishing method. Valid values: `standard` and `exquisite`. This parameter is only valid for the CCN direct connect gateway.
+	ModeType *string `json:"ModeType,omitempty" name:"ModeType"`
 }
 
 func (r *CreateDirectConnectGatewayRequest) ToJsonString() string {
@@ -4907,6 +4910,49 @@ func (r *DescribeIpGeolocationDatabaseUrlResponse) FromJsonString(s string) erro
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeIpGeolocationInfosRequest struct {
+	*tchttp.BaseRequest
+
+	// IP addresses to be queried. Both IPv4 and IPv6 addresses are supported.
+	AddressIps []*string `json:"AddressIps,omitempty" name:"AddressIps" list`
+
+	// Fields of the IP addresses to be queried, including `Country`, `Province`, `City`, `Region`, `Isp`, `AsName` and `AsId`
+	Fields *IpField `json:"Fields,omitempty" name:"Fields"`
+}
+
+func (r *DescribeIpGeolocationInfosRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIpGeolocationInfosRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIpGeolocationInfosResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// IP address details
+		AddressInfo []*IpGeolocationInfo `json:"AddressInfo,omitempty" name:"AddressInfo" list`
+
+		// Number of IP addresses
+		Total *int64 `json:"Total,omitempty" name:"Total"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeIpGeolocationInfosResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIpGeolocationInfosResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest struct {
 	*tchttp.BaseRequest
 
@@ -6261,6 +6307,14 @@ type DirectConnectGateway struct {
 	// ID of the NAT gateway bound.
 	// Note: this field may return `null`, indicating that no valid value was found.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Whether the direct connect gateway supports the VXLAN architecture.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VXLANSupport []*bool `json:"VXLANSupport,omitempty" name:"VXLANSupport" list`
+
+	// CCN route publishing mode. Valid values: `standard` and `exquisite`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ModeType *string `json:"ModeType,omitempty" name:"ModeType"`
 }
 
 type DirectConnectGatewayCcnRoute struct {
@@ -6969,6 +7023,45 @@ type IPSECOptionsSpecification struct {
 	IPSECSaLifetimeTraffic *uint64 `json:"IPSECSaLifetimeTraffic,omitempty" name:"IPSECSaLifetimeTraffic"`
 }
 
+type InquirePriceCreateDirectConnectGatewayRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *InquirePriceCreateDirectConnectGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquirePriceCreateDirectConnectGatewayRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePriceCreateDirectConnectGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Standard access fee for a direct connect gateway
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TotalCost *int64 `json:"TotalCost,omitempty" name:"TotalCost"`
+
+		// Actual access fee for a direct connect gateway
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		RealTotalCost *int64 `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquirePriceCreateDirectConnectGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *InquirePriceCreateDirectConnectGatewayResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type InquiryPriceCreateVpnGatewayRequest struct {
 	*tchttp.BaseRequest
 
@@ -7108,6 +7201,72 @@ type InstanceStatistic struct {
 
 	// Number of instances
 	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+}
+
+type IpField struct {
+
+	// Country/region field
+	Country *bool `json:"Country,omitempty" name:"Country"`
+
+	// Province/municipality field
+	Province *bool `json:"Province,omitempty" name:"Province"`
+
+	// City field
+	City *bool `json:"City,omitempty" name:"City"`
+
+	// Urban area field
+	Region *bool `json:"Region,omitempty" name:"Region"`
+
+	// Access ISP field
+	Isp *bool `json:"Isp,omitempty" name:"Isp"`
+
+	// ISP backbone network’s AS field
+	AsName *bool `json:"AsName,omitempty" name:"AsName"`
+
+	// AS ID
+	AsId *bool `json:"AsId,omitempty" name:"AsId"`
+
+	// Comment
+	Comment *bool `json:"Comment,omitempty" name:"Comment"`
+}
+
+type IpGeolocationInfo struct {
+
+	// Country/region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Country *string `json:"Country,omitempty" name:"Country"`
+
+	// Province- or municipality-level administrative region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Province *string `json:"Province,omitempty" name:"Province"`
+
+	// Municipal administrative region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Urban area
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Access ISP
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Isp *string `json:"Isp,omitempty" name:"Isp"`
+
+	// ISP backbone network’s AS name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AsName *string `json:"AsName,omitempty" name:"AsName"`
+
+	// ISP backbone network’s AS ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AsId *string `json:"AsId,omitempty" name:"AsId"`
+
+	// Comment. The APN value of mobile users is entered currently. If there is no APN attribute, this is `null`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// IP address
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AddressIp *string `json:"AddressIp,omitempty" name:"AddressIp"`
 }
 
 type Ipv6Address struct {
@@ -7657,6 +7816,9 @@ type ModifyDirectConnectGatewayAttributeRequest struct {
 
 	// The CCN route-learning type. Valid values: `BGP` (Automatic learning), `STATIC` (Static, that is, user-configured). You can only modify `CcnRouteType` for a CCN direct connect gateway with BGP enabled.
 	CcnRouteType *string `json:"CcnRouteType,omitempty" name:"CcnRouteType"`
+
+	// CCN route publishing method. Valid values: `standard` and `exquisite`. You can only modify `ModeType` for a CCN direct connect gateway.
+	ModeType *string `json:"ModeType,omitempty" name:"ModeType"`
 }
 
 func (r *ModifyDirectConnectGatewayAttributeRequest) ToJsonString() string {

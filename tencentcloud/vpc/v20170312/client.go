@@ -2590,6 +2590,31 @@ func (c *Client) DescribeIpGeolocationDatabaseUrl(request *DescribeIpGeolocation
     return
 }
 
+func NewDescribeIpGeolocationInfosRequest() (request *DescribeIpGeolocationInfosRequest) {
+    request = &DescribeIpGeolocationInfosRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeIpGeolocationInfos")
+    return
+}
+
+func NewDescribeIpGeolocationInfosResponse() (response *DescribeIpGeolocationInfosResponse) {
+    response = &DescribeIpGeolocationInfosResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the IP addresses, including their geographical locations and networks.
+func (c *Client) DescribeIpGeolocationInfos(request *DescribeIpGeolocationInfosRequest) (response *DescribeIpGeolocationInfosResponse, err error) {
+    if request == nil {
+        request = NewDescribeIpGeolocationInfosRequest()
+    }
+    response = NewDescribeIpGeolocationInfosResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeNatGatewayDestinationIpPortTranslationNatRulesRequest() (request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) {
     request = &DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3596,6 +3621,31 @@ func (c *Client) HaVipDisassociateAddressIp(request *HaVipDisassociateAddressIpR
         request = NewHaVipDisassociateAddressIpRequest()
     }
     response = NewHaVipDisassociateAddressIpResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquirePriceCreateDirectConnectGatewayRequest() (request *InquirePriceCreateDirectConnectGatewayRequest) {
+    request = &InquirePriceCreateDirectConnectGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "InquirePriceCreateDirectConnectGateway")
+    return
+}
+
+func NewInquirePriceCreateDirectConnectGatewayResponse() (response *InquirePriceCreateDirectConnectGatewayResponse) {
+    response = &InquirePriceCreateDirectConnectGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the price of creating a direct connect gateway.
+func (c *Client) InquirePriceCreateDirectConnectGateway(request *InquirePriceCreateDirectConnectGatewayRequest) (response *InquirePriceCreateDirectConnectGatewayResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceCreateDirectConnectGatewayRequest()
+    }
+    response = NewInquirePriceCreateDirectConnectGatewayResponse()
     err = c.Send(request, response)
     return
 }
