@@ -20,6 +20,211 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type ContactItem struct {
+
+	// Contact ID.
+	Id *int64 `json:"Id,omitempty" name:"Id"`
+
+	// Contact name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The mailbox bound to the contact.
+	Mail *string `json:"Mail,omitempty" name:"Mail"`
+}
+
+type CreateDBDiagReportTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time, such as `2020-11-08T14:00:00+08:00`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time, such as `2020-11-09T14:00:00+08:00`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Whether to send an email. Valid values: 0 - Yes, 1 - No.
+	SendMailFlag *int64 `json:"SendMailFlag,omitempty" name:"SendMailFlag"`
+
+	// An array of contact IDs to receive the email.
+	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson" list`
+
+	// An array of contact group IDs to receive the email.
+	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup" list`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *CreateDBDiagReportTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateDBDiagReportTaskRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateDBDiagReportTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// ID of an async task request, which can be used to query the execution result of an async task.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateDBDiagReportTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateDBDiagReportTaskResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateMailProfileRequest struct {
+	*tchttp.BaseRequest
+
+	// The content of email configuration.
+	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
+
+	// Configuration level. Valid values: "User" (user-level), "Instance" (instance-level). The email of database inspection report is configured as the user level, and the email of scheduled task report is configured as the instance level.
+	ProfileLevel *string `json:"ProfileLevel,omitempty" name:"ProfileLevel"`
+
+	// Name configuration, which needs to be unique. The email configuration name of database inspection report can be customize; the email configuration name of scheduled task report should in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
+	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+
+	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
+	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Instance ID bound to the configuration, which is set when the configuration level is "Instance".
+	BindInstanceIds []*string `json:"BindInstanceIds,omitempty" name:"BindInstanceIds" list`
+}
+
+func (r *CreateMailProfileRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateMailProfileRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateMailProfileResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateMailProfileResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateMailProfileResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAllUserContactRequest struct {
+	*tchttp.BaseRequest
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// An array of contact name. Fuzzy search is supported.
+	Names []*string `json:"Names,omitempty" name:"Names" list`
+}
+
+func (r *DescribeAllUserContactRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAllUserContactRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAllUserContactResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of contacts.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Contact information.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		Contacts []*ContactItem `json:"Contacts,omitempty" name:"Contacts" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAllUserContactResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAllUserContactResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAllUserGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// An array of contact group name. Fuzzy search is supported.
+	Names []*string `json:"Names,omitempty" name:"Names" list`
+}
+
+func (r *DescribeAllUserGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAllUserGroupRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAllUserGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of contact groups.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Contact group information.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		Groups []*GroupItem `json:"Groups,omitempty" name:"Groups" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAllUserGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAllUserGroupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeDBDiagEventRequest struct {
 	*tchttp.BaseRequest
 
@@ -445,6 +650,85 @@ type DiagHistoryEventItem struct {
 	Region *string `json:"Region,omitempty" name:"Region"`
 }
 
+type GroupItem struct {
+
+	// Group ID.
+	Id *int64 `json:"Id,omitempty" name:"Id"`
+
+	// Group name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Number of group members.
+	MemberCount *int64 `json:"MemberCount,omitempty" name:"MemberCount"`
+}
+
+type InstanceConfs struct {
+
+	// The switch of database inspection. Valid values: Yes/No.
+	DailyInspection *string `json:"DailyInspection,omitempty" name:"DailyInspection"`
+}
+
+type MailConfiguration struct {
+
+	// Whether to enable email sending. Valid values: 0 (No), 1 (Yes).
+	SendMail *int64 `json:"SendMail,omitempty" name:"SendMail"`
+
+	// Region configuration, such as "ap-guangzhou", "ap-shanghai".
+	Region []*string `json:"Region,omitempty" name:"Region" list`
+
+	// Sending a report with the specified health level, such as "HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK".
+	HealthStatus []*string `json:"HealthStatus,omitempty" name:"HealthStatus" list`
+
+	// Contact ID. The contact/contact group cannot be empty.
+	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson" list`
+
+	// Contact group ID. The contact/contact group cannot be empty.
+	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup" list`
+}
+
+type ModifyDiagDBInstanceConfRequest struct {
+	*tchttp.BaseRequest
+
+	// Inspection switch.
+	InstanceConfs *InstanceConfs `json:"InstanceConfs,omitempty" name:"InstanceConfs"`
+
+	// The effective instance region. If the value is "All", it means it is effective for the whole region.
+	Regions *string `json:"Regions,omitempty" name:"Regions"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Specify the instance ID that needs to modify the inspection status.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+}
+
+func (r *ModifyDiagDBInstanceConfRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyDiagDBInstanceConfRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDiagDBInstanceConfResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDiagDBInstanceConfResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyDiagDBInstanceConfResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type MonitorFloatMetric struct {
 
 	// Metric name.
@@ -487,6 +771,15 @@ type MonitorMetricSeriesData struct {
 
 	// Timestamp corresponding to monitoring metric.
 	Timestamp []*int64 `json:"Timestamp,omitempty" name:"Timestamp" list`
+}
+
+type ProfileInfo struct {
+
+	// Language, such as “zh”.
+	Language *string `json:"Language,omitempty" name:"Language"`
+
+	// The content of email template.
+	MailConfiguration *MailConfiguration `json:"MailConfiguration,omitempty" name:"MailConfiguration"`
 }
 
 type SchemaItem struct {

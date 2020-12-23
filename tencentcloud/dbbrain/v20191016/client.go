@@ -43,6 +43,106 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewCreateDBDiagReportTaskRequest() (request *CreateDBDiagReportTaskRequest) {
+    request = &CreateDBDiagReportTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "CreateDBDiagReportTask")
+    return
+}
+
+func NewCreateDBDiagReportTaskResponse() (response *CreateDBDiagReportTaskResponse) {
+    response = &CreateDBDiagReportTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a health report and select whether to send an email.
+func (c *Client) CreateDBDiagReportTask(request *CreateDBDiagReportTaskRequest) (response *CreateDBDiagReportTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateDBDiagReportTaskRequest()
+    }
+    response = NewCreateDBDiagReportTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMailProfileRequest() (request *CreateMailProfileRequest) {
+    request = &CreateMailProfileRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "CreateMailProfile")
+    return
+}
+
+func NewCreateMailProfileResponse() (response *CreateMailProfileResponse) {
+    response = &CreateMailProfileResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create the email configuration. The input parameter “ProfileType” represents the type of the email configuration. Valid values: “dbScan_mail_configuration” (email configuration of database inspection report) and “scheduler_mail_configuration” (email configuration of scheduled task report).
+func (c *Client) CreateMailProfile(request *CreateMailProfileRequest) (response *CreateMailProfileResponse, err error) {
+    if request == nil {
+        request = NewCreateMailProfileRequest()
+    }
+    response = NewCreateMailProfileResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllUserContactRequest() (request *DescribeAllUserContactRequest) {
+    request = &DescribeAllUserContactRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeAllUserContact")
+    return
+}
+
+func NewDescribeAllUserContactResponse() (response *DescribeAllUserContactResponse) {
+    response = &DescribeAllUserContactResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the information of the contact in the email.
+func (c *Client) DescribeAllUserContact(request *DescribeAllUserContactRequest) (response *DescribeAllUserContactResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllUserContactRequest()
+    }
+    response = NewDescribeAllUserContactResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllUserGroupRequest() (request *DescribeAllUserGroupRequest) {
+    request = &DescribeAllUserGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeAllUserGroup")
+    return
+}
+
+func NewDescribeAllUserGroupResponse() (response *DescribeAllUserGroupResponse) {
+    response = &DescribeAllUserGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the information of the contact group in the email.
+func (c *Client) DescribeAllUserGroup(request *DescribeAllUserGroupRequest) (response *DescribeAllUserGroupResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllUserGroupRequest()
+    }
+    response = NewDescribeAllUserGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBDiagEventRequest() (request *DescribeDBDiagEventRequest) {
     request = &DescribeDBDiagEventRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -214,6 +314,31 @@ func (c *Client) DescribeTopSpaceTables(request *DescribeTopSpaceTablesRequest) 
         request = NewDescribeTopSpaceTablesRequest()
     }
     response = NewDescribeTopSpaceTablesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDiagDBInstanceConfRequest() (request *ModifyDiagDBInstanceConfRequest) {
+    request = &ModifyDiagDBInstanceConfRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "ModifyDiagDBInstanceConf")
+    return
+}
+
+func NewModifyDiagDBInstanceConfResponse() (response *ModifyDiagDBInstanceConfResponse) {
+    response = &ModifyDiagDBInstanceConfResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify instance inspection switch.
+func (c *Client) ModifyDiagDBInstanceConf(request *ModifyDiagDBInstanceConfRequest) (response *ModifyDiagDBInstanceConfResponse, err error) {
+    if request == nil {
+        request = NewModifyDiagDBInstanceConfRequest()
+    }
+    response = NewModifyDiagDBInstanceConfResponse()
     err = c.Send(request, response)
     return
 }

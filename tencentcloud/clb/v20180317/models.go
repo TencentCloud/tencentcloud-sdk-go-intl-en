@@ -630,8 +630,8 @@ type CreateLoadBalancerRequest struct {
 	// CLB instance type. 1: generic CLB instance. Currently, only 1 can be passed in
 	Forward *int64 `json:"Forward,omitempty" name:"Forward"`
 
-	// CLB instance name, which takes effect only when an instance is created. Rule: 1-50 letters, digits, dashes (-), or underscores (_).
-	// Note: If this name is the same as the name of an existing CLB instance in the system, the system will automatically generate a name for this newly created instance.
+	// CLB instance name, which takes effect only when an instance is created. It consists of 1 to 60 letters, digits, hyphens (-), or underscores (_).
+	// Note: If the name of the new CLB instance already exists in the system, the system will automatically generate a name for the new CLB instance.
 	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
 
 	// Network ID of the backend target server of CLB, which can be obtained through the DescribeVpcEx API. If this parameter is not passed in, it will default to a basic network ("0").
@@ -668,7 +668,7 @@ type CreateLoadBalancerRequest struct {
 	// Applies for CLB instances for a specified VIP
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
-	// 
+	// Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
 	// Exclusive cluster information.
@@ -1647,6 +1647,44 @@ func (r *DescribeLoadBalancerListByCertIdResponse) ToJsonString() string {
 }
 
 func (r *DescribeLoadBalancerListByCertIdResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLoadBalancerTrafficRequest struct {
+	*tchttp.BaseRequest
+
+	// CLB instance region. If this parameter is not passed in, CLB instances in all regions will be returned.
+	LoadBalancerRegion *string `json:"LoadBalancerRegion,omitempty" name:"LoadBalancerRegion"`
+}
+
+func (r *DescribeLoadBalancerTrafficRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLoadBalancerTrafficRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLoadBalancerTrafficResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Information of CLB instances descendingly sorted by outbound bandwidth
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		LoadBalancerTraffic []*LoadBalancerTraffic `json:"LoadBalancerTraffic,omitempty" name:"LoadBalancerTraffic" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLoadBalancerTrafficResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeLoadBalancerTrafficResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2749,6 +2787,24 @@ type LoadBalancerHealth struct {
 	Listeners []*ListenerHealth `json:"Listeners,omitempty" name:"Listeners" list`
 }
 
+type LoadBalancerTraffic struct {
+
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// CLB instance name
+	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
+
+	// CLB instance region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// CLB instance VIP
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Maximum outbound bandwidth in Mbps
+	OutBandwidth *float64 `json:"OutBandwidth,omitempty" name:"OutBandwidth"`
+}
+
 type ManualRewriteRequest struct {
 	*tchttp.BaseRequest
 
@@ -3574,8 +3630,8 @@ type RuleHealth struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Health check status of the real server bound to this rule
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Health status of the real server bound to this rule
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Targets []*TargetHealth `json:"Targets,omitempty" name:"Targets" list`
 }
 

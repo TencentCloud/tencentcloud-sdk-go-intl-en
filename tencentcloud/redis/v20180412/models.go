@@ -3196,7 +3196,7 @@ type RedisNodeInfo struct {
 	// ID of the availability zone of the master or replica node
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// ID of the master or replica node, which is not required when creating an instance
+	// ID of the master or replica node, which is not required upon creation of the instance
 	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
 }
 

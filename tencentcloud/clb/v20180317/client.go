@@ -831,6 +831,31 @@ func (c *Client) DescribeLoadBalancerListByCertId(request *DescribeLoadBalancerL
     return
 }
 
+func NewDescribeLoadBalancerTrafficRequest() (request *DescribeLoadBalancerTrafficRequest) {
+    request = &DescribeLoadBalancerTrafficRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "DescribeLoadBalancerTraffic")
+    return
+}
+
+func NewDescribeLoadBalancerTrafficResponse() (response *DescribeLoadBalancerTrafficResponse) {
+    response = &DescribeLoadBalancerTrafficResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query CLB instances with high traffic and return the top 10 results. For queries using a sub-account, only the result CLB instances authorized to the sub-account will be returned.
+func (c *Client) DescribeLoadBalancerTraffic(request *DescribeLoadBalancerTrafficRequest) (response *DescribeLoadBalancerTrafficResponse, err error) {
+    if request == nil {
+        request = NewDescribeLoadBalancerTrafficRequest()
+    }
+    response = NewDescribeLoadBalancerTrafficResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLoadBalancersRequest() (request *DescribeLoadBalancersRequest) {
     request = &DescribeLoadBalancersRequest{
         BaseRequest: &tchttp.BaseRequest{},
