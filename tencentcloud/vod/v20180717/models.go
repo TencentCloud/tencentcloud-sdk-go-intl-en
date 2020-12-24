@@ -196,8 +196,8 @@ type AdaptiveStreamTemplate struct {
 	RemoveAudio *uint64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
 
 	// Whether to remove a video stream. Valid values:
-	// <li>0: no,</li>
-	// <li>1: yes.</li>
+	// <li>0: no</li>
+	// <li>1: yes</li>
 	RemoveVideo *uint64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
 }
 
@@ -1752,11 +1752,11 @@ type AudioTemplateInfo struct {
 	SampleRate *uint64 `json:"SampleRate,omitempty" name:"SampleRate"`
 
 	// Audio channel system. Valid values:
-	// <li>1: Mono-channel</li>
-	// <li>2: Dual-channel</li>
-	// <li>6: Stereo</li>
+	// <li>1: mono-channel</li>
+	// <li>2: dual-channel</li>
+	// <li>6: stereo</li>
 	// You cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).
-	// Default value: 2.
+	// Default value: 2
 	AudioChannel *int64 `json:"AudioChannel,omitempty" name:"AudioChannel"`
 }
 
@@ -1791,9 +1791,9 @@ type AudioTemplateInfoForUpdate struct {
 	SampleRate *uint64 `json:"SampleRate,omitempty" name:"SampleRate"`
 
 	// Audio channel system. Valid values:
-	// <li>1: Mono-channel</li>
-	// <li>2: Dual-channel</li>
-	// <li>6: Stereo</li>
+	// <li>1: mono-channel</li>
+	// <li>2: dual-channel</li>
+	// <li>6: stereo</li>
 	// You cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).
 	AudioChannel *int64 `json:"AudioChannel,omitempty" name:"AudioChannel"`
 }
@@ -4505,13 +4505,13 @@ type DescribeMediaProcessUsageDataRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// This API is used to query video processing task types. The following types are supported now:
-	// <li> Transcoding: Basic transcoding</li>
-	// <li> Transcoding-TESHD: TESHD transcoding</li>
-	// <li> Editing: Video editing</li>
-	// <li> AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
-	// <li> ContentAudit: content audit</li>
-	// <li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing (not recommended)</li>
+	// This API is used to query video processing task types. Valid values:
+	// <li>Transcoding: basic transcoding</li>
+	// <li>Transcoding-TESHD: TESHD transcoding</li>
+	// <li>Editing: video editing</li>
+	// <li>AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
+	// <li>ContentAudit: content moderation</li>
+	// <li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing. This value is not recommended.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -4928,6 +4928,12 @@ func (r *DescribeStorageDetailsResponse) FromJsonString(s string) error {
 
 type DescribeSubAppIdsRequest struct {
 	*tchttp.BaseRequest
+
+	// 
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// 
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Tag information. You can query the list of subapplications with specified tags.
 	Tags []*ResourceTag `json:"Tags,omitempty" name:"Tags" list`
@@ -7971,11 +7977,11 @@ type ModifySubAppIdStatusRequest struct {
 	// Subapplication ID.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
-	// Subapplication status. Valid strings include:
-	// <li>On: to enable the subapplication.</li>
-	// <li>Off: to disable the subapplication.</li>
-	// <li>Destroyed: to terminate the subapplication. </li>
-	// You cannot enable a subapplication when its status is “Destroying”. You can enable it after it was terminated.
+	// Subapplication status. Valid values:
+	// <li>On: enabled</li>
+	// <li>Off: disabled</li>
+	// <li>Destroyed: terminated</li>
+	// You cannot enable a subapplication whose status is “Destroying”. You can enable it after it was terminated.
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -8930,7 +8936,7 @@ func (r *ProcessMediaByProcedureResponse) FromJsonString(s string) error {
 type ProcessMediaByUrlRequest struct {
 	*tchttp.BaseRequest
 
-	// This API is<font color='red'>disused</font>. We recommend using an alternative API. For more information, see API overview.
+	// This API is<font color='red'>disused</font>. You are advised to use an alternative API. For more information, see API overview.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
 
 	// Information of COS path to output file.
@@ -9885,11 +9891,11 @@ type SubAppIdInfo struct {
 	// Subapplication creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Subapplication status. Valid strings include:
-	// <li>On: enabled;</li>
-	// <li>Off: disabled.</li>
-	// <li>Destroying: terminating. </li>
-	// <li>Destroyed: terminated. </li>
+	// Subapplication status. Valid values:
+	// <li>On: enabled</li>
+	// <li>Off: disabled</li>
+	// <li>Destroying: terminating</li>
+	// <li>Destroyed: terminated</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -10026,12 +10032,12 @@ type TaskSimpleInfo struct {
 type TaskStatData struct {
 
 	// Task type.
-	// <li> Transcoding: basic transcoding</li>
-	// <li> Transcoding-TESHD: TESHD transcoding</li>
-	// <li> Editing: Video editing</li>
-	// <li> AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
-	// <li> ContentAudit: content audit</li>
-	// <li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing (not recommended)</li>
+	// <li>Transcoding: basic transcoding</li>
+	// <li>Transcoding-TESHD: TESHD transcoding</li>
+	// <li>Editing: video editing</li>
+	// <li>AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
+	// <li>ContentAudit: content moderation</li>
+	// <li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing. This value is not recommended.</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task statistics overview (usage unit: second).
@@ -10613,18 +10619,21 @@ type VideoTemplateInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. The following fill types are supported:
-	// <li> stretch: stretch video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding;</li>
-	// <li>black: keep the image's aspect ratio unchanged and fill the uncovered area with black color.</li>
-	// <li>white: keep the image's aspect ratio unchanged and fill the uncovered area with white color.</li>
-	// <li>gauss: keep the image's aspect ratio unchanged and apply Gaussian blur to the uncovered area.</li>
-	// Default value: black.
+	// Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:
+	// <li>stretch: stretches the video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding.</li>
+	// <li>black: fills the uncovered area with black color, without changing the image's aspect ratio.</li>
+	// <li>white: fills the uncovered area with white color, without changing the image's aspect ratio.</li>
+	// <li>gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.</li>
+	// Default value: black
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
 	// Video Constant Rate Factor (CRF). Value range: 1-51.
 	// If this parameter is specified, CRF will be used to control video bitrate for transcoding and the original video bitrate will not be used.
-	// We don’t recommend specifying this parameter if you have no special requirements.
+	// We don’t recommend specifying this parameter unless you have special requirements.
 	Vcrf *uint64 `json:"Vcrf,omitempty" name:"Vcrf"`
+
+	// 
+	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
 }
 
 type VideoTemplateInfoForUpdate struct {
@@ -10659,16 +10668,19 @@ type VideoTemplateInfoForUpdate struct {
 	// Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
-	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-	// <li> stretch: stretch video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding;</li>
-	// <li>black: keep the image's aspect ratio unchanged and fill the uncovered area with black color.</li>
-	// <li>white: keep the image's aspect ratio unchanged and fill the uncovered area with white color.</li>
-	// <li>gauss: keep the image's aspect ratio unchanged and apply Gaussian blur to the uncovered area.</li>
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. Valid values:
+	// <li>stretch: stretches video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding.</li>
+	// <li>black: fills the uncovered area with black color, without changing the image's aspect ratio.</li>
+	// <li>white: fills the uncovered area with white color, without changing the image's aspect ratio.</li>
+	// <li>gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.</li>
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
 	// Video Constant Rate Factor (CRF). Value range: 1-51. This parameter will be disabled if you enter 0.
-	// We don’t recommend specifying this parameter if you have no special requirements.
+	// We don’t recommend specifying this parameter unless you have special requirements.
 	Vcrf *uint64 `json:"Vcrf,omitempty" name:"Vcrf"`
+
+	// 
+	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
 }
 
 type VideoTrackItem struct {
@@ -10745,11 +10757,11 @@ type WatermarkInput struct {
 	// Watermarking template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// Text content, which contains up to 100 characters. This field is required only when the watermark type is text.
+	// Text content, which contains up to 100 characters. Set this parameter only when the watermark type is text.
 	// VOD does not support adding text watermarks on screenshots.
 	TextContent *string `json:"TextContent,omitempty" name:"TextContent"`
 
-	// SVG content, which contains up to 2,000,000 characters. This field is required only when the watermark type is SVG.
+	// SVG content, which contains up to 2,000,000 characters. Set this parameter only when the watermark type is SVG.
 	// VOD does not support adding SVG watermarks on screenshots.
 	SvgContent *string `json:"SvgContent,omitempty" name:"SvgContent"`
 

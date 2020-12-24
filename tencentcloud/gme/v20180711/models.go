@@ -317,7 +317,7 @@ type RealtimeSpeechConf struct {
 
 type ScanDetail struct {
 
-	// Violation scenario. For more information, please see the definition of <a href="https://cloud.tencent.com/document/product/607/37622#Label_Value">Label</a>
+	// Violation scenario. For more information, please see the definition of <a href="https://intl.cloud.tencent.com/document/product/607/37622?from_cn_redirect=1#Label_Value">Label</a>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// Confidence score in scenario. Value range: [0.00,100.00]. The higher the score, the more likely the content is non-compliant

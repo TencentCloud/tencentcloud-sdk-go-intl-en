@@ -846,7 +846,7 @@ func NewDescribeLoadBalancerTrafficResponse() (response *DescribeLoadBalancerTra
     return
 }
 
-// This API is used to query CLB instances with high traffic and return the top 10 results. For queries using a sub-account, only the result CLB instances authorized to the sub-account will be returned.
+// This API is used to query CLB instances with high traffic under the current account, and return the top 10 results. For queries using a sub-account, only the CLB instances authorized to the sub-account will be returned.
 func (c *Client) DescribeLoadBalancerTraffic(request *DescribeLoadBalancerTrafficRequest) (response *DescribeLoadBalancerTrafficResponse, err error) {
     if request == nil {
         request = NewDescribeLoadBalancerTrafficRequest()
