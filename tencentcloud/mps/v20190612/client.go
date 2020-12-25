@@ -1606,11 +1606,12 @@ func NewProcessLiveStreamResponse() (response *ProcessLiveStreamResponse) {
     return
 }
 
-// This API is used to initiate a processing task for a live streaming media file, including:
+// This API is used to initiate tasks to process live streaming media files. Such tasks include:
 // 
-// * Intelligent content audit (detection of porn, terrorism, and politically sensitive information in image and porn information in speech);
+// * Intelligent content moderation (detecting porn, terrorism, and politically sensitive information in image and porn information in speech)
+// * Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
 // 
-// The live stream processing event notification is written into the specified CMQ queue in real time. You need to obtain the event notification result from CMQ. If a file is output during video processing, it will be written into the specified target bucket.
+// Live stream processing event notifications are written into specified CMQ queues in real time. Users need to obtain event notification results from such CMQ queues. Output files of the processing tasks are written into destination buckets specified by users.
 func (c *Client) ProcessLiveStream(request *ProcessLiveStreamRequest) (response *ProcessLiveStreamResponse, err error) {
     if request == nil {
         request = NewProcessLiveStreamRequest()

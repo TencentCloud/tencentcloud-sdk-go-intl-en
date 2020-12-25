@@ -23,31 +23,31 @@ import (
 type CreateGameServerSessionRequest struct {
 	*tchttp.BaseRequest
 
-	// Maximum number of players
+	// The maximum number of players, which cannot be less than 0.
 	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
 
-	// Alias ID
+	// Alias ID. You need to specify an alias ID or fleet ID for each request. If both of them are specified, the fleet ID shall prevail.
 	AliasId *string `json:"AliasId,omitempty" name:"AliasId"`
 
-	// Creator ID
+	// Creator ID. Up to 1024 ASCII characters are allowed.
 	CreatorId *string `json:"CreatorId,omitempty" name:"CreatorId"`
 
-	// Fleet ID
+	// Fleet ID. You need to specify an alias ID or fleet ID for each request. If both of them are specified, the fleet ID shall prevail.
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
-	// Game attributes
+	// Game attributes. Up to 16 groups of attributes are allowed.
 	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties" list`
 
-	// Game server session attribute details
+	// The attribute details of game server session. Up to 4096 ASCII characters are allowed.
 	GameServerSessionData *string `json:"GameServerSessionData,omitempty" name:"GameServerSessionData"`
 
-	// Custom ID of game server session
+	// The custom ID of game server session. Up to 4096 ASCII characters are allowed.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
-	// Idempotency token
+	// Idempotency token. Up to 48 ASCII characters are allowed.
 	IdempotencyToken *string `json:"IdempotencyToken,omitempty" name:"IdempotencyToken"`
 
-	// Game server session name
+	// The name of game server session. Up to 1024 ASCII characters are allowed.
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
@@ -100,13 +100,13 @@ type DescribeGameServerSessionDetailsRequest struct {
 	// Fleet ID
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
-	// Game server session ID
+	// Game server session ID. It should contain 1 to 48 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
 	// Maximum number of entries in a single query
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Pagination offset, which is used for querying the next page
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
 	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
 	// Game server session status. Valid values: ACTIVE, ACTIVATING, TERMINATED, TERMINATING, ERROR
@@ -130,8 +130,8 @@ type DescribeGameServerSessionDetailsResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		GameServerSessionDetails []*GameServerSessionDetail `json:"GameServerSessionDetails,omitempty" name:"GameServerSessionDetails" list`
 
-		// Pagination offset, which is used for querying the next page
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -194,13 +194,13 @@ type DescribeGameServerSessionsRequest struct {
 	// Fleet ID
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
-	// Game server session ID
+	// Game server session ID. It should contain 1 to 48 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
 	// Maximum number of entries in a single query
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Pagination offset, which is used for querying the next page
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
 	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
 	// Game server session status. Valid values: ACTIVE, ACTIVATING, TERMINATED, TERMINATING, ERROR
@@ -224,8 +224,8 @@ type DescribeGameServerSessionsResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		GameServerSessions []*GameServerSession `json:"GameServerSessions,omitempty" name:"GameServerSessions" list`
 
-		// Pagination offset, which is used for querying the next page
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -245,19 +245,19 @@ func (r *DescribeGameServerSessionsResponse) FromJsonString(s string) error {
 type DescribePlayerSessionsRequest struct {
 	*tchttp.BaseRequest
 
-	// Game server session ID
+	// Game server session ID. It should contain 1 to 48 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
 	// Maximum number of entries in a single query
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Pagination offset, which is used for querying the next page
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
 	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
-	// Player ID
+	// Player ID. It should contain 1 to 1024 ASCII characters.
 	PlayerId *string `json:"PlayerId,omitempty" name:"PlayerId"`
 
-	// Player session ID
+	// Player session ID. It should contain 1 to 1024 ASCII characters.
 	PlayerSessionId *string `json:"PlayerSessionId,omitempty" name:"PlayerSessionId"`
 
 	// Player session status. Valid values: RESERVED, ACTIVE, COMPLETED, TIMEDOUT
@@ -281,8 +281,8 @@ type DescribePlayerSessionsResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		PlayerSessions []*PlayerSession `json:"PlayerSessions,omitempty" name:"PlayerSessions" list`
 
-		// Pagination offset
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -310,10 +310,10 @@ type DesiredPlayerSession struct {
 
 type GameProperty struct {
 
-	// Attribute name
+	// Attribute name. Up to 32 ASCII characters are allowed.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
-	// Attribute value
+	// Attribute value. Up to 96 ASCII characters are allowed.
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
@@ -322,11 +322,11 @@ type GameServerSession struct {
 	// Game server session creation time
 	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
 
-	// Creator ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Creator ID. Up to 1024 ASCII characters are allowed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	CreatorId *string `json:"CreatorId,omitempty" name:"CreatorId"`
 
-	// Current number of players
+	// The current number of players, which cannot be less than 0.
 	CurrentPlayerSessionCount *uint64 `json:"CurrentPlayerSessionCount,omitempty" name:"CurrentPlayerSessionCount"`
 
 	// CVM DNS ID
@@ -336,39 +336,39 @@ type GameServerSession struct {
 	// Fleet ID
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
-	// Game attributes
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Game attributes. Up to 16 groups of attributes are allowed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties" list`
 
-	// Game server session attribute details
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The attribute details of game server session. Up to 4096 ASCII characters are allowed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	GameServerSessionData *string `json:"GameServerSessionData,omitempty" name:"GameServerSessionData"`
 
-	// Game server session ID
+	// Game server session ID. It should contain 1 to 48 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
 	// CVM IP address
 	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
 
-	// Battle progress details
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Battle progress details. Up to 400,000 ASCII characters are allowed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	MatchmakerData *string `json:"MatchmakerData,omitempty" name:"MatchmakerData"`
 
-	// Maximum number of players
+	// The maximum number of players, which cannot be less than 0.
 	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
 
-	// Game server session name
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The name of game server session. Up to 1024 ASCII characters are allowed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Player session creation policy
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Player session creation policy. Valid values: ACCEPT_ALL, DENY_ALL
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	PlayerSessionCreationPolicy *string `json:"PlayerSessionCreationPolicy,omitempty" name:"PlayerSessionCreationPolicy"`
 
-	// Port number
+	// Port number. It should be a value between 1 to 60000.
 	Port *uint64 `json:"Port,omitempty" name:"Port"`
 
-	// Game server session status
+	// Game server session status. Valid values: ACTIVE, ACTIVATING, TERMINATED, TERMINATING, ERROR
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Additional information of game server session status
@@ -379,8 +379,8 @@ type GameServerSession struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TerminationTime *string `json:"TerminationTime,omitempty" name:"TerminationTime"`
 
-	// Instance type
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Instance type. Up to 128 ASCII characters are allowed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
 	// Current custom count
@@ -395,8 +395,8 @@ type GameServerSession struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 
-	// Session availability status, i.e., whether it is blocked
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Session availability status, i.e., whether it is blocked. Valid value: Enable, Disable
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	AvailabilityStatus *string `json:"AvailabilityStatus,omitempty" name:"AvailabilityStatus"`
 }
 
@@ -445,7 +445,7 @@ type GameServerSessionPlacement struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties" list`
 
-	// Maximum number of players
+	// The maximum number of players that can be connected simultaneously to the game session. It should a value between 1 to the maximum number of player sessions.
 	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
 
 	// Game session data
@@ -479,7 +479,7 @@ type GameServerSessionPlacement struct {
 type GetGameServerSessionLogUrlRequest struct {
 	*tchttp.BaseRequest
 
-	// Game server session ID
+	// Game server session ID. It should contain 1 to 48 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 }
 
@@ -496,8 +496,8 @@ type GetGameServerSessionLogUrlResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Log download URL
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Log download URL. It should contain 1 to 1024 ASCII characters.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 		PreSignedUrl *string `json:"PreSignedUrl,omitempty" name:"PreSignedUrl"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -517,7 +517,7 @@ func (r *GetGameServerSessionLogUrlResponse) FromJsonString(s string) error {
 type GetInstanceAccessRequest struct {
 	*tchttp.BaseRequest
 
-	// Service deployment ID
+	// Server fleet ID
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
 	// Instance ID
@@ -572,16 +572,60 @@ type InstanceAccess struct {
 	OperatingSystem *string `json:"OperatingSystem,omitempty" name:"OperatingSystem"`
 }
 
+type JoinGameServerSessionBatchRequest struct {
+	*tchttp.BaseRequest
+
+	// Game server session ID. It should contain 1 to 256 ASCII characters.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+
+	// Player ID list. At least 1 ID and up to 25 IDs.
+	PlayerIds []*string `json:"PlayerIds,omitempty" name:"PlayerIds" list`
+
+	// Player custom data
+	PlayerDataMap *PlayerDataMap `json:"PlayerDataMap,omitempty" name:"PlayerDataMap"`
+}
+
+func (r *JoinGameServerSessionBatchRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *JoinGameServerSessionBatchRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type JoinGameServerSessionBatchResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Player session list. Up to 25 sessions.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		PlayerSessions []*PlayerSession `json:"PlayerSessions,omitempty" name:"PlayerSessions" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *JoinGameServerSessionBatchResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *JoinGameServerSessionBatchResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type JoinGameServerSessionRequest struct {
 	*tchttp.BaseRequest
 
-	// Game server session ID
+	// Game server session ID. It should contain 1 to 256 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
-	// Player ID
+	// Player ID. Up to 1024 ASCII characters are allowed.
 	PlayerId *string `json:"PlayerId,omitempty" name:"PlayerId"`
 
-	// Custom player information
+	// Player custom data. Up to 2048 ASCII characters are allowed.
 	PlayerData *string `json:"PlayerData,omitempty" name:"PlayerData"`
 }
 
@@ -625,6 +669,15 @@ type PlacedPlayerSession struct {
 	PlayerSessionId *string `json:"PlayerSessionId,omitempty" name:"PlayerSessionId"`
 }
 
+type PlayerDataMap struct {
+
+	// The key of player custom data. It should contain 1 to 1024 ASCII characters.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// The value of player custom data. It should contain 1 to 2048 ASCII characters.
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
 type PlayerLatency struct {
 
 	// Player ID
@@ -651,27 +704,27 @@ type PlayerSession struct {
 	// Fleet ID
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
-	// Game server session ID
+	// Game server session ID. It should contain 1 to 256 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
 	// Address of the CVM instance where the game server session is running
 	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
 
-	// Player information
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Player custom data. Up to 2048 ASCII characters are allowed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	PlayerData *string `json:"PlayerData,omitempty" name:"PlayerData"`
 
-	// Player ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Player ID. Up to 1024 ASCII characters are allowed.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	PlayerId *string `json:"PlayerId,omitempty" name:"PlayerId"`
 
 	// Player session ID
 	PlayerSessionId *string `json:"PlayerSessionId,omitempty" name:"PlayerSessionId"`
 
-	// Port number
+	// Port number. It should be a value between 1 to 60000.
 	Port *uint64 `json:"Port,omitempty" name:"Port"`
 
-	// Player session status
+	// Player session status. Valid values: RESERVED = 1, ACTIVE = 2, COMPLETED =3, TIMEDOUT = 4
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Player session termination time
@@ -691,7 +744,7 @@ type SearchGameServerSessionsRequest struct {
 	// Maximum number of entries in a single query
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Pagination offset, which is used for querying the next page
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
 	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
 	// Search filter expression. Valid values:
@@ -705,6 +758,32 @@ type SearchGameServerSessionsRequest struct {
 	// 
 	// Expressions in `String` type support = and <> for judgment
 	// Expressions in `Number` type support =, <>, >, >=, <, and <= for judgment
+	// 
+	// Example:
+	// If FilterExpression takes the value:
+	// playerSessionCount>=2 AND hasAvailablePlayerSessions=true"
+	// It means searching for game sessions that have at least two players and have player sessions available.
+	// If FilterExpression takes the value:
+	// gameServerSessionProperties.K1 = 'V1' AND gameServerSessionProperties.K2 = 'V2' OR gameServerSessionProperties.K3 = 'V3'
+	// 
+	// it means
+	// searching for game sessions that meets the following game server session attributes
+	// {
+	//     "GameProperties":[
+	//         {
+	//             "Key":"K1",
+	//             "Value":"V1"
+	//         },
+	//         {
+	//             "Key":"K2",
+	//             "Value":"V2"
+	//         },
+	//         {
+	//             "Key":"K3",
+	//             "Value":"V3"
+	//         }
+	//     ]
+	// }
 	FilterExpression *string `json:"FilterExpression,omitempty" name:"FilterExpression"`
 
 	// Sorting keyword
@@ -734,8 +813,8 @@ type SearchGameServerSessionsResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		GameServerSessions []*GameServerSession `json:"GameServerSessions,omitempty" name:"GameServerSessions" list`
 
-		// Pagination offset, which is used for querying the next page
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -755,13 +834,13 @@ func (r *SearchGameServerSessionsResponse) FromJsonString(s string) error {
 type StartGameServerSessionPlacementRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of starting game server session placement
+	// The unique ID of the game server session placement. It should contain up to 48 ASCII characters, supporting [a-zA-Z0-9-]+.
 	PlacementId *string `json:"PlacementId,omitempty" name:"PlacementId"`
 
 	// Game server session queue name
 	GameServerSessionQueueName *string `json:"GameServerSessionQueueName,omitempty" name:"GameServerSessionQueueName"`
 
-	// Maximum number of concurrent players allowed by the game server to connect to the game session
+	// The maximum number of players that can be connected simultaneously to the game session. It should a value between 1 to the maximum number of player sessions.
 	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
 
 	// Player game session information
@@ -770,10 +849,10 @@ type StartGameServerSessionPlacementRequest struct {
 	// Player game session attributes
 	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties" list`
 
-	// Game server session data
+	// Data of game server sessions. Up to 4096 ASCII characters are allowed.
 	GameServerSessionData *string `json:"GameServerSessionData,omitempty" name:"GameServerSessionData"`
 
-	// Game server session name
+	// Name of game server sessions. Up to 4096 ASCII characters are allowed.
 	GameServerSessionName *string `json:"GameServerSessionName,omitempty" name:"GameServerSessionName"`
 
 	// Player latency
@@ -850,19 +929,19 @@ func (r *StopGameServerSessionPlacementResponse) FromJsonString(s string) error 
 type UpdateGameServerSessionRequest struct {
 	*tchttp.BaseRequest
 
-	// Game server session ID
+	// Game server session ID. It should contain 1 to 256 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
-	// Maximum number of players
+	// The maximum number of players, which cannot be less than 0.
 	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
 
-	// Game server session name
+	// Name of the game server session. It should contain 1 to 1024 ASCII characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Player session creation policy. Valid values: ACCEPT_ALL, DENY_ALL
+	// Player session creation policy, which includes `ACCEPT_ALL` (allow all players) and `DENY_ALL` (reject all players).
 	PlayerSessionCreationPolicy *string `json:"PlayerSessionCreationPolicy,omitempty" name:"PlayerSessionCreationPolicy"`
 
-	// Protection policy. Valid values: NoProtection, TimeLimitProtection, FullProtection
+	// Protection policy, which includes `NoProtection`·(no protection), `TimeLimitProtection` (time-limited protection) and `FullProtection` (full protection)
 	ProtectionPolicy *string `json:"ProtectionPolicy,omitempty" name:"ProtectionPolicy"`
 }
 

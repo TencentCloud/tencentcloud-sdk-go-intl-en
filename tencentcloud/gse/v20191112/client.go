@@ -243,6 +243,31 @@ func (c *Client) JoinGameServerSession(request *JoinGameServerSessionRequest) (r
     return
 }
 
+func NewJoinGameServerSessionBatchRequest() (request *JoinGameServerSessionBatchRequest) {
+    request = &JoinGameServerSessionBatchRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gse", APIVersion, "JoinGameServerSessionBatch")
+    return
+}
+
+func NewJoinGameServerSessionBatchResponse() (response *JoinGameServerSessionBatchResponse) {
+    response = &JoinGameServerSessionBatchResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to join game server sessions in batch.
+func (c *Client) JoinGameServerSessionBatch(request *JoinGameServerSessionBatchRequest) (response *JoinGameServerSessionBatchResponse, err error) {
+    if request == nil {
+        request = NewJoinGameServerSessionBatchRequest()
+    }
+    response = NewJoinGameServerSessionBatchResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSearchGameServerSessionsRequest() (request *SearchGameServerSessionsRequest) {
     request = &SearchGameServerSessionsRequest{
         BaseRequest: &tchttp.BaseRequest{},

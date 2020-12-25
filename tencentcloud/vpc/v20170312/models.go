@@ -7205,16 +7205,16 @@ type InstanceStatistic struct {
 
 type IpField struct {
 
-	// Country/region field
+	// Country/region of the IP
 	Country *bool `json:"Country,omitempty" name:"Country"`
 
-	// Province/municipality field
+	// Province/municipality/state of the IP
 	Province *bool `json:"Province,omitempty" name:"Province"`
 
-	// City field
+	// City of the IP
 	City *bool `json:"City,omitempty" name:"City"`
 
-	// Urban area field
+	// City district of the IP
 	Region *bool `json:"Region,omitempty" name:"Region"`
 
 	// Access ISP field
@@ -7223,7 +7223,7 @@ type IpField struct {
 	// ISP backbone network’s AS field
 	AsName *bool `json:"AsName,omitempty" name:"AsName"`
 
-	// AS ID
+	// Backbone AS ID
 	AsId *bool `json:"AsId,omitempty" name:"AsId"`
 
 	// Comment

@@ -2605,7 +2605,7 @@ func NewDescribeIpGeolocationInfosResponse() (response *DescribeIpGeolocationInf
     return
 }
 
-// This API is used to query the IP addresses, including their geographical locations and networks.
+// This API is used to query the information of IP addresses, including their geographical locations and networks.
 func (c *Client) DescribeIpGeolocationInfos(request *DescribeIpGeolocationInfosRequest) (response *DescribeIpGeolocationInfosResponse, err error) {
     if request == nil {
         request = NewDescribeIpGeolocationInfosRequest()
