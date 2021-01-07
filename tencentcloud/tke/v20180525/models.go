@@ -60,7 +60,7 @@ type AddExistedInstancesRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Instance list
+	// Instance list. Spot instance is not supported.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 	// Additional parameter to be set for the instance
@@ -77,6 +77,9 @@ type AddExistedInstancesRequest struct {
 
 	// When reinstalling the system, you can specify the HostName of the modified instance (when the cluster is in HostName mode, this parameter is required, and the rule name is the same as the [Create CVM Instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API HostName except for uppercase letters not being supported.
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
+
+	// Node pool options
+	NodePool *NodePoolOption `json:"NodePool,omitempty" name:"NodePool"`
 }
 
 func (r *AddExistedInstancesRequest) ToJsonString() string {
@@ -2272,6 +2275,43 @@ func (r *ModifyClusterAsGroupAttributeResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyClusterAsGroupOptionAttributeRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster auto scaling attributes
+	ClusterAsGroupOption *ClusterAsGroupOption `json:"ClusterAsGroupOption,omitempty" name:"ClusterAsGroupOption"`
+}
+
+func (r *ModifyClusterAsGroupOptionAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterAsGroupOptionAttributeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyClusterAsGroupOptionAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyClusterAsGroupOptionAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterAsGroupOptionAttributeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyClusterAttributeRequest struct {
 	*tchttp.BaseRequest
 
@@ -2390,6 +2430,12 @@ type ModifyClusterNodePoolRequest struct {
 
 	// Indicates whether auto scaling is enabled.
 	EnableAutoscale *bool `json:"EnableAutoscale,omitempty" name:"EnableAutoscale"`
+
+	// Operating system name
+	OsName *string `json:"OsName,omitempty" name:"OsName"`
+
+	// Image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
+	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
 }
 
 func (r *ModifyClusterNodePoolRequest) ToJsonString() string {
@@ -2473,6 +2519,18 @@ type NodePool struct {
 	// Desired number of nodes
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	DesiredNodesNum *int64 `json:"DesiredNodesNum,omitempty" name:"DesiredNodesNum"`
+}
+
+type NodePoolOption struct {
+
+	// Whether to add to the node pool.
+	AddToNodePool *bool `json:"AddToNodePool,omitempty" name:"AddToNodePool"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Whether to inherit the node pool configuration.
+	InheritConfigurationFromNodePool *bool `json:"InheritConfigurationFromNodePool,omitempty" name:"InheritConfigurationFromNodePool"`
 }
 
 type RegionInstance struct {

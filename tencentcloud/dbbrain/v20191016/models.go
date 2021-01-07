@@ -28,7 +28,7 @@ type ContactItem struct {
 	// Contact name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The mailbox bound to the contact.
+	// The email address of the contact.
 	Mail *string `json:"Mail,omitempty" name:"Mail"`
 }
 
@@ -91,13 +91,13 @@ func (r *CreateDBDiagReportTaskResponse) FromJsonString(s string) error {
 type CreateMailProfileRequest struct {
 	*tchttp.BaseRequest
 
-	// The content of email configuration.
+	// Email configurations
 	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
 
-	// Configuration level. Valid values: "User" (user-level), "Instance" (instance-level). The email of database inspection report is configured as the user level, and the email of scheduled task report is configured as the instance level.
+	// Configuration level. Valid values: "User" (user-level), "Instance" (instance-level). For database inspection report, it should be `User`; and for scheduled task reports, it should be `Instance`.
 	ProfileLevel *string `json:"ProfileLevel,omitempty" name:"ProfileLevel"`
 
-	// Name configuration, which needs to be unique. The email configuration name of database inspection report can be customize; the email configuration name of scheduled task report should in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
+	// Configuration name, which needs to be unique. For database inspection reports, this name can be customize as needed. For scheduled task reports, the name should be in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
 	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
 
 	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
@@ -106,7 +106,7 @@ type CreateMailProfileRequest struct {
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// Instance ID bound to the configuration, which is set when the configuration level is "Instance".
+	// Instance ID bound to the configuration, which is required when the configuration level is `Instance`.
 	BindInstanceIds []*string `json:"BindInstanceIds,omitempty" name:"BindInstanceIds" list`
 }
 
@@ -664,7 +664,7 @@ type GroupItem struct {
 
 type InstanceConfs struct {
 
-	// The switch of database inspection. Valid values: Yes/No.
+	// Whether to enable database inspection. Valid values: Yes/No.
 	DailyInspection *string `json:"DailyInspection,omitempty" name:"DailyInspection"`
 }
 
@@ -679,26 +679,26 @@ type MailConfiguration struct {
 	// Sending a report with the specified health level, such as "HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK".
 	HealthStatus []*string `json:"HealthStatus,omitempty" name:"HealthStatus" list`
 
-	// Contact ID. The contact/contact group cannot be empty.
+	// Contact ID. Either `ContactGroup` or `ContactID` should be passed in.
 	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson" list`
 
-	// Contact group ID. The contact/contact group cannot be empty.
+	// Contact group ID. Either `ContactGroup` or `ContactID` should be passed in.
 	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup" list`
 }
 
 type ModifyDiagDBInstanceConfRequest struct {
 	*tchttp.BaseRequest
 
-	// Inspection switch.
+	// Whether to enable inspection
 	InstanceConfs *InstanceConfs `json:"InstanceConfs,omitempty" name:"InstanceConfs"`
 
-	// The effective instance region. If the value is "All", it means it is effective for the whole region.
+	// Target regions of the request. If the value is `All`, it is applied to all regions.
 	Regions *string `json:"Regions,omitempty" name:"Regions"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// Specify the instance ID that needs to modify the inspection status.
+	// ID of the instance to modify.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
@@ -775,7 +775,7 @@ type MonitorMetricSeriesData struct {
 
 type ProfileInfo struct {
 
-	// Language, such as “zh”.
+	// Language of the email, such as `en`.
 	Language *string `json:"Language,omitempty" name:"Language"`
 
 	// The content of email template.

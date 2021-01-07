@@ -58,7 +58,7 @@ func NewCreateDBDiagReportTaskResponse() (response *CreateDBDiagReportTaskRespon
     return
 }
 
-// This API is used to create a health report and select whether to send an email.
+// This API is used to create a health report and send it via email as configured.
 func (c *Client) CreateDBDiagReportTask(request *CreateDBDiagReportTaskRequest) (response *CreateDBDiagReportTaskResponse, err error) {
     if request == nil {
         request = NewCreateDBDiagReportTaskRequest()
@@ -83,7 +83,7 @@ func NewCreateMailProfileResponse() (response *CreateMailProfileResponse) {
     return
 }
 
-// This API is used to create the email configuration. The input parameter “ProfileType” represents the type of the email configuration. Valid values: “dbScan_mail_configuration” (email configuration of database inspection report) and “scheduler_mail_configuration” (email configuration of scheduled task report).
+// This API is used to create the email configuration. The input parameter `ProfileType` represents the type of the email configuration. Valid values: `dbScan_mail_configuration` (email configuration of database inspection report) and `scheduler_mail_configuration` (email configuration of scheduled task report).
 func (c *Client) CreateMailProfile(request *CreateMailProfileRequest) (response *CreateMailProfileResponse, err error) {
     if request == nil {
         request = NewCreateMailProfileRequest()
@@ -333,7 +333,7 @@ func NewModifyDiagDBInstanceConfResponse() (response *ModifyDiagDBInstanceConfRe
     return
 }
 
-// This API is used to modify instance inspection switch.
+// This API is used to enable/disable instance inspection.
 func (c *Client) ModifyDiagDBInstanceConf(request *ModifyDiagDBInstanceConfRequest) (response *ModifyDiagDBInstanceConfResponse, err error) {
     if request == nil {
         request = NewModifyDiagDBInstanceConfRequest()

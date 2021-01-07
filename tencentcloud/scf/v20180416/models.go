@@ -271,7 +271,7 @@ type CreateFunctionRequest struct {
 	// Function environment variable
 	Environment *Environment `json:"Environment,omitempty" name:"Environment"`
 
-	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime. Default value: Python2.7
+	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, Php5, Php7, Go1, Java8, CustomRuntime. Default value: Python2.7
 	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
 
 	// Function VPC configuration
@@ -593,6 +593,83 @@ func (r *DeleteNamespaceResponse) ToJsonString() string {
 }
 
 func (r *DeleteNamespaceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteProvisionedConcurrencyConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Name of the function for which to delete the provisioned concurrency
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Function version number
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+	// Function namespace. Default value: default
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *DeleteProvisionedConcurrencyConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteProvisionedConcurrencyConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteProvisionedConcurrencyConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteProvisionedConcurrencyConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteProvisionedConcurrencyConfigResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteReservedConcurrencyConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Name of the function for which to delete the provisioned concurrency
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Function namespace. Default value: default
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *DeleteReservedConcurrencyConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteReservedConcurrencyConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteReservedConcurrencyConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteReservedConcurrencyConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteReservedConcurrencyConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1209,6 +1286,93 @@ func (r *GetLayerVersionResponse) ToJsonString() string {
 }
 
 func (r *GetLayerVersionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetProvisionedConcurrencyConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Name of the function for which to get the provisioned concurrency details.
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Function namespace. Default value: default.
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Function version number. If this parameter is left empty, the provisioned concurrency information of all function versions will be returned.
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+}
+
+func (r *GetProvisionedConcurrencyConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetProvisionedConcurrencyConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetProvisionedConcurrencyConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Unallocated provisioned concurrency amount of function.
+		UnallocatedConcurrencyNum *uint64 `json:"UnallocatedConcurrencyNum,omitempty" name:"UnallocatedConcurrencyNum"`
+
+		// Allocated provisioned concurrency amount of function.
+		Allocated []*VersionProvisionedConcurrencyInfo `json:"Allocated,omitempty" name:"Allocated" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetProvisionedConcurrencyConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetProvisionedConcurrencyConfigResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetReservedConcurrencyConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Name of the function for which to get the provisioned concurrency details.
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Function namespace. Default value: default.
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *GetReservedConcurrencyConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetReservedConcurrencyConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetReservedConcurrencyConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Reserved concurrency memory of function.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ReservedMem *uint64 `json:"ReservedMem,omitempty" name:"ReservedMem"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetReservedConcurrencyConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetReservedConcurrencyConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1853,6 +2017,126 @@ func (r *PublishVersionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type PutProvisionedConcurrencyConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Name of the function for which to set the provisioned concurrency
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Function version number. Note: the `$LATEST` version does not support provisioned concurrency
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+	// Provisioned concurrency amount. Note: there is an upper limit for the sum of provisioned concurrency amounts of all versions, which currently is the function's maximum concurrency quota minus 100
+	VersionProvisionedConcurrencyNum *uint64 `json:"VersionProvisionedConcurrencyNum,omitempty" name:"VersionProvisionedConcurrencyNum"`
+
+	// Function namespace. Default value: default
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *PutProvisionedConcurrencyConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutProvisionedConcurrencyConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PutProvisionedConcurrencyConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *PutProvisionedConcurrencyConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutProvisionedConcurrencyConfigResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PutReservedConcurrencyConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Name of the function for which to set the provisioned concurrency
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Reserved concurrency memory of function. Note: the upper limit for the total reserved concurrency memory of the function is the user's total concurrency memory minus 12800
+	ReservedConcurrencyMem *uint64 `json:"ReservedConcurrencyMem,omitempty" name:"ReservedConcurrencyMem"`
+
+	// Function namespace. Default value: default
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *PutReservedConcurrencyConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutReservedConcurrencyConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PutReservedConcurrencyConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *PutReservedConcurrencyConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutReservedConcurrencyConfigResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PutTotalConcurrencyConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Account concurrency memory quota. Note: the lower limit for the account concurrency memory quota is the user's total concurrency memory used + 12800
+	TotalConcurrencyMem *uint64 `json:"TotalConcurrencyMem,omitempty" name:"TotalConcurrencyMem"`
+
+	// Namespace. Default value: default
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *PutTotalConcurrencyConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutTotalConcurrencyConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PutTotalConcurrencyConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *PutTotalConcurrencyConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutTotalConcurrencyConfigResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type Result struct {
 
 	// It indicates the log output during the function execution. Null is returned for asynchronous invocations.
@@ -1941,6 +2225,9 @@ type Trigger struct {
 
 	// Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console
 	TriggerAttribute *string `json:"TriggerAttribute,omitempty" name:"TriggerAttribute"`
+
+	// The alias or version bound with the trigger
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 }
 
 type TriggerInfo struct {
@@ -2247,6 +2534,24 @@ type VersionMatch struct {
 	// Rule requirements for exact match:
 	// Exact string match
 	Expression *string `json:"Expression,omitempty" name:"Expression"`
+}
+
+type VersionProvisionedConcurrencyInfo struct {
+
+	// Set provisioned concurrency amount.
+	AllocatedProvisionedConcurrencyNum *uint64 `json:"AllocatedProvisionedConcurrencyNum,omitempty" name:"AllocatedProvisionedConcurrencyNum"`
+
+	// Currently available provisioned concurrency amount.
+	AvailableProvisionedConcurrencyNum *uint64 `json:"AvailableProvisionedConcurrencyNum,omitempty" name:"AvailableProvisionedConcurrencyNum"`
+
+	// Provisioned concurrency setting task status. Done: completed; InProgress: in progress; Failed: partially or completely failed.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Status description of provisioned concurrency setting task.
+	StatusReason *string `json:"StatusReason,omitempty" name:"StatusReason"`
+
+	// Function version number
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 }
 
 type VersionWeight struct {
