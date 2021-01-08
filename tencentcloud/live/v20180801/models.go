@@ -131,6 +131,8 @@ type AddLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
 
 	// Watermark image URL.
+	// Unallowed characters in the URL:
+	//  ;(){}$>`#"\'|
 	PictureUrl *string `json:"PictureUrl,omitempty" name:"PictureUrl"`
 
 	// Watermark name.
@@ -146,7 +148,7 @@ type AddLiveWatermarkRequest struct {
 	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
+	// Watermark height, which is set by entering a percentage of the live stream image’s original height. You are advised to set either the height or width as the other will be scaled proportionally to avoid distortions. Default value: original height.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 }
 
@@ -1147,12 +1149,11 @@ type CreateLiveTranscodeTemplateRequest struct {
 	//   Top speed codec transcoding: 3-10 characters
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
-	// Video bitrate. Value range: 0–8,000 Kbps.
-	// If the value is 0, the original bitrate will be retained.
-	// Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
+	// Video bitrate in Kbps. Value range: 100-8000.
+	// Note: the transcoding template requires that the bitrate be unique. Therefore, the final saved bitrate may be different from the input bitrate.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
-	// Audio codec: acc by default.
+	// Audio codec. Default value: aac.
 	// Note: this parameter is unsupported now.
 	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
 
@@ -1160,7 +1161,7 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Value range: 0-500.
 	AudioBitrate *int64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
-	// Video codec: `h264/h265/origin`. Default value: `h264`.
+	// Video codec. Valid values: h264 (default), h265, origin
 	// 
 	// origin: original codec as the output codec
 	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
@@ -1169,8 +1170,8 @@ type CreateLiveTranscodeTemplateRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Width. Default value: 0.
-	// Value range: 0-3,000
-	// It must be a multiple of 2. The original width is 0
+	// Value range: 0-3000
+	// It must be a multiple of 2. The original width is 0.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
 	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
@@ -1180,17 +1181,16 @@ type CreateLiveTranscodeTemplateRequest struct {
 	NeedAudio *int64 `json:"NeedAudio,omitempty" name:"NeedAudio"`
 
 	// Height. Default value: 0.
-	// Value range: 0-3,000
-	// It must be a multiple of 2. The original height is 0
+	// Value range: 0-3000
+	// It must be a multiple of 2. The original height is 0.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
 	// Frame rate. Default value: 0.
-	// Range: 0-60 Fps.
+	// Value range: 0-60
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Keyframe interval, unit: second.
-	// Original interval by default
-	// Range: 2-6
+	// Keyframe interval in seconds. Default value: original interval
+	// Value range: 2-6
 	Gop *int64 `json:"Gop,omitempty" name:"Gop"`
 
 	// Rotation angle. Default value: 0.
@@ -1225,7 +1225,7 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Value range: 0.0-0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
 
-	// This parameter is used to define whether the short side is the video height. 0: no, 1: yes. The default value is 0.
+	// Whether to use the short side as the video height. 0: no, 1: yes. Default value: 0.
 	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
 }
 
@@ -1314,10 +1314,10 @@ type CreateRecordTaskRequest struct {
 	// Push path.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
-	// The recording end time in UNIX timestamp format. The “EndTime” should be later than “StartTime”. Normally the duration between “EndTime” and “StartTime” is up to 24 hours.
+	// Recording end time in UNIX timestamp format. “EndTime” should be later than “StartTime”, and the duration between “EndTime” and “StartTime” is up to 24 hours.
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The recording start time in UNIX timestamp format. If the “StartTime” is not entered, recording will start immediately after the API is successfully called. Normally the “StartTime” should be within 6 days from current time.
+	// Recording start time in UNIX timestamp format. If “StartTime” is not entered, recording will start immediately after the API is successfully called. “StartTime” should be within 6 days from the current time.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Push type. Default value: 0. Valid values:
@@ -1345,7 +1345,7 @@ type CreateRecordTaskResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// `TaskId`, which is a globally unique task ID. If the `TaskId` is returned, that means the recording task has been successfully created.
+		// A globally unique task ID. If `TaskId` is returned, the recording task has been successfully created.
 		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2043,7 +2043,7 @@ type DescribeBillBandwidthAndFluxListRequest struct {
 	// Default value: 5.
 	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
 
-	// Service name. Valid values: LVB, LEB. Default value: LVB.
+	// Service name. Valid values: LVB, LEB. The sum of LVB and LEB usage will be returned if this parameter is left empty.
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 }
 
@@ -4357,6 +4357,15 @@ type DomainCertInfo struct {
 
 	// Certificate status.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// List of domain names in the certificate.
+	// ["*.x.com"] for example.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CertDomains []*string `json:"CertDomains,omitempty" name:"CertDomains" list`
+
+	// Tencent Cloud SSL certificate ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CloudCertId *string `json:"CloudCertId,omitempty" name:"CloudCertId"`
 }
 
 type DomainDetailInfo struct {
@@ -5092,12 +5101,12 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Template ID.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Video codec: `h264/h265/origin`. Default value: `h264`.
+	// Video codec. Valid values: h264 (default), h265, origin
 	// 
 	// origin: original codec as the output codec
 	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
 
-	// Audio codec: acc by default.
+	// Audio codec. Defaut value: aac.
 	// Note: this parameter is unsupported now.
 	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
 
@@ -5108,13 +5117,12 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Template description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Video bitrate. Value range: 0–8,000 Kbps.
-	// If the value is 0, the original bitrate will be retained.
-	// Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
+	// Video bitrate in Kbps. Value range: 100-8000.
+	// Note: the transcoding template requires that the bitrate be unique. Therefore, the final saved bitrate may be different from the input bitrate.
 	VideoBitrate *int64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
-	// Width in pixels. Value range: 0-3,000.
-	// It must be a multiple of 2. The original width is 0
+	// Width in pixels. Value range: 0-3000.
+	// It must be a multiple of 2. The original width is 0.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
 	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
@@ -5123,8 +5131,8 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Whether to keep the audio. 0: no; 1: yes. Default value: 1.
 	NeedAudio *int64 `json:"NeedAudio,omitempty" name:"NeedAudio"`
 
-	// Height in pixels. Value range: 0-3,000.
-	// It must be a multiple of 2. The original height is 0
+	// Height in pixels. Value range: 0-3000.
+	// It must be a multiple of 2. The original height is 0.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
 	// Frame rate in fps. Default value: 0.
@@ -5164,7 +5172,7 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Value range: 0.0-0.5.
 	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitempty" name:"AdaptBitratePercent"`
 
-	// This parameter is used to define whether the short side is the video height. 0: no, 1: yes. The default value is 0.
+	// Whether to use the short side as the video height. 0: no, 1: yes. Default value: 0.
 	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
 }
 
@@ -6012,6 +6020,8 @@ type UpdateLiveWatermarkRequest struct {
 	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
 
 	// Watermark image URL.
+	// Unallowed characters in the URL:
+	//  ;(){}$>`#"\'|
 	PictureUrl *string `json:"PictureUrl,omitempty" name:"PictureUrl"`
 
 	// Display position: X-axis offset in %. Default value: 0.

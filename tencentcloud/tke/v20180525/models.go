@@ -342,11 +342,11 @@ type ClusterAdvancedSettings struct {
 
 	// Cluster network proxy model, which is only used when ipvs-bpf mode is used. At present, TKE cluster supports three network proxy modes including `iptables`, `ipvs` and `ipvs-bpf` and their parameter setting relationships are as follows:
 	// `iptables`: do not set IPVS and KubeProxyMode.
-	// `ipvs` mode: set IPVS to `true` and do not set KubeProxyMode.
+	// `ipvs`: set IPVS to `true` and do not set KubeProxyMode.
 	// `ipvs-bpf`: set KubeProxyMode to `kube-proxy-bpf`.
 	// The following conditions are required to use ipvs-bpf network mode:
 	// 1. The cluster version must be v1.14 or later.
-	// 2. The system image must be a TKE custom image such as Ubuntu TKE Optimized or Centos TKE Optimized.
+	// 2. The system image must be Tencent Linux 2.4.
 	KubeProxyMode *string `json:"KubeProxyMode,omitempty" name:"KubeProxyMode"`
 
 	// Indicates whether to enable auditing
@@ -2519,6 +2519,18 @@ type NodePool struct {
 	// Desired number of nodes
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	DesiredNodesNum *int64 `json:"DesiredNodesNum,omitempty" name:"DesiredNodesNum"`
+
+	// The operating system of the node pool
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	NodePoolOs *string `json:"NodePoolOs,omitempty" name:"NodePoolOs"`
+
+	// Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
+
+	// Image ID
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 }
 
 type NodePoolOption struct {

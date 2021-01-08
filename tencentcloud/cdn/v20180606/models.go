@@ -158,6 +158,12 @@ type AddCdnDomainRequest struct {
 
 	// Tag configuration
 	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
+
+	// IPv6 access configuration
+	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
+
+	// 
+	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
 }
 
 func (r *AddCdnDomainRequest) ToJsonString() string {
@@ -211,6 +217,19 @@ type AdvanceCacheRule struct {
 	// Unit: second. The maximum value is 365 days.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CacheTime *int64 `json:"CacheTime,omitempty" name:"CacheTime"`
+}
+
+type AdvanceConfig struct {
+
+	// Advanced configuration name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether advanced configuration is supported:
+	// `on`: support
+	// `off`: do not support
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type AdvancedAuthentication struct {
@@ -2463,6 +2482,20 @@ type DetailDomain struct {
 	// Origin-pull authentication advanced configuration (allowlist feature)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginAuthentication *OriginAuthentication `json:"OriginAuthentication,omitempty" name:"OriginAuthentication"`
+
+	// IPv6 access configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
+
+	// Advanced configuration set
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AdvanceSet []*AdvanceConfig `json:"AdvanceSet,omitempty" name:"AdvanceSet" list`
+
+	// 
+	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
+
+	// 
+	OriginCombine *OriginCombine `json:"OriginCombine,omitempty" name:"OriginCombine"`
 }
 
 type DisableCachesRequest struct {
@@ -2741,6 +2774,10 @@ type ForceRedirect struct {
 	// Supports 301, 302.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitempty" name:"RedirectStatusCode"`
+
+	// Whether to return the added header in forced redirection.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CarryHeaders *string `json:"CarryHeaders,omitempty" name:"CarryHeaders"`
 }
 
 type GetDisableRecordsRequest struct {
@@ -3048,6 +3085,13 @@ type Ipv6 struct {
 
 	// Whether to enable the IPv6 feature for a domain name. Values include `on` or `off`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type Ipv6Access struct {
+
+	// Whether to enable the IPv6 access feature for a domain name. Valid values: `on` and `off`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -3507,6 +3551,12 @@ type MaxAgeRule struct {
 	FollowOrigin *string `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 }
 
+type OfflineCache struct {
+
+	// 
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
 type Origin struct {
 
 	// Master origin server list
@@ -3565,9 +3615,12 @@ type Origin struct {
 	// 
 	BasePath *string `json:"BasePath,omitempty" name:"BasePath"`
 
-	// Path-based origin-pull configuration rules
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// Origin URL rewrite rule configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	PathRules []*PathRule `json:"PathRules,omitempty" name:"PathRules" list`
+
+	// 
+	PathBasedOrigin []*PathBasedOriginRule `json:"PathBasedOrigin,omitempty" name:"PathBasedOrigin" list`
 }
 
 type OriginAuthentication struct {
@@ -3586,6 +3639,12 @@ type OriginAuthenticationTypeA struct {
 	// Key used for signature calculation, allowing 6 to 32 bytes of letters and digits.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+}
+
+type OriginCombine struct {
+
+	// 
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
 type OriginIp struct {
@@ -3716,6 +3775,18 @@ type OverseaConfig struct {
 	// Video dragging configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VideoSeek *VideoSeek `json:"VideoSeek,omitempty" name:"VideoSeek"`
+}
+
+type PathBasedOriginRule struct {
+
+	// 
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// 
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+
+	// 
+	Origin []*string `json:"Origin,omitempty" name:"Origin" list`
 }
 
 type PathRule struct {
@@ -3924,6 +3995,13 @@ type PushUrlsCacheRequest struct {
 
 	// If this parameter is `middle` or left empty, prefetch will be performed onto the intermediate node
 	Layer *string `json:"Layer,omitempty" name:"Layer"`
+
+	// Whether to recursively resolve the M3U8 index file and prefetch the TS shards in it.
+	// Notes:
+	// 1. This feature requires that the M3U8 index file can be directly requested and obtained.
+	// 2. In the M3U8 index file, currently only the TS shards at the first to the third level can be recursively resolved.
+	// 3. Prefetching the TS shards obtained through recursive resolution consumes the daily prefetch quota. If the usage exceeds the quota, the feature will be disabled and TS shards will not be prefetched.
+	ParseM3U8 *bool `json:"ParseM3U8,omitempty" name:"ParseM3U8"`
 }
 
 func (r *PushUrlsCacheRequest) ToJsonString() string {
@@ -4855,6 +4933,15 @@ type UpdateDomainConfigRequest struct {
 
 	// Origin-pull authentication advanced configuration (allowlist feature)
 	OriginAuthentication *OriginAuthentication `json:"OriginAuthentication,omitempty" name:"OriginAuthentication"`
+
+	// IPv6 access configuration
+	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
+
+	// 
+	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
+
+	// 
+	OriginCombine *OriginCombine `json:"OriginCombine,omitempty" name:"OriginCombine"`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {

@@ -111,6 +111,34 @@ type ClusterInfo struct {
 	// TcaplusDB SDK connection parameter for accessing IPv6 addresses
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ApiAccessIpv6 *string `json:"ApiAccessIpv6,omitempty" name:"ApiAccessIpv6"`
+
+	// Cluster type
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClusterType *int64 `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// Cluster status
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClusterStatus *int64 `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
+
+	// Read CU
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ReadCapacityUnit *int64 `json:"ReadCapacityUnit,omitempty" name:"ReadCapacityUnit"`
+
+	// Write CU
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	WriteCapacityUnit *int64 `json:"WriteCapacityUnit,omitempty" name:"WriteCapacityUnit"`
+
+	// Disk capacity
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DiskVolume *int64 `json:"DiskVolume,omitempty" name:"DiskVolume"`
+
+	// Information of the machine at the storage layer (tcapsvr) in a dedicated cluster
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ServerList []*ServerDetailInfo `json:"ServerList,omitempty" name:"ServerList" list`
+
+	// Information of the machine at the access layer (tcaproxy) in a dedicated cluster
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProxyList []*ProxyDetailInfo `json:"ProxyList,omitempty" name:"ProxyList" list`
 }
 
 type CompareIdlFilesRequest struct {
@@ -231,6 +259,15 @@ type CreateClusterRequest struct {
 
 	// Whether to enable IPv6 address access for clusters
 	Ipv6Enable *int64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
+
+	// Information of the machine at the storage layer (tcapsvr) in a dedicated cluster
+	ServerList []*MachineInfo `json:"ServerList,omitempty" name:"ServerList" list`
+
+	// Information of the machine at the access layer (tcaproxy) in a dedicated cluster
+	ProxyList []*MachineInfo `json:"ProxyList,omitempty" name:"ProxyList" list`
+
+	// Cluster type. Valid values: `1` (standard), `2` (dedicated)
+	ClusterType *int64 `json:"ClusterType,omitempty" name:"ClusterType"`
 }
 
 func (r *CreateClusterRequest) ToJsonString() string {
@@ -478,6 +515,49 @@ func (r *DeleteTableGroupResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteTableIndexRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tables whose global indexes need to be deleted
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables" list`
+}
+
+func (r *DeleteTableIndexRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteTableIndexRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteTableIndexResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of tables whose global indexes are deleted
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The list of global index deletion results
+		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteTableIndexResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteTableIndexResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteTablesRequest struct {
 	*tchttp.BaseRequest
 
@@ -662,6 +742,43 @@ func (r *DescribeIdlFileInfosResponse) ToJsonString() string {
 }
 
 func (r *DescribeIdlFileInfosResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMachineRequest struct {
+	*tchttp.BaseRequest
+
+	// Whether to filter the resources supporting IPv6 access
+	Ipv6Enable *int64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
+}
+
+func (r *DescribeMachineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMachineRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMachineResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The list of dedicated machine resources
+		PoolList []*PoolInfo `json:"PoolList,omitempty" name:"PoolList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeMachineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMachineResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1042,6 +1159,21 @@ type ErrorInfo struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
+type FieldInfo struct {
+
+	// Table field name
+	FieldName *string `json:"FieldName,omitempty" name:"FieldName"`
+
+	// Whether it is a primary key field
+	IsPrimaryKey *string `json:"IsPrimaryKey,omitempty" name:"IsPrimaryKey"`
+
+	// Field type
+	FieldType *string `json:"FieldType,omitempty" name:"FieldType"`
+
+	// Field length
+	FieldSize *int64 `json:"FieldSize,omitempty" name:"FieldSize"`
+}
+
 type Filter struct {
 
 	// Filter field name
@@ -1099,6 +1231,61 @@ type IdlFileInfoWithoutContent struct {
 	// Error message
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Error *ErrorInfo `json:"Error,omitempty" name:"Error"`
+}
+
+type MachineInfo struct {
+
+	// Machine type
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// Machine quantity
+	MachineNum *int64 `json:"MachineNum,omitempty" name:"MachineNum"`
+}
+
+type ModifyClusterMachineRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Information of the machines at the storage layer (tcapsvr)
+	ServerList []*MachineInfo `json:"ServerList,omitempty" name:"ServerList" list`
+
+	// Information of the machines at the access layer (tcaproxy)
+	ProxyList []*MachineInfo `json:"ProxyList,omitempty" name:"ProxyList" list`
+
+	// Cluster type. Valid values: `1` (standard), `2` (dedicated)
+	ClusterType *int64 `json:"ClusterType,omitempty" name:"ClusterType"`
+}
+
+func (r *ModifyClusterMachineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterMachineRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyClusterMachineResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Cluster ID
+		ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyClusterMachineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyClusterMachineResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyClusterNameRequest struct {
@@ -1569,6 +1756,51 @@ type ParsedTableInfoNew struct {
 	SortRule *int64 `json:"SortRule,omitempty" name:"SortRule"`
 }
 
+type PoolInfo struct {
+
+	// Unique ID
+	PoolUid *int64 `json:"PoolUid,omitempty" name:"PoolUid"`
+
+	// Whether IPv6 is supported
+	Ipv6Enable *int64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
+
+	// Remaining available cluster resources
+	AvailableAppCount *int64 `json:"AvailableAppCount,omitempty" name:"AvailableAppCount"`
+
+	// The list of machines at the storage layer (tcapsvr)
+	ServerList []*ServerMachineInfo `json:"ServerList,omitempty" name:"ServerList" list`
+
+	// The list of machines at the access layer (tcaproxy)
+	ProxyList []*ProxyMachineInfo `json:"ProxyList,omitempty" name:"ProxyList" list`
+}
+
+type ProxyDetailInfo struct {
+
+	// The unique ID of the access layer (tcaproxy)
+	ProxyUid *string `json:"ProxyUid,omitempty" name:"ProxyUid"`
+
+	// Machine type
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// The speed of processing request packets
+	ProcessSpeed *int64 `json:"ProcessSpeed,omitempty" name:"ProcessSpeed"`
+
+	// Request packet delay
+	AverageProcessDelay *int64 `json:"AverageProcessDelay,omitempty" name:"AverageProcessDelay"`
+
+	// The speed of processing delayed request packets
+	SlowProcessSpeed *int64 `json:"SlowProcessSpeed,omitempty" name:"SlowProcessSpeed"`
+}
+
+type ProxyMachineInfo struct {
+
+	// Unique ID
+	ProxyUid *string `json:"ProxyUid,omitempty" name:"ProxyUid"`
+
+	// Machine type
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+}
+
 type RecoverRecycleTablesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1719,6 +1951,103 @@ type SelectedTableInfoNew struct {
 
 	// Key rollback file content, which is only used for rollback
 	FileContent *string `json:"FileContent,omitempty" name:"FileContent"`
+}
+
+type SelectedTableWithField struct {
+
+	// ID of the table group where the table resides
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table name
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Table ID
+	TableInstanceId *string `json:"TableInstanceId,omitempty" name:"TableInstanceId"`
+
+	// Table description language. Valid values: `PROTO`, `TDR`
+	TableIdlType *string `json:"TableIdlType,omitempty" name:"TableIdlType"`
+
+	// Table data structure. Valid values: `GENERIC`, `LIST`
+	TableType *string `json:"TableType,omitempty" name:"TableType"`
+
+	// The list of fields on which indexes need to be created
+	SelectedFields []*FieldInfo `json:"SelectedFields,omitempty" name:"SelectedFields" list`
+
+	// The number of index shards
+	ShardNum *uint64 `json:"ShardNum,omitempty" name:"ShardNum"`
+}
+
+type ServerDetailInfo struct {
+
+	// The unique ID of the storage layer (tcapsvr)
+	ServerUid *string `json:"ServerUid,omitempty" name:"ServerUid"`
+
+	// Machine type
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// Memory utilization
+	MemoryRate *int64 `json:"MemoryRate,omitempty" name:"MemoryRate"`
+
+	// Disk utilization
+	DiskRate *int64 `json:"DiskRate,omitempty" name:"DiskRate"`
+
+	// The number of reads
+	ReadNum *int64 `json:"ReadNum,omitempty" name:"ReadNum"`
+
+	// The number of writes
+	WriteNum *int64 `json:"WriteNum,omitempty" name:"WriteNum"`
+}
+
+type ServerMachineInfo struct {
+
+	// The unique ID of the machine
+	ServerUid *string `json:"ServerUid,omitempty" name:"ServerUid"`
+
+	// Machine type
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+}
+
+type SetTableIndexRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tables that need to create global indexes
+	SelectedTables []*SelectedTableWithField `json:"SelectedTables,omitempty" name:"SelectedTables" list`
+}
+
+func (r *SetTableIndexRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetTableIndexRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SetTableIndexResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of tables whose global indexes are created
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The list of global index creation results
+		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SetTableIndexResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetTableIndexResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type TableGroupInfo struct {
