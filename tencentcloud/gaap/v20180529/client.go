@@ -1335,7 +1335,7 @@ func NewDescribeRealServersResponse() (response *DescribeRealServersResponse) {
     return
 }
 
-// This API (DescribeRealServers) is used to query origin server information. It can query all origin server information by project names, and supports fuzzy query by specified IPs or domain names.
+// This API is used to query origin server information. It can query all origin servers under the specified project name, and supports fuzzy query by specified IPs or domain names.
 func (c *Client) DescribeRealServers(request *DescribeRealServersRequest) (response *DescribeRealServersResponse, err error) {
     if request == nil {
         request = NewDescribeRealServersRequest()
@@ -1685,7 +1685,7 @@ func NewModifyCertificateAttributesResponse() (response *ModifyCertificateAttrib
     return
 }
 
-// This API (ModifyCertificateAttributes) is used to modify certificates, including identification name and certificate content.
+// This API is used to modify certificate name and content.
 func (c *Client) ModifyCertificateAttributes(request *ModifyCertificateAttributesRequest) (response *ModifyCertificateAttributesResponse, err error) {
     if request == nil {
         request = NewModifyCertificateAttributesRequest()

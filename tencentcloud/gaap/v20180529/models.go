@@ -1115,6 +1115,9 @@ type CreateTCPListenersRequest struct {
 
 	// List of origin server ports, which only supports the listeners of version 1.0 and connection group.
 	RealServerPorts []*uint64 `json:"RealServerPorts,omitempty" name:"RealServerPorts" list`
+
+	// Listener methods of getting client IPs. 0: TOA; 1: Proxy Protocol.
+	ClientIPMethod *int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod"`
 }
 
 func (r *CreateTCPListenersRequest) ToJsonString() string {
@@ -2483,7 +2486,7 @@ type DescribeProxyStatisticsRequest struct {
 	// End time (2019-03-25 12:00:00)
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Statistical metric name list. Values: InBandwidth (inbound bandwidth); OutBandwidth (outbound bandwidth); Concurrent (concurrence); InPackets (inbound packets); OutPackets (outbound packets); PacketLoss (packet loss rate); Latency (latency).
+	// Statistical metric name list. Valid values: `InBandwidth` (inbound bandwidth); `OutBandwidth` (outbound bandwidth); Concurrent (concurrence); `InPackets` (inbound packets); `OutPackets` (outbound packets); `PacketLoss` (packet loss rate); `Latency` (latency); `HttpQPS` (the number of HTTP requests); `HttpsQPS` (the number of HTTPS requests).
 	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
 
 	// Monitoring granularity. It currently supports: 60, 300, 3,600, and 86,400. Unit: seconds.
@@ -2777,6 +2780,12 @@ type DescribeRuleRealServersRequest struct {
 
 	// Forwarding rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 1000.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
 func (r *DescribeRuleRealServersRequest) ToJsonString() string {
@@ -3300,6 +3309,13 @@ type DomainRuleSet struct {
 	// Returns IDs and aliases of multiple certificates when there are multiple origin certificates.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PolyRealServerCertificateAliasInfo []*CertificateAliasInfo `json:"PolyRealServerCertificateAliasInfo,omitempty" name:"PolyRealServerCertificateAliasInfo" list`
+
+	// Domain name status.
+	// 0: running;
+	// 1: changing;
+	// 2: deleting.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DomainStatus *uint64 `json:"DomainStatus,omitempty" name:"DomainStatus"`
 }
 
 type Filter struct {
@@ -4397,6 +4413,18 @@ type ProxyGroupDetail struct {
 	// Tag list
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+
+	// Security policy ID. This field exists if security policies are set.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Connection group version
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// Describes how the connection obtains client IPs. 0: TOA; 1: Proxy Protocol.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClientIPMethod []*int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod" list`
 }
 
 type ProxyGroupInfo struct {
@@ -4546,9 +4574,13 @@ type ProxyInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ModifyConfigTime *uint64 `json:"ModifyConfigTime,omitempty" name:"ModifyConfigTime"`
 
-	// Connection type
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Connection type. 104: SILVER connection.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ProxyType *uint64 `json:"ProxyType,omitempty" name:"ProxyType"`
+
+	// Describes how the connection obtains client IPs. 0: TOA; 1: Proxy Protocol.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClientIPMethod []*int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod" list`
 }
 
 type ProxySimpleInfo struct {
@@ -4688,6 +4720,18 @@ type RuleCheckParams struct {
 	// Domain name to be performed health check
 	// You cannot modify this parameter when calling ModifyRuleAttribute API.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Origin server failure check frequency
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FailedCountInter *uint64 `json:"FailedCountInter,omitempty" name:"FailedCountInter"`
+
+	// Origin server health check threshold. The service will be blocked once the threshold is exceeded.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FailedThreshold *uint64 `json:"FailedThreshold,omitempty" name:"FailedThreshold"`
+
+	// Time of a request is blocked after the origin server health check threshold is exceeded.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BlockInter *uint64 `json:"BlockInter,omitempty" name:"BlockInter"`
 }
 
 type RuleInfo struct {
@@ -4917,6 +4961,10 @@ type TCPListener struct {
 
 	// Listener creation time; using UNIX timestamp.
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Describes how the listener obtains client IPs. 0: TOA; 1: Proxy Protocol.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClientIPMethod *uint64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod"`
 }
 
 type TagPair struct {

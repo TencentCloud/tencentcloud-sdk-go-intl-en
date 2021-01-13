@@ -162,7 +162,7 @@ type AddCdnDomainRequest struct {
 	// IPv6 access configuration
 	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
 
-	// 
+	// Offline cache
 	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
 }
 
@@ -2491,7 +2491,8 @@ type DetailDomain struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AdvanceSet []*AdvanceConfig `json:"AdvanceSet,omitempty" name:"AdvanceSet" list`
 
-	// 
+	// Offline cache
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
 
 	// 
@@ -3553,7 +3554,7 @@ type MaxAgeRule struct {
 
 type OfflineCache struct {
 
-	// 
+	// Whether to enable offline cache. Valid values: `on` and `off`.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -3619,7 +3620,8 @@ type Origin struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	PathRules []*PathRule `json:"PathRules,omitempty" name:"PathRules" list`
 
-	// 
+	// Path-based origin-pull configurations
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	PathBasedOrigin []*PathBasedOriginRule `json:"PathBasedOrigin,omitempty" name:"PathBasedOrigin" list`
 }
 
@@ -3779,13 +3781,21 @@ type OverseaConfig struct {
 
 type PathBasedOriginRule struct {
 
-	// 
+	// Rule types:
+	// `file`: effective for files with specified suffixes.
+	// `directory`: effective for specified paths.
+	// `path`: effective for specified absolute paths.
+	// `index`: effective for specified homepages.
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
-	// 
+	// Content for each `RuleType`:
+	// For `file`, enter a suffix, e.g., `jpg` or `txt`.
+	// For `directory`, enter a path, e.g., `/xxx/test/`.
+	// For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+	// For `index`, enter a forward slash `/`.
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
 
-	// 
+	// Origin server list. Domain names and IPv4 addresses are supported.
 	Origin []*string `json:"Origin,omitempty" name:"Origin" list`
 }
 
@@ -4937,7 +4947,7 @@ type UpdateDomainConfigRequest struct {
 	// IPv6 access configuration
 	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
 
-	// 
+	// Offline cache
 	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
 
 	// 

@@ -20,6 +20,352 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AlarmEvent struct {
+
+	// Event name
+	EventName *string `json:"EventName,omitempty" name:"EventName"`
+
+	// Event display name
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Alarm policy type
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+type AlarmHistory struct {
+
+	// Alarm record ID
+	AlarmId *string `json:"AlarmId,omitempty" name:"AlarmId"`
+
+	// Monitor type
+	MonitorType *string `json:"MonitorType,omitempty" name:"MonitorType"`
+
+	// Policy type
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Alarm object
+	AlarmObject *string `json:"AlarmObject,omitempty" name:"AlarmObject"`
+
+	// Alarm content
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Timestamp of the first occurrence
+	FirstOccurTime *int64 `json:"FirstOccurTime,omitempty" name:"FirstOccurTime"`
+
+	// Timestamp of the last occurrence
+	LastOccurTime *int64 `json:"LastOccurTime,omitempty" name:"LastOccurTime"`
+
+	// Alarm status. Valid values: ALARM (not resolved), OK (resolved), NO_CONF (expired), NO_DATA (insufficient data)
+	AlarmStatus *string `json:"AlarmStatus,omitempty" name:"AlarmStatus"`
+
+	// Alarm policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// VPC of alarm object for basic product alarm
+	VPC *string `json:"VPC,omitempty" name:"VPC"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Project name
+	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
+
+	// Instance group of alarm object
+	InstanceGroup []*InstanceGroups `json:"InstanceGroup,omitempty" name:"InstanceGroup" list`
+
+	// Recipient list
+	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids" list`
+
+	// Recipient group list
+	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups" list`
+
+	// Alarm channel list. Valid values: SMS (SMS), EMAIL (email), CALL (phone), WECHAT (WeChat)
+	NoticeWays []*string `json:"NoticeWays,omitempty" name:"NoticeWays" list`
+
+	// Compatible Alarm 1.0 policy group ID
+	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
+
+	// Alarm type
+	AlarmType *string `json:"AlarmType,omitempty" name:"AlarmType"`
+
+	// Event ID
+	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+
+	// Region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Whether the policy exists. Valid values: 0 (no), 1 (yes)
+	PolicyExists *int64 `json:"PolicyExists,omitempty" name:"PolicyExists"`
+}
+
+type AlarmNotice struct {
+
+	// Alarm notification template ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Alarm notification template name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Last modified time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
+
+	// Last modified by
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UpdatedBy *string `json:"UpdatedBy,omitempty" name:"UpdatedBy"`
+
+	// Alarm notification type. Valid values: ALARM (for unresolved alarms), OK (for resolved alarms), ALL (for all alarms)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NoticeType *string `json:"NoticeType,omitempty" name:"NoticeType"`
+
+	// User notification list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UserNotices []*UserNotice `json:"UserNotices,omitempty" name:"UserNotices" list`
+
+	// Callback notification list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices" list`
+
+	// Whether it is the system default notification template. Valid values: 0 (no), 1 (yes)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsPreset *int64 `json:"IsPreset,omitempty" name:"IsPreset"`
+
+	// Notification language. Valid values: zh-CN (Chinese), en-US (English)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NoticeLanguage *string `json:"NoticeLanguage,omitempty" name:"NoticeLanguage"`
+
+	// List of IDs of the alarm policies bound to alarm notification template
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds" list`
+}
+
+type AlarmPolicy struct {
+
+	// Alarm policy ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Alarm policy name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Remarks
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MonitorType *string `json:"MonitorType,omitempty" name:"MonitorType"`
+
+	// Status. Valid values: 0 (disabled), 1 (enabled)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+
+	// Number of instances bound to policy group
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UseSum *int64 `json:"UseSum,omitempty" name:"UseSum"`
+
+	// Project ID. Valid values: -1 (no project), 0 (default project)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Project name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
+
+	// Alarm policy type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Trigger condition template ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ConditionTemplateId *string `json:"ConditionTemplateId,omitempty" name:"ConditionTemplateId"`
+
+	// Metric trigger condition
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Condition *AlarmPolicyCondition `json:"Condition,omitempty" name:"Condition"`
+
+	// Event trigger condition
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	EventCondition *AlarmPolicyEventCondition `json:"EventCondition,omitempty" name:"EventCondition"`
+
+	// Notification rule ID list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
+
+	// Notification rule list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Notices []*AlarmNotice `json:"Notices,omitempty" name:"Notices" list`
+
+	// Triggered task list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks" list`
+
+	// Template policy group
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ConditionsTemp *ConditionsTemp `json:"ConditionsTemp,omitempty" name:"ConditionsTemp"`
+
+	// `Uin` of the last modifying user
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	LastEditUin *string `json:"LastEditUin,omitempty" name:"LastEditUin"`
+
+	// Update time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UpdateTime *int64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// Creation time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InsertTime *int64 `json:"InsertTime,omitempty" name:"InsertTime"`
+
+	// Region
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Region []*string `json:"Region,omitempty" name:"Region" list`
+
+	// Namespace display name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NamespaceShowName *string `json:"NamespaceShowName,omitempty" name:"NamespaceShowName"`
+
+	// Whether it is the default policy. Valid values: 1 (yes), 0 (no)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsDefault *int64 `json:"IsDefault,omitempty" name:"IsDefault"`
+
+	// Whether the default policy can be set. Valid values: 1 (yes), 0 (no)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CanSetDefault *int64 `json:"CanSetDefault,omitempty" name:"CanSetDefault"`
+
+	// Instance group ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InstanceGroupId *int64 `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
+
+	// Total number of instances in instance group
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InstanceSum *int64 `json:"InstanceSum,omitempty" name:"InstanceSum"`
+
+	// Instance group name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InstanceGroupName *string `json:"InstanceGroupName,omitempty" name:"InstanceGroupName"`
+
+	// Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Policy ID for instance/instance group binding and unbinding APIs (BindingPolicyObject, UnBindingAllPolicyObject, UnBindingPolicyObject)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
+}
+
+type AlarmPolicyCondition struct {
+
+	// Metric trigger condition operator. Valid values: 0 (OR), 1 (AND)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
+
+	// Alarm trigger condition list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Rules []*AlarmPolicyRule `json:"Rules,omitempty" name:"Rules" list`
+}
+
+type AlarmPolicyEventCondition struct {
+
+	// Alarm trigger condition list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Rules []*AlarmPolicyRule `json:"Rules,omitempty" name:"Rules" list`
+}
+
+type AlarmPolicyFilter struct {
+
+	// Filter condition type. Valid values: DIMENSION (uses dimensions for filtering)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// JSON string generated by serializing the `AlarmPolicyDimension` two-dimensional array. The one-dimensional arrays are in OR relationship, and the elements in a one-dimensional array are in AND relationship
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Dimensions *string `json:"Dimensions,omitempty" name:"Dimensions"`
+}
+
+type AlarmPolicyRule struct {
+
+	// Metric name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Statistical period in seconds
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Operator
+	// intelligent = intelligent detection without threshold
+	// eq = equal to
+	// ge = greater than or equal to
+	// gt = greater than
+	// le = less than or equal to
+	// lt = less than
+	// ne = not equal to
+	// day_increase = daily increase
+	// day_decrease = daily decrease
+	// day_wave = daily fluctuation
+	// week_increase = weekly increase
+	// week_decrease = weekly decrease
+	// week_wave = weekly fluctuation
+	// cycle_increase = periodical increase
+	// cycle_decrease = periodical decrease
+	// cycle_wave = periodical fluctuation
+	// re = regex match
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// Threshold
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// Number of cycles for continuous notification. Valid values: 1 (1 cycle), 2 (2 cycles), and so on.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ContinuePeriod *int64 `json:"ContinuePeriod,omitempty" name:"ContinuePeriod"`
+
+	// Alarm interval in seconds. Valid values: 0 (do not repeat), 300 (alarm once every 5 minutes), 600 (alarm once every 10 minutes), 900 (alarm once every 15 minutes), 1800 (alarm once every 30 minutes), 3600 (alarm once every hour), 7200 (alarm once every 2 hours), 10800 (alarm once every 3 hours), 21600 (alarm once every 6 hours),  43200 (alarm once every 12 hours), 86400 (alarm once every day)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NoticeFrequency *int64 `json:"NoticeFrequency,omitempty" name:"NoticeFrequency"`
+
+	// Whether the alarm frequency increases exponentially. Valid values: 0 (no), 1 (yes)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsPowerNotice *int64 `json:"IsPowerNotice,omitempty" name:"IsPowerNotice"`
+
+	// Filter condition for one single trigger rule
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Filter *AlarmPolicyFilter `json:"Filter,omitempty" name:"Filter"`
+
+	// Metric display name, which is used in the output parameter
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Unit, which is used in the output parameter
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic threshold)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+}
+
+type AlarmPolicyTriggerTask struct {
+
+	// Triggered task type. Valid value: AS (auto scaling)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Configuration information in JSON format, such as {"Key1":"Value1","Key2":"Value2"}
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TaskConfig *string `json:"TaskConfig,omitempty" name:"TaskConfig"`
+}
+
 type BindingPolicyObjectDimension struct {
 
 	// Region name.
@@ -75,6 +421,170 @@ func (r *BindingPolicyObjectResponse) ToJsonString() string {
 }
 
 func (r *BindingPolicyObjectResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CommonNamespace struct {
+
+	// Namespace ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Namespace name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Namespace value
+	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// Product name
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+	// Configuration information
+	Config *string `json:"Config,omitempty" name:"Config"`
+
+	// List of supported regions
+	AvailableRegions []*string `json:"AvailableRegions,omitempty" name:"AvailableRegions" list`
+
+	// Sort ID
+	SortId *int64 `json:"SortId,omitempty" name:"SortId"`
+
+	// Unique ID in Dashboard
+	DashboardId *string `json:"DashboardId,omitempty" name:"DashboardId"`
+}
+
+type ConditionsTemp struct {
+
+	// Template name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Metric trigger condition
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Condition *AlarmPolicyCondition `json:"Condition,omitempty" name:"Condition"`
+
+	// Event trigger condition
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	EventCondition *AlarmPolicyEventCondition `json:"EventCondition,omitempty" name:"EventCondition"`
+}
+
+type CreateAlarmNoticeRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name. Enter "monitor" here
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Notification template name, which can contain up to 60 characters
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Notification type. Valid values: ALARM (for unresolved alarms), OK (for resolved alarms), ALL (for all alarms)
+	NoticeType *string `json:"NoticeType,omitempty" name:"NoticeType"`
+
+	// Notification language. Valid values: zh-CN (Chinese), en-US (English)
+	NoticeLanguage *string `json:"NoticeLanguage,omitempty" name:"NoticeLanguage"`
+
+	// User notifications (up to 5)
+	UserNotices []*UserNotice `json:"UserNotices,omitempty" name:"UserNotices" list`
+
+	// Callback notifications (up to 3)
+	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices" list`
+}
+
+func (r *CreateAlarmNoticeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAlarmNoticeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAlarmNoticeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Alarm notification template ID
+		NoticeId *string `json:"NoticeId,omitempty" name:"NoticeId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateAlarmNoticeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAlarmNoticeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAlarmPolicyRequest struct {
+	*tchttp.BaseRequest
+
+	// Value fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Policy name, which can contain up to 20 characters
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring)
+	MonitorType *string `json:"MonitorType,omitempty" name:"MonitorType"`
+
+	// Alarm policy type such as cvm_device, which is obtained through the `DescribeAllNamespaces` API
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Remarks with up to 100 letters, digits, underscores, and hyphens
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether to enable. Valid values: 0 (no), 1 (yes). Default value: 1. This parameter can be left empty
+	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+
+	// Project ID. Valid values: -1 (no project), 0 (default project). Default value: -1. This parameter can be left empty
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Metric trigger condition
+	Condition *AlarmPolicyCondition `json:"Condition,omitempty" name:"Condition"`
+
+	// Event trigger condition
+	EventCondition *AlarmPolicyEventCondition `json:"EventCondition,omitempty" name:"EventCondition"`
+
+	// List of notification rule IDs, which is obtained through the `DescribeAlarmNotices` API
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
+
+	// Triggered task list
+	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks" list`
+}
+
+func (r *CreateAlarmPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAlarmPolicyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAlarmPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Alarm policy ID
+		PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+		// Policy ID for instance/instance group binding and unbinding APIs (BindingPolicyObject, UnBindingAllPolicyObject, UnBindingPolicyObject)
+		OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateAlarmPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateAlarmPolicyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -200,6 +710,80 @@ type DataPoint struct {
 
 	// The array of monitoring values, which is in one-to-one correspondence to Timestamps
 	Values []*float64 `json:"Values,omitempty" name:"Values" list`
+}
+
+type DeleteAlarmNoticesRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name. Enter "monitor" here
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm notification template ID list
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
+}
+
+func (r *DeleteAlarmNoticesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteAlarmNoticesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteAlarmNoticesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteAlarmNoticesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteAlarmNoticesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteAlarmPolicyRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name, which is fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm policy ID list
+	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds" list`
+}
+
+func (r *DeleteAlarmPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteAlarmPolicyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteAlarmPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteAlarmPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteAlarmPolicyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type DeletePolicyGroupRequest struct {
@@ -349,6 +933,502 @@ func (r *DescribeAccidentEventListResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeAlarmEventsRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name, which is fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm policy type such as cvm_device, which is obtained through the `DescribeAllNamespaces` API
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *DescribeAlarmEventsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmEventsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmEventsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Alarm event list
+		Events []*AlarmEvent `json:"Events,omitempty" name:"Events" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAlarmEventsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmEventsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmHistoriesRequest struct {
+	*tchttp.BaseRequest
+
+	// Value fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Page number starting from 1. Default value: 1
+	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// Number of entries per page. Value range: 1–100. Default value: 20
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Sort by the first occurrence time in descending order by default. Valid values: ASC (ascending), DESC (descending)
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Start time, which is the timestamp exactly one day ago
+	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time, which is the current timestamp by default
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Filter by monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring). If this parameter is left empty, all will be queried by default
+	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes" list`
+
+	// Filter by alarm object. Fuzzy search with string is supported
+	AlarmObject *string `json:"AlarmObject,omitempty" name:"AlarmObject"`
+
+	// Filter by alarm status. Valid values: ALARM (not resolved), OK (resolved), NO_CONF (expired), NO_DATA (insufficient data). If this parameter is left empty, all will be queried by default
+	AlarmStatus []*string `json:"AlarmStatus,omitempty" name:"AlarmStatus" list`
+
+	// Filter by project ID. Valid values: -1 (no project), 0 (default project)
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
+
+	// Filter by instance group ID
+	InstanceGroupIds []*int64 `json:"InstanceGroupIds,omitempty" name:"InstanceGroupIds" list`
+
+	// Filter by policy type
+	Namespaces []*MonitorTypeNamespace `json:"Namespaces,omitempty" name:"Namespaces" list`
+
+	// Filter by metric name
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
+
+	// Fuzzy search by policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Fuzzy search by alarm content
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Search by recipient
+	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids" list`
+
+	// Search by recipient group
+	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups" list`
+
+	// Search by alarm policy ID list
+	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds" list`
+}
+
+func (r *DescribeAlarmHistoriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmHistoriesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmHistoriesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Alarm record list
+		Histories []*AlarmHistory `json:"Histories,omitempty" name:"Histories" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAlarmHistoriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmHistoriesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmMetricsRequest struct {
+	*tchttp.BaseRequest
+
+	// Value fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Monitor type filter. Valid values: MT_QCE (Tencent Cloud service monitoring)
+	MonitorType *string `json:"MonitorType,omitempty" name:"MonitorType"`
+
+	// Alarm policy type such as cvm_device, which is obtained through the `DescribeAllNamespaces` API
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *DescribeAlarmMetricsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmMetricsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmMetricsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Alarm metric list
+		Metrics []*Metric `json:"Metrics,omitempty" name:"Metrics" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAlarmMetricsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmMetricsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmNoticeCallbacksRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name. Enter "monitor" here
+	Module *string `json:"Module,omitempty" name:"Module"`
+}
+
+func (r *DescribeAlarmNoticeCallbacksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmNoticeCallbacksRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmNoticeCallbacksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Alarm callback notification
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAlarmNoticeCallbacksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmNoticeCallbacksResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmNoticeRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name. Enter "monitor" here
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm notification template ID
+	NoticeId *string `json:"NoticeId,omitempty" name:"NoticeId"`
+}
+
+func (r *DescribeAlarmNoticeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmNoticeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmNoticeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Alarm notification template details
+		Notice *AlarmNotice `json:"Notice,omitempty" name:"Notice"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAlarmNoticeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmNoticeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmNoticesRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name. Enter "monitor" here
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Page number. Minimum value: 1
+	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// Number of entries per page. Value range: 1–200
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Sort by update time. Valid values: ASC (ascending), DESC (descending)
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Root account `uid`, which is used to create preset notifications
+	OwnerUid *int64 `json:"OwnerUid,omitempty" name:"OwnerUid"`
+
+	// Alarm notification template name, which is used for fuzzy search
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Filter by recipient. The type of notified users should be selected for the alarm notification template. Valid values: USER (user), GROUP (user group). If this parameter is left empty, no filter by recipient will be performed
+	ReceiverType *string `json:"ReceiverType,omitempty" name:"ReceiverType"`
+
+	// Recipient object list
+	UserIds []*int64 `json:"UserIds,omitempty" name:"UserIds" list`
+
+	// Recipient group list
+	GroupIds []*int64 `json:"GroupIds,omitempty" name:"GroupIds" list`
+}
+
+func (r *DescribeAlarmNoticesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmNoticesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmNoticesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of alarm notification templates
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Alarm notification template list
+		Notices []*AlarmNotice `json:"Notices,omitempty" name:"Notices" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAlarmNoticesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmNoticesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmPoliciesRequest struct {
+	*tchttp.BaseRequest
+
+	// Value fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Page number starting from 1. Default value: 1
+	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// Number of entries per page. Value range: 1–100. Default value: 20
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Fuzzy search by policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Filter by monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring). If this parameter is left empty, all will be queried by default
+	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes" list`
+
+	// Filter by namespace
+	Namespaces []*string `json:"Namespaces,omitempty" name:"Namespaces" list`
+
+	// Alarm object list
+	Dimensions *string `json:"Dimensions,omitempty" name:"Dimensions"`
+
+	// Search by recipient
+	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids" list`
+
+	// Search by recipient group
+	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups" list`
+
+	// Filter by default policy. Valid values: DEFAULT (display default policy), NOT_DEFAULT (display non-default policies). If this parameter is left empty, all policies will be displayed
+	PolicyType []*string `json:"PolicyType,omitempty" name:"PolicyType" list`
+
+	// Sort by field
+	Field *string `json:"Field,omitempty" name:"Field"`
+
+	// Sort order. Valid values: ASC (ascending), DESC (descending)
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Project ID array
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
+
+	// Alarm notification ID list
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
+
+	// Filter by trigger condition. Valid values: STATIC (display policies with static threshold), DYNAMIC (display policies with dynamic threshold). If this parameter is left empty, all policies will be displayed
+	RuleTypes []*string `json:"RuleTypes,omitempty" name:"RuleTypes" list`
+
+	// Status. Valid values: 1 (enabled), 0 (disabled)
+	Enable []*int64 `json:"Enable,omitempty" name:"Enable" list`
+}
+
+func (r *DescribeAlarmPoliciesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmPoliciesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmPoliciesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of policies
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Policy array
+		Policies []*AlarmPolicy `json:"Policies,omitempty" name:"Policies" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAlarmPoliciesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmPoliciesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmPolicyRequest struct {
+	*tchttp.BaseRequest
+
+	// Value fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
+func (r *DescribeAlarmPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmPolicyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAlarmPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Policy details
+		Policy *AlarmPolicy `json:"Policy,omitempty" name:"Policy"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAlarmPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAlarmPolicyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAllNamespacesRequest struct {
+	*tchttp.BaseRequest
+
+	// Filter by use case. Valid values: ST_DASHBOARD (Dashboard type), ST_ALARM (alarm type)
+	SceneType *string `json:"SceneType,omitempty" name:"SceneType"`
+
+	// Value fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Filter by monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring). If this parameter is left empty, all will be queried by default
+	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes" list`
+
+	// Filter by namespace ID. If this parameter is left empty, all will be queried
+	Ids []*string `json:"Ids,omitempty" name:"Ids" list`
+}
+
+func (r *DescribeAllNamespacesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAllNamespacesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAllNamespacesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Alarm policy type of Tencent Cloud service (disused)
+		QceNamespaces *CommonNamespace `json:"QceNamespaces,omitempty" name:"QceNamespaces"`
+
+		// Other alarm policy type (disused)
+		CustomNamespaces *CommonNamespace `json:"CustomNamespaces,omitempty" name:"CustomNamespaces"`
+
+		// Alarm policy type of Tencent Cloud service
+		QceNamespacesNew []*CommonNamespace `json:"QceNamespacesNew,omitempty" name:"QceNamespacesNew" list`
+
+		// Other alarm policy type (not supported currently)
+		CustomNamespacesNew []*CommonNamespace `json:"CustomNamespacesNew,omitempty" name:"CustomNamespacesNew" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAllNamespacesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAllNamespacesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeBaseMetricsRequest struct {
 	*tchttp.BaseRequest
 
@@ -402,12 +1482,12 @@ type DescribeBasicAlarmListAlarms struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
 
-	// Alarm status ID.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Alarm status ID. Valid values: 0 (not resolved), 1 (resolved), 2/3/5 (insufficient data), 4 (expired)
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-	// Alarm status.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Alarm status. Valid values: ALARM (not resolved), OK (resolved), NO_DATA (insufficient data), NO_CONF (expired)
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	AlarmStatus *string `json:"AlarmStatus,omitempty" name:"AlarmStatus"`
 
 	// Policy group ID.
@@ -669,6 +1749,43 @@ func (r *DescribeBindingPolicyObjectListResponse) ToJsonString() string {
 }
 
 func (r *DescribeBindingPolicyObjectListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMonitorTypesRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name, which is fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+}
+
+func (r *DescribeMonitorTypesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMonitorTypesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMonitorTypesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring)
+		MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeMonitorTypesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMonitorTypesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1561,22 +2678,22 @@ type DimensionsDesc struct {
 type GetMonitorDataRequest struct {
 	*tchttp.BaseRequest
 
-	// Namespace. For detailed namespace descriptions of each Tencent Cloud service, see the corresponding [Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1) documentation
+	// Namespace, such as QCE/CVM. For more information on the namespaces of each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1)
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
-	// Metric name. For detailed metric descriptions of each Tencent Cloud service, see the corresponding [Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1) documentation
+	// Metric name, such as `CPUUsage`. For more information on the metrics of each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The corresponding metric name is the `MetricName`
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
-	// Combination of instance object dimensions
+	// Dimension combination of instance object in the format of `key-value` pair, such as [{"Name":"InstanceId","Value":"ins-j0hk02zo"}]. For more information on the dimensions of each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The value in the dimension column is the `key` in the dimension combination, and the value corresponding to the `key` is the `value` in the combination
 	Instances []*Instance `json:"Instances,omitempty" name:"Instances" list`
 
-	// Monitoring statistical period. The default value is 300, and the unit is s
+	// Monitoring statistical period in seconds, such as 60. Default value: 300. The statistical period varies by metric. For more information on the statistical periods supported by each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The values in the statistical period column are the supported statistical periods
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
 	// Start time such as 2018-09-22T19:51:23+08:00
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time. Uses the current time by default and cannot be earlier than StartTime
+	// End time, which is the current time by default, such as 2018-09-22T20:51:23+08:00. `EndTime` cannot be earlier than `StartTime`
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
@@ -1639,6 +2756,55 @@ type InstanceGroup struct {
 	InstanceGroupName *string `json:"InstanceGroupName,omitempty" name:"InstanceGroupName"`
 }
 
+type InstanceGroups struct {
+
+	// Instance group ID
+	Id *int64 `json:"Id,omitempty" name:"Id"`
+
+	// Instance group name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type Metric struct {
+
+	// Alarm policy type
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Metric name
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Metric display name
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Minimum value
+	Min *float64 `json:"Min,omitempty" name:"Min"`
+
+	// Maximum value
+	Max *float64 `json:"Max,omitempty" name:"Max"`
+
+	// Dimension list
+	Dimensions []*string `json:"Dimensions,omitempty" name:"Dimensions" list`
+
+	// Unit
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// Metric configuration
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MetricConfig *MetricConfig `json:"MetricConfig,omitempty" name:"MetricConfig"`
+}
+
+type MetricConfig struct {
+
+	// Allowed operator
+	Operator []*string `json:"Operator,omitempty" name:"Operator" list`
+
+	// Allowed data cycle in seconds
+	Period []*int64 `json:"Period,omitempty" name:"Period" list`
+
+	// Allowed number of continuous cycles
+	ContinuePeriod []*int64 `json:"ContinuePeriod,omitempty" name:"ContinuePeriod" list`
+}
+
 type MetricDatum struct {
 
 	// Metric name.
@@ -1682,6 +2848,264 @@ type MetricSet struct {
 
 	// Dimension description
 	Dimensions []*DimensionsDesc `json:"Dimensions,omitempty" name:"Dimensions" list`
+}
+
+type ModifyAlarmNoticeRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name. Enter "monitor" here
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm notification rule name, which can contain up to 60 characters
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Notification type. Valid values: ALARM (for unresolved alarms), OK (for resolved alarms), ALL (for all alarms)
+	NoticeType *string `json:"NoticeType,omitempty" name:"NoticeType"`
+
+	// Notification language. Valid values: zh-CN (Chinese), en-US (English)
+	NoticeLanguage *string `json:"NoticeLanguage,omitempty" name:"NoticeLanguage"`
+
+	// Alarm notification template ID
+	NoticeId *string `json:"NoticeId,omitempty" name:"NoticeId"`
+
+	// User notifications (up to 5)
+	UserNotices []*UserNotice `json:"UserNotices,omitempty" name:"UserNotices" list`
+
+	// Callback notifications (up to 3)
+	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices" list`
+}
+
+func (r *ModifyAlarmNoticeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmNoticeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmNoticeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyAlarmNoticeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmNoticeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmPolicyConditionRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name, which is fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Metric trigger condition
+	Condition *AlarmPolicyCondition `json:"Condition,omitempty" name:"Condition"`
+
+	// Event trigger condition
+	EventCondition *AlarmPolicyEventCondition `json:"EventCondition,omitempty" name:"EventCondition"`
+}
+
+func (r *ModifyAlarmPolicyConditionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmPolicyConditionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmPolicyConditionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyAlarmPolicyConditionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmPolicyConditionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmPolicyInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name. Enter "monitor" here
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Field to be modified. Valid values: NAME (policy name), REMARK (policy remarks)
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Value after modification
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+func (r *ModifyAlarmPolicyInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmPolicyInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmPolicyInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyAlarmPolicyInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmPolicyInfoResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmPolicyNoticeRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name. Enter "monitor" here
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Alarm notification template ID list
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
+}
+
+func (r *ModifyAlarmPolicyNoticeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmPolicyNoticeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmPolicyNoticeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyAlarmPolicyNoticeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmPolicyNoticeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmPolicyStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name, which is fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Status. Valid values: 0 (disabled), 1 (enabled)
+	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+}
+
+func (r *ModifyAlarmPolicyStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmPolicyStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmPolicyStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyAlarmPolicyStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmPolicyStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmPolicyTasksRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name. Enter "monitor" here
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// List of tasks triggered by alarm policy. If this parameter is left empty, it indicates to unbind all tasks
+	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks" list`
+}
+
+func (r *ModifyAlarmPolicyTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmPolicyTasksRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAlarmPolicyTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyAlarmPolicyTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyAlarmPolicyTasksResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyAlarmReceiversRequest struct {
@@ -1824,6 +3248,15 @@ func (r *ModifyPolicyGroupResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type MonitorTypeNamespace struct {
+
+	// Monitor type
+	MonitorType *string `json:"MonitorType,omitempty" name:"MonitorType"`
+
+	// Policy type value
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
 type PeriodsSt struct {
 
 	// Period
@@ -1964,6 +3397,58 @@ func (r *SendCustomAlarmMsgResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type SetDefaultAlarmPolicyRequest struct {
+	*tchttp.BaseRequest
+
+	// Module name, which is fixed at "monitor"
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Alarm policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
+func (r *SetDefaultAlarmPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetDefaultAlarmPolicyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SetDefaultAlarmPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SetDefaultAlarmPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetDefaultAlarmPolicyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type URLNotice struct {
+
+	// Callback URL, which can contain up to 256 characters
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	URL *string `json:"URL,omitempty" name:"URL"`
+
+	// Whether verification is passed. Valid values: 0 (no), 1 (yes)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsValid *int64 `json:"IsValid,omitempty" name:"IsValid"`
+
+	// Verification code
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ValidationCode *string `json:"ValidationCode,omitempty" name:"ValidationCode"`
+}
+
 type UnBindingAllPolicyObjectRequest struct {
 	*tchttp.BaseRequest
 
@@ -2010,7 +3495,7 @@ type UnBindingPolicyObjectRequest struct {
 	// Policy group ID.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 
-	// List of unique IDs of object instances to be deleted.
+	// List of unique IDs of the object instances to be deleted. `UniqueId` can be obtained from the output parameter `List` of the [DescribeBindingPolicyObjectList](https://intl.cloud.tencent.com/document/api/248/40570?from_cn_redirect=1) API
 	UniqueId []*string `json:"UniqueId,omitempty" name:"UniqueId" list`
 
 	// Instance group ID. The UniqueId parameter is invalid if object instances are deleted by instance group.
@@ -2042,4 +3527,51 @@ func (r *UnBindingPolicyObjectResponse) ToJsonString() string {
 
 func (r *UnBindingPolicyObjectResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type UserNotice struct {
+
+	// Recipient type. Valid values: USER (user), GROUP (user group)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ReceiverType *string `json:"ReceiverType,omitempty" name:"ReceiverType"`
+
+	// Notification start time, which is expressed by the number of seconds since 00:00:00. Value range: 0–86399
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Notification end time, which is expressed by the number of seconds since 00:00:00. Value range: 0–86399
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Notification channel list. Valid values: EMAIL (email), SMS (SMS), CALL (phone), WECHAT (WeChat)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NoticeWay []*string `json:"NoticeWay,omitempty" name:"NoticeWay" list`
+
+	// User `uid` list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UserIds []*int64 `json:"UserIds,omitempty" name:"UserIds" list`
+
+	// User group ID list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	GroupIds []*int64 `json:"GroupIds,omitempty" name:"GroupIds" list`
+
+	// Phone polling list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PhoneOrder []*int64 `json:"PhoneOrder,omitempty" name:"PhoneOrder" list`
+
+	// Number of phone pollings. Value range: 1–5
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PhoneCircleTimes *int64 `json:"PhoneCircleTimes,omitempty" name:"PhoneCircleTimes"`
+
+	// Call interval in seconds within one polling. Value range: 60–900
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PhoneInnerInterval *int64 `json:"PhoneInnerInterval,omitempty" name:"PhoneInnerInterval"`
+
+	// Polling interval in seconds. Value range: 60–900
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PhoneCircleInterval *int64 `json:"PhoneCircleInterval,omitempty" name:"PhoneCircleInterval"`
+
+	// Whether receipt notification is required. Valid values: 0 (no), 1 (yes)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NeedPhoneArriveNotice *int64 `json:"NeedPhoneArriveNotice,omitempty" name:"NeedPhoneArriveNotice"`
 }
