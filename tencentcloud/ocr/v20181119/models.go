@@ -29,12 +29,27 @@ type BankCardOCRRequest struct {
 	// Either the `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
 
-	// URL address of the image.
+	// URL address of image. (This field is not supported outside Chinese mainland)
 	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-	// Supported image size: the downloaded image cannot exceed 7 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-	// It is recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+	// Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 	// The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// 
+	RetBorderCutImage *bool `json:"RetBorderCutImage,omitempty" name:"RetBorderCutImage"`
+
+	// 
+	RetCardNoImage *bool `json:"RetCardNoImage,omitempty" name:"RetCardNoImage"`
+
+	// 
+	EnableCopyCheck *bool `json:"EnableCopyCheck,omitempty" name:"EnableCopyCheck"`
+
+	// 
+	EnableReshootCheck *bool `json:"EnableReshootCheck,omitempty" name:"EnableReshootCheck"`
+
+	// 
+	EnableBorderCheck *bool `json:"EnableBorderCheck,omitempty" name:"EnableBorderCheck"`
 }
 
 func (r *BankCardOCRRequest) ToJsonString() string {
@@ -90,9 +105,9 @@ type GeneralAccurateOCRRequest struct {
 	// Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
 
-	// URL address of image.
-	// The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
-	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	// URL address of image. (This field is not supported outside Chinese mainland)
+	// The image cannot exceed 7 MB after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
+	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 }
 
@@ -133,13 +148,12 @@ type GeneralBasicOCRRequest struct {
 	*tchttp.BaseRequest
 
 	// Base64-encoded value of image/PDF.
-	// The image/PDF cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
-	// Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+	// The image/PDF cannot exceed 7 MB after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
 
-	// URL address of image/PDF.
-	// The image/PDF cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
-	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	// URL address of image/PDF. (This field is not supported outside Chinese mainland)
+	// The image/PDF cannot exceed 7 MB after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
+	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 
 	// Reserved field.
@@ -222,10 +236,10 @@ type HKIDCardOCRRequest struct {
 	// Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
 
-	// URL of the image.
+	// URL address of image. (This field is not supported outside Chinese mainland)
 	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-	// Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+	// Supported image size: the downloaded image cannot exceed 3 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 	// The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 }
@@ -500,10 +514,10 @@ type TableOCRRequest struct {
 	// Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
 
-	// URL address of image.
-	// Supported image formats: PNG, JPG, JPEG. GIF is not supported at present.
-	// Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+	// URL address of image. (This field is not supported outside Chinese mainland)
+	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
+	// Supported image size: the downloaded image cannot exceed 3 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 	// The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 }
@@ -521,7 +535,7 @@ type TableOCRResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Recognized text. For more information, please click the link on the left.
+		// Recognized text. For more information, please click the link on the left
 		TextDetections []*TextTable `json:"TextDetections,omitempty" name:"TextDetections" list`
 
 		// Base64-encoded Excel data.

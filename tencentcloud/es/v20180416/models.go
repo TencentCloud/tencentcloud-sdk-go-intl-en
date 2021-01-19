@@ -420,6 +420,43 @@ type EsPublicAcl struct {
 	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList" list`
 }
 
+type GetRequestTargetNodeTypesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *GetRequestTargetNodeTypesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetRequestTargetNodeTypesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetRequestTargetNodeTypesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// A list of node types used to receive requests.
+		TargetNodeTypes []*string `json:"TargetNodeTypes,omitempty" name:"TargetNodeTypes" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetRequestTargetNodeTypesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetRequestTargetNodeTypesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type InstanceInfo struct {
 
 	// Instance ID
@@ -597,6 +634,10 @@ type InstanceInfo struct {
 	// Scenario template type. 0: not enabled; 1: general scenario; 2: log scenario; 3: search scenario
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SceneType *int64 `json:"SceneType,omitempty" name:"SceneType"`
+
+	// Kibana configuration item.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	KibanaConfig *string `json:"KibanaConfig,omitempty" name:"KibanaConfig"`
 }
 
 type InstanceLog struct {
@@ -1034,6 +1075,43 @@ func (r *UpdatePluginsResponse) ToJsonString() string {
 }
 
 func (r *UpdatePluginsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateRequestTargetNodeTypesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// A list of node types used to receive requests.
+	TargetNodeTypes []*string `json:"TargetNodeTypes,omitempty" name:"TargetNodeTypes" list`
+}
+
+func (r *UpdateRequestTargetNodeTypesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateRequestTargetNodeTypesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateRequestTargetNodeTypesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateRequestTargetNodeTypesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateRequestTargetNodeTypesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

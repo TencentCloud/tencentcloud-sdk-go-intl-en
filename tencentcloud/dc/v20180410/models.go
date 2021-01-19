@@ -230,6 +230,9 @@ type CreateDirectConnectTunnelRequest struct {
 
 	// TencentBackupAddress, i.e., Tencent-side standby IP address
 	TencentBackupAddress *string `json:"TencentBackupAddress,omitempty" name:"TencentBackupAddress"`
+
+	// Cloud Attached Connection Service ID
+	CloudAttachId *string `json:"CloudAttachId,omitempty" name:"CloudAttachId"`
 }
 
 func (r *CreateDirectConnectTunnelRequest) ToJsonString() string {
@@ -702,6 +705,10 @@ type DirectConnectTunnel struct {
 	// Whether the connection associated with the dedicated tunnel has the service agreement signed.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	SignLaw *bool `json:"SignLaw,omitempty" name:"SignLaw"`
+
+	// Cloud Attached Connection Service ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CloudAttachId *string `json:"CloudAttachId,omitempty" name:"CloudAttachId"`
 }
 
 type Filter struct {

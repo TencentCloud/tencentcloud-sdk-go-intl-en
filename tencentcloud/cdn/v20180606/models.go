@@ -2495,7 +2495,8 @@ type DetailDomain struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
 
-	// 
+	// Merging pull requests
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginCombine *OriginCombine `json:"OriginCombine,omitempty" name:"OriginCombine"`
 }
 
@@ -3645,7 +3646,7 @@ type OriginAuthenticationTypeA struct {
 
 type OriginCombine struct {
 
-	// 
+	// Whether to enable the merging pull requests feature. Valid values: `on` and `off`.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -4950,7 +4951,7 @@ type UpdateDomainConfigRequest struct {
 	// Offline cache
 	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
 
-	// 
+	// Merging pull requests
 	OriginCombine *OriginCombine `json:"OriginCombine,omitempty" name:"OriginCombine"`
 }
 

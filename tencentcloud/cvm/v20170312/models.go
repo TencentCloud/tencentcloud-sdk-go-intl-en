@@ -246,7 +246,7 @@ type CreateImageRequest struct {
 	// Whether to force shut down an instance to create an image when a soft shutdown fails
 	ForcePoweroff *string `json:"ForcePoweroff,omitempty" name:"ForcePoweroff"`
 
-	// Whether to enable Sysprep when creating a Windows image
+	// Whether to enable Sysprep when creating a Windows image. Click [here](https://intl.cloud.tencent.com/document/product/213/43498?from_cn_redirect=1) to learn more about Sysprep.
 	Sysprep *string `json:"Sysprep,omitempty" name:"Sysprep"`
 
 	// Specified data disk ID included in the full image created from the instance.
@@ -272,7 +272,7 @@ type CreateImageResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Image ID
+		// Image ID.
 	// Note: This field may return null, indicating that no valid value was found.
 		ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
@@ -338,7 +338,7 @@ type DataDisk struct {
 	// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
-	// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
+	// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>LOCAL_NVME: local NVME disk, specified in the `InstanceType`<br><li>LOCAL_PRO: local HDD disk, specified in the `InstanceType`<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Data disk ID. Data disks of the type `LOCAL_BASIC` or `LOCAL_SSD` do not have IDs and do not support this parameter.
@@ -369,6 +369,9 @@ type DataDisk struct {
 	// Currently, this parameter is only used in the `RunInstances` API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+
+	// 
+	ThroughputPerformance *int64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
 }
 
 type DeleteDisasterRecoverGroupsRequest struct {
@@ -1194,7 +1197,7 @@ type DescribeReservedInstancesConfigInfosRequest struct {
 	// Type: Integer
 	// Unit: second
 	// Required: no
-	// Valid values: 31536000 (1 year), 94608000 (3 years)
+	// Valid value: 31536000 (1 year)
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
@@ -1362,37 +1365,6 @@ func (r *DescribeReservedInstancesResponse) ToJsonString() string {
 }
 
 func (r *DescribeReservedInstancesResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeSpotTypeConfigRequest struct {
-	*tchttp.BaseRequest
-}
-
-func (r *DescribeSpotTypeConfigRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *DescribeSpotTypeConfigRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeSpotTypeConfigResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeSpotTypeConfigResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-func (r *DescribeSpotTypeConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2438,8 +2410,8 @@ type ItemPrice struct {
 	// Note: this field may return null, indicating that no valid value is obtained.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 
-	// Percentage of the original price. For example, if you enter "20.0", the discounted price will be 20% of the original price.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Discount. For example, 20.0 indicates 80% off.
+	// Note: this field may return `null`, indicating that no valid value was found.
 	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
 
 	// The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to that the unit price for unlimited usage.
@@ -2461,6 +2433,51 @@ type ItemPrice struct {
 	// Discounted unit price for the usage after 360 hours in USD. It's applicable to pay-as-you-go mode.
 	// Note: this field may return null, indicating that no valid value is obtained.
 	UnitPriceDiscountThirdStep *float64 `json:"UnitPriceDiscountThirdStep,omitempty" name:"UnitPriceDiscountThirdStep"`
+
+	// Original 3-year payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	OriginalPriceThreeYear *float64 `json:"OriginalPriceThreeYear,omitempty" name:"OriginalPriceThreeYear"`
+
+	// Discounted 3-year upfront payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountPriceThreeYear *float64 `json:"DiscountPriceThreeYear,omitempty" name:"DiscountPriceThreeYear"`
+
+	// Discount for 3-year upfront payment. For example, 20.0 indicates 80% off.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountThreeYear *float64 `json:"DiscountThreeYear,omitempty" name:"DiscountThreeYear"`
+
+	// Original 5-year payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	OriginalPriceFiveYear *float64 `json:"OriginalPriceFiveYear,omitempty" name:"OriginalPriceFiveYear"`
+
+	// Discounted 5-year upfront payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountPriceFiveYear *float64 `json:"DiscountPriceFiveYear,omitempty" name:"DiscountPriceFiveYear"`
+
+	// Discount for 5-year upfront payment. For example, 20.0 indicates 80% off.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountFiveYear *float64 `json:"DiscountFiveYear,omitempty" name:"DiscountFiveYear"`
+
+	// Original 1-year payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	OriginalPriceOneYear *float64 `json:"OriginalPriceOneYear,omitempty" name:"OriginalPriceOneYear"`
+
+	// Discounted 1-year payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountPriceOneYear *float64 `json:"DiscountPriceOneYear,omitempty" name:"DiscountPriceOneYear"`
+
+	// Discount for 1-year upfront payment. For example, 20.0 indicates 80% off.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountOneYear *float64 `json:"DiscountOneYear,omitempty" name:"DiscountOneYear"`
 }
 
 type KeyPair struct {
@@ -2872,7 +2889,7 @@ type OsVersion struct {
 
 type Placement struct {
 
-	// The ID of [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) where the instance locates. It can obtained in the `Zone` field returned by [DescribeZones](https://intl.cloud.tencent.com/document/213/15707?from_cn_redirect=1) API.
+	// ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain the ID in the returned `Zone` field.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// ID of the project to which the instance belongs. To obtain the project IDs, you can call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) and look for the `projectId` fields in the response. If this parameter is not specified, the default project will be used.
@@ -3077,13 +3094,13 @@ type ReservedInstanceTypeItem struct {
 	// Memory size.
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Number of GPU cores.
+	// Number of GPUs.
 	Gpu *uint64 `json:"Gpu,omitempty" name:"Gpu"`
 
-	// Number of FPGA cores.
+	// Number of FPGAs.
 	Fpga *uint64 `json:"Fpga,omitempty" name:"Fpga"`
 
-	// Number of storage blocks.
+	// Number of local storage blocks.
 	StorageBlock *uint64 `json:"StorageBlock,omitempty" name:"StorageBlock"`
 
 	// Number of NICs.
@@ -3338,7 +3355,7 @@ func (r *ResetInstancesPasswordResponse) FromJsonString(s string) error {
 type ResetInstancesTypeRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API. The maximum number of instances for each request is 1.
+	// Instance ID(s). To obtain the instance IDs, you can call the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API and find the value `InstanceId` in the response. The maximum number of instances in each request is 1.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 	// Instance model. Different resource specifications are specified for different models. For specific values, call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to get the latest specification list or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
@@ -3418,21 +3435,21 @@ func (r *ResizeInstanceDisksResponse) FromJsonString(s string) error {
 type RunInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone, project, and CDH. You can specify a CDH for a CVM by creating the CVM on the CDH.
-	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
-
-	// The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images</li><br/>You can retrieve available image IDs in the following ways:<br/><li>For the IDs of `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information. For the IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
-	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
-
 	// The instance [billing method](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1). Valid values: <br><li>`POSTPAID_BY_HOUR`: hourly, pay-as-you-go<br><li>`CDHPAID`: you are only billed for CDH instances, not the CVMs running on the CDH instances.<br>Default value: POSTPAID_BY_HOUR.
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 
 	// Configuration of prepaid instances. You can use the parameter to specify the attributes of prepaid instances, such as the subscription period and the auto-renewal plan. This parameter is required for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
+	// Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone, project, and CDH. You can specify a CDH for a CVM by creating the CVM on the CDH.
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
 	// The instance model. Different resource specifications are specified for different instance models.
 	// <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, `S1.SMALL1` will be used by default.<br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images</li><br/>You can retrieve available image IDs in the following ways:<br/><li>For the IDs of `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information. For the IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
+	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
 	// System disk configuration of the instance. If this parameter is not specified, the default value will be used.
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
@@ -3724,7 +3741,7 @@ type Tag struct {
 
 type TagSpecification struct {
 
-	// Type of the resources associated with the tags. Currently only "instance" and "host" are supported.
+	// The type of resource that bound with the tag. Valid values: `instance` (for CVM) and `host` (for CDH).
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
 	// List of tags
@@ -3789,6 +3806,7 @@ type ZoneInfo struct {
 	// The following is a list of all availability zones:
 	// <li> ap-chongqing-1 </li>
 	// <li> ap-seoul-1 </li>
+	// <li> ap-seoul-2 </li>
 	// <li> ap-chengdu-1 </li>
 	// <li> ap-chengdu-2 </li>
 	// <li> ap-hongkong-1 </li>
@@ -3800,8 +3818,10 @@ type ZoneInfo struct {
 	// <li> ap-guangzhou-2 (sold out)</li>
 	// <li> ap-guangzhou-3 </li>
 	// <li> ap-guangzhou-4 </li>
+	// <li> ap-guangzhou-6 </li>
 	// <li> ap-tokyo-1 </li>
 	// <li> ap-singapore-1 </li>
+	// <li> ap-singapore-2 </li>
 	// <li> ap-shanghai-fsi-1 </li>
 	// <li> ap-shanghai-fsi-2 </li>
 	// <li> ap-shanghai-fsi-3 </li>
@@ -3810,6 +3830,7 @@ type ZoneInfo struct {
 	// <li> ap-shanghai-2 </li>
 	// <li> ap-shanghai-3 </li>
 	// <li> ap-shanghai-4 </li>
+	// <li> ap-shanghai-5 </li>
 	// <li> ap-mumbai-1 </li>
 	// <li> ap-mumbai-2 </li>
 	// <li> eu-moscow-1 </li>
@@ -3831,7 +3852,7 @@ type ZoneInfo struct {
 	// Availability zone description, such as Guangzhou Zone 3.
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 
-	// Availability zone ID
+	// Availability zone ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
 	// Availability zone status. Valid values: `AVAILABLE`: available; `UNAVAILABLE`: unavailable.

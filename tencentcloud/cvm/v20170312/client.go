@@ -791,31 +791,6 @@ func (c *Client) DescribeReservedInstancesOfferings(request *DescribeReservedIns
     return
 }
 
-func NewDescribeSpotTypeConfigRequest() (request *DescribeSpotTypeConfigRequest) {
-    request = &DescribeSpotTypeConfigRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cvm", APIVersion, "DescribeSpotTypeConfig")
-    return
-}
-
-func NewDescribeSpotTypeConfigResponse() (response *DescribeSpotTypeConfigResponse) {
-    response = &DescribeSpotTypeConfigResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// This API is used to query spot instances that are available for purchase.
-func (c *Client) DescribeSpotTypeConfig(request *DescribeSpotTypeConfigRequest) (response *DescribeSpotTypeConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeSpotTypeConfigRequest()
-    }
-    response = NewDescribeSpotTypeConfigResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeZoneInstanceConfigInfosRequest() (request *DescribeZoneInstanceConfigInfosRequest) {
     request = &DescribeZoneInstanceConfigInfosRequest{
         BaseRequest: &tchttp.BaseRequest{},

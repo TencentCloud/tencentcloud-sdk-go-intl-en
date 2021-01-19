@@ -424,7 +424,7 @@ type DCDBInstanceInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DcnDstNum *int64 `json:"DcnDstNum,omitempty" name:"DcnDstNum"`
 
-	// Instance type. Valid values: `1` (primary instance (dedicated)), `2` (primary instance), `3` (disaster recovery instance), `4` (disaster recovery instance (dedicated))
+	// Instance type. Valid values: `1` (dedicated primary instance), `2` (standard primary instance), `3` (standard disaster recovery instance), `4` (dedicated disaster recovery instance)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
 }
