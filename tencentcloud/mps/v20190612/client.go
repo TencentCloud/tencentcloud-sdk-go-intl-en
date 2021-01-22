@@ -158,7 +158,7 @@ func NewCreateContentReviewTemplateResponse() (response *CreateContentReviewTemp
     return
 }
 
-// This API is used to create a custom content audit template. Up to 50 templates can be created.
+// This API is used to create a custom template for intelligent content recognition. Up to 50 templates can be created.
 func (c *Client) CreateContentReviewTemplate(request *CreateContentReviewTemplateRequest) (response *CreateContentReviewTemplateResponse, err error) {
     if request == nil {
         request = NewCreateContentReviewTemplateRequest()
@@ -208,7 +208,7 @@ func NewCreatePersonSampleResponse() (response *CreatePersonSampleResponse) {
     return
 }
 
-// This API is used to create a figure sample for video processing operations such as content recognition and audit using the face recognition technology.
+// This API is used to create material samples for video processing operations such as content recognition and detection of inappropriate information with the help of technologies such as facial feature positioning.
 func (c *Client) CreatePersonSample(request *CreatePersonSampleRequest) (response *CreatePersonSampleResponse, err error) {
     if request == nil {
         request = NewCreatePersonSampleRequest()
@@ -333,7 +333,7 @@ func NewCreateWordSamplesResponse() (response *CreateWordSamplesResponse) {
     return
 }
 
-// This API is used to create keyword samples in batches for video processing operations such as content recognition and audit using the OCR and ASR technologies.
+// This API is used to create keyword samples in batches for video processing operations such as content recognition and detection of inappropriate information with the help of the OCR and ASR technologies.
 func (c *Client) CreateWordSamples(request *CreateWordSamplesRequest) (response *CreateWordSamplesResponse, err error) {
     if request == nil {
         request = NewCreateWordSamplesRequest()
@@ -495,7 +495,7 @@ func NewDeleteContentReviewTemplateResponse() (response *DeleteContentReviewTemp
     return
 }
 
-// This API is used to delete a custom content audit template.
+// This API is used to delete a custom intelligent content recognition template.
 func (c *Client) DeleteContentReviewTemplate(request *DeleteContentReviewTemplateRequest) (response *DeleteContentReviewTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteContentReviewTemplateRequest()
@@ -545,7 +545,7 @@ func NewDeletePersonSampleResponse() (response *DeletePersonSampleResponse) {
     return
 }
 
-// This API is used to delete a figure sample based on figure ID.
+// This API is used to delete the material samples that belong to a material ID.
 func (c *Client) DeletePersonSample(request *DeletePersonSampleRequest) (response *DeletePersonSampleResponse, err error) {
     if request == nil {
         request = NewDeletePersonSampleRequest()
@@ -820,7 +820,7 @@ func NewDescribeContentReviewTemplatesResponse() (response *DescribeContentRevie
     return
 }
 
-// This API is used to get the list of content audit templates based on unique template ID. The return result includes all eligible custom and preset content audit templates.
+// This API is used to get the list of content recognition templates using their unique ID. The returned result includes all custom templates that meet the conditions as well as preset content recognition templates.
 func (c *Client) DescribeContentReviewTemplates(request *DescribeContentReviewTemplatesRequest) (response *DescribeContentReviewTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeContentReviewTemplatesRequest()
@@ -895,7 +895,7 @@ func NewDescribePersonSamplesResponse() (response *DescribePersonSamplesResponse
     return
 }
 
-// This API is used to query the information of figure samples and supports paged queries by figure ID, name, and tag.
+// This API is used to query the information of material samples. It supports paginated queries by material ID, name, and tag.
 func (c *Client) DescribePersonSamples(request *DescribePersonSamplesRequest) (response *DescribePersonSamplesResponse, err error) {
     if request == nil {
         request = NewDescribePersonSamplesRequest()
@@ -1226,8 +1226,7 @@ func NewManageTaskResponse() (response *ManageTaskResponse) {
     return
 }
 
-// This API is used to manage an initiated task.
-// > Note: currently, you can only terminate an ongoing live stream processing task.
+// This API is used to manage initiated tasks.
 func (c *Client) ManageTask(request *ManageTaskRequest) (response *ManageTaskResponse, err error) {
     if request == nil {
         request = NewManageTaskRequest()
@@ -1354,7 +1353,7 @@ func NewModifyContentReviewTemplateResponse() (response *ModifyContentReviewTemp
     return
 }
 
-// This API is used to modify a custom content audit template.
+// This API is used to modify a custom intelligent content recognition template.
 func (c *Client) ModifyContentReviewTemplate(request *ModifyContentReviewTemplateRequest) (response *ModifyContentReviewTemplateResponse, err error) {
     if request == nil {
         request = NewModifyContentReviewTemplateRequest()
@@ -1404,7 +1403,7 @@ func NewModifyPersonSampleResponse() (response *ModifyPersonSampleResponse) {
     return
 }
 
-// This API is used to modify figure sample information based on figure ID, such as modifying the name and description and adding/deleting/resetting a face or tag. There should be at least one image left after the face deletion operation; otherwise, please use the reset operation.
+// This API is used to modify material samples by material ID. You can use it to modify the name and description of a material sample and add/delete/reset facial features or tags. There must be at least one image left after the deletion of facial features; otherwise, please reset instead of delete the facial features.
 func (c *Client) ModifyPersonSample(request *ModifyPersonSampleRequest) (response *ModifyPersonSampleResponse, err error) {
     if request == nil {
         request = NewModifyPersonSampleRequest()

@@ -249,7 +249,10 @@ type AiAnalysisTaskClassificationResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -280,7 +283,10 @@ type AiAnalysisTaskCoverResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -311,7 +317,10 @@ type AiAnalysisTaskFrameTagResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -342,7 +351,10 @@ type AiAnalysisTaskHighlightResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -379,7 +391,10 @@ type AiAnalysisTaskTagResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -513,7 +528,10 @@ type AiRecognitionTaskAsrFullTextResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -562,7 +580,10 @@ type AiRecognitionTaskAsrWordsResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -614,7 +635,10 @@ type AiRecognitionTaskFaceResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -677,7 +701,10 @@ type AiRecognitionTaskHeadTailResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -723,7 +750,10 @@ type AiRecognitionTaskObjectResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -778,7 +808,10 @@ type AiRecognitionTaskOcrFullTextResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -833,7 +866,10 @@ type AiRecognitionTaskOcrWordsResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -888,7 +924,10 @@ type AiRecognitionTaskSegmentResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1133,11 +1172,10 @@ type AiReviewTaskPoliticalAsrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1156,11 +1194,10 @@ type AiReviewTaskPoliticalOcrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1180,11 +1217,10 @@ type AiReviewTaskPoliticalResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1204,11 +1240,10 @@ type AiReviewTaskPornAsrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1228,11 +1263,10 @@ type AiReviewTaskPornOcrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1252,11 +1286,10 @@ type AiReviewTaskPornResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1276,10 +1309,10 @@ type AiReviewTaskProhibitedAsrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1298,10 +1331,10 @@ type AiReviewTaskProhibitedOcrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1320,10 +1353,10 @@ type AiReviewTaskTerrorismOcrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1342,11 +1375,10 @@ type AiReviewTaskTerrorismResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -2612,24 +2644,24 @@ func (r *CreateClassResponse) FromJsonString(s string) error {
 type CreateContentReviewTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Switch controlling whether to add audit result to review list (for human review).
-	// <li>ON: yes;</li>
-	// <li>OFF: no.</li>
+	// Whether to allow the recognition result to enter the intelligent recognition platform (for human recognition).
+	// <li>ON: yes</li>
+	// <li>OFF: no</li>
 	ReviewWallSwitch *string `json:"ReviewWallSwitch,omitempty" name:"ReviewWallSwitch"`
 
-	// Content audit template name. Length limit: 64 characters.
+	// Name of an intelligent content recognition template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Description of content audit template. Length limit: 256 characters.
+	// Description of an intelligent content recognition template. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// Control parameter of porn detection.
+	// Control parameter for porn information.
 	PornConfigure *PornConfigureInfo `json:"PornConfigure,omitempty" name:"PornConfigure"`
 
-	// Control parameter of terrorism information detection.
+	// Control parameter for terrorism information.
 	TerrorismConfigure *TerrorismConfigureInfo `json:"TerrorismConfigure,omitempty" name:"TerrorismConfigure"`
 
-	// Control parameter of politically sensitive information detection.
+	// Control parameter for politically sensitive information.
 	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
 	// Control parameter of prohibited information detection. Prohibited information includes:
@@ -2637,7 +2669,7 @@ type CreateContentReviewTemplateRequest struct {
 	// <li>Drug-related.</li>
 	ProhibitedConfigure *ProhibitedConfigureInfo `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
-	// Control parameter of custom content audit.
+	// Control parameter for custom intelligent content recognition.
 	UserDefineConfigure *UserDefineConfigureInfo `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
 
 	// Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
@@ -2660,7 +2692,7 @@ type CreateContentReviewTemplateResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Unique ID of content audit template.
+		// Unique ID of an intelligent recognition template.
 		Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2803,25 +2835,25 @@ func (r *CreateImageSpriteTemplateResponse) FromJsonString(s string) error {
 type CreatePersonSampleRequest struct {
 	*tchttp.BaseRequest
 
-	// Figure name. Length limit: 20 characters.
+	// Name of a sample. Length limit: 20 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Figure use case. Valid values:
-	// 1. Recognition: it is used for content recognition and equivalent to `Recognition.Face`.
-	// 2. Review: it is used for content audit and equivalent to `Review.Face`.
-	// 3. All: it is used for content recognition and content audit and equivalent to 1+2 above.
+	// Usage of a sample. Valid values:
+	// 1. Recognition: used for content recognition; equivalent to `Recognition.Face`
+	// 2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
+	// 3. All: equivalent to 1+2.
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
-	// Figure description. Length limit: 1,024 characters.
+	// Description of a sample. Length limit: 1024 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) face image. Only JPEG and PNG images are supported. Array length limit: 5 images.
-	// Note: the image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
+	// String generated after the sample image is encoded by [Base64](https://tools.ietf.org/html/rfc4648). Only JPEG and PNG images are supported. Array length limit: 5 images.
+	// Note: the image must be a relatively clear full-face photo of a person and has a resolution of no less than 200 x 200.
 	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents" list`
 
-	// Figure tag
-	// <li>Array length limit: 20 tags;</li>
-	// <li>Tag length limit: 128 characters.</li>
+	// Tags of a sample
+	// <li>Array length limit: 20 tags</li>
+	// <li>Length limit of a tag: 128 characters</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -2841,10 +2873,10 @@ type CreatePersonSampleResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Figure information.
+		// Information of a sample.
 		Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
 
-		// Face information failed to be processed.
+		// Information of samples that failed the verification by facial feature positioning.
 		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3339,15 +3371,15 @@ func (r *CreateWatermarkTemplateResponse) FromJsonString(s string) error {
 type CreateWordSamplesRequest struct {
 	*tchttp.BaseRequest
 
-	// <b>Keyword use case. Valid values:</b>
-	// 1. Recognition.Ocr: OCR-based content recognition;
-	// 2. Recognition.Asr: ASR-based content recognition;
-	// 3. Review.Ocr: OCR-based content audit;
-	// 4. Review.Asr: ASR-based content audit;
-	// <b>These values can be merged as follows:</b>
-	// 5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-	// 6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-	// 7. All: ASR-based and OCR-based content recognition and audit, which is equivalent to 1+2+3+4 above;
+	// <b>Keyword usage. Valid values:</b>
+	// 1. Recognition.Ocr: OCR-based content recognition
+	// 2. Recognition.Asr: ASR-based content recognition
+	// 3. Review.Ocr: OCR-based inappropriate information recognition
+	// 4. Review.Asr: ASR-based inappropriate information recognition
+	// <b>Valid values can also be:</b>
+	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+	// 7. All: ASR- and OCR-based content recognition and inappropriate information recognition; equivalent to 1+2+3+4
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
 	// Keyword. Array length limit: 100.
@@ -3572,7 +3604,7 @@ func (r *DeleteClassResponse) FromJsonString(s string) error {
 type DeleteContentReviewTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of content audit template.
+	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -3686,7 +3718,7 @@ func (r *DeleteMediaResponse) FromJsonString(s string) error {
 type DeletePersonSampleRequest struct {
 	*tchttp.BaseRequest
 
-	// Figure ID.
+	// ID of a sample.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -4223,6 +4255,127 @@ func (r *DescribeAnimatedGraphicsTemplatesResponse) FromJsonString(s string) err
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeCDNStatDetailsRequest struct {
+	*tchttp.BaseRequest
+
+	// Metrics to query. Valid values:
+	// <li>Traffic: traffic in bytes.</li>
+	// <li>Bandwidth: bandwidth in bps.</li>
+	Metric *string `json:"Metric,omitempty" name:"Metric"`
+
+	// Start time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// List of domain names. The usage data of up to 20 domain names can be queried at a time. The usage data of all domain names is returned by default.
+	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames" list`
+
+	// Service region. Valid values:
+	// <li>Chinese Mainland</li>
+	// <li>Asia Pacific Region 1: Hong Kong (China), Macao (China), Singapore, Vietnam, and Thailand</li>
+	// <li>Asia Pacific Region 2: Taiwan (China), Japan, Malaysia, Indonesia, and South Korea</li>
+	// <li>Asia Pacific Region 3: Philippines, India, Australia, and other Asia Pacific countries and regions</li>
+	// <li>Middle East</li>
+	// <li>Europe</li>
+	// <li>North America</li>
+	// <li>South America</li>
+	// <li>Africa</li>
+	// Default value: Chinese Mainland
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// District where users are located. When `Area` is `Chinese Mainland`, valid values for `Districts` are as follows. Otherwise, `Districts` can be ignored.
+	// <li>Beijing</li>
+	// <li>Inner Mongolia</li>
+	// <li>Shanxi</li>
+	// <li>Hebei</li>
+	// <li>Tianjin</li>
+	// <li>Ningxia</li>
+	// <li>Shaanxi</li>
+	// <li>Gansu</li>
+	// <li>Qinghai</li>
+	// <li>Xinjiang</li>
+	// <li>Heilongjiang</li>
+	// <li>Jilin</li>
+	// <li>Liaoning</li>
+	// <li>Fujian</li>
+	// <li>Jiangsu</li>
+	// <li>Anhui</li>
+	// <li>Shandong</li>
+	// <li>Shanghai</li>
+	// <li>Zhejiang</li>
+	// <li>Henan</li>
+	// <li>Hubei</li>
+	// <li>Jiangxi</li>
+	// <li>Hunan</li>
+	// <li>Guizhou</li>
+	// <li>Yunnan</li>
+	// <li>Chongqing</li>
+	// <li>Sichuan</li>
+	// <li>Tibet</li>
+	// <li>Guangdong</li>
+	// <li>Guangxi</li>
+	// <li>Hainan</li>
+	// <li>Hong Kong, Macao and Taiwan</li>
+	// <li>Outside Chinese Mainland</li>
+	// <li>Other</li>
+	Districts []*string `json:"Districts,omitempty" name:"Districts" list`
+
+	// ISP of users. When `Area` is `Chinese Mainland`, valid values for `Isps` are as follows. Otherwise, `Isps` can be ignored.
+	// <li>China Telecom</li>
+	// <li>China Unicom</li>
+	// <li>CERNET</li>
+	// <li>Great Wall Broadband Network</li>
+	// <li>China Mobile</li>
+	// <li>China Mobile Tietong</li>
+	// <li>ISPs outside Chinese Mainland</li>
+	// <li>Other ISPs</li>
+	Isps []*string `json:"Isps,omitempty" name:"Isps" list`
+
+	// Time granularity of every piece of data in minutes. Valid values:
+	// <li>5: 5-minute granularity. The data at 5-minute granularity in the query period will be returned.</li>
+	// <li>1440: 1-day granularity. The data at 1-day granularity in the query period will be returned. If the query period is larger than 24 hours, only data at 1-day granularity can be queried.</li>
+	// If the difference between `StartTime` and `EndTime` is larger than 24 hours, the default value of `DataInterval` is 1440.
+	DataInterval *uint64 `json:"DataInterval,omitempty" name:"DataInterval"`
+
+	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeCDNStatDetailsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCDNStatDetailsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCDNStatDetailsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Time granularity of every piece of data in minutes.
+		DataInterval *uint64 `json:"DataInterval,omitempty" name:"DataInterval"`
+
+		// CDN usage statistics.
+		Data []*StatDataItem `json:"Data,omitempty" name:"Data" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCDNStatDetailsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCDNStatDetailsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeCDNUsageDataRequest struct {
 	*tchttp.BaseRequest
 
@@ -4238,11 +4391,10 @@ type DescribeCDNUsageDataRequest struct {
 	DataType *string `json:"DataType,omitempty" name:"DataType"`
 
 	// Time granularity of usage data in minutes. Valid values:
-	// <li>5: 5-minute granularity, which returns the details at the 5-minute granularity within the specified time range.</li>
-	// <li>60: 1-hour granularity, which returns the details at the 1-hour granularity within the specified time range.</li>
-	// <li>1440: 1-day granularity, which returns the details at the 1-day granularity within the specified time range.</li>
-	// Default value: 1440. Data at the 1-day granularity will be returned.
-	// When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin.
+	// <li>5: 5-minute granularity. The data at 5-minute granularity in the query period will be returned.</li>
+	// <li>60: 1-hour granularity. The data at 1-hour granularity in the query period will be returned.</li>
+	// <li>1440: 1-day granularity. The data at 1-day granularity in the query period will be returned.</li>
+	// Default value: 1440. Data at 1-day granularity will be returned.
 	DataInterval *uint64 `json:"DataInterval,omitempty" name:"DataInterval"`
 
 	// List of domain names. The usage data of up to 20 domain names can be queried at a time. You can specify multiple domain names and query their combined usage data. The usage data of all domain names will be returned by default.
@@ -4340,7 +4492,7 @@ func (r *DescribeCdnLogsResponse) FromJsonString(s string) error {
 type DescribeContentReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID filter of content audit templates. Array length limit: 100.
+	// Unique IDs for filters of an intelligent content recognition template. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
 
 	// Pagination offset. Default value: 0.
@@ -4369,7 +4521,7 @@ type DescribeContentReviewTemplatesResponse struct {
 		// Number of eligible entries.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// List of content audit template details.
+		// List of intelligent content recognition template details.
 		ContentReviewTemplateSet []*ContentReviewTemplateItem `json:"ContentReviewTemplateSet,omitempty" name:"ContentReviewTemplateSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4383,6 +4535,49 @@ func (r *DescribeContentReviewTemplatesResponse) ToJsonString() string {
 }
 
 func (r *DescribeContentReviewTemplatesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDailyPlayStatFileListRequest struct {
+	*tchttp.BaseRequest
+
+	// Start date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeDailyPlayStatFileListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDailyPlayStatFileListRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDailyPlayStatFileListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of playback statistics files.
+		PlayStatFileSet []*PlayStatFileInfo `json:"PlayStatFileSet,omitempty" name:"PlayStatFileSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDailyPlayStatFileListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDailyPlayStatFileListResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4551,21 +4746,21 @@ func (r *DescribeMediaProcessUsageDataResponse) FromJsonString(s string) error {
 type DescribePersonSamplesRequest struct {
 	*tchttp.BaseRequest
 
-	// Pulled figure type. Valid values:
-	// <li>UserDefine: custom figure library;</li>
-	// <li>Default: default figure library.</li>
+	// Type of samples to pull. Valid values:
+	// <li>UserDefine: custom sample library</li>
+	// <li>Default: default sample library</li>
 	// 
-	// Default value: UserDefine (the custom figure library will be pulled.)
-	// Note: the default figure library can be pulled only through "figure name" or "figure ID + figure name", and only one face image will be returned.
+	// Default value: UserDefine. Samples in the custom sample library will be pulled.
+	// Note: samples from the default library can only be pulled by providing the name or both the ID and name of a sample. Only one face image will be returned.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Figure ID. Array length limit: 100.
+	// IDs of samples. Array length limit: 100.
 	PersonIds []*string `json:"PersonIds,omitempty" name:"PersonIds" list`
 
-	// Figure name. Array length limit: 20.
+	// Names of samples. Array length limit: 20.
 	Names []*string `json:"Names,omitempty" name:"Names" list`
 
-	// Figure tag. Array length limit: 20.
+	// Tags of a sample. Array length limit: 20.
 	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
 
 	// Pagination offset. Default value: 0.
@@ -4691,13 +4886,13 @@ type DescribeReviewDetailsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Number of initiated content audits.
+		// Times of initiating intelligent content recognition tasks.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// Total content audit duration.
+		// Duration of intelligent recognition content.
 		TotalDuration *int64 `json:"TotalDuration,omitempty" name:"TotalDuration"`
 
-		// Data of content audit duration, which is collected once per day.
+		// Data of intelligent recognition content duration. One piece of data is collected every day.
 		Data []*StatDataItem `json:"Data,omitempty" name:"Data" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4854,6 +5049,9 @@ type DescribeStorageDataResponse struct {
 		// Current Standard storage capacity in bytes.
 		StandardStorage *uint64 `json:"StandardStorage,omitempty" name:"StandardStorage"`
 
+		// Storage usage by billing region.
+		StorageStat []*StorageStatData `json:"StorageStat,omitempty" name:"StorageStat" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -4871,17 +5069,16 @@ func (r *DescribeStorageDataResponse) FromJsonString(s string) error {
 type DescribeStorageDetailsRequest struct {
 	*tchttp.BaseRequest
 
-	// Start time in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Start time in ISO 8601 format. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time in ISO 8601 format, which must be after the start time. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// End time in ISO 8601 format, which should be larger than the start time. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Query time interval. Valid values:
-	// <li>Minute: once per minute.</li>
-	// <li>Hour: once per hour.</li>
-	// <li>Day: once per day.</li>
-	// The default value is determined by the time span. `Minute` will be used if the time span is less than 1 hour, `Hour` if less than or equal to 7 days, and `Day` if more than 7 days.
+	// Time granularity. Valid values:
+	// <li>Minute: 5-minute granularity</li>
+	// <li>Day: 1-day granularity</li>
+	// The value is set according to query period length by default. 5-minute granularity is set for periods no longer than 1 day, and 1-day granularity is set for periods longer than 1 day.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
 	// Storage class to be queried. Valid values:
@@ -4894,6 +5091,12 @@ type DescribeStorageDetailsRequest struct {
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	// When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// Storage region to query. Valid values:
+	// <li>Chinese Mainland</li>
+	// <li>Outside Chinese Mainland</li>
+	// Default value: Chinese Mainland
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 func (r *DescribeStorageDetailsRequest) ToJsonString() string {
@@ -4909,7 +5112,7 @@ type DescribeStorageDetailsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Storage statistics. One data entry per minute/hour/day.
+		// Storage statistics with one piece of data for every 5 minutes or 1 day.
 		Data []*StatDataItem `json:"Data,omitempty" name:"Data" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4929,14 +5132,17 @@ func (r *DescribeStorageDetailsResponse) FromJsonString(s string) error {
 type DescribeSubAppIdsRequest struct {
 	*tchttp.BaseRequest
 
-	// 
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// 
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	// Subapplication name.
+	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Tag information. You can query the list of subapplications with specified tags.
 	Tags []*ResourceTag `json:"Tags,omitempty" name:"Tags" list`
+
+	// Page number offset from the beginning of paginated queries. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum return results of pulling paginated queries. Default: 200; maximum: 200.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
 func (r *DescribeSubAppIdsRequest) ToJsonString() string {
@@ -4954,6 +5160,9 @@ type DescribeSubAppIdsResponse struct {
 
 		// Subapplication information set.
 		SubAppIdInfoSet []*SubAppIdInfo `json:"SubAppIdInfoSet,omitempty" name:"SubAppIdInfoSet" list`
+
+		// Total number of subapplications.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5047,19 +5256,20 @@ type DescribeTaskDetailResponse struct {
 	Response *struct {
 
 		// Task type. Valid values:
-	// <li>Procedure: video processing task;</li>
-	// <li>EditMedia: video editing task;</li>
-	// <li>WechatPublish: release on WeChat task;</li>
-	// <li>WechatMiniProgramPublish: release on WeChat Mini Program task;</li>
-	// <li>ComposeMedia: media file composing task;</li>
-	// <li>PullUpload: media file pulling for upload task.</li>
+	// <li>Procedure: video processing task</li>
+	// <li>EditMedia: video editing task</li>
+	// <li>SplitMedia: video splitting task</li>
+	// <li>ComposeMedia: media file producing task</li>
+	// <li>WechatPublish: WeChat publishing task</li>
+	// <li>WechatMiniProgramPublish: video publishing on WeChat Mini Program</li>
+	// <li>PullUpload: pulling media files for upload</li>
 	// 
-	// Task types compatible with v2017:
-	// <li>Transcode: transcoding task;</li>
+	// Support v2017 task types:
+	// <li>Transcode: transcoding task</li>
 	// <li>SnapshotByTimeOffset: screencapturing task</li>
-	// <li>Concat: video splicing task;</li>
-	// <li>Clip: video clipping task;</li>
-	// <li>ImageSprites: image sprite generating task.</li>
+	// <li>Concat: video splicing task</li>
+	// <li>Clip: video clipping task</li>
+	// <li>ImageSprites: image sprite generating task</li>
 		TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 		// Task status. Valid values:
@@ -5093,6 +5303,14 @@ type DescribeTaskDetailResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ComposeMediaTask *ComposeMediaTask `json:"ComposeMediaTask,omitempty" name:"ComposeMediaTask"`
 
+		// Video splitting task information. This field has a value only when `TaskType` is `EditMedia`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		SplitMediaTask *SplitMediaTask `json:"SplitMediaTask,omitempty" name:"SplitMediaTask"`
+
+		// Release on WeChat Mini Program task information. This field has a value only when `TaskType` is `WechatMiniProgramPublish`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		WechatMiniProgramPublishTask *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishTask,omitempty" name:"WechatMiniProgramPublishTask"`
+
 		// Media file pulling for upload task information. This field has a value only when `TaskType` is `PullUpload`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		PullUploadTask *PullUploadTask `json:"PullUploadTask,omitempty" name:"PullUploadTask"`
@@ -5100,10 +5318,6 @@ type DescribeTaskDetailResponse struct {
 		// Video transcoding task information. This field has a value only when `TaskType` is `Transcode`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		TranscodeTask *TranscodeTask2017 `json:"TranscodeTask,omitempty" name:"TranscodeTask"`
-
-		// Time point screencapturing task information. This field has a value only when `TaskType` is `SnapshotByTimeOffset`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		SnapshotByTimeOffsetTask *SnapshotByTimeOffsetTask2017 `json:"SnapshotByTimeOffsetTask,omitempty" name:"SnapshotByTimeOffsetTask"`
 
 		// Video splicing task information. This field has a value only when `TaskType` is `Concat`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -5117,9 +5331,9 @@ type DescribeTaskDetailResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CreateImageSpriteTask *CreateImageSpriteTask2017 `json:"CreateImageSpriteTask,omitempty" name:"CreateImageSpriteTask"`
 
-		// Release on WeChat Mini Program task information. This field has a value only when `TaskType` is `WechatMiniProgramPublish`.
+		// Time point screencapturing task information. This field has a value only when `TaskType` is `SnapshotByTimeOffset`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		WechatMiniProgramPublishTask *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishTask,omitempty" name:"WechatMiniProgramPublishTask"`
+		SnapshotByTimeOffsetTask *SnapshotByTimeOffsetTask2017 `json:"SnapshotByTimeOffsetTask,omitempty" name:"SnapshotByTimeOffsetTask"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5312,15 +5526,15 @@ func (r *DescribeWatermarkTemplatesResponse) FromJsonString(s string) error {
 type DescribeWordSamplesRequest struct {
 	*tchttp.BaseRequest
 
-	// <b>Keyword use case filter. Valid values:</b>
-	// 1. Recognition.Ocr: OCR-based content recognition;
-	// 2. Recognition.Asr: ASR-based content recognition;
-	// 3. Review.Ocr: OCR-based content audit;
-	// 4. Review.Asr: ASR-based content audit;
-	// <b>These values can be merged as follows:</b>
-	// 5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-	// 6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-	// Multiple elements can be selected, and the relationship between them is "OR", i.e., any keyword use case that contains any element in this field set will be deemed eligible.
+	// <b>Keyword usage. Valid values:</b>
+	// 1. Recognition.Ocr: OCR-based content recognition
+	// 2. Recognition.Asr: ASR-based content recognition
+	// 3. Review.Ocr: OCR-based inappropriate information recognition
+	// 4. Review.Asr: ASR-based inappropriate information recognition
+	// <b>Valid values can also be:</b>
+	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+	// You can select multiple elements, which are connected by OR logic. If a use case contains any element in this parameter, the keyword sample will be used.
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
 	// Keyword filter. Array length limit: 100 words.
@@ -5593,21 +5807,22 @@ type EventContent struct {
 	// Event handler. The caller must call `ConfirmEvents` to confirm that the message has been received, and the confirmation is valid for 30 seconds. After the confirmation expires, the event can be obtained again.
 	EventHandle *string `json:"EventHandle,omitempty" name:"EventHandle"`
 
-	// <b>Supported event type:</b>
-	// <li>NewFileUpload: video upload completion;</li>
-	// <li>ProcedureStateChanged: task flow status change;</li>
-	// <li>FileDeleted: video deletion completion;</li>
-	// <li>PullComplete: video pull for upload completion;</li>
-	// <li>EditMediaComplete: video editing completion;</li>
-	// <li>WechatPublishComplete: release on WeChat completion;</li>
-	// <li>ComposeMediaComplete: media file composing completion;</li>
-	// <li>WechatMiniProgramPublishComplete: release on WeChat Mini Program completion.</li>
-	// <b>Event types compatible with v2017:</b>
-	// <li>TranscodeComplete: video transcoding completion;</li>
-	// <li>ConcatComplete: video splicing completion;</li>
-	// <li>ClipComplete: video clipping completion;</li>
-	// <li>CreateImageSpriteComplete: image sprite generating completion;</li>
-	// <li>CreateSnapshotByTimeOffsetComplete: time point screencapturing completion.</li>
+	// <b>Supported event types:</b>
+	// <li>NewFileUpload: finished video upload</li>
+	// <li>ProcedureStateChanged: task flow status changed</li>
+	// <li>FileDeleted: finished video deletion</li>
+	// <li>PullComplete: finished pulling for upload</li>
+	// <li>EditMediaComplete: finished video editing</li>
+	// <li>SplitMediaComplete: finished video splitting</li>
+	// <li>WechatPublishComplete: finished publishing on WeChat</li>
+	// <li>ComposeMediaComplete: finished producing the media file</li>
+	// <li>WechatMiniProgramPublishComplete: finished publishing on WeChat Mini Program</li>
+	// <b>Support v2017 task types:</b>
+	// <li>TranscodeComplete: finished video transcoding</li>
+	// <li>ConcatComplete: finished video splicing</li>
+	// <li>ClipComplete: finished video clipping</li>
+	// <li>CreateImageSpriteComplete: finished image sprite generation</li>
+	// <li>CreateSnapshotByTimeOffsetComplete: finished point-in-time screencapturing</li>
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
 	// Video upload completion event, which is valid if the event type is `NewFileUpload`.
@@ -5630,33 +5845,37 @@ type EventContent struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	EditMediaCompleteEvent *EditMediaTask `json:"EditMediaCompleteEvent,omitempty" name:"EditMediaCompleteEvent"`
 
-	// Release on WeChat completion event, which is valid if the event type is `WechatPublishComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	WechatPublishCompleteEvent *WechatPublishTask `json:"WechatPublishCompleteEvent,omitempty" name:"WechatPublishCompleteEvent"`
+	// Video splitting completion event, which is valid if the event type is `EditMediaComplete`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SplitMediaCompleteEvent *SplitMediaTask `json:"SplitMediaCompleteEvent,omitempty" name:"SplitMediaCompleteEvent"`
 
-	// Video transcoding completion event, which is valid if the event type is `TranscodeComplete`.
+	// Media file composing task completion event, which is valid when the event type is `ComposeMediaComplete`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TranscodeCompleteEvent *TranscodeTask2017 `json:"TranscodeCompleteEvent,omitempty" name:"TranscodeCompleteEvent"`
-
-	// Video splicing completion event, which is valid if the event type is `ConcatComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConcatCompleteEvent *ConcatTask2017 `json:"ConcatCompleteEvent,omitempty" name:"ConcatCompleteEvent"`
+	ComposeMediaCompleteEvent *ComposeMediaTask `json:"ComposeMediaCompleteEvent,omitempty" name:"ComposeMediaCompleteEvent"`
 
 	// Video clipping completion event, which is valid if the event type is `ClipComplete`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ClipCompleteEvent *ClipTask2017 `json:"ClipCompleteEvent,omitempty" name:"ClipCompleteEvent"`
 
+	// Video transcoding completion event, which is valid if the event type is `TranscodeComplete`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TranscodeCompleteEvent *TranscodeTask2017 `json:"TranscodeCompleteEvent,omitempty" name:"TranscodeCompleteEvent"`
+
 	// Image sprite generating completion event, which is valid if the event type is `CreateImageSpriteComplete`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CreateImageSpriteCompleteEvent *CreateImageSpriteTask2017 `json:"CreateImageSpriteCompleteEvent,omitempty" name:"CreateImageSpriteCompleteEvent"`
+
+	// Video splicing completion event, which is valid if the event type is `ConcatComplete`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ConcatCompleteEvent *ConcatTask2017 `json:"ConcatCompleteEvent,omitempty" name:"ConcatCompleteEvent"`
 
 	// Time point screencapturing completion event, which is valid when the event type is `CreateSnapshotByTimeOffsetComplete`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SnapshotByTimeOffsetCompleteEvent *SnapshotByTimeOffsetTask2017 `json:"SnapshotByTimeOffsetCompleteEvent,omitempty" name:"SnapshotByTimeOffsetCompleteEvent"`
 
-	// Media file composing task completion event, which is valid when the event type is `ComposeMediaComplete`.
+	// Release on WeChat completion event, which is valid if the event type is `WechatPublishComplete`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ComposeMediaCompleteEvent *ComposeMediaTask `json:"ComposeMediaCompleteEvent,omitempty" name:"ComposeMediaCompleteEvent"`
+	WechatPublishCompleteEvent *WechatPublishTask `json:"WechatPublishCompleteEvent,omitempty" name:"WechatPublishCompleteEvent"`
 
 	// Release on WeChat Mini Program task completion event, which is valid if the event type is `WechatMiniProgramPublishComplete`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -6005,6 +6224,9 @@ type ImageWatermarkInput struct {
 	// <li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
 	// Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
 	Height *string `json:"Height,omitempty" name:"Height"`
+
+	// 
+	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
 }
 
 type ImageWatermarkInputForUpdate struct {
@@ -6021,6 +6243,9 @@ type ImageWatermarkInputForUpdate struct {
 	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
 	// <li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
 	Height *string `json:"Height,omitempty" name:"Height"`
+
+	// 
+	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
 }
 
 type ImageWatermarkTemplate struct {
@@ -6038,6 +6263,9 @@ type ImageWatermarkTemplate struct {
 	// <li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px;</li>
 	// `0px` means that `Height` will be proportionally scaled according to the video width.
 	Height *string `json:"Height,omitempty" name:"Height"`
+
+	// 
+	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
 }
 
 type LiveRealTimeClipRequest struct {
@@ -6113,6 +6341,47 @@ func (r *LiveRealTimeClipResponse) ToJsonString() string {
 }
 
 func (r *LiveRealTimeClipResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ManageTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// Video processing task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Operation type. Valid value:
+	// <li>Abort: terminate a task. You can only terminate initiated tasks in `WAITING` status.</li>
+	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
+
+	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *ManageTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ManageTaskRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ManageTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ManageTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ManageTaskResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6737,10 +7006,10 @@ type MediaProcessTaskAdaptiveDynamicStreamingResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -6758,11 +7027,10 @@ type MediaProcessTaskAnimatedGraphicResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -6782,11 +7050,10 @@ type MediaProcessTaskCoverBySnapshotResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -6805,11 +7072,10 @@ type MediaProcessTaskImageSpriteResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -6901,11 +7167,10 @@ type MediaProcessTaskSampleSnapshotResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -6925,11 +7190,10 @@ type MediaProcessTaskSnapshotByTimeOffsetResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -6949,11 +7213,10 @@ type MediaProcessTaskTranscodeResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code. 0: success; other values: failure.
-	// <li>40000: invalid input parameter. Please check it;</li>
-	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-	// <li>70000: internal service error. Please try again.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -6966,6 +7229,9 @@ type MediaProcessTaskTranscodeResult struct {
 	// Output of transcoding task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *MediaTranscodeItem `json:"Output,omitempty" name:"Output"`
+
+	// Transcoding progress. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type MediaSampleSnapshotInfo struct {
@@ -7490,22 +7756,22 @@ func (r *ModifyClassResponse) FromJsonString(s string) error {
 type ModifyContentReviewTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of content audit template.
+	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// Content audit template name. Length limit: 64 characters.
+	// Name of an intelligent content recognition template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Description of content audit template. Length limit: 256 characters.
+	// Description of an intelligent content recognition template. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// Control parameter of porn detection.
-	PornConfigure *PornConfigureInfoForUpdate `json:"PornConfigure,omitempty" name:"PornConfigure"`
-
-	// Control parameter of terrorism information detection.
+	// Control parameter for terrorism information.
 	TerrorismConfigure *TerrorismConfigureInfoForUpdate `json:"TerrorismConfigure,omitempty" name:"TerrorismConfigure"`
 
-	// Control parameter of politically sensitive information detection.
+	// Control parameter for porn information.
+	PornConfigure *PornConfigureInfoForUpdate `json:"PornConfigure,omitempty" name:"PornConfigure"`
+
+	// Control parameter for politically sensitive information.
 	PoliticalConfigure *PoliticalConfigureInfoForUpdate `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
 	// Control parameter of prohibited information detection. Prohibited information includes:
@@ -7513,15 +7779,15 @@ type ModifyContentReviewTemplateRequest struct {
 	// <li>Drug-related.</li>
 	ProhibitedConfigure *ProhibitedConfigureInfoForUpdate `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
-	// Control parameter of custom content audit.
+	// Control parameter for custom intelligent content recognition tasks.
 	UserDefineConfigure *UserDefineConfigureInfoForUpdate `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
 
 	// Frame capturing interval in seconds. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
 
-	// Switch controlling whether to add audit result to review list (for human review).
-	// <li>ON: yes;</li>
-	// <li>OFF: no.</li>
+	// Whether to allow the recognition result to enter the intelligent recognition platform (for human recognition).
+	// <li>ON: yes</li>
+	// <li>OFF: no</li>
 	ReviewWallSwitch *string `json:"ReviewWallSwitch,omitempty" name:"ReviewWallSwitch"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -7711,7 +7977,7 @@ func (r *ModifyMediaInfoResponse) FromJsonString(s string) error {
 type ModifyPersonSampleRequest struct {
 	*tchttp.BaseRequest
 
-	// Figure ID.
+	// ID of a sample.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
 	// Name. Length limit: 128 characters.
@@ -7720,13 +7986,13 @@ type ModifyPersonSampleRequest struct {
 	// Description. Length limit: 1,024 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Figure use case. Valid values:
-	// 1. Recognition: it is used for content recognition and equivalent to `Recognition.Face`.
-	// 2. Review: it is used for content audit and equivalent to `Review.Face`.
-	// 3. All: it is used for content recognition and content audit and equivalent to 1+2 above.
+	// Sample usage. Valid values:
+	// 1. Recognition: used for content recognition; equivalent to `Recognition.Face`
+	// 2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
+	// 3. All: used for content recognition and inappropriate information recognition; equivalent to 1+2
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
-	// Face operation information.
+	// Information of operations on facial features.
 	FaceOperationInfo *AiSampleFaceOperation `json:"FaceOperationInfo,omitempty" name:"FaceOperationInfo"`
 
 	// Tag operation information.
@@ -7749,10 +8015,11 @@ type ModifyPersonSampleResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Figure information.
+		// Information of a sample.
 		Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
 
-		// Face information failed to be processed.
+		// Information of samples that failed the verification by facial feature positioning.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8222,15 +8489,15 @@ type ModifyWordSampleRequest struct {
 	// Keyword. Length limit: 128 characters.
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
-	// <b>Keyword use case. Valid values:</b>
-	// 1. Recognition.Ocr: OCR-based content recognition;
-	// 2. Recognition.Asr: ASR-based content recognition;
-	// 3. Review.Ocr: OCR-based content audit;
-	// 4. Review.Asr: ASR-based content audit;
-	// <b>These values can be merged as follows:</b>
-	// 5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-	// 6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-	// 7. All: ASR-based and OCR-based content recognition and audit, which is equivalent to 1+2+3+4 above;
+	// <b>Keyword usage. Valid values:</b>
+	// 1. Recognition.Ocr: OCR-based content recognition
+	// 2. Recognition.Asr: ASR-based content recognition
+	// 3. Review.Ocr: OCR-based inappropriate information recognition
+	// 4. Review.Asr: ASR-based inappropriate information recognition
+	// <b>Valid values can also be:</b>
+	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+	// 7. All: equivalent to 1+2+3+4
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
 	// Tag operation information.
@@ -8455,6 +8722,25 @@ func (r *ParseStreamingManifestResponse) ToJsonString() string {
 
 func (r *ParseStreamingManifestResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type PlayStatFileInfo struct {
+
+	// Date of playback statistics in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// URL of a playback statistics file, including the following contents:
+	// <li> date: playback date</li>
+	// <li> file_id: video file ID</li>
+	// <li> ip_count: number of client IPs after deduplication</li>
+	// <li> flux: playback traffic in bytes</li>
+	// <li> play_times: total playback times</li>
+	// <li> pc_play_times: playback times on PC clients</li>
+	// <li> mobile_play_times: playback times on mobile clients</li>
+	// <li> iphone_play_times: playback times on iPhone</li>
+	// <li> android_play_times: playback times on Android</li>
+	// <li> host_name: domain name</li>
+	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
 type PlayerConfig struct {
@@ -9649,6 +9935,9 @@ type SimpleHlsClipRequest struct {
 	// End offset time of clipping in seconds. Default value: 0, which means to clip till the end of the video. A negative number indicates how many seconds from the end of the video clipping will end. For example, -10 means that clipping will end at the 10th second from the end.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
+	// Whether to store the video clip persistently. 0: no (default), 1: yes.
+	IsPersistence *int64 `json:"IsPersistence,omitempty" name:"IsPersistence"`
+
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
@@ -9671,6 +9960,9 @@ type SimpleHlsClipResponse struct {
 
 		// Metadata of clipped video. Currently, `Size`, `Rotate`, `VideoDuration`, and `AudioDuration` fields use default value with no actual data.
 		MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
+
+		// Unique ID of a video clip for persistent storage.
+		FileId *string `json:"FileId,omitempty" name:"FileId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -9811,6 +10103,88 @@ type SpecificationDataItem struct {
 	Data []*TaskStatDataItem `json:"Data,omitempty" name:"Data" list`
 }
 
+type SplitMediaOutputConfig struct {
+
+	// Name of an output file. This parameter can contain up to 64 characters, and will be generated by the system if it is left empty.
+	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
+
+	// Output file format. Valid values: mp4 (default), hls.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Category ID, which is used to categorize the media file for management. You can use [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+	// <li>Default value: 0, which means other categories.</li>
+	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
+
+	// Expiration time of an output file. After passing the expiration time, the file will be deleted. There is no expiration time set for a file by default. The time is in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+}
+
+type SplitMediaTask struct {
+
+	// Task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Task flow status. Valid values:
+	// <li>PROCESSING: processing</li>
+	// <li>FINISH: finished</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. You're not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// Error information.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// List of video splitting task details.
+	FileInfoSet []*SplitMediaTaskSegmentInfo `json:"FileInfoSet,omitempty" name:"FileInfoSet" list`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or set to an empty string, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+}
+
+type SplitMediaTaskInput struct {
+
+	// Video ID.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// Offset of the video splitting start time in seconds.
+	// <li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
+	// <li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
+	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// Offset of the video splitting end time in seconds.
+	// <li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
+	// <li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
+	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+
+	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/33931?lang=en&pg=) name, which should be entered if you want to perform a task flow on the generated new video.
+	ProcedureName *string `json:"ProcedureName,omitempty" name:"ProcedureName"`
+
+	// Output information of a video splitting task.
+	OutputConfig *SplitMediaOutputConfig `json:"OutputConfig,omitempty" name:"OutputConfig"`
+}
+
+type SplitMediaTaskSegmentInfo struct {
+
+	// Input information of a video splitting task.
+	Input *SplitMediaTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// Output information of a video splitting task.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Output *TaskOutputMediaInfo `json:"Output,omitempty" name:"Output"`
+
+	// If a video processing flow is specified when a video splitting task is initiated, this field will be the task flow ID.
+	ProcedureTaskId *string `json:"ProcedureTaskId,omitempty" name:"ProcedureTaskId"`
+}
+
 type StatDataItem struct {
 
 	// Start time of data time range in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
@@ -9875,6 +10249,23 @@ type StickerTrackItem struct {
 	// Operation on sticker such as image rotation.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ImageOperations []*ImageTransform `json:"ImageOperations,omitempty" name:"ImageOperations" list`
+}
+
+type StorageStatData struct {
+
+	// VOD storage billing region. Valid values:
+	// <li>Chinese Mainland</li>
+	// <li>Outside Chinese Mainland</li>
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Current total storage capacity in bytes.
+	TotalStorage *uint64 `json:"TotalStorage,omitempty" name:"TotalStorage"`
+
+	// Current STANDARD_IA storage capacity in bytes.
+	InfrequentStorage *uint64 `json:"InfrequentStorage,omitempty" name:"InfrequentStorage"`
+
+	// Current STANDARD storage capacity in bytes.
+	StandardStorage *uint64 `json:"StandardStorage,omitempty" name:"StandardStorage"`
 }
 
 type SubAppIdInfo struct {
@@ -9994,6 +10385,15 @@ type TagConfigureInfoForUpdate struct {
 	// <li>ON: enables intelligent tagging task;</li>
 	// <li>OFF: disables intelligent tagging task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type TaskOutputMediaInfo struct {
+
+	// Media file ID.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// 
+	MediaBasicInfo *MediaBasicInfo `json:"MediaBasicInfo,omitempty" name:"MediaBasicInfo"`
 }
 
 type TaskSimpleInfo struct {
@@ -10632,7 +11032,8 @@ type VideoTemplateInfo struct {
 	// We don’t recommend specifying this parameter unless you have special requirements.
 	Vcrf *uint64 `json:"Vcrf,omitempty" name:"Vcrf"`
 
-	// 
+	// I-frame interval in frames. Valid values: 0 and 1-100000.
+	// When this parameter is set to 0 or left empty, `Gop` will be automatically set.
 	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
 }
 
@@ -10675,11 +11076,12 @@ type VideoTemplateInfoForUpdate struct {
 	// <li>gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.</li>
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
-	// Video Constant Rate Factor (CRF). Value range: 1-51. This parameter will be disabled if you enter 0.
+	// Video Constant Rate Factor (CRF). Value range: 0-51. This parameter will be disabled if you enter 0.
 	// We don’t recommend specifying this parameter unless you have special requirements.
 	Vcrf *uint64 `json:"Vcrf,omitempty" name:"Vcrf"`
 
-	// 
+	// I-frame interval in frames. Valid values: 0 and 1-100000.
+	// When this parameter is set to 0 or left empty, `Gop` will be automatically set.
 	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
 }
 

@@ -225,10 +225,10 @@ type AiAnalysisTaskClassificationResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code, 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -261,10 +261,10 @@ type AiAnalysisTaskCoverResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -294,10 +294,10 @@ type AiAnalysisTaskFrameTagResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -333,10 +333,10 @@ type AiAnalysisTaskTagResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -455,10 +455,10 @@ type AiRecognitionTaskAsrFullTextResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -510,10 +510,10 @@ type AiRecognitionTaskAsrWordsResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -565,10 +565,10 @@ type AiRecognitionTaskFaceResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -637,10 +637,10 @@ type AiRecognitionTaskOcrFullTextResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -695,10 +695,10 @@ type AiRecognitionTaskOcrWordsResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -938,7 +938,7 @@ type AiReviewTaskPoliticalAsrResult struct {
 	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see the list of [Error Codes](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -957,10 +957,10 @@ type AiReviewTaskPoliticalOcrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -980,10 +980,10 @@ type AiReviewTaskPoliticalResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1002,10 +1002,10 @@ type AiReviewTaskPornAsrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1024,10 +1024,10 @@ type AiReviewTaskPornOcrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1046,10 +1046,10 @@ type AiReviewTaskPornResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1069,10 +1069,10 @@ type AiReviewTaskProhibitedAsrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1090,10 +1090,10 @@ type AiReviewTaskProhibitedOcrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1111,10 +1111,10 @@ type AiReviewTaskTerrorismOcrResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1132,10 +1132,10 @@ type AiReviewTaskTerrorismResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1853,19 +1853,19 @@ func (r *CreateAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 type CreateContentReviewTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Name of a content audit template. Length limit: 64 characters.
+	// Name of an intelligent content recognition template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Description of a content audit template. Length limit: 256 characters.
+	// Description of an intelligent content recognition template. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// Porn information detection control parameter.
+	// Control parameter for offensive content
 	PornConfigure *PornConfigureInfo `json:"PornConfigure,omitempty" name:"PornConfigure"`
 
-	// Terrorism information detection control parameter.
+	// Control parameter for insecure content
 	TerrorismConfigure *TerrorismConfigureInfo `json:"TerrorismConfigure,omitempty" name:"TerrorismConfigure"`
 
-	// Politically sensitive information detection control parameter.
+	// Control parameter for inappropriate content
 	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
 	// Control parameter of prohibited information detection. Prohibited information includes:
@@ -1874,7 +1874,7 @@ type CreateContentReviewTemplateRequest struct {
 	// Note: this parameter is not supported yet.
 	ProhibitedConfigure *ProhibitedConfigureInfo `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
-	// Custom content audit control parameter.
+	// Control parameter for custom intelligent content recognition
 	UserDefineConfigure *UserDefineConfigureInfo `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
 }
 
@@ -1891,7 +1891,7 @@ type CreateContentReviewTemplateResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Unique ID of a content audit template.
+		// Unique ID of an intelligent content recognition template
 		Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1985,23 +1985,23 @@ func (r *CreateImageSpriteTemplateResponse) FromJsonString(s string) error {
 type CreatePersonSampleRequest struct {
 	*tchttp.BaseRequest
 
-	// Name of a figure. Length limit: 20 characters.
+	// Name of a material. Length limit: 20 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Figure sample use case. Valid values:
-	// 1. Recognition: It is used for content recognition, equivalent to `Recognition.Face`.
-	// 2. Review: It is used for content audit, equivalent to `Review.Face`.
-	// 3. All: It is used for content recognition and content audit, equivalent to 1+2 above.
+	// Material use case. Valid values:
+	// 1. Recognition: used for content recognition, equivalent to `Recognition.Face`
+	// 2. Review: used for detection of inappropriate content, equivalent to `Review.Face`
+	// 3. All: all of the above, equivalent to 1 and 2 combined
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
-	// Figure description. Length limit: 1,024 characters.
+	// Material description. Length limit: 1,024 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a face image. Only JPEG and PNG images are supported. Array length limit: 5 images.
-	// Note: The image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
+	// [Base64](https://tools.ietf.org/html/rfc4648) string converted from an image. Only JPEG and PNG images are supported. Array length limit: 5 images.
+	// Note: the image must be a relatively clear facial feature photo of one person with a size of at least 200 x 200 pixels.
 	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents" list`
 
-	// Figure tag
+	// Material tag
 	// <li>Array length limit: 20 tags;</li>
 	// <li>Tag length limit: 128 characters.</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
@@ -2020,10 +2020,10 @@ type CreatePersonSampleResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Figure information.
+		// Material information
 		Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
 
-		// Face information failing to be processed.
+		// Positioning information of facial features processed unsuccessfully
 		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2324,12 +2324,12 @@ type CreateWordSamplesRequest struct {
 	// <b>Keyword use case. Valid values:</b>
 	// 1. Recognition.Ocr: OCR-based content recognition;
 	// 2. Recognition.Asr: ASR-based content recognition;
-	// 3. Review.Ocr: OCR-based content audit;
-	// 4. Review.Asr: ASR-based content audit;
+	// 3. Review.Ocr: OCR-based detection of inappropriate content;
+	// 4. Review.Asr：ASR-based detection of inappropriate content;
 	// <b>These values can be merged as follows:</b>
-	// 5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-	// 6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-	// 7. All: ASR-based and OCR-based content recognition and audit, which is equivalent to 1+2+3+4 above;
+	// 5. Recognition: ASR- and OCR-based content recognition, equivalent to 1+2 above;
+	// 6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3+4 above;
+	// 7. All: ASR- and OCR-based content recognition and detection of inappropriate content, equivalent to 1+2+3+4 above;
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
 	// Keyword. Array length limit: 100.
@@ -2566,7 +2566,7 @@ func (r *DeleteAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 type DeleteContentReviewTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of a content audit template.
+	// Unique ID of an intelligent content recognition template
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
 
@@ -2634,7 +2634,7 @@ func (r *DeleteImageSpriteTemplateResponse) FromJsonString(s string) error {
 type DeletePersonSampleRequest struct {
 	*tchttp.BaseRequest
 
-	// Figure ID.
+	// Material ID
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 }
 
@@ -3066,7 +3066,7 @@ func (r *DescribeAnimatedGraphicsTemplatesResponse) FromJsonString(s string) err
 type DescribeContentReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID filter of content audit templates. Array length limit: 50.
+	// Unique ID of intelligent content recognition templates as the filter. Array length limit: 50.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
 
 	// Paging offset. Default value: 0.
@@ -3200,21 +3200,21 @@ func (r *DescribeMediaMetaDataResponse) FromJsonString(s string) error {
 type DescribePersonSamplesRequest struct {
 	*tchttp.BaseRequest
 
-	// Pulled figure type. Valid values:
-	// <li>UserDefine: Custom figure library;</li>
-	// <li>Default: Default figure library.</li>
+	// Type of the material pulled. Valid values:
+	// <li>UserDefine: custom material library;</li>
+	// <li>Default: default material library.</li>
 	// 
-	// Default value: UserDefine (the custom figure library will be pulled.)
-	// Note: The default figure library can be pulled only through "figure name" or "figure ID + figure name", and only one face image will be returned.
+	// Default value: UserDefine (the materials of the custom material library are pulled.)
+	// Note: you can pull the default material library only using the material name or a combination of the material name and ID, and only one face image is returned.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Figure ID. Array length limit: 100.
+	// Material ID. Array length limit: 100.
 	PersonIds []*string `json:"PersonIds,omitempty" name:"PersonIds" list`
 
-	// Figure name. Array length limit: 20.
+	// Material name. Array length limit: 20.
 	Names []*string `json:"Names,omitempty" name:"Names" list`
 
-	// Figure tag. Array length limit: 20.
+	// Material tag. Array length limit: 20.
 	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
 
 	// Paging offset. Default value: 0.
@@ -3240,7 +3240,7 @@ type DescribePersonSamplesResponse struct {
 		// Number of eligible entries.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// Figure information.
+		// Material information
 		PersonSet []*AiSamplePerson `json:"PersonSet,omitempty" name:"PersonSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3603,19 +3603,19 @@ func (r *DescribeWatermarkTemplatesResponse) FromJsonString(s string) error {
 type DescribeWordSamplesRequest struct {
 	*tchttp.BaseRequest
 
+	// Keyword filter. Array length limit: 100 words.
+	Keywords []*string `json:"Keywords,omitempty" name:"Keywords" list`
+
 	// <b>Keyword use case filter. Valid values:</b>
 	// 1. Recognition.Ocr: OCR-based content recognition;
 	// 2. Recognition.Asr: ASR-based content recognition;
-	// 3. Review.Ocr: OCR-based content audit;
-	// 4. Review.Asr: ASR-based content audit;
+	// 3. Review.Ocr: OCR-based detection of inappropriate content;
+	// 4. Review.Asr：ASR-based detection of inappropriate content;
 	// <b>These values can be merged as follows:</b>
-	// 5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-	// 6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
+	// 5. Recognition: ASR- and OCR-based content recognition, equivalent to 1 and 2 combined;
+	// 6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3+4 above;
 	// Multiple elements can be selected, and the relationship between them is "or", i.e., any keyword use case that contains any element in this field set will be deemed eligible.
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
-
-	// Keyword filter. Array length limit: 100 words.
-	Keywords []*string `json:"Keywords,omitempty" name:"Keywords" list`
 
 	// Tag filter. Array length limit: 20 words.
 	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
@@ -4089,6 +4089,12 @@ type ImageWatermarkInput struct {
 	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
 	// Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
 	Height *string `json:"Height,omitempty" name:"Height"`
+
+	// Repeat type of an animated watermark. Valid values:
+	// <li>once: no longer appears after watermark playback ends.</li>
+	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+	// <li>repeat (default): repeats the playback until the video ends.</li>
+	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
 }
 
 type ImageWatermarkInputForUpdate struct {
@@ -4106,6 +4112,12 @@ type ImageWatermarkInputForUpdate struct {
 	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
 	// Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
 	Height *string `json:"Height,omitempty" name:"Height"`
+
+	// Repeat type of an animated watermark. Valid values:
+	// <li>once: no longer appears after watermark playback ends.</li>
+	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+	// <li>repeat (default): repeats the playback until the video ends.</li>
+	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
 }
 
 type ImageWatermarkTemplate struct {
@@ -4123,6 +4135,12 @@ type ImageWatermarkTemplate struct {
 	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels.</li>
 	// `0px` means that `Height` will be proportionally scaled according to the video width.
 	Height *string `json:"Height,omitempty" name:"Height"`
+
+	// Repeat type of an animated watermark. Valid values:
+	// <li>once: no longer appears after watermark playback ends.</li>
+	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+	// <li>repeat (default): repeats the playback until the video ends.</li>
+	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
 }
 
 type LiveStreamAiRecognitionResultInfo struct {
@@ -4457,7 +4475,11 @@ type ManageTaskRequest struct {
 	*tchttp.BaseRequest
 
 	// Operation type. Valid values:
-	// <li>Abort: terminates task.</li>
+	// <ul>
+	// <li>Abort: task termination. Description:
+	// <ul><li>If the [task type](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is live stream processing (`LiveStreamProcessTask`), tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is waiting (`WAITING`) or processing (`PROCESSING`) can be terminated;</li>
+	// <li>For other [task types](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0), only tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is waiting can be terminated.</li></ul>
+	// </li></ul>
 	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
 
 	// Video processing task ID.
@@ -4756,7 +4778,7 @@ type MediaImageSpriteItem struct {
 
 type MediaInputInfo struct {
 
-	// The type of video processing input object. COS and URL objects are supported.
+	// The type of video processing input object, which supports COS and URL.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// This parameter is required and valid when `Type` is `COS`, indicating the information of a COS object for video processing.
@@ -4819,10 +4841,10 @@ type MediaProcessTaskAdaptiveDynamicStreamingResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -4841,10 +4863,10 @@ type MediaProcessTaskAnimatedGraphicResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -4863,10 +4885,10 @@ type MediaProcessTaskImageSpriteResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -4943,10 +4965,10 @@ type MediaProcessTaskSampleSnapshotResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -4966,10 +4988,10 @@ type MediaProcessTaskSnapshotByTimeOffsetResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -4988,10 +5010,10 @@ type MediaProcessTaskTranscodeResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -5358,22 +5380,22 @@ func (r *ModifyAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 type ModifyContentReviewTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of a content audit template.
+	// Unique ID of an intelligent content recognition template
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// Name of a content audit template. Length limit: 64 characters.
+	// Name of an intelligent content recognition template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Description of a content audit template. Length limit: 256 characters.
+	// Description of an intelligent content recognition template. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// Porn information detection control parameter.
+	// Control parameter for offensive content
 	PornConfigure *PornConfigureInfoForUpdate `json:"PornConfigure,omitempty" name:"PornConfigure"`
 
-	// Terrorism information detection control parameter.
+	// Control parameter for insecure content
 	TerrorismConfigure *TerrorismConfigureInfoForUpdate `json:"TerrorismConfigure,omitempty" name:"TerrorismConfigure"`
 
-	// Politically sensitive information detection control parameter.
+	// Control parameter for inappropriate content
 	PoliticalConfigure *PoliticalConfigureInfoForUpdate `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
 	// Control parameter of prohibited information detection. Prohibited information includes:
@@ -5382,7 +5404,7 @@ type ModifyContentReviewTemplateRequest struct {
 	// Note: this parameter is not supported yet.
 	ProhibitedConfigure *ProhibitedConfigureInfoForUpdate `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
-	// Custom content audit control parameter.
+	// Control parameter for custom intelligent content recognition
 	UserDefineConfigure *UserDefineConfigureInfoForUpdate `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
 }
 
@@ -5490,7 +5512,7 @@ func (r *ModifyImageSpriteTemplateResponse) FromJsonString(s string) error {
 type ModifyPersonSampleRequest struct {
 	*tchttp.BaseRequest
 
-	// Figure ID.
+	// Material ID
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
 	// Name. Length limit: 128 characters.
@@ -5499,13 +5521,13 @@ type ModifyPersonSampleRequest struct {
 	// Description. Length limit: 1,024 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Figure sample use case. Valid values:
-	// 1. Recognition: It is used for content recognition, equivalent to `Recognition.Face`.
-	// 2. Review: It is used for content audit, equivalent to `Review.Face`.
-	// 3. All: It is used for content recognition and content audit, equivalent to 1+2 above.
+	// Material use case. Valid values:
+	// 1. Recognition: used for content recognition, equivalent to `Recognition.Face`.
+	// 2. Review: used for detection of inappropriate content, equivalent to `Review.Face`.
+	// 3. All: used for content recognition and detection of inappropriate content, equivalent to 1 and 2 combined.
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
-	// Face operation information.
+	// Facial feature operation information
 	FaceOperationInfo *AiSampleFaceOperation `json:"FaceOperationInfo,omitempty" name:"FaceOperationInfo"`
 
 	// Tag operation information.
@@ -5525,11 +5547,11 @@ type ModifyPersonSampleResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Figure information.
+		// Material information
 		Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
 
-		// Face information failing to be processed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+		// Information of facial features processed unsuccessfully
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5822,12 +5844,12 @@ type ModifyWordSampleRequest struct {
 	// <b>Keyword use case. Valid values:</b>
 	// 1. Recognition.Ocr: OCR-based content recognition;
 	// 2. Recognition.Asr: ASR-based content recognition;
-	// 3. Review.Ocr: OCR-based content audit;
-	// 4. Review.Asr: ASR-based content audit;
+	// 3. Review.Ocr: OCR-based detection of inappropriate content;
+	// 4. Review.Asr：ASR-based detection of inappropriate content;
 	// <b>These values can be merged as follows:</b>
-	// 5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-	// 6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-	// 7. All: ASR-based and OCR-based content recognition and audit, which is equivalent to 1+2+3+4 above;
+	// 5. Recognition: ASR- and OCR-based content recognition, equivalent to 1 and 2 combined;
+	// 6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3 and 4 combined.
+	// 7. All: all of the above, equivalent to 1, 2, 3, and 4 combined.
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
 	// Tag operation information.
@@ -7150,6 +7172,18 @@ type TranscodeTaskInput struct {
 
 	// List of blurs. Up to 10 ones can be supported.
 	MosaicSet []*MosaicInput `json:"MosaicSet,omitempty" name:"MosaicSet" list`
+
+	// Start time offset of a transcoded video, in seconds.
+	// <li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
+	// <li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
+	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// End time offset of a transcoded video, in seconds.
+	// <li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
+	// <li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
+	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
 	// Target bucket of an output file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
 	// Note: This field may return null, indicating that no valid values can be obtained.

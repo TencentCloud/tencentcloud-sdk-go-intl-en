@@ -293,7 +293,7 @@ func NewCreateContentReviewTemplateResponse() (response *CreateContentReviewTemp
     return
 }
 
-// This API is used to create a custom video content audit template. Up to 50 templates can be created.
+// This API is used to create custom intelligent video content recognition templates. Up to 50 templates can be created.
 func (c *Client) CreateContentReviewTemplate(request *CreateContentReviewTemplateRequest) (response *CreateContentReviewTemplateResponse, err error) {
     if request == nil {
         request = NewCreateContentReviewTemplateRequest()
@@ -343,7 +343,7 @@ func NewCreatePersonSampleResponse() (response *CreatePersonSampleResponse) {
     return
 }
 
-// This API is used to create a figure sample for video processing operations such as content recognition and audit using the face recognition technology.
+// This API is used to create samples for using facial features positioning and other technologies to perform video processing operations such as content recognition and inappropriate information recognition.
 func (c *Client) CreatePersonSample(request *CreatePersonSampleRequest) (response *CreatePersonSampleResponse, err error) {
     if request == nil {
         request = NewCreatePersonSampleRequest()
@@ -543,7 +543,7 @@ func NewCreateWordSamplesResponse() (response *CreateWordSamplesResponse) {
     return
 }
 
-// This API is used to create keyword samples in batches for video processing operations such as content recognition and audit by using the OCR and ASR technologies.
+// This API is used to create keyword samples in batches for using OCR and ASR technologies to perform video processing operations such as content recognition and inappropriate information recognition.
 func (c *Client) CreateWordSamples(request *CreateWordSamplesRequest) (response *CreateWordSamplesResponse, err error) {
     if request == nil {
         request = NewCreateWordSamplesRequest()
@@ -696,7 +696,7 @@ func NewDeleteContentReviewTemplateResponse() (response *DeleteContentReviewTemp
     return
 }
 
-// This API is used to delete a custom video content audit template.
+// This API is used to delete custom intelligent video content recognition templates.
 func (c *Client) DeleteContentReviewTemplate(request *DeleteContentReviewTemplateRequest) (response *DeleteContentReviewTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteContentReviewTemplateRequest()
@@ -772,7 +772,7 @@ func NewDeletePersonSampleResponse() (response *DeletePersonSampleResponse) {
     return
 }
 
-// This API is used to delete a figure sample based on figure ID.
+// This API is used to delete samples according to sample IDs.
 func (c *Client) DeletePersonSample(request *DeletePersonSampleRequest) (response *DeletePersonSampleResponse, err error) {
     if request == nil {
         request = NewDeletePersonSampleRequest()
@@ -1083,6 +1083,34 @@ func (c *Client) DescribeAnimatedGraphicsTemplates(request *DescribeAnimatedGrap
     return
 }
 
+func NewDescribeCDNStatDetailsRequest() (request *DescribeCDNStatDetailsRequest) {
+    request = &DescribeCDNStatDetailsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeCDNStatDetails")
+    return
+}
+
+func NewDescribeCDNStatDetailsResponse() (response *DescribeCDNStatDetailsResponse) {
+    response = &DescribeCDNStatDetailsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query CDN bandwidth, traffic, and other data of VOD domain names.
+// * The query period is up to 90 days.
+// * You can query data of different service regions.
+// * You can query data of Chinese mainland by region and ISP.
+func (c *Client) DescribeCDNStatDetails(request *DescribeCDNStatDetailsRequest) (response *DescribeCDNStatDetailsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCDNStatDetailsRequest()
+    }
+    response = NewDescribeCDNStatDetailsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCDNUsageDataRequest() (request *DescribeCDNUsageDataRequest) {
     request = &DescribeCDNUsageDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1155,12 +1183,44 @@ func NewDescribeContentReviewTemplatesResponse() (response *DescribeContentRevie
     return
 }
 
-// This API is used to get the list of video content audit templates based on unique template ID. The return result includes all eligible custom and [preset video content audit templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.AE.A1.E6.A0.B8.E6.A8.A1.E6.9D.BF).
+// This API is used to get the list of intelligent video content recognition template details according to unique template IDs. The return result includes all eligible custom and [preset intelligent video content recognition templates](https://intl.cloud.tencent.com/document/product/266/33932).
 func (c *Client) DescribeContentReviewTemplates(request *DescribeContentReviewTemplatesRequest) (response *DescribeContentReviewTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeContentReviewTemplatesRequest()
     }
     response = NewDescribeContentReviewTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDailyPlayStatFileListRequest() (request *DescribeDailyPlayStatFileListRequest) {
+    request = &DescribeDailyPlayStatFileListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeDailyPlayStatFileList")
+    return
+}
+
+func NewDescribeDailyPlayStatFileListResponse() (response *DescribeDailyPlayStatFileListResponse) {
+    response = &DescribeDailyPlayStatFileListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the download links of playback statistics files.
+// * You can query the download links of playback statistics files in last 30 days.
+// * Every day, VOD will analyze CDN request logs of the previous day and then generate a playback statistics file.
+// * A playback statistics file includes playback times and traffic of media files.
+// * Notes on playback times:
+//     1. HLS file: VOD counts playback times when accessing M3U8 files, but not when accessing TS files.
+//     2. Other files (MP4 files for example): VOD does not count playback times when the playback request carries the `range` parameter and the `start` parameter in `range` is not 0. In other cases, VOD counts playback times.
+// * Statistics on playback devices: VOD counts playback times on mobile clients when the playback request carries the `UserAgent` parameter which includes an identifier such as `Android` or `iPhone`. In other cases, VOD counts playback times on PC clients.
+func (c *Client) DescribeDailyPlayStatFileList(request *DescribeDailyPlayStatFileListRequest) (response *DescribeDailyPlayStatFileListResponse, err error) {
+    if request == nil {
+        request = NewDescribeDailyPlayStatFileListRequest()
+    }
+    response = NewDescribeDailyPlayStatFileListResponse()
     err = c.Send(request, response)
     return
 }
@@ -1267,7 +1327,7 @@ func NewDescribePersonSamplesResponse() (response *DescribePersonSamplesResponse
     return
 }
 
-// This API is used to query the information of figure samples and supports paginated queries by figure ID, name, and tag.
+// This API is used to query the information of samples and supports paginated queries by sample ID, name, and tag.
 func (c *Client) DescribePersonSamples(request *DescribePersonSamplesRequest) (response *DescribePersonSamplesResponse, err error) {
     if request == nil {
         request = NewDescribePersonSamplesRequest()
@@ -1317,12 +1377,12 @@ func NewDescribeReviewDetailsResponse() (response *DescribeReviewDetailsResponse
     return
 }
 
-// <b>This API is replaced by [DescribeMediaProcessUsageData](https://intl.cloud.tencent.com/document/product/266/41464?from_cn_redirect=1) and not recommended for use.</b>
+// <b>This API is disused and replaced by [DescribeMediaProcessUsageData](https://intl.cloud.tencent.com/document/product/266/41464?from_cn_redirect=1).</b>
 // 
-// This API returns the duration of reviewed video content in seconds per day within the queried period.
+// This API returns the video content duration for intelligent recognition in seconds per day within the queried period.
 // 
-// 1. The API is used to query statistics on the duration of reviewed video content for the last 365 days.
-// 2. The queried period is up to 90 days.
+// 1. The API is used to query statistics on the video content duration for intelligent recognition in the last 365 days.
+// 2. The query period is up to 90 days.
 func (c *Client) DescribeReviewDetails(request *DescribeReviewDetailsRequest) (response *DescribeReviewDetailsResponse, err error) {
     if request == nil {
         request = NewDescribeReviewDetailsRequest()
@@ -1422,11 +1482,10 @@ func NewDescribeStorageDetailsResponse() (response *DescribeStorageDetailsRespon
     return
 }
 
-// This API is used to query the used VOD storage capacity in bytes within the specified time range.
-//    1. Only storage capacity usage data for the last 365 days can be queried.
-//    2. The query time range cannot be more than 90 days;
-//    3. The query time range at the minute granularity cannot be more than 5 days;
-//    4. The query time range at the hour granularity cannot be more than 10 days.
+// This API is used to query VOD storage usage in bytes within the query period.
+//     1. You can only query storage usage for the last 365 days.
+//     2. The query period is up to 90 days.
+//     3. The query period at minute-level granularity is up to 7 days.
 func (c *Client) DescribeStorageDetails(request *DescribeStorageDetailsRequest) (response *DescribeStorageDetailsResponse, err error) {
     if request == nil {
         request = NewDescribeStorageDetailsRequest()
@@ -1748,6 +1807,31 @@ func (c *Client) LiveRealTimeClip(request *LiveRealTimeClipRequest) (response *L
     return
 }
 
+func NewManageTaskRequest() (request *ManageTaskRequest) {
+    request = &ManageTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ManageTask")
+    return
+}
+
+func NewManageTaskResponse() (response *ManageTaskResponse) {
+    response = &ManageTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to manage initiated tasks.
+func (c *Client) ManageTask(request *ManageTaskRequest) (response *ManageTaskResponse, err error) {
+    if request == nil {
+        request = NewManageTaskRequest()
+    }
+    response = NewManageTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAIAnalysisTemplateRequest() (request *ModifyAIAnalysisTemplateRequest) {
     request = &ModifyAIAnalysisTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1890,7 +1974,7 @@ func NewModifyContentReviewTemplateResponse() (response *ModifyContentReviewTemp
     return
 }
 
-// This API is used to modify a custom video content audit template.
+// This API is used to modify custom intelligent video content recognition templates.
 func (c *Client) ModifyContentReviewTemplate(request *ModifyContentReviewTemplateRequest) (response *ModifyContentReviewTemplateResponse, err error) {
     if request == nil {
         request = NewModifyContentReviewTemplateRequest()
@@ -1965,7 +2049,7 @@ func NewModifyPersonSampleResponse() (response *ModifyPersonSampleResponse) {
     return
 }
 
-// This API is used to modify figure sample information based on figure ID, such as modifying the name and description and adding/deleting/resetting a face or tag. There should be at least one image left after the face deletion operation; otherwise, please use the reset operation.
+// This API is used to modify sample information according to the sample ID. You can modify the name and description, add, delete, and reset facial features or tags. Leave at least one image after deleting facial features. To leave no image, please use the reset operation.
 func (c *Client) ModifyPersonSample(request *ModifyPersonSampleRequest) (response *ModifyPersonSampleResponse, err error) {
     if request == nil {
         request = NewModifyPersonSampleRequest()
@@ -2466,9 +2550,29 @@ func NewSimpleHlsClipResponse() (response *SimpleHlsClipResponse) {
     return
 }
 
-// This API is used to clip an HLS video by time period.
+// This API is used to clip an HLS video by time period and then generate a new HLS video which developers can share right away or store persistently.
 // 
-// Note: the clipped video shares the same ts segments with the source video, and only a new m3u8 file will be generated. Deleting the source video will also delete the clipped video.
+// VOD supports two types of clipping:
+// - Clipping for persistent storage: the video clip is saved as an independent video file with a `FileId`.
+// - Clipping for temporary sharing: the video clip is affiliated to the input file and has no `FileId`.
+// 
+// Notes:
+// - Clipping is based on the input M3U8 file that contains the list of TS segments, so the smallest clipping unit is one TS segment instead of in seconds or less.
+// 
+// 
+// ### Clipping for Persistent Storage
+// In this mode, a video clip is saved as an independent video file with a `FileId`, and its lifecycle is not subject to the input video. Even if the source video is deleted, the video clip still exists. Moreover, the video clip can be transcoded, published on WeChat, and processed in other ways.
+// 
+// Take the video of a two-hour long football match for example. The customer may only want to store the original two-hour video for two months to save costs, but want to store clipped highlights for a specified longer time and also to transcode and publish such highlights on WeChat. Clipping for persistent storage is suitable for this customer.
+// 
+// The advantage of clipping for persistent storage is that the video clip has a lifecycle independent of the input video and can be managed independently and stored persistently.
+// 
+// ### Clipping for Temporary Sharing
+// The video clip (an M3U8 file) shares the same TS segments with the input video instead of being an independent video. It only has a playback URL but has no `FileId`, and its validity period is the same as that of the input video. Once the input video is deleted, the video clip cannot be played back.
+// 
+// As the video clip is not an independent video, it will not be managed as a VOD media asset. For example, it will not be counted in the total videos displayed on the VOD console, and also cannot be transcoded or published on WeChat.
+// 
+// Clipping for temporary sharing is lightweight and incurs no additional storage fees. However, the video clip has the same lifecycle as the source recording video and cannot be transcoded or processed in other ways.
 func (c *Client) SimpleHlsClip(request *SimpleHlsClipRequest) (response *SimpleHlsClipResponse, err error) {
     if request == nil {
         request = NewSimpleHlsClipRequest()

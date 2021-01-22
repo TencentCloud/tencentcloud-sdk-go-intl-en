@@ -490,7 +490,7 @@ type DescribeRoomInformationRequest struct {
 	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Room ID of uint type
+	// Room ID in string type
 	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
 
 	// Page index starting from 0 (if either `PageNumber` or `PageSize` is left empty, 10 data entries will be returned by default)
@@ -513,7 +513,7 @@ type DescribeRoomInformationResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Total number of returned data entries.
+		// Total number of data entries displayed on the current page
 		Total *int64 `json:"Total,omitempty" name:"Total"`
 
 		// Room information list
@@ -539,7 +539,7 @@ type DescribeUserInformationRequest struct {
 	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
 	CommId *string `json:"CommId,omitempty" name:"CommId"`
 
-	// Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
+	// Query start time in the format of UNIX timestamp (e.g. 1588031999s) in the last 5 days.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Query end time in the format of UNIX timestamp (e.g. 1588031999s).
@@ -715,6 +715,9 @@ type LayoutParams struct {
 
 	// Valid in custom template, used to specify the video image position of a user in mixed streams.
 	PresetLayoutConfig []*PresetLayoutConfig `json:"PresetLayoutConfig,omitempty" name:"PresetLayoutConfig" list`
+
+	// Valid in custom templates. 1: the placeholding feature is enabled; 0 (default): the feature is disabled. When the feature is enabled, but a user for whom a position is reserved is not sending video data, the position will show the corresponding placeholder image.
+	PlaceHolderMode *uint64 `json:"PlaceHolderMode,omitempty" name:"PlaceHolderMode"`
 }
 
 type OutputParams struct {
@@ -725,7 +728,7 @@ type OutputParams struct {
 	// Value range: [0, 1]. If it is 0, live streams are audio and video; if it is 1, live streams are only audio. Default value: 0.
 	PureAudioStream *uint64 `json:"PureAudioStream,omitempty" name:"PureAudioStream"`
 
-	// Custom recording file name
+	// Custom recording file name. Please enable the recording feature in the TRTC console first. https://intl.cloud.tencent.com/document/product/647/50768?from_cn_redirect=1
 	RecordId *string `json:"RecordId,omitempty" name:"RecordId"`
 
 	// Value range: [0, 1]. If it is 0, the recording template configured in the console will be used; if it is 1, streams are recorded as .mp3 files.
@@ -755,8 +758,23 @@ type PresetLayoutConfig struct {
 	// Z-order of the image in pixels. If this parameter is not set, 0 is used by default.
 	ZOrder *uint64 `json:"ZOrder,omitempty" name:"ZOrder"`
 
-	// Render mode of the output image. 0: cropping; 1: scaling. If this parameter is not set, 0 is used by default.
+	// Render mode of the output image. 0: cropping; 1: scaling; 2: scaling on a black background. If this parameter is not set, 0 is used by default.
 	RenderMode *uint64 `json:"RenderMode,omitempty" name:"RenderMode"`
+
+	// Media type of the mixed stream of the user occupying the current position. 0 (default): audio and video; 1: audio; 2: video. You are advised to specify a user ID when using this parameter.
+	MixInputType *uint64 `json:"MixInputType,omitempty" name:"MixInputType"`
+
+	// Reservation image ID. If the reservation feature is enabled, and a user for whom a image position is reserved is not generating upstream video data, the position will show the reservation image. Reservation images are uploaded and generated in the TRTC console. https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1
+	PlaceImageId *uint64 `json:"PlaceImageId,omitempty" name:"PlaceImageId"`
+}
+
+type PublishCdnParams struct {
+
+	// Tencent Cloud LVB BizId
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+
+	// Destination of non-Tencent Cloud CDN relayed push. It is possible to push to only one non-Tencent Cloud CDN address at a time.
+	PublishCdnUrls []*string `json:"PublishCdnUrls,omitempty" name:"PublishCdnUrls" list`
 }
 
 type QualityData struct {
@@ -900,6 +918,9 @@ type StartMCUMixTranscodeRequest struct {
 
 	// On-Cloud MixTranscoding output layout parameters.
 	LayoutParams *LayoutParams `json:"LayoutParams,omitempty" name:"LayoutParams"`
+
+	// Relayed push parameters of a non-Tencent Cloud CDN
+	PublishCdnParams *PublishCdnParams `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
 }
 
 func (r *StartMCUMixTranscodeRequest) ToJsonString() string {
