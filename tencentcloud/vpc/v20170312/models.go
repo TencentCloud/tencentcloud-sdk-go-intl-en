@@ -1200,6 +1200,56 @@ type ClassicLinkInstance struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
+type CloneSecurityGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the security group to be cloned, such as `sg-33ocnj9n`. This can be obtained through the `DescribeSecurityGroups` API.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// The name of security group clone. You can enter any name within 60 characters. If this parameter is left empty, the security group clone will use the name of the source security group.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Description of the security group clone. You can enter up to 100 characters. If this parameter is left empty, the security group clone will use the description of the source security group.
+	GroupDescription *string `json:"GroupDescription,omitempty" name:"GroupDescription"`
+
+	// Project ID of the security group clone. The default is 0. You can query it on the project management page of the Tencent Cloud console.
+	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// The region of the source security group for a cross-region clone. For example, to clone the security group in Guangzhou to Shanghai, set it to `ap-guangzhou`.
+	RemoteRegion *string `json:"RemoteRegion,omitempty" name:"RemoteRegion"`
+}
+
+func (r *CloneSecurityGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CloneSecurityGroupRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CloneSecurityGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Security group object
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		SecurityGroup *SecurityGroup `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CloneSecurityGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CloneSecurityGroupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ConflictItem struct {
 
 	// Conflict resource ID
@@ -1559,7 +1609,7 @@ func (r *CreateCustomerGatewayResponse) FromJsonString(s string) error {
 type CreateDefaultVpcRequest struct {
 	*tchttp.BaseRequest
 
-	// The ID of the availability zone in which the subnet resides. The availability zone will be randomly selected if not specified.
+	// The ID of the availability zone in which the subnet resides. This parameter can be obtained through the [`DescribeZones`](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API, such as `ap-guangzhou-1`. If it’s not specified, a random availability zone will be used.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// Whether to forcibly return a default VPC
@@ -2448,19 +2498,19 @@ type CreateVpcRequest struct {
 	// The VPC name. The maximum length is 60 bytes.
 	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
 
-	// VPC CIDR, which must fall within the following private network IP ranges: 10.0.0.0/16, 172.16.0.0/16, and 192.168.0.0/16.
+	// VPC CIDR blocks, which must fall within the following three private network IP ranges: 10.0.0.0/16, 172.16.0.0/16 and 192.168.0.0/16.
 	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
 
 	// Whether multicast is enabled. `true`: Enabled. `false`: Not enabled.
 	EnableMulticast *string `json:"EnableMulticast,omitempty" name:"EnableMulticast"`
 
-	// The DNS address. A maximum of 4 addresses is supported.
+	// DNS address. A maximum of 4 addresses is supported.
 	DnsServers []*string `json:"DnsServers,omitempty" name:"DnsServers" list`
 
-	// Domain name
+	// Domain name of DHCP
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
@@ -2558,7 +2608,7 @@ func (r *CreateVpnConnectionResponse) FromJsonString(s string) error {
 type CreateVpnGatewayRequest struct {
 	*tchttp.BaseRequest
 
-	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	// VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The VPN gateway name. The maximum length is 60 bytes.
@@ -4890,7 +4940,7 @@ type DescribeIpGeolocationDatabaseUrlResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Download link of the IP location database.
+		// Download link of an IP location database
 		DownLoadUrl *string `json:"DownLoadUrl,omitempty" name:"DownLoadUrl"`
 
 		// Link expiration time in UTC format following the ISO8601 standard.
@@ -7613,10 +7663,10 @@ type ModifyAssistantCidrRequest struct {
 	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Load CIDR blocks to add. CIDR block set; format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	// Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
 	NewCidrBlocks []*string `json:"NewCidrBlocks,omitempty" name:"NewCidrBlocks" list`
 
-	// Load CIDR blocks to delete. CIDR block set; Format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	// Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
 	OldCidrBlocks []*string `json:"OldCidrBlocks,omitempty" name:"OldCidrBlocks" list`
 }
 
@@ -8019,6 +8069,12 @@ type ModifyNatGatewayAttributeRequest struct {
 
 	// The maximum outbound bandwidth of the NAT gateway. Unit: Mbps.
 	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Whether to modify the security group bound to the NAT Gateway
+	ModifySecurityGroup *bool `json:"ModifySecurityGroup,omitempty" name:"ModifySecurityGroup"`
+
+	// The final security groups bound to the NAT Gateway, such as `['sg-1n232323', 'sg-o4242424']`. An empty list indicates that all the security groups have been deleted.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 }
 
 func (r *ModifyNatGatewayAttributeRequest) ToJsonString() string {
@@ -8755,6 +8811,10 @@ type NatGateway struct {
 
 	// Tag key-value pair.
 	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+
+	// The list of the security groups bound to the NAT Gateway
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecurityGroupSet []*string `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet" list`
 }
 
 type NatGatewayAddress struct {
@@ -9822,7 +9882,7 @@ type SecurityGroupAssociationStatistics struct {
 	// Number of CVM instances.
 	CVM *uint64 `json:"CVM,omitempty" name:"CVM"`
 
-	// Number of database instances.
+	// Number of TencentDB for MySQL instances
 	CDB *uint64 `json:"CDB,omitempty" name:"CDB"`
 
 	// Number of ENI instances.

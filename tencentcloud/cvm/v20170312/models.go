@@ -370,7 +370,8 @@ type DataDisk struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
 
-	// 
+	// Cloud disk performance, in MB/s
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ThroughputPerformance *int64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
 }
 
@@ -2410,8 +2411,8 @@ type ItemPrice struct {
 	// Note: this field may return null, indicating that no valid value is obtained.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 
-	// Discount. For example, 20.0 indicates 80% off.
-	// Note: this field may return `null`, indicating that no valid value was found.
+	// Percentage of the original price. For example, if you enter "20.0", the discounted price will be 20% of the original price.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
 
 	// The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to that the unit price for unlimited usage.

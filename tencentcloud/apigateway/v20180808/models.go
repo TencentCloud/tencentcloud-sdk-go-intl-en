@@ -310,6 +310,15 @@ type ApiInfo struct {
 	// Environment information published for API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Environments []*string `json:"Environments,omitempty" name:"Environments" list`
+
+	// 
+	IsBase64Encoded *bool `json:"IsBase64Encoded,omitempty" name:"IsBase64Encoded"`
+
+	// 
+	IsBase64Trigger *bool `json:"IsBase64Trigger,omitempty" name:"IsBase64Trigger"`
+
+	// 
+	Base64EncodedTriggerRules []*Base64EncodedTriggerRule `json:"Base64EncodedTriggerRules,omitempty" name:"Base64EncodedTriggerRules" list`
 }
 
 type ApiKey struct {
@@ -437,6 +446,15 @@ type ApisStatus struct {
 
 	// API list.
 	ApiIdStatusSet []*DesApisStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet" list`
+}
+
+type Base64EncodedTriggerRule struct {
+
+	// 
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// 
+	Value []*string `json:"Value,omitempty" name:"Value" list`
 }
 
 type BindEnvironmentRequest struct {
@@ -603,6 +621,9 @@ type BindSubDomainRequest struct {
 
 	// Custom domain name path mapping. It can contain up to 3 `Environment` values which can be set to only `test`, `prepub`, and `release`, respectively.
 	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet" list`
+
+	// Whether to force HTTP requests to redirect to HTTPS. Default value: `false`. When this parameter is `true`, API Gateway will redirect all requests using the custom domain name over the HTTP protocol to the HTTPS protocol for forwarding.
+	IsForcedHttps *bool `json:"IsForcedHttps,omitempty" name:"IsForcedHttps"`
 }
 
 func (r *BindSubDomainRequest) ToJsonString() string {
@@ -617,6 +638,10 @@ func (r *BindSubDomainRequest) FromJsonString(s string) error {
 type BindSubDomainResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Whether binding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *bool `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -831,6 +856,9 @@ type CreateApiRequest struct {
 
 	// User type.
 	UserType *string `json:"UserType,omitempty" name:"UserType"`
+
+	// 
+	IsBase64Encoded *bool `json:"IsBase64Encoded,omitempty" name:"IsBase64Encoded"`
 }
 
 func (r *CreateApiRequest) ToJsonString() string {
@@ -3326,6 +3354,9 @@ type ModifySubDomainRequest struct {
 
 	// Network type. Valid values: INNER, OUTER.
 	NetType *string `json:"NetType,omitempty" name:"NetType"`
+
+	// Whether to force HTTP requests to redirect to HTTPS. Default value: `false`. When this parameter is `true`, API Gateway will redirect all requests using the custom domain name over the HTTP protocol to the HTTPS protocol for forwarding.
+	IsForcedHttps *bool `json:"IsForcedHttps,omitempty" name:"IsForcedHttps"`
 }
 
 func (r *ModifySubDomainRequest) ToJsonString() string {

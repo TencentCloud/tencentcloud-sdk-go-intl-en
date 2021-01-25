@@ -107,10 +107,12 @@ type BillDetail struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tags []*BillTagInfo `json:"Tags,omitempty" name:"Tags" list`
 
-	// Product name/code (optional)
+	// Product code
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 
-	// Subproduct name/code (optional)
+	// Subproduct code
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
 
 	// Transaction type/code (optional)
@@ -118,6 +120,9 @@ type BillDetail struct {
 
 	// 
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Project ID: ID of the project to which the resource belongs
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
 type BillDetailComponent struct {
@@ -170,10 +175,12 @@ type BillDetailComponent struct {
 	// Amount paid in trial credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
 
-	// Component type/code (optional)
+	// Component type code
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ItemCode *string `json:"ItemCode,omitempty" name:"ItemCode"`
 
-	// Component name/code (optional)
+	// Component code
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ComponentCode *string `json:"ComponentCode,omitempty" name:"ComponentCode"`
 
 	// Contract price
@@ -371,6 +378,9 @@ type DescribeBillDetailRequest struct {
 
 	// 
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// Project ID: ID of the project to which the resource belongs
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
 func (r *DescribeBillDetailRequest) ToJsonString() string {

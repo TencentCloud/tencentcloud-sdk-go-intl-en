@@ -685,6 +685,9 @@ type CreateLoadBalancerRequest struct {
 
 	// Tag for the STGW exclusive cluster.
 	ClusterTag *string `json:"ClusterTag,omitempty" name:"ClusterTag"`
+
+	// Unique ID of an EIP, which can only be used when binding the EIP of a private network CLB instance. E.g., `eip-11112222`.
+	EipAddressId *string `json:"EipAddressId,omitempty" name:"EipAddressId"`
 }
 
 func (r *CreateLoadBalancerRequest) ToJsonString() string {
@@ -3917,7 +3920,7 @@ type Target struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Unique ID of a CVM instance, which is required when binding a CVM instance. It can be obtained from the `InstanceId` field in the response of the `DescribeInstances` API.
+	// Unique ID of a CVM instance, which is required when binding a CVM instance. It can be obtained from the `InstanceId` field in the response of the `DescribeInstances` API. It indicates binding the primary IP of the primary ENI.
 	// Note: either `InstanceId` or `EniIp` must be passed in.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -3925,8 +3928,8 @@ type Target struct {
 	// Forwarding weight of a real server. Value range: [0, 100]. Default value: 10.
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 
-	// IP of an ENI, which is required when binding an ENI. To bind an ENI with a CLB, you must bind it with a CVM first.
-	// Note: either `InstanceId` or `EniIp` must be passed in. Binding ENI is now only available to beta users. Please submit a ticket to apply for it if necessary. 
+	// It is required when binding an IP. ENI IPs and other private IPs are supported. To bind an ENI IP, the ENI should be bound to a CVM instance before being bound to a CLB instance.
+	// Note: either `InstanceId` or `EniIp` must be passed in. It is required when binding a dual-stack IPv6 CVM instance.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	EniIp *string `json:"EniIp,omitempty" name:"EniIp"`
 }

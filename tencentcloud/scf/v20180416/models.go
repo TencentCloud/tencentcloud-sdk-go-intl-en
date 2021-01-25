@@ -605,7 +605,7 @@ type DeleteProvisionedConcurrencyConfigRequest struct {
 	// Function version number
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 
-	// Function namespace. Default value: default
+	// Function namespace. Default value: `default`
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
@@ -642,7 +642,7 @@ type DeleteReservedConcurrencyConfigRequest struct {
 	// Name of the function for which to delete the provisioned concurrency
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
-	// Function namespace. Default value: default
+	// Function namespace. Default value: `default`
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
@@ -2029,7 +2029,7 @@ type PutProvisionedConcurrencyConfigRequest struct {
 	// Provisioned concurrency amount. Note: there is an upper limit for the sum of provisioned concurrency amounts of all versions, which currently is the function's maximum concurrency quota minus 100
 	VersionProvisionedConcurrencyNum *uint64 `json:"VersionProvisionedConcurrencyNum,omitempty" name:"VersionProvisionedConcurrencyNum"`
 
-	// Function namespace. Default value: default
+	// Function namespace. Default value: `default`
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
@@ -2069,7 +2069,7 @@ type PutReservedConcurrencyConfigRequest struct {
 	// Reserved concurrency memory of function. Note: the upper limit for the total reserved concurrency memory of the function is the user's total concurrency memory minus 12800
 	ReservedConcurrencyMem *uint64 `json:"ReservedConcurrencyMem,omitempty" name:"ReservedConcurrencyMem"`
 
-	// Function namespace. Default value: default
+	// Function namespace. Default value: `default`
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
@@ -2106,7 +2106,7 @@ type PutTotalConcurrencyConfigRequest struct {
 	// Account concurrency memory quota. Note: the lower limit for the account concurrency memory quota is the user's total concurrency memory used + 12800
 	TotalConcurrencyMem *uint64 `json:"TotalConcurrencyMem,omitempty" name:"TotalConcurrencyMem"`
 
-	// Namespace. Default value: default
+	// Namespace. Default value: `default`
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
@@ -2544,7 +2544,7 @@ type VersionProvisionedConcurrencyInfo struct {
 	// Currently available provisioned concurrency amount.
 	AvailableProvisionedConcurrencyNum *uint64 `json:"AvailableProvisionedConcurrencyNum,omitempty" name:"AvailableProvisionedConcurrencyNum"`
 
-	// Provisioned concurrency setting task status. Done: completed; InProgress: in progress; Failed: partially or completely failed.
+	// Provisioned concurrency setting task status. `Done`: completed; `InProgress`: in progress; `Failed`: partially or completely failed.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Status description of provisioned concurrency setting task.

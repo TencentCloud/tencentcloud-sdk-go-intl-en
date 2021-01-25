@@ -237,7 +237,7 @@ func (r *CreateAutoSnapshotPolicyResponse) FromJsonString(s string) error {
 type CreateDisksRequest struct {
 	*tchttp.BaseRequest
 
-	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD
+	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Cloud disk billing method. POSTPAID_BY_HOUR: pay as you go by hour<br><li>CDCPAID: Billed together with the bound dedicated cluster<br>For information about the pricing of each method, see the cloud disk [Pricing Overview](https://intl.cloud.tencent.com/document/product/362/2413?from_cn_redirect=1).
@@ -272,6 +272,9 @@ type CreateDisksRequest struct {
 
 	// The default of optional parameter is False. When True is selected, the cloud disk will be created as a shareable cloud disk.
 	Shareable *bool `json:"Shareable,omitempty" name:"Shareable"`
+
+	// Extra performance purchased for a cloud disk.<br>This optional parameter is only valid for Tremendous SSD (CLOUD_TSSD) and Enhanced SSD (CLOUD_HSSD).
+	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
 }
 
 func (r *CreateDisksRequest) ToJsonString() string {
@@ -1134,7 +1137,7 @@ type Image struct {
 type InquiryPriceCreateDisksRequest struct {
 	*tchttp.BaseRequest
 
-	// Type of cloud hard disk. Value range: <br><li>Ordinary cloud disk: CLOUD_BASIC <br><li>Premium cloud storage: CLOUD_PREMIUM <br><li>SSD cloud disk: CLOUD_SSD.
+	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Cloud disk size (in GB). For the value range of the cloud disk sizes, see cloud disk [Product Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1).
@@ -1151,6 +1154,9 @@ type InquiryPriceCreateDisksRequest struct {
 
 	// ID of project the cloud disk belongs to.
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Extra performance (in MB/sec) purchased for a cloud disk.<br>This parameter is only valid for Enhanced SSD (CLOUD_HSSD) and Tremendous SSD (CLOUD_TSSD).
+	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
 }
 
 func (r *InquiryPriceCreateDisksRequest) ToJsonString() string {
@@ -1444,6 +1450,32 @@ type PrepayPrice struct {
 
 	// Discount price of the advanced payment for a prepaid cloud disk or snapshot (in CNY).
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+
+	// Highly-precise published unit price of a monthly-subscribed cloud disk or a snapshot, in USD.
+	OriginalPriceHigh *string `json:"OriginalPriceHigh,omitempty" name:"OriginalPriceHigh"`
+
+	// Highly-precise discounted unit price of a monthly-subscribed cloud disk or a snapshot, in USD.
+	DiscountPriceHigh *string `json:"DiscountPriceHigh,omitempty" name:"DiscountPriceHigh"`
+
+	// Published unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UnitPrice *string `json:"UnitPrice,omitempty" name:"UnitPrice"`
+
+	// Billing unit for pay-as-you-go cloud disks. Valid value: <br><li>HOUR: billed hourly.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ChargeUnit *string `json:"ChargeUnit,omitempty" name:"ChargeUnit"`
+
+	// Discount unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UnitPriceDiscount *string `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
+
+	// Highly-precise published unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UnitPriceHigh *string `json:"UnitPriceHigh,omitempty" name:"UnitPriceHigh"`
+
+	// Highly-precise discounted unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UnitPriceDiscountHigh *string `json:"UnitPriceDiscountHigh,omitempty" name:"UnitPriceDiscountHigh"`
 }
 
 type Price struct {
@@ -1467,6 +1499,22 @@ type Price struct {
 	// Postpaid cloud disk discount price. Unit: CNY.
 	// Note: This field may return null, indicating that no valid value was found.
 	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
+
+	// Highly-precise published unit price of a monthly-subscribed cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	OriginalPriceHigh *string `json:"OriginalPriceHigh,omitempty" name:"OriginalPriceHigh"`
+
+	// Highly-precise discounted unit price of a monthly-subscribed cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DiscountPriceHigh *string `json:"DiscountPriceHigh,omitempty" name:"DiscountPriceHigh"`
+
+	// Highly-precise published unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UnitPriceHigh *string `json:"UnitPriceHigh,omitempty" name:"UnitPriceHigh"`
+
+	// Highly-precise discounted unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UnitPriceDiscountHigh *string `json:"UnitPriceDiscountHigh,omitempty" name:"UnitPriceDiscountHigh"`
 }
 
 type ResizeDiskRequest struct {
@@ -1532,7 +1580,7 @@ type Snapshot struct {
 	// Size of the cloud disk used to create this snapshot (in GB).
 	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
-	// Status of the snapshot. Value range: <br><li>NORMAL: Normal <br><li>CREATING: Creating <br><li>ROLLBACKING: Rolling backing <br><li>COPYING_FROM_REMOTE: Copying snapshot across regions.
+	// Snapshot status. Valid values: <br><li>NORMAL: normal <br><li>CREATING: creating<br><li>ROLLBACKING: rolling back<br><li>COPYING_FROM_REMOTE: cross-region replicating<li>CHECKING_COPIED: verifying the cross-region replicated data<br><li>TORECYCLE: to be repossessed.
 	SnapshotState *string `json:"SnapshotState,omitempty" name:"SnapshotState"`
 
 	// Snapshot name, the user-defined snapshot alias. Call [ModifySnapshotAttribute](https://intl.cloud.tencent.com/document/product/362/15650?from_cn_redirect=1) to modify this field.
@@ -1570,6 +1618,9 @@ type Snapshot struct {
 
 	// Number of snapshots currently shared
 	ShareReference *uint64 `json:"ShareReference,omitempty" name:"ShareReference"`
+
+	// 
+	TimeStartShare *string `json:"TimeStartShare,omitempty" name:"TimeStartShare"`
 }
 
 type SnapshotOperationLog struct {

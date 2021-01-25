@@ -526,6 +526,31 @@ func (c *Client) CheckNetDetectState(request *CheckNetDetectStateRequest) (respo
     return
 }
 
+func NewCloneSecurityGroupRequest() (request *CloneSecurityGroupRequest) {
+    request = &CloneSecurityGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CloneSecurityGroup")
+    return
+}
+
+func NewCloneSecurityGroupResponse() (response *CloneSecurityGroupResponse) {
+    response = &CloneSecurityGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a security group with the same rule configurations as an existing security group. The cloning only copies the security group and its rules, but not the security group tags.
+func (c *Client) CloneSecurityGroup(request *CloneSecurityGroupRequest) (response *CloneSecurityGroupResponse, err error) {
+    if request == nil {
+        request = NewCloneSecurityGroupRequest()
+    }
+    response = NewCloneSecurityGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAddressTemplateRequest() (request *CreateAddressTemplateRequest) {
     request = &CreateAddressTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1258,9 +1283,9 @@ func NewCreateVpcResponse() (response *CreateVpcResponse) {
 }
 
 // This API is used to create a VPC instance.
-// * The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses). For more information, see the corresponding documents about VPC IP address ranges.
-// * The number of VPC instances that can be created in a region is limited. For more information, see <a href="https://intl.cloud.tencent.com/doc/product/215/537" title="VPC Use Limits">VPC Use Limits</a>. To request more resources, contact the online customer service.
-// * You can bind a tag when creating a VPC instance. The tag list in the response indicates the tags that have been successfully added.
+// * The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses). For more information on how to plan VPC IP ranges, see [Network Planning](https://intl.cloud.tencent.com/document/product/215/30313?from_cn_redirect=1).
+// * The number of VPC instances that can be created in a region is limited. For more information, see <a href="https://intl.cloud.tencent.com/doc/product/215/537?from_cn_redirect=1" title="VPC Use Limits">VPC Use Limits</a>. To request more resources, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+// * You can bind tags when creating a VPC instance. The tag list in the response indicates the tags that have been successfully added.
 func (c *Client) CreateVpc(request *CreateVpcRequest) (response *CreateVpcResponse, err error) {
     if request == nil {
         request = NewCreateVpcRequest()
@@ -2503,8 +2528,8 @@ func NewDescribeGatewayFlowMonitorDetailResponse() (response *DescribeGatewayFlo
     return
 }
 
-// This API (DescribeGatewayFlowMonitorDetail) is used to query the monitoring details of the gateway traffic.
-// * Only querying of a single gateway instance is supported. That is, only one of the `VpnId`, `DirectConnectGatewayId`, `PeeringConnectionId`, or `NatId` input parameters is supported, and one must be used.
+// This API is used to query the traffic monitoring details of the gateway.
+// * You can only use this API to query a single gateway instance, which means you must pass in only one of `VpnId`, `DirectConnectGatewayId`, `PeeringConnectionId`, or `NatId`.
 // * If the gateway has traffic, but no data is returned when this API is called, please check whether gateway traffic monitoring has been enabled in the corresponding gateway details page in the console.
 func (c *Client) DescribeGatewayFlowMonitorDetail(request *DescribeGatewayFlowMonitorDetailRequest) (response *DescribeGatewayFlowMonitorDetailResponse, err error) {
     if request == nil {

@@ -840,7 +840,7 @@ func NewPutTotalConcurrencyConfigResponse() (response *PutTotalConcurrencyConfig
     return
 }
 
-// This API is used to modify the account concurrency limit quota.
+// This API is used to modify the account concurrency quota.
 func (c *Client) PutTotalConcurrencyConfig(request *PutTotalConcurrencyConfigRequest) (response *PutTotalConcurrencyConfigResponse, err error) {
     if request == nil {
         request = NewPutTotalConcurrencyConfigRequest()
