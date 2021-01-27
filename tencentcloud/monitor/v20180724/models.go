@@ -384,7 +384,7 @@ type BindingPolicyObjectDimension struct {
 type BindingPolicyObjectRequest struct {
 	*tchttp.BaseRequest
 
-	// Policy group ID.
+	// Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 
 	// Required. The value is fixed to monitor.
@@ -395,6 +395,9 @@ type BindingPolicyObjectRequest struct {
 
 	// Dimensions of an object to be bound.
 	Dimensions []*BindingPolicyObjectDimension `json:"Dimensions,omitempty" name:"Dimensions" list`
+
+	// Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
 func (r *BindingPolicyObjectRequest) ToJsonString() string {
@@ -2660,6 +2663,73 @@ func (r *DescribeProductEventListResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeStatisticDataRequest struct {
+	*tchttp.BaseRequest
+
+	// Module, whose value is fixed at `monitor`
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Namespace. Valid values: QCE/TKE
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Metric name list
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
+
+	// Dimension condition. The `=` and `in` operators are supported
+	Conditions []*MidQueryCondition `json:"Conditions,omitempty" name:"Conditions" list`
+
+	// Statistical granularity in s. Default value: 300
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Start time, which is the current time by default, such as 2020-12-08T19:51:23+08:00
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time, which is the current time by default, such as 2020-12-08T19:51:23+08:00
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// `groupBy` by the specified dimension
+	GroupBys []*string `json:"GroupBys,omitempty" name:"GroupBys" list`
+}
+
+func (r *DescribeStatisticDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeStatisticDataRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStatisticDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Statistical period
+		Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+		// Start time
+		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+		// End time
+		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+		// Monitoring data
+		Data []*MetricData `json:"Data,omitempty" name:"Data" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStatisticDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeStatisticDataResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type Dimension struct {
 
 	// Instance dimension name
@@ -2805,6 +2875,24 @@ type MetricConfig struct {
 	ContinuePeriod []*int64 `json:"ContinuePeriod,omitempty" name:"ContinuePeriod" list`
 }
 
+type MetricData struct {
+
+	// Metric name
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Monitoring data point
+	Points []*MetricDataPoint `json:"Points,omitempty" name:"Points" list`
+}
+
+type MetricDataPoint struct {
+
+	// Combination of instance object dimensions
+	Dimensions []*Dimension `json:"Dimensions,omitempty" name:"Dimensions" list`
+
+	// Data point list
+	Values []*Point `json:"Values,omitempty" name:"Values" list`
+}
+
 type MetricDatum struct {
 
 	// Metric name.
@@ -2848,6 +2936,18 @@ type MetricSet struct {
 
 	// Dimension description
 	Dimensions []*DimensionsDesc `json:"Dimensions,omitempty" name:"Dimensions" list`
+}
+
+type MidQueryCondition struct {
+
+	// Dimension
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Operator. Valid values: eq (equal to), ne (not equal to), in
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// Dimension value. If `Operator` is `eq` or `ne`, only the first element will be used
+	Value []*string `json:"Value,omitempty" name:"Value" list`
 }
 
 type ModifyAlarmNoticeRequest struct {
@@ -3266,6 +3366,16 @@ type PeriodsSt struct {
 	StatType []*string `json:"StatType,omitempty" name:"StatType" list`
 }
 
+type Point struct {
+
+	// Time point when this monitoring data point is generated
+	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// Monitoring data point value
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Value *float64 `json:"Value,omitempty" name:"Value"`
+}
+
 type PutMonitorDataRequest struct {
 	*tchttp.BaseRequest
 
@@ -3455,8 +3565,11 @@ type UnBindingAllPolicyObjectRequest struct {
 	// The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Policy group ID.
+	// Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
 func (r *UnBindingAllPolicyObjectRequest) ToJsonString() string {
@@ -3492,7 +3605,7 @@ type UnBindingPolicyObjectRequest struct {
 	// The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Policy group ID.
+	// Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 
 	// List of unique IDs of the object instances to be deleted. `UniqueId` can be obtained from the output parameter `List` of the [DescribeBindingPolicyObjectList](https://intl.cloud.tencent.com/document/api/248/40570?from_cn_redirect=1) API
@@ -3500,6 +3613,9 @@ type UnBindingPolicyObjectRequest struct {
 
 	// Instance group ID. The UniqueId parameter is invalid if object instances are deleted by instance group.
 	InstanceGroupId *int64 `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
+
+	// Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
 func (r *UnBindingPolicyObjectRequest) ToJsonString() string {
