@@ -68,6 +68,31 @@ func (c *Client) AcceptDirectConnectTunnel(request *AcceptDirectConnectTunnelReq
     return
 }
 
+func NewApplyInternetAddressRequest() (request *ApplyInternetAddressRequest) {
+    request = &ApplyInternetAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "ApplyInternetAddress")
+    return
+}
+
+func NewApplyInternetAddressResponse() (response *ApplyInternetAddressResponse) {
+    response = &ApplyInternetAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to apply for an internet tunnel’s CIDR block.
+func (c *Client) ApplyInternetAddress(request *ApplyInternetAddressRequest) (response *ApplyInternetAddressResponse, err error) {
+    if request == nil {
+        request = NewApplyInternetAddressRequest()
+    }
+    response = NewApplyInternetAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDirectConnectRequest() (request *CreateDirectConnectRequest) {
     request = &CreateDirectConnectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -247,6 +272,131 @@ func (c *Client) DescribeDirectConnects(request *DescribeDirectConnectsRequest) 
     return
 }
 
+func NewDescribeInternetAddressRequest() (request *DescribeInternetAddressRequest) {
+    request = &DescribeInternetAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "DescribeInternetAddress")
+    return
+}
+
+func NewDescribeInternetAddressResponse() (response *DescribeInternetAddressResponse) {
+    response = &DescribeInternetAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the public IP address of an internet tunnel.
+func (c *Client) DescribeInternetAddress(request *DescribeInternetAddressRequest) (response *DescribeInternetAddressResponse, err error) {
+    if request == nil {
+        request = NewDescribeInternetAddressRequest()
+    }
+    response = NewDescribeInternetAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInternetAddressQuotaRequest() (request *DescribeInternetAddressQuotaRequest) {
+    request = &DescribeInternetAddressQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "DescribeInternetAddressQuota")
+    return
+}
+
+func NewDescribeInternetAddressQuotaResponse() (response *DescribeInternetAddressQuotaResponse) {
+    response = &DescribeInternetAddressQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the public IP quota of internet tunnels.
+func (c *Client) DescribeInternetAddressQuota(request *DescribeInternetAddressQuotaRequest) (response *DescribeInternetAddressQuotaResponse, err error) {
+    if request == nil {
+        request = NewDescribeInternetAddressQuotaRequest()
+    }
+    response = NewDescribeInternetAddressQuotaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInternetAddressStatisticsRequest() (request *DescribeInternetAddressStatisticsRequest) {
+    request = &DescribeInternetAddressStatisticsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "DescribeInternetAddressStatistics")
+    return
+}
+
+func NewDescribeInternetAddressStatisticsResponse() (response *DescribeInternetAddressStatisticsResponse) {
+    response = &DescribeInternetAddressStatisticsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the public IP address assignment statistics of internet tunnels.
+func (c *Client) DescribeInternetAddressStatistics(request *DescribeInternetAddressStatisticsRequest) (response *DescribeInternetAddressStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInternetAddressStatisticsRequest()
+    }
+    response = NewDescribeInternetAddressStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDisableInternetAddressRequest() (request *DisableInternetAddressRequest) {
+    request = &DisableInternetAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "DisableInternetAddress")
+    return
+}
+
+func NewDisableInternetAddressResponse() (response *DisableInternetAddressResponse) {
+    response = &DisableInternetAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to disable a public IP address of internet tunnels.
+func (c *Client) DisableInternetAddress(request *DisableInternetAddressRequest) (response *DisableInternetAddressResponse, err error) {
+    if request == nil {
+        request = NewDisableInternetAddressRequest()
+    }
+    response = NewDisableInternetAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableInternetAddressRequest() (request *EnableInternetAddressRequest) {
+    request = &EnableInternetAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "EnableInternetAddress")
+    return
+}
+
+func NewEnableInternetAddressResponse() (response *EnableInternetAddressResponse) {
+    response = &EnableInternetAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to enable a public IP address for internet tunnels.
+func (c *Client) EnableInternetAddress(request *EnableInternetAddressRequest) (response *EnableInternetAddressResponse, err error) {
+    if request == nil {
+        request = NewEnableInternetAddressRequest()
+    }
+    response = NewEnableInternetAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDirectConnectAttributeRequest() (request *ModifyDirectConnectAttributeRequest) {
     request = &ModifyDirectConnectAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -318,6 +468,31 @@ func (c *Client) RejectDirectConnectTunnel(request *RejectDirectConnectTunnelReq
         request = NewRejectDirectConnectTunnelRequest()
     }
     response = NewRejectDirectConnectTunnelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewReleaseInternetAddressRequest() (request *ReleaseInternetAddressRequest) {
+    request = &ReleaseInternetAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dc", APIVersion, "ReleaseInternetAddress")
+    return
+}
+
+func NewReleaseInternetAddressResponse() (response *ReleaseInternetAddressResponse) {
+    response = &ReleaseInternetAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to release an IP address of internet tunnels.
+func (c *Client) ReleaseInternetAddress(request *ReleaseInternetAddressRequest) (response *ReleaseInternetAddressResponse, err error) {
+    if request == nil {
+        request = NewReleaseInternetAddressRequest()
+    }
+    response = NewReleaseInternetAddressResponse()
     err = c.Send(request, response)
     return
 }

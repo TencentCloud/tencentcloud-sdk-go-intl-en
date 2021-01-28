@@ -387,9 +387,9 @@ type CertInfo struct {
 	// Certificate content.
 	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
 
-	// Certificate type:
-	// 0: Tencent Cloud-hosted certificate.
-	// 1: user-added certificate.
+	// Certificate type.
+	// 0: User-added certificate.
+	// 1: Tencent Cloud-hosted certificate.
 	CertType *int64 `json:"CertType,omitempty" name:"CertType"`
 
 	// Certificate expiration time in UTC format.
@@ -1161,9 +1161,9 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Value range: 0-500.
 	AudioBitrate *int64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
-	// Video codec. Valid values: h264 (default), h265, origin
+	// Video codec. Valid values: h264, h265, origin (default).
 	// 
-	// origin: original codec as the output codec
+	// origin: original codec as the output codec.
 	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
 
 	// Template description.
@@ -1937,7 +1937,7 @@ func (r *DeleteRecordTaskResponse) FromJsonString(s string) error {
 type DescribeAllStreamPlayInfoListRequest struct {
 	*tchttp.BaseRequest
 
-	// Query time accurate down to the minute in the format of `yyyy-mm-dd HH:MM:SS`. Data for the last month can be queried. The data has a delay of about 5 minutes; therefore, if you want to query real-time data, we recommend you pass in a point in time 5 minutes ago.
+	// Query time point accurate to the minute. You can query data within the last month. As there is a 5-minute delay in the data, you're advised to pass in a time point 5 minutes earlier than needed. Format: yyyy-mm-dd HH:MM:00. As the accuracy is to the minute, please set the value of second to `00`.
 	QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
 }
 
@@ -3204,7 +3204,7 @@ type DescribeLiveStreamPublishedListRequest struct {
 
 	// Number of entries per page.
 	// Maximum value: 100.
-	// Value range: any integer between 1 and 100.
+	// Valid values: integers between 10 and 100.
 	// Default value: 10.
 	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 
@@ -3760,7 +3760,7 @@ type DescribePlayErrorCodeSumInfoListResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Information of 4xx or 5xx error codes by district and ISP.
+		// Information of error codes starting with 2, 3, 4, or 5 by district and ISP.
 		ProIspInfoList []*ProIspPlayCodeDataInfo `json:"ProIspInfoList,omitempty" name:"ProIspInfoList" list`
 
 		// Total occurrences of all status codes.
@@ -3927,6 +3927,11 @@ type DescribeProvinceIspPlayInfoListRequest struct {
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
 	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
+
+	// IP type:
+	// "Ipv6": IPv6 data
+	// Data of all IPs will be returned if this parameter is left empty.
+	IpType *string `json:"IpType,omitempty" name:"IpType"`
 }
 
 func (r *DescribeProvinceIspPlayInfoListRequest) ToJsonString() string {
@@ -4076,8 +4081,8 @@ type DescribeStreamPlayInfoListRequest struct {
 	// Start time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
-	// The end time and start time must be on the same day. Data in the last 3 days can be queried.
+	// End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS.
+	// The difference between the start time and end time cannot be greater than 24 hours. Data in the last 30 days can be queried.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name,
@@ -4244,6 +4249,55 @@ func (r *DescribeTopClientIpSumInfoListResponse) ToJsonString() string {
 }
 
 func (r *DescribeTopClientIpSumInfoListResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUploadStreamNumsRequest struct {
+	*tchttp.BaseRequest
+
+	// Start time point in the format of yyyy-mm-dd HH:MM:SS.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 31 days can be queried.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// LVB domain names. If this parameter is left empty, data of all domain names will be queried.
+	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+
+	// Time granularity of the data. Valid values:
+	// 5: 5-minute granularity (the query period is up to 1 day).
+	// 1440: 1-day granularity (the query period is up to 1 month).
+	// Default value: 5.
+	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
+}
+
+func (r *DescribeUploadStreamNumsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeUploadStreamNumsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUploadStreamNumsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Detailed data.
+		DataInfoList []*ConcurrentRecordStreamNum `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeUploadStreamNumsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeUploadStreamNumsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5101,9 +5155,9 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Template ID.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Video codec. Valid values: h264 (default), h265, origin
+	// Video codec. Valid values: h264, h265, origin (default).
 	// 
-	// origin: original codec as the output codec
+	// origin: original codec as the output codec.
 	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
 
 	// Audio codec. Defaut value: aac.

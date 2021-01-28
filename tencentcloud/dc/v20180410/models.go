@@ -79,6 +79,54 @@ type AccessPoint struct {
 	AvailablePortType []*string `json:"AvailablePortType,omitempty" name:"AvailablePortType" list`
 }
 
+type ApplyInternetAddressRequest struct {
+	*tchttp.BaseRequest
+
+	// Mask length of a CIDR block
+	MaskLen *int64 `json:"MaskLen,omitempty" name:"MaskLen"`
+
+	// Address type. Valid values: 0: BGP
+	// 1: China Telecom
+	// 2: China Mobile
+	// 3: China Unicom
+	AddrType *int64 `json:"AddrType,omitempty" name:"AddrType"`
+
+	// Address protocol. Valid values: 0: IPv4
+	// 1: IPv6
+	AddrProto *int64 `json:"AddrProto,omitempty" name:"AddrProto"`
+}
+
+func (r *ApplyInternetAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ApplyInternetAddressRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ApplyInternetAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// ID of the internet tunnel’s public IP address
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ApplyInternetAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ApplyInternetAddressResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type BgpPeer struct {
 
 	// User-side BGP Asn.
@@ -487,6 +535,147 @@ func (r *DescribeDirectConnectsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeInternetAddressQuotaRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeInternetAddressQuotaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInternetAddressQuotaRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInternetAddressQuotaResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Minimum prefix length allowed for a public IPv6 address
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Ipv6PrefixLen *int64 `json:"Ipv6PrefixLen,omitempty" name:"Ipv6PrefixLen"`
+
+		// Quota of BGP IPv4 addresses
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Ipv4BgpQuota *int64 `json:"Ipv4BgpQuota,omitempty" name:"Ipv4BgpQuota"`
+
+		// Quota of non-BGP IPv4 addresses
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Ipv4OtherQuota *int64 `json:"Ipv4OtherQuota,omitempty" name:"Ipv4OtherQuota"`
+
+		// Used number of BGP IPv4 addresses
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Ipv4BgpNum *int64 `json:"Ipv4BgpNum,omitempty" name:"Ipv4BgpNum"`
+
+		// Used number of non-BGP IPv4 addresses
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Ipv4OtherNum *int64 `json:"Ipv4OtherNum,omitempty" name:"Ipv4OtherNum"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInternetAddressQuotaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInternetAddressQuotaResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInternetAddressRequest struct {
+	*tchttp.BaseRequest
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter conditions:
+	// <li>AddrType, address type. Valid values: 0: BGP; 1: China Telecom; 2: China Mobile; 3: China Unicom</li>
+	// <li>AddrProto, address protocol. Valid values: 0: IPv4; 1: IPv6</li>
+	// <li>Status, address status. Valid values: 0: in use; 1: disabled; 2: returned</li>
+	// <li>Subnet, public IP address array</li>
+	// <InstanceIds>Public IP address ID array</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeInternetAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInternetAddressRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInternetAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of public IP addresses for internet tunnels
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of the public IP addresses for internet tunnels
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Subnets []*InternetAddressDetail `json:"Subnets,omitempty" name:"Subnets" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInternetAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInternetAddressResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInternetAddressStatisticsRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeInternetAddressStatisticsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInternetAddressStatisticsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInternetAddressStatisticsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of public IP address statistics for internet tunnels
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of the public IP address statistics for internet tunnels
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		InternetAddressStatistics []*InternetAddressStatistics `json:"InternetAddressStatistics,omitempty" name:"InternetAddressStatistics" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInternetAddressStatisticsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeInternetAddressStatisticsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DirectConnect struct {
 
 	// Connection ID.
@@ -711,6 +900,74 @@ type DirectConnectTunnel struct {
 	CloudAttachId *string `json:"CloudAttachId,omitempty" name:"CloudAttachId"`
 }
 
+type DisableInternetAddressRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the internet tunnel’s public IP address
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DisableInternetAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisableInternetAddressRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DisableInternetAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DisableInternetAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisableInternetAddressResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableInternetAddressRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the internet tunnel’s public IP address
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *EnableInternetAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableInternetAddressRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableInternetAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *EnableInternetAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableInternetAddressResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type Filter struct {
 
 	// Fields to be filtered.
@@ -718,6 +975,72 @@ type Filter struct {
 
 	// Filter values of the field.
 	Values []*string `json:"Values,omitempty" name:"Values" list`
+}
+
+type InternetAddressDetail struct {
+
+	// Internet tunnel’s IP address ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Internet tunnel’s network address
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Subnet *string `json:"Subnet,omitempty" name:"Subnet"`
+
+	// Mask length of a network address
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MaskLen *int64 `json:"MaskLen,omitempty" name:"MaskLen"`
+
+	// Address type. Valid values: 0: BGP
+	// 1: China Telecom
+	// 2: China Mobile
+	// 3: China Unicom
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AddrType *int64 `json:"AddrType,omitempty" name:"AddrType"`
+
+	// Address status. Valid values: 0: in use
+	// 1: disabled
+	// 2: returned
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Applied at
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ApplyTime *string `json:"ApplyTime,omitempty" name:"ApplyTime"`
+
+	// Disabled at
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	StopTime *string `json:"StopTime,omitempty" name:"StopTime"`
+
+	// Returned at
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ReleaseTime *string `json:"ReleaseTime,omitempty" name:"ReleaseTime"`
+
+	// Region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// User ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Address protocol. Valid values: 0: IPv4; 1: IPv6
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AddrProto *int64 `json:"AddrProto,omitempty" name:"AddrProto"`
+
+	// Retention period of a released IP address, in days
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ReserveTime *int64 `json:"ReserveTime,omitempty" name:"ReserveTime"`
+}
+
+type InternetAddressStatistics struct {
+
+	// Region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Number of public IP addresses for internet tunnels
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SubnetNum *int64 `json:"SubnetNum,omitempty" name:"SubnetNum"`
 }
 
 type ModifyDirectConnectAttributeRequest struct {
@@ -873,6 +1196,40 @@ func (r *RejectDirectConnectTunnelResponse) ToJsonString() string {
 }
 
 func (r *RejectDirectConnectTunnelResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ReleaseInternetAddressRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the internet tunnel’s public IP address
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *ReleaseInternetAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ReleaseInternetAddressRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ReleaseInternetAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ReleaseInternetAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ReleaseInternetAddressResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

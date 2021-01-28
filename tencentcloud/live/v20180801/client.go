@@ -2066,6 +2066,31 @@ func (c *Client) DescribeTopClientIpSumInfoList(request *DescribeTopClientIpSumI
     return
 }
 
+func NewDescribeUploadStreamNumsRequest() (request *DescribeUploadStreamNumsRequest) {
+    request = &DescribeUploadStreamNumsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeUploadStreamNums")
+    return
+}
+
+func NewDescribeUploadStreamNumsResponse() (response *DescribeUploadStreamNumsResponse) {
+    response = &DescribeUploadStreamNumsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the number of LVB upstream channels.
+func (c *Client) DescribeUploadStreamNums(request *DescribeUploadStreamNumsRequest) (response *DescribeUploadStreamNumsResponse, err error) {
+    if request == nil {
+        request = NewDescribeUploadStreamNumsRequest()
+    }
+    response = NewDescribeUploadStreamNumsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeVisitTopSumInfoListRequest() (request *DescribeVisitTopSumInfoListRequest) {
     request = &DescribeVisitTopSumInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},

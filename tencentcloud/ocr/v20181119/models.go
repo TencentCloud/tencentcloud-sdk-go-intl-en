@@ -23,10 +23,8 @@ import (
 type BankCardOCRRequest struct {
 	*tchttp.BaseRequest
 
-	// Base64-encoded value of image.
-	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-	// Supported image size: the downloaded image cannot exceed 7 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-	// Either the `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+	// Base64-encoded value of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` will be used.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
 
 	// URL address of image. (This field is not supported outside Chinese mainland)
@@ -36,19 +34,19 @@ type BankCardOCRRequest struct {
 	// The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 
-	// 
+	// Whether to return the bank card image data after preprocessing (precise cropping and alignment). Default value: `false`
 	RetBorderCutImage *bool `json:"RetBorderCutImage,omitempty" name:"RetBorderCutImage"`
 
-	// 
+	// Whether to return the card number image data after slicing. Default value: `false`
 	RetCardNoImage *bool `json:"RetCardNoImage,omitempty" name:"RetCardNoImage"`
 
-	// 
+	// Whether to enable photocopy check. If the input image is a bank card photocopy, an alarm will be returned. Default value: `false`
 	EnableCopyCheck *bool `json:"EnableCopyCheck,omitempty" name:"EnableCopyCheck"`
 
-	// 
+	// Whether to enable photograph check. If the input image is a bank card photograph, an alarm will be returned. Default value: `false`
 	EnableReshootCheck *bool `json:"EnableReshootCheck,omitempty" name:"EnableReshootCheck"`
 
-	// 
+	// Whether to enable obscured border check. If the input image is a bank card with obscured border, an alarm will be returned. Default value: `false`
 	EnableBorderCheck *bool `json:"EnableBorderCheck,omitempty" name:"EnableBorderCheck"`
 }
 
@@ -71,8 +69,32 @@ type BankCardOCRResponse struct {
 		// Bank information
 		BankInfo *string `json:"BankInfo,omitempty" name:"BankInfo"`
 
-		// Expiration date
+		// Expiration date. Format: 07/2023
 		ValidDate *string `json:"ValidDate,omitempty" name:"ValidDate"`
+
+		// Card type
+		CardType *string `json:"CardType,omitempty" name:"CardType"`
+
+		// Card name
+		CardName *string `json:"CardName,omitempty" name:"CardName"`
+
+		// Sliced image data
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		BorderCutImage *string `json:"BorderCutImage,omitempty" name:"BorderCutImage"`
+
+		// Card number image data
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		CardNoImage *string `json:"CardNoImage,omitempty" name:"CardNoImage"`
+
+		// Warning code:
+	// -9110: the bank card date is invalid. 
+	// -9111: the bank card border is incomplete. 
+	// -9112: the bank card image is reflective.
+	// -9113: the bank card image is a photocopy.
+	// -9114: the bank card image is a photograph.
+	// Multiple warning codes may be returned at a time.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		WarningCode []*int64 `json:"WarningCode,omitempty" name:"WarningCode" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
