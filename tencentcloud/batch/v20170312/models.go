@@ -390,7 +390,7 @@ type DataDisk struct {
 	// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
-	// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
+	// Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>LOCAL_NVME: local NVME disk, specified in the `InstanceType`<br><li>LOCAL_PRO: local HDD disk, specified in the `InstanceType`<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Data disk ID. Data disks of the type `LOCAL_BASIC` or `LOCAL_SSD` do not have IDs and do not support this parameter.
@@ -421,6 +421,10 @@ type DataDisk struct {
 	// Currently, this parameter is only used in the `RunInstances` API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+
+	// Cloud disk performance, in MB/s
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ThroughputPerformance *int64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
 }
 
 type DeleteComputeEnvRequest struct {
@@ -1671,6 +1675,51 @@ type ItemPrice struct {
 	// Discounted unit price for the usage after 360 hours in USD. It's applicable to pay-as-you-go mode.
 	// Note: this field may return null, indicating that no valid value is obtained.
 	UnitPriceDiscountThirdStep *float64 `json:"UnitPriceDiscountThirdStep,omitempty" name:"UnitPriceDiscountThirdStep"`
+
+	// Original 3-year payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	OriginalPriceThreeYear *float64 `json:"OriginalPriceThreeYear,omitempty" name:"OriginalPriceThreeYear"`
+
+	// Discounted 3-year upfront payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountPriceThreeYear *float64 `json:"DiscountPriceThreeYear,omitempty" name:"DiscountPriceThreeYear"`
+
+	// Discount for 3-year upfront payment. For example, 20.0 indicates 80% off.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountThreeYear *float64 `json:"DiscountThreeYear,omitempty" name:"DiscountThreeYear"`
+
+	// Original 5-year payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	OriginalPriceFiveYear *float64 `json:"OriginalPriceFiveYear,omitempty" name:"OriginalPriceFiveYear"`
+
+	// Discounted 5-year upfront payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountPriceFiveYear *float64 `json:"DiscountPriceFiveYear,omitempty" name:"DiscountPriceFiveYear"`
+
+	// Discount for 5-year upfront payment. For example, 20.0 indicates 80% off.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountFiveYear *float64 `json:"DiscountFiveYear,omitempty" name:"DiscountFiveYear"`
+
+	// Original 1-year payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	OriginalPriceOneYear *float64 `json:"OriginalPriceOneYear,omitempty" name:"OriginalPriceOneYear"`
+
+	// Discounted 1-year payment, in USD. This parameter is only available to upfront payment mode.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountPriceOneYear *float64 `json:"DiscountPriceOneYear,omitempty" name:"DiscountPriceOneYear"`
+
+	// Discount for 1-year upfront payment. For example, 20.0 indicates 80% off.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DiscountOneYear *float64 `json:"DiscountOneYear,omitempty" name:"DiscountOneYear"`
 }
 
 type Job struct {
@@ -1938,7 +1987,7 @@ type OutputMappingConfig struct {
 
 type Placement struct {
 
-	// The ID of [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) where the instance locates. It can obtained in the `Zone` field returned by [DescribeZones](https://intl.cloud.tencent.com/document/213/15707?from_cn_redirect=1) API.
+	// ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain the ID in the returned `Zone` field.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// ID of the project to which the instance belongs. To obtain the project IDs, you can call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) and look for the `projectId` fields in the response. If this parameter is not specified, the default project will be used.

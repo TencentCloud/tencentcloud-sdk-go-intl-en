@@ -272,7 +272,7 @@ type CreateKeyRequest struct {
 	// CMK description of up to 1,024 bytes in length
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Key purpose. The default value is `ENCRYPT_DECRYPT` (creating a symmetric key for encryption and decryption). Other valid values include `ASYMMETRIC_DECRYPT_RSA_2048` (creating an RSA2048 asymmetric key for encryption and decryption) and `ASYMMETRIC_DECRYPT_SM2` (creating an SM2 asymmetric key for encryption and decryption).
+	// Key purpose. Valid values: `ENCRYPT_DECRYPT` (default value; creating a symmetric key for encryption and decryption), `ASYMMETRIC_DECRYPT_RSA_2048` (creating an RSA2048 asymmetric key for encryption and decryption), `ASYMMETRIC_DECRYPT_SM2` (creating an SM2 asymmetric key for encryption and decryption), and `ASYMMETRIC_SIGN_VERIFY_SM2` (creating an SM2 asymmetric key for signature verification).
 	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
 
 	// Specifies the key type. Default value: 1. Valid value: 1 - default type, indicating that the CMK is created by KMS; 2 - EXTERNAL type, indicating that you need to import key material. For more information, please see the `GetParametersForImport` and `ImportKeyMaterial` API documents.
@@ -1589,7 +1589,7 @@ type KeyMetadata struct {
 	// CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport, Archived.
 	KeyState *string `json:"KeyState,omitempty" name:"KeyState"`
 
-	// CMK purpose. Valid values: ENCRYPT_DECRYPT, ASYMMETRIC_DECRYPT_RSA_2048, ASYMMETRIC_DECRYPT_SM2
+	// CMK purpose. Valid values: `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, and `ASYMMETRIC_SIGN_VERIFY_SM2`.
 	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
 
 	// CMK type. 2: FIPS-compliant; 4: SM-CRYPTO
@@ -1645,6 +1645,9 @@ type ListAlgorithmsResponse struct {
 		// Asymmetric encryption algorithms supported in this region
 		AsymmetricAlgorithms []*AlgorithmInfo `json:"AsymmetricAlgorithms,omitempty" name:"AsymmetricAlgorithms" list`
 
+		// Asymmetric signature verification algorithms supported in the current region
+		AsymmetricSignVerifyAlgorithms []*AlgorithmInfo `json:"AsymmetricSignVerifyAlgorithms,omitempty" name:"AsymmetricSignVerifyAlgorithms" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1683,7 +1686,7 @@ type ListKeyDetailRequest struct {
 	// Filters by CMK type. "TENCENT_KMS" indicates to filter CMKs whose key materials are created by KMS; "EXTERNAL" indicates to filter CMKs of `EXTERNAL` type whose key materials are imported by users; "ALL" or empty indicates to filter CMKs of both types. This value is case-sensitive.
 	Origin *string `json:"Origin,omitempty" name:"Origin"`
 
-	// Filter by `KeyUsage` of CMKs. Valid values: `ALL` (filter all CMKs), `ENCRYPT_DECRYPT` (it will be used when the parameter is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`.
+	// Filter by the `KeyUsage` field of CMKs. Valid values: `ALL` (filtering all CMKs), `ENCRYPT_DECRYPT` (it will be used when the parameter is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, and `ASYMMETRIC_SIGN_VERIFY_SM2`.
 	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
 
 	// Tag filter condition
@@ -1905,6 +1908,52 @@ func (r *ScheduleKeyDeletionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type SignByAsymmetricKeyRequest struct {
+	*tchttp.BaseRequest
+
+	// Signature algorithm. Supported algorithm: SM2DSA.
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
+
+	// The original message or message abstract. For an original message, the length before Base64 encoding can contain up to 4,096 bytes. For a message abstract, the SM2 signature algorithm only supports 32-byte (before Base64 encoding) message abstracts.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Unique ID of a key
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Message type. Valid values: `RAW` (indicating an original message; used by default if the parameter is not passed in) and `DIGEST`.
+	MessageType *string `json:"MessageType,omitempty" name:"MessageType"`
+}
+
+func (r *SignByAsymmetricKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SignByAsymmetricKeyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SignByAsymmetricKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Base64-encoded signature
+		Signature *string `json:"Signature,omitempty" name:"Signature"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SignByAsymmetricKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SignByAsymmetricKeyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type Tag struct {
 
 	// Tag key
@@ -2034,6 +2083,55 @@ func (r *UpdateKeyDescriptionResponse) ToJsonString() string {
 }
 
 func (r *UpdateKeyDescriptionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type VerifyByAsymmetricKeyRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of a key
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Signature value, which is generated by calling the KMS signature API.
+	SignatureValue *string `json:"SignatureValue,omitempty" name:"SignatureValue"`
+
+	// The original message or message abstract. For an original message, the length before Base64 encoding can contain up to 4,096 bytes. For a message abstract, the SM2 signature algorithm only supports 32-byte (before Base64 encoding) message abstracts.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Signature algorithm. Supported algorithm: SM2DSA.
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
+
+	// Message type. Valid values: `RAW` (indicating an original message; used by default if the parameter is not passed in) and `DIGEST`.
+	MessageType *string `json:"MessageType,omitempty" name:"MessageType"`
+}
+
+func (r *VerifyByAsymmetricKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *VerifyByAsymmetricKeyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type VerifyByAsymmetricKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether the signature is valid.
+		SignatureValid *bool `json:"SignatureValid,omitempty" name:"SignatureValid"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *VerifyByAsymmetricKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *VerifyByAsymmetricKeyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
