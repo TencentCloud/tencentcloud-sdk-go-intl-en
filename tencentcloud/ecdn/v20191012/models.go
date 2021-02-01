@@ -922,6 +922,9 @@ type IpStatus struct {
 	// online: the node is online and scheduling normally
 	// offline: the node is offline
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Node IP creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 type Origin struct {
