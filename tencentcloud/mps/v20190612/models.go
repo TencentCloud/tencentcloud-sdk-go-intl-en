@@ -1072,7 +1072,10 @@ type AiReviewTaskProhibitedAsrResult struct {
 	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+	// Error code. 0: success; other values: failure.
+	// <li>40000: invalid input parameter. Please check it;</li>
+	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+	// <li>70000: internal service error. Please try again.</li>
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1093,7 +1096,10 @@ type AiReviewTaskProhibitedOcrResult struct {
 	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+	// Error code. 0: success; other values: failure.
+	// <li>40000: invalid input parameter. Please check it;</li>
+	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+	// <li>70000: internal service error. Please try again.</li>
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1114,7 +1120,10 @@ type AiReviewTaskTerrorismOcrResult struct {
 	// Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+	// Error code. 0: success; other values: failure.
+	// <li>40000: invalid input parameter. Please check it;</li>
+	// <li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+	// <li>70000: internal service error. Please try again.</li>
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -1853,19 +1862,19 @@ func (r *CreateAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 type CreateContentReviewTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Name of an intelligent content recognition template. Length limit: 64 characters.
+	// Name of an intelligent content recognition template. Length limit: 64 characters
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Description of an intelligent content recognition template. Length limit: 256 characters.
+	// Description of an intelligent content recognition template. Length limit: 256 characters
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// Control parameter for offensive content
+	// Control parameter for porn information
 	PornConfigure *PornConfigureInfo `json:"PornConfigure,omitempty" name:"PornConfigure"`
 
-	// Control parameter for insecure content
+	// Control parameter for terrorism information
 	TerrorismConfigure *TerrorismConfigureInfo `json:"TerrorismConfigure,omitempty" name:"TerrorismConfigure"`
 
-	// Control parameter for inappropriate content
+	// Control parameter for politically sensitive information
 	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
 	// Control parameter of prohibited information detection. Prohibited information includes:
@@ -1874,7 +1883,7 @@ type CreateContentReviewTemplateRequest struct {
 	// Note: this parameter is not supported yet.
 	ProhibitedConfigure *ProhibitedConfigureInfo `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
-	// Control parameter for custom intelligent content recognition
+	// Control parameter for custom intelligent content recognition tasks
 	UserDefineConfigure *UserDefineConfigureInfo `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
 }
 
@@ -1985,25 +1994,25 @@ func (r *CreateImageSpriteTemplateResponse) FromJsonString(s string) error {
 type CreatePersonSampleRequest struct {
 	*tchttp.BaseRequest
 
-	// Name of a material. Length limit: 20 characters.
+	// Name of an image. Length limit: 20 characters
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Material use case. Valid values:
-	// 1. Recognition: used for content recognition, equivalent to `Recognition.Face`
-	// 2. Review: used for detection of inappropriate content, equivalent to `Review.Face`
-	// 3. All: all of the above, equivalent to 1 and 2 combined
+	// Image usage. Valid values:
+	// 1. Recognition: used for content recognition; equivalent to `Recognition.Face`
+	// 2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
+	// 3. All: equivalent to 1+2
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
-	// Material description. Length limit: 1,024 characters.
+	// Image description. Length limit: 1,024 characters
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// [Base64](https://tools.ietf.org/html/rfc4648) string converted from an image. Only JPEG and PNG images are supported. Array length limit: 5 images.
+	// [Base64](https://tools.ietf.org/html/rfc4648) string converted from an image. Only JPEG and PNG images are supported. Array length limit: 5 images
 	// Note: the image must be a relatively clear facial feature photo of one person with a size of at least 200 x 200 pixels.
 	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents" list`
 
-	// Material tag
-	// <li>Array length limit: 20 tags;</li>
-	// <li>Tag length limit: 128 characters.</li>
+	// Image tag
+	// <li>Array length limit: 20 tags</li>
+	// <li>Tag length limit: 128 characters</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
 }
 
@@ -2020,10 +2029,10 @@ type CreatePersonSampleResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Material information
+		// Image information
 		Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
 
-		// Positioning information of facial features processed unsuccessfully
+		// Information of images that failed the verification by facial feature positioning
 		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2321,15 +2330,15 @@ func (r *CreateWatermarkTemplateResponse) FromJsonString(s string) error {
 type CreateWordSamplesRequest struct {
 	*tchttp.BaseRequest
 
-	// <b>Keyword use case. Valid values:</b>
-	// 1. Recognition.Ocr: OCR-based content recognition;
-	// 2. Recognition.Asr: ASR-based content recognition;
-	// 3. Review.Ocr: OCR-based detection of inappropriate content;
-	// 4. Review.Asr：ASR-based detection of inappropriate content;
-	// <b>These values can be merged as follows:</b>
-	// 5. Recognition: ASR- and OCR-based content recognition, equivalent to 1+2 above;
-	// 6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3+4 above;
-	// 7. All: ASR- and OCR-based content recognition and detection of inappropriate content, equivalent to 1+2+3+4 above;
+	// <b>Keyword usage. Valid values:</b>
+	// 1. Recognition.Ocr: OCR-based content recognition
+	// 2. Recognition.Asr: ASR-based content recognition
+	// 3. Review.Ocr: OCR-based inappropriate information recognition
+	// 4. Review.Asr: ASR-based inappropriate information recognition
+	// <b>Valid values can also be:</b>
+	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+	// 7. All: ASR- and OCR-based content recognition and inappropriate information detection; equivalent to 1+2+3+4
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
 	// Keyword. Array length limit: 100.
@@ -2634,7 +2643,7 @@ func (r *DeleteImageSpriteTemplateResponse) FromJsonString(s string) error {
 type DeletePersonSampleRequest struct {
 	*tchttp.BaseRequest
 
-	// Material ID
+	// Image ID
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 }
 
@@ -3066,7 +3075,7 @@ func (r *DescribeAnimatedGraphicsTemplatesResponse) FromJsonString(s string) err
 type DescribeContentReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of intelligent content recognition templates as the filter. Array length limit: 50.
+	// Unique ID of intelligent content recognition templates as the filter. Array length limit: 50
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
 
 	// Paging offset. Default value: 0.
@@ -3200,21 +3209,21 @@ func (r *DescribeMediaMetaDataResponse) FromJsonString(s string) error {
 type DescribePersonSamplesRequest struct {
 	*tchttp.BaseRequest
 
-	// Type of the material pulled. Valid values:
-	// <li>UserDefine: custom material library;</li>
-	// <li>Default: default material library.</li>
+	// Type of images to pull. Valid values:
+	// <li>UserDefine: custom image library</li>
+	// <li>Default: default image library</li>
 	// 
-	// Default value: UserDefine (the materials of the custom material library are pulled.)
-	// Note: you can pull the default material library only using the material name or a combination of the material name and ID, and only one face image is returned.
+	// Default value: UserDefine. Samples in the custom image library will be pulled.
+	// Note: you can pull the default image library only using the image name or a combination of the image name and ID, and only one face image is returned.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Material ID. Array length limit: 100.
+	// Image ID. Array length limit: 100
 	PersonIds []*string `json:"PersonIds,omitempty" name:"PersonIds" list`
 
-	// Material name. Array length limit: 20.
+	// Image name. Array length limit: 20
 	Names []*string `json:"Names,omitempty" name:"Names" list`
 
-	// Material tag. Array length limit: 20.
+	// Image tag. Array length limit: 20
 	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
 
 	// Paging offset. Default value: 0.
@@ -3240,7 +3249,7 @@ type DescribePersonSamplesResponse struct {
 		// Number of eligible entries.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// Material information
+		// Image information
 		PersonSet []*AiSamplePerson `json:"PersonSet,omitempty" name:"PersonSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3606,15 +3615,15 @@ type DescribeWordSamplesRequest struct {
 	// Keyword filter. Array length limit: 100 words.
 	Keywords []*string `json:"Keywords,omitempty" name:"Keywords" list`
 
-	// <b>Keyword use case filter. Valid values:</b>
-	// 1. Recognition.Ocr: OCR-based content recognition;
-	// 2. Recognition.Asr: ASR-based content recognition;
-	// 3. Review.Ocr: OCR-based detection of inappropriate content;
-	// 4. Review.Asr：ASR-based detection of inappropriate content;
-	// <b>These values can be merged as follows:</b>
-	// 5. Recognition: ASR- and OCR-based content recognition, equivalent to 1 and 2 combined;
-	// 6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3+4 above;
-	// Multiple elements can be selected, and the relationship between them is "or", i.e., any keyword use case that contains any element in this field set will be deemed eligible.
+	// <b>Keyword usage. Valid values:</b>
+	// 1. Recognition.Ocr: OCR-based content recognition
+	// 2. Recognition.Asr: ASR-based content recognition
+	// 3. Review.Ocr: OCR-based inappropriate information recognition
+	// 4. Review.Asr: ASR-based inappropriate information recognition
+	// <b>Valid values can also be:</b>
+	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+	// You can select multiple elements, which are connected by OR logic. If a usage contains any element in this parameter, the keyword sample will be used.
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
 	// Tag filter. Array length limit: 20 words.
@@ -4477,8 +4486,8 @@ type ManageTaskRequest struct {
 	// Operation type. Valid values:
 	// <ul>
 	// <li>Abort: task termination. Description:
-	// <ul><li>If the [task type](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is live stream processing (`LiveStreamProcessTask`), tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is waiting (`WAITING`) or processing (`PROCESSING`) can be terminated;</li>
-	// <li>For other [task types](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0), only tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is waiting can be terminated.</li></ul>
+	// <ul><li>If the [task type](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is live stream processing (`LiveStreamProcessTask`), tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is `WAITING` or `PROCESSING` can be terminated.</li>
+	// <li>For other [task types](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0), only tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is `WAITING` can be terminated.</li></ul>
 	// </li></ul>
 	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
 
@@ -5383,19 +5392,19 @@ type ModifyContentReviewTemplateRequest struct {
 	// Unique ID of an intelligent content recognition template
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// Name of an intelligent content recognition template. Length limit: 64 characters.
+	// Name of an intelligent content recognition template. Length limit: 64 characters
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Description of an intelligent content recognition template. Length limit: 256 characters.
+	// Description of an intelligent content recognition template. Length limit: 256 characters
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// Control parameter for offensive content
+	// Control parameter for porn information
 	PornConfigure *PornConfigureInfoForUpdate `json:"PornConfigure,omitempty" name:"PornConfigure"`
 
-	// Control parameter for insecure content
+	// Control parameter for terrorism information
 	TerrorismConfigure *TerrorismConfigureInfoForUpdate `json:"TerrorismConfigure,omitempty" name:"TerrorismConfigure"`
 
-	// Control parameter for inappropriate content
+	// Control parameter for politically sensitive information
 	PoliticalConfigure *PoliticalConfigureInfoForUpdate `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
 	// Control parameter of prohibited information detection. Prohibited information includes:
@@ -5404,7 +5413,7 @@ type ModifyContentReviewTemplateRequest struct {
 	// Note: this parameter is not supported yet.
 	ProhibitedConfigure *ProhibitedConfigureInfoForUpdate `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
-	// Control parameter for custom intelligent content recognition
+	// Control parameter for custom intelligent content recognition tasks
 	UserDefineConfigure *UserDefineConfigureInfoForUpdate `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
 }
 
@@ -5512,7 +5521,7 @@ func (r *ModifyImageSpriteTemplateResponse) FromJsonString(s string) error {
 type ModifyPersonSampleRequest struct {
 	*tchttp.BaseRequest
 
-	// Material ID
+	// Image ID
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
 	// Name. Length limit: 128 characters.
@@ -5521,13 +5530,13 @@ type ModifyPersonSampleRequest struct {
 	// Description. Length limit: 1,024 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Material use case. Valid values:
-	// 1. Recognition: used for content recognition, equivalent to `Recognition.Face`.
-	// 2. Review: used for detection of inappropriate content, equivalent to `Review.Face`.
-	// 3. All: used for content recognition and detection of inappropriate content, equivalent to 1 and 2 combined.
+	// Image usage. Valid values:
+	// 1. Recognition: used for content recognition; equivalent to `Recognition.Face`
+	// 2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
+	// 3. All: used for content recognition and inappropriate information recognition; equivalent to 1+2
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
-	// Facial feature operation information
+	// Information of operations on facial features
 	FaceOperationInfo *AiSampleFaceOperation `json:"FaceOperationInfo,omitempty" name:"FaceOperationInfo"`
 
 	// Tag operation information.
@@ -5547,10 +5556,10 @@ type ModifyPersonSampleResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Material information
+		// Image information
 		Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
 
-		// Information of facial features processed unsuccessfully
+		// Information of images that failed the verification by facial feature positioning.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet" list`
 
@@ -5841,15 +5850,15 @@ type ModifyWordSampleRequest struct {
 	// Keyword. Length limit: 128 characters.
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
-	// <b>Keyword use case. Valid values:</b>
-	// 1. Recognition.Ocr: OCR-based content recognition;
-	// 2. Recognition.Asr: ASR-based content recognition;
-	// 3. Review.Ocr: OCR-based detection of inappropriate content;
-	// 4. Review.Asr：ASR-based detection of inappropriate content;
-	// <b>These values can be merged as follows:</b>
-	// 5. Recognition: ASR- and OCR-based content recognition, equivalent to 1 and 2 combined;
-	// 6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3 and 4 combined.
-	// 7. All: all of the above, equivalent to 1, 2, 3, and 4 combined.
+	// <b>Keyword usage. Valid values:</b>
+	// 1. Recognition.Ocr: OCR-based content recognition
+	// 2. Recognition.Asr: ASR-based content recognition
+	// 3. Review.Ocr: OCR-based inappropriate information recognition
+	// 4. Review.Asr: ASR-based inappropriate information recognition
+	// <b>Valid values can also be:</b>
+	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+	// 7. All: equivalent to 1+2+3+4
 	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
 
 	// Tag operation information.
