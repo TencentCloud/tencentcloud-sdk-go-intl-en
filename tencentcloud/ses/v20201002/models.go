@@ -22,10 +22,10 @@ import (
 
 type Attachment struct {
 
-	// 
+	// Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types](https://intl.cloud.tencent.com/document/product/1288/51951?from_cn_redirect=1).
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
-	// 
+	// Attachment content after base64 encoding. A single attachment cannot exceed 5 MB. Note: Tencent Cloud APIs require that a request packet should not exceed 10 MB. If you are sending multiple attachments, the total size of these attachments cannot exceed 10 MB.
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
@@ -41,7 +41,7 @@ type BlackEmailAddress struct {
 type CreateEmailAddressRequest struct {
 	*tchttp.BaseRequest
 
-	// Your sender address. You can create up to 10 sender addresses for each domain.
+	// Your sender address. (You can create up to 10 sender addresses for each domain.)
 	EmailAddress *string `json:"EmailAddress,omitempty" name:"EmailAddress"`
 
 	// Sender name.
@@ -278,7 +278,7 @@ func (r *DeleteEmailIdentityResponse) FromJsonString(s string) error {
 type DeleteEmailTemplateRequest struct {
 	*tchttp.BaseRequest
 
-	// Email template to be deleted.
+	// Template ID
 	TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
 }
 
@@ -516,16 +516,16 @@ func (r *GetStatisticsReportResponse) FromJsonString(s string) error {
 type ListBlackEmailAddressRequest struct {
 	*tchttp.BaseRequest
 
-	// Start date.
+	// Start date in the format of `YYYY-MM-DD`
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
 
-	// End date.
+	// End date in the format of `YYYY-MM-DD`
 	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
 
 	// Common parameter. It must be used with `Offset`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Common parameter. It must be used with `Limit`.
+	// Common parameter. It must be used with `Limit`. Maximum value of `Limit`: `100`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// You can specify an email address to query.
@@ -688,13 +688,13 @@ type SendEmailRequest struct {
 	// Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;
 	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
 
-	// Recipient email addresses. You can send an email to up to 50 recipients at a time.
+	// Recipient email addresses. You can send an email to up to 50 recipients at a time. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
 	Destination []*string `json:"Destination,omitempty" name:"Destination" list`
 
 	// Email subject.
 	Subject *string `json:"Subject,omitempty" name:"Subject"`
 
-	// Reply-to address. You can enter a valid personal email address that can receive emails. If this field is left empty, reply emails will be sent to Tencent Cloud. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
+	// Reply-to address. You can enter a valid personal email address that can receive emails. If this field is left empty, reply emails will be sent to Tencent Cloud.
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
 
 	// Template when sending emails using a template.
@@ -703,7 +703,7 @@ type SendEmailRequest struct {
 	// Email content when sending emails by calling the API.
 	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
 
-	// 
+	// Email attachments
 	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments" list`
 }
 
@@ -720,7 +720,7 @@ type SendEmailResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Unique ID generated when receiving the message.
+		// Unique ID generated when receiving the message
 		MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

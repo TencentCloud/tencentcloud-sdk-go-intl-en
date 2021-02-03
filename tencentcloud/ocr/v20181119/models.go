@@ -149,7 +149,7 @@ type GeneralAccurateOCRResponse struct {
 		// Information on recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
 		TextDetections []*TextDetection `json:"TextDetections,omitempty" name:"TextDetections" list`
 
-		// Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation.
+		// Image rotation angle in degrees. 0° indicates horizontal text. A positive value indicates clockwise rotation. A negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>.
 		Angel *float64 `json:"Angel,omitempty" name:"Angel"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
