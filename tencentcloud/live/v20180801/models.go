@@ -388,8 +388,8 @@ type CertInfo struct {
 	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
 
 	// Certificate type.
-	// 0: User-added certificate.
-	// 1: Tencent Cloud-hosted certificate.
+	// 0: user-added certificate
+	// 1: Tencent Cloud-hosted certificate
 	CertType *int64 `json:"CertType,omitempty" name:"CertType"`
 
 	// Certificate expiration time in UTC format.
@@ -1161,9 +1161,9 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Value range: 0-500.
 	AudioBitrate *int64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
-	// Video codec. Valid values: h264, h265, origin (default).
+	// Video codec. Valid values: h264, h265, origin (default)
 	// 
-	// origin: original codec as the output codec.
+	// origin: original codec as the output codec
 	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
 
 	// Template description.
@@ -3203,9 +3203,9 @@ type DescribeLiveStreamPublishedListRequest struct {
 	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
 
 	// Number of entries per page.
-	// Maximum value: 100.
-	// Valid values: integers between 10 and 100.
-	// Default value: 10.
+	// Maximum value: 100
+	// Valid values: integers between 10 and 100
+	// Default value: 10
 	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 
 	// Stream name, which supports fuzzy match.
@@ -4097,6 +4097,9 @@ type DescribeStreamPlayInfoListRequest struct {
 	// If it is left empty, the full playback data will be queried.
 	// Note: to query by `AppName`, you need to submit a ticket first. After your application succeeds, it will take about 5 business days (subject to the time in the reply) for the configuration to take effect.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// 
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 }
 
 func (r *DescribeStreamPlayInfoListRequest) ToJsonString() string {
@@ -4265,9 +4268,9 @@ type DescribeUploadStreamNumsRequest struct {
 	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
 
 	// Time granularity of the data. Valid values:
-	// 5: 5-minute granularity (the query period is up to 1 day).
-	// 1440: 1-day granularity (the query period is up to 1 month).
-	// Default value: 5.
+	// 5: 5-minute granularity (the query period is up to 1 day)
+	// 1440: 1-day granularity (the query period is up to 1 month)
+	// Default value: 5
 	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
 }
 
@@ -5155,9 +5158,9 @@ type ModifyLiveTranscodeTemplateRequest struct {
 	// Template ID.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Video codec. Valid values: h264, h265, origin (default).
+	// Video codec. Valid values: h264, h265, origin (default)
 	// 
-	// origin: original codec as the output codec.
+	// origin: original codec as the output codec
 	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
 
 	// Audio codec. Defaut value: aac.

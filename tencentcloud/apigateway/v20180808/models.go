@@ -311,13 +311,16 @@ type ApiInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Environments []*string `json:"Environments,omitempty" name:"Environments" list`
 
-	// 
+	// Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IsBase64Encoded *bool `json:"IsBase64Encoded,omitempty" name:"IsBase64Encoded"`
 
-	// 
+	// Whether to trigger Base64 encoding by header. This parameter takes effect only when the backend is SCF.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IsBase64Trigger *bool `json:"IsBase64Trigger,omitempty" name:"IsBase64Trigger"`
 
-	// 
+	// Header trigger rules. The number of rules cannot exceed 10.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Base64EncodedTriggerRules []*Base64EncodedTriggerRule `json:"Base64EncodedTriggerRules,omitempty" name:"Base64EncodedTriggerRules" list`
 }
 
@@ -450,10 +453,17 @@ type ApisStatus struct {
 
 type Base64EncodedTriggerRule struct {
 
-	// 
+	// Header for triggering encoding. Valid values are `Accept` and `Content_Type`, corresponding to the `Accept` and `Content-Type` headers in the data stream request, respectively.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// Array of header values that can trigger the encoding. Each element in the array can be up to 40 characters, including digits, letters, and special characters (`.`, `+`, `*`, `-`, `/`, and `_`). 
 	// 
+	// For example, [
+	//     "application/x-vpeg005",
+	//     "application/xhtml+xml",
+	//     "application/vnd.ms-project",
+	//     "application/vnd.rn-rn_music_package"
+	// ] are valid.
 	Value []*string `json:"Value,omitempty" name:"Value" list`
 }
 
@@ -857,7 +867,7 @@ type CreateApiRequest struct {
 	// User type.
 	UserType *string `json:"UserType,omitempty" name:"UserType"`
 
-	// 
+	// Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
 	IsBase64Encoded *bool `json:"IsBase64Encoded,omitempty" name:"IsBase64Encoded"`
 }
 
@@ -3168,6 +3178,15 @@ type ModifyApiRequest struct {
 
 	// Custom error code configuration.
 	ResponseErrorCodes []*ResponseErrorCodeReq `json:"ResponseErrorCodes,omitempty" name:"ResponseErrorCodes" list`
+
+	// Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
+	IsBase64Encoded *bool `json:"IsBase64Encoded,omitempty" name:"IsBase64Encoded"`
+
+	// Whether to trigger Base64 encoding by header. This parameter takes effect only when the backend is SCF.
+	IsBase64Trigger *bool `json:"IsBase64Trigger,omitempty" name:"IsBase64Trigger"`
+
+	// Header trigger rules. The number of rules cannot exceed 10.
+	Base64EncodedTriggerRules []*Base64EncodedTriggerRule `json:"Base64EncodedTriggerRules,omitempty" name:"Base64EncodedTriggerRules" list`
 }
 
 func (r *ModifyApiRequest) ToJsonString() string {
