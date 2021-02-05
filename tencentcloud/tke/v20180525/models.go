@@ -72,14 +72,17 @@ type AddExistedInstancesRequest struct {
 	// Node login information (currently only supports using Password or single KeyIds)
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
 
-	// Security group to which the instance belongs. This parameter can be obtained from the `sgId` field returned by DescribeSecurityGroups. If this parameter is not specified, the default security group is bound. (Currently, you can only set a single sgId)
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
-
 	// When reinstalling the system, you can specify the HostName of the modified instance (when the cluster is in HostName mode, this parameter is required, and the rule name is the same as the [Create CVM Instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API HostName except for uppercase letters not being supported.
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
 
+	// Security group to which the instance belongs. This parameter can be obtained from the `sgId` field returned by DescribeSecurityGroups. If this parameter is not specified, the default security group is bound. (Currently, you can only set a single sgId)
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+
 	// Node pool options
 	NodePool *NodePoolOption `json:"NodePool,omitempty" name:"NodePool"`
+
+	// Skips the specified verification. Valid values: GlobalRouteCIDRCheck, VpcCniCIDRCheck
+	SkipValidateOptions []*string `json:"SkipValidateOptions,omitempty" name:"SkipValidateOptions" list`
 }
 
 func (r *AddExistedInstancesRequest) ToJsonString() string {
@@ -545,6 +548,15 @@ type ClusterNetworkSettings struct {
 	Cni *bool `json:"Cni,omitempty" name:"Cni"`
 }
 
+type ClusterVersion struct {
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of cluster major version, such as 1.18.4
+	Versions []*string `json:"Versions,omitempty" name:"Versions" list`
+}
+
 type CreateClusterAsGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -688,6 +700,9 @@ type CreateClusterInstancesRequest struct {
 
 	// Additional parameter to be set for the instance
 	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
+
+	// Skips the specified verification. Valid values: GlobalRouteCIDRCheck, VpcCniCIDRCheck
+	SkipValidateOptions []*string `json:"SkipValidateOptions,omitempty" name:"SkipValidateOptions" list`
 }
 
 func (r *CreateClusterInstancesRequest) ToJsonString() string {
@@ -786,6 +801,12 @@ type CreateClusterNodePoolRequest struct {
 
 	// Taints
 	Taints []*Taint `json:"Taints,omitempty" name:"Taints" list`
+
+	// Operating system of the node pool
+	NodePoolOs *string `json:"NodePoolOs,omitempty" name:"NodePoolOs"`
+
+	// Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
+	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
 }
 
 func (r *CreateClusterNodePoolRequest) ToJsonString() string {
@@ -1259,6 +1280,51 @@ func (r *DeleteClusterRouteTableResponse) ToJsonString() string {
 }
 
 func (r *DeleteClusterRouteTableResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAvailableClusterVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of cluster IDs
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds" list`
+}
+
+func (r *DescribeAvailableClusterVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAvailableClusterVersionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAvailableClusterVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Upgradable cluster version
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		Versions []*string `json:"Versions,omitempty" name:"Versions" list`
+
+		// Cluster information
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		Clusters []*ClusterVersion `json:"Clusters,omitempty" name:"Clusters" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAvailableClusterVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeAvailableClusterVersionResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2092,6 +2158,67 @@ type Filter struct {
 	Values []*string `json:"Values,omitempty" name:"Values" list`
 }
 
+type GetUpgradeInstanceProgressRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Maximum number of nodes to be queried
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The starting node for the query
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *GetUpgradeInstanceProgressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetUpgradeInstanceProgressRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetUpgradeInstanceProgressResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total nodes to upgrade
+		Total *int64 `json:"Total,omitempty" name:"Total"`
+
+		// Total upgraded nodes
+		Done *int64 `json:"Done,omitempty" name:"Done"`
+
+		// The lifecycle of the upgrade task
+	// process: running
+	// paused: stopped
+	// pausing: stopping
+	// done: completed
+	// timeout: timed out
+	// aborted: canceled
+		LifeState *string `json:"LifeState,omitempty" name:"LifeState"`
+
+		// Details of upgrade progress of each node
+		Instances []*InstanceUpgradeProgressItem `json:"Instances,omitempty" name:"Instances" list`
+
+		// Current cluster status
+		ClusterStatus *InstanceUpgradeClusterStatus `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetUpgradeInstanceProgressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetUpgradeInstanceProgressResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ImageInstance struct {
 
 	// Image alias
@@ -2197,6 +2324,78 @@ type InstanceExtraArgs struct {
 	// Kubelet custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Kubelet []*string `json:"Kubelet,omitempty" name:"Kubelet" list`
+}
+
+type InstanceUpgradeClusterStatus struct {
+
+	// Total Pods
+	PodTotal *int64 `json:"PodTotal,omitempty" name:"PodTotal"`
+
+	// Total number of NotReady Pods
+	NotReadyPod *int64 `json:"NotReadyPod,omitempty" name:"NotReadyPod"`
+}
+
+type InstanceUpgradePreCheckResult struct {
+
+	// Whether the check is passed
+	CheckPass *bool `json:"CheckPass,omitempty" name:"CheckPass"`
+
+	// Array of check items
+	Items []*InstanceUpgradePreCheckResultItem `json:"Items,omitempty" name:"Items" list`
+
+	// List of independent pods on this node
+	SinglePods []*string `json:"SinglePods,omitempty" name:"SinglePods" list`
+}
+
+type InstanceUpgradePreCheckResultItem struct {
+
+	// The namespace of the workload
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Workload type
+	WorkLoadKind *string `json:"WorkLoadKind,omitempty" name:"WorkLoadKind"`
+
+	// Workload name
+	WorkLoadName *string `json:"WorkLoadName,omitempty" name:"WorkLoadName"`
+
+	// The number of running pods in the workload before draining the node
+	Before *uint64 `json:"Before,omitempty" name:"Before"`
+
+	// The number of running pods in the workload after draining the node
+	After *uint64 `json:"After,omitempty" name:"After"`
+
+	// The pod list of the workload on this node
+	Pods []*string `json:"Pods,omitempty" name:"Pods" list`
+}
+
+type InstanceUpgradeProgressItem struct {
+
+	// Node instance ID
+	InstanceID *string `json:"InstanceID,omitempty" name:"InstanceID"`
+
+	// Task lifecycle
+	// process: running
+	// paused: stopped
+	// pausing: stopping
+	// done: completed
+	// timeout: timed out
+	// aborted: canceled
+	// pending: not started
+	LifeState *string `json:"LifeState,omitempty" name:"LifeState"`
+
+	// Upgrade start time
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	StartAt *string `json:"StartAt,omitempty" name:"StartAt"`
+
+	// Upgrade end time
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	EndAt *string `json:"EndAt,omitempty" name:"EndAt"`
+
+	// Check result before upgrading
+	CheckResult *InstanceUpgradePreCheckResult `json:"CheckResult,omitempty" name:"CheckResult"`
+
+	// Upgrade steps details
+	Detail []*TaskStepInfo `json:"Detail,omitempty" name:"Detail" list`
 }
 
 type Label struct {
@@ -2715,6 +2914,74 @@ type Taint struct {
 
 	// Effect of the taint
 	Effect *string `json:"Effect,omitempty" name:"Effect"`
+}
+
+type TaskStepInfo struct {
+
+	// Step name
+	Step *string `json:"Step,omitempty" name:"Step"`
+
+	// Lifecycle
+	// pending: the step is not started
+	// running: the step is in progress
+	// success: the step is completed
+	// failed: the step failed
+	LifeState *string `json:"LifeState,omitempty" name:"LifeState"`
+
+	// Step start time
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	StartAt *string `json:"StartAt,omitempty" name:"StartAt"`
+
+	// Step end time
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	EndAt *string `json:"EndAt,omitempty" name:"EndAt"`
+
+	// If the lifecycle of the step is failed, this field will display the error information.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	FailedMsg *string `json:"FailedMsg,omitempty" name:"FailedMsg"`
+}
+
+type UpdateClusterVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The version that needs to upgrade to
+	DstVersion *string `json:"DstVersion,omitempty" name:"DstVersion"`
+
+	// The maximum tolerable number of unavailable pods
+	MaxNotReadyPercent *float64 `json:"MaxNotReadyPercent,omitempty" name:"MaxNotReadyPercent"`
+
+	// Whether to skip the precheck
+	SkipPreCheck *bool `json:"SkipPreCheck,omitempty" name:"SkipPreCheck"`
+}
+
+func (r *UpdateClusterVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateClusterVersionRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateClusterVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateClusterVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateClusterVersionResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type UpgradeAbleInstancesItem struct {
