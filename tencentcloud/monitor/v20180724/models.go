@@ -260,6 +260,10 @@ type AlarmPolicy struct {
 	// Policy ID for instance/instance group binding and unbinding APIs (BindingPolicyObject, UnBindingAllPolicyObject, UnBindingPolicyObject)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
+
+	// Tag
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TagInstances []*TagInstance `json:"TagInstances,omitempty" name:"TagInstances" list`
 }
 
 type AlarmPolicyCondition struct {
@@ -1302,6 +1306,9 @@ type DescribeAlarmPoliciesRequest struct {
 
 	// Status. Valid values: 1 (enabled), 0 (disabled)
 	Enable []*int64 `json:"Enable,omitempty" name:"Enable" list`
+
+	// Indicates whether the notification rule is configured. 1: not configured; 0: configured
+	NotBindingNoticeRule *int64 `json:"NotBindingNoticeRule,omitempty" name:"NotBindingNoticeRule"`
 }
 
 func (r *DescribeAlarmPoliciesRequest) ToJsonString() string {
@@ -2529,6 +2536,10 @@ type DescribeProductEventListEvents struct {
 	// Policy information.
 	// Note: This field may return null, indicating that no valid value was found.
 	GroupInfo []*DescribeProductEventListEventsGroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo" list`
+
+	// Display name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ViewName *string `json:"ViewName,omitempty" name:"ViewName"`
 }
 
 type DescribeProductEventListEventsDimensions struct {
@@ -3542,6 +3553,37 @@ func (r *SetDefaultAlarmPolicyResponse) ToJsonString() string {
 
 func (r *SetDefaultAlarmPolicyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type TagInstance struct {
+
+	// Tag key
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Tag value
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// Number of instances
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	InstanceSum *int64 `json:"InstanceSum,omitempty" name:"InstanceSum"`
+
+	// Service type, for example, CVM
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Region ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Binding status. 2: bound; 1: binding
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	BindingStatus *int64 `json:"BindingStatus,omitempty" name:"BindingStatus"`
+
+	// Tag status. 2: existent; 1: nonexistent
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TagStatus *int64 `json:"TagStatus,omitempty" name:"TagStatus"`
 }
 
 type URLNotice struct {

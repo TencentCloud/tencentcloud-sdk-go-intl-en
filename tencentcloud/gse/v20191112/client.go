@@ -43,6 +43,31 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewCopyFleetRequest() (request *CopyFleetRequest) {
+    request = &CopyFleetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gse", APIVersion, "CopyFleet")
+    return
+}
+
+func NewCopyFleetResponse() (response *CopyFleetResponse) {
+    response = &CopyFleetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to replicate server fleet.
+func (c *Client) CopyFleet(request *CopyFleetRequest) (response *CopyFleetResponse, err error) {
+    if request == nil {
+        request = NewCopyFleetRequest()
+    }
+    response = NewCopyFleetResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateGameServerSessionRequest() (request *CreateGameServerSessionRequest) {
     request = &CreateGameServerSessionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -339,6 +364,56 @@ func (c *Client) StopGameServerSessionPlacement(request *StopGameServerSessionPl
         request = NewStopGameServerSessionPlacementRequest()
     }
     response = NewStopGameServerSessionPlacementResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateBucketAccelerateOptRequest() (request *UpdateBucketAccelerateOptRequest) {
+    request = &UpdateBucketAccelerateOptRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gse", APIVersion, "UpdateBucketAccelerateOpt")
+    return
+}
+
+func NewUpdateBucketAccelerateOptResponse() (response *UpdateBucketAccelerateOptResponse) {
+    response = &UpdateBucketAccelerateOptResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (UpdateBucketAccelerateOpt) is used to enable COS global acceleration.
+func (c *Client) UpdateBucketAccelerateOpt(request *UpdateBucketAccelerateOptRequest) (response *UpdateBucketAccelerateOptResponse, err error) {
+    if request == nil {
+        request = NewUpdateBucketAccelerateOptRequest()
+    }
+    response = NewUpdateBucketAccelerateOptResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateBucketCORSOptRequest() (request *UpdateBucketCORSOptRequest) {
+    request = &UpdateBucketCORSOptRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gse", APIVersion, "UpdateBucketCORSOpt")
+    return
+}
+
+func NewUpdateBucketCORSOptResponse() (response *UpdateBucketCORSOptResponse) {
+    response = &UpdateBucketCORSOptResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (UpdateBucketCORSOpt) is used to configure CORS for COS.
+func (c *Client) UpdateBucketCORSOpt(request *UpdateBucketCORSOptRequest) (response *UpdateBucketCORSOptResponse, err error) {
+    if request == nil {
+        request = NewUpdateBucketCORSOptRequest()
+    }
+    response = NewUpdateBucketCORSOptResponse()
     err = c.Send(request, response)
     return
 }

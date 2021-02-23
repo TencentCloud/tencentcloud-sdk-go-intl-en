@@ -1072,7 +1072,7 @@ func NewDescribeDatabasesResponse() (response *DescribeDatabasesResponse) {
     return
 }
 
-// This API (DescribeDatabases) is used to query the information of databases of a TencentDB instance.
+// This API is used to query the information of databases in a TencentDB instance which must be a source or disaster recovery instance.
 func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response *DescribeDatabasesResponse, err error) {
     if request == nil {
         request = NewDescribeDatabasesRequest()
@@ -1497,7 +1497,7 @@ func NewDescribeTablesResponse() (response *DescribeTablesResponse) {
     return
 }
 
-// This API (DescribeTables) is used to query the database tables of a TencentDB instance.
+// This API is used to query the information of database tables in a TencentDB instance. It only supports source or disaster recovery instances.
 func (c *Client) DescribeTables(request *DescribeTablesRequest) (response *DescribeTablesResponse, err error) {
     if request == nil {
         request = NewDescribeTablesRequest()
@@ -2366,6 +2366,56 @@ func (c *Client) StopRollback(request *StopRollbackRequest) (response *StopRollb
         request = NewStopRollbackRequest()
     }
     response = NewStopRollbackResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSwitchDBInstanceMasterSlaveRequest() (request *SwitchDBInstanceMasterSlaveRequest) {
+    request = &SwitchDBInstanceMasterSlaveRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "SwitchDBInstanceMasterSlave")
+    return
+}
+
+func NewSwitchDBInstanceMasterSlaveResponse() (response *SwitchDBInstanceMasterSlaveResponse) {
+    response = &SwitchDBInstanceMasterSlaveResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used for source-to-replica switch.
+func (c *Client) SwitchDBInstanceMasterSlave(request *SwitchDBInstanceMasterSlaveRequest) (response *SwitchDBInstanceMasterSlaveResponse, err error) {
+    if request == nil {
+        request = NewSwitchDBInstanceMasterSlaveRequest()
+    }
+    response = NewSwitchDBInstanceMasterSlaveResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSwitchDrInstanceToMasterRequest() (request *SwitchDrInstanceToMasterRequest) {
+    request = &SwitchDrInstanceToMasterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "SwitchDrInstanceToMaster")
+    return
+}
+
+func NewSwitchDrInstanceToMasterResponse() (response *SwitchDrInstanceToMasterResponse) {
+    response = &SwitchDrInstanceToMasterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to promote a disaster recovery instance to source instance. The request parameter `Region` must be the region of the disaster recovery instance.
+func (c *Client) SwitchDrInstanceToMaster(request *SwitchDrInstanceToMasterRequest) (response *SwitchDrInstanceToMasterResponse, err error) {
+    if request == nil {
+        request = NewSwitchDrInstanceToMasterRequest()
+    }
+    response = NewSwitchDrInstanceToMasterResponse()
     err = c.Send(request, response)
     return
 }

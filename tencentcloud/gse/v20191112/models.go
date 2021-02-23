@@ -20,6 +20,98 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type CopyFleetRequest struct {
+	*tchttp.BaseRequest
+
+	// Server fleet ID
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Replica number. It should a value between 1 to the number of the remaining quota. It can be obtained through [Obtaining User Quota](https://intl.cloud.tencent.com/document/product/1165/48732?from_cn_redirect=1).
+	CopyNumber *int64 `json:"CopyNumber,omitempty" name:"CopyNumber"`
+
+	// Asset package ID
+	AssetId *string `json:"AssetId,omitempty" name:"AssetId"`
+
+	// Description. The length is 0-100 characters.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Network configuration
+	InboundPermissions []*InboundPermission `json:"InboundPermissions,omitempty" name:"InboundPermissions" list`
+
+	// Server type. It can be obtained through [Obtaining Server Instance Type List](https://intl.cloud.tencent.com/document/product/1165/48732?from_cn_redirect=1).
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Server fleet type, which only supports “ON_DEMAND” type now.
+	FleetType *string `json:"FleetType,omitempty" name:"FleetType"`
+
+	// Server fleet name. The length is 1-50 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Protection policy. Valid values: NoProtection·(no protection), FullProtection (full protection), TimeLimitProtection (time-limited protection)
+	NewGameServerSessionProtectionPolicy *string `json:"NewGameServerSessionProtectionPolicy,omitempty" name:"NewGameServerSessionProtectionPolicy"`
+
+	// Limit policy of resource creation
+	ResourceCreationLimitPolicy *ResourceCreationLimitPolicy `json:"ResourceCreationLimitPolicy,omitempty" name:"ResourceCreationLimitPolicy"`
+
+	// Progress configuration
+	RuntimeConfiguration *RuntimeConfiguration `json:"RuntimeConfiguration,omitempty" name:"RuntimeConfiguration"`
+
+	// Timeout period of time-limited protection. Value range: 5-1440 minutes. Default value: 60 minutes. This parameter is valid only when NewGameSessionProtectionPolicy is set as TimeLimitProtection.
+	GameServerSessionProtectionTimeLimit *int64 `json:"GameServerSessionProtectionTimeLimit,omitempty" name:"GameServerSessionProtectionTimeLimit"`
+
+	// Whether to select scaling. Valid values: SCALING_SELECTED, SCALING_UNSELECTED. Default value: SCALING_UNSELECTED.
+	SelectedScalingType *string `json:"SelectedScalingType,omitempty" name:"SelectedScalingType"`
+
+	// Whether to select CCN. Valid values: CCN_SELECTED, CCN_UNSELECTED. Default value: CCN_UNSELECTED.
+	SelectedCcnType *string `json:"SelectedCcnType,omitempty" name:"SelectedCcnType"`
+
+	// Tag list. Up to 50 tags.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// System disk. It can be a SSD (CLOUD_SSD) with 100-500 GB capacity or a Premium Cloud Storage disk (CLOUD_PREMIUM) with 50-500 GB capacity. The increment is 1.
+	SystemDiskInfo *DiskInfo `json:"SystemDiskInfo,omitempty" name:"SystemDiskInfo"`
+
+	// Data disk. It can be SSD disks (CLOUD_SSD) with 100-32000 GB capacity or Premium Cloud Storage disks (CLOUD_PREMIUM) with 10-32000 GB capacity. The increment is 10. 
+	DataDiskInfo []*DiskInfo `json:"DataDiskInfo,omitempty" name:"DataDiskInfo" list`
+
+	// Whether to select to replicate the timer policy: TIMER_SELECTED or TIMER_UNSELECTED. The default value is TIMER_UNSELECTED.
+	SelectedTimerType *string `json:"SelectedTimerType,omitempty" name:"SelectedTimerType"`
+}
+
+func (r *CopyFleetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CopyFleetRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CopyFleetResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Server fleet attributes
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		FleetAttributes []*FleetAttributes `json:"FleetAttributes,omitempty" name:"FleetAttributes" list`
+
+		// The number of server fleets
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CopyFleetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CopyFleetResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateGameServerSessionRequest struct {
 	*tchttp.BaseRequest
 
@@ -308,6 +400,91 @@ type DesiredPlayerSession struct {
 	PlayerData *string `json:"PlayerData,omitempty" name:"PlayerData"`
 }
 
+type DiskInfo struct {
+
+	// Disk type: Premium Cloud Storage (CLOUD_PREMIUM) or SSD (CLOUD_SSD)
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// System disk: the available disk capacity is 50-500 GB. Data disk: the available disk capacity is 100-32000 GB, and the value is a multiple of 10. When the disk type is SSD (CLOUD_SSD), the minimum capacity is 100 GB.
+	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
+}
+
+type FleetAttributes struct {
+
+	// Asset package ID
+	AssetId *string `json:"AssetId,omitempty" name:"AssetId"`
+
+	// Server fleet creation time
+	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
+
+	// Description
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Description of server fleet resource
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	FleetArn *string `json:"FleetArn,omitempty" name:"FleetArn"`
+
+	// Server fleet ID
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Server fleet type, which only supports ON_DEMAND now.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	FleetType *string `json:"FleetType,omitempty" name:"FleetType"`
+
+	// Server type, such as S5.LARGE8
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Server fleet name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Game session protection policy
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	NewGameServerSessionProtectionPolicy *string `json:"NewGameServerSessionProtectionPolicy,omitempty" name:"NewGameServerSessionProtectionPolicy"`
+
+	// Operating system type
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	OperatingSystem *string `json:"OperatingSystem,omitempty" name:"OperatingSystem"`
+
+	// Limit policy of resource creation
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	ResourceCreationLimitPolicy *ResourceCreationLimitPolicy `json:"ResourceCreationLimitPolicy,omitempty" name:"ResourceCreationLimitPolicy"`
+
+	// Statuses: “Create”, “Downloading”, “Verifying”, “Generating”, “Activating”, “Active”, “Exception”, “Deleting”, and “End”.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The status of server fleet when it stopped. If this field is left empty, it means automatic scaling.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	StoppedActions []*string `json:"StoppedActions,omitempty" name:"StoppedActions" list`
+
+	// Server fleet termination time
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	TerminationTime *string `json:"TerminationTime,omitempty" name:"TerminationTime"`
+
+	// Timeout period of time-limited protection. Value range: 5-1440 minutes. Default value: 60 minutes.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	GameServerSessionProtectionTimeLimit *uint64 `json:"GameServerSessionProtectionTimeLimit,omitempty" name:"GameServerSessionProtectionTimeLimit"`
+
+	// Billing status: Unactivated, Activated, Exception, Isolated due to arrears, Terminated, and Unfrozen.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	BillingStatus *string `json:"BillingStatus,omitempty" name:"BillingStatus"`
+
+	// Tag list. Up to 50 tags.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// Data disk. It can be SSD disks (CLOUD_SSD) with 100-32000 GB capacity or Premium Cloud Storage disks (CLOUD_PREMIUM) with 10-32000 GB capacity. The increment is 10. 
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	DataDiskInfo []*DiskInfo `json:"DataDiskInfo,omitempty" name:"DataDiskInfo" list`
+
+	// System disk. It can be a SSD (CLOUD_SSD) with 100-500 GB capacity or a Premium Cloud Storage disk (CLOUD_PREMIUM) with 50-500 GB capacity. The increment is 1.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	SystemDiskInfo *DiskInfo `json:"SystemDiskInfo,omitempty" name:"SystemDiskInfo"`
+}
+
 type GameProperty struct {
 
 	// Attribute name. Up to 32 ASCII characters are allowed.
@@ -554,6 +731,21 @@ func (r *GetInstanceAccessResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type InboundPermission struct {
+
+	// Start port number. Minimum value: 1025.
+	FromPort *uint64 `json:"FromPort,omitempty" name:"FromPort"`
+
+	// IP range. Valid range of the input IPv4 addresses in CIDR format; for example, 0.0.0.0.0/0.
+	IpRange *string `json:"IpRange,omitempty" name:"IpRange"`
+
+	// Protocol type: TCP or UDP.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// End port number. Maximum value: 60000.
+	ToPort *uint64 `json:"ToPort,omitempty" name:"ToPort"`
+}
+
 type InstanceAccess struct {
 
 	// Credentials required for instance access
@@ -732,6 +924,27 @@ type PlayerSession struct {
 	TerminationTime *string `json:"TerminationTime,omitempty" name:"TerminationTime"`
 }
 
+type ResourceCreationLimitPolicy struct {
+
+	// Creation quantity. Minimum value: 1. Default value: 2.
+	NewGameServerSessionsPerCreator *uint64 `json:"NewGameServerSessionsPerCreator,omitempty" name:"NewGameServerSessionsPerCreator"`
+
+	// Unit time. Minimum value: 1. Default value: 3. Unit: minute.
+	PolicyPeriodInMinutes *uint64 `json:"PolicyPeriodInMinutes,omitempty" name:"PolicyPeriodInMinutes"`
+}
+
+type RuntimeConfiguration struct {
+
+	// Game session timeout. Value range: 1-600. Unit: second.
+	GameServerSessionActivationTimeoutSeconds *uint64 `json:"GameServerSessionActivationTimeoutSeconds,omitempty" name:"GameServerSessionActivationTimeoutSeconds"`
+
+	// Maximum number of game sessions. Value range: 1-2,147,483,647.
+	MaxConcurrentGameServerSessionActivations *uint64 `json:"MaxConcurrentGameServerSessionActivations,omitempty" name:"MaxConcurrentGameServerSessionActivations"`
+
+	// Service process configuration. There must be at least one service configuration.
+	ServerProcesses []*ServerProcesse `json:"ServerProcesses,omitempty" name:"ServerProcesses" list`
+}
+
 type SearchGameServerSessionsRequest struct {
 	*tchttp.BaseRequest
 
@@ -831,6 +1044,18 @@ func (r *SearchGameServerSessionsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ServerProcesse struct {
+
+	// Number of concurrent processes. Value range of total concurrent processes: 1-50.
+	ConcurrentExecutions *uint64 `json:"ConcurrentExecutions,omitempty" name:"ConcurrentExecutions"`
+
+	// Launch Path. Linux: /local/game/ or Windows: C:\game\. The path length is 1-1024.
+	LaunchPath *string `json:"LaunchPath,omitempty" name:"LaunchPath"`
+
+	// Launch parameter. The length is 0-1024.
+	Parameters *string `json:"Parameters,omitempty" name:"Parameters"`
+}
+
 type StartGameServerSessionPlacementRequest struct {
 	*tchttp.BaseRequest
 
@@ -923,6 +1148,95 @@ func (r *StopGameServerSessionPlacementResponse) ToJsonString() string {
 }
 
 func (r *StopGameServerSessionPlacementResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type Tag struct {
+
+	// Tag key. Up to 127 bytes are allowed.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Tag value. Up to 255 bytes are allowed.
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type UpdateBucketAccelerateOptRequest struct {
+	*tchttp.BaseRequest
+
+	// `true`: enable global acceleration; `false`: disable global acceleration
+	Allowed *bool `json:"Allowed,omitempty" name:"Allowed"`
+}
+
+func (r *UpdateBucketAccelerateOptRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateBucketAccelerateOptRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateBucketAccelerateOptResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateBucketAccelerateOptResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateBucketAccelerateOptResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateBucketCORSOptRequest struct {
+	*tchttp.BaseRequest
+
+	// Allowed access source. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+	AllowedOrigins []*string `json:"AllowedOrigins,omitempty" name:"AllowedOrigins" list`
+
+	// Allowed HTTP method(s). Multiple methods are allowed, including PUT, GET, POST, and HEAD. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+	AllowedMethods []*string `json:"AllowedMethods,omitempty" name:"AllowedMethods" list`
+
+	// Specifies the custom HTTP request headers that the browser is allowed to include in a CORS request. Wildcard (*) is supported, indicating allowing all headers (recommended). For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+	AllowedHeaders []*string `json:"AllowedHeaders,omitempty" name:"AllowedHeaders" list`
+
+	// Sets the validity duration for the CORS configuration (in second). For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+	MaxAgeSeconds *int64 `json:"MaxAgeSeconds,omitempty" name:"MaxAgeSeconds"`
+
+	// CORS response header(s) that can be exposed to the browser, case-insensitive. If this parameter is not specified, the browser can access only simple response headers Cache-Control, Content-Type, Expires, and Last-Modified by default. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+	ExposeHeaders []*string `json:"ExposeHeaders,omitempty" name:"ExposeHeaders" list`
+}
+
+func (r *UpdateBucketCORSOptRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateBucketCORSOptRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateBucketCORSOptResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateBucketCORSOptResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateBucketCORSOptResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

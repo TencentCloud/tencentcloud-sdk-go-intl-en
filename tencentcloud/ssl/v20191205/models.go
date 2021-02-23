@@ -267,6 +267,10 @@ type Certificates struct {
 	// Whether the certificate can be deployed.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Deployable *bool `json:"Deployable,omitempty" name:"Deployable"`
+
+	// List of tags
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Tags []*Tags `json:"Tags,omitempty" name:"Tags" list`
 }
 
 type CommitCertificateInformationRequest struct {
@@ -289,10 +293,10 @@ type CommitCertificateInformationResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// TrustAsia order ID
+		// Order number at the certificate authority
 		OrderId *string `json:"OrderId,omitempty" name:"OrderId"`
 
-		// Certificate status. 0: being reviewed; 1: approved; 2: not approved; 3: expired; 4: DNS record added; 5: OV certificate, to be submitted; 6: order being canceled; 7: cancelled; 8: information submitted, confirmation letter to be uploaded; 9: certificate being revoked; 10: revoked; 11: reissuing; 12: revocation confirmation letter to be uploaded.
+		// Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload; `13`: pending information submission for the free certificate.
 		Status *uint64 `json:"Status,omitempty" name:"Status"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -329,7 +333,7 @@ type DeleteCertificateResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Deletion result.
+		// Deletion result (`true`: deleted successfully; `false`: failed to delete)
 		DeleteResult *bool `json:"DeleteResult,omitempty" name:"DeleteResult"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -382,8 +386,8 @@ type DescribeCertificateDetailResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertificateType *string `json:"CertificateType,omitempty" name:"CertificateType"`
 
-		// Certificate package type. 1: GeoTrust DV SSL CA - G3; 2: TrustAsia TLS RSA CA; 3: Secure Site EV Pro; 4: Secure Site EV; 5: Secure Site OV Pro; 6: Secure Site OV; 7: Secure Site OV wildcard SSL certificate; 8: GeoTrust EV; 9: GeoTrust OV; 10: GeoTrust OV wildcard SSL certificate; 11: TrustAsia DV multi-domain SSL certificate; 12: TrustAsia DV wildcard SSL certificate; 13: TrustAsia OV wildcard SSL certificate (D3); 14: TrustAsia OV SSL certificate (D3); 15: TrustAsia OV multi-domain SSL certificate (D3); 16: TrustAsia EV SSL certificate (D3); 17: TrustAsia EV multi-domain SSL certificate (D3); 18: GlobalSign OV SSL certificate; 19: GlobalSign OV wildcard SSL certificate; 20: GlobalSign EV SSL certificate; 21: TrustAsia OV multi-domain wildcard SSL certificate (D3); 22: GlobalSign OV multi-domain SSL certificate; 23: GlobalSign OV multi-domain wildcard SSL certificate; 24: GlobalSign EV multi-domain SSL certificate.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain; `25` WoTrus DV; `26`: WoTrus DV multi-domain; `27`: WoTrus DV wildcard; `28`: WoTrus OV; `29`: WoTrus OV multi-domain; `30`: WoTrus OV wildcard; `31`: WoTrus EV; `32`: WoTrus EV multi-domain; `33`: DNSPod Chinese Cryptographic DV; `34`: DNSPod Chinese Cryptographic DV multi-domain; `35`: DNSPod Chinese Cryptographic DV wildcard; `37`: DNSPod Chinese Cryptographic OV; `38`: DNSPod Chinese Cryptographic OV multi-domain; `39`: DNSPod Chinese Cryptographic OV wildcard: `40`: DNSPod Chinese Cryptographic EV; `41`: DNSPod Chinese Cryptographic EV multi-domain; `42`: TrustAsia DV wildcard multi-domain.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
 		// Issuer.
@@ -398,8 +402,8 @@ type DescribeCertificateDetailResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Alias *string `json:"Alias,omitempty" name:"Alias"`
 
-		// Certificate status. 0: being reviewed; 1: approved; 2: not approved; 3: expired; 4: DNS record added; 5: OV certificate, to be submitted; 6: order being canceled; 7: cancelled; 8: information submitted, confirmation letter to be uploaded; 9: certificate being revoked; 10: revoked; 11: reissuing; 12: revocation confirmation letter to be uploaded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload; `13`: pending information submission for the free certificate.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		Status *uint64 `json:"Status,omitempty" name:"Status"`
 
 		// Status information.
@@ -442,8 +446,8 @@ type DescribeCertificateDetailResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertificatePrivateKey *string `json:"CertificatePrivateKey,omitempty" name:"CertificatePrivateKey"`
 
-		// Public key of the certificate.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Certificate public key (i.e., certificate content)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		CertificatePublicKey *string `json:"CertificatePublicKey,omitempty" name:"CertificatePublicKey"`
 
 		// DV authentication information.
@@ -497,6 +501,10 @@ type DescribeCertificateDetailResponse struct {
 		// Whether the certificate can be deployed.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Deployable *bool `json:"Deployable,omitempty" name:"Deployable"`
+
+		// List of associated tags
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Tags []*Tags `json:"Tags,omitempty" name:"Tags" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -605,8 +613,8 @@ type DescribeCertificateResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-		// Name of the certificate issuer.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Name of the certificate issuer
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		ProductZhName *string `json:"ProductZhName,omitempty" name:"ProductZhName"`
 
 		// Domain name.
@@ -708,6 +716,10 @@ type DescribeCertificateResponse struct {
 		// Whether the certificate can be deployed.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Deployable *bool `json:"Deployable,omitempty" name:"Deployable"`
+
+		// List of tags
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Tags []*Tags `json:"Tags,omitempty" name:"Tags" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1009,7 +1021,7 @@ type ReplaceCertificateRequest struct {
 	// Certificate ID.
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
-	// Verification type. DNS_AUTO: automatic DNS verification; DNS: manual DNS verification; FILE: verification by file.
+	// Validation type. `DNS_AUTO`: automatic DNS validation (only available for domains hosted in Tencent Cloud and when the DNS status is OK); `DNS`: manual DNS validation; `FILE`: file validation.
 	ValidType *string `json:"ValidType,omitempty" name:"ValidType"`
 
 	// Type. Original: original certificate CSR; upload: uploaded manually; online: generated online. The default value is original.
@@ -1020,6 +1032,9 @@ type ReplaceCertificateRequest struct {
 
 	// Password of the key.
 	CsrkeyPassword *string `json:"CsrkeyPassword,omitempty" name:"CsrkeyPassword"`
+
+	// Reissue reason
+	Reason *string `json:"Reason,omitempty" name:"Reason"`
 }
 
 func (r *ReplaceCertificateRequest) ToJsonString() string {
@@ -1070,7 +1085,7 @@ type SubmitCertificateInformationRequest struct {
 	// Uploaded domain name array (can be uploaded for a multi-domain certificate).
 	DomainList []*string `json:"DomainList,omitempty" name:"DomainList" list`
 
-	// Password of the private key.
+	// Private key password (optional)
 	KeyPassword *string `json:"KeyPassword,omitempty" name:"KeyPassword"`
 
 	// Organization name.
@@ -1100,13 +1115,13 @@ type SubmitCertificateInformationRequest struct {
 	// Fixed-line phone number of the organization.
 	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
 
-	// Certificate verification method.
+	// Validation type. `DNS_AUTO`: automatic DNS validation (only available for domains hosted in Tencent Cloud and when the DNS status is OK); `DNS`: manual DNS validation; `FILE`: file validation.
 	VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
 
-	// Last name of the admin.
+	// First name of the administrator
 	AdminFirstName *string `json:"AdminFirstName,omitempty" name:"AdminFirstName"`
 
-	// First name of the admin.
+	// Last name of the administrator
 	AdminLastName *string `json:"AdminLastName,omitempty" name:"AdminLastName"`
 
 	// Mobile number of the admin.
@@ -1118,10 +1133,10 @@ type SubmitCertificateInformationRequest struct {
 	// Position of the admin.
 	AdminPosition *string `json:"AdminPosition,omitempty" name:"AdminPosition"`
 
-	// Last name of the contact.
+	// First name of the contact
 	ContactFirstName *string `json:"ContactFirstName,omitempty" name:"ContactFirstName"`
 
-	// First name of the contact.
+	// Last name of the contact
 	ContactLastName *string `json:"ContactLastName,omitempty" name:"ContactLastName"`
 
 	// Email of the contact.
@@ -1267,10 +1282,19 @@ type SubmittedData struct {
 	VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
 }
 
+type Tags struct {
+
+	// Tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
 type UploadCertificateRequest struct {
 	*tchttp.BaseRequest
 
-	// Public key of the certificate.
+	// Certificate content
 	CertificatePublicKey *string `json:"CertificatePublicKey,omitempty" name:"CertificatePublicKey"`
 
 	// Private key content. This parameter is required when the certificate type is SVR, and not required when the certificate type is CA.
@@ -1284,6 +1308,9 @@ type UploadCertificateRequest struct {
 
 	// Project ID.
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// 
+	CertificateUse *string `json:"CertificateUse,omitempty" name:"CertificateUse"`
 }
 
 func (r *UploadCertificateRequest) ToJsonString() string {

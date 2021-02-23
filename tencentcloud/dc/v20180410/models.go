@@ -77,6 +77,14 @@ type AccessPoint struct {
 	// Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	AvailablePortType []*string `json:"AvailablePortType,omitempty" name:"AvailablePortType" list`
+
+	// Latitude and longitude of the access point
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Coordinate *Coordinate `json:"Coordinate,omitempty" name:"Coordinate"`
+
+	// City where the access point is located
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	City *string `json:"City,omitempty" name:"City"`
 }
 
 type ApplyInternetAddressRequest struct {
@@ -134,6 +142,15 @@ type BgpPeer struct {
 
 	// User-side BGP key.
 	AuthKey *string `json:"AuthKey,omitempty" name:"AuthKey"`
+}
+
+type Coordinate struct {
+
+	// Latitude
+	Lat *float64 `json:"Lat,omitempty" name:"Lat"`
+
+	// Longitude
+	Lng *float64 `json:"Lng,omitempty" name:"Lng"`
 }
 
 type CreateDirectConnectRequest struct {

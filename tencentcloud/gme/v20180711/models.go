@@ -38,6 +38,48 @@ type AppStatisticsItem struct {
 	Date *string `json:"Date,omitempty" name:"Date"`
 }
 
+type ApplicationDataStatistics struct {
+
+	// Application ID
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+
+	// DAU data
+	DauDataNum *uint64 `json:"DauDataNum,omitempty" name:"DauDataNum"`
+
+	// DAU in Chinese mainland
+	DauDataMainland []*StatisticsItem `json:"DauDataMainland,omitempty" name:"DauDataMainland" list`
+
+	// DAU outside Chinese mainland
+	DauDataOversea []*StatisticsItem `json:"DauDataOversea,omitempty" name:"DauDataOversea" list`
+
+	// Total DAU
+	DauDataSum []*StatisticsItem `json:"DauDataSum,omitempty" name:"DauDataSum" list`
+
+	// Number of voice chat metrics
+	DurationDataNum *uint64 `json:"DurationDataNum,omitempty" name:"DurationDataNum"`
+
+	// Duration of voice chat in Chinese mainland in minutes
+	DurationDataMainland []*StatisticsItem `json:"DurationDataMainland,omitempty" name:"DurationDataMainland" list`
+
+	// Duration of voice chat outside Chinese mainland in minutes
+	DurationDataOversea []*StatisticsItem `json:"DurationDataOversea,omitempty" name:"DurationDataOversea" list`
+
+	// Total duration of voice chat in minutes
+	DurationDataSum []*StatisticsItem `json:"DurationDataSum,omitempty" name:"DurationDataSum" list`
+
+	// PCU data
+	PcuDataNum *uint64 `json:"PcuDataNum,omitempty" name:"PcuDataNum"`
+
+	// PCU in Chinese mainland
+	PcuDataMainland []*StatisticsItem `json:"PcuDataMainland,omitempty" name:"PcuDataMainland" list`
+
+	// PCU outside Chinese mainland
+	PcuDataOversea []*StatisticsItem `json:"PcuDataOversea,omitempty" name:"PcuDataOversea" list`
+
+	// Total PCU
+	PcuDataSum []*StatisticsItem `json:"PcuDataSum,omitempty" name:"PcuDataSum" list`
+}
+
 type CreateAppRequest struct {
 	*tchttp.BaseRequest
 
@@ -154,6 +196,49 @@ func (r *DescribeAppStatisticsResponse) ToJsonString() string {
 }
 
 func (r *DescribeAppStatisticsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApplicationDataRequest struct {
+	*tchttp.BaseRequest
+
+	// Application ID
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+
+	// Data start date in the format of yyyy-mm-dd, such as 2018-07-13
+	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+
+	// Data end date in the format of yyyy-mm-dd, such as 2018-07-13
+	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+}
+
+func (r *DescribeApplicationDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeApplicationDataRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApplicationDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Application statistics
+		Data *ApplicationDataStatistics `json:"Data,omitempty" name:"Data"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeApplicationDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeApplicationDataResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -433,6 +518,15 @@ type ScanVoiceResult struct {
 
 	// Task ID
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+type StatisticsItem struct {
+
+	// Date in the format of yyyy-mm-dd, such as 2018-07-13
+	StatDate *string `json:"StatDate,omitempty" name:"StatDate"`
+
+	// Statistics
+	Data *uint64 `json:"Data,omitempty" name:"Data"`
 }
 
 type Tag struct {

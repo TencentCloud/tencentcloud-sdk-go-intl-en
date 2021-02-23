@@ -1150,6 +1150,86 @@ func (r *DescribeUinInWhitelistResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DisableRestProxyRequest struct {
+	*tchttp.BaseRequest
+
+	// The value is the same as `appid`.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DisableRestProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisableRestProxyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DisableRestProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// RestProxy status. Valid values: 0 (disabled), 1 (enabling), 2 (enabled), 3 (disabling).
+		RestProxyStatus *uint64 `json:"RestProxyStatus,omitempty" name:"RestProxyStatus"`
+
+		// `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
+		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DisableRestProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DisableRestProxyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableRestProxyRequest struct {
+	*tchttp.BaseRequest
+
+	// The value is the same as `appid`.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *EnableRestProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableRestProxyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableRestProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// RestProxy status. Valid values: 0 (disabled), 1 (enabling), 2 (enabled), 3 (disabling).
+		RestProxyStatus *uint64 `json:"RestProxyStatus,omitempty" name:"RestProxyStatus"`
+
+		// `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
+		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *EnableRestProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *EnableRestProxyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ErrorInfo struct {
 
 	// Error code

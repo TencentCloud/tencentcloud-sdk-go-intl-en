@@ -545,6 +545,9 @@ type DCDBShardInfo struct {
 
 	// Number of CPU cores
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// The value range of shardkey, which includes 64 hash values, such as 0-31, 32-63.
+	Range *string `json:"Range,omitempty" name:"Range"`
 }
 
 type Database struct {
@@ -1234,6 +1237,40 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeProjectsRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeProjectsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeProjectsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProjectsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Project list
+		Projects []*Project `json:"Projects,omitempty" name:"Projects" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeProjectsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeProjectsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DisassociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
@@ -1679,6 +1716,42 @@ type ParamModifyResult struct {
 
 	// Result of parameter modification. 0: success; -1: failure; -2: invalid parameter value
 	Code *int64 `json:"Code,omitempty" name:"Code"`
+}
+
+type Project struct {
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// The `uin` of the resource owner (root account)
+	OwnerUin *int64 `json:"OwnerUin,omitempty" name:"OwnerUin"`
+
+	// Application ID
+	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Project name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Creator `uin`
+	CreatorUin *int64 `json:"CreatorUin,omitempty" name:"CreatorUin"`
+
+	// Source platform
+	SrcPlat *string `json:"SrcPlat,omitempty" name:"SrcPlat"`
+
+	// Source `AppId`
+	SrcAppId *int64 `json:"SrcAppId,omitempty" name:"SrcAppId"`
+
+	// Project status. 0: normal; -1: disabled; 3: default project.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Whether it is the default project. 1: yes; 0: no.
+	IsDefault *int64 `json:"IsDefault,omitempty" name:"IsDefault"`
+
+	// Description
+	Info *string `json:"Info,omitempty" name:"Info"`
 }
 
 type ResetAccountPasswordRequest struct {

@@ -618,6 +618,56 @@ func (c *Client) DescribeUinInWhitelist(request *DescribeUinInWhitelistRequest) 
     return
 }
 
+func NewDisableRestProxyRequest() (request *DisableRestProxyRequest) {
+    request = &DisableRestProxyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "DisableRestProxy")
+    return
+}
+
+func NewDisableRestProxyResponse() (response *DisableRestProxyResponse) {
+    response = &DisableRestProxyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to disable the RESTful API.
+func (c *Client) DisableRestProxy(request *DisableRestProxyRequest) (response *DisableRestProxyResponse, err error) {
+    if request == nil {
+        request = NewDisableRestProxyRequest()
+    }
+    response = NewDisableRestProxyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableRestProxyRequest() (request *EnableRestProxyRequest) {
+    request = &EnableRestProxyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "EnableRestProxy")
+    return
+}
+
+func NewEnableRestProxyResponse() (response *EnableRestProxyResponse) {
+    response = &EnableRestProxyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to enable the RESTful API.
+func (c *Client) EnableRestProxy(request *EnableRestProxyRequest) (response *EnableRestProxyResponse, err error) {
+    if request == nil {
+        request = NewEnableRestProxyRequest()
+    }
+    response = NewEnableRestProxyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyClusterMachineRequest() (request *ModifyClusterMachineRequest) {
     request = &ModifyClusterMachineRequest{
         BaseRequest: &tchttp.BaseRequest{},

@@ -143,6 +143,46 @@ type Backup struct {
 	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
 }
 
+type CloneDBRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of mssql-j8kv137v
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Clone and rename the databases specified in `ReNameRestoreDatabase`. Please note that the clones must be renamed.
+	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore" list`
+}
+
+func (r *CloneDBRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CloneDBRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CloneDBResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task request ID, which can be used in the `DescribeFlowStatus` API to query the execution result of an async task
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CloneDBResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CloneDBResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateAccountRequest struct {
 	*tchttp.BaseRequest
 
@@ -288,6 +328,9 @@ type CreateDBInstancesRequest struct {
 
 	// Whether to deploy across availability zones. Default value: false.
 	MultiZones *bool `json:"MultiZones,omitempty" name:"MultiZones"`
+
+	// Tags associated with the instances to be created
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags" list`
 }
 
 func (r *CreateDBInstancesRequest) ToJsonString() string {
@@ -570,6 +613,10 @@ type DBInstance struct {
 	// Disaster recovery type. Valid values: MIRROR (image), ALWAYSON (AlwaysOn), SINGLE (singleton).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	HAFlag *string `json:"HAFlag,omitempty" name:"HAFlag"`
+
+	// The list of tags associated with the instance
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags" list`
 }
 
 type DBPrivilege struct {
@@ -824,6 +871,9 @@ type DescribeBackupsRequest struct {
 
 	// Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
 	BackupId *uint64 `json:"BackupId,omitempty" name:"BackupId"`
+
+	// Filter backups by the database name. If the parameter is left empty, this filter criteria will not take effect.
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
 }
 
 func (r *DescribeBackupsRequest) ToJsonString() string {
@@ -897,6 +947,24 @@ type DescribeDBInstancesRequest struct {
 
 	// Unique string-type ID of instance subnet in the format of `subnet-xxx`. If an empty string ("") is passed in, filtering will be made by basic network.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The list of instance private IPs, such as 172.1.0.12
+	VipSet []*string `json:"VipSet,omitempty" name:"VipSet" list`
+
+	// The list of instance names used for fuzzy match
+	InstanceNameSet []*string `json:"InstanceNameSet,omitempty" name:"InstanceNameSet" list`
+
+	// The list of instance version numbers, such as 2008R2, 2012SP3
+	VersionSet []*string `json:"VersionSet,omitempty" name:"VersionSet" list`
+
+	// Instance availability zone, such as ap-guangzhou-2
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The list of instance tags
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+
+	// Keyword used for fuzzy match, including instance ID, instance name, and instance private IP
+	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -1785,6 +1853,52 @@ func (r *ModifyDBInstanceNameResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyDBInstanceNetworkRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ID of the new VPC
+	NewVpcId *string `json:"NewVpcId,omitempty" name:"NewVpcId"`
+
+	// ID of the new subnet
+	NewSubnetId *string `json:"NewSubnetId,omitempty" name:"NewSubnetId"`
+
+	// Retention period (in hours) of the original VIP. Value range: `0-168`. Default value: `0`, indicating the original VIP is released immediately.
+	OldIpRetainTime *int64 `json:"OldIpRetainTime,omitempty" name:"OldIpRetainTime"`
+}
+
+func (r *ModifyDBInstanceNetworkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyDBInstanceNetworkRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDBInstanceNetworkResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// ID of the instance network changing task. You can use the [DescribeFlowStatus](https://intl.cloud.tencent.com/document/product/238/19967?from_cn_redirect=1) API to query the task status.
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDBInstanceNetworkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyDBInstanceNetworkResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyDBInstanceProjectRequest struct {
 	*tchttp.BaseRequest
 
@@ -2018,7 +2132,7 @@ type RenameRestoreDatabase struct {
 	// It can be left empty in offline migration tasks.
 	OldName *string `json:"OldName,omitempty" name:"OldName"`
 
-	// New database name. If this parameter is left empty, the restored database will be renamed in the default format. If this parameter is left empty in offline migration tasks, the restored database will be named `OldName`. `OldName` and `NewName` cannot be both empty.
+	// New database name. In offline migration, `OldName` will be used if `NewName` is left empty (`OldName` and `NewName` cannot be both empty). In database cloning, `OldName` and `NewName` must be both specified and cannot have the same value.
 	NewName *string `json:"NewName,omitempty" name:"NewName"`
 }
 
@@ -2060,6 +2174,15 @@ func (r *ResetAccountPasswordResponse) ToJsonString() string {
 
 func (r *ResetAccountPasswordResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type ResourceTag struct {
+
+	// Tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type RestartDBInstanceRequest struct {
@@ -2368,6 +2491,15 @@ type UpgradeDBInstanceRequest struct {
 
 	// The number of CUP cores after the instance is upgraded.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Upgrade the SQL Server version. Supported versions include SQL Server 2008 Enterprise (`2008R2`), SQL Server 2012 Enterprise (`2012SP3`), etc. As the purchasable versions are region-specific, you can use the `DescribeProductConfig` API to query the information of purchasable versions in each region. Downgrading is unsupported. If this parameter is left empty, the SQL Server version will not be changed.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Upgrade the high availability architecture from image-based disaster recovery to Always On cluster disaster recovery. This parameter is valid only for instances which support Always On high availability and run SQL Server 2017 or later. Neither downgrading to image-based disaster recovery nor upgrading from cluster disaster recovery to Always On disaster recovery is supported. If this parameter is left empty, the high availability architecture will not be changed.
+	HAType *string `json:"HAType,omitempty" name:"HAType"`
+
+	// Change the instance deployment scheme. Valid values: `SameZones` (change to single-AZ deployment, which does not support cross-AZ disaster recovery), `MultiZones` (change to multi-AZ deployment, which supports cross-AZ disaster recovery).
+	MultiZones *string `json:"MultiZones,omitempty" name:"MultiZones"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {

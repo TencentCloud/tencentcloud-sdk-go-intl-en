@@ -358,7 +358,7 @@ func NewSubmitCertificateInformationResponse() (response *SubmitCertificateInfor
     return
 }
 
-// This API is used to submit certificate information.
+// This API is used to submit certificate information. You can call this API to submit the information of a certificate for several times. However, please make sure the submitted information is complete.
 func (c *Client) SubmitCertificateInformation(request *SubmitCertificateInformationRequest) (response *SubmitCertificateInformationResponse, err error) {
     if request == nil {
         request = NewSubmitCertificateInformationRequest()

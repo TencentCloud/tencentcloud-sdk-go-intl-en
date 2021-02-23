@@ -496,6 +496,31 @@ func (c *Client) DescribeProjectSecurityGroups(request *DescribeProjectSecurityG
     return
 }
 
+func NewDescribeProjectsRequest() (request *DescribeProjectsRequest) {
+    request = &DescribeProjectsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "DescribeProjects")
+    return
+}
+
+func NewDescribeProjectsResponse() (response *DescribeProjectsResponse) {
+    response = &DescribeProjectsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the project list.
+func (c *Client) DescribeProjects(request *DescribeProjectsRequest) (response *DescribeProjectsResponse, err error) {
+    if request == nil {
+        request = NewDescribeProjectsRequest()
+    }
+    response = NewDescribeProjectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisassociateSecurityGroupsRequest() (request *DisassociateSecurityGroupsRequest) {
     request = &DisassociateSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},

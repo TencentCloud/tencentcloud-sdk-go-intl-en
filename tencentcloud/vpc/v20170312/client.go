@@ -916,6 +916,31 @@ func (c *Client) CreateNatGatewayDestinationIpPortTranslationNatRule(request *Cr
     return
 }
 
+func NewCreateNatGatewaySourceIpTranslationNatRuleRequest() (request *CreateNatGatewaySourceIpTranslationNatRuleRequest) {
+    request = &CreateNatGatewaySourceIpTranslationNatRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateNatGatewaySourceIpTranslationNatRule")
+    return
+}
+
+func NewCreateNatGatewaySourceIpTranslationNatRuleResponse() (response *CreateNatGatewaySourceIpTranslationNatRuleResponse) {
+    response = &CreateNatGatewaySourceIpTranslationNatRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a SNAT rule for the NAT Gateway.
+func (c *Client) CreateNatGatewaySourceIpTranslationNatRule(request *CreateNatGatewaySourceIpTranslationNatRuleRequest) (response *CreateNatGatewaySourceIpTranslationNatRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateNatGatewaySourceIpTranslationNatRuleRequest()
+    }
+    response = NewCreateNatGatewaySourceIpTranslationNatRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateNetDetectRequest() (request *CreateNetDetectRequest) {
     request = &CreateNetDetectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1648,6 +1673,31 @@ func (c *Client) DeleteNatGatewayDestinationIpPortTranslationNatRule(request *De
         request = NewDeleteNatGatewayDestinationIpPortTranslationNatRuleRequest()
     }
     response = NewDeleteNatGatewayDestinationIpPortTranslationNatRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteNatGatewaySourceIpTranslationNatRuleRequest() (request *DeleteNatGatewaySourceIpTranslationNatRuleRequest) {
+    request = &DeleteNatGatewaySourceIpTranslationNatRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteNatGatewaySourceIpTranslationNatRule")
+    return
+}
+
+func NewDeleteNatGatewaySourceIpTranslationNatRuleResponse() (response *DeleteNatGatewaySourceIpTranslationNatRuleResponse) {
+    response = &DeleteNatGatewaySourceIpTranslationNatRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a SNAT forwarding rule of the NAT Gateway.
+func (c *Client) DeleteNatGatewaySourceIpTranslationNatRule(request *DeleteNatGatewaySourceIpTranslationNatRuleRequest) (response *DeleteNatGatewaySourceIpTranslationNatRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteNatGatewaySourceIpTranslationNatRuleRequest()
+    }
+    response = NewDeleteNatGatewaySourceIpTranslationNatRuleResponse()
     err = c.Send(request, response)
     return
 }
@@ -2661,6 +2711,31 @@ func (c *Client) DescribeNatGatewayDestinationIpPortTranslationNatRules(request 
         request = NewDescribeNatGatewayDestinationIpPortTranslationNatRulesRequest()
     }
     response = NewDescribeNatGatewayDestinationIpPortTranslationNatRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNatGatewaySourceIpTranslationNatRulesRequest() (request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) {
+    request = &DescribeNatGatewaySourceIpTranslationNatRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGatewaySourceIpTranslationNatRules")
+    return
+}
+
+func NewDescribeNatGatewaySourceIpTranslationNatRulesResponse() (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse) {
+    response = &DescribeNatGatewaySourceIpTranslationNatRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the object arrays of SNAT forwarding rules of the NAT Gateway.
+func (c *Client) DescribeNatGatewaySourceIpTranslationNatRules(request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeNatGatewaySourceIpTranslationNatRulesRequest()
+    }
+    response = NewDescribeNatGatewaySourceIpTranslationNatRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -4230,6 +4305,31 @@ func (c *Client) ModifyNatGatewayDestinationIpPortTranslationNatRule(request *Mo
     return
 }
 
+func NewModifyNatGatewaySourceIpTranslationNatRuleRequest() (request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) {
+    request = &ModifyNatGatewaySourceIpTranslationNatRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNatGatewaySourceIpTranslationNatRule")
+    return
+}
+
+func NewModifyNatGatewaySourceIpTranslationNatRuleResponse() (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse) {
+    response = &ModifyNatGatewaySourceIpTranslationNatRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a SNAT forwarding rule of the NAT Gateway.
+func (c *Client) ModifyNatGatewaySourceIpTranslationNatRule(request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyNatGatewaySourceIpTranslationNatRuleRequest()
+    }
+    response = NewModifyNatGatewaySourceIpTranslationNatRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyNetDetectRequest() (request *ModifyNetDetectRequest) {
     request = &ModifyNetDetectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4616,6 +4716,31 @@ func (c *Client) ModifyVpnGatewayCcnRoutes(request *ModifyVpnGatewayCcnRoutesReq
         request = NewModifyVpnGatewayCcnRoutesRequest()
     }
     response = NewModifyVpnGatewayCcnRoutesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewNotifyRoutesRequest() (request *NotifyRoutesRequest) {
+    request = &NotifyRoutesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "NotifyRoutes")
+    return
+}
+
+func NewNotifyRoutesResponse() (response *NotifyRoutesResponse) {
+    response = &NotifyRoutesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to publish a route to CCN. This can also be done by clicking the **Publish to CCN** button on the route table page.
+func (c *Client) NotifyRoutes(request *NotifyRoutesRequest) (response *NotifyRoutesResponse, err error) {
+    if request == nil {
+        request = NewNotifyRoutesRequest()
+    }
+    response = NewNotifyRoutesResponse()
     err = c.Send(request, response)
     return
 }
@@ -5101,6 +5226,31 @@ func (c *Client) UnassignPrivateIpAddresses(request *UnassignPrivateIpAddressesR
         request = NewUnassignPrivateIpAddressesRequest()
     }
     response = NewUnassignPrivateIpAddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewWithdrawNotifyRoutesRequest() (request *WithdrawNotifyRoutesRequest) {
+    request = &WithdrawNotifyRoutesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "WithdrawNotifyRoutes")
+    return
+}
+
+func NewWithdrawNotifyRoutesResponse() (response *WithdrawNotifyRoutesResponse) {
+    response = &WithdrawNotifyRoutesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to withdraw a route from CCN. This can also be done by clicking the **Withdraw from CCN** button on the route table page.
+func (c *Client) WithdrawNotifyRoutes(request *WithdrawNotifyRoutesRequest) (response *WithdrawNotifyRoutesResponse, err error) {
+    if request == nil {
+        request = NewWithdrawNotifyRoutesRequest()
+    }
+    response = NewWithdrawNotifyRoutesResponse()
     err = c.Send(request, response)
     return
 }

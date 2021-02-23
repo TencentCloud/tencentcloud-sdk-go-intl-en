@@ -43,6 +43,31 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewCloneDBRequest() (request *CloneDBRequest) {
+    request = &CloneDBRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "CloneDB")
+    return
+}
+
+func NewCloneDBResponse() (response *CloneDBResponse) {
+    response = &CloneDBResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to clone and rename databases of an instance. The clones are still in the instance from which they are cloned.
+func (c *Client) CloneDB(request *CloneDBRequest) (response *CloneDBResponse, err error) {
+    if request == nil {
+        request = NewCloneDBRequest()
+    }
+    response = NewCloneDBResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAccountRequest() (request *CreateAccountRequest) {
     request = &CreateAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -714,6 +739,31 @@ func (c *Client) ModifyDBInstanceName(request *ModifyDBInstanceNameRequest) (res
         request = NewModifyDBInstanceNameRequest()
     }
     response = NewModifyDBInstanceNameResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDBInstanceNetworkRequest() (request *ModifyDBInstanceNetworkRequest) {
+    request = &ModifyDBInstanceNetworkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBInstanceNetwork")
+    return
+}
+
+func NewModifyDBInstanceNetworkResponse() (response *ModifyDBInstanceNetworkResponse) {
+    response = &ModifyDBInstanceNetworkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to switch a running instance from a VPC to another.
+func (c *Client) ModifyDBInstanceNetwork(request *ModifyDBInstanceNetworkRequest) (response *ModifyDBInstanceNetworkResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceNetworkRequest()
+    }
+    response = NewModifyDBInstanceNetworkResponse()
     err = c.Send(request, response)
     return
 }

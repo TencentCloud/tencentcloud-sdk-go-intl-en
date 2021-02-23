@@ -93,6 +93,31 @@ func (c *Client) DescribeAppStatistics(request *DescribeAppStatisticsRequest) (r
     return
 }
 
+func NewDescribeApplicationDataRequest() (request *DescribeApplicationDataRequest) {
+    request = &DescribeApplicationDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gme", APIVersion, "DescribeApplicationData")
+    return
+}
+
+func NewDescribeApplicationDataResponse() (response *DescribeApplicationDataResponse) {
+    response = &DescribeApplicationDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeApplicationData) is used to query usage data details within 90 days.
+func (c *Client) DescribeApplicationData(request *DescribeApplicationDataRequest) (response *DescribeApplicationDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationDataRequest()
+    }
+    response = NewDescribeApplicationDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeScanResultListRequest() (request *DescribeScanResultListRequest) {
     request = &DescribeScanResultListRequest{
         BaseRequest: &tchttp.BaseRequest{},

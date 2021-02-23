@@ -681,7 +681,7 @@ type CreateDBInstanceHourRequest struct {
 	// AZ information of secondary database 1, which is the `Zone` value by default. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
 	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
 
-	// AZ information of secondary database 2, which is empty by default. This parameter can be specified when purchasing strong sync primary instances and is meaningless for other types of instances.
+	// Availability zone information of replica 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
 	BackupZone *string `json:"BackupZone,omitempty" name:"BackupZone"`
 
 	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API to query the security group details of a project.
@@ -2474,6 +2474,9 @@ type DescribeErrorLogDataRequest struct {
 
 	// Offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// This parameter is valid only for source or disaster recovery instances. Valid value: `slave`, which indicates pulling logs from the replica.
+	InstType *string `json:"InstType,omitempty" name:"InstType"`
 }
 
 func (r *DescribeErrorLogDataRequest) ToJsonString() string {
@@ -2921,6 +2924,9 @@ type DescribeSlowLogDataRequest struct {
 
 	// The number of results per page in paginated queries. Default value: 100. Maximum value: 400.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// This parameter is valid only for source or disaster recovery instances. Valid value: `slave`, which indicates pulling logs from the replica.
+	InstType *string `json:"InstType,omitempty" name:"InstType"`
 }
 
 func (r *DescribeSlowLogDataRequest) ToJsonString() string {
@@ -3647,7 +3653,7 @@ type InstanceInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MasterInfo *MasterInfo `json:"MasterInfo,omitempty" name:"MasterInfo"`
 
-	// Instance type. Value range: HA (High-Availability Edition), FE (Finance Edition), BASIC (Basic Edition)
+	// Instance type
 	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
 
 	// Kernel version
@@ -5513,6 +5519,89 @@ func (r *StopRollbackResponse) ToJsonString() string {
 }
 
 func (r *StopRollbackResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SwitchDBInstanceMasterSlaveRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Specifies the replica server to switched to. Valid values: `first` (the first replica server), `second` (the second replica server). Default value: `first`. `second` is valid only for a multi-AZ instance.
+	DstSlave *string `json:"DstSlave,omitempty" name:"DstSlave"`
+
+	// Whether to force the switch. Valid values: `True`, `False` (default). If this parameter is set to `True`, instance data may be lost during the switch.
+	ForceSwitch *bool `json:"ForceSwitch,omitempty" name:"ForceSwitch"`
+
+	// Whether to perform the switch during a time window. Valid values: `True`, `False` (default). If `ForceSwitch` is set to `True`, this parameter is invalid.
+	WaitSwitch *bool `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
+}
+
+func (r *SwitchDBInstanceMasterSlaveRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SwitchDBInstanceMasterSlaveRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SwitchDBInstanceMasterSlaveResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SwitchDBInstanceMasterSlaveResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SwitchDBInstanceMasterSlaveResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SwitchDrInstanceToMasterRequest struct {
+	*tchttp.BaseRequest
+
+	// Disaster recovery instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *SwitchDrInstanceToMasterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SwitchDrInstanceToMasterRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SwitchDrInstanceToMasterResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task request ID, which can be used to query the execution result of an async task
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SwitchDrInstanceToMasterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SwitchDrInstanceToMasterResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

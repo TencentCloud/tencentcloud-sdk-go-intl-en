@@ -592,6 +592,43 @@ func (r *DescribeUserInformationResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DismissRoomByStrRoomIdRequest struct {
+	*tchttp.BaseRequest
+
+	// `SDKAppId` of TRTC
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Room ID
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+}
+
+func (r *DismissRoomByStrRoomIdRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DismissRoomByStrRoomIdRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DismissRoomByStrRoomIdResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DismissRoomByStrRoomIdResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DismissRoomByStrRoomIdResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DismissRoomRequest struct {
 	*tchttp.BaseRequest
 
@@ -718,6 +755,9 @@ type LayoutParams struct {
 
 	// Valid in custom templates. 1: the placeholding feature is enabled; 0 (default): the feature is disabled. When the feature is enabled, but a user for whom a position is reserved is not sending video data, the position will show the corresponding placeholder image.
 	PlaceHolderMode *uint64 `json:"PlaceHolderMode,omitempty" name:"PlaceHolderMode"`
+
+	// Whether an audio-only stream occupies an image spot, which takes effect in a floating, grid, or screen sharing template. Valid values: 0 (default): when a floating or grid template is used, users sending audio only occupy image spots; when a screen sharing template is used, users (except the user whose screen is shared) sending audio only do not occupy image spots; 1: users sending audio only occupy image spots; 2: users sending audio only do not occupy image spots.
+	PureAudioHoldPlaceMode *uint64 `json:"PureAudioHoldPlaceMode,omitempty" name:"PureAudioHoldPlaceMode"`
 }
 
 type OutputParams struct {
@@ -799,6 +839,46 @@ type RealtimeData struct {
 
 	// Data type field
 	DataType *string `json:"DataType,omitempty" name:"DataType"`
+}
+
+type RemoveUserByStrRoomIdRequest struct {
+	*tchttp.BaseRequest
+
+	// `SDKAppId` of TRTC
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Room ID
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// List of up to 10 users to be removed
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds" list`
+}
+
+func (r *RemoveUserByStrRoomIdRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RemoveUserByStrRoomIdRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RemoveUserByStrRoomIdResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RemoveUserByStrRoomIdResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RemoveUserByStrRoomIdResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type RemoveUserRequest struct {
@@ -901,6 +981,55 @@ type SmallVideoLayoutParams struct {
 	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
 }
 
+type StartMCUMixTranscodeByStrRoomIdRequest struct {
+	*tchttp.BaseRequest
+
+	// `SDKAppId` of TRTC
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Room ID in string type
+	StrRoomId *string `json:"StrRoomId,omitempty" name:"StrRoomId"`
+
+	// On-Cloud MixTranscoding output parameters
+	OutputParams *OutputParams `json:"OutputParams,omitempty" name:"OutputParams"`
+
+	// On-Cloud MixTranscoding output encoding parameters
+	EncodeParams *EncodeParams `json:"EncodeParams,omitempty" name:"EncodeParams"`
+
+	// On-Cloud MixTranscoding output layout parameters
+	LayoutParams *LayoutParams `json:"LayoutParams,omitempty" name:"LayoutParams"`
+
+	// Relayed push parameters of a non-Tencent Cloud CDN
+	PublishCdnParams *PublishCdnParams `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
+}
+
+func (r *StartMCUMixTranscodeByStrRoomIdRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StartMCUMixTranscodeByStrRoomIdRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StartMCUMixTranscodeByStrRoomIdResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *StartMCUMixTranscodeByStrRoomIdResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StartMCUMixTranscodeByStrRoomIdResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type StartMCUMixTranscodeRequest struct {
 	*tchttp.BaseRequest
 
@@ -947,6 +1076,43 @@ func (r *StartMCUMixTranscodeResponse) ToJsonString() string {
 }
 
 func (r *StartMCUMixTranscodeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StopMCUMixTranscodeByStrRoomIdRequest struct {
+	*tchttp.BaseRequest
+
+	// `SDKAppId` of TRTC
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Room ID in string type
+	StrRoomId *string `json:"StrRoomId,omitempty" name:"StrRoomId"`
+}
+
+func (r *StopMCUMixTranscodeByStrRoomIdRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StopMCUMixTranscodeByStrRoomIdRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StopMCUMixTranscodeByStrRoomIdResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *StopMCUMixTranscodeByStrRoomIdResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StopMCUMixTranscodeByStrRoomIdResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 

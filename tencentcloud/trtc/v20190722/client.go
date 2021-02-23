@@ -83,7 +83,7 @@ func NewDescribeAbnormalEventResponse() (response *DescribeAbnormalEventResponse
     return
 }
 
-// This API is used to query exception occurrences under a specified `SDKAppID` and return the exception ID and possible causes. It queries data in last 5 days, and the query period is up to 1 hour which can start and end on different days. For more information about exceptions, please see the exception ID mapping table: https://intl.cloud.tencent.com/document/product/647/37906
+// This API is used to query exception occurrences under a specified `SDKAppID` and return the exception IDs and possible causes. It queries data in last 15 days, and the query period is up to 1 hour, which can start and end on different days. For more information about exceptions, please see the exception event ID mapping table: https://intl.cloud.tencent.com/document/product/647/37906.
 func (c *Client) DescribeAbnormalEvent(request *DescribeAbnormalEventRequest) (response *DescribeAbnormalEventResponse, err error) {
     if request == nil {
         request = NewDescribeAbnormalEventRequest()
@@ -321,6 +321,31 @@ func (c *Client) DismissRoom(request *DismissRoomRequest) (response *DismissRoom
     return
 }
 
+func NewDismissRoomByStrRoomIdRequest() (request *DismissRoomByStrRoomIdRequest) {
+    request = &DismissRoomByStrRoomIdRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DismissRoomByStrRoomId")
+    return
+}
+
+func NewDismissRoomByStrRoomIdResponse() (response *DismissRoomByStrRoomIdResponse) {
+    response = &DismissRoomByStrRoomIdResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
+func (c *Client) DismissRoomByStrRoomId(request *DismissRoomByStrRoomIdRequest) (response *DismissRoomByStrRoomIdResponse, err error) {
+    if request == nil {
+        request = NewDismissRoomByStrRoomIdRequest()
+    }
+    response = NewDismissRoomByStrRoomIdResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRemoveUserRequest() (request *RemoveUserRequest) {
     request = &RemoveUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -342,6 +367,31 @@ func (c *Client) RemoveUser(request *RemoveUserRequest) (response *RemoveUserRes
         request = NewRemoveUserRequest()
     }
     response = NewRemoveUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRemoveUserByStrRoomIdRequest() (request *RemoveUserByStrRoomIdRequest) {
+    request = &RemoveUserByStrRoomIdRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "RemoveUserByStrRoomId")
+    return
+}
+
+func NewRemoveUserByStrRoomIdResponse() (response *RemoveUserByStrRoomIdResponse) {
+    response = &RemoveUserByStrRoomIdResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to remove a user from a room. It allows the anchor, room owner, or admin to kick out a user, and works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
+func (c *Client) RemoveUserByStrRoomId(request *RemoveUserByStrRoomIdRequest) (response *RemoveUserByStrRoomIdResponse, err error) {
+    if request == nil {
+        request = NewRemoveUserByStrRoomIdRequest()
+    }
+    response = NewRemoveUserByStrRoomIdResponse()
     err = c.Send(request, response)
     return
 }
@@ -388,6 +438,48 @@ func (c *Client) StartMCUMixTranscode(request *StartMCUMixTranscodeRequest) (res
     return
 }
 
+func NewStartMCUMixTranscodeByStrRoomIdRequest() (request *StartMCUMixTranscodeByStrRoomIdRequest) {
+    request = &StartMCUMixTranscodeByStrRoomIdRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "StartMCUMixTranscodeByStrRoomId")
+    return
+}
+
+func NewStartMCUMixTranscodeByStrRoomIdResponse() (response *StartMCUMixTranscodeByStrRoomIdResponse) {
+    response = &StartMCUMixTranscodeByStrRoomIdResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to enable On-Cloud MixTranscoding and specify the position of each channel of image in stream mixing.
+// 
+// There may be multiple channels of audio/video streams in a TRTC room. You can call this API to request the Tencent Cloud server to mix multiple channels of video images and audio into one channel and specify the position of each image so as to produce only one channel of audio/video stream for recording and live streaming.
+// 
+// You can use this API to perform the following operations:
+// - Set image and audio quality parameters of the mixed stream, including video resolution, bitrate, frame rate, and audio quality.
+// - Set the layout, i.e., the position of each channel of image. You only need to set it once when enabling On-Cloud MixTranscoding, and the layout engine will automatically arrange images as configured.
+// - Set the names of recording files for future playback.
+// - Set the stream ID for CDN live streaming.
+// 
+// Currently, On-Cloud MixTranscoding supports the following layout templates:
+// - Floating: the entire screen is covered by the video image of the first user who enters the room, and the images of other users are displayed as small images in horizontal rows in the bottom-left corner in room entry sequence. The screen can accommodate up to 4 rows of 4 small images, which float over the big image. Up to 1 big image and 15 small images can be displayed. A user sending audio only will still occupy an image spot.
+// - Grid: the images of all users split the screen evenly. The more the users, the smaller the image dimensions. Up to 16 images can be displayed. A user sending audio only will still occupy an image spot.
+// - Screen sharing: this template is designed for video conferencing and online classes. The shared screen (or camera image of the anchor) is always displayed as the big image, which occupies the left half of the screen, and the images of other users occupy the right half in up to 2 columns of a maximum of 8 small images each. Up to 1 big image and 15 small images can be displayed. If the aspect ratio of upstream images does not match that of output images, the big image on the left will be scaled and displayed in whole, while the small images on the right will be cropped.
+// - Picture-in-picture: this template mixes the big and small images or big image of a user with the audio of other users. The small image floats over the big image. You can specify the user whose big and small images are displayed and the position of the small image.
+// - Custom: you can use custom templates to specify the image positions of users in mixed streams or preset image positions. If users are assigned to preset positions, the layout engine will reserve the positions for the users; if not, users will occupy the positions in room entry sequence. Once all preset positions are occupied, TRTC will stop mixing the audio and images of other users. If the placeholding feature is enabled for a custom template (`PlaceHolderMode` in `LayoutParams` is set to 1), but a user for whom a place is reserved is not sending video data, the position will show the corresponding placeholder image (`PlaceImageId`).
+// 
+// Note: only applications created on and after January 9, 2020 can call this API directly. Those created before use the stream mixing service of CSS by default. If you want to switch to MCU On-Cloud MixTranscoding, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+func (c *Client) StartMCUMixTranscodeByStrRoomId(request *StartMCUMixTranscodeByStrRoomIdRequest) (response *StartMCUMixTranscodeByStrRoomIdResponse, err error) {
+    if request == nil {
+        request = NewStartMCUMixTranscodeByStrRoomIdRequest()
+    }
+    response = NewStartMCUMixTranscodeByStrRoomIdResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopMCUMixTranscodeRequest() (request *StopMCUMixTranscodeRequest) {
     request = &StopMCUMixTranscodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -409,6 +501,31 @@ func (c *Client) StopMCUMixTranscode(request *StopMCUMixTranscodeRequest) (respo
         request = NewStopMCUMixTranscodeRequest()
     }
     response = NewStopMCUMixTranscodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopMCUMixTranscodeByStrRoomIdRequest() (request *StopMCUMixTranscodeByStrRoomIdRequest) {
+    request = &StopMCUMixTranscodeByStrRoomIdRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "StopMCUMixTranscodeByStrRoomId")
+    return
+}
+
+func NewStopMCUMixTranscodeByStrRoomIdResponse() (response *StopMCUMixTranscodeByStrRoomIdResponse) {
+    response = &StopMCUMixTranscodeByStrRoomIdResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to stop On-Cloud MixTranscoding.
+func (c *Client) StopMCUMixTranscodeByStrRoomId(request *StopMCUMixTranscodeByStrRoomIdRequest) (response *StopMCUMixTranscodeByStrRoomIdResponse, err error) {
+    if request == nil {
+        request = NewStopMCUMixTranscodeByStrRoomIdRequest()
+    }
+    response = NewStopMCUMixTranscodeByStrRoomIdResponse()
     err = c.Send(request, response)
     return
 }

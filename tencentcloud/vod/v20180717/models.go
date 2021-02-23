@@ -1558,10 +1558,16 @@ type AnimatedGraphicTaskInput struct {
 	// Animated image generating template ID
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// Start time of animated image in video in seconds.
+	// Start time offset of an animated image in the video, in seconds.
+	// <li>If this parameter is left empty or set to 0, the animated image will start at the same time as the video.</li>
+	// <li>If this parameter is set to a positive number (n for example), the animated image will start at the nth second of the video.</li>
+	// <li>If this parameter is set to a negative number (-n for example), the animated image will start at the nth second before the end of the video.</li>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
-	// End time of animated image in video in seconds.
+	// End time offset of an animated image in the video, in seconds.
+	// <li>If this parameter is left empty or set to 0, the animated image will end at the same time as the video.</li>
+	// <li>If this parameter is set to a positive number (n for example), the animated image will end at the nth second of the video.</li>
+	// <li>If this parameter is set to a negative number (-n for example), the animated image will end at the nth second before the end of the video.</li>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 }
 
@@ -6225,7 +6231,10 @@ type ImageWatermarkInput struct {
 	// Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
 	Height *string `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Repeat type of an animated watermark. Valid values:
+	// <li>once: no longer appears after watermark playback ends.</li>
+	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
 }
 
@@ -6244,7 +6253,10 @@ type ImageWatermarkInputForUpdate struct {
 	// <li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
 	Height *string `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Repeat type of an animated watermark. Valid values:
+	// <li>once: no longer appears after watermark playback ends.</li>
+	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
 }
 
@@ -6264,7 +6276,10 @@ type ImageWatermarkTemplate struct {
 	// `0px` means that `Height` will be proportionally scaled according to the video width.
 	Height *string `json:"Height,omitempty" name:"Height"`
 
-	// 
+	// Repeat type of an animated watermark. Valid values:
+	// <li>once: no longer appears after watermark playback ends.</li>
+	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
 }
 

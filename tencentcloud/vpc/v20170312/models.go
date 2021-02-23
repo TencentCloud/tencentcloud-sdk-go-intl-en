@@ -1191,6 +1191,17 @@ func (r *CheckNetDetectStateResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CidrForCcn struct {
+
+	// Local CIDR block, including subnet CIDR block and secondary CIDR block
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Cidr *string `json:"Cidr,omitempty" name:"Cidr"`
+
+	// Whether the routing policy of the VPC subnet is published to CCN.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PublishedToVbc *bool `json:"PublishedToVbc,omitempty" name:"PublishedToVbc"`
+}
+
 type ClassicLinkInstance struct {
 
 	// VPC instance ID
@@ -1456,7 +1467,7 @@ func (r *CreateAssistantCidrResponse) FromJsonString(s string) error {
 type CreateBandwidthPackageRequest struct {
 	*tchttp.BaseRequest
 
-	// The bandwidth package type. Valid values: 'BGP', 'SINGLEISP', and 'ANYCAST'.
+	// The type of the bandwidth package. Valid values: `HIGH_QUALITY_BGP`, `BGP`, `SINGLEISP`, and `ANYCAST`.
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
 	// The bandwidth package billing mode. Valid values: 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'.
@@ -1468,7 +1479,7 @@ type CreateBandwidthPackageRequest struct {
 	// The number of bandwidth packages (It can only be “1” for bill-by-CVM accounts)
 	BandwidthPackageCount *uint64 `json:"BandwidthPackageCount,omitempty" name:"BandwidthPackageCount"`
 
-	// The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit.
+	// The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit. This feature is currently in beta.
 	InternetMaxBandwidth *int64 `json:"InternetMaxBandwidth,omitempty" name:"InternetMaxBandwidth"`
 
 	// The list of tags to be bound.
@@ -1939,6 +1950,43 @@ func (r *CreateNatGatewayResponse) ToJsonString() string {
 }
 
 func (r *CreateNatGatewayResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateNatGatewaySourceIpTranslationNatRuleRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the NAT Gateway, such as `nat-df45454`
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The SNAT forwarding rule of the NAT Gateway
+	SourceIpTranslationNatRules []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRules,omitempty" name:"SourceIpTranslationNatRules" list`
+}
+
+func (r *CreateNatGatewaySourceIpTranslationNatRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateNatGatewaySourceIpTranslationNatRuleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateNatGatewaySourceIpTranslationNatRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateNatGatewaySourceIpTranslationNatRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateNatGatewaySourceIpTranslationNatRuleResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2547,7 +2595,7 @@ func (r *CreateVpcResponse) FromJsonString(s string) error {
 type CreateVpnConnectionRequest struct {
 	*tchttp.BaseRequest
 
-	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	// VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The ID of the VPN gateway instance.
@@ -2573,6 +2621,15 @@ type CreateVpnConnectionRequest struct {
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// Whether the tunnel health check is supported.
+	EnableHealthCheck *bool `json:"EnableHealthCheck,omitempty" name:"EnableHealthCheck"`
+
+	// Local IP address for the health check
+	HealthCheckLocalIp *string `json:"HealthCheckLocalIp,omitempty" name:"HealthCheckLocalIp"`
+
+	// Peer IP address for the health check
+	HealthCheckRemoteIp *string `json:"HealthCheckRemoteIp,omitempty" name:"HealthCheckRemoteIp"`
 }
 
 func (r *CreateVpnConnectionRequest) ToJsonString() string {
@@ -3227,6 +3284,43 @@ func (r *DeleteNatGatewayResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteNatGatewaySourceIpTranslationNatRuleRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the NAT Gateway, such as `nat-df45454`
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The list of SNAT rule IDs of a NAT Gateway, such as `snat-df43254`
+	NatGatewaySnatIds []*string `json:"NatGatewaySnatIds,omitempty" name:"NatGatewaySnatIds" list`
+}
+
+func (r *DeleteNatGatewaySourceIpTranslationNatRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteNatGatewaySourceIpTranslationNatRuleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteNatGatewaySourceIpTranslationNatRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteNatGatewaySourceIpTranslationNatRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteNatGatewaySourceIpTranslationNatRuleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteNetDetectRequest struct {
 	*tchttp.BaseRequest
 
@@ -3369,7 +3463,7 @@ type DeleteRoutesRequest struct {
 	// Route table instance ID.
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
-	// Routing policy object.
+	// Routing policy object. Only the `RouteId` field is required when deleting a routing policy.
 	Routes []*Route `json:"Routes,omitempty" name:"Routes" list`
 }
 
@@ -3385,6 +3479,9 @@ func (r *DeleteRoutesRequest) FromJsonString(s string) error {
 type DeleteRoutesResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Details of the routing policy that has been deleted.
+		RouteSet []*Route `json:"RouteSet,omitempty" name:"RouteSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4923,7 +5020,7 @@ func (r *DescribeHaVipsResponse) FromJsonString(s string) error {
 type DescribeIpGeolocationDatabaseUrlRequest struct {
 	*tchttp.BaseRequest
 
-	// Protocol type of the IP location database. Valid values: `ipv4` and `ipv6`.
+	// Protocol type for an IP location database. Valid value: `ipv4`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
@@ -5057,6 +5154,59 @@ func (r *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse) ToJsonS
 }
 
 func (r *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeNatGatewaySourceIpTranslationNatRulesRequest struct {
+	*tchttp.BaseRequest
+
+	// The unique ID of the NAT Gateway, such as `nat-123xx454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Filter conditions:
+	// <li> resource-id, the subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
+	// <li> public-ip-address, the EIP, such as `139.199.232.238`</li>
+	// <li>description, the rule description</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Offset. Default is 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeNatGatewaySourceIpTranslationNatRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeNatGatewaySourceIpTranslationNatRulesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeNatGatewaySourceIpTranslationNatRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Object array of the SNAT rule for a NAT Gateway.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		SourceIpTranslationNatRuleSet []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRuleSet,omitempty" name:"SourceIpTranslationNatRuleSet" list`
+
+		// The number of object arrays of eligible forwarding rules for a NAT Gateway
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeNatGatewaySourceIpTranslationNatRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeNatGatewaySourceIpTranslationNatRulesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6813,6 +6963,9 @@ type FlowLog struct {
 
 	// The creation time of the flow log.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Tag list, such as [{"Key": "city", "Value": "shanghai"}]
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
 }
 
 type GatewayFlowMonitorDetail struct {
@@ -8144,6 +8297,43 @@ func (r *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse) FromJsonSt
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyNatGatewaySourceIpTranslationNatRuleRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the NAT Gateway, such as `nat-df453454`
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The SNAT forwarding rule of the NAT Gateway
+	SourceIpTranslationNatRule *SourceIpTranslationNatRule `json:"SourceIpTranslationNatRule,omitempty" name:"SourceIpTranslationNatRule"`
+}
+
+func (r *ModifyNatGatewaySourceIpTranslationNatRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyNatGatewaySourceIpTranslationNatRuleRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNatGatewaySourceIpTranslationNatRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyNatGatewaySourceIpTranslationNatRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyNatGatewaySourceIpTranslationNatRuleResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyNetDetectRequest struct {
 	*tchttp.BaseRequest
 
@@ -8443,7 +8633,7 @@ type ModifySecurityGroupPoliciesRequest struct {
 	// The security group policy set. SecurityGroupPolicySet object must specify new egress and ingress policies at the same time. SecurityGroupPolicy object does not support custom index (PolicyIndex).
 	SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
 
-	// Whether security group sorting is supported. True indicates that security group sorting is supported. If SortPolicys does not exist or is set to False, the security group policy can be modified.
+	// Whether the security group rule is sorted. Default value: False. If it is set to `True`, security group rules will be strictly sorted according to the sequence specified in the `SecurityGroupPolicySet` parameter. Manual entry may cause omission, so we recommend sorting security group rules in the console.
 	SortPolicys *bool `json:"SortPolicys,omitempty" name:"SortPolicys"`
 }
 
@@ -8660,6 +8850,15 @@ type ModifyVpnConnectionAttributeRequest struct {
 
 	// IPSec configuration. The IPSec secure session configuration is provided by Tencent Cloud.
 	IPSECOptionsSpecification *IPSECOptionsSpecification `json:"IPSECOptionsSpecification,omitempty" name:"IPSECOptionsSpecification"`
+
+	// Whether to enable the tunnel health check.
+	EnableHealthCheck *bool `json:"EnableHealthCheck,omitempty" name:"EnableHealthCheck"`
+
+	// Local IP address for the tunnel health check
+	HealthCheckLocalIp *string `json:"HealthCheckLocalIp,omitempty" name:"HealthCheckLocalIp"`
+
+	// Peer IP address for the tunnel health check
+	HealthCheckRemoteIp *string `json:"HealthCheckRemoteIp,omitempty" name:"HealthCheckRemoteIp"`
 }
 
 func (r *ModifyVpnConnectionAttributeRequest) ToJsonString() string {
@@ -9058,6 +9257,10 @@ type NetworkInterface struct {
 
 	// The ENI type. 0: ENI. 1: EVM ENI.
 	EniType *uint64 `json:"EniType,omitempty" name:"EniType"`
+
+	// Type of the resource bound with an ENI. Valid values: cvm, eks.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Business *string `json:"Business,omitempty" name:"Business"`
 }
 
 type NetworkInterfaceAttachment struct {
@@ -9073,6 +9276,43 @@ type NetworkInterfaceAttachment struct {
 
 	// Binding time
 	AttachTime *string `json:"AttachTime,omitempty" name:"AttachTime"`
+}
+
+type NotifyRoutesRequest struct {
+	*tchttp.BaseRequest
+
+	// The unique ID of the route table
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// The unique ID of the routing policy
+	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds" list`
+}
+
+func (r *NotifyRoutesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *NotifyRoutesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type NotifyRoutesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *NotifyRoutesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *NotifyRoutesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type Price struct {
@@ -9812,6 +10052,10 @@ type Route struct {
 
 	// Unique routing policy ID.
 	RouteItemId *string `json:"RouteItemId,omitempty" name:"RouteItemId"`
+
+	// Whether the routing policy is published to CCN.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PublishedToVbc *bool `json:"PublishedToVbc,omitempty" name:"PublishedToVbc"`
 }
 
 type RouteTable struct {
@@ -9839,6 +10083,10 @@ type RouteTable struct {
 
 	// Tag key-value pairs.
 	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+
+	// Whether the local route is published to CCN.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	LocalCidrForCcn []*CidrForCcn `json:"LocalCidrForCcn,omitempty" name:"LocalCidrForCcn" list`
 }
 
 type RouteTableAssociation struct {
@@ -10035,6 +10283,40 @@ func (r *SetCcnRegionBandwidthLimitsResponse) ToJsonString() string {
 
 func (r *SetCcnRegionBandwidthLimitsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type SourceIpTranslationNatRule struct {
+
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Source IP/IP range
+	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
+
+	// Elastic IP address pool
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// SNAT rule ID
+	NatGatewaySnatId *string `json:"NatGatewaySnatId,omitempty" name:"NatGatewaySnatId"`
+
+	// NAT Gateway ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// VPC ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Creation time of a SNAT rule for a NAT Gateway
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 }
 
 type Subnet struct {
@@ -10412,6 +10694,18 @@ type VpnConnection struct {
 
 	// IPSEC options.
 	IPSECOptionsSpecification *IPSECOptionsSpecification `json:"IPSECOptionsSpecification,omitempty" name:"IPSECOptionsSpecification"`
+
+	// Whether the health check is supported.
+	EnableHealthCheck *bool `json:"EnableHealthCheck,omitempty" name:"EnableHealthCheck"`
+
+	// Local IP address for the health check
+	HealthCheckLocalIp *string `json:"HealthCheckLocalIp,omitempty" name:"HealthCheckLocalIp"`
+
+	// Peer IP address for the health check
+	HealthCheckRemoteIp *string `json:"HealthCheckRemoteIp,omitempty" name:"HealthCheckRemoteIp"`
+
+	// Tunnel health check status. Valid values: AVAILABLE: healthy; UNAVAILABLE: unhealthy. This parameter will be returned only after health check is enabled.
+	HealthCheckStatus *string `json:"HealthCheckStatus,omitempty" name:"HealthCheckStatus"`
 }
 
 type VpnGateway struct {
@@ -10492,4 +10786,41 @@ type VpngwCcnRoutes struct {
 	// ENABLE: enable the route
 	// DISABLE: do not enable the route
 	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
+type WithdrawNotifyRoutesRequest struct {
+	*tchttp.BaseRequest
+
+	// The unique ID of the route table
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// The unique ID of the routing policy
+	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds" list`
+}
+
+func (r *WithdrawNotifyRoutesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *WithdrawNotifyRoutesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type WithdrawNotifyRoutesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *WithdrawNotifyRoutesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *WithdrawNotifyRoutesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
