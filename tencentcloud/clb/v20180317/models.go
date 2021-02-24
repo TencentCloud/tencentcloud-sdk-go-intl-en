@@ -98,6 +98,12 @@ type AutoRewriteRequest struct {
 
 	// The domain name to be redirected under the listener `HTTPS:443`. If it is left empty, all domain names under the listener `HTTPS:443` will be configured with redirects.
 	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+
+	// Redirection status code. Valid values: 301, 302, and 307.
+	RewriteCodes []*int64 `json:"RewriteCodes,omitempty" name:"RewriteCodes" list`
+
+	// Whether the matched URL is carried in redirection.
+	TakeUrls []*bool `json:"TakeUrls,omitempty" name:"TakeUrls" list`
 }
 
 func (r *AutoRewriteRequest) ToJsonString() string {
@@ -297,13 +303,13 @@ type BatchTarget struct {
 	// Binding port
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
-	// CVM instance ID
+	// CVM instance ID. Indicating binding the primary IP of the primary ENI.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// ENI IP
+	// ENI IP or other private IP. This parameter is required for binding a dual-stack IPv6 CVM instance.
 	EniIp *string `json:"EniIp,omitempty" name:"EniIp"`
 
-	// Weight of a CVM instance. Value range: [0, 100]. If it is not specified when binding the instance, 10 will be used by default.
+	// CVM instance weight. Value range: [0, 100]. If it is not specified when binding the instance, 10 will be used by default.
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 
 	// Layer-7 rule ID
@@ -2413,9 +2419,13 @@ type Listener struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SessionType *string `json:"SessionType,omitempty" name:"SessionType"`
 
-	// Whether a persistent connection is enabled (This parameter can only be configured in HTTP/HTTPS listeners)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Whether a persistent connection is enabled (1: enabled; 0: disabled). This parameter can only be configured in HTTP/HTTPS listeners.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	KeepaliveEnable *int64 `json:"KeepaliveEnable,omitempty" name:"KeepaliveEnable"`
+
+	// Only the NAT64 CLB TCP listeners are supported.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Toa *bool `json:"Toa,omitempty" name:"Toa"`
 }
 
 type ListenerBackend struct {
@@ -2651,6 +2661,10 @@ type LoadBalancer struct {
 	// Availability zone of a VPC-based private network CLB instance
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Zones []*string `json:"Zones,omitempty" name:"Zones" list`
+
+	// Whether it is an NFV CLB instance. No returned information: no; l7nfv: yes.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NfvInfo *string `json:"NfvInfo,omitempty" name:"NfvInfo"`
 }
 
 type LoadBalancerDetail struct {
@@ -2774,6 +2788,14 @@ type LoadBalancerDetail struct {
 	// 0: not isolated; 1: isolated.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Isolation *uint64 `json:"Isolation,omitempty" name:"Isolation"`
+
+	// List of the security groups bound to the CLB instance.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
+
+	// Whether the CLB instance is billed by IP.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	LoadBalancerPassToTarget *uint64 `json:"LoadBalancerPassToTarget,omitempty" name:"LoadBalancerPassToTarget"`
 }
 
 type LoadBalancerHealth struct {
@@ -3584,6 +3606,15 @@ type RewriteLocationMap struct {
 
 	// Forwarding rule ID of a redirect target
 	TargetLocationId *string `json:"TargetLocationId,omitempty" name:"TargetLocationId"`
+
+	// Redirection status code. Valid values: 301, 302, and 307.
+	RewriteCode *int64 `json:"RewriteCode,omitempty" name:"RewriteCode"`
+
+	// Whether the matched URL is carried in redirection. It is required when configuring `RewriteCode`.
+	TakeUrl *bool `json:"TakeUrl,omitempty" name:"TakeUrl"`
+
+	// Original domain name of redirection, which must be the corresponding domain name of `SourceLocationId`. It is required when configuring `RewriteCode`.
+	SourceDomain *string `json:"SourceDomain,omitempty" name:"SourceDomain"`
 }
 
 type RewriteTarget struct {
@@ -3597,6 +3628,18 @@ type RewriteTarget struct {
 	// Note: This field may return null, indicating that there is no redirection.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TargetLocationId *string `json:"TargetLocationId,omitempty" name:"TargetLocationId"`
+
+	// Redirection status code
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RewriteCode *int64 `json:"RewriteCode,omitempty" name:"RewriteCode"`
+
+	// Whether the matched URL is carried in redirection.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TakeUrl *bool `json:"TakeUrl,omitempty" name:"TakeUrl"`
+
+	// Redirection type. Manual: manual redirection; Auto: automatic redirection.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RewriteType *string `json:"RewriteType,omitempty" name:"RewriteType"`
 }
 
 type RsWeightRule struct {

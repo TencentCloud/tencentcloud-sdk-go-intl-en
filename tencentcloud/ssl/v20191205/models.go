@@ -23,22 +23,22 @@ import (
 type ApplyCertificateRequest struct {
 	*tchttp.BaseRequest
 
-	// Verification type. DNS_AUTO: automatic DNS verification; DNS: manual DNS verification; FILE: verification by file.
+	// Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation
 	DvAuthMethod *string `json:"DvAuthMethod,omitempty" name:"DvAuthMethod"`
 
-	// Domain name.
+	// Domain name
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Project ID.
+	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Certificate type. Currently, the only supported value is 2, which indicates TrustAsia TLS RSA CA.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// Email address.
+	// Email address
 	ContactEmail *string `json:"ContactEmail,omitempty" name:"ContactEmail"`
 
-	// Mobile number.
+	// Mobile number
 	ContactPhone *string `json:"ContactPhone,omitempty" name:"ContactPhone"`
 
 	// Validity period. The default value is 12 months, which is the only supported value currently.
@@ -50,10 +50,10 @@ type ApplyCertificateRequest struct {
 	// Key pair parameter. Only the 2048-bit key pair is supported.
 	CsrKeyParameter *string `json:"CsrKeyParameter,omitempty" name:"CsrKeyParameter"`
 
-	// CSR encryption password.
+	// CSR encryption password
 	CsrKeyPassword *string `json:"CsrKeyPassword,omitempty" name:"CsrKeyPassword"`
 
-	// Alias.
+	// Alias
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
 	// Original certificate ID, which is used to apply for a new certificate.
@@ -73,7 +73,7 @@ type ApplyCertificateResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Certificate ID.
+		// Certificate ID
 		CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -93,7 +93,7 @@ func (r *ApplyCertificateResponse) FromJsonString(s string) error {
 type CancelCertificateOrderRequest struct {
 	*tchttp.BaseRequest
 
-	// Certificate ID.
+	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
@@ -110,7 +110,7 @@ type CancelCertificateOrderResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// ID of the certificate whose order has been successfully cancelled.
+		// ID of the certificate whose order has been successfully cancelled
 		CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -129,134 +129,134 @@ func (r *CancelCertificateOrderResponse) FromJsonString(s string) error {
 
 type CertificateExtra struct {
 
-	// Number of domain names which can be associated with the certificate.
+	// Number of domain names which can be associated with the certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DomainNumber *string `json:"DomainNumber,omitempty" name:"DomainNumber"`
 
-	// Original certificate ID.
+	// Original certificate ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OriginCertificateId *string `json:"OriginCertificateId,omitempty" name:"OriginCertificateId"`
 
-	// Original ID of the new certificate.
+	// Original ID of the new certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ReplacedBy *string `json:"ReplacedBy,omitempty" name:"ReplacedBy"`
 
-	// New ID of the new certificate.
+	// New ID of the new certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ReplacedFor *string `json:"ReplacedFor,omitempty" name:"ReplacedFor"`
 
-	// Certificate ID of the new order.
+	// Certificate ID of the new order
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RenewOrder *string `json:"RenewOrder,omitempty" name:"RenewOrder"`
 }
 
 type Certificates struct {
 
-	// User UIN.
+	// User UIN
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
-	// Project ID.
+	// Project ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Certificate source.
+	// Certificate source
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	From *string `json:"From,omitempty" name:"From"`
 
-	// Certificate package type. 1: GeoTrust DV SSL CA - G3; 2: TrustAsia TLS RSA CA; 3: Secure Site EV Pro; 4: Secure Site EV; 5: Secure Site OV Pro; 6: Secure Site OV; 7: Secure Site OV wildcard SSL certificate; 8: GeoTrust EV; 9: GeoTrust OV; 10: GeoTrust OV wildcard SSL certificate; 11: TrustAsia DV multi-domain SSL certificate; 12: TrustAsia DV wildcard SSL certificate; 13: TrustAsia OV wildcard SSL certificate (D3); 14: TrustAsia OV SSL certificate (D3); 15: TrustAsia OV multi-domain SSL certificate (D3); 16: TrustAsia EV SSL certificate (D3); 17: TrustAsia EV multi-domain SSL certificate (D3); 18: GlobalSign OV SSL certificate; 19: GlobalSign OV wildcard SSL certificate; 20: GlobalSign EV SSL certificate; 21: TrustAsia OV multi-domain wildcard SSL certificate (D3); 22: GlobalSign OV multi-domain SSL certificate; 23: GlobalSign OV multi-domain wildcard SSL certificate; 24: GlobalSign EV multi-domain SSL certificate.
+	// Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// Certificate type. CA: client certificate; SVR: server certificate.
+	// Certificate type. `CA`: client certificate; `SVR`: server certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CertificateType *string `json:"CertificateType,omitempty" name:"CertificateType"`
 
-	// Issuer.
+	// Issuer
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProductZhName *string `json:"ProductZhName,omitempty" name:"ProductZhName"`
 
-	// Primary domain name.
+	// Primary domain name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Alias.
+	// Alias
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
-	// Status value. 0: being reviewed; 1: approved; 2: not approved; 3: expired; 4: DNS resolution record added; 5: OV/EV certificate, information to be submitted; 6: order being canceled; 7: cancelled; 8: information submitted, confirmation letter to be uploaded.
+	// Status value. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: OV/EV certificate, information to be submitted; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
-	// Extended information of the certificate.
+	// Extended information of the certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CertificateExtra *CertificateExtra `json:"CertificateExtra,omitempty" name:"CertificateExtra"`
 
-	// Vulnerability scanning status. INACTIVE: not activated; ACTIVE: activated.
+	// Vulnerability scanning status. `INACTIVE`: not activated; `ACTIVE`: activated
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VulnerabilityStatus *string `json:"VulnerabilityStatus,omitempty" name:"VulnerabilityStatus"`
 
-	// Status information.
+	// Status information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StatusMsg *string `json:"StatusMsg,omitempty" name:"StatusMsg"`
 
-	// Verification type. DNS_AUTO: automatic DNS verification; DNS: manual DNS verification; FILE: verification by file; EMAIL: verification by email.
+	// Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation; `EMAIL`: email validation
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
 
-	// Time when the certificate takes effect.
+	// Time when the certificate takes effect
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CertBeginTime *string `json:"CertBeginTime,omitempty" name:"CertBeginTime"`
 
-	// Time when the certificate expires.
+	// Time when the certificate expires
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CertEndTime *string `json:"CertEndTime,omitempty" name:"CertEndTime"`
 
-	// Validity period of the certificate (unit: month).
+	// Validity period of the certificate, in months
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ValidityPeriod *string `json:"ValidityPeriod,omitempty" name:"ValidityPeriod"`
 
-	// Creation time.
+	// Creation time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	InsertTime *string `json:"InsertTime,omitempty" name:"InsertTime"`
 
-	// Certificate ID.
+	// Certificate ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
-	// Domain names associated with the certificate (including the primary domain name).
+	// Domain names associated with the certificate (including the primary domain name)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName" list`
 
-	// Certificate type name.
+	// Certificate type name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PackageTypeName *string `json:"PackageTypeName,omitempty" name:"PackageTypeName"`
 
-	// Status description.
+	// Status description
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StatusName *string `json:"StatusName,omitempty" name:"StatusName"`
 
-	// Whether the customer is a VIP customer.
+	// Whether the customer is a VIP customer
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsVip *bool `json:"IsVip,omitempty" name:"IsVip"`
 
-	// Whether the certificate is a DV certificate.
+	// Whether the certificate is a DV certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsDv *bool `json:"IsDv,omitempty" name:"IsDv"`
 
-	// Whether the certificate is a wildcard certificate.
+	// Whether the certificate is a wildcard certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsWildcard *bool `json:"IsWildcard,omitempty" name:"IsWildcard"`
 
-	// Whether the vulnerability scanning feature is enabled.
+	// Whether the vulnerability scanning feature is enabled
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsVulnerability *bool `json:"IsVulnerability,omitempty" name:"IsVulnerability"`
 
-	// Whether the certificate can be reissued.
+	// Whether the certificate can be reissued
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RenewAble *bool `json:"RenewAble,omitempty" name:"RenewAble"`
 
-	// Project information.
+	// Project information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProjectInfo *ProjectInfo `json:"ProjectInfo,omitempty" name:"ProjectInfo"`
 
@@ -264,7 +264,7 @@ type Certificates struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BoundResource []*string `json:"BoundResource,omitempty" name:"BoundResource" list`
 
-	// Whether the certificate can be deployed.
+	// Whether the certificate can be deployed
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Deployable *bool `json:"Deployable,omitempty" name:"Deployable"`
 
@@ -276,7 +276,7 @@ type Certificates struct {
 type CommitCertificateInformationRequest struct {
 	*tchttp.BaseRequest
 
-	// Certificate ID.
+	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
@@ -293,10 +293,10 @@ type CommitCertificateInformationResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Order number at the certificate authority
+		// TrustAsia order ID
 		OrderId *string `json:"OrderId,omitempty" name:"OrderId"`
 
-		// Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload; `13`: pending information submission for the free certificate.
+		// Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload
 		Status *uint64 `json:"Status,omitempty" name:"Status"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -316,7 +316,7 @@ func (r *CommitCertificateInformationResponse) FromJsonString(s string) error {
 type DeleteCertificateRequest struct {
 	*tchttp.BaseRequest
 
-	// Certificate ID.
+	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
@@ -333,7 +333,7 @@ type DeleteCertificateResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Deletion result (`true`: deleted successfully; `false`: failed to delete)
+		// Deletion result
 		DeleteResult *bool `json:"DeleteResult,omitempty" name:"DeleteResult"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -353,7 +353,7 @@ func (r *DeleteCertificateResponse) FromJsonString(s string) error {
 type DescribeCertificateDetailRequest struct {
 	*tchttp.BaseRequest
 
-	// Certificate ID.
+	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
@@ -370,135 +370,135 @@ type DescribeCertificateDetailResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// User UIN.
+		// User UIN
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
-		// Project ID.
+		// Project ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
 
-		// Certificate source. trustasia: TrustAsia; upload: certificate uploaded by users.
+		// Certificate source. `trustasia`: TrustAsia; `upload`: certificate uploaded by users
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		From *string `json:"From,omitempty" name:"From"`
 
-		// Certificate type. CA: client certificate; SVR: server certificate.
+		// Certificate type. `CA`: client certificate; `SVR`: server certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertificateType *string `json:"CertificateType,omitempty" name:"CertificateType"`
 
-		// Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain; `25` WoTrus DV; `26`: WoTrus DV multi-domain; `27`: WoTrus DV wildcard; `28`: WoTrus OV; `29`: WoTrus OV multi-domain; `30`: WoTrus OV wildcard; `31`: WoTrus EV; `32`: WoTrus EV multi-domain; `33`: DNSPod Chinese Cryptographic DV; `34`: DNSPod Chinese Cryptographic DV multi-domain; `35`: DNSPod Chinese Cryptographic DV wildcard; `37`: DNSPod Chinese Cryptographic OV; `38`: DNSPod Chinese Cryptographic OV multi-domain; `39`: DNSPod Chinese Cryptographic OV wildcard: `40`: DNSPod Chinese Cryptographic EV; `41`: DNSPod Chinese Cryptographic EV multi-domain; `42`: TrustAsia DV wildcard multi-domain.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		// Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
+	// Note: this field may return null, indicating that no valid values can be obtained.
 		PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-		// Issuer.
+		// Issuer
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ProductZhName *string `json:"ProductZhName,omitempty" name:"ProductZhName"`
 
-		// Domain name.
+		// Domain name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-		// Alias.
+		// Alias
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Alias *string `json:"Alias,omitempty" name:"Alias"`
 
-		// Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload; `13`: pending information submission for the free certificate.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		// Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload
+	// Note: this field may return null, indicating that no valid values can be obtained.
 		Status *uint64 `json:"Status,omitempty" name:"Status"`
 
-		// Status information.
+		// Status information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		StatusMsg *string `json:"StatusMsg,omitempty" name:"StatusMsg"`
 
-		// Verification type. DNS_AUTO: automatic DNS verification; DNS: manual DNS verification; FILE: verification by file; EMAIL: verification by email.
+		// Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation; `EMAIL`: email validation
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
 
-		// Vulnerability scanning status.
+		// Vulnerability scanning status
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		VulnerabilityStatus *string `json:"VulnerabilityStatus,omitempty" name:"VulnerabilityStatus"`
 
-		// Time when the certificate takes effect.
+		// Time when the certificate takes effect
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertBeginTime *string `json:"CertBeginTime,omitempty" name:"CertBeginTime"`
 
-		// Time when the certificate expires.
+		// Time when the certificate expires
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertEndTime *string `json:"CertEndTime,omitempty" name:"CertEndTime"`
 
-		// Validity period of the certificate (unit: month).
+		// Validity period of the certificate, in months
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ValidityPeriod *string `json:"ValidityPeriod,omitempty" name:"ValidityPeriod"`
 
-		// Application time.
+		// Application time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		InsertTime *string `json:"InsertTime,omitempty" name:"InsertTime"`
 
-		// Order ID.
+		// Order ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		OrderId *string `json:"OrderId,omitempty" name:"OrderId"`
 
-		// Extended information of the certificate.
+		// Extended information of the certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertificateExtra *CertificateExtra `json:"CertificateExtra,omitempty" name:"CertificateExtra"`
 
-		// Private key of the certificate.
+		// Private key of the certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertificatePrivateKey *string `json:"CertificatePrivateKey,omitempty" name:"CertificatePrivateKey"`
 
-		// Certificate public key (i.e., certificate content)
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		// Public key of the certificate
+	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertificatePublicKey *string `json:"CertificatePublicKey,omitempty" name:"CertificatePublicKey"`
 
-		// DV authentication information.
+		// DV authentication information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		DvAuthDetail *DvAuthDetail `json:"DvAuthDetail,omitempty" name:"DvAuthDetail"`
 
-		// Vulnerability scanning assessment report.
+		// Vulnerability scanning assessment report
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		VulnerabilityReport *string `json:"VulnerabilityReport,omitempty" name:"VulnerabilityReport"`
 
-		// Certificate ID.
+		// Certificate ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
-		// Certificate type name.
+		// Certificate type name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
 
-		// Status description.
+		// Status description
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		StatusName *string `json:"StatusName,omitempty" name:"StatusName"`
 
-		// Domain names associated with the certificate (including the primary domain name).
+		// Domain names associated with the certificate (including the primary domain name)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName" list`
 
-		// Whether the customer is a VIP customer.
+		// Whether the customer is a VIP customer
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		IsVip *bool `json:"IsVip,omitempty" name:"IsVip"`
 
-		// Whether the certificate is a wildcard certificate.
+		// Whether the certificate is a wildcard certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		IsWildcard *bool `json:"IsWildcard,omitempty" name:"IsWildcard"`
 
-		// Whether the certificate is a DV certificate.
+		// Whether the certificate is a DV certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		IsDv *bool `json:"IsDv,omitempty" name:"IsDv"`
 
-		// Whether the vulnerability scanning feature is enabled.
+		// Whether the vulnerability scanning feature is enabled
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		IsVulnerability *bool `json:"IsVulnerability,omitempty" name:"IsVulnerability"`
 
-		// Submitted data.
+		// Submitted data
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		SubmittedData *SubmittedData `json:"SubmittedData,omitempty" name:"SubmittedData"`
 
-		// Whether the certificate can be reissued.
+		// Whether the certificate can be reissued
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		RenewAble *bool `json:"RenewAble,omitempty" name:"RenewAble"`
 
-		// Whether the certificate can be deployed.
+		// Whether the certificate can be deployed
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Deployable *bool `json:"Deployable,omitempty" name:"Deployable"`
 
@@ -549,13 +549,13 @@ type DescribeCertificateOperateLogsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Total number of logs that meet query conditions.
+		// Total number of logs that meet query conditions
 		AllTotal *uint64 `json:"AllTotal,omitempty" name:"AllTotal"`
 
-		// Number of logs returned for this request.
+		// Number of logs returned for this request
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// Certificate operation log list.
+		// Certificate operation log list
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		OperateLogs []*OperationLog `json:"OperateLogs,omitempty" name:"OperateLogs" list`
 
@@ -576,7 +576,7 @@ func (r *DescribeCertificateOperateLogsResponse) FromJsonString(s string) error 
 type DescribeCertificateRequest struct {
 	*tchttp.BaseRequest
 
-	// Certificate ID.
+	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
@@ -593,127 +593,127 @@ type DescribeCertificateResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// User UIN.
+		// User UIN
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
-		// Project ID.
+		// Project ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
 
-		// Certificate source. trustasia: TrustAsia; upload: certificate uploaded by users.
+		// Certificate source. `trustasia`: TrustAsia; `upload`: certificate uploaded by users
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		From *string `json:"From,omitempty" name:"From"`
 
-		// Certificate type. CA: client certificate; SVR: server certificate.
+		// Certificate type. `CA`: client certificate; `SVR`: server certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertificateType *string `json:"CertificateType,omitempty" name:"CertificateType"`
 
-		// Certificate package type. 1: GeoTrust DV SSL CA - G3; 2: TrustAsia TLS RSA CA; 3: Secure Site EV Pro; 4: Secure Site EV; 5: Secure Site OV Pro; 6: Secure Site OV; 7: Secure Site OV wildcard SSL certificate; 8: GeoTrust EV; 9: GeoTrust OV; 10: GeoTrust OV wildcard SSL certificate; 11: TrustAsia DV multi-domain SSL certificate; 12: TrustAsia DV wildcard SSL certificate; 13: TrustAsia OV wildcard SSL certificate (D3); 14: TrustAsia OV SSL certificate (D3); 15: TrustAsia OV multi-domain SSL certificate (D3); 16: TrustAsia EV SSL certificate (D3); 17: TrustAsia EV multi-domain SSL certificate (D3); 18: GlobalSign OV SSL certificate; 19: GlobalSign OV wildcard SSL certificate; 20: GlobalSign EV SSL certificate; 21: TrustAsia OV multi-domain wildcard SSL certificate (D3); 22: GlobalSign OV multi-domain SSL certificate; 23: GlobalSign OV multi-domain wildcard SSL certificate; 24: GlobalSign EV multi-domain SSL certificate.
+		// Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
 		// Name of the certificate issuer
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 		ProductZhName *string `json:"ProductZhName,omitempty" name:"ProductZhName"`
 
-		// Domain name.
+		// Domain name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-		// Alias.
+		// Alias
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Alias *string `json:"Alias,omitempty" name:"Alias"`
 
-		// Certificate status. 0: being reviewed; 1: approved; 2: not approved; 3: expired; 4: DNS record added; 5: OV certificate, to be submitted; 6: order being canceled; 7: cancelled; 8: information submitted, confirmation letter to be uploaded; 9: certificate being revoked; 10: revoked; 11: reissuing; 12: revocation confirmation letter to be uploaded.
+		// Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Status *uint64 `json:"Status,omitempty" name:"Status"`
 
-		// Status information.
+		// Status information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		StatusMsg *string `json:"StatusMsg,omitempty" name:"StatusMsg"`
 
-		// Verification type. DNS_AUTO: automatic DNS verification; DNS: manual DNS verification; FILE: verification by file; EMAIL: verification by email.
+		// Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation; `EMAIL`: email validation
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
 
-		// Vulnerability scanning status.
+		// Vulnerability scanning status
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		VulnerabilityStatus *string `json:"VulnerabilityStatus,omitempty" name:"VulnerabilityStatus"`
 
-		// Time when the certificate takes effect.
+		// Time when the certificate takes effect
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertBeginTime *string `json:"CertBeginTime,omitempty" name:"CertBeginTime"`
 
-		// Time when the certificate expires.
+		// Time when the certificate expires
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertEndTime *string `json:"CertEndTime,omitempty" name:"CertEndTime"`
 
-		// Validity period of the certificate (unit: month).
+		// Validity period of the certificate, in months
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ValidityPeriod *string `json:"ValidityPeriod,omitempty" name:"ValidityPeriod"`
 
-		// Application time.
+		// Application time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		InsertTime *string `json:"InsertTime,omitempty" name:"InsertTime"`
 
-		// Order ID.
+		// Order ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		OrderId *string `json:"OrderId,omitempty" name:"OrderId"`
 
-		// Extended information of the certificate.
+		// Extended information of the certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertificateExtra *CertificateExtra `json:"CertificateExtra,omitempty" name:"CertificateExtra"`
 
-		// DV authentication information.
+		// DV authentication information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		DvAuthDetail *DvAuthDetail `json:"DvAuthDetail,omitempty" name:"DvAuthDetail"`
 
-		// Vulnerability scanning assessment report.
+		// Vulnerability scanning assessment report
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		VulnerabilityReport *string `json:"VulnerabilityReport,omitempty" name:"VulnerabilityReport"`
 
-		// Certificate ID.
+		// Certificate ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
-		// Certificate type name.
+		// Certificate type name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		PackageTypeName *string `json:"PackageTypeName,omitempty" name:"PackageTypeName"`
 
-		// Status description.
+		// Status description
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		StatusName *string `json:"StatusName,omitempty" name:"StatusName"`
 
-		// Domain names associated with the certificate (including the primary domain name).
+		// Domain names associated with the certificate (including the primary domain name)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName" list`
 
-		// Whether the customer is a VIP customer.
+		// Whether the customer is a VIP customer
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		IsVip *bool `json:"IsVip,omitempty" name:"IsVip"`
 
-		// Whether the certificate is a wildcard certificate.
+		// Whether the certificate is a wildcard certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		IsWildcard *bool `json:"IsWildcard,omitempty" name:"IsWildcard"`
 
-		// Whether the certificate is a DV certificate.
+		// Whether the certificate is a DV certificate
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		IsDv *bool `json:"IsDv,omitempty" name:"IsDv"`
 
-		// Whether the vulnerability scanning feature is enabled.
+		// Whether the vulnerability scanning feature is enabled
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		IsVulnerability *bool `json:"IsVulnerability,omitempty" name:"IsVulnerability"`
 
-		// Whether the certificate can be reissued.
+		// Whether the certificate can be reissued
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		RenewAble *bool `json:"RenewAble,omitempty" name:"RenewAble"`
 
-		// Submitted data.
+		// Submitted data
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		SubmittedData *SubmittedData `json:"SubmittedData,omitempty" name:"SubmittedData"`
 
-		// Whether the certificate can be deployed.
+		// Whether the certificate can be deployed
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Deployable *bool `json:"Deployable,omitempty" name:"Deployable"`
 
@@ -738,28 +738,28 @@ func (r *DescribeCertificateResponse) FromJsonString(s string) error {
 type DescribeCertificatesRequest struct {
 	*tchttp.BaseRequest
 
-	// Pagination offset, starting from 0.
+	// Pagination offset, starting from 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of certificates on each page. The default value is 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Keyword for search, which can be a certificate ID, alias, or domain name. For example, a8xHcaIs.
+	// Keyword for search, which can be a certificate ID, alias, or domain name, for example, a8xHcaIs
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 
-	// Certificate type. CA: client certificate; SVR: server certificate.
+	// Certificate type. `CA`: client certificate; `SVR`: server certificate
 	CertificateType *string `json:"CertificateType,omitempty" name:"CertificateType"`
 
-	// Project ID.
+	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Sorting by expiration time. DESC: descending; ASC: ascending.
+	// Sorting by expiration time. `DESC`: descending; `ASC`: ascending
 	ExpirationSort *string `json:"ExpirationSort,omitempty" name:"ExpirationSort"`
 
-	// Certificate status.
+	// Certificate status
 	CertificateStatus []*uint64 `json:"CertificateStatus,omitempty" name:"CertificateStatus" list`
 
-	// Whether the certificate can be deployed. 1: yes; 0: no.
+	// Whether the certificate can be deployed. `1`: yes; `0`: no
 	Deployable *uint64 `json:"Deployable,omitempty" name:"Deployable"`
 }
 
@@ -776,11 +776,11 @@ type DescribeCertificatesResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Total number.
+		// Total number
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// List.
+		// List
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Certificates []*Certificates `json:"Certificates,omitempty" name:"Certificates" list`
 
@@ -801,7 +801,7 @@ func (r *DescribeCertificatesResponse) FromJsonString(s string) error {
 type DownloadCertificateRequest struct {
 	*tchttp.BaseRequest
 
-	// Certificate ID.
+	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
@@ -822,7 +822,7 @@ type DownloadCertificateResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		Content *string `json:"Content,omitempty" name:"Content"`
 
-		// MIME type. application/zip: ZIP file.
+		// MIME type. `application/zip`: ZIP file
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ContentType *string `json:"ContentType,omitempty" name:"ContentType"`
 
@@ -842,54 +842,54 @@ func (r *DownloadCertificateResponse) FromJsonString(s string) error {
 
 type DvAuthDetail struct {
 
-	// DV authentication key.
+	// DV authentication key
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthKey *string `json:"DvAuthKey,omitempty" name:"DvAuthKey"`
 
-	// DV authentication value.
+	// DV authentication value
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthValue *string `json:"DvAuthValue,omitempty" name:"DvAuthValue"`
 
-	// Domain name of the DV authentication value.
+	// Domain name of the DV authentication value
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthDomain *string `json:"DvAuthDomain,omitempty" name:"DvAuthDomain"`
 
-	// Path of the DV authentication value.
+	// Path of the DV authentication value
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthPath *string `json:"DvAuthPath,omitempty" name:"DvAuthPath"`
 
-	// DV authentication sub-domain name.
+	// DV authentication sub-domain name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthKeySubDomain *string `json:"DvAuthKeySubDomain,omitempty" name:"DvAuthKeySubDomain"`
 
-	// DV authentication information.
+	// DV authentication information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuths []*DvAuths `json:"DvAuths,omitempty" name:"DvAuths" list`
 }
 
 type DvAuths struct {
 
-	// DV authentication key.
+	// DV authentication key
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthKey *string `json:"DvAuthKey,omitempty" name:"DvAuthKey"`
 
-	// DV authentication value.
+	// DV authentication value
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthValue *string `json:"DvAuthValue,omitempty" name:"DvAuthValue"`
 
-	// Domain name of the DV authentication value.
+	// Domain name of the DV authentication value
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthDomain *string `json:"DvAuthDomain,omitempty" name:"DvAuthDomain"`
 
-	// Path of the DV authentication value.
+	// Path of the DV authentication value
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthPath *string `json:"DvAuthPath,omitempty" name:"DvAuthPath"`
 
-	// DV authentication sub-domain name.
+	// DV authentication sub-domain name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthSubDomain *string `json:"DvAuthSubDomain,omitempty" name:"DvAuthSubDomain"`
 
-	// DV authentication type.
+	// DV authentication type
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthVerifyType *string `json:"DvAuthVerifyType,omitempty" name:"DvAuthVerifyType"`
 }
@@ -897,10 +897,10 @@ type DvAuths struct {
 type ModifyCertificateAliasRequest struct {
 	*tchttp.BaseRequest
 
-	// Certificate ID.
+	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
-	// Alias.
+	// Alias
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 }
 
@@ -917,7 +917,7 @@ type ModifyCertificateAliasResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// ID of the successfully modified certificate.
+		// ID of the successfully modified certificate
 		CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -937,10 +937,10 @@ func (r *ModifyCertificateAliasResponse) FromJsonString(s string) error {
 type ModifyCertificateProjectRequest struct {
 	*tchttp.BaseRequest
 
-	// ID list of certificates whose projects need to be modified. A maximum 100 certificate IDs are supported.
+	// ID list of certificates whose projects need to be modified. A maximum of 100 certificate IDs are supported.
 	CertificateIdList []*string `json:"CertificateIdList,omitempty" name:"CertificateIdList" list`
 
-	// Project ID.
+	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
@@ -957,11 +957,11 @@ type ModifyCertificateProjectResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// List of certificates whose projects were modified successfully.
+		// List of certificates whose projects were modified successfully
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		SuccessCertificates []*string `json:"SuccessCertificates,omitempty" name:"SuccessCertificates" list`
 
-		// List of certificates whose projects failed to be modified.
+		// List of certificates whose projects failed to be modified
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		FailCertificates []*string `json:"FailCertificates,omitempty" name:"FailCertificates" list`
 
@@ -981,36 +981,36 @@ func (r *ModifyCertificateProjectResponse) FromJsonString(s string) error {
 
 type OperationLog struct {
 
-	// Action performed on logs.
+	// Action performed on logs
 	Action *string `json:"Action,omitempty" name:"Action"`
 
-	// Time when the action is performed.
+	// Time when the action is performed
 	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
 }
 
 type ProjectInfo struct {
 
-	// Project name.
+	// Project name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
 
-	// UIN of the project creator.
+	// UIN of the project creator
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProjectCreatorUin *uint64 `json:"ProjectCreatorUin,omitempty" name:"ProjectCreatorUin"`
 
-	// Project creation time.
+	// Project creation time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProjectCreateTime *string `json:"ProjectCreateTime,omitempty" name:"ProjectCreateTime"`
 
-	// Brief project information.
+	// Brief project information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProjectResume *string `json:"ProjectResume,omitempty" name:"ProjectResume"`
 
-	// User UIN.
+	// User UIN
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OwnerUin *uint64 `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
-	// Project ID.
+	// Project ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
 }
@@ -1018,19 +1018,19 @@ type ProjectInfo struct {
 type ReplaceCertificateRequest struct {
 	*tchttp.BaseRequest
 
-	// Certificate ID.
+	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
-	// Validation type. `DNS_AUTO`: automatic DNS validation (only available for domains hosted in Tencent Cloud and when the DNS status is OK); `DNS`: manual DNS validation; `FILE`: file validation.
+	// Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation
 	ValidType *string `json:"ValidType,omitempty" name:"ValidType"`
 
-	// Type. Original: original certificate CSR; upload: uploaded manually; online: generated online. The default value is original.
+	// Type. `original`: original certificate CSR; `upload`: uploaded manually; `online`: generated online. The default value is original.
 	CsrType *string `json:"CsrType,omitempty" name:"CsrType"`
 
-	// CSR content.
+	// CSR content
 	CsrContent *string `json:"CsrContent,omitempty" name:"CsrContent"`
 
-	// Password of the key.
+	// Password of the key
 	CsrkeyPassword *string `json:"CsrkeyPassword,omitempty" name:"CsrkeyPassword"`
 
 	// Reissue reason
@@ -1050,7 +1050,7 @@ type ReplaceCertificateResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Certificate ID.
+		// Certificate ID
 		CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1070,82 +1070,82 @@ func (r *ReplaceCertificateResponse) FromJsonString(s string) error {
 type SubmitCertificateInformationRequest struct {
 	*tchttp.BaseRequest
 
-	// Certificate ID.
+	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
-	// CSR generation mode. Online: generated online; parse: uploaded manually.
+	// CSR generation mode. `online`: generated online; `parse`: uploaded manually
 	CsrType *string `json:"CsrType,omitempty" name:"CsrType"`
 
-	// Uploaded CSR content.
+	// Uploaded CSR content
 	CsrContent *string `json:"CsrContent,omitempty" name:"CsrContent"`
 
-	// Domain name bound with the certificate.
+	// Domain name bound with the certificate
 	CertificateDomain *string `json:"CertificateDomain,omitempty" name:"CertificateDomain"`
 
-	// Uploaded domain name array (can be uploaded for a multi-domain certificate).
+	// Uploaded domain name array (can be uploaded for a multi-domain certificate)
 	DomainList []*string `json:"DomainList,omitempty" name:"DomainList" list`
 
-	// Private key password (optional)
+	// Password of the private key
 	KeyPassword *string `json:"KeyPassword,omitempty" name:"KeyPassword"`
 
-	// Organization name.
+	// Organization name
 	OrganizationName *string `json:"OrganizationName,omitempty" name:"OrganizationName"`
 
-	// Division name.
+	// Division name
 	OrganizationDivision *string `json:"OrganizationDivision,omitempty" name:"OrganizationDivision"`
 
-	// Detailed address of the organization.
+	// Detailed address of the organization
 	OrganizationAddress *string `json:"OrganizationAddress,omitempty" name:"OrganizationAddress"`
 
-	// Country where the organization is located. For example, CN (China).
+	// Country where the organization is located, for example, CN (China)
 	OrganizationCountry *string `json:"OrganizationCountry,omitempty" name:"OrganizationCountry"`
 
-	// City where the organization is located.
+	// City where the organization is located
 	OrganizationCity *string `json:"OrganizationCity,omitempty" name:"OrganizationCity"`
 
-	// Province where the organization is located.
+	// Province where the organization is located
 	OrganizationRegion *string `json:"OrganizationRegion,omitempty" name:"OrganizationRegion"`
 
-	// Postal code of the organization.
+	// Postal code of the organization
 	PostalCode *string `json:"PostalCode,omitempty" name:"PostalCode"`
 
-	// Area code of the fixed-line phone number of the organization.
+	// Area code of the fixed-line phone number of the organization
 	PhoneAreaCode *string `json:"PhoneAreaCode,omitempty" name:"PhoneAreaCode"`
 
-	// Fixed-line phone number of the organization.
+	// Fixed-line phone number of the organization
 	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
 
-	// Validation type. `DNS_AUTO`: automatic DNS validation (only available for domains hosted in Tencent Cloud and when the DNS status is OK); `DNS`: manual DNS validation; `FILE`: file validation.
+	// Certificate validation method
 	VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
 
-	// First name of the administrator
+	// Last name of the administrator
 	AdminFirstName *string `json:"AdminFirstName,omitempty" name:"AdminFirstName"`
 
-	// Last name of the administrator
+	// First name of the administrator
 	AdminLastName *string `json:"AdminLastName,omitempty" name:"AdminLastName"`
 
-	// Mobile number of the admin.
+	// Mobile number of the administrator
 	AdminPhoneNum *string `json:"AdminPhoneNum,omitempty" name:"AdminPhoneNum"`
 
-	// Email of the admin.
+	// Email of the administrator
 	AdminEmail *string `json:"AdminEmail,omitempty" name:"AdminEmail"`
 
-	// Position of the admin.
+	// Position of the administrator
 	AdminPosition *string `json:"AdminPosition,omitempty" name:"AdminPosition"`
 
-	// First name of the contact
+	// Last name of the contact
 	ContactFirstName *string `json:"ContactFirstName,omitempty" name:"ContactFirstName"`
 
-	// Last name of the contact
+	// First name of the contact
 	ContactLastName *string `json:"ContactLastName,omitempty" name:"ContactLastName"`
 
-	// Email of the contact.
+	// Email of the contact
 	ContactEmail *string `json:"ContactEmail,omitempty" name:"ContactEmail"`
 
-	// Mobile number of the contact.
+	// Mobile number of the contact
 	ContactNumber *string `json:"ContactNumber,omitempty" name:"ContactNumber"`
 
-	// Position of the contact.
+	// Position of the contact
 	ContactPosition *string `json:"ContactPosition,omitempty" name:"ContactPosition"`
 }
 
@@ -1162,7 +1162,7 @@ type SubmitCertificateInformationResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Certificate ID.
+		// Certificate ID
 		CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1181,103 +1181,103 @@ func (r *SubmitCertificateInformationResponse) FromJsonString(s string) error {
 
 type SubmittedData struct {
 
-	// CSR type. Online: CSR generated online; parse: CSR pasted.
+	// CSR type. `online`: CSR generated online; `parse`: CSR pasted
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CsrType *string `json:"CsrType,omitempty" name:"CsrType"`
 
-	// CSR content.
+	// CSR content
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CsrContent *string `json:"CsrContent,omitempty" name:"CsrContent"`
 
-	// Domain name information.
+	// Domain name information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CertificateDomain *string `json:"CertificateDomain,omitempty" name:"CertificateDomain"`
 
-	// DNS information.
+	// DNS information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DomainList []*string `json:"DomainList,omitempty" name:"DomainList" list`
 
-	// Password of the private key.
+	// Password of the private key
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	KeyPassword *string `json:"KeyPassword,omitempty" name:"KeyPassword"`
 
-	// Enterprise or unit name.
+	// Enterprise or unit name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OrganizationName *string `json:"OrganizationName,omitempty" name:"OrganizationName"`
 
-	// Division.
+	// Division
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OrganizationDivision *string `json:"OrganizationDivision,omitempty" name:"OrganizationDivision"`
 
-	// Address.
+	// Address
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OrganizationAddress *string `json:"OrganizationAddress,omitempty" name:"OrganizationAddress"`
 
-	// Country.
+	// Country
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OrganizationCountry *string `json:"OrganizationCountry,omitempty" name:"OrganizationCountry"`
 
-	// City.
+	// City
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OrganizationCity *string `json:"OrganizationCity,omitempty" name:"OrganizationCity"`
 
-	// Province.
+	// Province
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OrganizationRegion *string `json:"OrganizationRegion,omitempty" name:"OrganizationRegion"`
 
-	// Postal code.
+	// Postal code
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PostalCode *string `json:"PostalCode,omitempty" name:"PostalCode"`
 
-	// Area code of the fixed-line phone number.
+	// Area code of the fixed-line phone number
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PhoneAreaCode *string `json:"PhoneAreaCode,omitempty" name:"PhoneAreaCode"`
 
-	// Fixed-line phone number.
+	// Fixed-line phone number
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
 
-	// First name of the admin.
+	// First name of the administrator
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AdminFirstName *string `json:"AdminFirstName,omitempty" name:"AdminFirstName"`
 
-	// Last name of the admin.
+	// Last name of the administrator
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AdminLastName *string `json:"AdminLastName,omitempty" name:"AdminLastName"`
 
-	// Phone number of the admin.
+	// Phone number of the administrator
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AdminPhoneNum *string `json:"AdminPhoneNum,omitempty" name:"AdminPhoneNum"`
 
-	// Email of the admin.
+	// Email of the administrator
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AdminEmail *string `json:"AdminEmail,omitempty" name:"AdminEmail"`
 
-	// Position of the admin.
+	// Position of the administrator
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AdminPosition *string `json:"AdminPosition,omitempty" name:"AdminPosition"`
 
-	// First name of the contact.
+	// First name of the contact
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ContactFirstName *string `json:"ContactFirstName,omitempty" name:"ContactFirstName"`
 
-	// Last name of the contact.
+	// Last name of the contact
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ContactLastName *string `json:"ContactLastName,omitempty" name:"ContactLastName"`
 
-	// Phone number of the contact.
+	// Phone number of the contact
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ContactNumber *string `json:"ContactNumber,omitempty" name:"ContactNumber"`
 
-	// Email of the contact.
+	// Email of the contact
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ContactEmail *string `json:"ContactEmail,omitempty" name:"ContactEmail"`
 
-	// Position of the contact.
+	// Position of the contact
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ContactPosition *string `json:"ContactPosition,omitempty" name:"ContactPosition"`
 
-	// Verification type.
+	// Validation type
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
 }
@@ -1294,19 +1294,19 @@ type Tags struct {
 type UploadCertificateRequest struct {
 	*tchttp.BaseRequest
 
-	// Certificate content
+	// Public key of the certificate
 	CertificatePublicKey *string `json:"CertificatePublicKey,omitempty" name:"CertificatePublicKey"`
 
 	// Private key content. This parameter is required when the certificate type is SVR, and not required when the certificate type is CA.
 	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitempty" name:"CertificatePrivateKey"`
 
-	// Certificate type. CA: client certificate; SVR: server certificate. The default value is SVR.
+	// Certificate type. `CA`: client certificate; `SVR`: server certificate. The default value is SVR.
 	CertificateType *string `json:"CertificateType,omitempty" name:"CertificateType"`
 
-	// Alias.
+	// Alias
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
-	// Project ID.
+	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// 
@@ -1326,7 +1326,7 @@ type UploadCertificateResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Certificate ID.
+		// Certificate ID
 		CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

@@ -158,7 +158,7 @@ func NewDescribeCertificateResponse() (response *DescribeCertificateResponse) {
     return
 }
 
-// This API is used to obtain certificate information.
+// This API is used to get certificate information.
 func (c *Client) DescribeCertificate(request *DescribeCertificateRequest) (response *DescribeCertificateResponse, err error) {
     if request == nil {
         request = NewDescribeCertificateRequest()
@@ -183,7 +183,7 @@ func NewDescribeCertificateDetailResponse() (response *DescribeCertificateDetail
     return
 }
 
-// This API is used to obtain certificate details.
+// This API is used to get certificate details.
 func (c *Client) DescribeCertificateDetail(request *DescribeCertificateDetailRequest) (response *DescribeCertificateDetailResponse, err error) {
     if request == nil {
         request = NewDescribeCertificateDetailRequest()
@@ -208,7 +208,7 @@ func NewDescribeCertificateOperateLogsResponse() (response *DescribeCertificateO
     return
 }
 
-// This API is used to obtain certificate operation logs in the current account.
+// This API is used to get certificate operation logs in the current account.
 func (c *Client) DescribeCertificateOperateLogs(request *DescribeCertificateOperateLogsRequest) (response *DescribeCertificateOperateLogsResponse, err error) {
     if request == nil {
         request = NewDescribeCertificateOperateLogsRequest()
@@ -233,7 +233,7 @@ func NewDescribeCertificatesResponse() (response *DescribeCertificatesResponse) 
     return
 }
 
-// This API is used to obtain the certificate list.
+// This API is used to get the certificate list.
 func (c *Client) DescribeCertificates(request *DescribeCertificatesRequest) (response *DescribeCertificatesResponse, err error) {
     if request == nil {
         request = NewDescribeCertificatesRequest()
@@ -283,7 +283,7 @@ func NewModifyCertificateAliasResponse() (response *ModifyCertificateAliasRespon
     return
 }
 
-// This API is used to modify certificate alias by inputting the certificate ID and new alias.
+// This API is used to modify a certificate alias by passing in the certificate ID and new alias.
 func (c *Client) ModifyCertificateAlias(request *ModifyCertificateAliasRequest) (response *ModifyCertificateAliasResponse, err error) {
     if request == nil {
         request = NewModifyCertificateAliasRequest()
@@ -358,7 +358,7 @@ func NewSubmitCertificateInformationResponse() (response *SubmitCertificateInfor
     return
 }
 
-// This API is used to submit certificate information. You can call this API to submit the information of a certificate for several times. However, please make sure the submitted information is complete.
+// This API is used to submit certificate information.
 func (c *Client) SubmitCertificateInformation(request *SubmitCertificateInformationRequest) (response *SubmitCertificateInformationResponse, err error) {
     if request == nil {
         request = NewSubmitCertificateInformationRequest()
