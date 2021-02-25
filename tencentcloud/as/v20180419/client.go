@@ -782,7 +782,9 @@ func NewDetachInstancesResponse() (response *DetachInstancesResponse) {
     return
 }
 
-// This API (DetachInstances) is used to remove CVM instances from an auto scaling group. Instances removed via this API will not be terminated.
+// This API is used to remove CVM instances from a scaling group. Instances removed via this API will not be terminated.
+// * If the number of remaining `IN_SERVICE` instances in the scaling group is less than the minimum capacity, an error will be reported.
+// * However, if the scaling group is in `DISABLED` status, the removal will not verify the relationship between the number of `IN_SERVICE` instances and the minimum capacity.
 func (c *Client) DetachInstances(request *DetachInstancesRequest) (response *DetachInstancesResponse, err error) {
     if request == nil {
         request = NewDetachInstancesRequest()
@@ -1092,7 +1094,9 @@ func NewRemoveInstancesResponse() (response *RemoveInstancesResponse) {
     return
 }
 
-// This API (RemoveInstances) is used to remove CVM instances from an auto scaling group. Instances created automatically by AS will be terminated, while those added to the auto scaling group after creation will be removed and retained.
+// This API is used to remove CVM instances from a scaling group. Instances that are automatically created through AS will be terminated, while those manually added to the scaling group will be removed and retained.
+// * If the number of remaining `IN_SERVICE` instances in the scaling group is less than the minimum capacity, an error will be reported.
+// * However, if the scaling group is in `DISABLED` status, the removal will not verify the relationship between the number of `IN_SERVICE` instances and the minimum capacity.
 func (c *Client) RemoveInstances(request *RemoveInstancesRequest) (response *RemoveInstancesResponse, err error) {
     if request == nil {
         request = NewRemoveInstancesRequest()
