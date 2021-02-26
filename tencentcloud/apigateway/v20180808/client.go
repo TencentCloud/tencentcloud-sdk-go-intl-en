@@ -467,7 +467,7 @@ func NewDescribeApiResponse() (response *DescribeApiResponse) {
     return
 }
 
-// This API is used to query the details of an API deployed in API Gateway.
+// This API (`DescribeApi`) is used to query the details of the APIs users manage via Tencent Cloud API Gateway.
 func (c *Client) DescribeApi(request *DescribeApiRequest) (response *DescribeApiResponse, err error) {
     if request == nil {
         request = NewDescribeApiRequest()
