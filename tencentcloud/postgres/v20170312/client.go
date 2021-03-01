@@ -68,6 +68,31 @@ func (c *Client) CloseDBExtranetAccess(request *CloseDBExtranetAccessRequest) (r
     return
 }
 
+func NewCloseServerlessDBExtranetAccessRequest() (request *CloseServerlessDBExtranetAccessRequest) {
+    request = &CloseServerlessDBExtranetAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "CloseServerlessDBExtranetAccess")
+    return
+}
+
+func NewCloseServerlessDBExtranetAccessResponse() (response *CloseServerlessDBExtranetAccessResponse) {
+    response = &CloseServerlessDBExtranetAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to disable public network access for a PostgreSQL for Serverless instance.
+func (c *Client) CloseServerlessDBExtranetAccess(request *CloseServerlessDBExtranetAccessRequest) (response *CloseServerlessDBExtranetAccessResponse, err error) {
+    if request == nil {
+        request = NewCloseServerlessDBExtranetAccessRequest()
+    }
+    response = NewCloseServerlessDBExtranetAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBInstancesRequest() (request *CreateDBInstancesRequest) {
     request = &CreateDBInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -689,6 +714,31 @@ func (c *Client) OpenDBExtranetAccess(request *OpenDBExtranetAccessRequest) (res
         request = NewOpenDBExtranetAccessRequest()
     }
     response = NewOpenDBExtranetAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOpenServerlessDBExtranetAccessRequest() (request *OpenServerlessDBExtranetAccessRequest) {
+    request = &OpenServerlessDBExtranetAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "OpenServerlessDBExtranetAccess")
+    return
+}
+
+func NewOpenServerlessDBExtranetAccessResponse() (response *OpenServerlessDBExtranetAccessResponse) {
+    response = &OpenServerlessDBExtranetAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to enable public network access for a PostgreSQL for Serverless instance.
+func (c *Client) OpenServerlessDBExtranetAccess(request *OpenServerlessDBExtranetAccessRequest) (response *OpenServerlessDBExtranetAccessResponse, err error) {
+    if request == nil {
+        request = NewOpenServerlessDBExtranetAccessRequest()
+    }
+    response = NewOpenServerlessDBExtranetAccessResponse()
     err = c.Send(request, response)
     return
 }

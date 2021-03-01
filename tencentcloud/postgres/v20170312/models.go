@@ -81,6 +81,43 @@ func (r *CloseDBExtranetAccessResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CloseServerlessDBExtranetAccessRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of an instance
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance name
+	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
+}
+
+func (r *CloseServerlessDBExtranetAccessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CloseServerlessDBExtranetAccessRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CloseServerlessDBExtranetAccessResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CloseServerlessDBExtranetAccessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CloseServerlessDBExtranetAccessResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1485,6 +1522,43 @@ func (r *OpenDBExtranetAccessResponse) ToJsonString() string {
 }
 
 func (r *OpenDBExtranetAccessResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type OpenServerlessDBExtranetAccessRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of an instance
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance name
+	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
+}
+
+func (r *OpenServerlessDBExtranetAccessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *OpenServerlessDBExtranetAccessRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type OpenServerlessDBExtranetAccessResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *OpenServerlessDBExtranetAccessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *OpenServerlessDBExtranetAccessResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
