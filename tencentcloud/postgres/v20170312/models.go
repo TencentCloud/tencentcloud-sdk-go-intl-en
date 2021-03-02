@@ -41,6 +41,46 @@ type AccountInfo struct {
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
+type AddDBInstanceToReadOnlyGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
+func (r *AddDBInstanceToReadOnlyGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AddDBInstanceToReadOnlyGroupRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AddDBInstanceToReadOnlyGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AddDBInstanceToReadOnlyGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AddDBInstanceToReadOnlyGroupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CloseDBExtranetAccessRequest struct {
 	*tchttp.BaseRequest
 
@@ -206,6 +246,171 @@ func (r *CreateDBInstancesResponse) ToJsonString() string {
 }
 
 func (r *CreateDBInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateReadOnlyDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
+
+	// PostgreSQL kernel version, which must be the same as that of the primary instance
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Instance storage capacity in GB
+	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Number of instances purchased at a time. Value range: 1–100.
+	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// ID of the primary instance to which the read-only replica belongs
+	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitempty" name:"MasterDBInstanceId"`
+
+	// Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list. Currently, you can specify only one voucher.
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
+
+	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Special offer ID
+	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Instance name (which will be supported in the future)
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no).
+	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitempty" name:"NeedSupportIpv6"`
+
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// The information of tags to be associated with instances. This parameter is left empty by default.
+	TagList *Tag `json:"TagList,omitempty" name:"TagList"`
+}
+
+func (r *CreateReadOnlyDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateReadOnlyDBInstanceRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateReadOnlyDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Order number list. Each instance corresponds to an order number.
+		DealNames []*string `json:"DealNames,omitempty" name:"DealNames" list`
+
+		// Bill ID of frozen fees
+		BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+		// ID set of instances which have been created successfully. The parameter value will be returned only when the pay-as-you-go billing mode is used.
+		DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateReadOnlyDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateReadOnlyDBInstanceResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateReadOnlyGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// Primary instance ID
+	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitempty" name:"MasterDBInstanceId"`
+
+	// RO group name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: `0` (no), `1` (yes).
+	ReplayLagEliminate *uint64 `json:"ReplayLagEliminate,omitempty" name:"ReplayLagEliminate"`
+
+	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: `0` (no), `1` (yes).
+	ReplayLatencyEliminate *uint64 `json:"ReplayLatencyEliminate,omitempty" name:"ReplayLatencyEliminate"`
+
+	// Delay threshold in ms
+	MaxReplayLag *uint64 `json:"MaxReplayLag,omitempty" name:"MaxReplayLag"`
+
+	// Delayed log size threshold in MB
+	MaxReplayLatency *uint64 `json:"MaxReplayLatency,omitempty" name:"MaxReplayLatency"`
+
+	// The minimum number of read-only replicas that must be retained in an RO group
+	MinDelayEliminateReserve *uint64 `json:"MinDelayEliminateReserve,omitempty" name:"MinDelayEliminateReserve"`
+}
+
+func (r *CreateReadOnlyGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateReadOnlyGroupRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateReadOnlyGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// RO group ID
+		ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+		// Task ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateReadOnlyGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateReadOnlyGroupResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -419,6 +624,44 @@ type DBInstanceNetInfo struct {
 
 	// Network connection status
 	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
+type DeleteReadOnlyGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the RO group to be deleted
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
+func (r *DeleteReadOnlyGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteReadOnlyGroupRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteReadOnlyGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteReadOnlyGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteReadOnlyGroupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type DeleteServerlessDBInstanceRequest struct {
@@ -669,7 +912,7 @@ type DescribeDBInstancesRequest struct {
 	// Number of entries returned per page. Default value: 10.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page number, starting from 0.
+	// Data offset which starts from 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
@@ -936,6 +1179,55 @@ func (r *DescribeProductConfigResponse) ToJsonString() string {
 }
 
 func (r *DescribeProductConfigResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReadOnlyGroupsRequest struct {
+	*tchttp.BaseRequest
+
+	// Filter condition. The primary ID must be specified in the format of `db-master-instance-id` to filter results, or else `null` will be returned.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// The number of results per page. Default value: 10.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Specify which page is displayed. Default value: 1 (the first page).
+	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// Sorting criterion. Valid values: `ROGroupId`, `CreateTime`, `Name`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `desc`, `asc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeReadOnlyGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeReadOnlyGroupsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReadOnlyGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// RO group list
+		ReadOnlyGroupList []*ReadOnlyGroup `json:"ReadOnlyGroupList,omitempty" name:"ReadOnlyGroupList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeReadOnlyGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeReadOnlyGroupsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1397,6 +1689,49 @@ func (r *ModifyDBInstanceNameResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyDBInstanceReadOnlyGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// ID of the RO group to which the read-only replica belongs
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// ID of the new RO group into which the read-only replica will move
+	NewReadOnlyGroupId *string `json:"NewReadOnlyGroupId,omitempty" name:"NewReadOnlyGroupId"`
+}
+
+func (r *ModifyDBInstanceReadOnlyGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyDBInstanceReadOnlyGroupRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDBInstanceReadOnlyGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDBInstanceReadOnlyGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyDBInstanceReadOnlyGroupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyDBInstancesProjectRequest struct {
 	*tchttp.BaseRequest
 
@@ -1434,6 +1769,61 @@ func (r *ModifyDBInstancesProjectResponse) ToJsonString() string {
 }
 
 func (r *ModifyDBInstancesProjectResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyReadOnlyGroupConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// RO group name
+	ReadOnlyGroupName *string `json:"ReadOnlyGroupName,omitempty" name:"ReadOnlyGroupName"`
+
+	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: `0` (no), `1` (yes).
+	ReplayLagEliminate *uint64 `json:"ReplayLagEliminate,omitempty" name:"ReplayLagEliminate"`
+
+	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: `0` (no), `1` (yes).
+	ReplayLatencyEliminate *uint64 `json:"ReplayLatencyEliminate,omitempty" name:"ReplayLatencyEliminate"`
+
+	// Delayed log size threshold in MB
+	MaxReplayLatency *uint64 `json:"MaxReplayLatency,omitempty" name:"MaxReplayLatency"`
+
+	// Delay threshold in ms
+	MaxReplayLag *uint64 `json:"MaxReplayLag,omitempty" name:"MaxReplayLag"`
+
+	// Whether to enable automatic load balancing. Valid values: `0` (disable), `1` (enable).
+	Rebalance *uint64 `json:"Rebalance,omitempty" name:"Rebalance"`
+
+	// The minimum number of read-only replicas that must be retained in an RO group
+	MinDelayEliminateReserve *uint64 `json:"MinDelayEliminateReserve,omitempty" name:"MinDelayEliminateReserve"`
+}
+
+func (r *ModifyReadOnlyGroupConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyReadOnlyGroupConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyReadOnlyGroupConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyReadOnlyGroupConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyReadOnlyGroupConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1583,6 +1973,100 @@ type PgDeal struct {
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet" list`
 }
 
+type ReadOnlyGroup struct {
+
+	// RO group identifier
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// RO group name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ReadOnlyGroupName *string `json:"ReadOnlyGroupName,omitempty" name:"ReadOnlyGroupName"`
+
+	// Project ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Primary instance ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitempty" name:"MasterDBInstanceId"`
+
+	// The minimum number of read-only replicas that must be retained in an RO group
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MinDelayEliminateReserve *int64 `json:"MinDelayEliminateReserve,omitempty" name:"MinDelayEliminateReserve"`
+
+	// Delayed log size threshold
+	MaxReplayLatency *int64 `json:"MaxReplayLatency,omitempty" name:"MaxReplayLatency"`
+
+	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: `0` (no), `1` (yes).
+	ReplayLatencyEliminate *int64 `json:"ReplayLatencyEliminate,omitempty" name:"ReplayLatencyEliminate"`
+
+	// Delay threshold
+	MaxReplayLag *float64 `json:"MaxReplayLag,omitempty" name:"MaxReplayLag"`
+
+	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: `0` (no), `1` (yes).
+	ReplayLagEliminate *int64 `json:"ReplayLagEliminate,omitempty" name:"ReplayLagEliminate"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Region ID
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Availability zone ID
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Instance details
+	ReadOnlyDBInstanceList []*DBInstance `json:"ReadOnlyDBInstanceList,omitempty" name:"ReadOnlyDBInstanceList" list`
+
+	// Whether to enable automatic load balancing
+	Rebalance *int64 `json:"Rebalance,omitempty" name:"Rebalance"`
+
+	// Network information
+	DBInstanceNetInfo []*DBInstanceNetInfo `json:"DBInstanceNetInfo,omitempty" name:"DBInstanceNetInfo" list`
+}
+
+type RebalanceReadOnlyGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
+func (r *RebalanceReadOnlyGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RebalanceReadOnlyGroupRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RebalanceReadOnlyGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RebalanceReadOnlyGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RebalanceReadOnlyGroupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type RegionInfo struct {
 
 	// Region abbreviation
@@ -1596,6 +2080,50 @@ type RegionInfo struct {
 
 	// Availability status. UNAVAILABLE: unavailable, AVAILABLE: available
 	RegionState *string `json:"RegionState,omitempty" name:"RegionState"`
+
+	// Whether the resource can be purchased in this region. Valid values: `0` (no), `1` (yes).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SupportInternational *uint64 `json:"SupportInternational,omitempty" name:"SupportInternational"`
+}
+
+type RemoveDBInstanceFromReadOnlyGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
+func (r *RemoveDBInstanceFromReadOnlyGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RemoveDBInstanceFromReadOnlyGroupRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type RemoveDBInstanceFromReadOnlyGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RemoveDBInstanceFromReadOnlyGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *RemoveDBInstanceFromReadOnlyGroupResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type RenewInstanceRequest struct {

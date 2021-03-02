@@ -340,7 +340,7 @@ type CreateInstancesResponse struct {
 		// Transaction ID
 		DealId *string `json:"DealId,omitempty" name:"DealId"`
 
-		// Instance ID (this field is during beta test and is not displayed in some regions)
+		// Instance ID
 		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2546,6 +2546,22 @@ type InstanceSet struct {
 	// Monitoring granularity type. Valid values: 1m (monitoring at 1-minute granularity), 5s (monitoring at 5-second granularity)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MonitorVersion *string `json:"MonitorVersion,omitempty" name:"MonitorVersion"`
+
+	// The minimum value of the range of maximum connections to the client
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClientLimitMin *int64 `json:"ClientLimitMin,omitempty" name:"ClientLimitMin"`
+
+	// The maximum value of the range of maximum connections to the client
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClientLimitMax *int64 `json:"ClientLimitMax,omitempty" name:"ClientLimitMax"`
+
+	// Instance node details
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet" list`
+
+	// Region where the instance is deployed
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
 }
 
 type InstanceSlowlogDetail struct {

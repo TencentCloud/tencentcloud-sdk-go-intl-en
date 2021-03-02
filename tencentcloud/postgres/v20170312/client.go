@@ -43,6 +43,31 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewAddDBInstanceToReadOnlyGroupRequest() (request *AddDBInstanceToReadOnlyGroupRequest) {
+    request = &AddDBInstanceToReadOnlyGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "AddDBInstanceToReadOnlyGroup")
+    return
+}
+
+func NewAddDBInstanceToReadOnlyGroupResponse() (response *AddDBInstanceToReadOnlyGroupResponse) {
+    response = &AddDBInstanceToReadOnlyGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to add a read-only replica to an RO group.
+func (c *Client) AddDBInstanceToReadOnlyGroup(request *AddDBInstanceToReadOnlyGroupRequest) (response *AddDBInstanceToReadOnlyGroupResponse, err error) {
+    if request == nil {
+        request = NewAddDBInstanceToReadOnlyGroupRequest()
+    }
+    response = NewAddDBInstanceToReadOnlyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCloseDBExtranetAccessRequest() (request *CloseDBExtranetAccessRequest) {
     request = &CloseDBExtranetAccessRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -118,6 +143,56 @@ func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response 
     return
 }
 
+func NewCreateReadOnlyDBInstanceRequest() (request *CreateReadOnlyDBInstanceRequest) {
+    request = &CreateReadOnlyDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateReadOnlyDBInstance")
+    return
+}
+
+func NewCreateReadOnlyDBInstanceResponse() (response *CreateReadOnlyDBInstanceResponse) {
+    response = &CreateReadOnlyDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create read-only replicas.
+func (c *Client) CreateReadOnlyDBInstance(request *CreateReadOnlyDBInstanceRequest) (response *CreateReadOnlyDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateReadOnlyDBInstanceRequest()
+    }
+    response = NewCreateReadOnlyDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateReadOnlyGroupRequest() (request *CreateReadOnlyGroupRequest) {
+    request = &CreateReadOnlyGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateReadOnlyGroup")
+    return
+}
+
+func NewCreateReadOnlyGroupResponse() (response *CreateReadOnlyGroupResponse) {
+    response = &CreateReadOnlyGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create an RO group.
+func (c *Client) CreateReadOnlyGroup(request *CreateReadOnlyGroupRequest) (response *CreateReadOnlyGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateReadOnlyGroupRequest()
+    }
+    response = NewCreateReadOnlyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateServerlessDBInstanceRequest() (request *CreateServerlessDBInstanceRequest) {
     request = &CreateServerlessDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -139,6 +214,31 @@ func (c *Client) CreateServerlessDBInstance(request *CreateServerlessDBInstanceR
         request = NewCreateServerlessDBInstanceRequest()
     }
     response = NewCreateServerlessDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteReadOnlyGroupRequest() (request *DeleteReadOnlyGroupRequest) {
+    request = &DeleteReadOnlyGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DeleteReadOnlyGroup")
+    return
+}
+
+func NewDeleteReadOnlyGroupResponse() (response *DeleteReadOnlyGroupResponse) {
+    response = &DeleteReadOnlyGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete an RO group.
+func (c *Client) DeleteReadOnlyGroup(request *DeleteReadOnlyGroupRequest) (response *DeleteReadOnlyGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteReadOnlyGroupRequest()
+    }
+    response = NewDeleteReadOnlyGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -418,6 +518,31 @@ func (c *Client) DescribeProductConfig(request *DescribeProductConfigRequest) (r
     return
 }
 
+func NewDescribeReadOnlyGroupsRequest() (request *DescribeReadOnlyGroupsRequest) {
+    request = &DescribeReadOnlyGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeReadOnlyGroups")
+    return
+}
+
+func NewDescribeReadOnlyGroupsResponse() (response *DescribeReadOnlyGroupsResponse) {
+    response = &DescribeReadOnlyGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query RO group information by specifying the primary instance IDs.
+func (c *Client) DescribeReadOnlyGroups(request *DescribeReadOnlyGroupsRequest) (response *DescribeReadOnlyGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeReadOnlyGroupsRequest()
+    }
+    response = NewDescribeReadOnlyGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
     request = &DescribeRegionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -508,7 +633,7 @@ func NewDestroyDBInstanceResponse() (response *DestroyDBInstanceResponse) {
     return
 }
 
-// This API is used to terminate the instance corresponding to a specified `DBInstanceId`.
+// This API is used to terminate a pay-as-you-go instance by specifying the `DBInstanceId` parameter.
 func (c *Client) DestroyDBInstance(request *DestroyDBInstanceRequest) (response *DestroyDBInstanceResponse, err error) {
     if request == nil {
         request = NewDestroyDBInstanceRequest()
@@ -668,6 +793,31 @@ func (c *Client) ModifyDBInstanceName(request *ModifyDBInstanceNameRequest) (res
     return
 }
 
+func NewModifyDBInstanceReadOnlyGroupRequest() (request *ModifyDBInstanceReadOnlyGroupRequest) {
+    request = &ModifyDBInstanceReadOnlyGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyDBInstanceReadOnlyGroup")
+    return
+}
+
+func NewModifyDBInstanceReadOnlyGroupResponse() (response *ModifyDBInstanceReadOnlyGroupResponse) {
+    response = &ModifyDBInstanceReadOnlyGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the RO group of an instance.
+func (c *Client) ModifyDBInstanceReadOnlyGroup(request *ModifyDBInstanceReadOnlyGroupRequest) (response *ModifyDBInstanceReadOnlyGroupResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceReadOnlyGroupRequest()
+    }
+    response = NewModifyDBInstanceReadOnlyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstancesProjectRequest() (request *ModifyDBInstancesProjectRequest) {
     request = &ModifyDBInstancesProjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -689,6 +839,31 @@ func (c *Client) ModifyDBInstancesProject(request *ModifyDBInstancesProjectReque
         request = NewModifyDBInstancesProjectRequest()
     }
     response = NewModifyDBInstancesProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyReadOnlyGroupConfigRequest() (request *ModifyReadOnlyGroupConfigRequest) {
+    request = &ModifyReadOnlyGroupConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyReadOnlyGroupConfig")
+    return
+}
+
+func NewModifyReadOnlyGroupConfigResponse() (response *ModifyReadOnlyGroupConfigResponse) {
+    response = &ModifyReadOnlyGroupConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify RO group configuration.
+func (c *Client) ModifyReadOnlyGroupConfig(request *ModifyReadOnlyGroupConfigRequest) (response *ModifyReadOnlyGroupConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyReadOnlyGroupConfigRequest()
+    }
+    response = NewModifyReadOnlyGroupConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -739,6 +914,56 @@ func (c *Client) OpenServerlessDBExtranetAccess(request *OpenServerlessDBExtrane
         request = NewOpenServerlessDBExtranetAccessRequest()
     }
     response = NewOpenServerlessDBExtranetAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRebalanceReadOnlyGroupRequest() (request *RebalanceReadOnlyGroupRequest) {
+    request = &RebalanceReadOnlyGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "RebalanceReadOnlyGroup")
+    return
+}
+
+func NewRebalanceReadOnlyGroupResponse() (response *RebalanceReadOnlyGroupResponse) {
+    response = &RebalanceReadOnlyGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to rebalance the loads of read-only replicas in an RO group. Please note that connections to those read-only replicas will be interrupted transiently; therefore, you should ensure that your application can reconnect to the databases. This operation should be performed with caution.
+func (c *Client) RebalanceReadOnlyGroup(request *RebalanceReadOnlyGroupRequest) (response *RebalanceReadOnlyGroupResponse, err error) {
+    if request == nil {
+        request = NewRebalanceReadOnlyGroupRequest()
+    }
+    response = NewRebalanceReadOnlyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRemoveDBInstanceFromReadOnlyGroupRequest() (request *RemoveDBInstanceFromReadOnlyGroupRequest) {
+    request = &RemoveDBInstanceFromReadOnlyGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "RemoveDBInstanceFromReadOnlyGroup")
+    return
+}
+
+func NewRemoveDBInstanceFromReadOnlyGroupResponse() (response *RemoveDBInstanceFromReadOnlyGroupResponse) {
+    response = &RemoveDBInstanceFromReadOnlyGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to remove a read-only replica from an RO group.
+func (c *Client) RemoveDBInstanceFromReadOnlyGroup(request *RemoveDBInstanceFromReadOnlyGroupRequest) (response *RemoveDBInstanceFromReadOnlyGroupResponse, err error) {
+    if request == nil {
+        request = NewRemoveDBInstanceFromReadOnlyGroupRequest()
+    }
+    response = NewRemoveDBInstanceFromReadOnlyGroupResponse()
     err = c.Send(request, response)
     return
 }
