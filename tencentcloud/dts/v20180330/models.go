@@ -238,6 +238,9 @@ type CreateSubscribeRequest struct {
 
 	// Whether to auto-renew. Default value: 0. This flag does not take effect for hourly billed instances (this field should be hidden from global site users)
 	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+
+	// Instance resource tags
+	Tags []*TagItem `json:"Tags,omitempty" name:"Tags" list`
 }
 
 func (r *CreateSubscribeRequest) ToJsonString() string {
@@ -709,6 +712,14 @@ type DescribeSubscribeConfResponse struct {
 		// Region
 		Region *string `json:"Region,omitempty" name:"Region"`
 
+		// Tags of the subscription
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Tags []*TagItem `json:"Tags,omitempty" name:"Tags" list`
+
+		// Whether auto-renewal is enabled. 0: do not enable, 1: enable
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -758,6 +769,12 @@ type DescribeSubscribesRequest struct {
 
 	// Sorting order. Valid values: DESC, ASC. Default value: DESC, indicating descending by creation time
 	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+
+	// Tag filtering condition
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
+
+	// Subscription instance edition. `txdts`: legacy data subscription; `kafka`: data subscription in Kafka edition
+	SubscribeVersion *string `json:"SubscribeVersion,omitempty" name:"SubscribeVersion"`
 }
 
 func (r *DescribeSubscribesRequest) ToJsonString() string {
@@ -1653,6 +1670,18 @@ type SubscribeInfo struct {
 
 	// Timestamp of the last message confirmed by the SDK. If the SDK keeps consuming, this field can also be used as the current consumption time point of the SDK
 	SdkConsumedTime *string `json:"SdkConsumedTime,omitempty" name:"SdkConsumedTime"`
+
+	// Tag
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Tags []*TagItem `json:"Tags,omitempty" name:"Tags" list`
+
+	// Whether auto-renewal is enabled. 0: do not enable; 1: enable
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Subscription instance edition. ·`txdts`: legacy data subscription; `kafka`: data subscription in Kafka edition
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SubscribeVersion *string `json:"SubscribeVersion,omitempty" name:"SubscribeVersion"`
 }
 
 type SubscribeObject struct {
@@ -1857,4 +1886,23 @@ type SyncStepDetailInfo struct {
 
 	// Step ID
 	StepId *int64 `json:"StepId,omitempty" name:"StepId"`
+}
+
+type TagFilter struct {
+
+	// Tag key value
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue []*string `json:"TagValue,omitempty" name:"TagValue" list`
+}
+
+type TagItem struct {
+
+	// Tag key value
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }

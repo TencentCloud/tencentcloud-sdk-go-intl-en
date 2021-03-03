@@ -54,6 +54,27 @@ type Alias struct {
 	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
 }
 
+type AsyncEvent struct {
+
+	// Invocation request ID
+	InvokeRequestId *string `json:"InvokeRequestId,omitempty" name:"InvokeRequestId"`
+
+	// Invocation type
+	InvokeType *string `json:"InvokeType,omitempty" name:"InvokeType"`
+
+	// Function version
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+	// Event status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Invocation start time in the format of "%Y-%m-%d %H:%M:%S.%f"
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Invocation end time in the format of "%Y-%m-%d %H:%M:%S.%f"
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type CfsConfig struct {
 
 	// File system information list
@@ -95,7 +116,7 @@ type CfsInsInfo struct {
 
 type Code struct {
 
-	// COS bucket name
+	// Object bucket name (enter the custom part of the bucket name without `-appid`)
 	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
 
 	// COS object path
@@ -979,7 +1000,9 @@ func (r *GetFunctionAddressResponse) FromJsonString(s string) error {
 type GetFunctionLogsRequest struct {
 	*tchttp.BaseRequest
 
-	// Function name
+	// Function name.
+	// - To ensure the compatibility of the [`GetFunctionLogs`](https://intl.cloud.tencent.com/document/product/583/18583?from_cn_redirect=1) API, the input parameter `FunctionName` is optional, but we recommend you enter it; otherwise, log acquisition may fail.
+	// - After the function is connected to CLS, we recommend you use the [related CLS API](https://intl.cloud.tencent.com/document/product/614/16875?from_cn_redirect=1) to get the best log retrieval experience.
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
 	// Data offset. The addition of `Offset` and `Limit` cannot exceed 10,000.
@@ -1520,6 +1543,79 @@ func (r *ListAliasesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ListAsyncEventsRequest struct {
+	*tchttp.BaseRequest
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Filter (function version)
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+	// Filter (invocation type list)
+	InvokeType []*string `json:"InvokeType,omitempty" name:"InvokeType" list`
+
+	// Filter (event status list)
+	Status []*string `json:"Status,omitempty" name:"Status" list`
+
+	// Filter (left-closed-right-open range of execution start time)
+	StartTimeInterval *TimeInterval `json:"StartTimeInterval,omitempty" name:"StartTimeInterval"`
+
+	// Filter (left-closed-right-open range of execution end time)
+	EndTimeInterval *TimeInterval `json:"EndTimeInterval,omitempty" name:"EndTimeInterval"`
+
+	// Valid values: ASC, DESC. Default value: DESC
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Valid values: StartTime, EndTime. Default value: StartTime
+	Orderby *string `json:"Orderby,omitempty" name:"Orderby"`
+
+	// Data offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter (event invocation request ID)
+	InvokeRequestId *string `json:"InvokeRequestId,omitempty" name:"InvokeRequestId"`
+}
+
+func (r *ListAsyncEventsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListAsyncEventsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ListAsyncEventsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of events that meet the filter
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Async event list
+		EventList []*AsyncEvent `json:"EventList,omitempty" name:"EventList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListAsyncEventsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ListAsyncEventsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ListFunctionsRequest struct {
 	*tchttp.BaseRequest
 
@@ -1737,7 +1833,7 @@ type ListTriggersRequest struct {
 	// Number of results to be returned. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Indicates by which field to sort the returned results. Valid values: AddTime, ModTime. Default value: ModTime
+	// Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
 	// Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC
@@ -2189,6 +2285,55 @@ type Tag struct {
 
 	// Tag value
 	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type TerminateAsyncEventRequest struct {
+	*tchttp.BaseRequest
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Terminated invocation request ID
+	InvokeRequestId *string `json:"InvokeRequestId,omitempty" name:"InvokeRequestId"`
+
+	// Namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *TerminateAsyncEventRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TerminateAsyncEventRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TerminateAsyncEventResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *TerminateAsyncEventResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *TerminateAsyncEventResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type TimeInterval struct {
+
+	// Start time (inclusive) in the format of "%Y-%m-%d %H:%M:%S"
+	Start *string `json:"Start,omitempty" name:"Start"`
+
+	// End time (exclusive) in the format of "%Y-%m-%d %H:%M:%S"
+	End *string `json:"End,omitempty" name:"End"`
 }
 
 type Trigger struct {
