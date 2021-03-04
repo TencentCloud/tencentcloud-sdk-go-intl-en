@@ -85,6 +85,10 @@ type AccessPoint struct {
 	// City where the access point is located
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	City *string `json:"City,omitempty" name:"City"`
+
+	// Access point region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 type ApplyInternetAddressRequest struct {

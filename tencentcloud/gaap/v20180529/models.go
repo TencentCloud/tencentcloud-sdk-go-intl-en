@@ -4092,6 +4092,22 @@ type ModifySecurityRuleRequest struct {
 
 	// Security policy ID
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Security rule action
+	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+
+	// A CIDR IP address associated with the rule
+	SourceCidr *string `json:"SourceCidr,omitempty" name:"SourceCidr"`
+
+	// Protocol type
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Port range. Valid values:
+	// A single port: 80
+	// Multiple ports: 80 and 443
+	// Consecutive ports: 3306-20000
+	// All ports: ALL
+	DestPortRange *string `json:"DestPortRange,omitempty" name:"DestPortRange"`
 }
 
 func (r *ModifySecurityRuleRequest) ToJsonString() string {
@@ -4725,11 +4741,11 @@ type RuleCheckParams struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	FailedCountInter *uint64 `json:"FailedCountInter,omitempty" name:"FailedCountInter"`
 
-	// Origin server health check threshold. The service will be blocked once the threshold is exceeded.
+	// Origin server health check threshold. All requests to the origin server will be blocked once the threshold is exceeded.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	FailedThreshold *uint64 `json:"FailedThreshold,omitempty" name:"FailedThreshold"`
 
-	// Time of a request is blocked after the origin server health check threshold is exceeded.
+	// Duration to block requests targeting the origin server after a failed health check
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	BlockInter *uint64 `json:"BlockInter,omitempty" name:"BlockInter"`
 }
