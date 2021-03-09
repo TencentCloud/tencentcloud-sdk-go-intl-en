@@ -20,6 +20,49 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AddUserContactRequest struct {
+	*tchttp.BaseRequest
+
+	// Contact name, which needs to be unique and can contain 2-60 characters, supporting uppercase and lowercase letters, numbers, and underline “_”. It cannot start with “_”.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Email address, which can contain uppercase and lowercase letters, numbers, and underline “_”, and cannot start with “_”.
+	ContactInfo *string `json:"ContactInfo,omitempty" name:"ContactInfo"`
+
+	// Service type, which is fixed to “mysql”.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *AddUserContactRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AddUserContactRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AddUserContactResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The successfully added contact ID
+		Id *int64 `json:"Id,omitempty" name:"Id"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AddUserContactResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AddUserContactResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ContactItem struct {
 
 	// Contact ID.
@@ -106,7 +149,7 @@ type CreateMailProfileRequest struct {
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// Instance ID bound to the configuration, which is required when the configuration level is `Instance`.
+	// Instance ID bound to the configuration, which is set when the configuration level is "Instance". Only one instance can be bound at a time.
 	BindInstanceIds []*string `json:"BindInstanceIds,omitempty" name:"BindInstanceIds" list`
 }
 
@@ -137,10 +180,56 @@ func (r *CreateMailProfileResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateSchedulerMailProfileRequest struct {
+	*tchttp.BaseRequest
+
+	// Value range: 1-7, representing Monday to Sunday respectively.
+	WeekConfiguration []*int64 `json:"WeekConfiguration,omitempty" name:"WeekConfiguration" list`
+
+	// Email configurations
+	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
+
+	// Configuration name, which needs to be unique. For scheduled task reports, the name should be in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
+	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+
+	// Configure the instance ID that you need to generate the health report.
+	BindInstanceId *string `json:"BindInstanceId,omitempty" name:"BindInstanceId"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *CreateSchedulerMailProfileRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateSchedulerMailProfileRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateSchedulerMailProfileResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateSchedulerMailProfileResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateSchedulerMailProfileResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeAllUserContactRequest struct {
 	*tchttp.BaseRequest
 
-	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
+	// Service type, which is fixed to “mysql”.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// An array of contact name. Fuzzy search is supported.
@@ -184,7 +273,7 @@ func (r *DescribeAllUserContactResponse) FromJsonString(s string) error {
 type DescribeAllUserGroupRequest struct {
 	*tchttp.BaseRequest
 
-	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
+	// Service type, which is fixed to “mysql”.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// An array of contact group name. Fuzzy search is supported.
@@ -394,6 +483,164 @@ func (r *DescribeDBSpaceStatusResponse) ToJsonString() string {
 }
 
 func (r *DescribeDBSpaceStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDiagDBInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Whether it is an instance supported by DBbrain. It is fixed to “true”.
+	IsSupported *bool `json:"IsSupported,omitempty" name:"IsSupported"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Pagination parameter indicating the offset.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination parameter indicating the number of entries for each page.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query by instance name.
+	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames" list`
+
+	// Query by instance ID.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+
+	// Query by region.
+	Regions []*string `json:"Regions,omitempty" name:"Regions" list`
+}
+
+func (r *DescribeDiagDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDiagDBInstancesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDiagDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total Number of Instances
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Status of all instance inspection. 0: all instance inspection enabled, 1: all instance inspection disabled
+		DbScanStatus *int64 `json:"DbScanStatus,omitempty" name:"DbScanStatus"`
+
+		// Instance related information
+		Items []*InstanceInfo `json:"Items,omitempty" name:"Items" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDiagDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDiagDBInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeHealthScoreRequest struct {
+	*tchttp.BaseRequest
+
+	// The instance ID that needs to obtain the health score
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Time to obtain the health score
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL (compatible with MySQL)). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *DescribeHealthScoreRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeHealthScoreRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeHealthScoreResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Health score and deduction for exceptions
+		Data *HealthScoreInfo `json:"Data,omitempty" name:"Data"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeHealthScoreResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeHealthScoreResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMailProfileRequest struct {
+	*tchttp.BaseRequest
+
+	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
+	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of results per page in paginated queries. Maximum value: 50
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query by the name of email configuration. The name of the regularly sent email configuration should be in the format of "scheduler_"+{instanceId}.
+	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+}
+
+func (r *DescribeMailProfileRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMailProfileRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMailProfileResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Email configuration details
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ProfileList []*UserProfile `json:"ProfileList,omitempty" name:"ProfileList" list`
+
+		// Total number of email templates
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeMailProfileResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeMailProfileResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -650,6 +897,36 @@ type DiagHistoryEventItem struct {
 	Region *string `json:"Region,omitempty" name:"Region"`
 }
 
+type EventInfo struct {
+
+	// Event ID
+	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+
+	// Diagnosis type
+	DiagType *string `json:"DiagType,omitempty" name:"DiagType"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Summary
+	Outline *string `json:"Outline,omitempty" name:"Outline"`
+
+	// Severity, which can be divided into 5 levels: 1: fatal, 2: severe, 3: warning, 4: notice, 5: healthy.
+	Severity *int64 `json:"Severity,omitempty" name:"Severity"`
+
+	// Deduction
+	ScoreLost *int64 `json:"ScoreLost,omitempty" name:"ScoreLost"`
+
+	// Reserved field
+	Metric *string `json:"Metric,omitempty" name:"Metric"`
+
+	// The number of alarms
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+}
+
 type GroupItem struct {
 
 	// Group ID.
@@ -662,10 +939,127 @@ type GroupItem struct {
 	MemberCount *int64 `json:"MemberCount,omitempty" name:"MemberCount"`
 }
 
+type HealthScoreInfo struct {
+
+	// Exception details
+	IssueTypes []*IssueTypeInfo `json:"IssueTypes,omitempty" name:"IssueTypes" list`
+
+	// Total number of the exceptions
+	EventsTotalCount *int64 `json:"EventsTotalCount,omitempty" name:"EventsTotalCount"`
+
+	// Health score
+	HealthScore *int64 `json:"HealthScore,omitempty" name:"HealthScore"`
+
+	// Health level, such as "HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK".
+	HealthLevel *string `json:"HealthLevel,omitempty" name:"HealthLevel"`
+}
+
 type InstanceConfs struct {
 
 	// Whether to enable database inspection. Valid values: Yes/No.
 	DailyInspection *string `json:"DailyInspection,omitempty" name:"DailyInspection"`
+
+	// Whether to enable instance overview. Valid values: Yes/No.
+	OverviewDisplay *string `json:"OverviewDisplay,omitempty" name:"OverviewDisplay"`
+}
+
+type InstanceInfo struct {
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// The region where the instance belongs
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Health score
+	HealthScore *int64 `json:"HealthScore,omitempty" name:"HealthScore"`
+
+	// Service
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Number of exceptions
+	EventCount *int64 `json:"EventCount,omitempty" name:"EventCount"`
+
+	// Instance type. Valid values: 1: MASTER, 2: DR, 3: RO, 4: SDR
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Number of cores
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory in MB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Disk storage in GB
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Database version
+	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+
+	// Private network address
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Private network port
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Access source
+	Source *string `json:"Source,omitempty" name:"Source"`
+
+	// Group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Group name
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Instance status. Valid values: 0: Delivering, 1: Running, 4: Terminating, 5: Isolated
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Subnet unified ID
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// cdb (TencentDB instance) type
+	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// cdb (TencentDB instance) initialization flag. Valid values: 0: not initialized, 1: initialized
+	InitFlag *int64 `json:"InitFlag,omitempty" name:"InitFlag"`
+
+	// Task status
+	TaskStatus *int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
+
+	// Unified VPC ID
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Instance inspection/overview status
+	InstanceConf *InstanceConfs `json:"InstanceConf,omitempty" name:"InstanceConf"`
+
+	// Resource expiration time
+	DeadlineTime *string `json:"DeadlineTime,omitempty" name:"DeadlineTime"`
+
+	// Whether it is an instance supported by DBbrain.
+	IsSupported *bool `json:"IsSupported,omitempty" name:"IsSupported"`
+
+	// The status of instance security audit log. ON: enabled, OFF: disabled.
+	SecAuditStatus *string `json:"SecAuditStatus,omitempty" name:"SecAuditStatus"`
+
+	// The status of instance audit log. ALL_AUDIT: full audit is enabled, RULE_AUDIT: rule audit is enabled, UNBOUND: audit is disabled.
+	AuditPolicyStatus *string `json:"AuditPolicyStatus,omitempty" name:"AuditPolicyStatus"`
+
+	// The running status of instance audit log. normal: running, paused: suspension due to arrears
+	AuditRunningStatus *string `json:"AuditRunningStatus,omitempty" name:"AuditRunningStatus"`
+}
+
+type IssueTypeInfo struct {
+
+	// Metric categories: AVAILABILITY, MAINTAINABILITY, PERFORMANCE, and RELIABILITY
+	IssueType *string `json:"IssueType,omitempty" name:"IssueType"`
+
+	// Exception
+	Events []*EventInfo `json:"Events,omitempty" name:"Events" list`
+
+	// Total number of the exceptions
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 }
 
 type MailConfiguration struct {
@@ -673,7 +1067,7 @@ type MailConfiguration struct {
 	// Whether to enable email sending. Valid values: 0 (No), 1 (Yes).
 	SendMail *int64 `json:"SendMail,omitempty" name:"SendMail"`
 
-	// Region configuration, such as "ap-guangzhou", "ap-shanghai".
+	// Region configuration, such as "ap-guangzhou", "ap-shanghai". For the inspection email sending template, configure the region where you need to send the inspection email. For the subscription email sending template, configure the region to which the current subscribed instance belongs.
 	Region []*string `json:"Region,omitempty" name:"Region" list`
 
 	// Sending a report with the specified health level, such as "HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK".
@@ -906,4 +1300,26 @@ type TimeSlice struct {
 
 	// Statistics start time
 	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+}
+
+type UserProfile struct {
+
+	// Configured ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProfileId *string `json:"ProfileId,omitempty" name:"ProfileId"`
+
+	// Configuration type
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
+
+	// Configuration level. Valid values: “User” or “Instance”
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProfileLevel *string `json:"ProfileLevel,omitempty" name:"ProfileLevel"`
+
+	// Configuration name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+
+	// Configuration details
+	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
 }

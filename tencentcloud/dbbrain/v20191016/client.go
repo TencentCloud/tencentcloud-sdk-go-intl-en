@@ -43,6 +43,31 @@ func NewClient(credential *common.Credential, region string, clientProfile *prof
 }
 
 
+func NewAddUserContactRequest() (request *AddUserContactRequest) {
+    request = &AddUserContactRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "AddUserContact")
+    return
+}
+
+func NewAddUserContactResponse() (response *AddUserContactResponse) {
+    response = &AddUserContactResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to add the contact name and email.. The return value is the successfully added contact ID. Select Guangzhou for Region.
+func (c *Client) AddUserContact(request *AddUserContactRequest) (response *AddUserContactResponse, err error) {
+    if request == nil {
+        request = NewAddUserContactRequest()
+    }
+    response = NewAddUserContactResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBDiagReportTaskRequest() (request *CreateDBDiagReportTaskRequest) {
     request = &CreateDBDiagReportTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -83,12 +108,37 @@ func NewCreateMailProfileResponse() (response *CreateMailProfileResponse) {
     return
 }
 
-// This API is used to create the email configuration. The input parameter `ProfileType` represents the type of the email configuration. Valid values: `dbScan_mail_configuration` (email configuration of database inspection report) and `scheduler_mail_configuration` (email configuration of scheduled task report).
+// This API is used to create the email configuration. The input parameter `ProfileType` represents the type of the email configuration. Valid values: `dbScan_mail_configuration` (email configuration of database inspection report) and `scheduler_mail_configuration` (email sending configuration of regularly generated health report). Select Guangzhou for Region, regardless of the region where the instance belongs.
 func (c *Client) CreateMailProfile(request *CreateMailProfileRequest) (response *CreateMailProfileResponse, err error) {
     if request == nil {
         request = NewCreateMailProfileRequest()
     }
     response = NewCreateMailProfileResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSchedulerMailProfileRequest() (request *CreateSchedulerMailProfileRequest) {
+    request = &CreateSchedulerMailProfileRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "CreateSchedulerMailProfile")
+    return
+}
+
+func NewCreateSchedulerMailProfileResponse() (response *CreateSchedulerMailProfileResponse) {
+    response = &CreateSchedulerMailProfileResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create the regular generation time of the health reports and the regular email sending configuration. Pass in the regular generation time of the health reports as a parameter (Monday to Sunday) to set the regular generation time of the health reports, and save the corresponding regular email sending configuration.
+func (c *Client) CreateSchedulerMailProfile(request *CreateSchedulerMailProfileRequest) (response *CreateSchedulerMailProfileResponse, err error) {
+    if request == nil {
+        request = NewCreateSchedulerMailProfileRequest()
+    }
+    response = NewCreateSchedulerMailProfileResponse()
     err = c.Send(request, response)
     return
 }
@@ -214,6 +264,81 @@ func (c *Client) DescribeDBSpaceStatus(request *DescribeDBSpaceStatusRequest) (r
         request = NewDescribeDBSpaceStatusRequest()
     }
     response = NewDescribeDBSpaceStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDiagDBInstancesRequest() (request *DescribeDiagDBInstancesRequest) {
+    request = &DescribeDiagDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeDiagDBInstances")
+    return
+}
+
+func NewDescribeDiagDBInstancesResponse() (response *DescribeDiagDBInstancesResponse) {
+    response = &DescribeDiagDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the instance information list. Select Guangzhou for Region.
+func (c *Client) DescribeDiagDBInstances(request *DescribeDiagDBInstancesRequest) (response *DescribeDiagDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDiagDBInstancesRequest()
+    }
+    response = NewDescribeDiagDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeHealthScoreRequest() (request *DescribeHealthScoreRequest) {
+    request = &DescribeHealthScoreRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeHealthScore")
+    return
+}
+
+func NewDescribeHealthScoreResponse() (response *DescribeHealthScoreResponse) {
+    response = &DescribeHealthScoreResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the health score and deduction for exceptions in the specified time period (30 minutes) based on the instance ID.
+func (c *Client) DescribeHealthScore(request *DescribeHealthScoreRequest) (response *DescribeHealthScoreResponse, err error) {
+    if request == nil {
+        request = NewDescribeHealthScoreRequest()
+    }
+    response = NewDescribeHealthScoreResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMailProfileRequest() (request *DescribeMailProfileRequest) {
+    request = &DescribeMailProfileRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeMailProfile")
+    return
+}
+
+func NewDescribeMailProfileResponse() (response *DescribeMailProfileResponse) {
+    response = &DescribeMailProfileResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the email sending configurations, including the email configuration for database inspection and the email sending configuration for regularly generated health reports. Select Guangzhou for Region.
+func (c *Client) DescribeMailProfile(request *DescribeMailProfileRequest) (response *DescribeMailProfileResponse, err error) {
+    if request == nil {
+        request = NewDescribeMailProfileRequest()
+    }
+    response = NewDescribeMailProfileResponse()
     err = c.Send(request, response)
     return
 }
