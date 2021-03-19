@@ -183,6 +183,46 @@ type Credentials struct {
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 }
 
+type DeleteTimerScalingPolicyRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of the policy
+	TimerId *string `json:"TimerId,omitempty" name:"TimerId"`
+
+	// ID of the fleet to be bound with the policy
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Scheduled scaling policy name
+	TimerName *string `json:"TimerName,omitempty" name:"TimerName"`
+}
+
+func (r *DeleteTimerScalingPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteTimerScalingPolicyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteTimerScalingPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteTimerScalingPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteTimerScalingPolicyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeGameServerSessionDetailsRequest struct {
 	*tchttp.BaseRequest
 
@@ -388,6 +428,63 @@ func (r *DescribePlayerSessionsResponse) ToJsonString() string {
 }
 
 func (r *DescribePlayerSessionsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTimerScalingPoliciesRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the fleet to be bound with the policy
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Scheduled scaling policy name
+	TimerName *string `json:"TimerName,omitempty" name:"TimerName"`
+
+	// Start time of the scheduled scaling policy
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// End time of the scheduled scaling policy
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeTimerScalingPoliciesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTimerScalingPoliciesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTimerScalingPoliciesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Configuration of the scheduled scaling policy
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		TimerScalingPolicies []*TimerScalingPolicy `json:"TimerScalingPolicies,omitempty" name:"TimerScalingPolicies" list`
+
+		// Total number of scheduled scaling policies
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTimerScalingPoliciesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeTimerScalingPoliciesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -924,6 +1021,40 @@ type PlayerSession struct {
 	TerminationTime *string `json:"TerminationTime,omitempty" name:"TerminationTime"`
 }
 
+type PutTimerScalingPolicyRequest struct {
+	*tchttp.BaseRequest
+
+	// Configuration of the scheduled scaling policy
+	TimerScalingPolicy *TimerScalingPolicy `json:"TimerScalingPolicy,omitempty" name:"TimerScalingPolicy"`
+}
+
+func (r *PutTimerScalingPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutTimerScalingPolicyRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type PutTimerScalingPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *PutTimerScalingPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *PutTimerScalingPolicyResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ResourceCreationLimitPolicy struct {
 
 	// Creation quantity. Minimum value: 1. Default value: 2.
@@ -1056,6 +1187,46 @@ type ServerProcesse struct {
 	Parameters *string `json:"Parameters,omitempty" name:"Parameters"`
 }
 
+type SetServerReservedRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the fleet to be bound with the policy
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether the instance is retained. Valid values: 1 (retained), 0 (not retained). Default value: 0.
+	ReserveValue *int64 `json:"ReserveValue,omitempty" name:"ReserveValue"`
+}
+
+func (r *SetServerReservedRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetServerReservedRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type SetServerReservedResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SetServerReservedResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *SetServerReservedResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type StartGameServerSessionPlacementRequest struct {
 	*tchttp.BaseRequest
 
@@ -1158,6 +1329,105 @@ type Tag struct {
 
 	// Tag value. Up to 255 bytes are allowed.
 	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type TargetConfiguration struct {
+
+	// Ratio of reserved server session resource 
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TargetValue *uint64 `json:"TargetValue,omitempty" name:"TargetValue"`
+}
+
+type TimerConfiguration struct {
+
+	// The recurrence pattern of auto-scaling. `0`: undefined, `1`: once, `2`: daily, `3`: monthly, `4`: weekly
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TimerType *int64 `json:"TimerType,omitempty" name:"TimerType"`
+
+	// Details of the recurrence pattern of auto-scaling
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TimerValue *TimerValue `json:"TimerValue,omitempty" name:"TimerValue"`
+
+	// Start time of the scheduled scaling policy
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// End time of the scheduled scaling policy
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+type TimerFleetCapacity struct {
+
+	// ID of the fleet to be bound with the policy
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Desired number of instances
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DesiredInstances *int64 `json:"DesiredInstances,omitempty" name:"DesiredInstances"`
+
+	// Minimum number of instances
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MinSize *int64 `json:"MinSize,omitempty" name:"MinSize"`
+
+	// Maximum number of instances
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
+
+	// Scaling cooldown period, in minutes
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ScalingInterval *int64 `json:"ScalingInterval,omitempty" name:"ScalingInterval"`
+
+	// Scaling type. `1`: manual, `2`: automatic, `0`: undefined
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ScalingType *int64 `json:"ScalingType,omitempty" name:"ScalingType"`
+
+	// Configuration of target tracking scaling
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TargetConfiguration *TargetConfiguration `json:"TargetConfiguration,omitempty" name:"TargetConfiguration"`
+}
+
+type TimerScalingPolicy struct {
+
+	// Unique ID of the policy. When it’s filled in, the policy will be updated.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TimerId *string `json:"TimerId,omitempty" name:"TimerId"`
+
+	// Scheduled scaling policy name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TimerName *string `json:"TimerName,omitempty" name:"TimerName"`
+
+	// Scheduled scaling policy status. `0`: Undefined, `1`: Not started, 2: Activated, `3`: Stopped, `4`: Expired
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TimerStatus *int64 `json:"TimerStatus,omitempty" name:"TimerStatus"`
+
+	// The capacity configurations of the scheduled scaling policy
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TimerFleetCapacity *TimerFleetCapacity `json:"TimerFleetCapacity,omitempty" name:"TimerFleetCapacity"`
+
+	// The recurrence pattern of auto-scaling
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TimerConfiguration *TimerConfiguration `json:"TimerConfiguration,omitempty" name:"TimerConfiguration"`
+}
+
+type TimerValue struct {
+
+	// Execute once every X day(s)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Day *int64 `json:"Day,omitempty" name:"Day"`
+
+	// Specify the first day to execute the scaling action in a month (execute once per day)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FromDay *int64 `json:"FromDay,omitempty" name:"FromDay"`
+
+	// Specify the last day to execute the scaling action in a month
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ToDay *int64 `json:"ToDay,omitempty" name:"ToDay"`
+
+	// Specify the week days to repeat the scaling action. Multiple values are supported. Valid values: `1` (Monday), `2` (Tuesday), `3` (Wednesday), `4` (Thursday), `5` (Friday), `6` (Saturday), `7` (Sunday). 
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	WeekDays []*int64 `json:"WeekDays,omitempty" name:"WeekDays" list`
 }
 
 type UpdateBucketAccelerateOptRequest struct {

@@ -118,6 +118,31 @@ func (c *Client) CreateBackup(request *CreateBackupRequest) (response *CreateBac
     return
 }
 
+func NewCreateBackupMigrationRequest() (request *CreateBackupMigrationRequest) {
+    request = &CreateBackupMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "CreateBackupMigration")
+    return
+}
+
+func NewCreateBackupMigrationResponse() (response *CreateBackupMigrationResponse) {
+    response = &CreateBackupMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a backup import task.
+func (c *Client) CreateBackupMigration(request *CreateBackupMigrationRequest) (response *CreateBackupMigrationResponse, err error) {
+    if request == nil {
+        request = NewCreateBackupMigrationRequest()
+    }
+    response = NewCreateBackupMigrationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBRequest() (request *CreateDBRequest) {
     request = &CreateDBRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -164,6 +189,31 @@ func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response 
         request = NewCreateDBInstancesRequest()
     }
     response = NewCreateDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateIncrementalMigrationRequest() (request *CreateIncrementalMigrationRequest) {
+    request = &CreateIncrementalMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "CreateIncrementalMigration")
+    return
+}
+
+func NewCreateIncrementalMigrationResponse() (response *CreateIncrementalMigrationResponse) {
+    response = &CreateIncrementalMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create an incremental backup import task.
+func (c *Client) CreateIncrementalMigration(request *CreateIncrementalMigrationRequest) (response *CreateIncrementalMigrationResponse, err error) {
+    if request == nil {
+        request = NewCreateIncrementalMigrationRequest()
+    }
+    response = NewCreateIncrementalMigrationResponse()
     err = c.Send(request, response)
     return
 }
@@ -218,6 +268,31 @@ func (c *Client) DeleteAccount(request *DeleteAccountRequest) (response *DeleteA
     return
 }
 
+func NewDeleteBackupMigrationRequest() (request *DeleteBackupMigrationRequest) {
+    request = &DeleteBackupMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteBackupMigration")
+    return
+}
+
+func NewDeleteBackupMigrationResponse() (response *DeleteBackupMigrationResponse) {
+    response = &DeleteBackupMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a backup import task.
+func (c *Client) DeleteBackupMigration(request *DeleteBackupMigrationRequest) (response *DeleteBackupMigrationResponse, err error) {
+    if request == nil {
+        request = NewDeleteBackupMigrationRequest()
+    }
+    response = NewDeleteBackupMigrationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteDBRequest() (request *DeleteDBRequest) {
     request = &DeleteDBRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -239,6 +314,31 @@ func (c *Client) DeleteDB(request *DeleteDBRequest) (response *DeleteDBResponse,
         request = NewDeleteDBRequest()
     }
     response = NewDeleteDBResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteIncrementalMigrationRequest() (request *DeleteIncrementalMigrationRequest) {
+    request = &DeleteIncrementalMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteIncrementalMigration")
+    return
+}
+
+func NewDeleteIncrementalMigrationResponse() (response *DeleteIncrementalMigrationResponse) {
+    response = &DeleteIncrementalMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete an incremental backup import task.
+func (c *Client) DeleteIncrementalMigration(request *DeleteIncrementalMigrationRequest) (response *DeleteIncrementalMigrationResponse, err error) {
+    if request == nil {
+        request = NewDeleteIncrementalMigrationRequest()
+    }
+    response = NewDeleteIncrementalMigrationResponse()
     err = c.Send(request, response)
     return
 }
@@ -293,6 +393,81 @@ func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *D
     return
 }
 
+func NewDescribeBackupCommandRequest() (request *DescribeBackupCommandRequest) {
+    request = &DescribeBackupCommandRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupCommand")
+    return
+}
+
+func NewDescribeBackupCommandResponse() (response *DescribeBackupCommandResponse) {
+    response = &DescribeBackupCommandResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the commands of creating backups canonically.
+func (c *Client) DescribeBackupCommand(request *DescribeBackupCommandRequest) (response *DescribeBackupCommandResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupCommandRequest()
+    }
+    response = NewDescribeBackupCommandResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBackupMigrationRequest() (request *DescribeBackupMigrationRequest) {
+    request = &DescribeBackupMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupMigration")
+    return
+}
+
+func NewDescribeBackupMigrationResponse() (response *DescribeBackupMigrationResponse) {
+    response = &DescribeBackupMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create an incremental backup import task.
+func (c *Client) DescribeBackupMigration(request *DescribeBackupMigrationRequest) (response *DescribeBackupMigrationResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupMigrationRequest()
+    }
+    response = NewDescribeBackupMigrationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBackupUploadSizeRequest() (request *DescribeBackupUploadSizeRequest) {
+    request = &DescribeBackupUploadSizeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupUploadSize")
+    return
+}
+
+func NewDescribeBackupUploadSizeResponse() (response *DescribeBackupUploadSizeResponse) {
+    response = &DescribeBackupUploadSizeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the size of uploaded backup files. It is valid if the backup file type is `COS_UPLOAD` (the file is stored in COS).
+func (c *Client) DescribeBackupUploadSize(request *DescribeBackupUploadSizeRequest) (response *DescribeBackupUploadSizeResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupUploadSizeRequest()
+    }
+    response = NewDescribeBackupUploadSizeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBackupsRequest() (request *DescribeBackupsRequest) {
     request = &DescribeBackupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -314,6 +489,31 @@ func (c *Client) DescribeBackups(request *DescribeBackupsRequest) (response *Des
         request = NewDescribeBackupsRequest()
     }
     response = NewDescribeBackupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBCharsetsRequest() (request *DescribeDBCharsetsRequest) {
+    request = &DescribeDBCharsetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDBCharsets")
+    return
+}
+
+func NewDescribeDBCharsetsResponse() (response *DescribeDBCharsetsResponse) {
+    response = &DescribeDBCharsetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the database character sets supported by an instance.
+func (c *Client) DescribeDBCharsets(request *DescribeDBCharsetsRequest) (response *DescribeDBCharsetsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBCharsetsRequest()
+    }
+    response = NewDescribeDBCharsetsResponse()
     err = c.Send(request, response)
     return
 }
@@ -389,6 +589,31 @@ func (c *Client) DescribeFlowStatus(request *DescribeFlowStatusRequest) (respons
         request = NewDescribeFlowStatusRequest()
     }
     response = NewDescribeFlowStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeIncrementalMigrationRequest() (request *DescribeIncrementalMigrationRequest) {
+    request = &DescribeIncrementalMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeIncrementalMigration")
+    return
+}
+
+func NewDescribeIncrementalMigrationResponse() (response *DescribeIncrementalMigrationResponse) {
+    response = &DescribeIncrementalMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query an incremental backup import task.
+func (c *Client) DescribeIncrementalMigration(request *DescribeIncrementalMigrationRequest) (response *DescribeIncrementalMigrationResponse, err error) {
+    if request == nil {
+        request = NewDescribeIncrementalMigrationRequest()
+    }
+    response = NewDescribeIncrementalMigrationResponse()
     err = c.Send(request, response)
     return
 }
@@ -568,6 +793,31 @@ func (c *Client) DescribeSlowlogs(request *DescribeSlowlogsRequest) (response *D
     return
 }
 
+func NewDescribeUploadBackupInfoRequest() (request *DescribeUploadBackupInfoRequest) {
+    request = &DescribeUploadBackupInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeUploadBackupInfo")
+    return
+}
+
+func NewDescribeUploadBackupInfoResponse() (response *DescribeUploadBackupInfoResponse) {
+    response = &DescribeUploadBackupInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query a backup upload permission.
+func (c *Client) DescribeUploadBackupInfo(request *DescribeUploadBackupInfoRequest) (response *DescribeUploadBackupInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeUploadBackupInfoRequest()
+    }
+    response = NewDescribeUploadBackupInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
     request = &DescribeZonesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -689,6 +939,31 @@ func (c *Client) ModifyAccountRemark(request *ModifyAccountRemarkRequest) (respo
         request = NewModifyAccountRemarkRequest()
     }
     response = NewModifyAccountRemarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyBackupMigrationRequest() (request *ModifyBackupMigrationRequest) {
+    request = &ModifyBackupMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyBackupMigration")
+    return
+}
+
+func NewModifyBackupMigrationResponse() (response *ModifyBackupMigrationResponse) {
+    response = &ModifyBackupMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a backup import task.
+func (c *Client) ModifyBackupMigration(request *ModifyBackupMigrationRequest) (response *ModifyBackupMigrationResponse, err error) {
+    if request == nil {
+        request = NewModifyBackupMigrationRequest()
+    }
+    response = NewModifyBackupMigrationResponse()
     err = c.Send(request, response)
     return
 }
@@ -839,6 +1114,31 @@ func (c *Client) ModifyDBRemark(request *ModifyDBRemarkRequest) (response *Modif
         request = NewModifyDBRemarkRequest()
     }
     response = NewModifyDBRemarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyIncrementalMigrationRequest() (request *ModifyIncrementalMigrationRequest) {
+    request = &ModifyIncrementalMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyIncrementalMigration")
+    return
+}
+
+func NewModifyIncrementalMigrationResponse() (response *ModifyIncrementalMigrationResponse) {
+    response = &ModifyIncrementalMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify an incremental backup import task.
+func (c *Client) ModifyIncrementalMigration(request *ModifyIncrementalMigrationRequest) (response *ModifyIncrementalMigrationResponse, err error) {
+    if request == nil {
+        request = NewModifyIncrementalMigrationRequest()
+    }
+    response = NewModifyIncrementalMigrationResponse()
     err = c.Send(request, response)
     return
 }
@@ -1014,6 +1314,56 @@ func (c *Client) RunMigration(request *RunMigrationRequest) (response *RunMigrat
         request = NewRunMigrationRequest()
     }
     response = NewRunMigrationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartBackupMigrationRequest() (request *StartBackupMigrationRequest) {
+    request = &StartBackupMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "StartBackupMigration")
+    return
+}
+
+func NewStartBackupMigrationResponse() (response *StartBackupMigrationResponse) {
+    response = &StartBackupMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to start a backup import task.
+func (c *Client) StartBackupMigration(request *StartBackupMigrationRequest) (response *StartBackupMigrationResponse, err error) {
+    if request == nil {
+        request = NewStartBackupMigrationRequest()
+    }
+    response = NewStartBackupMigrationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartIncrementalMigrationRequest() (request *StartIncrementalMigrationRequest) {
+    request = &StartIncrementalMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "StartIncrementalMigration")
+    return
+}
+
+func NewStartIncrementalMigrationResponse() (response *StartIncrementalMigrationResponse) {
+    response = &StartIncrementalMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to start an incremental backup import task.
+func (c *Client) StartIncrementalMigration(request *StartIncrementalMigrationRequest) (response *StartIncrementalMigrationResponse, err error) {
+    if request == nil {
+        request = NewStartIncrementalMigrationRequest()
+    }
+    response = NewStartIncrementalMigrationResponse()
     err = c.Send(request, response)
     return
 }

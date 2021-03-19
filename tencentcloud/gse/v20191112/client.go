@@ -93,6 +93,31 @@ func (c *Client) CreateGameServerSession(request *CreateGameServerSessionRequest
     return
 }
 
+func NewDeleteTimerScalingPolicyRequest() (request *DeleteTimerScalingPolicyRequest) {
+    request = &DeleteTimerScalingPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gse", APIVersion, "DeleteTimerScalingPolicy")
+    return
+}
+
+func NewDeleteTimerScalingPolicyResponse() (response *DeleteTimerScalingPolicyResponse) {
+    response = &DeleteTimerScalingPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DeleteTimerScalingPolicy) is used to delete a scheduled scaling policy of a fleet.
+func (c *Client) DeleteTimerScalingPolicy(request *DeleteTimerScalingPolicyRequest) (response *DeleteTimerScalingPolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteTimerScalingPolicyRequest()
+    }
+    response = NewDeleteTimerScalingPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGameServerSessionDetailsRequest() (request *DescribeGameServerSessionDetailsRequest) {
     request = &DescribeGameServerSessionDetailsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -189,6 +214,31 @@ func (c *Client) DescribePlayerSessions(request *DescribePlayerSessionsRequest) 
         request = NewDescribePlayerSessionsRequest()
     }
     response = NewDescribePlayerSessionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTimerScalingPoliciesRequest() (request *DescribeTimerScalingPoliciesRequest) {
+    request = &DescribeTimerScalingPoliciesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gse", APIVersion, "DescribeTimerScalingPolicies")
+    return
+}
+
+func NewDescribeTimerScalingPoliciesResponse() (response *DescribeTimerScalingPoliciesResponse) {
+    response = &DescribeTimerScalingPoliciesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (DescribeTimerScalingPolicies) is used to query the scheduled scaling policies of a fleet. You can query the policies by `fleetID` or the fleet name. The returned results are paged. 
+func (c *Client) DescribeTimerScalingPolicies(request *DescribeTimerScalingPoliciesRequest) (response *DescribeTimerScalingPoliciesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTimerScalingPoliciesRequest()
+    }
+    response = NewDescribeTimerScalingPoliciesResponse()
     err = c.Send(request, response)
     return
 }
@@ -293,6 +343,33 @@ func (c *Client) JoinGameServerSessionBatch(request *JoinGameServerSessionBatchR
     return
 }
 
+func NewPutTimerScalingPolicyRequest() (request *PutTimerScalingPolicyRequest) {
+    request = &PutTimerScalingPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gse", APIVersion, "PutTimerScalingPolicy")
+    return
+}
+
+func NewPutTimerScalingPolicyResponse() (response *PutTimerScalingPolicyResponse) {
+    response = &PutTimerScalingPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (PutTimerScalingPolicy) is used to create or update a scheduled scaling policy for a fleet.
+// 
+// If the field `timerID` is filled in, the specified policy will be updated, and if `timerID` is left empty, a new policy will be created.
+func (c *Client) PutTimerScalingPolicy(request *PutTimerScalingPolicyRequest) (response *PutTimerScalingPolicyResponse, err error) {
+    if request == nil {
+        request = NewPutTimerScalingPolicyRequest()
+    }
+    response = NewPutTimerScalingPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSearchGameServerSessionsRequest() (request *SearchGameServerSessionsRequest) {
     request = &SearchGameServerSessionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -314,6 +391,33 @@ func (c *Client) SearchGameServerSessions(request *SearchGameServerSessionsReque
         request = NewSearchGameServerSessionsRequest()
     }
     response = NewSearchGameServerSessionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetServerReservedRequest() (request *SetServerReservedRequest) {
+    request = &SetServerReservedRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gse", APIVersion, "SetServerReserved")
+    return
+}
+
+func NewSetServerReservedResponse() (response *SetServerReservedResponse) {
+    response = &SetServerReservedResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API (SetServerReserved) is used to mark the exceptional instances as retained for troubleshooting.
+// 
+// `ReserveValue`: specifies whether to retain the instance. Valid values: `0` (do not retain), `1` (retain). Default value: `0`.
+func (c *Client) SetServerReserved(request *SetServerReservedRequest) (response *SetServerReservedResponse, err error) {
+    if request == nil {
+        request = NewSetServerReservedRequest()
+    }
+    response = NewSetServerReservedResponse()
     err = c.Send(request, response)
     return
 }

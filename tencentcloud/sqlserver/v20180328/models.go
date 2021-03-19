@@ -183,6 +183,15 @@ func (r *CloneDBResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CosUploadBackupFile struct {
+
+	// Backup name
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// Backup size
+	Size *int64 `json:"Size,omitempty" name:"Size"`
+}
+
 type CreateAccountRequest struct {
 	*tchttp.BaseRequest
 
@@ -220,6 +229,55 @@ func (r *CreateAccountResponse) ToJsonString() string {
 }
 
 func (r *CreateAccountResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateBackupMigrationRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of imported target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Migration task restoration type. FULL: full backup restoration, FULL_LOG: full backup and transaction log restoration, FULL_DIFF: full backup and differential backup restoration
+	RecoveryType *string `json:"RecoveryType,omitempty" name:"RecoveryType"`
+
+	// Backup upload type. COS_URL: the backup is stored in user’s Cloud Object Storage, with URL provided. COS_UPLOAD: the backup is stored in the application’s Cloud Object Storage and needs to be uploaded by the user.
+	UploadType *string `json:"UploadType,omitempty" name:"UploadType"`
+
+	// Task name
+	MigrationName *string `json:"MigrationName,omitempty" name:"MigrationName"`
+
+	// If the UploadType is COS_URL, fill in the URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
+	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
+}
+
+func (r *CreateBackupMigrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateBackupMigrationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateBackupMigrationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Backup import task ID
+		BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateBackupMigrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateBackupMigrationResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -403,6 +461,52 @@ func (r *CreateDBResponse) ToJsonString() string {
 }
 
 func (r *CreateDBResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateIncrementalMigrationRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of imported target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup import task ID, which is returned through the API CreateBackupMigration.
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+
+	// Incremental backup file. If the UploadType of a full backup file is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
+	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
+
+	// Whether restoration is required. No: not required. Yes: required. Not required by default.
+	IsRecovery *string `json:"IsRecovery,omitempty" name:"IsRecovery"`
+}
+
+func (r *CreateIncrementalMigrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateIncrementalMigrationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateIncrementalMigrationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// ID of an incremental backup import task
+		IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateIncrementalMigrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateIncrementalMigrationResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -719,6 +823,43 @@ func (r *DeleteAccountResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteBackupMigrationRequest struct {
+	*tchttp.BaseRequest
+
+	// Target instance ID, which is returned through the API DescribeBackupMigration.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup import task ID, which is returned through the API DescribeBackupMigration.
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+}
+
+func (r *DeleteBackupMigrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteBackupMigrationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteBackupMigrationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteBackupMigrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteBackupMigrationResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteDBRequest struct {
 	*tchttp.BaseRequest
 
@@ -756,6 +897,46 @@ func (r *DeleteDBResponse) ToJsonString() string {
 }
 
 func (r *DeleteDBResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteIncrementalMigrationRequest struct {
+	*tchttp.BaseRequest
+
+	// Target instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup import task ID
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+
+	// ID of an incremental backup import task
+	IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
+}
+
+func (r *DeleteIncrementalMigrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteIncrementalMigrationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteIncrementalMigrationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteIncrementalMigrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteIncrementalMigrationResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -842,6 +1023,165 @@ func (r *DescribeAccountsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeBackupCommandRequest struct {
+	*tchttp.BaseRequest
+
+	// Backup file type. Full: full backup. FULL_LOG: full backup which needs log increments. FULL_DIFF: full backup which needs differential increments. LOG: log backup. DIFF: differential backup.
+	BackupFileType *string `json:"BackupFileType,omitempty" name:"BackupFileType"`
+
+	// Database name
+	DataBaseName *string `json:"DataBaseName,omitempty" name:"DataBaseName"`
+
+	// Whether restoration is required. No: not required. Yes: required.
+	IsRecovery *string `json:"IsRecovery,omitempty" name:"IsRecovery"`
+
+	// Storage path of backup files. If this parameter is left empty, the default storage path will be D:\\.
+	LocalPath *string `json:"LocalPath,omitempty" name:"LocalPath"`
+}
+
+func (r *DescribeBackupCommandRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBackupCommandRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupCommandResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Create a backup command
+		Command *string `json:"Command,omitempty" name:"Command"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBackupCommandResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBackupCommandResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupMigrationRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of imported target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup import task ID, which is returned through the API CreateBackupMigration.
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+
+	// Import task name
+	MigrationName *string `json:"MigrationName,omitempty" name:"MigrationName"`
+
+	// Backup file name
+	BackupFileName *string `json:"BackupFileName,omitempty" name:"BackupFileName"`
+
+	// Status set of import tasks
+	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet" list`
+
+	// Import task restoration type: FULL,FULL_LOG,FULL_DIFF
+	RecoveryType *string `json:"RecoveryType,omitempty" name:"RecoveryType"`
+
+	// COS_URL: the backup is stored in user’s Cloud Object Storage, with URL provided. COS_UPLOAD: the backup is stored in the application’s Cloud Object Storage and needs to be uploaded by the user.
+	UploadType *string `json:"UploadType,omitempty" name:"UploadType"`
+
+	// Paging. Page size
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Paging. Number of pages
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Field for order: name,createTime,startTime,endTime
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Type of order: desc,asc
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeBackupMigrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBackupMigrationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupMigrationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of tasks
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Migration task set
+		BackupMigrationSet []*Migration `json:"BackupMigrationSet,omitempty" name:"BackupMigrationSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBackupMigrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBackupMigrationResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupUploadSizeRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of imported target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup import task ID, which is returned through the API CreateBackupMigration
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+
+	// Incremental import task ID
+	IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
+}
+
+func (r *DescribeBackupUploadSizeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBackupUploadSizeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupUploadSizeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Information of uploaded backups
+		CosUploadBackupFileSet []*CosUploadBackupFile `json:"CosUploadBackupFileSet,omitempty" name:"CosUploadBackupFileSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBackupUploadSizeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBackupUploadSizeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeBackupsRequest struct {
 	*tchttp.BaseRequest
 
@@ -906,6 +1246,43 @@ func (r *DescribeBackupsResponse) ToJsonString() string {
 }
 
 func (r *DescribeBackupsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBCharsetsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of mssql-j8kv137v
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDBCharsetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBCharsetsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBCharsetsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Database character set list
+		DatabaseCharsets []*string `json:"DatabaseCharsets,omitempty" name:"DatabaseCharsets" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBCharsetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeDBCharsetsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1080,6 +1457,70 @@ func (r *DescribeFlowStatusResponse) ToJsonString() string {
 }
 
 func (r *DescribeFlowStatusResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIncrementalMigrationRequest struct {
+	*tchttp.BaseRequest
+
+	// Backup import task ID, which is returned through the API CreateBackupMigration
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+
+	// ID of imported target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup file name
+	BackupFileName *string `json:"BackupFileName,omitempty" name:"BackupFileName"`
+
+	// Status set of import tasks
+	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet" list`
+
+	// Paging. Page size
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Paging. Number of pages
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Field for order: name,createTime,startTime,endTime
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Type of order: desc,asc
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// ID of an incremental backup import task
+	IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
+}
+
+func (r *DescribeIncrementalMigrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIncrementalMigrationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIncrementalMigrationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of import tasks
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Incremental import task set
+		IncrementalMigrationSet []*Migration `json:"IncrementalMigrationSet,omitempty" name:"IncrementalMigrationSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeIncrementalMigrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeIncrementalMigrationResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1426,6 +1867,67 @@ func (r *DescribeSlowlogsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeUploadBackupInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of imported target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup import task ID, which is returned through the API CreateBackupMigration
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+}
+
+func (r *DescribeUploadBackupInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeUploadBackupInfoRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUploadBackupInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Bucket name
+		BucketName *string `json:"BucketName,omitempty" name:"BucketName"`
+
+		// Bucket location information
+		Region *string `json:"Region,omitempty" name:"Region"`
+
+		// Storage path
+		Path *string `json:"Path,omitempty" name:"Path"`
+
+		// Temporary key ID
+		TmpSecretId *string `json:"TmpSecretId,omitempty" name:"TmpSecretId"`
+
+		// Temporary key (Key)
+		TmpSecretKey *string `json:"TmpSecretKey,omitempty" name:"TmpSecretKey"`
+
+		// Temporary key (Token)
+		XCosSecurityToken *string `json:"XCosSecurityToken,omitempty" name:"XCosSecurityToken"`
+
+		// Temporary key start time
+		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+		// Temporary key expiration time
+		ExpiredTime *string `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeUploadBackupInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeUploadBackupInfoResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeZonesRequest struct {
 	*tchttp.BaseRequest
 }
@@ -1690,6 +2192,99 @@ type MigrateTask struct {
 	MigrateDetail *MigrateDetail `json:"MigrateDetail,omitempty" name:"MigrateDetail"`
 }
 
+type Migration struct {
+
+	// Backup import task ID or incremental import task ID
+	MigrationId *string `json:"MigrationId,omitempty" name:"MigrationId"`
+
+	// Backup import task name. For an incremental import task, this field will be left empty.
+	// Note: this field may return ‘null’, indicating that no valid values can be obtained.
+	MigrationName *string `json:"MigrationName,omitempty" name:"MigrationName"`
+
+	// Application ID
+	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// ID of migrated target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Migration task restoration type
+	RecoveryType *string `json:"RecoveryType,omitempty" name:"RecoveryType"`
+
+	// Backup user upload type. COS_URL: the backup is stored in user’s Cloud Object Storage, with URL provided. COS_UPLOAD: the backup is stored in the application’s Cloud Object Storage and needs to be uploaded by the user.
+	UploadType *string `json:"UploadType,omitempty" name:"UploadType"`
+
+	// Backup file list, which is determined by UploadType. If the upload type is COS_URL, URL will be saved. If the upload type is COS_UPLOAD, the backup name will be saved.
+	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
+
+	// Migration task status,
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Migration task creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Migration task start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Migration task end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// More information
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Migration detail
+	Detail *MigrationDetail `json:"Detail,omitempty" name:"Detail"`
+
+	// Operation allowed in the current status
+	Action *MigrationAction `json:"Action,omitempty" name:"Action"`
+
+	// Whether this is the final restoration. For a full import task, this field will be left empty.
+	// Note: this field may return ‘null’, indicating that no valid values can be obtained.
+	IsRecovery *string `json:"IsRecovery,omitempty" name:"IsRecovery"`
+}
+
+type MigrationAction struct {
+
+	// All the allowed operations. Values include: view (viewing a task), modify (modifying a task), start (starting a task), incremental (creating an incremental task), delete (deleting a task), and upload (obtaining the upload permission).
+	AllAction []*string `json:"AllAction,omitempty" name:"AllAction" list`
+
+	// Operation allowed in the current status. If the subset of AllAction is left empty, no operations will be allowed.
+	AllowedAction []*string `json:"AllowedAction,omitempty" name:"AllowedAction" list`
+}
+
+type MigrationDetail struct {
+
+	// Total number of steps
+	StepAll *int64 `json:"StepAll,omitempty" name:"StepAll"`
+
+	// Current step
+	StepNow *int64 `json:"StepNow,omitempty" name:"StepNow"`
+
+	// Overall progress. For example, “30” means 30%.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+
+	// Step information. ‘null’ means the migration has not started
+	// Note: this field may return ‘null’, indicating that no valid values can be obtained.
+	StepInfo []*MigrationStep `json:"StepInfo,omitempty" name:"StepInfo" list`
+}
+
+type MigrationStep struct {
+
+	// Step sequence
+	StepNo *int64 `json:"StepNo,omitempty" name:"StepNo"`
+
+	// Step name
+	StepName *string `json:"StepName,omitempty" name:"StepName"`
+
+	// Step ID in English
+	StepId *string `json:"StepId,omitempty" name:"StepId"`
+
+	// Step status: 0 (default value), 1 (succeeded), 2 (failed), 3 (in progress), 4 (not started)
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+}
+
 type ModifyAccountPrivilegeRequest struct {
 	*tchttp.BaseRequest
 
@@ -1764,6 +2359,58 @@ func (r *ModifyAccountRemarkResponse) ToJsonString() string {
 }
 
 func (r *ModifyAccountRemarkResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyBackupMigrationRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of imported target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup import task ID, which is returned through the API CreateBackupMigration
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+
+	// Task name
+	MigrationName *string `json:"MigrationName,omitempty" name:"MigrationName"`
+
+	// Migration task restoration type: FULL,FULL_LOG,FULL_DIFF
+	RecoveryType *string `json:"RecoveryType,omitempty" name:"RecoveryType"`
+
+	// COS_URL: the backup is stored in user’s Cloud Object Storage, with URL provided. COS_UPLOAD: the backup is stored in the application’s Cloud Object Storage and needs to be uploaded by the user.
+	UploadType *string `json:"UploadType,omitempty" name:"UploadType"`
+
+	// If the UploadType is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
+	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
+}
+
+func (r *ModifyBackupMigrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyBackupMigrationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyBackupMigrationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Backup import task ID
+		BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyBackupMigrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyBackupMigrationResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2016,6 +2663,55 @@ func (r *ModifyDBRemarkResponse) ToJsonString() string {
 }
 
 func (r *ModifyDBRemarkResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyIncrementalMigrationRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of imported target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup import task ID, which is returned through the API CreateBackupMigration
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+
+	// Incremental import task ID
+	IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
+
+	// Whether restoration is required. No: not required. Yes: required.
+	IsRecovery *string `json:"IsRecovery,omitempty" name:"IsRecovery"`
+
+	// If the UploadType is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
+	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
+}
+
+func (r *ModifyIncrementalMigrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyIncrementalMigrationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyIncrementalMigrationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// ID of an incremental backup import task
+		IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyIncrementalMigrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyIncrementalMigrationResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2435,6 +3131,89 @@ type SpecInfo struct {
 
 	// Whether multi-AZ deployment is supported. Valid values: MultiZones (only multi-AZ deployment is supported), SameZones (only single-AZ deployment is supported), ALL (both deployments are supported)
 	MultiZonesStatus *string `json:"MultiZonesStatus,omitempty" name:"MultiZonesStatus"`
+}
+
+type StartBackupMigrationRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of imported target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup import task ID, which is returned through the API CreateBackupMigration
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+}
+
+func (r *StartBackupMigrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StartBackupMigrationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StartBackupMigrationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		FlowId *uint64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *StartBackupMigrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StartBackupMigrationResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StartIncrementalMigrationRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of imported target instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup import task ID, which is returned through the API CreateBackupMigration
+	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
+
+	// ID of an incremental backup import task
+	IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
+}
+
+func (r *StartIncrementalMigrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StartIncrementalMigrationRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type StartIncrementalMigrationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		FlowId *uint64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *StartIncrementalMigrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *StartIncrementalMigrationResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
 }
 
 type TerminateDBInstanceRequest struct {
