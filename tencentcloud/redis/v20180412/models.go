@@ -2306,6 +2306,10 @@ type InstanceIntegerParam struct {
 
 	// Parameter status. 1: modifying; 2: modified
 	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Parameter unit
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
 }
 
 type InstanceMultiParam struct {
@@ -2580,6 +2584,9 @@ type InstanceSlowlogDetail struct {
 
 	// Execution duration
 	ExecuteTime *string `json:"ExecuteTime,omitempty" name:"ExecuteTime"`
+
+	// Node ID
+	Node *string `json:"Node,omitempty" name:"Node"`
 }
 
 type InstanceTagInfo struct {

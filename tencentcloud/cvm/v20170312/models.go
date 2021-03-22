@@ -373,6 +373,10 @@ type DataDisk struct {
 	// Cloud disk performance, in MB/s
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ThroughputPerformance *int64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
+
+	// ID of the dedicated cluster to which the instance belongs.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 type DeleteDisasterRecoverGroupsRequest struct {
@@ -2890,7 +2894,7 @@ type OsVersion struct {
 
 type Placement struct {
 
-	// ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain the ID in the returned `Zone` field.
+	// ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/35071) API and obtain the ID in the returned `Zone` field.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// ID of the project to which the instance belongs. To obtain the project IDs, you can call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) and look for the `projectId` fields in the response. If this parameter is not specified, the default project will be used.
@@ -3195,7 +3199,7 @@ type ReservedInstancesOffering struct {
 	FixedPrice *float64 `json:"FixedPrice,omitempty" name:"FixedPrice"`
 
 	// The instance model of the Reserved Instance, such as S3.MEDIUM4.
-	// Valid value: <a href="https://intl.cloud.tencent.com/product/cvm/instances?from_cn_redirect=1">Instance Models</a>
+	// Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518">Reserved Instance Types</a>
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
 	// The payment term of the Reserved Instance, such as **All Upfront**.
@@ -3729,6 +3733,9 @@ type SystemDisk struct {
 
 	// System disk size; unit: GB; default value: 50 GB.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// ID of the dedicated cluster to which the instance belongs.
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 type Tag struct {
@@ -3804,7 +3811,7 @@ type VirtualPrivateCloud struct {
 type ZoneInfo struct {
 
 	// Availability zone name, such as `ap-guangzhou-3`.
-	// The following is a list of all availability zones:
+	// Check below for the list of all availability zones:
 	// <li> ap-chongqing-1 </li>
 	// <li> ap-seoul-1 </li>
 	// <li> ap-seoul-2 </li>
@@ -3840,6 +3847,8 @@ type ZoneInfo struct {
 	// <li> ap-beijing-3 </li>
 	// <li> ap-beijing-4 </li>
 	// <li> ap-beijing-5 </li>
+	// <li> ap-beijing-6 </li>
+	// <li> ap-beijing-7 </li>
 	// <li> na-siliconvalley-1 </li>
 	// <li> na-siliconvalley-2 </li>
 	// <li> eu-frankfurt-1 </li>

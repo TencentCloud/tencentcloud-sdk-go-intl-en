@@ -93,6 +93,31 @@ func (c *Client) CreateClsLogTopic(request *CreateClsLogTopicRequest) (response 
     return
 }
 
+func NewCreateScdnFailedLogTaskRequest() (request *CreateScdnFailedLogTaskRequest) {
+    request = &CreateScdnFailedLogTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "CreateScdnFailedLogTask")
+    return
+}
+
+func NewCreateScdnFailedLogTaskResponse() (response *CreateScdnFailedLogTaskResponse) {
+    response = &CreateScdnFailedLogTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to recreate a failed event log task.
+func (c *Client) CreateScdnFailedLogTask(request *CreateScdnFailedLogTaskRequest) (response *CreateScdnFailedLogTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateScdnFailedLogTaskRequest()
+    }
+    response = NewCreateScdnFailedLogTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCdnDomainRequest() (request *DeleteCdnDomainRequest) {
     request = &DeleteCdnDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -268,7 +293,7 @@ func NewDescribeCdnOriginIpResponse() (response *DescribeCdnOriginIpResponse) {
     return
 }
 
-// This API is used to query the IP information of CDN intermediate nodes. Note: the relevant allowlist needs to be enabled for this API.
+// This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon. Please call `DescribeIpStatus` instead.
 func (c *Client) DescribeCdnOriginIp(request *DescribeCdnOriginIpRequest) (response *DescribeCdnOriginIpResponse, err error) {
     if request == nil {
         request = NewDescribeCdnOriginIpRequest()
@@ -658,7 +683,7 @@ func NewDisableCachesResponse() (response *DisableCachesResponse) {
     return
 }
 
-// This API (DisableCaches) is used to block access to a specific URL on CDN. After a URL is blocked, error 403 will be returned for all access requests to it. (This API is during beta test and not fully available now.)
+// This API is used to block access to a specific URL on CDN. After a URL is blocked, a 403 error will be returned for the arrived access requests initiated from the Chinese mainland. This API is in beta and not fully available now.
 func (c *Client) DisableCaches(request *DisableCachesRequest) (response *DisableCachesResponse, err error) {
     if request == nil {
         request = NewDisableCachesRequest()

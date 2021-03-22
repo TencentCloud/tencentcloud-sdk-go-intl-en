@@ -366,6 +366,12 @@ type ClusterAdvancedSettings struct {
 
 	// Runtime version
 	RuntimeVersion *string `json:"RuntimeVersion,omitempty" name:"RuntimeVersion"`
+
+	// Indicates whether to enable the custom mode for the node’s pod CIDR range
+	EnableCustomizedPodCIDR *bool `json:"EnableCustomizedPodCIDR,omitempty" name:"EnableCustomizedPodCIDR"`
+
+	// The basic number of Pods in custom mode
+	BasePodNumber *int64 `json:"BasePodNumber,omitempty" name:"BasePodNumber"`
 }
 
 type ClusterAsGroup struct {
@@ -522,6 +528,10 @@ type ClusterExtraArgs struct {
 	// kube-scheduler custom parameter
 	// Note: this field may return null, indicating that no valid value is obtained.
 	KubeScheduler []*string `json:"KubeScheduler,omitempty" name:"KubeScheduler" list`
+
+	// etcd custom parameter, which is only effective for self-deployed cluster.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Etcd []*string `json:"Etcd,omitempty" name:"Etcd" list`
 }
 
 type ClusterNetworkSettings struct {

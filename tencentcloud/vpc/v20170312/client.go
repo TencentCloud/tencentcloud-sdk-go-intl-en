@@ -2312,6 +2312,31 @@ func (c *Client) DescribeCcnAttachedInstances(request *DescribeCcnAttachedInstan
     return
 }
 
+func NewDescribeCcnRegionBandwidthLimitsRequest() (request *DescribeCcnRegionBandwidthLimitsRequest) {
+    request = &DescribeCcnRegionBandwidthLimitsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeCcnRegionBandwidthLimits")
+    return
+}
+
+func NewDescribeCcnRegionBandwidthLimitsResponse() (response *DescribeCcnRegionBandwidthLimitsResponse) {
+    response = &DescribeCcnRegionBandwidthLimitsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the outbound bandwidth caps of all regions connected with a CCN instance. The API only returns regions included in the associated network instances.
+func (c *Client) DescribeCcnRegionBandwidthLimits(request *DescribeCcnRegionBandwidthLimitsRequest) (response *DescribeCcnRegionBandwidthLimitsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCcnRegionBandwidthLimitsRequest()
+    }
+    response = NewDescribeCcnRegionBandwidthLimitsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCcnRoutesRequest() (request *DescribeCcnRoutesRequest) {
     request = &DescribeCcnRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},

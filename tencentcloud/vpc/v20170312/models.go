@@ -3942,18 +3942,20 @@ func (r *DescribeAddressTemplatesResponse) FromJsonString(s string) error {
 type DescribeAddressesRequest struct {
 	*tchttp.BaseRequest
 
-	// The list of unique IDs of EIPs, such as `eip-11112222`. `AddressIds` and `Filters` cannot be specified at the same time.
+	// The list of unique IDs of EIPs in the format of `eip-11112222`. `AddressIds` and `Filters.address-id` cannot be specified at the same time.
 	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds" list`
 
-	// The upper limit for `Filters` in each request is 10 and 5 for `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. Detailed filter conditions are as follows:
-	// <li> address-id - String - Required: no - (Filter condition) The unique EIP ID, such as `eip-11112222`.</li>
-	// <li> address-name - String - Required: no - (Filter condition) The EIP name. Fuzzy filtering is not supported.</li>
-	// <li> address-ip - String - Required: no - (Filter condition) Filters by EIP.</li>
-	// <li> address-status - String - Required: no - (Filter condition) The EIP state. Possible EIP states are: 'CREATING', 'BINDING', 'BIND', 'UNBINDING', 'UNBIND', 'OFFLINING', and 'BIND_ENI'.</li>
-	// <li> instance-id - String - Required: no - (Filter condition) The ID of the instance bound to the EIP, such as `ins-11112222`.</li>
-	// <li> private-ip-address - String - Required: no - (Filter condition) The private IP address bound to the EIP.</li>
-	// <li> network-interface-id - String - Required: no - (Filter condition) The ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
-	// <li> is-arrears - String - Required: no - (Filter condition) Whether the EIP is in arrears. (TRUE: the EIP is in arrears | FALSE: the billing status of the EIP is normal)</li>
+	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
+	// <li> `address-id` - String - Required: No - (Filter condition) Filter by the unique EIP ID in the format of `eip-11112222`.</li>
+	// <li> `address-name` - String - Required: No - (Filter condition) Filter by EIP name. Fuzzy filtering is not supported. </li>
+	// <li> `address-ip` - String - Required: No - (Filter condition) Filter by the IP address of EIP.</li>
+	// <li> address-status - String - Required: no - (Filter condition) Filter by the EIP state. Possible EIP states are: 'CREATING', 'BINDING', 'BIND', 'UNBINDING', 'UNBIND', 'OFFLINING', and 'BIND_ENI'.</li>
+	// <li> `instance-id` - String - Required: No - (Filter condition) Filter by the ID of the instance bound to the EIP in the format of `ins-11112222`.</li>
+	// <li> `private-ip-address` - String - Required: No - (Filter condition) Filter by the private IP bound to the EIP.</li>
+	// <li> `network-interface-id` - String - Required: No - (Filter condition) Filter by the ID of the ENI bound to the EIP in the format of `eni-11112222`.</li>
+	// <li> `is-arrears` - String - Required: No - (Filter condition) Filter by whether the EIP is overdue. (TRUE: The EIP is overdue | FALSE: The EIP billing status is normal)</li>
+	// <li> `address-type` - String - Required: No - (Filter condition) Filter by the IP type. Optional values: 'EIP'，'AnycastEIP'，'HighQualityEIP'</li>
+	// <li> `address-isp` - String - Required: No - (Filter condition) Filter by the ISP type. Optional values: 'BGP'，'CMCC'，'CUCC', 'CTCC'</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// The Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
@@ -4281,6 +4283,43 @@ func (r *DescribeCcnAttachedInstancesResponse) ToJsonString() string {
 }
 
 func (r *DescribeCcnAttachedInstancesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCcnRegionBandwidthLimitsRequest struct {
+	*tchttp.BaseRequest
+
+	// The CCN instance ID in the format of `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+}
+
+func (r *DescribeCcnRegionBandwidthLimitsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCcnRegionBandwidthLimitsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCcnRegionBandwidthLimitsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The outbound bandwidth caps of all regions connected with the specified CCN instance
+		CcnRegionBandwidthLimitSet []*CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimitSet,omitempty" name:"CcnRegionBandwidthLimitSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCcnRegionBandwidthLimitsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeCcnRegionBandwidthLimitsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5723,6 +5762,7 @@ type DescribeSecurityGroupsResponse struct {
 	Response *struct {
 
 		// Security group object.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		SecurityGroupSet []*SecurityGroup `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet" list`
 
 		// The number of instances meeting the filter condition.

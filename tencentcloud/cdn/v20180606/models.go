@@ -164,6 +164,9 @@ type AddCdnDomainRequest struct {
 
 	// Offline cache
 	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
+
+	// QUIC is in beta now. Please submit an application to join the beta. For more information, please see QUIC product documents.
+	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
 }
 
 func (r *AddCdnDomainRequest) ToJsonString() string {
@@ -425,11 +428,11 @@ type AdvancedCache struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitempty" name:"IgnoreCacheControl"`
 
-	// Ignore the Set-Cookie header of an origin server
-	// on: enabled
-	// off: disabled
-	// This is disabled by default
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Whether to cache the header and body on cache nodes if the origin server returns the header `Set-Cookie`.
+	// on: Enable; do not cache the header and body.
+	// off: Disable; follow the custom cache rules of cache nodes.
+	// It is disabled by default.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	IgnoreSetCookie *string `json:"IgnoreSetCookie,omitempty" name:"IgnoreSetCookie"`
 }
 
@@ -1078,6 +1081,47 @@ func (r *CreateClsLogTopicResponse) ToJsonString() string {
 }
 
 func (r *CreateClsLogTopicResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateScdnFailedLogTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the failed task to retry
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Region. Valid values: `mainland` and `overseas`.
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
+func (r *CreateScdnFailedLogTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateScdnFailedLogTaskRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateScdnFailedLogTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Creation result. 
+	// 0: Creation succeeded
+		Result *string `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateScdnFailedLogTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateScdnFailedLogTaskResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2163,10 +2207,16 @@ func (r *DescribePushTasksResponse) FromJsonString(s string) error {
 type DescribeReportDataRequest struct {
 	*tchttp.BaseRequest
 
-	// Query start time in the format of `yyyy-MM-dd`
+	// Query the start time in the format of `yyyy-MM-dd`
+	// If the report type is `daily`, the start time and end time must be the same day.
+	// If the report type is `weekly`, the start time must be Monday and the end time must be the Sunday of the same week.
+	// If the report type is `monthly`, the start time must be the first day of the calendar month and the end time must be the last day of the same calendar month.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Query end time in the format of `yyyy-MM-dd`
+	// Query the end time in the format of `yyyy-MM-dd`
+	// If the report type is `daily`, the start time and end time must be of the same day.
+	// If the report type is `weekly`, the start time must be Monday and the end time must be the Sunday of the same week.
+	// If the report type is `monthly`, the start time must be the first day of the calendar month and the end time must be the last day of the same calendar month.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Report type
@@ -2498,12 +2548,20 @@ type DetailDomain struct {
 	// Merging pull requests
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginCombine *OriginCombine `json:"OriginCombine,omitempty" name:"OriginCombine"`
+
+	// POST request configuration item
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PostMaxSize *PostSize `json:"PostMaxSize,omitempty" name:"PostMaxSize"`
+
+	// QUIC configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
 }
 
 type DisableCachesRequest struct {
 	*tchttp.BaseRequest
 
-	// List of URLs to be blocked
+	// List of URLs to be blocked (URLs must contain `http://` or `https://`).
 	// Up to 100 entries can be submitted at a time and 3,000 entries per day.
 	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
 }
@@ -3253,12 +3311,11 @@ type ListTopDataRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Object representing the sort criteria. The following objects are supported:
-	// url: sorts by access URL (including the query string). Supported filters are `flux` and `request`
-	// path: sorts by access URL (excluding the query string). Supported filters are `flux` and `request` (allowlist-based feature)
-	// district: sorts by district. Supported filters are `flux` and `request`
-	// isp: sorts by ISP. Supported filters are `flux` and `request`
-	// host: sorts by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, 2XX, 3XX, 4XX, 5XX, and `statusCode`
-	// originHost: sorts by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, `origin_2XX`, `origin_3XX`, `origin_4XX`, `origin_5XX`, and `OriginStatusCode`
+	// `url`: sorts by access URL (URLs carrying no parameters). Supported filters are `flux` and `request`.
+	// `district`: sorts by province, country, or region. Supported filters are `flux` and `request`.
+	// `isp`: sorts by ISP. Supported filters are `flux` and `request`.
+	// `host`: sorts by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, and `statusCode` (2XX, 3XX, 4XX, 5XX).
+	// `originHost`: sorts by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, and `OriginStatusCode` (origin_2XX, origin_3XX, origin_4XX, origin_5XX).
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
 
 	// Metric name used for sorting:
@@ -3836,6 +3893,17 @@ type PathRule struct {
 	RequestHeaders []*HttpHeaderRule `json:"RequestHeaders,omitempty" name:"RequestHeaders" list`
 }
 
+type PostSize struct {
+
+	// Limit the size of a POST request. The default value is 32 MB.
+	// off: Disable
+	// on: Enable
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Maximum size. Value range: 1 MB to 200 MB.
+	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
+}
+
 type PurgePathCacheRequest struct {
 	*tchttp.BaseRequest
 
@@ -4062,6 +4130,12 @@ type QueryStringKey struct {
 	// Array of included/excluded URL parameters (separated by ';')
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type Quic struct {
+
+	// Whether to enable QUIC
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
 type Quota struct {
@@ -4439,6 +4513,14 @@ type ScdnWafConfig struct {
 	// Attack blocking rules
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Rules []*ScdnWafRule `json:"Rules,omitempty" name:"Rules" list`
+
+	// WAF rule level. Valid values: 100, 200, and 300.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Level *int64 `json:"Level,omitempty" name:"Level"`
+
+	// WAF sub-rule switch
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SubRuleSwitch []*WafSubRuleStatus `json:"SubRuleSwitch,omitempty" name:"SubRuleSwitch" list`
 }
 
 type ScdnWafRule struct {
@@ -4953,6 +5035,9 @@ type UpdateDomainConfigRequest struct {
 
 	// Merging pull requests
 	OriginCombine *OriginCombine `json:"OriginCombine,omitempty" name:"OriginCombine"`
+
+	// QUIC is in beta now. Please submit an application to join the beta. For more information, please see QUIC product documents.
+	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {
@@ -5184,6 +5269,15 @@ type ViolationUrl struct {
 
 	// Update time
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type WafSubRuleStatus struct {
+
+	// Sub-rule status. Valid values: `on` and `off`.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// List of rule IDs
+	SubIds []*int64 `json:"SubIds,omitempty" name:"SubIds" list`
 }
 
 type WebpAdapter struct {
