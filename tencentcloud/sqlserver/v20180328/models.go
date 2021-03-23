@@ -570,7 +570,7 @@ type DBCreateInfo struct {
 	// Database name
 	DBName *string `json:"DBName,omitempty" name:"DBName"`
 
-	// Character set. Valid values: Chinese_PRC_CI_AS, Chinese_PRC_CS_AS, Chinese_PRC_BIN, Chinese_Taiwan_Stroke_CI_AS, SQL_Latin1_General_CP1_CI_AS, and SQL_Latin1_General_CP1_CS_AS. If this parameter is left empty, `Chinese_PRC_CI_AS` will be used by default
+	// Character set, which can be queried by the `DescribeDBCharsets` API. Default value: `Chinese_PRC_CI_AS`.
 	Charset *string `json:"Charset,omitempty" name:"Charset"`
 
 	// Database account permission information
@@ -2219,7 +2219,7 @@ type Migration struct {
 	// Backup file list, which is determined by UploadType. If the upload type is COS_URL, URL will be saved. If the upload type is COS_UPLOAD, the backup name will be saved.
 	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
 
-	// Migration task status,
+	// Migration task status. Valid values: `2` (Creation completed), `7` (Importing full backups), `8` (Waiting for incremental backups), `9` (Import success), `10` (Import failure), `12` (Importing incremental backups).
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Migration task creation time

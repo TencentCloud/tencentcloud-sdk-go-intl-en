@@ -365,7 +365,7 @@ type DBInstancePrice struct {
 type DescribeAsyncRequestInfoRequest struct {
 	*tchttp.BaseRequest
 
-	// Async request ID
+	// Async task ID, which is returned by APIs related to async tasks, such as `CreateBackupDBInstance`.
 	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 }
 
@@ -496,6 +496,15 @@ type DescribeDBBackupsRequest struct {
 
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup mode. Valid values: `0` (logical backup), `1` (physical backup), `2` (both modes). Default value: `0`.
+	BackupMethod *int64 `json:"BackupMethod,omitempty" name:"BackupMethod"`
+
+	// Number of entries per page. Maximum value: `100`. If this parameter is left empty, all entries will be returned.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset, starting from `0`. Default value: `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
 func (r *DescribeDBBackupsRequest) ToJsonString() string {
@@ -589,7 +598,7 @@ type DescribeDBInstancesRequest struct {
 	// Cluster type. Valid values: 0 (replica set instance), 1 (sharding instance), -1 (all instances)
 	ClusterType *int64 `json:"ClusterType,omitempty" name:"ClusterType"`
 
-	// Instance status. Valid values: 0 (to be initialized), 1 (in process), 2 (valid), -2 (expired)
+	// Instance status. Valid values: `0` (to be initialized), `1` (executing task), `2` (running), `-2` (isolated monthly-subscribed instance), `-3` (isolated pay-as-you-go instance)
 	Status []*int64 `json:"Status,omitempty" name:"Status" list`
 
 	// VPC ID. This parameter can be left empty for the basic network
@@ -618,6 +627,9 @@ type DescribeDBInstancesRequest struct {
 
 	// Search keyword, which can be instance ID, instance name, or complete IP
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+
+	// Tag information
+	Tags *TagInfo `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -673,6 +685,9 @@ type DescribeSlowLogPatternsRequest struct {
 
 	// Number of entries per page. Minimum value: 1. Maximum value: 100. Default value: 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Slow log format, which can be JSON. If this parameter is left empty, the slow log will be returned in its native format.
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 func (r *DescribeSlowLogPatternsRequest) ToJsonString() string {
@@ -728,6 +743,9 @@ type DescribeSlowLogsRequest struct {
 
 	// Number of entries per page. Minimum value: 1. Maximum value: 100. Default value: 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Slow log format, which can be JSON. If this parameter is left empty, the slow log will be returned in its native format.
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 func (r *DescribeSlowLogsRequest) ToJsonString() string {
@@ -983,15 +1001,17 @@ func (r *InquirePriceRenewDBInstancesResponse) FromJsonString(s string) error {
 
 type InstanceChargePrepaid struct {
 
-	// Purchased usage period (in month). Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. Default value: 1.
+	// Purchased usage period (in month). Valid values: `1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36`. Default value: `1`.
+	// (This parameter is required in `InquirePriceRenewDBInstances` and `RenewDBInstances` APIs.)
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
 	// Auto-renewal flag. Valid values:
-	// NOTIFY_AND_AUTO_RENEW: notify expiration and renew automatically
-	// NOTIFY_AND_MANUAL_RENEW: notify expiration but not renew automatically
-	// DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify expiration nor renew automatically
+	// `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically
+	// `NOTIFY_AND_MANUAL_RENEW`: notify expiration but not renew automatically
+	// `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify expiration nor renew automatically
 	// 
-	// Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis when the account balance is sufficient.
+	// Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis when the account balance is sufficient.
+	// (This parameter is required in `InquirePriceRenewDBInstances` and `RenewDBInstances` APIs.)
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 }
 

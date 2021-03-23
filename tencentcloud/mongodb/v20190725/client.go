@@ -233,7 +233,7 @@ func NewDescribeDBBackupsResponse() (response *DescribeDBBackupsResponse) {
     return
 }
 
-// This API is used to query the list of instance backups. Currently, only backups in the last 7 days can be queried.
+// This API is used to query the list of instance backups. Currently, only backups created in the last seven days can be queried.
 func (c *Client) DescribeDBBackups(request *DescribeDBBackupsRequest) (response *DescribeDBBackupsResponse, err error) {
     if request == nil {
         request = NewDescribeDBBackupsRequest()

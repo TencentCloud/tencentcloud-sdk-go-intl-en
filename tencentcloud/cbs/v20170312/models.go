@@ -797,7 +797,9 @@ type DescribeSnapshotsRequest struct {
 	// List of snapshot IDs to be queried. The parameter does not support specifying both `SnapshotIds` and `Filters`.
 	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds" list`
 
-	// Filter conditions. The specification of both the `SnapshotIds` and `Filters` parameters is not supported. <br><li>snapshot-id - Array of String - Required or not: No - (Filter condition) Filter by the snapshot ID. The format of the snapshot ID is as follows: `snap-11112222`. <br><li>snapshot-name - Array of String - Required or not: No - (Filter condition) Filter by the snapshot name. <br><li>snapshot-state - Array of String - Required or not: No - (Filter condition) Filter by the snapshot status (NORMAL: normal | CREATING: creating | ROLLBACKING: rolling back). <br><li>disk-usage - Array of String - Required or not: No - (Filter condition) Filter by the type of the cloud disk for which the snapshot is created (SYSTEM_DISK: system disk | DATA_DISK: data disk). <br><li>project-id - Array of String - Required or not: No - (Filter condition) Filter by ID of the project to which the cloud disk belongs. <br><li>disk-id - Array of String - Required or not: No - (Filter condition) Filter by the ID of the cloud disk for which the snapshot is created. <br><li>zone - Array of String - Required or not: No - (Filter condition) Filter by [Availability Zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo). <br><li>encrypt - Array of String - Required or not: No - (Filter condition) According to whether it is an encrypted disk snapshot. (TRUE: indicates an encrypted disk snapshot | FALSE: indicates that it is not an encrypted disk snapshot.)
+	// Filters. It cannot be specified together with `SnapshotIds`.<br><li>snapshot-id - Array of String - Optional - Filters by snapshot ID, such as `snap-11112222`.<br><li>snapshot-name - Array of String - Optional - Filters by snapshot name. <br><li>snapshot-state - Array of String - Optional - Filters by snapshot state (NORMAL: normal | CREATING: creating | ROLLBACKING: rolling back). <br><li>disk-usage - Array of String - Optional - Filters by the type of the cloud disk from which a snapshot is created (SYSTEM_DISK: system disk | DATA_DISK: data disk).<br><li>project-id - Array of String - Optional - Filters by the ID of the project to which a cloud disk belongs. <br><li>disk-id - Array of String - Optional - Filters by the ID of the cloud disk from which a snapshot is created.<br><li>zone - Array of String - Optional - Filters by [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo).<br><li>encrypt - Array of String - Optional - Filters by whether a snapshot is created from an encrypted cloud disk. (TRUE: a snapshot of an encrypted cloud disk | FALSE: not a snapshot of an encrypted cloud disk.)
+	// <li>snapshot-type- Array of String - Optional - Filters by the snapshot type specified in `snapshot-type`.
+	// (SHARED_SNAPSHOT: a shared snapshot | PRIVATE_SNAPSHOT: a private snapshot.)
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
@@ -912,7 +914,7 @@ type Disk struct {
 	// The state of the cloud disk. Value range: <br><li>UNATTACHED: Not mounted <br><li>ATTACHING: Mounting <br><li>ATTACHED: Mounted <br><li>DETACHING: Un-mounting <br><li>EXPANDING: Expanding <br><li>ROLLBACKING: Rolling back <br><li>TORECYCE: Pending recycling. <br><li>DUMPING: Copying the hard drive.
 	DiskState *string `json:"DiskState,omitempty" name:"DiskState"`
 
-	// Type of cloud disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
+	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Whether the cloud disk is mounted to the CVM. Value range: <br><li>false: Unmounted <br><li>true: Mounted.
@@ -994,6 +996,10 @@ type Disk struct {
 
 	// Indicates whether a snapshot should be created for backup when the cloud disk is terminated due to arrears or expiration. `True`: create a snapshot to backup the disk upon termination. `False`: terminate the disk without backup
 	BackupDisk *bool `json:"BackupDisk,omitempty" name:"BackupDisk"`
+
+	// Extra performance for a cloud disk, in MB/sec.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
 }
 
 type DiskChargePrepaid struct {
@@ -1445,21 +1451,21 @@ type Policy struct {
 
 type PrepayPrice struct {
 
-	// Original price of the advanced payment for a prepaid cloud disk or snapshot (in CNY).
+	// Original payment of a monthly-subscribed cloud disk or a snapshot, in USD.
 	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
 
-	// Discount price of the advanced payment for a prepaid cloud disk or snapshot (in CNY).
+	// Discounted price of a monthly-subscribed cloud disk or a snapshot, in USD.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 
-	// Highly-precise published unit price of a monthly-subscribed cloud disk or a snapshot, in USD.
+	// Original payment of a monthly-subscribed cloud disk or a snapshot, in USD, with six decimal places.
 	OriginalPriceHigh *string `json:"OriginalPriceHigh,omitempty" name:"OriginalPriceHigh"`
 
-	// Highly-precise discounted unit price of a monthly-subscribed cloud disk or a snapshot, in USD.
+	// Discounted price of a monthly-subscribed cloud disk or a snapshot, in USD, with six decimal places.
 	DiscountPriceHigh *string `json:"DiscountPriceHigh,omitempty" name:"DiscountPriceHigh"`
 
-	// Published unit price of a pay-as-you-go cloud disk, in USD.
+	// Original unit price of a pay-as-you-go cloud disk, in USD.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	UnitPrice *string `json:"UnitPrice,omitempty" name:"UnitPrice"`
+	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
 
 	// Billing unit for pay-as-you-go cloud disks. Valid value: <br><li>HOUR: billed hourly.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -1467,52 +1473,52 @@ type PrepayPrice struct {
 
 	// Discount unit price of a pay-as-you-go cloud disk, in USD.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	UnitPriceDiscount *string `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
+	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
 
-	// Highly-precise published unit price of a pay-as-you-go cloud disk, in USD.
+	// Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UnitPriceHigh *string `json:"UnitPriceHigh,omitempty" name:"UnitPriceHigh"`
 
-	// Highly-precise discounted unit price of a pay-as-you-go cloud disk, in USD.
+	// Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UnitPriceDiscountHigh *string `json:"UnitPriceDiscountHigh,omitempty" name:"UnitPriceDiscountHigh"`
 }
 
 type Price struct {
 
-	// Original price of the advanced payment for a prepaid cloud disk (in CNY).
-	// Note: This field may return null, indicating that no valid value was found.
+	// Original price of a monthly-subscribed cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
 
-	// Discount price of the advanced payment for a prepaid cloud disk (in CNY).
-	// Note: This field may return null, indicating that no valid value was found.
+	// Discounted price of a monthly-subscribed cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 
-	// Original unit price of a postpaid cloud disk (in CNY).
-	// Note: This field may return null, indicating that no valid value was found.
+	// Original unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
 
 	// Billing unit of a postpaid cloud disk. Value range: <br><li>HOUR: Billed by hour.
 	// Note: This field may return null, indicating that no valid value was found.
 	ChargeUnit *string `json:"ChargeUnit,omitempty" name:"ChargeUnit"`
 
-	// Postpaid cloud disk discount price. Unit: CNY.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Discount unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
 
-	// Highly-precise published unit price of a monthly-subscribed cloud disk, in USD.
+	// Original payment of a monthly-subscribed cloud disk, in USD, with six decimal places.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginalPriceHigh *string `json:"OriginalPriceHigh,omitempty" name:"OriginalPriceHigh"`
 
-	// Highly-precise discounted unit price of a monthly-subscribed cloud disk, in USD.
+	// Discounted payment price of a monthly-subscribed cloud disk, in USD, with six decimal places.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DiscountPriceHigh *string `json:"DiscountPriceHigh,omitempty" name:"DiscountPriceHigh"`
 
-	// Highly-precise published unit price of a pay-as-you-go cloud disk, in USD.
+	// Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UnitPriceHigh *string `json:"UnitPriceHigh,omitempty" name:"UnitPriceHigh"`
 
-	// Highly-precise discounted unit price of a pay-as-you-go cloud disk, in USD.
+	// Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UnitPriceDiscountHigh *string `json:"UnitPriceDiscountHigh,omitempty" name:"UnitPriceDiscountHigh"`
 }
@@ -1619,7 +1625,7 @@ type Snapshot struct {
 	// Number of snapshots currently shared
 	ShareReference *uint64 `json:"ShareReference,omitempty" name:"ShareReference"`
 
-	// 
+	// The time when the snapshot sharing starts
 	TimeStartShare *string `json:"TimeStartShare,omitempty" name:"TimeStartShare"`
 }
 
