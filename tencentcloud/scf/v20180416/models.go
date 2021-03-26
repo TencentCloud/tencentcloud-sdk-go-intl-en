@@ -890,6 +890,43 @@ type FunctionVersion struct {
 	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
 }
 
+type GetAccountRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *GetAccountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetAccountRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetAccountResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Namespace usage information
+		AccountUsage *UsageInfo `json:"AccountUsage,omitempty" name:"AccountUsage"`
+
+		// Namespace limit information
+		AccountLimit *LimitsInfo `json:"AccountLimit,omitempty" name:"AccountLimit"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetAccountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetAccountResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type GetAliasRequest struct {
 	*tchttp.BaseRequest
 
@@ -1490,6 +1527,15 @@ type LayerVersionSimple struct {
 	LayerVersion *int64 `json:"LayerVersion,omitempty" name:"LayerVersion"`
 }
 
+type LimitsInfo struct {
+
+	// Limit of namespace quantity
+	NamespacesCount *int64 `json:"NamespacesCount,omitempty" name:"NamespacesCount"`
+
+	// Namespace limit information
+	Namespace []*NamespaceLimit `json:"Namespace,omitempty" name:"Namespace" list`
+}
+
 type ListAliasesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1982,6 +2028,52 @@ type Namespace struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
+type NamespaceLimit struct {
+
+	// Total number of functions
+	FunctionsCount *int64 `json:"FunctionsCount,omitempty" name:"FunctionsCount"`
+
+	// Trigger information
+	Trigger *TriggerCount `json:"Trigger,omitempty" name:"Trigger"`
+
+	// Namespace name
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Concurrency
+	ConcurrentExecutions *int64 `json:"ConcurrentExecutions,omitempty" name:"ConcurrentExecutions"`
+
+	// Timeout limit
+	TimeoutLimit *int64 `json:"TimeoutLimit,omitempty" name:"TimeoutLimit"`
+
+	// Test event limit
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TestModelLimit *int64 `json:"TestModelLimit,omitempty" name:"TestModelLimit"`
+
+	// Initialization timeout limit
+	InitTimeoutLimit *int64 `json:"InitTimeoutLimit,omitempty" name:"InitTimeoutLimit"`
+
+	// Limit of async retry attempt quantity
+	RetryNumLimit *int64 `json:"RetryNumLimit,omitempty" name:"RetryNumLimit"`
+
+	// Lower limit of message retention time for async retry
+	MinMsgTTL *int64 `json:"MinMsgTTL,omitempty" name:"MinMsgTTL"`
+
+	// Upper limit of message retention time for async retry
+	MaxMsgTTL *int64 `json:"MaxMsgTTL,omitempty" name:"MaxMsgTTL"`
+}
+
+type NamespaceUsage struct {
+
+	// Function array
+	Functions []*string `json:"Functions,omitempty" name:"Functions" list`
+
+	// Namespace name
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Number of functions in namespace
+	FunctionsCount *int64 `json:"FunctionsCount,omitempty" name:"FunctionsCount"`
+}
+
 type PublicNetConfigIn struct {
 
 	// Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
@@ -2375,6 +2467,42 @@ type Trigger struct {
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 }
 
+type TriggerCount struct {
+
+	// Number of COS triggers
+	Cos *int64 `json:"Cos,omitempty" name:"Cos"`
+
+	// Number of timer triggers
+	Timer *int64 `json:"Timer,omitempty" name:"Timer"`
+
+	// Number of CMQ triggers
+	Cmq *int64 `json:"Cmq,omitempty" name:"Cmq"`
+
+	// Total number of triggers
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// Number of CKafka triggers
+	Ckafka *int64 `json:"Ckafka,omitempty" name:"Ckafka"`
+
+	// Number of API Gateway triggers
+	Apigw *int64 `json:"Apigw,omitempty" name:"Apigw"`
+
+	// Number of CLS triggers
+	Cls *int64 `json:"Cls,omitempty" name:"Cls"`
+
+	// Number of CLB triggers
+	Clb *int64 `json:"Clb,omitempty" name:"Clb"`
+
+	// Number of MPS triggers
+	Mps *int64 `json:"Mps,omitempty" name:"Mps"`
+
+	// Number of CM triggers
+	Cm *int64 `json:"Cm,omitempty" name:"Cm"`
+
+	// Number of VOD triggers
+	Vod *int64 `json:"Vod,omitempty" name:"Vod"`
+}
+
 type TriggerInfo struct {
 
 	// Whether to enable
@@ -2648,6 +2776,24 @@ func (r *UpdateNamespaceResponse) ToJsonString() string {
 
 func (r *UpdateNamespaceResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type UsageInfo struct {
+
+	// Number of namespaces
+	NamespacesCount *int64 `json:"NamespacesCount,omitempty" name:"NamespacesCount"`
+
+	// Namespace details
+	Namespace []*NamespaceUsage `json:"Namespace,omitempty" name:"Namespace" list`
+
+	// Upper limit of user concurrency memory in the current region
+	TotalConcurrencyMem *int64 `json:"TotalConcurrencyMem,omitempty" name:"TotalConcurrencyMem"`
+
+	// Quota of configured user concurrency memory in the current region
+	TotalAllocatedConcurrencyMem *int64 `json:"TotalAllocatedConcurrencyMem,omitempty" name:"TotalAllocatedConcurrencyMem"`
+
+	// Quota of account concurrency actually configured by user
+	UserConcurrencyMemLimit *int64 `json:"UserConcurrencyMemLimit,omitempty" name:"UserConcurrencyMemLimit"`
 }
 
 type Variable struct {

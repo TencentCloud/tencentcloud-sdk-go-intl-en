@@ -1049,6 +1049,9 @@ type UpdatePluginsRequest struct {
 
 	// Whether to force restart
 	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+
+	// Whether to reinstall
+	ForceUpdate *bool `json:"ForceUpdate,omitempty" name:"ForceUpdate"`
 }
 
 func (r *UpdatePluginsRequest) ToJsonString() string {

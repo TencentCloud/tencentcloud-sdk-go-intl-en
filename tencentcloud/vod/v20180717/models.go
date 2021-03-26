@@ -1433,16 +1433,16 @@ type AiReviewTerrorismTaskOutput struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tag of detected terrorism information in a video. Valid values:
-	// <li>guns: weapons and guns.</li>
-	// <li>crowd: crowd.</li>
-	// <li>police: police force.</li>
-	// <li>bloody: bloody scenes.</li>
-	// <li>banners: terrorism flags.</li>
-	// <li>militant: militants.</li>
-	// <li>explosion: explosions and fires.</li>
-	// <li>terrorists: terrorists.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Tag of the detected terrorism information in a video. Valid values:
+	// <li>`guns`: weapons and guns</li>
+	// <li>`crowd`: crowds</li>
+	// <li>`police`: police forces</li>
+	// <li>`bloody`: bloody images</li>
+	// <li>`banners`: terrorism flags</li>
+	// <li>`militant`: militants</li>
+	// <li>`explosion`: explosions and fires</li>
+	// <li>`terrorists`: terrorists</li>
+	// <li>`scenario`: terrorism images</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// List of video segments that contain the detected terrorism information.
@@ -2132,6 +2132,16 @@ type ComposeMediaTask struct {
 	// Output of media file composing task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *ComposeMediaTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// Metadata of a source video.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
+
+	// 
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// 
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 }
 
 type ComposeMediaTaskInput struct {
@@ -5758,6 +5768,9 @@ type EditMediaTask struct {
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// Metadata of a source video
+	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
 }
 
 type EditMediaTaskInput struct {
@@ -9581,6 +9594,9 @@ type PullUploadTask struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MediaBasicInfo *MediaBasicInfo `json:"MediaBasicInfo,omitempty" name:"MediaBasicInfo"`
 
+	// Metadata of a source video
+	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
+
 	// Playback address generated after pull for upload is completed.
 	FileUrl *string `json:"FileUrl,omitempty" name:"FileUrl"`
 
@@ -9776,37 +9792,6 @@ type SampleSnapshotTemplate struct {
 type SearchMediaRequest struct {
 	*tchttp.BaseRequest
 
-	// Tag set, which matches any element in the set.
-	// <li>Tag length limit: 8 characters.</li>
-	// <li>Array length limit: 10.</li>
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
-
-	// Category ID set. The categories of the specified IDs and all subcategories in the set are matched.
-	// <li>Array length limit: 10.</li>
-	ClassIds []*int64 `json:"ClassIds,omitempty" name:"ClassIds" list`
-
-	// [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) set. Any element in the set can be matched.
-	// <li>Array length limit: 10.</li>
-	StreamIds []*string `json:"StreamIds,omitempty" name:"StreamIds" list`
-
-	// Unique ID of LVB recording file. Any element in the set can be matched.
-	// <li>Array length limit: 10.</li>
-	Vids []*string `json:"Vids,omitempty" name:"Vids" list`
-
-	// Media file source set. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
-	// <li>Array length limit: 10.</li>
-	SourceTypes []*string `json:"SourceTypes,omitempty" name:"SourceTypes" list`
-
-	// File type. Any element in the set can be matched.
-	// <li>Video: video file</li>
-	// <li>Audio: audio file</li>
-	// <li>Image: image file</li>
-	Categories []*string `json:"Categories,omitempty" name:"Categories" list`
-
-	// Matches files created within the time period.
-	// <li>Includes specified start and end points in time.</li>
-	CreateTime *TimeRange `json:"CreateTime,omitempty" name:"CreateTime"`
-
 	// File ID set. Any element in the set can be matched.
 	// <li>Array length limit: 10.</li>
 	// <li>ID length limit: 40 characters.</li>
@@ -9822,10 +9807,41 @@ type SearchMediaRequest struct {
 	// <li>Array length limit: 10.</li>
 	NamePrefixes []*string `json:"NamePrefixes,omitempty" name:"NamePrefixes" list`
 
-	// File description set. Any element in the set can be matched.
-	// <li>Description length limit: 100 characters.</li>
-	// <li>Array length limit: 10.</li>
+	// File description set. Media file descriptions are fuzzily matched. The higher the match rate, the higher-ranked the result.
+	// <li>Length limit for a single description: 100 characters</li>
+	// <li>Array length limit: 10</li>
 	Descriptions []*string `json:"Descriptions,omitempty" name:"Descriptions" list`
+
+	// Category ID set. The categories of the specified IDs and all subcategories in the set are matched.
+	// <li>Array length limit: 10.</li>
+	ClassIds []*int64 `json:"ClassIds,omitempty" name:"ClassIds" list`
+
+	// Tag set, which matches any element in the set.
+	// <li>Tag length limit: 8 characters.</li>
+	// <li>Array length limit: 10.</li>
+	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+
+	// File type. Any element in the set can be matched.
+	// <li>Video: video file</li>
+	// <li>Audio: audio file</li>
+	// <li>Image: image file</li>
+	Categories []*string `json:"Categories,omitempty" name:"Categories" list`
+
+	// Media file source set. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+	// <li>Array length limit: 10.</li>
+	SourceTypes []*string `json:"SourceTypes,omitempty" name:"SourceTypes" list`
+
+	// [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) set. Any element in the set can be matched.
+	// <li>Array length limit: 10.</li>
+	StreamIds []*string `json:"StreamIds,omitempty" name:"StreamIds" list`
+
+	// Unique ID of LVB recording file. Any element in the set can be matched.
+	// <li>Array length limit: 10.</li>
+	Vids []*string `json:"Vids,omitempty" name:"Vids" list`
+
+	// Matches files created within the time period.
+	// <li>Includes specified start and end points in time.</li>
+	CreateTime *TimeRange `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Sorting order.
 	// <li>Valid value of `Sort.Field`: CreateTime.</li>
@@ -9856,6 +9872,14 @@ type SearchMediaRequest struct {
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
+	// (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
+	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// (This is not recommended. `SourceTypes` should be used instead)
+	// Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+
 	// (This is not recommended. `StreamIds` should be used instead)
 	// [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1).
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
@@ -9863,10 +9887,6 @@ type SearchMediaRequest struct {
 	// (This is not recommended. `Vids` should be used instead)
 	// Unique ID of LVB recording file.
 	Vid *string `json:"Vid,omitempty" name:"Vid"`
-
-	// (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
-	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
-	Text *string `json:"Text,omitempty" name:"Text"`
 
 	// (This is not recommended. `CreateTime` should be used instead)
 	// Start time in the creation time range.
@@ -9881,10 +9901,6 @@ type SearchMediaRequest struct {
 	// <li>If `CreateTime.Before` also exists, it will be used first.</li>
 	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// (This is not recommended. `SourceTypes` should be used instead)
-	// Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
-	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
 }
 
 func (r *SearchMediaRequest) ToJsonString() string {
@@ -9904,8 +9920,7 @@ type SearchMediaResponse struct {
 	// <li>Maximum value: 5000. If the number of eligible entries is greater than 5,000, this field will return 5,000 instead of the actual number.</li>
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// Media file information list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Media file information list
 		MediaInfoSet []*MediaInfo `json:"MediaInfoSet,omitempty" name:"MediaInfoSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -10550,15 +10565,16 @@ type TerrorismImgReviewTemplateInfo struct {
 	// <li>OFF: disables terrorism information detection in video image task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tag for terrorism information detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>guns: weapons and guns;</li>
-	// <li>crowd: crowd;</li>
-	// <li>bloody: bloody scenes;</li>
-	// <li>police: police force;</li>
-	// <li>banners: terrorism flags;</li>
-	// <li>militant: militants;</li>
-	// <li>explosion: explosions and fires;</li>
-	// <li>terrorists: terrorists.</li>
+	// Filter tags for terrorism information detection in images. If a moderation result contains a selected tag, it will be returned. If no filter tag is specified, all moderation results will be returned. Valid values:
+	// <li>`guns`: weapons and guns</li>
+	// <li>`crowd`: crowds</li>
+	// <li>`bloody`: bloody images</li>
+	// <li>`police`: police forces</li>
+	// <li>`banners`: terrorism flags</li>
+	// <li>`militant`: militants</li>
+	// <li>`explosion`: explosions and fires</li>
+	// <li>`terrorists`: terrorists</li>
+	// <li>`scenario`: terrorism images</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
@@ -10575,15 +10591,16 @@ type TerrorismImgReviewTemplateInfoForUpdate struct {
 	// <li>OFF: disables terrorism information detection in video image task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tag for terrorism information detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>guns: weapons and guns;</li>
-	// <li>crowd: crowd;</li>
-	// <li>bloody: bloody scenes;</li>
-	// <li>police: police force;</li>
-	// <li>banners: terrorism flags;</li>
-	// <li>militant: militants;</li>
-	// <li>explosion: explosions and fires;</li>
-	// <li>terrorists: terrorists.</li>
+	// Filter tags for terrorism information detection in images. If a moderation result contains a selected tag, it will be returned. If no filter tag is specified, all moderation results will be returned. Valid values:
+	// <li>`guns`: weapons and guns</li>
+	// <li>`crowd`: crowds</li>
+	// <li>`bloody`: bloody images</li>
+	// <li>`police`: police forces</li>
+	// <li>`banners`: terrorism flags</li>
+	// <li>`militant`: militants</li>
+	// <li>`explosion`: explosions and fires</li>
+	// <li>`terrorists`: terrorists</li>
+	// <li>`scenario`: terrorism images</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
@@ -10666,8 +10683,8 @@ type TimeRange struct {
 	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	After *string `json:"After,omitempty" name:"After"`
 
-	// <li>Before or at this time (end time).</li>
-	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+	// <li>Earlier than this time (end time).</li>
+	// <li>In ISO 8601 format. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	Before *string `json:"Before,omitempty" name:"Before"`
 }
 
