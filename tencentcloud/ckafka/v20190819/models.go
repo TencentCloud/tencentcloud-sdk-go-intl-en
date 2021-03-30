@@ -1244,6 +1244,25 @@ func (r *DescribeUserResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DynamicRetentionTime struct {
+
+	// Whether the dynamic message retention time configuration is enabled. 0: disabled; 1: enabled
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+
+	// Disk quota threshold (in percentage) for triggering the message retention time change event
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	DiskQuotaPercentage *int64 `json:"DiskQuotaPercentage,omitempty" name:"DiskQuotaPercentage"`
+
+	// Percentage by which the message retention time is shortened each time
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	StepForwardPercentage *int64 `json:"StepForwardPercentage,omitempty" name:"StepForwardPercentage"`
+
+	// Minimum retention time, in minutes
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	BottomRetention *int64 `json:"BottomRetention,omitempty" name:"BottomRetention"`
+}
+
 type Filter struct {
 
 	// Field to be filtered.
@@ -1461,8 +1480,8 @@ type InstanceAttributesResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MaxGroupNum *int64 `json:"MaxGroupNum,omitempty" name:"MaxGroupNum"`
 
-	// Sale type
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Offering type. `0`: Standard Edition; `1`: Professional Edition
+	// Note: this field may return `null`, indicating that no valid value was found.
 	Cvm *int64 `json:"Cvm,omitempty" name:"Cvm"`
 
 	// Type.
@@ -1472,6 +1491,10 @@ type InstanceAttributesResponse struct {
 	// Features supported by the instance. `FEATURE_SUBNET_ACL` indicates that the ACL policy supports setting subnets. 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Features []*string `json:"Features,omitempty" name:"Features" list`
+
+	// Dynamic message retention policy
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	RetentionTimeConfig *DynamicRetentionTime `json:"RetentionTimeConfig,omitempty" name:"RetentionTimeConfig"`
 }
 
 type InstanceConfigDO struct {
@@ -1556,6 +1579,26 @@ type InstanceDetail struct {
 	// CKafka sale type
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Cvm *int64 `json:"Cvm,omitempty" name:"Cvm"`
+
+	// CKafka instance type
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Disk type
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Maximum number of topics for the current instance
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	MaxTopicNumber *int64 `json:"MaxTopicNumber,omitempty" name:"MaxTopicNumber"`
+
+	// Maximum number of partitions for the current instance
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	MaxPartitionNumber *int64 `json:"MaxPartitionNumber,omitempty" name:"MaxPartitionNumber"`
+
+	// Time of scheduled upgrade
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	RebalanceTime *string `json:"RebalanceTime,omitempty" name:"RebalanceTime"`
 }
 
 type InstanceDetailResponse struct {
@@ -1675,6 +1718,12 @@ type ModifyInstanceAttributesRequest struct {
 
 	// Instance configuration
 	Config *ModifyInstanceAttributesConfig `json:"Config,omitempty" name:"Config"`
+
+	// Dynamic message retention policy configuration
+	DynamicRetentionConfig *DynamicRetentionTime `json:"DynamicRetentionConfig,omitempty" name:"DynamicRetentionConfig"`
+
+	// Modification of the rebalancing time after upgrade
+	RebalanceTime *int64 `json:"RebalanceTime,omitempty" name:"RebalanceTime"`
 }
 
 func (r *ModifyInstanceAttributesRequest) ToJsonString() string {
@@ -1983,6 +2032,10 @@ type TopicDetail struct {
 	// Advanced configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Config *Config `json:"Config,omitempty" name:"Config"`
+
+	// Message retention time configuration (for recording the latest retention time)
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	RetentionTimeConfig *TopicRetentionTimeConfigRsp `json:"RetentionTimeConfig,omitempty" name:"RetentionTimeConfig"`
 }
 
 type TopicDetailResponse struct {
@@ -2019,6 +2072,21 @@ type TopicResult struct {
 	// Number of eligible topics
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+}
+
+type TopicRetentionTimeConfigRsp struct {
+
+	// Expected value, i.e., the topic message retention time (min) configured
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Expect *int64 `json:"Expect,omitempty" name:"Expect"`
+
+	// Current value (min), i.e., the retention time currently in effect, which may be dynamically adjusted
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Current *int64 `json:"Current,omitempty" name:"Current"`
+
+	// Last modified time
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	ModTimeStamp *int64 `json:"ModTimeStamp,omitempty" name:"ModTimeStamp"`
 }
 
 type User struct {
