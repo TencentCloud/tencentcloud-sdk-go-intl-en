@@ -450,6 +450,31 @@ func (c *Client) GetFunctionAddress(request *GetFunctionAddressRequest) (respons
     return
 }
 
+func NewGetFunctionEventInvokeConfigRequest() (request *GetFunctionEventInvokeConfigRequest) {
+    request = &GetFunctionEventInvokeConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "GetFunctionEventInvokeConfig")
+    return
+}
+
+func NewGetFunctionEventInvokeConfigResponse() (response *GetFunctionEventInvokeConfigResponse) {
+    response = &GetFunctionEventInvokeConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the async retry configuration of a function, including the number of retry attempts and message retention period.
+func (c *Client) GetFunctionEventInvokeConfig(request *GetFunctionEventInvokeConfigRequest) (response *GetFunctionEventInvokeConfigResponse, err error) {
+    if request == nil {
+        request = NewGetFunctionEventInvokeConfigRequest()
+    }
+    response = NewGetFunctionEventInvokeConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetFunctionLogsRequest() (request *GetFunctionLogsRequest) {
     request = &GetFunctionLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -996,6 +1021,31 @@ func (c *Client) UpdateFunctionConfiguration(request *UpdateFunctionConfiguratio
         request = NewUpdateFunctionConfigurationRequest()
     }
     response = NewUpdateFunctionConfigurationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateFunctionEventInvokeConfigRequest() (request *UpdateFunctionEventInvokeConfigRequest) {
+    request = &UpdateFunctionEventInvokeConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "UpdateFunctionEventInvokeConfig")
+    return
+}
+
+func NewUpdateFunctionEventInvokeConfigResponse() (response *UpdateFunctionEventInvokeConfigResponse) {
+    response = &UpdateFunctionEventInvokeConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to update the async retry configuration of a function, including the number of retry attempts and message retention period.
+func (c *Client) UpdateFunctionEventInvokeConfig(request *UpdateFunctionEventInvokeConfigRequest) (response *UpdateFunctionEventInvokeConfigResponse, err error) {
+    if request == nil {
+        request = NewUpdateFunctionEventInvokeConfigRequest()
+    }
+    response = NewUpdateFunctionEventInvokeConfigResponse()
     err = c.Send(request, response)
     return
 }

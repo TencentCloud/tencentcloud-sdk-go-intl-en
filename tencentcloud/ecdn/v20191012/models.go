@@ -333,16 +333,10 @@ type DescribeEcdnDomainStatisticsRequest struct {
 	// The time span cannot exceed 90 days.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Statistical metric name. flux: traffic in bytes
-	// bandwidth: bandwidth in bps
+	// Statistical metric names:
+	// flux: traffic (in bytes)
+	// bandwidth: bandwidth (in bps)
 	// request: number of requests
-	// delay: response time in ms
-	// static_request: number of static requests
-	// static_flux: static traffic in bytes
-	// static_bandwidth: static bandwidth in bps
-	// dynamic_request: number of dynamic requests
-	// dynamic_flux: dynamic traffic in bytes
-	// dynamic_bandwidth: dynamic bandwidth in bps
 	Metrics []*string `json:"Metrics,omitempty" name:"Metrics" list`
 
 	// Specifies the list of domain names to be queried
@@ -357,6 +351,13 @@ type DescribeEcdnDomainStatisticsRequest struct {
 
 	// Number of entries per page. Default value: 1000. Maximum value: 3,000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Statistical areas:
+	// mainland: Chinese mainland
+	// oversea: outside the Chinese mainland
+	// global: global
+	// Default value: global
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 func (r *DescribeEcdnDomainStatisticsRequest) ToJsonString() string {
@@ -402,20 +403,13 @@ type DescribeEcdnStatisticsRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Specifies the query metric, which can be:
-	// flux: traffic in bytes
-	// bandwidth: bandwidth in bps
+	// flux: traffic (in bytes)
+	// bandwidth: bandwidth (in bps)
 	// request: number of requests
-	// delay: response time in ms
 	// 2xx: returns the number of 2xx status codes or details of status codes starting with 2
 	// 3xx: returns the number of 3xx status codes or details of status codes starting with 3
 	// 4xx: returns the number of 4xx status codes or details of status codes starting with 4
 	// 5xx: returns the number of 5xx status codes or details of status codes starting with 5
-	// static_request: number of static requests
-	// static_flux: static traffic in bytes
-	// static_bandwidth: static bandwidth in bps
-	// dynamic_request: number of dynamic requests
-	// dynamic_flux: dynamic traffic in bytes
-	// dynamic_bandwidth: dynamic bandwidth in bps
 	Metrics []*string `json:"Metrics,omitempty" name:"Metrics" list`
 
 	// Time granularity, which can be:
@@ -433,6 +427,13 @@ type DescribeEcdnStatisticsRequest struct {
 	// Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
 	// If no domain name is entered, the specified project will be queried; otherwise, the domain name will prevail
 	Projects []*int64 `json:"Projects,omitempty" name:"Projects" list`
+
+	// Statistical areas:
+	// mainland: Chinese mainland
+	// oversea: outside the Chinese mainland
+	// global: global
+	// Default value: global
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 func (r *DescribeEcdnStatisticsRequest) ToJsonString() string {
@@ -929,8 +930,7 @@ type IpStatus struct {
 
 type Origin struct {
 
-	// Primary origin server list. The default format is ["ip1:port1", "ip2:port2"].
-	// Weights can be configured in the origin server list. The weight format of IP origin servers is ["ip1:port1:weight1", "ip2:port2:weight2"].
+	// Primary origin server list. IP and the domain name of the origin server cannot be entered at the same time. Configure origin server port in the format of ["origin1:port1", "origin2:port2"]. Configure origin-pull weight in the format of ["origin1::weight1", "origin2::weight2"]. Configure both port and weight in the format of ["origin1:port1:weight1", "origin2:port2:weight2"]. Valid range of weight value: 0 - 100.
 	Origins []*string `json:"Origins,omitempty" name:"Origins" list`
 
 	// Primary origin server type. Valid values: domain (domain name origin server), ip (IP origin server).
@@ -943,7 +943,8 @@ type Origin struct {
 	ServerName *string `json:"ServerName,omitempty" name:"ServerName"`
 
 	// Origin-pull protocol type. Valid values: http (forced HTTP origin-pull), follow (protocol follow), https (HTTPS origin-pull).
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// If this parameter is left empty, HTTP origin-pull will be used by default.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	OriginPullProtocol *string `json:"OriginPullProtocol,omitempty" name:"OriginPullProtocol"`
 
 	// Secondary origin server list.

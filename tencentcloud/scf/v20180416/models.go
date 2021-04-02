@@ -75,6 +75,15 @@ type AsyncEvent struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
+type AsyncTriggerConfig struct {
+
+	// Async retry configuration of function upon user error
+	RetryConfig []*RetryConfig `json:"RetryConfig,omitempty" name:"RetryConfig" list`
+
+	// Message retention period
+	MsgTTL *int64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
+}
+
 type CfsConfig struct {
 
 	// File system information list
@@ -1031,6 +1040,49 @@ func (r *GetFunctionAddressResponse) ToJsonString() string {
 }
 
 func (r *GetFunctionAddressResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetFunctionEventInvokeConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Function namespace. Default value: default
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Function version. Default value: $LATEST
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+}
+
+func (r *GetFunctionEventInvokeConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetFunctionEventInvokeConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type GetFunctionEventInvokeConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async retry configuration information
+		AsyncTriggerConfig *AsyncTriggerConfig `json:"AsyncTriggerConfig,omitempty" name:"AsyncTriggerConfig"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetFunctionEventInvokeConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *GetFunctionEventInvokeConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2352,6 +2404,12 @@ type Result struct {
 	InvokeResult *int64 `json:"InvokeResult,omitempty" name:"InvokeResult"`
 }
 
+type RetryConfig struct {
+
+	// Number of retry attempts
+	RetryNum *int64 `json:"RetryNum,omitempty" name:"RetryNum"`
+}
+
 type RoutingConfig struct {
 
 	// Additional version with random weight-based routing
@@ -2738,6 +2796,46 @@ func (r *UpdateFunctionConfigurationResponse) ToJsonString() string {
 }
 
 func (r *UpdateFunctionConfigurationResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateFunctionEventInvokeConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Async retry configuration information
+	AsyncTriggerConfig *AsyncTriggerConfig `json:"AsyncTriggerConfig,omitempty" name:"AsyncTriggerConfig"`
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Function namespace. Default value: default
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+func (r *UpdateFunctionEventInvokeConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateFunctionEventInvokeConfigRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateFunctionEventInvokeConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateFunctionEventInvokeConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *UpdateFunctionEventInvokeConfigResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
