@@ -5564,17 +5564,18 @@ func (r *DescribeNetworkInterfacesResponse) FromJsonString(s string) error {
 type DescribeRouteTablesRequest struct {
 	*tchttp.BaseRequest
 
-	// The route table instance ID, such as `rtb-azd4dt1c`.
-	RouteTableIds []*string `json:"RouteTableIds,omitempty" name:"RouteTableIds" list`
-
-	// Filter condition. `RouteTableIds` and `Filters` cannot be speified at the same time.
+	// Filter condition. `RouteTableIds` and `Filters` cannot be specified at the same time.
 	// <li>route-table-id - String - (Filter condition) Route table instance ID.</li>
 	// <li>route-table-name - String - (Filter condition) Route table name.</li>
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
 	// <li>association.main - String - (Filter condition) Whether it is the main route table.</li>
-	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-	// <li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key is replaced with the specific tag key. For usage, refer to case 2.</li>
+	// <li>tag-key - String - Required: no - (Filter condition) Filter by tag key.</li>
+	// <li>tag:tag-key - String - Required: no - (Filter condition) Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
+	// <li>is-need-router-info - String - (Filter condition) Whether to obtain routing policies. It defaults to `false`. To obtain routing policies, change the parameter value to `true`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// The route table instance ID, such as `rtb-azd4dt1c`.
+	RouteTableIds []*string `json:"RouteTableIds,omitempty" name:"RouteTableIds" list`
 
 	// Offset.
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
@@ -10096,6 +10097,9 @@ type Route struct {
 	// Whether the routing policy is published to CCN.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	PublishedToVbc *bool `json:"PublishedToVbc,omitempty" name:"PublishedToVbc"`
+
+	// Creation time of the routing policy
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 }
 
 type RouteTable struct {

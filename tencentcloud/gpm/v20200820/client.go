@@ -68,6 +68,206 @@ func (c *Client) CancelMatching(request *CancelMatchingRequest) (response *Cance
     return
 }
 
+func NewCreateMatchRequest() (request *CreateMatchRequest) {
+    request = &CreateMatchRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "CreateMatch")
+    return
+}
+
+func NewCreateMatchResponse() (response *CreateMatchResponse) {
+    response = &CreateMatchResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a match.
+func (c *Client) CreateMatch(request *CreateMatchRequest) (response *CreateMatchResponse, err error) {
+    if request == nil {
+        request = NewCreateMatchRequest()
+    }
+    response = NewCreateMatchResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateRuleRequest() (request *CreateRuleRequest) {
+    request = &CreateRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "CreateRule")
+    return
+}
+
+func NewCreateRuleResponse() (response *CreateRuleResponse) {
+    response = &CreateRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a rule.
+func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateRuleRequest()
+    }
+    response = NewCreateRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteMatchRequest() (request *DeleteMatchRequest) {
+    request = &DeleteMatchRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "DeleteMatch")
+    return
+}
+
+func NewDeleteMatchResponse() (response *DeleteMatchResponse) {
+    response = &DeleteMatchResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a match.
+func (c *Client) DeleteMatch(request *DeleteMatchRequest) (response *DeleteMatchResponse, err error) {
+    if request == nil {
+        request = NewDeleteMatchRequest()
+    }
+    response = NewDeleteMatchResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRuleRequest() (request *DeleteRuleRequest) {
+    request = &DeleteRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "DeleteRule")
+    return
+}
+
+func NewDeleteRuleResponse() (response *DeleteRuleResponse) {
+    response = &DeleteRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete a rule.
+func (c *Client) DeleteRule(request *DeleteRuleRequest) (response *DeleteRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteRuleRequest()
+    }
+    response = NewDeleteRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDataRequest() (request *DescribeDataRequest) {
+    request = &DescribeDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "DescribeData")
+    return
+}
+
+func NewDescribeDataResponse() (response *DescribeDataResponse) {
+    response = &DescribeDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to view statistics.
+func (c *Client) DescribeData(request *DescribeDataRequest) (response *DescribeDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeDataRequest()
+    }
+    response = NewDescribeDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMatchRequest() (request *DescribeMatchRequest) {
+    request = &DescribeMatchRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "DescribeMatch")
+    return
+}
+
+func NewDescribeMatchResponse() (response *DescribeMatchResponse) {
+    response = &DescribeMatchResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the matchmaking details.
+func (c *Client) DescribeMatch(request *DescribeMatchRequest) (response *DescribeMatchResponse, err error) {
+    if request == nil {
+        request = NewDescribeMatchRequest()
+    }
+    response = NewDescribeMatchResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMatchCodesRequest() (request *DescribeMatchCodesRequest) {
+    request = &DescribeMatchCodesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "DescribeMatchCodes")
+    return
+}
+
+func NewDescribeMatchCodesResponse() (response *DescribeMatchCodesResponse) {
+    response = &DescribeMatchCodesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the created MatchCodes and paginate the query result.
+func (c *Client) DescribeMatchCodes(request *DescribeMatchCodesRequest) (response *DescribeMatchCodesResponse, err error) {
+    if request == nil {
+        request = NewDescribeMatchCodesRequest()
+    }
+    response = NewDescribeMatchCodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMatchesRequest() (request *DescribeMatchesRequest) {
+    request = &DescribeMatchesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "DescribeMatches")
+    return
+}
+
+func NewDescribeMatchesResponse() (response *DescribeMatchesResponse) {
+    response = &DescribeMatchesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the matchmaking list and paginate the query result.
+func (c *Client) DescribeMatches(request *DescribeMatchesRequest) (response *DescribeMatchesResponse, err error) {
+    if request == nil {
+        request = NewDescribeMatchesRequest()
+    }
+    response = NewDescribeMatchesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMatchingProgressRequest() (request *DescribeMatchingProgressRequest) {
     request = &DescribeMatchingProgressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -93,6 +293,56 @@ func (c *Client) DescribeMatchingProgress(request *DescribeMatchingProgressReque
     return
 }
 
+func NewDescribeRuleRequest() (request *DescribeRuleRequest) {
+    request = &DescribeRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "DescribeRule")
+    return
+}
+
+func NewDescribeRuleResponse() (response *DescribeRuleResponse) {
+    response = &DescribeRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the rule details.
+func (c *Client) DescribeRule(request *DescribeRuleRequest) (response *DescribeRuleResponse, err error) {
+    if request == nil {
+        request = NewDescribeRuleRequest()
+    }
+    response = NewDescribeRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRulesRequest() (request *DescribeRulesRequest) {
+    request = &DescribeRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "DescribeRules")
+    return
+}
+
+func NewDescribeRulesResponse() (response *DescribeRulesResponse) {
+    response = &DescribeRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the rule set list and paginate the query result.
+func (c *Client) DescribeRules(request *DescribeRulesRequest) (response *DescribeRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRulesRequest()
+    }
+    response = NewDescribeRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTokenRequest() (request *DescribeTokenRequest) {
     request = &DescribeTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -114,6 +364,56 @@ func (c *Client) DescribeToken(request *DescribeTokenRequest) (response *Describ
         request = NewDescribeTokenRequest()
     }
     response = NewDescribeTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMatchRequest() (request *ModifyMatchRequest) {
+    request = &ModifyMatchRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "ModifyMatch")
+    return
+}
+
+func NewModifyMatchResponse() (response *ModifyMatchResponse) {
+    response = &ModifyMatchResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a match.
+func (c *Client) ModifyMatch(request *ModifyMatchRequest) (response *ModifyMatchResponse, err error) {
+    if request == nil {
+        request = NewModifyMatchRequest()
+    }
+    response = NewModifyMatchResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRuleRequest() (request *ModifyRuleRequest) {
+    request = &ModifyRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gpm", APIVersion, "ModifyRule")
+    return
+}
+
+func NewModifyRuleResponse() (response *ModifyRuleResponse) {
+    response = &ModifyRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify a rule (including description and tag).
+func (c *Client) ModifyRule(request *ModifyRuleRequest) (response *ModifyRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyRuleRequest()
+    }
+    response = NewModifyRuleResponse()
     err = c.Send(request, response)
     return
 }
