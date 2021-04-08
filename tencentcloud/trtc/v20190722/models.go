@@ -668,10 +668,10 @@ func (r *DismissRoomResponse) FromJsonString(s string) error {
 
 type EncodeParams struct {
 
-	// Output stream audio sample rate for On-Cloud MixTranscoding in Hz. Valid values: 48000, 44100, 32000, 24000, 16000, 12000, 8000.
+	// Output audio sample rate (Hz) for On-Cloud MixTranscoding. Valid values: 48000, 44100, 32000, 24000, 16000, 8000
 	AudioSampleRate *uint64 `json:"AudioSampleRate,omitempty" name:"AudioSampleRate"`
 
-	// Output stream audio bitrate in Kbps for On-Cloud MixTranscoding. Value range: [8, 500].
+	// Output audio bitrate (Kbps) for On-Cloud MixTranscoding. Value range: 8-500
 	AudioBitrate *uint64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
 
 	// Number of sound channels of output stream for On-Cloud MixTranscoding. Valid values: 1, 2. 1 represents mono-channel, and 2 represents dual-channel.
@@ -683,7 +683,7 @@ type EncodeParams struct {
 	// Output stream height in pixels for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [0, 1080].
 	VideoHeight *uint64 `json:"VideoHeight,omitempty" name:"VideoHeight"`
 
-	// Output stream bitrate in Kbps for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [1, 10000].
+	// Output bitrate (Kbps) for On-Cloud MixTranscoding, which is required for audio-video output. Value range: 1-10000
 	VideoBitrate *uint64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
 
 	// Output stream frame rate for On-Cloud MixTranscoding in FPS. This parameter is required for audio/video outputs. Value range: [1, 60].
@@ -692,11 +692,21 @@ type EncodeParams struct {
 	// Output stream GOP in seconds for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [1, 5].
 	VideoGop *uint64 `json:"VideoGop,omitempty" name:"VideoGop"`
 
-	// Output stream background color for On-Cloud MixTranscoding.
+	// Output background color for On-Cloud MixTranscoding. Valid values: decimal integers. Commonly used colors include:
+	// Red: 0xff0000, whose decimal number is 16724736
+	// Yellow: 0xffff00, whose decimal number is 16776960
+	// Green: 0x33cc00, whose decimal number is 3394560
+	// Blue: 0x0066ff, whose decimal number is 26367
+	// Black: 0x000000, whose decimal number is 0
+	// White: 0xFFFFFF, whose decimal number is 16777215
+	// Grey: 0x999999, whose decimal number is 10066329
 	BackgroundColor *uint64 `json:"BackgroundColor,omitempty" name:"BackgroundColor"`
 
 	// Output stream background image for stream mix. Its value is the ID of image uploaded through the TRTC Console.
 	BackgroundImageId *uint64 `json:"BackgroundImageId,omitempty" name:"BackgroundImageId"`
+
+	// Output audio codec for On-Cloud MixTranscoding. Valid values: 0, 1, 2. 0 (default): LC-AAC; 1: HE-AAC; 2: HE-AACv2. If this parameter is set to 2 (HE-AACv2), On-Cloud MixTranscoding can produce only dual-channel streams. If it is set to 1 (HE-AAC) or 2 (HE-AACv2), the valid values for the audio sample rate of output streams are 48000, 44100, 32000, 24000, and 16000.
+	AudioCodec *uint64 `json:"AudioCodec,omitempty" name:"AudioCodec"`
 }
 
 type EventList struct {
@@ -768,7 +778,7 @@ type OutputParams struct {
 	// Value range: [0, 1]. If it is 0, live streams are audio and video; if it is 1, live streams are only audio. Default value: 0.
 	PureAudioStream *uint64 `json:"PureAudioStream,omitempty" name:"PureAudioStream"`
 
-	// Custom recording file name. Please enable the recording feature in the TRTC console first. https://intl.cloud.tencent.com/document/product/647/50768?from_cn_redirect=1
+	// Prefix of custom recording file names. Please enable the recording feature in the TRTC console first. https://intl.cloud.tencent.com/document/product/647/50768?from_cn_redirect=1
 	RecordId *string `json:"RecordId,omitempty" name:"RecordId"`
 
 	// Value range: [0, 1]. If it is 0, the recording template configured in the console will be used; if it is 1, streams are recorded as .mp3 files.

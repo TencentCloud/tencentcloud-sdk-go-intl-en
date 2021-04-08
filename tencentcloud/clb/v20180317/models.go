@@ -183,7 +183,7 @@ type BatchDeregisterTargetsRequest struct {
 	// CLB instance ID
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// Unbound targets
+	// Unbinding targets
 	Targets []*BatchTarget `json:"Targets,omitempty" name:"Targets" list`
 }
 
@@ -561,16 +561,16 @@ type CreateListenerRequest struct {
 	// CLB instance ID
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// Specifies for which ports to create listeners. Each port corresponds to a new listener
+	// Specifies for which ports to create listeners. Each port corresponds to a new listener.
 	Ports []*int64 `json:"Ports,omitempty" name:"Ports" list`
 
-	// Listener protocol: TCP, UDP, HTTP, HTTPS, or TCP_SSL (which is currently in beta test. If you want to use it, please submit a ticket for application)
+	// Listener protocol: TCP, UDP, HTTP, HTTPS, or TCP_SSL (which is currently in beta test. If you want to use it, please submit a ticket for application).
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// List of names of the listeners to be created. The array of names and array of ports are in one-to-one correspondence. If you do not want to name them now, you do not need to provide this parameter.
 	ListenerNames []*string `json:"ListenerNames,omitempty" name:"ListenerNames" list`
 
-	// Health check parameter, which is applicable only to TCP/UDP/TCP_SSL listeners
+	// Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
 	// Certificate information. This parameter is applicable only to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled.
@@ -592,7 +592,7 @@ type CreateListenerRequest struct {
 	// Session persistence type. Valid values: Normal: the default session persistence type; QUIC_CID: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
 	SessionType *string `json:"SessionType,omitempty" name:"SessionType"`
 
-	// Whether to enable a persistent connection (This parameter can only be configured in HTTP/HTTPS listeners). Valid values: 0: no; 1: yes. Default value: 0
+	// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
 	KeepaliveEnable *int64 `json:"KeepaliveEnable,omitempty" name:"KeepaliveEnable"`
 
 	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
@@ -636,7 +636,7 @@ type CreateLoadBalancerRequest struct {
 	// OPEN: public network; INTERNAL: private network.
 	LoadBalancerType *string `json:"LoadBalancerType,omitempty" name:"LoadBalancerType"`
 
-	// CLB instance type. 1: generic CLB instance. Currently, only 1 can be passed in
+	// CLB instance type. Valid value: 1 (generic CLB instance).
 	Forward *int64 `json:"Forward,omitempty" name:"Forward"`
 
 	// CLB instance name, which takes effect only when only one instance is to be created in the request. It can consist 1 to 60 letters, digits, hyphens (-), or underscores (_).
@@ -662,7 +662,7 @@ type CreateLoadBalancerRequest struct {
 	// Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic by default and will be used only if the primary AZ becomes unavailable. The platform will automatically select the optimal secondary AZ. The list of primary AZs in a specific region can be queried through the DescribeMasterZones API.
 	MasterZoneId *string `json:"MasterZoneId,omitempty" name:"MasterZoneId"`
 
-	// Specifies an AZ ID for creating a CLB instance, such as ap-guangzhou-1, which is applicable only to public network CLB.
+	// Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
 	// CLB network billing mode. This parameter is applicable only to public network CLB instances.
@@ -680,7 +680,7 @@ type CreateLoadBalancerRequest struct {
 	// Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
-	// Exclusive cluster information.
+	// Dedicated cluster information
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
@@ -694,6 +694,10 @@ type CreateLoadBalancerRequest struct {
 
 	// Tag for the STGW exclusive cluster.
 	ClusterTag *string `json:"ClusterTag,omitempty" name:"ClusterTag"`
+
+	// Sets the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB instances.
+	// Note: A secondary AZ will load traffic if the primary AZ has failures. The API `DescribeMasterZones` is used to query the primary and secondary AZ list of a region.
+	SlaveZoneId *string `json:"SlaveZoneId,omitempty" name:"SlaveZoneId"`
 
 	// Unique ID of an EIP, which can only be used when binding the EIP of a private network CLB instance. E.g., `eip-11112222`.
 	EipAddressId *string `json:"EipAddressId,omitempty" name:"EipAddressId"`
@@ -732,7 +736,7 @@ func (r *CreateLoadBalancerResponse) FromJsonString(s string) error {
 type CreateLoadBalancerSnatIpsRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique CLB instance ID, such as lb-12345678
+	// Unique ID of a CLB instance, e.g., lb-12345678.
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
 	// Information of the SNAT IP to be added. You can apply for a specified IP or apply for an automatically assigned IP by specifying a subnet.
@@ -972,7 +976,7 @@ func (r *DeleteLoadBalancerListenersResponse) FromJsonString(s string) error {
 type DeleteLoadBalancerRequest struct {
 	*tchttp.BaseRequest
 
-	// Array of IDs of the CLB instances to be deleted. Array length limit: 20
+	// Array of IDs of the CLB instances to be deleted. Array length limit: 20.
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds" list`
 }
 
@@ -1006,7 +1010,7 @@ func (r *DeleteLoadBalancerResponse) FromJsonString(s string) error {
 type DeleteLoadBalancerSnatIpsRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique CLB instance ID, such as lb-12345678
+	// Unique ID of a CLB instance, e.g., lb-12345678.
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
 	// Array of the SNAT IP addresses to be deleted
@@ -1095,10 +1099,10 @@ type DeleteRuleRequest struct {
 	// Array of IDs of the forwarding rules to be deleted
 	LocationIds []*string `json:"LocationIds,omitempty" name:"LocationIds" list`
 
-	// Domain name of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified
+	// Domain name of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Forwarding path of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified
+	// Forwarding path of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// A listener must be configured with a default domain name. If you need to delete the default domain name, you can specify another one as the new default domain name.
@@ -1209,7 +1213,7 @@ type DeregisterTargetsFromClassicalLBRequest struct {
 	// CLB instance ID
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// List of real server instance IDs
+	// List of real server IDs
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
@@ -1243,22 +1247,22 @@ func (r *DeregisterTargetsFromClassicalLBResponse) FromJsonString(s string) erro
 type DeregisterTargetsRequest struct {
 	*tchttp.BaseRequest
 
-	// CLB instance ID in the format of lb-12345678
+	// CLB instance ID in the format of "lb-12345678"
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// Listener ID in the format of lbl-12345678
+	// Listener ID in the format of "lbl-12345678"
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
-	// List of real servers to be unbound. Array length limit: 20
+	// List of real servers to be unbound. Array length limit: 20.
 	Targets []*Target `json:"Targets,omitempty" name:"Targets" list`
 
-	// Forwarding rule ID in the format of loc-12345678. When unbinding a server from a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
+	// Forwarding rule ID in the format of "loc-12345678". When unbinding a server from a layer-7 forwarding rule, you must provide either this parameter or Domain+Url.
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 
-	// Target rule domain name. This parameter does not take effect if LocationId is specified
+	// Target rule domain name. This parameter does not take effect if LocationId is specified.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Target rule URL. This parameter does not take effect if LocationId is specified
+	// Target rule URL. This parameter does not take effect if LocationId is specified.
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
@@ -1378,7 +1382,7 @@ func (r *DescribeBlockIPTaskResponse) FromJsonString(s string) error {
 type DescribeClassicalLBByInstanceIdRequest struct {
 	*tchttp.BaseRequest
 
-	// List of real server IDs.
+	// List of real server IDs
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
@@ -1436,7 +1440,7 @@ type DescribeClassicalLBHealthStatusResponse struct {
 	Response *struct {
 
 		// List of real server health statuses
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 		HealthList []*ClassicalHealth `json:"HealthList,omitempty" name:"HealthList" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1462,13 +1466,13 @@ type DescribeClassicalLBListenersRequest struct {
 	// List of CLB listener IDs
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
 
-	// CLB listening protocol. Value range: TCP, UDP, HTTP, HTTPS
+	// CLB listening protocol. Valid values: TCP, UDP, HTTP, and HTTPS.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// CLB listening port. Value range: [1-65535]
+	// CLB listening port. Value range: 1 - 65535.
 	ListenerPort *int64 `json:"ListenerPort,omitempty" name:"ListenerPort"`
 
-	// Listener status. Value range: 0 (creating), 1 (running)
+	// Listener status. Valid values: 0 (creating) and 1 (running).
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
@@ -1485,8 +1489,8 @@ type DescribeClassicalLBListenersResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// List of listeners
-	// Note: This field may return null, indicating that no valid values can be obtained.
+		// Listener list
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 		Listeners []*ClassicalListener `json:"Listeners,omitempty" name:"Listeners" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1523,8 +1527,8 @@ type DescribeClassicalLBTargetsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// List of real servers
-	// Note: This field may return null, indicating that no valid values can be obtained.
+		// Real server list
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 		Targets []*ClassicalTarget `json:"Targets,omitempty" name:"Targets" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1584,10 +1588,10 @@ type DescribeListenersRequest struct {
 	// Array of IDs of the CLB listeners to be queried
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
 
-	// Type of the listener protocol to be queried. Value range: TCP, UDP, HTTP, HTTPS, TCP_SSL
+	// Type of the listener protocols to be queried. Valid values: TCP, UDP, HTTP, HTTPS, and TCP_SSL.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Port of the listener to be queried
+	// Port of the listeners to be queried
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 }
 
@@ -1604,11 +1608,11 @@ type DescribeListenersResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// List of listeners
+		// Listener list
 		Listeners []*Listener `json:"Listeners,omitempty" name:"Listeners" list`
 
-		// Total number of listeners
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Total number of listeners (with filters of port, protocol, and listener ID applied).
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1683,7 +1687,7 @@ type DescribeLoadBalancerTrafficResponse struct {
 	Response *struct {
 
 		// Information of CLB instances sorted by outbound bandwidth from highest to lowest
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 		LoadBalancerTraffic []*LoadBalancerTraffic `json:"LoadBalancerTraffic,omitempty" name:"LoadBalancerTraffic" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1706,7 +1710,7 @@ type DescribeLoadBalancersDetailRequest struct {
 	// Number of CLB instance lists returned. Default value: 20; maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Starting offset of the CLB instance list returned. Default value: 0
+	// Starting offset of the CLB instance list returned. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// List of fields to be returned. The `LoadBalancerId` and `LoadBalancerName` are returned by default.
@@ -1903,7 +1907,7 @@ type DescribeRewriteRequest struct {
 	// Array of CLB listener IDs
 	SourceListenerIds []*string `json:"SourceListenerIds,omitempty" name:"SourceListenerIds" list`
 
-	// Array of CLB forwarding rules
+	// Array of CLB forwarding rule IDs
 	SourceLocationIds []*string `json:"SourceLocationIds,omitempty" name:"SourceLocationIds" list`
 }
 
@@ -1920,7 +1924,7 @@ type DescribeRewriteResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Array of redirection forwarding rules. If there are no redirection rules, an empty array will be returned
+		// Array of redirection forwarding rules. If there are no redirection rules, an empty array will be returned.
 		RewriteSet []*RuleOutput `json:"RewriteSet,omitempty" name:"RewriteSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1992,13 +1996,13 @@ type DescribeTargetGroupListRequest struct {
 	// Target group ID array
 	TargetGroupIds []*string `json:"TargetGroupIds,omitempty" name:"TargetGroupIds" list`
 
-	// Filter array, which is exclusive of `TargetGroupIds`. Valid values: TargetGroupVpcId, TargetGroupName. Target group ID will be used first.
+	// Filter array, which is exclusive of `TargetGroupIds`. Valid values: `TargetGroupVpcId` and `TargetGroupName`. Target group ID will be used first.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// Starting display offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Limit of the number of displayed results. Default value: 20
+	// Limit of the number of displayed results. Default value: 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -2041,13 +2045,13 @@ type DescribeTargetGroupsRequest struct {
 	// Target group ID, which is exclusive of `Filters`.
 	TargetGroupIds []*string `json:"TargetGroupIds,omitempty" name:"TargetGroupIds" list`
 
-	// Limit of the number of displayed results. Default value: 20
+	// Limit of the number of displayed results. Default value: 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Starting display offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Filter array, which is exclusive of `TargetGroupIds`. Valid values: TargetGroupVpcId, TargetGroupName
+	// Filter array, which is exclusive of `TargetGroupIds`. Valid values: `TargetGroupVpcId` and `TargetGroupName`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
@@ -2104,8 +2108,8 @@ type DescribeTargetHealthResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// List of CLB instances
-	// Note: This field may return null, indicating that no valid values can be obtained.
+		// CLB instance list
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 		LoadBalancers []*LoadBalancerHealth `json:"LoadBalancers,omitempty" name:"LoadBalancers" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2128,7 +2132,7 @@ type DescribeTargetsRequest struct {
 	// CLB instance ID
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// List of listener IDs
+	// Listener ID list
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
 
 	// Listener protocol type
@@ -2152,7 +2156,7 @@ type DescribeTargetsResponse struct {
 	Response *struct {
 
 		// Information of real servers bound to the listener
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 		Listeners []*ListenerBackend `json:"Listeners,omitempty" name:"Listeners" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2172,7 +2176,7 @@ func (r *DescribeTargetsResponse) FromJsonString(s string) error {
 type DescribeTaskStatusRequest struct {
 	*tchttp.BaseRequest
 
-	// Request ID, i.e., the RequestId parameter returned by the API
+	// Request ID, i.e., the RequestId parameter returned by the API.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
@@ -3047,10 +3051,10 @@ type ModifyListenerRequest struct {
 	// Session persistence time in seconds. Value range: 30-3,600. The default value is 0, indicating that session persistence is not enabled. This parameter is applicable only to TCP/UDP listeners.
 	SessionExpireTime *int64 `json:"SessionExpireTime,omitempty" name:"SessionExpireTime"`
 
-	// Health check parameter, which is applicable only to TCP/UDP/TCP_SSL listeners.
+	// Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Certificate information. This parameter is applicable only to HTTPS/TCP_SSL listeners.
+	// Certificate information. This parameter is applicable only to HTTPS and TCP_SSL listeners.
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Forwarding method of a listener. Value range: WRR, LEAST_CONN.
@@ -3060,7 +3064,7 @@ type ModifyListenerRequest struct {
 	// Whether to enable the SNI feature. This parameter is applicable only to HTTPS listeners. Note: The SNI feature can be enabled but cannot be disabled once enabled.
 	SniSwitch *int64 `json:"SniSwitch,omitempty" name:"SniSwitch"`
 
-	// Whether to enable a persistent connection (This parameter can only be configured in HTTP/HTTPS listeners). Valid values: 0: no; 1: yes. Default value: 0
+	// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners.
 	KeepaliveEnable *int64 `json:"KeepaliveEnable,omitempty" name:"KeepaliveEnable"`
 }
 
@@ -3156,7 +3160,7 @@ type ModifyRuleRequest struct {
 	// ID of the forwarding rule to be modified.
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 
-	// New forwarding path of the forwarding rule. This parameter is not required if the URL does not need to be modified
+	// New forwarding path of the forwarding rule. This parameter is not required if the URL does not need to be modified.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Health check information
@@ -3169,13 +3173,13 @@ type ModifyRuleRequest struct {
 	// Session persistence time
 	SessionExpireTime *int64 `json:"SessionExpireTime,omitempty" name:"SessionExpireTime"`
 
-	// Forwarding protocol between CLB instance and real server. Default value: HTTP. Valid values: HTTP, HTTPS, TRPC.
+	// Forwarding protocol between CLB instance and real server. Default value: HTTP. Valid values: HTTP, HTTPS, and TRPC.
 	ForwardType *string `json:"ForwardType,omitempty" name:"ForwardType"`
 
-	// TRPC callee server route, which is required when `ForwardType` is `TRPC`.
+	// TRPC callee server route, which is required when `ForwardType` is "TRPC".
 	TrpcCallee *string `json:"TrpcCallee,omitempty" name:"TrpcCallee"`
 
-	// TRPC calling service API, which is required when `ForwardType` is `TRPC`.
+	// TRPC calling service API, which is required when `ForwardType` is "TRPC".
 	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
 }
 
@@ -3252,7 +3256,7 @@ type ModifyTargetGroupInstancesPortRequest struct {
 	// Target group ID
 	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
 
-	// Array of servers for which to modify port
+	// Array of servers for which to modify ports
 	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
@@ -3289,7 +3293,7 @@ type ModifyTargetGroupInstancesWeightRequest struct {
 	// Target group ID
 	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
 
-	// Array of servers for which to modify weight
+	// Array of servers for which to modify weights
 	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
@@ -3335,13 +3339,13 @@ type ModifyTargetPortRequest struct {
 	// New port of the real server bound to a listener or forwarding rule
 	NewPort *int64 `json:"NewPort,omitempty" name:"NewPort"`
 
-	// Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
+	// Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url.
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 
-	// Target rule domain name. This parameter does not take effect if LocationId is specified
+	// Target rule domain name. This parameter does not take effect if LocationId is specified.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Target rule URL. This parameter does not take effect if LocationId is specified
+	// Target rule URL. This parameter does not take effect if LocationId is specified.
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
@@ -3381,16 +3385,16 @@ type ModifyTargetWeightRequest struct {
 	// CLB listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
-	// Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
+	// Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url.
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 
-	// Target rule domain name. This parameter does not take effect if LocationId is specified
+	// Target rule domain name. This parameter does not take effect if LocationId is specified.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Target rule URL. This parameter does not take effect if LocationId is specified
+	// Target rule URL. This parameter does not take effect if LocationId is specified.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// List of real servers for which to modify the weight
+	// List of real servers for which to modify the weights
 	Targets []*Target `json:"Targets,omitempty" name:"Targets" list`
 
 	// New forwarding weight of a real server. Value range: 0-100. Default value: 10. If the Targets.Weight parameter is set, this parameter will not take effect.
@@ -3488,16 +3492,16 @@ type RegisterTargetsRequest struct {
 	// CLB listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
-	// List of real servers to be bound. Array length limit: 20
+	// List of real servers to be bound. Array length limit: 20.
 	Targets []*Target `json:"Targets,omitempty" name:"Targets" list`
 
-	// Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
+	// Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url.
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 
-	// Target forwarding rule domain name. This parameter does not take effect if LocationId is specified
+	// Target forwarding rule domain name. This parameter does not take effect if LocationId is specified.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Target forwarding rule URL. This parameter does not take effect if LocationId is specified
+	// Target forwarding rule URL. This parameter does not take effect if LocationId is specified.
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
@@ -4031,6 +4035,10 @@ type TargetGroupBackend struct {
 	// Unique ENI ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	EniId *string `json:"EniId,omitempty" name:"EniId"`
+
+	// AZ ID of the real server
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 }
 
 type TargetGroupInfo struct {
@@ -4114,4 +4122,12 @@ type ZoneInfo struct {
 	// AZ name, such as Guangzhou Zone 1
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// AZ region, e.g., ap-guangzhou.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ZoneRegion *string `json:"ZoneRegion,omitempty" name:"ZoneRegion"`
+
+	// Whether the AZ is the `LocalZone`, e.g., false.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LocalZone *bool `json:"LocalZone,omitempty" name:"LocalZone"`
 }

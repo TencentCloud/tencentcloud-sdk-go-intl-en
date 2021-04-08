@@ -263,7 +263,7 @@ func NewCreateLoadBalancerSnatIpsResponse() (response *CreateLoadBalancerSnatIps
     return
 }
 
-// This API is used to add a SNAT IP for a SnatPro CLB instance. If SnatPro is not enabled for CLB, it will be automatically enabled after the SNAT IP is added.
+// This API is used to add an SNAT IP for an SnatPro CLB instance. If SnatPro is not enabled for CLB, it will be automatically enabled after the SNAT IP is added.
 func (c *Client) CreateLoadBalancerSnatIps(request *CreateLoadBalancerSnatIpsRequest) (response *CreateLoadBalancerSnatIpsResponse, err error) {
     if request == nil {
         request = NewCreateLoadBalancerSnatIpsRequest()
@@ -442,7 +442,7 @@ func NewDeleteLoadBalancerSnatIpsResponse() (response *DeleteLoadBalancerSnatIps
     return
 }
 
-// This API is used to delete a SNAT IP for a SnatPro CLB instance.
+// This API is used to delete the SNAT IP for an SnatPro CLB instance.
 func (c *Client) DeleteLoadBalancerSnatIps(request *DeleteLoadBalancerSnatIpsRequest) (response *DeleteLoadBalancerSnatIpsResponse, err error) {
     if request == nil {
         request = NewDeleteLoadBalancerSnatIpsRequest()
@@ -544,7 +544,7 @@ func NewDeregisterTargetGroupInstancesResponse() (response *DeregisterTargetGrou
 }
 
 // This API is used to unbind a server from a target group.
-// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+// This is an async API. After it is returned successfully, you can call the API `DescribeTaskStatus` with the returned RequestId as an input parameter to check whether this task is successful.
 func (c *Client) DeregisterTargetGroupInstances(request *DeregisterTargetGroupInstancesRequest) (response *DeregisterTargetGroupInstancesResponse, err error) {
     if request == nil {
         request = NewDeregisterTargetGroupInstancesRequest()
@@ -595,8 +595,7 @@ func NewDeregisterTargetsFromClassicalLBResponse() (response *DeregisterTargetsF
     return
 }
 
-// This API (DeregisterTargetsFromClassicalLB) is used to unbind real servers from a classic load balancer.
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestId as an input parameter to check whether this task is successful.
+// This API is used to unbind a CLB real server. This is an async API. After it is returned successfully, you can call the API `DescribeTaskStatus` with the returned RequestId as an input parameter to check whether this task is successful.
 func (c *Client) DeregisterTargetsFromClassicalLB(request *DeregisterTargetsFromClassicalLBRequest) (response *DeregisterTargetsFromClassicalLBResponse, err error) {
     if request == nil {
         request = NewDeregisterTargetsFromClassicalLBRequest()
@@ -671,7 +670,7 @@ func NewDescribeClassicalLBByInstanceIdResponse() (response *DescribeClassicalLB
     return
 }
 
-// This API (DescribeClassicalLBByInstanceId) is used to get the list of classic CLB IDs through the real server instance ID.
+// This API is used to get the list of classic CLB instance IDs through a real server ID.
 func (c *Client) DescribeClassicalLBByInstanceId(request *DescribeClassicalLBByInstanceIdRequest) (response *DescribeClassicalLBByInstanceIdResponse, err error) {
     if request == nil {
         request = NewDescribeClassicalLBByInstanceIdRequest()
@@ -746,7 +745,7 @@ func NewDescribeClassicalLBTargetsResponse() (response *DescribeClassicalLBTarge
     return
 }
 
-// This API (DescribeClassicalLBTargets) is used to get the real servers bound to a classic CLB.
+// This API is used to get the real servers bound to a classic CLB instance.
 func (c *Client) DescribeClassicalLBTargets(request *DescribeClassicalLBTargetsRequest) (response *DescribeClassicalLBTargetsResponse, err error) {
     if request == nil {
         request = NewDescribeClassicalLBTargetsRequest()
@@ -771,7 +770,7 @@ func NewDescribeClsLogSetResponse() (response *DescribeClsLogSetResponse) {
     return
 }
 
-// This API is used to get the CLB dedicated logset.
+// This API is used to get the CLB exclusive logset.
 func (c *Client) DescribeClsLogSet(request *DescribeClsLogSetRequest) (response *DescribeClsLogSetResponse, err error) {
     if request == nil {
         request = NewDescribeClsLogSetRequest()
@@ -1508,8 +1507,7 @@ func NewRegisterTargetsWithClassicalLBResponse() (response *RegisterTargetsWithC
     return
 }
 
-// This API (RegisterTargetsWithClassicalLB) is used to bind real servers to a classic CLB.
-// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestId as an input parameter to check whether this task is successful.
+// This API is used to bind a real server with a classic CLB instance. This is an async API. After it is returned successfully, you can call the API `DescribeTaskStatus` with the returned RequestId as an input parameter to check whether this task is successful.
 func (c *Client) RegisterTargetsWithClassicalLB(request *RegisterTargetsWithClassicalLBRequest) (response *RegisterTargetsWithClassicalLBResponse, err error) {
     if request == nil {
         request = NewRegisterTargetsWithClassicalLBRequest()

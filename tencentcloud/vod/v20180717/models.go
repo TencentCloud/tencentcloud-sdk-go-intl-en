@@ -1910,6 +1910,12 @@ type CdnLogInfo struct {
 
 	// Log download link, which is valid for 24 hours.
 	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Log start time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=)
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Log end time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=)
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type ClassificationConfigureInfo struct {
@@ -4466,6 +4472,12 @@ type DescribeCdnLogsRequest struct {
 	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F), which must be after the start time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// Maximum return results of pulling paginated queries. Default value: 100; maximum value: 1000
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number offset from the beginning of paginated queries. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
@@ -4483,13 +4495,17 @@ type DescribeCdnLogsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Log download list for CDN nodes in Mainland China.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		DomesticCdnLogs []*CdnLogInfo `json:"DomesticCdnLogs,omitempty" name:"DomesticCdnLogs" list`
+		// Total number of log download links
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Log download list for CDN nodes outside Mainland China. If global acceleration is not enabled for the domain name, ignore this parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		OverseaCdnLogs []*CdnLogInfo `json:"OverseaCdnLogs,omitempty" name:"OverseaCdnLogs" list`
+
+		// Log download list for CDN nodes in Mainland China.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		DomesticCdnLogs []*CdnLogInfo `json:"DomesticCdnLogs,omitempty" name:"DomesticCdnLogs" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
