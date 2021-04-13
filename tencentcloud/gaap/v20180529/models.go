@@ -1118,6 +1118,9 @@ type CreateTCPListenersRequest struct {
 
 	// Listener methods of getting client IPs. 0: TOA; 1: Proxy Protocol.
 	ClientIPMethod *int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod"`
+
+	// Whether to enable the primary/secondary origin server mode. Valid values: 1 (enable) and 0 (disable). It cannot be enabled for domain name origin servers.
+	FailoverSwitch *int64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
 }
 
 func (r *CreateTCPListenersRequest) ToJsonString() string {
@@ -4163,6 +4166,9 @@ type ModifyTCPListenerAttributeRequest struct {
 
 	// Whether to enable health check. 1: enable; 0: disable.
 	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
+
+	// Whether to enable the primary/secondary origin server mode. Valid values: 1 (enable) and 0 (disable). It cannot be enabled for domain name origin servers.
+	FailoverSwitch *uint64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
 }
 
 func (r *ModifyTCPListenerAttributeRequest) ToJsonString() string {
@@ -4659,6 +4665,9 @@ type RealServerBindSetReq struct {
 
 	// Origin server weight
 	RealServerWeight *uint64 `json:"RealServerWeight,omitempty" name:"RealServerWeight"`
+
+	// Origin server role: master (primary origin server); slave (secondary origin server). This parameter is applicable when the primary/secondary origin server mode is enabled for a TCP listener.
+	RealServerFailoverRole *string `json:"RealServerFailoverRole,omitempty" name:"RealServerFailoverRole"`
 }
 
 type RealServerStatus struct {

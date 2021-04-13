@@ -1126,6 +1126,14 @@ type DescribeDBSecurityGroupsResponse struct {
 		// Security group details
 		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
 
+		// Instance VIP
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		VIP *string `json:"VIP,omitempty" name:"VIP"`
+
+		// Instance port
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		VPort *int64 `json:"VPort,omitempty" name:"VPort"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`

@@ -506,6 +506,11 @@ type CreateLaunchConfigurationRequest struct {
 
 	// Sets prepaid billing mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+	// <br><li>ORIGINAL: uses the configured cloud disk type
+	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
+	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
 }
 
 func (r *CreateLaunchConfigurationRequest) ToJsonString() string {
@@ -2294,6 +2299,17 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// This parameter is required when changing the instance billing mode to spot instance. It will be automatically discarded after the spot instance is changed to another instance billing mode.
 	// To modify it or even its subfield, you should specify all the subfields again.
 	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitempty" name:"InstanceMarketOptions"`
+
+	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+	// <br><li>ORIGINAL: uses the configured cloud disk type
+	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
+	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
+
+	// 
+	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
+
+	// 
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
 }
 
 func (r *ModifyLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -2952,6 +2968,11 @@ type UpgradeLaunchConfigurationRequest struct {
 
 	// Advance payment mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+	// <br><li>ORIGINAL: uses the configured cloud disk type
+	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
+	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
 }
 
 func (r *UpgradeLaunchConfigurationRequest) ToJsonString() string {

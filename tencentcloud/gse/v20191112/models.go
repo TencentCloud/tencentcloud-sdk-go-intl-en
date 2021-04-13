@@ -20,6 +20,15 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type CcnInfo struct {
+
+	// CCN account
+	AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
+
+	// CCN ID
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+}
+
 type CopyFleetRequest struct {
 	*tchttp.BaseRequest
 
@@ -62,7 +71,7 @@ type CopyFleetRequest struct {
 	// Whether to select scaling. Valid values: SCALING_SELECTED, SCALING_UNSELECTED. Default value: SCALING_UNSELECTED.
 	SelectedScalingType *string `json:"SelectedScalingType,omitempty" name:"SelectedScalingType"`
 
-	// Whether to select CCN. Valid values: CCN_SELECTED, CCN_UNSELECTED. Default value: CCN_UNSELECTED.
+	// Whether to select CCN: CCN_SELECTED_BEFORE_CREATE (associated before creation), CCN_SELECTED_AFTER_CREATE (associated after creation), or CCN_UNSELECTED (not associated); CCN_UNSELECTED by default
 	SelectedCcnType *string `json:"SelectedCcnType,omitempty" name:"SelectedCcnType"`
 
 	// Tag list. Up to 50 tags.
@@ -76,6 +85,9 @@ type CopyFleetRequest struct {
 
 	// Whether to select to replicate the timer policy: TIMER_SELECTED or TIMER_UNSELECTED. The default value is TIMER_UNSELECTED.
 	SelectedTimerType *string `json:"SelectedTimerType,omitempty" name:"SelectedTimerType"`
+
+	// CCN information, including the corresponding CCN account and ID.
+	CcnInfos []*CcnInfo `json:"CcnInfos,omitempty" name:"CcnInfos" list`
 }
 
 func (r *CopyFleetRequest) ToJsonString() string {
@@ -580,6 +592,10 @@ type FleetAttributes struct {
 	// System disk. It can be a SSD (CLOUD_SSD) with 100-500 GB capacity or a Premium Cloud Storage disk (CLOUD_PREMIUM) with 50-500 GB capacity. The increment is 1.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	SystemDiskInfo *DiskInfo `json:"SystemDiskInfo,omitempty" name:"SystemDiskInfo"`
+
+	// CCN information
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	RelatedCcnInfos []*RelatedCcnInfo `json:"RelatedCcnInfos,omitempty" name:"RelatedCcnInfos" list`
 }
 
 type GameProperty struct {
@@ -1053,6 +1069,18 @@ func (r *PutTimerScalingPolicyResponse) ToJsonString() string {
 
 func (r *PutTimerScalingPolicyResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type RelatedCcnInfo struct {
+
+	// CCN account
+	AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
+
+	// CCN ID
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// Status of associated CCN
+	AttachType *string `json:"AttachType,omitempty" name:"AttachType"`
 }
 
 type ResourceCreationLimitPolicy struct {

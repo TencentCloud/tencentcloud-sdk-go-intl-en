@@ -852,6 +852,14 @@ type DescribeDBSecurityGroupsResponse struct {
 		// Security group details
 		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
 
+		// Instance VIP
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		VIP *string `json:"VIP,omitempty" name:"VIP"`
+
+		// Instance port
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		VPort *int64 `json:"VPort,omitempty" name:"VPort"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -891,6 +899,9 @@ type DescribeDBSyncModeResponse struct {
 
 		// Whether a modification is in progress. 1: yes; 0: no.
 		IsModifying *int64 `json:"IsModifying,omitempty" name:"IsModifying"`
+
+		// Current sync mode. Valid values: `0` (async), `1` (sync).
+		CurrentSyncMode *int64 `json:"CurrentSyncMode,omitempty" name:"CurrentSyncMode"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1723,7 +1734,7 @@ type Project struct {
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// The `uin` of the resource owner (root account)
+	// The UIN of the resource owner (root account)
 	OwnerUin *int64 `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
 	// Application ID
@@ -1732,22 +1743,22 @@ type Project struct {
 	// Project name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Creator `uin`
+	// Creator UIN
 	CreatorUin *int64 `json:"CreatorUin,omitempty" name:"CreatorUin"`
 
 	// Source platform
 	SrcPlat *string `json:"SrcPlat,omitempty" name:"SrcPlat"`
 
-	// Source `AppId`
+	// Source APPID
 	SrcAppId *int64 `json:"SrcAppId,omitempty" name:"SrcAppId"`
 
-	// Project status. 0: normal; -1: disabled; 3: default project.
+	// Project status. Valid values: `0` (normal), `-1` (disabled), `3` (default project).
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Whether it is the default project. 1: yes; 0: no.
+	// Whether it is the default project. Valid values: `1` (yes), `0` (no).
 	IsDefault *int64 `json:"IsDefault,omitempty" name:"IsDefault"`
 
 	// Description
