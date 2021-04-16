@@ -531,7 +531,7 @@ type CreateCloneInstanceRequest struct {
 	// Information of the cloned instance tag
 	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags" list`
 
-	// CPU core quantity of the cloned instance, which is equal to or larger than that of the original instance
+	// The number of CPU cores of the cloned instance. It should be equal to (by default) or larger than that of the original instance.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
 	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0.
@@ -870,7 +870,7 @@ type CreateRoInstanceIpRequest struct {
 	// Subnet descriptor, such as "subnet-1typ0s7d".
 	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
 
-	// VPC descriptor, such as "vpc-xxx". If this field is passed in, `UniqSubnetId` will be required.
+	// VPC descriptor, such as "vpc-a23yt67j". If this field is passed in, `UniqSubnetId` will be required.
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 }
 
@@ -935,6 +935,15 @@ type DatabasePrivilege struct {
 
 	// Database name
 	Database *string `json:"Database,omitempty" name:"Database"`
+}
+
+type DatabasesWithCharacterLists struct {
+
+	// Database name
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// Character set
+	CharacterSet *string `json:"CharacterSet,omitempty" name:"CharacterSet"`
 }
 
 type DeleteAccountsRequest struct {
@@ -1684,10 +1693,10 @@ type DescribeCloneListRequest struct {
 	// ID of the original instance. This parameter is used to query the clone task list of a specific original instance.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Paginated query offset
+	// Paginated query offset. Default value: `0`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// The number of results per page in paginated queries
+	// Number of results per page. Default value: `20`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -1842,11 +1851,16 @@ type DescribeDBInstanceConfigResponse struct {
 		// Instance AZ information in the format of "ap-shanghai-1".
 		Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-		// Configuration information of the secondary database.
+		// Configurations of the replica node
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 		SlaveConfig *SlaveConfig `json:"SlaveConfig,omitempty" name:"SlaveConfig"`
 
-		// Configuration information of secondary database 2 of a strong sync instance.
+		// Configurations of the second replica node of a strong-sync instance
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 		BackupConfig *BackupConfig `json:"BackupConfig,omitempty" name:"BackupConfig"`
+
+		// This parameter is only available for multi-AZ instances. It indicates whether the source AZ is the same as the one specified upon purchase. `true`: not the same, `false`: the same.
+		Switched *bool `json:"Switched,omitempty" name:"Switched"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2319,6 +2333,9 @@ type DescribeDatabasesResponse struct {
 		// Information of an instance.
 		Items []*string `json:"Items,omitempty" name:"Items" list`
 
+		// Database name and character set
+		DatabaseList []*DatabasesWithCharacterLists `json:"DatabaseList,omitempty" name:"DatabaseList" list`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -2643,7 +2660,7 @@ type DescribeParamTemplateInfoResponse struct {
 		// Parameter template name.
 		Name *string `json:"Name,omitempty" name:"Name"`
 
-		// Parameter template description
+		// Database engine version specified in the parameter template
 		EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
 		// Number of parameters in the parameter template
@@ -2651,6 +2668,9 @@ type DescribeParamTemplateInfoResponse struct {
 
 		// Parameter details
 		Items []*ParameterDetail `json:"Items,omitempty" name:"Items" list`
+
+		// Parameter template description
+		Description *string `json:"Description,omitempty" name:"Description"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2725,6 +2745,9 @@ type DescribeProjectSecurityGroupsResponse struct {
 
 		// Security group details.
 		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+
+		// Number of security group rules
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3741,8 +3764,7 @@ type InstanceInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The number of nodes
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Number of nodes
 	InstanceNodes *int64 `json:"InstanceNodes,omitempty" name:"InstanceNodes"`
 }
 
@@ -4441,7 +4463,7 @@ type ModifyRoGroupInfoRequest struct {
 	// Weights of instances in RO group. If the weighting mode of an RO group is changed to custom mode, this parameter must be set, and a weight value needs to be set for each RO instance.
 	RoWeightValues []*RoWeightValue `json:"RoWeightValues,omitempty" name:"RoWeightValues" list`
 
-	// Whether to rebalance the loads of RO instances in the RO group. Supported values include `1` (yes) and `0` (no). The default value is `0`. Please note that if this value is set to `1`, connections to the RO instances in the RO group will be interrupted transiently; therefore, you should ensure that your application can reconnect to the databases.
+	// Whether to rebalance the loads of read-only replicas in the RO group. Valid values: `1` (yes), `0` (no). Default value: `0`. If this parameter is set to `1`, connections to the read-only replicas in the RO group will be interrupted transiently. Please ensure that your application has a reconnection mechanism.
 	IsBalanceRoLoad *int64 `json:"IsBalanceRoLoad,omitempty" name:"IsBalanceRoLoad"`
 }
 
@@ -5189,13 +5211,13 @@ type SecurityGroup struct {
 
 type SellConfig struct {
 
-	// Device type
+	// (Disused) Device type
 	Device *string `json:"Device,omitempty" name:"Device"`
 
-	// Purchasable specification description
+	// (Disused) Purchasable specification description 
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Instance type
+	// (Disused) Instance type 
 	CdbType *string `json:"CdbType,omitempty" name:"CdbType"`
 
 	// Memory size in MB
@@ -5225,11 +5247,19 @@ type SellConfig struct {
 	// Application scenario description
 	Info *string `json:"Info,omitempty" name:"Info"`
 
-	// Status value
+	// Status. Value `0` indicates that this specification is purchasable.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-	// Tag value
+	// (Disused) Tag value
 	Tag *int64 `json:"Tag,omitempty" name:"Tag"`
+
+	// Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	DeviceTypeName *string `json:"DeviceTypeName,omitempty" name:"DeviceTypeName"`
 }
 
 type SellType struct {

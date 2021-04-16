@@ -534,6 +534,21 @@ func (r *DescribeInstancesResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DynamicPodSpec struct {
+
+	// Minimum number of CPU cores
+	RequestCpu *float64 `json:"RequestCpu,omitempty" name:"RequestCpu"`
+
+	// Maximum number of CPU cores
+	LimitCpu *float64 `json:"LimitCpu,omitempty" name:"LimitCpu"`
+
+	// Minimum memory in MB
+	RequestMemory *float64 `json:"RequestMemory,omitempty" name:"RequestMemory"`
+
+	// Maximum memory in MB
+	LimitMemory *float64 `json:"LimitMemory,omitempty" name:"LimitMemory"`
+}
+
 type EmrProductConfigOutter struct {
 
 	// Software information
@@ -1136,6 +1151,14 @@ type NodeHardwareInfo struct {
 	// Resource type. Valid values: host, pod
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
+
+	// Whether floating specification is used. `1`: yes; `0`: no
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	IsDynamicSpec *int64 `json:"IsDynamicSpec,omitempty" name:"IsDynamicSpec"`
+
+	// Floating specification in JSON string
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DynamicPodSpec *string `json:"DynamicPodSpec,omitempty" name:"DynamicPodSpec"`
 }
 
 type OutterResource struct {
@@ -1201,6 +1224,18 @@ type Placement struct {
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
+type PodParameter struct {
+
+	// TKE or EKS cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Custom permission
+	Config *string `json:"Config,omitempty" name:"Config"`
+
+	// Custom parameter
+	Parameter *string `json:"Parameter,omitempty" name:"Parameter"`
+}
+
 type PodSpec struct {
 
 	// Identifier of external resource provider, such as "cls-a1cd23fa".
@@ -1226,6 +1261,13 @@ type PodSpec struct {
 
 	// Pod node data directory mounting information.
 	PodVolumes []*PodVolume `json:"PodVolumes,omitempty" name:"PodVolumes" list`
+
+	// Whether floating specification is used. `1`: yes; `0`: no
+	IsDynamicSpec *uint64 `json:"IsDynamicSpec,omitempty" name:"IsDynamicSpec"`
+
+	// Floating specification
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DynamicPodSpec *DynamicPodSpec `json:"DynamicPodSpec,omitempty" name:"DynamicPodSpec"`
 }
 
 type PodVolume struct {
@@ -1452,6 +1494,12 @@ type ScaleOutInstanceRequest struct {
 
 	// YARN node label specified for rule-based scaling-out
 	YarnNodeLabel *string `json:"YarnNodeLabel,omitempty" name:"YarnNodeLabel"`
+
+	// Custom pod permission and parameter
+	PodParameter *PodParameter `json:"PodParameter,omitempty" name:"PodParameter"`
+
+	// Number of master nodes to be added
+	MasterCount *uint64 `json:"MasterCount,omitempty" name:"MasterCount"`
 }
 
 func (r *ScaleOutInstanceRequest) ToJsonString() string {

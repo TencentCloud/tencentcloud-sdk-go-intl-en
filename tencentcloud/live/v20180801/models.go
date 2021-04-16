@@ -5528,6 +5528,9 @@ type PushQualityData struct {
 
 	// Frame rate in `metadata`.
 	MateFps *uint64 `json:"MateFps,omitempty" name:"MateFps"`
+
+	// Push parameter
+	StreamParam *string `json:"StreamParam,omitempty" name:"StreamParam"`
 }
 
 type RecordParam struct {
