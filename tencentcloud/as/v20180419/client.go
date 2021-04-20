@@ -68,6 +68,31 @@ func (c *Client) AttachInstances(request *AttachInstancesRequest) (response *Att
     return
 }
 
+func NewClearLaunchConfigurationAttributesRequest() (request *ClearLaunchConfigurationAttributesRequest) {
+    request = &ClearLaunchConfigurationAttributesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("as", APIVersion, "ClearLaunchConfigurationAttributes")
+    return
+}
+
+func NewClearLaunchConfigurationAttributesResponse() (response *ClearLaunchConfigurationAttributesResponse) {
+    response = &ClearLaunchConfigurationAttributesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to clear specific attributes of the launch configuration.
+func (c *Client) ClearLaunchConfigurationAttributes(request *ClearLaunchConfigurationAttributesRequest) (response *ClearLaunchConfigurationAttributesResponse, err error) {
+    if request == nil {
+        request = NewClearLaunchConfigurationAttributesRequest()
+    }
+    response = NewClearLaunchConfigurationAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCompleteLifecycleActionRequest() (request *CompleteLifecycleActionRequest) {
     request = &CompleteLifecycleActionRequest{
         BaseRequest: &tchttp.BaseRequest{},

@@ -1099,6 +1099,43 @@ func (r *DescribeSafeAuthFlagResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeSubAccountsRequest struct {
+	*tchttp.BaseRequest
+
+	// List of sub-user UINs. Up to 50 UINs are supported.
+	FilterSubAccountUin []*uint64 `json:"FilterSubAccountUin,omitempty" name:"FilterSubAccountUin" list`
+}
+
+func (r *DescribeSubAccountsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSubAccountsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSubAccountsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Sub-user list
+		SubAccounts []*SubAccountUser `json:"SubAccounts,omitempty" name:"SubAccounts" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSubAccountsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSubAccountsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type DetachGroupPolicyRequest struct {
 	*tchttp.BaseRequest
 
@@ -2650,6 +2687,34 @@ type SubAccountInfo struct {
 	// Creation time
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
+type SubAccountUser struct {
+
+	// Sub-user ID
+	Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
+
+	// Sub-user name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Sub-user UID
+	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
+
+	// Sub-user remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Creation time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// User type (1: root account; 2: sub-user; 3: WeCom sub-user; 4: collaborator; 5: message recipient)
+	UserType *uint64 `json:"UserType,omitempty" name:"UserType"`
+
+	// 
+	LastLoginIp *string `json:"LastLoginIp,omitempty" name:"LastLoginIp"`
+
+	// 
+	LastLoginTime *string `json:"LastLoginTime,omitempty" name:"LastLoginTime"`
 }
 
 type UpdateAssumeRolePolicyRequest struct {

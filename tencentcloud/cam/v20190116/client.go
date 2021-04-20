@@ -643,6 +643,31 @@ func (c *Client) DescribeSafeAuthFlagColl(request *DescribeSafeAuthFlagCollReque
     return
 }
 
+func NewDescribeSubAccountsRequest() (request *DescribeSubAccountsRequest) {
+    request = &DescribeSubAccountsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "DescribeSubAccounts")
+    return
+}
+
+func NewDescribeSubAccountsResponse() (response *DescribeSubAccountsResponse) {
+    response = &DescribeSubAccountsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query sub-users through the sub-user UIN list.
+func (c *Client) DescribeSubAccounts(request *DescribeSubAccountsRequest) (response *DescribeSubAccountsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSubAccountsRequest()
+    }
+    response = NewDescribeSubAccountsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDetachGroupPolicyRequest() (request *DetachGroupPolicyRequest) {
     request = &DetachGroupPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},

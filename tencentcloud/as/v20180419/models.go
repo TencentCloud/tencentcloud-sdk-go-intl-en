@@ -231,6 +231,44 @@ type AutoScalingNotification struct {
 	AutoScalingNotificationId *string `json:"AutoScalingNotificationId,omitempty" name:"AutoScalingNotificationId"`
 }
 
+type ClearLaunchConfigurationAttributesRequest struct {
+	*tchttp.BaseRequest
+
+	// Launch configuration ID
+	LaunchConfigurationId *string `json:"LaunchConfigurationId,omitempty" name:"LaunchConfigurationId"`
+
+	// Whether to clear data disk information. This parameter is optional and the default value is `false`.
+	// Setting it to `true` will clear data disks, which means that CVM newly created on this launch configuration will have no data disk.
+	ClearDataDisks *bool `json:"ClearDataDisks,omitempty" name:"ClearDataDisks"`
+}
+
+func (r *ClearLaunchConfigurationAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ClearLaunchConfigurationAttributesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ClearLaunchConfigurationAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ClearLaunchConfigurationAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ClearLaunchConfigurationAttributesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CompleteLifecycleActionRequest struct {
 	*tchttp.BaseRequest
 
@@ -2305,10 +2343,10 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
 
-	// 
+	// Instance system disk configurations
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
-	// 
+	// Instance data disk configurations. Up to 11 data disks can be specified and will be collectively modified. Please provide all the new values for the modification.
 	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
 }
 

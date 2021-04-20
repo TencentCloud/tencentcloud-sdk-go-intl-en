@@ -483,7 +483,7 @@ func NewDescribeBaseMetricsResponse() (response *DescribeBaseMetricsResponse) {
     return
 }
 
-// This API is used to get the details of basic metrics.
+// This API is used to get the attributes of basic metrics.
 func (c *Client) DescribeBaseMetrics(request *DescribeBaseMetricsRequest) (response *DescribeBaseMetricsResponse, err error) {
     if request == nil {
         request = NewDescribeBaseMetricsRequest()
@@ -760,7 +760,7 @@ func NewModifyAlarmPolicyConditionResponse() (response *ModifyAlarmPolicyConditi
     return
 }
 
-// This API is used to edit the trigger condition of an alarm policy.
+// This API is used to modify the trigger condition of an alarm policy.
 func (c *Client) ModifyAlarmPolicyCondition(request *ModifyAlarmPolicyConditionRequest) (response *ModifyAlarmPolicyConditionResponse, err error) {
     if request == nil {
         request = NewModifyAlarmPolicyConditionRequest()

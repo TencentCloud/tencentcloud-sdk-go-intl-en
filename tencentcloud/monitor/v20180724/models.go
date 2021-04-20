@@ -85,7 +85,7 @@ type AlarmHistory struct {
 	// Alarm channel list. Valid values: SMS (SMS), EMAIL (email), CALL (phone), WECHAT (WeChat)
 	NoticeWays []*string `json:"NoticeWays,omitempty" name:"NoticeWays" list`
 
-	// Compatible Alarm 1.0 policy group ID
+	// Alarm policy ID, which can be used when you call APIs ([BindingPolicyObject](https://intl.cloud.tencent.com/document/product/248/40421?from_cn_redirect=1), [UnBindingAllPolicyObject](https://intl.cloud.tencent.com/document/product/248/40568?from_cn_redirect=1), [UnBindingPolicyObject](https://intl.cloud.tencent.com/document/product/248/40567?from_cn_redirect=1)) to bind/unbind instances or instance groups to/from an alarm policy
 	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
 
 	// Alarm type
@@ -99,6 +99,28 @@ type AlarmHistory struct {
 
 	// Whether the policy exists. Valid values: 0 (no), 1 (yes)
 	PolicyExists *int64 `json:"PolicyExists,omitempty" name:"PolicyExists"`
+
+	// Metric information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MetricsInfo []*AlarmHistoryMetric `json:"MetricsInfo,omitempty" name:"MetricsInfo" list`
+}
+
+type AlarmHistoryMetric struct {
+
+	// Namespace used to query data by Tencent Cloud service monitoring type
+	QceNamespace *string `json:"QceNamespace,omitempty" name:"QceNamespace"`
+
+	// Metric name
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Statistical period
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Value triggering alarm
+	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// Metric display name
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type AlarmNotice struct {
@@ -297,12 +319,12 @@ type AlarmPolicyFilter struct {
 
 type AlarmPolicyRule struct {
 
-	// Metric name
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Metric name or event name. The supported metrics can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1) and the supported events via [DescribeAlarmEvents](https://intl.cloud.tencent.com/document/product/248/51284?from_cn_redirect=1).
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
-	// Statistical period in seconds
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Statistical period in seconds. The valid values can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
 	// Operator
@@ -313,25 +335,26 @@ type AlarmPolicyRule struct {
 	// le = less than or equal to
 	// lt = less than
 	// ne = not equal to
-	// day_increase = daily increase
-	// day_decrease = daily decrease
-	// day_wave = daily fluctuation
-	// week_increase = weekly increase
-	// week_decrease = weekly decrease
-	// week_wave = weekly fluctuation
-	// cycle_increase = periodical increase
-	// cycle_decrease = periodical decrease
-	// cycle_wave = periodical fluctuation
+	// day_increase = day-on-day increase
+	// day_decrease = day-on-day decrease
+	// day_wave = day-on-day fluctuation
+	// week_increase = week-on-week increase
+	// week_decrease = week-on-week decrease
+	// week_wave = week-on-week fluctuation
+	// cycle_increase = cyclical increase
+	// cycle_decrease = cyclical decrease
+	// cycle_wave = cyclical fluctuation
 	// re = regex match
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The valid values can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Operator *string `json:"Operator,omitempty" name:"Operator"`
 
-	// Threshold
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Threshold. The valid value range can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Value *string `json:"Value,omitempty" name:"Value"`
 
-	// Number of cycles for continuous notification. Valid values: 1 (1 cycle), 2 (2 cycles), and so on.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Number of periods. `1`: continue for one period; `2`: continue for two periods; and so on. The valid values can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	ContinuePeriod *int64 `json:"ContinuePeriod,omitempty" name:"ContinuePeriod"`
 
 	// Alarm interval in seconds. Valid values: 0 (do not repeat), 300 (alarm once every 5 minutes), 600 (alarm once every 10 minutes), 900 (alarm once every 15 minutes), 1800 (alarm once every 30 minutes), 3600 (alarm once every hour), 7200 (alarm once every 2 hours), 10800 (alarm once every 3 hours), 21600 (alarm once every 6 hours),  43200 (alarm once every 12 hours), 86400 (alarm once every day)
@@ -354,8 +377,8 @@ type AlarmPolicyRule struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Unit *string `json:"Unit,omitempty" name:"Unit"`
 
-	// Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic threshold)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Trigger condition type. `STATIC`: static threshold; `dynamic`: dynamic threshold. If you do not specify this parameter when creating or editing a policy, `STATIC` is used by default.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 }
 
@@ -378,7 +401,9 @@ type BindingPolicyObjectDimension struct {
 	// Region ID.
 	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
 
-	// Dimensions.
+	// Instance dimension information in the following format:
+	// {"unInstanceId":"ins-00jvv9mo"}. The dimension information varies by Tencent Cloud services. For more information, please see:
+	// [Dimension List](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1)
 	Dimensions *string `json:"Dimensions,omitempty" name:"Dimensions"`
 
 	// Event dimensions.
@@ -388,7 +413,7 @@ type BindingPolicyObjectDimension struct {
 type BindingPolicyObjectRequest struct {
 	*tchttp.BaseRequest
 
-	// Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
+	// Policy group ID. If `PolicyId` is used, this parameter will be ignored, and any value, e.g., 0, can be passed in.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 
 	// Required. The value is fixed to monitor.
@@ -400,7 +425,7 @@ type BindingPolicyObjectRequest struct {
 	// Dimensions of an object to be bound.
 	Dimensions []*BindingPolicyObjectDimension `json:"Dimensions,omitempty" name:"Dimensions" list`
 
-	// Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+	// Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
@@ -537,7 +562,7 @@ type CreateAlarmPolicyRequest struct {
 	// Monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring)
 	MonitorType *string `json:"MonitorType,omitempty" name:"MonitorType"`
 
-	// Alarm policy type such as cvm_device, which is obtained through the `DescribeAllNamespaces` API
+	// Type of alarm policy, which can be obtained via [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1). An example value is `cvm_device`.
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
 	// Remarks with up to 100 letters, digits, underscores, and hyphens
@@ -546,16 +571,19 @@ type CreateAlarmPolicyRequest struct {
 	// Whether to enable. Valid values: 0 (no), 1 (yes). Default value: 1. This parameter can be left empty
 	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
 
-	// Project ID. Valid values: -1 (no project), 0 (default project). Default value: -1. This parameter can be left empty
+	// Project ID. For products with different projects, a value other than `-1` must be passed in. `-1`: no project; `0`: default project. If no value is passed in, `-1` will be used. The supported project IDs can be viewed on the [**Account Center** > **Project Management**](https://console.cloud.tencent.com/project) page of the console.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Metric trigger condition
+	// ID of trigger condition template. This parameter can be left empty.
+	ConditionTemplateId *int64 `json:"ConditionTemplateId,omitempty" name:"ConditionTemplateId"`
+
+	// Metric trigger condition. The supported metrics can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
 	Condition *AlarmPolicyCondition `json:"Condition,omitempty" name:"Condition"`
 
-	// Event trigger condition
+	// Event trigger condition. The supported events can be queried via [DescribeAlarmEvents](https://intl.cloud.tencent.com/document/product/248/51284?from_cn_redirect=1).
 	EventCondition *AlarmPolicyEventCondition `json:"EventCondition,omitempty" name:"EventCondition"`
 
-	// List of notification rule IDs, which is obtained through the `DescribeAlarmNotices` API
+	// List of notification rule IDs, which can be obtained via [DescribeAlarmNotices](https://intl.cloud.tencent.com/document/product/248/51280?from_cn_redirect=1)
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
 
 	// Triggered task list
@@ -578,7 +606,7 @@ type CreateAlarmPolicyResponse struct {
 		// Alarm policy ID
 		PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
-		// Policy ID for instance/instance group binding and unbinding APIs (BindingPolicyObject, UnBindingAllPolicyObject, UnBindingPolicyObject)
+		// Alarm policy ID, which can be used when you call APIs ([BindingPolicyObject](https://intl.cloud.tencent.com/document/product/248/40421?from_cn_redirect=1), [UnBindingAllPolicyObject](https://intl.cloud.tencent.com/document/product/248/40568?from_cn_redirect=1), [UnBindingPolicyObject](https://intl.cloud.tencent.com/document/product/248/40567?from_cn_redirect=1)) to bind/unbind instances or instance groups to/from an alarm policy
 		OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -995,10 +1023,10 @@ type DescribeAlarmHistoriesRequest struct {
 	// Sort by the first occurrence time in descending order by default. Valid values: ASC (ascending), DESC (descending)
 	Order *string `json:"Order,omitempty" name:"Order"`
 
-	// Start time, which is the timestamp exactly one day ago
+	// Start time, which corresponds to `FirstOccurTime` (time when an alarm first occurred). The default value is the timestamp of a day earlier.
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time, which is the current timestamp by default
+	// End time, which corresponds to `FirstOccurTime` (time when an alarm first occurred). The default value is the current timestamp.
 	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Filter by monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring). If this parameter is left empty, all will be queried by default
@@ -1274,40 +1302,53 @@ type DescribeAlarmPoliciesRequest struct {
 	// Filter by monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring). If this parameter is left empty, all will be queried by default
 	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes" list`
 
-	// Filter by namespace
+	// Filter by namespace. For the values of different policy types, please see:
+	// [Policy Type List](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1)
 	Namespaces []*string `json:"Namespaces,omitempty" name:"Namespaces" list`
 
-	// Alarm object list
+	// Alarm object list. The outer array corresponds to multiple instances.
+	// Each inner array corresponds to one instance, where `object` corresponds to the dimension information of the instance. The format is as follows:
+	// [
+	// 	[{"name":"unInstanceId","value":"ins-qr888845g"}],
+	// 	[{"name":"unInstanceId","value":"ins-qr8d555g"}]
+	// 	...
+	// ]
+	// For the samples for different Tencent Cloud services, please see:
+	// [Dimension List](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1)
 	Dimensions *string `json:"Dimensions,omitempty" name:"Dimensions"`
 
-	// Search by recipient
+	// Search by recipient `uid`, which should be queried by calling the CAM API. For more information, please see:
+	// [ListUsers](https://intl.cloud.tencent.com/document/product/598/34587?from_cn_redirect=1)
 	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids" list`
 
-	// Search by recipient group
+	// Search by recipient group `uid`, which should be queried by calling the CAM API. For more information, please see:
+	// [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1)
 	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups" list`
 
 	// Filter by default policy. Valid values: DEFAULT (display default policy), NOT_DEFAULT (display non-default policies). If this parameter is left empty, all policies will be displayed
 	PolicyType []*string `json:"PolicyType,omitempty" name:"PolicyType" list`
 
-	// Sort by field
+	// Sort by field. For example, to sort by the last modification time, use Field: "UpdateTime".
 	Field *string `json:"Field,omitempty" name:"Field"`
 
 	// Sort order. Valid values: ASC (ascending), DESC (descending)
 	Order *string `json:"Order,omitempty" name:"Order"`
 
-	// Project ID array
+	// ID array of the policy project, which can be viewed on the following page:
+	// [Project Management](https://console.cloud.tencent.com/project)
 	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
 
-	// Alarm notification ID list
+	// ID list of the notification template, which can be obtained by querying the notification template list.
+	// [DescribeAlarmNotices](https://intl.cloud.tencent.com/document/product/248/51280?from_cn_redirect=1)
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
 
 	// Filter by trigger condition. Valid values: STATIC (display policies with static threshold), DYNAMIC (display policies with dynamic threshold). If this parameter is left empty, all policies will be displayed
 	RuleTypes []*string `json:"RuleTypes,omitempty" name:"RuleTypes" list`
 
-	// Status. Valid values: 1 (enabled), 0 (disabled)
+	// Filter by alarm status. Valid values: [1]: enabled; [0]: disabled; [0, 1]: all
 	Enable []*int64 `json:"Enable,omitempty" name:"Enable" list`
 
-	// Indicates whether the notification rule is configured. 1: not configured; 0: configured
+	// If `1` is passed in, alarm policies with no notification rules configured are queried. If it is left empty or other values are passed in, all alarm policies are queried.
 	NotBindingNoticeRule *int64 `json:"NotBindingNoticeRule,omitempty" name:"NotBindingNoticeRule"`
 }
 
@@ -2599,13 +2640,13 @@ type DescribeProductEventListRequest struct {
 	// Filter by product name. For example, "guest_reboot" indicates server restart.
 	EventName []*string `json:"EventName,omitempty" name:"EventName" list`
 
-	// Affected object, such as ins-19708ino.
+	// Affected object, such as "ins-19708ino"
 	InstanceId []*string `json:"InstanceId,omitempty" name:"InstanceId" list`
 
 	// Filter by dimension, such as by public IP: 10.0.0.1.
 	Dimensions []*DescribeProductEventListDimensions `json:"Dimensions,omitempty" name:"Dimensions" list`
 
-	// Filter by region, such as by gz.
+	// Region filter parameter for service events, such as `gz`. For region abbreviations, please see [Region List](https://intl.cloud.tencent.com/document/product/248/50863?from_cn_redirect=1)
 	RegionList []*string `json:"RegionList,omitempty" name:"RegionList" list`
 
 	// Filter by event type. Valid values: ["status_change","abnormal"], which indicate events whose statuses have changed and events with exceptions respectively.
@@ -3021,6 +3062,9 @@ type ModifyAlarmPolicyConditionRequest struct {
 
 	// Alarm policy ID
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// ID of trigger condition template. This parameter can be left empty.
+	ConditionTemplateId *int64 `json:"ConditionTemplateId,omitempty" name:"ConditionTemplateId"`
 
 	// Metric trigger condition
 	Condition *AlarmPolicyCondition `json:"Condition,omitempty" name:"Condition"`
@@ -3607,10 +3651,10 @@ type UnBindingAllPolicyObjectRequest struct {
 	// The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
+	// Policy group ID. If `PolicyId` is used, this parameter will be ignored, and any value, e.g., `0`, can be passed in.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+	// Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
@@ -3647,16 +3691,16 @@ type UnBindingPolicyObjectRequest struct {
 	// The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
+	// Policy group ID. If `PolicyId` is used, this parameter will be ignored, and any value, e.g., `0`, can be passed in.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 
 	// List of unique IDs of the object instances to be deleted. `UniqueId` can be obtained from the output parameter `List` of the [DescribeBindingPolicyObjectList](https://intl.cloud.tencent.com/document/api/248/40570?from_cn_redirect=1) API
 	UniqueId []*string `json:"UniqueId,omitempty" name:"UniqueId" list`
 
-	// Instance group ID. The UniqueId parameter is invalid if object instances are deleted by instance group.
+	// Instance group ID. The `UniqueId` parameter is invalid if object instances are deleted by instance group.
 	InstanceGroupId *int64 `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
 
-	// Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+	// Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
