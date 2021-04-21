@@ -166,19 +166,19 @@ type CreateAclRequest struct {
 	// ACL resource type. 0: UNKNOWN, 1: ANY, 2: TOPIC, 3: GROUP, 4: CLUSTER, 5: TRANSACTIONAL_ID. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka
 	ResourceType *int64 `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name
-	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
-
 	// ACL operation mode. 0: UNKNOWN, 1: ANY, 2: ALL, 3: READ, 4: WRITE, 5: CREATE, 6: DELETE, 7: ALTER, 8: DESCRIBE, 9: CLUSTER_ACTION, 10: DESCRIBE_CONFIGS, 11: ALTER_CONFIGS
 	Operation *int64 `json:"Operation,omitempty" name:"Operation"`
 
 	// Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to allowlist), and other fields will be used for future ACLs compatible with open-source Kafka
 	PermissionType *int64 `json:"PermissionType,omitempty" name:"PermissionType"`
 
+	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name
+	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
+
 	// The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
 	Host *string `json:"Host,omitempty" name:"Host"`
 
-	// User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list
+	// The list of users allowed to access the topic. Default: User:*, meaning all users. The current user must be in the user list. Add `User:` before the user name (`User:A` for example).
 	Principal *string `json:"Principal,omitempty" name:"Principal"`
 }
 

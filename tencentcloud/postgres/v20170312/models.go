@@ -211,6 +211,9 @@ type CreateDBInstancesRequest struct {
 
 	// The information of tags to be associated with instances. This parameter is left empty by default.
 	TagList []*Tag `json:"TagList,omitempty" name:"TagList" list`
+
+	// Security group ID
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 }
 
 func (r *CreateDBInstancesRequest) ToJsonString() string {
@@ -308,6 +311,9 @@ type CreateReadOnlyDBInstanceRequest struct {
 
 	// The information of tags to be associated with instances. This parameter is left empty by default.
 	TagList *Tag `json:"TagList,omitempty" name:"TagList"`
+
+	// Security group ID
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 }
 
 func (r *CreateReadOnlyDBInstanceRequest) ToJsonString() string {
@@ -378,6 +384,9 @@ type CreateReadOnlyGroupRequest struct {
 
 	// The minimum number of read-only replicas that must be retained in an RO group
 	MinDelayEliminateReserve *uint64 `json:"MinDelayEliminateReserve,omitempty" name:"MinDelayEliminateReserve"`
+
+	// Security group ID
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
 }
 
 func (r *CreateReadOnlyGroupRequest) ToJsonString() string {
@@ -606,6 +615,10 @@ type DBInstance struct {
 	// The status of a instance in a read-only group
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StatusInReadonlyGroup *string `json:"StatusInReadonlyGroup,omitempty" name:"StatusInReadonlyGroup"`
+
+	// Elimination time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	OfflineTime *string `json:"OfflineTime,omitempty" name:"OfflineTime"`
 }
 
 type DBInstanceNetInfo struct {

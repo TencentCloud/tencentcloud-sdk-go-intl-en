@@ -69,6 +69,31 @@ func (c *Client) ApplyUpload(request *ApplyUploadRequest) (response *ApplyUpload
     return
 }
 
+func NewAttachMediaSubtitlesRequest() (request *AttachMediaSubtitlesRequest) {
+    request = &AttachMediaSubtitlesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "AttachMediaSubtitles")
+    return
+}
+
+func NewAttachMediaSubtitlesResponse() (response *AttachMediaSubtitlesResponse) {
+    response = &AttachMediaSubtitlesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to associate/disassociate subtitles with/from a media file of a specific adaptive bitrate streaming template ID.
+func (c *Client) AttachMediaSubtitles(request *AttachMediaSubtitlesRequest) (response *AttachMediaSubtitlesResponse, err error) {
+    if request == nil {
+        request = NewAttachMediaSubtitlesRequest()
+    }
+    response = NewAttachMediaSubtitlesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCommitUploadRequest() (request *CommitUploadRequest) {
     request = &CommitUploadRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2024,7 +2049,7 @@ func NewModifyMediaInfoResponse() (response *ModifyMediaInfoResponse) {
     return
 }
 
-// This API is used to modify the attributes of a media file, including category, name, description, tag, expiration time, timestamp information, and video cover.
+// This API is used to modify the attributes of a media file, including category, name, description, tag, expiration time, timestamp information, video thumbnail, and subtitle information.
 func (c *Client) ModifyMediaInfo(request *ModifyMediaInfoRequest) (response *ModifyMediaInfoResponse, err error) {
     if request == nil {
         request = NewModifyMediaInfoRequest()

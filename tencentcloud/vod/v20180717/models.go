@@ -1758,6 +1758,51 @@ type AsrWordsConfigureInfoForUpdate struct {
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
 }
 
+type AttachMediaSubtitlesRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of the media file
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// Operation. Valid values:
+	// <li>`Attach`: associates subtitles.</li>
+	// <li>`Detach`: disassociates subtitles.</li>
+	Operation *string `json:"Operation,omitempty" name:"Operation"`
+
+	// [Adaptive bitrate streaming template ID](https://intl.cloud.tencent.com/document/product/266/34071?from_cn_redirect=1#zsy)
+	AdaptiveDynamicStreamingDefinition *uint64 `json:"AdaptiveDynamicStreamingDefinition,omitempty" name:"AdaptiveDynamicStreamingDefinition"`
+
+	// Unique IDs of the subtitles
+	SubtitleIds []*string `json:"SubtitleIds,omitempty" name:"SubtitleIds" list`
+}
+
+func (r *AttachMediaSubtitlesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AttachMediaSubtitlesRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type AttachMediaSubtitlesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AttachMediaSubtitlesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *AttachMediaSubtitlesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type AudioTemplateInfo struct {
 
 	// Audio stream encoder.
@@ -7360,6 +7405,47 @@ type MediaSourceData struct {
 	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
 }
 
+type MediaSubtitleInput struct {
+
+	// Subtitle name. Length limit: 64 characters
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Subtitle language. Common values:
+	// <li>`cn`: Chinese</li>
+	// <li>`ja`: Japanese</li>
+	// <li>`en-US`: English</li>
+	// For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
+	Language *string `json:"Language,omitempty" name:"Language"`
+
+	// Subtitle format. Valid value:
+	// <li>vtt</li>
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Subtitle content, which is [Base64-encoded](https://tools.ietf.org/html/rfc4648) strings
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Subtitle ID. Its length cannot exceed 16 characters. Uppercase and lowercase letters, numbers, underscores (_), and hyphens (-) are supported. It cannot be the same as the IDs of the existing subtitles in the media file.
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
+type MediaSubtitleItem struct {
+
+	// 
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// 
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// 
+	Language *string `json:"Language,omitempty" name:"Language"`
+
+	// 
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// 
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
 type MediaTrack struct {
 
 	// Track type. Valid values:
@@ -7983,6 +8069,16 @@ type ModifyMediaInfoRequest struct {
 	// In the same request, `ClearTags` and `AddTags` cannot be present at the same time.
 	ClearTags *int64 `json:"ClearTags,omitempty" name:"ClearTags"`
 
+	// Information of multiple subtitles to be added. A single media file can have up to 16 subtitles. In the same request, the subtitle IDs specified in `AddSubtitles` must be different from those in `DeleteSubtitleIds`.
+	AddSubtitles []*MediaSubtitleInput `json:"AddSubtitles,omitempty" name:"AddSubtitles" list`
+
+	// Unique IDs of the subtitles to be deleted. In the same request, the subtitle IDs specified in `AddSubtitles` must be different from those in `DeleteSubtitleIds`.
+	DeleteSubtitleIds []*string `json:"DeleteSubtitleIds,omitempty" name:"DeleteSubtitleIds" list`
+
+	// The value `1` indicates to delete all subtitle information of the media file. Other values are meaningless.
+	// `ClearSubtitles` and `AddSubtitles` cannot co-exist in the same request.
+	ClearSubtitles *int64 `json:"ClearSubtitles,omitempty" name:"ClearSubtitles"`
+
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
@@ -8003,6 +8099,9 @@ type ModifyMediaInfoResponse struct {
 		// URL of new video cover.
 	// * Note: this returned value is valid only if the request carries `CoverData`.*
 		CoverUrl *string `json:"CoverUrl,omitempty" name:"CoverUrl"`
+
+		// Added subtitle information
+		AddedSubtitleSet []*MediaSubtitleItem `json:"AddedSubtitleSet,omitempty" name:"AddedSubtitleSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -9884,6 +9983,11 @@ type SearchMediaRequest struct {
 	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
 	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
 	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
+
+	// Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Regions](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
+	// <li>Length limit for a single region: 20 characters</li>
+	// <li>Array length limit: 20</li>
+	StorageRegions []*string `json:"StorageRegions,omitempty" name:"StorageRegions" list`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
