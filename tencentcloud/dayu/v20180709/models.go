@@ -41,10 +41,10 @@ type BaradData struct {
 
 type BoundIpInfo struct {
 
-	// IP
+	// IP address
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
-	// Bound product type. Valid values: [public (CVM), bm (BM), eni (ENI), vpngw (VPN Gateway), natgw (NAT Gateway), waf (WAF), fpc (finance product), gaap (GAAP), other (hosted IP)]
+	// Category of product that can be bound. Valid values: public (CVM and CLB), bm (BM), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), and other (Hosted IP).
 	BizType *string `json:"BizType,omitempty" name:"BizType"`
 
 	// Subtype under product type. Valid values: [cvm (CVM), lb (CLB), eni (ENI), vpngw (VPN), natgw (NAT), waf (WAF), fpc (finance), gaap (GAAP), other (hosted IP), eip (BM EIP)]
@@ -528,7 +528,7 @@ type CreateDDoSPolicyRequest struct {
 	// Ports to be closed. If no ports are to be closed, enter an empty array
 	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits" list`
 
-	// IP blocklist/allowlist. Enter an empty array if there is no IP blocklist/allowlist
+	// Request source IP blocklist/allowlist, which should be an empty array if there are no blocked or allowed IPs.
 	IpAllowDenys []*IpBlackWhite `json:"IpAllowDenys,omitempty" name:"IpAllowDenys" list`
 
 	// Packet filter. Enter an empty array if there are no packets to filter
@@ -1832,6 +1832,64 @@ func (r *DescribeBasicDeviceThresholdResponse) ToJsonString() string {
 }
 
 func (r *DescribeBasicDeviceThresholdResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBizHttpStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Resource ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Statistical period in seconds. Valid values: 300, 1800, 3600, 21600, and 86400.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistical mode, which only supports sum.
+	Statistics *string `json:"Statistics,omitempty" name:"Statistics"`
+
+	// Protocol and port list, which is valid when the statistical dimension is the number of connections. Valid protocols: TCP, UDP, HTTP, and HTTPS.
+	ProtoInfo []*ProtocolPort `json:"ProtoInfo,omitempty" name:"ProtoInfo" list`
+
+	// Specific domain name query
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
+func (r *DescribeBizHttpStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBizHttpStatusRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBizHttpStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Statistics on the HTTP status codes of business traffic
+		HttpStatusMap *HttpStatusMap `json:"HttpStatusMap,omitempty" name:"HttpStatusMap"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBizHttpStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeBizHttpStatusResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3845,7 +3903,7 @@ type DescribeResourceListRequest struct {
 	// Resource name search, which is optional. If this field is not an empty string, it means to search for resources by name;
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// IP search list, which is optional. If this field is not empty, it means to search for resources by IP;
+	// IP query list, which is optional. Resources will be queried by IP if the list is not empty.
 	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
 
 	// Resource status search list, which is optional. Valid values: [0 (running), 1 (cleansing), 2 (blocking)]. No status search will be performed if an empty array is entered;
@@ -3886,34 +3944,37 @@ type DescribeResourceListResponse struct {
 		// Total number of records
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-		// Resource record list. Valid values of `key`:
-	// "Key": "CreateTime" - resource instance purchase time
-	// "Key": "Region" - resource instance region
-	// "Key": "BoundIP" - IP bound to single IP instance
-	// "Key": "Id" - resource instance ID
-	// "Key": "CCEnabled" - CC protection status of resource instance
-	// "Key": "DDoSThreshold" - DDoS cleansing threshold of resource instance	
-	// "Key": "BoundStatus" - IP binding status of single IP instance or multi-IP instance (binding or bound)
-	// "Key": "Type" - this field has been disused
-	// "Key": "ElasticLimit" - elastic protection value of resource instance
-	// "Key": "DDoSAI" - DDoS AI protection status of resource instance
-	// "Key": "Bandwidth" - base protection value of resource instance
-	// "Key": "OverloadCount" - number of attacks to the resource instance that exceed the elastic protection value
-	// "Key": "Status" - resource instance status (idle: running, attacking: attacking, blocking: blocking, isolate: isolating)
-	// "Key": "Lbid" - this field has been disused
-	// "Key": "ShowFlag" - this field has been disused
-	// "Key": "Expire" - resource instance expiration time
-	// "Key": "CCThreshold" - CC protection triggering threshold of resource instance
-	// "Key": "AutoRenewFlag" - auto-renewal flag of resource instance
-	// "Key": "IspCode" - line of single IP instance or multi-IP instance (0: China Telecom, 1: China Unicom, 2: China Mobile, 5: BGP)
-	// "Key": "PackType" - package type
-	// "Key": "PackId" - package ID
-	// "Key": "Name" - resource instance name
-	// "Key": "Locked" - this field has been disused
-	// "Key": "IpDDoSLevel" - protection level of resource instance (low: loose, middle: normal, high: strict)
-	// "Key": "DefendStatus" - DDoS protection status of resource (enabled or temporarily disabled)
-	// "Key": "UndefendExpire" - end time of temporary disablement of DDoS protection for resource instance
-	// "Key": "Tgw" - whether the resource instance is a new resource
+		// Resource record list. The description of key values is as follows:
+	// "Key": "CreateTime" (Instance purchase time)
+	// "Key": "Region" (Instance region)
+	// "Key": "BoundIP" (IP bound to the single-IP instance)
+	// "Key": "Id" (Instance ID)
+	// "Key": "CCEnabled" (CC protection switch status of the instance)
+	// "Key": "DDoSThreshold" (Anti-DDoS cleansing threshold of the instance)	
+	// "Key": "BoundStatus" (IP binding status of the single-IP/multi-IP instance; binding or bound)
+	// "Key": "Type" (Disused field)
+	// "Key": "ElasticLimit" (Elastic protection value of the instance)
+	// "Key": "DDoSAI" (Anti-DDoS AI protection switch of the instance)
+	// "Key": "OverloadCount" (The number of attacks exceeding the elastic protection value to the instance)
+	// "Key": "Status" (Instance status; idle: running; attacking: under attacks; blocking: being blocked; isolate: being isolated)
+	// "Key": "Lbid" (Disused field)
+	// "Key": "ShowFlag" (Disused field)
+	// "Key": "Expire" (Instance expiry time)
+	// "Key": "CCThreshold" (CC protection trigger value of the instance)
+	// "Key": "AutoRenewFlag" (Whether the instance is on auto-renewal)
+	// "Key": "IspCode" (Line of the single-IP/multi-IP instance; 0: China Telecom; 1: China Unicom; 2: China Mobile; 5: BGP)
+	// "Key": "PackType" (Package type)
+	// "Key": "PackId" (Package ID)
+	// "Key": "Name" (Instance name)
+	// "Key": "Locked" (Disused field)
+	// "Key": "IpDDoSLevel" (Protection level of the instance; low: loose; middle: normal; high: strict)
+	// "Key": "DefendStatus" (DDoS protection status of the instance; enabled or temporarily disabled)
+	// "Key": "UndefendExpire" (End time of the temporary disabling on DDoS protection for the instance)
+	// "Key": "Tgw" (Whether it is a new instance)
+	// "Key": "Bandwidth" (Base protection value of the Anti-DDoS Pro/Advanced instance)
+	// "Key": "DdosMax" (Base protection value of the Anti-DDoS Ultimate instance)
+	// "Key": "GFBandwidth" (Base business application bandwidth of the Anti-DDoS Advanced instance)
+	// "Key": "ServiceBandwidth" (Base business application bandwidth of the Anti-DDoS Ultimate instance)
 		ServicePacks []*KeyValueRecord `json:"ServicePacks,omitempty" name:"ServicePacks" list`
 
 		// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate)
@@ -4382,6 +4443,39 @@ func (r *DescribleRegionCountResponse) ToJsonString() string {
 
 func (r *DescribleRegionCountResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type HttpStatusMap struct {
+
+	// HTTP 2xx Status code
+	Http2xx []*float64 `json:"Http2xx,omitempty" name:"Http2xx" list`
+
+	// HTTP 3xx Status code
+	Http3xx []*float64 `json:"Http3xx,omitempty" name:"Http3xx" list`
+
+	// HTTP 404 Status code
+	Http404 []*float64 `json:"Http404,omitempty" name:"Http404" list`
+
+	// HTTP 4xx Status code
+	Http4xx []*float64 `json:"Http4xx,omitempty" name:"Http4xx" list`
+
+	// HTTP 5xx Status code
+	Http5xx []*float64 `json:"Http5xx,omitempty" name:"Http5xx" list`
+
+	// HTTP 2xx Forwarding status code
+	SourceHttp2xx []*float64 `json:"SourceHttp2xx,omitempty" name:"SourceHttp2xx" list`
+
+	// HTTP 3xx Forwarding status code
+	SourceHttp3xx []*float64 `json:"SourceHttp3xx,omitempty" name:"SourceHttp3xx" list`
+
+	// HTTP 404 Forwarding status code
+	SourceHttp404 []*float64 `json:"SourceHttp404,omitempty" name:"SourceHttp404" list`
+
+	// HTTP 4xx Forwarding status code
+	SourceHttp4xx []*float64 `json:"SourceHttp4xx,omitempty" name:"SourceHttp4xx" list`
+
+	// HTTP 5xx Forwarding status code
+	SourceHttp5xx []*float64 `json:"SourceHttp5xx,omitempty" name:"SourceHttp5xx" list`
 }
 
 type IpBlackWhite struct {

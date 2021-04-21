@@ -743,6 +743,31 @@ func (c *Client) DescribeBasicDeviceThreshold(request *DescribeBasicDeviceThresh
     return
 }
 
+func NewDescribeBizHttpStatusRequest() (request *DescribeBizHttpStatusRequest) {
+    request = &DescribeBizHttpStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dayu", APIVersion, "DescribeBizHttpStatus")
+    return
+}
+
+func NewDescribeBizHttpStatusResponse() (response *DescribeBizHttpStatusResponse) {
+    response = &DescribeBizHttpStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to get the statistics on the status codes of business traffic.
+func (c *Client) DescribeBizHttpStatus(request *DescribeBizHttpStatusRequest) (response *DescribeBizHttpStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeBizHttpStatusRequest()
+    }
+    response = NewDescribeBizHttpStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCCAlarmThresholdRequest() (request *DescribeCCAlarmThresholdRequest) {
     request = &DescribeCCAlarmThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
