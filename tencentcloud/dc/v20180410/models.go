@@ -1102,6 +1102,9 @@ type ModifyDirectConnectAttributeRequest struct {
 
 	// Whether the connection applicant has signed the service agreement.
 	SignLaw *bool `json:"SignLaw,omitempty" name:"SignLaw"`
+
+	// Connection’s bandwidth
+	Bandwidth *uint64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 }
 
 func (r *ModifyDirectConnectAttributeRequest) ToJsonString() string {

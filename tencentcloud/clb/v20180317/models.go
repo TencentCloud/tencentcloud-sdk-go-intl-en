@@ -523,6 +523,9 @@ type CreateClsLogSetRequest struct {
 
 	// Logset name, which must be unique among all CLS logsets; default value: clb_logset
 	LogsetName *string `json:"LogsetName,omitempty" name:"LogsetName"`
+
+	// Logset type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
+	LogsetType *string `json:"LogsetType,omitempty" name:"LogsetType"`
 }
 
 func (r *CreateClsLogSetRequest) ToJsonString() string {
@@ -867,6 +870,9 @@ type CreateTopicRequest struct {
 
 	// The number of topic partitions, which changes as partitions are split or merged. Each log topic can have up to 50 partitions. If this parameter is not passed in, 1 partition will be created by default and up to 10 partitions are allowed to be created.
 	PartitionCount *uint64 `json:"PartitionCount,omitempty" name:"PartitionCount"`
+
+	// Log type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
+	TopicType *string `json:"TopicType,omitempty" name:"TopicType"`
 }
 
 func (r *CreateTopicRequest) ToJsonString() string {
@@ -1564,6 +1570,9 @@ type DescribeClsLogSetResponse struct {
 
 		// Logset ID
 		LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+		// Health check logset ID
+		HealthLogsetId *string `json:"HealthLogsetId,omitempty" name:"HealthLogsetId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2672,6 +2681,14 @@ type LoadBalancer struct {
 	// Whether it is an NFV CLB instance. No returned information: no; l7nfv: yes.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	NfvInfo *string `json:"NfvInfo,omitempty" name:"NfvInfo"`
+
+	// Health check logset ID of CLB CLS
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	HealthLogSetId *string `json:"HealthLogSetId,omitempty" name:"HealthLogSetId"`
+
+	// Health check log topic ID of CLB CLS
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	HealthLogTopicId *string `json:"HealthLogTopicId,omitempty" name:"HealthLogTopicId"`
 }
 
 type LoadBalancerDetail struct {
@@ -3834,6 +3851,9 @@ type SetLoadBalancerClsLogRequest struct {
 
 	// CLS log topic ID
 	LogTopicId *string `json:"LogTopicId,omitempty" name:"LogTopicId"`
+
+	// Log type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
 }
 
 func (r *SetLoadBalancerClsLogRequest) ToJsonString() string {

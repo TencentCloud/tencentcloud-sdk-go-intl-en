@@ -2740,6 +2740,14 @@ type NodePool struct {
 	// Image ID
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
+
+	// This parameter is required when the custom PodCIDR mode is enabled for the cluster.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	DesiredPodNum *int64 `json:"DesiredPodNum,omitempty" name:"DesiredPodNum"`
+
+	// Custom script
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	UserScript *string `json:"UserScript,omitempty" name:"UserScript"`
 }
 
 type NodePoolOption struct {
@@ -2959,6 +2967,9 @@ type UpdateClusterVersionRequest struct {
 
 	// The version that needs to upgrade to
 	DstVersion *string `json:"DstVersion,omitempty" name:"DstVersion"`
+
+	// Cluster custom parameter
+	ExtraArgs *ClusterExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
 
 	// The maximum tolerable number of unavailable pods
 	MaxNotReadyPercent *float64 `json:"MaxNotReadyPercent,omitempty" name:"MaxNotReadyPercent"`
