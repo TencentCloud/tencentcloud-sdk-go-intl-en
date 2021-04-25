@@ -143,6 +143,31 @@ func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateC
     return
 }
 
+func NewCreateSnapshotsRequest() (request *CreateSnapshotsRequest) {
+    request = &CreateSnapshotsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "CreateSnapshots")
+    return
+}
+
+func NewCreateSnapshotsResponse() (response *CreateSnapshotsResponse) {
+    response = &CreateSnapshotsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create one or more table snapshots at specific points in time in the past.
+func (c *Client) CreateSnapshots(request *CreateSnapshotsRequest) (response *CreateSnapshotsResponse, err error) {
+    if request == nil {
+        request = NewCreateSnapshotsRequest()
+    }
+    response = NewCreateSnapshotsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateTableGroupRequest() (request *CreateTableGroupRequest) {
     request = &CreateTableGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -239,6 +264,31 @@ func (c *Client) DeleteIdlFiles(request *DeleteIdlFilesRequest) (response *Delet
         request = NewDeleteIdlFilesRequest()
     }
     response = NewDeleteIdlFilesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteSnapshotsRequest() (request *DeleteSnapshotsRequest) {
+    request = &DeleteSnapshotsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "DeleteSnapshots")
+    return
+}
+
+func NewDeleteSnapshotsResponse() (response *DeleteSnapshotsResponse) {
+    response = &DeleteSnapshotsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete one or more table snapshots.
+func (c *Client) DeleteSnapshots(request *DeleteSnapshotsRequest) (response *DeleteSnapshotsResponse, err error) {
+    if request == nil {
+        request = NewDeleteSnapshotsRequest()
+    }
+    response = NewDeleteSnapshotsResponse()
     err = c.Send(request, response)
     return
 }
@@ -439,6 +489,31 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
         request = NewDescribeRegionsRequest()
     }
     response = NewDescribeRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSnapshotsRequest() (request *DescribeSnapshotsRequest) {
+    request = &DescribeSnapshotsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "DescribeSnapshots")
+    return
+}
+
+func NewDescribeSnapshotsResponse() (response *DescribeSnapshotsResponse) {
+    response = &DescribeSnapshotsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of table snapshots.
+func (c *Client) DescribeSnapshots(request *DescribeSnapshotsRequest) (response *DescribeSnapshotsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSnapshotsRequest()
+    }
+    response = NewDescribeSnapshotsResponse()
     err = c.Send(request, response)
     return
 }
@@ -668,6 +743,31 @@ func (c *Client) EnableRestProxy(request *EnableRestProxyRequest) (response *Ena
     return
 }
 
+func NewImportSnapshotsRequest() (request *ImportSnapshotsRequest) {
+    request = &ImportSnapshotsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "ImportSnapshots")
+    return
+}
+
+func NewImportSnapshotsResponse() (response *ImportSnapshotsResponse) {
+    response = &ImportSnapshotsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to import a snapshot into a new table or the original table from which the snapshot was created.
+func (c *Client) ImportSnapshots(request *ImportSnapshotsRequest) (response *ImportSnapshotsResponse, err error) {
+    if request == nil {
+        request = NewImportSnapshotsRequest()
+    }
+    response = NewImportSnapshotsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyClusterMachineRequest() (request *ModifyClusterMachineRequest) {
     request = &ModifyClusterMachineRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -764,6 +864,31 @@ func (c *Client) ModifyClusterTags(request *ModifyClusterTagsRequest) (response 
         request = NewModifyClusterTagsRequest()
     }
     response = NewModifyClusterTagsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySnapshotsRequest() (request *ModifySnapshotsRequest) {
+    request = &ModifySnapshotsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "ModifySnapshots")
+    return
+}
+
+func NewModifySnapshotsResponse() (response *ModifySnapshotsResponse) {
+    response = &ModifySnapshotsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the expiration time of one or more table snapshots.
+func (c *Client) ModifySnapshots(request *ModifySnapshotsRequest) (response *ModifySnapshotsResponse, err error) {
+    if request == nil {
+        request = NewModifySnapshotsRequest()
+    }
+    response = NewModifySnapshotsResponse()
     err = c.Send(request, response)
     return
 }

@@ -300,6 +300,49 @@ func (r *CreateClusterResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateSnapshotsRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Snapshot list
+	SelectedTables []*SnapshotInfo `json:"SelectedTables,omitempty" name:"SelectedTables" list`
+}
+
+func (r *CreateSnapshotsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateSnapshotsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateSnapshotsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of snapshots created in batches
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The result list of snapshots created in batches
+		TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateSnapshotsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *CreateSnapshotsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateTableGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -472,6 +515,49 @@ func (r *DeleteIdlFilesResponse) ToJsonString() string {
 }
 
 func (r *DeleteIdlFilesResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteSnapshotsRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of snapshots to delete
+	SelectedTables []*SnapshotInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables" list`
+}
+
+func (r *DeleteSnapshotsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteSnapshotsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteSnapshotsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of snapshots deleted in batches
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The result list of snapshots deleted in batches
+		TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteSnapshotsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DeleteSnapshotsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -748,7 +834,7 @@ func (r *DescribeIdlFileInfosResponse) FromJsonString(s string) error {
 type DescribeMachineRequest struct {
 	*tchttp.BaseRequest
 
-	// Whether to filter the resources supporting IPv6 access
+	// If this parameter is not `0`, machines supporting IPv6 will be queried.
 	Ipv6Enable *int64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
 }
 
@@ -816,6 +902,55 @@ func (r *DescribeRegionsResponse) ToJsonString() string {
 }
 
 func (r *DescribeRegionsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSnapshotsRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The ID of the table group where the table resides
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table name
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Snapshot name
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+}
+
+func (r *DescribeSnapshotsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSnapshotsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSnapshotsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of snapshots
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The result list of snapshots
+		TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSnapshotsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *DescribeSnapshotsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1313,6 +1448,77 @@ type IdlFileInfoWithoutContent struct {
 	Error *ErrorInfo `json:"Error,omitempty" name:"Error"`
 }
 
+type ImportSnapshotsRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where the original table (from which the snapshot was created) resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The information of the snapshot to import
+	Snapshots *SnapshotInfo `json:"Snapshots,omitempty" name:"Snapshots"`
+
+	// Whether to import partial data of the snapshot. Valid values: `TRUE` (import partial data), `FALSE` (import all data).
+	ImportSpecialKey *string `json:"ImportSpecialKey,omitempty" name:"ImportSpecialKey"`
+
+	// Whether to import to the original table. Valid values: `TRUE` (import to the original table), `FALSE` (import to a new table).
+	ImportOriginTable *string `json:"ImportOriginTable,omitempty" name:"ImportOriginTable"`
+
+	// The file of the keys of the partial data
+	KeyFile *KeyFile `json:"KeyFile,omitempty" name:"KeyFile"`
+
+	// The ID of the table group where the new table resides, which is valid only when `ImportOriginTable` is set to `FALSE`
+	NewTableGroupId *string `json:"NewTableGroupId,omitempty" name:"NewTableGroupId"`
+
+	// The name of the new table, which is valid only when `ImportOriginTable` is set to `FALSE`. TcaplusDB will automatically create a table named `NewTableName` of the same structure as that of the original table.
+	NewTableName *string `json:"NewTableName,omitempty" name:"NewTableName"`
+}
+
+func (r *ImportSnapshotsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ImportSnapshotsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ImportSnapshotsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ImportSnapshotsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ImportSnapshotsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type KeyFile struct {
+
+	// Key file name
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// Key file extension
+	FileExtType *string `json:"FileExtType,omitempty" name:"FileExtType"`
+
+	// Key file content
+	FileContent *string `json:"FileContent,omitempty" name:"FileContent"`
+
+	// Key file size
+	FileSize *int64 `json:"FileSize,omitempty" name:"FileSize"`
+}
+
 type MachineInfo struct {
 
 	// Machine type
@@ -1491,6 +1697,49 @@ func (r *ModifyClusterTagsResponse) ToJsonString() string {
 }
 
 func (r *ModifyClusterTagsResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifySnapshotsRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Snapshot list
+	SelectedTables []*SnapshotInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables" list`
+}
+
+func (r *ModifySnapshotsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifySnapshotsRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifySnapshotsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of snapshots modified in batches
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The result list of snapshots modified in batches
+		TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifySnapshotsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifySnapshotsResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2128,6 +2377,82 @@ func (r *SetTableIndexResponse) ToJsonString() string {
 
 func (r *SetTableIndexResponse) FromJsonString(s string) error {
     return json.Unmarshal([]byte(s), &r)
+}
+
+type SnapshotInfo struct {
+
+	// The ID of the table group where the table resides
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table name
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Snapshot name
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+
+	// The time of the data from which the snapshot was created
+	SnapshotTime *string `json:"SnapshotTime,omitempty" name:"SnapshotTime"`
+
+	// Snapshot expiration time
+	SnapshotDeadTime *string `json:"SnapshotDeadTime,omitempty" name:"SnapshotDeadTime"`
+}
+
+type SnapshotInfoNew struct {
+
+	// The ID of the table group where the table resides
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table name
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Snapshot name
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+
+	// Snapshot expiration time
+	SnapshotDeadTime *string `json:"SnapshotDeadTime,omitempty" name:"SnapshotDeadTime"`
+}
+
+type SnapshotResult struct {
+
+	// The ID of the table group where the table resides
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table name
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Task ID, which is valid for the API that creates one task at a time
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Error information
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Error *ErrorInfo `json:"Error,omitempty" name:"Error"`
+
+	// Snapshot name
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+
+	// The time of the data from which the snapshot was created
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	SnapshotTime *string `json:"SnapshotTime,omitempty" name:"SnapshotTime"`
+
+	// When the snapshot expires
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	SnapshotDeadTime *string `json:"SnapshotDeadTime,omitempty" name:"SnapshotDeadTime"`
+
+	// When the snapshot was created
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	SnapshotCreateTime *string `json:"SnapshotCreateTime,omitempty" name:"SnapshotCreateTime"`
+
+	// Snapshot size
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	SnapshotSize *uint64 `json:"SnapshotSize,omitempty" name:"SnapshotSize"`
+
+	// Snapshot status. Valid values: `0` (creating), `1` (normal), `2` (deleting), `3` (expired), `4` (rolling back).
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	SnapshotStatus *uint64 `json:"SnapshotStatus,omitempty" name:"SnapshotStatus"`
 }
 
 type TableGroupInfo struct {
