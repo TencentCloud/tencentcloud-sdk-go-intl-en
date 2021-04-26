@@ -978,6 +978,9 @@ type CcnAttachedInstance struct {
 
 	// General location of the associated instance, such as CHINA_MAINLAND.
 	InstanceArea *string `json:"InstanceArea,omitempty" name:"InstanceArea"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type CcnBandwidthInfo struct {
@@ -1020,6 +1023,9 @@ type CcnInstance struct {
 	// <li>`DIRECTCONNECT`: Direct Connect</li>
 	// <li>`BMVPC`: BM VPC</li>
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type CcnRegionBandwidthLimit struct {
@@ -2465,6 +2471,9 @@ type CreateSubnetRequest struct {
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 func (r *CreateSubnetRequest) ToJsonString() string {
@@ -2508,6 +2517,9 @@ type CreateSubnetsRequest struct {
 
 	// Bound tags. Note that the collection of tags here is shared by all subnet objects in the list. You cannot specify tags for each subnet. Example: [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// ID of the CDC instance to which the subnets will be created
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 func (r *CreateSubnetsRequest) ToJsonString() string {
@@ -7935,6 +7947,43 @@ func (r *ModifyBandwidthPackageAttributeResponse) FromJsonString(s string) error
     return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyCcnAttachedInstancesAttributeRequest struct {
+	*tchttp.BaseRequest
+
+	// CCN instance ID in the format of `ccn-f49l6u0z`
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// List of associated network instances
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances" list`
+}
+
+func (r *ModifyCcnAttachedInstancesAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyCcnAttachedInstancesAttributeRequest) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyCcnAttachedInstancesAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyCcnAttachedInstancesAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+func (r *ModifyCcnAttachedInstancesAttributeResponse) FromJsonString(s string) error {
+    return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyCcnAttributeRequest struct {
 	*tchttp.BaseRequest
 
@@ -9302,6 +9351,10 @@ type NetworkInterface struct {
 	// Type of the resource bound with an ENI. Valid values: cvm, eks.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// ID of the CDC instance associated with the ENI
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 type NetworkInterfaceAttachment struct {
@@ -9661,6 +9714,12 @@ func (r *ReplaceRoutesRequest) FromJsonString(s string) error {
 type ReplaceRoutesResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Old routing policy
+		OldRouteSet []*Route `json:"OldRouteSet,omitempty" name:"OldRouteSet" list`
+
+		// New routing policy
+		NewRouteSet []*Route `json:"NewRouteSet,omitempty" name:"NewRouteSet" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -10053,16 +10112,17 @@ type Route struct {
 	// Destination IP range, such as 112.20.51.0/24. Values cannot be in the VPC IP range.
 	DestinationCidrBlock *string `json:"DestinationCidrBlock,omitempty" name:"DestinationCidrBlock"`
 
-	// Type of the next hop. Currently supported types are:
-	// CVM: CVM of the public gateway type;
+	// Type of the next hop. Valid values:
+	// CVM: public gateway CVM;
 	// VPN: VPN gateway;
 	// DIRECTCONNECT: direct connect gateway;
 	// PEERCONNECTION: peering connection;
-	// SSLVPN: sslvpn gateway;
-	// NAT: NAT gateway; 
+	// SSLVPN: SSL VPN gateway;
+	// NAT: NAT Gateway; 
 	// NORMAL_CVM: normal CVM;
 	// EIP: public IP address of the CVM;
-	// CCN: Cloud Connect Network.
+	// CCN: Cloud Connect Network;
+	// LOCAL_GATEWAY: local gateway.
 	GatewayType *string `json:"GatewayType,omitempty" name:"GatewayType"`
 
 	// Next hop address. You simply need to specify the gateway ID of a different next hop type, and the system will automatically match the next hop address.
@@ -10409,6 +10469,14 @@ type Subnet struct {
 
 	// Tag key-value pairs
 	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+
+	// CDC instance ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+
+	// Whether it is a CDC subnet. Valid values: 0: no; 1: yes
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	IsCdcSubnet *int64 `json:"IsCdcSubnet,omitempty" name:"IsCdcSubnet"`
 }
 
 type SubnetInput struct {

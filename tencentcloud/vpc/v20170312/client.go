@@ -4080,6 +4080,31 @@ func (c *Client) ModifyBandwidthPackageAttribute(request *ModifyBandwidthPackage
     return
 }
 
+func NewModifyCcnAttachedInstancesAttributeRequest() (request *ModifyCcnAttachedInstancesAttributeRequest) {
+    request = &ModifyCcnAttachedInstancesAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyCcnAttachedInstancesAttribute")
+    return
+}
+
+func NewModifyCcnAttachedInstancesAttributeResponse() (response *ModifyCcnAttachedInstancesAttributeResponse) {
+    response = &ModifyCcnAttachedInstancesAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify CCN-associated instance attributes. Currently, only the `description` can be modified.
+func (c *Client) ModifyCcnAttachedInstancesAttribute(request *ModifyCcnAttachedInstancesAttributeRequest) (response *ModifyCcnAttachedInstancesAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyCcnAttachedInstancesAttributeRequest()
+    }
+    response = NewModifyCcnAttachedInstancesAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyCcnAttributeRequest() (request *ModifyCcnAttributeRequest) {
     request = &ModifyCcnAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
