@@ -45,13 +45,29 @@ type SendEmailRequest struct {
 	TextContent *string `json:"TextContent,omitempty" name:"TextContent"`
 }
 
-func (r *SendEmailRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SendEmailRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FromAddress")
+	delete(f, "ToAddress")
+	delete(f, "Subject")
+	delete(f, "FromName")
+	delete(f, "ReplyAddress")
+	delete(f, "HtmlContent")
+	delete(f, "TextContent")
+	if len(f) > 0 {
+		return errors.New("SendEmailRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SendEmailResponse struct {
@@ -66,13 +82,15 @@ type SendEmailResponse struct {
 	} `json:"Response"`
 }
 
-func (r *SendEmailResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SendEmailResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SendTemplatedEmailRequest struct {
@@ -97,13 +115,28 @@ type SendTemplatedEmailRequest struct {
 	ReplyAddress *string `json:"ReplyAddress,omitempty" name:"ReplyAddress"`
 }
 
-func (r *SendTemplatedEmailRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SendTemplatedEmailRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FromAddress")
+	delete(f, "ToAddress")
+	delete(f, "TemplateName")
+	delete(f, "TemplateValue")
+	delete(f, "FromName")
+	delete(f, "ReplyAddress")
+	if len(f) > 0 {
+		return errors.New("SendTemplatedEmailRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SendTemplatedEmailResponse struct {
@@ -118,11 +151,13 @@ type SendTemplatedEmailResponse struct {
 	} `json:"Response"`
 }
 
-func (r *SendTemplatedEmailResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SendTemplatedEmailResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }

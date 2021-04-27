@@ -46,13 +46,27 @@ type LivenessCompareRequest struct {
 	Optional *string `json:"Optional,omitempty" name:"Optional"`
 }
 
-func (r *LivenessCompareRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *LivenessCompareRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "VideoBase64")
+	delete(f, "LivenessType")
+	delete(f, "ValidateData")
+	delete(f, "Optional")
+	if len(f) > 0 {
+		return errors.New("LivenessCompareRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type LivenessCompareResponse struct {
@@ -79,11 +93,13 @@ type LivenessCompareResponse struct {
 	} `json:"Response"`
 }
 
-func (r *LivenessCompareResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *LivenessCompareResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }

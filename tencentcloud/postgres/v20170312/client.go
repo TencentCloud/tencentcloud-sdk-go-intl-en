@@ -633,12 +633,37 @@ func NewDestroyDBInstanceResponse() (response *DestroyDBInstanceResponse) {
     return
 }
 
-// This API is used to terminate a pay-as-you-go instance by specifying the `DBInstanceId` parameter.
+// This API is used to eliminate an isolated instance by specifying the `DBInstanceId` parameter. The data of an eliminated instance will be deleted and cannot be recovered.
 func (c *Client) DestroyDBInstance(request *DestroyDBInstanceRequest) (response *DestroyDBInstanceResponse, err error) {
     if request == nil {
         request = NewDestroyDBInstanceRequest()
     }
     response = NewDestroyDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDisIsolateDBInstancesRequest() (request *DisIsolateDBInstancesRequest) {
+    request = &DisIsolateDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DisIsolateDBInstances")
+    return
+}
+
+func NewDisIsolateDBInstancesResponse() (response *DisIsolateDBInstancesResponse) {
+    response = &DisIsolateDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to remove one or more instances from isolation.
+func (c *Client) DisIsolateDBInstances(request *DisIsolateDBInstancesRequest) (response *DisIsolateDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewDisIsolateDBInstancesRequest()
+    }
+    response = NewDisIsolateDBInstancesResponse()
     err = c.Send(request, response)
     return
 }
@@ -739,6 +764,31 @@ func (c *Client) InquiryPriceUpgradeDBInstance(request *InquiryPriceUpgradeDBIns
         request = NewInquiryPriceUpgradeDBInstanceRequest()
     }
     response = NewInquiryPriceUpgradeDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewIsolateDBInstancesRequest() (request *IsolateDBInstancesRequest) {
+    request = &IsolateDBInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "IsolateDBInstances")
+    return
+}
+
+func NewIsolateDBInstancesResponse() (response *IsolateDBInstancesResponse) {
+    response = &IsolateDBInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to isolate one or more instances.
+func (c *Client) IsolateDBInstances(request *IsolateDBInstancesRequest) (response *IsolateDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewIsolateDBInstancesRequest()
+    }
+    response = NewIsolateDBInstancesResponse()
     err = c.Send(request, response)
     return
 }

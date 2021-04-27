@@ -40,13 +40,26 @@ type AssumeRoleRequest struct {
 	Policy *string `json:"Policy,omitempty" name:"Policy"`
 }
 
-func (r *AssumeRoleRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *AssumeRoleRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RoleArn")
+	delete(f, "RoleSessionName")
+	delete(f, "DurationSeconds")
+	delete(f, "Policy")
+	if len(f) > 0 {
+		return errors.New("AssumeRoleRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type AssumeRoleResponse struct {
@@ -67,13 +80,15 @@ type AssumeRoleResponse struct {
 	} `json:"Response"`
 }
 
-func (r *AssumeRoleResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *AssumeRoleResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type AssumeRoleWithSAMLRequest struct {
@@ -95,13 +110,27 @@ type AssumeRoleWithSAMLRequest struct {
 	DurationSeconds *uint64 `json:"DurationSeconds,omitempty" name:"DurationSeconds"`
 }
 
-func (r *AssumeRoleWithSAMLRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *AssumeRoleWithSAMLRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SAMLAssertion")
+	delete(f, "PrincipalArn")
+	delete(f, "RoleArn")
+	delete(f, "RoleSessionName")
+	delete(f, "DurationSeconds")
+	if len(f) > 0 {
+		return errors.New("AssumeRoleWithSAMLRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type AssumeRoleWithSAMLResponse struct {
@@ -122,13 +151,15 @@ type AssumeRoleWithSAMLResponse struct {
 	} `json:"Response"`
 }
 
-func (r *AssumeRoleWithSAMLResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *AssumeRoleWithSAMLResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type Credentials struct {
@@ -160,13 +191,25 @@ type GetFederationTokenRequest struct {
 	DurationSeconds *uint64 `json:"DurationSeconds,omitempty" name:"DurationSeconds"`
 }
 
-func (r *GetFederationTokenRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *GetFederationTokenRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "Policy")
+	delete(f, "DurationSeconds")
+	if len(f) > 0 {
+		return errors.New("GetFederationTokenRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type GetFederationTokenResponse struct {
@@ -188,11 +231,13 @@ type GetFederationTokenResponse struct {
 	} `json:"Response"`
 }
 
-func (r *GetFederationTokenResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *GetFederationTokenResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }

@@ -87,13 +87,25 @@ type CreateMediaConnectFlowRequest struct {
 	InputGroup []*CreateInput `json:"InputGroup,omitempty" name:"InputGroup" list`
 }
 
-func (r *CreateMediaConnectFlowRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *CreateMediaConnectFlowRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowName")
+	delete(f, "MaxBandwidth")
+	delete(f, "InputGroup")
+	if len(f) > 0 {
+		return errors.New("CreateMediaConnectFlowRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateMediaConnectFlowResponse struct {
@@ -108,13 +120,15 @@ type CreateMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *CreateMediaConnectFlowResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *CreateMediaConnectFlowResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateMediaConnectOutputRequest struct {
@@ -127,13 +141,24 @@ type CreateMediaConnectOutputRequest struct {
 	Output *CreateOutput `json:"Output,omitempty" name:"Output"`
 }
 
-func (r *CreateMediaConnectOutputRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *CreateMediaConnectOutputRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowId")
+	delete(f, "Output")
+	if len(f) > 0 {
+		return errors.New("CreateMediaConnectOutputRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateMediaConnectOutputResponse struct {
@@ -148,13 +173,15 @@ type CreateMediaConnectOutputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *CreateMediaConnectOutputResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *CreateMediaConnectOutputResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateOutput struct {
@@ -263,13 +290,23 @@ type DeleteMediaConnectFlowRequest struct {
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
 
-func (r *DeleteMediaConnectFlowRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DeleteMediaConnectFlowRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowId")
+	if len(f) > 0 {
+		return errors.New("DeleteMediaConnectFlowRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DeleteMediaConnectFlowResponse struct {
@@ -281,13 +318,15 @@ type DeleteMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DeleteMediaConnectFlowResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DeleteMediaConnectFlowResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DeleteMediaConnectOutputRequest struct {
@@ -300,13 +339,24 @@ type DeleteMediaConnectOutputRequest struct {
 	OutputId *string `json:"OutputId,omitempty" name:"OutputId"`
 }
 
-func (r *DeleteMediaConnectOutputRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DeleteMediaConnectOutputRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowId")
+	delete(f, "OutputId")
+	if len(f) > 0 {
+		return errors.New("DeleteMediaConnectOutputRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DeleteMediaConnectOutputResponse struct {
@@ -318,13 +368,15 @@ type DeleteMediaConnectOutputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DeleteMediaConnectOutputResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DeleteMediaConnectOutputResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeFlow struct {
@@ -422,13 +474,23 @@ type DescribeMediaConnectFlowRequest struct {
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
 
-func (r *DescribeMediaConnectFlowRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeMediaConnectFlowRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowId")
+	if len(f) > 0 {
+		return errors.New("DescribeMediaConnectFlowRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeMediaConnectFlowResponse struct {
@@ -443,13 +505,15 @@ type DescribeMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaConnectFlowResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeMediaConnectFlowResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeMediaConnectFlowsRequest struct {
@@ -462,13 +526,24 @@ type DescribeMediaConnectFlowsRequest struct {
 	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
 }
 
-func (r *DescribeMediaConnectFlowsRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeMediaConnectFlowsRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageNum")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return errors.New("DescribeMediaConnectFlowsRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeMediaConnectFlowsResponse struct {
@@ -495,13 +570,15 @@ type DescribeMediaConnectFlowsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaConnectFlowsResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeMediaConnectFlowsResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeOutput struct {
@@ -647,13 +724,24 @@ type ModifyMediaConnectFlowRequest struct {
 	FlowName *string `json:"FlowName,omitempty" name:"FlowName"`
 }
 
-func (r *ModifyMediaConnectFlowRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *ModifyMediaConnectFlowRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowId")
+	delete(f, "FlowName")
+	if len(f) > 0 {
+		return errors.New("ModifyMediaConnectFlowRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyMediaConnectFlowResponse struct {
@@ -665,13 +753,15 @@ type ModifyMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *ModifyMediaConnectFlowResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *ModifyMediaConnectFlowResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyMediaConnectInputRequest struct {
@@ -684,13 +774,24 @@ type ModifyMediaConnectInputRequest struct {
 	Input *ModifyInput `json:"Input,omitempty" name:"Input"`
 }
 
-func (r *ModifyMediaConnectInputRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *ModifyMediaConnectInputRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowId")
+	delete(f, "Input")
+	if len(f) > 0 {
+		return errors.New("ModifyMediaConnectInputRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyMediaConnectInputResponse struct {
@@ -705,13 +806,15 @@ type ModifyMediaConnectInputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *ModifyMediaConnectInputResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *ModifyMediaConnectInputResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyMediaConnectOutputRequest struct {
@@ -724,13 +827,24 @@ type ModifyMediaConnectOutputRequest struct {
 	Output *ModifyOutput `json:"Output,omitempty" name:"Output"`
 }
 
-func (r *ModifyMediaConnectOutputRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *ModifyMediaConnectOutputRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowId")
+	delete(f, "Output")
+	if len(f) > 0 {
+		return errors.New("ModifyMediaConnectOutputRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyMediaConnectOutputResponse struct {
@@ -745,13 +859,15 @@ type ModifyMediaConnectOutputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *ModifyMediaConnectOutputResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *ModifyMediaConnectOutputResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyOutput struct {
@@ -818,13 +934,23 @@ type StartMediaConnectFlowRequest struct {
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
 
-func (r *StartMediaConnectFlowRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *StartMediaConnectFlowRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowId")
+	if len(f) > 0 {
+		return errors.New("StartMediaConnectFlowRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type StartMediaConnectFlowResponse struct {
@@ -836,13 +962,15 @@ type StartMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *StartMediaConnectFlowResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *StartMediaConnectFlowResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type StopMediaConnectFlowRequest struct {
@@ -852,13 +980,23 @@ type StopMediaConnectFlowRequest struct {
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
 
-func (r *StopMediaConnectFlowRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *StopMediaConnectFlowRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowId")
+	if len(f) > 0 {
+		return errors.New("StopMediaConnectFlowRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type StopMediaConnectFlowResponse struct {
@@ -870,11 +1008,13 @@ type StopMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *StopMediaConnectFlowResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *StopMediaConnectFlowResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }

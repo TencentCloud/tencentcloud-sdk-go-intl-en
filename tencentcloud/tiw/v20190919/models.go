@@ -69,13 +69,28 @@ type CreateTranscodeRequest struct {
 	CompressFileType *string `json:"CompressFileType,omitempty" name:"CompressFileType"`
 }
 
-func (r *CreateTranscodeRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *CreateTranscodeRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "Url")
+	delete(f, "IsStaticPPT")
+	delete(f, "MinResolution")
+	delete(f, "ThumbnailResolution")
+	delete(f, "CompressFileType")
+	if len(f) > 0 {
+		return errors.New("CreateTranscodeRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateTranscodeResponse struct {
@@ -90,13 +105,15 @@ type CreateTranscodeResponse struct {
 	} `json:"Response"`
 }
 
-func (r *CreateTranscodeResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *CreateTranscodeResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CustomLayout struct {
@@ -115,13 +132,23 @@ type DescribeOnlineRecordCallbackRequest struct {
 	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 }
 
-func (r *DescribeOnlineRecordCallbackRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeOnlineRecordCallbackRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return errors.New("DescribeOnlineRecordCallbackRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeOnlineRecordCallbackResponse struct {
@@ -139,13 +166,15 @@ type DescribeOnlineRecordCallbackResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeOnlineRecordCallbackResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeOnlineRecordCallbackResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeOnlineRecordRequest struct {
@@ -158,13 +187,24 @@ type DescribeOnlineRecordRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *DescribeOnlineRecordRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeOnlineRecordRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return errors.New("DescribeOnlineRecordRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeOnlineRecordResponse struct {
@@ -220,13 +260,15 @@ type DescribeOnlineRecordResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeOnlineRecordResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeOnlineRecordResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeTranscodeCallbackRequest struct {
@@ -236,13 +278,23 @@ type DescribeTranscodeCallbackRequest struct {
 	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 }
 
-func (r *DescribeTranscodeCallbackRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeTranscodeCallbackRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return errors.New("DescribeTranscodeCallbackRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeTranscodeCallbackResponse struct {
@@ -260,13 +312,15 @@ type DescribeTranscodeCallbackResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeTranscodeCallbackResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeTranscodeCallbackResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeTranscodeRequest struct {
@@ -279,13 +333,24 @@ type DescribeTranscodeRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *DescribeTranscodeRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeTranscodeRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return errors.New("DescribeTranscodeRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeTranscodeResponse struct {
@@ -336,13 +401,15 @@ type DescribeTranscodeResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeTranscodeResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *DescribeTranscodeResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type LayoutParams struct {
@@ -408,13 +475,24 @@ type PauseOnlineRecordRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *PauseOnlineRecordRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *PauseOnlineRecordRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return errors.New("PauseOnlineRecordRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type PauseOnlineRecordResponse struct {
@@ -426,13 +504,15 @@ type PauseOnlineRecordResponse struct {
 	} `json:"Response"`
 }
 
-func (r *PauseOnlineRecordResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *PauseOnlineRecordResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type RecordControl struct {
@@ -478,13 +558,24 @@ type ResumeOnlineRecordRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *ResumeOnlineRecordRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *ResumeOnlineRecordRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return errors.New("ResumeOnlineRecordRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ResumeOnlineRecordResponse struct {
@@ -496,13 +587,15 @@ type ResumeOnlineRecordResponse struct {
 	} `json:"Response"`
 }
 
-func (r *ResumeOnlineRecordResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *ResumeOnlineRecordResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SetOnlineRecordCallbackKeyRequest struct {
@@ -515,13 +608,24 @@ type SetOnlineRecordCallbackKeyRequest struct {
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
 }
 
-func (r *SetOnlineRecordCallbackKeyRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SetOnlineRecordCallbackKeyRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "CallbackKey")
+	if len(f) > 0 {
+		return errors.New("SetOnlineRecordCallbackKeyRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SetOnlineRecordCallbackKeyResponse struct {
@@ -533,13 +637,15 @@ type SetOnlineRecordCallbackKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *SetOnlineRecordCallbackKeyResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SetOnlineRecordCallbackKeyResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SetOnlineRecordCallbackRequest struct {
@@ -552,13 +658,24 @@ type SetOnlineRecordCallbackRequest struct {
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
 }
 
-func (r *SetOnlineRecordCallbackRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SetOnlineRecordCallbackRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "Callback")
+	if len(f) > 0 {
+		return errors.New("SetOnlineRecordCallbackRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SetOnlineRecordCallbackResponse struct {
@@ -570,13 +687,15 @@ type SetOnlineRecordCallbackResponse struct {
 	} `json:"Response"`
 }
 
-func (r *SetOnlineRecordCallbackResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SetOnlineRecordCallbackResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SetTranscodeCallbackKeyRequest struct {
@@ -589,13 +708,24 @@ type SetTranscodeCallbackKeyRequest struct {
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
 }
 
-func (r *SetTranscodeCallbackKeyRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SetTranscodeCallbackKeyRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "CallbackKey")
+	if len(f) > 0 {
+		return errors.New("SetTranscodeCallbackKeyRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SetTranscodeCallbackKeyResponse struct {
@@ -607,13 +737,15 @@ type SetTranscodeCallbackKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *SetTranscodeCallbackKeyResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SetTranscodeCallbackKeyResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SetTranscodeCallbackRequest struct {
@@ -627,13 +759,24 @@ type SetTranscodeCallbackRequest struct {
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
 }
 
-func (r *SetTranscodeCallbackRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SetTranscodeCallbackRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "Callback")
+	if len(f) > 0 {
+		return errors.New("SetTranscodeCallbackRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SetTranscodeCallbackResponse struct {
@@ -645,13 +788,15 @@ type SetTranscodeCallbackResponse struct {
 	} `json:"Response"`
 }
 
-func (r *SetTranscodeCallbackResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *SetTranscodeCallbackResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type StartOnlineRecordRequest struct {
@@ -697,13 +842,33 @@ type StartOnlineRecordRequest struct {
 	RecordControl *RecordControl `json:"RecordControl,omitempty" name:"RecordControl"`
 }
 
-func (r *StartOnlineRecordRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *StartOnlineRecordRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "RoomId")
+	delete(f, "RecordUserId")
+	delete(f, "RecordUserSig")
+	delete(f, "GroupId")
+	delete(f, "Concat")
+	delete(f, "Whiteboard")
+	delete(f, "MixStream")
+	delete(f, "Extras")
+	delete(f, "AudioFileNeeded")
+	delete(f, "RecordControl")
+	if len(f) > 0 {
+		return errors.New("StartOnlineRecordRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type StartOnlineRecordResponse struct {
@@ -718,13 +883,15 @@ type StartOnlineRecordResponse struct {
 	} `json:"Response"`
 }
 
-func (r *StartOnlineRecordResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *StartOnlineRecordResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type StopOnlineRecordRequest struct {
@@ -737,13 +904,24 @@ type StopOnlineRecordRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *StopOnlineRecordRequest) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *StopOnlineRecordRequest) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return errors.New("StopOnlineRecordRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type StopOnlineRecordResponse struct {
@@ -755,13 +933,15 @@ type StopOnlineRecordResponse struct {
 	} `json:"Response"`
 }
 
-func (r *StopOnlineRecordResponse) ToJsonString() string {
+func (r *%(obj)s) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
 func (r *StopOnlineRecordResponse) FromJsonString(s string) error {
-    return json.Unmarshal([]byte(s), &r)
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type StreamControl struct {
