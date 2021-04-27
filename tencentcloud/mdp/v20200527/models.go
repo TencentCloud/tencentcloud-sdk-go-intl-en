@@ -48,7 +48,7 @@ type CreateMediaPackageChannelEndpointRequest struct {
 	AuthInfo *EndpointAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaPackageChannelEndpointRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -81,7 +81,7 @@ type CreateMediaPackageChannelEndpointResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaPackageChannelEndpointResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -102,7 +102,7 @@ type CreateMediaPackageChannelRequest struct {
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaPackageChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -134,7 +134,7 @@ type CreateMediaPackageChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaPackageChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -155,7 +155,7 @@ type DeleteMediaPackageChannelEndpointsRequest struct {
 	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaPackageChannelEndpointsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -184,7 +184,7 @@ type DeleteMediaPackageChannelEndpointsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaPackageChannelEndpointsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -202,7 +202,7 @@ type DeleteMediaPackageChannelsRequest struct {
 	Ids []*string `json:"Ids,omitempty" name:"Ids" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaPackageChannelsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -236,7 +236,7 @@ type DeleteMediaPackageChannelsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaPackageChannelsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -254,7 +254,7 @@ type DescribeMediaPackageChannelRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaPackageChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -285,7 +285,7 @@ type DescribeMediaPackageChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaPackageChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -306,7 +306,7 @@ type DescribeMediaPackageChannelsRequest struct {
 	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaPackageChannelsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -351,7 +351,7 @@ type DescribeMediaPackageChannelsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaPackageChannelsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -426,7 +426,7 @@ type ModifyMediaPackageChannelEndpointRequest struct {
 	AuthInfo *EndpointAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaPackageChannelEndpointRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -457,7 +457,7 @@ type ModifyMediaPackageChannelEndpointResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaPackageChannelEndpointResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -483,7 +483,7 @@ type ModifyMediaPackageChannelInputAuthInfoRequest struct {
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaPackageChannelInputAuthInfoRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -516,7 +516,7 @@ type ModifyMediaPackageChannelInputAuthInfoResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaPackageChannelInputAuthInfoResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -540,7 +540,7 @@ type ModifyMediaPackageChannelRequest struct {
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaPackageChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -570,7 +570,7 @@ type ModifyMediaPackageChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaPackageChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

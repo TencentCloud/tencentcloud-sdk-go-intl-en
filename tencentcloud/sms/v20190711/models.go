@@ -78,7 +78,7 @@ type AddSmsSignRequest struct {
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AddSmsSignRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -116,7 +116,7 @@ type AddSmsSignResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AddSmsSignResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -148,7 +148,7 @@ type AddSmsTemplateRequest struct {
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AddSmsTemplateRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -183,7 +183,7 @@ type AddSmsTemplateResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AddSmsTemplateResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -252,7 +252,7 @@ type CallbackStatusStatisticsRequest struct {
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CallbackStatusStatisticsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -287,7 +287,7 @@ type CallbackStatusStatisticsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CallbackStatusStatisticsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -314,7 +314,7 @@ type DeleteSmsSignRequest struct {
 	SignId *uint64 `json:"SignId,omitempty" name:"SignId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteSmsSignRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -345,7 +345,7 @@ type DeleteSmsSignResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteSmsSignResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -363,7 +363,7 @@ type DeleteSmsTemplateRequest struct {
 	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteSmsTemplateRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -394,7 +394,7 @@ type DeleteSmsTemplateResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteSmsTemplateResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -451,7 +451,7 @@ type DescribeSmsSignListRequest struct {
 	International *uint64 `json:"International,omitempty" name:"International"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeSmsSignListRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -483,7 +483,7 @@ type DescribeSmsSignListResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeSmsSignListResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -506,7 +506,7 @@ type DescribeSmsTemplateListRequest struct {
 	International *uint64 `json:"International,omitempty" name:"International"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeSmsTemplateListRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -538,7 +538,7 @@ type DescribeSmsTemplateListResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeSmsTemplateListResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -635,7 +635,7 @@ type ModifySmsSignRequest struct {
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifySmsSignRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -674,7 +674,7 @@ type ModifySmsSignResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifySmsSignResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -709,7 +709,7 @@ type ModifySmsTemplateRequest struct {
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifySmsTemplateRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -745,7 +745,7 @@ type ModifySmsTemplateResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifySmsTemplateResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -809,7 +809,7 @@ type PullSmsReplyStatusByPhoneNumberRequest struct {
 	EndDateTime *uint64 `json:"EndDateTime,omitempty" name:"EndDateTime"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PullSmsReplyStatusByPhoneNumberRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -845,7 +845,7 @@ type PullSmsReplyStatusByPhoneNumberResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PullSmsReplyStatusByPhoneNumberResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -866,7 +866,7 @@ type PullSmsReplyStatusRequest struct {
 	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PullSmsReplyStatusRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -898,7 +898,7 @@ type PullSmsReplyStatusResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PullSmsReplyStatusResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -959,7 +959,7 @@ type PullSmsSendStatusByPhoneNumberRequest struct {
 	EndDateTime *uint64 `json:"EndDateTime,omitempty" name:"EndDateTime"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PullSmsSendStatusByPhoneNumberRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -995,7 +995,7 @@ type PullSmsSendStatusByPhoneNumberResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PullSmsSendStatusByPhoneNumberResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1016,7 +1016,7 @@ type PullSmsSendStatusRequest struct {
 	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PullSmsSendStatusRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1048,7 +1048,7 @@ type PullSmsSendStatusResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PullSmsSendStatusResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1088,7 +1088,7 @@ type SendSmsRequest struct {
 	SenderId *string `json:"SenderId,omitempty" name:"SenderId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SendSmsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1126,7 +1126,7 @@ type SendSmsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SendSmsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1195,7 +1195,7 @@ type SendStatusStatisticsRequest struct {
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SendStatusStatisticsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1230,7 +1230,7 @@ type SendStatusStatisticsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SendStatusStatisticsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1288,7 +1288,7 @@ type SmsPackagesStatisticsRequest struct {
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SmsPackagesStatisticsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1321,7 +1321,7 @@ type SmsPackagesStatisticsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SmsPackagesStatisticsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

@@ -45,7 +45,7 @@ type SendEmailRequest struct {
 	TextContent *string `json:"TextContent,omitempty" name:"TextContent"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SendEmailRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -82,7 +82,7 @@ type SendEmailResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SendEmailResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -115,7 +115,7 @@ type SendTemplatedEmailRequest struct {
 	ReplyAddress *string `json:"ReplyAddress,omitempty" name:"ReplyAddress"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SendTemplatedEmailRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -151,7 +151,7 @@ type SendTemplatedEmailResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SendTemplatedEmailResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

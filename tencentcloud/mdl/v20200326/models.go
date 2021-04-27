@@ -164,7 +164,7 @@ type CreateMediaLiveChannelRequest struct {
 	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -199,7 +199,7 @@ type CreateMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -228,7 +228,7 @@ type CreateMediaLiveInputRequest struct {
 	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaLiveInputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -262,7 +262,7 @@ type CreateMediaLiveInputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaLiveInputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -283,7 +283,7 @@ type CreateMediaLiveInputSecurityGroupRequest struct {
 	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaLiveInputSecurityGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -315,7 +315,7 @@ type CreateMediaLiveInputSecurityGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaLiveInputSecurityGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -345,7 +345,7 @@ type DeleteMediaLiveChannelRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -373,7 +373,7 @@ type DeleteMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -391,7 +391,7 @@ type DeleteMediaLiveInputRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaLiveInputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -419,7 +419,7 @@ type DeleteMediaLiveInputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaLiveInputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -437,7 +437,7 @@ type DeleteMediaLiveInputSecurityGroupRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaLiveInputSecurityGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -465,7 +465,7 @@ type DeleteMediaLiveInputSecurityGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaLiveInputSecurityGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -483,7 +483,7 @@ type DescribeMediaLiveChannelAlertsRequest struct {
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelAlertsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -514,7 +514,7 @@ type DescribeMediaLiveChannelAlertsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelAlertsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -543,7 +543,7 @@ type DescribeMediaLiveChannelInputStatisticsRequest struct {
 	Period *string `json:"Period,omitempty" name:"Period"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelInputStatisticsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -577,7 +577,7 @@ type DescribeMediaLiveChannelInputStatisticsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelInputStatisticsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -603,7 +603,7 @@ type DescribeMediaLiveChannelLogsRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelLogsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -636,7 +636,7 @@ type DescribeMediaLiveChannelLogsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelLogsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -665,7 +665,7 @@ type DescribeMediaLiveChannelOutputStatisticsRequest struct {
 	Period *string `json:"Period,omitempty" name:"Period"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelOutputStatisticsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -699,7 +699,7 @@ type DescribeMediaLiveChannelOutputStatisticsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelOutputStatisticsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -717,7 +717,7 @@ type DescribeMediaLiveChannelRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -748,7 +748,7 @@ type DescribeMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -763,7 +763,7 @@ type DescribeMediaLiveChannelsRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -794,7 +794,7 @@ type DescribeMediaLiveChannelsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveChannelsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -812,7 +812,7 @@ type DescribeMediaLiveInputRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveInputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -843,7 +843,7 @@ type DescribeMediaLiveInputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveInputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -861,7 +861,7 @@ type DescribeMediaLiveInputSecurityGroupRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveInputSecurityGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -892,7 +892,7 @@ type DescribeMediaLiveInputSecurityGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveInputSecurityGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -907,7 +907,7 @@ type DescribeMediaLiveInputSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveInputSecurityGroupsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -937,7 +937,7 @@ type DescribeMediaLiveInputSecurityGroupsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveInputSecurityGroupsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -952,7 +952,7 @@ type DescribeMediaLiveInputsRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveInputsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -983,7 +983,7 @@ type DescribeMediaLiveInputsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaLiveInputsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1191,7 +1191,7 @@ type ModifyMediaLiveChannelRequest struct {
 	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1224,7 +1224,7 @@ type ModifyMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1254,7 +1254,7 @@ type ModifyMediaLiveInputRequest struct {
 	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaLiveInputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1285,7 +1285,7 @@ type ModifyMediaLiveInputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaLiveInputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1309,7 +1309,7 @@ type ModifyMediaLiveInputSecurityGroupRequest struct {
 	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaLiveInputSecurityGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1339,7 +1339,7 @@ type ModifyMediaLiveInputSecurityGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaLiveInputSecurityGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1460,7 +1460,7 @@ type StartMediaLiveChannelRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StartMediaLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1488,7 +1488,7 @@ type StartMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StartMediaLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1506,7 +1506,7 @@ type StopMediaLiveChannelRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StopMediaLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1534,7 +1534,7 @@ type StopMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StopMediaLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

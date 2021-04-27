@@ -352,7 +352,7 @@ type CreateInstanceRequest struct {
 	ApplicationRole *string `json:"ApplicationRole,omitempty" name:"ApplicationRole"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateInstanceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -406,7 +406,7 @@ type CreateInstanceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateInstanceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -459,7 +459,7 @@ type DescribeClusterNodesRequest struct {
 	SearchFields []*SearchItem `json:"SearchFields,omitempty" name:"SearchFields" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClusterNodesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -507,7 +507,7 @@ type DescribeClusterNodesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClusterNodesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -551,7 +551,7 @@ type DescribeInstancesRequest struct {
 	Asc *int64 `json:"Asc,omitempty" name:"Asc"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeInstancesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -596,7 +596,7 @@ type DescribeInstancesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeInstancesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -756,7 +756,7 @@ type InquiryPriceCreateInstanceRequest struct {
 	ProductId *uint64 `json:"ProductId,omitempty" name:"ProductId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *InquiryPriceCreateInstanceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -813,7 +813,7 @@ type InquiryPriceCreateInstanceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *InquiryPriceCreateInstanceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -846,7 +846,7 @@ type InquiryPriceRenewInstanceRequest struct {
 	Currency *string `json:"Currency,omitempty" name:"Currency"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *InquiryPriceRenewInstanceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -895,7 +895,7 @@ type InquiryPriceRenewInstanceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *InquiryPriceRenewInstanceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -940,7 +940,7 @@ type InquiryPriceScaleOutInstanceRequest struct {
 	RouterCount *uint64 `json:"RouterCount,omitempty" name:"RouterCount"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *InquiryPriceScaleOutInstanceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -993,7 +993,7 @@ type InquiryPriceScaleOutInstanceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *InquiryPriceScaleOutInstanceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1029,7 +1029,7 @@ type InquiryPriceUpdateInstanceRequest struct {
 	Currency *string `json:"Currency,omitempty" name:"Currency"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *InquiryPriceUpdateInstanceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1079,7 +1079,7 @@ type InquiryPriceUpdateInstanceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *InquiryPriceUpdateInstanceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1653,7 +1653,7 @@ type ScaleOutInstanceRequest struct {
 	MasterCount *uint64 `json:"MasterCount,omitempty" name:"MasterCount"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ScaleOutInstanceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1720,7 +1720,7 @@ type ScaleOutInstanceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ScaleOutInstanceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1759,7 +1759,7 @@ type TerminateInstanceRequest struct {
 	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *TerminateInstanceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1788,7 +1788,7 @@ type TerminateInstanceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *TerminateInstanceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1809,7 +1809,7 @@ type TerminateTasksRequest struct {
 	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *TerminateTasksRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1838,7 +1838,7 @@ type TerminateTasksResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *TerminateTasksResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

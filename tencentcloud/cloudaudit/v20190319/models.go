@@ -83,7 +83,7 @@ type CreateRecorderRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateRecorderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -117,7 +117,7 @@ type CreateRecorderResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateRecorderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -132,7 +132,7 @@ type DeleteRecorderRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteRecorderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -162,7 +162,7 @@ type DeleteRecorderResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteRecorderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -180,7 +180,7 @@ type DescribeDiscoveredResourceRequest struct {
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeDiscoveredResourceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -236,7 +236,7 @@ type DescribeDiscoveredResourceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeDiscoveredResourceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -251,7 +251,7 @@ type DescribeRecorderRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeRecorderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -312,7 +312,7 @@ type DescribeRecorderResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeRecorderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -348,7 +348,7 @@ type GetConfigurationItemsRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetConfigurationItemsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -389,7 +389,7 @@ type GetConfigurationItemsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetConfigurationItemsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -422,7 +422,7 @@ type ListDiscoveredResourcesRequest struct {
 	IsDeleted *bool `json:"IsDeleted,omitempty" name:"IsDeleted"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListDiscoveredResourcesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -462,7 +462,7 @@ type ListDiscoveredResourcesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListDiscoveredResourcesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -477,7 +477,7 @@ type ListSupportResourceTypesRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListSupportResourceTypesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -507,7 +507,7 @@ type ListSupportResourceTypesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListSupportResourceTypesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -606,7 +606,7 @@ type UpdateRecorderRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateRecorderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -639,7 +639,7 @@ type UpdateRecorderResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateRecorderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

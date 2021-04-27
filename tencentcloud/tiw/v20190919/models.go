@@ -69,7 +69,7 @@ type CreateTranscodeRequest struct {
 	CompressFileType *string `json:"CompressFileType,omitempty" name:"CompressFileType"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateTranscodeRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -105,7 +105,7 @@ type CreateTranscodeResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateTranscodeResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -132,7 +132,7 @@ type DescribeOnlineRecordCallbackRequest struct {
 	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeOnlineRecordCallbackRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -166,7 +166,7 @@ type DescribeOnlineRecordCallbackResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeOnlineRecordCallbackResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -187,7 +187,7 @@ type DescribeOnlineRecordRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeOnlineRecordRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -260,7 +260,7 @@ type DescribeOnlineRecordResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeOnlineRecordResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -278,7 +278,7 @@ type DescribeTranscodeCallbackRequest struct {
 	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTranscodeCallbackRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -312,7 +312,7 @@ type DescribeTranscodeCallbackResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTranscodeCallbackResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -333,7 +333,7 @@ type DescribeTranscodeRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTranscodeRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -401,7 +401,7 @@ type DescribeTranscodeResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTranscodeResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -475,7 +475,7 @@ type PauseOnlineRecordRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PauseOnlineRecordRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -504,7 +504,7 @@ type PauseOnlineRecordResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PauseOnlineRecordResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -558,7 +558,7 @@ type ResumeOnlineRecordRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ResumeOnlineRecordRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -587,7 +587,7 @@ type ResumeOnlineRecordResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ResumeOnlineRecordResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -608,7 +608,7 @@ type SetOnlineRecordCallbackKeyRequest struct {
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetOnlineRecordCallbackKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -637,7 +637,7 @@ type SetOnlineRecordCallbackKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetOnlineRecordCallbackKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -658,7 +658,7 @@ type SetOnlineRecordCallbackRequest struct {
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetOnlineRecordCallbackRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -687,7 +687,7 @@ type SetOnlineRecordCallbackResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetOnlineRecordCallbackResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -708,7 +708,7 @@ type SetTranscodeCallbackKeyRequest struct {
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetTranscodeCallbackKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -737,7 +737,7 @@ type SetTranscodeCallbackKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetTranscodeCallbackKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -759,7 +759,7 @@ type SetTranscodeCallbackRequest struct {
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetTranscodeCallbackRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -788,7 +788,7 @@ type SetTranscodeCallbackResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetTranscodeCallbackResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -842,7 +842,7 @@ type StartOnlineRecordRequest struct {
 	RecordControl *RecordControl `json:"RecordControl,omitempty" name:"RecordControl"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StartOnlineRecordRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -883,7 +883,7 @@ type StartOnlineRecordResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StartOnlineRecordResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -904,7 +904,7 @@ type StopOnlineRecordRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StopOnlineRecordRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -933,7 +933,7 @@ type StopOnlineRecordResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StopOnlineRecordResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

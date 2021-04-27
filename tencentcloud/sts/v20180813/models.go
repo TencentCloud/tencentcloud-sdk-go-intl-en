@@ -40,7 +40,7 @@ type AssumeRoleRequest struct {
 	Policy *string `json:"Policy,omitempty" name:"Policy"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AssumeRoleRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -80,7 +80,7 @@ type AssumeRoleResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AssumeRoleResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -110,7 +110,7 @@ type AssumeRoleWithSAMLRequest struct {
 	DurationSeconds *uint64 `json:"DurationSeconds,omitempty" name:"DurationSeconds"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AssumeRoleWithSAMLRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -151,7 +151,7 @@ type AssumeRoleWithSAMLResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AssumeRoleWithSAMLResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -191,7 +191,7 @@ type GetFederationTokenRequest struct {
 	DurationSeconds *uint64 `json:"DurationSeconds,omitempty" name:"DurationSeconds"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetFederationTokenRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -231,7 +231,7 @@ type GetFederationTokenResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetFederationTokenResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

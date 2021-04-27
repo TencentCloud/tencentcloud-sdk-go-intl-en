@@ -50,7 +50,7 @@ type BankCardOCRRequest struct {
 	EnableBorderCheck *bool `json:"EnableBorderCheck,omitempty" name:"EnableBorderCheck"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *BankCardOCRRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -117,7 +117,7 @@ type BankCardOCRResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *BankCardOCRResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -151,7 +151,7 @@ type GeneralAccurateOCRRequest struct {
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GeneralAccurateOCRRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -186,7 +186,7 @@ type GeneralAccurateOCRResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GeneralAccurateOCRResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -236,7 +236,7 @@ type GeneralBasicOCRRequest struct {
 	PdfPageNumber *uint64 `json:"PdfPageNumber,omitempty" name:"PdfPageNumber"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GeneralBasicOCRRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -281,7 +281,7 @@ type GeneralBasicOCRResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GeneralBasicOCRResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -314,7 +314,7 @@ type HKIDCardOCRRequest struct {
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *HKIDCardOCRRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -396,7 +396,7 @@ type HKIDCardOCRResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *HKIDCardOCRResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -441,7 +441,7 @@ type MLIDCardOCRRequest struct {
 	RetImage *bool `json:"RetImage,omitempty" name:"RetImage"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *MLIDCardOCRRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -515,7 +515,7 @@ type MLIDCardOCRResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *MLIDCardOCRResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -536,7 +536,7 @@ type MLIDPassportOCRRequest struct {
 	RetImage *bool `json:"RetImage,omitempty" name:"RetImage"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *MLIDPassportOCRRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -606,7 +606,7 @@ type MLIDPassportOCRResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *MLIDPassportOCRResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -634,7 +634,7 @@ type TableOCRRequest struct {
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *TableOCRRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -669,7 +669,7 @@ type TableOCRResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *TableOCRResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

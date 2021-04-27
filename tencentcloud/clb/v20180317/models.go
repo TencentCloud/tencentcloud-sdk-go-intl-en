@@ -27,7 +27,7 @@ type AssociateTargetGroupsRequest struct {
 	Associations []*TargetGroupAssociation `json:"Associations,omitempty" name:"Associations" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AssociateTargetGroupsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -55,7 +55,7 @@ type AssociateTargetGroupsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AssociateTargetGroupsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -118,7 +118,7 @@ type AutoRewriteRequest struct {
 	TakeUrls []*bool `json:"TakeUrls,omitempty" name:"TakeUrls" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AutoRewriteRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -150,7 +150,7 @@ type AutoRewriteResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AutoRewriteResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -215,7 +215,7 @@ type BatchDeregisterTargetsRequest struct {
 	Targets []*BatchTarget `json:"Targets,omitempty" name:"Targets" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *BatchDeregisterTargetsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -247,7 +247,7 @@ type BatchDeregisterTargetsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *BatchDeregisterTargetsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -268,7 +268,7 @@ type BatchModifyTargetWeightRequest struct {
 	ModifyList []*RsWeightRule `json:"ModifyList,omitempty" name:"ModifyList" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *BatchModifyTargetWeightRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -297,7 +297,7 @@ type BatchModifyTargetWeightResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *BatchModifyTargetWeightResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -318,7 +318,7 @@ type BatchRegisterTargetsRequest struct {
 	Targets []*BatchTarget `json:"Targets,omitempty" name:"Targets" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *BatchRegisterTargetsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -351,7 +351,7 @@ type BatchRegisterTargetsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *BatchRegisterTargetsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -595,7 +595,7 @@ type CreateClsLogSetRequest struct {
 	LogsetType *string `json:"LogsetType,omitempty" name:"LogsetType"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateClsLogSetRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -628,7 +628,7 @@ type CreateClsLogSetResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateClsLogSetResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -683,7 +683,7 @@ type CreateListenerRequest struct {
 	EndPort *uint64 `json:"EndPort,omitempty" name:"EndPort"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateListenerRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -726,7 +726,7 @@ type CreateListenerResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateListenerResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -811,7 +811,7 @@ type CreateLoadBalancerRequest struct {
 	EipAddressId *string `json:"EipAddressId,omitempty" name:"EipAddressId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateLoadBalancerRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -863,7 +863,7 @@ type CreateLoadBalancerResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateLoadBalancerResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -884,7 +884,7 @@ type CreateLoadBalancerSnatIpsRequest struct {
 	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateLoadBalancerSnatIpsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -913,7 +913,7 @@ type CreateLoadBalancerSnatIpsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateLoadBalancerSnatIpsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -937,7 +937,7 @@ type CreateRuleRequest struct {
 	Rules []*RuleInput `json:"Rules,omitempty" name:"Rules" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateRuleRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -970,7 +970,7 @@ type CreateRuleResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateRuleResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -997,7 +997,7 @@ type CreateTargetGroupRequest struct {
 	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateTargetGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1031,7 +1031,7 @@ type CreateTargetGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateTargetGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1055,7 +1055,7 @@ type CreateTopicRequest struct {
 	TopicType *string `json:"TopicType,omitempty" name:"TopicType"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateTopicRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1088,7 +1088,7 @@ type CreateTopicResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateTopicResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1109,7 +1109,7 @@ type DeleteListenerRequest struct {
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteListenerRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1138,7 +1138,7 @@ type DeleteListenerResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteListenerResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1159,7 +1159,7 @@ type DeleteLoadBalancerListenersRequest struct {
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteLoadBalancerListenersRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1188,7 +1188,7 @@ type DeleteLoadBalancerListenersResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteLoadBalancerListenersResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1206,7 +1206,7 @@ type DeleteLoadBalancerRequest struct {
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteLoadBalancerRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1234,7 +1234,7 @@ type DeleteLoadBalancerResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteLoadBalancerResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1255,7 +1255,7 @@ type DeleteLoadBalancerSnatIpsRequest struct {
 	Ips []*string `json:"Ips,omitempty" name:"Ips" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteLoadBalancerSnatIpsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1284,7 +1284,7 @@ type DeleteLoadBalancerSnatIpsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteLoadBalancerSnatIpsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1311,7 +1311,7 @@ type DeleteRewriteRequest struct {
 	RewriteInfos []*RewriteLocationMap `json:"RewriteInfos,omitempty" name:"RewriteInfos" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteRewriteRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1342,7 +1342,7 @@ type DeleteRewriteResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteRewriteResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1375,7 +1375,7 @@ type DeleteRuleRequest struct {
 	NewDefaultServerDomain *string `json:"NewDefaultServerDomain,omitempty" name:"NewDefaultServerDomain"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteRuleRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1408,7 +1408,7 @@ type DeleteRuleResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteRuleResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1426,7 +1426,7 @@ type DeleteTargetGroupsRequest struct {
 	TargetGroupIds []*string `json:"TargetGroupIds,omitempty" name:"TargetGroupIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteTargetGroupsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1454,7 +1454,7 @@ type DeleteTargetGroupsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteTargetGroupsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1475,7 +1475,7 @@ type DeregisterTargetGroupInstancesRequest struct {
 	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeregisterTargetGroupInstancesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1504,7 +1504,7 @@ type DeregisterTargetGroupInstancesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeregisterTargetGroupInstancesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1525,7 +1525,7 @@ type DeregisterTargetsFromClassicalLBRequest struct {
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeregisterTargetsFromClassicalLBRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1554,7 +1554,7 @@ type DeregisterTargetsFromClassicalLBResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeregisterTargetsFromClassicalLBResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1587,7 +1587,7 @@ type DeregisterTargetsRequest struct {
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeregisterTargetsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1620,7 +1620,7 @@ type DeregisterTargetsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeregisterTargetsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1644,7 +1644,7 @@ type DescribeBlockIPListRequest struct {
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeBlockIPListRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1683,7 +1683,7 @@ type DescribeBlockIPListResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeBlockIPListResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1701,7 +1701,7 @@ type DescribeBlockIPTaskRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeBlockIPTaskRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1732,7 +1732,7 @@ type DescribeBlockIPTaskResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeBlockIPTaskResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1750,7 +1750,7 @@ type DescribeClassicalLBByInstanceIdRequest struct {
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClassicalLBByInstanceIdRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1781,7 +1781,7 @@ type DescribeClassicalLBByInstanceIdResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClassicalLBByInstanceIdResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1802,7 +1802,7 @@ type DescribeClassicalLBHealthStatusRequest struct {
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClassicalLBHealthStatusRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1835,7 +1835,7 @@ type DescribeClassicalLBHealthStatusResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClassicalLBHealthStatusResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1865,7 +1865,7 @@ type DescribeClassicalLBListenersRequest struct {
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClassicalLBListenersRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1901,7 +1901,7 @@ type DescribeClassicalLBListenersResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClassicalLBListenersResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1919,7 +1919,7 @@ type DescribeClassicalLBTargetsRequest struct {
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClassicalLBTargetsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1951,7 +1951,7 @@ type DescribeClassicalLBTargetsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClassicalLBTargetsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1966,7 +1966,7 @@ type DescribeClsLogSetRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClsLogSetRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1999,7 +1999,7 @@ type DescribeClsLogSetResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeClsLogSetResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2026,7 +2026,7 @@ type DescribeListenersRequest struct {
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeListenersRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2064,7 +2064,7 @@ type DescribeListenersResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeListenersResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2082,7 +2082,7 @@ type DescribeLoadBalancerListByCertIdRequest struct {
 	CertIds []*string `json:"CertIds,omitempty" name:"CertIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeLoadBalancerListByCertIdRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2113,7 +2113,7 @@ type DescribeLoadBalancerListByCertIdResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeLoadBalancerListByCertIdResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2131,7 +2131,7 @@ type DescribeLoadBalancerTrafficRequest struct {
 	LoadBalancerRegion *string `json:"LoadBalancerRegion,omitempty" name:"LoadBalancerRegion"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeLoadBalancerTrafficRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2163,7 +2163,7 @@ type DescribeLoadBalancerTrafficResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeLoadBalancerTrafficResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2203,7 +2203,7 @@ type DescribeLoadBalancersDetailRequest struct {
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeLoadBalancersDetailRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2242,7 +2242,7 @@ type DescribeLoadBalancersDetailResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeLoadBalancersDetailResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2317,7 +2317,7 @@ type DescribeLoadBalancersRequest struct {
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeLoadBalancersRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2369,7 +2369,7 @@ type DescribeLoadBalancersResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeLoadBalancersResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2384,7 +2384,7 @@ type DescribeQuotaRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeQuotaRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2414,7 +2414,7 @@ type DescribeQuotaResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeQuotaResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2438,7 +2438,7 @@ type DescribeRewriteRequest struct {
 	SourceLocationIds []*string `json:"SourceLocationIds,omitempty" name:"SourceLocationIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeRewriteRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2471,7 +2471,7 @@ type DescribeRewriteResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeRewriteResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2495,7 +2495,7 @@ type DescribeTargetGroupInstancesRequest struct {
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTargetGroupInstancesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2534,7 +2534,7 @@ type DescribeTargetGroupInstancesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTargetGroupInstancesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2561,7 +2561,7 @@ type DescribeTargetGroupListRequest struct {
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTargetGroupListRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2598,7 +2598,7 @@ type DescribeTargetGroupListResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTargetGroupListResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2625,7 +2625,7 @@ type DescribeTargetGroupsRequest struct {
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTargetGroupsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2662,7 +2662,7 @@ type DescribeTargetGroupsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTargetGroupsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2680,7 +2680,7 @@ type DescribeTargetHealthRequest struct {
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTargetHealthRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2712,7 +2712,7 @@ type DescribeTargetHealthResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTargetHealthResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2739,7 +2739,7 @@ type DescribeTargetsRequest struct {
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTargetsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2774,7 +2774,7 @@ type DescribeTargetsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTargetsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2792,7 +2792,7 @@ type DescribeTaskStatusRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTaskStatusRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2823,7 +2823,7 @@ type DescribeTaskStatusResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTaskStatusResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2841,7 +2841,7 @@ type DisassociateTargetGroupsRequest struct {
 	Associations []*TargetGroupAssociation `json:"Associations,omitempty" name:"Associations" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisassociateTargetGroupsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2869,7 +2869,7 @@ type DisassociateTargetGroupsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisassociateTargetGroupsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3497,7 +3497,7 @@ type ManualRewriteRequest struct {
 	RewriteInfos []*RewriteLocationMap `json:"RewriteInfos,omitempty" name:"RewriteInfos" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ManualRewriteRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3528,7 +3528,7 @@ type ManualRewriteResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ManualRewriteResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3567,7 +3567,7 @@ type ModifyBlockIPListRequest struct {
 	AddStrategy *string `json:"AddStrategy,omitempty" name:"AddStrategy"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyBlockIPListRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3603,7 +3603,7 @@ type ModifyBlockIPListResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyBlockIPListResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3642,7 +3642,7 @@ type ModifyDomainAttributesRequest struct {
 	NewDefaultServerDomain *string `json:"NewDefaultServerDomain,omitempty" name:"NewDefaultServerDomain"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyDomainAttributesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3677,7 +3677,7 @@ type ModifyDomainAttributesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyDomainAttributesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3704,7 +3704,7 @@ type ModifyDomainRequest struct {
 	NewDomain *string `json:"NewDomain,omitempty" name:"NewDomain"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyDomainRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3735,7 +3735,7 @@ type ModifyDomainResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyDomainResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3778,7 +3778,7 @@ type ModifyListenerRequest struct {
 	KeepaliveEnable *int64 `json:"KeepaliveEnable,omitempty" name:"KeepaliveEnable"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyListenerRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3814,7 +3814,7 @@ type ModifyListenerResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyListenerResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3847,7 +3847,7 @@ type ModifyLoadBalancerAttributesRequest struct {
 	SnatPro *bool `json:"SnatPro,omitempty" name:"SnatPro"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyLoadBalancerAttributesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3884,7 +3884,7 @@ type ModifyLoadBalancerAttributesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyLoadBalancerAttributesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3930,7 +3930,7 @@ type ModifyRuleRequest struct {
 	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyRuleRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3967,7 +3967,7 @@ type ModifyRuleResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyRuleResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3991,7 +3991,7 @@ type ModifyTargetGroupAttributeRequest struct {
 	Port *uint64 `json:"Port,omitempty" name:"Port"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyTargetGroupAttributeRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4021,7 +4021,7 @@ type ModifyTargetGroupAttributeResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyTargetGroupAttributeResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4042,7 +4042,7 @@ type ModifyTargetGroupInstancesPortRequest struct {
 	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyTargetGroupInstancesPortRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4071,7 +4071,7 @@ type ModifyTargetGroupInstancesPortResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyTargetGroupInstancesPortResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4092,7 +4092,7 @@ type ModifyTargetGroupInstancesWeightRequest struct {
 	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyTargetGroupInstancesWeightRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4121,7 +4121,7 @@ type ModifyTargetGroupInstancesWeightResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyTargetGroupInstancesWeightResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4157,7 +4157,7 @@ type ModifyTargetPortRequest struct {
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyTargetPortRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4191,7 +4191,7 @@ type ModifyTargetPortResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyTargetPortResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4227,7 +4227,7 @@ type ModifyTargetWeightRequest struct {
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyTargetWeightRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4261,7 +4261,7 @@ type ModifyTargetWeightResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyTargetWeightResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4300,7 +4300,7 @@ type RegisterTargetGroupInstancesRequest struct {
 	TargetGroupInstances []*TargetGroupInstance `json:"TargetGroupInstances,omitempty" name:"TargetGroupInstances" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *RegisterTargetGroupInstancesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4329,7 +4329,7 @@ type RegisterTargetGroupInstancesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *RegisterTargetGroupInstancesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4362,7 +4362,7 @@ type RegisterTargetsRequest struct {
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *RegisterTargetsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4395,7 +4395,7 @@ type RegisterTargetsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *RegisterTargetsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4416,7 +4416,7 @@ type RegisterTargetsWithClassicalLBRequest struct {
 	Targets []*ClassicalTargetInfo `json:"Targets,omitempty" name:"Targets" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *RegisterTargetsWithClassicalLBRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4445,7 +4445,7 @@ type RegisterTargetsWithClassicalLBResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *RegisterTargetsWithClassicalLBResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4466,7 +4466,7 @@ type ReplaceCertForLoadBalancersRequest struct {
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ReplaceCertForLoadBalancersRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4495,7 +4495,7 @@ type ReplaceCertForLoadBalancersResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ReplaceCertForLoadBalancersResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4739,7 +4739,7 @@ type SetLoadBalancerClsLogRequest struct {
 	LogType *string `json:"LogType,omitempty" name:"LogType"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetLoadBalancerClsLogRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4770,7 +4770,7 @@ type SetLoadBalancerClsLogResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetLoadBalancerClsLogResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4791,7 +4791,7 @@ type SetLoadBalancerSecurityGroupsRequest struct {
 	SecurityGroups []*string `json:"SecurityGroups,omitempty" name:"SecurityGroups" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetLoadBalancerSecurityGroupsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4820,7 +4820,7 @@ type SetLoadBalancerSecurityGroupsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetLoadBalancerSecurityGroupsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4845,7 +4845,7 @@ type SetSecurityGroupForLoadbalancersRequest struct {
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetSecurityGroupForLoadbalancersRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -4875,7 +4875,7 @@ type SetSecurityGroupForLoadbalancersResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetSecurityGroupForLoadbalancersResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

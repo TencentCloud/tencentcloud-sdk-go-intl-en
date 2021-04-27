@@ -63,7 +63,7 @@ type AddUserRequest struct {
 	Email *string `json:"Email,omitempty" name:"Email"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AddUserRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -117,7 +117,7 @@ type AddUserResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AddUserResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -135,7 +135,7 @@ type AddUserToGroupRequest struct {
 	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AddUserToGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -163,7 +163,7 @@ type AddUserToGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AddUserToGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -205,7 +205,7 @@ type AttachGroupPolicyRequest struct {
 	AttachGroupId *uint64 `json:"AttachGroupId,omitempty" name:"AttachGroupId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AttachGroupPolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -234,7 +234,7 @@ type AttachGroupPolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AttachGroupPolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -304,7 +304,7 @@ type AttachRolePolicyRequest struct {
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AttachRolePolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -335,7 +335,7 @@ type AttachRolePolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AttachRolePolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -356,7 +356,7 @@ type AttachUserPolicyRequest struct {
 	AttachUin *uint64 `json:"AttachUin,omitempty" name:"AttachUin"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AttachUserPolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -385,7 +385,7 @@ type AttachUserPolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AttachUserPolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -434,7 +434,7 @@ type ConsumeCustomMFATokenRequest struct {
 	MFAToken *string `json:"MFAToken,omitempty" name:"MFAToken"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ConsumeCustomMFATokenRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -462,7 +462,7 @@ type ConsumeCustomMFATokenResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ConsumeCustomMFATokenResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -483,7 +483,7 @@ type CreateGroupRequest struct {
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -515,7 +515,7 @@ type CreateGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -539,7 +539,7 @@ type CreatePolicyRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreatePolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -572,7 +572,7 @@ type CreatePolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreatePolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -596,7 +596,7 @@ type CreatePolicyVersionRequest struct {
 	SetAsDefault *bool `json:"SetAsDefault,omitempty" name:"SetAsDefault"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreatePolicyVersionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -630,7 +630,7 @@ type CreatePolicyVersionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreatePolicyVersionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -660,7 +660,7 @@ type CreateRoleRequest struct {
 	SessionDuration *uint64 `json:"SessionDuration,omitempty" name:"SessionDuration"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateRoleRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -696,7 +696,7 @@ type CreateRoleResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateRoleResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -720,7 +720,7 @@ type CreateSAMLProviderRequest struct {
 	SAMLMetadataDocument *string `json:"SAMLMetadataDocument,omitempty" name:"SAMLMetadataDocument"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateSAMLProviderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -753,7 +753,7 @@ type CreateSAMLProviderResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateSAMLProviderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -777,7 +777,7 @@ type CreateServiceLinkedRoleRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateServiceLinkedRoleRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -810,7 +810,7 @@ type CreateServiceLinkedRoleResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateServiceLinkedRoleResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -828,7 +828,7 @@ type DeleteGroupRequest struct {
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -856,7 +856,7 @@ type DeleteGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -874,7 +874,7 @@ type DeletePolicyRequest struct {
 	PolicyId []*uint64 `json:"PolicyId,omitempty" name:"PolicyId" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeletePolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -902,7 +902,7 @@ type DeletePolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeletePolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -923,7 +923,7 @@ type DeletePolicyVersionRequest struct {
 	VersionId []*uint64 `json:"VersionId,omitempty" name:"VersionId" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeletePolicyVersionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -952,7 +952,7 @@ type DeletePolicyVersionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeletePolicyVersionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -973,7 +973,7 @@ type DeleteRolePermissionsBoundaryRequest struct {
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteRolePermissionsBoundaryRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1002,7 +1002,7 @@ type DeleteRolePermissionsBoundaryResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteRolePermissionsBoundaryResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1023,7 +1023,7 @@ type DeleteRoleRequest struct {
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteRoleRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1052,7 +1052,7 @@ type DeleteRoleResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteRoleResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1070,7 +1070,7 @@ type DeleteSAMLProviderRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteSAMLProviderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1098,7 +1098,7 @@ type DeleteSAMLProviderResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteSAMLProviderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1116,7 +1116,7 @@ type DeleteServiceLinkedRoleRequest struct {
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteServiceLinkedRoleRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1147,7 +1147,7 @@ type DeleteServiceLinkedRoleResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteServiceLinkedRoleResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1165,7 +1165,7 @@ type DeleteUserPermissionsBoundaryRequest struct {
 	TargetUin *int64 `json:"TargetUin,omitempty" name:"TargetUin"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteUserPermissionsBoundaryRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1193,7 +1193,7 @@ type DeleteUserPermissionsBoundaryResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteUserPermissionsBoundaryResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1214,7 +1214,7 @@ type DeleteUserRequest struct {
 	Force *uint64 `json:"Force,omitempty" name:"Force"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteUserRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1243,7 +1243,7 @@ type DeleteUserResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteUserResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1264,7 +1264,7 @@ type DescribeRoleListRequest struct {
 	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeRoleListRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1300,7 +1300,7 @@ type DescribeRoleListResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeRoleListResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1318,7 +1318,7 @@ type DescribeSafeAuthFlagCollRequest struct {
 	SubUin *uint64 `json:"SubUin,omitempty" name:"SubUin"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeSafeAuthFlagCollRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1355,7 +1355,7 @@ type DescribeSafeAuthFlagCollResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeSafeAuthFlagCollResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1370,7 +1370,7 @@ type DescribeSafeAuthFlagRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeSafeAuthFlagRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1406,7 +1406,7 @@ type DescribeSafeAuthFlagResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeSafeAuthFlagResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1424,7 +1424,7 @@ type DescribeSubAccountsRequest struct {
 	FilterSubAccountUin []*uint64 `json:"FilterSubAccountUin,omitempty" name:"FilterSubAccountUin" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeSubAccountsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1455,7 +1455,7 @@ type DescribeSubAccountsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeSubAccountsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1476,7 +1476,7 @@ type DetachGroupPolicyRequest struct {
 	DetachGroupId *uint64 `json:"DetachGroupId,omitempty" name:"DetachGroupId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DetachGroupPolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1505,7 +1505,7 @@ type DetachGroupPolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DetachGroupPolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1532,7 +1532,7 @@ type DetachRolePolicyRequest struct {
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DetachRolePolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1563,7 +1563,7 @@ type DetachRolePolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DetachRolePolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1584,7 +1584,7 @@ type DetachUserPolicyRequest struct {
 	DetachUin *uint64 `json:"DetachUin,omitempty" name:"DetachUin"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DetachUserPolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1613,7 +1613,7 @@ type DetachUserPolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DetachUserPolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1631,7 +1631,7 @@ type GetCustomMFATokenInfoRequest struct {
 	MFAToken *string `json:"MFAToken,omitempty" name:"MFAToken"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetCustomMFATokenInfoRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1662,7 +1662,7 @@ type GetCustomMFATokenInfoResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetCustomMFATokenInfoResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1680,7 +1680,7 @@ type GetGroupRequest struct {
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1726,7 +1726,7 @@ type GetGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1744,7 +1744,7 @@ type GetPolicyRequest struct {
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetPolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1804,7 +1804,7 @@ type GetPolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetPolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1825,7 +1825,7 @@ type GetPolicyVersionRequest struct {
 	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetPolicyVersionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1858,7 +1858,7 @@ type GetPolicyVersionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetPolicyVersionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1879,7 +1879,7 @@ type GetRoleRequest struct {
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetRoleRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1911,7 +1911,7 @@ type GetRoleResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetRoleResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1929,7 +1929,7 @@ type GetSAMLProviderRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetSAMLProviderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1972,7 +1972,7 @@ type GetSAMLProviderResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetSAMLProviderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1990,7 +1990,7 @@ type GetServiceLinkedRoleDeletionStatusRequest struct {
 	DeletionTaskId *string `json:"DeletionTaskId,omitempty" name:"DeletionTaskId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetServiceLinkedRoleDeletionStatusRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2032,7 +2032,7 @@ type GetServiceLinkedRoleDeletionStatusResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetServiceLinkedRoleDeletionStatusResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2050,7 +2050,7 @@ type GetUserRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetUserRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2102,7 +2102,7 @@ type GetUserResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetUserResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2180,7 +2180,7 @@ type ListAccessKeysRequest struct {
 	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAccessKeysRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2212,7 +2212,7 @@ type ListAccessKeysResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAccessKeysResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2236,7 +2236,7 @@ type ListAttachedGroupPoliciesRequest struct {
 	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAttachedGroupPoliciesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2272,7 +2272,7 @@ type ListAttachedGroupPoliciesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAttachedGroupPoliciesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2302,7 +2302,7 @@ type ListAttachedRolePoliciesRequest struct {
 	PolicyType *string `json:"PolicyType,omitempty" name:"PolicyType"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAttachedRolePoliciesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2340,7 +2340,7 @@ type ListAttachedRolePoliciesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAttachedRolePoliciesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2364,7 +2364,7 @@ type ListAttachedUserPoliciesRequest struct {
 	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAttachedUserPoliciesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2400,7 +2400,7 @@ type ListAttachedUserPoliciesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAttachedUserPoliciesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2421,7 +2421,7 @@ type ListCollaboratorsRequest struct {
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListCollaboratorsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2456,7 +2456,7 @@ type ListCollaboratorsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListCollaboratorsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2483,7 +2483,7 @@ type ListEntitiesForPolicyRequest struct {
 	EntityFilter *string `json:"EntityFilter,omitempty" name:"EntityFilter"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListEntitiesForPolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2522,7 +2522,7 @@ type ListEntitiesForPolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListEntitiesForPolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2549,7 +2549,7 @@ type ListGroupsForUserRequest struct {
 	SubUin *uint64 `json:"SubUin,omitempty" name:"SubUin"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListGroupsForUserRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2586,7 +2586,7 @@ type ListGroupsForUserResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListGroupsForUserResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2610,7 +2610,7 @@ type ListGroupsRequest struct {
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListGroupsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2646,7 +2646,7 @@ type ListGroupsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListGroupsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2673,7 +2673,7 @@ type ListPoliciesRequest struct {
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListPoliciesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2723,7 +2723,7 @@ type ListPoliciesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListPoliciesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2741,7 +2741,7 @@ type ListPolicyVersionsRequest struct {
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListPolicyVersionsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2773,7 +2773,7 @@ type ListPolicyVersionsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListPolicyVersionsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2788,7 +2788,7 @@ type ListSAMLProvidersRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListSAMLProvidersRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2821,7 +2821,7 @@ type ListSAMLProvidersResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListSAMLProvidersResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2845,7 +2845,7 @@ type ListUsersForGroupRequest struct {
 	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListUsersForGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2881,7 +2881,7 @@ type ListUsersForGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListUsersForGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2896,7 +2896,7 @@ type ListUsersRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListUsersRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2926,7 +2926,7 @@ type ListUsersResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListUsersResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3032,7 +3032,7 @@ type PutRolePermissionsBoundaryRequest struct {
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutRolePermissionsBoundaryRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3062,7 +3062,7 @@ type PutRolePermissionsBoundaryResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutRolePermissionsBoundaryResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3083,7 +3083,7 @@ type PutUserPermissionsBoundaryRequest struct {
 	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutUserPermissionsBoundaryRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3112,7 +3112,7 @@ type PutUserPermissionsBoundaryResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutUserPermissionsBoundaryResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3130,7 +3130,7 @@ type RemoveUserFromGroupRequest struct {
 	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *RemoveUserFromGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3158,7 +3158,7 @@ type RemoveUserFromGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *RemoveUserFromGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3230,7 +3230,7 @@ type SetDefaultPolicyVersionRequest struct {
 	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetDefaultPolicyVersionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3259,7 +3259,7 @@ type SetDefaultPolicyVersionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetDefaultPolicyVersionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3283,7 +3283,7 @@ type SetMfaFlagRequest struct {
 	ActionFlag *LoginActionMfaFlag `json:"ActionFlag,omitempty" name:"ActionFlag"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetMfaFlagRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3313,7 +3313,7 @@ type SetMfaFlagResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetMfaFlagResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3441,7 +3441,7 @@ type UpdateAssumeRolePolicyRequest struct {
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateAssumeRolePolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3471,7 +3471,7 @@ type UpdateAssumeRolePolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateAssumeRolePolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3495,7 +3495,7 @@ type UpdateGroupRequest struct {
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3525,7 +3525,7 @@ type UpdateGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3555,7 +3555,7 @@ type UpdatePolicyRequest struct {
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdatePolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3591,7 +3591,7 @@ type UpdatePolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdatePolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3615,7 +3615,7 @@ type UpdateRoleConsoleLoginRequest struct {
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateRoleConsoleLoginRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3645,7 +3645,7 @@ type UpdateRoleConsoleLoginResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateRoleConsoleLoginResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3669,7 +3669,7 @@ type UpdateRoleDescriptionRequest struct {
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateRoleDescriptionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3699,7 +3699,7 @@ type UpdateRoleDescriptionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateRoleDescriptionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3723,7 +3723,7 @@ type UpdateSAMLProviderRequest struct {
 	SAMLMetadataDocument *string `json:"SAMLMetadataDocument,omitempty" name:"SAMLMetadataDocument"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateSAMLProviderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3753,7 +3753,7 @@ type UpdateSAMLProviderResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateSAMLProviderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3792,7 +3792,7 @@ type UpdateUserRequest struct {
 	Email *string `json:"Email,omitempty" name:"Email"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateUserRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3827,7 +3827,7 @@ type UpdateUserResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateUserResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

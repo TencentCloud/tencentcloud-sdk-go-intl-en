@@ -46,7 +46,7 @@ type LivenessCompareRequest struct {
 	Optional *string `json:"Optional,omitempty" name:"Optional"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *LivenessCompareRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -93,7 +93,7 @@ type LivenessCompareResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *LivenessCompareResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

@@ -87,7 +87,7 @@ type CreateMediaConnectFlowRequest struct {
 	InputGroup []*CreateInput `json:"InputGroup,omitempty" name:"InputGroup" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaConnectFlowRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -120,7 +120,7 @@ type CreateMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaConnectFlowResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -141,7 +141,7 @@ type CreateMediaConnectOutputRequest struct {
 	Output *CreateOutput `json:"Output,omitempty" name:"Output"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaConnectOutputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -173,7 +173,7 @@ type CreateMediaConnectOutputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateMediaConnectOutputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -290,7 +290,7 @@ type DeleteMediaConnectFlowRequest struct {
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaConnectFlowRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -318,7 +318,7 @@ type DeleteMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaConnectFlowResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -339,7 +339,7 @@ type DeleteMediaConnectOutputRequest struct {
 	OutputId *string `json:"OutputId,omitempty" name:"OutputId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaConnectOutputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -368,7 +368,7 @@ type DeleteMediaConnectOutputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteMediaConnectOutputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -474,7 +474,7 @@ type DescribeMediaConnectFlowRequest struct {
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaConnectFlowRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -505,7 +505,7 @@ type DescribeMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaConnectFlowResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -526,7 +526,7 @@ type DescribeMediaConnectFlowsRequest struct {
 	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaConnectFlowsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -570,7 +570,7 @@ type DescribeMediaConnectFlowsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeMediaConnectFlowsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -724,7 +724,7 @@ type ModifyMediaConnectFlowRequest struct {
 	FlowName *string `json:"FlowName,omitempty" name:"FlowName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaConnectFlowRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -753,7 +753,7 @@ type ModifyMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaConnectFlowResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -774,7 +774,7 @@ type ModifyMediaConnectInputRequest struct {
 	Input *ModifyInput `json:"Input,omitempty" name:"Input"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaConnectInputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -806,7 +806,7 @@ type ModifyMediaConnectInputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaConnectInputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -827,7 +827,7 @@ type ModifyMediaConnectOutputRequest struct {
 	Output *ModifyOutput `json:"Output,omitempty" name:"Output"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaConnectOutputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -859,7 +859,7 @@ type ModifyMediaConnectOutputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyMediaConnectOutputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -934,7 +934,7 @@ type StartMediaConnectFlowRequest struct {
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StartMediaConnectFlowRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -962,7 +962,7 @@ type StartMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StartMediaConnectFlowResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -980,7 +980,7 @@ type StopMediaConnectFlowRequest struct {
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StopMediaConnectFlowRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1008,7 +1008,7 @@ type StopMediaConnectFlowResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StopMediaConnectFlowResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

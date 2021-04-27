@@ -60,7 +60,7 @@ type ApplyCertificateRequest struct {
 	OldCertificateId *string `json:"OldCertificateId,omitempty" name:"OldCertificateId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ApplyCertificateRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -102,7 +102,7 @@ type ApplyCertificateResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ApplyCertificateResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -120,7 +120,7 @@ type CancelCertificateOrderRequest struct {
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CancelCertificateOrderRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -151,7 +151,7 @@ type CancelCertificateOrderResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CancelCertificateOrderResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -315,7 +315,7 @@ type CommitCertificateInformationRequest struct {
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CommitCertificateInformationRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -349,7 +349,7 @@ type CommitCertificateInformationResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CommitCertificateInformationResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -367,7 +367,7 @@ type DeleteCertificateRequest struct {
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteCertificateRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -398,7 +398,7 @@ type DeleteCertificateResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteCertificateResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -416,7 +416,7 @@ type DescribeCertificateDetailRequest struct {
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeCertificateDetailRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -580,7 +580,7 @@ type DescribeCertificateDetailResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeCertificateDetailResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -607,7 +607,7 @@ type DescribeCertificateOperateLogsRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeCertificateOperateLogsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -648,7 +648,7 @@ type DescribeCertificateOperateLogsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeCertificateOperateLogsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -666,7 +666,7 @@ type DescribeCertificateRequest struct {
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeCertificateRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -822,7 +822,7 @@ type DescribeCertificateResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeCertificateResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -861,7 +861,7 @@ type DescribeCertificatesRequest struct {
 	Deployable *uint64 `json:"Deployable,omitempty" name:"Deployable"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeCertificatesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -904,7 +904,7 @@ type DescribeCertificatesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeCertificatesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -922,7 +922,7 @@ type DownloadCertificateRequest struct {
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DownloadCertificateRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -958,7 +958,7 @@ type DownloadCertificateResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DownloadCertificateResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1033,7 +1033,7 @@ type ModifyCertificateAliasRequest struct {
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyCertificateAliasRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1065,7 +1065,7 @@ type ModifyCertificateAliasResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyCertificateAliasResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1086,7 +1086,7 @@ type ModifyCertificateProjectRequest struct {
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyCertificateProjectRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1123,7 +1123,7 @@ type ModifyCertificateProjectResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ModifyCertificateProjectResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1192,7 +1192,7 @@ type ReplaceCertificateRequest struct {
 	Reason *string `json:"Reason,omitempty" name:"Reason"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ReplaceCertificateRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1228,7 +1228,7 @@ type ReplaceCertificateResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ReplaceCertificateResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1321,7 +1321,7 @@ type SubmitCertificateInformationRequest struct {
 	ContactPosition *string `json:"ContactPosition,omitempty" name:"ContactPosition"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SubmitCertificateInformationRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1377,7 +1377,7 @@ type SubmitCertificateInformationResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SubmitCertificateInformationResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1522,7 +1522,7 @@ type UploadCertificateRequest struct {
 	CertificateUse *string `json:"CertificateUse,omitempty" name:"CertificateUse"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UploadCertificateRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1558,7 +1558,7 @@ type UploadCertificateResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UploadCertificateResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

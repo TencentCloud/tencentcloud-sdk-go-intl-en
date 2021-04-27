@@ -90,7 +90,7 @@ type CopyFleetRequest struct {
 	CcnInfos []*CcnInfo `json:"CcnInfos,omitempty" name:"CcnInfos" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CopyFleetRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -143,7 +143,7 @@ type CopyFleetResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CopyFleetResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -185,7 +185,7 @@ type CreateGameServerSessionRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateGameServerSessionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -225,7 +225,7 @@ type CreateGameServerSessionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateGameServerSessionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -258,7 +258,7 @@ type DeleteTimerScalingPolicyRequest struct {
 	TimerName *string `json:"TimerName,omitempty" name:"TimerName"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteTimerScalingPolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -288,7 +288,7 @@ type DeleteTimerScalingPolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteTimerScalingPolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -321,7 +321,7 @@ type DescribeGameServerSessionDetailsRequest struct {
 	StatusFilter *string `json:"StatusFilter,omitempty" name:"StatusFilter"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeGameServerSessionDetailsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -362,7 +362,7 @@ type DescribeGameServerSessionDetailsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeGameServerSessionDetailsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -380,7 +380,7 @@ type DescribeGameServerSessionPlacementRequest struct {
 	PlacementId *string `json:"PlacementId,omitempty" name:"PlacementId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeGameServerSessionPlacementRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -411,7 +411,7 @@ type DescribeGameServerSessionPlacementResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeGameServerSessionPlacementResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -444,7 +444,7 @@ type DescribeGameServerSessionsRequest struct {
 	StatusFilter *string `json:"StatusFilter,omitempty" name:"StatusFilter"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeGameServerSessionsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -485,7 +485,7 @@ type DescribeGameServerSessionsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeGameServerSessionsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -518,7 +518,7 @@ type DescribePlayerSessionsRequest struct {
 	PlayerSessionStatusFilter *string `json:"PlayerSessionStatusFilter,omitempty" name:"PlayerSessionStatusFilter"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribePlayerSessionsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -559,7 +559,7 @@ type DescribePlayerSessionsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribePlayerSessionsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -592,7 +592,7 @@ type DescribeTimerScalingPoliciesRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTimerScalingPoliciesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -633,7 +633,7 @@ type DescribeTimerScalingPoliciesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeTimerScalingPoliciesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -917,7 +917,7 @@ type GetGameServerSessionLogUrlRequest struct {
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetGameServerSessionLogUrlRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -949,7 +949,7 @@ type GetGameServerSessionLogUrlResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetGameServerSessionLogUrlResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -970,7 +970,7 @@ type GetInstanceAccessRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetInstanceAccessRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1002,7 +1002,7 @@ type GetInstanceAccessResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetInstanceAccessResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1059,7 +1059,7 @@ type JoinGameServerSessionBatchRequest struct {
 	PlayerDataMap *PlayerDataMap `json:"PlayerDataMap,omitempty" name:"PlayerDataMap"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *JoinGameServerSessionBatchRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1093,7 +1093,7 @@ type JoinGameServerSessionBatchResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *JoinGameServerSessionBatchResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1117,7 +1117,7 @@ type JoinGameServerSessionRequest struct {
 	PlayerData *string `json:"PlayerData,omitempty" name:"PlayerData"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *JoinGameServerSessionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1151,7 +1151,7 @@ type JoinGameServerSessionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *JoinGameServerSessionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1241,7 +1241,7 @@ type PutTimerScalingPolicyRequest struct {
 	TimerScalingPolicy *TimerScalingPolicy `json:"TimerScalingPolicy,omitempty" name:"TimerScalingPolicy"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutTimerScalingPolicyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1269,7 +1269,7 @@ type PutTimerScalingPolicyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutTimerScalingPolicyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1377,7 +1377,7 @@ type SearchGameServerSessionsRequest struct {
 	SortExpression *string `json:"SortExpression,omitempty" name:"SortExpression"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SearchGameServerSessionsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1418,7 +1418,7 @@ type SearchGameServerSessionsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SearchGameServerSessionsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1454,7 +1454,7 @@ type SetServerReservedRequest struct {
 	ReserveValue *int64 `json:"ReserveValue,omitempty" name:"ReserveValue"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetServerReservedRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1484,7 +1484,7 @@ type SetServerReservedResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SetServerReservedResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1523,7 +1523,7 @@ type StartGameServerSessionPlacementRequest struct {
 	PlayerLatencies []*PlayerLatency `json:"PlayerLatencies,omitempty" name:"PlayerLatencies" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StartGameServerSessionPlacementRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1561,7 +1561,7 @@ type StartGameServerSessionPlacementResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StartGameServerSessionPlacementResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1579,7 +1579,7 @@ type StopGameServerSessionPlacementRequest struct {
 	PlacementId *string `json:"PlacementId,omitempty" name:"PlacementId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StopGameServerSessionPlacementRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1610,7 +1610,7 @@ type StopGameServerSessionPlacementResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *StopGameServerSessionPlacementResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1736,7 +1736,7 @@ type UpdateBucketAccelerateOptRequest struct {
 	Allowed *bool `json:"Allowed,omitempty" name:"Allowed"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateBucketAccelerateOptRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1764,7 +1764,7 @@ type UpdateBucketAccelerateOptResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateBucketAccelerateOptResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1794,7 +1794,7 @@ type UpdateBucketCORSOptRequest struct {
 	ExposeHeaders []*string `json:"ExposeHeaders,omitempty" name:"ExposeHeaders" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateBucketCORSOptRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1826,7 +1826,7 @@ type UpdateBucketCORSOptResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateBucketCORSOptResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1856,7 +1856,7 @@ type UpdateGameServerSessionRequest struct {
 	ProtectionPolicy *string `json:"ProtectionPolicy,omitempty" name:"ProtectionPolicy"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateGameServerSessionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1891,7 +1891,7 @@ type UpdateGameServerSessionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateGameServerSessionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

@@ -201,7 +201,7 @@ type CopyFunctionRequest struct {
 	CopyConfiguration *bool `json:"CopyConfiguration,omitempty" name:"CopyConfiguration"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CopyFunctionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -236,7 +236,7 @@ type CopyFunctionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CopyFunctionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -269,7 +269,7 @@ type CreateAliasRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateAliasRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -302,7 +302,7 @@ type CreateAliasResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateAliasResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -380,7 +380,7 @@ type CreateFunctionRequest struct {
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateFunctionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -428,7 +428,7 @@ type CreateFunctionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateFunctionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -449,7 +449,7 @@ type CreateNamespaceRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateNamespaceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -478,7 +478,7 @@ type CreateNamespaceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateNamespaceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -517,7 +517,7 @@ type CreateTriggerRequest struct {
 	CustomArgument *string `json:"CustomArgument,omitempty" name:"CustomArgument"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateTriggerRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -555,7 +555,7 @@ type CreateTriggerResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateTriggerResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -591,7 +591,7 @@ type DeleteAliasRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteAliasRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -621,7 +621,7 @@ type DeleteAliasResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteAliasResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -642,7 +642,7 @@ type DeleteFunctionRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteFunctionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -671,7 +671,7 @@ type DeleteFunctionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteFunctionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -692,7 +692,7 @@ type DeleteLayerVersionRequest struct {
 	LayerVersion *int64 `json:"LayerVersion,omitempty" name:"LayerVersion"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteLayerVersionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -721,7 +721,7 @@ type DeleteLayerVersionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteLayerVersionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -739,7 +739,7 @@ type DeleteNamespaceRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteNamespaceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -767,7 +767,7 @@ type DeleteNamespaceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteNamespaceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -791,7 +791,7 @@ type DeleteProvisionedConcurrencyConfigRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteProvisionedConcurrencyConfigRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -821,7 +821,7 @@ type DeleteProvisionedConcurrencyConfigResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteProvisionedConcurrencyConfigResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -842,7 +842,7 @@ type DeleteReservedConcurrencyConfigRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteReservedConcurrencyConfigRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -871,7 +871,7 @@ type DeleteReservedConcurrencyConfigResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteReservedConcurrencyConfigResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -904,7 +904,7 @@ type DeleteTriggerRequest struct {
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteTriggerRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -937,7 +937,7 @@ type DeleteTriggerResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteTriggerResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1099,7 +1099,7 @@ type GetAccountRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetAccountRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1132,7 +1132,7 @@ type GetAccountResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetAccountResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1156,7 +1156,7 @@ type GetAliasRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetAliasRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1207,7 +1207,7 @@ type GetAliasResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetAliasResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1231,7 +1231,7 @@ type GetFunctionAddressRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetFunctionAddressRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1267,7 +1267,7 @@ type GetFunctionAddressResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetFunctionAddressResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1291,7 +1291,7 @@ type GetFunctionEventInvokeConfigRequest struct {
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetFunctionEventInvokeConfigRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1324,7 +1324,7 @@ type GetFunctionEventInvokeConfigResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetFunctionEventInvokeConfigResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1377,7 +1377,7 @@ type GetFunctionLogsRequest struct {
 	SearchContext *LogSearchContext `json:"SearchContext,omitempty" name:"SearchContext"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetFunctionLogsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1425,7 +1425,7 @@ type GetFunctionLogsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetFunctionLogsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1452,7 +1452,7 @@ type GetFunctionRequest struct {
 	ShowCode *string `json:"ShowCode,omitempty" name:"ShowCode"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetFunctionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1609,7 +1609,7 @@ type GetFunctionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetFunctionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1630,7 +1630,7 @@ type GetLayerVersionRequest struct {
 	LayerVersion *int64 `json:"LayerVersion,omitempty" name:"LayerVersion"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetLayerVersionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1690,7 +1690,7 @@ type GetLayerVersionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetLayerVersionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1714,7 +1714,7 @@ type GetProvisionedConcurrencyConfigRequest struct {
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetProvisionedConcurrencyConfigRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1750,7 +1750,7 @@ type GetProvisionedConcurrencyConfigResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetProvisionedConcurrencyConfigResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1771,7 +1771,7 @@ type GetReservedConcurrencyConfigRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetReservedConcurrencyConfigRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1804,7 +1804,7 @@ type GetReservedConcurrencyConfigResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetReservedConcurrencyConfigResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1840,7 +1840,7 @@ type InvokeRequest struct {
 	RoutingKey *string `json:"RoutingKey,omitempty" name:"RoutingKey"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *InvokeRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1877,7 +1877,7 @@ type InvokeResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *InvokeResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1952,7 +1952,7 @@ type ListAliasesRequest struct {
 	Limit *string `json:"Limit,omitempty" name:"Limit"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAliasesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1991,7 +1991,7 @@ type ListAliasesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAliasesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2042,7 +2042,7 @@ type ListAsyncEventsRequest struct {
 	InvokeRequestId *string `json:"InvokeRequestId,omitempty" name:"InvokeRequestId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAsyncEventsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2087,7 +2087,7 @@ type ListAsyncEventsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAsyncEventsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2129,7 +2129,7 @@ type ListFunctionsRequest struct {
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListFunctionsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2170,7 +2170,7 @@ type ListFunctionsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListFunctionsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2191,7 +2191,7 @@ type ListLayerVersionsRequest struct {
 	CompatibleRuntime []*string `json:"CompatibleRuntime,omitempty" name:"CompatibleRuntime" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListLayerVersionsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2223,7 +2223,7 @@ type ListLayerVersionsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListLayerVersionsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2250,7 +2250,7 @@ type ListLayersRequest struct {
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListLayersRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2287,7 +2287,7 @@ type ListLayersResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListLayersResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2314,7 +2314,7 @@ type ListNamespacesRequest struct {
 	Order *string `json:"Order,omitempty" name:"Order"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListNamespacesRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2351,7 +2351,7 @@ type ListNamespacesResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListNamespacesResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2388,7 +2388,7 @@ type ListTriggersRequest struct {
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListTriggersRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2428,7 +2428,7 @@ type ListTriggersResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListTriggersResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2461,7 +2461,7 @@ type ListVersionByFunctionRequest struct {
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListVersionByFunctionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2505,7 +2505,7 @@ type ListVersionByFunctionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListVersionByFunctionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2644,7 +2644,7 @@ type PublishLayerVersionRequest struct {
 	LicenseInfo *string `json:"LicenseInfo,omitempty" name:"LicenseInfo"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PublishLayerVersionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2679,7 +2679,7 @@ type PublishLayerVersionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PublishLayerVersionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2703,7 +2703,7 @@ type PublishVersionRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PublishVersionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2757,7 +2757,7 @@ type PublishVersionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PublishVersionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2784,7 +2784,7 @@ type PutProvisionedConcurrencyConfigRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutProvisionedConcurrencyConfigRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2815,7 +2815,7 @@ type PutProvisionedConcurrencyConfigResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutProvisionedConcurrencyConfigResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2839,7 +2839,7 @@ type PutReservedConcurrencyConfigRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutReservedConcurrencyConfigRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2869,7 +2869,7 @@ type PutReservedConcurrencyConfigResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutReservedConcurrencyConfigResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2890,7 +2890,7 @@ type PutTotalConcurrencyConfigRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutTotalConcurrencyConfigRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2919,7 +2919,7 @@ type PutTotalConcurrencyConfigResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *PutTotalConcurrencyConfigResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3003,7 +3003,7 @@ type TerminateAsyncEventRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *TerminateAsyncEventRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3033,7 +3033,7 @@ type TerminateAsyncEventResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *TerminateAsyncEventResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3190,7 +3190,7 @@ type UpdateAliasRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateAliasRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3223,7 +3223,7 @@ type UpdateAliasResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateAliasResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3271,7 +3271,7 @@ type UpdateFunctionCodeRequest struct {
 	CodeSource *string `json:"CodeSource,omitempty" name:"CodeSource"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateFunctionCodeRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3309,7 +3309,7 @@ type UpdateFunctionCodeResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateFunctionCodeResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3378,7 +3378,7 @@ type UpdateFunctionConfigurationRequest struct {
 	InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateFunctionConfigurationRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3423,7 +3423,7 @@ type UpdateFunctionConfigurationResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateFunctionConfigurationResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3447,7 +3447,7 @@ type UpdateFunctionEventInvokeConfigRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateFunctionEventInvokeConfigRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3477,7 +3477,7 @@ type UpdateFunctionEventInvokeConfigResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateFunctionEventInvokeConfigResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3498,7 +3498,7 @@ type UpdateNamespaceRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateNamespaceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -3527,7 +3527,7 @@ type UpdateNamespaceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateNamespaceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }

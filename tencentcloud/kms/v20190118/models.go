@@ -36,7 +36,7 @@ type ArchiveKeyRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ArchiveKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -64,7 +64,7 @@ type ArchiveKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ArchiveKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -88,7 +88,7 @@ type AsymmetricRsaDecryptRequest struct {
 	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AsymmetricRsaDecryptRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -124,7 +124,7 @@ type AsymmetricRsaDecryptResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AsymmetricRsaDecryptResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -145,7 +145,7 @@ type AsymmetricSm2DecryptRequest struct {
 	Ciphertext *string `json:"Ciphertext,omitempty" name:"Ciphertext"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AsymmetricSm2DecryptRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -180,7 +180,7 @@ type AsymmetricSm2DecryptResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *AsymmetricSm2DecryptResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -204,7 +204,7 @@ type BindCloudResourceRequest struct {
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *BindCloudResourceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -234,7 +234,7 @@ type BindCloudResourceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *BindCloudResourceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -252,7 +252,7 @@ type CancelKeyArchiveRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CancelKeyArchiveRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -280,7 +280,7 @@ type CancelKeyArchiveResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CancelKeyArchiveResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -298,7 +298,7 @@ type CancelKeyDeletionRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CancelKeyDeletionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -329,7 +329,7 @@ type CancelKeyDeletionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CancelKeyDeletionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -359,7 +359,7 @@ type CreateKeyRequest struct {
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -415,7 +415,7 @@ type CreateKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -442,7 +442,7 @@ type CreateWhiteBoxKeyRequest struct {
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateWhiteBoxKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -488,7 +488,7 @@ type CreateWhiteBoxKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *CreateWhiteBoxKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -509,7 +509,7 @@ type DecryptRequest struct {
 	EncryptionContext *string `json:"EncryptionContext,omitempty" name:"EncryptionContext"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DecryptRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -544,7 +544,7 @@ type DecryptResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DecryptResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -562,7 +562,7 @@ type DeleteImportedKeyMaterialRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteImportedKeyMaterialRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -590,7 +590,7 @@ type DeleteImportedKeyMaterialResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteImportedKeyMaterialResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -608,7 +608,7 @@ type DeleteWhiteBoxKeyRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteWhiteBoxKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -636,7 +636,7 @@ type DeleteWhiteBoxKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DeleteWhiteBoxKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -654,7 +654,7 @@ type DescribeKeyRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -686,7 +686,7 @@ type DescribeKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -704,7 +704,7 @@ type DescribeKeysRequest struct {
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeKeysRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -736,7 +736,7 @@ type DescribeKeysResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeKeysResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -754,7 +754,7 @@ type DescribeWhiteBoxDecryptKeyRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeWhiteBoxDecryptKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -785,7 +785,7 @@ type DescribeWhiteBoxDecryptKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeWhiteBoxDecryptKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -803,7 +803,7 @@ type DescribeWhiteBoxDeviceFingerprintsRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeWhiteBoxDeviceFingerprintsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -834,7 +834,7 @@ type DescribeWhiteBoxDeviceFingerprintsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeWhiteBoxDeviceFingerprintsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -861,7 +861,7 @@ type DescribeWhiteBoxKeyDetailsRequest struct {
 	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeWhiteBoxKeyDetailsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -899,7 +899,7 @@ type DescribeWhiteBoxKeyDetailsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeWhiteBoxKeyDetailsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -917,7 +917,7 @@ type DescribeWhiteBoxKeyRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeWhiteBoxKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -948,7 +948,7 @@ type DescribeWhiteBoxKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeWhiteBoxKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -963,7 +963,7 @@ type DescribeWhiteBoxServiceStatusRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeWhiteBoxServiceStatusRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -993,7 +993,7 @@ type DescribeWhiteBoxServiceStatusResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DescribeWhiteBoxServiceStatusResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1021,7 +1021,7 @@ type DisableKeyRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisableKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1049,7 +1049,7 @@ type DisableKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisableKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1067,7 +1067,7 @@ type DisableKeyRotationRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisableKeyRotationRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1095,7 +1095,7 @@ type DisableKeyRotationResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisableKeyRotationResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1113,7 +1113,7 @@ type DisableKeysRequest struct {
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisableKeysRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1141,7 +1141,7 @@ type DisableKeysResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisableKeysResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1159,7 +1159,7 @@ type DisableWhiteBoxKeyRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisableWhiteBoxKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1187,7 +1187,7 @@ type DisableWhiteBoxKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisableWhiteBoxKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1205,7 +1205,7 @@ type DisableWhiteBoxKeysRequest struct {
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisableWhiteBoxKeysRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1233,7 +1233,7 @@ type DisableWhiteBoxKeysResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *DisableWhiteBoxKeysResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1251,7 +1251,7 @@ type EnableKeyRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EnableKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1279,7 +1279,7 @@ type EnableKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EnableKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1297,7 +1297,7 @@ type EnableKeyRotationRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EnableKeyRotationRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1325,7 +1325,7 @@ type EnableKeyRotationResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EnableKeyRotationResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1343,7 +1343,7 @@ type EnableKeysRequest struct {
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EnableKeysRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1371,7 +1371,7 @@ type EnableKeysResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EnableKeysResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1389,7 +1389,7 @@ type EnableWhiteBoxKeyRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EnableWhiteBoxKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1417,7 +1417,7 @@ type EnableWhiteBoxKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EnableWhiteBoxKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1435,7 +1435,7 @@ type EnableWhiteBoxKeysRequest struct {
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EnableWhiteBoxKeysRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1463,7 +1463,7 @@ type EnableWhiteBoxKeysResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EnableWhiteBoxKeysResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1487,7 +1487,7 @@ type EncryptByWhiteBoxRequest struct {
 	InitializationVector *string `json:"InitializationVector,omitempty" name:"InitializationVector"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EncryptByWhiteBoxRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1523,7 +1523,7 @@ type EncryptByWhiteBoxResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EncryptByWhiteBoxResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1547,7 +1547,7 @@ type EncryptRequest struct {
 	EncryptionContext *string `json:"EncryptionContext,omitempty" name:"EncryptionContext"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EncryptRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1583,7 +1583,7 @@ type EncryptResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *EncryptResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1610,7 +1610,7 @@ type GenerateDataKeyRequest struct {
 	EncryptionContext *string `json:"EncryptionContext,omitempty" name:"EncryptionContext"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GenerateDataKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1650,7 +1650,7 @@ type GenerateDataKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GenerateDataKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1668,7 +1668,7 @@ type GenerateRandomRequest struct {
 	NumberOfBytes *uint64 `json:"NumberOfBytes,omitempty" name:"NumberOfBytes"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GenerateRandomRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1699,7 +1699,7 @@ type GenerateRandomResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GenerateRandomResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1717,7 +1717,7 @@ type GetKeyRotationStatusRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetKeyRotationStatusRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1748,7 +1748,7 @@ type GetKeyRotationStatusResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetKeyRotationStatusResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1772,7 +1772,7 @@ type GetParametersForImportRequest struct {
 	WrappingKeySpec *string `json:"WrappingKeySpec,omitempty" name:"WrappingKeySpec"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetParametersForImportRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1814,7 +1814,7 @@ type GetParametersForImportResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetParametersForImportResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1832,7 +1832,7 @@ type GetPublicKeyRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetPublicKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1869,7 +1869,7 @@ type GetPublicKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetPublicKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1884,7 +1884,7 @@ type GetRegionsRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetRegionsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1915,7 +1915,7 @@ type GetRegionsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetRegionsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1930,7 +1930,7 @@ type GetServiceStatusRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetServiceStatusRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -1978,7 +1978,7 @@ type GetServiceStatusResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *GetServiceStatusResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2005,7 +2005,7 @@ type ImportKeyMaterialRequest struct {
 	ValidTo *uint64 `json:"ValidTo,omitempty" name:"ValidTo"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ImportKeyMaterialRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2036,7 +2036,7 @@ type ImportKeyMaterialResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ImportKeyMaterialResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2107,7 +2107,7 @@ type ListAlgorithmsRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAlgorithmsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2143,7 +2143,7 @@ type ListAlgorithmsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListAlgorithmsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2185,7 +2185,7 @@ type ListKeyDetailRequest struct {
 	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListKeyDetailRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2228,7 +2228,7 @@ type ListKeyDetailResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListKeyDetailResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2252,7 +2252,7 @@ type ListKeysRequest struct {
 	Role *uint64 `json:"Role,omitempty" name:"Role"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListKeysRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2288,7 +2288,7 @@ type ListKeysResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ListKeysResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2309,7 +2309,7 @@ type OverwriteWhiteBoxDeviceFingerprintsRequest struct {
 	DeviceFingerprints []*DeviceFingerprint `json:"DeviceFingerprints,omitempty" name:"DeviceFingerprints" list`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *OverwriteWhiteBoxDeviceFingerprintsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2338,7 +2338,7 @@ type OverwriteWhiteBoxDeviceFingerprintsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *OverwriteWhiteBoxDeviceFingerprintsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2365,7 +2365,7 @@ type ReEncryptRequest struct {
 	DestinationEncryptionContext *string `json:"DestinationEncryptionContext,omitempty" name:"DestinationEncryptionContext"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ReEncryptRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2408,7 +2408,7 @@ type ReEncryptResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ReEncryptResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2429,7 +2429,7 @@ type ScheduleKeyDeletionRequest struct {
 	PendingWindowInDays *uint64 `json:"PendingWindowInDays,omitempty" name:"PendingWindowInDays"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ScheduleKeyDeletionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2464,7 +2464,7 @@ type ScheduleKeyDeletionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *ScheduleKeyDeletionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2491,7 +2491,7 @@ type SignByAsymmetricKeyRequest struct {
 	MessageType *string `json:"MessageType,omitempty" name:"MessageType"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SignByAsymmetricKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2525,7 +2525,7 @@ type SignByAsymmetricKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *SignByAsymmetricKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2567,7 +2567,7 @@ type UnbindCloudResourceRequest struct {
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UnbindCloudResourceRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2597,7 +2597,7 @@ type UnbindCloudResourceResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UnbindCloudResourceResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2618,7 +2618,7 @@ type UpdateAliasRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateAliasRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2647,7 +2647,7 @@ type UpdateAliasResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateAliasResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2668,7 +2668,7 @@ type UpdateKeyDescriptionRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateKeyDescriptionRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2697,7 +2697,7 @@ type UpdateKeyDescriptionResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *UpdateKeyDescriptionResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2727,7 +2727,7 @@ type VerifyByAsymmetricKeyRequest struct {
 	MessageType *string `json:"MessageType,omitempty" name:"MessageType"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *VerifyByAsymmetricKeyRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
@@ -2762,7 +2762,7 @@ type VerifyByAsymmetricKeyResponse struct {
 	} `json:"Response"`
 }
 
-func (r *%(obj)s) ToJsonString() string {
+func (r *VerifyByAsymmetricKeyResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
