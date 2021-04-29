@@ -3306,7 +3306,7 @@ type NodePool struct {
 	// Cluster instance ID
 	ClusterInstanceId *string `json:"ClusterInstanceId,omitempty" name:"ClusterInstanceId"`
 
-	// Status
+	// The lifecycle state of the current node pool. Valid values: `creating`, `normal`, `updating`, `deleting`, and `deleted`.
 	LifeState *string `json:"LifeState,omitempty" name:"LifeState"`
 
 	// Launch configuration ID

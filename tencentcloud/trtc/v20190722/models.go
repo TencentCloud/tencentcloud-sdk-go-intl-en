@@ -49,6 +49,79 @@ type AbnormalExperience struct {
 	EventTime *uint64 `json:"EventTime,omitempty" name:"EventTime"`
 }
 
+type CreatePictureRequest struct {
+	*tchttp.BaseRequest
+
+	// Application ID
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Base64-encoded image content
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Image file extension
+	Suffix *string `json:"Suffix,omitempty" name:"Suffix"`
+
+	// Image height
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Image width
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// X-axis value of the image’s position
+	XPosition *uint64 `json:"XPosition,omitempty" name:"XPosition"`
+
+	// Y-axis value of the image’s position
+	YPosition *uint64 `json:"YPosition,omitempty" name:"YPosition"`
+}
+
+func (r *CreatePictureRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePictureRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "Content")
+	delete(f, "Suffix")
+	delete(f, "Height")
+	delete(f, "Width")
+	delete(f, "XPosition")
+	delete(f, "YPosition")
+	if len(f) > 0 {
+		return errors.New("CreatePictureRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreatePictureResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Image ID
+		PictureId *uint64 `json:"PictureId,omitempty" name:"PictureId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreatePictureResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePictureResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateTroubleInfoRequest struct {
 	*tchttp.BaseRequest
 
@@ -128,6 +201,56 @@ func (r *CreateTroubleInfoResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateTroubleInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeletePictureRequest struct {
+	*tchttp.BaseRequest
+
+	// Image ID
+	PictureId *uint64 `json:"PictureId,omitempty" name:"PictureId"`
+
+	// Application ID
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+func (r *DeletePictureRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeletePictureRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PictureId")
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return errors.New("DeletePictureRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeletePictureResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeletePictureResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeletePictureResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -413,6 +536,70 @@ func (r *DescribeHistoryScaleResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeHistoryScaleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePictureRequest struct {
+	*tchttp.BaseRequest
+
+	// Application ID
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Image ID. If it is not passed in, the IDs of all images under the application are returned.
+	PictureId *uint64 `json:"PictureId,omitempty" name:"PictureId"`
+
+	// Number of records per page
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Page number
+	PageNo *uint64 `json:"PageNo,omitempty" name:"PageNo"`
+}
+
+func (r *DescribePictureRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePictureRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "PictureId")
+	delete(f, "PageSize")
+	delete(f, "PageNo")
+	if len(f) > 0 {
+		return errors.New("DescribePictureRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePictureResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of records returned
+		Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+		// Image information list
+		PictureInfo []*PictureInfo `json:"PictureInfo,omitempty" name:"PictureInfo" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribePictureResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePictureResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -960,6 +1147,72 @@ type LayoutParams struct {
 	PureAudioHoldPlaceMode *uint64 `json:"PureAudioHoldPlaceMode,omitempty" name:"PureAudioHoldPlaceMode"`
 }
 
+type ModifyPictureRequest struct {
+	*tchttp.BaseRequest
+
+	// Image ID
+	PictureId *uint64 `json:"PictureId,omitempty" name:"PictureId"`
+
+	// Application ID
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Image height
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Image width
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// X-axis value of the image’s position
+	XPosition *uint64 `json:"XPosition,omitempty" name:"XPosition"`
+
+	// Y-axis value of the image’s position
+	YPosition *uint64 `json:"YPosition,omitempty" name:"YPosition"`
+}
+
+func (r *ModifyPictureRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyPictureRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PictureId")
+	delete(f, "SdkAppId")
+	delete(f, "Height")
+	delete(f, "Width")
+	delete(f, "XPosition")
+	delete(f, "YPosition")
+	if len(f) > 0 {
+		return errors.New("ModifyPictureRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyPictureResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyPictureResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyPictureResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type OutputParams struct {
 
 	// Custom live stream ID, which must be different from the ID of relayed stream.
@@ -971,8 +1224,29 @@ type OutputParams struct {
 	// Prefix of custom recording file names. Please enable the recording feature in the TRTC console first. https://intl.cloud.tencent.com/document/product/647/50768?from_cn_redirect=1
 	RecordId *string `json:"RecordId,omitempty" name:"RecordId"`
 
-	// Value range: [0, 1]. If it is 0, the recording template configured in the console will be used; if it is 1, streams are recorded as .mp3 files.
+	// Whether to record audio only. Valid values: 0, 1. `0`: no meaning; `1`: records into MP3 files. This parameter is not recommended. Instead, you are advised to create an audio-only recording template in the TRTC console.
 	RecordAudioOnly *uint64 `json:"RecordAudioOnly,omitempty" name:"RecordAudioOnly"`
+}
+
+type PictureInfo struct {
+
+	// Image height
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Image width
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// X-axis value of the image’s position
+	XPosition *uint64 `json:"XPosition,omitempty" name:"XPosition"`
+
+	// Y-axis value of the image’s position
+	YPosition *uint64 `json:"YPosition,omitempty" name:"YPosition"`
+
+	// Application ID
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Image ID
+	PictureId *uint64 `json:"PictureId,omitempty" name:"PictureId"`
 }
 
 type PresetLayoutConfig struct {

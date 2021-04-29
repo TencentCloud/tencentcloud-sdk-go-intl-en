@@ -866,6 +866,31 @@ func (c *Client) CreateHaVip(request *CreateHaVipRequest) (response *CreateHaVip
     return
 }
 
+func NewCreateLocalGatewayRequest() (request *CreateLocalGatewayRequest) {
+    request = &CreateLocalGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateLocalGateway")
+    return
+}
+
+func NewCreateLocalGatewayResponse() (response *CreateLocalGatewayResponse) {
+    response = &CreateLocalGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a local gateway for a CDC instance.
+func (c *Client) CreateLocalGateway(request *CreateLocalGatewayRequest) (response *CreateLocalGatewayResponse, err error) {
+    if request == nil {
+        request = NewCreateLocalGatewayRequest()
+    }
+    response = NewCreateLocalGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateNatGatewayRequest() (request *CreateNatGatewayRequest) {
     request = &CreateNatGatewayRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1320,6 +1345,81 @@ func (c *Client) CreateVpc(request *CreateVpcRequest) (response *CreateVpcRespon
     return
 }
 
+func NewCreateVpcEndPointRequest() (request *CreateVpcEndPointRequest) {
+    request = &CreateVpcEndPointRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateVpcEndPoint")
+    return
+}
+
+func NewCreateVpcEndPointResponse() (response *CreateVpcEndPointResponse) {
+    response = &CreateVpcEndPointResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create an endpoint.
+func (c *Client) CreateVpcEndPoint(request *CreateVpcEndPointRequest) (response *CreateVpcEndPointResponse, err error) {
+    if request == nil {
+        request = NewCreateVpcEndPointRequest()
+    }
+    response = NewCreateVpcEndPointResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateVpcEndPointServiceRequest() (request *CreateVpcEndPointServiceRequest) {
+    request = &CreateVpcEndPointServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateVpcEndPointService")
+    return
+}
+
+func NewCreateVpcEndPointServiceResponse() (response *CreateVpcEndPointServiceResponse) {
+    response = &CreateVpcEndPointServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create an endpoint service.
+func (c *Client) CreateVpcEndPointService(request *CreateVpcEndPointServiceRequest) (response *CreateVpcEndPointServiceResponse, err error) {
+    if request == nil {
+        request = NewCreateVpcEndPointServiceRequest()
+    }
+    response = NewCreateVpcEndPointServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateVpcEndPointServiceWhiteListRequest() (request *CreateVpcEndPointServiceWhiteListRequest) {
+    request = &CreateVpcEndPointServiceWhiteListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateVpcEndPointServiceWhiteList")
+    return
+}
+
+func NewCreateVpcEndPointServiceWhiteListResponse() (response *CreateVpcEndPointServiceWhiteListResponse) {
+    response = &CreateVpcEndPointServiceWhiteListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create the endpoint service allowlist.
+func (c *Client) CreateVpcEndPointServiceWhiteList(request *CreateVpcEndPointServiceWhiteListRequest) (response *CreateVpcEndPointServiceWhiteListResponse, err error) {
+    if request == nil {
+        request = NewCreateVpcEndPointServiceWhiteListRequest()
+    }
+    response = NewCreateVpcEndPointServiceWhiteListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateVpnConnectionRequest() (request *CreateVpnConnectionRequest) {
     request = &CreateVpnConnectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1622,6 +1722,31 @@ func (c *Client) DeleteHaVip(request *DeleteHaVipRequest) (response *DeleteHaVip
         request = NewDeleteHaVipRequest()
     }
     response = NewDeleteHaVipResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLocalGatewayRequest() (request *DeleteLocalGatewayRequest) {
+    request = &DeleteLocalGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteLocalGateway")
+    return
+}
+
+func NewDeleteLocalGatewayResponse() (response *DeleteLocalGatewayResponse) {
+    response = &DeleteLocalGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete the local gateway of a CDC instance.
+func (c *Client) DeleteLocalGateway(request *DeleteLocalGatewayRequest) (response *DeleteLocalGatewayResponse, err error) {
+    if request == nil {
+        request = NewDeleteLocalGatewayRequest()
+    }
+    response = NewDeleteLocalGatewayResponse()
     err = c.Send(request, response)
     return
 }
@@ -1982,6 +2107,82 @@ func (c *Client) DeleteVpc(request *DeleteVpcRequest) (response *DeleteVpcRespon
         request = NewDeleteVpcRequest()
     }
     response = NewDeleteVpcResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteVpcEndPointRequest() (request *DeleteVpcEndPointRequest) {
+    request = &DeleteVpcEndPointRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteVpcEndPoint")
+    return
+}
+
+func NewDeleteVpcEndPointResponse() (response *DeleteVpcEndPointResponse) {
+    response = &DeleteVpcEndPointResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete an endpoint.
+func (c *Client) DeleteVpcEndPoint(request *DeleteVpcEndPointRequest) (response *DeleteVpcEndPointResponse, err error) {
+    if request == nil {
+        request = NewDeleteVpcEndPointRequest()
+    }
+    response = NewDeleteVpcEndPointResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteVpcEndPointServiceRequest() (request *DeleteVpcEndPointServiceRequest) {
+    request = &DeleteVpcEndPointServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteVpcEndPointService")
+    return
+}
+
+func NewDeleteVpcEndPointServiceResponse() (response *DeleteVpcEndPointServiceResponse) {
+    response = &DeleteVpcEndPointServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete an endpoint service.
+// 
+func (c *Client) DeleteVpcEndPointService(request *DeleteVpcEndPointServiceRequest) (response *DeleteVpcEndPointServiceResponse, err error) {
+    if request == nil {
+        request = NewDeleteVpcEndPointServiceRequest()
+    }
+    response = NewDeleteVpcEndPointServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteVpcEndPointServiceWhiteListRequest() (request *DeleteVpcEndPointServiceWhiteListRequest) {
+    request = &DeleteVpcEndPointServiceWhiteListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteVpcEndPointServiceWhiteList")
+    return
+}
+
+func NewDeleteVpcEndPointServiceWhiteListResponse() (response *DeleteVpcEndPointServiceWhiteListResponse) {
+    response = &DeleteVpcEndPointServiceWhiteListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to delete the endpoint service allowlist.
+func (c *Client) DeleteVpcEndPointServiceWhiteList(request *DeleteVpcEndPointServiceWhiteListRequest) (response *DeleteVpcEndPointServiceWhiteListResponse, err error) {
+    if request == nil {
+        request = NewDeleteVpcEndPointServiceWhiteListRequest()
+    }
+    response = NewDeleteVpcEndPointServiceWhiteListResponse()
     err = c.Send(request, response)
     return
 }
@@ -2715,6 +2916,31 @@ func (c *Client) DescribeIpGeolocationInfos(request *DescribeIpGeolocationInfosR
     return
 }
 
+func NewDescribeLocalGatewayRequest() (request *DescribeLocalGatewayRequest) {
+    request = &DescribeLocalGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeLocalGateway")
+    return
+}
+
+func NewDescribeLocalGatewayResponse() (response *DescribeLocalGatewayResponse) {
+    response = &DescribeLocalGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query local gateways of a CDC instance.
+func (c *Client) DescribeLocalGateway(request *DescribeLocalGatewayRequest) (response *DescribeLocalGatewayResponse, err error) {
+    if request == nil {
+        request = NewDescribeLocalGatewayRequest()
+    }
+    response = NewDescribeLocalGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeNatGatewayDestinationIpPortTranslationNatRulesRequest() (request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) {
     request = &DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3136,6 +3362,81 @@ func (c *Client) DescribeTaskResult(request *DescribeTaskResultRequest) (respons
         request = NewDescribeTaskResultRequest()
     }
     response = NewDescribeTaskResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeVpcEndPointRequest() (request *DescribeVpcEndPointRequest) {
+    request = &DescribeVpcEndPointRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcEndPoint")
+    return
+}
+
+func NewDescribeVpcEndPointResponse() (response *DescribeVpcEndPointResponse) {
+    response = &DescribeVpcEndPointResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the endpoint list.
+func (c *Client) DescribeVpcEndPoint(request *DescribeVpcEndPointRequest) (response *DescribeVpcEndPointResponse, err error) {
+    if request == nil {
+        request = NewDescribeVpcEndPointRequest()
+    }
+    response = NewDescribeVpcEndPointResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeVpcEndPointServiceRequest() (request *DescribeVpcEndPointServiceRequest) {
+    request = &DescribeVpcEndPointServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcEndPointService")
+    return
+}
+
+func NewDescribeVpcEndPointServiceResponse() (response *DescribeVpcEndPointServiceResponse) {
+    response = &DescribeVpcEndPointServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the endpoint service list.
+func (c *Client) DescribeVpcEndPointService(request *DescribeVpcEndPointServiceRequest) (response *DescribeVpcEndPointServiceResponse, err error) {
+    if request == nil {
+        request = NewDescribeVpcEndPointServiceRequest()
+    }
+    response = NewDescribeVpcEndPointServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeVpcEndPointServiceWhiteListRequest() (request *DescribeVpcEndPointServiceWhiteListRequest) {
+    request = &DescribeVpcEndPointServiceWhiteListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcEndPointServiceWhiteList")
+    return
+}
+
+func NewDescribeVpcEndPointServiceWhiteListResponse() (response *DescribeVpcEndPointServiceWhiteListResponse) {
+    response = &DescribeVpcEndPointServiceWhiteListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the endpoint service allowlist.
+func (c *Client) DescribeVpcEndPointServiceWhiteList(request *DescribeVpcEndPointServiceWhiteListRequest) (response *DescribeVpcEndPointServiceWhiteListResponse, err error) {
+    if request == nil {
+        request = NewDescribeVpcEndPointServiceWhiteListRequest()
+    }
+    response = NewDescribeVpcEndPointServiceWhiteListResponse()
     err = c.Send(request, response)
     return
 }
@@ -3597,6 +3898,31 @@ func (c *Client) DisassociateNetworkInterfaceSecurityGroups(request *Disassociat
     return
 }
 
+func NewDisassociateVpcEndPointSecurityGroupsRequest() (request *DisassociateVpcEndPointSecurityGroupsRequest) {
+    request = &DisassociateVpcEndPointSecurityGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DisassociateVpcEndPointSecurityGroups")
+    return
+}
+
+func NewDisassociateVpcEndPointSecurityGroupsResponse() (response *DisassociateVpcEndPointSecurityGroupsResponse) {
+    response = &DisassociateVpcEndPointSecurityGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to unbind an endpoint from a security group.
+func (c *Client) DisassociateVpcEndPointSecurityGroups(request *DisassociateVpcEndPointSecurityGroupsRequest) (response *DisassociateVpcEndPointSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewDisassociateVpcEndPointSecurityGroupsRequest()
+    }
+    response = NewDisassociateVpcEndPointSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDownloadCustomerGatewayConfigurationRequest() (request *DownloadCustomerGatewayConfigurationRequest) {
     request = &DownloadCustomerGatewayConfigurationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3669,6 +3995,31 @@ func (c *Client) EnableGatewayFlowMonitor(request *EnableGatewayFlowMonitorReque
         request = NewEnableGatewayFlowMonitorRequest()
     }
     response = NewEnableGatewayFlowMonitorResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableVpcEndPointConnectRequest() (request *EnableVpcEndPointConnectRequest) {
+    request = &EnableVpcEndPointConnectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "EnableVpcEndPointConnect")
+    return
+}
+
+func NewEnableVpcEndPointConnectResponse() (response *EnableVpcEndPointConnectResponse) {
+    response = &EnableVpcEndPointConnectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to determine whether to accept the request of connecting with an endpoint.
+func (c *Client) EnableVpcEndPointConnect(request *EnableVpcEndPointConnectRequest) (response *EnableVpcEndPointConnectResponse, err error) {
+    if request == nil {
+        request = NewEnableVpcEndPointConnectRequest()
+    }
+    response = NewEnableVpcEndPointConnectResponse()
     err = c.Send(request, response)
     return
 }
@@ -4305,6 +4656,31 @@ func (c *Client) ModifyIpv6AddressesAttribute(request *ModifyIpv6AddressesAttrib
     return
 }
 
+func NewModifyLocalGatewayRequest() (request *ModifyLocalGatewayRequest) {
+    request = &ModifyLocalGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyLocalGateway")
+    return
+}
+
+func NewModifyLocalGatewayResponse() (response *ModifyLocalGatewayResponse) {
+    response = &ModifyLocalGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the local gateway of a CDC instance.
+func (c *Client) ModifyLocalGateway(request *ModifyLocalGatewayRequest) (response *ModifyLocalGatewayResponse, err error) {
+    if request == nil {
+        request = NewModifyLocalGatewayRequest()
+    }
+    response = NewModifyLocalGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyNatGatewayAttributeRequest() (request *ModifyNatGatewayAttributeRequest) {
     request = &ModifyNatGatewayAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4691,6 +5067,82 @@ func (c *Client) ModifyVpcAttribute(request *ModifyVpcAttributeRequest) (respons
         request = NewModifyVpcAttributeRequest()
     }
     response = NewModifyVpcAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyVpcEndPointAttributeRequest() (request *ModifyVpcEndPointAttributeRequest) {
+    request = &ModifyVpcEndPointAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpcEndPointAttribute")
+    return
+}
+
+func NewModifyVpcEndPointAttributeResponse() (response *ModifyVpcEndPointAttributeResponse) {
+    response = &ModifyVpcEndPointAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify endpoint attributes.
+func (c *Client) ModifyVpcEndPointAttribute(request *ModifyVpcEndPointAttributeRequest) (response *ModifyVpcEndPointAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyVpcEndPointAttributeRequest()
+    }
+    response = NewModifyVpcEndPointAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyVpcEndPointServiceAttributeRequest() (request *ModifyVpcEndPointServiceAttributeRequest) {
+    request = &ModifyVpcEndPointServiceAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpcEndPointServiceAttribute")
+    return
+}
+
+func NewModifyVpcEndPointServiceAttributeResponse() (response *ModifyVpcEndPointServiceAttributeResponse) {
+    response = &ModifyVpcEndPointServiceAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify endpoint service attributes.
+// 
+func (c *Client) ModifyVpcEndPointServiceAttribute(request *ModifyVpcEndPointServiceAttributeRequest) (response *ModifyVpcEndPointServiceAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyVpcEndPointServiceAttributeRequest()
+    }
+    response = NewModifyVpcEndPointServiceAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyVpcEndPointServiceWhiteListRequest() (request *ModifyVpcEndPointServiceWhiteListRequest) {
+    request = &ModifyVpcEndPointServiceWhiteListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpcEndPointServiceWhiteList")
+    return
+}
+
+func NewModifyVpcEndPointServiceWhiteListResponse() (response *ModifyVpcEndPointServiceWhiteListResponse) {
+    response = &ModifyVpcEndPointServiceWhiteListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the attributes of the endpoint service allowlist.
+func (c *Client) ModifyVpcEndPointServiceWhiteList(request *ModifyVpcEndPointServiceWhiteListRequest) (response *ModifyVpcEndPointServiceWhiteListResponse, err error) {
+    if request == nil {
+        request = NewModifyVpcEndPointServiceWhiteListRequest()
+    }
+    response = NewModifyVpcEndPointServiceWhiteListResponse()
     err = c.Send(request, response)
     return
 }

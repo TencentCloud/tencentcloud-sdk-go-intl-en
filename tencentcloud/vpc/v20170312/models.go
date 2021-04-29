@@ -2318,6 +2318,63 @@ func (r *CreateHaVipResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateLocalGatewayRequest struct {
+	*tchttp.BaseRequest
+
+	// Local gateway name
+	LocalGatewayName *string `json:"LocalGatewayName,omitempty" name:"LocalGatewayName"`
+
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+}
+
+func (r *CreateLocalGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateLocalGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LocalGatewayName")
+	delete(f, "VpcId")
+	delete(f, "CdcId")
+	if len(f) > 0 {
+		return errors.New("CreateLocalGatewayRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateLocalGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Local gateway information
+		LocalGateway *LocalGateway `json:"LocalGateway,omitempty" name:"LocalGateway"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateLocalGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateLocalGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateNatGatewayDestinationIpPortTranslationNatRuleRequest struct {
 	*tchttp.BaseRequest
 
@@ -3236,6 +3293,194 @@ func (r *CreateSubnetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateVpcEndPointRequest struct {
+	*tchttp.BaseRequest
+
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet instance ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Endpoint name
+	EndPointName *string `json:"EndPointName,omitempty" name:"EndPointName"`
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// Endpoint VIP. You can apply for a specified IP.
+	EndPointVip *string `json:"EndPointVip,omitempty" name:"EndPointVip"`
+
+	// Security group ID
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+}
+
+func (r *CreateVpcEndPointRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVpcEndPointRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "EndPointName")
+	delete(f, "EndPointServiceId")
+	delete(f, "EndPointVip")
+	delete(f, "SecurityGroupId")
+	if len(f) > 0 {
+		return errors.New("CreateVpcEndPointRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateVpcEndPointResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Endpoint details
+		EndPoint *EndPoint `json:"EndPoint,omitempty" name:"EndPoint"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateVpcEndPointResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVpcEndPointResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateVpcEndPointServiceRequest struct {
+	*tchttp.BaseRequest
+
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Endpoint service name
+	EndPointServiceName *string `json:"EndPointServiceName,omitempty" name:"EndPointServiceName"`
+
+	// Whether to automatically accept
+	AutoAcceptFlag *bool `json:"AutoAcceptFlag,omitempty" name:"AutoAcceptFlag"`
+
+	// Real server ID, such as `lb-xxx`.
+	ServiceInstanceId *string `json:"ServiceInstanceId,omitempty" name:"ServiceInstanceId"`
+
+	// Whether it is of the type `PassService`. Valid values: true: yes; false: no. Default value: false
+	IsPassService *bool `json:"IsPassService,omitempty" name:"IsPassService"`
+}
+
+func (r *CreateVpcEndPointServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVpcEndPointServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpcId")
+	delete(f, "EndPointServiceName")
+	delete(f, "AutoAcceptFlag")
+	delete(f, "ServiceInstanceId")
+	delete(f, "IsPassService")
+	if len(f) > 0 {
+		return errors.New("CreateVpcEndPointServiceRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateVpcEndPointServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Endpoint service details
+		EndPointService *EndPointService `json:"EndPointService,omitempty" name:"EndPointService"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateVpcEndPointServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVpcEndPointServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateVpcEndPointServiceWhiteListRequest struct {
+	*tchttp.BaseRequest
+
+	// UIN
+	UserUin *string `json:"UserUin,omitempty" name:"UserUin"`
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// Allowlist description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *CreateVpcEndPointServiceWhiteListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVpcEndPointServiceWhiteListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UserUin")
+	delete(f, "EndPointServiceId")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return errors.New("CreateVpcEndPointServiceWhiteListRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateVpcEndPointServiceWhiteListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateVpcEndPointServiceWhiteListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVpcEndPointServiceWhiteListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateVpcRequest struct {
 	*tchttp.BaseRequest
 
@@ -4091,6 +4336,60 @@ func (r *DeleteHaVipResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteLocalGatewayRequest struct {
+	*tchttp.BaseRequest
+
+	// Local gateway instance ID
+	LocalGatewayId *string `json:"LocalGatewayId,omitempty" name:"LocalGatewayId"`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+}
+
+func (r *DeleteLocalGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteLocalGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LocalGatewayId")
+	delete(f, "CdcId")
+	delete(f, "VpcId")
+	if len(f) > 0 {
+		return errors.New("DeleteLocalGatewayRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteLocalGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteLocalGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteLocalGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest struct {
 	*tchttp.BaseRequest
 
@@ -4708,6 +5007,148 @@ func (r *DeleteSubnetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteVpcEndPointRequest struct {
+	*tchttp.BaseRequest
+
+	// Endpoint ID
+	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
+}
+
+func (r *DeleteVpcEndPointRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVpcEndPointRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EndPointId")
+	if len(f) > 0 {
+		return errors.New("DeleteVpcEndPointRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteVpcEndPointResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteVpcEndPointResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVpcEndPointResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteVpcEndPointServiceRequest struct {
+	*tchttp.BaseRequest
+
+	// Endpoint ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+}
+
+func (r *DeleteVpcEndPointServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVpcEndPointServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EndPointServiceId")
+	if len(f) > 0 {
+		return errors.New("DeleteVpcEndPointServiceRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteVpcEndPointServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteVpcEndPointServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVpcEndPointServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteVpcEndPointServiceWhiteListRequest struct {
+	*tchttp.BaseRequest
+
+	// Array of user UINs
+	UserUin []*string `json:"UserUin,omitempty" name:"UserUin" list`
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+}
+
+func (r *DeleteVpcEndPointServiceWhiteListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVpcEndPointServiceWhiteListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UserUin")
+	delete(f, "EndPointServiceId")
+	if len(f) > 0 {
+		return errors.New("DeleteVpcEndPointServiceWhiteListRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteVpcEndPointServiceWhiteListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteVpcEndPointServiceWhiteListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVpcEndPointServiceWhiteListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteVpcRequest struct {
 	*tchttp.BaseRequest
 
@@ -5071,16 +5512,17 @@ type DescribeAddressesRequest struct {
 	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds" list`
 
 	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
-	// <li> `address-id` - String - Required: No - (Filter condition) Filter by the unique EIP ID in the format of `eip-11112222`.</li>
-	// <li> `address-name` - String - Required: No - (Filter condition) Filter by EIP name. Fuzzy filtering is not supported. </li>
-	// <li> `address-ip` - String - Required: No - (Filter condition) Filter by the IP address of EIP.</li>
-	// <li> address-status - String - Required: no - (Filter condition) Filter by the EIP state. Possible EIP states are: 'CREATING', 'BINDING', 'BIND', 'UNBINDING', 'UNBIND', 'OFFLINING', and 'BIND_ENI'.</li>
-	// <li> `instance-id` - String - Required: No - (Filter condition) Filter by the ID of the instance bound to the EIP in the format of `ins-11112222`.</li>
-	// <li> `private-ip-address` - String - Required: No - (Filter condition) Filter by the private IP bound to the EIP.</li>
-	// <li> `network-interface-id` - String - Required: No - (Filter condition) Filter by the ID of the ENI bound to the EIP in the format of `eni-11112222`.</li>
-	// <li> `is-arrears` - String - Required: No - (Filter condition) Filter by whether the EIP is overdue. (TRUE: The EIP is overdue | FALSE: The EIP billing status is normal)</li>
-	// <li> `address-type` - String - Required: No - (Filter condition) Filter by the IP type. Optional values: 'EIP'，'AnycastEIP'，'HighQualityEIP'</li>
-	// <li> `address-isp` - String - Required: No - (Filter condition) Filter by the ISP type. Optional values: 'BGP'，'CMCC'，'CUCC', 'CTCC'</li>
+	// <li> address-id - String - Required: No - (Filter condition) Filter by the unique EIP ID in the format of `eip-11112222`.</li>
+	// <li> address-name - String - Required: No - (Filter condition) Filter by the EIP name. Fuzzy filtering is not supported.</li>
+	// <li> address-ip - String - Required: No - (Filter condition) Filter by EIP.</li>
+	// <li> address-status - String - Required: No - (Filter condition) Filter by the EIP state. Valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
+	// <li> instance-id - String - Required: No - (Filter condition) Filter by the ID of the instance bound to the EIP in the format of `ins-11112222`.</li>
+	// <li> private-ip-address - String - Required: No - (Filter condition) Filter by the private IP address bound to the EIP.</li>
+	// <li> network-interface-id - String - Required: No - (Filter condition) Filter by the ID of the ENI bound to the EIP in the format of `eni-11112222`.</li>
+	// <li> is-arrears - String - Required: No - (Filter condition) Whether the EIP is overdue (TRUE: the EIP is overdue | FALSE: the billing status of the EIP is normal).</li>
+	// <li> address-type - String - Required: No - (Filter condition) Filter by the IP type. Valid values: `EIP`, `AnycastEIP`, and `HighQualityEIP`.</li>
+	// <li> address-isp - String - Required: No - (Filter condition) Filter by the ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
+	// <li> dedicated-cluster-id - String - Required: No - (Filter condition) Filter by the unique CDC ID in the format of `cluster-11112222`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// The Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
@@ -6618,6 +7060,67 @@ func (r *DescribeIpGeolocationInfosResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeLocalGatewayRequest struct {
+	*tchttp.BaseRequest
+
+	// Query criteria:
+	// vpc-id: filter by VPC ID; local-gateway-name: filter by local gateway name (fuzzy search is supported); local-gateway-id: filter by local gateway instance ID; cdc-id: filter by CDC instance ID.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeLocalGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLocalGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return errors.New("DescribeLocalGatewayRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLocalGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Information set of local gateways
+		LocalGatewaySet []*LocalGateway `json:"LocalGatewaySet,omitempty" name:"LocalGatewaySet" list`
+
+		// Total number of local gateways
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLocalGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLocalGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest struct {
 	*tchttp.BaseRequest
 
@@ -7695,6 +8198,203 @@ func (r *DescribeTaskResultResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTaskResultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVpcEndPointRequest struct {
+	*tchttp.BaseRequest
+
+	// Filter condition
+	// <li> end-point-service-id - String - (Filter condition) Endpoint service ID.</li>
+	// <li>end-point-name - String - (Filter condition) Endpoint instance name.</li>
+	// <li> end-point-id - String - (Filter condition) Endpoint instance ID.</li>
+	// <li> vpc-id - String - (Filter condition) VPC instance ID.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results per page; default value: 20; maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Endpoint ID list
+	EndPointId []*string `json:"EndPointId,omitempty" name:"EndPointId" list`
+}
+
+func (r *DescribeVpcEndPointRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpcEndPointRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "EndPointId")
+	if len(f) > 0 {
+		return errors.New("DescribeVpcEndPointRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVpcEndPointResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Endpoint
+		EndPointSet []*EndPoint `json:"EndPointSet,omitempty" name:"EndPointSet" list`
+
+		// Number of matched endpoints
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeVpcEndPointResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpcEndPointResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVpcEndPointServiceRequest struct {
+	*tchttp.BaseRequest
+
+	// Filter condition
+	// <li> service-id - String - (Filter condition) Unique endpoint service ID.</li>
+	// <li>service-name - String - (Filter condition) Endpoint service instance name.</li>
+	// <li>service-instance-id - String - (Filter condition) Unique real server ID in the format of `lb-xxx`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results per page; default value: 20; maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Endpoint service ID
+	EndPointServiceIds []*string `json:"EndPointServiceIds,omitempty" name:"EndPointServiceIds" list`
+}
+
+func (r *DescribeVpcEndPointServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpcEndPointServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "EndPointServiceIds")
+	if len(f) > 0 {
+		return errors.New("DescribeVpcEndPointServiceRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVpcEndPointServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Array of endpoint services
+		EndPointServiceSet []*EndPointService `json:"EndPointServiceSet,omitempty" name:"EndPointServiceSet" list`
+
+		// Number of matched results
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeVpcEndPointServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpcEndPointServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVpcEndPointServiceWhiteListRequest struct {
+	*tchttp.BaseRequest
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results per page; default value: 20; maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter condition
+	// <li> user-uin - String - (Filter condition) UIN.</li>
+	// <li> end-point-service-id - String - (Filter condition) Endpoint service ID.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+}
+
+func (r *DescribeVpcEndPointServiceWhiteListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpcEndPointServiceWhiteListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return errors.New("DescribeVpcEndPointServiceWhiteListRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVpcEndPointServiceWhiteListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Array of allowed endpoint services
+		VpcEndpointServiceUserSet []*VpcEndPointServiceUser `json:"VpcEndpointServiceUserSet,omitempty" name:"VpcEndpointServiceUserSet" list`
+
+		// Number of matched allowlists
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeVpcEndPointServiceWhiteListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpcEndPointServiceWhiteListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8796,6 +9496,56 @@ func (r *DisassociateNetworkInterfaceSecurityGroupsResponse) FromJsonString(s st
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DisassociateVpcEndPointSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+
+	// Array of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+
+	// Endpoint ID
+	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
+}
+
+func (r *DisassociateVpcEndPointSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisassociateVpcEndPointSecurityGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecurityGroupIds")
+	delete(f, "EndPointId")
+	if len(f) > 0 {
+		return errors.New("DisassociateVpcEndPointSecurityGroupsRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DisassociateVpcEndPointSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DisassociateVpcEndPointSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisassociateVpcEndPointSecurityGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DownloadCustomerGatewayConfigurationRequest struct {
 	*tchttp.BaseRequest
 
@@ -8954,6 +9704,138 @@ func (r *EnableGatewayFlowMonitorResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *EnableGatewayFlowMonitorResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableVpcEndPointConnectRequest struct {
+	*tchttp.BaseRequest
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// Endpoint ID
+	EndPointId []*string `json:"EndPointId,omitempty" name:"EndPointId" list`
+
+	// Whether to accept the request of connecting with an endpoint
+	AcceptFlag *bool `json:"AcceptFlag,omitempty" name:"AcceptFlag"`
+}
+
+func (r *EnableVpcEndPointConnectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableVpcEndPointConnectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EndPointServiceId")
+	delete(f, "EndPointId")
+	delete(f, "AcceptFlag")
+	if len(f) > 0 {
+		return errors.New("EnableVpcEndPointConnectRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableVpcEndPointConnectResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *EnableVpcEndPointConnectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableVpcEndPointConnectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type EndPoint struct {
+
+	// Endpoint ID
+	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// APP ID
+	EndPointOwner *string `json:"EndPointOwner,omitempty" name:"EndPointOwner"`
+
+	// Endpoint name
+	EndPointName *string `json:"EndPointName,omitempty" name:"EndPointName"`
+
+	// Endpoint service VPC ID
+	ServiceVpcId *string `json:"ServiceVpcId,omitempty" name:"ServiceVpcId"`
+
+	// Endpoint service VIP
+	ServiceVip *string `json:"ServiceVip,omitempty" name:"ServiceVip"`
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// Endpoint VIP
+	EndPointVip *string `json:"EndPointVip,omitempty" name:"EndPointVip"`
+
+	// Endpoint status. Valid values: `ACTIVE` (available), `PENDING` (to be accepted), `ACCEPTING` (being accepted), `REJECTED` (rejected), and `FAILED` (failed).
+	State *string `json:"State,omitempty" name:"State"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// ID list of security group instances bound with endpoints
+	GroupSet []*string `json:"GroupSet,omitempty" name:"GroupSet" list`
+
+	// Endpoint service name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+}
+
+type EndPointService struct {
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// APP ID
+	ServiceOwner *string `json:"ServiceOwner,omitempty" name:"ServiceOwner"`
+
+	// Endpoint service name
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Real server VIP
+	ServiceVip *string `json:"ServiceVip,omitempty" name:"ServiceVip"`
+
+	// Real server ID in the format of `lb-xxx`.
+	ServiceInstanceId *string `json:"ServiceInstanceId,omitempty" name:"ServiceInstanceId"`
+
+	// Whether to automatically accept
+	AutoAcceptFlag *bool `json:"AutoAcceptFlag,omitempty" name:"AutoAcceptFlag"`
+
+	// Number of associated endpoints
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EndPointCount *uint64 `json:"EndPointCount,omitempty" name:"EndPointCount"`
+
+	// Array of endpoints
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EndPointSet []*EndPoint `json:"EndPointSet,omitempty" name:"EndPointSet" list`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 type Filter struct {
@@ -9654,6 +10536,27 @@ type ItemPrice struct {
 
 	// Discount price of the prepaid product. Unit: CNY.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+}
+
+type LocalGateway struct {
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Local gateway instance ID
+	UniqLocalGwId *string `json:"UniqLocalGwId,omitempty" name:"UniqLocalGwId"`
+
+	// Local gateway name
+	LocalGatewayName *string `json:"LocalGatewayName,omitempty" name:"LocalGatewayName"`
+
+	// Local gateway IP
+	LocalGwIp *string `json:"LocalGwIp,omitempty" name:"LocalGwIp"`
+
+	// Creation time of the local gateway
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 type MigrateNetworkInterfaceRequest struct {
@@ -10634,6 +11537,64 @@ func (r *ModifyIpv6AddressesAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyLocalGatewayRequest struct {
+	*tchttp.BaseRequest
+
+	// Local gateway name
+	LocalGatewayName *string `json:"LocalGatewayName,omitempty" name:"LocalGatewayName"`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+
+	// Local gateway instance ID
+	LocalGatewayId *string `json:"LocalGatewayId,omitempty" name:"LocalGatewayId"`
+
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+}
+
+func (r *ModifyLocalGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLocalGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LocalGatewayName")
+	delete(f, "CdcId")
+	delete(f, "LocalGatewayId")
+	delete(f, "VpcId")
+	if len(f) > 0 {
+		return errors.New("ModifyLocalGatewayRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLocalGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLocalGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLocalGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyNatGatewayAttributeRequest struct {
 	*tchttp.BaseRequest
 
@@ -11463,6 +12424,176 @@ func (r *ModifyVpcAttributeResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyVpcAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyVpcEndPointAttributeRequest struct {
+	*tchttp.BaseRequest
+
+	// Endpoint ID
+	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
+
+	// Endpoint name
+	EndPointName *string `json:"EndPointName,omitempty" name:"EndPointName"`
+
+	// List of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+}
+
+func (r *ModifyVpcEndPointAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVpcEndPointAttributeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EndPointId")
+	delete(f, "EndPointName")
+	delete(f, "SecurityGroupIds")
+	if len(f) > 0 {
+		return errors.New("ModifyVpcEndPointAttributeRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyVpcEndPointAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyVpcEndPointAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVpcEndPointAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyVpcEndPointServiceAttributeRequest struct {
+	*tchttp.BaseRequest
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Endpoint service name
+	EndPointServiceName *string `json:"EndPointServiceName,omitempty" name:"EndPointServiceName"`
+
+	// Whether to automatically accept
+	AutoAcceptFlag *bool `json:"AutoAcceptFlag,omitempty" name:"AutoAcceptFlag"`
+
+	// Real server ID in the format of `lb-xxx`.
+	ServiceInstanceId *string `json:"ServiceInstanceId,omitempty" name:"ServiceInstanceId"`
+}
+
+func (r *ModifyVpcEndPointServiceAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVpcEndPointServiceAttributeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EndPointServiceId")
+	delete(f, "VpcId")
+	delete(f, "EndPointServiceName")
+	delete(f, "AutoAcceptFlag")
+	delete(f, "ServiceInstanceId")
+	if len(f) > 0 {
+		return errors.New("ModifyVpcEndPointServiceAttributeRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyVpcEndPointServiceAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyVpcEndPointServiceAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVpcEndPointServiceAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyVpcEndPointServiceWhiteListRequest struct {
+	*tchttp.BaseRequest
+
+	// User UIN
+	UserUin *string `json:"UserUin,omitempty" name:"UserUin"`
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// Allowlist description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *ModifyVpcEndPointServiceWhiteListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVpcEndPointServiceWhiteListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UserUin")
+	delete(f, "EndPointServiceId")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return errors.New("ModifyVpcEndPointServiceWhiteListRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyVpcEndPointServiceWhiteListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyVpcEndPointServiceWhiteListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVpcEndPointServiceWhiteListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -13583,6 +14714,24 @@ type Vpc struct {
 	// The secondary CIDR block.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet" list`
+}
+
+type VpcEndPointServiceUser struct {
+
+	// APP ID
+	Owner *uint64 `json:"Owner,omitempty" name:"Owner"`
+
+	// User UIN
+	UserUin *string `json:"UserUin,omitempty" name:"UserUin"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
 }
 
 type VpcIpv6Address struct {
