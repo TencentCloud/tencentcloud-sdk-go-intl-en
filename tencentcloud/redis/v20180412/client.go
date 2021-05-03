@@ -258,7 +258,7 @@ func NewDescribeCommonDBInstancesResponse() (response *DescribeCommonDBInstances
     return
 }
 
-// This API is used to query information of the Redis instance list.
+// (Disused) Queries the list of instances
 func (c *Client) DescribeCommonDBInstances(request *DescribeCommonDBInstancesRequest) (response *DescribeCommonDBInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeCommonDBInstancesRequest()
@@ -1489,6 +1489,31 @@ func (c *Client) UpgradeInstanceVersion(request *UpgradeInstanceVersionRequest) 
         request = NewUpgradeInstanceVersionRequest()
     }
     response = NewUpgradeInstanceVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeVersionToMultiAvailabilityZonesRequest() (request *UpgradeVersionToMultiAvailabilityZonesRequest) {
+    request = &UpgradeVersionToMultiAvailabilityZonesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "UpgradeVersionToMultiAvailabilityZones")
+    return
+}
+
+func NewUpgradeVersionToMultiAvailabilityZonesResponse() (response *UpgradeVersionToMultiAvailabilityZonesResponse) {
+    response = &UpgradeVersionToMultiAvailabilityZonesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to upgrade an instance to support multi-AZ deployment.
+func (c *Client) UpgradeVersionToMultiAvailabilityZones(request *UpgradeVersionToMultiAvailabilityZonesRequest) (response *UpgradeVersionToMultiAvailabilityZonesResponse, err error) {
+    if request == nil {
+        request = NewUpgradeVersionToMultiAvailabilityZonesRequest()
+    }
+    response = NewUpgradeVersionToMultiAvailabilityZonesResponse()
     err = c.Send(request, response)
     return
 }
