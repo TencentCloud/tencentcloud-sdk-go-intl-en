@@ -21,6 +21,72 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type APIDoc struct {
+
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+
+	// API document name
+	ApiDocName *string `json:"ApiDocName,omitempty" name:"ApiDocName"`
+
+	// API document build status
+	ApiDocStatus *string `json:"ApiDocStatus,omitempty" name:"ApiDocStatus"`
+}
+
+type APIDocInfo struct {
+
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+
+	// API document name
+	ApiDocName *string `json:"ApiDocName,omitempty" name:"ApiDocName"`
+
+	// API document build status
+	ApiDocStatus *string `json:"ApiDocStatus,omitempty" name:"ApiDocStatus"`
+
+	// Number of API documents
+	ApiCount *int64 `json:"ApiCount,omitempty" name:"ApiCount"`
+
+	// Number of views of API document
+	ViewCount *int64 `json:"ViewCount,omitempty" name:"ViewCount"`
+
+	// Number of releases of API document
+	ReleaseCount *int64 `json:"ReleaseCount,omitempty" name:"ReleaseCount"`
+
+	// API document access URI
+	ApiDocUri *string `json:"ApiDocUri,omitempty" name:"ApiDocUri"`
+
+	// API document password for sharing
+	SharePassword *string `json:"SharePassword,omitempty" name:"SharePassword"`
+
+	// API document update time
+	UpdatedTime *string `json:"UpdatedTime,omitempty" name:"UpdatedTime"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment information
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// ID of the API for which to generate the API document
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+
+	// Service name
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Name of the API for which to generate the API document
+	ApiNames []*string `json:"ApiNames,omitempty" name:"ApiNames" list`
+}
+
+type APIDocs struct {
+
+	// Number of API documents
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Basic information of API document
+	APIDocSet []*APIDoc `json:"APIDocSet,omitempty" name:"APIDocSet" list`
+}
+
 type ApiEnvironmentStrategy struct {
 
 	// Unique API ID.
@@ -732,6 +798,55 @@ func (r *BindSubDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BuildAPIDocRequest struct {
+	*tchttp.BaseRequest
+
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+}
+
+func (r *BuildAPIDocRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BuildAPIDocRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiDocId")
+	if len(f) > 0 {
+		return errors.New("BuildAPIDocRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BuildAPIDocResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether the operation succeeded
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BuildAPIDocResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BuildAPIDocResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ConstantParameter struct {
 
 	// Constant parameter name, which is used only if `ServiceType` is `HTTP`.
@@ -745,6 +860,67 @@ type ConstantParameter struct {
 
 	// Default value of constant parameter, which is used only if `ServiceType` is `HTTP`.
 	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
+}
+
+type CreateAPIDocRequest struct {
+	*tchttp.BaseRequest
+
+	// API document name
+	ApiDocName *string `json:"ApiDocName,omitempty" name:"ApiDocName"`
+
+	// Service name
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment name
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// List of APIs for which to generate documents
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+}
+
+func (r *CreateAPIDocRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAPIDocRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiDocName")
+	delete(f, "ServiceId")
+	delete(f, "Environment")
+	delete(f, "ApiIds")
+	if len(f) > 0 {
+		return errors.New("CreateAPIDocRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAPIDocResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Basic information of API document
+		Result *APIDoc `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateAPIDocResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAPIDocResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateApiKeyRequest struct {
@@ -836,7 +1012,7 @@ type CreateApiRequest struct {
 	// API type. Valid values: NORMAL (general API), TSF (microservice API). Default value: NORMAL.
 	ApiType *string `json:"ApiType,omitempty" name:"ApiType"`
 
-	// API authentication type. Valid values: SECRET (key pair authentication), NONE (no authentication), OAUTH. Default value: NONE.
+	// API authentication type. Valid values: SECRET (key pair authentication), NONE (no authentication), OAUTH, APP (application authentication). Default value: NONE.
 	AuthType *string `json:"AuthType,omitempty" name:"AuthType"`
 
 	// Whether to enable CORS.
@@ -1070,7 +1246,7 @@ type CreateIPStrategyRequest struct {
 	// Policy type. Valid values: WHITE (allowlist), BLACK (blocklist).
 	StrategyType *string `json:"StrategyType,omitempty" name:"StrategyType"`
 
-	// Policy details.
+	// Policy details. Multiple IPs are separated with \n.
 	StrategyData *string `json:"StrategyData,omitempty" name:"StrategyData"`
 }
 
@@ -1149,6 +1325,9 @@ type CreateServiceRequest struct {
 
 	// Tag information.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// Dedicated instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 func (r *CreateServiceRequest) ToJsonString() string {
@@ -1172,6 +1351,7 @@ func (r *CreateServiceRequest) FromJsonString(s string) error {
 	delete(f, "SetServerName")
 	delete(f, "AppIdType")
 	delete(f, "Tags")
+	delete(f, "InstanceId")
 	if len(f) > 0 {
 		return errors.New("CreateServiceRequest has unknown keys!")
 	}
@@ -1282,6 +1462,55 @@ func (r *CreateUsagePlanResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateUsagePlanResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteAPIDocRequest struct {
+	*tchttp.BaseRequest
+
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+}
+
+func (r *DeleteAPIDocRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAPIDocRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiDocId")
+	if len(f) > 0 {
+		return errors.New("DeleteAPIDocRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteAPIDocResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether the operation succeeded
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteAPIDocResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAPIDocResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1733,6 +1962,108 @@ type DesApisStatus struct {
 	// API request method, such as `GET`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Method *string `json:"Method,omitempty" name:"Method"`
+}
+
+type DescribeAPIDocDetailRequest struct {
+	*tchttp.BaseRequest
+
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+}
+
+func (r *DescribeAPIDocDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAPIDocDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiDocId")
+	if len(f) > 0 {
+		return errors.New("DescribeAPIDocDetailRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAPIDocDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// API document details
+		Result *APIDocInfo `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAPIDocDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAPIDocDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAPIDocsRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeAPIDocsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAPIDocsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return errors.New("DescribeAPIDocsRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAPIDocsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// API document list information
+		Result *APIDocs `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAPIDocsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAPIDocsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DescribeApiEnvironmentStrategyRequest struct {
@@ -2735,6 +3066,18 @@ type DescribeServiceResponse struct {
 	// Note: this field may return null, indicating that no valid values found.
 		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
 
+		// Dedicated instance ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+		// Dedicated instance name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+		// Cluster type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		SetType *string `json:"SetType,omitempty" name:"SetType"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -2928,7 +3271,7 @@ type DescribeServicesStatusRequest struct {
 	// Offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Filter. Valid values: ServiceId, ServiceName, NotUsagePlanId, Environment, IpVersion.
+	// Filter. Valid values: ServiceId, ServiceName, NotUsagePlanId, Environment, IpVersion, InstanceId
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 }
 
@@ -3366,6 +3709,10 @@ type EnvironmentStrategy struct {
 
 	// Throttling value
 	Quota *int64 `json:"Quota,omitempty" name:"Quota"`
+
+	// Maximum quota value
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MaxQuota *int64 `json:"MaxQuota,omitempty" name:"MaxQuota"`
 }
 
 type ErrorCodes struct {
@@ -3593,6 +3940,71 @@ type MicroServiceReq struct {
 	MicroServiceName *string `json:"MicroServiceName,omitempty" name:"MicroServiceName"`
 }
 
+type ModifyAPIDocRequest struct {
+	*tchttp.BaseRequest
+
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+
+	// API document name
+	ApiDocName *string `json:"ApiDocName,omitempty" name:"ApiDocName"`
+
+	// Service name
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment name
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// List of APIs for which to generate documents
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+}
+
+func (r *ModifyAPIDocRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAPIDocRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiDocId")
+	delete(f, "ApiDocName")
+	delete(f, "ServiceId")
+	delete(f, "Environment")
+	delete(f, "ApiIds")
+	if len(f) > 0 {
+		return errors.New("ModifyAPIDocRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAPIDocResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Basic information of API document
+		Result *APIDoc `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyAPIDocResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAPIDocResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyApiEnvironmentStrategyRequest struct {
 	*tchttp.BaseRequest
 
@@ -3741,7 +4153,7 @@ type ModifyApiRequest struct {
 	// API type. Valid values: NORMAL, TSF. Default value: NORMAL.
 	ApiType *string `json:"ApiType,omitempty" name:"ApiType"`
 
-	// API authentication type. Valid values: SECRET, NONE, OAUTH. Default value: NONE.
+	// API authentication type. Valid values: SECRET, NONE, OAUTH, APP. Default value: NONE.
 	AuthType *string `json:"AuthType,omitempty" name:"AuthType"`
 
 	// Whether signature authentication is required. True: yes; False: no. This parameter is to be disused.
@@ -4416,6 +4828,55 @@ type RequestParameter struct {
 	Required *bool `json:"Required,omitempty" name:"Required"`
 }
 
+type ResetAPIDocPasswordRequest struct {
+	*tchttp.BaseRequest
+
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+}
+
+func (r *ResetAPIDocPasswordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetAPIDocPasswordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiDocId")
+	if len(f) > 0 {
+		return errors.New("ResetAPIDocPasswordRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ResetAPIDocPasswordResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Basic information of API document
+		Result *APIDoc `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ResetAPIDocPasswordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetAPIDocPasswordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ResponseErrorCodeReq struct {
 
 	// Custom response configuration error code.
@@ -4499,6 +4960,14 @@ type Service struct {
 	// Tags bound to a service.
 	// Note: this field may return null, indicating that no valid values found.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// Dedicated instance
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Cluster type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SetType *string `json:"SetType,omitempty" name:"SetType"`
 }
 
 type ServiceConfig struct {
@@ -4547,6 +5016,10 @@ type ServiceEnvironmentStrategy struct {
 
 	// Throttling value.
 	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
+
+	// Maximum quota value
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MaxStrategy *int64 `json:"MaxStrategy,omitempty" name:"MaxStrategy"`
 }
 
 type ServiceEnvironmentStrategyStatus struct {

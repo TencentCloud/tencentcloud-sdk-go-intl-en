@@ -1648,6 +1648,31 @@ func (c *Client) DescribeTranscodeTemplates(request *DescribeTranscodeTemplatesR
     return
 }
 
+func NewDescribeVodDomainsRequest() (request *DescribeVodDomainsRequest) {
+    request = &DescribeVodDomainsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeVodDomains")
+    return
+}
+
+func NewDescribeVodDomainsResponse() (response *DescribeVodDomainsResponse) {
+    response = &DescribeVodDomainsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of VOD domain names.
+func (c *Client) DescribeVodDomains(request *DescribeVodDomainsRequest) (response *DescribeVodDomainsResponse, err error) {
+    if request == nil {
+        request = NewDescribeVodDomainsRequest()
+    }
+    response = NewDescribeVodDomainsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeWatermarkTemplatesRequest() (request *DescribeWatermarkTemplatesRequest) {
     request = &DescribeWatermarkTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},

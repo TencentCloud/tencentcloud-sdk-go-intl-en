@@ -992,6 +992,22 @@ type DirectConnect struct {
 	// Whether the connection has the service agreement signed.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	SignLaw *bool `json:"SignLaw,omitempty" name:"SignLaw"`
+
+	// Whether the connection is an edge zone.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	LocalZone *bool `json:"LocalZone,omitempty" name:"LocalZone"`
+
+	// Number of dedicated tunnels with disabled VLAN in the connection
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VlanZeroDirectConnectTunnelCount *uint64 `json:"VlanZeroDirectConnectTunnelCount,omitempty" name:"VlanZeroDirectConnectTunnelCount"`
+
+	// Number of dedicated tunnels with enabled VLAN in the connection
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	OtherVlanDirectConnectTunnelCount *uint64 `json:"OtherVlanDirectConnectTunnelCount,omitempty" name:"OtherVlanDirectConnectTunnelCount"`
+
+	// Minimum bandwidth of the connection
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MinBandwidth *uint64 `json:"MinBandwidth,omitempty" name:"MinBandwidth"`
 }
 
 type DirectConnectTunnel struct {

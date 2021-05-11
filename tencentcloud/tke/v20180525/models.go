@@ -1801,6 +1801,10 @@ type DescribeClusterEndpointStatusResponse struct {
 		// Queries cluster access port status (Created = successfully enabled; Creating = in the process of being enabled; NotFound = not enabled).
 		Status *string `json:"Status,omitempty" name:"Status"`
 
+		// Details of the error occurred while opening the access port
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`

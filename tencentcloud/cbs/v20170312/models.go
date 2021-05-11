@@ -1106,10 +1106,10 @@ func (r *DescribeSnapshotsResponse) FromJsonString(s string) error {
 type DetachDisksRequest struct {
 	*tchttp.BaseRequest
 
-	// ID of the cloud disk to be unmounted, which can be queried through the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1). A maximum of 10 elastic cloud disks can be unmounted in a single request.
+	// IDs of the cloud disks to be unmounted, which can be queried via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API. Up to 10 elastic cloud disks can be unmounted in a single request.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
 
-	// For a cloud disk that is not shared, this parameter is ignored. For a shared cloud disk, this parameter indicates which CVM instance the cloud disk is to be unmounted from.
+	// Indicates the CVM from which you want to unmount the disks. This parameter is only available for shared cloud disks.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -1262,7 +1262,7 @@ type Disk struct {
 	// The total capacity of the snapshots of the cloud disk. Unit: MB.
 	SnapshotSize *uint64 `json:"SnapshotSize,omitempty" name:"SnapshotSize"`
 
-	// Indicates whether a snapshot should be created for backup when the cloud disk is terminated due to arrears or expiration. `True`: create a snapshot to backup the disk upon termination. `False`: terminate the disk without backup
+	// Specifies whether to create a snapshot when the cloud disk is terminated due to overdue payment or expiration. `true`: create snapshot; `false`: do not create snapshot.
 	BackupDisk *bool `json:"BackupDisk,omitempty" name:"BackupDisk"`
 
 	// Extra performance for a cloud disk, in MB/sec.
@@ -1417,6 +1417,59 @@ type Image struct {
 
 	// Image name.
 	ImageName *string `json:"ImageName,omitempty" name:"ImageName"`
+}
+
+type InquirePriceModifyDiskExtraPerformanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Cloud disk ID, which can be queried via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// The extra throughput to purchase, in MB/s
+	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
+}
+
+func (r *InquirePriceModifyDiskExtraPerformanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceModifyDiskExtraPerformanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskId")
+	delete(f, "ThroughputPerformance")
+	if len(f) > 0 {
+		return errors.New("InquirePriceModifyDiskExtraPerformanceRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePriceModifyDiskExtraPerformanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Price for purchasing the extra performance
+		DiskPrice *Price `json:"DiskPrice,omitempty" name:"DiskPrice"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquirePriceModifyDiskExtraPerformanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceModifyDiskExtraPerformanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type InquiryPriceCreateDisksRequest struct {
@@ -1678,6 +1731,56 @@ func (r *ModifyDiskAttributesResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyDiskAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDiskExtraPerformanceRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the cloud disk to create a snapshot, which can be obtained via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// The extra throughput to purchase, in MB/s
+	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
+}
+
+func (r *ModifyDiskExtraPerformanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDiskExtraPerformanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskId")
+	delete(f, "ThroughputPerformance")
+	if len(f) > 0 {
+		return errors.New("ModifyDiskExtraPerformanceRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDiskExtraPerformanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDiskExtraPerformanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDiskExtraPerformanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

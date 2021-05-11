@@ -2257,7 +2257,7 @@ func (r *DescribeLoadBalancersDetailResponse) FromJsonString(s string) error {
 type DescribeLoadBalancersRequest struct {
 	*tchttp.BaseRequest
 
-	// CLB instance ID.
+	// CLB instance ID
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds" list`
 
 	// CLB instance network type:
@@ -2307,10 +2307,10 @@ type DescribeLoadBalancersRequest struct {
 	// Basic network does not support queries by VpcId.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Security group ID, such as sg-m1cc9123
+	// Security group ID, e.g., `sg-m1cc****`.
 	SecurityGroup *string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
-	// Master AZ, such as "100001" (Guangzhou Zone 1)
+	// Primary AZ ID, e.g., `100001` (Guangzhou Zone 1).
 	MasterZone *string `json:"MasterZone,omitempty" name:"MasterZone"`
 
 	// Each request can have up to 10 `Filters` and 100 `Filter.Values`. Detailed filter conditions:

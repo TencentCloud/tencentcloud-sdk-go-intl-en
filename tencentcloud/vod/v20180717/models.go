@@ -111,6 +111,22 @@ type AIRecognitionTemplateItem struct {
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
+type AccelerateAreaInfo struct {
+
+	// Acceleration region. Valid values:
+	// <li>Chinese Mainland</li>
+	// <li>Outside Chinese Mainland</li>
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Reason why acceleration is disabled by Tencent Cloud. Valid values:
+	// <li>ForLegalReasons: legal reasons</li>
+	// <li>ForOverdueBills: overdue payment</li>
+	TencentDisableReason *string `json:"TencentDisableReason,omitempty" name:"TencentDisableReason"`
+
+	// CNAME of the acceleration domain name
+	TencentEdgeDomain *string `json:"TencentEdgeDomain,omitempty" name:"TencentEdgeDomain"`
+}
+
 type AdaptiveDynamicStreamingInfoItem struct {
 
 	// Adaptive bitrate streaming specification.
@@ -134,6 +150,9 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// List of up to 10 image or text watermarks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+
+	// List of subtitle IDs (maximum: 10)
+	SubtitleSet []*string `json:"SubtitleSet,omitempty" name:"SubtitleSet" list`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
@@ -2256,10 +2275,10 @@ type ComposeMediaTask struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
 
-	// 
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// 
+	// ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 }
 
@@ -6525,6 +6544,71 @@ func (r *DescribeTranscodeTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeVodDomainsRequest struct {
+	*tchttp.BaseRequest
+
+	// List of domain names. If this parameter is left empty, all domain names will be listed.
+	// <li>Maximum number of domain names listed: 20</li>
+	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+
+	// Maximum results to return for pulling paginated queries. Default value: 20
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number offset from the beginning of paginated queries. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeVodDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVodDomainsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domains")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return errors.New("DescribeVodDomainsRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVodDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of domain names
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Domain name information list
+		DomainSet []*DomainDetailInfo `json:"DomainSet,omitempty" name:"DomainSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeVodDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVodDomainsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeWatermarkTemplatesRequest struct {
 	*tchttp.BaseRequest
 
@@ -6676,6 +6760,45 @@ func (r *DescribeWordSamplesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribeWordSamplesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DomainDetailInfo struct {
+
+	// Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Acceleration region information
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	AccelerateAreaInfos []*AccelerateAreaInfo `json:"AccelerateAreaInfos,omitempty" name:"AccelerateAreaInfos" list`
+
+	// Deployment status. Valid values:
+	// <li>Online</li>
+	// <li>Deploying</li>
+	// <li>Locked: you cannot change the deployment status of locked domain names</li>
+	DeployStatus *string `json:"DeployStatus,omitempty" name:"DeployStatus"`
+
+	// HTTPS configuration information
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	HTTPSConfig *DomainHTTPSConfig `json:"HTTPSConfig,omitempty" name:"HTTPSConfig"`
+
+	// [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986) configuration
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	UrlSignatureAuthPolicy *UrlSignatureAuthPolicy `json:"UrlSignatureAuthPolicy,omitempty" name:"UrlSignatureAuthPolicy"`
+
+	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/33985) configuration
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	RefererAuthPolicy *RefererAuthPolicy `json:"RefererAuthPolicy,omitempty" name:"RefererAuthPolicy"`
+
+	// The time when the domain name was added in the VOD system
+	// <li>The time is in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732).</li>
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
+type DomainHTTPSConfig struct {
+
+	// Time when the certificate expires
+	// <li>The time is in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732).</li>
+	CertExpireTime *string `json:"CertExpireTime,omitempty" name:"CertExpireTime"`
 }
 
 type DrmStreamingsInfo struct {
@@ -7769,8 +7892,7 @@ type MediaBasicInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SourceInfo *MediaSourceData `json:"SourceInfo,omitempty" name:"SourceInfo"`
 
-	// Storage region of media file, such as ap-guangzhou. For more information, please see [Region List](https://intl.cloud.tencent.com/document/api/213/15692?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Region](https://intl.cloud.tencent.com/document/product/266/9760).
 	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
 
 	// Tag information of media file.
@@ -7790,6 +7912,9 @@ type MediaBasicInfo struct {
 	// 
 	// *Note: this field is not supported yet.
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// 
+	StorageClass *string `json:"StorageClass,omitempty" name:"StorageClass"`
 }
 
 type MediaClassInfo struct {
@@ -8051,6 +8176,10 @@ type MediaInfo struct {
 	// WeChat Mini Program audit information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MiniProgramReviewInfo *MediaMiniProgramReviewInfo `json:"MiniProgramReviewInfo,omitempty" name:"MiniProgramReviewInfo"`
+
+	// Subtitle information
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	SubtitleInfo *MediaSubtitleInfo `json:"SubtitleInfo,omitempty" name:"SubtitleInfo"`
 
 	// Unique ID of media file.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
@@ -8508,6 +8637,12 @@ type MediaSourceData struct {
 	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
 }
 
+type MediaSubtitleInfo struct {
+
+	// Subtitle information list
+	SubtitleSet []*MediaSubtitleItem `json:"SubtitleSet,omitempty" name:"SubtitleSet" list`
+}
+
 type MediaSubtitleInput struct {
 
 	// Subtitle name. Length limit: 64 characters
@@ -8533,19 +8668,24 @@ type MediaSubtitleInput struct {
 
 type MediaSubtitleItem struct {
 
-	// 
+	// Unique subtitle ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// 
+	// Subtitle name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// 
+	// Subtitle language. Common values:
+	// <li>`cn`: Chinese</li>
+	// <li>`ja`: Japanese</li>
+	// <li>`en-US`: English</li>
+	// For other values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
 	Language *string `json:"Language,omitempty" name:"Language"`
 
-	// 
+	// Subtitle format. Valid value:
+	// <li>vtt</li>
 	Format *string `json:"Format,omitempty" name:"Format"`
 
-	// 
+	// Subtitle URL
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
@@ -11324,6 +11464,27 @@ func (r *PushUrlCacheResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type RefererAuthPolicy struct {
+
+	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/33985) status. Valid values:
+	// <li>Enabled</li>
+	// <li>Disabled</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Referer authentication method. Valid values:
+	// <li>`Black`: blocklist</li>
+	// <li>`White`: allowlist</li>
+	AuthType *string `json:"AuthType,omitempty" name:"AuthType"`
+
+	// List for referer authentication
+	Referers []*string `json:"Referers,omitempty" name:"Referers" list`
+
+	// Whether to allow requests with empty referer to access this domain name. Valid values:
+	// <li>Yes</li>
+	// <li>No</li>
+	BlankRefererAllowed *string `json:"BlankRefererAllowed,omitempty" name:"BlankRefererAllowed"`
+}
+
 type ResetProcedureTemplateRequest struct {
 	*tchttp.BaseRequest
 
@@ -12622,6 +12783,17 @@ type TransitionOpertion struct {
 	// </li>
 	// </ul>
 	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type UrlSignatureAuthPolicy struct {
+
+	// [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986) status. Valid values:
+	// <li>Enabled</li>
+	// <li>Disabled</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The key for generating the signature of [key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986)
+	EncryptedKey *string `json:"EncryptedKey,omitempty" name:"EncryptedKey"`
 }
 
 type UserDefineAsrTextReviewTemplateInfo struct {

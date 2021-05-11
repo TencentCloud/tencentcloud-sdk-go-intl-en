@@ -505,6 +505,10 @@ type CommonMixControlParams struct {
 	// Value range: [0,1].
 	// If this parameter is set to 1, when both `InputStreamList` and `OutputParams.OutputStreamType` are set to 1, you can copy a stream instead of canceling it.
 	AllowCopy *int64 `json:"AllowCopy,omitempty" name:"AllowCopy"`
+
+	// Valid values: 0, 1
+	// If you set this parameter to 1, SEI (Supplemental Enhanced Information) of the input streams will be passed through.
+	PassInputSei *int64 `json:"PassInputSei,omitempty" name:"PassInputSei"`
 }
 
 type CommonMixCropParams struct {
@@ -3407,6 +3411,9 @@ type DescribeLiveForbidStreamListRequest struct {
 	// Value: any integer between 1 and 100.
 	// Default value: 10.
 	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// The stream name to search for
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 }
 
 func (r *DescribeLiveForbidStreamListRequest) ToJsonString() string {
@@ -3423,6 +3430,7 @@ func (r *DescribeLiveForbidStreamListRequest) FromJsonString(s string) error {
 	}
 	delete(f, "PageNum")
 	delete(f, "PageSize")
+	delete(f, "StreamName")
 	if len(f) > 0 {
 		return errors.New("DescribeLiveForbidStreamListRequest has unknown keys!")
 	}
