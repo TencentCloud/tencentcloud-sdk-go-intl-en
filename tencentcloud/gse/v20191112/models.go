@@ -23,7 +23,7 @@ import (
 
 type CcnInfo struct {
 
-	// CCN account
+	// Account of the CCN instance owner
 	AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
 
 	// CCN ID
@@ -72,7 +72,7 @@ type CopyFleetRequest struct {
 	// Whether to select scaling. Valid values: SCALING_SELECTED, SCALING_UNSELECTED. Default value: SCALING_UNSELECTED.
 	SelectedScalingType *string `json:"SelectedScalingType,omitempty" name:"SelectedScalingType"`
 
-	// Whether to select CCN: CCN_SELECTED_BEFORE_CREATE (associated before creation), CCN_SELECTED_AFTER_CREATE (associated after creation), or CCN_UNSELECTED (not associated); CCN_UNSELECTED by default
+	// Whether to associate the fleet with a CCN instance: CCN_SELECTED_BEFORE_CREATE (associate before creation), CCN_SELECTED_AFTER_CREATE (associated after creation), or CCN_UNSELECTED (do not associate); CCN_UNSELECTED by default
 	SelectedCcnType *string `json:"SelectedCcnType,omitempty" name:"SelectedCcnType"`
 
 	// Tag list. Up to 50 tags.
@@ -87,8 +87,11 @@ type CopyFleetRequest struct {
 	// Whether to select to replicate the timer policy: TIMER_SELECTED or TIMER_UNSELECTED. The default value is TIMER_UNSELECTED.
 	SelectedTimerType *string `json:"SelectedTimerType,omitempty" name:"SelectedTimerType"`
 
-	// CCN information, including the corresponding CCN account and ID.
+	// Information of the CCN instance, including the owner account and the instance ID.
 	CcnInfos []*CcnInfo `json:"CcnInfos,omitempty" name:"CcnInfos" list`
+
+	// 
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 }
 
 func (r *CopyFleetRequest) ToJsonString() string {
@@ -122,6 +125,7 @@ func (r *CopyFleetRequest) FromJsonString(s string) error {
 	delete(f, "DataDiskInfo")
 	delete(f, "SelectedTimerType")
 	delete(f, "CcnInfos")
+	delete(f, "InternetMaxBandwidthOut")
 	if len(f) > 0 {
 		return errors.New("CopyFleetRequest has unknown keys!")
 	}
@@ -738,9 +742,12 @@ type FleetAttributes struct {
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	SystemDiskInfo *DiskInfo `json:"SystemDiskInfo,omitempty" name:"SystemDiskInfo"`
 
-	// CCN information
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// CCN instance information
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	RelatedCcnInfos []*RelatedCcnInfo `json:"RelatedCcnInfos,omitempty" name:"RelatedCcnInfos" list`
+
+	// 
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 }
 
 type GameProperty struct {
@@ -1283,13 +1290,13 @@ func (r *PutTimerScalingPolicyResponse) FromJsonString(s string) error {
 
 type RelatedCcnInfo struct {
 
-	// CCN account
+	// Account of the CCN instance owner
 	AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
 
-	// CCN ID
+	// CCN instance ID
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
-	// Status of associated CCN
+	// Status of associated CCN instance
 	AttachType *string `json:"AttachType,omitempty" name:"AttachType"`
 }
 
