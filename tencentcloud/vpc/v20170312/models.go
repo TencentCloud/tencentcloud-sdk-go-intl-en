@@ -301,8 +301,9 @@ type AllocateAddressesRequest struct {
 	// A required billing parameter for an EIP billed by monthly bandwidth subscription. For EIPs using other billing modes, it can be ignored.
 	AddressChargePrepaid *AddressChargePrepaid `json:"AddressChargePrepaid,omitempty" name:"AddressChargePrepaid"`
 
-	// The EIP type. Default: EIP.
-	// <ul style="margin:0"><li>For a user who has activated the AIA allowlist, possible values are:<ul><li>AnycastEIP: an Anycast EIP address. For more information, see [Anycast Internet Acceleration](https://intl.cloud.tencent.com/document/product/644?from_cn_redirect=1).</li></ul>Note: Only certain regions support Anycast EIPs.</li></ul>
+	// The EIP type. Default: `EIP`.
+	// <ul style="margin:0"><li>For AIA beta users, the value should be:<ul><li>`AnycastEIP`: an AIA IP address. For more information, see [Anycast Internet Acceleration](https://intl.cloud.tencent.com/document/product/644?from_cn_redirect=1).</li></ul>Note: Anycast EIPs are only supported in some of the regions.</li></ul>
+	// <ul style="margin:0"><li>For high-quality IP beta users, the value should be: <ul><li>`HighQualityEIP`: high-quality IP</li></ul>Note: High-quality IPs are only supported in some of the regions.</li></ul>
 	AddressType *string `json:"AddressType,omitempty" name:"AddressType"`
 
 	// Anycast publishing region
@@ -320,6 +321,9 @@ type AllocateAddressesRequest struct {
 
 	// The unique ID of a BGP bandwidth package. If you configure this parameter and set InternetChargeType as BANDWIDTH_PACKAGE, the new EIP is added to this package and billed by the bandwidth package mode.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+
+	// EIP name, which is the custom EIP name given by the user when applying for the EIP. Default: not named
+	AddressName *string `json:"AddressName,omitempty" name:"AddressName"`
 }
 
 func (r *AllocateAddressesRequest) ToJsonString() string {
@@ -344,6 +348,7 @@ func (r *AllocateAddressesRequest) FromJsonString(s string) error {
 	delete(f, "ApplicableForCLB")
 	delete(f, "Tags")
 	delete(f, "BandwidthPackageId")
+	delete(f, "AddressName")
 	if len(f) > 0 {
 		return errors.New("AllocateAddressesRequest has unknown keys!")
 	}

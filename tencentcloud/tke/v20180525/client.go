@@ -1143,6 +1143,31 @@ func (c *Client) RemoveNodeFromNodePool(request *RemoveNodeFromNodePoolRequest) 
     return
 }
 
+func NewSetNodePoolNodeProtectionRequest() (request *SetNodePoolNodeProtectionRequest) {
+    request = &SetNodePoolNodeProtectionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "SetNodePoolNodeProtection")
+    return
+}
+
+func NewSetNodePoolNodeProtectionResponse() (response *SetNodePoolNodeProtectionResponse) {
+    response = &SetNodePoolNodeProtectionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to enable removal protection for the nodes automatically created by the scaling group in a node pool.
+func (c *Client) SetNodePoolNodeProtection(request *SetNodePoolNodeProtectionRequest) (response *SetNodePoolNodeProtectionResponse, err error) {
+    if request == nil {
+        request = NewSetNodePoolNodeProtectionRequest()
+    }
+    response = NewSetNodePoolNodeProtectionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateClusterVersionRequest() (request *UpdateClusterVersionRequest) {
     request = &UpdateClusterVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},

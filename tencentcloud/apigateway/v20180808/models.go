@@ -44,7 +44,7 @@ type APIDocInfo struct {
 	// API document build status
 	ApiDocStatus *string `json:"ApiDocStatus,omitempty" name:"ApiDocStatus"`
 
-	// Number of API documents
+	// Number of APIs with API documents
 	ApiCount *int64 `json:"ApiCount,omitempty" name:"ApiCount"`
 
 	// Number of views of API document

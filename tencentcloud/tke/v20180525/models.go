@@ -76,7 +76,7 @@ type AddExistedInstancesRequest struct {
 	// Instance list. Spot instance is not supported.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
 
-	// Additional parameter to be set for the instance
+	// Detailed information of the instance
 	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
 
 	// Enhanced services. This parameter is used to specify whether to enable Cloud Security, Cloud Monitoring and other services. If this parameter is not specified, Cloud Monitor and Cloud Security are enabled by default.
@@ -2364,6 +2364,9 @@ type DescribeExistedInstancesRequest struct {
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on Limit, see the relevant section in the API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter by multiple instance IPs
+	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses" list`
 }
 
 func (r *DescribeExistedInstancesRequest) ToJsonString() string {
@@ -2385,6 +2388,7 @@ func (r *DescribeExistedInstancesRequest) FromJsonString(s string) error {
 	delete(f, "VagueInstanceName")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "IpAddresses")
 	if len(f) > 0 {
 		return errors.New("DescribeExistedInstancesRequest has unknown keys!")
 	}
@@ -3530,6 +3534,48 @@ type RunSecurityServiceEnabled struct {
 
 	// Whether to enable [Cloud Security](https://intl.cloud.tencent.com/document/product/296?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
 	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+}
+
+type SetNodePoolNodeProtectionRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *SetNodePoolNodeProtectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetNodePoolNodeProtectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return errors.New("SetNodePoolNodeProtectionRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type SetNodePoolNodeProtectionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SetNodePoolNodeProtectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetNodePoolNodeProtectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type Tag struct {

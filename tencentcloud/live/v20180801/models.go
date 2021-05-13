@@ -1424,20 +1424,20 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Template description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
+	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
+	NeedVideo *int64 `json:"NeedVideo,omitempty" name:"NeedVideo"`
+
 	// Width. Default value: 0.
 	// Value range: 0-3000
 	// It must be a multiple of 2. The original width is 0.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
-	NeedVideo *int64 `json:"NeedVideo,omitempty" name:"NeedVideo"`
-
 	// Whether to keep the audio. 0: no; 1: yes. Default value: 1.
 	NeedAudio *int64 `json:"NeedAudio,omitempty" name:"NeedAudio"`
 
 	// Height. Default value: 0.
-	// Value range: 0-3000
-	// It must be a multiple of 2. The original height is 0.
+	// Value range: [0,3000]
+	// The value must be a multiple of 2, and 0 is the original height.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
 	// Frame rate. Default value: 0.
@@ -1502,8 +1502,8 @@ func (r *CreateLiveTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "AudioBitrate")
 	delete(f, "Vcodec")
 	delete(f, "Description")
-	delete(f, "Width")
 	delete(f, "NeedVideo")
+	delete(f, "Width")
 	delete(f, "NeedAudio")
 	delete(f, "Height")
 	delete(f, "Fps")
@@ -2439,6 +2439,9 @@ type DescribeAllStreamPlayInfoListRequest struct {
 
 	// Query time point accurate to the minute. You can query data within the last month. As there is a 5-minute delay in the data, you're advised to pass in a time point 5 minutes earlier than needed. Format: yyyy-mm-dd HH:MM:00. As the accuracy is to the minute, please set the value of second to `00`.
 	QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
+
+	// Playback domain name list. If this parameter is left empty, full data will be queried.
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
 }
 
 func (r *DescribeAllStreamPlayInfoListRequest) ToJsonString() string {
@@ -2454,6 +2457,7 @@ func (r *DescribeAllStreamPlayInfoListRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "QueryTime")
+	delete(f, "PlayDomains")
 	if len(f) > 0 {
 		return errors.New("DescribeAllStreamPlayInfoListRequest has unknown keys!")
 	}
@@ -5128,6 +5132,15 @@ type DescribeStreamDayPlayInfoListRequest struct {
 
 	// Number of entries per page. Value range: [100,1000]. Default value: 1,000.
 	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Valid values:
+	// Mainland: query data for Mainland China,
+	// Oversea: query data for regions outside Mainland China,
+	// Default: query data for all regions.
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
+
+	// Service name. Valid values: LVB, LEB. If this parameter is left empty, all data of LVB and LEB will be queried.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 }
 
 func (r *DescribeStreamDayPlayInfoListRequest) ToJsonString() string {
@@ -5146,6 +5159,8 @@ func (r *DescribeStreamDayPlayInfoListRequest) FromJsonString(s string) error {
 	delete(f, "PlayDomain")
 	delete(f, "PageNum")
 	delete(f, "PageSize")
+	delete(f, "MainlandOrOversea")
+	delete(f, "ServiceName")
 	if len(f) > 0 {
 		return errors.New("DescribeStreamDayPlayInfoListRequest has unknown keys!")
 	}
@@ -5210,7 +5225,7 @@ type DescribeStreamPlayInfoListRequest struct {
 	// Note: to query by `AppName`, you need to submit a ticket first. After your application succeeds, it will take about 5 business days (subject to the time in the reply) for the configuration to take effect.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
-	// 
+	// Service name. Valid values: LVB, LEB. If this parameter is left empty, all data of LVB and LEB will be queried.
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 }
 

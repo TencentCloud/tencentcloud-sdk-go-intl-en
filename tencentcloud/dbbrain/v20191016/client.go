@@ -93,6 +93,31 @@ func (c *Client) CreateDBDiagReportTask(request *CreateDBDiagReportTaskRequest) 
     return
 }
 
+func NewCreateDBDiagReportUrlRequest() (request *CreateDBDiagReportUrlRequest) {
+    request = &CreateDBDiagReportUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "CreateDBDiagReportUrl")
+    return
+}
+
+func NewCreateDBDiagReportUrlResponse() (response *CreateDBDiagReportUrlResponse) {
+    response = &CreateDBDiagReportUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a URL for a health report.
+func (c *Client) CreateDBDiagReportUrl(request *CreateDBDiagReportUrlRequest) (response *CreateDBDiagReportUrlResponse, err error) {
+    if request == nil {
+        request = NewCreateDBDiagReportUrlRequest()
+    }
+    response = NewCreateDBDiagReportUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateMailProfileRequest() (request *CreateMailProfileRequest) {
     request = &CreateMailProfileRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -239,6 +264,31 @@ func (c *Client) DescribeDBDiagHistory(request *DescribeDBDiagHistoryRequest) (r
         request = NewDescribeDBDiagHistoryRequest()
     }
     response = NewDescribeDBDiagHistoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBDiagReportTasksRequest() (request *DescribeDBDiagReportTasksRequest) {
+    request = &DescribeDBDiagReportTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeDBDiagReportTasks")
+    return
+}
+
+func NewDescribeDBDiagReportTasksResponse() (response *DescribeDBDiagReportTasksResponse) {
+    response = &DescribeDBDiagReportTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of health report generation tasks.
+func (c *Client) DescribeDBDiagReportTasks(request *DescribeDBDiagReportTasksRequest) (response *DescribeDBDiagReportTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBDiagReportTasksRequest()
+    }
+    response = NewDescribeDBDiagReportTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -393,6 +443,81 @@ func (c *Client) DescribeSlowLogTopSqls(request *DescribeSlowLogTopSqlsRequest) 
     return
 }
 
+func NewDescribeSlowLogUserHostStatsRequest() (request *DescribeSlowLogUserHostStatsRequest) {
+    request = &DescribeSlowLogUserHostStatsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeSlowLogUserHostStats")
+    return
+}
+
+func NewDescribeSlowLogUserHostStatsResponse() (response *DescribeSlowLogUserHostStatsResponse) {
+    response = &DescribeSlowLogUserHostStatsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the statistical distribution chart of slow log source addresses.
+func (c *Client) DescribeSlowLogUserHostStats(request *DescribeSlowLogUserHostStatsRequest) (response *DescribeSlowLogUserHostStatsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowLogUserHostStatsRequest()
+    }
+    response = NewDescribeSlowLogUserHostStatsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTopSpaceSchemaTimeSeriesRequest() (request *DescribeTopSpaceSchemaTimeSeriesRequest) {
+    request = &DescribeTopSpaceSchemaTimeSeriesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeTopSpaceSchemaTimeSeries")
+    return
+}
+
+func NewDescribeTopSpaceSchemaTimeSeriesResponse() (response *DescribeTopSpaceSchemaTimeSeriesResponse) {
+    response = &DescribeTopSpaceSchemaTimeSeriesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the daily space data of top databases consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The return results are sorted by size by default.
+func (c *Client) DescribeTopSpaceSchemaTimeSeries(request *DescribeTopSpaceSchemaTimeSeriesRequest) (response *DescribeTopSpaceSchemaTimeSeriesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopSpaceSchemaTimeSeriesRequest()
+    }
+    response = NewDescribeTopSpaceSchemaTimeSeriesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTopSpaceSchemasRequest() (request *DescribeTopSpaceSchemasRequest) {
+    request = &DescribeTopSpaceSchemasRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeTopSpaceSchemas")
+    return
+}
+
+func NewDescribeTopSpaceSchemasResponse() (response *DescribeTopSpaceSchemasResponse) {
+    response = &DescribeTopSpaceSchemasResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query real-time space statistics of top databases. The return results are sorted by size by default.
+func (c *Client) DescribeTopSpaceSchemas(request *DescribeTopSpaceSchemasRequest) (response *DescribeTopSpaceSchemasResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopSpaceSchemasRequest()
+    }
+    response = NewDescribeTopSpaceSchemasResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTopSpaceTableTimeSeriesRequest() (request *DescribeTopSpaceTableTimeSeriesRequest) {
     request = &DescribeTopSpaceTableTimeSeriesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -439,6 +564,31 @@ func (c *Client) DescribeTopSpaceTables(request *DescribeTopSpaceTablesRequest) 
         request = NewDescribeTopSpaceTablesRequest()
     }
     response = NewDescribeTopSpaceTablesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUserSqlAdviceRequest() (request *DescribeUserSqlAdviceRequest) {
+    request = &DescribeUserSqlAdviceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeUserSqlAdvice")
+    return
+}
+
+func NewDescribeUserSqlAdviceResponse() (response *DescribeUserSqlAdviceResponse) {
+    response = &DescribeUserSqlAdviceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain SQL statement optimization suggestions.
+func (c *Client) DescribeUserSqlAdvice(request *DescribeUserSqlAdviceRequest) (response *DescribeUserSqlAdviceResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserSqlAdviceRequest()
+    }
+    response = NewDescribeUserSqlAdviceResponse()
     err = c.Send(request, response)
     return
 }
