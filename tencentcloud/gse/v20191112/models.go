@@ -90,7 +90,7 @@ type CopyFleetRequest struct {
 	// Information of the CCN instance, including the owner account and the instance ID.
 	CcnInfos []*CcnInfo `json:"CcnInfos,omitempty" name:"CcnInfos" list`
 
-	// 
+	// Maximum outbound public network bandwidth of the server fleet. Value range: 1 - 200 Mbps. Default value: 100 Mbps.
 	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 }
 
@@ -746,7 +746,8 @@ type FleetAttributes struct {
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	RelatedCcnInfos []*RelatedCcnInfo `json:"RelatedCcnInfos,omitempty" name:"RelatedCcnInfos" list`
 
-	// 
+	// Maximum outbound public network bandwidth of the server fleet. Value range: 1 - 200 Mbps. Default value: 100 Mbps.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 }
 
