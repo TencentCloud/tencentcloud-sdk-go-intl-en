@@ -23,10 +23,10 @@ import (
 
 type CountryCodeItem struct {
 
-	// Country English Name
+	// Country/region name in English
 	EnName *string `json:"EnName,omitempty" name:"EnName"`
 
-	// Country Chinese Name
+	// Country/region name in Chinese
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// IOS2 standard country/region code
@@ -35,39 +35,39 @@ type CountryCodeItem struct {
 	// IOS3 standard country/region code
 	IOS3 *string `json:"IOS3,omitempty" name:"IOS3"`
 
-	// Phone Code
+	// Phone code
 	Code *string `json:"Code,omitempty" name:"Code"`
 }
 
 type CreateAccountRequest struct {
 	*tchttp.BaseRequest
 
-	// The account type identification of the newly created customer. The value of this interface is: business
+	// Account type of a new customer. Valid value: `business`.
 	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
 
-	// Registered email address. The caller needs to ensure the validity and correctness of the email address.
-	// The email format must be met. For example: account@qq.com
+	// Registered email address, which should be valid and correct.
+	// For example, account@qq.com.
 	Mail *string `json:"Mail,omitempty" name:"Mail"`
 
-	// Account password.
-	// Length limit: [8,20].
-	// It must also contain numbers, letters and special symbols (!@#$%^&*() and other non-spaces)
+	// Account password
+	// Length limit: 8-20 characters
+	// A password must contain numbers, letters, and special symbols [!@#$%^&*()]. Spaces are not allowed.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// Reconfirm the password. It must be the same as the Password value
+	// Confirm the password. It must be the same as the `Password` field.
 	ConfirmPassword *string `json:"ConfirmPassword,omitempty" name:"ConfirmPassword"`
 
-	// Customer's mobile phone number. The caller is required to ensure the validity and correctness of the mobile phone number.
-	// Length limit: [1,32]. Global mobile phone numbers are supported. For example, 18888888888
+	// Customer mobile number, which should be valid and correct.
+	// A global mobile number within 1-32 digits is allowed, such as 18888888888.
 	PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
 
-	// The country code of the customer. For the value, please refer to the GetCountryCodes interface GetCountryCodes. Such as 86
+	// Country code, which can be obtained via the `GetCountryCodes` API, such as `86`.
 	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
 
-	// Customer's IOS2 standard country code. Refer to the GetCountryCodes interface for obtaining country codes. It needs to correspond to the CountryCode value. Such as CN
+	// ISO2 standard country code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// Extension field, default is empty
+	// Expanded field, which is left empty by default.
 	Extended *string `json:"Extended,omitempty" name:"Extended"`
 }
 
@@ -101,7 +101,7 @@ type CreateAccountResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The uin of the account
+		// Account UIN
 		Uin *string `json:"Uin,omitempty" name:"Uin"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -146,7 +146,7 @@ type GetCountryCodesResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// List of Country Codes
+		// List of country/region codes
 		Data []*CountryCodeItem `json:"Data,omitempty" name:"Data" list`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

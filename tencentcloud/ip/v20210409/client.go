@@ -58,11 +58,11 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
     return
 }
 
-// On the partner platform, create a Tencent Cloud account. After the sub-customer is registered, it will be automatically bound to the partner account.
+// This API is used to create a Tencent Cloud account in the International Partner platform for a customer. After registration, the customer will be automatically bound to the partner account.
 // 
-// Notes: <br>
-// 1. Create a Tencent Cloud account and enter the email address , Mobile phone number, the partner needs to verify the validity.<br>
-// 2, the customer needs to add personal information for the first login
+// Notes:<br>
+// 1. To create the Tencent Cloud account, the partner should enter and verify the customer’s email address and mobile number.<br>
+// 2. The customer needs to complete personal information after the first login.
 func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateAccountResponse, err error) {
     if request == nil {
         request = NewCreateAccountRequest()
@@ -87,7 +87,7 @@ func NewGetCountryCodesResponse() (response *GetCountryCodesResponse) {
     return
 }
 
-// Get country and region code
+// This API is used to obtain country and region codes.
 func (c *Client) GetCountryCodes(request *GetCountryCodesRequest) (response *GetCountryCodesResponse, err error) {
     if request == nil {
         request = NewGetCountryCodesRequest()
