@@ -75,6 +75,18 @@ func (r *AssociateSecurityGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BriefNodeInfo struct {
+
+	// Node ID
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+
+	// Node role. Valid values: `master`, `slave`
+	Role *string `json:"Role,omitempty" name:"Role"`
+
+	// The ID of the shard where the node resides
+	ShardId *string `json:"ShardId,omitempty" name:"ShardId"`
+}
+
 type CloneAccountRequest struct {
 	*tchttp.BaseRequest
 
@@ -1090,6 +1102,66 @@ func (r *DescribeDBSyncModeResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDBSyncModeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDCDBInstanceNodeInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The maximum number of results returned at a time. Value range: `(0-100]`. Default value: `100`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset of the returned results. Default value: `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeDCDBInstanceNodeInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDCDBInstanceNodeInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return errors.New("DescribeDCDBInstanceNodeInfoRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDCDBInstanceNodeInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of nodes
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Node information
+		NodesInfo []*BriefNodeInfo `json:"NodesInfo,omitempty" name:"NodesInfo" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDCDBInstanceNodeInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDCDBInstanceNodeInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

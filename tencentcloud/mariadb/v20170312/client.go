@@ -546,6 +546,31 @@ func (c *Client) DescribeFlow(request *DescribeFlowRequest) (response *DescribeF
     return
 }
 
+func NewDescribeInstanceNodeInfoRequest() (request *DescribeInstanceNodeInfoRequest) {
+    request = &DescribeInstanceNodeInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mariadb", APIVersion, "DescribeInstanceNodeInfo")
+    return
+}
+
+func NewDescribeInstanceNodeInfoResponse() (response *DescribeInstanceNodeInfoResponse) {
+    response = &DescribeInstanceNodeInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the information of primary and replica nodes of an instance.
+func (c *Client) DescribeInstanceNodeInfo(request *DescribeInstanceNodeInfoRequest) (response *DescribeInstanceNodeInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceNodeInfoRequest()
+    }
+    response = NewDescribeInstanceNodeInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLogFileRetentionPeriodRequest() (request *DescribeLogFileRetentionPeriodRequest) {
     request = &DescribeLogFileRetentionPeriodRequest{
         BaseRequest: &tchttp.BaseRequest{},

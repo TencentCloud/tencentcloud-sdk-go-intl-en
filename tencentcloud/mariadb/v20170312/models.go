@@ -1605,6 +1605,66 @@ func (r *DescribeFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeInstanceNodeInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID, such as tdsql-6ltok4u9
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The maximum number of results returned at a time. By default, there is no upper limit to this value, that is, all results can be returned.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset of the returned results. Default value: `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeInstanceNodeInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceNodeInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return errors.New("DescribeInstanceNodeInfoRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceNodeInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of nodes
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Node information
+		NodesInfo []*NodeInfo `json:"NodesInfo,omitempty" name:"NodesInfo" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceNodeInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceNodeInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeLogFileRetentionPeriodRequest struct {
 	*tchttp.BaseRequest
 
@@ -2304,6 +2364,15 @@ type MonitorData struct {
 
 	// Monitoring data
 	Data []*float64 `json:"Data,omitempty" name:"Data" list`
+}
+
+type NodeInfo struct {
+
+	// Node ID
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+
+	// Node role. Valid values: `master`, `slave`
+	Role *string `json:"Role,omitempty" name:"Role"`
 }
 
 type OpenDBExtranetAccessRequest struct {
