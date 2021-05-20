@@ -158,7 +158,7 @@ func NewCreateSnapshotsResponse() (response *CreateSnapshotsResponse) {
     return
 }
 
-// This API is used to create one or more table snapshots at specific points in time in the past.
+// This API is used to create one or more table snapshots at a specified past time point.
 func (c *Client) CreateSnapshots(request *CreateSnapshotsRequest) (response *CreateSnapshotsResponse, err error) {
     if request == nil {
         request = NewCreateSnapshotsRequest()

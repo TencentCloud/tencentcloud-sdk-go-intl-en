@@ -1111,7 +1111,7 @@ type DescribeDCDBInstanceNodeInfoRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// The maximum number of results returned at a time. Value range: `(0-100]`. Default value: `100`.
+	// The maximum number of results returned at a time. Value range: (0-100]. Default value: `100`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset of the returned results. Default value: `0`.

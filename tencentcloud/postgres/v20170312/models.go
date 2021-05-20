@@ -1793,7 +1793,7 @@ type DisIsolateDBInstancesRequest struct {
 	// Resource ID list
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet" list`
 
-	// Specify the valid period (in months) of the monthly-subscribed instance when removing it from isolation
+	// The valid period (in months) of the monthly-subscribed instance when removing it from isolation
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
 	// Whether to use vouchers

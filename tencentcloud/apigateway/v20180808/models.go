@@ -1677,6 +1677,9 @@ type DeleteServiceRequest struct {
 
 	// Unique ID of the service to be deleted.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// A parameter which is specified to skip the deletion precondition verification (only supported for services on dedicated instances).
+	SkipVerification *int64 `json:"SkipVerification,omitempty" name:"SkipVerification"`
 }
 
 func (r *DeleteServiceRequest) ToJsonString() string {
@@ -1692,6 +1695,7 @@ func (r *DeleteServiceRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ServiceId")
+	delete(f, "SkipVerification")
 	if len(f) > 0 {
 		return errors.New("DeleteServiceRequest has unknown keys!")
 	}
