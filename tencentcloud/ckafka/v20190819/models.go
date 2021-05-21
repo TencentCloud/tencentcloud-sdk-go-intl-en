@@ -74,6 +74,39 @@ type Assignment struct {
 	Topics []*GroupInfoTopics `json:"Topics,omitempty" name:"Topics" list`
 }
 
+type ClusterInfo struct {
+
+	// Cluster ID
+	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// The cluster’s maximum disk capacity in GB
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	MaxDiskSize *int64 `json:"MaxDiskSize,omitempty" name:"MaxDiskSize"`
+
+	// The cluster’s maximum bandwidth in MB/s
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	MaxBandWidth *int64 `json:"MaxBandWidth,omitempty" name:"MaxBandWidth"`
+
+	// The cluster’s available disk capacity in GB
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	AvailableDiskSize *int64 `json:"AvailableDiskSize,omitempty" name:"AvailableDiskSize"`
+
+	// The cluster’s available bandwidth in MB/s
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	AvailableBandWidth *int64 `json:"AvailableBandWidth,omitempty" name:"AvailableBandWidth"`
+
+	// The AZ which the cluster belongs to
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The AZ which the cluster nodes belong to. If the cluster is a multi-AZ cluster, this field means multiple AZs which the cluster nodes belong to.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds" list`
+}
+
 type Config struct {
 
 	// Message retention period
@@ -859,6 +892,51 @@ func (r *DescribeAppInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeCkafkaZoneRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeCkafkaZoneRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCkafkaZoneRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return errors.New("DescribeCkafkaZoneRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCkafkaZoneResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The entity of query result complex objects
+		Result *ZoneResponse `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCkafkaZoneResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCkafkaZoneResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeConsumerGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -1305,6 +1383,64 @@ func (r *DescribeInstancesResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRegionRequest struct {
+	*tchttp.BaseRequest
+
+	// The offset value
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of results returned
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Business field, which can be ignored.
+	Business *string `json:"Business,omitempty" name:"Business"`
+}
+
+func (r *DescribeRegionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRegionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Business")
+	if len(f) > 0 {
+		return errors.New("DescribeRegionRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRegionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of the returned results of enumerated regions
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+		Result []*Region `json:"Result,omitempty" name:"Result" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRegionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRegionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2312,6 +2448,47 @@ type PartitionOffset struct {
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 
+type Price struct {
+
+	// Discounted price
+	RealTotalCost *float64 `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// Original price
+	TotalCost *float64 `json:"TotalCost,omitempty" name:"TotalCost"`
+}
+
+type Region struct {
+
+	// Region ID
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Region name
+	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+
+	// Area name
+	AreaName *string `json:"AreaName,omitempty" name:"AreaName"`
+
+	// Region code
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	RegionCode *string `json:"RegionCode,omitempty" name:"RegionCode"`
+
+	// Region code (V3)
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	RegionCodeV3 *string `json:"RegionCodeV3,omitempty" name:"RegionCodeV3"`
+
+	// NONE: no special models are supported by default.\nCVM: the CVM type is supported.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Support *string `json:"Support,omitempty" name:"Support"`
+
+	// Whether ipv6 is supported. `0` indicates no, and `1` indicates yes.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Ipv6 *int64 `json:"Ipv6,omitempty" name:"Ipv6"`
+
+	// Whether multi-zone clusters are supported.`0` indicates no, and `1` indicates yes.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	MultiZone *int64 `json:"MultiZone,omitempty" name:"MultiZone"`
+}
+
 type Route struct {
 
 	// Instance connection method
@@ -2543,4 +2720,69 @@ type VipEntity struct {
 
 	// Virtual port
 	Vport *string `json:"Vport,omitempty" name:"Vport"`
+}
+
+type ZoneInfo struct {
+
+	// Zone ID
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Whether it is an internal App.
+	IsInternalApp *int64 `json:"IsInternalApp,omitempty" name:"IsInternalApp"`
+
+	// app id
+	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Identifier
+	Flag *bool `json:"Flag,omitempty" name:"Flag"`
+
+	// Zone name
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// Zone status
+	ZoneStatus *int64 `json:"ZoneStatus,omitempty" name:"ZoneStatus"`
+
+	// Extra identifier
+	Exflag *string `json:"Exflag,omitempty" name:"Exflag"`
+
+	// JSON object. The key is the model. The value `true` means “sold out”, and `false` means “not sold out”.
+	SoldOut *string `json:"SoldOut,omitempty" name:"SoldOut"`
+}
+
+type ZoneResponse struct {
+
+	// Zone list
+	ZoneList []*ZoneInfo `json:"ZoneList,omitempty" name:"ZoneList" list`
+
+	// Maximum number of instances to be purchased
+	MaxBuyInstanceNum *int64 `json:"MaxBuyInstanceNum,omitempty" name:"MaxBuyInstanceNum"`
+
+	// Maximum bandwidth in MB/S
+	MaxBandwidth *int64 `json:"MaxBandwidth,omitempty" name:"MaxBandwidth"`
+
+	// Pay-as-you-go unit price
+	UnitPrice *Price `json:"UnitPrice,omitempty" name:"UnitPrice"`
+
+	// Pay-as-you-go unit message price
+	MessagePrice *Price `json:"MessagePrice,omitempty" name:"MessagePrice"`
+
+	// Cluster information dedicated to a user
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	ClusterInfo []*ClusterInfo `json:"ClusterInfo,omitempty" name:"ClusterInfo" list`
+
+	// Purchase of Standard Edition configurations
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Standard *string `json:"Standard,omitempty" name:"Standard"`
+
+	// Purchase of Standard S2 Edition configurations
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	StandardS2 *string `json:"StandardS2,omitempty" name:"StandardS2"`
+
+	// Purchase of Pro Edition configurations
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Profession *string `json:"Profession,omitempty" name:"Profession"`
+
+	// Purchase of Physical Dedicated Edition configurations
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Physical *string `json:"Physical,omitempty" name:"Physical"`
 }

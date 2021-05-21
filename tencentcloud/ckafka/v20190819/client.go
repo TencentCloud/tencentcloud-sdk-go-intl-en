@@ -318,6 +318,31 @@ func (c *Client) DescribeAppInfo(request *DescribeAppInfoRequest) (response *Des
     return
 }
 
+func NewDescribeCkafkaZoneRequest() (request *DescribeCkafkaZoneRequest) {
+    request = &DescribeCkafkaZoneRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ckafka", APIVersion, "DescribeCkafkaZone")
+    return
+}
+
+func NewDescribeCkafkaZoneResponse() (response *DescribeCkafkaZoneResponse) {
+    response = &DescribeCkafkaZoneResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to view the availability zone (AZ) list of Ckafka.
+func (c *Client) DescribeCkafkaZone(request *DescribeCkafkaZoneRequest) (response *DescribeCkafkaZoneResponse, err error) {
+    if request == nil {
+        request = NewDescribeCkafkaZoneRequest()
+    }
+    response = NewDescribeCkafkaZoneResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeConsumerGroupRequest() (request *DescribeConsumerGroupRequest) {
     request = &DescribeConsumerGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -489,6 +514,31 @@ func (c *Client) DescribeInstancesDetail(request *DescribeInstancesDetailRequest
         request = NewDescribeInstancesDetailRequest()
     }
     response = NewDescribeInstancesDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRegionRequest() (request *DescribeRegionRequest) {
+    request = &DescribeRegionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ckafka", APIVersion, "DescribeRegion")
+    return
+}
+
+func NewDescribeRegionResponse() (response *DescribeRegionResponse) {
+    response = &DescribeRegionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to enumerate regions, only including Guangzhou.
+func (c *Client) DescribeRegion(request *DescribeRegionRequest) (response *DescribeRegionResponse, err error) {
+    if request == nil {
+        request = NewDescribeRegionRequest()
+    }
+    response = NewDescribeRegionResponse()
     err = c.Send(request, response)
     return
 }
