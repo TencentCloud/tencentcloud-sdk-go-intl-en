@@ -628,7 +628,8 @@ type CreateLaunchConfigurationRequest struct {
 	// CVM HostName settings.
 	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitempty" name:"HostNameSettings"`
 
-	// Settings of CVM instance names.
+	// Settings of CVM instance names
+	// If this field is configured in a launch configuration, the `InstanceName` of a CVM created by the scaling group will be generated according to the configuration; otherwise, it will be in the `as-{{AutoScalingGroupName }}` format.
 	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitempty" name:"InstanceNameSettings"`
 
 	// Sets prepaid billing mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
@@ -717,7 +718,7 @@ type CreateLifecycleHookRequest struct {
 	// Defined actions when lifecycle hook times out. Valid values: "CONTINUE" and "ABANDON". Default value: "CONTINUE"
 	DefaultResult *string `json:"DefaultResult,omitempty" name:"DefaultResult"`
 
-	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-3,600. Default value: 300
+	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7,200. Default value: 300
 	HeartbeatTimeout *int64 `json:"HeartbeatTimeout,omitempty" name:"HeartbeatTimeout"`
 
 	// Additional information of a notification that Auto Scaling sends to targets. This parameter is left empty by default. Up to 1024 characters are allowed.
@@ -2337,11 +2338,11 @@ type ForwardLoadBalancer struct {
 
 type HostNameSettings struct {
 
-	// Host name of a CVM.
-	// <br><li> A period (.) and hyphen (-) cannot be used as the first and the last characters of HostName, and multiple consecutive hyphens (-) or periods (.) are not allowed.
-	// <br><li> No support for Windows instances.
-	// <br><li> Other types of instances (such as Linux): the name should be a combination of 2 to 40 characters, supports multiple periods (.). The string between two periods can be composed of letters (case insensitive), numbers, and hyphens (-).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Hostname of a CVM
+	// <br><li>The `HostName` cannot start or end with a period (.) or hyphen (-), and cannot contain consecutive periods and hyphens.
+	// <br><li>This field is unavailable to CVM instances.
+	// <br><li>Other types of instances (such as Linux): the name contains 2 to 40 characters, and supports multiple periods (.). The string between two periods can consist of letters (case insensitive), numbers, and hyphens (-), and cannot be all numbers.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
 
 	// Type of CVM host name. Valid values: "ORIGINAL" and "UNIQUE". Default value: "ORIGINAL"
@@ -2427,12 +2428,12 @@ type InstanceMarketOptionsRequest struct {
 
 type InstanceNameSettings struct {
 
-	// CVM instance name.
+	// CVM instance name
 	// 
-	// The InstanceName cannot start or end with a period (.) or hyphen (-), and cannot contain consecutive periods and hyphens.
+	// The `InstanceName` cannot start or end with a period (.) or hyphen (-), and cannot contain consecutive periods and hyphens.
 	// 
-	// Other types (such as Linux) of instances: The name should be a combination of 2 to 40 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-).
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Other types of instances (such as Linux): the name contains 2 to 40 characters, and supports multiple periods (.). The string between two periods can consist of letters (case insensitive), numbers, and hyphens (-), and cannot be all numbers.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Type of CVM instance name. Valid values: "ORIGINAL" and "UNIQUE". Default value: "ORIGINAL".
@@ -2555,6 +2556,11 @@ type LaunchConfiguration struct {
 
 	// Sets prepaid billing mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+	// <br><li>ORIGINAL: uses the configured cloud disk type
+	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type in the current availability zone
+	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
 }
 
 type LifecycleActionResultInfo struct {
@@ -3781,7 +3787,7 @@ type UpgradeLifecycleHookRequest struct {
 	// Defines the action to be taken by the auto scaling group upon lifecycle hook timeout. Value range: "CONTINUE", "ABANDON". Default value: "CONTINUE"
 	DefaultResult *string `json:"DefaultResult,omitempty" name:"DefaultResult"`
 
-	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-3,600. Default value: 300
+	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7,200. Default value: 300
 	HeartbeatTimeout *int64 `json:"HeartbeatTimeout,omitempty" name:"HeartbeatTimeout"`
 
 	// Additional information of a notification that Auto Scaling sends to targets. This parameter is left empty by default.

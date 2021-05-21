@@ -151,7 +151,7 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
 
-	// List of subtitle IDs (maximum: 10)
+	// List of subtitle IDs (maximum: 16)
 	SubtitleSet []*string `json:"SubtitleSet,omitempty" name:"SubtitleSet" list`
 }
 
@@ -1816,6 +1816,9 @@ type AttachMediaSubtitlesRequest struct {
 
 	// Unique IDs of the subtitles
 	SubtitleIds []*string `json:"SubtitleIds,omitempty" name:"SubtitleIds" list`
+
+	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access the resources in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *AttachMediaSubtitlesRequest) ToJsonString() string {
@@ -1834,6 +1837,7 @@ func (r *AttachMediaSubtitlesRequest) FromJsonString(s string) error {
 	delete(f, "Operation")
 	delete(f, "AdaptiveDynamicStreamingDefinition")
 	delete(f, "SubtitleIds")
+	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return errors.New("AttachMediaSubtitlesRequest has unknown keys!")
 	}
@@ -6402,6 +6406,17 @@ type DescribeTasksRequest struct {
 	// Filter: file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
+	// Filter: task creation time.
+	CreateTime *TimeRange `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Filter: task end time.
+	FinishTime *TimeRange `json:"FinishTime,omitempty" name:"FinishTime"`
+
+	// Sort field. Valid values:
+	// <li> CreateTime: task creation time</li>
+	// <li>FinishTime: task end time</li>
+	Sort *SortBy `json:"Sort,omitempty" name:"Sort"`
+
 	// Number of entries to be returned. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -6426,6 +6441,9 @@ func (r *DescribeTasksRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Status")
 	delete(f, "FileId")
+	delete(f, "CreateTime")
+	delete(f, "FinishTime")
+	delete(f, "Sort")
 	delete(f, "Limit")
 	delete(f, "ScrollToken")
 	delete(f, "SubAppId")
@@ -7913,7 +7931,9 @@ type MediaBasicInfo struct {
 	// *Note: this field is not supported yet.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// 
+	// Storage class of a media file:
+	// <li>STANDARD</li>
+	// <li>STANDARD_IA</li>
 	StorageClass *string `json:"StorageClass,omitempty" name:"StorageClass"`
 }
 
@@ -12341,6 +12361,12 @@ type TaskSimpleInfo struct {
 
 	// Task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Task status. Valid values: `WAITING` (waiting), `PROCESSING` (processing), `FINISH` (completed)
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Video ID
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
 	// Task type. Valid values:
 	// <li>Procedure: video processing task;</li>
