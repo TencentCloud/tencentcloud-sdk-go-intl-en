@@ -2137,6 +2137,9 @@ type CreateDirectConnectGatewayRequest struct {
 
 	// CCN route publishing method. Valid values: `standard` and `exquisite`. This parameter is only valid for the CCN direct connect gateway.
 	ModeType *string `json:"ModeType,omitempty" name:"ModeType"`
+
+	// Availability zone where the direct connect gateway resides.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
 func (r *CreateDirectConnectGatewayRequest) ToJsonString() string {
@@ -2156,6 +2159,7 @@ func (r *CreateDirectConnectGatewayRequest) FromJsonString(s string) error {
 	delete(f, "NetworkInstanceId")
 	delete(f, "GatewayType")
 	delete(f, "ModeType")
+	delete(f, "Zone")
 	if len(f) > 0 {
 		return errors.New("CreateDirectConnectGatewayRequest has unknown keys!")
 	}
@@ -7674,8 +7678,7 @@ type DescribeRouteTablesRequest struct {
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
 	// <li>association.main - String - (Filter condition) Whether it is the main route table.</li>
 	// <li>tag-key - String - Required: no - (Filter condition) Filter by tag key.</li>
-	// <li>tag:tag-key - String - Required: no - (Filter condition) Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
-	// <li>is-need-router-info - String - (Filter condition) Whether to obtain routing policies. It defaults to `false`. To obtain routing policies, change the parameter value to `true`.</li>
+	// <li>tag:tag-key - String - Required: no - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
 
 	// The route table instance ID, such as `rtb-azd4dt1c`.
@@ -9131,6 +9134,14 @@ type DirectConnectGateway struct {
 	// CCN route publishing mode. Valid values: `standard` and `exquisite`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ModeType *string `json:"ModeType,omitempty" name:"ModeType"`
+
+	// Whether the direct connect gateway is for an edge zone.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	LocalZone *bool `json:"LocalZone,omitempty" name:"LocalZone"`
+
+	// Availability zone where the direct connect gateway resides.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
 type DirectConnectGatewayCcnRoute struct {
@@ -10142,10 +10153,10 @@ func (r *HaVipDisassociateAddressIpResponse) FromJsonString(s string) error {
 
 type IKEOptionsSpecification struct {
 
-	// Encryption algorithm. Available values: '3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', and 'DES-CBC'. Default is 3DES-CBC.
+	// Encryption algorithm. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBS-192`, `AES-CBC-256`, `DES-CBC`, and `SM4`; default value: `3DES-CBC`.
 	PropoEncryAlgorithm *string `json:"PropoEncryAlgorithm,omitempty" name:"PropoEncryAlgorithm"`
 
-	// Verification algorithm. Available value: 'MD5' and 'SHA1'. Default is MD5.
+	// Authentication algorithm. Valid values: `MD5`, `SHA1` and `SHA-256`; default value: `MD5`.
 	PropoAuthenAlgorithm *string `json:"PropoAuthenAlgorithm,omitempty" name:"PropoAuthenAlgorithm"`
 
 	// Negotiation mode. Available values: 'AGGRESSIVE' and 'MAIN'. Default is MAIN.
@@ -13894,7 +13905,7 @@ type Resource struct {
 
 type ResourceDashboard struct {
 
-	// Vpc instance ID, e.g. vpc-f1xjkw1b.
+	// VPC instance ID, such as `vpc-bq4bzxpj`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// Subnet instance ID, such as subnet-bthucmmy.
@@ -13909,7 +13920,7 @@ type ResourceDashboard struct {
 	// Peering connection.
 	Pcx *uint64 `json:"Pcx,omitempty" name:"Pcx"`
 
-	// The total number of used IP addresses.
+	// Total number of used IPs except for CVM IP, EIP and network probe IP. The three IP types will be independently counted.
 	Ip *uint64 `json:"Ip,omitempty" name:"Ip"`
 
 	// NAT gateway.
