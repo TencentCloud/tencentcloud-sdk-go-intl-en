@@ -93,6 +93,31 @@ func (c *Client) CreateBackupDBInstance(request *CreateBackupDBInstanceRequest) 
     return
 }
 
+func NewCreateBackupDownloadTaskRequest() (request *CreateBackupDownloadTaskRequest) {
+    request = &CreateBackupDownloadTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "CreateBackupDownloadTask")
+    return
+}
+
+func NewCreateBackupDownloadTaskResponse() (response *CreateBackupDownloadTaskResponse) {
+    response = &CreateBackupDownloadTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create a backup download task.
+func (c *Client) CreateBackupDownloadTask(request *CreateBackupDownloadTaskRequest) (response *CreateBackupDownloadTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateBackupDownloadTaskRequest()
+    }
+    response = NewCreateBackupDownloadTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBInstanceRequest() (request *CreateDBInstanceRequest) {
     request = &CreateDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -183,12 +208,41 @@ func NewDescribeBackupAccessResponse() (response *DescribeBackupAccessResponse) 
     return
 }
 
-// This API is used to get the permission to download a backup file. The specific backup file information can be obtained through the DescribeDBBackups API.
+// 备份下载功能已调整，此接口即将下线
+// 
+// TencentDB will soon stop supporting this API, as the backup download feature has been modified.
+// 
+// This API is used to get the permission to download a backup file. The detailed backup file information can be obtained through the `DescribeDBBackups` API.
 func (c *Client) DescribeBackupAccess(request *DescribeBackupAccessRequest) (response *DescribeBackupAccessResponse, err error) {
     if request == nil {
         request = NewDescribeBackupAccessRequest()
     }
     response = NewDescribeBackupAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBackupDownloadTaskRequest() (request *DescribeBackupDownloadTaskRequest) {
+    request = &DescribeBackupDownloadTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeBackupDownloadTask")
+    return
+}
+
+func NewDescribeBackupDownloadTaskResponse() (response *DescribeBackupDownloadTaskResponse) {
+    response = &DescribeBackupDownloadTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query backup download task information.
+func (c *Client) DescribeBackupDownloadTask(request *DescribeBackupDownloadTaskRequest) (response *DescribeBackupDownloadTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupDownloadTaskRequest()
+    }
+    response = NewDescribeBackupDownloadTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -289,6 +343,31 @@ func (c *Client) DescribeDBInstances(request *DescribeDBInstancesRequest) (respo
         request = NewDescribeDBInstancesRequest()
     }
     response = NewDescribeDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSecurityGroupRequest() (request *DescribeSecurityGroupRequest) {
+    request = &DescribeSecurityGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeSecurityGroup")
+    return
+}
+
+func NewDescribeSecurityGroupResponse() (response *DescribeSecurityGroupResponse) {
+    response = &DescribeSecurityGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the security groups associated with an instance.
+func (c *Client) DescribeSecurityGroup(request *DescribeSecurityGroupRequest) (response *DescribeSecurityGroupResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityGroupRequest()
+    }
+    response = NewDescribeSecurityGroupResponse()
     err = c.Send(request, response)
     return
 }

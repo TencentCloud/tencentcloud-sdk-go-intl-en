@@ -74,6 +74,42 @@ func (r *AssignProjectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BackupDownloadTask struct {
+
+	// Task creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Backup name
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+
+	// Shard name
+	ReplicaSetId *string `json:"ReplicaSetId,omitempty" name:"ReplicaSetId"`
+
+	// Backup size in bytes
+	BackupSize *int64 `json:"BackupSize,omitempty" name:"BackupSize"`
+
+	// Task status. Valid values: `0` (waiting for execution), `1` (downloading), `2` (downloaded), `3` (download failed), `4` (waiting for retry)
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Task progress in terms of percentage
+	Percent *int64 `json:"Percent,omitempty" name:"Percent"`
+
+	// Task duration in seconds
+	TimeSpend *int64 `json:"TimeSpend,omitempty" name:"TimeSpend"`
+
+	// Backup download address
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
+type BackupDownloadTaskStatus struct {
+
+	// Shard name
+	ReplicaSetId *string `json:"ReplicaSetId,omitempty" name:"ReplicaSetId"`
+
+	// Task status. Valid values: `0` (waiting for execution), `1` (downloading), `2` (downloaded), `3` (download failed), `4` (waiting for retry)
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+}
+
 type BackupFile struct {
 
 	// ID of the replica set/shard to which a backup file belongs
@@ -183,6 +219,63 @@ func (r *CreateBackupDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateBackupDownloadTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The name of the backup file to be downloaded, which can be obtained by the `DescribeDBBackups` API
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+
+	// The list of shards whose backups will be downloaded
+	BackupSets []*ReplicaSetInfo `json:"BackupSets,omitempty" name:"BackupSets" list`
+}
+
+func (r *CreateBackupDownloadTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBackupDownloadTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "BackupName")
+	delete(f, "BackupSets")
+	if len(f) > 0 {
+		return errors.New("CreateBackupDownloadTaskRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateBackupDownloadTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Download task status
+		Tasks []*BackupDownloadTaskStatus `json:"Tasks,omitempty" name:"Tasks" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateBackupDownloadTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBackupDownloadTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateDBInstanceHourRequest struct {
 	*tchttp.BaseRequest
 
@@ -219,7 +312,7 @@ type CreateDBInstanceHourRequest struct {
 	// VPC subnet ID. If VpcId is set, then SubnetId will be required
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance password. If this parameter is not set, you need to set an instance password through the password setting API after creating an instance. The password can only contain 8-16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()` |
+	// Instance password, which must contain 8 to 16 characters and comprise at least two of the following types: letters, digits, and symbols (!@#%^*()). If it is left empty, the password is in the format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001".
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// Project ID. If this parameter is not set, the default project will be used
@@ -341,7 +434,7 @@ type CreateDBInstanceRequest struct {
 	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the `DescribeSubnets` API to query the subnet list.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance password. If this parameter is not set, you need to set an instance password through the `SetPassword` API after creating an instance. The password can only contain 8-16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()`.
+	// Instance password, which must contain 8 to 16 characters and comprise at least two of the following types: letters, digits, and symbols (!@#%^*()). If it is left empty, the password is in the format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001".
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// Instance tag information.
@@ -554,6 +647,90 @@ func (r *DescribeBackupAccessResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBackupAccessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupDownloadTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The name of a backup file whose download tasks will be queried
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+
+	// The start time of the query period. Tasks whose start time and end time fall within the query period will be queried. If it is left empty, the start time can be any time earlier than the end time.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time of the query period. Tasks whose start time and end time fall within the query period will be queried. If it is left empty, the end time can be any time later than the start time.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The maximum number of results returned per page. Value range: 1-100. Default value: `20`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset for pagination. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The field used to sort the results. Valid values: `createTime` (default), `finishTime`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sort order. Valid values: `asc`, `desc` (default).
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// The status of the tasks to be queried. Valid values: `0` (waiting for execution), `1` (downloading), `2` (downloaded), `3` (download failed), `4` (waiting for retry). If it is left empty, tasks in any status will be returned.
+	Status []*int64 `json:"Status,omitempty" name:"Status" list`
+}
+
+func (r *DescribeBackupDownloadTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupDownloadTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "BackupName")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return errors.New("DescribeBackupDownloadTaskRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupDownloadTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of results
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The list of download tasks
+		Tasks []*BackupDownloadTask `json:"Tasks,omitempty" name:"Tasks" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBackupDownloadTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupDownloadTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -840,6 +1017,55 @@ func (r *DescribeDBInstancesResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSecurityGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of "cmgo-p8vnipr5"
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeSecurityGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return errors.New("DescribeSecurityGroupRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSecurityGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Security groups associated with the instance
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSecurityGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1677,6 +1903,12 @@ func (r *RenewDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ReplicaSetInfo struct {
+
+	// Shard name
+	ReplicaSetId *string `json:"ReplicaSetId,omitempty" name:"ReplicaSetId"`
+}
+
 type ResetDBInstancePasswordRequest struct {
 	*tchttp.BaseRequest
 
@@ -1734,6 +1966,45 @@ func (r *ResetDBInstancePasswordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type SecurityGroup struct {
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Inbound rule
+	Inbound []*SecurityGroupBound `json:"Inbound,omitempty" name:"Inbound" list`
+
+	// Outbound rule
+	Outbound []*SecurityGroupBound `json:"Outbound,omitempty" name:"Outbound" list`
+
+	// Security group ID
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Security group name
+	SecurityGroupName *string `json:"SecurityGroupName,omitempty" name:"SecurityGroupName"`
+
+	// Security group remarks
+	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitempty" name:"SecurityGroupRemark"`
+}
+
+type SecurityGroupBound struct {
+
+	// Policy. Valid values: `ACCEPT`, `DROP`
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// IP range
+	CidrIp *string `json:"CidrIp,omitempty" name:"CidrIp"`
+
+	// Port range
+	PortRange *string `json:"PortRange,omitempty" name:"PortRange"`
+
+	// Transport layer protocol. Valid values: `tcp`, `udp`, `ALL`
+	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
+}
+
 type ShardInfo struct {
 
 	// Used shard capacity
@@ -1784,7 +2055,7 @@ type SpecItem struct {
 	// Specification purchasable flag. Valid values: 0 (not purchasable), 1 (purchasable)
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
-	// Specification purchasable flag. Valid values: 0 (not purchasable), 1 (purchasable)
+	// Computing resource specification in terms of CPU core
 	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
 
 	// Memory size in MB

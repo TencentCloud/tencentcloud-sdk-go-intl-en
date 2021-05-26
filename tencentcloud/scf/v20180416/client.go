@@ -265,7 +265,7 @@ func NewDeleteNamespaceResponse() (response *DeleteNamespaceResponse) {
     return
 }
 
-// This API is used to create a namespace based on the input parameters.
+// This API is used to delete the specific namespace according to the parameters passed in.
 func (c *Client) DeleteNamespace(request *DeleteNamespaceRequest) (response *DeleteNamespaceResponse, err error) {
     if request == nil {
         request = NewDeleteNamespaceRequest()

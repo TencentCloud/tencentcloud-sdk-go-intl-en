@@ -939,6 +939,9 @@ type InquiryPriceScaleOutInstanceRequest struct {
 
 	// Number of router nodes added.
 	RouterCount *uint64 `json:"RouterCount,omitempty" name:"RouterCount"`
+
+	// Number of master nodes to add
+	MasterCount *uint64 `json:"MasterCount,omitempty" name:"MasterCount"`
 }
 
 func (r *InquiryPriceScaleOutInstanceRequest) ToJsonString() string {
@@ -962,6 +965,7 @@ func (r *InquiryPriceScaleOutInstanceRequest) FromJsonString(s string) error {
 	delete(f, "TaskCount")
 	delete(f, "Currency")
 	delete(f, "RouterCount")
+	delete(f, "MasterCount")
 	if len(f) > 0 {
 		return errors.New("InquiryPriceScaleOutInstanceRequest has unknown keys!")
 	}

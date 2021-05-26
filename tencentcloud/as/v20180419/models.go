@@ -718,7 +718,7 @@ type CreateLifecycleHookRequest struct {
 	// Defined actions when lifecycle hook times out. Valid values: "CONTINUE" and "ABANDON". Default value: "CONTINUE"
 	DefaultResult *string `json:"DefaultResult,omitempty" name:"DefaultResult"`
 
-	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7,200. Default value: 300
+	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7200. Default value: 300
 	HeartbeatTimeout *int64 `json:"HeartbeatTimeout,omitempty" name:"HeartbeatTimeout"`
 
 	// Additional information of a notification that Auto Scaling sends to targets. This parameter is left empty by default. Up to 1024 characters are allowed.
@@ -2557,7 +2557,7 @@ type LaunchConfiguration struct {
 	// Sets prepaid billing mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
-	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+	// Specifies how to select the cloud disk type. 
 	// <br><li>ORIGINAL: uses the configured cloud disk type
 	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type in the current availability zone
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
@@ -3787,7 +3787,7 @@ type UpgradeLifecycleHookRequest struct {
 	// Defines the action to be taken by the auto scaling group upon lifecycle hook timeout. Value range: "CONTINUE", "ABANDON". Default value: "CONTINUE"
 	DefaultResult *string `json:"DefaultResult,omitempty" name:"DefaultResult"`
 
-	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7,200. Default value: 300
+	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7200. Default value: 300
 	HeartbeatTimeout *int64 `json:"HeartbeatTimeout,omitempty" name:"HeartbeatTimeout"`
 
 	// Additional information of a notification that Auto Scaling sends to targets. This parameter is left empty by default.

@@ -132,7 +132,7 @@ type Code struct {
 	// COS object path
 	CosObjectName *string `json:"CosObjectName,omitempty" name:"CosObjectName"`
 
-	// It contains a function code file and its dependencies in the ZIP format. When you use this API, the ZIP file needs to be encoded with Base64. Up to 20 MB is supported.
+	// This parameter contains a .zip file (up to 50 MB) of the function code file and its dependencies. When this API is used, the content of the .zip file needs to be Base64-encoded
 	ZipFile *string `json:"ZipFile,omitempty" name:"ZipFile"`
 
 	// COS region. For Beijing regions, you need to import `ap-beijing`. For Beijing Region 1, you need to input `ap-beijing-1`. For other regions, no import is required.
@@ -379,6 +379,12 @@ type CreateFunctionRequest struct {
 
 	// Tag parameter of the function. It is an array of key-value pairs.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+
+	// Whether to enable the async attribute. TRUE: yes; FALSE: no
+	AsyncRunEnable *string `json:"AsyncRunEnable,omitempty" name:"AsyncRunEnable"`
+
+	// Whether to enable event tracking. TRUE: yes; FALSE: no
+	TraceEnable *string `json:"TraceEnable,omitempty" name:"TraceEnable"`
 }
 
 func (r *CreateFunctionRequest) ToJsonString() string {
@@ -414,6 +420,8 @@ func (r *CreateFunctionRequest) FromJsonString(s string) error {
 	delete(f, "CfsConfig")
 	delete(f, "InitTimeout")
 	delete(f, "Tags")
+	delete(f, "AsyncRunEnable")
+	delete(f, "TraceEnable")
 	if len(f) > 0 {
 		return errors.New("CreateFunctionRequest has unknown keys!")
 	}
@@ -1825,13 +1833,13 @@ type InvokeRequest struct {
 	// The value is `RequestResponse` (synchronous) or `Event` (asynchronous). The default value is synchronous.
 	InvocationType *string `json:"InvocationType,omitempty" name:"InvocationType"`
 
-	// Version number of the triggered function
+	// Version number or name of the triggered function
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 
 	// Function running parameter, which is in the JSON format. Maximum parameter size is 1 MB.
 	ClientContext *string `json:"ClientContext,omitempty" name:"ClientContext"`
 
-	// If this field is specified for a synchronous invocation, the return value will contain a 4-KB log. The value is `None` (default) or `Tail`. If the value is `Tail`, `logMsg` in the return parameter will contain the corresponding function execution log.
+	// If this field is specified during sync invocation, the returned value will contain 4 KB of logs. Valid values: None, Tail. Default value: None. If the value is `Tail`, the `Log` field in the returned parameter will contain the corresponding function execution log
 	LogType *string `json:"LogType,omitempty" name:"LogType"`
 
 	// Namespace

@@ -545,13 +545,13 @@ type DescribePictureRequest struct {
 	// Application ID
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Image ID. If it is not passed in, the IDs of all images under the application are returned.
+	// Image ID. If it is left empty, the IDs of all images under the application are returned.
 	PictureId *uint64 `json:"PictureId,omitempty" name:"PictureId"`
 
-	// Number of records per page
+	// Number of records per page. `10` is used if it is left empty.
 	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 
-	// Page number
+	// Page number. `1` is used if it is left empty.
 	PageNo *uint64 `json:"PageNo,omitempty" name:"PageNo"`
 }
 
@@ -1269,7 +1269,7 @@ type PresetLayoutConfig struct {
 	// Y offset of the output image in pixels. The sum of `LocationY` and `ImageHeight` cannot exceed the total height of the mixed stream. If this parameter is not set, 0 is used by default.
 	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
 
-	// Z-order of the image in pixels. If this parameter is not set, 0 is used by default.
+	// Output order of the image. `0` is used if it is left empty.
 	ZOrder *uint64 `json:"ZOrder,omitempty" name:"ZOrder"`
 
 	// Render mode of the output image. 0: cropping; 1: scaling; 2: scaling on a black background. If this parameter is not set, 0 is used by default.
