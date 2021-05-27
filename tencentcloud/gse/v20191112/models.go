@@ -501,6 +501,51 @@ func (r *DescribeGameServerSessionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeInstanceTypesRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeInstanceTypesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceTypesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return errors.New("DescribeInstanceTypesRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceTypesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of server types
+		InstanceTypeList []*InstanceTypeInfo `json:"InstanceTypeList,omitempty" name:"InstanceTypeList" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceTypesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceTypesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribePlayerSessionsRequest struct {
 	*tchttp.BaseRequest
 
@@ -1053,6 +1098,24 @@ type InstanceAccess struct {
 
 	// OS
 	OperatingSystem *string `json:"OperatingSystem,omitempty" name:"OperatingSystem"`
+}
+
+type InstanceTypeInfo struct {
+
+	// Name of the server type, such as `Standard SA1`
+	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
+
+	// Specification of the server type, such as `SA1.SMALL1`
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// CPU, in core
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory, in GB
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// The packet sending and receiving capability, in 10k PPS. 
+	NetworkCard *uint64 `json:"NetworkCard,omitempty" name:"NetworkCard"`
 }
 
 type JoinGameServerSessionBatchRequest struct {

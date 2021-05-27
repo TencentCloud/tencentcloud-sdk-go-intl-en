@@ -193,6 +193,31 @@ func (c *Client) DescribeGameServerSessions(request *DescribeGameServerSessionsR
     return
 }
 
+func NewDescribeInstanceTypesRequest() (request *DescribeInstanceTypesRequest) {
+    request = &DescribeInstanceTypesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gse", APIVersion, "DescribeInstanceTypes")
+    return
+}
+
+func NewDescribeInstanceTypesResponse() (response *DescribeInstanceTypesResponse) {
+    response = &DescribeInstanceTypesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to obtain the list of CVM types in the specified region.
+func (c *Client) DescribeInstanceTypes(request *DescribeInstanceTypesRequest) (response *DescribeInstanceTypesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceTypesRequest()
+    }
+    response = NewDescribeInstanceTypesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePlayerSessionsRequest() (request *DescribePlayerSessionsRequest) {
     request = &DescribePlayerSessionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
