@@ -333,7 +333,7 @@ func NewDescribeCkafkaZoneResponse() (response *DescribeCkafkaZoneResponse) {
     return
 }
 
-// This API is used to view the availability zone (AZ) list of Ckafka.
+// This API is used to view the AZ list of Ckafka.
 func (c *Client) DescribeCkafkaZone(request *DescribeCkafkaZoneRequest) (response *DescribeCkafkaZoneResponse, err error) {
     if request == nil {
         request = NewDescribeCkafkaZoneRequest()
@@ -533,7 +533,7 @@ func NewDescribeRegionResponse() (response *DescribeRegionResponse) {
     return
 }
 
-// This API is used to enumerate regions, only including Guangzhou.
+// This API is used to enumerate regions, and can be called only in Guangzhou.
 func (c *Client) DescribeRegion(request *DescribeRegionRequest) (response *DescribeRegionResponse, err error) {
     if request == nil {
         request = NewDescribeRegionRequest()

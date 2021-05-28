@@ -91,7 +91,7 @@ type BackupDownloadTask struct {
 	// Task status. Valid values: `0` (waiting for execution), `1` (downloading), `2` (downloaded), `3` (download failed), `4` (waiting for retry)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-	// Task progress in terms of percentage
+	// Task progress in percentage
 	Percent *int64 `json:"Percent,omitempty" name:"Percent"`
 
 	// Task duration in seconds
@@ -228,7 +228,7 @@ type CreateBackupDownloadTaskRequest struct {
 	// The name of the backup file to be downloaded, which can be obtained by the `DescribeDBBackups` API
 	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
 
-	// The list of shards whose backups will be downloaded
+	// The list of shards with backups to be downloaded
 	BackupSets []*ReplicaSetInfo `json:"BackupSets,omitempty" name:"BackupSets" list`
 }
 
@@ -656,7 +656,7 @@ type DescribeBackupDownloadTaskRequest struct {
 	// Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// The name of a backup file whose download tasks will be queried
+	// The name of a backup file with download tasks to be queried
 	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
 
 	// The start time of the query period. Tasks whose start time and end time fall within the query period will be queried. If it is left empty, the start time can be any time earlier than the end time.
@@ -1992,7 +1992,7 @@ type SecurityGroup struct {
 
 type SecurityGroupBound struct {
 
-	// Policy. Valid values: `ACCEPT`, `DROP`
+	// Execution rule. Valid values: `ACCEPT`, `DROP`
 	Action *string `json:"Action,omitempty" name:"Action"`
 
 	// IP range
@@ -2003,6 +2003,18 @@ type SecurityGroupBound struct {
 
 	// Transport layer protocol. Valid values: `tcp`, `udp`, `ALL`
 	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
+
+	// 
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// 
+	AddressModule *string `json:"AddressModule,omitempty" name:"AddressModule"`
+
+	// 
+	ServiceModule *string `json:"ServiceModule,omitempty" name:"ServiceModule"`
+
+	// 
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
 }
 
 type ShardInfo struct {

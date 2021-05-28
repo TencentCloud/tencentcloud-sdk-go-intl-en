@@ -98,11 +98,11 @@ type ClusterInfo struct {
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	AvailableBandWidth *int64 `json:"AvailableBandWidth,omitempty" name:"AvailableBandWidth"`
 
-	// The AZ which the cluster belongs to
+	// The AZ where the cluster resides
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The AZ which the cluster nodes belong to. If the cluster is a multi-AZ cluster, this field means multiple AZs which the cluster nodes belong to.
+	// The AZ where the cluster nodes reside. If the cluster is a multi-AZ cluster, this field means multiple AZs where the cluster nodes reside.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds" list`
 }
@@ -918,7 +918,7 @@ type DescribeCkafkaZoneResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The entity of query result complex objects
+		// Returned results for the query
 		Result *ZoneResponse `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2472,7 +2472,7 @@ type Region struct {
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	RegionCode *string `json:"RegionCode,omitempty" name:"RegionCode"`
 
-	// Region code (V3)
+	// Region code (v3)
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	RegionCodeV3 *string `json:"RegionCodeV3,omitempty" name:"RegionCodeV3"`
 
@@ -2480,11 +2480,11 @@ type Region struct {
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	Support *string `json:"Support,omitempty" name:"Support"`
 
-	// Whether ipv6 is supported. `0` indicates no, and `1` indicates yes.
+	// Whether IPv6 is supported. `0` indicates no, and `1` indicates yes.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	Ipv6 *int64 `json:"Ipv6,omitempty" name:"Ipv6"`
 
-	// Whether multi-zone clusters are supported.`0` indicates no, and `1` indicates yes.
+	// Whether cross-AZ clusters are supported.`0` indicates no, and `1` indicates yes.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	MultiZone *int64 `json:"MultiZone,omitempty" name:"MultiZone"`
 }
@@ -2727,13 +2727,13 @@ type ZoneInfo struct {
 	// Zone ID
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Whether it is an internal App.
+	// Whether it is an internal application.
 	IsInternalApp *int64 `json:"IsInternalApp,omitempty" name:"IsInternalApp"`
 
-	// app id
+	// Application ID
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
 
-	// Identifier
+	// Flag
 	Flag *bool `json:"Flag,omitempty" name:"Flag"`
 
 	// Zone name
@@ -2742,7 +2742,7 @@ type ZoneInfo struct {
 	// Zone status
 	ZoneStatus *int64 `json:"ZoneStatus,omitempty" name:"ZoneStatus"`
 
-	// Extra identifier
+	// Extra flag
 	Exflag *string `json:"Exflag,omitempty" name:"Exflag"`
 
 	// JSON object. The key is the model. The value `true` means “sold out”, and `false` means “not sold out”.
