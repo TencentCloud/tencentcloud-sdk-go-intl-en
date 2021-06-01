@@ -682,6 +682,9 @@ type CreateListenerRequest struct {
 
 	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	EndPort *uint64 `json:"EndPort,omitempty" name:"EndPort"`
+
+	// Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
+	DeregisterTargetRst *bool `json:"DeregisterTargetRst,omitempty" name:"DeregisterTargetRst"`
 }
 
 func (r *CreateListenerRequest) ToJsonString() string {
@@ -709,6 +712,7 @@ func (r *CreateListenerRequest) FromJsonString(s string) error {
 	delete(f, "SessionType")
 	delete(f, "KeepaliveEnable")
 	delete(f, "EndPort")
+	delete(f, "DeregisterTargetRst")
 	if len(f) > 0 {
 		return errors.New("CreateListenerRequest has unknown keys!")
 	}
@@ -3070,6 +3074,10 @@ type Listener struct {
 	// Only the NAT64 CLB TCP listeners are supported.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Toa *bool `json:"Toa,omitempty" name:"Toa"`
+
+	// Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DeregisterTargetRst *bool `json:"DeregisterTargetRst,omitempty" name:"DeregisterTargetRst"`
 }
 
 type ListenerBackend struct {
@@ -3777,6 +3785,9 @@ type ModifyListenerRequest struct {
 
 	// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners.
 	KeepaliveEnable *int64 `json:"KeepaliveEnable,omitempty" name:"KeepaliveEnable"`
+
+	// Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
+	DeregisterTargetRst *bool `json:"DeregisterTargetRst,omitempty" name:"DeregisterTargetRst"`
 }
 
 func (r *ModifyListenerRequest) ToJsonString() string {
@@ -3800,6 +3811,7 @@ func (r *ModifyListenerRequest) FromJsonString(s string) error {
 	delete(f, "Scheduler")
 	delete(f, "SniSwitch")
 	delete(f, "KeepaliveEnable")
+	delete(f, "DeregisterTargetRst")
 	if len(f) > 0 {
 		return errors.New("ModifyListenerRequest has unknown keys!")
 	}

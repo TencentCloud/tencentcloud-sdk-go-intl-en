@@ -86,14 +86,17 @@ type AttachDetail struct {
 type AttachDisksRequest struct {
 	*tchttp.BaseRequest
 
-	// ID of the elastic cloud disk to be mounted, which can be queried through the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1). A maximum of 10 elastic cloud disks can be mounted in a single request.
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
-
 	// ID of the CVM instance on which the cloud disk will be mounted. It can be queried via the API [DescribeInstances](https://intl.cloud.tencent.com/document/product/213/15728?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
+	// ID of the elastic cloud disk to be mounted, which can be queried through the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1). A maximum of 10 elastic cloud disks can be mounted in a single request.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
+
 	// Optional parameter. If this is not passed only the mount operation is executed. If `True` is passed, the cloud disk will be configured to be terminated when the server it is mounted to is terminated. This is only valid for pay-as-you-go cloud disks.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitempty" name:"DeleteWithInstance"`
+
+	// (Optional) Specifies the cloud disk mounting method. It’s only valid for BM models. Valid values: <br><li>PF<br><li>VF
+	AttachMode *string `json:"AttachMode,omitempty" name:"AttachMode"`
 }
 
 func (r *AttachDisksRequest) ToJsonString() string {
@@ -108,9 +111,10 @@ func (r *AttachDisksRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "DiskIds")
 	delete(f, "InstanceId")
+	delete(f, "DiskIds")
 	delete(f, "DeleteWithInstance")
+	delete(f, "AttachMode")
 	if len(f) > 0 {
 		return errors.New("AttachDisksRequest has unknown keys!")
 	}
