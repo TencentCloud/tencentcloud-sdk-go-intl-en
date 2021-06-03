@@ -204,7 +204,7 @@ type CreateDBInstancesRequest struct {
 	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
-	// PostgreSQL kernel version. Currently, only two versions are supported: 9.3.5 and 9.5.4.
+	// PostgreSQL kernel version. Valid values: `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Instance capacity size in GB.
@@ -318,6 +318,141 @@ func (r *CreateDBInstancesResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
+
+	// PostgreSQL kernel version. Valid values: `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Instance storage capacity in GB
+	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
+
+	// The number of instances purchased at a time. Value range: 1-10.
+	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance character set. Valid values: `UTF8`, `LATIN1`.
+	Charset *string `json:"Charset,omitempty" name:"Charset"`
+
+	// Instance root account name
+	AdminName *string `json:"AdminName,omitempty" name:"AdminName"`
+
+	// Instance root account password
+	AdminPassword *string `json:"AdminPassword,omitempty" name:"AdminPassword"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list. Currently, you can specify only one voucher.
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// ID of a subnet in the VPC specified by `VpcId`
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Campaign ID
+	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Instance name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no).
+	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitempty" name:"NeedSupportIpv6"`
+
+	// The information of tags to be associated with instances. This parameter is left empty by default.
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList" list`
+
+	// Security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+}
+
+func (r *CreateInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SpecCode")
+	delete(f, "DBVersion")
+	delete(f, "Storage")
+	delete(f, "InstanceCount")
+	delete(f, "Period")
+	delete(f, "Zone")
+	delete(f, "Charset")
+	delete(f, "AdminName")
+	delete(f, "AdminPassword")
+	delete(f, "ProjectId")
+	delete(f, "InstanceChargeType")
+	delete(f, "AutoVoucher")
+	delete(f, "VoucherIds")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "AutoRenewFlag")
+	delete(f, "ActivityId")
+	delete(f, "Name")
+	delete(f, "NeedSupportIpv6")
+	delete(f, "TagList")
+	delete(f, "SecurityGroupIds")
+	if len(f) > 0 {
+		return errors.New("CreateInstancesRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Order number list. Each instance corresponds to an order number.
+		DealNames []*string `json:"DealNames,omitempty" name:"DealNames" list`
+
+		// Bill ID of frozen fees
+		BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+		// ID set of instances which have been created successfully. The parameter value will be returned only when the pay-as-you-go billing mode is used.
+		DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet" list`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1796,7 +1931,7 @@ type DisIsolateDBInstancesRequest struct {
 	// The valid period (in months) of the monthly-subscribed instance when removing it from isolation
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
-	// Whether to use vouchers
+	// Whether to use vouchers. Valid values: `true` (yes), `false` (no). Default value: `false`.
 	AutoVoucher *bool `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
 	// Voucher ID list

@@ -133,12 +133,37 @@ func NewCreateDBInstancesResponse() (response *CreateDBInstancesResponse) {
     return
 }
 
-// This API is used to create one or more TencentDB for PostgreSQL instances.
+// This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances.
 func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response *CreateDBInstancesResponse, err error) {
     if request == nil {
         request = NewCreateDBInstancesRequest()
     }
     response = NewCreateDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateInstancesRequest() (request *CreateInstancesRequest) {
+    request = &CreateInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateInstances")
+    return
+}
+
+func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
+    response = &CreateInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to create and initialize one or more TencentDB for PostgreSQL instances.
+func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *CreateInstancesResponse, err error) {
+    if request == nil {
+        request = NewCreateInstancesRequest()
+    }
+    response = NewCreateInstancesResponse()
     err = c.Send(request, response)
     return
 }
