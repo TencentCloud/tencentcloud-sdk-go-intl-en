@@ -998,7 +998,7 @@ type DirectConnect struct {
 	LocalZone *bool `json:"LocalZone,omitempty" name:"LocalZone"`
 
 	// Number of dedicated tunnels with disabled VLAN in the connection
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: this field may return `null`, indicating that no valid value can be found.
 	VlanZeroDirectConnectTunnelCount *uint64 `json:"VlanZeroDirectConnectTunnelCount,omitempty" name:"VlanZeroDirectConnectTunnelCount"`
 
 	// Number of dedicated tunnels with enabled VLAN in the connection

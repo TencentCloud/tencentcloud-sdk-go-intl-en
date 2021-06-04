@@ -47,8 +47,11 @@ type AccountInfo struct {
 	// Password modification time
 	ModifyPasswordTime *string `json:"ModifyPasswordTime,omitempty" name:"ModifyPasswordTime"`
 
-	// Account creation time
+	// This parameter is no longer supported.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// The maximum number of instance connections supported by an account
+	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 }
 
 type AddTimeWindowRequest struct {
@@ -480,6 +483,9 @@ type CreateAccountsRequest struct {
 
 	// Remarks
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// The maximum number of instance connections supported by the new account
+	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 }
 
 func (r *CreateAccountsRequest) ToJsonString() string {
@@ -498,6 +504,7 @@ func (r *CreateAccountsRequest) FromJsonString(s string) error {
 	delete(f, "Accounts")
 	delete(f, "Password")
 	delete(f, "Description")
+	delete(f, "MaxUserConnections")
 	if len(f) > 0 {
 		return errors.New("CreateAccountsRequest has unknown keys!")
 	}
@@ -1549,6 +1556,9 @@ type DescribeAccountsResponse struct {
 
 		// Details of eligible accounts.
 		Items []*AccountInfo `json:"Items,omitempty" name:"Items" list`
+
+		// The maximum number of instance connections (set by the MySQL parameter `max_connections`)
+		MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2613,6 +2623,9 @@ type DescribeDBInstancesRequest struct {
 
 	// Placement group ID list.
 	DeployGroupIds []*string `json:"DeployGroupIds,omitempty" name:"DeployGroupIds" list`
+
+	// Whether to use the tag key as a filter condition
+	TagKeysForSearch []*string `json:"TagKeysForSearch,omitempty" name:"TagKeysForSearch" list`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -2653,6 +2666,7 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "WithRo")
 	delete(f, "WithMaster")
 	delete(f, "DeployGroupIds")
+	delete(f, "TagKeysForSearch")
 	if len(f) > 0 {
 		return errors.New("DescribeDBInstancesRequest has unknown keys!")
 	}
@@ -4716,6 +4730,10 @@ type InstanceInfo struct {
 
 	// Number of nodes
 	InstanceNodes *int64 `json:"InstanceNodes,omitempty" name:"InstanceNodes"`
+
+	// List of tags
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TagList []*TagInfoItem `json:"TagList,omitempty" name:"TagList" list`
 }
 
 type InstanceRebootTime struct {
@@ -4906,6 +4924,63 @@ func (r *ModifyAccountDescriptionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyAccountMaxUserConnectionsRequest struct {
+	*tchttp.BaseRequest
+
+	// List of TencentDB accounts
+	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts" list`
+
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The maximum number of instance connections supported by an account
+	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
+}
+
+func (r *ModifyAccountMaxUserConnectionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccountMaxUserConnectionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Accounts")
+	delete(f, "InstanceId")
+	delete(f, "MaxUserConnections")
+	if len(f) > 0 {
+		return errors.New("ModifyAccountMaxUserConnectionsRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyAccountMaxUserConnectionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task request ID, which can be used to query the execution result of an async task
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyAccountMaxUserConnectionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccountMaxUserConnectionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyAccountPasswordRequest struct {
 	*tchttp.BaseRequest
 
@@ -4987,6 +5062,9 @@ type ModifyAccountPrivilegesRequest struct {
 	// Column permission in table. Valid values: "SELECT", "INSERT", "UPDATE", "REFERENCES".
 	// Note: if this parameter is not passed in, it means to clear the permission.
 	ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitempty" name:"ColumnPrivileges" list`
+
+	// If this parameter is specified, permissions are modified in batches. Valid values: `grant`, `revoke`.
+	ModifyAction *string `json:"ModifyAction,omitempty" name:"ModifyAction"`
 }
 
 func (r *ModifyAccountPrivilegesRequest) ToJsonString() string {
@@ -5007,6 +5085,7 @@ func (r *ModifyAccountPrivilegesRequest) FromJsonString(s string) error {
 	delete(f, "DatabasePrivileges")
 	delete(f, "TablePrivileges")
 	delete(f, "ColumnPrivileges")
+	delete(f, "ModifyAction")
 	if len(f) > 0 {
 		return errors.New("ModifyAccountPrivilegesRequest has unknown keys!")
 	}
@@ -7099,6 +7178,17 @@ type TagInfo struct {
 
 	// Tag value
 	TagValue []*string `json:"TagValue,omitempty" name:"TagValue" list`
+}
+
+type TagInfoItem struct {
+
+	// Tag key
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type TagInfoUnit struct {

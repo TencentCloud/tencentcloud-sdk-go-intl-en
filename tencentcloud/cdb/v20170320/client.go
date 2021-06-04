@@ -158,7 +158,7 @@ func NewCreateAccountsResponse() (response *CreateAccountsResponse) {
     return
 }
 
-// This API (CreateAccounts) is used to create TencentDB accounts. The new account names, domain names, and passwords need to be specified, and account remarks can also be added.
+// This API is used to create one or more TencentDB instance accounts. The account names, host addresses, and passwords are required, and account remarks and the maximum connections are optional.
 func (c *Client) CreateAccounts(request *CreateAccountsRequest) (response *CreateAccountsResponse, err error) {
     if request == nil {
         request = NewCreateAccountsRequest()
@@ -1703,6 +1703,31 @@ func (c *Client) ModifyAccountDescription(request *ModifyAccountDescriptionReque
         request = NewModifyAccountDescriptionRequest()
     }
     response = NewModifyAccountDescriptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAccountMaxUserConnectionsRequest() (request *ModifyAccountMaxUserConnectionsRequest) {
+    request = &ModifyAccountMaxUserConnectionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "ModifyAccountMaxUserConnections")
+    return
+}
+
+func NewModifyAccountMaxUserConnectionsResponse() (response *ModifyAccountMaxUserConnectionsResponse) {
+    response = &ModifyAccountMaxUserConnectionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to modify the maximum connections of one or more TencentDB instance accounts.
+func (c *Client) ModifyAccountMaxUserConnections(request *ModifyAccountMaxUserConnectionsRequest) (response *ModifyAccountMaxUserConnectionsResponse, err error) {
+    if request == nil {
+        request = NewModifyAccountMaxUserConnectionsRequest()
+    }
+    response = NewModifyAccountMaxUserConnectionsResponse()
     err = c.Send(request, response)
     return
 }
