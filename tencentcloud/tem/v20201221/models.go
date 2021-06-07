@@ -123,7 +123,7 @@ type CreateNamespaceRequest struct {
 	Vpc *string `json:"Vpc,omitempty" name:"Vpc"`
 
 	// Subnet list
-	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
 	// Namespace description
 	Description *string `json:"Description,omitempty" name:"Description"`
@@ -273,7 +273,7 @@ type CreateServiceV2Request struct {
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
 
 	// Service subnet
-	SubnetList []*string `json:"SubnetList,omitempty" name:"SubnetList" list`
+	SubnetList []*string `json:"SubnetList,omitempty" name:"SubnetList"`
 
 	// Programming language 
 	// - JAVA
@@ -434,16 +434,16 @@ type DeployServiceV2Request struct {
 	EsInfo *EsInfo `json:"EsInfo,omitempty" name:"EsInfo"`
 
 	// Environment variable configuration
-	EnvConf []*Pair `json:"EnvConf,omitempty" name:"EnvConf" list`
+	EnvConf []*Pair `json:"EnvConf,omitempty" name:"EnvConf"`
 
 	// Log configuration
-	LogConfs []*string `json:"LogConfs,omitempty" name:"LogConfs" list`
+	LogConfs []*string `json:"LogConfs,omitempty" name:"LogConfs"`
 
 	// Data volume configuration
-	StorageConfs []*StorageConf `json:"StorageConfs,omitempty" name:"StorageConfs" list`
+	StorageConfs []*StorageConf `json:"StorageConfs,omitempty" name:"StorageConfs"`
 
 	// Data volume mount configuration
-	StorageMountConfs []*StorageMountConf `json:"StorageMountConfs,omitempty" name:"StorageMountConfs" list`
+	StorageMountConfs []*StorageMountConf `json:"StorageMountConfs,omitempty" name:"StorageMountConfs"`
 
 	// Deployment type.
 	// - JAR: deployment through JAR package
@@ -464,7 +464,7 @@ type DeployServiceV2Request struct {
 	JdkVersion *string `json:"JdkVersion,omitempty" name:"JdkVersion"`
 
 	// Security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Log output configuration
 	LogOutputConf *LogOutputConf `json:"LogOutputConf,omitempty" name:"LogOutputConf"`
@@ -479,7 +479,7 @@ type DeployServiceV2Request struct {
 	ImageCommand *string `json:"ImageCommand,omitempty" name:"ImageCommand"`
 
 	// Image command parameters
-	ImageArgs []*string `json:"ImageArgs,omitempty" name:"ImageArgs" list`
+	ImageArgs []*string `json:"ImageArgs,omitempty" name:"ImageArgs"`
 }
 
 func (r *DeployServiceV2Request) ToJsonString() string {
@@ -648,7 +648,7 @@ type DescribeIngressesResponse struct {
 
 		// Ingress array
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result []*IngressInfo `json:"Result,omitempty" name:"Result" list`
+		Result []*IngressInfo `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -738,7 +738,7 @@ type DescribeRunPodPage struct {
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 
 	// Number of items
-	PodList []*RunVersionPod `json:"PodList,omitempty" name:"PodList" list`
+	PodList []*RunVersionPod `json:"PodList,omitempty" name:"PodList"`
 }
 
 type DescribeServiceRunPodListV2Request struct {
@@ -851,7 +851,7 @@ type IngressInfo struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Rules configuration
-	Rules []*IngressRule `json:"Rules,omitempty" name:"Rules" list`
+	Rules []*IngressRule `json:"Rules,omitempty" name:"Rules"`
 
 	// clb ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -859,7 +859,7 @@ type IngressInfo struct {
 
 	// TLS configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tls []*IngressTls `json:"Tls,omitempty" name:"Tls" list`
+	Tls []*IngressTls `json:"Tls,omitempty" name:"Tls"`
 
 	// eks clusterId
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -901,13 +901,13 @@ type IngressRulePath struct {
 type IngressRuleValue struct {
 
 	// Overall rule configuration
-	Paths []*IngressRulePath `json:"Paths,omitempty" name:"Paths" list`
+	Paths []*IngressRulePath `json:"Paths,omitempty" name:"Paths"`
 }
 
 type IngressTls struct {
 
 	// Host array
-	Hosts []*string `json:"Hosts,omitempty" name:"Hosts" list`
+	Hosts []*string `json:"Hosts,omitempty" name:"Hosts"`
 
 	// secret name
 	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
@@ -1001,7 +1001,7 @@ type ModifyNamespaceRequest struct {
 	Vpc *string `json:"Vpc,omitempty" name:"Vpc"`
 
 	// Subnet
-	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
 	// Source channel
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
@@ -1058,7 +1058,7 @@ func (r *ModifyNamespaceResponse) FromJsonString(s string) error {
 type NamespacePage struct {
 
 	// Records
-	Records []*TemNamespaceInfo `json:"Records,omitempty" name:"Records" list`
+	Records []*TemNamespaceInfo `json:"Records,omitempty" name:"Records"`
 
 	// Total number
 	Total *int64 `json:"Total,omitempty" name:"Total"`

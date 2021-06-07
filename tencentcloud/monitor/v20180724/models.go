@@ -75,16 +75,16 @@ type AlarmHistory struct {
 	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
 
 	// Instance group of alarm object
-	InstanceGroup []*InstanceGroups `json:"InstanceGroup,omitempty" name:"InstanceGroup" list`
+	InstanceGroup []*InstanceGroups `json:"InstanceGroup,omitempty" name:"InstanceGroup"`
 
 	// Recipient list
-	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids" list`
+	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids"`
 
 	// Recipient group list
-	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups" list`
+	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups"`
 
 	// Alarm channel list. Valid values: SMS (SMS), EMAIL (email), CALL (phone), WECHAT (WeChat)
-	NoticeWays []*string `json:"NoticeWays,omitempty" name:"NoticeWays" list`
+	NoticeWays []*string `json:"NoticeWays,omitempty" name:"NoticeWays"`
 
 	// Alarm policy ID, which can be used when you call APIs ([BindingPolicyObject](https://intl.cloud.tencent.com/document/product/248/40421?from_cn_redirect=1), [UnBindingAllPolicyObject](https://intl.cloud.tencent.com/document/product/248/40568?from_cn_redirect=1), [UnBindingPolicyObject](https://intl.cloud.tencent.com/document/product/248/40567?from_cn_redirect=1)) to bind/unbind instances or instance groups to/from an alarm policy
 	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
@@ -103,7 +103,7 @@ type AlarmHistory struct {
 
 	// Metric information
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	MetricsInfo []*AlarmHistoryMetric `json:"MetricsInfo,omitempty" name:"MetricsInfo" list`
+	MetricsInfo []*AlarmHistoryMetric `json:"MetricsInfo,omitempty" name:"MetricsInfo"`
 }
 
 type AlarmHistoryMetric struct {
@@ -148,11 +148,11 @@ type AlarmNotice struct {
 
 	// User notification list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserNotices []*UserNotice `json:"UserNotices,omitempty" name:"UserNotices" list`
+	UserNotices []*UserNotice `json:"UserNotices,omitempty" name:"UserNotices"`
 
 	// Callback notification list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices" list`
+	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices"`
 
 	// Whether it is the system default notification template. Valid values: 0 (no), 1 (yes)
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -164,7 +164,7 @@ type AlarmNotice struct {
 
 	// List of IDs of the alarm policies bound to alarm notification template
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds" list`
+	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
 }
 
 type AlarmPolicy struct {
@@ -219,15 +219,15 @@ type AlarmPolicy struct {
 
 	// Notification rule ID list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
 
 	// Notification rule list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Notices []*AlarmNotice `json:"Notices,omitempty" name:"Notices" list`
+	Notices []*AlarmNotice `json:"Notices,omitempty" name:"Notices"`
 
 	// Triggered task list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks" list`
+	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks"`
 
 	// Template policy group
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -250,7 +250,7 @@ type AlarmPolicy struct {
 
 	// Region
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Region []*string `json:"Region,omitempty" name:"Region" list`
+	Region []*string `json:"Region,omitempty" name:"Region"`
 
 	// Namespace display name
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -286,7 +286,7 @@ type AlarmPolicy struct {
 
 	// Tag
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	TagInstances []*TagInstance `json:"TagInstances,omitempty" name:"TagInstances" list`
+	TagInstances []*TagInstance `json:"TagInstances,omitempty" name:"TagInstances"`
 }
 
 type AlarmPolicyCondition struct {
@@ -297,14 +297,14 @@ type AlarmPolicyCondition struct {
 
 	// Alarm trigger condition list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Rules []*AlarmPolicyRule `json:"Rules,omitempty" name:"Rules" list`
+	Rules []*AlarmPolicyRule `json:"Rules,omitempty" name:"Rules"`
 }
 
 type AlarmPolicyEventCondition struct {
 
 	// Alarm trigger condition list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Rules []*AlarmPolicyRule `json:"Rules,omitempty" name:"Rules" list`
+	Rules []*AlarmPolicyRule `json:"Rules,omitempty" name:"Rules"`
 }
 
 type AlarmPolicyFilter struct {
@@ -424,7 +424,7 @@ type BindingPolicyObjectRequest struct {
 	InstanceGroupId *int64 `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
 
 	// Dimensions of an object to be bound.
-	Dimensions []*BindingPolicyObjectDimension `json:"Dimensions,omitempty" name:"Dimensions" list`
+	Dimensions []*BindingPolicyObjectDimension `json:"Dimensions,omitempty" name:"Dimensions"`
 
 	// Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
@@ -491,7 +491,7 @@ type CommonNamespace struct {
 	Config *string `json:"Config,omitempty" name:"Config"`
 
 	// List of supported regions
-	AvailableRegions []*string `json:"AvailableRegions,omitempty" name:"AvailableRegions" list`
+	AvailableRegions []*string `json:"AvailableRegions,omitempty" name:"AvailableRegions"`
 
 	// Sort ID
 	SortId *int64 `json:"SortId,omitempty" name:"SortId"`
@@ -531,10 +531,10 @@ type CreateAlarmNoticeRequest struct {
 	NoticeLanguage *string `json:"NoticeLanguage,omitempty" name:"NoticeLanguage"`
 
 	// User notifications (up to 5)
-	UserNotices []*UserNotice `json:"UserNotices,omitempty" name:"UserNotices" list`
+	UserNotices []*UserNotice `json:"UserNotices,omitempty" name:"UserNotices"`
 
 	// Callback notifications (up to 3)
-	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices" list`
+	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices"`
 }
 
 func (r *CreateAlarmNoticeRequest) ToJsonString() string {
@@ -618,10 +618,10 @@ type CreateAlarmPolicyRequest struct {
 	EventCondition *AlarmPolicyEventCondition `json:"EventCondition,omitempty" name:"EventCondition"`
 
 	// List of notification rule IDs, which can be obtained via [DescribeAlarmNotices](https://intl.cloud.tencent.com/document/product/248/51280?from_cn_redirect=1)
-	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
 
 	// Triggered task list
-	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks" list`
+	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks"`
 }
 
 func (r *CreateAlarmPolicyRequest) ToJsonString() string {
@@ -750,10 +750,10 @@ type CreatePolicyGroupRequest struct {
 	InsertTime *int64 `json:"InsertTime,omitempty" name:"InsertTime"`
 
 	// Alarm threshold rules in the policy group.
-	Conditions []*CreatePolicyGroupCondition `json:"Conditions,omitempty" name:"Conditions" list`
+	Conditions []*CreatePolicyGroupCondition `json:"Conditions,omitempty" name:"Conditions"`
 
 	// Event alarm rules in the policy group.
-	EventConditions []*CreatePolicyGroupEventCondition `json:"EventConditions,omitempty" name:"EventConditions" list`
+	EventConditions []*CreatePolicyGroupEventCondition `json:"EventConditions,omitempty" name:"EventConditions"`
 
 	// Whether it is a backend call. If the value is 1, rules from the policy template will be used to fill in the `Conditions` and `EventConditions` fields.
 	BackEndCall *int64 `json:"BackEndCall,omitempty" name:"BackEndCall"`
@@ -818,13 +818,13 @@ func (r *CreatePolicyGroupResponse) FromJsonString(s string) error {
 type DataPoint struct {
 
 	// Combination of instance object dimensions
-	Dimensions []*Dimension `json:"Dimensions,omitempty" name:"Dimensions" list`
+	Dimensions []*Dimension `json:"Dimensions,omitempty" name:"Dimensions"`
 
 	// The array of timestamps indicating at which points in time there is data. Missing timestamps have no data points (i.e., missed)
-	Timestamps []*float64 `json:"Timestamps,omitempty" name:"Timestamps" list`
+	Timestamps []*float64 `json:"Timestamps,omitempty" name:"Timestamps"`
 
 	// The array of monitoring values, which is in one-to-one correspondence to Timestamps
-	Values []*float64 `json:"Values,omitempty" name:"Values" list`
+	Values []*float64 `json:"Values,omitempty" name:"Values"`
 }
 
 type DeleteAlarmNoticesRequest struct {
@@ -834,7 +834,7 @@ type DeleteAlarmNoticesRequest struct {
 	Module *string `json:"Module,omitempty" name:"Module"`
 
 	// Alarm notification template ID list
-	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
 }
 
 func (r *DeleteAlarmNoticesRequest) ToJsonString() string {
@@ -884,7 +884,7 @@ type DeleteAlarmPolicyRequest struct {
 	Module *string `json:"Module,omitempty" name:"Module"`
 
 	// Alarm policy ID list
-	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds" list`
+	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
 }
 
 func (r *DeleteAlarmPolicyRequest) ToJsonString() string {
@@ -934,7 +934,7 @@ type DeletePolicyGroupRequest struct {
 	Module *string `json:"Module,omitempty" name:"Module"`
 
 	// Policy group ID.
-	GroupId []*int64 `json:"GroupId,omitempty" name:"GroupId" list`
+	GroupId []*int64 `json:"GroupId,omitempty" name:"GroupId"`
 }
 
 func (r *DeletePolicyGroupRequest) ToJsonString() string {
@@ -1037,16 +1037,16 @@ type DescribeAccidentEventListRequest struct {
 	OccurTimeOrder *string `json:"OccurTimeOrder,omitempty" name:"OccurTimeOrder"`
 
 	// Filter by event type. The value 1 indicates service issues. The value 2 indicates other subscriptions.
-	AccidentType []*int64 `json:"AccidentType,omitempty" name:"AccidentType" list`
+	AccidentType []*int64 `json:"AccidentType,omitempty" name:"AccidentType"`
 
 	// Filter by event. The value 1 indicates CVM storage issues. The value 2 indicates CVM network connection issues. The value 3 indicates that the CVM has an exception. The value 202 indicates that an ISP network jitter occurs.
-	AccidentEvent []*int64 `json:"AccidentEvent,omitempty" name:"AccidentEvent" list`
+	AccidentEvent []*int64 `json:"AccidentEvent,omitempty" name:"AccidentEvent"`
 
 	// Filter by event status. The value 0 indicates that the event has been recovered. The value 1 indicates that the event has not been recovered.
-	AccidentStatus []*int64 `json:"AccidentStatus,omitempty" name:"AccidentStatus" list`
+	AccidentStatus []*int64 `json:"AccidentStatus,omitempty" name:"AccidentStatus"`
 
 	// Filter by region where the event occurs. The value gz indicates Guangzhou. The value sh indicates Shanghai.
-	AccidentRegion []*string `json:"AccidentRegion,omitempty" name:"AccidentRegion" list`
+	AccidentRegion []*string `json:"AccidentRegion,omitempty" name:"AccidentRegion"`
 
 	// Filter by affected resource, such as ins-19a06bka.
 	AffectResource *string `json:"AffectResource,omitempty" name:"AffectResource"`
@@ -1088,7 +1088,7 @@ type DescribeAccidentEventListResponse struct {
 
 		// Platform event list.
 	// Note: This field may return null, indicating that no valid value was found.
-		Alarms []*DescribeAccidentEventListAlarms `json:"Alarms,omitempty" name:"Alarms" list`
+		Alarms []*DescribeAccidentEventListAlarms `json:"Alarms,omitempty" name:"Alarms"`
 
 		// Total number of platform events.
 	// Note: This field may return null, indicating that no valid value was found.
@@ -1145,7 +1145,7 @@ type DescribeAlarmEventsResponse struct {
 	Response *struct {
 
 		// Alarm event list
-		Events []*AlarmEvent `json:"Events,omitempty" name:"Events" list`
+		Events []*AlarmEvent `json:"Events,omitempty" name:"Events"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1185,27 +1185,27 @@ type DescribeAlarmHistoriesRequest struct {
 	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Filter by monitoring type. Valid value: `MT_QCE` (Tencent Cloud service monitoring). If this parameter is left empty, all types will be queried by default.
-	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes" list`
+	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes"`
 
 	// Filter by alarm object. Fuzzy search with string is supported
 	AlarmObject *string `json:"AlarmObject,omitempty" name:"AlarmObject"`
 
 	// Filter by alarm status. Valid values: ALARM (not resolved), OK (resolved), NO_CONF (expired), NO_DATA (insufficient data). If this parameter is left empty, all will be queried by default
-	AlarmStatus []*string `json:"AlarmStatus,omitempty" name:"AlarmStatus" list`
+	AlarmStatus []*string `json:"AlarmStatus,omitempty" name:"AlarmStatus"`
 
 	// Filter by project ID. Valid values: `-1` (no project), `0` (default project)
 	// You can query [Project Management](https://console.cloud.tencent.com/project) on this page.
-	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// Filter by instance group ID
-	InstanceGroupIds []*int64 `json:"InstanceGroupIds,omitempty" name:"InstanceGroupIds" list`
+	InstanceGroupIds []*int64 `json:"InstanceGroupIds,omitempty" name:"InstanceGroupIds"`
 
 	// Filter by policy type. Monitoring type and policy type are first-level and second-level filters respectively and both need to be passed in. For example, `[{"MonitorType": "MT_QCE", "Namespace": "cvm_device"}]`
 	// This parameter can be queried with the API [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1).
-	Namespaces []*MonitorTypeNamespace `json:"Namespaces,omitempty" name:"Namespaces" list`
+	Namespaces []*MonitorTypeNamespace `json:"Namespaces,omitempty" name:"Namespaces"`
 
 	// Filter by metric name
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
 
 	// Fuzzy search by policy name
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
@@ -1214,13 +1214,13 @@ type DescribeAlarmHistoriesRequest struct {
 	Content *string `json:"Content,omitempty" name:"Content"`
 
 	// Search by recipient. You can get the user list with the API [ListUsers](https://intl.cloud.tencent.com/document/product/598/34587?from_cn_redirect=1) in “Cloud Access Management” or query the sub-user information with the API [GetUser](https://intl.cloud.tencent.com/document/product/598/34590?from_cn_redirect=1). The `Uid` field in the returned result should be entered here.
-	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids" list`
+	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids"`
 
 	// Search by recipient group. You can get the user group list with the API [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) in “Cloud Access Management” or query the user group list where a sub-user is in with the API [ListGroupsForUser](https://intl.cloud.tencent.com/document/product/598/34588?from_cn_redirect=1). The `GroupId` field in the returned result should be entered here.
-	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups" list`
+	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups"`
 
 	// Search by alarm policy ID list
-	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds" list`
+	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
 }
 
 func (r *DescribeAlarmHistoriesRequest) ToJsonString() string {
@@ -1267,7 +1267,7 @@ type DescribeAlarmHistoriesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Alarm record list
-		Histories []*AlarmHistory `json:"Histories,omitempty" name:"Histories" list`
+		Histories []*AlarmHistory `json:"Histories,omitempty" name:"Histories"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1324,7 +1324,7 @@ type DescribeAlarmMetricsResponse struct {
 	Response *struct {
 
 		// Alarm metric list
-		Metrics []*Metric `json:"Metrics,omitempty" name:"Metrics" list`
+		Metrics []*Metric `json:"Metrics,omitempty" name:"Metrics"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1374,7 +1374,7 @@ type DescribeAlarmNoticeCallbacksResponse struct {
 
 		// Alarm callback notification
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices" list`
+		URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1470,10 +1470,10 @@ type DescribeAlarmNoticesRequest struct {
 	ReceiverType *string `json:"ReceiverType,omitempty" name:"ReceiverType"`
 
 	// Recipient object list
-	UserIds []*int64 `json:"UserIds,omitempty" name:"UserIds" list`
+	UserIds []*int64 `json:"UserIds,omitempty" name:"UserIds"`
 
 	// Recipient group list
-	GroupIds []*int64 `json:"GroupIds,omitempty" name:"GroupIds" list`
+	GroupIds []*int64 `json:"GroupIds,omitempty" name:"GroupIds"`
 }
 
 func (r *DescribeAlarmNoticesRequest) ToJsonString() string {
@@ -1511,7 +1511,7 @@ type DescribeAlarmNoticesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Alarm notification template list
-		Notices []*AlarmNotice `json:"Notices,omitempty" name:"Notices" list`
+		Notices []*AlarmNotice `json:"Notices,omitempty" name:"Notices"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1545,11 +1545,11 @@ type DescribeAlarmPoliciesRequest struct {
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 
 	// Filter by monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring). If this parameter is left empty, all will be queried by default
-	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes" list`
+	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes"`
 
 	// Filter by namespace. For the values of different policy types, please see:
 	// [Policy Type List](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1)
-	Namespaces []*string `json:"Namespaces,omitempty" name:"Namespaces" list`
+	Namespaces []*string `json:"Namespaces,omitempty" name:"Namespaces"`
 
 	// The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object. For example, “CVM - Basic Monitor” can be written as:
 	// `[ {"Dimensions": {"unInstanceId": "ins-qr8d555g"}}, {"Dimensions": {"unInstanceId": "ins-qr8d555h"}} ]`
@@ -1559,13 +1559,13 @@ type DescribeAlarmPoliciesRequest struct {
 	Dimensions *string `json:"Dimensions,omitempty" name:"Dimensions"`
 
 	// Search by recipient. You can get the user list with the API [ListUsers](https://intl.cloud.tencent.com/document/product/598/34587?from_cn_redirect=1) in “Cloud Access Management” or query the sub-user information with the API [GetUser](https://intl.cloud.tencent.com/document/product/598/34590?from_cn_redirect=1). The `Uid` field in the returned result should be entered here.
-	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids" list`
+	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids"`
 
 	// Search by recipient group. You can get the user group list with the API [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) in “Cloud Access Management” or query the user group list where a sub-user is in with the API [ListGroupsForUser](https://intl.cloud.tencent.com/document/product/598/34588?from_cn_redirect=1). The `GroupId` field in the returned result should be entered here.
-	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups" list`
+	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups"`
 
 	// Filter by default policy. Valid values: DEFAULT (display default policy), NOT_DEFAULT (display non-default policies). If this parameter is left empty, all policies will be displayed
-	PolicyType []*string `json:"PolicyType,omitempty" name:"PolicyType" list`
+	PolicyType []*string `json:"PolicyType,omitempty" name:"PolicyType"`
 
 	// Sort by field. For example, to sort by the last modification time, use Field: "UpdateTime".
 	Field *string `json:"Field,omitempty" name:"Field"`
@@ -1575,17 +1575,17 @@ type DescribeAlarmPoliciesRequest struct {
 
 	// ID array of the policy project, which can be viewed on the following page:
 	// [Project Management](https://console.cloud.tencent.com/project)
-	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// ID list of the notification template, which can be obtained by querying the notification template list.
 	// It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent.com/document/product/248/51280?from_cn_redirect=1).
-	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
 
 	// Filter by trigger condition. Valid values: STATIC (display policies with static threshold), DYNAMIC (display policies with dynamic threshold). If this parameter is left empty, all policies will be displayed
-	RuleTypes []*string `json:"RuleTypes,omitempty" name:"RuleTypes" list`
+	RuleTypes []*string `json:"RuleTypes,omitempty" name:"RuleTypes"`
 
 	// Filter by alarm status. Valid values: [1]: enabled; [0]: disabled; [0, 1]: all
-	Enable []*int64 `json:"Enable,omitempty" name:"Enable" list`
+	Enable []*int64 `json:"Enable,omitempty" name:"Enable"`
 
 	// If `1` is passed in, alarm policies with no notification rules configured are queried. If it is left empty or other values are passed in, all alarm policies are queried.
 	NotBindingNoticeRule *int64 `json:"NotBindingNoticeRule,omitempty" name:"NotBindingNoticeRule"`
@@ -1634,7 +1634,7 @@ type DescribeAlarmPoliciesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Policy array
-		Policies []*AlarmPolicy `json:"Policies,omitempty" name:"Policies" list`
+		Policies []*AlarmPolicy `json:"Policies,omitempty" name:"Policies"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1715,10 +1715,10 @@ type DescribeAllNamespacesRequest struct {
 	Module *string `json:"Module,omitempty" name:"Module"`
 
 	// Filter by monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring). If this parameter is left empty, all will be queried by default
-	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes" list`
+	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes"`
 
 	// Filter by namespace ID. If this parameter is left empty, all will be queried
-	Ids []*string `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*string `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *DescribeAllNamespacesRequest) ToJsonString() string {
@@ -1754,10 +1754,10 @@ type DescribeAllNamespacesResponse struct {
 		CustomNamespaces *CommonNamespace `json:"CustomNamespaces,omitempty" name:"CustomNamespaces"`
 
 		// Alarm policy type of Tencent Cloud service
-		QceNamespacesNew []*CommonNamespace `json:"QceNamespacesNew,omitempty" name:"QceNamespacesNew" list`
+		QceNamespacesNew []*CommonNamespace `json:"QceNamespacesNew,omitempty" name:"QceNamespacesNew"`
 
 		// Other alarm policy type (not supported currently)
-		CustomNamespacesNew []*CommonNamespace `json:"CustomNamespacesNew,omitempty" name:"CustomNamespacesNew" list`
+		CustomNamespacesNew []*CommonNamespace `json:"CustomNamespacesNew,omitempty" name:"CustomNamespacesNew"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1810,7 +1810,7 @@ type DescribeBaseMetricsResponse struct {
 	Response *struct {
 
 		// Listed of queried metric descriptions
-		MetricSet []*MetricSet `json:"MetricSet,omitempty" name:"MetricSet" list`
+		MetricSet []*MetricSet `json:"MetricSet,omitempty" name:"MetricSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1911,11 +1911,11 @@ type DescribeBasicAlarmListAlarms struct {
 
 	// Notification method.
 	// Note: This field may return null, indicating that no valid value was found.
-	NotifyWay []*string `json:"NotifyWay,omitempty" name:"NotifyWay" list`
+	NotifyWay []*string `json:"NotifyWay,omitempty" name:"NotifyWay"`
 
 	// Instance group information.
 	// Note: This field may return null, indicating that no valid value was found.
-	InstanceGroup []*InstanceGroup `json:"InstanceGroup,omitempty" name:"InstanceGroup" list`
+	InstanceGroup []*InstanceGroup `json:"InstanceGroup,omitempty" name:"InstanceGroup"`
 }
 
 type DescribeBasicAlarmListRequest struct {
@@ -1940,22 +1940,22 @@ type DescribeBasicAlarmListRequest struct {
 	OccurTimeOrder *string `json:"OccurTimeOrder,omitempty" name:"OccurTimeOrder"`
 
 	// Filter by project ID.
-	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// Filter by policy type.
-	ViewNames []*string `json:"ViewNames,omitempty" name:"ViewNames" list`
+	ViewNames []*string `json:"ViewNames,omitempty" name:"ViewNames"`
 
 	// Filter by alarm status.
-	AlarmStatus []*int64 `json:"AlarmStatus,omitempty" name:"AlarmStatus" list`
+	AlarmStatus []*int64 `json:"AlarmStatus,omitempty" name:"AlarmStatus"`
 
 	// Filter by alarm object.
 	ObjLike *string `json:"ObjLike,omitempty" name:"ObjLike"`
 
 	// Filter by instance group ID.
-	InstanceGroupIds []*int64 `json:"InstanceGroupIds,omitempty" name:"InstanceGroupIds" list`
+	InstanceGroupIds []*int64 `json:"InstanceGroupIds,omitempty" name:"InstanceGroupIds"`
 
 	// Filtering by metric names
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
 }
 
 func (r *DescribeBasicAlarmListRequest) ToJsonString() string {
@@ -1994,7 +1994,7 @@ type DescribeBasicAlarmListResponse struct {
 
 		// Alarm list.
 	// Note: This field may return null, indicating that no valid value was found.
-		Alarms []*DescribeBasicAlarmListAlarms `json:"Alarms,omitempty" name:"Alarms" list`
+		Alarms []*DescribeBasicAlarmListAlarms `json:"Alarms,omitempty" name:"Alarms"`
 
 		// Total number.
 	// Note: This field may return null, indicating that no valid value was found.
@@ -2071,7 +2071,7 @@ type DescribeBindingPolicyObjectListInstanceGroup struct {
 
 	// Regions where the instances reside.
 	// Note: This field may return null, indicating that no valid value was found.
-	Regions []*string `json:"Regions,omitempty" name:"Regions" list`
+	Regions []*string `json:"Regions,omitempty" name:"Regions"`
 }
 
 type DescribeBindingPolicyObjectListRequest struct {
@@ -2090,7 +2090,7 @@ type DescribeBindingPolicyObjectListRequest struct {
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Dimensions of filtering objects.
-	Dimensions []*DescribeBindingPolicyObjectListDimension `json:"Dimensions,omitempty" name:"Dimensions" list`
+	Dimensions []*DescribeBindingPolicyObjectListDimension `json:"Dimensions,omitempty" name:"Dimensions"`
 }
 
 func (r *DescribeBindingPolicyObjectListRequest) ToJsonString() string {
@@ -2122,7 +2122,7 @@ type DescribeBindingPolicyObjectListResponse struct {
 
 		// List of bound object instances.
 	// Note: This field may return null, indicating that no valid value was found.
-		List []*DescribeBindingPolicyObjectListInstance `json:"List,omitempty" name:"List" list`
+		List []*DescribeBindingPolicyObjectListInstance `json:"List,omitempty" name:"List"`
 
 		// Total number of bound object instances.
 		Total *int64 `json:"Total,omitempty" name:"Total"`
@@ -2181,7 +2181,7 @@ type DescribeMonitorTypesResponse struct {
 	Response *struct {
 
 		// Monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring)
-		MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes" list`
+		MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2206,14 +2206,14 @@ type DescribePolicyConditionListCondition struct {
 
 	// Event alarm conditions.
 	// Note: This field may return null, indicating that no valid value was found.
-	EventMetrics []*DescribePolicyConditionListEventMetric `json:"EventMetrics,omitempty" name:"EventMetrics" list`
+	EventMetrics []*DescribePolicyConditionListEventMetric `json:"EventMetrics,omitempty" name:"EventMetrics"`
 
 	// Whether to support multiple regions.
 	IsSupportMultiRegion *bool `json:"IsSupportMultiRegion,omitempty" name:"IsSupportMultiRegion"`
 
 	// Metric alarm conditions.
 	// Note: This field may return null, indicating that no valid value was found.
-	Metrics []*DescribePolicyConditionListMetric `json:"Metrics,omitempty" name:"Metrics" list`
+	Metrics []*DescribePolicyConditionListMetric `json:"Metrics,omitempty" name:"Metrics"`
 
 	// Policy type name.
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -2226,7 +2226,7 @@ type DescribePolicyConditionListCondition struct {
 
 	// List of regions that support this policy type.
 	// Note: This field may return null, indicating that no valid value was found.
-	SupportRegions []*string `json:"SupportRegions,omitempty" name:"SupportRegions" list`
+	SupportRegions []*string `json:"SupportRegions,omitempty" name:"SupportRegions"`
 }
 
 type DescribePolicyConditionListConfigManual struct {
@@ -2260,7 +2260,7 @@ type DescribePolicyConditionListConfigManualCalcType struct {
 
 	// Value of CalcType.
 	// Note: This field may return null, indicating that no valid value was found.
-	Keys []*int64 `json:"Keys,omitempty" name:"Keys" list`
+	Keys []*int64 `json:"Keys,omitempty" name:"Keys"`
 
 	// Required or not.
 	Need *bool `json:"Need,omitempty" name:"Need"`
@@ -2296,7 +2296,7 @@ type DescribePolicyConditionListConfigManualContinueTime struct {
 
 	// Custom durations in seconds.
 	// Note: This field may return null, indicating that no valid value was found.
-	Keys []*int64 `json:"Keys,omitempty" name:"Keys" list`
+	Keys []*int64 `json:"Keys,omitempty" name:"Keys"`
 
 	// Required or not.
 	Need *bool `json:"Need,omitempty" name:"Need"`
@@ -2310,7 +2310,7 @@ type DescribePolicyConditionListConfigManualPeriod struct {
 
 	// Custom periods in seconds.
 	// Note: This field may return null, indicating that no valid value was found.
-	Keys []*int64 `json:"Keys,omitempty" name:"Keys" list`
+	Keys []*int64 `json:"Keys,omitempty" name:"Keys"`
 
 	// Required or not.
 	Need *bool `json:"Need,omitempty" name:"Need"`
@@ -2324,7 +2324,7 @@ type DescribePolicyConditionListConfigManualPeriodNum struct {
 
 	// Number of custom periods.
 	// Note: This field may return null, indicating that no valid value was found.
-	Keys []*int64 `json:"Keys,omitempty" name:"Keys" list`
+	Keys []*int64 `json:"Keys,omitempty" name:"Keys"`
 
 	// Required or not.
 	Need *bool `json:"Need,omitempty" name:"Need"`
@@ -2427,7 +2427,7 @@ type DescribePolicyConditionListResponse struct {
 	Response *struct {
 
 		// List of alarm policy conditions.
-		Conditions []*DescribePolicyConditionListCondition `json:"Conditions,omitempty" name:"Conditions" list`
+		Conditions []*DescribePolicyConditionListCondition `json:"Conditions,omitempty" name:"Conditions"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2544,10 +2544,10 @@ type DescribePolicyGroupInfoEventCondition struct {
 type DescribePolicyGroupInfoReceiverInfo struct {
 
 	// List of alarm recipient group IDs.
-	ReceiverGroupList []*int64 `json:"ReceiverGroupList,omitempty" name:"ReceiverGroupList" list`
+	ReceiverGroupList []*int64 `json:"ReceiverGroupList,omitempty" name:"ReceiverGroupList"`
 
 	// List of alarm recipient IDs.
-	ReceiverUserList []*int64 `json:"ReceiverUserList,omitempty" name:"ReceiverUserList" list`
+	ReceiverUserList []*int64 `json:"ReceiverUserList,omitempty" name:"ReceiverUserList"`
 
 	// Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates '10:0:0'.
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
@@ -2559,11 +2559,11 @@ type DescribePolicyGroupInfoReceiverInfo struct {
 	ReceiverType *string `json:"ReceiverType,omitempty" name:"ReceiverType"`
 
 	// Alarm notification method. Valid values: "SMS", "SITE", "EMAIL", "CALL", and "WECHAT".
-	NotifyWay []*string `json:"NotifyWay,omitempty" name:"NotifyWay" list`
+	NotifyWay []*string `json:"NotifyWay,omitempty" name:"NotifyWay"`
 
 	// Uid of the alarm call recipient.
 	// Note: This field may return null, indicating that no valid value was found.
-	UidList []*int64 `json:"UidList,omitempty" name:"UidList" list`
+	UidList []*int64 `json:"UidList,omitempty" name:"UidList"`
 
 	// Number of alarm call rounds.
 	RoundNumber *int64 `json:"RoundNumber,omitempty" name:"RoundNumber"`
@@ -2578,10 +2578,10 @@ type DescribePolicyGroupInfoReceiverInfo struct {
 	NeedSendNotice *int64 `json:"NeedSendNotice,omitempty" name:"NeedSendNotice"`
 
 	// Alarm call notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is triggered) and RECOVER (indicating that a notice is sent when the alarm is recovered).
-	SendFor []*string `json:"SendFor,omitempty" name:"SendFor" list`
+	SendFor []*string `json:"SendFor,omitempty" name:"SendFor"`
 
 	// Notification method when an alarm is recovered. Valid value: SMS.
-	RecoverNotify []*string `json:"RecoverNotify,omitempty" name:"RecoverNotify" list`
+	RecoverNotify []*string `json:"RecoverNotify,omitempty" name:"RecoverNotify"`
 
 	// Alarm language.
 	// Note: This field may return null, indicating that no valid value was found.
@@ -2647,22 +2647,22 @@ type DescribePolicyGroupInfoResponse struct {
 		UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 		// Regions supported by this policy.
-		Region []*string `json:"Region,omitempty" name:"Region" list`
+		Region []*string `json:"Region,omitempty" name:"Region"`
 
 		// List of policy type dimensions.
-		DimensionGroup []*string `json:"DimensionGroup,omitempty" name:"DimensionGroup" list`
+		DimensionGroup []*string `json:"DimensionGroup,omitempty" name:"DimensionGroup"`
 
 		// Threshold rule list.
 	// Note: This field may return null, indicating that no valid value was found.
-		ConditionsConfig []*DescribePolicyGroupInfoCondition `json:"ConditionsConfig,omitempty" name:"ConditionsConfig" list`
+		ConditionsConfig []*DescribePolicyGroupInfoCondition `json:"ConditionsConfig,omitempty" name:"ConditionsConfig"`
 
 		// Product event rule list.
 	// Note: This field may return null, indicating that no valid value was found.
-		EventConfig []*DescribePolicyGroupInfoEventCondition `json:"EventConfig,omitempty" name:"EventConfig" list`
+		EventConfig []*DescribePolicyGroupInfoEventCondition `json:"EventConfig,omitempty" name:"EventConfig"`
 
 		// Recipient list.
 	// Note: This field may return null, indicating that no valid value was found.
-		ReceiverInfos []*DescribePolicyGroupInfoReceiverInfo `json:"ReceiverInfos,omitempty" name:"ReceiverInfos" list`
+		ReceiverInfos []*DescribePolicyGroupInfoReceiverInfo `json:"ReceiverInfos,omitempty" name:"ReceiverInfos"`
 
 		// User callback information.
 	// Note: This field may return null, indicating that no valid value was found.
@@ -2741,15 +2741,15 @@ type DescribePolicyGroupListGroup struct {
 
 	// Threshold rule list.
 	// Note: This field may return null, indicating that no valid value was found.
-	Conditions []*DescribePolicyGroupInfoCondition `json:"Conditions,omitempty" name:"Conditions" list`
+	Conditions []*DescribePolicyGroupInfoCondition `json:"Conditions,omitempty" name:"Conditions"`
 
 	// Product event rule list.
 	// Note: This field may return null, indicating that no valid value was found.
-	EventConditions []*DescribePolicyGroupInfoEventCondition `json:"EventConditions,omitempty" name:"EventConditions" list`
+	EventConditions []*DescribePolicyGroupInfoEventCondition `json:"EventConditions,omitempty" name:"EventConditions"`
 
 	// Recipient list.
 	// Note: This field may return null, indicating that no valid value was found.
-	ReceiverInfos []*DescribePolicyGroupInfoReceiverInfo `json:"ReceiverInfos,omitempty" name:"ReceiverInfos" list`
+	ReceiverInfos []*DescribePolicyGroupInfoReceiverInfo `json:"ReceiverInfos,omitempty" name:"ReceiverInfos"`
 
 	// Template-based policy group.
 	// Note: This field may return null, indicating that no valid value was found.
@@ -2810,19 +2810,19 @@ type DescribePolicyGroupListRequest struct {
 	UpdateTimeOrder *string `json:"UpdateTimeOrder,omitempty" name:"UpdateTimeOrder"`
 
 	// Project ID list.
-	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// List of alarm policy types.
-	ViewNames []*string `json:"ViewNames,omitempty" name:"ViewNames" list`
+	ViewNames []*string `json:"ViewNames,omitempty" name:"ViewNames"`
 
 	// Whether to filter policy groups without recipients. The value 1 indicates that policy groups without recipients will be filtered. The value 0 indicates that policy groups without recipients will not be filtered.
 	FilterUnuseReceiver *int64 `json:"FilterUnuseReceiver,omitempty" name:"FilterUnuseReceiver"`
 
 	// Filter by recipient group.
-	Receivers []*string `json:"Receivers,omitempty" name:"Receivers" list`
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
 
 	// Filter by recipient.
-	ReceiverUserList []*string `json:"ReceiverUserList,omitempty" name:"ReceiverUserList" list`
+	ReceiverUserList []*string `json:"ReceiverUserList,omitempty" name:"ReceiverUserList"`
 
 	// Dimension set field (json string), for example, [[{"name":"unInstanceId","value":"ins-6e4b2aaa"}]].
 	Dimensions *string `json:"Dimensions,omitempty" name:"Dimensions"`
@@ -2876,7 +2876,7 @@ type DescribePolicyGroupListResponse struct {
 
 		// Policy group list.
 	// Note: This field may return null, indicating that no valid value was found.
-		GroupList []*DescribePolicyGroupListGroup `json:"GroupList,omitempty" name:"GroupList" list`
+		GroupList []*DescribePolicyGroupListGroup `json:"GroupList,omitempty" name:"GroupList"`
 
 		// Total number of policy groups.
 		Total *int64 `json:"Total,omitempty" name:"Total"`
@@ -2974,11 +2974,11 @@ type DescribeProductEventListEvents struct {
 
 	// Instance object information.
 	// Note: This field may return null, indicating that no valid value was found.
-	Dimensions []*DescribeProductEventListEventsDimensions `json:"Dimensions,omitempty" name:"Dimensions" list`
+	Dimensions []*DescribeProductEventListEventsDimensions `json:"Dimensions,omitempty" name:"Dimensions"`
 
 	// Additional information of the instance object.
 	// Note: This field may return null, indicating that no valid value was found.
-	AdditionMsg []*DescribeProductEventListEventsDimensions `json:"AdditionMsg,omitempty" name:"AdditionMsg" list`
+	AdditionMsg []*DescribeProductEventListEventsDimensions `json:"AdditionMsg,omitempty" name:"AdditionMsg"`
 
 	// Whether to configure alarms.
 	// Note: This field may return null, indicating that no valid value was found.
@@ -2986,7 +2986,7 @@ type DescribeProductEventListEvents struct {
 
 	// Policy information.
 	// Note: This field may return null, indicating that no valid value was found.
-	GroupInfo []*DescribeProductEventListEventsGroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo" list`
+	GroupInfo []*DescribeProductEventListEventsGroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo"`
 
 	// Display name
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
@@ -3045,28 +3045,28 @@ type DescribeProductEventListRequest struct {
 	Module *string `json:"Module,omitempty" name:"Module"`
 
 	// Filter by product type. For example, 'cvm' indicates Cloud Virtual Machine.
-	ProductName []*string `json:"ProductName,omitempty" name:"ProductName" list`
+	ProductName []*string `json:"ProductName,omitempty" name:"ProductName"`
 
 	// Filter by product name. For example, "guest_reboot" indicates server restart.
-	EventName []*string `json:"EventName,omitempty" name:"EventName" list`
+	EventName []*string `json:"EventName,omitempty" name:"EventName"`
 
 	// Affected object, such as "ins-19708ino"
-	InstanceId []*string `json:"InstanceId,omitempty" name:"InstanceId" list`
+	InstanceId []*string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Filter by dimension, such as by public IP: 10.0.0.1.
-	Dimensions []*DescribeProductEventListDimensions `json:"Dimensions,omitempty" name:"Dimensions" list`
+	Dimensions []*DescribeProductEventListDimensions `json:"Dimensions,omitempty" name:"Dimensions"`
 
 	// Region filter parameter for service events, such as `gz`. For region abbreviations, please see [Region List](https://intl.cloud.tencent.com/document/product/248/50863?from_cn_redirect=1)
-	RegionList []*string `json:"RegionList,omitempty" name:"RegionList" list`
+	RegionList []*string `json:"RegionList,omitempty" name:"RegionList"`
 
 	// Filter by event type. Valid values: ["status_change","abnormal"], which indicate events whose statuses have changed and events with exceptions respectively.
-	Type []*string `json:"Type,omitempty" name:"Type" list`
+	Type []*string `json:"Type,omitempty" name:"Type"`
 
 	// Filter by event status. Valid values: ["recover","alarm","-"], which indicate that an event has been recovered, has not been recovered, and has no status respectively.
-	Status []*string `json:"Status,omitempty" name:"Status" list`
+	Status []*string `json:"Status,omitempty" name:"Status"`
 
 	// Filter by project ID.
-	Project []*string `json:"Project,omitempty" name:"Project" list`
+	Project []*string `json:"Project,omitempty" name:"Project"`
 
 	// Filter by alarm status configuration. The value 1 indicates that the alarm status has been configured. The value 0 indicates that the alarm status has not been configured.
 	IsAlarmConfig *int64 `json:"IsAlarmConfig,omitempty" name:"IsAlarmConfig"`
@@ -3126,7 +3126,7 @@ type DescribeProductEventListResponse struct {
 
 		// Event list
 	// Note: This field may return null, indicating that no valid value was found.
-		Events []*DescribeProductEventListEvents `json:"Events,omitempty" name:"Events" list`
+		Events []*DescribeProductEventListEvents `json:"Events,omitempty" name:"Events"`
 
 		// Event statistics.
 		OverView *DescribeProductEventListOverView `json:"OverView,omitempty" name:"OverView"`
@@ -3161,10 +3161,10 @@ type DescribeStatisticDataRequest struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
 	// Metric name list
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
 
 	// Dimension condition. The `=` and `in` operators are supported
-	Conditions []*MidQueryCondition `json:"Conditions,omitempty" name:"Conditions" list`
+	Conditions []*MidQueryCondition `json:"Conditions,omitempty" name:"Conditions"`
 
 	// Statistical granularity in s. Default value: 300
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
@@ -3176,7 +3176,7 @@ type DescribeStatisticDataRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// `groupBy` by the specified dimension
-	GroupBys []*string `json:"GroupBys,omitempty" name:"GroupBys" list`
+	GroupBys []*string `json:"GroupBys,omitempty" name:"GroupBys"`
 }
 
 func (r *DescribeStatisticDataRequest) ToJsonString() string {
@@ -3219,7 +3219,7 @@ type DescribeStatisticDataResponse struct {
 		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 		// Monitoring data
-		Data []*MetricData `json:"Data,omitempty" name:"Data" list`
+		Data []*MetricData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3249,7 +3249,7 @@ type Dimension struct {
 type DimensionsDesc struct {
 
 	// Array of dimension names
-	Dimensions []*string `json:"Dimensions,omitempty" name:"Dimensions" list`
+	Dimensions []*string `json:"Dimensions,omitempty" name:"Dimensions"`
 }
 
 type GetMonitorDataRequest struct {
@@ -3262,7 +3262,7 @@ type GetMonitorDataRequest struct {
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 	// Dimension combination of instance object in the format of `key-value` pair, such as [{"Name":"InstanceId","Value":"ins-j0hk02zo"}]. For more information on the dimensions of each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The value in the dimension column is the `key` in the dimension combination, and the value corresponding to the `key` is the `value` in the combination
-	Instances []*Instance `json:"Instances,omitempty" name:"Instances" list`
+	Instances []*Instance `json:"Instances,omitempty" name:"Instances"`
 
 	// Monitoring statistical period in seconds, such as 60. Default value: 300. The statistical period varies by metric. For more information on the statistical periods supported by each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The values in the statistical period column are the supported statistical periods
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
@@ -3309,7 +3309,7 @@ type GetMonitorDataResponse struct {
 		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 		// Array of data points
-		DataPoints []*DataPoint `json:"DataPoints,omitempty" name:"DataPoints" list`
+		DataPoints []*DataPoint `json:"DataPoints,omitempty" name:"DataPoints"`
 
 		// Start time
 		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -3336,7 +3336,7 @@ func (r *GetMonitorDataResponse) FromJsonString(s string) error {
 type Instance struct {
 
 	// Combination of instance dimensions
-	Dimensions []*Dimension `json:"Dimensions,omitempty" name:"Dimensions" list`
+	Dimensions []*Dimension `json:"Dimensions,omitempty" name:"Dimensions"`
 }
 
 type InstanceGroup struct {
@@ -3377,7 +3377,7 @@ type Metric struct {
 	Max *float64 `json:"Max,omitempty" name:"Max"`
 
 	// Dimension list
-	Dimensions []*string `json:"Dimensions,omitempty" name:"Dimensions" list`
+	Dimensions []*string `json:"Dimensions,omitempty" name:"Dimensions"`
 
 	// Unit
 	Unit *string `json:"Unit,omitempty" name:"Unit"`
@@ -3390,13 +3390,13 @@ type Metric struct {
 type MetricConfig struct {
 
 	// Allowed operator
-	Operator []*string `json:"Operator,omitempty" name:"Operator" list`
+	Operator []*string `json:"Operator,omitempty" name:"Operator"`
 
 	// Allowed data cycle in seconds
-	Period []*int64 `json:"Period,omitempty" name:"Period" list`
+	Period []*int64 `json:"Period,omitempty" name:"Period"`
 
 	// Allowed number of continuous cycles
-	ContinuePeriod []*int64 `json:"ContinuePeriod,omitempty" name:"ContinuePeriod" list`
+	ContinuePeriod []*int64 `json:"ContinuePeriod,omitempty" name:"ContinuePeriod"`
 }
 
 type MetricData struct {
@@ -3405,16 +3405,16 @@ type MetricData struct {
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 	// Monitoring data point
-	Points []*MetricDataPoint `json:"Points,omitempty" name:"Points" list`
+	Points []*MetricDataPoint `json:"Points,omitempty" name:"Points"`
 }
 
 type MetricDataPoint struct {
 
 	// Combination of instance object dimensions
-	Dimensions []*Dimension `json:"Dimensions,omitempty" name:"Dimensions" list`
+	Dimensions []*Dimension `json:"Dimensions,omitempty" name:"Dimensions"`
 
 	// Data point list
-	Values []*Point `json:"Values,omitempty" name:"Values" list`
+	Values []*Point `json:"Values,omitempty" name:"Values"`
 }
 
 type MetricDatum struct {
@@ -3450,16 +3450,16 @@ type MetricSet struct {
 	UnitCname *string `json:"UnitCname,omitempty" name:"UnitCname"`
 
 	// Statistical period in seconds supported by the metric, such as 60 and 300
-	Period []*int64 `json:"Period,omitempty" name:"Period" list`
+	Period []*int64 `json:"Period,omitempty" name:"Period"`
 
 	// Metric method during the statistical period
-	Periods []*PeriodsSt `json:"Periods,omitempty" name:"Periods" list`
+	Periods []*PeriodsSt `json:"Periods,omitempty" name:"Periods"`
 
 	// Meaning of the statistical metric
 	Meaning *MetricObjectMeaning `json:"Meaning,omitempty" name:"Meaning"`
 
 	// Dimension description
-	Dimensions []*DimensionsDesc `json:"Dimensions,omitempty" name:"Dimensions" list`
+	Dimensions []*DimensionsDesc `json:"Dimensions,omitempty" name:"Dimensions"`
 }
 
 type MidQueryCondition struct {
@@ -3471,7 +3471,7 @@ type MidQueryCondition struct {
 	Operator *string `json:"Operator,omitempty" name:"Operator"`
 
 	// Dimension value. If `Operator` is `eq` or `ne`, only the first element will be used
-	Value []*string `json:"Value,omitempty" name:"Value" list`
+	Value []*string `json:"Value,omitempty" name:"Value"`
 }
 
 type ModifyAlarmNoticeRequest struct {
@@ -3493,10 +3493,10 @@ type ModifyAlarmNoticeRequest struct {
 	NoticeId *string `json:"NoticeId,omitempty" name:"NoticeId"`
 
 	// User notifications (up to 5)
-	UserNotices []*UserNotice `json:"UserNotices,omitempty" name:"UserNotices" list`
+	UserNotices []*UserNotice `json:"UserNotices,omitempty" name:"UserNotices"`
 
 	// Callback notifications (up to 3)
-	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices" list`
+	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices"`
 }
 
 func (r *ModifyAlarmNoticeRequest) ToJsonString() string {
@@ -3674,7 +3674,7 @@ type ModifyAlarmPolicyNoticeRequest struct {
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// Alarm notification template ID list
-	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds" list`
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
 }
 
 func (r *ModifyAlarmPolicyNoticeRequest) ToJsonString() string {
@@ -3782,7 +3782,7 @@ type ModifyAlarmPolicyTasksRequest struct {
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// List of tasks triggered by alarm policy. If this parameter is left empty, it indicates to unbind all tasks
-	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks" list`
+	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks"`
 }
 
 func (r *ModifyAlarmPolicyTasksRequest) ToJsonString() string {
@@ -3836,7 +3836,7 @@ type ModifyAlarmReceiversRequest struct {
 	Module *string `json:"Module,omitempty" name:"Module"`
 
 	// New recipient information. If this parameter is not configured, all recipients will be deleted.
-	ReceiverInfos []*ReceiverInfo `json:"ReceiverInfos,omitempty" name:"ReceiverInfos" list`
+	ReceiverInfos []*ReceiverInfo `json:"ReceiverInfos,omitempty" name:"ReceiverInfos"`
 }
 
 func (r *ModifyAlarmReceiversRequest) ToJsonString() string {
@@ -3941,10 +3941,10 @@ type ModifyPolicyGroupRequest struct {
 	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
 
 	// Metric alarm condition rules. No filling indicates that all existing metric alarm condition rules will be deleted.
-	Conditions []*ModifyPolicyGroupCondition `json:"Conditions,omitempty" name:"Conditions" list`
+	Conditions []*ModifyPolicyGroupCondition `json:"Conditions,omitempty" name:"Conditions"`
 
 	// Event alarm conditions. No filling indicates that all existing event alarm conditions will be deleted.
-	EventConditions []*ModifyPolicyGroupEventCondition `json:"EventConditions,omitempty" name:"EventConditions" list`
+	EventConditions []*ModifyPolicyGroupEventCondition `json:"EventConditions,omitempty" name:"EventConditions"`
 
 	// Template-based policy group ID.
 	ConditionTempGroupId *int64 `json:"ConditionTempGroupId,omitempty" name:"ConditionTempGroupId"`
@@ -4014,7 +4014,7 @@ type PeriodsSt struct {
 	Period *string `json:"Period,omitempty" name:"Period"`
 
 	// Statistical method
-	StatType []*string `json:"StatType,omitempty" name:"StatType" list`
+	StatType []*string `json:"StatType,omitempty" name:"StatType"`
 }
 
 type Point struct {
@@ -4031,7 +4031,7 @@ type PutMonitorDataRequest struct {
 	*tchttp.BaseRequest
 
 	// A group of metrics and data.
-	Metrics []*MetricDatum `json:"Metrics,omitempty" name:"Metrics" list`
+	Metrics []*MetricDatum `json:"Metrics,omitempty" name:"Metrics"`
 
 	// IP address that is automatically specified when monitoring data is reported.
 	AnnounceIp *string `json:"AnnounceIp,omitempty" name:"AnnounceIp"`
@@ -4094,7 +4094,7 @@ type ReceiverInfo struct {
 	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Alarm notification method. Valid values: "SMS", "SITE", "EMAIL", "CALL", and "WECHAT".
-	NotifyWay []*string `json:"NotifyWay,omitempty" name:"NotifyWay" list`
+	NotifyWay []*string `json:"NotifyWay,omitempty" name:"NotifyWay"`
 
 	// Recipient type. Valid values: group and user.
 	ReceiverType *string `json:"ReceiverType,omitempty" name:"ReceiverType"`
@@ -4103,10 +4103,10 @@ type ReceiverInfo struct {
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 
 	// Alarm call notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is triggered) and RECOVER (indicating that a notice is sent when the alarm is recovered).
-	SendFor []*string `json:"SendFor,omitempty" name:"SendFor" list`
+	SendFor []*string `json:"SendFor,omitempty" name:"SendFor"`
 
 	// Uid of the alarm call recipient.
-	UidList []*int64 `json:"UidList,omitempty" name:"UidList" list`
+	UidList []*int64 `json:"UidList,omitempty" name:"UidList"`
 
 	// Number of alarm call rounds.
 	RoundNumber *int64 `json:"RoundNumber,omitempty" name:"RoundNumber"`
@@ -4118,16 +4118,16 @@ type ReceiverInfo struct {
 	RoundInterval *int64 `json:"RoundInterval,omitempty" name:"RoundInterval"`
 
 	// Notification method when an alarm is recovered. Valid value: SMS.
-	RecoverNotify []*string `json:"RecoverNotify,omitempty" name:"RecoverNotify" list`
+	RecoverNotify []*string `json:"RecoverNotify,omitempty" name:"RecoverNotify"`
 
 	// Whether to send an alarm call delivery notice. The value 0 indicates that no notice needs to be sent. The value 1 indicates that a notice needs to be sent.
 	NeedSendNotice *int64 `json:"NeedSendNotice,omitempty" name:"NeedSendNotice"`
 
 	// Recipient group list. The list of recipient group IDs that is queried by a platform API.
-	ReceiverGroupList []*int64 `json:"ReceiverGroupList,omitempty" name:"ReceiverGroupList" list`
+	ReceiverGroupList []*int64 `json:"ReceiverGroupList,omitempty" name:"ReceiverGroupList"`
 
 	// Recipient list. The list of recipient IDs that is queried by a platform API.
-	ReceiverUserList []*int64 `json:"ReceiverUserList,omitempty" name:"ReceiverUserList" list`
+	ReceiverUserList []*int64 `json:"ReceiverUserList,omitempty" name:"ReceiverUserList"`
 
 	// Language of received alarms. Enumerated values: zh-CN and en-US.
 	ReceiveLanguage *string `json:"ReceiveLanguage,omitempty" name:"ReceiveLanguage"`
@@ -4347,7 +4347,7 @@ type UnBindingPolicyObjectRequest struct {
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 
 	// List of unique IDs of the object instances to be deleted. `UniqueId` can be obtained from the output parameter `List` of the [DescribeBindingPolicyObjectList](https://intl.cloud.tencent.com/document/api/248/40570?from_cn_redirect=1) API
-	UniqueId []*string `json:"UniqueId,omitempty" name:"UniqueId" list`
+	UniqueId []*string `json:"UniqueId,omitempty" name:"UniqueId"`
 
 	// Instance group ID. The `UniqueId` parameter is invalid if object instances are deleted by instance group.
 	InstanceGroupId *int64 `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
@@ -4415,19 +4415,19 @@ type UserNotice struct {
 
 	// Notification channel list. Valid values: EMAIL (email), SMS (SMS), CALL (phone), WECHAT (WeChat)
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	NoticeWay []*string `json:"NoticeWay,omitempty" name:"NoticeWay" list`
+	NoticeWay []*string `json:"NoticeWay,omitempty" name:"NoticeWay"`
 
 	// User `uid` list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserIds []*int64 `json:"UserIds,omitempty" name:"UserIds" list`
+	UserIds []*int64 `json:"UserIds,omitempty" name:"UserIds"`
 
 	// User group ID list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	GroupIds []*int64 `json:"GroupIds,omitempty" name:"GroupIds" list`
+	GroupIds []*int64 `json:"GroupIds,omitempty" name:"GroupIds"`
 
 	// Phone polling list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PhoneOrder []*int64 `json:"PhoneOrder,omitempty" name:"PhoneOrder" list`
+	PhoneOrder []*int64 `json:"PhoneOrder,omitempty" name:"PhoneOrder"`
 
 	// Number of phone pollings. Value range: 1–5
 	// Note: this field may return null, indicating that no valid values can be obtained.

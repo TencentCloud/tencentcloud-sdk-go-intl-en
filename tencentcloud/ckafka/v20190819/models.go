@@ -51,7 +51,7 @@ type AclResponse struct {
 
 	// ACL list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AclList []*Acl `json:"AclList,omitempty" name:"AclList" list`
+	AclList []*Acl `json:"AclList,omitempty" name:"AclList"`
 }
 
 type AppIdResponse struct {
@@ -61,7 +61,7 @@ type AppIdResponse struct {
 
 	// List of eligible `AppId`
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AppIdList []*int64 `json:"AppIdList,omitempty" name:"AppIdList" list`
+	AppIdList []*int64 `json:"AppIdList,omitempty" name:"AppIdList"`
 }
 
 type Assignment struct {
@@ -71,7 +71,7 @@ type Assignment struct {
 
 	// Topic information list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Topics []*GroupInfoTopics `json:"Topics,omitempty" name:"Topics" list`
+	Topics []*GroupInfoTopics `json:"Topics,omitempty" name:"Topics"`
 }
 
 type ClusterInfo struct {
@@ -104,7 +104,7 @@ type ClusterInfo struct {
 
 	// The AZ where the cluster nodes reside. If the cluster is a multi-AZ cluster, this field means multiple AZs where the cluster nodes reside.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds" list`
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
 }
 
 type Config struct {
@@ -145,7 +145,7 @@ type ConsumerGroup struct {
 	ConsumerGroupName *string `json:"ConsumerGroupName,omitempty" name:"ConsumerGroupName"`
 
 	// Subscribed message entity
-	SubscribedInfo []*SubscribedInfo `json:"SubscribedInfo,omitempty" name:"SubscribedInfo" list`
+	SubscribedInfo []*SubscribedInfo `json:"SubscribedInfo,omitempty" name:"SubscribedInfo"`
 }
 
 type ConsumerGroupResponse struct {
@@ -155,11 +155,11 @@ type ConsumerGroupResponse struct {
 
 	// Topic list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicList []*ConsumerGroupTopic `json:"TopicList,omitempty" name:"TopicList" list`
+	TopicList []*ConsumerGroupTopic `json:"TopicList,omitempty" name:"TopicList"`
 
 	// Consumer group list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	GroupList []*ConsumerGroup `json:"GroupList,omitempty" name:"GroupList" list`
+	GroupList []*ConsumerGroup `json:"GroupList,omitempty" name:"GroupList"`
 
 	// Total number of partitions
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -167,7 +167,7 @@ type ConsumerGroupResponse struct {
 
 	// List of monitored partitions
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PartitionListForMonitor []*Partition `json:"PartitionListForMonitor,omitempty" name:"PartitionListForMonitor" list`
+	PartitionListForMonitor []*Partition `json:"PartitionListForMonitor,omitempty" name:"PartitionListForMonitor"`
 
 	// Total number of topics
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -175,11 +175,11 @@ type ConsumerGroupResponse struct {
 
 	// List of monitored topics
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicListForMonitor []*ConsumerGroupTopic `json:"TopicListForMonitor,omitempty" name:"TopicListForMonitor" list`
+	TopicListForMonitor []*ConsumerGroupTopic `json:"TopicListForMonitor,omitempty" name:"TopicListForMonitor"`
 
 	// List of monitored groups
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	GroupListForMonitor []*Group `json:"GroupListForMonitor,omitempty" name:"GroupListForMonitor" list`
+	GroupListForMonitor []*Group `json:"GroupListForMonitor,omitempty" name:"GroupListForMonitor"`
 }
 
 type ConsumerGroupTopic struct {
@@ -331,7 +331,7 @@ type CreateTopicIpWhiteListRequest struct {
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
 	// IP allowlist list
-	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList" list`
+	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList"`
 }
 
 func (r *CreateTopicIpWhiteListRequest) ToJsonString() string {
@@ -397,7 +397,7 @@ type CreateTopicRequest struct {
 	EnableWhiteList *int64 `json:"EnableWhiteList,omitempty" name:"EnableWhiteList"`
 
 	// IP allowlist list for quota limit, which is required if `enableWhileList` is 1
-	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList" list`
+	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList"`
 
 	// Log cleanup policy, which is `delete` by default. `delete`: logs will be deleted by save time; `compact`: logs will be compressed by key; `compact, delete`: logs will be compressed by key and deleted by save time.
 	CleanUpPolicy *string `json:"CleanUpPolicy,omitempty" name:"CleanUpPolicy"`
@@ -617,7 +617,7 @@ type DeleteTopicIpWhiteListRequest struct {
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
 	// IP allowlist list
-	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList" list`
+	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList"`
 }
 
 func (r *DeleteTopicIpWhiteListRequest) ToJsonString() string {
@@ -1018,7 +1018,7 @@ type DescribeGroupInfoRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Kafka consumer group (`Consumer-group`), which is an array in the format of `GroupList.0=xxx&GroupList.1=yyy`.
-	GroupList []*string `json:"GroupList,omitempty" name:"GroupList" list`
+	GroupList []*string `json:"GroupList,omitempty" name:"GroupList"`
 }
 
 func (r *DescribeGroupInfoRequest) ToJsonString() string {
@@ -1047,7 +1047,7 @@ type DescribeGroupInfoResponse struct {
 
 		// Returned result
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result []*GroupInfoResponse `json:"Result,omitempty" name:"Result" list`
+		Result []*GroupInfoResponse `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1075,7 +1075,7 @@ type DescribeGroupOffsetsRequest struct {
 	Group *string `json:"Group,omitempty" name:"Group"`
 
 	// Array of the names of topics subscribed to by a group. If there is no such array, this parameter means the information of all topics in the specified group
-	Topics []*string `json:"Topics,omitempty" name:"Topics" list`
+	Topics []*string `json:"Topics,omitempty" name:"Topics"`
 
 	// Fuzzy match by `topicName`
 	SearchWord *string `json:"SearchWord,omitempty" name:"SearchWord"`
@@ -1254,7 +1254,7 @@ type DescribeInstancesDetailRequest struct {
 	SearchWord *string `json:"SearchWord,omitempty" name:"SearchWord"`
 
 	// (Filter) instance status. 0: creating, 1: running, 2: deleting. If this parameter is left empty, all instances will be returned by default
-	Status []*int64 `json:"Status,omitempty" name:"Status" list`
+	Status []*int64 `json:"Status,omitempty" name:"Status"`
 
 	// Offset. If this parameter is left empty, 0 will be used by default
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -1266,7 +1266,7 @@ type DescribeInstancesDetailRequest struct {
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
 	// Filter
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeInstancesDetailRequest) ToJsonString() string {
@@ -1327,7 +1327,7 @@ type DescribeInstancesRequest struct {
 	SearchWord *string `json:"SearchWord,omitempty" name:"SearchWord"`
 
 	// (Filter) instance status. 0: creating, 1: running, 2: deleting. If this parameter is left empty, all instances will be returned by default
-	Status []*int64 `json:"Status,omitempty" name:"Status" list`
+	Status []*int64 `json:"Status,omitempty" name:"Status"`
 
 	// Offset. If this parameter is left empty, 0 will be used by default
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -1426,7 +1426,7 @@ type DescribeRegionResponse struct {
 
 		// List of the returned results of enumerated regions
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-		Result []*Region `json:"Result,omitempty" name:"Result" list`
+		Result []*Region `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1755,7 +1755,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter value of field.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type Group struct {
@@ -1799,7 +1799,7 @@ type GroupInfoResponse struct {
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// This array contains information only if `state` is `Stable` and `protocol_type` is `consumer`
-	Members []*GroupInfoMember `json:"Members,omitempty" name:"Members" list`
+	Members []*GroupInfoMember `json:"Members,omitempty" name:"Members"`
 
 	// Kafka consumer group
 	Group *string `json:"Group,omitempty" name:"Group"`
@@ -1812,7 +1812,7 @@ type GroupInfoTopics struct {
 
 	// Information of assigned partition
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Partitions []*int64 `json:"Partitions,omitempty" name:"Partitions" list`
+	Partitions []*int64 `json:"Partitions,omitempty" name:"Partitions"`
 }
 
 type GroupOffsetPartition struct {
@@ -1844,7 +1844,7 @@ type GroupOffsetResponse struct {
 
 	// Array of partitions in the topic, where each element is a JSON object
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicList []*GroupOffsetTopic `json:"TopicList,omitempty" name:"TopicList" list`
+	TopicList []*GroupOffsetTopic `json:"TopicList,omitempty" name:"TopicList"`
 }
 
 type GroupOffsetTopic struct {
@@ -1854,7 +1854,7 @@ type GroupOffsetTopic struct {
 
 	// Array of partitions in the topic, where each element is a JSON object
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Partitions []*GroupOffsetPartition `json:"Partitions,omitempty" name:"Partitions" list`
+	Partitions []*GroupOffsetPartition `json:"Partitions,omitempty" name:"Partitions"`
 }
 
 type GroupResponse struct {
@@ -1865,7 +1865,7 @@ type GroupResponse struct {
 
 	// GroupList
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	GroupList []*DescribeGroup `json:"GroupList,omitempty" name:"GroupList" list`
+	GroupList []*DescribeGroup `json:"GroupList,omitempty" name:"GroupList"`
 }
 
 type Instance struct {
@@ -1893,7 +1893,7 @@ type InstanceAttributesResponse struct {
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// VIP list information of access point
-	VipList []*VipEntity `json:"VipList,omitempty" name:"VipList" list`
+	VipList []*VipEntity `json:"VipList,omitempty" name:"VipList"`
 
 	// Virtual IP
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
@@ -1948,7 +1948,7 @@ type InstanceAttributesResponse struct {
 
 	// Tag array
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Expiration time
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1956,7 +1956,7 @@ type InstanceAttributesResponse struct {
 
 	// Cross-AZ
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds" list`
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
 	// Kafka version information
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1976,7 +1976,7 @@ type InstanceAttributesResponse struct {
 
 	// Features supported by the instance. `FEATURE_SUBNET_ACL` indicates that the ACL policy supports setting subnets. 
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Features []*string `json:"Features,omitempty" name:"Features" list`
+	Features []*string `json:"Features,omitempty" name:"Features"`
 
 	// Dynamic message retention policy
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
@@ -2010,7 +2010,7 @@ type InstanceDetail struct {
 	Vport *string `json:"Vport,omitempty" name:"Vport"`
 
 	// Virtual IP list
-	VipList []*VipEntity `json:"VipList,omitempty" name:"VipList" list`
+	VipList []*VipEntity `json:"VipList,omitempty" name:"VipList"`
 
 	// Instance status. 0: creating, 1: running, 2: deleting, 5: isolated, -1: creation failed
 	Status *int64 `json:"Status,omitempty" name:"Status"`
@@ -2052,7 +2052,7 @@ type InstanceDetail struct {
 	TopicNum *int64 `json:"TopicNum,omitempty" name:"TopicNum"`
 
 	// Tag
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Kafka version information
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -2060,7 +2060,7 @@ type InstanceDetail struct {
 
 	// Cross-AZ
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds" list`
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
 	// CKafka sale type
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -2093,14 +2093,14 @@ type InstanceDetailResponse struct {
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// List of eligible instance details
-	InstanceList []*InstanceDetail `json:"InstanceList,omitempty" name:"InstanceList" list`
+	InstanceList []*InstanceDetail `json:"InstanceList,omitempty" name:"InstanceList"`
 }
 
 type InstanceResponse struct {
 
 	// List of eligible instances
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	InstanceList []*Instance `json:"InstanceList,omitempty" name:"InstanceList" list`
+	InstanceList []*Instance `json:"InstanceList,omitempty" name:"InstanceList"`
 
 	// Total number of eligible results
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -2133,7 +2133,7 @@ type ModifyGroupOffsetsRequest struct {
 	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
 
 	// Indicates the topics to be reset. If this parameter is left empty, all topics will be reset
-	Topics []*string `json:"Topics,omitempty" name:"Topics" list`
+	Topics []*string `json:"Topics,omitempty" name:"Topics"`
 
 	// When `strategy` is 0, this field is required. If it is above zero, the offset will be shifted backward by the value of the `shift`. If it is below zero, the offset will be shifted forward by the value of the `shift`. After a correct reset, the new offset should be (old_offset + shift). Note that if the new offset is smaller than the `earliest` parameter of the partition, it will be set to `earliest`, and if it is greater than the `latest` parameter of the partition, it will be set to `latest`
 	Shift *int64 `json:"Shift,omitempty" name:"Shift"`
@@ -2145,7 +2145,7 @@ type ModifyGroupOffsetsRequest struct {
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// List of partitions that need to be reset. If the topics parameter is not specified, reset partitions in the corresponding partition list of all topics. If the topics parameter is specified, reset partitions of the corresponding partition list of the specified topic list.
-	Partitions []*int64 `json:"Partitions,omitempty" name:"Partitions" list`
+	Partitions []*int64 `json:"Partitions,omitempty" name:"Partitions"`
 }
 
 func (r *ModifyGroupOffsetsRequest) ToJsonString() string {
@@ -2505,7 +2505,7 @@ type Route struct {
 	VipType *int64 `json:"VipType,omitempty" name:"VipType"`
 
 	// Virtual IP list
-	VipList []*VipEntity `json:"VipList,omitempty" name:"VipList" list`
+	VipList []*VipEntity `json:"VipList,omitempty" name:"VipList"`
 
 	// Domain name
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -2520,7 +2520,7 @@ type RouteResponse struct {
 
 	// Route information list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Routers []*Route `json:"Routers,omitempty" name:"Routers" list`
+	Routers []*Route `json:"Routers,omitempty" name:"Routers"`
 }
 
 type SubscribedInfo struct {
@@ -2530,11 +2530,11 @@ type SubscribedInfo struct {
 
 	// Subscribed partition
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Partition []*int64 `json:"Partition,omitempty" name:"Partition" list`
+	Partition []*int64 `json:"Partition,omitempty" name:"Partition"`
 
 	// Partition offset information
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PartitionOffset []*PartitionOffset `json:"PartitionOffset,omitempty" name:"PartitionOffset" list`
+	PartitionOffset []*PartitionOffset `json:"PartitionOffset,omitempty" name:"PartitionOffset"`
 
 	// ID of the subscribed topic. 
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -2582,13 +2582,13 @@ type TopicAttributesResponse struct {
 	EnableWhiteList *int64 `json:"EnableWhiteList,omitempty" name:"EnableWhiteList"`
 
 	// IP allowlist list
-	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList" list`
+	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList"`
 
 	// Topic configuration array
 	Config *Config `json:"Config,omitempty" name:"Config"`
 
 	// Partition details
-	Partitions []*TopicPartitionDO `json:"Partitions,omitempty" name:"Partitions" list`
+	Partitions []*TopicPartitionDO `json:"Partitions,omitempty" name:"Partitions"`
 }
 
 type TopicDetail struct {
@@ -2641,7 +2641,7 @@ type TopicDetailResponse struct {
 
 	// List of returned topic details
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicList []*TopicDetail `json:"TopicList,omitempty" name:"TopicList" list`
+	TopicList []*TopicDetail `json:"TopicList,omitempty" name:"TopicList"`
 
 	// Number of all eligible topic details
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2666,7 +2666,7 @@ type TopicResult struct {
 
 	// List of returned topic information
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicList []*Topic `json:"TopicList,omitempty" name:"TopicList" list`
+	TopicList []*Topic `json:"TopicList,omitempty" name:"TopicList"`
 
 	// Number of eligible topics
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -2707,7 +2707,7 @@ type UserResponse struct {
 
 	// List of eligible users
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Users []*User `json:"Users,omitempty" name:"Users" list`
+	Users []*User `json:"Users,omitempty" name:"Users"`
 
 	// Total number of eligible users
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2752,7 +2752,7 @@ type ZoneInfo struct {
 type ZoneResponse struct {
 
 	// Zone list
-	ZoneList []*ZoneInfo `json:"ZoneList,omitempty" name:"ZoneList" list`
+	ZoneList []*ZoneInfo `json:"ZoneList,omitempty" name:"ZoneList"`
 
 	// Maximum number of instances to be purchased
 	MaxBuyInstanceNum *int64 `json:"MaxBuyInstanceNum,omitempty" name:"MaxBuyInstanceNum"`
@@ -2768,7 +2768,7 @@ type ZoneResponse struct {
 
 	// Cluster information dedicated to a user
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	ClusterInfo []*ClusterInfo `json:"ClusterInfo,omitempty" name:"ClusterInfo" list`
+	ClusterInfo []*ClusterInfo `json:"ClusterInfo,omitempty" name:"ClusterInfo"`
 
 	// Purchase of Standard Edition configurations
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.

@@ -61,25 +61,25 @@ type AddTimeWindowRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Maintenance window on Monday. The format should be 10:00-12:00. You can set multiple time windows on a day. Each time window lasts from half an hour to three hours, and must start and end on the hour or half hour. At least one time window is required in a week. The same rule applies to the following parameters.
-	Monday []*string `json:"Monday,omitempty" name:"Monday" list`
+	Monday []*string `json:"Monday,omitempty" name:"Monday"`
 
 	// Maintenance window on Tuesday. At least one time window is required in a week.
-	Tuesday []*string `json:"Tuesday,omitempty" name:"Tuesday" list`
+	Tuesday []*string `json:"Tuesday,omitempty" name:"Tuesday"`
 
 	// Maintenance window on Wednesday. At least one time window is required in a week.
-	Wednesday []*string `json:"Wednesday,omitempty" name:"Wednesday" list`
+	Wednesday []*string `json:"Wednesday,omitempty" name:"Wednesday"`
 
 	// Maintenance window on Thursday. At least one time window is required in a week.
-	Thursday []*string `json:"Thursday,omitempty" name:"Thursday" list`
+	Thursday []*string `json:"Thursday,omitempty" name:"Thursday"`
 
 	// Maintenance window on Friday. At least one time window is required in a week.
-	Friday []*string `json:"Friday,omitempty" name:"Friday" list`
+	Friday []*string `json:"Friday,omitempty" name:"Friday"`
 
 	// Maintenance window on Saturday. At least one time window is required in a week.
-	Saturday []*string `json:"Saturday,omitempty" name:"Saturday" list`
+	Saturday []*string `json:"Saturday,omitempty" name:"Saturday"`
 
 	// Maintenance window on Sunday. At least one time window is required in a week.
-	Sunday []*string `json:"Sunday,omitempty" name:"Sunday" list`
+	Sunday []*string `json:"Sunday,omitempty" name:"Sunday"`
 }
 
 func (r *AddTimeWindowRequest) ToJsonString() string {
@@ -135,7 +135,7 @@ type AssociateSecurityGroupsRequest struct {
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
 	// List of instance IDs, which is an array of one or more instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// This parameter takes effect only when the IDs of read-only replicas are passed in. If this parameter is set to `False` or left empty, the security group will be bound to the RO groups of these read-only replicas. If this parameter is set to `True`, the security group will be bound to the read-only replicas themselves.
 	ForReadonlyInstance *bool `json:"ForReadonlyInstance,omitempty" name:"ForReadonlyInstance"`
@@ -442,7 +442,7 @@ type ColumnPrivilege struct {
 	Column *string `json:"Column,omitempty" name:"Column"`
 
 	// Permission information
-	Privileges []*string `json:"Privileges,omitempty" name:"Privileges" list`
+	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
 }
 
 type CommonTimeWindow struct {
@@ -476,7 +476,7 @@ type CreateAccountsRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// TencentDB account.
-	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
 	// Password of the new account
 	Password *string `json:"Password,omitempty" name:"Password"`
@@ -545,7 +545,7 @@ type CreateBackupRequest struct {
 
 	// Information of the table to be backed up. If this parameter is not set, the entire instance will be backed up by default. It can be set only in logical backup (i.e., BackupMethod = logical). The specified table must exist; otherwise, backup may fail.
 	// For example, if you want to backup tb1 and tb2 in db1 and the entire db2, you should set the parameter as [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"} ].
-	BackupDBTableList []*BackupItem `json:"BackupDBTableList,omitempty" name:"BackupDBTableList" list`
+	BackupDBTableList []*BackupItem `json:"BackupDBTableList,omitempty" name:"BackupDBTableList"`
 }
 
 func (r *CreateBackupRequest) ToJsonString() string {
@@ -620,10 +620,10 @@ type CreateCloneInstanceRequest struct {
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Security group parameter, which can be obtained by the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API
-	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
 	// Information of the cloned instance tag
-	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags" list`
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags"`
 
 	// The number of CPU cores of the cloned instance. It should be equal to (by default) or larger than that of the original instance.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
@@ -814,7 +814,7 @@ type CreateDBInstanceHourRequest struct {
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// List of parameters in the format of `ParamList.0.Name=auto_increment&ParamList.0.Value=1`. You can use the [DescribeDefaultParams](https://intl.cloud.tencent.com/document/api/236/32662?from_cn_redirect=1) API to query the configurable parameters.
-	ParamList []*ParamInfo `json:"ParamList,omitempty" name:"ParamList" list`
+	ParamList []*ParamInfo `json:"ParamList,omitempty" name:"ParamList"`
 
 	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
 	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
@@ -829,7 +829,7 @@ type CreateDBInstanceHourRequest struct {
 	BackupZone *string `json:"BackupZone,omitempty" name:"BackupZone"`
 
 	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API to query the security group details of a project.
-	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
 	// Read-only instance information. This parameter must be passed in when purchasing read-only instances.
 	RoGroup *RoGroup `json:"RoGroup,omitempty" name:"RoGroup"`
@@ -841,7 +841,7 @@ type CreateDBInstanceHourRequest struct {
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Instance tag information.
-	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags" list`
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags"`
 
 	// Placement group ID.
 	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
@@ -856,7 +856,7 @@ type CreateDBInstanceHourRequest struct {
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
 
 	// The array of alarm policy IDs.
-	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitempty" name:"AlarmPolicyList" list`
+	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitempty" name:"AlarmPolicyList"`
 
 	// The number of nodes of the instance. To purchase a read-only replica or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
 	InstanceNodes *int64 `json:"InstanceNodes,omitempty" name:"InstanceNodes"`
@@ -922,10 +922,10 @@ type CreateDBInstanceHourResponse struct {
 	Response *struct {
 
 		// Short order ID.
-		DealIds []*string `json:"DealIds,omitempty" name:"DealIds" list`
+		DealIds []*string `json:"DealIds,omitempty" name:"DealIds"`
 
 		// Instance ID list
-		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -953,13 +953,13 @@ type CreateDeployGroupRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Affinity policy of placement group. Currently, the value of this parameter can only be 1. Policy 1 indicates the upper limit of instances on one physical machine.
-	Affinity []*int64 `json:"Affinity,omitempty" name:"Affinity" list`
+	Affinity []*int64 `json:"Affinity,omitempty" name:"Affinity"`
 
 	// Upper limit of instances on one physical machine as defined in affinity policy 1 of placement group.
 	LimitNum *int64 `json:"LimitNum,omitempty" name:"LimitNum"`
 
 	// Model attribute of placement group. Valid values: SH12+SH02, TS85.
-	DevClass []*string `json:"DevClass,omitempty" name:"DevClass" list`
+	DevClass []*string `json:"DevClass,omitempty" name:"DevClass"`
 }
 
 func (r *CreateDeployGroupRequest) ToJsonString() string {
@@ -1024,7 +1024,7 @@ type CreateParamTemplateRequest struct {
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
 	// List of parameters.
-	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList" list`
+	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList"`
 }
 
 func (r *CreateParamTemplateRequest) ToJsonString() string {
@@ -1157,7 +1157,7 @@ type DatabaseName struct {
 type DatabasePrivilege struct {
 
 	// Permission information
-	Privileges []*string `json:"Privileges,omitempty" name:"Privileges" list`
+	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
 
 	// Database name
 	Database *string `json:"Database,omitempty" name:"Database"`
@@ -1179,7 +1179,7 @@ type DeleteAccountsRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// TencentDB account.
-	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 }
 
 func (r *DeleteAccountsRequest) ToJsonString() string {
@@ -1279,7 +1279,7 @@ type DeleteDeployGroupsRequest struct {
 	*tchttp.BaseRequest
 
 	// List of IDs of placement groups to be deleted.
-	DeployGroupIds []*string `json:"DeployGroupIds,omitempty" name:"DeployGroupIds" list`
+	DeployGroupIds []*string `json:"DeployGroupIds,omitempty" name:"DeployGroupIds"`
 }
 
 func (r *DeleteDeployGroupsRequest) ToJsonString() string {
@@ -1482,16 +1482,16 @@ type DescribeAccountPrivilegesResponse struct {
 	Response *struct {
 
 		// Array of global permissions.
-		GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges" list`
+		GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges"`
 
 		// Array of database permissions.
-		DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitempty" name:"DatabasePrivileges" list`
+		DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitempty" name:"DatabasePrivileges"`
 
 		// Array of table permissions in the database.
-		TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitempty" name:"TablePrivileges" list`
+		TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitempty" name:"TablePrivileges"`
 
 		// Array of column permissions in the table.
-		ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitempty" name:"ColumnPrivileges" list`
+		ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitempty" name:"ColumnPrivileges"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1555,7 +1555,7 @@ type DescribeAccountsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Details of eligible accounts.
-		Items []*AccountInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*AccountInfo `json:"Items,omitempty" name:"Items"`
 
 		// The maximum number of instance connections (set by the MySQL parameter `max_connections`)
 		MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
@@ -1744,7 +1744,7 @@ type DescribeBackupDatabasesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Array of eligible databases.
-		Items []*DatabaseName `json:"Items,omitempty" name:"Items" list`
+		Items []*DatabaseName `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1867,7 +1867,7 @@ type DescribeBackupSummariesResponse struct {
 	Response *struct {
 
 		// Statistical items of instance backup.
-		Items []*BackupSummaryItem `json:"Items,omitempty" name:"Items" list`
+		Items []*BackupSummaryItem `json:"Items,omitempty" name:"Items"`
 
 		// Total number of instance backups.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1942,7 +1942,7 @@ type DescribeBackupTablesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Array of eligible tables.
-		Items []*TableName `json:"Items,omitempty" name:"Items" list`
+		Items []*TableName `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2002,7 +2002,7 @@ type DescribeBackupsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Details of eligible backups.
-		Items []*BackupInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*BackupInfo `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2114,7 +2114,7 @@ type DescribeBinlogsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Number of eligible binlog files.
-		Items []*BinlogInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*BinlogInfo `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2174,7 +2174,7 @@ type DescribeCloneListResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Clone task list
-		Items []*CloneItem `json:"Items,omitempty" name:"Items" list`
+		Items []*CloneItem `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2242,7 +2242,7 @@ type DescribeDBImportRecordsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of import operation records.
-		Items []*ImportRecord `json:"Items,omitempty" name:"Items" list`
+		Items []*ImportRecord `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2495,7 +2495,7 @@ type DescribeDBInstanceRebootTimeRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeDBInstanceRebootTimeRequest) ToJsonString() string {
@@ -2525,7 +2525,7 @@ type DescribeDBInstanceRebootTimeResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Returned parameter information.
-		Items []*InstanceRebootTime `json:"Items,omitempty" name:"Items" list`
+		Items []*InstanceRebootTime `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2550,13 +2550,13 @@ type DescribeDBInstancesRequest struct {
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Instance type. Value range: 1 (primary), 2 (disaster recovery), 3 (read-only).
-	InstanceTypes []*uint64 `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+	InstanceTypes []*uint64 `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
 
 	// Private IP address of the instance.
-	Vips []*string `json:"Vips,omitempty" name:"Vips" list`
+	Vips []*string `json:"Vips,omitempty" name:"Vips"`
 
 	// Instance status. Value range: <br>0 - creating <br>1 - running <br>4 - isolating <br>5 - isolated (the instance can be restored and started in the recycle bin)
-	Status []*uint64 `json:"Status,omitempty" name:"Status" list`
+	Status []*uint64 `json:"Status,omitempty" name:"Status"`
 
 	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -2568,28 +2568,28 @@ type DescribeDBInstancesRequest struct {
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
 	// Billing method. Value range: 0 (monthly subscribed), 1 (hourly).
-	PayTypes []*uint64 `json:"PayTypes,omitempty" name:"PayTypes" list`
+	PayTypes []*uint64 `json:"PayTypes,omitempty" name:"PayTypes"`
 
 	// Instance name.
-	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames" list`
+	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames"`
 
 	// Instance task status. Valid values: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - enabling secondary instance access <br>4 - enabling public network access <br>5 - batch operation in progress <br>6 - rolling back <br>7 - disabling public network access <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built database <br>13 - dropping tables <br>14 - Disaster recovery instance creating sync task <br>15 - waiting for switch <br>16 - switching <br>17 - upgrade and switch completed <br>19 - parameter settings to be executed
-	TaskStatus []*uint64 `json:"TaskStatus,omitempty" name:"TaskStatus" list`
+	TaskStatus []*uint64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
 
 	// Version of the instance database engine. Value range: 5.1, 5.5, 5.6, 5.7.
-	EngineVersions []*string `json:"EngineVersions,omitempty" name:"EngineVersions" list`
+	EngineVersions []*string `json:"EngineVersions,omitempty" name:"EngineVersions"`
 
 	// VPC ID.
-	VpcIds []*uint64 `json:"VpcIds,omitempty" name:"VpcIds" list`
+	VpcIds []*uint64 `json:"VpcIds,omitempty" name:"VpcIds"`
 
 	// AZ ID.
-	ZoneIds []*uint64 `json:"ZoneIds,omitempty" name:"ZoneIds" list`
+	ZoneIds []*uint64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
 	// Subnet ID.
-	SubnetIds []*uint64 `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*uint64 `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
 	// Lock flag.
-	CdbErrors []*int64 `json:"CdbErrors,omitempty" name:"CdbErrors" list`
+	CdbErrors []*int64 `json:"CdbErrors,omitempty" name:"CdbErrors"`
 
 	// Sort by field of the returned result set. Currently, supported values include "InstanceId", "InstanceName", "CreateTime", and "DeadlineTime".
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
@@ -2607,7 +2607,7 @@ type DescribeDBInstancesRequest struct {
 	ExClusterId *string `json:"ExClusterId,omitempty" name:"ExClusterId"`
 
 	// Instance ID.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Initialization flag. Value range: 0 (not initialized), 1 (initialized).
 	InitFlag *int64 `json:"InitFlag,omitempty" name:"InitFlag"`
@@ -2622,10 +2622,10 @@ type DescribeDBInstancesRequest struct {
 	WithMaster *int64 `json:"WithMaster,omitempty" name:"WithMaster"`
 
 	// Placement group ID list.
-	DeployGroupIds []*string `json:"DeployGroupIds,omitempty" name:"DeployGroupIds" list`
+	DeployGroupIds []*string `json:"DeployGroupIds,omitempty" name:"DeployGroupIds"`
 
 	// Whether to use the tag key as a filter condition
-	TagKeysForSearch []*string `json:"TagKeysForSearch,omitempty" name:"TagKeysForSearch" list`
+	TagKeysForSearch []*string `json:"TagKeysForSearch,omitempty" name:"TagKeysForSearch"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -2681,7 +2681,7 @@ type DescribeDBInstancesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Instance details.
-		Items []*InstanceInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*InstanceInfo `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2734,7 +2734,7 @@ type DescribeDBSecurityGroupsResponse struct {
 	Response *struct {
 
 		// Security group details.
-		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2794,7 +2794,7 @@ type DescribeDBSwitchRecordsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Details of instance switches.
-		Items []*DBSwitchInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*DBSwitchInfo `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2842,7 +2842,7 @@ type DescribeDBZoneConfigResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Details of configurations in purchasable regions
-		Items []*RegionSellConf `json:"Items,omitempty" name:"Items" list`
+		Items []*RegionSellConf `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2970,10 +2970,10 @@ type DescribeDatabasesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Information of an instance.
-		Items []*string `json:"Items,omitempty" name:"Items" list`
+		Items []*string `json:"Items,omitempty" name:"Items"`
 
 		// Database name and character set
-		DatabaseList []*DatabasesWithCharacterLists `json:"DatabaseList,omitempty" name:"DatabaseList" list`
+		DatabaseList []*DatabasesWithCharacterLists `json:"DatabaseList,omitempty" name:"DatabaseList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3025,7 +3025,7 @@ type DescribeDefaultParamsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Parameter details.
-		Items []*ParameterDetail `json:"Items,omitempty" name:"Items" list`
+		Items []*ParameterDetail `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3090,7 +3090,7 @@ type DescribeDeployGroupListResponse struct {
 
 		// List of returned results.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		Items []*DeployGroupInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*DeployGroupInfo `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3183,7 +3183,7 @@ type DescribeErrorLogDataRequest struct {
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// List of keywords to match. Up to 15 keywords are supported.
-	KeyWords []*string `json:"KeyWords,omitempty" name:"KeyWords" list`
+	KeyWords []*string `json:"KeyWords,omitempty" name:"KeyWords"`
 
 	// The number of results per page in paginated queries. Default value: 100. Maximum value: 400.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
@@ -3229,7 +3229,7 @@ type DescribeErrorLogDataResponse struct {
 
 		// Returned result.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Items []*ErrlogItem `json:"Items,omitempty" name:"Items" list`
+		Items []*ErrlogItem `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3289,7 +3289,7 @@ type DescribeInstanceParamRecordsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Parameter modification records.
-		Items []*ParamRecord `json:"Items,omitempty" name:"Items" list`
+		Items []*ParamRecord `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3341,7 +3341,7 @@ type DescribeInstanceParamsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Parameter details.
-		Items []*ParameterDetail `json:"Items,omitempty" name:"Items" list`
+		Items []*ParameterDetail `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3402,7 +3402,7 @@ type DescribeParamTemplateInfoResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Parameter details
-		Items []*ParameterDetail `json:"Items,omitempty" name:"Items" list`
+		Items []*ParameterDetail `json:"Items,omitempty" name:"Items"`
 
 		// Parameter template description
 		Description *string `json:"Description,omitempty" name:"Description"`
@@ -3453,7 +3453,7 @@ type DescribeParamTemplatesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Parameter template details.
-		Items []*ParamTemplateInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*ParamTemplateInfo `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3502,7 +3502,7 @@ type DescribeProjectSecurityGroupsResponse struct {
 	Response *struct {
 
 		// Security group details.
-		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
 
 		// Number of security group rules
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -3554,7 +3554,7 @@ type DescribeRoGroupsResponse struct {
 	Response *struct {
 
 		// RO group information array. An instance can be associated with multiple RO groups.
-		RoGroups []*RoGroup `json:"RoGroups,omitempty" name:"RoGroups" list`
+		RoGroups []*RoGroup `json:"RoGroups,omitempty" name:"RoGroups"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3632,7 +3632,7 @@ type DescribeRollbackRangeTimeRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID list. An instance ID is in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed on the TencentDB Console page.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeRollbackRangeTimeRequest) ToJsonString() string {
@@ -3662,7 +3662,7 @@ type DescribeRollbackRangeTimeResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Returned parameter information.
-		Items []*InstanceRollbackRangeTime `json:"Items,omitempty" name:"Items" list`
+		Items []*InstanceRollbackRangeTime `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3727,7 +3727,7 @@ type DescribeRollbackTaskDetailResponse struct {
 
 		// Rollback task details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Items []*RollbackTask `json:"Items,omitempty" name:"Items" list`
+		Items []*RollbackTask `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3758,13 +3758,13 @@ type DescribeSlowLogDataRequest struct {
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Client `Host` list.
-	UserHosts []*string `json:"UserHosts,omitempty" name:"UserHosts" list`
+	UserHosts []*string `json:"UserHosts,omitempty" name:"UserHosts"`
 
 	// Client username list.
-	UserNames []*string `json:"UserNames,omitempty" name:"UserNames" list`
+	UserNames []*string `json:"UserNames,omitempty" name:"UserNames"`
 
 	// Accessed database list.
-	DataBases []*string `json:"DataBases,omitempty" name:"DataBases" list`
+	DataBases []*string `json:"DataBases,omitempty" name:"DataBases"`
 
 	// Sort by field. Valid values: Timestamp, QueryTime, LockTime, RowsExamined, RowsSent.
 	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
@@ -3820,7 +3820,7 @@ type DescribeSlowLogDataResponse struct {
 
 		// Queried results.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Items []*SlowLogItem `json:"Items,omitempty" name:"Items" list`
+		Items []*SlowLogItem `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3880,7 +3880,7 @@ type DescribeSlowLogsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Details of eligible slow logs.
-		Items []*SlowLogInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*SlowLogInfo `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3929,16 +3929,16 @@ type DescribeSupportedPrivilegesResponse struct {
 	Response *struct {
 
 		// Global permissions supported by the instance
-		GlobalSupportedPrivileges []*string `json:"GlobalSupportedPrivileges,omitempty" name:"GlobalSupportedPrivileges" list`
+		GlobalSupportedPrivileges []*string `json:"GlobalSupportedPrivileges,omitempty" name:"GlobalSupportedPrivileges"`
 
 		// Database permissions supported by the instance.
-		DatabaseSupportedPrivileges []*string `json:"DatabaseSupportedPrivileges,omitempty" name:"DatabaseSupportedPrivileges" list`
+		DatabaseSupportedPrivileges []*string `json:"DatabaseSupportedPrivileges,omitempty" name:"DatabaseSupportedPrivileges"`
 
 		// Table permissions supported by the instance.
-		TableSupportedPrivileges []*string `json:"TableSupportedPrivileges,omitempty" name:"TableSupportedPrivileges" list`
+		TableSupportedPrivileges []*string `json:"TableSupportedPrivileges,omitempty" name:"TableSupportedPrivileges"`
 
 		// Column permissions supported by the instance.
-		ColumnSupportedPrivileges []*string `json:"ColumnSupportedPrivileges,omitempty" name:"ColumnSupportedPrivileges" list`
+		ColumnSupportedPrivileges []*string `json:"ColumnSupportedPrivileges,omitempty" name:"ColumnSupportedPrivileges"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4006,7 +4006,7 @@ type DescribeTablesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Information of a table.
-		Items []*string `json:"Items,omitempty" name:"Items" list`
+		Items []*string `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4028,7 +4028,7 @@ type DescribeTagsOfInstanceIdsRequest struct {
 	*tchttp.BaseRequest
 
 	// List of instances.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Pagination offset.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -4069,7 +4069,7 @@ type DescribeTagsOfInstanceIdsResponse struct {
 		Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Instance tag information.
-		Rows []*TagsInfoOfInstance `json:"Rows,omitempty" name:"Rows" list`
+		Rows []*TagsInfoOfInstance `json:"Rows,omitempty" name:"Rows"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4109,7 +4109,7 @@ type DescribeTasksRequest struct {
 	// 11 - upgrading a primary instance;
 	// 12 - deleting a TencentDB table;
 	// 13 - promoting a disaster recovery instance.
-	TaskTypes []*int64 `json:"TaskTypes,omitempty" name:"TaskTypes" list`
+	TaskTypes []*int64 `json:"TaskTypes,omitempty" name:"TaskTypes"`
 
 	// Task status. If no value is passed in, all task statuses will be queried. Valid values:
 	// -1 - undefined;
@@ -4120,7 +4120,7 @@ type DescribeTasksRequest struct {
 	// 4 - terminated;
 	// 5 - deleted;
 	// 6 - paused.
-	TaskStatus []*int64 `json:"TaskStatus,omitempty" name:"TaskStatus" list`
+	TaskStatus []*int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
 
 	// Start time of the first task in the format of yyyy-MM-dd HH:mm:ss, such as 2017-12-31 10:40:01. It is used for queries by time range.
 	StartTimeBegin *string `json:"StartTimeBegin,omitempty" name:"StartTimeBegin"`
@@ -4169,7 +4169,7 @@ type DescribeTasksResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Information of an instance task.
-		Items []*TaskDetail `json:"Items,omitempty" name:"Items" list`
+		Items []*TaskDetail `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4218,25 +4218,25 @@ type DescribeTimeWindowResponse struct {
 	Response *struct {
 
 		// List of maintenance time windows on Monday.
-		Monday []*string `json:"Monday,omitempty" name:"Monday" list`
+		Monday []*string `json:"Monday,omitempty" name:"Monday"`
 
 		// List of maintenance time windows on Tuesday.
-		Tuesday []*string `json:"Tuesday,omitempty" name:"Tuesday" list`
+		Tuesday []*string `json:"Tuesday,omitempty" name:"Tuesday"`
 
 		// List of maintenance time windows on Wednesday.
-		Wednesday []*string `json:"Wednesday,omitempty" name:"Wednesday" list`
+		Wednesday []*string `json:"Wednesday,omitempty" name:"Wednesday"`
 
 		// List of maintenance time windows on Thursday.
-		Thursday []*string `json:"Thursday,omitempty" name:"Thursday" list`
+		Thursday []*string `json:"Thursday,omitempty" name:"Thursday"`
 
 		// List of maintenance time windows on Friday.
-		Friday []*string `json:"Friday,omitempty" name:"Friday" list`
+		Friday []*string `json:"Friday,omitempty" name:"Friday"`
 
 		// List of maintenance time windows on Saturday.
-		Saturday []*string `json:"Saturday,omitempty" name:"Saturday" list`
+		Saturday []*string `json:"Saturday,omitempty" name:"Saturday"`
 
 		// List of maintenance time windows on Sunday.
-		Sunday []*string `json:"Sunday,omitempty" name:"Sunday" list`
+		Sunday []*string `json:"Sunday,omitempty" name:"Sunday"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4296,7 +4296,7 @@ type DescribeUploadedFilesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of returned SQL files.
-		Items []*SqlFileInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*SqlFileInfo `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4317,10 +4317,10 @@ func (r *DescribeUploadedFilesResponse) FromJsonString(s string) error {
 type DeviceCpuInfo struct {
 
 	// Average instance CPU utilization
-	Rate []*DeviceCpuRateInfo `json:"Rate,omitempty" name:"Rate" list`
+	Rate []*DeviceCpuRateInfo `json:"Rate,omitempty" name:"Rate"`
 
 	// CPU monitoring data of the instance
-	Load []*int64 `json:"Load,omitempty" name:"Load" list`
+	Load []*int64 `json:"Load,omitempty" name:"Load"`
 }
 
 type DeviceCpuRateInfo struct {
@@ -4329,52 +4329,52 @@ type DeviceCpuRateInfo struct {
 	CpuCore *int64 `json:"CpuCore,omitempty" name:"CpuCore"`
 
 	// CPU utilization
-	Rate []*int64 `json:"Rate,omitempty" name:"Rate" list`
+	Rate []*int64 `json:"Rate,omitempty" name:"Rate"`
 }
 
 type DeviceDiskInfo struct {
 
 	// Time percentage of IO operations per second
-	IoRatioPerSec []*int64 `json:"IoRatioPerSec,omitempty" name:"IoRatioPerSec" list`
+	IoRatioPerSec []*int64 `json:"IoRatioPerSec,omitempty" name:"IoRatioPerSec"`
 
 	// Average wait time of device I/O operations * 100 in milliseconds. For example, if the value is 201, the average wait time of I/O operations is 201/100 = 2.1 milliseconds.
-	IoWaitTime []*int64 `json:"IoWaitTime,omitempty" name:"IoWaitTime" list`
+	IoWaitTime []*int64 `json:"IoWaitTime,omitempty" name:"IoWaitTime"`
 
 	// Average number of read operations completed by the disk per second * 100. For example, if the value is 2,002, the average number of read operations completed by the disk per second is 2,002/100=20.2.
-	Read []*int64 `json:"Read,omitempty" name:"Read" list`
+	Read []*int64 `json:"Read,omitempty" name:"Read"`
 
 	// Average number of write operations completed by the disk per second * 100. For example, if the value is 30,001, the average number of write operations completed by the disk per second is 30,001/100=300.01.
-	Write []*int64 `json:"Write,omitempty" name:"Write" list`
+	Write []*int64 `json:"Write,omitempty" name:"Write"`
 
 	// Disk capacity. Each value is comprised of two data, with the first data representing the used capacity and the second one representing the total disk capacity.
-	CapacityRatio []*int64 `json:"CapacityRatio,omitempty" name:"CapacityRatio" list`
+	CapacityRatio []*int64 `json:"CapacityRatio,omitempty" name:"CapacityRatio"`
 }
 
 type DeviceMemInfo struct {
 
 	// Total memory size in KB, which is the value of `total` in the `Mem:` in the `free` command
-	Total []*int64 `json:"Total,omitempty" name:"Total" list`
+	Total []*int64 `json:"Total,omitempty" name:"Total"`
 
 	// Used memory size in KB, which is the value of `used` in the `Mem:` row in the `free` command
-	Used []*int64 `json:"Used,omitempty" name:"Used" list`
+	Used []*int64 `json:"Used,omitempty" name:"Used"`
 }
 
 type DeviceNetInfo struct {
 
 	// Number of TCP connections
-	Conn []*int64 `json:"Conn,omitempty" name:"Conn" list`
+	Conn []*int64 `json:"Conn,omitempty" name:"Conn"`
 
 	// ENI inbound packets per second
-	PackageIn []*int64 `json:"PackageIn,omitempty" name:"PackageIn" list`
+	PackageIn []*int64 `json:"PackageIn,omitempty" name:"PackageIn"`
 
 	// ENI outbound packets per second
-	PackageOut []*int64 `json:"PackageOut,omitempty" name:"PackageOut" list`
+	PackageOut []*int64 `json:"PackageOut,omitempty" name:"PackageOut"`
 
 	// Inbound traffic in Kbps
-	FlowIn []*int64 `json:"FlowIn,omitempty" name:"FlowIn" list`
+	FlowIn []*int64 `json:"FlowIn,omitempty" name:"FlowIn"`
 
 	// Outbound traffic in Kbps
-	FlowOut []*int64 `json:"FlowOut,omitempty" name:"FlowOut" list`
+	FlowOut []*int64 `json:"FlowOut,omitempty" name:"FlowOut"`
 }
 
 type DisassociateSecurityGroupsRequest struct {
@@ -4384,7 +4384,7 @@ type DisassociateSecurityGroupsRequest struct {
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
 	// List of instance IDs, which is an array of one or more instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// This parameter takes effect only when the IDs of read-only replicas are passed in. If this parameter is set to `False` or left empty, the security group will be unbound from the RO groups of these read-only replicas. If this parameter is set to `True`, the security group will be unbound from the read-only replicas themselves.
 	ForReadonlyInstance *bool `json:"ForReadonlyInstance,omitempty" name:"ForReadonlyInstance"`
@@ -4538,13 +4538,13 @@ type InitDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// New password of the instance. Rule: It can only contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special characters (!@#$%^*()).
 	NewPassword *string `json:"NewPassword,omitempty" name:"NewPassword"`
 
 	// List of instance parameters. Currently, "character_set_server" and "lower_case_table_names" are supported, whose value ranges are ["utf8","latin1","gbk","utf8mb4"] and ["0","1"], respectively.
-	Parameters []*ParamInfo `json:"Parameters,omitempty" name:"Parameters" list`
+	Parameters []*ParamInfo `json:"Parameters,omitempty" name:"Parameters"`
 
 	// Instance port. Value range: [1024, 65535].
 	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
@@ -4577,7 +4577,7 @@ type InitDBInstancesResponse struct {
 	Response *struct {
 
 		// Array of async task request IDs, which can be used to query the execution results of async tasks.
-		AsyncRequestIds []*string `json:"AsyncRequestIds,omitempty" name:"AsyncRequestIds" list`
+		AsyncRequestIds []*string `json:"AsyncRequestIds,omitempty" name:"AsyncRequestIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4637,7 +4637,7 @@ type InstanceInfo struct {
 
 	// Details of a read-only group
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RoGroups []*RoGroup `json:"RoGroups,omitempty" name:"RoGroups" list`
+	RoGroups []*RoGroup `json:"RoGroups,omitempty" name:"RoGroups"`
 
 	// Subnet ID, such as 2333
 	SubnetId *int64 `json:"SubnetId,omitempty" name:"SubnetId"`
@@ -4675,7 +4675,7 @@ type InstanceInfo struct {
 
 	// Details of a disaster recovery instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DrInfo []*DrInfo `json:"DrInfo,omitempty" name:"DrInfo" list`
+	DrInfo []*DrInfo `json:"DrInfo,omitempty" name:"DrInfo"`
 
 	// Public domain name
 	WanDomain *string `json:"WanDomain,omitempty" name:"WanDomain"`
@@ -4733,7 +4733,7 @@ type InstanceInfo struct {
 
 	// List of tags
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	TagList []*TagInfoItem `json:"TagList,omitempty" name:"TagList" list`
+	TagList []*TagInfoItem `json:"TagList,omitempty" name:"TagList"`
 }
 
 type InstanceRebootTime struct {
@@ -4757,7 +4757,7 @@ type InstanceRollbackRangeTime struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Time range available for rollback
-	Times []*RollbackTimeRange `json:"Times,omitempty" name:"Times" list`
+	Times []*RollbackTimeRange `json:"Times,omitempty" name:"Times"`
 }
 
 type IsolateDBInstanceRequest struct {
@@ -4874,7 +4874,7 @@ type ModifyAccountDescriptionRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// TencentDB account
-	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
 	// Database account remarks
 	Description *string `json:"Description,omitempty" name:"Description"`
@@ -4928,7 +4928,7 @@ type ModifyAccountMaxUserConnectionsRequest struct {
 	*tchttp.BaseRequest
 
 	// List of TencentDB accounts
-	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -4991,7 +4991,7 @@ type ModifyAccountPasswordRequest struct {
 	NewPassword *string `json:"NewPassword,omitempty" name:"NewPassword"`
 
 	// TencentDB account
-	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 }
 
 func (r *ModifyAccountPasswordRequest) ToJsonString() string {
@@ -5045,23 +5045,23 @@ type ModifyAccountPrivilegesRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Database account, including username and domain name.
-	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
 	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".
 	// Note: if this parameter is not passed in, it means to clear the permission.
-	GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges" list`
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges"`
 
 	// Database permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", 	"DROP", "REFERENCES", "INDEX", "ALTER", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".
 	// Note: if this parameter is not passed in, it means to clear the permission.
-	DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitempty" name:"DatabasePrivileges" list`
+	DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitempty" name:"DatabasePrivileges"`
 
 	// Table permission in the database. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", 	"DROP", "REFERENCES", "INDEX", "ALTER", "CREATE VIEW", "SHOW VIEW", "TRIGGER".
 	// Note: if this parameter is not passed in, it means to clear the permission.
-	TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitempty" name:"TablePrivileges" list`
+	TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitempty" name:"TablePrivileges"`
 
 	// Column permission in table. Valid values: "SELECT", "INSERT", "UPDATE", "REFERENCES".
 	// Note: if this parameter is not passed in, it means to clear the permission.
-	ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitempty" name:"ColumnPrivileges" list`
+	ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitempty" name:"ColumnPrivileges"`
 
 	// If this parameter is specified, permissions are modified in batches. Valid values: `grant`, `revoke`.
 	ModifyAction *string `json:"ModifyAction,omitempty" name:"ModifyAction"`
@@ -5119,7 +5119,7 @@ type ModifyAutoRenewFlagRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Auto-renewal flag. Value range: 0 (auto-renewal not enabled), 1 (auto-renewal enabled).
 	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
@@ -5285,7 +5285,7 @@ type ModifyDBInstanceProjectRequest struct {
 	*tchttp.BaseRequest
 
 	// Array of instance IDs in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Project ID.
 	NewProjectId *int64 `json:"NewProjectId,omitempty" name:"NewProjectId"`
@@ -5338,7 +5338,7 @@ type ModifyDBInstanceSecurityGroupsRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// This parameter takes effect only when the ID of read-only replica is passed in. If this parameter is set to `False` or left empty, the security groups bound with the RO group of the read-only replicas will be modified. If this parameter is set to `True`, the security groups bound with the read-only replica itself will be modified.
 	ForReadonlyInstance *bool `json:"ForReadonlyInstance,omitempty" name:"ForReadonlyInstance"`
@@ -5459,10 +5459,10 @@ type ModifyInstanceParamRequest struct {
 	*tchttp.BaseRequest
 
 	// List of short instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value).
-	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList" list`
+	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList"`
 
 	// Template ID. At least one of `ParamList` and `TemplateId` must be passed in.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
@@ -5523,10 +5523,10 @@ type ModifyInstanceTagRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Tag to be added or modified.
-	ReplaceTags []*TagInfo `json:"ReplaceTags,omitempty" name:"ReplaceTags" list`
+	ReplaceTags []*TagInfo `json:"ReplaceTags,omitempty" name:"ReplaceTags"`
 
 	// Tag to be deleted.
-	DeleteTags []*TagInfo `json:"DeleteTags,omitempty" name:"DeleteTags" list`
+	DeleteTags []*TagInfo `json:"DeleteTags,omitempty" name:"DeleteTags"`
 }
 
 func (r *ModifyInstanceTagRequest) ToJsonString() string {
@@ -5637,7 +5637,7 @@ type ModifyParamTemplateRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// List of parameters.
-	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList" list`
+	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList"`
 }
 
 func (r *ModifyParamTemplateRequest) ToJsonString() string {
@@ -5692,7 +5692,7 @@ type ModifyRoGroupInfoRequest struct {
 	RoGroupInfo *RoGroupAttr `json:"RoGroupInfo,omitempty" name:"RoGroupInfo"`
 
 	// Weights of instances in RO group. If the weighting mode of an RO group is changed to custom mode, this parameter must be set, and a weight value needs to be set for each RO instance.
-	RoWeightValues []*RoWeightValue `json:"RoWeightValues,omitempty" name:"RoWeightValues" list`
+	RoWeightValues []*RoWeightValue `json:"RoWeightValues,omitempty" name:"RoWeightValues"`
 
 	// Whether to rebalance the loads of read-only replicas in the RO group. Valid values: `1` (yes), `0` (no). Default value: `0`. If this parameter is set to `1`, connections to the read-only replicas in the RO group will be interrupted transiently. Please ensure that your application has a reconnection mechanism.
 	IsBalanceRoLoad *int64 `json:"IsBalanceRoLoad,omitempty" name:"IsBalanceRoLoad"`
@@ -5855,10 +5855,10 @@ type ModifyTimeWindowRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Time period available for maintenance after modification in the format of 10:00-12:00. Each period lasts from half an hour to three hours, with the start time and end time aligned by half-hour. Up to two time periods can be set. Start and end time range: [00:00, 24:00].
-	TimeRanges []*string `json:"TimeRanges,omitempty" name:"TimeRanges" list`
+	TimeRanges []*string `json:"TimeRanges,omitempty" name:"TimeRanges"`
 
 	// Specifies for which day to modify the time period. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. If it is not specified or is left blank, the time period will be modified for every day by default.
-	Weekdays []*string `json:"Weekdays,omitempty" name:"Weekdays" list`
+	Weekdays []*string `json:"Weekdays,omitempty" name:"Weekdays"`
 }
 
 func (r *ModifyTimeWindowRequest) ToJsonString() string {
@@ -5906,7 +5906,7 @@ type OfflineIsolatedInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *OfflineIsolatedInstancesRequest) ToJsonString() string {
@@ -6148,7 +6148,7 @@ type ParameterDetail struct {
 	Min *int64 `json:"Min,omitempty" name:"Min"`
 
 	// Enumerated values of the parameter. It is null if the parameter is non-enumerated
-	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue" list`
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 }
 
 type RegionSellConf struct {
@@ -6166,14 +6166,14 @@ type RegionSellConf struct {
 	Region *string `json:"Region,omitempty" name:"Region"`
 
 	// Sale configuration of the AZ
-	ZonesConf []*ZoneSellConf `json:"ZonesConf,omitempty" name:"ZonesConf" list`
+	ZonesConf []*ZoneSellConf `json:"ZonesConf,omitempty" name:"ZonesConf"`
 }
 
 type ReleaseIsolatedDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Array of instance IDs in the format of `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in the output parameters.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *ReleaseIsolatedDBInstancesRequest) ToJsonString() string {
@@ -6200,7 +6200,7 @@ type ReleaseIsolatedDBInstancesResponse struct {
 	Response *struct {
 
 		// Deisolation result set.
-		Items []*ReleaseResult `json:"Items,omitempty" name:"Items" list`
+		Items []*ReleaseResult `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6234,7 +6234,7 @@ type RestartDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Array of instance IDs in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *RestartDBInstancesRequest) ToJsonString() string {
@@ -6306,7 +6306,7 @@ type RoGroup struct {
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 
 	// Details of read-only instances in read-only group
-	RoInstances []*RoInstanceInfo `json:"RoInstances,omitempty" name:"RoInstances" list`
+	RoInstances []*RoInstanceInfo `json:"RoInstances,omitempty" name:"RoInstances"`
 
 	// Private IP of read-only group.
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
@@ -6473,11 +6473,11 @@ type RollbackInstancesInfo struct {
 
 	// Information of the databases to be rolled back, which means rollback at the database level
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Databases []*RollbackDBName `json:"Databases,omitempty" name:"Databases" list`
+	Databases []*RollbackDBName `json:"Databases,omitempty" name:"Databases"`
 
 	// Information of the tables to be rolled back, which means rollback at the table level
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tables []*RollbackTables `json:"Tables,omitempty" name:"Tables" list`
+	Tables []*RollbackTables `json:"Tables,omitempty" name:"Tables"`
 }
 
 type RollbackTableName struct {
@@ -6499,7 +6499,7 @@ type RollbackTables struct {
 
 	// Table details
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Table []*RollbackTableName `json:"Table,omitempty" name:"Table" list`
+	Table []*RollbackTableName `json:"Table,omitempty" name:"Table"`
 }
 
 type RollbackTask struct {
@@ -6521,7 +6521,7 @@ type RollbackTask struct {
 
 	// Rollback task details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Detail []*RollbackInstancesInfo `json:"Detail,omitempty" name:"Detail" list`
+	Detail []*RollbackInstancesInfo `json:"Detail,omitempty" name:"Detail"`
 }
 
 type RollbackTimeRange struct {
@@ -6542,10 +6542,10 @@ type SecurityGroup struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Inbound rule
-	Inbound []*Inbound `json:"Inbound,omitempty" name:"Inbound" list`
+	Inbound []*Inbound `json:"Inbound,omitempty" name:"Inbound"`
 
 	// Outbound rule
-	Outbound []*Outbound `json:"Outbound,omitempty" name:"Outbound" list`
+	Outbound []*Outbound `json:"Outbound,omitempty" name:"Outbound"`
 
 	// Security group ID
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
@@ -6616,10 +6616,10 @@ type SellType struct {
 	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
 
 	// Kernel version number
-	EngineVersion []*string `json:"EngineVersion,omitempty" name:"EngineVersion" list`
+	EngineVersion []*string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
 	// Configuration details of a purchasable specification
-	Configs []*SellConfig `json:"Configs,omitempty" name:"Configs" list`
+	Configs []*SellConfig `json:"Configs,omitempty" name:"Configs"`
 }
 
 type SlaveConfig struct {
@@ -6749,7 +6749,7 @@ type StartBatchRollbackRequest struct {
 	*tchttp.BaseRequest
 
 	// Details of the instance for rollback
-	Instances []*RollbackInstancesInfo `json:"Instances,omitempty" name:"Instances" list`
+	Instances []*RollbackInstancesInfo `json:"Instances,omitempty" name:"Instances"`
 }
 
 func (r *StartBatchRollbackRequest) ToJsonString() string {
@@ -7168,7 +7168,7 @@ type TablePrivilege struct {
 	Table *string `json:"Table,omitempty" name:"Table"`
 
 	// Permission information
-	Privileges []*string `json:"Privileges,omitempty" name:"Privileges" list`
+	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
 }
 
 type TagInfo struct {
@@ -7177,7 +7177,7 @@ type TagInfo struct {
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
 	// Tag value
-	TagValue []*string `json:"TagValue,omitempty" name:"TagValue" list`
+	TagValue []*string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type TagInfoItem struct {
@@ -7206,7 +7206,7 @@ type TagsInfoOfInstance struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Tag information
-	Tags []*TagInfoUnit `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*TagInfoUnit `json:"Tags,omitempty" name:"Tags"`
 }
 
 type TaskDetail struct {
@@ -7258,7 +7258,7 @@ type TaskDetail struct {
 
 	// ID of an instance associated with a task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Async task request ID.
 	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
@@ -7392,7 +7392,7 @@ type UpgradeDBInstanceResponse struct {
 	Response *struct {
 
 		// Order ID.
-		DealIds []*string `json:"DealIds,omitempty" name:"DealIds" list`
+		DealIds []*string `json:"DealIds,omitempty" name:"DealIds"`
 
 		// Async task request ID, which can be used to query the execution result of an async task.
 		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
@@ -7425,16 +7425,16 @@ type UploadInfo struct {
 type ZoneConf struct {
 
 	// AZ deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
-	DeployMode []*int64 `json:"DeployMode,omitempty" name:"DeployMode" list`
+	DeployMode []*int64 `json:"DeployMode,omitempty" name:"DeployMode"`
 
 	// AZ where the primary instance is located
-	MasterZone []*string `json:"MasterZone,omitempty" name:"MasterZone" list`
+	MasterZone []*string `json:"MasterZone,omitempty" name:"MasterZone"`
 
 	// AZ where salve database 1 is located when the instance is deployed in multi-AZ mode
-	SlaveZone []*string `json:"SlaveZone,omitempty" name:"SlaveZone" list`
+	SlaveZone []*string `json:"SlaveZone,omitempty" name:"SlaveZone"`
 
 	// AZ where salve database 2 is located when the instance is deployed in multi-AZ mode
-	BackupZone []*string `json:"BackupZone,omitempty" name:"BackupZone" list`
+	BackupZone []*string `json:"BackupZone,omitempty" name:"BackupZone"`
 }
 
 type ZoneSellConf struct {
@@ -7464,27 +7464,27 @@ type ZoneSellConf struct {
 	IsBm *bool `json:"IsBm,omitempty" name:"IsBm"`
 
 	// Supported billing method. Value range: 0 (monthly subscribed), 1 (hourly), 2 (postpaid)
-	PayType []*string `json:"PayType,omitempty" name:"PayType" list`
+	PayType []*string `json:"PayType,omitempty" name:"PayType"`
 
 	// Data replication type. Value range: 0 (async), 1 (semi-sync), 2 (strong sync)
-	ProtectMode []*string `json:"ProtectMode,omitempty" name:"ProtectMode" list`
+	ProtectMode []*string `json:"ProtectMode,omitempty" name:"ProtectMode"`
 
 	// AZ name
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// Array of purchasable instance types
-	SellType []*SellType `json:"SellType,omitempty" name:"SellType" list`
+	SellType []*SellType `json:"SellType,omitempty" name:"SellType"`
 
 	// Multi-AZ information
 	ZoneConf *ZoneConf `json:"ZoneConf,omitempty" name:"ZoneConf"`
 
 	// Information of the supported disaster recovery AZ
-	DrZone []*string `json:"DrZone,omitempty" name:"DrZone" list`
+	DrZone []*string `json:"DrZone,omitempty" name:"DrZone"`
 
 	// Whether cross-AZ read-only access is supported
 	IsSupportRemoteRo *bool `json:"IsSupportRemoteRo,omitempty" name:"IsSupportRemoteRo"`
 
 	// Information of supported cross-AZ read-only zone
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RemoteRoZone []*string `json:"RemoteRoZone,omitempty" name:"RemoteRoZone" list`
+	RemoteRoZone []*string `json:"RemoteRoZone,omitempty" name:"RemoteRoZone"`
 }

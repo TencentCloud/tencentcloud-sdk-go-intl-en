@@ -31,7 +31,7 @@ type AssociateSecurityGroupsRequest struct {
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
 	// ID(s) of the instance(s) to be associated in the format of tdsqlshard-lesecurk. You can specify multiple instances.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *AssociateSecurityGroupsRequest) ToJsonString() string {
@@ -468,7 +468,7 @@ type DCDBInstanceInfo struct {
 	Uin *string `json:"Uin,omitempty" name:"Uin"`
 
 	// Shard details
-	ShardDetail []*ShardInfo `json:"ShardDetail,omitempty" name:"ShardDetail" list`
+	ShardDetail []*ShardInfo `json:"ShardDetail,omitempty" name:"ShardDetail"`
 
 	// Number of nodes. 2: one master and one slave; 3: one master and two slaves
 	NodeCount *int64 `json:"NodeCount,omitempty" name:"NodeCount"`
@@ -634,7 +634,7 @@ type DCDBShardInfo struct {
 
 	// List of secondary AZs of a shard
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ShardSlaveZones []*string `json:"ShardSlaveZones,omitempty" name:"ShardSlaveZones" list`
+	ShardSlaveZones []*string `json:"ShardSlaveZones,omitempty" name:"ShardSlaveZones"`
 
 	// Number of CPU cores
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
@@ -785,7 +785,7 @@ type DescribeAccountPrivilegesResponse struct {
 		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 		// List of permissions.
-		Privileges []*string `json:"Privileges,omitempty" name:"Privileges" list`
+		Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
 
 		// Database account username
 		UserName *string `json:"UserName,omitempty" name:"UserName"`
@@ -844,7 +844,7 @@ type DescribeAccountsResponse struct {
 
 		// List of instance users.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Users []*DBAccount `json:"Users,omitempty" name:"Users" list`
+		Users []*DBAccount `json:"Users,omitempty" name:"Users"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -910,7 +910,7 @@ type DescribeDBLogFilesResponse struct {
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// List of log files
-		Files []*LogFileInfo `json:"Files,omitempty" name:"Files" list`
+		Files []*LogFileInfo `json:"Files,omitempty" name:"Files"`
 
 		// For an instance in a VPC, this prefix plus URI can be used as the download address
 		VpcPrefix *string `json:"VpcPrefix,omitempty" name:"VpcPrefix"`
@@ -971,7 +971,7 @@ type DescribeDBParametersResponse struct {
 		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 		// Requests the current parameter values of a DB
-		Params []*ParamDesc `json:"Params,omitempty" name:"Params" list`
+		Params []*ParamDesc `json:"Params,omitempty" name:"Params"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1024,7 +1024,7 @@ type DescribeDBSecurityGroupsResponse struct {
 	Response *struct {
 
 		// Security group details
-		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
 
 		// Instance VIP
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -1147,7 +1147,7 @@ type DescribeDCDBInstanceNodeInfoResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Node information
-		NodesInfo []*BriefNodeInfo `json:"NodesInfo,omitempty" name:"NodesInfo" list`
+		NodesInfo []*BriefNodeInfo `json:"NodesInfo,omitempty" name:"NodesInfo"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1169,7 +1169,7 @@ type DescribeDCDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Query by instance ID or IDs. Instance ID is in the format of dcdbt-2t4cf98d
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Search field name. Valid values: instancename (search by instance name); vip (search by private IP); all (search by instance ID, instance name, and private IP).
 	SearchName *string `json:"SearchName,omitempty" name:"SearchName"`
@@ -1178,7 +1178,7 @@ type DescribeDCDBInstancesRequest struct {
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 
 	// Query by project ID
-	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// Whether to search by VPC
 	IsFilterVpc *bool `json:"IsFilterVpc,omitempty" name:"IsFilterVpc"`
@@ -1208,10 +1208,10 @@ type DescribeDCDBInstancesRequest struct {
 	IsFilterExcluster *bool `json:"IsFilterExcluster,omitempty" name:"IsFilterExcluster"`
 
 	// Dedicated cluster ID
-	ExclusterIds []*string `json:"ExclusterIds,omitempty" name:"ExclusterIds" list`
+	ExclusterIds []*string `json:"ExclusterIds,omitempty" name:"ExclusterIds"`
 
 	// Tag key used in queries
-	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
 	// Instance types used in filtering. Valid values: 1 (dedicated instance), 2 (primary instance), 3 (disaster recovery instance). Multiple values should be separated by commas.
 	FilterInstanceType *string `json:"FilterInstanceType,omitempty" name:"FilterInstanceType"`
@@ -1259,7 +1259,7 @@ type DescribeDCDBInstancesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of instance details
-		Instances []*DCDBInstanceInfo `json:"Instances,omitempty" name:"Instances" list`
+		Instances []*DCDBInstanceInfo `json:"Instances,omitempty" name:"Instances"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1284,7 +1284,7 @@ type DescribeDCDBShardsRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Shard ID list.
-	ShardInstanceIds []*string `json:"ShardInstanceIds,omitempty" name:"ShardInstanceIds" list`
+	ShardInstanceIds []*string `json:"ShardInstanceIds,omitempty" name:"ShardInstanceIds"`
 
 	// Offset. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -1331,7 +1331,7 @@ type DescribeDCDBShardsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Shard information list
-		Shards []*DCDBShardInfo `json:"Shards,omitempty" name:"Shards" list`
+		Shards []*DCDBShardInfo `json:"Shards,omitempty" name:"Shards"`
 
 		// DCN type. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1394,16 +1394,16 @@ type DescribeDatabaseObjectsResponse struct {
 		DbName *string `json:"DbName,omitempty" name:"DbName"`
 
 		// List of tables.
-		Tables []*DatabaseTable `json:"Tables,omitempty" name:"Tables" list`
+		Tables []*DatabaseTable `json:"Tables,omitempty" name:"Tables"`
 
 		// List of views.
-		Views []*DatabaseView `json:"Views,omitempty" name:"Views" list`
+		Views []*DatabaseView `json:"Views,omitempty" name:"Views"`
 
 		// List of stored procedures.
-		Procs []*DatabaseProcedure `json:"Procs,omitempty" name:"Procs" list`
+		Procs []*DatabaseProcedure `json:"Procs,omitempty" name:"Procs"`
 
 		// List of functions.
-		Funcs []*DatabaseFunction `json:"Funcs,omitempty" name:"Funcs" list`
+		Funcs []*DatabaseFunction `json:"Funcs,omitempty" name:"Funcs"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1469,7 +1469,7 @@ type DescribeDatabaseTableResponse struct {
 		Table *string `json:"Table,omitempty" name:"Table"`
 
 		// Column information.
-		Cols []*TableColumn `json:"Cols,omitempty" name:"Cols" list`
+		Cols []*TableColumn `json:"Cols,omitempty" name:"Cols"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1518,7 +1518,7 @@ type DescribeDatabasesResponse struct {
 	Response *struct {
 
 		// List of databases on an instance.
-		Databases []*Database `json:"Databases,omitempty" name:"Databases" list`
+		Databases []*Database `json:"Databases,omitempty" name:"Databases"`
 
 		// Passed through from the input parameters.
 		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -1574,7 +1574,7 @@ type DescribeProjectSecurityGroupsResponse struct {
 	Response *struct {
 
 		// Security group details
-		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1619,7 +1619,7 @@ type DescribeProjectsResponse struct {
 	Response *struct {
 
 		// Project list
-		Projects []*Project `json:"Projects,omitempty" name:"Projects" list`
+		Projects []*Project `json:"Projects,omitempty" name:"Projects"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1647,7 +1647,7 @@ type DisassociateSecurityGroupsRequest struct {
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
 	// Instance ID list, which is an array of one or more instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DisassociateSecurityGroupsRequest) ToJsonString() string {
@@ -1711,7 +1711,7 @@ type GrantAccountPrivilegesRequest struct {
 	// Table/view permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE VIEW; SHOW VIEW; TRIGGER 
 	// Stored procedure/function permission. Valid values: ALTER ROUTINE; EXECUTE 
 	// Field permission. Valid values: INSERT; REFERENCES; SELECT; UPDATE
-	Privileges []*string `json:"Privileges,omitempty" name:"Privileges" list`
+	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
 
 	// Type. Valid values: table; view; proc; func; \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be set (i.e., `db.\*`), in which case the `Object` parameter will be ignored
 	Type *string `json:"Type,omitempty" name:"Type"`
@@ -1773,10 +1773,10 @@ type InitDCDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of IDs of instances to be initialized. The ID is in the format of `dcdbt-ow728lmc` and can be obtained through the `DescribeDCDBInstances` API.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// List of parameters. Valid values: character_set_server (character set; required); lower_case_table_names (table name case sensitivity; required; 0: case-sensitive; 1: case-insensitive); innodb_page_size (InnoDB data page; default size: 16 KB); sync_mode (sync mode; 0: async; 1: strong sync; 2: downgradable strong sync; default value: strong sync).
-	Params []*DBParamValue `json:"Params,omitempty" name:"Params" list`
+	Params []*DBParamValue `json:"Params,omitempty" name:"Params"`
 }
 
 func (r *InitDCDBInstancesRequest) ToJsonString() string {
@@ -1804,10 +1804,10 @@ type InitDCDBInstancesResponse struct {
 	Response *struct {
 
 		// Async task ID. The task status can be queried through the `DescribeFlow` API.
-		FlowIds []*uint64 `json:"FlowIds,omitempty" name:"FlowIds" list`
+		FlowIds []*uint64 `json:"FlowIds,omitempty" name:"FlowIds"`
 
 		// Passed through from the input parameters.
-		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1908,7 +1908,7 @@ type ModifyDBInstanceSecurityGroupsRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
 
 func (r *ModifyDBInstanceSecurityGroupsRequest) ToJsonString() string {
@@ -1956,7 +1956,7 @@ type ModifyDBInstancesProjectRequest struct {
 	*tchttp.BaseRequest
 
 	// List of IDs of instances to be modified. Instance ID is in the format of dcdbt-ow728lmc.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// ID of the project to be assigned, which can be obtained through the `DescribeProjects` API.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
@@ -2009,7 +2009,7 @@ type ModifyDBParametersRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// List of parameters. Every element is a combination of `Param` and `Value`.
-	Params []*DBParamValue `json:"Params,omitempty" name:"Params" list`
+	Params []*DBParamValue `json:"Params,omitempty" name:"Params"`
 }
 
 func (r *ModifyDBParametersRequest) ToJsonString() string {
@@ -2040,7 +2040,7 @@ type ModifyDBParametersResponse struct {
 		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 		// Parameter modification results
-		Result []*ParamModifyResult `json:"Result,omitempty" name:"Result" list`
+		Result []*ParamModifyResult `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2323,10 +2323,10 @@ type SecurityGroup struct {
 	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitempty" name:"SecurityGroupRemark"`
 
 	// Inbound rule
-	Inbound []*SecurityGroupBound `json:"Inbound,omitempty" name:"Inbound" list`
+	Inbound []*SecurityGroupBound `json:"Inbound,omitempty" name:"Inbound"`
 
 	// Outbound rule
-	Outbound []*SecurityGroupBound `json:"Outbound,omitempty" name:"Outbound" list`
+	Outbound []*SecurityGroupBound `json:"Outbound,omitempty" name:"Outbound"`
 }
 
 type SecurityGroupBound struct {

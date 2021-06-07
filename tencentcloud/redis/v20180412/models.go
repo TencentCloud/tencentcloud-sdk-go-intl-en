@@ -41,7 +41,7 @@ type Account struct {
 
 	// Routing policy. master: master node; replication: secondary node
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy" list`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy"`
 
 	// Sub-account status. 1: account is being changed; 2: account is valid; -4: account has been deleted
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -58,7 +58,7 @@ type AssociateSecurityGroupsRequest struct {
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
 	// ID(s) of the instance(s) to be associated in the format of ins-lesecurk. You can specify multiple instances.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *AssociateSecurityGroupsRequest) ToJsonString() string {
@@ -259,7 +259,7 @@ type CreateInstanceAccountRequest struct {
 	AccountPassword *string `json:"AccountPassword,omitempty" name:"AccountPassword"`
 
 	// Routing policy. Enter `master` for primary node or `replication` for secondary node
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy" list`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy"`
 
 	// Read/write policy. Valid values: r (read-only), rw (read/write).
 	Privilege *string `json:"Privilege,omitempty" name:"Privilege"`
@@ -354,7 +354,7 @@ type CreateInstancesRequest struct {
 	AutoRenew *uint64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 
 	// Array of security group IDs
-	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitempty" name:"SecurityGroupIdList" list`
+	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitempty" name:"SecurityGroupIdList"`
 
 	// User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024, 65535].
 	VPort *uint64 `json:"VPort,omitempty" name:"VPort"`
@@ -375,10 +375,10 @@ type CreateInstancesRequest struct {
 	NoAuth *bool `json:"NoAuth,omitempty" name:"NoAuth"`
 
 	// Node information of an instance. Currently, information about the node type (master or replica) and node availability zone can be passed in. This parameter is not required for instances deployed in a single availability zone.
-	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet" list`
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet"`
 
 	// The tag bound with the instance to be purchased
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags" list`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -427,7 +427,7 @@ type CreateInstancesResponse struct {
 		DealId *string `json:"DealId,omitempty" name:"DealId"`
 
 		// Instance ID
-		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -550,7 +550,7 @@ type DescribeAutoBackupConfigResponse struct {
 		AutoBackupType *int64 `json:"AutoBackupType,omitempty" name:"AutoBackupType"`
 
 		// Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
-		WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays" list`
+		WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays"`
 
 		// Time period.
 		TimePeriod *string `json:"TimePeriod,omitempty" name:"TimePeriod"`
@@ -606,10 +606,10 @@ type DescribeBackupUrlResponse struct {
 	Response *struct {
 
 		// Download address on the public network (valid for 6 hours)
-		DownloadUrl []*string `json:"DownloadUrl,omitempty" name:"DownloadUrl" list`
+		DownloadUrl []*string `json:"DownloadUrl,omitempty" name:"DownloadUrl"`
 
 		// Download address on the private network (valid for 6 hours)
-		InnerDownloadUrl []*string `json:"InnerDownloadUrl,omitempty" name:"InnerDownloadUrl" list`
+		InnerDownloadUrl []*string `json:"InnerDownloadUrl,omitempty" name:"InnerDownloadUrl"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -631,22 +631,22 @@ type DescribeCommonDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of instance VIPs
-	VpcIds []*int64 `json:"VpcIds,omitempty" name:"VpcIds" list`
+	VpcIds []*int64 `json:"VpcIds,omitempty" name:"VpcIds"`
 
 	// List of subnet IDs
-	SubnetIds []*int64 `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*int64 `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
 	// List of billing modes. Valid values: `0` (monthly subscription), `1` (pay-as-you-go)
 	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
 
 	// List of instance IDs
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// List of instance names
-	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames" list`
+	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames"`
 
 	// List of instance status
-	Status []*string `json:"Status,omitempty" name:"Status" list`
+	Status []*string `json:"Status,omitempty" name:"Status"`
 
 	// Sort field
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
@@ -655,13 +655,13 @@ type DescribeCommonDBInstancesRequest struct {
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 
 	// List of instance VIPs
-	Vips []*string `json:"Vips,omitempty" name:"Vips" list`
+	Vips []*string `json:"Vips,omitempty" name:"Vips"`
 
 	// List of unique VPC IDs
-	UniqVpcIds []*string `json:"UniqVpcIds,omitempty" name:"UniqVpcIds" list`
+	UniqVpcIds []*string `json:"UniqVpcIds,omitempty" name:"UniqVpcIds"`
 
 	// List of unique subnet IDs
-	UniqSubnetIds []*string `json:"UniqSubnetIds,omitempty" name:"UniqSubnetIds" list`
+	UniqSubnetIds []*string `json:"UniqSubnetIds,omitempty" name:"UniqSubnetIds"`
 
 	// Quantity limit. The default value `100` is recommended.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
@@ -709,7 +709,7 @@ type DescribeCommonDBInstancesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Instance information
-		InstanceDetails []*RedisCommonInstanceList `json:"InstanceDetails,omitempty" name:"InstanceDetails" list`
+		InstanceDetails []*RedisCommonInstanceList `json:"InstanceDetails,omitempty" name:"InstanceDetails"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -762,7 +762,7 @@ type DescribeDBSecurityGroupsResponse struct {
 	Response *struct {
 
 		// Security group rules.
-		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -820,7 +820,7 @@ type DescribeInstanceAccountResponse struct {
 
 		// Account details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		Accounts []*Account `json:"Accounts,omitempty" name:"Accounts" list`
+		Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
 		// Number of accounts
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -861,7 +861,7 @@ type DescribeInstanceBackupsRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// 1: backup in process; 2: backing up normally; 3: converting from backup to RDB file; 4: RDB conversion completed; -1: backup expired; -2: backup deleted.
-	Status []*int64 `json:"Status,omitempty" name:"Status" list`
+	Status []*int64 `json:"Status,omitempty" name:"Status"`
 }
 
 func (r *DescribeInstanceBackupsRequest) ToJsonString() string {
@@ -896,7 +896,7 @@ type DescribeInstanceBackupsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Array of instance backups
-		BackupSet []*RedisBackupSet `json:"BackupSet,omitempty" name:"BackupSet" list`
+		BackupSet []*RedisBackupSet `json:"BackupSet,omitempty" name:"BackupSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1031,7 +1031,7 @@ type DescribeInstanceDealDetailRequest struct {
 	*tchttp.BaseRequest
 
 	// Array of order IDs. It is the same as the response parameter `DealId` in the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
-	DealIds []*string `json:"DealIds,omitempty" name:"DealIds" list`
+	DealIds []*string `json:"DealIds,omitempty" name:"DealIds"`
 }
 
 func (r *DescribeInstanceDealDetailRequest) ToJsonString() string {
@@ -1058,7 +1058,7 @@ type DescribeInstanceDealDetailResponse struct {
 	Response *struct {
 
 		// Order details
-		DealDetails []*TradeDealDetail `json:"DealDetails,omitempty" name:"DealDetails" list`
+		DealDetails []*TradeDealDetail `json:"DealDetails,omitempty" name:"DealDetails"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1115,7 +1115,7 @@ type DescribeInstanceMonitorBigKeyResponse struct {
 	Response *struct {
 
 		// Big key details
-		Data []*BigKeyInfo `json:"Data,omitempty" name:"Data" list`
+		Data []*BigKeyInfo `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1168,7 +1168,7 @@ type DescribeInstanceMonitorBigKeySizeDistResponse struct {
 	Response *struct {
 
 		// Big key size distribution details
-		Data []*DelayDistribution `json:"Data,omitempty" name:"Data" list`
+		Data []*DelayDistribution `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1221,7 +1221,7 @@ type DescribeInstanceMonitorBigKeyTypeDistResponse struct {
 	Response *struct {
 
 		// Big key type distribution details
-		Data []*BigKeyTypeInfo `json:"Data,omitempty" name:"Data" list`
+		Data []*BigKeyTypeInfo `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1274,7 +1274,7 @@ type DescribeInstanceMonitorHotKeyResponse struct {
 	Response *struct {
 
 		// Hot key details
-		Data []*HotKeyInfo `json:"Data,omitempty" name:"Data" list`
+		Data []*HotKeyInfo `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1323,7 +1323,7 @@ type DescribeInstanceMonitorSIPResponse struct {
 	Response *struct {
 
 		// Access source information
-		Data []*SourceInfo `json:"Data,omitempty" name:"Data" list`
+		Data []*SourceInfo `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1380,7 +1380,7 @@ type DescribeInstanceMonitorTookDistResponse struct {
 	Response *struct {
 
 		// Latency distribution information
-		Data []*DelayDistribution `json:"Data,omitempty" name:"Data" list`
+		Data []*DelayDistribution `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1433,7 +1433,7 @@ type DescribeInstanceMonitorTopNCmdResponse struct {
 	Response *struct {
 
 		// Access command information
-		Data []*SourceCommand `json:"Data,omitempty" name:"Data" list`
+		Data []*SourceCommand `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1486,7 +1486,7 @@ type DescribeInstanceMonitorTopNCmdTookResponse struct {
 	Response *struct {
 
 		// Duration details
-		Data []*CommandTake `json:"Data,omitempty" name:"Data" list`
+		Data []*CommandTake `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1547,21 +1547,21 @@ type DescribeInstanceNodeInfoResponse struct {
 
 		// Proxy node information
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Proxy []*ProxyNodes `json:"Proxy,omitempty" name:"Proxy" list`
+		Proxy []*ProxyNodes `json:"Proxy,omitempty" name:"Proxy"`
 
 		// The number of redis nodes
 		RedisCount *int64 `json:"RedisCount,omitempty" name:"RedisCount"`
 
 		// Redis node information
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Redis []*RedisNodes `json:"Redis,omitempty" name:"Redis" list`
+		Redis []*RedisNodes `json:"Redis,omitempty" name:"Redis"`
 
 		// The number of tendis nodes
 		TendisCount *int64 `json:"TendisCount,omitempty" name:"TendisCount"`
 
 		// Tendis node information
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Tendis []*TendisNodes `json:"Tendis,omitempty" name:"Tendis" list`
+		Tendis []*TendisNodes `json:"Tendis,omitempty" name:"Tendis"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1621,7 +1621,7 @@ type DescribeInstanceParamRecordsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Information of modifications.
-		InstanceParamHistory []*InstanceParamHistory `json:"InstanceParamHistory,omitempty" name:"InstanceParamHistory" list`
+		InstanceParamHistory []*InstanceParamHistory `json:"InstanceParamHistory,omitempty" name:"InstanceParamHistory"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1673,16 +1673,16 @@ type DescribeInstanceParamsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Instance parameter in Enum type
-		InstanceEnumParam []*InstanceEnumParam `json:"InstanceEnumParam,omitempty" name:"InstanceEnumParam" list`
+		InstanceEnumParam []*InstanceEnumParam `json:"InstanceEnumParam,omitempty" name:"InstanceEnumParam"`
 
 		// Instance parameter in Integer type
-		InstanceIntegerParam []*InstanceIntegerParam `json:"InstanceIntegerParam,omitempty" name:"InstanceIntegerParam" list`
+		InstanceIntegerParam []*InstanceIntegerParam `json:"InstanceIntegerParam,omitempty" name:"InstanceIntegerParam"`
 
 		// Instance parameter in Char type
-		InstanceTextParam []*InstanceTextParam `json:"InstanceTextParam,omitempty" name:"InstanceTextParam" list`
+		InstanceTextParam []*InstanceTextParam `json:"InstanceTextParam,omitempty" name:"InstanceTextParam"`
 
 		// Instance parameter in Multi type
-		InstanceMultiParam []*InstanceMultiParam `json:"InstanceMultiParam,omitempty" name:"InstanceMultiParam" list`
+		InstanceMultiParam []*InstanceMultiParam `json:"InstanceMultiParam,omitempty" name:"InstanceMultiParam"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1704,7 +1704,7 @@ type DescribeInstanceSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance list
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeInstanceSecurityGroupRequest) ToJsonString() string {
@@ -1731,7 +1731,7 @@ type DescribeInstanceSecurityGroupResponse struct {
 	Response *struct {
 
 		// Security group information of an instance
-		InstanceSecurityGroupsDetail []*InstanceSecurityGroupDetail `json:"InstanceSecurityGroupsDetail,omitempty" name:"InstanceSecurityGroupsDetail" list`
+		InstanceSecurityGroupsDetail []*InstanceSecurityGroupDetail `json:"InstanceSecurityGroupsDetail,omitempty" name:"InstanceSecurityGroupsDetail"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1784,7 +1784,7 @@ type DescribeInstanceShardsResponse struct {
 	Response *struct {
 
 		// Information list of instance shards
-		InstanceShards []*InstanceClusterShard `json:"InstanceShards,omitempty" name:"InstanceShards" list`
+		InstanceShards []*InstanceClusterShard `json:"InstanceShards,omitempty" name:"InstanceShards"`
 
 		// Total number of instance shard nodes
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1839,7 +1839,7 @@ type DescribeInstanceZoneInfoResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The list of instance node groups
-		ReplicaGroups []*ReplicaGroup `json:"ReplicaGroups,omitempty" name:"ReplicaGroups" list`
+		ReplicaGroups []*ReplicaGroup `json:"ReplicaGroups,omitempty" name:"ReplicaGroups"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1876,13 +1876,13 @@ type DescribeInstancesRequest struct {
 	OrderType *int64 `json:"OrderType,omitempty" name:"OrderType"`
 
 	// Array of VPC IDs such as 47525. The array subscript starts from 0. If this parameter is not passed in, the basic network will be selected by default
-	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds" list`
+	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 
 	// Array of subnet IDs such as 56854. The array subscript starts from 0
-	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
 	// Array of project IDs. The array subscript starts from 0
-	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// ID of the instance to be searched for.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
@@ -1891,16 +1891,16 @@ type DescribeInstancesRequest struct {
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Array of VPC IDs such as vpc-sad23jfdfk. The array subscript starts from 0. If this parameter is not passed in, the basic network will be selected by default
-	UniqVpcIds []*string `json:"UniqVpcIds,omitempty" name:"UniqVpcIds" list`
+	UniqVpcIds []*string `json:"UniqVpcIds,omitempty" name:"UniqVpcIds"`
 
 	// Array of subnet IDs such as subnet-fdj24n34j2. The array subscript starts from 0
-	UniqSubnetIds []*string `json:"UniqSubnetIds,omitempty" name:"UniqSubnetIds" list`
+	UniqSubnetIds []*string `json:"UniqSubnetIds,omitempty" name:"UniqSubnetIds"`
 
 	// Region ID, which has already been disused. The corresponding region can be queried through the common parameter `Region`
-	RegionIds []*int64 `json:"RegionIds,omitempty" name:"RegionIds" list`
+	RegionIds []*int64 `json:"RegionIds,omitempty" name:"RegionIds"`
 
 	// Instance status. 0: to be initialized; 1: in process; 2: running; -2: isolated; -3: to be deleted
-	Status []*int64 `json:"Status,omitempty" name:"Status" list`
+	Status []*int64 `json:"Status,omitempty" name:"Status"`
 
 	// Type edition. 1: standalone edition; 2: primary-secondary edition; 3: cluster edition
 	TypeVersion *int64 `json:"TypeVersion,omitempty" name:"TypeVersion"`
@@ -1909,7 +1909,7 @@ type DescribeInstancesRequest struct {
 	EngineName *string `json:"EngineName,omitempty" name:"EngineName"`
 
 	// Renewal mode. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
-	AutoRenew []*int64 `json:"AutoRenew,omitempty" name:"AutoRenew" list`
+	AutoRenew []*int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 
 	// Billing method. postpaid: pay-as-you-go; prepaid: monthly subscription
 	BillingMode *string `json:"BillingMode,omitempty" name:"BillingMode"`
@@ -1918,10 +1918,10 @@ type DescribeInstancesRequest struct {
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
 	// Search keywords, which can be instance ID, instance name, or complete IP
-	SearchKeys []*string `json:"SearchKeys,omitempty" name:"SearchKeys" list`
+	SearchKeys []*string `json:"SearchKeys,omitempty" name:"SearchKeys"`
 
 	// Internal parameter, which can be ignored
-	TypeList []*int64 `json:"TypeList,omitempty" name:"TypeList" list`
+	TypeList []*int64 `json:"TypeList,omitempty" name:"TypeList"`
 
 	// Internal parameter, which can be ignored
 	MonitorVersion *string `json:"MonitorVersion,omitempty" name:"MonitorVersion"`
@@ -1975,7 +1975,7 @@ type DescribeInstancesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of instance details
-		InstanceSet []*InstanceSet `json:"InstanceSet,omitempty" name:"InstanceSet" list`
+		InstanceSet []*InstanceSet `json:"InstanceSet,omitempty" name:"InstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2072,7 +2072,7 @@ type DescribeProductInfoResponse struct {
 	Response *struct {
 
 		// Sale information of a region
-		RegionSet []*RegionConf `json:"RegionSet,omitempty" name:"RegionSet" list`
+		RegionSet []*RegionConf `json:"RegionSet,omitempty" name:"RegionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2125,7 +2125,7 @@ type DescribeProjectSecurityGroupResponse struct {
 	Response *struct {
 
 		// Security group of a project
-		SecurityGroupDetails []*SecurityGroupDetail `json:"SecurityGroupDetails,omitempty" name:"SecurityGroupDetails" list`
+		SecurityGroupDetails []*SecurityGroupDetail `json:"SecurityGroupDetails,omitempty" name:"SecurityGroupDetails"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2190,7 +2190,7 @@ type DescribeProjectSecurityGroupsResponse struct {
 	Response *struct {
 
 		// Security group rules.
-		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
 
 		// Total number of the security groups meeting the condition.
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
@@ -2265,7 +2265,7 @@ type DescribeProxySlowLogResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Slow query details
-		InstanceProxySlowLogDetail []*InstanceProxySlowlogDetail `json:"InstanceProxySlowLogDetail,omitempty" name:"InstanceProxySlowLogDetail" list`
+		InstanceProxySlowLogDetail []*InstanceProxySlowlogDetail `json:"InstanceProxySlowLogDetail,omitempty" name:"InstanceProxySlowLogDetail"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2337,7 +2337,7 @@ type DescribeSlowLogResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Slow log details
-		InstanceSlowlogDetail []*InstanceSlowlogDetail `json:"InstanceSlowlogDetail,omitempty" name:"InstanceSlowlogDetail" list`
+		InstanceSlowlogDetail []*InstanceSlowlogDetail `json:"InstanceSlowlogDetail,omitempty" name:"InstanceSlowlogDetail"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2432,10 +2432,10 @@ type DescribeTaskListRequest struct {
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Project ID
-	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// Task type
-	TaskTypes []*string `json:"TaskTypes,omitempty" name:"TaskTypes" list`
+	TaskTypes []*string `json:"TaskTypes,omitempty" name:"TaskTypes"`
 
 	// Start time
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
@@ -2444,7 +2444,7 @@ type DescribeTaskListRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Task status
-	TaskStatus []*int64 `json:"TaskStatus,omitempty" name:"TaskStatus" list`
+	TaskStatus []*int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
 }
 
 func (r *DescribeTaskListRequest) ToJsonString() string {
@@ -2482,7 +2482,7 @@ type DescribeTaskListResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Task details
-		Tasks []*TaskInfoDetail `json:"Tasks,omitempty" name:"Tasks" list`
+		Tasks []*TaskInfoDetail `json:"Tasks,omitempty" name:"Tasks"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2657,7 +2657,7 @@ type DisassociateSecurityGroupsRequest struct {
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
 	// Instance ID list, which is an array of one or more instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DisassociateSecurityGroupsRequest) ToJsonString() string {
@@ -2708,7 +2708,7 @@ type EnableReplicaReadonlyRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Account routing policy. If `master` or `replication` is entered, it means to route to the primary or secondary node; if this is left blank, it means to write into the primary node and read from the secondary node by default
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy" list`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy"`
 }
 
 func (r *EnableReplicaReadonlyRequest) ToJsonString() string {
@@ -2886,7 +2886,7 @@ type InstanceEnumParam struct {
 	Tips *string `json:"Tips,omitempty" name:"Tips"`
 
 	// Value range of a parameter
-	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue" list`
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 
 	// Parameter status. 1: modifying; 2: modified
 	Status *int64 `json:"Status,omitempty" name:"Status"`
@@ -2947,7 +2947,7 @@ type InstanceMultiParam struct {
 	Tips *string `json:"Tips,omitempty" name:"Tips"`
 
 	// Parameter description
-	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue" list`
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 
 	// Parameter status. 1: modifying; 2: modified
 	Status *int64 `json:"Status,omitempty" name:"Status"`
@@ -2959,7 +2959,7 @@ type InstanceNode struct {
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 
 	// Node details
-	InstanceClusterNode []*InstanceClusterNode `json:"InstanceClusterNode,omitempty" name:"InstanceClusterNode" list`
+	InstanceClusterNode []*InstanceClusterNode `json:"InstanceClusterNode,omitempty" name:"InstanceClusterNode"`
 }
 
 type InstanceParam struct {
@@ -3013,7 +3013,7 @@ type InstanceSecurityGroupDetail struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Security group information
-	SecurityGroupDetails []*SecurityGroupDetail `json:"SecurityGroupDetails,omitempty" name:"SecurityGroupDetails" list`
+	SecurityGroupDetails []*SecurityGroupDetail `json:"SecurityGroupDetails,omitempty" name:"SecurityGroupDetails"`
 }
 
 type InstanceSet struct {
@@ -3094,10 +3094,10 @@ type InstanceSet struct {
 	SubStatus *int64 `json:"SubStatus,omitempty" name:"SubStatus"`
 
 	// Anti-affinity tag
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 	// Instance node information
-	InstanceNode []*InstanceNode `json:"InstanceNode,omitempty" name:"InstanceNode" list`
+	InstanceNode []*InstanceNode `json:"InstanceNode,omitempty" name:"InstanceNode"`
 
 	// Shard size
 	RedisShardSize *int64 `json:"RedisShardSize,omitempty" name:"RedisShardSize"`
@@ -3119,7 +3119,7 @@ type InstanceSet struct {
 
 	// Instance tag information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitempty" name:"InstanceTags" list`
+	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitempty" name:"InstanceTags"`
 
 	// Project name
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -3175,7 +3175,7 @@ type InstanceSet struct {
 
 	// Instance node details
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet" list`
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet"`
 
 	// Region where the instance is deployed
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -3233,7 +3233,7 @@ type InstanceTextParam struct {
 	Tips *string `json:"Tips,omitempty" name:"Tips"`
 
 	// Value range of a parameter
-	TextValue []*string `json:"TextValue,omitempty" name:"TextValue" list`
+	TextValue []*string `json:"TextValue,omitempty" name:"TextValue"`
 
 	// Parameter status. 1: modifying; 2: modified
 	Status *int64 `json:"Status,omitempty" name:"Status"`
@@ -3356,7 +3356,7 @@ type ModifyAutoBackupConfigRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Date. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-	WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays" list`
+	WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays"`
 
 	// Time period. Value range: 00:00-01:00, 01:00-02:00...... 23:00-00:00
 	TimePeriod *string `json:"TimePeriod,omitempty" name:"TimePeriod"`
@@ -3395,7 +3395,7 @@ type ModifyAutoBackupConfigResponse struct {
 		AutoBackupType *int64 `json:"AutoBackupType,omitempty" name:"AutoBackupType"`
 
 		// Date. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
-		WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays" list`
+		WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays"`
 
 		// Time period. Value range: 00:00-01:00, 01:00-02:00...... 23:00-00:00
 		TimePeriod *string `json:"TimePeriod,omitempty" name:"TimePeriod"`
@@ -3423,7 +3423,7 @@ type ModifyDBInstanceSecurityGroupsRequest struct {
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// The ID list of the security groups to be modified, which is an array of one or more security group IDs.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB Console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -3486,7 +3486,7 @@ type ModifyInstanceAccountRequest struct {
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
 	// Sub-account routing policy. Enter `master` to route to the primary node or `slave` to route to the secondary node
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy" list`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy"`
 
 	// Sub-account read/write policy. Enter `r` for read-only, `w` for write-only, or `rw` for read/write
 	Privilege *string `json:"Privilege,omitempty" name:"Privilege"`
@@ -3550,7 +3550,7 @@ type ModifyInstanceParamsRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// List of instance parameters modified
-	InstanceParams []*InstanceParam `json:"InstanceParams,omitempty" name:"InstanceParams" list`
+	InstanceParams []*InstanceParam `json:"InstanceParams,omitempty" name:"InstanceParams"`
 }
 
 func (r *ModifyInstanceParamsRequest) ToJsonString() string {
@@ -3606,16 +3606,16 @@ type ModifyInstanceRequest struct {
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
 
 	// Instance ID
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// New name of instance
-	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames" list`
+	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames"`
 
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Auto-renewal flag. 0: default status (manual renewal), 1: auto-renewal enabled, 2: auto-renewal disabled
-	AutoRenews []*int64 `json:"AutoRenews,omitempty" name:"AutoRenews" list`
+	AutoRenews []*int64 `json:"AutoRenews,omitempty" name:"AutoRenews"`
 
 	// Disused
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -3855,16 +3855,16 @@ type ProductConf struct {
 	Version *string `json:"Version,omitempty" name:"Version"`
 
 	// Total capacity in GB
-	TotalSize []*string `json:"TotalSize,omitempty" name:"TotalSize" list`
+	TotalSize []*string `json:"TotalSize,omitempty" name:"TotalSize"`
 
 	// Shard size in GB
-	ShardSize []*string `json:"ShardSize,omitempty" name:"ShardSize" list`
+	ShardSize []*string `json:"ShardSize,omitempty" name:"ShardSize"`
 
 	// Number of replicas
-	ReplicaNum []*string `json:"ReplicaNum,omitempty" name:"ReplicaNum" list`
+	ReplicaNum []*string `json:"ReplicaNum,omitempty" name:"ReplicaNum"`
 
 	// Number of shards
-	ShardNum []*string `json:"ShardNum,omitempty" name:"ShardNum" list`
+	ShardNum []*string `json:"ShardNum,omitempty" name:"ShardNum"`
 
 	// Supported billing method. 1: monthly subscription; 0: pay-as-you-go
 	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
@@ -3931,7 +3931,7 @@ type RedisCommonInstanceList struct {
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Instance network IP
-	Vips []*string `json:"Vips,omitempty" name:"Vips" list`
+	Vips []*string `json:"Vips,omitempty" name:"Vips"`
 
 	// Instance network port
 	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
@@ -4000,7 +4000,7 @@ type RegionConf struct {
 	Area *string `json:"Area,omitempty" name:"Area"`
 
 	// AZ information
-	ZoneSet []*ZoneCapacityConf `json:"ZoneSet,omitempty" name:"ZoneSet" list`
+	ZoneSet []*ZoneCapacityConf `json:"ZoneSet,omitempty" name:"ZoneSet"`
 }
 
 type RenewInstanceRequest struct {
@@ -4071,7 +4071,7 @@ type ReplicaGroup struct {
 	Role *string `json:"Role,omitempty" name:"Role"`
 
 	// The list of nodes in a node group
-	RedisNodes []*RedisNode `json:"RedisNodes,omitempty" name:"RedisNodes" list`
+	RedisNodes []*RedisNode `json:"RedisNodes,omitempty" name:"RedisNodes"`
 }
 
 type ResetPasswordRequest struct {
@@ -4215,10 +4215,10 @@ type SecurityGroup struct {
 	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitempty" name:"SecurityGroupRemark"`
 
 	// Outbound rule.
-	Outbound []*Outbound `json:"Outbound,omitempty" name:"Outbound" list`
+	Outbound []*Outbound `json:"Outbound,omitempty" name:"Outbound"`
 
 	// Inbound rule.
-	Inbound []*Inbound `json:"Inbound,omitempty" name:"Inbound" list`
+	Inbound []*Inbound `json:"Inbound,omitempty" name:"Inbound"`
 }
 
 type SecurityGroupDetail struct {
@@ -4239,10 +4239,10 @@ type SecurityGroupDetail struct {
 	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitempty" name:"SecurityGroupRemark"`
 
 	// Security group inbound rule
-	InboundRule []*SecurityGroupsInboundAndOutbound `json:"InboundRule,omitempty" name:"InboundRule" list`
+	InboundRule []*SecurityGroupsInboundAndOutbound `json:"InboundRule,omitempty" name:"InboundRule"`
 
 	// Security group outbound rule
-	OutboundRule []*SecurityGroupsInboundAndOutbound `json:"OutboundRule,omitempty" name:"OutboundRule" list`
+	OutboundRule []*SecurityGroupsInboundAndOutbound `json:"OutboundRule,omitempty" name:"OutboundRule"`
 }
 
 type SecurityGroupsInboundAndOutbound struct {
@@ -4479,7 +4479,7 @@ type TradeDealDetail struct {
 	Price *int64 `json:"Price,omitempty" name:"Price"`
 
 	// Instance ID
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 type UpgradeInstanceRequest struct {
@@ -4498,7 +4498,7 @@ type UpgradeInstanceRequest struct {
 	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitempty" name:"RedisReplicasNum"`
 
 	// The information of the replica to be added to a multi-AZ instance, such as replica availability zone and replica type (`NodeType` should be `1`). This parameter is required only when multi-AZ instances add replicas.
-	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet" list`
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet"`
 }
 
 func (r *UpgradeInstanceRequest) ToJsonString() string {
@@ -4668,10 +4668,10 @@ type ZoneCapacityConf struct {
 	IsDefault *bool `json:"IsDefault,omitempty" name:"IsDefault"`
 
 	// Network type. basenet: basic network; vpcnet: VPC
-	NetWorkType []*string `json:"NetWorkType,omitempty" name:"NetWorkType" list`
+	NetWorkType []*string `json:"NetWorkType,omitempty" name:"NetWorkType"`
 
 	// Information of an AZ, such as product specifications in it
-	ProductSet []*ProductConf `json:"ProductSet,omitempty" name:"ProductSet" list`
+	ProductSet []*ProductConf `json:"ProductSet,omitempty" name:"ProductSet"`
 
 	// AZ ID, such as 100003
 	OldZoneId *int64 `json:"OldZoneId,omitempty" name:"OldZoneId"`

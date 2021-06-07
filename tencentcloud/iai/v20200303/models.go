@@ -83,7 +83,7 @@ type AnalyzeFaceResponse struct {
 		ImageHeight *uint64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
 
 		// Specific information of facial feature localization (facial keypoints).
-		FaceShapeSet []*FaceShape `json:"FaceShapeSet,omitempty" name:"FaceShapeSet" list`
+		FaceShapeSet []*FaceShape `json:"FaceShapeSet,omitempty" name:"FaceShapeSet"`
 
 		// Algorithm model version used for face recognition.
 		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
@@ -131,7 +131,7 @@ type Candidate struct {
 
 	// List of groups containing this person and their description fields
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PersonGroupInfos []*PersonGroupInfo `json:"PersonGroupInfos,omitempty" name:"PersonGroupInfos" list`
+	PersonGroupInfos []*PersonGroupInfo `json:"PersonGroupInfos,omitempty" name:"PersonGroupInfos"`
 }
 
 type CompareFaceRequest struct {
@@ -248,7 +248,7 @@ type CopyPersonRequest struct {
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
 	// List of groups to join. The array element value is the `GroupId` in the `CreateGroup` API.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds" list`
+	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
 }
 
 func (r *CopyPersonRequest) ToJsonString() string {
@@ -279,7 +279,7 @@ type CopyPersonResponse struct {
 		SucGroupNum *uint64 `json:"SucGroupNum,omitempty" name:"SucGroupNum"`
 
 		// List of groups successfully added to.
-		SucGroupIds []*string `json:"SucGroupIds,omitempty" name:"SucGroupIds" list`
+		SucGroupIds []*string `json:"SucGroupIds,omitempty" name:"SucGroupIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -308,7 +308,7 @@ type CreateFaceRequest struct {
 	// A person can have up to 5 face images.
 	// If there are multiple faces in the image, only the face with the largest size will be selected.
 	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
-	Images []*string `json:"Images,omitempty" name:"Images" list`
+	Images []*string `json:"Images,omitempty" name:"Images"`
 
 	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
 	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
@@ -318,7 +318,7 @@ type CreateFaceRequest struct {
 	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
 	// A person can have up to 5 face images.
 	// If there are multiple faces in the image, only the face with the largest size will be selected.
-	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 
 	// Only faces whose similarity to an existing face of the person is above the value of `FaceMatchThreshold` can be added successfully. 
 	// Default value: 60. Value range: [0,100].
@@ -370,20 +370,20 @@ type CreateFaceResponse struct {
 		SucFaceNum *uint64 `json:"SucFaceNum,omitempty" name:"SucFaceNum"`
 
 		// List of IDs of successfully added faces
-		SucFaceIds []*string `json:"SucFaceIds,omitempty" name:"SucFaceIds" list`
+		SucFaceIds []*string `json:"SucFaceIds,omitempty" name:"SucFaceIds"`
 
 		// Adding result for each face image. -1101: no face detected; -1102: image decoding failed; 
 	// -1601: the image quality control requirement is not met; -1604: the face similarity is not above `FaceMatchThreshold`. 
 	// Other non-zero values: algorithm service exception. 
 	// The order of `RetCode` values is the same as the order of `Images` or `Urls` in the input parameter.
-		RetCode []*int64 `json:"RetCode,omitempty" name:"RetCode" list`
+		RetCode []*int64 `json:"RetCode,omitempty" name:"RetCode"`
 
 		// Indexes of successfully added faces. The order of indexes is the same as the order of `Images` or `Urls` in the input parameter. 
 	// For example, if there are 3 URLs in `Urls`, and the second URL fails, then the value of `SucIndexes` will be [0,2].
-		SucIndexes []*uint64 `json:"SucIndexes,omitempty" name:"SucIndexes" list`
+		SucIndexes []*uint64 `json:"SucIndexes,omitempty" name:"SucIndexes"`
 
 		// Frame positions of successfully added faces. The order is the same as the order of `Images` or `Urls` in the input parameter.
-		SucFaceRects []*FaceRect `json:"SucFaceRects,omitempty" name:"SucFaceRects" list`
+		SucFaceRects []*FaceRect `json:"SucFaceRects,omitempty" name:"SucFaceRects"`
 
 		// Algorithm model version used for face recognition.
 		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
@@ -420,7 +420,7 @@ type CreateGroupRequest struct {
 	// Example: if you set the "custom description field" of a group to ["student ID","employee ID","mobile number"], 
 	// then all the persons in the group will have description fields named "student ID", "employee ID", and "mobile number". 
 	// You can enter content in the corresponding field to register a person's student ID, employee ID, and mobile number.
-	GroupExDescriptions []*string `json:"GroupExDescriptions,omitempty" name:"GroupExDescriptions" list`
+	GroupExDescriptions []*string `json:"GroupExDescriptions,omitempty" name:"GroupExDescriptions"`
 
 	// Group remarks, which can contain 0 to 40 characters.
 	Tag *string `json:"Tag,omitempty" name:"Tag"`
@@ -493,7 +493,7 @@ type CreatePersonRequest struct {
 	Gender *int64 `json:"Gender,omitempty" name:"Gender"`
 
 	// Content of person description field, which is a `key-value` pair, can contain 0 to 60 characters, and is modifiable and repeatable.
-	PersonExDescriptionInfos []*PersonExDescriptionInfo `json:"PersonExDescriptionInfos,omitempty" name:"PersonExDescriptionInfos" list`
+	PersonExDescriptionInfos []*PersonExDescriptionInfo `json:"PersonExDescriptionInfos,omitempty" name:"PersonExDescriptionInfos"`
 
 	// Base64-encoded image data, which cannot exceed 5 MB.
 	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
@@ -603,7 +603,7 @@ type DeleteFaceRequest struct {
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
 	// List of IDs of the faces to be deleted. The array element value is the `FaceId` returned by the `CreateFace` API.
-	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds" list`
+	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds"`
 }
 
 func (r *DeleteFaceRequest) ToJsonString() string {
@@ -634,7 +634,7 @@ type DeleteFaceResponse struct {
 		SucDeletedNum *uint64 `json:"SucDeletedNum,omitempty" name:"SucDeletedNum"`
 
 		// List of IDs of successfully deleted faces
-		SucFaceIds []*string `json:"SucFaceIds,omitempty" name:"SucFaceIds" list`
+		SucFaceIds []*string `json:"SucFaceIds,omitempty" name:"SucFaceIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -877,7 +877,7 @@ type DetectFaceResponse struct {
 		ImageHeight *int64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
 
 		// Face information list, including face coordinate information, attribute information (if needed), and quality score information (if needed).
-		FaceInfos []*FaceInfo `json:"FaceInfos,omitempty" name:"FaceInfos" list`
+		FaceInfos []*FaceInfo `json:"FaceInfos,omitempty" name:"FaceInfos"`
 
 		// Algorithm model version used for face recognition.
 		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
@@ -1142,31 +1142,31 @@ type FaceRect struct {
 type FaceShape struct {
 
 	// 21 points that describe the face contour.
-	FaceProfile []*Point `json:"FaceProfile,omitempty" name:"FaceProfile" list`
+	FaceProfile []*Point `json:"FaceProfile,omitempty" name:"FaceProfile"`
 
 	// 8 points that describe the left eye.
-	LeftEye []*Point `json:"LeftEye,omitempty" name:"LeftEye" list`
+	LeftEye []*Point `json:"LeftEye,omitempty" name:"LeftEye"`
 
 	// 8 points that describe the right eye.
-	RightEye []*Point `json:"RightEye,omitempty" name:"RightEye" list`
+	RightEye []*Point `json:"RightEye,omitempty" name:"RightEye"`
 
 	// 8 points that describe the left eyebrow.
-	LeftEyeBrow []*Point `json:"LeftEyeBrow,omitempty" name:"LeftEyeBrow" list`
+	LeftEyeBrow []*Point `json:"LeftEyeBrow,omitempty" name:"LeftEyeBrow"`
 
 	// 8 points that describe the right eyebrow.
-	RightEyeBrow []*Point `json:"RightEyeBrow,omitempty" name:"RightEyeBrow" list`
+	RightEyeBrow []*Point `json:"RightEyeBrow,omitempty" name:"RightEyeBrow"`
 
 	// 22 points that describe the mouth.
-	Mouth []*Point `json:"Mouth,omitempty" name:"Mouth" list`
+	Mouth []*Point `json:"Mouth,omitempty" name:"Mouth"`
 
 	// 13 points that describe the nose.
-	Nose []*Point `json:"Nose,omitempty" name:"Nose" list`
+	Nose []*Point `json:"Nose,omitempty" name:"Nose"`
 
 	// 1 point that describes the left pupil.
-	LeftPupil []*Point `json:"LeftPupil,omitempty" name:"LeftPupil" list`
+	LeftPupil []*Point `json:"LeftPupil,omitempty" name:"LeftPupil"`
 
 	// 1 point that describes the right pupil.
-	RightPupil []*Point `json:"RightPupil,omitempty" name:"RightPupil" list`
+	RightPupil []*Point `json:"RightPupil,omitempty" name:"RightPupil"`
 }
 
 type GetGroupInfoRequest struct {
@@ -1206,7 +1206,7 @@ type GetGroupInfoResponse struct {
 		GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
 		// Custom group description field
-		GroupExDescriptions []*string `json:"GroupExDescriptions,omitempty" name:"GroupExDescriptions" list`
+		GroupExDescriptions []*string `json:"GroupExDescriptions,omitempty" name:"GroupExDescriptions"`
 
 		// Group remarks
 		Tag *string `json:"Tag,omitempty" name:"Tag"`
@@ -1268,7 +1268,7 @@ type GetGroupListResponse struct {
 	Response *struct {
 
 		// Returned group information
-		GroupInfos []*GroupInfo `json:"GroupInfos,omitempty" name:"GroupInfos" list`
+		GroupInfos []*GroupInfo `json:"GroupInfos,omitempty" name:"GroupInfos"`
 
 		// Total number of groups
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1327,7 +1327,7 @@ type GetPersonBaseInfoResponse struct {
 		Gender *int64 `json:"Gender,omitempty" name:"Gender"`
 
 		// List of the IDs of included faces
-		FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds" list`
+		FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1384,7 +1384,7 @@ type GetPersonGroupInfoResponse struct {
 	Response *struct {
 
 		// List of groups containing this person and their description fields
-		PersonGroupInfos []*PersonGroupInfo `json:"PersonGroupInfos,omitempty" name:"PersonGroupInfos" list`
+		PersonGroupInfos []*PersonGroupInfo `json:"PersonGroupInfos,omitempty" name:"PersonGroupInfos"`
 
 		// Total number of groups
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1501,7 +1501,7 @@ type GetPersonListResponse struct {
 	Response *struct {
 
 		// Returned person information
-		PersonInfos []*PersonInfo `json:"PersonInfos,omitempty" name:"PersonInfos" list`
+		PersonInfos []*PersonInfo `json:"PersonInfos,omitempty" name:"PersonInfos"`
 
 		// Number of persons in the group
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1537,7 +1537,7 @@ type GroupCandidate struct {
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
 	// Most matching candidate recognized
-	Candidates []*Candidate `json:"Candidates,omitempty" name:"Candidates" list`
+	Candidates []*Candidate `json:"Candidates,omitempty" name:"Candidates"`
 }
 
 type GroupExDescriptionInfo struct {
@@ -1560,7 +1560,7 @@ type GroupInfo struct {
 
 	// Custom group description field
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	GroupExDescriptions []*string `json:"GroupExDescriptions,omitempty" name:"GroupExDescriptions" list`
+	GroupExDescriptions []*string `json:"GroupExDescriptions,omitempty" name:"GroupExDescriptions"`
 
 	// Group remarks
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1586,7 +1586,7 @@ type ModifyGroupRequest struct {
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
 	// Custom description field of the group to be modified, which is a `key-value` pair.
-	GroupExDescriptionInfos []*GroupExDescriptionInfo `json:"GroupExDescriptionInfos,omitempty" name:"GroupExDescriptionInfos" list`
+	GroupExDescriptionInfos []*GroupExDescriptionInfo `json:"GroupExDescriptionInfos,omitempty" name:"GroupExDescriptionInfos"`
 
 	// Group remarks
 	Tag *string `json:"Tag,omitempty" name:"Tag"`
@@ -1698,7 +1698,7 @@ type ModifyPersonGroupInfoRequest struct {
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
 	// Custom description field of the person to be modified, which is a `key-value` pair.
-	PersonExDescriptionInfos []*PersonExDescriptionInfo `json:"PersonExDescriptionInfos,omitempty" name:"PersonExDescriptionInfos" list`
+	PersonExDescriptionInfos []*PersonExDescriptionInfo `json:"PersonExDescriptionInfos,omitempty" name:"PersonExDescriptionInfos"`
 }
 
 func (r *ModifyPersonGroupInfoRequest) ToJsonString() string {
@@ -1758,7 +1758,7 @@ type PersonGroupInfo struct {
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
 	// Content of person description field
-	PersonExDescriptions []*string `json:"PersonExDescriptions,omitempty" name:"PersonExDescriptions" list`
+	PersonExDescriptions []*string `json:"PersonExDescriptions,omitempty" name:"PersonExDescriptions"`
 }
 
 type PersonInfo struct {
@@ -1773,10 +1773,10 @@ type PersonInfo struct {
 	Gender *int64 `json:"Gender,omitempty" name:"Gender"`
 
 	// Content of person description field
-	PersonExDescriptions []*string `json:"PersonExDescriptions,omitempty" name:"PersonExDescriptions" list`
+	PersonExDescriptions []*string `json:"PersonExDescriptions,omitempty" name:"PersonExDescriptions"`
 
 	// List of contained face images
-	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds" list`
+	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds"`
 
 	// Person creation time and date (`CreationTimestamp`), whose value is the number of milliseconds between the UNIX epoch time and the group creation time. 
 	// The UNIX epoch time is 00:00:00, Thursday, January 1, 1970, Coordinated Universal Time (UTC). For more information, please see the UNIX time document.
@@ -1795,7 +1795,7 @@ type Point struct {
 type Result struct {
 
 	// Most matching candidate recognized
-	Candidates []*Candidate `json:"Candidates,omitempty" name:"Candidates" list`
+	Candidates []*Candidate `json:"Candidates,omitempty" name:"Candidates"`
 
 	// Position of detected face frame
 	FaceRect *FaceRect `json:"FaceRect,omitempty" name:"FaceRect"`
@@ -1811,7 +1811,7 @@ type ResultsReturnsByGroup struct {
 	FaceRect *FaceRect `json:"FaceRect,omitempty" name:"FaceRect"`
 
 	// Recognition result.
-	GroupCandidates []*GroupCandidate `json:"GroupCandidates,omitempty" name:"GroupCandidates" list`
+	GroupCandidates []*GroupCandidate `json:"GroupCandidates,omitempty" name:"GroupCandidates"`
 
 	// Status return code of detected face image. 0: normal. 
 	// -1601: the image quality control requirement is not met; in this case, `Candidate` is empty.
@@ -1822,7 +1822,7 @@ type SearchFacesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of groups to be searched in (up to 100). The array element value is the `GroupId` in the `CreateGroup` API.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds" list`
+	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
 
 	// Base64-encoded image data, which cannot exceed 5 MB.
 	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
@@ -1903,7 +1903,7 @@ type SearchFacesResponse struct {
 	Response *struct {
 
 		// Recognition result.
-		Results []*Result `json:"Results,omitempty" name:"Results" list`
+		Results []*Result `json:"Results,omitempty" name:"Results"`
 
 		// Number of faces included in searched groups.
 		FaceNum *uint64 `json:"FaceNum,omitempty" name:"FaceNum"`
@@ -1931,7 +1931,7 @@ type SearchFacesReturnsByGroupRequest struct {
 	*tchttp.BaseRequest
 
 	// List of groups to be searched in (up to 60). The array element value is the `GroupId` in the `CreateGroup` API.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds" list`
+	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
 
 	// Base64-encoded image data, which cannot exceed 5 MB.
 	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
@@ -2016,7 +2016,7 @@ type SearchFacesReturnsByGroupResponse struct {
 		FaceNum *uint64 `json:"FaceNum,omitempty" name:"FaceNum"`
 
 		// Recognition result.
-		ResultsReturnsByGroup []*ResultsReturnsByGroup `json:"ResultsReturnsByGroup,omitempty" name:"ResultsReturnsByGroup" list`
+		ResultsReturnsByGroup []*ResultsReturnsByGroup `json:"ResultsReturnsByGroup,omitempty" name:"ResultsReturnsByGroup"`
 
 		// Algorithm model version used for face recognition.
 		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
@@ -2041,7 +2041,7 @@ type SearchPersonsRequest struct {
 	*tchttp.BaseRequest
 
 	// List of groups to be searched in (up to 100). The array element value is the `GroupId` in the `CreateGroup` API.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds" list`
+	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
 
 	// Base64-encoded image data, which cannot exceed 5 MB.
 	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
@@ -2123,7 +2123,7 @@ type SearchPersonsResponse struct {
 	Response *struct {
 
 		// Recognition result.
-		Results []*Result `json:"Results,omitempty" name:"Results" list`
+		Results []*Result `json:"Results,omitempty" name:"Results"`
 
 		// Number of the persons included in searched groups. If the quality of all faces in the input image does not meet the requirement, 0 will be returned.
 		PersonNum *uint64 `json:"PersonNum,omitempty" name:"PersonNum"`
@@ -2152,7 +2152,7 @@ type SearchPersonsReturnsByGroupRequest struct {
 	*tchttp.BaseRequest
 
 	// List of groups to be searched in (up to 60). The array element value is the `GroupId` in the `CreateGroup` API.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds" list`
+	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
 
 	// Base64-encoded image data, which cannot exceed 5 MB.
 	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
@@ -2235,7 +2235,7 @@ type SearchPersonsReturnsByGroupResponse struct {
 		PersonNum *uint64 `json:"PersonNum,omitempty" name:"PersonNum"`
 
 		// Recognition result.
-		ResultsReturnsByGroup []*ResultsReturnsByGroup `json:"ResultsReturnsByGroup,omitempty" name:"ResultsReturnsByGroup" list`
+		ResultsReturnsByGroup []*ResultsReturnsByGroup `json:"ResultsReturnsByGroup,omitempty" name:"ResultsReturnsByGroup"`
 
 		// Algorithm model version used for face recognition.
 		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`

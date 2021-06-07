@@ -126,7 +126,7 @@ type CreateEmailIdentityResponse struct {
 		VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitempty" name:"VerifiedForSendingStatus"`
 
 		// DNS information that needs to be configured.
-		Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes" list`
+		Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -216,7 +216,7 @@ type DeleteBlackListRequest struct {
 	*tchttp.BaseRequest
 
 	// List of email addresses to be unblocklisted. Enter at least one address.
-	EmailAddressList []*string `json:"EmailAddressList,omitempty" name:"EmailAddressList" list`
+	EmailAddressList []*string `json:"EmailAddressList,omitempty" name:"EmailAddressList"`
 }
 
 func (r *DeleteBlackListRequest) ToJsonString() string {
@@ -459,7 +459,7 @@ type GetEmailIdentityResponse struct {
 		VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitempty" name:"VerifiedForSendingStatus"`
 
 		// DNS configuration details.
-		Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes" list`
+		Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -573,7 +573,7 @@ type GetSendEmailStatusResponse struct {
 	Response *struct {
 
 		// Email sending status list
-		EmailStatusList []*SendEmailStatus `json:"EmailStatusList,omitempty" name:"EmailStatusList" list`
+		EmailStatusList []*SendEmailStatus `json:"EmailStatusList,omitempty" name:"EmailStatusList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -634,7 +634,7 @@ type GetStatisticsReportResponse struct {
 	Response *struct {
 
 		// Daily email sending statistics.
-		DailyVolumes []*Volume `json:"DailyVolumes,omitempty" name:"DailyVolumes" list`
+		DailyVolumes []*Volume `json:"DailyVolumes,omitempty" name:"DailyVolumes"`
 
 		// Overall email sending statistics.
 		OverallVolume *Volume `json:"OverallVolume,omitempty" name:"OverallVolume"`
@@ -706,7 +706,7 @@ type ListBlackEmailAddressResponse struct {
 	Response *struct {
 
 		// List of blocklisted addresses.
-		BlackList []*BlackEmailAddress `json:"BlackList,omitempty" name:"BlackList" list`
+		BlackList []*BlackEmailAddress `json:"BlackList,omitempty" name:"BlackList"`
 
 		// Total number of blocklisted addresses.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -755,7 +755,7 @@ type ListEmailAddressResponse struct {
 
 		// Details of sender addresses.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		EmailSenders []*EmailSender `json:"EmailSenders,omitempty" name:"EmailSenders" list`
+		EmailSenders []*EmailSender `json:"EmailSenders,omitempty" name:"EmailSenders"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -800,7 +800,7 @@ type ListEmailIdentitiesResponse struct {
 	Response *struct {
 
 		// List of sender domains.
-		EmailIdentities []*EmailIdentity `json:"EmailIdentities,omitempty" name:"EmailIdentities" list`
+		EmailIdentities []*EmailIdentity `json:"EmailIdentities,omitempty" name:"EmailIdentities"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -853,7 +853,7 @@ type ListEmailTemplatesResponse struct {
 	Response *struct {
 
 		// List of email templates.
-		TemplatesMetadata []*TemplatesMetadata `json:"TemplatesMetadata,omitempty" name:"TemplatesMetadata" list`
+		TemplatesMetadata []*TemplatesMetadata `json:"TemplatesMetadata,omitempty" name:"TemplatesMetadata"`
 
 		// Total number of templates.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -883,7 +883,7 @@ type SendEmailRequest struct {
 	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
 
 	// Recipient email addresses. You can send an email to up to 50 recipients at a time. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
-	Destination []*string `json:"Destination,omitempty" name:"Destination" list`
+	Destination []*string `json:"Destination,omitempty" name:"Destination"`
 
 	// Email subject.
 	Subject *string `json:"Subject,omitempty" name:"Subject"`
@@ -898,7 +898,7 @@ type SendEmailRequest struct {
 	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
 
 	// Email attachments
-	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments" list`
+	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments"`
 }
 
 func (r *SendEmailRequest) ToJsonString() string {
@@ -1097,7 +1097,7 @@ type UpdateEmailIdentityResponse struct {
 		VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitempty" name:"VerifiedForSendingStatus"`
 
 		// DNS information that needs to be configured.
-		Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes" list`
+		Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

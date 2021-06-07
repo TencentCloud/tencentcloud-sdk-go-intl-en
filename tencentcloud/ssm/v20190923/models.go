@@ -43,7 +43,7 @@ type CreateSecretRequest struct {
 	SecretString *string `json:"SecretString,omitempty" name:"SecretString"`
 
 	// List of tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateSecretRequest) ToJsonString() string {
@@ -409,7 +409,7 @@ type GetRegionsResponse struct {
 	Response *struct {
 
 		// List of regions.
-		Regions []*string `json:"Regions,omitempty" name:"Regions" list`
+		Regions []*string `json:"Regions,omitempty" name:"Regions"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -572,7 +572,7 @@ type ListSecretVersionIdsResponse struct {
 
 		// `VersionId` list.
 	// Note: This field may return `null`, indicating that no valid value was found.
-		Versions []*VersionInfo `json:"Versions,omitempty" name:"Versions" list`
+		Versions []*VersionInfo `json:"Versions,omitempty" name:"Versions"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -609,7 +609,7 @@ type ListSecretsRequest struct {
 	SearchSecretName *string `json:"SearchSecretName,omitempty" name:"SearchSecretName"`
 
 	// Tag filter condition.
-	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
 }
 
 func (r *ListSecretsRequest) ToJsonString() string {
@@ -644,7 +644,7 @@ type ListSecretsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of Secret information.
-		SecretMetadatas []*SecretMetadata `json:"SecretMetadatas,omitempty" name:"SecretMetadatas" list`
+		SecretMetadatas []*SecretMetadata `json:"SecretMetadatas,omitempty" name:"SecretMetadatas"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -817,7 +817,7 @@ type TagFilter struct {
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
 	// Tag value
-	TagValue []*string `json:"TagValue,omitempty" name:"TagValue" list`
+	TagValue []*string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type UpdateDescriptionRequest struct {

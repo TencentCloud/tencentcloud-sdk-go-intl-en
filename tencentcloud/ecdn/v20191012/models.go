@@ -58,7 +58,7 @@ type AddEcdnDomainRequest struct {
 	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
 
 	// Tag bound to a domain name.
-	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag"`
 
 	// WebSocket configuration.
 	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
@@ -118,7 +118,7 @@ func (r *AddEcdnDomainResponse) FromJsonString(s string) error {
 type Cache struct {
 
 	// Caching configuration rule array.
-	CacheRules []*CacheRule `json:"CacheRules,omitempty" name:"CacheRules" list`
+	CacheRules []*CacheRule `json:"CacheRules,omitempty" name:"CacheRules"`
 
 	// Whether to follow the `Cache-Control: max-age` configuration on the origin server (this feature is only available to users on the allowlist).
 	// on: enable
@@ -140,7 +140,7 @@ type CacheRule struct {
 	CacheType *string `json:"CacheType,omitempty" name:"CacheType"`
 
 	// Cached content list.
-	CacheContents []*string `json:"CacheContents,omitempty" name:"CacheContents" list`
+	CacheContents []*string `json:"CacheContents,omitempty" name:"CacheContents"`
 
 	// Cache time in seconds.
 	CacheTime *int64 `json:"CacheTime,omitempty" name:"CacheTime"`
@@ -221,7 +221,7 @@ type DescribeDomainsConfigRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Query filter.
-	Filters []*DomainFilter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*DomainFilter `json:"Filters,omitempty" name:"Filters"`
 
 	// Query result sorting rule.
 	Sort *Sort `json:"Sort,omitempty" name:"Sort"`
@@ -254,7 +254,7 @@ type DescribeDomainsConfigResponse struct {
 	Response *struct {
 
 		// Domain name list.
-		Domains []*DomainDetailInfo `json:"Domains,omitempty" name:"Domains" list`
+		Domains []*DomainDetailInfo `json:"Domains,omitempty" name:"Domains"`
 
 		// Number of matched domain names. This is used for paginated query.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -285,7 +285,7 @@ type DescribeDomainsRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Query filter.
-	Filters []*DomainFilter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*DomainFilter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeDomainsRequest) ToJsonString() string {
@@ -314,7 +314,7 @@ type DescribeDomainsResponse struct {
 	Response *struct {
 
 		// Domain name information list.
-		Domains []*DomainBriefInfo `json:"Domains,omitempty" name:"Domains" list`
+		Domains []*DomainBriefInfo `json:"Domains,omitempty" name:"Domains"`
 
 		// Total number of domain names.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -383,7 +383,7 @@ type DescribeEcdnDomainLogsResponse struct {
 
 		// Log link list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		DomainLogs []*DomainLogs `json:"DomainLogs,omitempty" name:"DomainLogs" list`
+		DomainLogs []*DomainLogs `json:"DomainLogs,omitempty" name:"DomainLogs"`
 
 		// Total number of log links.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -419,14 +419,14 @@ type DescribeEcdnDomainStatisticsRequest struct {
 	// flux: traffic (in bytes)
 	// bandwidth: bandwidth (in bps)
 	// request: number of requests
-	Metrics []*string `json:"Metrics,omitempty" name:"Metrics" list`
+	Metrics []*string `json:"Metrics,omitempty" name:"Metrics"`
 
 	// Specifies the list of domain names to be queried
-	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
 	// If no domain name is entered, the specified project will be queried; otherwise, the domain name will prevail
-	Projects []*int64 `json:"Projects,omitempty" name:"Projects" list`
+	Projects []*int64 `json:"Projects,omitempty" name:"Projects"`
 
 	// Pagination offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -473,7 +473,7 @@ type DescribeEcdnDomainStatisticsResponse struct {
 	Response *struct {
 
 		// Domain name data
-		Data []*DomainData `json:"Data,omitempty" name:"Data" list`
+		Data []*DomainData `json:"Data,omitempty" name:"Data"`
 
 		// Quantity
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -511,7 +511,7 @@ type DescribeEcdnStatisticsRequest struct {
 	// 3xx: returns the number of 3xx status codes or details of status codes starting with 3
 	// 4xx: returns the number of 4xx status codes or details of status codes starting with 4
 	// 5xx: returns the number of 5xx status codes or details of status codes starting with 5
-	Metrics []*string `json:"Metrics,omitempty" name:"Metrics" list`
+	Metrics []*string `json:"Metrics,omitempty" name:"Metrics"`
 
 	// Time granularity, which can be:
 	// 1 day	 1, 5, 15, 30, 60, 120, 240, 1440 
@@ -523,11 +523,11 @@ type DescribeEcdnStatisticsRequest struct {
 	// Specifies the list of domain names to be queried
 	// 
 	// Up to 30 acceleration domain names can be queried at a time.
-	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
 	// If no domain name is entered, the specified project will be queried; otherwise, the domain name will prevail
-	Projects []*int64 `json:"Projects,omitempty" name:"Projects" list`
+	Projects []*int64 `json:"Projects,omitempty" name:"Projects"`
 
 	// Statistical areas:
 	// mainland: Chinese mainland
@@ -567,7 +567,7 @@ type DescribeEcdnStatisticsResponse struct {
 	Response *struct {
 
 		// Returned data details of the specified conditional query
-		Data []*ResourceData `json:"Data,omitempty" name:"Data" list`
+		Data []*ResourceData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -623,7 +623,7 @@ type DescribeIpStatusResponse struct {
 	Response *struct {
 
 		// Node list
-		Ips []*IpStatus `json:"Ips,omitempty" name:"Ips" list`
+		Ips []*IpStatus `json:"Ips,omitempty" name:"Ips"`
 
 		// Total number of nodes
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -751,7 +751,7 @@ type DescribePurgeTasksResponse struct {
 	Response *struct {
 
 		// Purge history.
-		PurgeLogs []*PurgeTask `json:"PurgeLogs,omitempty" name:"PurgeLogs" list`
+		PurgeLogs []*PurgeTask `json:"PurgeLogs,omitempty" name:"PurgeLogs"`
 
 		// Total number of tasks, which is used for pagination.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -826,7 +826,7 @@ type DomainData struct {
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
 	// Result details.
-	DetailData []*DetailData `json:"DetailData,omitempty" name:"DetailData" list`
+	DetailData []*DetailData `json:"DetailData,omitempty" name:"DetailData"`
 }
 
 type DomainDetailInfo struct {
@@ -901,7 +901,7 @@ type DomainDetailInfo struct {
 
 	// Domain name tag
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag"`
 
 	// WebSocket configuration.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
@@ -924,7 +924,7 @@ type DomainFilter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter field value.
-	Value []*string `json:"Value,omitempty" name:"Value" list`
+	Value []*string `json:"Value,omitempty" name:"Value"`
 
 	// Whether to enable fuzzy query, which is supported only for filter fields `origin` and `domain`.
 	Fuzzy *bool `json:"Fuzzy,omitempty" name:"Fuzzy"`
@@ -945,10 +945,10 @@ type DomainLogs struct {
 type EcdnData struct {
 
 	// Queries the specified metric. Valid values: Bandwidth, Flux, Request, Delay, status code, LogBandwidth, LogFlux, LogRequest
-	Metrics []*string `json:"Metrics,omitempty" name:"Metrics" list`
+	Metrics []*string `json:"Metrics,omitempty" name:"Metrics"`
 
 	// Detailed data collection
-	DetailData []*TimestampData `json:"DetailData,omitempty" name:"DetailData" list`
+	DetailData []*TimestampData `json:"DetailData,omitempty" name:"DetailData"`
 }
 
 type ForceRedirect struct {
@@ -1001,7 +1001,7 @@ type HttpHeaderPathRule struct {
 
 	// URL path or file type list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 }
 
 type Https struct {
@@ -1054,7 +1054,7 @@ type IpFilter struct {
 
 	// IP blocklist/allowlist list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*string `json:"Filters,omitempty" name:"Filters"`
 }
 
 type IpFreqLimit struct {
@@ -1093,7 +1093,7 @@ type IpStatus struct {
 type Origin struct {
 
 	// Primary origin server list. IP and the domain name of the origin server cannot be entered at the same time. Configure origin server port in the format of ["origin1:port1", "origin2:port2"]. Configure origin-pull weight in the format of ["origin1::weight1", "origin2::weight2"]. Configure both port and weight in the format of ["origin1:port1:weight1", "origin2:port2:weight2"]. Valid range of weight value: 0 - 100.
-	Origins []*string `json:"Origins,omitempty" name:"Origins" list`
+	Origins []*string `json:"Origins,omitempty" name:"Origins"`
 
 	// Primary origin server type. Valid values: domain (domain name origin server), ip (IP origin server).
 	// This is required when setting `Origins`.
@@ -1110,7 +1110,7 @@ type Origin struct {
 	OriginPullProtocol *string `json:"OriginPullProtocol,omitempty" name:"OriginPullProtocol"`
 
 	// Secondary origin server list.
-	BackupOrigins []*string `json:"BackupOrigins,omitempty" name:"BackupOrigins" list`
+	BackupOrigins []*string `json:"BackupOrigins,omitempty" name:"BackupOrigins"`
 
 	// Secondary origin server type, which is the same as `OriginType`.
 	// This is required when setting `BackupOrigins`.
@@ -1122,7 +1122,7 @@ type PurgePathCacheRequest struct {
 	*tchttp.BaseRequest
 
 	// List of directories to be purged. The protocol header must be included.
-	Paths []*string `json:"Paths,omitempty" name:"Paths" list`
+	Paths []*string `json:"Paths,omitempty" name:"Paths"`
 
 	// Purge type. flush: purges updated resources, delete: purges all resources.
 	FlushType *string `json:"FlushType,omitempty" name:"FlushType"`
@@ -1196,7 +1196,7 @@ type PurgeUrlsCacheRequest struct {
 	*tchttp.BaseRequest
 
 	// List of URLs to be purged. The protocol header must be included.
-	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 }
 
 func (r *PurgeUrlsCacheRequest) ToJsonString() string {
@@ -1273,7 +1273,7 @@ type ResponseHeader struct {
 
 	// Custom response header rule array.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules" list`
+	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules"`
 }
 
 type ServerCert struct {
@@ -1428,7 +1428,7 @@ type TimestampData struct {
 	Time *string `json:"Time,omitempty" name:"Time"`
 
 	// Data value
-	Value []*float64 `json:"Value,omitempty" name:"Value" list`
+	Value []*float64 `json:"Value,omitempty" name:"Value"`
 }
 
 type UpdateDomainConfigRequest struct {

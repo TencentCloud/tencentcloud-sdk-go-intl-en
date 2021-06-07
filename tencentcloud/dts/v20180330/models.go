@@ -302,7 +302,7 @@ type CreateSubscribeRequest struct {
 	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 
 	// Instance resource tags
-	Tags []*TagItem `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateSubscribeRequest) ToJsonString() string {
@@ -335,7 +335,7 @@ type CreateSubscribeResponse struct {
 
 		// Data subscription instance ID array
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		SubscribeIds []*string `json:"SubscribeIds,omitempty" name:"SubscribeIds" list`
+		SubscribeIds []*string `json:"SubscribeIds,omitempty" name:"SubscribeIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -741,7 +741,7 @@ type DescribeMigrateJobsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Array of task details
-		JobList []*MigrateJobInfo `json:"JobList,omitempty" name:"JobList" list`
+		JobList []*MigrateJobInfo `json:"JobList,omitempty" name:"JobList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -789,7 +789,7 @@ type DescribeRegionConfResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Purchasable region details
-		Items []*SubscribeRegionConf `json:"Items,omitempty" name:"Items" list`
+		Items []*SubscribeRegionConf `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -901,7 +901,7 @@ type DescribeSubscribeConfResponse struct {
 		SubscribeObjectType *int64 `json:"SubscribeObjectType,omitempty" name:"SubscribeObjectType"`
 
 		// Subscription object, which is an empty array if `SubscribeObjectType` is 0
-		SubscribeObjects []*SubscribeObject `json:"SubscribeObjects,omitempty" name:"SubscribeObjects" list`
+		SubscribeObjects []*SubscribeObject `json:"SubscribeObjects,omitempty" name:"SubscribeObjects"`
 
 		// Modification time
 		ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
@@ -911,7 +911,7 @@ type DescribeSubscribeConfResponse struct {
 
 		// Tags of the subscription
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Tags []*TagItem `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
 
 		// Whether auto-renewal is enabled. 0: do not enable, 1: enable
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -955,10 +955,10 @@ type DescribeSubscribesRequest struct {
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// Data subscription instance status. Valid values: creating, normal, isolating, isolated, offlining
-	Status []*string `json:"Status,omitempty" name:"Status" list`
+	Status []*string `json:"Status,omitempty" name:"Status"`
 
 	// Data subscription instance configuration status. Valid values: unconfigure, configuring, configured
-	SubsStatus []*string `json:"SubsStatus,omitempty" name:"SubsStatus" list`
+	SubsStatus []*string `json:"SubsStatus,omitempty" name:"SubsStatus"`
 
 	// Starting offset of returned results
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -970,7 +970,7 @@ type DescribeSubscribesRequest struct {
 	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
 
 	// Tag filtering condition
-	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
 
 	// Subscription instance edition. `txdts`: legacy data subscription; `kafka`: data subscription in Kafka edition
 	SubscribeVersion *string `json:"SubscribeVersion,omitempty" name:"SubscribeVersion"`
@@ -1015,7 +1015,7 @@ type DescribeSubscribesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Information list of data subscription instances
-		Items []*SubscribeInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*SubscribeInfo `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1073,7 +1073,7 @@ type DescribeSyncCheckJobResponse struct {
 		ErrorMessage *string `json:"ErrorMessage,omitempty" name:"ErrorMessage"`
 
 		// Description of a task execution step
-		StepInfo []*SyncCheckStepInfo `json:"StepInfo,omitempty" name:"StepInfo" list`
+		StepInfo []*SyncCheckStepInfo `json:"StepInfo,omitempty" name:"StepInfo"`
 
 		// Check flag. 0: checking; 1: successfully checked
 		CheckFlag *int64 `json:"CheckFlag,omitempty" name:"CheckFlag"`
@@ -1148,7 +1148,7 @@ type DescribeSyncJobsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Array of task details
-		JobList []*SyncJobInfo `json:"JobList,omitempty" name:"JobList" list`
+		JobList []*SyncJobInfo `json:"JobList,omitempty" name:"JobList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1266,7 +1266,7 @@ type MigrateDetailInfo struct {
 	SecondsBehindMaster *int64 `json:"SecondsBehindMaster,omitempty" name:"SecondsBehindMaster"`
 
 	// Step information
-	StepInfo []*MigrateStepDetailInfo `json:"StepInfo,omitempty" name:"StepInfo" list`
+	StepInfo []*MigrateStepDetailInfo `json:"StepInfo,omitempty" name:"StepInfo"`
 }
 
 type MigrateJobInfo struct {
@@ -1317,7 +1317,7 @@ type MigrateJobInfo struct {
 	Detail *MigrateDetailInfo `json:"Detail,omitempty" name:"Detail"`
 
 	// Prompt message for task error, which is not null or empty when an error occurs with the task
-	ErrorInfo []*ErrorInfo `json:"ErrorInfo,omitempty" name:"ErrorInfo" list`
+	ErrorInfo []*ErrorInfo `json:"ErrorInfo,omitempty" name:"ErrorInfo"`
 }
 
 type MigrateOption struct {
@@ -1572,7 +1572,7 @@ type ModifySubscribeObjectsRequest struct {
 	SubscribeObjectType *int64 `json:"SubscribeObjectType,omitempty" name:"SubscribeObjectType"`
 
 	// Information of subscribed table
-	Objects []*SubscribeObject `json:"Objects,omitempty" name:"Objects" list`
+	Objects []*SubscribeObject `json:"Objects,omitempty" name:"Objects"`
 }
 
 func (r *ModifySubscribeObjectsRequest) ToJsonString() string {
@@ -2086,7 +2086,7 @@ type SubscribeInfo struct {
 
 	// Tag
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Tags []*TagItem `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
 
 	// Whether auto-renewal is enabled. 0: do not enable; 1: enable
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -2109,7 +2109,7 @@ type SubscribeObject struct {
 
 	// Array of table names in subscribed database
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TableNames []*string `json:"TableNames,omitempty" name:"TableNames" list`
+	TableNames []*string `json:"TableNames,omitempty" name:"TableNames"`
 }
 
 type SubscribeRegionConf struct {
@@ -2224,7 +2224,7 @@ type SyncDetailInfo struct {
 	SecondsBehindMaster *int64 `json:"SecondsBehindMaster,omitempty" name:"SecondsBehindMaster"`
 
 	// Step information
-	StepInfo []*SyncStepDetailInfo `json:"StepInfo,omitempty" name:"StepInfo" list`
+	StepInfo []*SyncStepDetailInfo `json:"StepInfo,omitempty" name:"StepInfo"`
 }
 
 type SyncInstanceInfo struct {
@@ -2320,7 +2320,7 @@ type TagFilter struct {
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
 	// Tag value
-	TagValue []*string `json:"TagValue,omitempty" name:"TagValue" list`
+	TagValue []*string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type TagItem struct {

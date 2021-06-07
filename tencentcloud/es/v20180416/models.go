@@ -83,7 +83,7 @@ type CreateInstanceRequest struct {
 	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
 	// List of voucher IDs (only one voucher can be specified at a time currently)
-	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
 	// Whether to create a dedicated primary node <li>true: yes </li><li>false: no </li>Default value: false
@@ -108,16 +108,16 @@ type CreateInstanceRequest struct {
 	DeployMode *uint64 `json:"DeployMode,omitempty" name:"DeployMode"`
 
 	// Details of AZs in multi-AZ deployment mode (which is required when DeployMode is 1)
-	MultiZoneInfo []*ZoneDetail `json:"MultiZoneInfo,omitempty" name:"MultiZoneInfo" list`
+	MultiZoneInfo []*ZoneDetail `json:"MultiZoneInfo,omitempty" name:"MultiZoneInfo"`
 
 	// License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
 	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
 
 	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size
-	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList" list`
+	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList"`
 
 	// Node tag information list
-	TagList []*TagInfo `json:"TagList,omitempty" name:"TagList" list`
+	TagList []*TagInfo `json:"TagList,omitempty" name:"TagList"`
 
 	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
 	BasicSecurityType *uint64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
@@ -309,7 +309,7 @@ type DescribeInstanceLogsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Log details list
-		InstanceLogList []*InstanceLog `json:"InstanceLogList,omitempty" name:"InstanceLogList" list`
+		InstanceLogList []*InstanceLog `json:"InstanceLogList,omitempty" name:"InstanceLogList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -377,7 +377,7 @@ type DescribeInstanceOperationsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Operation history
-		Operations []*Operation `json:"Operations,omitempty" name:"Operations" list`
+		Operations []*Operation `json:"Operations,omitempty" name:"Operations"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -402,10 +402,10 @@ type DescribeInstancesRequest struct {
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// List of cluster instance IDs
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// List of cluster instance names
-	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames" list`
+	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames"`
 
 	// Pagination start value. Default value: 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -420,10 +420,10 @@ type DescribeInstancesRequest struct {
 	OrderByType *uint64 `json:"OrderByType,omitempty" name:"OrderByType"`
 
 	// Node tag information list
-	TagList []*TagInfo `json:"TagList,omitempty" name:"TagList" list`
+	TagList []*TagInfo `json:"TagList,omitempty" name:"TagList"`
 
 	// VPC VIP list
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -461,7 +461,7 @@ type DescribeInstancesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of instance details
-		InstanceList []*InstanceInfo `json:"InstanceList,omitempty" name:"InstanceList" list`
+		InstanceList []*InstanceInfo `json:"InstanceList,omitempty" name:"InstanceList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -494,25 +494,25 @@ type DictInfo struct {
 type EsAcl struct {
 
 	// Kibana access blocklist
-	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList" list`
+	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList"`
 
 	// Kibana access allowlist
-	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList" list`
+	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList"`
 }
 
 type EsDictionaryInfo struct {
 
 	// List of non-stop words
-	MainDict []*DictInfo `json:"MainDict,omitempty" name:"MainDict" list`
+	MainDict []*DictInfo `json:"MainDict,omitempty" name:"MainDict"`
 
 	// List of stop words
-	Stopwords []*DictInfo `json:"Stopwords,omitempty" name:"Stopwords" list`
+	Stopwords []*DictInfo `json:"Stopwords,omitempty" name:"Stopwords"`
 
 	// QQ dictionary list
-	QQDict []*DictInfo `json:"QQDict,omitempty" name:"QQDict" list`
+	QQDict []*DictInfo `json:"QQDict,omitempty" name:"QQDict"`
 
 	// Synonym dictionary list
-	Synonym []*DictInfo `json:"Synonym,omitempty" name:"Synonym" list`
+	Synonym []*DictInfo `json:"Synonym,omitempty" name:"Synonym"`
 
 	// Update dictionary type
 	UpdateType *string `json:"UpdateType,omitempty" name:"UpdateType"`
@@ -521,10 +521,10 @@ type EsDictionaryInfo struct {
 type EsPublicAcl struct {
 
 	// Access blocklist
-	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList" list`
+	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList"`
 
 	// Access allowlist
-	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList" list`
+	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList"`
 }
 
 type GetRequestTargetNodeTypesRequest struct {
@@ -558,7 +558,7 @@ type GetRequestTargetNodeTypesResponse struct {
 	Response *struct {
 
 		// A list of node types used to receive requests.
-		TargetNodeTypes []*string `json:"TargetNodeTypes,omitempty" name:"TargetNodeTypes" list`
+		TargetNodeTypes []*string `json:"TargetNodeTypes,omitempty" name:"TargetNodeTypes"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -678,7 +678,7 @@ type InstanceInfo struct {
 	AllowCosBackup *bool `json:"AllowCosBackup,omitempty" name:"AllowCosBackup"`
 
 	// List of tags owned by the instance
-	TagList []*TagInfo `json:"TagList,omitempty" name:"TagList" list`
+	TagList []*TagInfo `json:"TagList,omitempty" name:"TagList"`
 
 	// License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
 	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
@@ -713,7 +713,7 @@ type InstanceInfo struct {
 
 	// Cluster node information list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList" list`
+	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList"`
 
 	// ES public IP address
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -721,7 +721,7 @@ type InstanceInfo struct {
 
 	// Multi-AZ network information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MultiZoneInfo []*ZoneDetail `json:"MultiZoneInfo,omitempty" name:"MultiZoneInfo" list`
+	MultiZoneInfo []*ZoneDetail `json:"MultiZoneInfo,omitempty" name:"MultiZoneInfo"`
 
 	// Deployment mode <li>0: single-AZ </li><li>1: multi-AZ</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -868,7 +868,7 @@ type Operation struct {
 	Result *string `json:"Result,omitempty" name:"Result"`
 
 	// Workflow task information
-	Tasks []*TaskDetail `json:"Tasks,omitempty" name:"Tasks" list`
+	Tasks []*TaskDetail `json:"Tasks,omitempty" name:"Tasks"`
 
 	// Operation progress
 	Progress *float64 `json:"Progress,omitempty" name:"Progress"`
@@ -877,10 +877,10 @@ type Operation struct {
 type OperationDetail struct {
 
 	// Original instance configuration information
-	OldInfo []*KeyValue `json:"OldInfo,omitempty" name:"OldInfo" list`
+	OldInfo []*KeyValue `json:"OldInfo,omitempty" name:"OldInfo"`
 
 	// Updated instance configuration information
-	NewInfo []*KeyValue `json:"NewInfo,omitempty" name:"NewInfo" list`
+	NewInfo []*KeyValue `json:"NewInfo,omitempty" name:"NewInfo"`
 }
 
 type RestartInstanceRequest struct {
@@ -986,7 +986,7 @@ type RestartNodesRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Node name list
-	NodeNames []*string `json:"NodeNames,omitempty" name:"NodeNames" list`
+	NodeNames []*string `json:"NodeNames,omitempty" name:"NodeNames"`
 
 	// Whether to force restart
 	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
@@ -1051,7 +1051,7 @@ type SubTaskDetail struct {
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Name of the index for which the check for upgrade failed
-	FailedIndices []*string `json:"FailedIndices,omitempty" name:"FailedIndices" list`
+	FailedIndices []*string `json:"FailedIndices,omitempty" name:"FailedIndices"`
 
 	// Subtask end time
 	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
@@ -1081,7 +1081,7 @@ type TaskDetail struct {
 	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 
 	// Subtask
-	SubTasks []*SubTaskDetail `json:"SubTasks,omitempty" name:"SubTasks" list`
+	SubTasks []*SubTaskDetail `json:"SubTasks,omitempty" name:"SubTasks"`
 }
 
 type UpdateInstanceRequest struct {
@@ -1133,7 +1133,7 @@ type UpdateInstanceRequest struct {
 	CosBackup *CosBackup `json:"CosBackup,omitempty" name:"CosBackup"`
 
 	// Node information list. You can pass in only the nodes to be updated and their corresponding specification information. Supported operations include: <li>modifying the number of nodes in the same type </li><li>modifying the specification and disk size of nodes in the same type </li><li>adding a node type (you must also specify the node type, quantity, specification, disk, etc.) </li>The above operations can only be performed one at a time, and the disk type cannot be modified
-	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList" list`
+	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList"`
 
 	// Public network access status
 	PublicAccess *string `json:"PublicAccess,omitempty" name:"PublicAccess"`
@@ -1157,7 +1157,7 @@ type UpdateInstanceRequest struct {
 	ScaleType *int64 `json:"ScaleType,omitempty" name:"ScaleType"`
 
 	// Multi-AZ deployment
-	MultiZoneInfo []*ZoneDetail `json:"MultiZoneInfo,omitempty" name:"MultiZoneInfo" list`
+	MultiZoneInfo []*ZoneDetail `json:"MultiZoneInfo,omitempty" name:"MultiZoneInfo"`
 
 	// Scenario template type. -1: not enabled; 1: general; 2: log; 3: search
 	SceneType *int64 `json:"SceneType,omitempty" name:"SceneType"`
@@ -1235,10 +1235,10 @@ type UpdatePluginsRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// List of names of the plugins to be installed
-	InstallPluginList []*string `json:"InstallPluginList,omitempty" name:"InstallPluginList" list`
+	InstallPluginList []*string `json:"InstallPluginList,omitempty" name:"InstallPluginList"`
 
 	// List of names of the plugins to be uninstalled
-	RemovePluginList []*string `json:"RemovePluginList,omitempty" name:"RemovePluginList" list`
+	RemovePluginList []*string `json:"RemovePluginList,omitempty" name:"RemovePluginList"`
 
 	// Whether to force restart
 	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
@@ -1297,7 +1297,7 @@ type UpdateRequestTargetNodeTypesRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// A list of node types used to receive requests.
-	TargetNodeTypes []*string `json:"TargetNodeTypes,omitempty" name:"TargetNodeTypes" list`
+	TargetNodeTypes []*string `json:"TargetNodeTypes,omitempty" name:"TargetNodeTypes"`
 }
 
 func (r *UpdateRequestTargetNodeTypesRequest) ToJsonString() string {
@@ -1419,7 +1419,7 @@ type UpgradeLicenseRequest struct {
 	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
 	// List of voucher IDs (only one voucher can be specified at a time currently)
-	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
 
 	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
 	BasicSecurityType *uint64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`

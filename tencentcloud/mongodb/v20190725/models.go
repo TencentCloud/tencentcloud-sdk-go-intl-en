@@ -25,7 +25,7 @@ type AssignProjectRequest struct {
 	*tchttp.BaseRequest
 
 	// List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
@@ -56,7 +56,7 @@ type AssignProjectResponse struct {
 	Response *struct {
 
 		// List of the returned async task IDs
-		FlowIds []*uint64 `json:"FlowIds,omitempty" name:"FlowIds" list`
+		FlowIds []*uint64 `json:"FlowIds,omitempty" name:"FlowIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -229,7 +229,7 @@ type CreateBackupDownloadTaskRequest struct {
 	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
 
 	// The list of shards with backups to be downloaded
-	BackupSets []*ReplicaSetInfo `json:"BackupSets,omitempty" name:"BackupSets" list`
+	BackupSets []*ReplicaSetInfo `json:"BackupSets,omitempty" name:"BackupSets"`
 }
 
 func (r *CreateBackupDownloadTaskRequest) ToJsonString() string {
@@ -258,7 +258,7 @@ type CreateBackupDownloadTaskResponse struct {
 	Response *struct {
 
 		// Download task status
-		Tasks []*BackupDownloadTaskStatus `json:"Tasks,omitempty" name:"Tasks" list`
+		Tasks []*BackupDownloadTaskStatus `json:"Tasks,omitempty" name:"Tasks"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -319,7 +319,7 @@ type CreateDBInstanceHourRequest struct {
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Instance tag information
-	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 
 	// Valid values: 1 (regular instance), 2 (temp instance), 3 (read-only instance), 4 (disaster recovery instance).
 	Clone *int64 `json:"Clone,omitempty" name:"Clone"`
@@ -328,7 +328,7 @@ type CreateDBInstanceHourRequest struct {
 	Father *string `json:"Father,omitempty" name:"Father"`
 
 	// Security group.
-	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 }
 
 func (r *CreateDBInstanceHourRequest) ToJsonString() string {
@@ -374,7 +374,7 @@ type CreateDBInstanceHourResponse struct {
 		DealId *string `json:"DealId,omitempty" name:"DealId"`
 
 		// List of IDs of created instances
-		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -438,7 +438,7 @@ type CreateDBInstanceRequest struct {
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// Instance tag information.
-	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 
 	// Auto-renewal flag. Valid values: 0 (auto-renewal not enabled), 1 (auto-renewal enabled). Default value: 0.
 	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
@@ -453,7 +453,7 @@ type CreateDBInstanceRequest struct {
 	Father *string `json:"Father,omitempty" name:"Father"`
 
 	// Security group.
-	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup" list`
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 }
 
 func (r *CreateDBInstanceRequest) ToJsonString() string {
@@ -502,7 +502,7 @@ type CreateDBInstanceResponse struct {
 		DealId *string `json:"DealId,omitempty" name:"DealId"`
 
 		// List of IDs of created instances.
-		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -632,7 +632,7 @@ type DescribeBackupAccessResponse struct {
 		Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 
 		// Storage information of a backup file
-		Files []*BackupFile `json:"Files,omitempty" name:"Files" list`
+		Files []*BackupFile `json:"Files,omitempty" name:"Files"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -678,7 +678,7 @@ type DescribeBackupDownloadTaskRequest struct {
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 
 	// The status of the tasks to be queried. Valid values: `0` (waiting for execution), `1` (downloading), `2` (downloaded), `3` (download failed), `4` (waiting for retry). If it is left empty, tasks in any status will be returned.
-	Status []*int64 `json:"Status,omitempty" name:"Status" list`
+	Status []*int64 `json:"Status,omitempty" name:"Status"`
 }
 
 func (r *DescribeBackupDownloadTaskRequest) ToJsonString() string {
@@ -716,7 +716,7 @@ type DescribeBackupDownloadTaskResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The list of download tasks
-		Tasks []*BackupDownloadTask `json:"Tasks,omitempty" name:"Tasks" list`
+		Tasks []*BackupDownloadTask `json:"Tasks,omitempty" name:"Tasks"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -773,7 +773,7 @@ type DescribeClientConnectionsResponse struct {
 	Response *struct {
 
 		// Client connection information, including client IP and number of connections
-		Clients []*ClientConnection `json:"Clients,omitempty" name:"Clients" list`
+		Clients []*ClientConnection `json:"Clients,omitempty" name:"Clients"`
 
 		// The total number of records that meet the query condition, which can be used for paginated queries.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -837,7 +837,7 @@ type DescribeDBBackupsResponse struct {
 	Response *struct {
 
 		// Backup list
-		BackupList []*BackupInfo `json:"BackupList,omitempty" name:"BackupList" list`
+		BackupList []*BackupInfo `json:"BackupList,omitempty" name:"BackupList"`
 
 		// Total number of backups
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -920,7 +920,7 @@ type DescribeDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Instance type. Valid values: 0 (all instances), 1 (promoted), 2 (temp), 3 (read-only), -1 (promoted + read-only + disaster recovery)
 	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
@@ -929,7 +929,7 @@ type DescribeDBInstancesRequest struct {
 	ClusterType *int64 `json:"ClusterType,omitempty" name:"ClusterType"`
 
 	// Instance status. Valid values: `0` (to be initialized), `1` (executing task), `2` (running), `-2` (isolated monthly-subscribed instance), `-3` (isolated pay-as-you-go instance)
-	Status []*int64 `json:"Status,omitempty" name:"Status" list`
+	Status []*int64 `json:"Status,omitempty" name:"Status"`
 
 	// VPC ID. This parameter can be left empty for the basic network
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
@@ -953,7 +953,7 @@ type DescribeDBInstancesRequest struct {
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 
 	// Project ID
-	ProjectIds []*uint64 `json:"ProjectIds,omitempty" name:"ProjectIds" list`
+	ProjectIds []*uint64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// Search keyword, which can be instance ID, instance name, or complete IP
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
@@ -1002,7 +1002,7 @@ type DescribeDBInstancesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of instance details
-		InstanceDetails []*InstanceDetail `json:"InstanceDetails,omitempty" name:"InstanceDetails" list`
+		InstanceDetails []*InstanceDetail `json:"InstanceDetails,omitempty" name:"InstanceDetails"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1051,7 +1051,7 @@ type DescribeSecurityGroupResponse struct {
 	Response *struct {
 
 		// Security groups associated with the instance
-		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups" list`
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1127,7 +1127,7 @@ type DescribeSlowLogPatternsResponse struct {
 		Count *uint64 `json:"Count,omitempty" name:"Count"`
 
 		// Slow log statistics
-		SlowLogPatterns []*SlowLogPattern `json:"SlowLogPatterns,omitempty" name:"SlowLogPatterns" list`
+		SlowLogPatterns []*SlowLogPattern `json:"SlowLogPatterns,omitempty" name:"SlowLogPatterns"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1203,7 +1203,7 @@ type DescribeSlowLogsResponse struct {
 		Count *uint64 `json:"Count,omitempty" name:"Count"`
 
 		// Slow log details
-		SlowLogs []*string `json:"SlowLogs,omitempty" name:"SlowLogs" list`
+		SlowLogs []*string `json:"SlowLogs,omitempty" name:"SlowLogs"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1252,7 +1252,7 @@ type DescribeSpecInfoResponse struct {
 	Response *struct {
 
 		// List of purchasable instance specifications
-		SpecInfoList []*SpecificationInfo `json:"SpecInfoList,omitempty" name:"SpecInfoList" list`
+		SpecInfoList []*SpecificationInfo `json:"SpecInfoList,omitempty" name:"SpecInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1462,7 +1462,7 @@ type InquirePriceRenewDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed in the TencentDB Console. This API supports operations on up to 5 instances at a time.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// The parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set automatic renewal, and other attributes of the monthly subscription instance.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
@@ -1608,22 +1608,22 @@ type InstanceDetail struct {
 	MaintenanceEnd *string `json:"MaintenanceEnd,omitempty" name:"MaintenanceEnd"`
 
 	// Shard information
-	ReplicaSets []*ShardInfo `json:"ReplicaSets,omitempty" name:"ReplicaSets" list`
+	ReplicaSets []*ShardInfo `json:"ReplicaSets,omitempty" name:"ReplicaSets"`
 
 	// Information of read-only instances
-	ReadonlyInstances []*DBInstanceInfo `json:"ReadonlyInstances,omitempty" name:"ReadonlyInstances" list`
+	ReadonlyInstances []*DBInstanceInfo `json:"ReadonlyInstances,omitempty" name:"ReadonlyInstances"`
 
 	// Information of disaster recovery instances
-	StandbyInstances []*DBInstanceInfo `json:"StandbyInstances,omitempty" name:"StandbyInstances" list`
+	StandbyInstances []*DBInstanceInfo `json:"StandbyInstances,omitempty" name:"StandbyInstances"`
 
 	// Information of temp instances
-	CloneInstances []*DBInstanceInfo `json:"CloneInstances,omitempty" name:"CloneInstances" list`
+	CloneInstances []*DBInstanceInfo `json:"CloneInstances,omitempty" name:"CloneInstances"`
 
 	// Information of associated instances. For a promoted instance, this field represents information of its temp instance; for a temp instance, this field represents information of its promoted instance; and for a read-only/disaster recovery instance, this field represents information of its primary instance
 	RelatedInstance *DBInstanceInfo `json:"RelatedInstance,omitempty" name:"RelatedInstance"`
 
 	// Instance tag information set
-	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 
 	// Instance version tag
 	InstanceVer *uint64 `json:"InstanceVer,omitempty" name:"InstanceVer"`
@@ -1857,7 +1857,7 @@ type RenewDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// IDs of one or more instances to be operated. The value can be obtained from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 100 instances can be requested at a time.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// The parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set automatic renewal, and other attributes of the monthly subscription instance. This parameter is mandatory in monthly subscription.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
@@ -1975,10 +1975,10 @@ type SecurityGroup struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Inbound rule
-	Inbound []*SecurityGroupBound `json:"Inbound,omitempty" name:"Inbound" list`
+	Inbound []*SecurityGroupBound `json:"Inbound,omitempty" name:"Inbound"`
 
 	// Outbound rule
-	Outbound []*SecurityGroupBound `json:"Outbound,omitempty" name:"Outbound" list`
+	Outbound []*SecurityGroupBound `json:"Outbound,omitempty" name:"Outbound"`
 
 	// Security group ID
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
@@ -2134,7 +2134,7 @@ type SpecificationInfo struct {
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// Purchasable specification information
-	SpecItems []*SpecItem `json:"SpecItems,omitempty" name:"SpecItems" list`
+	SpecItems []*SpecItem `json:"SpecItems,omitempty" name:"SpecItems"`
 }
 
 type TagInfo struct {

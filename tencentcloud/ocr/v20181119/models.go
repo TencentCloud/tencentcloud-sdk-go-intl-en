@@ -111,7 +111,7 @@ type BankCardOCRResponse struct {
 	// -9114: the bank card image is a photograph.
 	// Multiple warning codes may be returned at a time.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		WarningCode []*int64 `json:"WarningCode,omitempty" name:"WarningCode" list`
+		WarningCode []*int64 `json:"WarningCode,omitempty" name:"WarningCode"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -177,7 +177,7 @@ type GeneralAccurateOCRResponse struct {
 	Response *struct {
 
 		// Information on recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
-		TextDetections []*TextDetection `json:"TextDetections,omitempty" name:"TextDetections" list`
+		TextDetections []*TextDetection `json:"TextDetections,omitempty" name:"TextDetections"`
 
 		// Image rotation angle in degrees. 0° indicates horizontal text. A positive value indicates clockwise rotation. A negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>.
 		Angel *float64 `json:"Angel,omitempty" name:"Angel"`
@@ -266,7 +266,7 @@ type GeneralBasicOCRResponse struct {
 	Response *struct {
 
 		// Information of recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
-		TextDetections []*TextDetection `json:"TextDetections,omitempty" name:"TextDetections" list`
+		TextDetections []*TextDetection `json:"TextDetections,omitempty" name:"TextDetections"`
 
 		// Detected language. For more information on the supported languages, please see the description of the `LanguageType` input parameter.
 		Language *string `json:"Language,omitempty" name:"Language"`
@@ -390,7 +390,7 @@ type HKIDCardOCRResponse struct {
 	// -9103: alarm for spoofed document
 	// -9104: alarm for doctored document
 	// -9105: alarm for forged document
-		WarningCode []*int64 `json:"WarningCode,omitempty" name:"WarningCode" list`
+		WarningCode []*int64 `json:"WarningCode,omitempty" name:"WarningCode"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -483,7 +483,7 @@ type MLIDCardOCRResponse struct {
 	// -9103	Alarm for photographed document
 	// -9102	Alarm for photocopied document
 	// -9106       Alarm for covered card
-		Warn []*int64 `json:"Warn,omitempty" name:"Warn" list`
+		Warn []*int64 `json:"Warn,omitempty" name:"Warn"`
 
 		// Identity photo
 		Image *string `json:"Image,omitempty" name:"Image"`
@@ -587,7 +587,7 @@ type MLIDPassportOCRResponse struct {
 	// -9103 Alarm for spoofed card
 	// -9102 Alarm for photocopied card
 	// -9106 Alarm for covered card
-		Warn []*int64 `json:"Warn,omitempty" name:"Warn" list`
+		Warn []*int64 `json:"Warn,omitempty" name:"Warn"`
 
 		// Identity photo
 		Image *string `json:"Image,omitempty" name:"Image"`
@@ -661,7 +661,7 @@ type TableOCRResponse struct {
 	Response *struct {
 
 		// Recognized text. For more information, please click the link on the left
-		TextDetections []*TextTable `json:"TextDetections,omitempty" name:"TextDetections" list`
+		TextDetections []*TextTable `json:"TextDetections,omitempty" name:"TextDetections"`
 
 		// Base64-encoded Excel data.
 		Data *string `json:"Data,omitempty" name:"Data"`
@@ -692,7 +692,7 @@ type TextDetection struct {
 
 	// Text line coordinates, which are represented as 4 vertex coordinates.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Polygon []*Coord `json:"Polygon,omitempty" name:"Polygon" list`
+	Polygon []*Coord `json:"Polygon,omitempty" name:"Polygon"`
 
 	// Extended field.
 	// The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains `ParagNo`.
@@ -726,7 +726,7 @@ type TextTable struct {
 	Confidence *int64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Text line coordinates, which are represented as 4 vertex coordinates.
-	Polygon []*Coord `json:"Polygon,omitempty" name:"Polygon" list`
+	Polygon []*Coord `json:"Polygon,omitempty" name:"Polygon"`
 
 	// Extended field
 	AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`

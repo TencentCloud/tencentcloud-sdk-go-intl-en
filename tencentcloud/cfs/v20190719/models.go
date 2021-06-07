@@ -42,7 +42,7 @@ type AvailableRegion struct {
 	RegionStatus *string `json:"RegionStatus,omitempty" name:"RegionStatus"`
 
 	// Array of AZs
-	Zones []*AvailableZone `json:"Zones,omitempty" name:"Zones" list`
+	Zones []*AvailableZone `json:"Zones,omitempty" name:"Zones"`
 
 	// Region name, such as "Guangzhou"
 	RegionCnName *string `json:"RegionCnName,omitempty" name:"RegionCnName"`
@@ -51,7 +51,7 @@ type AvailableRegion struct {
 type AvailableType struct {
 
 	// Protocol and sale details
-	Protocols []*AvailableProtoStatus `json:"Protocols,omitempty" name:"Protocols" list`
+	Protocols []*AvailableProtoStatus `json:"Protocols,omitempty" name:"Protocols"`
 
 	// Storage class. Valid values: `SD` (standard storage) and `HP` (high-performance storage)
 	Type *string `json:"Type,omitempty" name:"Type"`
@@ -72,7 +72,7 @@ type AvailableZone struct {
 	ZoneCnName *string `json:"ZoneCnName,omitempty" name:"ZoneCnName"`
 
 	// Array of classes
-	Types []*AvailableType `json:"Types,omitempty" name:"Types" list`
+	Types []*AvailableType `json:"Types,omitempty" name:"Types"`
 
 	// Chinese and English names of an AZ
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
@@ -109,7 +109,7 @@ type CreateCfsFileSystemRequest struct {
 	FsName *string `json:"FsName,omitempty" name:"FsName"`
 
 	// File system tag
-	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags" list`
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. This string is valid for 2 hours.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
@@ -564,7 +564,7 @@ type DescribeAvailableZoneInfoResponse struct {
 	Response *struct {
 
 		// Information such as resource availability in each AZ and the supported storage classes and protocols
-		RegionZones []*AvailableRegion `json:"RegionZones,omitempty" name:"RegionZones" list`
+		RegionZones []*AvailableRegion `json:"RegionZones,omitempty" name:"RegionZones"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -613,7 +613,7 @@ type DescribeCfsFileSystemClientsResponse struct {
 	Response *struct {
 
 		// Client list
-		ClientList []*FileSystemClient `json:"ClientList,omitempty" name:"ClientList" list`
+		ClientList []*FileSystemClient `json:"ClientList,omitempty" name:"ClientList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -670,7 +670,7 @@ type DescribeCfsFileSystemsResponse struct {
 	Response *struct {
 
 		// File system information
-		FileSystems []*FileSystemInfo `json:"FileSystems,omitempty" name:"FileSystems" list`
+		FileSystems []*FileSystemInfo `json:"FileSystems,omitempty" name:"FileSystems"`
 
 		// Total number of file systems
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -718,7 +718,7 @@ type DescribeCfsPGroupsResponse struct {
 	Response *struct {
 
 		// Permission group information list
-		PGroupList []*PGroupInfo `json:"PGroupList,omitempty" name:"PGroupList" list`
+		PGroupList []*PGroupInfo `json:"PGroupList,omitempty" name:"PGroupList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -767,7 +767,7 @@ type DescribeCfsRulesResponse struct {
 	Response *struct {
 
 		// List of permission group rules
-		RuleList []*PGroupRuleInfo `json:"RuleList,omitempty" name:"RuleList" list`
+		RuleList []*PGroupRuleInfo `json:"RuleList,omitempty" name:"RuleList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -861,7 +861,7 @@ type DescribeMountTargetsResponse struct {
 	Response *struct {
 
 		// Mount target details
-		MountTargets []*MountInfo `json:"MountTargets,omitempty" name:"MountTargets" list`
+		MountTargets []*MountInfo `json:"MountTargets,omitempty" name:"MountTargets"`
 
 		// The number of mount targets
 		NumberOfMountTargets *int64 `json:"NumberOfMountTargets,omitempty" name:"NumberOfMountTargets"`

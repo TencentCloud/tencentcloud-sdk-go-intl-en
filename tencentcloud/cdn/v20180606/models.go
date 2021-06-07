@@ -28,7 +28,7 @@ type AccessControl struct {
 
 	// Request header and request URL access rule
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccessControlRules []*AccessControlRule `json:"AccessControlRules,omitempty" name:"AccessControlRules" list`
+	AccessControlRules []*AccessControlRule `json:"AccessControlRules,omitempty" name:"AccessControlRules"`
 
 	// Returned status code
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -158,7 +158,7 @@ type AddCdnDomainRequest struct {
 	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
 
 	// Tag configuration
-	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag"`
 
 	// IPv6 access configuration
 	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
@@ -260,7 +260,7 @@ type AdvanceCacheRule struct {
 	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 	// For `default`, enter "no max-age".
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CacheContents []*string `json:"CacheContents,omitempty" name:"CacheContents" list`
+	CacheContents []*string `json:"CacheContents,omitempty" name:"CacheContents"`
 
 	// Cache expiration time
 	// Unit: second. The maximum value is 365 days.
@@ -341,7 +341,7 @@ type AdvancedAuthenticationTypeA struct {
 	ExpireCode *int64 `json:"ExpireCode,omitempty" name:"ExpireCode"`
 
 	// List of URLs to be authenticated
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 
 	// Reserved field
 	Transformation *int64 `json:"Transformation,omitempty" name:"Transformation"`
@@ -377,7 +377,7 @@ type AdvancedAuthenticationTypeB struct {
 	ExpireCode *int64 `json:"ExpireCode,omitempty" name:"ExpireCode"`
 
 	// List of URLs to be authenticated
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 }
 
 type AdvancedAuthenticationTypeC struct {
@@ -464,7 +464,7 @@ type AdvancedCache struct {
 
 	// Cache expiration rule
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CacheRules []*AdvanceCacheRule `json:"CacheRules,omitempty" name:"CacheRules" list`
+	CacheRules []*AdvanceCacheRule `json:"CacheRules,omitempty" name:"CacheRules"`
 
 	// Forced cache configuration
 	// on: enabled
@@ -524,7 +524,7 @@ type AuthenticationTypeA struct {
 
 	// File extension list settings determining if authentication should be performed
 	// If it contains an asterisk (*), this indicates all files.
-	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
+	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
 
 	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
@@ -544,7 +544,7 @@ type AuthenticationTypeB struct {
 
 	// File extension list settings determining if authentication should be performed
 	// If it contains an asterisk (*), this indicates all files.
-	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
+	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
 
 	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
@@ -564,7 +564,7 @@ type AuthenticationTypeC struct {
 
 	// File extension list settings determining if authentication should be performed
 	// If it contains an asterisk (*), this indicates all files.
-	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
+	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
 
 	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
@@ -590,7 +590,7 @@ type AuthenticationTypeD struct {
 
 	// File extension list settings determining if authentication should be performed
 	// If it contains an asterisk (*), this indicates all files.
-	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
+	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
 
 	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
@@ -655,7 +655,7 @@ type BotCookie struct {
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
 	// Rule value. Valid value: `*`.
-	RuleValue []*string `json:"RuleValue,omitempty" name:"RuleValue" list`
+	RuleValue []*string `json:"RuleValue,omitempty" name:"RuleValue"`
 
 	// Action. Valid values: `monitor`, `intercept`, `redirect`, and `captcha`.
 	Action *string `json:"Action,omitempty" name:"Action"`
@@ -678,7 +678,7 @@ type BotJavaScript struct {
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
 	// Rule value. Valid values: `html` and `htm`.
-	RuleValue []*string `json:"RuleValue,omitempty" name:"RuleValue" list`
+	RuleValue []*string `json:"RuleValue,omitempty" name:"RuleValue"`
 
 	// Action. Valid values: `monitor`, `intercept`, `redirect`, and `captcha`.
 	Action *string `json:"Action,omitempty" name:"Action"`
@@ -768,7 +768,7 @@ type Cache struct {
 
 	// Advanced path cache configuration
 	// Note: this field may return null, indicating that no valid value is obtained.
-	RuleCache []*RuleCache `json:"RuleCache,omitempty" name:"RuleCache" list`
+	RuleCache []*RuleCache `json:"RuleCache,omitempty" name:"RuleCache"`
 }
 
 type CacheConfigCache struct {
@@ -863,18 +863,18 @@ type CacheKey struct {
 
 	// Path-based cache key configuration
 	// Note: this field may return null, indicating that no valid value is obtained.
-	KeyRules []*KeyRule `json:"KeyRules,omitempty" name:"KeyRules" list`
+	KeyRules []*KeyRule `json:"KeyRules,omitempty" name:"KeyRules"`
 }
 
 type CacheOptResult struct {
 
 	// List of succeeded URLs
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SuccessUrls []*string `json:"SuccessUrls,omitempty" name:"SuccessUrls" list`
+	SuccessUrls []*string `json:"SuccessUrls,omitempty" name:"SuccessUrls"`
 
 	// List of failed URLs
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FailUrls []*string `json:"FailUrls,omitempty" name:"FailUrls" list`
+	FailUrls []*string `json:"FailUrls,omitempty" name:"FailUrls"`
 }
 
 type CacheTagKey struct {
@@ -902,7 +902,7 @@ type CappingRule struct {
 	// For `file`, enter the suffix, such as jpg, txt.
 	// For `directory`, enter the path, such as /xxx/test/.
 	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 
 	// Downstream speed value settings (in KB/s)
 	KBpsThreshold *int64 `json:"KBpsThreshold,omitempty" name:"KBpsThreshold"`
@@ -924,7 +924,7 @@ type CdnData struct {
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
 
 	// Detailed data combination
-	DetailData []*TimestampData `json:"DetailData,omitempty" name:"DetailData" list`
+	DetailData []*TimestampData `json:"DetailData,omitempty" name:"DetailData"`
 
 	// Aggregate data combination
 	SummarizedData *SummarizedData `json:"SummarizedData,omitempty" name:"SummarizedData"`
@@ -945,7 +945,7 @@ type CdnIp struct {
 	Location *string `json:"Location,omitempty" name:"Location"`
 
 	// Node activation and deactivation history
-	History []*CdnIpHistory `json:"History,omitempty" name:"History" list`
+	History []*CdnIpHistory `json:"History,omitempty" name:"History"`
 
 	// Node region
 	// mainland: cache node in Mainland China
@@ -1023,7 +1023,7 @@ type ClsSearchLogs struct {
 	Listover *bool `json:"Listover,omitempty" name:"Listover"`
 
 	// Log content information
-	Results []*ClsLogObject `json:"Results,omitempty" name:"Results" list`
+	Results []*ClsLogObject `json:"Results,omitempty" name:"Results"`
 }
 
 type Compatibility struct {
@@ -1042,7 +1042,7 @@ type Compression struct {
 
 	// Compression rules array
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CompressionRules []*CompressionRule `json:"CompressionRules,omitempty" name:"CompressionRules" list`
+	CompressionRules []*CompressionRule `json:"CompressionRules,omitempty" name:"CompressionRules"`
 }
 
 type CompressionRule struct {
@@ -1054,7 +1054,7 @@ type CompressionRule struct {
 	// Compress according to the file suffix type
 	// Such as: jpg, txt
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions" list`
+	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
 
 	// The minimum file size to trigger compression (in bytes)
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1069,7 +1069,7 @@ type CompressionRule struct {
 	// gzip: specifies Gzip compression
 	// brotli: specifies Brotli compression
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Algorithms []*string `json:"Algorithms,omitempty" name:"Algorithms" list`
+	Algorithms []*string `json:"Algorithms,omitempty" name:"Algorithms"`
 }
 
 type CookieKey struct {
@@ -1096,7 +1096,7 @@ type CreateClsLogTopicRequest struct {
 	Channel *string `json:"Channel,omitempty" name:"Channel"`
 
 	// Domain name region information
-	DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitempty" name:"DomainAreaConfigs" list`
+	DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitempty" name:"DomainAreaConfigs"`
 }
 
 func (r *CreateClsLogTopicRequest) ToJsonString() string {
@@ -1385,7 +1385,7 @@ type DescribeBillingDataResponse struct {
 		Interval *string `json:"Interval,omitempty" name:"Interval"`
 
 		// Data details
-		Data []*ResourceBillingData `json:"Data,omitempty" name:"Data" list`
+		Data []*ResourceBillingData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1431,7 +1431,7 @@ type DescribeCdnDataRequest struct {
 
 	// Specifies the list of domain names to be queried
 	// Up to 30 domain names can be queried at a time
-	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
 	// Please note that if domain names are specified, this parameter will be ignored.
@@ -1531,7 +1531,7 @@ type DescribeCdnDataResponse struct {
 		Interval *string `json:"Interval,omitempty" name:"Interval"`
 
 		// Returned data details of the specified conditional query
-		Data []*ResourceData `json:"Data,omitempty" name:"Data" list`
+		Data []*ResourceData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1609,7 +1609,7 @@ type DescribeCdnDomainLogsResponse struct {
 	Response *struct {
 
 		// Download link of the log package
-		DomainLogs []*DomainLog `json:"DomainLogs,omitempty" name:"DomainLogs" list`
+		DomainLogs []*DomainLog `json:"DomainLogs,omitempty" name:"DomainLogs"`
 
 		// Total number of entries obtained
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1634,7 +1634,7 @@ type DescribeCdnIpRequest struct {
 	*tchttp.BaseRequest
 
 	// List of IPs to be queried
-	Ips []*string `json:"Ips,omitempty" name:"Ips" list`
+	Ips []*string `json:"Ips,omitempty" name:"Ips"`
 }
 
 func (r *DescribeCdnIpRequest) ToJsonString() string {
@@ -1661,7 +1661,7 @@ type DescribeCdnIpResponse struct {
 	Response *struct {
 
 		// Node ownership details
-		Ips []*CdnIp `json:"Ips,omitempty" name:"Ips" list`
+		Ips []*CdnIp `json:"Ips,omitempty" name:"Ips"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1706,7 +1706,7 @@ type DescribeCdnOriginIpResponse struct {
 	Response *struct {
 
 		// Intermediate node IP details
-		Ips []*OriginIp `json:"Ips,omitempty" name:"Ips" list`
+		Ips []*OriginIp `json:"Ips,omitempty" name:"Ips"`
 
 		// Number of intermediate node IPs
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1759,11 +1759,11 @@ type DescribeCertDomainsResponse struct {
 
 		// List of domain names connected to CDN
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+		Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 		// List of CDN domain names with certificates configured
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		CertifiedDomains []*string `json:"CertifiedDomains,omitempty" name:"CertifiedDomains" list`
+		CertifiedDomains []*string `json:"CertifiedDomains,omitempty" name:"CertifiedDomains"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1791,7 +1791,7 @@ type DescribeDomainsConfigRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Query condition filter, complex type.
-	Filters []*DomainFilter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*DomainFilter `json:"Filters,omitempty" name:"Filters"`
 
 	// Sorting rules
 	Sort *Sort `json:"Sort,omitempty" name:"Sort"`
@@ -1824,7 +1824,7 @@ type DescribeDomainsConfigResponse struct {
 	Response *struct {
 
 		// List of domain names
-		Domains []*DetailDomain `json:"Domains,omitempty" name:"Domains" list`
+		Domains []*DetailDomain `json:"Domains,omitempty" name:"Domains"`
 
 		// The number of domain names that matched the query conditions
 	// Used for paginated queries
@@ -1856,7 +1856,7 @@ type DescribeDomainsRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Query condition filter, complex type.
-	Filters []*DomainFilter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*DomainFilter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeDomainsRequest) ToJsonString() string {
@@ -1885,7 +1885,7 @@ type DescribeDomainsResponse struct {
 	Response *struct {
 
 		// List of domain names
-		Domains []*BriefDomain `json:"Domains,omitempty" name:"Domains" list`
+		Domains []*BriefDomain `json:"Domains,omitempty" name:"Domains"`
 
 		// The number of domain names that matched the query conditions
 	// Used for paginated queries
@@ -1952,7 +1952,7 @@ type DescribeIpStatusResponse struct {
 	Response *struct {
 
 		// Node list
-		Ips []*IpStatus `json:"Ips,omitempty" name:"Ips" list`
+		Ips []*IpStatus `json:"Ips,omitempty" name:"Ips"`
 
 		// Total number of nodes
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1985,7 +1985,7 @@ type DescribeIpVisitRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Specifies the list of domain names to be queried; up to 30 domain names can be queried at a time.
-	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
 	// Please note that if domain names are specified, this parameter will be ignored.
@@ -2028,7 +2028,7 @@ type DescribeIpVisitResponse struct {
 		Interval *string `json:"Interval,omitempty" name:"Interval"`
 
 		// Origin-pull data details of each resource.
-		Data []*ResourceData `json:"Data,omitempty" name:"Data" list`
+		Data []*ResourceData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2079,15 +2079,15 @@ type DescribeMapInfoResponse struct {
 	Response *struct {
 
 		// Array of mappings.
-		MapInfoList []*MapInfo `json:"MapInfoList,omitempty" name:"MapInfoList" list`
+		MapInfoList []*MapInfo `json:"MapInfoList,omitempty" name:"MapInfoList"`
 
 		// The relationship between server region ID and sub-region ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		ServerRegionRelation []*RegionMapRelation `json:"ServerRegionRelation,omitempty" name:"ServerRegionRelation" list`
+		ServerRegionRelation []*RegionMapRelation `json:"ServerRegionRelation,omitempty" name:"ServerRegionRelation"`
 
 		// The relationship between client region ID and sub-region ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		ClientRegionRelation []*RegionMapRelation `json:"ClientRegionRelation,omitempty" name:"ClientRegionRelation" list`
+		ClientRegionRelation []*RegionMapRelation `json:"ClientRegionRelation,omitempty" name:"ClientRegionRelation"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2133,7 +2133,7 @@ type DescribeOriginDataRequest struct {
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
 
 	// Specifies the list of domain names to be queried; up to 30 domain names can be queried at a time.
-	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// Project ID, which can be viewed [here](https://console.cloud.tencent.com/project)
 	// If the domain name is not specified, the specified project will be queried. Up to 30 acceleration domain names can be queried at a time
@@ -2191,7 +2191,7 @@ type DescribeOriginDataResponse struct {
 		Interval *string `json:"Interval,omitempty" name:"Interval"`
 
 		// Origin-pull data details of each resource.
-		Data []*ResourceOriginData `json:"Data,omitempty" name:"Data" list`
+		Data []*ResourceOriginData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2314,10 +2314,10 @@ type DescribePurgeQuotaResponse struct {
 	Response *struct {
 
 		// URL purge usage and quota.
-		UrlPurge []*Quota `json:"UrlPurge,omitempty" name:"UrlPurge" list`
+		UrlPurge []*Quota `json:"UrlPurge,omitempty" name:"UrlPurge"`
 
 		// Directory purge usage and quota.
-		PathPurge []*Quota `json:"PathPurge,omitempty" name:"PathPurge" list`
+		PathPurge []*Quota `json:"PathPurge,omitempty" name:"PathPurge"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2408,7 +2408,7 @@ type DescribePurgeTasksResponse struct {
 
 		// Detailed purge record.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		PurgeLogs []*PurgeTask `json:"PurgeLogs,omitempty" name:"PurgeLogs" list`
+		PurgeLogs []*PurgeTask `json:"PurgeLogs,omitempty" name:"PurgeLogs"`
 
 		// Total number of tasks, which is used for pagination.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2457,7 +2457,7 @@ type DescribePushQuotaResponse struct {
 	Response *struct {
 
 		// URL prefetch usage and quota.
-		UrlPush []*Quota `json:"UrlPush,omitempty" name:"UrlPush" list`
+		UrlPush []*Quota `json:"UrlPush,omitempty" name:"UrlPush"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2542,7 +2542,7 @@ type DescribePushTasksResponse struct {
 
 		// Prefetch history
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		PushLogs []*PushTask `json:"PushLogs,omitempty" name:"PushLogs" list`
+		PushLogs []*PushTask `json:"PushLogs,omitempty" name:"PushLogs"`
 
 		// Total number of tasks, which is used for pagination.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2630,10 +2630,10 @@ type DescribeReportDataResponse struct {
 	Response *struct {
 
 		// Domain name-level data details.
-		DomainReport []*ReportData `json:"DomainReport,omitempty" name:"DomainReport" list`
+		DomainReport []*ReportData `json:"DomainReport,omitempty" name:"DomainReport"`
 
 		// Project-level data details
-		ProjectReport []*ReportData `json:"ProjectReport,omitempty" name:"ProjectReport" list`
+		ProjectReport []*ReportData `json:"ProjectReport,omitempty" name:"ProjectReport"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2661,7 +2661,7 @@ type DescribeUrlViolationsRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Specified domain name query
-	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 }
 
 func (r *DescribeUrlViolationsRequest) ToJsonString() string {
@@ -2691,7 +2691,7 @@ type DescribeUrlViolationsResponse struct {
 
 		// Details of URLs in violation
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		UrlRecordList []*ViolationUrl `json:"UrlRecordList,omitempty" name:"UrlRecordList" list`
+		UrlRecordList []*ViolationUrl `json:"UrlRecordList,omitempty" name:"UrlRecordList"`
 
 		// Total number of records, which is used for pagination.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2911,11 +2911,11 @@ type DetailDomain struct {
 
 	// Access port configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccessPort []*int64 `json:"AccessPort,omitempty" name:"AccessPort" list`
+	AccessPort []*int64 `json:"AccessPort,omitempty" name:"AccessPort"`
 
 	// Tag configuration
 	// Note: this field may return null, indicating that no valid value is obtained.
-	Tag []*Tag `json:"Tag,omitempty" name:"Tag" list`
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag"`
 
 	// Timestamp hotlink protection advanced configuration (allowlist feature)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -2931,7 +2931,7 @@ type DetailDomain struct {
 
 	// Advanced configuration set
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	AdvanceSet []*AdvanceConfig `json:"AdvanceSet,omitempty" name:"AdvanceSet" list`
+	AdvanceSet []*AdvanceConfig `json:"AdvanceSet,omitempty" name:"AdvanceSet"`
 
 	// Offline cache
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -2955,7 +2955,7 @@ type DisableCachesRequest struct {
 
 	// List of URLs to be blocked (URLs must contain `http://` or `https://`).
 	// Up to 100 entries can be submitted at a time and 3,000 entries per day.
-	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 }
 
 func (r *DisableCachesRequest) ToJsonString() string {
@@ -3061,7 +3061,7 @@ type DomainAreaConfig struct {
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Region list, where the element can be `mainland/overseas`
-	Area []*string `json:"Area,omitempty" name:"Area" list`
+	Area []*string `json:"Area,omitempty" name:"Area"`
 }
 
 type DomainFilter struct {
@@ -3081,7 +3081,7 @@ type DomainFilter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter field value.
-	Value []*string `json:"Value,omitempty" name:"Value" list`
+	Value []*string `json:"Value,omitempty" name:"Value"`
 
 	// Whether to enable fuzzy query. Only `origin` or `domain` is supported for the filter field name.
 	// When fuzzy query is enabled, the maximum Value length is 1. When fuzzy query is disabled, the maximum Value length is 5.
@@ -3117,14 +3117,14 @@ type DownstreamCapping struct {
 
 	// Downstream speed limiting rules
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CappingRules []*CappingRule `json:"CappingRules,omitempty" name:"CappingRules" list`
+	CappingRules []*CappingRule `json:"CappingRules,omitempty" name:"CappingRules"`
 }
 
 type EnableCachesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of unblocked URLs
-	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 }
 
 func (r *EnableCachesRequest) ToJsonString() string {
@@ -3234,7 +3234,7 @@ type ErrorPage struct {
 
 	// Status code redirect rules configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PageRules []*ErrorPageRule `json:"PageRules,omitempty" name:"PageRules" list`
+	PageRules []*ErrorPageRule `json:"PageRules,omitempty" name:"PageRules"`
 }
 
 type ErrorPageRule struct {
@@ -3338,7 +3338,7 @@ type GetDisableRecordsResponse struct {
 
 		// Blocking history
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		UrlRecordList []*UrlRecord `json:"UrlRecordList,omitempty" name:"UrlRecordList" list`
+		UrlRecordList []*UrlRecord `json:"UrlRecordList,omitempty" name:"UrlRecordList"`
 
 		// Total number of tasks, which is used for pagination
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -3424,7 +3424,7 @@ type HttpHeaderPathRule struct {
 	// For `directory`, enter the path, such as /xxx/test/.
 	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 }
 
 type HttpHeaderRule struct {
@@ -3496,7 +3496,7 @@ type Https struct {
 
 	// TLS version settings, which only support certain advanced domain names. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	TlsVersion []*string `json:"TlsVersion,omitempty" name:"TlsVersion" list`
+	TlsVersion []*string `json:"TlsVersion,omitempty" name:"TlsVersion"`
 }
 
 type ImageOptimization struct {
@@ -3531,11 +3531,11 @@ type IpFilter struct {
 	// Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
 	// Up to 50 allowlists or blocklists can be entered
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*string `json:"Filters,omitempty" name:"Filters"`
 
 	// IP blocklist/allowlist path-based configuration. This feature is only available to selected beta customers.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	FilterRules []*IpFilterPathRule `json:"FilterRules,omitempty" name:"FilterRules" list`
+	FilterRules []*IpFilterPathRule `json:"FilterRules,omitempty" name:"FilterRules"`
 }
 
 type IpFilterPathRule struct {
@@ -3550,7 +3550,7 @@ type IpFilterPathRule struct {
 	// Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
 	// Up to 50 allowlists or blocklists can be entered.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*string `json:"Filters,omitempty" name:"Filters"`
 
 	// Rule types:
 	// `all`: effective for all files
@@ -3566,7 +3566,7 @@ type IpFilterPathRule struct {
 	// For `directory`, enter the path, such as /xxx/test/.
 	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 }
 
 type IpFreqLimit struct {
@@ -3624,7 +3624,7 @@ type KeyRule struct {
 	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 	// For `index`, enter a backslash (/).
 	// Note: this field may return null, indicating that no valid value is obtained.
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 
 	// Rule types:
 	// `file`: effective for specified file suffixes
@@ -3688,7 +3688,7 @@ type ListClsLogTopicsResponse struct {
 
 		// Log topic information list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Topics []*TopicInfo `json:"Topics,omitempty" name:"Topics" list`
+		Topics []*TopicInfo `json:"Topics,omitempty" name:"Topics"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3757,7 +3757,7 @@ type ListClsTopicDomainsResponse struct {
 		TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
 		// Domain name region configuration, which may contain deleted domain names. If this is to be used in `ManageClsTopicDomains` API, you need to exclude deleted domain names by using the `ListCdnDomains` API.
-		DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitempty" name:"DomainAreaConfigs" list`
+		DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitempty" name:"DomainAreaConfigs"`
 
 		// Log topic name
 		TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
@@ -3823,7 +3823,7 @@ type ListTopDataRequest struct {
 	Filter *string `json:"Filter,omitempty" name:"Filter"`
 
 	// Specifies the list of domain names to be queried; up to 30 domain names can be queried at a time.
-	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
 	// Please note that if domain names are specified, this parameter will be ignored.
@@ -3880,7 +3880,7 @@ type ListTopDataResponse struct {
 	Response *struct {
 
 		// Top access data details of each resource
-		Data []*TopData `json:"Data,omitempty" name:"Data" list`
+		Data []*TopData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4038,7 +4038,7 @@ type ManageClsTopicDomainsRequest struct {
 	Channel *string `json:"Channel,omitempty" name:"Channel"`
 
 	// Domain name region configuration. Note: if this field is empty, it means to unbind all domain names from the corresponding topic
-	DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitempty" name:"DomainAreaConfigs" list`
+	DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitempty" name:"DomainAreaConfigs"`
 }
 
 func (r *ManageClsTopicDomainsRequest) ToJsonString() string {
@@ -4102,7 +4102,7 @@ type MaxAge struct {
 
 	// MaxAge rule
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MaxAgeRules []*MaxAgeRule `json:"MaxAgeRules,omitempty" name:"MaxAgeRules" list`
+	MaxAgeRules []*MaxAgeRule `json:"MaxAgeRules,omitempty" name:"MaxAgeRules"`
 }
 
 type MaxAgeRule struct {
@@ -4122,7 +4122,7 @@ type MaxAgeRule struct {
 	// For `path`, enter an absolute path, e.g., `/xxx/test.html`.
 	// For `index`, enter a forward slash `/`.
 	// Note: the rule `all` cannot be deleted. It follows origin by default and can be modified.
-	MaxAgeContents []*string `json:"MaxAgeContents,omitempty" name:"MaxAgeContents" list`
+	MaxAgeContents []*string `json:"MaxAgeContents,omitempty" name:"MaxAgeContents"`
 
 	// MaxAge time (in seconds)
 	// Note: the value `0` means not to cache.
@@ -4144,7 +4144,7 @@ type Origin struct {
 	// Master origin server list
 	// When modifying the origin server, you need to enter the corresponding OriginType.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Origins []*string `json:"Origins,omitempty" name:"Origins" list`
+	Origins []*string `json:"Origins,omitempty" name:"Origins"`
 
 	// Master origin server type
 	// The following types are supported for input parameters:
@@ -4181,7 +4181,7 @@ type Origin struct {
 	// Backup origin server list
 	// When modifying the backup origin server, you need to enter the corresponding BackupOriginType.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BackupOrigins []*string `json:"BackupOrigins,omitempty" name:"BackupOrigins" list`
+	BackupOrigins []*string `json:"BackupOrigins,omitempty" name:"BackupOrigins"`
 
 	// Backup origin server type, which supports the following types:
 	// domain: domain name type
@@ -4199,11 +4199,11 @@ type Origin struct {
 
 	// Origin URL rewrite rule configuration
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	PathRules []*PathRule `json:"PathRules,omitempty" name:"PathRules" list`
+	PathRules []*PathRule `json:"PathRules,omitempty" name:"PathRules"`
 
 	// Path-based origin-pull configurations
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	PathBasedOrigin []*PathBasedOriginRule `json:"PathBasedOrigin,omitempty" name:"PathBasedOrigin" list`
+	PathBasedOrigin []*PathBasedOriginRule `json:"PathBasedOrigin,omitempty" name:"PathBasedOrigin"`
 }
 
 type OriginAuthentication struct {
@@ -4374,10 +4374,10 @@ type PathBasedOriginRule struct {
 	// For `directory`, enter a path, e.g., `/xxx/test/`.
 	// For `path`, enter an absolute path, e.g., `/xxx/test.html`.
 	// For `index`, enter a forward slash `/`.
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 
 	// Origin server list. Domain names and IPv4 addresses are supported.
-	Origin []*string `json:"Origin,omitempty" name:"Origin" list`
+	Origin []*string `json:"Origin,omitempty" name:"Origin"`
 }
 
 type PathRule struct {
@@ -4413,7 +4413,7 @@ type PathRule struct {
 
 	// Origin-pull header setting when the path matches.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	RequestHeaders []*HttpHeaderRule `json:"RequestHeaders,omitempty" name:"RequestHeaders" list`
+	RequestHeaders []*HttpHeaderRule `json:"RequestHeaders,omitempty" name:"RequestHeaders"`
 }
 
 type PostSize struct {
@@ -4431,7 +4431,7 @@ type PurgePathCacheRequest struct {
 	*tchttp.BaseRequest
 
 	// List of directories. The protocol header such as "http://" or "https://" needs to be included.
-	Paths []*string `json:"Paths,omitempty" name:"Paths" list`
+	Paths []*string `json:"Paths,omitempty" name:"Paths"`
 
 	// Purge type:
 	// `flush`: purges updated resources
@@ -4518,7 +4518,7 @@ type PurgeUrlsCacheRequest struct {
 	*tchttp.BaseRequest
 
 	// List of URLs. The protocol header such as "http://" or "https://" needs to be included.
-	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 
 	// Purging region
 	// The acceleration region of the acceleration domain name will be purged if this parameter is not passed in
@@ -4610,7 +4610,7 @@ type PushUrlsCacheRequest struct {
 	*tchttp.BaseRequest
 
 	// List of URLs. The protocol header such as "http://" or "https://" needs to be included.
-	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 
 	// Specifies the User-Agent header of an HTTP prefetch request when it is forwarded to the origin server
 	// Default value: `TencentCdn`
@@ -4737,7 +4737,7 @@ type Referer struct {
 
 	// Referer blocklist/allowlist configuration rule
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RefererRules []*RefererRule `json:"RefererRules,omitempty" name:"RefererRules" list`
+	RefererRules []*RefererRule `json:"RefererRules,omitempty" name:"RefererRules"`
 }
 
 type RefererRule struct {
@@ -4754,7 +4754,7 @@ type RefererRule struct {
 	// For `file`, enter the suffix, such as jpg, txt.
 	// For `directory`, enter the path, such as /xxx/test/.
 	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 
 	// Referer configuration types
 	// whitelist: allowlist
@@ -4762,7 +4762,7 @@ type RefererRule struct {
 	RefererType *string `json:"RefererType,omitempty" name:"RefererType"`
 
 	// Referer content list
-	Referers []*string `json:"Referers,omitempty" name:"Referers" list`
+	Referers []*string `json:"Referers,omitempty" name:"Referers"`
 
 	// Whether to allow empty referer
 	// true: allow empty referer
@@ -4776,7 +4776,7 @@ type RegionMapRelation struct {
 	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
 
 	// List of sub-region IDs
-	SubRegionIdList []*int64 `json:"SubRegionIdList,omitempty" name:"SubRegionIdList" list`
+	SubRegionIdList []*int64 `json:"SubRegionIdList,omitempty" name:"SubRegionIdList"`
 }
 
 type ReportData struct {
@@ -4809,7 +4809,7 @@ type RequestHeader struct {
 
 	// Custom request header configuration rules
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules" list`
+	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules"`
 }
 
 type ResourceBillingData struct {
@@ -4822,7 +4822,7 @@ type ResourceBillingData struct {
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
 	// Billing data details
-	BillingData []*CdnData `json:"BillingData,omitempty" name:"BillingData" list`
+	BillingData []*CdnData `json:"BillingData,omitempty" name:"BillingData"`
 }
 
 type ResourceData struct {
@@ -4835,7 +4835,7 @@ type ResourceData struct {
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
 	// Data details of a resource
-	CdnData []*CdnData `json:"CdnData,omitempty" name:"CdnData" list`
+	CdnData []*CdnData `json:"CdnData,omitempty" name:"CdnData"`
 }
 
 type ResourceOriginData struct {
@@ -4848,7 +4848,7 @@ type ResourceOriginData struct {
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
 	// Origin-pull data details
-	OriginData []*CdnData `json:"OriginData,omitempty" name:"OriginData" list`
+	OriginData []*CdnData `json:"OriginData,omitempty" name:"OriginData"`
 }
 
 type ResponseHeader struct {
@@ -4860,7 +4860,7 @@ type ResponseHeader struct {
 
 	// Custom response header rules
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules" list`
+	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules"`
 }
 
 type ResponseHeaderCache struct {
@@ -4892,7 +4892,7 @@ type RuleCache struct {
 	// For `index`, enter a forward slash `/`.
 	// For `default`, enter `no max-age`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 
 	// Rule types:
 	// `all`: effective for all files.
@@ -4946,7 +4946,7 @@ type ScdnAclConfig struct {
 
 	// ACL rule group, which is required when the access control is on.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ScriptData []*ScdnAclGroup `json:"ScriptData,omitempty" name:"ScriptData" list`
+	ScriptData []*ScdnAclGroup `json:"ScriptData,omitempty" name:"ScriptData"`
 
 	// Error page configuration
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -4959,7 +4959,7 @@ type ScdnAclGroup struct {
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 
 	// Specific configurations
-	Configure []*ScdnAclRule `json:"Configure,omitempty" name:"Configure" list`
+	Configure []*ScdnAclRule `json:"Configure,omitempty" name:"Configure"`
 
 	// Rule action, which is generally `refuse`.
 	Result *string `json:"Result,omitempty" name:"Result"`
@@ -4987,11 +4987,11 @@ type ScdnBotConfig struct {
 
 	// Bot cookie policy
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	BotCookie []*BotCookie `json:"BotCookie,omitempty" name:"BotCookie" list`
+	BotCookie []*BotCookie `json:"BotCookie,omitempty" name:"BotCookie"`
 
 	// Bot JS policy
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	BotJavaScript []*BotJavaScript `json:"BotJavaScript,omitempty" name:"BotJavaScript" list`
+	BotJavaScript []*BotJavaScript `json:"BotJavaScript,omitempty" name:"BotJavaScript"`
 }
 
 type ScdnCCRules struct {
@@ -5005,7 +5005,7 @@ type ScdnCCRules struct {
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
 	// Rule value (blocking condition)
-	RuleValue []*string `json:"RuleValue,omitempty" name:"RuleValue" list`
+	RuleValue []*string `json:"RuleValue,omitempty" name:"RuleValue"`
 
 	// IP access limit rule
 	Qps *uint64 `json:"Qps,omitempty" name:"Qps"`
@@ -5042,7 +5042,7 @@ type ScdnConfig struct {
 
 	// Custom CC attack defense rule
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Rules []*ScdnCCRules `json:"Rules,omitempty" name:"Rules" list`
+	Rules []*ScdnCCRules `json:"Rules,omitempty" name:"Rules"`
 }
 
 type ScdnDdosConfig struct {
@@ -5079,7 +5079,7 @@ type ScdnWafConfig struct {
 
 	// Attack blocking rules
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Rules []*ScdnWafRule `json:"Rules,omitempty" name:"Rules" list`
+	Rules []*ScdnWafRule `json:"Rules,omitempty" name:"Rules"`
 
 	// WAF rule level. Valid values: 100, 200, and 300.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -5087,7 +5087,7 @@ type ScdnWafConfig struct {
 
 	// WAF sub-rule switch
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	SubRuleSwitch []*WafSubRuleStatus `json:"SubRuleSwitch,omitempty" name:"SubRuleSwitch" list`
+	SubRuleSwitch []*WafSubRuleStatus `json:"SubRuleSwitch,omitempty" name:"SubRuleSwitch"`
 }
 
 type ScdnWafRule struct {
@@ -5243,7 +5243,7 @@ type SimpleCache struct {
 
 	// Cache expiration time rules
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CacheRules []*SimpleCacheRule `json:"CacheRules,omitempty" name:"CacheRules" list`
+	CacheRules []*SimpleCacheRule `json:"CacheRules,omitempty" name:"CacheRules"`
 
 	// Follows origin server Cache-Control: max-age configurations
 	// on: enabled
@@ -5295,7 +5295,7 @@ type SimpleCacheRule struct {
 	// Enter a path for `directory`, such as `/xxx/test`
 	// Enter an absolute path for `path`, such as `/xxx/test.html`
 	// Enter `/` for `index`
-	CacheContents []*string `json:"CacheContents,omitempty" name:"CacheContents" list`
+	CacheContents []*string `json:"CacheContents,omitempty" name:"CacheContents"`
 
 	// Cache expiration time settings
 	// Unit: second. The maximum value is 365 days.
@@ -5382,7 +5382,7 @@ type StatusCodeCache struct {
 
 	// Status code cache expiration rules details
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CacheRules []*StatusCodeCacheRule `json:"CacheRules,omitempty" name:"CacheRules" list`
+	CacheRules []*StatusCodeCacheRule `json:"CacheRules,omitempty" name:"CacheRules"`
 }
 
 type StatusCodeCacheRule struct {
@@ -5485,7 +5485,7 @@ type TopData struct {
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
 	// Detailed sorting results
-	DetailData []*TopDetailData `json:"DetailData,omitempty" name:"DetailData" list`
+	DetailData []*TopDetailData `json:"DetailData,omitempty" name:"DetailData"`
 }
 
 type TopDetailData struct {
@@ -5630,7 +5630,7 @@ type UpdateDomainConfigRequest struct {
 	UrlRedirect *UrlRedirect `json:"UrlRedirect,omitempty" name:"UrlRedirect"`
 
 	// Access port configuration
-	AccessPort []*int64 `json:"AccessPort,omitempty" name:"AccessPort" list`
+	AccessPort []*int64 `json:"AccessPort,omitempty" name:"AccessPort"`
 
 	// Timestamp hotlink protection advanced configuration (allowlist feature)
 	AdvancedAuthentication *AdvancedAuthentication `json:"AdvancedAuthentication,omitempty" name:"AdvancedAuthentication"`
@@ -5876,7 +5876,7 @@ type UrlRedirect struct {
 
 	// URL redirect rule, which is required if `Switch` is `on`. There can be up to 10 rules.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PathRules []*UrlRedirectRule `json:"PathRules,omitempty" name:"PathRules" list`
+	PathRules []*UrlRedirectRule `json:"PathRules,omitempty" name:"PathRules"`
 }
 
 type UrlRedirectRule struct {
@@ -5903,7 +5903,7 @@ type UserAgentFilter struct {
 
 	// UA blocklist/allowlist effect rule list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FilterRules []*UserAgentFilterRule `json:"FilterRules,omitempty" name:"FilterRules" list`
+	FilterRules []*UserAgentFilterRule `json:"FilterRules,omitempty" name:"FilterRules"`
 }
 
 type UserAgentFilterRule struct {
@@ -5918,11 +5918,11 @@ type UserAgentFilterRule struct {
 
 	// Effective access paths
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths" list`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 
 	// `UserAgent` list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserAgents []*string `json:"UserAgents,omitempty" name:"UserAgents" list`
+	UserAgents []*string `json:"UserAgents,omitempty" name:"UserAgents"`
 
 	// blocklist or allowlist. Valid values: blacklist, whitelist
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -5969,7 +5969,7 @@ type WafSubRuleStatus struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// List of rule IDs
-	SubIds []*int64 `json:"SubIds,omitempty" name:"SubIds" list`
+	SubIds []*int64 `json:"SubIds,omitempty" name:"SubIds"`
 }
 
 type WebpAdapter struct {

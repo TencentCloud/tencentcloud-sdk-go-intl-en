@@ -63,13 +63,13 @@ type Activity struct {
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// Information set of the instances related to the scaling activity.
-	ActivityRelatedInstanceSet []*ActivtyRelatedInstance `json:"ActivityRelatedInstanceSet,omitempty" name:"ActivityRelatedInstanceSet" list`
+	ActivityRelatedInstanceSet []*ActivtyRelatedInstance `json:"ActivityRelatedInstanceSet,omitempty" name:"ActivityRelatedInstanceSet"`
 
 	// Brief description of the scaling activity status.
 	StatusMessageSimplified *string `json:"StatusMessageSimplified,omitempty" name:"StatusMessageSimplified"`
 
 	// Result of the lifecycle hook action in the scaling activity
-	LifecycleActionResultSet []*LifecycleActionResultInfo `json:"LifecycleActionResultSet,omitempty" name:"LifecycleActionResultSet" list`
+	LifecycleActionResultSet []*LifecycleActionResultInfo `json:"LifecycleActionResultSet,omitempty" name:"LifecycleActionResultSet"`
 }
 
 type ActivtyRelatedInstance struct {
@@ -92,7 +92,7 @@ type AttachInstancesRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
 	// List of CVM instance IDs
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *AttachInstancesRequest) ToJsonString() string {
@@ -162,7 +162,7 @@ type AutoScalingGroup struct {
 	EnabledStatus *string `json:"EnabledStatus,omitempty" name:"EnabledStatus"`
 
 	// List of application load balancers
-	ForwardLoadBalancerSet []*ForwardLoadBalancer `json:"ForwardLoadBalancerSet,omitempty" name:"ForwardLoadBalancerSet" list`
+	ForwardLoadBalancerSet []*ForwardLoadBalancer `json:"ForwardLoadBalancerSet,omitempty" name:"ForwardLoadBalancerSet"`
 
 	// Number of instances
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
@@ -177,7 +177,7 @@ type AutoScalingGroup struct {
 	LaunchConfigurationName *string `json:"LaunchConfigurationName,omitempty" name:"LaunchConfigurationName"`
 
 	// List of Classic load balancer IDs
-	LoadBalancerIdSet []*string `json:"LoadBalancerIdSet,omitempty" name:"LoadBalancerIdSet" list`
+	LoadBalancerIdSet []*string `json:"LoadBalancerIdSet,omitempty" name:"LoadBalancerIdSet"`
 
 	// Maximum number of instances
 	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
@@ -189,16 +189,16 @@ type AutoScalingGroup struct {
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// List of subnet IDs
-	SubnetIdSet []*string `json:"SubnetIdSet,omitempty" name:"SubnetIdSet" list`
+	SubnetIdSet []*string `json:"SubnetIdSet,omitempty" name:"SubnetIdSet"`
 
 	// Termination policy
-	TerminationPolicySet []*string `json:"TerminationPolicySet,omitempty" name:"TerminationPolicySet" list`
+	TerminationPolicySet []*string `json:"TerminationPolicySet,omitempty" name:"TerminationPolicySet"`
 
 	// VPC ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// List of availability zones
-	ZoneSet []*string `json:"ZoneSet,omitempty" name:"ZoneSet" list`
+	ZoneSet []*string `json:"ZoneSet,omitempty" name:"ZoneSet"`
 
 	// Retry policy
 	RetryPolicy *string `json:"RetryPolicy,omitempty" name:"RetryPolicy"`
@@ -207,7 +207,7 @@ type AutoScalingGroup struct {
 	InActivityStatus *string `json:"InActivityStatus,omitempty" name:"InActivityStatus"`
 
 	// List of auto scaling group tags
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Service settings
 	ServiceSettings *ServiceSettings `json:"ServiceSettings,omitempty" name:"ServiceSettings"`
@@ -236,10 +236,10 @@ type AutoScalingNotification struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
 	// List of user group IDs.
-	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds" list`
+	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
 
 	// List of notification events.
-	NotificationTypes []*string `json:"NotificationTypes,omitempty" name:"NotificationTypes" list`
+	NotificationTypes []*string `json:"NotificationTypes,omitempty" name:"NotificationTypes"`
 
 	// Event notification ID.
 	AutoScalingNotificationId *string `json:"AutoScalingNotificationId,omitempty" name:"AutoScalingNotificationId"`
@@ -448,24 +448,24 @@ type CreateAutoScalingGroupRequest struct {
 	DesiredCapacity *uint64 `json:"DesiredCapacity,omitempty" name:"DesiredCapacity"`
 
 	// List of classic CLB IDs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
-	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds" list`
+	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
 
 	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// List of CLBs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
-	ForwardLoadBalancers []*ForwardLoadBalancer `json:"ForwardLoadBalancers,omitempty" name:"ForwardLoadBalancers" list`
+	ForwardLoadBalancers []*ForwardLoadBalancer `json:"ForwardLoadBalancers,omitempty" name:"ForwardLoadBalancers"`
 
 	// List of subnet IDs. A subnet must be specified in the VPC scenario. If multiple subnets are entered, their priority will be determined by the order in which they are entered, and they will be tried one by one until instances can be successfully created.
-	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
 	// Termination policy. Currently, the maximum length is 1. Value range: OLDEST_INSTANCE, NEWEST_INSTANCE. Default value: OLDEST_INSTANCE.
 	// <br><li> OLDEST_INSTANCE: The oldest instance in the auto scaling group will be terminated first.
 	// <br><li> NEWEST_INSTANCE: The newest instance in the auto scaling group will be terminated first.
-	TerminationPolicies []*string `json:"TerminationPolicies,omitempty" name:"TerminationPolicies" list`
+	TerminationPolicies []*string `json:"TerminationPolicies,omitempty" name:"TerminationPolicies"`
 
 	// List of availability zones. An availability zone must be specified in the basic network scenario. If multiple availability zones are entered, their priority will be determined by the order in which they are entered, and they will be tried one by one until instances can be successfully created.
-	Zones []*string `json:"Zones,omitempty" name:"Zones" list`
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
 
 	// Retry policy. Value range: IMMEDIATE_RETRY, INCREMENTAL_INTERVALS, and NO_RETRY. Default value: IMMEDIATE_RETRY.
 	// <br><li> IMMEDIATE_RETRY: Retrying immediately in a short period of time and stopping after a number of consecutive failures (5).
@@ -482,7 +482,7 @@ type CreateAutoScalingGroupRequest struct {
 	ZonesCheckPolicy *string `json:"ZonesCheckPolicy,omitempty" name:"ZonesCheckPolicy"`
 
 	// List of tag descriptions. In this parameter, you can specify the tags to be bound with a scaling group as well as corresponding resource instances. Each scaling group can have up to 30 tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Service settings such as unhealthy instance replacement.
 	ServiceSettings *ServiceSettings `json:"ServiceSettings,omitempty" name:"ServiceSettings"`
@@ -582,7 +582,7 @@ type CreateLaunchConfigurationRequest struct {
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
 	// Information of the instance's data disk configuration. If this parameter is not specified, no data disk is purchased by default. Up to 11 data disks can be supported.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// Configuration information of public network bandwidth. If this parameter is not specified, the default public network bandwidth is 0 Mbps.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
@@ -591,7 +591,7 @@ type CreateLaunchConfigurationRequest struct {
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
 
 	// The security group to which the instance belongs. This parameter can be obtained by calling the `SecurityGroupId` field in the returned value of [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1). If this parameter is not specified, no security group will be bound by default.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Enhanced service. This parameter is used to specify whether to enable Cloud Security, Cloud Monitoring and other services. If this parameter is not specified, Cloud Monitoring and Cloud Security will be enabled by default.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
@@ -609,7 +609,7 @@ type CreateLaunchConfigurationRequest struct {
 
 	// List of instance models. Different instance models specify different resource specifications. Up to 10 instance models can be supported.
 	// `InstanceType` and `InstanceTypes` are mutually exclusive, and one and only one of them must be entered.
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
 
 	// Instance type verification policy. Value range: ALL, ANY. Default value: ANY.
 	// <br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
@@ -620,7 +620,7 @@ type CreateLaunchConfigurationRequest struct {
 	InstanceTypesCheckPolicy *string `json:"InstanceTypesCheckPolicy,omitempty" name:"InstanceTypesCheckPolicy"`
 
 	// List of tags. This parameter is used to bind up to 10 tags to newly added instances.
-	InstanceTags []*InstanceTag `json:"InstanceTags,omitempty" name:"InstanceTags" list`
+	InstanceTags []*InstanceTag `json:"InstanceTags,omitempty" name:"InstanceTags"`
 
 	// CAM role name, which can be obtained from the roleName field in the return value of the DescribeRoleList API.
 	CamRoleName *string `json:"CamRoleName,omitempty" name:"CamRoleName"`
@@ -793,10 +793,10 @@ type CreateNotificationConfigurationRequest struct {
 	// <li>SCALE_IN_FAILED: scale-in failed</li>
 	// <li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL: unhealthy instance replacement succeeded</li>
 	// <li>REPLACE_UNHEALTHY_INSTANCE_FAILED: unhealthy instance replacement failed</li>
-	NotificationTypes []*string `json:"NotificationTypes,omitempty" name:"NotificationTypes" list`
+	NotificationTypes []*string `json:"NotificationTypes,omitempty" name:"NotificationTypes"`
 
 	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
-	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds" list`
+	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
 }
 
 func (r *CreateNotificationConfigurationRequest) ToJsonString() string {
@@ -856,19 +856,19 @@ type CreatePaiInstanceRequest struct {
 	InitScript *string `json:"InitScript,omitempty" name:"InitScript"`
 
 	// List of availability zones.
-	Zones []*string `json:"Zones,omitempty" name:"Zones" list`
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
 
 	// VPC ID.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// List of subnets.
-	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
 	// Instance display name.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// List of instance models.
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
 
 	// Instance login settings.
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
@@ -914,7 +914,7 @@ type CreatePaiInstanceResponse struct {
 	Response *struct {
 
 		// This parameter is returned when an instance is created via this API, representing one or more instance `IDs`. The return of the instance `ID` list does not mean that the instance is created successfully. You can find out whether the instance is created by checking the status of the instance `ID` in the InstancesSet returned by the [DescribeInstances API](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). If the status of the instance changes from "pending" to "running", the instance is created successfully.
-		InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet" list`
+		InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -954,7 +954,7 @@ type CreateScalingPolicyRequest struct {
 	Cooldown *uint64 `json:"Cooldown,omitempty" name:"Cooldown"`
 
 	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
-	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds" list`
+	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
 }
 
 func (r *CreateScalingPolicyRequest) ToJsonString() string {
@@ -1431,7 +1431,7 @@ type DescribeAutoScalingActivitiesRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries by one or more scaling activity IDs in the format of `asa-5l2ejpfo`. The maximum quantity per request is 100. This parameter does not support specifying both `ActivityIds` and `Filters` at the same time.
-	ActivityIds []*string `json:"ActivityIds,omitempty" name:"ActivityIds" list`
+	ActivityIds []*string `json:"ActivityIds,omitempty" name:"ActivityIds"`
 
 	// Filter.
 	// <li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
@@ -1439,7 +1439,7 @@ type DescribeAutoScalingActivitiesRequest struct {
 	// <li> activity-type - String - Required: No - (Filter) Filter by scaling activity type. (SCALE_OUT: scale-out | SCALE_IN: scale-in | ATTACH_INSTANCES: adding an instance | REMOVE_INSTANCES: terminating an instance | DETACH_INSTANCES: removing an instance | TERMINATE_INSTANCES_UNEXPECTEDLY: terminating an instance in the CVM console | REPLACE_UNHEALTHY_INSTANCE: replacing an unhealthy instance | UPDATE_LOAD_BALANCERS: updating a load balancer)</li>
 	// <li> activity-id - String - Required: No - (Filter) Filter by scaling activity ID.</li>
 	// The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `ActivityIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -1486,7 +1486,7 @@ type DescribeAutoScalingActivitiesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Information set of eligible scaling activities.
-		ActivitySet []*Activity `json:"ActivitySet,omitempty" name:"ActivitySet" list`
+		ActivitySet []*Activity `json:"ActivitySet,omitempty" name:"ActivitySet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1508,7 +1508,7 @@ type DescribeAutoScalingGroupLastActivitiesRequest struct {
 	*tchttp.BaseRequest
 
 	// ID list of an auto scaling group.
-	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds" list`
+	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds"`
 }
 
 func (r *DescribeAutoScalingGroupLastActivitiesRequest) ToJsonString() string {
@@ -1535,7 +1535,7 @@ type DescribeAutoScalingGroupLastActivitiesResponse struct {
 	Response *struct {
 
 		// Information set of eligible scaling activities. Scaling groups without scaling activities are not returned. For example, if there are 50 auto scaling group IDs but only 45 records are returned, it indicates that 5 of the auto scaling groups do not have scaling activities.
-		ActivitySet []*Activity `json:"ActivitySet,omitempty" name:"ActivitySet" list`
+		ActivitySet []*Activity `json:"ActivitySet,omitempty" name:"ActivitySet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1557,7 +1557,7 @@ type DescribeAutoScalingGroupsRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries by one or more auto scaling group IDs in the format of `asg-nkdwoui0`. The maximum quantity per request is 100. This parameter does not support specifying both `AutoScalingGroupIds` and `Filters` at the same time.
-	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds" list`
+	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds"`
 
 	// Filters.
 	// <li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
@@ -1568,7 +1568,7 @@ type DescribeAutoScalingGroupsRequest struct {
 	// <li> tag-value - String - Required: No - (Filter) Filter by tag value.</li>
 	// <li> tag:tag-key - String - Required: No - (Filter) Filter by tag key-value pair. The tag-key should be replaced with a specified tag key. For more information, see example 2.</li>
 	// The maximum number of `Filters` in each request is 10. The upper limit for `Filter.Values` is 5. This parameter cannot specify `AutoScalingGroupIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -1604,7 +1604,7 @@ type DescribeAutoScalingGroupsResponse struct {
 	Response *struct {
 
 		// List of auto scaling group details.
-		AutoScalingGroupSet []*AutoScalingGroup `json:"AutoScalingGroupSet,omitempty" name:"AutoScalingGroupSet" list`
+		AutoScalingGroupSet []*AutoScalingGroup `json:"AutoScalingGroupSet,omitempty" name:"AutoScalingGroupSet"`
 
 		// Number of eligible auto scaling groups.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1629,13 +1629,13 @@ type DescribeAutoScalingInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// ID of the CVM instance to be queried. This parameter does not support specifying both InstanceIds and Filters at the same time.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Filter.
 	// <li> instance-id - String - Required: No - (Filter) Filter by instance ID.</li>
 	// <li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
 	// The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `InstanceIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -1671,7 +1671,7 @@ type DescribeAutoScalingInstancesResponse struct {
 	Response *struct {
 
 		// List of instance details.
-		AutoScalingInstanceSet []*Instance `json:"AutoScalingInstanceSet,omitempty" name:"AutoScalingInstanceSet" list`
+		AutoScalingInstanceSet []*Instance `json:"AutoScalingInstanceSet,omitempty" name:"AutoScalingInstanceSet"`
 
 		// Number of eligible instances.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1696,14 +1696,14 @@ type DescribeLaunchConfigurationsRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries by one or more launch configuration IDs in the format of `asc-ouy1ax38`. The maximum quantity per request is 100. This parameter does not support specifying both `LaunchConfigurationIds` and `Filters` at the same time.
-	LaunchConfigurationIds []*string `json:"LaunchConfigurationIds,omitempty" name:"LaunchConfigurationIds" list`
+	LaunchConfigurationIds []*string `json:"LaunchConfigurationIds,omitempty" name:"LaunchConfigurationIds"`
 
 	// Filters.
 	// <li> launch-configuration-id - String - Required: No - (Filter) Filter by launch configuration ID.</li>
 	// <li> launch-configuration-name - String - Required: No - (Filter) Filter by launch configuration name.</li>
 	// <li> launch-configuration-name - String - Required: No - (Filter) Fuzzy search by launch configuration name.</li>
 	// The maximum number of `Filters` in each request is 10. The upper limit for `Filter.Values` is 5. This parameter cannot specify `LaunchConfigurationIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -1742,7 +1742,7 @@ type DescribeLaunchConfigurationsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of launch configuration details.
-		LaunchConfigurationSet []*LaunchConfiguration `json:"LaunchConfigurationSet,omitempty" name:"LaunchConfigurationSet" list`
+		LaunchConfigurationSet []*LaunchConfiguration `json:"LaunchConfigurationSet,omitempty" name:"LaunchConfigurationSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1764,7 +1764,7 @@ type DescribeLifecycleHooksRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries by one or more lifecycle hook IDs in the format of `ash-8azjzxcl`. The maximum quantity per request is 100. This parameter does not support specifying both `LifecycleHookIds` and `Filters` at the same time.
-	LifecycleHookIds []*string `json:"LifecycleHookIds,omitempty" name:"LifecycleHookIds" list`
+	LifecycleHookIds []*string `json:"LifecycleHookIds,omitempty" name:"LifecycleHookIds"`
 
 	// Filter.
 	// <li> lifecycle-hook-id - String - Required: No - (Filter) Filter by lifecycle hook ID.</li>
@@ -1775,7 +1775,7 @@ type DescribeLifecycleHooksRequest struct {
 	// <li> lifecycle-hook-name - String - Required: No - (Filter) Filter by lifecycle hook name.</li>
 	// <li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
 	// The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `LifecycleHookIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -1811,7 +1811,7 @@ type DescribeLifecycleHooksResponse struct {
 	Response *struct {
 
 		// Array of lifecycle hooks
-		LifecycleHookSet []*LifecycleHook `json:"LifecycleHookSet,omitempty" name:"LifecycleHookSet" list`
+		LifecycleHookSet []*LifecycleHook `json:"LifecycleHookSet,omitempty" name:"LifecycleHookSet"`
 
 		// Total quantity
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1836,13 +1836,13 @@ type DescribeNotificationConfigurationsRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries by one or more notification IDs in the format of asn-2sestqbr. The maximum number of instances per request is 100. This parameter does not support specifying both `AutoScalingNotificationIds` and `Filters` at the same time.
-	AutoScalingNotificationIds []*string `json:"AutoScalingNotificationIds,omitempty" name:"AutoScalingNotificationIds" list`
+	AutoScalingNotificationIds []*string `json:"AutoScalingNotificationIds,omitempty" name:"AutoScalingNotificationIds"`
 
 	// Filter.
 	// <li> auto-scaling-notification-id - String - Required: No - (Filter) Filter by notification ID.</li>
 	// <li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
 	// The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `AutoScalingNotificationIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -1881,7 +1881,7 @@ type DescribeNotificationConfigurationsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of AS event notification details.
-		AutoScalingNotificationSet []*AutoScalingNotification `json:"AutoScalingNotificationSet,omitempty" name:"AutoScalingNotificationSet" list`
+		AutoScalingNotificationSet []*AutoScalingNotification `json:"AutoScalingNotificationSet,omitempty" name:"AutoScalingNotificationSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1903,10 +1903,10 @@ type DescribePaiInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries by PAI instance ID.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Filter.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -1945,7 +1945,7 @@ type DescribePaiInstancesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// PAI instance details
-		PaiInstanceSet []*PaiInstance `json:"PaiInstanceSet,omitempty" name:"PaiInstanceSet" list`
+		PaiInstanceSet []*PaiInstance `json:"PaiInstanceSet,omitempty" name:"PaiInstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1967,14 +1967,14 @@ type DescribeScalingPoliciesRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries by one or more alarm policy IDs in the format of asp-i9vkg894. The maximum number of instances per request is 100. This parameter does not support specifying both `AutoScalingPolicyIds` and `Filters` at the same time.
-	AutoScalingPolicyIds []*string `json:"AutoScalingPolicyIds,omitempty" name:"AutoScalingPolicyIds" list`
+	AutoScalingPolicyIds []*string `json:"AutoScalingPolicyIds,omitempty" name:"AutoScalingPolicyIds"`
 
 	// Filter.
 	// <li> auto-scaling-policy-id - String - Required: No - (Filter) Filter by alarm policy ID.</li>
 	// <li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
 	// <li> scaling-policy-name - String - Required: No - (Filter) Filter by alarm policy name.</li>
 	// The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `AutoScalingPolicyIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -2010,7 +2010,7 @@ type DescribeScalingPoliciesResponse struct {
 	Response *struct {
 
 		// List of AS alarm trigger policy details.
-		ScalingPolicySet []*ScalingPolicy `json:"ScalingPolicySet,omitempty" name:"ScalingPolicySet" list`
+		ScalingPolicySet []*ScalingPolicy `json:"ScalingPolicySet,omitempty" name:"ScalingPolicySet"`
 
 		// Number of eligible notifications.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2035,13 +2035,13 @@ type DescribeScheduledActionsRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries by one or more scheduled task IDs in the format of asst-am691zxo. The maximum number of instances per request is 100. This parameter does not support specifying both ScheduledActionIds` and `Filters` at the same time.
-	ScheduledActionIds []*string `json:"ScheduledActionIds,omitempty" name:"ScheduledActionIds" list`
+	ScheduledActionIds []*string `json:"ScheduledActionIds,omitempty" name:"ScheduledActionIds"`
 
 	// Filter.
 	// <li> scheduled-action-id - String - Required: No - (Filter) Filter by scheduled task ID.</li>
 	// <li> scheduled-action-name - String - Required: No - (Filter) Filter by scheduled task name.</li>
 	// <li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -2080,7 +2080,7 @@ type DescribeScheduledActionsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of scheduled task details.
-		ScheduledActionSet []*ScheduledAction `json:"ScheduledActionSet,omitempty" name:"ScheduledActionSet" list`
+		ScheduledActionSet []*ScheduledAction `json:"ScheduledActionSet,omitempty" name:"ScheduledActionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2105,7 +2105,7 @@ type DetachInstancesRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
 	// List of CVM instance IDs
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DetachInstancesRequest) ToJsonString() string {
@@ -2315,7 +2315,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter value of the field.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type ForwardLoadBalancer struct {
@@ -2327,7 +2327,7 @@ type ForwardLoadBalancer struct {
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
 	// List of target rule attributes
-	TargetAttributes []*TargetAttribute `json:"TargetAttributes,omitempty" name:"TargetAttributes" list`
+	TargetAttributes []*TargetAttribute `json:"TargetAttributes,omitempty" name:"TargetAttributes"`
 
 	// ID of a forwarding rule. This parameter is required for layer-7 listeners.
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
@@ -2491,7 +2491,7 @@ type LaunchConfiguration struct {
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
 	// Information of the instance's data disk configuration.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// Instance login settings.
 	LoginSettings *LimitedLoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
@@ -2500,10 +2500,10 @@ type LaunchConfiguration struct {
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
 
 	// Security group of the instance.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Auto scaling group associated with the launch configuration.
-	AutoScalingGroupAbstractSet []*AutoScalingGroupAbstract `json:"AutoScalingGroupAbstractSet,omitempty" name:"AutoScalingGroupAbstractSet" list`
+	AutoScalingGroupAbstractSet []*AutoScalingGroupAbstract `json:"AutoScalingGroupAbstractSet,omitempty" name:"AutoScalingGroupAbstractSet"`
 
 	// Custom data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2531,10 +2531,10 @@ type LaunchConfiguration struct {
 	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitempty" name:"InstanceMarketOptions"`
 
 	// List of instance models.
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
 
 	// List of tags.
-	InstanceTags []*InstanceTag `json:"InstanceTags,omitempty" name:"InstanceTags" list`
+	InstanceTags []*InstanceTag `json:"InstanceTags,omitempty" name:"InstanceTags"`
 
 	// Version number.
 	VersionNumber *int64 `json:"VersionNumber,omitempty" name:"VersionNumber"`
@@ -2617,7 +2617,7 @@ type LifecycleHook struct {
 type LimitedLoginSettings struct {
 
 	// List of key IDs.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 }
 
 type LoginSettings struct {
@@ -2627,7 +2627,7 @@ type LoginSettings struct {
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// List of key IDs. An instance associated with the key can be accessed using the corresponding private key. KeyId can be obtained via the API DescribeKeyPairs. A key and a password cannot be specified at the same time, and specifying the key is not supported in Windows. You can specify only one key when purchasing an instance.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
 	// Keep the original settings for an image. You cannot specify this parameter if Password or KeyIds.N is specified. You can specify this parameter to TRUE only when you create an instance using a custom image, shared image, or image imported from external resources. Value range: <br><li>TRUE: Keep the login settings for the image <br><li>FALSE: Do not keep the login settings for the image <br><br>Default value: FALSE.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2683,18 +2683,18 @@ type ModifyAutoScalingGroupRequest struct {
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// List of subnet IDs
-	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
 	// Termination policy. Currently, the maximum length is 1. Value range: OLDEST_INSTANCE, NEWEST_INSTANCE.
 	// <br><li> OLDEST_INSTANCE: The oldest instance in the auto scaling group will be terminated first.
 	// <br><li> NEWEST_INSTANCE: The newest instance in the auto scaling group will be terminated first.
-	TerminationPolicies []*string `json:"TerminationPolicies,omitempty" name:"TerminationPolicies" list`
+	TerminationPolicies []*string `json:"TerminationPolicies,omitempty" name:"TerminationPolicies"`
 
 	// VPC ID. This field is left empty for basic networks. You need to specify SubnetIds when modifying the network of the auto scaling group to a VPC with a specified VPC ID. Specify Zones when modifying the network to a basic network.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// List of availability zones
-	Zones []*string `json:"Zones,omitempty" name:"Zones" list`
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
 
 	// Retry policy. Value range: IMMEDIATE_RETRY, INCREMENTAL_INTERVALS, and NO_RETRY. Default value: IMMEDIATE_RETRY.
 	// <br><li> IMMEDIATE_RETRY: Retrying immediately in a short period of time and stopping after a number of consecutive failures (5).
@@ -2844,7 +2844,7 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 
 	// List of instance types. Each type specifies different resource specifications. This list contains up to 10 instance types.
 	// The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. After `InstanceTypes` is successfully specified for the launch configuration, the original `InstanceType` will be automatically invalidated.
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
 
 	// Instance type verification policy which works when InstanceTypes is actually modified. Value range: ALL, ANY. Default value: ANY.
 	// <br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
@@ -2862,7 +2862,7 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 
 	// Security group to which the instance belongs. This parameter can be obtained from the `SecurityGroupId` field in the response of the [`DescribeSecurityGroups`](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API.
 	// At least one security group is required for this parameter. The security group specified is sequential.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Information of the public network bandwidth configuration.
 	// To modify it or even its subfield, you should specify all the subfields again.
@@ -2890,7 +2890,7 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
 	// Instance data disk configurations. Up to 11 data disks can be specified and will be collectively modified. Please provide all the new values for the modification.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 }
 
 func (r *ModifyLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -2952,10 +2952,10 @@ type ModifyLoadBalancersRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
 	// List of classic CLB IDs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
-	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds" list`
+	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
 
 	// List of CLBs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
-	ForwardLoadBalancers []*ForwardLoadBalancer `json:"ForwardLoadBalancers,omitempty" name:"ForwardLoadBalancers" list`
+	ForwardLoadBalancers []*ForwardLoadBalancer `json:"ForwardLoadBalancers,omitempty" name:"ForwardLoadBalancers"`
 
 	// CLB verification policy. Valid values: "ALL" and "DIFF". Default value: "ALL"
 	// <br><li> ALL. Verification is successful only when all CLBs are valid. Otherwise, verification fails.
@@ -3021,10 +3021,10 @@ type ModifyNotificationConfigurationRequest struct {
 	// <li>SCALE_IN_FAILED: scale-in failed</li>
 	// <li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL: unhealthy instance replacement succeeded</li>
 	// <li>REPLACE_UNHEALTHY_INSTANCE_FAILED: unhealthy instance replacement failed</li>
-	NotificationTypes []*string `json:"NotificationTypes,omitempty" name:"NotificationTypes" list`
+	NotificationTypes []*string `json:"NotificationTypes,omitempty" name:"NotificationTypes"`
 
 	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
-	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds" list`
+	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
 }
 
 func (r *ModifyNotificationConfigurationRequest) ToJsonString() string {
@@ -3091,7 +3091,7 @@ type ModifyScalingPolicyRequest struct {
 
 	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
 	// If you want to clear the user group, you need to pass in the specific string "NULL" to the list.
-	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds" list`
+	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
 }
 
 func (r *ModifyScalingPolicyRequest) ToJsonString() string {
@@ -3295,7 +3295,7 @@ type RemoveInstancesRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
 	// List of CVM instance IDs
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *RemoveInstancesRequest) ToJsonString() string {
@@ -3379,7 +3379,7 @@ type ScalingPolicy struct {
 	MetricAlarm *MetricAlarm `json:"MetricAlarm,omitempty" name:"MetricAlarm"`
 
 	// Notification group ID, which is the set of user group IDs.
-	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds" list`
+	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
 }
 
 type ScheduledAction struct {
@@ -3434,7 +3434,7 @@ type SetInstancesProtectionRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
 	// Instance ID.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Whether the instance needs to be protected from scale-in.
 	ProtectedFromScaleIn *bool `json:"ProtectedFromScaleIn,omitempty" name:"ProtectedFromScaleIn"`
@@ -3498,7 +3498,7 @@ type StartAutoScalingInstancesRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
 	// The list of the CVM instances you want to start up.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *StartAutoScalingInstancesRequest) ToJsonString() string {
@@ -3551,7 +3551,7 @@ type StopAutoScalingInstancesRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
 	// The list of the CVM instances you want to shut down.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Whether the shutdown instances will be charged. Valid values:  
 	// KEEP_CHARGING: keep charging after shutdown.  
@@ -3647,13 +3647,13 @@ type UpgradeLaunchConfigurationRequest struct {
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
 	// List of instance models. Different instance models specify different resource specifications. Up to 5 instance models can be supported.
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
 
 	// Display name of the launch configuration, which can contain Chinese characters, letters, numbers, underscores, separators ("-"), and decimal points with a maximum length of 60 bytes.
 	LaunchConfigurationName *string `json:"LaunchConfigurationName,omitempty" name:"LaunchConfigurationName"`
 
 	// Information of the instance's data disk configuration. If this parameter is not specified, no data disk is purchased by default. Up to 11 data disks can be supported.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// Enhanced service. This parameter is used to specify whether to enable Cloud Security, Cloud Monitoring and other services. If this parameter is not specified, Cloud Monitoring and Cloud Security will be enabled by default.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
@@ -3684,7 +3684,7 @@ type UpgradeLaunchConfigurationRequest struct {
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// The security group of instance. This parameter can be obtained by calling the `SecurityGroupId` field in the returned value of [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1). If this parameter is not specified, no security group will be bound by default.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// System disk configuration of the instance. If this parameter is not specified, the default value will be assigned to it.
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
@@ -3693,7 +3693,7 @@ type UpgradeLaunchConfigurationRequest struct {
 	UserData *string `json:"UserData,omitempty" name:"UserData"`
 
 	// List of tags. This parameter is used to bind up to 10 tags to newly added instances.
-	InstanceTags []*InstanceTag `json:"InstanceTags,omitempty" name:"InstanceTags" list`
+	InstanceTags []*InstanceTag `json:"InstanceTags,omitempty" name:"InstanceTags"`
 
 	// CAM role name, which can be obtained from the roleName field in the return value of the DescribeRoleList API.
 	CamRoleName *string `json:"CamRoleName,omitempty" name:"CamRoleName"`

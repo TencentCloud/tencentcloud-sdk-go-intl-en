@@ -82,7 +82,7 @@ type AttachResourcesTagRequest struct {
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// Resource ID array, which can contain up to 50 resources
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
@@ -301,7 +301,7 @@ type DescribeResourceTagsByResourceIdsRequest struct {
 	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
 
 	// Unique resource ID.
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
 	// The resource's region.
 	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
@@ -351,7 +351,7 @@ type DescribeResourceTagsByResourceIdsResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Tag list.
-		Tags []*TagResource `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*TagResource `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -379,7 +379,7 @@ type DescribeResourceTagsByResourceIdsSeqRequest struct {
 	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
 
 	// Unique resource ID
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
 	// Resource region
 	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
@@ -429,7 +429,7 @@ type DescribeResourceTagsByResourceIdsSeqResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Tag list
-		Tags []*TagResource `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*TagResource `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -460,10 +460,10 @@ type DescribeResourceTagsByTagKeysRequest struct {
 	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
 
 	// Unique resource ID
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
 	// Resource tag key
-	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
 	// Number of entries per page. Default value: 400
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -511,7 +511,7 @@ type DescribeResourceTagsByTagKeysResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Resource tag
-		Rows []*ResourceIdTag `json:"Rows,omitempty" name:"Rows" list`
+		Rows []*ResourceIdTag `json:"Rows,omitempty" name:"Rows"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -598,7 +598,7 @@ type DescribeResourceTagsResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Resource tag
-		Rows []*TagResource `json:"Rows,omitempty" name:"Rows" list`
+		Rows []*TagResource `json:"Rows,omitempty" name:"Rows"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -620,7 +620,7 @@ type DescribeResourcesByTagsRequest struct {
 	*tchttp.BaseRequest
 
 	// Tag filtering arrays.
-	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
 
 	// Tag creator uin.
 	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
@@ -685,7 +685,7 @@ type DescribeResourcesByTagsResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Resource tag.
-		Rows []*ResourceTag `json:"Rows,omitempty" name:"Rows" list`
+		Rows []*ResourceTag `json:"Rows,omitempty" name:"Rows"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -707,7 +707,7 @@ type DescribeResourcesByTagsUnionRequest struct {
 	*tchttp.BaseRequest
 
 	// Tag filtering arrays.
-	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
 
 	// Tag creator uin.
 	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
@@ -771,7 +771,7 @@ type DescribeResourcesByTagsUnionResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Resource tag.
-		Rows []*ResourceTag `json:"Rows,omitempty" name:"Rows" list`
+		Rows []*ResourceTag `json:"Rows,omitempty" name:"Rows"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -841,7 +841,7 @@ type DescribeTagKeysResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Tag list.
-		Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -863,7 +863,7 @@ type DescribeTagValuesRequest struct {
 	*tchttp.BaseRequest
 
 	// Tag key list.
-	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
 	// Creator `Uin`. If not specified, `Uin` is only used as the query condition.
 	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
@@ -911,7 +911,7 @@ type DescribeTagValuesResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Tag list.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -933,7 +933,7 @@ type DescribeTagValuesSeqRequest struct {
 	*tchttp.BaseRequest
 
 	// Tag key list
-	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
 	// Creator `Uin`. If this parameter is blank or left empty, only `Uin` will be used as a condition for query
 	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
@@ -981,7 +981,7 @@ type DescribeTagValuesSeqResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Tag list
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1018,7 +1018,7 @@ type DescribeTagsRequest struct {
 	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
 
 	// Tag key array, which either exists or does not exist with the tag value. If it does not exist, all tags of the user will be queried. If it is passed in together with `TagKey`, it will be used and the `TagKey` will be ignored.
-	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
 	// Whether to show project tag
 	ShowProject *uint64 `json:"ShowProject,omitempty" name:"ShowProject"`
@@ -1063,7 +1063,7 @@ type DescribeTagsResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Tag list.
-		Tags []*TagWithDelete `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*TagWithDelete `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1100,7 +1100,7 @@ type DescribeTagsSeqRequest struct {
 	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
 
 	// Tag key array, which either exists or does not exist with the tag value. If it does not exist, all tags of the user will be queried. If it is passed in together with `TagKey`, it will be used and the `TagKey` will be ignored.
-	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
 	// Whether to show project tag
 	ShowProject *uint64 `json:"ShowProject,omitempty" name:"ShowProject"`
@@ -1145,7 +1145,7 @@ type DescribeTagsSeqResponse struct {
 		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 		// Tag list
-		Tags []*TagWithDelete `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*TagWithDelete `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1170,7 +1170,7 @@ type DetachResourcesTagRequest struct {
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// Resource ID array, which can contain up to 50 resources
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
 	// Tag key to be unbound
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
@@ -1232,10 +1232,10 @@ type ModifyResourceTagsRequest struct {
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
 	// The tags to be added or modified. If the resource described by `Resource` is not associated with the input tag keys, an association will be added. If the tag keys are already associated, the values corresponding to the associated tag keys will be modified to the input values. This API must contain either `ReplaceTags` or `DeleteTag`. And these two parameters cannot include the same tag keys.
-	ReplaceTags []*Tag `json:"ReplaceTags,omitempty" name:"ReplaceTags" list`
+	ReplaceTags []*Tag `json:"ReplaceTags,omitempty" name:"ReplaceTags"`
 
 	// The tags to be unassociated. This API must contain either `ReplaceTags` or `DeleteTag`. And these two parameters cannot include the same tag keys.
-	DeleteTags []*TagKeyObject `json:"DeleteTags,omitempty" name:"DeleteTags" list`
+	DeleteTags []*TagKeyObject `json:"DeleteTags,omitempty" name:"DeleteTags"`
 }
 
 func (r *ModifyResourceTagsRequest) ToJsonString() string {
@@ -1286,7 +1286,7 @@ type ModifyResourcesTagValueRequest struct {
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// Resource ID array, which can contain up to 50 resources
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
@@ -1353,7 +1353,7 @@ type ResourceIdTag struct {
 
 	// Tag key-value pair
 	// Note: this field may return null, indicating that no valid values can be obtained
-	TagKeyValues []*Tag `json:"TagKeyValues,omitempty" name:"TagKeyValues" list`
+	TagKeyValues []*Tag `json:"TagKeyValues,omitempty" name:"TagKeyValues"`
 }
 
 type ResourceTag struct {
@@ -1376,7 +1376,7 @@ type ResourceTag struct {
 
 	// Resource tag.
 	// Note: This field may return null, indicating that no valid value is found.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type Tag struct {
@@ -1394,7 +1394,7 @@ type TagFilter struct {
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
 	// Tag value array. '**OR**' relation if multiple values.
-	TagValue []*string `json:"TagValue,omitempty" name:"TagValue" list`
+	TagValue []*string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type TagKeyObject struct {

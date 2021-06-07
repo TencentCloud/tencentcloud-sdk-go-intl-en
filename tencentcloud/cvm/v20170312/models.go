@@ -55,7 +55,7 @@ type AllocateHostsRequest struct {
 	HostCount *uint64 `json:"HostCount,omitempty" name:"HostCount"`
 
 	// Tag description. You can specify the parameter to associate a tag with an instance.
-	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification" list`
+	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 }
 
 func (r *AllocateHostsRequest) ToJsonString() string {
@@ -88,7 +88,7 @@ type AllocateHostsResponse struct {
 	Response *struct {
 
 		// The ID list of the CVM instances newly created on the CDH.
-		HostIdSet []*string `json:"HostIdSet,omitempty" name:"HostIdSet" list`
+		HostIdSet []*string `json:"HostIdSet,omitempty" name:"HostIdSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -110,10 +110,10 @@ type AssociateInstancesKeyPairsRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). The maximum number of instances in each request is 100. <br>You can obtain the available instance IDs in two ways: <br><li>Log in to the [console](https://console.cloud.tencent.com/cvm/index) to query the instance IDs. <br><li>Call [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Key ID(s). The maximum number of key pairs in each request is 100. The key pair ID is in the format of `skey-3glfot13`. <br>You can obtain the available key pair IDs in two ways: <br><li>Log in to the [console](https://console.cloud.tencent.com/cvm/sshkey) to query the key pair IDs. <br><li>Call [DescribeKeyPairs](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) and look for `KeyId` in the response.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
 	// Whether to force shut down a running instances. It is recommended to manually shut down a running instance before associating a key pair with it. Valid values: <br><li>TRUE: force shut down an instance after a normal shutdown fails. <br><li>FALSE: do not force shut down an instance after a normal shutdown fails. <br><br>Default value: FALSE.
 	ForceStop *bool `json:"ForceStop,omitempty" name:"ForceStop"`
@@ -164,10 +164,10 @@ type AssociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
 	// ID of the security group to be associated, such as `sg-efil73jd`. Only one security group can be associated.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// ID of the instance bound in the format of ins-lesecurk. You can specify up to 100 instances in each request.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *AssociateSecurityGroupsRequest) ToJsonString() string {
@@ -310,10 +310,10 @@ type CreateImageRequest struct {
 	Sysprep *string `json:"Sysprep,omitempty" name:"Sysprep"`
 
 	// Specified data disk ID included in the full image created from the instance.
-	DataDiskIds []*string `json:"DataDiskIds,omitempty" name:"DataDiskIds" list`
+	DataDiskIds []*string `json:"DataDiskIds,omitempty" name:"DataDiskIds"`
 
 	// Specified snapshot ID used to create an image. A system disk snapshot must be included. It cannot be passed together with `InstanceId`.
-	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds" list`
+	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds"`
 
 	// Success status of this request, without affecting the resources involved
 	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
@@ -475,7 +475,7 @@ type DeleteDisasterRecoverGroupsRequest struct {
 	*tchttp.BaseRequest
 
 	// ID list of spread placement groups, obtainable via the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/api/213/17810?from_cn_redirect=1) API. You can operate up to 100 spread placement groups in each request.
-	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds" list`
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
 }
 
 func (r *DeleteDisasterRecoverGroupsRequest) ToJsonString() string {
@@ -521,7 +521,7 @@ type DeleteImagesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of the IDs of the instances to be deleted.
-	ImageIds []*string `json:"ImageIds,omitempty" name:"ImageIds" list`
+	ImageIds []*string `json:"ImageIds,omitempty" name:"ImageIds"`
 }
 
 func (r *DeleteImagesRequest) ToJsonString() string {
@@ -567,7 +567,7 @@ type DeleteKeyPairsRequest struct {
 	*tchttp.BaseRequest
 
 	// Key ID(s). The maximum number of key pairs in each request is 100. <br>You can obtain the available key pair IDs in two ways: <br><li>Log in to the [console](https://console.cloud.tencent.com/cvm/sshkey) to query the key pair IDs. <br><li>Call [DescribeKeyPairs](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) and look for `KeyId` in the response.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 }
 
 func (r *DeleteKeyPairsRequest) ToJsonString() string {
@@ -670,7 +670,7 @@ type DescribeDisasterRecoverGroupsRequest struct {
 	*tchttp.BaseRequest
 
 	// ID list of spread placement groups. You can operate up to 100 spread placement groups in each request.
-	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds" list`
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
 
 	// Name of a spread placement group. Fuzzy match is supported.
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -709,7 +709,7 @@ type DescribeDisasterRecoverGroupsResponse struct {
 	Response *struct {
 
 		// Information on spread placement groups.
-		DisasterRecoverGroupSet []*DisasterRecoverGroup `json:"DisasterRecoverGroupSet,omitempty" name:"DisasterRecoverGroupSet" list`
+		DisasterRecoverGroupSet []*DisasterRecoverGroup `json:"DisasterRecoverGroupSet,omitempty" name:"DisasterRecoverGroupSet"`
 
 		// Total number of placement groups of the user.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -744,7 +744,7 @@ type DescribeHostsRequest struct {
 	// <li><strong>state</strong></li>
 	// <p style="padding-left: 30px;">Filter results by **<strong>CDH instance status </strong>**. (PENDING: creating | LAUNCH_FAILURE: creation failed | RUNNING: running | EXPIRED: expired)</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
 	// Each request can have up to 10 `Filters` and 5 `Filters.Values`.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset; default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -782,7 +782,7 @@ type DescribeHostsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Information on CDH instances
-		HostSet []*HostItem `json:"HostSet,omitempty" name:"HostSet" list`
+		HostSet []*HostItem `json:"HostSet,omitempty" name:"HostSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -876,7 +876,7 @@ type DescribeImageSharePermissionResponse struct {
 	Response *struct {
 
 		// Information on image sharing.
-		SharePermissionSet []*SharePermission `json:"SharePermissionSet,omitempty" name:"SharePermissionSet" list`
+		SharePermissionSet []*SharePermission `json:"SharePermissionSet,omitempty" name:"SharePermissionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -898,7 +898,7 @@ type DescribeImagesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of image IDs, such as `img-gvbnzy6f`. For the format of array-type parameters, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1). You can obtain the image IDs in two ways: <br><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response. <br><li>View the image IDs in the [Image Console](https://console.cloud.tencent.com/cvm/image).
-	ImageIds []*string `json:"ImageIds,omitempty" name:"ImageIds" list`
+	ImageIds []*string `json:"ImageIds,omitempty" name:"ImageIds"`
 
 	// Filters. Each request can have up to 10 `Filters` and 5 `Filters.Values`. You cannot specify `ImageIds` and `Filters` at the same time. Specific filters:
 	// <li>`image-id` - String - Optional - Filter results by image ID</li>
@@ -906,7 +906,7 @@ type DescribeImagesRequest struct {
 	//     PRIVATE_IMAGE: private image created by the current account 
 	//     PUBLIC_IMAGE: public image created by Tencent Cloud
 	//    SHARED_IMAGE: image shared with the current account by another account.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset; default value: 0. For more information on `Offset`, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89).
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -946,7 +946,7 @@ type DescribeImagesResponse struct {
 	Response *struct {
 
 		// Information on an image, including its state and attributes.
-		ImageSet []*Image `json:"ImageSet,omitempty" name:"ImageSet" list`
+		ImageSet []*Image `json:"ImageSet,omitempty" name:"ImageSet"`
 
 		// Number of images meeting the filtering conditions.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -997,7 +997,7 @@ type DescribeImportImageOsResponse struct {
 		ImportImageOsListSupported *ImageOsList `json:"ImportImageOsListSupported,omitempty" name:"ImportImageOsListSupported"`
 
 		// Supported operating system versions of imported images. 
-		ImportImageOsVersionSet []*OsVersion `json:"ImportImageOsVersionSet,omitempty" name:"ImportImageOsVersionSet" list`
+		ImportImageOsVersionSet []*OsVersion `json:"ImportImageOsVersionSet,omitempty" name:"ImportImageOsVersionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1042,7 +1042,7 @@ type DescribeInstanceFamilyConfigsResponse struct {
 	Response *struct {
 
 		// List of instance model families
-		InstanceFamilyConfigSet []*InstanceFamilyConfig `json:"InstanceFamilyConfigSet,omitempty" name:"InstanceFamilyConfigSet" list`
+		InstanceFamilyConfigSet []*InstanceFamilyConfig `json:"InstanceFamilyConfigSet,omitempty" name:"InstanceFamilyConfigSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1068,7 +1068,7 @@ type DescribeInstanceTypeConfigsRequest struct {
 	// <li><strong>instance-family</strong></li>
 	// <p style="padding-left: 30px;">Filter results by **<strong>instance models</strong>**. For example, instance models: S1, I1 and M1.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Required: no</p>
 	// Each request can have up to 10 `Filters` and 1 `Filters.Values`.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeInstanceTypeConfigsRequest) ToJsonString() string {
@@ -1095,7 +1095,7 @@ type DescribeInstanceTypeConfigsResponse struct {
 	Response *struct {
 
 		// List of instance model families
-		InstanceTypeConfigSet []*InstanceTypeConfig `json:"InstanceTypeConfigSet,omitempty" name:"InstanceTypeConfigSet" list`
+		InstanceTypeConfigSet []*InstanceTypeConfig `json:"InstanceTypeConfigSet,omitempty" name:"InstanceTypeConfigSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1166,7 +1166,7 @@ type DescribeInstancesOperationLimitRequest struct {
 	*tchttp.BaseRequest
 
 	// Query by instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API. For example, instance ID: ins-xxxxxxxx. (For the specific format, refer to section `ids.N` of the API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).) You can query up to 100 instances in each request.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Operation on the instance(s).
 	// <li> INSTANCE_DEGRADE: downgrade the instance configurations</li>
@@ -1198,7 +1198,7 @@ type DescribeInstancesOperationLimitResponse struct {
 	Response *struct {
 
 		// The maximum number of times you can modify the instance configurations (degrading the configurations)
-		InstanceOperationLimitSet []*OperationCountLimit `json:"InstanceOperationLimitSet,omitempty" name:"InstanceOperationLimitSet" list`
+		InstanceOperationLimitSet []*OperationCountLimit `json:"InstanceOperationLimitSet,omitempty" name:"InstanceOperationLimitSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1220,7 +1220,7 @@ type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Query by instance ID(s). For example, instance ID: `ins-xxxxxxxx`. For the specific format, refer to section `Ids.N` of the API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1). You can query up to 100 instances in each request. However, `InstanceIds` and `Filters` cannot be specified at the same time.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Filters.
 	// <li> `zone` - String - Optional - Filter results by availability zone.</li>
@@ -1238,7 +1238,7 @@ type DescribeInstancesRequest struct {
 	// </li>`tag-value` - String - Optional - Filter results by tag value.</li>
 	// <li> `tag:tag-key` - String - Optional - Filter results by tag key-value pair. Replace `tag-key` with specific tag keys, as shown in example 2.</li>
 	// Each request can have up to 10 `Filters` and 5 `Filters.Values`. You cannot specify `InstanceIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset; default value: 0. For more information on `Offset`, see the corresponding section in API [Introduction](https://intl.cloud.tencent.com/document/product/377).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -1277,7 +1277,7 @@ type DescribeInstancesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Detailed instance information.
-		InstanceSet []*Instance `json:"InstanceSet,omitempty" name:"InstanceSet" list`
+		InstanceSet []*Instance `json:"InstanceSet,omitempty" name:"InstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1299,7 +1299,7 @@ type DescribeInstancesStatusRequest struct {
 	*tchttp.BaseRequest
 
 	// Query by instance ID(s). For example, instance ID: `ins-xxxxxxxx`. For the specific format, refer to section `Ids.N` of the API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1). You can query up to 100 instances in each request.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Offset; default value: 0. For more information on `Offset`, see the corresponding section in API [Introduction](https://intl.cloud.tencent.com/document/product/377).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -1337,7 +1337,7 @@ type DescribeInstancesStatusResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// [Instance status](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) list.
-		InstanceStatusSet []*InstanceStatus `json:"InstanceStatusSet,omitempty" name:"InstanceStatusSet" list`
+		InstanceStatusSet []*InstanceStatus `json:"InstanceStatusSet,omitempty" name:"InstanceStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1382,7 +1382,7 @@ type DescribeInternetChargeTypeConfigsResponse struct {
 	Response *struct {
 
 		// List of network billing methods.
-		InternetChargeTypeConfigSet []*InternetChargeTypeConfig `json:"InternetChargeTypeConfigSet,omitempty" name:"InternetChargeTypeConfigSet" list`
+		InternetChargeTypeConfigSet []*InternetChargeTypeConfig `json:"InternetChargeTypeConfigSet,omitempty" name:"InternetChargeTypeConfigSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1404,12 +1404,12 @@ type DescribeKeyPairsRequest struct {
 	*tchttp.BaseRequest
 
 	// Key pair ID(s) in the format of `skey-11112222`. This API supports using multiple IDs as filters at the same time. For more information on the format of this parameter, see the `id.N` section in [API Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1). You cannot specify `KeyIds` and `Filters` at the same time. You can log in to the [console](https://console.cloud.tencent.com/cvm/index) to query the key pair IDs.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
 	// Filters.
 	// <li> `project-id` - Integer - Optional - Filter results by project ID. To view the list of project IDs, you can go to [Project Management](https://console.cloud.tencent.com/project), or call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) and look for `projectId` in the response. </li>
 	// <li> `key-name` - String - Optional - Filter results by key pair name. </li> You cannot specify `KeyIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset; default value: 0. For more information on `Offset`, see the corresponding sections in API [Introduction](https://intl.cloud.tencent.com/document/product/377). Number of results returned; default value: 20; maximum: 100. For more information on `Limit`, see the corresponding section in API [Introduction](https://intl.cloud.tencent.com/document/product/377). 
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -1448,7 +1448,7 @@ type DescribeKeyPairsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Detailed information on key pairs.
-		KeyPairSet []*KeyPair `json:"KeyPairSet,omitempty" name:"KeyPairSet" list`
+		KeyPairSet []*KeyPair `json:"KeyPairSet,omitempty" name:"KeyPairSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1496,7 +1496,7 @@ type DescribeRegionsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of regions
-		RegionSet []*RegionInfo `json:"RegionSet,omitempty" name:"RegionSet" list`
+		RegionSet []*RegionInfo `json:"RegionSet,omitempty" name:"RegionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1535,7 +1535,7 @@ type DescribeReservedInstancesConfigInfosRequest struct {
 	// Unit: second
 	// Required: no
 	// Valid value: 31536000 (1 year)
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeReservedInstancesConfigInfosRequest) ToJsonString() string {
@@ -1562,7 +1562,7 @@ type DescribeReservedInstancesConfigInfosResponse struct {
 	Response *struct {
 
 		// Static configurations of the reserved instance.
-		ReservedInstanceConfigInfos []*ReservedInstanceConfigInfoItem `json:"ReservedInstanceConfigInfos,omitempty" name:"ReservedInstanceConfigInfos" list`
+		ReservedInstanceConfigInfos []*ReservedInstanceConfigInfoItem `json:"ReservedInstanceConfigInfos,omitempty" name:"ReservedInstanceConfigInfos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1615,7 +1615,7 @@ type DescribeReservedInstancesOfferingsRequest struct {
 	// <li><strong>reserved-instances-offering-id</strong></li>
 	// <p style="padding-left: 30px;">Filters by <strong>Reserved Instance ID</strong>, in the form of 650c138f-ae7e-4750-952a-96841d6e9fc1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
 	// Each request can have up to 10 `Filters` and 5 `Filter.Values`.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeReservedInstancesOfferingsRequest) ToJsonString() string {
@@ -1650,7 +1650,7 @@ type DescribeReservedInstancesOfferingsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The list of Reserved Instances that meet the condition.
-		ReservedInstancesOfferingsSet []*ReservedInstancesOffering `json:"ReservedInstancesOfferingsSet,omitempty" name:"ReservedInstancesOfferingsSet" list`
+		ReservedInstancesOfferingsSet []*ReservedInstancesOffering `json:"ReservedInstancesOfferingsSet,omitempty" name:"ReservedInstancesOfferingsSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1698,7 +1698,7 @@ type DescribeReservedInstancesRequest struct {
 	// <li><strong>state</strong></li>
 	// <p style="padding-left: 30px;">Filters by <strong>reserved instance status</strong>, such as `active`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: active (created) | pending (waiting to be created) | retired (expired)</p>
 	// Each request can have up to 10 `Filters` and 5 `Filter.Values`.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeReservedInstancesRequest) ToJsonString() string {
@@ -1731,7 +1731,7 @@ type DescribeReservedInstancesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of eligible reserved instances.
-		ReservedInstancesSet []*ReservedInstances `json:"ReservedInstancesSet,omitempty" name:"ReservedInstancesSet" list`
+		ReservedInstancesSet []*ReservedInstances `json:"ReservedInstancesSet,omitempty" name:"ReservedInstancesSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1761,7 +1761,7 @@ type DescribeZoneInstanceConfigInfosRequest struct {
 	// <li>`instance-type` - String - Optional - Filter results by model. Different instance models have different configurations. You can call `DescribeInstanceTypeConfigs` to query the latest configuration list or refer to the documentation on instance types. If this parameter is not specified, `S1.SMALL1` will be used by default.</li>
 	// 
 	// <li>`instance-charge-type` - String - Optional - Filter results by instance billing method. `POSTPAID_BY_HOUR`: pay-as-you-go | `CDHPAID`: you are only billed for CDH instances, not the CVMs running on the CDH instances.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeZoneInstanceConfigInfosRequest) ToJsonString() string {
@@ -1788,7 +1788,7 @@ type DescribeZoneInstanceConfigInfosResponse struct {
 	Response *struct {
 
 		// List of model configurations for the availability zone.
-		InstanceTypeQuotaSet []*InstanceTypeQuotaItem `json:"InstanceTypeQuotaSet,omitempty" name:"InstanceTypeQuotaSet" list`
+		InstanceTypeQuotaSet []*InstanceTypeQuotaItem `json:"InstanceTypeQuotaSet,omitempty" name:"InstanceTypeQuotaSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1836,7 +1836,7 @@ type DescribeZonesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of availability zones.
-		ZoneSet []*ZoneInfo `json:"ZoneSet,omitempty" name:"ZoneSet" list`
+		ZoneSet []*ZoneInfo `json:"ZoneSet,omitempty" name:"ZoneSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1858,10 +1858,10 @@ type DisassociateInstancesKeyPairsRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). The maximum number of instances in each request is 100. <br><br>You can obtain the available instance IDs in two ways: <br><li>Log in to the [console](https://console.cloud.tencent.com/cvm/index) to query the instance IDs. <br><li>Call [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// List of key pair IDs. The maximum number of key pairs in each request is 100. The key pair ID is in the format of `skey-11112222`. <br><br>You can obtain the available key pair IDs in two ways: <br><li>Log in to the [console](https://console.cloud.tencent.com/cvm/sshkey) to query the key pair IDs. <br><li>Call [DescribeKeyPairs](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) and look for `KeyId` in the response.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
 	// Whether to force shut down a running instances. It is recommended to manually shut down a running instance before disassociating a key pair from it. Valid values: <br><li>TRUE: force shut down an instance after a normal shutdown fails. <br><li>FALSE: do not force shut down an instance after a normal shutdown fails. <br><br>Default value: FALSE.
 	ForceStop *bool `json:"ForceStop,omitempty" name:"ForceStop"`
@@ -1912,10 +1912,10 @@ type DisassociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
 	// ID of the security group to be disassociated, such as `sg-efil73jd`. Only one security group can be disassociated.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// ID(s) of the instance(s) to be disassociated,such as `ins-lesecurk`. You can specify multiple instances.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DisassociateSecurityGroupsRequest) ToJsonString() string {
@@ -1977,7 +1977,7 @@ type DisasterRecoverGroup struct {
 
 	// The list of CVM IDs in a spread placement group.
 	// Note: This field may return null, indicating that no valid value was found.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Creation time of a spread placement group.
 	// Note: This field may return null, indicating that no valid value is found.
@@ -2001,7 +2001,7 @@ type Externals struct {
 
 	// Not supported network. Value: <br><li>BASIC: classic network<br><li>VPC1.0: VPC1.0
 	// Note: This field may return null, indicating that no valid value was found.
-	UnsupportNetworks []*string `json:"UnsupportNetworks,omitempty" name:"UnsupportNetworks" list`
+	UnsupportNetworks []*string `json:"UnsupportNetworks,omitempty" name:"UnsupportNetworks"`
 
 	// Attributes of local HDD storage
 	// Note: This field may return null, indicating that no valid value is found.
@@ -2014,7 +2014,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter values.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type HostItem struct {
@@ -2044,7 +2044,7 @@ type HostItem struct {
 	ExpiredTime *string `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
 
 	// List of IDs of CVM instances created on the CDH
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// CDH instance state
 	HostState *string `json:"HostState,omitempty" name:"HostState"`
@@ -2132,18 +2132,18 @@ type Image struct {
 
 	// Information on the snapshots associated with the image
 	// Note: This field may return null, indicating that no valid value is found.
-	SnapshotSet []*Snapshot `json:"SnapshotSet,omitempty" name:"SnapshotSet" list`
+	SnapshotSet []*Snapshot `json:"SnapshotSet,omitempty" name:"SnapshotSet"`
 }
 
 type ImageOsList struct {
 
 	// Supported Windows OS
 	// Note: This field may return null, indicating that no valid value is found.
-	Windows []*string `json:"Windows,omitempty" name:"Windows" list`
+	Windows []*string `json:"Windows,omitempty" name:"Windows"`
 
 	// Supported Linux OS
 	// Note: This field may return null, indicating that no valid value is found.
-	Linux []*string `json:"Linux,omitempty" name:"Linux" list`
+	Linux []*string `json:"Linux,omitempty" name:"Linux"`
 }
 
 type ImportImageRequest struct {
@@ -2413,7 +2413,7 @@ type InquiryPriceResetInstancesInternetMaxBandwidthRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100. When changing the bandwidth of instances with `BANDWIDTH_PREPAID` or `BANDWIDTH_POSTPAID_BY_HOUR` as the network billing method, you can only specify one instance at a time.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Configuration of public network egress bandwidth. The maximum bandwidth varies among different models. For more information, see the documentation on bandwidth limits. Currently only the `InternetMaxBandwidthOut` parameter is supported.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
@@ -2474,7 +2474,7 @@ type InquiryPriceResetInstancesTypeRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API. The maximum number of instances in each request is 1.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Instance model. Resources vary with the instance model. Specific values can be found in the tables of [Instance Types] (https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) or in the latest specifications via the [DescribeInstanceTypeConfigs] (https://intl.cloud.tencent.com/document/product/213/15749?from_cn_redirect=1) API.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
@@ -2530,7 +2530,7 @@ type InquiryPriceResizeInstanceDisksRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// The configuration of data disks to be expanded. Currently, you can only use the API to expand non-elastic data disks whose [disk type](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#DataDisk) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`. You can use [`DescribeDisks`](https://intl.cloud.tencent.com/document/api/362/16315?from_cn_redirect=1) to check whether a disk is elastic. If the `Portable` field in the response is `false`, it means that the disk is non-elastic. Data disk capacity unit: GB; minimum increment: 10 GB. For more information about selecting a data disk type, see the product overview on cloud disks. Available data disk types are subject to the instance type (`InstanceType`). In addition, the maximum capacity allowed for expansion varies by data disk type.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// Whether to force shut down a running instances. It is recommended to manually shut down a running instance before resetting the user password. Valid values: <br><li>TRUE: force shut down an instance after a normal shutdown fails. <br><li>FALSE: do not force shut down an instance after a normal shutdown fails. <br><br>Default value: FALSE. <br><br>A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force shut down a CVM when it cannot be shut down normally.
 	ForceStop *bool `json:"ForceStop,omitempty" name:"ForceStop"`
@@ -2602,7 +2602,7 @@ type InquiryPriceRunInstancesRequest struct {
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
 	// The configuration information of the instance data disk. If this parameter is not specified, no data disk will be purchased by default. When purchasing, you can specify 21 data disks, which can contain at most 1 LOCAL_BASIC data disk or LOCAL_SSD data disk, and at most 20 CLOUD_BASIC data disks, CLOUD_PREMIUM data disks, or CLOUD_SSD data disks.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// VPC configurations. You can use this parameter to specify the VPC ID, subnet ID, etc. If this parameter is not specified, the basic network will be used by default. If a VPC IP is specified in this parameter, the `InstanceCount` parameter can only be 1. 
 	VirtualPrivateCloud *VirtualPrivateCloud `json:"VirtualPrivateCloud,omitempty" name:"VirtualPrivateCloud"`
@@ -2620,7 +2620,7 @@ type InquiryPriceRunInstancesRequest struct {
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
 
 	// Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response. If this parameter is not specified, the instance will not be associated with any security group by default.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Monitor and Cloud Security. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
@@ -2632,7 +2632,7 @@ type InquiryPriceRunInstancesRequest struct {
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
 
 	// The tag description list. This parameter is used to bind a tag to a resource instance. A tag can only be bound to CVM instances.
-	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification" list`
+	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 
 	// The market options of the instance.
 	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitempty" name:"InstanceMarketOptions"`
@@ -2731,14 +2731,14 @@ type Instance struct {
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
 	// Information on the data disks of the instance, which only covers the data disks purchased together with the instance. 
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// List of private IPs of the instance's primary ENI.
-	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 
 	// List of public IPs of the instance's primary ENI.
 	// Note: This field may return null, indicating that no valid value is found.
-	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
 
 	// Information on instance bandwidth.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
@@ -2763,7 +2763,7 @@ type Instance struct {
 	OsName *string `json:"OsName,omitempty" name:"OsName"`
 
 	// Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Login settings of the instance. Currently only the key associated with the instance is returned.
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
@@ -2772,7 +2772,7 @@ type Instance struct {
 	InstanceState *string `json:"InstanceState,omitempty" name:"InstanceState"`
 
 	// List of tags associated with the instance.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Instance billing method after shutdown.
 	// Valid values: <br><li>KEEP_CHARGING: billing continues after shutdown <br><li>STOP_CHARGING: billing stops after shutdown <li>NOT_APPLICABLE: the instance is not shut down or stopping billing after shutdown is not applicable to the instance. <br>
@@ -2796,7 +2796,7 @@ type Instance struct {
 
 	// IPv6 address of the instance.
 	// Note: this field may return null, indicating that no valid value is obtained.
-	IPv6Addresses []*string `json:"IPv6Addresses,omitempty" name:"IPv6Addresses" list`
+	IPv6Addresses []*string `json:"IPv6Addresses,omitempty" name:"IPv6Addresses"`
 
 	// CAM role name.
 	// Note: this field may return null, indicating that no valid value is obtained.
@@ -2808,7 +2808,7 @@ type Instance struct {
 
 	// IP list of HPC cluster.
 	// Note: this field may return null, indicating that no valid value was found.
-	RdmaIpAddresses []*string `json:"RdmaIpAddresses,omitempty" name:"RdmaIpAddresses" list`
+	RdmaIpAddresses []*string `json:"RdmaIpAddresses,omitempty" name:"RdmaIpAddresses"`
 }
 
 type InstanceChargePrepaid struct {
@@ -2902,7 +2902,7 @@ type InstanceTypeQuotaItem struct {
 	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
 
 	// List of local disk specifications. If the parameter returns null, it means that local disks cannot be created.
-	LocalDiskTypeList []*LocalDiskType `json:"LocalDiskTypeList,omitempty" name:"LocalDiskTypeList" list`
+	LocalDiskTypeList []*LocalDiskType `json:"LocalDiskTypeList,omitempty" name:"LocalDiskTypeList"`
 
 	// Whether an instance model is available. Valid values: <br><li>SELL: available <br><li>SOLD_OUT: sold out
 	Status *string `json:"Status,omitempty" name:"Status"`
@@ -3069,7 +3069,7 @@ type KeyPair struct {
 	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
 
 	// `ID` list of instances associated with a key.
-	AssociatedInstanceIds []*string `json:"AssociatedInstanceIds,omitempty" name:"AssociatedInstanceIds" list`
+	AssociatedInstanceIds []*string `json:"AssociatedInstanceIds,omitempty" name:"AssociatedInstanceIds"`
 
 	// Creation time, which follows the `ISO8601` standard and uses `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
@@ -3101,7 +3101,7 @@ type LoginSettings struct {
 
 	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
 	// Note: this field may return null, indicating that no valid value is obtained.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
 	// Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
 	// Note: This field may return null, indicating that no valid value is found.
@@ -3162,7 +3162,7 @@ type ModifyHostsAttributeRequest struct {
 	*tchttp.BaseRequest
 
 	// CDH instance ID(s).
-	HostIds []*string `json:"HostIds,omitempty" name:"HostIds" list`
+	HostIds []*string `json:"HostIds,omitempty" name:"HostIds"`
 
 	// CDH instance name to be displayed. You can specify any name you like, but its length cannot exceed 60 characters.
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
@@ -3277,7 +3277,7 @@ type ModifyImageSharePermissionRequest struct {
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
 	// List of account IDs with which an image is shared. For the format of array-type parameters, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1). The account ID is different from the QQ number. You can find the account ID in [Account Information](https://console.cloud.tencent.com/developer). 
-	AccountIds []*string `json:"AccountIds,omitempty" name:"AccountIds" list`
+	AccountIds []*string `json:"AccountIds,omitempty" name:"AccountIds"`
 
 	// Operations. Valid values: `SHARE`, sharing an image; `CANCEL`, cancelling an image sharing. 
 	Permission *string `json:"Permission,omitempty" name:"Permission"`
@@ -3328,13 +3328,13 @@ type ModifyInstancesAttributeRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Instance name. You can specify any name you like, but its length cannot exceed 60 characters.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// ID list of security groups of the instance. The instance will be associated with the specified security groups and will be disassociated from the original security groups.
-	SecurityGroups []*string `json:"SecurityGroups,omitempty" name:"SecurityGroups" list`
+	SecurityGroups []*string `json:"SecurityGroups,omitempty" name:"SecurityGroups"`
 }
 
 func (r *ModifyInstancesAttributeRequest) ToJsonString() string {
@@ -3382,7 +3382,7 @@ type ModifyInstancesProjectRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance IDs. To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. You can operate up to 100 instances in each request.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Project ID. You can create a project by using the [AddProject](https://intl.cloud.tencent.com/doc/api/403/4398?from_cn_redirect=1) API and obtain its ID from the response parameter `projectId` of the [`DescribeProject`](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. Subsequently, the project ID can be used to filter results when you query instances by calling the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
@@ -3432,7 +3432,7 @@ type ModifyInstancesVpcAttributeRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// VPC configurations. You can use this parameter to specify the VPC ID, subnet ID, VPC IP, etc. If the specified VPC ID and subnet ID (the subnet must be in the same availability zone as the instance) are different from the VPC where the specified instance resides, the instance will be migrated to a subnet of the specified VPC. You can use `PrivateIpAddresses` to specify the VPC subnet IP. If you want to specify the subnet IP, you will need to specify a subnet IP for each of the specified instances, and each `InstanceIds` will match a `PrivateIpAddresses`. If `PrivateIpAddresses` is not specified, the VPC subnet IP will be assigned randomly.
 	VirtualPrivateCloud *VirtualPrivateCloud `json:"VirtualPrivateCloud,omitempty" name:"VirtualPrivateCloud"`
@@ -3561,10 +3561,10 @@ type OsVersion struct {
 	OsName *string `json:"OsName,omitempty" name:"OsName"`
 
 	// Supported operating system versions
-	OsVersions []*string `json:"OsVersions,omitempty" name:"OsVersions" list`
+	OsVersions []*string `json:"OsVersions,omitempty" name:"OsVersions"`
 
 	// Supported operating system architecture
-	Architecture []*string `json:"Architecture,omitempty" name:"Architecture" list`
+	Architecture []*string `json:"Architecture,omitempty" name:"Architecture"`
 }
 
 type Placement struct {
@@ -3576,10 +3576,10 @@ type Placement struct {
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
-	HostIds []*string `json:"HostIds,omitempty" name:"HostIds" list`
+	HostIds []*string `json:"HostIds,omitempty" name:"HostIds"`
 
 	// Master host IP used to create the CVM
-	HostIps []*string `json:"HostIps,omitempty" name:"HostIps" list`
+	HostIps []*string `json:"HostIps,omitempty" name:"HostIps"`
 
 	// The ID of the CDH to which the instance belongs, only used as an output parameter.
 	HostId *string `json:"HostId,omitempty" name:"HostId"`
@@ -3663,7 +3663,7 @@ type RebootInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance IDs. To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. You can operate up to 100 instances in each request.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Whether to force restart an instance after a normal restart fails. Valid values: <br><li>TRUE: force restart an instance after a normal restart fails <br><li>FALSE: do not force restart an instance after a normal restart fails <br><br>Default value: FALSE.
 	ForceReboot *bool `json:"ForceReboot,omitempty" name:"ForceReboot"`
@@ -3737,7 +3737,7 @@ type ReservedInstanceConfigInfoItem struct {
 	Order *int64 `json:"Order,omitempty" name:"Order"`
 
 	// List of instance families.
-	InstanceFamilies []*ReservedInstanceFamilyItem `json:"InstanceFamilies,omitempty" name:"InstanceFamilies" list`
+	InstanceFamilies []*ReservedInstanceFamilyItem `json:"InstanceFamilies,omitempty" name:"InstanceFamilies"`
 }
 
 type ReservedInstanceFamilyItem struct {
@@ -3749,7 +3749,7 @@ type ReservedInstanceFamilyItem struct {
 	Order *int64 `json:"Order,omitempty" name:"Order"`
 
 	// List of instance types.
-	InstanceTypes []*ReservedInstanceTypeItem `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+	InstanceTypes []*ReservedInstanceTypeItem `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
 }
 
 type ReservedInstancePrice struct {
@@ -3835,7 +3835,7 @@ type ReservedInstanceTypeItem struct {
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
 	// Price information about the reserved instance.
-	Prices []*ReservedInstancePriceItem `json:"Prices,omitempty" name:"Prices" list`
+	Prices []*ReservedInstancePriceItem `json:"Prices,omitempty" name:"Prices"`
 }
 
 type ReservedInstances struct {
@@ -3995,7 +3995,7 @@ type ResetInstancesInternetMaxBandwidthRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100. When changing the bandwidth of instances with `BANDWIDTH_PREPAID` or `BANDWIDTH_POSTPAID_BY_HOUR` as the network billing method, you can only specify one instance at a time.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Configuration of public network egress bandwidth. The maximum bandwidth varies among different models. For more information, see the documentation on bandwidth limits. Currently only the `InternetMaxBandwidthOut` parameter is supported.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
@@ -4053,7 +4053,7 @@ type ResetInstancesPasswordRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Login password of the instance. The rule of password complexity varies with operating systems:
 	// For a Linux instance, the password must be 8 to 30 characters in length; password with more than 12 characters is recommended. It cannot begin with "/", and must contain at least three types of the following:<br><li>Lowercase letters: [a-z]<br><li>Uppercase letters: [A-Z]<br><li>Numbers: 0-9<br><li>Special characters: ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/
@@ -4113,7 +4113,7 @@ type ResetInstancesTypeRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). To obtain the instance IDs, you can call the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API and find the value `InstanceId` in the response. The maximum number of instances in each request is 1.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Instance model. Different resource specifications are specified for different models. For specific values, call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to get the latest specification list or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
@@ -4170,7 +4170,7 @@ type ResizeInstanceDisksRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Configuration of data disks to be expanded. Currently you can only use the API to expand non-elastic data disks whose [disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#block_device) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`. You can use [`DescribeDisks`](https://intl.cloud.tencent.com/document/api/362/16315?from_cn_redirect=1) to check whether a disk is elastic. If the `Portable` field in the response is `false`, it means that the disk is not elastic. Data disk capacity unit: GB; minimum increment: 10 GB. For more information on selecting the data disk type, see the [product overview on cloud disks](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). Available data disk types are subject to the instance type (`InstanceType`). In addition, the maximum capacity allowed for expansion varies by data disk type.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// Whether to force shut down a running instances. It is recommended to manually shut down a running instance before resetting the user password. Valid values: <br><li>TRUE: force shut down an instance after a normal shutdown fails. <br><li>FALSE: do not force shut down an instance after a normal shutdown fails. <br><br>Default value: FALSE. <br><br>A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force shut down a CVM when it cannot be shut down normally.
 	ForceStop *bool `json:"ForceStop,omitempty" name:"ForceStop"`
@@ -4240,7 +4240,7 @@ type RunInstancesRequest struct {
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
 	// The configuration information of instance data disks. If this parameter is not specified, no data disk will be purchased by default. When purchasing, you can specify 21 data disks, which can contain at most 1 LOCAL_BASIC data disk or LOCAL_SSD data disk, and at most 20 CLOUD_BASIC data disks, CLOUD_PREMIUM data disks, or CLOUD_SSD data disks.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// Configuration information of VPC. This parameter is used to specify VPC ID and subnet ID, etc. If this parameter is not specified, the classic network is used by default. If a VPC IP is specified in this parameter, it indicates the primary ENI IP of each instance. The value of parameter InstanceCount must be same as the number of VPC IPs, which cannot be greater than 20.
 	VirtualPrivateCloud *VirtualPrivateCloud `json:"VirtualPrivateCloud,omitempty" name:"VirtualPrivateCloud"`
@@ -4258,7 +4258,7 @@ type RunInstancesRequest struct {
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
 
 	// Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response. If this parameter is not specified, the instance will be associated with default security groups.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Specifies whether to enable services such as Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. However, for custom images and images from the marketplace, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
@@ -4273,10 +4273,10 @@ type RunInstancesRequest struct {
 	ActionTimer *ActionTimer `json:"ActionTimer,omitempty" name:"ActionTimer"`
 
 	// Placement group ID. You can only specify one.
-	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds" list`
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
 
 	// The tag description list. This parameter is used to bind a tag to a resource instance. A tag can only be bound to CVM instances.
-	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification" list`
+	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 
 	// The market options of the instance.
 	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitempty" name:"InstanceMarketOptions"`
@@ -4345,7 +4345,7 @@ type RunInstancesResponse struct {
 	Response *struct {
 
 		// If you use this API to create instance(s), this parameter will be returned, representing one or more instance `ID`s. Retuning the instance `ID` list does not necessarily mean that the instance(s) were created successfully. To check whether the instance(s) were created successfully, you can call [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and check the states of the instances in `InstancesSet` in the response. If the state of an instance changes from "pending" to "running", it means that the instance has been created successfully.
-		InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet" list`
+		InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4411,7 +4411,7 @@ type StartInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *StartInstancesRequest) ToJsonString() string {
@@ -4457,7 +4457,7 @@ type StopInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Whether to force shut down an instance after a normal shutdown fails. Valid values: <br><li>TRUE: force shut down an instance after a normal shutdown fails <br><li>FALSE: do not force shut down an instance after a normal shutdown fails <br><br>Default value: FALSE.
 	ForceStop *bool `json:"ForceStop,omitempty" name:"ForceStop"`
@@ -4532,10 +4532,10 @@ type SyncImagesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of image IDs. You can obtain the image IDs in two ways: <br><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response. <br><li>Look for the information in the [Image Console](https://console.cloud.tencent.com/cvm/image). <br>The specified images must meet the following requirements: <br><li>The images must be in the `NORMAL` state. <br><li>The image size must be smaller than 50 GB. <br>For more information on image states, see [here](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#image_state).
-	ImageIds []*string `json:"ImageIds,omitempty" name:"ImageIds" list`
+	ImageIds []*string `json:"ImageIds,omitempty" name:"ImageIds"`
 
 	// List of destination regions for synchronization. A destination region must meet the following requirements: <br><li>It cannot be the source region. <br><li>It must be valid. <br><li>Currently some regions do not support image synchronization. <br>For specific regions, see [Region](https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1).
-	DestinationRegions []*string `json:"DestinationRegions,omitempty" name:"DestinationRegions" list`
+	DestinationRegions []*string `json:"DestinationRegions,omitempty" name:"DestinationRegions"`
 }
 
 func (r *SyncImagesRequest) ToJsonString() string {
@@ -4608,14 +4608,14 @@ type TagSpecification struct {
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
 	// List of tags
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type TerminateInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *TerminateInstancesRequest) ToJsonString() string {
@@ -4669,7 +4669,7 @@ type VirtualPrivateCloud struct {
 	AsVpcGateway *bool `json:"AsVpcGateway,omitempty" name:"AsVpcGateway"`
 
 	// Array of VPC subnet IPs. You can use this parameter when creating instances or modifying VPC attributes of instances. Currently you can specify multiple IPs in one subnet only when creating multiple instances at the same time.
-	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 
 	// Number of IPv6 addresses randomly generated for the ENI.
 	Ipv6AddressCount *uint64 `json:"Ipv6AddressCount,omitempty" name:"Ipv6AddressCount"`

@@ -442,10 +442,10 @@ type CreateUsualLoginPlacesRequest struct {
 	*tchttp.BaseRequest
 
 	// CWP agent `UUID` array.
-	Uuids []*string `json:"Uuids,omitempty" name:"Uuids" list`
+	Uuids []*string `json:"Uuids,omitempty" name:"Uuids"`
 
 	// Login region information array.
-	Places []*Place `json:"Places,omitempty" name:"Places" list`
+	Places []*Place `json:"Places,omitempty" name:"Places"`
 }
 
 func (r *CreateUsualLoginPlacesRequest) ToJsonString() string {
@@ -492,7 +492,7 @@ type DeleteBruteAttacksRequest struct {
 	*tchttp.BaseRequest
 
 	// Brute force attack event ID array.
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *DeleteBruteAttacksRequest) ToJsonString() string {
@@ -538,7 +538,7 @@ type DeleteLoginWhiteListRequest struct {
 	*tchttp.BaseRequest
 
 	// Whitelist ID
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *DeleteLoginWhiteListRequest) ToJsonString() string {
@@ -676,7 +676,7 @@ type DeleteMaliciousRequestsRequest struct {
 	*tchttp.BaseRequest
 
 	// Malicious request record ID array. Maximum value: 100 entries.
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *DeleteMaliciousRequestsRequest) ToJsonString() string {
@@ -722,7 +722,7 @@ type DeleteMalwaresRequest struct {
 	*tchttp.BaseRequest
 
 	// Trojan record ID array
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *DeleteMalwaresRequest) ToJsonString() string {
@@ -768,7 +768,7 @@ type DeleteNonlocalLoginPlacesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unusual login location event ID array.
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *DeleteNonlocalLoginPlacesRequest) ToJsonString() string {
@@ -817,7 +817,7 @@ type DeleteUsualLoginPlacesRequest struct {
 	Uuid *string `json:"Uuid,omitempty" name:"Uuid"`
 
 	// Added usual login city ID array
-	CityIds []*uint64 `json:"CityIds,omitempty" name:"CityIds" list`
+	CityIds []*uint64 `json:"CityIds,omitempty" name:"CityIds"`
 }
 
 func (r *DeleteUsualLoginPlacesRequest) ToJsonString() string {
@@ -871,7 +871,7 @@ type DescribeAccountStatisticsRequest struct {
 
 	// Filter.
 	// <li>Username - String - Required: No - Account username</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeAccountStatisticsRequest) ToJsonString() string {
@@ -903,7 +903,7 @@ type DescribeAccountStatisticsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Account statistics list.
-		AccountStatistics []*AccountStatistics `json:"AccountStatistics,omitempty" name:"AccountStatistics" list`
+		AccountStatistics []*AccountStatistics `json:"AccountStatistics,omitempty" name:"AccountStatistics"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -940,7 +940,7 @@ type DescribeAccountsRequest struct {
 	// <li>Username - String - Required: No - Account name</li>
 	// <li>Privilege - String - Required: No - Account name (ORDINARY: ordinary account, SUPPER: super admin account)</li>
 	// <li>MachineIp - String - Required: No - Private IP of server</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeAccountsRequest) ToJsonString() string {
@@ -974,7 +974,7 @@ type DescribeAccountsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Account data list.
-		Accounts []*Account `json:"Accounts,omitempty" name:"Accounts" list`
+		Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1012,7 +1012,7 @@ type DescribeAgentVulsRequest struct {
 
 	// Filter.
 	// <li>Status - String - Required: No - Filter by status (UN_OPERATED: to be processed, FIXED: fixed)
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeAgentVulsRequest) ToJsonString() string {
@@ -1046,7 +1046,7 @@ type DescribeAgentVulsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Server vulnerability information
-		AgentVuls []*AgentVul `json:"AgentVuls,omitempty" name:"AgentVuls" list`
+		AgentVuls []*AgentVul `json:"AgentVuls,omitempty" name:"AgentVuls"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1138,7 +1138,7 @@ type DescribeBruteAttacksRequest struct {
 	// Filter.
 	// <li>Keywords - String - Required: No - Query keywords</li>
 	// <li>Status - String - Required: No - Query status (FAILED: brute force attack failed, SUCCESS: brute force attack succeeded)</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of results to be returned. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -1174,7 +1174,7 @@ type DescribeBruteAttacksResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Brute force attack event list
-		BruteAttacks []*BruteAttack `json:"BruteAttacks,omitempty" name:"BruteAttacks" list`
+		BruteAttacks []*BruteAttack `json:"BruteAttacks,omitempty" name:"BruteAttacks"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1266,7 +1266,7 @@ type DescribeComponentStatisticsRequest struct {
 
 	// Filter.
 	// ComponentName - String - Required: No - Component name
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeComponentStatisticsRequest) ToJsonString() string {
@@ -1298,7 +1298,7 @@ type DescribeComponentStatisticsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Component statistics list data array.
-		ComponentStatistics []*ComponentStatistics `json:"ComponentStatistics,omitempty" name:"ComponentStatistics" list`
+		ComponentStatistics []*ComponentStatistics `json:"ComponentStatistics,omitempty" name:"ComponentStatistics"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1334,7 +1334,7 @@ type DescribeComponentsRequest struct {
 	// Filter.
 	// <li>ComponentVersion - String - Required: No - Component version number</li>
 	// <li>MachineIp - String - Required: No - Private IP of server</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeComponentsRequest) ToJsonString() string {
@@ -1368,7 +1368,7 @@ type DescribeComponentsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Component list data.
-		Components []*Component `json:"Components,omitempty" name:"Components" list`
+		Components []*Component `json:"Components,omitempty" name:"Components"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1400,7 +1400,7 @@ type DescribeHistoryAccountsRequest struct {
 
 	// Filter.
 	// <li>Username - String - Required: No - Account name</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeHistoryAccountsRequest) ToJsonString() string {
@@ -1433,7 +1433,7 @@ type DescribeHistoryAccountsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Account change history data array.
-		HistoryAccounts []*HistoryAccount `json:"HistoryAccounts,omitempty" name:"HistoryAccounts" list`
+		HistoryAccounts []*HistoryAccount `json:"HistoryAccounts,omitempty" name:"HistoryAccounts"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1465,7 +1465,7 @@ type DescribeImpactedHostsRequest struct {
 
 	// Filter.
 	// <li>Status - String - Required: No - Filter by status (UN_OPERATED: to be processed, FIXED: fixed)</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeImpactedHostsRequest) ToJsonString() string {
@@ -1498,7 +1498,7 @@ type DescribeImpactedHostsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Affected server list array
-		ImpactedHosts []*ImpactedHost `json:"ImpactedHosts,omitempty" name:"ImpactedHosts" list`
+		ImpactedHosts []*ImpactedHost `json:"ImpactedHosts,omitempty" name:"ImpactedHosts"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1527,7 +1527,7 @@ type DescribeLoginWhiteListRequest struct {
 
 	// Filter.
 	// <li>Keywords - String - Required: No - Query keywords</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeLoginWhiteListRequest) ToJsonString() string {
@@ -1559,7 +1559,7 @@ type DescribeLoginWhiteListResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Login allowlist array
-		LoginWhiteLists []*LoginWhiteLists `json:"LoginWhiteLists,omitempty" name:"LoginWhiteLists" list`
+		LoginWhiteLists []*LoginWhiteLists `json:"LoginWhiteLists,omitempty" name:"LoginWhiteLists"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1700,7 +1700,7 @@ type DescribeMachinesRequest struct {
 	// <li>Status - String - Required: no - CWP client status (valid values: OFFLINE, ONLINE, UNINSTALLED)</li>
 	// <li>Version - String - Required: no - Current CWP version (valid values: PRO_VERSION, BASIC_VERSION)</li>
 	// Each filter can have only one value but does not support "OR" queries with multiple values
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeMachinesRequest) ToJsonString() string {
@@ -1731,7 +1731,7 @@ type DescribeMachinesResponse struct {
 	Response *struct {
 
 		// Server list
-		Machines []*Machine `json:"Machines,omitempty" name:"Machines" list`
+		Machines []*Machine `json:"Machines,omitempty" name:"Machines"`
 
 		// Number of servers
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1765,7 +1765,7 @@ type DescribeMaliciousRequestsRequest struct {
 	// <li>Status - String - Required: No - Filter by status (UN_OPERATED: to be processed, TRUSTED: trusted, UN_TRUSTED: untrusted)</li>
 	// <li>Domain - String - Required: No - Malicious request domain name</li>
 	// <li>MachineIp - String - Required: No - Private IP of server</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// CWP agent `UUID`.
 	Uuid *string `json:"Uuid,omitempty" name:"Uuid"`
@@ -1801,7 +1801,7 @@ type DescribeMaliciousRequestsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Malicious request record array.
-		MaliciousRequests []*MaliciousRequest `json:"MaliciousRequests,omitempty" name:"MaliciousRequests" list`
+		MaliciousRequests []*MaliciousRequest `json:"MaliciousRequests,omitempty" name:"MaliciousRequests"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1835,7 +1835,7 @@ type DescribeMalwaresRequest struct {
 	// <li>Keywords - String - Required: No - Query keywords</li>
 	// <li>Status - String - Required: No - Trojan status (UN_OPERATED: not processed, SEGREGATED: isolated, TRUSTED: trusted)</li>
 	// Each filter supports only one value. Query with multiple values in "OR" relationship is not supported for the time being.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeMalwaresRequest) ToJsonString() string {
@@ -1868,7 +1868,7 @@ type DescribeMalwaresResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Malware array.
-		Malwares []*Malware `json:"Malwares,omitempty" name:"Malwares" list`
+		Malwares []*Malware `json:"Malwares,omitempty" name:"Malwares"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1901,7 +1901,7 @@ type DescribeNonlocalLoginPlacesRequest struct {
 	// Filter.
 	// <li>Keywords - String - Required: No - Query keywords</li>
 	// <li>Status - String - Required: No - Login status (NON_LOCAL_LOGIN: unusual login location, NORMAL_LOGIN: intended login)</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeNonlocalLoginPlacesRequest) ToJsonString() string {
@@ -1934,7 +1934,7 @@ type DescribeNonlocalLoginPlacesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Unusual login location information array.
-		NonLocalLoginPlaces []*NonLocalLoginPlace `json:"NonLocalLoginPlaces,omitempty" name:"NonLocalLoginPlaces" list`
+		NonLocalLoginPlaces []*NonLocalLoginPlace `json:"NonLocalLoginPlaces,omitempty" name:"NonLocalLoginPlaces"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1963,7 +1963,7 @@ type DescribeOpenPortStatisticsRequest struct {
 
 	// Filter.
 	// <li>Port - Uint64 - Required: No - Port number</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeOpenPortStatisticsRequest) ToJsonString() string {
@@ -1995,7 +1995,7 @@ type DescribeOpenPortStatisticsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Port statistics list
-		OpenPortStatistics []*OpenPortStatistics `json:"OpenPortStatistics,omitempty" name:"OpenPortStatistics" list`
+		OpenPortStatistics []*OpenPortStatistics `json:"OpenPortStatistics,omitempty" name:"OpenPortStatistics"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2085,7 +2085,7 @@ type DescribeOpenPortsRequest struct {
 	// <li>Port - Uint64 - Required: No - Port number</li>
 	// <li>ProcessName - String - Required: No - Process name</li>
 	// <li>MachineIp - String - Required: No - Private IP of server</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeOpenPortsRequest) ToJsonString() string {
@@ -2119,7 +2119,7 @@ type DescribeOpenPortsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Port list.
-		OpenPorts []*OpenPort `json:"OpenPorts,omitempty" name:"OpenPorts" list`
+		OpenPorts []*OpenPort `json:"OpenPorts,omitempty" name:"OpenPorts"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2262,7 +2262,7 @@ type DescribeProcessStatisticsRequest struct {
 
 	// Filter.
 	// <li>ProcessName - String - Required: No - Process name</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeProcessStatisticsRequest) ToJsonString() string {
@@ -2294,7 +2294,7 @@ type DescribeProcessStatisticsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Process statistics list array.
-		ProcessStatistics []*ProcessStatistics `json:"ProcessStatistics,omitempty" name:"ProcessStatistics" list`
+		ProcessStatistics []*ProcessStatistics `json:"ProcessStatistics,omitempty" name:"ProcessStatistics"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2383,7 +2383,7 @@ type DescribeProcessesRequest struct {
 	// Filter.
 	// <li>ProcessName - String - Required: No - Process name</li>
 	// <li>MachineIp - String - Required: No - Private IP of server</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeProcessesRequest) ToJsonString() string {
@@ -2417,7 +2417,7 @@ type DescribeProcessesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Process list data array.
-		Processes []*Process `json:"Processes,omitempty" name:"Processes" list`
+		Processes []*Process `json:"Processes,omitempty" name:"Processes"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2470,7 +2470,7 @@ type DescribeSecurityDynamicsResponse struct {
 	Response *struct {
 
 		// Security event message array.
-		SecurityDynamics []*SecurityDynamic `json:"SecurityDynamics,omitempty" name:"SecurityDynamics" list`
+		SecurityDynamics []*SecurityDynamic `json:"SecurityDynamics,omitempty" name:"SecurityDynamics"`
 
 		// Total number of records.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2526,34 +2526,34 @@ type DescribeSecurityTrendsResponse struct {
 	Response *struct {
 
 		// Trojan event statistics array.
-		Malwares []*SecurityTrend `json:"Malwares,omitempty" name:"Malwares" list`
+		Malwares []*SecurityTrend `json:"Malwares,omitempty" name:"Malwares"`
 
 		// Unusual login location event statistics array.
-		NonLocalLoginPlaces []*SecurityTrend `json:"NonLocalLoginPlaces,omitempty" name:"NonLocalLoginPlaces" list`
+		NonLocalLoginPlaces []*SecurityTrend `json:"NonLocalLoginPlaces,omitempty" name:"NonLocalLoginPlaces"`
 
 		// Brute force attack event statistics array.
-		BruteAttacks []*SecurityTrend `json:"BruteAttacks,omitempty" name:"BruteAttacks" list`
+		BruteAttacks []*SecurityTrend `json:"BruteAttacks,omitempty" name:"BruteAttacks"`
 
 		// Vulnerability statistics array.
-		Vuls []*SecurityTrend `json:"Vuls,omitempty" name:"Vuls" list`
+		Vuls []*SecurityTrend `json:"Vuls,omitempty" name:"Vuls"`
 
 		// Baseline statistics array.
-		BaseLines []*SecurityTrend `json:"BaseLines,omitempty" name:"BaseLines" list`
+		BaseLines []*SecurityTrend `json:"BaseLines,omitempty" name:"BaseLines"`
 
 		// Statistics array of malicious requests.
-		MaliciousRequests []*SecurityTrend `json:"MaliciousRequests,omitempty" name:"MaliciousRequests" list`
+		MaliciousRequests []*SecurityTrend `json:"MaliciousRequests,omitempty" name:"MaliciousRequests"`
 
 		// Statistics array of high-risk commands.
-		HighRiskBashs []*SecurityTrend `json:"HighRiskBashs,omitempty" name:"HighRiskBashs" list`
+		HighRiskBashs []*SecurityTrend `json:"HighRiskBashs,omitempty" name:"HighRiskBashs"`
 
 		// Statistics array of reverse shells.
-		ReverseShells []*SecurityTrend `json:"ReverseShells,omitempty" name:"ReverseShells" list`
+		ReverseShells []*SecurityTrend `json:"ReverseShells,omitempty" name:"ReverseShells"`
 
 		// Statistics array of local privilege escalations.
-		PrivilegeEscalations []*SecurityTrend `json:"PrivilegeEscalations,omitempty" name:"PrivilegeEscalations" list`
+		PrivilegeEscalations []*SecurityTrend `json:"PrivilegeEscalations,omitempty" name:"PrivilegeEscalations"`
 
 		// Statistics array of network attacks.
-		CyberAttacks []*SecurityTrend `json:"CyberAttacks,omitempty" name:"CyberAttacks" list`
+		CyberAttacks []*SecurityTrend `json:"CyberAttacks,omitempty" name:"CyberAttacks"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2602,7 +2602,7 @@ type DescribeTagMachinesResponse struct {
 	Response *struct {
 
 		// List data
-		List []*TagMachine `json:"List,omitempty" name:"List" list`
+		List []*TagMachine `json:"List,omitempty" name:"List"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2657,7 +2657,7 @@ type DescribeTagsResponse struct {
 	Response *struct {
 
 		// List information
-		List []*Tag `json:"List,omitempty" name:"List" list`
+		List []*Tag `json:"List,omitempty" name:"List"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2706,7 +2706,7 @@ type DescribeUsualLoginPlacesResponse struct {
 	Response *struct {
 
 		// Usual login location array
-		UsualLoginPlaces []*UsualPlace `json:"UsualLoginPlaces,omitempty" name:"UsualLoginPlaces" list`
+		UsualLoginPlaces []*UsualPlace `json:"UsualLoginPlaces,omitempty" name:"UsualLoginPlaces"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2870,7 +2870,7 @@ type DescribeVulsRequest struct {
 	// <li>Status - String - Required: No - Filter by status (UN_OPERATED: to be processed, FIXED: fixed)
 	// 
 	// Only one value is allowed for the `Status` filter, and "OR" logic is not supported.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeVulsRequest) ToJsonString() string {
@@ -2903,7 +2903,7 @@ type DescribeVulsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Vulnerability list array.
-		Vuls []*Vul `json:"Vuls,omitempty" name:"Vuls" list`
+		Vuls []*Vul `json:"Vuls,omitempty" name:"Vuls"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2960,7 +2960,7 @@ type DescribeWeeklyReportBruteAttacksResponse struct {
 	Response *struct {
 
 		// Brute force attack array in weekly CWP Pro report.
-		WeeklyReportBruteAttacks []*WeeklyReportBruteAttack `json:"WeeklyReportBruteAttacks,omitempty" name:"WeeklyReportBruteAttacks" list`
+		WeeklyReportBruteAttacks []*WeeklyReportBruteAttack `json:"WeeklyReportBruteAttacks,omitempty" name:"WeeklyReportBruteAttacks"`
 
 		// Total number of records.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -3108,7 +3108,7 @@ type DescribeWeeklyReportMalwaresResponse struct {
 	Response *struct {
 
 		// Trojan data in weekly CWP Pro report.
-		WeeklyReportMalwares []*WeeklyReportMalware `json:"WeeklyReportMalwares,omitempty" name:"WeeklyReportMalwares" list`
+		WeeklyReportMalwares []*WeeklyReportMalware `json:"WeeklyReportMalwares,omitempty" name:"WeeklyReportMalwares"`
 
 		// Total number of records.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -3168,7 +3168,7 @@ type DescribeWeeklyReportNonlocalLoginPlacesResponse struct {
 	Response *struct {
 
 		// Unusual login location data in weekly CWP Pro report
-		WeeklyReportNonlocalLoginPlaces []*WeeklyReportNonlocalLoginPlace `json:"WeeklyReportNonlocalLoginPlaces,omitempty" name:"WeeklyReportNonlocalLoginPlaces" list`
+		WeeklyReportNonlocalLoginPlaces []*WeeklyReportNonlocalLoginPlace `json:"WeeklyReportNonlocalLoginPlaces,omitempty" name:"WeeklyReportNonlocalLoginPlaces"`
 
 		// Total number of records.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -3228,7 +3228,7 @@ type DescribeWeeklyReportVulsResponse struct {
 	Response *struct {
 
 		// Vulnerability data array in weekly CWP Pro report.
-		WeeklyReportVuls []*WeeklyReportVul `json:"WeeklyReportVuls,omitempty" name:"WeeklyReportVuls" list`
+		WeeklyReportVuls []*WeeklyReportVul `json:"WeeklyReportVuls,omitempty" name:"WeeklyReportVuls"`
 
 		// Total number of records.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -3284,7 +3284,7 @@ type DescribeWeeklyReportsResponse struct {
 	Response *struct {
 
 		// Weekly CWP Pro report list array.
-		WeeklyReports []*WeeklyReport `json:"WeeklyReports,omitempty" name:"WeeklyReports" list`
+		WeeklyReports []*WeeklyReport `json:"WeeklyReports,omitempty" name:"WeeklyReports"`
 
 		// Total number of records.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -3315,7 +3315,7 @@ type EditTagsRequest struct {
 	Id *uint64 `json:"Id,omitempty" name:"Id"`
 
 	// CVM instance ID
-	Quuids []*string `json:"Quuids,omitempty" name:"Quuids" list`
+	Quuids []*string `json:"Quuids,omitempty" name:"Quuids"`
 }
 
 func (r *EditTagsRequest) ToJsonString() string {
@@ -3548,7 +3548,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// One or more filter values.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type HistoryAccount struct {
@@ -3582,7 +3582,7 @@ type IgnoreImpactedHostsRequest struct {
 	*tchttp.BaseRequest
 
 	// Vulnerability ID array.
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *IgnoreImpactedHostsRequest) ToJsonString() string {
@@ -3666,7 +3666,7 @@ type LoginWhiteLists struct {
 	Uuid *string `json:"Uuid,omitempty" name:"Uuid"`
 
 	// Whitelisted location
-	Places []*Place `json:"Places,omitempty" name:"Places" list`
+	Places []*Place `json:"Places,omitempty" name:"Places"`
 
 	// Whitelisted users (separated by commas)
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
@@ -3699,7 +3699,7 @@ type LoginWhiteLists struct {
 type LoginWhiteListsRule struct {
 
 	// Whitelisted location
-	Places []*Place `json:"Places,omitempty" name:"Places" list`
+	Places []*Place `json:"Places,omitempty" name:"Places"`
 
 	// Whitelisted IPs (separated by commas). This parameter can be an IP range.
 	SrcIp *string `json:"SrcIp,omitempty" name:"SrcIp"`
@@ -3765,7 +3765,7 @@ type Machine struct {
 	MalwareNum *int64 `json:"MalwareNum,omitempty" name:"MalwareNum"`
 
 	// Tag information
-	Tag []*MachineTag `json:"Tag,omitempty" name:"Tag" list`
+	Tag []*MachineTag `json:"Tag,omitempty" name:"Tag"`
 
 	// Number of baseline risks.
 	BaselineNum *int64 `json:"BaselineNum,omitempty" name:"BaselineNum"`
@@ -3886,7 +3886,7 @@ type MisAlarmNonlocalLoginPlacesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unusual login location event ID array.
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *MisAlarmNonlocalLoginPlacesRequest) ToJsonString() string {
@@ -4222,7 +4222,7 @@ type OpenProVersionRequest struct {
 
 	// Server `Uuid` array.
 	// `InstanceId` for BM or `Uuid` for CVM
-	Quuids []*string `json:"Quuids,omitempty" name:"Quuids" list`
+	Quuids []*string `json:"Quuids,omitempty" name:"Quuids"`
 
 	// Event ID.
 	ActivityId *uint64 `json:"ActivityId,omitempty" name:"ActivityId"`
@@ -4335,7 +4335,7 @@ type RecoverMalwaresRequest struct {
 	*tchttp.BaseRequest
 
 	// Trojan ID array. Up to 200 IDs can be deleted at a time
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *RecoverMalwaresRequest) ToJsonString() string {
@@ -4362,10 +4362,10 @@ type RecoverMalwaresResponse struct {
 	Response *struct {
 
 		// Array of IDs of successfully recovered trojans.
-		SuccessIds []*uint64 `json:"SuccessIds,omitempty" name:"SuccessIds" list`
+		SuccessIds []*uint64 `json:"SuccessIds,omitempty" name:"SuccessIds"`
 
 		// Array of IDs of trojans failed to be recovered.
-		FailedIds []*uint64 `json:"FailedIds,omitempty" name:"FailedIds" list`
+		FailedIds []*uint64 `json:"FailedIds,omitempty" name:"FailedIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4484,7 +4484,7 @@ type SeparateMalwaresRequest struct {
 	*tchttp.BaseRequest
 
 	// Trojan event ID array.
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *SeparateMalwaresRequest) ToJsonString() string {
@@ -4511,10 +4511,10 @@ type SeparateMalwaresResponse struct {
 	Response *struct {
 
 		// Array of IDs of successfully isolated trojans.
-		SuccessIds []*uint64 `json:"SuccessIds,omitempty" name:"SuccessIds" list`
+		SuccessIds []*uint64 `json:"SuccessIds,omitempty" name:"SuccessIds"`
 
 		// Array of IDs of trojans failed to be isolated.
-		FailedIds []*uint64 `json:"FailedIds,omitempty" name:"FailedIds" list`
+		FailedIds []*uint64 `json:"FailedIds,omitempty" name:"FailedIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4618,7 +4618,7 @@ type TrustMalwaresRequest struct {
 	*tchttp.BaseRequest
 
 	// Trojan ID array.
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *TrustMalwaresRequest) ToJsonString() string {
@@ -4710,7 +4710,7 @@ type UntrustMalwaresRequest struct {
 	*tchttp.BaseRequest
 
 	// Trojan event ID array. Up to 200 IDs can be processed at a time.
-	Ids []*uint64 `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*uint64 `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *UntrustMalwaresRequest) ToJsonString() string {

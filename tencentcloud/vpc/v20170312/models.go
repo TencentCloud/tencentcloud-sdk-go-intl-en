@@ -28,7 +28,7 @@ type AcceptAttachCcnInstancesRequest struct {
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// List of associated instances.
-	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances" list`
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
 }
 
 func (r *AcceptAttachCcnInstancesRequest) ToJsonString() string {
@@ -77,14 +77,14 @@ type AccountAttribute struct {
 	AttributeName *string `json:"AttributeName,omitempty" name:"AttributeName"`
 
 	// Attribute values
-	AttributeValues []*string `json:"AttributeValues,omitempty" name:"AttributeValues" list`
+	AttributeValues []*string `json:"AttributeValues,omitempty" name:"AttributeValues"`
 }
 
 type AddBandwidthPackageResourcesRequest struct {
 	*tchttp.BaseRequest
 
 	// The unique ID of the source, such as 'eip-xxxx' and 'lb-xxxx'. EIP and LB resources are currently supported.
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
 	// The unique ID of the bandwidth package, such as 'bwp-xxxx'.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
@@ -219,7 +219,7 @@ type AddressTemplate struct {
 	AddressTemplateId *string `json:"AddressTemplateId,omitempty" name:"AddressTemplateId"`
 
 	// IP address information.
-	AddressSet []*string `json:"AddressSet,omitempty" name:"AddressSet" list`
+	AddressSet []*string `json:"AddressSet,omitempty" name:"AddressSet"`
 
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
@@ -234,13 +234,13 @@ type AddressTemplateGroup struct {
 	AddressTemplateGroupId *string `json:"AddressTemplateGroupId,omitempty" name:"AddressTemplateGroupId"`
 
 	// IP address template ID.
-	AddressTemplateIdSet []*string `json:"AddressTemplateIdSet,omitempty" name:"AddressTemplateIdSet" list`
+	AddressTemplateIdSet []*string `json:"AddressTemplateIdSet,omitempty" name:"AddressTemplateIdSet"`
 
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// IP address template instance
-	AddressTemplateSet []*AddressTemplateItem `json:"AddressTemplateSet,omitempty" name:"AddressTemplateSet" list`
+	AddressTemplateSet []*AddressTemplateItem `json:"AddressTemplateSet,omitempty" name:"AddressTemplateSet"`
 }
 
 type AddressTemplateItem struct {
@@ -317,7 +317,7 @@ type AllocateAddressesRequest struct {
 	ApplicableForCLB *bool `json:"ApplicableForCLB,omitempty" name:"ApplicableForCLB"`
 
 	// List of tags to be bound.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// The unique ID of a BGP bandwidth package. If you configure this parameter and set InternetChargeType as BANDWIDTH_PACKAGE, the new EIP is added to this package and billed by the bandwidth package mode.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
@@ -360,7 +360,7 @@ type AllocateAddressesResponse struct {
 	Response *struct {
 
 		// List of the unique IDs of the requested EIPs.
-		AddressSet []*string `json:"AddressSet,omitempty" name:"AddressSet" list`
+		AddressSet []*string `json:"AddressSet,omitempty" name:"AddressSet"`
 
 		// The Async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
 		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
@@ -388,7 +388,7 @@ type AssignIpv6AddressesRequest struct {
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
 	// A list of `IPv6` addresses. You can specify a maximum of 10 at one time. The quota is calculated together with that of `Ipv6AddressCount`, a required input parameter alternative to this one.
-	Ipv6Addresses []*Ipv6Address `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses" list`
+	Ipv6Addresses []*Ipv6Address `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses"`
 
 	// The number of automatically assigned `IPv6` addresses. The total number of private IP addresses cannot exceed the quota. The quota is calculated together with that of `Ipv6Addresses`, a required input parameter alternative to this one.
 	Ipv6AddressCount *uint64 `json:"Ipv6AddressCount,omitempty" name:"Ipv6AddressCount"`
@@ -420,7 +420,7 @@ type AssignIpv6AddressesResponse struct {
 	Response *struct {
 
 		// The list of `IPv6` addresses assigned to ENIs.
-		Ipv6AddressSet []*Ipv6Address `json:"Ipv6AddressSet,omitempty" name:"Ipv6AddressSet" list`
+		Ipv6AddressSet []*Ipv6Address `json:"Ipv6AddressSet,omitempty" name:"Ipv6AddressSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -494,7 +494,7 @@ type AssignIpv6SubnetCidrBlockRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The assigned `IPv6` subnet IP range list.
-	Ipv6SubnetCidrBlocks []*Ipv6SubnetCidrBlock `json:"Ipv6SubnetCidrBlocks,omitempty" name:"Ipv6SubnetCidrBlocks" list`
+	Ipv6SubnetCidrBlocks []*Ipv6SubnetCidrBlock `json:"Ipv6SubnetCidrBlocks,omitempty" name:"Ipv6SubnetCidrBlocks"`
 }
 
 func (r *AssignIpv6SubnetCidrBlockRequest) ToJsonString() string {
@@ -522,7 +522,7 @@ type AssignIpv6SubnetCidrBlockResponse struct {
 	Response *struct {
 
 		// The assigned `IPv6` subnet IP range list.
-		Ipv6SubnetCidrBlockSet []*Ipv6SubnetCidrBlock `json:"Ipv6SubnetCidrBlockSet,omitempty" name:"Ipv6SubnetCidrBlockSet" list`
+		Ipv6SubnetCidrBlockSet []*Ipv6SubnetCidrBlock `json:"Ipv6SubnetCidrBlockSet,omitempty" name:"Ipv6SubnetCidrBlockSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -547,7 +547,7 @@ type AssignPrivateIpAddressesRequest struct {
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
 	// The information on private IP addresses, of which you can specify a maximum of 10 at a time. You should provide either this parameter or SecondaryPrivateIpAddressCount, or both.
-	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 
 	// The number of newly-applied private IP addresses. You should provide either this parameter or PrivateIpAddresses, or both. The total number of private IP addresses cannot exceed the quota. For more information, see<a href="/document/product/576/18527">ENI Use Limits</a>.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
@@ -579,7 +579,7 @@ type AssignPrivateIpAddressesResponse struct {
 	Response *struct {
 
 		// The detailed information of the Private IP.
-		PrivateIpAddressSet []*PrivateIpAddressSpecification `json:"PrivateIpAddressSet,omitempty" name:"PrivateIpAddressSet" list`
+		PrivateIpAddressSet []*PrivateIpAddressSpecification `json:"PrivateIpAddressSet,omitempty" name:"PrivateIpAddressSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -610,7 +610,7 @@ type AssistantCidr struct {
 
 	// Subnets divided by the secondary CIDR.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet" list`
+	SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet"`
 }
 
 type AssociateAddressRequest struct {
@@ -738,7 +738,7 @@ type AssociateNatGatewayAddressRequest struct {
 	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
 
 	// Array of the EIPs bound to the NAT gateway. Either `AddressCount` or `PublicAddresses` must be passed in.
-	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
 
 	// The availability zone of the EIP, which is passed in when the EIP is automatically assigned.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
@@ -793,7 +793,7 @@ type AssociateNetworkAclSubnetsRequest struct {
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 
 	// Array of subnet instance IDs. Example: [subnet-12345678]
-	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 }
 
 func (r *AssociateNetworkAclSubnetsRequest) ToJsonString() string {
@@ -840,10 +840,10 @@ type AssociateNetworkInterfaceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
 	// ENI instance ID, e.g. eni-pxir56ns. You can enter up to 100 instances for each request.
-	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds" list`
+	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
 
 	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups. You can enter up to 100 instances for each request.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
 
 func (r *AssociateNetworkInterfaceSecurityGroupsRequest) ToJsonString() string {
@@ -893,7 +893,7 @@ type AttachCcnInstancesRequest struct {
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// List of associated network instances
-	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances" list`
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
 
 	// The UIN (root account) of the CCN. By default, the current account belongs to the UIN
 	CcnUin *string `json:"CcnUin,omitempty" name:"CcnUin"`
@@ -947,7 +947,7 @@ type AttachClassicLinkVpcRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// CVM Instance ID
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *AttachClassicLinkVpcRequest) ToJsonString() string {
@@ -1115,7 +1115,7 @@ type BandwidthPackage struct {
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// The resource information of the bandwidth package.
-	ResourceSet []*Resource `json:"ResourceSet,omitempty" name:"ResourceSet" list`
+	ResourceSet []*Resource `json:"ResourceSet,omitempty" name:"ResourceSet"`
 
 	// The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit.
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
@@ -1159,7 +1159,7 @@ type CCN struct {
 	BandwidthLimitType *string `json:"BandwidthLimitType,omitempty" name:"BandwidthLimitType"`
 
 	// Tag key-value pairs.
-	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Whether the CCN route priority feature is supported. Valid values: False: do not support; True: support.
 	RoutePriorityFlag *bool `json:"RoutePriorityFlag,omitempty" name:"RoutePriorityFlag"`
@@ -1189,7 +1189,7 @@ type CcnAttachedInstance struct {
 	InstanceUin *string `json:"InstanceUin,omitempty" name:"InstanceUin"`
 
 	// The CIDR of the associated instance.
-	CidrBlock []*string `json:"CidrBlock,omitempty" name:"CidrBlock" list`
+	CidrBlock []*string `json:"CidrBlock,omitempty" name:"CidrBlock"`
 
 	// The status of the associated instance:
 	// <li>`PENDING`: In application</li>
@@ -1329,10 +1329,10 @@ type CheckAssistantCidrRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// Load CIDR blocks to add. CIDR block set; format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
-	NewCidrBlocks []*string `json:"NewCidrBlocks,omitempty" name:"NewCidrBlocks" list`
+	NewCidrBlocks []*string `json:"NewCidrBlocks,omitempty" name:"NewCidrBlocks"`
 
 	// Load CIDR blocks to delete. CIDR block set; Format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
-	OldCidrBlocks []*string `json:"OldCidrBlocks,omitempty" name:"OldCidrBlocks" list`
+	OldCidrBlocks []*string `json:"OldCidrBlocks,omitempty" name:"OldCidrBlocks"`
 }
 
 func (r *CheckAssistantCidrRequest) ToJsonString() string {
@@ -1361,7 +1361,7 @@ type CheckAssistantCidrResponse struct {
 	Response *struct {
 
 		// Array of conflict resources.
-		ConflictSourceSet []*ConflictSource `json:"ConflictSourceSet,omitempty" name:"ConflictSourceSet" list`
+		ConflictSourceSet []*ConflictSource `json:"ConflictSourceSet,omitempty" name:"ConflictSourceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1383,7 +1383,7 @@ type CheckNetDetectStateRequest struct {
 	*tchttp.BaseRequest
 
 	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
-	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp" list`
+	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp"`
 
 	// The type of the next hop. Currently supported types are:
 	// VPN: VPN gateway;
@@ -1444,7 +1444,7 @@ type CheckNetDetectStateResponse struct {
 	Response *struct {
 
 		// The array of network detection verification results.
-		NetDetectIpStateSet []*NetDetectIpState `json:"NetDetectIpStateSet,omitempty" name:"NetDetectIpStateSet" list`
+		NetDetectIpStateSet []*NetDetectIpState `json:"NetDetectIpStateSet,omitempty" name:"NetDetectIpStateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1566,7 +1566,7 @@ type ConflictSource struct {
 	SourceItem *string `json:"SourceItem,omitempty" name:"SourceItem"`
 
 	// Conflict resource items
-	ConflictItemSet []*ConflictItem `json:"ConflictItemSet,omitempty" name:"ConflictItemSet" list`
+	ConflictItemSet []*ConflictItem `json:"ConflictItemSet,omitempty" name:"ConflictItemSet"`
 }
 
 type CreateAddressTemplateGroupRequest struct {
@@ -1576,7 +1576,7 @@ type CreateAddressTemplateGroupRequest struct {
 	AddressTemplateGroupName *string `json:"AddressTemplateGroupName,omitempty" name:"AddressTemplateGroupName"`
 
 	// The instance ID of the IP address template, such as `ipm-mdunqeb6`.
-	AddressTemplateIds []*string `json:"AddressTemplateIds,omitempty" name:"AddressTemplateIds" list`
+	AddressTemplateIds []*string `json:"AddressTemplateIds,omitempty" name:"AddressTemplateIds"`
 }
 
 func (r *CreateAddressTemplateGroupRequest) ToJsonString() string {
@@ -1629,7 +1629,7 @@ type CreateAddressTemplateRequest struct {
 	AddressTemplateName *string `json:"AddressTemplateName,omitempty" name:"AddressTemplateName"`
 
 	// Address information, including IP, CIDR and IP address range.
-	Addresses []*string `json:"Addresses,omitempty" name:"Addresses" list`
+	Addresses []*string `json:"Addresses,omitempty" name:"Addresses"`
 }
 
 func (r *CreateAddressTemplateRequest) ToJsonString() string {
@@ -1691,19 +1691,19 @@ type CreateAndAttachNetworkInterfaceRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// The information of the specified private IPs. You can specify a maximum of 10 IPs each time.
-	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 
 	// The number of private IP addresses you can apply for. The total number of private IP addresses cannot exceed the quota.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
 
 	// The security group to be bound with, such as ['sg-1dd51d'].
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// The ENI description. You can enter any information within 60 characters.
 	NetworkInterfaceDescription *string `json:"NetworkInterfaceDescription,omitempty" name:"NetworkInterfaceDescription"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateAndAttachNetworkInterfaceRequest) ToJsonString() string {
@@ -1763,7 +1763,7 @@ type CreateAssistantCidrRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
-	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks" list`
+	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks"`
 }
 
 func (r *CreateAssistantCidrRequest) ToJsonString() string {
@@ -1792,7 +1792,7 @@ type CreateAssistantCidrResponse struct {
 
 		// A set of secondary CIDR blocks.
 	// Note: This field may return null, indicating that no valid value was found.
-		AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet" list`
+		AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1829,7 +1829,7 @@ type CreateBandwidthPackageRequest struct {
 	InternetMaxBandwidth *int64 `json:"InternetMaxBandwidth,omitempty" name:"InternetMaxBandwidth"`
 
 	// The list of tags to be bound.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// The protocol type of the bandwidth package. Valid values: 'ipv4' and 'ipv6'. Default value: 'ipv4'.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
@@ -1868,7 +1868,7 @@ type CreateBandwidthPackageResponse struct {
 		BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
 		// The unique ID list of the bandwidth package (effective only when you apply for more than 1 bandwidth packages).
-		BandwidthPackageIds []*string `json:"BandwidthPackageIds,omitempty" name:"BandwidthPackageIds" list`
+		BandwidthPackageIds []*string `json:"BandwidthPackageIds,omitempty" name:"BandwidthPackageIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1905,7 +1905,7 @@ type CreateCcnRequest struct {
 	BandwidthLimitType *string `json:"BandwidthLimitType,omitempty" name:"BandwidthLimitType"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateCcnRequest) ToJsonString() string {
@@ -1965,7 +1965,7 @@ type CreateCustomerGatewayRequest struct {
 	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateCustomerGatewayRequest) ToJsonString() string {
@@ -2072,7 +2072,7 @@ type CreateDirectConnectGatewayCcnRoutesRequest struct {
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
 	// The list of IDC IP range that must be connected
-	Routes []*DirectConnectGatewayCcnRoute `json:"Routes,omitempty" name:"Routes" list`
+	Routes []*DirectConnectGatewayCcnRoute `json:"Routes,omitempty" name:"Routes"`
 }
 
 func (r *CreateDirectConnectGatewayCcnRoutesRequest) ToJsonString() string {
@@ -2214,7 +2214,7 @@ type CreateFlowLogRequest struct {
 	FlowLogDescription *string `json:"FlowLogDescription,omitempty" name:"FlowLogDescription"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateFlowLogRequest) ToJsonString() string {
@@ -2248,7 +2248,7 @@ type CreateFlowLogResponse struct {
 	Response *struct {
 
 		// The information of the flow log created.
-		FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog" list`
+		FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2391,7 +2391,7 @@ type CreateNatGatewayDestinationIpPortTranslationNatRuleRequest struct {
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
 	// The port forwarding rules of the NAT gateway.
-	DestinationIpPortTranslationNatRules []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRules,omitempty" name:"DestinationIpPortTranslationNatRules" list`
+	DestinationIpPortTranslationNatRules []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRules,omitempty" name:"DestinationIpPortTranslationNatRules"`
 }
 
 func (r *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) ToJsonString() string {
@@ -2453,13 +2453,13 @@ type CreateNatGatewayRequest struct {
 	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
 
 	// The EIP array bound to the NAT gateway. Either AddressCount or PublicAddresses must be passed in.
-	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
 
 	// The availability zone, such as `ap-guangzhou-1`.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Subnet of the NAT gateway
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
@@ -2497,7 +2497,7 @@ type CreateNatGatewayResponse struct {
 	Response *struct {
 
 		// NAT gateway object array.
-		NatGatewaySet []*NatGateway `json:"NatGatewaySet,omitempty" name:"NatGatewaySet" list`
+		NatGatewaySet []*NatGateway `json:"NatGatewaySet,omitempty" name:"NatGatewaySet"`
 
 		// The number of NAT gateway objects meeting the conditions.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2525,7 +2525,7 @@ type CreateNatGatewaySourceIpTranslationNatRuleRequest struct {
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
 	// The SNAT forwarding rule of the NAT Gateway
-	SourceIpTranslationNatRules []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRules,omitempty" name:"SourceIpTranslationNatRules" list`
+	SourceIpTranslationNatRules []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRules,omitempty" name:"SourceIpTranslationNatRules"`
 }
 
 func (r *CreateNatGatewaySourceIpTranslationNatRuleRequest) ToJsonString() string {
@@ -2581,7 +2581,7 @@ type CreateNetDetectRequest struct {
 	NetDetectName *string `json:"NetDetectName,omitempty" name:"NetDetectName"`
 
 	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
-	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp" list`
+	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp"`
 
 	// The type of the next hop. Currently supported types are:
 	// VPN: VPN gateway;
@@ -2723,13 +2723,13 @@ type CreateNetworkInterfaceRequest struct {
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
 
 	// Specifies the security group to be bound with, such as ['sg-1dd51d'].
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// The information of the specified private IPs. You can specify a maximum of 10 each time.
-	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateNetworkInterfaceRequest) ToJsonString() string {
@@ -2791,7 +2791,7 @@ type CreateRouteTableRequest struct {
 	RouteTableName *string `json:"RouteTableName,omitempty" name:"RouteTableName"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateRouteTableRequest) ToJsonString() string {
@@ -2845,7 +2845,7 @@ type CreateRoutesRequest struct {
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
 	// Routing policy object.
-	Routes []*Route `json:"Routes,omitempty" name:"Routes" list`
+	Routes []*Route `json:"Routes,omitempty" name:"Routes"`
 }
 
 func (r *CreateRoutesRequest) ToJsonString() string {
@@ -2876,7 +2876,7 @@ type CreateRoutesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Route table object.
-		RouteTableSet []*RouteTable `json:"RouteTableSet,omitempty" name:"RouteTableSet" list`
+		RouteTableSet []*RouteTable `json:"RouteTableSet,omitempty" name:"RouteTableSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2957,7 +2957,7 @@ type CreateSecurityGroupRequest struct {
 	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateSecurityGroupRequest) ToJsonString() string {
@@ -3073,7 +3073,7 @@ type CreateServiceTemplateGroupRequest struct {
 	ServiceTemplateGroupName *string `json:"ServiceTemplateGroupName,omitempty" name:"ServiceTemplateGroupName"`
 
 	// Instance ID of the protocol port template, such as `ppm-4dw6agho`.
-	ServiceTemplateIds []*string `json:"ServiceTemplateIds,omitempty" name:"ServiceTemplateIds" list`
+	ServiceTemplateIds []*string `json:"ServiceTemplateIds,omitempty" name:"ServiceTemplateIds"`
 }
 
 func (r *CreateServiceTemplateGroupRequest) ToJsonString() string {
@@ -3126,7 +3126,7 @@ type CreateServiceTemplateRequest struct {
 	ServiceTemplateName *string `json:"ServiceTemplateName,omitempty" name:"ServiceTemplateName"`
 
 	// It supports single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP, and GRE.
-	Services []*string `json:"Services,omitempty" name:"Services" list`
+	Services []*string `json:"Services,omitempty" name:"Services"`
 }
 
 func (r *CreateServiceTemplateRequest) ToJsonString() string {
@@ -3188,7 +3188,7 @@ type CreateSubnetRequest struct {
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// CDC instance ID
 	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
@@ -3248,10 +3248,10 @@ type CreateSubnetsRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The subnet object list.
-	Subnets []*SubnetInput `json:"Subnets,omitempty" name:"Subnets" list`
+	Subnets []*SubnetInput `json:"Subnets,omitempty" name:"Subnets"`
 
 	// Bound tags. Note that the collection of tags here is shared by all subnet objects in the list. You cannot specify tags for each subnet. Example: [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// ID of the CDC instance to which the subnets will be created
 	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
@@ -3284,7 +3284,7 @@ type CreateSubnetsResponse struct {
 	Response *struct {
 
 		// The list of newly created subnets.
-		SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet" list`
+		SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3503,13 +3503,13 @@ type CreateVpcRequest struct {
 	EnableMulticast *string `json:"EnableMulticast,omitempty" name:"EnableMulticast"`
 
 	// DNS address. A maximum of 4 addresses is supported.
-	DnsServers []*string `json:"DnsServers,omitempty" name:"DnsServers" list`
+	DnsServers []*string `json:"DnsServers,omitempty" name:"DnsServers"`
 
 	// Domain name of DHCP
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateVpcRequest) ToJsonString() string {
@@ -3578,7 +3578,7 @@ type CreateVpnConnectionRequest struct {
 	PreShareKey *string `json:"PreShareKey,omitempty" name:"PreShareKey"`
 
 	// The SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}. 10.0.0.5/24 is the VPC internal IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
-	SecurityPolicyDatabases []*SecurityPolicyDatabase `json:"SecurityPolicyDatabases,omitempty" name:"SecurityPolicyDatabases" list`
+	SecurityPolicyDatabases []*SecurityPolicyDatabase `json:"SecurityPolicyDatabases,omitempty" name:"SecurityPolicyDatabases"`
 
 	// Internet Key Exchange (IKE) configuration. IKE has a self-protection mechanism. The network security protocol is configured by the user.
 	IKEOptionsSpecification *IKEOptionsSpecification `json:"IKEOptionsSpecification,omitempty" name:"IKEOptionsSpecification"`
@@ -3587,7 +3587,7 @@ type CreateVpnConnectionRequest struct {
 	IPSECOptionsSpecification *IPSECOptionsSpecification `json:"IPSECOptionsSpecification,omitempty" name:"IPSECOptionsSpecification"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Whether the tunnel health check is supported.
 	EnableHealthCheck *bool `json:"EnableHealthCheck,omitempty" name:"EnableHealthCheck"`
@@ -3677,7 +3677,7 @@ type CreateVpnGatewayRequest struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateVpnGatewayRequest) ToJsonString() string {
@@ -3972,7 +3972,7 @@ type DeleteAssistantCidrRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
-	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks" list`
+	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks"`
 }
 
 func (r *DeleteAssistantCidrRequest) ToJsonString() string {
@@ -4160,7 +4160,7 @@ type DeleteDirectConnectGatewayCcnRoutesRequest struct {
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
 	// The route ID, such as `ccnr-f49l6u0z`.
-	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds" list`
+	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds"`
 }
 
 func (r *DeleteDirectConnectGatewayCcnRoutesRequest) ToJsonString() string {
@@ -4406,7 +4406,7 @@ type DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest struct {
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
 	// The port forwarding rules of the NAT gateway.
-	DestinationIpPortTranslationNatRules []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRules,omitempty" name:"DestinationIpPortTranslationNatRules" list`
+	DestinationIpPortTranslationNatRules []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRules,omitempty" name:"DestinationIpPortTranslationNatRules"`
 }
 
 func (r *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) ToJsonString() string {
@@ -4502,7 +4502,7 @@ type DeleteNatGatewaySourceIpTranslationNatRuleRequest struct {
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
 	// The list of SNAT rule IDs of a NAT Gateway, such as `snat-df43254`
-	NatGatewaySnatIds []*string `json:"NatGatewaySnatIds,omitempty" name:"NatGatewaySnatIds" list`
+	NatGatewaySnatIds []*string `json:"NatGatewaySnatIds,omitempty" name:"NatGatewaySnatIds"`
 }
 
 func (r *DeleteNatGatewaySourceIpTranslationNatRuleRequest) ToJsonString() string {
@@ -4736,7 +4736,7 @@ type DeleteRoutesRequest struct {
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
 	// Routing policy object. Only the `RouteId` field is required when deleting a routing policy.
-	Routes []*Route `json:"Routes,omitempty" name:"Routes" list`
+	Routes []*Route `json:"Routes,omitempty" name:"Routes"`
 }
 
 func (r *DeleteRoutesRequest) ToJsonString() string {
@@ -4764,7 +4764,7 @@ type DeleteRoutesResponse struct {
 	Response *struct {
 
 		// Details of the routing policy that has been deleted.
-		RouteSet []*Route `json:"RouteSet,omitempty" name:"RouteSet" list`
+		RouteSet []*Route `json:"RouteSet,omitempty" name:"RouteSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5112,7 +5112,7 @@ type DeleteVpcEndPointServiceWhiteListRequest struct {
 	*tchttp.BaseRequest
 
 	// Array of user UINs
-	UserUin []*string `json:"UserUin,omitempty" name:"UserUin" list`
+	UserUin []*string `json:"UserUin,omitempty" name:"UserUin"`
 
 	// Endpoint service ID
 	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
@@ -5327,7 +5327,7 @@ type DescribeAccountAttributesResponse struct {
 	Response *struct {
 
 		// User account attribute object
-		AccountAttributeSet []*AccountAttribute `json:"AccountAttributeSet,omitempty" name:"AccountAttributeSet" list`
+		AccountAttributeSet []*AccountAttribute `json:"AccountAttributeSet,omitempty" name:"AccountAttributeSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5372,7 +5372,7 @@ type DescribeAddressQuotaResponse struct {
 	Response *struct {
 
 		// The quota information of EIPs in an account.
-		QuotaSet []*Quota `json:"QuotaSet,omitempty" name:"QuotaSet" list`
+		QuotaSet []*Quota `json:"QuotaSet,omitempty" name:"QuotaSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5396,7 +5396,7 @@ type DescribeAddressTemplateGroupsRequest struct {
 	// Filter conditions.
 	// <li>address-template-group-name - String - (Filter condition) IP address template group name.</li>
 	// <li>address-template-group-id - String - (Filter condition) IP address template group instance ID, such as `ipmg-mdunqeb6`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. The default value is 0.
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
@@ -5434,7 +5434,7 @@ type DescribeAddressTemplateGroupsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// IP address template.
-		AddressTemplateGroupSet []*AddressTemplateGroup `json:"AddressTemplateGroupSet,omitempty" name:"AddressTemplateGroupSet" list`
+		AddressTemplateGroupSet []*AddressTemplateGroup `json:"AddressTemplateGroupSet,omitempty" name:"AddressTemplateGroupSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5458,7 +5458,7 @@ type DescribeAddressTemplatesRequest struct {
 	// Filter conditions.
 	// <li>address-template-name - String - (Filter condition) IP address template name.</li>
 	// <li>address-template-id - String - (Filter condition) IP address template instance ID, such as `ipm-mdunqeb6`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. The default value is 0.
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
@@ -5496,7 +5496,7 @@ type DescribeAddressTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// IP address template.
-		AddressTemplateSet []*AddressTemplate `json:"AddressTemplateSet,omitempty" name:"AddressTemplateSet" list`
+		AddressTemplateSet []*AddressTemplate `json:"AddressTemplateSet,omitempty" name:"AddressTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5518,7 +5518,7 @@ type DescribeAddressesRequest struct {
 	*tchttp.BaseRequest
 
 	// The list of unique IDs of EIPs in the format of `eip-11112222`. `AddressIds` and `Filters.address-id` cannot be specified at the same time.
-	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds" list`
+	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
 
 	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
 	// <li> address-id - String - Required: No - (Filter condition) Filter by the unique EIP ID in the format of `eip-11112222`.</li>
@@ -5532,7 +5532,7 @@ type DescribeAddressesRequest struct {
 	// <li> address-type - String - Required: No - (Filter condition) Filter by the IP type. Valid values: `EIP`, `AnycastEIP`, and `HighQualityEIP`.</li>
 	// <li> address-isp - String - Required: No - (Filter condition) Filter by the ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
 	// <li> dedicated-cluster-id - String - Required: No - (Filter condition) Filter by the unique CDC ID in the format of `cluster-11112222`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -5571,7 +5571,7 @@ type DescribeAddressesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of EIPs details.
-		AddressSet []*Address `json:"AddressSet,omitempty" name:"AddressSet" list`
+		AddressSet []*Address `json:"AddressSet,omitempty" name:"AddressSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5593,11 +5593,11 @@ type DescribeAssistantCidrRequest struct {
 	*tchttp.BaseRequest
 
 	// The ID of a VPC instance set, such as `vpc-6v2ht8q5`.
-	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds" list`
+	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 
 	// Filter condition. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -5634,7 +5634,7 @@ type DescribeAssistantCidrResponse struct {
 
 		// A set of eligible secondary CIDR blocks
 	// Note: This field may return null, indicating that no valid value was found.
-		AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet" list`
+		AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet"`
 
 		// Number of eligible instances.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -5686,7 +5686,7 @@ type DescribeBandwidthPackageBillUsageResponse struct {
 	Response *struct {
 
 		// Current billable usage.
-		BandwidthPackageBillBandwidthSet []*BandwidthPackageBillBandwidth `json:"BandwidthPackageBillBandwidthSet,omitempty" name:"BandwidthPackageBillBandwidthSet" list`
+		BandwidthPackageBillBandwidthSet []*BandwidthPackageBillBandwidth `json:"BandwidthPackageBillBandwidthSet,omitempty" name:"BandwidthPackageBillBandwidthSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5731,7 +5731,7 @@ type DescribeBandwidthPackageQuotaResponse struct {
 	Response *struct {
 
 		// The quota of the bandwidth package.
-		QuotaSet []*Quota `json:"QuotaSet,omitempty" name:"QuotaSet" list`
+		QuotaSet []*Quota `json:"QuotaSet,omitempty" name:"QuotaSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5758,7 +5758,7 @@ type DescribeBandwidthPackageResourcesRequest struct {
 	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
 	// <li>resource-id - String - Required: no -  (Filter condition) Filters by the unique ID of resources in a bandwidth package, such as `eip-11112222`.</li>
 	// <li>resource-type - String - Required: no - (Filter condition) Filters by the type of resources in a bandwidth package. It now supports only EIP (`Address`) and load balancer (`LoadBalance`).</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -5797,7 +5797,7 @@ type DescribeBandwidthPackageResourcesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The list of resources in the bandwidth package.
-		ResourceSet []*Resource `json:"ResourceSet,omitempty" name:"ResourceSet" list`
+		ResourceSet []*Resource `json:"ResourceSet,omitempty" name:"ResourceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5819,7 +5819,7 @@ type DescribeBandwidthPackagesRequest struct {
 	*tchttp.BaseRequest
 
 	// The unique ID list of bandwidth packages.
-	BandwidthPackageIds []*string `json:"BandwidthPackageIds,omitempty" name:"BandwidthPackageIds" list`
+	BandwidthPackageIds []*string `json:"BandwidthPackageIds,omitempty" name:"BandwidthPackageIds"`
 
 	// Each request can have up to 10 `Filters`. `BandwidthPackageIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
 	// <li> bandwidth-package_id - String - Required: No - (Filter condition) Filter by the unique ID of the bandwidth package.</li>
@@ -5829,7 +5829,7 @@ type DescribeBandwidthPackagesRequest struct {
 	// <li> resource.resource-type - String - Required: No - (Filter condition) Filter by the bandwidth package resource type. Resource types include 'Address' and 'LoadBalance'.</li>
 	// <li> resource.resource-id - String - Required: No - (Filter condition) Filter by the bandwidth package resource ID, such as 'eip-xxxx' and 'lb-xxxx'.</li>
 	// <li> resource.address-ip - String - Required: No - (Filter condition) Filter by the bandwidth package resource IP.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset of the query results
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -5868,7 +5868,7 @@ type DescribeBandwidthPackagesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Detail information of the bandwidth package.
-		BandwidthPackageSet []*BandwidthPackage `json:"BandwidthPackageSet,omitempty" name:"BandwidthPackageSet" list`
+		BandwidthPackageSet []*BandwidthPackage `json:"BandwidthPackageSet,omitempty" name:"BandwidthPackageSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5900,7 +5900,7 @@ type DescribeCcnAttachedInstancesRequest struct {
 	// <li>instance-type - String - (Filter condition) The associated instance type.</li>
 	// <li>instance-region - String - (Filter condition) The associated instance region.</li>
 	// <li>instance-type - String - (Filter condition) The instance ID of the associated instance.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The ID of the CCN instance
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
@@ -5944,7 +5944,7 @@ type DescribeCcnAttachedInstancesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The list of associated instances.
-		InstanceSet []*CcnAttachedInstance `json:"InstanceSet,omitempty" name:"InstanceSet" list`
+		InstanceSet []*CcnAttachedInstance `json:"InstanceSet,omitempty" name:"InstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5993,7 +5993,7 @@ type DescribeCcnRegionBandwidthLimitsResponse struct {
 	Response *struct {
 
 		// The outbound bandwidth caps of all regions connected with the specified CCN instance
-		CcnRegionBandwidthLimitSet []*CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimitSet,omitempty" name:"CcnRegionBandwidthLimitSet" list`
+		CcnRegionBandwidthLimitSet []*CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimitSet,omitempty" name:"CcnRegionBandwidthLimitSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6018,7 +6018,7 @@ type DescribeCcnRoutesRequest struct {
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// The unique ID of the CCN routing policy, such as `ccnr-f49l6u0z`.
-	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds" list`
+	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds"`
 
 	// Filter condition. `RouteIds` and `Filters` cannot be specified at the same time.
 	// <li>route-id - String - (Filter condition) Routing policy ID.</li>
@@ -6026,7 +6026,7 @@ type DescribeCcnRoutesRequest struct {
 	// <li>instance-type - String - (Filter condition) The next hop type.</li>
 	// <li>instance-region - String - (Filter condition) The next hop region.</li>
 	// <li>instance-type - String - (Filter condition) The instance ID of the next hop.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -6066,7 +6066,7 @@ type DescribeCcnRoutesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The CCN routing policy object.
-		RouteSet []*CcnRoute `json:"RouteSet,omitempty" name:"RouteSet" list`
+		RouteSet []*CcnRoute `json:"RouteSet,omitempty" name:"RouteSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6088,7 +6088,7 @@ type DescribeCcnsRequest struct {
 	*tchttp.BaseRequest
 
 	// The CCN instance ID, such as `ccn-f49l6u0z`. Each request can have a maximum of 100 instances. `CcnIds` and `Filters` cannot be specified at the same time
-	CcnIds []*string `json:"CcnIds,omitempty" name:"CcnIds" list`
+	CcnIds []*string `json:"CcnIds,omitempty" name:"CcnIds"`
 
 	// Filter conditions. `CcnIds` and `Filters` cannot be specified at the same time.
 	// <li>ccn-id - String - (Filter condition) The unique ID of the CCN, such as `vpc-f49l6u0z`.</li>
@@ -6097,7 +6097,7 @@ type DescribeCcnsRequest struct {
 	// <li>state - String - (Filter condition) The instance status. 'ISOLATED': Isolated (the account is in arrears and the service is suspended.) 'AVAILABLE': Running.</li>
 	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key.</li>
 	// <li>`tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see this example: **Querying the list of CCNs bound to tags**.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -6144,7 +6144,7 @@ type DescribeCcnsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// CCN object.
-		CcnSet []*CCN `json:"CcnSet,omitempty" name:"CcnSet" list`
+		CcnSet []*CCN `json:"CcnSet,omitempty" name:"CcnSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6168,7 +6168,7 @@ type DescribeClassicLinkInstancesRequest struct {
 	// Filter conditions.
 	// <li>vpc-id - String - (Filter condition) The VPC instance ID.</li>
 	// <li>vm-ip - String - (Filter condition) The IP address of the CVM on the basic network.</li>
-	Filters []*FilterObject `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*FilterObject `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
@@ -6206,7 +6206,7 @@ type DescribeClassicLinkInstancesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Classiclink instance.
-		ClassicLinkInstanceSet []*ClassicLinkInstance `json:"ClassicLinkInstanceSet,omitempty" name:"ClassicLinkInstanceSet" list`
+		ClassicLinkInstanceSet []*ClassicLinkInstance `json:"ClassicLinkInstanceSet,omitempty" name:"ClassicLinkInstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6315,7 +6315,7 @@ type DescribeCrossBorderComplianceResponse struct {
 	Response *struct {
 
 		// List of compliance review requests.
-		CrossBorderComplianceSet []*CrossBorderCompliance `json:"CrossBorderComplianceSet,omitempty" name:"CrossBorderComplianceSet" list`
+		CrossBorderComplianceSet []*CrossBorderCompliance `json:"CrossBorderComplianceSet,omitempty" name:"CrossBorderComplianceSet"`
 
 		// Total number of compliance review requests.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -6363,7 +6363,7 @@ type DescribeCustomerGatewayVendorsResponse struct {
 	Response *struct {
 
 		// Customer gateway vendor information object.
-		CustomerGatewayVendorSet []*CustomerGatewayVendor `json:"CustomerGatewayVendorSet,omitempty" name:"CustomerGatewayVendorSet" list`
+		CustomerGatewayVendorSet []*CustomerGatewayVendor `json:"CustomerGatewayVendorSet,omitempty" name:"CustomerGatewayVendorSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6385,13 +6385,13 @@ type DescribeCustomerGatewaysRequest struct {
 	*tchttp.BaseRequest
 
 	// Customer gateway ID, such as `cgw-2wqq41m9`. Each request can have a maximum of 100 instances. `CustomerGatewayIds` and `Filters` cannot be specified at the same time.
-	CustomerGatewayIds []*string `json:"CustomerGatewayIds,omitempty" name:"CustomerGatewayIds" list`
+	CustomerGatewayIds []*string `json:"CustomerGatewayIds,omitempty" name:"CustomerGatewayIds"`
 
 	// The filter condition. For details, see the Instance Filter Conditions Table. The upper limit for `Filters` in each request is 10 and 5 for `Filter.Values`. `CustomerGatewayIds` and `Filters` cannot be specified at the same time.
 	// <li>customer-gateway-id - String - (Filter condition) The unique ID of the user gateway, such as `cgw-mgp33pll`.</li>
 	// <li>customer-gateway-name - String - (Filter condition) The name of the user gateway, such as `test-cgw`.</li>
 	// <li>ip-address - String - (Filter condition) The public IP address, such as `58.211.1.12`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The Offset. The default value is 0. For more information about Offset, see the relevant section in the API Introduction.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -6427,7 +6427,7 @@ type DescribeCustomerGatewaysResponse struct {
 	Response *struct {
 
 		// Customer gateway object list
-		CustomerGatewaySet []*CustomerGateway `json:"CustomerGatewaySet,omitempty" name:"CustomerGatewaySet" list`
+		CustomerGatewaySet []*CustomerGateway `json:"CustomerGatewaySet,omitempty" name:"CustomerGatewaySet"`
 
 		// Number of eligible instances
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -6496,7 +6496,7 @@ type DescribeDirectConnectGatewayCcnRoutesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The CCN route (IDC IP range) list.
-		RouteSet []*DirectConnectGatewayCcnRoute `json:"RouteSet,omitempty" name:"RouteSet" list`
+		RouteSet []*DirectConnectGatewayCcnRoute `json:"RouteSet,omitempty" name:"RouteSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6518,7 +6518,7 @@ type DescribeDirectConnectGatewaysRequest struct {
 	*tchttp.BaseRequest
 
 	// The unique ID of the direct connect gateway, such as `dcg-9o233uri`.
-	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds" list`
+	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds"`
 
 	// Filter condition. `DirectConnectGatewayIds` and `Filters` cannot be specified at the same time.
 	// <li>direct-connect-gateway-id - String - The unique ID of the direct connect gateway, such as `dcg-9o233uri`.</li>
@@ -6528,7 +6528,7 @@ type DescribeDirectConnectGatewaysRequest struct {
 	// <li>network-type- String - The network type. Valid values: `VPC` (VPC type), `CCN` (CCN type).</li>
 	// <li>ccn-id - String - The ID of the CCN where the direct connect gateway resides.</li>
 	// <li>vpc-id - String - The ID of the VPC where the direct connect gateway resides.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The offset.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -6567,7 +6567,7 @@ type DescribeDirectConnectGatewaysResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The object array of the direct connect gateway.
-		DirectConnectGatewaySet []*DirectConnectGateway `json:"DirectConnectGatewaySet,omitempty" name:"DirectConnectGatewaySet" list`
+		DirectConnectGatewaySet []*DirectConnectGateway `json:"DirectConnectGatewaySet,omitempty" name:"DirectConnectGatewaySet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6620,7 +6620,7 @@ type DescribeFlowLogResponse struct {
 	Response *struct {
 
 		// The flow log information.
-		FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog" list`
+		FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6719,7 +6719,7 @@ type DescribeFlowLogsResponse struct {
 	Response *struct {
 
 		// The instance set of flow logs.
-		FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog" list`
+		FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog"`
 
 		// The total number of flow logs.
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
@@ -6806,7 +6806,7 @@ type DescribeGatewayFlowMonitorDetailResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The gateway traffic monitoring details.
-		GatewayFlowMonitorDetailSet []*GatewayFlowMonitorDetail `json:"GatewayFlowMonitorDetailSet,omitempty" name:"GatewayFlowMonitorDetailSet" list`
+		GatewayFlowMonitorDetailSet []*GatewayFlowMonitorDetail `json:"GatewayFlowMonitorDetailSet,omitempty" name:"GatewayFlowMonitorDetailSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6834,7 +6834,7 @@ type DescribeGatewayFlowQosRequest struct {
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
 	// CVM private IP addresses with limited bandwidth.
-	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses" list`
+	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses"`
 
 	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -6870,7 +6870,7 @@ type DescribeGatewayFlowQosResponse struct {
 	Response *struct {
 
 		// List of instance details.
-		GatewayQosSet []*GatewayQos `json:"GatewayQosSet,omitempty" name:"GatewayQosSet" list`
+		GatewayQosSet []*GatewayQos `json:"GatewayQosSet,omitempty" name:"GatewayQosSet"`
 
 		// Number of eligible instances.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -6895,7 +6895,7 @@ type DescribeHaVipsRequest struct {
 	*tchttp.BaseRequest
 
 	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`.
-	HaVipIds []*string `json:"HaVipIds,omitempty" name:"HaVipIds" list`
+	HaVipIds []*string `json:"HaVipIds,omitempty" name:"HaVipIds"`
 
 	// Filter condition. `HaVipIds` and `Filters` cannot be specified at the same time.
 	// li>havip-id - String - The unique ID of the HAVIP, such as `havip-9o233uri`.</li>
@@ -6904,7 +6904,7 @@ type DescribeHaVipsRequest struct {
 	// <li>subnet-id - String - Subnet ID of the HAVIP.</li>
 	// <li>vip - String - Virtual IP address of the HAVIP.</li>
 	// <li>address-ip - String - Bound EIP.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -6943,7 +6943,7 @@ type DescribeHaVipsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// `HAVIP` object array.
-		HaVipSet []*HaVip `json:"HaVipSet,omitempty" name:"HaVipSet" list`
+		HaVipSet []*HaVip `json:"HaVipSet,omitempty" name:"HaVipSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -7017,7 +7017,7 @@ type DescribeIpGeolocationInfosRequest struct {
 	*tchttp.BaseRequest
 
 	// IP addresses to be queried. Both IPv4 and IPv6 addresses are supported.
-	AddressIps []*string `json:"AddressIps,omitempty" name:"AddressIps" list`
+	AddressIps []*string `json:"AddressIps,omitempty" name:"AddressIps"`
 
 	// Fields of the IP addresses to be queried, including `Country`, `Province`, `City`, `Region`, `Isp`, `AsName` and `AsId`
 	Fields *IpField `json:"Fields,omitempty" name:"Fields"`
@@ -7048,7 +7048,7 @@ type DescribeIpGeolocationInfosResponse struct {
 	Response *struct {
 
 		// IP address details
-		AddressInfo []*IpGeolocationInfo `json:"AddressInfo,omitempty" name:"AddressInfo" list`
+		AddressInfo []*IpGeolocationInfo `json:"AddressInfo,omitempty" name:"AddressInfo"`
 
 		// Number of IP addresses
 		Total *int64 `json:"Total,omitempty" name:"Total"`
@@ -7074,7 +7074,7 @@ type DescribeLocalGatewayRequest struct {
 
 	// Query criteria:
 	// vpc-id: filter by VPC ID; local-gateway-name: filter by local gateway name (fuzzy search is supported); local-gateway-id: filter by local gateway instance ID; cdc-id: filter by CDC instance ID.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -7109,7 +7109,7 @@ type DescribeLocalGatewayResponse struct {
 	Response *struct {
 
 		// Information set of local gateways
-		LocalGatewaySet []*LocalGateway `json:"LocalGatewaySet,omitempty" name:"LocalGatewaySet" list`
+		LocalGatewaySet []*LocalGateway `json:"LocalGatewaySet,omitempty" name:"LocalGatewaySet"`
 
 		// Total number of local gateways
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -7134,7 +7134,7 @@ type DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest struct {
 	*tchttp.BaseRequest
 
 	// NAT gateway ID.
-	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds" list`
+	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds"`
 
 	// Filter conditions:
 	// `NatGatewayIds` and `Filters` cannot be specified at the same time.
@@ -7145,7 +7145,7 @@ type DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest struct {
 	// <li>private-ip-address, the private IP, such as `10.0.0.1`.</li>
 	// <li>private-port, the private network port.</li>
 	// <li>description, the rule description.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. The default value is 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -7181,7 +7181,7 @@ type DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse struct {
 	Response *struct {
 
 		// The object array of port forwarding rules for the NAT gateway.
-		NatGatewayDestinationIpPortTranslationNatRuleSet []*NatGatewayDestinationIpPortTranslationNatRule `json:"NatGatewayDestinationIpPortTranslationNatRuleSet,omitempty" name:"NatGatewayDestinationIpPortTranslationNatRuleSet" list`
+		NatGatewayDestinationIpPortTranslationNatRuleSet []*NatGatewayDestinationIpPortTranslationNatRule `json:"NatGatewayDestinationIpPortTranslationNatRuleSet,omitempty" name:"NatGatewayDestinationIpPortTranslationNatRuleSet"`
 
 		// The number of object arrays of NAT port forwarding rules meeting the conditions.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -7212,7 +7212,7 @@ type DescribeNatGatewaySourceIpTranslationNatRulesRequest struct {
 	// <li> resource-id, the subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
 	// <li> public-ip-address, the EIP, such as `139.199.232.238`</li>
 	// <li>description, the rule description</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default is 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -7249,7 +7249,7 @@ type DescribeNatGatewaySourceIpTranslationNatRulesResponse struct {
 
 		// Object array of the SNAT rule for a NAT Gateway.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		SourceIpTranslationNatRuleSet []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRuleSet,omitempty" name:"SourceIpTranslationNatRuleSet" list`
+		SourceIpTranslationNatRuleSet []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRuleSet,omitempty" name:"SourceIpTranslationNatRuleSet"`
 
 		// The number of object arrays of eligible forwarding rules for a NAT Gateway
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -7274,14 +7274,14 @@ type DescribeNatGatewaysRequest struct {
 	*tchttp.BaseRequest
 
 	// The unified ID of the NAT gateways, such as `nat-123xx454`.
-	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds" list`
+	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds"`
 
 	// Filter condition. `NatGatewayIds` and `Filters` cannot be specified at the same time.
 	// <li>nat-gateway-id - String - (Filter condition) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
 	// <li>vpc-id - String - (Filter condition) The unique ID of the VPC, such as `vpc-123xx454`.</li>
 	// <li>nat-gateway-name - String - (Filter condition) The name of the protocol port template instance, such as `test_nat`.</li>
 	// <li>tag-key - String - (Filter condition) The tag key, such as `test-key`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. The default value is 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -7317,7 +7317,7 @@ type DescribeNatGatewaysResponse struct {
 	Response *struct {
 
 		// NAT gateway object array.
-		NatGatewaySet []*NatGateway `json:"NatGatewaySet,omitempty" name:"NatGatewaySet" list`
+		NatGatewaySet []*NatGateway `json:"NatGatewaySet,omitempty" name:"NatGatewaySet"`
 
 		// The number of NAT gateway object sets meeting the conditions.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -7342,11 +7342,11 @@ type DescribeNetDetectStatesRequest struct {
 	*tchttp.BaseRequest
 
 	// The array of network detection instance `IDs`, such as [`netd-12345678`].
-	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds" list`
+	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds"`
 
 	// Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.
 	// <li>net-detect-id - String - (Filter condition) The network detection instance ID, such as netd-12345678.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The offset. Default: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -7383,7 +7383,7 @@ type DescribeNetDetectStatesResponse struct {
 
 		// The array of network detection verification results that meet requirements.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		NetDetectStateSet []*NetDetectState `json:"NetDetectStateSet,omitempty" name:"NetDetectStateSet" list`
+		NetDetectStateSet []*NetDetectState `json:"NetDetectStateSet,omitempty" name:"NetDetectStateSet"`
 
 		// The number of network detection verification results that meet requirements.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -7409,14 +7409,14 @@ type DescribeNetDetectsRequest struct {
 	*tchttp.BaseRequest
 
 	// The array of network detection instance `IDs`, such as [`netd-12345678`].
-	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds" list`
+	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds"`
 
 	// Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.
 	// <li>vpc-id - String - (Filter condition) The VPC instance ID, such as vpc-12345678.</li>
 	// <li>net-detect-id - String - (Filter condition) The network detection instance ID, such as netd-12345678.</li>
 	// <li>subnet-id - String - (Filter condition) The subnet instance ID, such as subnet-12345678.</li>
 	// <li>net-detect-name - String - (Filter condition) The network detection name.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The offset. Default: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -7453,7 +7453,7 @@ type DescribeNetDetectsResponse struct {
 
 		// The array of network detection objects that meet requirements.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		NetDetectSet []*NetDetect `json:"NetDetectSet,omitempty" name:"NetDetectSet" list`
+		NetDetectSet []*NetDetect `json:"NetDetectSet,omitempty" name:"NetDetectSet"`
 
 		// The number of network detection objects that meet requirements.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -7479,13 +7479,13 @@ type DescribeNetworkAclsRequest struct {
 	*tchttp.BaseRequest
 
 	// Array of network ACL instance IDs, such as [acl-12345678]. Up to 100 instances are allowed for each request. This parameter does not support specifying `NetworkAclIds` and `Filters` at the same time.
-	NetworkAclIds []*string `json:"NetworkAclIds,omitempty" name:"NetworkAclIds" list`
+	NetworkAclIds []*string `json:"NetworkAclIds,omitempty" name:"NetworkAclIds"`
 
 	// Filter condition. `NetworkAclIds` and `Filters` cannot be specified at the same time.
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as vpc-12345678.</li>
 	// <li>network-acl-id - String - (Filter condition) Network ACL instance ID, such as acl-12345678.</li>
 	// <li>network-acl-name - String - (Filter condition) Network ACL instance name.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -7521,7 +7521,7 @@ type DescribeNetworkAclsResponse struct {
 	Response *struct {
 
 		// List of instance details.
-		NetworkAclSet []*NetworkAcl `json:"NetworkAclSet,omitempty" name:"NetworkAclSet" list`
+		NetworkAclSet []*NetworkAcl `json:"NetworkAclSet,omitempty" name:"NetworkAclSet"`
 
 		// Number of eligible instances.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -7598,7 +7598,7 @@ type DescribeNetworkInterfacesRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries the ID of the ENI instance, such as `eni-pxir56ns`. Each request can have a maximum of 100 instances. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
-	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds" list`
+	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
 
 	// Filter condition. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
@@ -7612,7 +7612,7 @@ type DescribeNetworkInterfacesRequest struct {
 	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
 	// <li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
 	// <li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is ‘true’, filter only the primary ENI. If the value is ‘false’, filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -7648,7 +7648,7 @@ type DescribeNetworkInterfacesResponse struct {
 	Response *struct {
 
 		// List of instance details.
-		NetworkInterfaceSet []*NetworkInterface `json:"NetworkInterfaceSet,omitempty" name:"NetworkInterfaceSet" list`
+		NetworkInterfaceSet []*NetworkInterface `json:"NetworkInterfaceSet,omitempty" name:"NetworkInterfaceSet"`
 
 		// Number of eligible instances.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -7679,10 +7679,10 @@ type DescribeRouteTablesRequest struct {
 	// <li>association.main - String - (Filter condition) Whether it is the main route table.</li>
 	// <li>tag-key - String - Required: no - (Filter condition) Filter by tag key.</li>
 	// <li>tag:tag-key - String - Required: no - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The route table instance ID, such as `rtb-azd4dt1c`.
-	RouteTableIds []*string `json:"RouteTableIds,omitempty" name:"RouteTableIds" list`
+	RouteTableIds []*string `json:"RouteTableIds,omitempty" name:"RouteTableIds"`
 
 	// Offset.
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
@@ -7721,7 +7721,7 @@ type DescribeRouteTablesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Route table object.
-		RouteTableSet []*RouteTable `json:"RouteTableSet,omitempty" name:"RouteTableSet" list`
+		RouteTableSet []*RouteTable `json:"RouteTableSet,omitempty" name:"RouteTableSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -7743,7 +7743,7 @@ type DescribeSecurityGroupAssociationStatisticsRequest struct {
 	*tchttp.BaseRequest
 
 	// The Security instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
 
 func (r *DescribeSecurityGroupAssociationStatisticsRequest) ToJsonString() string {
@@ -7770,7 +7770,7 @@ type DescribeSecurityGroupAssociationStatisticsResponse struct {
 	Response *struct {
 
 		// Statistics on the instances associated with a security group.
-		SecurityGroupAssociationStatisticsSet []*SecurityGroupAssociationStatistics `json:"SecurityGroupAssociationStatisticsSet,omitempty" name:"SecurityGroupAssociationStatisticsSet" list`
+		SecurityGroupAssociationStatisticsSet []*SecurityGroupAssociationStatistics `json:"SecurityGroupAssociationStatisticsSet,omitempty" name:"SecurityGroupAssociationStatisticsSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -7841,7 +7841,7 @@ type DescribeSecurityGroupReferencesRequest struct {
 	*tchttp.BaseRequest
 
 	// A set of security group instance IDs, e.g. ['sg-12345678']
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
 
 func (r *DescribeSecurityGroupReferencesRequest) ToJsonString() string {
@@ -7868,7 +7868,7 @@ type DescribeSecurityGroupReferencesResponse struct {
 	Response *struct {
 
 		// Referred security groups.
-		ReferredSecurityGroupSet []*ReferredSecurityGroup `json:"ReferredSecurityGroupSet,omitempty" name:"ReferredSecurityGroupSet" list`
+		ReferredSecurityGroupSet []*ReferredSecurityGroup `json:"ReferredSecurityGroupSet,omitempty" name:"ReferredSecurityGroupSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -7890,7 +7890,7 @@ type DescribeSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
 	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through `DescribeSecurityGroups`. Each request can have a maximum of 100 instances. `SecurityGroupIds` and `Filters` cannot be specified at the same time.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Filter conditions. `SecurityGroupIds` and `Filters` cannot be specified at the same time.
 	// <li>security-group-id - String - (Filter condition) The security group ID.</li>
@@ -7898,7 +7898,7 @@ type DescribeSecurityGroupsRequest struct {
 	// <li>security-group-name - String - (Filter condition) The security group name.</li>
 	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
 	// <li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
@@ -7935,7 +7935,7 @@ type DescribeSecurityGroupsResponse struct {
 
 		// Security group object.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		SecurityGroupSet []*SecurityGroup `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet" list`
+		SecurityGroupSet []*SecurityGroup `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet"`
 
 		// The number of instances meeting the filter condition.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -7962,7 +7962,7 @@ type DescribeServiceTemplateGroupsRequest struct {
 	// Filter conditions.
 	// <li>service-template-group-name - String - (Filter condition) Protocol port template group name.</li>
 	// <li>service-template-group-id - String - (Filter condition) Protocol port template group instance ID, such as `ppmg-e6dy460g`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. The default value is 0.
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
@@ -8000,7 +8000,7 @@ type DescribeServiceTemplateGroupsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Protocol port template group.
-		ServiceTemplateGroupSet []*ServiceTemplateGroup `json:"ServiceTemplateGroupSet,omitempty" name:"ServiceTemplateGroupSet" list`
+		ServiceTemplateGroupSet []*ServiceTemplateGroup `json:"ServiceTemplateGroupSet,omitempty" name:"ServiceTemplateGroupSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -8024,7 +8024,7 @@ type DescribeServiceTemplatesRequest struct {
 	// Filter conditions.
 	// <li>service-template-name - String - (Filter condition) Protocol port template name.</li>
 	// <li>service-template-id - String - (Filter condition) Protocol port template instance ID, such as `ppm-e6dy460g`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. The default value is 0.
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
@@ -8062,7 +8062,7 @@ type DescribeServiceTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Protocol port template object.
-		ServiceTemplateSet []*ServiceTemplate `json:"ServiceTemplateSet,omitempty" name:"ServiceTemplateSet" list`
+		ServiceTemplateSet []*ServiceTemplate `json:"ServiceTemplateSet,omitempty" name:"ServiceTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -8084,7 +8084,7 @@ type DescribeSubnetsRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries the ID of the subnet instance, such as `subnet-pxir56ns`. Each request can have a maximum of 100 instances. `SubnetIds` and `Filters` cannot be specified at the same time.
-	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
 	// Filter condition. `SubnetIds` and `Filters` cannot be specified at the same time.
 	// <li>subnet-id - String - (Filter condition) Subnet instance name.</li>
@@ -8096,7 +8096,7 @@ type DescribeSubnetsRequest struct {
 	// <li>zone - String - (Filter condition) Availability zone.</li>
 	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
 	// <li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key is replaced with the specific tag key. For usage, refer to case 2.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
@@ -8135,7 +8135,7 @@ type DescribeSubnetsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Subnet object.
-		SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet" list`
+		SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -8217,7 +8217,7 @@ type DescribeVpcEndPointRequest struct {
 	// <li>end-point-name - String - (Filter condition) Endpoint instance name.</li>
 	// <li> end-point-id - String - (Filter condition) Endpoint instance ID.</li>
 	// <li> vpc-id - String - (Filter condition) VPC instance ID.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -8226,7 +8226,7 @@ type DescribeVpcEndPointRequest struct {
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Endpoint ID list
-	EndPointId []*string `json:"EndPointId,omitempty" name:"EndPointId" list`
+	EndPointId []*string `json:"EndPointId,omitempty" name:"EndPointId"`
 }
 
 func (r *DescribeVpcEndPointRequest) ToJsonString() string {
@@ -8256,7 +8256,7 @@ type DescribeVpcEndPointResponse struct {
 	Response *struct {
 
 		// Endpoint
-		EndPointSet []*EndPoint `json:"EndPointSet,omitempty" name:"EndPointSet" list`
+		EndPointSet []*EndPoint `json:"EndPointSet,omitempty" name:"EndPointSet"`
 
 		// Number of matched endpoints
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -8284,7 +8284,7 @@ type DescribeVpcEndPointServiceRequest struct {
 	// <li> service-id - String - (Filter condition) Unique endpoint service ID.</li>
 	// <li>service-name - String - (Filter condition) Endpoint service instance name.</li>
 	// <li>service-instance-id - String - (Filter condition) Unique real server ID in the format of `lb-xxx`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -8293,7 +8293,7 @@ type DescribeVpcEndPointServiceRequest struct {
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Endpoint service ID
-	EndPointServiceIds []*string `json:"EndPointServiceIds,omitempty" name:"EndPointServiceIds" list`
+	EndPointServiceIds []*string `json:"EndPointServiceIds,omitempty" name:"EndPointServiceIds"`
 }
 
 func (r *DescribeVpcEndPointServiceRequest) ToJsonString() string {
@@ -8323,7 +8323,7 @@ type DescribeVpcEndPointServiceResponse struct {
 	Response *struct {
 
 		// Array of endpoint services
-		EndPointServiceSet []*EndPointService `json:"EndPointServiceSet,omitempty" name:"EndPointServiceSet" list`
+		EndPointServiceSet []*EndPointService `json:"EndPointServiceSet,omitempty" name:"EndPointServiceSet"`
 
 		// Number of matched results
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -8356,7 +8356,7 @@ type DescribeVpcEndPointServiceWhiteListRequest struct {
 	// Filter condition
 	// <li> user-uin - String - (Filter condition) UIN.</li>
 	// <li> end-point-service-id - String - (Filter condition) Endpoint service ID.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeVpcEndPointServiceWhiteListRequest) ToJsonString() string {
@@ -8385,7 +8385,7 @@ type DescribeVpcEndPointServiceWhiteListResponse struct {
 	Response *struct {
 
 		// Array of allowed endpoint services
-		VpcEndpointServiceUserSet []*VpcEndPointServiceUser `json:"VpcEndpointServiceUserSet,omitempty" name:"VpcEndpointServiceUserSet" list`
+		VpcEndpointServiceUserSet []*VpcEndPointServiceUser `json:"VpcEndpointServiceUserSet,omitempty" name:"VpcEndpointServiceUserSet"`
 
 		// Number of matched allowlists
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -8413,7 +8413,7 @@ type DescribeVpcInstancesRequest struct {
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
 	// <li>instance-type - String - (Filter condition) CVM instance ID.</li>
 	// <li>instance-name - String - (Filter condition) CVM name.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -8448,7 +8448,7 @@ type DescribeVpcInstancesResponse struct {
 	Response *struct {
 
 		// List of CVM instances.
-		InstanceSet []*CvmInstance `json:"InstanceSet,omitempty" name:"InstanceSet" list`
+		InstanceSet []*CvmInstance `json:"InstanceSet,omitempty" name:"InstanceSet"`
 
 		// The number of eligible CVM instances.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -8476,7 +8476,7 @@ type DescribeVpcIpv6AddressesRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The `IP` address list. Each request supports a maximum of `10` batch querying.
-	Ipv6Addresses []*string `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses" list`
+	Ipv6Addresses []*string `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses"`
 
 	// Offset.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -8512,7 +8512,7 @@ type DescribeVpcIpv6AddressesResponse struct {
 	Response *struct {
 
 		// The `IPv6` address list.
-		Ipv6AddressSet []*VpcIpv6Address `json:"Ipv6AddressSet,omitempty" name:"Ipv6AddressSet" list`
+		Ipv6AddressSet []*VpcIpv6Address `json:"Ipv6AddressSet,omitempty" name:"Ipv6AddressSet"`
 
 		// The total number of `IPv6` addresses.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -8540,7 +8540,7 @@ type DescribeVpcPrivateIpAddressesRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The private `IP` address list. Each request supports a maximum of `10` batch querying.
-	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 }
 
 func (r *DescribeVpcPrivateIpAddressesRequest) ToJsonString() string {
@@ -8568,7 +8568,7 @@ type DescribeVpcPrivateIpAddressesResponse struct {
 	Response *struct {
 
 		// The list of private `IP` address information.
-		VpcPrivateIpAddressSet []*VpcPrivateIpAddress `json:"VpcPrivateIpAddressSet,omitempty" name:"VpcPrivateIpAddressSet" list`
+		VpcPrivateIpAddressSet []*VpcPrivateIpAddress `json:"VpcPrivateIpAddressSet,omitempty" name:"VpcPrivateIpAddressSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -8590,7 +8590,7 @@ type DescribeVpcResourceDashboardRequest struct {
 	*tchttp.BaseRequest
 
 	// Vpc instance ID, e.g. vpc-f1xjkw1b.
-	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds" list`
+	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 }
 
 func (r *DescribeVpcResourceDashboardRequest) ToJsonString() string {
@@ -8617,7 +8617,7 @@ type DescribeVpcResourceDashboardResponse struct {
 	Response *struct {
 
 		// List of resource objects.
-		ResourceDashboardSet []*ResourceDashboard `json:"ResourceDashboardSet,omitempty" name:"ResourceDashboardSet" list`
+		ResourceDashboardSet []*ResourceDashboard `json:"ResourceDashboardSet,omitempty" name:"ResourceDashboardSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -8639,7 +8639,7 @@ type DescribeVpcsRequest struct {
 	*tchttp.BaseRequest
 
 	// The VPC instance ID, such as `vpc-f49l6u0z`. Each request supports a maximum of 100 instances. `VpcIds` and `Filters` cannot be specified at the same time.
-	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds" list`
+	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 
 	// Filter condition. `VpcIds` and `Filters` cannot be specified at the same time.
 	// <li>vpc-name - String - (Filter condition) VPC instance name.</li>
@@ -8648,7 +8648,7 @@ type DescribeVpcsRequest struct {
 	// <li>cidr-block - String - (Filter condition) VPC CIDR.</li>
 	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
 	// <li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key is replaced with the specific tag key. For usage, refer to case 2.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
@@ -8687,7 +8687,7 @@ type DescribeVpcsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The VPC object.
-		VpcSet []*Vpc `json:"VpcSet,omitempty" name:"VpcSet" list`
+		VpcSet []*Vpc `json:"VpcSet,omitempty" name:"VpcSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -8709,7 +8709,7 @@ type DescribeVpnConnectionsRequest struct {
 	*tchttp.BaseRequest
 
 	// The instance ID of the VPN tunnel, such as `vpnx-f49l6u0z`. Each request can have a maximum of 100 instances. `VpnConnectionIds` and `Filters` cannot be specified at the same time.
-	VpnConnectionIds []*string `json:"VpnConnectionIds,omitempty" name:"VpnConnectionIds" list`
+	VpnConnectionIds []*string `json:"VpnConnectionIds,omitempty" name:"VpnConnectionIds"`
 
 	// Filter condition. In each request, the upper limit for `Filters` is 10 and 5 for `Filter.Values`. `VpnConnectionIds` and `Filters` cannot be specified at the same time.
 	// <li>vpc-id - String - VPC instance ID, such as `vpc-0a36uwkr`.</li>
@@ -8717,7 +8717,7 @@ type DescribeVpnConnectionsRequest struct {
 	// <li>customer-gateway-id - String - Customer gateway instance ID, such as `cgw-l4rblw63`.</li>
 	// <li>vpn-connection-name - String - Connection name, such as `test-vpn`.</li>
 	// <li>vpn-connection-id - String - Connection instance ID, such as `vpnx-5p7vkch8"`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The Offset. The default value is 0. For more information about Offset, see the relevant section in the API Introduction.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -8756,7 +8756,7 @@ type DescribeVpnConnectionsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// VPN tunnel instance.
-		VpnConnectionSet []*VpnConnection `json:"VpnConnectionSet,omitempty" name:"VpnConnectionSet" list`
+		VpnConnectionSet []*VpnConnection `json:"VpnConnectionSet,omitempty" name:"VpnConnectionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -8813,7 +8813,7 @@ type DescribeVpnGatewayCcnRoutesResponse struct {
 	Response *struct {
 
 		// The CCN route (IDC IP range) list.
-		RouteSet []*VpngwCcnRoutes `json:"RouteSet,omitempty" name:"RouteSet" list`
+		RouteSet []*VpngwCcnRoutes `json:"RouteSet,omitempty" name:"RouteSet"`
 
 		// Number of objects that meet the condition.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -8838,7 +8838,7 @@ type DescribeVpnGatewaysRequest struct {
 	*tchttp.BaseRequest
 
 	// The VPN gateway instance ID, such as `vpngw-f49l6u0z`. Each request can have a maximum of 100 instances. `VpnGatewayIds` and `Filters` cannot be specified at the same time.
-	VpnGatewayIds []*string `json:"VpnGatewayIds,omitempty" name:"VpnGatewayIds" list`
+	VpnGatewayIds []*string `json:"VpnGatewayIds,omitempty" name:"VpnGatewayIds"`
 
 	// Filter condition. `VpnGatewayIds` and `Filters` cannot be specified at the same time.
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
@@ -8848,7 +8848,7 @@ type DescribeVpnGatewaysRequest struct {
 	// <li>public-ip-address- String - (Filter condition) Public IP.</li>
 	// <li>renew-flag - String - (Filter condition) Gateway renewal type. Manual renewal: `NOTIFY_AND_MANUAL_RENEW`, Automatic renewal: `NOTIFY_AND_AUTO_RENEW`.</li>
 	// <li>zone - String - (Filter condition) The availability zone where the VPN is located, such as `ap-guangzhou-2`.</li>
-	Filters []*FilterObject `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*FilterObject `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -8887,7 +8887,7 @@ type DescribeVpnGatewaysResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// The list of details of VPN gateway instances.
-		VpnGatewaySet []*VpnGateway `json:"VpnGatewaySet,omitempty" name:"VpnGatewaySet" list`
+		VpnGatewaySet []*VpnGateway `json:"VpnGatewaySet,omitempty" name:"VpnGatewaySet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -8933,7 +8933,7 @@ type DetachCcnInstancesRequest struct {
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// The list of network instances to be unbound
-	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances" list`
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
 }
 
 func (r *DetachCcnInstancesRequest) ToJsonString() string {
@@ -8983,7 +8983,7 @@ type DetachClassicLinkVpcRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// Queries the ID of the CVM instance, such as `ins-r8hr2upy`.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DetachClassicLinkVpcRequest) ToJsonString() string {
@@ -9129,7 +9129,7 @@ type DirectConnectGateway struct {
 
 	// Whether the direct connect gateway supports the VXLAN architecture.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	VXLANSupport []*bool `json:"VXLANSupport,omitempty" name:"VXLANSupport" list`
+	VXLANSupport []*bool `json:"VXLANSupport,omitempty" name:"VXLANSupport"`
 
 	// CCN route publishing mode. Valid values: `standard` and `exquisite`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -9153,7 +9153,7 @@ type DirectConnectGatewayCcnRoute struct {
 	DestinationCidrBlock *string `json:"DestinationCidrBlock,omitempty" name:"DestinationCidrBlock"`
 
 	// The `AS-Path` attribute of `BGP`.
-	ASPath []*string `json:"ASPath,omitempty" name:"ASPath" list`
+	ASPath []*string `json:"ASPath,omitempty" name:"ASPath"`
 }
 
 type DisableCcnRoutesRequest struct {
@@ -9163,7 +9163,7 @@ type DisableCcnRoutesRequest struct {
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// The unique ID of the CCN routing policy, such as `ccnr-f49l6u0z`.
-	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds" list`
+	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds"`
 }
 
 func (r *DisableCcnRoutesRequest) ToJsonString() string {
@@ -9369,7 +9369,7 @@ type DisassociateNatGatewayAddressRequest struct {
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
 	// Array of the EIPs to be unbound from the NAT gateway.
-	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
 }
 
 func (r *DisassociateNatGatewayAddressRequest) ToJsonString() string {
@@ -9419,7 +9419,7 @@ type DisassociateNetworkAclSubnetsRequest struct {
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 
 	// Array of subnet instance IDs. Example: [subnet-12345678].
-	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds" list`
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 }
 
 func (r *DisassociateNetworkAclSubnetsRequest) ToJsonString() string {
@@ -9466,10 +9466,10 @@ type DisassociateNetworkInterfaceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
 	// ENI instance ID, e.g. eni-pxir56ns. You can enter up to 100 instances for each request.
-	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds" list`
+	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
 
 	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups. You can enter up to 100 instances for each request.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
 
 func (r *DisassociateNetworkInterfaceSecurityGroupsRequest) ToJsonString() string {
@@ -9516,7 +9516,7 @@ type DisassociateVpcEndPointSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
 	// Array of security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Endpoint ID
 	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
@@ -9630,7 +9630,7 @@ type EnableCcnRoutesRequest struct {
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// The unique ID of the CCN routing policy, such as `ccnr-f49l6u0z`.
-	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds" list`
+	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds"`
 }
 
 func (r *EnableCcnRoutesRequest) ToJsonString() string {
@@ -9729,7 +9729,7 @@ type EnableVpcEndPointConnectRequest struct {
 	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
 
 	// Endpoint ID
-	EndPointId []*string `json:"EndPointId,omitempty" name:"EndPointId" list`
+	EndPointId []*string `json:"EndPointId,omitempty" name:"EndPointId"`
 
 	// Whether to accept the request of connecting with an endpoint
 	AcceptFlag *bool `json:"AcceptFlag,omitempty" name:"AcceptFlag"`
@@ -9812,7 +9812,7 @@ type EndPoint struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// ID list of security group instances bound with endpoints
-	GroupSet []*string `json:"GroupSet,omitempty" name:"GroupSet" list`
+	GroupSet []*string `json:"GroupSet,omitempty" name:"GroupSet"`
 
 	// Endpoint service name
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -9848,7 +9848,7 @@ type EndPointService struct {
 
 	// Array of endpoints
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	EndPointSet []*EndPoint `json:"EndPointSet,omitempty" name:"EndPointSet" list`
+	EndPointSet []*EndPoint `json:"EndPointSet,omitempty" name:"EndPointSet"`
 
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -9860,7 +9860,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type FilterObject struct {
@@ -9869,7 +9869,7 @@ type FilterObject struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type FlowLog struct {
@@ -9905,7 +9905,7 @@ type FlowLog struct {
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// Tag list, such as [{"Key": "city", "Value": "shanghai"}]
-	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type GatewayFlowMonitorDetail struct {
@@ -9950,7 +9950,7 @@ type GetCcnRegionBandwidthLimitsRequest struct {
 	// The filter condition.
 	// <li>sregion - String - (Filter condition) Filter by the source region, such as 'ap-guangzhou'.</li>
 	// <li>dregion - String - (Filter condition) Filter by the destination region, such as 'ap-shanghai-bm'.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The sorting condition. Valid values: `BandwidthLimit` and `ExpireTime`.
 	SortedBy *string `json:"SortedBy,omitempty" name:"SortedBy"`
@@ -9995,7 +9995,7 @@ type GetCcnRegionBandwidthLimitsResponse struct {
 
 		// The outbound bandwidth limits of regions in a CCN instance.
 	// Note: this field may return null, indicating that no valid value was found.
-		CcnBandwidthSet []*CcnBandwidthInfo `json:"CcnBandwidthSet,omitempty" name:"CcnBandwidthSet" list`
+		CcnBandwidthSet []*CcnBandwidthInfo `json:"CcnBandwidthSet,omitempty" name:"CcnBandwidthSet"`
 
 		// The number of eligible objects.
 	// Note: this field may return null, indicating that no valid value was found.
@@ -10805,7 +10805,7 @@ type ModifyAddressTemplateAttributeRequest struct {
 	AddressTemplateName *string `json:"AddressTemplateName,omitempty" name:"AddressTemplateName"`
 
 	// Address information, including IP, CIDR and IP address range.
-	Addresses []*string `json:"Addresses,omitempty" name:"Addresses" list`
+	Addresses []*string `json:"Addresses,omitempty" name:"Addresses"`
 }
 
 func (r *ModifyAddressTemplateAttributeRequest) ToJsonString() string {
@@ -10859,7 +10859,7 @@ type ModifyAddressTemplateGroupAttributeRequest struct {
 	AddressTemplateGroupName *string `json:"AddressTemplateGroupName,omitempty" name:"AddressTemplateGroupName"`
 
 	// IP address template instance ID, such as `ipm-mdunqeb6`.
-	AddressTemplateIds []*string `json:"AddressTemplateIds,omitempty" name:"AddressTemplateIds" list`
+	AddressTemplateIds []*string `json:"AddressTemplateIds,omitempty" name:"AddressTemplateIds"`
 }
 
 func (r *ModifyAddressTemplateGroupAttributeRequest) ToJsonString() string {
@@ -10907,7 +10907,7 @@ type ModifyAddressesBandwidthRequest struct {
 	*tchttp.BaseRequest
 
 	// List of EIP IDs, such as “eip-xxxx”.
-	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds" list`
+	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
 
 	// Target bandwidth value adjustment
 	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
@@ -10971,10 +10971,10 @@ type ModifyAssistantCidrRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
-	NewCidrBlocks []*string `json:"NewCidrBlocks,omitempty" name:"NewCidrBlocks" list`
+	NewCidrBlocks []*string `json:"NewCidrBlocks,omitempty" name:"NewCidrBlocks"`
 
 	// Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
-	OldCidrBlocks []*string `json:"OldCidrBlocks,omitempty" name:"OldCidrBlocks" list`
+	OldCidrBlocks []*string `json:"OldCidrBlocks,omitempty" name:"OldCidrBlocks"`
 }
 
 func (r *ModifyAssistantCidrRequest) ToJsonString() string {
@@ -11004,7 +11004,7 @@ type ModifyAssistantCidrResponse struct {
 
 		// A set of secondary CIDR blocks.
 	// Note: This field may return null, indicating that no valid value was found.
-		AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet" list`
+		AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -11083,7 +11083,7 @@ type ModifyCcnAttachedInstancesAttributeRequest struct {
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// List of associated network instances
-	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances" list`
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
 }
 
 func (r *ModifyCcnAttachedInstancesAttributeRequest) ToJsonString() string {
@@ -11409,7 +11409,7 @@ type ModifyGatewayFlowQosRequest struct {
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
 	// CVM private IP addresses with limited bandwidth.
-	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses" list`
+	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses"`
 }
 
 func (r *ModifyGatewayFlowQosRequest) ToJsonString() string {
@@ -11510,7 +11510,7 @@ type ModifyIpv6AddressesAttributeRequest struct {
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
 	// The information of the specified private `IPv6` addresses.
-	Ipv6Addresses []*Ipv6Address `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses" list`
+	Ipv6Addresses []*Ipv6Address `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses"`
 }
 
 func (r *ModifyIpv6AddressesAttributeRequest) ToJsonString() string {
@@ -11627,7 +11627,7 @@ type ModifyNatGatewayAttributeRequest struct {
 	ModifySecurityGroup *bool `json:"ModifySecurityGroup,omitempty" name:"ModifySecurityGroup"`
 
 	// The final security groups bound to the NAT Gateway, such as `['sg-1n232323', 'sg-o4242424']`. An empty list indicates that all the security groups have been deleted.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
 
 func (r *ModifyNatGatewayAttributeRequest) ToJsonString() string {
@@ -11787,7 +11787,7 @@ type ModifyNetDetectRequest struct {
 	NetDetectName *string `json:"NetDetectName,omitempty" name:"NetDetectName"`
 
 	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
-	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp" list`
+	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp"`
 
 	// The type of the next hop. Currently supported types are:
 	// VPN: VPN gateway;
@@ -11966,7 +11966,7 @@ type ModifyNetworkInterfaceAttributeRequest struct {
 	NetworkInterfaceDescription *string `json:"NetworkInterfaceDescription,omitempty" name:"NetworkInterfaceDescription"`
 
 	// The specified security groups to be bound with, such as ['sg-1dd51d'].
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
 
 func (r *ModifyNetworkInterfaceAttributeRequest) ToJsonString() string {
@@ -12018,7 +12018,7 @@ type ModifyPrivateIpAddressesAttributeRequest struct {
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
 	// The specified private IP information.
-	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 }
 
 func (r *ModifyPrivateIpAddressesAttributeRequest) ToJsonString() string {
@@ -12229,7 +12229,7 @@ type ModifyServiceTemplateAttributeRequest struct {
 	ServiceTemplateName *string `json:"ServiceTemplateName,omitempty" name:"ServiceTemplateName"`
 
 	// It supports single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP, and GRE.
-	Services []*string `json:"Services,omitempty" name:"Services" list`
+	Services []*string `json:"Services,omitempty" name:"Services"`
 }
 
 func (r *ModifyServiceTemplateAttributeRequest) ToJsonString() string {
@@ -12283,7 +12283,7 @@ type ModifyServiceTemplateGroupAttributeRequest struct {
 	ServiceTemplateGroupName *string `json:"ServiceTemplateGroupName,omitempty" name:"ServiceTemplateGroupName"`
 
 	// Instance ID of the protocol port template, such as `ppm-4dw6agho`.
-	ServiceTemplateIds []*string `json:"ServiceTemplateIds,omitempty" name:"ServiceTemplateIds" list`
+	ServiceTemplateIds []*string `json:"ServiceTemplateIds,omitempty" name:"ServiceTemplateIds"`
 }
 
 func (r *ModifyServiceTemplateGroupAttributeRequest) ToJsonString() string {
@@ -12394,7 +12394,7 @@ type ModifyVpcAttributeRequest struct {
 	EnableMulticast *string `json:"EnableMulticast,omitempty" name:"EnableMulticast"`
 
 	// DNS address. A maximum of 4 addresses is supported. The first one is primary server by default, and the rest are secondary servers.
-	DnsServers []*string `json:"DnsServers,omitempty" name:"DnsServers" list`
+	DnsServers []*string `json:"DnsServers,omitempty" name:"DnsServers"`
 
 	// Domain name
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
@@ -12453,7 +12453,7 @@ type ModifyVpcEndPointAttributeRequest struct {
 	EndPointName *string `json:"EndPointName,omitempty" name:"EndPointName"`
 
 	// List of security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
 
 func (r *ModifyVpcEndPointAttributeRequest) ToJsonString() string {
@@ -12626,7 +12626,7 @@ type ModifyVpnConnectionAttributeRequest struct {
 	PreShareKey *string `json:"PreShareKey,omitempty" name:"PreShareKey"`
 
 	// The SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}. 10.0.0.5/24 is the VPC internal IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
-	SecurityPolicyDatabases []*SecurityPolicyDatabase `json:"SecurityPolicyDatabases,omitempty" name:"SecurityPolicyDatabases" list`
+	SecurityPolicyDatabases []*SecurityPolicyDatabase `json:"SecurityPolicyDatabases,omitempty" name:"SecurityPolicyDatabases"`
 
 	// IKE (Internet Key Exchange) configuration. IKE comes with a self-protection mechanism. The network security protocol is configured by the user.
 	IKEOptionsSpecification *IKEOptionsSpecification `json:"IKEOptionsSpecification,omitempty" name:"IKEOptionsSpecification"`
@@ -12752,7 +12752,7 @@ type ModifyVpnGatewayCcnRoutesRequest struct {
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
 	// The CCN route (IDC IP range) list.
-	Routes []*VpngwCcnRoutes `json:"Routes,omitempty" name:"Routes" list`
+	Routes []*VpngwCcnRoutes `json:"Routes,omitempty" name:"Routes"`
 }
 
 func (r *ModifyVpnGatewayCcnRoutesRequest) ToJsonString() string {
@@ -12818,13 +12818,13 @@ type NatGateway struct {
 	MaxConcurrentConnection *uint64 `json:"MaxConcurrentConnection,omitempty" name:"MaxConcurrentConnection"`
 
 	// The public IP object array of the bound NAT gateway.
-	PublicIpAddressSet []*NatGatewayAddress `json:"PublicIpAddressSet,omitempty" name:"PublicIpAddressSet" list`
+	PublicIpAddressSet []*NatGatewayAddress `json:"PublicIpAddressSet,omitempty" name:"PublicIpAddressSet"`
 
 	// The NAT gateway status. `AVAILABLE`: Operating, `UNAVAILABLE`: Unavailable, `INSUFFICIENT`: Account is in arrears and the service is suspended.
 	NetworkState *string `json:"NetworkState,omitempty" name:"NetworkState"`
 
 	// The port forwarding rules of the NAT gateway.
-	DestinationIpPortTranslationNatRuleSet []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRuleSet,omitempty" name:"DestinationIpPortTranslationNatRuleSet" list`
+	DestinationIpPortTranslationNatRuleSet []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRuleSet,omitempty" name:"DestinationIpPortTranslationNatRuleSet"`
 
 	// VPC instance ID.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
@@ -12833,17 +12833,17 @@ type NatGateway struct {
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// IDs of direct connect gateway associated.
-	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds" list`
+	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds"`
 
 	// Subnet ID.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// Tag key-value pair.
-	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 
 	// The list of the security groups bound to the NAT Gateway
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	SecurityGroupSet []*string `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet" list`
+	SecurityGroupSet []*string `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet"`
 }
 
 type NatGatewayAddress struct {
@@ -12912,10 +12912,10 @@ type NetDetect struct {
 	NetDetectName *string `json:"NetDetectName,omitempty" name:"NetDetectName"`
 
 	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
-	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp" list`
+	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp"`
 
 	// The array of detection source IPv4 addresses automatically allocated by the system. The length is 2.
-	DetectSourceIp []*string `json:"DetectSourceIp,omitempty" name:"DetectSourceIp" list`
+	DetectSourceIp []*string `json:"DetectSourceIp,omitempty" name:"DetectSourceIp"`
 
 	// Type of the next hop. Currently supported types are:
 	// VPN: VPN gateway;
@@ -12972,7 +12972,7 @@ type NetDetectState struct {
 	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
 
 	// The array of network detection destination IP verification results.
-	NetDetectIpStateSet []*NetDetectIpState `json:"NetDetectIpStateSet,omitempty" name:"NetDetectIpStateSet" list`
+	NetDetectIpStateSet []*NetDetectIpState `json:"NetDetectIpStateSet,omitempty" name:"NetDetectIpStateSet"`
 }
 
 type NetworkAcl struct {
@@ -12990,13 +12990,13 @@ type NetworkAcl struct {
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// Array of subnets associated with the network ACL.
-	SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet" list`
+	SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet"`
 
 	// Inbound rules of the network ACL.
-	IngressEntries []*NetworkAclEntry `json:"IngressEntries,omitempty" name:"IngressEntries" list`
+	IngressEntries []*NetworkAclEntry `json:"IngressEntries,omitempty" name:"IngressEntries"`
 
 	// Outbound rules of the network ACL.
-	EgressEntries []*NetworkAclEntry `json:"EgressEntries,omitempty" name:"EgressEntries" list`
+	EgressEntries []*NetworkAclEntry `json:"EgressEntries,omitempty" name:"EgressEntries"`
 }
 
 type NetworkAclEntry struct {
@@ -13026,10 +13026,10 @@ type NetworkAclEntry struct {
 type NetworkAclEntrySet struct {
 
 	// Inbound rules.
-	Ingress []*NetworkAclEntry `json:"Ingress,omitempty" name:"Ingress" list`
+	Ingress []*NetworkAclEntry `json:"Ingress,omitempty" name:"Ingress"`
 
 	// Outbound rules.
-	Egress []*NetworkAclEntry `json:"Egress,omitempty" name:"Egress" list`
+	Egress []*NetworkAclEntry `json:"Egress,omitempty" name:"Egress"`
 }
 
 type NetworkInterface struct {
@@ -13050,7 +13050,7 @@ type NetworkInterface struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// Bound security group.
-	GroupSet []*string `json:"GroupSet,omitempty" name:"GroupSet" list`
+	GroupSet []*string `json:"GroupSet,omitempty" name:"GroupSet"`
 
 	// Whether it is the primary ENI.
 	Primary *bool `json:"Primary,omitempty" name:"Primary"`
@@ -13067,7 +13067,7 @@ type NetworkInterface struct {
 	State *string `json:"State,omitempty" name:"State"`
 
 	// Private IP information.
-	PrivateIpAddressSet []*PrivateIpAddressSpecification `json:"PrivateIpAddressSet,omitempty" name:"PrivateIpAddressSet" list`
+	PrivateIpAddressSet []*PrivateIpAddressSpecification `json:"PrivateIpAddressSet,omitempty" name:"PrivateIpAddressSet"`
 
 	// Bound CVM object.
 	// Note: This field may return null, indicating no valid value.
@@ -13080,10 +13080,10 @@ type NetworkInterface struct {
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// The `IPv6` address list.
-	Ipv6AddressSet []*Ipv6Address `json:"Ipv6AddressSet,omitempty" name:"Ipv6AddressSet" list`
+	Ipv6AddressSet []*Ipv6Address `json:"Ipv6AddressSet,omitempty" name:"Ipv6AddressSet"`
 
 	// Tag key-value pair.
-	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 
 	// The ENI type. 0: ENI. 1: EVM ENI.
 	EniType *uint64 `json:"EniType,omitempty" name:"EniType"`
@@ -13119,7 +13119,7 @@ type NotifyRoutesRequest struct {
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
 	// The unique ID of the routing policy
-	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds" list`
+	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds"`
 }
 
 func (r *NotifyRoutesRequest) ToJsonString() string {
@@ -13217,7 +13217,7 @@ type ReferredSecurityGroup struct {
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
 	// IDs of all referred security group instances.
-	ReferredSecurityGroupIds []*string `json:"ReferredSecurityGroupIds,omitempty" name:"ReferredSecurityGroupIds" list`
+	ReferredSecurityGroupIds []*string `json:"ReferredSecurityGroupIds,omitempty" name:"ReferredSecurityGroupIds"`
 }
 
 type RejectAttachCcnInstancesRequest struct {
@@ -13227,7 +13227,7 @@ type RejectAttachCcnInstancesRequest struct {
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// The list of instances whose association is rejected.
-	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances" list`
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
 }
 
 func (r *RejectAttachCcnInstancesRequest) ToJsonString() string {
@@ -13274,7 +13274,7 @@ type ReleaseAddressesRequest struct {
 	*tchttp.BaseRequest
 
 	// The unique ID list of the EIP. The unique ID of an EIP is as follows: `eip-11112222`.
-	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds" list`
+	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
 }
 
 func (r *ReleaseAddressesRequest) ToJsonString() string {
@@ -13329,7 +13329,7 @@ type RemoveBandwidthPackageResourcesRequest struct {
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
 	// The resource IP, such as `eip-xxxx` and `lb-xxxx`.
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 }
 
 func (r *RemoveBandwidthPackageResourcesRequest) ToJsonString() string {
@@ -13430,7 +13430,7 @@ type ReplaceDirectConnectGatewayCcnRoutesRequest struct {
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
 	// The list of IDC IP range that must be connected
-	Routes []*DirectConnectGatewayCcnRoute `json:"Routes,omitempty" name:"Routes" list`
+	Routes []*DirectConnectGatewayCcnRoute `json:"Routes,omitempty" name:"Routes"`
 }
 
 func (r *ReplaceDirectConnectGatewayCcnRoutesRequest) ToJsonString() string {
@@ -13530,7 +13530,7 @@ type ReplaceRoutesRequest struct {
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
 	// Routing policy object. The routing policy ID (RouteId) must be specified.
-	Routes []*Route `json:"Routes,omitempty" name:"Routes" list`
+	Routes []*Route `json:"Routes,omitempty" name:"Routes"`
 }
 
 func (r *ReplaceRoutesRequest) ToJsonString() string {
@@ -13558,10 +13558,10 @@ type ReplaceRoutesResponse struct {
 	Response *struct {
 
 		// Old routing policy
-		OldRouteSet []*Route `json:"OldRouteSet,omitempty" name:"OldRouteSet" list`
+		OldRouteSet []*Route `json:"OldRouteSet,omitempty" name:"OldRouteSet"`
 
 		// New routing policy
-		NewRouteSet []*Route `json:"NewRouteSet,omitempty" name:"NewRouteSet" list`
+		NewRouteSet []*Route `json:"NewRouteSet,omitempty" name:"NewRouteSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -13643,7 +13643,7 @@ type ResetAttachCcnInstancesRequest struct {
 	CcnUin *string `json:"CcnUin,omitempty" name:"CcnUin"`
 
 	// The list of network instances that re-apply for association.
-	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances" list`
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
 }
 
 func (r *ResetAttachCcnInstancesRequest) ToJsonString() string {
@@ -13747,7 +13747,7 @@ type ResetRoutesRequest struct {
 	RouteTableName *string `json:"RouteTableName,omitempty" name:"RouteTableName"`
 
 	// Routing policy.
-	Routes []*Route `json:"Routes,omitempty" name:"Routes" list`
+	Routes []*Route `json:"Routes,omitempty" name:"Routes"`
 }
 
 func (r *ResetRoutesRequest) ToJsonString() string {
@@ -14099,10 +14099,10 @@ type RouteTable struct {
 	RouteTableName *string `json:"RouteTableName,omitempty" name:"RouteTableName"`
 
 	// The association relationships of the route table.
-	AssociationSet []*RouteTableAssociation `json:"AssociationSet,omitempty" name:"AssociationSet" list`
+	AssociationSet []*RouteTableAssociation `json:"AssociationSet,omitempty" name:"AssociationSet"`
 
 	// IPv4 routing policy set.
-	RouteSet []*Route `json:"RouteSet,omitempty" name:"RouteSet" list`
+	RouteSet []*Route `json:"RouteSet,omitempty" name:"RouteSet"`
 
 	// Whether it is the default route table.
 	Main *bool `json:"Main,omitempty" name:"Main"`
@@ -14111,11 +14111,11 @@ type RouteTable struct {
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// Tag key-value pairs.
-	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Whether the local route is published to CCN.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	LocalCidrForCcn []*CidrForCcn `json:"LocalCidrForCcn,omitempty" name:"LocalCidrForCcn" list`
+	LocalCidrForCcn []*CidrForCcn `json:"LocalCidrForCcn,omitempty" name:"LocalCidrForCcn"`
 }
 
 type RouteTableAssociation struct {
@@ -14148,7 +14148,7 @@ type SecurityGroup struct {
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// Tag key-value pairs.
-	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type SecurityGroupAssociationStatistics struct {
@@ -14172,7 +14172,7 @@ type SecurityGroupAssociationStatistics struct {
 	CLB *uint64 `json:"CLB,omitempty" name:"CLB"`
 
 	// The binding statistics for all instances.
-	InstanceStatistics []*InstanceStatistic `json:"InstanceStatistics,omitempty" name:"InstanceStatistics" list`
+	InstanceStatistics []*InstanceStatistic `json:"InstanceStatistics,omitempty" name:"InstanceStatistics"`
 
 	// Total count of all resources (excluding resources referenced by security groups).
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -14220,10 +14220,10 @@ type SecurityGroupPolicySet struct {
 	Version *string `json:"Version,omitempty" name:"Version"`
 
 	// Outbound policy.
-	Egress []*SecurityGroupPolicy `json:"Egress,omitempty" name:"Egress" list`
+	Egress []*SecurityGroupPolicy `json:"Egress,omitempty" name:"Egress"`
 
 	// Inbound policy.
-	Ingress []*SecurityGroupPolicy `json:"Ingress,omitempty" name:"Ingress" list`
+	Ingress []*SecurityGroupPolicy `json:"Ingress,omitempty" name:"Ingress"`
 }
 
 type SecurityPolicyDatabase struct {
@@ -14232,7 +14232,7 @@ type SecurityPolicyDatabase struct {
 	LocalCidrBlock *string `json:"LocalCidrBlock,omitempty" name:"LocalCidrBlock"`
 
 	// Opposite IP range
-	RemoteCidrBlock []*string `json:"RemoteCidrBlock,omitempty" name:"RemoteCidrBlock" list`
+	RemoteCidrBlock []*string `json:"RemoteCidrBlock,omitempty" name:"RemoteCidrBlock"`
 }
 
 type ServiceTemplate struct {
@@ -14244,7 +14244,7 @@ type ServiceTemplate struct {
 	ServiceTemplateName *string `json:"ServiceTemplateName,omitempty" name:"ServiceTemplateName"`
 
 	// Protocol port information.
-	ServiceSet []*string `json:"ServiceSet,omitempty" name:"ServiceSet" list`
+	ServiceSet []*string `json:"ServiceSet,omitempty" name:"ServiceSet"`
 
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
@@ -14259,13 +14259,13 @@ type ServiceTemplateGroup struct {
 	ServiceTemplateGroupName *string `json:"ServiceTemplateGroupName,omitempty" name:"ServiceTemplateGroupName"`
 
 	// Protocol port template instance ID.
-	ServiceTemplateIdSet []*string `json:"ServiceTemplateIdSet,omitempty" name:"ServiceTemplateIdSet" list`
+	ServiceTemplateIdSet []*string `json:"ServiceTemplateIdSet,omitempty" name:"ServiceTemplateIdSet"`
 
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// Protocol port template instance information.
-	ServiceTemplateSet []*ServiceTemplate `json:"ServiceTemplateSet,omitempty" name:"ServiceTemplateSet" list`
+	ServiceTemplateSet []*ServiceTemplate `json:"ServiceTemplateSet,omitempty" name:"ServiceTemplateSet"`
 }
 
 type ServiceTemplateSpecification struct {
@@ -14284,7 +14284,7 @@ type SetCcnRegionBandwidthLimitsRequest struct {
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
 	// The outbound bandwidth cap of each CCN region.
-	CcnRegionBandwidthLimits []*CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimits,omitempty" name:"CcnRegionBandwidthLimits" list`
+	CcnRegionBandwidthLimits []*CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimits,omitempty" name:"CcnRegionBandwidthLimits"`
 }
 
 func (r *SetCcnRegionBandwidthLimitsRequest) ToJsonString() string {
@@ -14340,7 +14340,7 @@ type SourceIpTranslationNatRule struct {
 	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
 
 	// Elastic IP address pool
-	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
 
 	// Description
 	Description *string `json:"Description,omitempty" name:"Description"`
@@ -14406,7 +14406,7 @@ type Subnet struct {
 	TotalIpAddressCount *uint64 `json:"TotalIpAddressCount,omitempty" name:"TotalIpAddressCount"`
 
 	// Tag key-value pairs
-	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 
 	// CDC instance ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -14496,7 +14496,7 @@ type UnassignIpv6AddressesRequest struct {
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
 	// The list of specified `IPv6` addresses. A maximum of 10 can be specified each time.
-	Ipv6Addresses []*Ipv6Address `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses" list`
+	Ipv6Addresses []*Ipv6Address `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses"`
 }
 
 func (r *UnassignIpv6AddressesRequest) ToJsonString() string {
@@ -14596,7 +14596,7 @@ type UnassignIpv6SubnetCidrBlockRequest struct {
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The `IPv6` subnet IP range list.
-	Ipv6SubnetCidrBlocks []*Ipv6SubnetCidrBlock `json:"Ipv6SubnetCidrBlocks,omitempty" name:"Ipv6SubnetCidrBlocks" list`
+	Ipv6SubnetCidrBlocks []*Ipv6SubnetCidrBlock `json:"Ipv6SubnetCidrBlocks,omitempty" name:"Ipv6SubnetCidrBlocks"`
 }
 
 func (r *UnassignIpv6SubnetCidrBlockRequest) ToJsonString() string {
@@ -14646,7 +14646,7 @@ type UnassignPrivateIpAddressesRequest struct {
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
 	// The information of the specified private IPs. You can specify a maximum of 10 each time.
-	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 }
 
 func (r *UnassignPrivateIpAddressesRequest) ToJsonString() string {
@@ -14710,7 +14710,7 @@ type Vpc struct {
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// `DNS` list.
-	DnsServerSet []*string `json:"DnsServerSet,omitempty" name:"DnsServerSet" list`
+	DnsServerSet []*string `json:"DnsServerSet,omitempty" name:"DnsServerSet"`
 
 	// DHCP domain name option value.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
@@ -14725,11 +14725,11 @@ type Vpc struct {
 	Ipv6CidrBlock *string `json:"Ipv6CidrBlock,omitempty" name:"Ipv6CidrBlock"`
 
 	// Tag key-value pair
-	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 
 	// The secondary CIDR block.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet" list`
+	AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet"`
 }
 
 type VpcEndPointServiceUser struct {
@@ -14819,7 +14819,7 @@ type VpnConnection struct {
 	NetStatus *string `json:"NetStatus,omitempty" name:"NetStatus"`
 
 	// SPD.
-	SecurityPolicyDatabaseSet []*SecurityPolicyDatabase `json:"SecurityPolicyDatabaseSet,omitempty" name:"SecurityPolicyDatabaseSet" list`
+	SecurityPolicyDatabaseSet []*SecurityPolicyDatabase `json:"SecurityPolicyDatabaseSet,omitempty" name:"SecurityPolicyDatabaseSet"`
 
 	// IKE options.
 	IKEOptionsSpecification *IKEOptionsSpecification `json:"IKEOptionsSpecification,omitempty" name:"IKEOptionsSpecification"`
@@ -14888,7 +14888,7 @@ type VpnGateway struct {
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// Gateway bandwidth quota information.
-	VpnGatewayQuotaSet []*VpnGatewayQuota `json:"VpnGatewayQuotaSet,omitempty" name:"VpnGatewayQuotaSet" list`
+	VpnGatewayQuotaSet []*VpnGatewayQuota `json:"VpnGatewayQuotaSet,omitempty" name:"VpnGatewayQuotaSet"`
 
 	// Gateway instance version.
 	Version *string `json:"Version,omitempty" name:"Version"`
@@ -14927,7 +14927,7 @@ type WithdrawNotifyRoutesRequest struct {
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
 	// The unique ID of the routing policy
-	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds" list`
+	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds"`
 }
 
 func (r *WithdrawNotifyRoutesRequest) ToJsonString() string {

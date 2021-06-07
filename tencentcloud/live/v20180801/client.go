@@ -1286,6 +1286,32 @@ func (c *Client) DescribeLiveDomainPlayInfoList(request *DescribeLiveDomainPlayI
     return
 }
 
+func NewDescribeLiveDomainRefererRequest() (request *DescribeLiveDomainRefererRequest) {
+    request = &DescribeLiveDomainRefererRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomainReferer")
+    return
+}
+
+func NewDescribeLiveDomainRefererResponse() (response *DescribeLiveDomainRefererResponse) {
+    response = &DescribeLiveDomainRefererResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query referer allowlist/blocklist configuration of a live streaming domain name.
+// Referer information is included in HTTP requests. After you enable referer configuration, live streams using RTMP or WebRTC for playback will not authenticate the referer and can be played back normally. To make the referer configuration effective, the HTTP-FLV or HLS protocol is recommended for playback.
+func (c *Client) DescribeLiveDomainReferer(request *DescribeLiveDomainRefererRequest) (response *DescribeLiveDomainRefererResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainRefererRequest()
+    }
+    response = NewDescribeLiveDomainRefererResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveDomainsRequest() (request *DescribeLiveDomainsRequest) {
     request = &DescribeLiveDomainsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2288,6 +2314,32 @@ func (c *Client) ModifyLiveDomainCert(request *ModifyLiveDomainCertRequest) (res
         request = NewModifyLiveDomainCertRequest()
     }
     response = NewModifyLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLiveDomainRefererRequest() (request *ModifyLiveDomainRefererRequest) {
+    request = &ModifyLiveDomainRefererRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "ModifyLiveDomainReferer")
+    return
+}
+
+func NewModifyLiveDomainRefererResponse() (response *ModifyLiveDomainRefererResponse) {
+    response = &ModifyLiveDomainRefererResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to configure referer allowlist/blocklist of a live streaming domain name.
+// Referer information is included in HTTP requests. After you enable referer configuration, live streams using RTMP or WebRTC for playback will not authenticate the referer and can be played back normally. To make the referer configuration effective, the HTTP-FLV or HLS protocol is recommended for playback.
+func (c *Client) ModifyLiveDomainReferer(request *ModifyLiveDomainRefererRequest) (response *ModifyLiveDomainRefererResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveDomainRefererRequest()
+    }
+    response = NewModifyLiveDomainRefererResponse()
     err = c.Send(request, response)
     return
 }

@@ -98,7 +98,7 @@ type DescribeMigrationTaskResponse struct {
 	Response *struct {
 
 		// Migration details list
-		TaskStatus []*TaskStatus `json:"TaskStatus,omitempty" name:"TaskStatus" list`
+		TaskStatus []*TaskStatus `json:"TaskStatus,omitempty" name:"TaskStatus"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -166,7 +166,7 @@ type ListMigrationProjectResponse struct {
 	Response *struct {
 
 		// Project list
-		Projects []*Project `json:"Projects,omitempty" name:"Projects" list`
+		Projects []*Project `json:"Projects,omitempty" name:"Projects"`
 
 		// Total number of projects
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -229,7 +229,7 @@ type ListMigrationTaskResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Migration task list
-		Tasks []*Task `json:"Tasks,omitempty" name:"Tasks" list`
+		Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

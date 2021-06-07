@@ -34,7 +34,7 @@ type BaradData struct {
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 	// Value array
-	Data []*float64 `json:"Data,omitempty" name:"Data" list`
+	Data []*float64 `json:"Data,omitempty" name:"Data"`
 
 	// Value array size
 	Count *uint64 `json:"Count,omitempty" name:"Count"`
@@ -158,10 +158,10 @@ type CCPolicy struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Rule list
-	RuleList []*CCRule `json:"RuleList,omitempty" name:"RuleList" list`
+	RuleList []*CCRule `json:"RuleList,omitempty" name:"RuleList"`
 
 	// IP list. If this field is to be left empty, please pass in an empty instead of null;
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 
 	// CC protection type. Valid values: [http, https]
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
@@ -274,10 +274,10 @@ type CreateBoundIPRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Array of IPs to be bound to the Anti-DDoS instance. For Anti-DDoS Pro Single IP instance, this array can contain only one IP. If there are no IPs to bind, it can be empty; however, either `BoundDevList` or `UnBoundDevList` must not be empty;
-	BoundDevList []*BoundIpInfo `json:"BoundDevList,omitempty" name:"BoundDevList" list`
+	BoundDevList []*BoundIpInfo `json:"BoundDevList,omitempty" name:"BoundDevList"`
 
 	// Array of IPs to be unbound from Anti-DDoS instance. For Anti-DDoS Pro Single IP instance, this array can contain only one IP; if there are no IPs to unbind, it can be empty; however, either `BoundDevList` or `UnBoundDevList` must not be empty;
-	UnBoundDevList []*BoundIpInfo `json:"UnBoundDevList,omitempty" name:"UnBoundDevList" list`
+	UnBoundDevList []*BoundIpInfo `json:"UnBoundDevList,omitempty" name:"UnBoundDevList"`
 
 	// [Disused]
 	CopyPolicy *string `json:"CopyPolicy,omitempty" name:"CopyPolicy"`
@@ -485,13 +485,13 @@ type CreateDDoSPolicyCaseRequest struct {
 	CaseName *string `json:"CaseName,omitempty" name:"CaseName"`
 
 	// Development platform. Valid values: [PC (PC client), MOBILE (mobile device), TV (TV), SERVER (server)]
-	PlatformTypes []*string `json:"PlatformTypes,omitempty" name:"PlatformTypes" list`
+	PlatformTypes []*string `json:"PlatformTypes,omitempty" name:"PlatformTypes"`
 
 	// Category. Valid values: [WEB (website), GAME (game), APP (application), OTHER (other)]
 	AppType *string `json:"AppType,omitempty" name:"AppType"`
 
 	// Application protocol. Valid values: [tcp (TCP protocol), udp (UDP protocol), icmp (ICMP protocol), all (other protocols)]
-	AppProtocols []*string `json:"AppProtocols,omitempty" name:"AppProtocols" list`
+	AppProtocols []*string `json:"AppProtocols,omitempty" name:"AppProtocols"`
 
 	// TCP start port. Value range: (0, 65535]
 	TcpSportStart *string `json:"TcpSportStart,omitempty" name:"TcpSportStart"`
@@ -527,7 +527,7 @@ type CreateDDoSPolicyCaseRequest struct {
 	UdpFootprint *string `json:"UdpFootprint,omitempty" name:"UdpFootprint"`
 
 	// Web application API URL
-	WebApiUrl []*string `json:"WebApiUrl,omitempty" name:"WebApiUrl" list`
+	WebApiUrl []*string `json:"WebApiUrl,omitempty" name:"WebApiUrl"`
 
 	// Minimum length of TCP packet. Value range: (0, 1500)
 	MinTcpPackageLen *string `json:"MinTcpPackageLen,omitempty" name:"MinTcpPackageLen"`
@@ -623,22 +623,22 @@ type CreateDDoSPolicyRequest struct {
 	Business *string `json:"Business,omitempty" name:"Business"`
 
 	// Protocol disablement, which must be entered, and the array length must be 1
-	DropOptions []*DDoSPolicyDropOption `json:"DropOptions,omitempty" name:"DropOptions" list`
+	DropOptions []*DDoSPolicyDropOption `json:"DropOptions,omitempty" name:"DropOptions"`
 
 	// Policy name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Ports to be closed. If no ports are to be closed, enter an empty array
-	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits" list`
+	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits"`
 
 	// Request source IP blocklist/allowlist, which should be an empty array if there are no blocked or allowed IPs.
-	IpAllowDenys []*IpBlackWhite `json:"IpAllowDenys,omitempty" name:"IpAllowDenys" list`
+	IpAllowDenys []*IpBlackWhite `json:"IpAllowDenys,omitempty" name:"IpAllowDenys"`
 
 	// Packet filter. Enter an empty array if there are no packets to filter
-	PacketFilters []*DDoSPolicyPacketFilter `json:"PacketFilters,omitempty" name:"PacketFilters" list`
+	PacketFilters []*DDoSPolicyPacketFilter `json:"PacketFilters,omitempty" name:"PacketFilters"`
 
 	// Watermarking policy parameters. Enter an empty array if the watermarking feature is not enabled. Only one watermarking policy can be passed in (that is, the size of the array cannot exceed 1)
-	WaterPrint []*WaterPrintPolicy `json:"WaterPrint,omitempty" name:"WaterPrint" list`
+	WaterPrint []*WaterPrintPolicy `json:"WaterPrint,omitempty" name:"WaterPrint"`
 }
 
 func (r *CreateDDoSPolicyRequest) ToJsonString() string {
@@ -756,7 +756,7 @@ type CreateL4HealthConfigRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Layer-4 health check configuration array
-	HealthConfig []*L4HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig" list`
+	HealthConfig []*L4HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig"`
 }
 
 func (r *CreateL4HealthConfigRequest) ToJsonString() string {
@@ -813,7 +813,7 @@ type CreateL4RulesRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Rule list
-	Rules []*L4RuleEntry `json:"Rules,omitempty" name:"Rules" list`
+	Rules []*L4RuleEntry `json:"Rules,omitempty" name:"Rules"`
 }
 
 func (r *CreateL4RulesRequest) ToJsonString() string {
@@ -876,7 +876,7 @@ type CreateL7CCRuleRequest struct {
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
 	// Custom layer-7 CC protection rule. If the `Method` is `query`, this field can be left empty; if the `Method` is `add` or `del`, it is required, and the array length can only be 1;
-	RuleConfig []*CCRuleConfig `json:"RuleConfig,omitempty" name:"RuleConfig" list`
+	RuleConfig []*CCRuleConfig `json:"RuleConfig,omitempty" name:"RuleConfig"`
 }
 
 func (r *CreateL7CCRuleRequest) ToJsonString() string {
@@ -907,7 +907,7 @@ type CreateL7CCRuleResponse struct {
 	Response *struct {
 
 		// Custom layer-7 CC protection rule parameters. If custom CC protection rule is not enabled, an empty array will be returned.
-		RuleConfig []*CCRuleConfig `json:"RuleConfig,omitempty" name:"RuleConfig" list`
+		RuleConfig []*CCRuleConfig `json:"RuleConfig,omitempty" name:"RuleConfig"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -935,7 +935,7 @@ type CreateL7HealthConfigRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Layer-7 health check configuration array
-	HealthConfig []*L7HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig" list`
+	HealthConfig []*L7HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig"`
 }
 
 func (r *CreateL7HealthConfigRequest) ToJsonString() string {
@@ -1065,7 +1065,7 @@ type CreateL7RulesRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Rule list
-	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules" list`
+	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
 }
 
 func (r *CreateL7RulesRequest) ToJsonString() string {
@@ -1122,7 +1122,7 @@ type CreateL7RulesUploadRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Rule list
-	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules" list`
+	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
 }
 
 func (r *CreateL7RulesUploadRequest) ToJsonString() string {
@@ -1226,13 +1226,13 @@ type CreateNewL7RulesUploadRequest struct {
 	Business *string `json:"Business,omitempty" name:"Business"`
 
 	// Resource ID list.
-	IdList []*string `json:"IdList,omitempty" name:"IdList" list`
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
 
 	// Resource IP address list.
-	VipList []*string `json:"VipList,omitempty" name:"VipList" list`
+	VipList []*string `json:"VipList,omitempty" name:"VipList"`
 
 	// Rule list.
-	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules" list`
+	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
 }
 
 func (r *CreateNewL7RulesUploadRequest) ToJsonString() string {
@@ -1551,19 +1551,19 @@ type DDoSPolicyPortLimit struct {
 type DDosPolicy struct {
 
 	// Resource bound to policy
-	Resources []*ResourceIp `json:"Resources,omitempty" name:"Resources" list`
+	Resources []*ResourceIp `json:"Resources,omitempty" name:"Resources"`
 
 	// Disabled protocol
 	DropOptions *DDoSPolicyDropOption `json:"DropOptions,omitempty" name:"DropOptions"`
 
 	// Disabled port
-	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits" list`
+	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits"`
 
 	// Packet filter
-	PacketFilters []*DDoSPolicyPacketFilter `json:"PacketFilters,omitempty" name:"PacketFilters" list`
+	PacketFilters []*DDoSPolicyPacketFilter `json:"PacketFilters,omitempty" name:"PacketFilters"`
 
 	// IP blocklist/allowlist
-	IpBlackWhiteLists []*IpBlackWhite `json:"IpBlackWhiteLists,omitempty" name:"IpBlackWhiteLists" list`
+	IpBlackWhiteLists []*IpBlackWhite `json:"IpBlackWhiteLists,omitempty" name:"IpBlackWhiteLists"`
 
 	// Policy ID
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
@@ -1575,14 +1575,14 @@ type DDosPolicy struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Watermarking policy parameter. There can be only one policy. If there are no policies, the array is empty
-	WaterPrint []*WaterPrintPolicy `json:"WaterPrint,omitempty" name:"WaterPrint" list`
+	WaterPrint []*WaterPrintPolicy `json:"WaterPrint,omitempty" name:"WaterPrint"`
 
 	// Watermark key. There can be up to two keys. If there are no policies, the array is empty
-	WaterKey []*WaterPrintKey `json:"WaterKey,omitempty" name:"WaterKey" list`
+	WaterKey []*WaterPrintKey `json:"WaterKey,omitempty" name:"WaterKey"`
 
 	// Resource instance bound to policy
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BoundResources []*string `json:"BoundResources,omitempty" name:"BoundResources" list`
+	BoundResources []*string `json:"BoundResources,omitempty" name:"BoundResources"`
 
 	// Policy scenario
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1815,7 +1815,7 @@ type DeleteL4RulesRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Rule ID list
-	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList" list`
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
 }
 
 func (r *DeleteL4RulesRequest) ToJsonString() string {
@@ -1872,7 +1872,7 @@ type DeleteL7RulesRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Rule ID list
-	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList" list`
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
 }
 
 func (r *DeleteL7RulesRequest) ToJsonString() string {
@@ -1973,7 +1973,7 @@ type DescribeActionLogResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Record array
-		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2080,7 +2080,7 @@ type DescribeBaradDataRequest struct {
 	Statistics *string `json:"Statistics,omitempty" name:"Statistics"`
 
 	// Protocol port array
-	ProtocolPort []*ProtocolPort `json:"ProtocolPort,omitempty" name:"ProtocolPort" list`
+	ProtocolPort []*ProtocolPort `json:"ProtocolPort,omitempty" name:"ProtocolPort"`
 
 	// Resource instance IP, which is required only if `Business` is `net` (Anti-DDoS Ultimate), because an Anti-DDoS Ultimate instance has multiple IPs;
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
@@ -2118,7 +2118,7 @@ type DescribeBaradDataResponse struct {
 	Response *struct {
 
 		// Returned metric value
-		DataList []*BaradData `json:"DataList,omitempty" name:"DataList" list`
+		DataList []*BaradData `json:"DataList,omitempty" name:"DataList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2303,7 +2303,7 @@ type DescribeBizHttpStatusRequest struct {
 	Statistics *string `json:"Statistics,omitempty" name:"Statistics"`
 
 	// Protocol and port list, which is valid when the statistical dimension is the number of connections. Valid protocols: TCP, UDP, HTTP, and HTTPS.
-	ProtoInfo []*ProtocolPort `json:"ProtoInfo,omitempty" name:"ProtoInfo" list`
+	ProtoInfo []*ProtocolPort `json:"ProtoInfo,omitempty" name:"ProtoInfo"`
 
 	// Specific domain name query
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
@@ -2427,7 +2427,7 @@ type DescribeCCEvListRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Resource instance IP. When `business` is not `basic`, if `IpList` is not empty, `Id` must not be empty;
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 
 	// Number of entries per page. A value of 0 means no pagination
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -2473,7 +2473,7 @@ type DescribeCCEvListResponse struct {
 
 		// Instance IP list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+		IpList []*string `json:"IpList,omitempty" name:"IpList"`
 
 		// Start time
 		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -2482,7 +2482,7 @@ type DescribeCCEvListResponse struct {
 		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 		// CC attack event list
-		Data []*CCEventRecord `json:"Data,omitempty" name:"Data" list`
+		Data []*CCEventRecord `json:"Data,omitempty" name:"Data"`
 
 		// Total number of records
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
@@ -2542,7 +2542,7 @@ type DescribeCCFrequencyRulesResponse struct {
 	Response *struct {
 
 		// Access frequency control rule list
-		CCFrequencyRuleList []*CCFrequencyRule `json:"CCFrequencyRuleList,omitempty" name:"CCFrequencyRuleList" list`
+		CCFrequencyRuleList []*CCFrequencyRule `json:"CCFrequencyRuleList,omitempty" name:"CCFrequencyRuleList"`
 
 		// Access frequency control rule status. Valid values: [on, off];
 		CCFrequencyRuleStatus *string `json:"CCFrequencyRuleStatus,omitempty" name:"CCFrequencyRuleStatus"`
@@ -2574,7 +2574,7 @@ type DescribeCCIpAllowDenyRequest struct {
 
 	// Blocklist or allowlist. Valid values: [white (allowlist), black (blocklist)]
 	// Note: this array can only have one value. It cannot get the blocklist and allowlist at the same time
-	Type []*string `json:"Type,omitempty" name:"Type" list`
+	Type []*string `json:"Type,omitempty" name:"Type"`
 
 	// Pagination parameter
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -2615,7 +2615,7 @@ type DescribeCCIpAllowDenyResponse struct {
 	Response *struct {
 
 		// This field has been replaced by `RecordList` and should not be used
-		Data []*KeyValue `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
 		// Number of records
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
@@ -2625,7 +2625,7 @@ type DescribeCCIpAllowDenyResponse struct {
 	// If "Key":"domain", "Value": domain name.
 	// If "Key":"type", "Value" can be `white` (allowlist) or `black` (blocklist).
 	// If "Key":"protocol", "Value": CC protection protocol (HTTP or HTTPS);
-		RecordList []*KeyValueRecord `json:"RecordList,omitempty" name:"RecordList" list`
+		RecordList []*KeyValueRecord `json:"RecordList,omitempty" name:"RecordList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2689,7 +2689,7 @@ type DescribeCCSelfDefinePolicyResponse struct {
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// Policy list
-		Policys []*CCPolicy `json:"Policys,omitempty" name:"Policys" list`
+		Policys []*CCPolicy `json:"Policys,omitempty" name:"Policys"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2788,7 +2788,7 @@ type DescribeCCTrendResponse struct {
 		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 		// Value array
-		Data []*uint64 `json:"Data,omitempty" name:"Data" list`
+		Data []*uint64 `json:"Data,omitempty" name:"Data"`
 
 		// Number of values
 		Count *uint64 `json:"Count,omitempty" name:"Count"`
@@ -2820,7 +2820,7 @@ type DescribeCCUrlAllowRequest struct {
 
 	// Blocklist or allowlist. Valid value: [white (allowlist)]. Currently, only allowlist is supported.
 	// Note: this array can only have one value which can only be `white`
-	Type []*string `json:"Type,omitempty" name:"Type" list`
+	Type []*string `json:"Type,omitempty" name:"Type"`
 
 	// Pagination parameter
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -2861,7 +2861,7 @@ type DescribeCCUrlAllowResponse struct {
 	Response *struct {
 
 		// This field has been replaced by `RecordList` and should not be used
-		Data []*KeyValue `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
 		// Total number of records
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
@@ -2871,7 +2871,7 @@ type DescribeCCUrlAllowResponse struct {
 	// If "Key":"domain", "Value": domain name.
 	// If "Key":"type", "Value" can be `white` (allowlist) or `black` (blocklist).
 	// If "Key":"protocol", "Value": CC protection type (HTTP protection or HTTPS domain name protection);
-		RecordList []*KeyValueRecord `json:"RecordList,omitempty" name:"RecordList" list`
+		RecordList []*KeyValueRecord `json:"RecordList,omitempty" name:"RecordList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2958,7 +2958,7 @@ type DescribeDDoSAttackIPRegionMapRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// IP attack source of specified resource, which is optional
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 }
 
 func (r *DescribeDDoSAttackIPRegionMapRequest) ToJsonString() string {
@@ -2989,10 +2989,10 @@ type DescribeDDoSAttackIPRegionMapResponse struct {
 	Response *struct {
 
 		// Global region distribution data
-		NationCount []*KeyValueRecord `json:"NationCount,omitempty" name:"NationCount" list`
+		NationCount []*KeyValueRecord `json:"NationCount,omitempty" name:"NationCount"`
 
 		// Chinese province distribution data
-		ProvinceCount []*KeyValueRecord `json:"ProvinceCount,omitempty" name:"ProvinceCount" list`
+		ProvinceCount []*KeyValueRecord `json:"ProvinceCount,omitempty" name:"ProvinceCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3032,7 +3032,7 @@ type DescribeDDoSAttackSourceRequest struct {
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// IP attack source of specified resource, which is optional
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 }
 
 func (r *DescribeDDoSAttackSourceRequest) ToJsonString() string {
@@ -3068,7 +3068,7 @@ type DescribeDDoSAttackSourceResponse struct {
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// Attack source list
-		AttackSourceList []*DDoSAttackSourceRecord `json:"AttackSourceList,omitempty" name:"AttackSourceList" list`
+		AttackSourceList []*DDoSAttackSourceRecord `json:"AttackSourceList,omitempty" name:"AttackSourceList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3169,7 +3169,7 @@ type DescribeDDoSCountResponse struct {
 	// 
 	// If `MetricName` is `classnum`:
 	// The value of `key` indicates the attack event type. When the `key` is `UNKNOWNFLOOD`, it indicates  unknown attack events.
-		Data []*KeyValue `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3386,7 +3386,7 @@ type DescribeDDoSEvInfoResponse struct {
 		Pps *uint64 `json:"Pps,omitempty" name:"Pps"`
 
 		// PCAP file download link
-		PcapUrl []*string `json:"PcapUrl,omitempty" name:"PcapUrl" list`
+		PcapUrl []*string `json:"PcapUrl,omitempty" name:"PcapUrl"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3420,7 +3420,7 @@ type DescribeDDoSEvListRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Resource IP
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 
 	// Whether the elastic protection bandwidth is exceeded. Valid values: [yes, no]. If an empty string is entered, it means no filtering
 	OverLoad *string `json:"OverLoad,omitempty" name:"OverLoad"`
@@ -3470,7 +3470,7 @@ type DescribeDDoSEvListResponse struct {
 
 		// Resource IP
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+		IpList []*string `json:"IpList,omitempty" name:"IpList"`
 
 		// Start time
 		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -3479,7 +3479,7 @@ type DescribeDDoSEvListResponse struct {
 		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 		// DDoS attack event list
-		Data []*DDoSEventRecord `json:"Data,omitempty" name:"Data" list`
+		Data []*DDoSEventRecord `json:"Data,omitempty" name:"Data"`
 
 		// Total number of records
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
@@ -3564,7 +3564,7 @@ type DescribeDDoSIpLogResponse struct {
 		// IP attack log, which is a `KeyValue` array. Valid values of `Key-Value`:
 	// If `Key` is `LogTime`, `Value` indicates the IP log time
 	// If `Key` is `LogMessage`, `Value` indicates the IP log content
-		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3658,7 +3658,7 @@ type DescribeDDoSNetCountResponse struct {
 	// 
 	// If `MetricName` is `classnum`:
 	// The value of `key` indicates the attack event type. When the `key` is `UNKNOWNFLOOD`, it indicates  unknown attack events.
-		Data []*KeyValue `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3764,7 +3764,7 @@ type DescribeDDoSNetEvInfoResponse struct {
 		Pps *uint64 `json:"Pps,omitempty" name:"Pps"`
 
 		// PCAP file download link
-		PcapUrl []*string `json:"PcapUrl,omitempty" name:"PcapUrl" list`
+		PcapUrl []*string `json:"PcapUrl,omitempty" name:"PcapUrl"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3845,7 +3845,7 @@ type DescribeDDoSNetEvListResponse struct {
 		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 		// DDoS attack event list
-		Data []*DDoSEventRecord `json:"Data,omitempty" name:"Data" list`
+		Data []*DDoSEventRecord `json:"Data,omitempty" name:"Data"`
 
 		// Total number of records
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
@@ -3923,7 +3923,7 @@ type DescribeDDoSNetIpLogResponse struct {
 		// IP attack log, which is a `KeyValue` array. Valid values of `Key-Value`:
 	// If `Key` is `LogTime`, `Value` indicates the IP log time
 	// If `Key` is `LogMessage`, `Value` indicates the IP log content
-		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4010,7 +4010,7 @@ type DescribeDDoSNetTrendResponse struct {
 		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 		// Value array
-		Data []*uint64 `json:"Data,omitempty" name:"Data" list`
+		Data []*uint64 `json:"Data,omitempty" name:"Data"`
 
 		// Number of values
 		Count *uint64 `json:"Count,omitempty" name:"Count"`
@@ -4066,7 +4066,7 @@ type DescribeDDoSPolicyResponse struct {
 	Response *struct {
 
 		// Advanced DDoS policy list
-		DDosPolicyList []*DDosPolicy `json:"DDosPolicyList,omitempty" name:"DDosPolicyList" list`
+		DDosPolicyList []*DDosPolicy `json:"DDosPolicyList,omitempty" name:"DDosPolicyList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4161,7 +4161,7 @@ type DescribeDDoSTrendResponse struct {
 		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 		// Value array. The unit for attack traffic bandwidth is Mbps, and that for the packet rate is pps.
-		Data []*uint64 `json:"Data,omitempty" name:"Data" list`
+		Data []*uint64 `json:"Data,omitempty" name:"Data"`
 
 		// Number of values
 		Count *uint64 `json:"Count,omitempty" name:"Count"`
@@ -4215,7 +4215,7 @@ type DescribeDDoSUsedStatisResponse struct {
 		// Field value as follows:
 	// Days: number of days of Anti-DDoS resource use
 	// Attacks: number of DDoS attacks
-		Data []*KeyValue `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4240,7 +4240,7 @@ type DescribeIPProductInfoRequest struct {
 	Business *string `json:"Business,omitempty" name:"Business"`
 
 	// IP list
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 }
 
 func (r *DescribeIPProductInfoRequest) ToJsonString() string {
@@ -4272,7 +4272,7 @@ type DescribeIPProductInfoResponse struct {
 	// If `Key` is `ProductInstanceId`, `value` indicates the ID of a Tencent Cloud product instance;
 	// If `Key` is `ProductType`, `value` indicates the Tencent Cloud product type (cvm: CVM, clb: CLB);
 	// If `Key` is `IP`, `value` indicates the IP of a Tencent Cloud product instance;
-		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4294,7 +4294,7 @@ type DescribeInsurePacksRequest struct {
 	*tchttp.BaseRequest
 
 	// Guarantee package ID, which is optional. If you need to get the guarantee package with a specified ID (such as insure-000000xe), please use this field
-	IdList []*string `json:"IdList,omitempty" name:"IdList" list`
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
 }
 
 func (r *DescribeInsurePacksRequest) ToJsonString() string {
@@ -4321,7 +4321,7 @@ type DescribeInsurePacksResponse struct {
 	Response *struct {
 
 		// Guarantee package list
-		InsurePacks []*KeyValueRecord `json:"InsurePacks,omitempty" name:"InsurePacks" list`
+		InsurePacks []*KeyValueRecord `json:"InsurePacks,omitempty" name:"InsurePacks"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4366,7 +4366,7 @@ type DescribeIpBlockListResponse struct {
 	Response *struct {
 
 		// Blocked IP list
-		List []*IpBlockData `json:"List,omitempty" name:"List" list`
+		List []*IpBlockData `json:"List,omitempty" name:"List"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4441,7 +4441,7 @@ type DescribeIpUnBlockListResponse struct {
 		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 		// IP unblocking record
-		List []*IpUnBlockData `json:"List,omitempty" name:"List" list`
+		List []*IpUnBlockData `json:"List,omitempty" name:"List"`
 
 		// Total number of records
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
@@ -4472,7 +4472,7 @@ type DescribeL4HealthConfigRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Rule ID array. To export the health check configurations of all rules, leave this field empty or enter an empty array;
-	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList" list`
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
 }
 
 func (r *DescribeL4HealthConfigRequest) ToJsonString() string {
@@ -4501,7 +4501,7 @@ type DescribeL4HealthConfigResponse struct {
 	Response *struct {
 
 		// Layer-4 health check configuration array
-		HealthConfig []*L4HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig" list`
+		HealthConfig []*L4HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4557,7 +4557,7 @@ type DescribeL4RulesErrHealthResponse struct {
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// Exceptional rule list. Returned value description: `Key` is the rule ID, while `Value` is the exceptional IP. Multiple IPs are separated by ","
-		ErrHealths []*KeyValue `json:"ErrHealths,omitempty" name:"ErrHealths" list`
+		ErrHealths []*KeyValue `json:"ErrHealths,omitempty" name:"ErrHealths"`
 
 		// Exceptional rule list (which provides more error-related information). Returned value description:
 	// If `key` is `RuleId`, `Value` indicates the rule ID;
@@ -4566,7 +4566,7 @@ type DescribeL4RulesErrHealthResponse struct {
 	// If `Key` is `ErrMessage`, `Value` indicates the exception message for health check;
 	// Exception message for health check in the format of `"SourceIp:1.1.1.1|SourcePort:1234|AbnormalStatTime:1570689065|AbnormalReason:connection time out|Interval:20|CheckNum:6|FailNum:6"`. Multiple error messages for the source IP should be separated by `,`,
 	// SourceIp: real server IP, SourcePort: real server port, AbnormalStatTime: exception time, AbnormalReason: cause of exception, Interval: check frequency, CheckNum: number of checks, FailNum: number of failures;
-		ExtErrHealths []*KeyValueRecord `json:"ExtErrHealths,omitempty" name:"ExtErrHealths" list`
+		ExtErrHealths []*KeyValueRecord `json:"ExtErrHealths,omitempty" name:"ExtErrHealths"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4594,7 +4594,7 @@ type DescribeL7HealthConfigRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Rule ID array. To export the health check configurations of all rules, leave this field empty or enter an empty array;
-	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList" list`
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
 }
 
 func (r *DescribeL7HealthConfigRequest) ToJsonString() string {
@@ -4623,7 +4623,7 @@ type DescribeL7HealthConfigResponse struct {
 	Response *struct {
 
 		// Layer-7 health check configuration array
-		HealthConfig []*L7HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig" list`
+		HealthConfig []*L7HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4678,7 +4678,7 @@ type DescribePackIndexResponse struct {
 	// ExpiredPackCount: number of expired resources
 	// ExpireingPackCount: number of expiring resources
 	// IsolatePackCount: number of isolated resources
-		Data []*KeyValue `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4743,7 +4743,7 @@ type DescribePcapResponse struct {
 	Response *struct {
 
 		// PCAP packet download link list, which is an empty array if there are no PCAP packets;
-		PcapUrlList []*string `json:"PcapUrlList,omitempty" name:"PcapUrlList" list`
+		PcapUrlList []*string `json:"PcapUrlList,omitempty" name:"PcapUrlList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4796,7 +4796,7 @@ type DescribePolicyCaseResponse struct {
 	Response *struct {
 
 		// Policy scenario list
-		CaseList []*KeyValueRecord `json:"CaseList,omitempty" name:"CaseList" list`
+		CaseList []*KeyValueRecord `json:"CaseList,omitempty" name:"CaseList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4821,7 +4821,7 @@ type DescribeResIpListRequest struct {
 	Business *string `json:"Business,omitempty" name:"Business"`
 
 	// Resource ID. If this field is left empty, it means to get all resources IP of the current user
-	IdList []*string `json:"IdList,omitempty" name:"IdList" list`
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
 }
 
 func (r *DescribeResIpListRequest) ToJsonString() string {
@@ -4849,7 +4849,7 @@ type DescribeResIpListResponse struct {
 	Response *struct {
 
 		// Resource IP list
-		Resource []*ResourceIp `json:"Resource,omitempty" name:"Resource" list`
+		Resource []*ResourceIp `json:"Resource,omitempty" name:"Resource"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4874,28 +4874,28 @@ type DescribeResourceListRequest struct {
 	Business *string `json:"Business,omitempty" name:"Business"`
 
 	// Region code search, which is optional. If no regions are to be specified, enter an empty array. If a region is to be specified, enter a region code, such as ["gz", "sh"]
-	RegionList []*string `json:"RegionList,omitempty" name:"RegionList" list`
+	RegionList []*string `json:"RegionList,omitempty" name:"RegionList"`
 
 	// Line search. This field can be optionally entered only when getting the list of Anti-DDoS Advanced resources. Valid values: [1 (BGP line), 2 (Nanjing Telecom), 3 (Nanjing Unicom), 99 (third-party partner line)]. Please enter an empty array when getting other products;
-	Line []*uint64 `json:"Line,omitempty" name:"Line" list`
+	Line []*uint64 `json:"Line,omitempty" name:"Line"`
 
 	// Resource ID search, which is optional. If this field is not an empty array, it means to get the resource list of a specified resource;
-	IdList []*string `json:"IdList,omitempty" name:"IdList" list`
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
 
 	// Resource name search, which is optional. If this field is not an empty string, it means to search for resources by name;
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// IP query list, which is optional. Resources will be queried by IP if the list is not empty.
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 
 	// Resource status search list, which is optional. Valid values: [0 (running), 1 (cleansing), 2 (blocking)]. No status search will be performed if an empty array is entered;
-	Status []*uint64 `json:"Status,omitempty" name:"Status" list`
+	Status []*uint64 `json:"Status,omitempty" name:"Status"`
 
 	// Expiring resource search, which is optional. Valid values: [0 (no search), 1 (search for expiring resources)]
 	Expire *uint64 `json:"Expire,omitempty" name:"Expire"`
 
 	// Sort by field, which is optional
-	OderBy []*OrderBy `json:"OderBy,omitempty" name:"OderBy" list`
+	OderBy []*OrderBy `json:"OderBy,omitempty" name:"OderBy"`
 
 	// Number of entries per page. A value of 0 means no pagination
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -4979,7 +4979,7 @@ type DescribeResourceListResponse struct {
 	// "Key": "DdosMax" (Base protection value of the Anti-DDoS Ultimate instance)
 	// "Key": "GFBandwidth" (Base business application bandwidth of the Anti-DDoS Advanced instance)
 	// "Key": "ServiceBandwidth" (Base business application bandwidth of the Anti-DDoS Ultimate instance)
-		ServicePacks []*KeyValueRecord `json:"ServicePacks,omitempty" name:"ServicePacks" list`
+		ServicePacks []*KeyValueRecord `json:"ServicePacks,omitempty" name:"ServicePacks"`
 
 		// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate)
 		Business *string `json:"Business,omitempty" name:"Business"`
@@ -5007,7 +5007,7 @@ type DescribeRuleSetsRequest struct {
 	Business *string `json:"Business,omitempty" name:"Business"`
 
 	// Resource ID list
-	IdList []*string `json:"IdList,omitempty" name:"IdList" list`
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
 }
 
 func (r *DescribeRuleSetsRequest) ToJsonString() string {
@@ -5039,14 +5039,14 @@ type DescribeRuleSetsResponse struct {
 	// If `Key` is "RuleIdList", `Value` indicates the resource rule ID. Multiple rule IDs are separated by ","
 	// If `Key` is "RuleNameList", `Value` indicates the resource rule name. Multiple rule names are separated by ","
 	// If `Key` is "RuleNum", `Value` indicates the number of resource rules
-		L4RuleSets []*KeyValueRecord `json:"L4RuleSets,omitempty" name:"L4RuleSets" list`
+		L4RuleSets []*KeyValueRecord `json:"L4RuleSets,omitempty" name:"L4RuleSets"`
 
 		// Rule record array. Valid values:
 	// If `Key` is "Id", `Value` indicates the resource ID
 	// If `Key` is "RuleIdList", `Value` indicates the resource rule ID. Multiple rule IDs are separated by ","
 	// If `Key` is "RuleNameList", `Value` indicates the resource rule name. Multiple rule names are separated by ","
 	// If `Key` is "RuleNum", `Value` indicates the number of resource rules
-		L7RuleSets []*KeyValueRecord `json:"L7RuleSets,omitempty" name:"L7RuleSets" list`
+		L7RuleSets []*KeyValueRecord `json:"L7RuleSets,omitempty" name:"L7RuleSets"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5106,7 +5106,7 @@ type DescribeSchedulingDomainListResponse struct {
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// List of scheduling domain names
-		DomainList []*SchedulingDomain `json:"DomainList,omitempty" name:"DomainList" list`
+		DomainList []*SchedulingDomain `json:"DomainList,omitempty" name:"DomainList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5156,7 +5156,7 @@ type DescribeSecIndexResponse struct {
 	// BlockCount: number of blockings
 	// MaxMbps: attack bandwidth peak in Mbps
 	// IpNum: IP statistics
-		Data []*KeyValue `json:"Data,omitempty" name:"Data" list`
+		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
 		// Start time of the current month
 		BeginDate *string `json:"BeginDate,omitempty" name:"BeginDate"`
@@ -5257,7 +5257,7 @@ type DescribeTransmitStatisRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Resource IP, which is required and only supports one IP if `Business` is `bgp-multip`. If this field is left empty, all IPs of a resource instance will be counted by default. If the resource instance has multiple IPs (such as Anti-DDoS Ultimate), the statistical method is summation;
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 }
 
 func (r *DescribeTransmitStatisRequest) ToJsonString() string {
@@ -5291,11 +5291,11 @@ type DescribeTransmitStatisResponse struct {
 
 		// If `MetricName` is `traffic`, this field indicates the inbound traffic bandwidth in bps;
 	// If `MetricName` is `pkg`, this field indicates the inbound packet rate in pps;
-		InDataList []*float64 `json:"InDataList,omitempty" name:"InDataList" list`
+		InDataList []*float64 `json:"InDataList,omitempty" name:"InDataList"`
 
 		// If `MetricName` is `traffic`, this field indicates the outbound traffic bandwidth in bps;
 	// If `MetricName` is `pkg`, this field indicates the outbound packet rate in pps;
-		OutDataList []*float64 `json:"OutDataList,omitempty" name:"OutDataList" list`
+		OutDataList []*float64 `json:"OutDataList,omitempty" name:"OutDataList"`
 
 		// Metric name:
 	// traffic: traffic bandwidth;
@@ -5382,7 +5382,7 @@ type DescribleL4RulesRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Rule ID, which is optional. If this field is entered, the specified rule will be obtained
-	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList" list`
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
 
 	// Number of entries per page. A value of 0 means no pagination
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -5419,13 +5419,13 @@ type DescribleL4RulesResponse struct {
 	Response *struct {
 
 		// Forwarding rule list
-		Rules []*L4RuleEntry `json:"Rules,omitempty" name:"Rules" list`
+		Rules []*L4RuleEntry `json:"Rules,omitempty" name:"Rules"`
 
 		// Total number of rules
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// Health check configuration list
-		Healths []*L4RuleHealth `json:"Healths,omitempty" name:"Healths" list`
+		Healths []*L4RuleHealth `json:"Healths,omitempty" name:"Healths"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5453,7 +5453,7 @@ type DescribleL7RulesRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Rule ID, which is optional. If this field is entered, the specified rule will be obtained
-	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList" list`
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
 
 	// Number of entries per page. A value of 0 means no pagination
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -5465,10 +5465,10 @@ type DescribleL7RulesRequest struct {
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Forwarding protocol search, which is optional. Valid values: [http, https, http/https]
-	ProtocolList []*string `json:"ProtocolList,omitempty" name:"ProtocolList" list`
+	ProtocolList []*string `json:"ProtocolList,omitempty" name:"ProtocolList"`
 
 	// Status search, which is optional. Valid values: [0 (successfully configured rule), 1 (rule configuration taking effect), 2 (rule configuration failed), 3 (rule deletion taking effect), 5 (rule deletion failed), 6 (rule waiting for configuration), 7 (rule waiting for deletion), 8 (rule waiting for certificate configuration)]
-	StatusList []*uint64 `json:"StatusList,omitempty" name:"StatusList" list`
+	StatusList []*uint64 `json:"StatusList,omitempty" name:"StatusList"`
 }
 
 func (r *DescribleL7RulesRequest) ToJsonString() string {
@@ -5502,13 +5502,13 @@ type DescribleL7RulesResponse struct {
 	Response *struct {
 
 		// Forwarding rule list
-		Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules" list`
+		Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
 
 		// Total number of rules
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// Health check configuration list
-		Healths []*L7RuleHealth `json:"Healths,omitempty" name:"Healths" list`
+		Healths []*L7RuleHealth `json:"Healths,omitempty" name:"Healths"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5533,7 +5533,7 @@ type DescribleRegionCountRequest struct {
 	Business *string `json:"Business,omitempty" name:"Business"`
 
 	// Line search. Valid values: [1 (BGP line), 2 (Nanjing Telecom), 3 (Nanjing Unicom), 99 (third-party partner line)]. This field is valid only for Anti-DDoS Advanced and should be ignored for other product
-	LineList []*uint64 `json:"LineList,omitempty" name:"LineList" list`
+	LineList []*uint64 `json:"LineList,omitempty" name:"LineList"`
 }
 
 func (r *DescribleRegionCountRequest) ToJsonString() string {
@@ -5561,7 +5561,7 @@ type DescribleRegionCountResponse struct {
 	Response *struct {
 
 		// Number of resource instances in region
-		RegionList []*RegionInstanceCount `json:"RegionList,omitempty" name:"RegionList" list`
+		RegionList []*RegionInstanceCount `json:"RegionList,omitempty" name:"RegionList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5582,34 +5582,34 @@ func (r *DescribleRegionCountResponse) FromJsonString(s string) error {
 type HttpStatusMap struct {
 
 	// HTTP 2xx Status code
-	Http2xx []*float64 `json:"Http2xx,omitempty" name:"Http2xx" list`
+	Http2xx []*float64 `json:"Http2xx,omitempty" name:"Http2xx"`
 
 	// HTTP 3xx Status code
-	Http3xx []*float64 `json:"Http3xx,omitempty" name:"Http3xx" list`
+	Http3xx []*float64 `json:"Http3xx,omitempty" name:"Http3xx"`
 
 	// HTTP 404 Status code
-	Http404 []*float64 `json:"Http404,omitempty" name:"Http404" list`
+	Http404 []*float64 `json:"Http404,omitempty" name:"Http404"`
 
 	// HTTP 4xx Status code
-	Http4xx []*float64 `json:"Http4xx,omitempty" name:"Http4xx" list`
+	Http4xx []*float64 `json:"Http4xx,omitempty" name:"Http4xx"`
 
 	// HTTP 5xx Status code
-	Http5xx []*float64 `json:"Http5xx,omitempty" name:"Http5xx" list`
+	Http5xx []*float64 `json:"Http5xx,omitempty" name:"Http5xx"`
 
 	// HTTP 2xx Forwarding status code
-	SourceHttp2xx []*float64 `json:"SourceHttp2xx,omitempty" name:"SourceHttp2xx" list`
+	SourceHttp2xx []*float64 `json:"SourceHttp2xx,omitempty" name:"SourceHttp2xx"`
 
 	// HTTP 3xx Forwarding status code
-	SourceHttp3xx []*float64 `json:"SourceHttp3xx,omitempty" name:"SourceHttp3xx" list`
+	SourceHttp3xx []*float64 `json:"SourceHttp3xx,omitempty" name:"SourceHttp3xx"`
 
 	// HTTP 404 Forwarding status code
-	SourceHttp404 []*float64 `json:"SourceHttp404,omitempty" name:"SourceHttp404" list`
+	SourceHttp404 []*float64 `json:"SourceHttp404,omitempty" name:"SourceHttp404"`
 
 	// HTTP 4xx Forwarding status code
-	SourceHttp4xx []*float64 `json:"SourceHttp4xx,omitempty" name:"SourceHttp4xx" list`
+	SourceHttp4xx []*float64 `json:"SourceHttp4xx,omitempty" name:"SourceHttp4xx"`
 
 	// HTTP 5xx Forwarding status code
-	SourceHttp5xx []*float64 `json:"SourceHttp5xx,omitempty" name:"SourceHttp5xx" list`
+	SourceHttp5xx []*float64 `json:"SourceHttp5xx,omitempty" name:"SourceHttp5xx"`
 }
 
 type IpBlackWhite struct {
@@ -5666,7 +5666,7 @@ type KeyValue struct {
 type KeyValueRecord struct {
 
 	// Key-Value array of a record
-	Record []*KeyValue `json:"Record,omitempty" name:"Record" list`
+	Record []*KeyValue `json:"Record,omitempty" name:"Record"`
 }
 
 type L4HealthConfig struct {
@@ -5714,7 +5714,7 @@ type L4RuleEntry struct {
 	KeepTime *uint64 `json:"KeepTime,omitempty" name:"KeepTime"`
 
 	// Forward list
-	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList" list`
+	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList"`
 
 	// Load balancing method. Valid values: [1 (weighted round robin), 2 (source IP hash)]
 	LbType *uint64 `json:"LbType,omitempty" name:"LbType"`
@@ -5807,7 +5807,7 @@ type L7RuleEntry struct {
 	KeepTime *uint64 `json:"KeepTime,omitempty" name:"KeepTime"`
 
 	// Forward list
-	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList" list`
+	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList"`
 
 	// Load balancing method. Valid value: [1 (weighted round robin)]
 	LbType *uint64 `json:"LbType,omitempty" name:"LbType"`
@@ -5899,7 +5899,7 @@ type ModifyCCAlarmThresholdRequest struct {
 	AlarmThreshold *uint64 `json:"AlarmThreshold,omitempty" name:"AlarmThreshold"`
 
 	// List of IPs associated with resource. If no Anti-DDoS Pro instance is bound, pass in an empty array. For Anti-DDoS Ultimate, pass in multiple IPs
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 }
 
 func (r *ModifyCCAlarmThresholdRequest) ToJsonString() string {
@@ -6170,7 +6170,7 @@ type ModifyCCIpAllowDenyRequest struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Blocklisted/whitelisted IP array
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 
 	// CC protection type, which is optional. Valid values: [http (HTTP CC protection), https (HTTPS CC protection)]; if this field is left empty, HTTPS CC protection will be used by default; if `https` is entered, the `Domain` and `RuleId` fields are required;
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
@@ -6541,7 +6541,7 @@ type ModifyCCUrlAllowRequest struct {
 	// URL array. URL format:
 	// http://domain name/cgi
 	// https://domain name/cgi
-	UrlList []*string `json:"UrlList,omitempty" name:"UrlList" list`
+	UrlList []*string `json:"UrlList,omitempty" name:"UrlList"`
 
 	// CC protection type, which is optional. Valid values: [http (HTTP CC protection), https (HTTPS CC protection)]; if this field is left empty, HTTPS CC protection will be used by default; if `https` is entered, the `Domain` and `RuleId` fields are required;
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
@@ -6683,7 +6683,7 @@ type ModifyDDoSAlarmThresholdRequest struct {
 	AlarmThreshold *uint64 `json:"AlarmThreshold,omitempty" name:"AlarmThreshold"`
 
 	// List of IPs associated with resource. If no Anti-DDoS Pro instance is bound, pass in an empty array. For Anti-DDoS Ultimate, pass in multiple IPs
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 }
 
 func (r *ModifyDDoSAlarmThresholdRequest) ToJsonString() string {
@@ -6909,13 +6909,13 @@ type ModifyDDoSPolicyCaseRequest struct {
 	SceneId *string `json:"SceneId,omitempty" name:"SceneId"`
 
 	// Development platform. Valid values: [PC (PC client), MOBILE (mobile device), TV (TV), SERVER (server)]
-	PlatformTypes []*string `json:"PlatformTypes,omitempty" name:"PlatformTypes" list`
+	PlatformTypes []*string `json:"PlatformTypes,omitempty" name:"PlatformTypes"`
 
 	// Category. Valid values: [WEB (website), GAME (game), APP (application), OTHER (other)]
 	AppType *string `json:"AppType,omitempty" name:"AppType"`
 
 	// Application protocol. Valid values: [tcp (TCP protocol), udp (UDP protocol), icmp (ICMP protocol), all (other protocols)]
-	AppProtocols []*string `json:"AppProtocols,omitempty" name:"AppProtocols" list`
+	AppProtocols []*string `json:"AppProtocols,omitempty" name:"AppProtocols"`
 
 	// TCP start port. Value range: (0, 65535]
 	TcpSportStart *string `json:"TcpSportStart,omitempty" name:"TcpSportStart"`
@@ -6951,7 +6951,7 @@ type ModifyDDoSPolicyCaseRequest struct {
 	UdpFootprint *string `json:"UdpFootprint,omitempty" name:"UdpFootprint"`
 
 	// Web business API URL
-	WebApiUrl []*string `json:"WebApiUrl,omitempty" name:"WebApiUrl" list`
+	WebApiUrl []*string `json:"WebApiUrl,omitempty" name:"WebApiUrl"`
 
 	// Minimum length of TCP business packet. Value range: (0, 1500)
 	MinTcpPackageLen *string `json:"MinTcpPackageLen,omitempty" name:"MinTcpPackageLen"`
@@ -7107,19 +7107,19 @@ type ModifyDDoSPolicyRequest struct {
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// Protocol disablement, which must be entered, and the array length must be 1
-	DropOptions []*DDoSPolicyDropOption `json:"DropOptions,omitempty" name:"DropOptions" list`
+	DropOptions []*DDoSPolicyDropOption `json:"DropOptions,omitempty" name:"DropOptions"`
 
 	// Port disablement. If no ports are to be disabled, enter an empty array
-	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits" list`
+	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits"`
 
 	// IP blocklist/allowlist. Enter an empty array if there is no IP blocklist/allowlist
-	IpAllowDenys []*IpBlackWhite `json:"IpAllowDenys,omitempty" name:"IpAllowDenys" list`
+	IpAllowDenys []*IpBlackWhite `json:"IpAllowDenys,omitempty" name:"IpAllowDenys"`
 
 	// Packet filter. Enter an empty array if there are no packets to filter
-	PacketFilters []*DDoSPolicyPacketFilter `json:"PacketFilters,omitempty" name:"PacketFilters" list`
+	PacketFilters []*DDoSPolicyPacketFilter `json:"PacketFilters,omitempty" name:"PacketFilters"`
 
 	// Watermarking policy parameter. Enter an empty array if the watermarking feature is not enabled. At most one watermarking policy can be passed in (that is, the size of the array cannot exceed 1)
-	WaterPrint []*WaterPrintPolicy `json:"WaterPrint,omitempty" name:"WaterPrint" list`
+	WaterPrint []*WaterPrintPolicy `json:"WaterPrint,omitempty" name:"WaterPrint"`
 }
 
 func (r *ModifyDDoSPolicyRequest) ToJsonString() string {
@@ -7370,7 +7370,7 @@ type ModifyDDoSWaterKeyResponse struct {
 	Response *struct {
 
 		// Watermark key list
-		KeyList []*WaterPrintKey `json:"KeyList,omitempty" name:"KeyList" list`
+		KeyList []*WaterPrintKey `json:"KeyList,omitempty" name:"KeyList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -7455,7 +7455,7 @@ type ModifyL4HealthRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Health check parameter array
-	Healths []*L4RuleHealth `json:"Healths,omitempty" name:"Healths" list`
+	Healths []*L4RuleHealth `json:"Healths,omitempty" name:"Healths"`
 }
 
 func (r *ModifyL4HealthRequest) ToJsonString() string {
@@ -7986,7 +7986,7 @@ type NewL7RuleEntry struct {
 	KeepTime *uint64 `json:"KeepTime,omitempty" name:"KeepTime"`
 
 	// List of sources
-	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList" list`
+	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList"`
 
 	// Load balancing method. Valid value: `1` (weighed polling).
 	LbType *uint64 `json:"LbType,omitempty" name:"LbType"`
@@ -8095,7 +8095,7 @@ type ResourceIp struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// Resource IP array
-	IpList []*string `json:"IpList,omitempty" name:"IpList" list`
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
 }
 
 type SchedulingDomain struct {
@@ -8104,19 +8104,19 @@ type SchedulingDomain struct {
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// List of BGP IPs
-	BGPIpList []*string `json:"BGPIpList,omitempty" name:"BGPIpList" list`
+	BGPIpList []*string `json:"BGPIpList,omitempty" name:"BGPIpList"`
 
 	// List of CTCC IPs
-	CTCCIpList []*string `json:"CTCCIpList,omitempty" name:"CTCCIpList" list`
+	CTCCIpList []*string `json:"CTCCIpList,omitempty" name:"CTCCIpList"`
 
 	// List of CUCC IPs
-	CUCCIpList []*string `json:"CUCCIpList,omitempty" name:"CUCCIpList" list`
+	CUCCIpList []*string `json:"CUCCIpList,omitempty" name:"CUCCIpList"`
 
 	// List of CMCC IPs
-	CMCCIpList []*string `json:"CMCCIpList,omitempty" name:"CMCCIpList" list`
+	CMCCIpList []*string `json:"CMCCIpList,omitempty" name:"CMCCIpList"`
 
 	// List of IPs outside Mainland China
-	OverseaIpList []*string `json:"OverseaIpList,omitempty" name:"OverseaIpList" list`
+	OverseaIpList []*string `json:"OverseaIpList,omitempty" name:"OverseaIpList"`
 
 	// Scheduling method. It only supports `priority` now.
 	Method *string `json:"Method,omitempty" name:"Method"`
@@ -8164,10 +8164,10 @@ type WaterPrintKey struct {
 type WaterPrintPolicy struct {
 
 	// TCP port range, such as ["2000-3000","3500-4000"]
-	TcpPortList []*string `json:"TcpPortList,omitempty" name:"TcpPortList" list`
+	TcpPortList []*string `json:"TcpPortList,omitempty" name:"TcpPortList"`
 
 	// UDP port range, such as ["2000-3000","3500-4000"]
-	UdpPortList []*string `json:"UdpPortList,omitempty" name:"UdpPortList" list`
+	UdpPortList []*string `json:"UdpPortList,omitempty" name:"UdpPortList"`
 
 	// Watermark offset. Value range: [0, 100)
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`

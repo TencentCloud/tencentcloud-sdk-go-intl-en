@@ -249,7 +249,7 @@ type BillAreaInfo struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Detailed country information
-	Countrys []*BillCountryInfo `json:"Countrys,omitempty" name:"Countrys" list`
+	Countrys []*BillCountryInfo `json:"Countrys,omitempty" name:"Countrys"`
 }
 
 type BillCountryInfo struct {
@@ -258,7 +258,7 @@ type BillCountryInfo struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Detailed bandwidth information
-	BandInfoList []*BillDataInfo `json:"BandInfoList,omitempty" name:"BandInfoList" list`
+	BandInfoList []*BillDataInfo `json:"BandInfoList,omitempty" name:"BandInfoList"`
 }
 
 type BillDataInfo struct {
@@ -472,7 +472,7 @@ type CertInfo struct {
 	CertExpireTime *string `json:"CertExpireTime,omitempty" name:"CertExpireTime"`
 
 	// List of domain names that use this certificate.
-	DomainList []*string `json:"DomainList,omitempty" name:"DomainList" list`
+	DomainList []*string `json:"DomainList,omitempty" name:"DomainList"`
 }
 
 type ClientIpPlaySumInfo struct {
@@ -655,7 +655,7 @@ type CreateCommonMixStreamRequest struct {
 	MixStreamSessionId *string `json:"MixStreamSessionId,omitempty" name:"MixStreamSessionId"`
 
 	// Input stream list for stream mix.
-	InputStreamList []*CommonMixInputParam `json:"InputStreamList,omitempty" name:"InputStreamList" list`
+	InputStreamList []*CommonMixInputParam `json:"InputStreamList,omitempty" name:"InputStreamList"`
 
 	// Output stream parameter for stream mix.
 	OutputParams *CommonMixOutputParams `json:"OutputParams,omitempty" name:"OutputParams"`
@@ -2441,7 +2441,7 @@ type DescribeAllStreamPlayInfoListRequest struct {
 	QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
 
 	// Playback domain name list. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 }
 
 func (r *DescribeAllStreamPlayInfoListRequest) ToJsonString() string {
@@ -2472,7 +2472,7 @@ type DescribeAllStreamPlayInfoListResponse struct {
 		QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
 
 		// Data information list.
-		DataInfoList []*MonitorStreamPlayInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*MonitorStreamPlayInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2500,7 +2500,7 @@ type DescribeAreaBillBandwidthAndFluxListRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// LVB playback domain name. If it is left blank, the full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 }
 
 func (r *DescribeAreaBillBandwidthAndFluxListRequest) ToJsonString() string {
@@ -2529,7 +2529,7 @@ type DescribeAreaBillBandwidthAndFluxListResponse struct {
 	Response *struct {
 
 		// Detailed data information.
-		DataInfoList []*BillAreaInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*BillAreaInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2557,7 +2557,7 @@ type DescribeBillBandwidthAndFluxListRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// LVB playback domain name. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 
 	// Valid values:
 	// Mainland: query data for Mainland China,
@@ -2621,7 +2621,7 @@ type DescribeBillBandwidthAndFluxListResponse struct {
 		SumFlux *float64 `json:"SumFlux,omitempty" name:"SumFlux"`
 
 		// Detailed data information.
-		DataInfoList []*BillDataInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*BillDataInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2658,7 +2658,7 @@ type DescribeConcurrentRecordStreamNumRequest struct {
 	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
 
 	// Playback domain name list. If this parameter is left empty, full data will be queried.
-	PushDomains []*string `json:"PushDomains,omitempty" name:"PushDomains" list`
+	PushDomains []*string `json:"PushDomains,omitempty" name:"PushDomains"`
 }
 
 func (r *DescribeConcurrentRecordStreamNumRequest) ToJsonString() string {
@@ -2689,7 +2689,7 @@ type DescribeConcurrentRecordStreamNumResponse struct {
 	Response *struct {
 
 		// Statistics list.
-		DataInfoList []*ConcurrentRecordStreamNum `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*ConcurrentRecordStreamNum `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2742,7 +2742,7 @@ type DescribeDeliverBandwidthListResponse struct {
 	Response *struct {
 
 		// Billable bandwidth of live stream relaying.
-		DataInfoList []*BandwidthInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*BandwidthInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2771,13 +2771,13 @@ type DescribeGroupProIspPlayInfoListRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 
 	// District list. If this parameter is left empty, data for all districts will be returned.
-	ProvinceNames []*string `json:"ProvinceNames,omitempty" name:"ProvinceNames" list`
+	ProvinceNames []*string `json:"ProvinceNames,omitempty" name:"ProvinceNames"`
 
 	// ISP list. If this parameter is left empty, data of all ISPs will be returned.
-	IspNames []*string `json:"IspNames,omitempty" name:"IspNames" list`
+	IspNames []*string `json:"IspNames,omitempty" name:"IspNames"`
 
 	// Within or outside Mainland China. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If this parameter is left empty, data for all regions will be queried.
 	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
@@ -2812,7 +2812,7 @@ type DescribeGroupProIspPlayInfoListResponse struct {
 	Response *struct {
 
 		// Data content.
-		DataInfoList []*GroupProIspDataInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*GroupProIspDataInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2843,7 +2843,7 @@ type DescribeHttpStatusInfoListRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 }
 
 func (r *DescribeHttpStatusInfoListRequest) ToJsonString() string {
@@ -2872,7 +2872,7 @@ type DescribeHttpStatusInfoListResponse struct {
 	Response *struct {
 
 		// Playback status code list.
-		DataInfoList []*HttpStatusData `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*HttpStatusData `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2917,7 +2917,7 @@ type DescribeLiveCallbackRulesResponse struct {
 	Response *struct {
 
 		// Rule information list.
-		Rules []*CallBackRuleInfo `json:"Rules,omitempty" name:"Rules" list`
+		Rules []*CallBackRuleInfo `json:"Rules,omitempty" name:"Rules"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3013,7 +3013,7 @@ type DescribeLiveCallbackTemplatesResponse struct {
 	Response *struct {
 
 		// Template information list.
-		Templates []*CallBackTemplateInfo `json:"Templates,omitempty" name:"Templates" list`
+		Templates []*CallBackTemplateInfo `json:"Templates,omitempty" name:"Templates"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3107,7 +3107,7 @@ type DescribeLiveCertsResponse struct {
 	Response *struct {
 
 		// Certificate information list.
-		CertInfoSet []*CertInfo `json:"CertInfoSet,omitempty" name:"CertInfoSet" list`
+		CertInfoSet []*CertInfo `json:"CertInfoSet,omitempty" name:"CertInfoSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3152,7 +3152,7 @@ type DescribeLiveDelayInfoListResponse struct {
 	Response *struct {
 
 		// Delayed playback information list.
-		DelayInfoList []*DelayInfo `json:"DelayInfoList,omitempty" name:"DelayInfoList" list`
+		DelayInfoList []*DelayInfo `json:"DelayInfoList,omitempty" name:"DelayInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3223,7 +3223,7 @@ type DescribeLiveDomainPlayInfoListRequest struct {
 	*tchttp.BaseRequest
 
 	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 }
 
 func (r *DescribeLiveDomainPlayInfoListRequest) ToJsonString() string {
@@ -3265,7 +3265,7 @@ type DescribeLiveDomainPlayInfoListResponse struct {
 		TotalOnline *uint64 `json:"TotalOnline,omitempty" name:"TotalOnline"`
 
 		// Data by domain name.
-		DomainInfoList []*DomainInfoList `json:"DomainInfoList,omitempty" name:"DomainInfoList" list`
+		DomainInfoList []*DomainInfoList `json:"DomainInfoList,omitempty" name:"DomainInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3280,6 +3280,55 @@ func (r *DescribeLiveDomainPlayInfoListResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeLiveDomainPlayInfoListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveDomainRefererRequest struct {
+	*tchttp.BaseRequest
+
+	// Playback domain name
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+}
+
+func (r *DescribeLiveDomainRefererRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLiveDomainRefererRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DomainName")
+	if len(f) > 0 {
+		return errors.New("DescribeLiveDomainRefererRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveDomainRefererResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Referer allowlist/blocklist configuration of a domain name
+		RefererAuthConfig *RefererAuthConfig `json:"RefererAuthConfig,omitempty" name:"RefererAuthConfig"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveDomainRefererResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLiveDomainRefererResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3387,7 +3436,7 @@ type DescribeLiveDomainsResponse struct {
 		AllCount *uint64 `json:"AllCount,omitempty" name:"AllCount"`
 
 		// List of domain name details.
-		DomainList []*DomainInfo `json:"DomainList,omitempty" name:"DomainList" list`
+		DomainList []*DomainInfo `json:"DomainList,omitempty" name:"DomainList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3458,7 +3507,7 @@ type DescribeLiveForbidStreamListResponse struct {
 		PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
 
 		// List of forbidden streams.
-		ForbidStreamList []*ForbidStreamInfo `json:"ForbidStreamList,omitempty" name:"ForbidStreamList" list`
+		ForbidStreamList []*ForbidStreamInfo `json:"ForbidStreamList,omitempty" name:"ForbidStreamList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3601,7 +3650,7 @@ type DescribeLiveRecordRulesResponse struct {
 	Response *struct {
 
 		// List of rules.
-		Rules []*RuleInfo `json:"Rules,omitempty" name:"Rules" list`
+		Rules []*RuleInfo `json:"Rules,omitempty" name:"Rules"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3701,7 +3750,7 @@ type DescribeLiveRecordTemplatesResponse struct {
 	Response *struct {
 
 		// Recording template information list.
-		Templates []*RecordTemplateInfo `json:"Templates,omitempty" name:"Templates" list`
+		Templates []*RecordTemplateInfo `json:"Templates,omitempty" name:"Templates"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3746,7 +3795,7 @@ type DescribeLiveSnapshotRulesResponse struct {
 	Response *struct {
 
 		// Rule list.
-		Rules []*RuleInfo `json:"Rules,omitempty" name:"Rules" list`
+		Rules []*RuleInfo `json:"Rules,omitempty" name:"Rules"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3841,7 +3890,7 @@ type DescribeLiveSnapshotTemplatesResponse struct {
 	Response *struct {
 
 		// Screencapturing template list.
-		Templates []*SnapshotTemplateInfo `json:"Templates,omitempty" name:"Templates" list`
+		Templates []*SnapshotTemplateInfo `json:"Templates,omitempty" name:"Templates"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3944,7 +3993,7 @@ type DescribeLiveStreamEventListResponse struct {
 	Response *struct {
 
 		// List of streaming events.
-		EventList []*StreamEventInfo `json:"EventList,omitempty" name:"EventList" list`
+		EventList []*StreamEventInfo `json:"EventList,omitempty" name:"EventList"`
 
 		// Page number.
 		PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
@@ -4035,7 +4084,7 @@ type DescribeLiveStreamOnlineListResponse struct {
 		PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 
 		// Active push information list.
-		OnlineInfo []*StreamOnlineInfo `json:"OnlineInfo,omitempty" name:"OnlineInfo" list`
+		OnlineInfo []*StreamOnlineInfo `json:"OnlineInfo,omitempty" name:"OnlineInfo"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4117,7 +4166,7 @@ type DescribeLiveStreamPublishedListResponse struct {
 	Response *struct {
 
 		// Push record information.
-		PublishInfo []*StreamName `json:"PublishInfo,omitempty" name:"PublishInfo" list`
+		PublishInfo []*StreamName `json:"PublishInfo,omitempty" name:"PublishInfo"`
 
 		// Page number.
 		PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
@@ -4194,7 +4243,7 @@ type DescribeLiveStreamPushInfoListResponse struct {
 	Response *struct {
 
 		// Live stream statistics list.
-		DataInfoList []*PushDataInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*PushDataInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// Total number of live streams.
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
@@ -4347,7 +4396,7 @@ type DescribeLiveTranscodeDetailInfoResponse struct {
 	Response *struct {
 
 		// Statistics list.
-		DataInfoList []*TranscodeDetailInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*TranscodeDetailInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// Page number.
 		PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
@@ -4381,10 +4430,10 @@ type DescribeLiveTranscodeRulesRequest struct {
 	*tchttp.BaseRequest
 
 	// An array of template IDs to be filtered.
-	TemplateIds []*int64 `json:"TemplateIds,omitempty" name:"TemplateIds" list`
+	TemplateIds []*int64 `json:"TemplateIds,omitempty" name:"TemplateIds"`
 
 	// An array of domain names to be filtered.
-	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames" list`
+	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
 }
 
 func (r *DescribeLiveTranscodeRulesRequest) ToJsonString() string {
@@ -4412,7 +4461,7 @@ type DescribeLiveTranscodeRulesResponse struct {
 	Response *struct {
 
 		// List of transcoding rules.
-		Rules []*RuleInfo `json:"Rules,omitempty" name:"Rules" list`
+		Rules []*RuleInfo `json:"Rules,omitempty" name:"Rules"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4507,7 +4556,7 @@ type DescribeLiveTranscodeTemplatesResponse struct {
 	Response *struct {
 
 		// List of transcoding templates.
-		Templates []*TemplateInfo `json:"Templates,omitempty" name:"Templates" list`
+		Templates []*TemplateInfo `json:"Templates,omitempty" name:"Templates"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4601,7 +4650,7 @@ type DescribeLiveWatermarkRulesResponse struct {
 	Response *struct {
 
 		// Watermarking rule list.
-		Rules []*RuleInfo `json:"Rules,omitempty" name:"Rules" list`
+		Rules []*RuleInfo `json:"Rules,omitempty" name:"Rules"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4649,7 +4698,7 @@ type DescribeLiveWatermarksResponse struct {
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
 
 		// Watermark information list.
-		WatermarkList []*WatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList" list`
+		WatermarkList []*WatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4687,7 +4736,7 @@ type DescribePlayErrorCodeDetailInfoListRequest struct {
 	StatType *string `json:"StatType,omitempty" name:"StatType"`
 
 	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
 	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
@@ -4722,7 +4771,7 @@ type DescribePlayErrorCodeDetailInfoListResponse struct {
 	Response *struct {
 
 		// Statistics list.
-		HttpCodeList []*HttpCodeInfo `json:"HttpCodeList,omitempty" name:"HttpCodeList" list`
+		HttpCodeList []*HttpCodeInfo `json:"HttpCodeList,omitempty" name:"HttpCodeList"`
 
 		// Statistics type.
 		StatType *string `json:"StatType,omitempty" name:"StatType"`
@@ -4756,7 +4805,7 @@ type DescribePlayErrorCodeSumInfoListRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name list. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 
 	// Number of pages. Value range: [1,1000]. Default value: 1.
 	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
@@ -4805,7 +4854,7 @@ type DescribePlayErrorCodeSumInfoListResponse struct {
 	Response *struct {
 
 		// Information of error codes starting with 2, 3, 4, or 5 by district and ISP.
-		ProIspInfoList []*ProIspPlayCodeDataInfo `json:"ProIspInfoList,omitempty" name:"ProIspInfoList" list`
+		ProIspInfoList []*ProIspPlayCodeDataInfo `json:"ProIspInfoList,omitempty" name:"ProIspInfoList"`
 
 		// Total occurrences of all status codes.
 		TotalCodeAll *uint64 `json:"TotalCodeAll,omitempty" name:"TotalCodeAll"`
@@ -4817,7 +4866,7 @@ type DescribePlayErrorCodeSumInfoListResponse struct {
 		TotalCode5xx *uint64 `json:"TotalCode5xx,omitempty" name:"TotalCode5xx"`
 
 		// Total occurrences of each status code.
-		TotalCodeList []*PlayCodeTotalInfo `json:"TotalCodeList,omitempty" name:"TotalCodeList" list`
+		TotalCodeList []*PlayCodeTotalInfo `json:"TotalCodeList,omitempty" name:"TotalCodeList"`
 
 		// Page number.
 		PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
@@ -4869,7 +4918,7 @@ type DescribeProIspPlaySumInfoListRequest struct {
 	StatType *string `json:"StatType,omitempty" name:"StatType"`
 
 	// Playback domain name list. If it is left empty, it refers to all playback domain names.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 
 	// Page number. Value range: [1,1000]. Default value: 1.
 	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
@@ -4936,7 +4985,7 @@ type DescribeProIspPlaySumInfoListResponse struct {
 		TotalPage *uint64 `json:"TotalPage,omitempty" name:"TotalPage"`
 
 		// Aggregated data list by district, ISP, or country/region.
-		DataInfoList []*ProIspPlaySumInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*ProIspPlaySumInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// Download speed in MB/s. Calculation method: total traffic/total duration.
 		AvgFluxPerSecond *float64 `json:"AvgFluxPerSecond,omitempty" name:"AvgFluxPerSecond"`
@@ -4982,13 +5031,13 @@ type DescribeProvinceIspPlayInfoListRequest struct {
 	StatType *string `json:"StatType,omitempty" name:"StatType"`
 
 	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 
 	// List of the districts to be queried, such as Beijing.
-	ProvinceNames []*string `json:"ProvinceNames,omitempty" name:"ProvinceNames" list`
+	ProvinceNames []*string `json:"ProvinceNames,omitempty" name:"ProvinceNames"`
 
 	// List of the ISPs to be queried, such as China Mobile. If this parameter is left empty, the data of all ISPs will be queried.
-	IspNames []*string `json:"IspNames,omitempty" name:"IspNames" list`
+	IspNames []*string `json:"IspNames,omitempty" name:"IspNames"`
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
 	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
@@ -5031,7 +5080,7 @@ type DescribeProvinceIspPlayInfoListResponse struct {
 	Response *struct {
 
 		// Playback information list.
-		DataInfoList []*PlayStatInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*PlayStatInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// Statistics type, which is the same as the input parameter.
 		StatType *string `json:"StatType,omitempty" name:"StatType"`
@@ -5065,7 +5114,7 @@ type DescribeScreenShotSheetNumListRequest struct {
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// Push domain name (data at the domain name level after November 1, 2019 can be queried).
-	PushDomains []*string `json:"PushDomains,omitempty" name:"PushDomains" list`
+	PushDomains []*string `json:"PushDomains,omitempty" name:"PushDomains"`
 
 	// Data dimension. The data has a delay of one and a half hours. Valid values: 1. Minute (5-minute granularity, which supports a maximum query time range of 31 days); 2. Day (1-day granularity, which is the default value and supports a maximum query time range of 186 days).
 	Granularity *string `json:"Granularity,omitempty" name:"Granularity"`
@@ -5099,7 +5148,7 @@ type DescribeScreenShotSheetNumListResponse struct {
 	Response *struct {
 
 		// Data information list.
-		DataInfoList []*TimeValue `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*TimeValue `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5172,7 +5221,7 @@ type DescribeStreamDayPlayInfoListResponse struct {
 	Response *struct {
 
 		// Playback data information list.
-		DataInfoList []*PlayDataInfoByStream `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*PlayDataInfoByStream `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// Total number.
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
@@ -5258,7 +5307,7 @@ type DescribeStreamPlayInfoListResponse struct {
 	Response *struct {
 
 		// Statistics list at a 1-minute granularity.
-		DataInfoList []*DayStreamPlayInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*DayStreamPlayInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5323,7 +5372,7 @@ type DescribeStreamPushInfoListResponse struct {
 	Response *struct {
 
 		// Returned data list.
-		DataInfoList []*PushQualityData `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*PushQualityData `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5352,7 +5401,7 @@ type DescribeTopClientIpSumInfoListRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried by default.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 
 	// Page number. Value range: [1,1000]. Default value: 1.
 	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
@@ -5416,7 +5465,7 @@ type DescribeTopClientIpSumInfoListResponse struct {
 		TotalPage *uint64 `json:"TotalPage,omitempty" name:"TotalPage"`
 
 		// Data content.
-		DataInfoList []*ClientIpPlaySumInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*ClientIpPlaySumInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5444,7 +5493,7 @@ type DescribeUploadStreamNumsRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// LVB domain names. If this parameter is left empty, data of all domain names will be queried.
-	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// Time granularity of the data. Valid values:
 	// 5: 5-minute granularity (the query period is up to 1 day)
@@ -5480,7 +5529,7 @@ type DescribeUploadStreamNumsResponse struct {
 	Response *struct {
 
 		// Detailed data.
-		DataInfoList []*ConcurrentRecordStreamNum `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*ConcurrentRecordStreamNum `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5512,7 +5561,7 @@ type DescribeVisitTopSumInfoListRequest struct {
 	TopIndex *string `json:"TopIndex,omitempty" name:"TopIndex"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried by default.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains" list`
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
 
 	// Page number,
 	// Value range: [1,1000],
@@ -5578,7 +5627,7 @@ type DescribeVisitTopSumInfoListResponse struct {
 		TotalPage *uint64 `json:"TotalPage,omitempty" name:"TotalPage"`
 
 		// Data content.
-		DataInfoList []*PlaySumStatInfo `json:"DataInfoList,omitempty" name:"DataInfoList" list`
+		DataInfoList []*PlaySumStatInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5630,7 +5679,7 @@ type DomainCertInfo struct {
 	// List of domain names in the certificate.
 	// ["*.x.com"] for example.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	CertDomains []*string `json:"CertDomains,omitempty" name:"CertDomains" list`
+	CertDomains []*string `json:"CertDomains,omitempty" name:"CertDomains"`
 
 	// Tencent Cloud SSL certificate ID.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -5715,7 +5764,7 @@ type DomainInfoList struct {
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Details.
-	DetailInfoList []*DomainDetailInfo `json:"DetailInfoList,omitempty" name:"DetailInfoList" list`
+	DetailInfoList []*DomainDetailInfo `json:"DetailInfoList,omitempty" name:"DetailInfoList"`
 }
 
 type DropLiveStreamRequest struct {
@@ -5952,7 +6001,7 @@ type GroupProIspDataInfo struct {
 	IspName *string `json:"IspName,omitempty" name:"IspName"`
 
 	// Detailed data at the minute level.
-	DetailInfoList []*CdnPlayStatData `json:"DetailInfoList,omitempty" name:"DetailInfoList" list`
+	DetailInfoList []*CdnPlayStatData `json:"DetailInfoList,omitempty" name:"DetailInfoList"`
 }
 
 type HlsSpecialParam struct {
@@ -5969,7 +6018,7 @@ type HttpCodeInfo struct {
 	HttpCode *string `json:"HttpCode,omitempty" name:"HttpCode"`
 
 	// Statistics. 0 will be added for points in time when there is no data.
-	ValueList []*HttpCodeValue `json:"ValueList,omitempty" name:"ValueList" list`
+	ValueList []*HttpCodeValue `json:"ValueList,omitempty" name:"ValueList"`
 }
 
 type HttpCodeValue struct {
@@ -5991,7 +6040,7 @@ type HttpStatusData struct {
 	Time *string `json:"Time,omitempty" name:"Time"`
 
 	// Playback status code details.
-	HttpStatusInfoList []*HttpStatusInfo `json:"HttpStatusInfoList,omitempty" name:"HttpStatusInfoList" list`
+	HttpStatusInfoList []*HttpStatusInfo `json:"HttpStatusInfoList,omitempty" name:"HttpStatusInfoList"`
 }
 
 type HttpStatusInfo struct {
@@ -6199,6 +6248,68 @@ func (r *ModifyLiveDomainCertResponse) ToJsonString() string {
 // It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyLiveDomainCertResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLiveDomainRefererRequest struct {
+	*tchttp.BaseRequest
+
+	// Playback domain name
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Whether to enable referer allowlist/blocklist authentication for the current domain name
+	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+
+	// List type. Valid values: `0` (blocklist), `1` (allowlist)
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Whether to allow empty referer. Valid values: `0` (no), `1` (yes)
+	AllowEmpty *int64 `json:"AllowEmpty,omitempty" name:"AllowEmpty"`
+
+	// Referer list. Separate items in it with semicolons (;).
+	Rules *string `json:"Rules,omitempty" name:"Rules"`
+}
+
+func (r *ModifyLiveDomainRefererRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLiveDomainRefererRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DomainName")
+	delete(f, "Enable")
+	delete(f, "Type")
+	delete(f, "AllowEmpty")
+	delete(f, "Rules")
+	if len(f) > 0 {
+		return errors.New("ModifyLiveDomainRefererRequest has unknown keys!")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLiveDomainRefererResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLiveDomainRefererResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLiveDomainRefererResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7043,6 +7154,24 @@ type RecordTemplateInfo struct {
 	Mp3Param *RecordParam `json:"Mp3Param,omitempty" name:"Mp3Param"`
 }
 
+type RefererAuthConfig struct {
+
+	// Domain name
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Whether to enable referer. Valid values: `0` (no), `1` (yes)
+	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+
+	// List type. Valid values: `0` (blocklist), `1` (allowlist)
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Whether to allow empty referer. Valid values: `0` (no), `1` (yes)
+	AllowEmpty *int64 `json:"AllowEmpty,omitempty" name:"AllowEmpty"`
+
+	// Referer list. Separate items in it with semicolons (;).
+	Rules *string `json:"Rules,omitempty" name:"Rules"`
+}
+
 type ResumeDelayLiveStreamRequest struct {
 	*tchttp.BaseRequest
 
@@ -7381,7 +7510,7 @@ type StreamOnlineInfo struct {
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
 	// Push time list
-	PublishTimeList []*PublishTime `json:"PublishTimeList,omitempty" name:"PublishTimeList" list`
+	PublishTimeList []*PublishTime `json:"PublishTimeList,omitempty" name:"PublishTimeList"`
 
 	// Application name.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`

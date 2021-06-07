@@ -241,10 +241,10 @@ type CreateSubscribeRequest struct {
 	NotifyStrategy *string `json:"NotifyStrategy,omitempty" name:"NotifyStrategy"`
 
 	// Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not set, no matter whether `MsgTag` is set, the subscription will receive all messages published to the topic; 2. If the `FilterTag` array has a value, only when at least one of the values in the array also exists in the `MsgTag` array (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the `FilterTag` array has a value, but `MsgTag` is not set, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
-	FilterTag []*string `json:"FilterTag,omitempty" name:"FilterTag" list`
+	FilterTag []*string `json:"FilterTag,omitempty" name:"FilterTag"`
 
 	// The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` can contain up to 15 `.`, i.e., up to 16 phrases.
-	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey" list`
+	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey"`
 
 	// Push content format. Valid values: 1. JSON, 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `http`, both options are acceptable, and the default value is `JSON`.
 	NotifyContentFormat *string `json:"NotifyContentFormat,omitempty" name:"NotifyContentFormat"`
@@ -553,7 +553,7 @@ type DescribeDeadLetterSourceQueuesRequest struct {
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Filters source queue name of dead letter queue. Currently, only filtering by `SourceQueueName` is supported
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeDeadLetterSourceQueuesRequest) ToJsonString() string {
@@ -586,7 +586,7 @@ type DescribeDeadLetterSourceQueuesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Source queues of dead letter queue
-		QueueSet []*DeadLetterSource `json:"QueueSet,omitempty" name:"QueueSet" list`
+		QueueSet []*DeadLetterSource `json:"QueueSet,omitempty" name:"QueueSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -614,7 +614,7 @@ type DescribeQueueDetailRequest struct {
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter parameter. Currently, filtering by `QueueName` is supported, and only one keyword is allowed
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Tag search
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
@@ -654,7 +654,7 @@ type DescribeQueueDetailResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Queue list
-		QueueSet []*QueueSet `json:"QueueSet,omitempty" name:"QueueSet" list`
+		QueueSet []*QueueSet `json:"QueueSet,omitempty" name:"QueueSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -685,7 +685,7 @@ type DescribeSubscriptionDetailRequest struct {
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter parameter. Currently, only filtering by `SubscriptionName` is supported, and only one keyword is allowed.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeSubscriptionDetailRequest) ToJsonString() string {
@@ -719,7 +719,7 @@ type DescribeSubscriptionDetailResponse struct {
 
 		// Subscription attribute set
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		SubscriptionSet []*Subscription `json:"SubscriptionSet,omitempty" name:"SubscriptionSet" list`
+		SubscriptionSet []*Subscription `json:"SubscriptionSet,omitempty" name:"SubscriptionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -747,7 +747,7 @@ type DescribeTopicDetailRequest struct {
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Currently, only filtering by `TopicName` is supported, and only one filter value can be entered
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Tag match
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
@@ -787,7 +787,7 @@ type DescribeTopicDetailResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// TopicSet
-		TopicSet []*TopicSet `json:"TopicSet,omitempty" name:"TopicSet" list`
+		TopicSet []*TopicSet `json:"TopicSet,omitempty" name:"TopicSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -811,7 +811,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Value
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type ModifyQueueAttributeRequest struct {
@@ -930,10 +930,10 @@ type ModifySubscriptionAttributeRequest struct {
 	NotifyContentFormat *string `json:"NotifyContentFormat,omitempty" name:"NotifyContentFormat"`
 
 	// Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not set, no matter whether `MsgTag` is set, the subscription will receive all messages published to the topic; 2. If the `FilterTag` array has a value, only when at least one of the values in the array also exists in the `MsgTag` array (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the `FilterTag` array has a value, but `MsgTag` is not set, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
-	FilterTags []*string `json:"FilterTags,omitempty" name:"FilterTags" list`
+	FilterTags []*string `json:"FilterTags,omitempty" name:"FilterTags"`
 
 	// The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` can contain up to 15 `.`, i.e., up to 16 phrases.
-	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey" list`
+	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey"`
 }
 
 func (r *ModifySubscriptionAttributeRequest) ToJsonString() string {
@@ -1116,7 +1116,7 @@ type QueueSet struct {
 
 	// DeadLetterSource
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DeadLetterSource []*DeadLetterSource `json:"DeadLetterSource,omitempty" name:"DeadLetterSource" list`
+	DeadLetterSource []*DeadLetterSource `json:"DeadLetterSource,omitempty" name:"DeadLetterSource"`
 
 	// DeadLetterPolicy
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1132,7 +1132,7 @@ type QueueSet struct {
 
 	// Tag
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Message trace flag. true: enabled, false: not enabled
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1217,7 +1217,7 @@ type Subscription struct {
 
 	// BindingKey
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey" list`
+	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey"`
 
 	// Endpoint
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1225,7 +1225,7 @@ type Subscription struct {
 
 	// FilterTags
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FilterTags []*string `json:"FilterTags,omitempty" name:"FilterTags" list`
+	FilterTags []*string `json:"FilterTags,omitempty" name:"FilterTags"`
 
 	// Protocol
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1295,7 +1295,7 @@ type TopicSet struct {
 
 	// Tags
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Whether to enable message trace for a topic. true: yes, false: no
 	// Note: this field may return null, indicating that no valid values can be obtained.

@@ -444,7 +444,7 @@ type DescribeSmsSignListRequest struct {
 	*tchttp.BaseRequest
 
 	// Signature ID array.
-	SignIdSet []*uint64 `json:"SignIdSet,omitempty" name:"SignIdSet" list`
+	SignIdSet []*uint64 `json:"SignIdSet,omitempty" name:"SignIdSet"`
 
 	// Whether it is Global SMS:
 	// 0: Mainland China SMS.
@@ -477,7 +477,7 @@ type DescribeSmsSignListResponse struct {
 	Response *struct {
 
 		// Response for getting signature information
-		DescribeSignListStatusSet []*DescribeSignListStatus `json:"DescribeSignListStatusSet,omitempty" name:"DescribeSignListStatusSet" list`
+		DescribeSignListStatusSet []*DescribeSignListStatus `json:"DescribeSignListStatusSet,omitempty" name:"DescribeSignListStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -499,7 +499,7 @@ type DescribeSmsTemplateListRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID array.
-	TemplateIdSet []*uint64 `json:"TemplateIdSet,omitempty" name:"TemplateIdSet" list`
+	TemplateIdSet []*uint64 `json:"TemplateIdSet,omitempty" name:"TemplateIdSet"`
 
 	// Whether it is Global SMS:
 	// 0: Mainland China SMS.
@@ -532,7 +532,7 @@ type DescribeSmsTemplateListResponse struct {
 	Response *struct {
 
 		// Response for getting SMS signature information
-		DescribeTemplateStatusSet []*DescribeTemplateListStatus `json:"DescribeTemplateStatusSet,omitempty" name:"DescribeTemplateStatusSet" list`
+		DescribeTemplateStatusSet []*DescribeTemplateListStatus `json:"DescribeTemplateStatusSet,omitempty" name:"DescribeTemplateStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -839,7 +839,7 @@ type PullSmsReplyStatusByPhoneNumberResponse struct {
 	Response *struct {
 
 		// Reply status response set.
-		PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet" list`
+		PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -892,7 +892,7 @@ type PullSmsReplyStatusResponse struct {
 	Response *struct {
 
 		// Reply status response set.
-		PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet" list`
+		PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -989,7 +989,7 @@ type PullSmsSendStatusByPhoneNumberResponse struct {
 	Response *struct {
 
 		// Delivery status response set.
-		PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet" list`
+		PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1042,7 +1042,7 @@ type PullSmsSendStatusResponse struct {
 	Response *struct {
 
 		// Delivery status response set.
-		PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet" list`
+		PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1065,7 +1065,7 @@ type SendSmsRequest struct {
 
 	// Target mobile number in the e.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Mainland China mobile numbers or all global mobile numbers).
 	// Example: +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
-	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet" list`
+	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet"`
 
 	// Template ID. You must enter the ID of an approved template, which can be viewed in the [SMS Console](https://console.cloud.tencent.com/sms/smslist).
 	TemplateID *string `json:"TemplateID,omitempty" name:"TemplateID"`
@@ -1077,7 +1077,7 @@ type SendSmsRequest struct {
 	Sign *string `json:"Sign,omitempty" name:"Sign"`
 
 	// Template parameter. If there is no template parameter, leave this parameter blank.
-	TemplateParamSet []*string `json:"TemplateParamSet,omitempty" name:"TemplateParamSet" list`
+	TemplateParamSet []*string `json:"TemplateParamSet,omitempty" name:"TemplateParamSet"`
 
 	// SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1).
 	ExtendCode *string `json:"ExtendCode,omitempty" name:"ExtendCode"`
@@ -1120,7 +1120,7 @@ type SendSmsResponse struct {
 	Response *struct {
 
 		// SMS delivery status.
-		SendStatusSet []*SendStatus `json:"SendStatusSet,omitempty" name:"SendStatusSet" list`
+		SendStatusSet []*SendStatus `json:"SendStatusSet,omitempty" name:"SendStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1315,7 +1315,7 @@ type SmsPackagesStatisticsResponse struct {
 	Response *struct {
 
 		// Delivery statistics response packet body.
-		SmsPackagesStatisticsSet []*SmsPackagesStatistics `json:"SmsPackagesStatisticsSet,omitempty" name:"SmsPackagesStatisticsSet" list`
+		SmsPackagesStatisticsSet []*SmsPackagesStatistics `json:"SmsPackagesStatisticsSet,omitempty" name:"SmsPackagesStatisticsSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

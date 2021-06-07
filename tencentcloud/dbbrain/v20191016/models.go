@@ -106,10 +106,10 @@ type CreateDBDiagReportTaskRequest struct {
 	SendMailFlag *int64 `json:"SendMailFlag,omitempty" name:"SendMailFlag"`
 
 	// An array of contact IDs to receive the email.
-	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson" list`
+	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson"`
 
 	// An array of contact group IDs to receive the email.
-	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup" list`
+	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
@@ -243,7 +243,7 @@ type CreateMailProfileRequest struct {
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// Instance ID bound with the configuration, which is set when the configuration level is "Instance". Only one instance can be bound at a time. When the configuration level is “User”, leave this parameter empty.
-	BindInstanceIds []*string `json:"BindInstanceIds,omitempty" name:"BindInstanceIds" list`
+	BindInstanceIds []*string `json:"BindInstanceIds,omitempty" name:"BindInstanceIds"`
 }
 
 func (r *CreateMailProfileRequest) ToJsonString() string {
@@ -294,7 +294,7 @@ type CreateSchedulerMailProfileRequest struct {
 	*tchttp.BaseRequest
 
 	// Value range: 1-7, representing Monday to Sunday respectively.
-	WeekConfiguration []*int64 `json:"WeekConfiguration,omitempty" name:"WeekConfiguration" list`
+	WeekConfiguration []*int64 `json:"WeekConfiguration,omitempty" name:"WeekConfiguration"`
 
 	// Email configurations
 	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
@@ -359,7 +359,7 @@ type DescribeAllUserContactRequest struct {
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// An array of contact name. Fuzzy search is supported.
-	Names []*string `json:"Names,omitempty" name:"Names" list`
+	Names []*string `json:"Names,omitempty" name:"Names"`
 }
 
 func (r *DescribeAllUserContactRequest) ToJsonString() string {
@@ -391,7 +391,7 @@ type DescribeAllUserContactResponse struct {
 
 		// Contact information.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		Contacts []*ContactItem `json:"Contacts,omitempty" name:"Contacts" list`
+		Contacts []*ContactItem `json:"Contacts,omitempty" name:"Contacts"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -416,7 +416,7 @@ type DescribeAllUserGroupRequest struct {
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// An array of contact group name. Fuzzy search is supported.
-	Names []*string `json:"Names,omitempty" name:"Names" list`
+	Names []*string `json:"Names,omitempty" name:"Names"`
 }
 
 func (r *DescribeAllUserGroupRequest) ToJsonString() string {
@@ -448,7 +448,7 @@ type DescribeAllUserGroupResponse struct {
 
 		// Contact group information.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		Groups []*GroupItem `json:"Groups,omitempty" name:"Groups" list`
+		Groups []*GroupItem `json:"Groups,omitempty" name:"Groups"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -597,7 +597,7 @@ type DescribeDBDiagHistoryResponse struct {
 	Response *struct {
 
 		// Event description.
-		Events []*DiagHistoryEventItem `json:"Events,omitempty" name:"Events" list`
+		Events []*DiagHistoryEventItem `json:"Events,omitempty" name:"Events"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -625,10 +625,10 @@ type DescribeDBDiagReportTasksRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Instance ID array, which is used to filter the task list of a specified instance.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Source that triggers the task. Valid values: `DAILY_INSPECTION` (instance inspection), `SCHEDULED` (timed generation), and `MANUAL` (manual trigger).
-	Sources []*string `json:"Sources,omitempty" name:"Sources" list`
+	Sources []*string `json:"Sources,omitempty" name:"Sources"`
 
 	// Health level. Valid values: `HEALTH` (healthy), `SUB_HEALTH` (suboptimal), `RISK` (risky), and `HIGH_RISK` (critical).
 	HealthLevels *string `json:"HealthLevels,omitempty" name:"HealthLevels"`
@@ -681,7 +681,7 @@ type DescribeDBDiagReportTasksResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Task list.
-		Tasks []*HealthReportTask `json:"Tasks,omitempty" name:"Tasks" list`
+		Tasks []*HealthReportTask `json:"Tasks,omitempty" name:"Tasks"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -781,13 +781,13 @@ type DescribeDiagDBInstancesRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Query by instance name.
-	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames" list`
+	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames"`
 
 	// Query by instance ID.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Query by region.
-	Regions []*string `json:"Regions,omitempty" name:"Regions" list`
+	Regions []*string `json:"Regions,omitempty" name:"Regions"`
 }
 
 func (r *DescribeDiagDBInstancesRequest) ToJsonString() string {
@@ -826,7 +826,7 @@ type DescribeDiagDBInstancesResponse struct {
 		DbScanStatus *int64 `json:"DbScanStatus,omitempty" name:"DbScanStatus"`
 
 		// Instance related information
-		Items []*InstanceInfo `json:"Items,omitempty" name:"Items" list`
+		Items []*InstanceInfo `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -949,7 +949,7 @@ type DescribeMailProfileResponse struct {
 
 		// Email configuration details
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ProfileList []*UserProfile `json:"ProfileList,omitempty" name:"ProfileList" list`
+		ProfileList []*UserProfile `json:"ProfileList,omitempty" name:"ProfileList"`
 
 		// Total number of email templates
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -1017,7 +1017,7 @@ type DescribeSlowLogTimeSeriesStatsResponse struct {
 		Period *int64 `json:"Period,omitempty" name:"Period"`
 
 		// Number of slow logs in specified time range.
-		TimeSeries []*TimeSlice `json:"TimeSeries,omitempty" name:"TimeSeries" list`
+		TimeSeries []*TimeSlice `json:"TimeSeries,omitempty" name:"TimeSeries"`
 
 		// Instance CPU utilization monitoring data in specified time range.
 		SeriesData *MonitorMetricSeriesData `json:"SeriesData,omitempty" name:"SeriesData"`
@@ -1063,7 +1063,7 @@ type DescribeSlowLogTopSqlsRequest struct {
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Database name array.
-	SchemaList []*SchemaItem `json:"SchemaList,omitempty" name:"SchemaList" list`
+	SchemaList []*SchemaItem `json:"SchemaList,omitempty" name:"SchemaList"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
@@ -1104,7 +1104,7 @@ type DescribeSlowLogTopSqlsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of top slow SQL statements
-		Rows []*SlowLogTopSqlItem `json:"Rows,omitempty" name:"Rows" list`
+		Rows []*SlowLogTopSqlItem `json:"Rows,omitempty" name:"Rows"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1168,7 +1168,7 @@ type DescribeSlowLogUserHostStatsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Detailed list of the proportion of slow logs from each source address.
-		Items []*SlowLogHost `json:"Items,omitempty" name:"Items" list`
+		Items []*SlowLogHost `json:"Items,omitempty" name:"Items"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1237,7 +1237,7 @@ type DescribeTopSpaceSchemaTimeSeriesResponse struct {
 	Response *struct {
 
 		// Time series list of the returned space statistics of top databases.
-		TopSpaceSchemaTimeSeries []*SchemaSpaceTimeSeries `json:"TopSpaceSchemaTimeSeries,omitempty" name:"TopSpaceSchemaTimeSeries" list`
+		TopSpaceSchemaTimeSeries []*SchemaSpaceTimeSeries `json:"TopSpaceSchemaTimeSeries,omitempty" name:"TopSpaceSchemaTimeSeries"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1298,7 +1298,7 @@ type DescribeTopSpaceSchemasResponse struct {
 	Response *struct {
 
 		// List of the returned space statistics of top databases.
-		TopSpaceSchemas []*SchemaSpaceData `json:"TopSpaceSchemas,omitempty" name:"TopSpaceSchemas" list`
+		TopSpaceSchemas []*SchemaSpaceData `json:"TopSpaceSchemas,omitempty" name:"TopSpaceSchemas"`
 
 		// Timestamp (in seconds) of database space data collect points
 		Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
@@ -1370,7 +1370,7 @@ type DescribeTopSpaceTableTimeSeriesResponse struct {
 	Response *struct {
 
 		// Time series list of the returned space statistics of top tables.
-		TopSpaceTableTimeSeries []*TableSpaceTimeSeries `json:"TopSpaceTableTimeSeries,omitempty" name:"TopSpaceTableTimeSeries" list`
+		TopSpaceTableTimeSeries []*TableSpaceTimeSeries `json:"TopSpaceTableTimeSeries,omitempty" name:"TopSpaceTableTimeSeries"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1431,7 +1431,7 @@ type DescribeTopSpaceTablesResponse struct {
 	Response *struct {
 
 		// List of the returned space statistics of top tables.
-		TopSpaceTables []*TableSpaceData `json:"TopSpaceTables,omitempty" name:"TopSpaceTables" list`
+		TopSpaceTables []*TableSpaceData `json:"TopSpaceTables,omitempty" name:"TopSpaceTables"`
 
 		// Timestamp (in seconds) of tablespace data collect points
 		Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
@@ -1635,7 +1635,7 @@ type HealthReportTask struct {
 type HealthScoreInfo struct {
 
 	// Exception details
-	IssueTypes []*IssueTypeInfo `json:"IssueTypes,omitempty" name:"IssueTypes" list`
+	IssueTypes []*IssueTypeInfo `json:"IssueTypes,omitempty" name:"IssueTypes"`
 
 	// Total number of the exceptions
 	EventsTotalCount *int64 `json:"EventsTotalCount,omitempty" name:"EventsTotalCount"`
@@ -1660,7 +1660,7 @@ type HealthStatus struct {
 
 	// Deduction details.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	ScoreDetails []*ScoreDetail `json:"ScoreDetails,omitempty" name:"ScoreDetails" list`
+	ScoreDetails []*ScoreDetail `json:"ScoreDetails,omitempty" name:"ScoreDetails"`
 }
 
 type InstanceBasicInfo struct {
@@ -1786,7 +1786,7 @@ type IssueTypeInfo struct {
 	IssueType *string `json:"IssueType,omitempty" name:"IssueType"`
 
 	// Exception
-	Events []*EventInfo `json:"Events,omitempty" name:"Events" list`
+	Events []*EventInfo `json:"Events,omitempty" name:"Events"`
 
 	// Total number of the exceptions
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1798,16 +1798,16 @@ type MailConfiguration struct {
 	SendMail *int64 `json:"SendMail,omitempty" name:"SendMail"`
 
 	// Region configuration, such as "ap-guangzhou", "ap-shanghai". For the inspection email sending template, configure the region where you need to send the inspection email. For the subscription email sending template, configure the region to which the current subscribed instance belongs.
-	Region []*string `json:"Region,omitempty" name:"Region" list`
+	Region []*string `json:"Region,omitempty" name:"Region"`
 
 	// Sending a report with the specified health level, such as "HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK".
-	HealthStatus []*string `json:"HealthStatus,omitempty" name:"HealthStatus" list`
+	HealthStatus []*string `json:"HealthStatus,omitempty" name:"HealthStatus"`
 
 	// Contact ID. Either `ContactGroup` or `ContactID` should be passed in.
-	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson" list`
+	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson"`
 
 	// Contact group ID. Either `ContactGroup` or `ContactID` should be passed in.
-	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup" list`
+	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup"`
 }
 
 type ModifyDiagDBInstanceConfRequest struct {
@@ -1823,7 +1823,7 @@ type ModifyDiagDBInstanceConfRequest struct {
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// ID of the instance to modify.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *ModifyDiagDBInstanceConfRequest) ToJsonString() string {
@@ -1878,16 +1878,16 @@ type MonitorFloatMetric struct {
 
 	// Metric value.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Values []*float64 `json:"Values,omitempty" name:"Values" list`
+	Values []*float64 `json:"Values,omitempty" name:"Values"`
 }
 
 type MonitorFloatMetricSeriesData struct {
 
 	// Monitoring metric.
-	Series []*MonitorFloatMetric `json:"Series,omitempty" name:"Series" list`
+	Series []*MonitorFloatMetric `json:"Series,omitempty" name:"Series"`
 
 	// Timestamp corresponding to monitoring metric.
-	Timestamp []*int64 `json:"Timestamp,omitempty" name:"Timestamp" list`
+	Timestamp []*int64 `json:"Timestamp,omitempty" name:"Timestamp"`
 }
 
 type MonitorMetric struct {
@@ -1900,16 +1900,16 @@ type MonitorMetric struct {
 
 	// Metric value.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Values []*int64 `json:"Values,omitempty" name:"Values" list`
+	Values []*int64 `json:"Values,omitempty" name:"Values"`
 }
 
 type MonitorMetricSeriesData struct {
 
 	// Monitoring metric.
-	Series []*MonitorMetric `json:"Series,omitempty" name:"Series" list`
+	Series []*MonitorMetric `json:"Series,omitempty" name:"Series"`
 
 	// Timestamp corresponding to monitoring metric.
-	Timestamp []*int64 `json:"Timestamp,omitempty" name:"Timestamp" list`
+	Timestamp []*int64 `json:"Timestamp,omitempty" name:"Timestamp"`
 }
 
 type ProfileInfo struct {
@@ -1977,7 +1977,7 @@ type ScoreDetail struct {
 
 	// Deduction item list.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	Items []*ScoreItem `json:"Items,omitempty" name:"Items" list`
+	Items []*ScoreItem `json:"Items,omitempty" name:"Items"`
 }
 
 type ScoreItem struct {

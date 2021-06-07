@@ -117,13 +117,13 @@ type CreateMatchRequest struct {
 	ServerSessionData *string `json:"ServerSessionData,omitempty" name:"ServerSessionData"`
 
 	// Game attribute. It is an array of key-value structure.
-	GameProperties []*StringKV `json:"GameProperties,omitempty" name:"GameProperties" list`
+	GameProperties []*StringKV `json:"GameProperties,omitempty" name:"GameProperties"`
 
 	// Enable or disable the log. 0: disable, 1: enable
 	LogSwitch *int64 `json:"LogSwitch,omitempty" name:"LogSwitch"`
 
 	// Tag. It is an array of key-value structure.
-	Tags []*StringKV `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*StringKV `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateMatchRequest) ToJsonString() string {
@@ -193,7 +193,7 @@ type CreateRuleRequest struct {
 	RuleDesc *string `json:"RuleDesc,omitempty" name:"RuleDesc"`
 
 	// Tag. It is an array of key-value structure. Up to 50 tags can be associated.
-	Tags []*StringKV `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*StringKV `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateRuleRequest) ToJsonString() string {
@@ -439,7 +439,7 @@ type DescribeMatchCodesResponse struct {
 
 		// MatchCode
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		MatchCodes []*MatchCodeAttr `json:"MatchCodes,omitempty" name:"MatchCodes" list`
+		MatchCodes []*MatchCodeAttr `json:"MatchCodes,omitempty" name:"MatchCodes"`
 
 		// The total number of queried MatchCodes
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -527,7 +527,7 @@ type DescribeMatchesRequest struct {
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
 	// Tags. Enter a tag for querying.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *DescribeMatchesRequest) ToJsonString() string {
@@ -559,7 +559,7 @@ type DescribeMatchesResponse struct {
 
 		// Matchmaking information list
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		MatchInfoList []*MatchInfo `json:"MatchInfoList,omitempty" name:"MatchInfoList" list`
+		MatchInfoList []*MatchInfo `json:"MatchInfoList,omitempty" name:"MatchInfoList"`
 
 		// Total number of results
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -596,7 +596,7 @@ type DescribeMatchingProgressRequest struct {
 	*tchttp.BaseRequest
 
 	// List of MatchTicket IDs. It can contain up to 12 IDs.
-	MatchTicketIds []*MTicket `json:"MatchTicketIds,omitempty" name:"MatchTicketIds" list`
+	MatchTicketIds []*MTicket `json:"MatchTicketIds,omitempty" name:"MatchTicketIds"`
 }
 
 func (r *DescribeMatchingProgressRequest) ToJsonString() string {
@@ -624,7 +624,7 @@ type DescribeMatchingProgressResponse struct {
 
 		// MatchTicket list
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		MatchTickets []*MatchTicket `json:"MatchTickets,omitempty" name:"MatchTickets" list`
+		MatchTickets []*MatchTicket `json:"MatchTickets,omitempty" name:"MatchTickets"`
 
 		// Error code
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -712,7 +712,7 @@ type DescribeRulesRequest struct {
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
 	// Tags. Enter a tag for querying.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *DescribeRulesRequest) ToJsonString() string {
@@ -744,7 +744,7 @@ type DescribeRulesResponse struct {
 
 		// Rule information list
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		RuleInfoList []*RuleBriefInfo `json:"RuleInfoList,omitempty" name:"RuleInfoList" list`
+		RuleInfoList []*RuleBriefInfo `json:"RuleInfoList,omitempty" name:"RuleInfoList"`
 
 		// Total number of results
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -855,10 +855,10 @@ type MatchAttribute struct {
 	StringValue *string `json:"StringValue,omitempty" name:"StringValue"`
 
 	// List attribute value
-	ListValue []*string `json:"ListValue,omitempty" name:"ListValue" list`
+	ListValue []*string `json:"ListValue,omitempty" name:"ListValue"`
 
 	// Map attribute value
-	MapValue []*AttributeMap `json:"MapValue,omitempty" name:"MapValue" list`
+	MapValue []*AttributeMap `json:"MapValue,omitempty" name:"MapValue"`
 }
 
 type MatchCodeAttr struct {
@@ -913,7 +913,7 @@ type MatchInfo struct {
 
 	// Game attributes
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	GameProperties []*StringKV `json:"GameProperties,omitempty" name:"GameProperties" list`
+	GameProperties []*StringKV `json:"GameProperties,omitempty" name:"GameProperties"`
 
 	// Enable or disable the log. 0: disable, 1: enable
 	LogSwitch *int64 `json:"LogSwitch,omitempty" name:"LogSwitch"`
@@ -936,7 +936,7 @@ type MatchInfo struct {
 
 	// Tag
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Tags []*StringKV `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*StringKV `json:"Tags,omitempty" name:"Tags"`
 
 	// Region
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -980,7 +980,7 @@ type MatchTicket struct {
 	MatchType *string `json:"MatchType,omitempty" name:"MatchType"`
 
 	// Player information list
-	Players []*Player `json:"Players,omitempty" name:"Players" list`
+	Players []*Player `json:"Players,omitempty" name:"Players"`
 
 	// Matching status. Valid values: SEARCHING (matching), PLACING (pending match), COMPLETED (match completed), CANCELLED (match cancelled), TIMEDOUT (match timeouts), FAILED (match failed)
 	Status *string `json:"Status,omitempty" name:"Status"`
@@ -1038,13 +1038,13 @@ type ModifyMatchRequest struct {
 	ServerSessionData *string `json:"ServerSessionData,omitempty" name:"ServerSessionData"`
 
 	// Game attribute. It is an array of key-value structure.
-	GameProperties []*StringKV `json:"GameProperties,omitempty" name:"GameProperties" list`
+	GameProperties []*StringKV `json:"GameProperties,omitempty" name:"GameProperties"`
 
 	// Enable or disable the log. 0: disable, 1: enable
 	LogSwitch *int64 `json:"LogSwitch,omitempty" name:"LogSwitch"`
 
 	// Tag. It is an array of key-value structure.
-	Tags []*StringKV `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*StringKV `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *ModifyMatchRequest) ToJsonString() string {
@@ -1115,7 +1115,7 @@ type ModifyRuleRequest struct {
 	RuleDesc *string `json:"RuleDesc,omitempty" name:"RuleDesc"`
 
 	// Tag. It is an array of key-value structure. Up to 50 tags can be associated.
-	Tags []*StringKV `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*StringKV `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *ModifyRuleRequest) ToJsonString() string {
@@ -1233,7 +1233,7 @@ type Player struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Player attribute for matching. Up to 10 attributes are supported.
-	MatchAttributes []*MatchAttribute `json:"MatchAttributes,omitempty" name:"MatchAttributes" list`
+	MatchAttributes []*MatchAttribute `json:"MatchAttributes,omitempty" name:"MatchAttributes"`
 
 	// Team name. A player can pass in a different team name, which can contain up to 128 characters, and support [a-zA-Z0-9-\.]*.
 	Team *string `json:"Team,omitempty" name:"Team"`
@@ -1245,7 +1245,7 @@ type Player struct {
 	CustomProfile *string `json:"CustomProfile,omitempty" name:"CustomProfile"`
 
 	// Number of delays in each area. Up to 20 delays are supported.
-	RegionLatencies []*RegionLatency `json:"RegionLatencies,omitempty" name:"RegionLatencies" list`
+	RegionLatencies []*RegionLatency `json:"RegionLatencies,omitempty" name:"RegionLatencies"`
 }
 
 type RegionLatency struct {
@@ -1293,22 +1293,22 @@ type ReportOverviewData struct {
 type ReportTrendData struct {
 
 	// Total count
-	TotalList []*string `json:"TotalList,omitempty" name:"TotalList" list`
+	TotalList []*string `json:"TotalList,omitempty" name:"TotalList"`
 
 	// Number of requests cancelled
-	CancelList []*string `json:"CancelList,omitempty" name:"CancelList" list`
+	CancelList []*string `json:"CancelList,omitempty" name:"CancelList"`
 
 	// Number of successes
-	SuccessList []*string `json:"SuccessList,omitempty" name:"SuccessList" list`
+	SuccessList []*string `json:"SuccessList,omitempty" name:"SuccessList"`
 
 	// Number of failures
-	FailList []*string `json:"FailList,omitempty" name:"FailList" list`
+	FailList []*string `json:"FailList,omitempty" name:"FailList"`
 
 	// Number of request timeout
-	TimeoutList []*string `json:"TimeoutList,omitempty" name:"TimeoutList" list`
+	TimeoutList []*string `json:"TimeoutList,omitempty" name:"TimeoutList"`
 
 	// Time array in seconds
-	TimeList []*string `json:"TimeList,omitempty" name:"TimeList" list`
+	TimeList []*string `json:"TimeList,omitempty" name:"TimeList"`
 }
 
 type RuleBriefInfo struct {
@@ -1317,7 +1317,7 @@ type RuleBriefInfo struct {
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 
 	// The associated match
-	MatchCodeList []*StringKV `json:"MatchCodeList,omitempty" name:"MatchCodeList" list`
+	MatchCodeList []*StringKV `json:"MatchCodeList,omitempty" name:"MatchCodeList"`
 
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -1343,11 +1343,11 @@ type RuleInfo struct {
 
 	// Tag
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Tags []*StringKV `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*StringKV `json:"Tags,omitempty" name:"Tags"`
 
 	// The associated match
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchCodeList []*StringKV `json:"MatchCodeList,omitempty" name:"MatchCodeList" list`
+	MatchCodeList []*StringKV `json:"MatchCodeList,omitempty" name:"MatchCodeList"`
 
 	// RuleCode
 	RuleCode *string `json:"RuleCode,omitempty" name:"RuleCode"`
@@ -1376,7 +1376,7 @@ type StartMatchingBackfillRequest struct {
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 
 	// Player information
-	Players []*Player `json:"Players,omitempty" name:"Players" list`
+	Players []*Player `json:"Players,omitempty" name:"Players"`
 
 	// Game server session ID. It should contain 1 to 256 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
@@ -1438,7 +1438,7 @@ type StartMatchingRequest struct {
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 
 	// Player information. Up to 200 entries can be entered.
-	Players []*Player `json:"Players,omitempty" name:"Players" list`
+	Players []*Player `json:"Players,omitempty" name:"Players"`
 
 	// MatchTicket ID, which can contain up to 128 characters and can only contain numbers, letters, “.”, and “-”. This parameter is left empty by default. When it is empty, the MatchTicket ID will be automatically generated by GPM.
 	MatchTicketId *string `json:"MatchTicketId,omitempty" name:"MatchTicketId"`

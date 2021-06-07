@@ -90,7 +90,7 @@ type AttachDisksRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// ID of the elastic cloud disk to be mounted, which can be queried through the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1). A maximum of 10 elastic cloud disks can be mounted in a single request.
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
 	// Optional parameter. If this is not passed only the mount operation is executed. If `True` is passed, the cloud disk will be configured to be terminated when the server it is mounted to is terminated. This is only valid for pay-as-you-go cloud disks.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitempty" name:"DeleteWithInstance"`
@@ -168,10 +168,10 @@ type AutoSnapshotPolicy struct {
 	NextTriggerTime *string `json:"NextTriggerTime,omitempty" name:"NextTriggerTime"`
 
 	// The policy for executing the scheduled snapshot.
-	Policy []*Policy `json:"Policy,omitempty" name:"Policy" list`
+	Policy []*Policy `json:"Policy,omitempty" name:"Policy"`
 
 	// The list of cloud disk IDs that the current scheduled snapshot policy is bound to.
-	DiskIdSet []*string `json:"DiskIdSet,omitempty" name:"DiskIdSet" list`
+	DiskIdSet []*string `json:"DiskIdSet,omitempty" name:"DiskIdSet"`
 }
 
 type BindAutoSnapshotPolicyRequest struct {
@@ -181,7 +181,7 @@ type BindAutoSnapshotPolicyRequest struct {
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
 
 	// List of cloud disk IDs to be bound. Maximum of 80 cloud disks can be bound per request.
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 }
 
 func (r *BindAutoSnapshotPolicyRequest) ToJsonString() string {
@@ -228,7 +228,7 @@ type CreateAutoSnapshotPolicyRequest struct {
 	*tchttp.BaseRequest
 
 	// The policy for executing the scheduled snapshot.
-	Policy []*Policy `json:"Policy,omitempty" name:"Policy" list`
+	Policy []*Policy `json:"Policy,omitempty" name:"Policy"`
 
 	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
 	AutoSnapshotPolicyName *string `json:"AutoSnapshotPolicyName,omitempty" name:"AutoSnapshotPolicyName"`
@@ -330,7 +330,7 @@ type CreateDisksRequest struct {
 	Encrypt *string `json:"Encrypt,omitempty" name:"Encrypt"`
 
 	// Cloud disk binding tag.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// The default of optional parameter is False. When True is selected, the cloud disk will be created as a shareable cloud disk.
 	Shareable *bool `json:"Shareable,omitempty" name:"Shareable"`
@@ -375,7 +375,7 @@ type CreateDisksResponse struct {
 	Response *struct {
 
 		// List of created cloud disk IDs. 
-		DiskIdSet []*string `json:"DiskIdSet,omitempty" name:"DiskIdSet" list`
+		DiskIdSet []*string `json:"DiskIdSet,omitempty" name:"DiskIdSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -454,7 +454,7 @@ type DeleteAutoSnapshotPoliciesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of scheduled snapshot policy IDs to be deleted.
-	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitempty" name:"AutoSnapshotPolicyIds" list`
+	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitempty" name:"AutoSnapshotPolicyIds"`
 }
 
 func (r *DeleteAutoSnapshotPoliciesRequest) ToJsonString() string {
@@ -500,7 +500,7 @@ type DeleteSnapshotsRequest struct {
 	*tchttp.BaseRequest
 
 	// List of IDs of snapshots to be deleted, which can be queried via [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1).
-	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds" list`
+	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds"`
 }
 
 func (r *DeleteSnapshotsRequest) ToJsonString() string {
@@ -546,10 +546,10 @@ type DescribeAutoSnapshotPoliciesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of scheduled snapshot policy IDs to be queried. The parameter does not support specifying both `SnapshotIds` and `Filters`.
-	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitempty" name:"AutoSnapshotPolicyIds" list`
+	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitempty" name:"AutoSnapshotPolicyIds"`
 
 	// Filter conditions. Specification of both the `AutoSnapshotPolicyIds` and `Filters` parameters is not supported.<br><li>auto-snapshot-policy-id - Array of String - Required or not: No - (Filter condition) Filters according to the scheduled snapshot policy ID. The format of the scheduled snapshot policy ID is as follows: `asp-11112222`. <br><li>auto-snapshot-policy-state - Array of String - Required or not: No - (Filter condition) Filters according to the status of the scheduled snapshot policy. The format of the scheduled snapshot policy ID is as follows: `asp-11112222`. (NORMAL: normal | ISOLATED: isolated)<br><li>auto-snapshot-policy-name - Array of String - Required or not: No - (Filter condition) Filters according to the name of the scheduled snapshot policy.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of results to be returned. Default is 20. Maximum is 100. For more information on `Limit`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -596,7 +596,7 @@ type DescribeAutoSnapshotPoliciesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of scheduled snapshot policies.
-		AutoSnapshotPolicySet []*AutoSnapshotPolicy `json:"AutoSnapshotPolicySet,omitempty" name:"AutoSnapshotPolicySet" list`
+		AutoSnapshotPolicySet []*AutoSnapshotPolicy `json:"AutoSnapshotPolicySet,omitempty" name:"AutoSnapshotPolicySet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -648,7 +648,7 @@ type DescribeDiskAssociatedAutoSnapshotPolicyResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of scheduled snapshots bound to cloud disk.
-		AutoSnapshotPolicySet []*AutoSnapshotPolicy `json:"AutoSnapshotPolicySet,omitempty" name:"AutoSnapshotPolicySet" list`
+		AutoSnapshotPolicySet []*AutoSnapshotPolicy `json:"AutoSnapshotPolicySet,omitempty" name:"AutoSnapshotPolicySet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -673,19 +673,19 @@ type DescribeDiskConfigQuotaRequest struct {
 	InquiryType *string `json:"InquiryType,omitempty" name:"InquiryType"`
 
 	// Query configuration under one or more [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo).
-	Zones []*string `json:"Zones,omitempty" name:"Zones" list`
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
 
 	// Billing mode. Value range: <br><li>POSTPAID_BY_HOUR: postpaid.
 	DiskChargeType *string `json:"DiskChargeType,omitempty" name:"DiskChargeType"`
 
 	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD
-	DiskTypes []*string `json:"DiskTypes,omitempty" name:"DiskTypes" list`
+	DiskTypes []*string `json:"DiskTypes,omitempty" name:"DiskTypes"`
 
 	// The system disk or data disk. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
 	DiskUsage *string `json:"DiskUsage,omitempty" name:"DiskUsage"`
 
 	// Filter by the instance model series, such as S1, I1 and M1. For more information, please see [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1)
-	InstanceFamilies []*string `json:"InstanceFamilies,omitempty" name:"InstanceFamilies" list`
+	InstanceFamilies []*string `json:"InstanceFamilies,omitempty" name:"InstanceFamilies"`
 
 	// Instance CPU cores.
 	CPU *uint64 `json:"CPU,omitempty" name:"CPU"`
@@ -725,7 +725,7 @@ type DescribeDiskConfigQuotaResponse struct {
 	Response *struct {
 
 		// List of cloud disk configurations.
-		DiskConfigSet []*DiskConfig `json:"DiskConfigSet,omitempty" name:"DiskConfigSet" list`
+		DiskConfigSet []*DiskConfig `json:"DiskConfigSet,omitempty" name:"DiskConfigSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -748,7 +748,7 @@ type DescribeDiskOperationLogsRequest struct {
 
 	// Filter conditions. The following conditions are supported:
 	// <li>disk-id - Array of String - Required or not: Yes - Filter by cloud disk ID, with maximum of 10 cloud disk IDs able to be specified per request.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The start time of the operation logs to be queried, for example: '2019-11-22 00:00:00"
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
@@ -783,7 +783,7 @@ type DescribeDiskOperationLogsResponse struct {
 	Response *struct {
 
 		// List of cloud disk operation logs.
-		DiskOperationLogSet []*DiskOperationLog `json:"DiskOperationLogSet,omitempty" name:"DiskOperationLogSet" list`
+		DiskOperationLogSet []*DiskOperationLog `json:"DiskOperationLogSet,omitempty" name:"DiskOperationLogSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -805,10 +805,10 @@ type DescribeDisksRequest struct {
 	*tchttp.BaseRequest
 
 	// Query by one or more cloud disk IDs, such as `disk-11112222`. For the format of this parameter, please see the ids.N section of the API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1). This parameter does not support specifying both `DiskIds` and `Filters`.
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
 	// Filters. You cannot specify `DiskIds` and `Filters` at the same time. <br><li>disk-usage - Array of String - Optional - Filters by cloud disk type. (SYSTEM_DISK: system disk | DATA_DISK: data disk) <br><li>disk-charge-type - Array of String - Optional - Filters by cloud disk billing method. (POSTPAID_BY_HOUR: pay-as-you-go) <br><li>portable - Array of String- Optional - Filters by whether the cloud disk is elastic or not. (TRUE: elastic | FALSE: non-elastic) <br><li>project-id - Array of Integer - Optional - Filters by the ID of the project to which a cloud disk belongs. <br><li>disk-id - Array of String - Optional - Filters by cloud disk ID, such as `disk-11112222`. <br><li>disk-name - Array of String - Optional - Filters by cloud disk name. <br><li>disk-type - Array of String - Optional - Filters by cloud disk media type (CLOUD_BASIC: HDD cloud disk | CLOUD_PREMIUM: Premium Cloud Storage | CLOUD_SSD: SSD cloud disk.) <br><li>disk-state - Array of String - Optional - Filters by cloud disk state. (UNATTACHED: not mounted | ATTACHING: being mounted | ATTACHED: mounted | DETACHING: being unmounted | EXPANDING: being expanded | ROLLBACKING: being rolled back | TORECYCLE: to be repossessed.) <br><li>instance-id - Array of String - Optional - Filters by the ID of the CVM instance on which a cloud disk is mounted. You can use this parameter to query the cloud disks mounted on specific CVMs. <br><li>zone - Array of String - Optional - Filters by [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) <br><li>instance-ip-address - Array of String - Optional - Filters by the private or public IP of the CVM on which a cloud disk is mounted. <br><li>instance-name - Array of String - Optional - Filters by the name of the instance on which a cloud disk is mounted. <br><li>tag-key - Array of String - Optional - Filters by tag key. <br><li>tag-value - Array of String - Optional - Filters by tag value. <br><li>tag:tag-key - Array of String - Optional - Filters by tag key-value pair. Please replace `tag-key` with a specific tag key.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -859,7 +859,7 @@ type DescribeDisksResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of cloud disk details.
-		DiskSet []*Disk `json:"DiskSet,omitempty" name:"DiskSet" list`
+		DiskSet []*Disk `json:"DiskSet,omitempty" name:"DiskSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -881,7 +881,7 @@ type DescribeInstancesDiskNumRequest struct {
 	*tchttp.BaseRequest
 
 	// ID of the CVM instance can be queried via the API [DescribeInstances](https://intl.cloud.tencent.com/document/product/213/15728?from_cn_redirect=1).
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeInstancesDiskNumRequest) ToJsonString() string {
@@ -908,7 +908,7 @@ type DescribeInstancesDiskNumResponse struct {
 	Response *struct {
 
 		// The quantity of mounted and mountable elastic cloud disks for each cloud virtual machine
-		AttachDetail []*AttachDetail `json:"AttachDetail,omitempty" name:"AttachDetail" list`
+		AttachDetail []*AttachDetail `json:"AttachDetail,omitempty" name:"AttachDetail"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -931,7 +931,7 @@ type DescribeSnapshotOperationLogsRequest struct {
 
 	// Filter conditions. The following conditions are supported:
 	// <li>snapshot-id - Array of String - Required or not: Yes - Filter by snapshot ID, with maximum of 10 snapshot IDs able to be specified per request.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The start time of the operation logs to be queried, for example: '2019-11-22 00:00:00"
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
@@ -966,7 +966,7 @@ type DescribeSnapshotOperationLogsResponse struct {
 	Response *struct {
 
 		// List of snapshot operation logs.
-		SnapshotOperationLogSet []*SnapshotOperationLog `json:"SnapshotOperationLogSet,omitempty" name:"SnapshotOperationLogSet" list`
+		SnapshotOperationLogSet []*SnapshotOperationLog `json:"SnapshotOperationLogSet,omitempty" name:"SnapshotOperationLogSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1015,7 +1015,7 @@ type DescribeSnapshotSharePermissionResponse struct {
 	Response *struct {
 
 		// The set of snapshot sharing information
-		SharePermissionSet []*SharePermission `json:"SharePermissionSet,omitempty" name:"SharePermissionSet" list`
+		SharePermissionSet []*SharePermission `json:"SharePermissionSet,omitempty" name:"SharePermissionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1037,12 +1037,12 @@ type DescribeSnapshotsRequest struct {
 	*tchttp.BaseRequest
 
 	// List of snapshot IDs to be queried. The parameter does not support specifying both `SnapshotIds` and `Filters`.
-	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds" list`
+	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds"`
 
 	// Filters. It cannot be specified together with `SnapshotIds`.<br><li>snapshot-id - Array of String - Optional - Filters by snapshot ID, such as `snap-11112222`.<br><li>snapshot-name - Array of String - Optional - Filters by snapshot name. <br><li>snapshot-state - Array of String - Optional - Filters by snapshot state (NORMAL: normal | CREATING: creating | ROLLBACKING: rolling back). <br><li>disk-usage - Array of String - Optional - Filters by the type of the cloud disk from which a snapshot is created (SYSTEM_DISK: system disk | DATA_DISK: data disk).<br><li>project-id - Array of String - Optional - Filters by the ID of the project to which a cloud disk belongs. <br><li>disk-id - Array of String - Optional - Filters by the ID of the cloud disk from which a snapshot is created.<br><li>zone - Array of String - Optional - Filters by [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo).<br><li>encrypt - Array of String - Optional - Filters by whether a snapshot is created from an encrypted cloud disk. (TRUE: a snapshot of an encrypted cloud disk | FALSE: not a snapshot of an encrypted cloud disk.)
 	// <li>snapshot-type- Array of String - Optional - Filters by the snapshot type specified in `snapshot-type`.
 	// (SHARED_SNAPSHOT: a shared snapshot | PRIVATE_SNAPSHOT: a private snapshot.)
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -1089,7 +1089,7 @@ type DescribeSnapshotsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of snapshot details.
-		SnapshotSet []*Snapshot `json:"SnapshotSet,omitempty" name:"SnapshotSet" list`
+		SnapshotSet []*Snapshot `json:"SnapshotSet,omitempty" name:"SnapshotSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1111,7 +1111,7 @@ type DetachDisksRequest struct {
 	*tchttp.BaseRequest
 
 	// IDs of the cloud disks to be unmounted, which can be queried via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API. Up to 10 elastic cloud disks can be unmounted in a single request.
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
 	// Indicates the CVM from which you want to unmount the disks. This parameter is only available for shared cloud disks.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -1232,11 +1232,11 @@ type Disk struct {
 
 	// ID of the periodic snapshot associated to the cloud disk. This parameter is returned only if the value of parameter ReturnBindAutoSnapshotPolicy is TRUE when the API DescribeDisks is called.
 	// Note: This field may return null, indicating that no valid value was found.
-	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitempty" name:"AutoSnapshotPolicyIds" list`
+	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitempty" name:"AutoSnapshotPolicyIds"`
 
 	// The tag bound to the cloud disk. The value Null is used when no tag is bound to the cloud disk.
 	// Note: This field may return null, indicating that no valid value was found.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Whether the cloud disk terminates along with the instance mounted to it. <br><li>true: Cloud disk will also be terminated when instance terminates, so only hourly postpaid cloud disk are supported.<br><li>false: Cloud disk does not terminate when instance terminates.
 	// Note: This field may return null, indicating that no valid value was found.
@@ -1258,7 +1258,7 @@ type Disk struct {
 	Shareable *bool `json:"Shareable,omitempty" name:"Shareable"`
 
 	// For non-shareable cloud disks, this parameter is null. For shareable cloud disks, this parameters indicates this cloud disk's Instance IDs currently mounted to the CVM.
-	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList" list`
+	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
 
 	// The total number of snapshots of the cloud disk.
 	SnapshotCount *int64 `json:"SnapshotCount,omitempty" name:"SnapshotCount"`
@@ -1357,7 +1357,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// One or more filter values.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type GetSnapOverviewRequest struct {
@@ -1613,7 +1613,7 @@ type ModifyAutoSnapshotPolicyAttributeRequest struct {
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
 
 	// The policy for executing the scheduled snapshot.
-	Policy []*Policy `json:"Policy,omitempty" name:"Policy" list`
+	Policy []*Policy `json:"Policy,omitempty" name:"Policy"`
 
 	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
 	AutoSnapshotPolicyName *string `json:"AutoSnapshotPolicyName,omitempty" name:"AutoSnapshotPolicyName"`
@@ -1676,7 +1676,7 @@ type ModifyDiskAttributesRequest struct {
 	*tchttp.BaseRequest
 
 	// IDs of one or more cloud disks to be operated. If multiple cloud disk IDs are selected, it only supports modifying all cloud disks with the same attributes.
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
 	// The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1).
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
@@ -1850,13 +1850,13 @@ type ModifySnapshotsSharePermissionRequest struct {
 	*tchttp.BaseRequest
 
 	// List of account IDs with which a snapshot is shared. For the format of array-type parameters, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1). You can find the account ID in [Account Information](https://console.cloud.tencent.com/developer).
-	AccountIds []*string `json:"AccountIds,omitempty" name:"AccountIds" list`
+	AccountIds []*string `json:"AccountIds,omitempty" name:"AccountIds"`
 
 	// Operations. Valid values: `SHARE`, sharing an image; `CANCEL`, cancelling the sharing of an image.
 	Permission *string `json:"Permission,omitempty" name:"Permission"`
 
 	// The ID of the snapshot. You can obtain this by using [DescribeSnapshots](https://intl.cloud.tencent.com/document/api/362/15647?from_cn_redirect=1).
-	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds" list`
+	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds"`
 }
 
 func (r *ModifySnapshotsSharePermissionRequest) ToJsonString() string {
@@ -1924,10 +1924,10 @@ type Placement struct {
 type Policy struct {
 
 	// Specifies the days of the week, from Monday to Sunday, on which a scheduled snapshot will be triggered. Value range: [0, 6]. 0 indicates triggering on Sunday, 1-6 indicate triggering on Monday-Saturday.
-	DayOfWeek []*uint64 `json:"DayOfWeek,omitempty" name:"DayOfWeek" list`
+	DayOfWeek []*uint64 `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
 
 	// Specifies the time that that the scheduled snapshot policy will be triggered. The unit is hour. The value range is [0-23]. 00:00-23:00 is a total of 24 time points that can be selected. 1 indicates 01:00, and so on.
-	Hour []*uint64 `json:"Hour,omitempty" name:"Hour" list`
+	Hour []*uint64 `json:"Hour,omitempty" name:"Hour"`
 }
 
 type PrepayPrice struct {
@@ -2102,13 +2102,13 @@ type Snapshot struct {
 	IsPermanent *bool `json:"IsPermanent,omitempty" name:"IsPermanent"`
 
 	// The destination region to which the snapshot is being replicated. Default value is [ ].
-	CopyingToRegions []*string `json:"CopyingToRegions,omitempty" name:"CopyingToRegions" list`
+	CopyingToRegions []*string `json:"CopyingToRegions,omitempty" name:"CopyingToRegions"`
 
 	// Whether the snapshot is replicated across regions. Value range: <br><li>true: Indicates that the snapshot is replicated across regions. <br><li>false: Indicates that the snapshot belongs to the local region.
 	CopyFromRemote *bool `json:"CopyFromRemote,omitempty" name:"CopyFromRemote"`
 
 	// List of images associated with snapshot.
-	Images []*Image `json:"Images,omitempty" name:"Images" list`
+	Images []*Image `json:"Images,omitempty" name:"Images"`
 
 	// Number of images associated with snapshot.
 	ImageCount *uint64 `json:"ImageCount,omitempty" name:"ImageCount"`
@@ -2168,7 +2168,7 @@ type TerminateDisksRequest struct {
 	*tchttp.BaseRequest
 
 	// List of cloud disk IDs required to be returned.
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 }
 
 func (r *TerminateDisksRequest) ToJsonString() string {
@@ -2214,7 +2214,7 @@ type UnbindAutoSnapshotPolicyRequest struct {
 	*tchttp.BaseRequest
 
 	// List of cloud disk IDs scheduled snapshot policy to be unbound from.
-	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds" list`
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
 	// ID of scheduled snapshot policy to be unbound.
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`

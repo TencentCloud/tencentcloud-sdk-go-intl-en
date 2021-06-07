@@ -87,7 +87,7 @@ type LivenessCompareResponse struct {
 		Description *string `json:"Description,omitempty" name:"Description"`
 
 		// 
-		BestFrameList []*string `json:"BestFrameList,omitempty" name:"BestFrameList" list`
+		BestFrameList []*string `json:"BestFrameList,omitempty" name:"BestFrameList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

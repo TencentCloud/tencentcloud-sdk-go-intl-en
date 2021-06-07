@@ -93,7 +93,7 @@ type BillDetail struct {
 	FeeEndTime *string `json:"FeeEndTime,omitempty" name:"FeeEndTime"`
 
 	// Component list
-	ComponentSet []*BillDetailComponent `json:"ComponentSet,omitempty" name:"ComponentSet" list`
+	ComponentSet []*BillDetailComponent `json:"ComponentSet,omitempty" name:"ComponentSet"`
 
 	// Payer's UIN
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
@@ -106,7 +106,7 @@ type BillDetail struct {
 
 	// Tag information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Tags []*BillTagInfo `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*BillTagInfo `json:"Tags,omitempty" name:"Tags"`
 
 	// Product code
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -270,7 +270,7 @@ type BillResourceSummary struct {
 
 	// Tag information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Tags []*BillTagInfo `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*BillTagInfo `json:"Tags,omitempty" name:"Tags"`
 
 	// Payer UIN
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
@@ -419,7 +419,7 @@ type DescribeBillDetailResponse struct {
 	Response *struct {
 
 		// Details list
-		DetailSet []*BillDetail `json:"DetailSet,omitempty" name:"DetailSet" list`
+		DetailSet []*BillDetail `json:"DetailSet,omitempty" name:"DetailSet"`
 
 		// Total number of records
 	// Note: This field may return null, indicating that no valid value was found.
@@ -493,7 +493,7 @@ type DescribeBillResourceSummaryResponse struct {
 	Response *struct {
 
 		// Resource summary list
-		ResourceSummarySet []*BillResourceSummary `json:"ResourceSummarySet,omitempty" name:"ResourceSummarySet" list`
+		ResourceSummarySet []*BillResourceSummary `json:"ResourceSummarySet,omitempty" name:"ResourceSummarySet"`
 
 		// Total number of resource summary lists
 	// Note: This field may return null, indicating that no valid value was found.
@@ -558,7 +558,7 @@ type DescribeBillSummaryByPayModeResponse struct {
 
 		// Detailed cost distribution for all billing modes
 	// Note: This field may return null, indicating that no valid value was found.
-		SummaryOverview []*PayModeSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview" list`
+		SummaryOverview []*PayModeSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -623,7 +623,7 @@ type DescribeBillSummaryByProductResponse struct {
 
 		// Cost distribution of all products
 	// Note: This field may return null, indicating that no valid value was found.
-		SummaryOverview []*BusinessSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview" list`
+		SummaryOverview []*BusinessSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -684,7 +684,7 @@ type DescribeBillSummaryByProjectResponse struct {
 
 		// Detailed cost distribution for all projects
 	// Note: This field may return null, indicating that no valid value was found.
-		SummaryOverview []*ProjectSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview" list`
+		SummaryOverview []*ProjectSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -745,7 +745,7 @@ type DescribeBillSummaryByRegionResponse struct {
 
 		// Detailed cost distribution for all regions
 	// Note: This field may return null, indicating that no valid value was found.
-		SummaryOverview []*RegionSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview" list`
+		SummaryOverview []*RegionSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -810,7 +810,7 @@ type DescribeBillSummaryByTagResponse struct {
 
 		// Details about cost distribution over different tags
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		SummaryOverview []*TagSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview" list`
+		SummaryOverview []*TagSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -843,7 +843,7 @@ type PayModeSummaryOverviewItem struct {
 	RealTotalCostRatio *string `json:"RealTotalCostRatio,omitempty" name:"RealTotalCostRatio"`
 
 	// Detailed summary of purchases by transaction type
-	Detail []*ActionSummaryOverviewItem `json:"Detail,omitempty" name:"Detail" list`
+	Detail []*ActionSummaryOverviewItem `json:"Detail,omitempty" name:"Detail"`
 
 	// Cash amount
 	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`

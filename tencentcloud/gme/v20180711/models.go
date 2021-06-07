@@ -48,37 +48,37 @@ type ApplicationDataStatistics struct {
 	DauDataNum *uint64 `json:"DauDataNum,omitempty" name:"DauDataNum"`
 
 	// DAU in Chinese mainland
-	DauDataMainland []*StatisticsItem `json:"DauDataMainland,omitempty" name:"DauDataMainland" list`
+	DauDataMainland []*StatisticsItem `json:"DauDataMainland,omitempty" name:"DauDataMainland"`
 
 	// DAU outside Chinese mainland
-	DauDataOversea []*StatisticsItem `json:"DauDataOversea,omitempty" name:"DauDataOversea" list`
+	DauDataOversea []*StatisticsItem `json:"DauDataOversea,omitempty" name:"DauDataOversea"`
 
 	// Total DAU
-	DauDataSum []*StatisticsItem `json:"DauDataSum,omitempty" name:"DauDataSum" list`
+	DauDataSum []*StatisticsItem `json:"DauDataSum,omitempty" name:"DauDataSum"`
 
 	// Number of voice chat metrics
 	DurationDataNum *uint64 `json:"DurationDataNum,omitempty" name:"DurationDataNum"`
 
 	// Duration of voice chat in Chinese mainland in minutes
-	DurationDataMainland []*StatisticsItem `json:"DurationDataMainland,omitempty" name:"DurationDataMainland" list`
+	DurationDataMainland []*StatisticsItem `json:"DurationDataMainland,omitempty" name:"DurationDataMainland"`
 
 	// Duration of voice chat outside Chinese mainland in minutes
-	DurationDataOversea []*StatisticsItem `json:"DurationDataOversea,omitempty" name:"DurationDataOversea" list`
+	DurationDataOversea []*StatisticsItem `json:"DurationDataOversea,omitempty" name:"DurationDataOversea"`
 
 	// Total duration of voice chat in minutes
-	DurationDataSum []*StatisticsItem `json:"DurationDataSum,omitempty" name:"DurationDataSum" list`
+	DurationDataSum []*StatisticsItem `json:"DurationDataSum,omitempty" name:"DurationDataSum"`
 
 	// PCU data
 	PcuDataNum *uint64 `json:"PcuDataNum,omitempty" name:"PcuDataNum"`
 
 	// PCU in Chinese mainland
-	PcuDataMainland []*StatisticsItem `json:"PcuDataMainland,omitempty" name:"PcuDataMainland" list`
+	PcuDataMainland []*StatisticsItem `json:"PcuDataMainland,omitempty" name:"PcuDataMainland"`
 
 	// PCU outside Chinese mainland
-	PcuDataOversea []*StatisticsItem `json:"PcuDataOversea,omitempty" name:"PcuDataOversea" list`
+	PcuDataOversea []*StatisticsItem `json:"PcuDataOversea,omitempty" name:"PcuDataOversea"`
 
 	// Total PCU
-	PcuDataSum []*StatisticsItem `json:"PcuDataSum,omitempty" name:"PcuDataSum" list`
+	PcuDataSum []*StatisticsItem `json:"PcuDataSum,omitempty" name:"PcuDataSum"`
 }
 
 type CreateAppRequest struct {
@@ -91,10 +91,10 @@ type CreateAppRequest struct {
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// List of engines to be supported. All values are selected by default.
-	EngineList []*string `json:"EngineList,omitempty" name:"EngineList" list`
+	EngineList []*string `json:"EngineList,omitempty" name:"EngineList"`
 
 	// Service region list. All values are selected by default.
-	RegionList []*string `json:"RegionList,omitempty" name:"RegionList" list`
+	RegionList []*string `json:"RegionList,omitempty" name:"RegionList"`
 
 	// Configuration information of voice chat
 	RealtimeSpeechConf *RealtimeSpeechConf `json:"RealtimeSpeechConf,omitempty" name:"RealtimeSpeechConf"`
@@ -106,7 +106,7 @@ type CreateAppRequest struct {
 	VoiceFilterConf *VoiceFilterConf `json:"VoiceFilterConf,omitempty" name:"VoiceFilterConf"`
 
 	// List of tags to be added
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateAppRequest) ToJsonString() string {
@@ -189,7 +189,7 @@ type DescribeAppStatisticsRequest struct {
 	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
 
 	// List of services to be queried. Valid values: RealTimeSpeech, VoiceMessage, VoiceFilter
-	Services []*string `json:"Services,omitempty" name:"Services" list`
+	Services []*string `json:"Services,omitempty" name:"Services"`
 }
 
 func (r *DescribeAppStatisticsRequest) ToJsonString() string {
@@ -219,7 +219,7 @@ type DescribeAppStatisticsResponse struct {
 	Response *struct {
 
 		// Application usage statistics
-		AppStatistics []*AppStatisticsItem `json:"AppStatistics,omitempty" name:"AppStatistics" list`
+		AppStatistics []*AppStatisticsItem `json:"AppStatistics,omitempty" name:"AppStatistics"`
 	} `json:"Response"`
 }
 
@@ -314,13 +314,13 @@ type DescribeScanResult struct {
 
 	// Detection result, which will be returned if `Code` is 0
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ScanPiece []*ScanPiece `json:"ScanPiece,omitempty" name:"ScanPiece" list`
+	ScanPiece []*ScanPiece `json:"ScanPiece,omitempty" name:"ScanPiece"`
 
 	// Detection task submission timestamp
 	ScanStartTime *uint64 `json:"ScanStartTime,omitempty" name:"ScanStartTime"`
 
 	// Speech detection scenario, which corresponds to the `Scene` at the time of request
-	Scenes []*string `json:"Scenes,omitempty" name:"Scenes" list`
+	Scenes []*string `json:"Scenes,omitempty" name:"Scenes"`
 
 	// Speech detection task ID, which is assigned by the backend
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
@@ -342,7 +342,7 @@ type DescribeScanResultListRequest struct {
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
 	// List of IDs of the tasks to be queried. Up to 100 entries can be added in the ID list.
-	TaskIdList []*string `json:"TaskIdList,omitempty" name:"TaskIdList" list`
+	TaskIdList []*string `json:"TaskIdList,omitempty" name:"TaskIdList"`
 
 	// Number of task results to be returned. Default value: 10. Maximum value: 500. This parameter will be ignored for large file tasks where all results will be returned
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -375,7 +375,7 @@ type DescribeScanResultListResponse struct {
 
 		// Result of the speech detection task to be queried
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Data []*DescribeScanResult `json:"Data,omitempty" name:"Data" list`
+		Data []*DescribeScanResult `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -508,7 +508,7 @@ type ScanPiece struct {
 	MainType *string `json:"MainType,omitempty" name:"MainType"`
 
 	// Speech detection details
-	ScanDetail []*ScanDetail `json:"ScanDetail,omitempty" name:"ScanDetail" list`
+	ScanDetail []*ScanDetail `json:"ScanDetail,omitempty" name:"ScanDetail"`
 
 	// GME voice chat room ID, which is the `RoomId` passed through when the task was submitted
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -542,7 +542,7 @@ type ScanVoiceRequest struct {
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
 	// Speech detection scenario. The value of this parameter is currently required to be `default`. Preset scenarios: abusive, pornographic, politically sensitive, advertising, terrorism, and prohibited scenarios. For specific values, please see the <a href="#Label_Value">Label description</a> above.
-	Scenes []*string `json:"Scenes,omitempty" name:"Scenes" list`
+	Scenes []*string `json:"Scenes,omitempty" name:"Scenes"`
 
 	// Whether it is a live stream. false: audio file detection, true: audio stream detection.
 	Live *bool `json:"Live,omitempty" name:"Live"`
@@ -550,7 +550,7 @@ type ScanVoiceRequest struct {
 	// Speech detection task list. Up to 100 tasks can be added in the list. The structure contains:
 	// <li>DataId: unique data ID</li>
 	// <li>Url: URL-encoded data file URL, which is a pull address if the detected speech is a stream</li>
-	Tasks []*Task `json:"Tasks,omitempty" name:"Tasks" list`
+	Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
 
 	// Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">callback description</a> above. (Note: if this field is empty, the detection result can only be obtained by calling the `DescribeScanResultList` API.)
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
@@ -585,7 +585,7 @@ type ScanVoiceResponse struct {
 
 		// Speech detection return. The `Data` field is a JSON array where each element contains: <li>DataId: corresponding `DataId` in request.</li>
 	// <li>TaskID: detection task ID, which is used to poll the speech detection result.</li>
-		Data []*ScanVoiceResult `json:"Data,omitempty" name:"Data" list`
+		Data []*ScanVoiceResult `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

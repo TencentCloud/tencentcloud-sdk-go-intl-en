@@ -42,10 +42,10 @@ type AccessRegionDetial struct {
 	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
 
 	// Value array of the available concurrence
-	ConcurrentList []*int64 `json:"ConcurrentList,omitempty" name:"ConcurrentList" list`
+	ConcurrentList []*int64 `json:"ConcurrentList,omitempty" name:"ConcurrentList"`
 
 	// Value array of the available bandwidth
-	BandwidthList []*int64 `json:"BandwidthList,omitempty" name:"BandwidthList" list`
+	BandwidthList []*int64 `json:"BandwidthList,omitempty" name:"BandwidthList"`
 }
 
 type AccessRegionDomainConf struct {
@@ -54,7 +54,7 @@ type AccessRegionDomainConf struct {
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 
 	// Region/country code for the nearest access, which can be obtained via the DescribeCountryAreaMapping API.
-	NationCountryInnerList []*string `json:"NationCountryInnerList,omitempty" name:"NationCountryInnerList" list`
+	NationCountryInnerList []*string `json:"NationCountryInnerList,omitempty" name:"NationCountryInnerList"`
 }
 
 type AddRealServersRequest struct {
@@ -64,13 +64,13 @@ type AddRealServersRequest struct {
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// IP or domain name corresponding to origin server
-	RealServerIP []*string `json:"RealServerIP,omitempty" name:"RealServerIP" list`
+	RealServerIP []*string `json:"RealServerIP,omitempty" name:"RealServerIP"`
 
 	// Origin server name
 	RealServerName *string `json:"RealServerName,omitempty" name:"RealServerName"`
 
 	// Tag list
-	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 func (r *AddRealServersRequest) ToJsonString() string {
@@ -100,7 +100,7 @@ type AddRealServersResponse struct {
 	Response *struct {
 
 		// Origin server information list
-		RealServerSet []*NewRealServer `json:"RealServerSet,omitempty" name:"RealServerSet" list`
+		RealServerSet []*NewRealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -121,7 +121,7 @@ func (r *AddRealServersResponse) FromJsonString(s string) error {
 type BandwidthPriceGradient struct {
 
 	// Bandwidth range.
-	BandwidthRange []*int64 `json:"BandwidthRange,omitempty" name:"BandwidthRange" list`
+	BandwidthRange []*int64 `json:"BandwidthRange,omitempty" name:"BandwidthRange"`
 
 	// Bandwidth unit price within the bandwidth range. Unit: CNY/Mbps/day.
 	BandwidthUnitPrice *float64 `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice"`
@@ -137,7 +137,7 @@ type BindListenerRealServersRequest struct {
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
 	// List of origin servers to be bound. If the origin server scheduling policy type of this listener is weighted round robin, you need to enter the `RealServerWeight`, i.e., the origin server weight. If this field is left empty or for other scheduling types, the default origin server weight is 1.
-	RealServerBindSet []*RealServerBindSetReq `json:"RealServerBindSet,omitempty" name:"RealServerBindSet" list`
+	RealServerBindSet []*RealServerBindSetReq `json:"RealServerBindSet,omitempty" name:"RealServerBindSet"`
 }
 
 func (r *BindListenerRealServersRequest) ToJsonString() string {
@@ -203,7 +203,7 @@ type BindRealServer struct {
 	RealServerPort *int64 `json:"RealServerPort,omitempty" name:"RealServerPort"`
 
 	// If the origin server is a domain name, the domain name will be resolved to one or multiple IPs. This field indicates the exceptional IP list.
-	DownIPList []*string `json:"DownIPList,omitempty" name:"DownIPList" list`
+	DownIPList []*string `json:"DownIPList,omitempty" name:"DownIPList"`
 }
 
 type BindRealServerInfo struct {
@@ -222,7 +222,7 @@ type BindRealServerInfo struct {
 
 	// Tag list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type BindRuleRealServersRequest struct {
@@ -235,7 +235,7 @@ type BindRuleRealServersRequest struct {
 	// If there are origin servers bound already, they will be replaced by this new origin server list.
 	// If this field is empty, it indicates unbinding all origin servers of this rule.
 	// If the origin server scheduling policy type of this rule is weighted round robin, you need to enter `RealServerWeight`, i.e., the origin server weight. If this field is left empty or for other scheduling types, the default origin server weight is 1.
-	RealServerBindSet []*RealServerBindSetReq `json:"RealServerBindSet,omitempty" name:"RealServerBindSet" list`
+	RealServerBindSet []*RealServerBindSetReq `json:"RealServerBindSet,omitempty" name:"RealServerBindSet"`
 }
 
 func (r *BindRuleRealServersRequest) ToJsonString() string {
@@ -431,14 +431,14 @@ type CloseProxiesRequest struct {
 	*tchttp.BaseRequest
 
 	// Connection instance ID; It's an old parameter, please switch to ProxyIds.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	// For more information, please see How to Ensure Idempotence.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
 	// Connection instance ID; It's a new parameter.
-	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds" list`
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
 }
 
 func (r *CloseProxiesRequest) ToJsonString() string {
@@ -467,10 +467,10 @@ type CloseProxiesResponse struct {
 	Response *struct {
 
 		// Only the running connection instance ID lists can be enabled.
-		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet" list`
+		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
 
 		// ID list of connection instances failed to be enabled.
-		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet" list`
+		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -519,10 +519,10 @@ type CloseProxyGroupResponse struct {
 	Response *struct {
 
 		// List of IDs of the connection instances that are not running, which cannot be enabled.
-		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet" list`
+		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
 
 		// List of IDs of the connection instances failed to be enabled.
-		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet" list`
+		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -692,7 +692,7 @@ type CreateDomainErrorPageInfoRequest struct {
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Original error code
-	ErrorNos []*int64 `json:"ErrorNos,omitempty" name:"ErrorNos" list`
+	ErrorNos []*int64 `json:"ErrorNos,omitempty" name:"ErrorNos"`
 
 	// New response packet
 	Body *string `json:"Body,omitempty" name:"Body"`
@@ -701,10 +701,10 @@ type CreateDomainErrorPageInfoRequest struct {
 	NewErrorNo *int64 `json:"NewErrorNo,omitempty" name:"NewErrorNo"`
 
 	// Response header to be deleted
-	ClearHeaders []*string `json:"ClearHeaders,omitempty" name:"ClearHeaders" list`
+	ClearHeaders []*string `json:"ClearHeaders,omitempty" name:"ClearHeaders"`
 
 	// Response header to be set
-	SetHeaders []*HttpHeaderParam `json:"SetHeaders,omitempty" name:"SetHeaders" list`
+	SetHeaders []*HttpHeaderParam `json:"SetHeaders,omitempty" name:"SetHeaders"`
 }
 
 func (r *CreateDomainErrorPageInfoRequest) ToJsonString() string {
@@ -773,7 +773,7 @@ type CreateDomainRequest struct {
 
 	// Client CA certificate, which is used for the HTTPS interaction between the client and GAAP.
 	// This field or the `ClientCertificateId` field is required for mutual authentication only.
-	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds" list`
+	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
 }
 
 func (r *CreateDomainRequest) ToJsonString() string {
@@ -908,7 +908,7 @@ type CreateHTTPSListenerRequest struct {
 	ClientCertificateId *string `json:"ClientCertificateId,omitempty" name:"ClientCertificateId"`
 
 	// IDs of multiple new client CA certificates. This field or the `ClientCertificateId` field is required for mutual authentication only.
-	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds" list`
+	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
 
 	// Connection group ID, which cannot be set together with `ProxyId` at the same time. A listener will be created for the corresponding connection group.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
@@ -1026,10 +1026,10 @@ type CreateProxyGroupRequest struct {
 	RealServerRegion *string `json:"RealServerRegion,omitempty" name:"RealServerRegion"`
 
 	// Tag list
-	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 
 	// List of acceleration regions, including their names, bandwidth, and concurrence configuration.
-	AccessRegionSet []*AccessConfiguration `json:"AccessRegionSet,omitempty" name:"AccessRegionSet" list`
+	AccessRegionSet []*AccessConfiguration `json:"AccessRegionSet,omitempty" name:"AccessRegionSet"`
 }
 
 func (r *CreateProxyGroupRequest) ToJsonString() string {
@@ -1107,7 +1107,7 @@ type CreateProxyRequest struct {
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
 	// List of tags to be added for connection.
-	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 
 	// ID of the replicated connection. Only a running connection can be replicated.
 	// The connection is to be replicated if this parameter is set.
@@ -1315,7 +1315,7 @@ type CreateSecurityRulesRequest struct {
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// List of access rules
-	RuleList []*SecurityPolicyRuleIn `json:"RuleList,omitempty" name:"RuleList" list`
+	RuleList []*SecurityPolicyRuleIn `json:"RuleList,omitempty" name:"RuleList"`
 }
 
 func (r *CreateSecurityRulesRequest) ToJsonString() string {
@@ -1343,7 +1343,7 @@ type CreateSecurityRulesResponse struct {
 	Response *struct {
 
 		// List of rule IDs
-		RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList" list`
+		RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1368,7 +1368,7 @@ type CreateTCPListenersRequest struct {
 	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 
 	// List of listener ports.
-	Ports []*uint64 `json:"Ports,omitempty" name:"Ports" list`
+	Ports []*uint64 `json:"Ports,omitempty" name:"Ports"`
 
 	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
@@ -1392,7 +1392,7 @@ type CreateTCPListenersRequest struct {
 	ConnectTimeout *uint64 `json:"ConnectTimeout,omitempty" name:"ConnectTimeout"`
 
 	// List of origin server ports, which only supports the listeners of version 1.0 and connection group.
-	RealServerPorts []*uint64 `json:"RealServerPorts,omitempty" name:"RealServerPorts" list`
+	RealServerPorts []*uint64 `json:"RealServerPorts,omitempty" name:"RealServerPorts"`
 
 	// Listener methods of getting client IPs. 0: TOA; 1: Proxy Protocol.
 	ClientIPMethod *int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod"`
@@ -1436,7 +1436,7 @@ type CreateTCPListenersResponse struct {
 	Response *struct {
 
 		// Returns the listener ID
-		ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
+		ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1461,7 +1461,7 @@ type CreateUDPListenersRequest struct {
 	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 
 	// List of listener ports
-	Ports []*uint64 `json:"Ports,omitempty" name:"Ports" list`
+	Ports []*uint64 `json:"Ports,omitempty" name:"Ports"`
 
 	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
@@ -1476,7 +1476,7 @@ type CreateUDPListenersRequest struct {
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
 	// List of origin server ports, which only supports the listeners of version 1.0 and connection group.
-	RealServerPorts []*uint64 `json:"RealServerPorts,omitempty" name:"RealServerPorts" list`
+	RealServerPorts []*uint64 `json:"RealServerPorts,omitempty" name:"RealServerPorts"`
 }
 
 func (r *CreateUDPListenersRequest) ToJsonString() string {
@@ -1509,7 +1509,7 @@ type CreateUDPListenersResponse struct {
 	Response *struct {
 
 		// Returns the listener ID
-		ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
+		ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1678,7 +1678,7 @@ type DeleteListenersRequest struct {
 	*tchttp.BaseRequest
 
 	// ID list of listeners to be deleted
-	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds" list`
+	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 
 	// Whether to allow a forced deletion of listeners that have been bound to origin servers. 1: allowed; 0: not allow.
 	Force *uint64 `json:"Force,omitempty" name:"Force"`
@@ -1717,13 +1717,13 @@ type DeleteListenersResponse struct {
 	Response *struct {
 
 		// ID list of listeners failed to be deleted
-		OperationFailedListenerSet []*string `json:"OperationFailedListenerSet,omitempty" name:"OperationFailedListenerSet" list`
+		OperationFailedListenerSet []*string `json:"OperationFailedListenerSet,omitempty" name:"OperationFailedListenerSet"`
 
 		// ID list of listeners deleted successfully
-		OperationSucceedListenerSet []*string `json:"OperationSucceedListenerSet,omitempty" name:"OperationSucceedListenerSet" list`
+		OperationSucceedListenerSet []*string `json:"OperationSucceedListenerSet,omitempty" name:"OperationSucceedListenerSet"`
 
 		// ID list of invalid listeners. For example: the listener does not exist, or the instance corresponding to the listener does not match.
-		InvalidStatusListenerSet []*string `json:"InvalidStatusListenerSet,omitempty" name:"InvalidStatusListenerSet" list`
+		InvalidStatusListenerSet []*string `json:"InvalidStatusListenerSet,omitempty" name:"InvalidStatusListenerSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1901,7 +1901,7 @@ type DeleteSecurityRulesRequest struct {
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// List of access rule IDs
-	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList" list`
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
 }
 
 func (r *DeleteSecurityRulesRequest) ToJsonString() string {
@@ -1978,7 +1978,7 @@ type DescribeAccessRegionsByDestRegionResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of available acceleration region information
-		AccessRegionSet []*AccessRegionDetial `json:"AccessRegionSet,omitempty" name:"AccessRegionSet" list`
+		AccessRegionSet []*AccessRegionDetial `json:"AccessRegionSet,omitempty" name:"AccessRegionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2026,7 +2026,7 @@ type DescribeAccessRegionsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Acceleration region details list
-		AccessRegionSet []*RegionDetail `json:"AccessRegionSet,omitempty" name:"AccessRegionSet" list`
+		AccessRegionSet []*RegionDetail `json:"AccessRegionSet,omitempty" name:"AccessRegionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2139,7 +2139,7 @@ type DescribeCertificatesResponse struct {
 	Response *struct {
 
 		// Server certificate list, which includes certificate ID and certificate name.
-		CertificateSet []*Certificate `json:"CertificateSet,omitempty" name:"CertificateSet" list`
+		CertificateSet []*Certificate `json:"CertificateSet,omitempty" name:"CertificateSet"`
 
 		// Total quantity of server certificates that match the query conditions.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2187,7 +2187,7 @@ type DescribeCountryAreaMappingResponse struct {
 	Response *struct {
 
 		// Country/region code mapping table
-		CountryAreaMappingList []*CountryAreaMap `json:"CountryAreaMappingList,omitempty" name:"CountryAreaMappingList" list`
+		CountryAreaMappingList []*CountryAreaMap `json:"CountryAreaMappingList,omitempty" name:"CountryAreaMappingList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2235,7 +2235,7 @@ type DescribeDestRegionsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of origin server region details
-		DestRegionSet []*RegionDetail `json:"DestRegionSet,omitempty" name:"DestRegionSet" list`
+		DestRegionSet []*RegionDetail `json:"DestRegionSet,omitempty" name:"DestRegionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2257,7 +2257,7 @@ type DescribeDomainErrorPageInfoByIdsRequest struct {
 	*tchttp.BaseRequest
 
 	// List of custom error IDs. Up to 10 IDs are supported
-	ErrorPageIds []*string `json:"ErrorPageIds,omitempty" name:"ErrorPageIds" list`
+	ErrorPageIds []*string `json:"ErrorPageIds,omitempty" name:"ErrorPageIds"`
 }
 
 func (r *DescribeDomainErrorPageInfoByIdsRequest) ToJsonString() string {
@@ -2285,7 +2285,7 @@ type DescribeDomainErrorPageInfoByIdsResponse struct {
 
 		// Configuration set of custom error responses
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		ErrorPageSet []*DomainErrorPageInfo `json:"ErrorPageSet,omitempty" name:"ErrorPageSet" list`
+		ErrorPageSet []*DomainErrorPageInfo `json:"ErrorPageSet,omitempty" name:"ErrorPageSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2339,7 +2339,7 @@ type DescribeDomainErrorPageInfoResponse struct {
 
 		// Configuration set of a custom error response
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		ErrorPageSet []*DomainErrorPageInfo `json:"ErrorPageSet,omitempty" name:"ErrorPageSet" list`
+		ErrorPageSet []*DomainErrorPageInfo `json:"ErrorPageSet,omitempty" name:"ErrorPageSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2388,7 +2388,7 @@ type DescribeGroupAndStatisticsProxyResponse struct {
 	Response *struct {
 
 		// Information of connection groups that the statistics can be derived from
-		GroupSet []*GroupStatisticsInfo `json:"GroupSet,omitempty" name:"GroupSet" list`
+		GroupSet []*GroupStatisticsInfo `json:"GroupSet,omitempty" name:"GroupSet"`
 
 		// Connection group quantity
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2440,7 +2440,7 @@ type DescribeGroupDomainConfigResponse struct {
 	Response *struct {
 
 		// Nearest access configuration list of domain name resolution.
-		AccessRegionList []*DomainAccessRegionDict `json:"AccessRegionList,omitempty" name:"AccessRegionList" list`
+		AccessRegionList []*DomainAccessRegionDict `json:"AccessRegionList,omitempty" name:"AccessRegionList"`
 
 		// Default accesses Ip.
 		DefaultDnsIp *string `json:"DefaultDnsIp,omitempty" name:"DefaultDnsIp"`
@@ -2529,7 +2529,7 @@ type DescribeHTTPListenersResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// HTTP listener list
-		ListenerSet []*HTTPListener `json:"ListenerSet,omitempty" name:"ListenerSet" list`
+		ListenerSet []*HTTPListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2609,7 +2609,7 @@ type DescribeHTTPSListenersResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// HTTPS listener list
-		ListenerSet []*HTTPSListener `json:"ListenerSet,omitempty" name:"ListenerSet" list`
+		ListenerSet []*HTTPSListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2661,13 +2661,13 @@ type DescribeListenerRealServersResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// An information list of origin servers
-		RealServerSet []*RealServer `json:"RealServerSet,omitempty" name:"RealServerSet" list`
+		RealServerSet []*RealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
 
 		// Number of bound origin servers
 		BindRealServerTotalCount *uint64 `json:"BindRealServerTotalCount,omitempty" name:"BindRealServerTotalCount"`
 
 		// Information list of bound origin servers
-		BindRealServerSet []*BindRealServer `json:"BindRealServerSet,omitempty" name:"BindRealServerSet" list`
+		BindRealServerSet []*BindRealServer `json:"BindRealServerSet,omitempty" name:"BindRealServerSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2698,7 +2698,7 @@ type DescribeListenerStatisticsRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Statistical metric name list. It supports:["InBandwidth", "OutBandwidth", "Concurrent", "InPackets", "OutPackets"]
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
 
 	// Monitoring granularity. It currently supports: 300, 3,600, and 86,400. Unit: seconds.
 	// Time range: <= 1 day, supported minimum granularity: 300 seconds;
@@ -2735,7 +2735,7 @@ type DescribeListenerStatisticsResponse struct {
 	Response *struct {
 
 		// Connection group statistics
-		StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData" list`
+		StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2757,7 +2757,7 @@ type DescribeProxiesRequest struct {
 	*tchttp.BaseRequest
 
 	// Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It's an old parameter, please switch to ProxyIds.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Offset. The default value is 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -2771,14 +2771,14 @@ type DescribeProxiesRequest struct {
 	// AccessRegion - String - Required: No - Filter by an access region.    
 	// RealServerRegion - String - Required: No - Filter by an origin server region.
 	// GroupId - String - Required: No - Filter by a connection group ID.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It's a new parameter, and replaces InstanceIds.
-	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds" list`
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
 
 	// Tag list. If this field exists, the list of the resources with the tag will be pulled.
 	// It supports up to 5 tags. If there are two or more tags, the connections tagged any of them will be pulled.
-	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 
 	// When this field is 1, only not-grouped connections are pulled.
 	// When this field is 0, only grouped connections are pulled.
@@ -2819,10 +2819,10 @@ type DescribeProxiesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Connection instance information list; It's an old parameter, please switch to ProxySet.
-		InstanceSet []*ProxyInfo `json:"InstanceSet,omitempty" name:"InstanceSet" list`
+		InstanceSet []*ProxyInfo `json:"InstanceSet,omitempty" name:"InstanceSet"`
 
 		// Connection instance information list; It's a new parameter.
-		ProxySet []*ProxyInfo `json:"ProxySet,omitempty" name:"ProxySet" list`
+		ProxySet []*ProxyInfo `json:"ProxySet,omitempty" name:"ProxySet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2844,10 +2844,10 @@ type DescribeProxiesStatusRequest struct {
 	*tchttp.BaseRequest
 
 	// Connection ID list; It's an old parameter, please switch to ProxyIds.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Connection ID list; It's a new parameter.
-	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds" list`
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
 }
 
 func (r *DescribeProxiesStatusRequest) ToJsonString() string {
@@ -2875,7 +2875,7 @@ type DescribeProxiesStatusResponse struct {
 	Response *struct {
 
 		// Connection status list.
-		InstanceStatusSet []*ProxyStatus `json:"InstanceStatusSet,omitempty" name:"InstanceStatusSet" list`
+		InstanceStatusSet []*ProxyStatus `json:"InstanceStatusSet,omitempty" name:"InstanceStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2924,7 +2924,7 @@ type DescribeProxyAndStatisticsListenersResponse struct {
 	Response *struct {
 
 		// Information of connections that the statistics can be derived from
-		ProxySet []*ProxySimpleInfo `json:"ProxySet,omitempty" name:"ProxySet" list`
+		ProxySet []*ProxySimpleInfo `json:"ProxySet,omitempty" name:"ProxySet"`
 
 		// Quantity of connections
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -3060,12 +3060,12 @@ type DescribeProxyGroupListRequest struct {
 
 	// Tag list. If this field exists, the list of the resources with the tag will be pulled.
 	// It supports up to 5 tags. If there are two or more tags, the connection groups tagged any of them will be pulled.
-	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Filter conditions.   
 	// The limit on Filter.Values of each request is 5.
 	// RealServerRegion - String - Required: No - Filter by origin server region; Refer to the RegionId in the results returned by DescribeDestRegions API.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeProxyGroupListRequest) ToJsonString() string {
@@ -3100,7 +3100,7 @@ type DescribeProxyGroupListResponse struct {
 
 		// List of connection groups.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		ProxyGroupList []*ProxyGroupInfo `json:"ProxyGroupList,omitempty" name:"ProxyGroupList" list`
+		ProxyGroupList []*ProxyGroupInfo `json:"ProxyGroupList,omitempty" name:"ProxyGroupList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3131,7 +3131,7 @@ type DescribeProxyGroupStatisticsRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Statistical metric name list. Values: InBandwidth (inbound bandwidth); OutBandwidth (outbound bandwidth); Concurrent (concurrence); InPackets (inbound packets); OutPackets (outbound packets).
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
 
 	// Monitoring granularity. It currently supports: 60, 300, 3,600, 86,400. Unit: seconds.
 	// Time range: <= 1 day, supported minimum granularity: 60 seconds;
@@ -3168,7 +3168,7 @@ type DescribeProxyGroupStatisticsResponse struct {
 	Response *struct {
 
 		// Connection group statistics
-		StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData" list`
+		StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3199,7 +3199,7 @@ type DescribeProxyStatisticsRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Statistical metric name list. Valid values: `InBandwidth` (inbound bandwidth); `OutBandwidth` (outbound bandwidth); Concurrent (concurrence); `InPackets` (inbound packets); `OutPackets` (outbound packets); `PacketLoss` (packet loss rate); `Latency` (latency); `HttpQPS` (the number of HTTP requests); `HttpsQPS` (the number of HTTPS requests).
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames" list`
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
 
 	// Monitoring granularity. It currently supports: 60, 300, 3,600, and 86,400. Unit: seconds.
 	// Time range: <= 1 day, supported minimum granularity: 60 seconds;
@@ -3236,7 +3236,7 @@ type DescribeProxyStatisticsResponse struct {
 	Response *struct {
 
 		// Connection statistics
-		StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData" list`
+		StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3309,10 +3309,10 @@ type DescribeRealServerStatisticsResponse struct {
 	Response *struct {
 
 		// Origin server status statistics of specified listener
-		StatisticsData []*StatisticsDataInfo `json:"StatisticsData,omitempty" name:"StatisticsData" list`
+		StatisticsData []*StatisticsDataInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
 
 		// Status statistics of multiple origin servers
-		RsStatisticsData []*MetricStatisticsInfo `json:"RsStatisticsData,omitempty" name:"RsStatisticsData" list`
+		RsStatisticsData []*MetricStatisticsInfo `json:"RsStatisticsData,omitempty" name:"RsStatisticsData"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3347,10 +3347,10 @@ type DescribeRealServersRequest struct {
 
 	// Tag list. If this field exists, the list of the resources with the tag will be pulled.
 	// It supports up to 5 tags. If there are two or more tags, the origin servers tagged any of them will be pulled.
-	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Filter conditions. The value of the `name` of the `filter` (RealServerName, RealServerIP)
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeRealServersRequest) ToJsonString() string {
@@ -3382,7 +3382,7 @@ type DescribeRealServersResponse struct {
 	Response *struct {
 
 		// An information list of origin server
-		RealServerSet []*BindRealServerInfo `json:"RealServerSet,omitempty" name:"RealServerSet" list`
+		RealServerSet []*BindRealServerInfo `json:"RealServerSet,omitempty" name:"RealServerSet"`
 
 		// The quantity of origin servers
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -3407,7 +3407,7 @@ type DescribeRealServersStatusRequest struct {
 	*tchttp.BaseRequest
 
 	// List of origin server IDs
-	RealServerIds []*string `json:"RealServerIds,omitempty" name:"RealServerIds" list`
+	RealServerIds []*string `json:"RealServerIds,omitempty" name:"RealServerIds"`
 }
 
 func (r *DescribeRealServersStatusRequest) ToJsonString() string {
@@ -3437,7 +3437,7 @@ type DescribeRealServersStatusResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Binding status list of origin servers
-		RealServerStatusSet []*RealServerStatus `json:"RealServerStatusSet,omitempty" name:"RealServerStatusSet" list`
+		RealServerStatusSet []*RealServerStatus `json:"RealServerStatusSet,omitempty" name:"RealServerStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3485,10 +3485,10 @@ type DescribeRegionAndPriceResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of origin server region details
-		DestRegionSet []*RegionDetail `json:"DestRegionSet,omitempty" name:"DestRegionSet" list`
+		DestRegionSet []*RegionDetail `json:"DestRegionSet,omitempty" name:"DestRegionSet"`
 
 		// Connection bandwidth price gradient
-		BandwidthUnitPrice []*BandwidthPriceGradient `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice" list`
+		BandwidthUnitPrice []*BandwidthPriceGradient `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice"`
 
 		// Currency type of bandwidth price:
 	// CNY (Chinese Yuan)
@@ -3557,7 +3557,7 @@ type DescribeResourcesByTagResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Resource list corresponding to the tag
-		ResourceSet []*TagResourceInfo `json:"ResourceSet,omitempty" name:"ResourceSet" list`
+		ResourceSet []*TagResourceInfo `json:"ResourceSet,omitempty" name:"ResourceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3617,13 +3617,13 @@ type DescribeRuleRealServersResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Information list of origin servers that can be bound
-		RealServerSet []*RealServer `json:"RealServerSet,omitempty" name:"RealServerSet" list`
+		RealServerSet []*RealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
 
 		// Quantity of bound origin servers
 		BindRealServerTotalCount *uint64 `json:"BindRealServerTotalCount,omitempty" name:"BindRealServerTotalCount"`
 
 		// Bound origin server information list
-		BindRealServerSet []*BindRealServer `json:"BindRealServerSet,omitempty" name:"BindRealServerSet" list`
+		BindRealServerSet []*BindRealServer `json:"BindRealServerSet,omitempty" name:"BindRealServerSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3645,7 +3645,7 @@ type DescribeRulesByRuleIdsRequest struct {
 	*tchttp.BaseRequest
 
 	// List of rule IDs. Up to 10 rules are supported.
-	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds" list`
+	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
 }
 
 func (r *DescribeRulesByRuleIdsRequest) ToJsonString() string {
@@ -3675,7 +3675,7 @@ type DescribeRulesByRuleIdsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of returned rules.
-		RuleSet []*RuleInfo `json:"RuleSet,omitempty" name:"RuleSet" list`
+		RuleSet []*RuleInfo `json:"RuleSet,omitempty" name:"RuleSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3724,7 +3724,7 @@ type DescribeRulesResponse struct {
 	Response *struct {
 
 		// Rule information list classified by domain name type
-		DomainRuleSet []*DomainRuleSet `json:"DomainRuleSet,omitempty" name:"DomainRuleSet" list`
+		DomainRuleSet []*DomainRuleSet `json:"DomainRuleSet,omitempty" name:"DomainRuleSet"`
 
 		// Total quantity of domain names under this listener
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -3793,7 +3793,7 @@ type DescribeSecurityPolicyDetailResponse struct {
 		PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
 		// List of rules
-		RuleList []*SecurityPolicyRuleOut `json:"RuleList,omitempty" name:"RuleList" list`
+		RuleList []*SecurityPolicyRuleOut `json:"RuleList,omitempty" name:"RuleList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3815,7 +3815,7 @@ type DescribeSecurityRulesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of security rule IDs. Up to 20 security rules are supported.
-	SecurityRuleIds []*string `json:"SecurityRuleIds,omitempty" name:"SecurityRuleIds" list`
+	SecurityRuleIds []*string `json:"SecurityRuleIds,omitempty" name:"SecurityRuleIds"`
 }
 
 func (r *DescribeSecurityRulesRequest) ToJsonString() string {
@@ -3845,7 +3845,7 @@ type DescribeSecurityRulesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of returned security rules.
-		SecurityRuleSet []*SecurityPolicyRuleOut `json:"SecurityRuleSet,omitempty" name:"SecurityRuleSet" list`
+		SecurityRuleSet []*SecurityPolicyRuleOut `json:"SecurityRuleSet,omitempty" name:"SecurityRuleSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3925,7 +3925,7 @@ type DescribeTCPListenersResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// TCP listener list
-		ListenerSet []*TCPListener `json:"ListenerSet,omitempty" name:"ListenerSet" list`
+		ListenerSet []*TCPListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4005,7 +4005,7 @@ type DescribeUDPListenersResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// UDP listener list
-		ListenerSet []*UDPListener `json:"ListenerSet,omitempty" name:"ListenerSet" list`
+		ListenerSet []*UDPListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4033,14 +4033,14 @@ type DestroyProxiesRequest struct {
 	Force *int64 `json:"Force,omitempty" name:"Force"`
 
 	// List of connection instance IDs; It's an old parameter, please switch to ProxyIds.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	// For more information, please see How to Ensure Idempotence.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
 	// List of connection instance IDs; It's a new parameter.
-	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds" list`
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
 }
 
 func (r *DestroyProxiesRequest) ToJsonString() string {
@@ -4070,10 +4070,10 @@ type DestroyProxiesResponse struct {
 	Response *struct {
 
 		// ID list of connection instances that cannot be terminated.
-		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet" list`
+		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
 
 		// ID list of connection instances that failed to be terminated.
-		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet" list`
+		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4094,10 +4094,10 @@ func (r *DestroyProxiesResponse) FromJsonString(s string) error {
 type DomainAccessRegionDict struct {
 
 	// Nearest access region
-	NationCountryInnerList []*NationCountryInnerInfo `json:"NationCountryInnerList,omitempty" name:"NationCountryInnerList" list`
+	NationCountryInnerList []*NationCountryInnerInfo `json:"NationCountryInnerList,omitempty" name:"NationCountryInnerList"`
 
 	// Acceleration region connection list
-	ProxyList []*ProxyIdDict `json:"ProxyList,omitempty" name:"ProxyList" list`
+	ProxyList []*ProxyIdDict `json:"ProxyList,omitempty" name:"ProxyList"`
 
 	// Acceleration region ID
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
@@ -4124,7 +4124,7 @@ type DomainErrorPageInfo struct {
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Original error code
-	ErrorNos []*int64 `json:"ErrorNos,omitempty" name:"ErrorNos" list`
+	ErrorNos []*int64 `json:"ErrorNos,omitempty" name:"ErrorNos"`
 
 	// New error code
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -4132,11 +4132,11 @@ type DomainErrorPageInfo struct {
 
 	// Response header to be cleared
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ClearHeaders []*string `json:"ClearHeaders,omitempty" name:"ClearHeaders" list`
+	ClearHeaders []*string `json:"ClearHeaders,omitempty" name:"ClearHeaders"`
 
 	// Response header to be set
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SetHeaders []*HttpHeaderParam `json:"SetHeaders,omitempty" name:"SetHeaders" list`
+	SetHeaders []*HttpHeaderParam `json:"SetHeaders,omitempty" name:"SetHeaders"`
 
 	// Configured response body (excluding HTTP header)
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -4153,7 +4153,7 @@ type DomainRuleSet struct {
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Forwarding rule list of the domain name.
-	RuleSet []*RuleInfo `json:"RuleSet,omitempty" name:"RuleSet" list`
+	RuleSet []*RuleInfo `json:"RuleSet,omitempty" name:"RuleSet"`
 
 	// Server certificate ID of the domain. When it is `default`, it indicates that the default certificate will be used (i.e., the certificate configured for the listener).
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -4219,11 +4219,11 @@ type DomainRuleSet struct {
 
 	// Returns IDs and aliases of multiple certificates when there are multiple client certificates.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PolyClientCertificateAliasInfo []*CertificateAliasInfo `json:"PolyClientCertificateAliasInfo,omitempty" name:"PolyClientCertificateAliasInfo" list`
+	PolyClientCertificateAliasInfo []*CertificateAliasInfo `json:"PolyClientCertificateAliasInfo,omitempty" name:"PolyClientCertificateAliasInfo"`
 
 	// Returns IDs and aliases of multiple certificates when there are multiple origin certificates.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PolyRealServerCertificateAliasInfo []*CertificateAliasInfo `json:"PolyRealServerCertificateAliasInfo,omitempty" name:"PolyRealServerCertificateAliasInfo" list`
+	PolyRealServerCertificateAliasInfo []*CertificateAliasInfo `json:"PolyRealServerCertificateAliasInfo,omitempty" name:"PolyRealServerCertificateAliasInfo"`
 
 	// Domain name status.
 	// 0: running;
@@ -4239,7 +4239,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter values
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type GroupStatisticsInfo struct {
@@ -4251,7 +4251,7 @@ type GroupStatisticsInfo struct {
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
 	// List of connections of a connection group
-	ProxySet []*ProxySimpleInfo `json:"ProxySet,omitempty" name:"ProxySet" list`
+	ProxySet []*ProxySimpleInfo `json:"ProxySet,omitempty" name:"ProxySet"`
 }
 
 type HTTPListener struct {
@@ -4331,7 +4331,7 @@ type HTTPSListener struct {
 
 	// Alias information of multiple client CA certificates.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PolyClientCertificateAliasInfo []*CertificateAliasInfo `json:"PolyClientCertificateAliasInfo,omitempty" name:"PolyClientCertificateAliasInfo" list`
+	PolyClientCertificateAliasInfo []*CertificateAliasInfo `json:"PolyClientCertificateAliasInfo,omitempty" name:"PolyClientCertificateAliasInfo"`
 }
 
 type HttpHeaderParam struct {
@@ -4402,7 +4402,7 @@ type InquiryPriceCreateProxyResponse struct {
 
 		// Tiered price of connection bandwidth.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		BandwidthUnitPrice []*BandwidthPriceGradient `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice" list`
+		BandwidthUnitPrice []*BandwidthPriceGradient `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice"`
 
 		// Discounted basic price of connection in USD/day.
 		DiscountProxyDailyPrice *float64 `json:"DiscountProxyDailyPrice,omitempty" name:"DiscountProxyDailyPrice"`
@@ -4455,7 +4455,7 @@ type MetricStatisticsInfo struct {
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 	// Metric statistics
-	MetricData []*StatisticsDataInfo `json:"MetricData,omitempty" name:"MetricData" list`
+	MetricData []*StatisticsDataInfo `json:"MetricData,omitempty" name:"MetricData"`
 }
 
 type ModifyCertificateAttributesRequest struct {
@@ -4528,7 +4528,7 @@ type ModifyCertificateRequest struct {
 
 	// List of new IDs of multiple client certificates, where:
 	// This parameter or the `ClientCertificateId` parameter is required for mutual authentication only.
-	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds" list`
+	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
 }
 
 func (r *ModifyCertificateRequest) ToJsonString() string {
@@ -4602,7 +4602,7 @@ type ModifyDomainRequest struct {
 	// If this field and `ClientCertificateId` are not included, the original certificate will be used;
 	// If this field is included, and ClientCertificateId=default, then the listener certificate will be used;
 	// In other cases, the certificate specified by `ClientCertificateId` or `PolyClientCertificateIds` will be used.
-	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds" list`
+	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
 }
 
 func (r *ModifyDomainRequest) ToJsonString() string {
@@ -4659,7 +4659,7 @@ type ModifyGroupDomainConfigRequest struct {
 	DefaultDnsIp *string `json:"DefaultDnsIp,omitempty" name:"DefaultDnsIp"`
 
 	// Nearest access region configuration.
-	AccessRegionList []*AccessRegionDomainConf `json:"AccessRegionList,omitempty" name:"AccessRegionList" list`
+	AccessRegionList []*AccessRegionDomainConf `json:"AccessRegionList,omitempty" name:"AccessRegionList"`
 }
 
 func (r *ModifyGroupDomainConfigRequest) ToJsonString() string {
@@ -4779,7 +4779,7 @@ type ModifyHTTPSListenerAttributeRequest struct {
 	ClientCertificateId *string `json:"ClientCertificateId,omitempty" name:"ClientCertificateId"`
 
 	// Client certificate ID of the listener after modification, which is a new field.
-	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds" list`
+	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
 }
 
 func (r *ModifyHTTPSListenerAttributeRequest) ToJsonString() string {
@@ -4831,7 +4831,7 @@ type ModifyProxiesAttributeRequest struct {
 	*tchttp.BaseRequest
 
 	// ID of one or multiple connections to be operated; It's an old parameter, please switch to ProxyIds.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Connection name. Up to 30 characters.
 	ProxyName *string `json:"ProxyName,omitempty" name:"ProxyName"`
@@ -4841,7 +4841,7 @@ type ModifyProxiesAttributeRequest struct {
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
 	// ID of one or multiple connections to be operated; It's a new parameter.
-	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds" list`
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
 }
 
 func (r *ModifyProxiesAttributeRequest) ToJsonString() string {
@@ -4893,14 +4893,14 @@ type ModifyProxiesProjectRequest struct {
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// ID of one or multiple connections to be operated; It's an old parameter, please switch to ProxyIds.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	// For more information, please see How to Ensure Idempotence.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
 	// ID of one or multiple connections to be operated; It's a new parameter.
-	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds" list`
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
 }
 
 func (r *ModifyProxiesProjectRequest) ToJsonString() string {
@@ -5435,14 +5435,14 @@ type OpenProxiesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of connection instance IDs; It's an old parameter, please switch to ProxyIds.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	// For more information, please see How to Ensure Idempotence.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
 	// List of connection instance IDs; It's a new parameter.
-	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds" list`
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
 }
 
 func (r *OpenProxiesRequest) ToJsonString() string {
@@ -5471,10 +5471,10 @@ type OpenProxiesResponse struct {
 	Response *struct {
 
 		// The connection instance ID list cannot be enabled if it's not disabled.
-		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet" list`
+		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
 
 		// ID list of connection instances failed to be enabled.
-		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet" list`
+		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5523,10 +5523,10 @@ type OpenProxyGroupResponse struct {
 	Response *struct {
 
 		// List of IDs of the connection instances that are not disabled, which cannot be enabled.
-		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet" list`
+		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
 
 		// List of IDs of the connection instances failed to be enabled.
-		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet" list`
+		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5642,7 +5642,7 @@ type ProxyGroupDetail struct {
 
 	// Tag list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Security policy ID. This field exists if security policies are set.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -5654,7 +5654,7 @@ type ProxyGroupDetail struct {
 
 	// Describes how the connection obtains client IPs. 0: TOA; 1: Proxy Protocol.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ClientIPMethod []*int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod" list`
+	ClientIPMethod []*int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod"`
 }
 
 type ProxyGroupInfo struct {
@@ -5685,7 +5685,7 @@ type ProxyGroupInfo struct {
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Tag list.
-	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Connection group version
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -5763,7 +5763,7 @@ type ProxyInfo struct {
 	Scalarable *int64 `json:"Scalarable,omitempty" name:"Scalarable"`
 
 	// Supported protocol types.
-	SupportProtocols []*string `json:"SupportProtocols,omitempty" name:"SupportProtocols" list`
+	SupportProtocols []*string `json:"SupportProtocols,omitempty" name:"SupportProtocols"`
 
 	// Connection group ID. This field exists if a connection belongs to a connection group.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -5786,7 +5786,7 @@ type ProxyInfo struct {
 
 	// Tag list. This field is an empty list if no tags exist.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Whether security groups are supported.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -5798,7 +5798,7 @@ type ProxyInfo struct {
 
 	// List of domain names associated with resolution record
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RelatedGlobalDomains []*string `json:"RelatedGlobalDomains,omitempty" name:"RelatedGlobalDomains" list`
+	RelatedGlobalDomains []*string `json:"RelatedGlobalDomains,omitempty" name:"RelatedGlobalDomains"`
 
 	// Configuration change time
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -5810,7 +5810,7 @@ type ProxyInfo struct {
 
 	// Describes how the connection obtains client IPs. 0: TOA; 1: Proxy Protocol.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ClientIPMethod []*int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod" list`
+	ClientIPMethod []*int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod"`
 }
 
 type ProxySimpleInfo struct {
@@ -5822,7 +5822,7 @@ type ProxySimpleInfo struct {
 	ProxyName *string `json:"ProxyName,omitempty" name:"ProxyName"`
 
 	// Listener list
-	ListenerList []*ListenerInfo `json:"ListenerList,omitempty" name:"ListenerList" list`
+	ListenerList []*ListenerInfo `json:"ListenerList,omitempty" name:"ListenerList"`
 }
 
 type ProxyStatus struct {
@@ -5903,7 +5903,7 @@ type RemoveRealServersRequest struct {
 	*tchttp.BaseRequest
 
 	// List of origin server IDs
-	RealServerIds []*string `json:"RealServerIds,omitempty" name:"RealServerIds" list`
+	RealServerIds []*string `json:"RealServerIds,omitempty" name:"RealServerIds"`
 }
 
 func (r *RemoveRealServersRequest) ToJsonString() string {
@@ -5960,7 +5960,7 @@ type RuleCheckParams struct {
 	Method *string `json:"Method,omitempty" name:"Method"`
 
 	// Return code indicting normal origin servers. Value range: [100, 200, 300, 400, 500]
-	StatusCode []*uint64 `json:"StatusCode,omitempty" name:"StatusCode" list`
+	StatusCode []*uint64 `json:"StatusCode,omitempty" name:"StatusCode"`
 
 	// Domain name to be performed health check
 	// You cannot modify this parameter when calling ModifyRuleAttribute API.
@@ -6009,7 +6009,7 @@ type RuleInfo struct {
 	CheckParams *RuleCheckParams `json:"CheckParams,omitempty" name:"CheckParams"`
 
 	// Bound origin server information
-	RealServerSet []*BindRealServer `json:"RealServerSet,omitempty" name:"RealServerSet" list`
+	RealServerSet []*BindRealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
 
 	// Origin server service status. 0: exceptional, 1: normal
 	// If health check is not enabled, this status will always be normal.
@@ -6109,7 +6109,7 @@ type SetAuthenticationRequest struct {
 	RealServerCertificateDomain *string `json:"RealServerCertificateDomain,omitempty" name:"RealServerCertificateDomain"`
 
 	// CA certificate IDs of multiple origin servers, which are obtained from the certificate management page. When authenticating the origin servers, enter this parameter or the `RealServerCertificateId` parameter.
-	PolyRealServerCertificateIds []*string `json:"PolyRealServerCertificateIds,omitempty" name:"PolyRealServerCertificateIds" list`
+	PolyRealServerCertificateIds []*string `json:"PolyRealServerCertificateIds,omitempty" name:"PolyRealServerCertificateIds"`
 }
 
 func (r *SetAuthenticationRequest) ToJsonString() string {
@@ -6223,7 +6223,7 @@ type TCPListener struct {
 
 	// Information of the origin server bound to listeners
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RealServerSet []*BindRealServer `json:"RealServerSet,omitempty" name:"RealServerSet" list`
+	RealServerSet []*BindRealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
 
 	// Listener creation time; using UNIX timestamp.
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -6290,7 +6290,7 @@ type UDPListener struct {
 	BindStatus *uint64 `json:"BindStatus,omitempty" name:"BindStatus"`
 
 	// Information of the origin server bound to listeners
-	RealServerSet []*BindRealServer `json:"RealServerSet,omitempty" name:"RealServerSet" list`
+	RealServerSet []*BindRealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
 
 	// Listener creation time; using UNIX timestamp.
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`

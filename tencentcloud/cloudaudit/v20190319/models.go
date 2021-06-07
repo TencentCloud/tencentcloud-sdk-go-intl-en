@@ -36,7 +36,7 @@ type ConfigurationItems struct {
 
 	// List of events associated with the configuration changes
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	RelatedEvents []*RelatedEvent `json:"RelatedEvents,omitempty" name:"RelatedEvents" list`
+	RelatedEvents []*RelatedEvent `json:"RelatedEvents,omitempty" name:"RelatedEvents"`
 
 	// Resource type
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
@@ -288,7 +288,7 @@ type DescribeRecorderResponse struct {
 
 		// List of the resource types monitored by the recorder
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ResourceTypes []*RecordResourceType `json:"ResourceTypes,omitempty" name:"ResourceTypes" list`
+		ResourceTypes []*RecordResourceType `json:"ResourceTypes,omitempty" name:"ResourceTypes"`
 
 		// Time when the recorder was enabled last time
 		LastStartTime *string `json:"LastStartTime,omitempty" name:"LastStartTime"`
@@ -380,7 +380,7 @@ type GetConfigurationItemsResponse struct {
 
 		// Resource configuration item list
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ConfigurationItems []*ConfigurationItems `json:"ConfigurationItems,omitempty" name:"ConfigurationItems" list`
+		ConfigurationItems []*ConfigurationItems `json:"ConfigurationItems,omitempty" name:"ConfigurationItems"`
 
 		// Total number
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -456,7 +456,7 @@ type ListDiscoveredResourcesResponse struct {
 
 		// Resource list
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Resources []*Resources `json:"Resources,omitempty" name:"Resources" list`
+		Resources []*Resources `json:"Resources,omitempty" name:"Resources"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -501,7 +501,7 @@ type ListSupportResourceTypesResponse struct {
 	Response *struct {
 
 		// List of supported resource types
-		ResourceTypes []*SupportResourceType `json:"ResourceTypes,omitempty" name:"ResourceTypes" list`
+		ResourceTypes []*SupportResourceType `json:"ResourceTypes,omitempty" name:"ResourceTypes"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

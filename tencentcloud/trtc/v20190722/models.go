@@ -43,7 +43,7 @@ type AbnormalExperience struct {
 	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
 
 	// Exception event array
-	AbnormalEventList []*AbnormalEvent `json:"AbnormalEventList,omitempty" name:"AbnormalEventList" list`
+	AbnormalEventList []*AbnormalEvent `json:"AbnormalEventList,omitempty" name:"AbnormalEventList"`
 
 	// Report time of the exception event
 	EventTime *uint64 `json:"EventTime,omitempty" name:"EventTime"`
@@ -300,7 +300,7 @@ type DescribeAbnormalEventResponse struct {
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// Exceptional experience list.
-		AbnormalExperienceList []*AbnormalExperience `json:"AbnormalExperienceList,omitempty" name:"AbnormalExperienceList" list`
+		AbnormalExperienceList []*AbnormalExperience `json:"AbnormalExperienceList,omitempty" name:"AbnormalExperienceList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -334,7 +334,7 @@ type DescribeCallDetailRequest struct {
 	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
 	// User array to query, which contains up to 6 users. If it is left empty, 6 users will be returned by default.
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds" list`
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
 
 	// Metric to query. The user list will be returned if it is left empty; all metrics will be returned if its value is `all`.
 	// appCpu: CPU utilization of the application;
@@ -350,7 +350,7 @@ type DescribeCallDetailRequest struct {
 	// bigvLoss: upstream/downstream video packet loss;
 	// bigvWidth: upstream/downstream resolution in width;
 	// bigvHeight: upstream/downstream resolution in height.
-	DataType []*string `json:"DataType,omitempty" name:"DataType" list`
+	DataType []*string `json:"DataType,omitempty" name:"DataType"`
 
 	// Page index starting from 0. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned by default.
 	PageNumber *string `json:"PageNumber,omitempty" name:"PageNumber"`
@@ -393,10 +393,10 @@ type DescribeCallDetailResponse struct {
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// User information list
-		UserList []*UserInformation `json:"UserList,omitempty" name:"UserList" list`
+		UserList []*UserInformation `json:"UserList,omitempty" name:"UserList"`
 
 		// Quality data
-		Data []*QualityData `json:"Data,omitempty" name:"Data" list`
+		Data []*QualityData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -461,7 +461,7 @@ type DescribeDetailEventResponse struct {
 	Response *struct {
 
 		// List of returned events
-		Data []*EventList `json:"Data,omitempty" name:"Data" list`
+		Data []*EventList `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -521,7 +521,7 @@ type DescribeHistoryScaleResponse struct {
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// Returned data
-		ScaleList []*ScaleInfomation `json:"ScaleList,omitempty" name:"ScaleList" list`
+		ScaleList []*ScaleInfomation `json:"ScaleList,omitempty" name:"ScaleList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -585,7 +585,7 @@ type DescribePictureResponse struct {
 		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// Image information list
-		PictureInfo []*PictureInfo `json:"PictureInfo,omitempty" name:"PictureInfo" list`
+		PictureInfo []*PictureInfo `json:"PictureInfo,omitempty" name:"PictureInfo"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -618,7 +618,7 @@ type DescribeRealtimeNetworkRequest struct {
 	// Type of data to query
 	// sendLossRateRaw: upstream packet loss rate;
 	// recvLossRateRaw: downstream packet loss rate.
-	DataType []*string `json:"DataType,omitempty" name:"DataType" list`
+	DataType []*string `json:"DataType,omitempty" name:"DataType"`
 }
 
 func (r *DescribeRealtimeNetworkRequest) ToJsonString() string {
@@ -648,7 +648,7 @@ type DescribeRealtimeNetworkResponse struct {
 	Response *struct {
 
 		// Data returned by query
-		Data []*RealtimeData `json:"Data,omitempty" name:"Data" list`
+		Data []*RealtimeData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -683,7 +683,7 @@ type DescribeRealtimeQualityRequest struct {
 	// fistFreamInSecRate: instant playback rate of the first frame;
 	// blockPercent: video lag rate;
 	// audioBlockPercent: audio lag rate.
-	DataType []*string `json:"DataType,omitempty" name:"DataType" list`
+	DataType []*string `json:"DataType,omitempty" name:"DataType"`
 }
 
 func (r *DescribeRealtimeQualityRequest) ToJsonString() string {
@@ -713,7 +713,7 @@ type DescribeRealtimeQualityResponse struct {
 	Response *struct {
 
 		// Type of returned data
-		Data []*RealtimeData `json:"Data,omitempty" name:"Data" list`
+		Data []*RealtimeData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -746,7 +746,7 @@ type DescribeRealtimeScaleRequest struct {
 	// Type of data to query
 	// `UserNum: number of users in call;
 	// RoomNum: number of rooms.
-	DataType []*string `json:"DataType,omitempty" name:"DataType" list`
+	DataType []*string `json:"DataType,omitempty" name:"DataType"`
 }
 
 func (r *DescribeRealtimeScaleRequest) ToJsonString() string {
@@ -776,7 +776,7 @@ type DescribeRealtimeScaleResponse struct {
 	Response *struct {
 
 		// Returned data array
-		Data []*RealtimeData `json:"Data,omitempty" name:"Data" list`
+		Data []*RealtimeData `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -848,7 +848,7 @@ type DescribeRoomInformationResponse struct {
 		Total *int64 `json:"Total,omitempty" name:"Total"`
 
 		// Room information list
-		RoomList []*RoomState `json:"RoomList,omitempty" name:"RoomList" list`
+		RoomList []*RoomState `json:"RoomList,omitempty" name:"RoomList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -882,7 +882,7 @@ type DescribeUserInformationRequest struct {
 	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
 	// The array of user IDs for query. You can enter up to 6 user IDs. If it is left empty, data of 6 users will be returned.
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds" list`
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
 
 	// Page index starting from 0. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned.
 	PageNumber *string `json:"PageNumber,omitempty" name:"PageNumber"`
@@ -925,7 +925,7 @@ type DescribeUserInformationResponse struct {
 
 		// User information list
 	// Note: this field may return `null`, indicating that no valid value was found.
-		UserList []*UserInformation `json:"UserList,omitempty" name:"UserList" list`
+		UserList []*UserInformation `json:"UserList,omitempty" name:"UserList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1089,7 +1089,7 @@ type EncodeParams struct {
 type EventList struct {
 
 	// Data content
-	Content []*EventMessage `json:"Content,omitempty" name:"Content" list`
+	Content []*EventMessage `json:"Content,omitempty" name:"Content"`
 
 	// Sender `userId`
 	PeerId *string `json:"PeerId,omitempty" name:"PeerId"`
@@ -1135,10 +1135,10 @@ type LayoutParams struct {
 	MainVideoRightAlign *uint64 `json:"MainVideoRightAlign,omitempty" name:"MainVideoRightAlign"`
 
 	// A user list, which takes effect for floating, grid, or screen sharing templates. When the user list has been set, the stream mix output for users in this user list will include both audio and video; the stream mix output for users not in the list will only include audio. Up to 16 users can be set.
-	MixVideoUids []*string `json:"MixVideoUids,omitempty" name:"MixVideoUids" list`
+	MixVideoUids []*string `json:"MixVideoUids,omitempty" name:"MixVideoUids"`
 
 	// Valid in custom template, used to specify the video image position of a user in mixed streams.
-	PresetLayoutConfig []*PresetLayoutConfig `json:"PresetLayoutConfig,omitempty" name:"PresetLayoutConfig" list`
+	PresetLayoutConfig []*PresetLayoutConfig `json:"PresetLayoutConfig,omitempty" name:"PresetLayoutConfig"`
 
 	// Valid in custom templates. 1: the placeholding feature is enabled; 0 (default): the feature is disabled. When the feature is enabled, but a user for whom a position is reserved is not sending video data, the position will show the corresponding placeholder image.
 	PlaceHolderMode *uint64 `json:"PlaceHolderMode,omitempty" name:"PlaceHolderMode"`
@@ -1288,13 +1288,13 @@ type PublishCdnParams struct {
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
 	// Destination of non-Tencent Cloud CDN relayed push. It is possible to push to only one non-Tencent Cloud CDN address at a time.
-	PublishCdnUrls []*string `json:"PublishCdnUrls,omitempty" name:"PublishCdnUrls" list`
+	PublishCdnUrls []*string `json:"PublishCdnUrls,omitempty" name:"PublishCdnUrls"`
 }
 
 type QualityData struct {
 
 	// Data content
-	Content []*TimeValue `json:"Content,omitempty" name:"Content" list`
+	Content []*TimeValue `json:"Content,omitempty" name:"Content"`
 
 	// User ID
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
@@ -1309,7 +1309,7 @@ type QualityData struct {
 type RealtimeData struct {
 
 	// Returned data
-	Content []*TimeValue `json:"Content,omitempty" name:"Content" list`
+	Content []*TimeValue `json:"Content,omitempty" name:"Content"`
 
 	// Data type field
 	DataType *string `json:"DataType,omitempty" name:"DataType"`
@@ -1325,7 +1325,7 @@ type RemoveUserByStrRoomIdRequest struct {
 	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
 
 	// List of up to 10 users to be removed
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds" list`
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
 }
 
 func (r *RemoveUserByStrRoomIdRequest) ToJsonString() string {
@@ -1379,7 +1379,7 @@ type RemoveUserRequest struct {
 	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
 
 	// List of up to 10 users to be removed.
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds" list`
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
 }
 
 func (r *RemoveUserRequest) ToJsonString() string {

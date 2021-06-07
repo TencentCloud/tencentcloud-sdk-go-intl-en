@@ -28,7 +28,7 @@ type AttachedInputInfo struct {
 
 	// Audio selector for media input. Quantity limit: [0,20]
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AudioSelectors []*AudioSelectorInfo `json:"AudioSelectors,omitempty" name:"AudioSelectors" list`
+	AudioSelectors []*AudioSelectorInfo `json:"AudioSelectors,omitempty" name:"AudioSelectors"`
 }
 
 type AudioPidSelectionInfo struct {
@@ -80,10 +80,10 @@ type AudioTemplateInfo struct {
 type ChannelAlertInfos struct {
 
 	// Alarm details of pipeline 0 under this channel.
-	Pipeline0 []*ChannelPipelineAlerts `json:"Pipeline0,omitempty" name:"Pipeline0" list`
+	Pipeline0 []*ChannelPipelineAlerts `json:"Pipeline0,omitempty" name:"Pipeline0"`
 
 	// Alarm details of pipeline 1 under this channel.
-	Pipeline1 []*ChannelPipelineAlerts `json:"Pipeline1,omitempty" name:"Pipeline1" list`
+	Pipeline1 []*ChannelPipelineAlerts `json:"Pipeline1,omitempty" name:"Pipeline1"`
 }
 
 type ChannelInfo struct {
@@ -95,21 +95,21 @@ type ChannelInfo struct {
 	State *string `json:"State,omitempty" name:"State"`
 
 	// Information of associated input.
-	AttachedInputs []*AttachedInputInfo `json:"AttachedInputs,omitempty" name:"AttachedInputs" list`
+	AttachedInputs []*AttachedInputInfo `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
 
 	// Information of output group.
-	OutputGroups []*OutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups" list`
+	OutputGroups []*OutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
 
 	// Channel name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Audio transcoding template array.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates" list`
+	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates"`
 
 	// Video transcoding template array.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates" list`
+	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates"`
 }
 
 type ChannelInputStatistics struct {
@@ -153,16 +153,16 @@ type CreateMediaLiveChannelRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Associated media input. Quantity limit: [1,1].
-	AttachedInputs []*AttachedInputInfo `json:"AttachedInputs,omitempty" name:"AttachedInputs" list`
+	AttachedInputs []*AttachedInputInfo `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
 
 	// Configuration information of channel output groups. Quantity limit: [1,10].
-	OutputGroups []*OutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups" list`
+	OutputGroups []*OutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
 
 	// Audio transcoding template array. Quantity limit: [1,20].
-	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates" list`
+	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates"`
 
 	// Video transcoding template array. Quantity limit: [1,10].
-	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates" list`
+	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates"`
 }
 
 func (r *CreateMediaLiveChannelRequest) ToJsonString() string {
@@ -223,10 +223,10 @@ type CreateMediaLiveInputRequest struct {
 
 	// ID of the input security group to be bound.
 	// Only one security group can be associated.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Input settings information, one or two sets of which need to be configured for RTMP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
-	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings" list`
+	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings"`
 }
 
 func (r *CreateMediaLiveInputRequest) ToJsonString() string {
@@ -281,7 +281,7 @@ type CreateMediaLiveInputSecurityGroupRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// List of allowlist entries. Quantity limit: [1,10].
-	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist" list`
+	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
 }
 
 func (r *CreateMediaLiveInputSecurityGroupRequest) ToJsonString() string {
@@ -571,7 +571,7 @@ type DescribeMediaLiveChannelInputStatisticsResponse struct {
 	Response *struct {
 
 		// Channel input statistics array.
-		Infos []*ChannelInputStatistics `json:"Infos,omitempty" name:"Infos" list`
+		Infos []*ChannelInputStatistics `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -693,7 +693,7 @@ type DescribeMediaLiveChannelOutputStatisticsResponse struct {
 	Response *struct {
 
 		// Channel output information.
-		Infos []*ChannelOutputsStatistics `json:"Infos,omitempty" name:"Infos" list`
+		Infos []*ChannelOutputsStatistics `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -788,7 +788,7 @@ type DescribeMediaLiveChannelsResponse struct {
 
 		// Channel list information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Infos []*ChannelInfo `json:"Infos,omitempty" name:"Infos" list`
+		Infos []*ChannelInfo `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -931,7 +931,7 @@ type DescribeMediaLiveInputSecurityGroupsResponse struct {
 	Response *struct {
 
 		// Input security group information list.
-		Infos []*InputSecurityGroupInfo `json:"Infos,omitempty" name:"Infos" list`
+		Infos []*InputSecurityGroupInfo `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -977,7 +977,7 @@ type DescribeMediaLiveInputsResponse struct {
 
 		// MediaLive input information list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Infos []*InputInfo `json:"Infos,omitempty" name:"Infos" list`
+		Infos []*InputInfo `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1054,7 +1054,7 @@ type DrmSettingsInfo struct {
 
 	// The key customized by the content user, which is required when `Scheme` is set to CustomDRMKeys.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Keys []*DrmKey `json:"Keys,omitempty" name:"Keys" list`
+	Keys []*DrmKey `json:"Keys,omitempty" name:"Keys"`
 }
 
 type HlsRemuxSettingsInfo struct {
@@ -1087,14 +1087,14 @@ type InputInfo struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Array of security groups associated with input.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Array of channels associated with input.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AttachedChannels []*string `json:"AttachedChannels,omitempty" name:"AttachedChannels" list`
+	AttachedChannels []*string `json:"AttachedChannels,omitempty" name:"AttachedChannels"`
 
 	// Input configuration array.
-	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings" list`
+	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings"`
 }
 
 type InputSecurityGroupInfo struct {
@@ -1106,11 +1106,11 @@ type InputSecurityGroupInfo struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// List of allowlist entries.
-	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist" list`
+	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
 
 	// List of bound input streams.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OccupiedInputs []*string `json:"OccupiedInputs,omitempty" name:"OccupiedInputs" list`
+	OccupiedInputs []*string `json:"OccupiedInputs,omitempty" name:"OccupiedInputs"`
 
 	// Input security group address.
 	Region *string `json:"Region,omitempty" name:"Region"`
@@ -1138,10 +1138,10 @@ type InputSettingInfo struct {
 type InputStatistics struct {
 
 	// Input statistics of pipeline 0.
-	Pipeline0 []*PipelineInputStatistics `json:"Pipeline0,omitempty" name:"Pipeline0" list`
+	Pipeline0 []*PipelineInputStatistics `json:"Pipeline0,omitempty" name:"Pipeline0"`
 
 	// Input statistics of pipeline 1.
-	Pipeline1 []*PipelineInputStatistics `json:"Pipeline1,omitempty" name:"Pipeline1" list`
+	Pipeline1 []*PipelineInputStatistics `json:"Pipeline1,omitempty" name:"Pipeline1"`
 }
 
 type LogInfo struct {
@@ -1180,16 +1180,16 @@ type ModifyMediaLiveChannelRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Associated media input. Quantity limit: [1,1].
-	AttachedInputs []*AttachedInputInfo `json:"AttachedInputs,omitempty" name:"AttachedInputs" list`
+	AttachedInputs []*AttachedInputInfo `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
 
 	// Configuration information of channel output groups. Quantity limit: [1,10].
-	OutputGroups []*OutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups" list`
+	OutputGroups []*OutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
 
 	// Audio transcoding template array. Quantity limit: [1,20].
-	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates" list`
+	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates"`
 
 	// Video transcoding template array. Quantity limit: [1,10].
-	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates" list`
+	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates"`
 }
 
 func (r *ModifyMediaLiveChannelRequest) ToJsonString() string {
@@ -1246,13 +1246,13 @@ type ModifyMediaLiveInputRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// List of IDs of bound security groups.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Input settings information.
 	// One or two sets of settings need to be configured for RTMP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
 	// This parameter can be left empty for RTP_PUSH and UDP_PUSH.
 	// Note: if it is left empty or the array is empty, the original `InputSettings` value will be used.
-	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings" list`
+	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings"`
 }
 
 func (r *ModifyMediaLiveInputRequest) ToJsonString() string {
@@ -1307,7 +1307,7 @@ type ModifyMediaLiveInputSecurityGroupRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// List of allowlist entries. Up to 10 entries are allowed.
-	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist" list`
+	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
 }
 
 func (r *ModifyMediaLiveInputSecurityGroupRequest) ToJsonString() string {
@@ -1362,10 +1362,10 @@ type OutputGroupsInfo struct {
 
 	// Output information.
 	// Quantity limit: [1,1] for RTMP/RTP; [1,10] for HLS/DASH.
-	Outputs []*OutputInfo `json:"Outputs,omitempty" name:"Outputs" list`
+	Outputs []*OutputInfo `json:"Outputs,omitempty" name:"Outputs"`
 
 	// Relay destination address. Quantity limit: [1,2].
-	Destinations []*DestinationInfo `json:"Destinations,omitempty" name:"Destinations" list`
+	Destinations []*DestinationInfo `json:"Destinations,omitempty" name:"Destinations"`
 
 	// HLS protocol configuration information, which takes effect only for HLS/HLS_ARCHIVE.
 	HlsRemuxSettings *HlsRemuxSettingsInfo `json:"HlsRemuxSettings,omitempty" name:"HlsRemuxSettings"`
@@ -1389,11 +1389,11 @@ type OutputInfo struct {
 	// Audio transcoding template name array.
 	// Quantity limit: [0,1] for RTMP; [0,20] for others.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AudioTemplateNames []*string `json:"AudioTemplateNames,omitempty" name:"AudioTemplateNames" list`
+	AudioTemplateNames []*string `json:"AudioTemplateNames,omitempty" name:"AudioTemplateNames"`
 
 	// Video transcoding template name array. Quantity limit: [0,1].
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	VideoTemplateNames []*string `json:"VideoTemplateNames,omitempty" name:"VideoTemplateNames" list`
+	VideoTemplateNames []*string `json:"VideoTemplateNames,omitempty" name:"VideoTemplateNames"`
 
 	// SCTE-35 information configuration.
 	Scte35Settings *Scte35SettingsInfo `json:"Scte35Settings,omitempty" name:"Scte35Settings"`
@@ -1402,10 +1402,10 @@ type OutputInfo struct {
 type OutputsStatistics struct {
 
 	// Output information of pipeline 0.
-	Pipeline0 []*PipelineOutputStatistics `json:"Pipeline0,omitempty" name:"Pipeline0" list`
+	Pipeline0 []*PipelineOutputStatistics `json:"Pipeline0,omitempty" name:"Pipeline0"`
 
 	// Output information of pipeline 1.
-	Pipeline1 []*PipelineOutputStatistics `json:"Pipeline1,omitempty" name:"Pipeline1" list`
+	Pipeline1 []*PipelineOutputStatistics `json:"Pipeline1,omitempty" name:"Pipeline1"`
 }
 
 type PipelineInputStatistics struct {
@@ -1419,23 +1419,23 @@ type PipelineInputStatistics struct {
 	// Video information array.
 	// For `rtp/udp` input, the quantity is the number of `Pid` of the input video.
 	// For other inputs, the quantity is 1.
-	Video []*VideoPipelineInputStatistics `json:"Video,omitempty" name:"Video" list`
+	Video []*VideoPipelineInputStatistics `json:"Video,omitempty" name:"Video"`
 
 	// Audio information array.
 	// For `rtp/udp` input, the quantity is the number of `Pid` of the input audio.
 	// For other inputs, the quantity is 1.
-	Audio []*AudioPipelineInputStatistics `json:"Audio,omitempty" name:"Audio" list`
+	Audio []*AudioPipelineInputStatistics `json:"Audio,omitempty" name:"Audio"`
 }
 
 type PipelineLogInfo struct {
 
 	// Log information of pipeline 0.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Pipeline0 []*LogInfo `json:"Pipeline0,omitempty" name:"Pipeline0" list`
+	Pipeline0 []*LogInfo `json:"Pipeline0,omitempty" name:"Pipeline0"`
 
 	// Log information of pipeline 1.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Pipeline1 []*LogInfo `json:"Pipeline1,omitempty" name:"Pipeline1" list`
+	Pipeline1 []*LogInfo `json:"Pipeline1,omitempty" name:"Pipeline1"`
 }
 
 type PipelineOutputStatistics struct {
@@ -1575,13 +1575,13 @@ type StreamInfo struct {
 	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
 
 	// Video information of pushed streams.
-	Video []*StreamVideoInfo `json:"Video,omitempty" name:"Video" list`
+	Video []*StreamVideoInfo `json:"Video,omitempty" name:"Video"`
 
 	// Audio information of pushed streams.
-	Audio []*StreamAudioInfo `json:"Audio,omitempty" name:"Audio" list`
+	Audio []*StreamAudioInfo `json:"Audio,omitempty" name:"Audio"`
 
 	// SCTE-35 information of pushed streams.
-	Scte35 []*StreamScte35Info `json:"Scte35,omitempty" name:"Scte35" list`
+	Scte35 []*StreamScte35Info `json:"Scte35,omitempty" name:"Scte35"`
 }
 
 type StreamScte35Info struct {

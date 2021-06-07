@@ -368,6 +368,31 @@ func (c *Client) DeleteTables(request *DeleteTablesRequest) (response *DeleteTab
     return
 }
 
+func NewDescribeApplicationsRequest() (request *DescribeApplicationsRequest) {
+    request = &DescribeApplicationsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "DescribeApplications")
+    return
+}
+
+func NewDescribeApplicationsResponse() (response *DescribeApplicationsResponse) {
+    response = &DescribeApplicationsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to query the list of cluster operation applications.
+func (c *Client) DescribeApplications(request *DescribeApplicationsRequest) (response *DescribeApplicationsResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationsRequest()
+    }
+    response = NewDescribeApplicationsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClusterTagsRequest() (request *DescribeClusterTagsRequest) {
     request = &DescribeClusterTagsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -768,6 +793,56 @@ func (c *Client) ImportSnapshots(request *ImportSnapshotsRequest) (response *Imp
     return
 }
 
+func NewMergeTablesDataRequest() (request *MergeTablesDataRequest) {
+    request = &MergeTablesDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "MergeTablesData")
+    return
+}
+
+func NewMergeTablesDataResponse() (response *MergeTablesDataResponse) {
+    response = &MergeTablesDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to merge tables.
+func (c *Client) MergeTablesData(request *MergeTablesDataRequest) (response *MergeTablesDataResponse, err error) {
+    if request == nil {
+        request = NewMergeTablesDataRequest()
+    }
+    response = NewMergeTablesDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCensorshipRequest() (request *ModifyCensorshipRequest) {
+    request = &ModifyCensorshipRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "ModifyCensorship")
+    return
+}
+
+func NewModifyCensorshipResponse() (response *ModifyCensorshipResponse) {
+    response = &ModifyCensorshipResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to enable or disable the cluster operation approval feature.
+func (c *Client) ModifyCensorship(request *ModifyCensorshipRequest) (response *ModifyCensorshipResponse, err error) {
+    if request == nil {
+        request = NewModifyCensorshipRequest()
+    }
+    response = NewModifyCensorshipResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyClusterMachineRequest() (request *ModifyClusterMachineRequest) {
     request = &ModifyClusterMachineRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1114,6 +1189,31 @@ func (c *Client) SetTableIndex(request *SetTableIndexRequest) (response *SetTabl
         request = NewSetTableIndexRequest()
     }
     response = NewSetTableIndexResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateApplyRequest() (request *UpdateApplyRequest) {
+    request = &UpdateApplyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "UpdateApply")
+    return
+}
+
+func NewUpdateApplyResponse() (response *UpdateApplyResponse) {
+    response = &UpdateApplyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// This API is used to update the application status.
+func (c *Client) UpdateApply(request *UpdateApplyRequest) (response *UpdateApplyResponse, err error) {
+    if request == nil {
+        request = NewUpdateApplyRequest()
+    }
+    response = NewUpdateApplyResponse()
     err = c.Send(request, response)
     return
 }

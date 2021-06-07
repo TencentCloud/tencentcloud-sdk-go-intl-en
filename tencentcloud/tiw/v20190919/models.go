@@ -123,7 +123,7 @@ type CustomLayout struct {
 	Canvas *Canvas `json:"Canvas,omitempty" name:"Canvas"`
 
 	// Stream layout. The layout of each stream cannot exceed the canvas area.
-	InputStreamList []*StreamLayout `json:"InputStreamList,omitempty" name:"InputStreamList" list`
+	InputStreamList []*StreamLayout `json:"InputStreamList,omitempty" name:"InputStreamList"`
 }
 
 type DescribeOnlineRecordCallbackRequest struct {
@@ -251,10 +251,10 @@ type DescribeOnlineRecordResponse struct {
 		ExceptionCnt *int64 `json:"ExceptionCnt,omitempty" name:"ExceptionCnt"`
 
 		// Duration to be deleted in the spliced video. This parameter is valid only when the video splicing feature is enabled.
-		OmittedDurations []*OmittedDuration `json:"OmittedDurations,omitempty" name:"OmittedDurations" list`
+		OmittedDurations []*OmittedDuration `json:"OmittedDurations,omitempty" name:"OmittedDurations"`
 
 		// List of recorded videos
-		VideoInfos []*VideoInfo `json:"VideoInfos,omitempty" name:"VideoInfos" list`
+		VideoInfos []*VideoInfo `json:"VideoInfos,omitempty" name:"VideoInfos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -546,7 +546,7 @@ type RecordControl struct {
 	PullSmallVideo *bool `json:"PullSmallVideo,omitempty" name:"PullSmallVideo"`
 
 	// Parameters over specific streams, which take priority over global configurations. If it’s empty, all streams are recorded according to the global configurations. 
-	StreamControls []*StreamControl `json:"StreamControls,omitempty" name:"StreamControls" list`
+	StreamControls []*StreamControl `json:"StreamControls,omitempty" name:"StreamControls"`
 }
 
 type ResumeOnlineRecordRequest struct {
@@ -834,7 +834,7 @@ type StartOnlineRecordRequest struct {
 	// List of advanced features used
 	// List of possible values:
 	// MIX_STREAM - Stream mixing feature
-	Extras []*string `json:"Extras,omitempty" name:"Extras" list`
+	Extras []*string `json:"Extras,omitempty" name:"Extras"`
 
 	// Whether to return the audio-only recording file of different streams in the result callback. The file format is mp3.
 	AudioFileNeeded *bool `json:"AudioFileNeeded,omitempty" name:"AudioFileNeeded"`

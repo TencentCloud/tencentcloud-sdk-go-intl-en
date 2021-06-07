@@ -149,10 +149,10 @@ type AdaptiveDynamicStreamingTaskInput struct {
 
 	// List of up to 10 image or text watermarks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 
 	// List of subtitle IDs (maximum: 16)
-	SubtitleSet []*string `json:"SubtitleSet,omitempty" name:"SubtitleSet" list`
+	SubtitleSet []*string `json:"SubtitleSet,omitempty" name:"SubtitleSet"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
@@ -183,7 +183,7 @@ type AdaptiveDynamicStreamingTemplate struct {
 	DrmType *string `json:"DrmType,omitempty" name:"DrmType"`
 
 	// Parameter information of input stream for adaptive bitrate streaming. Up to 10 streams can be input.
-	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
 
 	// Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
 	// <li>0: no,</li>
@@ -261,7 +261,7 @@ type AiAnalysisTaskClassificationInput struct {
 type AiAnalysisTaskClassificationOutput struct {
 
 	// List of intelligently generated video categories.
-	ClassificationSet []*MediaAiAnalysisClassificationItem `json:"ClassificationSet,omitempty" name:"ClassificationSet" list`
+	ClassificationSet []*MediaAiAnalysisClassificationItem `json:"ClassificationSet,omitempty" name:"ClassificationSet"`
 }
 
 type AiAnalysisTaskClassificationResult struct {
@@ -295,7 +295,7 @@ type AiAnalysisTaskCoverInput struct {
 type AiAnalysisTaskCoverOutput struct {
 
 	// List of intelligently generated covers.
-	CoverSet []*MediaAiAnalysisCoverItem `json:"CoverSet,omitempty" name:"CoverSet" list`
+	CoverSet []*MediaAiAnalysisCoverItem `json:"CoverSet,omitempty" name:"CoverSet"`
 }
 
 type AiAnalysisTaskCoverResult struct {
@@ -329,7 +329,7 @@ type AiAnalysisTaskFrameTagInput struct {
 type AiAnalysisTaskFrameTagOutput struct {
 
 	// List of frame-specific video tags.
-	SegmentSet []*MediaAiAnalysisFrameTagSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaAiAnalysisFrameTagSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiAnalysisTaskFrameTagResult struct {
@@ -363,7 +363,7 @@ type AiAnalysisTaskHighlightInput struct {
 type AiAnalysisTaskHighlightOutput struct {
 
 	// List of intelligently generated highlights.
-	HighlightSet []*MediaAiAnalysisHighlightItem `json:"HighlightSet,omitempty" name:"HighlightSet" list`
+	HighlightSet []*MediaAiAnalysisHighlightItem `json:"HighlightSet,omitempty" name:"HighlightSet"`
 }
 
 type AiAnalysisTaskHighlightResult struct {
@@ -403,7 +403,7 @@ type AiAnalysisTaskTagInput struct {
 type AiAnalysisTaskTagOutput struct {
 
 	// List of intelligently generated video tags.
-	TagSet []*MediaAiAnalysisTagItem `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*MediaAiAnalysisTagItem `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type AiAnalysisTaskTagResult struct {
@@ -574,7 +574,7 @@ type AiRecognitionTaskAsrFullTextResultInput struct {
 type AiRecognitionTaskAsrFullTextResultOutput struct {
 
 	// List of full speech recognition segments.
-	SegmentSet []*AiRecognitionTaskAsrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskAsrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 
 	// Subtitles file URL.
 	SubtitleUrl *string `json:"SubtitleUrl,omitempty" name:"SubtitleUrl"`
@@ -629,13 +629,13 @@ type AiRecognitionTaskAsrWordsResultItem struct {
 	Word *string `json:"Word,omitempty" name:"Word"`
 
 	// List of time segments that contain the speech keyword.
-	SegmentSet []*AiRecognitionTaskAsrWordsSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskAsrWordsSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskAsrWordsResultOutput struct {
 
 	// Speech keyword recognition result set.
-	ResultSet []*AiRecognitionTaskAsrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
+	ResultSet []*AiRecognitionTaskAsrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type AiRecognitionTaskAsrWordsSegmentItem struct {
@@ -692,13 +692,13 @@ type AiRecognitionTaskFaceResultItem struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Result set of segments that contain a figure.
-	SegmentSet []*AiRecognitionTaskFaceSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskFaceSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskFaceResultOutput struct {
 
 	// Intelligent face recognition result set.
-	ResultSet []*AiRecognitionTaskFaceResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
+	ResultSet []*AiRecognitionTaskFaceResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type AiRecognitionTaskFaceSegmentItem struct {
@@ -713,7 +713,7 @@ type AiRecognitionTaskFaceSegmentItem struct {
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 }
 
 type AiRecognitionTaskHeadTailResult struct {
@@ -799,13 +799,13 @@ type AiRecognitionTaskObjectResultItem struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// List of segments that contain an object.
-	SegmentSet []*AiRecognitionTaskObjectSeqmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskObjectSeqmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskObjectResultOutput struct {
 
 	// Result set of intelligent object recognition.
-	ResultSet []*AiRecognitionTaskObjectResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
+	ResultSet []*AiRecognitionTaskObjectResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type AiRecognitionTaskObjectSeqmentItem struct {
@@ -820,7 +820,7 @@ type AiRecognitionTaskObjectSeqmentItem struct {
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 }
 
 type AiRecognitionTaskOcrFullTextResult struct {
@@ -854,7 +854,7 @@ type AiRecognitionTaskOcrFullTextResultInput struct {
 type AiRecognitionTaskOcrFullTextResultOutput struct {
 
 	// Full text recognition result set.
-	SegmentSet []*AiRecognitionTaskOcrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskOcrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskOcrFullTextSegmentItem struct {
@@ -866,7 +866,7 @@ type AiRecognitionTaskOcrFullTextSegmentItem struct {
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
 	// Recognition segment result set.
-	TextSet []*AiRecognitionTaskOcrFullTextSegmentTextItem `json:"TextSet,omitempty" name:"TextSet" list`
+	TextSet []*AiRecognitionTaskOcrFullTextSegmentTextItem `json:"TextSet,omitempty" name:"TextSet"`
 }
 
 type AiRecognitionTaskOcrFullTextSegmentTextItem struct {
@@ -875,7 +875,7 @@ type AiRecognitionTaskOcrFullTextSegmentTextItem struct {
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// Recognized text.
 	Text *string `json:"Text,omitempty" name:"Text"`
@@ -915,13 +915,13 @@ type AiRecognitionTaskOcrWordsResultItem struct {
 	Word *string `json:"Word,omitempty" name:"Word"`
 
 	// List of segments that contain a text keyword.
-	SegmentSet []*AiRecognitionTaskOcrWordsSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskOcrWordsSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskOcrWordsResultOutput struct {
 
 	// Text keyword recognition result set.
-	ResultSet []*AiRecognitionTaskOcrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
+	ResultSet []*AiRecognitionTaskOcrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type AiRecognitionTaskOcrWordsSegmentItem struct {
@@ -936,7 +936,7 @@ type AiRecognitionTaskOcrWordsSegmentItem struct {
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 }
 
 type AiRecognitionTaskSegmentResult struct {
@@ -971,7 +971,7 @@ type AiRecognitionTaskSegmentResultInput struct {
 type AiRecognitionTaskSegmentResultOutput struct {
 
 	// List of split video segments.
-	SegmentSet []*AiRecognitionTaskSegmentSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskSegmentSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskSegmentSegmentItem struct {
@@ -1016,7 +1016,7 @@ type AiReviewPoliticalAsrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain ASR-detected politically sensitive information in speech.
-	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPoliticalOcrTaskInput struct {
@@ -1037,7 +1037,7 @@ type AiReviewPoliticalOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain OCR-detected politically sensitive information in text.
-	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPoliticalTaskInput struct {
@@ -1068,7 +1068,7 @@ type AiReviewPoliticalTaskOutput struct {
 
 	// List of video segments that contain the detected politically sensitive information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SegmentSet []*MediaContentReviewPoliticalSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewPoliticalSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPornAsrTaskInput struct {
@@ -1089,7 +1089,7 @@ type AiReviewPornAsrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the ASR-detected porn information in speech.
-	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPornOcrTaskInput struct {
@@ -1110,7 +1110,7 @@ type AiReviewPornOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the OCR-detected porn information in text.
-	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPornTaskInput struct {
@@ -1142,7 +1142,7 @@ type AiReviewPornTaskOutput struct {
 
 	// List of video segments that contain the detected porn information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewProhibitedAsrTaskInput struct {
@@ -1163,7 +1163,7 @@ type AiReviewProhibitedAsrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the ASR-detected prohibited information in speech.
-	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewProhibitedOcrTaskInput struct {
@@ -1184,7 +1184,7 @@ type AiReviewProhibitedOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the OCR-detected prohibited information in text.
-	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewTaskPoliticalAsrResult struct {
@@ -1431,7 +1431,7 @@ type AiReviewTerrorismOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain OCR-detected terrorism information in text.
-	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewTerrorismTaskInput struct {
@@ -1467,7 +1467,7 @@ type AiReviewTerrorismTaskOutput struct {
 
 	// List of video segments that contain the detected terrorism information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiSampleFaceInfo struct {
@@ -1485,13 +1485,13 @@ type AiSampleFaceOperation struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Face ID set, which is required if `Type` is `delete`.
-	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds" list`
+	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds"`
 
 	// String set generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) the face image.
 	// <li>This field is required if `Type` is `add` or `reset`;</li>
 	// <li>Array length limit: 5 images.</li>
 	// Note: the image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
-	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents" list`
+	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents"`
 }
 
 type AiSampleFailFaceInfo struct {
@@ -1520,13 +1520,13 @@ type AiSamplePerson struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Face information.
-	FaceInfoSet []*AiSampleFaceInfo `json:"FaceInfoSet,omitempty" name:"FaceInfoSet" list`
+	FaceInfoSet []*AiSampleFaceInfo `json:"FaceInfoSet,omitempty" name:"FaceInfoSet"`
 
 	// Figure tag.
-	TagSet []*string `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*string `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Use case.
-	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet" list`
+	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet"`
 
 	// Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -1541,7 +1541,7 @@ type AiSampleTagOperation struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Tag. Length limit: 128 characters.
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 }
 
 type AiSampleWord struct {
@@ -1550,10 +1550,10 @@ type AiSampleWord struct {
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
 	// Keyword tag.
-	TagSet []*string `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*string `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Keyword use case.
-	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet" list`
+	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet"`
 
 	// Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -1570,7 +1570,7 @@ type AiSampleWordInfo struct {
 	// Keyword tag
 	// <li>Array length limit: 20 tags;</li>
 	// <li>Tag length limit: 128 characters.</li>
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 }
 
 type AnimatedGraphicTaskInput struct {
@@ -1785,7 +1785,7 @@ type AsrWordsConfigureInfo struct {
 
 	// Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 }
 
 type AsrWordsConfigureInfoForUpdate struct {
@@ -1797,7 +1797,7 @@ type AsrWordsConfigureInfoForUpdate struct {
 
 	// Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results will be returned.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 }
 
 type AttachMediaSubtitlesRequest struct {
@@ -1815,7 +1815,7 @@ type AttachMediaSubtitlesRequest struct {
 	AdaptiveDynamicStreamingDefinition *uint64 `json:"AdaptiveDynamicStreamingDefinition,omitempty" name:"AdaptiveDynamicStreamingDefinition"`
 
 	// Unique IDs of the subtitles
-	SubtitleIds []*string `json:"SubtitleIds,omitempty" name:"SubtitleIds" list`
+	SubtitleIds []*string `json:"SubtitleIds,omitempty" name:"SubtitleIds"`
 
 	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access the resources in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -1958,7 +1958,7 @@ type AudioTrackItem struct {
 
 	// Operation on audio segment, such as volume adjustment.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AudioOperations []*AudioTransform `json:"AudioOperations,omitempty" name:"AudioOperations" list`
+	AudioOperations []*AudioTransform `json:"AudioOperations,omitempty" name:"AudioOperations"`
 }
 
 type AudioTransform struct {
@@ -2181,7 +2181,7 @@ type ComposeMediaRequest struct {
 	*tchttp.BaseRequest
 
 	// List of input media tracks, i.e., information of multiple tracks composed of video, audio, image, and other materials. <li>Multiple input tracks are aligned with the output media file on the time axis. </li><li>The materials of each track at the same time point on the time axis will be superimposed. Specifically, videos or images will be superimposed for video image by track order, where a material with a higher track order will be more on top, while audio materials will be mixed. </li><li>Up to 10 tracks are supported for each type (video, audio, or image).</li>
-	Tracks []*MediaTrack `json:"Tracks,omitempty" name:"Tracks" list`
+	Tracks []*MediaTrack `json:"Tracks,omitempty" name:"Tracks"`
 
 	// Information of output media file.
 	Output *ComposeMediaOutput `json:"Output,omitempty" name:"Output"`
@@ -2289,7 +2289,7 @@ type ComposeMediaTask struct {
 type ComposeMediaTaskInput struct {
 
 	// List of input media tracks, i.e., information of multiple tracks composed of video, audio, image, and other materials.
-	Tracks []*MediaTrack `json:"Tracks,omitempty" name:"Tracks" list`
+	Tracks []*MediaTrack `json:"Tracks,omitempty" name:"Tracks"`
 
 	// Canvas used for composing video file.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -2352,7 +2352,7 @@ type ConcatTask2017 struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 	// Information of source file for video splicing.
-	FileInfoSet []*ConcatFileInfo2017 `json:"FileInfoSet,omitempty" name:"FileInfoSet" list`
+	FileInfoSet []*ConcatFileInfo2017 `json:"FileInfoSet,omitempty" name:"FileInfoSet"`
 }
 
 type ConfirmEventsRequest struct {
@@ -2360,7 +2360,7 @@ type ConfirmEventsRequest struct {
 
 	// Event handler, i.e., the `EventSet. EventHandle` field in the output parameters of the [event notification pulling](https://intl.cloud.tencent.com/document/product/266/33433?from_cn_redirect=1) API.
 	// Array length limit: 16.
-	EventHandles []*string `json:"EventHandles,omitempty" name:"EventHandles" list`
+	EventHandles []*string `json:"EventHandles,omitempty" name:"EventHandles"`
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
@@ -2475,7 +2475,7 @@ type CoverBySnapshotTaskInput struct {
 
 	// List of up to 10 image or text watermarks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 }
 
 type CoverBySnapshotTaskOutput struct {
@@ -2679,7 +2679,7 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 
 	// Parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output.
 	// Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
-	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
 
 	// Template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -3026,7 +3026,7 @@ type CreateImageSpriteTask2017 struct {
 
 	// Address of output image sprite.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ImageSpriteUrlSet []*string `json:"ImageSpriteUrlSet,omitempty" name:"ImageSpriteUrlSet" list`
+	ImageSpriteUrlSet []*string `json:"ImageSpriteUrlSet,omitempty" name:"ImageSpriteUrlSet"`
 
 	// Address of WebVtt file for the position-time relationship among subimages in an image sprite.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -3152,19 +3152,19 @@ type CreatePersonSampleRequest struct {
 	// 1. Recognition: used for content recognition; equivalent to `Recognition.Face`
 	// 2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
 	// 3. All: equivalent to 1+2.
-	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
 	// Description of a sample. Length limit: 1024 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// String generated after the sample image is encoded by [Base64](https://tools.ietf.org/html/rfc4648). Only JPEG and PNG images are supported. Array length limit: 5 images.
 	// Note: the image must be a relatively clear full-face photo of a person and has a resolution of no less than 200 x 200.
-	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents" list`
+	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents"`
 
 	// Tags of a sample
 	// <li>Array length limit: 20 tags</li>
 	// <li>Length limit of a tag: 128 characters</li>
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -3202,7 +3202,7 @@ type CreatePersonSampleResponse struct {
 		Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
 
 		// Information of samples that failed the verification by facial feature positioning.
-		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet" list`
+		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3574,7 +3574,7 @@ type CreateSuperPlayerConfigRequest struct {
 	// <li>MinEdgeLength: 1440, Name: 2K;</li>
 	// <li>MinEdgeLength: 2160, Name: 4K;</li>
 	// <li>MinEdgeLength: 4320, Name: 8K.</li>
-	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitempty" name:"ResolutionNames" list`
+	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitempty" name:"ResolutionNames"`
 
 	// Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
@@ -3840,10 +3840,10 @@ type CreateWordSamplesRequest struct {
 	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
 	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
 	// 7. All: ASR- and OCR-based content recognition and inappropriate information recognition; equivalent to 1+2+3+4
-	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
 	// Keyword. Array length limit: 100.
-	Words []*AiSampleWordInfo `json:"Words,omitempty" name:"Words" list`
+	Words []*AiSampleWordInfo `json:"Words,omitempty" name:"Words"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -4247,7 +4247,7 @@ type DeleteMediaRequest struct {
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
 	// Content to be deleted. The default value is "[]", which indicates to delete the media file and all its corresponding files generated by video processing.
-	DeleteParts []*MediaDeleteItem `json:"DeleteParts,omitempty" name:"DeleteParts" list`
+	DeleteParts []*MediaDeleteItem `json:"DeleteParts,omitempty" name:"DeleteParts"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -4648,7 +4648,7 @@ type DeleteWordSamplesRequest struct {
 	*tchttp.BaseRequest
 
 	// Keyword. Array length limit: 100 words.
-	Keywords []*string `json:"Keywords,omitempty" name:"Keywords" list`
+	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -4698,7 +4698,7 @@ type DescribeAIAnalysisTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of video content analysis templates. Array length limit: 100.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -4740,7 +4740,7 @@ type DescribeAIAnalysisTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of video content analysis template details.
-		AIAnalysisTemplateSet []*AIAnalysisTemplateItem `json:"AIAnalysisTemplateSet,omitempty" name:"AIAnalysisTemplateSet" list`
+		AIAnalysisTemplateSet []*AIAnalysisTemplateItem `json:"AIAnalysisTemplateSet,omitempty" name:"AIAnalysisTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4762,7 +4762,7 @@ type DescribeAIRecognitionTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of video content recognition templates. Array length limit: 100.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -4804,7 +4804,7 @@ type DescribeAIRecognitionTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of video content recognition template details.
-		AIRecognitionTemplateSet []*AIRecognitionTemplateItem `json:"AIRecognitionTemplateSet,omitempty" name:"AIRecognitionTemplateSet" list`
+		AIRecognitionTemplateSet []*AIRecognitionTemplateItem `json:"AIRecognitionTemplateSet,omitempty" name:"AIRecognitionTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4826,7 +4826,7 @@ type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of transcoding to adaptive bitrate streaming templates. Array length limit: 100.
-	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paged offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -4874,7 +4874,7 @@ type DescribeAdaptiveDynamicStreamingTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of transcoding to adaptive bitrate streaming template details.
-		AdaptiveDynamicStreamingTemplateSet []*AdaptiveDynamicStreamingTemplate `json:"AdaptiveDynamicStreamingTemplateSet,omitempty" name:"AdaptiveDynamicStreamingTemplateSet" list`
+		AdaptiveDynamicStreamingTemplateSet []*AdaptiveDynamicStreamingTemplate `json:"AdaptiveDynamicStreamingTemplateSet,omitempty" name:"AdaptiveDynamicStreamingTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4924,7 +4924,7 @@ type DescribeAllClassResponse struct {
 
 		// Category information set
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		ClassInfoSet []*MediaClassInfo `json:"ClassInfoSet,omitempty" name:"ClassInfoSet" list`
+		ClassInfoSet []*MediaClassInfo `json:"ClassInfoSet,omitempty" name:"ClassInfoSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4946,7 +4946,7 @@ type DescribeAnimatedGraphicsTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of animated image generating templates. Array length limit: 100.
-	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paged offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -4994,7 +4994,7 @@ type DescribeAnimatedGraphicsTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of animated image generating template details.
-		AnimatedGraphicsTemplateSet []*AnimatedGraphicsTemplate `json:"AnimatedGraphicsTemplateSet,omitempty" name:"AnimatedGraphicsTemplateSet" list`
+		AnimatedGraphicsTemplateSet []*AnimatedGraphicsTemplate `json:"AnimatedGraphicsTemplateSet,omitempty" name:"AnimatedGraphicsTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5027,7 +5027,7 @@ type DescribeCDNStatDetailsRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// List of domain names. The usage data of up to 20 domain names can be queried at a time. The usage data of all domain names is returned by default.
-	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames" list`
+	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
 
 	// Service region. Valid values:
 	// <li>Chinese Mainland</li>
@@ -5077,7 +5077,7 @@ type DescribeCDNStatDetailsRequest struct {
 	// <li>Hong Kong, Macao and Taiwan</li>
 	// <li>Outside Chinese Mainland</li>
 	// <li>Other</li>
-	Districts []*string `json:"Districts,omitempty" name:"Districts" list`
+	Districts []*string `json:"Districts,omitempty" name:"Districts"`
 
 	// ISP of users. When `Area` is `Chinese Mainland`, valid values for `Isps` are as follows. Otherwise, `Isps` can be ignored.
 	// <li>China Telecom</li>
@@ -5088,7 +5088,7 @@ type DescribeCDNStatDetailsRequest struct {
 	// <li>China Mobile Tietong</li>
 	// <li>ISPs outside Chinese Mainland</li>
 	// <li>Other ISPs</li>
-	Isps []*string `json:"Isps,omitempty" name:"Isps" list`
+	Isps []*string `json:"Isps,omitempty" name:"Isps"`
 
 	// Time granularity of every piece of data in minutes. Valid values:
 	// <li>5: 5-minute granularity. The data at 5-minute granularity in the query period will be returned.</li>
@@ -5135,7 +5135,7 @@ type DescribeCDNStatDetailsResponse struct {
 		DataInterval *uint64 `json:"DataInterval,omitempty" name:"DataInterval"`
 
 		// CDN usage statistics.
-		Data []*StatDataItem `json:"Data,omitempty" name:"Data" list`
+		Data []*StatDataItem `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5175,7 +5175,7 @@ type DescribeCDNUsageDataRequest struct {
 	DataInterval *uint64 `json:"DataInterval,omitempty" name:"DataInterval"`
 
 	// List of domain names. The usage data of up to 20 domain names can be queried at a time. You can specify multiple domain names and query their combined usage data. The usage data of all domain names will be returned by default.
-	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames" list`
+	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
 
 	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	// When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin. In this case, only 1-day granularity is supported.
@@ -5214,7 +5214,7 @@ type DescribeCDNUsageDataResponse struct {
 		DataInterval *int64 `json:"DataInterval,omitempty" name:"DataInterval"`
 
 		// CDN statistics.
-		Data []*StatDataItem `json:"Data,omitempty" name:"Data" list`
+		Data []*StatDataItem `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5288,11 +5288,11 @@ type DescribeCdnLogsResponse struct {
 
 		// Log download list for CDN nodes outside Mainland China. If global acceleration is not enabled for the domain name, ignore this parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		OverseaCdnLogs []*CdnLogInfo `json:"OverseaCdnLogs,omitempty" name:"OverseaCdnLogs" list`
+		OverseaCdnLogs []*CdnLogInfo `json:"OverseaCdnLogs,omitempty" name:"OverseaCdnLogs"`
 
 		// Log download list for CDN nodes in Mainland China.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		DomesticCdnLogs []*CdnLogInfo `json:"DomesticCdnLogs,omitempty" name:"DomesticCdnLogs" list`
+		DomesticCdnLogs []*CdnLogInfo `json:"DomesticCdnLogs,omitempty" name:"DomesticCdnLogs"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5314,7 +5314,7 @@ type DescribeContentReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique IDs for filters of an intelligent content recognition template. Array length limit: 100.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -5356,7 +5356,7 @@ type DescribeContentReviewTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of intelligent content recognition template details.
-		ContentReviewTemplateSet []*ContentReviewTemplateItem `json:"ContentReviewTemplateSet,omitempty" name:"ContentReviewTemplateSet" list`
+		ContentReviewTemplateSet []*ContentReviewTemplateItem `json:"ContentReviewTemplateSet,omitempty" name:"ContentReviewTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5413,7 +5413,7 @@ type DescribeDailyPlayStatFileListResponse struct {
 	Response *struct {
 
 		// List of playback statistics files.
-		PlayStatFileSet []*PlayStatFileInfo `json:"PlayStatFileSet,omitempty" name:"PlayStatFileSet" list`
+		PlayStatFileSet []*PlayStatFileInfo `json:"PlayStatFileSet,omitempty" name:"PlayStatFileSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5435,7 +5435,7 @@ type DescribeImageSpriteTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of image sprite generating templates. Array length limit: 100.
-	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paged offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -5483,7 +5483,7 @@ type DescribeImageSpriteTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of image sprite generating template details.
-		ImageSpriteTemplateSet []*ImageSpriteTemplate `json:"ImageSpriteTemplateSet,omitempty" name:"ImageSpriteTemplateSet" list`
+		ImageSpriteTemplateSet []*ImageSpriteTemplate `json:"ImageSpriteTemplateSet,omitempty" name:"ImageSpriteTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5505,7 +5505,7 @@ type DescribeMediaInfosRequest struct {
 	*tchttp.BaseRequest
 
 	// List of media file IDs. N starts from 0 and can be up to 19.
-	FileIds []*string `json:"FileIds,omitempty" name:"FileIds" list`
+	FileIds []*string `json:"FileIds,omitempty" name:"FileIds"`
 
 	// Specifies information entry that needs to be returned by all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
 	// <li>basicInfo (basic video information).</li>
@@ -5518,7 +5518,7 @@ type DescribeMediaInfosRequest struct {
 	// <li>keyFrameDescInfo (timestamp information).</li>
 	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
 	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
-	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*string `json:"Filters,omitempty" name:"Filters"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -5550,10 +5550,10 @@ type DescribeMediaInfosResponse struct {
 	Response *struct {
 
 		// Media file information list.
-		MediaInfoSet []*MediaInfo `json:"MediaInfoSet,omitempty" name:"MediaInfoSet" list`
+		MediaInfoSet []*MediaInfo `json:"MediaInfoSet,omitempty" name:"MediaInfoSet"`
 
 		// List of IDs of files that do not exist.
-		NotExistFileIdSet []*string `json:"NotExistFileIdSet,omitempty" name:"NotExistFileIdSet" list`
+		NotExistFileIdSet []*string `json:"NotExistFileIdSet,omitempty" name:"NotExistFileIdSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5620,7 +5620,7 @@ type DescribeMediaProcessUsageDataResponse struct {
 	Response *struct {
 
 		// Overview of video processing statistics, which displays the overview and details of queried tasks.
-		MediaProcessDataSet []*TaskStatData `json:"MediaProcessDataSet,omitempty" name:"MediaProcessDataSet" list`
+		MediaProcessDataSet []*TaskStatData `json:"MediaProcessDataSet,omitempty" name:"MediaProcessDataSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5650,13 +5650,13 @@ type DescribePersonSamplesRequest struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// IDs of samples. Array length limit: 100.
-	PersonIds []*string `json:"PersonIds,omitempty" name:"PersonIds" list`
+	PersonIds []*string `json:"PersonIds,omitempty" name:"PersonIds"`
 
 	// Names of samples. Array length limit: 20.
-	Names []*string `json:"Names,omitempty" name:"Names" list`
+	Names []*string `json:"Names,omitempty" name:"Names"`
 
 	// Tags of a sample. Array length limit: 20.
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -5701,7 +5701,7 @@ type DescribePersonSamplesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Figure information.
-		PersonSet []*AiSamplePerson `json:"PersonSet,omitempty" name:"PersonSet" list`
+		PersonSet []*AiSamplePerson `json:"PersonSet,omitempty" name:"PersonSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5723,7 +5723,7 @@ type DescribeProcedureTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Name filter of task flow template. Array length limit: 100.
-	Names []*string `json:"Names,omitempty" name:"Names" list`
+	Names []*string `json:"Names,omitempty" name:"Names"`
 
 	// Filter of task flow template types. Valid values:
 	// <li>Preset: preset task flow template;</li>
@@ -5771,7 +5771,7 @@ type DescribeProcedureTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of task flow template details.
-		ProcedureTemplateSet []*ProcedureTemplate `json:"ProcedureTemplateSet,omitempty" name:"ProcedureTemplateSet" list`
+		ProcedureTemplateSet []*ProcedureTemplate `json:"ProcedureTemplateSet,omitempty" name:"ProcedureTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5834,7 +5834,7 @@ type DescribeReviewDetailsResponse struct {
 		TotalDuration *int64 `json:"TotalDuration,omitempty" name:"TotalDuration"`
 
 		// Data of intelligent recognition content duration. One piece of data is collected every day.
-		Data []*StatDataItem `json:"Data,omitempty" name:"Data" list`
+		Data []*StatDataItem `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5856,7 +5856,7 @@ type DescribeSampleSnapshotTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
-	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paged offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -5904,7 +5904,7 @@ type DescribeSampleSnapshotTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of sampled screencapturing template details.
-		SampleSnapshotTemplateSet []*SampleSnapshotTemplate `json:"SampleSnapshotTemplateSet,omitempty" name:"SampleSnapshotTemplateSet" list`
+		SampleSnapshotTemplateSet []*SampleSnapshotTemplate `json:"SampleSnapshotTemplateSet,omitempty" name:"SampleSnapshotTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5926,7 +5926,7 @@ type DescribeSnapshotByTimeOffsetTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
-	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paged offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -5974,7 +5974,7 @@ type DescribeSnapshotByTimeOffsetTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of time point screencapturing template details.
-		SnapshotByTimeOffsetTemplateSet []*SnapshotByTimeOffsetTemplate `json:"SnapshotByTimeOffsetTemplateSet,omitempty" name:"SnapshotByTimeOffsetTemplateSet" list`
+		SnapshotByTimeOffsetTemplateSet []*SnapshotByTimeOffsetTemplate `json:"SnapshotByTimeOffsetTemplateSet,omitempty" name:"SnapshotByTimeOffsetTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6035,7 +6035,7 @@ type DescribeStorageDataResponse struct {
 		StandardStorage *uint64 `json:"StandardStorage,omitempty" name:"StandardStorage"`
 
 		// Storage usage by billing region.
-		StorageStat []*StorageStatData `json:"StorageStat,omitempty" name:"StorageStat" list`
+		StorageStat []*StorageStatData `json:"StorageStat,omitempty" name:"StorageStat"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6115,7 +6115,7 @@ type DescribeStorageDetailsResponse struct {
 	Response *struct {
 
 		// Storage statistics with one piece of data for every 5 minutes or 1 day.
-		Data []*StatDataItem `json:"Data,omitempty" name:"Data" list`
+		Data []*StatDataItem `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6140,7 +6140,7 @@ type DescribeSubAppIdsRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Tag information. You can query the list of subapplications with specified tags.
-	Tags []*ResourceTag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*ResourceTag `json:"Tags,omitempty" name:"Tags"`
 
 	// Page number offset from the beginning of paginated queries. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -6176,7 +6176,7 @@ type DescribeSubAppIdsResponse struct {
 	Response *struct {
 
 		// Subapplication information set.
-		SubAppIdInfoSet []*SubAppIdInfo `json:"SubAppIdInfoSet,omitempty" name:"SubAppIdInfoSet" list`
+		SubAppIdInfoSet []*SubAppIdInfo `json:"SubAppIdInfoSet,omitempty" name:"SubAppIdInfoSet"`
 
 		// Total number of subapplications.
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -6201,7 +6201,7 @@ type DescribeSuperPlayerConfigsRequest struct {
 	*tchttp.BaseRequest
 
 	// Player configuration name filter. Array length limit: 100.
-	Names []*string `json:"Names,omitempty" name:"Names" list`
+	Names []*string `json:"Names,omitempty" name:"Names"`
 
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -6249,7 +6249,7 @@ type DescribeSuperPlayerConfigsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Player configuration array.
-		PlayerConfigSet []*PlayerConfig `json:"PlayerConfigSet,omitempty" name:"PlayerConfigSet" list`
+		PlayerConfigSet []*PlayerConfig `json:"PlayerConfigSet,omitempty" name:"PlayerConfigSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6412,9 +6412,10 @@ type DescribeTasksRequest struct {
 	// Filter: task end time.
 	FinishTime *TimeRange `json:"FinishTime,omitempty" name:"FinishTime"`
 
+	// (Not supported now)
 	// Sort field. Valid values:
-	// <li> CreateTime: task creation time</li>
-	// <li>FinishTime: task end time</li>
+	// <li>`CreateTime`: task creation time</li>
+	// <li>`FinishTime`: task end time</li>
 	Sort *SortBy `json:"Sort,omitempty" name:"Sort"`
 
 	// Number of entries to be returned. Default value: 10. Maximum value: 100.
@@ -6458,7 +6459,7 @@ type DescribeTasksResponse struct {
 	Response *struct {
 
 		// Task overview list.
-		TaskSet []*TaskSimpleInfo `json:"TaskSet,omitempty" name:"TaskSet" list`
+		TaskSet []*TaskSimpleInfo `json:"TaskSet,omitempty" name:"TaskSet"`
 
 		// Scrolling identifier. If a request does not return all the data entries, this field indicates the ID of the next entry. If this field is empty, there is no more data.
 		ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
@@ -6483,7 +6484,7 @@ type DescribeTranscodeTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of transcoding templates. Array length limit: 100.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Template type filter. Valid values:
 	// <li>Preset: preset template;</li>
@@ -6544,7 +6545,7 @@ type DescribeTranscodeTemplatesResponse struct {
 
 		// List of transcoding template details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		TranscodeTemplateSet []*TranscodeTemplate `json:"TranscodeTemplateSet,omitempty" name:"TranscodeTemplateSet" list`
+		TranscodeTemplateSet []*TranscodeTemplate `json:"TranscodeTemplateSet,omitempty" name:"TranscodeTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6567,7 +6568,7 @@ type DescribeVodDomainsRequest struct {
 
 	// List of domain names. If this parameter is left empty, all domain names will be listed.
 	// <li>Maximum number of domain names listed: 20</li>
-	Domains []*string `json:"Domains,omitempty" name:"Domains" list`
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// Maximum results to return for pulling paginated queries. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -6609,7 +6610,7 @@ type DescribeVodDomainsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Domain name information list
-		DomainSet []*DomainDetailInfo `json:"DomainSet,omitempty" name:"DomainSet" list`
+		DomainSet []*DomainDetailInfo `json:"DomainSet,omitempty" name:"DomainSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6631,7 +6632,7 @@ type DescribeWatermarkTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of watermarking templates. Array length limit: 100.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Watermark type filter. Valid values:
 	// <li>image: image watermark;</li>
@@ -6682,7 +6683,7 @@ type DescribeWatermarkTemplatesResponse struct {
 
 		// List of watermarking template details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		WatermarkTemplateSet []*WatermarkTemplate `json:"WatermarkTemplateSet,omitempty" name:"WatermarkTemplateSet" list`
+		WatermarkTemplateSet []*WatermarkTemplate `json:"WatermarkTemplateSet,omitempty" name:"WatermarkTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6712,13 +6713,13 @@ type DescribeWordSamplesRequest struct {
 	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
 	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
 	// You can select multiple elements, which are connected by OR logic. If a use case contains any element in this parameter, the keyword sample will be used.
-	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
 	// Keyword filter. Array length limit: 100 words.
-	Keywords []*string `json:"Keywords,omitempty" name:"Keywords" list`
+	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
 
 	// Tag filter. Array length limit: 20 words.
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -6762,7 +6763,7 @@ type DescribeWordSamplesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Keyword information.
-		WordSet []*AiSampleWord `json:"WordSet,omitempty" name:"WordSet" list`
+		WordSet []*AiSampleWord `json:"WordSet,omitempty" name:"WordSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6787,7 +6788,7 @@ type DomainDetailInfo struct {
 
 	// Acceleration region information
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	AccelerateAreaInfos []*AccelerateAreaInfo `json:"AccelerateAreaInfos,omitempty" name:"AccelerateAreaInfos" list`
+	AccelerateAreaInfos []*AccelerateAreaInfo `json:"AccelerateAreaInfos,omitempty" name:"AccelerateAreaInfos"`
 
 	// Deployment status. Valid values:
 	// <li>Online</li>
@@ -6868,10 +6869,10 @@ type EditMediaRequest struct {
 	InputType *string `json:"InputType,omitempty" name:"InputType"`
 
 	// Information of input video file, which is required if `InputType` is `File`.
-	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitempty" name:"FileInfos" list`
+	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitempty" name:"FileInfos"`
 
 	// Input stream information, which is required if `InputType` is `Stream`.
-	StreamInfos []*EditMediaStreamInfo `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+	StreamInfos []*EditMediaStreamInfo `json:"StreamInfos,omitempty" name:"StreamInfos"`
 
 	// Editing template ID. Valid values: 10, 20. If this parameter is left empty, template 10 will be used.
 	// <li>10: the input with the highest resolution will be used as the benchmark;</li>
@@ -7019,11 +7020,11 @@ type EditMediaTaskInput struct {
 
 	// Information of input video file. This field has a value only when `InputType` is `File`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FileInfoSet []*EditMediaFileInfo `json:"FileInfoSet,omitempty" name:"FileInfoSet" list`
+	FileInfoSet []*EditMediaFileInfo `json:"FileInfoSet,omitempty" name:"FileInfoSet"`
 
 	// Input stream information. This field has a value only when `InputType` is `Stream`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	StreamInfoSet []*EditMediaStreamInfo `json:"StreamInfoSet,omitempty" name:"StreamInfoSet" list`
+	StreamInfoSet []*EditMediaStreamInfo `json:"StreamInfoSet,omitempty" name:"StreamInfoSet"`
 }
 
 type EditMediaTaskOutput struct {
@@ -7224,11 +7225,11 @@ type FaceConfigureInfo struct {
 	// <li>entertainment: entertainment celebrity;</li>
 	// <li>sport: sports celebrity;</li>
 	// <li>politician: politically sensitive figure.</li>
-	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet" list`
+	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
 	// Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet" list`
+	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet"`
 
 	// Figure library. Valid values:
 	// <li>Default: default figure library;</li>
@@ -7252,11 +7253,11 @@ type FaceConfigureInfoForUpdate struct {
 	// <li>entertainment: entertainment celebrity;</li>
 	// <li>sport: sports celebrity;</li>
 	// <li>politician: politically sensitive figure.</li>
-	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet" list`
+	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
 	// Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet" list`
+	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet"`
 
 	// Figure library. Valid values:
 	// <li>Default: default figure library;</li>
@@ -7268,7 +7269,7 @@ type FaceConfigureInfoForUpdate struct {
 type FileDeleteTask struct {
 
 	// List of IDs of deleted files.
-	FileIdSet []*string `json:"FileIdSet,omitempty" name:"FileIdSet" list`
+	FileIdSet []*string `json:"FileIdSet,omitempty" name:"FileIdSet"`
 }
 
 type FileUploadTask struct {
@@ -7292,7 +7293,7 @@ type ForbidMediaDistributionRequest struct {
 	*tchttp.BaseRequest
 
 	// List of media files. Up to 20 ones can be submitted at a time.
-	FileIds []*string `json:"FileIds,omitempty" name:"FileIds" list`
+	FileIds []*string `json:"FileIds,omitempty" name:"FileIds"`
 
 	// forbid: forbids, recover: unblocks.
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
@@ -7327,7 +7328,7 @@ type ForbidMediaDistributionResponse struct {
 	Response *struct {
 
 		// List of IDs of files that do not exist.
-		NotExistFileIdSet []*string `json:"NotExistFileIdSet,omitempty" name:"NotExistFileIdSet" list`
+		NotExistFileIdSet []*string `json:"NotExistFileIdSet,omitempty" name:"NotExistFileIdSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -7381,6 +7382,12 @@ type HeadTailConfigureInfoForUpdate struct {
 	// <li>ON: enables video opening and ending credits recognition task;</li>
 	// <li>OFF: disables video opening and ending credits recognition task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type HeadTailTaskInput struct {
+
+	// Video opening/closing credits configuration template ID
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type HighlightSegmentItem struct {
@@ -7722,7 +7729,7 @@ type MediaAdaptiveDynamicStreamingInfo struct {
 
 	// Information array of adaptive bitrate streaming.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AdaptiveDynamicStreamingSet []*AdaptiveDynamicStreamingInfoItem `json:"AdaptiveDynamicStreamingSet,omitempty" name:"AdaptiveDynamicStreamingSet" list`
+	AdaptiveDynamicStreamingSet []*AdaptiveDynamicStreamingInfoItem `json:"AdaptiveDynamicStreamingSet,omitempty" name:"AdaptiveDynamicStreamingSet"`
 }
 
 type MediaAiAnalysisClassificationItem struct {
@@ -7750,7 +7757,7 @@ type MediaAiAnalysisFrameTagItem struct {
 
 	// Category list of frame-specific tag names. `CategorySet.N` indicates the N+1-level category.
 	// For example, if the `Tag` is "tower", and `CategorySet` contains two elements (`CategorySet.0` is "scene", and `CategorySet.1` is "architecture"), then the frame-specific tag is "tower", the first-level category is "scene", and the second-level category is "architecture".
-	CategorySet []*string `json:"CategorySet,omitempty" name:"CategorySet" list`
+	CategorySet []*string `json:"CategorySet,omitempty" name:"CategorySet"`
 
 	// Confidence of intelligently generated frame-specific tag between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
@@ -7765,7 +7772,7 @@ type MediaAiAnalysisFrameTagSegmentItem struct {
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
 	// List of tags in time period.
-	TagSet []*MediaAiAnalysisFrameTagItem `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*MediaAiAnalysisFrameTagItem `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type MediaAiAnalysisHighlightItem struct {
@@ -7783,7 +7790,7 @@ type MediaAiAnalysisHighlightItem struct {
 	Duration *float64 `json:"Duration,omitempty" name:"Duration"`
 
 	// List of intelligently generated highlight subsegments, which together form a highlight.
-	SegmentSet []*HighlightSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*HighlightSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type MediaAiAnalysisTagItem struct {
@@ -7799,7 +7806,7 @@ type MediaAnimatedGraphicsInfo struct {
 
 	// Result information of animated image generating task
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AnimatedGraphicsSet []*MediaAnimatedGraphicsItem `json:"AnimatedGraphicsSet,omitempty" name:"AnimatedGraphicsSet" list`
+	AnimatedGraphicsSet []*MediaAnimatedGraphicsItem `json:"AnimatedGraphicsSet,omitempty" name:"AnimatedGraphicsSet"`
 }
 
 type MediaAnimatedGraphicsItem struct {
@@ -7915,7 +7922,7 @@ type MediaBasicInfo struct {
 
 	// Tag information of media file.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TagSet []*string `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*string `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Unique ID of an LVB recording file.
 	Vid *string `json:"Vid,omitempty" name:"Vid"`
@@ -7952,7 +7959,7 @@ type MediaClassInfo struct {
 	Level *uint64 `json:"Level,omitempty" name:"Level"`
 
 	// Set of IDs of the immediate subcategories in current category
-	SubClassIdSet []*int64 `json:"SubClassIdSet,omitempty" name:"SubClassIdSet" list`
+	SubClassIdSet []*int64 `json:"SubClassIdSet,omitempty" name:"SubClassIdSet"`
 }
 
 type MediaContentReviewAsrTextSegmentItem struct {
@@ -7978,7 +7985,7 @@ type MediaContentReviewAsrTextSegmentItem struct {
 
 	// List of suspected keywords.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet" list`
+	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet"`
 }
 
 type MediaContentReviewOcrTextSegmentItem struct {
@@ -8004,11 +8011,11 @@ type MediaContentReviewOcrTextSegmentItem struct {
 
 	// List of suspected keywords.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet" list`
+	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet"`
 
 	// Zone coordinates (at the pixel level) of suspected text: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// URL of a suspected image (which will not be permanently stored
 	// and will be deleted after `PicUrlExpireTime`).
@@ -8069,7 +8076,7 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Zone coordinates (at the pixel level) of a politically sensitive figure or violating photo: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// This field has been disused. Please use `PicUrlExpireTime`.
 	PicUrlExpireTimeStamp *int64 `json:"PicUrlExpireTimeStamp,omitempty" name:"PicUrlExpireTimeStamp"`
@@ -8125,7 +8132,7 @@ type MediaImageSpriteInfo struct {
 
 	// Information set of image sprites with specified specifications. Each element represents a set of image sprites with the same specification.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ImageSpriteSet []*MediaImageSpriteItem `json:"ImageSpriteSet,omitempty" name:"ImageSpriteSet" list`
+	ImageSpriteSet []*MediaImageSpriteItem `json:"ImageSpriteSet,omitempty" name:"ImageSpriteSet"`
 }
 
 type MediaImageSpriteItem struct {
@@ -8148,7 +8155,7 @@ type MediaImageSpriteItem struct {
 
 	// Address of each image sprite.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ImageUrlSet []*string `json:"ImageUrlSet,omitempty" name:"ImageUrlSet" list`
+	ImageUrlSet []*string `json:"ImageUrlSet,omitempty" name:"ImageUrlSet"`
 
 	// Address of WebVtt file for the position-time relationship among subimages in an image sprite. The WebVtt file indicates the corresponding time points of each subimage and their coordinates in the image sprite, which is typically used by the player for implementing preview.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -8221,7 +8228,7 @@ type MediaKeyFrameDescInfo struct {
 
 	// Information array of video timestamps.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	KeyFrameDescSet []*MediaKeyFrameDescItem `json:"KeyFrameDescSet,omitempty" name:"KeyFrameDescSet" list`
+	KeyFrameDescSet []*MediaKeyFrameDescItem `json:"KeyFrameDescSet,omitempty" name:"KeyFrameDescSet"`
 }
 
 type MediaKeyFrameDescItem struct {
@@ -8265,11 +8272,11 @@ type MediaMetaData struct {
 
 	// Video stream information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitempty" name:"VideoStreamSet" list`
+	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitempty" name:"VideoStreamSet"`
 
 	// Audio stream information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet" list`
+	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet"`
 
 	// Video duration in seconds.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -8305,7 +8312,7 @@ type MediaMiniProgramReviewElem struct {
 type MediaMiniProgramReviewInfo struct {
 
 	// Audit information list.
-	MiniProgramReviewList []*MediaMiniProgramReviewInfoItem `json:"MiniProgramReviewList,omitempty" name:"MiniProgramReviewList" list`
+	MiniProgramReviewList []*MediaMiniProgramReviewInfoItem `json:"MiniProgramReviewList,omitempty" name:"MiniProgramReviewList"`
 }
 
 type MediaMiniProgramReviewInfoItem struct {
@@ -8327,7 +8334,7 @@ type MediaMiniProgramReviewInfoItem struct {
 
 	// WeChat Mini Program audit element.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ReviewSummary []*MediaMiniProgramReviewElem `json:"ReviewSummary,omitempty" name:"ReviewSummary" list`
+	ReviewSummary []*MediaMiniProgramReviewElem `json:"ReviewSummary,omitempty" name:"ReviewSummary"`
 }
 
 type MediaOutputInfo struct {
@@ -8435,31 +8442,31 @@ type MediaProcessTaskInput struct {
 
 	// List of transcoding tasks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TranscodeTaskSet []*TranscodeTaskInput `json:"TranscodeTaskSet,omitempty" name:"TranscodeTaskSet" list`
+	TranscodeTaskSet []*TranscodeTaskInput `json:"TranscodeTaskSet,omitempty" name:"TranscodeTaskSet"`
 
 	// List of animated image generating tasks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AnimatedGraphicTaskSet []*AnimatedGraphicTaskInput `json:"AnimatedGraphicTaskSet,omitempty" name:"AnimatedGraphicTaskSet" list`
+	AnimatedGraphicTaskSet []*AnimatedGraphicTaskInput `json:"AnimatedGraphicTaskSet,omitempty" name:"AnimatedGraphicTaskSet"`
 
 	// List of time point screencapturing tasks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SnapshotByTimeOffsetTaskSet []*SnapshotByTimeOffsetTaskInput `json:"SnapshotByTimeOffsetTaskSet,omitempty" name:"SnapshotByTimeOffsetTaskSet" list`
+	SnapshotByTimeOffsetTaskSet []*SnapshotByTimeOffsetTaskInput `json:"SnapshotByTimeOffsetTaskSet,omitempty" name:"SnapshotByTimeOffsetTaskSet"`
 
 	// List of sampled screencapturing tasks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SampleSnapshotTaskSet []*SampleSnapshotTaskInput `json:"SampleSnapshotTaskSet,omitempty" name:"SampleSnapshotTaskSet" list`
+	SampleSnapshotTaskSet []*SampleSnapshotTaskInput `json:"SampleSnapshotTaskSet,omitempty" name:"SampleSnapshotTaskSet"`
 
 	// List of image sprite generating tasks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ImageSpriteTaskSet []*ImageSpriteTaskInput `json:"ImageSpriteTaskSet,omitempty" name:"ImageSpriteTaskSet" list`
+	ImageSpriteTaskSet []*ImageSpriteTaskInput `json:"ImageSpriteTaskSet,omitempty" name:"ImageSpriteTaskSet"`
 
 	// List of cover generating tasks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CoverBySnapshotTaskSet []*CoverBySnapshotTaskInput `json:"CoverBySnapshotTaskSet,omitempty" name:"CoverBySnapshotTaskSet" list`
+	CoverBySnapshotTaskSet []*CoverBySnapshotTaskInput `json:"CoverBySnapshotTaskSet,omitempty" name:"CoverBySnapshotTaskSet"`
 
 	// List of adaptive bitrate streaming tasks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AdaptiveDynamicStreamingTaskSet []*AdaptiveDynamicStreamingTaskInput `json:"AdaptiveDynamicStreamingTaskSet,omitempty" name:"AdaptiveDynamicStreamingTaskSet" list`
+	AdaptiveDynamicStreamingTaskSet []*AdaptiveDynamicStreamingTaskInput `json:"AdaptiveDynamicStreamingTaskSet,omitempty" name:"AdaptiveDynamicStreamingTaskSet"`
 }
 
 type MediaProcessTaskResult struct {
@@ -8579,7 +8586,7 @@ type MediaSampleSnapshotInfo struct {
 
 	// Information set of sampled screenshots with the specified specifications. Each element represents a set of sampled screenshots with the same specification.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SampleSnapshotSet []*MediaSampleSnapshotItem `json:"SampleSnapshotSet,omitempty" name:"SampleSnapshotSet" list`
+	SampleSnapshotSet []*MediaSampleSnapshotItem `json:"SampleSnapshotSet,omitempty" name:"SampleSnapshotSet"`
 }
 
 type MediaSampleSnapshotItem struct {
@@ -8602,18 +8609,18 @@ type MediaSampleSnapshotItem struct {
 
 	// List of URLs of generated screenshots.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ImageUrlSet []*string `json:"ImageUrlSet,omitempty" name:"ImageUrlSet" list`
+	ImageUrlSet []*string `json:"ImageUrlSet,omitempty" name:"ImageUrlSet"`
 
 	// List of watermarking template IDs if the screenshots are watermarked.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WaterMarkDefinition []*int64 `json:"WaterMarkDefinition,omitempty" name:"WaterMarkDefinition" list`
+	WaterMarkDefinition []*int64 `json:"WaterMarkDefinition,omitempty" name:"WaterMarkDefinition"`
 }
 
 type MediaSnapshotByTimeOffsetInfo struct {
 
 	// Information set of time point screenshots with a specified specification. Currently, there can be only one set of screenshots for each specification.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SnapshotByTimeOffsetSet []*MediaSnapshotByTimeOffsetItem `json:"SnapshotByTimeOffsetSet,omitempty" name:"SnapshotByTimeOffsetSet" list`
+	SnapshotByTimeOffsetSet []*MediaSnapshotByTimeOffsetItem `json:"SnapshotByTimeOffsetSet,omitempty" name:"SnapshotByTimeOffsetSet"`
 }
 
 type MediaSnapshotByTimeOffsetItem struct {
@@ -8624,7 +8631,7 @@ type MediaSnapshotByTimeOffsetItem struct {
 
 	// Information set of screenshots of the same specification. Each element represents a screenshot.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PicInfoSet []*MediaSnapshotByTimePicInfoItem `json:"PicInfoSet,omitempty" name:"PicInfoSet" list`
+	PicInfoSet []*MediaSnapshotByTimePicInfoItem `json:"PicInfoSet,omitempty" name:"PicInfoSet"`
 }
 
 type MediaSnapshotByTimePicInfoItem struct {
@@ -8639,7 +8646,7 @@ type MediaSnapshotByTimePicInfoItem struct {
 
 	// List of watermarking template IDs if the screenshots are watermarked.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WaterMarkDefinition []*int64 `json:"WaterMarkDefinition,omitempty" name:"WaterMarkDefinition" list`
+	WaterMarkDefinition []*int64 `json:"WaterMarkDefinition,omitempty" name:"WaterMarkDefinition"`
 }
 
 type MediaSourceData struct {
@@ -8660,7 +8667,7 @@ type MediaSourceData struct {
 type MediaSubtitleInfo struct {
 
 	// Subtitle information list
-	SubtitleSet []*MediaSubtitleItem `json:"SubtitleSet,omitempty" name:"SubtitleSet" list`
+	SubtitleSet []*MediaSubtitleItem `json:"SubtitleSet,omitempty" name:"SubtitleSet"`
 }
 
 type MediaSubtitleInput struct {
@@ -8721,7 +8728,7 @@ type MediaTrack struct {
 
 	// List of media segments on track.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TrackItems []*MediaTrackItem `json:"TrackItems,omitempty" name:"TrackItems" list`
+	TrackItems []*MediaTrackItem `json:"TrackItems,omitempty" name:"TrackItems"`
 }
 
 type MediaTrackItem struct {
@@ -8760,7 +8767,7 @@ type MediaTranscodeInfo struct {
 
 	// Information set of transcoding with each specification. Each element represents a result of transcoding with a specification.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TranscodeSet []*MediaTranscodeItem `json:"TranscodeSet,omitempty" name:"TranscodeSet" list`
+	TranscodeSet []*MediaTranscodeItem `json:"TranscodeSet,omitempty" name:"TranscodeSet"`
 }
 
 type MediaTranscodeItem struct {
@@ -8803,11 +8810,11 @@ type MediaTranscodeItem struct {
 
 	// Audio stream information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet" list`
+	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet"`
 
 	// Video stream information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitempty" name:"VideoStreamSet" list`
+	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitempty" name:"VideoStreamSet"`
 }
 
 type MediaTransitionItem struct {
@@ -8817,7 +8824,7 @@ type MediaTransitionItem struct {
 
 	// List of transition operations. Up to one video image or audio transition operation is supported.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Transitions []*TransitionOpertion `json:"Transitions,omitempty" name:"Transitions" list`
+	Transitions []*TransitionOpertion `json:"Transitions,omitempty" name:"Transitions"`
 }
 
 type MediaVideoStreamItem struct {
@@ -9040,7 +9047,7 @@ type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 
 	// Parameter information of input stream for adaptive bitrate streaming. Up to 10 streams can be input.
 	// Note: the frame rate of all streams must be the same; otherwise, the frame rate of the first stream will be used as the output frame rate.
-	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
@@ -9456,30 +9463,30 @@ type ModifyMediaInfoRequest struct {
 	CoverData *string `json:"CoverData,omitempty" name:"CoverData"`
 
 	// Set of video timestamps to be added. If a timestamp already exists at an offset time point, it will be overwritten. Up to 100 timestamps can be added to one media file. In the same request, the time offset parameters of `AddKeyFrameDescs` must be different from those of `DeleteKeyFrameDescs`.
-	AddKeyFrameDescs []*MediaKeyFrameDescItem `json:"AddKeyFrameDescs,omitempty" name:"AddKeyFrameDescs" list`
+	AddKeyFrameDescs []*MediaKeyFrameDescItem `json:"AddKeyFrameDescs,omitempty" name:"AddKeyFrameDescs"`
 
 	// Time offset of the set of video timestamps to be deleted in seconds. In the same request, the time offset parameters of `AddKeyFrameDescs` must be different from those of `DeleteKeyFrameDescs`.
-	DeleteKeyFrameDescs []*float64 `json:"DeleteKeyFrameDescs,omitempty" name:"DeleteKeyFrameDescs" list`
+	DeleteKeyFrameDescs []*float64 `json:"DeleteKeyFrameDescs,omitempty" name:"DeleteKeyFrameDescs"`
 
 	// The value `1` indicates to delete all timestamps in the video. Other values are meaningless.
 	// In the same request, `ClearKeyFrameDescs` and `AddKeyFrameDescs` cannot be present at the same time.
 	ClearKeyFrameDescs *int64 `json:"ClearKeyFrameDescs,omitempty" name:"ClearKeyFrameDescs"`
 
 	// Set of tags to be added. Up to 16 tags can be added to one media file, and one tag can contain up to 16 characters. In the same request, the parameters of `AddTags` must be different from those of `DeleteTags`.
-	AddTags []*string `json:"AddTags,omitempty" name:"AddTags" list`
+	AddTags []*string `json:"AddTags,omitempty" name:"AddTags"`
 
 	// Set of tags to be deleted. In the same request, the parameters of `AddTags` must be different from those of `DeleteTags`.
-	DeleteTags []*string `json:"DeleteTags,omitempty" name:"DeleteTags" list`
+	DeleteTags []*string `json:"DeleteTags,omitempty" name:"DeleteTags"`
 
 	// The value `1` indicates to delete all tags of the media file. Other values are meaningless.
 	// In the same request, `ClearTags` and `AddTags` cannot be present at the same time.
 	ClearTags *int64 `json:"ClearTags,omitempty" name:"ClearTags"`
 
 	// Information of multiple subtitles to be added. A single media file can have up to 16 subtitles. In the same request, the subtitle IDs specified in `AddSubtitles` must be different from those in `DeleteSubtitleIds`.
-	AddSubtitles []*MediaSubtitleInput `json:"AddSubtitles,omitempty" name:"AddSubtitles" list`
+	AddSubtitles []*MediaSubtitleInput `json:"AddSubtitles,omitempty" name:"AddSubtitles"`
 
 	// Unique IDs of the subtitles to be deleted. In the same request, the subtitle IDs specified in `AddSubtitles` must be different from those in `DeleteSubtitleIds`.
-	DeleteSubtitleIds []*string `json:"DeleteSubtitleIds,omitempty" name:"DeleteSubtitleIds" list`
+	DeleteSubtitleIds []*string `json:"DeleteSubtitleIds,omitempty" name:"DeleteSubtitleIds"`
 
 	// The value `1` indicates to delete all subtitle information of the media file. Other values are meaningless.
 	// `ClearSubtitles` and `AddSubtitles` cannot co-exist in the same request.
@@ -9532,7 +9539,7 @@ type ModifyMediaInfoResponse struct {
 		CoverUrl *string `json:"CoverUrl,omitempty" name:"CoverUrl"`
 
 		// Added subtitle information
-		AddedSubtitleSet []*MediaSubtitleItem `json:"AddedSubtitleSet,omitempty" name:"AddedSubtitleSet" list`
+		AddedSubtitleSet []*MediaSubtitleItem `json:"AddedSubtitleSet,omitempty" name:"AddedSubtitleSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -9566,7 +9573,7 @@ type ModifyPersonSampleRequest struct {
 	// 1. Recognition: used for content recognition; equivalent to `Recognition.Face`
 	// 2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
 	// 3. All: used for content recognition and inappropriate information recognition; equivalent to 1+2
-	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
 	// Information of operations on facial features.
 	FaceOperationInfo *AiSampleFaceOperation `json:"FaceOperationInfo,omitempty" name:"FaceOperationInfo"`
@@ -9612,7 +9619,7 @@ type ModifyPersonSampleResponse struct {
 
 		// Information of samples that failed the verification by facial feature positioning.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet" list`
+		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -9963,7 +9970,7 @@ type ModifySuperPlayerConfigRequest struct {
 	ImageSpriteDefinition *uint64 `json:"ImageSpriteDefinition,omitempty" name:"ImageSpriteDefinition"`
 
 	// Display name of player for substreams with different resolutions.
-	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitempty" name:"ResolutionNames" list`
+	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitempty" name:"ResolutionNames"`
 
 	// Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
@@ -10224,7 +10231,7 @@ type ModifyWordSampleRequest struct {
 	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
 	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
 	// 7. All: equivalent to 1+2+3+4
-	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
 	// Tag operation information.
 	TagOperationInfo *AiSampleTagOperation `json:"TagOperationInfo,omitempty" name:"TagOperationInfo"`
@@ -10373,7 +10380,7 @@ type OcrWordsConfigureInfo struct {
 
 	// Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 }
 
 type OcrWordsConfigureInfoForUpdate struct {
@@ -10385,7 +10392,7 @@ type OcrWordsConfigureInfoForUpdate struct {
 
 	// Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results will be returned.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 }
 
 type OutputAudioStream struct {
@@ -10460,7 +10467,7 @@ type ParseStreamingManifestResponse struct {
 	Response *struct {
 
 		// Segment file list.
-		MediaSegmentSet []*string `json:"MediaSegmentSet,omitempty" name:"MediaSegmentSet" list`
+		MediaSegmentSet []*string `json:"MediaSegmentSet,omitempty" name:"MediaSegmentSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -10522,7 +10529,7 @@ type PlayerConfig struct {
 	ImageSpriteDefinition *uint64 `json:"ImageSpriteDefinition,omitempty" name:"ImageSpriteDefinition"`
 
 	// Display name of player for substreams with different resolutions.
-	ResolutionNameSet []*ResolutionNameInfo `json:"ResolutionNameSet,omitempty" name:"ResolutionNameSet" list`
+	ResolutionNameSet []*ResolutionNameInfo `json:"ResolutionNameSet,omitempty" name:"ResolutionNameSet"`
 
 	// Creation time of player configuration in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -10614,7 +10621,7 @@ type PoliticalImgReviewTemplateInfo struct {
 	// <li>scholar: educator;</li>
 	// <li>celebrity: well-known figure;</li>
 	// <li>military: military figure.</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -10639,7 +10646,7 @@ type PoliticalImgReviewTemplateInfoForUpdate struct {
 	// <li>scholar: educator;</li>
 	// <li>celebrity: well-known figure;</li>
 	// <li>military: military figure.</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -10743,7 +10750,7 @@ type PornImgReviewTemplateInfo struct {
 	// <li>vulgar: vulgarity;</li>
 	// <li>intimacy: intimacy;</li>
 	// <li>sexy: sexiness.</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -10764,7 +10771,7 @@ type PornImgReviewTemplateInfoForUpdate struct {
 	// <li>vulgar: vulgarity;</li>
 	// <li>intimacy: intimacy;</li>
 	// <li>sexy: sexiness.</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -10841,19 +10848,19 @@ type ProcedureTask struct {
 
 	// Execution status and result of video processing task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MediaProcessResultSet []*MediaProcessTaskResult `json:"MediaProcessResultSet,omitempty" name:"MediaProcessResultSet" list`
+	MediaProcessResultSet []*MediaProcessTaskResult `json:"MediaProcessResultSet,omitempty" name:"MediaProcessResultSet"`
 
 	// Execution status and result of video content audit task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AiContentReviewResultSet []*AiContentReviewResult `json:"AiContentReviewResultSet,omitempty" name:"AiContentReviewResultSet" list`
+	AiContentReviewResultSet []*AiContentReviewResult `json:"AiContentReviewResultSet,omitempty" name:"AiContentReviewResultSet"`
 
 	// Execution status and result of video content analysis task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AiAnalysisResultSet []*AiAnalysisResult `json:"AiAnalysisResultSet,omitempty" name:"AiAnalysisResultSet" list`
+	AiAnalysisResultSet []*AiAnalysisResult `json:"AiAnalysisResultSet,omitempty" name:"AiAnalysisResultSet"`
 
 	// Execution status and result of video content recognition task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AiRecognitionResultSet []*AiRecognitionResult `json:"AiRecognitionResultSet,omitempty" name:"AiRecognitionResultSet" list`
+	AiRecognitionResultSet []*AiRecognitionResult `json:"AiRecognitionResultSet,omitempty" name:"AiRecognitionResultSet"`
 
 	// Task flow priority. Value range: [-10, 10].
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -11278,7 +11285,7 @@ type PullEventsResponse struct {
 
 		// List of events.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		EventSet []*EventContent `json:"EventSet,omitempty" name:"EventSet" list`
+		EventSet []*EventContent `json:"EventSet,omitempty" name:"EventSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -11438,7 +11445,7 @@ type PushUrlCacheRequest struct {
 	*tchttp.BaseRequest
 
 	// List of prefetched URLs. Up to 20 ones can be specified at a time.
-	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -11497,7 +11504,7 @@ type RefererAuthPolicy struct {
 	AuthType *string `json:"AuthType,omitempty" name:"AuthType"`
 
 	// List for referer authentication
-	Referers []*string `json:"Referers,omitempty" name:"Referers" list`
+	Referers []*string `json:"Referers,omitempty" name:"Referers"`
 
 	// Whether to allow requests with empty referer to access this domain name. Valid values:
 	// <li>Yes</li>
@@ -11600,7 +11607,7 @@ type SampleSnapshotTaskInput struct {
 
 	// List of up to 10 image or text watermarks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 }
 
 type SampleSnapshotTemplate struct {
@@ -11671,49 +11678,49 @@ type SearchMediaRequest struct {
 	// File ID set. Any element in the set can be matched.
 	// <li>Array length limit: 10.</li>
 	// <li>ID length limit: 40 characters.</li>
-	FileIds []*string `json:"FileIds,omitempty" name:"FileIds" list`
+	FileIds []*string `json:"FileIds,omitempty" name:"FileIds"`
 
 	// Filename set. Filenames of media files are fuzzily matched. The higher the match rate, the higher-ranked the result.
 	// <li>Filename length limit: 40 characters.</li>
 	// <li>Array length limit: 10.</li>
-	Names []*string `json:"Names,omitempty" name:"Names" list`
+	Names []*string `json:"Names,omitempty" name:"Names"`
 
 	// Filename prefix, which matches the filenames of media files.
 	// <li>Filename prefix length limit: 20 characters.</li>
 	// <li>Array length limit: 10.</li>
-	NamePrefixes []*string `json:"NamePrefixes,omitempty" name:"NamePrefixes" list`
+	NamePrefixes []*string `json:"NamePrefixes,omitempty" name:"NamePrefixes"`
 
 	// File description set. Media file descriptions are fuzzily matched. The higher the match rate, the higher-ranked the result.
 	// <li>Length limit for a single description: 100 characters</li>
 	// <li>Array length limit: 10</li>
-	Descriptions []*string `json:"Descriptions,omitempty" name:"Descriptions" list`
+	Descriptions []*string `json:"Descriptions,omitempty" name:"Descriptions"`
 
 	// Category ID set. The categories of the specified IDs and all subcategories in the set are matched.
 	// <li>Array length limit: 10.</li>
-	ClassIds []*int64 `json:"ClassIds,omitempty" name:"ClassIds" list`
+	ClassIds []*int64 `json:"ClassIds,omitempty" name:"ClassIds"`
 
 	// Tag set, which matches any element in the set.
 	// <li>Tag length limit: 8 characters.</li>
 	// <li>Array length limit: 10.</li>
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 	// File type. Any element in the set can be matched.
 	// <li>Video: video file</li>
 	// <li>Audio: audio file</li>
 	// <li>Image: image file</li>
-	Categories []*string `json:"Categories,omitempty" name:"Categories" list`
+	Categories []*string `json:"Categories,omitempty" name:"Categories"`
 
 	// Media file source set. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
 	// <li>Array length limit: 10.</li>
-	SourceTypes []*string `json:"SourceTypes,omitempty" name:"SourceTypes" list`
+	SourceTypes []*string `json:"SourceTypes,omitempty" name:"SourceTypes"`
 
 	// [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) set. Any element in the set can be matched.
 	// <li>Array length limit: 10.</li>
-	StreamIds []*string `json:"StreamIds,omitempty" name:"StreamIds" list`
+	StreamIds []*string `json:"StreamIds,omitempty" name:"StreamIds"`
 
 	// Unique ID of LVB recording file. Any element in the set can be matched.
 	// <li>Array length limit: 10.</li>
-	Vids []*string `json:"Vids,omitempty" name:"Vids" list`
+	Vids []*string `json:"Vids,omitempty" name:"Vids"`
 
 	// Matches files created within the time period.
 	// <li>Includes specified start and end points in time.</li>
@@ -11743,12 +11750,12 @@ type SearchMediaRequest struct {
 	// <li>keyFrameDescInfo (timestamp information).</li>
 	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
 	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
-	Filters []*string `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*string `json:"Filters,omitempty" name:"Filters"`
 
 	// Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Regions](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
 	// <li>Length limit for a single region: 20 characters</li>
 	// <li>Array length limit: 20</li>
-	StorageRegions []*string `json:"StorageRegions,omitempty" name:"StorageRegions" list`
+	StorageRegions []*string `json:"StorageRegions,omitempty" name:"StorageRegions"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -11834,7 +11841,7 @@ type SearchMediaResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Media file information list
-		MediaInfoSet []*MediaInfo `json:"MediaInfoSet,omitempty" name:"MediaInfoSet" list`
+		MediaInfoSet []*MediaInfo `json:"MediaInfoSet,omitempty" name:"MediaInfoSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -11968,7 +11975,7 @@ type SnapshotByTimeOffsetTask2017 struct {
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// Result information of screencapturing.
-	SnapshotInfoSet []*SnapshotByTimeOffset2017 `json:"SnapshotInfoSet,omitempty" name:"SnapshotInfoSet" list`
+	SnapshotInfoSet []*SnapshotByTimeOffset2017 `json:"SnapshotInfoSet,omitempty" name:"SnapshotInfoSet"`
 }
 
 type SnapshotByTimeOffsetTaskInput struct {
@@ -11979,15 +11986,15 @@ type SnapshotByTimeOffsetTaskInput struct {
 	// The list of screenshot time points. “s” and “%” formats are supported:
 	// <li>When a time point string ends with “s”, its unit is second. For example, “3.5s” means the 3.5th second of the video.</li>
 	// <li>When a time point string ends with “%”, it represents the percentage of the video’s duration. For example, “10%” means that the time point is at the 10% of the video’s entire duration.</li>
-	ExtTimeOffsetSet []*string `json:"ExtTimeOffsetSet,omitempty" name:"ExtTimeOffsetSet" list`
+	ExtTimeOffsetSet []*string `json:"ExtTimeOffsetSet,omitempty" name:"ExtTimeOffsetSet"`
 
 	// List of time points for screencapturing in <font color=red>milliseconds</font>.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TimeOffsetSet []*float64 `json:"TimeOffsetSet,omitempty" name:"TimeOffsetSet" list`
+	TimeOffsetSet []*float64 `json:"TimeOffsetSet,omitempty" name:"TimeOffsetSet"`
 
 	// List of up to 10 image or text watermarks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 }
 
 type SnapshotByTimeOffsetTemplate struct {
@@ -12061,7 +12068,7 @@ type SpecificationDataItem struct {
 	Specification *string `json:"Specification,omitempty" name:"Specification"`
 
 	// Statistics.
-	Data []*TaskStatDataItem `json:"Data,omitempty" name:"Data" list`
+	Data []*TaskStatDataItem `json:"Data,omitempty" name:"Data"`
 }
 
 type SplitMediaOutputConfig struct {
@@ -12100,7 +12107,7 @@ type SplitMediaTask struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 
 	// List of video splitting task details.
-	FileInfoSet []*SplitMediaTaskSegmentInfo `json:"FileInfoSet,omitempty" name:"FileInfoSet" list`
+	FileInfoSet []*SplitMediaTaskSegmentInfo `json:"FileInfoSet,omitempty" name:"FileInfoSet"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
@@ -12209,7 +12216,7 @@ type StickerTrackItem struct {
 
 	// Operation on sticker such as image rotation.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ImageOperations []*ImageTransform `json:"ImageOperations,omitempty" name:"ImageOperations" list`
+	ImageOperations []*ImageTransform `json:"ImageOperations,omitempty" name:"ImageOperations"`
 }
 
 type StorageStatData struct {
@@ -12408,7 +12415,7 @@ type TaskStatData struct {
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task statistics overview (usage unit: second).
-	Summary []*TaskStatDataItem `json:"Summary,omitempty" name:"Summary" list`
+	Summary []*TaskStatDataItem `json:"Summary,omitempty" name:"Summary"`
 
 	// Detailed statistics of tasks with different specifications.
 	// Transcoding specification:
@@ -12445,7 +12452,7 @@ type TaskStatData struct {
 	// <li>Edit.H265.FHD: H.265 FHD video editing</li>
 	// <li>Edit.H265.2K: H.265 2K video editing</li>
 	// <li>Edit.H265.4K: H.265 4K video editing</li>
-	Details []*SpecificationDataItem `json:"Details,omitempty" name:"Details" list`
+	Details []*SpecificationDataItem `json:"Details,omitempty" name:"Details"`
 }
 
 type TaskStatDataItem struct {
@@ -12512,7 +12519,7 @@ type TerrorismImgReviewTemplateInfo struct {
 	// <li>`explosion`: explosions and fires</li>
 	// <li>`terrorists`: terrorists</li>
 	// <li>`scenario`: terrorism images</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -12538,7 +12545,7 @@ type TerrorismImgReviewTemplateInfoForUpdate struct {
 	// <li>`explosion`: explosions and fires</li>
 	// <li>`terrorists`: terrorists</li>
 	// <li>`scenario`: terrorism images</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -12676,7 +12683,7 @@ type TranscodeTask2017 struct {
 
 	// Playback information generated after video transcoding.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PlayInfoSet []*TranscodePlayInfo2017 `json:"PlayInfoSet,omitempty" name:"PlayInfoSet" list`
+	PlayInfoSet []*TranscodePlayInfo2017 `json:"PlayInfoSet,omitempty" name:"PlayInfoSet"`
 }
 
 type TranscodeTaskInput struct {
@@ -12686,10 +12693,13 @@ type TranscodeTaskInput struct {
 
 	// List of up to 10 image or text watermarks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 
 	// List of blurs. Up to 10 ones can be supported.
-	MosaicSet []*MosaicInput `json:"MosaicSet,omitempty" name:"MosaicSet" list`
+	MosaicSet []*MosaicInput `json:"MosaicSet,omitempty" name:"MosaicSet"`
+
+	// List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+	HeadTailSet []*HeadTailTaskInput `json:"HeadTailSet,omitempty" name:"HeadTailSet"`
 
 	// Start time offset of a transcoded video, in seconds.
 	// <li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
@@ -12831,7 +12841,7 @@ type UserDefineAsrTextReviewTemplateInfo struct {
 
 	// Custom speech filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom speech keywords.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -12849,7 +12859,7 @@ type UserDefineAsrTextReviewTemplateInfoForUpdate struct {
 
 	// Custom speech filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom speech keywords.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -12894,7 +12904,7 @@ type UserDefineFaceReviewTemplateInfo struct {
 
 	// Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -12912,7 +12922,7 @@ type UserDefineFaceReviewTemplateInfoForUpdate struct {
 
 	// Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -12930,7 +12940,7 @@ type UserDefineOcrTextReviewTemplateInfo struct {
 
 	// Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -12948,7 +12958,7 @@ type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
 
 	// Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -13114,11 +13124,11 @@ type VideoTrackItem struct {
 
 	// Operation on video image such as image rotation.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ImageOperations []*ImageTransform `json:"ImageOperations,omitempty" name:"ImageOperations" list`
+	ImageOperations []*ImageTransform `json:"ImageOperations,omitempty" name:"ImageOperations"`
 
 	// Operation on audio such as muting.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AudioOperations []*AudioTransform `json:"AudioOperations,omitempty" name:"AudioOperations" list`
+	AudioOperations []*AudioTransform `json:"AudioOperations,omitempty" name:"AudioOperations"`
 }
 
 type WatermarkCycleConfigForUpdate struct {

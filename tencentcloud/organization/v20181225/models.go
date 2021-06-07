@@ -278,7 +278,7 @@ type DeleteOrganizationMembersRequest struct {
 	*tchttp.BaseRequest
 
 	// List of UINs of members to be deleted
-	Uins []*uint64 `json:"Uins,omitempty" name:"Uins" list`
+	Uins []*uint64 `json:"Uins,omitempty" name:"Uins"`
 }
 
 func (r *DeleteOrganizationMembersRequest) ToJsonString() string {
@@ -324,7 +324,7 @@ type DeleteOrganizationNodesRequest struct {
 	*tchttp.BaseRequest
 
 	// Organizational unit ID list
-	NodeIds []*uint64 `json:"NodeIds,omitempty" name:"NodeIds" list`
+	NodeIds []*uint64 `json:"NodeIds,omitempty" name:"NodeIds"`
 }
 
 func (r *DeleteOrganizationNodesRequest) ToJsonString() string {
@@ -620,7 +620,7 @@ type ListOrganizationInvitationsResponse struct {
 	Response *struct {
 
 		// List of invitations
-		Invitations []*OrgInvitation `json:"Invitations,omitempty" name:"Invitations" list`
+		Invitations []*OrgInvitation `json:"Invitations,omitempty" name:"Invitations"`
 
 		// Total number of results
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -676,7 +676,7 @@ type ListOrganizationMembersResponse struct {
 	Response *struct {
 
 		// Member list
-		Members []*OrgMember `json:"Members,omitempty" name:"Members" list`
+		Members []*OrgMember `json:"Members,omitempty" name:"Members"`
 
 		// Total number of results
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -739,7 +739,7 @@ type ListOrganizationNodeMembersResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Member list
-		Members []*OrgMember `json:"Members,omitempty" name:"Members" list`
+		Members []*OrgMember `json:"Members,omitempty" name:"Members"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -784,7 +784,7 @@ type ListOrganizationNodesResponse struct {
 	Response *struct {
 
 		// Organizational unit list
-		Nodes []*OrgNode `json:"Nodes,omitempty" name:"Nodes" list`
+		Nodes []*OrgNode `json:"Nodes,omitempty" name:"Nodes"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -809,7 +809,7 @@ type MoveOrganizationMembersToNodeRequest struct {
 	NodeId *uint64 `json:"NodeId,omitempty" name:"NodeId"`
 
 	// Member UIN list
-	Uins []*uint64 `json:"Uins,omitempty" name:"Uins" list`
+	Uins []*uint64 `json:"Uins,omitempty" name:"Uins"`
 }
 
 func (r *MoveOrganizationMembersToNodeRequest) ToJsonString() string {

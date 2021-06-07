@@ -110,7 +110,7 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
 	// List of up to 10 image or text watermarks.
-	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 
 	// Target bucket of an output file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -148,7 +148,7 @@ type AdaptiveDynamicStreamingTemplate struct {
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Parameter information of input streams for transcoding to adaptive bitrate streaming. Up to 10 streams can be input.
-	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
 
 	// Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
 	// <li>0: no,</li>
@@ -218,7 +218,7 @@ type AiAnalysisTaskClassificationInput struct {
 type AiAnalysisTaskClassificationOutput struct {
 
 	// List of intelligently generated video categories.
-	ClassificationSet []*MediaAiAnalysisClassificationItem `json:"ClassificationSet,omitempty" name:"ClassificationSet" list`
+	ClassificationSet []*MediaAiAnalysisClassificationItem `json:"ClassificationSet,omitempty" name:"ClassificationSet"`
 }
 
 type AiAnalysisTaskClassificationResult struct {
@@ -251,7 +251,7 @@ type AiAnalysisTaskCoverInput struct {
 type AiAnalysisTaskCoverOutput struct {
 
 	// List of intelligently generated covers.
-	CoverSet []*MediaAiAnalysisCoverItem `json:"CoverSet,omitempty" name:"CoverSet" list`
+	CoverSet []*MediaAiAnalysisCoverItem `json:"CoverSet,omitempty" name:"CoverSet"`
 
 	// Storage location of intelligently generated cover.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
@@ -287,7 +287,7 @@ type AiAnalysisTaskFrameTagInput struct {
 type AiAnalysisTaskFrameTagOutput struct {
 
 	// List of frame-specific video tags.
-	SegmentSet []*MediaAiAnalysisFrameTagSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaAiAnalysisFrameTagSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiAnalysisTaskFrameTagResult struct {
@@ -326,7 +326,7 @@ type AiAnalysisTaskTagInput struct {
 type AiAnalysisTaskTagOutput struct {
 
 	// List of intelligently generated video tags.
-	TagSet []*MediaAiAnalysisTagItem `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*MediaAiAnalysisTagItem `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type AiAnalysisTaskTagResult struct {
@@ -482,7 +482,7 @@ type AiRecognitionTaskAsrFullTextResultInput struct {
 type AiRecognitionTaskAsrFullTextResultOutput struct {
 
 	// List of full speech recognition segments.
-	SegmentSet []*AiRecognitionTaskAsrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskAsrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 
 	// Subtitles file address.
 	SubtitlePath *string `json:"SubtitlePath,omitempty" name:"SubtitlePath"`
@@ -540,13 +540,13 @@ type AiRecognitionTaskAsrWordsResultItem struct {
 	Word *string `json:"Word,omitempty" name:"Word"`
 
 	// List of time segments that contain the speech keyword.
-	SegmentSet []*AiRecognitionTaskAsrWordsSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskAsrWordsSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskAsrWordsResultOutput struct {
 
 	// Speech keyword recognition result set.
-	ResultSet []*AiRecognitionTaskAsrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
+	ResultSet []*AiRecognitionTaskAsrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type AiRecognitionTaskAsrWordsSegmentItem struct {
@@ -603,13 +603,13 @@ type AiRecognitionTaskFaceResultItem struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Result set of segments that contain a figure.
-	SegmentSet []*AiRecognitionTaskFaceSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskFaceSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskFaceResultOutput struct {
 
 	// Intelligent face recognition result set.
-	ResultSet []*AiRecognitionTaskFaceResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
+	ResultSet []*AiRecognitionTaskFaceResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type AiRecognitionTaskFaceSegmentItem struct {
@@ -624,7 +624,7 @@ type AiRecognitionTaskFaceSegmentItem struct {
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 }
 
 type AiRecognitionTaskInput struct {
@@ -664,7 +664,7 @@ type AiRecognitionTaskOcrFullTextResultInput struct {
 type AiRecognitionTaskOcrFullTextResultOutput struct {
 
 	// Full text recognition result set.
-	SegmentSet []*AiRecognitionTaskOcrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskOcrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskOcrFullTextSegmentItem struct {
@@ -676,7 +676,7 @@ type AiRecognitionTaskOcrFullTextSegmentItem struct {
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
 	// Recognition segment result set.
-	TextSet []*AiRecognitionTaskOcrFullTextSegmentTextItem `json:"TextSet,omitempty" name:"TextSet" list`
+	TextSet []*AiRecognitionTaskOcrFullTextSegmentTextItem `json:"TextSet,omitempty" name:"TextSet"`
 }
 
 type AiRecognitionTaskOcrFullTextSegmentTextItem struct {
@@ -685,7 +685,7 @@ type AiRecognitionTaskOcrFullTextSegmentTextItem struct {
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// Recognized text.
 	Text *string `json:"Text,omitempty" name:"Text"`
@@ -725,13 +725,13 @@ type AiRecognitionTaskOcrWordsResultItem struct {
 	Word *string `json:"Word,omitempty" name:"Word"`
 
 	// List of segments that contain a text keyword.
-	SegmentSet []*AiRecognitionTaskOcrWordsSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*AiRecognitionTaskOcrWordsSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskOcrWordsResultOutput struct {
 
 	// Text keyword recognition result set.
-	ResultSet []*AiRecognitionTaskOcrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
+	ResultSet []*AiRecognitionTaskOcrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type AiRecognitionTaskOcrWordsSegmentItem struct {
@@ -746,7 +746,7 @@ type AiRecognitionTaskOcrWordsSegmentItem struct {
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 }
 
 type AiReviewPoliticalAsrTaskInput struct {
@@ -767,7 +767,7 @@ type AiReviewPoliticalAsrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain ASR-detected politically sensitive information in text.
-	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPoliticalOcrTaskInput struct {
@@ -788,7 +788,7 @@ type AiReviewPoliticalOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain OCR-detected politically sensitive information in text.
-	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPoliticalTaskInput struct {
@@ -816,7 +816,7 @@ type AiReviewPoliticalTaskOutput struct {
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// List of video segments that contain the detected politically sensitive information.
-	SegmentSet []*MediaContentReviewPoliticalSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewPoliticalSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPornAsrTaskInput struct {
@@ -837,7 +837,7 @@ type AiReviewPornAsrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the ASR-detected porn information in text.
-	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPornOcrTaskInput struct {
@@ -858,7 +858,7 @@ type AiReviewPornOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the OCR-detected porn information in text.
-	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPornTaskInput struct {
@@ -886,7 +886,7 @@ type AiReviewPornTaskOutput struct {
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// List of video segments that contain the detected porn information.
-	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewProhibitedAsrTaskInput struct {
@@ -907,7 +907,7 @@ type AiReviewProhibitedAsrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the ASR-detected prohibited information in speech.
-	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewProhibitedOcrTaskInput struct {
@@ -928,7 +928,7 @@ type AiReviewProhibitedOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain the OCR-detected prohibited information in text.
-	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewTaskPoliticalAsrResult struct {
@@ -1177,7 +1177,7 @@ type AiReviewTerrorismOcrTaskOutput struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of video segments that contain OCR-detected terrorism information in text.
-	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewTerrorismTaskInput struct {
@@ -1197,19 +1197,20 @@ type AiReviewTerrorismTaskOutput struct {
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tag of the detected terrorism information in a video. Valid values:
-	// <li>guns: Weapons and guns.</li>
-	// <li>crowd: Crowd.</li>
-	// <li>police: Police force.</li>
-	// <li>bloody: Bloody scenes.</li>
-	// <li>banners: Terrorism flags.</li>
-	// <li>militant: Militants.</li>
-	// <li>explosion: Explosions and fires.</li>
-	// <li>terrorists: Terrorists.</li>
+	// Tags for detected terrorism information in a video. Valid values:
+	// <li>`guns`: weapons and guns</li>
+	// <li>`crowd`: crowds</li>
+	// <li>`police`: police forces</li>
+	// <li>`bloody`: bloodiness</li>
+	// <li>`banners`: terrorism flags</li>
+	// <li>`militant`: militants</li>
+	// <li>`explosion`: explosions and fires</li>
+	// <li>`terrorists`: terrorists</li>
+	// <li>`scenario`: terrorism images</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// List of video segments that contain the detected terrorism information.
-	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet" list`
+	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiSampleFaceInfo struct {
@@ -1227,13 +1228,13 @@ type AiSampleFaceOperation struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Face ID set. This field is required when `Type` is `delete`.
-	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds" list`
+	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds"`
 
 	// String set generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) the face image.
 	// <li>This field is required when `Type` is `add` or `reset`;</li>
 	// <li>Array length limit: 5 images.</li>
 	// Note: The image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
-	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents" list`
+	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents"`
 }
 
 type AiSampleFailFaceInfo struct {
@@ -1262,13 +1263,13 @@ type AiSamplePerson struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Face information.
-	FaceInfoSet []*AiSampleFaceInfo `json:"FaceInfoSet,omitempty" name:"FaceInfoSet" list`
+	FaceInfoSet []*AiSampleFaceInfo `json:"FaceInfoSet,omitempty" name:"FaceInfoSet"`
 
 	// Figure tag.
-	TagSet []*string `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*string `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Use case.
-	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet" list`
+	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet"`
 
 	// Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -1283,7 +1284,7 @@ type AiSampleTagOperation struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Tag. Length limit: 128 characters.
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 }
 
 type AiSampleWord struct {
@@ -1292,10 +1293,10 @@ type AiSampleWord struct {
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
 	// Keyword tag.
-	TagSet []*string `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*string `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Keyword use case.
-	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet" list`
+	UsageSet []*string `json:"UsageSet,omitempty" name:"UsageSet"`
 
 	// Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -1312,7 +1313,7 @@ type AiSampleWordInfo struct {
 	// Keyword tag
 	// <li>Array length limit: 20 tags;</li>
 	// <li>Tag length limit: 128 characters.</li>
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 }
 
 type AnimatedGraphicTaskInput struct {
@@ -1421,7 +1422,7 @@ type AsrWordsConfigureInfo struct {
 
 	// Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 }
 
 type AsrWordsConfigureInfoForUpdate struct {
@@ -1433,7 +1434,7 @@ type AsrWordsConfigureInfoForUpdate struct {
 
 	// Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 }
 
 type AudioTemplateInfo struct {
@@ -1581,7 +1582,7 @@ type CosFileUploadTrigger struct {
 	Dir *string `json:"Dir,omitempty" name:"Dir"`
 
 	// Format list of files that can trigger a workflow, such as ["mp4", "flv", "mov"]. If this parameter is left empty, files in all formats can trigger the workflow.
-	Formats []*string `json:"Formats,omitempty" name:"Formats" list`
+	Formats []*string `json:"Formats,omitempty" name:"Formats"`
 }
 
 type CosInputInfo struct {
@@ -1773,7 +1774,7 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 
 	// Parameter information of output substreams for transcoding to adaptive bitrate streaming. Up to 10 substreams can be output.
 	// Note: the frame rate of each substream must be consistent; otherwise, the frame rate of the first substream is used as the output frame rate.
-	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
 
 	// Template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -2112,19 +2113,19 @@ type CreatePersonSampleRequest struct {
 	// 1. Recognition: used for content recognition; equivalent to `Recognition.Face`
 	// 2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
 	// 3. All: equivalent to 1+2
-	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
 	// Image description. Length limit: 1,024 characters
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// [Base64](https://tools.ietf.org/html/rfc4648) string converted from an image. Only JPEG and PNG images are supported. Array length limit: 5 images
 	// Note: the image must be a relatively clear facial feature photo of one person with a size of at least 200 x 200 pixels.
-	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents" list`
+	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents"`
 
 	// Image tag
 	// <li>Array length limit: 20 tags</li>
 	// <li>Tag length limit: 128 characters</li>
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreatePersonSampleRequest) ToJsonString() string {
@@ -2158,7 +2159,7 @@ type CreatePersonSampleResponse struct {
 		Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
 
 		// Information of images that failed the verification by facial feature positioning
-		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet" list`
+		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2543,10 +2544,10 @@ type CreateWordSamplesRequest struct {
 	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
 	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
 	// 7. All: ASR- and OCR-based content recognition and inappropriate information detection; equivalent to 1+2+3+4
-	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
 	// Keyword. Array length limit: 100.
-	Words []*AiSampleWordInfo `json:"Words,omitempty" name:"Words" list`
+	Words []*AiSampleWordInfo `json:"Words,omitempty" name:"Words"`
 }
 
 func (r *CreateWordSamplesRequest) ToJsonString() string {
@@ -3184,7 +3185,7 @@ type DeleteWordSamplesRequest struct {
 	*tchttp.BaseRequest
 
 	// Keyword. Array length limit: 100 words.
-	Keywords []*string `json:"Keywords,omitempty" name:"Keywords" list`
+	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
 }
 
 func (r *DeleteWordSamplesRequest) ToJsonString() string {
@@ -3276,7 +3277,7 @@ type DescribeAIAnalysisTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of video content analysis templates. Array length limit: 10.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -3314,7 +3315,7 @@ type DescribeAIAnalysisTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of video content analysis template details.
-		AIAnalysisTemplateSet []*AIAnalysisTemplateItem `json:"AIAnalysisTemplateSet,omitempty" name:"AIAnalysisTemplateSet" list`
+		AIAnalysisTemplateSet []*AIAnalysisTemplateItem `json:"AIAnalysisTemplateSet,omitempty" name:"AIAnalysisTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3336,7 +3337,7 @@ type DescribeAIRecognitionTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of video content recognition templates. Array length limit: 10.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paging offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -3374,7 +3375,7 @@ type DescribeAIRecognitionTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of video content recognition template details.
-		AIRecognitionTemplateSet []*AIRecognitionTemplateItem `json:"AIRecognitionTemplateSet,omitempty" name:"AIRecognitionTemplateSet" list`
+		AIRecognitionTemplateSet []*AIRecognitionTemplateItem `json:"AIRecognitionTemplateSet,omitempty" name:"AIRecognitionTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3396,7 +3397,7 @@ type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of adaptive bitrate streaming templates. Array length limit: 100.
-	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -3440,7 +3441,7 @@ type DescribeAdaptiveDynamicStreamingTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of adaptive bitrate streaming template details.
-		AdaptiveDynamicStreamingTemplateSet []*AdaptiveDynamicStreamingTemplate `json:"AdaptiveDynamicStreamingTemplateSet,omitempty" name:"AdaptiveDynamicStreamingTemplateSet" list`
+		AdaptiveDynamicStreamingTemplateSet []*AdaptiveDynamicStreamingTemplate `json:"AdaptiveDynamicStreamingTemplateSet,omitempty" name:"AdaptiveDynamicStreamingTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3462,7 +3463,7 @@ type DescribeAnimatedGraphicsTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of animated image generating templates. Array length limit: 100.
-	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paging offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -3506,7 +3507,7 @@ type DescribeAnimatedGraphicsTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of animated image generating template details.
-		AnimatedGraphicsTemplateSet []*AnimatedGraphicsTemplate `json:"AnimatedGraphicsTemplateSet,omitempty" name:"AnimatedGraphicsTemplateSet" list`
+		AnimatedGraphicsTemplateSet []*AnimatedGraphicsTemplate `json:"AnimatedGraphicsTemplateSet,omitempty" name:"AnimatedGraphicsTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3528,7 +3529,7 @@ type DescribeContentReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID of intelligent content recognition templates as the filter. Array length limit: 50
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paging offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -3566,7 +3567,7 @@ type DescribeContentReviewTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of content audit template details.
-		ContentReviewTemplateSet []*ContentReviewTemplateItem `json:"ContentReviewTemplateSet,omitempty" name:"ContentReviewTemplateSet" list`
+		ContentReviewTemplateSet []*ContentReviewTemplateItem `json:"ContentReviewTemplateSet,omitempty" name:"ContentReviewTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3588,7 +3589,7 @@ type DescribeImageSpriteTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of image sprite generating templates. Array length limit: 100.
-	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paging offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -3632,7 +3633,7 @@ type DescribeImageSpriteTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of image sprite generating template details.
-		ImageSpriteTemplateSet []*ImageSpriteTemplate `json:"ImageSpriteTemplateSet,omitempty" name:"ImageSpriteTemplateSet" list`
+		ImageSpriteTemplateSet []*ImageSpriteTemplate `json:"ImageSpriteTemplateSet,omitempty" name:"ImageSpriteTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3711,13 +3712,13 @@ type DescribePersonSamplesRequest struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Image ID. Array length limit: 100
-	PersonIds []*string `json:"PersonIds,omitempty" name:"PersonIds" list`
+	PersonIds []*string `json:"PersonIds,omitempty" name:"PersonIds"`
 
 	// Image name. Array length limit: 20
-	Names []*string `json:"Names,omitempty" name:"Names" list`
+	Names []*string `json:"Names,omitempty" name:"Names"`
 
 	// Image tag. Array length limit: 20
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 	// Paging offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -3758,7 +3759,7 @@ type DescribePersonSamplesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Image information
-		PersonSet []*AiSamplePerson `json:"PersonSet,omitempty" name:"PersonSet" list`
+		PersonSet []*AiSamplePerson `json:"PersonSet,omitempty" name:"PersonSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3780,7 +3781,7 @@ type DescribeSampleSnapshotTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
-	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paging offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -3824,7 +3825,7 @@ type DescribeSampleSnapshotTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of sampled screencapturing template details.
-		SampleSnapshotTemplateSet []*SampleSnapshotTemplate `json:"SampleSnapshotTemplateSet,omitempty" name:"SampleSnapshotTemplateSet" list`
+		SampleSnapshotTemplateSet []*SampleSnapshotTemplate `json:"SampleSnapshotTemplateSet,omitempty" name:"SampleSnapshotTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3846,7 +3847,7 @@ type DescribeSnapshotByTimeOffsetTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
-	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Paging offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -3890,7 +3891,7 @@ type DescribeSnapshotByTimeOffsetTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of time point screencapturing template details.
-		SnapshotByTimeOffsetTemplateSet []*SnapshotByTimeOffsetTemplate `json:"SnapshotByTimeOffsetTemplateSet,omitempty" name:"SnapshotByTimeOffsetTemplateSet" list`
+		SnapshotByTimeOffsetTemplateSet []*SnapshotByTimeOffsetTemplate `json:"SnapshotByTimeOffsetTemplateSet,omitempty" name:"SnapshotByTimeOffsetTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4040,7 +4041,7 @@ type DescribeTasksResponse struct {
 	Response *struct {
 
 		// Task overview list.
-		TaskSet []*TaskSimpleInfo `json:"TaskSet,omitempty" name:"TaskSet" list`
+		TaskSet []*TaskSimpleInfo `json:"TaskSet,omitempty" name:"TaskSet"`
 
 		// Scrolling identifier. If a request does not return all the data entries, this field indicates the ID of the next entry. If this field is an empty string, there is no more data.
 		ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
@@ -4065,7 +4066,7 @@ type DescribeTranscodeTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of transcoding templates. Array length limit: 100.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Template type filter. Valid values:
 	// <li>Preset: Preset template;</li>
@@ -4121,7 +4122,7 @@ type DescribeTranscodeTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of transcoding template details.
-		TranscodeTemplateSet []*TranscodeTemplate `json:"TranscodeTemplateSet,omitempty" name:"TranscodeTemplateSet" list`
+		TranscodeTemplateSet []*TranscodeTemplate `json:"TranscodeTemplateSet,omitempty" name:"TranscodeTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4143,7 +4144,7 @@ type DescribeWatermarkTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Unique ID filter of watermarking templates. Array length limit: 100.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions" list`
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
 	// Watermark type filter. Valid values:
 	// <li>image: Image watermark;</li>
@@ -4189,7 +4190,7 @@ type DescribeWatermarkTemplatesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of watermarking template details.
-		WatermarkTemplateSet []*WatermarkTemplate `json:"WatermarkTemplateSet,omitempty" name:"WatermarkTemplateSet" list`
+		WatermarkTemplateSet []*WatermarkTemplate `json:"WatermarkTemplateSet,omitempty" name:"WatermarkTemplateSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4211,7 +4212,7 @@ type DescribeWordSamplesRequest struct {
 	*tchttp.BaseRequest
 
 	// Keyword filter. Array length limit: 100 words.
-	Keywords []*string `json:"Keywords,omitempty" name:"Keywords" list`
+	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
 
 	// <b>Keyword usage. Valid values:</b>
 	// 1. Recognition.Ocr: OCR-based content recognition
@@ -4222,10 +4223,10 @@ type DescribeWordSamplesRequest struct {
 	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
 	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
 	// You can select multiple elements, which are connected by OR logic. If a usage contains any element in this parameter, the keyword sample will be used.
-	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
 	// Tag filter. Array length limit: 20 words.
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 	// Paging offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -4267,7 +4268,7 @@ type DescribeWordSamplesResponse struct {
 
 		// Keyword information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		WordSet []*AiSampleWord `json:"WordSet,omitempty" name:"WordSet" list`
+		WordSet []*AiSampleWord `json:"WordSet,omitempty" name:"WordSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4289,7 +4290,7 @@ type DescribeWorkflowsRequest struct {
 	*tchttp.BaseRequest
 
 	// Workflow ID filter. Array length limit: 100.
-	WorkflowIds []*int64 `json:"WorkflowIds,omitempty" name:"WorkflowIds" list`
+	WorkflowIds []*int64 `json:"WorkflowIds,omitempty" name:"WorkflowIds"`
 
 	// Workflow status. Valid values:
 	// <li>Enabled: Enabled,</li>
@@ -4334,7 +4335,7 @@ type DescribeWorkflowsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Workflow information array.
-		WorkflowInfoSet []*WorkflowInfo `json:"WorkflowInfoSet,omitempty" name:"WorkflowInfoSet" list`
+		WorkflowInfoSet []*WorkflowInfo `json:"WorkflowInfoSet,omitempty" name:"WorkflowInfoSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4414,7 +4415,7 @@ type EditMediaRequest struct {
 	*tchttp.BaseRequest
 
 	// Information of input video file.
-	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitempty" name:"FileInfos" list`
+	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitempty" name:"FileInfos"`
 
 	// Target storage of video processing output file.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
@@ -4511,7 +4512,7 @@ type EditMediaTask struct {
 type EditMediaTaskInput struct {
 
 	// Information of input video file.
-	FileInfoSet []*EditMediaFileInfo `json:"FileInfoSet,omitempty" name:"FileInfoSet" list`
+	FileInfoSet []*EditMediaFileInfo `json:"FileInfoSet,omitempty" name:"FileInfoSet"`
 }
 
 type EditMediaTaskOutput struct {
@@ -4636,11 +4637,11 @@ type FaceConfigureInfo struct {
 	// <li>entertainment: Entertainment celebrity;</li>
 	// <li>sport: Sports celebrity;</li>
 	// <li>politician: Politically sensitive figure.</li>
-	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet" list`
+	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
 	// Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the custom figures will be returned. Valid values:
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet" list`
+	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet"`
 
 	// Figure library. Valid values:
 	// <li>Default: Default figure library;</li>
@@ -4664,11 +4665,11 @@ type FaceConfigureInfoForUpdate struct {
 	// <li>entertainment: Entertainment celebrity;</li>
 	// <li>sport: Sports celebrity;</li>
 	// <li>politician: Politically sensitive figure.</li>
-	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet" list`
+	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
 	// Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the custom figures will be returned. Valid values:
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet" list`
+	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet"`
 
 	// Figure library. Valid values:
 	// <li>Default: Default figure library;</li>
@@ -4839,7 +4840,7 @@ type ImageWatermarkTemplate struct {
 type LiveStreamAiRecognitionResultInfo struct {
 
 	// Content recognition result list.
-	ResultSet []*LiveStreamAiRecognitionResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
+	ResultSet []*LiveStreamAiRecognitionResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type LiveStreamAiRecognitionResultItem struct {
@@ -4854,23 +4855,23 @@ type LiveStreamAiRecognitionResultItem struct {
 
 	// Face recognition result, which is valid when `Type` is
 	// `FaceRecognition`.
-	FaceRecognitionResultSet []*LiveStreamFaceRecognitionResult `json:"FaceRecognitionResultSet,omitempty" name:"FaceRecognitionResultSet" list`
+	FaceRecognitionResultSet []*LiveStreamFaceRecognitionResult `json:"FaceRecognitionResultSet,omitempty" name:"FaceRecognitionResultSet"`
 
 	// Speech keyword recognition result, which is valid when `Type` is
 	// `AsrWordsRecognition`.
-	AsrWordsRecognitionResultSet []*LiveStreamAsrWordsRecognitionResult `json:"AsrWordsRecognitionResultSet,omitempty" name:"AsrWordsRecognitionResultSet" list`
+	AsrWordsRecognitionResultSet []*LiveStreamAsrWordsRecognitionResult `json:"AsrWordsRecognitionResultSet,omitempty" name:"AsrWordsRecognitionResultSet"`
 
 	// Text keyword recognition result, which is valid when `Type` is
 	// `OcrWordsRecognition`.
-	OcrWordsRecognitionResultSet []*LiveStreamOcrWordsRecognitionResult `json:"OcrWordsRecognitionResultSet,omitempty" name:"OcrWordsRecognitionResultSet" list`
+	OcrWordsRecognitionResultSet []*LiveStreamOcrWordsRecognitionResult `json:"OcrWordsRecognitionResultSet,omitempty" name:"OcrWordsRecognitionResultSet"`
 
 	// Full speech recognition result, which is valid when `Type` is
 	// `AsrFullTextRecognition`.
-	AsrFullTextRecognitionResultSet []*LiveStreamAsrFullTextRecognitionResult `json:"AsrFullTextRecognitionResultSet,omitempty" name:"AsrFullTextRecognitionResultSet" list`
+	AsrFullTextRecognitionResultSet []*LiveStreamAsrFullTextRecognitionResult `json:"AsrFullTextRecognitionResultSet,omitempty" name:"AsrFullTextRecognitionResultSet"`
 
 	// Full text recognition result, which is valid when `Type` is
 	// `OcrFullTextRecognition`.
-	OcrFullTextRecognitionResultSet []*LiveStreamOcrFullTextRecognitionResult `json:"OcrFullTextRecognitionResultSet,omitempty" name:"OcrFullTextRecognitionResultSet" list`
+	OcrFullTextRecognitionResultSet []*LiveStreamOcrFullTextRecognitionResult `json:"OcrFullTextRecognitionResultSet,omitempty" name:"OcrFullTextRecognitionResultSet"`
 }
 
 type LiveStreamAiReviewImagePoliticalResult struct {
@@ -4899,7 +4900,7 @@ type LiveStreamAiReviewImagePoliticalResult struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Zone coordinates (at the pixel level) of a politically sensitive figure or violating photo: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// URL of a suspected image (which will not be permanently stored
 	// and will be deleted after `PicUrlExpireTime`).
@@ -4980,7 +4981,7 @@ type LiveStreamAiReviewImageTerrorismResult struct {
 type LiveStreamAiReviewResultInfo struct {
 
 	// List of content audit results.
-	ResultSet []*LiveStreamAiReviewResultItem `json:"ResultSet,omitempty" name:"ResultSet" list`
+	ResultSet []*LiveStreamAiReviewResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type LiveStreamAiReviewResultItem struct {
@@ -4993,16 +4994,16 @@ type LiveStreamAiReviewResultItem struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Result of porn information detection in image, which is valid when `Type` is `ImagePorn`.
-	ImagePornResultSet []*LiveStreamAiReviewImagePornResult `json:"ImagePornResultSet,omitempty" name:"ImagePornResultSet" list`
+	ImagePornResultSet []*LiveStreamAiReviewImagePornResult `json:"ImagePornResultSet,omitempty" name:"ImagePornResultSet"`
 
 	// Result of terrorism information detection in image, which is valid when `Type` is `ImageTerrorism`.
-	ImageTerrorismResultSet []*LiveStreamAiReviewImageTerrorismResult `json:"ImageTerrorismResultSet,omitempty" name:"ImageTerrorismResultSet" list`
+	ImageTerrorismResultSet []*LiveStreamAiReviewImageTerrorismResult `json:"ImageTerrorismResultSet,omitempty" name:"ImageTerrorismResultSet"`
 
 	// Result of politically sensitive information detection in image, which is valid when `Type` is `ImagePolitical`.
-	ImagePoliticalResultSet []*LiveStreamAiReviewImagePoliticalResult `json:"ImagePoliticalResultSet,omitempty" name:"ImagePoliticalResultSet" list`
+	ImagePoliticalResultSet []*LiveStreamAiReviewImagePoliticalResult `json:"ImagePoliticalResultSet,omitempty" name:"ImagePoliticalResultSet"`
 
 	// Result of porn information detection in speech, which is valid when `Type` is `PornVoice`.
-	VoicePornResultSet []*LiveStreamAiReviewVoicePornResult `json:"VoicePornResultSet,omitempty" name:"VoicePornResultSet" list`
+	VoicePornResultSet []*LiveStreamAiReviewVoicePornResult `json:"VoicePornResultSet,omitempty" name:"VoicePornResultSet"`
 }
 
 type LiveStreamAiReviewVoicePornResult struct {
@@ -5079,7 +5080,7 @@ type LiveStreamFaceRecognitionResult struct {
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 }
 
 type LiveStreamOcrFullTextRecognitionResult struct {
@@ -5097,7 +5098,7 @@ type LiveStreamOcrFullTextRecognitionResult struct {
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 }
 
 type LiveStreamOcrWordsRecognitionResult struct {
@@ -5115,7 +5116,7 @@ type LiveStreamOcrWordsRecognitionResult struct {
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-	AreaCoords []*int64 `json:"AreaCoords,omitempty" name:"AreaCoords" list`
+	AreaCoords []*int64 `json:"AreaCoords,omitempty" name:"AreaCoords"`
 }
 
 type LiveStreamProcessErrorInfo struct {
@@ -5243,7 +5244,7 @@ type MediaAiAnalysisFrameTagItem struct {
 	Tag *string `json:"Tag,omitempty" name:"Tag"`
 
 	// 
-	CategorySet []*string `json:"CategorySet,omitempty" name:"CategorySet" list`
+	CategorySet []*string `json:"CategorySet,omitempty" name:"CategorySet"`
 
 	// Confidence of intelligently generated frame-specific tag between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
@@ -5258,7 +5259,7 @@ type MediaAiAnalysisFrameTagSegmentItem struct {
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
 	// List of tags in time period.
-	TagSet []*MediaAiAnalysisFrameTagItem `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*MediaAiAnalysisFrameTagItem `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type MediaAiAnalysisTagItem struct {
@@ -5339,7 +5340,7 @@ type MediaContentReviewAsrTextSegmentItem struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of suspected keywords.
-	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet" list`
+	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet"`
 }
 
 type MediaContentReviewOcrTextSegmentItem struct {
@@ -5360,10 +5361,10 @@ type MediaContentReviewOcrTextSegmentItem struct {
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of suspected keywords.
-	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet" list`
+	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet"`
 
 	// Zone coordinates (at the pixel level) of suspected text: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// URL of a suspected image (which will not be permanently stored
 	// and will be deleted after `PicUrlExpireTime`).
@@ -5424,7 +5425,7 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Zone coordinates (at the pixel level) of a politically sensitive figure or violating photo: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet" list`
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
@@ -5473,7 +5474,7 @@ type MediaImageSpriteItem struct {
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// Path to each image sprite.
-	ImagePathSet []*string `json:"ImagePathSet,omitempty" name:"ImagePathSet" list`
+	ImagePathSet []*string `json:"ImagePathSet,omitempty" name:"ImagePathSet"`
 
 	// Path to a WebVtt file for the position-time relationship among subimages in an image sprite. The WebVtt file indicates the corresponding time points of each subimage and their coordinates in the image sprite, which is typically used by the player for implementing preview.
 	WebVttPath *string `json:"WebVttPath,omitempty" name:"WebVttPath"`
@@ -5527,11 +5528,11 @@ type MediaMetaData struct {
 
 	// Video stream information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitempty" name:"VideoStreamSet" list`
+	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitempty" name:"VideoStreamSet"`
 
 	// Audio stream information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet" list`
+	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet"`
 
 	// Video duration in seconds.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -5611,22 +5612,22 @@ type MediaProcessTaskImageSpriteResult struct {
 type MediaProcessTaskInput struct {
 
 	// List of transcoding tasks.
-	TranscodeTaskSet []*TranscodeTaskInput `json:"TranscodeTaskSet,omitempty" name:"TranscodeTaskSet" list`
+	TranscodeTaskSet []*TranscodeTaskInput `json:"TranscodeTaskSet,omitempty" name:"TranscodeTaskSet"`
 
 	// List of animated image generating tasks.
-	AnimatedGraphicTaskSet []*AnimatedGraphicTaskInput `json:"AnimatedGraphicTaskSet,omitempty" name:"AnimatedGraphicTaskSet" list`
+	AnimatedGraphicTaskSet []*AnimatedGraphicTaskInput `json:"AnimatedGraphicTaskSet,omitempty" name:"AnimatedGraphicTaskSet"`
 
 	// List of time point screencapturing tasks.
-	SnapshotByTimeOffsetTaskSet []*SnapshotByTimeOffsetTaskInput `json:"SnapshotByTimeOffsetTaskSet,omitempty" name:"SnapshotByTimeOffsetTaskSet" list`
+	SnapshotByTimeOffsetTaskSet []*SnapshotByTimeOffsetTaskInput `json:"SnapshotByTimeOffsetTaskSet,omitempty" name:"SnapshotByTimeOffsetTaskSet"`
 
 	// List of sampled screencapturing tasks.
-	SampleSnapshotTaskSet []*SampleSnapshotTaskInput `json:"SampleSnapshotTaskSet,omitempty" name:"SampleSnapshotTaskSet" list`
+	SampleSnapshotTaskSet []*SampleSnapshotTaskInput `json:"SampleSnapshotTaskSet,omitempty" name:"SampleSnapshotTaskSet"`
 
 	// List of image sprite generating tasks.
-	ImageSpriteTaskSet []*ImageSpriteTaskInput `json:"ImageSpriteTaskSet,omitempty" name:"ImageSpriteTaskSet" list`
+	ImageSpriteTaskSet []*ImageSpriteTaskInput `json:"ImageSpriteTaskSet,omitempty" name:"ImageSpriteTaskSet"`
 
 	// List of adaptive bitrate streaming tasks.
-	AdaptiveDynamicStreamingTaskSet []*AdaptiveDynamicStreamingTaskInput `json:"AdaptiveDynamicStreamingTaskSet,omitempty" name:"AdaptiveDynamicStreamingTaskSet" list`
+	AdaptiveDynamicStreamingTaskSet []*AdaptiveDynamicStreamingTaskInput `json:"AdaptiveDynamicStreamingTaskSet,omitempty" name:"AdaptiveDynamicStreamingTaskSet"`
 }
 
 type MediaProcessTaskResult struct {
@@ -5752,10 +5753,10 @@ type MediaSampleSnapshotItem struct {
 	Storage *TaskOutputStorage `json:"Storage,omitempty" name:"Storage"`
 
 	// List of paths to generated screenshots.
-	ImagePathSet []*string `json:"ImagePathSet,omitempty" name:"ImagePathSet" list`
+	ImagePathSet []*string `json:"ImagePathSet,omitempty" name:"ImagePathSet"`
 
 	// List of watermarking template IDs if the screenshots are watermarked.
-	WaterMarkDefinition []*int64 `json:"WaterMarkDefinition,omitempty" name:"WaterMarkDefinition" list`
+	WaterMarkDefinition []*int64 `json:"WaterMarkDefinition,omitempty" name:"WaterMarkDefinition"`
 }
 
 type MediaSnapshotByTimeOffsetItem struct {
@@ -5764,7 +5765,7 @@ type MediaSnapshotByTimeOffsetItem struct {
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
 	// Information set of screenshots of the same specification. Each element represents a screenshot.
-	PicInfoSet []*MediaSnapshotByTimePicInfoItem `json:"PicInfoSet,omitempty" name:"PicInfoSet" list`
+	PicInfoSet []*MediaSnapshotByTimePicInfoItem `json:"PicInfoSet,omitempty" name:"PicInfoSet"`
 
 	// Location of a time point screenshot file.
 	Storage *TaskOutputStorage `json:"Storage,omitempty" name:"Storage"`
@@ -5779,7 +5780,7 @@ type MediaSnapshotByTimePicInfoItem struct {
 	Path *string `json:"Path,omitempty" name:"Path"`
 
 	// List of watermarking template IDs if the screenshots are watermarked.
-	WaterMarkDefinition []*int64 `json:"WaterMarkDefinition,omitempty" name:"WaterMarkDefinition" list`
+	WaterMarkDefinition []*int64 `json:"WaterMarkDefinition,omitempty" name:"WaterMarkDefinition"`
 }
 
 type MediaTranscodeItem struct {
@@ -5816,11 +5817,11 @@ type MediaTranscodeItem struct {
 
 	// Audio stream information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet" list`
+	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet"`
 
 	// Video stream information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitempty" name:"VideoStreamSet" list`
+	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitempty" name:"VideoStreamSet"`
 }
 
 type MediaVideoStreamItem struct {
@@ -6016,7 +6017,7 @@ type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 
 	// Parameter information of input streams for transcoding to adaptive bitrate streaming. Up to 10 streams can be input.
 	// Note: the frame rate of each stream must be consistent; otherwise, the frame rate of the first stream is used as the output frame rate.
-	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos" list`
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
@@ -6347,7 +6348,7 @@ type ModifyPersonSampleRequest struct {
 	// 1. Recognition: used for content recognition; equivalent to `Recognition.Face`
 	// 2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
 	// 3. All: used for content recognition and inappropriate information recognition; equivalent to 1+2
-	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
 	// Information of operations on facial features
 	FaceOperationInfo *AiSampleFaceOperation `json:"FaceOperationInfo,omitempty" name:"FaceOperationInfo"`
@@ -6389,7 +6390,7 @@ type ModifyPersonSampleResponse struct {
 
 		// Information of images that failed the verification by facial feature positioning.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet" list`
+		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6769,7 +6770,7 @@ type ModifyWordSampleRequest struct {
 	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
 	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
 	// 7. All: equivalent to 1+2+3+4
-	Usages []*string `json:"Usages,omitempty" name:"Usages" list`
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
 	// Tag operation information.
 	TagOperationInfo *AiSampleTagOperation `json:"TagOperationInfo,omitempty" name:"TagOperationInfo"`
@@ -6900,7 +6901,7 @@ type OcrWordsConfigureInfo struct {
 
 	// Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 }
 
 type OcrWordsConfigureInfoForUpdate struct {
@@ -6912,7 +6913,7 @@ type OcrWordsConfigureInfoForUpdate struct {
 
 	// Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 }
 
 type OverrideTranscodeParameter struct {
@@ -7145,7 +7146,7 @@ type PoliticalImgReviewTemplateInfo struct {
 	// <li>scholar: educator;</li>
 	// <li>celebrity: well-known figure;</li>
 	// <li>military: military figure.</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -7170,7 +7171,7 @@ type PoliticalImgReviewTemplateInfoForUpdate struct {
 	// <li>scholar: educator;</li>
 	// <li>celebrity: well-known figure;</li>
 	// <li>military: military figure.</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -7274,7 +7275,7 @@ type PornImgReviewTemplateInfo struct {
 	// <li>vulgar: Vulgarity;</li>
 	// <li>intimacy: Intimacy;</li>
 	// <li>sexy: Sexiness.</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -7295,7 +7296,7 @@ type PornImgReviewTemplateInfoForUpdate struct {
 	// <li>vulgar: Vulgarity;</li>
 	// <li>intimacy: Intimacy;</li>
 	// <li>sexy: Sexiness.</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -7588,6 +7589,12 @@ type RawImageWatermarkInput struct {
 	// <li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.</li>
 	// Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
 	Height *string `json:"Height,omitempty" name:"Height"`
+
+	// Repeat type of an animated watermark. Valid values:
+	// <li>`once`: no longer appears after watermark playback ends.</li>
+	// <li>`repeat_last_frame`: stays on the last frame after watermark playback ends.</li>
+	// <li>`repeat` (default): repeats the playback until the video ends.</li>
+	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
 }
 
 type RawTranscodeParameter struct {
@@ -7737,7 +7744,7 @@ type SampleSnapshotTaskInput struct {
 
 	// List of up to 10 image or text watermarks.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 
 	// Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -7821,14 +7828,14 @@ type SnapshotByTimeOffsetTaskInput struct {
 	// List of screenshot time points in the format of `s` or `%`:
 	// <li>If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second;</li>
 	// <li>If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.</li>
-	ExtTimeOffsetSet []*string `json:"ExtTimeOffsetSet,omitempty" name:"ExtTimeOffsetSet" list`
+	ExtTimeOffsetSet []*string `json:"ExtTimeOffsetSet,omitempty" name:"ExtTimeOffsetSet"`
 
 	// List of time points of screenshots in <font color=red>seconds</font>.
-	TimeOffsetSet []*float64 `json:"TimeOffsetSet,omitempty" name:"TimeOffsetSet" list`
+	TimeOffsetSet []*float64 `json:"TimeOffsetSet,omitempty" name:"TimeOffsetSet"`
 
 	// List of up to 10 image or text watermarks.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 
 	// Target bucket of a generated time point screenshot file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -8061,16 +8068,17 @@ type TerrorismImgReviewTemplateInfo struct {
 	// <li>OFF: Disables a terrorism information detection in image task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tag for terrorism information detection in image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>guns: Weapons and guns;</li>
-	// <li>crowd: Crowd;</li>
-	// <li>bloody: Bloody scenes;</li>
-	// <li>police: Police force;</li>
-	// <li>banners: Terrorism flags;</li>
-	// <li>militant: Militants;</li>
-	// <li>explosion: Explosions and fires;</li>
-	// <li>terrorists: Terrorists.</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	// Filter tags for terrorism information detection in images. If a specified tag is detected, the tag is returned. If no filter tag is specified, all detected tags are returned. Valid values:
+	// <li>`guns`: weapons and guns</li>
+	// <li>`crowd`: crowds</li>
+	// <li>`bloody`: bloodiness</li>
+	// <li>`police`: police forces</li>
+	// <li>`banners`: terrorism flags</li>
+	// <li>`militant`: militants</li>
+	// <li>`explosion`: explosions and fires</li>
+	// <li>`terrorists`: terrorists</li>
+	// <li>`scenario`: terrorism images</li>
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -8086,16 +8094,17 @@ type TerrorismImgReviewTemplateInfoForUpdate struct {
 	// <li>OFF: Disables a terrorism information detection in image task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tag for terrorism information detection in image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>guns: Weapons and guns;</li>
-	// <li>crowd: Crowd;</li>
-	// <li>bloody: Bloody scenes;</li>
-	// <li>police: Police force;</li>
-	// <li>banners: Terrorism flags;</li>
-	// <li>militant: Militants;</li>
-	// <li>explosion: Explosions and fires;</li>
-	// <li>terrorists: Terrorists.</li>
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	// Filter tags for terrorism information detection in images. If a specified tag is detected, the tag is returned. If no filter tag is specified, all detected tags are returned. Valid values:
+	// <li>`guns`: weapons and guns</li>
+	// <li>`crowd`: crowds</li>
+	// <li>`bloody`: bloodiness</li>
+	// <li>`police`: police forces</li>
+	// <li>`banners`: terrorism flags</li>
+	// <li>`militant`: militants</li>
+	// <li>`explosion`: explosions and fires</li>
+	// <li>`terrorists`: terrorists</li>
+	// <li>`scenario`: terrorism images</li>
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -8188,10 +8197,10 @@ type TranscodeTaskInput struct {
 
 	// List of up to 10 image or text watermarks.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet" list`
+	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 
 	// List of blurs. Up to 10 ones can be supported.
-	MosaicSet []*MosaicInput `json:"MosaicSet,omitempty" name:"MosaicSet" list`
+	MosaicSet []*MosaicInput `json:"MosaicSet,omitempty" name:"MosaicSet"`
 
 	// Start time offset of a transcoded video, in seconds.
 	// <li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
@@ -8290,7 +8299,7 @@ type UserDefineAsrTextReviewTemplateInfo struct {
 
 	// Custom speech filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom speech keywords.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -8308,7 +8317,7 @@ type UserDefineAsrTextReviewTemplateInfoForUpdate struct {
 
 	// Custom speech filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom speech keywords.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -8353,7 +8362,7 @@ type UserDefineFaceReviewTemplateInfo struct {
 
 	// Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -8371,7 +8380,7 @@ type UserDefineFaceReviewTemplateInfoForUpdate struct {
 
 	// Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -8389,7 +8398,7 @@ type UserDefineOcrTextReviewTemplateInfo struct {
 
 	// Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
 	// There can be up to 10 tags, each with a length limit of 16 characters.
-	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet" list`
+	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
@@ -8678,16 +8687,16 @@ type WorkflowTask struct {
 	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
 
 	// Execution status and result of a video processing task.
-	MediaProcessResultSet []*MediaProcessTaskResult `json:"MediaProcessResultSet,omitempty" name:"MediaProcessResultSet" list`
+	MediaProcessResultSet []*MediaProcessTaskResult `json:"MediaProcessResultSet,omitempty" name:"MediaProcessResultSet"`
 
 	// Execution status and result of a video content audit task.
-	AiContentReviewResultSet []*AiContentReviewResult `json:"AiContentReviewResultSet,omitempty" name:"AiContentReviewResultSet" list`
+	AiContentReviewResultSet []*AiContentReviewResult `json:"AiContentReviewResultSet,omitempty" name:"AiContentReviewResultSet"`
 
 	// Execution status and result of video content analysis task.
-	AiAnalysisResultSet []*AiAnalysisResult `json:"AiAnalysisResultSet,omitempty" name:"AiAnalysisResultSet" list`
+	AiAnalysisResultSet []*AiAnalysisResult `json:"AiAnalysisResultSet,omitempty" name:"AiAnalysisResultSet"`
 
 	// Execution status and result of a video content recognition task.
-	AiRecognitionResultSet []*AiRecognitionResult `json:"AiRecognitionResultSet,omitempty" name:"AiRecognitionResultSet" list`
+	AiRecognitionResultSet []*AiRecognitionResult `json:"AiRecognitionResultSet,omitempty" name:"AiRecognitionResultSet"`
 }
 
 type WorkflowTrigger struct {

@@ -46,7 +46,7 @@ type CopyFleetRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Network configuration
-	InboundPermissions []*InboundPermission `json:"InboundPermissions,omitempty" name:"InboundPermissions" list`
+	InboundPermissions []*InboundPermission `json:"InboundPermissions,omitempty" name:"InboundPermissions"`
 
 	// Server type. It can be obtained through [Obtaining Server Instance Type List](https://intl.cloud.tencent.com/document/product/1165/48732?from_cn_redirect=1).
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
@@ -76,19 +76,19 @@ type CopyFleetRequest struct {
 	SelectedCcnType *string `json:"SelectedCcnType,omitempty" name:"SelectedCcnType"`
 
 	// Tag list. Up to 50 tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// System disk. It can be a SSD (CLOUD_SSD) with 100-500 GB capacity or a Premium Cloud Storage disk (CLOUD_PREMIUM) with 50-500 GB capacity. The increment is 1.
 	SystemDiskInfo *DiskInfo `json:"SystemDiskInfo,omitempty" name:"SystemDiskInfo"`
 
 	// Data disk. It can be SSD disks (CLOUD_SSD) with 100-32000 GB capacity or Premium Cloud Storage disks (CLOUD_PREMIUM) with 10-32000 GB capacity. The increment is 10. 
-	DataDiskInfo []*DiskInfo `json:"DataDiskInfo,omitempty" name:"DataDiskInfo" list`
+	DataDiskInfo []*DiskInfo `json:"DataDiskInfo,omitempty" name:"DataDiskInfo"`
 
 	// Whether to select to replicate the timer policy: TIMER_SELECTED or TIMER_UNSELECTED. The default value is TIMER_UNSELECTED.
 	SelectedTimerType *string `json:"SelectedTimerType,omitempty" name:"SelectedTimerType"`
 
 	// Information of the CCN instance, including the owner account and the instance ID.
-	CcnInfos []*CcnInfo `json:"CcnInfos,omitempty" name:"CcnInfos" list`
+	CcnInfos []*CcnInfo `json:"CcnInfos,omitempty" name:"CcnInfos"`
 
 	// Maximum outbound public network bandwidth of the server fleet. Value range: 1 - 200 Mbps. Default value: 100 Mbps.
 	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
@@ -138,7 +138,7 @@ type CopyFleetResponse struct {
 
 		// Server fleet attributes
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		FleetAttributes []*FleetAttributes `json:"FleetAttributes,omitempty" name:"FleetAttributes" list`
+		FleetAttributes []*FleetAttributes `json:"FleetAttributes,omitempty" name:"FleetAttributes"`
 
 		// The number of server fleets
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -175,7 +175,7 @@ type CreateGameServerSessionRequest struct {
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
 	// Game attributes. Up to 16 groups of attributes are allowed.
-	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties" list`
+	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties"`
 
 	// The attribute details of game server session. Up to 4096 ASCII characters are allowed.
 	GameServerSessionData *string `json:"GameServerSessionData,omitempty" name:"GameServerSessionData"`
@@ -356,7 +356,7 @@ type DescribeGameServerSessionDetailsResponse struct {
 
 		// List of game server session details
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		GameServerSessionDetails []*GameServerSessionDetail `json:"GameServerSessionDetails,omitempty" name:"GameServerSessionDetails" list`
+		GameServerSessionDetails []*GameServerSessionDetail `json:"GameServerSessionDetails,omitempty" name:"GameServerSessionDetails"`
 
 		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -479,7 +479,7 @@ type DescribeGameServerSessionsResponse struct {
 
 		// Game server session list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		GameServerSessions []*GameServerSession `json:"GameServerSessions,omitempty" name:"GameServerSessions" list`
+		GameServerSessions []*GameServerSession `json:"GameServerSessions,omitempty" name:"GameServerSessions"`
 
 		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -528,7 +528,7 @@ type DescribeInstanceTypesResponse struct {
 	Response *struct {
 
 		// List of server types
-		InstanceTypeList []*InstanceTypeInfo `json:"InstanceTypeList,omitempty" name:"InstanceTypeList" list`
+		InstanceTypeList []*InstanceTypeInfo `json:"InstanceTypeList,omitempty" name:"InstanceTypeList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -598,7 +598,7 @@ type DescribePlayerSessionsResponse struct {
 
 		// Player session list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		PlayerSessions []*PlayerSession `json:"PlayerSessions,omitempty" name:"PlayerSessions" list`
+		PlayerSessions []*PlayerSession `json:"PlayerSessions,omitempty" name:"PlayerSessions"`
 
 		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -672,7 +672,7 @@ type DescribeTimerScalingPoliciesResponse struct {
 
 		// Configuration of the scheduled scaling policy
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		TimerScalingPolicies []*TimerScalingPolicy `json:"TimerScalingPolicies,omitempty" name:"TimerScalingPolicies" list`
+		TimerScalingPolicies []*TimerScalingPolicy `json:"TimerScalingPolicies,omitempty" name:"TimerScalingPolicies"`
 
 		// Total number of scheduled scaling policies
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -761,7 +761,7 @@ type FleetAttributes struct {
 
 	// The status of server fleet when it stopped. If this field is left empty, it means automatic scaling.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	StoppedActions []*string `json:"StoppedActions,omitempty" name:"StoppedActions" list`
+	StoppedActions []*string `json:"StoppedActions,omitempty" name:"StoppedActions"`
 
 	// Server fleet termination time
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -777,11 +777,11 @@ type FleetAttributes struct {
 
 	// Tag list. Up to 50 tags.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Data disk. It can be SSD disks (CLOUD_SSD) with 100-32000 GB capacity or Premium Cloud Storage disks (CLOUD_PREMIUM) with 10-32000 GB capacity. The increment is 10. 
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	DataDiskInfo []*DiskInfo `json:"DataDiskInfo,omitempty" name:"DataDiskInfo" list`
+	DataDiskInfo []*DiskInfo `json:"DataDiskInfo,omitempty" name:"DataDiskInfo"`
 
 	// System disk. It can be a SSD (CLOUD_SSD) with 100-500 GB capacity or a Premium Cloud Storage disk (CLOUD_PREMIUM) with 50-500 GB capacity. The increment is 1.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -789,7 +789,7 @@ type FleetAttributes struct {
 
 	// CCN instance information
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	RelatedCcnInfos []*RelatedCcnInfo `json:"RelatedCcnInfos,omitempty" name:"RelatedCcnInfos" list`
+	RelatedCcnInfos []*RelatedCcnInfo `json:"RelatedCcnInfos,omitempty" name:"RelatedCcnInfos"`
 
 	// Maximum outbound public network bandwidth of the server fleet. Value range: 1 - 200 Mbps. Default value: 100 Mbps.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -826,7 +826,7 @@ type GameServerSession struct {
 
 	// Game attributes. Up to 16 groups of attributes are allowed.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties" list`
+	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties"`
 
 	// The attribute details of game server session. Up to 4096 ASCII characters are allowed.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -908,7 +908,7 @@ type GameServerSessionPlacement struct {
 
 	// Player latency
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PlayerLatencies []*PlayerLatency `json:"PlayerLatencies,omitempty" name:"PlayerLatencies" list`
+	PlayerLatencies []*PlayerLatency `json:"PlayerLatencies,omitempty" name:"PlayerLatencies"`
 
 	// Service deployment status
 	Status *string `json:"Status,omitempty" name:"Status"`
@@ -931,7 +931,7 @@ type GameServerSessionPlacement struct {
 
 	// Game attributes
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties" list`
+	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties"`
 
 	// The maximum number of players that can be connected simultaneously to the game session. It should a value between 1 to the maximum number of player sessions.
 	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
@@ -954,7 +954,7 @@ type GameServerSessionPlacement struct {
 
 	// Deployed player game data
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PlacedPlayerSessions []*PlacedPlayerSession `json:"PlacedPlayerSessions,omitempty" name:"PlacedPlayerSessions" list`
+	PlacedPlayerSessions []*PlacedPlayerSession `json:"PlacedPlayerSessions,omitempty" name:"PlacedPlayerSessions"`
 
 	// Start time
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -1125,7 +1125,7 @@ type JoinGameServerSessionBatchRequest struct {
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
 	// Player ID list. At least 1 ID and up to 25 IDs.
-	PlayerIds []*string `json:"PlayerIds,omitempty" name:"PlayerIds" list`
+	PlayerIds []*string `json:"PlayerIds,omitempty" name:"PlayerIds"`
 
 	// Player custom data
 	PlayerDataMap *PlayerDataMap `json:"PlayerDataMap,omitempty" name:"PlayerDataMap"`
@@ -1158,7 +1158,7 @@ type JoinGameServerSessionBatchResponse struct {
 
 		// Player session list. Up to 25 sessions.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		PlayerSessions []*PlayerSession `json:"PlayerSessions,omitempty" name:"PlayerSessions" list`
+		PlayerSessions []*PlayerSession `json:"PlayerSessions,omitempty" name:"PlayerSessions"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1382,7 +1382,7 @@ type RuntimeConfiguration struct {
 	MaxConcurrentGameServerSessionActivations *uint64 `json:"MaxConcurrentGameServerSessionActivations,omitempty" name:"MaxConcurrentGameServerSessionActivations"`
 
 	// Service process configuration. There must be at least one service configuration.
-	ServerProcesses []*ServerProcesse `json:"ServerProcesses,omitempty" name:"ServerProcesses" list`
+	ServerProcesses []*ServerProcesse `json:"ServerProcesses,omitempty" name:"ServerProcesses"`
 }
 
 type SearchGameServerSessionsRequest struct {
@@ -1479,7 +1479,7 @@ type SearchGameServerSessionsResponse struct {
 
 		// Game server session list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		GameServerSessions []*GameServerSession `json:"GameServerSessions,omitempty" name:"GameServerSessions" list`
+		GameServerSessions []*GameServerSession `json:"GameServerSessions,omitempty" name:"GameServerSessions"`
 
 		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -1580,10 +1580,10 @@ type StartGameServerSessionPlacementRequest struct {
 	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
 
 	// Player game session information
-	DesiredPlayerSessions []*DesiredPlayerSession `json:"DesiredPlayerSessions,omitempty" name:"DesiredPlayerSessions" list`
+	DesiredPlayerSessions []*DesiredPlayerSession `json:"DesiredPlayerSessions,omitempty" name:"DesiredPlayerSessions"`
 
 	// Player game session attributes
-	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties" list`
+	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties"`
 
 	// Data of game server sessions. Up to 4096 ASCII characters are allowed.
 	GameServerSessionData *string `json:"GameServerSessionData,omitempty" name:"GameServerSessionData"`
@@ -1592,7 +1592,7 @@ type StartGameServerSessionPlacementRequest struct {
 	GameServerSessionName *string `json:"GameServerSessionName,omitempty" name:"GameServerSessionName"`
 
 	// Player latency
-	PlayerLatencies []*PlayerLatency `json:"PlayerLatencies,omitempty" name:"PlayerLatencies" list`
+	PlayerLatencies []*PlayerLatency `json:"PlayerLatencies,omitempty" name:"PlayerLatencies"`
 }
 
 func (r *StartGameServerSessionPlacementRequest) ToJsonString() string {
@@ -1798,7 +1798,7 @@ type TimerValue struct {
 
 	// Specify the week days to repeat the scaling action. Multiple values are supported. Valid values: `1` (Monday), `2` (Tuesday), `3` (Wednesday), `4` (Thursday), `5` (Friday), `6` (Saturday), `7` (Sunday). 
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	WeekDays []*int64 `json:"WeekDays,omitempty" name:"WeekDays" list`
+	WeekDays []*int64 `json:"WeekDays,omitempty" name:"WeekDays"`
 }
 
 type UpdateBucketAccelerateOptRequest struct {
@@ -1851,19 +1851,19 @@ type UpdateBucketCORSOptRequest struct {
 	*tchttp.BaseRequest
 
 	// Allowed access source. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
-	AllowedOrigins []*string `json:"AllowedOrigins,omitempty" name:"AllowedOrigins" list`
+	AllowedOrigins []*string `json:"AllowedOrigins,omitempty" name:"AllowedOrigins"`
 
 	// Allowed HTTP method(s). Multiple methods are allowed, including PUT, GET, POST, and HEAD. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
-	AllowedMethods []*string `json:"AllowedMethods,omitempty" name:"AllowedMethods" list`
+	AllowedMethods []*string `json:"AllowedMethods,omitempty" name:"AllowedMethods"`
 
 	// Specifies the custom HTTP request headers that the browser is allowed to include in a CORS request. Wildcard (*) is supported, indicating allowing all headers (recommended). For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
-	AllowedHeaders []*string `json:"AllowedHeaders,omitempty" name:"AllowedHeaders" list`
+	AllowedHeaders []*string `json:"AllowedHeaders,omitempty" name:"AllowedHeaders"`
 
 	// Sets the validity duration for the CORS configuration (in second). For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
 	MaxAgeSeconds *int64 `json:"MaxAgeSeconds,omitempty" name:"MaxAgeSeconds"`
 
 	// CORS response header(s) that can be exposed to the browser, case-insensitive. If this parameter is not specified, the browser can access only simple response headers Cache-Control, Content-Type, Expires, and Last-Modified by default. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
-	ExposeHeaders []*string `json:"ExposeHeaders,omitempty" name:"ExposeHeaders" list`
+	ExposeHeaders []*string `json:"ExposeHeaders,omitempty" name:"ExposeHeaders"`
 }
 
 func (r *UpdateBucketCORSOptRequest) ToJsonString() string {

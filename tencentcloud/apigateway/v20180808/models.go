@@ -69,13 +69,13 @@ type APIDocInfo struct {
 	Environment *string `json:"Environment,omitempty" name:"Environment"`
 
 	// ID of the API for which to generate the API document
-	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
 
 	// Service name
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 
 	// Name of the API for which to generate the API document
-	ApiNames []*string `json:"ApiNames,omitempty" name:"ApiNames" list`
+	ApiNames []*string `json:"ApiNames,omitempty" name:"ApiNames"`
 }
 
 type APIDocs struct {
@@ -84,7 +84,7 @@ type APIDocs struct {
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// Basic information of API document
-	APIDocSet []*APIDoc `json:"APIDocSet,omitempty" name:"APIDocSet" list`
+	APIDocSet []*APIDoc `json:"APIDocSet,omitempty" name:"APIDocSet"`
 }
 
 type ApiEnvironmentStrategy struct {
@@ -102,7 +102,7 @@ type ApiEnvironmentStrategy struct {
 	Method *string `json:"Method,omitempty" name:"Method"`
 
 	// Environment throttling information.
-	EnvironmentStrategySet []*EnvironmentStrategy `json:"EnvironmentStrategySet,omitempty" name:"EnvironmentStrategySet" list`
+	EnvironmentStrategySet []*EnvironmentStrategy `json:"EnvironmentStrategySet,omitempty" name:"EnvironmentStrategySet"`
 }
 
 type ApiEnvironmentStrategyStataus struct {
@@ -113,7 +113,7 @@ type ApiEnvironmentStrategyStataus struct {
 
 	// List of throttling policies bound to API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApiEnvironmentStrategySet []*ApiEnvironmentStrategy `json:"ApiEnvironmentStrategySet,omitempty" name:"ApiEnvironmentStrategySet" list`
+	ApiEnvironmentStrategySet []*ApiEnvironmentStrategy `json:"ApiEnvironmentStrategySet,omitempty" name:"ApiEnvironmentStrategySet"`
 }
 
 type ApiIdStatus struct {
@@ -173,7 +173,7 @@ type ApiIdStatus struct {
 
 	// List of business APIs associated with authorization API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RelationBuniessApiIds []*string `json:"RelationBuniessApiIds,omitempty" name:"RelationBuniessApiIds" list`
+	RelationBuniessApiIds []*string `json:"RelationBuniessApiIds,omitempty" name:"RelationBuniessApiIds"`
 
 	// OAuth configuration information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -264,11 +264,11 @@ type ApiInfo struct {
 
 	// Custom error code configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ResponseErrorCodes []*ErrorCodes `json:"ResponseErrorCodes,omitempty" name:"ResponseErrorCodes" list`
+	ResponseErrorCodes []*ErrorCodes `json:"ResponseErrorCodes,omitempty" name:"ResponseErrorCodes"`
 
 	// Frontend request parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RequestParameters []*ReqParameter `json:"RequestParameters,omitempty" name:"RequestParameters" list`
+	RequestParameters []*ReqParameter `json:"RequestParameters,omitempty" name:"RequestParameters"`
 
 	// API backend service timeout period in seconds.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -284,11 +284,11 @@ type ApiInfo struct {
 
 	// API backend service parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters" list`
+	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters"`
 
 	// Constant parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters" list`
+	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters"`
 
 	// Returned message of API backend Mock, which is required if `ServiceType` is `Mock`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -352,11 +352,11 @@ type ApiInfo struct {
 
 	// List of microservices bound to API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MicroServices []*MicroService `json:"MicroServices,omitempty" name:"MicroServices" list`
+	MicroServices []*MicroService `json:"MicroServices,omitempty" name:"MicroServices"`
 
 	// Microservice details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MicroServicesInfo []*int64 `json:"MicroServicesInfo,omitempty" name:"MicroServicesInfo" list`
+	MicroServicesInfo []*int64 `json:"MicroServicesInfo,omitempty" name:"MicroServicesInfo"`
 
 	// Load balancing configuration of microservice.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -372,11 +372,11 @@ type ApiInfo struct {
 
 	// Information of tags bound to API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Environment information published for API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Environments []*string `json:"Environments,omitempty" name:"Environments" list`
+	Environments []*string `json:"Environments,omitempty" name:"Environments"`
 
 	// Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
@@ -388,7 +388,7 @@ type ApiInfo struct {
 
 	// Header trigger rules. The number of rules cannot exceed 10.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Base64EncodedTriggerRules []*Base64EncodedTriggerRule `json:"Base64EncodedTriggerRules,omitempty" name:"Base64EncodedTriggerRules" list`
+	Base64EncodedTriggerRules []*Base64EncodedTriggerRule `json:"Base64EncodedTriggerRules,omitempty" name:"Base64EncodedTriggerRules"`
 }
 
 type ApiKey struct {
@@ -423,7 +423,7 @@ type ApiKeysStatus struct {
 
 	// API key list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApiKeySet []*ApiKey `json:"ApiKeySet,omitempty" name:"ApiKeySet" list`
+	ApiKeySet []*ApiKey `json:"ApiKeySet,omitempty" name:"ApiKeySet"`
 }
 
 type ApiRequestConfig struct {
@@ -506,7 +506,7 @@ type ApiUsagePlanSet struct {
 
 	// List of usage plans bound to API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApiUsagePlanList []*ApiUsagePlan `json:"ApiUsagePlanList,omitempty" name:"ApiUsagePlanList" list`
+	ApiUsagePlanList []*ApiUsagePlan `json:"ApiUsagePlanList,omitempty" name:"ApiUsagePlanList"`
 }
 
 type ApisStatus struct {
@@ -515,7 +515,7 @@ type ApisStatus struct {
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// API list.
-	ApiIdStatusSet []*DesApisStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet" list`
+	ApiIdStatusSet []*DesApisStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet"`
 }
 
 type Base64EncodedTriggerRule struct {
@@ -531,14 +531,14 @@ type Base64EncodedTriggerRule struct {
 	//     "application/vnd.ms-project",
 	//     "application/vnd.rn-rn_music_package"
 	// ] are valid.
-	Value []*string `json:"Value,omitempty" name:"Value" list`
+	Value []*string `json:"Value,omitempty" name:"Value"`
 }
 
 type BindEnvironmentRequest struct {
 	*tchttp.BaseRequest
 
 	// List of unique IDs of the usage plans to be bound.
-	UsagePlanIds []*string `json:"UsagePlanIds,omitempty" name:"UsagePlanIds" list`
+	UsagePlanIds []*string `json:"UsagePlanIds,omitempty" name:"UsagePlanIds"`
 
 	// Binding type. Valid values: API, SERVICE. Default value: SERVICE.
 	BindType *string `json:"BindType,omitempty" name:"BindType"`
@@ -550,7 +550,7 @@ type BindEnvironmentRequest struct {
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Unique API ID array, which is required if `bindType` is `API`.
-	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
 }
 
 func (r *BindEnvironmentRequest) ToJsonString() string {
@@ -613,7 +613,7 @@ type BindIPStrategyRequest struct {
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
 	// List of APIs to be bound to IP policy.
-	BindApiIds []*string `json:"BindApiIds,omitempty" name:"BindApiIds" list`
+	BindApiIds []*string `json:"BindApiIds,omitempty" name:"BindApiIds"`
 }
 
 func (r *BindIPStrategyRequest) ToJsonString() string {
@@ -669,7 +669,7 @@ type BindSecretIdsRequest struct {
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
 	// Array of IDs of the keys to be bound.
-	AccessKeyIds []*string `json:"AccessKeyIds,omitempty" name:"AccessKeyIds" list`
+	AccessKeyIds []*string `json:"AccessKeyIds,omitempty" name:"AccessKeyIds"`
 }
 
 func (r *BindSecretIdsRequest) ToJsonString() string {
@@ -741,7 +741,7 @@ type BindSubDomainRequest struct {
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
 	// Custom domain name path mapping. It can contain up to 3 `Environment` values which can be set to only `test`, `prepub`, and `release`, respectively.
-	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet" list`
+	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet"`
 
 	// Whether to force HTTP requests to redirect to HTTPS. Default value: `false`. When this parameter is `true`, API Gateway will redirect all requests using the custom domain name over the HTTP protocol to the HTTPS protocol for forwarding.
 	IsForcedHttps *bool `json:"IsForcedHttps,omitempty" name:"IsForcedHttps"`
@@ -875,7 +875,7 @@ type CreateAPIDocRequest struct {
 	Environment *string `json:"Environment,omitempty" name:"Environment"`
 
 	// List of APIs for which to generate documents
-	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
 }
 
 func (r *CreateAPIDocRequest) ToJsonString() string {
@@ -1019,10 +1019,10 @@ type CreateApiRequest struct {
 	EnableCORS *bool `json:"EnableCORS,omitempty" name:"EnableCORS"`
 
 	// Constant parameter.
-	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters" list`
+	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters"`
 
 	// Frontend request parameter.
-	RequestParameters []*RequestParameter `json:"RequestParameters,omitempty" name:"RequestParameters" list`
+	RequestParameters []*RequestParameter `json:"RequestParameters,omitempty" name:"RequestParameters"`
 
 	// This field is valid if `AuthType` is `OAUTH`. NORMAL: business API; OAUTH: authorization API.
 	ApiBusinessType *string `json:"ApiBusinessType,omitempty" name:"ApiBusinessType"`
@@ -1031,7 +1031,7 @@ type CreateApiRequest struct {
 	ServiceMockReturnMessage *string `json:"ServiceMockReturnMessage,omitempty" name:"ServiceMockReturnMessage"`
 
 	// List of microservices bound to API.
-	MicroServices []*MicroServiceReq `json:"MicroServices,omitempty" name:"MicroServices" list`
+	MicroServices []*MicroServiceReq `json:"MicroServices,omitempty" name:"MicroServices"`
 
 	// Load balancing configuration of microservice.
 	ServiceTsfLoadBalanceConf *TsfLoadBalanceConfResp `json:"ServiceTsfLoadBalanceConf,omitempty" name:"ServiceTsfLoadBalanceConf"`
@@ -1040,7 +1040,7 @@ type CreateApiRequest struct {
 	ServiceTsfHealthCheckConf *HealthCheckConf `json:"ServiceTsfHealthCheckConf,omitempty" name:"ServiceTsfHealthCheckConf"`
 
 	// `target` type backend resource information (in beta test).
-	TargetServices []*TargetServicesReq `json:"TargetServices,omitempty" name:"TargetServices" list`
+	TargetServices []*TargetServicesReq `json:"TargetServices,omitempty" name:"TargetServices"`
 
 	// `target` type load balancing configuration (in beta test).
 	TargetServicesLoadBalanceConf *int64 `json:"TargetServicesLoadBalanceConf,omitempty" name:"TargetServicesLoadBalanceConf"`
@@ -1109,13 +1109,13 @@ type CreateApiRequest struct {
 	AuthRelationApiId *string `json:"AuthRelationApiId,omitempty" name:"AuthRelationApiId"`
 
 	// API backend service parameter.
-	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters" list`
+	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters"`
 
 	// OAuth configuration, which takes effect if `AuthType` is `OAUTH`.
 	OauthConfig *OauthConfig `json:"OauthConfig,omitempty" name:"OauthConfig"`
 
 	// Custom error code configuration.
-	ResponseErrorCodes []*ResponseErrorCodeReq `json:"ResponseErrorCodes,omitempty" name:"ResponseErrorCodes" list`
+	ResponseErrorCodes []*ResponseErrorCodeReq `json:"ResponseErrorCodes,omitempty" name:"ResponseErrorCodes"`
 
 	// TSF Serverless namespace ID (in beta test).
 	TargetNamespaceId *string `json:"TargetNamespaceId,omitempty" name:"TargetNamespaceId"`
@@ -1312,7 +1312,7 @@ type CreateServiceRequest struct {
 	ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
 
 	// Network type list, which is used to specify the supported network types. INNER: private network access; OUTER: public network access. Default value: OUTER.
-	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes" list`
+	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
 
 	// IP version number. Valid values: IPv4, IPv6. Default value: IPv4.
 	IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
@@ -1324,7 +1324,7 @@ type CreateServiceRequest struct {
 	AppIdType *string `json:"AppIdType,omitempty" name:"AppIdType"`
 
 	// Tag information.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Dedicated instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -1381,7 +1381,7 @@ type CreateServiceResponse struct {
 		CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 		// Network type list. INNER: private network access; OUTER: public network access.
-		NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes" list`
+		NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
 
 		// IP version number.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1953,11 +1953,11 @@ type DesApisStatus struct {
 
 	// List of business APIs associated with authorization API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RelationBuniessApiIds []*string `json:"RelationBuniessApiIds,omitempty" name:"RelationBuniessApiIds" list`
+	RelationBuniessApiIds []*string `json:"RelationBuniessApiIds,omitempty" name:"RelationBuniessApiIds"`
 
 	// Information of tags associated with API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*string `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 	// API path, such as `/path`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -2077,7 +2077,7 @@ type DescribeApiEnvironmentStrategyRequest struct {
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Environment list.
-	EnvironmentNames []*string `json:"EnvironmentNames,omitempty" name:"EnvironmentNames" list`
+	EnvironmentNames []*string `json:"EnvironmentNames,omitempty" name:"EnvironmentNames"`
 
 	// Unique API ID.
 	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
@@ -2196,7 +2196,7 @@ type DescribeApiKeysStatusRequest struct {
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Filter. Valid values: AccessKeyId, AccessKeySecret, SecretName, NotUsagePlanId, Status, KeyWord (match with `name` or `path`).
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeApiKeysStatusRequest) ToJsonString() string {
@@ -2368,7 +2368,7 @@ type DescribeApisStatusRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// API filter. Valid values: ApiId, ApiName, ApiPath, ApiType, AuthRelationApiId, AuthType, ApiBuniessType, NotUsagePlanId, Environment, Tags (whose values are the list of `$tag_key:tag_value`), TagKeys (whose values are the list of tag keys).
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeApisStatusRequest) ToJsonString() string {
@@ -2435,7 +2435,7 @@ type DescribeIPStrategyApisStatusRequest struct {
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Filter. Valid values: ApiPath, ApiName, KeyWord (fuzzy search by `Path` and `Name`).
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeIPStrategyApisStatusRequest) ToJsonString() string {
@@ -2505,7 +2505,7 @@ type DescribeIPStrategyRequest struct {
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Filter, which is a reserved field. Filtering is not supported currently.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeIPStrategyRequest) ToJsonString() string {
@@ -2563,7 +2563,7 @@ type DescribeIPStrategysStatusRequest struct {
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Filter. Valid values: StrategyName.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeIPStrategysStatusRequest) ToJsonString() string {
@@ -2623,7 +2623,7 @@ type DescribeLogSearchRequest struct {
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Reserved field
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of logs to be returned at a time. Maximum value: 100
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -2648,7 +2648,7 @@ type DescribeLogSearchRequest struct {
 	// 
 	// Note:
 	// ":" indicates included, and "!=" indicates not equal to. For the meanings of fields, please see the `LogSet` description of the output parameter
-	LogQuerys []*LogQuery `json:"LogQuerys,omitempty" name:"LogQuerys" list`
+	LogQuerys []*LogQuery `json:"LogQuerys,omitempty" name:"LogQuerys"`
 }
 
 func (r *DescribeLogSearchRequest) ToJsonString() string {
@@ -2713,7 +2713,7 @@ type DescribeLogSearchResponse struct {
 	// err_msg: error message.
 	// tcp_rtt: client TCP connection information. RTT (Round Trip Time) consists of three parts: link propagation delay, end system processing delay, and queuing delay in router cache.
 	// req_id: request ID.
-		LogSet []*string `json:"LogSet,omitempty" name:"LogSet" list`
+		LogSet []*string `json:"LogSet,omitempty" name:"LogSet"`
 
 		// Number of logs returned for one search (`TotalCount <= Limit`)
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -3004,7 +3004,7 @@ type DescribeServiceResponse struct {
 		ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 		// Service environment list.
-		AvailableEnvironments []*string `json:"AvailableEnvironments,omitempty" name:"AvailableEnvironments" list`
+		AvailableEnvironments []*string `json:"AvailableEnvironments,omitempty" name:"AvailableEnvironments"`
 
 		// Service name.
 		ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
@@ -3026,7 +3026,7 @@ type DescribeServiceResponse struct {
 		ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
 
 		// Network type list. INNER: private network access; OUTER: public network access.
-		NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes" list`
+		NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
 
 		// Subdomain name for private network access.
 		InternalSubDomain *string `json:"InternalSubDomain,omitempty" name:"InternalSubDomain"`
@@ -3045,14 +3045,14 @@ type DescribeServiceResponse struct {
 
 		// API list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		ApiIdStatusSet []*ApiIdStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet" list`
+		ApiIdStatusSet []*ApiIdStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet"`
 
 		// Total number of usage plans.
 		UsagePlanTotalCount *int64 `json:"UsagePlanTotalCount,omitempty" name:"UsagePlanTotalCount"`
 
 		// Usage plan array.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		UsagePlanList []*UsagePlan `json:"UsagePlanList,omitempty" name:"UsagePlanList" list`
+		UsagePlanList []*UsagePlan `json:"UsagePlanList,omitempty" name:"UsagePlanList"`
 
 		// IP version.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -3068,7 +3068,7 @@ type DescribeServiceResponse struct {
 
 		// Tags bound to a service.
 	// Note: this field may return null, indicating that no valid values found.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 		// Dedicated instance ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -3276,7 +3276,7 @@ type DescribeServicesStatusRequest struct {
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Filter. Valid values: ServiceId, ServiceName, NotUsagePlanId, Environment, IpVersion, InstanceId
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeServicesStatusRequest) ToJsonString() string {
@@ -3504,7 +3504,7 @@ type DescribeUsagePlansStatusRequest struct {
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Usage plan filter. Valid values: UsagePlanId, UsagePlanName, NotServiceId, NotApiId, Environment.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeUsagePlansStatusRequest) ToJsonString() string {
@@ -3638,7 +3638,7 @@ type DomainSets struct {
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// Custom service domain name list.
-	DomainSet []*DomainSetList `json:"DomainSet,omitempty" name:"DomainSet" list`
+	DomainSet []*DomainSetList `json:"DomainSet,omitempty" name:"DomainSet"`
 }
 
 type EnableApiKeyRequest struct {
@@ -3748,7 +3748,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter value of field.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type GenerateApiDocumentRequest struct {
@@ -3859,7 +3859,7 @@ type IPStrategy struct {
 
 	// Bound API details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BindApis []*DesApisStatus `json:"BindApis,omitempty" name:"BindApis" list`
+	BindApis []*DesApisStatus `json:"BindApis,omitempty" name:"BindApis"`
 }
 
 type IPStrategyApi struct {
@@ -3894,7 +3894,7 @@ type IPStrategyApiStatus struct {
 
 	// Details of APIs bound to environment.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApiIdStatusSet []*IPStrategyApi `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet" list`
+	ApiIdStatusSet []*IPStrategyApi `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet"`
 }
 
 type IPStrategysStatus struct {
@@ -3905,7 +3905,7 @@ type IPStrategysStatus struct {
 
 	// Policy list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	StrategySet []*IPStrategy `json:"StrategySet,omitempty" name:"StrategySet" list`
+	StrategySet []*IPStrategy `json:"StrategySet,omitempty" name:"StrategySet"`
 }
 
 type LogQuery struct {
@@ -3960,7 +3960,7 @@ type ModifyAPIDocRequest struct {
 	Environment *string `json:"Environment,omitempty" name:"Environment"`
 
 	// List of APIs for which to generate documents
-	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
 }
 
 func (r *ModifyAPIDocRequest) ToJsonString() string {
@@ -4022,7 +4022,7 @@ type ModifyApiEnvironmentStrategyRequest struct {
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
 	// API list.
-	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
 }
 
 func (r *ModifyApiEnvironmentStrategyRequest) ToJsonString() string {
@@ -4173,10 +4173,10 @@ type ModifyApiRequest struct {
 	EnableCORS *bool `json:"EnableCORS,omitempty" name:"EnableCORS"`
 
 	// Constant parameter.
-	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters" list`
+	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters"`
 
 	// Frontend request parameter.
-	RequestParameters []*ReqParameter `json:"RequestParameters,omitempty" name:"RequestParameters" list`
+	RequestParameters []*ReqParameter `json:"RequestParameters,omitempty" name:"RequestParameters"`
 
 	// This field is valid if `AuthType` is `OAUTH`. NORMAL: business API; OAUTH: authorization API.
 	ApiBusinessType *string `json:"ApiBusinessType,omitempty" name:"ApiBusinessType"`
@@ -4185,7 +4185,7 @@ type ModifyApiRequest struct {
 	ServiceMockReturnMessage *string `json:"ServiceMockReturnMessage,omitempty" name:"ServiceMockReturnMessage"`
 
 	// List of microservices bound to API.
-	MicroServices []*MicroServiceReq `json:"MicroServices,omitempty" name:"MicroServices" list`
+	MicroServices []*MicroServiceReq `json:"MicroServices,omitempty" name:"MicroServices"`
 
 	// Load balancing configuration of microservice.
 	ServiceTsfLoadBalanceConf *TsfLoadBalanceConfResp `json:"ServiceTsfLoadBalanceConf,omitempty" name:"ServiceTsfLoadBalanceConf"`
@@ -4263,13 +4263,13 @@ type ModifyApiRequest struct {
 	AuthRelationApiId *string `json:"AuthRelationApiId,omitempty" name:"AuthRelationApiId"`
 
 	// API backend service parameter.
-	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters" list`
+	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters"`
 
 	// OAuth configuration, which takes effect if `AuthType` is `OAUTH`.
 	OauthConfig *OauthConfig `json:"OauthConfig,omitempty" name:"OauthConfig"`
 
 	// Custom error code configuration.
-	ResponseErrorCodes []*ResponseErrorCodeReq `json:"ResponseErrorCodes,omitempty" name:"ResponseErrorCodes" list`
+	ResponseErrorCodes []*ResponseErrorCodeReq `json:"ResponseErrorCodes,omitempty" name:"ResponseErrorCodes"`
 
 	// Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
 	IsBase64Encoded *bool `json:"IsBase64Encoded,omitempty" name:"IsBase64Encoded"`
@@ -4278,7 +4278,7 @@ type ModifyApiRequest struct {
 	IsBase64Trigger *bool `json:"IsBase64Trigger,omitempty" name:"IsBase64Trigger"`
 
 	// Header trigger rules. The number of rules cannot exceed 10.
-	Base64EncodedTriggerRules []*Base64EncodedTriggerRule `json:"Base64EncodedTriggerRules,omitempty" name:"Base64EncodedTriggerRules" list`
+	Base64EncodedTriggerRules []*Base64EncodedTriggerRule `json:"Base64EncodedTriggerRules,omitempty" name:"Base64EncodedTriggerRules"`
 }
 
 func (r *ModifyApiRequest) ToJsonString() string {
@@ -4435,7 +4435,7 @@ type ModifyServiceEnvironmentStrategyRequest struct {
 	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
 
 	// Environment list.
-	EnvironmentNames []*string `json:"EnvironmentNames,omitempty" name:"EnvironmentNames" list`
+	EnvironmentNames []*string `json:"EnvironmentNames,omitempty" name:"EnvironmentNames"`
 }
 
 func (r *ModifyServiceEnvironmentStrategyRequest) ToJsonString() string {
@@ -4499,7 +4499,7 @@ type ModifyServiceRequest struct {
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Network type list, which is used to specify the supported network types. INNER: private network access; OUTER: public network access. Default value: OUTER.
-	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes" list`
+	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
 }
 
 func (r *ModifyServiceRequest) ToJsonString() string {
@@ -4564,7 +4564,7 @@ type ModifySubDomainRequest struct {
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Path mapping list after modification.
-	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet" list`
+	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet"`
 
 	// Network type. Valid values: INNER, OUTER.
 	NetType *string `json:"NetType,omitempty" name:"NetType"`
@@ -4733,7 +4733,7 @@ type ReleaseServiceRequest struct {
 	ReleaseDesc *string `json:"ReleaseDesc,omitempty" name:"ReleaseDesc"`
 
 	// `apiId` list, which is reserved. Full API release is used by default.
-	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
 }
 
 func (r *ReleaseServiceRequest) ToJsonString() string {
@@ -4919,7 +4919,7 @@ type Service struct {
 
 	// Network types supported by service.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes" list`
+	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
 
 	// Dedicated cluster name.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -4935,7 +4935,7 @@ type Service struct {
 
 	// List of published environments, such as test, prepub, and release.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AvailableEnvironments []*string `json:"AvailableEnvironments,omitempty" name:"AvailableEnvironments" list`
+	AvailableEnvironments []*string `json:"AvailableEnvironments,omitempty" name:"AvailableEnvironments"`
 
 	// Custom service name.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -4963,7 +4963,7 @@ type Service struct {
 
 	// Tags bound to a service.
 	// Note: this field may return null, indicating that no valid values found.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Dedicated instance
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -5000,7 +5000,7 @@ type ServiceEnvironmentSet struct {
 
 	// List of environments bound to service.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	EnvironmentList []*Environment `json:"EnvironmentList,omitempty" name:"EnvironmentList" list`
+	EnvironmentList []*Environment `json:"EnvironmentList,omitempty" name:"EnvironmentList"`
 }
 
 type ServiceEnvironmentStrategy struct {
@@ -5034,7 +5034,7 @@ type ServiceEnvironmentStrategyStatus struct {
 
 	// Throttling policy list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	EnvironmentList []*ServiceEnvironmentStrategy `json:"EnvironmentList,omitempty" name:"EnvironmentList" list`
+	EnvironmentList []*ServiceEnvironmentStrategy `json:"EnvironmentList,omitempty" name:"EnvironmentList"`
 }
 
 type ServiceParameter struct {
@@ -5076,7 +5076,7 @@ type ServiceReleaseHistory struct {
 
 	// Historical version list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	VersionList []*ServiceReleaseHistoryInfo `json:"VersionList,omitempty" name:"VersionList" list`
+	VersionList []*ServiceReleaseHistoryInfo `json:"VersionList,omitempty" name:"VersionList"`
 }
 
 type ServiceReleaseHistoryInfo struct {
@@ -5102,7 +5102,7 @@ type ServiceReleaseVersion struct {
 
 	// Release version list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	VersionList []*ServiceReleaseHistoryInfo `json:"VersionList,omitempty" name:"VersionList" list`
+	VersionList []*ServiceReleaseHistoryInfo `json:"VersionList,omitempty" name:"VersionList"`
 }
 
 type ServiceSubDomainMappings struct {
@@ -5111,7 +5111,7 @@ type ServiceSubDomainMappings struct {
 	IsDefaultMapping *bool `json:"IsDefaultMapping,omitempty" name:"IsDefaultMapping"`
 
 	// Custom path mapping list.
-	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet" list`
+	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet"`
 }
 
 type ServiceUsagePlanSet struct {
@@ -5122,7 +5122,7 @@ type ServiceUsagePlanSet struct {
 
 	// List of usage plans bound to service.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ServiceUsagePlanList []*ApiUsagePlan `json:"ServiceUsagePlanList,omitempty" name:"ServiceUsagePlanList" list`
+	ServiceUsagePlanList []*ApiUsagePlan `json:"ServiceUsagePlanList,omitempty" name:"ServiceUsagePlanList"`
 }
 
 type ServicesStatus struct {
@@ -5133,7 +5133,7 @@ type ServicesStatus struct {
 
 	// Service list details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ServiceSet []*Service `json:"ServiceSet,omitempty" name:"ServiceSet" list`
+	ServiceSet []*Service `json:"ServiceSet,omitempty" name:"ServiceSet"`
 }
 
 type Tag struct {
@@ -5189,7 +5189,7 @@ type UnBindEnvironmentRequest struct {
 	BindType *string `json:"BindType,omitempty" name:"BindType"`
 
 	// List of unique IDs of the usage plans to be bound.
-	UsagePlanIds []*string `json:"UsagePlanIds,omitempty" name:"UsagePlanIds" list`
+	UsagePlanIds []*string `json:"UsagePlanIds,omitempty" name:"UsagePlanIds"`
 
 	// Service environment to be unbound.
 	Environment *string `json:"Environment,omitempty" name:"Environment"`
@@ -5198,7 +5198,7 @@ type UnBindEnvironmentRequest struct {
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
 	// Unique API ID array, which is required if `BindType` is `API`.
-	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
 }
 
 func (r *UnBindEnvironmentRequest) ToJsonString() string {
@@ -5261,7 +5261,7 @@ type UnBindIPStrategyRequest struct {
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
 	// List of APIs to be unbound.
-	UnBindApiIds []*string `json:"UnBindApiIds,omitempty" name:"UnBindApiIds" list`
+	UnBindApiIds []*string `json:"UnBindApiIds,omitempty" name:"UnBindApiIds"`
 }
 
 func (r *UnBindIPStrategyRequest) ToJsonString() string {
@@ -5317,7 +5317,7 @@ type UnBindSecretIdsRequest struct {
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
 	// Array of IDs of the keys to be unbound.
-	AccessKeyIds []*string `json:"AccessKeyIds,omitempty" name:"AccessKeyIds" list`
+	AccessKeyIds []*string `json:"AccessKeyIds,omitempty" name:"AccessKeyIds"`
 }
 
 func (r *UnBindSecretIdsRequest) ToJsonString() string {
@@ -5427,7 +5427,7 @@ type UnReleaseServiceRequest struct {
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
 	// List of APIs to be deactivated, which is a reserved field.
-	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds" list`
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
 }
 
 func (r *UnReleaseServiceRequest) ToJsonString() string {
@@ -5649,7 +5649,7 @@ type UsagePlanBindSecretStatus struct {
 
 	// List of key details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccessKeyList []*UsagePlanBindSecret `json:"AccessKeyList,omitempty" name:"AccessKeyList" list`
+	AccessKeyList []*UsagePlanBindSecret `json:"AccessKeyList,omitempty" name:"AccessKeyList"`
 }
 
 type UsagePlanEnvironment struct {
@@ -5711,7 +5711,7 @@ type UsagePlanEnvironmentStatus struct {
 
 	// Environment status of services bound to usage plan.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	EnvironmentList []*UsagePlanEnvironment `json:"EnvironmentList,omitempty" name:"EnvironmentList" list`
+	EnvironmentList []*UsagePlanEnvironment `json:"EnvironmentList,omitempty" name:"EnvironmentList"`
 }
 
 type UsagePlanInfo struct {
@@ -5758,7 +5758,7 @@ type UsagePlanInfo struct {
 
 	// Details of bound keys.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BindSecretIds []*string `json:"BindSecretIds,omitempty" name:"BindSecretIds" list`
+	BindSecretIds []*string `json:"BindSecretIds,omitempty" name:"BindSecretIds"`
 
 	// Number of bound environments.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -5766,7 +5766,7 @@ type UsagePlanInfo struct {
 
 	// Details of bound environments.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BindEnvironments []*UsagePlanBindEnvironment `json:"BindEnvironments,omitempty" name:"BindEnvironments" list`
+	BindEnvironments []*UsagePlanBindEnvironment `json:"BindEnvironments,omitempty" name:"BindEnvironments"`
 }
 
 type UsagePlanStatusInfo struct {
@@ -5808,5 +5808,5 @@ type UsagePlansStatus struct {
 
 	// Usage plan list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UsagePlanStatusSet []*UsagePlanStatusInfo `json:"UsagePlanStatusSet,omitempty" name:"UsagePlanStatusSet" list`
+	UsagePlanStatusSet []*UsagePlanStatusInfo `json:"UsagePlanStatusSet,omitempty" name:"UsagePlanStatusSet"`
 }

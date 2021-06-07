@@ -262,7 +262,7 @@ type Certificates struct {
 
 	// Domain names associated with the certificate (including the primary domain name)
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName" list`
+	SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName"`
 
 	// Certificate type name
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -298,7 +298,7 @@ type Certificates struct {
 
 	// Associated Tencent Cloud services. Currently, this parameter is unavailable.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BoundResource []*string `json:"BoundResource,omitempty" name:"BoundResource" list`
+	BoundResource []*string `json:"BoundResource,omitempty" name:"BoundResource"`
 
 	// Whether the certificate can be deployed
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -306,7 +306,7 @@ type Certificates struct {
 
 	// List of tags
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Tags []*Tags `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tags `json:"Tags,omitempty" name:"Tags"`
 }
 
 type CommitCertificateInformationRequest struct {
@@ -542,7 +542,7 @@ type DescribeCertificateDetailResponse struct {
 
 		// Domain names associated with the certificate (including the primary domain name)
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName" list`
+		SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName"`
 
 		// Whether the customer is a VIP customer
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -574,7 +574,7 @@ type DescribeCertificateDetailResponse struct {
 
 		// List of associated tags
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Tags []*Tags `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*Tags `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -642,7 +642,7 @@ type DescribeCertificateOperateLogsResponse struct {
 
 		// Certificate operation log list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		OperateLogs []*OperationLog `json:"OperateLogs,omitempty" name:"OperateLogs" list`
+		OperateLogs []*OperationLog `json:"OperateLogs,omitempty" name:"OperateLogs"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -784,7 +784,7 @@ type DescribeCertificateResponse struct {
 
 		// Domain names associated with the certificate (including the primary domain name)
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName" list`
+		SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName"`
 
 		// Whether the customer is a VIP customer
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -816,7 +816,7 @@ type DescribeCertificateResponse struct {
 
 		// List of tags
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Tags []*Tags `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*Tags `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -856,7 +856,7 @@ type DescribeCertificatesRequest struct {
 	ExpirationSort *string `json:"ExpirationSort,omitempty" name:"ExpirationSort"`
 
 	// Certificate status
-	CertificateStatus []*uint64 `json:"CertificateStatus,omitempty" name:"CertificateStatus" list`
+	CertificateStatus []*uint64 `json:"CertificateStatus,omitempty" name:"CertificateStatus"`
 
 	// Whether the certificate can be deployed. `1`: yes; `0`: no
 	Deployable *uint64 `json:"Deployable,omitempty" name:"Deployable"`
@@ -898,7 +898,7 @@ type DescribeCertificatesResponse struct {
 
 		// List
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Certificates []*Certificates `json:"Certificates,omitempty" name:"Certificates" list`
+		Certificates []*Certificates `json:"Certificates,omitempty" name:"Certificates"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -994,7 +994,7 @@ type DvAuthDetail struct {
 
 	// DV authentication information
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DvAuths []*DvAuths `json:"DvAuths,omitempty" name:"DvAuths" list`
+	DvAuths []*DvAuths `json:"DvAuths,omitempty" name:"DvAuths"`
 }
 
 type DvAuths struct {
@@ -1081,7 +1081,7 @@ type ModifyCertificateProjectRequest struct {
 	*tchttp.BaseRequest
 
 	// ID list of certificates whose projects need to be modified. A maximum of 100 certificate IDs are supported.
-	CertificateIdList []*string `json:"CertificateIdList,omitempty" name:"CertificateIdList" list`
+	CertificateIdList []*string `json:"CertificateIdList,omitempty" name:"CertificateIdList"`
 
 	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
@@ -1113,11 +1113,11 @@ type ModifyCertificateProjectResponse struct {
 
 		// List of certificates whose projects were modified successfully
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		SuccessCertificates []*string `json:"SuccessCertificates,omitempty" name:"SuccessCertificates" list`
+		SuccessCertificates []*string `json:"SuccessCertificates,omitempty" name:"SuccessCertificates"`
 
 		// List of certificates whose projects failed to be modified
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		FailCertificates []*string `json:"FailCertificates,omitempty" name:"FailCertificates" list`
+		FailCertificates []*string `json:"FailCertificates,omitempty" name:"FailCertificates"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1256,7 +1256,7 @@ type SubmitCertificateInformationRequest struct {
 	CertificateDomain *string `json:"CertificateDomain,omitempty" name:"CertificateDomain"`
 
 	// Uploaded domain name array (can be uploaded for a multi-domain certificate)
-	DomainList []*string `json:"DomainList,omitempty" name:"DomainList" list`
+	DomainList []*string `json:"DomainList,omitempty" name:"DomainList"`
 
 	// Password of the private key
 	KeyPassword *string `json:"KeyPassword,omitempty" name:"KeyPassword"`
@@ -1405,7 +1405,7 @@ type SubmittedData struct {
 
 	// DNS information
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DomainList []*string `json:"DomainList,omitempty" name:"DomainList" list`
+	DomainList []*string `json:"DomainList,omitempty" name:"DomainList"`
 
 	// Password of the private key
 	// Note: this field may return null, indicating that no valid values can be obtained.

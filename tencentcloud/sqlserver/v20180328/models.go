@@ -30,7 +30,7 @@ type AccountCreateInfo struct {
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// List of database permissions
-	DBPrivileges []*DBPrivilege `json:"DBPrivileges,omitempty" name:"DBPrivileges" list`
+	DBPrivileges []*DBPrivilege `json:"DBPrivileges,omitempty" name:"DBPrivileges"`
 
 	// Account remarks
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
@@ -63,7 +63,7 @@ type AccountDetail struct {
 	InternalStatus *string `json:"InternalStatus,omitempty" name:"InternalStatus"`
 
 	// Information of read and write permissions of this account on relevant databases
-	Dbs []*DBPrivilege `json:"Dbs,omitempty" name:"Dbs" list`
+	Dbs []*DBPrivilege `json:"Dbs,omitempty" name:"Dbs"`
 
 	// Whether it is an admin account
 	IsAdmin *bool `json:"IsAdmin,omitempty" name:"IsAdmin"`
@@ -93,7 +93,7 @@ type AccountPrivilegeModifyInfo struct {
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 
 	// Account permission change information
-	DBPrivileges []*DBPrivilegeModifyInfo `json:"DBPrivileges,omitempty" name:"DBPrivileges" list`
+	DBPrivileges []*DBPrivilegeModifyInfo `json:"DBPrivileges,omitempty" name:"DBPrivileges"`
 }
 
 type AccountRemark struct {
@@ -132,7 +132,7 @@ type Backup struct {
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
 	// List of databases for multi-database backup
-	DBs []*string `json:"DBs,omitempty" name:"DBs" list`
+	DBs []*string `json:"DBs,omitempty" name:"DBs"`
 
 	// Backup policy (0: instance backup, 1: multi-database backup)
 	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
@@ -151,7 +151,7 @@ type CloneDBRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Clone and rename the databases specified in `ReNameRestoreDatabase`. Please note that the clones must be renamed.
-	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore" list`
+	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore"`
 }
 
 func (r *CloneDBRequest) ToJsonString() string {
@@ -213,7 +213,7 @@ type CreateAccountRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Database instance account information
-	Accounts []*AccountCreateInfo `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*AccountCreateInfo `json:"Accounts,omitempty" name:"Accounts"`
 }
 
 func (r *CreateAccountRequest) ToJsonString() string {
@@ -275,7 +275,7 @@ type CreateBackupMigrationRequest struct {
 	MigrationName *string `json:"MigrationName,omitempty" name:"MigrationName"`
 
 	// If the UploadType is COS_URL, fill in the URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
-	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
+	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles"`
 }
 
 func (r *CreateBackupMigrationRequest) ToJsonString() string {
@@ -331,7 +331,7 @@ type CreateBackupRequest struct {
 	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
 
 	// List of names of databases to be backed up (required only for multi-database backup)
-	DBNames []*string `json:"DBNames,omitempty" name:"DBNames" list`
+	DBNames []*string `json:"DBNames,omitempty" name:"DBNames"`
 
 	// Instance ID in the format of mssql-i1z41iwd
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -419,7 +419,7 @@ type CreateDBInstancesRequest struct {
 	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
 	// Array of voucher IDs (currently, only one voucher can be used per order)
-	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
 
 	// SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). The version purchasable varies by region and can be queried by calling the `DescribeProductConfig` API. If this parameter is left empty, 2008R2 will be used by default.
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
@@ -428,10 +428,10 @@ type CreateDBInstancesRequest struct {
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
 	// Security group list, which contains security group IDs in the format of sg-xxx.
-	SecurityGroupList []*string `json:"SecurityGroupList,omitempty" name:"SecurityGroupList" list`
+	SecurityGroupList []*string `json:"SecurityGroupList,omitempty" name:"SecurityGroupList"`
 
 	// Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: 1 (Monday), 2 (Tuesday), 3 (Wednesday), 4 (Thursday), 5 (Friday), 6 (Saturday), 7 (Sunday).
-	Weekly []*int64 `json:"Weekly,omitempty" name:"Weekly" list`
+	Weekly []*int64 `json:"Weekly,omitempty" name:"Weekly"`
 
 	// Configuration of the maintenance window, which specifies the start time of daily maintenance.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -446,7 +446,7 @@ type CreateDBInstancesRequest struct {
 	MultiZones *bool `json:"MultiZones,omitempty" name:"MultiZones"`
 
 	// Tags associated with the instances to be created
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags" list`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
 }
 
 func (r *CreateDBInstancesRequest) ToJsonString() string {
@@ -495,7 +495,7 @@ type CreateDBInstancesResponse struct {
 		DealName *string `json:"DealName,omitempty" name:"DealName"`
 
 		// Order name array
-		DealNames []*string `json:"DealNames,omitempty" name:"DealNames" list`
+		DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -520,7 +520,7 @@ type CreateDBRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Database creation information
-	DBs []*DBCreateInfo `json:"DBs,omitempty" name:"DBs" list`
+	DBs []*DBCreateInfo `json:"DBs,omitempty" name:"DBs"`
 }
 
 func (r *CreateDBRequest) ToJsonString() string {
@@ -576,7 +576,7 @@ type CreateIncrementalMigrationRequest struct {
 	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
 
 	// Incremental backup file. If the UploadType of a full backup file is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
-	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
+	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles"`
 
 	// Whether restoration is required. No: not required. Yes: required. Not required by default.
 	IsRecovery *string `json:"IsRecovery,omitempty" name:"IsRecovery"`
@@ -646,10 +646,10 @@ type CreateMigrationRequest struct {
 	Target *MigrateTarget `json:"Target,omitempty" name:"Target"`
 
 	// Database objects to be migrated. This parameter is not used for offline migration (SourceType=4 or SourceType=5)
-	MigrateDBSet []*MigrateDB `json:"MigrateDBSet,omitempty" name:"MigrateDBSet" list`
+	MigrateDBSet []*MigrateDB `json:"MigrateDBSet,omitempty" name:"MigrateDBSet"`
 
 	// Restore and rename the databases listed in `ReNameRestoreDatabase`. If this parameter is left empty, all restored databases will be renamed in the default format. This parameter takes effect only when `SourceType=5`.
-	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore" list`
+	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore"`
 }
 
 func (r *CreateMigrationRequest) ToJsonString() string {
@@ -709,7 +709,7 @@ type DBCreateInfo struct {
 	Charset *string `json:"Charset,omitempty" name:"Charset"`
 
 	// Database account permission information
-	Accounts []*AccountPrivilege `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*AccountPrivilege `json:"Accounts,omitempty" name:"Accounts"`
 
 	// Remarks
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
@@ -733,7 +733,7 @@ type DBDetail struct {
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Database account permission information
-	Accounts []*AccountPrivilege `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*AccountPrivilege `json:"Accounts,omitempty" name:"Accounts"`
 
 	// Internal status. ONLINE: running
 	InternalStatus *string `json:"InternalStatus,omitempty" name:"InternalStatus"`
@@ -855,7 +855,7 @@ type DBInstance struct {
 
 	// The list of tags associated with the instance
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags" list`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
 }
 
 type DBPrivilege struct {
@@ -909,7 +909,7 @@ type DealInfo struct {
 	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
 
 	// This field is required only for an order that creates an instance, indicating the ID of the instance created by the order
-	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet" list`
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
 
 	// Account
 	OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
@@ -925,7 +925,7 @@ type DeleteAccountRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Array of instance usernames
-	UserNames []*string `json:"UserNames,omitempty" name:"UserNames" list`
+	UserNames []*string `json:"UserNames,omitempty" name:"UserNames"`
 }
 
 func (r *DeleteAccountRequest) ToJsonString() string {
@@ -1028,7 +1028,7 @@ type DeleteDBRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Array of database names
-	Names []*string `json:"Names,omitempty" name:"Names" list`
+	Names []*string `json:"Names,omitempty" name:"Names"`
 }
 
 func (r *DeleteDBRequest) ToJsonString() string {
@@ -1216,7 +1216,7 @@ type DescribeAccountsResponse struct {
 		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 		// Account information list
-		Accounts []*AccountDetail `json:"Accounts,omitempty" name:"Accounts" list`
+		Accounts []*AccountDetail `json:"Accounts,omitempty" name:"Accounts"`
 
 		// Total number
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1314,7 +1314,7 @@ type DescribeBackupMigrationRequest struct {
 	BackupFileName *string `json:"BackupFileName,omitempty" name:"BackupFileName"`
 
 	// Status set of import tasks
-	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet" list`
+	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet"`
 
 	// Import task restoration type: FULL,FULL_LOG,FULL_DIFF
 	RecoveryType *string `json:"RecoveryType,omitempty" name:"RecoveryType"`
@@ -1372,7 +1372,7 @@ type DescribeBackupMigrationResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Migration task set
-		BackupMigrationSet []*Migration `json:"BackupMigrationSet,omitempty" name:"BackupMigrationSet" list`
+		BackupMigrationSet []*Migration `json:"BackupMigrationSet,omitempty" name:"BackupMigrationSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1429,7 +1429,7 @@ type DescribeBackupUploadSizeResponse struct {
 	Response *struct {
 
 		// Information of uploaded backups
-		CosUploadBackupFileSet []*CosUploadBackupFile `json:"CosUploadBackupFileSet,omitempty" name:"CosUploadBackupFileSet" list`
+		CosUploadBackupFileSet []*CosUploadBackupFile `json:"CosUploadBackupFileSet,omitempty" name:"CosUploadBackupFileSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1517,7 +1517,7 @@ type DescribeBackupsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Backup list details
-		Backups []*Backup `json:"Backups,omitempty" name:"Backups" list`
+		Backups []*Backup `json:"Backups,omitempty" name:"Backups"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1566,7 +1566,7 @@ type DescribeDBCharsetsResponse struct {
 	Response *struct {
 
 		// Database character set list
-		DatabaseCharsets []*string `json:"DatabaseCharsets,omitempty" name:"DatabaseCharsets" list`
+		DatabaseCharsets []*string `json:"DatabaseCharsets,omitempty" name:"DatabaseCharsets"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1612,7 +1612,7 @@ type DescribeDBInstancesRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// One or more instance IDs in the format of mssql-si2823jyl
-	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet" list`
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
 
 	// Retrieves billing type. 0: pay-as-you-go
 	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
@@ -1624,19 +1624,19 @@ type DescribeDBInstancesRequest struct {
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// The list of instance private IPs, such as 172.1.0.12
-	VipSet []*string `json:"VipSet,omitempty" name:"VipSet" list`
+	VipSet []*string `json:"VipSet,omitempty" name:"VipSet"`
 
 	// The list of instance names used for fuzzy match
-	InstanceNameSet []*string `json:"InstanceNameSet,omitempty" name:"InstanceNameSet" list`
+	InstanceNameSet []*string `json:"InstanceNameSet,omitempty" name:"InstanceNameSet"`
 
 	// The list of instance version numbers, such as 2008R2, 2012SP3
-	VersionSet []*string `json:"VersionSet,omitempty" name:"VersionSet" list`
+	VersionSet []*string `json:"VersionSet,omitempty" name:"VersionSet"`
 
 	// Instance availability zone, such as ap-guangzhou-2
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// The list of instance tags
-	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
 	// Keyword used for fuzzy match, including instance ID, instance name, and instance private IP
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
@@ -1682,7 +1682,7 @@ type DescribeDBInstancesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Instance list
-		DBInstances []*DBInstance `json:"DBInstances,omitempty" name:"DBInstances" list`
+		DBInstances []*DBInstance `json:"DBInstances,omitempty" name:"DBInstances"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1704,7 +1704,7 @@ type DescribeDBsRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID
-	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet" list`
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
 
 	// Number of results per page. Value range: 1-100. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
@@ -1742,7 +1742,7 @@ type DescribeDBsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of instance databases
-		DBInstances []*InstanceDBDetail `json:"DBInstances,omitempty" name:"DBInstances" list`
+		DBInstances []*InstanceDBDetail `json:"DBInstances,omitempty" name:"DBInstances"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1822,7 +1822,7 @@ type DescribeIncrementalMigrationRequest struct {
 	BackupFileName *string `json:"BackupFileName,omitempty" name:"BackupFileName"`
 
 	// Status set of import tasks
-	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet" list`
+	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet"`
 
 	// Paging. Page size
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
@@ -1875,7 +1875,7 @@ type DescribeIncrementalMigrationResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Incremental import task set
-		IncrementalMigrationSet []*Migration `json:"IncrementalMigrationSet,omitempty" name:"IncrementalMigrationSet" list`
+		IncrementalMigrationSet []*Migration `json:"IncrementalMigrationSet,omitempty" name:"IncrementalMigrationSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1963,7 +1963,7 @@ type DescribeMigrationDetailResponse struct {
 		Target *MigrateTarget `json:"Target,omitempty" name:"Target"`
 
 		// Database objects to be migrated. This parameter is not used for offline migration (SourceType=4 or SourceType=5)
-		MigrateDBSet []*MigrateDB `json:"MigrateDBSet,omitempty" name:"MigrateDBSet" list`
+		MigrateDBSet []*MigrateDB `json:"MigrateDBSet,omitempty" name:"MigrateDBSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1985,7 +1985,7 @@ type DescribeMigrationsRequest struct {
 	*tchttp.BaseRequest
 
 	// Status set. As long as a migration task is in a status therein, it will be listed
-	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet" list`
+	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet"`
 
 	// Migration task name (fuzzy match)
 	MigrateName *string `json:"MigrateName,omitempty" name:"MigrateName"`
@@ -2035,7 +2035,7 @@ type DescribeMigrationsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of query results
-		MigrateTaskSet []*MigrateTask `json:"MigrateTaskSet,omitempty" name:"MigrateTaskSet" list`
+		MigrateTaskSet []*MigrateTask `json:"MigrateTaskSet,omitempty" name:"MigrateTaskSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2057,7 +2057,7 @@ type DescribeOrdersRequest struct {
 	*tchttp.BaseRequest
 
 	// Order array. The order name will be returned upon shipping, which can be used to call the `DescribeOrders` API to query shipment status
-	DealNames []*string `json:"DealNames,omitempty" name:"DealNames" list`
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
 }
 
 func (r *DescribeOrdersRequest) ToJsonString() string {
@@ -2084,7 +2084,7 @@ type DescribeOrdersResponse struct {
 	Response *struct {
 
 		// Order information array
-		Deals []*DealInfo `json:"Deals,omitempty" name:"Deals" list`
+		Deals []*DealInfo `json:"Deals,omitempty" name:"Deals"`
 
 		// Number of orders returned
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2140,7 +2140,7 @@ type DescribeProductConfigResponse struct {
 	Response *struct {
 
 		// Specification information array
-		SpecInfoList []*SpecInfo `json:"SpecInfoList,omitempty" name:"SpecInfoList" list`
+		SpecInfoList []*SpecInfo `json:"SpecInfoList,omitempty" name:"SpecInfoList"`
 
 		// Number of date entries returned
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2191,7 +2191,7 @@ type DescribeRegionsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Region information array
-		RegionSet []*RegionInfo `json:"RegionSet,omitempty" name:"RegionSet" list`
+		RegionSet []*RegionInfo `json:"RegionSet,omitempty" name:"RegionSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2216,7 +2216,7 @@ type DescribeRollbackTimeRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// List of databases to be queried
-	DBs []*string `json:"DBs,omitempty" name:"DBs" list`
+	DBs []*string `json:"DBs,omitempty" name:"DBs"`
 }
 
 func (r *DescribeRollbackTimeRequest) ToJsonString() string {
@@ -2244,7 +2244,7 @@ type DescribeRollbackTimeResponse struct {
 	Response *struct {
 
 		// Information of time range available for database rollback
-		Details []*DbRollbackTimeInfo `json:"Details,omitempty" name:"Details" list`
+		Details []*DbRollbackTimeInfo `json:"Details,omitempty" name:"Details"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2312,7 +2312,7 @@ type DescribeSlowlogsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Information list of slow query logs
-		Slowlogs []*SlowlogInfo `json:"Slowlogs,omitempty" name:"Slowlogs" list`
+		Slowlogs []*SlowlogInfo `json:"Slowlogs,omitempty" name:"Slowlogs"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2434,7 +2434,7 @@ type DescribeZonesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Array of AZs
-		ZoneSet []*ZoneInfo `json:"ZoneSet,omitempty" name:"ZoneSet" list`
+		ZoneSet []*ZoneInfo `json:"ZoneSet,omitempty" name:"ZoneSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2610,7 +2610,7 @@ type InstanceDBDetail struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Database information list
-	DBDetails []*DBDetail `json:"DBDetails,omitempty" name:"DBDetails" list`
+	DBDetails []*DBDetail `json:"DBDetails,omitempty" name:"DBDetails"`
 }
 
 type MigrateDB struct {
@@ -2655,7 +2655,7 @@ type MigrateSource struct {
 	Port *uint64 `json:"Port,omitempty" name:"Port"`
 
 	// Source backup address for offline migration, which is used when `MigrateType` is 4 or 5
-	Url []*string `json:"Url,omitempty" name:"Url" list`
+	Url []*string `json:"Url,omitempty" name:"Url"`
 
 	// Source backup password for offline migration, which is used when `MigrateType` is 4 or 5
 	UrlPassword *string `json:"UrlPassword,omitempty" name:"UrlPassword"`
@@ -2740,7 +2740,7 @@ type Migration struct {
 	UploadType *string `json:"UploadType,omitempty" name:"UploadType"`
 
 	// Backup file list, which is determined by UploadType. If the upload type is COS_URL, URL will be saved. If the upload type is COS_UPLOAD, the backup name will be saved.
-	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
+	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles"`
 
 	// Migration task status. Valid values: `2` (Creation completed), `7` (Importing full backups), `8` (Waiting for incremental backups), `9` (Import success), `10` (Import failure), `12` (Importing incremental backups).
 	Status *int64 `json:"Status,omitempty" name:"Status"`
@@ -2771,10 +2771,10 @@ type Migration struct {
 type MigrationAction struct {
 
 	// All the allowed operations. Values include: view (viewing a task), modify (modifying a task), start (starting a task), incremental (creating an incremental task), delete (deleting a task), and upload (obtaining the upload permission).
-	AllAction []*string `json:"AllAction,omitempty" name:"AllAction" list`
+	AllAction []*string `json:"AllAction,omitempty" name:"AllAction"`
 
 	// Operation allowed in the current status. If the subset of AllAction is left empty, no operations will be allowed.
-	AllowedAction []*string `json:"AllowedAction,omitempty" name:"AllowedAction" list`
+	AllowedAction []*string `json:"AllowedAction,omitempty" name:"AllowedAction"`
 }
 
 type MigrationDetail struct {
@@ -2790,7 +2790,7 @@ type MigrationDetail struct {
 
 	// Step information. ‘null’ means the migration has not started
 	// Note: this field may return ‘null’, indicating that no valid values can be obtained.
-	StepInfo []*MigrationStep `json:"StepInfo,omitempty" name:"StepInfo" list`
+	StepInfo []*MigrationStep `json:"StepInfo,omitempty" name:"StepInfo"`
 }
 
 type MigrationStep struct {
@@ -2815,7 +2815,7 @@ type ModifyAccountPrivilegeRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Account permission change information
-	Accounts []*AccountPrivilegeModifyInfo `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*AccountPrivilegeModifyInfo `json:"Accounts,omitempty" name:"Accounts"`
 }
 
 func (r *ModifyAccountPrivilegeRequest) ToJsonString() string {
@@ -2868,7 +2868,7 @@ type ModifyAccountRemarkRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Information of account for which to modify remarks
-	Accounts []*AccountRemark `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*AccountRemark `json:"Accounts,omitempty" name:"Accounts"`
 }
 
 func (r *ModifyAccountRemarkRequest) ToJsonString() string {
@@ -2930,7 +2930,7 @@ type ModifyBackupMigrationRequest struct {
 	UploadType *string `json:"UploadType,omitempty" name:"UploadType"`
 
 	// If the UploadType is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
-	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
+	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles"`
 }
 
 func (r *ModifyBackupMigrationRequest) ToJsonString() string {
@@ -3159,7 +3159,7 @@ type ModifyDBInstanceProjectRequest struct {
 	*tchttp.BaseRequest
 
 	// Array of instance IDs in the format of mssql-j8kv137v
-	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet" list`
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
 
 	// Project ID. If this parameter is 0, the default project will be used
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
@@ -3272,7 +3272,7 @@ type ModifyDBRemarkRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Array of database names and remarks, where each element contains a database name and the corresponding remarks
-	DBRemarks []*DBRemark `json:"DBRemarks,omitempty" name:"DBRemarks" list`
+	DBRemarks []*DBRemark `json:"DBRemarks,omitempty" name:"DBRemarks"`
 }
 
 func (r *ModifyDBRemarkRequest) ToJsonString() string {
@@ -3331,7 +3331,7 @@ type ModifyIncrementalMigrationRequest struct {
 	IsRecovery *string `json:"IsRecovery,omitempty" name:"IsRecovery"`
 
 	// If the UploadType is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
-	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles" list`
+	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles"`
 }
 
 func (r *ModifyIncrementalMigrationRequest) ToJsonString() string {
@@ -3402,7 +3402,7 @@ type ModifyMigrationRequest struct {
 	Target *MigrateTarget `json:"Target,omitempty" name:"Target"`
 
 	// Database objects to be migrated. This parameter is not used for offline migration (SourceType=4 or SourceType=5). If it left empty, no modification will be made
-	MigrateDBSet []*MigrateDB `json:"MigrateDBSet,omitempty" name:"MigrateDBSet" list`
+	MigrateDBSet []*MigrateDB `json:"MigrateDBSet,omitempty" name:"MigrateDBSet"`
 }
 
 func (r *ModifyMigrationRequest) ToJsonString() string {
@@ -3534,7 +3534,7 @@ type ResetAccountPasswordRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Updated account password information array
-	Accounts []*AccountPassword `json:"Accounts,omitempty" name:"Accounts" list`
+	Accounts []*AccountPassword `json:"Accounts,omitempty" name:"Accounts"`
 }
 
 func (r *ResetAccountPasswordRequest) ToJsonString() string {
@@ -3651,7 +3651,7 @@ type RestoreInstanceRequest struct {
 	TargetInstanceId *string `json:"TargetInstanceId,omitempty" name:"TargetInstanceId"`
 
 	// Restore the databases listed in `ReNameRestoreDatabase` and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format.
-	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore" list`
+	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore"`
 }
 
 func (r *RestoreInstanceRequest) ToJsonString() string {
@@ -3709,7 +3709,7 @@ type RollbackInstanceRequest struct {
 	Type *uint64 `json:"Type,omitempty" name:"Type"`
 
 	// Database to be rolled back
-	DBs []*string `json:"DBs,omitempty" name:"DBs" list`
+	DBs []*string `json:"DBs,omitempty" name:"DBs"`
 
 	// Target time point for rollback
 	Time *string `json:"Time,omitempty" name:"Time"`
@@ -3718,7 +3718,7 @@ type RollbackInstanceRequest struct {
 	TargetInstanceId *string `json:"TargetInstanceId,omitempty" name:"TargetInstanceId"`
 
 	// Rename the databases listed in `ReNameRestoreDatabase`. This parameter takes effect only when `Type = 1` which indicates that backup rollback supports renaming databases. If it is left empty, databases will be renamed in the default format and the `DBs` parameter specifies the databases to be restored.
-	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore" list`
+	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore"`
 }
 
 func (r *RollbackInstanceRequest) ToJsonString() string {
@@ -3885,7 +3885,7 @@ type SpecInfo struct {
 
 	// Pay-as-you-go Pid list corresponding to this specification
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PostPid []*int64 `json:"PostPid,omitempty" name:"PostPid" list`
+	PostPid []*int64 `json:"PostPid,omitempty" name:"PostPid"`
 
 	// Billing mode under this specification. POST: pay-as-you-go
 	PayModeStatus *string `json:"PayModeStatus,omitempty" name:"PayModeStatus"`
@@ -4011,7 +4011,7 @@ type TerminateDBInstanceRequest struct {
 	*tchttp.BaseRequest
 
 	// List of instance IDs manually terminated in the format of [mssql-3l3fgqn7], which are the same as the instance IDs displayed on the TencentDB Console page
-	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet" list`
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
 }
 
 func (r *TerminateDBInstanceRequest) ToJsonString() string {
@@ -4069,7 +4069,7 @@ type UpgradeDBInstanceRequest struct {
 	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
 	// Voucher ID (currently, only one voucher can be used per order)
-	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds" list`
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
 
 	// The number of CUP cores after the instance is upgraded.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`

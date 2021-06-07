@@ -74,7 +74,7 @@ type AddExistedInstancesRequest struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// Instance list. Spot instance is not supported.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Detailed information of the instance
 	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
@@ -89,13 +89,13 @@ type AddExistedInstancesRequest struct {
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
 
 	// Security group to which the instance belongs. This parameter can be obtained from the `sgId` field returned by DescribeSecurityGroups. If this parameter is not specified, the default security group is bound. (Currently, you can only set a single sgId)
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Node pool options
 	NodePool *NodePoolOption `json:"NodePool,omitempty" name:"NodePool"`
 
 	// Skips the specified verification. Valid values: GlobalRouteCIDRCheck, VpcCniCIDRCheck
-	SkipValidateOptions []*string `json:"SkipValidateOptions,omitempty" name:"SkipValidateOptions" list`
+	SkipValidateOptions []*string `json:"SkipValidateOptions,omitempty" name:"SkipValidateOptions"`
 }
 
 func (r *AddExistedInstancesRequest) ToJsonString() string {
@@ -131,19 +131,19 @@ type AddExistedInstancesResponse struct {
 
 		// IDs of failed nodes
 	// Note: This field may return null, indicating that no valid value was found.
-		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds" list`
+		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds"`
 
 		// IDs of successful nodes
 	// Note: This field may return null, indicating that no valid value was found.
-		SuccInstanceIds []*string `json:"SuccInstanceIds,omitempty" name:"SuccInstanceIds" list`
+		SuccInstanceIds []*string `json:"SuccInstanceIds,omitempty" name:"SuccInstanceIds"`
 
 		// IDs of (successful or failed) nodes that timed out
 	// Note: This field may return null, indicating that no valid value was found.
-		TimeoutInstanceIds []*string `json:"TimeoutInstanceIds,omitempty" name:"TimeoutInstanceIds" list`
+		TimeoutInstanceIds []*string `json:"TimeoutInstanceIds,omitempty" name:"TimeoutInstanceIds"`
 
 		// Causes of the failure to add a node to a cluster
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		FailedReasons []*string `json:"FailedReasons,omitempty" name:"FailedReasons" list`
+		FailedReasons []*string `json:"FailedReasons,omitempty" name:"FailedReasons"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -171,7 +171,7 @@ type AddNodeToNodePoolRequest struct {
 	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
 
 	// Node ID
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *AddNodeToNodePoolRequest) ToJsonString() string {
@@ -246,7 +246,7 @@ type CheckInstancesUpgradeAbleRequest struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// Specify the node list to check. If it’s not passed in, all nodes of the cluster will be checked.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Upgrade type
 	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
@@ -258,7 +258,7 @@ type CheckInstancesUpgradeAbleRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filtering
-	Filter []*Filter `json:"Filter,omitempty" name:"Filter" list`
+	Filter []*Filter `json:"Filter,omitempty" name:"Filter"`
 }
 
 func (r *CheckInstancesUpgradeAbleRequest) ToJsonString() string {
@@ -297,7 +297,7 @@ type CheckInstancesUpgradeAbleResponse struct {
 
 		// List of nodes that can be upgraded
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		UpgradeAbleInstances []*UpgradeAbleInstancesItem `json:"UpgradeAbleInstances,omitempty" name:"UpgradeAbleInstances" list`
+		UpgradeAbleInstances []*UpgradeAbleInstancesItem `json:"UpgradeAbleInstances,omitempty" name:"UpgradeAbleInstances"`
 
 		// Total number
 	// Note: this field may return `null`, indicating that no valid value is obtained.
@@ -349,7 +349,7 @@ type Cluster struct {
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Tag description list.
-	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification" list`
+	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 
 	// Cluster status (Running, Creating, or Abnormal)
 	ClusterStatus *string `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
@@ -452,7 +452,7 @@ type ClusterAsGroup struct {
 
 	// Scaling group label list
 	// Note: this field may return null, indicating that no valid value was found.
-	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
 
 	// Creation time
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
@@ -546,7 +546,7 @@ type ClusterBasicSettings struct {
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Tag description list. This parameter is used to bind a tag to a resource instance. Currently, a tag can only be bound to cluster instances.
-	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification" list`
+	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 
 	// Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
 	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
@@ -573,7 +573,7 @@ type ClusterCIDRSettings struct {
 	ServiceCIDR *string `json:"ServiceCIDR,omitempty" name:"ServiceCIDR"`
 
 	// Subnet ID of the ENI in VPC-CNI network mode
-	EniSubnetIds []*string `json:"EniSubnetIds,omitempty" name:"EniSubnetIds" list`
+	EniSubnetIds []*string `json:"EniSubnetIds,omitempty" name:"EniSubnetIds"`
 
 	// Repossession time of ENI IP addresses in VPC-CNI network mode, whose range is [300,15768000)
 	ClaimExpiredSeconds *int64 `json:"ClaimExpiredSeconds,omitempty" name:"ClaimExpiredSeconds"`
@@ -583,19 +583,19 @@ type ClusterExtraArgs struct {
 
 	// kube-apiserver custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	KubeAPIServer []*string `json:"KubeAPIServer,omitempty" name:"KubeAPIServer" list`
+	KubeAPIServer []*string `json:"KubeAPIServer,omitempty" name:"KubeAPIServer"`
 
 	// kube-controller-manager custom parameter
 	// Note: this field may return null, indicating that no valid value is obtained.
-	KubeControllerManager []*string `json:"KubeControllerManager,omitempty" name:"KubeControllerManager" list`
+	KubeControllerManager []*string `json:"KubeControllerManager,omitempty" name:"KubeControllerManager"`
 
 	// kube-scheduler custom parameter
 	// Note: this field may return null, indicating that no valid value is obtained.
-	KubeScheduler []*string `json:"KubeScheduler,omitempty" name:"KubeScheduler" list`
+	KubeScheduler []*string `json:"KubeScheduler,omitempty" name:"KubeScheduler"`
 
 	// etcd custom parameter, which is only effective for self-deployed cluster.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Etcd []*string `json:"Etcd,omitempty" name:"Etcd" list`
+	Etcd []*string `json:"Etcd,omitempty" name:"Etcd"`
 }
 
 type ClusterNetworkSettings struct {
@@ -628,7 +628,7 @@ type ClusterVersion struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// The list of cluster major version, such as 1.18.4
-	Versions []*string `json:"Versions,omitempty" name:"Versions" list`
+	Versions []*string `json:"Versions,omitempty" name:"Versions"`
 }
 
 type CreateClusterAsGroupRequest struct {
@@ -647,7 +647,7 @@ type CreateClusterAsGroupRequest struct {
 	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
 
 	// Node label array
-	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
 }
 
 func (r *CreateClusterAsGroupRequest) ToJsonString() string {
@@ -760,7 +760,7 @@ type CreateClusterEndpointVipRequest struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// Security policy opens single IP or CIDR to the Internet (for example: '192.168.1.0/24', with 'reject all' as the default).
-	SecurityPolicies []*string `json:"SecurityPolicies,omitempty" name:"SecurityPolicies" list`
+	SecurityPolicies []*string `json:"SecurityPolicies,omitempty" name:"SecurityPolicies"`
 }
 
 func (r *CreateClusterEndpointVipRequest) ToJsonString() string {
@@ -819,7 +819,7 @@ type CreateClusterInstancesRequest struct {
 	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
 
 	// Skips the specified verification. Valid values: GlobalRouteCIDRCheck, VpcCniCIDRCheck
-	SkipValidateOptions []*string `json:"SkipValidateOptions,omitempty" name:"SkipValidateOptions" list`
+	SkipValidateOptions []*string `json:"SkipValidateOptions,omitempty" name:"SkipValidateOptions"`
 }
 
 func (r *CreateClusterInstancesRequest) ToJsonString() string {
@@ -849,7 +849,7 @@ type CreateClusterInstancesResponse struct {
 	Response *struct {
 
 		// Instance ID
-		InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet" list`
+		InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -942,10 +942,10 @@ type CreateClusterNodePoolRequest struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Labels
-	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
 
 	// Taints
-	Taints []*Taint `json:"Taints,omitempty" name:"Taints" list`
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
 
 	// Operating system of the node pool
 	NodePoolOs *string `json:"NodePoolOs,omitempty" name:"NodePoolOs"`
@@ -1015,7 +1015,7 @@ type CreateClusterRequest struct {
 	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
 
 	// Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1).
-	RunInstancesForNode []*RunInstancesForNode `json:"RunInstancesForNode,omitempty" name:"RunInstancesForNode" list`
+	RunInstancesForNode []*RunInstancesForNode `json:"RunInstancesForNode,omitempty" name:"RunInstancesForNode"`
 
 	// Basic configuration information of the cluster
 	ClusterBasicSettings *ClusterBasicSettings `json:"ClusterBasicSettings,omitempty" name:"ClusterBasicSettings"`
@@ -1027,13 +1027,13 @@ type CreateClusterRequest struct {
 	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
 
 	// Configuration information of an existing instance
-	ExistedInstancesForNode []*ExistedInstancesForNode `json:"ExistedInstancesForNode,omitempty" name:"ExistedInstancesForNode" list`
+	ExistedInstancesForNode []*ExistedInstancesForNode `json:"ExistedInstancesForNode,omitempty" name:"ExistedInstancesForNode"`
 
 	// CVM type and the corresponding data disk mounting configuration information.
-	InstanceDataDiskMountSettings []*InstanceDataDiskMountSetting `json:"InstanceDataDiskMountSettings,omitempty" name:"InstanceDataDiskMountSettings" list`
+	InstanceDataDiskMountSettings []*InstanceDataDiskMountSetting `json:"InstanceDataDiskMountSettings,omitempty" name:"InstanceDataDiskMountSettings"`
 
 	// Information of the add-on to be installed
-	ExtensionAddons []*ExtensionAddon `json:"ExtensionAddons,omitempty" name:"ExtensionAddons" list`
+	ExtensionAddons []*ExtensionAddon `json:"ExtensionAddons,omitempty" name:"ExtensionAddons"`
 }
 
 func (r *CreateClusterRequest) ToJsonString() string {
@@ -1174,7 +1174,7 @@ type DeleteClusterAsGroupsRequest struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// Cluster scaling group ID list
-	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds" list`
+	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds"`
 
 	// Whether to keep nodes in the scaling group. Default to **false** (not keep)
 	KeepInstance *bool `json:"KeepInstance,omitempty" name:"KeepInstance"`
@@ -1324,7 +1324,7 @@ type DeleteClusterInstancesRequest struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// List of Instance IDs
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Policy used to delete an instance in the cluster: `terminate` (terminates the instance. Only available for pay-as-you-go CVMs); `retain` (only removes it from the cluster. The instance will be retained.)
 	InstanceDeleteMode *string `json:"InstanceDeleteMode,omitempty" name:"InstanceDeleteMode"`
@@ -1360,13 +1360,13 @@ type DeleteClusterInstancesResponse struct {
 	Response *struct {
 
 		// IDs of deleted instances
-		SuccInstanceIds []*string `json:"SuccInstanceIds,omitempty" name:"SuccInstanceIds" list`
+		SuccInstanceIds []*string `json:"SuccInstanceIds,omitempty" name:"SuccInstanceIds"`
 
 		// IDs of instances failed to be deleted
-		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds" list`
+		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds"`
 
 		// IDs of instances that cannot be found
-		NotFoundInstanceIds []*string `json:"NotFoundInstanceIds,omitempty" name:"NotFoundInstanceIds" list`
+		NotFoundInstanceIds []*string `json:"NotFoundInstanceIds,omitempty" name:"NotFoundInstanceIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1391,7 +1391,7 @@ type DeleteClusterNodePoolRequest struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// IDs of node pools to delete
-	NodePoolIds []*string `json:"NodePoolIds,omitempty" name:"NodePoolIds" list`
+	NodePoolIds []*string `json:"NodePoolIds,omitempty" name:"NodePoolIds"`
 
 	// Indicates whether nodes in a node pool are retained when the node pool is deleted. (The nodes are removed from the cluster. However, the corresponding instances will not be terminated.)
 	KeepInstance *bool `json:"KeepInstance,omitempty" name:"KeepInstance"`
@@ -1448,7 +1448,7 @@ type DeleteClusterRequest struct {
 	InstanceDeleteMode *string `json:"InstanceDeleteMode,omitempty" name:"InstanceDeleteMode"`
 
 	// Specifies the policy to deal with resources in the cluster when the cluster is deleted. It only supports CBS now. The default policy is to retain CBS disks.
-	ResourceDeleteOptions []*ResourceDeleteOption `json:"ResourceDeleteOptions,omitempty" name:"ResourceDeleteOptions" list`
+	ResourceDeleteOptions []*ResourceDeleteOption `json:"ResourceDeleteOptions,omitempty" name:"ResourceDeleteOptions"`
 }
 
 func (r *DeleteClusterRequest) ToJsonString() string {
@@ -1599,7 +1599,7 @@ type DescribeAvailableClusterVersionRequest struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// List of cluster IDs
-	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds" list`
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 }
 
 func (r *DescribeAvailableClusterVersionRequest) ToJsonString() string {
@@ -1628,11 +1628,11 @@ type DescribeAvailableClusterVersionResponse struct {
 
 		// Upgradable cluster version
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		Versions []*string `json:"Versions,omitempty" name:"Versions" list`
+		Versions []*string `json:"Versions,omitempty" name:"Versions"`
 
 		// Cluster information
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		Clusters []*ClusterVersion `json:"Clusters,omitempty" name:"Clusters" list`
+		Clusters []*ClusterVersion `json:"Clusters,omitempty" name:"Clusters"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1707,7 +1707,7 @@ type DescribeClusterAsGroupsRequest struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// Scaling group ID list. If this value is null, it indicates that all cluster-associated scaling groups are pulled.
-	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds" list`
+	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds"`
 
 	// Offset. This value defaults to 0. For more information on Offset, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -1746,7 +1746,7 @@ type DescribeClusterAsGroupsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Cluster-associated scaling group list
-		ClusterAsGroupSet []*ClusterAsGroup `json:"ClusterAsGroupSet,omitempty" name:"ClusterAsGroupSet" list`
+		ClusterAsGroupSet []*ClusterAsGroup `json:"ClusterAsGroupSet,omitempty" name:"ClusterAsGroupSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1886,7 +1886,7 @@ type DescribeClusterInstancesRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// List of instance IDs to be obtained. This parameter is empty by default, which indicates that all instances in the cluster will be pulled.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Node role. Valid values are MASTER, WORKER, ETCD, MASTER_ETCD, and ALL. Default value: WORKER.
 	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
@@ -1923,7 +1923,7 @@ type DescribeClusterInstancesResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of instances in the cluster
-		InstanceSet []*Instance `json:"InstanceSet,omitempty" name:"InstanceSet" list`
+		InstanceSet []*Instance `json:"InstanceSet,omitempty" name:"InstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2075,7 +2075,7 @@ type DescribeClusterNodePoolsResponse struct {
 
 		// NodePools (node pool list)
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-		NodePoolSet []*NodePool `json:"NodePoolSet,omitempty" name:"NodePoolSet" list`
+		NodePoolSet []*NodePool `json:"NodePoolSet,omitempty" name:"NodePoolSet"`
 
 		// Total resources
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2126,7 +2126,7 @@ type DescribeClusterRouteTablesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Object of cluster route table.
-		RouteTableSet []*RouteTableInfo `json:"RouteTableSet,omitempty" name:"RouteTableSet" list`
+		RouteTableSet []*RouteTableInfo `json:"RouteTableSet,omitempty" name:"RouteTableSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2151,7 +2151,7 @@ type DescribeClusterRoutesRequest struct {
 	RouteTableName *string `json:"RouteTableName,omitempty" name:"RouteTableName"`
 
 	// Filtering conditions, which are optional. Currently, only filtering by GatewayIP is supported.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeClusterRoutesRequest) ToJsonString() string {
@@ -2182,7 +2182,7 @@ type DescribeClusterRoutesResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Object of cluster route.
-		RouteSet []*RouteInfo `json:"RouteSet,omitempty" name:"RouteSet" list`
+		RouteSet []*RouteInfo `json:"RouteSet,omitempty" name:"RouteSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2250,7 +2250,7 @@ type DescribeClusterSecurityResponse struct {
 
 		// Cluster's access policy group
 	// Note: This field may return null, indicating that no valid value was found.
-		SecurityPolicy []*string `json:"SecurityPolicy,omitempty" name:"SecurityPolicy" list`
+		SecurityPolicy []*string `json:"SecurityPolicy,omitempty" name:"SecurityPolicy"`
 
 		// Cluster Kubeconfig file
 	// Note: This field may return null, indicating that no valid value was found.
@@ -2281,7 +2281,7 @@ type DescribeClustersRequest struct {
 
 	// Cluster ID list (When it is empty,
 	// all clusters under the account will be obtained)
-	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds" list`
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 
 	// Offset. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -2290,7 +2290,7 @@ type DescribeClustersRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter condition. Currently, only filtering by a single ClusterName is supported
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeClustersRequest) ToJsonString() string {
@@ -2323,7 +2323,7 @@ type DescribeClustersResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Cluster information list
-		Clusters []*Cluster `json:"Clusters,omitempty" name:"Clusters" list`
+		Clusters []*Cluster `json:"Clusters,omitempty" name:"Clusters"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2348,10 +2348,10 @@ type DescribeExistedInstancesRequest struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// Query by one or more instance ID(s). Instance ID format: ins-xxxxxxxx. (Refer to section ID.N of the API overview for this parameter's specific format.) Up to 100 instances are allowed for each request. You cannot specify InstanceIds and Filters at the same time.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Filter condition. For fields and other information, see [the DescribeInstances API](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). If a ClusterId has been set, then the cluster's VPC ID will be attached as a query field. In this situation, if a "vpc-id" is specified in Filter, then the specified VPC ID must be consistent with the cluster's VPC ID.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Filter by instance IP (Supports both private and public IPs)
 	VagueIpAddress *string `json:"VagueIpAddress,omitempty" name:"VagueIpAddress"`
@@ -2366,7 +2366,7 @@ type DescribeExistedInstancesRequest struct {
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter by multiple instance IPs
-	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses" list`
+	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses"`
 }
 
 func (r *DescribeExistedInstancesRequest) ToJsonString() string {
@@ -2401,7 +2401,7 @@ type DescribeExistedInstancesResponse struct {
 
 		// Array of existing instance information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		ExistedInstanceSet []*ExistedInstance `json:"ExistedInstanceSet,omitempty" name:"ExistedInstanceSet" list`
+		ExistedInstanceSet []*ExistedInstance `json:"ExistedInstanceSet,omitempty" name:"ExistedInstanceSet"`
 
 		// Number of instances that match the filter condition(s).
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2454,7 +2454,7 @@ type DescribeImagesResponse struct {
 
 		// Image information list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		ImageInstanceSet []*ImageInstance `json:"ImageInstanceSet,omitempty" name:"ImageInstanceSet" list`
+		ImageInstanceSet []*ImageInstance `json:"ImageInstanceSet,omitempty" name:"ImageInstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2504,7 +2504,7 @@ type DescribeRegionsResponse struct {
 
 		// ## Region List
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		RegionInstanceSet []*RegionInstance `json:"RegionInstanceSet,omitempty" name:"RegionInstanceSet" list`
+		RegionInstanceSet []*RegionInstance `json:"RegionInstanceSet,omitempty" name:"RegionInstanceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2561,7 +2561,7 @@ type DescribeRouteTableConflictsResponse struct {
 
 		// Route table conflict list.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		RouteTableConflictSet []*RouteTableConflict `json:"RouteTableConflictSet,omitempty" name:"RouteTableConflictSet" list`
+		RouteTableConflictSet []*RouteTableConflict `json:"RouteTableConflictSet,omitempty" name:"RouteTableConflictSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2611,11 +2611,11 @@ type ExistedInstance struct {
 
 	// List of private IPs of the instance's primary ENI.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 
 	// List of public IPs of the instance's primary ENI.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
 
 	// Creation time, which follows the ISO8601 standard and uses UTC time. Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2661,7 +2661,7 @@ type ExistedInstancesForNode struct {
 type ExistedInstancesPara struct {
 
 	// Cluster ID
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Additional parameter to be set for the instance
 	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
@@ -2673,7 +2673,7 @@ type ExistedInstancesPara struct {
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
 
 	// Security group to which the instance belongs. This parameter can be obtained from the sgId field in the returned values of DescribeSecurityGroups. If this parameter is not specified, the default security group is bound. (Currently, you can only set a single sgId)
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// When reinstalling the system, you can specify the HostName of the modified instance (when the cluster is in HostName mode, this parameter is required, and the rule name is the same as the [Create CVM Instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API HostName except for uppercase letters not being supported.
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
@@ -2694,7 +2694,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter values.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type GetUpgradeInstanceProgressRequest struct {
@@ -2751,7 +2751,7 @@ type GetUpgradeInstanceProgressResponse struct {
 		LifeState *string `json:"LifeState,omitempty" name:"LifeState"`
 
 		// Details of upgrade progress of each node
-		Instances []*InstanceUpgradeProgressItem `json:"Instances,omitempty" name:"Instances" list`
+		Instances []*InstanceUpgradeProgressItem `json:"Instances,omitempty" name:"Instances"`
 
 		// Current cluster status
 		ClusterStatus *InstanceUpgradeClusterStatus `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
@@ -2849,11 +2849,11 @@ type InstanceAdvancedSettings struct {
 
 	// Node label array
 	// Note: This field may return null, indicating that no valid value was found.
-	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
 
 	// Mounting information of multiple data disks. Ensure that the CVM purchase parameter specifies the information required for the purchase of multiple data disks, for example `DataDisks` under `RunInstancesPara` of the `CreateClusterInstances` API. You can refer to the example of adding a cluster node with multiple data disks in the CreateClusterInstances API. This parameter does not take effect when the AddExistedInstances API is called.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// Information about node custom parameters
 	// Note: This field may return null, indicating that no valid value was found.
@@ -2866,7 +2866,7 @@ type InstanceDataDiskMountSetting struct {
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
 	// Data disk mounting information
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// Availability zone where the CVM instance is located
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
@@ -2876,7 +2876,7 @@ type InstanceExtraArgs struct {
 
 	// Kubelet custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Kubelet []*string `json:"Kubelet,omitempty" name:"Kubelet" list`
+	Kubelet []*string `json:"Kubelet,omitempty" name:"Kubelet"`
 }
 
 type InstanceUpgradeClusterStatus struct {
@@ -2894,10 +2894,10 @@ type InstanceUpgradePreCheckResult struct {
 	CheckPass *bool `json:"CheckPass,omitempty" name:"CheckPass"`
 
 	// Array of check items
-	Items []*InstanceUpgradePreCheckResultItem `json:"Items,omitempty" name:"Items" list`
+	Items []*InstanceUpgradePreCheckResultItem `json:"Items,omitempty" name:"Items"`
 
 	// List of independent pods on this node
-	SinglePods []*string `json:"SinglePods,omitempty" name:"SinglePods" list`
+	SinglePods []*string `json:"SinglePods,omitempty" name:"SinglePods"`
 }
 
 type InstanceUpgradePreCheckResultItem struct {
@@ -2918,7 +2918,7 @@ type InstanceUpgradePreCheckResultItem struct {
 	After *uint64 `json:"After,omitempty" name:"After"`
 
 	// The pod list of the workload on this node
-	Pods []*string `json:"Pods,omitempty" name:"Pods" list`
+	Pods []*string `json:"Pods,omitempty" name:"Pods"`
 }
 
 type InstanceUpgradeProgressItem struct {
@@ -2948,7 +2948,7 @@ type InstanceUpgradeProgressItem struct {
 	CheckResult *InstanceUpgradePreCheckResult `json:"CheckResult,omitempty" name:"CheckResult"`
 
 	// Upgrade steps details
-	Detail []*TaskStepInfo `json:"Detail,omitempty" name:"Detail" list`
+	Detail []*TaskStepInfo `json:"Detail,omitempty" name:"Detail"`
 }
 
 type Label struct {
@@ -2968,7 +2968,7 @@ type LoginSettings struct {
 
 	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
 	// Note: this field may return null, indicating that no valid value is obtained.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
 	// Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
 	// Note: This field may return null, indicating that no valid value is found.
@@ -3167,7 +3167,7 @@ type ModifyClusterEndpointSPRequest struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// Security policy opens single IP or CIDR block to the Internet (for example: '192.168.1.0/24', with 'reject all' as the default).
-	SecurityPolicies []*string `json:"SecurityPolicies,omitempty" name:"SecurityPolicies" list`
+	SecurityPolicies []*string `json:"SecurityPolicies,omitempty" name:"SecurityPolicies"`
 }
 
 func (r *ModifyClusterEndpointSPRequest) ToJsonString() string {
@@ -3229,10 +3229,10 @@ type ModifyClusterNodePoolRequest struct {
 	MinNodesNum *int64 `json:"MinNodesNum,omitempty" name:"MinNodesNum"`
 
 	// Labels
-	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
 
 	// Taints
-	Taints []*Taint `json:"Taints,omitempty" name:"Taints" list`
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
 
 	// Indicates whether auto scaling is enabled.
 	EnableAutoscale *bool `json:"EnableAutoscale,omitempty" name:"EnableAutoscale"`
@@ -3324,10 +3324,10 @@ type NodePool struct {
 	AutoscalingGroupId *string `json:"AutoscalingGroupId,omitempty" name:"AutoscalingGroupId"`
 
 	// Labels
-	Labels []*Label `json:"Labels,omitempty" name:"Labels" list`
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
 
 	// Array of taint
-	Taints []*Taint `json:"Taints,omitempty" name:"Taints" list`
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
 
 	// Node list
 	NodeCountSummary *NodeCountSummary `json:"NodeCountSummary,omitempty" name:"NodeCountSummary"`
@@ -3417,7 +3417,7 @@ type RemoveNodeFromNodePoolRequest struct {
 	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
 
 	// Node ID list
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *RemoveNodeFromNodePoolRequest) ToJsonString() string {
@@ -3518,10 +3518,10 @@ type RunInstancesForNode struct {
 	NodeRole *string `json:"NodeRole,omitempty" name:"NodeRole"`
 
 	// Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1). Pass any parameter other than common parameters. ImageId will be replaced with the image corresponding to the TKE cluster operating system.
-	RunInstancesPara []*string `json:"RunInstancesPara,omitempty" name:"RunInstancesPara" list`
+	RunInstancesPara []*string `json:"RunInstancesPara,omitempty" name:"RunInstancesPara"`
 
 	// An advanced node setting. This parameter overrides the InstanceAdvancedSettings item set at the cluster level and corresponds to RunInstancesPara in a one-to-one sequential manner (currently valid for the ExtraArgs node custom parameter only).
-	InstanceAdvancedSettingsOverrides []*InstanceAdvancedSettings `json:"InstanceAdvancedSettingsOverrides,omitempty" name:"InstanceAdvancedSettingsOverrides" list`
+	InstanceAdvancedSettingsOverrides []*InstanceAdvancedSettings `json:"InstanceAdvancedSettingsOverrides,omitempty" name:"InstanceAdvancedSettingsOverrides"`
 }
 
 type RunMonitorServiceEnabled struct {
@@ -3593,7 +3593,7 @@ type TagSpecification struct {
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
 	// List of tag pairs
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type Taint struct {
@@ -3727,7 +3727,7 @@ type UpgradeClusterInstancesRequest struct {
 	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
 
 	// List of nodes that need to upgrade
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// This parameter is used when the node joins the cluster again. Refer to the API of creating one or more cluster nodes.
 	ResetParam *UpgradeNodeResetParam `json:"ResetParam,omitempty" name:"ResetParam"`
@@ -3796,5 +3796,5 @@ type UpgradeNodeResetParam struct {
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
 
 	// Security group to which the instance belongs. This parameter can be obtained from the `sgId` field in the response of `DescribeSecurityGroups`. If this parameter is not specified, the default security group is bound. (Currently, you can only set a single sgId.)
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }

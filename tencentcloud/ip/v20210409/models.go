@@ -147,7 +147,7 @@ type GetCountryCodesResponse struct {
 	Response *struct {
 
 		// List of country/region codes
-		Data []*CountryCodeItem `json:"Data,omitempty" name:"Data" list`
+		Data []*CountryCodeItem `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

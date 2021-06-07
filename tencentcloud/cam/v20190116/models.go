@@ -133,7 +133,7 @@ type AddUserToGroupRequest struct {
 	*tchttp.BaseRequest
 
 	// How sub-user UIDs are associated with the ID of the user group they are added to.
-	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info" list`
+	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info"`
 }
 
 func (r *AddUserToGroupRequest) ToJsonString() string {
@@ -286,7 +286,7 @@ type AttachPolicyInfo struct {
 
 	// List of deprecated products
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail" list`
+	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail"`
 }
 
 type AttachRolePolicyRequest struct {
@@ -421,7 +421,7 @@ type AttachedPolicyOfRole struct {
 
 	// List of deprecated products
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail" list`
+	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail"`
 
 	// Policy description
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -769,7 +769,7 @@ type CreateServiceLinkedRoleRequest struct {
 	*tchttp.BaseRequest
 
 	// Authorized service, i.e., Tencent Cloud service entity with this role attached.
-	QCSServiceName []*string `json:"QCSServiceName,omitempty" name:"QCSServiceName" list`
+	QCSServiceName []*string `json:"QCSServiceName,omitempty" name:"QCSServiceName"`
 
 	// Custom suffix. A string you provide, which is combined with the service-provided prefix to form the complete role name.
 	CustomSuffix *string `json:"CustomSuffix,omitempty" name:"CustomSuffix"`
@@ -872,7 +872,7 @@ type DeletePolicyRequest struct {
 	*tchttp.BaseRequest
 
 	// Array. Array elements are policy IDs. Policies can be deleted in a batch
-	PolicyId []*uint64 `json:"PolicyId,omitempty" name:"PolicyId" list`
+	PolicyId []*uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
 func (r *DeletePolicyRequest) ToJsonString() string {
@@ -921,7 +921,7 @@ type DeletePolicyVersionRequest struct {
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// Policy version ID
-	VersionId []*uint64 `json:"VersionId,omitempty" name:"VersionId" list`
+	VersionId []*uint64 `json:"VersionId,omitempty" name:"VersionId"`
 }
 
 func (r *DeletePolicyVersionRequest) ToJsonString() string {
@@ -1291,7 +1291,7 @@ type DescribeRoleListResponse struct {
 
 		// Role details list
 	// Note: This field may return null, indicating that no valid value was found.
-		List []*RoleInfo `json:"List,omitempty" name:"List" list`
+		List []*RoleInfo `json:"List,omitempty" name:"List"`
 
 		// Total number of roles
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
@@ -1422,7 +1422,7 @@ type DescribeSubAccountsRequest struct {
 	*tchttp.BaseRequest
 
 	// List of sub-user UINs. Up to 50 UINs are supported.
-	FilterSubAccountUin []*uint64 `json:"FilterSubAccountUin,omitempty" name:"FilterSubAccountUin" list`
+	FilterSubAccountUin []*uint64 `json:"FilterSubAccountUin,omitempty" name:"FilterSubAccountUin"`
 }
 
 func (r *DescribeSubAccountsRequest) ToJsonString() string {
@@ -1449,7 +1449,7 @@ type DescribeSubAccountsResponse struct {
 	Response *struct {
 
 		// Sub-user list
-		SubAccounts []*SubAccountUser `json:"SubAccounts,omitempty" name:"SubAccounts" list`
+		SubAccounts []*SubAccountUser `json:"SubAccounts,omitempty" name:"SubAccounts"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1720,7 +1720,7 @@ type GetGroupResponse struct {
 		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 		// User Group member information
-		UserInfo []*GroupMemberInfo `json:"UserInfo,omitempty" name:"UserInfo" list`
+		UserInfo []*GroupMemberInfo `json:"UserInfo,omitempty" name:"UserInfo"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2206,7 +2206,7 @@ type ListAccessKeysResponse struct {
 
 		// Access key list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		AccessKeys []*AccessKey `json:"AccessKeys,omitempty" name:"AccessKeys" list`
+		AccessKeys []*AccessKey `json:"AccessKeys,omitempty" name:"AccessKeys"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2266,7 +2266,7 @@ type ListAttachedGroupPoliciesResponse struct {
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
 
 		// Policy list
-		List []*AttachPolicyInfo `json:"List,omitempty" name:"List" list`
+		List []*AttachPolicyInfo `json:"List,omitempty" name:"List"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2331,7 +2331,7 @@ type ListAttachedRolePoliciesResponse struct {
 	Response *struct {
 
 		// List of policies associated with the role
-		List []*AttachedPolicyOfRole `json:"List,omitempty" name:"List" list`
+		List []*AttachedPolicyOfRole `json:"List,omitempty" name:"List"`
 
 		// Total number of policies associated with the role
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
@@ -2394,7 +2394,7 @@ type ListAttachedUserPoliciesResponse struct {
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
 
 		// Policy list
-		List []*AttachPolicyInfo `json:"List,omitempty" name:"List" list`
+		List []*AttachPolicyInfo `json:"List,omitempty" name:"List"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2450,7 +2450,7 @@ type ListCollaboratorsResponse struct {
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
 
 		// Collaborator information
-		Data []*SubAccountInfo `json:"Data,omitempty" name:"Data" list`
+		Data []*SubAccountInfo `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2516,7 +2516,7 @@ type ListEntitiesForPolicyResponse struct {
 
 		// Entity list
 	// Note: This field may return null, indicating that no valid value was found.
-		List []*AttachEntityOfPolicy `json:"List,omitempty" name:"List" list`
+		List []*AttachEntityOfPolicy `json:"List,omitempty" name:"List"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2580,7 +2580,7 @@ type ListGroupsForUserResponse struct {
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
 
 		// User Group information
-		GroupInfo []*GroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo" list`
+		GroupInfo []*GroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2640,7 +2640,7 @@ type ListGroupsResponse struct {
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
 
 		// User group information array
-		GroupInfo []*GroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo" list`
+		GroupInfo []*GroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2713,11 +2713,11 @@ type ListPoliciesResponse struct {
 	// Attachments: number of associated users
 	// ServiceType: the product the policy is associated with
 	// IsAttached: this value should not be null when querying if a marked entity has been associated with a policy. 0 indicates that no policy has been associated, and 1 indicates that a policy has been associated
-		List []*StrategyInfo `json:"List,omitempty" name:"List" list`
+		List []*StrategyInfo `json:"List,omitempty" name:"List"`
 
 		// Reserved field
 	// Note: This field may return null, indicating that no valid value was found.
-		ServiceTypeList []*string `json:"ServiceTypeList,omitempty" name:"ServiceTypeList" list`
+		ServiceTypeList []*string `json:"ServiceTypeList,omitempty" name:"ServiceTypeList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2767,7 +2767,7 @@ type ListPolicyVersionsResponse struct {
 
 		// Policy version list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Versions []*PolicyVersionItem `json:"Versions,omitempty" name:"Versions" list`
+		Versions []*PolicyVersionItem `json:"Versions,omitempty" name:"Versions"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2815,7 +2815,7 @@ type ListSAMLProvidersResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of SAML identity providers
-		SAMLProviderSet []*SAMLProviderInfo `json:"SAMLProviderSet,omitempty" name:"SAMLProviderSet" list`
+		SAMLProviderSet []*SAMLProviderInfo `json:"SAMLProviderSet,omitempty" name:"SAMLProviderSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2875,7 +2875,7 @@ type ListUsersForGroupResponse struct {
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
 
 		// Sub-user information
-		UserInfo []*GroupMemberInfo `json:"UserInfo,omitempty" name:"UserInfo" list`
+		UserInfo []*GroupMemberInfo `json:"UserInfo,omitempty" name:"UserInfo"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2920,7 +2920,7 @@ type ListUsersResponse struct {
 	Response *struct {
 
 		// Sub-user information
-		Data []*SubAccountInfo `json:"Data,omitempty" name:"Data" list`
+		Data []*SubAccountInfo `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3128,7 +3128,7 @@ type RemoveUserFromGroupRequest struct {
 	*tchttp.BaseRequest
 
 	// The UID of the user to be deleted and an array corresponding to the User Group IDs
-	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info" list`
+	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info"`
 }
 
 func (r *RemoveUserFromGroupRequest) ToJsonString() string {
@@ -3363,7 +3363,7 @@ type StrategyInfo struct {
 
 	// List of deprecated products
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail" list`
+	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail"`
 
 	// The deletion task identifier used to check the deletion status of the service-linked role
 	// Note: this field may return null, indicating that no valid values can be obtained.

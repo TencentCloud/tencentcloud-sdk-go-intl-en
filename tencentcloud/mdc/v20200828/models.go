@@ -33,7 +33,7 @@ type CreateInput struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Allowlist of input IPs in CIDR format.
-	AllowIpList []*string `json:"AllowIpList,omitempty" name:"AllowIpList" list`
+	AllowIpList []*string `json:"AllowIpList,omitempty" name:"AllowIpList"`
 
 	// SRT configuration information of input.
 	SRTSettings *CreateInputSRTSettings `json:"SRTSettings,omitempty" name:"SRTSettings"`
@@ -85,7 +85,7 @@ type CreateMediaConnectFlowRequest struct {
 	MaxBandwidth *int64 `json:"MaxBandwidth,omitempty" name:"MaxBandwidth"`
 
 	// Flow input group.
-	InputGroup []*CreateInput `json:"InputGroup,omitempty" name:"InputGroup" list`
+	InputGroup []*CreateInput `json:"InputGroup,omitempty" name:"InputGroup"`
 }
 
 func (r *CreateMediaConnectFlowRequest) ToJsonString() string {
@@ -212,7 +212,7 @@ type CreateOutput struct {
 type CreateOutputRTMPSettings struct {
 
 	// Push destination address. You can enter one or two addresses.
-	Destinations []*CreateOutputRtmpSettingsDestinations `json:"Destinations,omitempty" name:"Destinations" list`
+	Destinations []*CreateOutputRtmpSettingsDestinations `json:"Destinations,omitempty" name:"Destinations"`
 
 	// RTMP chunk size. Value range: [4096, 40960].
 	ChunkSize *int64 `json:"ChunkSize,omitempty" name:"ChunkSize"`
@@ -251,7 +251,7 @@ type CreateOutputRtmpSettingsDestinations struct {
 type CreateOutputSrtSettings struct {
 
 	// Push destination address. Please configure one or two addresses.
-	Destinations []*CreateOutputSrtSettingsDestinations `json:"Destinations,omitempty" name:"Destinations" list`
+	Destinations []*CreateOutputSrtSettingsDestinations `json:"Destinations,omitempty" name:"Destinations"`
 
 	// Stream ID of SRT push.
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
@@ -395,11 +395,11 @@ type DescribeFlow struct {
 	MaxBandwidth *int64 `json:"MaxBandwidth,omitempty" name:"MaxBandwidth"`
 
 	// Input group.
-	InputGroup []*DescribeInput `json:"InputGroup,omitempty" name:"InputGroup" list`
+	InputGroup []*DescribeInput `json:"InputGroup,omitempty" name:"InputGroup"`
 
 	// Output group.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OutputGroup []*DescribeOutput `json:"OutputGroup,omitempty" name:"OutputGroup" list`
+	OutputGroup []*DescribeOutput `json:"OutputGroup,omitempty" name:"OutputGroup"`
 }
 
 type DescribeInput struct {
@@ -418,10 +418,10 @@ type DescribeInput struct {
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Input address list.
-	InputAddressList []*InputAddress `json:"InputAddressList,omitempty" name:"InputAddressList" list`
+	InputAddressList []*InputAddress `json:"InputAddressList,omitempty" name:"InputAddressList"`
 
 	// Input IP allowlist.
-	AllowIpList []*string `json:"AllowIpList,omitempty" name:"AllowIpList" list`
+	AllowIpList []*string `json:"AllowIpList,omitempty" name:"AllowIpList"`
 
 	// SRT configuration information of input.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -552,7 +552,7 @@ type DescribeMediaConnectFlowsResponse struct {
 	Response *struct {
 
 		// Configuration information list of a flow.
-		Infos []*DescribeFlow `json:"Infos,omitempty" name:"Infos" list`
+		Infos []*DescribeFlow `json:"Infos,omitempty" name:"Infos"`
 
 		// Number of current pages.
 		PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
@@ -601,7 +601,7 @@ type DescribeOutput struct {
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Output destination address information list.
-	OutputAddressList []*OutputAddress `json:"OutputAddressList,omitempty" name:"OutputAddressList" list`
+	OutputAddressList []*OutputAddress `json:"OutputAddressList,omitempty" name:"OutputAddressList"`
 
 	// Output region.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -632,14 +632,14 @@ type DescribeOutputRTMPSettings struct {
 
 	// Destination address information list of RTMP push.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Destinations []*RTMPAddressDestination `json:"Destinations,omitempty" name:"Destinations" list`
+	Destinations []*RTMPAddressDestination `json:"Destinations,omitempty" name:"Destinations"`
 }
 
 type DescribeOutputRTPSettings struct {
 
 	// Destination address information list of RTP push.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Destinations []*RTPAddressDestination `json:"Destinations,omitempty" name:"Destinations" list`
+	Destinations []*RTPAddressDestination `json:"Destinations,omitempty" name:"Destinations"`
 
 	// Whether it is FEC.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -654,7 +654,7 @@ type DescribeOutputSRTSettings struct {
 
 	// Push destination address information list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Destinations []*SRTAddressDestination `json:"Destinations,omitempty" name:"Destinations" list`
+	Destinations []*SRTAddressDestination `json:"Destinations,omitempty" name:"Destinations"`
 
 	// Stream ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -706,7 +706,7 @@ type ModifyInput struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Allowed push IP in CIDR format.
-	AllowIpList []*string `json:"AllowIpList,omitempty" name:"AllowIpList" list`
+	AllowIpList []*string `json:"AllowIpList,omitempty" name:"AllowIpList"`
 
 	// SRT configuration information.
 	SRTSettings *CreateInputSRTSettings `json:"SRTSettings,omitempty" name:"SRTSettings"`

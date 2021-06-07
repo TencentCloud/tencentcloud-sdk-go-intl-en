@@ -82,14 +82,14 @@ type AccessPoint struct {
 	Location *string `json:"Location,omitempty" name:"Location"`
 
 	// List of ISPs supported by access point.
-	LineOperator []*string `json:"LineOperator,omitempty" name:"LineOperator" list`
+	LineOperator []*string `json:"LineOperator,omitempty" name:"LineOperator"`
 
 	// ID of the region that manages the access point.
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 
 	// Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	AvailablePortType []*string `json:"AvailablePortType,omitempty" name:"AvailablePortType" list`
+	AvailablePortType []*string `json:"AvailablePortType,omitempty" name:"AvailablePortType"`
 
 	// Latitude and longitude of the access point
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -280,7 +280,7 @@ type CreateDirectConnectResponse struct {
 	Response *struct {
 
 		// Connection ID.
-		DirectConnectIdSet []*string `json:"DirectConnectIdSet,omitempty" name:"DirectConnectIdSet" list`
+		DirectConnectIdSet []*string `json:"DirectConnectIdSet,omitempty" name:"DirectConnectIdSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -339,7 +339,7 @@ type CreateDirectConnectTunnelRequest struct {
 	BgpPeer *BgpPeer `json:"BgpPeer,omitempty" name:"BgpPeer"`
 
 	// Static routing, i.e., IP range of the user's IDC.
-	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitempty" name:"RouteFilterPrefixes" list`
+	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitempty" name:"RouteFilterPrefixes"`
 
 	// VLAN. Value range: 0-3,000.
 	// 0: sub-interface not enabled.
@@ -398,7 +398,7 @@ type CreateDirectConnectTunnelResponse struct {
 	Response *struct {
 
 		// Dedicated tunnel ID.
-		DirectConnectTunnelIdSet []*string `json:"DirectConnectTunnelIdSet,omitempty" name:"DirectConnectTunnelIdSet" list`
+		DirectConnectTunnelIdSet []*string `json:"DirectConnectTunnelIdSet,omitempty" name:"DirectConnectTunnelIdSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -549,7 +549,7 @@ type DescribeAccessPointsResponse struct {
 	Response *struct {
 
 		// Access point information.
-		AccessPointSet []*AccessPoint `json:"AccessPointSet,omitempty" name:"AccessPointSet" list`
+		AccessPointSet []*AccessPoint `json:"AccessPointSet,omitempty" name:"AccessPointSet"`
 
 		// Number of eligible access points.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -578,10 +578,10 @@ type DescribeDirectConnectTunnelsRequest struct {
 	// <li> direct-connect-tunnel-name: Dedicated tunnel name.</li>
 	// <li> direct-connect-tunnel-id: Dedicated tunnel instance ID, such as `dcx-abcdefgh`.</li>
 	// <li>direct-connect-id: Connection instance ID, such as `dc-abcdefgh`.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Array of dedicated tunnel IDs.
-	DirectConnectTunnelIds []*string `json:"DirectConnectTunnelIds,omitempty" name:"DirectConnectTunnelIds" list`
+	DirectConnectTunnelIds []*string `json:"DirectConnectTunnelIds,omitempty" name:"DirectConnectTunnelIds"`
 
 	// Offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -617,7 +617,7 @@ type DescribeDirectConnectTunnelsResponse struct {
 	Response *struct {
 
 		// List of dedicated tunnels.
-		DirectConnectTunnelSet []*DirectConnectTunnel `json:"DirectConnectTunnelSet,omitempty" name:"DirectConnectTunnelSet" list`
+		DirectConnectTunnelSet []*DirectConnectTunnel `json:"DirectConnectTunnelSet,omitempty" name:"DirectConnectTunnelSet"`
 
 		// Number of eligible dedicated tunnels.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -642,10 +642,10 @@ type DescribeDirectConnectsRequest struct {
 	*tchttp.BaseRequest
 
 	// Filter conditions:
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Array of connection IDs.
-	DirectConnectIds []*string `json:"DirectConnectIds,omitempty" name:"DirectConnectIds" list`
+	DirectConnectIds []*string `json:"DirectConnectIds,omitempty" name:"DirectConnectIds"`
 
 	// Offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -681,7 +681,7 @@ type DescribeDirectConnectsResponse struct {
 	Response *struct {
 
 		// List of connections.
-		DirectConnectSet []*DirectConnect `json:"DirectConnectSet,omitempty" name:"DirectConnectSet" list`
+		DirectConnectSet []*DirectConnect `json:"DirectConnectSet,omitempty" name:"DirectConnectSet"`
 
 		// Number of eligible connection lists.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -783,7 +783,7 @@ type DescribeInternetAddressRequest struct {
 	// <li>Status, address status. Valid values: 0: in use; 1: disabled; 2: returned</li>
 	// <li>Subnet, public IP address array</li>
 	// <InstanceIds>Public IP address ID array</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeInternetAddressRequest) ToJsonString() string {
@@ -816,7 +816,7 @@ type DescribeInternetAddressResponse struct {
 
 		// List of the public IP addresses for internet tunnels
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Subnets []*InternetAddressDetail `json:"Subnets,omitempty" name:"Subnets" list`
+		Subnets []*InternetAddressDetail `json:"Subnets,omitempty" name:"Subnets"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -865,7 +865,7 @@ type DescribeInternetAddressStatisticsResponse struct {
 
 		// List of the public IP address statistics for internet tunnels
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		InternetAddressStatistics []*InternetAddressStatistics `json:"InternetAddressStatistics,omitempty" name:"InternetAddressStatistics" list`
+		InternetAddressStatistics []*InternetAddressStatistics `json:"InternetAddressStatistics,omitempty" name:"InternetAddressStatistics"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -972,7 +972,7 @@ type DirectConnect struct {
 
 	// Tag key-value pair
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Access point type of a connection.
 	AccessPointType *string `json:"AccessPointType,omitempty" name:"AccessPointType"`
@@ -1056,7 +1056,7 @@ type DirectConnectTunnel struct {
 	BgpPeer *BgpPeer `json:"BgpPeer,omitempty" name:"BgpPeer"`
 
 	// User-side IP range.
-	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitempty" name:"RouteFilterPrefixes" list`
+	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitempty" name:"RouteFilterPrefixes"`
 
 	// VLAN of a dedicated tunnel.
 	Vlan *int64 `json:"Vlan,omitempty" name:"Vlan"`
@@ -1077,7 +1077,7 @@ type DirectConnectTunnel struct {
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
 	// Tag value of a dedicated tunnel.
-	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet" list`
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 
 	// Associated custom network probe ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1221,7 +1221,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter values of the field.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type InternetAddressDetail struct {
@@ -1397,7 +1397,7 @@ type ModifyDirectConnectTunnelAttributeRequest struct {
 	BgpPeer *BgpPeer `json:"BgpPeer,omitempty" name:"BgpPeer"`
 
 	// User-side IP range.
-	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitempty" name:"RouteFilterPrefixes" list`
+	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitempty" name:"RouteFilterPrefixes"`
 
 	// Tencent-side IP address.
 	TencentAddress *string `json:"TencentAddress,omitempty" name:"TencentAddress"`

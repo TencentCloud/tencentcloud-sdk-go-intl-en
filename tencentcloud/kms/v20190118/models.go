@@ -357,7 +357,7 @@ type CreateKeyRequest struct {
 	Type *uint64 `json:"Type,omitempty" name:"Type"`
 
 	// Tag list
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateKeyRequest) ToJsonString() string {
@@ -440,7 +440,7 @@ type CreateWhiteBoxKeyRequest struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Tag list
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateWhiteBoxKeyRequest) ToJsonString() string {
@@ -702,7 +702,7 @@ type DescribeKeysRequest struct {
 	*tchttp.BaseRequest
 
 	// List of IDs of the CMKs to be queried in batches. Up to 100 `KeyId` values are supported in one query.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 }
 
 func (r *DescribeKeysRequest) ToJsonString() string {
@@ -730,7 +730,7 @@ type DescribeKeysResponse struct {
 
 		// List of returned attribute information
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		KeyMetadatas []*KeyMetadata `json:"KeyMetadatas,omitempty" name:"KeyMetadatas" list`
+		KeyMetadatas []*KeyMetadata `json:"KeyMetadatas,omitempty" name:"KeyMetadatas"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -828,7 +828,7 @@ type DescribeWhiteBoxDeviceFingerprintsResponse struct {
 	Response *struct {
 
 		// Device fingerprint list
-		DeviceFingerprints []*DeviceFingerprint `json:"DeviceFingerprints,omitempty" name:"DeviceFingerprints" list`
+		DeviceFingerprints []*DeviceFingerprint `json:"DeviceFingerprints,omitempty" name:"DeviceFingerprints"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -859,7 +859,7 @@ type DescribeWhiteBoxKeyDetailsRequest struct {
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Tag filter condition
-	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
 }
 
 func (r *DescribeWhiteBoxKeyDetailsRequest) ToJsonString() string {
@@ -889,7 +889,7 @@ type DescribeWhiteBoxKeyDetailsResponse struct {
 	Response *struct {
 
 		// White-box key information list
-		KeyInfos []*WhiteboxKeyInfo `json:"KeyInfos,omitempty" name:"KeyInfos" list`
+		KeyInfos []*WhiteboxKeyInfo `json:"KeyInfos,omitempty" name:"KeyInfos"`
 
 		// Total number of keys
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1111,7 +1111,7 @@ type DisableKeysRequest struct {
 	*tchttp.BaseRequest
 
 	// List of IDs of the CMKs to be disabled in batches. Up to 100 CMKs are supported at a time
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 }
 
 func (r *DisableKeysRequest) ToJsonString() string {
@@ -1203,7 +1203,7 @@ type DisableWhiteBoxKeysRequest struct {
 	*tchttp.BaseRequest
 
 	// List of globally unique white-box key IDs. Note: you should make sure that all provided `KeyId` values are in valid format, unique, and actually exist. Up to 50 ones are allowed.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 }
 
 func (r *DisableWhiteBoxKeysRequest) ToJsonString() string {
@@ -1341,7 +1341,7 @@ type EnableKeysRequest struct {
 	*tchttp.BaseRequest
 
 	// List of IDs of the CMKs to be enabled in batches. Up to 100 CMKs are supported at a time
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 }
 
 func (r *EnableKeysRequest) ToJsonString() string {
@@ -1433,7 +1433,7 @@ type EnableWhiteBoxKeysRequest struct {
 	*tchttp.BaseRequest
 
 	// List of globally unique white-box key IDs. Note: you should make sure that all provided `KeyId` values are in valid format, unique, and actually exist. Up to 50 ones are allowed.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 }
 
 func (r *EnableWhiteBoxKeysRequest) ToJsonString() string {
@@ -1909,7 +1909,7 @@ type GetRegionsResponse struct {
 
 		// The list of supported regions
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Regions []*string `json:"Regions,omitempty" name:"Regions" list`
+		Regions []*string `json:"Regions,omitempty" name:"Regions"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2131,13 +2131,13 @@ type ListAlgorithmsResponse struct {
 	Response *struct {
 
 		// Symmetric encryption algorithms supported in this region
-		SymmetricAlgorithms []*AlgorithmInfo `json:"SymmetricAlgorithms,omitempty" name:"SymmetricAlgorithms" list`
+		SymmetricAlgorithms []*AlgorithmInfo `json:"SymmetricAlgorithms,omitempty" name:"SymmetricAlgorithms"`
 
 		// Asymmetric encryption algorithms supported in this region
-		AsymmetricAlgorithms []*AlgorithmInfo `json:"AsymmetricAlgorithms,omitempty" name:"AsymmetricAlgorithms" list`
+		AsymmetricAlgorithms []*AlgorithmInfo `json:"AsymmetricAlgorithms,omitempty" name:"AsymmetricAlgorithms"`
 
 		// Asymmetric signature verification algorithms supported in the current region
-		AsymmetricSignVerifyAlgorithms []*AlgorithmInfo `json:"AsymmetricSignVerifyAlgorithms,omitempty" name:"AsymmetricSignVerifyAlgorithms" list`
+		AsymmetricSignVerifyAlgorithms []*AlgorithmInfo `json:"AsymmetricSignVerifyAlgorithms,omitempty" name:"AsymmetricSignVerifyAlgorithms"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2183,7 +2183,7 @@ type ListKeyDetailRequest struct {
 	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
 
 	// Tag filter condition
-	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters" list`
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
 }
 
 func (r *ListKeyDetailRequest) ToJsonString() string {
@@ -2222,7 +2222,7 @@ type ListKeyDetailResponse struct {
 
 		// List of returned attribute information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		KeyMetadatas []*KeyMetadata `json:"KeyMetadatas,omitempty" name:"KeyMetadatas" list`
+		KeyMetadatas []*KeyMetadata `json:"KeyMetadatas,omitempty" name:"KeyMetadatas"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2279,7 +2279,7 @@ type ListKeysResponse struct {
 	Response *struct {
 
 		// CMK list array
-		Keys []*Key `json:"Keys,omitempty" name:"Keys" list`
+		Keys []*Key `json:"Keys,omitempty" name:"Keys"`
 
 		// Total number of CMKs
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2307,7 +2307,7 @@ type OverwriteWhiteBoxDeviceFingerprintsRequest struct {
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
 	// Device fingerprint list. If the list is empty, it means to delete all fingerprint information corresponding to the key. There can be up to 200 entries in the list.
-	DeviceFingerprints []*DeviceFingerprint `json:"DeviceFingerprints,omitempty" name:"DeviceFingerprints" list`
+	DeviceFingerprints []*DeviceFingerprint `json:"DeviceFingerprints,omitempty" name:"DeviceFingerprints"`
 }
 
 func (r *OverwriteWhiteBoxDeviceFingerprintsRequest) ToJsonString() string {
@@ -2552,7 +2552,7 @@ type TagFilter struct {
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
 	// Tag value
-	TagValue []*string `json:"TagValue,omitempty" name:"TagValue" list`
+	TagValue []*string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type UnbindCloudResourceRequest struct {

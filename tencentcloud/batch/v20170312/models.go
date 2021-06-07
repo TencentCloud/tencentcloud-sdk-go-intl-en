@@ -77,7 +77,7 @@ type AnonymousComputeEnv struct {
 	EnvData *EnvData `json:"EnvData,omitempty" name:"EnvData"`
 
 	// Data disk mounting option
-	MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks" list`
+	MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks"`
 
 	// Agent running mode; applicable for Windows
 	AgentRunningMode *AgentRunningMode `json:"AgentRunningMode,omitempty" name:"AgentRunningMode"`
@@ -105,7 +105,7 @@ type AttachInstancesRequest struct {
 	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
 
 	// List of instances that added to the compute environment
-	Instances []*Instance `json:"Instances,omitempty" name:"Instances" list`
+	Instances []*Instance `json:"Instances,omitempty" name:"Instances"`
 }
 
 func (r *AttachInstancesRequest) ToJsonString() string {
@@ -181,32 +181,32 @@ type ComputeEnvCreateInfo struct {
 
 	// Data disk mounting option
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks" list`
+	MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks"`
 
 	// Input mapping
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings" list`
+	InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings"`
 
 	// Authorization information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications" list`
+	Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications"`
 
 	// Notification information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Notifications []*Notification `json:"Notifications,omitempty" name:"Notifications" list`
+	Notifications []*Notification `json:"Notifications,omitempty" name:"Notifications"`
 
 	// Number of desired compute nodes
 	DesiredComputeNodeCount *uint64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
 
 	// Tag list of the compute environment.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type ComputeEnvData struct {
 
 	// List of CVM instance types
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
 }
 
 type ComputeEnvView struct {
@@ -243,7 +243,7 @@ type ComputeEnvView struct {
 
 	// Tag list bound to the compute environment.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type ComputeNode struct {
@@ -273,10 +273,10 @@ type ComputeNode struct {
 	AgentVersion *string `json:"AgentVersion,omitempty" name:"AgentVersion"`
 
 	// Private IP of the instance
-	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 
 	// Public IP of the instance
-	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses" list`
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
 
 	// Compute environment resource type. Valid values: `CVM`, `CPM` (Bare Metal)
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
@@ -380,7 +380,7 @@ type CreateTaskTemplateRequest struct {
 	TaskTemplateDescription *string `json:"TaskTemplateDescription,omitempty" name:"TaskTemplateDescription"`
 
 	// Tag list. By setting this parameter, you can bind tags to a task template. Each task template supports up to 10 tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateTaskTemplateRequest) ToJsonString() string {
@@ -566,7 +566,7 @@ type DeleteTaskTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// This API is used to delete task template information.
-	TaskTemplateIds []*string `json:"TaskTemplateIds,omitempty" name:"TaskTemplateIds" list`
+	TaskTemplateIds []*string `json:"TaskTemplateIds,omitempty" name:"TaskTemplateIds"`
 }
 
 func (r *DeleteTaskTemplatesRequest) ToJsonString() string {
@@ -623,7 +623,7 @@ type DescribeAvailableCvmInstanceTypesRequest struct {
 	// Filter.
 	// <li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
 	// <li> instance-family - String - Required: No - (Filter) Filter by model family such as S1, I1, and M1.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeAvailableCvmInstanceTypesRequest) ToJsonString() string {
@@ -650,7 +650,7 @@ type DescribeAvailableCvmInstanceTypesResponse struct {
 	Response *struct {
 
 		// Array of model configurations
-		InstanceTypeConfigSet []*InstanceTypeConfig `json:"InstanceTypeConfigSet,omitempty" name:"InstanceTypeConfigSet" list`
+		InstanceTypeConfigSet []*InstanceTypeConfig `json:"InstanceTypeConfigSet,omitempty" name:"InstanceTypeConfigSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -712,7 +712,7 @@ type DescribeComputeEnvActivitiesResponse struct {
 	Response *struct {
 
 		// List of activities in the compute environment
-		ActivitySet []*Activity `json:"ActivitySet,omitempty" name:"ActivitySet" list`
+		ActivitySet []*Activity `json:"ActivitySet,omitempty" name:"ActivitySet"`
 
 		// Number of activities
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -780,23 +780,23 @@ type DescribeComputeEnvCreateInfoResponse struct {
 		EnvData *EnvData `json:"EnvData,omitempty" name:"EnvData"`
 
 		// Data disk mounting option
-		MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks" list`
+		MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks"`
 
 		// Input mapping
-		InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings" list`
+		InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings"`
 
 		// Authorization information
-		Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications" list`
+		Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications"`
 
 		// Notification information
-		Notifications []*Notification `json:"Notifications,omitempty" name:"Notifications" list`
+		Notifications []*Notification `json:"Notifications,omitempty" name:"Notifications"`
 
 		// Number of desired compute nodes
 		DesiredComputeNodeCount *int64 `json:"DesiredComputeNodeCount,omitempty" name:"DesiredComputeNodeCount"`
 
 		// Tag list bound to the compute environment.
 	// Note: This field may return `null`, indicating that no valid value was found.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -818,13 +818,13 @@ type DescribeComputeEnvCreateInfosRequest struct {
 	*tchttp.BaseRequest
 
 	// Compute environment ID
-	EnvIds []*string `json:"EnvIds,omitempty" name:"EnvIds" list`
+	EnvIds []*string `json:"EnvIds,omitempty" name:"EnvIds"`
 
 	// Filter
 	// <li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
 	// <li> env-id - String - Required: No - (Filter) Filter by compute environment ID.</li>
 	// <li> env-name - String - Required: No - (Filter) Filter by compute environment name.</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -863,7 +863,7 @@ type DescribeComputeEnvCreateInfosResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// List of compute environment creation information
-		ComputeEnvCreateInfoSet []*ComputeEnvCreateInfo `json:"ComputeEnvCreateInfoSet,omitempty" name:"ComputeEnvCreateInfoSet" list`
+		ComputeEnvCreateInfoSet []*ComputeEnvCreateInfo `json:"ComputeEnvCreateInfoSet,omitempty" name:"ComputeEnvCreateInfoSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -924,7 +924,7 @@ type DescribeComputeEnvResponse struct {
 		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 		// List of compute nodes
-		ComputeNodeSet []*ComputeNode `json:"ComputeNodeSet,omitempty" name:"ComputeNodeSet" list`
+		ComputeNodeSet []*ComputeNode `json:"ComputeNodeSet,omitempty" name:"ComputeNodeSet"`
 
 		// Compute node statistical metrics
 		ComputeNodeMetrics *ComputeNodeMetrics `json:"ComputeNodeMetrics,omitempty" name:"ComputeNodeMetrics"`
@@ -946,7 +946,7 @@ type DescribeComputeEnvResponse struct {
 
 		// Tag list bound to the compute environment.
 	// Note: This field may return `null`, indicating that no valid value was found.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -968,7 +968,7 @@ type DescribeComputeEnvsRequest struct {
 	*tchttp.BaseRequest
 
 	// Compute environment ID
-	EnvIds []*string `json:"EnvIds,omitempty" name:"EnvIds" list`
+	EnvIds []*string `json:"EnvIds,omitempty" name:"EnvIds"`
 
 	// Filter.
 	// <li> `zone` - String - Optional - Filter by availability zone.</li>
@@ -979,7 +979,7 @@ type DescribeComputeEnvsRequest struct {
 	// </li>`tag-value` - String - Optional - Filter by tag value.</li>
 	// <li> `tag:tag-key` - String - Optional - Filter by tag key-value pair. The tag-key should be replaced by a specified tag key.</li>
 	// It cannot be specified together with the `EnvIds` parameter.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -1015,7 +1015,7 @@ type DescribeComputeEnvsResponse struct {
 	Response *struct {
 
 		// List of compute environments
-		ComputeEnvSet []*ComputeEnvView `json:"ComputeEnvSet,omitempty" name:"ComputeEnvSet" list`
+		ComputeEnvSet []*ComputeEnvView `json:"ComputeEnvSet,omitempty" name:"ComputeEnvSet"`
 
 		// Number of compute environments
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1044,7 +1044,7 @@ type DescribeCvmZoneInstanceConfigInfosRequest struct {
 	// <li> instance-family - String - Required: No - (Filter) Filter by model family such as S1, I1, and M1.</li>
 	// <li> instance-type - String - Required: No - (Filter) Filter by model.</li>
 	// <li> instance-charge-type - String - Required: No - (Filter) Filter by instance billing method. ( POSTPAID_BY_HOUR: pay-as-you-go | SPOTPAID: bidding.)  </li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeCvmZoneInstanceConfigInfosRequest) ToJsonString() string {
@@ -1071,7 +1071,7 @@ type DescribeCvmZoneInstanceConfigInfosResponse struct {
 	Response *struct {
 
 		// List of model configurations in the availability zone.
-		InstanceTypeQuotaSet []*InstanceTypeQuotaItem `json:"InstanceTypeQuotaSet,omitempty" name:"InstanceTypeQuotaSet" list`
+		InstanceTypeQuotaSet []*InstanceTypeQuotaItem `json:"InstanceTypeQuotaSet,omitempty" name:"InstanceTypeQuotaSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1116,7 +1116,7 @@ type DescribeInstanceCategoriesResponse struct {
 	Response *struct {
 
 		// List of CVM instance categories
-		InstanceCategorySet []*InstanceCategoryItem `json:"InstanceCategorySet,omitempty" name:"InstanceCategorySet" list`
+		InstanceCategorySet []*InstanceCategoryItem `json:"InstanceCategorySet,omitempty" name:"InstanceCategorySet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1186,10 +1186,10 @@ type DescribeJobResponse struct {
 		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 		// Task view information
-		TaskSet []*TaskView `json:"TaskSet,omitempty" name:"TaskSet" list`
+		TaskSet []*TaskView `json:"TaskSet,omitempty" name:"TaskSet"`
 
 		// Information of the dependency among tasks
-		DependenceSet []*Dependence `json:"DependenceSet,omitempty" name:"DependenceSet" list`
+		DependenceSet []*Dependence `json:"DependenceSet,omitempty" name:"DependenceSet"`
 
 		// Task statistical metrics
 		TaskMetrics *TaskMetrics `json:"TaskMetrics,omitempty" name:"TaskMetrics"`
@@ -1202,7 +1202,7 @@ type DescribeJobResponse struct {
 
 		// Tag list bound to the job.
 	// Note: This field may return `null`, indicating that no valid value was found.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 		// Next action
 	// Note: This field may return `null`, indicating that no valid value was found.
@@ -1267,14 +1267,14 @@ type DescribeJobSubmitInfoResponse struct {
 		Priority *int64 `json:"Priority,omitempty" name:"Priority"`
 
 		// Task information
-		Tasks []*Task `json:"Tasks,omitempty" name:"Tasks" list`
+		Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
 
 		// Dependency information
-		Dependences []*Dependence `json:"Dependences,omitempty" name:"Dependences" list`
+		Dependences []*Dependence `json:"Dependences,omitempty" name:"Dependences"`
 
 		// Tag list bound to the job.
 	// Note: This field may return `null`, indicating that no valid value was found.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1296,7 +1296,7 @@ type DescribeJobsRequest struct {
 	*tchttp.BaseRequest
 
 	// Instance ID
-	JobIds []*string `json:"JobIds,omitempty" name:"JobIds" list`
+	JobIds []*string `json:"JobIds,omitempty" name:"JobIds"`
 
 	// Filter.
 	// <li> `job-id` - String - Optional - Filter by job ID.</li>
@@ -1307,7 +1307,7 @@ type DescribeJobsRequest struct {
 	// <li> `tag-value` - String - Optional - Filter by tag value.</li>
 	// <li> `tag:tag-key` - String - Optional - Filter by tag key-value pair. The tag-key should be replaced by a specified tag key.</li>
 	// It cannot be specified together with the `JobIds` parameter.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -1343,7 +1343,7 @@ type DescribeJobsResponse struct {
 	Response *struct {
 
 		// List of instances
-		JobSet []*JobView `json:"JobSet,omitempty" name:"JobSet" list`
+		JobSet []*JobView `json:"JobSet,omitempty" name:"JobSet"`
 
 		// Number of eligible instances
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1374,7 +1374,7 @@ type DescribeTaskLogsRequest struct {
 	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
 
 	// Set of task instances
-	TaskInstanceIndexes []*uint64 `json:"TaskInstanceIndexes,omitempty" name:"TaskInstanceIndexes" list`
+	TaskInstanceIndexes []*uint64 `json:"TaskInstanceIndexes,omitempty" name:"TaskInstanceIndexes"`
 
 	// Starting task instance
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -1414,7 +1414,7 @@ type DescribeTaskLogsResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Set of task instance log details
-		TaskInstanceLogSet []*TaskInstanceLog `json:"TaskInstanceLogSet,omitempty" name:"TaskInstanceLogSet" list`
+		TaskInstanceLogSet []*TaskInstanceLog `json:"TaskInstanceLogSet,omitempty" name:"TaskInstanceLogSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1449,7 +1449,7 @@ type DescribeTaskRequest struct {
 
 	// Filter as detailed below:
 	// <li> task-instance-type - String - Required: No - (Filter) Filter by task instance state. (SUBMITTED: submitted; PENDING: pending; RUNNABLE: runnable; STARTING: starting; RUNNING: running; SUCCEED: succeeded; FAILED: failed; FAILED_INTERRUPTED: instance retained after failure).</li>
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeTaskRequest) ToJsonString() string {
@@ -1498,7 +1498,7 @@ type DescribeTaskResponse struct {
 		TaskInstanceTotalCount *int64 `json:"TaskInstanceTotalCount,omitempty" name:"TaskInstanceTotalCount"`
 
 		// Task instance information
-		TaskInstanceSet []*TaskInstanceView `json:"TaskInstanceSet,omitempty" name:"TaskInstanceSet" list`
+		TaskInstanceSet []*TaskInstanceView `json:"TaskInstanceSet,omitempty" name:"TaskInstanceSet"`
 
 		// Task instance statistical metrics
 		TaskInstanceMetrics *TaskInstanceMetrics `json:"TaskInstanceMetrics,omitempty" name:"TaskInstanceMetrics"`
@@ -1523,7 +1523,7 @@ type DescribeTaskTemplatesRequest struct {
 	*tchttp.BaseRequest
 
 	// Job template ID
-	TaskTemplateIds []*string `json:"TaskTemplateIds,omitempty" name:"TaskTemplateIds" list`
+	TaskTemplateIds []*string `json:"TaskTemplateIds,omitempty" name:"TaskTemplateIds"`
 
 	// Filter.
 	// <li> `task-template-name` - String - Optional - Filter by task template name.</li>
@@ -1531,7 +1531,7 @@ type DescribeTaskTemplatesRequest struct {
 	// <li> `tag-value` - String - Optional - Filter by tag value.</li>
 	// <li> `tag:tag-key` - String - Optional - Filter by tag key-value pair. The tag-key should be replaced by a specified tag key.</li>
 	// It cannot be specified together with the `TaskTemplateIds` parameter.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -1567,7 +1567,7 @@ type DescribeTaskTemplatesResponse struct {
 	Response *struct {
 
 		// List of job templates
-		TaskTemplateSet []*TaskTemplateView `json:"TaskTemplateSet,omitempty" name:"TaskTemplateSet" list`
+		TaskTemplateSet []*TaskTemplateView `json:"TaskTemplateSet,omitempty" name:"TaskTemplateSet"`
 
 		// Number of job templates
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -1595,7 +1595,7 @@ type DetachInstancesRequest struct {
 	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
 
 	// Instance ID list
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DetachInstancesRequest) ToJsonString() string {
@@ -1674,7 +1674,7 @@ type EnvData struct {
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
 	// Information of the instance's data disk configuration
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks" list`
+	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// Information of the VPC configuration, which cannot be specified together with Zones and VirtualPrivateClouds.
 	VirtualPrivateCloud *VirtualPrivateCloud `json:"VirtualPrivateCloud,omitempty" name:"VirtualPrivateCloud"`
@@ -1689,7 +1689,7 @@ type EnvData struct {
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
 
 	// Security group of the instance
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds" list`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Enhanced service. This parameter is used to specify whether to enable Cloud Security, Cloud Monitoring and other services. If this parameter is not specified, Cloud Monitoring and Cloud Security will be enabled by default.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
@@ -1701,16 +1701,16 @@ type EnvData struct {
 	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitempty" name:"InstanceMarketOptions"`
 
 	// List of CVM instance types, which cannot be present together with InstanceType or InstanceTypeOptions at the same time. After the field is specified, the system will try creating compute nodes in the order of the models until successful creation and then stop the traversal process. Up to 10 models are supported.
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes" list`
+	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
 
 	// CVM instance model configuration, which cannot be present together with InstanceType or InstanceTypes at the same time.
 	InstanceTypeOptions *InstanceTypeOptions `json:"InstanceTypeOptions,omitempty" name:"InstanceTypeOptions"`
 
 	// List of availability zones (creation of CVM instances across availability zones is supported), which cannot be specified together with VirtualPrivateCloud or VirtualPrivateClouds at the same time.
-	Zones []*string `json:"Zones,omitempty" name:"Zones" list`
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
 
 	// List of VPCs (creation of CVM instances across VPCs is supported), which cannot be specified together with VirtualPrivateCloud or Zones at the same time.
-	VirtualPrivateClouds []*VirtualPrivateCloud `json:"VirtualPrivateClouds,omitempty" name:"VirtualPrivateClouds" list`
+	VirtualPrivateClouds []*VirtualPrivateCloud `json:"VirtualPrivateClouds,omitempty" name:"VirtualPrivateClouds"`
 }
 
 type EnvVar struct {
@@ -1728,7 +1728,7 @@ type EventConfig struct {
 	EventName *string `json:"EventName,omitempty" name:"EventName"`
 
 	// Custom key-value pair
-	EventVars []*EventVar `json:"EventVars,omitempty" name:"EventVars" list`
+	EventVars []*EventVar `json:"EventVars,omitempty" name:"EventVars"`
 }
 
 type EventVar struct {
@@ -1748,7 +1748,7 @@ type Externals struct {
 
 	// Not supported network. Value: <br><li>BASIC: classic network<br><li>VPC1.0: VPC1.0
 	// Note: This field may return null, indicating that no valid value was found.
-	UnsupportNetworks []*string `json:"UnsupportNetworks,omitempty" name:"UnsupportNetworks" list`
+	UnsupportNetworks []*string `json:"UnsupportNetworks,omitempty" name:"UnsupportNetworks"`
 
 	// Attributes of local HDD storage
 	// Note: This field may return null, indicating that no valid value is found.
@@ -1761,7 +1761,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter values.
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type InputMapping struct {
@@ -1794,7 +1794,7 @@ type InstanceCategoryItem struct {
 	InstanceCategory *string `json:"InstanceCategory,omitempty" name:"InstanceCategory"`
 
 	// List of instance families
-	InstanceFamilySet []*string `json:"InstanceFamilySet,omitempty" name:"InstanceFamilySet" list`
+	InstanceFamilySet []*string `json:"InstanceFamilySet,omitempty" name:"InstanceFamilySet"`
 }
 
 type InstanceMarketOptionsRequest struct {
@@ -1833,7 +1833,7 @@ type InstanceTypeOptions struct {
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
 	// Instance model category. Value range: "ALL", "GENERAL", "GENERAL_2", "GENERAL_3", "COMPUTE", "COMPUTE_2", and "COMPUTE_3". Default value: "ALL".
-	InstanceCategories []*string `json:"InstanceCategories,omitempty" name:"InstanceCategories" list`
+	InstanceCategories []*string `json:"InstanceCategories,omitempty" name:"InstanceCategories"`
 }
 
 type InstanceTypeQuotaItem struct {
@@ -1867,7 +1867,7 @@ type InstanceTypeQuotaItem struct {
 	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
 
 	// List of local disk specifications. If the parameter returns null, it means that local disks cannot be created.
-	LocalDiskTypeList []*LocalDiskType `json:"LocalDiskTypeList,omitempty" name:"LocalDiskTypeList" list`
+	LocalDiskTypeList []*LocalDiskType `json:"LocalDiskTypeList,omitempty" name:"LocalDiskTypeList"`
 
 	// Whether an instance model is available. Valid values: <br><li>SELL: available <br><li>SOLD_OUT: sold out
 	Status *string `json:"Status,omitempty" name:"Status"`
@@ -2007,7 +2007,7 @@ type ItemPrice struct {
 type Job struct {
 
 	// Job information
-	Tasks []*Task `json:"Tasks,omitempty" name:"Tasks" list`
+	Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
 
 	// Instance name
 	JobName *string `json:"JobName,omitempty" name:"JobName"`
@@ -2019,10 +2019,10 @@ type Job struct {
 	Priority *uint64 `json:"Priority,omitempty" name:"Priority"`
 
 	// Dependency information
-	Dependences []*Dependence `json:"Dependences,omitempty" name:"Dependences" list`
+	Dependences []*Dependence `json:"Dependences,omitempty" name:"Dependences"`
 
 	// Notification information
-	Notifications []*Notification `json:"Notifications,omitempty" name:"Notifications" list`
+	Notifications []*Notification `json:"Notifications,omitempty" name:"Notifications"`
 
 	// This is the dependency of the subsequent task on the previous task if there is a dependent relationship between them. Value range: PRE_TASK_SUCCEED, PRE_TASK_AT_LEAST_PARTLY_SUCCEED, PRE_TASK_FINISHED. Default value: PRE_TASK_SUCCEED.
 	TaskExecutionDependOn *string `json:"TaskExecutionDependOn,omitempty" name:"TaskExecutionDependOn"`
@@ -2031,7 +2031,7 @@ type Job struct {
 	StateIfCreateCvmFailed *string `json:"StateIfCreateCvmFailed,omitempty" name:"StateIfCreateCvmFailed"`
 
 	// Tag list. By setting this parameter, you can bind tags to a job. Each job supports up to 10 tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type JobView struct {
@@ -2064,7 +2064,7 @@ type JobView struct {
 
 	// Tag list bound to the job.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type LocalDiskType struct {
@@ -2091,7 +2091,7 @@ type LoginSettings struct {
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds" list`
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
 	// Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
 	KeepImageLogin *string `json:"KeepImageLogin,omitempty" name:"KeepImageLogin"`
@@ -2244,13 +2244,13 @@ type NamedComputeEnv struct {
 	EnvData *EnvData `json:"EnvData,omitempty" name:"EnvData"`
 
 	// Data disk mounting option
-	MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks" list`
+	MountDataDisks []*MountDataDisk `json:"MountDataDisks,omitempty" name:"MountDataDisks"`
 
 	// Authorization information
-	Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications" list`
+	Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications"`
 
 	// Input mapping information
-	InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings" list`
+	InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings"`
 
 	// Agent running mode; applicable for Windows
 	AgentRunningMode *AgentRunningMode `json:"AgentRunningMode,omitempty" name:"AgentRunningMode"`
@@ -2265,7 +2265,7 @@ type NamedComputeEnv struct {
 	ResourceMaxRetryCount *int64 `json:"ResourceMaxRetryCount,omitempty" name:"ResourceMaxRetryCount"`
 
 	// Tag list. By setting this parameter, you can bind tags to a compute environment. Each compute environment supports up to 10 tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type Notification struct {
@@ -2274,7 +2274,7 @@ type Notification struct {
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
 	// Event configuration
-	EventConfigs []*EventConfig `json:"EventConfigs,omitempty" name:"EventConfigs" list`
+	EventConfigs []*EventConfig `json:"EventConfigs,omitempty" name:"EventConfigs"`
 }
 
 type OutputMapping struct {
@@ -2307,10 +2307,10 @@ type Placement struct {
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
-	HostIds []*string `json:"HostIds,omitempty" name:"HostIds" list`
+	HostIds []*string `json:"HostIds,omitempty" name:"HostIds"`
 
 	// Master host IP used to create the CVM
-	HostIps []*string `json:"HostIps,omitempty" name:"HostIps" list`
+	HostIps []*string `json:"HostIps,omitempty" name:"HostIps"`
 
 	// The ID of the CDH to which the instance belongs, only used as an output parameter.
 	HostId *string `json:"HostId,omitempty" name:"HostId"`
@@ -2350,7 +2350,7 @@ type RetryJobsRequest struct {
 	*tchttp.BaseRequest
 
 	// List of instance IDs.
-	JobIds []*string `json:"JobIds,omitempty" name:"JobIds" list`
+	JobIds []*string `json:"JobIds,omitempty" name:"JobIds"`
 }
 
 func (r *RetryJobsRequest) ToJsonString() string {
@@ -2532,19 +2532,19 @@ type Task struct {
 	RedirectLocalInfo *RedirectLocalInfo `json:"RedirectLocalInfo,omitempty" name:"RedirectLocalInfo"`
 
 	// Input mapping
-	InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings" list`
+	InputMappings []*InputMapping `json:"InputMappings,omitempty" name:"InputMappings"`
 
 	// Output mapping
-	OutputMappings []*OutputMapping `json:"OutputMappings,omitempty" name:"OutputMappings" list`
+	OutputMappings []*OutputMapping `json:"OutputMappings,omitempty" name:"OutputMappings"`
 
 	// Output mapping configuration
-	OutputMappingConfigs []*OutputMappingConfig `json:"OutputMappingConfigs,omitempty" name:"OutputMappingConfigs" list`
+	OutputMappingConfigs []*OutputMappingConfig `json:"OutputMappingConfigs,omitempty" name:"OutputMappingConfigs"`
 
 	// Custom environment variable
-	EnvVars []*EnvVar `json:"EnvVars,omitempty" name:"EnvVars" list`
+	EnvVars []*EnvVar `json:"EnvVars,omitempty" name:"EnvVars"`
 
 	// Authorization information
-	Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications" list`
+	Authentications []*Authentication `json:"Authentications,omitempty" name:"Authentications"`
 
 	// The processing method after the TaskInstance fails; Value range: TERMINATE (default), INTERRUPT, FAST_INTERRUPT.
 	FailedAction *string `json:"FailedAction,omitempty" name:"FailedAction"`
@@ -2709,7 +2709,7 @@ type TaskTemplateView struct {
 
 	// Tag list bound to the task template.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type TaskView struct {
@@ -2785,7 +2785,7 @@ type TerminateComputeNodesRequest struct {
 	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
 
 	// List of compute node IDs
-	ComputeNodeIds []*string `json:"ComputeNodeIds,omitempty" name:"ComputeNodeIds" list`
+	ComputeNodeIds []*string `json:"ComputeNodeIds,omitempty" name:"ComputeNodeIds"`
 }
 
 func (r *TerminateComputeNodesRequest) ToJsonString() string {
@@ -2940,7 +2940,7 @@ type VirtualPrivateCloud struct {
 	AsVpcGateway *bool `json:"AsVpcGateway,omitempty" name:"AsVpcGateway"`
 
 	// Array of VPC subnet IPs. You can use this parameter when creating instances or modifying VPC attributes of instances. Currently you can specify multiple IPs in one subnet only when creating multiple instances at the same time.
-	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses" list`
+	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 
 	// Number of IPv6 addresses randomly generated for the ENI.
 	Ipv6AddressCount *uint64 `json:"Ipv6AddressCount,omitempty" name:"Ipv6AddressCount"`

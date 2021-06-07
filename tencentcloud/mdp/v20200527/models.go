@@ -153,7 +153,7 @@ type DeleteMediaPackageChannelEndpointsRequest struct {
 	Id *string `json:"Id,omitempty" name:"Id"`
 
 	// The list of endpoint URLs.
-	Urls []*string `json:"Urls,omitempty" name:"Urls" list`
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 }
 
 func (r *DeleteMediaPackageChannelEndpointsRequest) ToJsonString() string {
@@ -200,7 +200,7 @@ type DeleteMediaPackageChannelsRequest struct {
 	*tchttp.BaseRequest
 
 	// The ID list of channels to be deleted.
-	Ids []*string `json:"Ids,omitempty" name:"Ids" list`
+	Ids []*string `json:"Ids,omitempty" name:"Ids"`
 }
 
 func (r *DeleteMediaPackageChannelsRequest) ToJsonString() string {
@@ -227,10 +227,10 @@ type DeleteMediaPackageChannelsResponse struct {
 	Response *struct {
 
 		// The information list of channels that have been deleted.
-		SuccessInfos []*ChannelInfo `json:"SuccessInfos,omitempty" name:"SuccessInfos" list`
+		SuccessInfos []*ChannelInfo `json:"SuccessInfos,omitempty" name:"SuccessInfos"`
 
 		// The information list of channels that failed to be deleted.
-		FailInfos []*ChannelInfo `json:"FailInfos,omitempty" name:"FailInfos" list`
+		FailInfos []*ChannelInfo `json:"FailInfos,omitempty" name:"FailInfos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -333,7 +333,7 @@ type DescribeMediaPackageChannelsResponse struct {
 
 		// The list of channel outputs.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Infos []*ChannelInfo `json:"Infos,omitempty" name:"Infos" list`
+		Infos []*ChannelInfo `json:"Infos,omitempty" name:"Infos"`
 
 		// Page number.
 		PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
@@ -367,11 +367,11 @@ type EndpointAuthInfo struct {
 
 	// The security group allowlist in CIDR format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList" list`
+	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList"`
 
 	// The security group blocklist in CIDR format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList" list`
+	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList"`
 
 	// The authentication key. Its value is same as `X-TENCENT-PACKAGE` set in the HTTP request header.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -585,9 +585,9 @@ func (r *ModifyMediaPackageChannelResponse) FromJsonString(s string) error {
 type PointInfo struct {
 
 	// Channel input list.
-	Inputs []*InputInfo `json:"Inputs,omitempty" name:"Inputs" list`
+	Inputs []*InputInfo `json:"Inputs,omitempty" name:"Inputs"`
 
 	// Channel output list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Endpoints []*EndpointInfo `json:"Endpoints,omitempty" name:"Endpoints" list`
+	Endpoints []*EndpointInfo `json:"Endpoints,omitempty" name:"Endpoints"`
 }

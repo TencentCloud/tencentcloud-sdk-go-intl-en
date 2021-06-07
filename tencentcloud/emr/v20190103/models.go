@@ -223,7 +223,7 @@ type ClusterInstancesInfo struct {
 
 	// Tag information
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Hive metadata
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -260,7 +260,7 @@ type CreateInstanceRequest struct {
 	// <li>When `ProductId` is 2, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
 	// <li>When `ProductId` is 4, the required components include hadoop-2.8.4, knox-1.2.0, and zookeeper-3.4.9</li>
 	// <li>When `ProductId` is 7, the required components include hadoop-3.1.2, knox-1.2.0, and zookeeper-3.4.9</li>
-	Software []*string `json:"Software,omitempty" name:"Software" list`
+	Software []*string `json:"Software,omitempty" name:"Software"`
 
 	// Node resource specification.
 	ResourceSpec *NewResourceSpec `json:"ResourceSpec,omitempty" name:"ResourceSpec"`
@@ -304,7 +304,7 @@ type CreateInstanceRequest struct {
 	SgId *string `json:"SgId,omitempty" name:"SgId"`
 
 	// Bootstrap script settings.
-	PreExecutedFileSettings []*PreExecuteFileSettings `json:"PreExecutedFileSettings,omitempty" name:"PreExecutedFileSettings" list`
+	PreExecutedFileSettings []*PreExecuteFileSettings `json:"PreExecutedFileSettings,omitempty" name:"PreExecutedFileSettings"`
 
 	// Whether auto-renewal is enabled. Valid values:
 	// <li>0: auto-renewal not enabled.</li>
@@ -329,10 +329,10 @@ type CreateInstanceRequest struct {
 	ExtendFsField *string `json:"ExtendFsField,omitempty" name:"ExtendFsField"`
 
 	// Tag description list. This parameter is used to bind a tag to a resource instance.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// List of spread placement group IDs. Only one can be specified currently.
-	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds" list`
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
 
 	// CBS disk encryption at the cluster level. 0: not encrypted, 1: encrypted
 	CbsEncrypt *uint64 `json:"CbsEncrypt,omitempty" name:"CbsEncrypt"`
@@ -457,7 +457,7 @@ type DescribeClusterNodesRequest struct {
 	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
 
 	// Searchable field
-	SearchFields []*SearchItem `json:"SearchFields,omitempty" name:"SearchFields" list`
+	SearchFields []*SearchItem `json:"SearchFields,omitempty" name:"SearchFields"`
 }
 
 func (r *DescribeClusterNodesRequest) ToJsonString() string {
@@ -493,15 +493,15 @@ type DescribeClusterNodesResponse struct {
 
 		// List of node details
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		NodeList []*NodeHardwareInfo `json:"NodeList,omitempty" name:"NodeList" list`
+		NodeList []*NodeHardwareInfo `json:"NodeList,omitempty" name:"NodeList"`
 
 		// List of tag keys owned by user
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
 		// Resource type list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		HardwareResourceTypeList []*string `json:"HardwareResourceTypeList,omitempty" name:"HardwareResourceTypeList" list`
+		HardwareResourceTypeList []*string `json:"HardwareResourceTypeList,omitempty" name:"HardwareResourceTypeList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -529,7 +529,7 @@ type DescribeInstancesRequest struct {
 	DisplayStrategy *string `json:"DisplayStrategy,omitempty" name:"DisplayStrategy"`
 
 	// Queries by one or more instance IDs in the format of `emr-xxxxxxxx`. For the format of this parameter, please see the `id.N` section in [API Overview](https://intl.cloud.tencent.com/document/api/213/15688). If no instance ID is entered, the list of all instances under this `APPID` will be returned.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds" list`
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Page number. Default value: 0, indicating the first page.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
@@ -586,11 +586,11 @@ type DescribeInstancesResponse struct {
 
 		// List of EMR instance details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		ClusterList []*ClusterInstancesInfo `json:"ClusterList,omitempty" name:"ClusterList" list`
+		ClusterList []*ClusterInstancesInfo `json:"ClusterList,omitempty" name:"ClusterList"`
 
 		// List of tag keys associated to an instance.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys" list`
+		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -627,7 +627,7 @@ type EmrProductConfigOutter struct {
 
 	// Software information
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SoftInfo []*string `json:"SoftInfo,omitempty" name:"SoftInfo" list`
+	SoftInfo []*string `json:"SoftInfo,omitempty" name:"SoftInfo"`
 
 	// Number of master nodes
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -729,7 +729,7 @@ type InquiryPriceCreateInstanceRequest struct {
 	// <li>When `ProductId` is 2, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
 	// <li>When `ProductId` is 4, the required components include hadoop-2.8.4, knox-1.2.0, and zookeeper-3.4.9</li>
 	// <li>When `ProductId` is 7, the required components include hadoop-3.1.2, knox-1.2.0, and zookeeper-3.4.9</li>
-	Software []*string `json:"Software,omitempty" name:"Software" list`
+	Software []*string `json:"Software,omitempty" name:"Software"`
 
 	// Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
 	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
@@ -832,7 +832,7 @@ type InquiryPriceRenewInstanceRequest struct {
 	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
 	// List of resource IDs of the node to be renewed. The resource ID is in the format of `emr-vm-xxxxxxxx`. A valid resource ID can be queried in the [console](https://console.cloud.tencent.com/emr/static/hardware).
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
 	// Location of the instance. This parameter is used to specify the AZ, project, and other attributes of the instance.
 	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
@@ -1283,7 +1283,7 @@ type NodeHardwareInfo struct {
 
 	// Multi-cloud disk
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MCMultiDisk []*MultiDiskMC `json:"MCMultiDisk,omitempty" name:"MCMultiDisk" list`
+	MCMultiDisk []*MultiDiskMC `json:"MCMultiDisk,omitempty" name:"MCMultiDisk"`
 
 	// Database information
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1299,7 +1299,7 @@ type NodeHardwareInfo struct {
 
 	// Tags bound to node
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Wether the node is auto-scaling. 0 means common node. 1 means auto-scaling node.
 	AutoFlag *int64 `json:"AutoFlag,omitempty" name:"AutoFlag"`
@@ -1410,13 +1410,13 @@ type PodSpec struct {
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
 	// Mount point of resources for the host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod. (This parameter has been disused)
-	DataVolumes []*string `json:"DataVolumes,omitempty" name:"DataVolumes" list`
+	DataVolumes []*string `json:"DataVolumes,omitempty" name:"DataVolumes"`
 
 	// EKS cluster - CPU type. Valid values: "intel", "amd"
 	CpuType *string `json:"CpuType,omitempty" name:"CpuType"`
 
 	// Pod node data directory mounting information.
-	PodVolumes []*PodVolume `json:"PodVolumes,omitempty" name:"PodVolumes" list`
+	PodVolumes []*PodVolume `json:"PodVolumes,omitempty" name:"PodVolumes"`
 
 	// Whether floating specification is used. `1`: yes; `0`: no
 	IsDynamicSpec *uint64 `json:"IsDynamicSpec,omitempty" name:"IsDynamicSpec"`
@@ -1447,7 +1447,7 @@ type PreExecuteFileSettings struct {
 	Path *string `json:"Path,omitempty" name:"Path"`
 
 	// Execution script parameter
-	Args []*string `json:"Args,omitempty" name:"Args" list`
+	Args []*string `json:"Args,omitempty" name:"Args"`
 
 	// COS bucket name, which has been disused
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
@@ -1512,7 +1512,7 @@ type PriceResource struct {
 
 	// List of cloud disks
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MultiDisks []*MultiDisk `json:"MultiDisks,omitempty" name:"MultiDisks" list`
+	MultiDisks []*MultiDisk `json:"MultiDisks,omitempty" name:"MultiDisks"`
 
 	// Number of disks
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1524,7 +1524,7 @@ type PriceResource struct {
 
 	// Tag
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Number of disks
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1567,11 +1567,11 @@ type Resource struct {
 
 	// List of cloud disks. When the data disk is a cloud disk, `DiskType` and `DiskSize` are used directly; `MultiDisks` will be used for the excessive part
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MultiDisks []*MultiDisk `json:"MultiDisks,omitempty" name:"MultiDisks" list`
+	MultiDisks []*MultiDisk `json:"MultiDisks,omitempty" name:"MultiDisks"`
 
 	// List of tags to be bound
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Specification type
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1608,7 +1608,7 @@ type ScaleOutInstanceRequest struct {
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
 	// Bootstrap script settings.
-	PreExecutedFileSettings []*PreExecuteFileSettings `json:"PreExecutedFileSettings,omitempty" name:"PreExecutedFileSettings" list`
+	PreExecutedFileSettings []*PreExecuteFileSettings `json:"PreExecutedFileSettings,omitempty" name:"PreExecutedFileSettings"`
 
 	// Number of task nodes added.
 	TaskCount *uint64 `json:"TaskCount,omitempty" name:"TaskCount"`
@@ -1617,7 +1617,7 @@ type ScaleOutInstanceRequest struct {
 	CoreCount *uint64 `json:"CoreCount,omitempty" name:"CoreCount"`
 
 	// Process not required during scale-out.
-	UnNecessaryNodeList []*uint64 `json:"UnNecessaryNodeList,omitempty" name:"UnNecessaryNodeList" list`
+	UnNecessaryNodeList []*uint64 `json:"UnNecessaryNodeList,omitempty" name:"UnNecessaryNodeList"`
 
 	// Number of router nodes added.
 	RouterCount *uint64 `json:"RouterCount,omitempty" name:"RouterCount"`
@@ -1625,16 +1625,16 @@ type ScaleOutInstanceRequest struct {
 	// Deployed service.
 	// <li>`SoftDeployInfo` and `ServiceNodeInfo` are in the same group and mutually exclusive with `UnNecessaryNodeList`.</li>
 	// <li>The combination of `SoftDeployInfo` and `ServiceNodeInfo` is recommended.</li>
-	SoftDeployInfo []*uint64 `json:"SoftDeployInfo,omitempty" name:"SoftDeployInfo" list`
+	SoftDeployInfo []*uint64 `json:"SoftDeployInfo,omitempty" name:"SoftDeployInfo"`
 
 	// Started process.
-	ServiceNodeInfo []*uint64 `json:"ServiceNodeInfo,omitempty" name:"ServiceNodeInfo" list`
+	ServiceNodeInfo []*uint64 `json:"ServiceNodeInfo,omitempty" name:"ServiceNodeInfo"`
 
 	// List of spread placement group IDs. Only one can be specified currently.
-	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds" list`
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
 
 	// List of tags bound to added nodes.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Resource type selected for expansion. Valid values: host (general CVM resource), pod (resource provided by TKE cluster)
 	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
@@ -1706,7 +1706,7 @@ type ScaleOutInstanceResponse struct {
 
 		// Order number.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		DealNames []*string `json:"DealNames,omitempty" name:"DealNames" list`
+		DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
 
 		// Client token.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1761,7 +1761,7 @@ type TerminateInstanceRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// ID of terminated node. This parameter is reserved and does not need to be configured.
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 }
 
 func (r *TerminateInstanceRequest) ToJsonString() string {
@@ -1811,7 +1811,7 @@ type TerminateTasksRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// List of resource IDs of the node to be terminated. The resource ID is in the format of `emr-vm-xxxxxxxx`. A valid resource ID can be queried in the [console](https://console.cloud.tencent.com/emr/static/hardware).
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds" list`
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 }
 
 func (r *TerminateTasksRequest) ToJsonString() string {

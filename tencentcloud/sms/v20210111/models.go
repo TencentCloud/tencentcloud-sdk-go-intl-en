@@ -440,7 +440,7 @@ type DescribeSmsSignListRequest struct {
 
 	// Signature ID array.
 	// Note: the maximum length of the array is 100 by default.
-	SignIdSet []*uint64 `json:"SignIdSet,omitempty" name:"SignIdSet" list`
+	SignIdSet []*uint64 `json:"SignIdSet,omitempty" name:"SignIdSet"`
 
 	// Whether it is Global SMS:
 	// 0: Mainland China SMS.
@@ -473,7 +473,7 @@ type DescribeSmsSignListResponse struct {
 	Response *struct {
 
 		// Response for getting signature information
-		DescribeSignListStatusSet []*DescribeSignListStatus `json:"DescribeSignListStatusSet,omitempty" name:"DescribeSignListStatusSet" list`
+		DescribeSignListStatusSet []*DescribeSignListStatus `json:"DescribeSignListStatusSet,omitempty" name:"DescribeSignListStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -496,7 +496,7 @@ type DescribeSmsTemplateListRequest struct {
 
 	// Template ID array.
 	// Note: the maximum length of the array is 100 by default.
-	TemplateIdSet []*uint64 `json:"TemplateIdSet,omitempty" name:"TemplateIdSet" list`
+	TemplateIdSet []*uint64 `json:"TemplateIdSet,omitempty" name:"TemplateIdSet"`
 
 	// Whether it is Global SMS:
 	// 0: Mainland China SMS.
@@ -529,7 +529,7 @@ type DescribeSmsTemplateListResponse struct {
 	Response *struct {
 
 		// Response for getting SMS template information
-		DescribeTemplateStatusSet []*DescribeTemplateListStatus `json:"DescribeTemplateStatusSet,omitempty" name:"DescribeTemplateStatusSet" list`
+		DescribeTemplateStatusSet []*DescribeTemplateListStatus `json:"DescribeTemplateStatusSet,omitempty" name:"DescribeTemplateStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -834,7 +834,7 @@ type PullSmsReplyStatusByPhoneNumberResponse struct {
 	Response *struct {
 
 		// Reply status response set.
-		PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet" list`
+		PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -887,7 +887,7 @@ type PullSmsReplyStatusResponse struct {
 	Response *struct {
 
 		// Reply status response set.
-		PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet" list`
+		PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -982,7 +982,7 @@ type PullSmsSendStatusByPhoneNumberResponse struct {
 	Response *struct {
 
 		// Delivery status response set.
-		PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet" list`
+		PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1035,7 +1035,7 @@ type PullSmsSendStatusResponse struct {
 	Response *struct {
 
 		// Delivery status response set.
-		PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet" list`
+		PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1058,7 +1058,7 @@ type SendSmsRequest struct {
 
 	// Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Mainland China mobile numbers or all global mobile numbers).
 	// Example: +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
-	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet" list`
+	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet"`
 
 	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
 	SmsSdkAppId *string `json:"SmsSdkAppId,omitempty" name:"SmsSdkAppId"`
@@ -1071,7 +1071,7 @@ type SendSmsRequest struct {
 	SignName *string `json:"SignName,omitempty" name:"SignName"`
 
 	// Template parameter. If there is no template parameter, leave this parameter blank.
-	TemplateParamSet []*string `json:"TemplateParamSet,omitempty" name:"TemplateParamSet" list`
+	TemplateParamSet []*string `json:"TemplateParamSet,omitempty" name:"TemplateParamSet"`
 
 	// SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
 	ExtendCode *string `json:"ExtendCode,omitempty" name:"ExtendCode"`
@@ -1115,7 +1115,7 @@ type SendSmsResponse struct {
 	Response *struct {
 
 		// SMS delivery status.
-		SendStatusSet []*SendStatus `json:"SendStatusSet,omitempty" name:"SendStatusSet" list`
+		SendStatusSet []*SendStatus `json:"SendStatusSet,omitempty" name:"SendStatusSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

@@ -79,7 +79,7 @@ type AsyncEvent struct {
 type AsyncTriggerConfig struct {
 
 	// Async retry configuration of function upon user error
-	RetryConfig []*RetryConfig `json:"RetryConfig,omitempty" name:"RetryConfig" list`
+	RetryConfig []*RetryConfig `json:"RetryConfig,omitempty" name:"RetryConfig"`
 
 	// Message retention period
 	MsgTTL *int64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
@@ -88,7 +88,7 @@ type AsyncTriggerConfig struct {
 type CfsConfig struct {
 
 	// File system information list
-	CfsInsList []*CfsInsInfo `json:"CfsInsList,omitempty" name:"CfsInsList" list`
+	CfsInsList []*CfsInsInfo `json:"CfsInsList,omitempty" name:"CfsInsList"`
 }
 
 type CfsInsInfo struct {
@@ -363,7 +363,7 @@ type CreateFunctionRequest struct {
 	CodeSource *string `json:"CodeSource,omitempty" name:"CodeSource"`
 
 	// List of layer versions to be associate with the function. Layers will be overwritten sequentially in the order in the list.
-	Layers []*LayerVersionSimple `json:"Layers,omitempty" name:"Layers" list`
+	Layers []*LayerVersionSimple `json:"Layers,omitempty" name:"Layers"`
 
 	// Dead letter queue parameter
 	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitempty" name:"DeadLetterConfig"`
@@ -378,7 +378,7 @@ type CreateFunctionRequest struct {
 	InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
 
 	// Tag parameter of the function. It is an array of key-value pairs.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Whether to enable the async attribute. TRUE: yes; FALSE: no
 	AsyncRunEnable *string `json:"AsyncRunEnable,omitempty" name:"AsyncRunEnable"`
@@ -970,7 +970,7 @@ type EipConfigOut struct {
 
 	// IP list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EipAddress []*string `json:"EipAddress,omitempty" name:"EipAddress" list`
+	EipAddress []*string `json:"EipAddress,omitempty" name:"EipAddress"`
 }
 
 type EipOutConfig struct {
@@ -979,13 +979,13 @@ type EipOutConfig struct {
 	EipFixed *string `json:"EipFixed,omitempty" name:"EipFixed"`
 
 	// IP list
-	Eips []*string `json:"Eips,omitempty" name:"Eips" list`
+	Eips []*string `json:"Eips,omitempty" name:"Eips"`
 }
 
 type Environment struct {
 
 	// Environment variable array
-	Variables []*Variable `json:"Variables,omitempty" name:"Variables" list`
+	Variables []*Variable `json:"Variables,omitempty" name:"Variables"`
 }
 
 type Filter struct {
@@ -994,7 +994,7 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter values of the field
-	Values []*string `json:"Values,omitempty" name:"Values" list`
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type Function struct {
@@ -1027,13 +1027,13 @@ type Function struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Function tag
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Function type. The value is `HTTP` or `Event`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Cause of function failure
-	StatusReasons []*StatusReason `json:"StatusReasons,omitempty" name:"StatusReasons" list`
+	StatusReasons []*StatusReason `json:"StatusReasons,omitempty" name:"StatusReasons"`
 
 	// Sum of provisioned concurrence memory for all function versions
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1424,7 +1424,7 @@ type GetFunctionLogsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Function log information
-		Data []*FunctionLog `json:"Data,omitempty" name:"Data" list`
+		Data []*FunctionLog `json:"Data,omitempty" name:"Data"`
 
 		// This field is disused.
 		SearchContext *LogSearchContext `json:"SearchContext,omitempty" name:"SearchContext"`
@@ -1497,7 +1497,7 @@ type GetFunctionResponse struct {
 		Description *string `json:"Description,omitempty" name:"Description"`
 
 		// Function trigger list
-		Triggers []*Trigger `json:"Triggers,omitempty" name:"Triggers" list`
+		Triggers []*Trigger `json:"Triggers,omitempty" name:"Triggers"`
 
 		// Function entry
 		Handler *string `json:"Handler,omitempty" name:"Handler"`
@@ -1563,7 +1563,7 @@ type GetFunctionResponse struct {
 		FunctionId *string `json:"FunctionId,omitempty" name:"FunctionId"`
 
 		// Function tag list
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags" list`
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 		// EipConfig configuration
 		EipConfig *EipOutConfig `json:"EipConfig,omitempty" name:"EipConfig"`
@@ -1578,7 +1578,7 @@ type GetFunctionResponse struct {
 		L5Enable *string `json:"L5Enable,omitempty" name:"L5Enable"`
 
 		// Version information of a layer associated with a function
-		Layers []*LayerVersionInfo `json:"Layers,omitempty" name:"Layers" list`
+		Layers []*LayerVersionInfo `json:"Layers,omitempty" name:"Layers"`
 
 		// Information of a dead letter queue associated with a function
 		DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitempty" name:"DeadLetterConfig"`
@@ -1611,7 +1611,7 @@ type GetFunctionResponse struct {
 
 		// Cause of function failure
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		StatusReasons []*StatusReason `json:"StatusReasons,omitempty" name:"StatusReasons" list`
+		StatusReasons []*StatusReason `json:"StatusReasons,omitempty" name:"StatusReasons"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1664,7 +1664,7 @@ type GetLayerVersionResponse struct {
 	Response *struct {
 
 		// Compatible runtimes
-		CompatibleRuntimes []*string `json:"CompatibleRuntimes,omitempty" name:"CompatibleRuntimes" list`
+		CompatibleRuntimes []*string `json:"CompatibleRuntimes,omitempty" name:"CompatibleRuntimes"`
 
 		// SHA256 encoding of version file on the layer
 		CodeSha256 *string `json:"CodeSha256,omitempty" name:"CodeSha256"`
@@ -1752,7 +1752,7 @@ type GetProvisionedConcurrencyConfigResponse struct {
 		UnallocatedConcurrencyNum *uint64 `json:"UnallocatedConcurrencyNum,omitempty" name:"UnallocatedConcurrencyNum"`
 
 		// Allocated provisioned concurrency amount of function.
-		Allocated []*VersionProvisionedConcurrencyInfo `json:"Allocated,omitempty" name:"Allocated" list`
+		Allocated []*VersionProvisionedConcurrencyInfo `json:"Allocated,omitempty" name:"Allocated"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1901,7 +1901,7 @@ type LayerVersionInfo struct {
 
 	// Runtime applicable to a version
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CompatibleRuntimes []*string `json:"CompatibleRuntimes,omitempty" name:"CompatibleRuntimes" list`
+	CompatibleRuntimes []*string `json:"CompatibleRuntimes,omitempty" name:"CompatibleRuntimes"`
 
 	// Creation time
 	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
@@ -1939,7 +1939,7 @@ type LimitsInfo struct {
 	NamespacesCount *int64 `json:"NamespacesCount,omitempty" name:"NamespacesCount"`
 
 	// Namespace limit information
-	Namespace []*NamespaceLimit `json:"Namespace,omitempty" name:"Namespace" list`
+	Namespace []*NamespaceLimit `json:"Namespace,omitempty" name:"Namespace"`
 }
 
 type ListAliasesRequest struct {
@@ -1989,7 +1989,7 @@ type ListAliasesResponse struct {
 	Response *struct {
 
 		// Alias list
-		Aliases []*Alias `json:"Aliases,omitempty" name:"Aliases" list`
+		Aliases []*Alias `json:"Aliases,omitempty" name:"Aliases"`
 
 		// Total number of aliases
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -2024,10 +2024,10 @@ type ListAsyncEventsRequest struct {
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 
 	// Filter (invocation type list)
-	InvokeType []*string `json:"InvokeType,omitempty" name:"InvokeType" list`
+	InvokeType []*string `json:"InvokeType,omitempty" name:"InvokeType"`
 
 	// Filter (event status list)
-	Status []*string `json:"Status,omitempty" name:"Status" list`
+	Status []*string `json:"Status,omitempty" name:"Status"`
 
 	// Filter (left-closed-right-open range of execution start time)
 	StartTimeInterval *TimeInterval `json:"StartTimeInterval,omitempty" name:"StartTimeInterval"`
@@ -2089,7 +2089,7 @@ type ListAsyncEventsResponse struct {
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Async event list
-		EventList []*AsyncEvent `json:"EventList,omitempty" name:"EventList" list`
+		EventList []*AsyncEvent `json:"EventList,omitempty" name:"EventList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2135,7 +2135,7 @@ type ListFunctionsRequest struct {
 	// - tag:tag-key - String - Required: No - Filtering criteria based on tag-key - value pairs. Replace `tag-key` with a specific tag-key.
 	// 
 	// The maximum number of `Filters` for each request is 10, and that of `Filter.Values` is 5.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *ListFunctionsRequest) ToJsonString() string {
@@ -2169,7 +2169,7 @@ type ListFunctionsResponse struct {
 	Response *struct {
 
 		// Function list
-		Functions []*Function `json:"Functions,omitempty" name:"Functions" list`
+		Functions []*Function `json:"Functions,omitempty" name:"Functions"`
 
 		// Total number
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2197,7 +2197,7 @@ type ListLayerVersionsRequest struct {
 	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
 
 	// Compatible runtimes
-	CompatibleRuntime []*string `json:"CompatibleRuntime,omitempty" name:"CompatibleRuntime" list`
+	CompatibleRuntime []*string `json:"CompatibleRuntime,omitempty" name:"CompatibleRuntime"`
 }
 
 func (r *ListLayerVersionsRequest) ToJsonString() string {
@@ -2225,7 +2225,7 @@ type ListLayerVersionsResponse struct {
 	Response *struct {
 
 		// Layer version list
-		LayerVersions []*LayerVersionInfo `json:"LayerVersions,omitempty" name:"LayerVersions" list`
+		LayerVersions []*LayerVersionInfo `json:"LayerVersions,omitempty" name:"LayerVersions"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2286,7 +2286,7 @@ type ListLayersResponse struct {
 	Response *struct {
 
 		// Layer list
-		Layers []*LayerVersionInfo `json:"Layers,omitempty" name:"Layers" list`
+		Layers []*LayerVersionInfo `json:"Layers,omitempty" name:"Layers"`
 
 		// Total number of layers
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2350,7 +2350,7 @@ type ListNamespacesResponse struct {
 	Response *struct {
 
 		// Namespace details
-		Namespaces []*Namespace `json:"Namespaces,omitempty" name:"Namespaces" list`
+		Namespaces []*Namespace `json:"Namespaces,omitempty" name:"Namespaces"`
 
 		// Number of return namespaces
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -2394,7 +2394,7 @@ type ListTriggersRequest struct {
 
 	// * Qualifier:
 	// Function version, alias
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters" list`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *ListTriggersRequest) ToJsonString() string {
@@ -2430,7 +2430,7 @@ type ListTriggersResponse struct {
 		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 		// Trigger list
-		Triggers []*TriggerInfo `json:"Triggers,omitempty" name:"Triggers" list`
+		Triggers []*TriggerInfo `json:"Triggers,omitempty" name:"Triggers"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2499,11 +2499,11 @@ type ListVersionByFunctionResponse struct {
 	Response *struct {
 
 		// Function version
-		FunctionVersion []*string `json:"FunctionVersion,omitempty" name:"FunctionVersion" list`
+		FunctionVersion []*string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
 
 		// Function version list
 	// Note: This field may return null, indicating that no valid values is found.
-		Versions []*FunctionVersion `json:"Versions,omitempty" name:"Versions" list`
+		Versions []*FunctionVersion `json:"Versions,omitempty" name:"Versions"`
 
 		// Total number of function versions
 	// Note: This field may return null, indicating that no valid value was found.
@@ -2607,7 +2607,7 @@ type NamespaceLimit struct {
 type NamespaceUsage struct {
 
 	// Function array
-	Functions []*string `json:"Functions,omitempty" name:"Functions" list`
+	Functions []*string `json:"Functions,omitempty" name:"Functions"`
 
 	// Namespace name
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
@@ -2641,7 +2641,7 @@ type PublishLayerVersionRequest struct {
 	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
 
 	// Runtimes compatible with layer. Multiple choices are allowed. The valid values of this parameter correspond to the valid values of the `Runtime` of the function.
-	CompatibleRuntimes []*string `json:"CompatibleRuntimes,omitempty" name:"CompatibleRuntimes" list`
+	CompatibleRuntimes []*string `json:"CompatibleRuntimes,omitempty" name:"CompatibleRuntimes"`
 
 	// Layer file source or content
 	Content *Code `json:"Content,omitempty" name:"Content"`
@@ -2975,10 +2975,10 @@ type RetryConfig struct {
 type RoutingConfig struct {
 
 	// Additional version with random weight-based routing
-	AdditionalVersionWeights []*VersionWeight `json:"AdditionalVersionWeights,omitempty" name:"AdditionalVersionWeights" list`
+	AdditionalVersionWeights []*VersionWeight `json:"AdditionalVersionWeights,omitempty" name:"AdditionalVersionWeights"`
 
 	// Additional version with rule-based routing
-	AddtionVersionMatchs []*VersionMatch `json:"AddtionVersionMatchs,omitempty" name:"AddtionVersionMatchs" list`
+	AddtionVersionMatchs []*VersionMatch `json:"AddtionVersionMatchs,omitempty" name:"AddtionVersionMatchs"`
 }
 
 type StatusReason struct {
@@ -3372,7 +3372,7 @@ type UpdateFunctionConfigurationRequest struct {
 	L5Enable *string `json:"L5Enable,omitempty" name:"L5Enable"`
 
 	// List of layer versions that bound with the function. Files with the same name will be overridden by the bound layer versions according to the ascending order in the list. 
-	Layers []*LayerVersionSimple `json:"Layers,omitempty" name:"Layers" list`
+	Layers []*LayerVersionSimple `json:"Layers,omitempty" name:"Layers"`
 
 	// Information of a dead letter queue associated with a function
 	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitempty" name:"DeadLetterConfig"`
@@ -3553,7 +3553,7 @@ type UsageInfo struct {
 	NamespacesCount *int64 `json:"NamespacesCount,omitempty" name:"NamespacesCount"`
 
 	// Namespace details
-	Namespace []*NamespaceUsage `json:"Namespace,omitempty" name:"Namespace" list`
+	Namespace []*NamespaceUsage `json:"Namespace,omitempty" name:"Namespace"`
 
 	// Upper limit of user concurrency memory in the current region
 	TotalConcurrencyMem *int64 `json:"TotalConcurrencyMem,omitempty" name:"TotalConcurrencyMem"`
