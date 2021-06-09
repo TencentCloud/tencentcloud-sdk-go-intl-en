@@ -16,8 +16,7 @@ package v20200303
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -67,7 +66,7 @@ func (r *AnalyzeFaceRequest) FromJsonString(s string) error {
 	delete(f, "FaceModelVersion")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("AnalyzeFaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AnalyzeFaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -206,7 +205,7 @@ func (r *CompareFaceRequest) FromJsonString(s string) error {
 	delete(f, "QualityControl")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("CompareFaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CompareFaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -266,7 +265,7 @@ func (r *CopyPersonRequest) FromJsonString(s string) error {
 	delete(f, "PersonId")
 	delete(f, "GroupIds")
 	if len(f) > 0 {
-		return errors.New("CopyPersonRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CopyPersonRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -357,7 +356,7 @@ func (r *CreateFaceRequest) FromJsonString(s string) error {
 	delete(f, "QualityControl")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("CreateFaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateFaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -449,7 +448,7 @@ func (r *CreateGroupRequest) FromJsonString(s string) error {
 	delete(f, "Tag")
 	delete(f, "FaceModelVersion")
 	if len(f) > 0 {
-		return errors.New("CreateGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -557,7 +556,7 @@ func (r *CreatePersonRequest) FromJsonString(s string) error {
 	delete(f, "QualityControl")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("CreatePersonRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePersonRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -621,7 +620,7 @@ func (r *DeleteFaceRequest) FromJsonString(s string) error {
 	delete(f, "PersonId")
 	delete(f, "FaceIds")
 	if len(f) > 0 {
-		return errors.New("DeleteFaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteFaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -673,7 +672,7 @@ func (r *DeleteGroupRequest) FromJsonString(s string) error {
 	}
 	delete(f, "GroupId")
 	if len(f) > 0 {
-		return errors.New("DeleteGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -723,7 +722,7 @@ func (r *DeletePersonFromGroupRequest) FromJsonString(s string) error {
 	delete(f, "PersonId")
 	delete(f, "GroupId")
 	if len(f) > 0 {
-		return errors.New("DeletePersonFromGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeletePersonFromGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -769,7 +768,7 @@ func (r *DeletePersonRequest) FromJsonString(s string) error {
 	}
 	delete(f, "PersonId")
 	if len(f) > 0 {
-		return errors.New("DeletePersonRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeletePersonRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -861,7 +860,7 @@ func (r *DetectFaceRequest) FromJsonString(s string) error {
 	delete(f, "FaceModelVersion")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("DetectFaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetectFaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -937,7 +936,7 @@ func (r *DetectLiveFaceRequest) FromJsonString(s string) error {
 	delete(f, "Url")
 	delete(f, "FaceModelVersion")
 	if len(f) > 0 {
-		return errors.New("DetectLiveFaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetectLiveFaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1190,7 +1189,7 @@ func (r *GetGroupInfoRequest) FromJsonString(s string) error {
 	}
 	delete(f, "GroupId")
 	if len(f) > 0 {
-		return errors.New("GetGroupInfoRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetGroupInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1258,7 +1257,7 @@ func (r *GetGroupListRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("GetGroupListRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetGroupListRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1311,7 +1310,7 @@ func (r *GetPersonBaseInfoRequest) FromJsonString(s string) error {
 	}
 	delete(f, "PersonId")
 	if len(f) > 0 {
-		return errors.New("GetPersonBaseInfoRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetPersonBaseInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1374,7 +1373,7 @@ func (r *GetPersonGroupInfoRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("GetPersonGroupInfoRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetPersonGroupInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1431,7 +1430,7 @@ func (r *GetPersonListNumRequest) FromJsonString(s string) error {
 	}
 	delete(f, "GroupId")
 	if len(f) > 0 {
-		return errors.New("GetPersonListNumRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetPersonListNumRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1491,7 +1490,7 @@ func (r *GetPersonListRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("GetPersonListRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetPersonListRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1609,7 +1608,7 @@ func (r *ModifyGroupRequest) FromJsonString(s string) error {
 	delete(f, "GroupExDescriptionInfos")
 	delete(f, "Tag")
 	if len(f) > 0 {
-		return errors.New("ModifyGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1663,7 +1662,7 @@ func (r *ModifyPersonBaseInfoRequest) FromJsonString(s string) error {
 	delete(f, "PersonName")
 	delete(f, "Gender")
 	if len(f) > 0 {
-		return errors.New("ModifyPersonBaseInfoRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPersonBaseInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1717,7 +1716,7 @@ func (r *ModifyPersonGroupInfoRequest) FromJsonString(s string) error {
 	delete(f, "PersonId")
 	delete(f, "PersonExDescriptionInfos")
 	if len(f) > 0 {
-		return errors.New("ModifyPersonGroupInfoRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPersonGroupInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1893,7 +1892,7 @@ func (r *SearchFacesRequest) FromJsonString(s string) error {
 	delete(f, "FaceMatchThreshold")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("SearchFacesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchFacesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2003,7 +2002,7 @@ func (r *SearchFacesReturnsByGroupRequest) FromJsonString(s string) error {
 	delete(f, "FaceMatchThreshold")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("SearchFacesReturnsByGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchFacesReturnsByGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2113,7 +2112,7 @@ func (r *SearchPersonsRequest) FromJsonString(s string) error {
 	delete(f, "NeedPersonInfo")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("SearchPersonsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchPersonsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2222,7 +2221,7 @@ func (r *SearchPersonsReturnsByGroupRequest) FromJsonString(s string) error {
 	delete(f, "NeedPersonInfo")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("SearchPersonsReturnsByGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchPersonsReturnsByGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2309,7 +2308,7 @@ func (r *VerifyFaceRequest) FromJsonString(s string) error {
 	delete(f, "QualityControl")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("VerifyFaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "VerifyFaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2400,7 +2399,7 @@ func (r *VerifyPersonRequest) FromJsonString(s string) error {
 	delete(f, "QualityControl")
 	delete(f, "NeedRotateDetection")
 	if len(f) > 0 {
-		return errors.New("VerifyPersonRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "VerifyPersonRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

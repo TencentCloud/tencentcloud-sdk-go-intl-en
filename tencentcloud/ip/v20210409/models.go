@@ -16,8 +16,7 @@ package v20210409
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -92,7 +91,7 @@ func (r *CreateAccountRequest) FromJsonString(s string) error {
 	delete(f, "Area")
 	delete(f, "Extended")
 	if len(f) > 0 {
-		return errors.New("CreateAccountRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccountRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -137,7 +136,7 @@ func (r *GetCountryCodesRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("GetCountryCodesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetCountryCodesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

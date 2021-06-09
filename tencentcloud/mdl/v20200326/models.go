@@ -16,8 +16,7 @@ package v20200326
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -183,7 +182,7 @@ func (r *CreateMediaLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "AudioTemplates")
 	delete(f, "VideoTemplates")
 	if len(f) > 0 {
-		return errors.New("CreateMediaLiveChannelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -246,7 +245,7 @@ func (r *CreateMediaLiveInputRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupIds")
 	delete(f, "InputSettings")
 	if len(f) > 0 {
-		return errors.New("CreateMediaLiveInputRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaLiveInputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -299,7 +298,7 @@ func (r *CreateMediaLiveInputSecurityGroupRequest) FromJsonString(s string) erro
 	delete(f, "Name")
 	delete(f, "Whitelist")
 	if len(f) > 0 {
-		return errors.New("CreateMediaLiveInputSecurityGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaLiveInputSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -360,7 +359,7 @@ func (r *DeleteMediaLiveChannelRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return errors.New("DeleteMediaLiveChannelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -406,7 +405,7 @@ func (r *DeleteMediaLiveInputRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return errors.New("DeleteMediaLiveInputRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaLiveInputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -452,7 +451,7 @@ func (r *DeleteMediaLiveInputSecurityGroupRequest) FromJsonString(s string) erro
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return errors.New("DeleteMediaLiveInputSecurityGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaLiveInputSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -498,7 +497,7 @@ func (r *DescribeMediaLiveChannelAlertsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ChannelId")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaLiveChannelAlertsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelAlertsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -561,7 +560,7 @@ func (r *DescribeMediaLiveChannelInputStatisticsRequest) FromJsonString(s string
 	delete(f, "EndTime")
 	delete(f, "Period")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaLiveChannelInputStatisticsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelInputStatisticsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -620,7 +619,7 @@ func (r *DescribeMediaLiveChannelLogsRequest) FromJsonString(s string) error {
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaLiveChannelLogsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelLogsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -683,7 +682,7 @@ func (r *DescribeMediaLiveChannelOutputStatisticsRequest) FromJsonString(s strin
 	delete(f, "EndTime")
 	delete(f, "Period")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaLiveChannelOutputStatisticsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelOutputStatisticsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -732,7 +731,7 @@ func (r *DescribeMediaLiveChannelRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaLiveChannelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -777,7 +776,7 @@ func (r *DescribeMediaLiveChannelsRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeMediaLiveChannelsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -827,7 +826,7 @@ func (r *DescribeMediaLiveInputRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaLiveInputRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveInputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -876,7 +875,7 @@ func (r *DescribeMediaLiveInputSecurityGroupRequest) FromJsonString(s string) er
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaLiveInputSecurityGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveInputSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -921,7 +920,7 @@ func (r *DescribeMediaLiveInputSecurityGroupsRequest) FromJsonString(s string) e
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeMediaLiveInputSecurityGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveInputSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -966,7 +965,7 @@ func (r *DescribeMediaLiveInputsRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeMediaLiveInputsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveInputsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1211,7 +1210,7 @@ func (r *ModifyMediaLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "AudioTemplates")
 	delete(f, "VideoTemplates")
 	if len(f) > 0 {
-		return errors.New("ModifyMediaLiveChannelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1272,7 +1271,7 @@ func (r *ModifyMediaLiveInputRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupIds")
 	delete(f, "InputSettings")
 	if len(f) > 0 {
-		return errors.New("ModifyMediaLiveInputRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaLiveInputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1326,7 +1325,7 @@ func (r *ModifyMediaLiveInputSecurityGroupRequest) FromJsonString(s string) erro
 	delete(f, "Name")
 	delete(f, "Whitelist")
 	if len(f) > 0 {
-		return errors.New("ModifyMediaLiveInputSecurityGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaLiveInputSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1475,7 +1474,7 @@ func (r *StartMediaLiveChannelRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return errors.New("StartMediaLiveChannelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartMediaLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1521,7 +1520,7 @@ func (r *StopMediaLiveChannelRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return errors.New("StopMediaLiveChannelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopMediaLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

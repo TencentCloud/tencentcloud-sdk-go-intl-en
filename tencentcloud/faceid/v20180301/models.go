@@ -16,8 +16,7 @@ package v20180301
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -65,7 +64,7 @@ func (r *LivenessCompareRequest) FromJsonString(s string) error {
 	delete(f, "ValidateData")
 	delete(f, "Optional")
 	if len(f) > 0 {
-		return errors.New("LivenessCompareRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "LivenessCompareRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

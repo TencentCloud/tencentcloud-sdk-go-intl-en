@@ -16,8 +16,7 @@ package v20180813
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -58,7 +57,7 @@ func (r *AssumeRoleRequest) FromJsonString(s string) error {
 	delete(f, "DurationSeconds")
 	delete(f, "Policy")
 	if len(f) > 0 {
-		return errors.New("AssumeRoleRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssumeRoleRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -129,7 +128,7 @@ func (r *AssumeRoleWithSAMLRequest) FromJsonString(s string) error {
 	delete(f, "RoleSessionName")
 	delete(f, "DurationSeconds")
 	if len(f) > 0 {
-		return errors.New("AssumeRoleWithSAMLRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssumeRoleWithSAMLRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -208,7 +207,7 @@ func (r *GetFederationTokenRequest) FromJsonString(s string) error {
 	delete(f, "Policy")
 	delete(f, "DurationSeconds")
 	if len(f) > 0 {
-		return errors.New("GetFederationTokenRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetFederationTokenRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

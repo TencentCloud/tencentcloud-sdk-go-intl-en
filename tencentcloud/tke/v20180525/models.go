@@ -16,8 +16,7 @@ package v20180525
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -42,7 +41,7 @@ func (r *AcquireClusterAdminRoleRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	if len(f) > 0 {
-		return errors.New("AcquireClusterAdminRoleRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AcquireClusterAdminRoleRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -120,7 +119,7 @@ func (r *AddExistedInstancesRequest) FromJsonString(s string) error {
 	delete(f, "NodePool")
 	delete(f, "SkipValidateOptions")
 	if len(f) > 0 {
-		return errors.New("AddExistedInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddExistedInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -190,7 +189,7 @@ func (r *AddNodeToNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "NodePoolId")
 	delete(f, "InstanceIds")
 	if len(f) > 0 {
-		return errors.New("AddNodeToNodePoolRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddNodeToNodePoolRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -280,7 +279,7 @@ func (r *CheckInstancesUpgradeAbleRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Filter")
 	if len(f) > 0 {
-		return errors.New("CheckInstancesUpgradeAbleRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckInstancesUpgradeAbleRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -668,7 +667,7 @@ func (r *CreateClusterAsGroupRequest) FromJsonString(s string) error {
 	delete(f, "InstanceAdvancedSettings")
 	delete(f, "Labels")
 	if len(f) > 0 {
-		return errors.New("CreateClusterAsGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterAsGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -728,7 +727,7 @@ func (r *CreateClusterEndpointRequest) FromJsonString(s string) error {
 	delete(f, "SubnetId")
 	delete(f, "IsExtranet")
 	if len(f) > 0 {
-		return errors.New("CreateClusterEndpointRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterEndpointRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -778,7 +777,7 @@ func (r *CreateClusterEndpointVipRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "SecurityPolicies")
 	if len(f) > 0 {
-		return errors.New("CreateClusterEndpointVipRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterEndpointVipRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -839,7 +838,7 @@ func (r *CreateClusterInstancesRequest) FromJsonString(s string) error {
 	delete(f, "InstanceAdvancedSettings")
 	delete(f, "SkipValidateOptions")
 	if len(f) > 0 {
-		return errors.New("CreateClusterInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -892,7 +891,7 @@ func (r *CreateClusterNodePoolFromExistingAsgRequest) FromJsonString(s string) e
 	delete(f, "ClusterId")
 	delete(f, "AutoscalingGroupId")
 	if len(f) > 0 {
-		return errors.New("CreateClusterNodePoolFromExistingAsgRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterNodePoolFromExistingAsgRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -977,7 +976,7 @@ func (r *CreateClusterNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "NodePoolOs")
 	delete(f, "OsCustomizeType")
 	if len(f) > 0 {
-		return errors.New("CreateClusterNodePoolRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterNodePoolRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1058,7 +1057,7 @@ func (r *CreateClusterRequest) FromJsonString(s string) error {
 	delete(f, "InstanceDataDiskMountSettings")
 	delete(f, "ExtensionAddons")
 	if len(f) > 0 {
-		return errors.New("CreateClusterRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1119,7 +1118,7 @@ func (r *CreateClusterRouteTableRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "IgnoreClusterCidrConflict")
 	if len(f) > 0 {
-		return errors.New("CreateClusterRouteTableRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterRouteTableRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1196,7 +1195,7 @@ func (r *DeleteClusterAsGroupsRequest) FromJsonString(s string) error {
 	delete(f, "AutoScalingGroupIds")
 	delete(f, "KeepInstance")
 	if len(f) > 0 {
-		return errors.New("DeleteClusterAsGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterAsGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1246,7 +1245,7 @@ func (r *DeleteClusterEndpointRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "IsExtranet")
 	if len(f) > 0 {
-		return errors.New("DeleteClusterEndpointRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterEndpointRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1292,7 +1291,7 @@ func (r *DeleteClusterEndpointVipRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	if len(f) > 0 {
-		return errors.New("DeleteClusterEndpointVipRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterEndpointVipRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1350,7 +1349,7 @@ func (r *DeleteClusterInstancesRequest) FromJsonString(s string) error {
 	delete(f, "InstanceDeleteMode")
 	delete(f, "ForceDelete")
 	if len(f) > 0 {
-		return errors.New("DeleteClusterInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1413,7 +1412,7 @@ func (r *DeleteClusterNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "NodePoolIds")
 	delete(f, "KeepInstance")
 	if len(f) > 0 {
-		return errors.New("DeleteClusterNodePoolRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterNodePoolRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1467,7 +1466,7 @@ func (r *DeleteClusterRequest) FromJsonString(s string) error {
 	delete(f, "InstanceDeleteMode")
 	delete(f, "ResourceDeleteOptions")
 	if len(f) > 0 {
-		return errors.New("DeleteClusterRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1521,7 +1520,7 @@ func (r *DeleteClusterRouteRequest) FromJsonString(s string) error {
 	delete(f, "GatewayIp")
 	delete(f, "DestinationCidrBlock")
 	if len(f) > 0 {
-		return errors.New("DeleteClusterRouteRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterRouteRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1567,7 +1566,7 @@ func (r *DeleteClusterRouteTableRequest) FromJsonString(s string) error {
 	}
 	delete(f, "RouteTableName")
 	if len(f) > 0 {
-		return errors.New("DeleteClusterRouteTableRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterRouteTableRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1617,7 +1616,7 @@ func (r *DescribeAvailableClusterVersionRequest) FromJsonString(s string) error 
 	delete(f, "ClusterId")
 	delete(f, "ClusterIds")
 	if len(f) > 0 {
-		return errors.New("DescribeAvailableClusterVersionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAvailableClusterVersionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1671,7 +1670,7 @@ func (r *DescribeClusterAsGroupOptionRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterAsGroupOptionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterAsGroupOptionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1733,7 +1732,7 @@ func (r *DescribeClusterAsGroupsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterAsGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterAsGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1789,7 +1788,7 @@ func (r *DescribeClusterEndpointStatusRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "IsExtranet")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterEndpointStatusRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterEndpointStatusRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1842,7 +1841,7 @@ func (r *DescribeClusterEndpointVipStatusRequest) FromJsonString(s string) error
 	}
 	delete(f, "ClusterId")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterEndpointVipStatusRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterEndpointVipStatusRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1910,7 +1909,7 @@ func (r *DescribeClusterInstancesRequest) FromJsonString(s string) error {
 	delete(f, "InstanceIds")
 	delete(f, "InstanceRole")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1962,7 +1961,7 @@ func (r *DescribeClusterKubeconfigRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterKubeconfigRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterKubeconfigRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2015,7 +2014,7 @@ func (r *DescribeClusterNodePoolDetailRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "NodePoolId")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterNodePoolDetailRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterNodePoolDetailRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2064,7 +2063,7 @@ func (r *DescribeClusterNodePoolsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterNodePoolsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterNodePoolsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2113,7 +2112,7 @@ func (r *DescribeClusterRouteTablesRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeClusterRouteTablesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterRouteTablesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2169,7 +2168,7 @@ func (r *DescribeClusterRoutesRequest) FromJsonString(s string) error {
 	delete(f, "RouteTableName")
 	delete(f, "Filters")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2221,7 +2220,7 @@ func (r *DescribeClusterSecurityRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterSecurityRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterSecurityRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2310,7 +2309,7 @@ func (r *DescribeClustersRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Filters")
 	if len(f) > 0 {
-		return errors.New("DescribeClustersRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClustersRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2390,7 +2389,7 @@ func (r *DescribeExistedInstancesRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "IpAddresses")
 	if len(f) > 0 {
-		return errors.New("DescribeExistedInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeExistedInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2439,7 +2438,7 @@ func (r *DescribeImagesRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeImagesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImagesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2489,7 +2488,7 @@ func (r *DescribeRegionsRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeRegionsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRegionsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2547,7 +2546,7 @@ func (r *DescribeRouteTableConflictsRequest) FromJsonString(s string) error {
 	delete(f, "RouteTableCidrBlock")
 	delete(f, "VpcId")
 	if len(f) > 0 {
-		return errors.New("DescribeRouteTableConflictsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRouteTableConflictsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2726,7 +2725,7 @@ func (r *GetUpgradeInstanceProgressRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Offset")
 	if len(f) > 0 {
-		return errors.New("GetUpgradeInstanceProgressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetUpgradeInstanceProgressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3015,7 +3014,7 @@ func (r *ModifyClusterAsGroupAttributeRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "ClusterAsGroupAttribute")
 	if len(f) > 0 {
-		return errors.New("ModifyClusterAsGroupAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterAsGroupAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3065,7 +3064,7 @@ func (r *ModifyClusterAsGroupOptionAttributeRequest) FromJsonString(s string) er
 	delete(f, "ClusterId")
 	delete(f, "ClusterAsGroupOption")
 	if len(f) > 0 {
-		return errors.New("ModifyClusterAsGroupOptionAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterAsGroupOptionAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3123,7 +3122,7 @@ func (r *ModifyClusterAttributeRequest) FromJsonString(s string) error {
 	delete(f, "ClusterName")
 	delete(f, "ClusterDesc")
 	if len(f) > 0 {
-		return errors.New("ModifyClusterAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3185,7 +3184,7 @@ func (r *ModifyClusterEndpointSPRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "SecurityPolicies")
 	if len(f) > 0 {
-		return errors.New("ModifyClusterEndpointSPRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterEndpointSPRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3267,7 +3266,7 @@ func (r *ModifyClusterNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "OsName")
 	delete(f, "OsCustomizeType")
 	if len(f) > 0 {
-		return errors.New("ModifyClusterNodePoolRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterNodePoolRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3436,7 +3435,7 @@ func (r *RemoveNodeFromNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "NodePoolId")
 	delete(f, "InstanceIds")
 	if len(f) > 0 {
-		return errors.New("RemoveNodeFromNodePoolRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RemoveNodeFromNodePoolRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3553,7 +3552,7 @@ func (r *SetNodePoolNodeProtectionRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("SetNodePoolNodeProtectionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetNodePoolNodeProtectionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3670,7 +3669,7 @@ func (r *UpdateClusterVersionRequest) FromJsonString(s string) error {
 	delete(f, "MaxNotReadyPercent")
 	delete(f, "SkipPreCheck")
 	if len(f) > 0 {
-		return errors.New("UpdateClusterVersionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateClusterVersionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3759,7 +3758,7 @@ func (r *UpgradeClusterInstancesRequest) FromJsonString(s string) error {
 	delete(f, "SkipPreCheck")
 	delete(f, "MaxNotReadyPercent")
 	if len(f) > 0 {
-		return errors.New("UpgradeClusterInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeClusterInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

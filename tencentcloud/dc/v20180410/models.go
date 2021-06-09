@@ -16,8 +16,7 @@ package v20180410
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -42,7 +41,7 @@ func (r *AcceptDirectConnectTunnelRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DirectConnectTunnelId")
 	if len(f) > 0 {
-		return errors.New("AcceptDirectConnectTunnelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AcceptDirectConnectTunnelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -137,7 +136,7 @@ func (r *ApplyInternetAddressRequest) FromJsonString(s string) error {
 	delete(f, "AddrType")
 	delete(f, "AddrProto")
 	if len(f) > 0 {
-		return errors.New("ApplyInternetAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyInternetAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -270,7 +269,7 @@ func (r *CreateDirectConnectRequest) FromJsonString(s string) error {
 	delete(f, "FaultReportContactNumber")
 	delete(f, "SignLaw")
 	if len(f) > 0 {
-		return errors.New("CreateDirectConnectRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDirectConnectRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -388,7 +387,7 @@ func (r *CreateDirectConnectTunnelRequest) FromJsonString(s string) error {
 	delete(f, "TencentBackupAddress")
 	delete(f, "CloudAttachId")
 	if len(f) > 0 {
-		return errors.New("CreateDirectConnectTunnelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDirectConnectTunnelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -437,7 +436,7 @@ func (r *DeleteDirectConnectRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DirectConnectId")
 	if len(f) > 0 {
-		return errors.New("DeleteDirectConnectRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDirectConnectRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -483,7 +482,7 @@ func (r *DeleteDirectConnectTunnelRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DirectConnectTunnelId")
 	if len(f) > 0 {
-		return errors.New("DeleteDirectConnectTunnelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDirectConnectTunnelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -539,7 +538,7 @@ func (r *DescribeAccessPointsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeAccessPointsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessPointsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -607,7 +606,7 @@ func (r *DescribeDirectConnectTunnelsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeDirectConnectTunnelsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDirectConnectTunnelsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -671,7 +670,7 @@ func (r *DescribeDirectConnectsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeDirectConnectsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDirectConnectsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -723,7 +722,7 @@ func (r *DescribeInternetAddressQuotaRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeInternetAddressQuotaRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInternetAddressQuotaRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -802,7 +801,7 @@ func (r *DescribeInternetAddressRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Filters")
 	if len(f) > 0 {
-		return errors.New("DescribeInternetAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInternetAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -851,7 +850,7 @@ func (r *DescribeInternetAddressStatisticsRequest) FromJsonString(s string) erro
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeInternetAddressStatisticsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInternetAddressStatisticsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1144,7 +1143,7 @@ func (r *DisableInternetAddressRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("DisableInternetAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableInternetAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1190,7 +1189,7 @@ func (r *EnableInternetAddressRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("EnableInternetAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableInternetAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1359,7 +1358,7 @@ func (r *ModifyDirectConnectAttributeRequest) FromJsonString(s string) error {
 	delete(f, "SignLaw")
 	delete(f, "Bandwidth")
 	if len(f) > 0 {
-		return errors.New("ModifyDirectConnectAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDirectConnectAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1433,7 +1432,7 @@ func (r *ModifyDirectConnectTunnelAttributeRequest) FromJsonString(s string) err
 	delete(f, "Bandwidth")
 	delete(f, "TencentBackupAddress")
 	if len(f) > 0 {
-		return errors.New("ModifyDirectConnectTunnelAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDirectConnectTunnelAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1479,7 +1478,7 @@ func (r *RejectDirectConnectTunnelRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DirectConnectTunnelId")
 	if len(f) > 0 {
-		return errors.New("RejectDirectConnectTunnelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RejectDirectConnectTunnelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1525,7 +1524,7 @@ func (r *ReleaseInternetAddressRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("ReleaseInternetAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReleaseInternetAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

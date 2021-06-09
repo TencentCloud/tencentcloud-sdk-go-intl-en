@@ -16,8 +16,7 @@ package v20170312
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -46,7 +45,7 @@ func (r *AcceptAttachCcnInstancesRequest) FromJsonString(s string) error {
 	delete(f, "CcnId")
 	delete(f, "Instances")
 	if len(f) > 0 {
-		return errors.New("AcceptAttachCcnInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AcceptAttachCcnInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -117,7 +116,7 @@ func (r *AddBandwidthPackageResourcesRequest) FromJsonString(s string) error {
 	delete(f, "ResourceType")
 	delete(f, "Protocol")
 	if len(f) > 0 {
-		return errors.New("AddBandwidthPackageResourcesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddBandwidthPackageResourcesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -199,6 +198,10 @@ type Address struct {
 	// Network billing mode of EIP. The EIP for the bill-by-CVM account will return `null`.
 	// Note: this field may return `null`, indicating that no valid value was found.
 	InternetChargeType *string `json:"InternetChargeType,omitempty" name:"InternetChargeType"`
+
+	// List of tags associated with the EIP
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type AddressChargePrepaid struct {
@@ -350,7 +353,7 @@ func (r *AllocateAddressesRequest) FromJsonString(s string) error {
 	delete(f, "BandwidthPackageId")
 	delete(f, "AddressName")
 	if len(f) > 0 {
-		return errors.New("AllocateAddressesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AllocateAddressesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -410,7 +413,7 @@ func (r *AssignIpv6AddressesRequest) FromJsonString(s string) error {
 	delete(f, "Ipv6Addresses")
 	delete(f, "Ipv6AddressCount")
 	if len(f) > 0 {
-		return errors.New("AssignIpv6AddressesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssignIpv6AddressesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -459,7 +462,7 @@ func (r *AssignIpv6CidrBlockRequest) FromJsonString(s string) error {
 	}
 	delete(f, "VpcId")
 	if len(f) > 0 {
-		return errors.New("AssignIpv6CidrBlockRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssignIpv6CidrBlockRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -512,7 +515,7 @@ func (r *AssignIpv6SubnetCidrBlockRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "Ipv6SubnetCidrBlocks")
 	if len(f) > 0 {
-		return errors.New("AssignIpv6SubnetCidrBlockRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssignIpv6SubnetCidrBlockRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -569,7 +572,7 @@ func (r *AssignPrivateIpAddressesRequest) FromJsonString(s string) error {
 	delete(f, "PrivateIpAddresses")
 	delete(f, "SecondaryPrivateIpAddressCount")
 	if len(f) > 0 {
-		return errors.New("AssignPrivateIpAddressesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssignPrivateIpAddressesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -646,7 +649,7 @@ func (r *AssociateAddressRequest) FromJsonString(s string) error {
 	delete(f, "NetworkInterfaceId")
 	delete(f, "PrivateIpAddress")
 	if len(f) > 0 {
-		return errors.New("AssociateAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -703,7 +706,7 @@ func (r *AssociateDirectConnectGatewayNatGatewayRequest) FromJsonString(s string
 	delete(f, "NatGatewayId")
 	delete(f, "DirectConnectGatewayId")
 	if len(f) > 0 {
-		return errors.New("AssociateDirectConnectGatewayNatGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateDirectConnectGatewayNatGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -761,7 +764,7 @@ func (r *AssociateNatGatewayAddressRequest) FromJsonString(s string) error {
 	delete(f, "PublicIpAddresses")
 	delete(f, "Zone")
 	if len(f) > 0 {
-		return errors.New("AssociateNatGatewayAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateNatGatewayAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -811,7 +814,7 @@ func (r *AssociateNetworkAclSubnetsRequest) FromJsonString(s string) error {
 	delete(f, "NetworkAclId")
 	delete(f, "SubnetIds")
 	if len(f) > 0 {
-		return errors.New("AssociateNetworkAclSubnetsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateNetworkAclSubnetsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -861,7 +864,7 @@ func (r *AssociateNetworkInterfaceSecurityGroupsRequest) FromJsonString(s string
 	delete(f, "NetworkInterfaceIds")
 	delete(f, "SecurityGroupIds")
 	if len(f) > 0 {
-		return errors.New("AssociateNetworkInterfaceSecurityGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateNetworkInterfaceSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -915,7 +918,7 @@ func (r *AttachCcnInstancesRequest) FromJsonString(s string) error {
 	delete(f, "Instances")
 	delete(f, "CcnUin")
 	if len(f) > 0 {
-		return errors.New("AttachCcnInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AttachCcnInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -965,7 +968,7 @@ func (r *AttachClassicLinkVpcRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "InstanceIds")
 	if len(f) > 0 {
-		return errors.New("AttachClassicLinkVpcRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AttachClassicLinkVpcRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -998,6 +1001,9 @@ type AttachNetworkInterfaceRequest struct {
 
 	// The ID of the CVM instance, such as `ins-r8hr2upy`.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ENI mounting type. Valid values: `0` (standard); `1` (extension); default value: `0`
+	AttachType *uint64 `json:"AttachType,omitempty" name:"AttachType"`
 }
 
 func (r *AttachNetworkInterfaceRequest) ToJsonString() string {
@@ -1014,8 +1020,9 @@ func (r *AttachNetworkInterfaceRequest) FromJsonString(s string) error {
 	}
 	delete(f, "NetworkInterfaceId")
 	delete(f, "InstanceId")
+	delete(f, "AttachType")
 	if len(f) > 0 {
-		return errors.New("AttachNetworkInterfaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AttachNetworkInterfaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1069,7 +1076,7 @@ func (r *AuditCrossBorderComplianceRequest) FromJsonString(s string) error {
 	delete(f, "ComplianceId")
 	delete(f, "AuditBehavior")
 	if len(f) > 0 {
-		return errors.New("AuditCrossBorderComplianceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AuditCrossBorderComplianceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1351,7 +1358,7 @@ func (r *CheckAssistantCidrRequest) FromJsonString(s string) error {
 	delete(f, "NewCidrBlocks")
 	delete(f, "OldCidrBlocks")
 	if len(f) > 0 {
-		return errors.New("CheckAssistantCidrRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckAssistantCidrRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1434,7 +1441,7 @@ func (r *CheckNetDetectStateRequest) FromJsonString(s string) error {
 	delete(f, "SubnetId")
 	delete(f, "NetDetectName")
 	if len(f) > 0 {
-		return errors.New("CheckNetDetectStateRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckNetDetectStateRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1519,7 +1526,7 @@ func (r *CloneSecurityGroupRequest) FromJsonString(s string) error {
 	delete(f, "ProjectId")
 	delete(f, "RemoteRegion")
 	if len(f) > 0 {
-		return errors.New("CloneSecurityGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloneSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1594,7 +1601,7 @@ func (r *CreateAddressTemplateGroupRequest) FromJsonString(s string) error {
 	delete(f, "AddressTemplateGroupName")
 	delete(f, "AddressTemplateIds")
 	if len(f) > 0 {
-		return errors.New("CreateAddressTemplateGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAddressTemplateGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1647,7 +1654,7 @@ func (r *CreateAddressTemplateRequest) FromJsonString(s string) error {
 	delete(f, "AddressTemplateName")
 	delete(f, "Addresses")
 	if len(f) > 0 {
-		return errors.New("CreateAddressTemplateRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAddressTemplateRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1704,6 +1711,9 @@ type CreateAndAttachNetworkInterfaceRequest struct {
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// ENI mounting type. Valid values: `0` (standard); `1` (extension); default value: `0`
+	AttachType *uint64 `json:"AttachType,omitempty" name:"AttachType"`
 }
 
 func (r *CreateAndAttachNetworkInterfaceRequest) ToJsonString() string {
@@ -1727,8 +1737,9 @@ func (r *CreateAndAttachNetworkInterfaceRequest) FromJsonString(s string) error 
 	delete(f, "SecurityGroupIds")
 	delete(f, "NetworkInterfaceDescription")
 	delete(f, "Tags")
+	delete(f, "AttachType")
 	if len(f) > 0 {
-		return errors.New("CreateAndAttachNetworkInterfaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAndAttachNetworkInterfaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1781,7 +1792,7 @@ func (r *CreateAssistantCidrRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "CidrBlocks")
 	if len(f) > 0 {
-		return errors.New("CreateAssistantCidrRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAssistantCidrRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1855,7 +1866,7 @@ func (r *CreateBandwidthPackageRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "Protocol")
 	if len(f) > 0 {
-		return errors.New("CreateBandwidthPackageRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBandwidthPackageRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1927,7 +1938,7 @@ func (r *CreateCcnRequest) FromJsonString(s string) error {
 	delete(f, "BandwidthLimitType")
 	delete(f, "Tags")
 	if len(f) > 0 {
-		return errors.New("CreateCcnRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCcnRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1984,7 +1995,7 @@ func (r *CreateCustomerGatewayRequest) FromJsonString(s string) error {
 	delete(f, "IpAddress")
 	delete(f, "Tags")
 	if len(f) > 0 {
-		return errors.New("CreateCustomerGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCustomerGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2037,7 +2048,7 @@ func (r *CreateDefaultVpcRequest) FromJsonString(s string) error {
 	delete(f, "Zone")
 	delete(f, "Force")
 	if len(f) > 0 {
-		return errors.New("CreateDefaultVpcRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDefaultVpcRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2090,7 +2101,7 @@ func (r *CreateDirectConnectGatewayCcnRoutesRequest) FromJsonString(s string) er
 	delete(f, "DirectConnectGatewayId")
 	delete(f, "Routes")
 	if len(f) > 0 {
-		return errors.New("CreateDirectConnectGatewayCcnRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDirectConnectGatewayCcnRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2161,7 +2172,7 @@ func (r *CreateDirectConnectGatewayRequest) FromJsonString(s string) error {
 	delete(f, "ModeType")
 	delete(f, "Zone")
 	if len(f) > 0 {
-		return errors.New("CreateDirectConnectGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDirectConnectGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2238,7 +2249,7 @@ func (r *CreateFlowLogRequest) FromJsonString(s string) error {
 	delete(f, "FlowLogDescription")
 	delete(f, "Tags")
 	if len(f) > 0 {
-		return errors.New("CreateFlowLogRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateFlowLogRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2299,7 +2310,7 @@ func (r *CreateHaVipRequest) FromJsonString(s string) error {
 	delete(f, "HaVipName")
 	delete(f, "Vip")
 	if len(f) > 0 {
-		return errors.New("CreateHaVipRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateHaVipRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2356,7 +2367,7 @@ func (r *CreateLocalGatewayRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "CdcId")
 	if len(f) > 0 {
-		return errors.New("CreateLocalGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLocalGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2409,7 +2420,7 @@ func (r *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) FromJsonStr
 	delete(f, "NatGatewayId")
 	delete(f, "DestinationIpPortTranslationNatRules")
 	if len(f) > 0 {
-		return errors.New("CreateNatGatewayDestinationIpPortTranslationNatRuleRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNatGatewayDestinationIpPortTranslationNatRuleRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2487,7 +2498,7 @@ func (r *CreateNatGatewayRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "SubnetId")
 	if len(f) > 0 {
-		return errors.New("CreateNatGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNatGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2543,7 +2554,7 @@ func (r *CreateNatGatewaySourceIpTranslationNatRuleRequest) FromJsonString(s str
 	delete(f, "NatGatewayId")
 	delete(f, "SourceIpTranslationNatRules")
 	if len(f) > 0 {
-		return errors.New("CreateNatGatewaySourceIpTranslationNatRuleRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNatGatewaySourceIpTranslationNatRuleRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2583,20 +2594,22 @@ type CreateNetDetectRequest struct {
 	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
 	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp"`
 
-	// The type of the next hop. Currently supported types are:
-	// VPN: VPN gateway;
-	// DIRECTCONNECT: direct connect gateway;
-	// PEERCONNECTION: peering connection;
-	// NAT: NAT gateway;
-	// NORMAL_CVM: normal CVM.
+	// Type of the next hop. Valid values:
+	// `VPN`: VPN gateway;
+	// `DIRECTCONNECT`: direct connect gateway;
+	// `PEERCONNECTION`: peering connection;
+	// `NAT`: NAT gateway;
+	// `NORMAL_CVM`: normal CVM;
+	// `CCN`: CCN gateway.
 	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
 
-	// The next-hop destination gateway. The value is related to NextHopType.
-	// If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
-	// If NextHopType is set to DIRECTCONNECT, the value of this parameter is the direct connect gateway ID, such as dcg-12345678.
-	// If NextHopType is set to PEERCONNECTION, the value of this parameter is the peering connection ID, such as pcx-12345678.
-	// If NextHopType is set to NAT, the value of this parameter is the NAT gateway ID, such as nat-12345678.
-	// If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
+	// Next-hop destination gateway. Its value is determined by `NextHopType`.
+	// If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
+	// If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
+	// If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
+	// If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
+	// If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
+	// If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
 	NextHopDestination *string `json:"NextHopDestination,omitempty" name:"NextHopDestination"`
 
 	// Network detection description.
@@ -2623,7 +2636,7 @@ func (r *CreateNetDetectRequest) FromJsonString(s string) error {
 	delete(f, "NextHopDestination")
 	delete(f, "NetDetectDescription")
 	if len(f) > 0 {
-		return errors.New("CreateNetDetectRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNetDetectRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2676,7 +2689,7 @@ func (r *CreateNetworkAclRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "NetworkAclName")
 	if len(f) > 0 {
-		return errors.New("CreateNetworkAclRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNetworkAclRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2753,7 +2766,7 @@ func (r *CreateNetworkInterfaceRequest) FromJsonString(s string) error {
 	delete(f, "PrivateIpAddresses")
 	delete(f, "Tags")
 	if len(f) > 0 {
-		return errors.New("CreateNetworkInterfaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNetworkInterfaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2810,7 +2823,7 @@ func (r *CreateRouteTableRequest) FromJsonString(s string) error {
 	delete(f, "RouteTableName")
 	delete(f, "Tags")
 	if len(f) > 0 {
-		return errors.New("CreateRouteTableRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRouteTableRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2863,7 +2876,7 @@ func (r *CreateRoutesRequest) FromJsonString(s string) error {
 	delete(f, "RouteTableId")
 	delete(f, "Routes")
 	if len(f) > 0 {
-		return errors.New("CreateRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2919,7 +2932,7 @@ func (r *CreateSecurityGroupPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupId")
 	delete(f, "SecurityGroupPolicySet")
 	if len(f) > 0 {
-		return errors.New("CreateSecurityGroupPoliciesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecurityGroupPoliciesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2977,7 +2990,7 @@ func (r *CreateSecurityGroupRequest) FromJsonString(s string) error {
 	delete(f, "ProjectId")
 	delete(f, "Tags")
 	if len(f) > 0 {
-		return errors.New("CreateSecurityGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3038,7 +3051,7 @@ func (r *CreateSecurityGroupWithPoliciesRequest) FromJsonString(s string) error 
 	delete(f, "ProjectId")
 	delete(f, "SecurityGroupPolicySet")
 	if len(f) > 0 {
-		return errors.New("CreateSecurityGroupWithPoliciesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecurityGroupWithPoliciesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3091,7 +3104,7 @@ func (r *CreateServiceTemplateGroupRequest) FromJsonString(s string) error {
 	delete(f, "ServiceTemplateGroupName")
 	delete(f, "ServiceTemplateIds")
 	if len(f) > 0 {
-		return errors.New("CreateServiceTemplateGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateServiceTemplateGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3144,7 +3157,7 @@ func (r *CreateServiceTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ServiceTemplateName")
 	delete(f, "Services")
 	if len(f) > 0 {
-		return errors.New("CreateServiceTemplateRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateServiceTemplateRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3213,7 +3226,7 @@ func (r *CreateSubnetRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "CdcId")
 	if len(f) > 0 {
-		return errors.New("CreateSubnetRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSubnetRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3274,7 +3287,7 @@ func (r *CreateSubnetsRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "CdcId")
 	if len(f) > 0 {
-		return errors.New("CreateSubnetsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSubnetsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3343,7 +3356,7 @@ func (r *CreateVpcEndPointRequest) FromJsonString(s string) error {
 	delete(f, "EndPointVip")
 	delete(f, "SecurityGroupId")
 	if len(f) > 0 {
-		return errors.New("CreateVpcEndPointRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpcEndPointRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3408,7 +3421,7 @@ func (r *CreateVpcEndPointServiceRequest) FromJsonString(s string) error {
 	delete(f, "ServiceInstanceId")
 	delete(f, "IsPassService")
 	if len(f) > 0 {
-		return errors.New("CreateVpcEndPointServiceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpcEndPointServiceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3465,7 +3478,7 @@ func (r *CreateVpcEndPointServiceWhiteListRequest) FromJsonString(s string) erro
 	delete(f, "EndPointServiceId")
 	delete(f, "Description")
 	if len(f) > 0 {
-		return errors.New("CreateVpcEndPointServiceWhiteListRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpcEndPointServiceWhiteListRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3531,7 +3544,7 @@ func (r *CreateVpcRequest) FromJsonString(s string) error {
 	delete(f, "DomainName")
 	delete(f, "Tags")
 	if len(f) > 0 {
-		return errors.New("CreateVpcRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpcRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3624,7 +3637,7 @@ func (r *CreateVpnConnectionRequest) FromJsonString(s string) error {
 	delete(f, "HealthCheckLocalIp")
 	delete(f, "HealthCheckRemoteIp")
 	if len(f) > 0 {
-		return errors.New("CreateVpnConnectionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpnConnectionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3701,7 +3714,7 @@ func (r *CreateVpnGatewayRequest) FromJsonString(s string) error {
 	delete(f, "Type")
 	delete(f, "Tags")
 	if len(f) > 0 {
-		return errors.New("CreateVpnGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpnGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3894,7 +3907,7 @@ func (r *DeleteAddressTemplateGroupRequest) FromJsonString(s string) error {
 	}
 	delete(f, "AddressTemplateGroupId")
 	if len(f) > 0 {
-		return errors.New("DeleteAddressTemplateGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAddressTemplateGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3940,7 +3953,7 @@ func (r *DeleteAddressTemplateRequest) FromJsonString(s string) error {
 	}
 	delete(f, "AddressTemplateId")
 	if len(f) > 0 {
-		return errors.New("DeleteAddressTemplateRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAddressTemplateRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -3990,7 +4003,7 @@ func (r *DeleteAssistantCidrRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "CidrBlocks")
 	if len(f) > 0 {
-		return errors.New("DeleteAssistantCidrRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAssistantCidrRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4036,7 +4049,7 @@ func (r *DeleteBandwidthPackageRequest) FromJsonString(s string) error {
 	}
 	delete(f, "BandwidthPackageId")
 	if len(f) > 0 {
-		return errors.New("DeleteBandwidthPackageRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBandwidthPackageRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4082,7 +4095,7 @@ func (r *DeleteCcnRequest) FromJsonString(s string) error {
 	}
 	delete(f, "CcnId")
 	if len(f) > 0 {
-		return errors.New("DeleteCcnRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCcnRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4128,7 +4141,7 @@ func (r *DeleteCustomerGatewayRequest) FromJsonString(s string) error {
 	}
 	delete(f, "CustomerGatewayId")
 	if len(f) > 0 {
-		return errors.New("DeleteCustomerGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCustomerGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4178,7 +4191,7 @@ func (r *DeleteDirectConnectGatewayCcnRoutesRequest) FromJsonString(s string) er
 	delete(f, "DirectConnectGatewayId")
 	delete(f, "RouteIds")
 	if len(f) > 0 {
-		return errors.New("DeleteDirectConnectGatewayCcnRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDirectConnectGatewayCcnRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4224,7 +4237,7 @@ func (r *DeleteDirectConnectGatewayRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DirectConnectGatewayId")
 	if len(f) > 0 {
-		return errors.New("DeleteDirectConnectGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDirectConnectGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4274,7 +4287,7 @@ func (r *DeleteFlowLogRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "FlowLogId")
 	if len(f) > 0 {
-		return errors.New("DeleteFlowLogRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteFlowLogRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4320,7 +4333,7 @@ func (r *DeleteHaVipRequest) FromJsonString(s string) error {
 	}
 	delete(f, "HaVipId")
 	if len(f) > 0 {
-		return errors.New("DeleteHaVipRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteHaVipRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4374,7 +4387,7 @@ func (r *DeleteLocalGatewayRequest) FromJsonString(s string) error {
 	delete(f, "CdcId")
 	delete(f, "VpcId")
 	if len(f) > 0 {
-		return errors.New("DeleteLocalGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteLocalGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4424,7 +4437,7 @@ func (r *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) FromJsonStr
 	delete(f, "NatGatewayId")
 	delete(f, "DestinationIpPortTranslationNatRules")
 	if len(f) > 0 {
-		return errors.New("DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4470,7 +4483,7 @@ func (r *DeleteNatGatewayRequest) FromJsonString(s string) error {
 	}
 	delete(f, "NatGatewayId")
 	if len(f) > 0 {
-		return errors.New("DeleteNatGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNatGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4520,7 +4533,7 @@ func (r *DeleteNatGatewaySourceIpTranslationNatRuleRequest) FromJsonString(s str
 	delete(f, "NatGatewayId")
 	delete(f, "NatGatewaySnatIds")
 	if len(f) > 0 {
-		return errors.New("DeleteNatGatewaySourceIpTranslationNatRuleRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNatGatewaySourceIpTranslationNatRuleRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4566,7 +4579,7 @@ func (r *DeleteNetDetectRequest) FromJsonString(s string) error {
 	}
 	delete(f, "NetDetectId")
 	if len(f) > 0 {
-		return errors.New("DeleteNetDetectRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNetDetectRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4612,7 +4625,7 @@ func (r *DeleteNetworkAclRequest) FromJsonString(s string) error {
 	}
 	delete(f, "NetworkAclId")
 	if len(f) > 0 {
-		return errors.New("DeleteNetworkAclRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNetworkAclRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4658,7 +4671,7 @@ func (r *DeleteNetworkInterfaceRequest) FromJsonString(s string) error {
 	}
 	delete(f, "NetworkInterfaceId")
 	if len(f) > 0 {
-		return errors.New("DeleteNetworkInterfaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNetworkInterfaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4704,7 +4717,7 @@ func (r *DeleteRouteTableRequest) FromJsonString(s string) error {
 	}
 	delete(f, "RouteTableId")
 	if len(f) > 0 {
-		return errors.New("DeleteRouteTableRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRouteTableRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4754,7 +4767,7 @@ func (r *DeleteRoutesRequest) FromJsonString(s string) error {
 	delete(f, "RouteTableId")
 	delete(f, "Routes")
 	if len(f) > 0 {
-		return errors.New("DeleteRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4807,7 +4820,7 @@ func (r *DeleteSecurityGroupPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupId")
 	delete(f, "SecurityGroupPolicySet")
 	if len(f) > 0 {
-		return errors.New("DeleteSecurityGroupPoliciesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSecurityGroupPoliciesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4853,7 +4866,7 @@ func (r *DeleteSecurityGroupRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SecurityGroupId")
 	if len(f) > 0 {
-		return errors.New("DeleteSecurityGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4899,7 +4912,7 @@ func (r *DeleteServiceTemplateGroupRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ServiceTemplateGroupId")
 	if len(f) > 0 {
-		return errors.New("DeleteServiceTemplateGroupRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteServiceTemplateGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4945,7 +4958,7 @@ func (r *DeleteServiceTemplateRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ServiceTemplateId")
 	if len(f) > 0 {
-		return errors.New("DeleteServiceTemplateRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteServiceTemplateRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -4991,7 +5004,7 @@ func (r *DeleteSubnetRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SubnetId")
 	if len(f) > 0 {
-		return errors.New("DeleteSubnetRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSubnetRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5037,7 +5050,7 @@ func (r *DeleteVpcEndPointRequest) FromJsonString(s string) error {
 	}
 	delete(f, "EndPointId")
 	if len(f) > 0 {
-		return errors.New("DeleteVpcEndPointRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVpcEndPointRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5083,7 +5096,7 @@ func (r *DeleteVpcEndPointServiceRequest) FromJsonString(s string) error {
 	}
 	delete(f, "EndPointServiceId")
 	if len(f) > 0 {
-		return errors.New("DeleteVpcEndPointServiceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVpcEndPointServiceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5133,7 +5146,7 @@ func (r *DeleteVpcEndPointServiceWhiteListRequest) FromJsonString(s string) erro
 	delete(f, "UserUin")
 	delete(f, "EndPointServiceId")
 	if len(f) > 0 {
-		return errors.New("DeleteVpcEndPointServiceWhiteListRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVpcEndPointServiceWhiteListRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5179,7 +5192,7 @@ func (r *DeleteVpcRequest) FromJsonString(s string) error {
 	}
 	delete(f, "VpcId")
 	if len(f) > 0 {
-		return errors.New("DeleteVpcRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVpcRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5229,7 +5242,7 @@ func (r *DeleteVpnConnectionRequest) FromJsonString(s string) error {
 	delete(f, "VpnGatewayId")
 	delete(f, "VpnConnectionId")
 	if len(f) > 0 {
-		return errors.New("DeleteVpnConnectionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVpnConnectionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5275,7 +5288,7 @@ func (r *DeleteVpnGatewayRequest) FromJsonString(s string) error {
 	}
 	delete(f, "VpnGatewayId")
 	if len(f) > 0 {
-		return errors.New("DeleteVpnGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVpnGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5317,7 +5330,7 @@ func (r *DescribeAccountAttributesRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeAccountAttributesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountAttributesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5362,7 +5375,7 @@ func (r *DescribeAddressQuotaRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeAddressQuotaRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAddressQuotaRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5421,7 +5434,7 @@ func (r *DescribeAddressTemplateGroupsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeAddressTemplateGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAddressTemplateGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5483,7 +5496,7 @@ func (r *DescribeAddressTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeAddressTemplatesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAddressTemplatesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5521,17 +5534,20 @@ type DescribeAddressesRequest struct {
 	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
 
 	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
-	// <li> address-id - String - Required: No - (Filter condition) Filter by the unique EIP ID in the format of `eip-11112222`.</li>
+	// <li> address-id - String - Required: No - (Filter condition) Filter by the unique EIP ID, such as `eip-11112222`.</li>
 	// <li> address-name - String - Required: No - (Filter condition) Filter by the EIP name. Fuzzy filtering is not supported.</li>
 	// <li> address-ip - String - Required: No - (Filter condition) Filter by EIP.</li>
 	// <li> address-status - String - Required: No - (Filter condition) Filter by the EIP state. Valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
-	// <li> instance-id - String - Required: No - (Filter condition) Filter by the ID of the instance bound to the EIP in the format of `ins-11112222`.</li>
+	// <li> instance-id - String - Required: No - (Filter condition) Filter by the ID of the instance bound to the EIP, such as `ins-11112222`.</li>
 	// <li> private-ip-address - String - Required: No - (Filter condition) Filter by the private IP address bound to the EIP.</li>
-	// <li> network-interface-id - String - Required: No - (Filter condition) Filter by the ID of the ENI bound to the EIP in the format of `eni-11112222`.</li>
+	// <li> network-interface-id - String - Required: No - (Filter condition) Filter by ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
 	// <li> is-arrears - String - Required: No - (Filter condition) Whether the EIP is overdue (TRUE: the EIP is overdue | FALSE: the billing status of the EIP is normal).</li>
 	// <li> address-type - String - Required: No - (Filter condition) Filter by the IP type. Valid values: `EIP`, `AnycastEIP`, and `HighQualityEIP`.</li>
 	// <li> address-isp - String - Required: No - (Filter condition) Filter by the ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
-	// <li> dedicated-cluster-id - String - Required: No - (Filter condition) Filter by the unique CDC ID in the format of `cluster-11112222`.</li>
+	// <li> dedicated-cluster-id - String - Required: No - (Filter condition) Filter by the unique CDC ID, such as `cluster-11112222`.</li>
+	// <li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+	// <li> tag-value - String - Required: No - (Filter condition) Filter by tag value.</li>
+	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
@@ -5558,7 +5574,7 @@ func (r *DescribeAddressesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeAddressesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAddressesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5623,7 +5639,7 @@ func (r *DescribeAssistantCidrRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeAssistantCidrRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAssistantCidrRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5676,7 +5692,7 @@ func (r *DescribeBandwidthPackageBillUsageRequest) FromJsonString(s string) erro
 	}
 	delete(f, "BandwidthPackageId")
 	if len(f) > 0 {
-		return errors.New("DescribeBandwidthPackageBillUsageRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBandwidthPackageBillUsageRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5721,7 +5737,7 @@ func (r *DescribeBandwidthPackageQuotaRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeBandwidthPackageQuotaRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBandwidthPackageQuotaRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5784,7 +5800,7 @@ func (r *DescribeBandwidthPackageResourcesRequest) FromJsonString(s string) erro
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeBandwidthPackageResourcesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBandwidthPackageResourcesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5824,11 +5840,14 @@ type DescribeBandwidthPackagesRequest struct {
 	// Each request can have up to 10 `Filters`. `BandwidthPackageIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
 	// <li> bandwidth-package_id - String - Required: No - (Filter condition) Filter by the unique ID of the bandwidth package.</li>
 	// <li> bandwidth-package-name - String - Required: No - (Filter condition) Filter by the bandwidth package name. Fuzzy filtering is not supported.</li>
-	// <li> network-type - String - Required: No - (Filter condition) Filter by the bandwidth package type. Types include 'BGP', 'SINGLEISP', and 'ANYCAST'.</li>
-	// <li> charge-type - String - Required: No - (Filter condition) Filter by the bandwidth package billing mode. Billing modes include 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'.</li>
-	// <li> resource.resource-type - String - Required: No - (Filter condition) Filter by the bandwidth package resource type. Resource types include 'Address' and 'LoadBalance'.</li>
-	// <li> resource.resource-id - String - Required: No - (Filter condition) Filter by the bandwidth package resource ID, such as 'eip-xxxx' and 'lb-xxxx'.</li>
+	// <li> network-type - String - Required: No - (Filter condition) Filter by the bandwidth package type. Valid values: `HIGH_QUALITY_BGP`, `BGP`, `SINGLEISP`, and `ANYCAST`.</li>
+	// <li> charge-type - String - Required: No - (Filter condition) Filter by the bandwidth package billing mode. Valid values: `TOP5_POSTPAID_BY_MONTH` and `PERCENT95_POSTPAID_BY_MONTH`.</li>
+	// <li> resource.resource-type - String - Required: No - (Filter condition) Filter by the bandwidth package resource type. Valid values: `Address` and `LoadBalance`.</li>
+	// <li> resource.resource-id - String - Required: No - (Filter condition) Filter by the bandwidth package resource ID, such as `eip-xxxx` and `lb-xxxx`.</li>
 	// <li> resource.address-ip - String - Required: No - (Filter condition) Filter by the bandwidth package resource IP.</li>
+	// <li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+	// <li> tag-value - String - Required: No - (Filter condition) Filter by tag value.</li>
+	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset of the query results
@@ -5855,7 +5874,7 @@ func (r *DescribeBandwidthPackagesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeBandwidthPackagesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBandwidthPackagesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5931,7 +5950,7 @@ func (r *DescribeCcnAttachedInstancesRequest) FromJsonString(s string) error {
 	delete(f, "OrderField")
 	delete(f, "OrderDirection")
 	if len(f) > 0 {
-		return errors.New("DescribeCcnAttachedInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCcnAttachedInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -5983,7 +6002,7 @@ func (r *DescribeCcnRegionBandwidthLimitsRequest) FromJsonString(s string) error
 	}
 	delete(f, "CcnId")
 	if len(f) > 0 {
-		return errors.New("DescribeCcnRegionBandwidthLimitsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCcnRegionBandwidthLimitsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6053,7 +6072,7 @@ func (r *DescribeCcnRoutesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeCcnRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCcnRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6131,7 +6150,7 @@ func (r *DescribeCcnsRequest) FromJsonString(s string) error {
 	delete(f, "OrderField")
 	delete(f, "OrderDirection")
 	if len(f) > 0 {
-		return errors.New("DescribeCcnsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCcnsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6193,7 +6212,7 @@ func (r *DescribeClassicLinkInstancesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeClassicLinkInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClassicLinkInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6305,7 +6324,7 @@ func (r *DescribeCrossBorderComplianceRequest) FromJsonString(s string) error {
 	delete(f, "ServiceEndDate")
 	delete(f, "State")
 	if len(f) > 0 {
-		return errors.New("DescribeCrossBorderComplianceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCrossBorderComplianceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6353,7 +6372,7 @@ func (r *DescribeCustomerGatewayVendorsRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeCustomerGatewayVendorsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomerGatewayVendorsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6417,7 +6436,7 @@ func (r *DescribeCustomerGatewaysRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeCustomerGatewaysRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomerGatewaysRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6483,7 +6502,7 @@ func (r *DescribeDirectConnectGatewayCcnRoutesRequest) FromJsonString(s string) 
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeDirectConnectGatewayCcnRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDirectConnectGatewayCcnRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6554,7 +6573,7 @@ func (r *DescribeDirectConnectGatewaysRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeDirectConnectGatewaysRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDirectConnectGatewaysRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6610,7 +6629,7 @@ func (r *DescribeFlowLogRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "FlowLogId")
 	if len(f) > 0 {
-		return errors.New("DescribeFlowLogRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeFlowLogRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6709,7 +6728,7 @@ func (r *DescribeFlowLogsRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Filters")
 	if len(f) > 0 {
-		return errors.New("DescribeFlowLogsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeFlowLogsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6793,7 +6812,7 @@ func (r *DescribeGatewayFlowMonitorDetailRequest) FromJsonString(s string) error
 	delete(f, "OrderField")
 	delete(f, "OrderDirection")
 	if len(f) > 0 {
-		return errors.New("DescribeGatewayFlowMonitorDetailRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGatewayFlowMonitorDetailRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6860,7 +6879,7 @@ func (r *DescribeGatewayFlowQosRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeGatewayFlowQosRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGatewayFlowQosRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6930,7 +6949,7 @@ func (r *DescribeHaVipsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeHaVipsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHaVipsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -6982,7 +7001,7 @@ func (r *DescribeIpGeolocationDatabaseUrlRequest) FromJsonString(s string) error
 	}
 	delete(f, "Type")
 	if len(f) > 0 {
-		return errors.New("DescribeIpGeolocationDatabaseUrlRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIpGeolocationDatabaseUrlRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7038,7 +7057,7 @@ func (r *DescribeIpGeolocationInfosRequest) FromJsonString(s string) error {
 	delete(f, "AddressIps")
 	delete(f, "Fields")
 	if len(f) > 0 {
-		return errors.New("DescribeIpGeolocationInfosRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIpGeolocationInfosRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7099,7 +7118,7 @@ func (r *DescribeLocalGatewayRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeLocalGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLocalGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7171,7 +7190,7 @@ func (r *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) FromJson
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7238,7 +7257,7 @@ func (r *DescribeNatGatewaySourceIpTranslationNatRulesRequest) FromJsonString(s 
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeNatGatewaySourceIpTranslationNatRulesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNatGatewaySourceIpTranslationNatRulesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7307,7 +7326,7 @@ func (r *DescribeNatGatewaysRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeNatGatewaysRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNatGatewaysRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7372,7 +7391,7 @@ func (r *DescribeNetDetectStatesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeNetDetectStatesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNetDetectStatesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7442,7 +7461,7 @@ func (r *DescribeNetDetectsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeNetDetectsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNetDetectsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7511,7 +7530,7 @@ func (r *DescribeNetworkAclsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeNetworkAclsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNetworkAclsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7563,7 +7582,7 @@ func (r *DescribeNetworkInterfaceLimitRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("DescribeNetworkInterfaceLimitRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNetworkInterfaceLimitRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7572,11 +7591,19 @@ type DescribeNetworkInterfaceLimitResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// ENI quota
+		// Quota of ENIs mounted to a CVM instance in a standard way
 		EniQuantity *int64 `json:"EniQuantity,omitempty" name:"EniQuantity"`
 
-		// Quota of IP addresses that can be allocated to each ENI.
+		// Quota of IP addresses that can be allocated to each standard-mounted ENI
 		EniPrivateIpAddressQuantity *int64 `json:"EniPrivateIpAddressQuantity,omitempty" name:"EniPrivateIpAddressQuantity"`
+
+		// Quota of ENIs mounted to a CVM instance as an extension
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ExtendEniQuantity *int64 `json:"ExtendEniQuantity,omitempty" name:"ExtendEniQuantity"`
+
+		// Quota of IP addresses that can be allocated to each extension-mounted ENI.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ExtendEniPrivateIpAddressQuantity *int64 `json:"ExtendEniPrivateIpAddressQuantity,omitempty" name:"ExtendEniPrivateIpAddressQuantity"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -7638,7 +7665,7 @@ func (r *DescribeNetworkInterfacesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeNetworkInterfacesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNetworkInterfacesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7708,7 +7735,7 @@ func (r *DescribeRouteTablesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeRouteTablesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRouteTablesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7760,7 +7787,7 @@ func (r *DescribeSecurityGroupAssociationStatisticsRequest) FromJsonString(s str
 	}
 	delete(f, "SecurityGroupIds")
 	if len(f) > 0 {
-		return errors.New("DescribeSecurityGroupAssociationStatisticsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityGroupAssociationStatisticsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7809,7 +7836,7 @@ func (r *DescribeSecurityGroupPoliciesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SecurityGroupId")
 	if len(f) > 0 {
-		return errors.New("DescribeSecurityGroupPoliciesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityGroupPoliciesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7858,7 +7885,7 @@ func (r *DescribeSecurityGroupReferencesRequest) FromJsonString(s string) error 
 	}
 	delete(f, "SecurityGroupIds")
 	if len(f) > 0 {
-		return errors.New("DescribeSecurityGroupReferencesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityGroupReferencesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7924,7 +7951,7 @@ func (r *DescribeSecurityGroupsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeSecurityGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -7987,7 +8014,7 @@ func (r *DescribeServiceTemplateGroupsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeServiceTemplateGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeServiceTemplateGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8049,7 +8076,7 @@ func (r *DescribeServiceTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeServiceTemplatesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeServiceTemplatesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8089,13 +8116,15 @@ type DescribeSubnetsRequest struct {
 	// Filter condition. `SubnetIds` and `Filters` cannot be specified at the same time.
 	// <li>subnet-id - String - (Filter condition) Subnet instance name.</li>
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
-	// <li>cidr-block - String - (Filter condition) The subnet IP range, such as 192.168.1.0.</li>
+	// <li>cidr-block - String - (Filter condition) Subnet IP range, such as `192.168.1.0`.</li>
 	// <li>is-default - Boolean - (Filter condition) Whether it is the default subnet.</li>
 	// <li>is-remote-vpc-snat - Boolean - (Filter condition) Whether it is a VPC SNAT address pool subnet.</li>
 	// <li>subnet-name - String - (Filter condition) Subnet name.</li>
 	// <li>zone - String - (Filter condition) Availability zone.</li>
-	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-	// <li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key is replaced with the specific tag key. For usage, refer to case 2.</li>
+	// <li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+	// <li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`. For its usage, see example 2.</li>
+	// <li>cdc-id - String - Required: No - (Filter condition) Filter by CDC ID to obtain subnets in the specified CDC.</li>
+	// <li>is-cdc-subnet - String - Required: No - (Filter condition) Whether it is a CDC subnet. Valid values: `0` (no); `1` (yes).</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
@@ -8122,7 +8151,7 @@ func (r *DescribeSubnetsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeSubnetsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSubnetsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8178,7 +8207,7 @@ func (r *DescribeTaskResultRequest) FromJsonString(s string) error {
 	delete(f, "TaskId")
 	delete(f, "DealName")
 	if len(f) > 0 {
-		return errors.New("DescribeTaskResultRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTaskResultRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8246,7 +8275,7 @@ func (r *DescribeVpcEndPointRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "EndPointId")
 	if len(f) > 0 {
-		return errors.New("DescribeVpcEndPointRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpcEndPointRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8313,7 +8342,7 @@ func (r *DescribeVpcEndPointServiceRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "EndPointServiceIds")
 	if len(f) > 0 {
-		return errors.New("DescribeVpcEndPointServiceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpcEndPointServiceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8375,7 +8404,7 @@ func (r *DescribeVpcEndPointServiceWhiteListRequest) FromJsonString(s string) er
 	delete(f, "Limit")
 	delete(f, "Filters")
 	if len(f) > 0 {
-		return errors.New("DescribeVpcEndPointServiceWhiteListRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpcEndPointServiceWhiteListRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8438,7 +8467,7 @@ func (r *DescribeVpcInstancesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeVpcInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpcInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8502,7 +8531,7 @@ func (r *DescribeVpcIpv6AddressesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeVpcIpv6AddressesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpcIpv6AddressesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8558,7 +8587,7 @@ func (r *DescribeVpcPrivateIpAddressesRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "PrivateIpAddresses")
 	if len(f) > 0 {
-		return errors.New("DescribeVpcPrivateIpAddressesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpcPrivateIpAddressesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8607,7 +8636,7 @@ func (r *DescribeVpcResourceDashboardRequest) FromJsonString(s string) error {
 	}
 	delete(f, "VpcIds")
 	if len(f) > 0 {
-		return errors.New("DescribeVpcResourceDashboardRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpcResourceDashboardRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8674,7 +8703,7 @@ func (r *DescribeVpcsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeVpcsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpcsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8743,7 +8772,7 @@ func (r *DescribeVpnConnectionsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeVpnConnectionsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpnConnectionsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8803,7 +8832,7 @@ func (r *DescribeVpnGatewayCcnRoutesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeVpnGatewayCcnRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpnGatewayCcnRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8874,7 +8903,7 @@ func (r *DescribeVpnGatewaysRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeVpnGatewaysRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpnGatewaysRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -8951,7 +8980,7 @@ func (r *DetachCcnInstancesRequest) FromJsonString(s string) error {
 	delete(f, "CcnId")
 	delete(f, "Instances")
 	if len(f) > 0 {
-		return errors.New("DetachCcnInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetachCcnInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9001,7 +9030,7 @@ func (r *DetachClassicLinkVpcRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "InstanceIds")
 	if len(f) > 0 {
-		return errors.New("DetachClassicLinkVpcRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetachClassicLinkVpcRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9051,7 +9080,7 @@ func (r *DetachNetworkInterfaceRequest) FromJsonString(s string) error {
 	delete(f, "NetworkInterfaceId")
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("DetachNetworkInterfaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetachNetworkInterfaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9181,7 +9210,7 @@ func (r *DisableCcnRoutesRequest) FromJsonString(s string) error {
 	delete(f, "CcnId")
 	delete(f, "RouteIds")
 	if len(f) > 0 {
-		return errors.New("DisableCcnRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableCcnRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9230,7 +9259,7 @@ func (r *DisableGatewayFlowMonitorRequest) FromJsonString(s string) error {
 	}
 	delete(f, "GatewayId")
 	if len(f) > 0 {
-		return errors.New("DisableGatewayFlowMonitorRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableGatewayFlowMonitorRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9280,7 +9309,7 @@ func (r *DisassociateAddressRequest) FromJsonString(s string) error {
 	delete(f, "AddressId")
 	delete(f, "ReallocateNormalPublicIp")
 	if len(f) > 0 {
-		return errors.New("DisassociateAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9337,7 +9366,7 @@ func (r *DisassociateDirectConnectGatewayNatGatewayRequest) FromJsonString(s str
 	delete(f, "NatGatewayId")
 	delete(f, "DirectConnectGatewayId")
 	if len(f) > 0 {
-		return errors.New("DisassociateDirectConnectGatewayNatGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateDirectConnectGatewayNatGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9387,7 +9416,7 @@ func (r *DisassociateNatGatewayAddressRequest) FromJsonString(s string) error {
 	delete(f, "NatGatewayId")
 	delete(f, "PublicIpAddresses")
 	if len(f) > 0 {
-		return errors.New("DisassociateNatGatewayAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateNatGatewayAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9437,7 +9466,7 @@ func (r *DisassociateNetworkAclSubnetsRequest) FromJsonString(s string) error {
 	delete(f, "NetworkAclId")
 	delete(f, "SubnetIds")
 	if len(f) > 0 {
-		return errors.New("DisassociateNetworkAclSubnetsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateNetworkAclSubnetsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9487,7 +9516,7 @@ func (r *DisassociateNetworkInterfaceSecurityGroupsRequest) FromJsonString(s str
 	delete(f, "NetworkInterfaceIds")
 	delete(f, "SecurityGroupIds")
 	if len(f) > 0 {
-		return errors.New("DisassociateNetworkInterfaceSecurityGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateNetworkInterfaceSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9537,7 +9566,7 @@ func (r *DisassociateVpcEndPointSecurityGroupsRequest) FromJsonString(s string) 
 	delete(f, "SecurityGroupIds")
 	delete(f, "EndPointId")
 	if len(f) > 0 {
-		return errors.New("DisassociateVpcEndPointSecurityGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateVpcEndPointSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9595,7 +9624,7 @@ func (r *DownloadCustomerGatewayConfigurationRequest) FromJsonString(s string) e
 	delete(f, "CustomerGatewayVendor")
 	delete(f, "InterfaceName")
 	if len(f) > 0 {
-		return errors.New("DownloadCustomerGatewayConfigurationRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DownloadCustomerGatewayConfigurationRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9648,7 +9677,7 @@ func (r *EnableCcnRoutesRequest) FromJsonString(s string) error {
 	delete(f, "CcnId")
 	delete(f, "RouteIds")
 	if len(f) > 0 {
-		return errors.New("EnableCcnRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableCcnRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9697,7 +9726,7 @@ func (r *EnableGatewayFlowMonitorRequest) FromJsonString(s string) error {
 	}
 	delete(f, "GatewayId")
 	if len(f) > 0 {
-		return errors.New("EnableGatewayFlowMonitorRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableGatewayFlowMonitorRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9751,7 +9780,7 @@ func (r *EnableVpcEndPointConnectRequest) FromJsonString(s string) error {
 	delete(f, "EndPointId")
 	delete(f, "AcceptFlag")
 	if len(f) > 0 {
-		return errors.New("EnableVpcEndPointConnectRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableVpcEndPointConnectRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -9984,7 +10013,7 @@ func (r *GetCcnRegionBandwidthLimitsRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "OrderBy")
 	if len(f) > 0 {
-		return errors.New("GetCcnRegionBandwidthLimitsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetCcnRegionBandwidthLimitsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10080,7 +10109,7 @@ func (r *HaVipAssociateAddressIpRequest) FromJsonString(s string) error {
 	delete(f, "HaVipId")
 	delete(f, "AddressIp")
 	if len(f) > 0 {
-		return errors.New("HaVipAssociateAddressIpRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "HaVipAssociateAddressIpRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10126,7 +10155,7 @@ func (r *HaVipDisassociateAddressIpRequest) FromJsonString(s string) error {
 	}
 	delete(f, "HaVipId")
 	if len(f) > 0 {
-		return errors.New("HaVipDisassociateAddressIpRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "HaVipDisassociateAddressIpRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10225,7 +10254,7 @@ func (r *InquirePriceCreateDirectConnectGatewayRequest) FromJsonString(s string)
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("InquirePriceCreateDirectConnectGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceCreateDirectConnectGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10287,7 +10316,7 @@ func (r *InquiryPriceCreateVpnGatewayRequest) FromJsonString(s string) error {
 	delete(f, "InstanceChargeType")
 	delete(f, "InstanceChargePrepaid")
 	if len(f) > 0 {
-		return errors.New("InquiryPriceCreateVpnGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateVpnGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10340,7 +10369,7 @@ func (r *InquiryPriceRenewVpnGatewayRequest) FromJsonString(s string) error {
 	delete(f, "VpnGatewayId")
 	delete(f, "InstanceChargePrepaid")
 	if len(f) > 0 {
-		return errors.New("InquiryPriceRenewVpnGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceRenewVpnGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10393,7 +10422,7 @@ func (r *InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest) FromJsonString(
 	delete(f, "VpnGatewayId")
 	delete(f, "InternetMaxBandwidthOut")
 	if len(f) > 0 {
-		return errors.New("InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10586,6 +10615,9 @@ type MigrateNetworkInterfaceRequest struct {
 
 	// ID of the destination CVM instance to be migrated.
 	DestinationInstanceId *string `json:"DestinationInstanceId,omitempty" name:"DestinationInstanceId"`
+
+	// ENI mount method. Valid values: 0: standard; 1: extension; default value: 0
+	AttachType *uint64 `json:"AttachType,omitempty" name:"AttachType"`
 }
 
 func (r *MigrateNetworkInterfaceRequest) ToJsonString() string {
@@ -10603,8 +10635,9 @@ func (r *MigrateNetworkInterfaceRequest) FromJsonString(s string) error {
 	delete(f, "NetworkInterfaceId")
 	delete(f, "SourceInstanceId")
 	delete(f, "DestinationInstanceId")
+	delete(f, "AttachType")
 	if len(f) > 0 {
-		return errors.New("MigrateNetworkInterfaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "MigrateNetworkInterfaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10658,7 +10691,7 @@ func (r *MigratePrivateIpAddressRequest) FromJsonString(s string) error {
 	delete(f, "DestinationNetworkInterfaceId")
 	delete(f, "PrivateIpAddress")
 	if len(f) > 0 {
-		return errors.New("MigratePrivateIpAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "MigratePrivateIpAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10712,7 +10745,7 @@ func (r *ModifyAddressAttributeRequest) FromJsonString(s string) error {
 	delete(f, "AddressName")
 	delete(f, "EipDirectConnection")
 	if len(f) > 0 {
-		return errors.New("ModifyAddressAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAddressAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10770,7 +10803,7 @@ func (r *ModifyAddressInternetChargeTypeRequest) FromJsonString(s string) error 
 	delete(f, "InternetMaxBandwidthOut")
 	delete(f, "AddressChargePrepaid")
 	if len(f) > 0 {
-		return errors.New("ModifyAddressInternetChargeTypeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAddressInternetChargeTypeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10824,7 +10857,7 @@ func (r *ModifyAddressTemplateAttributeRequest) FromJsonString(s string) error {
 	delete(f, "AddressTemplateName")
 	delete(f, "Addresses")
 	if len(f) > 0 {
-		return errors.New("ModifyAddressTemplateAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAddressTemplateAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10878,7 +10911,7 @@ func (r *ModifyAddressTemplateGroupAttributeRequest) FromJsonString(s string) er
 	delete(f, "AddressTemplateGroupName")
 	delete(f, "AddressTemplateIds")
 	if len(f) > 0 {
-		return errors.New("ModifyAddressTemplateGroupAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAddressTemplateGroupAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10936,7 +10969,7 @@ func (r *ModifyAddressesBandwidthRequest) FromJsonString(s string) error {
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	if len(f) > 0 {
-		return errors.New("ModifyAddressesBandwidthRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAddressesBandwidthRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -10993,7 +11026,7 @@ func (r *ModifyAssistantCidrRequest) FromJsonString(s string) error {
 	delete(f, "NewCidrBlocks")
 	delete(f, "OldCidrBlocks")
 	if len(f) > 0 {
-		return errors.New("ModifyAssistantCidrRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAssistantCidrRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11051,7 +11084,7 @@ func (r *ModifyBandwidthPackageAttributeRequest) FromJsonString(s string) error 
 	delete(f, "BandwidthPackageName")
 	delete(f, "ChargeType")
 	if len(f) > 0 {
-		return errors.New("ModifyBandwidthPackageAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBandwidthPackageAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11101,7 +11134,7 @@ func (r *ModifyCcnAttachedInstancesAttributeRequest) FromJsonString(s string) er
 	delete(f, "CcnId")
 	delete(f, "Instances")
 	if len(f) > 0 {
-		return errors.New("ModifyCcnAttachedInstancesAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCcnAttachedInstancesAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11155,7 +11188,7 @@ func (r *ModifyCcnAttributeRequest) FromJsonString(s string) error {
 	delete(f, "CcnName")
 	delete(f, "CcnDescription")
 	if len(f) > 0 {
-		return errors.New("ModifyCcnAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCcnAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11205,7 +11238,7 @@ func (r *ModifyCcnRegionBandwidthLimitsTypeRequest) FromJsonString(s string) err
 	delete(f, "CcnId")
 	delete(f, "BandwidthLimitType")
 	if len(f) > 0 {
-		return errors.New("ModifyCcnRegionBandwidthLimitsTypeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCcnRegionBandwidthLimitsTypeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11255,7 +11288,7 @@ func (r *ModifyCustomerGatewayAttributeRequest) FromJsonString(s string) error {
 	delete(f, "CustomerGatewayId")
 	delete(f, "CustomerGatewayName")
 	if len(f) > 0 {
-		return errors.New("ModifyCustomerGatewayAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCustomerGatewayAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11313,7 +11346,7 @@ func (r *ModifyDirectConnectGatewayAttributeRequest) FromJsonString(s string) er
 	delete(f, "CcnRouteType")
 	delete(f, "ModeType")
 	if len(f) > 0 {
-		return errors.New("ModifyDirectConnectGatewayAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDirectConnectGatewayAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11371,7 +11404,7 @@ func (r *ModifyFlowLogAttributeRequest) FromJsonString(s string) error {
 	delete(f, "FlowLogName")
 	delete(f, "FlowLogDescription")
 	if len(f) > 0 {
-		return errors.New("ModifyFlowLogAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyFlowLogAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11428,7 +11461,7 @@ func (r *ModifyGatewayFlowQosRequest) FromJsonString(s string) error {
 	delete(f, "Bandwidth")
 	delete(f, "IpAddresses")
 	if len(f) > 0 {
-		return errors.New("ModifyGatewayFlowQosRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyGatewayFlowQosRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11478,7 +11511,7 @@ func (r *ModifyHaVipAttributeRequest) FromJsonString(s string) error {
 	delete(f, "HaVipId")
 	delete(f, "HaVipName")
 	if len(f) > 0 {
-		return errors.New("ModifyHaVipAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyHaVipAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11528,7 +11561,7 @@ func (r *ModifyIpv6AddressesAttributeRequest) FromJsonString(s string) error {
 	delete(f, "NetworkInterfaceId")
 	delete(f, "Ipv6Addresses")
 	if len(f) > 0 {
-		return errors.New("ModifyIpv6AddressesAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyIpv6AddressesAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11586,7 +11619,7 @@ func (r *ModifyLocalGatewayRequest) FromJsonString(s string) error {
 	delete(f, "LocalGatewayId")
 	delete(f, "VpcId")
 	if len(f) > 0 {
-		return errors.New("ModifyLocalGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLocalGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11648,7 +11681,7 @@ func (r *ModifyNatGatewayAttributeRequest) FromJsonString(s string) error {
 	delete(f, "ModifySecurityGroup")
 	delete(f, "SecurityGroupIds")
 	if len(f) > 0 {
-		return errors.New("ModifyNatGatewayAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNatGatewayAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11702,7 +11735,7 @@ func (r *ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest) FromJsonStr
 	delete(f, "SourceNatRule")
 	delete(f, "DestinationNatRule")
 	if len(f) > 0 {
-		return errors.New("ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11752,7 +11785,7 @@ func (r *ModifyNatGatewaySourceIpTranslationNatRuleRequest) FromJsonString(s str
 	delete(f, "NatGatewayId")
 	delete(f, "SourceIpTranslationNatRule")
 	if len(f) > 0 {
-		return errors.New("ModifyNatGatewaySourceIpTranslationNatRuleRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNatGatewaySourceIpTranslationNatRuleRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11828,7 +11861,7 @@ func (r *ModifyNetDetectRequest) FromJsonString(s string) error {
 	delete(f, "NextHopDestination")
 	delete(f, "NetDetectDescription")
 	if len(f) > 0 {
-		return errors.New("ModifyNetDetectRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetDetectRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11878,7 +11911,7 @@ func (r *ModifyNetworkAclAttributeRequest) FromJsonString(s string) error {
 	delete(f, "NetworkAclId")
 	delete(f, "NetworkAclName")
 	if len(f) > 0 {
-		return errors.New("ModifyNetworkAclAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkAclAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11928,7 +11961,7 @@ func (r *ModifyNetworkAclEntriesRequest) FromJsonString(s string) error {
 	delete(f, "NetworkAclId")
 	delete(f, "NetworkAclEntrySet")
 	if len(f) > 0 {
-		return errors.New("ModifyNetworkAclEntriesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkAclEntriesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -11986,7 +12019,7 @@ func (r *ModifyNetworkInterfaceAttributeRequest) FromJsonString(s string) error 
 	delete(f, "NetworkInterfaceDescription")
 	delete(f, "SecurityGroupIds")
 	if len(f) > 0 {
-		return errors.New("ModifyNetworkInterfaceAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkInterfaceAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12036,7 +12069,7 @@ func (r *ModifyPrivateIpAddressesAttributeRequest) FromJsonString(s string) erro
 	delete(f, "NetworkInterfaceId")
 	delete(f, "PrivateIpAddresses")
 	if len(f) > 0 {
-		return errors.New("ModifyPrivateIpAddressesAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPrivateIpAddressesAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12086,7 +12119,7 @@ func (r *ModifyRouteTableAttributeRequest) FromJsonString(s string) error {
 	delete(f, "RouteTableId")
 	delete(f, "RouteTableName")
 	if len(f) > 0 {
-		return errors.New("ModifyRouteTableAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRouteTableAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12140,7 +12173,7 @@ func (r *ModifySecurityGroupAttributeRequest) FromJsonString(s string) error {
 	delete(f, "GroupName")
 	delete(f, "GroupDescription")
 	if len(f) > 0 {
-		return errors.New("ModifySecurityGroupAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityGroupAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12194,7 +12227,7 @@ func (r *ModifySecurityGroupPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupPolicySet")
 	delete(f, "SortPolicys")
 	if len(f) > 0 {
-		return errors.New("ModifySecurityGroupPoliciesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityGroupPoliciesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12248,7 +12281,7 @@ func (r *ModifyServiceTemplateAttributeRequest) FromJsonString(s string) error {
 	delete(f, "ServiceTemplateName")
 	delete(f, "Services")
 	if len(f) > 0 {
-		return errors.New("ModifyServiceTemplateAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyServiceTemplateAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12302,7 +12335,7 @@ func (r *ModifyServiceTemplateGroupAttributeRequest) FromJsonString(s string) er
 	delete(f, "ServiceTemplateGroupName")
 	delete(f, "ServiceTemplateIds")
 	if len(f) > 0 {
-		return errors.New("ModifyServiceTemplateGroupAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyServiceTemplateGroupAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12356,7 +12389,7 @@ func (r *ModifySubnetAttributeRequest) FromJsonString(s string) error {
 	delete(f, "SubnetName")
 	delete(f, "EnableBroadcast")
 	if len(f) > 0 {
-		return errors.New("ModifySubnetAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySubnetAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12418,7 +12451,7 @@ func (r *ModifyVpcAttributeRequest) FromJsonString(s string) error {
 	delete(f, "DnsServers")
 	delete(f, "DomainName")
 	if len(f) > 0 {
-		return errors.New("ModifyVpcAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpcAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12472,7 +12505,7 @@ func (r *ModifyVpcEndPointAttributeRequest) FromJsonString(s string) error {
 	delete(f, "EndPointName")
 	delete(f, "SecurityGroupIds")
 	if len(f) > 0 {
-		return errors.New("ModifyVpcEndPointAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpcEndPointAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12534,7 +12567,7 @@ func (r *ModifyVpcEndPointServiceAttributeRequest) FromJsonString(s string) erro
 	delete(f, "AutoAcceptFlag")
 	delete(f, "ServiceInstanceId")
 	if len(f) > 0 {
-		return errors.New("ModifyVpcEndPointServiceAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpcEndPointServiceAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12588,7 +12621,7 @@ func (r *ModifyVpcEndPointServiceWhiteListRequest) FromJsonString(s string) erro
 	delete(f, "EndPointServiceId")
 	delete(f, "Description")
 	if len(f) > 0 {
-		return errors.New("ModifyVpcEndPointServiceWhiteListRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpcEndPointServiceWhiteListRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12666,7 +12699,7 @@ func (r *ModifyVpnConnectionAttributeRequest) FromJsonString(s string) error {
 	delete(f, "HealthCheckLocalIp")
 	delete(f, "HealthCheckRemoteIp")
 	if len(f) > 0 {
-		return errors.New("ModifyVpnConnectionAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpnConnectionAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12720,7 +12753,7 @@ func (r *ModifyVpnGatewayAttributeRequest) FromJsonString(s string) error {
 	delete(f, "VpnGatewayName")
 	delete(f, "InstanceChargeType")
 	if len(f) > 0 {
-		return errors.New("ModifyVpnGatewayAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpnGatewayAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12770,7 +12803,7 @@ func (r *ModifyVpnGatewayCcnRoutesRequest) FromJsonString(s string) error {
 	delete(f, "VpnGatewayId")
 	delete(f, "Routes")
 	if len(f) > 0 {
-		return errors.New("ModifyVpnGatewayCcnRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpnGatewayCcnRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -12917,20 +12950,22 @@ type NetDetect struct {
 	// The array of detection source IPv4 addresses automatically allocated by the system. The length is 2.
 	DetectSourceIp []*string `json:"DetectSourceIp,omitempty" name:"DetectSourceIp"`
 
-	// Type of the next hop. Currently supported types are:
+	// Type of the next hop. Valid values:
 	// VPN: VPN gateway;
 	// DIRECTCONNECT: direct connect gateway;
 	// PEERCONNECTION: peering connection;
 	// NAT: NAT gateway;
 	// NORMAL_CVM: normal CVM.
+	// CCN: CCN gateway.
 	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
 
-	// Next-hop destination gateway. The value is related to NextHopType.
-	// If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
-	// If NextHopType is set to DIRECTCONNECT, the value of this parameter is the direct connect gateway ID, such as dcg-12345678.
-	// If NextHopType is set to PEERCONNECTION, the value of this parameter is the peering connection ID, such as pcx-12345678.
-	// If NextHopType is set to NAT, the value of this parameter is the NAT gateway ID, such as nat-12345678.
-	// If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
+	// Next-hop destination gateway. Its value is determined by `NextHopType`.
+	// If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
+	// If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
+	// If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
+	// If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
+	// If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
+	// If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
 	NextHopDestination *string `json:"NextHopDestination,omitempty" name:"NextHopDestination"`
 
 	// The name of the next-hop gateway.
@@ -13095,6 +13130,10 @@ type NetworkInterface struct {
 	// ID of the CDC instance associated with the ENI
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+
+	// ENI type. Valid values: `0` (standard); `1` (extension). Default value: `0`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AttachType *uint64 `json:"AttachType,omitempty" name:"AttachType"`
 }
 
 type NetworkInterfaceAttachment struct {
@@ -13137,7 +13176,7 @@ func (r *NotifyRoutesRequest) FromJsonString(s string) error {
 	delete(f, "RouteTableId")
 	delete(f, "RouteItemIds")
 	if len(f) > 0 {
-		return errors.New("NotifyRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "NotifyRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13245,7 +13284,7 @@ func (r *RejectAttachCcnInstancesRequest) FromJsonString(s string) error {
 	delete(f, "CcnId")
 	delete(f, "Instances")
 	if len(f) > 0 {
-		return errors.New("RejectAttachCcnInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RejectAttachCcnInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13291,7 +13330,7 @@ func (r *ReleaseAddressesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "AddressIds")
 	if len(f) > 0 {
-		return errors.New("ReleaseAddressesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReleaseAddressesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13348,7 +13387,7 @@ func (r *RemoveBandwidthPackageResourcesRequest) FromJsonString(s string) error 
 	delete(f, "ResourceType")
 	delete(f, "ResourceIds")
 	if len(f) > 0 {
-		return errors.New("RemoveBandwidthPackageResourcesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RemoveBandwidthPackageResourcesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13398,7 +13437,7 @@ func (r *RenewVpnGatewayRequest) FromJsonString(s string) error {
 	delete(f, "VpnGatewayId")
 	delete(f, "InstanceChargePrepaid")
 	if len(f) > 0 {
-		return errors.New("RenewVpnGatewayRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RenewVpnGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13448,7 +13487,7 @@ func (r *ReplaceDirectConnectGatewayCcnRoutesRequest) FromJsonString(s string) e
 	delete(f, "DirectConnectGatewayId")
 	delete(f, "Routes")
 	if len(f) > 0 {
-		return errors.New("ReplaceDirectConnectGatewayCcnRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReplaceDirectConnectGatewayCcnRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13498,7 +13537,7 @@ func (r *ReplaceRouteTableAssociationRequest) FromJsonString(s string) error {
 	delete(f, "SubnetId")
 	delete(f, "RouteTableId")
 	if len(f) > 0 {
-		return errors.New("ReplaceRouteTableAssociationRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReplaceRouteTableAssociationRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13548,7 +13587,7 @@ func (r *ReplaceRoutesRequest) FromJsonString(s string) error {
 	delete(f, "RouteTableId")
 	delete(f, "Routes")
 	if len(f) > 0 {
-		return errors.New("ReplaceRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReplaceRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13608,7 +13647,7 @@ func (r *ReplaceSecurityGroupPolicyRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupPolicySet")
 	delete(f, "OriginalSecurityGroupPolicySet")
 	if len(f) > 0 {
-		return errors.New("ReplaceSecurityGroupPolicyRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReplaceSecurityGroupPolicyRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13662,7 +13701,7 @@ func (r *ResetAttachCcnInstancesRequest) FromJsonString(s string) error {
 	delete(f, "CcnUin")
 	delete(f, "Instances")
 	if len(f) > 0 {
-		return errors.New("ResetAttachCcnInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetAttachCcnInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13712,7 +13751,7 @@ func (r *ResetNatGatewayConnectionRequest) FromJsonString(s string) error {
 	delete(f, "NatGatewayId")
 	delete(f, "MaxConcurrentConnection")
 	if len(f) > 0 {
-		return errors.New("ResetNatGatewayConnectionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetNatGatewayConnectionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13766,7 +13805,7 @@ func (r *ResetRoutesRequest) FromJsonString(s string) error {
 	delete(f, "RouteTableName")
 	delete(f, "Routes")
 	if len(f) > 0 {
-		return errors.New("ResetRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13816,7 +13855,7 @@ func (r *ResetVpnConnectionRequest) FromJsonString(s string) error {
 	delete(f, "VpnGatewayId")
 	delete(f, "VpnConnectionId")
 	if len(f) > 0 {
-		return errors.New("ResetVpnConnectionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetVpnConnectionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -13866,7 +13905,7 @@ func (r *ResetVpnGatewayInternetMaxBandwidthRequest) FromJsonString(s string) er
 	delete(f, "VpnGatewayId")
 	delete(f, "InternetMaxBandwidthOut")
 	if len(f) > 0 {
-		return errors.New("ResetVpnGatewayInternetMaxBandwidthRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetVpnGatewayInternetMaxBandwidthRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -14285,6 +14324,9 @@ type SetCcnRegionBandwidthLimitsRequest struct {
 
 	// The outbound bandwidth cap of each CCN region.
 	CcnRegionBandwidthLimits []*CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimits,omitempty" name:"CcnRegionBandwidthLimits"`
+
+	// Whether to restore the region outbound bandwidth limit or inter-region bandwidth limit to default 1Gbps. Valid values: `false` (no); `true` (yes). Default value: `false`. When the parameter is set to `true`, the CCN instance created will not be displayed in the console.
+	SetDefaultLimitFlag *bool `json:"SetDefaultLimitFlag,omitempty" name:"SetDefaultLimitFlag"`
 }
 
 func (r *SetCcnRegionBandwidthLimitsRequest) ToJsonString() string {
@@ -14301,8 +14343,9 @@ func (r *SetCcnRegionBandwidthLimitsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "CcnId")
 	delete(f, "CcnRegionBandwidthLimits")
+	delete(f, "SetDefaultLimitFlag")
 	if len(f) > 0 {
-		return errors.New("SetCcnRegionBandwidthLimitsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetCcnRegionBandwidthLimitsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -14464,7 +14507,7 @@ func (r *TransformAddressRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("TransformAddressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TransformAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -14514,7 +14557,7 @@ func (r *UnassignIpv6AddressesRequest) FromJsonString(s string) error {
 	delete(f, "NetworkInterfaceId")
 	delete(f, "Ipv6Addresses")
 	if len(f) > 0 {
-		return errors.New("UnassignIpv6AddressesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnassignIpv6AddressesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -14564,7 +14607,7 @@ func (r *UnassignIpv6CidrBlockRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "Ipv6CidrBlock")
 	if len(f) > 0 {
-		return errors.New("UnassignIpv6CidrBlockRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnassignIpv6CidrBlockRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -14614,7 +14657,7 @@ func (r *UnassignIpv6SubnetCidrBlockRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "Ipv6SubnetCidrBlocks")
 	if len(f) > 0 {
-		return errors.New("UnassignIpv6SubnetCidrBlockRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnassignIpv6SubnetCidrBlockRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -14664,7 +14707,7 @@ func (r *UnassignPrivateIpAddressesRequest) FromJsonString(s string) error {
 	delete(f, "NetworkInterfaceId")
 	delete(f, "PrivateIpAddresses")
 	if len(f) > 0 {
-		return errors.New("UnassignPrivateIpAddressesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnassignPrivateIpAddressesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -14945,7 +14988,7 @@ func (r *WithdrawNotifyRoutesRequest) FromJsonString(s string) error {
 	delete(f, "RouteTableId")
 	delete(f, "RouteItemIds")
 	if len(f) > 0 {
-		return errors.New("WithdrawNotifyRoutesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "WithdrawNotifyRoutesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

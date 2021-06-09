@@ -16,8 +16,7 @@ package v20170312
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -46,7 +45,7 @@ func (r *ApplySnapshotRequest) FromJsonString(s string) error {
 	delete(f, "SnapshotId")
 	delete(f, "DiskId")
 	if len(f) > 0 {
-		return errors.New("ApplySnapshotRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplySnapshotRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -116,7 +115,7 @@ func (r *AttachDisksRequest) FromJsonString(s string) error {
 	delete(f, "DeleteWithInstance")
 	delete(f, "AttachMode")
 	if len(f) > 0 {
-		return errors.New("AttachDisksRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AttachDisksRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -199,7 +198,7 @@ func (r *BindAutoSnapshotPolicyRequest) FromJsonString(s string) error {
 	delete(f, "AutoSnapshotPolicyId")
 	delete(f, "DiskIds")
 	if len(f) > 0 {
-		return errors.New("BindAutoSnapshotPolicyRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindAutoSnapshotPolicyRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -265,7 +264,7 @@ func (r *CreateAutoSnapshotPolicyRequest) FromJsonString(s string) error {
 	delete(f, "RetentionDays")
 	delete(f, "DryRun")
 	if len(f) > 0 {
-		return errors.New("CreateAutoSnapshotPolicyRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAutoSnapshotPolicyRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -365,7 +364,7 @@ func (r *CreateDisksRequest) FromJsonString(s string) error {
 	delete(f, "Shareable")
 	delete(f, "ThroughputPerformance")
 	if len(f) > 0 {
-		return errors.New("CreateDisksRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDisksRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -422,7 +421,7 @@ func (r *CreateSnapshotRequest) FromJsonString(s string) error {
 	delete(f, "SnapshotName")
 	delete(f, "Deadline")
 	if len(f) > 0 {
-		return errors.New("CreateSnapshotRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSnapshotRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -471,7 +470,7 @@ func (r *DeleteAutoSnapshotPoliciesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "AutoSnapshotPolicyIds")
 	if len(f) > 0 {
-		return errors.New("DeleteAutoSnapshotPoliciesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAutoSnapshotPoliciesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -517,7 +516,7 @@ func (r *DeleteSnapshotsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SnapshotIds")
 	if len(f) > 0 {
-		return errors.New("DeleteSnapshotsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSnapshotsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -583,7 +582,7 @@ func (r *DescribeAutoSnapshotPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "Order")
 	delete(f, "OrderField")
 	if len(f) > 0 {
-		return errors.New("DescribeAutoSnapshotPoliciesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAutoSnapshotPoliciesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -635,7 +634,7 @@ func (r *DescribeDiskAssociatedAutoSnapshotPolicyRequest) FromJsonString(s strin
 	}
 	delete(f, "DiskId")
 	if len(f) > 0 {
-		return errors.New("DescribeDiskAssociatedAutoSnapshotPolicyRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDiskAssociatedAutoSnapshotPolicyRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -715,7 +714,7 @@ func (r *DescribeDiskConfigQuotaRequest) FromJsonString(s string) error {
 	delete(f, "CPU")
 	delete(f, "Memory")
 	if len(f) > 0 {
-		return errors.New("DescribeDiskConfigQuotaRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDiskConfigQuotaRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -773,7 +772,7 @@ func (r *DescribeDiskOperationLogsRequest) FromJsonString(s string) error {
 	delete(f, "BeginTime")
 	delete(f, "EndTime")
 	if len(f) > 0 {
-		return errors.New("DescribeDiskOperationLogsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDiskOperationLogsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -846,7 +845,7 @@ func (r *DescribeDisksRequest) FromJsonString(s string) error {
 	delete(f, "OrderField")
 	delete(f, "ReturnBindAutoSnapshotPolicy")
 	if len(f) > 0 {
-		return errors.New("DescribeDisksRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDisksRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -898,7 +897,7 @@ func (r *DescribeInstancesDiskNumRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceIds")
 	if len(f) > 0 {
-		return errors.New("DescribeInstancesDiskNumRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesDiskNumRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -956,7 +955,7 @@ func (r *DescribeSnapshotOperationLogsRequest) FromJsonString(s string) error {
 	delete(f, "BeginTime")
 	delete(f, "EndTime")
 	if len(f) > 0 {
-		return errors.New("DescribeSnapshotOperationLogsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSnapshotOperationLogsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1005,7 +1004,7 @@ func (r *DescribeSnapshotSharePermissionRequest) FromJsonString(s string) error 
 	}
 	delete(f, "SnapshotId")
 	if len(f) > 0 {
-		return errors.New("DescribeSnapshotSharePermissionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSnapshotSharePermissionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1076,7 +1075,7 @@ func (r *DescribeSnapshotsRequest) FromJsonString(s string) error {
 	delete(f, "Order")
 	delete(f, "OrderField")
 	if len(f) > 0 {
-		return errors.New("DescribeSnapshotsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSnapshotsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1132,7 +1131,7 @@ func (r *DetachDisksRequest) FromJsonString(s string) error {
 	delete(f, "DiskIds")
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("DetachDisksRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetachDisksRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1377,7 +1376,7 @@ func (r *GetSnapOverviewRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("GetSnapOverviewRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetSnapOverviewRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1448,7 +1447,7 @@ func (r *InquirePriceModifyDiskExtraPerformanceRequest) FromJsonString(s string)
 	delete(f, "DiskId")
 	delete(f, "ThroughputPerformance")
 	if len(f) > 0 {
-		return errors.New("InquirePriceModifyDiskExtraPerformanceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceModifyDiskExtraPerformanceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1521,7 +1520,7 @@ func (r *InquiryPriceCreateDisksRequest) FromJsonString(s string) error {
 	delete(f, "ProjectId")
 	delete(f, "ThroughputPerformance")
 	if len(f) > 0 {
-		return errors.New("InquiryPriceCreateDisksRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateDisksRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1578,7 +1577,7 @@ func (r *InquiryPriceResizeDiskRequest) FromJsonString(s string) error {
 	delete(f, "DiskSize")
 	delete(f, "ProjectId")
 	if len(f) > 0 {
-		return errors.New("InquiryPriceResizeDiskRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceResizeDiskRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1647,7 +1646,7 @@ func (r *ModifyAutoSnapshotPolicyAttributeRequest) FromJsonString(s string) erro
 	delete(f, "IsPermanent")
 	delete(f, "RetentionDays")
 	if len(f) > 0 {
-		return errors.New("ModifyAutoSnapshotPolicyAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAutoSnapshotPolicyAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1713,7 +1712,7 @@ func (r *ModifyDiskAttributesRequest) FromJsonString(s string) error {
 	delete(f, "DeleteWithInstance")
 	delete(f, "DiskType")
 	if len(f) > 0 {
-		return errors.New("ModifyDiskAttributesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDiskAttributesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1763,7 +1762,7 @@ func (r *ModifyDiskExtraPerformanceRequest) FromJsonString(s string) error {
 	delete(f, "DiskId")
 	delete(f, "ThroughputPerformance")
 	if len(f) > 0 {
-		return errors.New("ModifyDiskExtraPerformanceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDiskExtraPerformanceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1821,7 +1820,7 @@ func (r *ModifySnapshotAttributeRequest) FromJsonString(s string) error {
 	delete(f, "IsPermanent")
 	delete(f, "Deadline")
 	if len(f) > 0 {
-		return errors.New("ModifySnapshotAttributeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySnapshotAttributeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1875,7 +1874,7 @@ func (r *ModifySnapshotsSharePermissionRequest) FromJsonString(s string) error {
 	delete(f, "Permission")
 	delete(f, "SnapshotIds")
 	if len(f) > 0 {
-		return errors.New("ModifySnapshotsSharePermissionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySnapshotsSharePermissionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2029,7 +2028,7 @@ func (r *ResizeDiskRequest) FromJsonString(s string) error {
 	delete(f, "DiskId")
 	delete(f, "DiskSize")
 	if len(f) > 0 {
-		return errors.New("ResizeDiskRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResizeDiskRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2185,7 +2184,7 @@ func (r *TerminateDisksRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DiskIds")
 	if len(f) > 0 {
-		return errors.New("TerminateDisksRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateDisksRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2235,7 +2234,7 @@ func (r *UnbindAutoSnapshotPolicyRequest) FromJsonString(s string) error {
 	delete(f, "DiskIds")
 	delete(f, "AutoSnapshotPolicyId")
 	if len(f) > 0 {
-		return errors.New("UnbindAutoSnapshotPolicyRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnbindAutoSnapshotPolicyRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

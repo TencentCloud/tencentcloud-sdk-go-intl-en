@@ -16,8 +16,7 @@ package v20190103
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -393,7 +392,7 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "MetaDBInfo")
 	delete(f, "ApplicationRole")
 	if len(f) > 0 {
-		return errors.New("CreateInstanceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -479,7 +478,7 @@ func (r *DescribeClusterNodesRequest) FromJsonString(s string) error {
 	delete(f, "HardwareResourceType")
 	delete(f, "SearchFields")
 	if len(f) > 0 {
-		return errors.New("DescribeClusterNodesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterNodesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -572,7 +571,7 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "OrderField")
 	delete(f, "Asc")
 	if len(f) > 0 {
-		return errors.New("DescribeInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -783,7 +782,7 @@ func (r *InquiryPriceCreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "MetaDBInfo")
 	delete(f, "ProductId")
 	if len(f) > 0 {
-		return errors.New("InquiryPriceCreateInstanceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateInstanceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -866,7 +865,7 @@ func (r *InquiryPriceRenewInstanceRequest) FromJsonString(s string) error {
 	delete(f, "TimeUnit")
 	delete(f, "Currency")
 	if len(f) > 0 {
-		return errors.New("InquiryPriceRenewInstanceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceRenewInstanceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -967,7 +966,7 @@ func (r *InquiryPriceScaleOutInstanceRequest) FromJsonString(s string) error {
 	delete(f, "RouterCount")
 	delete(f, "MasterCount")
 	if len(f) > 0 {
-		return errors.New("InquiryPriceScaleOutInstanceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceScaleOutInstanceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1053,7 +1052,7 @@ func (r *InquiryPriceUpdateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "Placement")
 	delete(f, "Currency")
 	if len(f) > 0 {
-		return errors.New("InquiryPriceUpdateInstanceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceUpdateInstanceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1692,7 +1691,7 @@ func (r *ScaleOutInstanceRequest) FromJsonString(s string) error {
 	delete(f, "PodParameter")
 	delete(f, "MasterCount")
 	if len(f) > 0 {
-		return errors.New("ScaleOutInstanceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScaleOutInstanceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1779,7 +1778,7 @@ func (r *TerminateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "ResourceIds")
 	if len(f) > 0 {
-		return errors.New("TerminateInstanceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateInstanceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1829,7 +1828,7 @@ func (r *TerminateTasksRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "ResourceIds")
 	if len(f) > 0 {
-		return errors.New("TerminateTasksRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateTasksRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

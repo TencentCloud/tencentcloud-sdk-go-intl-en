@@ -16,8 +16,7 @@ package v20201221
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -84,7 +83,7 @@ func (r *CreateCosTokenV2Request) FromJsonString(s string) error {
 	delete(f, "OptType")
 	delete(f, "SourceChannel")
 	if len(f) > 0 {
-		return errors.New("CreateCosTokenV2Request has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCosTokenV2Request has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -154,7 +153,7 @@ func (r *CreateNamespaceRequest) FromJsonString(s string) error {
 	delete(f, "K8sVersion")
 	delete(f, "SourceChannel")
 	if len(f) > 0 {
-		return errors.New("CreateNamespaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNamespaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -216,7 +215,7 @@ func (r *CreateResourceRequest) FromJsonString(s string) error {
 	delete(f, "ResourceId")
 	delete(f, "SourceChannel")
 	if len(f) > 0 {
-		return errors.New("CreateResourceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateResourceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -311,7 +310,7 @@ func (r *CreateServiceV2Request) FromJsonString(s string) error {
 	delete(f, "CodingLanguage")
 	delete(f, "DeployMode")
 	if len(f) > 0 {
-		return errors.New("CreateServiceV2Request has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateServiceV2Request has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -372,7 +371,7 @@ func (r *DeleteIngressRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "SourceChannel")
 	if len(f) > 0 {
-		return errors.New("DeleteIngressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteIngressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -519,7 +518,7 @@ func (r *DeployServiceV2Request) FromJsonString(s string) error {
 	delete(f, "ImageCommand")
 	delete(f, "ImageArgs")
 	if len(f) > 0 {
-		return errors.New("DeployServiceV2Request has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeployServiceV2Request has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -580,7 +579,7 @@ func (r *DescribeIngressRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "SourceChannel")
 	if len(f) > 0 {
-		return errors.New("DescribeIngressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIngressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -637,7 +636,7 @@ func (r *DescribeIngressesRequest) FromJsonString(s string) error {
 	delete(f, "EksNamespace")
 	delete(f, "SourceChannel")
 	if len(f) > 0 {
-		return errors.New("DescribeIngressesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIngressesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -695,7 +694,7 @@ func (r *DescribeNamespacesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "SourceChannel")
 	if len(f) > 0 {
-		return errors.New("DescribeNamespacesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNamespacesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -789,7 +788,7 @@ func (r *DescribeServiceRunPodListV2Request) FromJsonString(s string) error {
 	delete(f, "PodName")
 	delete(f, "SourceChannel")
 	if len(f) > 0 {
-		return errors.New("DescribeServiceRunPodListV2Request has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeServiceRunPodListV2Request has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -956,7 +955,7 @@ func (r *ModifyIngressRequest) FromJsonString(s string) error {
 	delete(f, "Ingress")
 	delete(f, "SourceChannel")
 	if len(f) > 0 {
-		return errors.New("ModifyIngressRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyIngressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1026,7 +1025,7 @@ func (r *ModifyNamespaceRequest) FromJsonString(s string) error {
 	delete(f, "SubnetIds")
 	delete(f, "SourceChannel")
 	if len(f) > 0 {
-		return errors.New("ModifyNamespaceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNamespaceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

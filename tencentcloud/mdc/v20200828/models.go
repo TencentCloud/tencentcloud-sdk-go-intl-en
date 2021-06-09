@@ -16,8 +16,7 @@ package v20200828
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -104,7 +103,7 @@ func (r *CreateMediaConnectFlowRequest) FromJsonString(s string) error {
 	delete(f, "MaxBandwidth")
 	delete(f, "InputGroup")
 	if len(f) > 0 {
-		return errors.New("CreateMediaConnectFlowRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaConnectFlowRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -157,7 +156,7 @@ func (r *CreateMediaConnectOutputRequest) FromJsonString(s string) error {
 	delete(f, "FlowId")
 	delete(f, "Output")
 	if len(f) > 0 {
-		return errors.New("CreateMediaConnectOutputRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaConnectOutputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -305,7 +304,7 @@ func (r *DeleteMediaConnectFlowRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FlowId")
 	if len(f) > 0 {
-		return errors.New("DeleteMediaConnectFlowRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaConnectFlowRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -355,7 +354,7 @@ func (r *DeleteMediaConnectOutputRequest) FromJsonString(s string) error {
 	delete(f, "FlowId")
 	delete(f, "OutputId")
 	if len(f) > 0 {
-		return errors.New("DeleteMediaConnectOutputRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaConnectOutputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -489,7 +488,7 @@ func (r *DescribeMediaConnectFlowRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FlowId")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaConnectFlowRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaConnectFlowRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -542,7 +541,7 @@ func (r *DescribeMediaConnectFlowsRequest) FromJsonString(s string) error {
 	delete(f, "PageNum")
 	delete(f, "PageSize")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaConnectFlowsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaConnectFlowsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -740,7 +739,7 @@ func (r *ModifyMediaConnectFlowRequest) FromJsonString(s string) error {
 	delete(f, "FlowId")
 	delete(f, "FlowName")
 	if len(f) > 0 {
-		return errors.New("ModifyMediaConnectFlowRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaConnectFlowRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -790,7 +789,7 @@ func (r *ModifyMediaConnectInputRequest) FromJsonString(s string) error {
 	delete(f, "FlowId")
 	delete(f, "Input")
 	if len(f) > 0 {
-		return errors.New("ModifyMediaConnectInputRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaConnectInputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -843,7 +842,7 @@ func (r *ModifyMediaConnectOutputRequest) FromJsonString(s string) error {
 	delete(f, "FlowId")
 	delete(f, "Output")
 	if len(f) > 0 {
-		return errors.New("ModifyMediaConnectOutputRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaConnectOutputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -949,7 +948,7 @@ func (r *StartMediaConnectFlowRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FlowId")
 	if len(f) > 0 {
-		return errors.New("StartMediaConnectFlowRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartMediaConnectFlowRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -995,7 +994,7 @@ func (r *StopMediaConnectFlowRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FlowId")
 	if len(f) > 0 {
-		return errors.New("StopMediaConnectFlowRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopMediaConnectFlowRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

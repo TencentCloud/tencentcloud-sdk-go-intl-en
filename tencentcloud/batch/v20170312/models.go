@@ -16,8 +16,7 @@ package v20170312
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -123,7 +122,7 @@ func (r *AttachInstancesRequest) FromJsonString(s string) error {
 	delete(f, "EnvId")
 	delete(f, "Instances")
 	if len(f) > 0 {
-		return errors.New("AttachInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AttachInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -339,7 +338,7 @@ func (r *CreateComputeEnvRequest) FromJsonString(s string) error {
 	delete(f, "Placement")
 	delete(f, "ClientToken")
 	if len(f) > 0 {
-		return errors.New("CreateComputeEnvRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateComputeEnvRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -400,7 +399,7 @@ func (r *CreateTaskTemplateRequest) FromJsonString(s string) error {
 	delete(f, "TaskTemplateDescription")
 	delete(f, "Tags")
 	if len(f) > 0 {
-		return errors.New("CreateTaskTemplateRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTaskTemplateRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -491,7 +490,7 @@ func (r *DeleteComputeEnvRequest) FromJsonString(s string) error {
 	}
 	delete(f, "EnvId")
 	if len(f) > 0 {
-		return errors.New("DeleteComputeEnvRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteComputeEnvRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -537,7 +536,7 @@ func (r *DeleteJobRequest) FromJsonString(s string) error {
 	}
 	delete(f, "JobId")
 	if len(f) > 0 {
-		return errors.New("DeleteJobRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteJobRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -583,7 +582,7 @@ func (r *DeleteTaskTemplatesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "TaskTemplateIds")
 	if len(f) > 0 {
-		return errors.New("DeleteTaskTemplatesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteTaskTemplatesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -640,7 +639,7 @@ func (r *DescribeAvailableCvmInstanceTypesRequest) FromJsonString(s string) erro
 	}
 	delete(f, "Filters")
 	if len(f) > 0 {
-		return errors.New("DescribeAvailableCvmInstanceTypesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAvailableCvmInstanceTypesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -702,7 +701,7 @@ func (r *DescribeComputeEnvActivitiesRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Filters")
 	if len(f) > 0 {
-		return errors.New("DescribeComputeEnvActivitiesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeComputeEnvActivitiesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -754,7 +753,7 @@ func (r *DescribeComputeEnvCreateInfoRequest) FromJsonString(s string) error {
 	}
 	delete(f, "EnvId")
 	if len(f) > 0 {
-		return errors.New("DescribeComputeEnvCreateInfoRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeComputeEnvCreateInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -850,7 +849,7 @@ func (r *DescribeComputeEnvCreateInfosRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeComputeEnvCreateInfosRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeComputeEnvCreateInfosRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -902,7 +901,7 @@ func (r *DescribeComputeEnvRequest) FromJsonString(s string) error {
 	}
 	delete(f, "EnvId")
 	if len(f) > 0 {
-		return errors.New("DescribeComputeEnvRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeComputeEnvRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1005,7 +1004,7 @@ func (r *DescribeComputeEnvsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeComputeEnvsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeComputeEnvsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1061,7 +1060,7 @@ func (r *DescribeCvmZoneInstanceConfigInfosRequest) FromJsonString(s string) err
 	}
 	delete(f, "Filters")
 	if len(f) > 0 {
-		return errors.New("DescribeCvmZoneInstanceConfigInfosRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCvmZoneInstanceConfigInfosRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1106,7 +1105,7 @@ func (r *DescribeInstanceCategoriesRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeInstanceCategoriesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceCategoriesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1155,7 +1154,7 @@ func (r *DescribeJobRequest) FromJsonString(s string) error {
 	}
 	delete(f, "JobId")
 	if len(f) > 0 {
-		return errors.New("DescribeJobRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeJobRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1245,7 +1244,7 @@ func (r *DescribeJobSubmitInfoRequest) FromJsonString(s string) error {
 	}
 	delete(f, "JobId")
 	if len(f) > 0 {
-		return errors.New("DescribeJobSubmitInfoRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeJobSubmitInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1333,7 +1332,7 @@ func (r *DescribeJobsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeJobsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeJobsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1401,7 +1400,7 @@ func (r *DescribeTaskLogsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeTaskLogsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTaskLogsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1470,7 +1469,7 @@ func (r *DescribeTaskRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Filters")
 	if len(f) > 0 {
-		return errors.New("DescribeTaskRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTaskRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1557,7 +1556,7 @@ func (r *DescribeTaskTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeTaskTemplatesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTaskTemplatesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1613,7 +1612,7 @@ func (r *DetachInstancesRequest) FromJsonString(s string) error {
 	delete(f, "EnvId")
 	delete(f, "InstanceIds")
 	if len(f) > 0 {
-		return errors.New("DetachInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetachInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2134,7 +2133,7 @@ func (r *ModifyComputeEnvRequest) FromJsonString(s string) error {
 	delete(f, "EnvDescription")
 	delete(f, "EnvData")
 	if len(f) > 0 {
-		return errors.New("ModifyComputeEnvRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyComputeEnvRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2192,7 +2191,7 @@ func (r *ModifyTaskTemplateRequest) FromJsonString(s string) error {
 	delete(f, "TaskTemplateDescription")
 	delete(f, "TaskTemplateInfo")
 	if len(f) > 0 {
-		return errors.New("ModifyTaskTemplateRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTaskTemplateRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2367,7 +2366,7 @@ func (r *RetryJobsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "JobIds")
 	if len(f) > 0 {
-		return errors.New("RetryJobsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RetryJobsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2457,7 +2456,7 @@ func (r *SubmitJobRequest) FromJsonString(s string) error {
 	delete(f, "Job")
 	delete(f, "ClientToken")
 	if len(f) > 0 {
-		return errors.New("SubmitJobRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SubmitJobRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2753,7 +2752,7 @@ func (r *TerminateComputeNodeRequest) FromJsonString(s string) error {
 	delete(f, "EnvId")
 	delete(f, "ComputeNodeId")
 	if len(f) > 0 {
-		return errors.New("TerminateComputeNodeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateComputeNodeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2803,7 +2802,7 @@ func (r *TerminateComputeNodesRequest) FromJsonString(s string) error {
 	delete(f, "EnvId")
 	delete(f, "ComputeNodeIds")
 	if len(f) > 0 {
-		return errors.New("TerminateComputeNodesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateComputeNodesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2849,7 +2848,7 @@ func (r *TerminateJobRequest) FromJsonString(s string) error {
 	}
 	delete(f, "JobId")
 	if len(f) > 0 {
-		return errors.New("TerminateJobRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateJobRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2903,7 +2902,7 @@ func (r *TerminateTaskInstanceRequest) FromJsonString(s string) error {
 	delete(f, "TaskName")
 	delete(f, "TaskInstanceIndex")
 	if len(f) > 0 {
-		return errors.New("TerminateTaskInstanceRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateTaskInstanceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

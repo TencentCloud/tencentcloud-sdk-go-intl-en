@@ -16,8 +16,7 @@ package v20180411
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -50,7 +49,7 @@ func (r *AssociateSecurityGroupsRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupId")
 	delete(f, "InstanceIds")
 	if len(f) > 0 {
-		return errors.New("AssociateSecurityGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -128,7 +127,7 @@ func (r *CloneAccountRequest) FromJsonString(s string) error {
 	delete(f, "DstHost")
 	delete(f, "DstDesc")
 	if len(f) > 0 {
-		return errors.New("CloneAccountRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloneAccountRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -181,7 +180,7 @@ func (r *CloseDBExtranetAccessRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "Ipv6Flag")
 	if len(f) > 0 {
-		return errors.New("CloseDBExtranetAccessRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseDBExtranetAccessRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -263,7 +262,7 @@ func (r *CopyAccountPrivilegesRequest) FromJsonString(s string) error {
 	delete(f, "SrcReadOnly")
 	delete(f, "DstReadOnly")
 	if len(f) > 0 {
-		return errors.New("CopyAccountPrivilegesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CopyAccountPrivilegesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -334,7 +333,7 @@ func (r *CreateAccountRequest) FromJsonString(s string) error {
 	delete(f, "Description")
 	delete(f, "DelayThresh")
 	if len(f) > 0 {
-		return errors.New("CreateAccountRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccountRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -434,7 +433,7 @@ type DCDBInstanceInfo struct {
 	// Status description
 	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
 
-	// Status
+	// Instance status. Valid values: `0` (creating), `1` (running task), `2` (running), `3` (uninitialized), `-1` (isolated), `-2` (eliminated), `4` (initializing), `5` (eliminating), `6` (restarting), `7` (migrating data)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Private IP
@@ -673,6 +672,42 @@ type DatabaseView struct {
 	View *string `json:"View,omitempty" name:"View"`
 }
 
+type DcnDetailItem struct {
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Region where the instance resides
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Availability zone where the instance resides
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance IP address
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Instance IPv6 address
+	Vipv6 *string `json:"Vipv6,omitempty" name:"Vipv6"`
+
+	// Instance port
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Instance status
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Instance status description
+	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
+
+	// DCN flag. Valid values: `1` (primary), `2` (secondary)
+	DcnFlag *int64 `json:"DcnFlag,omitempty" name:"DcnFlag"`
+
+	// DCN status. Valid values: `0` (null), `1` (creating), `2` (syncing), `3` (disconnected)
+	DcnStatus *int64 `json:"DcnStatus,omitempty" name:"DcnStatus"`
+}
+
 type DeleteAccountRequest struct {
 	*tchttp.BaseRequest
 
@@ -702,7 +737,7 @@ func (r *DeleteAccountRequest) FromJsonString(s string) error {
 	delete(f, "UserName")
 	delete(f, "Host")
 	if len(f) > 0 {
-		return errors.New("DeleteAccountRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAccountRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -772,7 +807,7 @@ func (r *DescribeAccountPrivilegesRequest) FromJsonString(s string) error {
 	delete(f, "Object")
 	delete(f, "ColName")
 	if len(f) > 0 {
-		return errors.New("DescribeAccountPrivilegesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountPrivilegesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -830,7 +865,7 @@ func (r *DescribeAccountsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("DescribeAccountsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -891,7 +926,7 @@ func (r *DescribeDBLogFilesRequest) FromJsonString(s string) error {
 	delete(f, "ShardId")
 	delete(f, "Type")
 	if len(f) > 0 {
-		return errors.New("DescribeDBLogFilesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBLogFilesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -958,7 +993,7 @@ func (r *DescribeDBParametersRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("DescribeDBParametersRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBParametersRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1014,7 +1049,7 @@ func (r *DescribeDBSecurityGroupsRequest) FromJsonString(s string) error {
 	delete(f, "Product")
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("DescribeDBSecurityGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1071,7 +1106,7 @@ func (r *DescribeDBSyncModeRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("DescribeDBSyncModeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBSyncModeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1134,7 +1169,7 @@ func (r *DescribeDCDBInstanceNodeInfoRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Offset")
 	if len(f) > 0 {
-		return errors.New("DescribeDCDBInstanceNodeInfoRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDCDBInstanceNodeInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1215,6 +1250,12 @@ type DescribeDCDBInstancesRequest struct {
 
 	// Instance types used in filtering. Valid values: 1 (dedicated instance), 2 (primary instance), 3 (disaster recovery instance). Multiple values should be separated by commas.
 	FilterInstanceType *string `json:"FilterInstanceType,omitempty" name:"FilterInstanceType"`
+
+	// Use this filter to include instances in specific statuses
+	Status []*int64 `json:"Status,omitempty" name:"Status"`
+
+	// Use this filter to exclude instances in specific statuses
+	ExcludeStatus []*int64 `json:"ExcludeStatus,omitempty" name:"ExcludeStatus"`
 }
 
 func (r *DescribeDCDBInstancesRequest) ToJsonString() string {
@@ -1245,8 +1286,10 @@ func (r *DescribeDCDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ExclusterIds")
 	delete(f, "TagKeys")
 	delete(f, "FilterInstanceType")
+	delete(f, "Status")
+	delete(f, "ExcludeStatus")
 	if len(f) > 0 {
-		return errors.New("DescribeDCDBInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDCDBInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1318,7 +1361,7 @@ func (r *DescribeDCDBShardsRequest) FromJsonString(s string) error {
 	delete(f, "OrderBy")
 	delete(f, "OrderByType")
 	if len(f) > 0 {
-		return errors.New("DescribeDCDBShardsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDCDBShardsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1378,7 +1421,7 @@ func (r *DescribeDatabaseObjectsRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "DbName")
 	if len(f) > 0 {
-		return errors.New("DescribeDatabaseObjectsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatabaseObjectsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1450,7 +1493,7 @@ func (r *DescribeDatabaseTableRequest) FromJsonString(s string) error {
 	delete(f, "DbName")
 	delete(f, "Table")
 	if len(f) > 0 {
-		return errors.New("DescribeDatabaseTableRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatabaseTableRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1508,7 +1551,7 @@ func (r *DescribeDatabasesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return errors.New("DescribeDatabasesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatabasesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1539,6 +1582,55 @@ func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDcnDetailRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDcnDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDcnDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDcnDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDcnDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// DCN synchronization details
+		DcnDetails []*DcnDetailItem `json:"DcnDetails,omitempty" name:"DcnDetails"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDcnDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDcnDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeProjectSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
@@ -1564,7 +1656,7 @@ func (r *DescribeProjectSecurityGroupsRequest) FromJsonString(s string) error {
 	delete(f, "Product")
 	delete(f, "ProjectId")
 	if len(f) > 0 {
-		return errors.New("DescribeProjectSecurityGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProjectSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1609,7 +1701,7 @@ func (r *DescribeProjectsRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribeProjectsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProjectsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1666,7 +1758,7 @@ func (r *DisassociateSecurityGroupsRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupId")
 	delete(f, "InstanceIds")
 	if len(f) > 0 {
-		return errors.New("DisassociateSecurityGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1744,7 +1836,7 @@ func (r *GrantAccountPrivilegesRequest) FromJsonString(s string) error {
 	delete(f, "Object")
 	delete(f, "ColName")
 	if len(f) > 0 {
-		return errors.New("GrantAccountPrivilegesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GrantAccountPrivilegesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1794,7 +1886,7 @@ func (r *InitDCDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "InstanceIds")
 	delete(f, "Params")
 	if len(f) > 0 {
-		return errors.New("InitDCDBInstancesRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InitDCDBInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1873,7 +1965,7 @@ func (r *ModifyAccountDescriptionRequest) FromJsonString(s string) error {
 	delete(f, "Host")
 	delete(f, "Description")
 	if len(f) > 0 {
-		return errors.New("ModifyAccountDescriptionRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAccountDescriptionRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1927,7 +2019,7 @@ func (r *ModifyDBInstanceSecurityGroupsRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "SecurityGroupIds")
 	if len(f) > 0 {
-		return errors.New("ModifyDBInstanceSecurityGroupsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1977,7 +2069,7 @@ func (r *ModifyDBInstancesProjectRequest) FromJsonString(s string) error {
 	delete(f, "InstanceIds")
 	delete(f, "ProjectId")
 	if len(f) > 0 {
-		return errors.New("ModifyDBInstancesProjectRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstancesProjectRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2027,7 +2119,7 @@ func (r *ModifyDBParametersRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "Params")
 	if len(f) > 0 {
-		return errors.New("ModifyDBParametersRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBParametersRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2083,7 +2175,7 @@ func (r *ModifyDBSyncModeRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "SyncMode")
 	if len(f) > 0 {
-		return errors.New("ModifyDBSyncModeRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBSyncModeRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2136,7 +2228,7 @@ func (r *OpenDBExtranetAccessRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "Ipv6Flag")
 	if len(f) > 0 {
-		return errors.New("OpenDBExtranetAccessRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenDBExtranetAccessRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -2280,7 +2372,7 @@ func (r *ResetAccountPasswordRequest) FromJsonString(s string) error {
 	delete(f, "Host")
 	delete(f, "Password")
 	if len(f) > 0 {
-		return errors.New("ResetAccountPasswordRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetAccountPasswordRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

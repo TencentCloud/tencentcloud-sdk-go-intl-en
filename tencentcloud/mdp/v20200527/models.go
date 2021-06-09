@@ -16,8 +16,7 @@ package v20200527
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -65,7 +64,7 @@ func (r *CreateMediaPackageChannelEndpointRequest) FromJsonString(s string) erro
 	delete(f, "Name")
 	delete(f, "AuthInfo")
 	if len(f) > 0 {
-		return errors.New("CreateMediaPackageChannelEndpointRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaPackageChannelEndpointRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -118,7 +117,7 @@ func (r *CreateMediaPackageChannelRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "Protocol")
 	if len(f) > 0 {
-		return errors.New("CreateMediaPackageChannelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaPackageChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -171,7 +170,7 @@ func (r *DeleteMediaPackageChannelEndpointsRequest) FromJsonString(s string) err
 	delete(f, "Id")
 	delete(f, "Urls")
 	if len(f) > 0 {
-		return errors.New("DeleteMediaPackageChannelEndpointsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaPackageChannelEndpointsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -217,7 +216,7 @@ func (r *DeleteMediaPackageChannelsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Ids")
 	if len(f) > 0 {
-		return errors.New("DeleteMediaPackageChannelsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaPackageChannelsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -269,7 +268,7 @@ func (r *DescribeMediaPackageChannelRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaPackageChannelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaPackageChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -322,7 +321,7 @@ func (r *DescribeMediaPackageChannelsRequest) FromJsonString(s string) error {
 	delete(f, "PageNum")
 	delete(f, "PageSize")
 	if len(f) > 0 {
-		return errors.New("DescribeMediaPackageChannelsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaPackageChannelsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -444,7 +443,7 @@ func (r *ModifyMediaPackageChannelEndpointRequest) FromJsonString(s string) erro
 	delete(f, "Name")
 	delete(f, "AuthInfo")
 	if len(f) > 0 {
-		return errors.New("ModifyMediaPackageChannelEndpointRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaPackageChannelEndpointRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -500,7 +499,7 @@ func (r *ModifyMediaPackageChannelInputAuthInfoRequest) FromJsonString(s string)
 	delete(f, "Url")
 	delete(f, "ActionType")
 	if len(f) > 0 {
-		return errors.New("ModifyMediaPackageChannelInputAuthInfoRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaPackageChannelInputAuthInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -557,7 +556,7 @@ func (r *ModifyMediaPackageChannelRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "Protocol")
 	if len(f) > 0 {
-		return errors.New("ModifyMediaPackageChannelRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaPackageChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

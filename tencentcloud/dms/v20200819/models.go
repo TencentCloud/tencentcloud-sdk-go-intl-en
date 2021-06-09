@@ -16,8 +16,7 @@ package v20200819
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -66,7 +65,7 @@ func (r *SendEmailRequest) FromJsonString(s string) error {
 	delete(f, "HtmlContent")
 	delete(f, "TextContent")
 	if len(f) > 0 {
-		return errors.New("SendEmailRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SendEmailRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -135,7 +134,7 @@ func (r *SendTemplatedEmailRequest) FromJsonString(s string) error {
 	delete(f, "FromName")
 	delete(f, "ReplyAddress")
 	if len(f) > 0 {
-		return errors.New("SendTemplatedEmailRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SendTemplatedEmailRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }

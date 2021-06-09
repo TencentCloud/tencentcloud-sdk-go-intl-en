@@ -16,8 +16,7 @@ package v20191012
 
 import (
     "encoding/json"
-    "errors"
-
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
@@ -90,7 +89,7 @@ func (r *AddEcdnDomainRequest) FromJsonString(s string) error {
 	delete(f, "Tag")
 	delete(f, "WebSocket")
 	if len(f) > 0 {
-		return errors.New("AddEcdnDomainRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddEcdnDomainRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -186,7 +185,7 @@ func (r *DeleteEcdnDomainRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Domain")
 	if len(f) > 0 {
-		return errors.New("DeleteEcdnDomainRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteEcdnDomainRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -244,7 +243,7 @@ func (r *DescribeDomainsConfigRequest) FromJsonString(s string) error {
 	delete(f, "Filters")
 	delete(f, "Sort")
 	if len(f) > 0 {
-		return errors.New("DescribeDomainsConfigRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDomainsConfigRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -304,7 +303,7 @@ func (r *DescribeDomainsRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Filters")
 	if len(f) > 0 {
-		return errors.New("DescribeDomainsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDomainsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -372,7 +371,7 @@ func (r *DescribeEcdnDomainLogsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
-		return errors.New("DescribeEcdnDomainLogsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEcdnDomainLogsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -463,7 +462,7 @@ func (r *DescribeEcdnDomainStatisticsRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Area")
 	if len(f) > 0 {
-		return errors.New("DescribeEcdnDomainStatisticsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEcdnDomainStatisticsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -557,7 +556,7 @@ func (r *DescribeEcdnStatisticsRequest) FromJsonString(s string) error {
 	delete(f, "Projects")
 	delete(f, "Area")
 	if len(f) > 0 {
-		return errors.New("DescribeEcdnStatisticsRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEcdnStatisticsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -613,7 +612,7 @@ func (r *DescribeIpStatusRequest) FromJsonString(s string) error {
 	delete(f, "Domain")
 	delete(f, "Area")
 	if len(f) > 0 {
-		return errors.New("DescribeIpStatusRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIpStatusRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -661,7 +660,7 @@ func (r *DescribePurgeQuotaRequest) FromJsonString(s string) error {
 		return err
 	}
 	if len(f) > 0 {
-		return errors.New("DescribePurgeQuotaRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePurgeQuotaRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -741,7 +740,7 @@ func (r *DescribePurgeTasksRequest) FromJsonString(s string) error {
 	delete(f, "Keyword")
 	delete(f, "Status")
 	if len(f) > 0 {
-		return errors.New("DescribePurgeTasksRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePurgeTasksRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1143,7 +1142,7 @@ func (r *PurgePathCacheRequest) FromJsonString(s string) error {
 	delete(f, "Paths")
 	delete(f, "FlushType")
 	if len(f) > 0 {
-		return errors.New("PurgePathCacheRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PurgePathCacheRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1213,7 +1212,7 @@ func (r *PurgeUrlsCacheRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Urls")
 	if len(f) > 0 {
-		return errors.New("PurgeUrlsCacheRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PurgeUrlsCacheRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1339,7 +1338,7 @@ func (r *StartEcdnDomainRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Domain")
 	if len(f) > 0 {
-		return errors.New("StartEcdnDomainRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartEcdnDomainRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1385,7 +1384,7 @@ func (r *StopEcdnDomainRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Domain")
 	if len(f) > 0 {
-		return errors.New("StopEcdnDomainRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopEcdnDomainRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
@@ -1496,7 +1495,7 @@ func (r *UpdateDomainConfigRequest) FromJsonString(s string) error {
 	delete(f, "Area")
 	delete(f, "WebSocket")
 	if len(f) > 0 {
-		return errors.New("UpdateDomainConfigRequest has unknown keys!")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateDomainConfigRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
