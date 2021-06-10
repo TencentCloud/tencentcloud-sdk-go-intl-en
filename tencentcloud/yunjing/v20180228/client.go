@@ -58,7 +58,14 @@ func NewAddLoginWhiteListResponse() (response *AddLoginWhiteListResponse) {
     return
 }
 
+// AddLoginWhiteList
 // This API is used to add a allowlist rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) AddLoginWhiteList(request *AddLoginWhiteListRequest) (response *AddLoginWhiteListResponse, err error) {
     if request == nil {
         request = NewAddLoginWhiteListRequest()
@@ -83,7 +90,14 @@ func NewAddMachineTagResponse() (response *AddMachineTagResponse) {
     return
 }
 
+// AddMachineTag
 // This API is used to add a tag to a server.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) AddMachineTag(request *AddMachineTagRequest) (response *AddMachineTagResponse, err error) {
     if request == nil {
         request = NewAddMachineTagRequest()
@@ -108,7 +122,18 @@ func NewCloseProVersionResponse() (response *CloseProVersionResponse) {
     return
 }
 
+// CloseProVersion
 // This API is used to deactivate CWP Pro.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLOSEPROVERSION = "FailedOperation.CloseProVersion"
+//  FAILEDOPERATION_OPENPROVERSION = "FailedOperation.OpenProVersion"
+//  FAILEDOPERATION_PREPAYMODE = "FailedOperation.PrePayMode"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CloseProVersion(request *CloseProVersionRequest) (response *CloseProVersionResponse, err error) {
     if request == nil {
         request = NewCloseProVersionRequest()
@@ -133,7 +158,15 @@ func NewCreateOpenPortTaskResponse() (response *CreateOpenPortTaskResponse) {
     return
 }
 
+// CreateOpenPortTask
 // This API is used to create a real-time port acquisition task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEOPENPORTTASK = "FailedOperation.CreateOpenPortTask"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateOpenPortTask(request *CreateOpenPortTaskRequest) (response *CreateOpenPortTaskResponse, err error) {
     if request == nil {
         request = NewCreateOpenPortTaskRequest()
@@ -158,7 +191,17 @@ func NewCreateProcessTaskResponse() (response *CreateProcessTaskResponse) {
     return
 }
 
+// CreateProcessTask
 // This API is used to create a real-time process pulling task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEPROCESSTASK = "FailedOperation.CreateProcessTask"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateProcessTask(request *CreateProcessTaskRequest) (response *CreateProcessTaskResponse, err error) {
     if request == nil {
         request = NewCreateProcessTaskRequest()
@@ -183,7 +226,15 @@ func NewCreateUsualLoginPlacesResponse() (response *CreateUsualLoginPlacesRespon
     return
 }
 
+// CreateUsualLoginPlaces
 // This API is used to add one or more usual login locations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CreateUsualLoginPlaces(request *CreateUsualLoginPlacesRequest) (response *CreateUsualLoginPlacesResponse, err error) {
     if request == nil {
         request = NewCreateUsualLoginPlacesRequest()
@@ -208,7 +259,14 @@ func NewDeleteBruteAttacksResponse() (response *DeleteBruteAttacksResponse) {
     return
 }
 
+// DeleteBruteAttacks
 // This API is used to delete brute force attack records.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteBruteAttacks(request *DeleteBruteAttacksRequest) (response *DeleteBruteAttacksResponse, err error) {
     if request == nil {
         request = NewDeleteBruteAttacksRequest()
@@ -233,7 +291,14 @@ func NewDeleteLoginWhiteListResponse() (response *DeleteLoginWhiteListResponse) 
     return
 }
 
+// DeleteLoginWhiteList
 // This API is used to delete a allowlist rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteLoginWhiteList(request *DeleteLoginWhiteListRequest) (response *DeleteLoginWhiteListResponse, err error) {
     if request == nil {
         request = NewDeleteLoginWhiteListRequest()
@@ -258,7 +323,16 @@ func NewDeleteMachineResponse() (response *DeleteMachineResponse) {
     return
 }
 
+// DeleteMachine
 // This API is used to uninstall the CWP agent.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MACHINEDELETE = "FailedOperation.MachineDelete"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteMachine(request *DeleteMachineRequest) (response *DeleteMachineResponse, err error) {
     if request == nil {
         request = NewDeleteMachineRequest()
@@ -283,7 +357,14 @@ func NewDeleteMachineTagResponse() (response *DeleteMachineTagResponse) {
     return
 }
 
+// DeleteMachineTag
 // This API is used to remove a tag from a server.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteMachineTag(request *DeleteMachineTagRequest) (response *DeleteMachineTagResponse, err error) {
     if request == nil {
         request = NewDeleteMachineTagRequest()
@@ -308,7 +389,12 @@ func NewDeleteMaliciousRequestsResponse() (response *DeleteMaliciousRequestsResp
     return
 }
 
+// DeleteMaliciousRequests
 // This API is used to delete malicious request records.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteMaliciousRequests(request *DeleteMaliciousRequestsRequest) (response *DeleteMaliciousRequestsResponse, err error) {
     if request == nil {
         request = NewDeleteMaliciousRequestsRequest()
@@ -333,7 +419,14 @@ func NewDeleteMalwaresResponse() (response *DeleteMalwaresResponse) {
     return
 }
 
+// DeleteMalwares
 // This API is used to delete trojan records.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteMalwares(request *DeleteMalwaresRequest) (response *DeleteMalwaresResponse, err error) {
     if request == nil {
         request = NewDeleteMalwaresRequest()
@@ -358,7 +451,14 @@ func NewDeleteNonlocalLoginPlacesResponse() (response *DeleteNonlocalLoginPlaces
     return
 }
 
+// DeleteNonlocalLoginPlaces
 // This API is used to delete unusual login location records.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteNonlocalLoginPlaces(request *DeleteNonlocalLoginPlacesRequest) (response *DeleteNonlocalLoginPlacesResponse, err error) {
     if request == nil {
         request = NewDeleteNonlocalLoginPlacesRequest()
@@ -383,7 +483,14 @@ func NewDeleteUsualLoginPlacesResponse() (response *DeleteUsualLoginPlacesRespon
     return
 }
 
+// DeleteUsualLoginPlaces
 // This API is used to delete one or more usual login locations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DeleteUsualLoginPlaces(request *DeleteUsualLoginPlacesRequest) (response *DeleteUsualLoginPlacesResponse, err error) {
     if request == nil {
         request = NewDeleteUsualLoginPlacesRequest()
@@ -408,7 +515,15 @@ func NewDescribeAccountStatisticsResponse() (response *DescribeAccountStatistics
     return
 }
 
+// DescribeAccountStatistics
 // This API is used to get the account statistics list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeAccountStatistics(request *DescribeAccountStatisticsRequest) (response *DescribeAccountStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeAccountStatisticsRequest()
@@ -433,7 +548,14 @@ func NewDescribeAccountsResponse() (response *DescribeAccountsResponse) {
     return
 }
 
+// DescribeAccounts
 // This API is used to get the account list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *DescribeAccountsResponse, err error) {
     if request == nil {
         request = NewDescribeAccountsRequest()
@@ -458,7 +580,14 @@ func NewDescribeAgentVulsResponse() (response *DescribeAgentVulsResponse) {
     return
 }
 
+// DescribeAgentVuls
 // This API is used to get the list of vulnerabilities on a single server.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeAgentVuls(request *DescribeAgentVulsRequest) (response *DescribeAgentVulsResponse, err error) {
     if request == nil {
         request = NewDescribeAgentVulsRequest()
@@ -483,7 +612,11 @@ func NewDescribeAlarmAttributeResponse() (response *DescribeAlarmAttributeRespon
     return
 }
 
+// DescribeAlarmAttribute
 // This API is used to get the alarm settings.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeAlarmAttribute(request *DescribeAlarmAttributeRequest) (response *DescribeAlarmAttributeResponse, err error) {
     if request == nil {
         request = NewDescribeAlarmAttributeRequest()
@@ -508,7 +641,14 @@ func NewDescribeBruteAttacksResponse() (response *DescribeBruteAttacksResponse) 
     return
 }
 
+// DescribeBruteAttacks
 // This API is used to get the brute force attack event list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DescribeBruteAttacks(request *DescribeBruteAttacksRequest) (response *DescribeBruteAttacksResponse, err error) {
     if request == nil {
         request = NewDescribeBruteAttacksRequest()
@@ -533,7 +673,16 @@ func NewDescribeComponentInfoResponse() (response *DescribeComponentInfoResponse
     return
 }
 
+// DescribeComponentInfo
 // This API is used to get the component information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeComponentInfo(request *DescribeComponentInfoRequest) (response *DescribeComponentInfoResponse, err error) {
     if request == nil {
         request = NewDescribeComponentInfoRequest()
@@ -558,7 +707,15 @@ func NewDescribeComponentStatisticsResponse() (response *DescribeComponentStatis
     return
 }
 
+// DescribeComponentStatistics
 // This API is used to get the component statistics list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeComponentStatistics(request *DescribeComponentStatisticsRequest) (response *DescribeComponentStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeComponentStatisticsRequest()
@@ -583,7 +740,14 @@ func NewDescribeComponentsResponse() (response *DescribeComponentsResponse) {
     return
 }
 
+// DescribeComponents
 // This API is used to get the component list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DescribeComponents(request *DescribeComponentsRequest) (response *DescribeComponentsResponse, err error) {
     if request == nil {
         request = NewDescribeComponentsRequest()
@@ -608,7 +772,15 @@ func NewDescribeHistoryAccountsResponse() (response *DescribeHistoryAccountsResp
     return
 }
 
+// DescribeHistoryAccounts
 // This API is used to get the account change history list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeHistoryAccounts(request *DescribeHistoryAccountsRequest) (response *DescribeHistoryAccountsResponse, err error) {
     if request == nil {
         request = NewDescribeHistoryAccountsRequest()
@@ -633,7 +805,14 @@ func NewDescribeImpactedHostsResponse() (response *DescribeImpactedHostsResponse
     return
 }
 
+// DescribeImpactedHosts
 // This API is used to get the list of servers affected by a vulnerability.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeImpactedHosts(request *DescribeImpactedHostsRequest) (response *DescribeImpactedHostsResponse, err error) {
     if request == nil {
         request = NewDescribeImpactedHostsRequest()
@@ -658,7 +837,14 @@ func NewDescribeLoginWhiteListResponse() (response *DescribeLoginWhiteListRespon
     return
 }
 
+// DescribeLoginWhiteList
 // This API is used to get the list of login allowlist entries.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DescribeLoginWhiteList(request *DescribeLoginWhiteListRequest) (response *DescribeLoginWhiteListResponse, err error) {
     if request == nil {
         request = NewDescribeLoginWhiteListRequest()
@@ -683,7 +869,15 @@ func NewDescribeMachineInfoResponse() (response *DescribeMachineInfoResponse) {
     return
 }
 
+// DescribeMachineInfo
 // This API is used to get server details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeMachineInfo(request *DescribeMachineInfoRequest) (response *DescribeMachineInfoResponse, err error) {
     if request == nil {
         request = NewDescribeMachineInfoRequest()
@@ -708,7 +902,15 @@ func NewDescribeMachinesResponse() (response *DescribeMachinesResponse) {
     return
 }
 
+// DescribeMachines
 // This API is used to get the list of servers in a specified region.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeMachines(request *DescribeMachinesRequest) (response *DescribeMachinesResponse, err error) {
     if request == nil {
         request = NewDescribeMachinesRequest()
@@ -733,7 +935,12 @@ func NewDescribeMaliciousRequestsResponse() (response *DescribeMaliciousRequests
     return
 }
 
+// DescribeMaliciousRequests
 // This API is used to get malicious request data.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 func (c *Client) DescribeMaliciousRequests(request *DescribeMaliciousRequestsRequest) (response *DescribeMaliciousRequestsResponse, err error) {
     if request == nil {
         request = NewDescribeMaliciousRequestsRequest()
@@ -758,7 +965,14 @@ func NewDescribeMalwaresResponse() (response *DescribeMalwaresResponse) {
     return
 }
 
+// DescribeMalwares
 // This API is used to get the list of trojan events.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DescribeMalwares(request *DescribeMalwaresRequest) (response *DescribeMalwaresResponse, err error) {
     if request == nil {
         request = NewDescribeMalwaresRequest()
@@ -783,7 +997,14 @@ func NewDescribeNonlocalLoginPlacesResponse() (response *DescribeNonlocalLoginPl
     return
 }
 
+// DescribeNonlocalLoginPlaces
 // This API is used to get unusual login events.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DescribeNonlocalLoginPlaces(request *DescribeNonlocalLoginPlacesRequest) (response *DescribeNonlocalLoginPlacesResponse, err error) {
     if request == nil {
         request = NewDescribeNonlocalLoginPlacesRequest()
@@ -808,7 +1029,13 @@ func NewDescribeOpenPortStatisticsResponse() (response *DescribeOpenPortStatisti
     return
 }
 
+// DescribeOpenPortStatistics
 // This API is used to get the statistics on port usage
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeOpenPortStatistics(request *DescribeOpenPortStatisticsRequest) (response *DescribeOpenPortStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeOpenPortStatisticsRequest()
@@ -833,7 +1060,15 @@ func NewDescribeOpenPortTaskStatusResponse() (response *DescribeOpenPortTaskStat
     return
 }
 
+// DescribeOpenPortTaskStatus
 // This API is used to get the status of a real-time port pulling task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AGENTOFFLINE = "FailedOperation.AgentOffline"
+//  FAILEDOPERATION_OPENPORTTASKNOTFOUND = "FailedOperation.OpenPortTaskNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeOpenPortTaskStatus(request *DescribeOpenPortTaskStatusRequest) (response *DescribeOpenPortTaskStatusResponse, err error) {
     if request == nil {
         request = NewDescribeOpenPortTaskStatusRequest()
@@ -858,7 +1093,14 @@ func NewDescribeOpenPortsResponse() (response *DescribeOpenPortsResponse) {
     return
 }
 
+// DescribeOpenPorts
 // This API is used to get the port list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeOpenPorts(request *DescribeOpenPortsRequest) (response *DescribeOpenPortsResponse, err error) {
     if request == nil {
         request = NewDescribeOpenPortsRequest()
@@ -883,7 +1125,13 @@ func NewDescribeOverviewStatisticsResponse() (response *DescribeOverviewStatisti
     return
 }
 
+// DescribeOverviewStatistics
 // This API is used to get the overview statistics of CWP under the current account.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeOverviewStatistics(request *DescribeOverviewStatisticsRequest) (response *DescribeOverviewStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeOverviewStatisticsRequest()
@@ -908,7 +1156,11 @@ func NewDescribeProVersionInfoResponse() (response *DescribeProVersionInfoRespon
     return
 }
 
+// DescribeProVersionInfo
 // This API is used to get the CWP Pro information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeProVersionInfo(request *DescribeProVersionInfoRequest) (response *DescribeProVersionInfoResponse, err error) {
     if request == nil {
         request = NewDescribeProVersionInfoRequest()
@@ -933,7 +1185,15 @@ func NewDescribeProcessStatisticsResponse() (response *DescribeProcessStatistics
     return
 }
 
+// DescribeProcessStatistics
 // This API is used to get the process statistics list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeProcessStatistics(request *DescribeProcessStatisticsRequest) (response *DescribeProcessStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeProcessStatisticsRequest()
@@ -958,7 +1218,17 @@ func NewDescribeProcessTaskStatusResponse() (response *DescribeProcessTaskStatus
     return
 }
 
+// DescribeProcessTaskStatus
 // This API is used to get the status of a real-time process pulling task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PROCESSTASKNOTFOUND = "FailedOperation.ProcessTaskNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeProcessTaskStatus(request *DescribeProcessTaskStatusRequest) (response *DescribeProcessTaskStatusResponse, err error) {
     if request == nil {
         request = NewDescribeProcessTaskStatusRequest()
@@ -983,7 +1253,15 @@ func NewDescribeProcessesResponse() (response *DescribeProcessesResponse) {
     return
 }
 
+// DescribeProcesses
 // This API is used to get the process list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeProcesses(request *DescribeProcessesRequest) (response *DescribeProcessesResponse, err error) {
     if request == nil {
         request = NewDescribeProcessesRequest()
@@ -1008,7 +1286,13 @@ func NewDescribeSecurityDynamicsResponse() (response *DescribeSecurityDynamicsRe
     return
 }
 
+// DescribeSecurityDynamics
 // This API is used to get the security event message data.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeSecurityDynamics(request *DescribeSecurityDynamicsRequest) (response *DescribeSecurityDynamicsResponse, err error) {
     if request == nil {
         request = NewDescribeSecurityDynamicsRequest()
@@ -1033,7 +1317,14 @@ func NewDescribeSecurityTrendsResponse() (response *DescribeSecurityTrendsRespon
     return
 }
 
+// DescribeSecurityTrends
 // This API is used to get the security event statistics.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeSecurityTrends(request *DescribeSecurityTrendsRequest) (response *DescribeSecurityTrendsResponse, err error) {
     if request == nil {
         request = NewDescribeSecurityTrendsRequest()
@@ -1058,7 +1349,14 @@ func NewDescribeTagMachinesResponse() (response *DescribeTagMachinesResponse) {
     return
 }
 
+// DescribeTagMachines
 // This API is used to get the information of servers associated with a specified tag.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeTagMachines(request *DescribeTagMachinesRequest) (response *DescribeTagMachinesResponse, err error) {
     if request == nil {
         request = NewDescribeTagMachinesRequest()
@@ -1083,7 +1381,15 @@ func NewDescribeTagsResponse() (response *DescribeTagsResponse) {
     return
 }
 
+// DescribeTags
 // This API is used to get all server tags.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeTags(request *DescribeTagsRequest) (response *DescribeTagsResponse, err error) {
     if request == nil {
         request = NewDescribeTagsRequest()
@@ -1108,7 +1414,15 @@ func NewDescribeUsualLoginPlacesResponse() (response *DescribeUsualLoginPlacesRe
     return
 }
 
+// DescribeUsualLoginPlaces
 // This API is used to query usual login locations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeUsualLoginPlaces(request *DescribeUsualLoginPlacesRequest) (response *DescribeUsualLoginPlacesResponse, err error) {
     if request == nil {
         request = NewDescribeUsualLoginPlacesRequest()
@@ -1133,7 +1447,15 @@ func NewDescribeVulInfoResponse() (response *DescribeVulInfoResponse) {
     return
 }
 
+// DescribeVulInfo
 // This API is used to get vulnerability details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVulInfo(request *DescribeVulInfoRequest) (response *DescribeVulInfoResponse, err error) {
     if request == nil {
         request = NewDescribeVulInfoRequest()
@@ -1158,7 +1480,14 @@ func NewDescribeVulScanResultResponse() (response *DescribeVulScanResultResponse
     return
 }
 
+// DescribeVulScanResult
 // This API is used to get the vulnerability detection result.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeVulScanResult(request *DescribeVulScanResultRequest) (response *DescribeVulScanResultResponse, err error) {
     if request == nil {
         request = NewDescribeVulScanResultRequest()
@@ -1183,7 +1512,13 @@ func NewDescribeVulsResponse() (response *DescribeVulsResponse) {
     return
 }
 
+// DescribeVuls
 // This API is used to get the vulnerability list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeVuls(request *DescribeVulsRequest) (response *DescribeVulsResponse, err error) {
     if request == nil {
         request = NewDescribeVulsRequest()
@@ -1208,7 +1543,13 @@ func NewDescribeWeeklyReportBruteAttacksResponse() (response *DescribeWeeklyRepo
     return
 }
 
+// DescribeWeeklyReportBruteAttacks
 // This API is used to get the brute force attack data in the weekly CWP Pro report.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeWeeklyReportBruteAttacks(request *DescribeWeeklyReportBruteAttacksRequest) (response *DescribeWeeklyReportBruteAttacksResponse, err error) {
     if request == nil {
         request = NewDescribeWeeklyReportBruteAttacksRequest()
@@ -1233,7 +1574,12 @@ func NewDescribeWeeklyReportInfoResponse() (response *DescribeWeeklyReportInfoRe
     return
 }
 
+// DescribeWeeklyReportInfo
 // This API is used to get the details in the weekly CWP Pro report.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 func (c *Client) DescribeWeeklyReportInfo(request *DescribeWeeklyReportInfoRequest) (response *DescribeWeeklyReportInfoResponse, err error) {
     if request == nil {
         request = NewDescribeWeeklyReportInfoRequest()
@@ -1258,7 +1604,13 @@ func NewDescribeWeeklyReportMalwaresResponse() (response *DescribeWeeklyReportMa
     return
 }
 
+// DescribeWeeklyReportMalwares
 // This API is used to get the trojan data in the weekly CWP Pro report.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeWeeklyReportMalwares(request *DescribeWeeklyReportMalwaresRequest) (response *DescribeWeeklyReportMalwaresResponse, err error) {
     if request == nil {
         request = NewDescribeWeeklyReportMalwaresRequest()
@@ -1283,7 +1635,13 @@ func NewDescribeWeeklyReportNonlocalLoginPlacesResponse() (response *DescribeWee
     return
 }
 
+// DescribeWeeklyReportNonlocalLoginPlaces
 // This API is used to get the unusual login location data in the weekly CWP Pro report.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeWeeklyReportNonlocalLoginPlaces(request *DescribeWeeklyReportNonlocalLoginPlacesRequest) (response *DescribeWeeklyReportNonlocalLoginPlacesResponse, err error) {
     if request == nil {
         request = NewDescribeWeeklyReportNonlocalLoginPlacesRequest()
@@ -1308,7 +1666,13 @@ func NewDescribeWeeklyReportVulsResponse() (response *DescribeWeeklyReportVulsRe
     return
 }
 
+// DescribeWeeklyReportVuls
 // This API is used to get the vulnerability data in the weekly CWP Pro report.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeWeeklyReportVuls(request *DescribeWeeklyReportVulsRequest) (response *DescribeWeeklyReportVulsResponse, err error) {
     if request == nil {
         request = NewDescribeWeeklyReportVulsRequest()
@@ -1333,7 +1697,12 @@ func NewDescribeWeeklyReportsResponse() (response *DescribeWeeklyReportsResponse
     return
 }
 
+// DescribeWeeklyReports
 // This API is used to get the weekly report list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 func (c *Client) DescribeWeeklyReports(request *DescribeWeeklyReportsRequest) (response *DescribeWeeklyReportsResponse, err error) {
     if request == nil {
         request = NewDescribeWeeklyReportsRequest()
@@ -1358,7 +1727,16 @@ func NewEditTagsResponse() (response *EditTagsResponse) {
     return
 }
 
+// EditTags
 // This API is used to add or edit tags.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE_TAGNAMELENGTHLIMIT = "InvalidParameterValue.TagNameLengthLimit"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) EditTags(request *EditTagsRequest) (response *EditTagsResponse, err error) {
     if request == nil {
         request = NewEditTagsRequest()
@@ -1383,7 +1761,12 @@ func NewExportBruteAttacksResponse() (response *ExportBruteAttacksResponse) {
     return
 }
 
+// ExportBruteAttacks
 // This API is used to export brute force attack records into a CSV file.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXPORT = "FailedOperation.Export"
+//  INTERNALERROR = "InternalError"
 func (c *Client) ExportBruteAttacks(request *ExportBruteAttacksRequest) (response *ExportBruteAttacksResponse, err error) {
     if request == nil {
         request = NewExportBruteAttacksRequest()
@@ -1408,7 +1791,12 @@ func NewExportMaliciousRequestsResponse() (response *ExportMaliciousRequestsResp
     return
 }
 
+// ExportMaliciousRequests
 // This API is used to export the malicious request file into a CSV file for download.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) ExportMaliciousRequests(request *ExportMaliciousRequestsRequest) (response *ExportMaliciousRequestsResponse, err error) {
     if request == nil {
         request = NewExportMaliciousRequestsRequest()
@@ -1433,7 +1821,12 @@ func NewExportMalwaresResponse() (response *ExportMalwaresResponse) {
     return
 }
 
+// ExportMalwares
 // This API is used to export trojan records into a CSV file.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXPORT = "FailedOperation.Export"
+//  INTERNALERROR = "InternalError"
 func (c *Client) ExportMalwares(request *ExportMalwaresRequest) (response *ExportMalwaresResponse, err error) {
     if request == nil {
         request = NewExportMalwaresRequest()
@@ -1458,7 +1851,12 @@ func NewExportNonlocalLoginPlacesResponse() (response *ExportNonlocalLoginPlaces
     return
 }
 
+// ExportNonlocalLoginPlaces
 // This API is used to export unusual login location events into a CSV file.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXPORT = "FailedOperation.Export"
+//  INTERNALERROR = "InternalError"
 func (c *Client) ExportNonlocalLoginPlaces(request *ExportNonlocalLoginPlacesRequest) (response *ExportNonlocalLoginPlacesResponse, err error) {
     if request == nil {
         request = NewExportNonlocalLoginPlacesRequest()
@@ -1483,7 +1881,15 @@ func NewIgnoreImpactedHostsResponse() (response *IgnoreImpactedHostsResponse) {
     return
 }
 
+// IgnoreImpactedHosts
 // This API is used to ignore one or more vulnerabilities.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) IgnoreImpactedHosts(request *IgnoreImpactedHostsRequest) (response *IgnoreImpactedHostsResponse, err error) {
     if request == nil {
         request = NewIgnoreImpactedHostsRequest()
@@ -1508,7 +1914,14 @@ func NewMisAlarmNonlocalLoginPlacesResponse() (response *MisAlarmNonlocalLoginPl
     return
 }
 
+// MisAlarmNonlocalLoginPlaces
 // This API is used to set the current location as the usual login location.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) MisAlarmNonlocalLoginPlaces(request *MisAlarmNonlocalLoginPlacesRequest) (response *MisAlarmNonlocalLoginPlacesResponse, err error) {
     if request == nil {
         request = NewMisAlarmNonlocalLoginPlacesRequest()
@@ -1533,7 +1946,14 @@ func NewModifyAlarmAttributeResponse() (response *ModifyAlarmAttributeResponse) 
     return
 }
 
+// ModifyAlarmAttribute
 // This API is used to modify alarm settings.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) ModifyAlarmAttribute(request *ModifyAlarmAttributeRequest) (response *ModifyAlarmAttributeResponse, err error) {
     if request == nil {
         request = NewModifyAlarmAttributeRequest()
@@ -1558,7 +1978,11 @@ func NewModifyAutoOpenProVersionConfigResponse() (response *ModifyAutoOpenProVer
     return
 }
 
+// ModifyAutoOpenProVersionConfig
 // This API is used to set whether to automatically activate CWP Pro for newly added servers.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) ModifyAutoOpenProVersionConfig(request *ModifyAutoOpenProVersionConfigRequest) (response *ModifyAutoOpenProVersionConfigResponse, err error) {
     if request == nil {
         request = NewModifyAutoOpenProVersionConfigRequest()
@@ -1583,7 +2007,14 @@ func NewModifyLoginWhiteListResponse() (response *ModifyLoginWhiteListResponse) 
     return
 }
 
+// ModifyLoginWhiteList
 // This API is used to edit a allowlist rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) ModifyLoginWhiteList(request *ModifyLoginWhiteListRequest) (response *ModifyLoginWhiteListResponse, err error) {
     if request == nil {
         request = NewModifyLoginWhiteListRequest()
@@ -1608,7 +2039,13 @@ func NewModifyProVersionRenewFlagResponse() (response *ModifyProVersionRenewFlag
     return
 }
 
+// ModifyProVersionRenewFlag
 // This API is used to modify the renewal flag of CWP Pro.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyProVersionRenewFlag(request *ModifyProVersionRenewFlagRequest) (response *ModifyProVersionRenewFlagResponse, err error) {
     if request == nil {
         request = NewModifyProVersionRenewFlagRequest()
@@ -1633,7 +2070,17 @@ func NewOpenProVersionResponse() (response *OpenProVersionResponse) {
     return
 }
 
+// OpenProVersion
 // This API is used to activate CWP Pro.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPENPROVERSION = "FailedOperation.OpenProVersion"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) OpenProVersion(request *OpenProVersionRequest) (response *OpenProVersionResponse, err error) {
     if request == nil {
         request = NewOpenProVersionRequest()
@@ -1658,7 +2105,15 @@ func NewRecoverMalwaresResponse() (response *RecoverMalwaresResponse) {
     return
 }
 
+// RecoverMalwares
 // This API is used to recover isolated trojan files in a batch.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RECOVER = "FailedOperation.Recover"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) RecoverMalwares(request *RecoverMalwaresRequest) (response *RecoverMalwaresResponse, err error) {
     if request == nil {
         request = NewRecoverMalwaresRequest()
@@ -1683,7 +2138,17 @@ func NewRescanImpactedHostResponse() (response *RescanImpactedHostResponse) {
     return
 }
 
+// RescanImpactedHost
 // This API is used to re-scan for vulnerabilities.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AGENTOFFLINE = "FailedOperation.AgentOffline"
+//  FAILEDOPERATION_RESCANVUL = "FailedOperation.RescanVul"
+//  FAILEDOPERATION_RESCANVULPROCESSINUSE = "FailedOperation.RescanVulProcessInUse"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) RescanImpactedHost(request *RescanImpactedHostRequest) (response *RescanImpactedHostResponse, err error) {
     if request == nil {
         request = NewRescanImpactedHostRequest()
@@ -1708,7 +2173,16 @@ func NewSeparateMalwaresResponse() (response *SeparateMalwaresResponse) {
     return
 }
 
+// SeparateMalwares
 // This API is used to isolate trojans.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PARTSEPARATE = "FailedOperation.PartSeparate"
+//  FAILEDOPERATION_SINGLESEPARATE = "FailedOperation.SingleSeparate"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) SeparateMalwares(request *SeparateMalwaresRequest) (response *SeparateMalwaresResponse, err error) {
     if request == nil {
         request = NewSeparateMalwaresRequest()
@@ -1733,7 +2207,12 @@ func NewTrustMaliciousRequestResponse() (response *TrustMaliciousRequestResponse
     return
 }
 
+// TrustMaliciousRequest
 // This API is used to trust a malicious request.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) TrustMaliciousRequest(request *TrustMaliciousRequestRequest) (response *TrustMaliciousRequestResponse, err error) {
     if request == nil {
         request = NewTrustMaliciousRequestRequest()
@@ -1758,7 +2237,15 @@ func NewTrustMalwaresResponse() (response *TrustMalwaresResponse) {
     return
 }
 
+// TrustMalwares
 // This API is used to trust an identified trojan file.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) TrustMalwares(request *TrustMalwaresRequest) (response *TrustMalwaresResponse, err error) {
     if request == nil {
         request = NewTrustMalwaresRequest()
@@ -1783,7 +2270,13 @@ func NewUntrustMaliciousRequestResponse() (response *UntrustMaliciousRequestResp
     return
 }
 
+// UntrustMaliciousRequest
 // This API is used to untrust a malicious request.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) UntrustMaliciousRequest(request *UntrustMaliciousRequestRequest) (response *UntrustMaliciousRequestResponse, err error) {
     if request == nil {
         request = NewUntrustMaliciousRequestRequest()
@@ -1808,7 +2301,14 @@ func NewUntrustMalwaresResponse() (response *UntrustMalwaresResponse) {
     return
 }
 
+// UntrustMalwares
 // This API is used to untrust a trojan file.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) UntrustMalwares(request *UntrustMalwaresRequest) (response *UntrustMalwaresResponse, err error) {
     if request == nil {
         request = NewUntrustMalwaresRequest()

@@ -58,7 +58,15 @@ func NewDescribeBillDetailResponse() (response *DescribeBillDetailResponse) {
     return
 }
 
+// DescribeBillDetail
 // This API is used to query bill details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBillDetail(request *DescribeBillDetailRequest) (response *DescribeBillDetailResponse, err error) {
     if request == nil {
         request = NewDescribeBillDetailRequest()
@@ -83,7 +91,11 @@ func NewDescribeBillResourceSummaryResponse() (response *DescribeBillResourceSum
     return
 }
 
+// DescribeBillResourceSummary
 // This API is used to query bill resources summary. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
 func (c *Client) DescribeBillResourceSummary(request *DescribeBillResourceSummaryRequest) (response *DescribeBillResourceSummaryResponse, err error) {
     if request == nil {
         request = NewDescribeBillResourceSummaryRequest()
@@ -108,7 +120,13 @@ func NewDescribeBillSummaryByPayModeResponse() (response *DescribeBillSummaryByP
     return
 }
 
+// DescribeBillSummaryByPayMode
 // Gets the bill summarized according to billing mode
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByPayMode(request *DescribeBillSummaryByPayModeRequest) (response *DescribeBillSummaryByPayModeResponse, err error) {
     if request == nil {
         request = NewDescribeBillSummaryByPayModeRequest()
@@ -133,7 +151,13 @@ func NewDescribeBillSummaryByProductResponse() (response *DescribeBillSummaryByP
     return
 }
 
+// DescribeBillSummaryByProduct
 // Gets the bill summarized according to product
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByProduct(request *DescribeBillSummaryByProductRequest) (response *DescribeBillSummaryByProductResponse, err error) {
     if request == nil {
         request = NewDescribeBillSummaryByProductRequest()
@@ -158,7 +182,13 @@ func NewDescribeBillSummaryByProjectResponse() (response *DescribeBillSummaryByP
     return
 }
 
+// DescribeBillSummaryByProject
 // Gets the bill summarized according to project
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByProject(request *DescribeBillSummaryByProjectRequest) (response *DescribeBillSummaryByProjectResponse, err error) {
     if request == nil {
         request = NewDescribeBillSummaryByProjectRequest()
@@ -183,7 +213,13 @@ func NewDescribeBillSummaryByRegionResponse() (response *DescribeBillSummaryByRe
     return
 }
 
+// DescribeBillSummaryByRegion
 // Gets the bill summarized according to region
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByRegion(request *DescribeBillSummaryByRegionRequest) (response *DescribeBillSummaryByRegionResponse, err error) {
     if request == nil {
         request = NewDescribeBillSummaryByRegionRequest()
@@ -208,7 +244,14 @@ func NewDescribeBillSummaryByTagResponse() (response *DescribeBillSummaryByTagRe
     return
 }
 
+// DescribeBillSummaryByTag
 // This API is used to get the cost distribution over different tags.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByTag(request *DescribeBillSummaryByTagRequest) (response *DescribeBillSummaryByTagResponse, err error) {
     if request == nil {
         request = NewDescribeBillSummaryByTagRequest()

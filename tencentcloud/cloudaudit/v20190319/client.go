@@ -58,7 +58,11 @@ func NewCreateRecorderResponse() (response *CreateRecorderResponse) {
     return
 }
 
+// CreateRecorder
 // This API is used to create resource recorders to detect and record resource configuration changes.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED_RECORDEROVERAMOUNT = "LimitExceeded.RecorderOverAmount"
 func (c *Client) CreateRecorder(request *CreateRecorderRequest) (response *CreateRecorderResponse, err error) {
     if request == nil {
         request = NewCreateRecorderRequest()
@@ -83,7 +87,11 @@ func NewDeleteRecorderResponse() (response *DeleteRecorderResponse) {
     return
 }
 
+// DeleteRecorder
 // This API is used to delete resource recorders. After deletion, resource configuration changes will not be recorded.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_RECORDERNOTFOUND = "ResourceNotFound.RecorderNotFound"
 func (c *Client) DeleteRecorder(request *DeleteRecorderRequest) (response *DeleteRecorderResponse, err error) {
     if request == nil {
         request = NewDeleteRecorderRequest()
@@ -108,7 +116,11 @@ func NewDescribeDiscoveredResourceResponse() (response *DescribeDiscoveredResour
     return
 }
 
+// DescribeDiscoveredResource
 // This API is used to view the basic information of discovered resources.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
 func (c *Client) DescribeDiscoveredResource(request *DescribeDiscoveredResourceRequest) (response *DescribeDiscoveredResourceResponse, err error) {
     if request == nil {
         request = NewDescribeDiscoveredResourceRequest()
@@ -133,7 +145,11 @@ func NewDescribeRecorderResponse() (response *DescribeRecorderResponse) {
     return
 }
 
+// DescribeRecorder
 // This API is used to display current configurations and status of a recorder.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_RECORDERNOTFOUND = "ResourceNotFound.RecorderNotFound"
 func (c *Client) DescribeRecorder(request *DescribeRecorderRequest) (response *DescribeRecorderResponse, err error) {
     if request == nil {
         request = NewDescribeRecorderRequest()
@@ -158,7 +174,11 @@ func NewGetConfigurationItemsResponse() (response *GetConfigurationItemsResponse
     return
 }
 
+// GetConfigurationItems
 // This API is used to get the list of resource configuration items and display resource configuration changes in chronological order.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
 func (c *Client) GetConfigurationItems(request *GetConfigurationItemsRequest) (response *GetConfigurationItemsResponse, err error) {
     if request == nil {
         request = NewGetConfigurationItemsRequest()
@@ -183,7 +203,11 @@ func NewListDiscoveredResourcesResponse() (response *ListDiscoveredResourcesResp
     return
 }
 
+// ListDiscoveredResources
 // This API is used to view the list of discovered resources.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
 func (c *Client) ListDiscoveredResources(request *ListDiscoveredResourcesRequest) (response *ListDiscoveredResourcesResponse, err error) {
     if request == nil {
         request = NewListDiscoveredResourcesRequest()
@@ -208,7 +232,11 @@ func NewListSupportResourceTypesResponse() (response *ListSupportResourceTypesRe
     return
 }
 
+// ListSupportResourceTypes
 // This API is used to query the list of all CFA supported resource types.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
 func (c *Client) ListSupportResourceTypes(request *ListSupportResourceTypesRequest) (response *ListSupportResourceTypesResponse, err error) {
     if request == nil {
         request = NewListSupportResourceTypesRequest()
@@ -233,7 +261,12 @@ func NewUpdateRecorderResponse() (response *UpdateRecorderResponse) {
     return
 }
 
+// UpdateRecorder
 // This API is used to modify the resources to monitor, recorder name, and other recorder configurations.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_RECORDERNAMEREPEAT = "InvalidParameterValue.RecorderNameRepeat"
+//  RESOURCENOTFOUND_RECORDERNOTFOUND = "ResourceNotFound.RecorderNotFound"
 func (c *Client) UpdateRecorder(request *UpdateRecorderRequest) (response *UpdateRecorderResponse, err error) {
     if request == nil {
         request = NewUpdateRecorderRequest()

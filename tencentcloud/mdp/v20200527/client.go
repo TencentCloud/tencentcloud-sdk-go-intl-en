@@ -58,7 +58,14 @@ func NewCreateMediaPackageChannelResponse() (response *CreateMediaPackageChannel
     return
 }
 
+// CreateMediaPackageChannel
 // This API is used to create a media package channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
 func (c *Client) CreateMediaPackageChannel(request *CreateMediaPackageChannelRequest) (response *CreateMediaPackageChannelResponse, err error) {
     if request == nil {
         request = NewCreateMediaPackageChannelRequest()
@@ -83,7 +90,16 @@ func NewCreateMediaPackageChannelEndpointResponse() (response *CreateMediaPackag
     return
 }
 
+// CreateMediaPackageChannelEndpoint
 // This API is used to create an endpoint of a media package channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) CreateMediaPackageChannelEndpoint(request *CreateMediaPackageChannelEndpointRequest) (response *CreateMediaPackageChannelEndpointResponse, err error) {
     if request == nil {
         request = NewCreateMediaPackageChannelEndpointRequest()
@@ -108,7 +124,14 @@ func NewDeleteMediaPackageChannelEndpointsResponse() (response *DeleteMediaPacka
     return
 }
 
+// DeleteMediaPackageChannelEndpoints
 // This API is used to delete endpoints from a media package channel in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
 func (c *Client) DeleteMediaPackageChannelEndpoints(request *DeleteMediaPackageChannelEndpointsRequest) (response *DeleteMediaPackageChannelEndpointsResponse, err error) {
     if request == nil {
         request = NewDeleteMediaPackageChannelEndpointsRequest()
@@ -133,7 +156,14 @@ func NewDeleteMediaPackageChannelsResponse() (response *DeleteMediaPackageChanne
     return
 }
 
+// DeleteMediaPackageChannels
 // This API is used to delete media package channels in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
 func (c *Client) DeleteMediaPackageChannels(request *DeleteMediaPackageChannelsRequest) (response *DeleteMediaPackageChannelsResponse, err error) {
     if request == nil {
         request = NewDeleteMediaPackageChannelsRequest()
@@ -158,7 +188,13 @@ func NewDescribeMediaPackageChannelResponse() (response *DescribeMediaPackageCha
     return
 }
 
+// DescribeMediaPackageChannel
 // This API is used to query the information of a media package channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeMediaPackageChannel(request *DescribeMediaPackageChannelRequest) (response *DescribeMediaPackageChannelResponse, err error) {
     if request == nil {
         request = NewDescribeMediaPackageChannelRequest()
@@ -183,7 +219,16 @@ func NewDescribeMediaPackageChannelsResponse() (response *DescribeMediaPackageCh
     return
 }
 
+// DescribeMediaPackageChannels
 // This API is used to query the information list of media package channels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
 func (c *Client) DescribeMediaPackageChannels(request *DescribeMediaPackageChannelsRequest) (response *DescribeMediaPackageChannelsResponse, err error) {
     if request == nil {
         request = NewDescribeMediaPackageChannelsRequest()
@@ -208,7 +253,15 @@ func NewModifyMediaPackageChannelResponse() (response *ModifyMediaPackageChannel
     return
 }
 
+// ModifyMediaPackageChannel
 // This API is used to modify the information of a media package channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
 func (c *Client) ModifyMediaPackageChannel(request *ModifyMediaPackageChannelRequest) (response *ModifyMediaPackageChannelResponse, err error) {
     if request == nil {
         request = NewModifyMediaPackageChannelRequest()
@@ -233,7 +286,16 @@ func NewModifyMediaPackageChannelEndpointResponse() (response *ModifyMediaPackag
     return
 }
 
+// ModifyMediaPackageChannelEndpoint
 // This API is used to modify an endpoint of a media package channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
 func (c *Client) ModifyMediaPackageChannelEndpoint(request *ModifyMediaPackageChannelEndpointRequest) (response *ModifyMediaPackageChannelEndpointResponse, err error) {
     if request == nil {
         request = NewModifyMediaPackageChannelEndpointRequest()
@@ -258,7 +320,14 @@ func NewModifyMediaPackageChannelInputAuthInfoResponse() (response *ModifyMediaP
     return
 }
 
+// ModifyMediaPackageChannelInputAuthInfo
 // This API is used to modify the input authentication information of a media package channel.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ACTIONTYPE = "InvalidParameter.ActionType"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
 func (c *Client) ModifyMediaPackageChannelInputAuthInfo(request *ModifyMediaPackageChannelInputAuthInfoRequest) (response *ModifyMediaPackageChannelInputAuthInfoResponse, err error) {
     if request == nil {
         request = NewModifyMediaPackageChannelInputAuthInfoRequest()

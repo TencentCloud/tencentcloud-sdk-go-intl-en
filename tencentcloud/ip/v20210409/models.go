@@ -75,7 +75,7 @@ func (r *CreateAccountRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAccountRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -113,7 +113,7 @@ func (r *CreateAccountResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAccountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -128,7 +128,7 @@ func (r *GetCountryCodesRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GetCountryCodesRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -158,7 +158,7 @@ func (r *GetCountryCodesResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GetCountryCodesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)

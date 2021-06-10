@@ -58,7 +58,19 @@ func NewCreateSecretResponse() (response *CreateSecretResponse) {
     return
 }
 
+// CreateSecret
 // This API is used to create a KMS-encrypted Secret. You can create and store up to 1,000 Secrets in each region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCESSKMSERROR = "FailedOperation.AccessKmsError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TAGKEYSDUPLICATED = "InvalidParameterValue.TagKeysDuplicated"
+//  INVALIDPARAMETERVALUE_TAGSNOTEXISTED = "InvalidParameterValue.TagsNotExisted"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE_SECRETEXISTS = "ResourceInUse.SecretExists"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSecret(request *CreateSecretRequest) (response *CreateSecretResponse, err error) {
     if request == nil {
         request = NewCreateSecretRequest()
@@ -83,7 +95,16 @@ func NewDeleteSecretResponse() (response *DeleteSecretResponse) {
     return
 }
 
+// DeleteSecret
 // This API is used to delete a Secret. You can set whether to delete the Secret immediately or on schedule using the `RecoveryWindowInDays` parameter. For a Secret to be deleted on schedule, its status will be `PendingDelete` before the scheduled deletion time. You can use `RestoreSecret` to restore a deleted Secret during this time. A deleted Secret will not be restorable after the scheduled deletion time. A Secret can only be deleted after being disabled using `DisableSecret`.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteSecret(request *DeleteSecretRequest) (response *DeleteSecretResponse, err error) {
     if request == nil {
         request = NewDeleteSecretRequest()
@@ -108,7 +129,15 @@ func NewDeleteSecretVersionResponse() (response *DeleteSecretVersionResponse) {
     return
 }
 
+// DeleteSecretVersion
 // This API is used to delete a version of a Secret. The deletion takes effect immediately. Secret versions in any status can be deleted.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteSecretVersion(request *DeleteSecretVersionRequest) (response *DeleteSecretVersionResponse, err error) {
     if request == nil {
         request = NewDeleteSecretVersionRequest()
@@ -133,7 +162,15 @@ func NewDescribeSecretResponse() (response *DescribeSecretResponse) {
     return
 }
 
+// DescribeSecret
 // This API is used to obtain the detailed attribute information of a Secret.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSecret(request *DescribeSecretRequest) (response *DescribeSecretResponse, err error) {
     if request == nil {
         request = NewDescribeSecretRequest()
@@ -158,7 +195,16 @@ func NewDisableSecretResponse() (response *DisableSecretResponse) {
     return
 }
 
+// DisableSecret
 // This API is used to disable a Secret and will change its status to `Disabled`. The plaintext of a disabled Secret cannot be obtained through APIs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DisableSecret(request *DisableSecretRequest) (response *DisableSecretResponse, err error) {
     if request == nil {
         request = NewDisableSecretRequest()
@@ -183,7 +229,16 @@ func NewEnableSecretResponse() (response *EnableSecretResponse) {
     return
 }
 
+// EnableSecret
 // This API is used to enable a Secret and will change its status to `Enabled`. You can call the `GetSecretValue` API to obtain the plaintext of this Secret. Secrets in `PendingDelete` status can only be enabled after being restored by using `RestoreSecret`.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) EnableSecret(request *EnableSecretRequest) (response *EnableSecretResponse, err error) {
     if request == nil {
         request = NewEnableSecretRequest()
@@ -208,7 +263,12 @@ func NewGetRegionsResponse() (response *GetRegionsResponse) {
     return
 }
 
+// GetRegions
 // This API is used to obtain the list of regions displayed on Console.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetRegions(request *GetRegionsRequest) (response *GetRegionsResponse, err error) {
     if request == nil {
         request = NewGetRegionsRequest()
@@ -233,7 +293,18 @@ func NewGetSecretValueResponse() (response *GetSecretValueResponse) {
     return
 }
 
+// GetSecretValue
 // This API is used to obtain the plaintext of a specified Secret and version. Only plaintext of an enabled Secret can be obtained.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCESSKMSERROR = "FailedOperation.AccessKmsError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  RESOURCEUNAVAILABLE_RESOURCEDISABLED = "ResourceUnavailable.ResourceDisabled"
+//  RESOURCEUNAVAILABLE_RESOURCEPENDINGDELETED = "ResourceUnavailable.ResourcePendingDeleted"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetSecretValue(request *GetSecretValueRequest) (response *GetSecretValueResponse, err error) {
     if request == nil {
         request = NewGetSecretValueRequest()
@@ -258,7 +329,12 @@ func NewGetServiceStatusResponse() (response *GetServiceStatusResponse) {
     return
 }
 
+// GetServiceStatus
 // This API is used to obtain the SecretsManager service status of a user.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetServiceStatus(request *GetServiceStatusRequest) (response *GetServiceStatusResponse, err error) {
     if request == nil {
         request = NewGetServiceStatusRequest()
@@ -283,7 +359,15 @@ func NewListSecretVersionIdsResponse() (response *ListSecretVersionIdsResponse) 
     return
 }
 
+// ListSecretVersionIds
 // This API is used to obtain list of versions of a Secret.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ListSecretVersionIds(request *ListSecretVersionIdsRequest) (response *ListSecretVersionIdsResponse, err error) {
     if request == nil {
         request = NewListSecretVersionIdsRequest()
@@ -308,7 +392,14 @@ func NewListSecretsResponse() (response *ListSecretsResponse) {
     return
 }
 
+// ListSecrets
 // This API is used to obtain the detailed information list of all Secrets. You can specify the filter fields and sorting order as needed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ListSecrets(request *ListSecretsRequest) (response *ListSecretsResponse, err error) {
     if request == nil {
         request = NewListSecretsRequest()
@@ -333,7 +424,19 @@ func NewPutSecretValueResponse() (response *PutSecretValueResponse) {
     return
 }
 
+// PutSecretValue
 // This API is used to add a new version to a specified Secret. Each Secret supports up to 10 versions. You can only add versions to Secrets in `Enabled` or `Disabled` status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSKMSERROR = "FailedOperation.AccessKmsError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE_VERSIONIDEXISTS = "ResourceInUse.VersionIdExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PutSecretValue(request *PutSecretValueRequest) (response *PutSecretValueResponse, err error) {
     if request == nil {
         request = NewPutSecretValueRequest()
@@ -358,7 +461,16 @@ func NewRestoreSecretResponse() (response *RestoreSecretResponse) {
     return
 }
 
+// RestoreSecret
 // This API is used to restore a `PendingDelete` Secret, canceling its scheduled deletion. The restored Secret will be in `Disabled` status. You can call the `EnableSecret` API to enable this Secret again.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) RestoreSecret(request *RestoreSecretRequest) (response *RestoreSecretResponse, err error) {
     if request == nil {
         request = NewRestoreSecretRequest()
@@ -383,7 +495,15 @@ func NewUpdateDescriptionResponse() (response *UpdateDescriptionResponse) {
     return
 }
 
+// UpdateDescription
 // This API is used to update the description of a Secret. This API can only update Secrets in `Enabled` or `Disabled` status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) UpdateDescription(request *UpdateDescriptionRequest) (response *UpdateDescriptionResponse, err error) {
     if request == nil {
         request = NewUpdateDescriptionRequest()
@@ -408,7 +528,17 @@ func NewUpdateSecretResponse() (response *UpdateSecretResponse) {
     return
 }
 
+// UpdateSecret
 // This API is used to update the name and version ID of a Secret. Calling this API encrypts the new Secret content and overwrites the old content. This API can only update Secrets in `Enabled` or `Disabled` status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSKMSERROR = "FailedOperation.AccessKmsError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) UpdateSecret(request *UpdateSecretRequest) (response *UpdateSecretResponse, err error) {
     if request == nil {
         request = NewUpdateSecretRequest()

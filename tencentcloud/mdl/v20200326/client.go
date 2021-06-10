@@ -58,7 +58,20 @@ func NewCreateMediaLiveChannelResponse() (response *CreateMediaLiveChannelRespon
     return
 }
 
+// CreateMediaLiveChannel
 // This API is used to create a media channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
+//  INVALIDPARAMETER_ATTACHEDINPUTS = "InvalidParameter.AttachedInputs"
+//  INVALIDPARAMETER_AUDIOTEMPLATES = "InvalidParameter.AudioTemplates"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
+//  INVALIDPARAMETER_VIDEOTEMPLATES = "InvalidParameter.VideoTemplates"
 func (c *Client) CreateMediaLiveChannel(request *CreateMediaLiveChannelRequest) (response *CreateMediaLiveChannelResponse, err error) {
     if request == nil {
         request = NewCreateMediaLiveChannelRequest()
@@ -83,7 +96,18 @@ func NewCreateMediaLiveInputResponse() (response *CreateMediaLiveInputResponse) 
     return
 }
 
+// CreateMediaLiveInput
 // This API is used to create a media input.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_INPUTSETTINGS = "InvalidParameter.InputSettings"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SECURITYGROUPS = "InvalidParameter.SecurityGroups"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
 func (c *Client) CreateMediaLiveInput(request *CreateMediaLiveInputRequest) (response *CreateMediaLiveInputResponse, err error) {
     if request == nil {
         request = NewCreateMediaLiveInputRequest()
@@ -108,7 +132,15 @@ func NewCreateMediaLiveInputSecurityGroupResponse() (response *CreateMediaLiveIn
     return
 }
 
+// CreateMediaLiveInputSecurityGroup
 // This API is used to create an input security group. Up to 5 ones can be created.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
 func (c *Client) CreateMediaLiveInputSecurityGroup(request *CreateMediaLiveInputSecurityGroupRequest) (response *CreateMediaLiveInputSecurityGroupResponse, err error) {
     if request == nil {
         request = NewCreateMediaLiveInputSecurityGroupRequest()
@@ -133,7 +165,16 @@ func NewDeleteMediaLiveChannelResponse() (response *DeleteMediaLiveChannelRespon
     return
 }
 
+// DeleteMediaLiveChannel
 // This API is used to delete a MediaLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+//  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
 func (c *Client) DeleteMediaLiveChannel(request *DeleteMediaLiveChannelRequest) (response *DeleteMediaLiveChannelResponse, err error) {
     if request == nil {
         request = NewDeleteMediaLiveChannelRequest()
@@ -158,7 +199,15 @@ func NewDeleteMediaLiveInputResponse() (response *DeleteMediaLiveInputResponse) 
     return
 }
 
+// DeleteMediaLiveInput
 // This API is used to delete a media input.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DeleteMediaLiveInput(request *DeleteMediaLiveInputRequest) (response *DeleteMediaLiveInputResponse, err error) {
     if request == nil {
         request = NewDeleteMediaLiveInputRequest()
@@ -183,7 +232,15 @@ func NewDeleteMediaLiveInputSecurityGroupResponse() (response *DeleteMediaLiveIn
     return
 }
 
+// DeleteMediaLiveInputSecurityGroup
 // This API is used to delete an input security group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALREADYASSOCIATEDINPUT = "InvalidParameter.AlreadyAssociatedInput"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DeleteMediaLiveInputSecurityGroup(request *DeleteMediaLiveInputSecurityGroupRequest) (response *DeleteMediaLiveInputSecurityGroupResponse, err error) {
     if request == nil {
         request = NewDeleteMediaLiveInputSecurityGroupRequest()
@@ -208,7 +265,12 @@ func NewDescribeMediaLiveChannelResponse() (response *DescribeMediaLiveChannelRe
     return
 }
 
+// DescribeMediaLiveChannel
 // This API is used to query the information of a MediaLive channel.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeMediaLiveChannel(request *DescribeMediaLiveChannelRequest) (response *DescribeMediaLiveChannelResponse, err error) {
     if request == nil {
         request = NewDescribeMediaLiveChannelRequest()
@@ -233,7 +295,12 @@ func NewDescribeMediaLiveChannelAlertsResponse() (response *DescribeMediaLiveCha
     return
 }
 
+// DescribeMediaLiveChannelAlerts
 // This API is used to query the channel alarm information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeMediaLiveChannelAlerts(request *DescribeMediaLiveChannelAlertsRequest) (response *DescribeMediaLiveChannelAlertsResponse, err error) {
     if request == nil {
         request = NewDescribeMediaLiveChannelAlertsRequest()
@@ -258,7 +325,14 @@ func NewDescribeMediaLiveChannelInputStatisticsResponse() (response *DescribeMed
     return
 }
 
+// DescribeMediaLiveChannelInputStatistics
 // This API is used to query the input statistics.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
 func (c *Client) DescribeMediaLiveChannelInputStatistics(request *DescribeMediaLiveChannelInputStatisticsRequest) (response *DescribeMediaLiveChannelInputStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeMediaLiveChannelInputStatisticsRequest()
@@ -283,7 +357,14 @@ func NewDescribeMediaLiveChannelLogsResponse() (response *DescribeMediaLiveChann
     return
 }
 
+// DescribeMediaLiveChannelLogs
 // This API is used to query MediaLive channel logs, such as push event logs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
 func (c *Client) DescribeMediaLiveChannelLogs(request *DescribeMediaLiveChannelLogsRequest) (response *DescribeMediaLiveChannelLogsResponse, err error) {
     if request == nil {
         request = NewDescribeMediaLiveChannelLogsRequest()
@@ -308,7 +389,15 @@ func NewDescribeMediaLiveChannelOutputStatisticsResponse() (response *DescribeMe
     return
 }
 
+// DescribeMediaLiveChannelOutputStatistics
 // This API is used to query the output statistics of a channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
 func (c *Client) DescribeMediaLiveChannelOutputStatistics(request *DescribeMediaLiveChannelOutputStatisticsRequest) (response *DescribeMediaLiveChannelOutputStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeMediaLiveChannelOutputStatisticsRequest()
@@ -333,7 +422,11 @@ func NewDescribeMediaLiveChannelsResponse() (response *DescribeMediaLiveChannels
     return
 }
 
+// DescribeMediaLiveChannels
 // This API is used to query the information of MediaLive channels in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMediaLiveChannels(request *DescribeMediaLiveChannelsRequest) (response *DescribeMediaLiveChannelsResponse, err error) {
     if request == nil {
         request = NewDescribeMediaLiveChannelsRequest()
@@ -358,7 +451,14 @@ func NewDescribeMediaLiveInputResponse() (response *DescribeMediaLiveInputRespon
     return
 }
 
+// DescribeMediaLiveInput
 // This API is used to query a media input.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeMediaLiveInput(request *DescribeMediaLiveInputRequest) (response *DescribeMediaLiveInputResponse, err error) {
     if request == nil {
         request = NewDescribeMediaLiveInputRequest()
@@ -383,7 +483,14 @@ func NewDescribeMediaLiveInputSecurityGroupResponse() (response *DescribeMediaLi
     return
 }
 
+// DescribeMediaLiveInputSecurityGroup
 // This API is used to query an input security group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeMediaLiveInputSecurityGroup(request *DescribeMediaLiveInputSecurityGroupRequest) (response *DescribeMediaLiveInputSecurityGroupResponse, err error) {
     if request == nil {
         request = NewDescribeMediaLiveInputSecurityGroupRequest()
@@ -408,7 +515,11 @@ func NewDescribeMediaLiveInputSecurityGroupsResponse() (response *DescribeMediaL
     return
 }
 
+// DescribeMediaLiveInputSecurityGroups
 // This API is used to query the information of input security groups in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMediaLiveInputSecurityGroups(request *DescribeMediaLiveInputSecurityGroupsRequest) (response *DescribeMediaLiveInputSecurityGroupsResponse, err error) {
     if request == nil {
         request = NewDescribeMediaLiveInputSecurityGroupsRequest()
@@ -433,7 +544,11 @@ func NewDescribeMediaLiveInputsResponse() (response *DescribeMediaLiveInputsResp
     return
 }
 
+// DescribeMediaLiveInputs
 // This API is used to query the information of media inputs in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMediaLiveInputs(request *DescribeMediaLiveInputsRequest) (response *DescribeMediaLiveInputsResponse, err error) {
     if request == nil {
         request = NewDescribeMediaLiveInputsRequest()
@@ -458,7 +573,20 @@ func NewModifyMediaLiveChannelResponse() (response *ModifyMediaLiveChannelRespon
     return
 }
 
+// ModifyMediaLiveChannel
 // This API is used to modify the information of a MediaLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
+//  INVALIDPARAMETER_ATTACHEDINPUTS = "InvalidParameter.AttachedInputs"
+//  INVALIDPARAMETER_AUDIOTEMPLATES = "InvalidParameter.AudioTemplates"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
+//  INVALIDPARAMETER_VIDEOTEMPLATES = "InvalidParameter.VideoTemplates"
 func (c *Client) ModifyMediaLiveChannel(request *ModifyMediaLiveChannelRequest) (response *ModifyMediaLiveChannelResponse, err error) {
     if request == nil {
         request = NewModifyMediaLiveChannelRequest()
@@ -483,7 +611,18 @@ func NewModifyMediaLiveInputResponse() (response *ModifyMediaLiveInputResponse) 
     return
 }
 
+// ModifyMediaLiveInput
 // This API is used to update a media input.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUTSETTINGS = "InvalidParameter.InputSettings"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SECURITYGROUPS = "InvalidParameter.SecurityGroups"
+//  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
 func (c *Client) ModifyMediaLiveInput(request *ModifyMediaLiveInputRequest) (response *ModifyMediaLiveInputResponse, err error) {
     if request == nil {
         request = NewModifyMediaLiveInputRequest()
@@ -508,7 +647,16 @@ func NewModifyMediaLiveInputSecurityGroupResponse() (response *ModifyMediaLiveIn
     return
 }
 
+// ModifyMediaLiveInputSecurityGroup
 // This API is used to update an input security group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
 func (c *Client) ModifyMediaLiveInputSecurityGroup(request *ModifyMediaLiveInputSecurityGroupRequest) (response *ModifyMediaLiveInputSecurityGroupResponse, err error) {
     if request == nil {
         request = NewModifyMediaLiveInputSecurityGroupRequest()
@@ -533,7 +681,15 @@ func NewStartMediaLiveChannelResponse() (response *StartMediaLiveChannelResponse
     return
 }
 
+// StartMediaLiveChannel
 // This API is used to start a MediaLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
 func (c *Client) StartMediaLiveChannel(request *StartMediaLiveChannelRequest) (response *StartMediaLiveChannelResponse, err error) {
     if request == nil {
         request = NewStartMediaLiveChannelRequest()
@@ -558,7 +714,15 @@ func NewStopMediaLiveChannelResponse() (response *StopMediaLiveChannelResponse) 
     return
 }
 
+// StopMediaLiveChannel
 // This API is used to stop a MediaLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
 func (c *Client) StopMediaLiveChannel(request *StopMediaLiveChannelRequest) (response *StopMediaLiveChannelResponse, err error) {
     if request == nil {
         request = NewStopMediaLiveChannelRequest()

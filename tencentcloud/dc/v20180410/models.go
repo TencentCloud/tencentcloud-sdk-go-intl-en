@@ -32,7 +32,7 @@ func (r *AcceptDirectConnectTunnelRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *AcceptDirectConnectTunnelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -60,7 +60,7 @@ func (r *AcceptDirectConnectTunnelResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *AcceptDirectConnectTunnelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -125,7 +125,7 @@ func (r *ApplyInternetAddressRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ApplyInternetAddressRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -159,7 +159,7 @@ func (r *ApplyInternetAddressResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ApplyInternetAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -244,7 +244,7 @@ func (r *CreateDirectConnectRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateDirectConnectRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -291,7 +291,7 @@ func (r *CreateDirectConnectResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateDirectConnectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -363,7 +363,7 @@ func (r *CreateDirectConnectTunnelRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateDirectConnectTunnelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -409,7 +409,7 @@ func (r *CreateDirectConnectTunnelResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateDirectConnectTunnelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -427,7 +427,7 @@ func (r *DeleteDirectConnectRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteDirectConnectRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -455,7 +455,7 @@ func (r *DeleteDirectConnectResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteDirectConnectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -473,7 +473,7 @@ func (r *DeleteDirectConnectTunnelRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteDirectConnectTunnelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -501,7 +501,7 @@ func (r *DeleteDirectConnectTunnelResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteDirectConnectTunnelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -527,7 +527,7 @@ func (r *DescribeAccessPointsRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAccessPointsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -563,7 +563,7 @@ func (r *DescribeAccessPointsResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAccessPointsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -594,7 +594,7 @@ func (r *DescribeDirectConnectTunnelsRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDirectConnectTunnelsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -631,7 +631,7 @@ func (r *DescribeDirectConnectTunnelsResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDirectConnectTunnelsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -658,7 +658,7 @@ func (r *DescribeDirectConnectsRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDirectConnectsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -699,7 +699,7 @@ func (r *DescribeDirectConnectsResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDirectConnectsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -714,7 +714,7 @@ func (r *DescribeInternetAddressQuotaRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInternetAddressQuotaRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -761,7 +761,7 @@ func (r *DescribeInternetAddressQuotaResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInternetAddressQuotaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -790,7 +790,7 @@ func (r *DescribeInternetAddressRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInternetAddressRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -827,7 +827,7 @@ func (r *DescribeInternetAddressResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInternetAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -842,7 +842,7 @@ func (r *DescribeInternetAddressStatisticsRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInternetAddressStatisticsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -876,7 +876,7 @@ func (r *DescribeInternetAddressStatisticsResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInternetAddressStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -1134,7 +1134,7 @@ func (r *DisableInternetAddressRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DisableInternetAddressRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -1162,7 +1162,7 @@ func (r *DisableInternetAddressResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DisableInternetAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -1180,7 +1180,7 @@ func (r *EnableInternetAddressRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *EnableInternetAddressRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -1208,7 +1208,7 @@ func (r *EnableInternetAddressResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *EnableInternetAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -1337,7 +1337,7 @@ func (r *ModifyDirectConnectAttributeRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyDirectConnectAttributeRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -1377,7 +1377,7 @@ func (r *ModifyDirectConnectAttributeResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyDirectConnectAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -1416,7 +1416,7 @@ func (r *ModifyDirectConnectTunnelAttributeRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyDirectConnectTunnelAttributeRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -1451,7 +1451,7 @@ func (r *ModifyDirectConnectTunnelAttributeResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyDirectConnectTunnelAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -1469,7 +1469,7 @@ func (r *RejectDirectConnectTunnelRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *RejectDirectConnectTunnelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -1497,7 +1497,7 @@ func (r *RejectDirectConnectTunnelResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *RejectDirectConnectTunnelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -1515,7 +1515,7 @@ func (r *ReleaseInternetAddressRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ReleaseInternetAddressRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -1543,7 +1543,7 @@ func (r *ReleaseInternetAddressResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ReleaseInternetAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)

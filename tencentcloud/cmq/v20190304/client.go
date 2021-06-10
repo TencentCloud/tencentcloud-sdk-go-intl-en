@@ -58,7 +58,20 @@ func NewClearQueueResponse() (response *ClearQueueResponse) {
     return
 }
 
+// ClearQueue
 // This API is used to clear all messages in a queue.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTASKID = "InvalidParameterValue.NoTaskId"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ClearQueue(request *ClearQueueRequest) (response *ClearQueueResponse, err error) {
     if request == nil {
         request = NewClearQueueRequest()
@@ -83,7 +96,20 @@ func NewClearSubscriptionFilterTagsResponse() (response *ClearSubscriptionFilter
     return
 }
 
+// ClearSubscriptionFilterTags
 // This API is used to clear the message tags of a subscriber.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTASKID = "InvalidParameterValue.NoTaskId"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ClearSubscriptionFilterTags(request *ClearSubscriptionFilterTagsRequest) (response *ClearSubscriptionFilterTagsResponse, err error) {
     if request == nil {
         request = NewClearSubscriptionFilterTagsRequest()
@@ -108,7 +134,16 @@ func NewCreateQueueResponse() (response *CreateQueueResponse) {
     return
 }
 
+// CreateQueue
 // This API is used to create a queue.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateQueue(request *CreateQueueRequest) (response *CreateQueueResponse, err error) {
     if request == nil {
         request = NewCreateQueueRequest()
@@ -133,7 +168,20 @@ func NewCreateSubscribeResponse() (response *CreateSubscribeResponse) {
     return
 }
 
+// CreateSubscribe
 // This API is used to create a subscription.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTASKID = "InvalidParameterValue.NoTaskId"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSubscribe(request *CreateSubscribeRequest) (response *CreateSubscribeResponse, err error) {
     if request == nil {
         request = NewCreateSubscribeRequest()
@@ -158,7 +206,19 @@ func NewCreateTopicResponse() (response *CreateTopicResponse) {
     return
 }
 
+// CreateTopic
 // This API is used to create a topic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
     if request == nil {
         request = NewCreateTopicRequest()
@@ -183,7 +243,16 @@ func NewDeleteQueueResponse() (response *DeleteQueueResponse) {
     return
 }
 
+// DeleteQueue
 // This API is used to delete a queue.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteQueue(request *DeleteQueueRequest) (response *DeleteQueueResponse, err error) {
     if request == nil {
         request = NewDeleteQueueRequest()
@@ -208,7 +277,19 @@ func NewDeleteSubscribeResponse() (response *DeleteSubscribeResponse) {
     return
 }
 
+// DeleteSubscribe
 // This API is used to delete a subscription.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteSubscribe(request *DeleteSubscribeRequest) (response *DeleteSubscribeResponse, err error) {
     if request == nil {
         request = NewDeleteSubscribeRequest()
@@ -233,7 +314,19 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
     return
 }
 
+// DeleteTopic
 // This API is used to delete a topic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopicResponse, err error) {
     if request == nil {
         request = NewDeleteTopicRequest()
@@ -258,7 +351,19 @@ func NewDescribeDeadLetterSourceQueuesResponse() (response *DescribeDeadLetterSo
     return
 }
 
+// DescribeDeadLetterSourceQueues
 // This API is used to enumerate the source queues of a dead letter queue.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeDeadLetterSourceQueues(request *DescribeDeadLetterSourceQueuesRequest) (response *DescribeDeadLetterSourceQueuesResponse, err error) {
     if request == nil {
         request = NewDescribeDeadLetterSourceQueuesRequest()
@@ -283,7 +388,19 @@ func NewDescribeQueueDetailResponse() (response *DescribeQueueDetailResponse) {
     return
 }
 
+// DescribeQueueDetail
 // This API is used to enumerate queues.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeQueueDetail(request *DescribeQueueDetailRequest) (response *DescribeQueueDetailResponse, err error) {
     if request == nil {
         request = NewDescribeQueueDetailRequest()
@@ -308,7 +425,20 @@ func NewDescribeSubscriptionDetailResponse() (response *DescribeSubscriptionDeta
     return
 }
 
+// DescribeSubscriptionDetail
 // This API is used to query subscription details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTASKID = "InvalidParameterValue.NoTaskId"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSubscriptionDetail(request *DescribeSubscriptionDetailRequest) (response *DescribeSubscriptionDetailResponse, err error) {
     if request == nil {
         request = NewDescribeSubscriptionDetailRequest()
@@ -333,7 +463,20 @@ func NewDescribeTopicDetailResponse() (response *DescribeTopicDetailResponse) {
     return
 }
 
+// DescribeTopicDetail
 // This API is used to query topic details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTASKID = "InvalidParameterValue.NoTaskId"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTopicDetail(request *DescribeTopicDetailRequest) (response *DescribeTopicDetailResponse, err error) {
     if request == nil {
         request = NewDescribeTopicDetailRequest()
@@ -358,7 +501,20 @@ func NewModifyQueueAttributeResponse() (response *ModifyQueueAttributeResponse) 
     return
 }
 
+// ModifyQueueAttribute
 // This API is used to modify queue attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTASKID = "InvalidParameterValue.NoTaskId"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyQueueAttribute(request *ModifyQueueAttributeRequest) (response *ModifyQueueAttributeResponse, err error) {
     if request == nil {
         request = NewModifyQueueAttributeRequest()
@@ -383,7 +539,20 @@ func NewModifySubscriptionAttributeResponse() (response *ModifySubscriptionAttri
     return
 }
 
+// ModifySubscriptionAttribute
 // This API is used to modify subscription attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTASKID = "InvalidParameterValue.NoTaskId"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySubscriptionAttribute(request *ModifySubscriptionAttributeRequest) (response *ModifySubscriptionAttributeResponse, err error) {
     if request == nil {
         request = NewModifySubscriptionAttributeRequest()
@@ -408,7 +577,19 @@ func NewModifyTopicAttributeResponse() (response *ModifyTopicAttributeResponse) 
     return
 }
 
+// ModifyTopicAttribute
 // This API is used to modify topic attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyTopicAttribute(request *ModifyTopicAttributeRequest) (response *ModifyTopicAttributeResponse, err error) {
     if request == nil {
         request = NewModifyTopicAttributeRequest()
@@ -433,7 +614,19 @@ func NewRewindQueueResponse() (response *RewindQueueResponse) {
     return
 }
 
+// RewindQueue
 // This API is used to rewind a queue.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) RewindQueue(request *RewindQueueRequest) (response *RewindQueueResponse, err error) {
     if request == nil {
         request = NewRewindQueueRequest()
@@ -458,7 +651,20 @@ func NewUnbindDeadLetterResponse() (response *UnbindDeadLetterResponse) {
     return
 }
 
+// UnbindDeadLetter
 // This API is used to unbind a dead letter queue.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRYLATER = "FailedOperation.TryLater"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTASKID = "InvalidParameterValue.NoTaskId"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) UnbindDeadLetter(request *UnbindDeadLetterRequest) (response *UnbindDeadLetterResponse, err error) {
     if request == nil {
         request = NewUnbindDeadLetterRequest()

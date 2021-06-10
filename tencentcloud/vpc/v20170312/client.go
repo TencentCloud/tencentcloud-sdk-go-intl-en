@@ -58,7 +58,20 @@ func NewAcceptAttachCcnInstancesResponse() (response *AcceptAttachCcnInstancesRe
     return
 }
 
+// AcceptAttachCcnInstances
 // This API (AcceptAttachCcnInstances) is used to associate instances across accounts. Cloud Connect Network (CCN) owners accept and agree to the operations.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
+//  UNSUPPORTEDOPERATION_ISNOTFINANCEACCOUNT = "UnsupportedOperation.IsNotFinanceAccount"
+//  UNSUPPORTEDOPERATION_NOTPENDINGCCNINSTANCE = "UnsupportedOperation.NotPendingCcnInstance"
+//  UNSUPPORTEDOPERATION_UNABLECROSSFINANCE = "UnsupportedOperation.UnableCrossFinance"
 func (c *Client) AcceptAttachCcnInstances(request *AcceptAttachCcnInstancesRequest) (response *AcceptAttachCcnInstancesResponse, err error) {
     if request == nil {
         request = NewAcceptAttachCcnInstancesRequest()
@@ -83,7 +96,12 @@ func NewAddBandwidthPackageResourcesResponse() (response *AddBandwidthPackageRes
     return
 }
 
+// AddBandwidthPackageResources
 // This API is used to add resources to a bandwidth package, including [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1), [Cloud Load Balancer](https://intl.cloud.tencent.com/document/product/214/517?from_cn_redirect=1), and so on.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) AddBandwidthPackageResources(request *AddBandwidthPackageResourcesRequest) (response *AddBandwidthPackageResourcesResponse, err error) {
     if request == nil {
         request = NewAddBandwidthPackageResourcesRequest()
@@ -108,10 +126,25 @@ func NewAllocateAddressesResponse() (response *AllocateAddressesResponse) {
     return
 }
 
+// AllocateAddresses
 // This API is used to apply for one or more [Elastic IP Addresses](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIPs for short).
+//
 // * An EIP is a static IP address that is dedicated for dynamic cloud computing. You can quickly re-map an EIP to another instance under your account to protect against instance failures.
+//
 // * Your EIP is associated with your Tencent Cloud account rather than an instance. It remains associated with your Tencent Cloud account until you choose to explicitly release it or your account is in arrears for more than 24 hours.
+//
 // * The maximum number of EIPs that can be applied for a Tencent Cloud account in each region is restricted. For more information, see [EIP Product Introduction](https://intl.cloud.tencent.com/document/product/213/5733?from_cn_redirect=1). You can get the quota information through the DescribeAddressQuota API.
+//
+// error code that may be returned:
+//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
+//  ADDRESSQUOTALIMITEXCEEDED_DAILYALLOCATE = "AddressQuotaLimitExceeded.DailyAllocate"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
+//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_BANDWIDTHTOOSMALL = "InvalidParameterValue.BandwidthTooSmall"
+//  INVALIDPARAMETERVALUE_INVALIDDEDICATEDCLUSTERID = "InvalidParameterValue.InvalidDedicatedClusterId"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 func (c *Client) AllocateAddresses(request *AllocateAddressesRequest) (response *AllocateAddressesResponse, err error) {
     if request == nil {
         request = NewAllocateAddressesRequest()
@@ -136,12 +169,29 @@ func NewAssignIpv6AddressesResponse() (response *AssignIpv6AddressesResponse) {
     return
 }
 
+// AssignIpv6Addresses
 // This API (AssignIpv6Addresses) is used to apply for an IPv6 address for the ENI.<br />
+//
 // This API is completed asynchronously. If you need to query the async execution results, use the `RequestId` returned by this API to query the `QueryTask` API.
+//
 // * An ENI can only be bound with a limited number of IPs. For more information about resource limits, see<a href="/document/product/576/18527">ENI use limits</a>.
+//
 // * You can specify the `IPv6` address when applying. The address type cannot be the primary `IP`. Currently, `IPv6` can only be supported as the secondary `IP`.
+//
 // * The address must be unoccupied and is in the subnet to which the ENI belongs.
+//
 // * When applying for one to multiple secondary `IPv6` addresses on ENI, the API will return the specified number of secondary `IPv6` addresses in the subnet range where the ENI is located.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED_ADDRESS = "LimitExceeded.Address"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+//  UNSUPPORTEDOPERATION_UNASSIGNCIDRBLOCK = "UnsupportedOperation.UnassignCidrBlock"
 func (c *Client) AssignIpv6Addresses(request *AssignIpv6AddressesRequest) (response *AssignIpv6AddressesResponse, err error) {
     if request == nil {
         request = NewAssignIpv6AddressesRequest()
@@ -166,9 +216,19 @@ func NewAssignIpv6CidrBlockResponse() (response *AssignIpv6CidrBlockResponse) {
     return
 }
 
+// AssignIpv6CidrBlock
 // This API is used to assign IPv6 ranges.
+//
 // * To use this API, you must already have a VPC instance. If you do not have a VPC instance yet, use the <a href="https://intl.cloud.tencent.com/document/api/215/15774?from_cn_redirect=1" title="CreateVpc" target="_blank">CreateVpc</a> API to create one.
+//
 // * Each VPC can apply for only one IPv6 range.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED_CIDRBLOCK = "LimitExceeded.CidrBlock"
+//  RESOURCEINSUFFICIENT_CIDRBLOCK = "ResourceInsufficient.CidrBlock"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) AssignIpv6CidrBlock(request *AssignIpv6CidrBlockRequest) (response *AssignIpv6CidrBlockResponse, err error) {
     if request == nil {
         request = NewAssignIpv6CidrBlockRequest()
@@ -193,9 +253,21 @@ func NewAssignIpv6SubnetCidrBlockResponse() (response *AssignIpv6SubnetCidrBlock
     return
 }
 
+// AssignIpv6SubnetCidrBlock
 // This API (AssignIpv6SubnetCidrBlock) is used to assign IPv6 subnet IP ranges.
+//
 // * To assign an `IPv6` IP range to a subnet, the `VPC` that the subnet belongs to should have obtained the `IPv6` IP range. If this has not been assigned, use the `AssignIpv6CidrBlock` API to assign an `IPv6` IP range to the `VPC` to which the subnet belongs. Otherwise, the `IPv6` subnet IP range cannot be assigned.
+//
 // * Each subnet can only be assigned one IPv6 IP range.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+//  INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+//  LIMITEXCEEDED_SUBNETCIDRBLOCK = "LimitExceeded.SubnetCidrBlock"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) AssignIpv6SubnetCidrBlock(request *AssignIpv6SubnetCidrBlockRequest) (response *AssignIpv6SubnetCidrBlockResponse, err error) {
     if request == nil {
         request = NewAssignIpv6SubnetCidrBlockRequest()
@@ -220,10 +292,26 @@ func NewAssignPrivateIpAddressesResponse() (response *AssignPrivateIpAddressesRe
     return
 }
 
+// AssignPrivateIpAddresses
 // This API (AssignPrivateIpAddresses) is used for the ENI to apply for private IPs.
+//
 // * An ENI can only be bound with a limited number of IP addresses. For more information about resource limits, see <a href="/document/product/576/18527">ENI Use Limits</a>.
+//
 // * You can specify the private IP you want to apply for. It cannot be the primary IP, which already exists and cannot be modified. The private IP must be in the same subnet as the ENI, and cannot be occupied.
+//
 // * You can apply for more than one secondary private IP on the ENI. The API will return the specified number of secondary private IPs in the subnet IP range of the ENI.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_RESERVED = "InvalidParameterValue.Reserved"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) AssignPrivateIpAddresses(request *AssignPrivateIpAddressesRequest) (response *AssignPrivateIpAddressesResponse, err error) {
     if request == nil {
         request = NewAssignPrivateIpAddressesRequest()
@@ -248,13 +336,36 @@ func NewAssociateAddressResponse() (response *AssociateAddressResponse) {
     return
 }
 
+// AssociateAddress
 // This API is used to bind an [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP for short) to the specified private IP of an instance or ENI.
+//
 // * The EIP is essentially bound to the primary private IP of the primary ENI on a CVM instance.
+//
 // * The EIP binding will automatically unbind and release the public IP previously bound to the CVM instance.
+//
 // * To bind another EIP to the private IP of the specified ENI (not the primary private IP of the primary ENI), you must first unbind the EIP.
+//
 // * To bind an EIP to a NAT Gateway, use the [`AssociateNatGatewayAddress`](https://intl.cloud.tencent.com/document/product/215/36722?from_cn_redirect=1) API.
+//
 // * EIP that is in arrears or blocked cannot be bound.
+//
 // * Only EIP in the UNBIND status can be bound.
+//
+// error code that may be returned:
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDADDRESSIDSTATE_INARREARS = "InvalidAddressIdState.InArrears"
+//  INVALIDADDRESSIDSTATUS_NOTPERMIT = "InvalidAddressIdStatus.NotPermit"
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  INVALIDINSTANCEID_ALREADYBINDEIP = "InvalidInstanceId.AlreadyBindEip"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDNETWORKINTERFACEID_NOTFOUND = "InvalidNetworkInterfaceId.NotFound"
+//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
+//  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
+//  INVALIDPRIVATEIPADDRESS_ALREADYBINDEIP = "InvalidPrivateIpAddress.AlreadyBindEip"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGRESOURCEID = "MissingResourceId"
 func (c *Client) AssociateAddress(request *AssociateAddressRequest) (response *AssociateAddressResponse, err error) {
     if request == nil {
         request = NewAssociateAddressRequest()
@@ -279,7 +390,14 @@ func NewAssociateDirectConnectGatewayNatGatewayResponse() (response *AssociateDi
     return
 }
 
+// AssociateDirectConnectGatewayNatGateway
 // This API is used to bind a direct connect gateway with a NAT gateway,  and direct its default route to the NAT Gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) AssociateDirectConnectGatewayNatGateway(request *AssociateDirectConnectGatewayNatGatewayRequest) (response *AssociateDirectConnectGatewayNatGatewayResponse, err error) {
     if request == nil {
         request = NewAssociateDirectConnectGatewayNatGatewayRequest()
@@ -304,7 +422,21 @@ func NewAssociateNatGatewayAddressResponse() (response *AssociateNatGatewayAddre
     return
 }
 
+// AssociateNatGatewayAddress
 // This API is used to bind an EIP to NAT Gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
 func (c *Client) AssociateNatGatewayAddress(request *AssociateNatGatewayAddressRequest) (response *AssociateNatGatewayAddressResponse, err error) {
     if request == nil {
         request = NewAssociateNatGatewayAddressRequest()
@@ -329,7 +461,15 @@ func NewAssociateNetworkAclSubnetsResponse() (response *AssociateNetworkAclSubne
     return
 }
 
+// AssociateNetworkAclSubnets
 // This API is used to associate a network ACL with subnets in a VPC instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) AssociateNetworkAclSubnets(request *AssociateNetworkAclSubnetsRequest) (response *AssociateNetworkAclSubnetsResponse, err error) {
     if request == nil {
         request = NewAssociateNetworkAclSubnetsRequest()
@@ -354,7 +494,15 @@ func NewAssociateNetworkInterfaceSecurityGroupsResponse() (response *AssociateNe
     return
 }
 
+// AssociateNetworkInterfaceSecurityGroups
 // This API (AssociateNetworkInterfaceSecurityGroups) is used to attach a security group to an ENI.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) AssociateNetworkInterfaceSecurityGroups(request *AssociateNetworkInterfaceSecurityGroupsRequest) (response *AssociateNetworkInterfaceSecurityGroupsResponse, err error) {
     if request == nil {
         request = NewAssociateNetworkInterfaceSecurityGroupsRequest()
@@ -379,8 +527,26 @@ func NewAttachCcnInstancesResponse() (response *AttachCcnInstancesResponse) {
     return
 }
 
+// AttachCcnInstances
 // This API (AttachCcnInstances) is used to load a network instance to a CCN instance. Network instances include VPCs and Direct Connect gateways.<br />
+//
 // The number of network instances that each CCN can be associated with is limited. For more information, see the product documentation. If you need to associate more instances, please contact online customer service.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CCNATTACHBMVPCLIMITEXCEEDED = "InvalidParameterValue.CcnAttachBmvpcLimitExceeded"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CCNATTACHED = "UnsupportedOperation.CcnAttached"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_ISNOTFINANCEACCOUNT = "UnsupportedOperation.IsNotFinanceAccount"
+//  UNSUPPORTEDOPERATION_UINNOTFOUND = "UnsupportedOperation.UinNotFound"
+//  UNSUPPORTEDOPERATION_UNABLECROSSBORDER = "UnsupportedOperation.UnableCrossBorder"
+//  UNSUPPORTEDOPERATION_UNABLECROSSFINANCE = "UnsupportedOperation.UnableCrossFinance"
 func (c *Client) AttachCcnInstances(request *AttachCcnInstancesRequest) (response *AttachCcnInstancesResponse, err error) {
     if request == nil {
         request = NewAttachCcnInstancesRequest()
@@ -405,9 +571,21 @@ func NewAttachClassicLinkVpcResponse() (response *AttachClassicLinkVpcResponse) 
     return
 }
 
+// AttachClassicLinkVpc
 // This API is used to create a Classiclink between a VPC instance and a basic network device.
+//
 // * The VPC instance and the basic network device must be in the same region.
+//
 // * For differences between VPC and basic networks, see <a href="https://intl.cloud.tencent.com/document/product/215/30720?from_cn_redirect=1">VPC and Basic Networks</a>.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CIDRUNSUPPORTEDCLASSICLINK = "UnsupportedOperation.CIDRUnSupportedClassicLink"
+//  UNSUPPORTEDOPERATION_CLASSICINSTANCEIDALREADYEXISTS = "UnsupportedOperation.ClassicInstanceIdAlreadyExists"
 func (c *Client) AttachClassicLinkVpc(request *AttachClassicLinkVpcRequest) (response *AttachClassicLinkVpcResponse, err error) {
     if request == nil {
         request = NewAttachClassicLinkVpcRequest()
@@ -432,11 +610,27 @@ func NewAttachNetworkInterfaceResponse() (response *AttachNetworkInterfaceRespon
     return
 }
 
+// AttachNetworkInterface
 // This API is used to bind an ENI to a CVM.
+//
 // * One CVM can be bound with multiple ENIs, but only one primary ENI. For more information about the limits, please see <a href="https://intl.cloud.tencent.com/document/product/576/18527?from_cn_redirect=1">ENI Use Limits</a>.
+//
 // * An ENI can only be bound to one CVM at a time.
+//
 // * Only the running or shutdown CVMs can be bound with ENIs. For more information about the CVM status, see <a href="https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#InstanceStatus">InstanceStatus</a> in the Data Types.
+//
 // * An ENI can only be bound to a VPC-based CVM under the same availability zone as the ENI subnet.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ATTACHMENTALREADYEXISTS = "UnsupportedOperation.AttachmentAlreadyExists"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDINSTANCEFAMILY = "UnsupportedOperation.UnsupportedInstanceFamily"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
+//  UNSUPPORTEDOPERATION_ZONEMISMATCH = "UnsupportedOperation.ZoneMismatch"
 func (c *Client) AttachNetworkInterface(request *AttachNetworkInterfaceRequest) (response *AttachNetworkInterfaceResponse, err error) {
     if request == nil {
         request = NewAttachNetworkInterfaceRequest()
@@ -461,9 +655,16 @@ func NewAuditCrossBorderComplianceResponse() (response *AuditCrossBorderComplian
     return
 }
 
+// AuditCrossBorderCompliance
 // This API is used by the service provider to perform a compliance audit.
+//
 // * This API is only provided for service providers to audit compliance review requests received. Tencent Cloud will verify the identity of the service provider by the `APPID`. 
+//
 // * The status of the review request can be changed between `APPROVED` and `DENY`.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) AuditCrossBorderCompliance(request *AuditCrossBorderComplianceRequest) (response *AuditCrossBorderComplianceResponse, err error) {
     if request == nil {
         request = NewAuditCrossBorderComplianceRequest()
@@ -488,10 +689,23 @@ func NewCheckAssistantCidrResponse() (response *CheckAssistantCidrResponse) {
     return
 }
 
+// CheckAssistantCidr
 // This API (CheckAssistantCidr) is used to check overlapping of a secondary CIDR block with inventory routing, peering connection (opposite VPC CIDR block), and any other resources. If an overlap is present, the overlapped resources are returned. (To use this API that is in Beta, please submit a ticket.)
+//
 // * Check whether the secondary CIDR block overlaps with a primary or secondary CIDR block of the current VPC.
+//
 // * Check whether the secondary CIDR block overlaps with the routing destination of the current VPC.
+//
 // * Check whether the secondary CIDR block is peer-connected to the current VPC, and whether it overlaps with a main or secondary CIDR block of the opposite VPC.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CheckAssistantCidr(request *CheckAssistantCidrRequest) (response *CheckAssistantCidrResponse, err error) {
     if request == nil {
         request = NewCheckAssistantCidrRequest()
@@ -516,7 +730,22 @@ func NewCheckNetDetectStateResponse() (response *CheckNetDetectStateResponse) {
     return
 }
 
+// CheckNetDetectState
 // This API is used to verify the network detection status.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_NEXTHOPMISMATCH = "InvalidParameter.NextHopMismatch"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_NETDETECTSAMEIP = "InvalidParameterValue.NetDetectSameIp"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_CONFLICTWITHDOCKERROUTE = "UnsupportedOperation.ConflictWithDockerRoute"
+//  UNSUPPORTEDOPERATION_ECMPWITHUSERROUTE = "UnsupportedOperation.EcmpWithUserRoute"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) CheckNetDetectState(request *CheckNetDetectStateRequest) (response *CheckNetDetectStateResponse, err error) {
     if request == nil {
         request = NewCheckNetDetectStateRequest()
@@ -541,7 +770,15 @@ func NewCloneSecurityGroupResponse() (response *CloneSecurityGroupResponse) {
     return
 }
 
+// CloneSecurityGroup
 // This API is used to create a security group with the same rule configurations as an existing security group. The cloning only copies the security group and its rules, but not the security group tags.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CloneSecurityGroup(request *CloneSecurityGroupRequest) (response *CloneSecurityGroupResponse, err error) {
     if request == nil {
         request = NewCloneSecurityGroupRequest()
@@ -566,7 +803,15 @@ func NewCreateAddressTemplateResponse() (response *CreateAddressTemplateResponse
     return
 }
 
+// CreateAddressTemplate
 // This API (CreateAddressTemplate) is used to create an IP address template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) CreateAddressTemplate(request *CreateAddressTemplateRequest) (response *CreateAddressTemplateResponse, err error) {
     if request == nil {
         request = NewCreateAddressTemplateRequest()
@@ -591,7 +836,14 @@ func NewCreateAddressTemplateGroupResponse() (response *CreateAddressTemplateGro
     return
 }
 
+// CreateAddressTemplateGroup
 // This API (CreateAddressTemplateGroup) is used to create an IP address template group.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) CreateAddressTemplateGroup(request *CreateAddressTemplateGroupRequest) (response *CreateAddressTemplateGroupResponse, err error) {
     if request == nil {
         request = NewCreateAddressTemplateGroupRequest()
@@ -616,12 +868,32 @@ func NewCreateAndAttachNetworkInterfaceResponse() (response *CreateAndAttachNetw
     return
 }
 
+// CreateAndAttachNetworkInterface
 // This API is used to create an ENI and bind it to a CVM.
+//
 // * You can specify private IP addresses and a primary IP when creating an ENI. The specified private IP must be idle and in the same subnet as the ENI.
+//
 // * When creating an ENI, you can specify the number of private IPs that you want to apply for. The system will randomly generate private IP addresses.
+//
 // * The number of IPs bound with an ENI is limited. For more information, see <a href="/document/product/576/18527">ENI Use Limits</a>.
+//
 // * You can bind an existing security group when creating an ENI.
+//
 // * You can bind a tag when creating an ENI. The tag list in the response indicates the tags that have been successfully added.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_RESERVED = "InvalidParameterValue.Reserved"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDINSTANCEFAMILY = "UnsupportedOperation.UnsupportedInstanceFamily"
 func (c *Client) CreateAndAttachNetworkInterface(request *CreateAndAttachNetworkInterfaceRequest) (response *CreateAndAttachNetworkInterfaceResponse, err error) {
     if request == nil {
         request = NewCreateAndAttachNetworkInterfaceRequest()
@@ -646,7 +918,17 @@ func NewCreateAssistantCidrResponse() (response *CreateAssistantCidrResponse) {
     return
 }
 
+// CreateAssistantCidr
 // This API (CreateAssistantCidr) is used to batch create secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+//  INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) CreateAssistantCidr(request *CreateAssistantCidrRequest) (response *CreateAssistantCidrResponse, err error) {
     if request == nil {
         request = NewCreateAssistantCidrRequest()
@@ -671,7 +953,12 @@ func NewCreateBandwidthPackageResponse() (response *CreateBandwidthPackageRespon
     return
 }
 
+// CreateBandwidthPackage
 // This API is used to create [device bandwidth packages](https://intl.cloud.tencent.com/document/product/684/15246?from_cn_redirect=1#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://intl.cloud.tencent.com/document/product/684/15246?from_cn_redirect=1#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
 func (c *Client) CreateBandwidthPackage(request *CreateBandwidthPackageRequest) (response *CreateBandwidthPackageResponse, err error) {
     if request == nil {
         request = NewCreateBandwidthPackageRequest()
@@ -696,9 +983,25 @@ func NewCreateCcnResponse() (response *CreateCcnResponse) {
     return
 }
 
+// CreateCcn
 // This API is used to create a Cloud Connect Network (CCN).<br />
+//
 // * You can bind a tag when creating a CCN instance. The tag list in the response indicates the tags that have been successfully added.
+//
 // Each account can only create a limited number of CCN instances. For more information, see product documentation. To create more instances, contact the online customer service.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
+//  UNSUPPORTEDOPERATION_PREPAIDCCNONLYSUPPORTINTERREGIONLIMIT = "UnsupportedOperation.PrepaidCcnOnlySupportInterRegionLimit"
+//  UNSUPPORTEDOPERATION_USERANDCCNCHARGETYPENOTMATCH = "UnsupportedOperation.UserAndCcnChargeTypeNotMatch"
 func (c *Client) CreateCcn(request *CreateCcnRequest) (response *CreateCcnResponse, err error) {
     if request == nil {
         request = NewCreateCcnRequest()
@@ -723,7 +1026,13 @@ func NewCreateCustomerGatewayResponse() (response *CreateCustomerGatewayResponse
     return
 }
 
+// CreateCustomerGateway
 // This API (CreateCustomerGateway) is used to create customer gateways.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  VPCLIMITEXCEEDED = "VpcLimitExceeded"
 func (c *Client) CreateCustomerGateway(request *CreateCustomerGatewayRequest) (response *CreateCustomerGatewayResponse, err error) {
     if request == nil {
         request = NewCreateCustomerGatewayRequest()
@@ -748,15 +1057,30 @@ func NewCreateDefaultVpcResponse() (response *CreateDefaultVpcResponse) {
     return
 }
 
+// CreateDefaultVpc
 // This API is used to create a default VPC.
+//
 // 
+//
 // The default VPC is suitable for getting started with and launching public instances, and it can be used like any other VPCs. To create a standard VPC, for which you need to specify a VPC name, VPC IP range, subnet IP range, and subnet availability zone, use the regular CreateVpc API.
+//
 // 
+//
 // Under normal circumstances, this API may not create a default VPC. It depends on the network attributes (DescribeAccountAttributes) of your account.
+//
 // * If both basic network and VPC are supported, the returned VpcId is 0.
+//
 // * If only VPC is supported, the default VPC information is returned.
+//
 // 
+//
 // You can also use the Force parameter to forcibly return a default VPC.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT_CIDRBLOCK = "ResourceInsufficient.CidrBlock"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateDefaultVpc(request *CreateDefaultVpcRequest) (response *CreateDefaultVpcResponse, err error) {
     if request == nil {
         request = NewCreateDefaultVpcRequest()
@@ -781,7 +1105,14 @@ func NewCreateDirectConnectGatewayResponse() (response *CreateDirectConnectGatew
     return
 }
 
+// CreateDirectConnectGateway
 // This API is used to create a direct connect gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_UNABLECROSSBORDER = "UnsupportedOperation.UnableCrossBorder"
 func (c *Client) CreateDirectConnectGateway(request *CreateDirectConnectGatewayRequest) (response *CreateDirectConnectGatewayResponse, err error) {
     if request == nil {
         request = NewCreateDirectConnectGatewayRequest()
@@ -806,7 +1137,12 @@ func NewCreateDirectConnectGatewayCcnRoutesResponse() (response *CreateDirectCon
     return
 }
 
+// CreateDirectConnectGatewayCcnRoutes
 // This API (CreateDirectConnectGatewayCcnRoutes) is used to create the CCN route (IDC IP range) of a Direct Connect gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 func (c *Client) CreateDirectConnectGatewayCcnRoutes(request *CreateDirectConnectGatewayCcnRoutesRequest) (response *CreateDirectConnectGatewayCcnRoutesResponse, err error) {
     if request == nil {
         request = NewCreateDirectConnectGatewayCcnRoutesRequest()
@@ -831,7 +1167,16 @@ func NewCreateFlowLogResponse() (response *CreateFlowLogResponse) {
     return
 }
 
+// CreateFlowLog
 // This API is used to create a flow log.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateFlowLog(request *CreateFlowLogRequest) (response *CreateFlowLogResponse, err error) {
     if request == nil {
         request = NewCreateFlowLogRequest()
@@ -856,7 +1201,18 @@ func NewCreateHaVipResponse() (response *CreateHaVipResponse) {
     return
 }
 
+// CreateHaVip
 // This API (CreateHaVip) is used to create a highly available virtual IP (HAVIP)
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateHaVip(request *CreateHaVipRequest) (response *CreateHaVipResponse, err error) {
     if request == nil {
         request = NewCreateHaVipRequest()
@@ -881,7 +1237,17 @@ func NewCreateLocalGatewayResponse() (response *CreateLocalGatewayResponse) {
     return
 }
 
+// CreateLocalGateway
 // This API is used to create a local gateway for a CDC instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_LOCALGATEWAYALREADYEXISTS = "UnsupportedOperation.LocalGateWayAlreadyExists"
 func (c *Client) CreateLocalGateway(request *CreateLocalGatewayRequest) (response *CreateLocalGatewayResponse, err error) {
     if request == nil {
         request = NewCreateLocalGatewayRequest()
@@ -906,7 +1272,34 @@ func NewCreateNatGatewayResponse() (response *CreateNatGatewayResponse) {
     return
 }
 
+// CreateNatGateway
 // This API (CreateNatGateway) is used to create a NAT gateway.
+//
+// error code that may be returned:
+//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
+//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
+//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_NATGATEWAYPERVPCLIMITEXCEEDED = "LimitExceeded.NatGatewayPerVpcLimitExceeded"
+//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
+//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
 func (c *Client) CreateNatGateway(request *CreateNatGatewayRequest) (response *CreateNatGatewayResponse, err error) {
     if request == nil {
         request = NewCreateNatGatewayRequest()
@@ -931,7 +1324,34 @@ func NewCreateNatGatewayDestinationIpPortTranslationNatRuleResponse() (response 
     return
 }
 
+// CreateNatGatewayDestinationIpPortTranslationNatRule
 // This API (CreateNatGatewayDestinationIpPortTranslationNatRule) is used to create a port forwarding rule for a NAT gateway.
+//
+// error code that may be returned:
+//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
+//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
+//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_NATGATEWAYPERVPCLIMITEXCEEDED = "LimitExceeded.NatGatewayPerVpcLimitExceeded"
+//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
+//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
 func (c *Client) CreateNatGatewayDestinationIpPortTranslationNatRule(request *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *CreateNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
     if request == nil {
         request = NewCreateNatGatewayDestinationIpPortTranslationNatRuleRequest()
@@ -956,7 +1376,18 @@ func NewCreateNatGatewaySourceIpTranslationNatRuleResponse() (response *CreateNa
     return
 }
 
+// CreateNatGatewaySourceIpTranslationNatRule
 // This API is used to create a SNAT rule for the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_NATSNATRULEEXISTS = "InvalidParameterValue.NatSnatRuleExists"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION_NATGATEWAYTYPENOTSUPPORTSNAT = "UnsupportedOperation.NatGatewayTypeNotSupportSNAT"
 func (c *Client) CreateNatGatewaySourceIpTranslationNatRule(request *CreateNatGatewaySourceIpTranslationNatRuleRequest) (response *CreateNatGatewaySourceIpTranslationNatRuleResponse, err error) {
     if request == nil {
         request = NewCreateNatGatewaySourceIpTranslationNatRuleRequest()
@@ -981,7 +1412,22 @@ func NewCreateNetDetectResponse() (response *CreateNetDetectResponse) {
     return
 }
 
+// CreateNetDetect
 // This API is used to create a network detection instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_NEXTHOPMISMATCH = "InvalidParameter.NextHopMismatch"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_NETDETECTSAMEIP = "InvalidParameterValue.NetDetectSameIp"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_CONFLICTWITHDOCKERROUTE = "UnsupportedOperation.ConflictWithDockerRoute"
+//  UNSUPPORTEDOPERATION_ECMPWITHUSERROUTE = "UnsupportedOperation.EcmpWithUserRoute"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) CreateNetDetect(request *CreateNetDetectRequest) (response *CreateNetDetectResponse, err error) {
     if request == nil {
         request = NewCreateNetDetectRequest()
@@ -1006,8 +1452,17 @@ func NewCreateNetworkAclResponse() (response *CreateNetworkAclResponse) {
     return
 }
 
+// CreateNetworkAcl
 // This API is used to create a <a href="https://intl.cloud.tencent.com/document/product/215/20088?from_cn_redirect=1">network ACL</a>.
+//
 // * The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` after creation to set rules for the network ACL as needed.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateNetworkAcl(request *CreateNetworkAclRequest) (response *CreateNetworkAclResponse, err error) {
     if request == nil {
         request = NewCreateNetworkAclRequest()
@@ -1032,12 +1487,32 @@ func NewCreateNetworkInterfaceResponse() (response *CreateNetworkInterfaceRespon
     return
 }
 
+// CreateNetworkInterface
 // This API is used to create one or more ENIs.
+//
 // * You can specify private IP addresses and a primary IP when creating an ENI. The specified private IP must be in the same subnet as the ENI and is not occupied.
+//
 // * When creating an ENI, you can specify the number of private IP addresses that you want to apply for. The system will randomly generate private IP addresses.
+//
 // * An ENI can only be bound with a limited number of IP addresses. For more information about resource limits, see <a href="/document/product/576/18527">ENI Use Limits</a>.
+//
 // * You can bind an existing security group when creating an ENI.
+//
 // * You can bind a tag when creating an ENI. The tag list in the response indicates the tags that have been successfully added.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_RESERVED = "InvalidParameterValue.Reserved"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateNetworkInterface(request *CreateNetworkInterfaceRequest) (response *CreateNetworkInterfaceResponse, err error) {
     if request == nil {
         request = NewCreateNetworkInterfaceRequest()
@@ -1062,9 +1537,21 @@ func NewCreateRouteTableResponse() (response *CreateRouteTableResponse) {
     return
 }
 
+// CreateRouteTable
 // This API is used to create a route table.
+//
 // * After the VPC instance has been created, the system creates a default route table with which all newly created subnets will be associated. By default, you can use this route table to manage your routing policies. If you have multiple routing policies, you can call the API for creating route tables to create more route tables to manage these routing policies.
+//
 // * You can bind a tag when creating a route table. The tag list in the response indicates the tags that have been successfully added.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateRouteTable(request *CreateRouteTableRequest) (response *CreateRouteTableResponse, err error) {
     if request == nil {
         request = NewCreateRouteTableRequest()
@@ -1089,8 +1576,28 @@ func NewCreateRoutesResponse() (response *CreateRoutesResponse) {
     return
 }
 
+// CreateRoutes
 // This API (CreateRoutes) is used to create a routing policy.
+//
 // * You can create routing policies in batch for a specified route table.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CIDRNOTINPEERVPC = "InvalidParameterValue.CidrNotInPeerVpc"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_VPCCIDRCONFLICT = "InvalidParameterValue.VpcCidrConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER_WITHGUESS = "UnknownParameter.WithGuess"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CDCSUBNETNOTSUPPORTUNLOCALGATEWAY = "UnsupportedOperation.CdcSubnetNotSupportUnLocalGateway"
+//  UNSUPPORTEDOPERATION_CONFLICTWITHDOCKERROUTE = "UnsupportedOperation.ConflictWithDockerRoute"
+//  UNSUPPORTEDOPERATION_ECMP = "UnsupportedOperation.Ecmp"
+//  UNSUPPORTEDOPERATION_ECMPWITHCCNROUTE = "UnsupportedOperation.EcmpWithCcnRoute"
+//  UNSUPPORTEDOPERATION_ECMPWITHUSERROUTE = "UnsupportedOperation.EcmpWithUserRoute"
+//  UNSUPPORTEDOPERATION_NORMALSUBNETNOTSUPPORTLOCALGATEWAY = "UnsupportedOperation.NormalSubnetNotSupportLocalGateway"
+//  UNSUPPORTEDOPERATION_SYSTEMROUTE = "UnsupportedOperation.SystemRoute"
 func (c *Client) CreateRoutes(request *CreateRoutesRequest) (response *CreateRoutesResponse, err error) {
     if request == nil {
         request = NewCreateRoutesRequest()
@@ -1115,10 +1622,23 @@ func NewCreateSecurityGroupResponse() (response *CreateSecurityGroupResponse) {
     return
 }
 
+// CreateSecurityGroup
 // This API is used to create a security group (SecurityGroup).
+//
 // * Note the <a href="https://intl.cloud.tencent.com/document/product/213/12453?from_cn_redirect=1">maximum number of security groups</a> per project in each region under each account.
+//
 // * Both the inbound and outbound rules for a newly created security group are "Deny All" by default. You need to call CreateSecurityGroupPolicies to set security group rules based on your needs.
+//
 // * You can bind a tag when creating a security group. The tag list in the response indicates the tags that have been successfully added.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateSecurityGroup(request *CreateSecurityGroupRequest) (response *CreateSecurityGroupResponse, err error) {
     if request == nil {
         request = NewCreateSecurityGroupRequest()
@@ -1143,21 +1663,51 @@ func NewCreateSecurityGroupPoliciesResponse() (response *CreateSecurityGroupPoli
     return
 }
 
+// CreateSecurityGroupPolicies
 // This API is used to create a security group policy (SecurityGroupPolicy).
+//
 // 
+//
 // For parameters of SecurityGroupPolicySet,
+//
 // <ul>
+//
 // <li>`Version`: the version number of a security group policy, which automatically increases by one each time you update the security policy, to prevent expiration of the updated routing policies. If it is left empty, any conflicts will be ignored.</li>
+//
 // <li>When creating the `Egress` and `Ingress` policies,<ul>
+//
 // <li>`Protocol`: allows `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, or `ALL`.</li>
+//
 // <li>`CidrBlock`: a CIDR block in the correct format. In the classic network, if a `CidrBlock` contains private IPs of devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
+//
 // <li>`Ipv6CidrBlock`: an IPv6 CIDR block in the correct format. In a classic network, if an `Ipv6CidrBlock` contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
+//
 // <li>`SecurityGroupId`: ID of the security group. It can be the ID of security group to be modified, or the ID of another security group in the same project. All private IPs of all CVMs under the security group will be covered. If this field is used, the policy will automatically change according to the CVM associated with the group ID while being used to match network messages. You don’t need to change it manually.</li>
+//
 // <li>`Port`: a single port number such as 80, or a port range in the format of “8000-8010”. You may use this field only if the `Protocol` field takes the value `TCP` or `UDP`. Otherwise `Protocol` and `Port` are mutually exclusive.</li>
+//
 // <li>`Action`: only allows `ACCEPT` or `DROP`.</li>
+//
 // <li>`CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are mutually exclusive. `Protocol` + `Port` and `ServiceTemplate` are mutually exclusive.</li>
+//
 // <li>You can only create policies in one direction in each request. To specify the `PolicyIndex` parameter, use the same index number in policies.</li>
+//
 // </ul></li></ul>
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SECURITYGROUPPOLICYSET = "LimitExceeded.SecurityGroupPolicySet"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER_WITHGUESS = "UnknownParameter.WithGuess"
+//  UNSUPPORTEDOPERATION_CLBPOLICYLIMIT = "UnsupportedOperation.ClbPolicyLimit"
+//  UNSUPPORTEDOPERATION_DUPLICATEPOLICY = "UnsupportedOperation.DuplicatePolicy"
+//  UNSUPPORTEDOPERATION_VERSIONMISMATCH = "UnsupportedOperation.VersionMismatch"
 func (c *Client) CreateSecurityGroupPolicies(request *CreateSecurityGroupPoliciesRequest) (response *CreateSecurityGroupPoliciesResponse, err error) {
     if request == nil {
         request = NewCreateSecurityGroupPoliciesRequest()
@@ -1182,20 +1732,43 @@ func NewCreateSecurityGroupWithPoliciesResponse() (response *CreateSecurityGroup
     return
 }
 
+// CreateSecurityGroupWithPolicies
 // This API (CreateSecurityGroupWithPolicies) is used to create security groups, and add security group policies.
+//
 // * Note the<a href="https://intl.cloud.tencent.com/document/product/213/12453?from_cn_redirect=1">maximum number of security groups</a>per project in each region under each account.
+//
 // * Both the inbound and outbound policies for a newly created security group are Deny All by default. You need to call CreateSecurityGroupPolicies to set security group policies according to your needs.
+//
 // 
+//
 // Description:
+//
 // * `Version`: Indicates the version number of a security group policy, which will automatically increment by 1 every time you update the security policy, to prevent the expiration of the updated policies. If this field is left empty, any conflicts will be ignored.
+//
 // * `Protocol`: Values can be TCP, UDP, ICMP, ICMPV6, GRE, or ALL.
+//
 // * `CidrBlock`:  A CIDR block in the correct format. In a basic network, if a CidrBlock contains private IPs on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.
+//
 // * `Ipv6CidrBlock`: An IPv6 CIDR block in the correct format. In a basic network, if an Ipv6CidrBlock contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.
+//
 // * `SecurityGroupId`: ID of the security group. It can be in the same project as the security group to be modified, including the ID of the security group itself, to represent private IP addresses of all CVMs under the security group. If this field is used, the policy will change without manual modification according to the CVM associated with the policy ID while being used to match network messages.
+//
 // * `Port`: A single port number, or a port range in the format of “8000-8010”. The Port field is accepted only if the value of the `Protocol` field is `TCP` or `UDP`. Otherwise Protocol and Port are mutually exclusive. 
+//
 // * `Action`: Values can be `ACCEPT` or `DROP`.
+//
 // * CidrBlock, Ipv6CidrBlock, SecurityGroupId, and AddressTemplate are exclusive and cannot be entered at the same time. “Protocol + Port” and ServiceTemplate are mutually exclusive and cannot be entered at the same time.
+//
 // * Only policies in one direction can be created in each request. If you need to specify the `PolicyIndex` parameter, the indexes of policies must be consistent.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateSecurityGroupWithPolicies(request *CreateSecurityGroupWithPoliciesRequest) (response *CreateSecurityGroupWithPoliciesResponse, err error) {
     if request == nil {
         request = NewCreateSecurityGroupWithPoliciesRequest()
@@ -1220,7 +1793,13 @@ func NewCreateServiceTemplateResponse() (response *CreateServiceTemplateResponse
     return
 }
 
+// CreateServiceTemplate
 // This API (CreateServiceTemplate) is used to create a protocol port template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) CreateServiceTemplate(request *CreateServiceTemplateRequest) (response *CreateServiceTemplateResponse, err error) {
     if request == nil {
         request = NewCreateServiceTemplateRequest()
@@ -1245,7 +1824,14 @@ func NewCreateServiceTemplateGroupResponse() (response *CreateServiceTemplateGro
     return
 }
 
+// CreateServiceTemplateGroup
 // This API (CreateServiceTemplateGroup) is used to create a protocol port template group.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) CreateServiceTemplateGroup(request *CreateServiceTemplateGroupRequest) (response *CreateServiceTemplateGroupResponse, err error) {
     if request == nil {
         request = NewCreateServiceTemplateGroupRequest()
@@ -1270,13 +1856,35 @@ func NewCreateSubnetResponse() (response *CreateSubnetResponse) {
     return
 }
 
+// CreateSubnet
 // This API is used to create a subnet.
+//
 // * You must create a VPC instance before creating a subnet.
+//
 // * After the subnet is successfully created, its IP address range cannot be modified. The subnet IP address range must fall within the VPC IP address range. They can be the same if the VPC instance has only one subnet. We recommend that you keep the subnet IP address range within the VPC IP address range to reserve IP address ranges for other subnets.
+//
 // * The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses).
+//
 // * IP address ranges of different subnets cannot overlap with each other within the same VPC instance.
+//
 // * A subnet is automatically associated with the default route table once created.
+//
 // * You can bind a tag when creating a subnet. The tag list in the response indicates the tags that have been successfully added.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+//  INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDPARAMETERVALUE_ZONECONFLICT = "InvalidParameterValue.ZoneConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_DCGATEWAYSNOTFOUNDINVPC = "UnsupportedOperation.DcGatewaysNotFoundInVpc"
 func (c *Client) CreateSubnet(request *CreateSubnetRequest) (response *CreateSubnetResponse, err error) {
     if request == nil {
         request = NewCreateSubnetRequest()
@@ -1301,13 +1909,33 @@ func NewCreateSubnetsResponse() (response *CreateSubnetsResponse) {
     return
 }
 
+// CreateSubnets
 // This API is used to create subnets in batches.
+//
 // * You must create a VPC instance before creating a subnet.
+//
 // * After the subnet is successfully created, its IP address range cannot be modified. The subnet IP address range must fall within the VPC IP address range. They can be the same if the VPC has only one subnet. We recommend that you keep the subnet IP address range within the VPC IP address range to reserve IP address ranges for other subnets.
+//
 // * The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses).
+//
 // * IP address ranges of different subnets cannot overlap with each other within the same VPC instance.
+//
 // * A subnet is automatically associated with the default route table once created.
+//
 // * You can bind a tag when creating a subnet. The tag list in the response indicates the tags that have been successfully added.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+//  INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDPARAMETERVALUE_ZONECONFLICT = "InvalidParameterValue.ZoneConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_DCGATEWAYSNOTFOUNDINVPC = "UnsupportedOperation.DcGatewaysNotFoundInVpc"
 func (c *Client) CreateSubnets(request *CreateSubnetsRequest) (response *CreateSubnetsResponse, err error) {
     if request == nil {
         request = NewCreateSubnetsRequest()
@@ -1332,10 +1960,24 @@ func NewCreateVpcResponse() (response *CreateVpcResponse) {
     return
 }
 
+// CreateVpc
 // This API is used to create a VPC instance.
+//
 // * The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses). For more information on how to plan VPC IP ranges, see [Network Planning](https://intl.cloud.tencent.com/document/product/215/30313?from_cn_redirect=1).
+//
 // * The number of VPC instances that can be created in a region is limited. For more information, see <a href="https://intl.cloud.tencent.com/doc/product/215/537?from_cn_redirect=1" title="VPC Use Limits">VPC Use Limits</a>. To request more resources, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+//
 // * You can bind tags when creating a VPC instance. The tag list in the response indicates the tags that have been successfully added.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateVpc(request *CreateVpcRequest) (response *CreateVpcResponse, err error) {
     if request == nil {
         request = NewCreateVpcRequest()
@@ -1360,7 +2002,22 @@ func NewCreateVpcEndPointResponse() (response *CreateVpcEndPointResponse) {
     return
 }
 
+// CreateVpcEndPoint
 // This API is used to create an endpoint.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_RESERVED = "InvalidParameterValue.Reserved"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION_SPECIALENDPOINTSERVICE = "UnsupportedOperation.SpecialEndPointService"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) CreateVpcEndPoint(request *CreateVpcEndPointRequest) (response *CreateVpcEndPointResponse, err error) {
     if request == nil {
         request = NewCreateVpcEndPointRequest()
@@ -1385,7 +2042,18 @@ func NewCreateVpcEndPointServiceResponse() (response *CreateVpcEndPointServiceRe
     return
 }
 
+// CreateVpcEndPointService
 // This API is used to create an endpoint service.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) CreateVpcEndPointService(request *CreateVpcEndPointServiceRequest) (response *CreateVpcEndPointServiceResponse, err error) {
     if request == nil {
         request = NewCreateVpcEndPointServiceRequest()
@@ -1410,7 +2078,14 @@ func NewCreateVpcEndPointServiceWhiteListResponse() (response *CreateVpcEndPoint
     return
 }
 
+// CreateVpcEndPointServiceWhiteList
 // This API is used to create the endpoint service allowlist.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_UINNOTFOUND = "UnsupportedOperation.UinNotFound"
 func (c *Client) CreateVpcEndPointServiceWhiteList(request *CreateVpcEndPointServiceWhiteListRequest) (response *CreateVpcEndPointServiceWhiteListResponse, err error) {
     if request == nil {
         request = NewCreateVpcEndPointServiceWhiteListRequest()
@@ -1435,7 +2110,19 @@ func NewCreateVpnConnectionResponse() (response *CreateVpnConnectionResponse) {
     return
 }
 
+// CreateVpnConnection
 // This API (CreateVpnConnection) is used to create VPN tunnel.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_VPCCIDRCONFLICT = "InvalidParameterValue.VpcCidrConflict"
+//  INVALIDPARAMETERVALUE_VPNCONNCIDRCONFLICT = "InvalidParameterValue.VpnConnCidrConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) CreateVpnConnection(request *CreateVpnConnectionRequest) (response *CreateVpnConnectionResponse, err error) {
     if request == nil {
         request = NewCreateVpnConnectionRequest()
@@ -1460,7 +2147,20 @@ func NewCreateVpnGatewayResponse() (response *CreateVpnGatewayResponse) {
     return
 }
 
+// CreateVpnGateway
 // This API (CreateVpnGateway) is used to create a VPN gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDPARAMETERVALUE_VPNCONNCIDRCONFLICT = "InvalidParameterValue.VpnConnCidrConflict"
+//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
+//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
+//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
 func (c *Client) CreateVpnGateway(request *CreateVpnGatewayRequest) (response *CreateVpnGatewayResponse, err error) {
     if request == nil {
         request = NewCreateVpnGatewayRequest()
@@ -1485,7 +2185,13 @@ func NewDeleteAddressTemplateResponse() (response *DeleteAddressTemplateResponse
     return
 }
 
+// DeleteAddressTemplate
 // This API (DeleteAddressTemplate) is used to delete an IP address template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) DeleteAddressTemplate(request *DeleteAddressTemplateRequest) (response *DeleteAddressTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteAddressTemplateRequest()
@@ -1510,7 +2216,13 @@ func NewDeleteAddressTemplateGroupResponse() (response *DeleteAddressTemplateGro
     return
 }
 
+// DeleteAddressTemplateGroup
 // This API (DeleteAddressTemplateGroup) is used to delete an IP address template group.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) DeleteAddressTemplateGroup(request *DeleteAddressTemplateGroupRequest) (response *DeleteAddressTemplateGroupResponse, err error) {
     if request == nil {
         request = NewDeleteAddressTemplateGroupRequest()
@@ -1535,7 +2247,16 @@ func NewDeleteAssistantCidrResponse() (response *DeleteAssistantCidrResponse) {
     return
 }
 
+// DeleteAssistantCidr
 // This API (DeleteAssistantCidr) is used to delete secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteAssistantCidr(request *DeleteAssistantCidrRequest) (response *DeleteAssistantCidrResponse, err error) {
     if request == nil {
         request = NewDeleteAssistantCidrRequest()
@@ -1560,7 +2281,11 @@ func NewDeleteBandwidthPackageResponse() (response *DeleteBandwidthPackageRespon
     return
 }
 
+// DeleteBandwidthPackage
 // This API is used to delete bandwidth packages, including [device bandwidth packages](https://intl.cloud.tencent.com/document/product/684/15246?from_cn_redirect=1#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://intl.cloud.tencent.com/document/product/684/15246?from_cn_redirect=1#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85).
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
 func (c *Client) DeleteBandwidthPackage(request *DeleteBandwidthPackageRequest) (response *DeleteBandwidthPackageResponse, err error) {
     if request == nil {
         request = NewDeleteBandwidthPackageRequest()
@@ -1585,9 +2310,19 @@ func NewDeleteCcnResponse() (response *DeleteCcnResponse) {
     return
 }
 
+// DeleteCcn
 // This API (DeleteCcn) is used to delete CCNs.
+//
 // * After deletion, the routes between all instances associated with the CCN will be deleted, and the network will be interrupted. Please confirm this operation in advance.
+//
 // * CCN deletion is an irreversible operation. Please proceed with caution.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BANDWIDTHNOTEXPIRED = "UnsupportedOperation.BandwidthNotExpired"
 func (c *Client) DeleteCcn(request *DeleteCcnRequest) (response *DeleteCcnResponse, err error) {
     if request == nil {
         request = NewDeleteCcnRequest()
@@ -1612,7 +2347,13 @@ func NewDeleteCustomerGatewayResponse() (response *DeleteCustomerGatewayResponse
     return
 }
 
+// DeleteCustomerGateway
 // This API (DeleteCustomerGateway) is used to delete customer gateways.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteCustomerGateway(request *DeleteCustomerGatewayRequest) (response *DeleteCustomerGatewayResponse, err error) {
     if request == nil {
         request = NewDeleteCustomerGatewayRequest()
@@ -1637,10 +2378,20 @@ func NewDeleteDirectConnectGatewayResponse() (response *DeleteDirectConnectGatew
     return
 }
 
+// DeleteDirectConnectGateway
 // This API is used to delete a direct connect gateway.
+//
 // <li>For a NAT gateway, NAT and ACL rules will be cleared upon the deletion of a direct connect gateway.
+//
 // <li>After the deletion of a direct connect gateway, the routing policy associated with the gateway in the route table will also be deleted.
+//
 // This API is completed asynchronously. If you need to query the async job execution results, please use the `RequestId` returned by this API to poll the `QueryTask` API.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteDirectConnectGateway(request *DeleteDirectConnectGatewayRequest) (response *DeleteDirectConnectGatewayResponse, err error) {
     if request == nil {
         request = NewDeleteDirectConnectGatewayRequest()
@@ -1665,7 +2416,12 @@ func NewDeleteDirectConnectGatewayCcnRoutesResponse() (response *DeleteDirectCon
     return
 }
 
+// DeleteDirectConnectGatewayCcnRoutes
 // This API (DeleteDirectConnectGatewayCcnRoutes) is used to delete the CCN routes (IDC IP range) of a Direct Connect gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteDirectConnectGatewayCcnRoutes(request *DeleteDirectConnectGatewayCcnRoutesRequest) (response *DeleteDirectConnectGatewayCcnRoutesResponse, err error) {
     if request == nil {
         request = NewDeleteDirectConnectGatewayCcnRoutesRequest()
@@ -1690,7 +2446,13 @@ func NewDeleteFlowLogResponse() (response *DeleteFlowLogResponse) {
     return
 }
 
+// DeleteFlowLog
 // This API is used to delete a flow log.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteFlowLog(request *DeleteFlowLogRequest) (response *DeleteFlowLogResponse, err error) {
     if request == nil {
         request = NewDeleteFlowLogRequest()
@@ -1715,8 +2477,17 @@ func NewDeleteHaVipResponse() (response *DeleteHaVipResponse) {
     return
 }
 
+// DeleteHaVip
 // This API (DeleteHaVip) is used to delete Highly Available Virtual IP (HAVIP)<br />
+//
 // This API is completed asynchronously. If you need to query the async job execution results, please use the `RequestId` returned by this API to query the `QueryTask` API.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteHaVip(request *DeleteHaVipRequest) (response *DeleteHaVipResponse, err error) {
     if request == nil {
         request = NewDeleteHaVipRequest()
@@ -1741,7 +2512,16 @@ func NewDeleteLocalGatewayResponse() (response *DeleteLocalGatewayResponse) {
     return
 }
 
+// DeleteLocalGateway
 // This API is used to delete the local gateway of a CDC instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteLocalGateway(request *DeleteLocalGatewayRequest) (response *DeleteLocalGatewayResponse, err error) {
     if request == nil {
         request = NewDeleteLocalGatewayRequest()
@@ -1766,8 +2546,15 @@ func NewDeleteNatGatewayResponse() (response *DeleteNatGatewayResponse) {
     return
 }
 
+// DeleteNatGateway
 // This API (DeleteNatGateway) is used to delete a NAT gateway.
+//
 // After the deletion of a NAT gateway, the system will automatically delete the routing entry that contains the NAT gateway from the route table. It will also unbind the Elastic IP.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) DeleteNatGateway(request *DeleteNatGatewayRequest) (response *DeleteNatGatewayResponse, err error) {
     if request == nil {
         request = NewDeleteNatGatewayRequest()
@@ -1792,7 +2579,13 @@ func NewDeleteNatGatewayDestinationIpPortTranslationNatRuleResponse() (response 
     return
 }
 
+// DeleteNatGatewayDestinationIpPortTranslationNatRule
 // This API (DeleteNatGatewayDestinationIpPortTranslationNatRule) is used to delete a port forwarding rule for a NAT gateway.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) DeleteNatGatewayDestinationIpPortTranslationNatRule(request *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
     if request == nil {
         request = NewDeleteNatGatewayDestinationIpPortTranslationNatRuleRequest()
@@ -1817,7 +2610,13 @@ func NewDeleteNatGatewaySourceIpTranslationNatRuleResponse() (response *DeleteNa
     return
 }
 
+// DeleteNatGatewaySourceIpTranslationNatRule
 // This API is used to delete a SNAT forwarding rule of the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DeleteNatGatewaySourceIpTranslationNatRule(request *DeleteNatGatewaySourceIpTranslationNatRuleRequest) (response *DeleteNatGatewaySourceIpTranslationNatRuleResponse, err error) {
     if request == nil {
         request = NewDeleteNatGatewaySourceIpTranslationNatRuleRequest()
@@ -1842,7 +2641,13 @@ func NewDeleteNetDetectResponse() (response *DeleteNetDetectResponse) {
     return
 }
 
+// DeleteNetDetect
 // This API (DeleteNetDetect) is used to delete a network detection instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteNetDetect(request *DeleteNetDetectRequest) (response *DeleteNetDetectResponse, err error) {
     if request == nil {
         request = NewDeleteNetDetectRequest()
@@ -1867,7 +2672,13 @@ func NewDeleteNetworkAclResponse() (response *DeleteNetworkAclResponse) {
     return
 }
 
+// DeleteNetworkAcl
 // This API is used to delete a network ACL.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteNetworkAcl(request *DeleteNetworkAclRequest) (response *DeleteNetworkAclResponse, err error) {
     if request == nil {
         request = NewDeleteNetworkAclRequest()
@@ -1892,9 +2703,19 @@ func NewDeleteNetworkInterfaceResponse() (response *DeleteNetworkInterfaceRespon
     return
 }
 
+// DeleteNetworkInterface
 // This API (DeleteNetworkInterface) is used to delete ENIs.
+//
 // * An ENI that has been bound to a CVM cannot be deleted.
+//
 // * An ENI can be deleted only after being unbound from the server. After the deletion, all private IP addresses associated with the ENI will be released.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) DeleteNetworkInterface(request *DeleteNetworkInterfaceRequest) (response *DeleteNetworkInterfaceResponse, err error) {
     if request == nil {
         request = NewDeleteNetworkInterfaceRequest()
@@ -1919,7 +2740,12 @@ func NewDeleteRouteTableResponse() (response *DeleteRouteTableResponse) {
     return
 }
 
+// DeleteRouteTable
 // This API is used to delete a route table.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteRouteTable(request *DeleteRouteTableRequest) (response *DeleteRouteTableResponse, err error) {
     if request == nil {
         request = NewDeleteRouteTableRequest()
@@ -1944,7 +2770,16 @@ func NewDeleteRoutesResponse() (response *DeleteRoutesResponse) {
     return
 }
 
+// DeleteRoutes
 // This API (DeleteRoutes) is used to delete routing policies in batches from a route table.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER_WITHGUESS = "UnknownParameter.WithGuess"
+//  UNSUPPORTEDOPERATION_DISABLEDNOTIFYCCN = "UnsupportedOperation.DisabledNotifyCcn"
+//  UNSUPPORTEDOPERATION_SYSTEMROUTE = "UnsupportedOperation.SystemRoute"
 func (c *Client) DeleteRoutes(request *DeleteRoutesRequest) (response *DeleteRoutesResponse, err error) {
     if request == nil {
         request = NewDeleteRoutesRequest()
@@ -1969,10 +2804,22 @@ func NewDeleteSecurityGroupResponse() (response *DeleteSecurityGroupResponse) {
     return
 }
 
+// DeleteSecurityGroup
 // This API (DeleteSecurityGroup) is used to delete security groups (SecurityGroup).
+//
 // * Only security groups under the current account can be deleted.
+//
 // * A security group cannot be deleted directly if its instance ID is used in the policy of another security group. You need to modify the policy first and then delete the security group.
+//
 // * A security group cannot be recovered after deletion, please proceed with caution.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDSECURITYGROUPID_MALFORMED = "InvalidSecurityGroupID.Malformed"
+//  INVALIDSECURITYGROUPID_NOTFOUND = "InvalidSecurityGroupID.NotFound"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteSecurityGroup(request *DeleteSecurityGroupRequest) (response *DeleteSecurityGroupResponse, err error) {
     if request == nil {
         request = NewDeleteSecurityGroupRequest()
@@ -1997,8 +2844,17 @@ func NewDeleteSecurityGroupPoliciesResponse() (response *DeleteSecurityGroupPoli
     return
 }
 
+// DeleteSecurityGroupPolicies
 // This API (DeleteSecurityGroupPolicies) is used to delete security group policies (SecurityGroupPolicy).
+//
 // * SecurityGroupPolicySet.Version is used to specify the version of the security group you are operating. If the specified Version number differs from the latest version of the current security group, a failure will be returned. If Version is not specified, the policy of the specified PolicyIndex will be deleted directly.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_VERSIONMISMATCH = "UnsupportedOperation.VersionMismatch"
 func (c *Client) DeleteSecurityGroupPolicies(request *DeleteSecurityGroupPoliciesRequest) (response *DeleteSecurityGroupPoliciesResponse, err error) {
     if request == nil {
         request = NewDeleteSecurityGroupPoliciesRequest()
@@ -2023,7 +2879,13 @@ func NewDeleteServiceTemplateResponse() (response *DeleteServiceTemplateResponse
     return
 }
 
+// DeleteServiceTemplate
 // This API (DeleteServiceTemplate) is used to delete a protocol port template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) DeleteServiceTemplate(request *DeleteServiceTemplateRequest) (response *DeleteServiceTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteServiceTemplateRequest()
@@ -2048,7 +2910,13 @@ func NewDeleteServiceTemplateGroupResponse() (response *DeleteServiceTemplateGro
     return
 }
 
+// DeleteServiceTemplateGroup
 // This API (DeleteServiceTemplateGroup) is used to delete a protocol port template group.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) DeleteServiceTemplateGroup(request *DeleteServiceTemplateGroupRequest) (response *DeleteServiceTemplateGroupResponse, err error) {
     if request == nil {
         request = NewDeleteServiceTemplateGroupRequest()
@@ -2073,8 +2941,15 @@ func NewDeleteSubnetResponse() (response *DeleteSubnetResponse) {
     return
 }
 
+// DeleteSubnet
 // This API (DeleteSubnet) is used to delete subnets.
+//
 // Before deleting a subnet, you need to remove all resources in the subnet, including CVMs, load balancers, cloud data, NoSQL databases, and ENIs.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteSubnet(request *DeleteSubnetRequest) (response *DeleteSubnetResponse, err error) {
     if request == nil {
         request = NewDeleteSubnetRequest()
@@ -2099,9 +2974,17 @@ func NewDeleteVpcResponse() (response *DeleteVpcResponse) {
     return
 }
 
+// DeleteVpc
 // This API (DeleteVpc) is used to delete VPCs.
+//
 // * Before deleting a VPC, ensure that the VPC contains no resources, including CVMs, cloud databases, NoSQL databases, VPN gateways, direct connect gateways, load balancers, peering connections, and basic network devices that are linked to the VPC.
+//
 // * The deletion of VPCs is irreversible. Proceed with caution.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteVpc(request *DeleteVpcRequest) (response *DeleteVpcResponse, err error) {
     if request == nil {
         request = NewDeleteVpcRequest()
@@ -2126,7 +3009,14 @@ func NewDeleteVpcEndPointResponse() (response *DeleteVpcEndPointResponse) {
     return
 }
 
+// DeleteVpcEndPoint
 // This API is used to delete an endpoint.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteVpcEndPoint(request *DeleteVpcEndPointRequest) (response *DeleteVpcEndPointResponse, err error) {
     if request == nil {
         request = NewDeleteVpcEndPointRequest()
@@ -2151,8 +3041,16 @@ func NewDeleteVpcEndPointServiceResponse() (response *DeleteVpcEndPointServiceRe
     return
 }
 
+// DeleteVpcEndPointService
 // This API is used to delete an endpoint service.
+//
 // 
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteVpcEndPointService(request *DeleteVpcEndPointServiceRequest) (response *DeleteVpcEndPointServiceResponse, err error) {
     if request == nil {
         request = NewDeleteVpcEndPointServiceRequest()
@@ -2177,7 +3075,13 @@ func NewDeleteVpcEndPointServiceWhiteListResponse() (response *DeleteVpcEndPoint
     return
 }
 
+// DeleteVpcEndPointServiceWhiteList
 // This API is used to delete the endpoint service allowlist.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_UINNOTFOUND = "UnsupportedOperation.UinNotFound"
 func (c *Client) DeleteVpcEndPointServiceWhiteList(request *DeleteVpcEndPointServiceWhiteListRequest) (response *DeleteVpcEndPointServiceWhiteListResponse, err error) {
     if request == nil {
         request = NewDeleteVpcEndPointServiceWhiteListRequest()
@@ -2202,7 +3106,14 @@ func NewDeleteVpnConnectionResponse() (response *DeleteVpnConnectionResponse) {
     return
 }
 
+// DeleteVpnConnection
 // This API (DeleteVpnConnection) is used to delete VPN tunnels.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) DeleteVpnConnection(request *DeleteVpnConnectionRequest) (response *DeleteVpnConnectionResponse, err error) {
     if request == nil {
         request = NewDeleteVpnConnectionRequest()
@@ -2227,7 +3138,15 @@ func NewDeleteVpnGatewayResponse() (response *DeleteVpnGatewayResponse) {
     return
 }
 
+// DeleteVpnGateway
 // This API (DeleteVpnGateway) is used to delete a VPN gateway. Currently, only deletion of pay-as-you-go IPSEC gateway instances in running status is supported.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDVPNGATEWAYID_MALFORMED = "InvalidVpnGatewayId.Malformed"
+//  INVALIDVPNGATEWAYID_NOTFOUND = "InvalidVpnGatewayId.NotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteVpnGateway(request *DeleteVpnGatewayRequest) (response *DeleteVpnGatewayResponse, err error) {
     if request == nil {
         request = NewDeleteVpnGatewayRequest()
@@ -2252,7 +3171,15 @@ func NewDescribeAccountAttributesResponse() (response *DescribeAccountAttributes
     return
 }
 
+// DescribeAccountAttributes
 // This API (DescribeAccountAttributes) is used to query your account attributes.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDVPNGATEWAYID_MALFORMED = "InvalidVpnGatewayId.Malformed"
+//  INVALIDVPNGATEWAYID_NOTFOUND = "InvalidVpnGatewayId.NotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAccountAttributes(request *DescribeAccountAttributesRequest) (response *DescribeAccountAttributesResponse, err error) {
     if request == nil {
         request = NewDescribeAccountAttributesRequest()
@@ -2277,7 +3204,11 @@ func NewDescribeAddressQuotaResponse() (response *DescribeAddressQuotaResponse) 
     return
 }
 
+// DescribeAddressQuota
 // This API (DescribeAddressQuota) is used to query the quota information of your [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP) in the current region. For more information, see [EIP product introduction](https://intl.cloud.tencent.com/document/product/213/5733?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
 func (c *Client) DescribeAddressQuota(request *DescribeAddressQuotaRequest) (response *DescribeAddressQuotaResponse, err error) {
     if request == nil {
         request = NewDescribeAddressQuotaRequest()
@@ -2302,7 +3233,12 @@ func NewDescribeAddressTemplateGroupsResponse() (response *DescribeAddressTempla
     return
 }
 
+// DescribeAddressTemplateGroups
 // This API (DescribeAddressTemplateGroups) is used to query an IP address template group.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 func (c *Client) DescribeAddressTemplateGroups(request *DescribeAddressTemplateGroupsRequest) (response *DescribeAddressTemplateGroupsResponse, err error) {
     if request == nil {
         request = NewDescribeAddressTemplateGroupsRequest()
@@ -2327,7 +3263,13 @@ func NewDescribeAddressTemplatesResponse() (response *DescribeAddressTemplatesRe
     return
 }
 
+// DescribeAddressTemplates
 // This API (DescribeAddressTemplates) is used to query an IP address template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) DescribeAddressTemplates(request *DescribeAddressTemplatesRequest) (response *DescribeAddressTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeAddressTemplatesRequest()
@@ -2352,8 +3294,14 @@ func NewDescribeAddressesResponse() (response *DescribeAddressesResponse) {
     return
 }
 
+// DescribeAddresses
 // This API (DescribeAddresses) is used to query the information of one or multiple [Elastic IPs](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1).
+//
 // * If the parameter is empty, a number (as specified by the `Limit`, the default value is 20) of EIPs will be returned.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 func (c *Client) DescribeAddresses(request *DescribeAddressesRequest) (response *DescribeAddressesResponse, err error) {
     if request == nil {
         request = NewDescribeAddressesRequest()
@@ -2378,7 +3326,13 @@ func NewDescribeAssistantCidrResponse() (response *DescribeAssistantCidrResponse
     return
 }
 
+// DescribeAssistantCidr
 // This API (DescribeAssistantCidr) is used to query a list of secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 func (c *Client) DescribeAssistantCidr(request *DescribeAssistantCidrRequest) (response *DescribeAssistantCidrResponse, err error) {
     if request == nil {
         request = NewDescribeAssistantCidrRequest()
@@ -2403,7 +3357,13 @@ func NewDescribeBandwidthPackageBillUsageResponse() (response *DescribeBandwidth
     return
 }
 
+// DescribeBandwidthPackageBillUsage
 // This API is used to query the current billable usage of a pay-as-you-go bandwidth package.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 func (c *Client) DescribeBandwidthPackageBillUsage(request *DescribeBandwidthPackageBillUsageRequest) (response *DescribeBandwidthPackageBillUsageResponse, err error) {
     if request == nil {
         request = NewDescribeBandwidthPackageBillUsageRequest()
@@ -2428,7 +3388,13 @@ func NewDescribeBandwidthPackageQuotaResponse() (response *DescribeBandwidthPack
     return
 }
 
+// DescribeBandwidthPackageQuota
 // This API is used to query the maximum and used number of bandwidth packages under the account in the current region.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 func (c *Client) DescribeBandwidthPackageQuota(request *DescribeBandwidthPackageQuotaRequest) (response *DescribeBandwidthPackageQuotaResponse, err error) {
     if request == nil {
         request = NewDescribeBandwidthPackageQuotaRequest()
@@ -2453,7 +3419,11 @@ func NewDescribeBandwidthPackageResourcesResponse() (response *DescribeBandwidth
     return
 }
 
+// DescribeBandwidthPackageResources
 // This API is used to query resources in a bandwidth package based on the unique package ID. You can filter the result by specifying conditions and paginate the query results.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeBandwidthPackageResources(request *DescribeBandwidthPackageResourcesRequest) (response *DescribeBandwidthPackageResourcesResponse, err error) {
     if request == nil {
         request = NewDescribeBandwidthPackageResourcesRequest()
@@ -2478,7 +3448,11 @@ func NewDescribeBandwidthPackagesResponse() (response *DescribeBandwidthPackages
     return
 }
 
+// DescribeBandwidthPackages
 // This API is used to query bandwidth package information, including the unique ID of the bandwidth package, the type, the billing mode, the name, and the resource information.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBandwidthPackages(request *DescribeBandwidthPackagesRequest) (response *DescribeBandwidthPackagesResponse, err error) {
     if request == nil {
         request = NewDescribeBandwidthPackagesRequest()
@@ -2503,7 +3477,16 @@ func NewDescribeCcnAttachedInstancesResponse() (response *DescribeCcnAttachedIns
     return
 }
 
+// DescribeCcnAttachedInstances
 // This API (DescribeCcnAttachedInstances) is used to query the network instances associated with the CCN instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETER_FILTERNOTDICT = "InvalidParameter.FilterNotDict"
+//  INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) DescribeCcnAttachedInstances(request *DescribeCcnAttachedInstancesRequest) (response *DescribeCcnAttachedInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeCcnAttachedInstancesRequest()
@@ -2528,7 +3511,11 @@ func NewDescribeCcnRegionBandwidthLimitsResponse() (response *DescribeCcnRegionB
     return
 }
 
+// DescribeCcnRegionBandwidthLimits
 // This API is used to query the outbound bandwidth caps of all regions connected with a CCN instance. The API only returns regions included in the associated network instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 func (c *Client) DescribeCcnRegionBandwidthLimits(request *DescribeCcnRegionBandwidthLimitsRequest) (response *DescribeCcnRegionBandwidthLimitsResponse, err error) {
     if request == nil {
         request = NewDescribeCcnRegionBandwidthLimitsRequest()
@@ -2553,7 +3540,14 @@ func NewDescribeCcnRoutesResponse() (response *DescribeCcnRoutesResponse) {
     return
 }
 
+// DescribeCcnRoutes
 // This API (DescribeCcnRoutes) is used to query routes that have been added to a CCN.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeCcnRoutes(request *DescribeCcnRoutesRequest) (response *DescribeCcnRoutesResponse, err error) {
     if request == nil {
         request = NewDescribeCcnRoutesRequest()
@@ -2578,7 +3572,19 @@ func NewDescribeCcnsResponse() (response *DescribeCcnsResponse) {
     return
 }
 
+// DescribeCcns
 // This API (DescribeCcns) is used to query the CCN list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERNOTDICT = "InvalidParameter.FilterNotDict"
+//  INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeCcns(request *DescribeCcnsRequest) (response *DescribeCcnsResponse, err error) {
     if request == nil {
         request = NewDescribeCcnsRequest()
@@ -2603,7 +3609,13 @@ func NewDescribeClassicLinkInstancesResponse() (response *DescribeClassicLinkIns
     return
 }
 
+// DescribeClassicLinkInstances
 // This API (DescribeClassicLinkInstances) is used to query the Classiclink instances list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) DescribeClassicLinkInstances(request *DescribeClassicLinkInstancesRequest) (response *DescribeClassicLinkInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeClassicLinkInstancesRequest()
@@ -2628,8 +3640,13 @@ func NewDescribeCrossBorderComplianceResponse() (response *DescribeCrossBorderCo
     return
 }
 
+// DescribeCrossBorderCompliance
 // This API is used to query the compliance review requests created by the user. 
+//
 // A service provider can query all review requests created by any `APPID` under its account. Other users can only query their own review requests.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeCrossBorderCompliance(request *DescribeCrossBorderComplianceRequest) (response *DescribeCrossBorderComplianceResponse, err error) {
     if request == nil {
         request = NewDescribeCrossBorderComplianceRequest()
@@ -2654,7 +3671,11 @@ func NewDescribeCustomerGatewayVendorsResponse() (response *DescribeCustomerGate
     return
 }
 
+// DescribeCustomerGatewayVendors
 // This API (DescribeCustomerGatewayVendors) is used to query the information of supported customer gateway vendors.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeCustomerGatewayVendors(request *DescribeCustomerGatewayVendorsRequest) (response *DescribeCustomerGatewayVendorsResponse, err error) {
     if request == nil {
         request = NewDescribeCustomerGatewayVendorsRequest()
@@ -2679,7 +3700,12 @@ func NewDescribeCustomerGatewaysResponse() (response *DescribeCustomerGatewaysRe
     return
 }
 
+// DescribeCustomerGateways
 // This API (DescribeCustomerGateways) is used to query the customer gateway list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeCustomerGateways(request *DescribeCustomerGatewaysRequest) (response *DescribeCustomerGatewaysResponse, err error) {
     if request == nil {
         request = NewDescribeCustomerGatewaysRequest()
@@ -2704,7 +3730,12 @@ func NewDescribeDirectConnectGatewayCcnRoutesResponse() (response *DescribeDirec
     return
 }
 
+// DescribeDirectConnectGatewayCcnRoutes
 // This API (DescribeDirectConnectGatewayCcnRoutes) is used to query the CCN routes (IDC IP range) of the Direct Connect gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeDirectConnectGatewayCcnRoutes(request *DescribeDirectConnectGatewayCcnRoutesRequest) (response *DescribeDirectConnectGatewayCcnRoutesResponse, err error) {
     if request == nil {
         request = NewDescribeDirectConnectGatewayCcnRoutesRequest()
@@ -2729,7 +3760,17 @@ func NewDescribeDirectConnectGatewaysResponse() (response *DescribeDirectConnect
     return
 }
 
+// DescribeDirectConnectGateways
 // This API is used to query direct connect gateways.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERNOTDICT = "InvalidParameter.FilterNotDict"
+//  INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 func (c *Client) DescribeDirectConnectGateways(request *DescribeDirectConnectGatewaysRequest) (response *DescribeDirectConnectGatewaysResponse, err error) {
     if request == nil {
         request = NewDescribeDirectConnectGatewaysRequest()
@@ -2754,7 +3795,12 @@ func NewDescribeFlowLogResponse() (response *DescribeFlowLogResponse) {
     return
 }
 
+// DescribeFlowLog
 // This API is used to query the information of a flow log.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) DescribeFlowLog(request *DescribeFlowLogRequest) (response *DescribeFlowLogResponse, err error) {
     if request == nil {
         request = NewDescribeFlowLogRequest()
@@ -2779,7 +3825,13 @@ func NewDescribeFlowLogsResponse() (response *DescribeFlowLogsResponse) {
     return
 }
 
+// DescribeFlowLogs
 // This API is used to query all the flow logs of the current account.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeFlowLogs(request *DescribeFlowLogsRequest) (response *DescribeFlowLogsResponse, err error) {
     if request == nil {
         request = NewDescribeFlowLogsRequest()
@@ -2804,9 +3856,17 @@ func NewDescribeGatewayFlowMonitorDetailResponse() (response *DescribeGatewayFlo
     return
 }
 
+// DescribeGatewayFlowMonitorDetail
 // This API is used to query the traffic monitoring details of the gateway.
+//
 // * You can only use this API to query a single gateway instance, which means you must pass in only one of `VpnId`, `DirectConnectGatewayId`, `PeeringConnectionId`, or `NatId`.
+//
 // * If the gateway has traffic, but no data is returned when this API is called, please check whether gateway traffic monitoring has been enabled in the corresponding gateway details page in the console.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeGatewayFlowMonitorDetail(request *DescribeGatewayFlowMonitorDetailRequest) (response *DescribeGatewayFlowMonitorDetailResponse, err error) {
     if request == nil {
         request = NewDescribeGatewayFlowMonitorDetailRequest()
@@ -2831,7 +3891,13 @@ func NewDescribeGatewayFlowQosResponse() (response *DescribeGatewayFlowQosRespon
     return
 }
 
+// DescribeGatewayFlowQos
 // This API (DescribeGatewayFlowQos) is used to query the QoS bandwidth limit of inbound IP flow in a gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) DescribeGatewayFlowQos(request *DescribeGatewayFlowQosRequest) (response *DescribeGatewayFlowQosResponse, err error) {
     if request == nil {
         request = NewDescribeGatewayFlowQosRequest()
@@ -2856,7 +3922,14 @@ func NewDescribeHaVipsResponse() (response *DescribeHaVipsResponse) {
     return
 }
 
+// DescribeHaVips
 // This API (DescribeHaVips) is used to query the list of highly available virtual IPs (HAVIP).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) DescribeHaVips(request *DescribeHaVipsRequest) (response *DescribeHaVipsResponse, err error) {
     if request == nil {
         request = NewDescribeHaVipsRequest()
@@ -2881,7 +3954,14 @@ func NewDescribeIpGeolocationDatabaseUrlResponse() (response *DescribeIpGeolocat
     return
 }
 
+// DescribeIpGeolocationDatabaseUrl
 // This API is used to obtain the download link of an IP location database.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeIpGeolocationDatabaseUrl(request *DescribeIpGeolocationDatabaseUrlRequest) (response *DescribeIpGeolocationDatabaseUrlResponse, err error) {
     if request == nil {
         request = NewDescribeIpGeolocationDatabaseUrlRequest()
@@ -2906,7 +3986,15 @@ func NewDescribeIpGeolocationInfosResponse() (response *DescribeIpGeolocationInf
     return
 }
 
+// DescribeIpGeolocationInfos
 // This API is used to query the information of IP addresses, including their geographical locations and networks.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeIpGeolocationInfos(request *DescribeIpGeolocationInfosRequest) (response *DescribeIpGeolocationInfosResponse, err error) {
     if request == nil {
         request = NewDescribeIpGeolocationInfosRequest()
@@ -2931,7 +4019,16 @@ func NewDescribeLocalGatewayResponse() (response *DescribeLocalGatewayResponse) 
     return
 }
 
+// DescribeLocalGateway
 // This API is used to query local gateways of a CDC instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeLocalGateway(request *DescribeLocalGatewayRequest) (response *DescribeLocalGatewayResponse, err error) {
     if request == nil {
         request = NewDescribeLocalGatewayRequest()
@@ -2956,7 +4053,19 @@ func NewDescribeNatGatewayDestinationIpPortTranslationNatRulesResponse() (respon
     return
 }
 
+// DescribeNatGatewayDestinationIpPortTranslationNatRules
 // This API (DescribeNatGatewayDestinationIpPortTranslationNatRules) is used to query the array of objects of the port forwarding rules for a NAT gateway.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeNatGatewayDestinationIpPortTranslationNatRules(request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) (response *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse, err error) {
     if request == nil {
         request = NewDescribeNatGatewayDestinationIpPortTranslationNatRulesRequest()
@@ -2981,7 +4090,17 @@ func NewDescribeNatGatewaySourceIpTranslationNatRulesResponse() (response *Descr
     return
 }
 
+// DescribeNatGatewaySourceIpTranslationNatRules
 // This API is used to query the object arrays of SNAT forwarding rules of the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeNatGatewaySourceIpTranslationNatRules(request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse, err error) {
     if request == nil {
         request = NewDescribeNatGatewaySourceIpTranslationNatRulesRequest()
@@ -3006,7 +4125,12 @@ func NewDescribeNatGatewaysResponse() (response *DescribeNatGatewaysResponse) {
     return
 }
 
+// DescribeNatGateways
 // This API (DescribeNatGateways) is used to query NAT gateways.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 func (c *Client) DescribeNatGateways(request *DescribeNatGatewaysRequest) (response *DescribeNatGatewaysResponse, err error) {
     if request == nil {
         request = NewDescribeNatGatewaysRequest()
@@ -3031,7 +4155,17 @@ func NewDescribeNetDetectStatesResponse() (response *DescribeNetDetectStatesResp
     return
 }
 
+// DescribeNetDetectStates
 // This API (DescribeNetDetectStates) is used to query the list of network detection verification results.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeNetDetectStates(request *DescribeNetDetectStatesRequest) (response *DescribeNetDetectStatesResponse, err error) {
     if request == nil {
         request = NewDescribeNetDetectStatesRequest()
@@ -3056,7 +4190,15 @@ func NewDescribeNetDetectsResponse() (response *DescribeNetDetectsResponse) {
     return
 }
 
+// DescribeNetDetects
 // This API (DescribeNetDetects) is used to query the list of network detection instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeNetDetects(request *DescribeNetDetectsRequest) (response *DescribeNetDetectsResponse, err error) {
     if request == nil {
         request = NewDescribeNetDetectsRequest()
@@ -3081,7 +4223,17 @@ func NewDescribeNetworkAclsResponse() (response *DescribeNetworkAclsResponse) {
     return
 }
 
+// DescribeNetworkAcls
 // This API is used to query a list of network ACLs.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
 func (c *Client) DescribeNetworkAcls(request *DescribeNetworkAclsRequest) (response *DescribeNetworkAclsResponse, err error) {
     if request == nil {
         request = NewDescribeNetworkAclsRequest()
@@ -3106,7 +4258,13 @@ func NewDescribeNetworkInterfaceLimitResponse() (response *DescribeNetworkInterf
     return
 }
 
+// DescribeNetworkInterfaceLimit
 // This API (DescribeNetworkInterfaceLimit) is used to query the ENI quota based on the ID of CVM instance or ENI. It returns the ENI quota to which the CVM instance can be bound and the IP address quota that can be allocated to the ENI.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeNetworkInterfaceLimit(request *DescribeNetworkInterfaceLimitRequest) (response *DescribeNetworkInterfaceLimitResponse, err error) {
     if request == nil {
         request = NewDescribeNetworkInterfaceLimitRequest()
@@ -3131,7 +4289,17 @@ func NewDescribeNetworkInterfacesResponse() (response *DescribeNetworkInterfaces
     return
 }
 
+// DescribeNetworkInterfaces
 // This API (DescribeNetworkInterfaces) is used to query the ENI list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETER_FILTERNOTDICT = "InvalidParameter.FilterNotDict"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeNetworkInterfaces(request *DescribeNetworkInterfacesRequest) (response *DescribeNetworkInterfacesResponse, err error) {
     if request == nil {
         request = NewDescribeNetworkInterfacesRequest()
@@ -3156,7 +4324,16 @@ func NewDescribeRouteTablesResponse() (response *DescribeRouteTablesResponse) {
     return
 }
 
+// DescribeRouteTables
 //  This API (DescribeRouteTables) is used to query route tables.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeRouteTables(request *DescribeRouteTablesRequest) (response *DescribeRouteTablesResponse, err error) {
     if request == nil {
         request = NewDescribeRouteTablesRequest()
@@ -3181,7 +4358,13 @@ func NewDescribeSecurityGroupAssociationStatisticsResponse() (response *Describe
     return
 }
 
+// DescribeSecurityGroupAssociationStatistics
 // This API (DescribeSecurityGroupAssociationStatistics) is used to query statistics on the instances associated with a security group.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeSecurityGroupAssociationStatistics(request *DescribeSecurityGroupAssociationStatisticsRequest) (response *DescribeSecurityGroupAssociationStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeSecurityGroupAssociationStatisticsRequest()
@@ -3206,7 +4389,12 @@ func NewDescribeSecurityGroupPoliciesResponse() (response *DescribeSecurityGroup
     return
 }
 
+// DescribeSecurityGroupPolicies
 // This API (DescribeSecurityGroupPolicies) is used to query security group policies.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeSecurityGroupPolicies(request *DescribeSecurityGroupPoliciesRequest) (response *DescribeSecurityGroupPoliciesResponse, err error) {
     if request == nil {
         request = NewDescribeSecurityGroupPoliciesRequest()
@@ -3231,7 +4419,13 @@ func NewDescribeSecurityGroupReferencesResponse() (response *DescribeSecurityGro
     return
 }
 
+// DescribeSecurityGroupReferences
 // This API (DescribeSecurityGroupReferences) is used to query referred security groups.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeSecurityGroupReferences(request *DescribeSecurityGroupReferencesRequest) (response *DescribeSecurityGroupReferencesResponse, err error) {
     if request == nil {
         request = NewDescribeSecurityGroupReferencesRequest()
@@ -3256,7 +4450,18 @@ func NewDescribeSecurityGroupsResponse() (response *DescribeSecurityGroupsRespon
     return
 }
 
+// DescribeSecurityGroups
 // This API (DescribeSecurityGroups) is used to query security groups.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETER_FILTERNOTDICT = "InvalidParameter.FilterNotDict"
+//  INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeSecurityGroups(request *DescribeSecurityGroupsRequest) (response *DescribeSecurityGroupsResponse, err error) {
     if request == nil {
         request = NewDescribeSecurityGroupsRequest()
@@ -3281,7 +4486,12 @@ func NewDescribeServiceTemplateGroupsResponse() (response *DescribeServiceTempla
     return
 }
 
+// DescribeServiceTemplateGroups
 // This API (DescribeServiceTemplateGroups) is used to query a protocol port template group.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 func (c *Client) DescribeServiceTemplateGroups(request *DescribeServiceTemplateGroupsRequest) (response *DescribeServiceTemplateGroupsResponse, err error) {
     if request == nil {
         request = NewDescribeServiceTemplateGroupsRequest()
@@ -3306,7 +4516,12 @@ func NewDescribeServiceTemplatesResponse() (response *DescribeServiceTemplatesRe
     return
 }
 
+// DescribeServiceTemplates
 // This API (DescribeServiceTemplates) is used to query protocol port templates.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) DescribeServiceTemplates(request *DescribeServiceTemplatesRequest) (response *DescribeServiceTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeServiceTemplatesRequest()
@@ -3331,7 +4546,19 @@ func NewDescribeSubnetsResponse() (response *DescribeSubnetsResponse) {
     return
 }
 
+// DescribeSubnets
 // This API (DescribeSubnets) is used to query the list of subnets.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETER_FILTERNOTDICT = "InvalidParameter.FilterNotDict"
+//  INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeSubnets(request *DescribeSubnetsRequest) (response *DescribeSubnetsResponse, err error) {
     if request == nil {
         request = NewDescribeSubnetsRequest()
@@ -3356,7 +4583,13 @@ func NewDescribeTaskResultResponse() (response *DescribeTaskResultResponse) {
     return
 }
 
+// DescribeTaskResult
 // This API is used to query the EIP async job execution results.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeTaskResult(request *DescribeTaskResultRequest) (response *DescribeTaskResultResponse, err error) {
     if request == nil {
         request = NewDescribeTaskResultRequest()
@@ -3381,7 +4614,15 @@ func NewDescribeVpcEndPointResponse() (response *DescribeVpcEndPointResponse) {
     return
 }
 
+// DescribeVpcEndPoint
 // This API is used to query the endpoint list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVpcEndPoint(request *DescribeVpcEndPointRequest) (response *DescribeVpcEndPointResponse, err error) {
     if request == nil {
         request = NewDescribeVpcEndPointRequest()
@@ -3406,7 +4647,16 @@ func NewDescribeVpcEndPointServiceResponse() (response *DescribeVpcEndPointServi
     return
 }
 
+// DescribeVpcEndPointService
 // This API is used to query the endpoint service list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVpcEndPointService(request *DescribeVpcEndPointServiceRequest) (response *DescribeVpcEndPointServiceResponse, err error) {
     if request == nil {
         request = NewDescribeVpcEndPointServiceRequest()
@@ -3431,7 +4681,12 @@ func NewDescribeVpcEndPointServiceWhiteListResponse() (response *DescribeVpcEndP
     return
 }
 
+// DescribeVpcEndPointServiceWhiteList
 // This API is used to query the endpoint service allowlist.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  UNSUPPORTEDOPERATION_UINNOTFOUND = "UnsupportedOperation.UinNotFound"
 func (c *Client) DescribeVpcEndPointServiceWhiteList(request *DescribeVpcEndPointServiceWhiteListRequest) (response *DescribeVpcEndPointServiceWhiteListResponse, err error) {
     if request == nil {
         request = NewDescribeVpcEndPointServiceWhiteListRequest()
@@ -3456,7 +4711,15 @@ func NewDescribeVpcInstancesResponse() (response *DescribeVpcInstancesResponse) 
     return
 }
 
+// DescribeVpcInstances
 //  This API (DescribeVpcInstances) is used to query a list of VCM instances on VPC.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVpcInstances(request *DescribeVpcInstancesRequest) (response *DescribeVpcInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeVpcInstancesRequest()
@@ -3481,8 +4744,14 @@ func NewDescribeVpcIpv6AddressesResponse() (response *DescribeVpcIpv6AddressesRe
     return
 }
 
+// DescribeVpcIpv6Addresses
 // This API (DescribeVpcIpv6Addresses) is used to query `VPC` `IPv6` information.
+//
 // This API is used to query only the information of `IPv6` addresses that are already in use. When querying IPs that have not yet been used, this API will not report an error, but the IPs will not appear in the returned results.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVpcIpv6Addresses(request *DescribeVpcIpv6AddressesRequest) (response *DescribeVpcIpv6AddressesResponse, err error) {
     if request == nil {
         request = NewDescribeVpcIpv6AddressesRequest()
@@ -3507,8 +4776,16 @@ func NewDescribeVpcPrivateIpAddressesResponse() (response *DescribeVpcPrivateIpA
     return
 }
 
+// DescribeVpcPrivateIpAddresses
 // This API (DescribeVpcPrivateIpAddresses) is used to query the private IP information of a VPC.<br />
+//
 // This API is used to query only the information of IP addresses that are already in use. When querying IPs that have not yet been used, this API will not report an error, but the IPs will not appear in the returned results.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVpcPrivateIpAddresses(request *DescribeVpcPrivateIpAddressesRequest) (response *DescribeVpcPrivateIpAddressesResponse, err error) {
     if request == nil {
         request = NewDescribeVpcPrivateIpAddressesRequest()
@@ -3533,7 +4810,12 @@ func NewDescribeVpcResourceDashboardResponse() (response *DescribeVpcResourceDas
     return
 }
 
+// DescribeVpcResourceDashboard
 // View VPC resources.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVpcResourceDashboard(request *DescribeVpcResourceDashboardRequest) (response *DescribeVpcResourceDashboardResponse, err error) {
     if request == nil {
         request = NewDescribeVpcResourceDashboardRequest()
@@ -3558,7 +4840,17 @@ func NewDescribeVpcsResponse() (response *DescribeVpcsResponse) {
     return
 }
 
+// DescribeVpcs
 // This API (DescribeVpcs) is used to query the VPC list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVpcs(request *DescribeVpcsRequest) (response *DescribeVpcsResponse, err error) {
     if request == nil {
         request = NewDescribeVpcsRequest()
@@ -3583,7 +4875,14 @@ func NewDescribeVpnConnectionsResponse() (response *DescribeVpnConnectionsRespon
     return
 }
 
+// DescribeVpnConnections
 //  This API (DescribeVpnConnections) is used to query the VPN tunnel list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVpnConnections(request *DescribeVpnConnectionsRequest) (response *DescribeVpnConnectionsResponse, err error) {
     if request == nil {
         request = NewDescribeVpnConnectionsRequest()
@@ -3608,7 +4907,13 @@ func NewDescribeVpnGatewayCcnRoutesResponse() (response *DescribeVpnGatewayCcnRo
     return
 }
 
+// DescribeVpnGatewayCcnRoutes
 // This API (DescribeVpnGatewayCcnRoutes) is used to query VPN gateway-based CCN routes.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVpnGatewayCcnRoutes(request *DescribeVpnGatewayCcnRoutesRequest) (response *DescribeVpnGatewayCcnRoutesResponse, err error) {
     if request == nil {
         request = NewDescribeVpnGatewayCcnRoutesRequest()
@@ -3633,7 +4938,18 @@ func NewDescribeVpnGatewaysResponse() (response *DescribeVpnGatewaysResponse) {
     return
 }
 
+// DescribeVpnGateways
 // This API (DescribeVpnGateways) is used to query the VPN gateway list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETER_FILTERNOTDICT = "InvalidParameter.FilterNotDict"
+//  INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDVPNGATEWAYID_MALFORMED = "InvalidVpnGatewayId.Malformed"
+//  INVALIDVPNGATEWAYID_NOTFOUND = "InvalidVpnGatewayId.NotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVpnGateways(request *DescribeVpnGatewaysRequest) (response *DescribeVpnGatewaysResponse, err error) {
     if request == nil {
         request = NewDescribeVpnGatewaysRequest()
@@ -3658,8 +4974,15 @@ func NewDetachCcnInstancesResponse() (response *DetachCcnInstancesResponse) {
     return
 }
 
+// DetachCcnInstances
 // This API (DetachCcnInstances) is used to unbind a specified network instance from a CCN instance.<br />
+//
 // After unbinding the network instance, the corresponding routing policy will also be deleted.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
 func (c *Client) DetachCcnInstances(request *DetachCcnInstancesRequest) (response *DetachCcnInstancesResponse, err error) {
     if request == nil {
         request = NewDetachCcnInstancesRequest()
@@ -3684,7 +5007,12 @@ func NewDetachClassicLinkVpcResponse() (response *DetachClassicLinkVpcResponse) 
     return
 }
 
+// DetachClassicLinkVpc
 // This API (DetachClassicLinkVpc) is used to delete a Classiclink.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DetachClassicLinkVpc(request *DetachClassicLinkVpcRequest) (response *DetachClassicLinkVpcResponse, err error) {
     if request == nil {
         request = NewDetachClassicLinkVpcRequest()
@@ -3709,7 +5037,14 @@ func NewDetachNetworkInterfaceResponse() (response *DetachNetworkInterfaceRespon
     return
 }
 
+// DetachNetworkInterface
 // This API is used to unbind an ENI from a CVM.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) DetachNetworkInterface(request *DetachNetworkInterfaceRequest) (response *DetachNetworkInterfaceResponse, err error) {
     if request == nil {
         request = NewDetachNetworkInterfaceRequest()
@@ -3734,7 +5069,12 @@ func NewDisableCcnRoutesResponse() (response *DisableCcnRoutesResponse) {
     return
 }
 
+// DisableCcnRoutes
 // This API (DisableCcnRoutes) is used to disable CCN routes that are already enabled.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DisableCcnRoutes(request *DisableCcnRoutesRequest) (response *DisableCcnRoutesResponse, err error) {
     if request == nil {
         request = NewDisableCcnRoutesRequest()
@@ -3759,7 +5099,13 @@ func NewDisableGatewayFlowMonitorResponse() (response *DisableGatewayFlowMonitor
     return
 }
 
+// DisableGatewayFlowMonitor
 // This API (DisableGatewayFlowMonitor) is used to disable gateway flow monitor.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) DisableGatewayFlowMonitor(request *DisableGatewayFlowMonitorRequest) (response *DisableGatewayFlowMonitorResponse, err error) {
     if request == nil {
         request = NewDisableGatewayFlowMonitorRequest()
@@ -3784,11 +5130,26 @@ func NewDisassociateAddressResponse() (response *DisassociateAddressResponse) {
     return
 }
 
+// DisassociateAddress
 // This API is used to unbind an [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP for short).
+//
 // * This API supports unbinding an EIP from CVM instances and ENIs.
+//
 // * This API does not support unbinding an EIP from a NAT Gateway. To unbind an EIP from a NAT Gateway, use the [`DisassociateNatGatewayAddress`](https://intl.cloud.tencent.com/document/api/215/36716?from_cn_redirect=1) API.
+//
 // * Only EIPs in BIND or BIND_ENI status can be unbound.
+//
 // * Blocked EIPs cannot be unbound.
+//
+// error code that may be returned:
+//  ADDRESSQUOTALIMITEXCEEDED_DAILYALLOCATE = "AddressQuotaLimitExceeded.DailyAllocate"
+//  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDADDRESSIDSTATUS_NOTPERMIT = "InvalidAddressIdStatus.NotPermit"
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ONLYSUPPORTEDFORMASTERNETWORKCARD = "InvalidParameterValue.OnlySupportedForMasterNetworkCard"
 func (c *Client) DisassociateAddress(request *DisassociateAddressRequest) (response *DisassociateAddressResponse, err error) {
     if request == nil {
         request = NewDisassociateAddressRequest()
@@ -3813,7 +5174,14 @@ func NewDisassociateDirectConnectGatewayNatGatewayResponse() (response *Disassoc
     return
 }
 
+// DisassociateDirectConnectGatewayNatGateway
 // This API is used to unbind a direct connect gateway from a NAT Gateway. After unbinding, the direct connect gateway cannot access internet through the NAT Gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DisassociateDirectConnectGatewayNatGateway(request *DisassociateDirectConnectGatewayNatGatewayRequest) (response *DisassociateDirectConnectGatewayNatGatewayResponse, err error) {
     if request == nil {
         request = NewDisassociateDirectConnectGatewayNatGatewayRequest()
@@ -3838,7 +5206,14 @@ func NewDisassociateNatGatewayAddressResponse() (response *DisassociateNatGatewa
     return
 }
 
+// DisassociateNatGatewayAddress
 // This API (DisassociateNatGatewayAddress) is used to unbind an EIP from a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSDISASSOCIATE = "UnsupportedOperation.PublicIpAddressDisassociate"
 func (c *Client) DisassociateNatGatewayAddress(request *DisassociateNatGatewayAddressRequest) (response *DisassociateNatGatewayAddressResponse, err error) {
     if request == nil {
         request = NewDisassociateNatGatewayAddressRequest()
@@ -3863,7 +5238,14 @@ func NewDisassociateNetworkAclSubnetsResponse() (response *DisassociateNetworkAc
     return
 }
 
+// DisassociateNetworkAclSubnets
 // This API is used to disassociate a network ACL from subnets in a VPC instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) DisassociateNetworkAclSubnets(request *DisassociateNetworkAclSubnetsRequest) (response *DisassociateNetworkAclSubnetsResponse, err error) {
     if request == nil {
         request = NewDisassociateNetworkAclSubnetsRequest()
@@ -3888,7 +5270,13 @@ func NewDisassociateNetworkInterfaceSecurityGroupsResponse() (response *Disassoc
     return
 }
 
+// DisassociateNetworkInterfaceSecurityGroups
 // This API (DisassociateNetworkInterfaceSecurityGroups) is used to detach (or fully detach if possible) a security group from an ENI.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DisassociateNetworkInterfaceSecurityGroups(request *DisassociateNetworkInterfaceSecurityGroupsRequest) (response *DisassociateNetworkInterfaceSecurityGroupsResponse, err error) {
     if request == nil {
         request = NewDisassociateNetworkInterfaceSecurityGroupsRequest()
@@ -3913,7 +5301,14 @@ func NewDisassociateVpcEndPointSecurityGroupsResponse() (response *DisassociateV
     return
 }
 
+// DisassociateVpcEndPointSecurityGroups
 // This API is used to unbind an endpoint from a security group.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DisassociateVpcEndPointSecurityGroups(request *DisassociateVpcEndPointSecurityGroupsRequest) (response *DisassociateVpcEndPointSecurityGroupsResponse, err error) {
     if request == nil {
         request = NewDisassociateVpcEndPointSecurityGroupsRequest()
@@ -3938,7 +5333,12 @@ func NewDownloadCustomerGatewayConfigurationResponse() (response *DownloadCustom
     return
 }
 
+// DownloadCustomerGatewayConfiguration
 // This API (DownloadCustomerGatewayConfiguration) is used to download a VPN tunnel configuration.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DownloadCustomerGatewayConfiguration(request *DownloadCustomerGatewayConfigurationRequest) (response *DownloadCustomerGatewayConfigurationResponse, err error) {
     if request == nil {
         request = NewDownloadCustomerGatewayConfigurationRequest()
@@ -3963,8 +5363,14 @@ func NewEnableCcnRoutesResponse() (response *EnableCcnRoutesResponse) {
     return
 }
 
+// EnableCcnRoutes
 // This API (EnableCcnRoutes) is used to enable CCN routes that are already added.<br />
+//
 // This API is used to verify whether there will be conflict with an existing route after a CCN route is enabled. If there is a conflict, the route will not be enabled, and the process will fail. When a conflict occurs, you must disable the conflicting route before you can enable the desired route.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_ECMP = "UnsupportedOperation.Ecmp"
 func (c *Client) EnableCcnRoutes(request *EnableCcnRoutesRequest) (response *EnableCcnRoutesResponse, err error) {
     if request == nil {
         request = NewEnableCcnRoutesRequest()
@@ -3989,7 +5395,13 @@ func NewEnableGatewayFlowMonitorResponse() (response *EnableGatewayFlowMonitorRe
     return
 }
 
+// EnableGatewayFlowMonitor
 // This API (EnableGatewayFlowMonitor) is used to enable gateway flow monitor.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) EnableGatewayFlowMonitor(request *EnableGatewayFlowMonitorRequest) (response *EnableGatewayFlowMonitorResponse, err error) {
     if request == nil {
         request = NewEnableGatewayFlowMonitorRequest()
@@ -4014,7 +5426,14 @@ func NewEnableVpcEndPointConnectResponse() (response *EnableVpcEndPointConnectRe
     return
 }
 
+// EnableVpcEndPointConnect
 // This API is used to determine whether to accept the request of connecting with an endpoint.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) EnableVpcEndPointConnect(request *EnableVpcEndPointConnectRequest) (response *EnableVpcEndPointConnectResponse, err error) {
     if request == nil {
         request = NewEnableVpcEndPointConnectRequest()
@@ -4039,7 +5458,13 @@ func NewGetCcnRegionBandwidthLimitsResponse() (response *GetCcnRegionBandwidthLi
     return
 }
 
+// GetCcnRegionBandwidthLimits
 // This API is used to query the bandwidth limits of a CCN instance. Monthly-subscribed CCNs only support Inter-region Bandwidth Limits, while the pay-as-you-go CCNs support both the Inter-region Bandwidth Limits and Region Outbound Bandwidth Limits. 
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetCcnRegionBandwidthLimits(request *GetCcnRegionBandwidthLimitsRequest) (response *GetCcnRegionBandwidthLimitsResponse, err error) {
     if request == nil {
         request = NewGetCcnRegionBandwidthLimitsRequest()
@@ -4064,8 +5489,16 @@ func NewHaVipAssociateAddressIpResponse() (response *HaVipAssociateAddressIpResp
     return
 }
 
+// HaVipAssociateAddressIp
 // This API (HaVipAssociateAddressIp) is used to bind an EIP to an HAVIP.<br />
+//
 // This API is completed asynchronously. If you need to query the async job execution results, please use the `RequestId` returned by this API to query the `QueryTask` API.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_BINDEIP = "UnsupportedOperation.BindEIP"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) HaVipAssociateAddressIp(request *HaVipAssociateAddressIpRequest) (response *HaVipAssociateAddressIpResponse, err error) {
     if request == nil {
         request = NewHaVipAssociateAddressIpRequest()
@@ -4090,8 +5523,17 @@ func NewHaVipDisassociateAddressIpResponse() (response *HaVipDisassociateAddress
     return
 }
 
+// HaVipDisassociateAddressIp
 // This API (HaVipDisassociateAddressIp) is used to unbind an EIP which has been bound to an HAVIP.<br />
+//
 // This API is completed asynchronously. If you need to query the async job execution results, please use the `RequestId` returned by this API to query the `QueryTask` API.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+//  UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
 func (c *Client) HaVipDisassociateAddressIp(request *HaVipDisassociateAddressIpRequest) (response *HaVipDisassociateAddressIpResponse, err error) {
     if request == nil {
         request = NewHaVipDisassociateAddressIpRequest()
@@ -4116,7 +5558,15 @@ func NewInquirePriceCreateDirectConnectGatewayResponse() (response *InquirePrice
     return
 }
 
+// InquirePriceCreateDirectConnectGateway
 // This API is used to query the price of creating a direct connect gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+//  UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
 func (c *Client) InquirePriceCreateDirectConnectGateway(request *InquirePriceCreateDirectConnectGatewayRequest) (response *InquirePriceCreateDirectConnectGatewayResponse, err error) {
     if request == nil {
         request = NewInquirePriceCreateDirectConnectGatewayRequest()
@@ -4141,7 +5591,11 @@ func NewInquiryPriceCreateVpnGatewayResponse() (response *InquiryPriceCreateVpnG
     return
 }
 
+// InquiryPriceCreateVpnGateway
 // This API (InquiryPriceCreateVpnGateway) is used to query the price for VPN gateway creation.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) InquiryPriceCreateVpnGateway(request *InquiryPriceCreateVpnGatewayRequest) (response *InquiryPriceCreateVpnGatewayResponse, err error) {
     if request == nil {
         request = NewInquiryPriceCreateVpnGatewayRequest()
@@ -4166,7 +5620,13 @@ func NewInquiryPriceRenewVpnGatewayResponse() (response *InquiryPriceRenewVpnGat
     return
 }
 
+// InquiryPriceRenewVpnGateway
 // This API (InquiryPriceRenewVpnGateway) is used to query the price for VPN gateway renewal. Currently, only querying prices for IPSEC-type gateways is supported.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) InquiryPriceRenewVpnGateway(request *InquiryPriceRenewVpnGatewayRequest) (response *InquiryPriceRenewVpnGatewayResponse, err error) {
     if request == nil {
         request = NewInquiryPriceRenewVpnGatewayRequest()
@@ -4191,7 +5651,13 @@ func NewInquiryPriceResetVpnGatewayInternetMaxBandwidthResponse() (response *Inq
     return
 }
 
+// InquiryPriceResetVpnGatewayInternetMaxBandwidth
 // This API (InquiryPriceResetVpnGatewayInternetMaxBandwidth) is used to query the price for adjusting the bandwidth cap of a VPN gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) InquiryPriceResetVpnGatewayInternetMaxBandwidth(request *InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest) (response *InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse, err error) {
     if request == nil {
         request = NewInquiryPriceResetVpnGatewayInternetMaxBandwidthRequest()
@@ -4216,7 +5682,14 @@ func NewMigrateNetworkInterfaceResponse() (response *MigrateNetworkInterfaceResp
     return
 }
 
+// MigrateNetworkInterface
 // This API (MigrateNetworkInterface) is used to migrate ENIs.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) MigrateNetworkInterface(request *MigrateNetworkInterfaceRequest) (response *MigrateNetworkInterfaceResponse, err error) {
     if request == nil {
         request = NewMigrateNetworkInterfaceRequest()
@@ -4241,10 +5714,22 @@ func NewMigratePrivateIpAddressResponse() (response *MigratePrivateIpAddressResp
     return
 }
 
+// MigratePrivateIpAddress
 //  This API (MigratePrivateIpAddress) is used to migrate the private IPs of ENIs.
+//
 // 
+//
 // * This API is used to migrate a private IP from one ENI to another. Primary IPs cannot be migrated.
+//
 // * The ENIs before and after migration must belong to the same subnet.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_ATTACHMENTNOTFOUND = "UnauthorizedOperation.AttachmentNotFound"
+//  UNAUTHORIZEDOPERATION_PRIMARYIP = "UnauthorizedOperation.PrimaryIp"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+//  UNSUPPORTEDOPERATION_PRIMARYIP = "UnsupportedOperation.PrimaryIp"
 func (c *Client) MigratePrivateIpAddress(request *MigratePrivateIpAddressRequest) (response *MigratePrivateIpAddressResponse, err error) {
     if request == nil {
         request = NewMigratePrivateIpAddressRequest()
@@ -4269,7 +5754,14 @@ func NewModifyAddressAttributeResponse() (response *ModifyAddressAttributeRespon
     return
 }
 
+// ModifyAddressAttribute
 // This API (ModifyAddressAttribute) is used to modify the name of an [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 func (c *Client) ModifyAddressAttribute(request *ModifyAddressAttributeRequest) (response *ModifyAddressAttributeResponse, err error) {
     if request == nil {
         request = NewModifyAddressAttributeRequest()
@@ -4294,9 +5786,23 @@ func NewModifyAddressInternetChargeTypeResponse() (response *ModifyAddressIntern
     return
 }
 
+// ModifyAddressInternetChargeType
 // This API is used to adjust the network billing mode of an EIP. Please note that it's available to users whose network fees are billed on IPs but not CVMs.
+//
 // * The network billing mode can be switched between `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
+//
 // * The network billing mode for each EIP be changed for up to twice.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDADDRESSIDSTATE_INARREARS = "InvalidAddressIdState.InArrears"
+//  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) ModifyAddressInternetChargeType(request *ModifyAddressInternetChargeTypeRequest) (response *ModifyAddressInternetChargeTypeResponse, err error) {
     if request == nil {
         request = NewModifyAddressInternetChargeTypeRequest()
@@ -4321,7 +5827,16 @@ func NewModifyAddressTemplateAttributeResponse() (response *ModifyAddressTemplat
     return
 }
 
+// ModifyAddressTemplateAttribute
 // This API (ModifyAddressTemplateAttribute) is used to modify an IP address template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) ModifyAddressTemplateAttribute(request *ModifyAddressTemplateAttributeRequest) (response *ModifyAddressTemplateAttributeResponse, err error) {
     if request == nil {
         request = NewModifyAddressTemplateAttributeRequest()
@@ -4346,7 +5861,16 @@ func NewModifyAddressTemplateGroupAttributeResponse() (response *ModifyAddressTe
     return
 }
 
+// ModifyAddressTemplateGroupAttribute
 // This API (ModifyAddressTemplateGroupAttribute) is used to modify an IP address template group.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) ModifyAddressTemplateGroupAttribute(request *ModifyAddressTemplateGroupAttributeRequest) (response *ModifyAddressTemplateGroupAttributeResponse, err error) {
     if request == nil {
         request = NewModifyAddressTemplateGroupAttributeRequest()
@@ -4371,7 +5895,13 @@ func NewModifyAddressesBandwidthResponse() (response *ModifyAddressesBandwidthRe
     return
 }
 
+// ModifyAddressesBandwidth
 // This API is used to adjust the bandwidth of [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1), including EIP billed on a pay-as-you-go, monthly subscription, and bandwidth package basis.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
 func (c *Client) ModifyAddressesBandwidth(request *ModifyAddressesBandwidthRequest) (response *ModifyAddressesBandwidthResponse, err error) {
     if request == nil {
         request = NewModifyAddressesBandwidthRequest()
@@ -4396,7 +5926,20 @@ func NewModifyAssistantCidrResponse() (response *ModifyAssistantCidrResponse) {
     return
 }
 
+// ModifyAssistantCidr
 // This API (ModifyAssistantCidr) is used to batch modify (e.g. add and delete) secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+//  INVALIDPARAMETERVALUE_VPCCIDRCONFLICT = "InvalidParameterValue.VpcCidrConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyAssistantCidr(request *ModifyAssistantCidrRequest) (response *ModifyAssistantCidrResponse, err error) {
     if request == nil {
         request = NewModifyAssistantCidrRequest()
@@ -4421,7 +5964,11 @@ func NewModifyBandwidthPackageAttributeResponse() (response *ModifyBandwidthPack
     return
 }
 
+// ModifyBandwidthPackageAttribute
 // This API is used to modify the attributes of a bandwidth package, including the bandwidth package name, and so on.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
 func (c *Client) ModifyBandwidthPackageAttribute(request *ModifyBandwidthPackageAttributeRequest) (response *ModifyBandwidthPackageAttributeResponse, err error) {
     if request == nil {
         request = NewModifyBandwidthPackageAttributeRequest()
@@ -4446,7 +5993,16 @@ func NewModifyCcnAttachedInstancesAttributeResponse() (response *ModifyCcnAttach
     return
 }
 
+// ModifyCcnAttachedInstancesAttribute
 // This API is used to modify CCN-associated instance attributes. Currently, only the `description` can be modified.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyCcnAttachedInstancesAttribute(request *ModifyCcnAttachedInstancesAttributeRequest) (response *ModifyCcnAttachedInstancesAttributeResponse, err error) {
     if request == nil {
         request = NewModifyCcnAttachedInstancesAttributeRequest()
@@ -4471,7 +6027,11 @@ func NewModifyCcnAttributeResponse() (response *ModifyCcnAttributeResponse) {
     return
 }
 
+// ModifyCcnAttribute
 // This API (ModifyCcnAttribute) is used to modify CCN attributes.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyCcnAttribute(request *ModifyCcnAttributeRequest) (response *ModifyCcnAttributeResponse, err error) {
     if request == nil {
         request = NewModifyCcnAttributeRequest()
@@ -4496,7 +6056,15 @@ func NewModifyCcnRegionBandwidthLimitsTypeResponse() (response *ModifyCcnRegionB
     return
 }
 
+// ModifyCcnRegionBandwidthLimitsType
 // This API is used to modify the bandwidth limit policy of a postpaid CCN instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_NOTPOSTPAIDCCNOPERATION = "UnsupportedOperation.NotPostpaidCcnOperation"
 func (c *Client) ModifyCcnRegionBandwidthLimitsType(request *ModifyCcnRegionBandwidthLimitsTypeRequest) (response *ModifyCcnRegionBandwidthLimitsTypeResponse, err error) {
     if request == nil {
         request = NewModifyCcnRegionBandwidthLimitsTypeRequest()
@@ -4521,7 +6089,12 @@ func NewModifyCustomerGatewayAttributeResponse() (response *ModifyCustomerGatewa
     return
 }
 
+// ModifyCustomerGatewayAttribute
 // This API (ModifyCustomerGatewayAttribute) is used to modify the customer gateway information.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyCustomerGatewayAttribute(request *ModifyCustomerGatewayAttributeRequest) (response *ModifyCustomerGatewayAttributeResponse, err error) {
     if request == nil {
         request = NewModifyCustomerGatewayAttributeRequest()
@@ -4546,7 +6119,16 @@ func NewModifyDirectConnectGatewayAttributeResponse() (response *ModifyDirectCon
     return
 }
 
+// ModifyDirectConnectGatewayAttribute
 // This API is used to modify the attributes of a direct connect gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_DIRECTCONNECTGATEWAYISUPDATINGCOMMUNITY = "UnsupportedOperation.DirectConnectGatewayIsUpdatingCommunity"
 func (c *Client) ModifyDirectConnectGatewayAttribute(request *ModifyDirectConnectGatewayAttributeRequest) (response *ModifyDirectConnectGatewayAttributeResponse, err error) {
     if request == nil {
         request = NewModifyDirectConnectGatewayAttributeRequest()
@@ -4571,7 +6153,12 @@ func NewModifyFlowLogAttributeResponse() (response *ModifyFlowLogAttributeRespon
     return
 }
 
+// ModifyFlowLogAttribute
 // This API is used to modify the attributes of a flow log.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) ModifyFlowLogAttribute(request *ModifyFlowLogAttributeRequest) (response *ModifyFlowLogAttributeResponse, err error) {
     if request == nil {
         request = NewModifyFlowLogAttributeRequest()
@@ -4596,7 +6183,13 @@ func NewModifyGatewayFlowQosResponse() (response *ModifyGatewayFlowQosResponse) 
     return
 }
 
+// ModifyGatewayFlowQos
 // This API (ModifyGatewayFlowQos) is used to adjust the QoS bandwidth limit in a gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) ModifyGatewayFlowQos(request *ModifyGatewayFlowQosRequest) (response *ModifyGatewayFlowQosResponse, err error) {
     if request == nil {
         request = NewModifyGatewayFlowQosRequest()
@@ -4621,7 +6214,15 @@ func NewModifyHaVipAttributeResponse() (response *ModifyHaVipAttributeResponse) 
     return
 }
 
+// ModifyHaVipAttribute
 // This API (ModifyHaVipAttribute) is used to modify HAVIP attributes.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyHaVipAttribute(request *ModifyHaVipAttributeRequest) (response *ModifyHaVipAttributeResponse, err error) {
     if request == nil {
         request = NewModifyHaVipAttributeRequest()
@@ -4646,7 +6247,14 @@ func NewModifyIpv6AddressesAttributeResponse() (response *ModifyIpv6AddressesAtt
     return
 }
 
+// ModifyIpv6AddressesAttribute
 // This API (ModifyIpv6AddressesAttribute) is used to modify the private IPv6 address attributes of an ENI.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ATTACHMENTNOTFOUND = "UnsupportedOperation.AttachmentNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) ModifyIpv6AddressesAttribute(request *ModifyIpv6AddressesAttributeRequest) (response *ModifyIpv6AddressesAttributeResponse, err error) {
     if request == nil {
         request = NewModifyIpv6AddressesAttributeRequest()
@@ -4671,7 +6279,16 @@ func NewModifyLocalGatewayResponse() (response *ModifyLocalGatewayResponse) {
     return
 }
 
+// ModifyLocalGateway
 // This API is used to modify the local gateway of a CDC instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyLocalGateway(request *ModifyLocalGatewayRequest) (response *ModifyLocalGatewayResponse, err error) {
     if request == nil {
         request = NewModifyLocalGatewayRequest()
@@ -4696,7 +6313,14 @@ func NewModifyNatGatewayAttributeResponse() (response *ModifyNatGatewayAttribute
     return
 }
 
+// ModifyNatGatewayAttribute
 // This API (ModifyNatGatewayAttribute) is used to modify the attributes of a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyNatGatewayAttribute(request *ModifyNatGatewayAttributeRequest) (response *ModifyNatGatewayAttributeResponse, err error) {
     if request == nil {
         request = NewModifyNatGatewayAttributeRequest()
@@ -4721,7 +6345,14 @@ func NewModifyNatGatewayDestinationIpPortTranslationNatRuleResponse() (response 
     return
 }
 
+// ModifyNatGatewayDestinationIpPortTranslationNatRule
 // This API (ModifyNatGatewayDestinationIpPortTranslationNatRule) is used to modify a port forwarding rule for a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyNatGatewayDestinationIpPortTranslationNatRule(request *ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
     if request == nil {
         request = NewModifyNatGatewayDestinationIpPortTranslationNatRuleRequest()
@@ -4746,7 +6377,15 @@ func NewModifyNatGatewaySourceIpTranslationNatRuleResponse() (response *ModifyNa
     return
 }
 
+// ModifyNatGatewaySourceIpTranslationNatRule
 // This API is used to modify a SNAT forwarding rule of the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) ModifyNatGatewaySourceIpTranslationNatRule(request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse, err error) {
     if request == nil {
         request = NewModifyNatGatewaySourceIpTranslationNatRuleRequest()
@@ -4771,7 +6410,19 @@ func NewModifyNetDetectResponse() (response *ModifyNetDetectResponse) {
     return
 }
 
+// ModifyNetDetect
 // This API (ModifyNetDetect) is used to modify network detection parameters.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_NEXTHOPMISMATCH = "InvalidParameter.NextHopMismatch"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_NETDETECTSAMEIP = "InvalidParameterValue.NetDetectSameIp"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_ECMPWITHUSERROUTE = "UnsupportedOperation.EcmpWithUserRoute"
 func (c *Client) ModifyNetDetect(request *ModifyNetDetectRequest) (response *ModifyNetDetectResponse, err error) {
     if request == nil {
         request = NewModifyNetDetectRequest()
@@ -4796,7 +6447,14 @@ func NewModifyNetworkAclAttributeResponse() (response *ModifyNetworkAclAttribute
     return
 }
 
+// ModifyNetworkAclAttribute
 // This API is used to modify the attributes of a network ACL.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyNetworkAclAttribute(request *ModifyNetworkAclAttributeRequest) (response *ModifyNetworkAclAttributeResponse, err error) {
     if request == nil {
         request = NewModifyNetworkAclAttributeRequest()
@@ -4821,7 +6479,17 @@ func NewModifyNetworkAclEntriesResponse() (response *ModifyNetworkAclEntriesResp
     return
 }
 
+// ModifyNetworkAclEntries
 // This API is used to modify (add or delete) the inbound and outbound rules of a network ACL.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyNetworkAclEntries(request *ModifyNetworkAclEntriesRequest) (response *ModifyNetworkAclEntriesResponse, err error) {
     if request == nil {
         request = NewModifyNetworkAclEntriesRequest()
@@ -4846,7 +6514,15 @@ func NewModifyNetworkInterfaceAttributeResponse() (response *ModifyNetworkInterf
     return
 }
 
+// ModifyNetworkInterfaceAttribute
 // This API (ModifyNetworkInterfaceAttribute) is used to modify ENI attributes.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyNetworkInterfaceAttribute(request *ModifyNetworkInterfaceAttributeRequest) (response *ModifyNetworkInterfaceAttributeResponse, err error) {
     if request == nil {
         request = NewModifyNetworkInterfaceAttributeRequest()
@@ -4871,7 +6547,13 @@ func NewModifyPrivateIpAddressesAttributeResponse() (response *ModifyPrivateIpAd
     return
 }
 
+// ModifyPrivateIpAddressesAttribute
 // This API (ModifyPrivateIpAddressesAttribute) is used to modify the private IP attributes of an ENI.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) ModifyPrivateIpAddressesAttribute(request *ModifyPrivateIpAddressesAttributeRequest) (response *ModifyPrivateIpAddressesAttributeResponse, err error) {
     if request == nil {
         request = NewModifyPrivateIpAddressesAttributeRequest()
@@ -4896,7 +6578,12 @@ func NewModifyRouteTableAttributeResponse() (response *ModifyRouteTableAttribute
     return
 }
 
+// ModifyRouteTableAttribute
 // This API (ModifyRouteTableAttribute) is used to modify the attributes of a route table.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyRouteTableAttribute(request *ModifyRouteTableAttributeRequest) (response *ModifyRouteTableAttributeResponse, err error) {
     if request == nil {
         request = NewModifyRouteTableAttributeRequest()
@@ -4921,7 +6608,14 @@ func NewModifySecurityGroupAttributeResponse() (response *ModifySecurityGroupAtt
     return
 }
 
+// ModifySecurityGroupAttribute
 // This API (ModifySecurityGroupAttribute) is used to modify the attributes of a security group (SecurityGroupPolicy).
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifySecurityGroupAttribute(request *ModifySecurityGroupAttributeRequest) (response *ModifySecurityGroupAttributeResponse, err error) {
     if request == nil {
         request = NewModifySecurityGroupAttributeRequest()
@@ -4946,22 +6640,47 @@ func NewModifySecurityGroupPoliciesResponse() (response *ModifySecurityGroupPoli
     return
 }
 
+// ModifySecurityGroupPolicies
 // This API is used to reset the egress and ingress policies (SecurityGroupPolicy) of a security group.
+//
 // 
+//
 // <ul>
+//
 // <li>This API deletes all the existing egress and ingress policies, and then adds Egress and Ingress policies. It does not support custom indexes `PolicyIndex`.</li>
+//
 // <li>For parameters of SecurityGroupPolicySet,<ul>
+//
 // 	<li>If `SecurityGroupPolicySet.Version` is set to 0, all policies will be cleared, and `Egress` and `Ingress` will be ignored.</li>
+//
 // 	<li>If `SecurityGroupPolicySet.Version` is not set to 0, add `Egress` and `Ingress` policies:<ul>
+//
 // 		<li>`Protocol`: allows TCP, UDP, ICMP, ICMPV6, GRE, or ALL.</li>
+//
 // 		<li>`CidrBlock`: a CIDR block in the correct format. In a classic network, if a `CidrBlock` contains private IPs on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
+//
 // 		<li>`Ipv6CidrBlock`: an IPv6 CIDR block in the correct format. In a classic network, if an `Ipv6CidrBlock` contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
+//
 // 		<li>`SecurityGroupId`: ID of the security group. It can be the ID of security group to be modified, or the ID of other security group in the same project. All private IPs of all CVMs under the security group will be covered. If this field is used, the policy will automatically change according to the CVM associated with the group ID while being used to match network messages. You don't need to change it manually.</li>
+//
 // 		<li>`Port`: a single port number such as 80, or a port range in the format of '8000-8010'. You may use this field only if the `Protocol` field takes the value `TCP` or `UDP`.</li>
+//
 // 		<li>`Action`: only allows ACCEPT or DROP.</li>
+//
 // 		<li>`CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are mutually exclusive. `Protocol` + `Port` and `ServiceTemplate` are mutually exclusive.</li>
+//
 // </ul></li></ul></li>
+//
 // </ul>
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_DUPLICATEPOLICY = "UnsupportedOperation.DuplicatePolicy"
 func (c *Client) ModifySecurityGroupPolicies(request *ModifySecurityGroupPoliciesRequest) (response *ModifySecurityGroupPoliciesResponse, err error) {
     if request == nil {
         request = NewModifySecurityGroupPoliciesRequest()
@@ -4986,7 +6705,15 @@ func NewModifyServiceTemplateAttributeResponse() (response *ModifyServiceTemplat
     return
 }
 
+// ModifyServiceTemplateAttribute
 // This API (ModifyServiceTemplateAttribute) is used to modify a protocol port template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) ModifyServiceTemplateAttribute(request *ModifyServiceTemplateAttributeRequest) (response *ModifyServiceTemplateAttributeResponse, err error) {
     if request == nil {
         request = NewModifyServiceTemplateAttributeRequest()
@@ -5011,7 +6738,13 @@ func NewModifyServiceTemplateGroupAttributeResponse() (response *ModifyServiceTe
     return
 }
 
+// ModifyServiceTemplateGroupAttribute
 // This API (ModifyServiceTemplateGroupAttribute) is used to modify a protocol port template group.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyServiceTemplateGroupAttribute(request *ModifyServiceTemplateGroupAttributeRequest) (response *ModifyServiceTemplateGroupAttributeResponse, err error) {
     if request == nil {
         request = NewModifyServiceTemplateGroupAttributeRequest()
@@ -5036,7 +6769,12 @@ func NewModifySubnetAttributeResponse() (response *ModifySubnetAttributeResponse
     return
 }
 
+// ModifySubnetAttribute
 // This API (ModifySubnetAttribute) is used to modify subnet attributes.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifySubnetAttribute(request *ModifySubnetAttributeRequest) (response *ModifySubnetAttributeResponse, err error) {
     if request == nil {
         request = NewModifySubnetAttributeRequest()
@@ -5061,7 +6799,14 @@ func NewModifyVpcAttributeResponse() (response *ModifyVpcAttributeResponse) {
     return
 }
 
+// ModifyVpcAttribute
 // This API (ModifyVpcAttribute) is used to modify VPC attributes.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyVpcAttribute(request *ModifyVpcAttributeRequest) (response *ModifyVpcAttributeResponse, err error) {
     if request == nil {
         request = NewModifyVpcAttributeRequest()
@@ -5086,7 +6831,17 @@ func NewModifyVpcEndPointAttributeResponse() (response *ModifyVpcEndPointAttribu
     return
 }
 
+// ModifyVpcEndPointAttribute
 // This API is used to modify endpoint attributes.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SPECIALENDPOINTSERVICE = "UnsupportedOperation.SpecialEndPointService"
 func (c *Client) ModifyVpcEndPointAttribute(request *ModifyVpcEndPointAttributeRequest) (response *ModifyVpcEndPointAttributeResponse, err error) {
     if request == nil {
         request = NewModifyVpcEndPointAttributeRequest()
@@ -5111,8 +6866,18 @@ func NewModifyVpcEndPointServiceAttributeResponse() (response *ModifyVpcEndPoint
     return
 }
 
+// ModifyVpcEndPointServiceAttribute
 // This API is used to modify endpoint service attributes.
+//
 // 
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) ModifyVpcEndPointServiceAttribute(request *ModifyVpcEndPointServiceAttributeRequest) (response *ModifyVpcEndPointServiceAttributeResponse, err error) {
     if request == nil {
         request = NewModifyVpcEndPointServiceAttributeRequest()
@@ -5137,7 +6902,14 @@ func NewModifyVpcEndPointServiceWhiteListResponse() (response *ModifyVpcEndPoint
     return
 }
 
+// ModifyVpcEndPointServiceWhiteList
 // This API is used to modify the attributes of the endpoint service allowlist.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_UINNOTFOUND = "UnsupportedOperation.UinNotFound"
 func (c *Client) ModifyVpcEndPointServiceWhiteList(request *ModifyVpcEndPointServiceWhiteListRequest) (response *ModifyVpcEndPointServiceWhiteListResponse, err error) {
     if request == nil {
         request = NewModifyVpcEndPointServiceWhiteListRequest()
@@ -5162,7 +6934,13 @@ func NewModifyVpnConnectionAttributeResponse() (response *ModifyVpnConnectionAtt
     return
 }
 
+// ModifyVpnConnectionAttribute
 // This API (ModifyVpnConnectionAttribute) is used to modify VPN tunnels.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_VPNCONNCIDRCONFLICT = "InvalidParameterValue.VpnConnCidrConflict"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyVpnConnectionAttribute(request *ModifyVpnConnectionAttributeRequest) (response *ModifyVpnConnectionAttributeResponse, err error) {
     if request == nil {
         request = NewModifyVpnConnectionAttributeRequest()
@@ -5187,7 +6965,13 @@ func NewModifyVpnGatewayAttributeResponse() (response *ModifyVpnGatewayAttribute
     return
 }
 
+// ModifyVpnGatewayAttribute
 // This API (ModifyVpnGatewayAttribute) is used to modify the attributes of VPN gateways.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyVpnGatewayAttribute(request *ModifyVpnGatewayAttributeRequest) (response *ModifyVpnGatewayAttributeResponse, err error) {
     if request == nil {
         request = NewModifyVpnGatewayAttributeRequest()
@@ -5212,7 +6996,12 @@ func NewModifyVpnGatewayCcnRoutesResponse() (response *ModifyVpnGatewayCcnRoutes
     return
 }
 
+// ModifyVpnGatewayCcnRoutes
 // This API (ModifyVpnGatewayCcnRoutes) is used to modify VPN gateway-based CCN routes.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyVpnGatewayCcnRoutes(request *ModifyVpnGatewayCcnRoutesRequest) (response *ModifyVpnGatewayCcnRoutesResponse, err error) {
     if request == nil {
         request = NewModifyVpnGatewayCcnRoutesRequest()
@@ -5237,7 +7026,19 @@ func NewNotifyRoutesResponse() (response *NotifyRoutesResponse) {
     return
 }
 
+// NotifyRoutes
 // This API is used to publish a route to CCN. This can also be done by clicking the **Publish to CCN** button on the route table page.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDROUTEID_NOTFOUND = "InvalidRouteId.NotFound"
+//  INVALIDROUTETABLEID_MALFORMED = "InvalidRouteTableId.Malformed"
+//  INVALIDROUTETABLEID_NOTFOUND = "InvalidRouteTableId.NotFound"
+//  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
+//  UNSUPPORTEDOPERATION_NOTIFYCCN = "UnsupportedOperation.NotifyCcn"
+//  UNSUPPORTEDOPERATION_SYSTEMROUTE = "UnsupportedOperation.SystemRoute"
 func (c *Client) NotifyRoutes(request *NotifyRoutesRequest) (response *NotifyRoutesResponse, err error) {
     if request == nil {
         request = NewNotifyRoutesRequest()
@@ -5262,7 +7063,17 @@ func NewRejectAttachCcnInstancesResponse() (response *RejectAttachCcnInstancesRe
     return
 }
 
+// RejectAttachCcnInstances
 // This API (RejectAttachCcnInstances) is used to reject association operations when instances are associated across accounts for the CCN owner.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
+//  UNSUPPORTEDOPERATION_NOTPENDINGCCNINSTANCE = "UnsupportedOperation.NotPendingCcnInstance"
 func (c *Client) RejectAttachCcnInstances(request *RejectAttachCcnInstancesRequest) (response *RejectAttachCcnInstancesResponse, err error) {
     if request == nil {
         request = NewRejectAttachCcnInstancesRequest()
@@ -5287,9 +7098,17 @@ func NewReleaseAddressesResponse() (response *ReleaseAddressesResponse) {
     return
 }
 
+// ReleaseAddresses
 // This API (ReleaseAddresses) is used to release one or multiple [Elastic IPs](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1).
+//
 // * This operation is irreversible. Once you release an EIP, the IP address associated with the EIP no longer belongs to you.
+//
 // * Only EIPs in UNBIND status can be released.
+//
+// error code that may be returned:
+//  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDADDRESSSTATE = "InvalidAddressState"
 func (c *Client) ReleaseAddresses(request *ReleaseAddressesRequest) (response *ReleaseAddressesResponse, err error) {
     if request == nil {
         request = NewReleaseAddressesRequest()
@@ -5314,7 +7133,13 @@ func NewRemoveBandwidthPackageResourcesResponse() (response *RemoveBandwidthPack
     return
 }
 
+// RemoveBandwidthPackageResources
 // This API is used to delete a bandwidth package resource, including [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1), [Cloud Load Balancer](https://intl.cloud.tencent.com/document/product/214/517?from_cn_redirect=1), and so on.
+//
+// error code that may be returned:
+//  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDADDRESSSTATE = "InvalidAddressState"
 func (c *Client) RemoveBandwidthPackageResources(request *RemoveBandwidthPackageResourcesRequest) (response *RemoveBandwidthPackageResourcesResponse, err error) {
     if request == nil {
         request = NewRemoveBandwidthPackageResourcesRequest()
@@ -5339,7 +7164,12 @@ func NewRenewVpnGatewayResponse() (response *RenewVpnGatewayResponse) {
     return
 }
 
+// RenewVpnGateway
 // This API (RenewVpnGateway) is used to renew prepaid (monthly subscription) VPN gateways. Currently, only IPSEC gateways are supported.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) RenewVpnGateway(request *RenewVpnGatewayRequest) (response *RenewVpnGatewayResponse, err error) {
     if request == nil {
         request = NewRenewVpnGatewayRequest()
@@ -5364,7 +7194,12 @@ func NewReplaceDirectConnectGatewayCcnRoutesResponse() (response *ReplaceDirectC
     return
 }
 
+// ReplaceDirectConnectGatewayCcnRoutes
 // This API (ReplaceDirectConnectGatewayCcnRoutes) is used to modify the specified route according to the route ID. Batch modification is supported.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ReplaceDirectConnectGatewayCcnRoutes(request *ReplaceDirectConnectGatewayCcnRoutesRequest) (response *ReplaceDirectConnectGatewayCcnRoutesResponse, err error) {
     if request == nil {
         request = NewReplaceDirectConnectGatewayCcnRoutesRequest()
@@ -5389,8 +7224,15 @@ func NewReplaceRouteTableAssociationResponse() (response *ReplaceRouteTableAssoc
     return
 }
 
+// ReplaceRouteTableAssociation
 // This API (ReplaceRouteTableAssociation) is used to modify the route table associated with a subnet.
+//
 // * A subnet can only be associated with one route table.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) ReplaceRouteTableAssociation(request *ReplaceRouteTableAssociationRequest) (response *ReplaceRouteTableAssociationResponse, err error) {
     if request == nil {
         request = NewReplaceRouteTableAssociationRequest()
@@ -5415,7 +7257,24 @@ func NewReplaceRoutesResponse() (response *ReplaceRoutesResponse) {
     return
 }
 
+// ReplaceRoutes
 // This API (ReplaceRoutes) is used to modify a specified routing policy by its ID (RouteId). Batch modification is supported.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CIDRNOTINPEERVPC = "InvalidParameterValue.CidrNotInPeerVpc"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_VPCCIDRCONFLICT = "InvalidParameterValue.VpcCidrConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER_WITHGUESS = "UnknownParameter.WithGuess"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CDCSUBNETNOTSUPPORTUNLOCALGATEWAY = "UnsupportedOperation.CdcSubnetNotSupportUnLocalGateway"
+//  UNSUPPORTEDOPERATION_CONFLICTWITHDOCKERROUTE = "UnsupportedOperation.ConflictWithDockerRoute"
+//  UNSUPPORTEDOPERATION_ECMP = "UnsupportedOperation.Ecmp"
+//  UNSUPPORTEDOPERATION_NORMALSUBNETNOTSUPPORTLOCALGATEWAY = "UnsupportedOperation.NormalSubnetNotSupportLocalGateway"
+//  UNSUPPORTEDOPERATION_SYSTEMROUTE = "UnsupportedOperation.SystemRoute"
 func (c *Client) ReplaceRoutes(request *ReplaceRoutesRequest) (response *ReplaceRoutesResponse, err error) {
     if request == nil {
         request = NewReplaceRoutesRequest()
@@ -5440,8 +7299,21 @@ func NewReplaceSecurityGroupPolicyResponse() (response *ReplaceSecurityGroupPoli
     return
 }
 
+// ReplaceSecurityGroupPolicy
 // This API (ReplaceSecurityGroupPolicy) is used to replace a single security group policy (SecurityGroupPolicy).
+//
 // Only one policy in a single direction can be replaced in each request, and the PolicyIndex parameter must be specified.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_DUPLICATEPOLICY = "UnsupportedOperation.DuplicatePolicy"
+//  UNSUPPORTEDOPERATION_VERSIONMISMATCH = "UnsupportedOperation.VersionMismatch"
 func (c *Client) ReplaceSecurityGroupPolicy(request *ReplaceSecurityGroupPolicyRequest) (response *ReplaceSecurityGroupPolicyResponse, err error) {
     if request == nil {
         request = NewReplaceSecurityGroupPolicyRequest()
@@ -5466,7 +7338,12 @@ func NewResetAttachCcnInstancesResponse() (response *ResetAttachCcnInstancesResp
     return
 }
 
+// ResetAttachCcnInstances
 // This API (ResetAttachCcnInstances) is used to re-apply for the association operation when the application for cross-account instance association expires.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ResetAttachCcnInstances(request *ResetAttachCcnInstancesRequest) (response *ResetAttachCcnInstancesResponse, err error) {
     if request == nil {
         request = NewResetAttachCcnInstancesRequest()
@@ -5491,7 +7368,11 @@ func NewResetNatGatewayConnectionResponse() (response *ResetNatGatewayConnection
     return
 }
 
+// ResetNatGatewayConnection
 // This API (ResetNatGatewayConnection) is used to adjust concurrent connection cap for the NAT gateway.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) ResetNatGatewayConnection(request *ResetNatGatewayConnectionRequest) (response *ResetNatGatewayConnectionResponse, err error) {
     if request == nil {
         request = NewResetNatGatewayConnectionRequest()
@@ -5516,8 +7397,20 @@ func NewResetRoutesResponse() (response *ResetRoutesResponse) {
     return
 }
 
+// ResetRoutes
 // This API (ResetRoutes) is used to reset the name of a route table and all its routing policies.<br />
+//
 // Note: When this API is called, all routing policies in the current route table are deleted before new routing policies are saved, which may incur network interruption.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CIDRNOTINPEERVPC = "InvalidParameterValue.CidrNotInPeerVpc"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_VPCCIDRCONFLICT = "InvalidParameterValue.VpcCidrConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ECMP = "UnsupportedOperation.Ecmp"
+//  UNSUPPORTEDOPERATION_SYSTEMROUTE = "UnsupportedOperation.SystemRoute"
 func (c *Client) ResetRoutes(request *ResetRoutesRequest) (response *ResetRoutesResponse, err error) {
     if request == nil {
         request = NewResetRoutesRequest()
@@ -5542,7 +7435,12 @@ func NewResetVpnConnectionResponse() (response *ResetVpnConnectionResponse) {
     return
 }
 
+// ResetVpnConnection
 // The API (ResetVpnConnection) is used to reset VPN tunnels.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ResetVpnConnection(request *ResetVpnConnectionRequest) (response *ResetVpnConnectionResponse, err error) {
     if request == nil {
         request = NewResetVpnConnectionRequest()
@@ -5567,7 +7465,14 @@ func NewResetVpnGatewayInternetMaxBandwidthResponse() (response *ResetVpnGateway
     return
 }
 
+// ResetVpnGatewayInternetMaxBandwidth
 // This API (ResetVpnGatewayInternetMaxBandwidth) is used to adjust the bandwidth cap of VPN gateways. Currently, only configuration upgrade is supported. VPN gateways with monthly subscription must be within the validity period.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) ResetVpnGatewayInternetMaxBandwidth(request *ResetVpnGatewayInternetMaxBandwidthRequest) (response *ResetVpnGatewayInternetMaxBandwidthResponse, err error) {
     if request == nil {
         request = NewResetVpnGatewayInternetMaxBandwidthRequest()
@@ -5592,7 +7497,13 @@ func NewSetCcnRegionBandwidthLimitsResponse() (response *SetCcnRegionBandwidthLi
     return
 }
 
+// SetCcnRegionBandwidthLimits
 // This API (SetCcnRegionBandwidthLimits) is used to set the outbound bandwidth cap for CCNs in each region. This API can only set the outbound bandwidth cap for regions in the network instances that have already been associated.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_NOTPOSTPAIDCCNOPERATION = "UnsupportedOperation.NotPostpaidCcnOperation"
 func (c *Client) SetCcnRegionBandwidthLimits(request *SetCcnRegionBandwidthLimitsRequest) (response *SetCcnRegionBandwidthLimitsResponse, err error) {
     if request == nil {
         request = NewSetCcnRegionBandwidthLimitsRequest()
@@ -5617,8 +7528,18 @@ func NewTransformAddressResponse() (response *TransformAddressResponse) {
     return
 }
 
+// TransformAddress
 // This API (TransformAddress) is used to switch common public IPs into [Elastic IPs](https://intl.cloud.tencent.comhttps://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1?from_cn_redirect=1).
+//
 // * The platform limits the number of times that a user can unbind an EIP and reassign public IPs in each region per day. For more information, see [EIP product introduction](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1)). The preceding quota can be obtained through the [DescribeAddressQuota](https://intl.cloud.tencent.com/document/api/213/1378?from_cn_redirect=1) API.
+//
+// error code that may be returned:
+//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
+//  ADDRESSQUOTALIMITEXCEEDED_DAILYALLOCATE = "AddressQuotaLimitExceeded.DailyAllocate"
+//  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  INVALIDINSTANCEID_ALREADYBINDEIP = "InvalidInstanceId.AlreadyBindEip"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 func (c *Client) TransformAddress(request *TransformAddressRequest) (response *TransformAddressResponse, err error) {
     if request == nil {
         request = NewTransformAddressRequest()
@@ -5643,8 +7564,18 @@ func NewUnassignIpv6AddressesResponse() (response *UnassignIpv6AddressesResponse
     return
 }
 
+// UnassignIpv6Addresses
 // This API (UnassignIpv6Addresses) is used to release ENI `IPv6` addresses.<br />
+//
 // This API is completed asynchronously. If you need to query the async execution results, use the `RequestId` returned by this API to query the `QueryTask` API.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_ATTACHMENTNOTFOUND = "UnauthorizedOperation.AttachmentNotFound"
+//  UNAUTHORIZEDOPERATION_PRIMARYIP = "UnauthorizedOperation.PrimaryIp"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ATTACHMENTNOTFOUND = "UnsupportedOperation.AttachmentNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) UnassignIpv6Addresses(request *UnassignIpv6AddressesRequest) (response *UnassignIpv6AddressesResponse, err error) {
     if request == nil {
         request = NewUnassignIpv6AddressesRequest()
@@ -5669,8 +7600,14 @@ func NewUnassignIpv6CidrBlockResponse() (response *UnassignIpv6CidrBlockResponse
     return
 }
 
+// UnassignIpv6CidrBlock
 // This API (UnassignIpv6CidrBlock) is used to release IPv6 IP ranges.
+//
 // If the IP range still has occupied IPs that are not yet repossessed, the IP range cannot be released.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) UnassignIpv6CidrBlock(request *UnassignIpv6CidrBlockRequest) (response *UnassignIpv6CidrBlockResponse, err error) {
     if request == nil {
         request = NewUnassignIpv6CidrBlockRequest()
@@ -5695,8 +7632,15 @@ func NewUnassignIpv6SubnetCidrBlockResponse() (response *UnassignIpv6SubnetCidrB
     return
 }
 
+// UnassignIpv6SubnetCidrBlock
 // This API (UnassignIpv6SubnetCidrBlock) is used to release IPv6 subnet IP ranges.
+//
 // If the subnet IP range still has occupied IPs that are not yet repossessed, the subnet IP range cannot be released.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) UnassignIpv6SubnetCidrBlock(request *UnassignIpv6SubnetCidrBlockRequest) (response *UnassignIpv6SubnetCidrBlockResponse, err error) {
     if request == nil {
         request = NewUnassignIpv6SubnetCidrBlockRequest()
@@ -5721,8 +7665,19 @@ func NewUnassignPrivateIpAddressesResponse() (response *UnassignPrivateIpAddress
     return
 }
 
+// UnassignPrivateIpAddresses
 // This API (UnassignPrivateIpAddresses) is used to return the private IPs of ENI.
+//
 // * To return the secondary private IPs of an ENI, the API will automatically unbind the IPs of an ENI. The primary private IP of the ENI cannot be returned.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ATTACHMENTNOTFOUND = "UnsupportedOperation.AttachmentNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
 func (c *Client) UnassignPrivateIpAddresses(request *UnassignPrivateIpAddressesRequest) (response *UnassignPrivateIpAddressesResponse, err error) {
     if request == nil {
         request = NewUnassignPrivateIpAddressesRequest()
@@ -5747,7 +7702,18 @@ func NewWithdrawNotifyRoutesResponse() (response *WithdrawNotifyRoutesResponse) 
     return
 }
 
+// WithdrawNotifyRoutes
 // This API is used to withdraw a route from CCN. This can also be done by clicking the **Withdraw from CCN** button on the route table page.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDROUTEID_NOTFOUND = "InvalidRouteId.NotFound"
+//  INVALIDROUTETABLEID_MALFORMED = "InvalidRouteTableId.Malformed"
+//  INVALIDROUTETABLEID_NOTFOUND = "InvalidRouteTableId.NotFound"
+//  UNSUPPORTEDOPERATION_NOTIFYCCN = "UnsupportedOperation.NotifyCcn"
+//  UNSUPPORTEDOPERATION_SYSTEMROUTE = "UnsupportedOperation.SystemRoute"
 func (c *Client) WithdrawNotifyRoutes(request *WithdrawNotifyRoutesRequest) (response *WithdrawNotifyRoutesResponse, err error) {
     if request == nil {
         request = NewWithdrawNotifyRoutesRequest()

@@ -58,6 +58,7 @@ func NewCreateBasicDDoSAlarmThresholdResponse() (response *CreateBasicDDoSAlarmT
     return
 }
 
+// CreateBasicDDoSAlarmThreshold
 // This API is used to set the DDoS alarm threshold for Anti-DDoS Basic, which is only supported for Anti-DDoS Basic.
 func (c *Client) CreateBasicDDoSAlarmThreshold(request *CreateBasicDDoSAlarmThresholdRequest) (response *CreateBasicDDoSAlarmThresholdResponse, err error) {
     if request == nil {
@@ -83,7 +84,13 @@ func NewCreateBoundIPResponse() (response *CreateBoundIPResponse) {
     return
 }
 
+// CreateBoundIP
 // This API is used to bind an IP to an Anti-DDoS Pro instance, which supports both single IP instances and multi-IP instances. It should be noted that this API is async; therefore, if a binding/unbinding operation is in progress, new binding/unbinding operations cannot be initiated.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateBoundIP(request *CreateBoundIPRequest) (response *CreateBoundIPResponse, err error) {
     if request == nil {
         request = NewCreateBoundIPRequest()
@@ -108,7 +115,13 @@ func NewCreateCCFrequencyRulesResponse() (response *CreateCCFrequencyRulesRespon
     return
 }
 
+// CreateCCFrequencyRules
 // This API is used to add an access frequency control rule for CC protection.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateCCFrequencyRules(request *CreateCCFrequencyRulesRequest) (response *CreateCCFrequencyRulesResponse, err error) {
     if request == nil {
         request = NewCreateCCFrequencyRulesRequest()
@@ -133,7 +146,19 @@ func NewCreateCCSelfDefinePolicyResponse() (response *CreateCCSelfDefinePolicyRe
     return
 }
 
+// CreateCCSelfDefinePolicy
 // This API is used to create a custom CC policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateCCSelfDefinePolicy(request *CreateCCSelfDefinePolicyRequest) (response *CreateCCSelfDefinePolicyResponse, err error) {
     if request == nil {
         request = NewCreateCCSelfDefinePolicyRequest()
@@ -158,7 +183,19 @@ func NewCreateDDoSPolicyResponse() (response *CreateDDoSPolicyResponse) {
     return
 }
 
+// CreateDDoSPolicy
 // This API is used to add an advanced DDoS policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateDDoSPolicy(request *CreateDDoSPolicyRequest) (response *CreateDDoSPolicyResponse, err error) {
     if request == nil {
         request = NewCreateDDoSPolicyRequest()
@@ -183,7 +220,19 @@ func NewCreateDDoSPolicyCaseResponse() (response *CreateDDoSPolicyCaseResponse) 
     return
 }
 
+// CreateDDoSPolicyCase
 // This API is used to add a policy scenario.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateDDoSPolicyCase(request *CreateDDoSPolicyCaseRequest) (response *CreateDDoSPolicyCaseResponse, err error) {
     if request == nil {
         request = NewCreateDDoSPolicyCaseRequest()
@@ -208,7 +257,19 @@ func NewCreateInstanceNameResponse() (response *CreateInstanceNameResponse) {
     return
 }
 
+// CreateInstanceName
 // This API is used to rename a resource instance, which supports single IP instances, multi-IP instances, Anti-DDoS Advanced, and Anti-DDoS Ultimate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateInstanceName(request *CreateInstanceNameRequest) (response *CreateInstanceNameResponse, err error) {
     if request == nil {
         request = NewCreateInstanceNameRequest()
@@ -233,7 +294,19 @@ func NewCreateL4HealthConfigResponse() (response *CreateL4HealthConfigResponse) 
     return
 }
 
+// CreateL4HealthConfig
 // This API is used to upload layer-4 health check configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateL4HealthConfig(request *CreateL4HealthConfigRequest) (response *CreateL4HealthConfigResponse, err error) {
     if request == nil {
         request = NewCreateL4HealthConfigRequest()
@@ -258,7 +331,19 @@ func NewCreateL4RulesResponse() (response *CreateL4RulesResponse) {
     return
 }
 
+// CreateL4Rules
 // This API is used to add a layer-4 forwarding rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateL4Rules(request *CreateL4RulesRequest) (response *CreateL4RulesResponse, err error) {
     if request == nil {
         request = NewCreateL4RulesRequest()
@@ -283,7 +368,19 @@ func NewCreateL7CCRuleResponse() (response *CreateL7CCRuleResponse) {
     return
 }
 
+// CreateL7CCRule
 // This API is used to add a custom frequency control rule for layer-7 CC access (it works in the IP + Host dimension and does not support specific URIs). As it has been disused, please call the new `CreateCCFrequencyRules` API, which supports both IP + Host and URI.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateL7CCRule(request *CreateL7CCRuleRequest) (response *CreateL7CCRuleResponse, err error) {
     if request == nil {
         request = NewCreateL7CCRuleRequest()
@@ -308,7 +405,19 @@ func NewCreateL7HealthConfigResponse() (response *CreateL7HealthConfigResponse) 
     return
 }
 
+// CreateL7HealthConfig
 // This API is used to upload layer-7 health check configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateL7HealthConfig(request *CreateL7HealthConfigRequest) (response *CreateL7HealthConfigResponse, err error) {
     if request == nil {
         request = NewCreateL7HealthConfigRequest()
@@ -333,7 +442,11 @@ func NewCreateL7RuleCertResponse() (response *CreateL7RuleCertResponse) {
     return
 }
 
+// CreateL7RuleCert
 // This API is used to configure a certificate for a layer-7 forwarding rule.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) CreateL7RuleCert(request *CreateL7RuleCertRequest) (response *CreateL7RuleCertResponse, err error) {
     if request == nil {
         request = NewCreateL7RuleCertRequest()
@@ -358,7 +471,11 @@ func NewCreateL7RulesResponse() (response *CreateL7RulesResponse) {
     return
 }
 
+// CreateL7Rules
 // This API is used to add a layer-7 (website) forwarding rule.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) CreateL7Rules(request *CreateL7RulesRequest) (response *CreateL7RulesResponse, err error) {
     if request == nil {
         request = NewCreateL7RulesRequest()
@@ -383,7 +500,20 @@ func NewCreateL7RulesUploadResponse() (response *CreateL7RulesUploadResponse) {
     return
 }
 
+// CreateL7RulesUpload
 // This API is used to upload layer-7 forwarding rules in batches.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateL7RulesUpload(request *CreateL7RulesUploadRequest) (response *CreateL7RulesUploadResponse, err error) {
     if request == nil {
         request = NewCreateL7RulesUploadRequest()
@@ -408,7 +538,20 @@ func NewCreateNetReturnResponse() (response *CreateNetReturnResponse) {
     return
 }
 
+// CreateNetReturn
 // This API is used to switch to the real server in Anti-DDoS Ultimate.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateNetReturn(request *CreateNetReturnRequest) (response *CreateNetReturnResponse, err error) {
     if request == nil {
         request = NewCreateNetReturnRequest()
@@ -433,7 +576,11 @@ func NewCreateNewL7RulesUploadResponse() (response *CreateNewL7RulesUploadRespon
     return
 }
 
+// CreateNewL7RulesUpload
 // This API is used to batch upload Layer-7 forwarding rules.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateNewL7RulesUpload(request *CreateNewL7RulesUploadRequest) (response *CreateNewL7RulesUploadResponse, err error) {
     if request == nil {
         request = NewCreateNewL7RulesUploadRequest()
@@ -458,7 +605,11 @@ func NewCreateUnblockIpResponse() (response *CreateUnblockIpResponse) {
     return
 }
 
+// CreateUnblockIp
 // This API is used to unblock an IP.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) CreateUnblockIp(request *CreateUnblockIpRequest) (response *CreateUnblockIpResponse, err error) {
     if request == nil {
         request = NewCreateUnblockIpRequest()
@@ -483,7 +634,11 @@ func NewDeleteCCFrequencyRulesResponse() (response *DeleteCCFrequencyRulesRespon
     return
 }
 
+// DeleteCCFrequencyRules
 // This API is used to delete an access frequency control rule for CC protection.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) DeleteCCFrequencyRules(request *DeleteCCFrequencyRulesRequest) (response *DeleteCCFrequencyRulesResponse, err error) {
     if request == nil {
         request = NewDeleteCCFrequencyRulesRequest()
@@ -508,7 +663,19 @@ func NewDeleteCCSelfDefinePolicyResponse() (response *DeleteCCSelfDefinePolicyRe
     return
 }
 
+// DeleteCCSelfDefinePolicy
 // This API is used to delete a custom CC policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DeleteCCSelfDefinePolicy(request *DeleteCCSelfDefinePolicyRequest) (response *DeleteCCSelfDefinePolicyResponse, err error) {
     if request == nil {
         request = NewDeleteCCSelfDefinePolicyRequest()
@@ -533,7 +700,11 @@ func NewDeleteDDoSPolicyResponse() (response *DeleteDDoSPolicyResponse) {
     return
 }
 
+// DeleteDDoSPolicy
 // This API is used to delete an advanced DDoS protection policy.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DeleteDDoSPolicy(request *DeleteDDoSPolicyRequest) (response *DeleteDDoSPolicyResponse, err error) {
     if request == nil {
         request = NewDeleteDDoSPolicyRequest()
@@ -558,7 +729,11 @@ func NewDeleteDDoSPolicyCaseResponse() (response *DeleteDDoSPolicyCaseResponse) 
     return
 }
 
+// DeleteDDoSPolicyCase
 // This API is used to delete a policy scenario.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DeleteDDoSPolicyCase(request *DeleteDDoSPolicyCaseRequest) (response *DeleteDDoSPolicyCaseResponse, err error) {
     if request == nil {
         request = NewDeleteDDoSPolicyCaseRequest()
@@ -583,7 +758,11 @@ func NewDeleteL4RulesResponse() (response *DeleteL4RulesResponse) {
     return
 }
 
+// DeleteL4Rules
 // This API is used to delete one or more layer-4 forwarding rules.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DeleteL4Rules(request *DeleteL4RulesRequest) (response *DeleteL4RulesResponse, err error) {
     if request == nil {
         request = NewDeleteL4RulesRequest()
@@ -608,7 +787,11 @@ func NewDeleteL7RulesResponse() (response *DeleteL7RulesResponse) {
     return
 }
 
+// DeleteL7Rules
 // This API is used to delete one or more layer-7 forwarding rules.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DeleteL7Rules(request *DeleteL7RulesRequest) (response *DeleteL7RulesResponse, err error) {
     if request == nil {
         request = NewDeleteL7RulesRequest()
@@ -633,7 +816,11 @@ func NewDescribeActionLogResponse() (response *DescribeActionLogResponse) {
     return
 }
 
+// DescribeActionLog
 // This API is used to get operation logs.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DescribeActionLog(request *DescribeActionLogRequest) (response *DescribeActionLogResponse, err error) {
     if request == nil {
         request = NewDescribeActionLogRequest()
@@ -658,7 +845,11 @@ func NewDescribeBGPIPL7RuleMaxCntResponse() (response *DescribeBGPIPL7RuleMaxCnt
     return
 }
 
+// DescribeBGPIPL7RuleMaxCnt
 // This API is used to get the maximum number of layer-7 rules that can be added for Anti-DDoS Advanced.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DescribeBGPIPL7RuleMaxCnt(request *DescribeBGPIPL7RuleMaxCntRequest) (response *DescribeBGPIPL7RuleMaxCntResponse, err error) {
     if request == nil {
         request = NewDescribeBGPIPL7RuleMaxCntRequest()
@@ -683,7 +874,11 @@ func NewDescribeBaradDataResponse() (response *DescribeBaradDataResponse) {
     return
 }
 
+// DescribeBaradData
 // This API is used to provide business forwarding metric data of Anti-DDoS services.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DescribeBaradData(request *DescribeBaradDataRequest) (response *DescribeBaradDataResponse, err error) {
     if request == nil {
         request = NewDescribeBaradDataRequest()
@@ -708,7 +903,20 @@ func NewDescribeBasicCCThresholdResponse() (response *DescribeBasicCCThresholdRe
     return
 }
 
+// DescribeBasicCCThreshold
 // This API is used to get the CC protection threshold of Anti-DDoS Basic.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeBasicCCThreshold(request *DescribeBasicCCThresholdRequest) (response *DescribeBasicCCThresholdResponse, err error) {
     if request == nil {
         request = NewDescribeBasicCCThresholdRequest()
@@ -733,7 +941,20 @@ func NewDescribeBasicDeviceThresholdResponse() (response *DescribeBasicDeviceThr
     return
 }
 
+// DescribeBasicDeviceThreshold
 // This API is used to get the blackhole threshold of Anti-DDoS Basic.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeBasicDeviceThreshold(request *DescribeBasicDeviceThresholdRequest) (response *DescribeBasicDeviceThresholdResponse, err error) {
     if request == nil {
         request = NewDescribeBasicDeviceThresholdRequest()
@@ -758,7 +979,20 @@ func NewDescribeBizHttpStatusResponse() (response *DescribeBizHttpStatusResponse
     return
 }
 
+// DescribeBizHttpStatus
 // This API is used to get the statistics on the status codes of business traffic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeBizHttpStatus(request *DescribeBizHttpStatusRequest) (response *DescribeBizHttpStatusResponse, err error) {
     if request == nil {
         request = NewDescribeBizHttpStatusRequest()
@@ -783,7 +1017,20 @@ func NewDescribeCCAlarmThresholdResponse() (response *DescribeCCAlarmThresholdRe
     return
 }
 
+// DescribeCCAlarmThreshold
 // This API is used to get the alarm notification threshold set for CC attacks in Anti-DDoS Pro, Anti-DDoS Advanced, Anti-DDoS Ultimate, and Chess Shield.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeCCAlarmThreshold(request *DescribeCCAlarmThresholdRequest) (response *DescribeCCAlarmThresholdResponse, err error) {
     if request == nil {
         request = NewDescribeCCAlarmThresholdRequest()
@@ -808,7 +1055,20 @@ func NewDescribeCCEvListResponse() (response *DescribeCCEvListResponse) {
     return
 }
 
+// DescribeCCEvList
 // This API is used to get the CC attack event list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeCCEvList(request *DescribeCCEvListRequest) (response *DescribeCCEvListResponse, err error) {
     if request == nil {
         request = NewDescribeCCEvListRequest()
@@ -833,7 +1093,20 @@ func NewDescribeCCFrequencyRulesResponse() (response *DescribeCCFrequencyRulesRe
     return
 }
 
+// DescribeCCFrequencyRules
 // This API is used to get an access frequency control rule for CC protection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeCCFrequencyRules(request *DescribeCCFrequencyRulesRequest) (response *DescribeCCFrequencyRulesResponse, err error) {
     if request == nil {
         request = NewDescribeCCFrequencyRulesRequest()
@@ -858,7 +1131,20 @@ func NewDescribeCCIpAllowDenyResponse() (response *DescribeCCIpAllowDenyResponse
     return
 }
 
+// DescribeCCIpAllowDeny
 // This API is used to get the CC IP blocklist/allowlist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeCCIpAllowDeny(request *DescribeCCIpAllowDenyRequest) (response *DescribeCCIpAllowDenyResponse, err error) {
     if request == nil {
         request = NewDescribeCCIpAllowDenyRequest()
@@ -883,7 +1169,19 @@ func NewDescribeCCSelfDefinePolicyResponse() (response *DescribeCCSelfDefinePoli
     return
 }
 
+// DescribeCCSelfDefinePolicy
 // This API is used to get a custom CC policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeCCSelfDefinePolicy(request *DescribeCCSelfDefinePolicyRequest) (response *DescribeCCSelfDefinePolicyResponse, err error) {
     if request == nil {
         request = NewDescribeCCSelfDefinePolicyRequest()
@@ -908,7 +1206,19 @@ func NewDescribeCCTrendResponse() (response *DescribeCCTrendResponse) {
     return
 }
 
+// DescribeCCTrend
 // This API is used to get CC attack metric data, including total requests peak (QPS) and attack requests (QPS).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeCCTrend(request *DescribeCCTrendRequest) (response *DescribeCCTrendResponse, err error) {
     if request == nil {
         request = NewDescribeCCTrendRequest()
@@ -933,7 +1243,19 @@ func NewDescribeCCUrlAllowResponse() (response *DescribeCCUrlAllowResponse) {
     return
 }
 
+// DescribeCCUrlAllow
 // This API is used to get the CC URL allowlist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeCCUrlAllow(request *DescribeCCUrlAllowRequest) (response *DescribeCCUrlAllowResponse, err error) {
     if request == nil {
         request = NewDescribeCCUrlAllowRequest()
@@ -958,7 +1280,19 @@ func NewDescribeDDoSAlarmThresholdResponse() (response *DescribeDDoSAlarmThresho
     return
 }
 
+// DescribeDDoSAlarmThreshold
 // This API is used to get the alarm notification threshold set for DDoS attacks in Anti-DDoS Pro, Anti-DDoS Advanced, Anti-DDoS Ultimate, and Chess Shield.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSAlarmThreshold(request *DescribeDDoSAlarmThresholdRequest) (response *DescribeDDoSAlarmThresholdResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSAlarmThresholdRequest()
@@ -983,7 +1317,17 @@ func NewDescribeDDoSAttackIPRegionMapResponse() (response *DescribeDDoSAttackIPR
     return
 }
 
+// DescribeDDoSAttackIPRegionMap
 // This API is used to get the geographical distribution map of DDoS attack source IPs. It supports display by global regions and Chinese provinces.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSAttackIPRegionMap(request *DescribeDDoSAttackIPRegionMapRequest) (response *DescribeDDoSAttackIPRegionMapResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSAttackIPRegionMapRequest()
@@ -1008,7 +1352,20 @@ func NewDescribeDDoSAttackSourceResponse() (response *DescribeDDoSAttackSourceRe
     return
 }
 
+// DescribeDDoSAttackSource
 // This API is used to get the DDoS attack source list.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSAttackSource(request *DescribeDDoSAttackSourceRequest) (response *DescribeDDoSAttackSourceResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSAttackSourceRequest()
@@ -1033,7 +1390,20 @@ func NewDescribeDDoSCountResponse() (response *DescribeDDoSCountResponse) {
     return
 }
 
+// DescribeDDoSCount
 // This API is used to get the DDoS attack proportion analysis.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSCount(request *DescribeDDoSCountRequest) (response *DescribeDDoSCountResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSCountRequest()
@@ -1058,7 +1428,20 @@ func NewDescribeDDoSDefendStatusResponse() (response *DescribeDDoSDefendStatusRe
     return
 }
 
+// DescribeDDoSDefendStatus
 // This API is used to get the DDoS protection status (temporarily disabled status). It is supported for Anti-DDoS Basic, single IP instance, multi-IP instance, Anti-DDoS Advanced, and Anti-DDoS Ultimate. It is used to query whether DDoS protection is temporarily disabled, and if yes, return parameters such as temporary disablement duration.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSDefendStatus(request *DescribeDDoSDefendStatusRequest) (response *DescribeDDoSDefendStatusResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSDefendStatusRequest()
@@ -1083,7 +1466,20 @@ func NewDescribeDDoSEvInfoResponse() (response *DescribeDDoSEvInfoResponse) {
     return
 }
 
+// DescribeDDoSEvInfo
 // This API is used to get details of a specific DDoS attack.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSEvInfo(request *DescribeDDoSEvInfoRequest) (response *DescribeDDoSEvInfoResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSEvInfoRequest()
@@ -1108,7 +1504,20 @@ func NewDescribeDDoSEvListResponse() (response *DescribeDDoSEvListResponse) {
     return
 }
 
+// DescribeDDoSEvList
 // This API is used to get the DDoS attack event list.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSEvList(request *DescribeDDoSEvListRequest) (response *DescribeDDoSEvListResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSEvListRequest()
@@ -1133,7 +1542,20 @@ func NewDescribeDDoSIpLogResponse() (response *DescribeDDoSIpLogResponse) {
     return
 }
 
+// DescribeDDoSIpLog
 // This API is used to get a DDoS IP attack log.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSIpLog(request *DescribeDDoSIpLogRequest) (response *DescribeDDoSIpLogResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSIpLogRequest()
@@ -1158,7 +1580,20 @@ func NewDescribeDDoSNetCountResponse() (response *DescribeDDoSNetCountResponse) 
     return
 }
 
+// DescribeDDoSNetCount
 // This API is used to get the DDoS attack proportion analysis for an Anti-DDoS Ultimate resource.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSNetCount(request *DescribeDDoSNetCountRequest) (response *DescribeDDoSNetCountResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSNetCountRequest()
@@ -1183,7 +1618,20 @@ func NewDescribeDDoSNetEvInfoResponse() (response *DescribeDDoSNetEvInfoResponse
     return
 }
 
+// DescribeDDoSNetEvInfo
 // This API is used to get the DDoS attack event details of an Anti-DDoS Ultimate resource.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSNetEvInfo(request *DescribeDDoSNetEvInfoRequest) (response *DescribeDDoSNetEvInfoResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSNetEvInfoRequest()
@@ -1208,7 +1656,20 @@ func NewDescribeDDoSNetEvListResponse() (response *DescribeDDoSNetEvListResponse
     return
 }
 
+// DescribeDDoSNetEvList
 // This API is used to get the DDoS attack event list of an Anti-DDoS Ultimate resource.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSNetEvList(request *DescribeDDoSNetEvListRequest) (response *DescribeDDoSNetEvListResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSNetEvListRequest()
@@ -1233,7 +1694,20 @@ func NewDescribeDDoSNetIpLogResponse() (response *DescribeDDoSNetIpLogResponse) 
     return
 }
 
+// DescribeDDoSNetIpLog
 // This API is used to get the DDoS IP attack logs of an Anti-DDoS Ultimate resource.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSNetIpLog(request *DescribeDDoSNetIpLogRequest) (response *DescribeDDoSNetIpLogResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSNetIpLogRequest()
@@ -1258,7 +1732,20 @@ func NewDescribeDDoSNetTrendResponse() (response *DescribeDDoSNetTrendResponse) 
     return
 }
 
+// DescribeDDoSNetTrend
 // This API is used to get the DDoS attack metric data of an Anti-DDoS Ultimate resource.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSNetTrend(request *DescribeDDoSNetTrendRequest) (response *DescribeDDoSNetTrendResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSNetTrendRequest()
@@ -1283,7 +1770,20 @@ func NewDescribeDDoSPolicyResponse() (response *DescribeDDoSPolicyResponse) {
     return
 }
 
+// DescribeDDoSPolicy
 // This API is used to get an advanced DDoS policy.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSPolicy(request *DescribeDDoSPolicyRequest) (response *DescribeDDoSPolicyResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSPolicyRequest()
@@ -1308,7 +1808,20 @@ func NewDescribeDDoSTrendResponse() (response *DescribeDDoSTrendResponse) {
     return
 }
 
+// DescribeDDoSTrend
 // This API is used to get the data of DDoS attack traffic bandwidth and attack packet rate.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSTrend(request *DescribeDDoSTrendRequest) (response *DescribeDDoSTrendResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSTrendRequest()
@@ -1333,7 +1846,20 @@ func NewDescribeDDoSUsedStatisResponse() (response *DescribeDDoSUsedStatisRespon
     return
 }
 
+// DescribeDDoSUsedStatis
 // This API is used to count the number of days of Anti-DDoS resource use and number of DDoS attacks defended against.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeDDoSUsedStatis(request *DescribeDDoSUsedStatisRequest) (response *DescribeDDoSUsedStatisResponse, err error) {
     if request == nil {
         request = NewDescribeDDoSUsedStatisRequest()
@@ -1358,7 +1884,20 @@ func NewDescribeIPProductInfoResponse() (response *DescribeIPProductInfoResponse
     return
 }
 
+// DescribeIPProductInfo
 // This API is used to get the Tencent Cloud asset information corresponding to an IP of a single IP instance or multi-IP instance, which is supported only for IPs of single IP instances and multi-IP instances.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeIPProductInfo(request *DescribeIPProductInfoRequest) (response *DescribeIPProductInfoResponse, err error) {
     if request == nil {
         request = NewDescribeIPProductInfoRequest()
@@ -1383,7 +1922,20 @@ func NewDescribeInsurePacksResponse() (response *DescribeInsurePacksResponse) {
     return
 }
 
+// DescribeInsurePacks
 // This API is used to get the guarantee package list.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeInsurePacks(request *DescribeInsurePacksRequest) (response *DescribeInsurePacksResponse, err error) {
     if request == nil {
         request = NewDescribeInsurePacksRequest()
@@ -1408,7 +1960,20 @@ func NewDescribeIpBlockListResponse() (response *DescribeIpBlockListResponse) {
     return
 }
 
+// DescribeIpBlockList
 // This API is used to get the blocked IP list.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeIpBlockList(request *DescribeIpBlockListRequest) (response *DescribeIpBlockListResponse, err error) {
     if request == nil {
         request = NewDescribeIpBlockListRequest()
@@ -1433,7 +1998,20 @@ func NewDescribeIpUnBlockListResponse() (response *DescribeIpUnBlockListResponse
     return
 }
 
+// DescribeIpUnBlockList
 // This API is used to get the IP unblocking records.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeIpUnBlockList(request *DescribeIpUnBlockListRequest) (response *DescribeIpUnBlockListResponse, err error) {
     if request == nil {
         request = NewDescribeIpUnBlockListRequest()
@@ -1458,7 +2036,20 @@ func NewDescribeL4HealthConfigResponse() (response *DescribeL4HealthConfigRespon
     return
 }
 
+// DescribeL4HealthConfig
 // This API is used to export the layer-4 health check configuration.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeL4HealthConfig(request *DescribeL4HealthConfigRequest) (response *DescribeL4HealthConfigResponse, err error) {
     if request == nil {
         request = NewDescribeL4HealthConfigRequest()
@@ -1483,7 +2074,20 @@ func NewDescribeL4RulesErrHealthResponse() (response *DescribeL4RulesErrHealthRe
     return
 }
 
+// DescribeL4RulesErrHealth
 // This API is used to get the exception result of a layer-4 forwarding rule health check.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeL4RulesErrHealth(request *DescribeL4RulesErrHealthRequest) (response *DescribeL4RulesErrHealthResponse, err error) {
     if request == nil {
         request = NewDescribeL4RulesErrHealthRequest()
@@ -1508,7 +2112,20 @@ func NewDescribeL7HealthConfigResponse() (response *DescribeL7HealthConfigRespon
     return
 }
 
+// DescribeL7HealthConfig
 // This API is used to export the layer-7 health check configuration.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeL7HealthConfig(request *DescribeL7HealthConfigRequest) (response *DescribeL7HealthConfigResponse, err error) {
     if request == nil {
         request = NewDescribeL7HealthConfigRequest()
@@ -1533,7 +2150,20 @@ func NewDescribePackIndexResponse() (response *DescribePackIndexResponse) {
     return
 }
 
+// DescribePackIndex
 // This API is used to get the product overview statistics. It is supported for Anti-DDoS Pro, Anti-DDoS Advanced, and Anti-DDoS Ultimate.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribePackIndex(request *DescribePackIndexRequest) (response *DescribePackIndexResponse, err error) {
     if request == nil {
         request = NewDescribePackIndexRequest()
@@ -1558,7 +2188,20 @@ func NewDescribePcapResponse() (response *DescribePcapResponse) {
     return
 }
 
+// DescribePcap
 // This API is used to download the PCAP packet of an attack event.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribePcap(request *DescribePcapRequest) (response *DescribePcapResponse, err error) {
     if request == nil {
         request = NewDescribePcapRequest()
@@ -1583,7 +2226,20 @@ func NewDescribePolicyCaseResponse() (response *DescribePolicyCaseResponse) {
     return
 }
 
+// DescribePolicyCase
 // This API is used to get the policy scenario.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribePolicyCase(request *DescribePolicyCaseRequest) (response *DescribePolicyCaseResponse, err error) {
     if request == nil {
         request = NewDescribePolicyCaseRequest()
@@ -1608,7 +2264,20 @@ func NewDescribeResIpListResponse() (response *DescribeResIpListResponse) {
     return
 }
 
+// DescribeResIpList
 // This API is used to get the IP list of a resource.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeResIpList(request *DescribeResIpListRequest) (response *DescribeResIpListResponse, err error) {
     if request == nil {
         request = NewDescribeResIpListRequest()
@@ -1633,7 +2302,20 @@ func NewDescribeResourceListResponse() (response *DescribeResourceListResponse) 
     return
 }
 
+// DescribeResourceList
 // This API is used to get the resource list.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeResourceList(request *DescribeResourceListRequest) (response *DescribeResourceListResponse, err error) {
     if request == nil {
         request = NewDescribeResourceListRequest()
@@ -1658,7 +2340,20 @@ func NewDescribeRuleSetsResponse() (response *DescribeRuleSetsResponse) {
     return
 }
 
+// DescribeRuleSets
 // This API is used to get the number of rules of a resource.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeRuleSets(request *DescribeRuleSetsRequest) (response *DescribeRuleSetsResponse, err error) {
     if request == nil {
         request = NewDescribeRuleSetsRequest()
@@ -1683,7 +2378,20 @@ func NewDescribeSchedulingDomainListResponse() (response *DescribeSchedulingDoma
     return
 }
 
+// DescribeSchedulingDomainList
 // Get scheduling domain name list
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeSchedulingDomainList(request *DescribeSchedulingDomainListRequest) (response *DescribeSchedulingDomainListResponse, err error) {
     if request == nil {
         request = NewDescribeSchedulingDomainListRequest()
@@ -1708,7 +2416,20 @@ func NewDescribeSecIndexResponse() (response *DescribeSecIndexResponse) {
     return
 }
 
+// DescribeSecIndex
 // This API is used to get the security statistics of the current month.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeSecIndex(request *DescribeSecIndexRequest) (response *DescribeSecIndexResponse, err error) {
     if request == nil {
         request = NewDescribeSecIndexRequest()
@@ -1733,7 +2454,20 @@ func NewDescribeSourceIpSegmentResponse() (response *DescribeSourceIpSegmentResp
     return
 }
 
+// DescribeSourceIpSegment
 // This API is used to get the intermediate IP range. It is supported for Anti-DDoS Advanced and Anti-DDoS Ultimate.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeSourceIpSegment(request *DescribeSourceIpSegmentRequest) (response *DescribeSourceIpSegmentResponse, err error) {
     if request == nil {
         request = NewDescribeSourceIpSegmentRequest()
@@ -1758,7 +2492,11 @@ func NewDescribeTransmitStatisResponse() (response *DescribeTransmitStatisRespon
     return
 }
 
+// DescribeTransmitStatis
 // This API is used to get the business forwarding statistics, including forwarded traffic and packet forwarding rate.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTransmitStatis(request *DescribeTransmitStatisRequest) (response *DescribeTransmitStatisResponse, err error) {
     if request == nil {
         request = NewDescribeTransmitStatisRequest()
@@ -1783,7 +2521,11 @@ func NewDescribeUnBlockStatisResponse() (response *DescribeUnBlockStatisResponse
     return
 }
 
+// DescribeUnBlockStatis
 // This API is used to get the number of blackhole unblockings.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeUnBlockStatis(request *DescribeUnBlockStatisRequest) (response *DescribeUnBlockStatisResponse, err error) {
     if request == nil {
         request = NewDescribeUnBlockStatisRequest()
@@ -1808,7 +2550,11 @@ func NewDescribleL4RulesResponse() (response *DescribleL4RulesResponse) {
     return
 }
 
+// DescribleL4Rules
 // This API is used to get a layer-4 forwarding rule.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribleL4Rules(request *DescribleL4RulesRequest) (response *DescribleL4RulesResponse, err error) {
     if request == nil {
         request = NewDescribleL4RulesRequest()
@@ -1833,7 +2579,11 @@ func NewDescribleL7RulesResponse() (response *DescribleL7RulesResponse) {
     return
 }
 
+// DescribleL7Rules
 // This API is used to get a layer-7 forwarding rule.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribleL7Rules(request *DescribleL7RulesRequest) (response *DescribleL7RulesResponse, err error) {
     if request == nil {
         request = NewDescribleL7RulesRequest()
@@ -1858,7 +2608,11 @@ func NewDescribleRegionCountResponse() (response *DescribleRegionCountResponse) 
     return
 }
 
+// DescribleRegionCount
 // This API is used to get the number of resource instances in a region.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribleRegionCount(request *DescribleRegionCountRequest) (response *DescribleRegionCountResponse, err error) {
     if request == nil {
         request = NewDescribleRegionCountRequest()
@@ -1883,7 +2637,11 @@ func NewModifyCCAlarmThresholdResponse() (response *ModifyCCAlarmThresholdRespon
     return
 }
 
+// ModifyCCAlarmThreshold
 // This API is used to set the alarm notification threshold for CC attacks in Anti-DDoS Pro, Anti-DDoS Advanced, Anti-DDoS Ultimate, and Chess Shield.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyCCAlarmThreshold(request *ModifyCCAlarmThresholdRequest) (response *ModifyCCAlarmThresholdResponse, err error) {
     if request == nil {
         request = NewModifyCCAlarmThresholdRequest()
@@ -1908,7 +2666,11 @@ func NewModifyCCFrequencyRulesResponse() (response *ModifyCCFrequencyRulesRespon
     return
 }
 
+// ModifyCCFrequencyRules
 // This API is used to modify an access frequency control rule for CC protection.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyCCFrequencyRules(request *ModifyCCFrequencyRulesRequest) (response *ModifyCCFrequencyRulesResponse, err error) {
     if request == nil {
         request = NewModifyCCFrequencyRulesRequest()
@@ -1933,7 +2695,11 @@ func NewModifyCCFrequencyRulesStatusResponse() (response *ModifyCCFrequencyRules
     return
 }
 
+// ModifyCCFrequencyRulesStatus
 // This API is used to enable or disable an access frequency control rule for CC protection.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyCCFrequencyRulesStatus(request *ModifyCCFrequencyRulesStatusRequest) (response *ModifyCCFrequencyRulesStatusResponse, err error) {
     if request == nil {
         request = NewModifyCCFrequencyRulesStatusRequest()
@@ -1958,7 +2724,11 @@ func NewModifyCCHostProtectionResponse() (response *ModifyCCHostProtectionRespon
     return
 }
 
+// ModifyCCHostProtection
 // This API is used to enable or disable CC domain name protection.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyCCHostProtection(request *ModifyCCHostProtectionRequest) (response *ModifyCCHostProtectionResponse, err error) {
     if request == nil {
         request = NewModifyCCHostProtectionRequest()
@@ -1983,7 +2753,11 @@ func NewModifyCCIpAllowDenyResponse() (response *ModifyCCIpAllowDenyResponse) {
     return
 }
 
+// ModifyCCIpAllowDeny
 // This API is used to add/remove a CC IP to/from the blocklist/allowlist.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyCCIpAllowDeny(request *ModifyCCIpAllowDenyRequest) (response *ModifyCCIpAllowDenyResponse, err error) {
     if request == nil {
         request = NewModifyCCIpAllowDenyRequest()
@@ -2008,7 +2782,11 @@ func NewModifyCCLevelResponse() (response *ModifyCCLevelResponse) {
     return
 }
 
+// ModifyCCLevel
 // This API is used to modify CC protection level.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyCCLevel(request *ModifyCCLevelRequest) (response *ModifyCCLevelResponse, err error) {
     if request == nil {
         request = NewModifyCCLevelRequest()
@@ -2033,7 +2811,19 @@ func NewModifyCCPolicySwitchResponse() (response *ModifyCCPolicySwitchResponse) 
     return
 }
 
+// ModifyCCPolicySwitch
 // This API is used to enable or disable a custom CC policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyCCPolicySwitch(request *ModifyCCPolicySwitchRequest) (response *ModifyCCPolicySwitchResponse, err error) {
     if request == nil {
         request = NewModifyCCPolicySwitchRequest()
@@ -2058,7 +2848,19 @@ func NewModifyCCSelfDefinePolicyResponse() (response *ModifyCCSelfDefinePolicyRe
     return
 }
 
+// ModifyCCSelfDefinePolicy
 // This API is used to modify a custom CC policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyCCSelfDefinePolicy(request *ModifyCCSelfDefinePolicyRequest) (response *ModifyCCSelfDefinePolicyResponse, err error) {
     if request == nil {
         request = NewModifyCCSelfDefinePolicyRequest()
@@ -2083,7 +2885,11 @@ func NewModifyCCThresholdResponse() (response *ModifyCCThresholdResponse) {
     return
 }
 
+// ModifyCCThreshold
 // This API is used to modify the CC protection threshold.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyCCThreshold(request *ModifyCCThresholdRequest) (response *ModifyCCThresholdResponse, err error) {
     if request == nil {
         request = NewModifyCCThresholdRequest()
@@ -2108,7 +2914,11 @@ func NewModifyCCUrlAllowResponse() (response *ModifyCCUrlAllowResponse) {
     return
 }
 
+// ModifyCCUrlAllow
 // This API is used to add/remove a CC URL to/from the allowlist.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyCCUrlAllow(request *ModifyCCUrlAllowRequest) (response *ModifyCCUrlAllowResponse, err error) {
     if request == nil {
         request = NewModifyCCUrlAllowRequest()
@@ -2133,7 +2943,11 @@ func NewModifyDDoSAIStatusResponse() (response *ModifyDDoSAIStatusResponse) {
     return
 }
 
+// ModifyDDoSAIStatus
 // This API is used to read or modify DDoS AI protection status.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyDDoSAIStatus(request *ModifyDDoSAIStatusRequest) (response *ModifyDDoSAIStatusResponse, err error) {
     if request == nil {
         request = NewModifyDDoSAIStatusRequest()
@@ -2158,7 +2972,11 @@ func NewModifyDDoSAlarmThresholdResponse() (response *ModifyDDoSAlarmThresholdRe
     return
 }
 
+// ModifyDDoSAlarmThreshold
 // This API is used to set the alarm notification threshold for DDoS attacks in Anti-DDoS Pro, Anti-DDoS Advanced, Anti-DDoS Ultimate, and Chess Shield.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyDDoSAlarmThreshold(request *ModifyDDoSAlarmThresholdRequest) (response *ModifyDDoSAlarmThresholdResponse, err error) {
     if request == nil {
         request = NewModifyDDoSAlarmThresholdRequest()
@@ -2183,7 +3001,11 @@ func NewModifyDDoSDefendStatusResponse() (response *ModifyDDoSDefendStatusRespon
     return
 }
 
+// ModifyDDoSDefendStatus
 // This API is used to enable or disable DDoS. It can disable DDoS protection for a period of time, which will be automatically enabled after the period of time elapses.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyDDoSDefendStatus(request *ModifyDDoSDefendStatusRequest) (response *ModifyDDoSDefendStatusResponse, err error) {
     if request == nil {
         request = NewModifyDDoSDefendStatusRequest()
@@ -2208,7 +3030,11 @@ func NewModifyDDoSLevelResponse() (response *ModifyDDoSLevelResponse) {
     return
 }
 
+// ModifyDDoSLevel
 // This API is used to read or modify DDoS protection level.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyDDoSLevel(request *ModifyDDoSLevelRequest) (response *ModifyDDoSLevelResponse, err error) {
     if request == nil {
         request = NewModifyDDoSLevelRequest()
@@ -2233,7 +3059,11 @@ func NewModifyDDoSPolicyResponse() (response *ModifyDDoSPolicyResponse) {
     return
 }
 
+// ModifyDDoSPolicy
 // This API is used to modify an advanced DDoS policy.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyDDoSPolicy(request *ModifyDDoSPolicyRequest) (response *ModifyDDoSPolicyResponse, err error) {
     if request == nil {
         request = NewModifyDDoSPolicyRequest()
@@ -2258,7 +3088,11 @@ func NewModifyDDoSPolicyCaseResponse() (response *ModifyDDoSPolicyCaseResponse) 
     return
 }
 
+// ModifyDDoSPolicyCase
 // This API is used to modify a policy scenario.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyDDoSPolicyCase(request *ModifyDDoSPolicyCaseRequest) (response *ModifyDDoSPolicyCaseResponse, err error) {
     if request == nil {
         request = NewModifyDDoSPolicyCaseRequest()
@@ -2283,7 +3117,11 @@ func NewModifyDDoSPolicyNameResponse() (response *ModifyDDoSPolicyNameResponse) 
     return
 }
 
+// ModifyDDoSPolicyName
 // This API is used to rename an advanced DDoS policy.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyDDoSPolicyName(request *ModifyDDoSPolicyNameRequest) (response *ModifyDDoSPolicyNameResponse, err error) {
     if request == nil {
         request = NewModifyDDoSPolicyNameRequest()
@@ -2308,7 +3146,11 @@ func NewModifyDDoSSwitchResponse() (response *ModifyDDoSSwitchResponse) {
     return
 }
 
+// ModifyDDoSSwitch
 // This API is used to enable or disable DDoS protection, which is only supported for Anti-DDoS Basic.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyDDoSSwitch(request *ModifyDDoSSwitchRequest) (response *ModifyDDoSSwitchResponse, err error) {
     if request == nil {
         request = NewModifyDDoSSwitchRequest()
@@ -2333,7 +3175,11 @@ func NewModifyDDoSThresholdResponse() (response *ModifyDDoSThresholdResponse) {
     return
 }
 
+// ModifyDDoSThreshold
 // This API is used to modify the DDoS cleansing threshold.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyDDoSThreshold(request *ModifyDDoSThresholdRequest) (response *ModifyDDoSThresholdResponse, err error) {
     if request == nil {
         request = NewModifyDDoSThresholdRequest()
@@ -2358,7 +3204,11 @@ func NewModifyDDoSWaterKeyResponse() (response *ModifyDDoSWaterKeyResponse) {
     return
 }
 
+// ModifyDDoSWaterKey
 // This API is used to add, delete, enable, or disable a watermark key.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyDDoSWaterKey(request *ModifyDDoSWaterKeyRequest) (response *ModifyDDoSWaterKeyResponse, err error) {
     if request == nil {
         request = NewModifyDDoSWaterKeyRequest()
@@ -2383,7 +3233,11 @@ func NewModifyElasticLimitResponse() (response *ModifyElasticLimitResponse) {
     return
 }
 
+// ModifyElasticLimit
 // This API is used to modify the elastic protection threshold.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyElasticLimit(request *ModifyElasticLimitRequest) (response *ModifyElasticLimitResponse, err error) {
     if request == nil {
         request = NewModifyElasticLimitRequest()
@@ -2408,7 +3262,11 @@ func NewModifyL4HealthResponse() (response *ModifyL4HealthResponse) {
     return
 }
 
+// ModifyL4Health
 // This API is used to modify the health check parameters of a layer-4 forwarding rule. It is supported for Anti-DDoS Advanced and Anti-DDoS Ultimate.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyL4Health(request *ModifyL4HealthRequest) (response *ModifyL4HealthResponse, err error) {
     if request == nil {
         request = NewModifyL4HealthRequest()
@@ -2433,7 +3291,11 @@ func NewModifyL4KeepTimeResponse() (response *ModifyL4KeepTimeResponse) {
     return
 }
 
+// ModifyL4KeepTime
 // This API is used to modify the session persistence of a layer-4 forwarding rule. It is supported for Anti-DDoS Advanced and Anti-DDoS Ultimate.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyL4KeepTime(request *ModifyL4KeepTimeRequest) (response *ModifyL4KeepTimeResponse, err error) {
     if request == nil {
         request = NewModifyL4KeepTimeRequest()
@@ -2458,7 +3320,11 @@ func NewModifyL4RulesResponse() (response *ModifyL4RulesResponse) {
     return
 }
 
+// ModifyL4Rules
 // This API is used to modify a layer-4 forwarding rule.
+//
+// error code that may be returned:
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyL4Rules(request *ModifyL4RulesRequest) (response *ModifyL4RulesResponse, err error) {
     if request == nil {
         request = NewModifyL4RulesRequest()
@@ -2483,7 +3349,12 @@ func NewModifyL7RulesResponse() (response *ModifyL7RulesResponse) {
     return
 }
 
+// ModifyL7Rules
 // This API is used to modify the layer-7 forwarding rules.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyL7Rules(request *ModifyL7RulesRequest) (response *ModifyL7RulesResponse, err error) {
     if request == nil {
         request = NewModifyL7RulesRequest()
@@ -2508,7 +3379,12 @@ func NewModifyNetReturnSwitchResponse() (response *ModifyNetReturnSwitchResponse
     return
 }
 
+// ModifyNetReturnSwitch
 // This API is used to switch a client to the real server and set the switch duration when the client is under attack or blocked.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyNetReturnSwitch(request *ModifyNetReturnSwitchRequest) (response *ModifyNetReturnSwitchResponse, err error) {
     if request == nil {
         request = NewModifyNetReturnSwitchRequest()
@@ -2533,7 +3409,11 @@ func NewModifyNewDomainRulesResponse() (response *ModifyNewDomainRulesResponse) 
     return
 }
 
+// ModifyNewDomainRules
 // This API is used to modify layer-7 forwarding rules.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) ModifyNewDomainRules(request *ModifyNewDomainRulesRequest) (response *ModifyNewDomainRulesResponse, err error) {
     if request == nil {
         request = NewModifyNewDomainRulesRequest()
@@ -2558,7 +3438,11 @@ func NewModifyNewL4RuleResponse() (response *ModifyNewL4RuleResponse) {
     return
 }
 
+// ModifyNewL4Rule
 // This API is used to modify layer-4 forwarding rules.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) ModifyNewL4Rule(request *ModifyNewL4RuleRequest) (response *ModifyNewL4RuleResponse, err error) {
     if request == nil {
         request = NewModifyNewL4RuleRequest()
@@ -2583,7 +3467,11 @@ func NewModifyResBindDDoSPolicyResponse() (response *ModifyResBindDDoSPolicyResp
     return
 }
 
+// ModifyResBindDDoSPolicy
 // This API is used to bind an advanced DDoS policy to an instance.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) ModifyResBindDDoSPolicy(request *ModifyResBindDDoSPolicyRequest) (response *ModifyResBindDDoSPolicyResponse, err error) {
     if request == nil {
         request = NewModifyResBindDDoSPolicyRequest()
@@ -2608,7 +3496,20 @@ func NewModifyResourceRenewFlagResponse() (response *ModifyResourceRenewFlagResp
     return
 }
 
+// ModifyResourceRenewFlag
 // This API is used to enable or disable auto-renewal for a resource.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyResourceRenewFlag(request *ModifyResourceRenewFlagRequest) (response *ModifyResourceRenewFlagResponse, err error) {
     if request == nil {
         request = NewModifyResourceRenewFlagRequest()

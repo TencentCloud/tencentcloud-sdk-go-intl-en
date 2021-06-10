@@ -58,7 +58,12 @@ func NewDeregisterMigrationTaskResponse() (response *DeregisterMigrationTaskResp
     return
 }
 
+// DeregisterMigrationTask
 // This API is used to cancel the registered migration tasks.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DeregisterMigrationTask(request *DeregisterMigrationTaskRequest) (response *DeregisterMigrationTaskResponse, err error) {
     if request == nil {
         request = NewDeregisterMigrationTaskRequest()
@@ -83,7 +88,11 @@ func NewDescribeMigrationTaskResponse() (response *DescribeMigrationTaskResponse
     return
 }
 
+// DescribeMigrationTask
 // This API is used to obtain the specified migration task details.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMigrationTask(request *DescribeMigrationTaskRequest) (response *DescribeMigrationTaskResponse, err error) {
     if request == nil {
         request = NewDescribeMigrationTaskRequest()
@@ -108,7 +117,11 @@ func NewListMigrationProjectResponse() (response *ListMigrationProjectResponse) 
     return
 }
 
+// ListMigrationProject
 // This API is used to obtain the list of migration project names.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) ListMigrationProject(request *ListMigrationProjectRequest) (response *ListMigrationProjectResponse, err error) {
     if request == nil {
         request = NewListMigrationProjectRequest()
@@ -133,7 +146,11 @@ func NewListMigrationTaskResponse() (response *ListMigrationTaskResponse) {
     return
 }
 
+// ListMigrationTask
 // This API is used to obtain migration task list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) ListMigrationTask(request *ListMigrationTaskRequest) (response *ListMigrationTaskResponse, err error) {
     if request == nil {
         request = NewListMigrationTaskRequest()
@@ -158,7 +175,12 @@ func NewModifyMigrationTaskBelongToProjectResponse() (response *ModifyMigrationT
     return
 }
 
+// ModifyMigrationTaskBelongToProject
 // This API is used to modify the project of a migration task.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyMigrationTaskBelongToProject(request *ModifyMigrationTaskBelongToProjectRequest) (response *ModifyMigrationTaskBelongToProjectResponse, err error) {
     if request == nil {
         request = NewModifyMigrationTaskBelongToProjectRequest()
@@ -183,7 +205,11 @@ func NewModifyMigrationTaskStatusResponse() (response *ModifyMigrationTaskStatus
     return
 }
 
+// ModifyMigrationTaskStatus
 // This API is used to update the migration task status.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) ModifyMigrationTaskStatus(request *ModifyMigrationTaskStatusRequest) (response *ModifyMigrationTaskStatusResponse, err error) {
     if request == nil {
         request = NewModifyMigrationTaskStatusRequest()
@@ -208,7 +234,12 @@ func NewRegisterMigrationTaskResponse() (response *RegisterMigrationTaskResponse
     return
 }
 
+// RegisterMigrationTask
 // This API is used to register a migration task.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) RegisterMigrationTask(request *RegisterMigrationTaskRequest) (response *RegisterMigrationTaskResponse, err error) {
     if request == nil {
         request = NewRegisterMigrationTaskRequest()

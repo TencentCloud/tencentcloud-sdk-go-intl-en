@@ -58,7 +58,32 @@ func NewAssumeRoleResponse() (response *AssumeRoleResponse) {
     return
 }
 
+// AssumeRole
 // This API is used to request for the temporary security credentials of a role.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ENCRYPTERROR = "InternalError.EncryptError"
+//  INTERNALERROR_GETAPPIDERROR = "InternalError.GetAppIdError"
+//  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
+//  INTERNALERROR_GETSEEDTOKENERROR = "InternalError.GetSeedTokenError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INTERNALERROR_PBSERIALIZEERROR = "InternalError.PbSerializeError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_ACCOUNTNOTAVALIABLE = "InvalidParameter.AccountNotAvaliable"
+//  INVALIDPARAMETER_EXTENDSTRATEGYOVERSIZE = "InvalidParameter.ExtendStrategyOverSize"
+//  INVALIDPARAMETER_GRANTOTHERRESOURCE = "InvalidParameter.GrantOtherResource"
+//  INVALIDPARAMETER_OVERLIMIT = "InvalidParameter.OverLimit"
+//  INVALIDPARAMETER_OVERTIMEERROR = "InvalidParameter.OverTimeError"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYTOOLONG = "InvalidParameter.PolicyTooLong"
+//  INVALIDPARAMETER_RESOUCEERROR = "InvalidParameter.ResouceError"
+//  INVALIDPARAMETER_STRATEGYFORMATERROR = "InvalidParameter.StrategyFormatError"
+//  INVALIDPARAMETER_STRATEGYINVALID = "InvalidParameter.StrategyInvalid"
+//  INVALIDPARAMETER_TEMPCODENOTAVALIABLE = "InvalidParameter.TempCodeNotAvaliable"
+//  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) AssumeRole(request *AssumeRoleRequest) (response *AssumeRoleResponse, err error) {
     if request == nil {
         request = NewAssumeRoleRequest()
@@ -83,7 +108,31 @@ func NewAssumeRoleWithSAMLResponse() (response *AssumeRoleWithSAMLResponse) {
     return
 }
 
+// AssumeRoleWithSAML
 // This API is used to request for the temporary credentials for a role that has been authenticated via a SAML assertion.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ENCRYPTERROR = "InternalError.EncryptError"
+//  INTERNALERROR_GETAPPIDERROR = "InternalError.GetAppIdError"
+//  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
+//  INTERNALERROR_GETSEEDTOKENERROR = "InternalError.GetSeedTokenError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INTERNALERROR_PBSERIALIZEERROR = "InternalError.PbSerializeError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_ACCOUNTNOTAVALIABLE = "InvalidParameter.AccountNotAvaliable"
+//  INVALIDPARAMETER_EXTENDSTRATEGYOVERSIZE = "InvalidParameter.ExtendStrategyOverSize"
+//  INVALIDPARAMETER_GRANTOTHERRESOURCE = "InvalidParameter.GrantOtherResource"
+//  INVALIDPARAMETER_OVERTIMEERROR = "InvalidParameter.OverTimeError"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYTOOLONG = "InvalidParameter.PolicyTooLong"
+//  INVALIDPARAMETER_RESOUCEERROR = "InvalidParameter.ResouceError"
+//  INVALIDPARAMETER_STRATEGYFORMATERROR = "InvalidParameter.StrategyFormatError"
+//  INVALIDPARAMETER_STRATEGYINVALID = "InvalidParameter.StrategyInvalid"
+//  INVALIDPARAMETER_TEMPCODENOTAVALIABLE = "InvalidParameter.TempCodeNotAvaliable"
+//  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) AssumeRoleWithSAML(request *AssumeRoleWithSAMLRequest) (response *AssumeRoleWithSAMLResponse, err error) {
     if request == nil {
         request = NewAssumeRoleWithSAMLRequest()
@@ -108,7 +157,27 @@ func NewGetFederationTokenResponse() (response *GetFederationTokenResponse) {
     return
 }
 
+// GetFederationToken
 // This API is used to get temporary credentials for a federated user.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ENCRYPTERROR = "InternalError.EncryptError"
+//  INTERNALERROR_GETAPPIDERROR = "InternalError.GetAppIdError"
+//  INTERNALERROR_GETSEEDTOKENERROR = "InternalError.GetSeedTokenError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_ACCOUNTNOTAVALIABLE = "InvalidParameter.AccountNotAvaliable"
+//  INVALIDPARAMETER_EXTENDSTRATEGYOVERSIZE = "InvalidParameter.ExtendStrategyOverSize"
+//  INVALIDPARAMETER_GRANTOTHERRESOURCE = "InvalidParameter.GrantOtherResource"
+//  INVALIDPARAMETER_OVERTIMEERROR = "InvalidParameter.OverTimeError"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYTOOLONG = "InvalidParameter.PolicyTooLong"
+//  INVALIDPARAMETER_RESOUCEERROR = "InvalidParameter.ResouceError"
+//  INVALIDPARAMETER_STRATEGYFORMATERROR = "InvalidParameter.StrategyFormatError"
+//  INVALIDPARAMETER_STRATEGYINVALID = "InvalidParameter.StrategyInvalid"
+//  INVALIDPARAMETER_TEMPCODENOTAVALIABLE = "InvalidParameter.TempCodeNotAvaliable"
+//  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetFederationToken(request *GetFederationTokenRequest) (response *GetFederationTokenResponse, err error) {
     if request == nil {
         request = NewGetFederationTokenRequest()

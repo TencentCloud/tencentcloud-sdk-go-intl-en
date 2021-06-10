@@ -92,7 +92,7 @@ func (r *CreateMediaConnectFlowRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMediaConnectFlowRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -125,7 +125,7 @@ func (r *CreateMediaConnectFlowResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMediaConnectFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -146,7 +146,7 @@ func (r *CreateMediaConnectOutputRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMediaConnectOutputRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -178,7 +178,7 @@ func (r *CreateMediaConnectOutputResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMediaConnectOutputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -295,7 +295,7 @@ func (r *DeleteMediaConnectFlowRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteMediaConnectFlowRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -323,7 +323,7 @@ func (r *DeleteMediaConnectFlowResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteMediaConnectFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -344,7 +344,7 @@ func (r *DeleteMediaConnectOutputRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteMediaConnectOutputRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -373,7 +373,7 @@ func (r *DeleteMediaConnectOutputResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteMediaConnectOutputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -479,7 +479,7 @@ func (r *DescribeMediaConnectFlowRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMediaConnectFlowRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -510,7 +510,7 @@ func (r *DescribeMediaConnectFlowResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMediaConnectFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -531,7 +531,7 @@ func (r *DescribeMediaConnectFlowsRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMediaConnectFlowsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -575,7 +575,7 @@ func (r *DescribeMediaConnectFlowsResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMediaConnectFlowsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -729,7 +729,7 @@ func (r *ModifyMediaConnectFlowRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaConnectFlowRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -758,7 +758,7 @@ func (r *ModifyMediaConnectFlowResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaConnectFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -779,7 +779,7 @@ func (r *ModifyMediaConnectInputRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaConnectInputRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -811,7 +811,7 @@ func (r *ModifyMediaConnectInputResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaConnectInputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -832,7 +832,7 @@ func (r *ModifyMediaConnectOutputRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaConnectOutputRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -864,7 +864,7 @@ func (r *ModifyMediaConnectOutputResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaConnectOutputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -939,7 +939,7 @@ func (r *StartMediaConnectFlowRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StartMediaConnectFlowRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -967,7 +967,7 @@ func (r *StartMediaConnectFlowResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StartMediaConnectFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -985,7 +985,7 @@ func (r *StopMediaConnectFlowRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StopMediaConnectFlowRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -1013,7 +1013,7 @@ func (r *StopMediaConnectFlowResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StopMediaConnectFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)

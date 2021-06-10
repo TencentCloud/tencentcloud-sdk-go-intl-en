@@ -74,7 +74,7 @@ func (r *CreateTranscodeRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateTranscodeRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -110,7 +110,7 @@ func (r *CreateTranscodeResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateTranscodeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -137,7 +137,7 @@ func (r *DescribeOnlineRecordCallbackRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeOnlineRecordCallbackRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -171,7 +171,7 @@ func (r *DescribeOnlineRecordCallbackResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeOnlineRecordCallbackResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -192,7 +192,7 @@ func (r *DescribeOnlineRecordRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeOnlineRecordRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -265,7 +265,7 @@ func (r *DescribeOnlineRecordResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeOnlineRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -283,7 +283,7 @@ func (r *DescribeTranscodeCallbackRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTranscodeCallbackRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -317,7 +317,7 @@ func (r *DescribeTranscodeCallbackResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTranscodeCallbackResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -338,7 +338,7 @@ func (r *DescribeTranscodeRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTranscodeRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -406,7 +406,7 @@ func (r *DescribeTranscodeResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTranscodeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -480,7 +480,7 @@ func (r *PauseOnlineRecordRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *PauseOnlineRecordRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -509,7 +509,7 @@ func (r *PauseOnlineRecordResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *PauseOnlineRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -563,7 +563,7 @@ func (r *ResumeOnlineRecordRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ResumeOnlineRecordRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -592,7 +592,7 @@ func (r *ResumeOnlineRecordResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ResumeOnlineRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -613,7 +613,7 @@ func (r *SetOnlineRecordCallbackKeyRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SetOnlineRecordCallbackKeyRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -642,7 +642,7 @@ func (r *SetOnlineRecordCallbackKeyResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SetOnlineRecordCallbackKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -663,7 +663,7 @@ func (r *SetOnlineRecordCallbackRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SetOnlineRecordCallbackRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -692,7 +692,7 @@ func (r *SetOnlineRecordCallbackResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SetOnlineRecordCallbackResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -713,7 +713,7 @@ func (r *SetTranscodeCallbackKeyRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SetTranscodeCallbackKeyRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -742,7 +742,7 @@ func (r *SetTranscodeCallbackKeyResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SetTranscodeCallbackKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -764,7 +764,7 @@ func (r *SetTranscodeCallbackRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SetTranscodeCallbackRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -793,7 +793,7 @@ func (r *SetTranscodeCallbackResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SetTranscodeCallbackResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -847,7 +847,7 @@ func (r *StartOnlineRecordRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StartOnlineRecordRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -888,7 +888,7 @@ func (r *StartOnlineRecordResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StartOnlineRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -909,7 +909,7 @@ func (r *StopOnlineRecordRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StopOnlineRecordRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -938,7 +938,7 @@ func (r *StopOnlineRecordResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StopOnlineRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)

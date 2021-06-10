@@ -58,7 +58,16 @@ func NewCreateMediaConnectFlowResponse() (response *CreateMediaConnectFlowRespon
     return
 }
 
+// CreateMediaConnectFlow
 // This API is used to create the configuration of a MediaConnect flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_INPUT = "InvalidParameter.Input"
+//  INVALIDPARAMETER_MAXBANDWIDTH = "InvalidParameter.MaxBandwidth"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 func (c *Client) CreateMediaConnectFlow(request *CreateMediaConnectFlowRequest) (response *CreateMediaConnectFlowResponse, err error) {
     if request == nil {
         request = NewCreateMediaConnectFlowRequest()
@@ -83,7 +92,16 @@ func NewCreateMediaConnectOutputResponse() (response *CreateMediaConnectOutputRe
     return
 }
 
+// CreateMediaConnectOutput
 // This API is used to create the output information of a MediaConnect flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_OUTPUT = "InvalidParameter.Output"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) CreateMediaConnectOutput(request *CreateMediaConnectOutputRequest) (response *CreateMediaConnectOutputResponse, err error) {
     if request == nil {
         request = NewCreateMediaConnectOutputRequest()
@@ -108,7 +126,12 @@ func NewDeleteMediaConnectFlowResponse() (response *DeleteMediaConnectFlowRespon
     return
 }
 
+// DeleteMediaConnectFlow
 // This API is used to delete the configuration of a MediaConnect flow.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) DeleteMediaConnectFlow(request *DeleteMediaConnectFlowRequest) (response *DeleteMediaConnectFlowResponse, err error) {
     if request == nil {
         request = NewDeleteMediaConnectFlowRequest()
@@ -133,7 +156,14 @@ func NewDeleteMediaConnectOutputResponse() (response *DeleteMediaConnectOutputRe
     return
 }
 
+// DeleteMediaConnectOutput
 // This API is used to delete the output configuration of a MediaConnect flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) DeleteMediaConnectOutput(request *DeleteMediaConnectOutputRequest) (response *DeleteMediaConnectOutputResponse, err error) {
     if request == nil {
         request = NewDeleteMediaConnectOutputRequest()
@@ -158,7 +188,12 @@ func NewDescribeMediaConnectFlowResponse() (response *DescribeMediaConnectFlowRe
     return
 }
 
+// DescribeMediaConnectFlow
 // This API is used to query the configuration information of a MediaConnect flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 func (c *Client) DescribeMediaConnectFlow(request *DescribeMediaConnectFlowRequest) (response *DescribeMediaConnectFlowResponse, err error) {
     if request == nil {
         request = NewDescribeMediaConnectFlowRequest()
@@ -183,7 +218,14 @@ func NewDescribeMediaConnectFlowsResponse() (response *DescribeMediaConnectFlows
     return
 }
 
+// DescribeMediaConnectFlows
 // This API is used to query the configuration information of multiple MediaConnect flows in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
 func (c *Client) DescribeMediaConnectFlows(request *DescribeMediaConnectFlowsRequest) (response *DescribeMediaConnectFlowsResponse, err error) {
     if request == nil {
         request = NewDescribeMediaConnectFlowsRequest()
@@ -208,7 +250,14 @@ func NewModifyMediaConnectFlowResponse() (response *ModifyMediaConnectFlowRespon
     return
 }
 
+// ModifyMediaConnectFlow
 // This API is used to modify the configuration information of a MediaConnect flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) ModifyMediaConnectFlow(request *ModifyMediaConnectFlowRequest) (response *ModifyMediaConnectFlowResponse, err error) {
     if request == nil {
         request = NewModifyMediaConnectFlowRequest()
@@ -233,7 +282,14 @@ func NewModifyMediaConnectInputResponse() (response *ModifyMediaConnectInputResp
     return
 }
 
+// ModifyMediaConnectInput
 // This API is used to modify the input information of a MediaConnect flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUT = "InvalidParameter.Input"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) ModifyMediaConnectInput(request *ModifyMediaConnectInputRequest) (response *ModifyMediaConnectInputResponse, err error) {
     if request == nil {
         request = NewModifyMediaConnectInputRequest()
@@ -258,7 +314,15 @@ func NewModifyMediaConnectOutputResponse() (response *ModifyMediaConnectOutputRe
     return
 }
 
+// ModifyMediaConnectOutput
 // This API is used to modify the output configuration of a MediaConnect flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_OUTPUT = "InvalidParameter.Output"
+//  INVALIDPARAMETER_OUTPUTID = "InvalidParameter.OutputId"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) ModifyMediaConnectOutput(request *ModifyMediaConnectOutputRequest) (response *ModifyMediaConnectOutputResponse, err error) {
     if request == nil {
         request = NewModifyMediaConnectOutputRequest()
@@ -283,7 +347,14 @@ func NewStartMediaConnectFlowResponse() (response *StartMediaConnectFlowResponse
     return
 }
 
+// StartMediaConnectFlow
 // This API is used to start a MediaConnect flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) StartMediaConnectFlow(request *StartMediaConnectFlowRequest) (response *StartMediaConnectFlowResponse, err error) {
     if request == nil {
         request = NewStartMediaConnectFlowRequest()
@@ -308,7 +379,13 @@ func NewStopMediaConnectFlowResponse() (response *StopMediaConnectFlowResponse) 
     return
 }
 
+// StopMediaConnectFlow
 // This API is used to stop a MediaConnect flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) StopMediaConnectFlow(request *StopMediaConnectFlowRequest) (response *StopMediaConnectFlowResponse, err error) {
     if request == nil {
         request = NewStopMediaConnectFlowRequest()

@@ -58,7 +58,16 @@ func NewClearTablesResponse() (response *ClearTablesResponse) {
     return
 }
 
+// ClearTables
 // This API is used to clear table data based on the specified table information.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ClearTables(request *ClearTablesRequest) (response *ClearTablesResponse, err error) {
     if request == nil {
         request = NewClearTablesRequest()
@@ -83,7 +92,15 @@ func NewCompareIdlFilesResponse() (response *CompareIdlFilesResponse) {
     return
 }
 
+// CompareIdlFiles
 // This API is used to select a target table, upload and verify the table modification file, and return the result of whether the table structure is allowed to be modified.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CompareIdlFiles(request *CompareIdlFilesRequest) (response *CompareIdlFilesResponse, err error) {
     if request == nil {
         request = NewCompareIdlFilesRequest()
@@ -108,7 +125,15 @@ func NewCreateBackupResponse() (response *CreateBackupResponse) {
     return
 }
 
+// CreateBackup
 // This API is used to create a backup task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateBackup(request *CreateBackupRequest) (response *CreateBackupResponse, err error) {
     if request == nil {
         request = NewCreateBackupRequest()
@@ -133,7 +158,19 @@ func NewCreateClusterResponse() (response *CreateClusterResponse) {
     return
 }
 
+// CreateCluster
 // This API is used to create a TcaplusDB cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_INVALIDCLUSTERNAME = "InvalidParameterValue.InvalidClusterName"
+//  INVALIDPARAMETERVALUE_UNSUPPORTIDLTYPE = "InvalidParameterValue.UnsupportIdlType"
+//  RESOURCEINSUFFICIENT_BALANCEERROR = "ResourceInsufficient.BalanceError"
+//  RESOURCEINSUFFICIENT_NOAVAILABLECLUSTER = "ResourceInsufficient.NoAvailableCluster"
+//  RESOURCEINSUFFICIENT_NOENOUGHVIPINVPC = "ResourceInsufficient.NoEnoughVipInVPC"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_DUPLICATECLUSTERNAME = "ResourceUnavailable.DuplicateClusterName"
 func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
     if request == nil {
         request = NewCreateClusterRequest()
@@ -158,7 +195,19 @@ func NewCreateSnapshotsResponse() (response *CreateSnapshotsResponse) {
     return
 }
 
+// CreateSnapshots
 // This API is used to create one or more table snapshots at a specified past time point.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateSnapshots(request *CreateSnapshotsRequest) (response *CreateSnapshotsResponse, err error) {
     if request == nil {
         request = NewCreateSnapshotsRequest()
@@ -183,7 +232,16 @@ func NewCreateTableGroupResponse() (response *CreateTableGroupResponse) {
     return
 }
 
+// CreateTableGroup
 // This API is used to create a table group in a TcaplusDB cluster.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_INVALIDTABLEGROUPNAME = "InvalidParameterValue.InvalidTableGroupName"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_DUPLICATETABLEGROUPINFO = "ResourceUnavailable.DuplicateTableGroupInfo"
+//  RESOURCEUNAVAILABLE_DUPLICATETABLEGROUPNAME = "ResourceUnavailable.DuplicateTableGroupName"
+//  RESOURCEUNAVAILABLE_NOAVAILABLETABLEGROUP = "ResourceUnavailable.NoAvailableTableGroup"
 func (c *Client) CreateTableGroup(request *CreateTableGroupRequest) (response *CreateTableGroupResponse, err error) {
     if request == nil {
         request = NewCreateTableGroupRequest()
@@ -208,7 +266,19 @@ func NewCreateTablesResponse() (response *CreateTablesResponse) {
     return
 }
 
+// CreateTables
 // This API is used to create tables in batches based on the selected IDL file list.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT_BALANCEERROR = "ResourceInsufficient.BalanceError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateTables(request *CreateTablesRequest) (response *CreateTablesResponse, err error) {
     if request == nil {
         request = NewCreateTablesRequest()
@@ -233,7 +303,14 @@ func NewDeleteClusterResponse() (response *DeleteClusterResponse) {
     return
 }
 
+// DeleteCluster
 // This API is used to delete a TcaplusDB cluster, which will succeed only after all resources (including table groups and tables) in the cluster are released.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteCluster(request *DeleteClusterRequest) (response *DeleteClusterResponse, err error) {
     if request == nil {
         request = NewDeleteClusterRequest()
@@ -258,7 +335,17 @@ func NewDeleteIdlFilesResponse() (response *DeleteIdlFilesResponse) {
     return
 }
 
+// DeleteIdlFiles
 // This API is used to delete a target IDL file by specifying the cluster ID and information of the file to be deleted. If the file is associated with a table, deletion will fail.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteIdlFiles(request *DeleteIdlFilesRequest) (response *DeleteIdlFilesResponse, err error) {
     if request == nil {
         request = NewDeleteIdlFilesRequest()
@@ -283,7 +370,19 @@ func NewDeleteSnapshotsResponse() (response *DeleteSnapshotsResponse) {
     return
 }
 
+// DeleteSnapshots
 // This API is used to delete one or more table snapshots.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteSnapshots(request *DeleteSnapshotsRequest) (response *DeleteSnapshotsResponse, err error) {
     if request == nil {
         request = NewDeleteSnapshotsRequest()
@@ -308,7 +407,13 @@ func NewDeleteTableGroupResponse() (response *DeleteTableGroupResponse) {
     return
 }
 
+// DeleteTableGroup
 // This API is used to delete a table group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteTableGroup(request *DeleteTableGroupRequest) (response *DeleteTableGroupResponse, err error) {
     if request == nil {
         request = NewDeleteTableGroupRequest()
@@ -333,7 +438,16 @@ func NewDeleteTableIndexResponse() (response *DeleteTableIndexResponse) {
     return
 }
 
+// DeleteTableIndex
 // This API is used to delete the global index from a table.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteTableIndex(request *DeleteTableIndexRequest) (response *DeleteTableIndexResponse, err error) {
     if request == nil {
         request = NewDeleteTableIndexRequest()
@@ -358,7 +472,16 @@ func NewDeleteTablesResponse() (response *DeleteTablesResponse) {
     return
 }
 
+// DeleteTables
 // This API is used to drop a specified table. Calling this API for the first time means to move the table to the recycle bin, while calling it again means to drop the table completely from the recycle bin.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteTables(request *DeleteTablesRequest) (response *DeleteTablesResponse, err error) {
     if request == nil {
         request = NewDeleteTablesRequest()
@@ -383,7 +506,16 @@ func NewDescribeApplicationsResponse() (response *DescribeApplicationsResponse) 
     return
 }
 
+// DescribeApplications
 // This API is used to query the list of cluster operation applications.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeApplications(request *DescribeApplicationsRequest) (response *DescribeApplicationsResponse, err error) {
     if request == nil {
         request = NewDescribeApplicationsRequest()
@@ -408,7 +540,15 @@ func NewDescribeClusterTagsResponse() (response *DescribeClusterTagsResponse) {
     return
 }
 
+// DescribeClusterTags
 // This API is used to get the associated tag list of a cluster.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeClusterTags(request *DescribeClusterTagsRequest) (response *DescribeClusterTagsResponse, err error) {
     if request == nil {
         request = NewDescribeClusterTagsRequest()
@@ -433,7 +573,14 @@ func NewDescribeClustersResponse() (response *DescribeClustersResponse) {
     return
 }
 
+// DescribeClusters
 // This API is used to query the TcaplusDB cluster list, including cluster details.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeClusters(request *DescribeClustersRequest) (response *DescribeClustersResponse, err error) {
     if request == nil {
         request = NewDescribeClustersRequest()
@@ -458,7 +605,14 @@ func NewDescribeIdlFileInfosResponse() (response *DescribeIdlFileInfosResponse) 
     return
 }
 
+// DescribeIdlFileInfos
 // This API is used to query table description file details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeIdlFileInfos(request *DescribeIdlFileInfosRequest) (response *DescribeIdlFileInfosResponse, err error) {
     if request == nil {
         request = NewDescribeIdlFileInfosRequest()
@@ -483,7 +637,14 @@ func NewDescribeMachineResponse() (response *DescribeMachineResponse) {
     return
 }
 
+// DescribeMachine
 // This API is used to query the available machines in a dedicated cluster.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMachine(request *DescribeMachineRequest) (response *DescribeMachineResponse, err error) {
     if request == nil {
         request = NewDescribeMachineRequest()
@@ -508,7 +669,11 @@ func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
     return
 }
 
+// DescribeRegions
 // This API is used to query the list of regions supported by the TcaplusDB service.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *DescribeRegionsResponse, err error) {
     if request == nil {
         request = NewDescribeRegionsRequest()
@@ -533,7 +698,18 @@ func NewDescribeSnapshotsResponse() (response *DescribeSnapshotsResponse) {
     return
 }
 
+// DescribeSnapshots
 // This API is used to query the list of table snapshots.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPNAME = "InvalidParameterValue.InvalidAppName"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 func (c *Client) DescribeSnapshots(request *DescribeSnapshotsRequest) (response *DescribeSnapshotsResponse, err error) {
     if request == nil {
         request = NewDescribeSnapshotsRequest()
@@ -558,7 +734,15 @@ func NewDescribeTableGroupTagsResponse() (response *DescribeTableGroupTagsRespon
     return
 }
 
+// DescribeTableGroupTags
 // This API is used to get the associated tag list of a table group.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeTableGroupTags(request *DescribeTableGroupTagsRequest) (response *DescribeTableGroupTagsResponse, err error) {
     if request == nil {
         request = NewDescribeTableGroupTagsRequest()
@@ -583,7 +767,16 @@ func NewDescribeTableGroupsResponse() (response *DescribeTableGroupsResponse) {
     return
 }
 
+// DescribeTableGroups
 // This API is used to query the table group list.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeTableGroups(request *DescribeTableGroupsRequest) (response *DescribeTableGroupsResponse, err error) {
     if request == nil {
         request = NewDescribeTableGroupsRequest()
@@ -608,7 +801,15 @@ func NewDescribeTableTagsResponse() (response *DescribeTableTagsResponse) {
     return
 }
 
+// DescribeTableTags
 // This API is used to get table tags.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeTableTags(request *DescribeTableTagsRequest) (response *DescribeTableTagsResponse, err error) {
     if request == nil {
         request = NewDescribeTableTagsRequest()
@@ -633,7 +834,16 @@ func NewDescribeTablesResponse() (response *DescribeTablesResponse) {
     return
 }
 
+// DescribeTables
 // This API is used to query table details.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeTables(request *DescribeTablesRequest) (response *DescribeTablesResponse, err error) {
     if request == nil {
         request = NewDescribeTablesRequest()
@@ -658,7 +868,15 @@ func NewDescribeTablesInRecycleResponse() (response *DescribeTablesInRecycleResp
     return
 }
 
+// DescribeTablesInRecycle
 // This API is used to query the details of a table in recycle bin.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeTablesInRecycle(request *DescribeTablesInRecycleRequest) (response *DescribeTablesInRecycleResponse, err error) {
     if request == nil {
         request = NewDescribeTablesInRecycleRequest()
@@ -683,7 +901,12 @@ func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
     return
 }
 
+// DescribeTasks
 // This API is used to query the task list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *DescribeTasksResponse, err error) {
     if request == nil {
         request = NewDescribeTasksRequest()
@@ -708,7 +931,11 @@ func NewDescribeUinInWhitelistResponse() (response *DescribeUinInWhitelistRespon
     return
 }
 
+// DescribeUinInWhitelist
 // This API is used to query whether the current user is in the allowlist and control whether the user can create TDR-type apps or tables.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeUinInWhitelist(request *DescribeUinInWhitelistRequest) (response *DescribeUinInWhitelistResponse, err error) {
     if request == nil {
         request = NewDescribeUinInWhitelistRequest()
@@ -733,7 +960,15 @@ func NewDisableRestProxyResponse() (response *DisableRestProxyResponse) {
     return
 }
 
+// DisableRestProxy
 // This API is used to disable the RESTful API.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DisableRestProxy(request *DisableRestProxyRequest) (response *DisableRestProxyResponse, err error) {
     if request == nil {
         request = NewDisableRestProxyRequest()
@@ -758,7 +993,15 @@ func NewEnableRestProxyResponse() (response *EnableRestProxyResponse) {
     return
 }
 
+// EnableRestProxy
 // This API is used to enable the RESTful API.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) EnableRestProxy(request *EnableRestProxyRequest) (response *EnableRestProxyResponse, err error) {
     if request == nil {
         request = NewEnableRestProxyRequest()
@@ -783,7 +1026,20 @@ func NewImportSnapshotsResponse() (response *ImportSnapshotsResponse) {
     return
 }
 
+// ImportSnapshots
 // This API is used to import a snapshot into a new table or the original table from which the snapshot was created.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT_BALANCEERROR = "ResourceInsufficient.BalanceError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ImportSnapshots(request *ImportSnapshotsRequest) (response *ImportSnapshotsResponse, err error) {
     if request == nil {
         request = NewImportSnapshotsRequest()
@@ -808,7 +1064,19 @@ func NewMergeTablesDataResponse() (response *MergeTablesDataResponse) {
     return
 }
 
+// MergeTablesData
 // This API is used to merge tables.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) MergeTablesData(request *MergeTablesDataRequest) (response *MergeTablesDataResponse, err error) {
     if request == nil {
         request = NewMergeTablesDataRequest()
@@ -833,7 +1101,19 @@ func NewModifyCensorshipResponse() (response *ModifyCensorshipResponse) {
     return
 }
 
+// ModifyCensorship
 // This API is used to enable or disable the cluster operation approval feature.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDCLUSTERNAME = "InvalidParameterValue.InvalidClusterName"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyCensorship(request *ModifyCensorshipRequest) (response *ModifyCensorshipResponse, err error) {
     if request == nil {
         request = NewModifyCensorshipRequest()
@@ -858,7 +1138,16 @@ func NewModifyClusterMachineResponse() (response *ModifyClusterMachineResponse) 
     return
 }
 
+// ModifyClusterMachine
 // This API is used to modify the machines of a dedicated cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_NOAVAILABLEAPP = "ResourceInsufficient.NoAvailableApp"
+//  RESOURCEINSUFFICIENT_NOAVAILABLECLUSTER = "ResourceInsufficient.NoAvailableCluster"
 func (c *Client) ModifyClusterMachine(request *ModifyClusterMachineRequest) (response *ModifyClusterMachineResponse, err error) {
     if request == nil {
         request = NewModifyClusterMachineRequest()
@@ -883,7 +1172,17 @@ func NewModifyClusterNameResponse() (response *ModifyClusterNameResponse) {
     return
 }
 
+// ModifyClusterName
 // This API is used to rename a specified cluster.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_INVALIDCLUSTERNAME = "InvalidParameterValue.InvalidClusterName"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_DUPLICATECLUSTERNAME = "ResourceUnavailable.DuplicateClusterName"
 func (c *Client) ModifyClusterName(request *ModifyClusterNameRequest) (response *ModifyClusterNameResponse, err error) {
     if request == nil {
         request = NewModifyClusterNameRequest()
@@ -908,7 +1207,18 @@ func NewModifyClusterPasswordResponse() (response *ModifyClusterPasswordResponse
     return
 }
 
+// ModifyClusterPassword
 // This API is used to change the password of a specified cluster. The backend will allow the TcaplusDB SDK to access databases with both old and new passwords before the old password expires. You cannot submit a new password change request before the old password expires or submit a request to modify the expiration time of the old password after the old password expires.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OLDPASSWORDHASEXPIRED = "FailedOperation.OldPasswordHasExpired"
+//  FAILEDOPERATION_OLDPASSWORDINUSE = "FailedOperation.OldPasswordInUse"
+//  FAILEDOPERATION_PASSWORDFAILURE = "FailedOperation.PasswordFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDTIMEVALUE = "InvalidParameterValue.InvalidTimeValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyClusterPassword(request *ModifyClusterPasswordRequest) (response *ModifyClusterPasswordResponse, err error) {
     if request == nil {
         request = NewModifyClusterPasswordRequest()
@@ -933,7 +1243,16 @@ func NewModifyClusterTagsResponse() (response *ModifyClusterTagsResponse) {
     return
 }
 
+// ModifyClusterTags
 // This API is used to modify cluster tags.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyClusterTags(request *ModifyClusterTagsRequest) (response *ModifyClusterTagsResponse, err error) {
     if request == nil {
         request = NewModifyClusterTagsRequest()
@@ -958,7 +1277,19 @@ func NewModifySnapshotsResponse() (response *ModifySnapshotsResponse) {
     return
 }
 
+// ModifySnapshots
 // This API is used to modify the expiration time of one or more table snapshots.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifySnapshots(request *ModifySnapshotsRequest) (response *ModifySnapshotsResponse, err error) {
     if request == nil {
         request = NewModifySnapshotsRequest()
@@ -983,7 +1314,15 @@ func NewModifyTableGroupNameResponse() (response *ModifyTableGroupNameResponse) 
     return
 }
 
+// ModifyTableGroupName
 // This API is used to rename a TcaplusDB table group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_INVALIDTABLEGROUPNAME = "InvalidParameterValue.InvalidTableGroupName"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_DUPLICATETABLEGROUPNAME = "ResourceUnavailable.DuplicateTableGroupName"
 func (c *Client) ModifyTableGroupName(request *ModifyTableGroupNameRequest) (response *ModifyTableGroupNameResponse, err error) {
     if request == nil {
         request = NewModifyTableGroupNameRequest()
@@ -1008,7 +1347,16 @@ func NewModifyTableGroupTagsResponse() (response *ModifyTableGroupTagsResponse) 
     return
 }
 
+// ModifyTableGroupTags
 // This API is used to modify table group tags.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyTableGroupTags(request *ModifyTableGroupTagsRequest) (response *ModifyTableGroupTagsResponse, err error) {
     if request == nil {
         request = NewModifyTableGroupTagsRequest()
@@ -1033,7 +1381,16 @@ func NewModifyTableMemosResponse() (response *ModifyTableMemosResponse) {
     return
 }
 
+// ModifyTableMemos
 // This API is used to modify table remarks.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyTableMemos(request *ModifyTableMemosRequest) (response *ModifyTableMemosResponse, err error) {
     if request == nil {
         request = NewModifyTableMemosRequest()
@@ -1058,7 +1415,17 @@ func NewModifyTableQuotasResponse() (response *ModifyTableQuotasResponse) {
     return
 }
 
+// ModifyTableQuotas
 // This API is used to scale a table.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT_BALANCEERROR = "ResourceInsufficient.BalanceError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyTableQuotas(request *ModifyTableQuotasRequest) (response *ModifyTableQuotasResponse, err error) {
     if request == nil {
         request = NewModifyTableQuotasRequest()
@@ -1083,7 +1450,17 @@ func NewModifyTableTagsResponse() (response *ModifyTableTagsResponse) {
     return
 }
 
+// ModifyTableTags
 // This API is used to modify table tags.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyTableTags(request *ModifyTableTagsRequest) (response *ModifyTableTagsResponse, err error) {
     if request == nil {
         request = NewModifyTableTagsRequest()
@@ -1108,7 +1485,17 @@ func NewModifyTablesResponse() (response *ModifyTablesResponse) {
     return
 }
 
+// ModifyTables
 // This API is used to modify specified tables in batches based on the selected table definition IDL file.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyTables(request *ModifyTablesRequest) (response *ModifyTablesResponse, err error) {
     if request == nil {
         request = NewModifyTablesRequest()
@@ -1133,7 +1520,16 @@ func NewRecoverRecycleTablesResponse() (response *RecoverRecycleTablesResponse) 
     return
 }
 
+// RecoverRecycleTables
 // This API is used to recover a dropped table from the recycle bin. It will not work for tables to be released due to arrears.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) RecoverRecycleTables(request *RecoverRecycleTablesRequest) (response *RecoverRecycleTablesResponse, err error) {
     if request == nil {
         request = NewRecoverRecycleTablesRequest()
@@ -1158,7 +1554,17 @@ func NewRollbackTablesResponse() (response *RollbackTablesResponse) {
     return
 }
 
+// RollbackTables
 // This API is used to roll back table data.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) RollbackTables(request *RollbackTablesRequest) (response *RollbackTablesResponse, err error) {
     if request == nil {
         request = NewRollbackTablesRequest()
@@ -1183,7 +1589,17 @@ func NewSetTableIndexResponse() (response *SetTableIndexResponse) {
     return
 }
 
+// SetTableIndex
 // This API is used to create a global index for a table.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SetTableIndex(request *SetTableIndexRequest) (response *SetTableIndexResponse, err error) {
     if request == nil {
         request = NewSetTableIndexRequest()
@@ -1208,7 +1624,18 @@ func NewUpdateApplyResponse() (response *UpdateApplyResponse) {
     return
 }
 
+// UpdateApply
 // This API is used to update the application status.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) UpdateApply(request *UpdateApplyRequest) (response *UpdateApplyResponse, err error) {
     if request == nil {
         request = NewUpdateApplyRequest()
@@ -1233,7 +1660,15 @@ func NewVerifyIdlFilesResponse() (response *VerifyIdlFilesResponse) {
     return
 }
 
+// VerifyIdlFiles
 // This API is used to upload and verify a table creation file and return the definition of tables that are verified to be valid.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) VerifyIdlFiles(request *VerifyIdlFilesRequest) (response *VerifyIdlFilesResponse, err error) {
     if request == nil {
         request = NewVerifyIdlFilesRequest()

@@ -58,6 +58,7 @@ func NewCreateCosTokenV2Response() (response *CreateCosTokenV2Response) {
     return
 }
 
+// CreateCosTokenV2
 // This API is used to generate a COS temporary key.
 func (c *Client) CreateCosTokenV2(request *CreateCosTokenV2Request) (response *CreateCosTokenV2Response, err error) {
     if request == nil {
@@ -83,6 +84,7 @@ func NewCreateNamespaceResponse() (response *CreateNamespaceResponse) {
     return
 }
 
+// CreateNamespace
 // This API is used to create an environment.
 func (c *Client) CreateNamespace(request *CreateNamespaceRequest) (response *CreateNamespaceResponse, err error) {
     if request == nil {
@@ -108,6 +110,7 @@ func NewCreateResourceResponse() (response *CreateResourceResponse) {
     return
 }
 
+// CreateResource
 // This API is used to bind a cloud resource.
 func (c *Client) CreateResource(request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
     if request == nil {
@@ -133,7 +136,11 @@ func NewCreateServiceV2Response() (response *CreateServiceV2Response) {
     return
 }
 
+// CreateServiceV2
 // This API is used to create a service.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) CreateServiceV2(request *CreateServiceV2Request) (response *CreateServiceV2Response, err error) {
     if request == nil {
         request = NewCreateServiceV2Request()
@@ -158,7 +165,11 @@ func NewDeleteIngressResponse() (response *DeleteIngressResponse) {
     return
 }
 
+// DeleteIngress
 // This API is used to delete an ingress rule.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DeleteIngress(request *DeleteIngressRequest) (response *DeleteIngressResponse, err error) {
     if request == nil {
         request = NewDeleteIngressRequest()
@@ -183,7 +194,11 @@ func NewDeployServiceV2Response() (response *DeployServiceV2Response) {
     return
 }
 
+// DeployServiceV2
 // This API is used to deploy a service.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DeployServiceV2(request *DeployServiceV2Request) (response *DeployServiceV2Response, err error) {
     if request == nil {
         request = NewDeployServiceV2Request()
@@ -208,7 +223,11 @@ func NewDescribeIngressResponse() (response *DescribeIngressResponse) {
     return
 }
 
+// DescribeIngress
 // This API is used to query an ingress rule.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DescribeIngress(request *DescribeIngressRequest) (response *DescribeIngressResponse, err error) {
     if request == nil {
         request = NewDescribeIngressRequest()
@@ -233,7 +252,11 @@ func NewDescribeIngressesResponse() (response *DescribeIngressesResponse) {
     return
 }
 
+// DescribeIngresses
 // This API is used to query the list of ingress rules.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response *DescribeIngressesResponse, err error) {
     if request == nil {
         request = NewDescribeIngressesRequest()
@@ -258,7 +281,11 @@ func NewDescribeNamespacesResponse() (response *DescribeNamespacesResponse) {
     return
 }
 
+// DescribeNamespaces
 // This API is used to get the list of tenant environments.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DescribeNamespaces(request *DescribeNamespacesRequest) (response *DescribeNamespacesResponse, err error) {
     if request == nil {
         request = NewDescribeNamespacesRequest()
@@ -283,7 +310,11 @@ func NewDescribeServiceRunPodListV2Response() (response *DescribeServiceRunPodLi
     return
 }
 
+// DescribeServiceRunPodListV2
 // This API is used to get the list of running pods under a service.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DescribeServiceRunPodListV2(request *DescribeServiceRunPodListV2Request) (response *DescribeServiceRunPodListV2Response, err error) {
     if request == nil {
         request = NewDescribeServiceRunPodListV2Request()
@@ -308,7 +339,11 @@ func NewModifyIngressResponse() (response *ModifyIngressResponse) {
     return
 }
 
+// ModifyIngress
 // This API is used to create or update an ingress rule.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) ModifyIngress(request *ModifyIngressRequest) (response *ModifyIngressResponse, err error) {
     if request == nil {
         request = NewModifyIngressRequest()
@@ -333,7 +368,11 @@ func NewModifyNamespaceResponse() (response *ModifyNamespaceResponse) {
     return
 }
 
+// ModifyNamespace
 // This API is used to edit an environment.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) ModifyNamespace(request *ModifyNamespaceRequest) (response *ModifyNamespaceResponse, err error) {
     if request == nil {
         request = NewModifyNamespaceRequest()

@@ -58,8 +58,19 @@ func NewApplyUploadResponse() (response *ApplyUploadResponse) {
     return
 }
 
+// ApplyUpload
 // * This API is used to apply for uploading a media file (and cover file) to VOD and obtain the metadata of file storage (including upload path and upload signature) for subsequent use by the uploading API.
+//
 // * For the detailed upload process, please see [Overview of Upload from Client](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXPIRETIME = "InvalidParameter.ExpireTime"
+//  INVALIDPARAMETERVALUE_COVERTYPE = "InvalidParameterValue.CoverType"
+//  INVALIDPARAMETERVALUE_EXPIRETIME = "InvalidParameterValue.ExpireTime"
+//  INVALIDPARAMETERVALUE_MEDIATYPE = "InvalidParameterValue.MediaType"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ApplyUpload(request *ApplyUploadRequest) (response *ApplyUploadResponse, err error) {
     if request == nil {
         request = NewApplyUploadRequest()
@@ -84,7 +95,15 @@ func NewAttachMediaSubtitlesResponse() (response *AttachMediaSubtitlesResponse) 
     return
 }
 
+// AttachMediaSubtitles
 // This API is used to associate/disassociate subtitles with/from a media file of a specific adaptive bitrate streaming template ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) AttachMediaSubtitles(request *AttachMediaSubtitlesRequest) (response *AttachMediaSubtitlesResponse, err error) {
     if request == nil {
         request = NewAttachMediaSubtitlesRequest()
@@ -109,7 +128,15 @@ func NewCommitUploadResponse() (response *CommitUploadResponse) {
     return
 }
 
+// CommitUpload
 // This API is used to confirm the result of uploading a media file (and cover file) to VOD, store the media information, and return the playback address and ID of the file.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  INVALIDPARAMETERVALUE_VODSESSIONKEY = "InvalidParameterValue.VodSessionKey"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CommitUpload(request *CommitUploadRequest) (response *CommitUploadResponse, err error) {
     if request == nil {
         request = NewCommitUploadRequest()
@@ -134,11 +161,28 @@ func NewComposeMediaResponse() (response *ComposeMediaResponse) {
     return
 }
 
+// ComposeMedia
 // This API is used to compose a media file, including:
+//
 // 
+//
 // 1. Clipping a media file to generate a new media file;
+//
 // 2. Clipping and splicing multiple media files to generate a new media file;
+//
 // 3. Clipping and splicing the media streams of multiple media files to generate a new media file;
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_UPLOADCOSFAIL = "FailedOperation.UploadCosFail"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETFILEINFOERROR = "InternalError.GetFileInfoError"
+//  INTERNALERROR_GETMEDIALISTERROR = "InternalError.GetMediaListError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_CLIPDURATION = "InvalidParameterValue.ClipDuration"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ComposeMedia(request *ComposeMediaRequest) (response *ComposeMediaResponse, err error) {
     if request == nil {
         request = NewComposeMediaRequest()
@@ -163,9 +207,19 @@ func NewConfirmEventsResponse() (response *ConfirmEventsResponse) {
     return
 }
 
+// ConfirmEvents
 // * After the `PullEvents` API is called to get an event, this API must be called to confirm that the message has been received;
+//
 // * After the event handler is obtained, the validity period of waiting for confirmation is 30 seconds. If the wait exceeds 30 seconds, a parameter error will be reported (4000);
+//
 // * For more information, please see the [reliable callback](https://intl.cloud.tencent.com/document/product/266/33779?from_cn_redirect=1#.E5.8F.AF.E9.9D.A0.E5.9B.9E.E8.B0.83) of event notification.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ConfirmEvents(request *ConfirmEventsRequest) (response *ConfirmEventsResponse, err error) {
     if request == nil {
         request = NewConfirmEventsRequest()
@@ -190,7 +244,22 @@ func NewCreateAIAnalysisTemplateResponse() (response *CreateAIAnalysisTemplateRe
     return
 }
 
+// CreateAIAnalysisTemplate
 // This API is used to create a custom video content analysis template. Up to 50 templates can be created.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_CLASSIFCATIONCONFIGURE = "InvalidParameterValue.ClassifcationConfigure"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_COVERCONFIGURE = "InvalidParameterValue.CoverConfigure"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  INVALIDPARAMETERVALUE_FRAMETAGCONFIGURE = "InvalidParameterValue.FrameTagConfigure"
+//  INVALIDPARAMETERVALUE_HIGHLIGHTCONFIGURE = "InvalidParameterValue.HighlightConfigure"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TAGCONFIGURE = "InvalidParameterValue.TagConfigure"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAIAnalysisTemplate(request *CreateAIAnalysisTemplateRequest) (response *CreateAIAnalysisTemplateResponse, err error) {
     if request == nil {
         request = NewCreateAIAnalysisTemplateRequest()
@@ -215,7 +284,25 @@ func NewCreateAIRecognitionTemplateResponse() (response *CreateAIRecognitionTemp
     return
 }
 
+// CreateAIRecognitionTemplate
 // This API is used to create a custom video content recognition template. Up to 50 templates can be created.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DEFAULTLIBRARYLABELSET = "InvalidParameterValue.DefaultLibraryLabelSet"
+//  INVALIDPARAMETERVALUE_FACELIBRARY = "InvalidParameterValue.FaceLibrary"
+//  INVALIDPARAMETERVALUE_FACESCORE = "InvalidParameterValue.FaceScore"
+//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_OBJECTLIBRARY = "InvalidParameterValue.ObjectLibrary"
+//  INVALIDPARAMETERVALUE_SCREENSHOTINTERVAL = "InvalidParameterValue.ScreenshotInterval"
+//  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  INVALIDPARAMETERVALUE_USERDEFINELIBRARYLABELSET = "InvalidParameterValue.UserDefineLibraryLabelSet"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAIRecognitionTemplate(request *CreateAIRecognitionTemplateRequest) (response *CreateAIRecognitionTemplateResponse, err error) {
     if request == nil {
         request = NewCreateAIRecognitionTemplateRequest()
@@ -240,7 +327,30 @@ func NewCreateAdaptiveDynamicStreamingTemplateResponse() (response *CreateAdapti
     return
 }
 
+// CreateAdaptiveDynamicStreamingTemplate
 // This API is used to create an adaptive bitrate streaming template. Up to 100 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_BITRATE = "InvalidParameterValue.Bitrate"
+//  INVALIDPARAMETERVALUE_CODEC = "InvalidParameterValue.Codec"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEOBITRATE = "InvalidParameterValue.DisableHigherVideoBitrate"
+//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEORESOLUTION = "InvalidParameterValue.DisableHigherVideoResolution"
+//  INVALIDPARAMETERVALUE_DRMTYPE = "InvalidParameterValue.DrmType"
+//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
+//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
+//  INVALIDPARAMETERVALUE_SOUNDSYSTEM = "InvalidParameterValue.SoundSystem"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 func (c *Client) CreateAdaptiveDynamicStreamingTemplate(request *CreateAdaptiveDynamicStreamingTemplateRequest) (response *CreateAdaptiveDynamicStreamingTemplateResponse, err error) {
     if request == nil {
         request = NewCreateAdaptiveDynamicStreamingTemplateRequest()
@@ -265,7 +375,23 @@ func NewCreateAnimatedGraphicsTemplateResponse() (response *CreateAnimatedGraphi
     return
 }
 
+// CreateAnimatedGraphicsTemplate
 // This API is used to create a custom animated image generating template. Up to 16 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_FORMATWEBPLACKWIDTHANDHEIGHT = "InvalidParameterValue.FormatWebpLackWidthAndHeight"
+//  INVALIDPARAMETERVALUE_FORMATWEBPWIDTHANDHEIGHTBOTHZERO = "InvalidParameterValue.FormatWebpWidthAndHeightBothZero"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_QUALITY = "InvalidParameterValue.Quality"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAnimatedGraphicsTemplate(request *CreateAnimatedGraphicsTemplateRequest) (response *CreateAnimatedGraphicsTemplateResponse, err error) {
     if request == nil {
         request = NewCreateAnimatedGraphicsTemplateRequest()
@@ -290,10 +416,26 @@ func NewCreateClassResponse() (response *CreateClassResponse) {
     return
 }
 
+// CreateClass
 // * This API is used to categorize media assets for management;
+//
 // * It does not affect the categories of existing media assets. If you want to modify the category of a media asset, call the [ModifyMediaInfo](https://intl.cloud.tencent.com/document/product/266/31762?from_cn_redirect=1) API.
+//
 // * There can be up to 4 levels of categories.
+//
 // * One category can have up to 500 subcategories under it.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSLEVELLIMITEXCEEDED = "FailedOperation.ClassLevelLimitExceeded"
+//  FAILEDOPERATION_CLASSNAMEDUPLICATE = "FailedOperation.ClassNameDuplicate"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_PARENTIDNOFOUND = "FailedOperation.ParentIdNoFound"
+//  FAILEDOPERATION_SUBCLASSLIMITEXCEEDED = "FailedOperation.SubclassLimitExceeded"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_CLASSNAME = "InvalidParameterValue.ClassName"
+//  INVALIDPARAMETERVALUE_PARENTID = "InvalidParameterValue.ParentId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateClass(request *CreateClassRequest) (response *CreateClassResponse, err error) {
     if request == nil {
         request = NewCreateClassRequest()
@@ -318,7 +460,24 @@ func NewCreateContentReviewTemplateResponse() (response *CreateContentReviewTemp
     return
 }
 
+// CreateContentReviewTemplate
 // This API is used to create custom intelligent video content recognition templates. Up to 50 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETERVALUE_BLOCKCONFIDENCE = "InvalidParameterValue.BlockConfidence"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REVIEWCONFIDENCE = "InvalidParameterValue.ReviewConfidence"
+//  INVALIDPARAMETERVALUE_REVIEWWALLSWITCH = "InvalidParameterValue.ReviewWallSwitch"
+//  INVALIDPARAMETERVALUE_SCREENSHOTINTERVAL = "InvalidParameterValue.ScreenshotInterval"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateContentReviewTemplate(request *CreateContentReviewTemplateRequest) (response *CreateContentReviewTemplateResponse, err error) {
     if request == nil {
         request = NewCreateContentReviewTemplateRequest()
@@ -343,7 +502,22 @@ func NewCreateImageSpriteTemplateResponse() (response *CreateImageSpriteTemplate
     return
 }
 
+// CreateImageSpriteTemplate
 // This API is used to create a custom image sprite generating template. Up to 16 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COLUMNCOUNT = "InvalidParameterValue.ColumnCount"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_ROWCOUNT = "InvalidParameterValue.RowCount"
+//  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
+//  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateImageSpriteTemplate(request *CreateImageSpriteTemplateRequest) (response *CreateImageSpriteTemplateResponse, err error) {
     if request == nil {
         request = NewCreateImageSpriteTemplateRequest()
@@ -368,7 +542,15 @@ func NewCreatePersonSampleResponse() (response *CreatePersonSampleResponse) {
     return
 }
 
+// CreatePersonSample
 // This API is used to create samples for using facial features positioning and other technologies to perform video processing operations such as content recognition and inappropriate information recognition.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"
+//  INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreatePersonSample(request *CreatePersonSampleRequest) (response *CreatePersonSampleResponse, err error) {
     if request == nil {
         request = NewCreatePersonSampleRequest()
@@ -393,7 +575,18 @@ func NewCreateProcedureTemplateResponse() (response *CreateProcedureTemplateResp
     return
 }
 
+// CreateProcedureTemplate
 // This API is used to create a custom task flow template. Up to 50 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXISTEDPROCEDURENAME = "InvalidParameter.ExistedProcedureName"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateProcedureTemplate(request *CreateProcedureTemplateRequest) (response *CreateProcedureTemplateResponse, err error) {
     if request == nil {
         request = NewCreateProcedureTemplateRequest()
@@ -418,7 +611,22 @@ func NewCreateSampleSnapshotTemplateResponse() (response *CreateSampleSnapshotTe
     return
 }
 
+// CreateSampleSnapshotTemplate
 // This API is used to create a custom sampled screencapturing template. Up to 16 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
+//  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSampleSnapshotTemplate(request *CreateSampleSnapshotTemplateRequest) (response *CreateSampleSnapshotTemplateResponse, err error) {
     if request == nil {
         request = NewCreateSampleSnapshotTemplateRequest()
@@ -443,7 +651,21 @@ func NewCreateSnapshotByTimeOffsetTemplateResponse() (response *CreateSnapshotBy
     return
 }
 
+// CreateSnapshotByTimeOffsetTemplate
 // This API is used to create a custom time point screencapturing template. Up to 16 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSnapshotByTimeOffsetTemplate(request *CreateSnapshotByTimeOffsetTemplateRequest) (response *CreateSnapshotByTimeOffsetTemplateResponse, err error) {
     if request == nil {
         request = NewCreateSnapshotByTimeOffsetTemplateRequest()
@@ -468,7 +690,16 @@ func NewCreateSubAppIdResponse() (response *CreateSubAppIdResponse) {
     return
 }
 
+// CreateSubAppId
 // This API is used to create a VOD subapplication.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSubAppId(request *CreateSubAppIdRequest) (response *CreateSubAppIdResponse, err error) {
     if request == nil {
         request = NewCreateSubAppIdRequest()
@@ -493,7 +724,16 @@ func NewCreateSuperPlayerConfigResponse() (response *CreateSuperPlayerConfigResp
     return
 }
 
+// CreateSuperPlayerConfig
 // This API is used to create a superplayer configuration. Up to 100 configurations can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSuperPlayerConfig(request *CreateSuperPlayerConfigRequest) (response *CreateSuperPlayerConfigResponse, err error) {
     if request == nil {
         request = NewCreateSuperPlayerConfigRequest()
@@ -518,7 +758,39 @@ func NewCreateTranscodeTemplateResponse() (response *CreateTranscodeTemplateResp
     return
 }
 
+// CreateTranscodeTemplate
 // This API is used to create a custom transcoding template. Up to 100 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AUDIOBITRATE = "InvalidParameterValue.AudioBitrate"
+//  INVALIDPARAMETERVALUE_AUDIOCHANNEL = "InvalidParameterValue.AudioChannel"
+//  INVALIDPARAMETERVALUE_AUDIOCODEC = "InvalidParameterValue.AudioCodec"
+//  INVALIDPARAMETERVALUE_AUDIOSAMPLERATE = "InvalidParameterValue.AudioSampleRate"
+//  INVALIDPARAMETERVALUE_BITRATE = "InvalidParameterValue.Bitrate"
+//  INVALIDPARAMETERVALUE_CODEC = "InvalidParameterValue.Codec"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_CONTAINER = "InvalidParameterValue.Container"
+//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
+//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_RESOLUTIONADAPTIVE = "InvalidParameterValue.ResolutionAdaptive"
+//  INVALIDPARAMETERVALUE_TEHDTYPE = "InvalidParameterValue.TEHDType"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  INVALIDPARAMETERVALUE_VCRF = "InvalidParameterValue.Vcrf"
+//  INVALIDPARAMETERVALUE_VIDEOBITRATE = "InvalidParameterValue.VideoBitrate"
+//  INVALIDPARAMETERVALUE_VIDEOCODEC = "InvalidParameterValue.VideoCodec"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateTranscodeTemplate(request *CreateTranscodeTemplateRequest) (response *CreateTranscodeTemplateResponse, err error) {
     if request == nil {
         request = NewCreateTranscodeTemplateRequest()
@@ -543,7 +815,33 @@ func NewCreateWatermarkTemplateResponse() (response *CreateWatermarkTemplateResp
     return
 }
 
+// CreateWatermarkTemplate
 // This API is used to create a custom watermarking template. Up to 1,000 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INTERNALERROR_UPLOADWATERMARKERROR = "InternalError.UploadWatermarkError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_COORDINATEORIGIN = "InvalidParameterValue.CoordinateOrigin"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_IMAGECONTENT = "InvalidParameterValue.ImageContent"
+//  INVALIDPARAMETERVALUE_IMAGETEMPLATE = "InvalidParameterValue.ImageTemplate"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REPEATTYPE = "InvalidParameterValue.RepeatType"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATE = "InvalidParameterValue.SvgTemplate"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATEHEIGHT = "InvalidParameterValue.SvgTemplateHeight"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATEWIDTH = "InvalidParameterValue.SvgTemplateWidth"
+//  INVALIDPARAMETERVALUE_TEXTALPHA = "InvalidParameterValue.TextAlpha"
+//  INVALIDPARAMETERVALUE_TEXTTEMPLATE = "InvalidParameterValue.TextTemplate"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  INVALIDPARAMETERVALUE_XPOS = "InvalidParameterValue.XPos"
+//  INVALIDPARAMETERVALUE_YPOS = "InvalidParameterValue.YPos"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateWatermarkTemplate(request *CreateWatermarkTemplateRequest) (response *CreateWatermarkTemplateResponse, err error) {
     if request == nil {
         request = NewCreateWatermarkTemplateRequest()
@@ -568,7 +866,13 @@ func NewCreateWordSamplesResponse() (response *CreateWordSamplesResponse) {
     return
 }
 
+// CreateWordSamples
 // This API is used to create keyword samples in batches for using OCR and ASR technologies to perform video processing operations such as content recognition and inappropriate information recognition.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateWordSamples(request *CreateWordSamplesRequest) (response *CreateWordSamplesResponse, err error) {
     if request == nil {
         request = NewCreateWordSamplesRequest()
@@ -593,9 +897,19 @@ func NewDeleteAIAnalysisTemplateResponse() (response *DeleteAIAnalysisTemplateRe
     return
 }
 
+// DeleteAIAnalysisTemplate
 // This API is used to delete a custom video content analysis template.
+//
 // 
+//
 // Note: templates with an ID below 10000 are preset and cannot be deleted.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteAIAnalysisTemplate(request *DeleteAIAnalysisTemplateRequest) (response *DeleteAIAnalysisTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteAIAnalysisTemplateRequest()
@@ -620,7 +934,15 @@ func NewDeleteAIRecognitionTemplateResponse() (response *DeleteAIRecognitionTemp
     return
 }
 
+// DeleteAIRecognitionTemplate
 // This API is used to delete a custom video content recognition template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteAIRecognitionTemplate(request *DeleteAIRecognitionTemplateRequest) (response *DeleteAIRecognitionTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteAIRecognitionTemplateRequest()
@@ -645,7 +967,14 @@ func NewDeleteAdaptiveDynamicStreamingTemplateResponse() (response *DeleteAdapti
     return
 }
 
+// DeleteAdaptiveDynamicStreamingTemplate
 // This API is used to delete an adaptive bitrate streaming template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) DeleteAdaptiveDynamicStreamingTemplate(request *DeleteAdaptiveDynamicStreamingTemplateRequest) (response *DeleteAdaptiveDynamicStreamingTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteAdaptiveDynamicStreamingTemplateRequest()
@@ -670,7 +999,14 @@ func NewDeleteAnimatedGraphicsTemplateResponse() (response *DeleteAnimatedGraphi
     return
 }
 
+// DeleteAnimatedGraphicsTemplate
 // This API is used to delete a custom animated image generating template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteAnimatedGraphicsTemplate(request *DeleteAnimatedGraphicsTemplateRequest) (response *DeleteAnimatedGraphicsTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteAnimatedGraphicsTemplateRequest()
@@ -695,8 +1031,16 @@ func NewDeleteClassResponse() (response *DeleteClassResponse) {
     return
 }
 
+// DeleteClass
 // * A category can be deleted only if it has no subcategories and associated media files;
+//
 // * Otherwise, [delete the media files](https://intl.cloud.tencent.com/document/product/266/31764?from_cn_redirect=1) and subcategories first before deleting the category.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_CLASSID = "InvalidParameterValue.ClassId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_CLASSNOTEMPTY = "UnsupportedOperation.ClassNotEmpty"
 func (c *Client) DeleteClass(request *DeleteClassRequest) (response *DeleteClassResponse, err error) {
     if request == nil {
         request = NewDeleteClassRequest()
@@ -721,7 +1065,15 @@ func NewDeleteContentReviewTemplateResponse() (response *DeleteContentReviewTemp
     return
 }
 
+// DeleteContentReviewTemplate
 // This API is used to delete custom intelligent video content recognition templates.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteContentReviewTemplate(request *DeleteContentReviewTemplateRequest) (response *DeleteContentReviewTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteContentReviewTemplateRequest()
@@ -746,7 +1098,13 @@ func NewDeleteImageSpriteTemplateResponse() (response *DeleteImageSpriteTemplate
     return
 }
 
+// DeleteImageSpriteTemplate
 // This API is used to delete an image sprite generating template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteImageSpriteTemplate(request *DeleteImageSpriteTemplateRequest) (response *DeleteImageSpriteTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteImageSpriteTemplateRequest()
@@ -771,8 +1129,17 @@ func NewDeleteMediaResponse() (response *DeleteMediaResponse) {
     return
 }
 
+// DeleteMedia
 // * This API is used to delete a media file and its corresponding files generated by video processing (such as transcoded videos, image sprites, screenshots, and videos published on WeChat);
+//
 // * The transcoded video files or video files published on WeChat can be deleted separately for a specified video ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteMedia(request *DeleteMediaRequest) (response *DeleteMediaResponse, err error) {
     if request == nil {
         request = NewDeleteMediaRequest()
@@ -797,7 +1164,13 @@ func NewDeletePersonSampleResponse() (response *DeletePersonSampleResponse) {
     return
 }
 
+// DeletePersonSample
 // This API is used to delete samples according to sample IDs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeletePersonSample(request *DeletePersonSampleRequest) (response *DeletePersonSampleResponse, err error) {
     if request == nil {
         request = NewDeletePersonSampleRequest()
@@ -822,7 +1195,16 @@ func NewDeleteProcedureTemplateResponse() (response *DeleteProcedureTemplateResp
     return
 }
 
+// DeleteProcedureTemplate
 // This API is used to delete a custom task flow template.  
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteProcedureTemplate(request *DeleteProcedureTemplateRequest) (response *DeleteProcedureTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteProcedureTemplateRequest()
@@ -847,7 +1229,13 @@ func NewDeleteSampleSnapshotTemplateResponse() (response *DeleteSampleSnapshotTe
     return
 }
 
+// DeleteSampleSnapshotTemplate
 // This API is used to delete a custom sampled screencapturing template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteSampleSnapshotTemplate(request *DeleteSampleSnapshotTemplateRequest) (response *DeleteSampleSnapshotTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteSampleSnapshotTemplateRequest()
@@ -872,7 +1260,13 @@ func NewDeleteSnapshotByTimeOffsetTemplateResponse() (response *DeleteSnapshotBy
     return
 }
 
+// DeleteSnapshotByTimeOffsetTemplate
 // This API is used to delete a custom time point screencapturing template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteSnapshotByTimeOffsetTemplate(request *DeleteSnapshotByTimeOffsetTemplateRequest) (response *DeleteSnapshotByTimeOffsetTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteSnapshotByTimeOffsetTemplateRequest()
@@ -897,8 +1291,17 @@ func NewDeleteSuperPlayerConfigResponse() (response *DeleteSuperPlayerConfigResp
     return
 }
 
+// DeleteSuperPlayerConfig
 // This API is used to delete a superplayer configuration.  
+//
 // *Note: preset player configurations cannot be deleted.*
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteSuperPlayerConfig(request *DeleteSuperPlayerConfigRequest) (response *DeleteSuperPlayerConfigResponse, err error) {
     if request == nil {
         request = NewDeleteSuperPlayerConfigRequest()
@@ -923,7 +1326,15 @@ func NewDeleteTranscodeTemplateResponse() (response *DeleteTranscodeTemplateResp
     return
 }
 
+// DeleteTranscodeTemplate
 // This API is used to delete a custom transcoding template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteTranscodeTemplate(request *DeleteTranscodeTemplateRequest) (response *DeleteTranscodeTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteTranscodeTemplateRequest()
@@ -948,7 +1359,16 @@ func NewDeleteWatermarkTemplateResponse() (response *DeleteWatermarkTemplateResp
     return
 }
 
+// DeleteWatermarkTemplate
 // This API is used to delete a custom watermarking template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteWatermarkTemplate(request *DeleteWatermarkTemplateRequest) (response *DeleteWatermarkTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteWatermarkTemplateRequest()
@@ -973,7 +1393,13 @@ func NewDeleteWordSamplesResponse() (response *DeleteWordSamplesResponse) {
     return
 }
 
+// DeleteWordSamples
 // This API is used to delete keyword samples in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteWordSamples(request *DeleteWordSamplesRequest) (response *DeleteWordSamplesResponse, err error) {
     if request == nil {
         request = NewDeleteWordSamplesRequest()
@@ -998,7 +1424,16 @@ func NewDescribeAIAnalysisTemplatesResponse() (response *DescribeAIAnalysisTempl
     return
 }
 
+// DescribeAIAnalysisTemplates
 // This API is used to get the list of video content analysis templates based on unique template ID. The returned result includes all eligible custom and [preset video content analysis templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.88.86.E6.9E.90.E6.A8.A1.E6.9D.BF).
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAIAnalysisTemplates(request *DescribeAIAnalysisTemplatesRequest) (response *DescribeAIAnalysisTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeAIAnalysisTemplatesRequest()
@@ -1023,7 +1458,17 @@ func NewDescribeAIRecognitionTemplatesResponse() (response *DescribeAIRecognitio
     return
 }
 
+// DescribeAIRecognitionTemplates
 // This API is used to get the list of video content recognition templates based on unique template ID. The return result includes all eligible custom and [preset video content recognition templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E8.AF.86.E5.88.AB.E6.A8.A1.E6.9D.BF).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAIRecognitionTemplates(request *DescribeAIRecognitionTemplatesRequest) (response *DescribeAIRecognitionTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeAIRecognitionTemplatesRequest()
@@ -1048,7 +1493,17 @@ func NewDescribeAdaptiveDynamicStreamingTemplatesResponse() (response *DescribeA
     return
 }
 
+// DescribeAdaptiveDynamicStreamingTemplates
 // This API is used to query the list of transcoding to adaptive bitrate streaming templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAdaptiveDynamicStreamingTemplates(request *DescribeAdaptiveDynamicStreamingTemplatesRequest) (response *DescribeAdaptiveDynamicStreamingTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeAdaptiveDynamicStreamingTemplatesRequest()
@@ -1073,7 +1528,14 @@ func NewDescribeAllClassResponse() (response *DescribeAllClassResponse) {
     return
 }
 
+// DescribeAllClass
 // * This API is used to get the information of all categories.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAllClass(request *DescribeAllClassRequest) (response *DescribeAllClassResponse, err error) {
     if request == nil {
         request = NewDescribeAllClassRequest()
@@ -1098,7 +1560,17 @@ func NewDescribeAnimatedGraphicsTemplatesResponse() (response *DescribeAnimatedG
     return
 }
 
+// DescribeAnimatedGraphicsTemplates
 // This API is used to query the list of animated image generating templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAnimatedGraphicsTemplates(request *DescribeAnimatedGraphicsTemplatesRequest) (response *DescribeAnimatedGraphicsTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeAnimatedGraphicsTemplatesRequest()
@@ -1123,10 +1595,28 @@ func NewDescribeCDNStatDetailsResponse() (response *DescribeCDNStatDetailsRespon
     return
 }
 
+// DescribeCDNStatDetails
 // This API is used to query CDN bandwidth, traffic, and other data of VOD domain names.
+//
 // * The query period is up to 90 days.
+//
 // * You can query data of different service regions.
+//
 // * You can query data of Chinese mainland by region and ISP.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE_AREA = "InvalidParameterValue.Area"
+//  INVALIDPARAMETERVALUE_DISTRICTS = "InvalidParameterValue.Districts"
+//  INVALIDPARAMETERVALUE_DOMAINNAMES = "InvalidParameterValue.DomainNames"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_ISPS = "InvalidParameterValue.Isps"
+//  INVALIDPARAMETERVALUE_METRIC = "InvalidParameterValue.Metric"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 func (c *Client) DescribeCDNStatDetails(request *DescribeCDNStatDetailsRequest) (response *DescribeCDNStatDetailsResponse, err error) {
     if request == nil {
         request = NewDescribeCDNStatDetailsRequest()
@@ -1151,11 +1641,30 @@ func NewDescribeCDNUsageDataResponse() (response *DescribeCDNUsageDataResponse) 
     return
 }
 
+// DescribeCDNUsageData
 // This API is used to query the CDN statistics of VOD such as traffic and bandwidth.
+//
 //    1. Only CDN usage data for the last 365 days can be queried.
+//
 //    2. The query time range cannot be more than 90 days.
+//
 //    3. The time granularity of usage data can be specified, including 5-minute, 1-hour, and 1-day.
+//
 //    4. Traffic refers to the total traffic within the query time granularity, while bandwidth the peak bandwidth.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetWorkError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATAINTERVAL = "InvalidParameterValue.DataInterval"
+//  INVALIDPARAMETERVALUE_DATATYPE = "InvalidParameterValue.DataType"
+//  INVALIDPARAMETERVALUE_DOMAINNAME = "InvalidParameterValue.DomainName"
+//  INVALIDPARAMETERVALUE_DOMAINNAMES = "InvalidParameterValue.DomainNames"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeCDNUsageData(request *DescribeCDNUsageDataRequest) (response *DescribeCDNUsageDataResponse, err error) {
     if request == nil {
         request = NewDescribeCDNUsageDataRequest()
@@ -1180,10 +1689,23 @@ func NewDescribeCdnLogsResponse() (response *DescribeCdnLogsResponse) {
     return
 }
 
+// DescribeCdnLogs
 // This API is used to query the download links of CDN access logs of a VOD domain name.
+//
 //     1. Only download links of CDN logs for the last 30 days can be queried.
+//
 //     2. By default, CDN generates a log file every hour. If there is no CDN access for a certain hour, no log file will be generated for the hour.    
+//
 //     3. A CDN log download link is valid for 24 hours.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetWorkError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DOMAINNAME = "InvalidParameterValue.DomainName"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeCdnLogs(request *DescribeCdnLogsRequest) (response *DescribeCdnLogsResponse, err error) {
     if request == nil {
         request = NewDescribeCdnLogsRequest()
@@ -1208,7 +1730,18 @@ func NewDescribeContentReviewTemplatesResponse() (response *DescribeContentRevie
     return
 }
 
+// DescribeContentReviewTemplates
 // This API is used to get the list of intelligent video content recognition template details according to unique template IDs. The return result includes all eligible custom and [preset intelligent video content recognition templates](https://intl.cloud.tencent.com/document/product/266/33932).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeContentReviewTemplates(request *DescribeContentReviewTemplatesRequest) (response *DescribeContentReviewTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeContentReviewTemplatesRequest()
@@ -1233,14 +1766,28 @@ func NewDescribeDailyPlayStatFileListResponse() (response *DescribeDailyPlayStat
     return
 }
 
+// DescribeDailyPlayStatFileList
 // This API is used to query the download links of playback statistics files.
+//
 // * You can query the download links of playback statistics files in last 30 days.
+//
 // * Every day, VOD will analyze CDN request logs of the previous day and then generate a playback statistics file.
+//
 // * A playback statistics file includes playback times and traffic of media files.
+//
 // * Notes on playback times:
+//
 //     1. HLS file: VOD counts playback times when accessing M3U8 files, but not when accessing TS files.
+//
 //     2. Other files (MP4 files for example): VOD does not count playback times when the playback request carries the `range` parameter and the `start` parameter in `range` is not `0`. In other cases, VOD counts playback times.
+//
 // * Statistics on playback devices: VOD counts playback times on mobile clients when the playback request carries the `UserAgent` parameter which includes an identifier such as `Android` or `iPhone`. In other cases, VOD counts playback times on PC clients.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 func (c *Client) DescribeDailyPlayStatFileList(request *DescribeDailyPlayStatFileListRequest) (response *DescribeDailyPlayStatFileListResponse, err error) {
     if request == nil {
         request = NewDescribeDailyPlayStatFileListRequest()
@@ -1265,7 +1812,17 @@ func NewDescribeImageSpriteTemplatesResponse() (response *DescribeImageSpriteTem
     return
 }
 
+// DescribeImageSpriteTemplates
 // This API is used to query the list of image sprite generating templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeImageSpriteTemplates(request *DescribeImageSpriteTemplatesRequest) (response *DescribeImageSpriteTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeImageSpriteTemplatesRequest()
@@ -1290,17 +1847,38 @@ func NewDescribeMediaInfosResponse() (response *DescribeMediaInfosResponse) {
     return
 }
 
+// DescribeMediaInfos
 // 1. This API can get multiple types of information of multiple media files, including:
+//
 //     1. Basic information (basicInfo): media name, category, playback address, cover image, etc.
+//
 //     2. Metadata (metaData): size, duration, video stream information, audio stream information, etc.
+//
 //     3. Information of the transcoding result (transcodeInfo): addresses, video stream parameters, and audio stream parameters of the media files with various specifications generated by transcoding a media file.
+//
 //     4. Information of the animated image generating result (animatedGraphicsInfo): information of an animated image (such as .gif) generated from a video.
+//
 //     5. Information of a sampled screenshot (sampleSnapshotInfo): information of a sampled screenshot of a video.
+//
 //     6. Information of an image sprite (imageSpriteInfo): information of an image sprite generated from a video.
+//
 //     7. Information of a time point screenshot (snapshotByTimeOffsetInfo): information of a time point screenshot of a video.
+//
 //     8. Information of a timestamp (keyFrameDescInfo): information of a timestamp set for a video.
+//
 //     9. Information of transcoding to adaptive bitrate streaming (adaptiveDynamicStreamingInfo): specification, encryption type, container format, etc.
+//
 // 2. The return packet can be configured to only contain certain information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETMEDIALISTERROR = "InternalError.GetMediaListError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEIDS = "InvalidParameterValue.FileIds"
+//  INVALIDPARAMETERVALUE_FILEIDSEMPTY = "InvalidParameterValue.FileIdsEmpty"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeMediaInfos(request *DescribeMediaInfosRequest) (response *DescribeMediaInfosResponse, err error) {
     if request == nil {
         request = NewDescribeMediaInfosRequest()
@@ -1325,9 +1903,18 @@ func NewDescribeMediaProcessUsageDataResponse() (response *DescribeMediaProcessU
     return
 }
 
+// DescribeMediaProcessUsageData
 // This API is used to query the information of video processing usage within the specified time range.
+//
 //    1. Statistics on video processing for the last 365 days can be queried.
+//
 //    2. The query time range cannot be more than 90 days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMediaProcessUsageData(request *DescribeMediaProcessUsageDataRequest) (response *DescribeMediaProcessUsageDataResponse, err error) {
     if request == nil {
         request = NewDescribeMediaProcessUsageDataRequest()
@@ -1352,7 +1939,13 @@ func NewDescribePersonSamplesResponse() (response *DescribePersonSamplesResponse
     return
 }
 
+// DescribePersonSamples
 // This API is used to query the information of samples and supports paginated queries by sample ID, name, and tag.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribePersonSamples(request *DescribePersonSamplesRequest) (response *DescribePersonSamplesResponse, err error) {
     if request == nil {
         request = NewDescribePersonSamplesRequest()
@@ -1377,7 +1970,17 @@ func NewDescribeProcedureTemplatesResponse() (response *DescribeProcedureTemplat
     return
 }
 
+// DescribeProcedureTemplates
 // This API is used to get the list of task flow template details by task flow template name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_NAMES = "InvalidParameterValue.Names"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeProcedureTemplates(request *DescribeProcedureTemplatesRequest) (response *DescribeProcedureTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeProcedureTemplatesRequest()
@@ -1402,12 +2005,27 @@ func NewDescribeReviewDetailsResponse() (response *DescribeReviewDetailsResponse
     return
 }
 
+// DescribeReviewDetails
 // <b>This API is disused and replaced by [DescribeMediaProcessUsageData](https://intl.cloud.tencent.com/document/product/266/41464?from_cn_redirect=1).</b>
+//
 // 
+//
 // This API returns the video content duration for intelligent recognition in seconds per day within the queried period.
+//
 // 
+//
 // 1. The API is used to query statistics on the video content duration for intelligent recognition in the last 365 days.
+//
 // 2. The query period is up to 90 days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeReviewDetails(request *DescribeReviewDetailsRequest) (response *DescribeReviewDetailsResponse, err error) {
     if request == nil {
         request = NewDescribeReviewDetailsRequest()
@@ -1432,7 +2050,17 @@ func NewDescribeSampleSnapshotTemplatesResponse() (response *DescribeSampleSnaps
     return
 }
 
+// DescribeSampleSnapshotTemplates
 // This API is used to query the list of sampled screencapturing templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSampleSnapshotTemplates(request *DescribeSampleSnapshotTemplatesRequest) (response *DescribeSampleSnapshotTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeSampleSnapshotTemplatesRequest()
@@ -1457,7 +2085,17 @@ func NewDescribeSnapshotByTimeOffsetTemplatesResponse() (response *DescribeSnaps
     return
 }
 
+// DescribeSnapshotByTimeOffsetTemplates
 // This API is used to query the list of time point screencapturing templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSnapshotByTimeOffsetTemplates(request *DescribeSnapshotByTimeOffsetTemplatesRequest) (response *DescribeSnapshotByTimeOffsetTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeSnapshotByTimeOffsetTemplatesRequest()
@@ -1482,7 +2120,15 @@ func NewDescribeStorageDataResponse() (response *DescribeStorageDataResponse) {
     return
 }
 
+// DescribeStorageData
 // This API is used to query the storage capacity usage and number of files.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeStorageData(request *DescribeStorageDataRequest) (response *DescribeStorageDataResponse, err error) {
     if request == nil {
         request = NewDescribeStorageDataRequest()
@@ -1507,10 +2153,28 @@ func NewDescribeStorageDetailsResponse() (response *DescribeStorageDetailsRespon
     return
 }
 
+// DescribeStorageDetails
 // This API is used to query VOD storage usage in bytes within the query period.
+//
 //     1. You can only query storage usage for the last 365 days.
+//
 //     2. The query period is up to 90 days.
+//
 //     3. The query period at minute-level granularity is up to 7 days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_USERSTATUSINAVLID = "FailedOperation.UserStatusInavlid"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_TIMEPARSEERROR = "InternalError.TimeParseError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AREA = "InvalidParameterValue.Area"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  INVALIDPARAMETERVALUE_STORAGETYPE = "InvalidParameterValue.StorageType"
+//  INVALIDPARAMETERVALUE_TIMETYPE = "InvalidParameterValue.TimeType"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeStorageDetails(request *DescribeStorageDetailsRequest) (response *DescribeStorageDetailsResponse, err error) {
     if request == nil {
         request = NewDescribeStorageDetailsRequest()
@@ -1535,8 +2199,16 @@ func NewDescribeSubAppIdsResponse() (response *DescribeSubAppIdsResponse) {
     return
 }
 
+// DescribeSubAppIds
 // This API is used to get the list of subapplications to which the current account has permissions, including primary applications. If the subapplication feature has not been enabled, this API will return. 
+//
 //  `FailedOperation`.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSubAppIds(request *DescribeSubAppIdsRequest) (response *DescribeSubAppIdsResponse, err error) {
     if request == nil {
         request = NewDescribeSubAppIdsRequest()
@@ -1561,7 +2233,15 @@ func NewDescribeSuperPlayerConfigsResponse() (response *DescribeSuperPlayerConfi
     return
 }
 
+// DescribeSuperPlayerConfigs
 // This API is used to query the list of superplayer configurations and supports paginated queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSuperPlayerConfigs(request *DescribeSuperPlayerConfigsRequest) (response *DescribeSuperPlayerConfigsResponse, err error) {
     if request == nil {
         request = NewDescribeSuperPlayerConfigsRequest()
@@ -1586,7 +2266,18 @@ func NewDescribeTaskDetailResponse() (response *DescribeTaskDetailResponse) {
     return
 }
 
+// DescribeTaskDetail
 // This API is used to query the details of execution status and result of a task submitted in the last 3 days by task ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  INVALIDPARAMETERVALUE_TASKID = "InvalidParameterValue.TaskId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTaskDetail(request *DescribeTaskDetailRequest) (response *DescribeTaskDetailResponse, err error) {
     if request == nil {
         request = NewDescribeTaskDetailRequest()
@@ -1611,9 +2302,20 @@ func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
     return
 }
 
+// DescribeTasks
 // * This API is used to query the task list;
+//
 // * If there are many data entries in the list, one single call of the API may not be able to pull the entire list. The `ScrollToken` parameter can be used to pull the list in batches;
+//
 // * Only tasks in the last three days (72 hours) can be queried.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_STATUS = "InvalidParameterValue.Status"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *DescribeTasksResponse, err error) {
     if request == nil {
         request = NewDescribeTasksRequest()
@@ -1638,7 +2340,20 @@ func NewDescribeTranscodeTemplatesResponse() (response *DescribeTranscodeTemplat
     return
 }
 
+// DescribeTranscodeTemplates
 // This API is used to get the list of transcoding templates based on unique template ID. The return result includes all eligible custom and [preset transcoding templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_CONTAINERTYPE = "InvalidParameterValue.ContainerType"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TEHDTYPE = "InvalidParameterValue.TEHDType"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTranscodeTemplates(request *DescribeTranscodeTemplatesRequest) (response *DescribeTranscodeTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeTranscodeTemplatesRequest()
@@ -1663,7 +2378,17 @@ func NewDescribeVodDomainsResponse() (response *DescribeVodDomainsResponse) {
     return
 }
 
+// DescribeVodDomains
 // This API is used to query the list of VOD domain names.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_LIMITTOOLARGE = "InvalidParameterValue.LimitTooLarge"
+//  INVALIDPARAMETERVALUE_OFFSET = "InvalidParameterValue.Offset"
+//  INVALIDPARAMETERVALUE_OFFSETTOOLARGE = "InvalidParameterValue.OffsetTooLarge"
 func (c *Client) DescribeVodDomains(request *DescribeVodDomainsRequest) (response *DescribeVodDomainsResponse, err error) {
     if request == nil {
         request = NewDescribeVodDomainsRequest()
@@ -1688,7 +2413,18 @@ func NewDescribeWatermarkTemplatesResponse() (response *DescribeWatermarkTemplat
     return
 }
 
+// DescribeWatermarkTemplates
 // This API is used to query custom watermarking templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeWatermarkTemplates(request *DescribeWatermarkTemplatesRequest) (response *DescribeWatermarkTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeWatermarkTemplatesRequest()
@@ -1713,7 +2449,13 @@ func NewDescribeWordSamplesResponse() (response *DescribeWordSamplesResponse) {
     return
 }
 
+// DescribeWordSamples
 // This API is used to perform paginated queries of keyword sample information by use case, keyword, and tag.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeWordSamples(request *DescribeWordSamplesRequest) (response *DescribeWordSamplesResponse, err error) {
     if request == nil {
         request = NewDescribeWordSamplesRequest()
@@ -1738,17 +2480,39 @@ func NewEditMediaResponse() (response *EditMediaResponse) {
     return
 }
 
+// EditMedia
 // This API is used to edit a video (by clipping, splicing, etc.) to generate a new VOD video. Editing features include:
+//
 // 
+//
 // 1. Clipping a file in VOD to generate a new video;
+//
 // 2. Splicing multiple files in VOD to generate a new video;
+//
 // 3. Clipping multiple files in VOD and then splicing the clips to generate a new video;
+//
 // 4. Directly generating a new video from a stream in VOD;
+//
 // 5. Clipping a stream in VOD to generate a new video;
+//
 // 6. Splicing multiple streams in VOD to generate a new video;
+//
 // 7. Clipping multiple streams in VOD and then splicing the clips to generate a new video.
+//
 // 
+//
 // You can also specify whether to perform a task flow for the generated new video.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) EditMedia(request *EditMediaRequest) (response *EditMediaResponse, err error) {
     if request == nil {
         request = NewEditMediaRequest()
@@ -1773,7 +2537,17 @@ func NewExecuteFunctionResponse() (response *ExecuteFunctionResponse) {
     return
 }
 
+// ExecuteFunction
 // This API is only used in special scenarios of custom development. Unless requested by VOD customer service, please do not call it.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ExecuteFunction(request *ExecuteFunctionRequest) (response *ExecuteFunctionResponse, err error) {
     if request == nil {
         request = NewExecuteFunctionRequest()
@@ -1798,8 +2572,20 @@ func NewForbidMediaDistributionResponse() (response *ForbidMediaDistributionResp
     return
 }
 
+// ForbidMediaDistribution
 // * After a media file is forbidden, except previewing it in the VOD Console, accessing the URLs of its various resources (such as source file, output files, and screenshots) in other scenarios will return error 403.
+//
 //   It takes about 5-10 minutes for a forbidding/unblocking operation to take effect across the entire network.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_MEDIAFORBIDEDBYSYSTEM = "FailedOperation.MediaForbidedBySystem"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEIDSTOOMANY = "InvalidParameterValue.FileIdsTooMany"
+//  INVALIDPARAMETERVALUE_OPERATION = "InvalidParameterValue.Operation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ForbidMediaDistribution(request *ForbidMediaDistributionRequest) (response *ForbidMediaDistributionResponse, err error) {
     if request == nil {
         request = NewForbidMediaDistributionRequest()
@@ -1824,30 +2610,66 @@ func NewLiveRealTimeClipResponse() (response *LiveRealTimeClipResponse) {
     return
 }
 
+// LiveRealTimeClip
 // Live clipping means that during a live broadcast (before it ends), you can select a segment of previous live broadcast content to generate a new video (in HLS format) in real time and share it immediately or store it persistently.
+//
 // 
+//
 // VOD supports two live clipping modes:
+//
 // - Persistent clipping: in this mode, the clipped video is saved as an independent video file with a `FileId`, which is suitable for **persistently storing** highlights;
+//
 // - Temporary clipping: in this mode, the clipped video is part of the LVB recording file with no `FileId`, which is suitable for **temporarily sharing** highlights;
+//
 // 
+//
 // Note:
+//
 // - The live clipping feature can be used only when [time shifting](https://intl.cloud.tencent.com/document/product/267/32742?from_cn_redirect=1) has been enabled for the target live stream.
+//
 // - Live clipping is performed based on the m3u8 file generated by LVB recording, so its minimum clipping granularity is one ts segment rather than at or below the second level.
+//
 // 
+//
 // 
+//
 // ### Persistent clipping
+//
 // In persistent clipping mode, the clipped video is saved as an independent video file with a `FileId`, and its lifecycle is not subject to the source LVB recording video (even if the source video is deleted, the clipped video will not be affected in any way). It can be further processed (transcoded, published on WeChat, etc.).
+//
 // 
+//
 // An example is as follows: for a complete football match, the source LVB recording video may be up to 2 hours in length. You want to store this video for only 2 months for the purpose of cost savings. However, you want to specify a longer retention period for the "highlights" video created by live clipping and perform additional VOD operations on it such as transcoding and release on WeChat. In this case, you need to choose the persistent clipping mode of live clipping.
+//
 // 
+//
 // The advantage of persistent clipping is that the clipped video has a lifecycle independent of the source recording video and can be managed independently and stored persistently.
+//
 // 
+//
 // ### Temporary clipping
+//
 // In temporary clipping mode, the clipped video (m3u8 file) shares the same ts segments with the LVB recording video instead of being an independent video. It only has a playback URL but has no `FileId`, and its validity period is the same as that of the LVB recording video; therefore, if the LVB recording video is deleted, it cannot be played back.
+//
 // 
+//
 // For temporary clipping, as the clipping result is not an independent video, it will not be included in VOD's media asset management (for example, it will not be counted in the total videos in the console), and no video processing operations can be separately performed on it, such as transcoding and release on WeChat.
+//
 // 
+//
 // The advantage of temporary clipping is that the clipping operation is very "lightweight" and does not incur additional storage fees. However, the clipped video has the same lifecycle as the source recording video and cannot be further transcoded or processed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CLIPDURATION = "InvalidParameterValue.ClipDuration"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_EXPIRETIME = "InvalidParameterValue.ExpireTime"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  INVALIDPARAMETERVALUE_STREAMIDINVALID = "InvalidParameterValue.StreamIdInvalid"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) LiveRealTimeClip(request *LiveRealTimeClipRequest) (response *LiveRealTimeClipResponse, err error) {
     if request == nil {
         request = NewLiveRealTimeClipRequest()
@@ -1872,7 +2694,17 @@ func NewManageTaskResponse() (response *ManageTaskResponse) {
     return
 }
 
+// ManageTask
 // This API is used to manage initiated tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDOPERATIONTYPE = "InvalidParameterValue.InvalidOperationType"
+//  INVALIDPARAMETERVALUE_TASKID = "InvalidParameterValue.TaskId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ManageTask(request *ManageTaskRequest) (response *ManageTaskResponse, err error) {
     if request == nil {
         request = NewManageTaskRequest()
@@ -1897,9 +2729,26 @@ func NewModifyAIAnalysisTemplateResponse() (response *ModifyAIAnalysisTemplateRe
     return
 }
 
+// ModifyAIAnalysisTemplate
 // This API is used to modify a custom video content analysis template.
+//
 // 
+//
 // Note: templates with an ID below 10000 are preset and cannot be modified.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_CLASSIFCATIONCONFIGURE = "InvalidParameterValue.ClassifcationConfigure"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_COVERCONFIGURE = "InvalidParameterValue.CoverConfigure"
+//  INVALIDPARAMETERVALUE_FRAMETAGCONFIGURE = "InvalidParameterValue.FrameTagConfigure"
+//  INVALIDPARAMETERVALUE_HIGHLIGHTCONFIGURE = "InvalidParameterValue.HighlightConfigure"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TAGCONFIGURE = "InvalidParameterValue.TagConfigure"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyAIAnalysisTemplate(request *ModifyAIAnalysisTemplateRequest) (response *ModifyAIAnalysisTemplateResponse, err error) {
     if request == nil {
         request = NewModifyAIAnalysisTemplateRequest()
@@ -1924,7 +2773,26 @@ func NewModifyAIRecognitionTemplateResponse() (response *ModifyAIRecognitionTemp
     return
 }
 
+// ModifyAIRecognitionTemplate
 // This API is used to modify a custom video content recognition template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DEFAULTLIBRARYLABELSET = "InvalidParameterValue.DefaultLibraryLabelSet"
+//  INVALIDPARAMETERVALUE_FACELIBRARY = "InvalidParameterValue.FaceLibrary"
+//  INVALIDPARAMETERVALUE_FACESCORE = "InvalidParameterValue.FaceScore"
+//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
+//  INVALIDPARAMETERVALUE_MODIFYDEFAULTTEMPLATE = "InvalidParameterValue.ModifyDefaultTemplate"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_OBJECTLIBRARY = "InvalidParameterValue.ObjectLibrary"
+//  INVALIDPARAMETERVALUE_SCREENSHOTINTERVAL = "InvalidParameterValue.ScreenshotInterval"
+//  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  INVALIDPARAMETERVALUE_USERDEFINELIBRARYLABELSET = "InvalidParameterValue.UserDefineLibraryLabelSet"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyAIRecognitionTemplate(request *ModifyAIRecognitionTemplateRequest) (response *ModifyAIRecognitionTemplateResponse, err error) {
     if request == nil {
         request = NewModifyAIRecognitionTemplateRequest()
@@ -1949,7 +2817,29 @@ func NewModifyAdaptiveDynamicStreamingTemplateResponse() (response *ModifyAdapti
     return
 }
 
+// ModifyAdaptiveDynamicStreamingTemplate
 // This API is used to modify an adaptive bitrate streaming template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_BITRATE = "InvalidParameterValue.Bitrate"
+//  INVALIDPARAMETERVALUE_CODEC = "InvalidParameterValue.Codec"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEOBITRATE = "InvalidParameterValue.DisableHigherVideoBitrate"
+//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEORESOLUTION = "InvalidParameterValue.DisableHigherVideoResolution"
+//  INVALIDPARAMETERVALUE_DRMTYPE = "InvalidParameterValue.DrmType"
+//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
+//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
+//  INVALIDPARAMETERVALUE_SOUNDSYSTEM = "InvalidParameterValue.SoundSystem"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
 func (c *Client) ModifyAdaptiveDynamicStreamingTemplate(request *ModifyAdaptiveDynamicStreamingTemplateRequest) (response *ModifyAdaptiveDynamicStreamingTemplateResponse, err error) {
     if request == nil {
         request = NewModifyAdaptiveDynamicStreamingTemplateRequest()
@@ -1974,7 +2864,22 @@ func NewModifyAnimatedGraphicsTemplateResponse() (response *ModifyAnimatedGraphi
     return
 }
 
+// ModifyAnimatedGraphicsTemplate
 // This API is used to modify a custom animated image generating template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_FORMATWEBPLACKWIDTHANDHEIGHT = "InvalidParameterValue.FormatWebpLackWidthAndHeight"
+//  INVALIDPARAMETERVALUE_FORMATWEBPWIDTHANDHEIGHTBOTHZERO = "InvalidParameterValue.FormatWebpWidthAndHeightBothZero"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_QUALITY = "InvalidParameterValue.Quality"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyAnimatedGraphicsTemplate(request *ModifyAnimatedGraphicsTemplateRequest) (response *ModifyAnimatedGraphicsTemplateResponse, err error) {
     if request == nil {
         request = NewModifyAnimatedGraphicsTemplateRequest()
@@ -1999,7 +2904,17 @@ func NewModifyClassResponse() (response *ModifyClassResponse) {
     return
 }
 
+// ModifyClass
 // This API is used to modify the category of a media file.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSNAMEDUPLICATE = "FailedOperation.ClassNameDuplicate"
+//  FAILEDOPERATION_CLASSNOFOUND = "FailedOperation.ClassNoFound"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_CLASSID = "InvalidParameterValue.ClassId"
+//  INVALIDPARAMETERVALUE_CLASSNAME = "InvalidParameterValue.ClassName"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyClass(request *ModifyClassRequest) (response *ModifyClassResponse, err error) {
     if request == nil {
         request = NewModifyClassRequest()
@@ -2024,7 +2939,24 @@ func NewModifyContentReviewTemplateResponse() (response *ModifyContentReviewTemp
     return
 }
 
+// ModifyContentReviewTemplate
 // This API is used to modify custom intelligent video content recognition templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BLOCKCONFIDENCE = "InvalidParameterValue.BlockConfidence"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REVIEWCONFIDENCE = "InvalidParameterValue.ReviewConfidence"
+//  INVALIDPARAMETERVALUE_REVIEWWALLSWITCH = "InvalidParameterValue.ReviewWallSwitch"
+//  INVALIDPARAMETERVALUE_SCREENSHOTINTERVAL = "InvalidParameterValue.ScreenshotInterval"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyContentReviewTemplate(request *ModifyContentReviewTemplateRequest) (response *ModifyContentReviewTemplateResponse, err error) {
     if request == nil {
         request = NewModifyContentReviewTemplateRequest()
@@ -2049,7 +2981,21 @@ func NewModifyImageSpriteTemplateResponse() (response *ModifyImageSpriteTemplate
     return
 }
 
+// ModifyImageSpriteTemplate
 // This API is used to modify a custom image sprite generating template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COLUMNCOUNT = "InvalidParameterValue.ColumnCount"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_ROWCOUNT = "InvalidParameterValue.RowCount"
+//  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
+//  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyImageSpriteTemplate(request *ModifyImageSpriteTemplateRequest) (response *ModifyImageSpriteTemplateResponse, err error) {
     if request == nil {
         request = NewModifyImageSpriteTemplateRequest()
@@ -2074,7 +3020,29 @@ func NewModifyMediaInfoResponse() (response *ModifyMediaInfoResponse) {
     return
 }
 
+// ModifyMediaInfo
 // This API is used to modify the attributes of a media file, including category, name, description, tag, expiration time, timestamp information, video thumbnail, and subtitle information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR_GETFILEINFOERROR = "InternalError.GetFileInfoError"
+//  INTERNALERROR_UPDATEMEDIAERROR = "InternalError.UpdateMediaError"
+//  INTERNALERROR_UPLOADCOVERIMAGEERROR = "InternalError.UploadCoverImageError"
+//  INVALIDPARAMETERVALUE_ADDKEYFRAMEDESCSANDCLEARKEYFRAMEDESCSCONFLICT = "InvalidParameterValue.AddKeyFrameDescsAndClearKeyFrameDescsConflict"
+//  INVALIDPARAMETERVALUE_ADDKEYFRAMEDESCSANDDELETEKEYFRAMEDESCSCONFLICT = "InvalidParameterValue.AddKeyFrameDescsAndDeleteKeyFrameDescsConflict"
+//  INVALIDPARAMETERVALUE_ADDTAGSANDCLEARTAGSCONFLICT = "InvalidParameterValue.AddTagsAndClearTagsConflict"
+//  INVALIDPARAMETERVALUE_ADDTAGSANDDELETETAGSCONFLICT = "InvalidParameterValue.AddTagsAndDeleteTagsConflict"
+//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
+//  INVALIDPARAMETERVALUE_EXPIRETIME = "InvalidParameterValue.ExpireTime"
+//  INVALIDPARAMETERVALUE_IMAGEDECODEERROR = "InvalidParameterValue.ImageDecodeError"
+//  INVALIDPARAMETERVALUE_KEYFRAMEDESCCONTENTTOOLONG = "InvalidParameterValue.KeyFrameDescContentTooLong"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TAGTOOLONG = "InvalidParameterValue.TagTooLong"
+//  LIMITEXCEEDED_KEYFRAMEDESCCOUNTREACHMAX = "LimitExceeded.KeyFrameDescCountReachMax"
+//  LIMITEXCEEDED_TAGCOUNTREACHMAX = "LimitExceeded.TagCountReachMax"
+//  RESOURCENOTFOUND_FILENOTEXIST = "ResourceNotFound.FileNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyMediaInfo(request *ModifyMediaInfoRequest) (response *ModifyMediaInfoResponse, err error) {
     if request == nil {
         request = NewModifyMediaInfoRequest()
@@ -2099,7 +3067,17 @@ func NewModifyPersonSampleResponse() (response *ModifyPersonSampleResponse) {
     return
 }
 
+// ModifyPersonSample
 // This API is used to modify sample information according to the sample ID. You can modify the name and description, add, delete, and reset facial features or tags. Leave at least one image after deleting facial features. To leave no image, please use the reset operation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"
+//  INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
+//  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyPersonSample(request *ModifyPersonSampleRequest) (response *ModifyPersonSampleResponse, err error) {
     if request == nil {
         request = NewModifyPersonSampleRequest()
@@ -2124,7 +3102,20 @@ func NewModifySampleSnapshotTemplateResponse() (response *ModifySampleSnapshotTe
     return
 }
 
+// ModifySampleSnapshotTemplate
 // This API is used to modify a custom sampled screencapturing template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
+//  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySampleSnapshotTemplate(request *ModifySampleSnapshotTemplateRequest) (response *ModifySampleSnapshotTemplateResponse, err error) {
     if request == nil {
         request = NewModifySampleSnapshotTemplateRequest()
@@ -2149,7 +3140,19 @@ func NewModifySnapshotByTimeOffsetTemplateResponse() (response *ModifySnapshotBy
     return
 }
 
+// ModifySnapshotByTimeOffsetTemplate
 // This API is used to modify a custom time point screencapturing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySnapshotByTimeOffsetTemplate(request *ModifySnapshotByTimeOffsetTemplateRequest) (response *ModifySnapshotByTimeOffsetTemplateResponse, err error) {
     if request == nil {
         request = NewModifySnapshotByTimeOffsetTemplateRequest()
@@ -2174,7 +3177,16 @@ func NewModifySubAppIdInfoResponse() (response *ModifySubAppIdInfoResponse) {
     return
 }
 
+// ModifySubAppIdInfo
 // This API is used to modify subapplication information, but it is not allowed to modify primary application information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySubAppIdInfo(request *ModifySubAppIdInfoRequest) (response *ModifySubAppIdInfoResponse, err error) {
     if request == nil {
         request = NewModifySubAppIdInfoRequest()
@@ -2199,7 +3211,15 @@ func NewModifySubAppIdStatusResponse() (response *ModifySubAppIdStatusResponse) 
     return
 }
 
+// ModifySubAppIdStatus
 // This API is used to enable/disable a subapplication. After a subapplication is disabled, its corresponding domain name will be blocked and its access to the console will be restricted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySubAppIdStatus(request *ModifySubAppIdStatusRequest) (response *ModifySubAppIdStatusResponse, err error) {
     if request == nil {
         request = NewModifySubAppIdStatusRequest()
@@ -2224,7 +3244,15 @@ func NewModifySuperPlayerConfigResponse() (response *ModifySuperPlayerConfigResp
     return
 }
 
+// ModifySuperPlayerConfig
 // This API is used to modify a superplayer configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySuperPlayerConfig(request *ModifySuperPlayerConfigRequest) (response *ModifySuperPlayerConfigResponse, err error) {
     if request == nil {
         request = NewModifySuperPlayerConfigRequest()
@@ -2249,7 +3277,35 @@ func NewModifyTranscodeTemplateResponse() (response *ModifyTranscodeTemplateResp
     return
 }
 
+// ModifyTranscodeTemplate
 // This API is used to modify a custom transcoding template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_AUDIOBITRATE = "InvalidParameterValue.AudioBitrate"
+//  INVALIDPARAMETERVALUE_AUDIOCHANNEL = "InvalidParameterValue.AudioChannel"
+//  INVALIDPARAMETERVALUE_AUDIOCODEC = "InvalidParameterValue.AudioCodec"
+//  INVALIDPARAMETERVALUE_AUDIOSAMPLERATE = "InvalidParameterValue.AudioSampleRate"
+//  INVALIDPARAMETERVALUE_BITRATE = "InvalidParameterValue.Bitrate"
+//  INVALIDPARAMETERVALUE_CODEC = "InvalidParameterValue.Codec"
+//  INVALIDPARAMETERVALUE_CONTAINER = "InvalidParameterValue.Container"
+//  INVALIDPARAMETERVALUE_FILTRATEAUDIO = "InvalidParameterValue.FiltrateAudio"
+//  INVALIDPARAMETERVALUE_FILTRATEVIDEO = "InvalidParameterValue.FiltrateVideo"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
+//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_RESOLUTIONADAPTIVE = "InvalidParameterValue.ResolutionAdaptive"
+//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
+//  INVALIDPARAMETERVALUE_TEHDTYPE = "InvalidParameterValue.TEHDType"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  INVALIDPARAMETERVALUE_VCRF = "InvalidParameterValue.Vcrf"
+//  INVALIDPARAMETERVALUE_VIDEOBITRATE = "InvalidParameterValue.VideoBitrate"
+//  INVALIDPARAMETERVALUE_VIDEOCODEC = "InvalidParameterValue.VideoCodec"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyTranscodeTemplate(request *ModifyTranscodeTemplateRequest) (response *ModifyTranscodeTemplateResponse, err error) {
     if request == nil {
         request = NewModifyTranscodeTemplateRequest()
@@ -2274,7 +3330,29 @@ func NewModifyWatermarkTemplateResponse() (response *ModifyWatermarkTemplateResp
     return
 }
 
+// ModifyWatermarkTemplate
 // This API is used to modify a custom watermarking template. The watermark type cannot be modified.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UPLOADWATERMARKERROR = "InternalError.UploadWatermarkError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_COORDINATEORIGIN = "InvalidParameterValue.CoordinateOrigin"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_IMAGECONTENT = "InvalidParameterValue.ImageContent"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REPEATTYPE = "InvalidParameterValue.RepeatType"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATEHEIGHT = "InvalidParameterValue.SvgTemplateHeight"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATEWIDTH = "InvalidParameterValue.SvgTemplateWidth"
+//  INVALIDPARAMETERVALUE_TEXTALPHA = "InvalidParameterValue.TextAlpha"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  INVALIDPARAMETERVALUE_XPOS = "InvalidParameterValue.XPos"
+//  INVALIDPARAMETERVALUE_YPOS = "InvalidParameterValue.YPos"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyWatermarkTemplate(request *ModifyWatermarkTemplateRequest) (response *ModifyWatermarkTemplateResponse, err error) {
     if request == nil {
         request = NewModifyWatermarkTemplateRequest()
@@ -2299,7 +3377,14 @@ func NewModifyWordSampleResponse() (response *ModifyWordSampleResponse) {
     return
 }
 
+// ModifyWordSample
 // This API is used to modify the use case and tag of a keyword. The keyword itself cannot be modified, but you can delete it and create another one if needed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_WORD = "ResourceNotFound.Word"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyWordSample(request *ModifyWordSampleRequest) (response *ModifyWordSampleResponse, err error) {
     if request == nil {
         request = NewModifyWordSampleRequest()
@@ -2324,7 +3409,14 @@ func NewParseStreamingManifestResponse() (response *ParseStreamingManifestRespon
     return
 }
 
+// ParseStreamingManifest
 // This API is used to parse the index file content and return the list of segment files to be uploaded when an HLS video is uploaded. A segment file path must be a relative path of the current directory or subdirectory instead of a URL or absolute path.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MEDIAMANIFESTCONTENT = "InvalidParameterValue.MediaManifestContent"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ParseStreamingManifest(request *ParseStreamingManifestRequest) (response *ParseStreamingManifestResponse, err error) {
     if request == nil {
         request = NewParseStreamingManifestRequest()
@@ -2349,17 +3441,45 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
     return
 }
 
+// ProcessMedia
 // This API is used to initiate a processing task for an audio/video media file in VOD, including:
+//
 // 1. Video transcoding (with watermark);
+//
 // 2. Animated image generating;
+//
 // 3. Time point screencapturing;
+//
 // 4. Sampled screencapturing;
+//
 // 5. Image sprite generating;
+//
 // 6. Cover generating by screencapturing;
+//
 // 7. Adaptive bitrate streaming (with encryption);
+//
 // 8. Intelligent content audit (detection of porn, terrorism, and politically sensitive information);
+//
 // 9. Intelligent content analysis (tag, category, cover, and frame-specific tag);
+//
 // 10. Intelligent content recognition (opening and closing credits, face, full text, text keyword, full speech, speech keyword, and object).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_TASKDUPLICATE = "FailedOperation.TaskDuplicate"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AIANALYSISTASKDEFINITION = "InvalidParameterValue.AiAnalysisTaskDefinition"
+//  INVALIDPARAMETERVALUE_AICONTENTREVIEWTASKDEFINITION = "InvalidParameterValue.AiContentReviewTaskDefinition"
+//  INVALIDPARAMETERVALUE_AIRECOGNITIONTASKDEFINITION = "InvalidParameterValue.AiRecognitionTaskDefinition"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMediaResponse, err error) {
     if request == nil {
         request = NewProcessMediaRequest()
@@ -2384,10 +3504,29 @@ func NewProcessMediaByProcedureResponse() (response *ProcessMediaByProcedureResp
     return
 }
 
+// ProcessMediaByProcedure
 // This API is used to initiate a processing task for a VOD video with a task flow template.
+//
 // There are two ways to create a task flow template:
+//
 // 1. Create and modify a task flow template in the console;
+//
 // 2. Create a task flow template through the task flow template API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_PROCEDURENAME = "InvalidParameterValue.ProcedureName"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  INVALIDPARAMETERVALUE_UNIQUEIDENTIFIER = "InvalidParameterValue.UniqueIdentifier"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ProcessMediaByProcedure(request *ProcessMediaByProcedureRequest) (response *ProcessMediaByProcedureResponse, err error) {
     if request == nil {
         request = NewProcessMediaByProcedureRequest()
@@ -2412,7 +3551,24 @@ func NewProcessMediaByUrlResponse() (response *ProcessMediaByUrlResponse) {
     return
 }
 
+// ProcessMediaByUrl
 // This API is <font color='red'>disused</font>, please use [ProcessMedia](https://intl.cloud.tencent.com/document/product/862/37578?from_cn_redirect=1) API of MPS, with the input parameter `InputInfo.UrlInputInfo.Url` set to a video URL.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_TASKDUPLICATE = "FailedOperation.TaskDuplicate"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETFILEINFOERROR = "InternalError.GetFileInfoError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AIANALYSISTASKDEFINITION = "InvalidParameterValue.AiAnalysisTaskDefinition"
+//  INVALIDPARAMETERVALUE_AICONTENTREVIEWTASKDEFINITION = "InvalidParameterValue.AiContentReviewTaskDefinition"
+//  INVALIDPARAMETERVALUE_AIRECOGNITIONTASKDEFINITION = "InvalidParameterValue.AiRecognitionTaskDefinition"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ProcessMediaByUrl(request *ProcessMediaByUrlRequest) (response *ProcessMediaByUrlResponse, err error) {
     if request == nil {
         request = NewProcessMediaByUrlRequest()
@@ -2437,11 +3593,24 @@ func NewPullEventsResponse() (response *PullEventsResponse) {
     return
 }
 
+// PullEvents
 // * This API is used to get event notifications from the business server through [reliable callback](https://intl.cloud.tencent.com/document/product/266/33948?lang=en&pg=).
+//
 // * The API gets event data through long polling. That is, if there is any unconsumed event on the server, the event notification will be returned to the requester immediately. If there is no unconsumed event on the server, the request will be suspended in the backend until a new event is generated.
+//
 // * The request can be suspended for up to 5 seconds. It’s recommended to set the request timeout period to 10 seconds.
+//
 // * Event notifications not being pulled will be retained for up to 4 days and may be cleared after this period.
+//
 // * After the API returns an event, the caller must call the [ConfirmEvents](https://intl.cloud.tencent.com/document/product/266/34184) API within <font color="red">30 seconds</font> to confirm that the event notification has been processed. Otherwise, the event notification will be pulled again after <font color="red">30 seconds</font>.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PullEvents(request *PullEventsRequest) (response *PullEventsResponse, err error) {
     if request == nil {
         request = NewPullEventsRequest()
@@ -2466,7 +3635,28 @@ func NewPullUploadResponse() (response *PullUploadResponse) {
     return
 }
 
+// PullUpload
 // This API is used to pull a video on the internet to the VOD platform.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COVERTYPE = "FailedOperation.CoverType"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXPIRETIME = "InvalidParameter.ExpireTime"
+//  INVALIDPARAMETER_STORAGEREGION = "InvalidParameter.StorageRegion"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COVERURL = "InvalidParameterValue.CoverUrl"
+//  INVALIDPARAMETERVALUE_EXPIRETIME = "InvalidParameterValue.ExpireTime"
+//  INVALIDPARAMETERVALUE_MEDIAURL = "InvalidParameterValue.MediaUrl"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_STORAGEREGION = "InvalidParameterValue.StorageRegion"
+//  RESOURCENOTFOUND_COVERURL = "ResourceNotFound.CoverUrl"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PullUpload(request *PullUploadRequest) (response *PullUploadResponse, err error) {
     if request == nil {
         request = NewPullUploadRequest()
@@ -2491,9 +3681,17 @@ func NewPushUrlCacheResponse() (response *PushUrlCacheResponse) {
     return
 }
 
+// PushUrlCache
 // 1. This API is used to prefetch a list of specified URLs.
+//
 // 2. The URL domain names must have already been registered with VOD.
+//
 // 3. Up to 20 URLs can be specified in one request.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PushUrlCache(request *PushUrlCacheRequest) (response *PushUrlCacheResponse, err error) {
     if request == nil {
         request = NewPushUrlCacheRequest()
@@ -2518,7 +3716,17 @@ func NewResetProcedureTemplateResponse() (response *ResetProcedureTemplateRespon
     return
 }
 
+// ResetProcedureTemplate
 // This API is used to reset a custom task flow template.  
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PROCEDURENAMENOTEXIST = "InvalidParameter.ProcedureNameNotExist"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ResetProcedureTemplate(request *ResetProcedureTemplateRequest) (response *ResetProcedureTemplateResponse, err error) {
     if request == nil {
         request = NewResetProcedureTemplateRequest()
@@ -2543,40 +3751,100 @@ func NewSearchMediaResponse() (response *SearchMediaResponse) {
     return
 }
 
+// SearchMedia
 // This API is used to search for media information and supports filtering and sorting the returned results in many ways. You can:
+//
 // - Specify the file ID set `FileIds` to return the media files with any ID in the set.
+//
 // - Fuzzily search by multiple media filenames `Names` or multiple descriptions `Descriptions`.
+//
 // - Search by multiple filename prefixes `NamePrefixes`.
+//
 // - Specify the category set `ClassIds` (please see the input parameters) to return the media files in any category in the set. For example, assuming that there are categories of `Movies`, `TV Series`, and `Variety Shows`, and there are subcategories of `History`, `Action`, and `Romance` in the category of `Movies`, if `Movies` and `TV Series` are specified in `ClassIds`, then all the subcategories under `Movies` and `TV Series` will be returned. However, if `History` and `Action` are specified in `ClassIds`, only the media files in these two subcategories will be returned.
+//
 // - Specify the tag set `Tags` (please see the input parameters) to return the media files with any tag in the set. For example, assuming that there are tags of `ACG`, `Drama`, and `YTPMV`, if `ACG` and `YTPMV` are specified in `Tags`, then any media files with either tag will be retrieved.
+//
 // - Specify the file type set `Categories` (please see the input parameters) to return the media files of any type in the set. For example, assuming that there are `Video`, `Audio`, and `Image` file types, if `Video` and `Audio` are specified in `Categories`, then all media files of these two types will be retrieved.
+//
 // - Specify the source set `SourceTypes` (please see the input parameters) to return the media files from any source in the set. For example, assuming that there are `Record` (live recording) and `Upload` (upload) sources, if `Record` and `Upload` are specified in `SourceTypes`, then all media files from these two sources will be retrieved.
+//
 // - Specify the live stream code set `StreamIds` (please see the input parameters) to filter live recording media files.
+//
 // - Specify the video ID set `Vids` (please see the input parameters) to filter live recording media files.
+//
 // - Specify the creation time range to filter media files.
+//
 // - Specify a text string `Text` for fuzzy search by media filenames or descriptions. (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead.)
+//
 // - Specify a media file source `SourceType` for search. (This is not recommended. `SourceTypes` should be used instead.)
+//
 // - Specify a live stream code `StreamId` for search. (This is not recommended. `StreamIds` should be used instead.)
+//
 // - Specify a video ID `Vid` for search. (This is not recommended. `Vids` should be used instead.)
+//
 // - Specify a creation start time `StartTime` for search. (This is not recommended. `CreateTime` should be used instead.)
+//
 // - Specify a creation end time `EndTime` for search. (This is not recommended. `CreateTime` should be used instead.)
+//
 // - Search by any combination of the parameters above. For example, you can search for the media files with the tags of "Drama" and "Suspense" in the category of "Movies" or "TV Series" created between 12:00:00, December 1, 2018 and 12:00:00, December 8, 2018. Please note that for any parameter that supports array input, the search logic between its elements is "OR", and the logical relationship between parameters is "AND".
+//
 // 
+//
 // - Sort the results by creation time and return them in multiple pages by specifying `Offset` and `Limit` (please see the input parameters).
+//
 // - Specify `Filters` to return specified types of media information (all types will be returned by default). Valid values:
+//
 //     1. Basic information `basicInfo`: media name, category, playback address, cover image, etc.
+//
 //     2. Metadata `metaData`: size, duration, video stream information, audio stream information, etc.
+//
 //     3. Information of the transcoding result `transcodeInfo`: addresses, video stream parameters, and audio stream parameters of various specifications generated by the file transcoding.
+//
 //     4. Information of the animated image generating result `animatedGraphicsInfo`: information of an animated image (such as .gif) generated from a video.
+//
 //     5. Information of a sampled screenshot `sampleSnapshotInfo`: information of a sampled screenshot of a video.
+//
 //     6. Information of an image sprite `imageSpriteInfo`: information of an image sprite generated from a video.
+//
 //     7. Information of a point-in-time screenshot `snapshotByTimeOffsetInfo`: information of a point-in-time screenshot of a video.
+//
 //     8. Information of a timestamp `keyFrameDescInfo`: information of a timestamp configured for a video.
+//
 //     9. Information of transcoding to adaptive bitrate streaming `adaptiveDynamicStreamingInfo`: specification, encryption type, muxing format, etc.
+//
 // 
+//
 // <div id="maxResultsDesc">Upper limit of returned results:</div>
+//
 // - The <b><a href="#p_offset">Offset</a> and <a href="#p_limit">Limit</a> parameters determine the number of search results on one single page. Note: if both of them use the default value, this API will return up to 10 results.</b>
+//
 // - <b>Up to 5,000 search results can be returned, and excessive ones will not be displayed. If there are too many search results, you are recommended to use more filters to narrow down the search results.</b>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETMEDIALISTERROR = "InternalError.GetMediaListError"
+//  INVALIDPARAMETERVALUE_CATEGORIES = "InvalidParameterValue.Categories"
+//  INVALIDPARAMETERVALUE_CLASSIDS = "InvalidParameterValue.ClassIds"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_FILEIDS = "InvalidParameterValue.FileIds"
+//  INVALIDPARAMETERVALUE_NAMEPREFIXES = "InvalidParameterValue.NamePrefixes"
+//  INVALIDPARAMETERVALUE_NAMES = "InvalidParameterValue.Names"
+//  INVALIDPARAMETERVALUE_OFFSET = "InvalidParameterValue.Offset"
+//  INVALIDPARAMETERVALUE_SORT = "InvalidParameterValue.Sort"
+//  INVALIDPARAMETERVALUE_SOURCETYPE = "InvalidParameterValue.SourceType"
+//  INVALIDPARAMETERVALUE_SOURCETYPES = "InvalidParameterValue.SourceTypes"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  INVALIDPARAMETERVALUE_STORAGEREGIONS = "InvalidParameterValue.StorageRegions"
+//  INVALIDPARAMETERVALUE_STREAMIDS = "InvalidParameterValue.StreamIds"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  INVALIDPARAMETERVALUE_TAGS = "InvalidParameterValue.Tags"
+//  INVALIDPARAMETERVALUE_TEXT = "InvalidParameterValue.Text"
+//  INVALIDPARAMETERVALUE_TYPES = "InvalidParameterValue.Types"
+//  INVALIDPARAMETERVALUE_VIDS = "InvalidParameterValue.Vids"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) SearchMedia(request *SearchMediaRequest) (response *SearchMediaResponse, err error) {
     if request == nil {
         request = NewSearchMediaRequest()
@@ -2601,29 +3869,63 @@ func NewSimpleHlsClipResponse() (response *SimpleHlsClipResponse) {
     return
 }
 
+// SimpleHlsClip
 // This API is used to clip an HLS video by time period and then generate a new HLS video which developers can share right away or store persistently.
+//
 // 
+//
 // VOD supports two types of clipping:
+//
 // - Clipping for persistent storage: the video clip is saved as an independent video file with a `FileId`.
+//
 // - Clipping for temporary sharing: the video clip is affiliated to the input file and has no `FileId`.
+//
 // 
+//
 // Notes:
+//
 // - Clipping is based on the input M3U8 file that contains the list of TS segments, so the smallest clipping unit is one TS segment instead of in seconds or less.
+//
 // 
+//
 // 
+//
 // ### Clipping for Persistent Storage
+//
 // In this mode, a video clip is saved as an independent video file with a `FileId`, and its lifecycle is not subject to the input video. Even if the source video is deleted, the video clip still exists. Moreover, the video clip can be transcoded, published on WeChat, and processed in other ways.
+//
 // 
+//
 // Take the video of a two-hour long football match for example. The customer may only want to store the original two-hour video for two months to save costs, but want to store clipped highlights for a specified longer time and also to transcode and publish such highlights on WeChat. Clipping for persistent storage is suitable for this customer.
+//
 // 
+//
 // The advantage of clipping for persistent storage is that the video clip has a lifecycle independent of the input video and can be managed independently and stored persistently.
+//
 // 
+//
 // ### Clipping for Temporary Sharing
+//
 // The video clip (an M3U8 file) shares the same TS segments with the input video instead of being an independent video. It only has a playback URL but has no `FileId`, and its validity period is the same as that of the input video. Once the input video is deleted, the video clip cannot be played back.
+//
 // 
+//
 // As the video clip is not an independent video, it will not be managed as a VOD media asset. For example, it will not be counted in the total videos displayed on the VOD console, and also cannot be transcoded or published on WeChat.
+//
 // 
+//
 // Clipping for temporary sharing is lightweight and incurs no additional storage fees. However, the video clip has the same lifecycle as the source recording video and cannot be transcoded or processed in other ways.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ENDTIMEOFFSET = "InvalidParameterValue.EndTimeOffset"
+//  INVALIDPARAMETERVALUE_STARTTIMEOFFSET = "InvalidParameterValue.StartTimeOffset"
+//  INVALIDPARAMETERVALUE_URL = "InvalidParameterValue.Url"
+//  RESOURCEUNAVAILABLE_MASTERPLAYLIST = "ResourceUnavailable.MasterPlaylist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) SimpleHlsClip(request *SimpleHlsClipRequest) (response *SimpleHlsClipResponse, err error) {
     if request == nil {
         request = NewSimpleHlsClipRequest()
@@ -2648,7 +3950,22 @@ func NewWeChatMiniProgramPublishResponse() (response *WeChatMiniProgramPublishRe
     return
 }
 
+// WeChatMiniProgramPublish
 // This API is used to publish a VOD video on WeChat Mini Program for playback in the WeChat Mini Program player.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_NOPRIVILEGES = "FailedOperation.NoPrivileges"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_FILETYPE = "InvalidParameterValue.FileType"
+//  INVALIDPARAMETERVALUE_SOURCEDEFINITION = "InvalidParameterValue.SourceDefinition"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  RESOURCENOTFOUND_FILENOTEXIST = "ResourceNotFound.FileNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) WeChatMiniProgramPublish(request *WeChatMiniProgramPublishRequest) (response *WeChatMiniProgramPublishResponse, err error) {
     if request == nil {
         request = NewWeChatMiniProgramPublishRequest()

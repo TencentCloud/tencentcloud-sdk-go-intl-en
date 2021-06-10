@@ -53,7 +53,7 @@ func (r *CreateMediaPackageChannelEndpointRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMediaPackageChannelEndpointRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -86,7 +86,7 @@ func (r *CreateMediaPackageChannelEndpointResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMediaPackageChannelEndpointResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -107,7 +107,7 @@ func (r *CreateMediaPackageChannelRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMediaPackageChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -139,7 +139,7 @@ func (r *CreateMediaPackageChannelResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMediaPackageChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -160,7 +160,7 @@ func (r *DeleteMediaPackageChannelEndpointsRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteMediaPackageChannelEndpointsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -189,7 +189,7 @@ func (r *DeleteMediaPackageChannelEndpointsResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteMediaPackageChannelEndpointsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -207,7 +207,7 @@ func (r *DeleteMediaPackageChannelsRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteMediaPackageChannelsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -241,7 +241,7 @@ func (r *DeleteMediaPackageChannelsResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteMediaPackageChannelsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -259,7 +259,7 @@ func (r *DescribeMediaPackageChannelRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMediaPackageChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -290,7 +290,7 @@ func (r *DescribeMediaPackageChannelResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMediaPackageChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -311,7 +311,7 @@ func (r *DescribeMediaPackageChannelsRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMediaPackageChannelsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -356,7 +356,7 @@ func (r *DescribeMediaPackageChannelsResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMediaPackageChannelsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -431,7 +431,7 @@ func (r *ModifyMediaPackageChannelEndpointRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaPackageChannelEndpointRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -462,7 +462,7 @@ func (r *ModifyMediaPackageChannelEndpointResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaPackageChannelEndpointResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -488,7 +488,7 @@ func (r *ModifyMediaPackageChannelInputAuthInfoRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaPackageChannelInputAuthInfoRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -521,7 +521,7 @@ func (r *ModifyMediaPackageChannelInputAuthInfoResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaPackageChannelInputAuthInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -545,7 +545,7 @@ func (r *ModifyMediaPackageChannelRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaPackageChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -575,7 +575,7 @@ func (r *ModifyMediaPackageChannelResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMediaPackageChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)

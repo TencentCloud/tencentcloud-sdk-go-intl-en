@@ -58,7 +58,12 @@ func NewAcceptOrganizationInvitationResponse() (response *AcceptOrganizationInvi
     return
 }
 
+// AcceptOrganizationInvitation
 // This API is used to accept an invitation to an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INORGANIZATIONALREADY = "FailedOperation.InOrganizationAlready"
+//  RESOURCENOTFOUND_INVITATIONNOTEXIST = "ResourceNotFound.InvitationNotExist"
 func (c *Client) AcceptOrganizationInvitation(request *AcceptOrganizationInvitationRequest) (response *AcceptOrganizationInvitationResponse, err error) {
     if request == nil {
         request = NewAcceptOrganizationInvitationRequest()
@@ -83,7 +88,15 @@ func NewAddOrganizationNodeResponse() (response *AddOrganizationNodeResponse) {
     return
 }
 
+// AddOrganizationNode
 // This API is used to add an organizational unit.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED_NODEDEPTHEXCEEDLIMIT = "LimitExceeded.NodeDepthExceedLimit"
+//  LIMITEXCEEDED_NODEEXCEEDLIMIT = "LimitExceeded.NodeExceedLimit"
+//  RESOURCEINUSE_NODENAME = "ResourceInUse.NodeName"
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) AddOrganizationNode(request *AddOrganizationNodeRequest) (response *AddOrganizationNodeResponse, err error) {
     if request == nil {
         request = NewAddOrganizationNodeRequest()
@@ -108,7 +121,11 @@ func NewCancelOrganizationInvitationResponse() (response *CancelOrganizationInvi
     return
 }
 
+// CancelOrganizationInvitation
 // This API is used to cancel an invitation to an organization.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INVITATIONNOTEXIST = "ResourceNotFound.InvitationNotExist"
 func (c *Client) CancelOrganizationInvitation(request *CancelOrganizationInvitationRequest) (response *CancelOrganizationInvitationResponse, err error) {
     if request == nil {
         request = NewCancelOrganizationInvitationRequest()
@@ -133,7 +150,12 @@ func NewCreateOrganizationResponse() (response *CreateOrganizationResponse) {
     return
 }
 
+// CreateOrganization
 // This API is used to create an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONEXISTALREADY = "FailedOperation.OrganizationExistAlready"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) CreateOrganization(request *CreateOrganizationRequest) (response *CreateOrganizationResponse, err error) {
     if request == nil {
         request = NewCreateOrganizationRequest()
@@ -158,7 +180,12 @@ func NewDeleteOrganizationResponse() (response *DeleteOrganizationResponse) {
     return
 }
 
+// DeleteOrganization
 // This API is used to delete an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONNOTEMPTY = "FailedOperation.OrganizationNotEmpty"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) DeleteOrganization(request *DeleteOrganizationRequest) (response *DeleteOrganizationResponse, err error) {
     if request == nil {
         request = NewDeleteOrganizationRequest()
@@ -183,7 +210,13 @@ func NewDeleteOrganizationMemberFromNodeResponse() (response *DeleteOrganization
     return
 }
 
+// DeleteOrganizationMemberFromNode
 // This API is used to delete an organization member.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DISABLEDELETEMEMBERFROMROOTNODE = "FailedOperation.DisableDeleteMemberFromRootNode"
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) DeleteOrganizationMemberFromNode(request *DeleteOrganizationMemberFromNodeRequest) (response *DeleteOrganizationMemberFromNodeResponse, err error) {
     if request == nil {
         request = NewDeleteOrganizationMemberFromNodeRequest()
@@ -208,7 +241,11 @@ func NewDeleteOrganizationMembersResponse() (response *DeleteOrganizationMembers
     return
 }
 
+// DeleteOrganizationMembers
 // This API is used to delete multiple organization members in a single request.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) DeleteOrganizationMembers(request *DeleteOrganizationMembersRequest) (response *DeleteOrganizationMembersResponse, err error) {
     if request == nil {
         request = NewDeleteOrganizationMembersRequest()
@@ -233,7 +270,12 @@ func NewDeleteOrganizationNodesResponse() (response *DeleteOrganizationNodesResp
     return
 }
 
+// DeleteOrganizationNodes
 // This API is used to delete multiple organizational units in a single request.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NODENOTEMPTY = "FailedOperation.NodeNotEmpty"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) DeleteOrganizationNodes(request *DeleteOrganizationNodesRequest) (response *DeleteOrganizationNodesResponse, err error) {
     if request == nil {
         request = NewDeleteOrganizationNodesRequest()
@@ -258,7 +300,11 @@ func NewDenyOrganizationInvitationResponse() (response *DenyOrganizationInvitati
     return
 }
 
+// DenyOrganizationInvitation
 // This API is used to decline an invitation to an organization.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INVITATIONNOTEXIST = "ResourceNotFound.InvitationNotExist"
 func (c *Client) DenyOrganizationInvitation(request *DenyOrganizationInvitationRequest) (response *DenyOrganizationInvitationResponse, err error) {
     if request == nil {
         request = NewDenyOrganizationInvitationRequest()
@@ -283,7 +329,12 @@ func NewGetOrganizationResponse() (response *GetOrganizationResponse) {
     return
 }
 
+// GetOrganization
 // This API is used to obtain information on organizations.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) GetOrganization(request *GetOrganizationRequest) (response *GetOrganizationResponse, err error) {
     if request == nil {
         request = NewGetOrganizationRequest()
@@ -308,7 +359,12 @@ func NewGetOrganizationMemberResponse() (response *GetOrganizationMemberResponse
     return
 }
 
+// GetOrganizationMember
 // This API is used to obtain information on organization members.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) GetOrganizationMember(request *GetOrganizationMemberRequest) (response *GetOrganizationMemberResponse, err error) {
     if request == nil {
         request = NewGetOrganizationMemberRequest()
@@ -333,7 +389,11 @@ func NewListOrganizationInvitationsResponse() (response *ListOrganizationInvitat
     return
 }
 
+// ListOrganizationInvitations
 // This API is used to obtain an invitation list.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) ListOrganizationInvitations(request *ListOrganizationInvitationsRequest) (response *ListOrganizationInvitationsResponse, err error) {
     if request == nil {
         request = NewListOrganizationInvitationsRequest()
@@ -358,7 +418,11 @@ func NewListOrganizationMembersResponse() (response *ListOrganizationMembersResp
     return
 }
 
+// ListOrganizationMembers
 // This API is used to obtain a list of organization members.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) ListOrganizationMembers(request *ListOrganizationMembersRequest) (response *ListOrganizationMembersResponse, err error) {
     if request == nil {
         request = NewListOrganizationMembersRequest()
@@ -383,7 +447,12 @@ func NewListOrganizationNodeMembersResponse() (response *ListOrganizationNodeMem
     return
 }
 
+// ListOrganizationNodeMembers
 // This API is used to obtain a list of organizational unit members.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) ListOrganizationNodeMembers(request *ListOrganizationNodeMembersRequest) (response *ListOrganizationNodeMembersResponse, err error) {
     if request == nil {
         request = NewListOrganizationNodeMembersRequest()
@@ -408,7 +477,11 @@ func NewListOrganizationNodesResponse() (response *ListOrganizationNodesResponse
     return
 }
 
+// ListOrganizationNodes
 // This API is used to obtain a list of organizational units.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) ListOrganizationNodes(request *ListOrganizationNodesRequest) (response *ListOrganizationNodesResponse, err error) {
     if request == nil {
         request = NewListOrganizationNodesRequest()
@@ -433,7 +506,13 @@ func NewMoveOrganizationMembersToNodeResponse() (response *MoveOrganizationMembe
     return
 }
 
+// MoveOrganizationMembersToNode
 // This API is used to move members to a specified organizational unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SOMEUINSNOTINORGANIZATION = "FailedOperation.SomeUinsNotInOrganization"
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) MoveOrganizationMembersToNode(request *MoveOrganizationMembersToNodeRequest) (response *MoveOrganizationMembersToNodeResponse, err error) {
     if request == nil {
         request = NewMoveOrganizationMembersToNodeRequest()
@@ -458,7 +537,12 @@ func NewQuitOrganizationResponse() (response *QuitOrganizationResponse) {
     return
 }
 
+// QuitOrganization
 // This API is used to quit an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DISABLEQUITSELFCREATEDORGANIZATION = "FailedOperation.DisableQuitSelfCreatedOrganization"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) QuitOrganization(request *QuitOrganizationRequest) (response *QuitOrganizationResponse, err error) {
     if request == nil {
         request = NewQuitOrganizationRequest()
@@ -483,7 +567,17 @@ func NewSendOrganizationInvitationResponse() (response *SendOrganizationInvitati
     return
 }
 
+// SendOrganizationInvitation
 // This API is used to send an invitation to join an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MEMBERNAMEUSED = "FailedOperation.MemberNameUsed"
+//  FAILEDOPERATION_RESENTINVITATION = "FailedOperation.ReSentInvitation"
+//  FAILEDOPERATION_USERINORGANIZATION = "FailedOperation.UserInOrganization"
+//  FAILEDOPERATION_USERNOTREGISTER = "FailedOperation.UserNotRegister"
+//  LIMITEXCEEDED_MEMBERS = "LimitExceeded.Members"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) SendOrganizationInvitation(request *SendOrganizationInvitationRequest) (response *SendOrganizationInvitationResponse, err error) {
     if request == nil {
         request = NewSendOrganizationInvitationRequest()
@@ -508,7 +602,13 @@ func NewUpdateOrganizationMemberResponse() (response *UpdateOrganizationMemberRe
     return
 }
 
+// UpdateOrganizationMember
 // This API is used to update information on organization members.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MEMBERNAMEUSED = "FailedOperation.MemberNameUsed"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) UpdateOrganizationMember(request *UpdateOrganizationMemberRequest) (response *UpdateOrganizationMemberResponse, err error) {
     if request == nil {
         request = NewUpdateOrganizationMemberRequest()
@@ -533,7 +633,14 @@ func NewUpdateOrganizationNodeResponse() (response *UpdateOrganizationNodeRespon
     return
 }
 
+// UpdateOrganizationNode
 // This API is used to update organizational units.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED_NODEDEPTHEXCEEDLIMIT = "LimitExceeded.NodeDepthExceedLimit"
+//  RESOURCEINUSE_NODENAMEUSED = "ResourceInUse.NodeNameUsed"
+//  RESOURCENOTFOUND_NODENOTEXIST = "ResourceNotFound.NodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) UpdateOrganizationNode(request *UpdateOrganizationNodeRequest) (response *UpdateOrganizationNodeResponse, err error) {
     if request == nil {
         request = NewUpdateOrganizationNodeRequest()

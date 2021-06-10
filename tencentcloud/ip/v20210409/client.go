@@ -58,11 +58,23 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
     return
 }
 
+// CreateAccount
 // This API is used to create a Tencent Cloud account in the International Partner platform for a customer. After registration, the customer will be automatically bound to the partner account.
+//
 // 
+//
 // Notes:<br>
+//
 // 1. To create the Tencent Cloud account, the partner should enter and verify the customer’s email address and mobile number.<br>
+//
 // 2. The customer needs to complete personal information after the first login.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_MAILISREGISTERED = "FailedOperation.MailIsRegistered"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateAccountResponse, err error) {
     if request == nil {
         request = NewCreateAccountRequest()
@@ -87,7 +99,11 @@ func NewGetCountryCodesResponse() (response *GetCountryCodesResponse) {
     return
 }
 
+// GetCountryCodes
 // This API is used to obtain country and region codes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) GetCountryCodes(request *GetCountryCodesRequest) (response *GetCountryCodesResponse, err error) {
     if request == nil {
         request = NewGetCountryCodesRequest()

@@ -50,7 +50,7 @@ func (r *SendEmailRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SendEmailRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -87,7 +87,7 @@ func (r *SendEmailResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SendEmailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
@@ -120,7 +120,7 @@ func (r *SendTemplatedEmailRequest) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SendTemplatedEmailRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
@@ -156,7 +156,7 @@ func (r *SendTemplatedEmailResponse) ToJsonString() string {
     return string(b)
 }
 
-// It is highly **NOT** recommended to use this function
+// FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SendTemplatedEmailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)

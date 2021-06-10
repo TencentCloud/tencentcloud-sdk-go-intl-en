@@ -58,7 +58,16 @@ func NewCreatePictureResponse() (response *CreatePictureResponse) {
     return
 }
 
+// CreatePicture
 // This API is used to upload an image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_CHECKCONTENTFAILED = "InvalidParameter.CheckContentFailed"
+//  INVALIDPARAMETER_CHECKSUFFIXFAILED = "InvalidParameter.CheckSuffixFailed"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) CreatePicture(request *CreatePictureRequest) (response *CreatePictureResponse, err error) {
     if request == nil {
         request = NewCreatePictureRequest()
@@ -83,7 +92,17 @@ func NewCreateTroubleInfoResponse() (response *CreateTroubleInfoResponse) {
     return
 }
 
+// CreateTroubleInfo
 // This API is used to create exception information.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDFAIL = "InternalError.BackendFail"
+//  INTERNALERROR_BACKENDTIMEOUT = "InternalError.BackendTimeOut"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CreateTroubleInfo(request *CreateTroubleInfoRequest) (response *CreateTroubleInfoResponse, err error) {
     if request == nil {
         request = NewCreateTroubleInfoRequest()
@@ -108,7 +127,15 @@ func NewDeletePictureResponse() (response *DeletePictureResponse) {
     return
 }
 
+// DeletePicture
 // This API is used to delete an image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DeletePicture(request *DeletePictureRequest) (response *DeletePictureResponse, err error) {
     if request == nil {
         request = NewDeletePictureRequest()
@@ -133,7 +160,29 @@ func NewDescribeAbnormalEventResponse() (response *DescribeAbnormalEventResponse
     return
 }
 
+// DescribeAbnormalEvent
 // This API is used to query exception occurrences under a specified `SDKAppID` and return the exception IDs and possible causes. It queries data in last 15 days, and the query period is up to 1 hour, which can start and end on different days. For more information about exceptions, please see the exception event ID mapping table: https://intl.cloud.tencent.com/document/product/647/37906.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppid"
+//  INVALIDPARAMETER_STARTTIMEEXPIRE = "InvalidParameter.StartTimeExpire"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeAbnormalEvent(request *DescribeAbnormalEventRequest) (response *DescribeAbnormalEventResponse, err error) {
     if request == nil {
         request = NewDescribeAbnormalEventRequest()
@@ -158,8 +207,33 @@ func NewDescribeCallDetailResponse() (response *DescribeCallDetailResponse) {
     return
 }
 
+// DescribeCallDetail
 // This API is used to query the user list and call quality data of a specified time range in the last 14 days. When `DataType` is not null, data of up to 6 users during a period of up to 1 hour can be queried each time, and the period can start on one day and end on the next. When `DataType` and `UserIds` are null, 6 users are queried by default, and data of up to 100 users can be displayed on each page (`PageSize` set to 100 or lower). This API is used to query call quality and is not recommended for billing.
+//
 // Note: you are not advised to use the API for the processing of real-time business logic.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_PAGESIZEOVERSIZE = "InvalidParameter.PageSizeOversize"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppid"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_USERIDSMORETHANSIX = "InvalidParameter.UserIdsMorethanSix"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_COMMID = "MissingParameter.CommId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeCallDetail(request *DescribeCallDetailRequest) (response *DescribeCallDetailResponse, err error) {
     if request == nil {
         request = NewDescribeCallDetailRequest()
@@ -184,7 +258,31 @@ func NewDescribeDetailEventResponse() (response *DescribeDetailEventResponse) {
     return
 }
 
+// DescribeDetailEvent
 // This API is used to query a user’s activity details such as room entry/exit and video enablement/disablement during a call. It can query data for the last 14 days.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppid"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_URLPARAMSERROR = "InvalidParameter.UrlParamsError"
+//  INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_APPID = "MissingParameter.AppId"
+//  MISSINGPARAMETER_COMMID = "MissingParameter.CommId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
 func (c *Client) DescribeDetailEvent(request *DescribeDetailEventRequest) (response *DescribeDetailEventResponse, err error) {
     if request == nil {
         request = NewDescribeDetailEventRequest()
@@ -209,7 +307,25 @@ func NewDescribeHistoryScaleResponse() (response *DescribeHistoryScaleResponse) 
     return
 }
 
+// DescribeHistoryScale
 // This API is used to query the daily numbers of rooms and users under a specified `SDKAppID`. It can query data once per minute for the last 14 days. If a day has not ended, the numbers of rooms and users on the day cannot be queried.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppid"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_USERIDSMORETHANSIX = "InvalidParameter.UserIdsMorethanSix"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeHistoryScale(request *DescribeHistoryScaleRequest) (response *DescribeHistoryScaleResponse, err error) {
     if request == nil {
         request = NewDescribeHistoryScaleRequest()
@@ -234,7 +350,15 @@ func NewDescribePictureResponse() (response *DescribePictureResponse) {
     return
 }
 
+// DescribePicture
 // This API is used to query the parameters of an image.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribePicture(request *DescribePictureRequest) (response *DescribePictureResponse, err error) {
     if request == nil {
         request = NewDescribePictureRequest()
@@ -259,7 +383,26 @@ func NewDescribeRealtimeNetworkResponse() (response *DescribeRealtimeNetworkResp
     return
 }
 
+// DescribeRealtimeNetwork
 // This API is used to query the network conditions of an `SDKAppID`, including upstream and downstream packet loss, in the last 24 hours on a per-minute basis. The query period must be 1-60 minutes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INTERNALERROR_MONITORQUERYERR = "InternalError.MonitorQueryErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEEXPIRE = "InvalidParameter.StartTimeExpire"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeRealtimeNetwork(request *DescribeRealtimeNetworkRequest) (response *DescribeRealtimeNetworkResponse, err error) {
     if request == nil {
         request = NewDescribeRealtimeNetworkRequest()
@@ -284,7 +427,26 @@ func NewDescribeRealtimeQualityResponse() (response *DescribeRealtimeQualityResp
     return
 }
 
+// DescribeRealtimeQuality
 // This API is used to query the quality metrics of an `SDKAppID` in the last 24 hours on a per-minute basis, including room entry success rate, instant playback rate of the first frame, and audio/video lag rate. The query period must be 1-60 minutes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INTERNALERROR_MONITORQUERYERR = "InternalError.MonitorQueryErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEEXPIRE = "InvalidParameter.StartTimeExpire"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_URLPARAMSERROR = "InvalidParameter.UrlParamsError"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeRealtimeQuality(request *DescribeRealtimeQualityRequest) (response *DescribeRealtimeQualityResponse, err error) {
     if request == nil {
         request = NewDescribeRealtimeQualityRequest()
@@ -309,7 +471,24 @@ func NewDescribeRealtimeScaleResponse() (response *DescribeRealtimeScaleResponse
     return
 }
 
+// DescribeRealtimeScale
 //  This API is used to query the scale of an `SDKAppID` in the last 24 hours on a per-minute basis. The query period must be 1-60 minutes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INTERNALERROR_MONITORQUERYERR = "InternalError.MonitorQueryErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEEXPIRE = "InvalidParameter.StartTimeExpire"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeRealtimeScale(request *DescribeRealtimeScaleRequest) (response *DescribeRealtimeScaleResponse, err error) {
     if request == nil {
         request = NewDescribeRealtimeScaleRequest()
@@ -334,8 +513,35 @@ func NewDescribeRoomInformationResponse() (response *DescribeRoomInformationResp
     return
 }
 
+// DescribeRoomInformation
 // This API is used to query the room list of an `SDKAppID` in the last 14 days. It returns 10 calls by default and can return up to 100 calls per query.
+//
 // Note: you are not advised to use the API for the processing of real-time business logic.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_PAGENUMBER = "InvalidParameter.PageNumber"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_PAGESIZEOVERSIZE = "InvalidParameter.PageSizeOversize"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppid"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_URLPARAMSERROR = "InvalidParameter.UrlParamsError"
+//  INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_ROOMNUM = "MissingParameter.RoomNum"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeRoomInformation(request *DescribeRoomInformationRequest) (response *DescribeRoomInformationResponse, err error) {
     if request == nil {
         request = NewDescribeRoomInformationRequest()
@@ -360,8 +566,33 @@ func NewDescribeUserInformationResponse() (response *DescribeUserInformationResp
     return
 }
 
+// DescribeUserInformation
 // This API is used to query the user list of a specified time range (up to 4 hours) in the last 14 days. Data of 6 users is displayed on each page by default, and data of up to 100 users can be displayed on each page (`PageSize` set to 100 or lower).
+//
 // Note: you are not advised to use the API for the processing of real-time business logic.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_PAGESIZEOVERSIZE = "InvalidParameter.PageSizeOversize"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppid"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_USERIDSMORETHANSIX = "InvalidParameter.UserIdsMorethanSix"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_COMMID = "MissingParameter.CommId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeUserInformation(request *DescribeUserInformationRequest) (response *DescribeUserInformationResponse, err error) {
     if request == nil {
         request = NewDescribeUserInformationRequest()
@@ -386,7 +617,20 @@ func NewDismissRoomResponse() (response *DismissRoomResponse) {
     return
 }
 
+// DismissRoom
 // This API is used to remove all users from a room and dismiss the room. It supports all platforms. For Android, iOS, Windows, and macOS, the TRTC SDK needs to be upgraded to v6.6 or above.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETROOMCACHEIPERROR = "InternalError.GetRoomCacheIpError"
+//  INTERNALERROR_GETROOMFROMCACHEERROR = "InternalError.GetRoomFromCacheError"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) DismissRoom(request *DismissRoomRequest) (response *DismissRoomResponse, err error) {
     if request == nil {
         request = NewDismissRoomRequest()
@@ -411,7 +655,19 @@ func NewDismissRoomByStrRoomIdResponse() (response *DismissRoomByStrRoomIdRespon
     return
 }
 
+// DismissRoomByStrRoomId
 // This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETROOMCACHEIPERROR = "InternalError.GetRoomCacheIpError"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) DismissRoomByStrRoomId(request *DismissRoomByStrRoomIdRequest) (response *DismissRoomByStrRoomIdResponse, err error) {
     if request == nil {
         request = NewDismissRoomByStrRoomIdRequest()
@@ -436,7 +692,15 @@ func NewModifyPictureResponse() (response *ModifyPictureResponse) {
     return
 }
 
+// ModifyPicture
 // This API is used to modify the parameters of an image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) ModifyPicture(request *ModifyPictureRequest) (response *ModifyPictureResponse, err error) {
     if request == nil {
         request = NewModifyPictureRequest()
@@ -461,7 +725,22 @@ func NewRemoveUserResponse() (response *RemoveUserResponse) {
     return
 }
 
+// RemoveUser
 // This API is used to remove a user from a room. It is applicable to scenarios where the anchor, room owner, or admin wants to kick out a user. It supports all platforms. For Android, iOS, Windows, and macOS, the TRTC SDK needs to be upgraded to v6.6 or above.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETROOMCACHEIPERROR = "InternalError.GetRoomCacheIpError"
+//  INTERNALERROR_GETROOMFROMCACHEERROR = "InternalError.GetRoomFromCacheError"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_USERIDS = "InvalidParameter.UserIds"
+//  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_USERIDS = "MissingParameter.UserIds"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) RemoveUser(request *RemoveUserRequest) (response *RemoveUserResponse, err error) {
     if request == nil {
         request = NewRemoveUserRequest()
@@ -486,7 +765,21 @@ func NewRemoveUserByStrRoomIdResponse() (response *RemoveUserByStrRoomIdResponse
     return
 }
 
+// RemoveUserByStrRoomId
 // This API is used to remove a user from a room. It allows the anchor, room owner, or admin to kick out a user, and works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETROOMCACHEIPERROR = "InternalError.GetRoomCacheIpError"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_USERIDS = "InvalidParameter.UserIds"
+//  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_USERIDS = "MissingParameter.UserIds"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) RemoveUserByStrRoomId(request *RemoveUserByStrRoomIdRequest) (response *RemoveUserByStrRoomIdResponse, err error) {
     if request == nil {
         request = NewRemoveUserByStrRoomIdRequest()
@@ -511,24 +804,76 @@ func NewStartMCUMixTranscodeResponse() (response *StartMCUMixTranscodeResponse) 
     return
 }
 
+// StartMCUMixTranscode
 // This API is used to enable On-Cloud MixTranscoding and specify the position of each channel of image in stream mixing.
+//
 // 
+//
 // There may be multiple channels of audio/video streams in a TRTC room. You can call this API to request the Tencent Cloud server to combine multiple channels of video images and audio into one channel and specify the position of each image so as to produce just one channel of audio/video stream for recording and live streaming. The mixing stops automatically after a room is destroyed.
+//
 // 
+//
 // You can use this API to perform the following operations:
+//
 // - Set image and audio quality parameters of the final live stream, including video resolution, video bitrate, video frame rate, and audio quality.
+//
 // - Set the layout, i.e., the position of each channel of image. You only need to set it once when enabling On-Cloud MixTranscoding, and the layout engine will automatically arrange images as configured.
+//
 // - Set the names of recording files for future playback.
+//
 // - Set the stream ID for CDN live streaming.
+//
 // 
+//
 // Currently, On-Cloud MixTranscoding supports the following layout templates:
+//
 // - Floating: the entire screen is covered by the video image of the first user who enters the room, and the images of other users are displayed as small images in horizontal rows in the bottom-left corner in room entry sequence. The screen can accommodate up to 4 rows of 4 small images, which float over the big image. Up to 1 big image and 15 small images can be displayed. A user sending audio only will still occupy an image spot.
+//
 // - Grid: the images of the users split the entire screen evenly. The more the users, the smaller the image dimensions. Up to 16 images can be displayed. A user sending audio only will still occupy an image spot.
+//
 // - Screen sharing: this is designed for video conferencing and online education. The shared screen (image of the anchor) is always displayed as the big image, which occupies the left half of the screen, and the images of other users occupy the right half in up to 2 columns of up to 8 small images each. Up to 1 big image and 15 small images can be displayed. If the aspect ratio of upstream images do not match that of output images, the big image on the left will be scaled and displayed in whole, while the small images on the right will be cropped.
+//
 // - Picture-in-picture: this is designed for mixing the dual-channel (small and big) image or big image with the audio of other users. The small images float over the big image. You can specify which users to be displayed as the big/small images as well as the positions of the small images. Up to 2 images are supported.
+//
 // - Custom: this is designed for cases where you want to specify the image positions of users in the mixed stream or preset image positions. If users are assigned to preset positions, the layout engine will reserve the positions for the users; if not, users will occupy the positions in room entry sequence. Once all preset positions are occupied, TRTC will stop mixing the audio and images of other users. If the placeholding feature is enabled for a custom template (`PlaceHolderMode` in `LayoutParams` set to 1), but a user for whom a place is reserved is not sending video data, the position will show the corresponding placeholder image (`PlaceImageId`).
+//
 // 
+//
 // Note: only applications created on and after January 9, 2020 can call this API directly. Applications created before use the stream mixing service of LVB by default. If you want to switch to MCU On-Cloud MixTranscoding, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REQUESTREJECTION = "FailedOperation.RequestRejection"
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETROOMFROMCACHEERROR = "InternalError.GetRoomFromCacheError"
+//  INVALIDPARAMETER_AUDIOENCODEPARAMS = "InvalidParameter.AudioEncodeParams"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_MAINVIDEORIGHTALIGN = "InvalidParameter.MainVideoRightAlign"
+//  INVALIDPARAMETER_MAINVIDEOSTREAMTYPE = "InvalidParameter.MainVideoStreamType"
+//  INVALIDPARAMETER_OUTPUTPARAMS = "InvalidParameter.OutputParams"
+//  INVALIDPARAMETER_PRESETLAYOUTCONFIG = "InvalidParameter.PresetLayoutConfig"
+//  INVALIDPARAMETER_PUREAUDIOSTREAM = "InvalidParameter.PureAudioStream"
+//  INVALIDPARAMETER_RECORDAUDIOONLY = "InvalidParameter.RecordAudioOnly"
+//  INVALIDPARAMETER_RECORDID = "InvalidParameter.RecordId"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_SMALLVIDEOLAYOUTPARAMS = "InvalidParameter.SmallVideoLayoutParams"
+//  INVALIDPARAMETER_SMALLVIDEOSTREAMTYPE = "InvalidParameter.SmallVideoStreamType"
+//  INVALIDPARAMETER_STREAMID = "InvalidParameter.StreamId"
+//  INVALIDPARAMETER_VIDEORESOLUTION = "InvalidParameter.VideoResolution"
+//  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+//  MISSINGPARAMETER_AUDIOENCODEPARAMS = "MissingParameter.AudioEncodeParams"
+//  MISSINGPARAMETER_BIZID = "MissingParameter.BizId"
+//  MISSINGPARAMETER_ENCODEPARAMS = "MissingParameter.EncodeParams"
+//  MISSINGPARAMETER_OUTPUTPARAMS = "MissingParameter.OutputParams"
+//  MISSINGPARAMETER_PRESETLAYOUTCONFIG = "MissingParameter.PresetLayoutConfig"
+//  MISSINGPARAMETER_PUBLISHCDNPARAMS = "MissingParameter.PublishCdnParams"
+//  MISSINGPARAMETER_PUBLISHCDNURLS = "MissingParameter.PublishCdnUrls"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STREAMID = "MissingParameter.StreamId"
+//  MISSINGPARAMETER_VIDEOENCODEPARAMS = "MissingParameter.VideoEncodeParams"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) StartMCUMixTranscode(request *StartMCUMixTranscodeRequest) (response *StartMCUMixTranscodeResponse, err error) {
     if request == nil {
         request = NewStartMCUMixTranscodeRequest()
@@ -553,24 +898,72 @@ func NewStartMCUMixTranscodeByStrRoomIdResponse() (response *StartMCUMixTranscod
     return
 }
 
+// StartMCUMixTranscodeByStrRoomId
 // This API is used to enable On-Cloud MixTranscoding and specify the position of each channel of image in stream mixing.
+//
 // 
+//
 // There may be multiple channels of audio/video streams in a TRTC room. You can call this API to request the Tencent Cloud server to mix multiple channels of video images and audio into one channel and specify the position of each image so as to produce only one channel of audio/video stream for recording and live streaming.
+//
 // 
+//
 // You can use this API to perform the following operations:
+//
 // - Set image and audio quality parameters of the mixed stream, including video resolution, bitrate, frame rate, and audio quality.
+//
 // - Set the layout, i.e., the position of each channel of image. You only need to set it once when enabling On-Cloud MixTranscoding, and the layout engine will automatically arrange images as configured.
+//
 // - Set the names of recording files for future playback.
+//
 // - Set the stream ID for CDN live streaming.
+//
 // 
+//
 // Currently, On-Cloud MixTranscoding supports the following layout templates:
+//
 // - Floating: the entire screen is covered by the video image of the first user who enters the room, and the images of other users are displayed as small images in horizontal rows in the bottom-left corner in room entry sequence. The screen can accommodate up to 4 rows of 4 small images, which float over the big image. Up to 1 big image and 15 small images can be displayed. A user sending audio only will still occupy an image spot.
+//
 // - Grid: the images of all users split the screen evenly. The more the users, the smaller the image dimensions. Up to 16 images can be displayed. A user sending audio only will still occupy an image spot.
+//
 // - Screen sharing: this template is designed for video conferencing and online classes. The shared screen (or camera image of the anchor) is always displayed as the big image, which occupies the left half of the screen, and the images of other users occupy the right half in up to 2 columns of a maximum of 8 small images each. Up to 1 big image and 15 small images can be displayed. If the aspect ratio of upstream images does not match that of output images, the big image on the left will be scaled and displayed in whole, while the small images on the right will be cropped.
+//
 // - Picture-in-picture: this template mixes the big and small images or big image of a user with the audio of other users. The small image floats over the big image. You can specify the user whose big and small images are displayed and the position of the small image.
+//
 // - Custom: you can use custom templates to specify the image positions of users in mixed streams or preset image positions. If users are assigned to preset positions, the layout engine will reserve the positions for the users; if not, users will occupy the positions in room entry sequence. Once all preset positions are occupied, TRTC will stop mixing the audio and images of other users. If the placeholding feature is enabled for a custom template (`PlaceHolderMode` in `LayoutParams` is set to 1), but a user for whom a place is reserved is not sending video data, the position will show the corresponding placeholder image (`PlaceImageId`).
+//
 // 
+//
 // Note: only applications created on and after January 9, 2020 can call this API directly. Those created before use the stream mixing service of CSS by default. If you want to switch to MCU On-Cloud MixTranscoding, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REQUESTREJECTION = "FailedOperation.RequestRejection"
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUDIOENCODEPARAMS = "InvalidParameter.AudioEncodeParams"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_MAINVIDEOSTREAMTYPE = "InvalidParameter.MainVideoStreamType"
+//  INVALIDPARAMETER_OUTPUTPARAMS = "InvalidParameter.OutputParams"
+//  INVALIDPARAMETER_PRESETLAYOUTCONFIG = "InvalidParameter.PresetLayoutConfig"
+//  INVALIDPARAMETER_PUREAUDIOSTREAM = "InvalidParameter.PureAudioStream"
+//  INVALIDPARAMETER_RECORDAUDIOONLY = "InvalidParameter.RecordAudioOnly"
+//  INVALIDPARAMETER_RECORDID = "InvalidParameter.RecordId"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_SMALLVIDEOLAYOUTPARAMS = "InvalidParameter.SmallVideoLayoutParams"
+//  INVALIDPARAMETER_SMALLVIDEOSTREAMTYPE = "InvalidParameter.SmallVideoStreamType"
+//  INVALIDPARAMETER_STREAMID = "InvalidParameter.StreamId"
+//  INVALIDPARAMETER_VIDEORESOLUTION = "InvalidParameter.VideoResolution"
+//  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+//  MISSINGPARAMETER_AUDIOENCODEPARAMS = "MissingParameter.AudioEncodeParams"
+//  MISSINGPARAMETER_BIZID = "MissingParameter.BizId"
+//  MISSINGPARAMETER_ENCODEPARAMS = "MissingParameter.EncodeParams"
+//  MISSINGPARAMETER_OUTPUTPARAMS = "MissingParameter.OutputParams"
+//  MISSINGPARAMETER_PRESETLAYOUTCONFIG = "MissingParameter.PresetLayoutConfig"
+//  MISSINGPARAMETER_PUBLISHCDNPARAMS = "MissingParameter.PublishCdnParams"
+//  MISSINGPARAMETER_PUBLISHCDNURLS = "MissingParameter.PublishCdnUrls"
+//  MISSINGPARAMETER_STREAMID = "MissingParameter.StreamId"
+//  MISSINGPARAMETER_VIDEOENCODEPARAMS = "MissingParameter.VideoEncodeParams"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) StartMCUMixTranscodeByStrRoomId(request *StartMCUMixTranscodeByStrRoomIdRequest) (response *StartMCUMixTranscodeByStrRoomIdResponse, err error) {
     if request == nil {
         request = NewStartMCUMixTranscodeByStrRoomIdRequest()
@@ -595,7 +988,22 @@ func NewStopMCUMixTranscodeResponse() (response *StopMCUMixTranscodeResponse) {
     return
 }
 
+// StopMCUMixTranscode
 // This API is used to end On-Cloud MixTranscoding.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MIXSESSIONNOTEXIST = "FailedOperation.MixSessionNotExist"
+//  FAILEDOPERATION_REQUESTREJECTION = "FailedOperation.RequestRejection"
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETROOMFROMCACHEERROR = "InternalError.GetRoomFromCacheError"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) StopMCUMixTranscode(request *StopMCUMixTranscodeRequest) (response *StopMCUMixTranscodeResponse, err error) {
     if request == nil {
         request = NewStopMCUMixTranscodeRequest()
@@ -620,7 +1028,22 @@ func NewStopMCUMixTranscodeByStrRoomIdResponse() (response *StopMCUMixTranscodeB
     return
 }
 
+// StopMCUMixTranscodeByStrRoomId
 // This API is used to stop On-Cloud MixTranscoding.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MIXSESSIONNOTEXIST = "FailedOperation.MixSessionNotExist"
+//  FAILEDOPERATION_REQUESTREJECTION = "FailedOperation.RequestRejection"
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  FAILEDOPERATION_SDKAPPIDNOTEXIST = "FailedOperation.SdkAppIdNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) StopMCUMixTranscodeByStrRoomId(request *StopMCUMixTranscodeByStrRoomIdRequest) (response *StopMCUMixTranscodeByStrRoomIdResponse, err error) {
     if request == nil {
         request = NewStopMCUMixTranscodeByStrRoomIdRequest()

@@ -58,13 +58,29 @@ func NewAttachInstancesResponse() (response *AttachInstancesResponse) {
     return
 }
 
+// AttachInstances
 // This API is used to add existing instances to the compute environment.
+//
 // Considerations: <br/>
+//
 // 1. The instance should not be in the batch compute system.<br/>
+//
 // 2. The instance status should be 'running'.<br/>
+//
 // 3. It supports dedicated CVMs and pay-as-you-go instances that billed on an hourly basis. Spot instances are not supported.<b/>
+//
 // 
+//
 // For instances added to the compute environment, their UserData will be reset and the operating systems will be reinstalled.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  INVALIDPARAMETERVALUE_INSTANCEIDDUPLICATED = "InvalidParameterValue.InstanceIdDuplicated"
+//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INSTANCESNOTALLOWTOATTACH = "UnsupportedOperation.InstancesNotAllowToAttach"
 func (c *Client) AttachInstances(request *AttachInstancesRequest) (response *AttachInstancesResponse, err error) {
     if request == nil {
         request = NewAttachInstancesRequest()
@@ -89,7 +105,30 @@ func NewCreateComputeEnvResponse() (response *CreateComputeEnvResponse) {
     return
 }
 
+// CreateComputeEnv
 // This API is used to create a compute environment.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
+//  INTERNALERROR_CALLTAGAPI = "InternalError.CallTagAPI"
+//  INVALIDPARAMETER_CVMPARAMETERS = "InvalidParameter.CvmParameters"
+//  INVALIDPARAMETER_ENVDESCRIPTIONTOOLONG = "InvalidParameter.EnvDescriptionTooLong"
+//  INVALIDPARAMETER_ENVNAMETOOLONG = "InvalidParameter.EnvNameTooLong"
+//  INVALIDPARAMETER_NOTIFICATIONEVENTNAMEDUPLICATE = "InvalidParameter.NotificationEventNameDuplicate"
+//  INVALIDPARAMETER_NOTIFICATIONTOPICNAME = "InvalidParameter.NotificationTopicName"
+//  INVALIDPARAMETER_NOTIFICATIONTOPICNAMETOOLONG = "InvalidParameter.NotificationTopicNameTooLong"
+//  INVALIDPARAMETERVALUE_COMPUTEENV = "InvalidParameterValue.ComputeEnv"
+//  INVALIDPARAMETERVALUE_INSTANCETYPE = "InvalidParameterValue.InstanceType"
+//  INVALIDPARAMETERVALUE_LOCALPATH = "InvalidParameterValue.LocalPath"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_REMOTESTORAGEPATH = "InvalidParameterValue.RemoteStoragePath"
+//  INVALIDPARAMETERVALUE_REMOTESTORAGESCHEMETYPE = "InvalidParameterValue.RemoteStorageSchemeType"
+//  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
+//  LIMITEXCEEDED_COMPUTEENVQUOTA = "LimitExceeded.ComputeEnvQuota"
+//  LIMITEXCEEDED_CPUQUOTA = "LimitExceeded.CpuQuota"
+//  UNAUTHORIZEDOPERATION_USERNOTALLOWEDTOUSEBATCH = "UnauthorizedOperation.UserNotAllowedToUseBatch"
 func (c *Client) CreateComputeEnv(request *CreateComputeEnvRequest) (response *CreateComputeEnvResponse, err error) {
     if request == nil {
         request = NewCreateComputeEnvRequest()
@@ -114,7 +153,26 @@ func NewCreateTaskTemplateResponse() (response *CreateTaskTemplateResponse) {
     return
 }
 
+// CreateTaskTemplate
 // This API is used to create a task template.
+//
+// error code that may be returned:
+//  ALLOWEDONEATTRIBUTEINENVIDANDCOMPUTEENV = "AllowedOneAttributeInEnvIdAndComputeEnv"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CVMPARAMETERS = "InvalidParameter.CvmParameters"
+//  INVALIDPARAMETER_TASKNAME = "InvalidParameter.TaskName"
+//  INVALIDPARAMETER_TASKNAMETOOLONG = "InvalidParameter.TaskNameTooLong"
+//  INVALIDPARAMETER_TASKTEMPLATENAME = "InvalidParameter.TaskTemplateName"
+//  INVALIDPARAMETER_TASKTEMPLATENAMETOOLONG = "InvalidParameter.TaskTemplateNameTooLong"
+//  INVALIDPARAMETERVALUE_COMPUTEENV = "InvalidParameterValue.ComputeEnv"
+//  INVALIDPARAMETERVALUE_DEPENDENCENOTFOUNDTASKNAME = "InvalidParameterValue.DependenceNotFoundTaskName"
+//  INVALIDPARAMETERVALUE_DEPENDENCEUNFEASIBLE = "InvalidParameterValue.DependenceUnfeasible"
+//  INVALIDPARAMETERVALUE_LOCALPATH = "InvalidParameterValue.LocalPath"
+//  INVALIDPARAMETERVALUE_MAXRETRYCOUNT = "InvalidParameterValue.MaxRetryCount"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_REMOTESTORAGEPATH = "InvalidParameterValue.RemoteStoragePath"
+//  INVALIDPARAMETERVALUE_REMOTESTORAGESCHEMETYPE = "InvalidParameterValue.RemoteStorageSchemeType"
+//  LIMITEXCEEDED_TASKTEMPLATEQUOTA = "LimitExceeded.TaskTemplateQuota"
 func (c *Client) CreateTaskTemplate(request *CreateTaskTemplateRequest) (response *CreateTaskTemplateResponse, err error) {
     if request == nil {
         request = NewCreateTaskTemplateRequest()
@@ -139,7 +197,17 @@ func NewDeleteComputeEnvResponse() (response *DeleteComputeEnvResponse) {
     return
 }
 
+// DeleteComputeEnv
 // This API is used to delete a compute environment.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ACCEPTOTHERREQUEST = "UnsupportedOperation.AcceptOtherRequest"
+//  UNSUPPORTEDOPERATION_COMPUTEENVOPERATION = "UnsupportedOperation.ComputeEnvOperation"
+//  UNSUPPORTEDOPERATION_COMPUTENODEFORBIDTERMINATE = "UnsupportedOperation.ComputeNodeForbidTerminate"
 func (c *Client) DeleteComputeEnv(request *DeleteComputeEnvRequest) (response *DeleteComputeEnvResponse, err error) {
     if request == nil {
         request = NewDeleteComputeEnvRequest()
@@ -164,9 +232,19 @@ func NewDeleteJobResponse() (response *DeleteJobResponse) {
     return
 }
 
+// DeleteJob
 // This API is used to delete a job.
+//
 // Deleting a job is equivalent to deleting all the information related to the job. After successful deletion, all information related to the job cannot be queried.
+//
 // The job to be deleted must be in a completed state, and all task instances contained in it must also be in a completed state; otherwise, the operation will be prohibited. The completed state can be either SUCCEED or FAILED.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCEINUSE_JOB = "ResourceInUse.Job"
+//  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteJob(request *DeleteJobRequest) (response *DeleteJobResponse, err error) {
     if request == nil {
         request = NewDeleteJobRequest()
@@ -191,7 +269,13 @@ func NewDeleteTaskTemplatesResponse() (response *DeleteTaskTemplatesResponse) {
     return
 }
 
+// DeleteTaskTemplates
 // This API is used to delete task template information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_TASKTEMPLATEIDMALFORMED = "InvalidParameter.TaskTemplateIdMalformed"
+//  RESOURCENOTFOUND_TASKTEMPLATE = "ResourceNotFound.TaskTemplate"
 func (c *Client) DeleteTaskTemplates(request *DeleteTaskTemplatesRequest) (response *DeleteTaskTemplatesResponse, err error) {
     if request == nil {
         request = NewDeleteTaskTemplatesRequest()
@@ -216,7 +300,16 @@ func NewDescribeAvailableCvmInstanceTypesResponse() (response *DescribeAvailable
     return
 }
 
+// DescribeAvailableCvmInstanceTypes
 // This API is used to view the information of available CVM model configurations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 func (c *Client) DescribeAvailableCvmInstanceTypes(request *DescribeAvailableCvmInstanceTypesRequest) (response *DescribeAvailableCvmInstanceTypesResponse, err error) {
     if request == nil {
         request = NewDescribeAvailableCvmInstanceTypesRequest()
@@ -241,7 +334,13 @@ func NewDescribeComputeEnvResponse() (response *DescribeComputeEnvResponse) {
     return
 }
 
+// DescribeComputeEnv
 // This API is used to query compute environment details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
 func (c *Client) DescribeComputeEnv(request *DescribeComputeEnvRequest) (response *DescribeComputeEnvResponse, err error) {
     if request == nil {
         request = NewDescribeComputeEnvRequest()
@@ -266,7 +365,15 @@ func NewDescribeComputeEnvActivitiesResponse() (response *DescribeComputeEnvActi
     return
 }
 
+// DescribeComputeEnvActivities
 // This API is used to query the information of activities in the compute environment.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_COMPUTENODEIDMALFORMED = "InvalidParameter.ComputeNodeIdMalformed"
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeComputeEnvActivities(request *DescribeComputeEnvActivitiesRequest) (response *DescribeComputeEnvActivitiesResponse, err error) {
     if request == nil {
         request = NewDescribeComputeEnvActivitiesRequest()
@@ -291,7 +398,12 @@ func NewDescribeComputeEnvCreateInfoResponse() (response *DescribeComputeEnvCrea
     return
 }
 
+// DescribeComputeEnvCreateInfo
 // Views compute environment creation information.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
 func (c *Client) DescribeComputeEnvCreateInfo(request *DescribeComputeEnvCreateInfoRequest) (response *DescribeComputeEnvCreateInfoResponse, err error) {
     if request == nil {
         request = NewDescribeComputeEnvCreateInfoRequest()
@@ -316,7 +428,15 @@ func NewDescribeComputeEnvCreateInfosResponse() (response *DescribeComputeEnvCre
     return
 }
 
+// DescribeComputeEnvCreateInfos
 // This API is used to view the list of information of compute environment creation, including name, description, type, environment parameters, notifications, and number of desired nodes.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  INVALIDPARAMETER_INVALIDPARAMETERCOMBINATION = "InvalidParameter.InvalidParameterCombination"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeComputeEnvCreateInfos(request *DescribeComputeEnvCreateInfosRequest) (response *DescribeComputeEnvCreateInfosResponse, err error) {
     if request == nil {
         request = NewDescribeComputeEnvCreateInfosRequest()
@@ -341,7 +461,18 @@ func NewDescribeComputeEnvsResponse() (response *DescribeComputeEnvsResponse) {
     return
 }
 
+// DescribeComputeEnvs
 // This API is used to view the list of compute environments.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  INVALIDPARAMETER_INVALIDPARAMETERCOMBINATION = "InvalidParameter.InvalidParameterCombination"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_RESOURCETYPE = "InvalidParameterValue.ResourceType"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeComputeEnvs(request *DescribeComputeEnvsRequest) (response *DescribeComputeEnvsResponse, err error) {
     if request == nil {
         request = NewDescribeComputeEnvsRequest()
@@ -366,7 +497,17 @@ func NewDescribeCvmZoneInstanceConfigInfosResponse() (response *DescribeCvmZoneI
     return
 }
 
+// DescribeCvmZoneInstanceConfigInfos
 // This API is used to get the model configuration information of the availability zone of BatchCompute.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDBATCHINSTANCECHARGETYPE = "InvalidParameterValue.UnsupportedBatchInstanceChargeType"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 func (c *Client) DescribeCvmZoneInstanceConfigInfos(request *DescribeCvmZoneInstanceConfigInfosRequest) (response *DescribeCvmZoneInstanceConfigInfosResponse, err error) {
     if request == nil {
         request = NewDescribeCvmZoneInstanceConfigInfosRequest()
@@ -391,7 +532,12 @@ func NewDescribeInstanceCategoriesResponse() (response *DescribeInstanceCategori
     return
 }
 
+// DescribeInstanceCategories
 // Currently, CVM instance families are classified into different category, and each category contains several instance families. This API is used to query the instance category information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeInstanceCategories(request *DescribeInstanceCategoriesRequest) (response *DescribeInstanceCategoriesResponse, err error) {
     if request == nil {
         request = NewDescribeInstanceCategoriesRequest()
@@ -416,7 +562,13 @@ func NewDescribeJobResponse() (response *DescribeJobResponse) {
     return
 }
 
+// DescribeJob
 // This API is used to view the details of a job, including internal task (Task) and dependency (Dependence) information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
 func (c *Client) DescribeJob(request *DescribeJobRequest) (response *DescribeJobResponse, err error) {
     if request == nil {
         request = NewDescribeJobRequest()
@@ -441,7 +593,13 @@ func NewDescribeJobSubmitInfoResponse() (response *DescribeJobSubmitInfoResponse
     return
 }
 
+// DescribeJobSubmitInfo
 // This API is used to query the submission information of the specified job, with the return including the job submission information used as input parameters in the JobId and SubmitJob APIs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
 func (c *Client) DescribeJobSubmitInfo(request *DescribeJobSubmitInfoRequest) (response *DescribeJobSubmitInfoResponse, err error) {
     if request == nil {
         request = NewDescribeJobSubmitInfoRequest()
@@ -466,7 +624,17 @@ func NewDescribeJobsResponse() (response *DescribeJobsResponse) {
     return
 }
 
+// DescribeJobs
 // This API is used to query the overview information of several instances.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER_INVALIDPARAMETERCOMBINATION = "InvalidParameter.InvalidParameterCombination"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeJobs(request *DescribeJobsRequest) (response *DescribeJobsResponse, err error) {
     if request == nil {
         request = NewDescribeJobsRequest()
@@ -491,7 +659,13 @@ func NewDescribeTaskResponse() (response *DescribeTaskResponse) {
     return
 }
 
+// DescribeTask
 // This API is used to query the details of a specified task, including information of the task instances inside the task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCENOTFOUND_TASK = "ResourceNotFound.Task"
 func (c *Client) DescribeTask(request *DescribeTaskRequest) (response *DescribeTaskResponse, err error) {
     if request == nil {
         request = NewDescribeTaskRequest()
@@ -516,7 +690,20 @@ func NewDescribeTaskLogsResponse() (response *DescribeTaskLogsResponse) {
     return
 }
 
+// DescribeTaskLogs
 // This API is used to get the standard outputs and standard error logs of multiple task instances.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  INVALIDPARAMETER_TASKNAME = "InvalidParameter.TaskName"
+//  INVALIDPARAMETER_TASKNAMETOOLONG = "InvalidParameter.TaskNameTooLong"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
+//  RESOURCENOTFOUND_TASK = "ResourceNotFound.Task"
+//  RESOURCENOTFOUND_TASKINSTANCE = "ResourceNotFound.TaskInstance"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeTaskLogs(request *DescribeTaskLogsRequest) (response *DescribeTaskLogsResponse, err error) {
     if request == nil {
         request = NewDescribeTaskLogsRequest()
@@ -541,7 +728,15 @@ func NewDescribeTaskTemplatesResponse() (response *DescribeTaskTemplatesResponse
     return
 }
 
+// DescribeTaskTemplates
 // This API is used to query the information of task templates.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETERCOMBINATION = "InvalidParameter.InvalidParameterCombination"
+//  INVALIDPARAMETER_TASKTEMPLATEIDMALFORMED = "InvalidParameter.TaskTemplateIdMalformed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeTaskTemplates(request *DescribeTaskTemplatesRequest) (response *DescribeTaskTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeTaskTemplatesRequest()
@@ -566,7 +761,17 @@ func NewDetachInstancesResponse() (response *DetachInstancesResponse) {
     return
 }
 
+// DetachInstances
 // This API is used to remove instances that from compute environment. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  INVALIDPARAMETERVALUE_INSTANCEIDDUPLICATED = "InvalidParameterValue.InstanceIdDuplicated"
+//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DetachInstances(request *DetachInstancesRequest) (response *DetachInstancesResponse, err error) {
     if request == nil {
         request = NewDetachInstancesRequest()
@@ -591,7 +796,26 @@ func NewModifyComputeEnvResponse() (response *ModifyComputeEnvResponse) {
     return
 }
 
+// ModifyComputeEnv
 // This API is used to modify the attributes of a compute environment.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCPMAPI = "InternalError.CallCpmAPI"
+//  INVALIDPARAMETER_ENVDESCRIPTIONTOOLONG = "InvalidParameter.EnvDescriptionTooLong"
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  INVALIDPARAMETER_ENVNAMETOOLONG = "InvalidParameter.EnvNameTooLong"
+//  INVALIDPARAMETERVALUE_INSTANCETYPE = "InvalidParameterValue.InstanceType"
+//  INVALIDPARAMETERVALUE_INSTANCETYPEDUPLICATE = "InvalidParameterValue.InstanceTypeDuplicate"
+//  INVALIDPARAMETERVALUE_INSTANCETYPESEMPTY = "InvalidParameterValue.InstanceTypesEmpty"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  LIMITEXCEEDED_CPUQUOTA = "LimitExceeded.CpuQuota"
+//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
+//  UNSUPPORTEDOPERATION_ACCEPTOTHERREQUEST = "UnsupportedOperation.AcceptOtherRequest"
+//  UNSUPPORTEDOPERATION_COMPUTEENVACCEPTOTHERREQUEST = "UnsupportedOperation.ComputeEnvAcceptOtherRequest"
+//  UNSUPPORTEDOPERATION_COMPUTENODEFORBIDTERMINATE = "UnsupportedOperation.ComputeNodeForbidTerminate"
+//  UNSUPPORTEDOPERATION_NOTENOUGHCOMPUTENODESTOTERMINATE = "UnsupportedOperation.NotEnoughComputeNodesToTerminate"
 func (c *Client) ModifyComputeEnv(request *ModifyComputeEnvRequest) (response *ModifyComputeEnvResponse, err error) {
     if request == nil {
         request = NewModifyComputeEnvRequest()
@@ -616,7 +840,29 @@ func NewModifyTaskTemplateResponse() (response *ModifyTaskTemplateResponse) {
     return
 }
 
+// ModifyTaskTemplate
 // This API is used to modify a task template.
+//
+// error code that may be returned:
+//  ALLOWEDONEATTRIBUTEINENVIDANDCOMPUTEENV = "AllowedOneAttributeInEnvIdAndComputeEnv"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CVMPARAMETERS = "InvalidParameter.CvmParameters"
+//  INVALIDPARAMETER_TASKNAME = "InvalidParameter.TaskName"
+//  INVALIDPARAMETER_TASKNAMETOOLONG = "InvalidParameter.TaskNameTooLong"
+//  INVALIDPARAMETER_TASKTEMPLATEDESCRIPTIONTOOLONG = "InvalidParameter.TaskTemplateDescriptionTooLong"
+//  INVALIDPARAMETER_TASKTEMPLATEIDMALFORMED = "InvalidParameter.TaskTemplateIdMalformed"
+//  INVALIDPARAMETER_TASKTEMPLATENAME = "InvalidParameter.TaskTemplateName"
+//  INVALIDPARAMETER_TASKTEMPLATENAMETOOLONG = "InvalidParameter.TaskTemplateNameTooLong"
+//  INVALIDPARAMETERATLEASTONEATTRIBUTE = "InvalidParameterAtLeastOneAttribute"
+//  INVALIDPARAMETERVALUE_COMPUTEENV = "InvalidParameterValue.ComputeEnv"
+//  INVALIDPARAMETERVALUE_DEPENDENCENOTFOUNDTASKNAME = "InvalidParameterValue.DependenceNotFoundTaskName"
+//  INVALIDPARAMETERVALUE_DEPENDENCEUNFEASIBLE = "InvalidParameterValue.DependenceUnfeasible"
+//  INVALIDPARAMETERVALUE_LOCALPATH = "InvalidParameterValue.LocalPath"
+//  INVALIDPARAMETERVALUE_MAXRETRYCOUNT = "InvalidParameterValue.MaxRetryCount"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_REMOTESTORAGEPATH = "InvalidParameterValue.RemoteStoragePath"
+//  INVALIDPARAMETERVALUE_REMOTESTORAGESCHEMETYPE = "InvalidParameterValue.RemoteStorageSchemeType"
+//  RESOURCENOTFOUND_TASKTEMPLATE = "ResourceNotFound.TaskTemplate"
 func (c *Client) ModifyTaskTemplate(request *ModifyTaskTemplateRequest) (response *ModifyTaskTemplateResponse, err error) {
     if request == nil {
         request = NewModifyTaskTemplateRequest()
@@ -641,8 +887,16 @@ func NewRetryJobsResponse() (response *RetryJobsResponse) {
     return
 }
 
+// RetryJobs
 // This API is used to retry the failing task instance in instances.
+//
 // Job retry is supported only if a job is in the "FAILED" state. After the retry operation succeeds, the instance will retry the failing task instances in each task in turn according to the task dependencies specified in the "DAG". The history information of the task instances will be reset, the instances will participate in subsequent scheduling and execution as if they are run for the first time.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) RetryJobs(request *RetryJobsRequest) (response *RetryJobsResponse, err error) {
     if request == nil {
         request = NewRetryJobsRequest()
@@ -667,7 +921,36 @@ func NewSubmitJobResponse() (response *SubmitJobResponse) {
     return
 }
 
+// SubmitJob
 // This API is used to submit a instance.
+//
+// error code that may be returned:
+//  ALLOWEDONEATTRIBUTEINENVIDANDCOMPUTEENV = "AllowedOneAttributeInEnvIdAndComputeEnv"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
+//  INVALIDPARAMETER_CVMPARAMETERS = "InvalidParameter.CvmParameters"
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  INVALIDPARAMETER_IMAGEIDMALFORMED = "InvalidParameter.ImageIdMalformed"
+//  INVALIDPARAMETER_JOBDESCRIPTIONTOOLONG = "InvalidParameter.JobDescriptionTooLong"
+//  INVALIDPARAMETER_JOBNAMETOOLONG = "InvalidParameter.JobNameTooLong"
+//  INVALIDPARAMETER_NOTIFICATIONEVENTNAMEDUPLICATE = "InvalidParameter.NotificationEventNameDuplicate"
+//  INVALIDPARAMETER_NOTIFICATIONTOPICNAME = "InvalidParameter.NotificationTopicName"
+//  INVALIDPARAMETER_NOTIFICATIONTOPICNAMETOOLONG = "InvalidParameter.NotificationTopicNameTooLong"
+//  INVALIDPARAMETER_TASKNAME = "InvalidParameter.TaskName"
+//  INVALIDPARAMETER_TASKNAMETOOLONG = "InvalidParameter.TaskNameTooLong"
+//  INVALIDPARAMETERVALUE_COMPUTEENV = "InvalidParameterValue.ComputeEnv"
+//  INVALIDPARAMETERVALUE_DEPENDENCENOTFOUNDTASKNAME = "InvalidParameterValue.DependenceNotFoundTaskName"
+//  INVALIDPARAMETERVALUE_DEPENDENCEUNFEASIBLE = "InvalidParameterValue.DependenceUnfeasible"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_LOCALPATH = "InvalidParameterValue.LocalPath"
+//  INVALIDPARAMETERVALUE_MAXRETRYCOUNT = "InvalidParameterValue.MaxRetryCount"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_REMOTESTORAGEPATH = "InvalidParameterValue.RemoteStoragePath"
+//  INVALIDPARAMETERVALUE_REMOTESTORAGESCHEMETYPE = "InvalidParameterValue.RemoteStorageSchemeType"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
+//  LIMITEXCEEDED_JOBQUOTA = "LimitExceeded.JobQuota"
+//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
+//  UNAUTHORIZEDOPERATION_USERNOTALLOWEDTOUSEBATCH = "UnauthorizedOperation.UserNotAllowedToUseBatch"
 func (c *Client) SubmitJob(request *SubmitJobRequest) (response *SubmitJobResponse, err error) {
     if request == nil {
         request = NewSubmitJobRequest()
@@ -692,8 +975,20 @@ func NewTerminateComputeNodeResponse() (response *TerminateComputeNodeResponse) 
     return
 }
 
+// TerminateComputeNode
 // This API is used to terminate a compute node.
+//
 // Termination is allowed for nodes in the CREATED, CREATION_FAILED, RUNNING or ABNORMAL state.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COMPUTENODEIDMALFORMED = "InvalidParameter.ComputeNodeIdMalformed"
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
+//  RESOURCENOTFOUND_COMPUTENODE = "ResourceNotFound.ComputeNode"
+//  UNSUPPORTEDOPERATION_ACCEPTOTHERREQUEST = "UnsupportedOperation.AcceptOtherRequest"
+//  UNSUPPORTEDOPERATION_COMPUTEENVACCEPTOTHERREQUEST = "UnsupportedOperation.ComputeEnvAcceptOtherRequest"
+//  UNSUPPORTEDOPERATION_COMPUTENODEFORBIDTERMINATE = "UnsupportedOperation.ComputeNodeForbidTerminate"
+//  UNSUPPORTEDOPERATION_COMPUTENODEISTERMINATING = "UnsupportedOperation.ComputeNodeIsTerminating"
 func (c *Client) TerminateComputeNode(request *TerminateComputeNodeRequest) (response *TerminateComputeNodeResponse, err error) {
     if request == nil {
         request = NewTerminateComputeNodeRequest()
@@ -718,7 +1013,16 @@ func NewTerminateComputeNodesResponse() (response *TerminateComputeNodesResponse
     return
 }
 
+// TerminateComputeNodes
 // This API is used to terminate compute nodes in batches. It is not allowed to repeatedly terminate the same node.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COMPUTENODEIDMALFORMED = "InvalidParameter.ComputeNodeIdMalformed"
+//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
+//  RESOURCENOTFOUND_COMPUTENODE = "ResourceNotFound.ComputeNode"
+//  UNSUPPORTEDOPERATION_ACCEPTOTHERREQUEST = "UnsupportedOperation.AcceptOtherRequest"
+//  UNSUPPORTEDOPERATION_COMPUTENODEFORBIDTERMINATE = "UnsupportedOperation.ComputeNodeForbidTerminate"
 func (c *Client) TerminateComputeNodes(request *TerminateComputeNodesRequest) (response *TerminateComputeNodesResponse, err error) {
     if request == nil {
         request = NewTerminateComputeNodesRequest()
@@ -743,9 +1047,19 @@ func NewTerminateJobResponse() (response *TerminateJobResponse) {
     return
 }
 
+// TerminateJob
 // This API is used to terminate an instance.
+//
 // Termination is prohibited if an instance is in the "SUBMITTED" state and does not take effect if it is in the "SUCCEED" state.
+//
 // Instance termination is an asynchronous process, and the time it takes to complete the entire process is directly proportional to the total number of tasks. The effect of terminating an instance is equivalent to performing the TerminateTaskInstance operation on all the task instances contained in the job. For more information on the specific effect and usage, see TerminateTaskInstance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_TERMINATEOPERATIONWITHENVID = "UnsupportedOperation.TerminateOperationWithEnvId"
 func (c *Client) TerminateJob(request *TerminateJobRequest) (response *TerminateJobResponse, err error) {
     if request == nil {
         request = NewTerminateJobRequest()
@@ -770,11 +1084,22 @@ func NewTerminateTaskInstanceResponse() (response *TerminateTaskInstanceResponse
     return
 }
 
+// TerminateTaskInstance
 // This API is used to terminate a task instance.
+//
 // Task instances in the "SUCCEED" or "FAILED" state will not be processed.
+//
 // Task instances in the "SUBMITTED", "PENDING", or "RUNNABLE" state will be set to the "FAILED" state.
+//
 // For task instances in the "STARTING", "RUNNING", or "FAILED_INTERRUPTED" state, there will be two cases: if no compute environment is specified, the CVM instance will be terminated first, and then the state will be set to "FAILED"; if a compute environment's EnvId is specified, the state of the task instances will be set to "FAILED" first, and then the CVM instance that performs the task will be restarted. Both cases takes a certain amount of time to be completed.
+//
 // For task instances in the "FAILED_INTERRUPTED" state, the related resources and quotas will be released only after the termination actually succeeds.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCENOTFOUND_TASKINSTANCE = "ResourceNotFound.TaskInstance"
+//  UNSUPPORTEDOPERATION_TERMINATEOPERATIONWITHENVID = "UnsupportedOperation.TerminateOperationWithEnvId"
 func (c *Client) TerminateTaskInstance(request *TerminateTaskInstanceRequest) (response *TerminateTaskInstanceResponse, err error) {
     if request == nil {
         request = NewTerminateTaskInstanceRequest()

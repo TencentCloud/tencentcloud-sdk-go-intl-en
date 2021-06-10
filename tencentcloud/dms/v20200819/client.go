@@ -58,7 +58,26 @@ func NewSendEmailResponse() (response *SendEmailResponse) {
     return
 }
 
+// SendEmail
 // This API is used to send regular emails.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALCOSERROR = "InternalError.InternalCOSError"
+//  INTERNALERROR_INTERNALDBERROR = "InternalError.InternalDBError"
+//  INTERNALERROR_INTERNALENCRYPTERROR = "InternalError.InternalEncryptError"
+//  INVALIDPARAMETER_INVALIDFROMNAMEMALFORMED = "InvalidParameter.InvalidFromNameMalformed"
+//  INVALIDPARAMETER_INVALIDHTMLCONTENTMALFORMED = "InvalidParameter.InvalidHtmlContentMalformed"
+//  INVALIDPARAMETER_INVALIDMAILADDRESSNAMEMALFORMED = "InvalidParameter.InvalidMailAddressNameMalformed"
+//  INVALIDPARAMETER_INVALIDMAILCONTENTMALFORMED = "InvalidParameter.InvalidMailContentMalformed"
+//  INVALIDPARAMETER_INVALIDRECEIVERNAMEMALFORMED = "InvalidParameter.InvalidReceiverNameMalformed"
+//  INVALIDPARAMETER_INVALIDSUBJECTMALFORMED = "InvalidParameter.InvalidSubjectMalformed"
+//  INVALIDPARAMETER_INVALIDTASKNAMEMALFORMED = "InvalidParameter.InvalidTaskNameMalformed"
+//  INVALIDPARAMETER_INVALIDTEXTCONTENTMALFORMED = "InvalidParameter.InvalidTextContentMalformed"
+//  RESOURCEINUSE_INVALIDTASKNAMEDUPLICATE = "ResourceInUse.InvalidTaskNameDuplicate"
+//  RESOURCENOTFOUND_INVALIDMAILADDRESSNOTFOUND = "ResourceNotFound.InvalidMailAddressNotFound"
+//  RESOURCENOTFOUND_INVALIDRECEIVERNOTFOUND = "ResourceNotFound.InvalidReceiverNotFound"
+//  RESOURCENOTFOUND_INVALIDREPLYNOTFOUND = "ResourceNotFound.InvalidReplyNotFound"
+//  RESOURCENOTFOUND_INVALIDTASKNAMENOTFOUND = "ResourceNotFound.InvalidTaskNameNotFound"
 func (c *Client) SendEmail(request *SendEmailRequest) (response *SendEmailResponse, err error) {
     if request == nil {
         request = NewSendEmailRequest()
@@ -83,7 +102,30 @@ func NewSendTemplatedEmailResponse() (response *SendTemplatedEmailResponse) {
     return
 }
 
+// SendTemplatedEmail
 // This API is used to send template emails.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALCOSERROR = "InternalError.InternalCOSError"
+//  INTERNALERROR_INTERNALDBERROR = "InternalError.InternalDBError"
+//  INTERNALERROR_INTERNALENCRYPTERROR = "InternalError.InternalEncryptError"
+//  INVALIDPARAMETER_INVALIDFROMNAMEMALFORMED = "InvalidParameter.InvalidFromNameMalformed"
+//  INVALIDPARAMETER_INVALIDHTMLCONTENTMALFORMED = "InvalidParameter.InvalidHtmlContentMalformed"
+//  INVALIDPARAMETER_INVALIDMAILADDRESSNAMEMALFORMED = "InvalidParameter.InvalidMailAddressNameMalformed"
+//  INVALIDPARAMETER_INVALIDMAILCONTENTMALFORMED = "InvalidParameter.InvalidMailContentMalformed"
+//  INVALIDPARAMETER_INVALIDRECEIVERNAMEMALFORMED = "InvalidParameter.InvalidReceiverNameMalformed"
+//  INVALIDPARAMETER_INVALIDSUBJECTMALFORMED = "InvalidParameter.InvalidSubjectMalformed"
+//  INVALIDPARAMETER_INVALIDTASKNAMEMALFORMED = "InvalidParameter.InvalidTaskNameMalformed"
+//  INVALIDPARAMETER_INVALIDTEMPLATECONTENTMALFORMED = "InvalidParameter.InvalidTemplateContentMalformed"
+//  INVALIDPARAMETER_INVALIDTEMPLATENAMEMALFORMED = "InvalidParameter.InvalidTemplateNameMalformed"
+//  INVALIDPARAMETER_INVALIDTEMPLATEVALUEMALFORMED = "InvalidParameter.InvalidTemplateValueMalformed"
+//  INVALIDPARAMETER_INVALIDTEXTCONTENTMALFORMED = "InvalidParameter.InvalidTextContentMalformed"
+//  RESOURCEINUSE_INVALIDTASKNAMEDUPLICATE = "ResourceInUse.InvalidTaskNameDuplicate"
+//  RESOURCENOTFOUND_INVALIDMAILADDRESSNOTFOUND = "ResourceNotFound.InvalidMailAddressNotFound"
+//  RESOURCENOTFOUND_INVALIDRECEIVERNOTFOUND = "ResourceNotFound.InvalidReceiverNotFound"
+//  RESOURCENOTFOUND_INVALIDREPLYNOTFOUND = "ResourceNotFound.InvalidReplyNotFound"
+//  RESOURCENOTFOUND_INVALIDTASKNAMENOTFOUND = "ResourceNotFound.InvalidTaskNameNotFound"
+//  RESOURCENOTFOUND_INVALIDTEMPLATENOTFOUND = "ResourceNotFound.InvalidTemplateNotFound"
 func (c *Client) SendTemplatedEmail(request *SendTemplatedEmailRequest) (response *SendTemplatedEmailResponse, err error) {
     if request == nil {
         request = NewSendTemplatedEmailRequest()

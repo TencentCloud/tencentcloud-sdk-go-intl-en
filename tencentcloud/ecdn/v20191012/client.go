@@ -58,7 +58,30 @@ func NewAddEcdnDomainResponse() (response *AddEcdnDomainResponse) {
     return
 }
 
+// AddEcdnDomain
 // This API is used to create an acceleration domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNCAMTAGKEYNOTEXIST = "InvalidParameter.EcdnCamTagKeyNotExist"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  INVALIDPARAMETER_ECDNRESOURCEMANYTAGKEY = "InvalidParameter.EcdnResourceManyTagKey"
+//  INVALIDPARAMETER_ECDNTAGKEYINVALID = "InvalidParameter.EcdnTagKeyInvalid"
+//  INVALIDPARAMETER_ECDNTAGKEYNOTEXIST = "InvalidParameter.EcdnTagKeyNotExist"
+//  INVALIDPARAMETER_ECDNTAGKEYTOOMANYVALUE = "InvalidParameter.EcdnTagKeyTooManyValue"
+//  INVALIDPARAMETER_ECDNTAGVALUEINVALID = "InvalidParameter.EcdnTagValueInvalid"
+//  INVALIDPARAMETER_ECDNUSERTOOMANYTAGKEY = "InvalidParameter.EcdnUserTooManyTagKey"
+//  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
+//  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
+//  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
 func (c *Client) AddEcdnDomain(request *AddEcdnDomainRequest) (response *AddEcdnDomainResponse, err error) {
     if request == nil {
         request = NewAddEcdnDomainRequest()
@@ -83,7 +106,20 @@ func NewDeleteEcdnDomainResponse() (response *DeleteEcdnDomainResponse) {
     return
 }
 
+// DeleteEcdnDomain
 // This API is used to delete a specified acceleration domain name. The acceleration domain name to be deleted must be in disabled status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DeleteEcdnDomain(request *DeleteEcdnDomainRequest) (response *DeleteEcdnDomainResponse, err error) {
     if request == nil {
         request = NewDeleteEcdnDomainRequest()
@@ -108,7 +144,19 @@ func NewDescribeDomainsResponse() (response *DescribeDomainsResponse) {
     return
 }
 
+// DescribeDomains
 // This API is used to query the basic information of a CDN domain name, including the project ID, status, business type, creation time, update time, etc.
+//
+// error code that may be returned:
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
 func (c *Client) DescribeDomains(request *DescribeDomainsRequest) (response *DescribeDomainsResponse, err error) {
     if request == nil {
         request = NewDescribeDomainsRequest()
@@ -133,7 +181,21 @@ func NewDescribeDomainsConfigResponse() (response *DescribeDomainsConfigResponse
     return
 }
 
+// DescribeDomainsConfig
 // This API is used to query the detailed configuration information of a CDN acceleration domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNCERTNOCERTINFO = "InvalidParameter.EcdnCertNoCertInfo"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
 func (c *Client) DescribeDomainsConfig(request *DescribeDomainsConfigRequest) (response *DescribeDomainsConfigResponse, err error) {
     if request == nil {
         request = NewDescribeDomainsConfigRequest()
@@ -158,7 +220,23 @@ func NewDescribeEcdnDomainLogsResponse() (response *DescribeEcdnDomainLogsRespon
     return
 }
 
+// DescribeEcdnDomainLogs
 // This API is used to query the access log download link of a domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  INVALIDPARAMETER_ECDNSTATINVALIDDATE = "InvalidParameter.EcdnStatInvalidDate"
+//  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNHOSTNOTEXISTS = "ResourceNotFound.EcdnHostNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.EcdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNHOSTUNAUTHORIZED = "UnauthorizedOperation.EcdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNNODOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnNoDomainUnauthorized"
 func (c *Client) DescribeEcdnDomainLogs(request *DescribeEcdnDomainLogsRequest) (response *DescribeEcdnDomainLogsResponse, err error) {
     if request == nil {
         request = NewDescribeEcdnDomainLogsRequest()
@@ -183,7 +261,37 @@ func NewDescribeEcdnDomainStatisticsResponse() (response *DescribeEcdnDomainStat
     return
 }
 
+// DescribeEcdnDomainStatistics
 // This API is used to query the statistical metrics of domain name access within a specified time period.
+//
+// error code that may be returned:
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  INVALIDPARAMETER_ECDNSTATINVALIDDATE = "InvalidParameter.EcdnStatInvalidDate"
+//  INVALIDPARAMETER_ECDNSTATINVALIDMETRIC = "InvalidParameter.EcdnStatInvalidMetric"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNPROJECTNOTEXISTS = "ResourceNotFound.EcdnProjectNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.CdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNNODOMAINUNAUTHORIZED = "UnauthorizedOperation.CdnNoDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_DOMAINNOPERMISSION = "UnauthorizedOperation.DomainNoPermission"
+//  UNAUTHORIZEDOPERATION_DOMAINSNOPERMISSION = "UnauthorizedOperation.DomainsNoPermission"
+//  UNAUTHORIZEDOPERATION_ECDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.EcdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNHOSTUNAUTHORIZED = "UnauthorizedOperation.EcdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNNODOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnNoDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.EcdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_PROJECTNOPERMISSION = "UnauthorizedOperation.ProjectNoPermission"
+//  UNAUTHORIZEDOPERATION_PROJECTSNOPERMISSION = "UnauthorizedOperation.ProjectsNoPermission"
 func (c *Client) DescribeEcdnDomainStatistics(request *DescribeEcdnDomainStatisticsRequest) (response *DescribeEcdnDomainStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeEcdnDomainStatisticsRequest()
@@ -208,15 +316,56 @@ func NewDescribeEcdnStatisticsResponse() (response *DescribeEcdnStatisticsRespon
     return
 }
 
+// DescribeEcdnStatistics
 // This API is used to query ECDN real-time access monitoring data and supports the following metrics:
+//
 // 
+//
 // + Traffic (in bytes)
+//
 // + Bandwidth (in bps)
+//
 // + Number of requests
+//
 // + Number of 2xx status codes and details of status codes starting with 2
+//
 // + Number of 3xx status codes and details of status codes starting with 3
+//
 // + Number of 4xx status codes and details of status codes starting with 4
+//
 // + Number of 5xx status codes and details of status codes starting with 5
+//
+// error code that may be returned:
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNINVALIDPARAMINTERVAL = "InvalidParameter.EcdnInvalidParamInterval"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  INVALIDPARAMETER_ECDNSTATINVALIDDATE = "InvalidParameter.EcdnStatInvalidDate"
+//  INVALIDPARAMETER_ECDNSTATINVALIDMETRIC = "InvalidParameter.EcdnStatInvalidMetric"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNHOSTNOTEXISTS = "ResourceNotFound.EcdnHostNotExists"
+//  RESOURCENOTFOUND_ECDNPROJECTNOTEXISTS = "ResourceNotFound.EcdnProjectNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.CdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNNODOMAINUNAUTHORIZED = "UnauthorizedOperation.CdnNoDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_DOMAINNOPERMISSION = "UnauthorizedOperation.DomainNoPermission"
+//  UNAUTHORIZEDOPERATION_DOMAINSNOPERMISSION = "UnauthorizedOperation.DomainsNoPermission"
+//  UNAUTHORIZEDOPERATION_ECDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.EcdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNHOSTUNAUTHORIZED = "UnauthorizedOperation.EcdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNNODOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnNoDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.EcdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_PROJECTNOPERMISSION = "UnauthorizedOperation.ProjectNoPermission"
+//  UNAUTHORIZEDOPERATION_PROJECTSNOPERMISSION = "UnauthorizedOperation.ProjectsNoPermission"
 func (c *Client) DescribeEcdnStatistics(request *DescribeEcdnStatisticsRequest) (response *DescribeEcdnStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeEcdnStatisticsRequest()
@@ -241,7 +390,20 @@ func NewDescribeIpStatusResponse() (response *DescribeIpStatusResponse) {
     return
 }
 
+// DescribeIpStatus
 // This API is used to query the detailed node information of the acceleration platform to which the domain name is connected.
+//
+// error code that may be returned:
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNHOSTNOTEXISTS = "ResourceNotFound.EcdnHostNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNHOSTUNAUTHORIZED = "UnauthorizedOperation.EcdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
 func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *DescribeIpStatusResponse, err error) {
     if request == nil {
         request = NewDescribeIpStatusRequest()
@@ -266,7 +428,18 @@ func NewDescribePurgeQuotaResponse() (response *DescribePurgeQuotaResponse) {
     return
 }
 
+// DescribePurgeQuota
 // This API is used to query the usage quota of the purge API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DescribePurgeQuota(request *DescribePurgeQuotaRequest) (response *DescribePurgeQuotaResponse, err error) {
     if request == nil {
         request = NewDescribePurgeQuotaRequest()
@@ -291,7 +464,17 @@ func NewDescribePurgeTasksResponse() (response *DescribePurgeTasksResponse) {
     return
 }
 
+// DescribePurgeTasks
 // This API is used to query the submission history of purge tasks and their execution progress.
+//
+// error code that may be returned:
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DescribePurgeTasks(request *DescribePurgeTasksRequest) (response *DescribePurgeTasksResponse, err error) {
     if request == nil {
         request = NewDescribePurgeTasksRequest()
@@ -316,7 +499,25 @@ func NewPurgePathCacheResponse() (response *PurgePathCacheResponse) {
     return
 }
 
+// PurgePathCache
 // This API is used to purge cache directories in batches. One purge task ID will be returned for each submission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNDOMAININVALIDSTATUS = "InvalidParameter.EcdnDomainInvalidStatus"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  INVALIDPARAMETER_ECDNPURGEWILDCARDNOTALLOWED = "InvalidParameter.EcdnPurgeWildcardNotAllowed"
+//  INVALIDPARAMETER_ECDNURLEXCEEDLENGTH = "InvalidParameter.EcdnUrlExceedLength"
+//  LIMITEXCEEDED_ECDNPURGEPATHEXCEEDBATCHLIMIT = "LimitExceeded.EcdnPurgePathExceedBatchLimit"
+//  LIMITEXCEEDED_ECDNPURGEPATHEXCEEDDAYLIMIT = "LimitExceeded.EcdnPurgePathExceedDayLimit"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) PurgePathCache(request *PurgePathCacheRequest) (response *PurgePathCacheResponse, err error) {
     if request == nil {
         request = NewPurgePathCacheRequest()
@@ -341,7 +542,26 @@ func NewPurgeUrlsCacheResponse() (response *PurgeUrlsCacheResponse) {
     return
 }
 
+// PurgeUrlsCache
 // This API is used to batch purge URLs. One purge task ID will be returned for each submission.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNDOMAININVALIDSTATUS = "InvalidParameter.EcdnDomainInvalidStatus"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  INVALIDPARAMETER_ECDNPURGEWILDCARDNOTALLOWED = "InvalidParameter.EcdnPurgeWildcardNotAllowed"
+//  INVALIDPARAMETER_ECDNURLEXCEEDLENGTH = "InvalidParameter.EcdnUrlExceedLength"
+//  LIMITEXCEEDED_ECDNPURGEURLEXCEEDBATCHLIMIT = "LimitExceeded.EcdnPurgeUrlExceedBatchLimit"
+//  LIMITEXCEEDED_ECDNPURGEURLEXCEEDDAYLIMIT = "LimitExceeded.EcdnPurgeUrlExceedDayLimit"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) PurgeUrlsCache(request *PurgeUrlsCacheRequest) (response *PurgeUrlsCacheResponse, err error) {
     if request == nil {
         request = NewPurgeUrlsCacheRequest()
@@ -366,7 +586,20 @@ func NewStartEcdnDomainResponse() (response *StartEcdnDomainResponse) {
     return
 }
 
+// StartEcdnDomain
 // This API is used to enable an acceleration domain name. The domain name to be enabled must be in deactivated status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) StartEcdnDomain(request *StartEcdnDomainRequest) (response *StartEcdnDomainResponse, err error) {
     if request == nil {
         request = NewStartEcdnDomainRequest()
@@ -391,7 +624,21 @@ func NewStopEcdnDomainResponse() (response *StopEcdnDomainResponse) {
     return
 }
 
+// StopEcdnDomain
 // This API is used to disable an acceleration domain name. The domain name to be disabled must be in enabled or deploying status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) StopEcdnDomain(request *StopEcdnDomainRequest) (response *StopEcdnDomainResponse, err error) {
     if request == nil {
         request = NewStopEcdnDomainRequest()
@@ -416,8 +663,29 @@ func NewUpdateDomainConfigResponse() (response *UpdateDomainConfigResponse) {
     return
 }
 
+// UpdateDomainConfig
 // This API is used to update the configuration information of an ECDN acceleration domain name.
+//
 // Note: if you need to update a complex configuration item, you must pass in all attributes of the entire object, and the default values will be used for the attributes that are not passed in. You are recommended to get the configuration attribute through the query API first and then directly modify and pass it to this API. Due to the special nature of the certificate for HTTPS configuration, you do not need to pass in the certificate and key fields during the update.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNINVALIDPARAMAREA = "InvalidParameter.EcdnInvalidParamArea"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
+//  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNPROJECTNOTEXISTS = "ResourceNotFound.EcdnProjectNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.EcdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
+//  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
 func (c *Client) UpdateDomainConfig(request *UpdateDomainConfigRequest) (response *UpdateDomainConfigResponse, err error) {
     if request == nil {
         request = NewUpdateDomainConfigRequest()
