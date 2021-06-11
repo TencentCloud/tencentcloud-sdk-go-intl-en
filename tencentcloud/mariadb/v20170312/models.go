@@ -420,7 +420,7 @@ type DBInstance struct {
 	// Subnet ID, which is 0 if the basic network is used
 	SubnetId *int64 `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance status. 0: creating, 1: processing, 2: running, 3: instance not initialized, -1: instance isolated, -2: instance deleted
+	// Instance status. Valid values: `0` (creating), `1` (running task), `2` (running), `3` (uninitialized), `-1` (isolated), `-2` (eliminated), `4` (initializing), `5` (eliminating), `6` (restarting), `7` (migrating data)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Private IP address
@@ -574,6 +574,42 @@ type Database struct {
 
 	// Database name
 	DbName *string `json:"DbName,omitempty" name:"DbName"`
+}
+
+type DcnDetailItem struct {
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Region where the instance resides
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Availability zone where the instance resides
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance IP address
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Instance IPv6 address
+	Vipv6 *string `json:"Vipv6,omitempty" name:"Vipv6"`
+
+	// Instance port
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Instance status
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Instance status description
+	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
+
+	// DCN flag. Valid values: `1` (primary), `2` (replica)
+	DcnFlag *int64 `json:"DcnFlag,omitempty" name:"DcnFlag"`
+
+	// DCN status. Valid values: `0` (null), `1` (creating), `2` (syncing), `3` (disconnected)
+	DcnStatus *int64 `json:"DcnStatus,omitempty" name:"DcnStatus"`
 }
 
 type DeleteAccountRequest struct {
@@ -870,6 +906,12 @@ type DescribeDBInstancesRequest struct {
 
 	// Instance types used in filtering. Valid values: 1 (dedicated instance), 2 (primary instance), 3 (disaster recovery instance). Multiple values should be separated by commas.
 	FilterInstanceType *string `json:"FilterInstanceType,omitempty" name:"FilterInstanceType"`
+
+	// Use this filter to include instances in specific statuses
+	Status []*int64 `json:"Status,omitempty" name:"Status"`
+
+	// Use this filter to exclude instances in specific statuses
+	ExcludeStatus []*int64 `json:"ExcludeStatus,omitempty" name:"ExcludeStatus"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -901,6 +943,8 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ExclusterIds")
 	delete(f, "TagKeys")
 	delete(f, "FilterInstanceType")
+	delete(f, "Status")
+	delete(f, "ExcludeStatus")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
 	}
@@ -1552,6 +1596,55 @@ func (r *DescribeDatabasesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDcnDetailRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDcnDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDcnDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDcnDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDcnDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// DCN synchronization details
+		DcnDetails []*DcnDetailItem `json:"DcnDetails,omitempty" name:"DcnDetails"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDcnDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDcnDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

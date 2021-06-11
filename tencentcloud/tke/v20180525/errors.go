@@ -119,6 +119,9 @@ const (
 	// Failed to delete the kubernetes resource.
 	INTERNALERROR_KUBERNETESDELETEOPERATIONERROR = "InternalError.KubernetesDeleteOperationError"
 
+	// 
+	INTERNALERROR_KUBERNETESGETOPERATIONERROR = "InternalError.KubernetesGetOperationError"
+
 	// Unknown Kubernetes error
 	INTERNALERROR_KUBERNETESINTERNAL = "InternalError.KubernetesInternal"
 

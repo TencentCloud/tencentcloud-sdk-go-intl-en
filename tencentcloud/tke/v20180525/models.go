@@ -214,6 +214,60 @@ func (r *AddNodeToNodePoolResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AddVpcCniSubnetsRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The subnets added for the cluster container network
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// ID of the VPC where the cluster resides
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+}
+
+func (r *AddVpcCniSubnetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddVpcCniSubnetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "SubnetIds")
+	delete(f, "VpcId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddVpcCniSubnetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AddVpcCniSubnetsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AddVpcCniSubnetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddVpcCniSubnetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AutoScalingGroupRange struct {
 
 	// Minimum number of pods in a scaling group
@@ -619,6 +673,18 @@ type ClusterNetworkSettings struct {
 
 	// Whether CNI is enabled for network plugin(s). Default value: enabled
 	Cni *bool `json:"Cni,omitempty" name:"Cni"`
+
+	// The network mode of service. This parameter is only applicable to ipvs+bpf mode.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	KubeProxyMode *string `json:"KubeProxyMode,omitempty" name:"KubeProxyMode"`
+
+	// The IP range for service assignment. It cannot conflict with the VPC’s CIDR block nor the CIDR blocks of other clusters in the same VPC.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	ServiceCIDR *string `json:"ServiceCIDR,omitempty" name:"ServiceCIDR"`
+
+	// The container subnet associated with the cluster
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	Subnets []*string `json:"Subnets,omitempty" name:"Subnets"`
 }
 
 type ClusterVersion struct {

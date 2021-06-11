@@ -775,6 +775,38 @@ func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response 
     return
 }
 
+func NewDescribeDcnDetailRequest() (request *DescribeDcnDetailRequest) {
+    request = &DescribeDcnDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDcnDetail")
+    return
+}
+
+func NewDescribeDcnDetailResponse() (response *DescribeDcnDetailResponse) {
+    response = &DescribeDcnDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDcnDetail
+// This API is used to query the disaster recovery details of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) DescribeDcnDetail(request *DescribeDcnDetailRequest) (response *DescribeDcnDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeDcnDetailRequest()
+    }
+    response = NewDescribeDcnDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeFlowRequest() (request *DescribeFlowRequest) {
     request = &DescribeFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},

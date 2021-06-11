@@ -62,6 +62,9 @@ const (
 	// Failed to update the security group information of an instance.
 	FAILEDOPERATION_UPDATEINSTANCEINFOFAILED = "FailedOperation.UpdateInstanceInfoFailed"
 
+	// Internal error.
+	INTERNALERROR = "InternalError"
+
 	// CAM authentication request failed.
 	INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 
