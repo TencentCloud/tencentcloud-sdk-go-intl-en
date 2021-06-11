@@ -329,9 +329,6 @@ const (
 	// The value of `OrderBy` does not conform to the specification. Please fix it and try again. For more information, please visit https://tencentcs.com/5jXKFnBW.
 	INVALIDPARAMETERVALUE_ORDERBY = "InvalidParameterValue.OrderBy"
 
-	// Orderby error.
-	INVALIDPARAMETERVALUE_ORDERBY = "InvalidParameterValue.Orderby"
-
 	// The input parameter is not in the standard JSON format.
 	INVALIDPARAMETERVALUE_PARAM = "InvalidParameterValue.Param"
 

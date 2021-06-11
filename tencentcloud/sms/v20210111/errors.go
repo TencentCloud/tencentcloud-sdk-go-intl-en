@@ -215,17 +215,11 @@ const (
 	// This `SdkAppId` is forbidden to provide services. If necessary, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
 	UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppIdIsDisabled"
 
-	// This `sdkappid` is forbidden to provide services. If necessary, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) for assistance.
-	UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
-
 	// The service has been suspended due to overdue payments. You can log in to Tencent Cloud to make the payments.
 	UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
 
 	// `SmsSdkAppId` check failed.
 	UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
-
-	// `SmsSdkAppid` check failed.
-	UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppidVerifyFail"
 
 	// The request is not supported.
 	UNSUPPORTEDOPERATION_ = "UnsupportedOperation."

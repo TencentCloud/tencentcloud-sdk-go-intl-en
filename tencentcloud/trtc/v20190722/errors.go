@@ -125,9 +125,6 @@ const (
 	// `SdkAppId` is incorrect.
 	INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 
-	// Inoperable `SdkAppid`.
-	INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppid"
-
 	// Invalid small image layout parameter.
 	INVALIDPARAMETER_SMALLVIDEOLAYOUTPARAMS = "InvalidParameter.SmallVideoLayoutParams"
 
