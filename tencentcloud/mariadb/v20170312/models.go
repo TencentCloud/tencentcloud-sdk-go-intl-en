@@ -605,10 +605,10 @@ type DcnDetailItem struct {
 	// Instance status description
 	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
 
-	// DCN flag. Valid values: `1` (primary), `2` (replica)
+	// DCN flag. Valid values: `1` (primary), `2` (disaster recovery)
 	DcnFlag *int64 `json:"DcnFlag,omitempty" name:"DcnFlag"`
 
-	// DCN status. Valid values: `0` (null), `1` (creating), `2` (syncing), `3` (disconnected)
+	// DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected)
 	DcnStatus *int64 `json:"DcnStatus,omitempty" name:"DcnStatus"`
 }
 
