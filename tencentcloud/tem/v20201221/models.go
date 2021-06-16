@@ -132,6 +132,9 @@ type CreateNamespaceRequest struct {
 
 	// Source channel
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Whether to enable the TSW service.
+	EnableTswTraceService *bool `json:"EnableTswTraceService,omitempty" name:"EnableTswTraceService"`
 }
 
 func (r *CreateNamespaceRequest) ToJsonString() string {
@@ -152,6 +155,7 @@ func (r *CreateNamespaceRequest) FromJsonString(s string) error {
 	delete(f, "Description")
 	delete(f, "K8sVersion")
 	delete(f, "SourceChannel")
+	delete(f, "EnableTswTraceService")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNamespaceRequest has unknown keys!", "")
 	}
@@ -479,6 +483,18 @@ type DeployServiceV2Request struct {
 
 	// Image command parameters
 	ImageArgs []*string `json:"ImageArgs,omitempty" name:"ImageArgs"`
+
+	// Service port mapping.
+	PortMappings []*PortMapping `json:"PortMappings,omitempty" name:"PortMappings"`
+
+	// Whether to add the registry’s default configurations.
+	UseRegistryDefaultConfig *bool `json:"UseRegistryDefaultConfig,omitempty" name:"UseRegistryDefaultConfig"`
+
+	// 
+	SettingConfs []*MountedSettingConf `json:"SettingConfs,omitempty" name:"SettingConfs"`
+
+	// 
+	EksService *EksService `json:"EksService,omitempty" name:"EksService"`
 }
 
 func (r *DeployServiceV2Request) ToJsonString() string {
@@ -517,6 +533,10 @@ func (r *DeployServiceV2Request) FromJsonString(s string) error {
 	delete(f, "Description")
 	delete(f, "ImageCommand")
 	delete(f, "ImageArgs")
+	delete(f, "PortMappings")
+	delete(f, "UseRegistryDefaultConfig")
+	delete(f, "SettingConfs")
+	delete(f, "EksService")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeployServiceV2Request has unknown keys!", "")
 	}
@@ -618,6 +638,9 @@ type DescribeIngressesRequest struct {
 
 	// Source channel
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Ingress rule name list.
+	Names []*string `json:"Names,omitempty" name:"Names"`
 }
 
 func (r *DescribeIngressesRequest) ToJsonString() string {
@@ -635,6 +658,7 @@ func (r *DescribeIngressesRequest) FromJsonString(s string) error {
 	delete(f, "NamespaceId")
 	delete(f, "EksNamespace")
 	delete(f, "SourceChannel")
+	delete(f, "Names")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIngressesRequest has unknown keys!", "")
 	}
@@ -719,6 +743,68 @@ func (r *DescribeNamespacesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeNamespacesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRelatedIngressesRequest struct {
+	*tchttp.BaseRequest
+
+	// Environment ID.
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// EKS namespace.
+	EksNamespace *string `json:"EksNamespace,omitempty" name:"EksNamespace"`
+
+	// Source channel.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+}
+
+func (r *DescribeRelatedIngressesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRelatedIngressesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NamespaceId")
+	delete(f, "EksNamespace")
+	delete(f, "SourceChannel")
+	delete(f, "ServiceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRelatedIngressesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRelatedIngressesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Ingress array.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+		Result []*IngressInfo `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRelatedIngressesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRelatedIngressesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -816,6 +902,42 @@ func (r *DescribeServiceRunPodListV2Response) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type EksService struct {
+
+	// service name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// 
+	Ports []*int64 `json:"Ports,omitempty" name:"Ports"`
+
+	// 
+	Yaml *string `json:"Yaml,omitempty" name:"Yaml"`
+
+	// 
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// 
+	VersionName *string `json:"VersionName,omitempty" name:"VersionName"`
+
+	// 
+	ClusterIp []*string `json:"ClusterIp,omitempty" name:"ClusterIp"`
+
+	// 
+	ExternalIp *string `json:"ExternalIp,omitempty" name:"ExternalIp"`
+
+	// 
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// 
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// 
+	LoadBalanceId *string `json:"LoadBalanceId,omitempty" name:"LoadBalanceId"`
+
+	// 
+	PortMappings []*PortMapping `json:"PortMappings,omitempty" name:"PortMappings"`
+}
+
 type EsInfo struct {
 
 	// Minimum number of instances
@@ -867,6 +989,13 @@ type IngressInfo struct {
 	// clb ip
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Creation time.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Whether to listen on both the HTTP Port 80 and HTTPS Port 443. The default value is `false`. The optional value `true` means listening on both the HTTP Port 80 and HTTPS Port 443.
+	Mixed *bool `json:"Mixed,omitempty" name:"Mixed"`
 }
 
 type IngressRule struct {
@@ -877,6 +1006,9 @@ type IngressRule struct {
 	// Host address
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Protocol. Options include HTTP and HTTPS. The default option is HTTP.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 }
 
 type IngressRuleBackend struct {
@@ -905,11 +1037,14 @@ type IngressRuleValue struct {
 
 type IngressTls struct {
 
-	// Host array
+	// Host array. An empty array indicates the default certificate for all domain names.
 	Hosts []*string `json:"Hosts,omitempty" name:"Hosts"`
 
-	// secret name
+	// Secret name. If a certificate is used, this field is left empty.
 	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+
+	// SSL Certificate Id
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
 type LogOutputConf struct {
@@ -1054,6 +1189,76 @@ func (r *ModifyNamespaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyServiceInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Source channel.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+func (r *ModifyServiceInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyServiceInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ServiceId")
+	delete(f, "Description")
+	delete(f, "SourceChannel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyServiceInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyServiceInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Results.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyServiceInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyServiceInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type MountedSettingConf struct {
+
+	// 
+	ConfigDataName *string `json:"ConfigDataName,omitempty" name:"ConfigDataName"`
+
+	// 
+	MountedPath *string `json:"MountedPath,omitempty" name:"MountedPath"`
+
+	// 
+	Data []*Pair `json:"Data,omitempty" name:"Data"`
+}
+
 type NamespacePage struct {
 
 	// Records
@@ -1078,6 +1283,92 @@ type Pair struct {
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
+type PortMapping struct {
+
+	// Port.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Mapped port.
+	TargetPort *int64 `json:"TargetPort,omitempty" name:"TargetPort"`
+
+	// TCP/UDP protocol stack.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+}
+
+type RestartServiceRunPodRequest struct {
+	*tchttp.BaseRequest
+
+	// Environment ID.
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Pod name.
+	PodName *string `json:"PodName,omitempty" name:"PodName"`
+
+	// Number of items per page.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pod status.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Source channel.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+func (r *RestartServiceRunPodRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestartServiceRunPodRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NamespaceId")
+	delete(f, "ServiceId")
+	delete(f, "PodName")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Status")
+	delete(f, "SourceChannel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestartServiceRunPodRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type RestartServiceRunPodResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Returned results.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RestartServiceRunPodResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestartServiceRunPodResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type RunVersionPod struct {
 
 	// Shell address
@@ -1092,8 +1383,16 @@ type RunVersionPod struct {
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Pod IP
+	// Pod IP.
 	PodIp *string `json:"PodIp,omitempty" name:"PodIp"`
+
+	// Availability zone.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Deployed version.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	DeployVersion *string `json:"DeployVersion,omitempty" name:"DeployVersion"`
 }
 
 type StorageConf struct {

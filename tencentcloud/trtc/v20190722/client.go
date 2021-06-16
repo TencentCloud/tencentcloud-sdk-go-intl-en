@@ -59,7 +59,7 @@ func NewCreatePictureResponse() (response *CreatePictureResponse) {
 }
 
 // CreatePicture
-// This API is used to upload an image.
+// This API is no longer used, and an error will occur if you call it. To use the feature provided by this API, please see [Console Guide > Application Management > Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -128,7 +128,7 @@ func NewDeletePictureResponse() (response *DeletePictureResponse) {
 }
 
 // DeletePicture
-// This API is used to delete an image.
+// This API is no longer used, and an error will occur if you call it. To use the feature provided by this API, please see [Console Guide > Application Management > Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -229,6 +229,7 @@ func NewDescribeCallDetailResponse() (response *DescribeCallDetailResponse) {
 //  INVALIDPARAMETER_USERIDSMORETHANSIX = "InvalidParameter.UserIdsMorethanSix"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_COMMID = "MissingParameter.CommId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
 //  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
@@ -347,7 +348,7 @@ func NewDescribePictureResponse() (response *DescribePictureResponse) {
 }
 
 // DescribePicture
-// This API is used to query the parameters of an image.
+// This API is no longer used, and an error will occur if you call it. To use the feature provided by this API, please see [Console Guide > Application Management > Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
@@ -687,7 +688,7 @@ func NewModifyPictureResponse() (response *ModifyPictureResponse) {
 }
 
 // ModifyPicture
-// This API is used to modify the parameters of an image.
+// This API is no longer used, and an error will occur if you call it. To use the feature provided by this API, please see [Console Guide > Application Management > Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

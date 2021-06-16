@@ -5015,8 +5015,9 @@ type DescribeCDNStatDetailsRequest struct {
 	*tchttp.BaseRequest
 
 	// Metrics to query. Valid values:
-	// <li>Traffic: traffic in bytes.</li>
-	// <li>Bandwidth: bandwidth in bps.</li>
+	// <li>`Traffic`: traffic in bytes</li>
+	// <li>`Bandwidth`: bandwidth in bps</li>
+	// <li>`Requests`: the number of requests</li>
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
 
 	// Start time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
@@ -6067,11 +6068,20 @@ type DescribeStorageDetailsRequest struct {
 	// The value is set according to query period length by default. 5-minute granularity is set for periods no longer than 1 day, and 1-day granularity is set for periods longer than 1 day.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Storage class to be queried. Valid values:
-	// <li>TotalStorage: total storage capacity.</li>
-	// <li>StandardStorage: Standard storage.</li>
-	// <li>InfrequentStorage: Standard_IA storage.</li>
-	// Default value: TotalStorage.
+	// Storage class to query. Valid values:
+	// <li>`TotalStorage`: total storage usage in classes of STANDARD, STANDARD_IA, ARCHIVE, and DEEP ARCHIVE, excluding the storage usage for data deleted in advance.</li>
+	// <li>`StandardStorage`: STANDARD</li>
+	// <li>`InfrequentStorage`: STANDARD_IA</li>
+	// <li>`ArchiveStorage`: ARCHIVE</li>
+	// <li>`DeepArchiveStorage`: DEEP ARCHIVE</li>
+	// <li>`DeletedArchiveStorage`: ARCHIVE data deleted in advance</li>
+	// <li>`DeletedDeepArchiveStorage`: DEEP ARCHIVE data deleted in advance</li>
+	// <li>`ArchiveStandardRetrieval`: ARCHIVE data retrieved using standard retrievals</li>
+	// <li>`ArchiveExpeditedRetrieval`: ARCHIVE data retrieved using expedited retrievals</li>
+	// <li>`ArchiveBulkRetrieval`: ARCHIVE data retrieved using bulk retrievals</li>
+	// <li>`DeepArchiveStandardRetrieval`: DEEP ARCHIVE data retrieved using standard retrievals</li>
+	// <li>`DeepArchiveBulkRetrieval`: DEEP ARCHIVE data retrieved using bulk retrievals</li>
+	// Default value: `TotalStorage`
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -6411,7 +6421,6 @@ type DescribeTasksRequest struct {
 	// Filter: task end time.
 	FinishTime *TimeRange `json:"FinishTime,omitempty" name:"FinishTime"`
 
-	// (Not supported now)
 	// Sort field. Valid values:
 	// <li>`CreateTime`: task creation time</li>
 	// <li>`FinishTime`: task end time</li>
@@ -12233,6 +12242,12 @@ type StorageStatData struct {
 
 	// Current STANDARD storage capacity in bytes.
 	StandardStorage *uint64 `json:"StandardStorage,omitempty" name:"StandardStorage"`
+
+	// Current ARCHIVE storage usage in bytes
+	ArchiveStorage *uint64 `json:"ArchiveStorage,omitempty" name:"ArchiveStorage"`
+
+	// Current DEEP ARCHIVE storage usage in bytes
+	DeepArchiveStorage *uint64 `json:"DeepArchiveStorage,omitempty" name:"DeepArchiveStorage"`
 }
 
 type SubAppIdInfo struct {

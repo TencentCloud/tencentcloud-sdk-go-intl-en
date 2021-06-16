@@ -295,6 +295,35 @@ func (c *Client) DescribeNamespaces(request *DescribeNamespacesRequest) (respons
     return
 }
 
+func NewDescribeRelatedIngressesRequest() (request *DescribeRelatedIngressesRequest) {
+    request = &DescribeRelatedIngressesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tem", APIVersion, "DescribeRelatedIngresses")
+    return
+}
+
+func NewDescribeRelatedIngressesResponse() (response *DescribeRelatedIngressesResponse) {
+    response = &DescribeRelatedIngressesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRelatedIngresses
+// This API is used to query the list of ingress rules associated with the service.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) DescribeRelatedIngresses(request *DescribeRelatedIngressesRequest) (response *DescribeRelatedIngressesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRelatedIngressesRequest()
+    }
+    response = NewDescribeRelatedIngressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeServiceRunPodListV2Request() (request *DescribeServiceRunPodListV2Request) {
     request = &DescribeServiceRunPodListV2Request{
         BaseRequest: &tchttp.BaseRequest{},
@@ -378,6 +407,64 @@ func (c *Client) ModifyNamespace(request *ModifyNamespaceRequest) (response *Mod
         request = NewModifyNamespaceRequest()
     }
     response = NewModifyNamespaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyServiceInfoRequest() (request *ModifyServiceInfoRequest) {
+    request = &ModifyServiceInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tem", APIVersion, "ModifyServiceInfo")
+    return
+}
+
+func NewModifyServiceInfoResponse() (response *ModifyServiceInfoResponse) {
+    response = &ModifyServiceInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyServiceInfo
+// This API is used to modify a service’s basic information.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) ModifyServiceInfo(request *ModifyServiceInfoRequest) (response *ModifyServiceInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyServiceInfoRequest()
+    }
+    response = NewModifyServiceInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRestartServiceRunPodRequest() (request *RestartServiceRunPodRequest) {
+    request = &RestartServiceRunPodRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tem", APIVersion, "RestartServiceRunPod")
+    return
+}
+
+func NewRestartServiceRunPodResponse() (response *RestartServiceRunPodResponse) {
+    response = &RestartServiceRunPodResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RestartServiceRunPod
+// This API is used to restart an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) RestartServiceRunPod(request *RestartServiceRunPodRequest) (response *RestartServiceRunPodResponse, err error) {
+    if request == nil {
+        request = NewRestartServiceRunPodRequest()
+    }
+    response = NewRestartServiceRunPodResponse()
     err = c.Send(request, response)
     return
 }

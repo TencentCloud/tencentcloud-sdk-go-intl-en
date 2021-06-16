@@ -1144,6 +1144,9 @@ type LayoutParams struct {
 
 	// Whether an audio-only stream occupies an image spot, which takes effect in a floating, grid, or screen sharing template. Valid values: 0 (default): when a floating or grid template is used, users sending audio only occupy image spots; when a screen sharing template is used, users (except the user whose screen is shared) sending audio only do not occupy image spots; 1: users sending audio only occupy image spots; 2: users sending audio only do not occupy image spots.
 	PureAudioHoldPlaceMode *uint64 `json:"PureAudioHoldPlaceMode,omitempty" name:"PureAudioHoldPlaceMode"`
+
+	// Watermark parameters
+	WaterMarkParams *WaterMarkParams `json:"WaterMarkParams,omitempty" name:"WaterMarkParams"`
 }
 
 type ModifyPictureRequest struct {
@@ -1748,4 +1751,22 @@ type UserInformation struct {
 
 	// Determine whether a user has left the room
 	Finished *bool `json:"Finished,omitempty" name:"Finished"`
+}
+
+type WaterMarkParams struct {
+
+	// Image ID of the watermark, which is generated after the image is uploaded to the TRTC console
+	WaterMarkId *uint64 `json:"WaterMarkId,omitempty" name:"WaterMarkId"`
+
+	// Width (px) of the watermark for On-Cloud MixTranscoding
+	WaterMarkWidth *uint64 `json:"WaterMarkWidth,omitempty" name:"WaterMarkWidth"`
+
+	// Height (px) of the watermark for On-Cloud MixTranscoding
+	WaterMarkHeight *uint64 `json:"WaterMarkHeight,omitempty" name:"WaterMarkHeight"`
+
+	// Horizontal offset (px) of the watermark
+	LocationX *uint64 `json:"LocationX,omitempty" name:"LocationX"`
+
+	// Vertical offset (px) of the watermark
+	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
 }

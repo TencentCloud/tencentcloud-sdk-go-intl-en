@@ -188,7 +188,7 @@ const (
 	// Cdn error.
 	INVALIDPARAMETERVALUE_CDN = "InvalidParameterValue.Cdn"
 
-	// 
+	// The value of `cfs` configuration item does not meet the specification.
 	INVALIDPARAMETERVALUE_CFSPARAMETERERROR = "InvalidParameterValue.CfsParameterError"
 
 	// The CFS parameter format does not conform to the specification.
@@ -350,7 +350,7 @@ const (
 	// Invalid ServiceName.
 	INVALIDPARAMETERVALUE_SERVICENAME = "InvalidParameterValue.ServiceName"
 
-	// 
+	// The value of `Stamp` does not meet the specification. Please fix it and try again.
 	INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
 
 	// You need to specify both the start time and the end time.

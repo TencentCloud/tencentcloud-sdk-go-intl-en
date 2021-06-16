@@ -434,7 +434,7 @@ const (
 	// Incorrect parameter: audio channel system.
 	INVALIDPARAMETERVALUE_SOUNDSYSTEM = "InvalidParameterValue.SoundSystem"
 
-	// 
+	// Incorrect `SourceDefinition`. Please check whether the media file is bound with a transcoding template.  
 	INVALIDPARAMETERVALUE_SOURCEDEFINITION = "InvalidParameterValue.SourceDefinition"
 
 	// Incorrect parameter value: invalid `SourceType`.
