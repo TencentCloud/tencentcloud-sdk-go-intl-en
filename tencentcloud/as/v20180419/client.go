@@ -321,6 +321,7 @@ func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfiguration
 //  INVALIDPERMISSION = "InvalidPermission"
 //  LAUNCHCONFIGURATIONQUOTALIMITEXCEEDED = "LaunchConfigurationQuotaLimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_INSTANCEMARKETOPTIONS = "MissingParameter.InstanceMarketOptions"
 func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationRequest) (response *CreateLaunchConfigurationResponse, err error) {
     if request == nil {
         request = NewCreateLaunchConfigurationRequest()
@@ -1183,11 +1184,7 @@ func NewDetachInstancesResponse() (response *DetachInstancesResponse) {
 //
 // * However, if the scaling group is in `DISABLED` status, the removal will not verify the relationship between the number of `IN_SERVICE` instances and the minimum capacity.
 //
-// 
-//
-// The CVM will be associated from the CLB instance (if any).
-//
-//  
+// * This removal will unassociate the CVM from the CLB instance that has been configured for the scaling group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
@@ -1637,21 +1634,7 @@ func NewPreviewPaiDomainNameResponse() (response *PreviewPaiDomainNameResponse) 
 // This API (PreviewPaiDomainName) is used to preview a PAI domain name.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_CRONEXPRESSIONILLEGAL = "InvalidParameterValue.CronExpressionIllegal"
-//  INVALIDPARAMETERVALUE_ENDTIMEBEFORESTARTTIME = "InvalidParameterValue.EndTimeBeforeStartTime"
-//  INVALIDPARAMETERVALUE_INVALIDSCHEDULEDACTIONID = "InvalidParameterValue.InvalidScheduledActionId"
-//  INVALIDPARAMETERVALUE_INVALIDSCHEDULEDACTIONNAMEINCLUDEILLEGALCHAR = "InvalidParameterValue.InvalidScheduledActionNameIncludeIllegalChar"
-//  INVALIDPARAMETERVALUE_SCHEDULEDACTIONNAMEDUPLICATE = "InvalidParameterValue.ScheduledActionNameDuplicate"
-//  INVALIDPARAMETERVALUE_SIZE = "InvalidParameterValue.Size"
-//  INVALIDPARAMETERVALUE_STARTTIMEBEFORECURRENTTIME = "InvalidParameterValue.StartTimeBeforeCurrentTime"
-//  INVALIDPARAMETERVALUE_TIMEFORMAT = "InvalidParameterValue.TimeFormat"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  LIMITEXCEEDED_DESIREDCAPACITYLIMITEXCEEDED = "LimitExceeded.DesiredCapacityLimitExceeded"
-//  LIMITEXCEEDED_MAXSIZELIMITEXCEEDED = "LimitExceeded.MaxSizeLimitExceeded"
-//  LIMITEXCEEDED_MINSIZELIMITEXCEEDED = "LimitExceeded.MinSizeLimitExceeded"
-//  LIMITEXCEEDED_SCHEDULEDACTIONLIMITEXCEEDED = "LimitExceeded.ScheduledActionLimitExceeded"
-//  RESOURCENOTFOUND_SCHEDULEDACTIONNOTFOUND = "ResourceNotFound.ScheduledActionNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPAIDOMAINNAMETYPE = "InvalidParameterValue.InvalidPaiDomainNameType"
 func (c *Client) PreviewPaiDomainName(request *PreviewPaiDomainNameRequest) (response *PreviewPaiDomainNameResponse, err error) {
     if request == nil {
         request = NewPreviewPaiDomainNameRequest()
@@ -1683,11 +1666,7 @@ func NewRemoveInstancesResponse() (response *RemoveInstancesResponse) {
 //
 // * However, if the scaling group is in `DISABLED` status, the removal will not verify the relationship between the number of `IN_SERVICE` instances and the minimum capacity.
 //
-// 
-//
-// This removal will unassociate the CVM from the CLB instance that has been configured for the scaling group.
-//
-//  
+// * This removal will unassociate the CVM from the CLB instance that has been configured for the scaling group.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1705,6 +1684,89 @@ func (c *Client) RemoveInstances(request *RemoveInstancesRequest) (response *Rem
         request = NewRemoveInstancesRequest()
     }
     response = NewRemoveInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewScaleInInstancesRequest() (request *ScaleInInstancesRequest) {
+    request = &ScaleInInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("as", APIVersion, "ScaleInInstances")
+    return
+}
+
+func NewScaleInInstancesResponse() (response *ScaleInInstancesResponse) {
+    response = &ScaleInInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ScaleInInstances
+// This API is used to reduce the specified number of instances from the scaling group, which returns the scaling activity ID `ActivityId`.
+//
+// * The scaling group is not active.
+//
+// * The scale-in instances will be selected according to the `TerminationPolicies` policy as described in [Reducing Capacity](https://intl.cloud.tencent.com/document/product/377/8563?from_cn_redirect=1).
+//
+// * Only the `IN_SERVICE` instances will be reduced. To reduce instances in other statues, use the [`DetachInstances`](https://intl.cloud.tencent.com/document/api/377/20436?from_cn_redirect=1) or [`RemoveInstances`](https://intl.cloud.tencent.com/document/api/377/20431?from_cn_redirect=1) API.
+//
+// * The desired capacity will be reduced accordingly. The new desired capacity should be no less than the minimum capacity.
+//
+// * If the scale-in activity failed or partially succeeded, the final desired capacity only deducts the instances that have been reduced successfully.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT_AUTOSCALINGGROUPBELOWMINSIZE = "ResourceInsufficient.AutoScalingGroupBelowMinSize"
+//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+func (c *Client) ScaleInInstances(request *ScaleInInstancesRequest) (response *ScaleInInstancesResponse, err error) {
+    if request == nil {
+        request = NewScaleInInstancesRequest()
+    }
+    response = NewScaleInInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewScaleOutInstancesRequest() (request *ScaleOutInstancesRequest) {
+    request = &ScaleOutInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("as", APIVersion, "ScaleOutInstances")
+    return
+}
+
+func NewScaleOutInstancesResponse() (response *ScaleOutInstancesResponse) {
+    response = &ScaleOutInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ScaleOutInstances
+// This API is used to add the specified number of instances to the scaling group, which returns the scaling activity ID `ActivityId`.
+//
+// * The scaling group is not active.
+//
+// * The desired capacity will be increased accordingly. The new desired capacity should be no more than the maximum capacity.
+//
+// * If the scale-out activity failed or partially succeeded, the final desired capacity only includes the instances that have been added successfully.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  LIMITEXCEEDED_DESIREDCAPACITYLIMITEXCEEDED = "LimitExceeded.DesiredCapacityLimitExceeded"
+//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+func (c *Client) ScaleOutInstances(request *ScaleOutInstancesRequest) (response *ScaleOutInstancesResponse, err error) {
+    if request == nil {
+        request = NewScaleOutInstancesRequest()
+    }
+    response = NewScaleOutInstancesResponse()
     err = c.Send(request, response)
     return
 }

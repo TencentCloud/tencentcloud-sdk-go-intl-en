@@ -62,7 +62,7 @@ const (
 	// Multiple parameters specified conflict and cannot co-exist.
 	INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 
-	// 
+	// The `hostname` parameter is unavailable to this image.
 	INVALIDPARAMETER_HOSTNAMEUNAVAILABLE = "InvalidParameter.HostNameUnavailable"
 
 	// The parameter is invalid in a specific scenario.
@@ -107,7 +107,7 @@ const (
 	// Invalid filter.
 	INVALIDPARAMETERVALUE_FILTER = "InvalidParameterValue.Filter"
 
-	// An application load balancer is incorrectly specified.
+	// A CLB should be specified.
 	INVALIDPARAMETERVALUE_FORWARDLB = "InvalidParameterValue.ForwardLb"
 
 	// The auto scaling group name already exists.
@@ -154,6 +154,9 @@ const (
 
 	// The notification group ID should be a numeric string.
 	INVALIDPARAMETERVALUE_INVALIDNOTIFICATIONUSERGROUPID = "InvalidParameterValue.InvalidNotificationUserGroupId"
+
+	// Invalid PAI domain name type
+	INVALIDPARAMETERVALUE_INVALIDPAIDOMAINNAMETYPE = "InvalidParameterValue.InvalidPaiDomainNameType"
 
 	// Invalid scheduled action ID.
 	INVALIDPARAMETERVALUE_INVALIDSCHEDULEDACTIONID = "InvalidParameterValue.InvalidScheduledActionId"
@@ -265,6 +268,9 @@ const (
 
 	// A parameter is missing in a specific scenario.
 	MISSINGPARAMETER_INSCENARIO = "MissingParameter.InScenario"
+
+	// 
+	MISSINGPARAMETER_INSTANCEMARKETOPTIONS = "MissingParameter.InstanceMarketOptions"
 
 	// The auto scaling group is performing a scaling activity.
 	RESOURCEINUSE_ACTIVITYINPROGRESS = "ResourceInUse.ActivityInProgress"
