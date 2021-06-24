@@ -1158,8 +1158,90 @@ func (r *DetachDisksResponse) FromJsonString(s string) error {
 
 type Disk struct {
 
+	// Whether the cloud disk terminates along with the instance mounted to it. <br><li>true: Cloud disk will also be terminated when instance terminates, so only hourly postpaid cloud disk are supported.<br><li>false: Cloud disk does not terminate when instance terminates.
+	// Note: This field may return null, indicating that no valid value was found.
+	DeleteWithInstance *bool `json:"DeleteWithInstance,omitempty" name:"DeleteWithInstance"`
+
+	// Auto renewal flag. Supported values:<br><li>NOTIFY_AND_AUTO_RENEW: Notify expiry and renew automatically<br><li>NOTIFY_AND_MANUAL_RENEW: Notify expiry but not renew automatically<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify expiry nor renew automatically.
+	// Note: This field may return null, indicating that no valid value was found.
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+
+	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// The state of the cloud disk. Value range: <br><li>UNATTACHED: Not mounted <br><li>ATTACHING: Mounting <br><li>ATTACHED: Mounted <br><li>DETACHING: Un-mounting <br><li>EXPANDING: Expanding <br><li>ROLLBACKING: Rolling back <br><li>TORECYCE: Pending recycling. <br><li>DUMPING: Copying the hard drive.
+	DiskState *string `json:"DiskState,omitempty" name:"DiskState"`
+
+	// The total number of snapshots of the cloud disk.
+	SnapshotCount *int64 `json:"SnapshotCount,omitempty" name:"SnapshotCount"`
+
+	// Cloud disk already mounted to CVM, and both CVM and cloud disk use monthly subscription.<br><li>true: CVM has auto-renewal flag set up, but cloud disk does not.<br><li>false: Cloud disk auto-renewal flag set up normally.
+	// Note: This field may return null, indicating that no valid value was found.
+	AutoRenewFlagError *bool `json:"AutoRenewFlagError,omitempty" name:"AutoRenewFlagError"`
+
+	// Whether the cloud disk is in the status of snapshot rollback. Value range: <br><li>false: No <br><li>true: Yes
+	Rollbacking *bool `json:"Rollbacking,omitempty" name:"Rollbacking"`
+
+	// For non-shareable cloud disks, this parameter is null. For shareable cloud disks, this parameters indicates this cloud disk's Instance IDs currently mounted to the CVM.
+	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
+
+	// Whether the cloud disk is encrypted. Value range: <br><li>false: Not encrypted <br><li>true: Encrypted.
+	Encrypt *bool `json:"Encrypt,omitempty" name:"Encrypt"`
+
+	// Cloud disk name.
+	DiskName *string `json:"DiskName,omitempty" name:"DiskName"`
+
+	// Specifies whether to create a snapshot when the cloud disk is terminated due to overdue payment or expiration. `true`: create snapshot; `false`: do not create snapshot.
+	BackupDisk *bool `json:"BackupDisk,omitempty" name:"BackupDisk"`
+
+	// The tag bound to the cloud disk. The value Null is used when no tag is bound to the cloud disk.
+	// Note: This field may return null, indicating that no valid value was found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// ID of the CVM to which the cloud disk is mounted.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Cloud disk mount method. Valid values: <br><li>PF: mount as a PF (Physical Function)<br><li>VF: mount as a VF (Virtual Function)
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	AttachMode *string `json:"AttachMode,omitempty" name:"AttachMode"`
+
+	// ID of the periodic snapshot associated to the cloud disk. This parameter is returned only if the value of parameter ReturnBindAutoSnapshotPolicy is TRUE when the API DescribeDisks is called.
+	// Note: This field may return null, indicating that no valid value was found.
+	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitempty" name:"AutoSnapshotPolicyIds"`
+
+	// Extra performance for a cloud disk, in MB/sec.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
+
+	// Whether cloud disk is in process of type change. Value range: <br><li>false: Cloud disk not in process of type change. <br><li>true: Cloud disk type change has been launched, and migration is in process.
+	// Note: This field may return null, indicating that no valid value was found.
+	Migrating *bool `json:"Migrating,omitempty" name:"Migrating"`
+
 	// Cloud disk ID.
 	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// The total capacity of the snapshots of the cloud disk. Unit: MB.
+	SnapshotSize *uint64 `json:"SnapshotSize,omitempty" name:"SnapshotSize"`
+
+	// Location of the cloud disk.
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// Determines whether or not prepaid cloud disk supports active return. <br><li>true: Active return supported.<br><li>false: Active return not supported.
+	// Note: This field may return null, indicating that no valid value was found.
+	IsReturnable *bool `json:"IsReturnable,omitempty" name:"IsReturnable"`
+
+	// Expiration time of the cloud disk.
+	DeadlineTime *string `json:"DeadlineTime,omitempty" name:"DeadlineTime"`
+
+	// Whether the cloud disk is mounted to the CVM. Value range: <br><li>false: Unmounted <br><li>true: Mounted.
+	Attached *bool `json:"Attached,omitempty" name:"Attached"`
+
+	// Cloud disk size (in GB).
+	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Migration progress of cloud disk type change, from 0 to 100.
+	// Note: This field may return null, indicating that no valid value was found.
+	MigratePercent *uint64 `json:"MigratePercent,omitempty" name:"MigratePercent"`
 
 	// Cloud disk type. Value range:<br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
 	DiskUsage *string `json:"DiskUsage,omitempty" name:"DiskUsage"`
@@ -1170,107 +1252,29 @@ type Disk struct {
 	// Whether it is an elastic cloud disk. false: Non-elastic cloud disk; true: Elastic cloud disk.
 	Portable *bool `json:"Portable,omitempty" name:"Portable"`
 
-	// Location of the cloud disk.
-	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
-
 	// Whether the cloud disk has the capability to create snapshots. Value range: <br><li>false: Cannot create snapshots. true: Can create snapshots.
 	SnapshotAbility *bool `json:"SnapshotAbility,omitempty" name:"SnapshotAbility"`
-
-	// Cloud disk name.
-	DiskName *string `json:"DiskName,omitempty" name:"DiskName"`
-
-	// Cloud disk size (in GB).
-	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
-
-	// The state of the cloud disk. Value range: <br><li>UNATTACHED: Not mounted <br><li>ATTACHING: Mounting <br><li>ATTACHED: Mounted <br><li>DETACHING: Un-mounting <br><li>EXPANDING: Expanding <br><li>ROLLBACKING: Rolling back <br><li>TORECYCE: Pending recycling. <br><li>DUMPING: Copying the hard drive.
-	DiskState *string `json:"DiskState,omitempty" name:"DiskState"`
-
-	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
-	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
-
-	// Whether the cloud disk is mounted to the CVM. Value range: <br><li>false: Unmounted <br><li>true: Mounted.
-	Attached *bool `json:"Attached,omitempty" name:"Attached"`
-
-	// ID of the CVM to which the cloud disk is mounted.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Creation time of the cloud disk.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Expiration time of the cloud disk.
-	DeadlineTime *string `json:"DeadlineTime,omitempty" name:"DeadlineTime"`
-
-	// Whether the cloud disk is in the status of snapshot rollback. Value range: <br><li>false: No <br><li>true: Yes
-	Rollbacking *bool `json:"Rollbacking,omitempty" name:"Rollbacking"`
-
-	// Rollback progress of a cloud disk snapshot.
-	RollbackPercent *uint64 `json:"RollbackPercent,omitempty" name:"RollbackPercent"`
-
-	// Whether the cloud disk is encrypted. Value range: <br><li>false: Not encrypted <br><li>true: Encrypted.
-	Encrypt *bool `json:"Encrypt,omitempty" name:"Encrypt"`
-
-	// Cloud disk already mounted to CVM, and both CVM and cloud disk use monthly subscription.<br><li>true: CVM has auto-renewal flag set up, but cloud disk does not.<br><li>false: Cloud disk auto-renewal flag set up normally.
-	// Note: This field may return null, indicating that no valid value was found.
-	AutoRenewFlagError *bool `json:"AutoRenewFlagError,omitempty" name:"AutoRenewFlagError"`
-
-	// Auto renewal flag. Supported values:<br><li>NOTIFY_AND_AUTO_RENEW: Notify expiry and renew automatically<br><li>NOTIFY_AND_MANUAL_RENEW: Notify expiry but not renew automatically<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify expiry nor renew automatically.
-	// Note: This field may return null, indicating that no valid value was found.
-	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
 	// This field is only applicable when the instance is already mounted to the cloud disk, and both the instance and the cloud disk use monthly subscription. <br><li>true: Expiration time of cloud disk is earlier than that of the instance.<br><li>false:Expiration time of cloud disk is later than that of the instance.
 	// Note: This field may return null, indicating that no valid value was found.
 	DeadlineError *bool `json:"DeadlineError,omitempty" name:"DeadlineError"`
 
-	// Determines whether or not prepaid cloud disk supports active return. <br><li>true: Active return supported.<br><li>false: Active return not supported.
-	// Note: This field may return null, indicating that no valid value was found.
-	IsReturnable *bool `json:"IsReturnable,omitempty" name:"IsReturnable"`
-
-	// In circumstances where the prepaid cloud disk does not support active return, this parameter indicates the reason that return is not supported. Value range: <br><li>1: The cloud disk has already been returned. <br><li>2: The cloud disk has already expired. <br><li>3: The cloud disk does not support return. <br><li> 8: The limit on the number of returns is exceeded.
-	// Note: This field may return null, indicating that no valid value was found.
-	ReturnFailCode *int64 `json:"ReturnFailCode,omitempty" name:"ReturnFailCode"`
-
-	// ID of the periodic snapshot associated to the cloud disk. This parameter is returned only if the value of parameter ReturnBindAutoSnapshotPolicy is TRUE when the API DescribeDisks is called.
-	// Note: This field may return null, indicating that no valid value was found.
-	AutoSnapshotPolicyIds []*string `json:"AutoSnapshotPolicyIds,omitempty" name:"AutoSnapshotPolicyIds"`
-
-	// The tag bound to the cloud disk. The value Null is used when no tag is bound to the cloud disk.
-	// Note: This field may return null, indicating that no valid value was found.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-	// Whether the cloud disk terminates along with the instance mounted to it. <br><li>true: Cloud disk will also be terminated when instance terminates, so only hourly postpaid cloud disk are supported.<br><li>false: Cloud disk does not terminate when instance terminates.
-	// Note: This field may return null, indicating that no valid value was found.
-	DeleteWithInstance *bool `json:"DeleteWithInstance,omitempty" name:"DeleteWithInstance"`
+	// Rollback progress of a cloud disk snapshot.
+	RollbackPercent *uint64 `json:"RollbackPercent,omitempty" name:"RollbackPercent"`
 
 	// Number of days from current time until disk expiration (only applicable for prepaid disks).
 	// Note: This field may return null, indicating that no valid value was found.
 	DifferDaysOfDeadline *int64 `json:"DifferDaysOfDeadline,omitempty" name:"DifferDaysOfDeadline"`
 
-	// Whether cloud disk is in process of type change. Value range: <br><li>false: Cloud disk not in process of type change. <br><li>true: Cloud disk type change has been launched, and migration is in process.
+	// In circumstances where the prepaid cloud disk does not support active return, this parameter indicates the reason that return is not supported. Value range: <br><li>1: The cloud disk has already been returned. <br><li>2: The cloud disk has already expired. <br><li>3: The cloud disk does not support return. <br><li> 8: The limit on the number of returns is exceeded.
 	// Note: This field may return null, indicating that no valid value was found.
-	Migrating *bool `json:"Migrating,omitempty" name:"Migrating"`
-
-	// Migration progress of cloud disk type change, from 0 to 100.
-	// Note: This field may return null, indicating that no valid value was found.
-	MigratePercent *uint64 `json:"MigratePercent,omitempty" name:"MigratePercent"`
+	ReturnFailCode *int64 `json:"ReturnFailCode,omitempty" name:"ReturnFailCode"`
 
 	// Whether or not cloud disk is shareable cloud disk.
 	Shareable *bool `json:"Shareable,omitempty" name:"Shareable"`
 
-	// For non-shareable cloud disks, this parameter is null. For shareable cloud disks, this parameters indicates this cloud disk's Instance IDs currently mounted to the CVM.
-	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
-
-	// The total number of snapshots of the cloud disk.
-	SnapshotCount *int64 `json:"SnapshotCount,omitempty" name:"SnapshotCount"`
-
-	// The total capacity of the snapshots of the cloud disk. Unit: MB.
-	SnapshotSize *uint64 `json:"SnapshotSize,omitempty" name:"SnapshotSize"`
-
-	// Specifies whether to create a snapshot when the cloud disk is terminated due to overdue payment or expiration. `true`: create snapshot; `false`: do not create snapshot.
-	BackupDisk *bool `json:"BackupDisk,omitempty" name:"BackupDisk"`
-
-	// Extra performance for a cloud disk, in MB/sec.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
+	// Creation time of the cloud disk.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 type DiskChargePrepaid struct {
@@ -1904,20 +1908,23 @@ type Placement struct {
 	// The ID of the [Availability Zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) to which the cloud disk belongs. This parameter can be obtained from the Zone field in the returned values of [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1).
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
+	// Cage ID. When it is an input parameter, the specified CageID resource is operated, and it can be left blank. When it is an output parameter, it is the ID of the cage the resource belongs to, and it can be left blank.
+	// Note: This field may return null, indicating that no valid value was found.
+	CageId *string `json:"CageId,omitempty" name:"CageId"`
+
 	// ID of the project to which the instance belongs. This parameter can be obtained from the projectId field in the returned values of [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1). If this is left empty, default project is used.
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Dedicated cluster name. When it is an input parameter, it is ignored.  When it is an output parameter, it is the name of the dedicated cluster the cloud disk belongs to, and it can be left blank.
+	// Note: This field may return null, indicating that no valid value was found.
+	CdcName *string `json:"CdcName,omitempty" name:"CdcName"`
 
 	// ID of dedicated cluster which the instance belongs to. When it is an input parameter, the specified CdcId dedicated cluster resource is operated, and it can be left blank. When it is an output parameter, it is the ID of the dedicated cluster which the resource belongs to, and it can be left blank.
 	// Note: This field may return null, indicating that no valid value was found.
 	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 
-	// Cage ID. When it is an input parameter, the specified CageID resource is operated, and it can be left blank. When it is an output parameter, it is the ID of the cage the resource belongs to, and it can be left blank.
-	// Note: This field may return null, indicating that no valid value was found.
-	CageId *string `json:"CageId,omitempty" name:"CageId"`
-
-	// Dedicated cluster name. When it is an input parameter, it is ignored.  When it is an output parameter, it is the name of the dedicated cluster the cloud disk belongs to, and it can be left blank.
-	// Note: This field may return null, indicating that no valid value was found.
-	CdcName *string `json:"CdcName,omitempty" name:"CdcName"`
+	// Dedicated cluster ID
+	DedicatedClusterId *string `json:"DedicatedClusterId,omitempty" name:"DedicatedClusterId"`
 }
 
 type Policy struct {

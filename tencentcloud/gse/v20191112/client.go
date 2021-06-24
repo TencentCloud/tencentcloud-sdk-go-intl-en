@@ -354,6 +354,7 @@ func NewDescribeTimerScalingPoliciesResponse() (response *DescribeTimerScalingPo
 // This API (DescribeTimerScalingPolicies) is used to query the scheduled scaling policies of a fleet. You can query the policies by `fleetID` or the fleet name. The returned results are paged. 
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -365,6 +366,38 @@ func (c *Client) DescribeTimerScalingPolicies(request *DescribeTimerScalingPolic
         request = NewDescribeTimerScalingPoliciesRequest()
     }
     response = NewDescribeTimerScalingPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEndGameServerSessionAndProcessRequest() (request *EndGameServerSessionAndProcessRequest) {
+    request = &EndGameServerSessionAndProcessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gse", APIVersion, "EndGameServerSessionAndProcess")
+    return
+}
+
+func NewEndGameServerSessionAndProcessResponse() (response *EndGameServerSessionAndProcessResponse) {
+    response = &EndGameServerSessionAndProcessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// EndGameServerSessionAndProcess
+// This API is used to terminate the game server session and the corresponding process, which is applicable to time-limited protection and no protection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) EndGameServerSessionAndProcess(request *EndGameServerSessionAndProcessRequest) (response *EndGameServerSessionAndProcessResponse, err error) {
+    if request == nil {
+        request = NewEndGameServerSessionAndProcessRequest()
+    }
+    response = NewEndGameServerSessionAndProcessResponse()
     err = c.Send(request, response)
     return
 }
@@ -618,6 +651,7 @@ func NewSetServerReservedResponse() (response *SetServerReservedResponse) {
 // `ReserveValue`: specifies whether to retain the instance. Valid values: `0` (do not retain), `1` (retain). Default value: `0`.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"

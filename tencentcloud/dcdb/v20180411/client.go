@@ -764,6 +764,37 @@ func (c *Client) DescribeDcnDetail(request *DescribeDcnDetailRequest) (response 
     return
 }
 
+func NewDescribeFlowRequest() (request *DescribeFlowRequest) {
+    request = &DescribeFlowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "DescribeFlow")
+    return
+}
+
+func NewDescribeFlowResponse() (response *DescribeFlowResponse) {
+    response = &DescribeFlowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeFlow
+// This API is used to query task status.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER_FLOWNOTFOUND = "InvalidParameter.FlowNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeFlow(request *DescribeFlowRequest) (response *DescribeFlowResponse, err error) {
+    if request == nil {
+        request = NewDescribeFlowRequest()
+    }
+    response = NewDescribeFlowResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProjectSecurityGroupsRequest() (request *DescribeProjectSecurityGroupsRequest) {
     request = &DescribeProjectSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -819,6 +850,74 @@ func (c *Client) DescribeProjects(request *DescribeProjectsRequest) (response *D
         request = NewDescribeProjectsRequest()
     }
     response = NewDescribeProjectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDestroyDCDBInstanceRequest() (request *DestroyDCDBInstanceRequest) {
+    request = &DestroyDCDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "DestroyDCDBInstance")
+    return
+}
+
+func NewDestroyDCDBInstanceResponse() (response *DestroyDCDBInstanceResponse) {
+    response = &DestroyDCDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DestroyDCDBInstance
+// This API is used to terminate an isolated monthly-subscribed instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+func (c *Client) DestroyDCDBInstance(request *DestroyDCDBInstanceRequest) (response *DestroyDCDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewDestroyDCDBInstanceRequest()
+    }
+    response = NewDestroyDCDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDestroyHourDCDBInstanceRequest() (request *DestroyHourDCDBInstanceRequest) {
+    request = &DestroyHourDCDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "DestroyHourDCDBInstance")
+    return
+}
+
+func NewDestroyHourDCDBInstanceResponse() (response *DestroyHourDCDBInstanceResponse) {
+    response = &DestroyHourDCDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DestroyHourDCDBInstance
+// This API is used to terminate a pay-as-you-go instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+func (c *Client) DestroyHourDCDBInstance(request *DestroyHourDCDBInstanceRequest) (response *DestroyHourDCDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewDestroyHourDCDBInstanceRequest()
+    }
+    response = NewDestroyHourDCDBInstanceResponse()
     err = c.Send(request, response)
     return
 }

@@ -164,6 +164,9 @@ const (
 	// The password contains invalid characters.
 	INVALIDPARAMETER_CHARACTERERROR = "InvalidParameter.CharacterError"
 
+	// The specified task information was not found.
+	INVALIDPARAMETER_FLOWNOTFOUND = "InvalidParameter.FlowNotFound"
+
 	// An error occurred while verifying parameter validity.
 	INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 
