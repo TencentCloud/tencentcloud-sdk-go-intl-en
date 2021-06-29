@@ -77,6 +77,7 @@ func NewAddCdnDomainResponse() (response *AddCdnDomainResponse) {
 //  INVALIDPARAMETER_CDNCONFIGINVALIDTAG = "InvalidParameter.CdnConfigInvalidTag"
 //  INVALIDPARAMETER_CDNCONFIGTAGREQUIRED = "InvalidParameter.CdnConfigTagRequired"
 //  INVALIDPARAMETER_CDNHOSTINTERNALHOST = "InvalidParameter.CdnHostInternalHost"
+//  INVALIDPARAMETER_CDNHOSTTOOLONGHOST = "InvalidParameter.CdnHostTooLongHost"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
 //  LIMITEXCEEDED_CAMRESOURCEARRAYTOOLONG = "LimitExceeded.CamResourceArrayTooLong"
@@ -248,6 +249,7 @@ func NewDeleteCdnDomainResponse() (response *DeleteCdnDomainResponse) {
 //  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
 //  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
 //  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
+//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
 //  RESOURCEUNAVAILABLE_CDNHOSTISLOCKED = "ResourceUnavailable.CdnHostIsLocked"
 //  RESOURCEUNAVAILABLE_CDNHOSTISNOTOFFLINE = "ResourceUnavailable.CdnHostIsNotOffline"
 //  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
@@ -338,6 +340,7 @@ func NewDescribeBillingDataResponse() (response *DescribeBillingDataResponse) {
 // This API is used to query billing data details.
 //
 // error code that may be returned:
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
 //  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
@@ -394,7 +397,13 @@ func NewDescribeCdnDataResponse() (response *DescribeCdnDataResponse) {
 //
 // + Number of requests
 //
-// + Traffic hit rate (in % with two decimal digits)
+// + Number of hit requests
+//
+// + Request hit rate (in %)
+//
+// + Hit traffic (in bytes)
+//
+// + Traffic hit rate (in %)
 //
 // + Aggregate list of 2xx status codes and the details of status codes starting with 2 (in entries)
 //
@@ -410,10 +419,12 @@ func NewDescribeCdnDataResponse() (response *DescribeCdnDataResponse) {
 //  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
 //  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
+//  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_COSTDATASYSTEMERROR = "InternalError.CostDataSystemError"
 //  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
 //  INTERNALERROR_ERROR = "InternalError.Error"
+//  INTERNALERROR_INVALIDERRORCODE = "InternalError.InvalidErrorCode"
 //  INTERNALERROR_TAGSYSTEMERROR = "InternalError.TagSystemError"
 //  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
@@ -642,6 +653,7 @@ func NewDescribeDomainsResponse() (response *DescribeDomainsResponse) {
 //  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
 //  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
+//  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_ERROR = "InternalError.Error"
 //  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
@@ -658,6 +670,7 @@ func NewDescribeDomainsResponse() (response *DescribeDomainsResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERAUTHFAIL = "UnauthorizedOperation.CdnUserAuthFail"
 //  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
 //  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribeDomains(request *DescribeDomainsRequest) (response *DescribeDomainsResponse, err error) {
     if request == nil {
         request = NewDescribeDomainsRequest()
@@ -689,8 +702,10 @@ func NewDescribeDomainsConfigResponse() (response *DescribeDomainsConfigResponse
 //  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
 //  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
+//  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
+//  INVALIDPARAMETER_CDNCERTNOCERTINFO = "InvalidParameter.CdnCertNoCertInfo"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
 //  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
@@ -791,6 +806,7 @@ func NewDescribeIpVisitResponse() (response *DescribeIpVisitResponse) {
 //  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
 //  RESOURCENOTFOUND_CDNPROJECTNOTEXISTS = "ResourceNotFound.CdnProjectNotExists"
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
@@ -890,6 +906,7 @@ func NewDescribeOriginDataResponse() (response *DescribeOriginDataResponse) {
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
+//  INTERNALERROR_INVALIDERRORCODE = "InternalError.InvalidErrorCode"
 //  INTERNALERROR_TAGSYSTEMERROR = "InternalError.TagSystemError"
 //  INVALIDPARAMETER_CDNHOSTINVALIDMIDDLECONFIG = "InvalidParameter.CdnHostInvalidMiddleConfig"
 //  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
@@ -979,6 +996,7 @@ func NewDescribePurgeQuotaResponse() (response *DescribePurgeQuotaResponse) {
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribePurgeQuota(request *DescribePurgeQuotaRequest) (response *DescribePurgeQuotaResponse, err error) {
     if request == nil {
         request = NewDescribePurgeQuotaRequest()
@@ -1221,6 +1239,7 @@ func NewDisableCachesResponse() (response *DisableCachesResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
 //  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DisableCaches(request *DisableCachesRequest) (response *DisableCachesResponse, err error) {
     if request == nil {
         request = NewDisableCachesRequest()
@@ -1320,6 +1339,7 @@ func NewEnableCachesResponse() (response *EnableCachesResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
 //  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) EnableCaches(request *EnableCachesRequest) (response *EnableCachesResponse, err error) {
     if request == nil {
         request = NewEnableCachesRequest()
@@ -1477,6 +1497,7 @@ func NewListClsLogTopicsResponse() (response *ListClsLogTopicsResponse) {
 //  UNAUTHORIZEDOPERATION_CDNCLSNOTREGISTERED = "UnauthorizedOperation.CdnClsNotRegistered"
 //  UNAUTHORIZEDOPERATION_CLSINVALIDAUTHORIZATION = "UnauthorizedOperation.ClsInvalidAuthorization"
 //  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) ListClsLogTopics(request *ListClsLogTopicsRequest) (response *ListClsLogTopicsResponse, err error) {
     if request == nil {
         request = NewListClsLogTopicsRequest()
@@ -1980,6 +2001,7 @@ func NewStopCdnDomainResponse() (response *StopCdnDomainResponse) {
 //  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNUSERAUTHFAIL = "UnauthorizedOperation.CdnUserAuthFail"
 //  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
+//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 //  UNSUPPORTEDOPERATION_OPNOAUTH = "UnsupportedOperation.OpNoAuth"
