@@ -134,6 +134,59 @@ type BigKeyTypeInfo struct {
 	Updatetime *int64 `json:"Updatetime,omitempty" name:"Updatetime"`
 }
 
+type ChangeReplicaToMasterRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Replica ID
+	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+}
+
+func (r *ChangeReplicaToMasterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChangeReplicaToMasterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "GroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ChangeReplicaToMasterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ChangeReplicaToMasterResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID
+		TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ChangeReplicaToMasterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChangeReplicaToMasterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CleanUpInstanceRequest struct {
 	*tchttp.BaseRequest
 
@@ -3958,6 +4011,9 @@ type RedisNode struct {
 
 	// Node status
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Node role
+	Role *string `json:"Role,omitempty" name:"Role"`
 }
 
 type RedisNodeInfo struct {
@@ -3982,6 +4038,9 @@ type RedisNodes struct {
 
 	// Shard ID
 	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// AZ ID
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
 }
 
 type RegionConf struct {

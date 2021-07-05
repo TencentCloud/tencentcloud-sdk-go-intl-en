@@ -7356,6 +7356,12 @@ type UpgradeDBInstanceRequest struct {
 
 	// Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
 	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+
+	// The resource isolation type after the instance is upgraded. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). If this parameter is left empty, the resource isolation type will be the same as the original one.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {
@@ -7380,6 +7386,8 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "WaitSwitch")
 	delete(f, "BackupZone")
 	delete(f, "InstanceRole")
+	delete(f, "DeviceType")
+	delete(f, "Cpu")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceRequest has unknown keys!", "")
 	}

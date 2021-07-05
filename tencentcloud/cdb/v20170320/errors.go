@@ -206,6 +206,9 @@ const (
 	// Invalid parameter value
 	INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 
+	// 
+	INVALIDPARAMETER_JSONUNMARSHALERROR = "InvalidParameter.JsonUnmarshalError"
+
 	// The quota of placement group resources has been exceeded.
 	INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
 

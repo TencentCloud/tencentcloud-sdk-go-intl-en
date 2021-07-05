@@ -94,6 +94,9 @@ type CompleteMigrateJobRequest struct {
 
 	// Data migration task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// The way to complete the task, which is supported only for legacy MySQL migration task. waitForSync: wait for the source-replica lag to become 0 before stopping; immediately: complete immediately without waiting for source-replica sync. Default value: waitForSync
+	CompleteMode *string `json:"CompleteMode,omitempty" name:"CompleteMode"`
 }
 
 func (r *CompleteMigrateJobRequest) ToJsonString() string {
@@ -109,6 +112,7 @@ func (r *CompleteMigrateJobRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "JobId")
+	delete(f, "CompleteMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CompleteMigrateJobRequest has unknown keys!", "")
 	}

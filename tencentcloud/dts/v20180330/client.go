@@ -66,6 +66,7 @@ func NewActivateSubscribeResponse() (response *ActivateSubscribeResponse) {
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_OPERATIONDENIED = "OperationDenied.OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -108,6 +109,7 @@ func NewCompleteMigrateJobResponse() (response *CompleteMigrateJobResponse) {
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CompleteMigrateJob(request *CompleteMigrateJobRequest) (response *CompleteMigrateJobResponse, err error) {
     if request == nil {
         request = NewCompleteMigrateJobRequest()
@@ -142,6 +144,7 @@ func NewCreateMigrateCheckJobResponse() (response *CreateMigrateCheckJobResponse
 // error code that may be returned:
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 //  INTERNALERROR_ADDTASKERROR = "InternalError.AddTaskError"
+//  INTERNALERROR_CGWSYSTEMERROR = "InternalError.CgwSystemError"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_LOCKERROR = "InternalError.LockError"
@@ -326,6 +329,7 @@ func NewDeleteMigrateJobResponse() (response *DeleteMigrateJobResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
+//  FAILEDOPERATION_STATUSINCONFLICT = "FailedOperation.StatusInConflict"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
@@ -974,6 +978,7 @@ func NewStartMigrateJobResponse() (response *StartMigrateJobResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 //  FAILEDOPERATION_STARTJOBFAILED = "FailedOperation.StartJobFailed"
+//  FAILEDOPERATION_STATUSINCONFLICT = "FailedOperation.StatusInConflict"
 //  INTERNALERROR_ADDTASKERROR = "InternalError.AddTaskError"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
@@ -1050,6 +1055,7 @@ func NewStopMigrateJobResponse() (response *StopMigrateJobResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
+//  FAILEDOPERATION_STATUSINCONFLICT = "FailedOperation.StatusInConflict"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"

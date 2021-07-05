@@ -621,6 +621,12 @@ type CreateAlarmPolicyRequest struct {
 
 	// Triggered task list
 	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks"`
+
+	// Global filter.
+	Filter *AlarmPolicyFilter `json:"Filter,omitempty" name:"Filter"`
+
+	// Aggregation dimension list, which is used to specify which dimension keys data is grouped by.
+	GroupBy []*string `json:"GroupBy,omitempty" name:"GroupBy"`
 }
 
 func (r *CreateAlarmPolicyRequest) ToJsonString() string {
@@ -647,6 +653,8 @@ func (r *CreateAlarmPolicyRequest) FromJsonString(s string) error {
 	delete(f, "EventCondition")
 	delete(f, "NoticeIds")
 	delete(f, "TriggerTasks")
+	delete(f, "Filter")
+	delete(f, "GroupBy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAlarmPolicyRequest has unknown keys!", "")
 	}
@@ -1117,6 +1125,9 @@ type DescribeAlarmEventsRequest struct {
 
 	// Alarm policy type such as cvm_device, which is obtained through the `DescribeAllNamespaces` API
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Monitoring type, such as `MT_QCE`, which is set to default.
+	MonitorType *string `json:"MonitorType,omitempty" name:"MonitorType"`
 }
 
 func (r *DescribeAlarmEventsRequest) ToJsonString() string {
@@ -1133,6 +1144,7 @@ func (r *DescribeAlarmEventsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Module")
 	delete(f, "Namespace")
+	delete(f, "MonitorType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmEventsRequest has unknown keys!", "")
 	}
@@ -3260,10 +3272,10 @@ type GetMonitorDataRequest struct {
 	// Metric name, such as `CPUUsage`. Only one monitoring metric can be pulled at a time. For more information on the metrics of each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The corresponding metric name is `MetricName`.
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
-	// Dimension combination of instance object in the format of `key-value` pair, such as [{"Name":"InstanceId","Value":"ins-j0hk02zo"}]. For more information on the dimensions of each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The value in the dimension column is the `key` in the dimension combination, and the value corresponding to the `key` is the `value` in the combination
+	// The dimension combination for instance objects, which is in the form of a set of key-value pairs. The dimension fields for instances of different Tencent Cloud services are completely different. For example, the field is [{"Name":"InstanceId","Value":"ins-j0hk02zo"}] for CVM instances, [{"Name":"instanceId","Value":"ckafka-l49k54dd"}] for CKafka instances, and [{"Name":"appid","Value":"1258344699"},{"Name":"bucket","Value":"rig-1258344699"}] for COS instances. For more information on the dimensions of various Tencent Cloud services, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). In each document, the dimension column displays a dimension combination’s key, which has a corresponding value. A single request can get the data of up to 10 instances.
 	Instances []*Instance `json:"Instances,omitempty" name:"Instances"`
 
-	// Monitoring statistical period in seconds, such as 60. Default value: 300. The statistical period varies by metric. For more information on the statistical periods supported by each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The values in the statistical period column are the supported statistical periods
+	// Monitoring statistical period in seconds, such as 60. Default value: 300. The statistical period varies by metric. For more information on the statistical periods supported by each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The values in the statistical period column are the supported statistical periods. A single request can get data at up to 1,440 data points.
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
 	// Start time such as 2018-09-22T19:51:23+08:00
@@ -3560,6 +3572,12 @@ type ModifyAlarmPolicyConditionRequest struct {
 
 	// Event trigger condition
 	EventCondition *AlarmPolicyEventCondition `json:"EventCondition,omitempty" name:"EventCondition"`
+
+	// Global filter.
+	Filter *AlarmPolicyFilter `json:"Filter,omitempty" name:"Filter"`
+
+	// Aggregation dimension list, which is used to specify which dimension keys data is grouped by.
+	GroupBy []*string `json:"GroupBy,omitempty" name:"GroupBy"`
 }
 
 func (r *ModifyAlarmPolicyConditionRequest) ToJsonString() string {
@@ -3579,6 +3597,8 @@ func (r *ModifyAlarmPolicyConditionRequest) FromJsonString(s string) error {
 	delete(f, "ConditionTemplateId")
 	delete(f, "Condition")
 	delete(f, "EventCondition")
+	delete(f, "Filter")
+	delete(f, "GroupBy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAlarmPolicyConditionRequest has unknown keys!", "")
 	}
