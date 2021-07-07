@@ -3742,6 +3742,59 @@ func (r *CreateVpnGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateVpnGatewayRoutesRequest struct {
+	*tchttp.BaseRequest
+
+	// VPN gateway ID
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// Destination route list of a VPN gateway
+	Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
+}
+
+func (r *CreateVpnGatewayRoutesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVpnGatewayRoutesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpnGatewayId")
+	delete(f, "Routes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpnGatewayRoutesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateVpnGatewayRoutesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Destination routes of a VPN gateway
+		Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateVpnGatewayRoutesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVpnGatewayRoutesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CrossBorderCompliance struct {
 
 	// Service provider. Valid values: `UNICOM`.
@@ -5313,6 +5366,56 @@ func (r *DeleteVpnGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteVpnGatewayRoutesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID of the VPN gateway
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// List of route IDs
+	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds"`
+}
+
+func (r *DeleteVpnGatewayRoutesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVpnGatewayRoutesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpnGatewayId")
+	delete(f, "RouteIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVpnGatewayRoutesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteVpnGatewayRoutesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteVpnGatewayRoutesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVpnGatewayRoutesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeAccountAttributesRequest struct {
 	*tchttp.BaseRequest
 }
@@ -6293,6 +6396,12 @@ type DescribeCrossBorderComplianceRequest struct {
 
 	// (Exact match) Status. Valid values: `PENDING`, `APPROVED`, and `DENY`.
 	State *string `json:"State,omitempty" name:"State"`
+
+	// The offset value
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Quantity of returned items
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
 func (r *DescribeCrossBorderComplianceRequest) ToJsonString() string {
@@ -6323,6 +6432,8 @@ func (r *DescribeCrossBorderComplianceRequest) FromJsonString(s string) error {
 	delete(f, "ServiceStartDate")
 	delete(f, "ServiceEndDate")
 	delete(f, "State")
+	delete(f, "Offset")
+	delete(f, "Limit")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCrossBorderComplianceRequest has unknown keys!", "")
 	}
@@ -8863,6 +8974,67 @@ func (r *DescribeVpnGatewayCcnRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeVpnGatewayRoutesRequest struct {
+	*tchttp.BaseRequest
+
+	// VPN gateway ID
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// Filter condition. Valid values: `DestinationCidr`, `InstanceId`, and `InstanceType`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results per page. Default value: 20; maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeVpnGatewayRoutesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpnGatewayRoutesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpnGatewayId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpnGatewayRoutesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVpnGatewayRoutesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Destination routes of the VPN gateway
+		Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeVpnGatewayRoutesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpnGatewayRoutesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeVpnGatewaysRequest struct {
 	*tchttp.BaseRequest
 
@@ -10221,10 +10393,10 @@ type IKEOptionsSpecification struct {
 
 type IPSECOptionsSpecification struct {
 
-	// Encryption algorithm. Available values: '3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', and 'NULL'. Default is AES-CBC-128.
+	// Encryption algorithm. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, and `NULL`; default value: `AES-CBC-128`.
 	EncryptAlgorithm *string `json:"EncryptAlgorithm,omitempty" name:"EncryptAlgorithm"`
 
-	// Verification algorithm. Available value: 'MD5' and 'SHA1'. Default is:
+	// Authentication algorithm. Valid values: `MD5`, `SHA1` and `SHA-256`; default value: `SHA1`.
 	IntegrityAlgorith *string `json:"IntegrityAlgorith,omitempty" name:"IntegrityAlgorith"`
 
 	// IPsec SA lifetime (in sec). Value range: 180-604800
@@ -12828,6 +13000,60 @@ func (r *ModifyVpnGatewayCcnRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyVpnGatewayRoutesRequest struct {
+	*tchttp.BaseRequest
+
+	// VPN gateway ID
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// Route parameters to modify
+	Routes []*VpnGatewayRouteModify `json:"Routes,omitempty" name:"Routes"`
+}
+
+func (r *ModifyVpnGatewayRoutesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVpnGatewayRoutesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpnGatewayId")
+	delete(f, "Routes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpnGatewayRoutesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyVpnGatewayRoutesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Route information of the VPN gateway
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyVpnGatewayRoutesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVpnGatewayRoutesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type NatGateway struct {
 
 	// NAT gateway ID.
@@ -14077,16 +14303,15 @@ type Route struct {
 	DestinationCidrBlock *string `json:"DestinationCidrBlock,omitempty" name:"DestinationCidrBlock"`
 
 	// Type of the next hop. Valid values:
-	// CVM: public gateway CVM;
-	// VPN: VPN gateway;
-	// DIRECTCONNECT: direct connect gateway;
-	// PEERCONNECTION: peering connection;
-	// SSLVPN: SSL VPN gateway;
-	// NAT: NAT Gateway; 
-	// NORMAL_CVM: normal CVM;
-	// EIP: public IP address of the CVM;
-	// CCN: Cloud Connect Network;
-	// LOCAL_GATEWAY: local gateway.
+	// `CVM`: public gateway CVM;
+	// `VPN`: VPN gateway;
+	// `DIRECTCONNECT`: direct connect gateway;
+	// `PEERCONNECTION`: peering connection;
+	// `HAVIP`: HAVIP;
+	// `NAT`: NAT Gateway; 
+	// `NORMAL_CVM`: normal CVM;
+	// `EIP`: public IP address of the CVM;
+	// `LOCAL_GATEWAY`: local gateway.
 	GatewayType *string `json:"GatewayType,omitempty" name:"GatewayType"`
 
 	// Next hop address. You simply need to specify the gateway ID of a different next hop type, and the system will automatically match the next hop address.
@@ -14325,7 +14550,7 @@ type SetCcnRegionBandwidthLimitsRequest struct {
 	// The outbound bandwidth cap of each CCN region.
 	CcnRegionBandwidthLimits []*CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimits,omitempty" name:"CcnRegionBandwidthLimits"`
 
-	// Whether to restore the region outbound bandwidth limit or inter-region bandwidth limit to default 1Gbps. Valid values: `false` (no); `true` (yes). Default value: `false`. When the parameter is set to `true`, the CCN instance created will not be displayed in the console.
+	// Whether to restore the region outbound bandwidth limit or inter-region bandwidth limit to default 1 Gbps. Valid values: `false` (no); `true` (yes). Default value: `false`. When the parameter is set to `true`, the CCN instance created will not be displayed in the console.
 	SetDefaultLimitFlag *bool `json:"SetDefaultLimitFlag,omitempty" name:"SetDefaultLimitFlag"`
 }
 
@@ -14950,6 +15175,45 @@ type VpnGatewayQuota struct {
 
 	// The bandwidth quota name in English.
 	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type VpnGatewayRoute struct {
+
+	// Destination IDC IP range
+	DestinationCidrBlock *string `json:"DestinationCidrBlock,omitempty" name:"DestinationCidrBlock"`
+
+	// Next hop type (type of the associated instance). Valid values: `VPNCONN` (VPN tunnel) and `CCN` (CCN instance)
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Instance ID of the next hop
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Priority. Valid values: `0` and `100`
+	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
+
+	// Status. Valid values: `ENABLE` and `DISABLE`
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Route ID
+	RouteId *string `json:"RouteId,omitempty" name:"RouteId"`
+
+	// Route type. Valid values: `VPC`, `CCN` (CCN-propagated route), `Static`, and `BGP`.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Update time
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type VpnGatewayRouteModify struct {
+
+	// Route ID of the VPN gateway
+	RouteId *string `json:"RouteId,omitempty" name:"RouteId"`
+
+	// Route status of the VPN gateway. Valid values: `ENABLE`, and `DISABLE`.
+	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type VpngwCcnRoutes struct {

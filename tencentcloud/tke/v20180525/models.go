@@ -432,6 +432,10 @@ type Cluster struct {
 	// Whether Deletion Protection is enabled
 	// Note: this field may return null, indicating that no valid value is obtained.
 	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
+
+	// Specifies whether the cluster supports external nodes.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	EnableExternalNode *bool `json:"EnableExternalNode,omitempty" name:"EnableExternalNode"`
 }
 
 type ClusterAdvancedSettings struct {
@@ -489,6 +493,9 @@ type ClusterAdvancedSettings struct {
 
 	// The basic number of Pods in custom mode
 	BasePodNumber *int64 `json:"BasePodNumber,omitempty" name:"BasePodNumber"`
+
+	// Specifies whether to enable Cilium. If it’s left empty, Cilium is not enabled. If `clusterIP` is passed in, it means to enable Cilium to support the clusterIP service type.
+	CiliumMode *string `json:"CiliumMode,omitempty" name:"CiliumMode"`
 }
 
 type ClusterAsGroup struct {

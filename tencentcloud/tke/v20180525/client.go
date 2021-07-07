@@ -277,6 +277,9 @@ func NewCreateClusterResponse() (response *CreateClusterResponse) {
 //  INTERNALERROR_VPCCOMMON = "InternalError.VpcCommon"
 //  INTERNALERROR_VPCRECODRNOTFOUND = "InternalError.VpcRecodrNotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CIDRCONFLICTWITHOTHERCLUSTER = "InvalidParameter.CidrConflictWithOtherCluster"
+//  INVALIDPARAMETER_CIDRCONFLICTWITHVPCCIDR = "InvalidParameter.CidrConflictWithVpcCidr"
+//  INVALIDPARAMETER_CIDRCONFLICTWITHVPCGLOBALROUTE = "InvalidParameter.CidrConflictWithVpcGlobalRoute"
 //  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
     if request == nil {
@@ -1625,6 +1628,7 @@ func NewGetUpgradeInstanceProgressResponse() (response *GetUpgradeInstanceProgre
 //
 // error code that may be returned:
 //  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) GetUpgradeInstanceProgress(request *GetUpgradeInstanceProgressRequest) (response *GetUpgradeInstanceProgressResponse, err error) {
     if request == nil {
         request = NewGetUpgradeInstanceProgressRequest()
