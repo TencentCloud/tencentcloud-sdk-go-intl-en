@@ -48,6 +48,9 @@ type BankCardOCRRequest struct {
 
 	// Whether to enable obscured border check. If the input image is a bank card with obscured border, an alarm will be returned. Default value: `false`
 	EnableBorderCheck *bool `json:"EnableBorderCheck,omitempty" name:"EnableBorderCheck"`
+
+	// Whether to return the image quality value, which measures how clear an image is. Default value: `false`
+	EnableQualityValue *bool `json:"EnableQualityValue,omitempty" name:"EnableQualityValue"`
 }
 
 func (r *BankCardOCRRequest) ToJsonString() string {
@@ -69,6 +72,7 @@ func (r *BankCardOCRRequest) FromJsonString(s string) error {
 	delete(f, "EnableCopyCheck")
 	delete(f, "EnableReshootCheck")
 	delete(f, "EnableBorderCheck")
+	delete(f, "EnableQualityValue")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BankCardOCRRequest has unknown keys!", "")
 	}
@@ -112,6 +116,10 @@ type BankCardOCRResponse struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		WarningCode []*int64 `json:"WarningCode,omitempty" name:"WarningCode"`
 
+		// Image quality value, which is returned when `EnableQualityValue` is set to `true`. The smaller the value, the less clear the image is. Value range: 0−100 (a threshold greater than or equal to 50 is recommended.)
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+		QualityValue *int64 `json:"QualityValue,omitempty" name:"QualityValue"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -137,6 +145,21 @@ type Coord struct {
 	Y *int64 `json:"Y,omitempty" name:"Y"`
 }
 
+type DetectedWordCoordPoint struct {
+
+	// Coordinates of a word’s four corners in a clockwise order on the input image, starting from the upper-left corner
+	WordCoordinate []*Coord `json:"WordCoordinate,omitempty" name:"WordCoordinate"`
+}
+
+type DetectedWords struct {
+
+	// Confidence. Value range: 0–100
+	Confidence *int64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// A possible character
+	Character *string `json:"Character,omitempty" name:"Character"`
+}
+
 type GeneralAccurateOCRRequest struct {
 	*tchttp.BaseRequest
 
@@ -149,6 +172,9 @@ type GeneralAccurateOCRRequest struct {
 	// The image cannot exceed 7 MB after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
 	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// Whether to return the character information. Default value: `false`
+	IsWords *bool `json:"IsWords,omitempty" name:"IsWords"`
 }
 
 func (r *GeneralAccurateOCRRequest) ToJsonString() string {
@@ -165,6 +191,7 @@ func (r *GeneralAccurateOCRRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ImageBase64")
 	delete(f, "ImageUrl")
+	delete(f, "IsWords")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GeneralAccurateOCRRequest has unknown keys!", "")
 	}
@@ -234,6 +261,9 @@ type GeneralBasicOCRRequest struct {
 
 	// Page number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF and the value of the `IsPdf` parameter is `true`. Default value: 1.
 	PdfPageNumber *uint64 `json:"PdfPageNumber,omitempty" name:"PdfPageNumber"`
+
+	// Whether to return the character information. Default value: `false`
+	IsWords *bool `json:"IsWords,omitempty" name:"IsWords"`
 }
 
 func (r *GeneralBasicOCRRequest) ToJsonString() string {
@@ -254,6 +284,7 @@ func (r *GeneralBasicOCRRequest) FromJsonString(s string) error {
 	delete(f, "LanguageType")
 	delete(f, "IsPdf")
 	delete(f, "PdfPageNumber")
+	delete(f, "IsWords")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GeneralBasicOCRRequest has unknown keys!", "")
 	}
@@ -699,6 +730,12 @@ type TextDetection struct {
 
 	// Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`.
 	ItemPolygon *ItemCoord `json:"ItemPolygon,omitempty" name:"ItemPolygon"`
+
+	// Information about a character, including the character itself and its confidence. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
+	Words []*DetectedWords `json:"Words,omitempty" name:"Words"`
+
+	// Coordinates of a word’s four corners on the input image. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
+	WordCoordPoint []*DetectedWordCoordPoint `json:"WordCoordPoint,omitempty" name:"WordCoordPoint"`
 }
 
 type TextTable struct {
