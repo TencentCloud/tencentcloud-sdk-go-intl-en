@@ -67,6 +67,8 @@ func NewAddUserResponse() (response *AddUserResponse) {
 //  INVALIDPARAMETER_PASSWORDVIOLATEDRULES = "InvalidParameter.PasswordViolatedRules"
 //  INVALIDPARAMETER_SUBUSERFULL = "InvalidParameter.SubUserFull"
 //  INVALIDPARAMETER_SUBUSERNAMEINUSE = "InvalidParameter.SubUserNameInUse"
+//  INVALIDPARAMETER_USERNAMEILLEGAL = "InvalidParameter.UserNameIllegal"
+//  REQUESTLIMITEXCEEDED_CREATEUSER = "RequestLimitExceeded.CreateUser"
 func (c *Client) AddUser(request *AddUserRequest) (response *AddUserResponse, err error) {
     if request == nil {
         request = NewAddUserRequest()
@@ -170,6 +172,7 @@ func NewAttachRolePolicyResponse() (response *AttachRolePolicyResponse) {
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
+//  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
 func (c *Client) AttachRolePolicy(request *AttachRolePolicyRequest) (response *AttachRolePolicyResponse, err error) {
@@ -467,6 +470,7 @@ func NewCreateSAMLProviderResponse() (response *CreateSAMLProviderResponse) {
 // This API is used to create a SAML identity provider.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
 //  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
 //  INVALIDPARAMETERVALUE_NAMEERROR = "InvalidParameterValue.NameError"
@@ -777,6 +781,7 @@ func NewDeleteUserResponse() (response *DeleteUserResponse) {
 // This API is used to delete a sub-user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_HAVEKEYS = "OperationDenied.HaveKeys"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 //  UNAUTHORIZEDOPERATION_DELETEAPIKEY = "UnauthorizedOperation.DeleteApiKey"
@@ -1097,6 +1102,7 @@ func NewGetGroupResponse() (response *GetGroupResponse) {
 // This API is used to query user group details.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) GetGroup(request *GetGroupRequest) (response *GetGroupResponse, err error) {
     if request == nil {
@@ -1229,6 +1235,36 @@ func (c *Client) GetSAMLProvider(request *GetSAMLProviderRequest) (response *Get
         request = NewGetSAMLProviderRequest()
     }
     response = NewGetSAMLProviderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetSecurityLastUsedRequest() (request *GetSecurityLastUsedRequest) {
+    request = &GetSecurityLastUsedRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "GetSecurityLastUsed")
+    return
+}
+
+func NewGetSecurityLastUsedResponse() (response *GetSecurityLastUsedResponse) {
+    response = &GetSecurityLastUsedResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetSecurityLastUsed
+// This API is used to get a key’s recent usage details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) GetSecurityLastUsed(request *GetSecurityLastUsedRequest) (response *GetSecurityLastUsedResponse, err error) {
+    if request == nil {
+        request = NewGetSecurityLastUsedRequest()
+    }
+    response = NewGetSecurityLastUsedResponse()
     err = c.Send(request, response)
     return
 }
@@ -1436,8 +1472,7 @@ func NewListCollaboratorsResponse() (response *ListCollaboratorsResponse) {
 // This API is used to get the collaborator list.
 //
 // error code that may be returned:
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) ListCollaborators(request *ListCollaboratorsRequest) (response *ListCollaboratorsResponse, err error) {
     if request == nil {
         request = NewListCollaboratorsRequest()

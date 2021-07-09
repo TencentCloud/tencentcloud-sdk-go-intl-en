@@ -1983,6 +1983,55 @@ func (r *GetSAMLProviderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type GetSecurityLastUsedRequest struct {
+	*tchttp.BaseRequest
+
+	// A parameter used to query the key ID list.
+	SecretIdList []*string `json:"SecretIdList,omitempty" name:"SecretIdList"`
+}
+
+func (r *GetSecurityLastUsedRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetSecurityLastUsedRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecretIdList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetSecurityLastUsedRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetSecurityLastUsedResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of key ID’s recent usage records.
+		SecretIdLastUsedRows []*SecretIdLastUsed `json:"SecretIdLastUsedRows,omitempty" name:"SecretIdLastUsedRows"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetSecurityLastUsedResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetSecurityLastUsedResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type GetServiceLinkedRoleDeletionStatusRequest struct {
 	*tchttp.BaseRequest
 
@@ -3218,6 +3267,16 @@ type SAMLProviderInfo struct {
 
 	// Time SAML identity provider last modified
 	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+}
+
+type SecretIdLastUsed struct {
+
+	// Key ID.
+	SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
+
+	// The date when the key ID was last used (the value is obtained one day later).
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	LastUsedDate *string `json:"LastUsedDate,omitempty" name:"LastUsedDate"`
 }
 
 type SetDefaultPolicyVersionRequest struct {
