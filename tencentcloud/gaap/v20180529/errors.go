@@ -29,6 +29,9 @@ const (
 	// The operation is being performed. Do not perform it again.
 	FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 
+	// Too many attempts. Please try again later.
+	FAILEDOPERATION_ACTIONOPERATETOOQUICKLY = "FailedOperation.ActionOperateTooQuickly"
+
 	// Unable to operate in batches: the connections belong to different groups.
 	FAILEDOPERATION_BELONGDIFFERENTGROUP = "FailedOperation.BelongDifferentGroup"
 

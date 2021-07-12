@@ -139,6 +139,7 @@ func NewCompleteLifecycleActionResponse() (response *CompleteLifecycleActionResp
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
 //  INVALIDPARAMETERVALUE_INVALIDLIFECYCLEHOOKID = "InvalidParameterValue.InvalidLifecycleHookId"
@@ -437,39 +438,6 @@ func (c *Client) CreateNotificationConfiguration(request *CreateNotificationConf
         request = NewCreateNotificationConfigurationRequest()
     }
     response = NewCreateNotificationConfigurationResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreatePaiInstanceRequest() (request *CreatePaiInstanceRequest) {
-    request = &CreatePaiInstanceRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("as", APIVersion, "CreatePaiInstance")
-    return
-}
-
-func NewCreatePaiInstanceResponse() (response *CreatePaiInstanceResponse) {
-    response = &CreatePaiInstanceResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreatePaiInstance
-// This API (CreatePaiInstance) is used to create a PAI instance.
-//
-// error code that may be returned:
-//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
-//  INVALIDPARAMETER_INVALIDCOMBINATION = "InvalidParameter.InvalidCombination"
-//  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
-//  INVALIDPARAMETERVALUE_INVALIDSUBNETID = "InvalidParameterValue.InvalidSubnetId"
-//  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
-func (c *Client) CreatePaiInstance(request *CreatePaiInstanceRequest) (response *CreatePaiInstanceResponse, err error) {
-    if request == nil {
-        request = NewCreatePaiInstanceRequest()
-    }
-    response = NewCreatePaiInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -1050,43 +1018,6 @@ func (c *Client) DescribeNotificationConfigurations(request *DescribeNotificatio
     return
 }
 
-func NewDescribePaiInstancesRequest() (request *DescribePaiInstancesRequest) {
-    request = &DescribePaiInstancesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("as", APIVersion, "DescribePaiInstances")
-    return
-}
-
-func NewDescribePaiInstancesResponse() (response *DescribePaiInstancesResponse) {
-    response = &DescribePaiInstancesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribePaiInstances
-// This API (DescribePaiInstances) is used to query the information of PAI instances.
-//
-// 
-//
-// * You can query the detailed information of PAI instances based on information such as instance ID and instance domain name. For more information on filters, see `Filter`.
-//
-// * If the parameter is empty, a certain number (specified by `Limit` and 20 by default) of PAI instances of the current user will be returned.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
-//  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-func (c *Client) DescribePaiInstances(request *DescribePaiInstancesRequest) (response *DescribePaiInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribePaiInstancesRequest()
-    }
-    response = NewDescribePaiInstancesResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeScalingPoliciesRequest() (request *DescribeScalingPoliciesRequest) {
     request = &DescribeScalingPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1615,35 +1546,6 @@ func (c *Client) ModifyScheduledAction(request *ModifyScheduledActionRequest) (r
     return
 }
 
-func NewPreviewPaiDomainNameRequest() (request *PreviewPaiDomainNameRequest) {
-    request = &PreviewPaiDomainNameRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("as", APIVersion, "PreviewPaiDomainName")
-    return
-}
-
-func NewPreviewPaiDomainNameResponse() (response *PreviewPaiDomainNameResponse) {
-    response = &PreviewPaiDomainNameResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// PreviewPaiDomainName
-// This API (PreviewPaiDomainName) is used to preview a PAI domain name.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_INVALIDPAIDOMAINNAMETYPE = "InvalidParameterValue.InvalidPaiDomainNameType"
-func (c *Client) PreviewPaiDomainName(request *PreviewPaiDomainNameRequest) (response *PreviewPaiDomainNameResponse, err error) {
-    if request == nil {
-        request = NewPreviewPaiDomainNameRequest()
-    }
-    response = NewPreviewPaiDomainNameResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewRemoveInstancesRequest() (request *RemoveInstancesRequest) {
     request = &RemoveInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1760,6 +1662,7 @@ func NewScaleOutInstancesResponse() (response *ScaleOutInstancesResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  LIMITEXCEEDED_DESIREDCAPACITYLIMITEXCEEDED = "LimitExceeded.DesiredCapacityLimitExceeded"
+//  RESOURCEINSUFFICIENT_AUTOSCALINGGROUPABOVEMAXSIZE = "ResourceInsufficient.AutoScalingGroupAboveMaxSize"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
 func (c *Client) ScaleOutInstances(request *ScaleOutInstancesRequest) (response *ScaleOutInstancesResponse, err error) {
@@ -1873,6 +1776,7 @@ func NewStopAutoScalingInstancesResponse() (response *StopAutoScalingInstancesRe
 // * This API supports batch operation. Up to 100 instances can be shut down in each request.
 //
 // error code that may be returned:
+//  CALLCVMERROR = "CallCvmError"
 //  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"

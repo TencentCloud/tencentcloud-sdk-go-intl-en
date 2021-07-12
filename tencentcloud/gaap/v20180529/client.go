@@ -382,6 +382,7 @@ func NewCreateDomainResponse() (response *CreateDomainResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINALREADYEXISTED = "FailedOperation.DomainAlreadyExisted"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
 //  FAILEDOPERATION_LIMITNUMOFDOMAINS = "FailedOperation.LimitNumofDomains"
@@ -1798,6 +1799,8 @@ func NewDescribeProxyDetailResponse() (response *DescribeProxyDetailResponse) {
 // error code that may be returned:
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
+//  FAILEDOPERATION_ACTIONOPERATETOOQUICKLY = "FailedOperation.ActionOperateTooQuickly"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2161,6 +2164,7 @@ func NewDescribeRuleRealServersResponse() (response *DescribeRuleRealServersResp
 // This API (DescribeRuleRealServers) is used to query forwarding rules-related origin server information, including information of origin servers that can be bound and have been bound.
 //
 // error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
 //  INTERNALERROR = "InternalError"

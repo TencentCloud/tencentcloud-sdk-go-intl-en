@@ -499,6 +499,12 @@ type CreateAutoScalingGroupRequest struct {
 	// <br><li> During instance creation, apply the multi-model policy and then apply the multi-availability zones/subnet policy. For example, if you have models A and B and subnets 1, 2, and 3 (based on the PRIORITY policy), creation will be attempted in the following order: A1, A2, A3, B1, B2, and B3. If A1 is sold out, A2 (not B1) is tried next.
 	// <br><li> No matter what policy is used, a single scaling event always uses a specific configuration at priority (model * availability zone/subnet).
 	MultiZoneSubnetPolicy *string `json:"MultiZoneSubnetPolicy,omitempty" name:"MultiZoneSubnetPolicy"`
+
+	// Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+	HealthCheckType *string `json:"HealthCheckType,omitempty" name:"HealthCheckType"`
+
+	// Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
+	LoadBalancerHealthCheckGracePeriod *uint64 `json:"LoadBalancerHealthCheckGracePeriod,omitempty" name:"LoadBalancerHealthCheckGracePeriod"`
 }
 
 func (r *CreateAutoScalingGroupRequest) ToJsonString() string {
@@ -532,6 +538,8 @@ func (r *CreateAutoScalingGroupRequest) FromJsonString(s string) error {
 	delete(f, "ServiceSettings")
 	delete(f, "Ipv6AddressCount")
 	delete(f, "MultiZoneSubnetPolicy")
+	delete(f, "HealthCheckType")
+	delete(f, "LoadBalancerHealthCheckGracePeriod")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAutoScalingGroupRequest has unknown keys!", "")
 	}
@@ -839,95 +847,6 @@ func (r *CreateNotificationConfigurationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateNotificationConfigurationResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreatePaiInstanceRequest struct {
-	*tchttp.BaseRequest
-
-	// PAI instance domain name.
-	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
-
-	// Information of the public network bandwidth configuration.
-	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
-
-	// Base64-encoded string of the launch script.
-	InitScript *string `json:"InitScript,omitempty" name:"InitScript"`
-
-	// List of availability zones.
-	Zones []*string `json:"Zones,omitempty" name:"Zones"`
-
-	// VPC ID.
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
-
-	// List of subnets.
-	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
-
-	// Instance display name.
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
-
-	// List of instance models.
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
-
-	// Instance login settings.
-	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
-
-	// Instance billing type.
-	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
-
-	// Relevant parameter settings for the prepaid mode (i.e., monthly subscription). This parameter can specify the purchased usage period, whether to set automatic renewal, and other attributes of the instance purchased on a prepaid basis. If the billing method of the specified instance is prepaid, this parameter is required.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
-}
-
-func (r *CreatePaiInstanceRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreatePaiInstanceRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "DomainName")
-	delete(f, "InternetAccessible")
-	delete(f, "InitScript")
-	delete(f, "Zones")
-	delete(f, "VpcId")
-	delete(f, "SubnetIds")
-	delete(f, "InstanceName")
-	delete(f, "InstanceTypes")
-	delete(f, "LoginSettings")
-	delete(f, "InstanceChargeType")
-	delete(f, "InstanceChargePrepaid")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePaiInstanceRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreatePaiInstanceResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// This parameter is returned when an instance is created via this API, representing one or more instance `IDs`. The return of the instance `ID` list does not mean that the instance is created successfully. You can find out whether the instance is created by checking the status of the instance `ID` in the InstancesSet returned by the [DescribeInstances API](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). If the status of the instance changes from "pending" to "running", the instance is created successfully.
-		InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreatePaiInstanceResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreatePaiInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1898,70 +1817,6 @@ func (r *DescribeNotificationConfigurationsResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribePaiInstancesRequest struct {
-	*tchttp.BaseRequest
-
-	// Queries by PAI instance ID.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
-
-	// Filter.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-
-	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Offset. Default value: 0.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-}
-
-func (r *DescribePaiInstancesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribePaiInstancesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceIds")
-	delete(f, "Filters")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePaiInstancesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribePaiInstancesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible PAI instances
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// PAI instance details
-		PaiInstanceSet []*PaiInstance `json:"PaiInstanceSet,omitempty" name:"PaiInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribePaiInstancesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribePaiInstancesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeScalingPoliciesRequest struct {
 	*tchttp.BaseRequest
 
@@ -2725,6 +2580,12 @@ type ModifyAutoScalingGroupRequest struct {
 	// <br><li> During instance creation, apply the multi-model policy and then apply the multi-availability zones/subnet policy. For example, if you have models A and B and subnets 1, 2, and 3 (based on the PRIORITY policy), creation will be attempted in the following order: A1, A2, A3, B1, B2, and B3. If A1 is sold out, A2 (not B1) is tried next.
 	// <br><li> No matter what policy is used, a single scaling event always uses a specific configuration at priority (model * availability zone/subnet).
 	MultiZoneSubnetPolicy *string `json:"MultiZoneSubnetPolicy,omitempty" name:"MultiZoneSubnetPolicy"`
+
+	// Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).
+	HealthCheckType *string `json:"HealthCheckType,omitempty" name:"HealthCheckType"`
+
+	// Grace period of the CLB health check
+	LoadBalancerHealthCheckGracePeriod *uint64 `json:"LoadBalancerHealthCheckGracePeriod,omitempty" name:"LoadBalancerHealthCheckGracePeriod"`
 }
 
 func (r *ModifyAutoScalingGroupRequest) ToJsonString() string {
@@ -2756,6 +2617,8 @@ func (r *ModifyAutoScalingGroupRequest) FromJsonString(s string) error {
 	delete(f, "ServiceSettings")
 	delete(f, "Ipv6AddressCount")
 	delete(f, "MultiZoneSubnetPolicy")
+	delete(f, "HealthCheckType")
+	delete(f, "LoadBalancerHealthCheckGracePeriod")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAutoScalingGroupRequest has unknown keys!", "")
 	}
@@ -3226,67 +3089,6 @@ type NotificationTarget struct {
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
-type PaiInstance struct {
-
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Instance domain name
-	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
-
-	// URL of the PAI management page
-	PaiMateUrl *string `json:"PaiMateUrl,omitempty" name:"PaiMateUrl"`
-}
-
-type PreviewPaiDomainNameRequest struct {
-	*tchttp.BaseRequest
-
-	// Domain name type
-	DomainNameType *string `json:"DomainNameType,omitempty" name:"DomainNameType"`
-}
-
-func (r *PreviewPaiDomainNameRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *PreviewPaiDomainNameRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "DomainNameType")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PreviewPaiDomainNameRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type PreviewPaiDomainNameResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Available PAI domain name
-		DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *PreviewPaiDomainNameResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *PreviewPaiDomainNameResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type RemoveInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -3530,6 +3332,9 @@ type ServiceSettings struct {
 	// WAKE_UP_STOPPED_SCALING: this scaling method first tries to start stopped instances. If the number of instances woken up is insufficient, the system creates new instances for scale-out. For scale-in, instances are terminated as in the typical method. You can use the StopAutoScalingInstances API to stop instances in the scaling group. Scale-out operations triggered by alarms will still create new instances.
 	// Default value: CLASSIC_SCALING
 	ScalingMode *string `json:"ScalingMode,omitempty" name:"ScalingMode"`
+
+	// Enable unhealthy instance replacement. If this feature is enabled, AS will replace instances that are found unhealthy in the CLB health check. If this parameter is not specified, the default value `False` will be used.
+	ReplaceLoadBalancerUnhealthy *bool `json:"ReplaceLoadBalancerUnhealthy,omitempty" name:"ReplaceLoadBalancerUnhealthy"`
 }
 
 type SetInstancesProtectionRequest struct {

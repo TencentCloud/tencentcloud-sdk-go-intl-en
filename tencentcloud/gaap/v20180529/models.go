@@ -378,6 +378,9 @@ type CheckProxyCreateRequest struct {
 
 	// Connection group ID that needs to be entered when a connection is created in a connection group
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 }
 
 func (r *CheckProxyCreateRequest) ToJsonString() string {
@@ -397,6 +400,7 @@ func (r *CheckProxyCreateRequest) FromJsonString(s string) error {
 	delete(f, "Bandwidth")
 	delete(f, "Concurrent")
 	delete(f, "GroupId")
+	delete(f, "IPAddressVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckProxyCreateRequest has unknown keys!", "")
 	}
@@ -1029,6 +1033,9 @@ type CreateProxyGroupRequest struct {
 
 	// List of acceleration regions, including their names, bandwidth, and concurrence configuration.
 	AccessRegionSet []*AccessConfiguration `json:"AccessRegionSet,omitempty" name:"AccessRegionSet"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 }
 
 func (r *CreateProxyGroupRequest) ToJsonString() string {
@@ -1048,6 +1055,7 @@ func (r *CreateProxyGroupRequest) FromJsonString(s string) error {
 	delete(f, "RealServerRegion")
 	delete(f, "TagSet")
 	delete(f, "AccessRegionSet")
+	delete(f, "IPAddressVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProxyGroupRequest has unknown keys!", "")
 	}
@@ -1114,6 +1122,9 @@ type CreateProxyRequest struct {
 
 	// Billing mode (0: bill-by-bandwidth, 1: bill-by-traffic. Default value: bill-by-bandwidth)
 	BillingType *int64 `json:"BillingType,omitempty" name:"BillingType"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 }
 
 func (r *CreateProxyRequest) ToJsonString() string {
@@ -1139,6 +1150,7 @@ func (r *CreateProxyRequest) FromJsonString(s string) error {
 	delete(f, "TagSet")
 	delete(f, "ClonedProxyId")
 	delete(f, "BillingType")
+	delete(f, "IPAddressVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProxyRequest has unknown keys!", "")
 	}
@@ -1398,6 +1410,12 @@ type CreateTCPListenersRequest struct {
 
 	// Whether to enable the primary/secondary origin server mode. Valid values: 1 (enable) and 0 (disable). It cannot be enabled for domain name origin servers.
 	FailoverSwitch *int64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
+
+	// Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+	HealthyThreshold *uint64 `json:"HealthyThreshold,omitempty" name:"HealthyThreshold"`
+
+	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
 }
 
 func (r *CreateTCPListenersRequest) ToJsonString() string {
@@ -1424,6 +1442,8 @@ func (r *CreateTCPListenersRequest) FromJsonString(s string) error {
 	delete(f, "RealServerPorts")
 	delete(f, "ClientIPMethod")
 	delete(f, "FailoverSwitch")
+	delete(f, "HealthyThreshold")
+	delete(f, "UnhealthyThreshold")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTCPListenersRequest has unknown keys!", "")
 	}
@@ -1948,6 +1968,9 @@ type DescribeAccessRegionsByDestRegionRequest struct {
 
 	// Origin server region: the DescribeDestRegions API returns the value of `RegionId` field of `DestRegionSet`.
 	DestRegion *string `json:"DestRegion,omitempty" name:"DestRegion"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 }
 
 func (r *DescribeAccessRegionsByDestRegionRequest) ToJsonString() string {
@@ -1963,6 +1986,7 @@ func (r *DescribeAccessRegionsByDestRegionRequest) FromJsonString(s string) erro
 		return err
 	}
 	delete(f, "DestRegion")
+	delete(f, "IPAddressVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessRegionsByDestRegionRequest has unknown keys!", "")
 	}
@@ -2764,12 +2788,13 @@ type DescribeProxiesRequest struct {
 	// Number of results to be returned. The default value is 20, and the maximum value is 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter conditions.   
-	// The upper limit on Filters for each request is 10, and the upper limit on Filter.Values is 5. This parameter does not support specifying InstanceIds and Filters at the same time. 
-	// ProjectId - String - Required: No - Filter by a project ID.    
-	// AccessRegion - String - Required: No - Filter by an access region.    
-	// RealServerRegion - String - Required: No - Filter by an origin server region.
-	// GroupId - String - Required: No - Filter by a connection group ID.
+	// Filter condition   
+	// The upper limit for `Filters` in each request is 10 and 5 for `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` with this parameter. 
+	// ProjectId - String - Required: No - Filter by project ID.   
+	// AccessRegion - String - Required: No - Filter by access region.    
+	// RealServerRegion - String - Required: No - Filter by origin server region.
+	// GroupId - String - Required: No - Filter by connection group ID.
+	// IPAddressVersion - String - Required: No - Filter by IP version.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It's a new parameter, and replaces InstanceIds.
@@ -3456,6 +3481,9 @@ func (r *DescribeRealServersStatusResponse) FromJsonString(s string) error {
 
 type DescribeRegionAndPriceRequest struct {
 	*tchttp.BaseRequest
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 }
 
 func (r *DescribeRegionAndPriceRequest) ToJsonString() string {
@@ -3470,6 +3498,7 @@ func (r *DescribeRegionAndPriceRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "IPAddressVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRegionAndPriceRequest has unknown keys!", "")
 	}
@@ -4365,6 +4394,9 @@ type InquiryPriceCreateProxyRequest struct {
 
 	// Billing mode. Valid values: 0: bill-by-bandwidth (default value); 1: bill-by-traffic.
 	BillingType *int64 `json:"BillingType,omitempty" name:"BillingType"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 }
 
 func (r *InquiryPriceCreateProxyRequest) ToJsonString() string {
@@ -4386,6 +4418,7 @@ func (r *InquiryPriceCreateProxyRequest) FromJsonString(s string) error {
 	delete(f, "RealServerRegion")
 	delete(f, "Concurrent")
 	delete(f, "BillingType")
+	delete(f, "IPAddressVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateProxyRequest has unknown keys!", "")
 	}
@@ -5301,6 +5334,12 @@ type ModifyTCPListenerAttributeRequest struct {
 
 	// Whether to enable the primary/secondary origin server mode. Valid values: 1 (enable) and 0 (disable). It cannot be enabled for domain name origin servers.
 	FailoverSwitch *uint64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
+
+	// Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+	HealthyThreshold *uint64 `json:"HealthyThreshold,omitempty" name:"HealthyThreshold"`
+
+	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 -10.
+	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
 }
 
 func (r *ModifyTCPListenerAttributeRequest) ToJsonString() string {
@@ -5324,6 +5363,8 @@ func (r *ModifyTCPListenerAttributeRequest) FromJsonString(s string) error {
 	delete(f, "ConnectTimeout")
 	delete(f, "HealthCheck")
 	delete(f, "FailoverSwitch")
+	delete(f, "HealthyThreshold")
+	delete(f, "UnhealthyThreshold")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTCPListenerAttributeRequest has unknown keys!", "")
 	}
@@ -5654,6 +5695,10 @@ type ProxyGroupDetail struct {
 	// Describes how the connection obtains client IPs. 0: TOA; 1: Proxy Protocol.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ClientIPMethod []*int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 }
 
 type ProxyGroupInfo struct {
@@ -5810,6 +5855,10 @@ type ProxyInfo struct {
 	// Describes how the connection obtains client IPs. 0: TOA; 1: Proxy Protocol.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ClientIPMethod []*int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod"`
+
+	// IP version. Valid values: `IPv4`, `IPv6`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 }
 
 type ProxySimpleInfo struct {
@@ -6230,6 +6279,14 @@ type TCPListener struct {
 	// Describes how the listener obtains client IPs. 0: TOA; 1: Proxy Protocol.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ClientIPMethod *uint64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod"`
+
+	// Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	HealthyThreshold *uint64 `json:"HealthyThreshold,omitempty" name:"HealthyThreshold"`
+
+	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
 }
 
 type TagPair struct {
