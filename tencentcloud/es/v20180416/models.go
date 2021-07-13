@@ -35,7 +35,7 @@ type CreateInstanceRequest struct {
 	// Availability Zone
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Instance version ("5.6.4", "6.4.3", "6.8.2", or "7.5.1")
+	// Instance version. Valid values: `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1`, `7.10.1`
 	EsVersion *string `json:"EsVersion,omitempty" name:"EsVersion"`
 
 	// VPC ID
@@ -123,6 +123,9 @@ type CreateInstanceRequest struct {
 
 	// Scenario template type. 0: not enabled; 1: general; 2: log; 3: search
 	SceneType *int64 `json:"SceneType,omitempty" name:"SceneType"`
+
+	// Visual node configuration
+	WebNodeTypeInfo *WebNodeTypeInfo `json:"WebNodeTypeInfo,omitempty" name:"WebNodeTypeInfo"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -165,6 +168,7 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "TagList")
 	delete(f, "BasicSecurityType")
 	delete(f, "SceneType")
+	delete(f, "WebNodeTypeInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
 	}
@@ -756,6 +760,10 @@ type InstanceInfo struct {
 	// Kibana configuration item.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	KibanaConfig *string `json:"KibanaConfig,omitempty" name:"KibanaConfig"`
+
+	// Kibana node information
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	KibanaNodeInfo *KibanaNodeInfo `json:"KibanaNodeInfo,omitempty" name:"KibanaNodeInfo"`
 }
 
 type InstanceLog struct {
@@ -780,6 +788,27 @@ type KeyValue struct {
 
 	// Value
 	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type KibanaNodeInfo struct {
+
+	// Kibana node specification
+	KibanaNodeType *string `json:"KibanaNodeType,omitempty" name:"KibanaNodeType"`
+
+	// Number of Kibana nodes
+	KibanaNodeNum *uint64 `json:"KibanaNodeNum,omitempty" name:"KibanaNodeNum"`
+
+	// Number of Kibana node's CPUs
+	KibanaNodeCpuNum *uint64 `json:"KibanaNodeCpuNum,omitempty" name:"KibanaNodeCpuNum"`
+
+	// Kibana node's memory in GB
+	KibanaNodeMemSize *uint64 `json:"KibanaNodeMemSize,omitempty" name:"KibanaNodeMemSize"`
+
+	// Kibana node's disk type
+	KibanaNodeDiskType *string `json:"KibanaNodeDiskType,omitempty" name:"KibanaNodeDiskType"`
+
+	// Kibana node's disk size
+	KibanaNodeDiskSize *uint64 `json:"KibanaNodeDiskSize,omitempty" name:"KibanaNodeDiskSize"`
 }
 
 type LocalDiskInfo struct {
@@ -826,10 +855,11 @@ type NodeInfo struct {
 	// Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
 	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
 
-	// Node type <li>hotData: hot data node</li>
-	// <li>warmData: warm data node</li>
-	// <li>dedicatedMaster: dedicated primary node</li>
-	// Default value: hotData
+	// Node type<li>`hotData`: hot data node</li>
+	// <li>`warmData`: warm data node</li>
+	// <li>`dedicatedMaster`: dedicated master node</li>
+	// <li>`kibana`: Kibana node</li>
+	// Default value: `hotData`
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Node disk type <li>CLOUD_SSD: SSD cloud storage </li><li>CLOUD_PREMIUM: Premium cloud disk </li>Default value: CLOUD_SSD
@@ -1469,6 +1499,15 @@ func (r *UpgradeLicenseResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *UpgradeLicenseResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type WebNodeTypeInfo struct {
+
+	// Number of visual nodes. The value is always `1`.
+	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Visual node specification
+	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
 }
 
 type ZoneDetail struct {

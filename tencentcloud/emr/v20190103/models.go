@@ -239,6 +239,10 @@ type ClusterInstancesInfo struct {
 	// Cluster version ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProductId *int64 `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Availability zone
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
 type CreateInstanceRequest struct {
@@ -687,6 +691,14 @@ type EmrProductConfigOutter struct {
 	// Whether to enable CBS encryption
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CbsEncrypt *int64 `json:"CbsEncrypt,omitempty" name:"CbsEncrypt"`
+
+	// Custom application role
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	ApplicationRole *string `json:"ApplicationRole,omitempty" name:"ApplicationRole"`
+
+	// Security groups
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	SecurityGroups []*string `json:"SecurityGroups,omitempty" name:"SecurityGroups"`
 }
 
 type HostVolumeContext struct {
