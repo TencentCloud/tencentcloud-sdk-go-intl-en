@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package v20191016
+package v20210527
 
 const (
 	// error codes for specific actions
@@ -31,6 +31,9 @@ const (
 
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
+
+	// The quota limit is exceeded.
+	LIMITEXCEEDED = "LimitExceeded"
 
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package v20191016
+package v20210527
 
 import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
@@ -20,7 +20,7 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
 )
 
-const APIVersion = "2019-10-16"
+const APIVersion = "2021-05-27"
 
 type Client struct {
     common.Client
@@ -59,7 +59,7 @@ func NewAddUserContactResponse() (response *AddUserContactResponse) {
 }
 
 // AddUserContact
-// This API is used to add the contact name and email.. The return value is the successfully added contact ID. Select Guangzhou for Region.
+// This API is used to add the contact name and email. The returned value is the ID of the successfully added contact. Please always select Guangzhou for `Region`.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -164,7 +164,7 @@ func NewCreateMailProfileResponse() (response *CreateMailProfileResponse) {
 }
 
 // CreateMailProfile
-// This API is used to create the email configuration. The input parameter `ProfileType` represents the type of the email configuration. Valid values: `dbScan_mail_configuration` (email configuration of database inspection report) and `scheduler_mail_configuration` (email sending configuration of regularly generated health report). Select Guangzhou for Region, regardless of the region where the instance belongs.
+// This API is used to create the email configuration. The input parameter `ProfileType` represents the type of the email configuration. Valid values: `dbScan_mail_configuration` (email configuration of database inspection report) and `scheduler_mail_configuration` (email sending configuration of scheduled task health report). Please always select Guangzhou for `Region`, regardless of the region where the instance resides.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -202,7 +202,7 @@ func NewCreateSchedulerMailProfileResponse() (response *CreateSchedulerMailProfi
 }
 
 // CreateSchedulerMailProfile
-// This API is used to create the regular generation time of the health reports and the regular email sending configuration. Pass in the regular generation time of the health reports as a parameter (Monday to Sunday) to set the regular generation time of the health reports, and save the corresponding regular email sending configuration.
+// This API is used to create the regular generation time of health reports and the regular email sending configuration. Please pass in the regular generation time of health reports as a parameter (Monday to Sunday) to set the regular generation time, and save the corresponding regular email sending configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -224,6 +224,73 @@ func (c *Client) CreateSchedulerMailProfile(request *CreateSchedulerMailProfileR
     return
 }
 
+func NewCreateSecurityAuditLogExportTaskRequest() (request *CreateSecurityAuditLogExportTaskRequest) {
+    request = &CreateSecurityAuditLogExportTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "CreateSecurityAuditLogExportTask")
+    return
+}
+
+func NewCreateSecurityAuditLogExportTaskResponse() (response *CreateSecurityAuditLogExportTaskResponse) {
+    response = &CreateSecurityAuditLogExportTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateSecurityAuditLogExportTask
+// This API is used to create a security audit log export task.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateSecurityAuditLogExportTask(request *CreateSecurityAuditLogExportTaskRequest) (response *CreateSecurityAuditLogExportTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateSecurityAuditLogExportTaskRequest()
+    }
+    response = NewCreateSecurityAuditLogExportTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteSecurityAuditLogExportTasksRequest() (request *DeleteSecurityAuditLogExportTasksRequest) {
+    request = &DeleteSecurityAuditLogExportTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DeleteSecurityAuditLogExportTasks")
+    return
+}
+
+func NewDeleteSecurityAuditLogExportTasksResponse() (response *DeleteSecurityAuditLogExportTasksResponse) {
+    response = &DeleteSecurityAuditLogExportTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteSecurityAuditLogExportTasks
+// This API is used to delete a security audit log export task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteSecurityAuditLogExportTasks(request *DeleteSecurityAuditLogExportTasksRequest) (response *DeleteSecurityAuditLogExportTasksResponse, err error) {
+    if request == nil {
+        request = NewDeleteSecurityAuditLogExportTasksRequest()
+    }
+    response = NewDeleteSecurityAuditLogExportTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAllUserContactRequest() (request *DescribeAllUserContactRequest) {
     request = &DescribeAllUserContactRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -240,7 +307,7 @@ func NewDescribeAllUserContactResponse() (response *DescribeAllUserContactRespon
 }
 
 // DescribeAllUserContact
-// This API is used to obtain the information of the contact in the email.
+// This API is used to get the information of the contact in the email.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -274,7 +341,7 @@ func NewDescribeAllUserGroupResponse() (response *DescribeAllUserGroupResponse) 
 }
 
 // DescribeAllUserGroup
-// This API is used to obtain the information of the contact group in the email.
+// This API is used to get the information of the contact group in the email.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -439,7 +506,7 @@ func NewDescribeDiagDBInstancesResponse() (response *DescribeDiagDBInstancesResp
 }
 
 // DescribeDiagDBInstances
-// This API is used to obtain the instance information list. Select Guangzhou for Region.
+// This API is used to get the instance information list. Please always select Guangzhou for `Region`.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -476,7 +543,7 @@ func NewDescribeHealthScoreResponse() (response *DescribeHealthScoreResponse) {
 }
 
 // DescribeHealthScore
-// This API is used to obtain the health score and deduction for exceptions in the specified time period (30 minutes) based on the instance ID.
+// This API is used to get the health score and deduction for exceptions in the specified time period (30 minutes) based on the instance ID.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -514,7 +581,7 @@ func NewDescribeMailProfileResponse() (response *DescribeMailProfileResponse) {
 }
 
 // DescribeMailProfile
-// This API is used to obtain the email sending configurations, including the email configuration for database inspection and the email sending configuration for regularly generated health reports. Select Guangzhou for Region.
+// This API is used to get the email sending configuration, including the email configuration for database inspection and the email sending configuration for scheduled task health reports. Please always select Guangzhou for `Region`.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -525,6 +592,103 @@ func (c *Client) DescribeMailProfile(request *DescribeMailProfileRequest) (respo
         request = NewDescribeMailProfileRequest()
     }
     response = NewDescribeMailProfileResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMySqlProcessListRequest() (request *DescribeMySqlProcessListRequest) {
+    request = &DescribeMySqlProcessListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeMySqlProcessList")
+    return
+}
+
+func NewDescribeMySqlProcessListResponse() (response *DescribeMySqlProcessListResponse) {
+    response = &DescribeMySqlProcessListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeMySqlProcessList
+// This API is used to query the real-time thread list of a relational database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeMySqlProcessList(request *DescribeMySqlProcessListRequest) (response *DescribeMySqlProcessListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMySqlProcessListRequest()
+    }
+    response = NewDescribeMySqlProcessListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSecurityAuditLogDownloadUrlsRequest() (request *DescribeSecurityAuditLogDownloadUrlsRequest) {
+    request = &DescribeSecurityAuditLogDownloadUrlsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeSecurityAuditLogDownloadUrls")
+    return
+}
+
+func NewDescribeSecurityAuditLogDownloadUrlsResponse() (response *DescribeSecurityAuditLogDownloadUrlsResponse) {
+    response = &DescribeSecurityAuditLogDownloadUrlsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSecurityAuditLogDownloadUrls
+// This API is used to query the download link of a security audit log export file. Currently, log file download only provides a Tencent Cloud private network address. Please download it by using a CVM instance in the Guangzhou region.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeSecurityAuditLogDownloadUrls(request *DescribeSecurityAuditLogDownloadUrlsRequest) (response *DescribeSecurityAuditLogDownloadUrlsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityAuditLogDownloadUrlsRequest()
+    }
+    response = NewDescribeSecurityAuditLogDownloadUrlsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSecurityAuditLogExportTasksRequest() (request *DescribeSecurityAuditLogExportTasksRequest) {
+    request = &DescribeSecurityAuditLogExportTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeSecurityAuditLogExportTasks")
+    return
+}
+
+func NewDescribeSecurityAuditLogExportTasksResponse() (response *DescribeSecurityAuditLogExportTasksResponse) {
+    response = &DescribeSecurityAuditLogExportTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSecurityAuditLogExportTasks
+// This API is used to query the list of security audit log export tasks.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeSecurityAuditLogExportTasks(request *DescribeSecurityAuditLogExportTasksRequest) (response *DescribeSecurityAuditLogExportTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityAuditLogExportTasksRequest()
+    }
+    response = NewDescribeSecurityAuditLogExportTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -606,7 +770,7 @@ func NewDescribeSlowLogUserHostStatsResponse() (response *DescribeSlowLogUserHos
 }
 
 // DescribeSlowLogUserHostStats
-// This API is used to obtain the statistical distribution chart of slow log source addresses.
+// This API is used to get the statistical distribution chart of slow log source addresses.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -639,7 +803,7 @@ func NewDescribeTopSpaceSchemaTimeSeriesResponse() (response *DescribeTopSpaceSc
 }
 
 // DescribeTopSpaceSchemaTimeSeries
-// This API is used to query the daily space data of top databases consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The return results are sorted by size by default.
+// This API is used to get the daily space data of top databases consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The returned results are sorted by size by default.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -674,7 +838,7 @@ func NewDescribeTopSpaceSchemasResponse() (response *DescribeTopSpaceSchemasResp
 }
 
 // DescribeTopSpaceSchemas
-// This API is used to query real-time space statistics of top databases. The return results are sorted by size by default.
+// This API is used to get the real-time space statistics of top databases of an instance. The returned results are sorted by size by default.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -709,7 +873,7 @@ func NewDescribeTopSpaceTableTimeSeriesResponse() (response *DescribeTopSpaceTab
 }
 
 // DescribeTopSpaceTableTimeSeries
-// This API is used to query the daily space data of top tables consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The return results are sorted by size by default.
+// This API is used to get the daily space data of top tables consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The returned results are sorted by size by default.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -741,7 +905,7 @@ func NewDescribeTopSpaceTablesResponse() (response *DescribeTopSpaceTablesRespon
 }
 
 // DescribeTopSpaceTables
-// This API is used to query real-time space statistics of top tables of an instance. The return results are sorted by size by default.
+// This API is used to get the real-time space statistics of top tables of an instance. The returned results are sorted by size by default.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -773,7 +937,7 @@ func NewDescribeUserSqlAdviceResponse() (response *DescribeUserSqlAdviceResponse
 }
 
 // DescribeUserSqlAdvice
-// This API is used to obtain SQL statement optimization suggestions.
+// This API is used to get SQL statement optimization suggestions.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

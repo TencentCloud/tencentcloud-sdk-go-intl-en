@@ -3629,6 +3629,12 @@ type DomainSetList struct {
 
 	// Network type. Valid values: INNER, OUTER.
 	NetType *string `json:"NetType,omitempty" name:"NetType"`
+
+	// Whether to force HTTP requests to redirect to HTTPS. Default value: `false`. When this parameter is `true`, API Gateway will redirect all requests using the custom domain name over the HTTP protocol to the HTTPS protocol for forwarding.
+	IsForcedHttps *bool `json:"IsForcedHttps,omitempty" name:"IsForcedHttps"`
+
+	// ICP filing status
+	RegistrationStatus *bool `json:"RegistrationStatus,omitempty" name:"RegistrationStatus"`
 }
 
 type DomainSets struct {

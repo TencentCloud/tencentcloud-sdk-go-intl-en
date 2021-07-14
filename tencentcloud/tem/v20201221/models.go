@@ -64,6 +64,9 @@ type CreateCosTokenV2Request struct {
 
 	// Source channel
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Input parameter of `deployVersion`
+	TimeVersion *string `json:"TimeVersion,omitempty" name:"TimeVersion"`
 }
 
 func (r *CreateCosTokenV2Request) ToJsonString() string {
@@ -82,6 +85,7 @@ func (r *CreateCosTokenV2Request) FromJsonString(s string) error {
 	delete(f, "PkgName")
 	delete(f, "OptType")
 	delete(f, "SourceChannel")
+	delete(f, "TimeVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCosTokenV2Request has unknown keys!", "")
 	}
@@ -490,11 +494,14 @@ type DeployServiceV2Request struct {
 	// Whether to add the registry’s default configurations.
 	UseRegistryDefaultConfig *bool `json:"UseRegistryDefaultConfig,omitempty" name:"UseRegistryDefaultConfig"`
 
-	// 
+	// Mounting configurations
 	SettingConfs []*MountedSettingConf `json:"SettingConfs,omitempty" name:"SettingConfs"`
 
-	// 
+	// EKS access configuration
 	EksService *EksService `json:"EksService,omitempty" name:"EksService"`
+
+	// ID of the version that you want to roll back to
+	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
 }
 
 func (r *DeployServiceV2Request) ToJsonString() string {
@@ -537,6 +544,7 @@ func (r *DeployServiceV2Request) FromJsonString(s string) error {
 	delete(f, "UseRegistryDefaultConfig")
 	delete(f, "SettingConfs")
 	delete(f, "EksService")
+	delete(f, "VersionId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeployServiceV2Request has unknown keys!", "")
 	}
@@ -904,37 +912,48 @@ func (r *DescribeServiceRunPodListV2Response) FromJsonString(s string) error {
 
 type EksService struct {
 
-	// service name
+	// Service name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// 
+	// Available ports
 	Ports []*int64 `json:"Ports,omitempty" name:"Ports"`
 
-	// 
+	// Yaml contents
 	Yaml *string `json:"Yaml,omitempty" name:"Yaml"`
 
-	// 
+	// Service name
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 
-	// 
+	// Version name
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	VersionName *string `json:"VersionName,omitempty" name:"VersionName"`
 
-	// 
+	// Private IP
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	ClusterIp []*string `json:"ClusterIp,omitempty" name:"ClusterIp"`
 
-	// 
+	// Public IP
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	ExternalIp *string `json:"ExternalIp,omitempty" name:"ExternalIp"`
 
-	// 
+	// The access type. Valid values:
+	// - EXTERNAL (internet access)
+	// - VPC（Intra-VPC access)
+	// - CLUSTER (Intra-cluster access)
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// 
+	// Subnet ID. It is filled when the access type is `VPC`.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// 
+	// Load balancer ID. It is filled when the access type is `EXTERNAL` or `CLUSTER`. It’s created automatically by default.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	LoadBalanceId *string `json:"LoadBalanceId,omitempty" name:"LoadBalanceId"`
 
-	// 
+	// Port Mapping
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	PortMappings []*PortMapping `json:"PortMappings,omitempty" name:"PortMappings"`
 }
 
@@ -954,6 +973,68 @@ type EsInfo struct {
 
 	// Version ID
 	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+}
+
+type GenerateDownloadUrlRequest struct {
+	*tchttp.BaseRequest
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Package Name
+	PkgName *string `json:"PkgName,omitempty" name:"PkgName"`
+
+	// Version of the package to download
+	DeployVersion *string `json:"DeployVersion,omitempty" name:"DeployVersion"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+func (r *GenerateDownloadUrlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GenerateDownloadUrlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ServiceId")
+	delete(f, "PkgName")
+	delete(f, "DeployVersion")
+	delete(f, "SourceChannel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GenerateDownloadUrlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GenerateDownloadUrlResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Temp download URL for the package
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+		Result *string `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GenerateDownloadUrlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GenerateDownloadUrlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type IngressInfo struct {
@@ -1249,13 +1330,13 @@ func (r *ModifyServiceInfoResponse) FromJsonString(s string) error {
 
 type MountedSettingConf struct {
 
-	// 
+	// Configuration Name
 	ConfigDataName *string `json:"ConfigDataName,omitempty" name:"ConfigDataName"`
 
-	// 
+	// Mount point path
 	MountedPath *string `json:"MountedPath,omitempty" name:"MountedPath"`
 
-	// 
+	// Configuration Content
 	Data []*Pair `json:"Data,omitempty" name:"Data"`
 }
 
