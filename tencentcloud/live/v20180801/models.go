@@ -4341,9 +4341,9 @@ type DescribeLiveTranscodeDetailInfoRequest struct {
 	// Stream name.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
-	// Start time (Beijing time).
-	// In the format of `yyyymmdd`.
-	// Note: details for a specified day in the last month can be queried.
+	// Query date (UTC+8)
+	// Format: yyyymmdd
+	// Note: you can query the statistics for a day in the past month, with yesterday as the latest date allowed.
 	DayTime *string `json:"DayTime,omitempty" name:"DayTime"`
 
 	// Number of pages. Default value: 1.
@@ -4359,9 +4359,9 @@ type DescribeLiveTranscodeDetailInfoRequest struct {
 	// Note: details for the last month can be queried.
 	StartDayTime *string `json:"StartDayTime,omitempty" name:"StartDayTime"`
 
-	// End day time (Beijing time),
-	// In the format of `yyyymmdd`.
-	// Note: detailed data for the last month can be queried. Either `DayTime` or `(StartDayTime,EndDayTime)` must be passed in. If both are passed in, `DayTime` shall prevail.
+	// End date (UTC+8)
+	// Format: yyyymmdd
+	// Note: you can query the statistics for a period in the past month, with yesterday as the latest date allowed. You must specify either `DayTime`, or `StartDayTime` and `EndDayTime`. If you specify all three parameters, only `DayTime` will be applied.
 	EndDayTime *string `json:"EndDayTime,omitempty" name:"EndDayTime"`
 }
 
@@ -7080,15 +7080,15 @@ type PushQualityData struct {
 
 type RecordParam struct {
 
-	// Recording interval.
-	// In seconds. Default value: 1800.
-	// Value range: 300-7200.
-	// This parameter is not valid for HLS, and a file will be generated from push start to interruption during HLS recording.
+	// Max recording time per file
+	// Default value: `1800` (seconds)
+	// Value range: 60-7200
+	// This parameter is invalid for HLS. Only one HLS file will be generated from push start to push end.
 	RecordInterval *int64 `json:"RecordInterval,omitempty" name:"RecordInterval"`
 
-	// Recording storage period.
-	// In seconds. Value range: 0-93312000.
-	// 0: permanent storage.
+	// Storage duration of the recording file
+	// Value range: 0-129600000 seconds (0-1500 days)
+	// `0`: permanent
 	StorageTime *int64 `json:"StorageTime,omitempty" name:"StorageTime"`
 
 	// Whether to enable recording in the current format. Default value: 0. 0: no, 1: yes.
@@ -7117,6 +7117,20 @@ type RecordParam struct {
 	// 
 	// If this parameter is not set, the recording filename will be `{StreamID}_{StartYear}-{StartMonth}-{StartDay}-{StartHour}-{StartMinute}-{StartSecond}_{EndYear}-{EndMonth}-{EndDay}-{EndHour}-{EndMinute}-{EndSecond}` by default
 	VodFileName *string `json:"VodFileName,omitempty" name:"VodFileName"`
+
+	// Task flow
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Procedure *string `json:"Procedure,omitempty" name:"Procedure"`
+
+	// Video storage class. Valid values:
+	// `normal`: STANDARD
+	// `cold`: STANDARD_IA
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	StorageMode *string `json:"StorageMode,omitempty" name:"StorageMode"`
+
+	// VOD subapplication category
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 }
 
 type RecordTemplateInfo struct {
