@@ -1366,6 +1366,57 @@ func (r *DescribeSafeAuthFlagCollResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeSafeAuthFlagIntlRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeSafeAuthFlagIntlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSafeAuthFlagIntlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSafeAuthFlagIntlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSafeAuthFlagIntlResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Login protection settings
+		LoginFlag *LoginActionFlagIntl `json:"LoginFlag,omitempty" name:"LoginFlag"`
+
+		// Sensitive operation protection settings
+		ActionFlag *LoginActionFlagIntl `json:"ActionFlag,omitempty" name:"ActionFlag"`
+
+		// Suspicious login location protection settings
+		OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSafeAuthFlagIntlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSafeAuthFlagIntlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSafeAuthFlagRequest struct {
 	*tchttp.BaseRequest
 }
@@ -1621,6 +1672,66 @@ func (r *DetachUserPolicyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DetachUserPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetAccountSummaryRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *GetAccountSummaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetAccountSummaryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetAccountSummaryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetAccountSummaryResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of policies
+		Policies *uint64 `json:"Policies,omitempty" name:"Policies"`
+
+		// Number of roles
+		Roles *uint64 `json:"Roles,omitempty" name:"Roles"`
+
+		// Number of identity providers
+		Idps *uint64 `json:"Idps,omitempty" name:"Idps"`
+
+		// Number of sub-accounts
+		User *uint64 `json:"User,omitempty" name:"User"`
+
+		// Number of groups
+		Group *uint64 `json:"Group,omitempty" name:"Group"`
+
+		// Total number of grouped users
+		Member *uint64 `json:"Member,omitempty" name:"Member"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetAccountSummaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetAccountSummaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3002,6 +3113,27 @@ type LoginActionFlag struct {
 
 	// Custom
 	Custom *uint64 `json:"Custom,omitempty" name:"Custom"`
+}
+
+type LoginActionFlagIntl struct {
+
+	// Mobile number
+	Phone *uint64 `json:"Phone,omitempty" name:"Phone"`
+
+	// Hard token
+	Token *uint64 `json:"Token,omitempty" name:"Token"`
+
+	// Soft token
+	Stoken *uint64 `json:"Stoken,omitempty" name:"Stoken"`
+
+	// WeChat
+	Wechat *uint64 `json:"Wechat,omitempty" name:"Wechat"`
+
+	// Custom
+	Custom *uint64 `json:"Custom,omitempty" name:"Custom"`
+
+	// Email
+	Mail *uint64 `json:"Mail,omitempty" name:"Mail"`
 }
 
 type LoginActionMfaFlag struct {
