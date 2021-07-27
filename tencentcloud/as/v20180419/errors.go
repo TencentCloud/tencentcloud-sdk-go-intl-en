@@ -29,11 +29,29 @@ const (
 	// An internal error occurred.
 	INTERNALERROR = "InternalError"
 
+	// 
+	INTERNALERROR_CALLCMQERROR = "InternalError.CallCmqError"
+
+	// 
+	INTERNALERROR_CALLERROR = "InternalError.CallError"
+
 	// CLB API call failed.
 	INTERNALERROR_CALLLBERROR = "InternalError.CallLbError"
 
 	// Monitor API call failed.
 	INTERNALERROR_CALLMONITORERROR = "InternalError.CallMonitorError"
+
+	// 
+	INTERNALERROR_CALLNOTIFICATIONERROR = "InternalError.CallNotificationError"
+
+	// 
+	INTERNALERROR_CALLSTSERROR = "InternalError.CallStsError"
+
+	// 
+	INTERNALERROR_CALLTAGERROR = "InternalError.CallTagError"
+
+	// 
+	INTERNALERROR_CALLTVPCERROR = "InternalError.CallTvpcError"
 
 	// VPC API call failed.
 	INTERNALERROR_CALLVPCERROR = "InternalError.CallVpcError"
@@ -83,6 +101,9 @@ const (
 	// Wrong parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
+	// 
+	INVALIDPARAMETERVALUE_BASECAPACITYTOOLARGE = "InvalidParameterValue.BaseCapacityTooLarge"
+
 	// A classic CLB should be specified.
 	INVALIDPARAMETERVALUE_CLASSICLB = "InvalidParameterValue.ClassicLb"
 
@@ -112,6 +133,12 @@ const (
 
 	// The auto scaling group name already exists.
 	INVALIDPARAMETERVALUE_GROUPNAMEDUPLICATED = "InvalidParameterValue.GroupNameDuplicated"
+
+	// 
+	INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
+
+	// 
+	INVALIDPARAMETERVALUE_IMAGENOTFOUND = "InvalidParameterValue.ImageNotFound"
 
 	// Invalid instance name
 	INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
@@ -230,6 +257,9 @@ const (
 	// The user group does not exist.
 	INVALIDPARAMETERVALUE_USERGROUPIDNOTFOUND = "InvalidParameterValue.UserGroupIdNotFound"
 
+	// 
+	INVALIDPARAMETERVALUE_ZONEMISMATCHREGION = "InvalidParameterValue.ZoneMismatchRegion"
+
 	// The account does not support this operation.
 	INVALIDPERMISSION = "InvalidPermission"
 
@@ -299,6 +329,9 @@ const (
 	// The notification does not exist.
 	RESOURCENOTFOUND_AUTOSCALINGNOTIFICATIONNOTFOUND = "ResourceNotFound.AutoScalingNotificationNotFound"
 
+	// 
+	RESOURCENOTFOUND_CMQQUEUENOTFOUND = "ResourceNotFound.CmqQueueNotFound"
+
 	// The specified instance does not exist.
 	RESOURCENOTFOUND_INSTANCESNOTFOUND = "ResourceNotFound.InstancesNotFound"
 
@@ -338,6 +371,9 @@ const (
 	// The auto scaling group is active.
 	RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
 
+	// 
+	RESOURCEUNAVAILABLE_CMQTOPICHASNOSUBSCRIBER = "ResourceUnavailable.CmqTopicHasNoSubscriber"
+
 	// The instance and the auto scaling group are in different VPCs.
 	RESOURCEUNAVAILABLE_CVMVPCINCONSISTENT = "ResourceUnavailable.CvmVpcInconsistent"
 
@@ -367,4 +403,7 @@ const (
 
 	// Project inconsistency.
 	RESOURCEUNAVAILABLE_PROJECTINCONSISTENT = "ResourceUnavailable.ProjectInconsistent"
+
+	// 
+	RESOURCEUNAVAILABLE_ZONEUNAVAILABLE = "ResourceUnavailable.ZoneUnavailable"
 )

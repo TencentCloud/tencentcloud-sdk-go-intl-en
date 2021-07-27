@@ -128,6 +128,9 @@ const (
 	// Occupied resource.
 	RESOURCEINUSE = "ResourceInUse"
 
+	// The cloud disk is being migrated. Try again later.
+	RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
+
 	// The cloud disk is being rolled back. Please try again later.
 	RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
 

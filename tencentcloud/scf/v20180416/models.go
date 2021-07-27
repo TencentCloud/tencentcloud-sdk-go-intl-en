@@ -1823,6 +1823,75 @@ func (r *GetReservedConcurrencyConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type InvokeFunctionRequest struct {
+	*tchttp.BaseRequest
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Version number or alias of the triggered function
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+	// Function running parameter, which is in the JSON format. Maximum parameter size is 1 MB.
+	Event *string `json:"Event,omitempty" name:"Event"`
+
+	// If this field is specified for a synchronous invocation, the return value will contain a 4 KB log. Valid value: `None` (default) or `Tail`. If the value is `Tail`, `log` in the return parameter will contain the corresponding function execution log.
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
+
+	// Namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Traffic routing config in json format, e.g., {"k":"v"}. Please note that both "k" and "v" must be strings. Up to 1024 bytes allowed.
+	RoutingKey *string `json:"RoutingKey,omitempty" name:"RoutingKey"`
+}
+
+func (r *InvokeFunctionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InvokeFunctionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FunctionName")
+	delete(f, "Qualifier")
+	delete(f, "Event")
+	delete(f, "LogType")
+	delete(f, "Namespace")
+	delete(f, "RoutingKey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InvokeFunctionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InvokeFunctionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Function execution result
+		Result *Result `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InvokeFunctionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InvokeFunctionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type InvokeRequest struct {
 	*tchttp.BaseRequest
 

@@ -13103,6 +13103,18 @@ type NatGateway struct {
 	// The list of the security groups bound to the NAT Gateway
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SecurityGroupSet []*string `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet"`
+
+	// SNAT forwarding rule of the NAT Gateway.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	SourceIpTranslationNatRuleSet []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRuleSet,omitempty" name:"SourceIpTranslationNatRuleSet"`
+
+	// Whether the NAT Gateway is dedicated.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	IsExclusive *bool `json:"IsExclusive,omitempty" name:"IsExclusive"`
+
+	// Bandwidth of the gateway cluster where the dedicated NAT Gateway resides. Unit: Mbps. This field does not exist when the `IsExclusive` field is set to `false`.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	ExclusiveGatewayBandwidth *uint64 `json:"ExclusiveGatewayBandwidth,omitempty" name:"ExclusiveGatewayBandwidth"`
 }
 
 type NatGatewayAddress struct {
@@ -14319,6 +14331,7 @@ type Route struct {
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
 	// Routing policy ID. The IPv4 routing policy will have a meaningful value, while the IPv6 routing policy is always 0. We recommend using the unique ID `RouteItemId` for the routing policy.
+	// This field is required when you want to delete a routing policy.
 	RouteId *uint64 `json:"RouteId,omitempty" name:"RouteId"`
 
 	// The description of the routing policy.

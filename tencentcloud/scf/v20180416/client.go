@@ -182,6 +182,7 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
+//  INVALIDPARAMETERVALUE_CFSPARAMETERDUPLICATE = "InvalidParameterValue.CfsParameterDuplicate"
 //  INVALIDPARAMETERVALUE_CFSPARAMETERERROR = "InvalidParameterValue.CfsParameterError"
 //  INVALIDPARAMETERVALUE_CFSSTRUCTIONERROR = "InvalidParameterValue.CfsStructionError"
 //  INVALIDPARAMETERVALUE_CLS = "InvalidParameterValue.Cls"
@@ -211,6 +212,7 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
 //  INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
 //  INVALIDPARAMETERVALUE_TEMPCOSOBJECTNAME = "InvalidParameterValue.TempCosObjectName"
+//  INVALIDPARAMETERVALUE_TRACEENABLE = "InvalidParameterValue.TraceEnable"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  INVALIDPARAMETERVALUE_VPCNOTSETWHENOPENCFS = "InvalidParameterValue.VpcNotSetWhenOpenCfs"
 //  INVALIDPARAMETERVALUE_ZIPFILE = "InvalidParameterValue.ZipFile"
@@ -544,10 +546,12 @@ func NewDeleteProvisionedConcurrencyConfigResponse() (response *DeleteProvisione
 // error code that may be returned:
 //  FAILEDOPERATION_PROVISIONEDINPROGRESS = "FailedOperation.ProvisionedInProgress"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_QUALIFIER = "InvalidParameterValue.Qualifier"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONVERSION = "ResourceNotFound.FunctionVersion"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+//  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteProvisionedConcurrencyConfig(request *DeleteProvisionedConcurrencyConfigRequest) (response *DeleteProvisionedConcurrencyConfigResponse, err error) {
     if request == nil {
@@ -879,6 +883,7 @@ func NewGetFunctionLogsResponse() (response *GetFunctionLogsResponse) {
 //  INVALIDPARAMETERVALUE_OFFSET = "InvalidParameterValue.Offset"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
 //  INVALIDPARAMETERVALUE_ORDERBY = "InvalidParameterValue.OrderBy"
+//  INVALIDPARAMETERVALUE_RETCODE = "InvalidParameterValue.RetCode"
 //  INVALIDPARAMETERVALUE_STARTTIMEORENDTIME = "InvalidParameterValue.StartTimeOrEndTime"
 //  LIMITEXCEEDED_OFFSET = "LimitExceeded.Offset"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
@@ -1033,6 +1038,46 @@ func (c *Client) Invoke(request *InvokeRequest) (response *InvokeResponse, err e
         request = NewInvokeRequest()
     }
     response = NewInvokeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInvokeFunctionRequest() (request *InvokeFunctionRequest) {
+    request = &InvokeFunctionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "InvokeFunction")
+    return
+}
+
+func NewInvokeFunctionResponse() (response *InvokeFunctionResponse) {
+    response = &InvokeFunctionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// InvokeFunction
+//  This API is used to invoke functions synchronously.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FUNCTIONSTATUSERROR = "FailedOperation.FunctionStatusError"
+//  FAILEDOPERATION_INVOKEFUNCTION = "FailedOperation.InvokeFunction"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER_FUNCTIONNAME = "InvalidParameter.FunctionName"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_PARAM = "InvalidParameterValue.Param"
+//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
+//  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+//  RESOURCENOTFOUND_QUALIFIER = "ResourceNotFound.Qualifier"
+//  RESOURCEUNAVAILABLE_INSUFFICIENTBALANCE = "ResourceUnavailable.InsufficientBalance"
+//  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+func (c *Client) InvokeFunction(request *InvokeFunctionRequest) (response *InvokeFunctionResponse, err error) {
+    if request == nil {
+        request = NewInvokeFunctionRequest()
+    }
+    response = NewInvokeFunctionResponse()
     err = c.Send(request, response)
     return
 }
@@ -1690,7 +1735,9 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 //  INTERNALERROR_SYSTEM = "InternalError.System"
 //  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CFSPARAMETERDUPLICATE = "InvalidParameterValue.CfsParameterDuplicate"
 //  INVALIDPARAMETERVALUE_CLS = "InvalidParameterValue.Cls"
+//  INVALIDPARAMETERVALUE_CLSROLE = "InvalidParameterValue.ClsRole"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_EIPCONFIG = "InvalidParameterValue.EipConfig"
 //  INVALIDPARAMETERVALUE_ENVIRONMENT = "InvalidParameterValue.Environment"

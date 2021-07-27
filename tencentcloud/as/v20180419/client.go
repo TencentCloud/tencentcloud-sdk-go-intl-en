@@ -176,9 +176,11 @@ func NewCreateAutoScalingGroupResponse() (response *CreateAutoScalingGroupRespon
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CALLLBERROR = "InternalError.CallLbError"
+//  INTERNALERROR_CALLTVPCERROR = "InternalError.CallTvpcError"
 //  INTERNALERROR_CALLVPCERROR = "InternalError.CallVpcError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INVALIDPARAMETER_INSCENARIO = "InvalidParameter.InScenario"
+//  INVALIDPARAMETERVALUE_BASECAPACITYTOOLARGE = "InvalidParameterValue.BaseCapacityTooLarge"
 //  INVALIDPARAMETERVALUE_CLASSICLB = "InvalidParameterValue.ClassicLb"
 //  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
 //  INVALIDPARAMETERVALUE_DUPLICATEDFORWARDLB = "InvalidParameterValue.DuplicatedForwardLb"
@@ -197,6 +199,7 @@ func NewCreateAutoScalingGroupResponse() (response *CreateAutoScalingGroupRespon
 //  INVALIDPARAMETERVALUE_SIZE = "InvalidParameterValue.Size"
 //  INVALIDPARAMETERVALUE_SUBNETIDS = "InvalidParameterValue.SubnetIds"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDPARAMETERVALUE_ZONEMISMATCHREGION = "InvalidParameterValue.ZoneMismatchRegion"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_AUTOSCALINGGROUPLIMITEXCEEDED = "LimitExceeded.AutoScalingGroupLimitExceeded"
 //  LIMITEXCEEDED_MAXSIZELIMITEXCEEDED = "LimitExceeded.MaxSizeLimitExceeded"
@@ -209,6 +212,7 @@ func NewCreateAutoScalingGroupResponse() (response *CreateAutoScalingGroupRespon
 //  RESOURCEUNAVAILABLE_LBBACKENDREGIONINCONSISTENT = "ResourceUnavailable.LbBackendRegionInconsistent"
 //  RESOURCEUNAVAILABLE_LBVPCINCONSISTENT = "ResourceUnavailable.LbVpcInconsistent"
 //  RESOURCEUNAVAILABLE_PROJECTINCONSISTENT = "ResourceUnavailable.ProjectInconsistent"
+//  RESOURCEUNAVAILABLE_ZONEUNAVAILABLE = "ResourceUnavailable.ZoneUnavailable"
 func (c *Client) CreateAutoScalingGroup(request *CreateAutoScalingGroupRequest) (response *CreateAutoScalingGroupResponse, err error) {
     if request == nil {
         request = NewCreateAutoScalingGroupRequest()
@@ -308,6 +312,7 @@ func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfiguration
 //  INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
 //  INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
 //  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
+//  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
 //  INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
@@ -394,9 +399,12 @@ func NewCreateLifecycleHookResponse() (response *CreateLifecycleHookResponse) {
 //  INVALIDPARAMETERVALUE_FILTER = "InvalidParameterValue.Filter"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_LIFECYCLEHOOKNAMEDUPLICATED = "InvalidParameterValue.LifecycleHookNameDuplicated"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  LIMITEXCEEDED_QUOTANOTENOUGH = "LimitExceeded.QuotaNotEnough"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCENOTFOUND_CMQQUEUENOTFOUND = "ResourceNotFound.CmqQueueNotFound"
+//  RESOURCEUNAVAILABLE_CMQTOPICHASNOSUBSCRIBER = "ResourceUnavailable.CmqTopicHasNoSubscriber"
 func (c *Client) CreateLifecycleHook(request *CreateLifecycleHookRequest) (response *CreateLifecycleHookResponse, err error) {
     if request == nil {
         request = NewCreateLifecycleHookRequest()
@@ -461,6 +469,7 @@ func NewCreateScalingPolicyResponse() (response *CreateScalingPolicyResponse) {
 // This API (CreateScalingPolicy) is used to create an alarm trigger policy.
 //
 // error code that may be returned:
+//  INTERNALERROR_CALLNOTIFICATIONERROR = "InternalError.CallNotificationError"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDNOTIFICATIONUSERGROUPID = "InvalidParameterValue.InvalidNotificationUserGroupId"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -545,7 +554,10 @@ func NewDeleteAutoScalingGroupResponse() (response *DeleteAutoScalingGroupRespon
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLERROR = "InternalError.CallError"
 //  INTERNALERROR_CALLMONITORERROR = "InternalError.CallMonitorError"
+//  INTERNALERROR_CALLTAGERROR = "InternalError.CallTagError"
+//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  RESOURCEINUSE_ACTIVITYINPROGRESS = "ResourceInUse.ActivityInProgress"
 //  RESOURCEINUSE_INSTANCEINGROUP = "ResourceInUse.InstanceInGroup"
@@ -848,6 +860,7 @@ func NewDescribeAutoScalingGroupsResponse() (response *DescribeAutoScalingGroups
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPERMISSION = "InvalidPermission"
 func (c *Client) DescribeAutoScalingGroups(request *DescribeAutoScalingGroupsRequest) (response *DescribeAutoScalingGroupsResponse, err error) {
@@ -1264,6 +1277,7 @@ func NewModifyAutoScalingGroupResponse() (response *ModifyAutoScalingGroupRespon
 // error code that may be returned:
 //  INTERNALERROR_CALLVPCERROR = "InternalError.CallVpcError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETER_INSCENARIO = "InvalidParameter.InScenario"
 //  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
 //  INVALIDPARAMETERVALUE_DUPLICATEDSUBNET = "InvalidParameterValue.DuplicatedSubnet"
@@ -1357,14 +1371,14 @@ func NewModifyLaunchConfigurationAttributesResponse() (response *ModifyLaunchCon
 // * This API supports modifying certain simple types of attributes.
 //
 // error code that may be returned:
-//  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
-//  CALLCVMERROR = "CallCvmError"
-//  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
-//  INVALIDLAUNCHCONFIGURATIONID_NOTFOUND = "InvalidLaunchConfigurationId.NotFound"
+//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
+//  INVALIDPARAMETER_HOSTNAMEUNAVAILABLE = "InvalidParameter.HostNameUnavailable"
 //  INVALIDPARAMETER_INVALIDCOMBINATION = "InvalidParameter.InvalidCombination"
 //  INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
+//  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
+//  INVALIDPARAMETERVALUE_IMAGENOTFOUND = "InvalidParameterValue.ImageNotFound"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
@@ -1833,6 +1847,7 @@ func NewUpgradeLaunchConfigurationResponse() (response *UpgradeLaunchConfigurati
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
 //  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
+//  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
@@ -1878,6 +1893,8 @@ func NewUpgradeLifecycleHookResponse() (response *UpgradeLifecycleHookResponse) 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCMQERROR = "InternalError.CallCmqError"
+//  INTERNALERROR_CALLSTSERROR = "InternalError.CallStsError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"

@@ -218,6 +218,21 @@ type AutoScalingGroup struct {
 	// <br><li> PRIORITY: when creating instances, choose the availability zone/subnet based on the order in the list from top to bottom. If the first instance is successfully created in the availability zone/subnet of the highest priority, all instances will be created in this availability zone/subnet.
 	// <br><li> EQUALITY: chooses the availability zone/subnet with the least instances for scale-out. This gives each availability zone/subnet an opportunity for scale-out and disperses the instances created during multiple scale-out operations across different availability zones/subnets.
 	MultiZoneSubnetPolicy *string `json:"MultiZoneSubnetPolicy,omitempty" name:"MultiZoneSubnetPolicy"`
+
+	// Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).
+	HealthCheckType *string `json:"HealthCheckType,omitempty" name:"HealthCheckType"`
+
+	// Grace period of the CLB health check
+	LoadBalancerHealthCheckGracePeriod *uint64 `json:"LoadBalancerHealthCheckGracePeriod,omitempty" name:"LoadBalancerHealthCheckGracePeriod"`
+
+	// 
+	InstanceAllocationPolicy *string `json:"InstanceAllocationPolicy,omitempty" name:"InstanceAllocationPolicy"`
+
+	// 
+	SpotMixedAllocationPolicy *SpotMixedAllocationPolicy `json:"SpotMixedAllocationPolicy,omitempty" name:"SpotMixedAllocationPolicy"`
+
+	// 
+	CapacityRebalance *bool `json:"CapacityRebalance,omitempty" name:"CapacityRebalance"`
 }
 
 type AutoScalingGroupAbstract struct {
@@ -253,6 +268,14 @@ type ClearLaunchConfigurationAttributesRequest struct {
 	// Whether to clear data disk information. This parameter is optional and the default value is `false`.
 	// Setting it to `true` will clear data disks, which means that CVM newly created on this launch configuration will have no data disk.
 	ClearDataDisks *bool `json:"ClearDataDisks,omitempty" name:"ClearDataDisks"`
+
+	// Whether to clear the CVM hostname settings. This parameter is optional and the default value is `false`.
+	// Setting it to `true` will clear the hostname settings, which means that CVM newly created on this launch configuration will have no hostname.
+	ClearHostNameSettings *bool `json:"ClearHostNameSettings,omitempty" name:"ClearHostNameSettings"`
+
+	// Whether to clear the CVM instance name settings. This parameter is optional and the default value is `false`.
+	// Setting it to `true` will clear the instance name settings, which means that CVM newly created on this launch configuration will be named in the “as-{{AutoScalingGroupName}} format.
+	ClearInstanceNameSettings *bool `json:"ClearInstanceNameSettings,omitempty" name:"ClearInstanceNameSettings"`
 }
 
 func (r *ClearLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -269,6 +292,8 @@ func (r *ClearLaunchConfigurationAttributesRequest) FromJsonString(s string) err
 	}
 	delete(f, "LaunchConfigurationId")
 	delete(f, "ClearDataDisks")
+	delete(f, "ClearHostNameSettings")
+	delete(f, "ClearInstanceNameSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ClearLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}
@@ -1002,8 +1027,8 @@ func (r *CreateScheduledActionResponse) FromJsonString(s string) error {
 
 type DataDisk struct {
 
-	// Data disk type. For more information on limits of data disk types, see [CVM Instance Configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). Value range: <br><li>LOCAL_BASIC: Local disk <br><li>LOCAL_SSD: Local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium cloud disk <br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: LOCAL_BASIC.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Data disk type. For more information on limits of data disk types, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/31636). Valid values:<br><li>LOCAL_BASIC: local disk <br><li>LOCAL_SSD: local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk <br><br>The default value should be the same as the `DiskType` field under `SystemDisk`.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [CVM Instance Configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
@@ -2705,7 +2730,7 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
 	// List of instance types. Each type specifies different resource specifications. This list contains up to 10 instance types.
-	// The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. After `InstanceTypes` is successfully specified for the launch configuration, the original `InstanceType` will be automatically invalidated.
+	// The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. Specifying the `InstanceTypes` field will invalidate the original `InstanceType`.
 	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
 
 	// Instance type verification policy which works when InstanceTypes is actually modified. Value range: ALL, ANY. Default value: ANY.
@@ -2719,7 +2744,7 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// Display name of the launch configuration, which can contain Chinese characters, letters, numbers, underscores, separators ("-"), and decimal points with a maximum length of 60 bytes.
 	LaunchConfigurationName *string `json:"LaunchConfigurationName,omitempty" name:"LaunchConfigurationName"`
 
-	// Base64-encoded custom data of up to 16 KB. If you want to clear UserData, specify it as an empty string
+	// Base64-encoded custom data of up to 16 KB. If you want to clear `UserData`, set it to an empty string.
 	UserData *string `json:"UserData,omitempty" name:"UserData"`
 
 	// Security group to which the instance belongs. This parameter can be obtained from the `SecurityGroupId` field in the response of the [`DescribeSecurityGroups`](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API.
@@ -2727,7 +2752,7 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Information of the public network bandwidth configuration.
-	// To modify it or even its subfield, you should specify all the subfields again.
+	// When the public outbound network bandwidth is 0 Mbps, assigning a public IP is not allowed. Accordingly, if a public IP is assigned, the new public network outbound bandwidth must be greater than 0 Mbps.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
 
 	// Instance billing mode. Valid values:
@@ -2735,12 +2760,16 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// <br><li>SPOTPAID: spot instance
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 
-	// 
+	// Parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set the auto-renewal, and other attributes of the monthly-subscribed instances.
+	// This parameter is required when changing the instance billing mode to monthly subscription. It will be automatically discarded after you choose another billing mode.
+	// This field requires passing in the `Period` field. Other fields that are not passed in will use their default values.
+	// This field can be modified only when the current billing mode is monthly subscription.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
 	// Market-related options for instances, such as parameters related to spot instances.
-	// This parameter is required when changing the instance billing mode to spot instance. It will be automatically discarded after the spot instance is changed to another instance billing mode.
-	// To modify it or even its subfield, you should specify all the subfields again.
+	// This parameter is required when changing the instance billing mode to spot instance. It will be automatically discarded after you choose another instance billing mode.
+	// This field requires passing in the `MaxPrice` field under the `SpotOptions`. Other fields that are not passed in will use their default values.
+	// This field can be modified only when the current billing mode is spot instance.
 	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitempty" name:"InstanceMarketOptions"`
 
 	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
@@ -2751,8 +2780,20 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// Instance system disk configurations
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
-	// Instance data disk configurations. Up to 11 data disks can be specified and will be collectively modified. Please provide all the new values for the modification.
+	// Configuration information of instance data disks.
+	// Up to 11 data disks can be specified and will be collectively modified. Please provide all the new values for the modification.
+	// The default data disk should be the same as the system disk.
 	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
+
+	// CVM hostname settings.
+	// This field is not supported for Windows instances.
+	// This field requires passing the `HostName` field. Other fields that are not passed in will use their default values.
+	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitempty" name:"HostNameSettings"`
+
+	// Settings of CVM instance names. 
+	// If this field is configured in a launch configuration, the `InstanceName` of a CVM created by the scaling group will be generated according to the configuration; otherwise, it will be in the `as-{{AutoScalingGroupName }}` format.
+	// This field requires passing in the `InstanceName` field. Other fields that are not passed in will use their default values.
+	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitempty" name:"InstanceNameSettings"`
 }
 
 func (r *ModifyLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -2781,6 +2822,8 @@ func (r *ModifyLaunchConfigurationAttributesRequest) FromJsonString(s string) er
 	delete(f, "DiskTypePolicy")
 	delete(f, "SystemDisk")
 	delete(f, "DataDisks")
+	delete(f, "HostNameSettings")
+	delete(f, "InstanceNameSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}
@@ -3401,6 +3444,21 @@ type SpotMarketOptions struct {
 	SpotInstanceType *string `json:"SpotInstanceType,omitempty" name:"SpotInstanceType"`
 }
 
+type SpotMixedAllocationPolicy struct {
+
+	// 
+	BaseCapacity *uint64 `json:"BaseCapacity,omitempty" name:"BaseCapacity"`
+
+	// 
+	OnDemandPercentageAboveBaseCapacity *uint64 `json:"OnDemandPercentageAboveBaseCapacity,omitempty" name:"OnDemandPercentageAboveBaseCapacity"`
+
+	// 
+	SpotAllocationStrategy *string `json:"SpotAllocationStrategy,omitempty" name:"SpotAllocationStrategy"`
+
+	// 
+	CompensateWithBaseInstance *bool `json:"CompensateWithBaseInstance,omitempty" name:"CompensateWithBaseInstance"`
+}
+
 type StartAutoScalingInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -3516,8 +3574,8 @@ func (r *StopAutoScalingInstancesResponse) FromJsonString(s string) error {
 
 type SystemDisk struct {
 
-	// System disk type. For more information on limits of system disk types, see [CVM Instance Configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). Value range: <br><li>LOCAL_BASIC: Local disk <br><li>LOCAL_SSD: Local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium cloud disk <br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: LOCAL_BASIC.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// System disk type. For more information on limits of system disk types, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/31636). Valid values:<br><li>LOCAL_BASIC: local disk <br><li>LOCAL_SSD: local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: CLOUD_PREMIUM.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// System disk size in GB. Default value: 50
