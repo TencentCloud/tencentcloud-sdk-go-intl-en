@@ -433,7 +433,7 @@ type DCDBInstanceInfo struct {
 	// Status description
 	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
 
-	// Instance status. Valid values: `0` (creating), `1` (running task), `2` (running), `3` (uninitialized), `-1` (isolated), `-2` (eliminated), `4` (initializing), `5` (eliminating), `6` (restarting), `7` (migrating data)
+	// Instance status. Valid values: `0` (creating), `1` (running task), `2` (running), `3` (uninitialized), `-1` (isolated), `4` (initializing), `5` (eliminating), `6` (restarting), `7` (migrating data)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Private IP
@@ -706,6 +706,27 @@ type DcnDetailItem struct {
 
 	// DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected)
 	DcnStatus *int64 `json:"DcnStatus,omitempty" name:"DcnStatus"`
+
+	// Number of CPU cores of the instance
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Instance memory capacity in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance storage capacity in GB
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Billing mode
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Creation time of the instance in the format of 2006-01-02 15:04:05
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Expiration time of the instance in the format of 2006-01-02 15:04:05
+	PeriodEndTime *string `json:"PeriodEndTime,omitempty" name:"PeriodEndTime"`
+
+	// Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), and `4` (dedicated disaster recovery instance).
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
 type DeleteAccountRequest struct {

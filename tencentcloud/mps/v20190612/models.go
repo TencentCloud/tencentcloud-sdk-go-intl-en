@@ -4410,6 +4410,12 @@ type EditMediaFileInfo struct {
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 }
 
+type EditMediaOutputConfig struct {
+
+	// Format. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`
+	Container *string `json:"Container,omitempty" name:"Container"`
+}
+
 type EditMediaRequest struct {
 	*tchttp.BaseRequest
 
@@ -4421,6 +4427,9 @@ type EditMediaRequest struct {
 
 	// Target path of video processing output file.
 	OutputObjectPath *string `json:"OutputObjectPath,omitempty" name:"OutputObjectPath"`
+
+	// Configuration for output files of video editing
+	OutputConfig *EditMediaOutputConfig `json:"OutputConfig,omitempty" name:"OutputConfig"`
 
 	// Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
@@ -4450,6 +4459,7 @@ func (r *EditMediaRequest) FromJsonString(s string) error {
 	delete(f, "FileInfos")
 	delete(f, "OutputStorage")
 	delete(f, "OutputObjectPath")
+	delete(f, "OutputConfig")
 	delete(f, "TaskNotifyConfig")
 	delete(f, "TasksPriority")
 	delete(f, "SessionId")
@@ -4638,8 +4648,8 @@ type FaceConfigureInfo struct {
 	// <li>politician: Politically sensitive figure.</li>
 	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
-	// Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the custom figures will be returned. Valid values:
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// Custom face tags for filter, which specify the face recognition results to return. If this parameter is not specified or left empty, the recognition results for all custom face tags are returned.
+	// Up to 100 tags are allowed, each containing no more than 16 characters.
 	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet"`
 
 	// Figure library. Valid values:
@@ -4666,8 +4676,8 @@ type FaceConfigureInfoForUpdate struct {
 	// <li>politician: Politically sensitive figure.</li>
 	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
-	// Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the custom figures will be returned. Valid values:
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// Custom face tags for filter, which specify the face recognition results to return. If this parameter is not specified or left empty, the recognition results for all custom face tags are returned.
+	// Up to 100 tags are allowed, each containing no more than 16 characters.
 	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet"`
 
 	// Figure library. Valid values:

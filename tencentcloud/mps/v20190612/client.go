@@ -1531,6 +1531,7 @@ func NewDisableWorkflowResponse() (response *DisableWorkflowResponse) {
 // This API is used to disable a workflow.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"

@@ -307,7 +307,13 @@ type CreateInstanceAccountRequest struct {
 	// Sub-account name
 	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
 
-	// Sub-account password
+	// 1. The password must contain 8-30 characters. A password of 12 or more characters is recommended.
+	// 2. The password cannot start with a slash (/).
+	// 3. The password must contain at least two of the following four types:
+	//     a. Lowercase letters (a-z)
+	//     b. Uppercase letters (A-Z)
+	//     c. Digits (0-9)
+	//     d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
 	AccountPassword *string `json:"AccountPassword,omitempty" name:"AccountPassword"`
 
 	// Routing policy. Enter `master` for primary node or `replication` for secondary node
@@ -709,7 +715,7 @@ type DescribeCommonDBInstancesRequest struct {
 	// List of instance VIPs
 	Vips []*string `json:"Vips,omitempty" name:"Vips"`
 
-	// List of unique VPC IDs
+	// List of VPC IDs
 	UniqVpcIds []*string `json:"UniqVpcIds,omitempty" name:"UniqVpcIds"`
 
 	// List of unique subnet IDs
@@ -3291,6 +3297,65 @@ type InstanceTextParam struct {
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
+type KillMasterGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// 1. The password must contain 8-30 characters. A password of 12 or more characters is recommended.
+	// 2. The password cannot start with a slash (/).
+	// 3. The password must contain at least two of the following four types:
+	//     a. Lowercase letters (a-z)
+	//     b. Uppercase letters (A-Z)
+	//     c. Digits (0-9)
+	//     d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
+func (r *KillMasterGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KillMasterGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Password")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "KillMasterGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type KillMasterGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID
+		TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *KillMasterGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KillMasterGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ManualBackupInstanceRequest struct {
 	*tchttp.BaseRequest
 
@@ -3979,7 +4044,7 @@ type RedisCommonInstanceList struct {
 	// Subnet ID
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance status. Valid values: `0` (creating), `1` (running)
+	// Instance status. Valid values: `1` (task running), `2` (instance running), `-2` (instance isolated), `-3` (instance being eliminated), `-4` (instance eliminated)
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Instance network IP
