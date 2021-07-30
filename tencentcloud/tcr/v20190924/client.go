@@ -43,6 +43,83 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewCheckInstanceRequest() (request *CheckInstanceRequest) {
+    request = &CheckInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "CheckInstance")
+    return
+}
+
+func NewCheckInstanceResponse() (response *CheckInstanceResponse) {
+    response = &CheckInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CheckInstance
+// This API is used to verify the information of the Enterprise Edition instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORNAMEEXISTS = "InvalidParameter.ErrorNameExists"
+//  INVALIDPARAMETER_ERRORREGISTRYNAME = "InvalidParameter.ErrorRegistryName"
+//  INVALIDPARAMETER_ERRORTAGOVERLIMIT = "InvalidParameter.ErrorTagOverLimit"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CheckInstance(request *CheckInstanceRequest) (response *CheckInstanceResponse, err error) {
+    if request == nil {
+        request = NewCheckInstanceRequest()
+    }
+    response = NewCheckInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateImmutableTagRulesRequest() (request *CreateImmutableTagRulesRequest) {
+    request = &CreateImmutableTagRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateImmutableTagRules")
+    return
+}
+
+func NewCreateImmutableTagRulesResponse() (response *CreateImmutableTagRulesResponse) {
+    response = &CreateImmutableTagRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateImmutableTagRules
+// This API is used to create the tag immutability rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+func (c *Client) CreateImmutableTagRules(request *CreateImmutableTagRulesRequest) (response *CreateImmutableTagRulesResponse, err error) {
+    if request == nil {
+        request = NewCreateImmutableTagRulesRequest()
+    }
+    response = NewCreateImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateMultipleSecurityPolicyRequest() (request *CreateMultipleSecurityPolicyRequest) {
     request = &CreateMultipleSecurityPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -78,6 +155,39 @@ func (c *Client) CreateMultipleSecurityPolicy(request *CreateMultipleSecurityPol
     return
 }
 
+func NewDeleteImmutableTagRulesRequest() (request *DeleteImmutableTagRulesRequest) {
+    request = &DeleteImmutableTagRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteImmutableTagRules")
+    return
+}
+
+func NewDeleteImmutableTagRulesResponse() (response *DeleteImmutableTagRulesResponse) {
+    response = &DeleteImmutableTagRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteImmutableTagRules
+//  This API is used to delete the tag immutability rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteImmutableTagRules(request *DeleteImmutableTagRulesRequest) (response *DeleteImmutableTagRulesResponse, err error) {
+    if request == nil {
+        request = NewDeleteImmutableTagRulesRequest()
+    }
+    response = NewDeleteImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteMultipleSecurityPolicyRequest() (request *DeleteMultipleSecurityPolicyRequest) {
     request = &DeleteMultipleSecurityPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -109,6 +219,75 @@ func (c *Client) DeleteMultipleSecurityPolicy(request *DeleteMultipleSecurityPol
         request = NewDeleteMultipleSecurityPolicyRequest()
     }
     response = NewDeleteMultipleSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImmutableTagRulesRequest() (request *DescribeImmutableTagRulesRequest) {
+    request = &DescribeImmutableTagRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeImmutableTagRules")
+    return
+}
+
+func NewDescribeImmutableTagRulesResponse() (response *DescribeImmutableTagRulesResponse) {
+    response = &DescribeImmutableTagRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeImmutableTagRules
+// This API is used to list the tag immutability rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) DescribeImmutableTagRules(request *DescribeImmutableTagRulesRequest) (response *DescribeImmutableTagRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeImmutableTagRulesRequest()
+    }
+    response = NewDescribeImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyImmutableTagRulesRequest() (request *ModifyImmutableTagRulesRequest) {
+    request = &ModifyImmutableTagRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "ModifyImmutableTagRules")
+    return
+}
+
+func NewModifyImmutableTagRulesResponse() (response *ModifyImmutableTagRulesResponse) {
+    response = &ModifyImmutableTagRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyImmutableTagRules
+// This API is used to update the tag immutability rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+func (c *Client) ModifyImmutableTagRules(request *ModifyImmutableTagRulesRequest) (response *ModifyImmutableTagRulesResponse, err error) {
+    if request == nil {
+        request = NewModifyImmutableTagRulesRequest()
+    }
+    response = NewModifyImmutableTagRulesResponse()
     err = c.Send(request, response)
     return
 }
