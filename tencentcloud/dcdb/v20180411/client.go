@@ -98,6 +98,40 @@ func (c *Client) AssociateSecurityGroups(request *AssociateSecurityGroupsRequest
     return
 }
 
+func NewCancelDcnJobRequest() (request *CancelDcnJobRequest) {
+    request = &CancelDcnJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "CancelDcnJob")
+    return
+}
+
+func NewCancelDcnJobResponse() (response *CancelDcnJobResponse) {
+    response = &CancelDcnJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CancelDcnJob
+// This API is used to cancel CDN synchronization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+func (c *Client) CancelDcnJob(request *CancelDcnJobRequest) (response *CancelDcnJobResponse, err error) {
+    if request == nil {
+        request = NewCancelDcnJobRequest()
+    }
+    response = NewCancelDcnJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCloneAccountRequest() (request *CloneAccountRequest) {
     request = &CloneAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
