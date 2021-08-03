@@ -114,7 +114,7 @@ func NewCancelDcnJobResponse() (response *CancelDcnJobResponse) {
 }
 
 // CancelDcnJob
-// This API is used to cancel CDN synchronization.
+// This API is used to cancel DCN synchronization.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"

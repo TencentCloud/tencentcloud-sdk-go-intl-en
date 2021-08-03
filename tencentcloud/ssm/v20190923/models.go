@@ -20,6 +20,123 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type CreateProductSecretRequest struct {
+	*tchttp.BaseRequest
+
+	// Credential name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens, and underscores and must begin with a letter or digit.
+	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+
+	// Prefix of the user account name, which is specified by you and can contain up to 8 characters.
+	// Supported character sets include:
+	// Digits: [0, 9].
+	// Lowercase letters: [a, z].
+	// Uppercase letters: [A, Z].
+	// Special symbols: underscore.
+	// The prefix must begin with a letter.
+	UserNamePrefix *string `json:"UserNamePrefix,omitempty" name:"UserNamePrefix"`
+
+	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`. The `DescribeSupportedProducts` API can be used to get the names of the supported Tencent Cloud services.
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+	// Tencent Cloud service instance ID.
+	InstanceID *string `json:"InstanceID,omitempty" name:"InstanceID"`
+
+	// Domain name of the account in the form of IP. You can enter `%`.
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+
+	// List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
+	PrivilegesList []*ProductPrivilegeUnit `json:"PrivilegesList,omitempty" name:"PrivilegesList"`
+
+	// Description, which is used to describe the purpose in detail and can contain up to 2,048 bytes.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Specifies the KMS CMK that encrypts the credential.
+	// If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.
+	// You can also specify a custom KMS CMK created in the same region for encryption.
+	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+
+	// List of tags.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// User-Defined rotation start time in the format of 2006-01-02 15:04:05.
+	// When `EnableRotation` is `True`, this parameter is required.
+	RotationBeginTime *string `json:"RotationBeginTime,omitempty" name:"RotationBeginTime"`
+
+	// Specifies whether to enable rotation
+	// True - enable
+	// False - do not enable
+	// If this parameter is not specified, `False` will be used by default.
+	EnableRotation *bool `json:"EnableRotation,omitempty" name:"EnableRotation"`
+
+	// Rotation frequency in days. Default value: 1 day.
+	RotationFrequency *int64 `json:"RotationFrequency,omitempty" name:"RotationFrequency"`
+}
+
+func (r *CreateProductSecretRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProductSecretRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecretName")
+	delete(f, "UserNamePrefix")
+	delete(f, "ProductName")
+	delete(f, "InstanceID")
+	delete(f, "Domains")
+	delete(f, "PrivilegesList")
+	delete(f, "Description")
+	delete(f, "KmsKeyId")
+	delete(f, "Tags")
+	delete(f, "RotationBeginTime")
+	delete(f, "EnableRotation")
+	delete(f, "RotationFrequency")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProductSecretRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateProductSecretResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Name of the created credential.
+		SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+
+		// Tag operation return code. 0: success; 1: internal error; 2: business processing error.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		TagCode *uint64 `json:"TagCode,omitempty" name:"TagCode"`
+
+		// Tag operation return message.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		TagMsg *string `json:"TagMsg,omitempty" name:"TagMsg"`
+
+		// ID of the created Tencent Cloud service credential async task.
+		FlowID *int64 `json:"FlowID,omitempty" name:"FlowID"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateProductSecretResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProductSecretResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateSecretRequest struct {
 	*tchttp.BaseRequest
 
@@ -216,6 +333,171 @@ func (r *DeleteSecretVersionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeAsyncRequestInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Async task ID.
+	FlowID *int64 `json:"FlowID,omitempty" name:"FlowID"`
+}
+
+func (r *DescribeAsyncRequestInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAsyncRequestInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAsyncRequestInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAsyncRequestInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// 0: processing, 1: processing succeeded, 2: processing failed
+		TaskStatus *int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
+
+		// Task description.
+		Description *string `json:"Description,omitempty" name:"Description"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAsyncRequestInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAsyncRequestInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRotationDetailRequest struct {
+	*tchttp.BaseRequest
+
+	// Specifies the name of the credential for which to get the credential rotation details.
+	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+}
+
+func (r *DescribeRotationDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRotationDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecretName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRotationDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRotationDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Specifies whether to allow rotation. True: yes; False: no.
+		EnableRotation *bool `json:"EnableRotation,omitempty" name:"EnableRotation"`
+
+		// Rotation frequency in days. Default value: 1 day.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Frequency *int64 `json:"Frequency,omitempty" name:"Frequency"`
+
+		// Last rotation time, which is an explicitly visible time string in the format of 2006-01-02 15:04:05.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		LatestRotateTime *string `json:"LatestRotateTime,omitempty" name:"LatestRotateTime"`
+
+		// Next rotation start time, which is an explicitly visible time string in the format of 2006-01-02 15:04:05.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		NextRotateBeginTime *string `json:"NextRotateBeginTime,omitempty" name:"NextRotateBeginTime"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRotationDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRotationDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRotationHistoryRequest struct {
+	*tchttp.BaseRequest
+
+	// Specifies the name of the credential for which to get the credential rotation records.
+	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+}
+
+func (r *DescribeRotationHistoryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRotationHistoryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecretName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRotationHistoryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRotationHistoryResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of version numbers.
+		VersionIDs []*string `json:"VersionIDs,omitempty" name:"VersionIDs"`
+
+		// Number of version numbers. The maximum number of version numbers that can be shown to users is 10.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeRotationHistoryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRotationHistoryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSecretRequest struct {
 	*tchttp.BaseRequest
 
@@ -258,7 +540,7 @@ type DescribeSecretResponse struct {
 		// Creator UIN.
 		CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
 
-		// Secret status, which can be `Enabled`, `Disabled`, or `PendingDelete`.
+		// Credential status: Enabled, Disabled, PendingDelete, Creating, Failed.
 		Status *string `json:"Status,omitempty" name:"Status"`
 
 		// Deletion time, formatted as a Unix timestamp. For a Secret that is not in `PendingDelete` status, this value is 0.
@@ -266,6 +548,26 @@ type DescribeSecretResponse struct {
 
 		// Creation time.
 		CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+		// 0: user-defined credential; 1: Tencent Cloud service credential.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		SecretType *int64 `json:"SecretType,omitempty" name:"SecretType"`
+
+		// Tencent Cloud service name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+		// Tencent Cloud service instance ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ResourceID *string `json:"ResourceID,omitempty" name:"ResourceID"`
+
+		// Whether to enable rotation. True: yes; False: no.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		RotationStatus *bool `json:"RotationStatus,omitempty" name:"RotationStatus"`
+
+		// Rotation frequency in days by default.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		RotationFrequency *int64 `json:"RotationFrequency,omitempty" name:"RotationFrequency"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -280,6 +582,54 @@ func (r *DescribeSecretResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeSecretResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSupportedProductsRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeSupportedProductsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSupportedProductsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSupportedProductsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSupportedProductsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of supported services.
+		Products []*string `json:"Products,omitempty" name:"Products"`
+
+		// Number of supported services
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSupportedProductsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSupportedProductsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -432,7 +782,8 @@ type GetSecretValueRequest struct {
 	// Name of a Secret.
 	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
 
-	// ID of the Secret version.
+	// Specifies the version number of the corresponding credential.
+	// For Tencent Cloud service credentials such as MySQL credentials, this API is used to get the plaintext information of a previously rotated credential by specifying the credential name and historical version number. If you want to get the plaintext of the credential version currently in use, you need to specify the version number as `SSM_Current`.
 	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
 }
 
@@ -466,10 +817,12 @@ type GetSecretValueResponse struct {
 		// ID of the Secret version.
 		VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
 
-		// If the `SecretBinary` field in the request body is specified in the `CreateSecret` call, this field is returned and base64-encoded. The caller needs to perform base64 decoding to obtain the original data. Either `SecretBinary` or `SecretString` will be returned.
+		// When creating a credential (CreateSecret), if you specify binary data, this field will be the Base64-encoded returned result. The application needs to Base64-decode the result to get the original data.
+	// Either `SecretBinary` or `SecretString` cannot be empty.
 		SecretBinary *string `json:"SecretBinary,omitempty" name:"SecretBinary"`
 
-		// If the `SecretString` field in the request body is specified in the `CreateSecret` call, this field is returned. Either `SecretBinary` or `SecretString` will be returned.
+		// When creating a credential (CreateSecret), if you specify general text data, this field will be the returned result.
+	// Either `SecretBinary` or `SecretString` cannot be empty.
 		SecretString *string `json:"SecretString,omitempty" name:"SecretString"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -601,14 +954,26 @@ type ListSecretsRequest struct {
 	// Sorting order according to the creation time. If not set or set to 0, descending order is used; if set to 1, ascending order is used.
 	OrderType *uint64 `json:"OrderType,omitempty" name:"OrderType"`
 
-	// Filter according to Secret statuses. `0` (default): all Secrets; `1`: Secrets in `Enabled` status; `2`: Secrets in `Disabled` status; `3`: Secrets in `PendingDelete` status.
+	// Filter based on credential status.
+	// The default value is 0, indicating to query all.
+	// 1: query the list of credentials in `Enabled` status.
+	// 2: query the list of credentials in `Disabled` status.
+	// 3: query the list of credentials in `PendingDelete` status.
+	// 4: query the list of credentials in `PendingCreate` status.
+	// 5: query the list of credentials in `CreateFailed` status.
+	// The `PendingCreate` and `CreateFailed` status only take effect when `SecretType` is Tencent Cloud service credential
 	State *uint64 `json:"State,omitempty" name:"State"`
 
 	// Filter according to Secret names. If left empty, this filter is not applied.
 	SearchSecretName *string `json:"SearchSecretName,omitempty" name:"SearchSecretName"`
 
-	// Tag filter condition.
+	// Tag filter.
 	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
+
+	// 0: user-defined credential (default value).
+	// 1: Tencent Cloud service credential.
+	// Either 1 or 0 can be selected for this parameter.
+	SecretType *uint64 `json:"SecretType,omitempty" name:"SecretType"`
 }
 
 func (r *ListSecretsRequest) ToJsonString() string {
@@ -629,6 +994,7 @@ func (r *ListSecretsRequest) FromJsonString(s string) error {
 	delete(f, "State")
 	delete(f, "SearchSecretName")
 	delete(f, "TagFilters")
+	delete(f, "SecretType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListSecretsRequest has unknown keys!", "")
 	}
@@ -661,6 +1027,49 @@ func (r *ListSecretsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ProductPrivilegeUnit struct {
+
+	// Permission name. Valid values:
+	// GlobalPrivileges
+	// DatabasePrivileges
+	// TablePrivileges
+	// ColumnPrivileges
+	// 
+	// When the permission is `DatabasePrivileges`, the database name must be specified by the `Database` parameter;
+	// 
+	// When the permission is `TablePrivileges`, the database name and the table name in the database must be specified by the `Database` and `TableName` parameters;
+	// 
+	// When the permission is `ColumnPrivileges`, the database name, table name in the database, and column name in the table must be specified by the `Database`, `TableName`, and `ColumnName` parameters.
+	PrivilegeName *string `json:"PrivilegeName,omitempty" name:"PrivilegeName"`
+
+	// Permission list.
+	// For the `Mysql` service, optional permission values are:
+	// 
+	// 1. Valid values of `GlobalPrivileges`: "SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER".
+	// Note: if this parameter is not passed in, it means to clear the permission.
+	// 
+	// 2. Valid values of `DatabasePrivileges`: "SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER".
+	// Note: if this parameter is not passed in, it means to clear the permission.
+	// 
+	// 3. Valid values of `TablePrivileges`: "SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER".
+	// Note: if this parameter is not passed in, it means to clear the permission.
+	// 
+	// 4. Valid values of `ColumnPrivileges`: "SELECT","INSERT","UPDATE","REFERENCES".
+	// Note: if this parameter is not passed in, it means to clear the permission.
+	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
+
+	// This value takes effect only when `PrivilegeName` is `DatabasePrivileges`.
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// This value takes effect only when `PrivilegeName` is `TablePrivileges`, and the `Database` parameter is required in this case to explicitly indicate the database instance.
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// This value takes effect only when `PrivilegeName` is `ColumnPrivileges`, and the following parameters are required in this case:
+	// Database: explicitly indicate the database instance.
+	// TableName: explicitly indicate the table
+	ColumnName *string `json:"ColumnName,omitempty" name:"ColumnName"`
+}
+
 type PutSecretValueRequest struct {
 	*tchttp.BaseRequest
 
@@ -670,7 +1079,8 @@ type PutSecretValueRequest struct {
 	// ID of the new Secret version. It can be up to 64 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit.
 	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
 
-	// Binary Secret information that is base64-encoded. Either `SecretBinary` or `SecretString` must be set.
+	// Base64-encoded binary credential information.
+	// Either `SecretBinary` or `SecretString` must be set.
 	SecretBinary *string `json:"SecretBinary,omitempty" name:"SecretBinary"`
 
 	// Secret information plaintext in text format, base64 encoding is not needed. Either `SecretBinary` or `SecretString` must be set.
@@ -774,31 +1184,96 @@ func (r *RestoreSecretResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type RotateProductSecretRequest struct {
+	*tchttp.BaseRequest
+
+	// Name of the credential to be rotated.
+	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+}
+
+func (r *RotateProductSecretRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RotateProductSecretRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecretName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RotateProductSecretRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type RotateProductSecretResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async rotation task ID.
+		FlowID *int64 `json:"FlowID,omitempty" name:"FlowID"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *RotateProductSecretResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RotateProductSecretResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SecretMetadata struct {
 
-	// Name of the Secret.
+	// Credential name
 	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
 
-	// Description of the Secret.
+	// Credential description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// KMS Key ID used for Secret encryption.
+	// KMS `KeyId` used to encrypt the credential
 	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
 
-	// Creator UIN.
+	// Creator UIN
 	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
 
-	// Secret status, which can be `Enabled`, `Disabled`, or `PendingDelete`.
+	// Credential status: Enabled, Disabled, PendingDelete, Creating, Failed.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Secret deletion time, formatted as a Unix timestamp. This parameter is only applicable for Secrets in `PendingDelete` status.
+	// Credential deletion date, which takes effect for credentials in `PendingDelete` status and is in UNIX timestamp format
 	DeleteTime *uint64 `json:"DeleteTime,omitempty" name:"DeleteTime"`
 
-	// Secret creation time, formatted as a Unix timestamp.
+	// Credential creation time in UNIX timestamp format
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Type of KMS CMK used for Secret encryption. `DEFAULT`: default key created by SecretsManager; `CUSTOMER`: user-specified key.
+	// Type of the KMS CMK used to encrypt the credential. `DEFAULT` represents the default key created by Secrets Manager, and `CUSTOMER` represents the user-specified key
 	KmsKeyType *string `json:"KmsKeyType,omitempty" name:"KmsKeyType"`
+
+	// 1: enable rotation; 0: disable rotation
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RotationStatus *int64 `json:"RotationStatus,omitempty" name:"RotationStatus"`
+
+	// Start time of the next rotation in UNIX timestamp format
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NextRotationTime *uint64 `json:"NextRotationTime,omitempty" name:"NextRotationTime"`
+
+	// 0: user-defined credential; 1: Tencent Cloud service credential.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SecretType *int64 `json:"SecretType,omitempty" name:"SecretType"`
+
+	// Tencent Cloud service name, which takes effect only when `SecretType` is 1 (Tencent Cloud service credential)
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
 }
 
 type Tag struct {
@@ -872,6 +1347,67 @@ func (r *UpdateDescriptionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type UpdateRotationStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Tencent Cloud service credential name.
+	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+
+	// Specifies whether to enable rotation.
+	// True: enable rotation.
+	// False: disable rotation.
+	EnableRotation *bool `json:"EnableRotation,omitempty" name:"EnableRotation"`
+
+	// Rotation frequency in days. Value range: 30–365.
+	Frequency *int64 `json:"Frequency,omitempty" name:"Frequency"`
+
+	// User-Defined rotation start time in the format of 2006-01-02 15:04:05.
+	// When `EnableRotation` is `True`, if `RotationBeginTime` is left empty, the current time will be entered by default.
+	RotationBeginTime *string `json:"RotationBeginTime,omitempty" name:"RotationBeginTime"`
+}
+
+func (r *UpdateRotationStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateRotationStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecretName")
+	delete(f, "EnableRotation")
+	delete(f, "Frequency")
+	delete(f, "RotationBeginTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateRotationStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateRotationStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateRotationStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateRotationStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type UpdateSecretRequest struct {
 	*tchttp.BaseRequest
 
@@ -881,10 +1417,11 @@ type UpdateSecretRequest struct {
 	// ID of the Secret version whose content is to be updated.
 	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
 
-	// Use this field if the new Secret content is in binary format, and base64-encoded. Either `SecretBinary` or `SecretString` is set.
+	// This field should be used and Base64-encoded if the content of the new credential is binary.
+	// Either `SecretBinary` or `SecretString` cannot be empty.
 	SecretBinary *string `json:"SecretBinary,omitempty" name:"SecretBinary"`
 
-	// Use this field if the new Secret content is in text format, and base64-encoding is not required. Either `SecretBinary` or `SecretString` is set.
+	// This field should be used without being Base64-encoded if the content of the new credential is text. Either `SecretBinary` or `SecretString` cannot be empty.
 	SecretString *string `json:"SecretString,omitempty" name:"SecretString"`
 }
 
