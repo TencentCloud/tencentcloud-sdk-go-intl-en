@@ -95,6 +95,11 @@ type AddExistedInstancesRequest struct {
 
 	// Skips the specified verification. Valid values: GlobalRouteCIDRCheck, VpcCniCIDRCheck
 	SkipValidateOptions []*string `json:"SkipValidateOptions,omitempty" name:"SkipValidateOptions"`
+
+	// This parameter is used to customize the configuration of an instance, which corresponds to the `InstanceIds` one-to-one in sequence. If this parameter is passed in, the default parameter `InstanceAdvancedSettings` will be overwritten and will not take effect. If this parameter is not passed in, the `InstanceAdvancedSettings` will take effect for each instance.
+	// 
+	// The array length of `InstanceAdvancedSettingsOverride` should be the same as the array length of `InstanceIds`. If its array length is greater than the `InstanceIds` array length, an error will be reported. If its array length is less than the `InstanceIds` array length, the instance without corresponding configuration will use the default configuration.
+	InstanceAdvancedSettingsOverrides []*InstanceAdvancedSettings `json:"InstanceAdvancedSettingsOverrides,omitempty" name:"InstanceAdvancedSettingsOverrides"`
 }
 
 func (r *AddExistedInstancesRequest) ToJsonString() string {
@@ -118,6 +123,7 @@ func (r *AddExistedInstancesRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupIds")
 	delete(f, "NodePool")
 	delete(f, "SkipValidateOptions")
+	delete(f, "InstanceAdvancedSettingsOverrides")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddExistedInstancesRequest has unknown keys!", "")
 	}
@@ -701,6 +707,15 @@ type ClusterVersion struct {
 
 	// The list of cluster major version, such as 1.18.4
 	Versions []*string `json:"Versions,omitempty" name:"Versions"`
+}
+
+type CommonName struct {
+
+	// User UIN
+	SubaccountUin *string `json:"SubaccountUin,omitempty" name:"SubaccountUin"`
+
+	// The CommonName in the certificate of the client corresponding to the sub-account
+	CN *string `json:"CN,omitempty" name:"CN"`
 }
 
 type CreateClusterAsGroupRequest struct {
@@ -1840,6 +1855,63 @@ func (r *DescribeClusterAsGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeClusterCommonNamesRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Sub-account. Up to 50 sub-accounts can be passed in at a time.
+	SubaccountUins []*string `json:"SubaccountUins,omitempty" name:"SubaccountUins"`
+
+	// Role ID. Up to 50 role IDs can be passed in at a time.
+	RoleIds []*string `json:"RoleIds,omitempty" name:"RoleIds"`
+}
+
+func (r *DescribeClusterCommonNamesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterCommonNamesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "SubaccountUins")
+	delete(f, "RoleIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterCommonNamesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterCommonNamesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The CommonName in the certificate of the client corresponding to the sub-account UIN
+		CommonNames []*CommonName `json:"CommonNames,omitempty" name:"CommonNames"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterCommonNamesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterCommonNamesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeClusterEndpointStatusRequest struct {
 	*tchttp.BaseRequest
 
@@ -1874,7 +1946,8 @@ type DescribeClusterEndpointStatusResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Queries cluster access port status (Created = successfully enabled; Creating = in the process of being enabled; NotFound = not enabled).
+		// The status of cluster access port. It can be `Created` (enabled); `Creating` (enabling) and `NotFound` (not enabled)
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 		Status *string `json:"Status,omitempty" name:"Status"`
 
 		// Details of the error occurred while opening the access port
@@ -2417,6 +2490,59 @@ func (r *DescribeClustersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeEnableVpcCniProgressRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the cluster for which you want to enable the VPC-CNI mode
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeEnableVpcCniProgressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEnableVpcCniProgressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEnableVpcCniProgressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeEnableVpcCniProgressResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task status, which can be `Running`, `Succeed`, or `Failed`.
+		Status *string `json:"Status,omitempty" name:"Status"`
+
+		// The description for the task status when the task status is “Failed”, for example, failed to install the IPAMD component.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ErrorMessage *string `json:"ErrorMessage,omitempty" name:"ErrorMessage"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeEnableVpcCniProgressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEnableVpcCniProgressResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeExistedInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -2655,6 +2781,68 @@ func (r *DescribeRouteTableConflictsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type EnableVpcCniNetworkTypeRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The VPC-CNI mode. `tke-route-eni`: Multi-IP ENI, `tke-direct-eni`: Independent ENI
+	VpcCniType *string `json:"VpcCniType,omitempty" name:"VpcCniType"`
+
+	// Whether to enable static IP address
+	EnableStaticIp *bool `json:"EnableStaticIp,omitempty" name:"EnableStaticIp"`
+
+	// The container subnet being used
+	Subnets []*string `json:"Subnets,omitempty" name:"Subnets"`
+
+	// Specifies when to release the IP after the Pod termination in static IP mode. It must be longer than 300 seconds. If this parameter is left empty, the IP address will never be released.
+	ExpiredSeconds *uint64 `json:"ExpiredSeconds,omitempty" name:"ExpiredSeconds"`
+}
+
+func (r *EnableVpcCniNetworkTypeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableVpcCniNetworkTypeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "VpcCniType")
+	delete(f, "EnableStaticIp")
+	delete(f, "Subnets")
+	delete(f, "ExpiredSeconds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableVpcCniNetworkTypeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type EnableVpcCniNetworkTypeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *EnableVpcCniNetworkTypeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableVpcCniNetworkTypeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type EnhancedService struct {
 
 	// Enables cloud security service. If this parameter is not specified, the cloud security service will be enabled by default.
@@ -2732,6 +2920,9 @@ type ExistedInstancesForNode struct {
 
 	// Advanced node setting, which overrides the InstanceAdvancedSettings item set at the cluster level (currently valid for the ExtraArgs node custom parameter only)
 	InstanceAdvancedSettingsOverride *InstanceAdvancedSettings `json:"InstanceAdvancedSettingsOverride,omitempty" name:"InstanceAdvancedSettingsOverride"`
+
+	// When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
+	DesiredPodNumbers []*int64 `json:"DesiredPodNumbers,omitempty" name:"DesiredPodNumbers"`
 }
 
 type ExistedInstancesPara struct {
@@ -2935,7 +3126,8 @@ type InstanceAdvancedSettings struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	ExtraArgs *InstanceExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
 
-	// 
+	// When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DesiredPodNumber *int64 `json:"DesiredPodNumber,omitempty" name:"DesiredPodNumber"`
 }
 
@@ -3617,6 +3809,18 @@ type RunSecurityServiceEnabled struct {
 
 type SetNodePoolNodeProtectionRequest struct {
 	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Node ID
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Whether the node needs removal protection
+	ProtectedFromScaleIn *bool `json:"ProtectedFromScaleIn,omitempty" name:"ProtectedFromScaleIn"`
 }
 
 func (r *SetNodePoolNodeProtectionRequest) ToJsonString() string {
@@ -3631,6 +3835,10 @@ func (r *SetNodePoolNodeProtectionRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "ClusterId")
+	delete(f, "NodePoolId")
+	delete(f, "InstanceIds")
+	delete(f, "ProtectedFromScaleIn")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetNodePoolNodeProtectionRequest has unknown keys!", "")
 	}
@@ -3640,6 +3848,14 @@ func (r *SetNodePoolNodeProtectionRequest) FromJsonString(s string) error {
 type SetNodePoolNodeProtectionResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// ID of the node that has successfully set the removal protection
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		SucceedInstanceIds []*string `json:"SucceedInstanceIds,omitempty" name:"SucceedInstanceIds"`
+
+		// ID of the node that fails to set the removal protection
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

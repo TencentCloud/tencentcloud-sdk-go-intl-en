@@ -249,20 +249,33 @@ type CreateInstanceRequest struct {
 	*tchttp.BaseRequest
 
 	// Product ID. Different product IDs represent different EMR product versions. Valid values:
-	// <li>1: EMR v1.3.1.</li>
-	// <li>2: EMR v2.0.1.</li>
-	// <li>4: EMR v2.1.0.</li>
-	// <li>7: EMR v3.0.0.</li>
+	// <li>1: EMR v1.3.1</li>
+	// <li>2: EMR v2.0.1</li>
+	// <li>4: EMR v2.1.0</li>
+	// <li>7: EMR v3.0.0</li>
+	// <li>9: EMR v2.2.0</li>
+	// <li>11: ClickHouse v1.0.0</li>
+	// <li>13: Druid v1.0.0</li>
+	// <li>15: EMR v2.2.1</li>
+	// <li>16: EMR v2.3.0</li>
+	// <li>17: ClickHouse v1.1.0</li>
+	// <li>19: EMR v2.4.0</li>
+	// <li>20: EMR v2.5.0</li>
+	// <li>22: ClickHouse v1.2.0</li>
+	// <li>24: EMR TianQiong v1.0.0</li>
+	// <li>25: EMR v3.1.0</li>
+	// <li>26: Doris v1.0.0</li>
+	// <li>27: Kafka v1.0.0</li>
+	// <li>28: EMR v3.2.0</li>
+	// <li>29: EMR v2.5.1</li>
+	// <li>30: EMR v2.6.0</li>
 	ProductId *uint64 `json:"ProductId,omitempty" name:"ProductId"`
 
 	// Configuration information of VPC. This parameter is used to specify the VPC ID, subnet ID, etc.
 	VPCSettings *VPCSettings `json:"VPCSettings,omitempty" name:"VPCSettings"`
 
-	// List of deployed components. Different required components need to be selected for different EMR product IDs (i.e., `ProductId`; for specific meanings, please see the `ProductId` field in the input parameter):
-	// <li>When `ProductId` is 1, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
-	// <li>When `ProductId` is 2, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
-	// <li>When `ProductId` is 4, the required components include hadoop-2.8.4, knox-1.2.0, and zookeeper-3.4.9</li>
-	// <li>When `ProductId` is 7, the required components include hadoop-3.1.2, knox-1.2.0, and zookeeper-3.4.9</li>
+	// List of deployed components. The list of component options varies by EMR product ID (i.e., `ProductId`; for specific meanings, please see the `ProductId` input parameter). For more information, please see [Component Version](https://intl.cloud.tencent.com/document/product/589/20279?from_cn_redirect=1).
+	// Enter an instance value: `hive` or `flink`.
 	Software []*string `json:"Software,omitempty" name:"Software"`
 
 	// Node resource specification.
@@ -306,7 +319,7 @@ type CreateInstanceRequest struct {
 	// Security group to which an instance belongs in the format of `sg-xxxxxxxx`. This parameter can be obtained from the `SecurityGroupId` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) API.
 	SgId *string `json:"SgId,omitempty" name:"SgId"`
 
-	// Bootstrap script settings.
+	// [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings
 	PreExecutedFileSettings []*PreExecuteFileSettings `json:"PreExecutedFileSettings,omitempty" name:"PreExecutedFileSettings"`
 
 	// Whether auto-renewal is enabled. Valid values:
@@ -335,6 +348,7 @@ type CreateInstanceRequest struct {
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// List of spread placement group IDs. Only one can be specified currently.
+	// This parameter can be obtained in the `SecurityGroupId` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/product/213/15486?from_cn_redirect=1) API.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
 
 	// CBS disk encryption at the cluster level. 0: not encrypted, 1: encrypted
@@ -404,6 +418,10 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 type CreateInstanceResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Instance ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -856,6 +874,9 @@ type InquiryPriceRenewInstanceRequest struct {
 
 	// Currency.
 	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Whether to change from pay-as-you-go billing to monthly subscription billing. `0`: no; `1`: yes
+	ModifyPayMode *int64 `json:"ModifyPayMode,omitempty" name:"ModifyPayMode"`
 }
 
 func (r *InquiryPriceRenewInstanceRequest) ToJsonString() string {
@@ -876,6 +897,7 @@ func (r *InquiryPriceRenewInstanceRequest) FromJsonString(s string) error {
 	delete(f, "PayMode")
 	delete(f, "TimeUnit")
 	delete(f, "Currency")
+	delete(f, "ModifyPayMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceRenewInstanceRequest has unknown keys!", "")
 	}
@@ -1117,7 +1139,10 @@ type LoginSettings struct {
 
 type MultiDisk struct {
 
-	// Cloud disk type. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_BASIC
+	// Cloud disk type
+	// <li>`CLOUD_SSD`: SSD</li>
+	// <li>`CLOUD_PREMIUM`: Premium Cloud Storage</li>
+	// <li>`CLOUD_HSSD`: Enhanced SSD</li>
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Cloud disk size
@@ -1326,6 +1351,10 @@ type NodeHardwareInfo struct {
 	// Floating specification in JSON string
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DynamicPodSpec *string `json:"DynamicPodSpec,omitempty" name:"DynamicPodSpec"`
+
+	// Whether to support billing mode change. `0`: no; `1`: yes
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SupportModifyPayMode *int64 `json:"SupportModifyPayMode,omitempty" name:"SupportModifyPayMode"`
 }
 
 type OutterResource struct {
@@ -1397,9 +1426,117 @@ type PodParameter struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// Custom permission
+	// Example:
+	// {
+	//   "apiVersion": "v1",
+	//   "clusters": [
+	//     {
+	//       "cluster": {
+	//         "certificate-authority-data": "xxxxxx==",
+	//         "server": "https://xxxxx.com"
+	//       },
+	//       "name": "cls-xxxxx"
+	//     }
+	//   ],
+	//   "contexts": [
+	//     {
+	//       "context": {
+	//         "cluster": "cls-xxxxx",
+	//         "user": "100014xxxxx"
+	//       },
+	//       "name": "cls-a44yhcxxxxxxxxxx"
+	//     }
+	//   ],
+	//   "current-context": "cls-a4xxxx-context-default",
+	//   "kind": "Config",
+	//   "preferences": {},
+	//   "users": [
+	//     {
+	//       "name": "100014xxxxx",
+	//       "user": {
+	//         "client-certificate-data": "xxxxxx",
+	//         "client-key-data": "xxxxxx"
+	//       }
+	//     }
+	//   ]
+	// }
 	Config *string `json:"Config,omitempty" name:"Config"`
 
 	// Custom parameter
+	// Example:
+	// {
+	//     "apiVersion": "apps/v1",
+	//     "kind": "Deployment",
+	//     "metadata": {
+	//       "name": "test-deployment",
+	//       "labels": {
+	//         "app": "test"
+	//       }
+	//     },
+	//     "spec": {
+	//       "replicas": 3,
+	//       "selector": {
+	//         "matchLabels": {
+	//           "app": "test-app"
+	//         }
+	//       },
+	//       "template": {
+	//         "metadata": {
+	//           "annotations": {
+	//             "your-organization.com/department-v1": "test-example-v1",
+	//             "your-organization.com/department-v2": "test-example-v2"
+	//           },
+	//           "labels": {
+	//             "app": "test-app",
+	//             "environment": "production"
+	//           }
+	//         },
+	//         "spec": {
+	//           "nodeSelector": {
+	//             "your-organization/node-test": "test-node"
+	//           },
+	//           "containers": [
+	//             {
+	//               "name": "nginx",
+	//               "image": "nginx:1.14.2",
+	//               "ports": [
+	//                 {
+	//                   "containerPort": 80
+	//                 }
+	//               ]
+	//             }
+	//           ],
+	//           "affinity": {
+	//             "nodeAffinity": {
+	//               "requiredDuringSchedulingIgnoredDuringExecution": {
+	//                 "nodeSelectorTerms": [
+	//                   {
+	//                     "matchExpressions": [
+	//                       {
+	//                         "key": "disk-type",
+	//                         "operator": "In",
+	//                         "values": [
+	//                           "ssd",
+	//                           "sas"
+	//                         ]
+	//                       },
+	//                       {
+	//                         "key": "cpu-num",
+	//                         "operator": "Gt",
+	//                         "values": [
+	//                           "6"
+	//                         ]
+	//                       }
+	//                     ]
+	//                   }
+	//                 ]
+	//               }
+	//             }
+	//           }
+	//         }
+	//       }
+	//     }
+	//   }
 	Parameter *string `json:"Parameter,omitempty" name:"Parameter"`
 }
 
@@ -1435,6 +1572,14 @@ type PodSpec struct {
 	// Floating specification
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DynamicPodSpec *DynamicPodSpec `json:"DynamicPodSpec,omitempty" name:"DynamicPodSpec"`
+
+	// Unique VPC ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Unique VPC subnet ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }
 
 type PodVolume struct {
@@ -1548,16 +1693,26 @@ type PriceResource struct {
 
 type Resource struct {
 
-	// Node specification description
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Node specification description, such as CVM.SA2
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Spec *string `json:"Spec,omitempty" name:"Spec"`
 
-	// Storage class
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Storage type
+	// Valid values:
+	// <li>4: SSD</li>
+	// <li>5: Premium Cloud Storage</li>
+	// <li>6: Enhanced SSD</li>
+	// <li>11: High-Throughput cloud disk</li>
+	// <li>12: Tremendous SSD</li>
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	StorageType *int64 `json:"StorageType,omitempty" name:"StorageType"`
 
 	// Disk type
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Valid values:
+	// <li>`CLOUD_SSD`: SSD</li>
+	// <li>`CLOUD_PREMIUM`: Premium Cloud Storage</li>
+	// <li>`CLOUD_BASIC`: HDD</li>
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Memory capacity in MB
@@ -1584,16 +1739,16 @@ type Resource struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
-	// Specification type
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specification type, such as S2.MEDIUM8
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
-	// Number of local disks
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Number of local disks. This field has been disused.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LocalDiskNum *uint64 `json:"LocalDiskNum,omitempty" name:"LocalDiskNum"`
 
-	// Number of disks
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Number of local disks, such as 2
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DiskNum *uint64 `json:"DiskNum,omitempty" name:"DiskNum"`
 }
 
@@ -1647,7 +1802,7 @@ type ScaleOutInstanceRequest struct {
 	// List of tags bound to added nodes.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
-	// Resource type selected for expansion. Valid values: host (general CVM resource), pod (resource provided by TKE cluster)
+	// Resource type selected for scaling. Valid values: `host` (general CVM resource), `pod` (resource provided by TKE or EKS cluster)
 	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
 
 	// Specified information such as pod specification and source for expansion with pod resources
@@ -1666,7 +1821,13 @@ type ScaleOutInstanceRequest struct {
 	PodParameter *PodParameter `json:"PodParameter,omitempty" name:"PodParameter"`
 
 	// Number of master nodes to be added
+	// When a ClickHouse cluster is scaled, this parameter does not take effect.
+	// When a Kafka cluster is scaled, this parameter does not take effect.
+	// When `HardwareResourceType` is `pod`, this parameter does not take effect.
 	MasterCount *uint64 `json:"MasterCount,omitempty" name:"MasterCount"`
+
+	// Whether to start the service after scaling. `true`: yes; `false`: no
+	StartServiceAfterScaleOut *string `json:"StartServiceAfterScaleOut,omitempty" name:"StartServiceAfterScaleOut"`
 }
 
 func (r *ScaleOutInstanceRequest) ToJsonString() string {
@@ -1702,6 +1863,7 @@ func (r *ScaleOutInstanceRequest) FromJsonString(s string) error {
 	delete(f, "YarnNodeLabel")
 	delete(f, "PodParameter")
 	delete(f, "MasterCount")
+	delete(f, "StartServiceAfterScaleOut")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScaleOutInstanceRequest has unknown keys!", "")
 	}

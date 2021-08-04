@@ -451,6 +451,7 @@ func NewCreateClusterInstancesResponse() (response *CreateClusterInstancesRespon
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCOUNTCOMMON = "InternalError.AccountCommon"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
 //  INTERNALERROR_CLUSTERSTATE = "InternalError.ClusterState"
@@ -1025,6 +1026,42 @@ func (c *Client) DescribeClusterAsGroups(request *DescribeClusterAsGroupsRequest
     return
 }
 
+func NewDescribeClusterCommonNamesRequest() (request *DescribeClusterCommonNamesRequest) {
+    request = &DescribeClusterCommonNamesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterCommonNames")
+    return
+}
+
+func NewDescribeClusterCommonNamesResponse() (response *DescribeClusterCommonNamesResponse) {
+    response = &DescribeClusterCommonNamesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeClusterCommonNames
+// This API is used to obtain the CommonName from the kube-apiserver client certificate that corresponding to the sub-account in RBAC authorization mode. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INTERNALERROR_WHITELISTUNEXPECTEDERROR = "InternalError.WhitelistUnexpectedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNSUPPORTEDOPERATION_NOTINWHITELIST = "UnsupportedOperation.NotInWhitelist"
+func (c *Client) DescribeClusterCommonNames(request *DescribeClusterCommonNamesRequest) (response *DescribeClusterCommonNamesResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterCommonNamesRequest()
+    }
+    response = NewDescribeClusterCommonNamesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClusterEndpointStatusRequest() (request *DescribeClusterEndpointStatusRequest) {
     request = &DescribeClusterEndpointStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1426,6 +1463,35 @@ func (c *Client) DescribeClusters(request *DescribeClustersRequest) (response *D
     return
 }
 
+func NewDescribeEnableVpcCniProgressRequest() (request *DescribeEnableVpcCniProgressRequest) {
+    request = &DescribeEnableVpcCniProgressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeEnableVpcCniProgress")
+    return
+}
+
+func NewDescribeEnableVpcCniProgressResponse() (response *DescribeEnableVpcCniProgressResponse) {
+    response = &DescribeEnableVpcCniProgressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeEnableVpcCniProgress
+// This API is used to query the task progress of enabling VPC-CNI mode.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+func (c *Client) DescribeEnableVpcCniProgress(request *DescribeEnableVpcCniProgressRequest) (response *DescribeEnableVpcCniProgressResponse, err error) {
+    if request == nil {
+        request = NewDescribeEnableVpcCniProgressRequest()
+    }
+    response = NewDescribeEnableVpcCniProgressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeExistedInstancesRequest() (request *DescribeExistedInstancesRequest) {
     request = &DescribeExistedInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1608,6 +1674,36 @@ func (c *Client) DescribeRouteTableConflicts(request *DescribeRouteTableConflict
     return
 }
 
+func NewEnableVpcCniNetworkTypeRequest() (request *EnableVpcCniNetworkTypeRequest) {
+    request = &EnableVpcCniNetworkTypeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "EnableVpcCniNetworkType")
+    return
+}
+
+func NewEnableVpcCniNetworkTypeResponse() (response *EnableVpcCniNetworkTypeResponse) {
+    response = &EnableVpcCniNetworkTypeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// EnableVpcCniNetworkType
+// This API is used to enable the VPC-CNI network mode for GR clusters.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+func (c *Client) EnableVpcCniNetworkType(request *EnableVpcCniNetworkTypeRequest) (response *EnableVpcCniNetworkTypeResponse, err error) {
+    if request == nil {
+        request = NewEnableVpcCniNetworkTypeRequest()
+    }
+    response = NewEnableVpcCniNetworkTypeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetUpgradeInstanceProgressRequest() (request *GetUpgradeInstanceProgressRequest) {
     request = &GetUpgradeInstanceProgressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1714,6 +1810,7 @@ func NewModifyClusterAsGroupOptionAttributeResponse() (response *ModifyClusterAs
 //  INTERNALERROR_CVMNOTFOUND = "InternalError.CvmNotFound"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBAFFECTIVEDROWS = "InternalError.DbAffectivedRows"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -1837,6 +1934,7 @@ func NewModifyClusterNodePoolResponse() (response *ModifyClusterNodePoolResponse
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  OPERATIONDENIED = "OperationDenied"
 //  UNSUPPORTEDOPERATION_CAENABLEFAILED = "UnsupportedOperation.CaEnableFailed"
 func (c *Client) ModifyClusterNodePool(request *ModifyClusterNodePoolRequest) (response *ModifyClusterNodePoolResponse, err error) {
     if request == nil {
@@ -1935,6 +2033,7 @@ func NewUpdateClusterVersionResponse() (response *UpdateClusterVersionResponse) 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CLUSTERUPGRADENODEVERSION = "InternalError.ClusterUpgradeNodeVersion"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
