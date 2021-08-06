@@ -246,16 +246,16 @@ type CreateClustersRequest struct {
 	// Number of CPU cores of normal instance
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Memory of normal instance
+	// Memory of a non-serverless instance in GB
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Storage
+	// Storage capacity in GB
 	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
 
 	// Cluster name
 	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
 
-	// Account password, which can contain 8–64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()~)
+	// Account password (it must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).)
 	AdminPassword *string `json:"AdminPassword,omitempty" name:"AdminPassword"`
 
 	// Port. Default value: 5432
@@ -285,7 +285,8 @@ type CreateClustersRequest struct {
 	// Specified allowed time range for time point rollback
 	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitempty" name:"ExpectTimeThresh"`
 
-	// Storage upper limit of normal instance in GB
+	// The maximum storage of a non-serverless instance in GB
+	// If `DbType` is `MYSQL` and the storage billing mode is prepaid, the parameter value cannot exceed the maximum storage corresponding to the CPU and memory specifications.
 	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
 
 	// Number of instances
@@ -335,6 +336,11 @@ type CreateClustersRequest struct {
 	// This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
 	// Default value: 600
 	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitempty" name:"AutoPauseDelay"`
+
+	// The billing mode of cluster storage. Valid values: `0` (postpaid), `1` (prepaid). Default value: `0`.
+	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be postpaid.
+	// Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
+	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
 }
 
 func (r *CreateClustersRequest) ToJsonString() string {
@@ -382,6 +388,7 @@ func (r *CreateClustersRequest) FromJsonString(s string) error {
 	delete(f, "MaxCpu")
 	delete(f, "AutoPause")
 	delete(f, "AutoPauseDelay")
+	delete(f, "StoragePayMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClustersRequest has unknown keys!", "")
 	}
@@ -515,6 +522,21 @@ type CynosdbCluster struct {
 	// resume
 	// pause
 	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
+
+	// Prepaid cluster storage
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Cluster storage ID used in prepaid storage modification
+	StorageId *string `json:"StorageId,omitempty" name:"StorageId"`
+
+	// Billing mode of cluster storage. Valid values: `0` (postpaid), `1` (prepaid)
+	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+
+	// The minimum storage corresponding to the compute specifications of the cluster
+	MinStorageSize *int64 `json:"MinStorageSize,omitempty" name:"MinStorageSize"`
+
+	// The maximum storage corresponding to the compute specifications of the cluster
+	MaxStorageSize *int64 `json:"MaxStorageSize,omitempty" name:"MaxStorageSize"`
 }
 
 type CynosdbClusterDetail struct {
@@ -719,6 +741,14 @@ type CynosdbInstance struct {
 	// resume
 	// pause
 	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
+
+	// Storage billing mode
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+
+	// Prepaid storage ID
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	StorageId *string `json:"StorageId,omitempty" name:"StorageId"`
 }
 
 type CynosdbInstanceDetail struct {
@@ -815,6 +845,17 @@ type CynosdbInstanceDetail struct {
 
 	// Renewal flag
 	RenewFlag *int64 `json:"RenewFlag,omitempty" name:"RenewFlag"`
+
+	// The minimum number of CPU cores for a serverless instance
+	MinCpu *float64 `json:"MinCpu,omitempty" name:"MinCpu"`
+
+	// The maximum number of CPU cores for a serverless instance
+	MaxCpu *float64 `json:"MaxCpu,omitempty" name:"MaxCpu"`
+
+	// Serverless instance status. Valid values:
+	// resume
+	// pause
+	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
 }
 
 type CynosdbInstanceGrp struct {
@@ -997,6 +1038,10 @@ type DescribeBackupListRequest struct {
 
 	// Backup file list start
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Database type. Valid values: 
+	// <li> MYSQL </li>
+	DbType *string `json:"DbType,omitempty" name:"DbType"`
 }
 
 func (r *DescribeBackupListRequest) ToJsonString() string {
@@ -1014,6 +1059,7 @@ func (r *DescribeBackupListRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "Limit")
 	delete(f, "Offset")
+	delete(f, "DbType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupListRequest has unknown keys!", "")
 	}
@@ -1562,7 +1608,7 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
 type DescribeResourcesByDealNameRequest struct {
 	*tchttp.BaseRequest
 
-	// Billing order ID
+	// Order ID. (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Please call the API again until it succeeds.)
 	DealName *string `json:"DealName,omitempty" name:"DealName"`
 }
 

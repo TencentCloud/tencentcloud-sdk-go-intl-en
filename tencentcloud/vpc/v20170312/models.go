@@ -1174,6 +1174,14 @@ type CCN struct {
 
 	// Whether the CCN route priority feature is supported. Valid values: False: do not support; True: support.
 	RoutePriorityFlag *bool `json:"RoutePriorityFlag,omitempty" name:"RoutePriorityFlag"`
+
+	// Number of route tables associated with the instance.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RouteTableCount *uint64 `json:"RouteTableCount,omitempty" name:"RouteTableCount"`
+
+	// Whether the multiple route tables feature is enabled for the CCN instance. Valid values: `False`: no; `True`: yes. Default value: `False`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RouteTableFlag *bool `json:"RouteTableFlag,omitempty" name:"RouteTableFlag"`
 }
 
 type CcnAttachedInstance struct {
@@ -1225,6 +1233,14 @@ type CcnAttachedInstance struct {
 
 	// Description
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Route table ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// Route table name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RouteTableName *string `json:"RouteTableName,omitempty" name:"RouteTableName"`
 }
 
 type CcnBandwidthInfo struct {
@@ -1270,6 +1286,10 @@ type CcnInstance struct {
 
 	// Description
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// The ID of the route table associated with the instance
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 }
 
 type CcnRegionBandwidthLimit struct {
@@ -5718,7 +5738,7 @@ type DescribeAssistantCidrRequest struct {
 	// The ID of a VPC instance set, such as `vpc-6v2ht8q5`.
 	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 
-	// Filter condition. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
+	// Filter condition. `VpcIds` and `Filters` cannot be specified at the same time.
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 

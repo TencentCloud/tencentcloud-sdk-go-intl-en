@@ -272,7 +272,7 @@ const (
 	// The instance is not associated with a CCN.
 	UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
 
-	// 
+	// The specified route table does not exist.
 	UNSUPPORTEDOPERATION_CCNROUTETABLENOTEXIST = "UnsupportedOperation.CcnRouteTableNotExist"
 
 	// CDC subnet can only create a route to the local gateway.
@@ -308,13 +308,13 @@ const (
 	// Form an ECMP with the user’s custom routes.
 	UNSUPPORTEDOPERATION_ECMPWITHUSERROUTE = "UnsupportedOperation.EcmpWithUserRoute"
 
-	// 
+	// The configured instance does not match with the route table.
 	UNSUPPORTEDOPERATION_INSTANCEANDRTBNOTMATCH = "UnsupportedOperation.InstanceAndRtbNotMatch"
 
 	// Insufficient account balance.
 	UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
 
-	// 
+	// Invalid instance status.
 	UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
 
 	// Invalid resource status.
