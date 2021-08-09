@@ -377,7 +377,7 @@ type CreateInstancesRequest struct {
 	// Instance name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no).
+	// Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no). Default value: `0`
 	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitempty" name:"NeedSupportIpv6"`
 
 	// The information of tags to be associated with instances. This parameter is left empty by default.
@@ -1282,19 +1282,24 @@ func (r *DescribeDBInstanceAttributeResponse) FromJsonString(s string) error {
 type DescribeDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// Filter condition. Valid values: db-instance-id, db-instance-name, db-project-id, db-pay-mode, db-tag-key.
+	// Filter instances using one or more criteria. Valid filter names:
+	// db-instance-id: filter by instance ID (the filter value is a string)
+	// db-instance-name: filter by instance name (the filter value is a string)
+	// db-project-id: filter by project ID (the filter value is an integer)
+	// db-pay-mode: filter by billing mode (the filter value is a string)
+	// db-tag-key: filter by tag key (the filter value is a string)
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// Number of entries returned per page. Default value: 10.
+	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Data offset which starts from 0
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
-	// In ascending or descending order
+	// Pagination offset, starting from 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting order. Valid values: `asc` (ascending), `desc` (descending)
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 }
 
@@ -1312,8 +1317,8 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Filters")
 	delete(f, "Limit")
-	delete(f, "Offset")
 	delete(f, "OrderBy")
+	delete(f, "Offset")
 	delete(f, "OrderByType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
@@ -2594,6 +2599,56 @@ func (r *ModifyReadOnlyGroupConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifySwitchTimePeriodRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the instance waiting for a switch
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Valid value: `0` (switch immediately)
+	SwitchTag *uint64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
+}
+
+func (r *ModifySwitchTimePeriodRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySwitchTimePeriodRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "SwitchTag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySwitchTimePeriodRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifySwitchTimePeriodResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifySwitchTimePeriodResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySwitchTimePeriodResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type NormalQueryItem struct {
 
 	// Username
@@ -3348,6 +3403,15 @@ type UpgradeDBInstanceRequest struct {
 
 	// Activity ID
 	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (specify a time to switch). Default value: `0`
+	SwitchTag *int64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
+
+	// The earliest time to start a switch
+	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
+
+	// The latest time to start a switch
+	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {
@@ -3368,6 +3432,9 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "AutoVoucher")
 	delete(f, "VoucherIds")
 	delete(f, "ActivityId")
+	delete(f, "SwitchTag")
+	delete(f, "SwitchStartTime")
+	delete(f, "SwitchEndTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceRequest has unknown keys!", "")
 	}

@@ -103,6 +103,10 @@ type AlarmHistory struct {
 	// Metric information
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	MetricsInfo []*AlarmHistoryMetric `json:"MetricsInfo,omitempty" name:"MetricsInfo"`
+
+	// Dimension information of an instance that triggered alarms.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Dimensions *string `json:"Dimensions,omitempty" name:"Dimensions"`
 }
 
 type AlarmHistoryMetric struct {
@@ -1719,7 +1723,7 @@ func (r *DescribeAlarmPolicyResponse) FromJsonString(s string) error {
 type DescribeAllNamespacesRequest struct {
 	*tchttp.BaseRequest
 
-	// Filter by use case. Valid values: ST_DASHBOARD (Dashboard type), ST_ALARM (alarm type)
+	// Filter by use case. Currently, the only valid value is `ST_ALARM` (alarm type).
 	SceneType *string `json:"SceneType,omitempty" name:"SceneType"`
 
 	// Value fixed at "monitor"
@@ -2091,13 +2095,16 @@ type DescribeBindingPolicyObjectListRequest struct {
 	// The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Policy group ID.
+	// Policy group ID. If the ID is in the format of “policy-xxxx”, please enter it in the `PolicyId` field. Enter 0 in this field.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Number of parameters that can be returned on each page. Value range: 1 - 100. Default value: 20.
+	// Alarm policy ID in the format of “policy-xxxx”. If a value has been entered in this field, you can enter 0 in the `GroupId` field.
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The number of alarm objects returned each time. Value range: 1-100. Default value: 20.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Parameter offset on each page. The value starts from 0 and the default value is 0.
+	// Offset, which starts from 0 and is set to 0 by default. For example, the parameter `Offset=0&Limit=20` returns the zeroth to 19th alarm objects, and `Offset=20&Limit=20` returns the 20th to 39th alarm objects, and so on.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Dimensions of filtering objects.
@@ -2118,6 +2125,7 @@ func (r *DescribeBindingPolicyObjectListRequest) FromJsonString(s string) error 
 	}
 	delete(f, "Module")
 	delete(f, "GroupId")
+	delete(f, "PolicyId")
 	delete(f, "Limit")
 	delete(f, "Offset")
 	delete(f, "Dimensions")

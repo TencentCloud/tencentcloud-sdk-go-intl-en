@@ -3558,6 +3558,18 @@ type StrategyInfo struct {
 	// The deletion task identifier used to check the deletion status of the service-linked role
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsServiceLinkedPolicy *uint64 `json:"IsServiceLinkedPolicy,omitempty" name:"IsServiceLinkedPolicy"`
+
+	// The number of entities associated with the policy.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AttachEntityCount *int64 `json:"AttachEntityCount,omitempty" name:"AttachEntityCount"`
+
+	// The number of entities associated with the permission boundary.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AttachEntityBoundaryCount *int64 `json:"AttachEntityBoundaryCount,omitempty" name:"AttachEntityBoundaryCount"`
+
+	// The last editted time.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
 type SubAccountInfo struct {

@@ -181,6 +181,7 @@ func NewComposeMediaResponse() (response *ComposeMediaResponse) {
 //  INTERNALERROR_GETMEDIALISTERROR = "InternalError.GetMediaListError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_CLIPDURATION = "InvalidParameterValue.ClipDuration"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ComposeMedia(request *ComposeMediaRequest) (response *ComposeMediaResponse, err error) {
@@ -2165,7 +2166,6 @@ func NewDescribeStorageDetailsResponse() (response *DescribeStorageDetailsRespon
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  FAILEDOPERATION_USERSTATUSINAVLID = "FailedOperation.UserStatusInavlid"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_TIMEPARSEERROR = "InternalError.TimeParseError"
 //  INVALIDPARAMETER = "InvalidParameter"

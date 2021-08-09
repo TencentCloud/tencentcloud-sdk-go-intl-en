@@ -361,11 +361,11 @@ type CallBackTemplateInfo struct {
 	// Stream starting callback URL.
 	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitempty" name:"StreamBeginNotifyUrl"`
 
+	// Stream mixing callback URL (disused)
+	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitempty" name:"StreamMixNotifyUrl"`
+
 	// Interruption callback URL.
 	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitempty" name:"StreamEndNotifyUrl"`
-
-	// Stream mixing callback URL.
-	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitempty" name:"StreamMixNotifyUrl"`
 
 	// Recording callback URL.
 	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitempty" name:"RecordNotifyUrl"`
@@ -806,8 +806,7 @@ type CreateLiveCallbackTemplateRequest struct {
 	// [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
 
-	// Stream mixing callback URL,
-	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
+	// Disused
 	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitempty" name:"StreamMixNotifyUrl"`
 }
 
@@ -7673,6 +7672,13 @@ type UnBindLiveDomainCertRequest struct {
 
 	// Playback domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Valid values:
+	// `gray`: unbind the canary certificate
+	// `formal` (default): unbind the formal certificate
+	// 
+	// `formal` will be used if no value is passed in
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 func (r *UnBindLiveDomainCertRequest) ToJsonString() string {
@@ -7688,6 +7694,7 @@ func (r *UnBindLiveDomainCertRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DomainName")
+	delete(f, "Type")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnBindLiveDomainCertRequest has unknown keys!", "")
 	}

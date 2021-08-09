@@ -6993,6 +6993,9 @@ type EditMediaTask struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
 	// Error message.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
@@ -7235,8 +7238,8 @@ type FaceConfigureInfo struct {
 	// <li>politician: politically sensitive figure.</li>
 	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
-	// Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// Custom face labels for filtering. After you specify a label, callbacks of face images without this label will be returned. If this parameter is not specified or left empty, callbacks of all face images will be returned.
+	// You can specify up to 100 labels, with each containing up to 16 characters.
 	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet"`
 
 	// Figure library. Valid values:
@@ -7263,8 +7266,8 @@ type FaceConfigureInfoForUpdate struct {
 	// <li>politician: politically sensitive figure.</li>
 	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
-	// Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// Custom face labels for filtering. After you specify a label, callbacks of face images without this label will be returned. If this parameter is not specified or left empty, callbacks of all face images will be returned.
+	// You can specify up to 100 labels, with each containing up to 16 characters.
 	UserDefineLibraryLabelSet []*string `json:"UserDefineLibraryLabelSet,omitempty" name:"UserDefineLibraryLabelSet"`
 
 	// Figure library. Valid values:

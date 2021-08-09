@@ -4703,6 +4703,15 @@ type FrameTagConfigureInfoForUpdate struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type HeadTailParameter struct {
+
+	// Opening credits list
+	HeadSet []*MediaInputInfo `json:"HeadSet,omitempty" name:"HeadSet"`
+
+	// Closing credits list
+	TailSet []*MediaInputInfo `json:"TailSet,omitempty" name:"TailSet"`
+}
+
 type ImageSpriteTaskInput struct {
 
 	// ID of an image sprite generating template.
@@ -8019,6 +8028,12 @@ type TaskNotifyConfig struct {
 
 	// Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
 	NotifyMode *string `json:"NotifyMode,omitempty" name:"NotifyMode"`
+
+	// Notification type, `CMQ` by default. If `URL` is passed in, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
+	NotifyType *string `json:"NotifyType,omitempty" name:"NotifyType"`
+
+	// HTTP callback URL, required if `NotifyType` is set to `URL`
+	NotifyUrl *string `json:"NotifyUrl,omitempty" name:"NotifyUrl"`
 }
 
 type TaskOutputStorage struct {
@@ -8236,6 +8251,10 @@ type TranscodeTaskInput struct {
 	// Rule of the `{number}` variable in the output path after transcoding.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ObjectNumberFormat *NumberFormat `json:"ObjectNumberFormat,omitempty" name:"ObjectNumberFormat"`
+
+	// Opening and closing credits parameters
+	// Note: this field may return `null`, indicating that no valid value was found.
+	HeadTailParameter *HeadTailParameter `json:"HeadTailParameter,omitempty" name:"HeadTailParameter"`
 }
 
 type TranscodeTemplate struct {

@@ -1379,6 +1379,7 @@ func NewGetUserResponse() (response *GetUserResponse) {
 // This API is used to query sub-users.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) GetUser(request *GetUserRequest) (response *GetUserResponse, err error) {
     if request == nil {
