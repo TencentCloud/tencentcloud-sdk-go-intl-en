@@ -502,6 +502,21 @@ type DeployServiceV2Request struct {
 
 	// ID of the version that you want to roll back to
 	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+
+	// The script to run after startup
+	PostStart *string `json:"PostStart,omitempty" name:"PostStart"`
+
+	// The script to run before stop
+	PreStop *string `json:"PreStop,omitempty" name:"PreStop"`
+
+	// Configuration of 
+	DeployStrategyConf *DeployStrategyConf `json:"DeployStrategyConf,omitempty" name:"DeployStrategyConf"`
+
+	// Configuration of aliveness probe
+	Liveness *HealthCheckConfig `json:"Liveness,omitempty" name:"Liveness"`
+
+	// Configuration of readiness probe
+	Readiness *HealthCheckConfig `json:"Readiness,omitempty" name:"Readiness"`
 }
 
 func (r *DeployServiceV2Request) ToJsonString() string {
@@ -545,6 +560,11 @@ func (r *DeployServiceV2Request) FromJsonString(s string) error {
 	delete(f, "SettingConfs")
 	delete(f, "EksService")
 	delete(f, "VersionId")
+	delete(f, "PostStart")
+	delete(f, "PreStop")
+	delete(f, "DeployStrategyConf")
+	delete(f, "Liveness")
+	delete(f, "Readiness")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeployServiceV2Request has unknown keys!", "")
 	}
@@ -572,6 +592,21 @@ func (r *DeployServiceV2Response) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DeployServiceV2Response) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeployStrategyConf struct {
+
+	// Total batches
+	TotalBatchCount *int64 `json:"TotalBatchCount,omitempty" name:"TotalBatchCount"`
+
+	// Number of instances for the beta batch
+	BetaBatchNum *int64 `json:"BetaBatchNum,omitempty" name:"BetaBatchNum"`
+
+	// Batch deploy policy. `0`: automatically; `1`: manually. If you use beta batch, the policy for beta batch must be `0`. The policy specified here only applies to the rest batches.
+	DeployStrategyType *int64 `json:"DeployStrategyType,omitempty" name:"DeployStrategyType"`
+
+	// Interval between batches
+	BatchInterval *int64 `json:"BatchInterval,omitempty" name:"BatchInterval"`
 }
 
 type DescribeIngressRequest struct {
@@ -1037,6 +1072,33 @@ func (r *GenerateDownloadUrlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type HealthCheckConfig struct {
+
+	// Health check type. Valid values: `HttpGet`，`TcpSocket`，`Exec`
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The protocol type. It’s only valid when the health check type is `HttpGet`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// The request path. It’s only valid when the health check type is `HttpGet`.
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// The script to be executed. It’s only valid when the health check type is `Exec`.
+	Exec *string `json:"Exec,omitempty" name:"Exec"`
+
+	// The request port. It’s only valid when the health check type is `HttpGet` or `TcpSocket `.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// The initial delay for health check in seconds. Default: `0`
+	InitialDelaySeconds *int64 `json:"InitialDelaySeconds,omitempty" name:"InitialDelaySeconds"`
+
+	// Timeout period in seconds. Default: `1`
+	TimeoutSeconds *int64 `json:"TimeoutSeconds,omitempty" name:"TimeoutSeconds"`
+
+	// Interval period in seconds. Default: `10`
+	PeriodSeconds *int64 `json:"PeriodSeconds,omitempty" name:"PeriodSeconds"`
+}
+
 type IngressInfo struct {
 
 	// tem namespaceId
@@ -1474,6 +1536,10 @@ type RunVersionPod struct {
 	// Deployed version.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	DeployVersion *string `json:"DeployVersion,omitempty" name:"DeployVersion"`
+
+	// Number of Restarts
+	// Note: This is field may return `null`, indicating that no valid value can be obtained.
+	RestartCount *int64 `json:"RestartCount,omitempty" name:"RestartCount"`
 }
 
 type StorageConf struct {

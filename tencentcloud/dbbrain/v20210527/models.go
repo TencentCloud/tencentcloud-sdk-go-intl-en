@@ -23,10 +23,10 @@ import (
 type AddUserContactRequest struct {
 	*tchttp.BaseRequest
 
-	// Contact name, which must be unique, can contain 2–60 letters, digits, and underscores, and cannot start with an underscore.
+	// Recipient name, which can contain up to 20 letters, digits, spaces, and special symbols `!@#$%^&*()_+-=()` and cannot begin with an underscore.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Email address, which can contain letters, digits, and underscores and cannot start with an underscore.
+	// Email address, which can contain letters, digits, underscores, and the @ symbol, cannot begin with an underscore, and must be unique.
 	ContactInfo *string `json:"ContactInfo,omitempty" name:"ContactInfo"`
 
 	// Service type, which is fixed to `mysql`.
@@ -631,10 +631,10 @@ type DescribeDBDiagEventResponse struct {
 		// Event ID.
 		EventId *int64 `json:"EventId,omitempty" name:"EventId"`
 
-		// Event details.
+		// Diagnosis event details. If there is no additional explanation information, the output will be empty.
 		Explanation *string `json:"Explanation,omitempty" name:"Explanation"`
 
-		// Summary.
+		// Diagnosis summary.
 		Outline *string `json:"Outline,omitempty" name:"Outline"`
 
 		// Found problem.
@@ -646,7 +646,7 @@ type DescribeDBDiagEventResponse struct {
 		// Start time
 		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-		// Suggestion.
+		// Suggestions. If there are no suggestions, the output will be empty.
 		Suggestions *string `json:"Suggestions,omitempty" name:"Suggestions"`
 
 		// Reserved field.
@@ -968,7 +968,7 @@ type DescribeHealthScoreRequest struct {
 	// Instance ID for which to get the health score.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Time to get the health score.
+	// Time to get the health score in the format of `2019-09-10 12:13:14`.
 	Time *string `json:"Time,omitempty" name:"Time"`
 
 	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
@@ -1468,6 +1468,9 @@ type DescribeSlowLogUserHostStatsRequest struct {
 
 	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
 	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// MD5 value of SOL template
+	Md5 *string `json:"Md5,omitempty" name:"Md5"`
 }
 
 func (r *DescribeSlowLogUserHostStatsRequest) ToJsonString() string {
@@ -1486,6 +1489,7 @@ func (r *DescribeSlowLogUserHostStatsRequest) FromJsonString(s string) error {
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	delete(f, "Product")
+	delete(f, "Md5")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSlowLogUserHostStatsRequest has unknown keys!", "")
 	}
@@ -1822,10 +1826,10 @@ type DescribeUserSqlAdviceResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// SQL statement optimization suggestions, which can be parsed into JSON arrays.
+		// SQL statement optimization suggestions, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
 		Advices *string `json:"Advices,omitempty" name:"Advices"`
 
-		// Notes of SQL statement optimization suggestions, which can be parsed into String arrays.
+		// Notes of SQL statement optimization suggestions, which can be parsed into String arrays. If there is no need for optimization, the output will be empty.
 		Comments *string `json:"Comments,omitempty" name:"Comments"`
 
 		// SQL statement.
@@ -1837,10 +1841,10 @@ type DescribeUserSqlAdviceResponse struct {
 		// DDL information of related tables, which can be parsed into JSON arrays.
 		Tables *string `json:"Tables,omitempty" name:"Tables"`
 
-		// SQL execution plan, which can be parsed into JSON.
+		// SQL execution plan, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
 		SqlPlan *string `json:"SqlPlan,omitempty" name:"SqlPlan"`
 
-		// Cost saving details after SQL statement optimization, which can be parsed into JSON.
+		// Cost saving details after SQL statement optimization, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
 		Cost *string `json:"Cost,omitempty" name:"Cost"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1870,28 +1874,26 @@ type DiagHistoryEventItem struct {
 	// Start time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Event ID.
+	// Unique event ID.
 	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
 
 	// Severity, which can be divided into 5 levels: 1: fatal, 2: severe, 3: warning, 4: notice, 5: healthy.
 	Severity *int64 `json:"Severity,omitempty" name:"Severity"`
 
-	// Summary.
+	// Diagnosis summary.
 	Outline *string `json:"Outline,omitempty" name:"Outline"`
 
-	// Diagnosis item.
+	// Diagnosis item description.
 	DiagItem *string `json:"DiagItem,omitempty" name:"DiagItem"`
 
 	// Instance ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Reserved field
+	// Reserved field.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
 
-	// Region
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Region.
 	Region *string `json:"Region,omitempty" name:"Region"`
 }
 
@@ -2481,6 +2483,9 @@ type SlowLogTopSqlItem struct {
 
 	// Average number of scanned rows
 	RowsExaminedAvg *float64 `json:"RowsExaminedAvg,omitempty" name:"RowsExaminedAvg"`
+
+	// MD5 value of SOL template
+	Md5 *string `json:"Md5,omitempty" name:"Md5"`
 }
 
 type TableSpaceData struct {
@@ -2546,11 +2551,11 @@ type UserProfile struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProfileId *string `json:"ProfileId,omitempty" name:"ProfileId"`
 
-	// Configuration type.
+	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
 
-	// Configuration level. Valid values: User, Instance.
+	// Configuration level. Valid values: User (user-level), Instance (instance-level). For database inspection emails, it should be `User`. For scheduled task emails, it should be `Instance`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProfileLevel *string `json:"ProfileLevel,omitempty" name:"ProfileLevel"`
 

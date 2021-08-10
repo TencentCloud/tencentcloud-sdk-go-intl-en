@@ -59,7 +59,7 @@ func NewAddUserContactResponse() (response *AddUserContactResponse) {
 }
 
 // AddUserContact
-// This API is used to add the contact name and email. The returned value is the ID of the successfully added contact. Please always select Guangzhou for `Region`.
+// This API is used to add the recipient name and email. The returned value is the ID of the successfully added recipient.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -581,7 +581,7 @@ func NewDescribeMailProfileResponse() (response *DescribeMailProfileResponse) {
 }
 
 // DescribeMailProfile
-// This API is used to get the email sending configuration, including the email configuration for database inspection and the email sending configuration for scheduled task health reports. Please always select Guangzhou for `Region`.
+// This API is used to get the email sending configuration, including the email configuration for database inspection and the email sending configuration for scheduled task health reports.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
