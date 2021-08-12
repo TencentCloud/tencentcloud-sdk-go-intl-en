@@ -884,6 +884,63 @@ type DBRemark struct {
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
+type DbNormalDetail struct {
+
+	// Whether it is subscribed. Valid values: `0` (no), `1` (yes)
+	IsSubscribed *string `json:"IsSubscribed,omitempty" name:"IsSubscribed"`
+
+	// Database collation
+	CollationName *string `json:"CollationName,omitempty" name:"CollationName"`
+
+	// Whether the cleanup task is enabled to automatically remove old change tracking information when CT is enabled. Valid values: `0` (no), `1` (yes)
+	IsAutoCleanupOn *string `json:"IsAutoCleanupOn,omitempty" name:"IsAutoCleanupOn"`
+
+	// Whether SQL Server Service Broker is enabled. Valid values: `0` (no), `1` (yes)
+	IsBrokerEnabled *string `json:"IsBrokerEnabled,omitempty" name:"IsBrokerEnabled"`
+
+	// Whether CDC is enabled. Valid values: `0` (disabled), `1` (enabled)
+	IsCdcEnabled *string `json:"IsCdcEnabled,omitempty" name:"IsCdcEnabled"`
+
+	// Whether CT is enabled. Valid values: `0` (disabled), `1` (enabled)
+	IsDbChainingOn *string `json:"IsDbChainingOn,omitempty" name:"IsDbChainingOn"`
+
+	// Whether it is encrypted. Valid values: `0` (no), `1` (yes)
+	IsEncrypted *string `json:"IsEncrypted,omitempty" name:"IsEncrypted"`
+
+	// Whether full-text indexes are enabled. Valid values: `0` (no), `1` (yes)
+	IsFulltextEnabled *string `json:"IsFulltextEnabled,omitempty" name:"IsFulltextEnabled"`
+
+	// Whether it is a mirror database. Valid values: `0` (no), `1` (yes)
+	IsMirroring *string `json:"IsMirroring,omitempty" name:"IsMirroring"`
+
+	// Whether it is published. Valid values: `0` (no), `1` (yes)
+	IsPublished *string `json:"IsPublished,omitempty" name:"IsPublished"`
+
+	// Whether snapshots are enabled. Valid values: `0` (no), `1` (yes)
+	IsReadCommittedSnapshotOn *string `json:"IsReadCommittedSnapshotOn,omitempty" name:"IsReadCommittedSnapshotOn"`
+
+	// Whether it is trustworthy. Valid values: `0` (no), `1` (yes)
+	IsTrustworthyOn *string `json:"IsTrustworthyOn,omitempty" name:"IsTrustworthyOn"`
+
+	// Mirroring state
+	MirroringState *string `json:"MirroringState,omitempty" name:"MirroringState"`
+
+	// Database name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Recovery model
+	RecoveryModelDesc *string `json:"RecoveryModelDesc,omitempty" name:"RecoveryModelDesc"`
+
+	// Retention period (in days) of change tracking information
+	RetentionPeriod *string `json:"RetentionPeriod,omitempty" name:"RetentionPeriod"`
+
+	// Database status
+	StateDesc *string `json:"StateDesc,omitempty" name:"StateDesc"`
+
+	// User type
+	UserAccessDesc *string `json:"UserAccessDesc,omitempty" name:"UserAccessDesc"`
+}
+
 type DbRollbackTimeInfo struct {
 
 	// Database name
@@ -1079,10 +1136,10 @@ type DeleteIncrementalMigrationRequest struct {
 	// Target instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup import task ID
+	// Backup import task ID, which is returned through the `CreateBackupMigration` API
 	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
 
-	// ID of an incremental backup import task
+	// Incremental backup import task ID, which is returned through the `CreateIncrementalMigration` API
 	IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
 }
 
@@ -1321,16 +1378,16 @@ type DescribeBackupMigrationRequest struct {
 	// COS_URL: the backup is stored in user’s Cloud Object Storage, with URL provided. COS_UPLOAD: the backup is stored in the application’s Cloud Object Storage and needs to be uploaded by the user.
 	UploadType *string `json:"UploadType,omitempty" name:"UploadType"`
 
-	// Paging. Page size
+	// The maximum number of results returned per page. Default value: `100`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Paging. Number of pages
+	// Page number. Default value: `0`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Field for order: name,createTime,startTime,endTime
+	// Sort by field. Valid values: `name`, `createTime`, `startTime`, `endTime`. By default, the results returned are sorted by `createTime` in the ascending order.
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
-	// Type of order: desc,asc
+	// Sorting order which is valid only when `OrderBy` is specified. Valid values: `asc` (ascending), `desc` (descending). Default value: `asc`.
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 }
 
@@ -1699,6 +1756,58 @@ func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDBsNormalRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of mssql-7vfv3rk3
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDBsNormalRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBsNormalRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBsNormalRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBsNormalResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of databases of the instance
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Detailed database configurations, such as whether CDC or CT is enabled for the database
+		DBList []*DbNormalDetail `json:"DBList,omitempty" name:"DBList"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBsNormalResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBsNormalResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeDBsRequest struct {
 	*tchttp.BaseRequest
 
@@ -1823,19 +1932,19 @@ type DescribeIncrementalMigrationRequest struct {
 	// Status set of import tasks
 	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet"`
 
-	// Paging. Page size
+	// The maximum number of results returned per page. Default value: `100`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Paging. Number of pages
+	// Page number. Default value: `0`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Field for order: name,createTime,startTime,endTime
+	// Sort by field. Valid values: `name`, `createTime`, `startTime`, `endTime`. By default, the results returned are sorted by `createTime` in the ascending order.
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
-	// Type of order: desc,asc
+	// Sorting order which is valid only when `OrderBy` is specified. Valid values: `asc` (ascending), `desc` (descending). Default value: `asc`.
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 
-	// ID of an incremental backup import task
+	// Incremental backup import task ID, which is returned through the `CreateIncrementalMigration` API.
 	IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
 }
 
@@ -1889,6 +1998,118 @@ func (r *DescribeIncrementalMigrationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeIncrementalMigrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceParamRecordsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of mssql-dj5i29c5n. It is the same as the instance ID displayed in the TencentDB console and the response parameter `InstanceId` of the `DescribeDBInstances` API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Page number. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of results returned per page. Maximum value: `100`. Default value: `20`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeInstanceParamRecordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceParamRecordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceParamRecordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceParamRecordsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible records
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Parameter modification records
+		Items []*ParamRecord `json:"Items,omitempty" name:"Items"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceParamRecordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceParamRecordsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceParamsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of mssql-dj5i29c5n. It is the same as the instance ID displayed in the TencentDB console and the response parameter `InstanceId` of the `DescribeDBInstances` API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeInstanceParamsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceParamsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceParamsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceParamsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of instance parameters
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Parameter details
+		Items []*ParameterDetail `json:"Items,omitempty" name:"Items"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceParamsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceParamsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3314,6 +3535,177 @@ func (r *ModifyDBRemarkResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyDatabaseCDCRequest struct {
+	*tchttp.BaseRequest
+
+	// Array of database names
+	DBNames []*string `json:"DBNames,omitempty" name:"DBNames"`
+
+	// Enable or disable CDC. Valid values: `enable`, `disable`
+	ModifyType *string `json:"ModifyType,omitempty" name:"ModifyType"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *ModifyDatabaseCDCRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatabaseCDCRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBNames")
+	delete(f, "ModifyType")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDatabaseCDCRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDatabaseCDCResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDatabaseCDCResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatabaseCDCResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDatabaseCTRequest struct {
+	*tchttp.BaseRequest
+
+	// Array of database names
+	DBNames []*string `json:"DBNames,omitempty" name:"DBNames"`
+
+	// Enable or disable CT. Valid values: `enable`, `disable`
+	ModifyType *string `json:"ModifyType,omitempty" name:"ModifyType"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Retention period (in days) of change tracking information when CT is enabled. Value range: 3-30. Default value: `3`
+	ChangeRetentionDay *int64 `json:"ChangeRetentionDay,omitempty" name:"ChangeRetentionDay"`
+}
+
+func (r *ModifyDatabaseCTRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatabaseCTRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBNames")
+	delete(f, "ModifyType")
+	delete(f, "InstanceId")
+	delete(f, "ChangeRetentionDay")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDatabaseCTRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDatabaseCTResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDatabaseCTResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatabaseCTResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDatabaseMdfRequest struct {
+	*tchttp.BaseRequest
+
+	// Array of database names
+	DBNames []*string `json:"DBNames,omitempty" name:"DBNames"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *ModifyDatabaseMdfRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatabaseMdfRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBNames")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDatabaseMdfRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDatabaseMdfResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDatabaseMdfResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatabaseMdfResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyIncrementalMigrationRequest struct {
 	*tchttp.BaseRequest
 
@@ -3323,10 +3715,10 @@ type ModifyIncrementalMigrationRequest struct {
 	// Backup import task ID, which is returned through the API CreateBackupMigration
 	BackupMigrationId *string `json:"BackupMigrationId,omitempty" name:"BackupMigrationId"`
 
-	// Incremental import task ID
+	// Incremental backup import task ID, which is returned through the `CreateIncrementalMigration` API.
 	IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
 
-	// Whether restoration is required. No: not required. Yes: required.
+	// Whether to restore backups. Valid values: `NO`, `YES`. If this parameter is not specified, whether to restore incremental backups will not change.
 	IsRecovery *string `json:"IsRecovery,omitempty" name:"IsRecovery"`
 
 	// If the UploadType is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
@@ -3376,6 +3768,60 @@ func (r *ModifyIncrementalMigrationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyIncrementalMigrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyInstanceParamRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID list.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// List of modified parameters. Each list element has two fields: `Name` and `CurrentValue`. Set `Name` to the parameter name and `CurrentValue` to the new value after modification. <b>Note</b>: if the instance needs to be <b>restarted</b> for the modified parameter to take effect, it will be <b>restarted</b> immediately or during the maintenance time. Before you modify a parameter, you can use the `DescribeInstanceParams` API to query whether the instance needs to be restarted.
+	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList"`
+
+	// When to execute the parameter modification task. Valid values: `0` (execute immediately), `1` (execute during maintenance time). Default value: `0`.
+	WaitSwitch *int64 `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
+}
+
+func (r *ModifyInstanceParamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstanceParamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "ParamList")
+	delete(f, "WaitSwitch")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceParamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyInstanceParamResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyInstanceParamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstanceParamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3450,6 +3896,69 @@ func (r *ModifyMigrationResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyMigrationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ParamRecord struct {
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Parameter name
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// Parameter value before modification
+	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
+
+	// Parameter value after modification
+	NewValue *string `json:"NewValue,omitempty" name:"NewValue"`
+
+	// Parameter modification status. Valid values: `1` (initializing and waiting for modification), `2` (modification succeed), `3` (modification failed), `4` (modifying)
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Modification time
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+}
+
+type Parameter struct {
+
+	// Parameter name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Parameter value
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+}
+
+type ParameterDetail struct {
+
+	// Parameter name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Data type of the parameter. Valid values: `integer`, `enum`
+	ParamType *string `json:"ParamType,omitempty" name:"ParamType"`
+
+	// Default value of the parameter
+	Default *string `json:"Default,omitempty" name:"Default"`
+
+	// Parameter description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Current value of the parameter
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Whether the database needs to be restarted for the modified parameter to take effect. Valid values: `0` (no),`1` (yes)
+	NeedReboot *int64 `json:"NeedReboot,omitempty" name:"NeedReboot"`
+
+	// Maximum value of the parameter
+	Max *int64 `json:"Max,omitempty" name:"Max"`
+
+	// Minimum value of the parameter
+	Min *int64 `json:"Min,omitempty" name:"Min"`
+
+	// Enumerated values of the parameter
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+
+	// Parameter status. Valid values: `0` (normal), `1` (modifying)
+	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
 type RecycleDBInstanceRequest struct {

@@ -1283,11 +1283,11 @@ type DescribeDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
 	// Filter instances using one or more criteria. Valid filter names:
-	// db-instance-id: filter by instance ID (the filter value is a string)
-	// db-instance-name: filter by instance name (the filter value is a string)
-	// db-project-id: filter by project ID (the filter value is an integer)
-	// db-pay-mode: filter by billing mode (the filter value is a string)
-	// db-tag-key: filter by tag key (the filter value is a string)
+	// db-instance-id: filter by instance ID (in string format)
+	// db-instance-name: filter by instance name (in string format)
+	// db-project-id: filter by project ID (in integer format)
+	// db-pay-mode: filter by billing mode (in string format)
+	// db-tag-key: filter by tag key (in string format)
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
@@ -3404,7 +3404,7 @@ type UpgradeDBInstanceRequest struct {
 	// Activity ID
 	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
 
-	// Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (specify a time to switch). Default value: `0`
+	// Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (switch at specified time). Default value: `0`
 	SwitchTag *int64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
 
 	// The earliest time to start a switch
