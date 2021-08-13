@@ -3567,7 +3567,7 @@ type StrategyInfo struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AttachEntityBoundaryCount *int64 `json:"AttachEntityBoundaryCount,omitempty" name:"AttachEntityBoundaryCount"`
 
-	// The last editted time.
+	// The last edited time.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
