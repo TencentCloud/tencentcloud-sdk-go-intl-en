@@ -146,6 +146,7 @@ func NewBindRuleRealServersResponse() (response *BindRuleRealServersResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
@@ -355,6 +356,44 @@ func (c *Client) CreateCertificate(request *CreateCertificateRequest) (response 
         request = NewCreateCertificateRequest()
     }
     response = NewCreateCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCustomHeaderRequest() (request *CreateCustomHeaderRequest) {
+    request = &CreateCustomHeaderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gaap", APIVersion, "CreateCustomHeader")
+    return
+}
+
+func NewCreateCustomHeaderResponse() (response *CreateCustomHeaderResponse) {
+    response = &CreateCustomHeaderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCustomHeader
+// This API is used to create a custom header of the HTTP/HTTPS listener. When client requests reach the listener, they will be forwarded to the origin with this custom hearer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_HITBLACKLIST = "InvalidParameterValue.HitBlacklist"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) CreateCustomHeader(request *CreateCustomHeaderRequest) (response *CreateCustomHeaderResponse, err error) {
+    if request == nil {
+        request = NewCreateCustomHeaderRequest()
+    }
+    response = NewCreateCustomHeaderResponse()
     err = c.Send(request, response)
     return
 }
@@ -668,6 +707,8 @@ func NewCreateRuleResponse() (response *CreateRuleResponse) {
 // error code that may be returned:
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACTIONOPERATETOOQUICKLY = "FailedOperation.ActionOperateTooQuickly"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFRULES = "FailedOperation.LimitNumofRules"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
@@ -952,6 +993,7 @@ func NewDeleteDomainErrorPageInfoResponse() (response *DeleteDomainErrorPageInfo
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  FAILEDOPERATION_PROXYVERSIONNOTSUPPORT = "FailedOperation.ProxyVersionNotSupport"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1065,6 +1107,7 @@ func NewDeleteRuleResponse() (response *DeleteRuleResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
@@ -1111,6 +1154,7 @@ func NewDeleteSecurityPolicyResponse() (response *DeleteSecurityPolicyResponse) 
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteSecurityPolicy(request *DeleteSecurityPolicyRequest) (response *DeleteSecurityPolicyResponse, err error) {
     if request == nil {
         request = NewDeleteSecurityPolicyRequest()
@@ -1230,6 +1274,42 @@ func (c *Client) DescribeAccessRegionsByDestRegion(request *DescribeAccessRegion
     return
 }
 
+func NewDescribeBlackHeaderRequest() (request *DescribeBlackHeaderRequest) {
+    request = &DescribeBlackHeaderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gaap", APIVersion, "DescribeBlackHeader")
+    return
+}
+
+func NewDescribeBlackHeaderResponse() (response *DescribeBlackHeaderResponse) {
+    response = &DescribeBlackHeaderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBlackHeader
+// This API is used to query names of blocked custom headers.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeBlackHeader(request *DescribeBlackHeaderRequest) (response *DescribeBlackHeaderResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlackHeaderRequest()
+    }
+    response = NewDescribeBlackHeaderResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCertificateDetailRequest() (request *DescribeCertificateDetailRequest) {
     request = &DescribeCertificateDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1338,6 +1418,42 @@ func (c *Client) DescribeCountryAreaMapping(request *DescribeCountryAreaMappingR
         request = NewDescribeCountryAreaMappingRequest()
     }
     response = NewDescribeCountryAreaMappingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCustomHeaderRequest() (request *DescribeCustomHeaderRequest) {
+    request = &DescribeCustomHeaderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("gaap", APIVersion, "DescribeCustomHeader")
+    return
+}
+
+func NewDescribeCustomHeaderResponse() (response *DescribeCustomHeaderResponse) {
+    response = &DescribeCustomHeaderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCustomHeader
+// This API is used to query the list of custom headers.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeCustomHeader(request *DescribeCustomHeaderRequest) (response *DescribeCustomHeaderResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomHeaderRequest()
+    }
+    response = NewDescribeCustomHeaderResponse()
     err = c.Send(request, response)
     return
 }
@@ -2275,6 +2391,7 @@ func NewDescribeSecurityPolicyDetailResponse() (response *DescribeSecurityPolicy
 // This API is used to obtain security policy details.
 //
 // error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"

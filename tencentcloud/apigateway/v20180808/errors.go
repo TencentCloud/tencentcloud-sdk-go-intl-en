@@ -134,6 +134,9 @@ const (
 	// Service error.
 	FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 
+	// The service is in use. Please try again later.
+	FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+
 	// The service does not exist.
 	FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 
@@ -182,7 +185,7 @@ const (
 	// The API business type passed in must be `OAUTH`.
 	INVALIDPARAMETERVALUE_INVALIDAPIBUSINESSTYPE = "InvalidParameterValue.InvalidApiBusinessType"
 
-	// 
+	// Incorrect API ID
 	INVALIDPARAMETERVALUE_INVALIDAPIIDS = "InvalidParameterValue.InvalidApiIds"
 
 	// Invalid API configuration.
@@ -199,6 +202,12 @@ const (
 
 	// The constant parameter is invalid.
 	INVALIDPARAMETERVALUE_INVALIDCONSTANTPARAMETERS = "InvalidParameterValue.InvalidConstantParameters"
+
+	// The value of the `Env` parameter is incorrect. Its valid values are (release, prepub, test).
+	INVALIDPARAMETERVALUE_INVALIDENV = "InvalidParameterValue.InvalidEnv"
+
+	// Invalid service environment status
+	INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
 
 	// The parameter value is incorrect.
 	INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
@@ -245,7 +254,7 @@ const (
 	// The backend service type is incorrect. For backend services in WEBSOCKET type, the frontend protocol should be configured as WEBSOCKET.
 	INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
 
-	// 
+	// Incorrect tag parameters
 	INVALIDPARAMETERVALUE_INVALIDTAGVALUES = "InvalidParameterValue.InvalidTagValues"
 
 	// Incorrect configuration of the TSF-type API.
@@ -284,6 +293,9 @@ const (
 	// The number of API documents exceeds the limit.
 	LIMITEXCEEDED_APIDOCLIMITEXCEEDED = "LimitExceeded.APIDocLimitExceeded"
 
+	// The number of applications exceeds the limit.
+	LIMITEXCEEDED_APIAPPCOUNTLIMITEXCEEDED = "LimitExceeded.ApiAppCountLimitExceeded"
+
 	// The number of APIs exceeds the limit.
 	LIMITEXCEEDED_APICOUNTLIMITEXCEEDED = "LimitExceeded.ApiCountLimitExceeded"
 
@@ -301,6 +313,9 @@ const (
 
 	// The request frequency has reached the limit. Please try again later.
 	LIMITEXCEEDED_REQUESTLIMITEXCEEDED = "LimitExceeded.RequestLimitExceeded"
+
+	// Too many services are bound to the plugin. Unbind some services or increase the quota, and try again.
+	LIMITEXCEEDED_SERVICECOUNTFORPLUGINLIMITEXCEEDED = "LimitExceeded.ServiceCountForPluginLimitExceeded"
 
 	// The number of services exceeds the limit. Please delete some services or increase the limit and try again.
 	LIMITEXCEEDED_SERVICECOUNTLIMITEXCEEDED = "LimitExceeded.ServiceCountLimitExceeded"
@@ -332,6 +347,9 @@ const (
 	// Incorrect `ApiId`.
 	RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 
+	// The application ID is incorrect.
+	RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+
 	// The API document does not exist.
 	RESOURCENOTFOUND_INVALIDAPIDOC = "ResourceNotFound.InvalidApiDoc"
 
@@ -340,6 +358,9 @@ const (
 
 	// Error with the OAuth service API.
 	RESOURCENOTFOUND_INVALIDOAUTHAPI = "ResourceNotFound.InvalidOauthApi"
+
+	// The plugin does not exist.
+	RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
 
 	// The corresponding service is invisible.
 	RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
@@ -386,6 +407,9 @@ const (
 	// The current key status does not support this operation.
 	UNSUPPORTEDOPERATION_INVALIDSTATUS = "UnsupportedOperation.InvalidStatus"
 
+	// The EIAM authentication API cannot be modified.
+	UNSUPPORTEDOPERATION_MODIFYEIAMAUTHAPI = "UnsupportedOperation.ModifyEIAMAuthApi"
+
 	// The frontend protocol type cannot be changed.
 	UNSUPPORTEDOPERATION_MODIFYPROTOCOL = "UnsupportedOperation.ModifyProtocol"
 
@@ -410,8 +434,14 @@ const (
 	// The environment cannot be bound.
 	UNSUPPORTEDOPERATION_UNSUPPORTEDBINDENVIRONMENT = "UnsupportedOperation.UnsupportedBindEnvironment"
 
+	// The current API has already been bound to a business API. Please unbind it and try again.
+	UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEAPI = "UnsupportedOperation.UnsupportedDeleteApi"
+
 	// This service is being used and cannot be deleted.
 	UNSUPPORTEDOPERATION_UNSUPPORTEDDELETESERVICE = "UnsupportedOperation.UnsupportedDeleteService"
+
+	// Unsupported network type
+	UNSUPPORTEDOPERATION_UNSUPPORTEDNETTYPE = "UnsupportedOperation.UnsupportedNetType"
 
 	// The environment cannot be unbound, as there are APIs that are not bound to a usage plan.
 	UNSUPPORTEDOPERATION_UNSUPPORTEDUNBINDENVIRONMENT = "UnsupportedOperation.UnsupportedUnBindEnvironment"

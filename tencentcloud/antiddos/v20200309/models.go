@@ -2519,7 +2519,7 @@ type EipProductInfo struct {
 
 type ForwardListener struct {
 
-	// Forwarding listening port. Value range: 1–65535.
+	// The starting port for listener forwarding. Value range: 1 to 65535.
 	FrontendPort *int64 `json:"FrontendPort,omitempty" name:"FrontendPort"`
 
 	// Forwarding protocol. Valid values:
@@ -2528,7 +2528,7 @@ type ForwardListener struct {
 	// ]
 	ForwardProtocol *string `json:"ForwardProtocol,omitempty" name:"ForwardProtocol"`
 
-	// 
+	// The ending port for listener forwarding. Value range: 1 to 65535.
 	FrontendPortEnd *int64 `json:"FrontendPortEnd,omitempty" name:"FrontendPortEnd"`
 }
 
@@ -2905,9 +2905,9 @@ type PacketFilterConfig struct {
 	// ]
 	MatchType *string `json:"MatchType,omitempty" name:"MatchType"`
 
-	// Detection value. Should be in key string or regular expression.
-	// For `sunday`, enter a string or a string in hexadecimal byte code representation starting with `\x`. For example, a string "123" corresponds to the hexadecimal byte code "\x313233".
-	// For `pcre`, enter a regular expression.
+	// Detection value. Should be in key string or regular expression. 
+	// When the `MatchType` is `sunday`, enter a string or a string in hexadecimal byte code representation. For example, a string "123" corresponds to the hexadecimal byte code "\x313233".
+	// When the `MatchType` is `pcre`, enter a regular expression.
 	// ]
 	Str *string `json:"Str,omitempty" name:"Str"`
 
@@ -2942,8 +2942,8 @@ type PacketFilterConfig struct {
 	MatchType2 *string `json:"MatchType2,omitempty" name:"MatchType2"`
 
 	// The second detection value. Should be in key string or regular expression.
-	// For `sunday`, enter a string or a string in hexadecimal byte code representation starting with `\x`. For example, a string "123" corresponds to the hexadecimal byte code "\x313233".
-	// For `pcre`, enter a regular expression.
+	// When the `MatchType` is `sunday`, enter a string or a string in hexadecimal byte code representation. For example, a string "123" corresponds to the hexadecimal byte code "\x313233".
+	// When the `MatchType` is `pcre`, enter a regular expression.
 	// ]
 	Str2 *string `json:"Str2,omitempty" name:"Str2"`
 
@@ -3151,6 +3151,56 @@ type SuccessCode struct {
 	Code *string `json:"Code,omitempty" name:"Code"`
 }
 
+type SwitchWaterPrintConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Anti-DDoS instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Watermark status. `1`: enabled; `0`: disabled.
+	OpenStatus *int64 `json:"OpenStatus,omitempty" name:"OpenStatus"`
+}
+
+func (r *SwitchWaterPrintConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchWaterPrintConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "OpenStatus")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchWaterPrintConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type SwitchWaterPrintConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SwitchWaterPrintConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchWaterPrintConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type WaterPrintConfig struct {
 
 	// Watermark offset. Value range: [0, 100).
@@ -3168,7 +3218,10 @@ type WaterPrintConfig struct {
 	// A list of watermark keys is generated after a watermark is added successfully. Each watermark can have up to 2 keys. When there is only one valid key, it cannot be deleted.
 	Keys []*WaterPrintKey `json:"Keys,omitempty" name:"Keys"`
 
-	// 
+	// Watermark checking mode, which can be:
+	// `checkall`: normal mode
+	// `shortfpcheckall`: compact mode
+	// ]
 	Verify *string `json:"Verify,omitempty" name:"Verify"`
 }
 

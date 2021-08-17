@@ -43,6 +43,81 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAttachPluginRequest() (request *AttachPluginRequest) {
+    request = &AttachPluginRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "AttachPlugin")
+    return
+}
+
+func NewAttachPluginResponse() (response *AttachPluginResponse) {
+    response = &AttachPluginResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AttachPlugin
+// This API is used to bind a plugin to an API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  LIMITEXCEEDED_SERVICECOUNTFORPLUGINLIMITEXCEEDED = "LimitExceeded.ServiceCountForPluginLimitExceeded"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) AttachPlugin(request *AttachPluginRequest) (response *AttachPluginResponse, err error) {
+    if request == nil {
+        request = NewAttachPluginRequest()
+    }
+    response = NewAttachPluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBindApiAppRequest() (request *BindApiAppRequest) {
+    request = &BindApiAppRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "BindApiApp")
+    return
+}
+
+func NewBindApiAppResponse() (response *BindApiAppResponse) {
+    response = &BindApiAppResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BindApiApp
+// This API is used to bind an application to an API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDENV = "InvalidParameterValue.InvalidEnv"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDBINDENVIRONMENT = "UnsupportedOperation.UnsupportedBindEnvironment"
+func (c *Client) BindApiApp(request *BindApiAppRequest) (response *BindApiAppResponse, err error) {
+    if request == nil {
+        request = NewBindApiAppRequest()
+    }
+    response = NewBindApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBindEnvironmentRequest() (request *BindEnvironmentRequest) {
     request = &BindEnvironmentRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -145,6 +220,7 @@ func NewBindSecretIdsResponse() (response *BindSecretIdsResponse) {
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
 //  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
 //  UNSUPPORTEDOPERATION_ALREADYBINDUSAGEPLAN = "UnsupportedOperation.AlreadyBindUsagePlan"
+//  UNSUPPORTEDOPERATION_INVALIDSTATUS = "UnsupportedOperation.InvalidStatus"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDBINDAPIKEY = "UnsupportedOperation.UnsupportedBindApiKey"
 func (c *Client) BindSecretIds(request *BindSecretIdsRequest) (response *BindSecretIdsResponse, err error) {
     if request == nil {
@@ -196,6 +272,7 @@ func NewBindSubDomainResponse() (response *BindSubDomainResponse) {
 //  FAILEDOPERATION_ISDEFAULTMAPPING = "FailedOperation.IsDefaultMapping"
 //  FAILEDOPERATION_NETSUBDOMAINERROR = "FailedOperation.NetSubDomainError"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  FAILEDOPERATION_SUBDOMAINFORMATERROR = "FailedOperation.SubDomainFormatError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
@@ -326,6 +403,7 @@ func NewCreateApiResponse() (response *CreateApiResponse) {
 //  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
 //  FAILEDOPERATION_SCFERROR = "FailedOperation.ScfError"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INTERNALERROR_SCFEXCEPTION = "InternalError.ScfException"
@@ -335,6 +413,7 @@ func NewCreateApiResponse() (response *CreateApiResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDAPIBUSINESSTYPE = "InvalidParameterValue.InvalidApiBusinessType"
 //  INVALIDPARAMETERVALUE_INVALIDAPIREQUESTCONFIG = "InvalidParameterValue.InvalidApiRequestConfig"
 //  INVALIDPARAMETERVALUE_INVALIDAPITYPE = "InvalidParameterValue.InvalidApiType"
+//  INVALIDPARAMETERVALUE_INVALIDBACKENDPATH = "InvalidParameterValue.InvalidBackendPath"
 //  INVALIDPARAMETERVALUE_INVALIDCLB = "InvalidParameterValue.InvalidClb"
 //  INVALIDPARAMETERVALUE_INVALIDPUBLICKEY = "InvalidParameterValue.InvalidPublicKey"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -345,17 +424,53 @@ func NewCreateApiResponse() (response *CreateApiResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDSERVICEPARAMETERS = "InvalidParameterValue.InvalidServiceParameters"
 //  INVALIDPARAMETERVALUE_INVALIDTSFCONFIG = "InvalidParameterValue.InvalidTsfConfig"
 //  INVALIDPARAMETERVALUE_INVALIDURL = "InvalidParameterValue.InvalidUrl"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
 //  INVALIDPARAMETERVALUE_PARAMETERNOTMATCH = "InvalidParameterValue.ParameterNotMatch"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
 //  LIMITEXCEEDED_APICOUNTLIMITEXCEEDED = "LimitExceeded.ApiCountLimitExceeded"
 //  RESOURCENOTFOUND_INVALIDOAUTHAPI = "ResourceNotFound.InvalidOauthApi"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_INVALIDENDPOINTTYPE = "UnsupportedOperation.InvalidEndpointType"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDNETTYPE = "UnsupportedOperation.UnsupportedNetType"
 func (c *Client) CreateApi(request *CreateApiRequest) (response *CreateApiResponse, err error) {
     if request == nil {
         request = NewCreateApiRequest()
     }
     response = NewCreateApiResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateApiAppRequest() (request *CreateApiAppRequest) {
+    request = &CreateApiAppRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "CreateApiApp")
+    return
+}
+
+func NewCreateApiAppResponse() (response *CreateApiAppResponse) {
+    response = &CreateApiAppResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateApiApp
+// This API is used to create an application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCESSKEYEXIST = "FailedOperation.AccessKeyExist"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  LIMITEXCEEDED_APIAPPCOUNTLIMITEXCEEDED = "LimitExceeded.ApiAppCountLimitExceeded"
+//  LIMITEXCEEDED_APIKEYCOUNTLIMITEXCEEDED = "LimitExceeded.ApiKeyCountLimitExceeded"
+func (c *Client) CreateApiApp(request *CreateApiAppRequest) (response *CreateApiAppResponse, err error) {
+    if request == nil {
+        request = NewCreateApiAppRequest()
+    }
+    response = NewCreateApiAppResponse()
     err = c.Send(request, response)
     return
 }
@@ -419,6 +534,40 @@ func (c *Client) CreateIPStrategy(request *CreateIPStrategyRequest) (response *C
         request = NewCreateIPStrategyRequest()
     }
     response = NewCreateIPStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreatePluginRequest() (request *CreatePluginRequest) {
+    request = &CreatePluginRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "CreatePlugin")
+    return
+}
+
+func NewCreatePluginResponse() (response *CreatePluginResponse) {
+    response = &CreatePluginResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreatePlugin
+// This API is used to create an API Gateway plugin.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) CreatePlugin(request *CreatePluginRequest) (response *CreatePluginResponse, err error) {
+    if request == nil {
+        request = NewCreatePluginRequest()
+    }
+    response = NewCreatePluginResponse()
     err = c.Send(request, response)
     return
 }
@@ -576,6 +725,7 @@ func NewDeleteApiResponse() (response *DeleteApiResponse) {
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_APIBINDENVIRONMEN = "FailedOperation.ApiBindEnvironmen"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
@@ -594,11 +744,52 @@ func NewDeleteApiResponse() (response *DeleteApiResponse) {
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEAPI = "UnsupportedOperation.UnsupportedDeleteApi"
 func (c *Client) DeleteApi(request *DeleteApiRequest) (response *DeleteApiResponse, err error) {
     if request == nil {
         request = NewDeleteApiRequest()
     }
     response = NewDeleteApiResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteApiAppRequest() (request *DeleteApiAppRequest) {
+    request = &DeleteApiAppRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DeleteApiApp")
+    return
+}
+
+func NewDeleteApiAppResponse() (response *DeleteApiAppResponse) {
+    response = &DeleteApiAppResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteApiApp
+// This API is used to delete a created application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEAPI = "UnsupportedOperation.UnsupportedDeleteApi"
+func (c *Client) DeleteApiApp(request *DeleteApiAppRequest) (response *DeleteApiAppResponse, err error) {
+    if request == nil {
+        request = NewDeleteApiAppRequest()
+    }
+    response = NewDeleteApiAppResponse()
     err = c.Send(request, response)
     return
 }
@@ -664,6 +855,37 @@ func (c *Client) DeleteIPStrategy(request *DeleteIPStrategyRequest) (response *D
     return
 }
 
+func NewDeletePluginRequest() (request *DeletePluginRequest) {
+    request = &DeletePluginRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DeletePlugin")
+    return
+}
+
+func NewDeletePluginResponse() (response *DeletePluginResponse) {
+    response = &DeletePluginResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeletePlugin
+// This API is used to delete an API Gateway plugin.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DeletePlugin(request *DeletePluginRequest) (response *DeletePluginResponse, err error) {
+    if request == nil {
+        request = NewDeletePluginRequest()
+    }
+    response = NewDeletePluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteServiceRequest() (request *DeleteServiceRequest) {
     request = &DeleteServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -684,6 +906,7 @@ func NewDeleteServiceResponse() (response *DeleteServiceResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -869,6 +1092,37 @@ func (c *Client) DescribeAPIDocs(request *DescribeAPIDocsRequest) (response *Des
     return
 }
 
+func NewDescribeAllPluginApisRequest() (request *DescribeAllPluginApisRequest) {
+    request = &DescribeAllPluginApisRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeAllPluginApis")
+    return
+}
+
+func NewDescribeAllPluginApisResponse() (response *DescribeAllPluginApisResponse) {
+    response = &DescribeAllPluginApisResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAllPluginApis
+// This API is used to list all APIs that can use this plugin, no matter whether the API is bound with the plugin.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FORMATERROR = "FailedOperation.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DescribeAllPluginApis(request *DescribeAllPluginApisRequest) (response *DescribeAllPluginApisResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllPluginApisRequest()
+    }
+    response = NewDescribeAllPluginApisResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApiRequest() (request *DescribeApiRequest) {
     request = &DescribeApiRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -907,6 +1161,125 @@ func (c *Client) DescribeApi(request *DescribeApiRequest) (response *DescribeApi
     return
 }
 
+func NewDescribeApiAppRequest() (request *DescribeApiAppRequest) {
+    request = &DescribeApiAppRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiApp")
+    return
+}
+
+func NewDescribeApiAppResponse() (response *DescribeApiAppResponse) {
+    response = &DescribeApiAppResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeApiApp
+// This API is used to search for an application by application ID.
+//
+// error code that may be returned:
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+func (c *Client) DescribeApiApp(request *DescribeApiAppRequest) (response *DescribeApiAppResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiAppRequest()
+    }
+    response = NewDescribeApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApiAppBindApisStatusRequest() (request *DescribeApiAppBindApisStatusRequest) {
+    request = &DescribeApiAppBindApisStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiAppBindApisStatus")
+    return
+}
+
+func NewDescribeApiAppBindApisStatusResponse() (response *DescribeApiAppBindApisStatusResponse) {
+    response = &DescribeApiAppBindApisStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeApiAppBindApisStatus
+// This API is used to query the list of APIs bound to an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+func (c *Client) DescribeApiAppBindApisStatus(request *DescribeApiAppBindApisStatusRequest) (response *DescribeApiAppBindApisStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiAppBindApisStatusRequest()
+    }
+    response = NewDescribeApiAppBindApisStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApiAppsStatusRequest() (request *DescribeApiAppsStatusRequest) {
+    request = &DescribeApiAppsStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiAppsStatus")
+    return
+}
+
+func NewDescribeApiAppsStatusResponse() (response *DescribeApiAppsStatusResponse) {
+    response = &DescribeApiAppsStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeApiAppsStatus
+// This API is used to query the application list.
+//
+// error code that may be returned:
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) DescribeApiAppsStatus(request *DescribeApiAppsStatusRequest) (response *DescribeApiAppsStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiAppsStatusRequest()
+    }
+    response = NewDescribeApiAppsStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApiBindApiAppsStatusRequest() (request *DescribeApiBindApiAppsStatusRequest) {
+    request = &DescribeApiBindApiAppsStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiBindApiAppsStatus")
+    return
+}
+
+func NewDescribeApiBindApiAppsStatusResponse() (response *DescribeApiBindApiAppsStatusResponse) {
+    response = &DescribeApiBindApiAppsStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeApiBindApiAppsStatus
+// This API is used to query the list of applications bound to an API.
+//
+// error code that may be returned:
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+func (c *Client) DescribeApiBindApiAppsStatus(request *DescribeApiBindApiAppsStatusRequest) (response *DescribeApiBindApiAppsStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiBindApiAppsStatusRequest()
+    }
+    response = NewDescribeApiBindApiAppsStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApiEnvironmentStrategyRequest() (request *DescribeApiEnvironmentStrategyRequest) {
     request = &DescribeApiEnvironmentStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -935,6 +1308,41 @@ func (c *Client) DescribeApiEnvironmentStrategy(request *DescribeApiEnvironmentS
         request = NewDescribeApiEnvironmentStrategyRequest()
     }
     response = NewDescribeApiEnvironmentStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApiForApiAppRequest() (request *DescribeApiForApiAppRequest) {
+    request = &DescribeApiForApiAppRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiForApiApp")
+    return
+}
+
+func NewDescribeApiForApiAppResponse() (response *DescribeApiForApiAppResponse) {
+    response = &DescribeApiForApiAppResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeApiForApiApp
+// This API is used to query the details of an API deployed at API Gateway.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeApiForApiApp(request *DescribeApiForApiAppRequest) (response *DescribeApiForApiAppResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiForApiAppRequest()
+    }
+    response = NewDescribeApiForApiAppResponse()
     err = c.Send(request, response)
     return
 }
@@ -1057,6 +1465,7 @@ func NewDescribeApisStatusResponse() (response *DescribeApisStatusResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) DescribeApisStatus(request *DescribeApisStatusRequest) (response *DescribeApisStatusResponse, err error) {
     if request == nil {
         request = NewDescribeApisStatusRequest()
@@ -1186,6 +1595,69 @@ func (c *Client) DescribeLogSearch(request *DescribeLogSearchRequest) (response 
     return
 }
 
+func NewDescribePluginRequest() (request *DescribePluginRequest) {
+    request = &DescribePluginRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribePlugin")
+    return
+}
+
+func NewDescribePluginResponse() (response *DescribePluginResponse) {
+    response = &DescribePluginResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePlugin
+// This API is used to query the plugin details by plugin ID.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DescribePlugin(request *DescribePluginRequest) (response *DescribePluginResponse, err error) {
+    if request == nil {
+        request = NewDescribePluginRequest()
+    }
+    response = NewDescribePluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePluginApisRequest() (request *DescribePluginApisRequest) {
+    request = &DescribePluginApisRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribePluginApis")
+    return
+}
+
+func NewDescribePluginApisResponse() (response *DescribePluginApisResponse) {
+    response = &DescribePluginApisResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePluginApis
+// This API is used to query APIs bound with a specified plugin.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DescribePluginApis(request *DescribePluginApisRequest) (response *DescribePluginApisResponse, err error) {
+    if request == nil {
+        request = NewDescribePluginApisRequest()
+    }
+    response = NewDescribePluginApisResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeServiceRequest() (request *DescribeServiceRequest) {
     request = &DescribeServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1308,6 +1780,36 @@ func (c *Client) DescribeServiceEnvironmentStrategy(request *DescribeServiceEnvi
         request = NewDescribeServiceEnvironmentStrategyRequest()
     }
     response = NewDescribeServiceEnvironmentStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeServiceForApiAppRequest() (request *DescribeServiceForApiAppRequest) {
+    request = &DescribeServiceForApiAppRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServiceForApiApp")
+    return
+}
+
+func NewDescribeServiceForApiAppResponse() (response *DescribeServiceForApiAppResponse) {
+    response = &DescribeServiceForApiAppResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeServiceForApiApp
+// This API is used to query the details of a service, such as its description, domain name, and protocol.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeServiceForApiApp(request *DescribeServiceForApiAppRequest) (response *DescribeServiceForApiAppResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceForApiAppRequest()
+    }
+    response = NewDescribeServiceForApiAppResponse()
     err = c.Send(request, response)
     return
 }
@@ -1613,6 +2115,40 @@ func (c *Client) DescribeUsagePlansStatus(request *DescribeUsagePlansStatusReque
     return
 }
 
+func NewDetachPluginRequest() (request *DetachPluginRequest) {
+    request = &DetachPluginRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DetachPlugin")
+    return
+}
+
+func NewDetachPluginResponse() (response *DetachPluginResponse) {
+    response = &DetachPluginResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DetachPlugin
+// This API is used to unbind an API from the plugin.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDAPIIDS = "InvalidParameterValue.InvalidApiIds"
+//  INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DetachPlugin(request *DetachPluginRequest) (response *DetachPluginResponse, err error) {
+    if request == nil {
+        request = NewDetachPluginRequest()
+    }
+    response = NewDetachPluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisableApiKeyRequest() (request *DisableApiKeyRequest) {
     request = &DisableApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1766,10 +2302,12 @@ func NewModifyApiResponse() (response *ModifyApiResponse) {
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INTERNALERROR_SCFEXCEPTION = "InternalError.ScfException"
 //  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
+//  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDAPIBUSINESSTYPE = "InvalidParameterValue.InvalidApiBusinessType"
@@ -1790,6 +2328,7 @@ func NewModifyApiResponse() (response *ModifyApiResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDWSMETHOD = "InvalidParameterValue.InvalidWSMethod"
 //  INVALIDPARAMETERVALUE_LENGTHEXCEEDED = "InvalidParameterValue.LengthExceeded"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
 //  INVALIDPARAMETERVALUE_PARAMETERNOTMATCH = "InvalidParameterValue.ParameterNotMatch"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
 //  LIMITEXCEEDED_APICOUNTLIMITEXCEEDED = "LimitExceeded.ApiCountLimitExceeded"
@@ -1797,6 +2336,7 @@ func NewModifyApiResponse() (response *ModifyApiResponse) {
 //  RESOURCENOTFOUND_INVALIDOAUTHAPI = "ResourceNotFound.InvalidOauthApi"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_INVALIDENDPOINTTYPE = "UnsupportedOperation.InvalidEndpointType"
+//  UNSUPPORTEDOPERATION_MODIFYEIAMAUTHAPI = "UnsupportedOperation.ModifyEIAMAuthApi"
 //  UNSUPPORTEDOPERATION_MODIFYPROTOCOL = "UnsupportedOperation.ModifyProtocol"
 //  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
 func (c *Client) ModifyApi(request *ModifyApiRequest) (response *ModifyApiResponse, err error) {
@@ -1804,6 +2344,46 @@ func (c *Client) ModifyApi(request *ModifyApiRequest) (response *ModifyApiRespon
         request = NewModifyApiRequest()
     }
     response = NewModifyApiResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyApiAppRequest() (request *ModifyApiAppRequest) {
+    request = &ModifyApiAppRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "ModifyApiApp")
+    return
+}
+
+func NewModifyApiAppResponse() (response *ModifyApiAppResponse) {
+    response = &ModifyApiAppResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyApiApp
+// This API is used to modify a created API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_SCFEXCEPTION = "InternalError.ScfException"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEAPI = "UnsupportedOperation.UnsupportedDeleteApi"
+func (c *Client) ModifyApiApp(request *ModifyApiAppRequest) (response *ModifyApiAppResponse, err error) {
+    if request == nil {
+        request = NewModifyApiAppRequest()
+    }
+    response = NewModifyApiAppResponse()
     err = c.Send(request, response)
     return
 }
@@ -1900,6 +2480,40 @@ func (c *Client) ModifyIPStrategy(request *ModifyIPStrategyRequest) (response *M
     return
 }
 
+func NewModifyPluginRequest() (request *ModifyPluginRequest) {
+    request = &ModifyPluginRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "ModifyPlugin")
+    return
+}
+
+func NewModifyPluginResponse() (response *ModifyPluginResponse) {
+    response = &ModifyPluginResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyPlugin
+// This API is used to modify a plugin.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) ModifyPlugin(request *ModifyPluginRequest) (response *ModifyPluginResponse, err error) {
+    if request == nil {
+        request = NewModifyPluginRequest()
+    }
+    response = NewModifyPluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyServiceRequest() (request *ModifyServiceRequest) {
     request = &ModifyServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1920,6 +2534,7 @@ func NewModifyServiceResponse() (response *ModifyServiceResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
@@ -1954,6 +2569,7 @@ func NewModifyServiceEnvironmentStrategyResponse() (response *ModifyServiceEnvir
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
 func (c *Client) ModifyServiceEnvironmentStrategy(request *ModifyServiceEnvironmentStrategyRequest) (response *ModifyServiceEnvironmentStrategyResponse, err error) {
     if request == nil {
@@ -1987,6 +2603,7 @@ func NewModifySubDomainResponse() (response *ModifySubDomainResponse) {
 //  FAILEDOPERATION_CERTIFICATEIDERROR = "FailedOperation.CertificateIdError"
 //  FAILEDOPERATION_PATHMAPPINGSETERROR = "FailedOperation.PathMappingSetError"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 //  FAILEDOPERATION_SETCUSTOMPATHMAPPINGERROR = "FailedOperation.SetCustomPathMappingError"
 //  FAILEDOPERATION_SUBDOMAINFORMATERROR = "FailedOperation.SubDomainFormatError"
@@ -2057,6 +2674,7 @@ func NewReleaseServiceResponse() (response *ReleaseServiceResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -2227,6 +2845,7 @@ func NewUnBindSubDomainResponse() (response *UnBindSubDomainResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_DOMAINNOTBINDSERVICE = "FailedOperation.DomainNotBindService"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 //  FAILEDOPERATION_SUBDOMAINFORMATERROR = "FailedOperation.SubDomainFormatError"
 //  UNSUPPORTEDOPERATION_INVALIDSTATUS = "UnsupportedOperation.InvalidStatus"
@@ -2271,6 +2890,82 @@ func (c *Client) UnReleaseService(request *UnReleaseServiceRequest) (response *U
         request = NewUnReleaseServiceRequest()
     }
     response = NewUnReleaseServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnbindApiAppRequest() (request *UnbindApiAppRequest) {
+    request = &UnbindApiAppRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "UnbindApiApp")
+    return
+}
+
+func NewUnbindApiAppResponse() (response *UnbindApiAppResponse) {
+    response = &UnbindApiAppResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UnbindApiApp
+// This API is used to unbind an application from an API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDENV = "InvalidParameterValue.InvalidEnv"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDBINDENVIRONMENT = "UnsupportedOperation.UnsupportedBindEnvironment"
+func (c *Client) UnbindApiApp(request *UnbindApiAppRequest) (response *UnbindApiAppResponse, err error) {
+    if request == nil {
+        request = NewUnbindApiAppRequest()
+    }
+    response = NewUnbindApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateApiAppKeyRequest() (request *UpdateApiAppKeyRequest) {
+    request = &UpdateApiAppKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "UpdateApiAppKey")
+    return
+}
+
+func NewUpdateApiAppKeyResponse() (response *UpdateApiAppKeyResponse) {
+    response = &UpdateApiAppKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateApiAppKey
+// This API is used to update an application key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_SCFEXCEPTION = "InternalError.ScfException"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEAPI = "UnsupportedOperation.UnsupportedDeleteApi"
+func (c *Client) UpdateApiAppKey(request *UpdateApiAppKeyRequest) (response *UpdateApiAppKeyResponse, err error) {
+    if request == nil {
+        request = NewUpdateApiAppKeyRequest()
+    }
+    response = NewUpdateApiAppKeyResponse()
     err = c.Send(request, response)
     return
 }
@@ -2325,6 +3020,7 @@ func NewUpdateServiceResponse() (response *UpdateServiceResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND = "ResourceNotFound"

@@ -544,6 +544,13 @@ type CreateAutoScalingGroupRequest struct {
 	// Specifies how to assign pay-as-you-go instances and spot instances.
 	// This parameter is valid only when `InstanceAllocationPolicy ` is set to `SPOT_MIXED`.
 	SpotMixedAllocationPolicy *SpotMixedAllocationPolicy `json:"SpotMixedAllocationPolicy,omitempty" name:"SpotMixedAllocationPolicy"`
+
+	// Indicates whether the capacity rebalancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
+	// <br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
+	// <br><li>`FALSE`: no. AS will add instances to meet the desired capacity only after the spot instances are terminated.
+	// 
+	// Default value: `False`.
+	CapacityRebalance *bool `json:"CapacityRebalance,omitempty" name:"CapacityRebalance"`
 }
 
 func (r *CreateAutoScalingGroupRequest) ToJsonString() string {
@@ -581,6 +588,7 @@ func (r *CreateAutoScalingGroupRequest) FromJsonString(s string) error {
 	delete(f, "LoadBalancerHealthCheckGracePeriod")
 	delete(f, "InstanceAllocationPolicy")
 	delete(f, "SpotMixedAllocationPolicy")
+	delete(f, "CapacityRebalance")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAutoScalingGroupRequest has unknown keys!", "")
 	}
@@ -2633,6 +2641,11 @@ type ModifyAutoScalingGroupRequest struct {
 	// Specifies how to assign pay-as-you-go instances and spot instances.
 	// This parameter is valid only when `InstanceAllocationPolicy` is set to `SPOT_MIXED`.
 	SpotMixedAllocationPolicy *SpotMixedAllocationPolicy `json:"SpotMixedAllocationPolicy,omitempty" name:"SpotMixedAllocationPolicy"`
+
+	// Indicates whether the capacity rebalancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
+	// <br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
+	// <br><li>`FALSE`: no. AS will add instances to meet the desired capacity only after the spot instances are terminated.
+	CapacityRebalance *bool `json:"CapacityRebalance,omitempty" name:"CapacityRebalance"`
 }
 
 func (r *ModifyAutoScalingGroupRequest) ToJsonString() string {
@@ -2668,6 +2681,7 @@ func (r *ModifyAutoScalingGroupRequest) FromJsonString(s string) error {
 	delete(f, "LoadBalancerHealthCheckGracePeriod")
 	delete(f, "InstanceAllocationPolicy")
 	delete(f, "SpotMixedAllocationPolicy")
+	delete(f, "CapacityRebalance")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAutoScalingGroupRequest has unknown keys!", "")
 	}

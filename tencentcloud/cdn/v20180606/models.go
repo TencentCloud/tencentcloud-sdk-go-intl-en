@@ -167,6 +167,12 @@ type AddCdnDomainRequest struct {
 
 	// QUIC is in beta now. Please submit an application to join the beta. For more information, please see QUIC product documents.
 	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
+
+	// Access authentication for S3 origin
+	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
+
+	// Access authentication for OSS origin
+	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
 }
 
 func (r *AddCdnDomainRequest) ToJsonString() string {
@@ -215,6 +221,8 @@ func (r *AddCdnDomainRequest) FromJsonString(s string) error {
 	delete(f, "Ipv6Access")
 	delete(f, "OfflineCache")
 	delete(f, "Quic")
+	delete(f, "AwsPrivateAccess")
+	delete(f, "OssPrivateAccess")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddCdnDomainRequest has unknown keys!", "")
 	}
@@ -753,6 +761,9 @@ type BriefDomain struct {
 	// overseas: locked outside Mainland China
 	// global: locked globally
 	Readonly *string `json:"Readonly,omitempty" name:"Readonly"`
+
+	// Product of the domain name, either `cdn` or `ecdn`.
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 type Cache struct {
@@ -1344,6 +1355,9 @@ type DescribeBillingDataRequest struct {
 	// bandwidth: bill-by-bandwidth
 	// Default value: `bandwidth`
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
+
+	// Specifies the product to query, either `cdn` (default) or `ecdn`.
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribeBillingDataRequest) ToJsonString() string {
@@ -1366,6 +1380,7 @@ func (r *DescribeBillingDataRequest) FromJsonString(s string) error {
 	delete(f, "Area")
 	delete(f, "District")
 	delete(f, "Metric")
+	delete(f, "Product")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillingDataRequest has unknown keys!", "")
 	}
@@ -1415,9 +1430,13 @@ type DescribeCdnDataRequest struct {
 	// The gap between the start time and end time should be less than or equal to 90 days.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Specifies the query metric, which can be:
+	// Specifies the metric to query, which can be:
 	// `flux`: traffic (in bytes)
+	// `fluxIn`: upstream traffic (in bytes), only used for the `ecdn` product
+	// `fluxOut`: downstream traffic (in bytes), only used for the `ecdn` product
 	// `bandwidth`: bandwidth (in bps)
+	// `bandwidthIn`: upstream bandwidth (in bps), only used for the `ecdn` product
+	// `bandwidthOut`: downstream bandwidth (in bps), only used for the `ecdn` product
 	// `request`: number of requests
 	// `hitRequest`: number of hit requests
 	// `requestHitRate`: request hit rate (in % with two decimal digits)
@@ -1428,7 +1447,7 @@ type DescribeCdnDataRequest struct {
 	// `3xx`: lists the number of all status codes starting with **3** returned during the queried period based on the specified interval (if any)
 	// `4xx`: lists the number of all status codes starting with **4** returned during the queried period based on the specified interval (if any)
 	// `5xx`: lists the number of all status codes starting with **5** returned during the queried period based on the specified interval (if any)
-	// It is supported to specify a status code for query. The return will be empty if the status code has never been generated.
+	// Specifies the status code to query. The return will be empty if the status code has never been generated.
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
 
 	// Specifies the list of domain names to be queried
@@ -1487,6 +1506,9 @@ type DescribeCdnDataRequest struct {
 	// `server`: specifies to query data on the service region where Tencent Cloud CDN nodes are located;
 	// `client`: specifies to query data on the client region where the request devices are located.
 	AreaType *string `json:"AreaType,omitempty" name:"AreaType"`
+
+	// Specifies the product to query, either `cdn` (default) or `ecdn`.
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribeCdnDataRequest) ToJsonString() string {
@@ -1515,6 +1537,7 @@ func (r *DescribeCdnDataRequest) FromJsonString(s string) error {
 	delete(f, "IpProtocol")
 	delete(f, "Area")
 	delete(f, "AreaType")
+	delete(f, "Product")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCdnDataRequest has unknown keys!", "")
 	}
@@ -1734,6 +1757,12 @@ type DescribeCertDomainsRequest struct {
 
 	// Base64-encoded string of certificate in PEM format
 	Cert *string `json:"Cert,omitempty" name:"Cert"`
+
+	// Managed certificate ID. `Cert` and `CertId` cannot be both empty. If they’re both filled in, `CerID` prevails.
+	CertId *string `json:"CertId,omitempty" name:"CertId"`
+
+	// Product of the domain name, either `cdn` (default) or `ecdn`.
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribeCertDomainsRequest) ToJsonString() string {
@@ -1749,6 +1778,8 @@ func (r *DescribeCertDomainsRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Cert")
+	delete(f, "CertId")
+	delete(f, "Product")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCertDomainsRequest has unknown keys!", "")
 	}
@@ -2223,6 +2254,9 @@ type DescribePayTypeRequest struct {
 	// `overseas`: queries billing methods outside Mainland China.
 	// Default value: `mainland`.
 	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Specifies the product to query, either `cdn` (default) or `ecdn`.
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *DescribePayTypeRequest) ToJsonString() string {
@@ -2238,6 +2272,7 @@ func (r *DescribePayTypeRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Area")
+	delete(f, "Product")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePayTypeRequest has unknown keys!", "")
 	}
@@ -2251,7 +2286,8 @@ type DescribePayTypeResponse struct {
 		// Billing modes:
 	// `flux`: bill-by-traffic
 	// `bandwidth`: bill-by-bandwidth
-	// When you switch the billing mode for a daily-billing-cycle account, if there is bandwidth usage on the day, this field indicates the billing mode that will take effect on the next day; otherwise, it indicates the billing mode that has already taken effect
+	// `request`: bill-by-request
+	// In case the billing mode is changed in the day, if there is bandwidth consumption occurred in the current day, the billing mode returned is the new billing mode for the next day. If no bandwidth consumption occurs, it indicates the current billing mode.
 		PayType *string `json:"PayType,omitempty" name:"PayType"`
 
 		// Billing cycle:
@@ -2259,12 +2295,11 @@ type DescribePayTypeResponse struct {
 	// month: monthly settlement
 		BillingCycle *string `json:"BillingCycle,omitempty" name:"BillingCycle"`
 
-		// Billing method:
-	// monthMax: billed by the monthly average of daily peak traffic (monthly settlement)
-	// day95: billed by the daily 95th percentile bandwidth (monthly settlement)
-	// month95: billed by the monthly 95th percentile bandwidth (monthly settlement)
-	// sum: billed by the total traffic (daily or monthly settlement)
-	// max: billed by the peak bandwidth (daily settlement)
+		// `monthMax`: billed by the monthly average of daily peak traffic (monthly settlement)
+	// `day95`: billed by the daily 95th percentile bandwidth (monthly settlement)
+	// `month95`: billed by the monthly 95th percentile bandwidth (monthly settlement)
+	// `sum`: billed by the total traffic/total requests (daily or monthly settlement)
+	// `max`: billed by the peak bandwidth (daily settlement)
 		StatType *string `json:"StatType,omitempty" name:"StatType"`
 
 		// Billing method outside Mainland China:
@@ -2272,9 +2307,10 @@ type DescribePayTypeResponse struct {
 	// `multiple`: separate billing for different regions
 		RegionType *string `json:"RegionType,omitempty" name:"RegionType"`
 
-		// Currently billing mode in effect:
+		// The current billing mode in effect:
 	// `flux`: bill-by-traffic
 	// `bandwidth`: bill-by-bandwidth
+	// `request`: bill-by-request
 		CurrentPayType *string `json:"CurrentPayType,omitempty" name:"CurrentPayType"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2954,6 +2990,14 @@ type DetailDomain struct {
 	// QUIC configuration
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
+
+	// Access authentication for OSS origin
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
+
+	// WebSocket configuration.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
 }
 
 type DisableCachesRequest struct {
@@ -2990,6 +3034,10 @@ type DisableCachesResponse struct {
 		// Submission result
 	// Note: This field may return null, indicating that no valid values can be obtained.
 		CacheOptResult *CacheOptResult `json:"CacheOptResult,omitempty" name:"CacheOptResult"`
+
+		// Task ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3072,18 +3120,18 @@ type DomainAreaConfig struct {
 
 type DomainFilter struct {
 
-	// Filter field name, the list supported is as follows:
-	// - origin: primary origin server.
-	// - domain: domain name.
-	// - resourceId: domain name id.
-	// - status: domain name status. Values include `online`, `offline`, or `processing`.
-	// - serviceType: service type. Values include `web`, `download`, or `media`.
+	// Filters field name, which includes:
+	// - `origin`: primary origin server.
+	// - `domain`: domain name.
+	// - `resourceId`: domain name ID.
+	// - `status`: domain name status. Valid values: `online`, `offline`, and `processing`.
+	// - `serviceType`: service type. Valid values: `web`, `download`, and `media`.
 	// - projectId: project ID.
-	// - domainType: primary origin server type, `cname` indicates external origin, `COS` indicates COS origin.
-	// - fullUrlCache: full-path cache, which can be on or off.
-	// - https: whether to configure HTTPS, which can be on, off or processing.
-	// - originPullProtocol: origin-pull protocol type. HTTP, follow, or HTTPS are supported.
-	// - tagKey: tag key.
+	// - `domainType`: primary origin server type. Valid values: `cname` (external origin), `COS` (COS origin), and `third_party` (3rd-party object storage origin).
+	// - `fullUrlCache`: whether to enable full-path cache, which can be `on` or `off`.
+	// - `https`: whether to configure HTTPS, which can be `on`, `off` or `processing`.
+	// - `originPullProtocol`: origin-pull protocol type, which can be `http`, `follow`, or `https`.
+	// - `tagKey`: tag key.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter field value.
@@ -3297,14 +3345,14 @@ type ForceRedirect struct {
 type GetDisableRecordsRequest struct {
 	*tchttp.BaseRequest
 
+	// Specifies the URL to be queried
+	Url *string `json:"Url,omitempty" name:"Url"`
+
 	// Starting time, such as `2018-12-12 10:24:00`
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time, such as 2018-12-14 10:24:00
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Specifies the URL to be queried
-	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Current URL status
 	// disable: The URL remains disabled, and accessing it will return an error 403
@@ -3316,6 +3364,9 @@ type GetDisableRecordsRequest struct {
 
 	// Limit on paged queries. Default value: 20
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Task ID. The task ID and start time cannot be both left empty.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
 
 func (r *GetDisableRecordsRequest) ToJsonString() string {
@@ -3330,12 +3381,13 @@ func (r *GetDisableRecordsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "Url")
 	delete(f, "StartTime")
 	delete(f, "EndTime")
-	delete(f, "Url")
 	delete(f, "Status")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "TaskId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetDisableRecordsRequest has unknown keys!", "")
 	}
@@ -3856,6 +3908,9 @@ type ListTopDataRequest struct {
 	// server: specifies to query data of service region (where a CDN node is located)
 	// client: specifies to query data of the client region (where a user request device is located). If `Metric` is `host`, `Filter` can only be `flux`, `request`, or `bandwidth`
 	AreaType *string `json:"AreaType,omitempty" name:"AreaType"`
+
+	// Specifies the product to query, either `cdn` (default) or `ecdn`.
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *ListTopDataRequest) ToJsonString() string {
@@ -3880,6 +3935,7 @@ func (r *ListTopDataRequest) FromJsonString(s string) error {
 	delete(f, "Code")
 	delete(f, "Area")
 	delete(f, "AreaType")
+	delete(f, "Product")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListTopDataRequest has unknown keys!", "")
 	}
@@ -4270,6 +4326,20 @@ type OriginPullTimeout struct {
 	// The origin-pull receipt timeout (in seconds). Valid range: 10-60.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ReceiveTimeout *uint64 `json:"ReceiveTimeout,omitempty" name:"ReceiveTimeout"`
+}
+
+type OssPrivateAccess struct {
+
+	// Whether to enable access authentication. Valid values: `on`, `off`.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Access ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
+
+	// Key.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 }
 
 type OverseaConfig struct {
@@ -4970,11 +5040,15 @@ type ScdnAclGroup struct {
 	// Specific configurations
 	Configure []*ScdnAclRule `json:"Configure,omitempty" name:"Configure"`
 
-	// Rule action, which is generally `refuse`.
+	// Rule action, which can be `refuse` or `redirect`.
 	Result *string `json:"Result,omitempty" name:"Result"`
 
 	// Whether the rule is effective. Valid values: `active` and `inactive`.
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Error page configuration.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ErrorPage *ScdnErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
 }
 
 type ScdnAclRule struct {
@@ -5520,6 +5594,10 @@ type TopicInfo struct {
 	// Creation time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Either `cdn` or `ecdn`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Channel *string `json:"Channel,omitempty" name:"Channel"`
 }
 
 type TpgAdapter struct {
@@ -5658,6 +5736,12 @@ type UpdateDomainConfigRequest struct {
 
 	// QUIC is in beta now. Please submit an application to join the beta. For more information, please see QUIC product documents.
 	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
+
+	// Access authentication for OSS origin
+	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
+
+	// WebSocket configuration.
+	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {
@@ -5712,6 +5796,8 @@ func (r *UpdateDomainConfigRequest) FromJsonString(s string) error {
 	delete(f, "OfflineCache")
 	delete(f, "OriginCombine")
 	delete(f, "Quic")
+	delete(f, "OssPrivateAccess")
+	delete(f, "WebSocket")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateDomainConfigRequest has unknown keys!", "")
 	}
@@ -5979,6 +6065,18 @@ type WafSubRuleStatus struct {
 
 	// List of rule IDs
 	SubIds []*int64 `json:"SubIds,omitempty" name:"SubIds"`
+}
+
+type WebSocket struct {
+
+	// Whether to enable custom WebSocket timeout setting. When it’s `off`: WebSocket connection is supported, and the default timeout period is 15 seconds. To change the timeout period, please set it to `on`.
+	// 
+	// * WebSocket is now only available for beta users. To use it, please submit a ticket.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Sets the timeout period in seconds. Maximum value: 65.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 }
 
 type WebpAdapter struct {

@@ -86,6 +86,90 @@ type APIDocs struct {
 	APIDocSet []*APIDoc `json:"APIDocSet,omitempty" name:"APIDocSet"`
 }
 
+type ApiAppApiInfo struct {
+
+	// Application name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiAppName *string `json:"ApiAppName,omitempty" name:"ApiAppName"`
+
+	// Application ID
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// API ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// API name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiName *string `json:"ApiName,omitempty" name:"ApiName"`
+
+	// Service ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Binding authorization time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AuthorizedTime *string `json:"AuthorizedTime,omitempty" name:"AuthorizedTime"`
+
+	// API region
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiRegion *string `json:"ApiRegion,omitempty" name:"ApiRegion"`
+
+	// Authorized binding environment
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+}
+
+type ApiAppApiInfos struct {
+
+	// Quantity
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Information array of the API bound to the application
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiAppApiSet []*ApiAppApiInfo `json:"ApiAppApiSet,omitempty" name:"ApiAppApiSet"`
+}
+
+type ApiAppInfo struct {
+
+	// Application name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiAppName *string `json:"ApiAppName,omitempty" name:"ApiAppName"`
+
+	// Application ID
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Application SECRET
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiAppSecret *string `json:"ApiAppSecret,omitempty" name:"ApiAppSecret"`
+
+	// Application description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiAppDesc *string `json:"ApiAppDesc,omitempty" name:"ApiAppDesc"`
+
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Modification time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
+
+	// Application KEY
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiAppKey *string `json:"ApiAppKey,omitempty" name:"ApiAppKey"`
+}
+
+type ApiAppInfos struct {
+
+	// Number of applications
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Application information array
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiAppSet []*ApiAppInfo `json:"ApiAppSet,omitempty" name:"ApiAppSet"`
+}
+
 type ApiEnvironmentStrategy struct {
 
 	// Unique API ID.
@@ -390,6 +474,15 @@ type ApiInfo struct {
 	Base64EncodedTriggerRules []*Base64EncodedTriggerRule `json:"Base64EncodedTriggerRules,omitempty" name:"Base64EncodedTriggerRules"`
 }
 
+type ApiInfoSummary struct {
+
+	// Total number of APIs that can use this plugin
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Information of the APIs that can use this plugin
+	ApiSet []*AvailableApiInfo `json:"ApiSet,omitempty" name:"ApiSet"`
+}
+
 type ApiKey struct {
 
 	// Created API key ID.
@@ -517,6 +610,131 @@ type ApisStatus struct {
 	ApiIdStatusSet []*DesApisStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet"`
 }
 
+type AttachPluginRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the plugin to be bound
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// API environment
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// List of APIs bound with the plugin
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+}
+
+func (r *AttachPluginRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AttachPluginRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginId")
+	delete(f, "ServiceId")
+	delete(f, "EnvironmentName")
+	delete(f, "ApiIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AttachPluginRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AttachPluginResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether binding succeeded.
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AttachPluginResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AttachPluginResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AttachedApiInfo struct {
+
+	// ID of the service to which the API belongs
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Name of the service to which the API belongs
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Description of the service to which the API belongs
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
+
+	// API ID
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// API name
+	ApiName *string `json:"ApiName,omitempty" name:"ApiName"`
+
+	// API description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiDesc *string `json:"ApiDesc,omitempty" name:"ApiDesc"`
+
+	// Environment of the API bound with the plugin
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// Time when the plugin was bound to the API
+	AttachedTime *string `json:"AttachedTime,omitempty" name:"AttachedTime"`
+}
+
+type AttachedApiSummary struct {
+
+	// Number of APIs bound with the plugin
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Information of the API bound with the plugin
+	AttachedApis []*AttachedApiInfo `json:"AttachedApis,omitempty" name:"AttachedApis"`
+}
+
+type AvailableApiInfo struct {
+
+	// API ID
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// API name
+	ApiName *string `json:"ApiName,omitempty" name:"ApiName"`
+
+	// API type
+	ApiType *string `json:"ApiType,omitempty" name:"ApiType"`
+
+	// API path
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// API method
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Whether the API is bound with another plugin
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AttachedOtherPlugin *bool `json:"AttachedOtherPlugin,omitempty" name:"AttachedOtherPlugin"`
+
+	// Whether the API is bound with the current plugin
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsAttached *bool `json:"IsAttached,omitempty" name:"IsAttached"`
+}
+
 type Base64EncodedTriggerRule struct {
 
 	// Header for triggering encoding. Valid values are `Accept` and `Content_Type`, corresponding to the `Accept` and `Content-Type` headers in the data stream request, respectively.
@@ -531,6 +749,68 @@ type Base64EncodedTriggerRule struct {
 	//     "application/vnd.rn-rn_music_package"
 	// ] are valid.
 	Value []*string `json:"Value,omitempty" name:"Value"`
+}
+
+type BindApiAppRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of the application to be bound.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Environment to be bound.
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// Unique ID of the service to be bound.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique ID of the API to be bound.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+}
+
+func (r *BindApiAppRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindApiAppRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiAppId")
+	delete(f, "Environment")
+	delete(f, "ServiceId")
+	delete(f, "ApiId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindApiAppRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BindApiAppResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether binding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BindApiAppResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindApiAppResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type BindEnvironmentRequest struct {
@@ -922,6 +1202,60 @@ func (r *CreateAPIDocResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateApiAppRequest struct {
+	*tchttp.BaseRequest
+
+	// Custom application name.
+	ApiAppName *string `json:"ApiAppName,omitempty" name:"ApiAppName"`
+
+	// Application description
+	ApiAppDesc *string `json:"ApiAppDesc,omitempty" name:"ApiAppDesc"`
+}
+
+func (r *CreateApiAppRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateApiAppRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiAppName")
+	delete(f, "ApiAppDesc")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApiAppRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateApiAppResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// New application details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *ApiAppInfo `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateApiAppResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateApiAppResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateApiKeyRequest struct {
 	*tchttp.BaseRequest
 
@@ -1124,6 +1458,9 @@ type CreateApiRequest struct {
 
 	// Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
 	IsBase64Encoded *bool `json:"IsBase64Encoded,omitempty" name:"IsBase64Encoded"`
+
+	// SCF function type, which takes effect if the backend type is `SCF`. Valid values: `EVENT` and `HTTP`.
+	ServiceScfFunctionType *string `json:"ServiceScfFunctionType,omitempty" name:"ServiceScfFunctionType"`
 }
 
 func (r *CreateApiRequest) ToJsonString() string {
@@ -1184,6 +1521,7 @@ func (r *CreateApiRequest) FromJsonString(s string) error {
 	delete(f, "TargetNamespaceId")
 	delete(f, "UserType")
 	delete(f, "IsBase64Encoded")
+	delete(f, "ServiceScfFunctionType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApiRequest has unknown keys!", "")
 	}
@@ -1292,6 +1630,67 @@ func (r *CreateIPStrategyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateIPStrategyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreatePluginRequest struct {
+	*tchttp.BaseRequest
+
+	// Custom plugin name. A plugin name contain up to 50 characters out of a-z, A-Z, 0-9, and _, which must begin with a letter and end with a letter or a number.
+	PluginName *string `json:"PluginName,omitempty" name:"PluginName"`
+
+	// Plugin type. Valid value: `IPControl`.
+	PluginType *string `json:"PluginType,omitempty" name:"PluginType"`
+
+	// Plugin definition statement in json format
+	PluginData *string `json:"PluginData,omitempty" name:"PluginData"`
+
+	// Plugin description within 200 characters
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *CreatePluginRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePluginRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginName")
+	delete(f, "PluginType")
+	delete(f, "PluginData")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePluginRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreatePluginResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Details of the new plugin
+		Result *Plugin `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreatePluginResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePluginResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1513,6 +1912,56 @@ func (r *DeleteAPIDocResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteApiAppRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique application ID.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+}
+
+func (r *DeleteApiAppRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteApiAppRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteApiAppRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteApiAppResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether deletion succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteApiAppResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteApiAppResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteApiKeyRequest struct {
 	*tchttp.BaseRequest
 
@@ -1668,6 +2117,55 @@ func (r *DeleteIPStrategyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteIPStrategyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeletePluginRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the plugin to be deleted
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+}
+
+func (r *DeletePluginRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeletePluginRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeletePluginRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeletePluginResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Result of the deletion action
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeletePluginResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeletePluginResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1934,8 +2432,8 @@ type DesApisStatus struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsDebugAfterCharge *bool `json:"IsDebugAfterCharge,omitempty" name:"IsDebugAfterCharge"`
 
-	// API authentication type. Valid values: SECRET (key pair authentication), NONE (no authentication), OAUTH.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// API authentication type. Valid values: `SECRET` (key pair authentication), `NONE` (no authentication), `OAUTH`, and `EIAM`
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AuthType *string `json:"AuthType,omitempty" name:"AuthType"`
 
 	// OAuth API type, which is valid if `AuthType` is `OAUTH`. Valid values: NORMAL (business API), OAUTH (authorization API).
@@ -2069,6 +2567,307 @@ func (r *DescribeAPIDocsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeAllPluginApisRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the service to be queried
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// ID of the plugin to be queried
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Environment information
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeAllPluginApisRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllPluginApisRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ServiceId")
+	delete(f, "PluginId")
+	delete(f, "EnvironmentName")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllPluginApisRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAllPluginApisResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of APIs that ca use this plugin
+		Result *ApiInfoSummary `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAllPluginApisResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllPluginApisResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiAppBindApisStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Application ID
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: ApiId, ApiName, ServiceId, Environment, KeyWord (match with `name` or ID).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeApiAppBindApisStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiAppBindApisStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiAppId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApiAppBindApisStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiAppBindApisStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of APIs bound to the application.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *ApiAppApiInfos `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeApiAppBindApisStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiAppBindApisStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiAppRequest struct {
+	*tchttp.BaseRequest
+
+	// Application ID.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+}
+
+func (r *DescribeApiAppRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiAppRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApiAppRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiAppResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Application details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *ApiAppInfos `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeApiAppResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiAppResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiAppsStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: ApiAppId, ApiAppName, KeyWord (match with `name` or ID).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeApiAppsStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiAppsStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApiAppsStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiAppsStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Application list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *ApiAppInfos `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeApiAppsStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiAppsStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiBindApiAppsStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Array of API IDs
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: ApiAppId, Environment, KeyWord (match with `name` or ID).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeApiBindApiAppsStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiBindApiAppsStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ServiceId")
+	delete(f, "ApiIds")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApiBindApiAppsStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiBindApiAppsStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of APIs bound to the application.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *ApiAppApiInfos `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeApiBindApiAppsStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiBindApiAppsStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeApiEnvironmentStrategyRequest struct {
 	*tchttp.BaseRequest
 
@@ -2132,6 +2931,63 @@ func (r *DescribeApiEnvironmentStrategyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeApiEnvironmentStrategyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiForApiAppRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique service ID of the API
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique API ID
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// API region
+	ApiRegion *string `json:"ApiRegion,omitempty" name:"ApiRegion"`
+}
+
+func (r *DescribeApiForApiAppRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiForApiAppRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ServiceId")
+	delete(f, "ApiId")
+	delete(f, "ApiRegion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApiForApiAppRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeApiForApiAppResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// API details.
+		Result *ApiInfo `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeApiForApiAppResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiForApiAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2733,6 +3589,120 @@ func (r *DescribeLogSearchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribePluginApisRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the plugin to be queried
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribePluginApisRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePluginApisRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePluginApisRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePluginApisResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of APIs bound with the plugin
+		Result *AttachedApiSummary `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribePluginApisResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePluginApisResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePluginRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the plugin to be queried
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribePluginRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePluginRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePluginRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePluginResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Plugin details
+		Result *Plugin `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribePluginResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePluginResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeServiceEnvironmentListRequest struct {
 	*tchttp.BaseRequest
 
@@ -2908,6 +3878,133 @@ func (r *DescribeServiceEnvironmentStrategyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeServiceEnvironmentStrategyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeServiceForApiAppRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of the service to be queried.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Service region.
+	ApiRegion *string `json:"ApiRegion,omitempty" name:"ApiRegion"`
+}
+
+func (r *DescribeServiceForApiAppRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeServiceForApiAppRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ServiceId")
+	delete(f, "ApiRegion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeServiceForApiAppRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeServiceForApiAppResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Unique service ID.
+		ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+		// Service environment list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		AvailableEnvironments []*string `json:"AvailableEnvironments,omitempty" name:"AvailableEnvironments"`
+
+		// Service name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+		// Service description.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
+
+		// Protocol supported by service. Valid values: http, https, http&https.
+		Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+		// Service creation time.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+		// Service modification time.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
+
+		// Self-Deployed cluster name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
+
+		// Network type list. INNER: private network access; OUTER: public network access.
+		NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
+
+		// Subdomain name for private network access.
+		InternalSubDomain *string `json:"InternalSubDomain,omitempty" name:"InternalSubDomain"`
+
+		// Subdomain name for public network access.
+		OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
+
+		// Service port number for HTTP access over private network.
+		InnerHttpPort *int64 `json:"InnerHttpPort,omitempty" name:"InnerHttpPort"`
+
+		// Port number for HTTPS access over private network.
+		InnerHttpsPort *int64 `json:"InnerHttpsPort,omitempty" name:"InnerHttpsPort"`
+
+		// Total number of APIs.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ApiTotalCount *int64 `json:"ApiTotalCount,omitempty" name:"ApiTotalCount"`
+
+		// API list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ApiIdStatusSet []*ApiIdStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet"`
+
+		// Total number of usage plans.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		UsagePlanTotalCount *int64 `json:"UsagePlanTotalCount,omitempty" name:"UsagePlanTotalCount"`
+
+		// Usage plan array.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		UsagePlanList []*UsagePlan `json:"UsagePlanList,omitempty" name:"UsagePlanList"`
+
+		// IP version.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
+
+		// Service user type.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		UserType *string `json:"UserType,omitempty" name:"UserType"`
+
+		// Reserved field.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		SetId *int64 `json:"SetId,omitempty" name:"SetId"`
+
+		// Tag bound to the service.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeServiceForApiAppResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeServiceForApiAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3551,6 +4648,67 @@ func (r *DescribeUsagePlansStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DetachPluginRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the plugin to be unbound
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// API environment
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// ID of the API to unbind from the plugin
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+}
+
+func (r *DetachPluginRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetachPluginRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginId")
+	delete(f, "ServiceId")
+	delete(f, "EnvironmentName")
+	delete(f, "ApiId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetachPluginRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DetachPluginResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether unbinding succeeded.
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DetachPluginResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetachPluginResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DisableApiKeyRequest struct {
 	*tchttp.BaseRequest
 
@@ -4014,6 +5172,64 @@ func (r *ModifyAPIDocResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyApiAppRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique application ID.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Modified application name
+	ApiAppName *string `json:"ApiAppName,omitempty" name:"ApiAppName"`
+
+	// Modified application description
+	ApiAppDesc *string `json:"ApiAppDesc,omitempty" name:"ApiAppDesc"`
+}
+
+func (r *ModifyApiAppRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyApiAppRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiAppId")
+	delete(f, "ApiAppName")
+	delete(f, "ApiAppDesc")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApiAppRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyApiAppResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether modification succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyApiAppResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyApiAppResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyApiEnvironmentStrategyRequest struct {
 	*tchttp.BaseRequest
 
@@ -4430,6 +5646,67 @@ func (r *ModifyIPStrategyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyPluginRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the plugin to be modified
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Plugin name to be modified. A plugin name can contain up to 50 characters out of `a-z`, `A-Z`, `0-9`, and `_`, which must begin with a letter and end with a letter or a number.
+	PluginName *string `json:"PluginName,omitempty" name:"PluginName"`
+
+	// Plugin description to be modified. A description is within 200 characters.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Plugin definition statement to be modified. The json format is supported.
+	PluginData *string `json:"PluginData,omitempty" name:"PluginData"`
+}
+
+func (r *ModifyPluginRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyPluginRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginId")
+	delete(f, "PluginName")
+	delete(f, "Description")
+	delete(f, "PluginData")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPluginRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyPluginResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether modification succeeded.
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyPluginResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyPluginResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyServiceEnvironmentStrategyRequest struct {
 	*tchttp.BaseRequest
 
@@ -4714,6 +5991,39 @@ type PathMapping struct {
 	Environment *string `json:"Environment,omitempty" name:"Environment"`
 }
 
+type Plugin struct {
+
+	// Plugin ID
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Plugin name
+	PluginName *string `json:"PluginName,omitempty" name:"PluginName"`
+
+	// Plugin type
+	PluginType *string `json:"PluginType,omitempty" name:"PluginType"`
+
+	// Plugin definition statement
+	PluginData *string `json:"PluginData,omitempty" name:"PluginData"`
+
+	// Plugin description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Plugin creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Plugin modification time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used
+	ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
+
+	// Total number of APIs bound with the plugin
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AttachedApiTotalCount *int64 `json:"AttachedApiTotalCount,omitempty" name:"AttachedApiTotalCount"`
+
+	// Information of the API bound with the plugin
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AttachedApis []*AttachedApiInfo `json:"AttachedApis,omitempty" name:"AttachedApis"`
+}
+
 type ReleaseService struct {
 
 	// Release remarks.
@@ -4981,7 +6291,7 @@ type Service struct {
 
 type ServiceConfig struct {
 
-	// Backend type, which takes effect when VPC is enabled. Currently, only `clb` is supported.
+	// Backend type, which takes effect when VPC is enabled. Valid values: `clb` and `upstream` (VPC channel)
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// Unique VPC ID.
@@ -5477,6 +6787,126 @@ func (r *UnReleaseServiceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UnReleaseServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UnbindApiAppRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of the application to be bound.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Environment to be bound.
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// Unique ID of the service to be bound.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique ID of the API to be bound.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+}
+
+func (r *UnbindApiAppRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindApiAppRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiAppId")
+	delete(f, "Environment")
+	delete(f, "ServiceId")
+	delete(f, "ApiId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnbindApiAppRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UnbindApiAppResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether unbinding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UnbindApiAppResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindApiAppResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateApiAppKeyRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique application ID.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Application Key.
+	ApiAppKey *string `json:"ApiAppKey,omitempty" name:"ApiAppKey"`
+
+	// Application Secret.
+	ApiAppSecret *string `json:"ApiAppSecret,omitempty" name:"ApiAppSecret"`
+}
+
+func (r *UpdateApiAppKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateApiAppKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiAppId")
+	delete(f, "ApiAppKey")
+	delete(f, "ApiAppSecret")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateApiAppKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateApiAppKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether update succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Result *bool `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateApiAppKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateApiAppKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
