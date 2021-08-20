@@ -483,7 +483,7 @@ type CreateAccountsRequest struct {
 	// Remarks
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// The maximum number of instance connections supported by the new account
+	// Maximum connections of the new account. Default value: `10240`. Maximum value: `10240`.
 	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 }
 
@@ -4932,7 +4932,7 @@ type ModifyAccountMaxUserConnectionsRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// The maximum number of instance connections supported by an account
+	// Maximum connections of the account. Maximum value: `10240`.
 	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 }
 
@@ -7362,6 +7362,9 @@ type UpgradeDBInstanceRequest struct {
 
 	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked: QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+	FastUpgrade *int64 `json:"FastUpgrade,omitempty" name:"FastUpgrade"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {
@@ -7388,6 +7391,7 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "InstanceRole")
 	delete(f, "DeviceType")
 	delete(f, "Cpu")
+	delete(f, "FastUpgrade")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceRequest has unknown keys!", "")
 	}

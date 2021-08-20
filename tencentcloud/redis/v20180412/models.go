@@ -47,6 +47,59 @@ type Account struct {
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
+type ApplyParamsTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID list
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// The ID of the parameter template to be applied
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *ApplyParamsTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyParamsTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "TemplateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyParamsTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ApplyParamsTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		TaskIds []*int64 `json:"TaskIds,omitempty" name:"TaskIds"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ApplyParamsTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyParamsTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AssociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
@@ -99,6 +152,21 @@ func (r *AssociateSecurityGroupsResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *AssociateSecurityGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type BackupDownloadInfo struct {
+
+	// Backup file name
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// Backup file size in bytes. If the parameter value is `0`, the backup file size is unknown.
+	FileSize *uint64 `json:"FileSize,omitempty" name:"FileSize"`
+
+	// Address (valid for 6 hours) used to download the backup file over a public network
+	DownloadUrl *string `json:"DownloadUrl,omitempty" name:"DownloadUrl"`
+
+	// Address (valid for 6 hours) used to download the backup file over a private network
+	InnerDownloadUrl *string `json:"InnerDownloadUrl,omitempty" name:"InnerDownloadUrl"`
 }
 
 type BigKeyInfo struct {
@@ -376,9 +444,6 @@ func (r *CreateInstanceAccountResponse) FromJsonString(s string) error {
 type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// Availability zone ID of the instance. For more information, please see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
-
 	// Instance type. Valid values: 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture).
 	TypeId *uint64 `json:"TypeId,omitempty" name:"TypeId"`
 
@@ -393,6 +458,9 @@ type CreateInstancesRequest struct {
 
 	// Billing method. 0: pay as you go
 	BillingMode *int64 `json:"BillingMode,omitempty" name:"BillingMode"`
+
+	// Availability zone ID of the instance. For more information, please see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
 	// Instance password. If the input parameter `NoAuth` is `true` and a VPC is used, the `Password` is optional; otherwise, it is required.
 	// If the instance type parameter `TypeId` indicates Redis 2.8, 4.0, or 5.0, the password cannot start with "/" and must contain 8-30 characters which are comprised of at least two of the following: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
@@ -437,6 +505,12 @@ type CreateInstancesRequest struct {
 
 	// The tag bound with the instance to be purchased
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// ID of the parameter template applied to the created instance. If this parameter is left blank, the default parameter template will be applied.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -451,12 +525,12 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "ZoneId")
 	delete(f, "TypeId")
 	delete(f, "MemSize")
 	delete(f, "GoodsNum")
 	delete(f, "Period")
 	delete(f, "BillingMode")
+	delete(f, "ZoneId")
 	delete(f, "Password")
 	delete(f, "VpcId")
 	delete(f, "SubnetId")
@@ -471,6 +545,8 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "NoAuth")
 	delete(f, "NodeSet")
 	delete(f, "ResourceTags")
+	delete(f, "ZoneName")
+	delete(f, "TemplateId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
@@ -500,6 +576,71 @@ func (r *CreateInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateParamTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Parameter template name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Parameter template description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture). If `TempateId` is specified, this parameter can be left blank; otherwise, it is required.
+	ProductType *uint64 `json:"ProductType,omitempty" name:"ProductType"`
+
+	// ID of the source parameter template. You can create a template by copying the source parameter template.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Parameter list.
+	ParamList []*InstanceParam `json:"ParamList,omitempty" name:"ParamList"`
+}
+
+func (r *CreateParamTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateParamTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "Description")
+	delete(f, "ProductType")
+	delete(f, "TemplateId")
+	delete(f, "ParamList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateParamTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateParamTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Parameter template ID.
+		TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateParamTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateParamTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -571,6 +712,52 @@ func (r *DeleteInstanceAccountResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteInstanceAccountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteParamTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Parameter template ID.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *DeleteParamTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteParamTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TemplateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteParamTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteParamTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteParamTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteParamTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -668,6 +855,14 @@ type DescribeBackupUrlResponse struct {
 
 		// Download address on the private network (valid for 6 hours)
 		InnerDownloadUrl []*string `json:"InnerDownloadUrl,omitempty" name:"InnerDownloadUrl"`
+
+		// File name (only valid for TencentDB for Tendis instances)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Filenames []*string `json:"Filenames,omitempty" name:"Filenames"`
+
+		// List of backup file information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		BackupInfos []*BackupDownloadInfo `json:"BackupInfos,omitempty" name:"BackupInfos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2103,6 +2298,130 @@ func (r *DescribeMaintenanceWindowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeParamTemplateInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Parameter template ID.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *DescribeParamTemplateInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParamTemplateInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TemplateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeParamTemplateInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeParamTemplateInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of instance parameters
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Parameter template ID
+		TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+		// Parameter template name
+		Name *string `json:"Name,omitempty" name:"Name"`
+
+		// Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture)
+		ProductType *uint64 `json:"ProductType,omitempty" name:"ProductType"`
+
+		// Parameter template description
+		Description *string `json:"Description,omitempty" name:"Description"`
+
+		// Parameter details
+		Items []*ParameterDetail `json:"Items,omitempty" name:"Items"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeParamTemplateInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParamTemplateInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeParamTemplatesRequest struct {
+	*tchttp.BaseRequest
+
+	// Array of instance types. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture).
+	ProductTypes []*int64 `json:"ProductTypes,omitempty" name:"ProductTypes"`
+
+	// Array of template names.
+	TemplateNames []*string `json:"TemplateNames,omitempty" name:"TemplateNames"`
+
+	// Array of template IDs.
+	TemplateIds []*string `json:"TemplateIds,omitempty" name:"TemplateIds"`
+}
+
+func (r *DescribeParamTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParamTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProductTypes")
+	delete(f, "TemplateNames")
+	delete(f, "TemplateIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeParamTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeParamTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of parameter templates of the user.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Parameter template details.
+		Items []*ParamTemplateInfo `json:"Items,omitempty" name:"Items"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeParamTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParamTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeProductInfoRequest struct {
 	*tchttp.BaseRequest
 }
@@ -2558,6 +2877,78 @@ func (r *DescribeTaskListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeTendisSlowLogRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of crs-ngvou0i1
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time in the format of 2019-09-08 12:12:41
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// End time in the format of 2019-09-09 12:12:41
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Slow query threshold in ms
+	MinQueryTime *int64 `json:"MinQueryTime,omitempty" name:"MinQueryTime"`
+
+	// The maximum number of results returned per page. Default value: `20`
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset, which is an integral multiple of `Limit`
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeTendisSlowLogRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTendisSlowLogRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "BeginTime")
+	delete(f, "EndTime")
+	delete(f, "MinQueryTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTendisSlowLogRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTendisSlowLogResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of slow queries
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Slow query details
+		TendisSlowLogDetail []*TendisSlowLogDetail `json:"TendisSlowLogDetail,omitempty" name:"TendisSlowLogDetail"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTendisSlowLogResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTendisSlowLogResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DestroyPostpaidInstanceRequest struct {
 	*tchttp.BaseRequest
 
@@ -2849,6 +3240,155 @@ type Inbound struct {
 
 	// All the addresses that the security group ID represents.
 	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
+type InquiryPriceCreateInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance type. Valid values: `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture).
+	TypeId *uint64 `json:"TypeId,omitempty" name:"TypeId"`
+
+	// Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
+	// If `TypeId` indicates the standard architecture, `MemSize` indicates the total memory capacity of an instance; if `TypeId` indicates the cluster architecture, `MemSize` indicates the memory capacity per shard.
+	MemSize *uint64 `json:"MemSize,omitempty" name:"MemSize"`
+
+	// Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
+	GoodsNum *uint64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Length of purchase in months, which is required when creating a monthly-subscribed instance. Value range: [1,2,3,4,5,6,7,8,9,10,11,12,24,36]. For pay-as-you-go instances, set the parameter to `1`.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Billing mode. Valid values: `0` (pay-as-you-go), `1` (monthly subscription).
+	BillingMode *int64 `json:"BillingMode,omitempty" name:"BillingMode"`
+
+	// ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Number of instance shards. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, Redis 2.8 in standalone architecture, and Redis 4.0 in standard architecture.
+	RedisShardNum *int64 `json:"RedisShardNum,omitempty" name:"RedisShardNum"`
+
+	// Number of instance replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitempty" name:"RedisReplicasNum"`
+
+	// Whether to support read-only replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+	ReplicasReadonly *bool `json:"ReplicasReadonly,omitempty" name:"ReplicasReadonly"`
+
+	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+}
+
+func (r *InquiryPriceCreateInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceCreateInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TypeId")
+	delete(f, "MemSize")
+	delete(f, "GoodsNum")
+	delete(f, "Period")
+	delete(f, "BillingMode")
+	delete(f, "ZoneId")
+	delete(f, "RedisShardNum")
+	delete(f, "RedisReplicasNum")
+	delete(f, "ReplicasReadonly")
+	delete(f, "ZoneName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InquiryPriceCreateInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Price. Unit: USD
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Price *float64 `json:"Price,omitempty" name:"Price"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquiryPriceCreateInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceCreateInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InquiryPriceUpgradeInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Shard size in MB.
+	MemSize *uint64 `json:"MemSize,omitempty" name:"MemSize"`
+
+	// Number of shards. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+	RedisShardNum *uint64 `json:"RedisShardNum,omitempty" name:"RedisShardNum"`
+
+	// Number of replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitempty" name:"RedisReplicasNum"`
+}
+
+func (r *InquiryPriceUpgradeInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceUpgradeInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "MemSize")
+	delete(f, "RedisShardNum")
+	delete(f, "RedisReplicasNum")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceUpgradeInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InquiryPriceUpgradeInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Price. Unit: USD
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Price *float64 `json:"Price,omitempty" name:"Price"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquiryPriceUpgradeInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceUpgradeInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type InstanceClusterNode struct {
@@ -3921,6 +4461,64 @@ func (r *ModifyNetworkConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyParamTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the parameter template to be modified.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// New name of the parameter template.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// New description of the parameter template.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// List of new parameters.
+	ParamList []*InstanceParam `json:"ParamList,omitempty" name:"ParamList"`
+}
+
+func (r *ModifyParamTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyParamTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TemplateId")
+	delete(f, "Name")
+	delete(f, "Description")
+	delete(f, "ParamList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyParamTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyParamTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyParamTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyParamTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Outbound struct {
 
 	// Policy. Valid values: ACCEPT, DROP.
@@ -3946,6 +4544,54 @@ type Outbound struct {
 
 	// All the addresses that the security group ID represents.
 	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
+type ParamTemplateInfo struct {
+
+	// Parameter template ID
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Parameter template name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Parameter template description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture)
+	ProductType *uint64 `json:"ProductType,omitempty" name:"ProductType"`
+}
+
+type ParameterDetail struct {
+
+	// Parameter name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Data type of the parameter
+	ParamType *string `json:"ParamType,omitempty" name:"ParamType"`
+
+	// Default value of the parameter
+	Default *string `json:"Default,omitempty" name:"Default"`
+
+	// Parameter description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Current value of the parameter
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Whether the database needs to be restarted for the modified parameter to take effect. Valid values: `0` (no),`1` (yes)
+	NeedReboot *int64 `json:"NeedReboot,omitempty" name:"NeedReboot"`
+
+	// Maximum value of the parameter
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Max *string `json:"Max,omitempty" name:"Max"`
+
+	// Minimum value of the parameter
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Min *string `json:"Min,omitempty" name:"Min"`
+
+	// Enumerated values of the parameter. It is null if the parameter is non-enumerated
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 }
 
 type ProductConf struct {
@@ -4086,11 +4732,14 @@ type RedisNodeInfo struct {
 	// Node type. Valid values: `0` (master node), `1` (replica node)
 	NodeType *int64 `json:"NodeType,omitempty" name:"NodeType"`
 
+	// ID of the master or replica node, which is not required upon creation of the instance
+	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
+
 	// ID of the availability zone of the master or replica node
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// ID of the master or replica node, which is not required upon creation of the instance
-	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
+	// ID of the availability zone of the master or replica node
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 }
 
 type RedisNodes struct {
@@ -4564,6 +5213,24 @@ type TendisNodes struct {
 
 	// Node role
 	NodeRole *string `json:"NodeRole,omitempty" name:"NodeRole"`
+}
+
+type TendisSlowLogDetail struct {
+
+	// Execution time
+	ExecuteTime *string `json:"ExecuteTime,omitempty" name:"ExecuteTime"`
+
+	// Duration of the slow query (ms)
+	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
+
+	// Command
+	Command *string `json:"Command,omitempty" name:"Command"`
+
+	// Command line details
+	CommandLine *string `json:"CommandLine,omitempty" name:"CommandLine"`
+
+	// Node ID
+	Node *string `json:"Node,omitempty" name:"Node"`
 }
 
 type TradeDealDetail struct {

@@ -43,6 +43,47 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewApplyParamsTemplateRequest() (request *ApplyParamsTemplateRequest) {
+    request = &ApplyParamsTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "ApplyParamsTemplate")
+    return
+}
+
+func NewApplyParamsTemplateResponse() (response *ApplyParamsTemplateResponse) {
+    response = &ApplyParamsTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ApplyParamsTemplate
+// This API is used to apply a parameter template to instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_CALLOSSERROR = "ResourceUnavailable.CallOssError"
+//  RESOURCEUNAVAILABLE_INSTANCECONFERROR = "ResourceUnavailable.InstanceConfError"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKEDERROR = "ResourceUnavailable.InstanceLockedError"
+//  RESOURCEUNAVAILABLE_INSTANCESTATEERROR = "ResourceUnavailable.InstanceStateError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+func (c *Client) ApplyParamsTemplate(request *ApplyParamsTemplateRequest) (response *ApplyParamsTemplateResponse, err error) {
+    if request == nil {
+        request = NewApplyParamsTemplateRequest()
+    }
+    response = NewApplyParamsTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsRequest) {
     request = &AssociateSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -268,6 +309,38 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
     return
 }
 
+func NewCreateParamTemplateRequest() (request *CreateParamTemplateRequest) {
+    request = &CreateParamTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "CreateParamTemplate")
+    return
+}
+
+func NewCreateParamTemplateResponse() (response *CreateParamTemplateResponse) {
+    response = &CreateParamTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateParamTemplate
+// This API is used to create a parameter template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+func (c *Client) CreateParamTemplate(request *CreateParamTemplateRequest) (response *CreateParamTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateParamTemplateRequest()
+    }
+    response = NewCreateParamTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteInstanceAccountRequest() (request *DeleteInstanceAccountRequest) {
     request = &DeleteInstanceAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -297,6 +370,38 @@ func (c *Client) DeleteInstanceAccount(request *DeleteInstanceAccountRequest) (r
         request = NewDeleteInstanceAccountRequest()
     }
     response = NewDeleteInstanceAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteParamTemplateRequest() (request *DeleteParamTemplateRequest) {
+    request = &DeleteParamTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DeleteParamTemplate")
+    return
+}
+
+func NewDeleteParamTemplateResponse() (response *DeleteParamTemplateResponse) {
+    response = &DeleteParamTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteParamTemplate
+// This API is used to delete a parameter template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+func (c *Client) DeleteParamTemplate(request *DeleteParamTemplateRequest) (response *DeleteParamTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteParamTemplateRequest()
+    }
+    response = NewDeleteParamTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -1084,6 +1189,72 @@ func (c *Client) DescribeMaintenanceWindow(request *DescribeMaintenanceWindowReq
     return
 }
 
+func NewDescribeParamTemplateInfoRequest() (request *DescribeParamTemplateInfoRequest) {
+    request = &DescribeParamTemplateInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeParamTemplateInfo")
+    return
+}
+
+func NewDescribeParamTemplateInfoResponse() (response *DescribeParamTemplateInfoResponse) {
+    response = &DescribeParamTemplateInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeParamTemplateInfo
+// This API is used to query parameter template details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+//  UNSUPPORTEDOPERATION_CLUSTERINSTANCEACCESSEDDENY = "UnsupportedOperation.ClusterInstanceAccessedDeny"
+func (c *Client) DescribeParamTemplateInfo(request *DescribeParamTemplateInfoRequest) (response *DescribeParamTemplateInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeParamTemplateInfoRequest()
+    }
+    response = NewDescribeParamTemplateInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeParamTemplatesRequest() (request *DescribeParamTemplatesRequest) {
+    request = &DescribeParamTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeParamTemplates")
+    return
+}
+
+func NewDescribeParamTemplatesResponse() (response *DescribeParamTemplatesResponse) {
+    response = &DescribeParamTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeParamTemplates
+// This API is used to query the list of parameter templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+func (c *Client) DescribeParamTemplates(request *DescribeParamTemplatesRequest) (response *DescribeParamTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeParamTemplatesRequest()
+    }
+    response = NewDescribeParamTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProductInfoRequest() (request *DescribeProductInfoRequest) {
     request = &DescribeProductInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1321,6 +1492,36 @@ func (c *Client) DescribeTaskList(request *DescribeTaskListRequest) (response *D
     return
 }
 
+func NewDescribeTendisSlowLogRequest() (request *DescribeTendisSlowLogRequest) {
+    request = &DescribeTendisSlowLogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeTendisSlowLog")
+    return
+}
+
+func NewDescribeTendisSlowLogResponse() (response *DescribeTendisSlowLogResponse) {
+    response = &DescribeTendisSlowLogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTendisSlowLog
+// This API is used to query slow queries of a TencentDB for Tendis instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) DescribeTendisSlowLog(request *DescribeTendisSlowLogRequest) (response *DescribeTendisSlowLogResponse, err error) {
+    if request == nil {
+        request = NewDescribeTendisSlowLogRequest()
+    }
+    response = NewDescribeTendisSlowLogResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDestroyPostpaidInstanceRequest() (request *DestroyPostpaidInstanceRequest) {
     request = &DestroyPostpaidInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1386,6 +1587,7 @@ func NewDestroyPrepaidInstanceResponse() (response *DestroyPrepaidInstanceRespon
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
 //  RESOURCEUNAVAILABLE_INSTANCEDELETED = "ResourceUnavailable.InstanceDeleted"
 //  RESOURCEUNAVAILABLE_INSTANCEISOLATED = "ResourceUnavailable.InstanceIsolated"
 //  RESOURCEUNAVAILABLE_INSTANCENODEAL = "ResourceUnavailable.InstanceNoDeal"
@@ -1497,6 +1699,73 @@ func (c *Client) EnableReplicaReadonly(request *EnableReplicaReadonlyRequest) (r
         request = NewEnableReplicaReadonlyRequest()
     }
     response = NewEnableReplicaReadonlyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceCreateInstanceRequest() (request *InquiryPriceCreateInstanceRequest) {
+    request = &InquiryPriceCreateInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "InquiryPriceCreateInstance")
+    return
+}
+
+func NewInquiryPriceCreateInstanceResponse() (response *InquiryPriceCreateInstanceResponse) {
+    response = &InquiryPriceCreateInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// InquiryPriceCreateInstance
+// This API is used to query the price for purchasing an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+func (c *Client) InquiryPriceCreateInstance(request *InquiryPriceCreateInstanceRequest) (response *InquiryPriceCreateInstanceResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceCreateInstanceRequest()
+    }
+    response = NewInquiryPriceCreateInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceUpgradeInstanceRequest() (request *InquiryPriceUpgradeInstanceRequest) {
+    request = &InquiryPriceUpgradeInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "InquiryPriceUpgradeInstance")
+    return
+}
+
+func NewInquiryPriceUpgradeInstanceResponse() (response *InquiryPriceUpgradeInstanceResponse) {
+    response = &InquiryPriceUpgradeInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// InquiryPriceUpgradeInstance
+// This API is used to query the price for scaling an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_REDUCECAPACITYNOTALLOWED = "InvalidParameterValue.ReduceCapacityNotAllowed"
+//  LIMITEXCEEDED_MEMSIZENOTINRANGE = "LimitExceeded.MemSizeNotInRange"
+//  RESOURCEUNAVAILABLE_INSTANCESTATEERROR = "ResourceUnavailable.InstanceStateError"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+func (c *Client) InquiryPriceUpgradeInstance(request *InquiryPriceUpgradeInstanceRequest) (response *InquiryPriceUpgradeInstanceResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceUpgradeInstanceRequest()
+    }
+    response = NewInquiryPriceUpgradeInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -1865,6 +2134,38 @@ func (c *Client) ModifyNetworkConfig(request *ModifyNetworkConfigRequest) (respo
         request = NewModifyNetworkConfigRequest()
     }
     response = NewModifyNetworkConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyParamTemplateRequest() (request *ModifyParamTemplateRequest) {
+    request = &ModifyParamTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "ModifyParamTemplate")
+    return
+}
+
+func NewModifyParamTemplateResponse() (response *ModifyParamTemplateResponse) {
+    response = &ModifyParamTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyParamTemplate
+// This API is used to modify a parameter template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+func (c *Client) ModifyParamTemplate(request *ModifyParamTemplateRequest) (response *ModifyParamTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyParamTemplateRequest()
+    }
+    response = NewModifyParamTemplateResponse()
     err = c.Send(request, response)
     return
 }
