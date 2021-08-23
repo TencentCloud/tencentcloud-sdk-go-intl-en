@@ -43,55 +43,56 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
-func NewCreateMediaPackageChannelRequest() (request *CreateMediaPackageChannelRequest) {
-    request = &CreateMediaPackageChannelRequest{
+func NewCreateStreamPackageChannelRequest() (request *CreateStreamPackageChannelRequest) {
+    request = &CreateStreamPackageChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdp", APIVersion, "CreateMediaPackageChannel")
+    request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageChannel")
     return
 }
 
-func NewCreateMediaPackageChannelResponse() (response *CreateMediaPackageChannelResponse) {
-    response = &CreateMediaPackageChannelResponse{
+func NewCreateStreamPackageChannelResponse() (response *CreateStreamPackageChannelResponse) {
+    response = &CreateStreamPackageChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// CreateMediaPackageChannel
-// This API is used to create a media package channel.
+// CreateStreamPackageChannel
+// This API is used to create a StreamPackage channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
 //  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
-func (c *Client) CreateMediaPackageChannel(request *CreateMediaPackageChannelRequest) (response *CreateMediaPackageChannelResponse, err error) {
+func (c *Client) CreateStreamPackageChannel(request *CreateStreamPackageChannelRequest) (response *CreateStreamPackageChannelResponse, err error) {
     if request == nil {
-        request = NewCreateMediaPackageChannelRequest()
+        request = NewCreateStreamPackageChannelRequest()
     }
-    response = NewCreateMediaPackageChannelResponse()
+    response = NewCreateStreamPackageChannelResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewCreateMediaPackageChannelEndpointRequest() (request *CreateMediaPackageChannelEndpointRequest) {
-    request = &CreateMediaPackageChannelEndpointRequest{
+func NewCreateStreamPackageChannelEndpointRequest() (request *CreateStreamPackageChannelEndpointRequest) {
+    request = &CreateStreamPackageChannelEndpointRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdp", APIVersion, "CreateMediaPackageChannelEndpoint")
+    request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageChannelEndpoint")
     return
 }
 
-func NewCreateMediaPackageChannelEndpointResponse() (response *CreateMediaPackageChannelEndpointResponse) {
-    response = &CreateMediaPackageChannelEndpointResponse{
+func NewCreateStreamPackageChannelEndpointResponse() (response *CreateStreamPackageChannelEndpointResponse) {
+    response = &CreateStreamPackageChannelEndpointResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// CreateMediaPackageChannelEndpoint
-// This API is used to create an endpoint of a media package channel.
+// CreateStreamPackageChannelEndpoint
+// This API is used to create an endpoint on a StreamPackage channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -100,127 +101,127 @@ func NewCreateMediaPackageChannelEndpointResponse() (response *CreateMediaPackag
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
-func (c *Client) CreateMediaPackageChannelEndpoint(request *CreateMediaPackageChannelEndpointRequest) (response *CreateMediaPackageChannelEndpointResponse, err error) {
+func (c *Client) CreateStreamPackageChannelEndpoint(request *CreateStreamPackageChannelEndpointRequest) (response *CreateStreamPackageChannelEndpointResponse, err error) {
     if request == nil {
-        request = NewCreateMediaPackageChannelEndpointRequest()
+        request = NewCreateStreamPackageChannelEndpointRequest()
     }
-    response = NewCreateMediaPackageChannelEndpointResponse()
+    response = NewCreateStreamPackageChannelEndpointResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDeleteMediaPackageChannelEndpointsRequest() (request *DeleteMediaPackageChannelEndpointsRequest) {
-    request = &DeleteMediaPackageChannelEndpointsRequest{
+func NewDeleteStreamPackageChannelEndpointsRequest() (request *DeleteStreamPackageChannelEndpointsRequest) {
+    request = &DeleteStreamPackageChannelEndpointsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdp", APIVersion, "DeleteMediaPackageChannelEndpoints")
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageChannelEndpoints")
     return
 }
 
-func NewDeleteMediaPackageChannelEndpointsResponse() (response *DeleteMediaPackageChannelEndpointsResponse) {
-    response = &DeleteMediaPackageChannelEndpointsResponse{
+func NewDeleteStreamPackageChannelEndpointsResponse() (response *DeleteStreamPackageChannelEndpointsResponse) {
+    response = &DeleteStreamPackageChannelEndpointsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DeleteMediaPackageChannelEndpoints
-// This API is used to delete endpoints from a media package channel in batches.
+// DeleteStreamPackageChannelEndpoints
+// This API is used to delete endpoints from a StreamPackage channel in batches.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_URL = "InvalidParameter.Url"
-func (c *Client) DeleteMediaPackageChannelEndpoints(request *DeleteMediaPackageChannelEndpointsRequest) (response *DeleteMediaPackageChannelEndpointsResponse, err error) {
+func (c *Client) DeleteStreamPackageChannelEndpoints(request *DeleteStreamPackageChannelEndpointsRequest) (response *DeleteStreamPackageChannelEndpointsResponse, err error) {
     if request == nil {
-        request = NewDeleteMediaPackageChannelEndpointsRequest()
+        request = NewDeleteStreamPackageChannelEndpointsRequest()
     }
-    response = NewDeleteMediaPackageChannelEndpointsResponse()
+    response = NewDeleteStreamPackageChannelEndpointsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDeleteMediaPackageChannelsRequest() (request *DeleteMediaPackageChannelsRequest) {
-    request = &DeleteMediaPackageChannelsRequest{
+func NewDeleteStreamPackageChannelsRequest() (request *DeleteStreamPackageChannelsRequest) {
+    request = &DeleteStreamPackageChannelsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdp", APIVersion, "DeleteMediaPackageChannels")
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageChannels")
     return
 }
 
-func NewDeleteMediaPackageChannelsResponse() (response *DeleteMediaPackageChannelsResponse) {
-    response = &DeleteMediaPackageChannelsResponse{
+func NewDeleteStreamPackageChannelsResponse() (response *DeleteStreamPackageChannelsResponse) {
+    response = &DeleteStreamPackageChannelsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DeleteMediaPackageChannels
-// This API is used to delete media package channels in batches.
+// DeleteStreamPackageChannels
+// This API is used to delete StreamPackage channels in batches.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
-func (c *Client) DeleteMediaPackageChannels(request *DeleteMediaPackageChannelsRequest) (response *DeleteMediaPackageChannelsResponse, err error) {
+func (c *Client) DeleteStreamPackageChannels(request *DeleteStreamPackageChannelsRequest) (response *DeleteStreamPackageChannelsResponse, err error) {
     if request == nil {
-        request = NewDeleteMediaPackageChannelsRequest()
+        request = NewDeleteStreamPackageChannelsRequest()
     }
-    response = NewDeleteMediaPackageChannelsResponse()
+    response = NewDeleteStreamPackageChannelsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaPackageChannelRequest() (request *DescribeMediaPackageChannelRequest) {
-    request = &DescribeMediaPackageChannelRequest{
+func NewDescribeStreamPackageChannelRequest() (request *DescribeStreamPackageChannelRequest) {
+    request = &DescribeStreamPackageChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdp", APIVersion, "DescribeMediaPackageChannel")
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageChannel")
     return
 }
 
-func NewDescribeMediaPackageChannelResponse() (response *DescribeMediaPackageChannelResponse) {
-    response = &DescribeMediaPackageChannelResponse{
+func NewDescribeStreamPackageChannelResponse() (response *DescribeStreamPackageChannelResponse) {
+    response = &DescribeStreamPackageChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaPackageChannel
-// This API is used to query the information of a media package channel.
+// DescribeStreamPackageChannel
+// This API is used to query the information of a StreamPackage channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
-func (c *Client) DescribeMediaPackageChannel(request *DescribeMediaPackageChannelRequest) (response *DescribeMediaPackageChannelResponse, err error) {
+func (c *Client) DescribeStreamPackageChannel(request *DescribeStreamPackageChannelRequest) (response *DescribeStreamPackageChannelResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaPackageChannelRequest()
+        request = NewDescribeStreamPackageChannelRequest()
     }
-    response = NewDescribeMediaPackageChannelResponse()
+    response = NewDescribeStreamPackageChannelResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaPackageChannelsRequest() (request *DescribeMediaPackageChannelsRequest) {
-    request = &DescribeMediaPackageChannelsRequest{
+func NewDescribeStreamPackageChannelsRequest() (request *DescribeStreamPackageChannelsRequest) {
+    request = &DescribeStreamPackageChannelsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdp", APIVersion, "DescribeMediaPackageChannels")
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageChannels")
     return
 }
 
-func NewDescribeMediaPackageChannelsResponse() (response *DescribeMediaPackageChannelsResponse) {
-    response = &DescribeMediaPackageChannelsResponse{
+func NewDescribeStreamPackageChannelsResponse() (response *DescribeStreamPackageChannelsResponse) {
+    response = &DescribeStreamPackageChannelsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaPackageChannels
-// This API is used to query the information list of media package channels.
+// DescribeStreamPackageChannels
+// This API is used to query the information of multiple StreamPackage channels.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -229,32 +230,32 @@ func NewDescribeMediaPackageChannelsResponse() (response *DescribeMediaPackageCh
 //  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
 //  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
 //  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
-func (c *Client) DescribeMediaPackageChannels(request *DescribeMediaPackageChannelsRequest) (response *DescribeMediaPackageChannelsResponse, err error) {
+func (c *Client) DescribeStreamPackageChannels(request *DescribeStreamPackageChannelsRequest) (response *DescribeStreamPackageChannelsResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaPackageChannelsRequest()
+        request = NewDescribeStreamPackageChannelsRequest()
     }
-    response = NewDescribeMediaPackageChannelsResponse()
+    response = NewDescribeStreamPackageChannelsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewModifyMediaPackageChannelRequest() (request *ModifyMediaPackageChannelRequest) {
-    request = &ModifyMediaPackageChannelRequest{
+func NewModifyStreamPackageChannelRequest() (request *ModifyStreamPackageChannelRequest) {
+    request = &ModifyStreamPackageChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdp", APIVersion, "ModifyMediaPackageChannel")
+    request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageChannel")
     return
 }
 
-func NewModifyMediaPackageChannelResponse() (response *ModifyMediaPackageChannelResponse) {
-    response = &ModifyMediaPackageChannelResponse{
+func NewModifyStreamPackageChannelResponse() (response *ModifyStreamPackageChannelResponse) {
+    response = &ModifyStreamPackageChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// ModifyMediaPackageChannel
-// This API is used to modify the information of a media package channel.
+// ModifyStreamPackageChannel
+// This API is used to modify a StreamPackage channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -262,32 +263,32 @@ func NewModifyMediaPackageChannelResponse() (response *ModifyMediaPackageChannel
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
-func (c *Client) ModifyMediaPackageChannel(request *ModifyMediaPackageChannelRequest) (response *ModifyMediaPackageChannelResponse, err error) {
+func (c *Client) ModifyStreamPackageChannel(request *ModifyStreamPackageChannelRequest) (response *ModifyStreamPackageChannelResponse, err error) {
     if request == nil {
-        request = NewModifyMediaPackageChannelRequest()
+        request = NewModifyStreamPackageChannelRequest()
     }
-    response = NewModifyMediaPackageChannelResponse()
+    response = NewModifyStreamPackageChannelResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewModifyMediaPackageChannelEndpointRequest() (request *ModifyMediaPackageChannelEndpointRequest) {
-    request = &ModifyMediaPackageChannelEndpointRequest{
+func NewModifyStreamPackageChannelEndpointRequest() (request *ModifyStreamPackageChannelEndpointRequest) {
+    request = &ModifyStreamPackageChannelEndpointRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdp", APIVersion, "ModifyMediaPackageChannelEndpoint")
+    request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageChannelEndpoint")
     return
 }
 
-func NewModifyMediaPackageChannelEndpointResponse() (response *ModifyMediaPackageChannelEndpointResponse) {
-    response = &ModifyMediaPackageChannelEndpointResponse{
+func NewModifyStreamPackageChannelEndpointResponse() (response *ModifyStreamPackageChannelEndpointResponse) {
+    response = &ModifyStreamPackageChannelEndpointResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// ModifyMediaPackageChannelEndpoint
-// This API is used to modify an endpoint of a media package channel.
+// ModifyStreamPackageChannelEndpoint
+// This API is used to modify an endpoint of a StreamPackage channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -296,43 +297,43 @@ func NewModifyMediaPackageChannelEndpointResponse() (response *ModifyMediaPackag
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_URL = "InvalidParameter.Url"
-func (c *Client) ModifyMediaPackageChannelEndpoint(request *ModifyMediaPackageChannelEndpointRequest) (response *ModifyMediaPackageChannelEndpointResponse, err error) {
+func (c *Client) ModifyStreamPackageChannelEndpoint(request *ModifyStreamPackageChannelEndpointRequest) (response *ModifyStreamPackageChannelEndpointResponse, err error) {
     if request == nil {
-        request = NewModifyMediaPackageChannelEndpointRequest()
+        request = NewModifyStreamPackageChannelEndpointRequest()
     }
-    response = NewModifyMediaPackageChannelEndpointResponse()
+    response = NewModifyStreamPackageChannelEndpointResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewModifyMediaPackageChannelInputAuthInfoRequest() (request *ModifyMediaPackageChannelInputAuthInfoRequest) {
-    request = &ModifyMediaPackageChannelInputAuthInfoRequest{
+func NewModifyStreamPackageChannelInputAuthInfoRequest() (request *ModifyStreamPackageChannelInputAuthInfoRequest) {
+    request = &ModifyStreamPackageChannelInputAuthInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdp", APIVersion, "ModifyMediaPackageChannelInputAuthInfo")
+    request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageChannelInputAuthInfo")
     return
 }
 
-func NewModifyMediaPackageChannelInputAuthInfoResponse() (response *ModifyMediaPackageChannelInputAuthInfoResponse) {
-    response = &ModifyMediaPackageChannelInputAuthInfoResponse{
+func NewModifyStreamPackageChannelInputAuthInfoResponse() (response *ModifyStreamPackageChannelInputAuthInfoResponse) {
+    response = &ModifyStreamPackageChannelInputAuthInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// ModifyMediaPackageChannelInputAuthInfo
-// This API is used to modify the input authentication information of a media package channel.
+// ModifyStreamPackageChannelInputAuthInfo
+// This API is used to modify the input authentication information of a StreamPackage channel.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_ACTIONTYPE = "InvalidParameter.ActionType"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_URL = "InvalidParameter.Url"
-func (c *Client) ModifyMediaPackageChannelInputAuthInfo(request *ModifyMediaPackageChannelInputAuthInfoRequest) (response *ModifyMediaPackageChannelInputAuthInfoResponse, err error) {
+func (c *Client) ModifyStreamPackageChannelInputAuthInfo(request *ModifyStreamPackageChannelInputAuthInfoRequest) (response *ModifyStreamPackageChannelInputAuthInfoResponse, err error) {
     if request == nil {
-        request = NewModifyMediaPackageChannelInputAuthInfoRequest()
+        request = NewModifyStreamPackageChannelInputAuthInfoRequest()
     }
-    response = NewModifyMediaPackageChannelInputAuthInfoResponse()
+    response = NewModifyStreamPackageChannelInputAuthInfoResponse()
     err = c.Send(request, response)
     return
 }

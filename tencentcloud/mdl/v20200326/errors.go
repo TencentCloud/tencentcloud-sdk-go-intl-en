@@ -23,6 +23,9 @@ const (
 	// Invalid parameter.
 	INVALIDPARAMETER = "InvalidParameter"
 
+	// Audio/Video transcoding template error
+	INVALIDPARAMETER_AVTEMPLATES = "InvalidParameter.AVTemplates"
+
 	// `Channel` already associated.
 	INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
 
@@ -55,6 +58,9 @@ const (
 
 	// Invalid `OutputGroups`.
 	INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
+
+	// Invalid `Plan` parameter
+	INVALIDPARAMETER_PLAN = "InvalidParameter.Plan"
 
 	// Invalid `SecurityGroups`.
 	INVALIDPARAMETER_SECURITYGROUPS = "InvalidParameter.SecurityGroups"

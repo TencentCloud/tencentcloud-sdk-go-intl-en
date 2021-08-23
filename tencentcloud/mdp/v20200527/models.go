@@ -20,6 +20,25 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type CacheInfo struct {
+
+	// List of timeout parameter configuration
+	// Note: this field may return `null`, indicating that no valid value was found.
+	Info []*CacheInfoInfo `json:"Info,omitempty" name:"Info"`
+}
+
+type CacheInfoInfo struct {
+
+	// Timeout period (ms), which must be an integer multiple of 1000
+	// .m3u8/.mpd: [1000, 60000]
+	// .ts/.m4s/.mp4: [10000, 1800000]
+	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
+
+	// File extension. Valid values: .m3u8, .ts, .mpd, .m4s, .mp4
+	// Note: this field may return `null`, indicating that no valid value was found.
+	Ext *string `json:"Ext,omitempty" name:"Ext"`
+}
+
 type ChannelInfo struct {
 
 	// Channel ID.
@@ -33,29 +52,33 @@ type ChannelInfo struct {
 
 	// Channel input and output.
 	Points *PointInfo `json:"Points,omitempty" name:"Points"`
+
+	// Cache configuration
+	// Note: this field may return `null`, indicating that no valid value was found.
+	CacheInfo *CacheInfo `json:"CacheInfo,omitempty" name:"CacheInfo"`
 }
 
-type CreateMediaPackageChannelEndpointRequest struct {
+type CreateStreamPackageChannelEndpointRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Channel name.
+	// Channel name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Authentication information.
+	// Authentication information
 	AuthInfo *EndpointAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
 }
 
-func (r *CreateMediaPackageChannelEndpointRequest) ToJsonString() string {
+func (r *CreateStreamPackageChannelEndpointRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateMediaPackageChannelEndpointRequest) FromJsonString(s string) error {
+func (r *CreateStreamPackageChannelEndpointRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -64,16 +87,16 @@ func (r *CreateMediaPackageChannelEndpointRequest) FromJsonString(s string) erro
 	delete(f, "Name")
 	delete(f, "AuthInfo")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaPackageChannelEndpointRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageChannelEndpointRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateMediaPackageChannelEndpointResponse struct {
+type CreateStreamPackageChannelEndpointResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The information of the created channel endpoint.
+		// Information of the created channel endpoint
 		Info *EndpointInfo `json:"Info,omitempty" name:"Info"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -81,88 +104,89 @@ type CreateMediaPackageChannelEndpointResponse struct {
 	} `json:"Response"`
 }
 
-func (r *CreateMediaPackageChannelEndpointResponse) ToJsonString() string {
+func (r *CreateStreamPackageChannelEndpointResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateMediaPackageChannelEndpointResponse) FromJsonString(s string) error {
+func (r *CreateStreamPackageChannelEndpointResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateMediaPackageChannelRequest struct {
+type CreateStreamPackageChannelRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel name.
+	// Channel name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Channel protocol. Valid values: HLS, DASH.
+	// Channel protocol. Valid values: HLS, DASH
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Cache configuration
+	CacheInfo *CacheInfo `json:"CacheInfo,omitempty" name:"CacheInfo"`
 }
 
-func (r *CreateMediaPackageChannelRequest) ToJsonString() string {
+func (r *CreateStreamPackageChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateMediaPackageChannelRequest) FromJsonString(s string) error {
+func (r *CreateStreamPackageChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Name")
 	delete(f, "Protocol")
+	delete(f, "CacheInfo")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaPackageChannelRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateMediaPackageChannelResponse struct {
+type CreateStreamPackageChannelResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
-
-		// Channel information.
-		Info *ChannelInfo `json:"Info,omitempty" name:"Info"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *CreateMediaPackageChannelResponse) ToJsonString() string {
+func (r *CreateStreamPackageChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateMediaPackageChannelResponse) FromJsonString(s string) error {
+func (r *CreateStreamPackageChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteMediaPackageChannelEndpointsRequest struct {
+type DeleteStreamPackageChannelEndpointsRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// The list of endpoint URLs.
+	// List of the URLs of the endpoints to delete
 	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 }
 
-func (r *DeleteMediaPackageChannelEndpointsRequest) ToJsonString() string {
+func (r *DeleteStreamPackageChannelEndpointsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DeleteMediaPackageChannelEndpointsRequest) FromJsonString(s string) error {
+func (r *DeleteStreamPackageChannelEndpointsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -170,12 +194,12 @@ func (r *DeleteMediaPackageChannelEndpointsRequest) FromJsonString(s string) err
 	delete(f, "Id")
 	delete(f, "Urls")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaPackageChannelEndpointsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamPackageChannelEndpointsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteMediaPackageChannelEndpointsResponse struct {
+type DeleteStreamPackageChannelEndpointsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -184,51 +208,51 @@ type DeleteMediaPackageChannelEndpointsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DeleteMediaPackageChannelEndpointsResponse) ToJsonString() string {
+func (r *DeleteStreamPackageChannelEndpointsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DeleteMediaPackageChannelEndpointsResponse) FromJsonString(s string) error {
+func (r *DeleteStreamPackageChannelEndpointsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteMediaPackageChannelsRequest struct {
+type DeleteStreamPackageChannelsRequest struct {
 	*tchttp.BaseRequest
 
-	// The ID list of channels to be deleted.
+	// List of the IDs of the channels to delete
 	Ids []*string `json:"Ids,omitempty" name:"Ids"`
 }
 
-func (r *DeleteMediaPackageChannelsRequest) ToJsonString() string {
+func (r *DeleteStreamPackageChannelsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DeleteMediaPackageChannelsRequest) FromJsonString(s string) error {
+func (r *DeleteStreamPackageChannelsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Ids")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaPackageChannelsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamPackageChannelsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteMediaPackageChannelsResponse struct {
+type DeleteStreamPackageChannelsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The information list of channels that have been deleted.
+		// List of the information of successfully deleted channels
 		SuccessInfos []*ChannelInfo `json:"SuccessInfos,omitempty" name:"SuccessInfos"`
 
-		// The information list of channels that failed to be deleted.
+		// List of the information of the channels that failed to be deleted
 		FailInfos []*ChannelInfo `json:"FailInfos,omitempty" name:"FailInfos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -236,48 +260,48 @@ type DeleteMediaPackageChannelsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DeleteMediaPackageChannelsResponse) ToJsonString() string {
+func (r *DeleteStreamPackageChannelsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DeleteMediaPackageChannelsResponse) FromJsonString(s string) error {
+func (r *DeleteStreamPackageChannelsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaPackageChannelRequest struct {
+type DescribeStreamPackageChannelRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *DescribeMediaPackageChannelRequest) ToJsonString() string {
+func (r *DescribeStreamPackageChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaPackageChannelRequest) FromJsonString(s string) error {
+func (r *DescribeStreamPackageChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaPackageChannelRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaPackageChannelResponse struct {
+type DescribeStreamPackageChannelResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Channel information.
+		// Channel information
 		Info *ChannelInfo `json:"Info,omitempty" name:"Info"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -285,35 +309,35 @@ type DescribeMediaPackageChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaPackageChannelResponse) ToJsonString() string {
+func (r *DescribeStreamPackageChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaPackageChannelResponse) FromJsonString(s string) error {
+func (r *DescribeStreamPackageChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaPackageChannelsRequest struct {
+type DescribeStreamPackageChannelsRequest struct {
 	*tchttp.BaseRequest
 
-	// Page number. Value range: [1, 1000].
+	// Page number. Value range: [1, 1000]
 	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
 
-	// The size of each page. Value range: [1, 1000].
+	// Number of entries per page. Value range: [1, 1000]
 	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 }
 
-func (r *DescribeMediaPackageChannelsRequest) ToJsonString() string {
+func (r *DescribeStreamPackageChannelsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaPackageChannelsRequest) FromJsonString(s string) error {
+func (r *DescribeStreamPackageChannelsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -321,29 +345,29 @@ func (r *DescribeMediaPackageChannelsRequest) FromJsonString(s string) error {
 	delete(f, "PageNum")
 	delete(f, "PageSize")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaPackageChannelsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageChannelsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaPackageChannelsResponse struct {
+type DescribeStreamPackageChannelsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The list of channel outputs.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// List of channel information
+	// Note: this field may return `null`, indicating that no valid value was found.
 		Infos []*ChannelInfo `json:"Infos,omitempty" name:"Infos"`
 
-		// Page number.
+		// Page number
 		PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
 
-		// The size of each page.
+		// Number of entries per page
 		PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 
-		// Total number.
+		// Total number of entries
 		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
 
-		// Total number of pages.
+		// Total number of pages
 		TotalPage *uint64 `json:"TotalPage,omitempty" name:"TotalPage"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -351,14 +375,14 @@ type DescribeMediaPackageChannelsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaPackageChannelsResponse) ToJsonString() string {
+func (r *DescribeStreamPackageChannelsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaPackageChannelsResponse) FromJsonString(s string) error {
+func (r *DescribeStreamPackageChannelsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -410,30 +434,30 @@ type InputInfo struct {
 	AuthInfo *InputAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
 }
 
-type ModifyMediaPackageChannelEndpointRequest struct {
+type ModifyStreamPackageChannelEndpointRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Channel endpoint URL.
+	// Channel endpoint URL
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// The channel name after modification.
+	// New endpoint name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The channel authentication after modification.
+	// New channel authentication information
 	AuthInfo *EndpointAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
 }
 
-func (r *ModifyMediaPackageChannelEndpointRequest) ToJsonString() string {
+func (r *ModifyStreamPackageChannelEndpointRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaPackageChannelEndpointRequest) FromJsonString(s string) error {
+func (r *ModifyStreamPackageChannelEndpointRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -443,12 +467,12 @@ func (r *ModifyMediaPackageChannelEndpointRequest) FromJsonString(s string) erro
 	delete(f, "Name")
 	delete(f, "AuthInfo")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaPackageChannelEndpointRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamPackageChannelEndpointRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyMediaPackageChannelEndpointResponse struct {
+type ModifyStreamPackageChannelEndpointResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -457,40 +481,40 @@ type ModifyMediaPackageChannelEndpointResponse struct {
 	} `json:"Response"`
 }
 
-func (r *ModifyMediaPackageChannelEndpointResponse) ToJsonString() string {
+func (r *ModifyStreamPackageChannelEndpointResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaPackageChannelEndpointResponse) FromJsonString(s string) error {
+func (r *ModifyStreamPackageChannelEndpointResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyMediaPackageChannelInputAuthInfoRequest struct {
+type ModifyStreamPackageChannelInputAuthInfoRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Channel input URL.
+	// Channel input URL
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Authentication configuration type. Valid values: CLOSE, UPDATE.
-	// CLOSE: disable authentication.
-	// UPDATE: update authentication.
+	// Authentication configuration. Valid values: `CLOSE`, `UPDATE`
+	// `CLOSE`: disable authentication
+	// `UPDATE`: update authentication information
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 }
 
-func (r *ModifyMediaPackageChannelInputAuthInfoRequest) ToJsonString() string {
+func (r *ModifyStreamPackageChannelInputAuthInfoRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaPackageChannelInputAuthInfoRequest) FromJsonString(s string) error {
+func (r *ModifyStreamPackageChannelInputAuthInfoRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -499,16 +523,16 @@ func (r *ModifyMediaPackageChannelInputAuthInfoRequest) FromJsonString(s string)
 	delete(f, "Url")
 	delete(f, "ActionType")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaPackageChannelInputAuthInfoRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamPackageChannelInputAuthInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyMediaPackageChannelInputAuthInfoResponse struct {
+type ModifyStreamPackageChannelInputAuthInfoResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Channel input authentication information.
+		// Channel input authentication information
 		AuthInfo *InputAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -516,38 +540,41 @@ type ModifyMediaPackageChannelInputAuthInfoResponse struct {
 	} `json:"Response"`
 }
 
-func (r *ModifyMediaPackageChannelInputAuthInfoResponse) ToJsonString() string {
+func (r *ModifyStreamPackageChannelInputAuthInfoResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaPackageChannelInputAuthInfoResponse) FromJsonString(s string) error {
+func (r *ModifyStreamPackageChannelInputAuthInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyMediaPackageChannelRequest struct {
+type ModifyStreamPackageChannelRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// The channel name after modification.
+	// New channel name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The channel protocol after modification. Valid values: HLS, DASH.
+	// New channel protocol. Valid values: HLS, DASH
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Cache configuration
+	CacheInfo *CacheInfo `json:"CacheInfo,omitempty" name:"CacheInfo"`
 }
 
-func (r *ModifyMediaPackageChannelRequest) ToJsonString() string {
+func (r *ModifyStreamPackageChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaPackageChannelRequest) FromJsonString(s string) error {
+func (r *ModifyStreamPackageChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -555,13 +582,14 @@ func (r *ModifyMediaPackageChannelRequest) FromJsonString(s string) error {
 	delete(f, "Id")
 	delete(f, "Name")
 	delete(f, "Protocol")
+	delete(f, "CacheInfo")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaPackageChannelRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamPackageChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyMediaPackageChannelResponse struct {
+type ModifyStreamPackageChannelResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -570,14 +598,14 @@ type ModifyMediaPackageChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *ModifyMediaPackageChannelResponse) ToJsonString() string {
+func (r *ModifyStreamPackageChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaPackageChannelResponse) FromJsonString(s string) error {
+func (r *ModifyStreamPackageChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

@@ -26,6 +26,9 @@ const (
 	// Incorrect authentication configuration.
 	INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
 
+	// Invalid `CacheInfo` value
+	INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+
 	// The quantity exceeds the limit.
 	INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
 
@@ -44,7 +47,7 @@ const (
 	// Invalid `PageSize`.
 	INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
 
-	// Endpoint error.
+	// Invalid `Points` value
 	INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
 
 	// Invalid protocol.

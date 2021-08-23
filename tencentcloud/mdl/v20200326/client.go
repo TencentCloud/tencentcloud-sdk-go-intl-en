@@ -43,26 +43,27 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
-func NewCreateMediaLiveChannelRequest() (request *CreateMediaLiveChannelRequest) {
-    request = &CreateMediaLiveChannelRequest{
+func NewCreateStreamLiveChannelRequest() (request *CreateStreamLiveChannelRequest) {
+    request = &CreateStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "CreateMediaLiveChannel")
+    request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveChannel")
     return
 }
 
-func NewCreateMediaLiveChannelResponse() (response *CreateMediaLiveChannelResponse) {
-    response = &CreateMediaLiveChannelResponse{
+func NewCreateStreamLiveChannelResponse() (response *CreateStreamLiveChannelResponse) {
+    response = &CreateStreamLiveChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// CreateMediaLiveChannel
-// This API is used to create a media channel.
+// CreateStreamLiveChannel
+// This API is used to create a StreamLive channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AVTEMPLATES = "InvalidParameter.AVTemplates"
 //  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
 //  INVALIDPARAMETER_ATTACHEDINPUTS = "InvalidParameter.AttachedInputs"
 //  INVALIDPARAMETER_AUDIOTEMPLATES = "InvalidParameter.AudioTemplates"
@@ -72,32 +73,32 @@ func NewCreateMediaLiveChannelResponse() (response *CreateMediaLiveChannelRespon
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
 //  INVALIDPARAMETER_VIDEOTEMPLATES = "InvalidParameter.VideoTemplates"
-func (c *Client) CreateMediaLiveChannel(request *CreateMediaLiveChannelRequest) (response *CreateMediaLiveChannelResponse, err error) {
+func (c *Client) CreateStreamLiveChannel(request *CreateStreamLiveChannelRequest) (response *CreateStreamLiveChannelResponse, err error) {
     if request == nil {
-        request = NewCreateMediaLiveChannelRequest()
+        request = NewCreateStreamLiveChannelRequest()
     }
-    response = NewCreateMediaLiveChannelResponse()
+    response = NewCreateStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewCreateMediaLiveInputRequest() (request *CreateMediaLiveInputRequest) {
-    request = &CreateMediaLiveInputRequest{
+func NewCreateStreamLiveInputRequest() (request *CreateStreamLiveInputRequest) {
+    request = &CreateStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "CreateMediaLiveInput")
+    request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveInput")
     return
 }
 
-func NewCreateMediaLiveInputResponse() (response *CreateMediaLiveInputResponse) {
-    response = &CreateMediaLiveInputResponse{
+func NewCreateStreamLiveInputResponse() (response *CreateStreamLiveInputResponse) {
+    response = &CreateStreamLiveInputResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// CreateMediaLiveInput
-// This API is used to create a media input.
+// CreateStreamLiveInput
+// This API is used to create a StreamLive input.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -108,32 +109,32 @@ func NewCreateMediaLiveInputResponse() (response *CreateMediaLiveInputResponse) 
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_SECURITYGROUPS = "InvalidParameter.SecurityGroups"
 //  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
-func (c *Client) CreateMediaLiveInput(request *CreateMediaLiveInputRequest) (response *CreateMediaLiveInputResponse, err error) {
+func (c *Client) CreateStreamLiveInput(request *CreateStreamLiveInputRequest) (response *CreateStreamLiveInputResponse, err error) {
     if request == nil {
-        request = NewCreateMediaLiveInputRequest()
+        request = NewCreateStreamLiveInputRequest()
     }
-    response = NewCreateMediaLiveInputResponse()
+    response = NewCreateStreamLiveInputResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewCreateMediaLiveInputSecurityGroupRequest() (request *CreateMediaLiveInputSecurityGroupRequest) {
-    request = &CreateMediaLiveInputSecurityGroupRequest{
+func NewCreateStreamLiveInputSecurityGroupRequest() (request *CreateStreamLiveInputSecurityGroupRequest) {
+    request = &CreateStreamLiveInputSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "CreateMediaLiveInputSecurityGroup")
+    request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveInputSecurityGroup")
     return
 }
 
-func NewCreateMediaLiveInputSecurityGroupResponse() (response *CreateMediaLiveInputSecurityGroupResponse) {
-    response = &CreateMediaLiveInputSecurityGroupResponse{
+func NewCreateStreamLiveInputSecurityGroupResponse() (response *CreateStreamLiveInputSecurityGroupResponse) {
+    response = &CreateStreamLiveInputSecurityGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// CreateMediaLiveInputSecurityGroup
-// This API is used to create an input security group. Up to 5 ones can be created.
+// CreateStreamLiveInputSecurityGroup
+// This API is used to create an input security group. Up to 5 security groups are allowed.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -141,32 +142,63 @@ func NewCreateMediaLiveInputSecurityGroupResponse() (response *CreateMediaLiveIn
 //  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
-func (c *Client) CreateMediaLiveInputSecurityGroup(request *CreateMediaLiveInputSecurityGroupRequest) (response *CreateMediaLiveInputSecurityGroupResponse, err error) {
+func (c *Client) CreateStreamLiveInputSecurityGroup(request *CreateStreamLiveInputSecurityGroupRequest) (response *CreateStreamLiveInputSecurityGroupResponse, err error) {
     if request == nil {
-        request = NewCreateMediaLiveInputSecurityGroupRequest()
+        request = NewCreateStreamLiveInputSecurityGroupRequest()
     }
-    response = NewCreateMediaLiveInputSecurityGroupResponse()
+    response = NewCreateStreamLiveInputSecurityGroupResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDeleteMediaLiveChannelRequest() (request *DeleteMediaLiveChannelRequest) {
-    request = &DeleteMediaLiveChannelRequest{
+func NewCreateStreamLivePlanRequest() (request *CreateStreamLivePlanRequest) {
+    request = &CreateStreamLivePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DeleteMediaLiveChannel")
+    request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLivePlan")
     return
 }
 
-func NewDeleteMediaLiveChannelResponse() (response *DeleteMediaLiveChannelResponse) {
-    response = &DeleteMediaLiveChannelResponse{
+func NewCreateStreamLivePlanResponse() (response *CreateStreamLivePlanResponse) {
+    response = &CreateStreamLivePlanResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DeleteMediaLiveChannel
-// This API is used to delete a MediaLive channel.
+// CreateStreamLivePlan
+// This API is used to create an event in the plan.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PLAN = "InvalidParameter.Plan"
+func (c *Client) CreateStreamLivePlan(request *CreateStreamLivePlanRequest) (response *CreateStreamLivePlanResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamLivePlanRequest()
+    }
+    response = NewCreateStreamLivePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamLiveChannelRequest() (request *DeleteStreamLiveChannelRequest) {
+    request = &DeleteStreamLiveChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveChannel")
+    return
+}
+
+func NewDeleteStreamLiveChannelResponse() (response *DeleteStreamLiveChannelResponse) {
+    response = &DeleteStreamLiveChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteStreamLiveChannel
+// This API is used to delete a StreamLive channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -175,32 +207,32 @@ func NewDeleteMediaLiveChannelResponse() (response *DeleteMediaLiveChannelRespon
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 //  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
-func (c *Client) DeleteMediaLiveChannel(request *DeleteMediaLiveChannelRequest) (response *DeleteMediaLiveChannelResponse, err error) {
+func (c *Client) DeleteStreamLiveChannel(request *DeleteStreamLiveChannelRequest) (response *DeleteStreamLiveChannelResponse, err error) {
     if request == nil {
-        request = NewDeleteMediaLiveChannelRequest()
+        request = NewDeleteStreamLiveChannelRequest()
     }
-    response = NewDeleteMediaLiveChannelResponse()
+    response = NewDeleteStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDeleteMediaLiveInputRequest() (request *DeleteMediaLiveInputRequest) {
-    request = &DeleteMediaLiveInputRequest{
+func NewDeleteStreamLiveInputRequest() (request *DeleteStreamLiveInputRequest) {
+    request = &DeleteStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DeleteMediaLiveInput")
+    request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveInput")
     return
 }
 
-func NewDeleteMediaLiveInputResponse() (response *DeleteMediaLiveInputResponse) {
-    response = &DeleteMediaLiveInputResponse{
+func NewDeleteStreamLiveInputResponse() (response *DeleteStreamLiveInputResponse) {
+    response = &DeleteStreamLiveInputResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DeleteMediaLiveInput
-// This API is used to delete a media input.
+// DeleteStreamLiveInput
+// This API is used to delete a StreamLive input.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -208,31 +240,31 @@ func NewDeleteMediaLiveInputResponse() (response *DeleteMediaLiveInputResponse) 
 //  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
-func (c *Client) DeleteMediaLiveInput(request *DeleteMediaLiveInputRequest) (response *DeleteMediaLiveInputResponse, err error) {
+func (c *Client) DeleteStreamLiveInput(request *DeleteStreamLiveInputRequest) (response *DeleteStreamLiveInputResponse, err error) {
     if request == nil {
-        request = NewDeleteMediaLiveInputRequest()
+        request = NewDeleteStreamLiveInputRequest()
     }
-    response = NewDeleteMediaLiveInputResponse()
+    response = NewDeleteStreamLiveInputResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDeleteMediaLiveInputSecurityGroupRequest() (request *DeleteMediaLiveInputSecurityGroupRequest) {
-    request = &DeleteMediaLiveInputSecurityGroupRequest{
+func NewDeleteStreamLiveInputSecurityGroupRequest() (request *DeleteStreamLiveInputSecurityGroupRequest) {
+    request = &DeleteStreamLiveInputSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DeleteMediaLiveInputSecurityGroup")
+    request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveInputSecurityGroup")
     return
 }
 
-func NewDeleteMediaLiveInputSecurityGroupResponse() (response *DeleteMediaLiveInputSecurityGroupResponse) {
-    response = &DeleteMediaLiveInputSecurityGroupResponse{
+func NewDeleteStreamLiveInputSecurityGroupResponse() (response *DeleteStreamLiveInputSecurityGroupResponse) {
+    response = &DeleteStreamLiveInputSecurityGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DeleteMediaLiveInputSecurityGroup
+// DeleteStreamLiveInputSecurityGroup
 // This API is used to delete an input security group.
 //
 // error code that may be returned:
@@ -241,156 +273,156 @@ func NewDeleteMediaLiveInputSecurityGroupResponse() (response *DeleteMediaLiveIn
 //  INVALIDPARAMETER_ALREADYASSOCIATEDINPUT = "InvalidParameter.AlreadyAssociatedInput"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
-func (c *Client) DeleteMediaLiveInputSecurityGroup(request *DeleteMediaLiveInputSecurityGroupRequest) (response *DeleteMediaLiveInputSecurityGroupResponse, err error) {
+func (c *Client) DeleteStreamLiveInputSecurityGroup(request *DeleteStreamLiveInputSecurityGroupRequest) (response *DeleteStreamLiveInputSecurityGroupResponse, err error) {
     if request == nil {
-        request = NewDeleteMediaLiveInputSecurityGroupRequest()
+        request = NewDeleteStreamLiveInputSecurityGroupRequest()
     }
-    response = NewDeleteMediaLiveInputSecurityGroupResponse()
+    response = NewDeleteStreamLiveInputSecurityGroupResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaLiveChannelRequest() (request *DescribeMediaLiveChannelRequest) {
-    request = &DescribeMediaLiveChannelRequest{
+func NewDescribeStreamLiveChannelRequest() (request *DescribeStreamLiveChannelRequest) {
+    request = &DescribeStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveChannel")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannel")
     return
 }
 
-func NewDescribeMediaLiveChannelResponse() (response *DescribeMediaLiveChannelResponse) {
-    response = &DescribeMediaLiveChannelResponse{
+func NewDescribeStreamLiveChannelResponse() (response *DescribeStreamLiveChannelResponse) {
+    response = &DescribeStreamLiveChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaLiveChannel
-// This API is used to query the information of a MediaLive channel.
+// DescribeStreamLiveChannel
+// This API is used to query a StreamLive channel.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
-func (c *Client) DescribeMediaLiveChannel(request *DescribeMediaLiveChannelRequest) (response *DescribeMediaLiveChannelResponse, err error) {
+func (c *Client) DescribeStreamLiveChannel(request *DescribeStreamLiveChannelRequest) (response *DescribeStreamLiveChannelResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaLiveChannelRequest()
+        request = NewDescribeStreamLiveChannelRequest()
     }
-    response = NewDescribeMediaLiveChannelResponse()
+    response = NewDescribeStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaLiveChannelAlertsRequest() (request *DescribeMediaLiveChannelAlertsRequest) {
-    request = &DescribeMediaLiveChannelAlertsRequest{
+func NewDescribeStreamLiveChannelAlertsRequest() (request *DescribeStreamLiveChannelAlertsRequest) {
+    request = &DescribeStreamLiveChannelAlertsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveChannelAlerts")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelAlerts")
     return
 }
 
-func NewDescribeMediaLiveChannelAlertsResponse() (response *DescribeMediaLiveChannelAlertsResponse) {
-    response = &DescribeMediaLiveChannelAlertsResponse{
+func NewDescribeStreamLiveChannelAlertsResponse() (response *DescribeStreamLiveChannelAlertsResponse) {
+    response = &DescribeStreamLiveChannelAlertsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaLiveChannelAlerts
-// This API is used to query the channel alarm information.
+// DescribeStreamLiveChannelAlerts
+// This API is used to query the alarm information of a StreamLive channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
-func (c *Client) DescribeMediaLiveChannelAlerts(request *DescribeMediaLiveChannelAlertsRequest) (response *DescribeMediaLiveChannelAlertsResponse, err error) {
+func (c *Client) DescribeStreamLiveChannelAlerts(request *DescribeStreamLiveChannelAlertsRequest) (response *DescribeStreamLiveChannelAlertsResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaLiveChannelAlertsRequest()
+        request = NewDescribeStreamLiveChannelAlertsRequest()
     }
-    response = NewDescribeMediaLiveChannelAlertsResponse()
+    response = NewDescribeStreamLiveChannelAlertsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaLiveChannelInputStatisticsRequest() (request *DescribeMediaLiveChannelInputStatisticsRequest) {
-    request = &DescribeMediaLiveChannelInputStatisticsRequest{
+func NewDescribeStreamLiveChannelInputStatisticsRequest() (request *DescribeStreamLiveChannelInputStatisticsRequest) {
+    request = &DescribeStreamLiveChannelInputStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveChannelInputStatistics")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelInputStatistics")
     return
 }
 
-func NewDescribeMediaLiveChannelInputStatisticsResponse() (response *DescribeMediaLiveChannelInputStatisticsResponse) {
-    response = &DescribeMediaLiveChannelInputStatisticsResponse{
+func NewDescribeStreamLiveChannelInputStatisticsResponse() (response *DescribeStreamLiveChannelInputStatisticsResponse) {
+    response = &DescribeStreamLiveChannelInputStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaLiveChannelInputStatistics
-// This API is used to query the input statistics.
+// DescribeStreamLiveChannelInputStatistics
+// This API is used to query input statistics.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
-func (c *Client) DescribeMediaLiveChannelInputStatistics(request *DescribeMediaLiveChannelInputStatisticsRequest) (response *DescribeMediaLiveChannelInputStatisticsResponse, err error) {
+func (c *Client) DescribeStreamLiveChannelInputStatistics(request *DescribeStreamLiveChannelInputStatisticsRequest) (response *DescribeStreamLiveChannelInputStatisticsResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaLiveChannelInputStatisticsRequest()
+        request = NewDescribeStreamLiveChannelInputStatisticsRequest()
     }
-    response = NewDescribeMediaLiveChannelInputStatisticsResponse()
+    response = NewDescribeStreamLiveChannelInputStatisticsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaLiveChannelLogsRequest() (request *DescribeMediaLiveChannelLogsRequest) {
-    request = &DescribeMediaLiveChannelLogsRequest{
+func NewDescribeStreamLiveChannelLogsRequest() (request *DescribeStreamLiveChannelLogsRequest) {
+    request = &DescribeStreamLiveChannelLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveChannelLogs")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelLogs")
     return
 }
 
-func NewDescribeMediaLiveChannelLogsResponse() (response *DescribeMediaLiveChannelLogsResponse) {
-    response = &DescribeMediaLiveChannelLogsResponse{
+func NewDescribeStreamLiveChannelLogsResponse() (response *DescribeStreamLiveChannelLogsResponse) {
+    response = &DescribeStreamLiveChannelLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaLiveChannelLogs
-// This API is used to query MediaLive channel logs, such as push event logs.
+// DescribeStreamLiveChannelLogs
+// This API is used to query StreamLive channel logs, such as push event logs.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
-func (c *Client) DescribeMediaLiveChannelLogs(request *DescribeMediaLiveChannelLogsRequest) (response *DescribeMediaLiveChannelLogsResponse, err error) {
+func (c *Client) DescribeStreamLiveChannelLogs(request *DescribeStreamLiveChannelLogsRequest) (response *DescribeStreamLiveChannelLogsResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaLiveChannelLogsRequest()
+        request = NewDescribeStreamLiveChannelLogsRequest()
     }
-    response = NewDescribeMediaLiveChannelLogsResponse()
+    response = NewDescribeStreamLiveChannelLogsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaLiveChannelOutputStatisticsRequest() (request *DescribeMediaLiveChannelOutputStatisticsRequest) {
-    request = &DescribeMediaLiveChannelOutputStatisticsRequest{
+func NewDescribeStreamLiveChannelOutputStatisticsRequest() (request *DescribeStreamLiveChannelOutputStatisticsRequest) {
+    request = &DescribeStreamLiveChannelOutputStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveChannelOutputStatistics")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelOutputStatistics")
     return
 }
 
-func NewDescribeMediaLiveChannelOutputStatisticsResponse() (response *DescribeMediaLiveChannelOutputStatisticsResponse) {
-    response = &DescribeMediaLiveChannelOutputStatisticsResponse{
+func NewDescribeStreamLiveChannelOutputStatisticsResponse() (response *DescribeStreamLiveChannelOutputStatisticsResponse) {
+    response = &DescribeStreamLiveChannelOutputStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaLiveChannelOutputStatistics
-// This API is used to query the output statistics of a channel.
+// DescribeStreamLiveChannelOutputStatistics
+// This API is used to query the output statistics of a StreamLive channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -398,92 +430,92 @@ func NewDescribeMediaLiveChannelOutputStatisticsResponse() (response *DescribeMe
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
-func (c *Client) DescribeMediaLiveChannelOutputStatistics(request *DescribeMediaLiveChannelOutputStatisticsRequest) (response *DescribeMediaLiveChannelOutputStatisticsResponse, err error) {
+func (c *Client) DescribeStreamLiveChannelOutputStatistics(request *DescribeStreamLiveChannelOutputStatisticsRequest) (response *DescribeStreamLiveChannelOutputStatisticsResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaLiveChannelOutputStatisticsRequest()
+        request = NewDescribeStreamLiveChannelOutputStatisticsRequest()
     }
-    response = NewDescribeMediaLiveChannelOutputStatisticsResponse()
+    response = NewDescribeStreamLiveChannelOutputStatisticsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaLiveChannelsRequest() (request *DescribeMediaLiveChannelsRequest) {
-    request = &DescribeMediaLiveChannelsRequest{
+func NewDescribeStreamLiveChannelsRequest() (request *DescribeStreamLiveChannelsRequest) {
+    request = &DescribeStreamLiveChannelsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveChannels")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannels")
     return
 }
 
-func NewDescribeMediaLiveChannelsResponse() (response *DescribeMediaLiveChannelsResponse) {
-    response = &DescribeMediaLiveChannelsResponse{
+func NewDescribeStreamLiveChannelsResponse() (response *DescribeStreamLiveChannelsResponse) {
+    response = &DescribeStreamLiveChannelsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaLiveChannels
-// This API is used to query the information of MediaLive channels in batches.
+// DescribeStreamLiveChannels
+// This API is used to query StreamLive channels in batches.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
-func (c *Client) DescribeMediaLiveChannels(request *DescribeMediaLiveChannelsRequest) (response *DescribeMediaLiveChannelsResponse, err error) {
+func (c *Client) DescribeStreamLiveChannels(request *DescribeStreamLiveChannelsRequest) (response *DescribeStreamLiveChannelsResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaLiveChannelsRequest()
+        request = NewDescribeStreamLiveChannelsRequest()
     }
-    response = NewDescribeMediaLiveChannelsResponse()
+    response = NewDescribeStreamLiveChannelsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaLiveInputRequest() (request *DescribeMediaLiveInputRequest) {
-    request = &DescribeMediaLiveInputRequest{
+func NewDescribeStreamLiveInputRequest() (request *DescribeStreamLiveInputRequest) {
+    request = &DescribeStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveInput")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInput")
     return
 }
 
-func NewDescribeMediaLiveInputResponse() (response *DescribeMediaLiveInputResponse) {
-    response = &DescribeMediaLiveInputResponse{
+func NewDescribeStreamLiveInputResponse() (response *DescribeStreamLiveInputResponse) {
+    response = &DescribeStreamLiveInputResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaLiveInput
-// This API is used to query a media input.
+// DescribeStreamLiveInput
+// This API is used to query a StreamLive input.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
-func (c *Client) DescribeMediaLiveInput(request *DescribeMediaLiveInputRequest) (response *DescribeMediaLiveInputResponse, err error) {
+func (c *Client) DescribeStreamLiveInput(request *DescribeStreamLiveInputRequest) (response *DescribeStreamLiveInputResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaLiveInputRequest()
+        request = NewDescribeStreamLiveInputRequest()
     }
-    response = NewDescribeMediaLiveInputResponse()
+    response = NewDescribeStreamLiveInputResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaLiveInputSecurityGroupRequest() (request *DescribeMediaLiveInputSecurityGroupRequest) {
-    request = &DescribeMediaLiveInputSecurityGroupRequest{
+func NewDescribeStreamLiveInputSecurityGroupRequest() (request *DescribeStreamLiveInputSecurityGroupRequest) {
+    request = &DescribeStreamLiveInputSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveInputSecurityGroup")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputSecurityGroup")
     return
 }
 
-func NewDescribeMediaLiveInputSecurityGroupResponse() (response *DescribeMediaLiveInputSecurityGroupResponse) {
-    response = &DescribeMediaLiveInputSecurityGroupResponse{
+func NewDescribeStreamLiveInputSecurityGroupResponse() (response *DescribeStreamLiveInputSecurityGroupResponse) {
+    response = &DescribeStreamLiveInputSecurityGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaLiveInputSecurityGroup
+// DescribeStreamLiveInputSecurityGroup
 // This API is used to query an input security group.
 //
 // error code that may be returned:
@@ -491,94 +523,125 @@ func NewDescribeMediaLiveInputSecurityGroupResponse() (response *DescribeMediaLi
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
-func (c *Client) DescribeMediaLiveInputSecurityGroup(request *DescribeMediaLiveInputSecurityGroupRequest) (response *DescribeMediaLiveInputSecurityGroupResponse, err error) {
+func (c *Client) DescribeStreamLiveInputSecurityGroup(request *DescribeStreamLiveInputSecurityGroupRequest) (response *DescribeStreamLiveInputSecurityGroupResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaLiveInputSecurityGroupRequest()
+        request = NewDescribeStreamLiveInputSecurityGroupRequest()
     }
-    response = NewDescribeMediaLiveInputSecurityGroupResponse()
+    response = NewDescribeStreamLiveInputSecurityGroupResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaLiveInputSecurityGroupsRequest() (request *DescribeMediaLiveInputSecurityGroupsRequest) {
-    request = &DescribeMediaLiveInputSecurityGroupsRequest{
+func NewDescribeStreamLiveInputSecurityGroupsRequest() (request *DescribeStreamLiveInputSecurityGroupsRequest) {
+    request = &DescribeStreamLiveInputSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveInputSecurityGroups")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputSecurityGroups")
     return
 }
 
-func NewDescribeMediaLiveInputSecurityGroupsResponse() (response *DescribeMediaLiveInputSecurityGroupsResponse) {
-    response = &DescribeMediaLiveInputSecurityGroupsResponse{
+func NewDescribeStreamLiveInputSecurityGroupsResponse() (response *DescribeStreamLiveInputSecurityGroupsResponse) {
+    response = &DescribeStreamLiveInputSecurityGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaLiveInputSecurityGroups
-// This API is used to query the information of input security groups in batches.
+// DescribeStreamLiveInputSecurityGroups
+// This API is used to query input security groups in batches.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
-func (c *Client) DescribeMediaLiveInputSecurityGroups(request *DescribeMediaLiveInputSecurityGroupsRequest) (response *DescribeMediaLiveInputSecurityGroupsResponse, err error) {
+func (c *Client) DescribeStreamLiveInputSecurityGroups(request *DescribeStreamLiveInputSecurityGroupsRequest) (response *DescribeStreamLiveInputSecurityGroupsResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaLiveInputSecurityGroupsRequest()
+        request = NewDescribeStreamLiveInputSecurityGroupsRequest()
     }
-    response = NewDescribeMediaLiveInputSecurityGroupsResponse()
+    response = NewDescribeStreamLiveInputSecurityGroupsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaLiveInputsRequest() (request *DescribeMediaLiveInputsRequest) {
-    request = &DescribeMediaLiveInputsRequest{
+func NewDescribeStreamLiveInputsRequest() (request *DescribeStreamLiveInputsRequest) {
+    request = &DescribeStreamLiveInputsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveInputs")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputs")
     return
 }
 
-func NewDescribeMediaLiveInputsResponse() (response *DescribeMediaLiveInputsResponse) {
-    response = &DescribeMediaLiveInputsResponse{
+func NewDescribeStreamLiveInputsResponse() (response *DescribeStreamLiveInputsResponse) {
+    response = &DescribeStreamLiveInputsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaLiveInputs
-// This API is used to query the information of media inputs in batches.
+// DescribeStreamLiveInputs
+// This API is used to query StreamLive inputs in batches.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
-func (c *Client) DescribeMediaLiveInputs(request *DescribeMediaLiveInputsRequest) (response *DescribeMediaLiveInputsResponse, err error) {
+func (c *Client) DescribeStreamLiveInputs(request *DescribeStreamLiveInputsRequest) (response *DescribeStreamLiveInputsResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaLiveInputsRequest()
+        request = NewDescribeStreamLiveInputsRequest()
     }
-    response = NewDescribeMediaLiveInputsResponse()
+    response = NewDescribeStreamLiveInputsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewModifyMediaLiveChannelRequest() (request *ModifyMediaLiveChannelRequest) {
-    request = &ModifyMediaLiveChannelRequest{
+func NewDescribeStreamLivePlansRequest() (request *DescribeStreamLivePlansRequest) {
+    request = &DescribeStreamLivePlansRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "ModifyMediaLiveChannel")
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLivePlans")
     return
 }
 
-func NewModifyMediaLiveChannelResponse() (response *ModifyMediaLiveChannelResponse) {
-    response = &ModifyMediaLiveChannelResponse{
+func NewDescribeStreamLivePlansResponse() (response *DescribeStreamLivePlansResponse) {
+    response = &DescribeStreamLivePlansResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// ModifyMediaLiveChannel
-// This API is used to modify the information of a MediaLive channel.
+// DescribeStreamLivePlans
+// This API is used to query the events in the plan in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLivePlans(request *DescribeStreamLivePlansRequest) (response *DescribeStreamLivePlansResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLivePlansRequest()
+    }
+    response = NewDescribeStreamLivePlansResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyStreamLiveChannelRequest() (request *ModifyStreamLiveChannelRequest) {
+    request = &ModifyStreamLiveChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveChannel")
+    return
+}
+
+func NewModifyStreamLiveChannelResponse() (response *ModifyStreamLiveChannelResponse) {
+    response = &ModifyStreamLiveChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyStreamLiveChannel
+// This API is used to modify a StreamLive channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_AVTEMPLATES = "InvalidParameter.AVTemplates"
 //  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
 //  INVALIDPARAMETER_ATTACHEDINPUTS = "InvalidParameter.AttachedInputs"
 //  INVALIDPARAMETER_AUDIOTEMPLATES = "InvalidParameter.AudioTemplates"
@@ -587,32 +650,32 @@ func NewModifyMediaLiveChannelResponse() (response *ModifyMediaLiveChannelRespon
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
 //  INVALIDPARAMETER_VIDEOTEMPLATES = "InvalidParameter.VideoTemplates"
-func (c *Client) ModifyMediaLiveChannel(request *ModifyMediaLiveChannelRequest) (response *ModifyMediaLiveChannelResponse, err error) {
+func (c *Client) ModifyStreamLiveChannel(request *ModifyStreamLiveChannelRequest) (response *ModifyStreamLiveChannelResponse, err error) {
     if request == nil {
-        request = NewModifyMediaLiveChannelRequest()
+        request = NewModifyStreamLiveChannelRequest()
     }
-    response = NewModifyMediaLiveChannelResponse()
+    response = NewModifyStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewModifyMediaLiveInputRequest() (request *ModifyMediaLiveInputRequest) {
-    request = &ModifyMediaLiveInputRequest{
+func NewModifyStreamLiveInputRequest() (request *ModifyStreamLiveInputRequest) {
+    request = &ModifyStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "ModifyMediaLiveInput")
+    request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveInput")
     return
 }
 
-func NewModifyMediaLiveInputResponse() (response *ModifyMediaLiveInputResponse) {
-    response = &ModifyMediaLiveInputResponse{
+func NewModifyStreamLiveInputResponse() (response *ModifyStreamLiveInputResponse) {
+    response = &ModifyStreamLiveInputResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// ModifyMediaLiveInput
-// This API is used to update a media input.
+// ModifyStreamLiveInput
+// This API is used to modify a StreamLive input.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -623,32 +686,32 @@ func NewModifyMediaLiveInputResponse() (response *ModifyMediaLiveInputResponse) 
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_SECURITYGROUPS = "InvalidParameter.SecurityGroups"
 //  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
-func (c *Client) ModifyMediaLiveInput(request *ModifyMediaLiveInputRequest) (response *ModifyMediaLiveInputResponse, err error) {
+func (c *Client) ModifyStreamLiveInput(request *ModifyStreamLiveInputRequest) (response *ModifyStreamLiveInputResponse, err error) {
     if request == nil {
-        request = NewModifyMediaLiveInputRequest()
+        request = NewModifyStreamLiveInputRequest()
     }
-    response = NewModifyMediaLiveInputResponse()
+    response = NewModifyStreamLiveInputResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewModifyMediaLiveInputSecurityGroupRequest() (request *ModifyMediaLiveInputSecurityGroupRequest) {
-    request = &ModifyMediaLiveInputSecurityGroupRequest{
+func NewModifyStreamLiveInputSecurityGroupRequest() (request *ModifyStreamLiveInputSecurityGroupRequest) {
+    request = &ModifyStreamLiveInputSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "ModifyMediaLiveInputSecurityGroup")
+    request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveInputSecurityGroup")
     return
 }
 
-func NewModifyMediaLiveInputSecurityGroupResponse() (response *ModifyMediaLiveInputSecurityGroupResponse) {
-    response = &ModifyMediaLiveInputSecurityGroupResponse{
+func NewModifyStreamLiveInputSecurityGroupResponse() (response *ModifyStreamLiveInputSecurityGroupResponse) {
+    response = &ModifyStreamLiveInputSecurityGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// ModifyMediaLiveInputSecurityGroup
-// This API is used to update an input security group.
+// ModifyStreamLiveInputSecurityGroup
+// This API is used to modify an input security group.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -657,32 +720,32 @@ func NewModifyMediaLiveInputSecurityGroupResponse() (response *ModifyMediaLiveIn
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
-func (c *Client) ModifyMediaLiveInputSecurityGroup(request *ModifyMediaLiveInputSecurityGroupRequest) (response *ModifyMediaLiveInputSecurityGroupResponse, err error) {
+func (c *Client) ModifyStreamLiveInputSecurityGroup(request *ModifyStreamLiveInputSecurityGroupRequest) (response *ModifyStreamLiveInputSecurityGroupResponse, err error) {
     if request == nil {
-        request = NewModifyMediaLiveInputSecurityGroupRequest()
+        request = NewModifyStreamLiveInputSecurityGroupRequest()
     }
-    response = NewModifyMediaLiveInputSecurityGroupResponse()
+    response = NewModifyStreamLiveInputSecurityGroupResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewStartMediaLiveChannelRequest() (request *StartMediaLiveChannelRequest) {
-    request = &StartMediaLiveChannelRequest{
+func NewStartStreamLiveChannelRequest() (request *StartStreamLiveChannelRequest) {
+    request = &StartStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "StartMediaLiveChannel")
+    request.Init().WithApiInfo("mdl", APIVersion, "StartStreamLiveChannel")
     return
 }
 
-func NewStartMediaLiveChannelResponse() (response *StartMediaLiveChannelResponse) {
-    response = &StartMediaLiveChannelResponse{
+func NewStartStreamLiveChannelResponse() (response *StartStreamLiveChannelResponse) {
+    response = &StartStreamLiveChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// StartMediaLiveChannel
-// This API is used to start a MediaLive channel.
+// StartStreamLiveChannel
+// This API is used to start a StreamLive channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -690,32 +753,32 @@ func NewStartMediaLiveChannelResponse() (response *StartMediaLiveChannelResponse
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
-func (c *Client) StartMediaLiveChannel(request *StartMediaLiveChannelRequest) (response *StartMediaLiveChannelResponse, err error) {
+func (c *Client) StartStreamLiveChannel(request *StartStreamLiveChannelRequest) (response *StartStreamLiveChannelResponse, err error) {
     if request == nil {
-        request = NewStartMediaLiveChannelRequest()
+        request = NewStartStreamLiveChannelRequest()
     }
-    response = NewStartMediaLiveChannelResponse()
+    response = NewStartStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewStopMediaLiveChannelRequest() (request *StopMediaLiveChannelRequest) {
-    request = &StopMediaLiveChannelRequest{
+func NewStopStreamLiveChannelRequest() (request *StopStreamLiveChannelRequest) {
+    request = &StopStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdl", APIVersion, "StopMediaLiveChannel")
+    request.Init().WithApiInfo("mdl", APIVersion, "StopStreamLiveChannel")
     return
 }
 
-func NewStopMediaLiveChannelResponse() (response *StopMediaLiveChannelResponse) {
-    response = &StopMediaLiveChannelResponse{
+func NewStopStreamLiveChannelResponse() (response *StopStreamLiveChannelResponse) {
+    response = &StopStreamLiveChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// StopMediaLiveChannel
-// This API is used to stop a MediaLive channel.
+// StopStreamLiveChannel
+// This API is used to stop a StreamLive channel.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -723,11 +786,11 @@ func NewStopMediaLiveChannelResponse() (response *StopMediaLiveChannelResponse) 
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
-func (c *Client) StopMediaLiveChannel(request *StopMediaLiveChannelRequest) (response *StopMediaLiveChannelResponse, err error) {
+func (c *Client) StopStreamLiveChannel(request *StopStreamLiveChannelRequest) (response *StopStreamLiveChannelResponse, err error) {
     if request == nil {
-        request = NewStopMediaLiveChannelRequest()
+        request = NewStopStreamLiveChannelRequest()
     }
-    response = NewStopMediaLiveChannelResponse()
+    response = NewStopStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
 }

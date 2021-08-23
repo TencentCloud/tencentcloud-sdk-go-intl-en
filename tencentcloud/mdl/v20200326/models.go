@@ -20,14 +20,65 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
-type AttachedInputInfo struct {
+type AVTemplate struct {
 
-	// Media input ID.
+	// Name of an audio/video transcoding template, which can contain 1-20 case-sensitive letters and digits
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether video is needed. `0`: not needed; `1`: needed
+	NeedVideo *uint64 `json:"NeedVideo,omitempty" name:"NeedVideo"`
+
+	// Video codec. Valid values: `H264`, `H265`. If this parameter is left empty, the original video codec will be used.
+	Vcodec *string `json:"Vcodec,omitempty" name:"Vcodec"`
+
+	// Video width. Value range: (0, 3000]. The value must be an integer multiple of 4. If this parameter is left empty, the original video width will be used.
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Video height. Value range: (0, 3000]. The value must be an integer multiple of 4. If this parameter is left empty, the original video height will be used.
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Video frame rate. Value range: [1, 240]. If this parameter is left empty, the original frame rate will be used.
+	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
+
+	// Whether to enable top speed codec transcoding. Valid values: `CLOSE` (disable), `OPEN` (enable). Default value: `CLOSE`
+	TopSpeed *string `json:"TopSpeed,omitempty" name:"TopSpeed"`
+
+	// Compression ratio for top speed codec transcoding. Value range: [0, 50]. The lower the compression ratio, the higher the image quality.
+	BitrateCompressionRatio *uint64 `json:"BitrateCompressionRatio,omitempty" name:"BitrateCompressionRatio"`
+
+	// Whether audio is needed. `0`: not needed; `1`: needed
+	NeedAudio *int64 `json:"NeedAudio,omitempty" name:"NeedAudio"`
+
+	// Audio codec. Valid value: `AAC` (default)
+	Acodec *string `json:"Acodec,omitempty" name:"Acodec"`
+
+	// Audio bitrate. If this parameter is left empty, the original bitrate will be used.
+	// Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000`, `24000`, `28000`, `32000`, `40000`, `48000`, `56000`, `64000`, `80000`, `96000`, `112000`, `128000`, `160000`, `192000`, `224000`, `256000`, `288000`, `320000`, `384000`, `448000`, `512000`, `576000`, `640000`, `768000`, `896000`, `1024000`
+	AudioBitrate *uint64 `json:"AudioBitrate,omitempty" name:"AudioBitrate"`
+
+	// Video bitrate. Value range: [50000, 40000000]. The value must be an integer multiple of 1000. If this parameter is left empty, the original bitrate will be used.
+	VideoBitrate *uint64 `json:"VideoBitrate,omitempty" name:"VideoBitrate"`
+
+	// Bitrate control mode. Valid values: `CBR`, `ABR` (default)
+	RateControlMode *string `json:"RateControlMode,omitempty" name:"RateControlMode"`
+}
+
+type AttachedInput struct {
+
+	// Input ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Audio selector for media input. Quantity limit: [0,20]
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Audio selector for the input. There can be 0 to 20 audio selectors.
+	// Note: this field may return `null`, indicating that no valid value was found.
 	AudioSelectors []*AudioSelectorInfo `json:"AudioSelectors,omitempty" name:"AudioSelectors"`
+
+	// Pull mode. If the input type is `HLS_PULL` or `MP4_PULL`, you can set this parameter to `LOOP` or `ONCE`. `LOOP` is the default value.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	PullBehavior *string `json:"PullBehavior,omitempty" name:"PullBehavior"`
+
+	// Input failover configuration
+	// Note: this field may return `null`, indicating that no valid value was found.
+	FailOverSettings *FailOverSettings `json:"FailOverSettings,omitempty" name:"FailOverSettings"`
 }
 
 type AudioPidSelectionInfo struct {
@@ -85,32 +136,6 @@ type ChannelAlertInfos struct {
 	Pipeline1 []*ChannelPipelineAlerts `json:"Pipeline1,omitempty" name:"Pipeline1"`
 }
 
-type ChannelInfo struct {
-
-	// Channel ID.
-	Id *string `json:"Id,omitempty" name:"Id"`
-
-	// Channel status.
-	State *string `json:"State,omitempty" name:"State"`
-
-	// Information of associated input.
-	AttachedInputs []*AttachedInputInfo `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
-
-	// Information of output group.
-	OutputGroups []*OutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
-
-	// Channel name.
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Audio transcoding template array.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates"`
-
-	// Video transcoding template array.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates"`
-}
-
 type ChannelInputStatistics struct {
 
 	// Input ID.
@@ -145,33 +170,36 @@ type ChannelPipelineAlerts struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
-type CreateMediaLiveChannelRequest struct {
+type CreateStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
+	// Channel name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Associated media input. Quantity limit: [1,1].
-	AttachedInputs []*AttachedInputInfo `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
+	// Inputs to attach. You can attach 1-5 inputs.
+	AttachedInputs []*AttachedInput `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
 
-	// Configuration information of channel output groups. Quantity limit: [1,10].
-	OutputGroups []*OutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
+	// Configuration information of the channel’s output groups. Quantity: [1, 10]
+	OutputGroups []*StreamLiveOutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
 
-	// Audio transcoding template array. Quantity limit: [1,20].
+	// Audio transcoding templates. Quantity: [1, 20]
 	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates"`
 
-	// Video transcoding template array. Quantity limit: [1,10].
+	// Video transcoding templates. Quantity: [1, 10]
 	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates"`
+
+	// Audio/Video transcoding templates. Quantity: [1, 10]
+	AVTemplates []*AVTemplate `json:"AVTemplates,omitempty" name:"AVTemplates"`
 }
 
-func (r *CreateMediaLiveChannelRequest) ToJsonString() string {
+func (r *CreateStreamLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateMediaLiveChannelRequest) FromJsonString(s string) error {
+func (r *CreateStreamLiveChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -181,17 +209,18 @@ func (r *CreateMediaLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "OutputGroups")
 	delete(f, "AudioTemplates")
 	delete(f, "VideoTemplates")
+	delete(f, "AVTemplates")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaLiveChannelRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateMediaLiveChannelResponse struct {
+type CreateStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Channel ID.
+		// Channel ID
 		Id *string `json:"Id,omitempty" name:"Id"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -199,43 +228,43 @@ type CreateMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *CreateMediaLiveChannelResponse) ToJsonString() string {
+func (r *CreateStreamLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateMediaLiveChannelResponse) FromJsonString(s string) error {
+func (r *CreateStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateMediaLiveInputRequest struct {
+type CreateStreamLiveInputRequest struct {
 	*tchttp.BaseRequest
 
-	// Media input name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
+	// Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Media input type.
-	// Valid values: RTMP_PUSH/RTP_PUSH/UDP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
+	// Input type
+	// Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// ID of the input security group to be bound.
-	// Only one security group can be associated.
+	// ID of the input security group to attach
+	// You can attach only one security group to an input.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
-	// Input settings information, one or two sets of which need to be configured for RTMP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
+	// Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
 	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings"`
 }
 
-func (r *CreateMediaLiveInputRequest) ToJsonString() string {
+func (r *CreateStreamLiveInputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateMediaLiveInputRequest) FromJsonString(s string) error {
+func (r *CreateStreamLiveInputRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -245,16 +274,16 @@ func (r *CreateMediaLiveInputRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupIds")
 	delete(f, "InputSettings")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaLiveInputRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLiveInputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateMediaLiveInputResponse struct {
+type CreateStreamLiveInputResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Media input ID.
+		// Input ID
 		Id *string `json:"Id,omitempty" name:"Id"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -262,35 +291,35 @@ type CreateMediaLiveInputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *CreateMediaLiveInputResponse) ToJsonString() string {
+func (r *CreateStreamLiveInputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateMediaLiveInputResponse) FromJsonString(s string) error {
+func (r *CreateStreamLiveInputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateMediaLiveInputSecurityGroupRequest struct {
+type CreateStreamLiveInputSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 
-	// Input security group name, which can contain letters, digits, and underscores and must be unique at the region level.
+	// Input security group name, which can contain case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// List of allowlist entries. Quantity limit: [1,10].
+	// Allowlist entries. Quantity: [1, 10]
 	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
 }
 
-func (r *CreateMediaLiveInputSecurityGroupRequest) ToJsonString() string {
+func (r *CreateStreamLiveInputSecurityGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateMediaLiveInputSecurityGroupRequest) FromJsonString(s string) error {
+func (r *CreateStreamLiveInputSecurityGroupRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -298,16 +327,16 @@ func (r *CreateMediaLiveInputSecurityGroupRequest) FromJsonString(s string) erro
 	delete(f, "Name")
 	delete(f, "Whitelist")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMediaLiveInputSecurityGroupRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLiveInputSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateMediaLiveInputSecurityGroupResponse struct {
+type CreateStreamLiveInputSecurityGroupResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Security group ID.
+		// Security group ID
 		Id *string `json:"Id,omitempty" name:"Id"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -315,14 +344,64 @@ type CreateMediaLiveInputSecurityGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *CreateMediaLiveInputSecurityGroupResponse) ToJsonString() string {
+func (r *CreateStreamLiveInputSecurityGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateMediaLiveInputSecurityGroupResponse) FromJsonString(s string) error {
+func (r *CreateStreamLiveInputSecurityGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateStreamLivePlanRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the channel for which you want to configure an event
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Event configuration
+	Plan *PlanReq `json:"Plan,omitempty" name:"Plan"`
+}
+
+func (r *CreateStreamLivePlanRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamLivePlanRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChannelId")
+	delete(f, "Plan")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLivePlanRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateStreamLivePlanResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateStreamLivePlanResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamLivePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -338,33 +417,33 @@ type DashRemuxSettingsInfo struct {
 	PeriodTriggers *string `json:"PeriodTriggers,omitempty" name:"PeriodTriggers"`
 }
 
-type DeleteMediaLiveChannelRequest struct {
+type DeleteStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *DeleteMediaLiveChannelRequest) ToJsonString() string {
+func (r *DeleteStreamLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DeleteMediaLiveChannelRequest) FromJsonString(s string) error {
+func (r *DeleteStreamLiveChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaLiveChannelRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteMediaLiveChannelResponse struct {
+type DeleteStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -373,44 +452,44 @@ type DeleteMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DeleteMediaLiveChannelResponse) ToJsonString() string {
+func (r *DeleteStreamLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DeleteMediaLiveChannelResponse) FromJsonString(s string) error {
+func (r *DeleteStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteMediaLiveInputRequest struct {
+type DeleteStreamLiveInputRequest struct {
 	*tchttp.BaseRequest
 
-	// Media input ID.
+	// Input ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *DeleteMediaLiveInputRequest) ToJsonString() string {
+func (r *DeleteStreamLiveInputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DeleteMediaLiveInputRequest) FromJsonString(s string) error {
+func (r *DeleteStreamLiveInputRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaLiveInputRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamLiveInputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteMediaLiveInputResponse struct {
+type DeleteStreamLiveInputResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -419,44 +498,44 @@ type DeleteMediaLiveInputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DeleteMediaLiveInputResponse) ToJsonString() string {
+func (r *DeleteStreamLiveInputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DeleteMediaLiveInputResponse) FromJsonString(s string) error {
+func (r *DeleteStreamLiveInputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteMediaLiveInputSecurityGroupRequest struct {
+type DeleteStreamLiveInputSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 
-	// Input security group ID.
+	// Input security group ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *DeleteMediaLiveInputSecurityGroupRequest) ToJsonString() string {
+func (r *DeleteStreamLiveInputSecurityGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DeleteMediaLiveInputSecurityGroupRequest) FromJsonString(s string) error {
+func (r *DeleteStreamLiveInputSecurityGroupRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaLiveInputSecurityGroupRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamLiveInputSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteMediaLiveInputSecurityGroupResponse struct {
+type DeleteStreamLiveInputSecurityGroupResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -465,48 +544,48 @@ type DeleteMediaLiveInputSecurityGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DeleteMediaLiveInputSecurityGroupResponse) ToJsonString() string {
+func (r *DeleteStreamLiveInputSecurityGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DeleteMediaLiveInputSecurityGroupResponse) FromJsonString(s string) error {
+func (r *DeleteStreamLiveInputSecurityGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelAlertsRequest struct {
+type DescribeStreamLiveChannelAlertsRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 }
 
-func (r *DescribeMediaLiveChannelAlertsRequest) ToJsonString() string {
+func (r *DescribeStreamLiveChannelAlertsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelAlertsRequest) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelAlertsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "ChannelId")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelAlertsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveChannelAlertsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelAlertsResponse struct {
+type DescribeStreamLiveChannelAlertsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Alarm information of two pipelines under this channel.
+		// Alarm information of the channel’s two pipelines
 		Infos *ChannelAlertInfos `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -514,43 +593,43 @@ type DescribeMediaLiveChannelAlertsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaLiveChannelAlertsResponse) ToJsonString() string {
+func (r *DescribeStreamLiveChannelAlertsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelAlertsResponse) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelAlertsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelInputStatisticsRequest struct {
+type DescribeStreamLiveChannelInputStatisticsRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
-	// Statistics start time, which is one hour ago by default. Maximum value: the last 7 days.
-	// UTC time, such as `2020-01-01T12:00:00Z`.
+	// Start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+	// UTC time, such as `2020-01-01T12:00:00Z`
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Statistics end time, which is one hour after `StartTime` by default.
-	// UTC time, such as `2020-01-01T12:00:00Z`.
+	// End time for query, which is 1 hour after `StartTime` by default
+	// UTC time, such as `2020-01-01T12:00:00Z`
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Data interval. Valid values: 5s, 1min, 5min, 15min. Default value: 1min.
+	// Data collection interval. Valid values: `5s`, `1min` (default), `5min`, `15min`
 	Period *string `json:"Period,omitempty" name:"Period"`
 }
 
-func (r *DescribeMediaLiveChannelInputStatisticsRequest) ToJsonString() string {
+func (r *DescribeStreamLiveChannelInputStatisticsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelInputStatisticsRequest) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelInputStatisticsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -560,16 +639,16 @@ func (r *DescribeMediaLiveChannelInputStatisticsRequest) FromJsonString(s string
 	delete(f, "EndTime")
 	delete(f, "Period")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelInputStatisticsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveChannelInputStatisticsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelInputStatisticsResponse struct {
+type DescribeStreamLiveChannelInputStatisticsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Channel input statistics array.
+		// Channel input statistics
 		Infos []*ChannelInputStatistics `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -577,40 +656,40 @@ type DescribeMediaLiveChannelInputStatisticsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaLiveChannelInputStatisticsResponse) ToJsonString() string {
+func (r *DescribeStreamLiveChannelInputStatisticsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelInputStatisticsResponse) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelInputStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelLogsRequest struct {
+type DescribeStreamLiveChannelLogsRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
-	// Log start time, which is one hour ago by default. Maximum value: the last 7 days.
-	// UTC time, such as `2020-01-01T12:00:00Z`.
+	// Start time for query, which is 1 hour ago by default. You can query logs in the last 7 days.
+	// UTC time, such as `2020-01-01T12:00:00Z`
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Log end time, which is one hour after `StartTime` by default.
-	// UTC time, such as `2020-01-01T12:00:00Z`.
+	// End time for query, which is 1 hour after `StartTime` by default
+	// UTC time, such as `2020-01-01T12:00:00Z`
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
-func (r *DescribeMediaLiveChannelLogsRequest) ToJsonString() string {
+func (r *DescribeStreamLiveChannelLogsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelLogsRequest) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelLogsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -619,16 +698,16 @@ func (r *DescribeMediaLiveChannelLogsRequest) FromJsonString(s string) error {
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelLogsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveChannelLogsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelLogsResponse struct {
+type DescribeStreamLiveChannelLogsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Pipeline push information.
+		// Pipeline push information
 		Infos *PipelineLogInfo `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -636,43 +715,43 @@ type DescribeMediaLiveChannelLogsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaLiveChannelLogsResponse) ToJsonString() string {
+func (r *DescribeStreamLiveChannelLogsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelLogsResponse) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelOutputStatisticsRequest struct {
+type DescribeStreamLiveChannelOutputStatisticsRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
-	// Statistics start time, which is one hour ago by default. Maximum value: the last 7 days.
-	// UTC time, such as `2020-01-01T12:00:00Z`.
+	// Start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+	// UTC time, such as `2020-01-01T12:00:00Z`
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Statistics end time, which is one hour after `StartTime` by default.
-	// UTC time, such as `2020-01-01T12:00:00Z`.
+	// End time for query, which is 1 hour after `StartTime` by default
+	// UTC time, such as `2020-01-01T12:00:00Z`
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Data interval. Valid values: 5s, 1min, 5min, 15min. Default value: 1min.
+	// Data collection interval. Valid values: `5s`, `1min` (default), `5min`, `15min`
 	Period *string `json:"Period,omitempty" name:"Period"`
 }
 
-func (r *DescribeMediaLiveChannelOutputStatisticsRequest) ToJsonString() string {
+func (r *DescribeStreamLiveChannelOutputStatisticsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelOutputStatisticsRequest) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelOutputStatisticsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -682,16 +761,16 @@ func (r *DescribeMediaLiveChannelOutputStatisticsRequest) FromJsonString(s strin
 	delete(f, "EndTime")
 	delete(f, "Period")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelOutputStatisticsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveChannelOutputStatisticsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelOutputStatisticsResponse struct {
+type DescribeStreamLiveChannelOutputStatisticsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Channel output information.
+		// Channel output information
 		Infos []*ChannelOutputsStatistics `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -699,143 +778,143 @@ type DescribeMediaLiveChannelOutputStatisticsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaLiveChannelOutputStatisticsResponse) ToJsonString() string {
+func (r *DescribeStreamLiveChannelOutputStatisticsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelOutputStatisticsResponse) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelOutputStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelRequest struct {
+type DescribeStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *DescribeMediaLiveChannelRequest) ToJsonString() string {
+func (r *DescribeStreamLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelRequest) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelResponse struct {
+type DescribeStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Channel information.
-		Info *ChannelInfo `json:"Info,omitempty" name:"Info"`
+		// Channel information
+		Info *StreamLiveChannelInfo `json:"Info,omitempty" name:"Info"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaLiveChannelResponse) ToJsonString() string {
+func (r *DescribeStreamLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelResponse) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelsRequest struct {
+type DescribeStreamLiveChannelsRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *DescribeMediaLiveChannelsRequest) ToJsonString() string {
+func (r *DescribeStreamLiveChannelsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelsRequest) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveChannelsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveChannelsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveChannelsResponse struct {
+type DescribeStreamLiveChannelsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Channel list information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Infos []*ChannelInfo `json:"Infos,omitempty" name:"Infos"`
+		// List of channel information
+	// Note: this field may return `null`, indicating that no valid value was found.
+		Infos []*StreamLiveChannelInfo `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaLiveChannelsResponse) ToJsonString() string {
+func (r *DescribeStreamLiveChannelsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveChannelsResponse) FromJsonString(s string) error {
+func (r *DescribeStreamLiveChannelsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveInputRequest struct {
+type DescribeStreamLiveInputRequest struct {
 	*tchttp.BaseRequest
 
-	// Media input ID.
+	// Input ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *DescribeMediaLiveInputRequest) ToJsonString() string {
+func (r *DescribeStreamLiveInputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveInputRequest) FromJsonString(s string) error {
+func (r *DescribeStreamLiveInputRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveInputRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveInputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveInputResponse struct {
+type DescribeStreamLiveInputResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// MediaLive input information.
+		// Input information
 		Info *InputInfo `json:"Info,omitempty" name:"Info"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -843,48 +922,48 @@ type DescribeMediaLiveInputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaLiveInputResponse) ToJsonString() string {
+func (r *DescribeStreamLiveInputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveInputResponse) FromJsonString(s string) error {
+func (r *DescribeStreamLiveInputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveInputSecurityGroupRequest struct {
+type DescribeStreamLiveInputSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 
-	// Input security group ID.
+	// Input security group ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *DescribeMediaLiveInputSecurityGroupRequest) ToJsonString() string {
+func (r *DescribeStreamLiveInputSecurityGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveInputSecurityGroupRequest) FromJsonString(s string) error {
+func (r *DescribeStreamLiveInputSecurityGroupRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveInputSecurityGroupRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveInputSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveInputSecurityGroupResponse struct {
+type DescribeStreamLiveInputSecurityGroupResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Input security group information.
+		// Input security group information
 		Info *InputSecurityGroupInfo `json:"Info,omitempty" name:"Info"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -892,44 +971,44 @@ type DescribeMediaLiveInputSecurityGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaLiveInputSecurityGroupResponse) ToJsonString() string {
+func (r *DescribeStreamLiveInputSecurityGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveInputSecurityGroupResponse) FromJsonString(s string) error {
+func (r *DescribeStreamLiveInputSecurityGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveInputSecurityGroupsRequest struct {
+type DescribeStreamLiveInputSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *DescribeMediaLiveInputSecurityGroupsRequest) ToJsonString() string {
+func (r *DescribeStreamLiveInputSecurityGroupsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveInputSecurityGroupsRequest) FromJsonString(s string) error {
+func (r *DescribeStreamLiveInputSecurityGroupsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveInputSecurityGroupsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveInputSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveInputSecurityGroupsResponse struct {
+type DescribeStreamLiveInputSecurityGroupsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Input security group information list.
+		// List of input security group information
 		Infos []*InputSecurityGroupInfo `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -937,45 +1016,45 @@ type DescribeMediaLiveInputSecurityGroupsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaLiveInputSecurityGroupsResponse) ToJsonString() string {
+func (r *DescribeStreamLiveInputSecurityGroupsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveInputSecurityGroupsResponse) FromJsonString(s string) error {
+func (r *DescribeStreamLiveInputSecurityGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveInputsRequest struct {
+type DescribeStreamLiveInputsRequest struct {
 	*tchttp.BaseRequest
 }
 
-func (r *DescribeMediaLiveInputsRequest) ToJsonString() string {
+func (r *DescribeStreamLiveInputsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveInputsRequest) FromJsonString(s string) error {
+func (r *DescribeStreamLiveInputsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaLiveInputsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveInputsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeMediaLiveInputsResponse struct {
+type DescribeStreamLiveInputsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// MediaLive input information list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// List of input information
+	// Note: this field may return `null`, indicating that no valid value was found.
 		Infos []*InputInfo `json:"Infos,omitempty" name:"Infos"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -983,14 +1062,64 @@ type DescribeMediaLiveInputsResponse struct {
 	} `json:"Response"`
 }
 
-func (r *DescribeMediaLiveInputsResponse) ToJsonString() string {
+func (r *DescribeStreamLiveInputsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeMediaLiveInputsResponse) FromJsonString(s string) error {
+func (r *DescribeStreamLiveInputsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamLivePlansRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the channel whose events you want to query
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+}
+
+func (r *DescribeStreamLivePlansRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLivePlansRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChannelId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLivePlansRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamLivePlansResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of event information
+	// Note: this field may return `null`, indicating that no valid value was found.
+		Infos []*PlanResp `json:"Infos,omitempty" name:"Infos"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStreamLivePlansResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLivePlansResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1038,22 +1167,51 @@ type DrmKey struct {
 
 type DrmSettingsInfo struct {
 
-	// Whether to enable DRM encryption. Valid value: CLOSE/OPEN. Default value: CLOSE.
-	// Currently, this is supported only for HLS/DASH/HLS_ARCHIVE/DASH_ARCHIVE.
+	// Whether to enable DRM encryption. Valid values: `CLOSE` (disable), `OPEN` (enable). Default value: `CLOSE`
+	// DRM encryption is supported only for HLS, DASH, HLS_ARCHIVE, DASH_ARCHIVE, HLS_MEDIAPACKAGE, and DASH_MEDIAPACKAGE outputs.
 	State *string `json:"State,omitempty" name:"State"`
 
-	// When `Scheme` is set to TencentDRM, this parameter should be set to the `ContentId` of DRM encryption, and if this parameter is left empty, a `ContentId` will be automatically created. For more information, please see [here](https://intl.cloud.tencent.com/document/product/1000/40960?from_cn_redirect=1).
-	// When `Scheme` is set to CustomDRMKeys, this parameter is required and should be specified by the user.
-	ContentId *string `json:"ContentId,omitempty" name:"ContentId"`
-
-	// Valid values: TencentDRM, CustomDRMKeys. If this parameter is left empty, TencentDRM will be used by default.
-	// TencentDRM refers to Tencent digital rights management (DRM) encryption. For more information, please see [here](https://intl.cloud.tencent.com/solution/drm?from_cn_redirect=1).
-	// CustomDRMKeys refers to an encryption key customized by the user.
+	// This parameter can be set to `CustomDRMKeys` or left empty.
+	// CustomDRMKeys means encryption keys customized by users.
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
+
+	// If `Scheme` is set to `CustomDRMKeys`, this parameter is required and should be specified by the user.
+	ContentId *string `json:"ContentId,omitempty" name:"ContentId"`
 
 	// The key customized by the content user, which is required when `Scheme` is set to CustomDRMKeys.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Keys []*DrmKey `json:"Keys,omitempty" name:"Keys"`
+}
+
+type EventSettingsReq struct {
+
+	// Only `INPUT_SWITCH` is supported currently. If you do not specify this parameter, `INPUT_SWITCH` will be used.
+	EventType *string `json:"EventType,omitempty" name:"EventType"`
+
+	// ID of the input to attach, which is required if `EventType` is `INPUT_SWITCH`
+	InputAttachment *string `json:"InputAttachment,omitempty" name:"InputAttachment"`
+}
+
+type EventSettingsResp struct {
+
+	// Only `INPUT_SWITCH` is supported currently.
+	EventType *string `json:"EventType,omitempty" name:"EventType"`
+
+	// ID of the input attached, which is not empty if `EventType` is `INPUT_SWITCH`
+	InputAttachment *string `json:"InputAttachment,omitempty" name:"InputAttachment"`
+}
+
+type FailOverSettings struct {
+
+	// ID of the backup input
+	// Note: this field may return `null`, indicating that no valid value was found.
+	SecondaryInputId *string `json:"SecondaryInputId,omitempty" name:"SecondaryInputId"`
+
+	// The wait time (ms) for triggering failover after the primary input becomes unavailable. Value range: [1000, 86400000]. Default value: `3000`
+	LossThreshold *int64 `json:"LossThreshold,omitempty" name:"LossThreshold"`
+
+	// Failover policy. Valid values: `CURRENT_PREFERRED` (default), `PRIMARY_PREFERRED`
+	RecoverBehavior *string `json:"RecoverBehavior,omitempty" name:"RecoverBehavior"`
 }
 
 type HlsRemuxSettingsInfo struct {
@@ -1069,6 +1227,9 @@ type HlsRemuxSettingsInfo struct {
 
 	// PDT duration in seconds. Value range: (0,3000]. Default value: 600.
 	PdtDuration *uint64 `json:"PdtDuration,omitempty" name:"PdtDuration"`
+
+	// Audio/Video packaging scheme. Valid values: `SEPARATE`, `MERGE`
+	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 }
 
 type InputInfo struct {
@@ -1132,6 +1293,10 @@ type InputSettingInfo struct {
 	// RTP/UDP input address, which does not need to be entered for the input parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	InputAddress *string `json:"InputAddress,omitempty" name:"InputAddress"`
+
+	// Source type for stream pulling and relaying. To pull content from private-read COS buckets under the current account, set this parameter to `TencentCOS`; otherwise, leave it empty.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
 }
 
 type InputStatistics struct {
@@ -1163,42 +1328,39 @@ type LogMessageInfo struct {
 	StreamInfo *StreamInfo `json:"StreamInfo,omitempty" name:"StreamInfo"`
 }
 
-type MediaPackageSettingsInfo struct {
-
-	// Media packaging ID.
-	Id *string `json:"Id,omitempty" name:"Id"`
-}
-
-type ModifyMediaLiveChannelRequest struct {
+type ModifyStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Channel name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
+	// Channel name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Associated media input. Quantity limit: [1,1].
-	AttachedInputs []*AttachedInputInfo `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
+	// Inputs to attach. You can attach 1-5 inputs.
+	AttachedInputs []*AttachedInput `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
 
-	// Configuration information of channel output groups. Quantity limit: [1,10].
-	OutputGroups []*OutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
+	// Configuration information of the channel’s output groups. Quantity: [1, 10]
+	OutputGroups []*StreamLiveOutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
 
-	// Audio transcoding template array. Quantity limit: [1,20].
+	// Audio transcoding templates. Quantity: [1, 20]
 	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates"`
 
-	// Video transcoding template array. Quantity limit: [1,10].
+	// Video transcoding templates. Quantity: [1, 10]
 	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates"`
+
+	// Audio/Video transcoding templates. Quantity: [1, 10]
+	AVTemplates []*AVTemplate `json:"AVTemplates,omitempty" name:"AVTemplates"`
 }
 
-func (r *ModifyMediaLiveChannelRequest) ToJsonString() string {
+func (r *ModifyStreamLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaLiveChannelRequest) FromJsonString(s string) error {
+func (r *ModifyStreamLiveChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -1209,13 +1371,14 @@ func (r *ModifyMediaLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "OutputGroups")
 	delete(f, "AudioTemplates")
 	delete(f, "VideoTemplates")
+	delete(f, "AVTemplates")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaLiveChannelRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyMediaLiveChannelResponse struct {
+type ModifyStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -1224,44 +1387,44 @@ type ModifyMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *ModifyMediaLiveChannelResponse) ToJsonString() string {
+func (r *ModifyStreamLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaLiveChannelResponse) FromJsonString(s string) error {
+func (r *ModifyStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyMediaLiveInputRequest struct {
+type ModifyStreamLiveInputRequest struct {
 	*tchttp.BaseRequest
 
-	// Media input ID.
+	// Input ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Media input name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
+	// Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// List of IDs of bound security groups.
+	// List of the IDs of the security groups to attach
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
-	// Input settings information.
-	// One or two sets of settings need to be configured for RTMP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
-	// This parameter can be left empty for RTP_PUSH and UDP_PUSH.
-	// Note: if it is left empty or the array is empty, the original `InputSettings` value will be used.
+	// Input settings
+	// For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	// This parameter can be left empty for RTP_PUSH and UDP_PUSH inputs.
+	// Note: If this parameter is not specified or empty, the original input settings will be used.
 	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings"`
 }
 
-func (r *ModifyMediaLiveInputRequest) ToJsonString() string {
+func (r *ModifyStreamLiveInputRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaLiveInputRequest) FromJsonString(s string) error {
+func (r *ModifyStreamLiveInputRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -1271,12 +1434,12 @@ func (r *ModifyMediaLiveInputRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupIds")
 	delete(f, "InputSettings")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaLiveInputRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamLiveInputRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyMediaLiveInputResponse struct {
+type ModifyStreamLiveInputResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -1285,38 +1448,38 @@ type ModifyMediaLiveInputResponse struct {
 	} `json:"Response"`
 }
 
-func (r *ModifyMediaLiveInputResponse) ToJsonString() string {
+func (r *ModifyStreamLiveInputResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaLiveInputResponse) FromJsonString(s string) error {
+func (r *ModifyStreamLiveInputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyMediaLiveInputSecurityGroupRequest struct {
+type ModifyStreamLiveInputSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 
-	// Input security group ID.
+	// Input security group ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Input security group name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
+	// Input security group name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// List of allowlist entries. Up to 10 entries are allowed.
+	// Allowlist entries (max: 10)
 	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
 }
 
-func (r *ModifyMediaLiveInputSecurityGroupRequest) ToJsonString() string {
+func (r *ModifyStreamLiveInputSecurityGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaLiveInputSecurityGroupRequest) FromJsonString(s string) error {
+func (r *ModifyStreamLiveInputSecurityGroupRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -1325,12 +1488,12 @@ func (r *ModifyMediaLiveInputSecurityGroupRequest) FromJsonString(s string) erro
 	delete(f, "Name")
 	delete(f, "Whitelist")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaLiveInputSecurityGroupRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamLiveInputSecurityGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyMediaLiveInputSecurityGroupResponse struct {
+type ModifyStreamLiveInputSecurityGroupResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -1339,45 +1502,15 @@ type ModifyMediaLiveInputSecurityGroupResponse struct {
 	} `json:"Response"`
 }
 
-func (r *ModifyMediaLiveInputSecurityGroupResponse) ToJsonString() string {
+func (r *ModifyStreamLiveInputSecurityGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyMediaLiveInputSecurityGroupResponse) FromJsonString(s string) error {
+func (r *ModifyStreamLiveInputSecurityGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
-}
-
-type OutputGroupsInfo struct {
-
-	// Channel output group name, which can contain 1–32 letters, digits, and underscores and must be unique at the channel level.
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Output protocol type.
-	// Valid values: HLS, DASH, HLS_ARCHIVE, HLS_MEDIA_PACKAGE, DASH_MEDIA_PACKAGE.
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// Output information.
-	// Quantity limit: [1,1] for RTMP/RTP; [1,10] for HLS/DASH.
-	Outputs []*OutputInfo `json:"Outputs,omitempty" name:"Outputs"`
-
-	// Relay destination address. Quantity limit: [1,2].
-	Destinations []*DestinationInfo `json:"Destinations,omitempty" name:"Destinations"`
-
-	// HLS protocol configuration information, which takes effect only for HLS/HLS_ARCHIVE.
-	HlsRemuxSettings *HlsRemuxSettingsInfo `json:"HlsRemuxSettings,omitempty" name:"HlsRemuxSettings"`
-
-	// DASH protocol configuration information, which takes effect only for DASH/DSAH_ARCHIVE.
-	DashRemuxSettings *DashRemuxSettingsInfo `json:"DashRemuxSettings,omitempty" name:"DashRemuxSettings"`
-
-	// DRM configuration information.
-	DrmSettings *DrmSettingsInfo `json:"DrmSettings,omitempty" name:"DrmSettings"`
-
-	// Configuration information of media packaging, which is required when `Type` is set to MediaPackage.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MediaPackageSettings *MediaPackageSettingsInfo `json:"MediaPackageSettings,omitempty" name:"MediaPackageSettings"`
 }
 
 type OutputInfo struct {
@@ -1396,6 +1529,10 @@ type OutputInfo struct {
 
 	// SCTE-35 information configuration.
 	Scte35Settings *Scte35SettingsInfo `json:"Scte35Settings,omitempty" name:"Scte35Settings"`
+
+	// Audio/Video transcoding template name. If `HlsRemuxSettings.Scheme` is `MERGE`, there is 1 audio/video transcoding template. Otherwise, this parameter is empty.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	AVTemplateNames []*string `json:"AVTemplateNames,omitempty" name:"AVTemplateNames"`
 }
 
 type OutputsStatistics struct {
@@ -1447,39 +1584,63 @@ type PipelineOutputStatistics struct {
 	NetworkOut *uint64 `json:"NetworkOut,omitempty" name:"NetworkOut"`
 }
 
+type PlanReq struct {
+
+	// Event name
+	EventName *string `json:"EventName,omitempty" name:"EventName"`
+
+	// Event trigger time settings
+	TimingSettings *TimingSettingsReq `json:"TimingSettings,omitempty" name:"TimingSettings"`
+
+	// Event configuration
+	EventSettings *EventSettingsReq `json:"EventSettings,omitempty" name:"EventSettings"`
+}
+
+type PlanResp struct {
+
+	// Event name
+	EventName *string `json:"EventName,omitempty" name:"EventName"`
+
+	// Event trigger time settings
+	TimingSettings *TimingSettingsResp `json:"TimingSettings,omitempty" name:"TimingSettings"`
+
+	// Event configuration
+	EventSettings *EventSettingsResp `json:"EventSettings,omitempty" name:"EventSettings"`
+}
+
 type Scte35SettingsInfo struct {
 
 	// Whether to pass through SCTE-35 information. Valid values: NO_PASSTHROUGH/PASSTHROUGH. Default value: NO_PASSTHROUGH.
 	Behavior *string `json:"Behavior,omitempty" name:"Behavior"`
 }
 
-type StartMediaLiveChannelRequest struct {
+type StartStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *StartMediaLiveChannelRequest) ToJsonString() string {
+func (r *StartStreamLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *StartMediaLiveChannelRequest) FromJsonString(s string) error {
+func (r *StartStreamLiveChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartMediaLiveChannelRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartStreamLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type StartMediaLiveChannelResponse struct {
+type StartStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -1488,44 +1649,44 @@ type StartMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *StartMediaLiveChannelResponse) ToJsonString() string {
+func (r *StartStreamLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *StartMediaLiveChannelResponse) FromJsonString(s string) error {
+func (r *StartStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type StopMediaLiveChannelRequest struct {
+type StopStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
 
-	// Channel ID.
+	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
-func (r *StopMediaLiveChannelRequest) ToJsonString() string {
+func (r *StopStreamLiveChannelRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *StopMediaLiveChannelRequest) FromJsonString(s string) error {
+func (r *StopStreamLiveChannelRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "Id")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopMediaLiveChannelRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopStreamLiveChannelRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type StopMediaLiveChannelResponse struct {
+type StopStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
@@ -1534,14 +1695,14 @@ type StopMediaLiveChannelResponse struct {
 	} `json:"Response"`
 }
 
-func (r *StopMediaLiveChannelResponse) ToJsonString() string {
+func (r *StopStreamLiveChannelResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *StopMediaLiveChannelResponse) FromJsonString(s string) error {
+func (r *StopStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1583,6 +1744,75 @@ type StreamInfo struct {
 	Scte35 []*StreamScte35Info `json:"Scte35,omitempty" name:"Scte35"`
 }
 
+type StreamLiveChannelInfo struct {
+
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Channel status
+	State *string `json:"State,omitempty" name:"State"`
+
+	// Information of attached inputs
+	AttachedInputs []*AttachedInput `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
+
+	// Information of output groups
+	OutputGroups []*StreamLiveOutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
+
+	// Channel name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Audio transcoding templates
+	// Note: this field may return `null`, indicating that no valid value was found.
+	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates"`
+
+	// Video transcoding templates
+	// Note: this field may return `null`, indicating that no valid value was found.
+	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates"`
+
+	// Audio/Video transcoding templates
+	// Note: this field may return `null`, indicating that no valid value was found.
+	AVTemplates []*AVTemplate `json:"AVTemplates,omitempty" name:"AVTemplates"`
+}
+
+type StreamLiveOutputGroupsInfo struct {
+
+	// Output group name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the channel level
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Output protocol
+	// Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Output information
+	// If the type is RTMP or RTP, only one output is allowed; if it is HLS or DASH, 1-10 outputs are allowed.
+	Outputs []*OutputInfo `json:"Outputs,omitempty" name:"Outputs"`
+
+	// Relay destinations. Quantity: [1, 2]
+	Destinations []*DestinationInfo `json:"Destinations,omitempty" name:"Destinations"`
+
+	// HLS protocol configuration information, which takes effect only for HLS/HLS_ARCHIVE outputs
+	// Note: this field may return `null`, indicating that no valid value was found.
+	HlsRemuxSettings *HlsRemuxSettingsInfo `json:"HlsRemuxSettings,omitempty" name:"HlsRemuxSettings"`
+
+	// DRM configuration information
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DrmSettings *DrmSettingsInfo `json:"DrmSettings,omitempty" name:"DrmSettings"`
+
+	// DASH protocol configuration information, which takes effect only for DASH/DASH_ARCHIVE outputs
+	// Note: this field may return `null`, indicating that no valid value was found.
+	DashRemuxSettings *DashRemuxSettingsInfo `json:"DashRemuxSettings,omitempty" name:"DashRemuxSettings"`
+
+	// StreamPackage configuration information, which is required if the output type is StreamPackage
+	// Note: this field may return `null`, indicating that no valid value was found.
+	StreamPackageSettings *StreamPackageSettingsInfo `json:"StreamPackageSettings,omitempty" name:"StreamPackageSettings"`
+}
+
+type StreamPackageSettingsInfo struct {
+
+	// Channel ID in StreamPackage
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type StreamScte35Info struct {
 
 	// SCTE-35 `Pid`.
@@ -1615,6 +1845,26 @@ type StreamVideoInfo struct {
 	// Video height.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
+}
+
+type TimingSettingsReq struct {
+
+	// Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`
+	StartType *string `json:"StartType,omitempty" name:"StartType"`
+
+	// Required if `StartType` is `FIXED_TIME`
+	// UTC time, such as `2020-01-01T12:00:00Z`
+	Time *string `json:"Time,omitempty" name:"Time"`
+}
+
+type TimingSettingsResp struct {
+
+	// Event trigger type
+	StartType *string `json:"StartType,omitempty" name:"StartType"`
+
+	// Not empty if `StartType` is `FIXED_TIME`
+	// UTC time, such as `2020-01-01T12:00:00Z`
+	Time *string `json:"Time,omitempty" name:"Time"`
 }
 
 type VideoPipelineInputStatistics struct {
@@ -1654,4 +1904,7 @@ type VideoTemplateInfo struct {
 
 	// Top speed codec compression ratio. Value range: [0,50]. The lower the compression ratio, the higher the image quality.
 	BitrateCompressionRatio *uint64 `json:"BitrateCompressionRatio,omitempty" name:"BitrateCompressionRatio"`
+
+	// Bitrate control mode. Valid values: `CBR`, `ABR` (default)
+	RateControlMode *string `json:"RateControlMode,omitempty" name:"RateControlMode"`
 }
