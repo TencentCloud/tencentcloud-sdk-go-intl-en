@@ -43,23 +43,23 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
-func NewCreateMediaConnectFlowRequest() (request *CreateMediaConnectFlowRequest) {
-    request = &CreateMediaConnectFlowRequest{
+func NewCreateStreamLinkFlowRequest() (request *CreateStreamLinkFlowRequest) {
+    request = &CreateStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdc", APIVersion, "CreateMediaConnectFlow")
+    request.Init().WithApiInfo("mdc", APIVersion, "CreateStreamLinkFlow")
     return
 }
 
-func NewCreateMediaConnectFlowResponse() (response *CreateMediaConnectFlowResponse) {
-    response = &CreateMediaConnectFlowResponse{
+func NewCreateStreamLinkFlowResponse() (response *CreateStreamLinkFlowResponse) {
+    response = &CreateStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// CreateMediaConnectFlow
-// This API is used to create the configuration of a MediaConnect flow.
+// CreateStreamLinkFlow
+// This API is used to create a StreamLink flow.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -68,329 +68,230 @@ func NewCreateMediaConnectFlowResponse() (response *CreateMediaConnectFlowRespon
 //  INVALIDPARAMETER_INPUT = "InvalidParameter.Input"
 //  INVALIDPARAMETER_MAXBANDWIDTH = "InvalidParameter.MaxBandwidth"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
-func (c *Client) CreateMediaConnectFlow(request *CreateMediaConnectFlowRequest) (response *CreateMediaConnectFlowResponse, err error) {
+func (c *Client) CreateStreamLinkFlow(request *CreateStreamLinkFlowRequest) (response *CreateStreamLinkFlowResponse, err error) {
     if request == nil {
-        request = NewCreateMediaConnectFlowRequest()
+        request = NewCreateStreamLinkFlowRequest()
     }
-    response = NewCreateMediaConnectFlowResponse()
+    response = NewCreateStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewCreateMediaConnectOutputRequest() (request *CreateMediaConnectOutputRequest) {
-    request = &CreateMediaConnectOutputRequest{
+func NewDeleteStreamLinkFlowRequest() (request *DeleteStreamLinkFlowRequest) {
+    request = &DeleteStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdc", APIVersion, "CreateMediaConnectOutput")
+    request.Init().WithApiInfo("mdc", APIVersion, "DeleteStreamLinkFlow")
     return
 }
 
-func NewCreateMediaConnectOutputResponse() (response *CreateMediaConnectOutputResponse) {
-    response = &CreateMediaConnectOutputResponse{
+func NewDeleteStreamLinkFlowResponse() (response *DeleteStreamLinkFlowResponse) {
+    response = &DeleteStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// CreateMediaConnectOutput
-// This API is used to create the output information of a MediaConnect flow.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
-//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
-//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
-//  INVALIDPARAMETER_OUTPUT = "InvalidParameter.Output"
-//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
-func (c *Client) CreateMediaConnectOutput(request *CreateMediaConnectOutputRequest) (response *CreateMediaConnectOutputResponse, err error) {
-    if request == nil {
-        request = NewCreateMediaConnectOutputRequest()
-    }
-    response = NewCreateMediaConnectOutputResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteMediaConnectFlowRequest() (request *DeleteMediaConnectFlowRequest) {
-    request = &DeleteMediaConnectFlowRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("mdc", APIVersion, "DeleteMediaConnectFlow")
-    return
-}
-
-func NewDeleteMediaConnectFlowResponse() (response *DeleteMediaConnectFlowResponse) {
-    response = &DeleteMediaConnectFlowResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteMediaConnectFlow
-// This API is used to delete the configuration of a MediaConnect flow.
+// DeleteStreamLinkFlow
+// This API is used to delete a StreamLink flow.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
-func (c *Client) DeleteMediaConnectFlow(request *DeleteMediaConnectFlowRequest) (response *DeleteMediaConnectFlowResponse, err error) {
+func (c *Client) DeleteStreamLinkFlow(request *DeleteStreamLinkFlowRequest) (response *DeleteStreamLinkFlowResponse, err error) {
     if request == nil {
-        request = NewDeleteMediaConnectFlowRequest()
+        request = NewDeleteStreamLinkFlowRequest()
     }
-    response = NewDeleteMediaConnectFlowResponse()
+    response = NewDeleteStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDeleteMediaConnectOutputRequest() (request *DeleteMediaConnectOutputRequest) {
-    request = &DeleteMediaConnectOutputRequest{
+func NewDeleteStreamLinkOutputRequest() (request *DeleteStreamLinkOutputRequest) {
+    request = &DeleteStreamLinkOutputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdc", APIVersion, "DeleteMediaConnectOutput")
+    request.Init().WithApiInfo("mdc", APIVersion, "DeleteStreamLinkOutput")
     return
 }
 
-func NewDeleteMediaConnectOutputResponse() (response *DeleteMediaConnectOutputResponse) {
-    response = &DeleteMediaConnectOutputResponse{
+func NewDeleteStreamLinkOutputResponse() (response *DeleteStreamLinkOutputResponse) {
+    response = &DeleteStreamLinkOutputResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DeleteMediaConnectOutput
-// This API is used to delete the output configuration of a MediaConnect flow.
+// DeleteStreamLinkOutput
+// This API is used to delete an output of a StreamLink flow.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
-func (c *Client) DeleteMediaConnectOutput(request *DeleteMediaConnectOutputRequest) (response *DeleteMediaConnectOutputResponse, err error) {
+func (c *Client) DeleteStreamLinkOutput(request *DeleteStreamLinkOutputRequest) (response *DeleteStreamLinkOutputResponse, err error) {
     if request == nil {
-        request = NewDeleteMediaConnectOutputRequest()
+        request = NewDeleteStreamLinkOutputRequest()
     }
-    response = NewDeleteMediaConnectOutputResponse()
+    response = NewDeleteStreamLinkOutputResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaConnectFlowRequest() (request *DescribeMediaConnectFlowRequest) {
-    request = &DescribeMediaConnectFlowRequest{
+func NewDescribeStreamLinkFlowRequest() (request *DescribeStreamLinkFlowRequest) {
+    request = &DescribeStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdc", APIVersion, "DescribeMediaConnectFlow")
+    request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlow")
     return
 }
 
-func NewDescribeMediaConnectFlowResponse() (response *DescribeMediaConnectFlowResponse) {
-    response = &DescribeMediaConnectFlowResponse{
+func NewDescribeStreamLinkFlowResponse() (response *DescribeStreamLinkFlowResponse) {
+    response = &DescribeStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaConnectFlow
-// This API is used to query the configuration information of a MediaConnect flow.
+// DescribeStreamLinkFlow
+// This API is used to query the configuration information of a StreamLink flow.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
-func (c *Client) DescribeMediaConnectFlow(request *DescribeMediaConnectFlowRequest) (response *DescribeMediaConnectFlowResponse, err error) {
+func (c *Client) DescribeStreamLinkFlow(request *DescribeStreamLinkFlowRequest) (response *DescribeStreamLinkFlowResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaConnectFlowRequest()
+        request = NewDescribeStreamLinkFlowRequest()
     }
-    response = NewDescribeMediaConnectFlowResponse()
+    response = NewDescribeStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewDescribeMediaConnectFlowsRequest() (request *DescribeMediaConnectFlowsRequest) {
-    request = &DescribeMediaConnectFlowsRequest{
+func NewDescribeStreamLinkFlowsRequest() (request *DescribeStreamLinkFlowsRequest) {
+    request = &DescribeStreamLinkFlowsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdc", APIVersion, "DescribeMediaConnectFlows")
+    request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlows")
     return
 }
 
-func NewDescribeMediaConnectFlowsResponse() (response *DescribeMediaConnectFlowsResponse) {
-    response = &DescribeMediaConnectFlowsResponse{
+func NewDescribeStreamLinkFlowsResponse() (response *DescribeStreamLinkFlowsResponse) {
+    response = &DescribeStreamLinkFlowsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeMediaConnectFlows
-// This API is used to query the configuration information of multiple MediaConnect flows in batches.
+// DescribeStreamLinkFlows
+// This API is used to query the configuration information of multiple StreamLink flows in batches.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
 //  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
-func (c *Client) DescribeMediaConnectFlows(request *DescribeMediaConnectFlowsRequest) (response *DescribeMediaConnectFlowsResponse, err error) {
+func (c *Client) DescribeStreamLinkFlows(request *DescribeStreamLinkFlowsRequest) (response *DescribeStreamLinkFlowsResponse, err error) {
     if request == nil {
-        request = NewDescribeMediaConnectFlowsRequest()
+        request = NewDescribeStreamLinkFlowsRequest()
     }
-    response = NewDescribeMediaConnectFlowsResponse()
+    response = NewDescribeStreamLinkFlowsResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewModifyMediaConnectFlowRequest() (request *ModifyMediaConnectFlowRequest) {
-    request = &ModifyMediaConnectFlowRequest{
+func NewModifyStreamLinkFlowRequest() (request *ModifyStreamLinkFlowRequest) {
+    request = &ModifyStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdc", APIVersion, "ModifyMediaConnectFlow")
+    request.Init().WithApiInfo("mdc", APIVersion, "ModifyStreamLinkFlow")
     return
 }
 
-func NewModifyMediaConnectFlowResponse() (response *ModifyMediaConnectFlowResponse) {
-    response = &ModifyMediaConnectFlowResponse{
+func NewModifyStreamLinkFlowResponse() (response *ModifyStreamLinkFlowResponse) {
+    response = &ModifyStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// ModifyMediaConnectFlow
-// This API is used to modify the configuration information of a MediaConnect flow.
+// ModifyStreamLinkFlow
+// This API is used to modify the configuration information of a StreamLink flow.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
-func (c *Client) ModifyMediaConnectFlow(request *ModifyMediaConnectFlowRequest) (response *ModifyMediaConnectFlowResponse, err error) {
+func (c *Client) ModifyStreamLinkFlow(request *ModifyStreamLinkFlowRequest) (response *ModifyStreamLinkFlowResponse, err error) {
     if request == nil {
-        request = NewModifyMediaConnectFlowRequest()
+        request = NewModifyStreamLinkFlowRequest()
     }
-    response = NewModifyMediaConnectFlowResponse()
+    response = NewModifyStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewModifyMediaConnectInputRequest() (request *ModifyMediaConnectInputRequest) {
-    request = &ModifyMediaConnectInputRequest{
+func NewStartStreamLinkFlowRequest() (request *StartStreamLinkFlowRequest) {
+    request = &StartStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdc", APIVersion, "ModifyMediaConnectInput")
+    request.Init().WithApiInfo("mdc", APIVersion, "StartStreamLinkFlow")
     return
 }
 
-func NewModifyMediaConnectInputResponse() (response *ModifyMediaConnectInputResponse) {
-    response = &ModifyMediaConnectInputResponse{
+func NewStartStreamLinkFlowResponse() (response *StartStreamLinkFlowResponse) {
+    response = &StartStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// ModifyMediaConnectInput
-// This API is used to modify the input information of a MediaConnect flow.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
-//  INVALIDPARAMETER_INPUT = "InvalidParameter.Input"
-//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
-func (c *Client) ModifyMediaConnectInput(request *ModifyMediaConnectInputRequest) (response *ModifyMediaConnectInputResponse, err error) {
-    if request == nil {
-        request = NewModifyMediaConnectInputRequest()
-    }
-    response = NewModifyMediaConnectInputResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyMediaConnectOutputRequest() (request *ModifyMediaConnectOutputRequest) {
-    request = &ModifyMediaConnectOutputRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("mdc", APIVersion, "ModifyMediaConnectOutput")
-    return
-}
-
-func NewModifyMediaConnectOutputResponse() (response *ModifyMediaConnectOutputResponse) {
-    response = &ModifyMediaConnectOutputResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyMediaConnectOutput
-// This API is used to modify the output configuration of a MediaConnect flow.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
-//  INVALIDPARAMETER_OUTPUT = "InvalidParameter.Output"
-//  INVALIDPARAMETER_OUTPUTID = "InvalidParameter.OutputId"
-//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
-func (c *Client) ModifyMediaConnectOutput(request *ModifyMediaConnectOutputRequest) (response *ModifyMediaConnectOutputResponse, err error) {
-    if request == nil {
-        request = NewModifyMediaConnectOutputRequest()
-    }
-    response = NewModifyMediaConnectOutputResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewStartMediaConnectFlowRequest() (request *StartMediaConnectFlowRequest) {
-    request = &StartMediaConnectFlowRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("mdc", APIVersion, "StartMediaConnectFlow")
-    return
-}
-
-func NewStartMediaConnectFlowResponse() (response *StartMediaConnectFlowResponse) {
-    response = &StartMediaConnectFlowResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// StartMediaConnectFlow
-// This API is used to start a MediaConnect flow.
+// StartStreamLinkFlow
+// This API is used to start a StreamLink flow.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
-func (c *Client) StartMediaConnectFlow(request *StartMediaConnectFlowRequest) (response *StartMediaConnectFlowResponse, err error) {
+func (c *Client) StartStreamLinkFlow(request *StartStreamLinkFlowRequest) (response *StartStreamLinkFlowResponse, err error) {
     if request == nil {
-        request = NewStartMediaConnectFlowRequest()
+        request = NewStartStreamLinkFlowRequest()
     }
-    response = NewStartMediaConnectFlowResponse()
+    response = NewStartStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
 }
 
-func NewStopMediaConnectFlowRequest() (request *StopMediaConnectFlowRequest) {
-    request = &StopMediaConnectFlowRequest{
+func NewStopStreamLinkFlowRequest() (request *StopStreamLinkFlowRequest) {
+    request = &StopStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("mdc", APIVersion, "StopMediaConnectFlow")
+    request.Init().WithApiInfo("mdc", APIVersion, "StopStreamLinkFlow")
     return
 }
 
-func NewStopMediaConnectFlowResponse() (response *StopMediaConnectFlowResponse) {
-    response = &StopMediaConnectFlowResponse{
+func NewStopStreamLinkFlowResponse() (response *StopStreamLinkFlowResponse) {
+    response = &StopStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// StopMediaConnectFlow
-// This API is used to stop a MediaConnect flow.
+// StopStreamLinkFlow
+// This API is used to stop a StreamLink flow.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
-func (c *Client) StopMediaConnectFlow(request *StopMediaConnectFlowRequest) (response *StopMediaConnectFlowResponse, err error) {
+func (c *Client) StopStreamLinkFlow(request *StopStreamLinkFlowRequest) (response *StopStreamLinkFlowResponse, err error) {
     if request == nil {
-        request = NewStopMediaConnectFlowRequest()
+        request = NewStopStreamLinkFlowRequest()
     }
-    response = NewStopMediaConnectFlowResponse()
+    response = NewStopStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
 }

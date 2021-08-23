@@ -65,7 +65,7 @@ type AsyncEvent struct {
 	// Function version
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 
-	// Event status
+	// Event status. Values: `RUNNING`; `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed)
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Invocation start time in the format of "%Y-%m-%d %H:%M:%S.%f"
@@ -1611,6 +1611,14 @@ type GetFunctionResponse struct {
 		// Cause of function failure
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		StatusReasons []*StatusReason `json:"StatusReasons,omitempty" name:"StatusReasons"`
+
+		// Specifies whether to enable asynchronization 
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		AsyncRunEnable *string `json:"AsyncRunEnable,omitempty" name:"AsyncRunEnable"`
+
+		// Specifies whether to enable event tracking
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TraceEnable *string `json:"TraceEnable,omitempty" name:"TraceEnable"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

@@ -172,7 +172,6 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  FAILEDOPERATION_CREATEFUNCTION = "FailedOperation.CreateFunction"
 //  FAILEDOPERATION_NAMESPACE = "FailedOperation.Namespace"
 //  FAILEDOPERATION_OPENSERVICE = "FailedOperation.OpenService"
-//  FAILEDOPERATION_QCSROLENOTFOUND = "FailedOperation.QcsRoleNotFound"
 //  FAILEDOPERATION_TOTALCONCURRENCYMEMORYINPROGRESS = "FailedOperation.TotalConcurrencyMemoryInProgress"
 //  FAILEDOPERATION_UNOPENEDSERVICE = "FailedOperation.UnOpenedService"
 //  INTERNALERROR = "InternalError"
@@ -184,7 +183,6 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
 //  INVALIDPARAMETERVALUE_CFSPARAMETERDUPLICATE = "InvalidParameterValue.CfsParameterDuplicate"
 //  INVALIDPARAMETERVALUE_CFSPARAMETERERROR = "InvalidParameterValue.CfsParameterError"
-//  INVALIDPARAMETERVALUE_CFSSTRUCTIONERROR = "InvalidParameterValue.CfsStructionError"
 //  INVALIDPARAMETERVALUE_CLS = "InvalidParameterValue.Cls"
 //  INVALIDPARAMETERVALUE_CODE = "InvalidParameterValue.Code"
 //  INVALIDPARAMETERVALUE_CODESECRET = "InvalidParameterValue.CodeSecret"
@@ -216,7 +214,6 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  INVALIDPARAMETERVALUE_VPCNOTSETWHENOPENCFS = "InvalidParameterValue.VpcNotSetWhenOpenCfs"
 //  INVALIDPARAMETERVALUE_ZIPFILE = "InvalidParameterValue.ZipFile"
-//  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
 //  LIMITEXCEEDED_EIP = "LimitExceeded.Eip"
 //  LIMITEXCEEDED_FUNCTION = "LimitExceeded.Function"
 //  LIMITEXCEEDED_INITTIMEOUT = "LimitExceeded.InitTimeout"
@@ -225,9 +222,9 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  MISSINGPARAMETER_CODE = "MissingParameter.Code"
 //  MISSINGPARAMETER_RUNTIME = "MissingParameter.Runtime"
 //  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINUSE_FUNCTION = "ResourceInUse.Function"
 //  RESOURCEINUSE_FUNCTIONNAME = "ResourceInUse.FunctionName"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CFSMOUNTINSNOTMATCH = "ResourceNotFound.CfsMountInsNotMatch"
 //  RESOURCENOTFOUND_CFSVPCNOTMATCH = "ResourceNotFound.CfsVpcNotMatch"
 //  RESOURCENOTFOUND_CMQ = "ResourceNotFound.Cmq"
 //  RESOURCENOTFOUND_DEMO = "ResourceNotFound.Demo"
@@ -330,6 +327,7 @@ func NewCreateTriggerResponse() (response *CreateTriggerResponse) {
 //  INVALIDPARAMETERVALUE_CUSTOMARGUMENT = "InvalidParameterValue.CustomArgument"
 //  INVALIDPARAMETERVALUE_ENABLE = "InvalidParameterValue.Enable"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_SECRETINFO = "InvalidParameterValue.SecretInfo"
 //  INVALIDPARAMETERVALUE_SERVICENAME = "InvalidParameterValue.ServiceName"
 //  INVALIDPARAMETERVALUE_TRIGGERDESC = "InvalidParameterValue.TriggerDesc"
 //  INVALIDPARAMETERVALUE_TRIGGERNAME = "InvalidParameterValue.TriggerName"
@@ -392,6 +390,8 @@ func NewDeleteAliasResponse() (response *DeleteAliasResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_DELETEALIAS = "FailedOperation.DeleteAlias"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETERVALUE_ALIAS = "InvalidParameterValue.Alias"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
 //  RESOURCENOTFOUND_ALIAS = "ResourceNotFound.Alias"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
@@ -1136,8 +1136,10 @@ func NewListAsyncEventsResponse() (response *ListAsyncEventsResponse) {
 // This API is used to pull the list of async function events.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_INVOKETYPE = "InvalidParameterValue.InvokeType"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
 //  INVALIDPARAMETERVALUE_STATUS = "InvalidParameterValue.Status"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
@@ -1312,6 +1314,7 @@ func NewListTriggersResponse() (response *ListTriggersResponse) {
 //  FAILEDOPERATION_APIGW = "FailedOperation.Apigw"
 //  INVALIDPARAMETERVALUE_FILTERS = "InvalidParameterValue.Filters"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
+//  INVALIDPARAMETERVALUE_ORDERBY = "InvalidParameterValue.OrderBy"
 func (c *Client) ListTriggers(request *ListTriggersRequest) (response *ListTriggersResponse, err error) {
     if request == nil {
         request = NewListTriggersRequest()
@@ -1393,6 +1396,7 @@ func NewPublishLayerVersionResponse() (response *PublishLayerVersionResponse) {
 //  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
 //  INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
 //  INVALIDPARAMETERVALUE_TEMPCOSOBJECTNAME = "InvalidParameterValue.TempCosObjectName"
+//  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
 //  LIMITEXCEEDED_LAYERVERSIONS = "LimitExceeded.LayerVersions"
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
@@ -1729,7 +1733,6 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DEBUGMODEUPDATETIMEOUTFAIL = "FailedOperation.DebugModeUpdateTimeOutFail"
-//  FAILEDOPERATION_QCSROLENOTFOUND = "FailedOperation.QcsRoleNotFound"
 //  FAILEDOPERATION_RESERVEDINPROGRESS = "FailedOperation.ReservedInProgress"
 //  FAILEDOPERATION_UPDATEFUNCTIONCONFIGURATION = "FailedOperation.UpdateFunctionConfiguration"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
@@ -1753,6 +1756,7 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 //  INVALIDPARAMETERVALUE_PUBLICNETCONFIG = "InvalidParameterValue.PublicNetConfig"
 //  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
 //  INVALIDPARAMETERVALUE_SYSTEMENVIRONMENT = "InvalidParameterValue.SystemEnvironment"
+//  INVALIDPARAMETERVALUE_TRACEENABLE = "InvalidParameterValue.TraceEnable"
 //  LIMITEXCEEDED_EIP = "LimitExceeded.Eip"
 //  LIMITEXCEEDED_INITTIMEOUT = "LimitExceeded.InitTimeout"
 //  LIMITEXCEEDED_MEMORY = "LimitExceeded.Memory"
