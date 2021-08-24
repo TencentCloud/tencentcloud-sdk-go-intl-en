@@ -430,16 +430,16 @@ type AiAnalysisTaskTagResult struct {
 type AiContentReviewResult struct {
 
 	// Task type. Valid values:
-	// <li>Porn: porn information detection in image</li>
-	// <li>Terrorism: terrorism information detection in image</li>
-	// <li>Political: politically sensitive information detection in image</li>
-	// <li>Porn.Asr: ASR-based porn information detection in speech</li>
-	// <li>Porn.Ocr: OCR-based porn information detection in text</li>
-	// <li>Political.Asr: ASR-based politically sensitive information detection in speech</li>
-	// <li>Political.Ocr: OCR-based politically sensitive information detection in text</li>
-	// <li>Terrorism.Ocr: OCR-based terrorism information in text</li>
-	// <li>Prohibited.Asr: ASR-based prohibited information detection in speech</li>
-	// <li>Prohibited.Ocr: OCR-based prohibited information detection in text</li>
+	// <li>`Porn`: porn information recognition in images</li>
+	// <li>`Terrorism`: terrorism information recognition in images</li>
+	// <li>`Political`: politically sensitive information recognition in images</li>
+	// <li>`Porn.Asr`: ASR-based porn information recognition in speech</li>
+	// <li>`Porn.Ocr`: OCR-based porn information recognition in text</li>
+	// <li>`Political.Asr`: ASR-based politically sensitive information recognition in speech</li>
+	// <li>`Political.Ocr`: OCR-based politically sensitive information recognition in text</li>
+	// <li>`Terrorism.Ocr`: OCR-based terrorism information recognition in text</li>
+	// <li>`Prohibited.Asr`: ASR-based prohibited information recognition in speech</li>
+	// <li>`Prohibited.Ocr`: OCR-based prohibited information recognition in text</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Query result of intelligent porn information detection in video image task in video content audit, which is valid when task type is `Porn`.
@@ -572,8 +572,15 @@ type AiRecognitionTaskAsrFullTextResultInput struct {
 
 type AiRecognitionTaskAsrFullTextResultOutput struct {
 
-	// List of full speech recognition segments.
+	// List of full-text speech recognition segments
+	// <font color=red>Note</font>: this list displays up to the first 100 results. You can get all the results from the file whose URL is `SegmentSetFileUrl`.
 	SegmentSet []*AiRecognitionTaskAsrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file of the list for full-text speech recognition segments. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file of the list for full-text speech recognition segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 
 	// Subtitles file URL.
 	SubtitleUrl *string `json:"SubtitleUrl,omitempty" name:"SubtitleUrl"`
@@ -633,8 +640,15 @@ type AiRecognitionTaskAsrWordsResultItem struct {
 
 type AiRecognitionTaskAsrWordsResultOutput struct {
 
-	// Speech keyword recognition result set.
+	// Speech keyword recognition result set
+	// <font color=red>Note</font>: this list displays up to the first 100 results. You can get all the results from the file whose URL is `SegmentSetFileUrl`.
 	ResultSet []*AiRecognitionTaskAsrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
+
+	// URL to the file of the speech keyword recognition result set. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+	ResultSetFileUrl *string `json:"ResultSetFileUrl,omitempty" name:"ResultSetFileUrl"`
+
+	// Expiration time of the URL to the file of the speech keyword recognition result set, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	ResultSetFileUrlExpireTime *string `json:"ResultSetFileUrlExpireTime,omitempty" name:"ResultSetFileUrlExpireTime"`
 }
 
 type AiRecognitionTaskAsrWordsSegmentItem struct {
@@ -696,8 +710,15 @@ type AiRecognitionTaskFaceResultItem struct {
 
 type AiRecognitionTaskFaceResultOutput struct {
 
-	// Intelligent face recognition result set.
+	// Intelligent face recognition result set
+	// <font color=red>Note</font>: this list displays up to the first 100 results. You can get all the results from the file whose URL is `SegmentSetFileUrl`.
 	ResultSet []*AiRecognitionTaskFaceResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
+
+	// URL to the file of the intelligent face recognition result set. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+	ResultSetFileUrl *string `json:"ResultSetFileUrl,omitempty" name:"ResultSetFileUrl"`
+
+	// Expiration time of the URL to the file of the intelligent face recognition result set, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	ResultSetFileUrlExpireTime *string `json:"ResultSetFileUrlExpireTime,omitempty" name:"ResultSetFileUrlExpireTime"`
 }
 
 type AiRecognitionTaskFaceSegmentItem struct {
@@ -803,8 +824,15 @@ type AiRecognitionTaskObjectResultItem struct {
 
 type AiRecognitionTaskObjectResultOutput struct {
 
-	// Result set of intelligent object recognition.
+	// Intelligent object recognition result set
+	// <font color=red>Note</font>: this list displays up to the first 100 results. You can get all the results from the file whose URL is `SegmentSetFileUrl`.
 	ResultSet []*AiRecognitionTaskObjectResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
+
+	// URL to the file of the object recognition result set. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+	ResultSetFileUrl *string `json:"ResultSetFileUrl,omitempty" name:"ResultSetFileUrl"`
+
+	// Expiration time of the URL to the object recognition result set, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	ResultSetFileUrlExpireTime *string `json:"ResultSetFileUrlExpireTime,omitempty" name:"ResultSetFileUrlExpireTime"`
 }
 
 type AiRecognitionTaskObjectSeqmentItem struct {
@@ -852,8 +880,15 @@ type AiRecognitionTaskOcrFullTextResultInput struct {
 
 type AiRecognitionTaskOcrFullTextResultOutput struct {
 
-	// Full text recognition result set.
+	// Full-text recognition result set
+	// <font color=red>Note</font>: this list displays up to the first 100 results. You can get all the results from the file whose URL is `SegmentSetFileUrl`.
 	SegmentSet []*AiRecognitionTaskOcrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file of the full-text recognition result set. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file of the full-text recognition result set, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiRecognitionTaskOcrFullTextSegmentItem struct {
@@ -919,8 +954,15 @@ type AiRecognitionTaskOcrWordsResultItem struct {
 
 type AiRecognitionTaskOcrWordsResultOutput struct {
 
-	// Text keyword recognition result set.
+	// Text keyword recognition result set
+	// <font color=red>Note</font>: this list displays up to the first 100 results. You can get all the results from the file whose URL is `SegmentSetFileUrl`.
 	ResultSet []*AiRecognitionTaskOcrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
+
+	// URL to the file of the text keyword recognition result set. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+	ResultSetFileUrl *string `json:"ResultSetFileUrl,omitempty" name:"ResultSetFileUrl"`
+
+	// Expiration time of the URL to the file of the text keyword recognition result set, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	ResultSetFileUrlExpireTime *string `json:"ResultSetFileUrlExpireTime,omitempty" name:"ResultSetFileUrlExpireTime"`
 }
 
 type AiRecognitionTaskOcrWordsSegmentItem struct {
@@ -969,8 +1011,15 @@ type AiRecognitionTaskSegmentResultInput struct {
 
 type AiRecognitionTaskSegmentResultOutput struct {
 
-	// List of split video segments.
+	// List of split video segments
+	// <font color=red>Note</font>: this list displays up to the first 100 results. You can get all the results from the file whose URL is `SegmentSetFileUrl`.
 	SegmentSet []*AiRecognitionTaskSegmentSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file of the list for split video segments. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file of the list for split video segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiRecognitionTaskSegmentSegmentItem struct {
@@ -6074,6 +6123,7 @@ type DescribeStorageDetailsRequest struct {
 	// <li>`InfrequentStorage`: STANDARD_IA</li>
 	// <li>`ArchiveStorage`: ARCHIVE</li>
 	// <li>`DeepArchiveStorage`: DEEP ARCHIVE</li>
+	// <li>`DeletedInfrequentStorage`: STANDARD_IA data deleted in advance</li>
 	// <li>`DeletedArchiveStorage`: ARCHIVE data deleted in advance</li>
 	// <li>`DeletedDeepArchiveStorage`: DEEP ARCHIVE data deleted in advance</li>
 	// <li>`ArchiveStandardRetrieval`: ARCHIVE data retrieved using standard retrievals</li>
@@ -7517,7 +7567,7 @@ type ImageTransform struct {
 
 type ImageWatermarkInput struct {
 
-	// String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a watermark image. JPEG and PNG images are supported.
+	// The [Base64](https://tools.ietf.org/html/rfc4648) encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.
 	ImageContent *string `json:"ImageContent,omitempty" name:"ImageContent"`
 
 	// Watermark width. % and px formats are supported:
@@ -7952,6 +8002,8 @@ type MediaBasicInfo struct {
 	// Storage class of a media file:
 	// <li>STANDARD</li>
 	// <li>STANDARD_IA</li>
+	// <li>ARCHIVE</li>
+	// <li>DEEP_ARCHIVE</li>
 	StorageClass *string `json:"StorageClass,omitempty" name:"StorageClass"`
 }
 
@@ -8591,6 +8643,12 @@ type MediaProcessTaskTranscodeResult struct {
 
 	// Transcoding progress. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+
+	// Transcoding task start time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	BeginProcessTime *string `json:"BeginProcessTime,omitempty" name:"BeginProcessTime"`
+
+	// Transcoding task end time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 }
 
 type MediaSampleSnapshotInfo struct {
@@ -11737,6 +11795,10 @@ type SearchMediaRequest struct {
 	// <li>Includes specified start and end points in time.</li>
 	CreateTime *TimeRange `json:"CreateTime,omitempty" name:"CreateTime"`
 
+	// Files whose expiration time points are within the specified time range will be returned. Expired files will not be returned.
+	// <li>The files whose expiration time points are on the start or end time of the specified range will also be returned.</li>
+	ExpireTime *TimeRange `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
 	// Sorting order.
 	// <li>Valid value of `Sort.Field`: CreateTime.</li>
 	// <li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
@@ -11770,6 +11832,13 @@ type SearchMediaRequest struct {
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// An array of storage classes. Valid values:
+	// <li>STANDARD</li>
+	// <li>STANDARD_IA</li>
+	// <li>ARCHIVE</li>
+	// <li>DEEP_ARCHIVE</li>
+	StorageClasses []*string `json:"StorageClasses,omitempty" name:"StorageClasses"`
 
 	// (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
 	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
@@ -11825,12 +11894,14 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 	delete(f, "StreamIds")
 	delete(f, "Vids")
 	delete(f, "CreateTime")
+	delete(f, "ExpireTime")
 	delete(f, "Sort")
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Filters")
 	delete(f, "StorageRegions")
 	delete(f, "SubAppId")
+	delete(f, "StorageClasses")
 	delete(f, "Text")
 	delete(f, "SourceType")
 	delete(f, "StreamId")
