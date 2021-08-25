@@ -5338,6 +5338,10 @@ type MediaAudioStreamItem struct {
 	// Audio stream codec, such as aac.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
+
+	// Number of sound channels, e.g., 2
+	// Note: this field may return `null`, indicating that no valid value was found.
+	Channel *int64 `json:"Channel,omitempty" name:"Channel"`
 }
 
 type MediaContentReviewAsrTextSegmentItem struct {
@@ -5863,6 +5867,18 @@ type MediaVideoStreamItem struct {
 	// Frame rate in Hz.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
+
+	// Color primaries
+	// Note: this field may return `null`, indicating that no valid value was found.
+	ColorPrimaries *string `json:"ColorPrimaries,omitempty" name:"ColorPrimaries"`
+
+	// Color space
+	// Note: this field may return `null`, indicating that no valid value was found.
+	ColorSpace *string `json:"ColorSpace,omitempty" name:"ColorSpace"`
+
+	// Color transfer
+	// Note: this field may return `null`, indicating that no valid value was found.
+	ColorTransfer *string `json:"ColorTransfer,omitempty" name:"ColorTransfer"`
 }
 
 type ModifyAIAnalysisTemplateRequest struct {
