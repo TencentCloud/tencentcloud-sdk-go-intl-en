@@ -1604,6 +1604,9 @@ type DescribeAlarmPoliciesRequest struct {
 
 	// If `1` is passed in, alarm policies with no notification rules configured are queried. If it is left empty or other values are passed in, all alarm policies are queried.
 	NotBindingNoticeRule *int64 `json:"NotBindingNoticeRule,omitempty" name:"NotBindingNoticeRule"`
+
+	// Instance group ID.
+	InstanceGroupId *int64 `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
 }
 
 func (r *DescribeAlarmPoliciesRequest) ToJsonString() string {
@@ -1635,6 +1638,7 @@ func (r *DescribeAlarmPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "RuleTypes")
 	delete(f, "Enable")
 	delete(f, "NotBindingNoticeRule")
+	delete(f, "InstanceGroupId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmPoliciesRequest has unknown keys!", "")
 	}
