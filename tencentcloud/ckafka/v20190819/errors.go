@@ -17,6 +17,9 @@ package v20190819
 const (
 	// error codes for specific actions
 
+	// Operation failed.
+	FAILEDOPERATION = "FailedOperation"
+
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
@@ -43,6 +46,9 @@ const (
 
 	// The zone is not supported.
 	INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+
+	// 
+	RESOURCEINUSE = "ResourceInUse"
 
 	// The resource is unavailable.
 	RESOURCEUNAVAILABLE = "ResourceUnavailable"

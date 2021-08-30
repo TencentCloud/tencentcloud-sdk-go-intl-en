@@ -190,6 +190,30 @@ type ConsumerGroupTopic struct {
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
+type ConsumerRecord struct {
+
+	// Topic name
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Partition ID
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Message key
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Message value
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// Message timestamp
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+}
+
 type CreateAclRequest struct {
 	*tchttp.BaseRequest
 
@@ -1746,6 +1770,67 @@ type DynamicRetentionTime struct {
 	// Minimum retention time, in minutes
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	BottomRetention *int64 `json:"BottomRetention,omitempty" name:"BottomRetention"`
+}
+
+type FetchMessageByOffsetRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Topic name
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Partition ID
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// Offset information
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *FetchMessageByOffsetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *FetchMessageByOffsetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Topic")
+	delete(f, "Partition")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "FetchMessageByOffsetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type FetchMessageByOffsetResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Returned results
+		Result *ConsumerRecord `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *FetchMessageByOffsetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *FetchMessageByOffsetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type Filter struct {

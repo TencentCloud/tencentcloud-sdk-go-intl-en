@@ -317,6 +317,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
@@ -1057,6 +1058,35 @@ func (c *Client) DescribeUser(request *DescribeUserRequest) (response *DescribeU
         request = NewDescribeUserRequest()
     }
     response = NewDescribeUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewFetchMessageByOffsetRequest() (request *FetchMessageByOffsetRequest) {
+    request = &FetchMessageByOffsetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ckafka", APIVersion, "FetchMessageByOffset")
+    return
+}
+
+func NewFetchMessageByOffsetResponse() (response *FetchMessageByOffsetResponse) {
+    response = &FetchMessageByOffsetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// FetchMessageByOffset
+// This API is used to query messages based on a specified offset position.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) FetchMessageByOffset(request *FetchMessageByOffsetRequest) (response *FetchMessageByOffsetResponse, err error) {
+    if request == nil {
+        request = NewFetchMessageByOffsetRequest()
+    }
+    response = NewFetchMessageByOffsetResponse()
     err = c.Send(request, response)
     return
 }
