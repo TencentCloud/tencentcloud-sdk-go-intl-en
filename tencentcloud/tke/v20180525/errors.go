@@ -59,7 +59,7 @@ const (
 	// Cluster status error.
 	INTERNALERROR_CLUSTERSTATE = "InternalError.ClusterState"
 
-	// 
+	// The version of the cluster node is outdated.
 	INTERNALERROR_CLUSTERUPGRADENODEVERSION = "InternalError.ClusterUpgradeNodeVersion"
 
 	// Internal HTTP client error
@@ -209,7 +209,7 @@ const (
 	// The CIDR block conflicts with the VPC’s CIDR block.
 	INVALIDPARAMETER_CIDRCONFLICTWITHVPCCIDR = "InvalidParameter.CidrConflictWithVpcCidr"
 
-	// 
+	// The created route conflicts with the existing global route under the VPC.
 	INVALIDPARAMETER_CIDRCONFLICTWITHVPCGLOBALROUTE = "InvalidParameter.CidrConflictWithVpcGlobalRoute"
 
 	// Parameter error. The CIDR block does not meet the specification.
@@ -226,6 +226,9 @@ const (
 
 	// Invalid parameter.
 	INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+
+	// The PROM instance does not exist.
+	INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 
 	// Route table is not empty.
 	INVALIDPARAMETER_ROUTETABLENOTEMPTY = "InvalidParameter.RouteTableNotEmpty"
