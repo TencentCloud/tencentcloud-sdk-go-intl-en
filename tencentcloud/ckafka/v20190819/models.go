@@ -1692,6 +1692,67 @@ func (r *DescribeTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeTopicSubscribeGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Starting position of paging
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeTopicSubscribeGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopicSubscribeGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "TopicName")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicSubscribeGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTopicSubscribeGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Returned results
+		Result *TopicSubscribeGroup `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTopicSubscribeGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopicSubscribeGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeUserRequest struct {
 	*tchttp.BaseRequest
 
@@ -2770,6 +2831,23 @@ type TopicRetentionTimeConfigRsp struct {
 	// Last modified time
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	ModTimeStamp *int64 `json:"ModTimeStamp,omitempty" name:"ModTimeStamp"`
+}
+
+type TopicSubscribeGroup struct {
+
+	// Total number
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Number of consumer group status
+	StatusCountInfo *string `json:"StatusCountInfo,omitempty" name:"StatusCountInfo"`
+
+	// Consumer group information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	GroupsInfo []*GroupInfoResponse `json:"GroupsInfo,omitempty" name:"GroupsInfo"`
+
+	// Whether a request is asynchronous. If there are fewer consumer groups in the instances, the result will be returned directly, and status code is 1. When there are many consumer groups in the instances, cache will be updated asynchronously. When status code is 0, grouping information will not be returned until cache update is completed and status code becomes 1.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
 type User struct {

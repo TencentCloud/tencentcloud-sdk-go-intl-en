@@ -467,6 +467,10 @@ type DataDisk struct {
 	// Cloud disk performance, in MB/s
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ThroughputPerformance *int64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
+
+	// ID of the dedicated cluster to which the instance belongs.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 type DeleteComputeEnvRequest struct {
@@ -2299,7 +2303,7 @@ type OutputMappingConfig struct {
 
 type Placement struct {
 
-	// ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain the ID in the returned `Zone` field.
+	// ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/35071) API and obtain the ID in the returned `Zone` field.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// ID of the project to which the instance belongs. To obtain the project IDs, you can call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) and look for the `projectId` fields in the response. If this parameter is not specified, the default project will be used.
@@ -2494,6 +2498,9 @@ type SystemDisk struct {
 
 	// System disk size; unit: GB; default value: 50 GB.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// ID of the dedicated cluster to which the instance belongs.
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 type Tag struct {
