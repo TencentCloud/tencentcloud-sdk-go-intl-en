@@ -2394,6 +2394,9 @@ type ListAttachedGroupPoliciesRequest struct {
 
 	// Number of entries per page; 20 by default
 	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// Search by keyword
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 }
 
 func (r *ListAttachedGroupPoliciesRequest) ToJsonString() string {
@@ -2411,6 +2414,7 @@ func (r *ListAttachedGroupPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "TargetGroupId")
 	delete(f, "Page")
 	delete(f, "Rp")
+	delete(f, "Keyword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListAttachedGroupPoliciesRequest has unknown keys!", "")
 	}
@@ -2460,6 +2464,9 @@ type ListAttachedRolePoliciesRequest struct {
 
 	// Filter according to policy type. `User` indicates querying custom policies only. `QCS` indicates querying preset policies only
 	PolicyType *string `json:"PolicyType,omitempty" name:"PolicyType"`
+
+	// Search by keyword
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 }
 
 func (r *ListAttachedRolePoliciesRequest) ToJsonString() string {
@@ -2479,6 +2486,7 @@ func (r *ListAttachedRolePoliciesRequest) FromJsonString(s string) error {
 	delete(f, "RoleId")
 	delete(f, "RoleName")
 	delete(f, "PolicyType")
+	delete(f, "Keyword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListAttachedRolePoliciesRequest has unknown keys!", "")
 	}

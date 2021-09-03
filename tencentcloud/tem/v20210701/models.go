@@ -557,7 +557,7 @@ type DeployApplicationRequest struct {
 	// Scheduled auto scaling policy
 	CronHorizontalAutoscaler []*CronHorizontalAutoscaler `json:"CronHorizontalAutoscaler,omitempty" name:"CronHorizontalAutoscaler"`
 
-	// 
+	// Specifies whether to enable logging. `1`: enable; `0`: do not enable
 	LogEnable *int64 `json:"LogEnable,omitempty" name:"LogEnable"`
 }
 

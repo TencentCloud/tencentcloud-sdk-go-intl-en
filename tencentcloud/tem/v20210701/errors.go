@@ -19,4 +19,7 @@ const (
 
 	// Failed to create the service.
 	INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+
+	// 
+	INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
 )

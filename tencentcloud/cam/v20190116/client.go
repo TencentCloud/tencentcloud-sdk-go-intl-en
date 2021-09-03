@@ -1935,6 +1935,7 @@ func NewSetDefaultPolicyVersionResponse() (response *SetDefaultPolicyVersionResp
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
+//  INVALIDPARAMETER_RESOURCEUINERROR = "InvalidParameter.ResourceUinError"
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"

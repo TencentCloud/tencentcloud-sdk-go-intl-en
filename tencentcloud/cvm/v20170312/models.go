@@ -296,7 +296,7 @@ type CreateImageRequest struct {
 	// Image name
 	ImageName *string `json:"ImageName,omitempty" name:"ImageName"`
 
-	// Instance ID used to create an image.
+	// ID of the instance from which an image will be created. This parameter is required when using instance to create an image.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Image description
@@ -305,7 +305,10 @@ type CreateImageRequest struct {
 	// Whether to force shut down an instance to create an image when a soft shutdown fails
 	ForcePoweroff *string `json:"ForcePoweroff,omitempty" name:"ForcePoweroff"`
 
-	// Whether to enable Sysprep when creating a Windows image. Click [here](https://intl.cloud.tencent.com/document/product/213/43498?from_cn_redirect=1) to learn more about Sysprep.
+	// Whether to enable Sysprep when creating a Windows image.
+	// Valid values: `TRUE` and `FALSE`; default value: `FALSE`.
+	// 
+	// Click [here](https://intl.cloud.tencent.com/document/product/213/43498?from_cn_redirect=1) to learn more about Sysprep.
 	Sysprep *string `json:"Sysprep,omitempty" name:"Sysprep"`
 
 	// Specified data disk ID included in the full image created from the instance.
@@ -1990,6 +1993,9 @@ type EnhancedService struct {
 
 	// Enables cloud monitor service. If this parameter is not specified, the cloud monitor service will be enabled by default.
 	MonitorService *RunMonitorServiceEnabled `json:"MonitorService,omitempty" name:"MonitorService"`
+
+	// Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
+	AutomationService *RunAutomationServiceEnabled `json:"AutomationService,omitempty" name:"AutomationService"`
 }
 
 type Externals struct {
@@ -2729,7 +2735,7 @@ type Instance struct {
 	// Information on the system disk of the instance
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
-	// Information on the data disks of the instance, which only covers the data disks purchased together with the instance. 
+	// Information of the instance data disks.
 	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
 
 	// List of private IPs of the instance's primary ENI.
@@ -2808,6 +2814,10 @@ type Instance struct {
 	// IP list of HPC cluster.
 	// Note: this field may return null, indicating that no valid value was found.
 	RdmaIpAddresses []*string `json:"RdmaIpAddresses,omitempty" name:"RdmaIpAddresses"`
+
+	// The isolation status of the instance. Valid values:<br><li>`ARREAR`: isolated due to overdue payment;<br></li><li>`EXPIRE`: isolated upon expiration;<br></li><li>`MANMADE`: isolated after manual returning;<br></li><li>`NOTISOLATED`: not isolated<br></li>
+	// Note: this field may return null, indicating that no valid value was found.
+	IsolatedSource *string `json:"IsolatedSource,omitempty" name:"IsolatedSource"`
 }
 
 type InstanceChargePrepaid struct {
@@ -3664,7 +3674,7 @@ type RebootInstancesRequest struct {
 	// Instance IDs. To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. You can operate up to 100 instances in each request.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Whether to force restart an instance after a normal restart fails. Valid values: <br><li>TRUE: force restart an instance after a normal restart fails <br><li>FALSE: do not force restart an instance after a normal restart fails <br><br>Default value: FALSE.
+	// Whether to forcibly restart an instance after a normal restart fails. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default value: `FALSE`. This parameter has been disused. We recommend using `StopType` instead. Note that `ForceReboot` and `StopType` parameters cannot be specified at the same time.
 	ForceReboot *bool `json:"ForceReboot,omitempty" name:"ForceReboot"`
 
 	// Shutdown type. Valid values: <br><li>SOFT: soft shutdown<br><li>HARD: hard shutdown<br><li>SOFT_FIRST: perform a soft shutdown first, and perform a hard shutdown if the soft shutdown fails<br><br>Default value: SOFT.
@@ -3933,7 +3943,7 @@ type ResetInstanceRequest struct {
 	// <br>Default value: current image.
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
-	// System disk configurations in the instance. For instances with a cloud disk as the system disk, you can expand the capacity of the system disk to the specified value after re-installation by using this parameter. If the parameter is not specified, lower system disk capacity will be automatically expanded to the image size, and extra disk costs are generated. You can only expand but cannot reduce the system disk capacity. By re-installing the system, you only modify the system disk capacity, but not the type.
+	// Configurations of the system disk. For an instance whose system disk is a cloud disk, this parameter can be used to expand the system disk by specifying a new capacity after reinstallation. The system disk capacity can only be expanded but not shrunk. Reinstalling the system can only resize rather than changing the type of the system disk.
 	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
 
 	// Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
@@ -4216,6 +4226,12 @@ func (r *ResizeInstanceDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type RunAutomationServiceEnabled struct {
+
+	// Whether to enable the TAT service. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+}
+
 type RunInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -4274,7 +4290,7 @@ type RunInstancesRequest struct {
 	// Placement group ID. You can only specify one.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
 
-	// The tag description list. This parameter is used to bind a tag to a resource instance. A tag can only be bound to CVM instances.
+	// Binds the tag with the specified resources (CVM and CLB) as well
 	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 
 	// The market options of the instance.
@@ -4664,7 +4680,7 @@ type VirtualPrivateCloud struct {
 	// VPC subnet ID in the format `subnet-xxx`. To obtain valid subnet IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/subnet?rid=1) or call [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) and look for the `unSubnetId` fields in the response. If you specify `DEFAULT` for both `SubnetId` and `VpcId` when creating an instance, the default VPC will be used.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Whether to use an instance as a public gateway. An instance can be used as a public gateway only when it has a public IP and resides in a VPC. Valid values: <br><li>TRUE: use the instance as a public gateway <br><li>FALSE: do not use the instance as a public gateway <br><br>Default value: FALSE.
+	// Whether to use a CVM instance as a public gateway. The public gateway is only available when the instance has a public IP and resides in a VPC. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
 	AsVpcGateway *bool `json:"AsVpcGateway,omitempty" name:"AsVpcGateway"`
 
 	// Array of VPC subnet IPs. You can use this parameter when creating instances or modifying VPC attributes of instances. Currently you can specify multiple IPs in one subnet only when creating multiple instances at the same time.
@@ -4677,14 +4693,15 @@ type VirtualPrivateCloud struct {
 type ZoneInfo struct {
 
 	// Availability zone name, such as `ap-guangzhou-3`.
-	// Check below for the list of all availability zones:
+	// The following is a list of all availability zones:
 	// <li> ap-chongqing-1 </li>
 	// <li> ap-seoul-1 </li>
 	// <li> ap-seoul-2 </li>
 	// <li> ap-chengdu-1 </li>
 	// <li> ap-chengdu-2 </li>
-	// <li> ap-hongkong-1 </li>
+	// <li> ap-hongkong-1 (sold out)</li>
 	// <li> ap-hongkong-2 </li>
+	// <li> ap-hongkong-3 </li>
 	// <li> ap-shenzhen-fsi-1 </li>
 	// <li> ap-shenzhen-fsi-2 </li>
 	// <li> ap-shenzhen-fsi-3 </li>
@@ -4693,13 +4710,17 @@ type ZoneInfo struct {
 	// <li> ap-guangzhou-3 </li>
 	// <li> ap-guangzhou-4 </li>
 	// <li> ap-guangzhou-6 </li>
+	// <li> ap-guangzhou-7 </li>
 	// <li> ap-tokyo-1 </li>
+	// <li> ap-tokyo-2 </li>
 	// <li> ap-singapore-1 </li>
 	// <li> ap-singapore-2 </li>
+	// <li> ap-singapore-3 </li>
 	// <li> ap-shanghai-fsi-1 </li>
 	// <li> ap-shanghai-fsi-2 </li>
 	// <li> ap-shanghai-fsi-3 </li>
 	// <li> ap-bangkok-1 </li>
+	// <li> ap-bangkok-2 </li>
 	// <li> ap-shanghai-1 (sold out) </li>
 	// <li> ap-shanghai-2 </li>
 	// <li> ap-shanghai-3 </li>
@@ -4718,6 +4739,7 @@ type ZoneInfo struct {
 	// <li> na-siliconvalley-1 </li>
 	// <li> na-siliconvalley-2 </li>
 	// <li> eu-frankfurt-1 </li>
+	// <li> eu-frankfurt-2 </li>
 	// <li> na-toronto-1 </li>
 	// <li> na-ashburn-1 </li>
 	// <li> na-ashburn-2 </li>
