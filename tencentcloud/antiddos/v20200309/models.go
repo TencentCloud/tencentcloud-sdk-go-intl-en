@@ -78,6 +78,64 @@ func (r *AssociateDDoSEipAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AssociateDDoSEipLoadBalancerRequest struct {
+	*tchttp.BaseRequest
+
+	// Anti-DDoS instance ID (only Anti-DDoS Advanced). For example, `bgpip-0000011x`.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// EIP of the Anti-DDoS instance ID.
+	Eip *string `json:"Eip,omitempty" name:"Eip"`
+
+	// ID of the CLB to bind, such as `lb-0000002i`. It can be queried in the console or obtained from `LoadBalancerId` returned by the `DescribeLoadBalancers` API.
+	LoadBalancerID *string `json:"LoadBalancerID,omitempty" name:"LoadBalancerID"`
+
+	// Region of the CLB instance, such as `ap-hongkong`.
+	LoadBalancerRegion *string `json:"LoadBalancerRegion,omitempty" name:"LoadBalancerRegion"`
+}
+
+func (r *AssociateDDoSEipLoadBalancerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssociateDDoSEipLoadBalancerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Eip")
+	delete(f, "LoadBalancerID")
+	delete(f, "LoadBalancerRegion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateDDoSEipLoadBalancerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AssociateDDoSEipLoadBalancerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AssociateDDoSEipLoadBalancerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssociateDDoSEipLoadBalancerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type BGPIPInstance struct {
 
 	// Anti-DDoS instance details
@@ -120,8 +178,8 @@ type BGPIPInstance struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	StaticPackRelation *StaticPackRelation `json:"StaticPackRelation,omitempty" name:"StaticPackRelation"`
 
-	// Used to differentiate Anti-DDoS Advanced lines outside the Chinese mainland
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the ISP. `0`: Chinese mainland ISPs (default); `1`：Radware；`2`: Tencent; `3`: NSFOCUS. Note that `1`, `2` and `3` are used for services outside the Chinese mainland.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
 	// Used to differentiate clusters
@@ -145,11 +203,15 @@ type BGPIPInstance struct {
 	// Note: This field is `null` if the EIP is not bound to an Anti-DDoS Advanced instance.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	EipAddressInfo *EipAddressRelation `json:"EipAddressInfo,omitempty" name:"EipAddressInfo"`
+
+	// Recommended domain name for clients to access.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
 
 type BGPIPInstanceSpecification struct {
 
-	// Base protection bandwidth (in Gbps)
+	// Base protection bandwidth (in Mbps)
 	ProtectBandwidth *uint64 `json:"ProtectBandwidth,omitempty" name:"ProtectBandwidth"`
 
 	// CC protection bandwidth (in QPS)
@@ -176,7 +238,7 @@ type BGPIPInstanceSpecification struct {
 	// ]
 	Line *uint64 `json:"Line,omitempty" name:"Line"`
 
-	// Elastic protection bandwidth (in Gbps)
+	// Elastic protection bandwidth (in Mbps)
 	ElasticBandwidth *uint64 `json:"ElasticBandwidth,omitempty" name:"ElasticBandwidth"`
 }
 
@@ -1375,6 +1437,55 @@ func (r *DeleteWaterPrintKeyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteWaterPrintKeyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBasicDeviceStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// List of IP resources
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+}
+
+func (r *DescribeBasicDeviceStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBasicDeviceStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IpList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBasicDeviceStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBasicDeviceStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The resource and status is returned.
+		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBasicDeviceStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBasicDeviceStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2593,6 +2704,15 @@ type InstanceRelation struct {
 
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type KeyValue struct {
+
+	// IP
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Status of the IP. Values: `1` (blocked); `2` (normal); `3` (being attacked)
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type Layer4Rule struct {

@@ -101,6 +101,10 @@ type AccessPoint struct {
 	// Access point region
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Access point type. Valid values: `VXLAN`, `QCPL`, and `QCAR`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AccessPointType *string `json:"AccessPointType,omitempty" name:"AccessPointType"`
 }
 
 type ApplyInternetAddressRequest struct {

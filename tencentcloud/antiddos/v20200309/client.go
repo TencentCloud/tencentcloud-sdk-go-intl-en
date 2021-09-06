@@ -89,6 +89,52 @@ func (c *Client) AssociateDDoSEipAddress(request *AssociateDDoSEipAddressRequest
     return
 }
 
+func NewAssociateDDoSEipLoadBalancerRequest() (request *AssociateDDoSEipLoadBalancerRequest) {
+    request = &AssociateDDoSEipLoadBalancerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "AssociateDDoSEipLoadBalancer")
+    return
+}
+
+func NewAssociateDDoSEipLoadBalancerResponse() (response *AssociateDDoSEipLoadBalancerResponse) {
+    response = &AssociateDDoSEipLoadBalancerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AssociateDDoSEipLoadBalancer
+// This API is used to bind an Anti-DDoS EIP to the specified private IP of a CLB instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AssociateDDoSEipLoadBalancer(request *AssociateDDoSEipLoadBalancerRequest) (response *AssociateDDoSEipLoadBalancerResponse, err error) {
+    if request == nil {
+        request = NewAssociateDDoSEipLoadBalancerRequest()
+    }
+    response = NewAssociateDDoSEipLoadBalancerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateBlackWhiteIpListRequest() (request *CreateBlackWhiteIpListRequest) {
     request = &CreateBlackWhiteIpListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -661,6 +707,35 @@ func (c *Client) DeleteWaterPrintKey(request *DeleteWaterPrintKeyRequest) (respo
         request = NewDeleteWaterPrintKeyRequest()
     }
     response = NewDeleteWaterPrintKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBasicDeviceStatusRequest() (request *DescribeBasicDeviceStatusRequest) {
+    request = &DescribeBasicDeviceStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeBasicDeviceStatus")
+    return
+}
+
+func NewDescribeBasicDeviceStatusResponse() (response *DescribeBasicDeviceStatusResponse) {
+    response = &DescribeBasicDeviceStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBasicDeviceStatus
+// This API is used to querying the status of Anti-DDoS IP.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+func (c *Client) DescribeBasicDeviceStatus(request *DescribeBasicDeviceStatusRequest) (response *DescribeBasicDeviceStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeBasicDeviceStatusRequest()
+    }
+    response = NewDescribeBasicDeviceStatusResponse()
     err = c.Send(request, response)
     return
 }
