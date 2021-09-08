@@ -1068,6 +1068,38 @@ func (c *Client) DescribeTopicSubscribeGroup(request *DescribeTopicSubscribeGrou
     return
 }
 
+func NewDescribeTopicSyncReplicaRequest() (request *DescribeTopicSyncReplicaRequest) {
+    request = &DescribeTopicSyncReplicaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ckafka", APIVersion, "DescribeTopicSyncReplica")
+    return
+}
+
+func NewDescribeTopicSyncReplicaResponse() (response *DescribeTopicSyncReplicaResponse) {
+    response = &DescribeTopicSyncReplicaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTopicSyncReplica
+// This API is used to get the details of a synced topic replica.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) DescribeTopicSyncReplica(request *DescribeTopicSyncReplicaRequest) (response *DescribeTopicSyncReplicaResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopicSyncReplicaRequest()
+    }
+    response = NewDescribeTopicSyncReplicaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUserRequest() (request *DescribeUserRequest) {
     request = &DescribeUserRequest{
         BaseRequest: &tchttp.BaseRequest{},

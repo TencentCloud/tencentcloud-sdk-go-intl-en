@@ -3718,7 +3718,7 @@ type ModifyIncrementalMigrationRequest struct {
 	// Incremental backup import task ID, which is returned through the `CreateIncrementalMigration` API.
 	IncrementalMigrationId *string `json:"IncrementalMigrationId,omitempty" name:"IncrementalMigrationId"`
 
-	// Whether to restore backups. Valid values: `NO`, `YES`. If this parameter is not specified, whether to restore incremental backups will not change.
+	// Whether to restore backups. Valid values: `NO`, `YES`. If this parameter is not specified, current settings will be applied.
 	IsRecovery *string `json:"IsRecovery,omitempty" name:"IsRecovery"`
 
 	// If the UploadType is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.

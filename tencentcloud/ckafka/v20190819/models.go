@@ -1753,6 +1753,71 @@ func (r *DescribeTopicSubscribeGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeTopicSyncReplicaRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Offset. If this parameter is left empty, 0 will be used by default.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filters unsynced replicas only
+	OutOfSyncReplicaOnly *bool `json:"OutOfSyncReplicaOnly,omitempty" name:"OutOfSyncReplicaOnly"`
+}
+
+func (r *DescribeTopicSyncReplicaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopicSyncReplicaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "TopicName")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "OutOfSyncReplicaOnly")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicSyncReplicaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTopicSyncReplicaResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Returns topic replica details
+		Result *TopicInSyncReplicaResult `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTopicSyncReplicaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopicSyncReplicaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeUserRequest struct {
 	*tchttp.BaseRequest
 
@@ -2126,6 +2191,18 @@ type InstanceAttributesResponse struct {
 	// Dynamic message retention policy
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	RetentionTimeConfig *DynamicRetentionTime `json:"RetentionTimeConfig,omitempty" name:"RetentionTimeConfig"`
+
+	// Maximum number of connections
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MaxConnection *uint64 `json:"MaxConnection,omitempty" name:"MaxConnection"`
+
+	// Public network bandwidth
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PublicNetwork *int64 `json:"PublicNetwork,omitempty" name:"PublicNetwork"`
+
+	// Time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DeleteRouteTimestamp *string `json:"DeleteRouteTimestamp,omitempty" name:"DeleteRouteTimestamp"`
 }
 
 type InstanceConfigDO struct {
@@ -2374,6 +2451,9 @@ type ModifyInstanceAttributesRequest struct {
 
 	// Modification of the rebalancing time after upgrade
 	RebalanceTime *int64 `json:"RebalanceTime,omitempty" name:"RebalanceTime"`
+
+	// Timestamp
+	PublicNetwork *int64 `json:"PublicNetwork,omitempty" name:"PublicNetwork"`
 }
 
 func (r *ModifyInstanceAttributesRequest) ToJsonString() string {
@@ -2394,6 +2474,7 @@ func (r *ModifyInstanceAttributesRequest) FromJsonString(s string) error {
 	delete(f, "Config")
 	delete(f, "DynamicRetentionConfig")
 	delete(f, "RebalanceTime")
+	delete(f, "PublicNetwork")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceAttributesRequest has unknown keys!", "")
 	}
@@ -2571,7 +2652,7 @@ func (r *ModifyTopicAttributesResponse) FromJsonString(s string) error {
 
 type OperateResponseData struct {
 
-	// FlowId
+	// FlowId11
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
 }
@@ -2646,7 +2727,7 @@ type Route struct {
 	// Route ID
 	RouteId *int64 `json:"RouteId,omitempty" name:"RouteId"`
 
-	// VIP network type (1: public network TGW; 2: classic network; 3: VPC; 4: Tencent Cloud-supported environment (generally used for internal instances); 5: SSL public network access; 6: BM VPC)
+	// VIP network type (1: public network TGW; 2: classic network; 3: VPC; 4: supporting network (Standard Edition); 5: SSL public network access; 6: BM VPC; 7: supporting network (Pro Edition))
 	VipType *int64 `json:"VipType,omitempty" name:"VipType"`
 
 	// Virtual IP list
@@ -2659,6 +2740,10 @@ type Route struct {
 	// Domain name port
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DomainPort *int64 `json:"DomainPort,omitempty" name:"DomainPort"`
+
+	// Timestamp
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DeleteTimestamp *string `json:"DeleteTimestamp,omitempty" name:"DeleteTimestamp"`
 }
 
 type RouteResponse struct {
@@ -2790,6 +2875,46 @@ type TopicDetailResponse struct {
 
 	// Number of all eligible topic details
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+}
+
+type TopicInSyncReplicaInfo struct {
+
+	// Partition name
+	Partition *string `json:"Partition,omitempty" name:"Partition"`
+
+	// Leader ID
+	Leader *uint64 `json:"Leader,omitempty" name:"Leader"`
+
+	// Replica set
+	Replica *string `json:"Replica,omitempty" name:"Replica"`
+
+	// ISR
+	InSyncReplica *string `json:"InSyncReplica,omitempty" name:"InSyncReplica"`
+
+	// Starting offset
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	BeginOffset *uint64 `json:"BeginOffset,omitempty" name:"BeginOffset"`
+
+	// Ending offset
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	EndOffset *uint64 `json:"EndOffset,omitempty" name:"EndOffset"`
+
+	// Number of messages
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MessageCount *uint64 `json:"MessageCount,omitempty" name:"MessageCount"`
+
+	// Unsynced replica set
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	OutOfSyncReplica *string `json:"OutOfSyncReplica,omitempty" name:"OutOfSyncReplica"`
+}
+
+type TopicInSyncReplicaResult struct {
+
+	// Set of topic details and replicas
+	TopicInSyncReplicaList []*TopicInSyncReplicaInfo `json:"TopicInSyncReplicaList,omitempty" name:"TopicInSyncReplicaList"`
+
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 }
 
 type TopicPartitionDO struct {

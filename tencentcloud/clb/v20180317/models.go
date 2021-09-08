@@ -364,22 +364,23 @@ func (r *BatchRegisterTargetsResponse) FromJsonString(s string) error {
 
 type BatchTarget struct {
 
-	// Listener ID
+	// Listener ID.
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
-	// Binding port
+	// The port to Bind
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
-	// CVM instance ID. Indicating binding the primary IP of the primary ENI.
+	// CVM instance ID. The primary IP of the primary ENI will be bound.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// ENI IP or other private IP. This parameter is required for binding a dual-stack IPv6 CVM instance.
+	// It is required for binding an IP. It supports an ENI IP or any other private IP. To bind an ENI IP, the ENI should be bound to a CVM instance before being bound to a CLB instance.
+	// Note: either `InstanceId` or `EniIp` must be passed in, which is required for binding a dual-stack IPv6 CVM instance.
 	EniIp *string `json:"EniIp,omitempty" name:"EniIp"`
 
-	// CVM instance weight. Value range: [0, 100]. If it is not specified when binding the instance, 10 will be used by default.
+	// Weight of the CVM instance. Value range: [0, 100]. If it is not specified for binding the instance, 10 will be used by default.
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 
-	// Layer-7 rule ID
+	// Layer-7 rule ID.
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 }
 
@@ -1159,7 +1160,7 @@ type DeleteLoadBalancerListenersRequest struct {
 	// CLB instance ID
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// Array of IDs of the listeners to be deleted. If this parameter is left empty, all listeners of the CLB instance will be deleted.
+	// Array of listener IDs to delete (20 IDs at most). If this parameter is left empty, all listeners of the CLB instance will be deleted.
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 }
 
@@ -2017,10 +2018,10 @@ func (r *DescribeClsLogSetResponse) FromJsonString(s string) error {
 type DescribeListenersRequest struct {
 	*tchttp.BaseRequest
 
-	// CLB instance ID
+	// CLB instance ID.
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// Array of IDs of the CLB listeners to be queried
+	// Array of CLB listener IDs to query (100 IDs at most).
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 
 	// Type of the listener protocols to be queried. Valid values: TCP, UDP, HTTP, HTTPS, and TCP_SSL.
@@ -2730,10 +2731,10 @@ func (r *DescribeTargetHealthResponse) FromJsonString(s string) error {
 type DescribeTargetsRequest struct {
 	*tchttp.BaseRequest
 
-	// CLB instance ID
+	// CLB instance ID.
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// Listener ID list
+	// List of listener IDs (20 IDs at most).
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 
 	// Listener protocol type
@@ -3455,6 +3456,10 @@ type LoadBalancerDetail struct {
 	// Whether the CLB instance is billed by IP.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LoadBalancerPassToTarget *uint64 `json:"LoadBalancerPassToTarget,omitempty" name:"LoadBalancerPassToTarget"`
+
+	// Health status of the target real server.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TargetHealth *string `json:"TargetHealth,omitempty" name:"TargetHealth"`
 }
 
 type LoadBalancerHealth struct {
@@ -4563,13 +4568,13 @@ type RewriteTarget struct {
 
 type RsWeightRule struct {
 
-	// CLB listener ID
+	// CLB listener ID.
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
-	// List of real servers for which to modify the weight
+	// List of real servers whose weights to modify.
 	Targets []*Target `json:"Targets,omitempty" name:"Targets"`
 
-	// Forwarding rule ID
+	// Forwarding rule ID, which is required only for layer-7 rules.
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 
 	// Target rule domain name. This parameter does not take effect if LocationId is specified
@@ -4578,7 +4583,7 @@ type RsWeightRule struct {
 	// Target rule URL. This parameter does not take effect if LocationId is specified
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// New forwarding weight of a real server. Value range: 0-100.
+	// The new forwarding weight of the real server. Value range: [0, 100]. This parameter takes lower precedence than `Weight` in [`Targets`](https://intl.cloud.tencent.com/document/api/214/30694?from_cn_redirect=1#Target), which means that this parameter only takes effect when the `Weight` in `RsWeightRule` is left empty.
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 }
 
@@ -4932,7 +4937,7 @@ type Target struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Forwarding weight of a real server. Value range: [0, 100]. Default value: 10.
+	// The new forwarding weight of the real server. Value range: [0, 100]. Default: 10. This parameter takes priority over `Weight` in [`RsWeightRule`](https://intl.cloud.tencent.com/document/api/214/30694?from_cn_redirect=1#RsWeightRule). If it’s left empty, the value of `Weight` in `RsWeightRule` will be used.
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 
 	// It is required when binding an IP. ENI IPs and other private IPs are supported. To bind an ENI IP, the ENI should be bound to a CVM instance before being bound to a CLB instance.
