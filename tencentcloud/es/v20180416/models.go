@@ -764,6 +764,14 @@ type InstanceInfo struct {
 	// Kibana node information
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	KibanaNodeInfo *KibanaNodeInfo `json:"KibanaNodeInfo,omitempty" name:"KibanaNodeInfo"`
+
+	// Visual node configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	WebNodeTypeInfo *WebNodeTypeInfo `json:"WebNodeTypeInfo,omitempty" name:"WebNodeTypeInfo"`
+
+	// JDK type. Valid values: `oracle`, `kona`
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Jdk *string `json:"Jdk,omitempty" name:"Jdk"`
 }
 
 type InstanceLog struct {
@@ -858,7 +866,6 @@ type NodeInfo struct {
 	// Node type<li>`hotData`: hot data node</li>
 	// <li>`warmData`: warm data node</li>
 	// <li>`dedicatedMaster`: dedicated master node</li>
-	// <li>`kibana`: Kibana node</li>
 	// Default value: `hotData`
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -920,6 +927,9 @@ type RestartInstanceRequest struct {
 
 	// Whether to force restart <li>true: Yes </li><li>false: No </li>Default value: false
 	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+
+	// Restart mode. `0`: rolling restart; `1`: full restart
+	RestartMode *int64 `json:"RestartMode,omitempty" name:"RestartMode"`
 }
 
 func (r *RestartInstanceRequest) ToJsonString() string {
@@ -936,6 +946,7 @@ func (r *RestartInstanceRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	delete(f, "ForceRestart")
+	delete(f, "RestartMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestartInstanceRequest has unknown keys!", "")
 	}
@@ -1193,6 +1204,9 @@ type UpdateInstanceRequest struct {
 
 	// Kibana configuration item (JSON string)
 	KibanaConfig *string `json:"KibanaConfig,omitempty" name:"KibanaConfig"`
+
+	// Visual node configuration
+	WebNodeTypeInfo *WebNodeTypeInfo `json:"WebNodeTypeInfo,omitempty" name:"WebNodeTypeInfo"`
 }
 
 func (r *UpdateInstanceRequest) ToJsonString() string {
@@ -1231,6 +1245,7 @@ func (r *UpdateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "MultiZoneInfo")
 	delete(f, "SceneType")
 	delete(f, "KibanaConfig")
+	delete(f, "WebNodeTypeInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateInstanceRequest has unknown keys!", "")
 	}

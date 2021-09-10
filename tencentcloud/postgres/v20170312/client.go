@@ -1276,6 +1276,68 @@ func (c *Client) DescribeServerlessDBInstances(request *DescribeServerlessDBInst
     return
 }
 
+func NewDescribeSlowQueryAnalysisRequest() (request *DescribeSlowQueryAnalysisRequest) {
+    request = &DescribeSlowQueryAnalysisRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeSlowQueryAnalysis")
+    return
+}
+
+func NewDescribeSlowQueryAnalysisResponse() (response *DescribeSlowQueryAnalysisResponse) {
+    response = &DescribeSlowQueryAnalysisResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSlowQueryAnalysis
+// This API is used to analyze slow query statements with abstract parameter values and return aggregated statistical analysis results.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
+func (c *Client) DescribeSlowQueryAnalysis(request *DescribeSlowQueryAnalysisRequest) (response *DescribeSlowQueryAnalysisResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowQueryAnalysisRequest()
+    }
+    response = NewDescribeSlowQueryAnalysisResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSlowQueryListRequest() (request *DescribeSlowQueryListRequest) {
+    request = &DescribeSlowQueryListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeSlowQueryList")
+    return
+}
+
+func NewDescribeSlowQueryListResponse() (response *DescribeSlowQueryListResponse) {
+    response = &DescribeSlowQueryListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSlowQueryList
+// This API is used to get the slow query list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeSlowQueryList(request *DescribeSlowQueryListRequest) (response *DescribeSlowQueryListResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowQueryListRequest()
+    }
+    response = NewDescribeSlowQueryListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
     request = &DescribeZonesRequest{
         BaseRequest: &tchttp.BaseRequest{},

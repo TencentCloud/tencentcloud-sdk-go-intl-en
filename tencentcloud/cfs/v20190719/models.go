@@ -83,16 +83,16 @@ type CreateCfsFileSystemRequest struct {
 	// AZ name, such as "ap-beijing-1". For the list of regions and AZs, please see [Overview](https://intl.cloud.tencent.com/document/product/582/13225?from_cn_redirect=1)
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Network type. Valid values: VPC (VPC), BASIC (basic network)
+	// Network type. Valid values: `VPC` (private network), `BASIC` (classic network), `CCN` (Cloud Connect Network). You must set this parameter to `CCN` if you use the Turbo series. Classic network will be phased out and is not recommended.
 	NetInterface *string `json:"NetInterface,omitempty" name:"NetInterface"`
 
-	// Permission group ID
+	// Permission group ID (required for Standard and High-Performance). For the Turbo series, set it to `pgroupbasic`.
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
-	// File system protocol type. Valid values: NFS, CIFS. If this parameter is left empty, NFS will be used by default
+	// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// File system storage class. Valid values: SD (standard), HP (high-performance)
+	// Storage class of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), `TP` (High-Performance Turbo)
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
 	// VPC ID. This field is required if network type is VPC.
@@ -101,7 +101,7 @@ type CreateCfsFileSystemRequest struct {
 	// Subnet ID. This field is required if network type is VPC.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Specifies an IP address, which is supported only for VPC. If this parameter is left empty, a random IP will be assigned in the subnet
+	// IP address (this parameter supports only the VPC network type, and the Turbo series is not supported). If this parameter is left empty, a random IP in the subnet will be assigned.
 	MountIP *string `json:"MountIP,omitempty" name:"MountIP"`
 
 	// Custom file system name
@@ -112,6 +112,15 @@ type CreateCfsFileSystemRequest struct {
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. This string is valid for 2 hours.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// CCN instance ID (required if the network type is CCN)
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN
+	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
+
+	// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+	Capacity *uint64 `json:"Capacity,omitempty" name:"Capacity"`
 }
 
 func (r *CreateCfsFileSystemRequest) ToJsonString() string {
@@ -137,6 +146,9 @@ func (r *CreateCfsFileSystemRequest) FromJsonString(s string) error {
 	delete(f, "FsName")
 	delete(f, "ResourceTags")
 	delete(f, "ClientToken")
+	delete(f, "CcnId")
+	delete(f, "CidrBlock")
+	delete(f, "Capacity")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCfsFileSystemRequest has unknown keys!", "")
 	}
@@ -156,10 +168,10 @@ type CreateCfsFileSystemResponse struct {
 		// File system ID
 		FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
 
-		// File system status
+		// File system status. Valid values: `creating`, `create_failed`, `available`, `unserviced`, `upgrading`, `deleting`
 		LifeCycleState *string `json:"LifeCycleState,omitempty" name:"LifeCycleState"`
 
-		// Used file system capacity
+		// Storage used by the file system, in bytes
 		SizeByte *uint64 `json:"SizeByte,omitempty" name:"SizeByte"`
 
 		// AZ ID
@@ -957,6 +969,9 @@ type FileSystemInfo struct {
 
 	// The upper limit on the file system’s throughput, which is determined based on its current usage, and bound resource packs for both storage and throughput
 	BandwidthLimit *float64 `json:"BandwidthLimit,omitempty" name:"BandwidthLimit"`
+
+	// Total capacity of the file system
+	Capacity *uint64 `json:"Capacity,omitempty" name:"Capacity"`
 }
 
 type MountInfo struct {
@@ -990,6 +1005,12 @@ type MountInfo struct {
 
 	// Subnet name
 	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
+
+	// CCN instance ID used by CFS Turbo
+	CcnID *string `json:"CcnID,omitempty" name:"CcnID"`
+
+	// CCN IP range used by CFS Turbo
+	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
 }
 
 type PGroup struct {
@@ -1212,7 +1233,7 @@ type UpdateCfsFileSystemSizeLimitRequest struct {
 	// File system capacity limit in GB. Value range: 0-1,073,741,824. If 0 is entered, no limit will be imposed on the file system capacity.
 	FsLimit *uint64 `json:"FsLimit,omitempty" name:"FsLimit"`
 
-	// File system ID
+	// File system ID. Currently, only Standard file systems are supported.
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
 }
 

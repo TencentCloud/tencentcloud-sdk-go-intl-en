@@ -94,6 +94,48 @@ func (r *AddDBInstanceToReadOnlyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AnalysisItems struct {
+
+	// The name of the database queried by the slow query statement
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// The name of the user who executes the slow query statement
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// The slow query statement whose parameter values are abstracted
+	NormalQuery *string `json:"NormalQuery,omitempty" name:"NormalQuery"`
+
+	// The address of the client that executes the slow query statement
+	ClientAddr *string `json:"ClientAddr,omitempty" name:"ClientAddr"`
+
+	// The number of executions of the slow query statement during the specified period of time
+	CallNum *uint64 `json:"CallNum,omitempty" name:"CallNum"`
+
+	// The ratio (in decimal form) of the number of executions of the slow query statement to that of all slow query statements during the specified period of time
+	CallPercent *float64 `json:"CallPercent,omitempty" name:"CallPercent"`
+
+	// The total execution time of the slow query statement during the specified period of time
+	CostTime *float64 `json:"CostTime,omitempty" name:"CostTime"`
+
+	// The ratio (in decimal form) of the total execution time of the slow query statement to that of all slow query statements during the specified period of time
+	CostPercent *float64 `json:"CostPercent,omitempty" name:"CostPercent"`
+
+	// The shortest execution time (in ms) of the slow query statement during the specified period of time
+	MinCostTime *float64 `json:"MinCostTime,omitempty" name:"MinCostTime"`
+
+	// The longest execution time (in ms) of the slow query statement during the specified period of time
+	MaxCostTime *float64 `json:"MaxCostTime,omitempty" name:"MaxCostTime"`
+
+	// The average execution time (in ms) of the slow query statement during the specified period of time
+	AvgCostTime *float64 `json:"AvgCostTime,omitempty" name:"AvgCostTime"`
+
+	// The timestamp when the slow query statement starts to execute for the first time during the specified period of time
+	FirstTime *string `json:"FirstTime,omitempty" name:"FirstTime"`
+
+	// The timestamp when the slow query statement starts to execute for the last time during the specified period of time
+	LastTime *string `json:"LastTime,omitempty" name:"LastTime"`
+}
+
 type CloseDBExtranetAccessRequest struct {
 	*tchttp.BaseRequest
 
@@ -815,7 +857,7 @@ type DBInstance struct {
 	// Instance name
 	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
 
-	// Instance status
+	// Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`
 	DBInstanceStatus *string `json:"DBInstanceStatus,omitempty" name:"DBInstanceStatus"`
 
 	// Assigned instance memory size in GB
@@ -1832,6 +1874,171 @@ func (r *DescribeServerlessDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeSlowQueryAnalysisRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Start timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss". The log is retained for seven days by default, so the start timestamp must fall within the retention period.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss".
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Filter by database name. This parameter is optional.
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// Sort by field. Valid values: `CallNum`, `CostTime`, `AvgCostTime`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `asc` (ascending), `desc` (descending).
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Number of entries per page. Value range: [1,100].
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset. Value range: [0,INF).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeSlowQueryAnalysisRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSlowQueryAnalysisRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "DatabaseName")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSlowQueryAnalysisRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSlowQueryAnalysisResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The total number of query results.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Detailed analysis.
+		Detail *Detail `json:"Detail,omitempty" name:"Detail"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSlowQueryAnalysisResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSlowQueryAnalysisResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSlowQueryListRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Start timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss". The log is retained for seven days by default, so the start timestamp must fall within the retention period.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss".
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Filter by database name. This parameter is optional.
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// Sorting order. Valid values: `asc` (ascending), `desc` (descending). Default value: `desc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Sort by field. Valid values: `SessionStartTime` (default), `Duration`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Number of entries per page. Value range: [1,100]. Default value: `20`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset. Value range: [0,INF). Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeSlowQueryListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSlowQueryListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "DatabaseName")
+	delete(f, "OrderByType")
+	delete(f, "OrderBy")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSlowQueryListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeSlowQueryListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The total number of slow query statements during the specified period of time.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Analysis of the execution time of slow query statements by classifying them to different time ranges. These slow query statements fall within the query range you specified in the request parameters.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		DurationAnalysis []*DurationAnalysis `json:"DurationAnalysis,omitempty" name:"DurationAnalysis"`
+
+		// The list of slow query details during the specified period of time.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		RawSlowQueryList []*RawSlowQuery `json:"RawSlowQueryList,omitempty" name:"RawSlowQueryList"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeSlowQueryListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSlowQueryListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeZonesRequest struct {
 	*tchttp.BaseRequest
 }
@@ -1926,6 +2133,19 @@ func (r *DestroyDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Detail struct {
+
+	// The total execution time (in ms) of all slow query statements during the specified period of time
+	TotalTime *float64 `json:"TotalTime,omitempty" name:"TotalTime"`
+
+	// The total number of all slow query statements during the specified period of time
+	TotalCallNum *uint64 `json:"TotalCallNum,omitempty" name:"TotalCallNum"`
+
+	// The statistical analysis list of slow queries
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AnalysisItems []*AnalysisItems `json:"AnalysisItems,omitempty" name:"AnalysisItems"`
+}
+
 type DisIsolateDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1982,6 +2202,15 @@ func (r *DisIsolateDBInstancesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DisIsolateDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DurationAnalysis struct {
+
+	// Time range
+	TimeSegment *string `json:"TimeSegment,omitempty" name:"TimeSegment"`
+
+	// The number of slow query statements whose execution time falls within the time range
+	Count *int64 `json:"Count,omitempty" name:"Count"`
 }
 
 type ErrLogDetail struct {
@@ -2819,6 +3048,27 @@ type PgDeal struct {
 
 	// Instance ID array
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+}
+
+type RawSlowQuery struct {
+
+	// Slow query statement
+	RawQuery *string `json:"RawQuery,omitempty" name:"RawQuery"`
+
+	// The database queried by the slow query statement
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// The execution time of the slow query statement
+	Duration *float64 `json:"Duration,omitempty" name:"Duration"`
+
+	// The client that executes the slow query statement
+	ClientAddr *string `json:"ClientAddr,omitempty" name:"ClientAddr"`
+
+	// The name of the user who executes the slow query statement
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// The time when the slow query statement starts to execute
+	SessionStartTime *string `json:"SessionStartTime,omitempty" name:"SessionStartTime"`
 }
 
 type ReadOnlyGroup struct {
