@@ -1848,16 +1848,21 @@ func (r *CreateAssistantCidrResponse) FromJsonString(s string) error {
 type CreateBandwidthPackageRequest struct {
 	*tchttp.BaseRequest
 
-	// The type of the bandwidth package. Valid values: `HIGH_QUALITY_BGP`, `BGP`, `SINGLEISP`, and `ANYCAST`.
+	// The network type of the bandwidth package. Default value: `BGP`. Valid values:
+	// `BGP` 
+	// `HIGH_QUALITY_BGP`
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
-	// The bandwidth package billing mode. Valid values: 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'.
+	// The billing mode of the bandwidth package. Default value: `TOP5_POSTPAID_BY_MONTH`. Valid values:
+	// <li>`TOP5_POSTPAID_BY_MONTH`: monthly top 5 </li>
+	// <li>`PERCENT95_POSTPAID_BY_MONTH`: monthly 95th percentile</li>
+	// <li>`FIXED_PREPAID_BY_MONTH`: monthly subscription</li>
 	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
 
 	// The name of the bandwidth package.
 	BandwidthPackageName *string `json:"BandwidthPackageName,omitempty" name:"BandwidthPackageName"`
 
-	// The number of bandwidth packages (It can only be “1” for bill-by-CVM accounts)
+	// The number of bandwidth packages to create. Valid range: 1-20. It can only be “1” for bill-by-CVM accounts.
 	BandwidthPackageCount *uint64 `json:"BandwidthPackageCount,omitempty" name:"BandwidthPackageCount"`
 
 	// The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit. This feature is currently in beta.
@@ -2227,13 +2232,10 @@ func (r *CreateDirectConnectGatewayResponse) FromJsonString(s string) error {
 type CreateFlowLogRequest struct {
 	*tchttp.BaseRequest
 
-	// ID of the VPC instance
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
-
 	// The name of the flow log instance.
 	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
 
-	// The type of resources to which the flow log belongs. Valid values: 'VPC', 'SUBNET' and 'NETWORKINTERFACE'.
+	// The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, and `CCN`.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
 	// The unique ID of the resource.
@@ -2244,6 +2246,9 @@ type CreateFlowLogRequest struct {
 
 	// The storage ID of the flow log.
 	CloudLogId *string `json:"CloudLogId,omitempty" name:"CloudLogId"`
+
+	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the `ResourceType` is set to `CCN`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The description of the flow log instance
 	FlowLogDescription *string `json:"FlowLogDescription,omitempty" name:"FlowLogDescription"`
@@ -2264,12 +2269,12 @@ func (r *CreateFlowLogRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "VpcId")
 	delete(f, "FlowLogName")
 	delete(f, "ResourceType")
 	delete(f, "ResourceId")
 	delete(f, "TrafficType")
 	delete(f, "CloudLogId")
+	delete(f, "VpcId")
 	delete(f, "FlowLogDescription")
 	delete(f, "Tags")
 	if len(f) > 0 {
@@ -4342,11 +4347,11 @@ func (r *DeleteDirectConnectGatewayResponse) FromJsonString(s string) error {
 type DeleteFlowLogRequest struct {
 	*tchttp.BaseRequest
 
-	// ID of the VPC instance
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
-
 	// The unique ID of the flow log.
 	FlowLogId *string `json:"FlowLogId,omitempty" name:"FlowLogId"`
+
+	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless a CCN flow log is deleted.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 }
 
 func (r *DeleteFlowLogRequest) ToJsonString() string {
@@ -4361,8 +4366,8 @@ func (r *DeleteFlowLogRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "VpcId")
 	delete(f, "FlowLogId")
+	delete(f, "VpcId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteFlowLogRequest has unknown keys!", "")
 	}
@@ -6168,10 +6173,11 @@ type DescribeCcnRoutesRequest struct {
 
 	// Filter condition. `RouteIds` and `Filters` cannot be specified at the same time.
 	// <li>route-id - String - (Filter condition) Routing policy ID.</li>
-	// <li>cidr-block - String - (Filter condition) Destination port.</li>
+	// <li>cidr-block - String - (Filter condition) Destination.</li>
 	// <li>instance-type - String - (Filter condition) The next hop type.</li>
 	// <li>instance-region - String - (Filter condition) The next hop region.</li>
-	// <li>instance-type - String - (Filter condition) The instance ID of the next hop.</li>
+	// <li>instance-id - String - (Filter condition) The instance ID of the next hop.</li>
+	// <li>route-table-id - String - (Filter condition) The list of route table IDs in the format of `ccntr-1234edfr`. Filters by the route table ID.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset
@@ -10160,7 +10166,7 @@ type FlowLog struct {
 	// The name of the flow log instance.
 	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
 
-	// The resource type of the flow log. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
+	// The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, and `CCN`.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
 	// The unique ID of the resource.
@@ -11622,11 +11628,11 @@ func (r *ModifyDirectConnectGatewayAttributeResponse) FromJsonString(s string) e
 type ModifyFlowLogAttributeRequest struct {
 	*tchttp.BaseRequest
 
-	// ID of the VPC instance
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
-
 	// The unique ID of the flow log.
 	FlowLogId *string `json:"FlowLogId,omitempty" name:"FlowLogId"`
+
+	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the attributes of a CCN flow log is modified.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The name of the flow log.
 	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
@@ -11647,8 +11653,8 @@ func (r *ModifyFlowLogAttributeRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "VpcId")
 	delete(f, "FlowLogId")
+	delete(f, "VpcId")
 	delete(f, "FlowLogName")
 	delete(f, "FlowLogDescription")
 	if len(f) > 0 {

@@ -1837,16 +1837,16 @@ type InvokeFunctionRequest struct {
 	// Function name
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
-	// Version number or alias of the triggered function
+	// Version or alias of the function. It defaults to `$DEFAULT`.
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 
-	// Function running parameter, which is in the JSON format. Maximum parameter size is 1 MB.
+	// Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB.
 	Event *string `json:"Event,omitempty" name:"Event"`
 
-	// If this field is specified for a synchronous invocation, the return value will contain a 4 KB log. Valid value: `None` (default) or `Tail`. If the value is `Tail`, `log` in the return parameter will contain the corresponding function execution log.
+	// Valid value: `None` (default) or `Tail`. If the value is `Tail`, `log` in the response will contain the corresponding function execution log (up to 4KB).
 	LogType *string `json:"LogType,omitempty" name:"LogType"`
 
-	// Namespace
+	// Namespace. `default` is used if it’s left empty.
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
 	// Traffic routing config in json format, e.g., {"k":"v"}. Please note that both "k" and "v" must be strings. Up to 1024 bytes allowed.
@@ -2397,6 +2397,9 @@ type ListNamespacesRequest struct {
 
 	// It specifies whether to return the results in ascending or descending order. The value is `ASC` or `DESC`.
 	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Specifies the range and keyword for search. The value of `Key` can be `Namespace` or `Description`. Multiple AND conditions can be specified.
+	SearchKey []*SearchKey `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
 func (r *ListNamespacesRequest) ToJsonString() string {
@@ -2415,6 +2418,7 @@ func (r *ListNamespacesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Orderby")
 	delete(f, "Order")
+	delete(f, "SearchKey")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListNamespacesRequest has unknown keys!", "")
 	}
@@ -3055,6 +3059,15 @@ type RoutingConfig struct {
 
 	// Additional version with rule-based routing
 	AddtionVersionMatchs []*VersionMatch `json:"AddtionVersionMatchs,omitempty" name:"AddtionVersionMatchs"`
+}
+
+type SearchKey struct {
+
+	// Search range
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Keyword for search
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type StatusReason struct {

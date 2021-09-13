@@ -110,8 +110,14 @@ const (
 	// You cannot publish a version in the current function state. Please try again when the state is normal.
 	FAILEDOPERATION_PUBLISHVERSION = "FailedOperation.PublishVersion"
 
+	// The role does not exist.
+	FAILEDOPERATION_QCSROLENOTFOUND = "FailedOperation.QcsRoleNotFound"
+
 	// The function already has a reserved concurrency setting task in progress. Please try again later.
 	FAILEDOPERATION_RESERVEDINPROGRESS = "FailedOperation.ReservedInProgress"
+
+	// 
+	FAILEDOPERATION_TOPICNOTEXIST = "FailedOperation.TopicNotExist"
 
 	// The user already has a concurrency quota setting task in progress. Please try again later.
 	FAILEDOPERATION_TOTALCONCURRENCYMEMORYINPROGRESS = "FailedOperation.TotalConcurrencyMemoryInProgress"
@@ -481,6 +487,9 @@ const (
 
 	// Cos is in use.
 	RESOURCEINUSE_COS = "ResourceInUse.Cos"
+
+	// This function already exists.
+	RESOURCEINUSE_FUNCTION = "ResourceInUse.Function"
 
 	// This FunctionName already exists.
 	RESOURCEINUSE_FUNCTIONNAME = "ResourceInUse.FunctionName"
