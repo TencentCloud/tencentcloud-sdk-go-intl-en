@@ -137,6 +137,87 @@ func (r *CreateProductSecretResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateSSHKeyPairSecretRequest struct {
+	*tchttp.BaseRequest
+
+	// Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
+	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+
+	// ID of the project to which the created SSH key belongs.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Description, such as what it is used for. It contains up to 2,048 bytes.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Specifies a KMS CMK to encrypt the secret.
+	// If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.
+	// You can also specify a custom KMS CMK created in the same region for encryption.
+	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+
+	// List of tags.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
+func (r *CreateSSHKeyPairSecretRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSSHKeyPairSecretRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecretName")
+	delete(f, "ProjectId")
+	delete(f, "Description")
+	delete(f, "KmsKeyId")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSSHKeyPairSecretRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateSSHKeyPairSecretResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Name of the created secret.
+		SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+
+		// ID of the created SSH key.
+		SSHKeyID *string `json:"SSHKeyID,omitempty" name:"SSHKeyID"`
+
+		// Name of the created SSH key.
+		SSHKeyName *string `json:"SSHKeyName,omitempty" name:"SSHKeyName"`
+
+		// Tag return code. `0`: success; `1`: internal error; `2`: business processing error.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TagCode *uint64 `json:"TagCode,omitempty" name:"TagCode"`
+
+		// Tag return message.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TagMsg *string `json:"TagMsg,omitempty" name:"TagMsg"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateSSHKeyPairSecretResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSSHKeyPairSecretResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateSecretRequest struct {
 	*tchttp.BaseRequest
 
@@ -227,8 +308,14 @@ type DeleteSecretRequest struct {
 	// Name of the Secret to be deleted.
 	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
 
-	// Scheduled deletion time, in days. If set to 0, the Secret is deleted immediately. A number in the range of 1 to 30 indicates the number of retention days. The Secret will be deleted after the set value.
+	// Scheduled deletion time (in days), indicating the number of retention days for the secret. Value range: 0-30. If it is `0`, the secret is deleted immediately.
+	// For an SSH key secret, this field can only be `0`.
 	RecoveryWindowInDays *uint64 `json:"RecoveryWindowInDays,omitempty" name:"RecoveryWindowInDays"`
+
+	// Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only valid for SSH key secrets. Valid values:
+	// `True`: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.
+	// `False`: only deletes the SSH key information in the secret.
+	CleanSSHKey *bool `json:"CleanSSHKey,omitempty" name:"CleanSSHKey"`
 }
 
 func (r *DeleteSecretRequest) ToJsonString() string {
@@ -245,6 +332,7 @@ func (r *DeleteSecretRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SecretName")
 	delete(f, "RecoveryWindowInDays")
+	delete(f, "CleanSSHKey")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSecretRequest has unknown keys!", "")
 	}
@@ -415,7 +503,7 @@ type DescribeRotationDetailResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Specifies whether to allow rotation. True: yes; False: no.
+		// Whether to enable rotation. `true`: enabled; `false`: disabled.
 		EnableRotation *bool `json:"EnableRotation,omitempty" name:"EnableRotation"`
 
 		// Rotation frequency in days. Default value: 1 day.
@@ -549,8 +637,8 @@ type DescribeSecretResponse struct {
 		// Creation time.
 		CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
 
-		// 0: user-defined credential; 1: Tencent Cloud service credential.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// `0`: user-defined secret; `1`: database credential; `2`: SSH key secret.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		SecretType *int64 `json:"SecretType,omitempty" name:"SecretType"`
 
 		// Tencent Cloud service name.
@@ -568,6 +656,18 @@ type DescribeSecretResponse struct {
 		// Rotation frequency in days by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		RotationFrequency *int64 `json:"RotationFrequency,omitempty" name:"RotationFrequency"`
+
+		// Secret name. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
+
+		// Project ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
+
+		// ID of the CVM instance associated with the SSH key. ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		AssociatedInstanceIDs []*string `json:"AssociatedInstanceIDs,omitempty" name:"AssociatedInstanceIDs"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -776,6 +876,76 @@ func (r *GetRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type GetSSHKeyPairValueRequest struct {
+	*tchttp.BaseRequest
+
+	// Secret name. This field is only valid for SSH key secrets.
+	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+
+	// 
+	SSHKeyId *string `json:"SSHKeyId,omitempty" name:"SSHKeyId"`
+}
+
+func (r *GetSSHKeyPairValueRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetSSHKeyPairValueRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecretName")
+	delete(f, "SSHKeyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetSSHKeyPairValueRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetSSHKeyPairValueResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// ID of the SSH key.
+		SSHKeyID *string `json:"SSHKeyID,omitempty" name:"SSHKeyID"`
+
+		// Plaintext value of the Base64-encoded public key.
+		PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
+
+		// Plaintext value of the Base64-encoded private key.
+		PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
+
+		// ID of the project to which the SSH key belongs.
+		ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
+
+		// Description of the SSH key.
+	// The description can be modified in the CVM console.
+		SSHKeyDescription *string `json:"SSHKeyDescription,omitempty" name:"SSHKeyDescription"`
+
+		// Name of the SSH key.
+	// The name can be modified in the CVM console.
+		SSHKeyName *string `json:"SSHKeyName,omitempty" name:"SSHKeyName"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetSSHKeyPairValueResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetSSHKeyPairValueResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type GetSecretValueRequest struct {
 	*tchttp.BaseRequest
 
@@ -970,10 +1140,13 @@ type ListSecretsRequest struct {
 	// Tag filter.
 	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
 
-	// 0: user-defined credential (default value).
-	// 1: Tencent Cloud service credential.
-	// Either 1 or 0 can be selected for this parameter.
+	// `0` (default): user-defined secret.
+	// `1`: Tencent Cloud services secret.
+	// `2`: SSH key secret.
 	SecretType *uint64 `json:"SecretType,omitempty" name:"SecretType"`
+
+	// 
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
 }
 
 func (r *ListSecretsRequest) ToJsonString() string {
@@ -995,6 +1168,7 @@ func (r *ListSecretsRequest) FromJsonString(s string) error {
 	delete(f, "SearchSecretName")
 	delete(f, "TagFilters")
 	delete(f, "SecretType")
+	delete(f, "ProductName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListSecretsRequest has unknown keys!", "")
 	}
@@ -1274,6 +1448,18 @@ type SecretMetadata struct {
 	// Tencent Cloud service name, which takes effect only when `SecretType` is 1 (Tencent Cloud service credential)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+	// Secret name. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
+
+	// Project ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
+
+	// ID of the CVM instance associated with the SSH key. ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AssociatedInstanceIDs []*string `json:"AssociatedInstanceIDs,omitempty" name:"AssociatedInstanceIDs"`
 }
 
 type Tag struct {
@@ -1354,15 +1540,15 @@ type UpdateRotationStatusRequest struct {
 	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
 
 	// Specifies whether to enable rotation.
-	// True: enable rotation.
-	// False: disable rotation.
+	// `true`: enables rotation.
+	// `false`: disables rotation.
 	EnableRotation *bool `json:"EnableRotation,omitempty" name:"EnableRotation"`
 
 	// Rotation frequency in days. Value range: 30–365.
 	Frequency *int64 `json:"Frequency,omitempty" name:"Frequency"`
 
-	// User-Defined rotation start time in the format of 2006-01-02 15:04:05.
-	// When `EnableRotation` is `True`, if `RotationBeginTime` is left empty, the current time will be entered by default.
+	// User-defined rotation start time in the format of 2006-01-02 15:04:05.
+	// When `EnableRotation` is `true` and `RotationBeginTime` is left empty, the current time will be entered by default.
 	RotationBeginTime *string `json:"RotationBeginTime,omitempty" name:"RotationBeginTime"`
 }
 

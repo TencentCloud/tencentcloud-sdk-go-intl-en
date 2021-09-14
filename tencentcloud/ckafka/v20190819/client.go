@@ -289,6 +289,39 @@ func (c *Client) DeleteAcl(request *DeleteAclRequest) (response *DeleteAclRespon
     return
 }
 
+func NewDeleteRouteTriggerTimeRequest() (request *DeleteRouteTriggerTimeRequest) {
+    request = &DeleteRouteTriggerTimeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ckafka", APIVersion, "DeleteRouteTriggerTime")
+    return
+}
+
+func NewDeleteRouteTriggerTimeResponse() (response *DeleteRouteTriggerTimeResponse) {
+    response = &DeleteRouteTriggerTimeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRouteTriggerTime
+// This API is used to modify the delayed trigger time of route deletion.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteRouteTriggerTime(request *DeleteRouteTriggerTimeRequest) (response *DeleteRouteTriggerTimeResponse, err error) {
+    if request == nil {
+        request = NewDeleteRouteTriggerTimeRequest()
+    }
+    response = NewDeleteRouteTriggerTimeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteTopicRequest() (request *DeleteTopicRequest) {
     request = &DeleteTopicRequest{
         BaseRequest: &tchttp.BaseRequest{},

@@ -237,6 +237,9 @@ type CreateAclRequest struct {
 
 	// The list of users allowed to access the topic. Default: User:*, meaning all users. The current user must be in the user list. Add `User:` before the user name (`User:A` for example).
 	Principal *string `json:"Principal,omitempty" name:"Principal"`
+
+	// The resource name list, which is in JSON string format. Only one of `ResourceName` and `resourceNameList` can be specified.
+	ResourceNameList *string `json:"ResourceNameList,omitempty" name:"ResourceNameList"`
 }
 
 func (r *CreateAclRequest) ToJsonString() string {
@@ -258,6 +261,7 @@ func (r *CreateAclRequest) FromJsonString(s string) error {
 	delete(f, "ResourceName")
 	delete(f, "Host")
 	delete(f, "Principal")
+	delete(f, "ResourceNameList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAclRequest has unknown keys!", "")
 	}
@@ -627,6 +631,52 @@ func (r *DeleteAclResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteAclResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteRouteTriggerTimeRequest struct {
+	*tchttp.BaseRequest
+
+	// Modification time.
+	DelayTime *string `json:"DelayTime,omitempty" name:"DelayTime"`
+}
+
+func (r *DeleteRouteTriggerTimeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRouteTriggerTimeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DelayTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRouteTriggerTimeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteRouteTriggerTimeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteRouteTriggerTimeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRouteTriggerTimeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

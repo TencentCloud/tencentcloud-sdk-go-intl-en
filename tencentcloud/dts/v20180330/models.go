@@ -710,6 +710,9 @@ type DescribeMigrateJobsRequest struct {
 
 	// Number of the returned instances. Value range: [1, 100]. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Tag filter.
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
 }
 
 func (r *DescribeMigrateJobsRequest) ToJsonString() string {
@@ -730,6 +733,7 @@ func (r *DescribeMigrateJobsRequest) FromJsonString(s string) error {
 	delete(f, "OrderSeq")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "TagFilters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMigrateJobsRequest has unknown keys!", "")
 	}
@@ -1321,6 +1325,10 @@ type MigrateJobInfo struct {
 
 	// Prompt message for task error, which is not null or empty when an error occurs with the task
 	ErrorInfo []*ErrorInfo `json:"ErrorInfo,omitempty" name:"ErrorInfo"`
+
+	// Tag
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
 }
 
 type MigrateOption struct {

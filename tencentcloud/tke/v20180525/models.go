@@ -632,7 +632,7 @@ type ClusterCIDRSettings struct {
 	// Maximum number of pods on each node in the cluster
 	MaxNodePodNum *uint64 `json:"MaxNodePodNum,omitempty" name:"MaxNodePodNum"`
 
-	// Maximum number of cluster services
+	// The maximum number of services in a cluster. The range is from 32 to 32768. When its power is not 2, it will round upward to the closest power of 2. Default value is 256.
 	MaxClusterServiceNum *uint64 `json:"MaxClusterServiceNum,omitempty" name:"MaxClusterServiceNum"`
 
 	// The CIDR block used to assign cluster service IP addresses. It must conflict with neither the VPC CIDR block nor with CIDR blocks of other clusters in the same VPC instance. The IP range must be within the private network IP range, such as 10.1.0.0/14, 192.168.0.1/18, and 172.16.0.0/16.
@@ -3141,6 +3141,9 @@ type EnhancedService struct {
 
 	// Enables cloud monitor service. If this parameter is not specified, the cloud monitor service will be enabled by default.
 	MonitorService *RunMonitorServiceEnabled `json:"MonitorService,omitempty" name:"MonitorService"`
+
+	// Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
+	AutomationService *RunAutomationServiceEnabled `json:"AutomationService,omitempty" name:"AutomationService"`
 }
 
 type ExistedInstance struct {
@@ -3420,6 +3423,10 @@ type InstanceAdvancedSettings struct {
 	// When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DesiredPodNumber *int64 `json:"DesiredPodNumber,omitempty" name:"DesiredPodNumber"`
+
+	// Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PreStartUserScript *string `json:"PreStartUserScript,omitempty" name:"PreStartUserScript"`
 }
 
 type InstanceDataDiskMountSetting struct {
@@ -3851,6 +3858,60 @@ func (r *ModifyClusterNodePoolResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyClusterNodePoolResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNodePoolInstanceTypesRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// List of instance types
+	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
+}
+
+func (r *ModifyNodePoolInstanceTypesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNodePoolInstanceTypesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "NodePoolId")
+	delete(f, "InstanceTypes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNodePoolInstanceTypesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNodePoolInstanceTypesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyNodePoolInstanceTypesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNodePoolInstanceTypesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4288,6 +4349,12 @@ type RouteTableInfo struct {
 
 	// VPC instance ID.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+}
+
+type RunAutomationServiceEnabled struct {
+
+	// Whether to enable the TAT service. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
 }
 
 type RunInstancesForNode struct {
