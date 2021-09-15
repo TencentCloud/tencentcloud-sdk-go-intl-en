@@ -384,6 +384,44 @@ type BatchTarget struct {
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 }
 
+type BindDetailItem struct {
+
+	// Specifies the ID of CLB to be bound
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// Specifies the ID of listener to be bound
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Specifies the domain name to be bound
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Sets the bound rule.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+
+	// Listener name.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Listener protocol.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Listener port.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// URL of the location.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Configuration ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UconfigId *string `json:"UconfigId,omitempty" name:"UconfigId"`
+}
+
 type BlockedIP struct {
 
 	// Blacklisted IP
@@ -583,6 +621,28 @@ type ClusterItem struct {
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
+type ConfigListItem struct {
+
+	// Configuration ID.
+	UconfigId *string `json:"UconfigId,omitempty" name:"UconfigId"`
+
+	// Configuration type.
+	ConfigType *string `json:"ConfigType,omitempty" name:"ConfigType"`
+
+	// Configuration name.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ConfigName *string `json:"ConfigName,omitempty" name:"ConfigName"`
+
+	// Configuration content.
+	ConfigContent *string `json:"ConfigContent,omitempty" name:"ConfigContent"`
+
+	// Creates configuration time.
+	CreateTimestamp *string `json:"CreateTimestamp,omitempty" name:"CreateTimestamp"`
+
+	// Modifies configuration time.
+	UpdateTimestamp *string `json:"UpdateTimestamp,omitempty" name:"UpdateTimestamp"`
+}
+
 type CreateClsLogSetRequest struct {
 	*tchttp.BaseRequest
 
@@ -756,16 +816,16 @@ type CreateLoadBalancerRequest struct {
 	// Note: if the name of the new CLB instance already exists, a default name will be generated automatically.
 	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
 
-	// Network ID of the backend target server of CLB, which can be obtained through the DescribeVpcEx API. If this parameter is not passed in, it will default to a basic network ("0").
+	// Network ID of the target CLB real server, such as `vpc-12345678`, which can be obtained through the [DescribeVpcEx](https://intl.cloud.tencent.com/document/product/215/1372?from_cn_redirect=1) API. If this parameter is not specified, it will default to `DefaultVPC`. This parameter is required for creating a CLB instance.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// A subnet ID must be specified when you purchase a private network CLB instance in a VPC, and the VIP of this instance will be generated in this subnet.
+	// A subnet ID must be specified when you purchase a private network CLB instance in a VPC, and the VIP of this instance will be generated in this subnet. This parameter is required for creating a CLB instance.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// ID of the project to which a CLB instance belongs, which can be obtained through the DescribeProject API. If this parameter is not passed in, the default project will be used.
+	// Project ID of the CLB instance, which can be obtained through the [DescribeProject](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. If this parameter is not specified, it will default to the default project.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// IP version. Valid values: IPv4, IPv6, IPv6FullChain. Default value: IPv4. This parameter is applicable only to public network CLB instances.
+	// IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). This parameter is only for public network CLB instances.
 	AddressIPVersion *string `json:"AddressIPVersion,omitempty" name:"AddressIPVersion"`
 
 	// Number of CLBs to be created. Default value: 1.
@@ -784,17 +844,23 @@ type CreateLoadBalancerRequest struct {
 	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
 	VipIsp *string `json:"VipIsp,omitempty" name:"VipIsp"`
 
-	// Tags a CLB instance when purchasing it
+	// Tags a CLB instance when purchasing it.
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 
-	// Applies for CLB instances for a specified VIP
+	// Specifies a VIP for the CLB instance.
+	// <ul><li>`VpcId` is optional for creating shared clusters of public network CLB instances. For IPv6 CLB instance type, `SubnetId` is required; for IPv4 and IPv6 NAT64 types, it can be left empty.</li>
+	// <li>`VpcId` is optional for creating shared clusters of public network CLB instances. For IPv6 CLB instance type, `SubnetId` is required; for IPv4 and IPv6 NAT64 types, it can be left empty.
+	// </li></ul>
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
 	// Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
-	// Dedicated cluster information
+	// Exclusive cluster information. This parameter is required for creating exclusive clusters of CLB instances.
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
+
+	// 
+	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
@@ -844,6 +910,7 @@ func (r *CreateLoadBalancerRequest) FromJsonString(s string) error {
 	delete(f, "Vip")
 	delete(f, "BandwidthPackageId")
 	delete(f, "ExclusiveCluster")
+	delete(f, "SlaType")
 	delete(f, "ClientToken")
 	delete(f, "SnatPro")
 	delete(f, "SnatIps")
@@ -2012,6 +2079,144 @@ func (r *DescribeClsLogSetResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeClsLogSetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCustomizedConfigAssociateListRequest struct {
+	*tchttp.BaseRequest
+
+	// Configuration ID.
+	UconfigId *string `json:"UconfigId,omitempty" name:"UconfigId"`
+
+	// Start position of the binding list. Default: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of binding lists to pull. Default: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Searches for the domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
+func (r *DescribeCustomizedConfigAssociateListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomizedConfigAssociateListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UconfigId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Domain")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomizedConfigAssociateListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCustomizedConfigAssociateListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of bound resources
+		BindList []*BindDetailItem `json:"BindList,omitempty" name:"BindList"`
+
+		// Total number of bound resources
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCustomizedConfigAssociateListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomizedConfigAssociateListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCustomizedConfigListRequest struct {
+	*tchttp.BaseRequest
+
+	// Configuration type. Valid values: `CLB` (CLB-specific configs), `SERVER` (domain name-specific configs), and `LOCATION` (forwarding rule-specific configs).
+	ConfigType *string `json:"ConfigType,omitempty" name:"ConfigType"`
+
+	// Pagination offset. Default: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results per page. Default: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Specifies the name of configs to query. Fuzzy match is supported.
+	ConfigName *string `json:"ConfigName,omitempty" name:"ConfigName"`
+
+	// Configuration ID.
+	UconfigIds []*string `json:"UconfigIds,omitempty" name:"UconfigIds"`
+
+	// The filters are:
+	// <li> loadbalancer-id - String - Required: no - (filter) CLB instance ID, such as "lb-12345678". </li>
+	// <li> vip - String - Required: no - (filter) CLB instance VIP, such as "1.1.1.1" and "2204::22:3". </li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeCustomizedConfigListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomizedConfigListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConfigType")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "ConfigName")
+	delete(f, "UconfigIds")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomizedConfigListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCustomizedConfigListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Configuration list.
+		ConfigList []*ConfigListItem `json:"ConfigList,omitempty" name:"ConfigList"`
+
+		// Number of configurations.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCustomizedConfigListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomizedConfigListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3862,6 +4067,9 @@ type ModifyLoadBalancerAttributesRequest struct {
 
 	// Whether to enable SnatPro
 	SnatPro *bool `json:"SnatPro,omitempty" name:"SnatPro"`
+
+	// Specifies whether to enable deletion protection.
+	DeleteProtect *bool `json:"DeleteProtect,omitempty" name:"DeleteProtect"`
 }
 
 func (r *ModifyLoadBalancerAttributesRequest) ToJsonString() string {
@@ -3882,6 +4090,7 @@ func (r *ModifyLoadBalancerAttributesRequest) FromJsonString(s string) error {
 	delete(f, "InternetChargeInfo")
 	delete(f, "LoadBalancerPassToTarget")
 	delete(f, "SnatPro")
+	delete(f, "DeleteProtect")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLoadBalancerAttributesRequest has unknown keys!", "")
 	}
