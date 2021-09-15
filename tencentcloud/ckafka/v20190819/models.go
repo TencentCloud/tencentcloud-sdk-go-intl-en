@@ -238,7 +238,7 @@ type CreateAclRequest struct {
 	// The list of users allowed to access the topic. Default: User:*, meaning all users. The current user must be in the user list. Add `User:` before the user name (`User:A` for example).
 	Principal *string `json:"Principal,omitempty" name:"Principal"`
 
-	// The resource name list, which is in JSON string format. Only one of `ResourceName` and `resourceNameList` can be specified.
+	// The resource name list, which is in JSON string format. Either `ResourceName` or `resourceNameList` can be specified.
 	ResourceNameList *string `json:"ResourceNameList,omitempty" name:"ResourceNameList"`
 }
 

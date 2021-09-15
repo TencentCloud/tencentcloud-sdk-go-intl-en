@@ -2126,6 +2126,75 @@ type IssueTypeInfo struct {
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 }
 
+type KillMySqlThreadsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The stage of a session killing task. Valid values: Prepare (preparation stage), Commit (commit stage).
+	Stage *string `json:"Stage,omitempty" name:"Stage"`
+
+	// The ID list of MySQL sessions to be killed. This parameter is used in the “Prepare” stage.
+	Threads []*int64 `json:"Threads,omitempty" name:"Threads"`
+
+	// Execution ID. This parameter is used in the “Commit” stage.
+	SqlExecId *string `json:"SqlExecId,omitempty" name:"SqlExecId"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *KillMySqlThreadsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KillMySqlThreadsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Stage")
+	delete(f, "Threads")
+	delete(f, "SqlExecId")
+	delete(f, "Product")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "KillMySqlThreadsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type KillMySqlThreadsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The ID list of MySQL sessions that have been killed.
+		Threads []*int64 `json:"Threads,omitempty" name:"Threads"`
+
+		// Execution ID, which is output in the “Prepare” stage and used to specify the ID of the session to be killed in the “Commit” stage.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		SqlExecId *string `json:"SqlExecId,omitempty" name:"SqlExecId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *KillMySqlThreadsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KillMySqlThreadsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type MailConfiguration struct {
 
 	// Whether to enable email sending. Valid values: 0 (no), 1 (yes).

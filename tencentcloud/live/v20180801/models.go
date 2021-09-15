@@ -527,7 +527,9 @@ type CommonMixCropParams struct {
 
 type CommonMixInputParam struct {
 
-	// Input stream name of up to 80 bytes, which is a string containing letters, digits, and underscores.
+	// Input stream name, which can contain up to 80 bytes of letters, digits, and underscores.
+	// The value should be the name of an input stream for stream mix when `LayoutParams.InputType` is set to `0` (audio and video), `4` (pure audio), or `5` (pure video).
+	// The value can be a random name for identification, such as `Canvas1` or `Picture1`, when `LayoutParams.InputType` is set to `2` (image) or `3` (canvas).
 	InputStreamName *string `json:"InputStreamName,omitempty" name:"InputStreamName"`
 
 	// Input stream layout parameter.
@@ -1261,10 +1263,12 @@ type CreateLiveSnapshotTemplateRequest struct {
 	// Value range: 5-300s.
 	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
 
-	// Screenshot width. Default value: 0 (original width).
+	// Screenshot width. Default value: `0` (original width)
+	// Value range: 0-3000
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Screenshot height. Default value: 0 (original height).
+	// Screenshot height. Default value: `0` (original height)
+	// Value range: 0-2000
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
 	// Whether to enable porn detection. 0: no, 1: yes. Default value: 0
@@ -1613,10 +1617,10 @@ type CreateRecordTaskRequest struct {
 	// Push path.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
-	// Recording end time in UNIX timestamp format. “EndTime” should be later than “StartTime”, and the duration between “EndTime” and “StartTime” is up to 24 hours.
+	// Recording end time in UNIX timestamp format. `EndTime` should be later than `StartTime` and the current time, and the duration between `EndTime` and `StartTime` is up to 24 hours.
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Recording start time in UNIX timestamp format. If “StartTime” is not entered, recording will start immediately after the API is successfully called. “StartTime” should be within 6 days from the current time.
+	// Recording start time in UNIX timestamp format. Leaving this parameter empty means starting recording now. `StartTime` cannot be later than the current time plus 6 days.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Push type. Default value: 0. Valid values:
@@ -3435,6 +3439,10 @@ type DescribeLiveDomainsResponse struct {
 
 		// List of domain name details.
 		DomainList []*DomainInfo `json:"DomainList,omitempty" name:"DomainList"`
+
+		// The number of domain names that can be added
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		CreateLimitCount *int64 `json:"CreateLimitCount,omitempty" name:"CreateLimitCount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -7081,7 +7089,7 @@ type RecordParam struct {
 
 	// Max recording time per file
 	// Default value: `1800` (seconds)
-	// Value range: 60-7200
+	// Value range: 30-7200
 	// This parameter is invalid for HLS. Only one HLS file will be generated from push start to push end.
 	RecordInterval *int64 `json:"RecordInterval,omitempty" name:"RecordInterval"`
 
