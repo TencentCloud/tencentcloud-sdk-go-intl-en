@@ -740,6 +740,44 @@ func (c *Client) DescribeBasicDeviceStatus(request *DescribeBasicDeviceStatusReq
     return
 }
 
+func NewDescribeBizTrendRequest() (request *DescribeBizTrendRequest) {
+    request = &DescribeBizTrendRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeBizTrend")
+    return
+}
+
+func NewDescribeBizTrendResponse() (response *DescribeBizTrendResponse) {
+    response = &DescribeBizTrendResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBizTrend
+// This API is used to get the traffic flow data collected in the specified period.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) DescribeBizTrend(request *DescribeBizTrendRequest) (response *DescribeBizTrendResponse, err error) {
+    if request == nil {
+        request = NewDescribeBizTrendRequest()
+    }
+    response = NewDescribeBizTrendResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBlackWhiteIpListRequest() (request *DescribeBlackWhiteIpListRequest) {
     request = &DescribeBlackWhiteIpListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -781,6 +819,96 @@ func (c *Client) DescribeBlackWhiteIpList(request *DescribeBlackWhiteIpListReque
         request = NewDescribeBlackWhiteIpListRequest()
     }
     response = NewDescribeBlackWhiteIpListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCCTrendRequest() (request *DescribeCCTrendRequest) {
+    request = &DescribeCCTrendRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCTrend")
+    return
+}
+
+func NewDescribeCCTrendResponse() (response *DescribeCCTrendResponse) {
+    response = &DescribeCCTrendResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCCTrend
+// This API is used to get CC attack data, including total peak requests (QPS) and attack requests (QPS).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCCTrend(request *DescribeCCTrendRequest) (response *DescribeCCTrendResponse, err error) {
+    if request == nil {
+        request = NewDescribeCCTrendRequest()
+    }
+    response = NewDescribeCCTrendResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDDoSTrendRequest() (request *DescribeDDoSTrendRequest) {
+    request = &DescribeDDoSTrendRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeDDoSTrend")
+    return
+}
+
+func NewDescribeDDoSTrendResponse() (response *DescribeDDoSTrendResponse) {
+    response = &DescribeDDoSTrendResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDDoSTrend
+// This API is used to get DDoS attack traffic bandwidth and attack packet rate.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDDoSTrend(request *DescribeDDoSTrendRequest) (response *DescribeDDoSTrendResponse, err error) {
+    if request == nil {
+        request = NewDescribeDDoSTrendRequest()
+    }
+    response = NewDescribeDDoSTrendResponse()
     err = c.Send(request, response)
     return
 }

@@ -1470,7 +1470,10 @@ type DescribeBasicDeviceStatusResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The resource and status is returned.
+		// Status of the specified Anti-DDoS resource. Valid values:
+	// `1`: The IP is blocked.
+	// `2`: The P is normal.
+	// `3`: The IP is being attacked.
 		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1486,6 +1489,90 @@ func (r *DescribeBasicDeviceStatusResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBasicDeviceStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBizTrendRequest struct {
+	*tchttp.BaseRequest
+
+	// Statistical method. Valid values: `max`, `min`, `avg`, `sum`. It can only be `max` if the statistical dimension is traffic rate or packet rate.
+	Statistics *string `json:"Statistics,omitempty" name:"Statistics"`
+
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Sampling interval. Valid values: `300`, `1800`, `3600`, `21600`, `86400`
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Beginning of the time range for the query, such as `2020-09-22 00:00:00`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End of the time range for the query, such as `2020-09-22 00:00:00`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Metric. Valid values: `connum`, `new_conn`, `inactive_conn`, `intraffic`, `outtraffic`, `inpkg`, `outpkg`, `qps`
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// You can query data by specifying a domain name when the metric is `qps`.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Protocol and port list, which is valid when the metric is `connum`, `new_conn` or `inactive_conn`. Valid protocols: `TCP`, `UDP`, `HTTP`, `HTTPS`
+	ProtoInfo []*ProtocolPort `json:"ProtoInfo,omitempty" name:"ProtoInfo"`
+}
+
+func (r *DescribeBizTrendRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBizTrendRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Statistics")
+	delete(f, "Business")
+	delete(f, "Period")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Id")
+	delete(f, "MetricName")
+	delete(f, "Domain")
+	delete(f, "ProtoInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBizTrendRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBizTrendResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Value at a time point on the curve
+		DataList []*float64 `json:"DataList,omitempty" name:"DataList"`
+
+		// Statistical dimension
+		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBizTrendResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBizTrendResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1538,6 +1625,206 @@ func (r *DescribeBlackWhiteIpListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBlackWhiteIpListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCCTrendRequest struct {
+	*tchttp.BaseRequest
+
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Instance IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Sampling period. Valid values: `300` (5 minutes), `3600` (one hour), `86400` (one day)
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Beginning of the time range for the query
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End of the time range for the query
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Metric. Valid values: `inqps`: total peak requests; `dropqps`: peak attack requests
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// (Optional) Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Instance ID. Leave this field empty when `Business` is `basic`, as basic protection does not require an instance.
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
+func (r *DescribeCCTrendRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCCTrendRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Business")
+	delete(f, "Ip")
+	delete(f, "Period")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MetricName")
+	delete(f, "Domain")
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCCTrendRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCCTrendResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of values returned
+		Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+		// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+		Business *string `json:"Business,omitempty" name:"Business"`
+
+		// Instance IP
+		Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+		// Sampling period. Valid values: `300` (5 minutes), `3600` (one hour), `86400` (one day)
+		Period *int64 `json:"Period,omitempty" name:"Period"`
+
+		// Beginning of the time range for the query
+		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+		// End of the time range for the query
+		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+		// Value array
+		Data []*uint64 `json:"Data,omitempty" name:"Data"`
+
+		// Instance ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Id *string `json:"Id,omitempty" name:"Id"`
+
+		// Metric. Valid values: `inqps`: total peak requests; `dropqps`: peak attack requests
+		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCCTrendResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCCTrendResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDDoSTrendRequest struct {
+	*tchttp.BaseRequest
+
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Instance IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Sampling period. Valid values: `300` (5 minutes), `3600` (one hour), `86400` (one day)
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Beginning of the time range for the query
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End of the time range for the query
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Metric. Valid values: `bps`: attack traffic bandwidth; `pps`: attack packet rate
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Instance ID. Leave this field empty when `Business` is `basic`, as basic protection does not require an instance.
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
+func (r *DescribeDDoSTrendRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDDoSTrendRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Business")
+	delete(f, "Ip")
+	delete(f, "Period")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MetricName")
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDDoSTrendRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDDoSTrendResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of values returned
+		Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+		// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+		Business *string `json:"Business,omitempty" name:"Business"`
+
+		// Instance IP
+		Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+		// Sampling period. Valid values: `300` (5 minutes), `3600` (one hour), `86400` (one day)
+		Period *int64 `json:"Period,omitempty" name:"Period"`
+
+		// Beginning of the time range for the query
+		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+		// End of the time range for the query
+		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+		// Value array. The unit for attack traffic bandwidth is Mbps, and that for the packet rate is pps.
+		Data []*uint64 `json:"Data,omitempty" name:"Data"`
+
+		// Instance ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Id *string `json:"Id,omitempty" name:"Id"`
+
+		// Metric. Valid values: `bps`: attack traffic bandwidth; `pps`: attack packet rate
+		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDDoSTrendResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDDoSTrendResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3160,6 +3447,15 @@ type ProtocolBlockRelation struct {
 
 	// Anti-DDoS instance configured
 	InstanceDetailList []*InstanceRelation `json:"InstanceDetailList,omitempty" name:"InstanceDetailList"`
+}
+
+type ProtocolPort struct {
+
+	// Protocol. Valid values: `tcp`, `udp`
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Port
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
 }
 
 type ProxyTypeInfo struct {

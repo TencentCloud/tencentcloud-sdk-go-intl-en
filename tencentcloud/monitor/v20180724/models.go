@@ -1489,6 +1489,9 @@ type DescribeAlarmNoticesRequest struct {
 
 	// Recipient group list
 	GroupIds []*int64 `json:"GroupIds,omitempty" name:"GroupIds"`
+
+	// Filter by notification template ID. If an empty array is passed in or if this parameter is left empty, the filter operation will not be performed.
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
 }
 
 func (r *DescribeAlarmNoticesRequest) ToJsonString() string {
@@ -1512,6 +1515,7 @@ func (r *DescribeAlarmNoticesRequest) FromJsonString(s string) error {
 	delete(f, "ReceiverType")
 	delete(f, "UserIds")
 	delete(f, "GroupIds")
+	delete(f, "NoticeIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmNoticesRequest has unknown keys!", "")
 	}

@@ -30,6 +30,9 @@ type AccessConfiguration struct {
 
 	// Concurrent connection upper limit in 10,000 connections, which indicates the allowed number of concurrently online connections.
 	Concurrent *uint64 `json:"Concurrent,omitempty" name:"Concurrent"`
+
+	// Network type. Valid values: `normal` (default), `cn2`
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 }
 
 type AccessRegionDetial struct {
@@ -381,6 +384,12 @@ type CheckProxyCreateRequest struct {
 
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Network type. Valid values: `normal` (default), `cn2`
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
 func (r *CheckProxyCreateRequest) ToJsonString() string {
@@ -401,6 +410,8 @@ func (r *CheckProxyCreateRequest) FromJsonString(s string) error {
 	delete(f, "Concurrent")
 	delete(f, "GroupId")
 	delete(f, "IPAddressVersion")
+	delete(f, "NetworkType")
+	delete(f, "PackageType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckProxyCreateRequest has unknown keys!", "")
 	}
@@ -1086,6 +1097,9 @@ type CreateProxyGroupRequest struct {
 
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Package type of connection group. Valid values: `Thunder` (default) and `Accelerator`.
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
 func (r *CreateProxyGroupRequest) ToJsonString() string {
@@ -1106,6 +1120,7 @@ func (r *CreateProxyGroupRequest) FromJsonString(s string) error {
 	delete(f, "TagSet")
 	delete(f, "AccessRegionSet")
 	delete(f, "IPAddressVersion")
+	delete(f, "PackageType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProxyGroupRequest has unknown keys!", "")
 	}
@@ -1175,6 +1190,9 @@ type CreateProxyRequest struct {
 
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Network type. Valid values: `normal` (default), `cn2`
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 }
 
 func (r *CreateProxyRequest) ToJsonString() string {
@@ -1201,6 +1219,7 @@ func (r *CreateProxyRequest) FromJsonString(s string) error {
 	delete(f, "ClonedProxyId")
 	delete(f, "BillingType")
 	delete(f, "IPAddressVersion")
+	delete(f, "NetworkType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProxyRequest has unknown keys!", "")
 	}
@@ -2021,6 +2040,9 @@ type DescribeAccessRegionsByDestRegionRequest struct {
 
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
 func (r *DescribeAccessRegionsByDestRegionRequest) ToJsonString() string {
@@ -2037,6 +2059,7 @@ func (r *DescribeAccessRegionsByDestRegionRequest) FromJsonString(s string) erro
 	}
 	delete(f, "DestRegion")
 	delete(f, "IPAddressVersion")
+	delete(f, "PackageType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessRegionsByDestRegionRequest has unknown keys!", "")
 	}
@@ -3228,14 +3251,15 @@ type DescribeProxyGroupListRequest struct {
 	// Other values: specified project
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
+	// Filter condition   
+	// Each request can have a maximum of 5 filter conditions for `Filter.Values`.
+	// RealServerRegion - String - Required: No - Filter by origin server region. You can also check the value of `RegionId` returned by the `DescribeDestRegions` API.
+	// PackageType - String - Required: No - Filter by type of connection groups, which can be `Thunder` (general connection group) or `Accelerator` (game accelerator connection group).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
 	// Tag list. If this field exists, the list of the resources with the tag will be pulled.
 	// It supports up to 5 tags. If there are two or more tags, the connection groups tagged any of them will be pulled.
 	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
-
-	// Filter conditions.   
-	// The limit on Filter.Values of each request is 5.
-	// RealServerRegion - String - Required: No - Filter by origin server region; Refer to the RegionId in the results returned by DescribeDestRegions API.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeProxyGroupListRequest) ToJsonString() string {
@@ -3253,8 +3277,8 @@ func (r *DescribeProxyGroupListRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "ProjectId")
-	delete(f, "TagSet")
 	delete(f, "Filters")
+	delete(f, "TagSet")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProxyGroupListRequest has unknown keys!", "")
 	}
@@ -3630,6 +3654,9 @@ type DescribeRegionAndPriceRequest struct {
 
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
 func (r *DescribeRegionAndPriceRequest) ToJsonString() string {
@@ -3645,6 +3672,7 @@ func (r *DescribeRegionAndPriceRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "IPAddressVersion")
+	delete(f, "PackageType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRegionAndPriceRequest has unknown keys!", "")
 	}
@@ -4543,6 +4571,12 @@ type InquiryPriceCreateProxyRequest struct {
 
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Network type. Valid values: `normal` (default), `cn2`
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
 func (r *InquiryPriceCreateProxyRequest) ToJsonString() string {
@@ -4565,6 +4599,8 @@ func (r *InquiryPriceCreateProxyRequest) FromJsonString(s string) error {
 	delete(f, "Concurrent")
 	delete(f, "BillingType")
 	delete(f, "IPAddressVersion")
+	delete(f, "NetworkType")
+	delete(f, "PackageType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateProxyRequest has unknown keys!", "")
 	}
@@ -4595,6 +4631,14 @@ type InquiryPriceCreateProxyResponse struct {
 		// Discounted connection traffic price in USD/GB.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		DiscountFlowUnitPrice *float64 `json:"DiscountFlowUnitPrice,omitempty" name:"DiscountFlowUnitPrice"`
+
+		// Dedicated BGP bandwidth price. Unit: USD/Mbps/day
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+		Cn2BandwidthPrice *float64 `json:"Cn2BandwidthPrice,omitempty" name:"Cn2BandwidthPrice"`
+
+		// Dedicated BGP bandwidth discount price. Unit: USD/Mbps/day
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+		Cn2BandwidthPriceWithDiscount *float64 `json:"Cn2BandwidthPriceWithDiscount,omitempty" name:"Cn2BandwidthPriceWithDiscount"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5845,6 +5889,10 @@ type ProxyGroupDetail struct {
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
 type ProxyGroupInfo struct {
@@ -5994,8 +6042,8 @@ type ProxyInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ModifyConfigTime *uint64 `json:"ModifyConfigTime,omitempty" name:"ModifyConfigTime"`
 
-	// Connection type. 104: SILVER connection.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Connection type
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	ProxyType *uint64 `json:"ProxyType,omitempty" name:"ProxyType"`
 
 	// Describes how the connection obtains client IPs. 0: TOA; 1: Proxy Protocol.
@@ -6005,6 +6053,14 @@ type ProxyInfo struct {
 	// IP version. Valid values: `IPv4`, `IPv6`.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Network type. Valid values: `normal`, `cn2`
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
 type ProxySimpleInfo struct {
@@ -6433,6 +6489,14 @@ type TCPListener struct {
 	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
+
+	// Whether to enable the primary/secondary origin server mode for failover. Values: `1` (enabled); `0` (disabled). It’s not available if the origin type is `DOMAIN`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FailoverSwitch *uint64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
+
+	// Specifies whether to enable session persistence. Values: `0` (disable), `1` (enable)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SessionPersist *uint64 `json:"SessionPersist,omitempty" name:"SessionPersist"`
 }
 
 type TagPair struct {
@@ -6496,4 +6560,8 @@ type UDPListener struct {
 
 	// Listener creation time; using UNIX timestamp.
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Specifies whether to enable session persistence. Values: `0` (disable), `1` (enable)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SessionPersist *uint64 `json:"SessionPersist,omitempty" name:"SessionPersist"`
 }

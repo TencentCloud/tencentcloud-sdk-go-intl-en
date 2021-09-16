@@ -53,6 +53,21 @@ type AclResponse struct {
 	AclList []*Acl `json:"AclList,omitempty" name:"AclList"`
 }
 
+type AclRuleInfo struct {
+
+	// ACL operation types. Enumerated values: `All` (all operations), `Read` (read), `Write` (write).
+	Operation *string `json:"Operation,omitempty" name:"Operation"`
+
+	// Permission types: `Deny`, `Allow`.
+	PermissionType *string `json:"PermissionType,omitempty" name:"PermissionType"`
+
+	// The default value is `*`, which means that any host can access the topic. Currently, CKafka does not support the host value being specified as * or IP range.
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// The list of users allowed to access the topic. Default value: `User:*`, which means all users. The current user must be in the user list. Add the prefix `User:` before the user name (`User:A`, for example).
+	Principal *string `json:"Principal,omitempty" name:"Principal"`
+}
+
 type AppIdResponse struct {
 
 	// Number of eligible `AppId`
@@ -71,6 +86,67 @@ type Assignment struct {
 	// Topic information list
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Topics []*GroupInfoTopics `json:"Topics,omitempty" name:"Topics"`
+}
+
+type BatchCreateAclRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ACL resource type. Default value: `2` (topic).
+	ResourceType *int64 `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Resource list array.
+	ResourceNames []*string `json:"ResourceNames,omitempty" name:"ResourceNames"`
+
+	// ACL rule list.
+	RuleList []*AclRuleInfo `json:"RuleList,omitempty" name:"RuleList"`
+}
+
+func (r *BatchCreateAclRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchCreateAclRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ResourceType")
+	delete(f, "ResourceNames")
+	delete(f, "RuleList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BatchCreateAclRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BatchCreateAclResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Status code.
+		Result *int64 `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BatchCreateAclResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchCreateAclResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ClusterInfo struct {
