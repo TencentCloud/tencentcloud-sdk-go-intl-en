@@ -20,6 +20,36 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AccountVpcInfo struct {
+
+	// VpcId: vpc-xadsafsdasd
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// VPC region: ap-guangzhou, ap-shanghai
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// VPC account: 123456789
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Uin *string `json:"Uin,omitempty" name:"Uin"`
+
+	// VPC name: testname
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+}
+
+type AccountVpcInfoOutput struct {
+
+	// UIN of the VPC account
+	Uin *string `json:"Uin,omitempty" name:"Uin"`
+
+	// VPC ID
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Region
+	Region *string `json:"Region,omitempty" name:"Region"`
+}
+
 type AuditLog struct {
 
 	// Log type
@@ -140,6 +170,9 @@ type CreatePrivateZoneRequest struct {
 
 	// Associates the private domain to a VPC when it is created
 	Vpcs []*VpcInfo `json:"Vpcs,omitempty" name:"Vpcs"`
+
+	// List of authorized accounts' VPCs to associate with the private domain
+	AccountVpcSet []*AccountVpcInfo `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
 }
 
 func (r *CreatePrivateZoneRequest) ToJsonString() string {
@@ -160,6 +193,7 @@ func (r *CreatePrivateZoneRequest) FromJsonString(s string) error {
 	delete(f, "Remark")
 	delete(f, "DnsForwardStatus")
 	delete(f, "Vpcs")
+	delete(f, "AccountVpcSet")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePrivateZoneRequest has unknown keys!", "")
 	}
@@ -871,6 +905,9 @@ type ModifyPrivateZoneVpcRequest struct {
 
 	// List of all VPCs associated with private domain
 	VpcSet []*VpcInfo `json:"VpcSet,omitempty" name:"VpcSet"`
+
+	// List of authorized accounts' VPCs to associate with the private domain
+	AccountVpcSet []*AccountVpcInfo `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
 }
 
 func (r *ModifyPrivateZoneVpcRequest) ToJsonString() string {
@@ -887,6 +924,7 @@ func (r *ModifyPrivateZoneVpcRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ZoneId")
 	delete(f, "VpcSet")
+	delete(f, "AccountVpcSet")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPrivateZoneVpcRequest has unknown keys!", "")
 	}
@@ -902,6 +940,9 @@ type ModifyPrivateZoneVpcResponse struct {
 
 		// List of VPCs associated with domain
 		VpcSet []*VpcInfo `json:"VpcSet,omitempty" name:"VpcSet"`
+
+		// List of authorized accounts' VPCs associated with the private domain
+		AccountVpcSet []*AccountVpcInfoOutput `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -954,6 +995,10 @@ type PrivateZone struct {
 
 	// Set of tag key-value pairs
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
+
+	// List of authorized accounts' VPCs associated with the private domain
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AccountVpcSet []*AccountVpcInfoOutput `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
 }
 
 type PrivateZoneRecord struct {

@@ -69,6 +69,9 @@ type Activity struct {
 
 	// Result of the lifecycle hook action in the scaling activity
 	LifecycleActionResultSet []*LifecycleActionResultInfo `json:"LifecycleActionResultSet,omitempty" name:"LifecycleActionResultSet"`
+
+	// Detailed description of scaling activity status
+	DetailedStatusMessageSet []*DetailedStatusMessage `json:"DetailedStatusMessageSet,omitempty" name:"DetailedStatusMessageSet"`
 }
 
 type ActivtyRelatedInstance struct {
@@ -2052,6 +2055,30 @@ func (r *DetachInstancesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DetachInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DetailedStatusMessage struct {
+
+	// Error type
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// AZ information
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance billing mode
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Error message
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Instance type
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
 type DisableAutoScalingGroupRequest struct {

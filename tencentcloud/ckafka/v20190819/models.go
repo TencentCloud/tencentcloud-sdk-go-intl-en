@@ -61,7 +61,7 @@ type AclRuleInfo struct {
 	// Permission types: `Deny`, `Allow`.
 	PermissionType *string `json:"PermissionType,omitempty" name:"PermissionType"`
 
-	// The default value is `*`, which means that any host can access the topic. Currently, CKafka does not support the host value being specified as * or IP range.
+	// The default value is `*`, which means that any host can access the topic. CKafka currently does not support specifying a host value of * or an IP range.
 	Host *string `json:"Host,omitempty" name:"Host"`
 
 	// The list of users allowed to access the topic. Default value: `User:*`, which means all users. The current user must be in the user list. Add the prefix `User:` before the user name (`User:A`, for example).

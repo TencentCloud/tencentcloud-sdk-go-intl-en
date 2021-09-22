@@ -20,6 +20,9 @@ const (
 	// Error with CAM signature/authentication.
 	AUTHFAILURE = "AuthFailure"
 
+	// Token verification failed.
+	AUTHFAILURE_TOKENFAILURE = "AuthFailure.TokenFailure"
+
 	// `DryRun` Operation. It means that the request would have succeeded, but the `DryRun` parameter was used.
 	DRYRUNOPERATION = "DryRunOperation"
 
@@ -158,6 +161,9 @@ const (
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
+	// Role not authorized.
+	UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnAuthorized"
+
 	// Unverified user.
 	UNAUTHORIZEDOPERATION_UNAUTHORIZEDACCOUNT = "UnauthorizedOperation.UnauthorizedAccount"
 
@@ -166,4 +172,7 @@ const (
 
 	// Unsupported operation.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
+
+	// Account not bound.
+	UNSUPPORTEDOPERATION_ACCOUNTNOTBOUND = "UnsupportedOperation.AccountNotBound"
 )
