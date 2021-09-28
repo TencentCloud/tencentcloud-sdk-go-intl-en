@@ -30,6 +30,7 @@ type AddSmsSignRequest struct {
 	*tchttp.BaseRequest
 
 	// Signature name.
+	// Note: you cannot apply for an approved or pending signature again.
 	SignName *string `json:"SignName,omitempty" name:"SignName"`
 
 	// Signature type. Each of these types is followed by their `DocumentType` (identity certificate type) option:
@@ -412,6 +413,56 @@ type DeleteTemplateStatus struct {
 	DeleteTime *uint64 `json:"DeleteTime,omitempty" name:"DeleteTime"`
 }
 
+type DescribePhoneNumberInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// A parameter used to query mobile numbers in E.164 format (+[country/region code][subscriber number]). Up to 200 mobile numbers can be queried at a time.
+	// Take the number +8613711112222 as an example. “86” is the country code (with a “+” sign in its front) and “13711112222” is the subscriber number.
+	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet"`
+}
+
+func (r *DescribePhoneNumberInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePhoneNumberInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PhoneNumberSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePhoneNumberInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePhoneNumberInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// A parameter used to obtain mobile number information.
+		PhoneNumberInfoSet []*PhoneNumberInfo `json:"PhoneNumberInfoSet,omitempty" name:"PhoneNumberInfoSet"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribePhoneNumberInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePhoneNumberInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSignListStatus struct {
 
 	// Signature ID.
@@ -494,7 +545,7 @@ type DescribeSmsTemplateListRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID array.
-	// Note: the maximum length of the array is 100 by default.
+	// <dx-alert infotype="notice" title="Note">The max array length is 100 by default.</dx-alert>
 	TemplateIdSet []*uint64 `json:"TemplateIdSet,omitempty" name:"TemplateIdSet"`
 
 	// Whether it is Global SMS:
@@ -607,9 +658,10 @@ type ModifySmsSignRequest struct {
 	// Note: the corresponding `DocumentType` must be selected according to `SignType`.
 	DocumentType *uint64 `json:"DocumentType,omitempty" name:"DocumentType"`
 
-	// Whether it is Global SMS:
-	// 0: Mainland China SMS.
-	// 1: Global SMS.
+	// A parameter used to specify whether it is Global SMS:
+	// `0`: Chinese mainland SMS.
+	// `1`: Global SMS.
+	// Note: the value of this parameter must be consistent with the `International` value of the signature to be modified. This parameter cannot be used to directly change a Chinese mainland signature to an international signature.
 	International *uint64 `json:"International,omitempty" name:"International"`
 
 	// Signature purpose:
@@ -754,6 +806,30 @@ type ModifyTemplateStatus struct {
 
 	// Template ID.
 	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+type PhoneNumberInfo struct {
+
+	// Error code for mobile number information query. `Ok` will be returned if the query is successful.
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Description of the error code for mobile number information query.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Country (or region) code.
+	NationCode *string `json:"NationCode,omitempty" name:"NationCode"`
+
+	// Subscriber number in normal format such as 13711112222, without any prefix (country or region code).
+	SubscriberNumber *string `json:"SubscriberNumber,omitempty" name:"SubscriberNumber"`
+
+	// The standardized mobile number in E.164 format after parsing, which is consistent with the parsed number for SMS message delivery. If the parsing fails, the original number will be returned.
+	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
+
+	// Country or region code such as CN and US. If the country or region code cannot be identified, `DEF` will be returned by default.
+	IsoCode *string `json:"IsoCode,omitempty" name:"IsoCode"`
+
+	// Country code or region name such as China. For more information, see [Global SMS Price Overview](https://intl.cloud.tencent.com/document/product/382/18051?from_cn_redirect=1#.E6.97.A5.E7.BB.93.E5.90.8E.E4.BB.98.E8.B4.B9.3Ca-id.3D.22post-payment.22.3E.3C.2Fa.3E)
+	IsoName *string `json:"IsoName,omitempty" name:"IsoName"`
 }
 
 type PullSmsReplyStatus struct {
@@ -1055,8 +1131,9 @@ func (r *PullSmsSendStatusResponse) FromJsonString(s string) error {
 type SendSmsRequest struct {
 	*tchttp.BaseRequest
 
-	// Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Mainland China mobile numbers or all global mobile numbers).
-	// Example: +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+	// Target mobile number in E.164 format (+[country/region code][subscriber number]). Up to 200 numbers, all of which should be either Chinese mainland numbers or international numbers, are supported in a single request.
+	// Take the number +8613711112222 as an example. “86” is the country code (with a “+” sign in its front) and “13711112222” is the subscriber number.
+	// Note: 11-digit Chinese mainland numbers prefixed by 0086 or 86 or those without any country/region code are also supported. The default prefix is +86.
 	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet"`
 
 	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
@@ -1065,11 +1142,12 @@ type SendSmsRequest struct {
 	// Template ID. You must enter the ID of an approved template, which can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2). If you need to send SMS messages to global mobile numbers, you can only use a Global SMS template.
 	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Content of the SMS signature, which should be encoded in UTF-8. You must enter an approved signature, such as Tencent Cloud. The signature information can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2).
-	// Note: this parameter is required for Mainland China SMS.
+	// SMS signature information which is encoded in UTF-8. You must enter an approved signature (such as Tencent Cloud). The signing information can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2).
+	// <dx-alert infotype="notice" title="Note">This parameter is required for Chinese mainland SMS.</dx-alert>
 	SignName *string `json:"SignName,omitempty" name:"SignName"`
 
-	// Template parameter. If there is no template parameter, leave this parameter blank.
+	// Template parameter. If there is no template parameter, leave this field empty.
+	// <dx-alert infotype="notice" title="Note">The number of template parameters should be consistent with that of the template variables of `TemplateId`.</dx-alert>
 	TemplateParamSet []*string `json:"TemplateParamSet,omitempty" name:"TemplateParamSet"`
 
 	// SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
@@ -1146,7 +1224,7 @@ type SendStatus struct {
 	// User session content.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// SMS request error code. For specific meanings, please see [Error Codes](https://intl.cloud.tencent.com/document/product/382/49316?from_cn_redirect=1).
+	// SMS request error code. For details, see [Error Codes](https://intl.cloud.tencent.com/document/api/382/55981?from_cn_redirect=1#6.-.E9.94.99.E8.AF.AF.E7.A0.81). `Ok` will be returned if the request is successful.
 	Code *string `json:"Code,omitempty" name:"Code"`
 
 	// SMS request error message.
