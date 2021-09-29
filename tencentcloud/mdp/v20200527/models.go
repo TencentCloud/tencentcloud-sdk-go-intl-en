@@ -20,6 +20,59 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type BindNewLVBDomainWithChannelRequest struct {
+	*tchttp.BaseRequest
+
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// The LVB domain name to bind
+	LVBDomain *string `json:"LVBDomain,omitempty" name:"LVBDomain"`
+}
+
+func (r *BindNewLVBDomainWithChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindNewLVBDomainWithChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChannelId")
+	delete(f, "LVBDomain")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindNewLVBDomainWithChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BindNewLVBDomainWithChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The LVB domain name bound successfully
+		LVBDomain *string `json:"LVBDomain,omitempty" name:"LVBDomain"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BindNewLVBDomainWithChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindNewLVBDomainWithChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CacheInfo struct {
 
 	// List of timeout parameter configuration
@@ -152,6 +205,9 @@ func (r *CreateStreamPackageChannelRequest) FromJsonString(s string) error {
 type CreateStreamPackageChannelResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Channel information
+		Info *ChannelInfo `json:"Info,omitempty" name:"Info"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

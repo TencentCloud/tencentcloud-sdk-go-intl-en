@@ -43,6 +43,36 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewBindNewLVBDomainWithChannelRequest() (request *BindNewLVBDomainWithChannelRequest) {
+    request = &BindNewLVBDomainWithChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdp", APIVersion, "BindNewLVBDomainWithChannel")
+    return
+}
+
+func NewBindNewLVBDomainWithChannelResponse() (response *BindNewLVBDomainWithChannelResponse) {
+    response = &BindNewLVBDomainWithChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BindNewLVBDomainWithChannel
+// This API is used to bind an LVB domain name to a channel.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+//  INVALIDPARAMETER_LVBDOMAIN = "InvalidParameter.LvbDomain"
+func (c *Client) BindNewLVBDomainWithChannel(request *BindNewLVBDomainWithChannelRequest) (response *BindNewLVBDomainWithChannelResponse, err error) {
+    if request == nil {
+        request = NewBindNewLVBDomainWithChannelRequest()
+    }
+    response = NewBindNewLVBDomainWithChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateStreamPackageChannelRequest() (request *CreateStreamPackageChannelRequest) {
     request = &CreateStreamPackageChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
