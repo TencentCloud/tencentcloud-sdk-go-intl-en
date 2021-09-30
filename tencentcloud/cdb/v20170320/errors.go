@@ -44,6 +44,9 @@ const (
 	// Creation failed. Please check whether the user already exists.
 	FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
 
+	// Failed to create the audit rule.
+	FAILEDOPERATION_CREATEAUDITFAILERROR = "FailedOperation.CreateAuditFailError"
+
 	// Failed to assign an exclusive VIP to the read-only replica.
 	FAILEDOPERATION_CREATEROVIPERROR = "FailedOperation.CreateRoVipError"
 
@@ -83,11 +86,20 @@ const (
 	// Failed to submit the task. Please try again later. If the submission remains unsuccessful, please contact customer service.
 	FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
 
+	// This type of operations cannot be performed.
+	FAILEDOPERATION_TYPEINCONFLICT = "FailedOperation.TypeInConflict"
+
 	// An internal error occurred.
 	INTERNALERROR = "InternalError"
 
 	// An error occurred while querying async tasks.
 	INTERNALERROR_ASYNCREQUESTERROR = "InternalError.AsyncRequestError"
+
+	// An error occurred in the internal service of the audit service.
+	INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+
+	// Internal exception of the audit service.
+	INTERNALERROR_AUDITOSSLOGICERROR = "InternalError.AuditOssLogicError"
 
 	// Authentication failed.
 	INTERNALERROR_AUTHERROR = "InternalError.AuthError"
@@ -166,6 +178,12 @@ const (
 
 	// Security group error
 	INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
+
+	// Internal error of the system.
+	INTERNALERROR_SERVERERROR = "InternalError.ServerError"
+
+	// An exception occurred in the internal service.
+	INTERNALERROR_SERVICEERROR = "InternalError.ServiceError"
 
 	// Failed to modify the tag. Please try again later.
 	INTERNALERROR_TAGERROR = "InternalError.TagError"
@@ -281,6 +299,9 @@ const (
 	// The account does not have the GRANT permission.
 	INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
 
+	// The quota limit has been reached.
+	LIMITEXCEEDED = "LimitExceeded"
+
 	// Account-related parameters are missing.
 	MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
 
@@ -295,6 +316,27 @@ const (
 
 	// Unsupported operation.
 	OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+
+	// The audit policies conflict.
+	OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+
+	// The audit policy already exists.
+	OPERATIONDENIED_AUDITPOLICYEXISTERROR = "OperationDenied.AuditPolicyExistError"
+
+	// The audit rule has been associated.
+	OPERATIONDENIED_AUDITRULEHASBIND = "OperationDenied.AuditRuleHasBind"
+
+	// The audit rule does not exist.
+	OPERATIONDENIED_AUDITRULENOTEXISTERROR = "OperationDenied.AuditRuleNotExistError"
+
+	// Exceptional audit status.
+	OPERATIONDENIED_AUDITSTATUSERROR = "OperationDenied.AuditStatusError"
+
+	// The audit tasks conflict.
+	OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+
+	// You have enabled the compliance audit feature of DBbrain, so you cannot enable the rule-based audit.
+	OPERATIONDENIED_DBBRAINPOLICYCONFLICT = "OperationDenied.DBBrainPolicyConflict"
 
 	// The operation is not allowed during the delayed replication.
 	OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
@@ -335,6 +377,9 @@ const (
 	// This instance is not refundable.
 	OPERATIONDENIED_UNSUPPORTREFUNDERROR = "OperationDenied.UnSupportRefundError"
 
+	// The audit feature cannot be enabled.
+	OPERATIONDENIED_UNSUPPORTOPENAUDITERROR = "OperationDenied.UnsupportOpenAuditError"
+
 	// This account is not authorized to access the requested resource.
 	OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 
@@ -347,14 +392,29 @@ const (
 	// Limit exceeded.
 	OVERQUOTA = "OverQuota"
 
+	// The resource is occupied.
+	RESOURCEINUSE = "ResourceInUse"
+
+	// Insufficient resource.
+	RESOURCEINSUFFICIENT = "ResourceInsufficient"
+
+	// The resource does not exist.
+	RESOURCENOTFOUND = "ResourceNotFound"
+
 	// The instance cannot be found. Please check whether your instance status is normal.
 	RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
 
 	// The instance does not exist.
 	RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 
+	// The resource is unavailable.
+	RESOURCEUNAVAILABLE = "ResourceUnavailable"
+
 	// Verification failed. Insufficient permissions.
 	UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
+
+	// Unsupported operation.
+	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 
 	// Unsupported permission.
 	UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"

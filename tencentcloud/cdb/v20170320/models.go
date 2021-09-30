@@ -207,10 +207,10 @@ type BackupInfo struct {
 	// Backup snapshot time in the format of yyyy-MM-dd HH:mm:ss, such as 2016-03-17 02:10:37
 	Date *string `json:"Date,omitempty" name:"Date"`
 
-	// Download address on the private network
+	// Download address
 	IntranetUrl *string `json:"IntranetUrl,omitempty" name:"IntranetUrl"`
 
-	// Download address on the public network
+	// Download address
 	InternetUrl *string `json:"InternetUrl,omitempty" name:"InternetUrl"`
 
 	// Log type. Valid values: `logical` (logical cold backup), `physical` (physical cold backup).
@@ -337,10 +337,10 @@ type BinlogInfo struct {
 	// File stored time in the format of 2016-03-17 02:10:37
 	Date *string `json:"Date,omitempty" name:"Date"`
 
-	// Download address on the private network
+	// Download address
 	IntranetUrl *string `json:"IntranetUrl,omitempty" name:"IntranetUrl"`
 
-	// Download address on the public network
+	// Download address
 	InternetUrl *string `json:"InternetUrl,omitempty" name:"InternetUrl"`
 
 	// Log type. Value range: binlog
@@ -530,6 +530,74 @@ func (r *CreateAccountsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAccountsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAuditPolicyRequest struct {
+	*tchttp.BaseRequest
+
+	// Audit policy name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Audit rule ID.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Retention period of audit logs. Valid values:
+	// 7: seven days (a week);
+	// 30: 30 days (a month);
+	// 180: 180 days (six months);
+	// 365: 365 days (a year);
+	// 1095: 1095 days (three years);
+	// 1825: 1825 days (five years).
+	// This parameter specifies the retention period (30 days by default) of audit logs, which is valid when you create the first audit policy for an instance. If the instance already has audit policies, this parameter is invalid, but you can use the `ModifyAuditConfig` API to modify the retention period.
+	LogExpireDay *int64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+}
+
+func (r *CreateAuditPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAuditPolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "RuleId")
+	delete(f, "InstanceId")
+	delete(f, "LogExpireDay")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAuditPolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateAuditPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Audit policy ID.
+		PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateAuditPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAuditPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6464,7 +6532,7 @@ type RollbackInstancesInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Rollback policy. Value range: table, db, full. Default value: full. Table: expedited rollback mode, where only the selected table-level backups and binlogs are imported; for cross-table rollback, if the associated tables are not selected simultaneously, the rollback will fail; the parameter `Databases` must be empty under this mode. db: fast rollback mode, where only the selected database-level backups and binlogs are imported; for cross-database rollback, if the associated databases are not selected simultaneously, the rollback will fail. full: ordinary rollback mode, which imports all the backups and binlogs of the instance at a relatively low speed.
+	// Rollback policy. Valid values: `table` (ultrafast mode), `db` (faster mode), and `full` (fast mode). Default value: `full`. In the ultrafast mode, only backups and binlogs of the tables specified by the `Tables` parameter are imported; if `Tables` does not include all of the tables involved in cross-table operations, the rollback may fail; and the `Database` parameter must be left empty. In the faster mode, only backups and binlogs of the databases specified by the `Databases` parameter are imported, and if `Databases` does not include all of the databases involved in cross-database operations, the rollback may fail. In the fast mode, backups and binlogs of the entire instance will be imported in a speed slower than the other modes.
 	Strategy *string `json:"Strategy,omitempty" name:"Strategy"`
 
 	// Database rollback time in the format of yyyy-mm-dd hh:mm:ss
@@ -7363,7 +7431,7 @@ type UpgradeDBInstanceRequest struct {
 	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked: QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+	// Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
 	FastUpgrade *int64 `json:"FastUpgrade,omitempty" name:"FastUpgrade"`
 }
 

@@ -633,13 +633,13 @@ type AwsPrivateAccess struct {
 
 type BandwidthAlert struct {
 
-	// Bandwidth cap configuration switch
-	// on: enabled
-	// off: disabled
+	// Specifies whether to enable the bandwidth cap
+	// `on`: enable
+	// `off`: disable
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Bandwidth cap threshold (in bps)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The upper limit of bandwidth usage (in bps) or traffic usage (in bytes).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	BpsThreshold *int64 `json:"BpsThreshold,omitempty" name:"BpsThreshold"`
 
 	// Action taken when threshold is reached
@@ -648,9 +648,29 @@ type BandwidthAlert struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CounterMeasure *string `json:"CounterMeasure,omitempty" name:"CounterMeasure"`
 
-	// The last time the bandwidth cap threshold was triggered
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The last time when the usage upper limit in the Chinese mainland was reached
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LastTriggerTime *string `json:"LastTriggerTime,omitempty" name:"LastTriggerTime"`
+
+	// Indicates whether to trigger alerts when the upper limit is reached
+	// `on`: enable
+	// `off`: disable
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AlertSwitch *string `json:"AlertSwitch,omitempty" name:"AlertSwitch"`
+
+	// Triggers alarms when the ratio of bandwidth or traffic usage to the usage upper limit reaches the specified value
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AlertPercentage *int64 `json:"AlertPercentage,omitempty" name:"AlertPercentage"`
+
+	// The last time when the usage outside the Chinese mainland reached the upper limit
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	LastTriggerTimeOverseas *string `json:"LastTriggerTimeOverseas,omitempty" name:"LastTriggerTimeOverseas"`
+
+	// Dimension of the usage limit
+	// `bandwidth`: bandwidth
+	// `flux`: traffic
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Metric *string `json:"Metric,omitempty" name:"Metric"`
 }
 
 type BotCookie struct {
@@ -772,8 +792,8 @@ type Cache struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SimpleCache *SimpleCache `json:"SimpleCache,omitempty" name:"SimpleCache"`
 
-	// Advanced cache expiration configuration (This feature is in beta and not generally available yet.)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// (Disused) Advanced cache validity configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AdvancedCache *AdvancedCache `json:"AdvancedCache,omitempty" name:"AdvancedCache"`
 
 	// Advanced path cache configuration
@@ -843,8 +863,8 @@ type CacheConfigNoCache struct {
 type CacheKey struct {
 
 	// Whether to enable full-path cache
-	// on: enable full-path cache (i.e., disable parameter filter)
-	// off: disable full-path cache (i.e., enable parameter filter)
+	// `on`: enables full-path cache (i.e., disables Ignore Query String)
+	// `off`: disables full-path cache (i.e., enables Ignore Query String)
 	FullUrlCache *string `json:"FullUrlCache,omitempty" name:"FullUrlCache"`
 
 	// Whether caches are case insensitive
@@ -1324,12 +1344,12 @@ type DescribeBillingDataRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Time granularity, which can be:
-	// min: 1-minute. The query range should be less than or equal to 24 hours
-	// 5min: 5-minute. The query range should be less than or equal to 31 days
-	// hour: 1-hour. The query range should be less than or equal to 31 days
-	// day: 1-day. The query period should be greater than 31 days
+	// `min`: 1-minute granularity. The query period cannot exceed 24 hours.
+	// `5min`: 5-minute granularity. The query range cannot exceed 31 days.
+	// `hour`: 1-hour granularity. The query period cannot exceed 31 days.
+	// `day`: 1-day granularity. The query period cannot exceed 31 days.
 	// 
-	// Currently, data query at 1-minute granularity is not supported if the `Area` field is `overseas`
+	// Querying 1-minute granularity data is not supported if the `Area` field is `overseas`.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
 	// Domain name whose billing data is to be queried
@@ -1450,8 +1470,10 @@ type DescribeCdnDataRequest struct {
 	// Specifies the status code to query. The return will be empty if the status code has never been generated.
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
 
-	// Specifies the list of domain names to be queried
-	// Up to 30 domain names can be queried at a time
+	// Queries the information of specified domain names
+	// Specifies a domain name to query
+	// Specifies multiple domain names to query (30 at most at a time)
+	// Queries all Specifies an account to query all domain names
 	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
@@ -2545,10 +2567,11 @@ type DescribePushTasksRequest struct {
 	// `global`: global
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// Specifies a task state for your query:
+	// Queries the status of a specified task
 	// `fail`: prefetch failed
 	// `done`: prefetch succeeded
 	// `process`: prefetch in progress
+	// `invalid`: invalid prefetch with 4XX/5XX status code returned from the origin server
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -3697,10 +3720,10 @@ type KeyRule struct {
 	// Note: this field may return null, indicating that no valid value is obtained.
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
-	// Whether to enable full-path cache
-	// on: enable full-path cache (i.e., disable parameter filter)
-	// off: disable full-path cache (i.e., enable parameter filter)
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Whether full-path cache is enaled
+	// `on`: enables full-path cache (i.e., disables ignore query string)
+	// `off`: disables full-path cache (i.e., enables ignore query string)
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	FullUrlCache *string `json:"FullUrlCache,omitempty" name:"FullUrlCache"`
 
 	// Whether caches are case insensitive
@@ -4495,6 +4518,12 @@ type PathRule struct {
 	// Origin-pull header setting when the path matches.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	RequestHeaders []*HttpHeaderRule `json:"RequestHeaders,omitempty" name:"RequestHeaders"`
+
+	// When `Regex` is `false`, this parameter should be `true`.
+	// `false`: disabled
+	// `true`: enabled
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	FullMatch *bool `json:"FullMatch,omitempty" name:"FullMatch"`
 }
 
 type PostSize struct {
@@ -4668,6 +4697,7 @@ type PushTask struct {
 	// `fail`: prefetch failed
 	// `done`: prefetch succeeded
 	// `process`: prefetch in progress
+	// `invalid`: invalid prefetch with 4XX/5XX status code returned from the origin server
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Prefetch progress in percentage
@@ -4704,7 +4734,8 @@ type PushUrlsCacheRequest struct {
 	// Default value: `mainland`. You can prefetch a URL to nodes in a region provided that CDN service has been enabled for the domain name in the URL in the region.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// If this parameter is `middle` or left empty, prefetch will be performed onto the intermediate node
+	// If this parameter is `middle` or left empty, prefetch will be performed onto the intermediate node.
+	// Note: resources prefetched outside the Chinese mainland will be cached to CDN nodes outside the Chinese mainland and the traffic generated will incur costs.
 	Layer *string `json:"Layer,omitempty" name:"Layer"`
 
 	// Whether to recursively resolve the M3U8 index file and prefetch the TS shards in it.
@@ -4908,11 +4939,11 @@ type ResourceBillingData struct {
 
 type ResourceData struct {
 
-	// Resource name, which is classified as follows based on different query conditions:
-	// A specific domain name: This indicates the details of this domain name
-	// multiDomains: This indicates the aggregate details of multiple domain names
-	// Project ID: This displays the ID of the specifically queried project
-	// all: This indicates the details at the account level
+	// Resource name, which is classified as follows based on different query filters:
+	// A single domain name: queries domain name details by a domain name. The details of the domain name will be displayed when the passed parameter `detail` is `true` (the `detail` parameter defaults to `false`).
+	// Multiple domain names: queries domain name details by multiple domain names. The aggregated details of the domain names will be displayed.
+	// Project ID: queries domain name details by a project ID. The aggregated details of the domain names of the project will be displayed.
+	// `all`: account-level data, which is aggregated details of all domain names of an account.
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
 	// Data details of a resource
@@ -5964,13 +5995,13 @@ type UrlRecord struct {
 
 type UrlRedirect struct {
 
-	// URL redirect configuration switch
-	// on: enabled
-	// off: disabled
+	// Whether URL rewriting is enabled
+	// `on`: enabled
+	// `off`: disabled
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// URL redirect rule, which is required if `Switch` is `on`. There can be up to 10 rules.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Rule of URL rewriting rule, which is required if `Switch` is `on`. There can be up to 10 rules.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	PathRules []*UrlRedirectRule `json:"PathRules,omitempty" name:"PathRules"`
 }
 

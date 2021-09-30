@@ -345,6 +345,7 @@ func NewDescribeBillingDataResponse() (response *DescribeBillingDataResponse) {
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
@@ -483,6 +484,7 @@ func NewDescribeCdnDomainLogsResponse() (response *DescribeCdnDomainLogsResponse
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
 //  INTERNALERROR_ERROR = "InternalError.Error"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
 //  INVALIDPARAMETER_CDNHOSTINVALIDSTATUS = "InvalidParameter.CdnHostInvalidStatus"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
@@ -657,6 +659,7 @@ func NewDescribeDomainsResponse() (response *DescribeDomainsResponse) {
 //  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_ERROR = "InternalError.Error"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
@@ -705,6 +708,7 @@ func NewDescribeDomainsConfigResponse() (response *DescribeDomainsConfigResponse
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
 //  INVALIDPARAMETER_CDNCERTNOCERTINFO = "InvalidParameter.CdnCertNoCertInfo"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
@@ -997,6 +1001,7 @@ func NewDescribePurgeQuotaResponse() (response *DescribePurgeQuotaResponse) {
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribePurgeQuota(request *DescribePurgeQuotaRequest) (response *DescribePurgeQuotaResponse, err error) {
@@ -1221,13 +1226,14 @@ func NewDisableCachesResponse() (response *DisableCachesResponse) {
 }
 
 // DisableCaches
-// This API is used to block access to a specific URL on CDN. After a URL is blocked, a 403 error will be returned for the arrived access requests initiated from the Chinese mainland. This API is in beta and not fully available now.
+// This API is used to block access to a specific URL on CDN. When a URL is blocked, error 403 will be returned for requests from the Chinese mainland. URL blocking is not permanent. Note that this API is only available to beta users now. 
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
 //  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
+//  INVALIDPARAMETER_CDNHOSTINVALIDSTATUS = "InvalidParameter.CdnHostInvalidStatus"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
 //  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
@@ -1610,6 +1616,7 @@ func NewListTopDataResponse() (response *ListTopDataResponse) {
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
 //  INTERNALERROR_ERROR = "InternalError.Error"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
@@ -1624,6 +1631,7 @@ func NewListTopDataResponse() (response *ListTopDataResponse) {
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
@@ -1821,7 +1829,7 @@ func NewPushUrlsCacheResponse() (response *PushUrlsCacheResponse) {
 // PushUrlsCache
 // This API is used to cache specified URL resources to CDN nodes. You can specify acceleration regions for the prefetch.
 //
-// By default, a maximum of 1000 URLs can be prefetched per day either within or outside Chinese mainland, and up to 20 tasks can be submitted at a time.
+// By default, a maximum of 1000 URLs can be prefetched per day either within or outside the Chinese mainland, and up to 20 tasks can be submitted at a time. Note that resources prefetched outside the Chinese mainland will be cached to CDN nodes outside the Chinese mainland and the traffic generated will incur costs.
 //
 // error code that may be returned:
 //  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
@@ -1883,6 +1891,7 @@ func NewSearchClsLogResponse() (response *SearchClsLogResponse) {
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_CLSINTERNALERROR = "InternalError.ClsInternalError"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_CDNCLSDUPLICATETOPIC = "InvalidParameter.CdnClsDuplicateTopic"
 //  INVALIDPARAMETER_CDNCLSTOPICNOTEXIST = "InvalidParameter.CdnClsTopicNotExist"
 //  INVALIDPARAMETER_CLSINDEXCONFLICT = "InvalidParameter.ClsIndexConflict"

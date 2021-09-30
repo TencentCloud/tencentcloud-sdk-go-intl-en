@@ -235,6 +235,66 @@ func (c *Client) CreateAccounts(request *CreateAccountsRequest) (response *Creat
     return
 }
 
+func NewCreateAuditPolicyRequest() (request *CreateAuditPolicyRequest) {
+    request = &CreateAuditPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "CreateAuditPolicy")
+    return
+}
+
+func NewCreateAuditPolicyResponse() (response *CreateAuditPolicyResponse) {
+    response = &CreateAuditPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateAuditPolicy
+// This API is used to create an audit policy for a TencentDB instance by associating an audit rule with the TencentDB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEAUDITFAILERROR = "FailedOperation.CreateAuditFailError"
+//  FAILEDOPERATION_TYPEINCONFLICT = "FailedOperation.TypeInConflict"
+//  INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+//  INTERNALERROR_AUDITOSSLOGICERROR = "InternalError.AuditOssLogicError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_SERVERERROR = "InternalError.ServerError"
+//  INTERNALERROR_SERVICEERROR = "InternalError.ServiceError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+//  OPERATIONDENIED_AUDITPOLICYEXISTERROR = "OperationDenied.AuditPolicyExistError"
+//  OPERATIONDENIED_AUDITRULEHASBIND = "OperationDenied.AuditRuleHasBind"
+//  OPERATIONDENIED_AUDITRULENOTEXISTERROR = "OperationDenied.AuditRuleNotExistError"
+//  OPERATIONDENIED_AUDITSTATUSERROR = "OperationDenied.AuditStatusError"
+//  OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+//  OPERATIONDENIED_DBBRAINPOLICYCONFLICT = "OperationDenied.DBBrainPolicyConflict"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+//  OPERATIONDENIED_UNSUPPORTOPENAUDITERROR = "OperationDenied.UnsupportOpenAuditError"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateAuditPolicy(request *CreateAuditPolicyRequest) (response *CreateAuditPolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateAuditPolicyRequest()
+    }
+    response = NewCreateAuditPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateBackupRequest() (request *CreateBackupRequest) {
     request = &CreateBackupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1092,6 +1152,7 @@ func NewDescribeBinlogBackupOverviewResponse() (response *DescribeBinlogBackupOv
 //
 // error code that may be returned:
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_SUBACCOUNTOPERATIONDENIED = "OperationDenied.SubAccountOperationDenied"
 func (c *Client) DescribeBinlogBackupOverview(request *DescribeBinlogBackupOverviewRequest) (response *DescribeBinlogBackupOverviewResponse, err error) {
     if request == nil {
@@ -2080,6 +2141,7 @@ func NewDescribeSlowLogsResponse() (response *DescribeSlowLogsResponse) {
 //  INTERNALERROR_INTERNALSERVICEERRORERR = "InternalError.InternalServiceErrorErr"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
 func (c *Client) DescribeSlowLogs(request *DescribeSlowLogsRequest) (response *DescribeSlowLogsResponse, err error) {
     if request == nil {
@@ -2744,6 +2806,7 @@ func NewModifyDBInstanceProjectResponse() (response *ModifyDBInstanceProjectResp
 // This API (ModifyDBInstanceProject) is used to modify the project to which a TencentDB instance belongs.
 //
 // error code that may be returned:
+//  INTERNALERROR_TAGERROR = "InternalError.TagError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 func (c *Client) ModifyDBInstanceProject(request *ModifyDBInstanceProjectRequest) (response *ModifyDBInstanceProjectResponse, err error) {
@@ -3094,6 +3157,7 @@ func NewModifyTimeWindowResponse() (response *ModifyTimeWindowResponse) {
 // This API (ModifyTimeWindow) is used to update the maintenance time window of a TencentDB instance.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INVALIDPARAMETER = "InvalidParameter"

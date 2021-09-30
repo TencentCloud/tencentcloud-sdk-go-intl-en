@@ -3604,9 +3604,6 @@ func (r *CreateVpcResponse) FromJsonString(s string) error {
 type CreateVpnConnectionRequest struct {
 	*tchttp.BaseRequest
 
-	// VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
-
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -3618,6 +3615,10 @@ type CreateVpnConnectionRequest struct {
 
 	// The pre-shared key.
 	PreShareKey *string `json:"PreShareKey,omitempty" name:"PreShareKey"`
+
+	// VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
+	// This parameter is optional for a CCN-based VPN tunnel.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}. 10.0.0.5/24 is the VPC internal IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
 	SecurityPolicyDatabases []*SecurityPolicyDatabase `json:"SecurityPolicyDatabases,omitempty" name:"SecurityPolicyDatabases"`
@@ -3639,6 +3640,9 @@ type CreateVpnConnectionRequest struct {
 
 	// Peer IP address for the health check
 	HealthCheckRemoteIp *string `json:"HealthCheckRemoteIp,omitempty" name:"HealthCheckRemoteIp"`
+
+	// Tunnel type. Valid values: `STATIC`, `StaticRoute`, and `Policy`.
+	RouteType *string `json:"RouteType,omitempty" name:"RouteType"`
 }
 
 func (r *CreateVpnConnectionRequest) ToJsonString() string {
@@ -3653,11 +3657,11 @@ func (r *CreateVpnConnectionRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "VpcId")
 	delete(f, "VpnGatewayId")
 	delete(f, "CustomerGatewayId")
 	delete(f, "VpnConnectionName")
 	delete(f, "PreShareKey")
+	delete(f, "VpcId")
 	delete(f, "SecurityPolicyDatabases")
 	delete(f, "IKEOptionsSpecification")
 	delete(f, "IPSECOptionsSpecification")
@@ -3665,6 +3669,7 @@ func (r *CreateVpnConnectionRequest) FromJsonString(s string) error {
 	delete(f, "EnableHealthCheck")
 	delete(f, "HealthCheckLocalIp")
 	delete(f, "HealthCheckRemoteIp")
+	delete(f, "RouteType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpnConnectionRequest has unknown keys!", "")
 	}
@@ -8864,12 +8869,14 @@ type DescribeVpcsRequest struct {
 	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 
 	// Filter condition. `VpcIds` and `Filters` cannot be specified at the same time.
-	// <li>vpc-name - String - (Filter condition) VPC instance name.</li>
-	// <li>is-default - String - (Filter condition) Indicates whether it is the default VPC.</li>
-	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
-	// <li>cidr-block - String - (Filter condition) VPC CIDR.</li>
-	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-	// <li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key is replaced with the specific tag key. For usage, refer to case 2.</li>
+	// Valid filters include:
+	// <li>`vpc-name`: VPC instance name</li>
+	// <li>`is-default`: indicates whether it is the default VPC</li>
+	// <li>`vpc-id`: VPC instance ID, such as `vpc-f49l6u0z`</li>
+	// <li>`cidr-block`: VPC CIDR block</li>
+	// <li>`tag-key`: (optional) tag key</li>
+	// <li>`tag:tag-key`: (optional) tag key-value pair. Replace the `tag-key` with a specified tag value. For its usage, refer to the Example 2.</li>
+	//   **Note:** if one filter has multiple values, the logical relationship between these values is `OR`. The logical relationship between filters is `AND`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
@@ -12796,7 +12803,7 @@ type ModifyVpcEndPointServiceAttributeRequest struct {
 	// Endpoint service name
 	EndPointServiceName *string `json:"EndPointServiceName,omitempty" name:"EndPointServiceName"`
 
-	// Whether to automatically accept
+	// Whether to automatically accept VPC endpoint connection requests. Valid values: <ui><li>`true`: yes<li>`false`: no</ul>
 	AutoAcceptFlag *bool `json:"AutoAcceptFlag,omitempty" name:"AutoAcceptFlag"`
 
 	// Real server ID in the format of `lb-xxx`.

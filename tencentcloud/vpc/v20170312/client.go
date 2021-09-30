@@ -146,6 +146,7 @@ func NewAllocateAddressesResponse() (response *AllocateAddressesResponse) {
 //  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
 //  INVALIDPARAMETERVALUE_BANDWIDTHTOOSMALL = "InvalidParameterValue.BandwidthTooSmall"
 //  INVALIDPARAMETERVALUE_INVALIDDEDICATEDCLUSTERID = "InvalidParameterValue.InvalidDedicatedClusterId"
+//  INVALIDPARAMETERVALUE_INVALIDTAG = "InvalidParameterValue.InvalidTag"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 func (c *Client) AllocateAddresses(request *AllocateAddressesRequest) (response *AllocateAddressesResponse, err error) {
     if request == nil {
@@ -295,13 +296,17 @@ func NewAssignPrivateIpAddressesResponse() (response *AssignPrivateIpAddressesRe
 }
 
 // AssignPrivateIpAddresses
-// This API (AssignPrivateIpAddresses) is used for the ENI to apply for private IPs.
+// This API is used to apply for private IPs for an ENI.
 //
 // * An ENI can only be bound with a limited number of IP addresses. For more information about resource limits, see <a href="/document/product/576/18527">ENI Use Limits</a>.
 //
-// * You can specify the private IP you want to apply for. It cannot be the primary IP, which already exists and cannot be modified. The private IP must be in the same subnet as the ENI, and cannot be occupied.
+// * You can apply for a specified private IP. It cannot be a primary IP because the primary IP already exists and cannot be modified. The private IP address must be an idle IP in the subnet to which the ENI belongs.
 //
-// * You can apply for more than one secondary private IP on the ENI. The API will return the specified number of secondary private IPs in the subnet IP range of the ENI.
+// * You can apply for more than one secondary private IP on the ENI. The API will return the specified number of secondary private IPs in the subnet IP range.
+//
+// >?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+//
+// >
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -364,6 +369,13 @@ func NewAssociateAddressResponse() (response *AssociateAddressResponse) {
 //  INVALIDNETWORKINTERFACEID_NOTFOUND = "InvalidNetworkInterfaceId.NotFound"
 //  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
 //  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
+//  INVALIDPARAMETERVALUE_INSTANCEDOESNOTSUPPORTANYCAST = "InvalidParameterValue.InstanceDoesNotSupportAnycast"
+//  INVALIDPARAMETERVALUE_INSTANCEHASWANIP = "InvalidParameterValue.InstanceHasWanIP"
+//  INVALIDPARAMETERVALUE_INSTANCENOWANIP = "InvalidParameterValue.InstanceNoWanIP"
+//  INVALIDPARAMETERVALUE_INSTANCENORMALPUBLICIPBLOCKED = "InvalidParameterValue.InstanceNormalPublicIpBlocked"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCEINTERNETCHARGETYPE = "InvalidParameterValue.InvalidInstanceInternetChargeType"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCESTATE = "InvalidParameterValue.InvalidInstanceState"
+//  INVALIDPARAMETERVALUE_LBALREADYBINDEIP = "InvalidParameterValue.LBAlreadyBindEip"
 //  INVALIDPRIVATEIPADDRESS_ALREADYBINDEIP = "InvalidPrivateIpAddress.AlreadyBindEip"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) AssociateAddress(request *AssociateAddressRequest) (response *AssociateAddressResponse, err error) {
@@ -396,8 +408,10 @@ func NewAssociateDirectConnectGatewayNatGatewayResponse() (response *AssociateDi
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_VPGTYPENOTMATCH = "InvalidParameterValue.VpgTypeNotMatch"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) AssociateDirectConnectGatewayNatGateway(request *AssociateDirectConnectGatewayNatGatewayRequest) (response *AssociateDirectConnectGatewayNatGatewayResponse, err error) {
     if request == nil {
         request = NewAssociateDirectConnectGatewayNatGatewayRequest()
@@ -574,11 +588,15 @@ func NewAttachClassicLinkVpcResponse() (response *AttachClassicLinkVpcResponse) 
 }
 
 // AttachClassicLinkVpc
-// This API is used to create a Classiclink between a VPC instance and a basic network device.
+// This API is used to create a Classiclink between a VPC instance and a classic network device.
 //
-// * The VPC instance and the basic network device must be in the same region.
+// * The VPC instance and the classic network device must be in the same region.
 //
-// * For differences between VPC and basic networks, see <a href="https://intl.cloud.tencent.com/document/product/215/30720?from_cn_redirect=1">VPC and Basic Networks</a>.
+// * For differences between VPC and the classic network, see <a href="https://intl.cloud.tencent.com/document/product/215/30720?from_cn_redirect=1">VPC and Classic Network</a>.
+//
+// >?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+//
+// >
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -886,6 +904,10 @@ func NewCreateAndAttachNetworkInterfaceResponse() (response *CreateAndAttachNetw
 // * You can bind an existing security group when creating an ENI.
 //
 // * You can bind a tag when creating an ENI. The tag list in the response indicates the tags that have been successfully added.
+//
+// >?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+//
+// >
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1286,7 +1308,9 @@ func NewCreateNatGatewayResponse() (response *CreateNatGatewayResponse) {
 }
 
 // CreateNatGateway
-// This API (CreateNatGateway) is used to create a NAT gateway.
+// This API is used to create a NAT Gateway.
+//
+// Before taking actions on a NAT Gateway, ensure that it has been successfully created, namely, the `State` field in the response of the `DescribeNatGateway` API is `AVAILABLE`.
 //
 // error code that may be returned:
 //  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
@@ -1501,7 +1525,7 @@ func NewCreateNetworkInterfaceResponse() (response *CreateNetworkInterfaceRespon
 }
 
 // CreateNetworkInterface
-// This API is used to create one or more ENIs.
+// This API is used to create an ENI.
 //
 // * You can specify private IP addresses and a primary IP when creating an ENI. The specified private IP must be in the same subnet as the ENI and is not occupied.
 //
@@ -1512,6 +1536,10 @@ func NewCreateNetworkInterfaceResponse() (response *CreateNetworkInterfaceRespon
 // * You can bind an existing security group when creating an ENI.
 //
 // * You can bind a tag when creating an ENI. The tag list in the response indicates the tags that have been successfully added.
+//
+// >?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+//
+// >
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1949,6 +1977,7 @@ func NewCreateSubnetsResponse() (response *CreateSubnetsResponse) {
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
 //  UNSUPPORTEDOPERATION_DCGATEWAYSNOTFOUNDINVPC = "UnsupportedOperation.DcGatewaysNotFoundInVpc"
 func (c *Client) CreateSubnets(request *CreateSubnetsRequest) (response *CreateSubnetsResponse, err error) {
     if request == nil {
@@ -2127,13 +2156,18 @@ func NewCreateVpnConnectionResponse() (response *CreateVpnConnectionResponse) {
 }
 
 // CreateVpnConnection
-// This API (CreateVpnConnection) is used to create VPN tunnel.
+// This API is used to create a VPN tunnel.
+//
+// >?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+//
+// >
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_VPCCIDRCONFLICT = "InvalidParameterValue.VpcCidrConflict"
 //  INVALIDPARAMETERVALUE_VPNCONNCIDRCONFLICT = "InvalidParameterValue.VpnConnCidrConflict"
+//  INVALIDPARAMETERVALUE_VPNCONNHEALTHCHECKIPCONFLICT = "InvalidParameterValue.VpnConnHealthCheckIpConflict"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -3044,6 +3078,7 @@ func NewDeleteVpcResponse() (response *DeleteVpcResponse) {
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
 func (c *Client) DeleteVpc(request *DeleteVpcRequest) (response *DeleteVpcResponse, err error) {
     if request == nil {
         request = NewDeleteVpcRequest()
@@ -3391,6 +3426,7 @@ func NewDescribeAddressesResponse() (response *DescribeAddressesResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 func (c *Client) DescribeAddresses(request *DescribeAddressesRequest) (response *DescribeAddressesResponse, err error) {
     if request == nil {
@@ -5176,7 +5212,11 @@ func NewDetachClassicLinkVpcResponse() (response *DetachClassicLinkVpcResponse) 
 }
 
 // DetachClassicLinkVpc
-// This API (DetachClassicLinkVpc) is used to delete a Classiclink.
+// This API is used to delete a Classiclink.
+//
+// >?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+//
+// >
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -5351,6 +5391,7 @@ func NewDisassociateDirectConnectGatewayNatGatewayResponse() (response *Disassoc
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DisassociateDirectConnectGatewayNatGateway(request *DisassociateDirectConnectGatewayNatGatewayRequest) (response *DisassociateDirectConnectGatewayNatGatewayResponse, err error) {
     if request == nil {
@@ -6077,6 +6118,8 @@ func NewModifyAddressesBandwidthResponse() (response *ModifyAddressesBandwidthRe
 //  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
 //  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
 //  INVALIDPARAMETERVALUE_BANDWIDTHTOOSMALL = "InvalidParameterValue.BandwidthTooSmall"
+//  INVALIDPARAMETERVALUE_INSTANCENOCALCIP = "InvalidParameterValue.InstanceNoCalcIP"
+//  INVALIDPARAMETERVALUE_INSTANCENOWANIP = "InvalidParameterValue.InstanceNoWanIP"
 func (c *Client) ModifyAddressesBandwidth(request *ModifyAddressesBandwidthRequest) (response *ModifyAddressesBandwidthResponse, err error) {
     if request == nil {
         request = NewModifyAddressesBandwidthRequest()
@@ -7046,7 +7089,7 @@ func NewModifyVpcEndPointServiceAttributeResponse() (response *ModifyVpcEndPoint
 }
 
 // ModifyVpcEndPointServiceAttribute
-// This API is used to modify endpoint service attributes.
+// This API is used to modify the VPC endpoint service attributes.
 //
 // 
 //
@@ -7587,6 +7630,7 @@ func NewResetNatGatewayConnectionResponse() (response *ResetNatGatewayConnection
 //
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
 func (c *Client) ResetNatGatewayConnection(request *ResetNatGatewayConnectionRequest) (response *ResetNatGatewayConnectionResponse, err error) {
     if request == nil {
         request = NewResetNatGatewayConnectionRequest()
@@ -7754,6 +7798,8 @@ func NewTransformAddressResponse() (response *TransformAddressResponse) {
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
 //  INVALIDINSTANCEID_ALREADYBINDEIP = "InvalidInstanceId.AlreadyBindEip"
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETERVALUE_INSTANCENOWANIP = "InvalidParameterValue.InstanceNoWanIP"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCESTATE = "InvalidParameterValue.InvalidInstanceState"
 func (c *Client) TransformAddress(request *TransformAddressRequest) (response *TransformAddressResponse, err error) {
     if request == nil {
         request = NewTransformAddressRequest()
