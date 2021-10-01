@@ -122,6 +122,9 @@ const (
 	// The VPC has been bound to another domain.
 	INVALIDPARAMETER_VPCBINDED = "InvalidParameter.VpcBinded"
 
+	// 
+	INVALIDPARAMETER_VPCPTRZONEBINDEXCEED = "InvalidParameter.VpcPtrZoneBindExceed"
+
 	// The domain does not exist.
 	INVALIDPARAMETER_ZONENOTEXISTS = "InvalidParameter.ZoneNotExists"
 

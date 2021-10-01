@@ -458,6 +458,66 @@ func (r *DescribeDashboardResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribePrivateDNSAccountListRequest struct {
+	*tchttp.BaseRequest
+
+	// Pagination offset, starting from `0`
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Maximum value: `100`. Default value: `20`
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter parameters
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribePrivateDNSAccountListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrivateDNSAccountListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrivateDNSAccountListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePrivateDNSAccountListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of Private DNS accounts
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of Private DNS accounts
+		AccountSet []*PrivateDNSAccount `json:"AccountSet,omitempty" name:"AccountSet"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribePrivateDNSAccountListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrivateDNSAccountListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribePrivateZoneListRequest struct {
 	*tchttp.BaseRequest
 
@@ -958,6 +1018,18 @@ func (r *ModifyPrivateZoneVpcResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyPrivateZoneVpcResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type PrivateDNSAccount struct {
+
+	// Root account UIN
+	Uin *string `json:"Uin,omitempty" name:"Uin"`
+
+	// Root account name
+	Account *string `json:"Account,omitempty" name:"Account"`
+
+	// Account name
+	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
 }
 
 type PrivateZone struct {
