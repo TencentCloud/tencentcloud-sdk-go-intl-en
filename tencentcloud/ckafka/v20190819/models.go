@@ -53,6 +53,61 @@ type AclResponse struct {
 	AclList []*Acl `json:"AclList,omitempty" name:"AclList"`
 }
 
+type AclRule struct {
+
+	// ACL rule name.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Instance ID.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Matching type. Currently, only prefix match is supported. Enumerated value list: PREFIXED
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	PatternType *string `json:"PatternType,omitempty" name:"PatternType"`
+
+	// Prefix value for prefix match.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Pattern *string `json:"Pattern,omitempty" name:"Pattern"`
+
+	// ACL resource type. Only “Topic” is supported. Enumerated value list: Topic.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// ACL information contained in the rule.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	AclList *string `json:"AclList,omitempty" name:"AclList"`
+
+	// Creation time of the rule.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	CreateTimeStamp *string `json:"CreateTimeStamp,omitempty" name:"CreateTimeStamp"`
+
+	// A parameter used to specify whether the preset ACL rule is applied to new topics.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	IsApplied *int64 `json:"IsApplied,omitempty" name:"IsApplied"`
+
+	// Rule update time.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	UpdateTimeStamp *string `json:"UpdateTimeStamp,omitempty" name:"UpdateTimeStamp"`
+
+	// Remarks of the rule.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// One of the corresponding topic names that is displayed.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// The number of topics that apply this ACL rule.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	TopicCount *int64 `json:"TopicCount,omitempty" name:"TopicCount"`
+
+	// Name of rule type.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	PatternTypeTitle *string `json:"PatternTypeTitle,omitempty" name:"PatternTypeTitle"`
+}
+
 type AclRuleInfo struct {
 
 	// ACL operation types. Enumerated values: `All` (all operations), `Read` (read), `Write` (write).
@@ -519,6 +574,12 @@ type CreateTopicRequest struct {
 
 	// Segment rolling duration in ms. The current minimum value is 3,600,000 ms
 	SegmentMs *int64 `json:"SegmentMs,omitempty" name:"SegmentMs"`
+
+	// Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
+	EnableAclRule *int64 `json:"EnableAclRule,omitempty" name:"EnableAclRule"`
+
+	// Name of the preset ACL rule.
+	AclRuleName *string `json:"AclRuleName,omitempty" name:"AclRuleName"`
 }
 
 func (r *CreateTopicRequest) ToJsonString() string {
@@ -545,6 +606,8 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	delete(f, "UncleanLeaderElectionEnable")
 	delete(f, "RetentionMs")
 	delete(f, "SegmentMs")
+	delete(f, "EnableAclRule")
+	delete(f, "AclRuleName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTopicRequest has unknown keys!", "")
 	}
@@ -1709,6 +1772,9 @@ type DescribeTopicDetailRequest struct {
 
 	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20. This value must be greater than 0
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Name of the preset ACL rule.
+	AclRuleName *string `json:"AclRuleName,omitempty" name:"AclRuleName"`
 }
 
 func (r *DescribeTopicDetailRequest) ToJsonString() string {
@@ -1727,6 +1793,7 @@ func (r *DescribeTopicDetailRequest) FromJsonString(s string) error {
 	delete(f, "SearchWord")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "AclRuleName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicDetailRequest has unknown keys!", "")
 	}
@@ -1770,6 +1837,9 @@ type DescribeTopicRequest struct {
 
 	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Name of the preset ACL rule.
+	AclRuleName *string `json:"AclRuleName,omitempty" name:"AclRuleName"`
 }
 
 func (r *DescribeTopicRequest) ToJsonString() string {
@@ -1788,6 +1858,7 @@ func (r *DescribeTopicRequest) FromJsonString(s string) error {
 	delete(f, "SearchWord")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "AclRuleName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicRequest has unknown keys!", "")
 	}
@@ -2723,6 +2794,15 @@ type ModifyTopicAttributesRequest struct {
 
 	// Message deletion policy. Valid values: delete, compact
 	CleanUpPolicy *string `json:"CleanUpPolicy,omitempty" name:"CleanUpPolicy"`
+
+	// IP allowlist, which is required if the value of `enableWhileList` is 1.
+	IpWhiteList []*string `json:"IpWhiteList,omitempty" name:"IpWhiteList"`
+
+	// Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
+	EnableAclRule *int64 `json:"EnableAclRule,omitempty" name:"EnableAclRule"`
+
+	// Name of the preset ACL rule.
+	AclRuleName *string `json:"AclRuleName,omitempty" name:"AclRuleName"`
 }
 
 func (r *ModifyTopicAttributesRequest) ToJsonString() string {
@@ -2747,6 +2827,9 @@ func (r *ModifyTopicAttributesRequest) FromJsonString(s string) error {
 	delete(f, "SegmentMs")
 	delete(f, "MaxMessageBytes")
 	delete(f, "CleanUpPolicy")
+	delete(f, "IpWhiteList")
+	delete(f, "EnableAclRule")
+	delete(f, "AclRuleName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTopicAttributesRequest has unknown keys!", "")
 	}
@@ -2945,6 +3028,14 @@ type TopicAttributesResponse struct {
 
 	// Partition details
 	Partitions []*TopicPartitionDO `json:"Partitions,omitempty" name:"Partitions"`
+
+	// Switch of the preset ACL rule. `1`: enable, `0`: disable.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	EnableAclRule *int64 `json:"EnableAclRule,omitempty" name:"EnableAclRule"`
+
+	// Preset ACL rule list.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	AclRuleList []*AclRule `json:"AclRuleList,omitempty" name:"AclRuleList"`
 }
 
 type TopicDetail struct {
@@ -2991,6 +3082,10 @@ type TopicDetail struct {
 	// Message retention time configuration (for recording the latest retention time)
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	RetentionTimeConfig *TopicRetentionTimeConfigRsp `json:"RetentionTimeConfig,omitempty" name:"RetentionTimeConfig"`
+
+	// `0`: normal, `1`: deleted, `2`: deleting
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
 type TopicDetailResponse struct {

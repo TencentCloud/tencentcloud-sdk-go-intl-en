@@ -882,7 +882,7 @@ type GetSSHKeyPairValueRequest struct {
 	// Secret name. This field is only valid for SSH key secrets.
 	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
 
-	// 
+	// ID of the key pair, which is the unique identifier of the key pair in the CVM.
 	SSHKeyId *string `json:"SSHKeyId,omitempty" name:"SSHKeyId"`
 }
 
@@ -1145,7 +1145,11 @@ type ListSecretsRequest struct {
 	// `2`: SSH key secret.
 	SecretType *uint64 `json:"SecretType,omitempty" name:"SecretType"`
 
-	// 
+	// This parameter is valid only when SecretType is `1`.
+	//  
+	// An empty value indicates querying all types of Tencent Cloud service secrets.
+	// `Mysql`: queries MySQL database credentials.
+	// `Tdsql-mysql`: queries TDSQL MySQL database credentials.
 	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
 }
 

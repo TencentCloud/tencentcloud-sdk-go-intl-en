@@ -29,6 +29,9 @@ const (
 	// Invalid `CacheInfo` value
 	INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
 
+	// Invalid CDN playback domain name.
+	INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+
 	// Invalid `ChannelId`.
 	INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
 

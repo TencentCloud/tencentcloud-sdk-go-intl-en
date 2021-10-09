@@ -291,3 +291,41 @@ func (c *Client) ModifyImmutableTagRules(request *ModifyImmutableTagRulesRequest
     err = c.Send(request, response)
     return
 }
+
+func NewModifyInstanceRequest() (request *ModifyInstanceRequest) {
+    request = &ModifyInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "ModifyInstance")
+    return
+}
+
+func NewModifyInstanceResponse() (response *ModifyInstanceResponse) {
+    response = &ModifyInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyInstance
+// This API is used to update instance information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyInstance(request *ModifyInstanceRequest) (response *ModifyInstanceResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceRequest()
+    }
+    response = NewModifyInstanceResponse()
+    err = c.Send(request, response)
+    return
+}

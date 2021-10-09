@@ -674,3 +674,53 @@ type PointInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Endpoints []*EndpointInfo `json:"Endpoints,omitempty" name:"Endpoints"`
 }
+
+type UnbindCdnDomainWithChannelRequest struct {
+	*tchttp.BaseRequest
+
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// CDN playback domain name
+	CdnDomain *string `json:"CdnDomain,omitempty" name:"CdnDomain"`
+}
+
+func (r *UnbindCdnDomainWithChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindCdnDomainWithChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChannelId")
+	delete(f, "CdnDomain")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnbindCdnDomainWithChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UnbindCdnDomainWithChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UnbindCdnDomainWithChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindCdnDomainWithChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}

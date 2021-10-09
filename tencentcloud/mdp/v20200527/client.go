@@ -367,3 +367,35 @@ func (c *Client) ModifyStreamPackageChannelInputAuthInfo(request *ModifyStreamPa
     err = c.Send(request, response)
     return
 }
+
+func NewUnbindCdnDomainWithChannelRequest() (request *UnbindCdnDomainWithChannelRequest) {
+    request = &UnbindCdnDomainWithChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdp", APIVersion, "UnbindCdnDomainWithChannel")
+    return
+}
+
+func NewUnbindCdnDomainWithChannelResponse() (response *UnbindCdnDomainWithChannelResponse) {
+    response = &UnbindCdnDomainWithChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UnbindCdnDomainWithChannel
+// This API is used to unbind a CDN playback domain name from a channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) UnbindCdnDomainWithChannel(request *UnbindCdnDomainWithChannelRequest) (response *UnbindCdnDomainWithChannelResponse, err error) {
+    if request == nil {
+        request = NewUnbindCdnDomainWithChannelRequest()
+    }
+    response = NewUnbindCdnDomainWithChannelResponse()
+    err = c.Send(request, response)
+    return
+}
