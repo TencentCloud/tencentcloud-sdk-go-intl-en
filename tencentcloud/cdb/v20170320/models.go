@@ -933,6 +933,9 @@ type CreateDBInstanceHourRequest struct {
 
 	// Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes).
 	AutoSyncFlag *int64 `json:"AutoSyncFlag,omitempty" name:"AutoSyncFlag"`
+
+	// Financial cage ID.
+	CageId *string `json:"CageId,omitempty" name:"CageId"`
 }
 
 func (r *CreateDBInstanceHourRequest) ToJsonString() string {
@@ -978,6 +981,7 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 	delete(f, "InstanceNodes")
 	delete(f, "Cpu")
 	delete(f, "AutoSyncFlag")
+	delete(f, "CageId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceHourRequest has unknown keys!", "")
 	}
@@ -2693,6 +2697,9 @@ type DescribeDBInstancesRequest struct {
 
 	// Whether to use the tag key as a filter condition
 	TagKeysForSearch []*string `json:"TagKeysForSearch,omitempty" name:"TagKeysForSearch"`
+
+	// Financial cage IDs.
+	CageIds []*string `json:"CageIds,omitempty" name:"CageIds"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -2734,6 +2741,7 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "WithMaster")
 	delete(f, "DeployGroupIds")
 	delete(f, "TagKeysForSearch")
+	delete(f, "CageIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
 	}

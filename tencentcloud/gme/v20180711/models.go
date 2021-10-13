@@ -350,6 +350,9 @@ type DescribeScanResult struct {
 	// <li>Success: task ended successfully</li>
 	// <li>Error: exceptional</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// ID of the application submitted for detection
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 }
 
 type DescribeScanResultListRequest struct {

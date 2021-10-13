@@ -3774,6 +3774,64 @@ func (r *CreateTranscodeTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateVodDomainRequest struct {
+	*tchttp.BaseRequest
+
+	// Domain name to add to VOD. Note: a wildcard domain name is not supported.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Region to enable acceleration. Valid values:
+	// <li>`Chinese Mainland`</li>
+	// <li>`Outside Chinese Mainland`</li>
+	// <li>`Global`</li>
+	// If `AccelerateArea` is not set, VOD will enable acceleration in `Chinese Mainland` or `Outside Chinese Mainland` according to the region set under the user’s Tencent Cloud account. To enable acceleration in Chinese mainland for a domain name, please finish [ICP filing](https://intl.cloud.tencent.com/document/product/243/18905?from_cn_redirect=1) for it first.
+	AccelerateArea *string `json:"AccelerateArea,omitempty" name:"AccelerateArea"`
+
+	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *CreateVodDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVodDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "AccelerateArea")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVodDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateVodDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateVodDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVodDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateWatermarkTemplateRequest struct {
 	*tchttp.BaseRequest
 
@@ -4639,6 +4697,56 @@ func (r *DeleteTranscodeTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteTranscodeTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteVodDomainRequest struct {
+	*tchttp.BaseRequest
+
+	// Domain name to delete from VOD
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DeleteVodDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVodDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVodDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteVodDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteVodDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVodDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8181,9 +8289,10 @@ type MediaContentReviewSegmentItem struct {
 
 type MediaDeleteItem struct {
 
-	// Type of the content to be deleted. If this field is left empty, the parameter will be invalid. Valid values:
-	// <li>TranscodeFiles: deletes transcoded files.</li>
-	// <li>WechatPublishFiles: deletes files published on WeChat.</li>
+	// Type of files to delete. If this parameter is left empty, it will be invalid. Valid values:
+	// <li>`OriginalFiles`: original files. You cannot initiate transcoding, publishing on WeChat, or other video processing operations after deleting the original files.</li>
+	// <li>`TranscodeFiles`: transcoded files</li>
+	// <li>`WechatPublishFiles`: files for publishing on WeChat</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// ID of the template for which to delete the videos of the type specified by the `Type` parameter. For the template definition, please see [Transcoding Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.3Cspan-id-.3D-.22zm.22-.3E.3C.2Fspan.3E.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
@@ -10191,6 +10300,128 @@ func (r *ModifyTranscodeTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyVodDomainAccelerateConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Domain name for acceleration setting
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Region. Valid values:
+	// <li>`Chinese Mainland`</li>
+	// <li>`Outside Chinese Mainland`</li>
+	// <li>`Global`</li>
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Whether to enable or disable domain name acceleration for the selected region. Valid values:
+	// <li>`Enabled`: enable</li>
+	// <li>`Disabled`: disable</li>
+	// To enable acceleration in Chinese mainland for a domain name, please finish [ICP filing](https://intl.cloud.tencent.com/document/product/243/18905?from_cn_redirect=1) for it first.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *ModifyVodDomainAccelerateConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVodDomainAccelerateConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "Area")
+	delete(f, "Status")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVodDomainAccelerateConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyVodDomainAccelerateConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyVodDomainAccelerateConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVodDomainAccelerateConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyVodDomainConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/14046?from_cn_redirect=1) policy
+	RefererAuthPolicy *RefererAuthPolicy `json:"RefererAuthPolicy,omitempty" name:"RefererAuthPolicy"`
+
+	// [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/14047?from_cn_redirect=1) policy
+	UrlSignatureAuthPolicy *UrlSignatureAuthPolicy `json:"UrlSignatureAuthPolicy,omitempty" name:"UrlSignatureAuthPolicy"`
+
+	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *ModifyVodDomainConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVodDomainConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "RefererAuthPolicy")
+	delete(f, "UrlSignatureAuthPolicy")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVodDomainConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyVodDomainConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyVodDomainConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVodDomainConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyWatermarkTemplateRequest struct {
 	*tchttp.BaseRequest
 
@@ -11568,16 +11799,18 @@ type RefererAuthPolicy struct {
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Referer authentication method. Valid values:
-	// <li>`Black`: blocklist</li>
-	// <li>`White`: allowlist</li>
+	// <li>`Black`: blocklist. Any HTTP request carrying a referer in the `Referers` list will be rejected. </li>
+	// <li>`White`: allowlist. Only HTTP requests carrying referers in the `Referers` list will be accepted.</li>
+	// When `Status` is set to `Enabled`, `AuthType` must be specified.
 	AuthType *string `json:"AuthType,omitempty" name:"AuthType"`
 
-	// List for referer authentication
+	// The list of referers (up to 20). When `Status` is set to `Enabled`, `Referers` cannot be empty. Enter domain names as referers.
 	Referers []*string `json:"Referers,omitempty" name:"Referers"`
 
 	// Whether to allow requests with empty referer to access this domain name. Valid values:
-	// <li>Yes</li>
-	// <li>No</li>
+	// <li>`Yes`</li>
+	// <li>`No`</li>
+	// When `Status` is set to `Enabled`, `BlankRefererAllowed` must be specified.
 	BlankRefererAllowed *string `json:"BlankRefererAllowed,omitempty" name:"BlankRefererAllowed"`
 }
 
@@ -12911,12 +13144,13 @@ type TransitionOpertion struct {
 
 type UrlSignatureAuthPolicy struct {
 
-	// [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986) status. Valid values:
-	// <li>Enabled</li>
-	// <li>Disabled</li>
+	// Whether to enable or disable [key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986). Valid values:
+	// <li>`Enabled`: enable</li>
+	// <li>`Disabled`: disable</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// The key for generating the signature of [key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986)
+	// The key for generating the signature of [key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986).
+	// `EncryptedKey` can contain 8-40 bytes, and cannot contain non-printable characters.
 	EncryptedKey *string `json:"EncryptedKey,omitempty" name:"EncryptedKey"`
 }
 
