@@ -106,10 +106,10 @@ type AccountRemark struct {
 
 type Backup struct {
 
-	// Filename
+	// File name. The name of an unarchived backup file is returned by the `DescribeBackupFiles` API instead of this parameter.
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
-	// File size in KB
+	// File size in KB. The size of an unarchived backup file is returned by the `DescribeBackupFiles` API instead of this parameter.
 	Size *int64 `json:"Size,omitempty" name:"Size"`
 
 	// Backup start time
@@ -118,13 +118,13 @@ type Backup struct {
 	// Backup end time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Download address for private network
+	// Private network download address. The download address of an unarchived backup file is returned by the `DescribeBackupFiles` API instead of this parameter.
 	InternalAddr *string `json:"InternalAddr,omitempty" name:"InternalAddr"`
 
-	// Download address for public network
+	// Public network download address. The download address of an unarchived backup file is returned by the `DescribeBackupFiles` API instead of this parameter.
 	ExternalAddr *string `json:"ExternalAddr,omitempty" name:"ExternalAddr"`
 
-	// Unique ID of backup file, which will be used by the `RestoreInstance` API
+	// Unique ID of a backup file, which is used by the `RestoreInstance` API. The unique ID of an unarchived backup file is returned by the `DescribeBackupFiles` API instead of this parameter.
 	Id *uint64 `json:"Id,omitempty" name:"Id"`
 
 	// Backup file status (0: creating, 1: succeeded, 2: failed)
@@ -139,8 +139,29 @@ type Backup struct {
 	// Backup mode. 0: scheduled, 1: manual
 	BackupWay *int64 `json:"BackupWay,omitempty" name:"BackupWay"`
 
-	// Backup name, which can be customized.
+	// Backup task name (customizable)
 	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+
+	// Group ID of unarchived backup files, which can be used as a request parameter in the `DescribeBackupFiles` API to get details of unarchived backup files in the specified group. This parameter is invalid for archived backup files.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
+type BackupFile struct {
+
+	// Unique ID of a backup file
+	Id *uint64 `json:"Id,omitempty" name:"Id"`
+
+	// Backup file name
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// File size in KB
+	Size *uint64 `json:"Size,omitempty" name:"Size"`
+
+	// Name of the database corresponding to the backup file
+	DBs []*string `json:"DBs,omitempty" name:"DBs"`
+
+	// Download address
+	DownloadLink *string `json:"DownloadLink,omitempty" name:"DownloadLink"`
 }
 
 type CloneDBRequest struct {
@@ -761,7 +782,7 @@ type DBInstance struct {
 	// Instance VPC subnet ID, which will be 0 if the basic network is used
 	SubnetId *int64 `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance status. Valid values: <li>1: applying </li> <li>2: running </li> <li>3: restrictedly running (primary/secondary switching) </li> <li>4: isolated </li> <li>5: repossessing </li> <li>6: repossessed </li> <li>7: task running (e.g., backing up or rolling back the instance) </li> <li>8: decommissioned </li> <li>9: scaling </li> <li>10: migrating </li> <li>11: read-only </li> <li>12: restarting </li>
+	// Instance status. Valid values: <li>1: creating</li> <li>2: running</li> <li>3: instance operations restricted (due to the ongoing primary-replica switch)</li> <li>4: isolated</li> <li>5: repossessing</li> <li>6: repossessed</li> <li>7: running tasks (such as backup and rollback tasks)</li> <li>8: eliminated</li> <li>9: expanding capacity</li> <li>10: migrating</li> <li>11: read-only</li> <li>12: restarting</li>  <li>13: modifying configuration and waiting for switch</li> <li>14: implementing pub/sub</li> <li>15: modifying pub/sub configuration</li> <li>16: modifying configuration and switching</li> <li>17: creating read-only instances</li>
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Instance access IP
@@ -855,6 +876,10 @@ type DBInstance struct {
 	// The list of tags associated with the instance
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Backup mode. Valid values: `master_pkg` (archive the backup files of the primary node (default value)), `master_no_pkg` (do not archive the backup files of the primary node), `slave_pkg` (archive the backup files of the replica node (valid for Always On clusters)), `slave_no_pkg` (do not archive the backup files of the replica node (valid for Always On clusters)). This parameter is invalid for read-only instances.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BackupModel *string `json:"BackupModel,omitempty" name:"BackupModel"`
 }
 
 type DBPrivilege struct {
@@ -1354,6 +1379,74 @@ func (r *DescribeBackupCommandResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeBackupFilesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of mssql-njj2mtpl
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Group ID of unarchived backup files, which can be obtained by the `DescribeBackups` API
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Number of entries to be returned per page. Value range: 1-100. Default value: `20`
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number. Default value: `0`
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter backups by database name. If the parameter is left empty, this filter criterion will not take effect.
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+}
+
+func (r *DescribeBackupFilesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupFilesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "GroupId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "DatabaseName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupFilesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupFilesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of backups
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of backup file details
+		BackupFiles []*BackupFile `json:"BackupFiles,omitempty" name:"BackupFiles"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBackupFilesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupFilesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeBackupMigrationRequest struct {
 	*tchttp.BaseRequest
 
@@ -1535,6 +1628,9 @@ type DescribeBackupsRequest struct {
 
 	// Filter backups by the database name. If the parameter is left empty, this filter criteria will not take effect.
 	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// Whether to group backup files by backup task. Valid value: `0` (no), `1` (yes). Default value: `0`. This parameter is valid only for unarchived backup files.
+	Group *int64 `json:"Group,omitempty" name:"Group"`
 }
 
 func (r *DescribeBackupsRequest) ToJsonString() string {
@@ -1559,6 +1655,7 @@ func (r *DescribeBackupsRequest) FromJsonString(s string) error {
 	delete(f, "BackupWay")
 	delete(f, "BackupId")
 	delete(f, "DatabaseName")
+	delete(f, "Group")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupsRequest has unknown keys!", "")
 	}
@@ -1696,6 +1793,9 @@ type DescribeDBInstancesRequest struct {
 
 	// Keyword used for fuzzy match, including instance ID, instance name, and instance private IP
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+
+	// Unique Uid of an instance
+	UidSet []*string `json:"UidSet,omitempty" name:"UidSet"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -1724,6 +1824,7 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "Zone")
 	delete(f, "TagKeys")
 	delete(f, "SearchKey")
+	delete(f, "UidSet")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
 	}
@@ -3214,6 +3315,9 @@ type ModifyBackupStrategyRequest struct {
 
 	// Backup interval in days when the `BackupType` is `daily`. Valid value: 1.
 	BackupDay *uint64 `json:"BackupDay,omitempty" name:"BackupDay"`
+
+	// Backup mode. Valid values: `master_pkg` (archive the backup files of the primary node), `master_no_pkg` (do not archive the backup files of the primary node), `slave_pkg` (archive the backup files of the replica node), `slave_no_pkg` (do not archive the backup files of the replica node). Backup files of the replica node are supported only when Always On disaster recovery is enabled.
+	BackupModel *string `json:"BackupModel,omitempty" name:"BackupModel"`
 }
 
 func (r *ModifyBackupStrategyRequest) ToJsonString() string {
@@ -3232,6 +3336,7 @@ func (r *ModifyBackupStrategyRequest) FromJsonString(s string) error {
 	delete(f, "BackupType")
 	delete(f, "BackupTime")
 	delete(f, "BackupDay")
+	delete(f, "BackupModel")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupStrategyRequest has unknown keys!", "")
 	}
@@ -4160,6 +4265,9 @@ type RestoreInstanceRequest struct {
 
 	// Restore the databases listed in `ReNameRestoreDatabase` and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format.
 	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore"`
+
+	// Group ID of unarchived backup files grouped by backup task. This parameter is returned by the [DescribeBackups](https://intl.cloud.tencent.com/document/product/238/19943?from_cn_redirect=1) API.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
 
 func (r *RestoreInstanceRequest) ToJsonString() string {
@@ -4178,6 +4286,7 @@ func (r *RestoreInstanceRequest) FromJsonString(s string) error {
 	delete(f, "BackupId")
 	delete(f, "TargetInstanceId")
 	delete(f, "RenameRestore")
+	delete(f, "GroupId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestoreInstanceRequest has unknown keys!", "")
 	}

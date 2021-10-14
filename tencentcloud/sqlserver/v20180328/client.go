@@ -622,6 +622,45 @@ func (c *Client) DescribeBackupCommand(request *DescribeBackupCommandRequest) (r
     return
 }
 
+func NewDescribeBackupFilesRequest() (request *DescribeBackupFilesRequest) {
+    request = &DescribeBackupFilesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupFiles")
+    return
+}
+
+func NewDescribeBackupFilesResponse() (response *DescribeBackupFilesResponse) {
+    response = &DescribeBackupFilesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBackupFiles
+// This API is used to query the list of unarchived database backup files.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_COSERROR = "InternalError.CosError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeBackupFiles(request *DescribeBackupFilesRequest) (response *DescribeBackupFilesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupFilesRequest()
+    }
+    response = NewDescribeBackupFilesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBackupMigrationRequest() (request *DescribeBackupMigrationRequest) {
     request = &DescribeBackupMigrationRequest{
         BaseRequest: &tchttp.BaseRequest{},

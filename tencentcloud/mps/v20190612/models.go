@@ -5181,6 +5181,12 @@ type LiveStreamTaskNotifyConfig struct {
 
 	// This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
+	NotifyType *string `json:"NotifyType,omitempty" name:"NotifyType"`
+
+	// HTTP callback URL, required if `NotifyType` is set to `URL`
+	NotifyUrl *string `json:"NotifyUrl,omitempty" name:"NotifyUrl"`
 }
 
 type ManageTaskRequest struct {

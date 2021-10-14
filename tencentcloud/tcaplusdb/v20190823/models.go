@@ -256,6 +256,14 @@ type ClusterInfo struct {
 	// Approver UIN list
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	DbaUins []*string `json:"DbaUins,omitempty" name:"DbaUins"`
+
+	// Whether data subscription is enabled
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DataFlowStatus *int64 `json:"DataFlowStatus,omitempty" name:"DataFlowStatus"`
+
+	// CKafka information when data subscription is enabled
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	KafkaInfo *KafkaInfo `json:"KafkaInfo,omitempty" name:"KafkaInfo"`
 }
 
 type CompareIdlFilesRequest struct {
@@ -446,6 +454,9 @@ type CreateClusterRequest struct {
 
 	// Cluster type. Valid values: `1` (standard), `2` (dedicated)
 	ClusterType *int64 `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// Authentication type. Valid values: `0` (static password), `1` (signature)
+	AuthType *int64 `json:"AuthType,omitempty" name:"AuthType"`
 }
 
 func (r *CreateClusterRequest) ToJsonString() string {
@@ -470,6 +481,7 @@ func (r *CreateClusterRequest) FromJsonString(s string) error {
 	delete(f, "ServerList")
 	delete(f, "ProxyList")
 	delete(f, "ClusterType")
+	delete(f, "AuthType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterRequest has unknown keys!", "")
 	}
@@ -838,6 +850,62 @@ func (r *DeleteSnapshotsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteSnapshotsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteTableDataFlowRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where the tables reside
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tables for which data subscription will be disabled
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
+func (r *DeleteTableDataFlowRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteTableDataFlowRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "SelectedTables")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteTableDataFlowRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteTableDataFlowResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of tables for which data subscription has been disabled
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The result list of tables for which data subscription has been disabled
+		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteTableDataFlowResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteTableDataFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2132,6 +2200,27 @@ func (r *ImportSnapshotsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type KafkaInfo struct {
+
+	// CKafka address
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// CKafka topic
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// CKafka username
+	User *string `json:"User,omitempty" name:"User"`
+
+	// CKafka password
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// CKafka instance
+	Instance *string `json:"Instance,omitempty" name:"Instance"`
+
+	// Whether VPC access is enabled
+	IsVpc *int64 `json:"IsVpc,omitempty" name:"IsVpc"`
+}
+
 type KeyFile struct {
 
 	// Key file name
@@ -3055,6 +3144,9 @@ type ProxyMachineInfo struct {
 
 	// Machine type
 	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// The number of proxy resources to be assigned
+	AvailableCount *int64 `json:"AvailableCount,omitempty" name:"AvailableCount"`
 }
 
 type RecoverRecycleTablesRequest struct {
@@ -3254,11 +3346,14 @@ type SelectedTableWithField struct {
 	// Table data structure. Valid values: `GENERIC`, `LIST`
 	TableType *string `json:"TableType,omitempty" name:"TableType"`
 
-	// The list of fields on which indexes need to be created
+	// The list of fields on which indexes will be created, table caching enabled, or data subscription enabled
 	SelectedFields []*FieldInfo `json:"SelectedFields,omitempty" name:"SelectedFields"`
 
 	// The number of index shards
 	ShardNum *uint64 `json:"ShardNum,omitempty" name:"ShardNum"`
+
+	// CKafka instance information
+	KafkaInfo *KafkaInfo `json:"KafkaInfo,omitempty" name:"KafkaInfo"`
 }
 
 type ServerDetailInfo struct {
@@ -3289,6 +3384,62 @@ type ServerMachineInfo struct {
 
 	// Machine type
 	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+}
+
+type SetTableDataFlowRequest struct {
+	*tchttp.BaseRequest
+
+	// The ID of the cluster where the tables reside
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tables for which data subscription will be enabled
+	SelectedTables []*SelectedTableWithField `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
+func (r *SetTableDataFlowRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetTableDataFlowRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "SelectedTables")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetTableDataFlowRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type SetTableDataFlowResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of tables for which data subscription has been enabled
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The result list of tables for which data subscription has been enabled
+		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SetTableDataFlowResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetTableDataFlowResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SetTableIndexRequest struct {
@@ -3547,7 +3698,8 @@ type TableInfoNew struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SortRule *int64 `json:"SortRule,omitempty" name:"SortRule"`
 
-	// Distributed index information of table
+	// Information about global indexes, table caching, or data subscription
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DbClusterInfoStruct *string `json:"DbClusterInfoStruct,omitempty" name:"DbClusterInfoStruct"`
 }
 

@@ -236,6 +236,7 @@ func NewCreateTableGroupResponse() (response *CreateTableGroupResponse) {
 // This API is used to create a table group in a TcaplusDB cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDTABLEGROUPNAME = "InvalidParameterValue.InvalidTableGroupName"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -388,6 +389,40 @@ func (c *Client) DeleteSnapshots(request *DeleteSnapshotsRequest) (response *Del
         request = NewDeleteSnapshotsRequest()
     }
     response = NewDeleteSnapshotsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteTableDataFlowRequest() (request *DeleteTableDataFlowRequest) {
+    request = &DeleteTableDataFlowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "DeleteTableDataFlow")
+    return
+}
+
+func NewDeleteTableDataFlowResponse() (response *DeleteTableDataFlowResponse) {
+    response = &DeleteTableDataFlowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteTableDataFlow
+// This API is used to disable data subscription for tables.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteTableDataFlow(request *DeleteTableDataFlowRequest) (response *DeleteTableDataFlowResponse, err error) {
+    if request == nil {
+        request = NewDeleteTableDataFlowRequest()
+    }
+    response = NewDeleteTableDataFlowResponse()
     err = c.Send(request, response)
     return
 }
@@ -1211,6 +1246,7 @@ func NewModifyClusterPasswordResponse() (response *ModifyClusterPasswordResponse
 // This API is used to change the password of a specified cluster. The backend will allow the TcaplusDB SDK to access databases with both old and new passwords before the old password expires. You cannot submit a new password change request before the old password expires or submit a request to modify the expiration time of the old password after the old password expires.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_OLDPASSWORDHASEXPIRED = "FailedOperation.OldPasswordHasExpired"
 //  FAILEDOPERATION_OLDPASSWORDINUSE = "FailedOperation.OldPasswordInUse"
 //  FAILEDOPERATION_PASSWORDFAILURE = "FailedOperation.PasswordFailure"
@@ -1570,6 +1606,42 @@ func (c *Client) RollbackTables(request *RollbackTablesRequest) (response *Rollb
         request = NewRollbackTablesRequest()
     }
     response = NewRollbackTablesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetTableDataFlowRequest() (request *SetTableDataFlowRequest) {
+    request = &SetTableDataFlowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "SetTableDataFlow")
+    return
+}
+
+func NewSetTableDataFlowResponse() (response *SetTableDataFlowResponse) {
+    response = &SetTableDataFlowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SetTableDataFlow
+// This API is used to enable data subscription for tables or modify the feature's configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SetTableDataFlow(request *SetTableDataFlowRequest) (response *SetTableDataFlowResponse, err error) {
+    if request == nil {
+        request = NewSetTableDataFlowRequest()
+    }
+    response = NewSetTableDataFlowResponse()
     err = c.Send(request, response)
     return
 }

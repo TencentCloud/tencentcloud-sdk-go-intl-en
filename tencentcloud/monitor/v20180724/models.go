@@ -3487,6 +3487,14 @@ type MetricSet struct {
 
 	// Dimension description
 	Dimensions []*DimensionsDesc `json:"Dimensions,omitempty" name:"Dimensions"`
+
+	// Metric name (in Chinese).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MetricCName *string `json:"MetricCName,omitempty" name:"MetricCName"`
+
+	// Metric name (in English).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MetricEName *string `json:"MetricEName,omitempty" name:"MetricEName"`
 }
 
 type MidQueryCondition struct {
