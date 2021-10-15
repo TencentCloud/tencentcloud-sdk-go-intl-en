@@ -179,6 +179,63 @@ func (r *CreateMultipleSecurityPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateReplicationInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Master instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Region ID of the replication instance
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitempty" name:"ReplicationRegionId"`
+
+	// Region name of the replication instance
+	ReplicationRegionName *string `json:"ReplicationRegionName,omitempty" name:"ReplicationRegionName"`
+}
+
+func (r *CreateReplicationInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateReplicationInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RegistryId")
+	delete(f, "ReplicationRegionId")
+	delete(f, "ReplicationRegionName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateReplicationInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateReplicationInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Enterprise Registry Instance ID
+		ReplicationRegistryId *string `json:"ReplicationRegistryId,omitempty" name:"ReplicationRegistryId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateReplicationInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateReplicationInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteImmutableTagRulesRequest struct {
 	*tchttp.BaseRequest
 
@@ -343,6 +400,199 @@ func (r *DescribeImmutableTagRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeReplicationInstanceCreateTasksRequest struct {
+	*tchttp.BaseRequest
+
+	// Replication instance ID
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitempty" name:"ReplicationRegistryId"`
+
+	// Region ID of the replication instance
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitempty" name:"ReplicationRegionId"`
+}
+
+func (r *DescribeReplicationInstanceCreateTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReplicationInstanceCreateTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ReplicationRegistryId")
+	delete(f, "ReplicationRegionId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeReplicationInstanceCreateTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReplicationInstanceCreateTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task details
+		TaskDetail []*TaskDetail `json:"TaskDetail,omitempty" name:"TaskDetail"`
+
+		// Overall task status
+		Status *string `json:"Status,omitempty" name:"Status"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeReplicationInstanceCreateTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReplicationInstanceCreateTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReplicationInstanceSyncStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Master instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Replication instance ID
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitempty" name:"ReplicationRegistryId"`
+
+	// Region ID of the replication instance
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitempty" name:"ReplicationRegionId"`
+
+	// Whether to show the synchronization log
+	ShowReplicationLog *bool `json:"ShowReplicationLog,omitempty" name:"ShowReplicationLog"`
+
+	// Page offset for log display. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of output entries. Default value: 5, maximum value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeReplicationInstanceSyncStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReplicationInstanceSyncStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RegistryId")
+	delete(f, "ReplicationRegistryId")
+	delete(f, "ReplicationRegionId")
+	delete(f, "ShowReplicationLog")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeReplicationInstanceSyncStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReplicationInstanceSyncStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Synchronization status
+		ReplicationStatus *string `json:"ReplicationStatus,omitempty" name:"ReplicationStatus"`
+
+		// Synchronization completion time
+		ReplicationTime *string `json:"ReplicationTime,omitempty" name:"ReplicationTime"`
+
+		// Synchronization log
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ReplicationLog *ReplicationLog `json:"ReplicationLog,omitempty" name:"ReplicationLog"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeReplicationInstanceSyncStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReplicationInstanceSyncStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReplicationInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of output entries. Default value: 20, maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeReplicationInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReplicationInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RegistryId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeReplicationInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeReplicationInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of instances
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Replication instance list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ReplicationRegistries []*ReplicationRegistry `json:"ReplicationRegistries,omitempty" name:"ReplicationRegistries"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeReplicationInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReplicationInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ImmutableTagRule struct {
 
 	// Repository matching rule
@@ -365,6 +615,72 @@ type ImmutableTagRule struct {
 
 	// Namespace
 	NsName *string `json:"NsName,omitempty" name:"NsName"`
+}
+
+type ManageReplicationRequest struct {
+	*tchttp.BaseRequest
+
+	// Source instance ID
+	SourceRegistryId *string `json:"SourceRegistryId,omitempty" name:"SourceRegistryId"`
+
+	// Destination instance ID
+	DestinationRegistryId *string `json:"DestinationRegistryId,omitempty" name:"DestinationRegistryId"`
+
+	// Synchronization rule
+	Rule *ReplicationRule `json:"Rule,omitempty" name:"Rule"`
+
+	// Rule description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Region ID of the destination instance. For example, `1` represents Guangzhou
+	DestinationRegionId *uint64 `json:"DestinationRegionId,omitempty" name:"DestinationRegionId"`
+
+	// Configuration of the synchronization rule
+	PeerReplicationOption *PeerReplicationOption `json:"PeerReplicationOption,omitempty" name:"PeerReplicationOption"`
+}
+
+func (r *ManageReplicationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ManageReplicationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SourceRegistryId")
+	delete(f, "DestinationRegistryId")
+	delete(f, "Rule")
+	delete(f, "Description")
+	delete(f, "DestinationRegionId")
+	delete(f, "PeerReplicationOption")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ManageReplicationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ManageReplicationResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ManageReplicationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ManageReplicationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyImmutableTagRulesRequest struct {
@@ -475,6 +791,90 @@ func (r *ModifyInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type PeerReplicationOption struct {
+
+	// UIN of the destination instance
+	PeerRegistryUin *string `json:"PeerRegistryUin,omitempty" name:"PeerRegistryUin"`
+
+	// Permanent access Token for the destination instance
+	PeerRegistryToken *string `json:"PeerRegistryToken,omitempty" name:"PeerRegistryToken"`
+
+	// Whether to enable cross-account synchronization
+	EnablePeerReplication *bool `json:"EnablePeerReplication,omitempty" name:"EnablePeerReplication"`
+}
+
+type ReplicationFilter struct {
+
+	// Type (`name`, `tag` and `resource`)
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// It is left blank by default
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type ReplicationLog struct {
+
+	// Resource type
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Path of the source resource
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Source *string `json:"Source,omitempty" name:"Source"`
+
+	// Path of the destination resource
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Destination *string `json:"Destination,omitempty" name:"Destination"`
+
+	// Synchronization status
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Start time
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+type ReplicationRegistry struct {
+
+	// Master instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Replication instance ID
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitempty" name:"ReplicationRegistryId"`
+
+	// Region ID of the replication instance
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitempty" name:"ReplicationRegionId"`
+
+	// Region name of the replication instance
+	ReplicationRegionName *string `json:"ReplicationRegionName,omitempty" name:"ReplicationRegionName"`
+
+	// Status of the replication instance
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Creation time
+	CreatedAt *string `json:"CreatedAt,omitempty" name:"CreatedAt"`
+}
+
+type ReplicationRule struct {
+
+	// Name of synchronization rule
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Destination namespace
+	DestNamespace *string `json:"DestNamespace,omitempty" name:"DestNamespace"`
+
+	// Whether to override
+	Override *bool `json:"Override,omitempty" name:"Override"`
+
+	// Synchronization filters
+	Filters []*ReplicationFilter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type SecurityPolicy struct {
 
 	// Policy index
@@ -488,4 +888,27 @@ type SecurityPolicy struct {
 
 	// The version of the security policy
 	PolicyVersion *string `json:"PolicyVersion,omitempty" name:"PolicyVersion"`
+}
+
+type TaskDetail struct {
+
+	// Task
+	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+	// Task UUID
+	TaskUUID *string `json:"TaskUUID,omitempty" name:"TaskUUID"`
+
+	// Task status
+	TaskStatus *string `json:"TaskStatus,omitempty" name:"TaskStatus"`
+
+	// Task details
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TaskMessage *string `json:"TaskMessage,omitempty" name:"TaskMessage"`
+
+	// Start time of the task
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// End time of the task
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FinishedTime *string `json:"FinishedTime,omitempty" name:"FinishedTime"`
 }

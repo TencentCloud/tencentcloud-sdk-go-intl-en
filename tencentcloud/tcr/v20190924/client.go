@@ -155,6 +155,46 @@ func (c *Client) CreateMultipleSecurityPolicy(request *CreateMultipleSecurityPol
     return
 }
 
+func NewCreateReplicationInstanceRequest() (request *CreateReplicationInstanceRequest) {
+    request = &CreateReplicationInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateReplicationInstance")
+    return
+}
+
+func NewCreateReplicationInstanceResponse() (response *CreateReplicationInstanceResponse) {
+    response = &CreateReplicationInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateReplicationInstance
+// This API is used to create a replication instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateReplicationInstance(request *CreateReplicationInstanceRequest) (response *CreateReplicationInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateReplicationInstanceRequest()
+    }
+    response = NewCreateReplicationInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteImmutableTagRulesRequest() (request *DeleteImmutableTagRulesRequest) {
     request = &DeleteImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -254,6 +294,155 @@ func (c *Client) DescribeImmutableTagRules(request *DescribeImmutableTagRulesReq
         request = NewDescribeImmutableTagRulesRequest()
     }
     response = NewDescribeImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReplicationInstanceCreateTasksRequest() (request *DescribeReplicationInstanceCreateTasksRequest) {
+    request = &DescribeReplicationInstanceCreateTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeReplicationInstanceCreateTasks")
+    return
+}
+
+func NewDescribeReplicationInstanceCreateTasksResponse() (response *DescribeReplicationInstanceCreateTasksResponse) {
+    response = &DescribeReplicationInstanceCreateTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeReplicationInstanceCreateTasks
+// This API is used to query the task status of creating a replication instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeReplicationInstanceCreateTasks(request *DescribeReplicationInstanceCreateTasksRequest) (response *DescribeReplicationInstanceCreateTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeReplicationInstanceCreateTasksRequest()
+    }
+    response = NewDescribeReplicationInstanceCreateTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReplicationInstanceSyncStatusRequest() (request *DescribeReplicationInstanceSyncStatusRequest) {
+    request = &DescribeReplicationInstanceSyncStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeReplicationInstanceSyncStatus")
+    return
+}
+
+func NewDescribeReplicationInstanceSyncStatusResponse() (response *DescribeReplicationInstanceSyncStatusResponse) {
+    response = &DescribeReplicationInstanceSyncStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeReplicationInstanceSyncStatus
+// This API is used to query the synchronization status of a replication instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeReplicationInstanceSyncStatus(request *DescribeReplicationInstanceSyncStatusRequest) (response *DescribeReplicationInstanceSyncStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeReplicationInstanceSyncStatusRequest()
+    }
+    response = NewDescribeReplicationInstanceSyncStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReplicationInstancesRequest() (request *DescribeReplicationInstancesRequest) {
+    request = &DescribeReplicationInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeReplicationInstances")
+    return
+}
+
+func NewDescribeReplicationInstancesResponse() (response *DescribeReplicationInstancesResponse) {
+    response = &DescribeReplicationInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeReplicationInstances
+// This API is used to query the list of replication instances.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINSUFFICIENT_ERRORINSTANCENOTRUNNING = "ResourceInsufficient.ErrorInstanceNotRunning"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeReplicationInstances(request *DescribeReplicationInstancesRequest) (response *DescribeReplicationInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeReplicationInstancesRequest()
+    }
+    response = NewDescribeReplicationInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewManageReplicationRequest() (request *ManageReplicationRequest) {
+    request = &ManageReplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "ManageReplication")
+    return
+}
+
+func NewManageReplicationResponse() (response *ManageReplicationResponse) {
+    response = &ManageReplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ManageReplication
+// This API is used to manage the instance synchronization rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ManageReplication(request *ManageReplicationRequest) (response *ManageReplicationResponse, err error) {
+    if request == nil {
+        request = NewManageReplicationRequest()
+    }
+    response = NewManageReplicationResponse()
     err = c.Send(request, response)
     return
 }
