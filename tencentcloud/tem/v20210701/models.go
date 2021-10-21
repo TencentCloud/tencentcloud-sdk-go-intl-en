@@ -734,7 +734,7 @@ type DescribeEnvironmentsRequest struct {
 	// Pagination limit
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page number
+	// Page offset
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Source
@@ -972,7 +972,7 @@ func (r *DescribeRelatedIngressesResponse) FromJsonString(s string) error {
 
 type DescribeRunPodPage struct {
 
-	// Page number
+	// Page offset
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of records per page
@@ -1515,7 +1515,7 @@ type RestartApplicationPodRequest struct {
 	// Number of items per page
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page number
+	// Page offset
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Pod status

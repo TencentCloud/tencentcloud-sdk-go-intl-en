@@ -5885,6 +5885,10 @@ type MediaVideoStreamItem struct {
 	// Color transfer
 	// Note: this field may return `null`, indicating that no valid value was found.
 	ColorTransfer *string `json:"ColorTransfer,omitempty" name:"ColorTransfer"`
+
+	// HDR type
+	// Note: This field may return `null`, indicating that no valid value was found.
+	HdrType *string `json:"HdrType,omitempty" name:"HdrType"`
 }
 
 type ModifyAIAnalysisTemplateRequest struct {

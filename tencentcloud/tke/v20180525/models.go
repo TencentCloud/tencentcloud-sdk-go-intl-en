@@ -1958,6 +1958,60 @@ func (r *DescribeClusterAsGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeClusterAuthenticationOptionsRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeClusterAuthenticationOptionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterAuthenticationOptionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterAuthenticationOptionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterAuthenticationOptionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// ServiceAccount authentication configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ServiceAccounts *ServiceAccountAuthenticationOptions `json:"ServiceAccounts,omitempty" name:"ServiceAccounts"`
+
+		// Result of the last modification. Values: `Updating`, `Success`, `Failed` or `TimeOut`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		LatestOperationState *string `json:"LatestOperationState,omitempty" name:"LatestOperationState"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterAuthenticationOptionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterAuthenticationOptionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeClusterCommonNamesRequest struct {
 	*tchttp.BaseRequest
 
@@ -2202,6 +2256,9 @@ type DescribeClusterKubeconfigRequest struct {
 
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Defaults to `false`, which means to obtain the kubeconfig of private network
+	IsExtranet *bool `json:"IsExtranet,omitempty" name:"IsExtranet"`
 }
 
 func (r *DescribeClusterKubeconfigRequest) ToJsonString() string {
@@ -2217,6 +2274,7 @@ func (r *DescribeClusterKubeconfigRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ClusterId")
+	delete(f, "IsExtranet")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterKubeconfigRequest has unknown keys!", "")
 	}
@@ -2545,8 +2603,39 @@ type DescribeClustersRequest struct {
 	// Maximum number of output entries. Default value: 20
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter condition. Currently, only filtering by a single ClusterName is supported
+	// ·  ClusterName
+	//     Filters by the cluster name
+	//     Type: String
+	//     Required: no
+	// 
+	// ·  Tags
+	//     Filters by key-value pairs of tags
+	//     Type: String
+	//     Required: no
+	// 
+	// ·  vpc-id
+	//     Filters by the VPC ID
+	//     Type: String
+	//     Required: no
+	// 
+	// ·  tag-key
+	//     Filters by the tag key
+	//     Type: String
+	//     Required: no
+	// 
+	// ·  tag-value
+	//     Filters by the tag value
+	//     Type: String
+	//     Required: no
+	// 
+	// ·  tag:tag-key
+	//     Filters by key-value pairs of tags
+	//     Type: String
+	//     Required: no
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Cluster type, such as `MANAGED_CLUSTER`
+	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
 }
 
 func (r *DescribeClustersRequest) ToJsonString() string {
@@ -2565,6 +2654,7 @@ func (r *DescribeClustersRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Filters")
+	delete(f, "ClusterType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClustersRequest has unknown keys!", "")
 	}
@@ -3729,6 +3819,56 @@ func (r *ModifyClusterAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyClusterAuthenticationOptionsRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// ServiceAccount authentication configuration
+	ServiceAccounts *ServiceAccountAuthenticationOptions `json:"ServiceAccounts,omitempty" name:"ServiceAccounts"`
+}
+
+func (r *ModifyClusterAuthenticationOptionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterAuthenticationOptionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "ServiceAccounts")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterAuthenticationOptionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyClusterAuthenticationOptionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyClusterAuthenticationOptionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterAuthenticationOptionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyClusterEndpointSPRequest struct {
 	*tchttp.BaseRequest
 
@@ -3811,6 +3951,9 @@ type ModifyClusterNodePoolRequest struct {
 
 	// Image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
 	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
+
+	// Node custom parameter
+	ExtraArgs *InstanceExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
 }
 
 func (r *ModifyClusterNodePoolRequest) ToJsonString() string {
@@ -3835,6 +3978,7 @@ func (r *ModifyClusterNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "EnableAutoscale")
 	delete(f, "OsName")
 	delete(f, "OsCustomizeType")
+	delete(f, "ExtraArgs")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterNodePoolRequest has unknown keys!", "")
 	}
@@ -4379,6 +4523,21 @@ type RunSecurityServiceEnabled struct {
 
 	// Whether to enable [Cloud Security](https://intl.cloud.tencent.com/document/product/296?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
 	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+}
+
+type ServiceAccountAuthenticationOptions struct {
+
+	// service-account-issuer
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Issuer *string `json:"Issuer,omitempty" name:"Issuer"`
+
+	// service-account-jwks-uri
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	JWKSURI *string `json:"JWKSURI,omitempty" name:"JWKSURI"`
+
+	// If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AutoCreateDiscoveryAnonymousAuth *bool `json:"AutoCreateDiscoveryAnonymousAuth,omitempty" name:"AutoCreateDiscoveryAnonymousAuth"`
 }
 
 type SetNodePoolNodeProtectionRequest struct {

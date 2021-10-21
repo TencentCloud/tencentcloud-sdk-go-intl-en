@@ -3400,9 +3400,9 @@ func NewModifyVodDomainAccelerateConfigResponse() (response *ModifyVodDomainAcce
 }
 
 // ModifyVodDomainAccelerateConfig
-// This API is used to enable or disable the acceleration region of a domain name on VOD.
+// This API is used to modify the acceleration region of a domain name on VOD.
 //
-// 1. You can enable or disable acceleration regions of only domain names whose status is `Online`.
+// 1. You can modify acceleration regions of only domain names whose status is `Online`.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

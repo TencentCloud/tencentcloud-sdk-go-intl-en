@@ -77,6 +77,9 @@ type AddInstancesRequest struct {
 
 	// Order source
 	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
+
+	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
 }
 
 func (r *AddInstancesRequest) ToJsonString() string {
@@ -103,6 +106,7 @@ func (r *AddInstancesRequest) FromJsonString(s string) error {
 	delete(f, "AutoVoucher")
 	delete(f, "DbType")
 	delete(f, "OrderSource")
+	delete(f, "DealMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddInstancesRequest has unknown keys!", "")
 	}
@@ -341,6 +345,21 @@ type CreateClustersRequest struct {
 	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be postpaid.
 	// Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
 	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+
+	// Array of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Array of alarm policy IDs
+	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitempty" name:"AlarmPolicyIds"`
+
+	// Array of parameters
+	ClusterParams []*ParamItem `json:"ClusterParams,omitempty" name:"ClusterParams"`
+
+	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+
+	// Parameter template ID
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
 }
 
 func (r *CreateClustersRequest) ToJsonString() string {
@@ -389,6 +408,11 @@ func (r *CreateClustersRequest) FromJsonString(s string) error {
 	delete(f, "AutoPause")
 	delete(f, "AutoPauseDelay")
 	delete(f, "StoragePayMode")
+	delete(f, "SecurityGroupIds")
+	delete(f, "AlarmPolicyIds")
+	delete(f, "ClusterParams")
+	delete(f, "DealMode")
+	delete(f, "ParamTemplateId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClustersRequest has unknown keys!", "")
 	}
@@ -407,12 +431,12 @@ type CreateClustersResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
 
-		// List of resource IDs (this parameter may not be returned in case of asynchronous delivery. We strongly recommend you call the `DescribeResourcesByDealName` API with the `dealNames` field to get the IDs of asynchronously delivered resources)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// List of resource IDs (This field has been deprecated. Please use `dealNames` in the `DescribeResourcesByDealName` API to get resource IDs.)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
-		// List of cluster IDs (this parameter may not be returned in case of asynchronous delivery. We strongly recommend you call the `DescribeResourcesByDealName` API with the `dealNames` field to get the IDs of asynchronously delivered clusters)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// List of cluster IDs (This field has been deprecated. Please use `dealNames` in the `DescribeResourcesByDealName` API to get cluster IDs.)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 
 		// Big order ID.
@@ -742,13 +766,12 @@ type CynosdbInstance struct {
 	// pause
 	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
 
-	// Storage billing mode
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
-
 	// Prepaid storage ID
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	StorageId *string `json:"StorageId,omitempty" name:"StorageId"`
+
+	// Storage billing mode
+	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
 }
 
 type CynosdbInstanceDetail struct {
@@ -2211,6 +2234,18 @@ func (r *OfflineInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ParamItem struct {
+
+	// Parameter name
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// New value
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Original value
+	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
+}
+
 type PolicyRule struct {
 
 	// Policy, which can be `ACCEPT` or `DROP`
@@ -2363,6 +2398,9 @@ type UpgradeInstanceRequest struct {
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
+
+	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
 }
 
 func (r *UpgradeInstanceRequest) ToJsonString() string {
@@ -2384,6 +2422,7 @@ func (r *UpgradeInstanceRequest) FromJsonString(s string) error {
 	delete(f, "StorageLimit")
 	delete(f, "AutoVoucher")
 	delete(f, "DbType")
+	delete(f, "DealMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeInstanceRequest has unknown keys!", "")
 	}

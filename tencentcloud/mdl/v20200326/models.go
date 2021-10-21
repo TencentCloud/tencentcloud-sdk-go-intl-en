@@ -176,7 +176,7 @@ type CreateStreamLiveChannelRequest struct {
 	// Channel name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Inputs to attach. You can attach 1-5 inputs.
+	// Inputs to attach. You can attach 1 to 5 inputs.
 	AttachedInputs []*AttachedInput `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
 
 	// Configuration information of the channel’s output groups. Quantity: [1, 10]
@@ -1337,7 +1337,7 @@ type ModifyStreamLiveChannelRequest struct {
 	// Channel name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Inputs to attach. You can attach 1-5 inputs.
+	// Inputs to attach. You can attach 1 to 5 inputs.
 	AttachedInputs []*AttachedInput `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
 
 	// Configuration information of the channel’s output groups. Quantity: [1, 10]

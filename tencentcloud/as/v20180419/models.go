@@ -548,9 +548,9 @@ type CreateAutoScalingGroupRequest struct {
 	// This parameter is valid only when `InstanceAllocationPolicy ` is set to `SPOT_MIXED`.
 	SpotMixedAllocationPolicy *SpotMixedAllocationPolicy `json:"SpotMixedAllocationPolicy,omitempty" name:"SpotMixedAllocationPolicy"`
 
-	// Indicates whether the capacity rebalancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
+	// Indicates whether the capacity re-balancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
 	// <br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
-	// <br><li>`FALSE`: no. AS will add instances to meet the desired capacity only after the spot instances are terminated.
+	// <br><li>`FALSE`: no. In this case, AS will add instances to meet the desired capacity only after the spot instances are terminated.
 	// 
 	// Default value: `False`.
 	CapacityRebalance *bool `json:"CapacityRebalance,omitempty" name:"CapacityRebalance"`
@@ -2671,7 +2671,7 @@ type ModifyAutoScalingGroupRequest struct {
 
 	// Indicates whether the capacity rebalancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
 	// <br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
-	// <br><li>`FALSE`: no. AS will add instances to meet the desired capacity only after the spot instances are terminated.
+	// <br><li>`FALSE`: no. In this case, AS will add instances to meet the desired capacity only after the spot instances are terminated.
 	CapacityRebalance *bool `json:"CapacityRebalance,omitempty" name:"CapacityRebalance"`
 }
 
