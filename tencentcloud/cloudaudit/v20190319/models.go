@@ -20,632 +20,155 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
-type ConfigurationItems struct {
-
-	// Time of getting a configuration item
-	ConfigurationItemCaptureTime *string `json:"ConfigurationItemCaptureTime,omitempty" name:"ConfigurationItemCaptureTime"`
-
-	// Resource relationship list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Relationships *string `json:"Relationships,omitempty" name:"Relationships"`
-
-	// This parameter takes effect only when `DiffMode` is set to `true`. When the input parameter `ChronologicalOrder` of the `GetConfigurationItems` API is set to `Forward`, details of the configuration item before the first one (if not a creation configuration item) will be returned. When this parameter is set to `Reverse`, details of the configuration item after the last one (if not a resource deletion configuration item) will be returned.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	LastItemInfo *string `json:"LastItemInfo,omitempty" name:"LastItemInfo"`
-
-	// List of events associated with the configuration changes
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	RelatedEvents []*RelatedEvent `json:"RelatedEvents,omitempty" name:"RelatedEvents"`
-
-	// Resource type
-	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
-
-	// Resource ID
-	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
-
-	// Configuration item ID
-	ConfigurationStateId *string `json:"ConfigurationStateId,omitempty" name:"ConfigurationStateId"`
-
-	// Resource creation time
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ResourceCreateTime *string `json:"ResourceCreateTime,omitempty" name:"ResourceCreateTime"`
-
-	// CFA version
-	Version *string `json:"Version,omitempty" name:"Version"`
-
-	// Resource region
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
-
-	// 
-	Configuration *string `json:"Configuration,omitempty" name:"Configuration"`
-
-	// Resource name
-	ResourceAlias *string `json:"ResourceAlias,omitempty" name:"ResourceAlias"`
-
-	// Configuration item status. Valid values: OK, ResourceDiscovered, ResourceNotRecorded, ResourceDeleted, ResourceDeletedNotRecorded.
-	ConfigurationItemStatus *string `json:"ConfigurationItemStatus,omitempty" name:"ConfigurationItemStatus"`
-}
-
-type CreateRecorderRequest struct {
+type DescribeEventsRequest struct {
 	*tchttp.BaseRequest
 
-	// Role name authorized to CFA
-	Role *string `json:"Role,omitempty" name:"Role"`
+	// Start timestamp in seconds (cannot be 90 days after the current time).
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Whether to select all supported resource types. Valid values: true (default), false.
-	AllSupported *bool `json:"AllSupported,omitempty" name:"AllSupported"`
+	// End timestamp in seconds (the time range for query is less than 30 days).
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Whether to enable the resource recorder. Valid values: true (default), false.
-	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+	// Credential for viewing more logs.
+	NextToken *uint64 `json:"NextToken,omitempty" name:"NextToken"`
 
-	// Resource recorder name. Default name: default.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	// Max number of returned logs (up to 50).
+	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
+
+	// Search criterion. Valid values: RequestId, EventName, ActionType (write/read), PrincipalId (sub-account), ResourceType, ResourceName, AccessKeyId, SensitiveAction, ApiErrorCode, and CamErrorCode.
+	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitempty" name:"LookupAttributes"`
+
+	// Whether to return the IP location. `1`: yes, `0`: no.
+	IsReturnLocation *uint64 `json:"IsReturnLocation,omitempty" name:"IsReturnLocation"`
 }
 
-func (r *CreateRecorderRequest) ToJsonString() string {
+func (r *DescribeEventsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateRecorderRequest) FromJsonString(s string) error {
+func (r *DescribeEventsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "Role")
-	delete(f, "AllSupported")
-	delete(f, "Enable")
-	delete(f, "Name")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRecorderRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateRecorderResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the recorder was created successfully
-		IsSuccess *bool `json:"IsSuccess,omitempty" name:"IsSuccess"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateRecorderResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateRecorderResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteRecorderRequest struct {
-	*tchttp.BaseRequest
-}
-
-func (r *DeleteRecorderRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteRecorderRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRecorderRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteRecorderResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the recorder was deleted successfully
-		IsSuccess *bool `json:"IsSuccess,omitempty" name:"IsSuccess"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeleteRecorderResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteRecorderResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeDiscoveredResourceRequest struct {
-	*tchttp.BaseRequest
-
-	// Request ID
-	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
-}
-
-func (r *DescribeDiscoveredResourceRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDiscoveredResourceRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ResourceId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDiscoveredResourceRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeDiscoveredResourceResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Last update time
-		LastUpdateTime *string `json:"LastUpdateTime,omitempty" name:"LastUpdateTime"`
-
-		// Resource type
-		ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
-
-		// Resource ID
-		ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
-
-		// Resource creation time
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-		// Tag details
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Tag *string `json:"Tag,omitempty" name:"Tag"`
-
-		// Current resource configuration details
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ResourceInfo *string `json:"ResourceInfo,omitempty" name:"ResourceInfo"`
-
-		// Resource region
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
-
-		// Resource alias
-		ResourceAlias *string `json:"ResourceAlias,omitempty" name:"ResourceAlias"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeDiscoveredResourceResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDiscoveredResourceResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRecorderRequest struct {
-	*tchttp.BaseRequest
-}
-
-func (r *DescribeRecorderRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRecorderRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRecorderRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRecorderResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether to enable the recorder. Valid values: true (enable), false (disable).
-		Enable *bool `json:"Enable,omitempty" name:"Enable"`
-
-		// Recorder name
-		Name *string `json:"Name,omitempty" name:"Name"`
-
-		// Last error message of the recorder, which corresponds to `LastErrorCode`.
-		LastErrorMessage *string `json:"LastErrorMessage,omitempty" name:"LastErrorMessage"`
-
-		// The status of the recorder when it recorded information last time. Valid values: PENDING, OK, FAILED.
-		LastStatus *string `json:"LastStatus,omitempty" name:"LastStatus"`
-
-		// List of the resource types monitored by the recorder
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ResourceTypes []*RecordResourceType `json:"ResourceTypes,omitempty" name:"ResourceTypes"`
-
-		// Time when the recorder was enabled last time
-		LastStartTime *string `json:"LastStartTime,omitempty" name:"LastStartTime"`
-
-		// Last error code of the recorder
-		LastErrorCode *string `json:"LastErrorCode,omitempty" name:"LastErrorCode"`
-
-		// Time when the recorder was disabled last time
-		LastStopTime *string `json:"LastStopTime,omitempty" name:"LastStopTime"`
-
-		// Whether to monitor all currently supported resource types. Valid values: true (yes), false (no).
-		AllSupported *bool `json:"AllSupported,omitempty" name:"AllSupported"`
-
-		// Recorder creation time
-		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-		// Role name authorized to CFA
-		Role *string `json:"Role,omitempty" name:"Role"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeRecorderResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRecorderResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type GetConfigurationItemsRequest struct {
-	*tchttp.BaseRequest
-
-	// Resource ID
-	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
-
-	// Chronological order. Valid values: Reverse, Forward (default).
-	ChronologicalOrder *string `json:"ChronologicalOrder,omitempty" name:"ChronologicalOrder"`
-
-	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// Offset. Default value: 0.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Whether to enable `DiffMode`. Valid values: true, false (default).
-	DiffMode *bool `json:"DiffMode,omitempty" name:"DiffMode"`
-
-	// Returned number. default: 10, maximum: 100.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-}
-
-func (r *GetConfigurationItemsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GetConfigurationItemsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ResourceId")
-	delete(f, "ChronologicalOrder")
 	delete(f, "StartTime")
-	delete(f, "Offset")
-	delete(f, "DiffMode")
-	delete(f, "Limit")
 	delete(f, "EndTime")
+	delete(f, "NextToken")
+	delete(f, "MaxResults")
+	delete(f, "LookupAttributes")
+	delete(f, "IsReturnLocation")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetConfigurationItemsRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEventsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type GetConfigurationItemsResponse struct {
+type DescribeEventsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Resource configuration item list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ConfigurationItems []*ConfigurationItems `json:"ConfigurationItems,omitempty" name:"ConfigurationItems"`
+		// Whether the logset ends.
+		ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
 
-		// Total number
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+		// Credential for viewing more logs.
+		NextToken *uint64 `json:"NextToken,omitempty" name:"NextToken"`
+
+		// Logset.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+		Events []*Event `json:"Events,omitempty" name:"Events"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *GetConfigurationItemsResponse) ToJsonString() string {
+func (r *DescribeEventsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *GetConfigurationItemsResponse) FromJsonString(s string) error {
+func (r *DescribeEventsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ListDiscoveredResourcesRequest struct {
-	*tchttp.BaseRequest
+type Event struct {
 
-	// Resource type
-	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+	// Log ID
+	EventId *string `json:"EventId,omitempty" name:"EventId"`
 
-	// Resource ID
-	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+	// Username
+	Username *string `json:"Username,omitempty" name:"Username"`
 
-	// Returned number. default: 20, maximum: 200.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	// Event Time
+	EventTime *string `json:"EventTime,omitempty" name:"EventTime"`
 
-	// Resource region
-	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+	// Log details
+	CloudAuditEvent *string `json:"CloudAuditEvent,omitempty" name:"CloudAuditEvent"`
 
-	// Offset. Default: 0.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	// Description of resource type in Chinese (please use this field as required; if you are using other languages, ignore this field)
+	ResourceTypeCn *string `json:"ResourceTypeCn,omitempty" name:"ResourceTypeCn"`
 
-	// Whether the resource is deleted
-	IsDeleted *bool `json:"IsDeleted,omitempty" name:"IsDeleted"`
-}
-
-func (r *ListDiscoveredResourcesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ListDiscoveredResourcesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ResourceType")
-	delete(f, "ResourceId")
-	delete(f, "Limit")
-	delete(f, "ResourceRegion")
-	delete(f, "Offset")
-	delete(f, "IsDeleted")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListDiscoveredResourcesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ListDiscoveredResourcesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Resource list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Resources []*Resources `json:"Resources,omitempty" name:"Resources"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ListDiscoveredResourcesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ListDiscoveredResourcesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ListSupportResourceTypesRequest struct {
-	*tchttp.BaseRequest
-}
-
-func (r *ListSupportResourceTypesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ListSupportResourceTypesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListSupportResourceTypesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ListSupportResourceTypesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of supported resource types
-		ResourceTypes []*SupportResourceType `json:"ResourceTypes,omitempty" name:"ResourceTypes"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ListSupportResourceTypesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ListSupportResourceTypesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type RecordResourceType struct {
-
-	// CAM policy name
-	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
-
-	// Modification time of resource types for monitoring
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
-
-	// Service
-	Service *string `json:"Service,omitempty" name:"Service"`
-
-	// Resource type
-	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
-
-	// Service name
-	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
-
-	// Resource type name
-	ResourceTypeName *string `json:"ResourceTypeName,omitempty" name:"ResourceTypeName"`
-}
-
-type RelatedEvent struct {
+	// Authentication error code
+	ErrorCode *int64 `json:"ErrorCode,omitempty" name:"ErrorCode"`
 
 	// Event name
 	EventName *string `json:"EventName,omitempty" name:"EventName"`
 
-	// Operation time
-	EventTime *string `json:"EventTime,omitempty" name:"EventTime"`
+	// Certificate ID
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
 
-	// ID of the operator account
-	OperateUin *uint64 `json:"OperateUin,omitempty" name:"OperateUin"`
+	// Request source
+	EventSource *string `json:"EventSource,omitempty" name:"EventSource"`
 
-	// CloudAudit event ID
-	EventReqId *string `json:"EventReqId,omitempty" name:"EventReqId"`
-}
-
-type Resources struct {
-
-	// Resource type
-	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
-
-	// Resource ID
-	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
-
-	// Resource creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	// Request ID
+	RequestID *string `json:"RequestID,omitempty" name:"RequestID"`
 
 	// Resource region
 	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
 
-	// Resource alias
-	ResourceAlias *string `json:"ResourceAlias,omitempty" name:"ResourceAlias"`
+	// Root account ID
+	AccountID *int64 `json:"AccountID,omitempty" name:"AccountID"`
 
-	// Whether the resource is deleted
-	IsDeleted *bool `json:"IsDeleted,omitempty" name:"IsDeleted"`
+	// Source IP
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	SourceIPAddress *string `json:"SourceIPAddress,omitempty" name:"SourceIPAddress"`
+
+	// Description of event name in Chinese (please use this field as required; if you are using other languages, ignore this field)
+	EventNameCn *string `json:"EventNameCn,omitempty" name:"EventNameCn"`
+
+	// Resource pair
+	Resources *Resource `json:"Resources,omitempty" name:"Resources"`
+
+	// Event region
+	EventRegion *string `json:"EventRegion,omitempty" name:"EventRegion"`
+
+	// IP location
+	Location *string `json:"Location,omitempty" name:"Location"`
 }
 
-type SupportResourceType struct {
+type LookupAttribute struct {
+
+	// Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	AttributeKey *string `json:"AttributeKey,omitempty" name:"AttributeKey"`
+
+	// Value of `AttributeValue`
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	AttributeValue *string `json:"AttributeValue,omitempty" name:"AttributeValue"`
+}
+
+type Resource struct {
 
 	// Resource type
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// CAM policy name
-	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
-
-	// Service name
-	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
-
-	// Resource type name in Chinese
-	ResourceTypeName *string `json:"ResourceTypeName,omitempty" name:"ResourceTypeName"`
-
-	// Service
-	Service *string `json:"Service,omitempty" name:"Service"`
-}
-
-type UpdateRecorderRequest struct {
-	*tchttp.BaseRequest
-
-	// Whether to select all currently supported resource types
-	AllSupported *bool `json:"AllSupported,omitempty" name:"AllSupported"`
-
-	// Whether to enable the recorder. Valid values: true (enable), false (disable).
-	Enable *bool `json:"Enable,omitempty" name:"Enable"`
-
-	// Recorder name after modification
-	Name *string `json:"Name,omitempty" name:"Name"`
-}
-
-func (r *UpdateRecorderRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpdateRecorderRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "AllSupported")
-	delete(f, "Enable")
-	delete(f, "Name")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateRecorderRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type UpdateRecorderResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the modification is successful
-		IsSuccess *bool `json:"IsSuccess,omitempty" name:"IsSuccess"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *UpdateRecorderResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpdateRecorderResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
+	// Resource name
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
 }

@@ -43,235 +43,32 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
-func NewCreateRecorderRequest() (request *CreateRecorderRequest) {
-    request = &CreateRecorderRequest{
+func NewDescribeEventsRequest() (request *DescribeEventsRequest) {
+    request = &DescribeEventsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "CreateRecorder")
+    request.Init().WithApiInfo("cloudaudit", APIVersion, "DescribeEvents")
     return
 }
 
-func NewCreateRecorderResponse() (response *CreateRecorderResponse) {
-    response = &CreateRecorderResponse{
+func NewDescribeEventsResponse() (response *DescribeEventsResponse) {
+    response = &DescribeEventsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// CreateRecorder
-// This API is used to create resource recorders to detect and record resource configuration changes.
+// DescribeEvents
+// This API is used to query CloudAudit logs.
 //
 // error code that may be returned:
-//  LIMITEXCEEDED_RECORDEROVERAMOUNT = "LimitExceeded.RecorderOverAmount"
-func (c *Client) CreateRecorder(request *CreateRecorderRequest) (response *CreateRecorderResponse, err error) {
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeEvents(request *DescribeEventsRequest) (response *DescribeEventsResponse, err error) {
     if request == nil {
-        request = NewCreateRecorderRequest()
+        request = NewDescribeEventsRequest()
     }
-    response = NewCreateRecorderResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteRecorderRequest() (request *DeleteRecorderRequest) {
-    request = &DeleteRecorderRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "DeleteRecorder")
-    return
-}
-
-func NewDeleteRecorderResponse() (response *DeleteRecorderResponse) {
-    response = &DeleteRecorderResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteRecorder
-// This API is used to delete resource recorders. After deletion, resource configuration changes will not be recorded.
-//
-// error code that may be returned:
-//  RESOURCENOTFOUND_RECORDERNOTFOUND = "ResourceNotFound.RecorderNotFound"
-func (c *Client) DeleteRecorder(request *DeleteRecorderRequest) (response *DeleteRecorderResponse, err error) {
-    if request == nil {
-        request = NewDeleteRecorderRequest()
-    }
-    response = NewDeleteRecorderResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeDiscoveredResourceRequest() (request *DescribeDiscoveredResourceRequest) {
-    request = &DescribeDiscoveredResourceRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "DescribeDiscoveredResource")
-    return
-}
-
-func NewDescribeDiscoveredResourceResponse() (response *DescribeDiscoveredResourceResponse) {
-    response = &DescribeDiscoveredResourceResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeDiscoveredResource
-// This API is used to view the basic information of discovered resources.
-//
-// error code that may be returned:
-//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
-func (c *Client) DescribeDiscoveredResource(request *DescribeDiscoveredResourceRequest) (response *DescribeDiscoveredResourceResponse, err error) {
-    if request == nil {
-        request = NewDescribeDiscoveredResourceRequest()
-    }
-    response = NewDescribeDiscoveredResourceResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeRecorderRequest() (request *DescribeRecorderRequest) {
-    request = &DescribeRecorderRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "DescribeRecorder")
-    return
-}
-
-func NewDescribeRecorderResponse() (response *DescribeRecorderResponse) {
-    response = &DescribeRecorderResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeRecorder
-// This API is used to display current configurations and status of a recorder.
-//
-// error code that may be returned:
-//  RESOURCENOTFOUND_RECORDERNOTFOUND = "ResourceNotFound.RecorderNotFound"
-func (c *Client) DescribeRecorder(request *DescribeRecorderRequest) (response *DescribeRecorderResponse, err error) {
-    if request == nil {
-        request = NewDescribeRecorderRequest()
-    }
-    response = NewDescribeRecorderResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewGetConfigurationItemsRequest() (request *GetConfigurationItemsRequest) {
-    request = &GetConfigurationItemsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "GetConfigurationItems")
-    return
-}
-
-func NewGetConfigurationItemsResponse() (response *GetConfigurationItemsResponse) {
-    response = &GetConfigurationItemsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// GetConfigurationItems
-// This API is used to get the list of resource configuration items and display resource configuration changes in chronological order.
-//
-// error code that may be returned:
-//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
-func (c *Client) GetConfigurationItems(request *GetConfigurationItemsRequest) (response *GetConfigurationItemsResponse, err error) {
-    if request == nil {
-        request = NewGetConfigurationItemsRequest()
-    }
-    response = NewGetConfigurationItemsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewListDiscoveredResourcesRequest() (request *ListDiscoveredResourcesRequest) {
-    request = &ListDiscoveredResourcesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "ListDiscoveredResources")
-    return
-}
-
-func NewListDiscoveredResourcesResponse() (response *ListDiscoveredResourcesResponse) {
-    response = &ListDiscoveredResourcesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ListDiscoveredResources
-// This API is used to view the list of discovered resources.
-//
-// error code that may be returned:
-//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
-func (c *Client) ListDiscoveredResources(request *ListDiscoveredResourcesRequest) (response *ListDiscoveredResourcesResponse, err error) {
-    if request == nil {
-        request = NewListDiscoveredResourcesRequest()
-    }
-    response = NewListDiscoveredResourcesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewListSupportResourceTypesRequest() (request *ListSupportResourceTypesRequest) {
-    request = &ListSupportResourceTypesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "ListSupportResourceTypes")
-    return
-}
-
-func NewListSupportResourceTypesResponse() (response *ListSupportResourceTypesResponse) {
-    response = &ListSupportResourceTypesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ListSupportResourceTypes
-// This API is used to query the list of all CFA supported resource types.
-//
-// error code that may be returned:
-//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
-func (c *Client) ListSupportResourceTypes(request *ListSupportResourceTypesRequest) (response *ListSupportResourceTypesResponse, err error) {
-    if request == nil {
-        request = NewListSupportResourceTypesRequest()
-    }
-    response = NewListSupportResourceTypesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewUpdateRecorderRequest() (request *UpdateRecorderRequest) {
-    request = &UpdateRecorderRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cloudaudit", APIVersion, "UpdateRecorder")
-    return
-}
-
-func NewUpdateRecorderResponse() (response *UpdateRecorderResponse) {
-    response = &UpdateRecorderResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// UpdateRecorder
-// This API is used to modify the resources to monitor, recorder name, and other recorder configurations.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_RECORDERNAMEREPEAT = "InvalidParameterValue.RecorderNameRepeat"
-//  RESOURCENOTFOUND_RECORDERNOTFOUND = "ResourceNotFound.RecorderNotFound"
-func (c *Client) UpdateRecorder(request *UpdateRecorderRequest) (response *UpdateRecorderResponse, err error) {
-    if request == nil {
-        request = NewUpdateRecorderRequest()
-    }
-    response = NewUpdateRecorderResponse()
+    response = NewDescribeEventsResponse()
     err = c.Send(request, response)
     return
 }
