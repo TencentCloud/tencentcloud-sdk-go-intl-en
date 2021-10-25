@@ -372,6 +372,31 @@ type DescribeOutput struct {
 	// RTMP configuration information of output.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RTMPSettings *DescribeOutputRTMPSettings `json:"RTMPSettings,omitempty" name:"RTMPSettings"`
+
+	// RTMP pull configuration of the output
+	// Note: This field may return `null`, indicating that no valid value was found.
+	RTMPPullSettings *DescribeOutputRTMPPullSettings `json:"RTMPPullSettings,omitempty" name:"RTMPPullSettings"`
+
+	// CIDR allowlist
+	// This parameter is valid if `Protocol` is set to `RTMP_PULL`. If this parameter is left empty, there is no restriction on clients’ IP addresses.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	AllowIpList []*string `json:"AllowIpList,omitempty" name:"AllowIpList"`
+}
+
+type DescribeOutputRTMPPullServerUrl struct {
+
+	// `tcUrl` of the RTMP pull URL
+	TcUrl *string `json:"TcUrl,omitempty" name:"TcUrl"`
+
+	// Stream key of the RTMP pull URL
+	StreamKey *string `json:"StreamKey,omitempty" name:"StreamKey"`
+}
+
+type DescribeOutputRTMPPullSettings struct {
+
+	// List of pull URLs
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ServerUrls []*DescribeOutputRTMPPullServerUrl `json:"ServerUrls,omitempty" name:"ServerUrls"`
 }
 
 type DescribeOutputRTMPSettings struct {

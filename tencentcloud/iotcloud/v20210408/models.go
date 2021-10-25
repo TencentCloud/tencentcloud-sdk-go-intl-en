@@ -491,7 +491,8 @@ type DescribeDeviceResponse struct {
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 		FirmwareUpdateTime *uint64 `json:"FirmwareUpdateTime,omitempty" name:"FirmwareUpdateTime"`
 
-		// 
+		// Account ID of the creator
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		CreateUserId *uint64 `json:"CreateUserId,omitempty" name:"CreateUserId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1005,6 +1006,56 @@ type ProductProperties struct {
 
 	// Original user ID of a transferred product. This parameter is empty for products that are not transferred.
 	OriginUserId *uint64 `json:"OriginUserId,omitempty" name:"OriginUserId"`
+}
+
+type SetProductsForbiddenStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// List of products to enable or disable
+	ProductId []*string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// `0`: enable; `1`: disable
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
+func (r *SetProductsForbiddenStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetProductsForbiddenStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProductId")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetProductsForbiddenStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type SetProductsForbiddenStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SetProductsForbiddenStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetProductsForbiddenStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type UpdateDeviceLogLevelRequest struct {

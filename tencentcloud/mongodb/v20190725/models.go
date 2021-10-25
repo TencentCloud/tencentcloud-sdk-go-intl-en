@@ -287,10 +287,10 @@ type CreateDBInstanceHourRequest struct {
 	// Number of replica sets. When a replica set instance is created, this parameter must be set to 1. When a sharding instance is created, please see the parameters returned by the DescribeSpecInfo API
 	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
 
-	// Number of nodes in each replica set. Currently, the number of nodes in a replica set is fixed at 3, while the number of shards is customizable. For more information, please see the parameter returned by the DescribeSpecInfo API
+	// The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
-	// Version number. For the specific purchasable versions supported, please see the return result of the DescribeSpecInfo API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition
+	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition; MONGO_42_WT: MongoDB 4.2 WiredTiger Edition.
 	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
 
 	// Server type. HIO: high IO; HIO10G: 10-Gigabit high IO
@@ -299,7 +299,7 @@ type CreateDBInstanceHourRequest struct {
 	// Number of instances. Minimum value: 1. Maximum value: 10
 	GoodsNum *uint64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
 
-	// AZ information in the format of ap-guangzhou-2
+	// AZ in the format of ap-guangzhou-2. If multi-AZ deployment is enabled, this parameter refers to the primary AZ and must be one of the values of `AvailabilityZoneList`.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// Instance type. REPLSET: replica set; SHARD: sharding cluster
@@ -320,7 +320,7 @@ type CreateDBInstanceHourRequest struct {
 	// Instance tag information
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 
-	// Valid values: 1 (regular instance), 2 (temp instance), 3 (read-only instance), 4 (disaster recovery instance).
+	// Instance type. Valid values: `1` (primary instance), `2` (temp instance), `3` (read-only instance), `4` (disaster recovery instance), `5` (cloned instance).
 	Clone *int64 `json:"Clone,omitempty" name:"Clone"`
 
 	// Parent instance ID. It is required if the `Clone` is 3 or 4.
@@ -328,6 +328,24 @@ type CreateDBInstanceHourRequest struct {
 
 	// Security group.
 	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// The point in time to which the cloned instance will be rolled back. This parameter is required for a cloned instance. The point in time in the format of 2021-08-13 16:30:00 must be within the last seven days.
+	RestoreTime *string `json:"RestoreTime,omitempty" name:"RestoreTime"`
+
+	// Instance name, which can contain up to 60 letters, digits, or symbols (_-).
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// AZ list when multi-AZ deployment is enabled. For the specific purchasable versions which support multi-AZ deployment, please see the return result of the `DescribeSpecInfo` API. Notes: 1. Nodes of a multi-AZ instance must be deployed across three AZs. 2. To ensure a successful cross-AZ switch, you should not deploy most of the nodes to the same AZ. (For example, a three-node sharded cluster instance does not support deploying two or more nodes in the same AZ.) 3. MongoDB 4.2 and later versions do not support multi-AZ deployment. 4. Read-Only and disaster recovery instances do not support multi-AZ deployment. 5. Instances in the classic network do not support multi-AZ deployment.
+	AvailabilityZoneList []*string `json:"AvailabilityZoneList,omitempty" name:"AvailabilityZoneList"`
+
+	// The number of mongos CPUs, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+	MongosCpu *uint64 `json:"MongosCpu,omitempty" name:"MongosCpu"`
+
+	// The size of mongos memory, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+	MongosMemory *uint64 `json:"MongosMemory,omitempty" name:"MongosMemory"`
+
+	// The number of mongos routers, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. Note: please purchase 3-32 mongos routers for high availability.
+	MongosNodeNum *uint64 `json:"MongosNodeNum,omitempty" name:"MongosNodeNum"`
 }
 
 func (r *CreateDBInstanceHourRequest) ToJsonString() string {
@@ -359,6 +377,12 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 	delete(f, "Clone")
 	delete(f, "Father")
 	delete(f, "SecurityGroup")
+	delete(f, "RestoreTime")
+	delete(f, "InstanceName")
+	delete(f, "AvailabilityZoneList")
+	delete(f, "MongosCpu")
+	delete(f, "MongosMemory")
+	delete(f, "MongosNodeNum")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceHourRequest has unknown keys!", "")
 	}
@@ -394,7 +418,7 @@ func (r *CreateDBInstanceHourResponse) FromJsonString(s string) error {
 type CreateDBInstanceRequest struct {
 	*tchttp.BaseRequest
 
-	// Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of secondary nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
+	// The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
 	// Instance memory size in GB.
@@ -403,13 +427,13 @@ type CreateDBInstanceRequest struct {
 	// Instance disk size in GB.
 	Volume *uint64 `json:"Volume,omitempty" name:"Volume"`
 
-	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition.
+	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition; MONGO_42_WT: MongoDB 4.2 WiredTiger Edition.
 	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
 
 	// Number of instances. Minimum value: 1. Maximum value: 10.
 	GoodsNum *uint64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
 
-	// Instance region name in the format of ap-guangzhou-2.
+	// AZ in the format of ap-guangzhou-2. If multi-AZ deployment is enabled, this parameter refers to the primary AZ and must be one of the values of `AvailabilityZoneList`.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
 	// Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
@@ -445,14 +469,32 @@ type CreateDBInstanceRequest struct {
 	// Whether to automatically use a voucher. Valid values: 1 (yes), 0 (no). Default value: 0.
 	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
-	// Valid values: 1 (regular instance), 2 (temp instance), 3 (read-only instance), 4 (disaster recovery instance).
+	// Instance type. Valid values: `1` (primary instance), `2` (temp instance), `3` (read-only instance), `4` (disaster recovery instance), `5` (cloned instance).
 	Clone *int64 `json:"Clone,omitempty" name:"Clone"`
 
-	// Primary instance ID. It is required for read-only and disaster recovery instances.
+	// Primary instance ID. It is required for read-only, disaster recovery, and cloned instances.
 	Father *string `json:"Father,omitempty" name:"Father"`
 
 	// Security group.
 	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// The point in time to which the cloned instance will be rolled back. This parameter is required for a cloned instance. The point in time in the format of 2021-08-13 16:30:00 must be within the last seven days.
+	RestoreTime *string `json:"RestoreTime,omitempty" name:"RestoreTime"`
+
+	// Instance name, which can contain up to 60 letters, digits, or symbols (_-).
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// AZ list when multi-AZ deployment is enabled. For the specific purchasable versions which support multi-AZ deployment, please see the return result of the `DescribeSpecInfo` API. Notes: 1. Nodes of a multi-AZ instance must be deployed across three AZs. 2. To ensure a successful cross-AZ switch, you should not deploy most of the nodes to the same AZ. (For example, a three-node sharded cluster instance does not support deploying two or more nodes in the same AZ.) 3. MongoDB 4.2 and later versions do not support multi-AZ deployment. 4. Read-Only and disaster recovery instances do not support multi-AZ deployment. 5. Instances in the classic network do not support multi-AZ deployment.
+	AvailabilityZoneList []*string `json:"AvailabilityZoneList,omitempty" name:"AvailabilityZoneList"`
+
+	// The number of mongos CPUs, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+	MongosCpu *uint64 `json:"MongosCpu,omitempty" name:"MongosCpu"`
+
+	// The size of mongos memory, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+	MongosMemory *uint64 `json:"MongosMemory,omitempty" name:"MongosMemory"`
+
+	// The number of mongos routers, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. Note: please purchase 3-32 mongos routers for high availability.
+	MongosNodeNum *uint64 `json:"MongosNodeNum,omitempty" name:"MongosNodeNum"`
 }
 
 func (r *CreateDBInstanceRequest) ToJsonString() string {
@@ -487,6 +529,12 @@ func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "Clone")
 	delete(f, "Father")
 	delete(f, "SecurityGroup")
+	delete(f, "RestoreTime")
+	delete(f, "InstanceName")
+	delete(f, "AvailabilityZoneList")
+	delete(f, "MongosCpu")
+	delete(f, "MongosMemory")
+	delete(f, "MongosNodeNum")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceRequest has unknown keys!", "")
 	}
@@ -571,7 +619,7 @@ type DescribeAsyncRequestInfoResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Status.
+		// Status. Valid values: `initial` (initializing), `running`, `paused` (paused due to failure), `undoed` (rolled back due to failure), `failed` (ended due to failure), `success`
 		Status *string `json:"Status,omitempty" name:"Status"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

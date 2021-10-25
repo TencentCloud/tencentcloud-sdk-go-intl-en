@@ -425,6 +425,37 @@ func (c *Client) DescribeProductCA(request *DescribeProductCARequest) (response 
     return
 }
 
+func NewSetProductsForbiddenStatusRequest() (request *SetProductsForbiddenStatusRequest) {
+    request = &SetProductsForbiddenStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("iotcloud", APIVersion, "SetProductsForbiddenStatus")
+    return
+}
+
+func NewSetProductsForbiddenStatusResponse() (response *SetProductsForbiddenStatusResponse) {
+    response = &SetProductsForbiddenStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SetProductsForbiddenStatus
+// This API is used to enable or disable multiple products at a time.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
+func (c *Client) SetProductsForbiddenStatus(request *SetProductsForbiddenStatusRequest) (response *SetProductsForbiddenStatusResponse, err error) {
+    if request == nil {
+        request = NewSetProductsForbiddenStatusRequest()
+    }
+    response = NewSetProductsForbiddenStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateDeviceLogLevelRequest() (request *UpdateDeviceLogLevelRequest) {
     request = &UpdateDeviceLogLevelRequest{
         BaseRequest: &tchttp.BaseRequest{},
