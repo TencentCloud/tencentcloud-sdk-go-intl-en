@@ -166,6 +166,9 @@ type Code struct {
 
 	// Git user name after encryption. In general, this value is not required.
 	GitUserNameSecret *string `json:"GitUserNameSecret,omitempty" name:"GitUserNameSecret"`
+
+	// TCR image configurations
+	ImageConfig *ImageConfig `json:"ImageConfig,omitempty" name:"ImageConfig"`
 }
 
 type CopyFunctionRequest struct {
@@ -373,7 +376,7 @@ type CreateFunctionRequest struct {
 	// File system configuration parameter, which is used for the function to mount the file system
 	CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
 
-	// Timeout period for function initialization
+	// The function initialization timeout period. It defaults to 65s for general cases and 90s for image deployment functions.
 	InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
 
 	// Tag parameter of the function. It is an array of key-value pairs.
@@ -506,7 +509,7 @@ type CreateTriggerRequest struct {
 	// Name of a new trigger. For a timer trigger, the name can contain up to 100 letters, digits, dashes, and underscores; for a COS trigger, it should be an access domain name of the corresponding COS bucket applicable to the XML API (e.g., 5401-5ff414-12345.cos.ap-shanghai.myqcloud.com); for other triggers, please see the descriptions of parameters bound to the specific trigger.
 	TriggerName *string `json:"TriggerName,omitempty" name:"TriggerName"`
 
-	// Trigger type. Currently, COS, CMQ, timer, and ckafka triggers are supported.
+	// Type of trigger. Values: `cos`, `cmq`, `timer`, `ckafka` and `apigw`. To create a CLS trigger, please refer to [Creating Shipping Task (SCF)](https://intl.cloud.tencent.com/document/product/614/61096?from_cn_redirect=1).
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// For parameters of triggers, see [Trigger Description](https://intl.cloud.tencent.com/document/product/583/39901?from_cn_redirect=1)
@@ -843,7 +846,7 @@ func (r *DeleteProvisionedConcurrencyConfigResponse) FromJsonString(s string) er
 type DeleteReservedConcurrencyConfigRequest struct {
 	*tchttp.BaseRequest
 
-	// Name of the function for which to delete the provisioned concurrency
+	// Specifies the function of which you want to delete the reserved quota
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
 	// Function namespace. Default value: `default`
@@ -1041,6 +1044,12 @@ type Function struct {
 	// Reserved memory for function concurrence
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ReservedConcurrencyMem *uint64 `json:"ReservedConcurrencyMem,omitempty" name:"ReservedConcurrencyMem"`
+
+	// Asynchronization attribute of the function. Values: `TRUE` and `FALSE`.
+	AsyncRunEnable *string `json:"AsyncRunEnable,omitempty" name:"AsyncRunEnable"`
+
+	// Whether to enable call tracing for ansynchronized functions. Values: `TRUE` and `FALSE`.
+	TraceEnable *string `json:"TraceEnable,omitempty" name:"TraceEnable"`
 }
 
 type FunctionLog struct {
@@ -1780,7 +1789,7 @@ func (r *GetProvisionedConcurrencyConfigResponse) FromJsonString(s string) error
 type GetReservedConcurrencyConfigRequest struct {
 	*tchttp.BaseRequest
 
-	// Name of the function for which to get the provisioned concurrency details.
+	// Specifies the function of which you want to obtain the reserved quota
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
 	// Function namespace. Default value: default.
@@ -1811,8 +1820,8 @@ type GetReservedConcurrencyConfigResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Reserved concurrency memory of function.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// The reserved quota of the function
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		ReservedMem *uint64 `json:"ReservedMem,omitempty" name:"ReservedMem"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1831,6 +1840,31 @@ func (r *GetReservedConcurrencyConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ImageConfig struct {
+
+	// Image repository type, which can be `personal` or `enterprise`
+	ImageType *string `json:"ImageType,omitempty" name:"ImageType"`
+
+	// {domain}/{namespace}/{imageName}:{tag}@{digest}
+	ImageUri *string `json:"ImageUri,omitempty" name:"ImageUri"`
+
+	// The temp token that a TCR Enterprise instance uses to obtain an image. It’s required when `ImageType` is `enterprise`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Entry point of the application
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EntryPoint *string `json:"EntryPoint,omitempty" name:"EntryPoint"`
+
+	// entrypoint execution command
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Command *string `json:"Command,omitempty" name:"Command"`
+
+	// Command parameters
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Args *string `json:"Args,omitempty" name:"Args"`
+}
+
 type InvokeFunctionRequest struct {
 	*tchttp.BaseRequest
 
@@ -1840,7 +1874,7 @@ type InvokeFunctionRequest struct {
 	// Version or alias of the function. It defaults to `$DEFAULT`.
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 
-	// Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB.
+	// Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB. This field corresponds to [event input parameter](https://intl.cloud.tencent.com/document/product/583/9210?from_cn_redirect=1#.E5.87.BD.E6.95.B0.E5.85.A5.E5.8F.82.3Ca-id.3D.22input.22.3E.3C.2Fa.3E).
 	Event *string `json:"Event,omitempty" name:"Event"`
 
 	// Valid value: `None` (default) or `Tail`. If the value is `Tail`, `log` in the response will contain the corresponding function execution log (up to 4KB).
@@ -1906,16 +1940,16 @@ type InvokeRequest struct {
 	// Function name
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
-	// The value is `RequestResponse` (synchronous) or `Event` (asynchronous). The default value is synchronous.
+	// Fill in `RequestResponse` for synchronized invocations (default and recommended) and `Event` for asychronized invocations. Note that for synchronized invocations, the max timeout period is 300s. Choose asychronized invocations if the required timeout period is longer than 300 seconds. You can also use [InvokeFunction](https://intl.cloud.tencent.com/document/product/583/58400?from_cn_redirect=1) for synchronized invocations. 
 	InvocationType *string `json:"InvocationType,omitempty" name:"InvocationType"`
 
 	// Version number or name of the triggered function
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 
-	// Function running parameter, which is in the JSON format. Maximum parameter size is 1 MB.
+	// Function running parameter, which is in the JSON format. The maximum parameter size is 6 MB for synchronized invocations and 128KB for asynchronized invocations. This field corresponds to [event input parameter](https://intl.cloud.tencent.com/document/product/583/9210?from_cn_redirect=1#.E5.87.BD.E6.95.B0.E5.85.A5.E5.8F.82.3Ca-id.3D.22input.22.3E.3C.2Fa.3E).
 	ClientContext *string `json:"ClientContext,omitempty" name:"ClientContext"`
 
-	// If this field is specified during sync invocation, the returned value will contain 4 KB of logs. Valid values: None, Tail. Default value: None. If the value is `Tail`, the `Log` field in the returned parameter will contain the corresponding function execution log
+	// Null for async invocations
 	LogType *string `json:"LogType,omitempty" name:"LogType"`
 
 	// Namespace
@@ -2918,10 +2952,10 @@ func (r *PutProvisionedConcurrencyConfigResponse) FromJsonString(s string) error
 type PutReservedConcurrencyConfigRequest struct {
 	*tchttp.BaseRequest
 
-	// Name of the function for which to set the provisioned concurrency
+	// Specifies the function of which you want to configure the reserved quota
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
-	// Reserved concurrency memory of function. Note: the upper limit for the total reserved concurrency memory of the function is the user's total concurrency memory minus 12800
+	// Reserved memory quota of the function. Note: the upper limit for the total reserved quota of the function is the user's total concurrency memory minus 12800
 	ReservedConcurrencyMem *uint64 `json:"ReservedConcurrencyMem,omitempty" name:"ReservedConcurrencyMem"`
 
 	// Function namespace. Default value: `default`
@@ -3472,7 +3506,7 @@ type UpdateFunctionConfigurationRequest struct {
 	// File system configuration input parameter, which is used for the function to bind the CFS file system
 	CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
 
-	// Timeout period for function initialization. Default value: 15 seconds
+	// The function initialization timeout period
 	InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
 }
 

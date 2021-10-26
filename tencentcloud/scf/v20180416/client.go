@@ -202,11 +202,13 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  INVALIDPARAMETERVALUE_GITCOMMITID = "InvalidParameterValue.GitCommitId"
 //  INVALIDPARAMETERVALUE_GITURL = "InvalidParameterValue.GitUrl"
 //  INVALIDPARAMETERVALUE_HANDLER = "InvalidParameterValue.Handler"
+//  INVALIDPARAMETERVALUE_IDLETIMEOUT = "InvalidParameterValue.IdleTimeOut"
 //  INVALIDPARAMETERVALUE_LAYERS = "InvalidParameterValue.Layers"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MEMORY = "InvalidParameterValue.Memory"
 //  INVALIDPARAMETERVALUE_MEMORYSIZE = "InvalidParameterValue.MemorySize"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
+//  INVALIDPARAMETERVALUE_PROTOCOLTYPE = "InvalidParameterValue.ProtocolType"
 //  INVALIDPARAMETERVALUE_PUBLICNETCONFIG = "InvalidParameterValue.PublicNetConfig"
 //  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
 //  INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
@@ -214,6 +216,7 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  INVALIDPARAMETERVALUE_TRACEENABLE = "InvalidParameterValue.TraceEnable"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  INVALIDPARAMETERVALUE_VPCNOTSETWHENOPENCFS = "InvalidParameterValue.VpcNotSetWhenOpenCfs"
+//  INVALIDPARAMETERVALUE_WEBSOCKETSPARAMS = "InvalidParameterValue.WebSocketsParams"
 //  INVALIDPARAMETERVALUE_ZIPFILE = "InvalidParameterValue.ZipFile"
 //  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
 //  LIMITEXCEEDED_EIP = "LimitExceeded.Eip"
@@ -581,7 +584,7 @@ func NewDeleteReservedConcurrencyConfigResponse() (response *DeleteReservedConcu
 }
 
 // DeleteReservedConcurrencyConfig
-// This API is used to delete the reserved concurrency configuration of a function.
+// This API is used to delete the configuration of reserved quota.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DEBUGMODESTATUS = "FailedOperation.DebugModeStatus"
@@ -987,7 +990,7 @@ func NewGetReservedConcurrencyConfigResponse() (response *GetReservedConcurrency
 }
 
 // GetReservedConcurrencyConfig
-// This API is used to get the reserved concurrency details of a function.
+// This API is used to obtain the reserved quota details of a function. 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1478,15 +1481,26 @@ func NewPutProvisionedConcurrencyConfigResponse() (response *PutProvisionedConcu
 //  FAILEDOPERATION_DEBUGMODESTATUS = "FailedOperation.DebugModeStatus"
 //  FAILEDOPERATION_FUNCTIONVERSIONSTATUSNOTACTIVE = "FailedOperation.FunctionVersionStatusNotActive"
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_PROVISIONCREATETIMER = "FailedOperation.ProvisionCreateTimer"
+//  FAILEDOPERATION_PROVISIONDELETETIMER = "FailedOperation.ProvisionDeleteTimer"
 //  FAILEDOPERATION_PROVISIONEDINPROGRESS = "FailedOperation.ProvisionedInProgress"
 //  FAILEDOPERATION_UNOPENEDSERVICE = "FailedOperation.UnOpenedService"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_PROVISIONTRIGGERCRONCONFIGDUPLICATE = "InvalidParameterValue.ProvisionTriggerCronConfigDuplicate"
+//  INVALIDPARAMETERVALUE_PROVISIONTRIGGERNAME = "InvalidParameterValue.ProvisionTriggerName"
+//  INVALIDPARAMETERVALUE_PROVISIONTRIGGERNAMEDUPLICATE = "InvalidParameterValue.ProvisionTriggerNameDuplicate"
+//  INVALIDPARAMETERVALUE_PROVISIONTYPE = "InvalidParameterValue.ProvisionType"
 //  INVALIDPARAMETERVALUE_QUALIFIER = "InvalidParameterValue.Qualifier"
+//  INVALIDPARAMETERVALUE_TRIGGERCRONCONFIG = "InvalidParameterValue.TriggerCronConfig"
+//  INVALIDPARAMETERVALUE_TRIGGERCRONCONFIGTIMEINTERVAL = "InvalidParameterValue.TriggerCronConfigTimeInterval"
+//  INVALIDPARAMETERVALUE_TRIGGERPROVISIONEDCONCURRENCYNUM = "InvalidParameterValue.TriggerProvisionedConcurrencyNum"
 //  LIMITEXCEEDED_FUNCTIONPROVISIONEDCONCURRENCYMEMORY = "LimitExceeded.FunctionProvisionedConcurrencyMemory"
 //  LIMITEXCEEDED_FUNCTIONTOTALPROVISIONEDCONCURRENCYMEMORY = "LimitExceeded.FunctionTotalProvisionedConcurrencyMemory"
 //  LIMITEXCEEDED_FUNCTIONTOTALPROVISIONEDCONCURRENCYNUM = "LimitExceeded.FunctionTotalProvisionedConcurrencyNum"
+//  LIMITEXCEEDED_PROVISIONTRIGGERACTION = "LimitExceeded.ProvisionTriggerAction"
+//  LIMITEXCEEDED_PROVISIONTRIGGERINTERVAL = "LimitExceeded.ProvisionTriggerInterval"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
@@ -1519,7 +1533,7 @@ func NewPutReservedConcurrencyConfigResponse() (response *PutReservedConcurrency
 }
 
 // PutReservedConcurrencyConfig
-// This API is used to set the reserved concurrency of a function.
+// This API is used to configure the reserved quota of a function.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DEBUGMODESTATUS = "FailedOperation.DebugModeStatus"
@@ -1755,6 +1769,7 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 //  INVALIDPARAMETERVALUE_ENVIRONMENTSYSTEMPROTECT = "InvalidParameterValue.EnvironmentSystemProtect"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_HANDLER = "InvalidParameterValue.Handler"
+//  INVALIDPARAMETERVALUE_IDLETIMEOUT = "InvalidParameterValue.IdleTimeOut"
 //  INVALIDPARAMETERVALUE_LAYERS = "InvalidParameterValue.Layers"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MEMORY = "InvalidParameterValue.Memory"
@@ -1764,6 +1779,7 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 //  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
 //  INVALIDPARAMETERVALUE_SYSTEMENVIRONMENT = "InvalidParameterValue.SystemEnvironment"
 //  INVALIDPARAMETERVALUE_TRACEENABLE = "InvalidParameterValue.TraceEnable"
+//  INVALIDPARAMETERVALUE_WEBSOCKETSPARAMS = "InvalidParameterValue.WebSocketsParams"
 //  LIMITEXCEEDED_EIP = "LimitExceeded.Eip"
 //  LIMITEXCEEDED_INITTIMEOUT = "LimitExceeded.InitTimeout"
 //  LIMITEXCEEDED_MEMORY = "LimitExceeded.Memory"

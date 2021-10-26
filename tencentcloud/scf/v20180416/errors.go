@@ -101,6 +101,12 @@ const (
 	// Operation conflict.
 	FAILEDOPERATION_OPERATIONCONFLICT = "FailedOperation.OperationConflict"
 
+	// 
+	FAILEDOPERATION_PROVISIONCREATETIMER = "FailedOperation.ProvisionCreateTimer"
+
+	// 
+	FAILEDOPERATION_PROVISIONDELETETIMER = "FailedOperation.ProvisionDeleteTimer"
+
 	// The function version already has a provisioned concurrency setting task in progress. Please try again later.
 	FAILEDOPERATION_PROVISIONEDINPROGRESS = "FailedOperation.ProvisionedInProgress"
 
@@ -116,7 +122,7 @@ const (
 	// The function already has a reserved concurrency setting task in progress. Please try again later.
 	FAILEDOPERATION_RESERVEDINPROGRESS = "FailedOperation.ReservedInProgress"
 
-	// 
+	// This topic does not exsit.
 	FAILEDOPERATION_TOPICNOTEXIST = "FailedOperation.TopicNotExist"
 
 	// The user already has a concurrency quota setting task in progress. Please try again later.
@@ -296,6 +302,9 @@ const (
 	// Handler error.
 	INVALIDPARAMETERVALUE_HANDLER = "InvalidParameterValue.Handler"
 
+	// IdleTimeOut input parameter error
+	INVALIDPARAMETERVALUE_IDLETIMEOUT = "InvalidParameterValue.IdleTimeOut"
+
 	// Invalid InlineZipFile.
 	INVALIDPARAMETERVALUE_INLINEZIPFILE = "InvalidParameterValue.InlineZipFile"
 
@@ -341,6 +350,21 @@ const (
 	// The input parameter is not in the standard JSON format.
 	INVALIDPARAMETERVALUE_PARAM = "InvalidParameterValue.Param"
 
+	// ProtocolType input parameter error
+	INVALIDPARAMETERVALUE_PROTOCOLTYPE = "InvalidParameterValue.ProtocolType"
+
+	// 
+	INVALIDPARAMETERVALUE_PROVISIONTRIGGERCRONCONFIGDUPLICATE = "InvalidParameterValue.ProvisionTriggerCronConfigDuplicate"
+
+	// 
+	INVALIDPARAMETERVALUE_PROVISIONTRIGGERNAME = "InvalidParameterValue.ProvisionTriggerName"
+
+	// 
+	INVALIDPARAMETERVALUE_PROVISIONTRIGGERNAMEDUPLICATE = "InvalidParameterValue.ProvisionTriggerNameDuplicate"
+
+	// 
+	INVALIDPARAMETERVALUE_PROVISIONTYPE = "InvalidParameterValue.ProvisionType"
+
 	// The `PublicNetConfig` parameter is invalid.
 	INVALIDPARAMETERVALUE_PUBLICNETCONFIG = "InvalidParameterValue.PublicNetConfig"
 
@@ -383,17 +407,29 @@ const (
 	// The value of `TraceEnable` is invalid. Please modify and try again.
 	INVALIDPARAMETERVALUE_TRACEENABLE = "InvalidParameterValue.TraceEnable"
 
+	// 
+	INVALIDPARAMETERVALUE_TRIGGERCRONCONFIG = "InvalidParameterValue.TriggerCronConfig"
+
+	// 
+	INVALIDPARAMETERVALUE_TRIGGERCRONCONFIGTIMEINTERVAL = "InvalidParameterValue.TriggerCronConfigTimeInterval"
+
 	// TriggerDesc error.
 	INVALIDPARAMETERVALUE_TRIGGERDESC = "InvalidParameterValue.TriggerDesc"
 
 	// TriggerName error.
 	INVALIDPARAMETERVALUE_TRIGGERNAME = "InvalidParameterValue.TriggerName"
 
+	// 
+	INVALIDPARAMETERVALUE_TRIGGERPROVISIONEDCONCURRENCYNUM = "InvalidParameterValue.TriggerProvisionedConcurrencyNum"
+
 	// Type error.
 	INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 
 	// A VPC needs to be activated together with CFS configuration.
 	INVALIDPARAMETERVALUE_VPCNOTSETWHENOPENCFS = "InvalidParameterValue.VpcNotSetWhenOpenCfs"
+
+	// WebSocketsParams input parameter error
+	INVALIDPARAMETERVALUE_WEBSOCKETSPARAMS = "InvalidParameterValue.WebSocketsParams"
 
 	// A non-standard zip file was detected. Please recompress and try again.
 	INVALIDPARAMETERVALUE_ZIPFILE = "InvalidParameterValue.ZipFile"
@@ -448,6 +484,12 @@ const (
 
 	// Offset exceeds the upper limit.
 	LIMITEXCEEDED_OFFSET = "LimitExceeded.Offset"
+
+	// 
+	LIMITEXCEEDED_PROVISIONTRIGGERACTION = "LimitExceeded.ProvisionTriggerAction"
+
+	// 
+	LIMITEXCEEDED_PROVISIONTRIGGERINTERVAL = "LimitExceeded.ProvisionTriggerInterval"
 
 	// The number of retry attempts in the async retry configuration of the function exceeds the limit.
 	LIMITEXCEEDED_RETRYNUM = "LimitExceeded.RetryNum"
