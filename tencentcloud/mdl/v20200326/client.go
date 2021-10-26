@@ -620,6 +620,35 @@ func (c *Client) DescribeStreamLivePlans(request *DescribeStreamLivePlansRequest
     return
 }
 
+func NewDescribeStreamLiveRegionsRequest() (request *DescribeStreamLiveRegionsRequest) {
+    request = &DescribeStreamLiveRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveRegions")
+    return
+}
+
+func NewDescribeStreamLiveRegionsResponse() (response *DescribeStreamLiveRegionsResponse) {
+    response = &DescribeStreamLiveRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamLiveRegions
+// This API is used to query all StreamLive regions.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeStreamLiveRegions(request *DescribeStreamLiveRegionsRequest) (response *DescribeStreamLiveRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveRegionsRequest()
+    }
+    response = NewDescribeStreamLiveRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyStreamLiveChannelRequest() (request *ModifyStreamLiveChannelRequest) {
     request = &ModifyStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},

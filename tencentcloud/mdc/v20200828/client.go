@@ -201,6 +201,35 @@ func (c *Client) DescribeStreamLinkFlows(request *DescribeStreamLinkFlowsRequest
     return
 }
 
+func NewDescribeStreamLinkRegionsRequest() (request *DescribeStreamLinkRegionsRequest) {
+    request = &DescribeStreamLinkRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkRegions")
+    return
+}
+
+func NewDescribeStreamLinkRegionsResponse() (response *DescribeStreamLinkRegionsResponse) {
+    response = &DescribeStreamLinkRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamLinkRegions
+// This API is used to query all StreamLink regions.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeStreamLinkRegions(request *DescribeStreamLinkRegionsRequest) (response *DescribeStreamLinkRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLinkRegionsRequest()
+    }
+    response = NewDescribeStreamLinkRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyStreamLinkFlowRequest() (request *ModifyStreamLinkFlowRequest) {
     request = &ModifyStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},

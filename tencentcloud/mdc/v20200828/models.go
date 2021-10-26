@@ -578,6 +578,51 @@ func (r *DescribeStreamLinkFlowsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeStreamLinkRegionsRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeStreamLinkRegionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLinkRegionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLinkRegionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamLinkRegionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// StreamLink region information
+		Info *StreamLinkRegionInfo `json:"Info,omitempty" name:"Info"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStreamLinkRegionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLinkRegionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type InputAddress struct {
 
 	// Input address IP.
@@ -659,6 +704,12 @@ type RTPAddressDestination struct {
 
 	// Push destination address port.
 	Port *int64 `json:"Port,omitempty" name:"Port"`
+}
+
+type RegionInfo struct {
+
+	// Region name
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type SRTAddressDestination struct {
@@ -760,4 +811,10 @@ func (r *StopStreamLinkFlowResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *StopStreamLinkFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type StreamLinkRegionInfo struct {
+
+	// List of StreamLink regions
+	Regions []*RegionInfo `json:"Regions,omitempty" name:"Regions"`
 }

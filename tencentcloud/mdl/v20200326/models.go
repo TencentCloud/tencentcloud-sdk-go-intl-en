@@ -1123,6 +1123,51 @@ func (r *DescribeStreamLivePlansResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeStreamLiveRegionsRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeStreamLiveRegionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLiveRegionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveRegionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamLiveRegionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// StreamLive region information
+		Info *StreamLiveRegionInfo `json:"Info,omitempty" name:"Info"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStreamLiveRegionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLiveRegionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DestinationInfo struct {
 
 	// Relay destination address. Length limit: [1,512].
@@ -1608,6 +1653,12 @@ type PlanResp struct {
 	EventSettings *EventSettingsResp `json:"EventSettings,omitempty" name:"EventSettings"`
 }
 
+type RegionInfo struct {
+
+	// Region name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
 type Scte35SettingsInfo struct {
 
 	// Whether to pass through SCTE-35 information. Valid values: NO_PASSTHROUGH/PASSTHROUGH. Default value: NO_PASSTHROUGH.
@@ -1805,6 +1856,12 @@ type StreamLiveOutputGroupsInfo struct {
 	// StreamPackage configuration information, which is required if the output type is StreamPackage
 	// Note: this field may return `null`, indicating that no valid value was found.
 	StreamPackageSettings *StreamPackageSettingsInfo `json:"StreamPackageSettings,omitempty" name:"StreamPackageSettings"`
+}
+
+type StreamLiveRegionInfo struct {
+
+	// List of StreamLive regions
+	Regions []*RegionInfo `json:"Regions,omitempty" name:"Regions"`
 }
 
 type StreamPackageSettingsInfo struct {
