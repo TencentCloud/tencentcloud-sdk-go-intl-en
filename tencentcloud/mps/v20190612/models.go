@@ -8482,17 +8482,17 @@ type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
 type VideoTemplateInfo struct {
 
 	// Video stream codec. Valid values:
-	// <li>libx264: H.264</li>
-	// <li>libx265: H.265</li>
-	// Currently, a resolution within 640*480p must be specified for H.265.
+	// <li>`libx264`: H.264</li>
+	// <li>`libx265`: H.265</li>
+	// <li>`av1`: AOMedia Video 1</li>
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
 	// Video frame rate in Hz. Value range: [0, 100].
 	// If the value is 0, the frame rate will be the same as that of the source video.
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Bitrate of a video stream in Kbps. Value range: 0 and [128, 35,000].
-	// If the value is 0, the bitrate of the video will be the same as that of the source video.
+	// Video stream bitrate (Kbps). Valid values: `0`; [75, 35000]
+	// If the value is `0`, the original video bitrate will be used.
 	Bitrate *uint64 `json:"Bitrate,omitempty" name:"Bitrate"`
 
 	// Resolution adaption. Valid values:
