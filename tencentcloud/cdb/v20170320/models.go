@@ -713,6 +713,9 @@ type CreateCloneInstanceRequest struct {
 
 	// The number of nodes of the clone. If this parameter is set to `3` or the `BackupZone` parameter is specified, the clone will have three nodes. If this parameter is set to `2` or left empty, the clone will have two nodes.
 	InstanceNodes *int64 `json:"InstanceNodes,omitempty" name:"InstanceNodes"`
+
+	// Placement group ID.
+	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
 }
 
 func (r *CreateCloneInstanceRequest) ToJsonString() string {
@@ -744,6 +747,7 @@ func (r *CreateCloneInstanceRequest) FromJsonString(s string) error {
 	delete(f, "BackupZone")
 	delete(f, "DeviceType")
 	delete(f, "InstanceNodes")
+	delete(f, "DeployGroupId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloneInstanceRequest has unknown keys!", "")
 	}
@@ -859,7 +863,7 @@ type CreateDBInstanceHourRequest struct {
 	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
 	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
 
-	// Project ID. If this is left empty, the default project will be used. Please use the [DescribeProject](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API to get the project ID.
+	// Project ID. If this is left empty, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// AZ information. By default, the system will automatically select an AZ. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported AZs.
@@ -1217,12 +1221,6 @@ type DBSwitchInfo struct {
 
 	// Switch type. Value range: TRANSFER (data migration), MASTER2SLAVE (primary/secondary switch), RECOVERY (primary/secondary recovery)
 	SwitchType *string `json:"SwitchType,omitempty" name:"SwitchType"`
-}
-
-type DatabaseName struct {
-
-	// Name of a database
-	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
 }
 
 type DatabasePrivilege struct {
@@ -1765,74 +1763,6 @@ func (r *DescribeBackupConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeBackupDatabasesRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Start time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-07-12 10:29:20.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// Prefix of the database to be queried.
-	SearchDatabase *string `json:"SearchDatabase,omitempty" name:"SearchDatabase"`
-
-	// Pagination offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of entries per page. Value range: 1-2,000.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-}
-
-func (r *DescribeBackupDatabasesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeBackupDatabasesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "StartTime")
-	delete(f, "SearchDatabase")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupDatabasesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeBackupDatabasesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of the returned data entries.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Array of eligible databases.
-		Items []*DatabaseName `json:"Items,omitempty" name:"Items"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeBackupDatabasesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeBackupDatabasesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeBackupOverviewRequest struct {
 	*tchttp.BaseRequest
 
@@ -1956,78 +1886,6 @@ func (r *DescribeBackupSummariesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBackupSummariesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeBackupTablesRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Start time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-07-12 10:29:20.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// Specified database name.
-	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
-
-	// Prefix of the table to be queried.
-	SearchTable *string `json:"SearchTable,omitempty" name:"SearchTable"`
-
-	// Pagination offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of entries per page. Value range: 1-2,000.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-}
-
-func (r *DescribeBackupTablesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeBackupTablesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "StartTime")
-	delete(f, "DatabaseName")
-	delete(f, "SearchTable")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupTablesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeBackupTablesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of the returned data entries.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Array of eligible tables.
-		Items []*TableName `json:"Items,omitempty" name:"Items"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeBackupTablesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeBackupTablesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2617,7 +2475,7 @@ func (r *DescribeDBInstanceRebootTimeResponse) FromJsonString(s string) error {
 type DescribeDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// Project ID. You can use the [project list querying API](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) to query the project ID.
+	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Instance type. Value range: 1 (primary), 2 (disaster recovery), 3 (read-only).
@@ -7226,12 +7084,6 @@ func (r *SwitchForUpgradeResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SwitchForUpgradeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
-}
-
-type TableName struct {
-
-	// Table name
-	TableName *string `json:"TableName,omitempty" name:"TableName"`
 }
 
 type TablePrivilege struct {

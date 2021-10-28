@@ -956,44 +956,6 @@ func (c *Client) DescribeBackupConfig(request *DescribeBackupConfigRequest) (res
     return
 }
 
-func NewDescribeBackupDatabasesRequest() (request *DescribeBackupDatabasesRequest) {
-    request = &DescribeBackupDatabasesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "DescribeBackupDatabases")
-    return
-}
-
-func NewDescribeBackupDatabasesResponse() (response *DescribeBackupDatabasesResponse) {
-    response = &DescribeBackupDatabasesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeBackupDatabases
-// This API is used to query the databases contained in a backup file. It has been disused.
-//
-// After the legacy version becomes capable of full backup, if you want to download logical backup files by table, you need to use this API.
-//
-// The new API (CreateBackup) can specify the table to be backed up when a logical backup file is created, which can be downloaded directly.
-//
-// error code that may be returned:
-//  CDBERROR = "CdbError"
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
-//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
-//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
-func (c *Client) DescribeBackupDatabases(request *DescribeBackupDatabasesRequest) (response *DescribeBackupDatabasesResponse, err error) {
-    if request == nil {
-        request = NewDescribeBackupDatabasesRequest()
-    }
-    response = NewDescribeBackupDatabasesResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeBackupOverviewRequest() (request *DescribeBackupOverviewRequest) {
     request = &DescribeBackupOverviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1053,44 +1015,6 @@ func (c *Client) DescribeBackupSummaries(request *DescribeBackupSummariesRequest
         request = NewDescribeBackupSummariesRequest()
     }
     response = NewDescribeBackupSummariesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeBackupTablesRequest() (request *DescribeBackupTablesRequest) {
-    request = &DescribeBackupTablesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "DescribeBackupTables")
-    return
-}
-
-func NewDescribeBackupTablesResponse() (response *DescribeBackupTablesResponse) {
-    response = &DescribeBackupTablesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeBackupTables
-// This API is used to query the backup tables of the specified database. It has been disused.
-//
-// After the legacy version becomes capable of full backup, if you want to download logical backup files by table, you need to use this API.
-//
-// The new API (CreateBackup) can specify the table to be backed up when a logical backup file is created, which can be downloaded directly.
-//
-// error code that may be returned:
-//  CDBERROR = "CdbError"
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
-//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
-//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
-func (c *Client) DescribeBackupTables(request *DescribeBackupTablesRequest) (response *DescribeBackupTablesResponse, err error) {
-    if request == nil {
-        request = NewDescribeBackupTablesRequest()
-    }
-    response = NewDescribeBackupTablesResponse()
     err = c.Send(request, response)
     return
 }
