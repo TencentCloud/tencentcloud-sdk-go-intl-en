@@ -206,6 +206,9 @@ const (
 	// Only one system disk snapshot can be included.
 	INVALIDPARAMETER_DUPLICATESYSTEMSNAPSHOTS = "InvalidParameter.DuplicateSystemSnapshots"
 
+	// 
+	INVALIDPARAMETER_HOSTIDSTATUSNOTSUPPORT = "InvalidParameter.HostIdStatusNotSupport"
+
 	// The specified HostName is invalid.
 	INVALIDPARAMETER_HOSTNAMEILLEGAL = "InvalidParameter.HostNameIllegal"
 
@@ -257,7 +260,7 @@ const (
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
-	// 
+	// The shared bandwidth package ID is invalid. Please provide a standard shared bandwidth package ID in the format similar to bwp-xxxxxxxx. In this format, the letter x stands for a lowercase character or a number.
 	INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDMALFORMED = "InvalidParameterValue.BandwidthPackageIdMalformed"
 
 	// The specified bandwidth package does not exist.
@@ -638,6 +641,9 @@ const (
 	// This instance type does not support spot instances.
 	UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
 
+	// Failed to configure the scheduled action for the current instance. 
+	UNSUPPORTEDOPERATION_NOTSUPPORTIMPORTINSTANCESACTIONTIMER = "UnsupportedOperation.NotSupportImportInstancesActionTimer"
+
 	// The instance does not support this operation.
 	UNSUPPORTEDOPERATION_NOTSUPPORTINSTANCEIMAGE = "UnsupportedOperation.NotSupportInstanceImage"
 
@@ -673,6 +679,9 @@ const (
 
 	// A Tencent Cloud International account does not support this operation.
 	UNSUPPORTEDOPERATION_UNSUPPORTEDINTERNATIONALUSER = "UnsupportedOperation.UnsupportedInternationalUser"
+
+	// The quota of user limit operations is insufficient.
+	UNSUPPORTEDOPERATION_USERLIMITOPERATIONEXCEEDQUOTA = "UnsupportedOperation.UserLimitOperationExceedQuota"
 
 	// The VPC IP address is not in the subnet.
 	VPCADDRNOTINSUBNET = "VpcAddrNotInSubNet"

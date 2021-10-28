@@ -110,7 +110,7 @@ const (
 	// Incorrect parameters for audio-only stream pushing.
 	INVALIDPARAMETER_PUREAUDIOSTREAM = "InvalidParameter.PureAudioStream"
 
-	// The query time range exceeds 1 hour.
+	// The range for query exceeded the limit.
 	INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
 
 	// Incorrect parameters for audio-only recording.
@@ -131,13 +131,13 @@ const (
 	// Invalid `StreamType` under `SmallVideoLayoutParams`.
 	INVALIDPARAMETER_SMALLVIDEOSTREAMTYPE = "InvalidParameter.SmallVideoStreamType"
 
-	// The query start time is more than 24 hours earlier than now.
+	// The start time for query exceeded the limit.
 	INVALIDPARAMETER_STARTTIMEEXPIRE = "InvalidParameter.StartTimeExpire"
 
 	// Invalid `StartTs`.
 	INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
 
-	// The query start time is more than 5 days earlier than now.
+	// The start time for query exceeded the limit.
 	INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
 
 	// Incorrect `StreamId` parameter.

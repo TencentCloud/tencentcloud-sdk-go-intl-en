@@ -104,7 +104,7 @@ type AclRule struct {
 	TopicCount *int64 `json:"TopicCount,omitempty" name:"TopicCount"`
 
 	// Name of rule type.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	PatternTypeTitle *string `json:"PatternTypeTitle,omitempty" name:"PatternTypeTitle"`
 }
 
@@ -2962,6 +2962,25 @@ type RouteResponse struct {
 	Routers []*Route `json:"Routers,omitempty" name:"Routers"`
 }
 
+type SaleInfo struct {
+
+	// Manually set flag.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Flag *bool `json:"Flag,omitempty" name:"Flag"`
+
+	// CKafka version (v1.1.1/2.4.2/0.10.2）
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// Whether it is Pro Edition or Standard Edition.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Platform *string `json:"Platform,omitempty" name:"Platform"`
+
+	// Whether it has been sold out. `true`: sold out.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SoldOut *bool `json:"SoldOut,omitempty" name:"SoldOut"`
+}
+
 type SubscribedInfo struct {
 
 	// Subscribed topic name
@@ -3255,6 +3274,10 @@ type ZoneInfo struct {
 
 	// JSON object. The key is the model. The value `true` means “sold out”, and `false` means “not sold out”.
 	SoldOut *string `json:"SoldOut,omitempty" name:"SoldOut"`
+
+	// Information on whether Standard Edition has been sold out.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SalesInfo []*SaleInfo `json:"SalesInfo,omitempty" name:"SalesInfo"`
 }
 
 type ZoneResponse struct {

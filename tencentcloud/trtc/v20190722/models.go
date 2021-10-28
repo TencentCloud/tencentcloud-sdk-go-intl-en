@@ -259,10 +259,10 @@ type DescribeAbnormalEventRequest struct {
 	// User `SDKAppID`, which can be used to query 20 exceptional experience events (in one or more rooms)
 	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Query start time
+	// Query start time (s) in the format of Unix timestamp, e.g., 1592448600
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Query end time
+	// Query end time (s) in the format of Unix timestamp, e.g., 1592449080
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Room ID, which can be used to query up to 20 exceptional experience events in a specific room
@@ -323,13 +323,13 @@ type DescribeCallDetailRequest struct {
 	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
 	CommId *string `json:"CommId,omitempty" name:"CommId"`
 
-	// Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
+	// Query start time (s) in the format of Unix timestamp (e.g., 1590065777), which must be a time point in the last 14 days. The start and end time for query must not be more than 1 hour apart.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
+	// Query end time (s) in the format of Unix timestamp, e.g., 1590065877
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// User `SDKAppID`, such as 1400188366.
+	// `SDKAppID` of the users to query, e.g., 1400353843
 	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
 	// User array to query, which contains up to 6 users. If it is left empty, 6 users will be returned by default.
@@ -419,10 +419,10 @@ type DescribeDetailEventRequest struct {
 	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
 	CommId *string `json:"CommId,omitempty" name:"CommId"`
 
-	// Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
+	// Query start time (s) in the format of Unix timestamp (e.g., 1588055615), which must be a time point in the last 14 days
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
+	// Query end time (s) in the format of Unix timestamp, e.g., 1588058615
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// User ID
@@ -459,7 +459,7 @@ type DescribeDetailEventResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// List of returned events
+		// List of returned events. An empty array will be returned if no data can be found.
 		Data []*EventList `json:"Data,omitempty" name:"Data"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -481,13 +481,13 @@ func (r *DescribeDetailEventResponse) FromJsonString(s string) error {
 type DescribeHistoryScaleRequest struct {
 	*tchttp.BaseRequest
 
-	// User `sdkappid`
+	// `SDKAppID` of the users to query, e.g., 1400188366
 	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 5 days.
+	// Query start time (s) in the format of Unix timestamp (e.g., 1587571000), which must be a time point in the last 5 days
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
+	// Query end time (s) in the format of Unix timestamp, e.g., 1588034999
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 }
 
@@ -799,10 +799,10 @@ type DescribeRoomInformationRequest struct {
 	// User `sdkappid`
 	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
+	// Query start time (s) in the format of Unix timestamp (e.g., 1588031999), which must be a time point in the last 14 days
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
+	// Query end time (s) in the format of Unix timestamp, e.g., 1588034999
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Room ID in string type
@@ -871,13 +871,13 @@ type DescribeUserInformationRequest struct {
 	// Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
 	CommId *string `json:"CommId,omitempty" name:"CommId"`
 
-	// Query start time in the format of UNIX timestamp (e.g. 1588031999s) in the last 5 days.
+	// Query start time (s) in the format of Unix timestamp (e.g., 1590065777), which must be a time point in the last 14 days
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Query end time in the format of UNIX timestamp (e.g. 1588031999s).
+	// Query end time (s) in the format of Unix timestamp (e.g., 1590065877)
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// User `SDKAppID` (e.g. 1400188366).
+	// `SDKAppID` of the users to query, e.g., 1400353843
 	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
 	// The array of user IDs for query. You can enter up to 6 user IDs. If it is left empty, data of 6 users will be returned.
@@ -1083,6 +1083,9 @@ type EncodeParams struct {
 
 	// Output audio codec for On-Cloud MixTranscoding. Valid values: 0, 1, 2. 0 (default): LC-AAC; 1: HE-AAC; 2: HE-AACv2. If this parameter is set to 2 (HE-AACv2), On-Cloud MixTranscoding can produce only dual-channel streams. If it is set to 1 (HE-AAC) or 2 (HE-AACv2), the valid values for the audio sample rate of output streams are 48000, 44100, 32000, 24000, and 16000.
 	AudioCodec *uint64 `json:"AudioCodec,omitempty" name:"AudioCodec"`
+
+	// URL of the background image for the mixed stream, which can be in PNG, JPG, JPEG, or BMP format and does not support the alpha channel. The URL must not exceed 512 bytes. When both `BackgroundImageUrl` and `BackgroundImageId` are specified, the former will be used. The background image must not exceed 10 MB.
+	BackgroundImageUrl *string `json:"BackgroundImageUrl,omitempty" name:"BackgroundImageUrl"`
 }
 
 type EventList struct {
@@ -1769,4 +1772,7 @@ type WaterMarkParams struct {
 
 	// Vertical offset (px) of the watermark
 	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
+
+	// URL of the watermark image for the mixed stream, which can be in PNG, JPG, JPEG, or BMP format and does not support the alpha channel. The URL must not exceed 512 bytes. When both `WaterMarkUrl` and `WaterMarkId` are specified, the former will be used. The watermark image cannot exceed 10 MB.
+	WaterMarkUrl *string `json:"WaterMarkUrl,omitempty" name:"WaterMarkUrl"`
 }

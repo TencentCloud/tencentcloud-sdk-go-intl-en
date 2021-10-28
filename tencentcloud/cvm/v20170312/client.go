@@ -1052,7 +1052,7 @@ func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
 }
 
 // DescribeRegions
-// This API is used to query regions.
+// (Suspended) This API is used to query the information of regions. Due to platform policy, the update of this API has been temporarily stopped. Please try the new one as described in https://intl.cloud.tencent.com/document/product/1278/55255?from_cn_redirect=1
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -1364,7 +1364,7 @@ func NewImportImageResponse() (response *ImportImageResponse) {
 }
 
 // ImportImage
-// This API is used to import images. Imported images can be used to create instances. 
+// The API is used to import an image. The image imported can be used to create instances. Currently, this API can import images in formats like RAW, VHD, QCOW2, and VMDK.
 //
 // error code that may be returned:
 //  IMAGEQUOTALIMITEXCEEDED = "ImageQuotaLimitExceeded"
@@ -1907,15 +1907,17 @@ func NewModifyInstancesAttributeResponse() (response *ModifyInstancesAttributeRe
 }
 
 // ModifyInstancesAttribute
-// This API is used to modify the attributes of an instance. Currently you can only use the API to modify the name and the associated security groups of the instance.
+// The API is used to modify the attributes of an instance. Currently, you can only use the API to modify the name and the associated security groups of the instance.
 //
 // 
 //
-// * Instance names are used only for users' convenience. Tencent Cloud does not use the name for ticket submission or instance management.
+// * **Instance names** are used only for users' convenience. Tencent Cloud does not use these names for online support or instance management.
 //
-// * Batch operations are supported. The maximum number of instances in each request is 100.
+// * Batch operations are supported. The maximum number of Batch instances in each request is 100.
 //
-// * When you change the security groups associated with an instance, the original security groups will be disassociated.
+// * When you modify the security groups associated with an instance, the original security groups will be disassociated.
+//
+// * You can use the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) API to query the instance operation result. If the 'LatestOperationState' in the response is **SUCCESS**, the operation is successful.
 //
 // error code that may be returned:
 //  AUTHFAILURE_CAMROLENAMEAUTHENTICATEFAILED = "AuthFailure.CamRoleNameAuthenticateFailed"
@@ -1930,6 +1932,7 @@ func NewModifyInstancesAttributeResponse() (response *ModifyInstancesAttributeRe
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDSECURITYGROUPID_NOTFOUND = "InvalidSecurityGroupId.NotFound"
 //  LIMITEXCEEDED_ASSOCIATEUSGLIMITEXCEEDED = "LimitExceeded.AssociateUSGLimitExceeded"
+//  LIMITEXCEEDED_CVMSVIFSPERSECGROUPLIMITEXCEEDED = "LimitExceeded.CvmsVifsPerSecGroupLimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
@@ -2587,6 +2590,7 @@ func NewRunInstancesResponse() (response *RunInstancesResponse) {
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
 //  INVALIDINSTANCENAME_TOOLONG = "InvalidInstanceName.TooLong"
 //  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
+//  INVALIDPARAMETER_HOSTIDSTATUSNOTSUPPORT = "InvalidParameter.HostIdStatusNotSupport"
 //  INVALIDPARAMETER_INSTANCEIMAGENOTSUPPORT = "InvalidParameter.InstanceImageNotSupport"
 //  INVALIDPARAMETER_INVALIDIPFORMAT = "InvalidParameter.InvalidIpFormat"
 //  INVALIDPARAMETER_LACKCORECOUNTORTHREADPERCORE = "InvalidParameter.LackCoreCountOrThreadPerCore"
@@ -2660,6 +2664,7 @@ func NewRunInstancesResponse() (response *RunInstancesResponse) {
 //  UNSUPPORTEDOPERATION_INVALIDREGIONDISKENCRYPT = "UnsupportedOperation.InvalidRegionDiskEncrypt"
 //  UNSUPPORTEDOPERATION_KEYPAIRUNSUPPORTEDWINDOWS = "UnsupportedOperation.KeyPairUnsupportedWindows"
 //  UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTIMPORTINSTANCESACTIONTIMER = "UnsupportedOperation.NotSupportImportInstancesActionTimer"
 //  UNSUPPORTEDOPERATION_ONLYFORPREPAIDACCOUNT = "UnsupportedOperation.OnlyForPrepaidAccount"
 //  UNSUPPORTEDOPERATION_RAWLOCALDISKINSREINSTALLTOQCOW2 = "UnsupportedOperation.RawLocalDiskInsReinstalltoQcow2"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDINTERNATIONALUSER = "UnsupportedOperation.UnsupportedInternationalUser"
@@ -2826,7 +2831,6 @@ func NewSyncImagesResponse() (response *SyncImagesResponse) {
 // * Each account can have up to 10 custom images in each region. 
 //
 // error code that may be returned:
-//  IMAGEQUOTALIMITEXCEEDED = "ImageQuotaLimitExceeded"
 //  INVALIDIMAGEID_INCORRECTSTATE = "InvalidImageId.IncorrectState"
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
@@ -2908,6 +2912,7 @@ func NewTerminateInstancesResponse() (response *TerminateInstancesResponse) {
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATING = "UnsupportedOperation.InstanceStateTerminating"
 //  UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"
 //  UNSUPPORTEDOPERATION_SPECIALINSTANCETYPE = "UnsupportedOperation.SpecialInstanceType"
+//  UNSUPPORTEDOPERATION_USERLIMITOPERATIONEXCEEDQUOTA = "UnsupportedOperation.UserLimitOperationExceedQuota"
 func (c *Client) TerminateInstances(request *TerminateInstancesRequest) (response *TerminateInstancesResponse, err error) {
     if request == nil {
         request = NewTerminateInstancesRequest()
