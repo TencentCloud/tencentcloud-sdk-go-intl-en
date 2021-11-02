@@ -60,7 +60,7 @@ type CreateAccountRequest struct {
 	// A global mobile number within 1-32 digits is allowed, such as 18888888888.
 	PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
 
-	// Country code, which can be obtained via the `GetCountryCodes` API, such as `86`.
+	// Country code, which can be obtained via the `GetCountryCodes` API, such as 852.
 	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
 
 	// ISO2 standard country code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field.
