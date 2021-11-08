@@ -48,6 +48,7 @@ func NewCreateStreamLiveChannelRequest() (request *CreateStreamLiveChannelReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveChannel")
+    
     return
 }
 
@@ -87,6 +88,7 @@ func NewCreateStreamLiveInputRequest() (request *CreateStreamLiveInputRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveInput")
+    
     return
 }
 
@@ -123,6 +125,7 @@ func NewCreateStreamLiveInputSecurityGroupRequest() (request *CreateStreamLiveIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveInputSecurityGroup")
+    
     return
 }
 
@@ -156,6 +159,7 @@ func NewCreateStreamLivePlanRequest() (request *CreateStreamLivePlanRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLivePlan")
+    
     return
 }
 
@@ -187,6 +191,7 @@ func NewDeleteStreamLiveChannelRequest() (request *DeleteStreamLiveChannelReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveChannel")
+    
     return
 }
 
@@ -221,6 +226,7 @@ func NewDeleteStreamLiveInputRequest() (request *DeleteStreamLiveInputRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveInput")
+    
     return
 }
 
@@ -254,6 +260,7 @@ func NewDeleteStreamLiveInputSecurityGroupRequest() (request *DeleteStreamLiveIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveInputSecurityGroup")
+    
     return
 }
 
@@ -287,6 +294,7 @@ func NewDescribeStreamLiveChannelRequest() (request *DescribeStreamLiveChannelRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannel")
+    
     return
 }
 
@@ -317,6 +325,7 @@ func NewDescribeStreamLiveChannelAlertsRequest() (request *DescribeStreamLiveCha
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelAlerts")
+    
     return
 }
 
@@ -347,6 +356,7 @@ func NewDescribeStreamLiveChannelInputStatisticsRequest() (request *DescribeStre
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelInputStatistics")
+    
     return
 }
 
@@ -379,6 +389,7 @@ func NewDescribeStreamLiveChannelLogsRequest() (request *DescribeStreamLiveChann
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelLogs")
+    
     return
 }
 
@@ -411,6 +422,7 @@ func NewDescribeStreamLiveChannelOutputStatisticsRequest() (request *DescribeStr
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelOutputStatistics")
+    
     return
 }
 
@@ -444,6 +456,7 @@ func NewDescribeStreamLiveChannelsRequest() (request *DescribeStreamLiveChannels
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannels")
+    
     return
 }
 
@@ -473,6 +486,7 @@ func NewDescribeStreamLiveInputRequest() (request *DescribeStreamLiveInputReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInput")
+    
     return
 }
 
@@ -505,6 +519,7 @@ func NewDescribeStreamLiveInputSecurityGroupRequest() (request *DescribeStreamLi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputSecurityGroup")
+    
     return
 }
 
@@ -537,6 +552,7 @@ func NewDescribeStreamLiveInputSecurityGroupsRequest() (request *DescribeStreamL
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputSecurityGroups")
+    
     return
 }
 
@@ -566,6 +582,7 @@ func NewDescribeStreamLiveInputsRequest() (request *DescribeStreamLiveInputsRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputs")
+    
     return
 }
 
@@ -595,6 +612,7 @@ func NewDescribeStreamLivePlansRequest() (request *DescribeStreamLivePlansReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLivePlans")
+    
     return
 }
 
@@ -625,6 +643,7 @@ func NewDescribeStreamLiveRegionsRequest() (request *DescribeStreamLiveRegionsRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveRegions")
+    
     return
 }
 
@@ -654,6 +673,7 @@ func NewModifyStreamLiveChannelRequest() (request *ModifyStreamLiveChannelReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveChannel")
+    
     return
 }
 
@@ -693,6 +713,7 @@ func NewModifyStreamLiveInputRequest() (request *ModifyStreamLiveInputRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveInput")
+    
     return
 }
 
@@ -729,6 +750,7 @@ func NewModifyStreamLiveInputSecurityGroupRequest() (request *ModifyStreamLiveIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveInputSecurityGroup")
+    
     return
 }
 
@@ -763,6 +785,7 @@ func NewStartStreamLiveChannelRequest() (request *StartStreamLiveChannelRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "StartStreamLiveChannel")
+    
     return
 }
 
@@ -796,6 +819,7 @@ func NewStopStreamLiveChannelRequest() (request *StopStreamLiveChannelRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "StopStreamLiveChannel")
+    
     return
 }
 

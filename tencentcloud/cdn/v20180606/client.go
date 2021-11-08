@@ -48,6 +48,7 @@ func NewAddCdnDomainRequest() (request *AddCdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "AddCdnDomain")
+    
     return
 }
 
@@ -124,6 +125,7 @@ func NewCreateClsLogTopicRequest() (request *CreateClsLogTopicRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "CreateClsLogTopic")
+    
     return
 }
 
@@ -186,6 +188,7 @@ func NewCreateScdnFailedLogTaskRequest() (request *CreateScdnFailedLogTaskReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "CreateScdnFailedLogTask")
+    
     return
 }
 
@@ -224,6 +227,7 @@ func NewDeleteCdnDomainRequest() (request *DeleteCdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DeleteCdnDomain")
+    
     return
 }
 
@@ -271,6 +275,7 @@ func NewDeleteClsLogTopicRequest() (request *DeleteClsLogTopicRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DeleteClsLogTopic")
+    
     return
 }
 
@@ -326,6 +331,7 @@ func NewDescribeBillingDataRequest() (request *DescribeBillingDataRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeBillingData")
+    
     return
 }
 
@@ -377,6 +383,7 @@ func NewDescribeCdnDataRequest() (request *DescribeCdnDataRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeCdnData")
+    
     return
 }
 
@@ -463,6 +470,7 @@ func NewDescribeCdnDomainLogsRequest() (request *DescribeCdnDomainLogsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeCdnDomainLogs")
+    
     return
 }
 
@@ -512,6 +520,7 @@ func NewDescribeCdnIpRequest() (request *DescribeCdnIpRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeCdnIp")
+    
     return
 }
 
@@ -552,6 +561,7 @@ func NewDescribeCdnOriginIpRequest() (request *DescribeCdnOriginIpRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeCdnOriginIp")
+    
     return
 }
 
@@ -591,6 +601,7 @@ func NewDescribeCertDomainsRequest() (request *DescribeCertDomainsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeCertDomains")
+    
     return
 }
 
@@ -638,6 +649,7 @@ func NewDescribeDomainsRequest() (request *DescribeDomainsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeDomains")
+    
     return
 }
 
@@ -689,6 +701,7 @@ func NewDescribeDomainsConfigRequest() (request *DescribeDomainsConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeDomainsConfig")
+    
     return
 }
 
@@ -739,6 +752,7 @@ func NewDescribeIpStatusRequest() (request *DescribeIpStatusRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeIpStatus")
+    
     return
 }
 
@@ -777,6 +791,7 @@ func NewDescribeIpVisitRequest() (request *DescribeIpVisitRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeIpVisit")
+    
     return
 }
 
@@ -832,6 +847,7 @@ func NewDescribeMapInfoRequest() (request *DescribeMapInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeMapInfo")
+    
     return
 }
 
@@ -873,6 +889,7 @@ func NewDescribeOriginDataRequest() (request *DescribeOriginDataRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeOriginData")
+    
     return
 }
 
@@ -949,6 +966,7 @@ func NewDescribePayTypeRequest() (request *DescribePayTypeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribePayType")
+    
     return
 }
 
@@ -985,6 +1003,7 @@ func NewDescribePurgeQuotaRequest() (request *DescribePurgeQuotaRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribePurgeQuota")
+    
     return
 }
 
@@ -1018,6 +1037,7 @@ func NewDescribePurgeTasksRequest() (request *DescribePurgeTasksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribePurgeTasks")
+    
     return
 }
 
@@ -1056,6 +1076,7 @@ func NewDescribePushQuotaRequest() (request *DescribePushQuotaRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribePushQuota")
+    
     return
 }
 
@@ -1089,6 +1110,7 @@ func NewDescribePushTasksRequest() (request *DescribePushTasksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribePushTasks")
+    
     return
 }
 
@@ -1139,6 +1161,7 @@ func NewDescribeReportDataRequest() (request *DescribeReportDataRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeReportData")
+    
     return
 }
 
@@ -1177,6 +1200,7 @@ func NewDescribeUrlViolationsRequest() (request *DescribeUrlViolationsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DescribeUrlViolations")
+    
     return
 }
 
@@ -1215,6 +1239,7 @@ func NewDisableCachesRequest() (request *DisableCachesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DisableCaches")
+    
     return
 }
 
@@ -1262,6 +1287,7 @@ func NewDisableClsLogTopicRequest() (request *DisableClsLogTopicRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "DisableClsLogTopic")
+    
     return
 }
 
@@ -1318,6 +1344,7 @@ func NewEnableCachesRequest() (request *EnableCachesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "EnableCaches")
+    
     return
 }
 
@@ -1363,6 +1390,7 @@ func NewEnableClsLogTopicRequest() (request *EnableClsLogTopicRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "EnableClsLogTopic")
+    
     return
 }
 
@@ -1419,6 +1447,7 @@ func NewGetDisableRecordsRequest() (request *GetDisableRecordsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "GetDisableRecords")
+    
     return
 }
 
@@ -1464,6 +1493,7 @@ func NewListClsLogTopicsRequest() (request *ListClsLogTopicsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "ListClsLogTopics")
+    
     return
 }
 
@@ -1524,6 +1554,7 @@ func NewListClsTopicDomainsRequest() (request *ListClsTopicDomainsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "ListClsTopicDomains")
+    
     return
 }
 
@@ -1579,6 +1610,7 @@ func NewListTopDataRequest() (request *ListTopDataRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "ListTopData")
+    
     return
 }
 
@@ -1650,6 +1682,7 @@ func NewManageClsTopicDomainsRequest() (request *ManageClsTopicDomainsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "ManageClsTopicDomains")
+    
     return
 }
 
@@ -1708,6 +1741,7 @@ func NewPurgePathCacheRequest() (request *PurgePathCacheRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "PurgePathCache")
+    
     return
 }
 
@@ -1760,6 +1794,7 @@ func NewPurgeUrlsCacheRequest() (request *PurgeUrlsCacheRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "PurgeUrlsCache")
+    
     return
 }
 
@@ -1816,6 +1851,7 @@ func NewPushUrlsCacheRequest() (request *PushUrlsCacheRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "PushUrlsCache")
+    
     return
 }
 
@@ -1874,6 +1910,7 @@ func NewSearchClsLogRequest() (request *SearchClsLogRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "SearchClsLog")
+    
     return
 }
 
@@ -1934,6 +1971,7 @@ func NewStartCdnDomainRequest() (request *StartCdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "StartCdnDomain")
+    
     return
 }
 
@@ -1984,6 +2022,7 @@ func NewStopCdnDomainRequest() (request *StopCdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "StopCdnDomain")
+    
     return
 }
 
@@ -2035,6 +2074,7 @@ func NewUpdateDomainConfigRequest() (request *UpdateDomainConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "UpdateDomainConfig")
+    
     return
 }
 
@@ -2101,6 +2141,7 @@ func NewUpdatePayTypeRequest() (request *UpdatePayTypeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "UpdatePayType")
+    
     return
 }
 
@@ -2138,6 +2179,7 @@ func NewUpdateScdnDomainRequest() (request *UpdateScdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdn", APIVersion, "UpdateScdnDomain")
+    
     return
 }
 

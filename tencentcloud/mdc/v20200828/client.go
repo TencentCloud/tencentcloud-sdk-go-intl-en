@@ -48,6 +48,7 @@ func NewCreateStreamLinkFlowRequest() (request *CreateStreamLinkFlowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "CreateStreamLinkFlow")
+    
     return
 }
 
@@ -82,6 +83,7 @@ func NewDeleteStreamLinkFlowRequest() (request *DeleteStreamLinkFlowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "DeleteStreamLinkFlow")
+    
     return
 }
 
@@ -112,6 +114,7 @@ func NewDeleteStreamLinkOutputRequest() (request *DeleteStreamLinkOutputRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "DeleteStreamLinkOutput")
+    
     return
 }
 
@@ -144,6 +147,7 @@ func NewDescribeStreamLinkFlowRequest() (request *DescribeStreamLinkFlowRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlow")
+    
     return
 }
 
@@ -174,6 +178,7 @@ func NewDescribeStreamLinkFlowsRequest() (request *DescribeStreamLinkFlowsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlows")
+    
     return
 }
 
@@ -206,6 +211,7 @@ func NewDescribeStreamLinkRegionsRequest() (request *DescribeStreamLinkRegionsRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkRegions")
+    
     return
 }
 
@@ -235,6 +241,7 @@ func NewModifyStreamLinkFlowRequest() (request *ModifyStreamLinkFlowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "ModifyStreamLinkFlow")
+    
     return
 }
 
@@ -267,6 +274,7 @@ func NewStartStreamLinkFlowRequest() (request *StartStreamLinkFlowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "StartStreamLinkFlow")
+    
     return
 }
 
@@ -299,6 +307,7 @@ func NewStopStreamLinkFlowRequest() (request *StopStreamLinkFlowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "StopStreamLinkFlow")
+    
     return
 }
 

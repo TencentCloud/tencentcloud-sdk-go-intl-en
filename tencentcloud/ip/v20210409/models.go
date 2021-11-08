@@ -20,6 +20,56 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AssignClientCreditRequest struct {
+	*tchttp.BaseRequest
+
+	// Specific value of the credit allocated to the customer
+	QuotaNum *float64 `json:"QuotaNum,omitempty" name:"QuotaNum"`
+
+	// Customer UIN
+	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
+}
+
+func (r *AssignClientCreditRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssignClientCreditRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "QuotaNum")
+	delete(f, "ClientUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssignClientCreditRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AssignClientCreditResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AssignClientCreditResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssignClientCreditResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CountryCodeItem struct {
 
 	// Country/region name in English
@@ -162,4 +212,224 @@ func (r *GetCountryCodesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *GetCountryCodesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type QueryAgentCreditRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *QueryAgentCreditRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryAgentCreditRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryAgentCreditRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type QueryAgentCreditResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Allocated credit
+		AssignedCreditAmount *float64 `json:"AssignedCreditAmount,omitempty" name:"AssignedCreditAmount"`
+
+		// Total credit
+		CustomerCreditAmount *float64 `json:"CustomerCreditAmount,omitempty" name:"CustomerCreditAmount"`
+
+		// Remaining credit
+		RemainingCreditAmount *float64 `json:"RemainingCreditAmount,omitempty" name:"RemainingCreditAmount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *QueryAgentCreditResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryAgentCreditResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type QueryClientListItem struct {
+
+	// Name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Phone
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Mobile *string `json:"Mobile,omitempty" name:"Mobile"`
+
+	// Email
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Email *string `json:"Email,omitempty" name:"Email"`
+
+	// Overdue payment flag
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Arrears *string `json:"Arrears,omitempty" name:"Arrears"`
+
+	// Binding time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AssociationTime *string `json:"AssociationTime,omitempty" name:"AssociationTime"`
+
+	// Expiration time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RecentExpiry *string `json:"RecentExpiry,omitempty" name:"RecentExpiry"`
+
+	// Customer UIN
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
+
+	// Credit granted to customer
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreditAmount *float64 `json:"CreditAmount,omitempty" name:"CreditAmount"`
+
+	// Customer's remaining credit
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RestCreditAmount *float64 `json:"RestCreditAmount,omitempty" name:"RestCreditAmount"`
+}
+
+type QueryClientListRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *QueryClientListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryClientListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryClientListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type QueryClientListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Queries the list of customers
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Data []*QueryClientListItem `json:"Data,omitempty" name:"Data"`
+
+		// Number of customers
+		Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *QueryClientListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryClientListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type QueryCreditHistoryRequest struct {
+	*tchttp.BaseRequest
+
+	// Customer UIN
+	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
+
+	// Page number
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of data entries per page
+	PageRow *uint64 `json:"PageRow,omitempty" name:"PageRow"`
+}
+
+func (r *QueryCreditHistoryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryCreditHistoryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClientUin")
+	delete(f, "Page")
+	delete(f, "PageRow")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryCreditHistoryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type QueryCreditHistoryResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of records
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+		// List of record details
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		History []*QueryUinCreditHistoryData `json:"History,omitempty" name:"History"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *QueryCreditHistoryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryCreditHistoryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type QueryUinCreditHistoryData struct {
+
+	// Credit allocatee UIN
+	CreditAssignUin *uint64 `json:"CreditAssignUin,omitempty" name:"CreditAssignUin"`
+
+	// Allocation time
+	AssginTime *string `json:"AssginTime,omitempty" name:"AssginTime"`
+
+	// Operator
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// Allocated credit value
+	CreditAmount *float64 `json:"CreditAmount,omitempty" name:"CreditAmount"`
 }

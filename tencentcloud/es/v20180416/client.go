@@ -48,6 +48,7 @@ func NewCreateInstanceRequest() (request *CreateInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "CreateInstance")
+    
     return
 }
 
@@ -86,6 +87,7 @@ func NewDeleteInstanceRequest() (request *DeleteInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "DeleteInstance")
+    
     return
 }
 
@@ -118,6 +120,7 @@ func NewDescribeInstanceLogsRequest() (request *DescribeInstanceLogsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "DescribeInstanceLogs")
+    
     return
 }
 
@@ -148,6 +151,7 @@ func NewDescribeInstanceOperationsRequest() (request *DescribeInstanceOperations
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "DescribeInstanceOperations")
+    
     return
 }
 
@@ -179,6 +183,7 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "DescribeInstances")
+    
     return
 }
 
@@ -210,6 +215,7 @@ func NewGetRequestTargetNodeTypesRequest() (request *GetRequestTargetNodeTypesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "GetRequestTargetNodeTypes")
+    
     return
 }
 
@@ -241,6 +247,7 @@ func NewRestartInstanceRequest() (request *RestartInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "RestartInstance")
+    
     return
 }
 
@@ -272,6 +279,7 @@ func NewRestartKibanaRequest() (request *RestartKibanaRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "RestartKibana")
+    
     return
 }
 
@@ -303,6 +311,7 @@ func NewRestartNodesRequest() (request *RestartNodesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "RestartNodes")
+    
     return
 }
 
@@ -336,6 +345,7 @@ func NewUpdateInstanceRequest() (request *UpdateInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "UpdateInstance")
+    
     return
 }
 
@@ -390,6 +400,7 @@ func NewUpdatePluginsRequest() (request *UpdatePluginsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "UpdatePlugins")
+    
     return
 }
 
@@ -427,6 +438,7 @@ func NewUpdateRequestTargetNodeTypesRequest() (request *UpdateRequestTargetNodeT
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "UpdateRequestTargetNodeTypes")
+    
     return
 }
 
@@ -461,6 +473,7 @@ func NewUpgradeInstanceRequest() (request *UpgradeInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "UpgradeInstance")
+    
     return
 }
 
@@ -498,6 +511,7 @@ func NewUpgradeLicenseRequest() (request *UpgradeLicenseRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("es", APIVersion, "UpgradeLicense")
+    
     return
 }
 

@@ -48,6 +48,7 @@ func NewCheckInstanceRequest() (request *CheckInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "CheckInstance")
+    
     return
 }
 
@@ -91,6 +92,7 @@ func NewCreateImmutableTagRulesRequest() (request *CreateImmutableTagRulesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "CreateImmutableTagRules")
+    
     return
 }
 
@@ -125,6 +127,7 @@ func NewCreateMultipleSecurityPolicyRequest() (request *CreateMultipleSecurityPo
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "CreateMultipleSecurityPolicy")
+    
     return
 }
 
@@ -160,6 +163,7 @@ func NewCreateReplicationInstanceRequest() (request *CreateReplicationInstanceRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "CreateReplicationInstance")
+    
     return
 }
 
@@ -200,6 +204,7 @@ func NewDeleteImmutableTagRulesRequest() (request *DeleteImmutableTagRulesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "DeleteImmutableTagRules")
+    
     return
 }
 
@@ -233,6 +238,7 @@ func NewDeleteMultipleSecurityPolicyRequest() (request *DeleteMultipleSecurityPo
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "DeleteMultipleSecurityPolicy")
+    
     return
 }
 
@@ -268,6 +274,7 @@ func NewDescribeImmutableTagRulesRequest() (request *DescribeImmutableTagRulesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "DescribeImmutableTagRules")
+    
     return
 }
 
@@ -303,6 +310,7 @@ func NewDescribeReplicationInstanceCreateTasksRequest() (request *DescribeReplic
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "DescribeReplicationInstanceCreateTasks")
+    
     return
 }
 
@@ -338,6 +346,7 @@ func NewDescribeReplicationInstanceSyncStatusRequest() (request *DescribeReplica
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "DescribeReplicationInstanceSyncStatus")
+    
     return
 }
 
@@ -373,6 +382,7 @@ func NewDescribeReplicationInstancesRequest() (request *DescribeReplicationInsta
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "DescribeReplicationInstances")
+    
     return
 }
 
@@ -410,6 +420,7 @@ func NewManageReplicationRequest() (request *ManageReplicationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "ManageReplication")
+    
     return
 }
 
@@ -452,6 +463,7 @@ func NewModifyImmutableTagRulesRequest() (request *ModifyImmutableTagRulesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "ModifyImmutableTagRules")
+    
     return
 }
 
@@ -486,6 +498,7 @@ func NewModifyInstanceRequest() (request *ModifyInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tcr", APIVersion, "ModifyInstance")
+    
     return
 }
 

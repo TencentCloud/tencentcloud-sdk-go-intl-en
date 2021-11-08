@@ -48,6 +48,7 @@ func NewBindNewLVBDomainWithChannelRequest() (request *BindNewLVBDomainWithChann
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "BindNewLVBDomainWithChannel")
+    
     return
 }
 
@@ -78,6 +79,7 @@ func NewCreateStreamPackageChannelRequest() (request *CreateStreamPackageChannel
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageChannel")
+    
     return
 }
 
@@ -111,6 +113,7 @@ func NewCreateStreamPackageChannelEndpointRequest() (request *CreateStreamPackag
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageChannelEndpoint")
+    
     return
 }
 
@@ -145,6 +148,7 @@ func NewDeleteStreamPackageChannelEndpointsRequest() (request *DeleteStreamPacka
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageChannelEndpoints")
+    
     return
 }
 
@@ -177,6 +181,7 @@ func NewDeleteStreamPackageChannelsRequest() (request *DeleteStreamPackageChanne
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageChannels")
+    
     return
 }
 
@@ -209,6 +214,7 @@ func NewDescribeStreamPackageChannelRequest() (request *DescribeStreamPackageCha
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageChannel")
+    
     return
 }
 
@@ -240,6 +246,7 @@ func NewDescribeStreamPackageChannelsRequest() (request *DescribeStreamPackageCh
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageChannels")
+    
     return
 }
 
@@ -274,6 +281,7 @@ func NewModifyStreamPackageChannelRequest() (request *ModifyStreamPackageChannel
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageChannel")
+    
     return
 }
 
@@ -307,6 +315,7 @@ func NewModifyStreamPackageChannelEndpointRequest() (request *ModifyStreamPackag
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageChannelEndpoint")
+    
     return
 }
 
@@ -341,6 +350,7 @@ func NewModifyStreamPackageChannelInputAuthInfoRequest() (request *ModifyStreamP
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageChannelInputAuthInfo")
+    
     return
 }
 
@@ -373,6 +383,7 @@ func NewUnbindCdnDomainWithChannelRequest() (request *UnbindCdnDomainWithChannel
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "UnbindCdnDomainWithChannel")
+    
     return
 }
 

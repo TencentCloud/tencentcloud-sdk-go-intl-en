@@ -48,6 +48,7 @@ func NewAcceptAttachCcnInstancesRequest() (request *AcceptAttachCcnInstancesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AcceptAttachCcnInstances")
+    
     return
 }
 
@@ -87,6 +88,7 @@ func NewAddBandwidthPackageResourcesRequest() (request *AddBandwidthPackageResou
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AddBandwidthPackageResources")
+    
     return
 }
 
@@ -118,6 +120,7 @@ func NewAllocateAddressesRequest() (request *AllocateAddressesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AllocateAddresses")
+    
     return
 }
 
@@ -162,6 +165,7 @@ func NewAssignIpv6AddressesRequest() (request *AssignIpv6AddressesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AssignIpv6Addresses")
+    
     return
 }
 
@@ -209,6 +213,7 @@ func NewAssignIpv6CidrBlockRequest() (request *AssignIpv6CidrBlockRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AssignIpv6CidrBlock")
+    
     return
 }
 
@@ -246,6 +251,7 @@ func NewAssignIpv6SubnetCidrBlockRequest() (request *AssignIpv6SubnetCidrBlockRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AssignIpv6SubnetCidrBlock")
+    
     return
 }
 
@@ -285,6 +291,7 @@ func NewAssignPrivateIpAddressesRequest() (request *AssignPrivateIpAddressesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AssignPrivateIpAddresses")
+    
     return
 }
 
@@ -335,6 +342,7 @@ func NewAssociateAddressRequest() (request *AssociateAddressRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AssociateAddress")
+    
     return
 }
 
@@ -392,6 +400,7 @@ func NewAssociateDirectConnectGatewayNatGatewayRequest() (request *AssociateDire
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AssociateDirectConnectGatewayNatGateway")
+    
     return
 }
 
@@ -426,6 +435,7 @@ func NewAssociateNatGatewayAddressRequest() (request *AssociateNatGatewayAddress
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AssociateNatGatewayAddress")
+    
     return
 }
 
@@ -465,6 +475,7 @@ func NewAssociateNetworkAclSubnetsRequest() (request *AssociateNetworkAclSubnets
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AssociateNetworkAclSubnets")
+    
     return
 }
 
@@ -498,6 +509,7 @@ func NewAssociateNetworkInterfaceSecurityGroupsRequest() (request *AssociateNetw
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AssociateNetworkInterfaceSecurityGroups")
+    
     return
 }
 
@@ -531,6 +543,7 @@ func NewAttachCcnInstancesRequest() (request *AttachCcnInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AttachCcnInstances")
+    
     return
 }
 
@@ -577,6 +590,7 @@ func NewAttachClassicLinkVpcRequest() (request *AttachClassicLinkVpcRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AttachClassicLinkVpc")
+    
     return
 }
 
@@ -620,6 +634,7 @@ func NewAttachNetworkInterfaceRequest() (request *AttachNetworkInterfaceRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AttachNetworkInterface")
+    
     return
 }
 
@@ -669,6 +684,7 @@ func NewAuditCrossBorderComplianceRequest() (request *AuditCrossBorderCompliance
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "AuditCrossBorderCompliance")
+    
     return
 }
 
@@ -703,6 +719,7 @@ func NewCheckAssistantCidrRequest() (request *CheckAssistantCidrRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CheckAssistantCidr")
+    
     return
 }
 
@@ -744,6 +761,7 @@ func NewCheckNetDetectStateRequest() (request *CheckNetDetectStateRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CheckNetDetectState")
+    
     return
 }
 
@@ -784,6 +802,7 @@ func NewCloneSecurityGroupRequest() (request *CloneSecurityGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CloneSecurityGroup")
+    
     return
 }
 
@@ -817,6 +836,7 @@ func NewCreateAddressTemplateRequest() (request *CreateAddressTemplateRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateAddressTemplate")
+    
     return
 }
 
@@ -850,6 +870,7 @@ func NewCreateAddressTemplateGroupRequest() (request *CreateAddressTemplateGroup
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateAddressTemplateGroup")
+    
     return
 }
 
@@ -882,6 +903,7 @@ func NewCreateAndAttachNetworkInterfaceRequest() (request *CreateAndAttachNetwor
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateAndAttachNetworkInterface")
+    
     return
 }
 
@@ -936,6 +958,7 @@ func NewCreateAssistantCidrRequest() (request *CreateAssistantCidrRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateAssistantCidr")
+    
     return
 }
 
@@ -972,6 +995,7 @@ func NewCreateBandwidthPackageRequest() (request *CreateBandwidthPackageRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateBandwidthPackage")
+    
     return
 }
 
@@ -1006,6 +1030,7 @@ func NewCreateCcnRequest() (request *CreateCcnRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateCcn")
+    
     return
 }
 
@@ -1049,6 +1074,7 @@ func NewCreateCustomerGatewayRequest() (request *CreateCustomerGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateCustomerGateway")
+    
     return
 }
 
@@ -1080,6 +1106,7 @@ func NewCreateDefaultVpcRequest() (request *CreateDefaultVpcRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateDefaultVpc")
+    
     return
 }
 
@@ -1128,6 +1155,7 @@ func NewCreateDirectConnectGatewayRequest() (request *CreateDirectConnectGateway
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateDirectConnectGateway")
+    
     return
 }
 
@@ -1160,6 +1188,7 @@ func NewCreateDirectConnectGatewayCcnRoutesRequest() (request *CreateDirectConne
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateDirectConnectGatewayCcnRoutes")
+    
     return
 }
 
@@ -1191,6 +1220,7 @@ func NewCreateFlowLogRequest() (request *CreateFlowLogRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateFlowLog")
+    
     return
 }
 
@@ -1226,6 +1256,7 @@ func NewCreateHaVipRequest() (request *CreateHaVipRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateHaVip")
+    
     return
 }
 
@@ -1262,6 +1293,7 @@ func NewCreateLocalGatewayRequest() (request *CreateLocalGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateLocalGateway")
+    
     return
 }
 
@@ -1297,6 +1329,7 @@ func NewCreateNatGatewayRequest() (request *CreateNatGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateNatGateway")
+    
     return
 }
 
@@ -1351,6 +1384,7 @@ func NewCreateNatGatewayDestinationIpPortTranslationNatRuleRequest() (request *C
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateNatGatewayDestinationIpPortTranslationNatRule")
+    
     return
 }
 
@@ -1403,6 +1437,7 @@ func NewCreateNatGatewaySourceIpTranslationNatRuleRequest() (request *CreateNatG
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateNatGatewaySourceIpTranslationNatRule")
+    
     return
 }
 
@@ -1439,6 +1474,7 @@ func NewCreateNetDetectRequest() (request *CreateNetDetectRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateNetDetect")
+    
     return
 }
 
@@ -1479,6 +1515,7 @@ func NewCreateNetworkAclRequest() (request *CreateNetworkAclRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateNetworkAcl")
+    
     return
 }
 
@@ -1514,6 +1551,7 @@ func NewCreateNetworkInterfaceRequest() (request *CreateNetworkInterfaceRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateNetworkInterface")
+    
     return
 }
 
@@ -1568,6 +1606,7 @@ func NewCreateRouteTableRequest() (request *CreateRouteTableRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateRouteTable")
+    
     return
 }
 
@@ -1607,6 +1646,7 @@ func NewCreateRoutesRequest() (request *CreateRoutesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateRoutes")
+    
     return
 }
 
@@ -1653,6 +1693,7 @@ func NewCreateSecurityGroupRequest() (request *CreateSecurityGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateSecurityGroup")
+    
     return
 }
 
@@ -1694,6 +1735,7 @@ func NewCreateSecurityGroupPoliciesRequest() (request *CreateSecurityGroupPolici
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateSecurityGroupPolicies")
+    
     return
 }
 
@@ -1763,6 +1805,7 @@ func NewCreateSecurityGroupWithPoliciesRequest() (request *CreateSecurityGroupWi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateSecurityGroupWithPolicies")
+    
     return
 }
 
@@ -1824,6 +1867,7 @@ func NewCreateServiceTemplateRequest() (request *CreateServiceTemplateRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateServiceTemplate")
+    
     return
 }
 
@@ -1855,6 +1899,7 @@ func NewCreateServiceTemplateGroupRequest() (request *CreateServiceTemplateGroup
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateServiceTemplateGroup")
+    
     return
 }
 
@@ -1888,6 +1933,7 @@ func NewCreateSubnetRequest() (request *CreateSubnetRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateSubnet")
+    
     return
 }
 
@@ -1941,6 +1987,7 @@ func NewCreateSubnetsRequest() (request *CreateSubnetsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateSubnets")
+    
     return
 }
 
@@ -1993,6 +2040,7 @@ func NewCreateVpcRequest() (request *CreateVpcRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateVpc")
+    
     return
 }
 
@@ -2035,6 +2083,7 @@ func NewCreateVpcEndPointRequest() (request *CreateVpcEndPointRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateVpcEndPoint")
+    
     return
 }
 
@@ -2076,6 +2125,7 @@ func NewCreateVpcEndPointServiceRequest() (request *CreateVpcEndPointServiceRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateVpcEndPointService")
+    
     return
 }
 
@@ -2113,6 +2163,7 @@ func NewCreateVpcEndPointServiceWhiteListRequest() (request *CreateVpcEndPointSe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateVpcEndPointServiceWhiteList")
+    
     return
 }
 
@@ -2145,6 +2196,7 @@ func NewCreateVpnConnectionRequest() (request *CreateVpnConnectionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateVpnConnection")
+    
     return
 }
 
@@ -2187,6 +2239,7 @@ func NewCreateVpnGatewayRequest() (request *CreateVpnGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateVpnGateway")
+    
     return
 }
 
@@ -2225,6 +2278,7 @@ func NewCreateVpnGatewayRoutesRequest() (request *CreateVpnGatewayRoutesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "CreateVpnGatewayRoutes")
+    
     return
 }
 
@@ -2261,6 +2315,7 @@ func NewDeleteAddressTemplateRequest() (request *DeleteAddressTemplateRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteAddressTemplate")
+    
     return
 }
 
@@ -2292,6 +2347,7 @@ func NewDeleteAddressTemplateGroupRequest() (request *DeleteAddressTemplateGroup
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteAddressTemplateGroup")
+    
     return
 }
 
@@ -2323,6 +2379,7 @@ func NewDeleteAssistantCidrRequest() (request *DeleteAssistantCidrRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteAssistantCidr")
+    
     return
 }
 
@@ -2357,6 +2414,7 @@ func NewDeleteBandwidthPackageRequest() (request *DeleteBandwidthPackageRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteBandwidthPackage")
+    
     return
 }
 
@@ -2386,6 +2444,7 @@ func NewDeleteCcnRequest() (request *DeleteCcnRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteCcn")
+    
     return
 }
 
@@ -2424,6 +2483,7 @@ func NewDeleteCustomerGatewayRequest() (request *DeleteCustomerGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteCustomerGateway")
+    
     return
 }
 
@@ -2455,6 +2515,7 @@ func NewDeleteDirectConnectGatewayRequest() (request *DeleteDirectConnectGateway
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteDirectConnectGateway")
+    
     return
 }
 
@@ -2493,6 +2554,7 @@ func NewDeleteDirectConnectGatewayCcnRoutesRequest() (request *DeleteDirectConne
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteDirectConnectGatewayCcnRoutes")
+    
     return
 }
 
@@ -2523,6 +2585,7 @@ func NewDeleteFlowLogRequest() (request *DeleteFlowLogRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteFlowLog")
+    
     return
 }
 
@@ -2554,6 +2617,7 @@ func NewDeleteHaVipRequest() (request *DeleteHaVipRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteHaVip")
+    
     return
 }
 
@@ -2589,6 +2653,7 @@ func NewDeleteLocalGatewayRequest() (request *DeleteLocalGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteLocalGateway")
+    
     return
 }
 
@@ -2623,6 +2688,7 @@ func NewDeleteNatGatewayRequest() (request *DeleteNatGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteNatGateway")
+    
     return
 }
 
@@ -2657,6 +2723,7 @@ func NewDeleteNatGatewayDestinationIpPortTranslationNatRuleRequest() (request *D
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteNatGatewayDestinationIpPortTranslationNatRule")
+    
     return
 }
 
@@ -2689,6 +2756,7 @@ func NewDeleteNatGatewaySourceIpTranslationNatRuleRequest() (request *DeleteNatG
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteNatGatewaySourceIpTranslationNatRule")
+    
     return
 }
 
@@ -2720,6 +2788,7 @@ func NewDeleteNetDetectRequest() (request *DeleteNetDetectRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteNetDetect")
+    
     return
 }
 
@@ -2751,6 +2820,7 @@ func NewDeleteNetworkAclRequest() (request *DeleteNetworkAclRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteNetworkAcl")
+    
     return
 }
 
@@ -2782,6 +2852,7 @@ func NewDeleteNetworkInterfaceRequest() (request *DeleteNetworkInterfaceRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteNetworkInterface")
+    
     return
 }
 
@@ -2823,6 +2894,7 @@ func NewDeleteRouteTableRequest() (request *DeleteRouteTableRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteRouteTable")
+    
     return
 }
 
@@ -2853,6 +2925,7 @@ func NewDeleteRoutesRequest() (request *DeleteRoutesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteRoutes")
+    
     return
 }
 
@@ -2887,6 +2960,7 @@ func NewDeleteSecurityGroupRequest() (request *DeleteSecurityGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteSecurityGroup")
+    
     return
 }
 
@@ -2927,6 +3001,7 @@ func NewDeleteSecurityGroupPoliciesRequest() (request *DeleteSecurityGroupPolici
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteSecurityGroupPolicies")
+    
     return
 }
 
@@ -2962,6 +3037,7 @@ func NewDeleteServiceTemplateRequest() (request *DeleteServiceTemplateRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteServiceTemplate")
+    
     return
 }
 
@@ -2993,6 +3069,7 @@ func NewDeleteServiceTemplateGroupRequest() (request *DeleteServiceTemplateGroup
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteServiceTemplateGroup")
+    
     return
 }
 
@@ -3024,6 +3101,7 @@ func NewDeleteSubnetRequest() (request *DeleteSubnetRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteSubnet")
+    
     return
 }
 
@@ -3057,6 +3135,7 @@ func NewDeleteVpcRequest() (request *DeleteVpcRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteVpc")
+    
     return
 }
 
@@ -3093,6 +3172,7 @@ func NewDeleteVpcEndPointRequest() (request *DeleteVpcEndPointRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteVpcEndPoint")
+    
     return
 }
 
@@ -3125,6 +3205,7 @@ func NewDeleteVpcEndPointServiceRequest() (request *DeleteVpcEndPointServiceRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteVpcEndPointService")
+    
     return
 }
 
@@ -3159,6 +3240,7 @@ func NewDeleteVpcEndPointServiceWhiteListRequest() (request *DeleteVpcEndPointSe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteVpcEndPointServiceWhiteList")
+    
     return
 }
 
@@ -3190,6 +3272,7 @@ func NewDeleteVpnConnectionRequest() (request *DeleteVpnConnectionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteVpnConnection")
+    
     return
 }
 
@@ -3222,6 +3305,7 @@ func NewDeleteVpnGatewayRequest() (request *DeleteVpnGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteVpnGateway")
+    
     return
 }
 
@@ -3255,6 +3339,7 @@ func NewDeleteVpnGatewayRoutesRequest() (request *DeleteVpnGatewayRoutesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DeleteVpnGatewayRoutes")
+    
     return
 }
 
@@ -3286,6 +3371,7 @@ func NewDescribeAccountAttributesRequest() (request *DescribeAccountAttributesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeAccountAttributes")
+    
     return
 }
 
@@ -3317,6 +3403,7 @@ func NewDescribeAddressQuotaRequest() (request *DescribeAddressQuotaRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeAddressQuota")
+    
     return
 }
 
@@ -3346,6 +3433,7 @@ func NewDescribeAddressTemplateGroupsRequest() (request *DescribeAddressTemplate
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeAddressTemplateGroups")
+    
     return
 }
 
@@ -3377,6 +3465,7 @@ func NewDescribeAddressTemplatesRequest() (request *DescribeAddressTemplatesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeAddressTemplates")
+    
     return
 }
 
@@ -3409,6 +3498,7 @@ func NewDescribeAddressesRequest() (request *DescribeAddressesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeAddresses")
+    
     return
 }
 
@@ -3442,6 +3532,7 @@ func NewDescribeAssistantCidrRequest() (request *DescribeAssistantCidrRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeAssistantCidr")
+    
     return
 }
 
@@ -3474,6 +3565,7 @@ func NewDescribeBandwidthPackageBillUsageRequest() (request *DescribeBandwidthPa
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeBandwidthPackageBillUsage")
+    
     return
 }
 
@@ -3506,6 +3598,7 @@ func NewDescribeBandwidthPackageQuotaRequest() (request *DescribeBandwidthPackag
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeBandwidthPackageQuota")
+    
     return
 }
 
@@ -3538,6 +3631,7 @@ func NewDescribeBandwidthPackageResourcesRequest() (request *DescribeBandwidthPa
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeBandwidthPackageResources")
+    
     return
 }
 
@@ -3567,6 +3661,7 @@ func NewDescribeBandwidthPackagesRequest() (request *DescribeBandwidthPackagesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeBandwidthPackages")
+    
     return
 }
 
@@ -3596,6 +3691,7 @@ func NewDescribeCcnAttachedInstancesRequest() (request *DescribeCcnAttachedInsta
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeCcnAttachedInstances")
+    
     return
 }
 
@@ -3630,6 +3726,7 @@ func NewDescribeCcnRegionBandwidthLimitsRequest() (request *DescribeCcnRegionBan
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeCcnRegionBandwidthLimits")
+    
     return
 }
 
@@ -3659,6 +3756,7 @@ func NewDescribeCcnRoutesRequest() (request *DescribeCcnRoutesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeCcnRoutes")
+    
     return
 }
 
@@ -3691,6 +3789,7 @@ func NewDescribeCcnsRequest() (request *DescribeCcnsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeCcns")
+    
     return
 }
 
@@ -3728,6 +3827,7 @@ func NewDescribeClassicLinkInstancesRequest() (request *DescribeClassicLinkInsta
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeClassicLinkInstances")
+    
     return
 }
 
@@ -3759,6 +3859,7 @@ func NewDescribeCrossBorderComplianceRequest() (request *DescribeCrossBorderComp
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeCrossBorderCompliance")
+    
     return
 }
 
@@ -3791,6 +3892,7 @@ func NewDescribeCustomerGatewayVendorsRequest() (request *DescribeCustomerGatewa
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeCustomerGatewayVendors")
+    
     return
 }
 
@@ -3821,6 +3923,7 @@ func NewDescribeCustomerGatewaysRequest() (request *DescribeCustomerGatewaysRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeCustomerGateways")
+    
     return
 }
 
@@ -3851,6 +3954,7 @@ func NewDescribeDirectConnectGatewayCcnRoutesRequest() (request *DescribeDirectC
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeDirectConnectGatewayCcnRoutes")
+    
     return
 }
 
@@ -3881,6 +3985,7 @@ func NewDescribeDirectConnectGatewaysRequest() (request *DescribeDirectConnectGa
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeDirectConnectGateways")
+    
     return
 }
 
@@ -3916,6 +4021,7 @@ func NewDescribeFlowLogRequest() (request *DescribeFlowLogRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeFlowLog")
+    
     return
 }
 
@@ -3946,6 +4052,7 @@ func NewDescribeFlowLogsRequest() (request *DescribeFlowLogsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeFlowLogs")
+    
     return
 }
 
@@ -3977,6 +4084,7 @@ func NewDescribeGatewayFlowMonitorDetailRequest() (request *DescribeGatewayFlowM
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeGatewayFlowMonitorDetail")
+    
     return
 }
 
@@ -4012,6 +4120,7 @@ func NewDescribeGatewayFlowQosRequest() (request *DescribeGatewayFlowQosRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeGatewayFlowQos")
+    
     return
 }
 
@@ -4043,6 +4152,7 @@ func NewDescribeHaVipsRequest() (request *DescribeHaVipsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeHaVips")
+    
     return
 }
 
@@ -4075,6 +4185,7 @@ func NewDescribeIpGeolocationDatabaseUrlRequest() (request *DescribeIpGeolocatio
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeIpGeolocationDatabaseUrl")
+    
     return
 }
 
@@ -4107,6 +4218,7 @@ func NewDescribeIpGeolocationInfosRequest() (request *DescribeIpGeolocationInfos
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeIpGeolocationInfos")
+    
     return
 }
 
@@ -4140,6 +4252,7 @@ func NewDescribeLocalGatewayRequest() (request *DescribeLocalGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeLocalGateway")
+    
     return
 }
 
@@ -4174,6 +4287,7 @@ func NewDescribeNatGatewayDestinationIpPortTranslationNatRulesRequest() (request
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGatewayDestinationIpPortTranslationNatRules")
+    
     return
 }
 
@@ -4211,6 +4325,7 @@ func NewDescribeNatGatewaySourceIpTranslationNatRulesRequest() (request *Describ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGatewaySourceIpTranslationNatRules")
+    
     return
 }
 
@@ -4246,6 +4361,7 @@ func NewDescribeNatGatewaysRequest() (request *DescribeNatGatewaysRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGateways")
+    
     return
 }
 
@@ -4277,6 +4393,7 @@ func NewDescribeNetDetectStatesRequest() (request *DescribeNetDetectStatesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeNetDetectStates")
+    
     return
 }
 
@@ -4312,6 +4429,7 @@ func NewDescribeNetDetectsRequest() (request *DescribeNetDetectsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeNetDetects")
+    
     return
 }
 
@@ -4345,6 +4463,7 @@ func NewDescribeNetworkAclsRequest() (request *DescribeNetworkAclsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeNetworkAcls")
+    
     return
 }
 
@@ -4380,6 +4499,7 @@ func NewDescribeNetworkInterfaceLimitRequest() (request *DescribeNetworkInterfac
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeNetworkInterfaceLimit")
+    
     return
 }
 
@@ -4412,6 +4532,7 @@ func NewDescribeNetworkInterfacesRequest() (request *DescribeNetworkInterfacesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeNetworkInterfaces")
+    
     return
 }
 
@@ -4447,6 +4568,7 @@ func NewDescribeRouteTablesRequest() (request *DescribeRouteTablesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeRouteTables")
+    
     return
 }
 
@@ -4482,6 +4604,7 @@ func NewDescribeSecurityGroupAssociationStatisticsRequest() (request *DescribeSe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeSecurityGroupAssociationStatistics")
+    
     return
 }
 
@@ -4513,6 +4636,7 @@ func NewDescribeSecurityGroupPoliciesRequest() (request *DescribeSecurityGroupPo
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeSecurityGroupPolicies")
+    
     return
 }
 
@@ -4543,6 +4667,7 @@ func NewDescribeSecurityGroupReferencesRequest() (request *DescribeSecurityGroup
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeSecurityGroupReferences")
+    
     return
 }
 
@@ -4574,6 +4699,7 @@ func NewDescribeSecurityGroupsRequest() (request *DescribeSecurityGroupsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeSecurityGroups")
+    
     return
 }
 
@@ -4610,6 +4736,7 @@ func NewDescribeServiceTemplateGroupsRequest() (request *DescribeServiceTemplate
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeServiceTemplateGroups")
+    
     return
 }
 
@@ -4641,6 +4768,7 @@ func NewDescribeServiceTemplatesRequest() (request *DescribeServiceTemplatesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeServiceTemplates")
+    
     return
 }
 
@@ -4671,6 +4799,7 @@ func NewDescribeSubnetsRequest() (request *DescribeSubnetsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeSubnets")
+    
     return
 }
 
@@ -4708,6 +4837,7 @@ func NewDescribeTaskResultRequest() (request *DescribeTaskResultRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeTaskResult")
+    
     return
 }
 
@@ -4739,6 +4869,7 @@ func NewDescribeVpcEndPointRequest() (request *DescribeVpcEndPointRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcEndPoint")
+    
     return
 }
 
@@ -4772,6 +4903,7 @@ func NewDescribeVpcEndPointServiceRequest() (request *DescribeVpcEndPointService
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcEndPointService")
+    
     return
 }
 
@@ -4806,6 +4938,7 @@ func NewDescribeVpcEndPointServiceWhiteListRequest() (request *DescribeVpcEndPoi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcEndPointServiceWhiteList")
+    
     return
 }
 
@@ -4836,6 +4969,7 @@ func NewDescribeVpcInstancesRequest() (request *DescribeVpcInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcInstances")
+    
     return
 }
 
@@ -4869,6 +5003,7 @@ func NewDescribeVpcIpv6AddressesRequest() (request *DescribeVpcIpv6AddressesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcIpv6Addresses")
+    
     return
 }
 
@@ -4901,6 +5036,7 @@ func NewDescribeVpcPrivateIpAddressesRequest() (request *DescribeVpcPrivateIpAdd
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcPrivateIpAddresses")
+    
     return
 }
 
@@ -4935,6 +5071,7 @@ func NewDescribeVpcResourceDashboardRequest() (request *DescribeVpcResourceDashb
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcResourceDashboard")
+    
     return
 }
 
@@ -4965,6 +5102,7 @@ func NewDescribeVpcTaskResultRequest() (request *DescribeVpcTaskResultRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcTaskResult")
+    
     return
 }
 
@@ -4997,6 +5135,7 @@ func NewDescribeVpcsRequest() (request *DescribeVpcsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcs")
+    
     return
 }
 
@@ -5032,6 +5171,7 @@ func NewDescribeVpnConnectionsRequest() (request *DescribeVpnConnectionsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpnConnections")
+    
     return
 }
 
@@ -5064,6 +5204,7 @@ func NewDescribeVpnGatewayCcnRoutesRequest() (request *DescribeVpnGatewayCcnRout
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpnGatewayCcnRoutes")
+    
     return
 }
 
@@ -5095,6 +5236,7 @@ func NewDescribeVpnGatewayRoutesRequest() (request *DescribeVpnGatewayRoutesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpnGatewayRoutes")
+    
     return
 }
 
@@ -5131,6 +5273,7 @@ func NewDescribeVpnGatewaysRequest() (request *DescribeVpnGatewaysRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpnGateways")
+    
     return
 }
 
@@ -5167,6 +5310,7 @@ func NewDetachCcnInstancesRequest() (request *DetachCcnInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DetachCcnInstances")
+    
     return
 }
 
@@ -5201,6 +5345,7 @@ func NewDetachClassicLinkVpcRequest() (request *DetachClassicLinkVpcRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DetachClassicLinkVpc")
+    
     return
 }
 
@@ -5235,6 +5380,7 @@ func NewDetachNetworkInterfaceRequest() (request *DetachNetworkInterfaceRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DetachNetworkInterface")
+    
     return
 }
 
@@ -5269,6 +5415,7 @@ func NewDisableCcnRoutesRequest() (request *DisableCcnRoutesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DisableCcnRoutes")
+    
     return
 }
 
@@ -5299,6 +5446,7 @@ func NewDisableGatewayFlowMonitorRequest() (request *DisableGatewayFlowMonitorRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DisableGatewayFlowMonitor")
+    
     return
 }
 
@@ -5330,6 +5478,7 @@ func NewDisassociateAddressRequest() (request *DisassociateAddressRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DisassociateAddress")
+    
     return
 }
 
@@ -5374,6 +5523,7 @@ func NewDisassociateDirectConnectGatewayNatGatewayRequest() (request *Disassocia
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DisassociateDirectConnectGatewayNatGateway")
+    
     return
 }
 
@@ -5407,6 +5557,7 @@ func NewDisassociateNatGatewayAddressRequest() (request *DisassociateNatGatewayA
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DisassociateNatGatewayAddress")
+    
     return
 }
 
@@ -5439,6 +5590,7 @@ func NewDisassociateNetworkAclSubnetsRequest() (request *DisassociateNetworkAclS
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DisassociateNetworkAclSubnets")
+    
     return
 }
 
@@ -5471,6 +5623,7 @@ func NewDisassociateNetworkInterfaceSecurityGroupsRequest() (request *Disassocia
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DisassociateNetworkInterfaceSecurityGroups")
+    
     return
 }
 
@@ -5502,6 +5655,7 @@ func NewDisassociateVpcEndPointSecurityGroupsRequest() (request *DisassociateVpc
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DisassociateVpcEndPointSecurityGroups")
+    
     return
 }
 
@@ -5534,6 +5688,7 @@ func NewDownloadCustomerGatewayConfigurationRequest() (request *DownloadCustomer
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "DownloadCustomerGatewayConfiguration")
+    
     return
 }
 
@@ -5564,6 +5719,7 @@ func NewEnableCcnRoutesRequest() (request *EnableCcnRoutesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "EnableCcnRoutes")
+    
     return
 }
 
@@ -5596,6 +5752,7 @@ func NewEnableGatewayFlowMonitorRequest() (request *EnableGatewayFlowMonitorRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "EnableGatewayFlowMonitor")
+    
     return
 }
 
@@ -5627,6 +5784,7 @@ func NewEnableVpcEndPointConnectRequest() (request *EnableVpcEndPointConnectRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "EnableVpcEndPointConnect")
+    
     return
 }
 
@@ -5659,6 +5817,7 @@ func NewGetCcnRegionBandwidthLimitsRequest() (request *GetCcnRegionBandwidthLimi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "GetCcnRegionBandwidthLimits")
+    
     return
 }
 
@@ -5690,6 +5849,7 @@ func NewHaVipAssociateAddressIpRequest() (request *HaVipAssociateAddressIpReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "HaVipAssociateAddressIp")
+    
     return
 }
 
@@ -5724,6 +5884,7 @@ func NewHaVipDisassociateAddressIpRequest() (request *HaVipDisassociateAddressIp
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "HaVipDisassociateAddressIp")
+    
     return
 }
 
@@ -5759,6 +5920,7 @@ func NewInquirePriceCreateDirectConnectGatewayRequest() (request *InquirePriceCr
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "InquirePriceCreateDirectConnectGateway")
+    
     return
 }
 
@@ -5792,6 +5954,7 @@ func NewInquiryPriceCreateVpnGatewayRequest() (request *InquiryPriceCreateVpnGat
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "InquiryPriceCreateVpnGateway")
+    
     return
 }
 
@@ -5821,6 +5984,7 @@ func NewInquiryPriceRenewVpnGatewayRequest() (request *InquiryPriceRenewVpnGatew
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "InquiryPriceRenewVpnGateway")
+    
     return
 }
 
@@ -5852,6 +6016,7 @@ func NewInquiryPriceResetVpnGatewayInternetMaxBandwidthRequest() (request *Inqui
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "InquiryPriceResetVpnGatewayInternetMaxBandwidth")
+    
     return
 }
 
@@ -5883,6 +6048,7 @@ func NewMigrateNetworkInterfaceRequest() (request *MigrateNetworkInterfaceReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "MigrateNetworkInterface")
+    
     return
 }
 
@@ -5917,6 +6083,7 @@ func NewMigratePrivateIpAddressRequest() (request *MigratePrivateIpAddressReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "MigratePrivateIpAddress")
+    
     return
 }
 
@@ -5959,6 +6126,7 @@ func NewModifyAddressAttributeRequest() (request *ModifyAddressAttributeRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyAddressAttribute")
+    
     return
 }
 
@@ -5991,6 +6159,7 @@ func NewModifyAddressInternetChargeTypeRequest() (request *ModifyAddressInternet
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyAddressInternetChargeType")
+    
     return
 }
 
@@ -6032,6 +6201,7 @@ func NewModifyAddressTemplateAttributeRequest() (request *ModifyAddressTemplateA
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyAddressTemplateAttribute")
+    
     return
 }
 
@@ -6066,6 +6236,7 @@ func NewModifyAddressTemplateGroupAttributeRequest() (request *ModifyAddressTemp
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyAddressTemplateGroupAttribute")
+    
     return
 }
 
@@ -6100,6 +6271,7 @@ func NewModifyAddressesBandwidthRequest() (request *ModifyAddressesBandwidthRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyAddressesBandwidth")
+    
     return
 }
 
@@ -6134,6 +6306,7 @@ func NewModifyAssistantCidrRequest() (request *ModifyAssistantCidrRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyAssistantCidr")
+    
     return
 }
 
@@ -6172,6 +6345,7 @@ func NewModifyBandwidthPackageAttributeRequest() (request *ModifyBandwidthPackag
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyBandwidthPackageAttribute")
+    
     return
 }
 
@@ -6201,6 +6375,7 @@ func NewModifyCcnAttachedInstancesAttributeRequest() (request *ModifyCcnAttached
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyCcnAttachedInstancesAttribute")
+    
     return
 }
 
@@ -6235,6 +6410,7 @@ func NewModifyCcnAttributeRequest() (request *ModifyCcnAttributeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyCcnAttribute")
+    
     return
 }
 
@@ -6265,6 +6441,7 @@ func NewModifyCcnRegionBandwidthLimitsTypeRequest() (request *ModifyCcnRegionBan
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyCcnRegionBandwidthLimitsType")
+    
     return
 }
 
@@ -6298,6 +6475,7 @@ func NewModifyCustomerGatewayAttributeRequest() (request *ModifyCustomerGatewayA
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyCustomerGatewayAttribute")
+    
     return
 }
 
@@ -6328,6 +6506,7 @@ func NewModifyDirectConnectGatewayAttributeRequest() (request *ModifyDirectConne
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyDirectConnectGatewayAttribute")
+    
     return
 }
 
@@ -6362,6 +6541,7 @@ func NewModifyFlowLogAttributeRequest() (request *ModifyFlowLogAttributeRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyFlowLogAttribute")
+    
     return
 }
 
@@ -6392,6 +6572,7 @@ func NewModifyGatewayFlowQosRequest() (request *ModifyGatewayFlowQosRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyGatewayFlowQos")
+    
     return
 }
 
@@ -6423,6 +6604,7 @@ func NewModifyHaVipAttributeRequest() (request *ModifyHaVipAttributeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyHaVipAttribute")
+    
     return
 }
 
@@ -6456,6 +6638,7 @@ func NewModifyIpv6AddressesAttributeRequest() (request *ModifyIpv6AddressesAttri
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyIpv6AddressesAttribute")
+    
     return
 }
 
@@ -6488,6 +6671,7 @@ func NewModifyLocalGatewayRequest() (request *ModifyLocalGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyLocalGateway")
+    
     return
 }
 
@@ -6522,6 +6706,7 @@ func NewModifyNatGatewayAttributeRequest() (request *ModifyNatGatewayAttributeRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyNatGatewayAttribute")
+    
     return
 }
 
@@ -6555,6 +6740,7 @@ func NewModifyNatGatewayDestinationIpPortTranslationNatRuleRequest() (request *M
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyNatGatewayDestinationIpPortTranslationNatRule")
+    
     return
 }
 
@@ -6588,6 +6774,7 @@ func NewModifyNatGatewaySourceIpTranslationNatRuleRequest() (request *ModifyNatG
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyNatGatewaySourceIpTranslationNatRule")
+    
     return
 }
 
@@ -6622,6 +6809,7 @@ func NewModifyNetDetectRequest() (request *ModifyNetDetectRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyNetDetect")
+    
     return
 }
 
@@ -6659,6 +6847,7 @@ func NewModifyNetworkAclAttributeRequest() (request *ModifyNetworkAclAttributeRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyNetworkAclAttribute")
+    
     return
 }
 
@@ -6691,6 +6880,7 @@ func NewModifyNetworkAclEntriesRequest() (request *ModifyNetworkAclEntriesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyNetworkAclEntries")
+    
     return
 }
 
@@ -6726,6 +6916,7 @@ func NewModifyNetworkInterfaceAttributeRequest() (request *ModifyNetworkInterfac
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyNetworkInterfaceAttribute")
+    
     return
 }
 
@@ -6759,6 +6950,7 @@ func NewModifyPrivateIpAddressesAttributeRequest() (request *ModifyPrivateIpAddr
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyPrivateIpAddressesAttribute")
+    
     return
 }
 
@@ -6790,6 +6982,7 @@ func NewModifyRouteTableAttributeRequest() (request *ModifyRouteTableAttributeRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyRouteTableAttribute")
+    
     return
 }
 
@@ -6820,6 +7013,7 @@ func NewModifySecurityGroupAttributeRequest() (request *ModifySecurityGroupAttri
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifySecurityGroupAttribute")
+    
     return
 }
 
@@ -6852,6 +7046,7 @@ func NewModifySecurityGroupPoliciesRequest() (request *ModifySecurityGroupPolici
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifySecurityGroupPolicies")
+    
     return
 }
 
@@ -6917,6 +7112,7 @@ func NewModifyServiceTemplateAttributeRequest() (request *ModifyServiceTemplateA
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyServiceTemplateAttribute")
+    
     return
 }
 
@@ -6950,6 +7146,7 @@ func NewModifyServiceTemplateGroupAttributeRequest() (request *ModifyServiceTemp
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyServiceTemplateGroupAttribute")
+    
     return
 }
 
@@ -6981,6 +7178,7 @@ func NewModifySubnetAttributeRequest() (request *ModifySubnetAttributeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifySubnetAttribute")
+    
     return
 }
 
@@ -7011,6 +7209,7 @@ func NewModifyVpcAttributeRequest() (request *ModifyVpcAttributeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpcAttribute")
+    
     return
 }
 
@@ -7043,6 +7242,7 @@ func NewModifyVpcEndPointAttributeRequest() (request *ModifyVpcEndPointAttribute
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpcEndPointAttribute")
+    
     return
 }
 
@@ -7078,6 +7278,7 @@ func NewModifyVpcEndPointServiceAttributeRequest() (request *ModifyVpcEndPointSe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpcEndPointServiceAttribute")
+    
     return
 }
 
@@ -7114,6 +7315,7 @@ func NewModifyVpcEndPointServiceWhiteListRequest() (request *ModifyVpcEndPointSe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpcEndPointServiceWhiteList")
+    
     return
 }
 
@@ -7146,6 +7348,7 @@ func NewModifyVpnConnectionAttributeRequest() (request *ModifyVpnConnectionAttri
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpnConnectionAttribute")
+    
     return
 }
 
@@ -7177,6 +7380,7 @@ func NewModifyVpnGatewayAttributeRequest() (request *ModifyVpnGatewayAttributeRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpnGatewayAttribute")
+    
     return
 }
 
@@ -7208,6 +7412,7 @@ func NewModifyVpnGatewayCcnRoutesRequest() (request *ModifyVpnGatewayCcnRoutesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpnGatewayCcnRoutes")
+    
     return
 }
 
@@ -7238,6 +7443,7 @@ func NewModifyVpnGatewayRoutesRequest() (request *ModifyVpnGatewayRoutesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ModifyVpnGatewayRoutes")
+    
     return
 }
 
@@ -7272,6 +7478,7 @@ func NewNotifyRoutesRequest() (request *NotifyRoutesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "NotifyRoutes")
+    
     return
 }
 
@@ -7309,6 +7516,7 @@ func NewRejectAttachCcnInstancesRequest() (request *RejectAttachCcnInstancesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "RejectAttachCcnInstances")
+    
     return
 }
 
@@ -7344,6 +7552,7 @@ func NewReleaseAddressesRequest() (request *ReleaseAddressesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ReleaseAddresses")
+    
     return
 }
 
@@ -7379,6 +7588,7 @@ func NewRemoveBandwidthPackageResourcesRequest() (request *RemoveBandwidthPackag
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "RemoveBandwidthPackageResources")
+    
     return
 }
 
@@ -7410,6 +7620,7 @@ func NewRenewVpnGatewayRequest() (request *RenewVpnGatewayRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "RenewVpnGateway")
+    
     return
 }
 
@@ -7440,6 +7651,7 @@ func NewReplaceDirectConnectGatewayCcnRoutesRequest() (request *ReplaceDirectCon
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ReplaceDirectConnectGatewayCcnRoutes")
+    
     return
 }
 
@@ -7470,6 +7682,7 @@ func NewReplaceRouteTableAssociationRequest() (request *ReplaceRouteTableAssocia
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ReplaceRouteTableAssociation")
+    
     return
 }
 
@@ -7503,6 +7716,7 @@ func NewReplaceRoutesRequest() (request *ReplaceRoutesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ReplaceRoutes")
+    
     return
 }
 
@@ -7545,6 +7759,7 @@ func NewReplaceSecurityGroupPolicyRequest() (request *ReplaceSecurityGroupPolicy
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ReplaceSecurityGroupPolicy")
+    
     return
 }
 
@@ -7585,6 +7800,7 @@ func NewResetAttachCcnInstancesRequest() (request *ResetAttachCcnInstancesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ResetAttachCcnInstances")
+    
     return
 }
 
@@ -7615,6 +7831,7 @@ func NewResetNatGatewayConnectionRequest() (request *ResetNatGatewayConnectionRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ResetNatGatewayConnection")
+    
     return
 }
 
@@ -7645,6 +7862,7 @@ func NewResetRoutesRequest() (request *ResetRoutesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ResetRoutes")
+    
     return
 }
 
@@ -7683,6 +7901,7 @@ func NewResetVpnConnectionRequest() (request *ResetVpnConnectionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ResetVpnConnection")
+    
     return
 }
 
@@ -7713,6 +7932,7 @@ func NewResetVpnGatewayInternetMaxBandwidthRequest() (request *ResetVpnGatewayIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "ResetVpnGatewayInternetMaxBandwidth")
+    
     return
 }
 
@@ -7745,6 +7965,7 @@ func NewSetCcnRegionBandwidthLimitsRequest() (request *SetCcnRegionBandwidthLimi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "SetCcnRegionBandwidthLimits")
+    
     return
 }
 
@@ -7776,6 +7997,7 @@ func NewTransformAddressRequest() (request *TransformAddressRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "TransformAddress")
+    
     return
 }
 
@@ -7814,6 +8036,7 @@ func NewUnassignIpv6AddressesRequest() (request *UnassignIpv6AddressesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "UnassignIpv6Addresses")
+    
     return
 }
 
@@ -7850,6 +8073,7 @@ func NewUnassignIpv6CidrBlockRequest() (request *UnassignIpv6CidrBlockRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "UnassignIpv6CidrBlock")
+    
     return
 }
 
@@ -7882,6 +8106,7 @@ func NewUnassignIpv6SubnetCidrBlockRequest() (request *UnassignIpv6SubnetCidrBlo
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "UnassignIpv6SubnetCidrBlock")
+    
     return
 }
 
@@ -7915,6 +8140,7 @@ func NewUnassignPrivateIpAddressesRequest() (request *UnassignPrivateIpAddresses
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "UnassignPrivateIpAddresses")
+    
     return
 }
 
@@ -7956,6 +8182,7 @@ func NewWithdrawNotifyRoutesRequest() (request *WithdrawNotifyRoutesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("vpc", APIVersion, "WithdrawNotifyRoutes")
+    
     return
 }
 

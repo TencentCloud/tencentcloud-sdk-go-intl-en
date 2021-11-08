@@ -48,6 +48,7 @@ func NewDescribeEventsRequest() (request *DescribeEventsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cloudaudit", APIVersion, "DescribeEvents")
+    
     return
 }
 

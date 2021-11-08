@@ -48,6 +48,7 @@ func NewCloneDBRequest() (request *CloneDBRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CloneDB")
+    
     return
 }
 
@@ -97,6 +98,7 @@ func NewCreateAccountRequest() (request *CreateAccountRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateAccount")
+    
     return
 }
 
@@ -137,6 +139,7 @@ func NewCreateBackupRequest() (request *CreateBackupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateBackup")
+    
     return
 }
 
@@ -180,6 +183,7 @@ func NewCreateBackupMigrationRequest() (request *CreateBackupMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateBackupMigration")
+    
     return
 }
 
@@ -216,6 +220,7 @@ func NewCreateDBRequest() (request *CreateDBRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateDB")
+    
     return
 }
 
@@ -259,6 +264,7 @@ func NewCreateDBInstancesRequest() (request *CreateDBInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateDBInstances")
+    
     return
 }
 
@@ -300,6 +306,7 @@ func NewCreateIncrementalMigrationRequest() (request *CreateIncrementalMigration
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateIncrementalMigration")
+    
     return
 }
 
@@ -339,6 +346,7 @@ func NewCreateMigrationRequest() (request *CreateMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateMigration")
+    
     return
 }
 
@@ -384,6 +392,7 @@ func NewDeleteAccountRequest() (request *DeleteAccountRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteAccount")
+    
     return
 }
 
@@ -421,6 +430,7 @@ func NewDeleteBackupMigrationRequest() (request *DeleteBackupMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteBackupMigration")
+    
     return
 }
 
@@ -454,6 +464,7 @@ func NewDeleteDBRequest() (request *DeleteDBRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteDB")
+    
     return
 }
 
@@ -490,6 +501,7 @@ func NewDeleteIncrementalMigrationRequest() (request *DeleteIncrementalMigration
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteIncrementalMigration")
+    
     return
 }
 
@@ -524,6 +536,7 @@ func NewDeleteMigrationRequest() (request *DeleteMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteMigration")
+    
     return
 }
 
@@ -561,6 +574,7 @@ func NewDescribeAccountsRequest() (request *DescribeAccountsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeAccounts")
+    
     return
 }
 
@@ -596,6 +610,7 @@ func NewDescribeBackupCommandRequest() (request *DescribeBackupCommandRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupCommand")
+    
     return
 }
 
@@ -627,6 +642,7 @@ func NewDescribeBackupFilesRequest() (request *DescribeBackupFilesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupFiles")
+    
     return
 }
 
@@ -666,6 +682,7 @@ func NewDescribeBackupMigrationRequest() (request *DescribeBackupMigrationReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupMigration")
+    
     return
 }
 
@@ -698,6 +715,7 @@ func NewDescribeBackupUploadSizeRequest() (request *DescribeBackupUploadSizeRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupUploadSize")
+    
     return
 }
 
@@ -733,6 +751,7 @@ func NewDescribeBackupsRequest() (request *DescribeBackupsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackups")
+    
     return
 }
 
@@ -772,6 +791,7 @@ func NewDescribeDBCharsetsRequest() (request *DescribeDBCharsetsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDBCharsets")
+    
     return
 }
 
@@ -815,6 +835,7 @@ func NewDescribeDBInstancesRequest() (request *DescribeDBInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDBInstances")
+    
     return
 }
 
@@ -854,6 +875,7 @@ func NewDescribeDBsRequest() (request *DescribeDBsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDBs")
+    
     return
 }
 
@@ -888,6 +910,7 @@ func NewDescribeDBsNormalRequest() (request *DescribeDBsNormalRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDBsNormal")
+    
     return
 }
 
@@ -922,6 +945,7 @@ func NewDescribeFlowStatusRequest() (request *DescribeFlowStatusRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeFlowStatus")
+    
     return
 }
 
@@ -957,6 +981,7 @@ func NewDescribeIncrementalMigrationRequest() (request *DescribeIncrementalMigra
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeIncrementalMigration")
+    
     return
 }
 
@@ -989,6 +1014,7 @@ func NewDescribeInstanceParamRecordsRequest() (request *DescribeInstanceParamRec
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeInstanceParamRecords")
+    
     return
 }
 
@@ -1024,6 +1050,7 @@ func NewDescribeInstanceParamsRequest() (request *DescribeInstanceParamsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeInstanceParams")
+    
     return
 }
 
@@ -1060,6 +1087,7 @@ func NewDescribeMigrationDetailRequest() (request *DescribeMigrationDetailReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeMigrationDetail")
+    
     return
 }
 
@@ -1096,6 +1124,7 @@ func NewDescribeMigrationsRequest() (request *DescribeMigrationsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeMigrations")
+    
     return
 }
 
@@ -1131,6 +1160,7 @@ func NewDescribeOrdersRequest() (request *DescribeOrdersRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeOrders")
+    
     return
 }
 
@@ -1164,6 +1194,7 @@ func NewDescribeProductConfigRequest() (request *DescribeProductConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeProductConfig")
+    
     return
 }
 
@@ -1199,6 +1230,7 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeRegions")
+    
     return
 }
 
@@ -1233,6 +1265,7 @@ func NewDescribeRollbackTimeRequest() (request *DescribeRollbackTimeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeRollbackTime")
+    
     return
 }
 
@@ -1268,6 +1301,7 @@ func NewDescribeSlowlogsRequest() (request *DescribeSlowlogsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeSlowlogs")
+    
     return
 }
 
@@ -1304,6 +1338,7 @@ func NewDescribeUploadBackupInfoRequest() (request *DescribeUploadBackupInfoRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeUploadBackupInfo")
+    
     return
 }
 
@@ -1343,6 +1378,7 @@ func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeZones")
+    
     return
 }
 
@@ -1377,6 +1413,7 @@ func NewInquiryPriceCreateDBInstancesRequest() (request *InquiryPriceCreateDBIns
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "InquiryPriceCreateDBInstances")
+    
     return
 }
 
@@ -1416,6 +1453,7 @@ func NewInquiryPriceUpgradeDBInstanceRequest() (request *InquiryPriceUpgradeDBIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "InquiryPriceUpgradeDBInstance")
+    
     return
 }
 
@@ -1455,6 +1493,7 @@ func NewModifyAccountPrivilegeRequest() (request *ModifyAccountPrivilegeRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyAccountPrivilege")
+    
     return
 }
 
@@ -1495,6 +1534,7 @@ func NewModifyAccountRemarkRequest() (request *ModifyAccountRemarkRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyAccountRemark")
+    
     return
 }
 
@@ -1532,6 +1572,7 @@ func NewModifyBackupMigrationRequest() (request *ModifyBackupMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyBackupMigration")
+    
     return
 }
 
@@ -1571,6 +1612,7 @@ func NewModifyBackupStrategyRequest() (request *ModifyBackupStrategyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyBackupStrategy")
+    
     return
 }
 
@@ -1605,6 +1647,7 @@ func NewModifyDBInstanceNameRequest() (request *ModifyDBInstanceNameRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBInstanceName")
+    
     return
 }
 
@@ -1640,6 +1683,7 @@ func NewModifyDBInstanceNetworkRequest() (request *ModifyDBInstanceNetworkReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBInstanceNetwork")
+    
     return
 }
 
@@ -1688,6 +1732,7 @@ func NewModifyDBInstanceProjectRequest() (request *ModifyDBInstanceProjectReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBInstanceProject")
+    
     return
 }
 
@@ -1722,6 +1767,7 @@ func NewModifyDBNameRequest() (request *ModifyDBNameRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBName")
+    
     return
 }
 
@@ -1763,6 +1809,7 @@ func NewModifyDBRemarkRequest() (request *ModifyDBRemarkRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBRemark")
+    
     return
 }
 
@@ -1801,6 +1848,7 @@ func NewModifyDatabaseCDCRequest() (request *ModifyDatabaseCDCRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDatabaseCDC")
+    
     return
 }
 
@@ -1837,6 +1885,7 @@ func NewModifyDatabaseCTRequest() (request *ModifyDatabaseCTRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDatabaseCT")
+    
     return
 }
 
@@ -1873,6 +1922,7 @@ func NewModifyDatabaseMdfRequest() (request *ModifyDatabaseMdfRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDatabaseMdf")
+    
     return
 }
 
@@ -1908,6 +1958,7 @@ func NewModifyIncrementalMigrationRequest() (request *ModifyIncrementalMigration
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyIncrementalMigration")
+    
     return
 }
 
@@ -1947,6 +1998,7 @@ func NewModifyInstanceParamRequest() (request *ModifyInstanceParamRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyInstanceParam")
+    
     return
 }
 
@@ -1986,6 +2038,7 @@ func NewModifyMigrationRequest() (request *ModifyMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyMigration")
+    
     return
 }
 
@@ -2029,6 +2082,7 @@ func NewRecycleDBInstanceRequest() (request *RecycleDBInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "RecycleDBInstance")
+    
     return
 }
 
@@ -2063,6 +2117,7 @@ func NewResetAccountPasswordRequest() (request *ResetAccountPasswordRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ResetAccountPassword")
+    
     return
 }
 
@@ -2101,6 +2156,7 @@ func NewRestartDBInstanceRequest() (request *RestartDBInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "RestartDBInstance")
+    
     return
 }
 
@@ -2136,6 +2192,7 @@ func NewRestoreInstanceRequest() (request *RestoreInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "RestoreInstance")
+    
     return
 }
 
@@ -2173,6 +2230,7 @@ func NewRollbackInstanceRequest() (request *RollbackInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "RollbackInstance")
+    
     return
 }
 
@@ -2209,6 +2267,7 @@ func NewRunMigrationRequest() (request *RunMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "RunMigration")
+    
     return
 }
 
@@ -2246,6 +2305,7 @@ func NewStartBackupMigrationRequest() (request *StartBackupMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "StartBackupMigration")
+    
     return
 }
 
@@ -2285,6 +2345,7 @@ func NewStartIncrementalMigrationRequest() (request *StartIncrementalMigrationRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "StartIncrementalMigration")
+    
     return
 }
 
@@ -2324,6 +2385,7 @@ func NewTerminateDBInstanceRequest() (request *TerminateDBInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "TerminateDBInstance")
+    
     return
 }
 
@@ -2356,6 +2418,7 @@ func NewUpgradeDBInstanceRequest() (request *UpgradeDBInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "UpgradeDBInstance")
+    
     return
 }
 

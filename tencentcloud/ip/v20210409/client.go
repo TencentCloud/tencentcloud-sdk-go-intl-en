@@ -43,11 +43,50 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAssignClientCreditRequest() (request *AssignClientCreditRequest) {
+    request = &AssignClientCreditRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ip", APIVersion, "AssignClientCredit")
+    
+    return
+}
+
+func NewAssignClientCreditResponse() (response *AssignClientCreditResponse) {
+    response = &AssignClientCreditResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AssignClientCredit
+// This API is used for a partner to set credit for a customer, such as increasing or lowering the credit and setting it to 0.
+//
+// 1. The credit is valid permanently and will not be zeroed regularly.
+//
+// 2. The customer's service will be suspended when its available credit sets to 0, so caution should be exercised with this operation.
+//
+// 3. To prevent the customer from making new purchases without affecting their use of previously purchased products, the partner can set their available credit to 0 after obtaining the non-stop feature privilege from the channel manager.
+//
+// 4. The set credit is an increase to the current available credit and cannot exceed the remaining allocable credit. Setting the credit to a negative value indicates to repossess it. The available credit can be set to 0 at the minimum.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) AssignClientCredit(request *AssignClientCreditRequest) (response *AssignClientCreditResponse, err error) {
+    if request == nil {
+        request = NewAssignClientCreditRequest()
+    }
+    response = NewAssignClientCreditResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAccountRequest() (request *CreateAccountRequest) {
     request = &CreateAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ip", APIVersion, "CreateAccount")
+    
     return
 }
 
@@ -89,6 +128,7 @@ func NewGetCountryCodesRequest() (request *GetCountryCodesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ip", APIVersion, "GetCountryCodes")
+    
     return
 }
 
@@ -109,6 +149,96 @@ func (c *Client) GetCountryCodes(request *GetCountryCodesRequest) (response *Get
         request = NewGetCountryCodesRequest()
     }
     response = NewGetCountryCodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryAgentCreditRequest() (request *QueryAgentCreditRequest) {
+    request = &QueryAgentCreditRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ip", APIVersion, "QueryAgentCredit")
+    
+    return
+}
+
+func NewQueryAgentCreditResponse() (response *QueryAgentCreditResponse) {
+    response = &QueryAgentCreditResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// QueryAgentCredit
+// This API is used for a partner to query its own total credit, available credit, and used credit in USD.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryAgentCredit(request *QueryAgentCreditRequest) (response *QueryAgentCreditResponse, err error) {
+    if request == nil {
+        request = NewQueryAgentCreditRequest()
+    }
+    response = NewQueryAgentCreditResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryClientListRequest() (request *QueryClientListRequest) {
+    request = &QueryClientListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ip", APIVersion, "QueryClientList")
+    
+    return
+}
+
+func NewQueryClientListResponse() (response *QueryClientListResponse) {
+    response = &QueryClientListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// QueryClientList
+// This API is used for a partner to query a customer's credit and basic information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryClientList(request *QueryClientListRequest) (response *QueryClientListResponse, err error) {
+    if request == nil {
+        request = NewQueryClientListRequest()
+    }
+    response = NewQueryClientListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryCreditHistoryRequest() (request *QueryCreditHistoryRequest) {
+    request = &QueryCreditHistoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ip", APIVersion, "QueryCreditHistory")
+    
+    return
+}
+
+func NewQueryCreditHistoryResponse() (response *QueryCreditHistoryResponse) {
+    response = &QueryCreditHistoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// QueryCreditHistory
+// This API is used to query all the credit allocation records of a single customer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryCreditHistory(request *QueryCreditHistoryRequest) (response *QueryCreditHistoryResponse, err error) {
+    if request == nil {
+        request = NewQueryCreditHistoryRequest()
+    }
+    response = NewQueryCreditHistoryResponse()
     err = c.Send(request, response)
     return
 }

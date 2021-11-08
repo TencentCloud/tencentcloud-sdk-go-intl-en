@@ -48,6 +48,7 @@ func NewActivateSubscribeRequest() (request *ActivateSubscribeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "ActivateSubscribe")
+    
     return
 }
 
@@ -84,6 +85,7 @@ func NewCompleteMigrateJobRequest() (request *CompleteMigrateJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "CompleteMigrateJob")
+    
     return
 }
 
@@ -124,6 +126,7 @@ func NewCreateMigrateCheckJobRequest() (request *CreateMigrateCheckJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "CreateMigrateCheckJob")
+    
     return
 }
 
@@ -168,6 +171,7 @@ func NewCreateMigrateJobRequest() (request *CreateMigrateJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "CreateMigrateJob")
+    
     return
 }
 
@@ -207,6 +211,7 @@ func NewCreateSubscribeRequest() (request *CreateSubscribeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "CreateSubscribe")
+    
     return
 }
 
@@ -239,6 +244,7 @@ func NewCreateSyncCheckJobRequest() (request *CreateSyncCheckJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "CreateSyncCheckJob")
+    
     return
 }
 
@@ -279,6 +285,7 @@ func NewCreateSyncJobRequest() (request *CreateSyncJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "CreateSyncJob")
+    
     return
 }
 
@@ -314,6 +321,7 @@ func NewDeleteMigrateJobRequest() (request *DeleteMigrateJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "DeleteMigrateJob")
+    
     return
 }
 
@@ -349,6 +357,7 @@ func NewDeleteSyncJobRequest() (request *DeleteSyncJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "DeleteSyncJob")
+    
     return
 }
 
@@ -382,6 +391,7 @@ func NewDescribeAsyncRequestInfoRequest() (request *DescribeAsyncRequestInfoRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "DescribeAsyncRequestInfo")
+    
     return
 }
 
@@ -415,6 +425,7 @@ func NewDescribeMigrateCheckJobRequest() (request *DescribeMigrateCheckJobReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "DescribeMigrateCheckJob")
+    
     return
 }
 
@@ -452,6 +463,7 @@ func NewDescribeMigrateJobsRequest() (request *DescribeMigrateJobsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "DescribeMigrateJobs")
+    
     return
 }
 
@@ -487,6 +499,7 @@ func NewDescribeRegionConfRequest() (request *DescribeRegionConfRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "DescribeRegionConf")
+    
     return
 }
 
@@ -518,6 +531,7 @@ func NewDescribeSubscribeConfRequest() (request *DescribeSubscribeConfRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "DescribeSubscribeConf")
+    
     return
 }
 
@@ -551,6 +565,7 @@ func NewDescribeSubscribesRequest() (request *DescribeSubscribesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "DescribeSubscribes")
+    
     return
 }
 
@@ -581,6 +596,7 @@ func NewDescribeSyncCheckJobRequest() (request *DescribeSyncCheckJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "DescribeSyncCheckJob")
+    
     return
 }
 
@@ -624,6 +640,7 @@ func NewDescribeSyncJobsRequest() (request *DescribeSyncJobsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "DescribeSyncJobs")
+    
     return
 }
 
@@ -656,6 +673,7 @@ func NewIsolateSubscribeRequest() (request *IsolateSubscribeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "IsolateSubscribe")
+    
     return
 }
 
@@ -687,6 +705,7 @@ func NewModifyMigrateJobRequest() (request *ModifyMigrateJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "ModifyMigrateJob")
+    
     return
 }
 
@@ -728,6 +747,7 @@ func NewModifySubscribeConsumeTimeRequest() (request *ModifySubscribeConsumeTime
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeConsumeTime")
+    
     return
 }
 
@@ -761,6 +781,7 @@ func NewModifySubscribeNameRequest() (request *ModifySubscribeNameRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeName")
+    
     return
 }
 
@@ -792,6 +813,7 @@ func NewModifySubscribeObjectsRequest() (request *ModifySubscribeObjectsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeObjects")
+    
     return
 }
 
@@ -825,6 +847,7 @@ func NewModifySubscribeVipVportRequest() (request *ModifySubscribeVipVportReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeVipVport")
+    
     return
 }
 
@@ -857,6 +880,7 @@ func NewModifySyncJobRequest() (request *ModifySyncJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "ModifySyncJob")
+    
     return
 }
 
@@ -895,6 +919,7 @@ func NewOfflineIsolatedSubscribeRequest() (request *OfflineIsolatedSubscribeRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "OfflineIsolatedSubscribe")
+    
     return
 }
 
@@ -927,6 +952,7 @@ func NewResetSubscribeRequest() (request *ResetSubscribeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "ResetSubscribe")
+    
     return
 }
 
@@ -960,6 +986,7 @@ func NewStartMigrateJobRequest() (request *StartMigrateJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "StartMigrateJob")
+    
     return
 }
 
@@ -1001,6 +1028,7 @@ func NewStartSyncJobRequest() (request *StartSyncJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "StartSyncJob")
+    
     return
 }
 
@@ -1038,6 +1066,7 @@ func NewStopMigrateJobRequest() (request *StopMigrateJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "StopMigrateJob")
+    
     return
 }
 
@@ -1075,6 +1104,7 @@ func NewSwitchDrToMasterRequest() (request *SwitchDrToMasterRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dts", APIVersion, "SwitchDrToMaster")
+    
     return
 }
 

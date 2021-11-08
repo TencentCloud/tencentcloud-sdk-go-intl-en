@@ -48,6 +48,7 @@ func NewLivenessCompareRequest() (request *LivenessCompareRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("faceid", APIVersion, "LivenessCompare")
+    
     return
 }
 

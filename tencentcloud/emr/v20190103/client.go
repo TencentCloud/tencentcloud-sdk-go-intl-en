@@ -48,6 +48,7 @@ func NewCreateInstanceRequest() (request *CreateInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("emr", APIVersion, "CreateInstance")
+    
     return
 }
 
@@ -143,6 +144,7 @@ func NewDescribeClusterNodesRequest() (request *DescribeClusterNodesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("emr", APIVersion, "DescribeClusterNodes")
+    
     return
 }
 
@@ -195,6 +197,7 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("emr", APIVersion, "DescribeInstances")
+    
     return
 }
 
@@ -248,6 +251,7 @@ func NewInquiryPriceCreateInstanceRequest() (request *InquiryPriceCreateInstance
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("emr", APIVersion, "InquiryPriceCreateInstance")
+    
     return
 }
 
@@ -309,6 +313,7 @@ func NewInquiryPriceRenewInstanceRequest() (request *InquiryPriceRenewInstanceRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("emr", APIVersion, "InquiryPriceRenewInstance")
+    
     return
 }
 
@@ -363,6 +368,7 @@ func NewInquiryPriceScaleOutInstanceRequest() (request *InquiryPriceScaleOutInst
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("emr", APIVersion, "InquiryPriceScaleOutInstance")
+    
     return
 }
 
@@ -421,6 +427,7 @@ func NewInquiryPriceUpdateInstanceRequest() (request *InquiryPriceUpdateInstance
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("emr", APIVersion, "InquiryPriceUpdateInstance")
+    
     return
 }
 
@@ -476,6 +483,7 @@ func NewScaleOutInstanceRequest() (request *ScaleOutInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("emr", APIVersion, "ScaleOutInstance")
+    
     return
 }
 
@@ -549,6 +557,7 @@ func NewTerminateInstanceRequest() (request *TerminateInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("emr", APIVersion, "TerminateInstance")
+    
     return
 }
 
@@ -587,6 +596,7 @@ func NewTerminateTasksRequest() (request *TerminateTasksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("emr", APIVersion, "TerminateTasks")
+    
     return
 }
 

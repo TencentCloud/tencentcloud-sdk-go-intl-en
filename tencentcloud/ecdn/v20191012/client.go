@@ -48,6 +48,7 @@ func NewAddEcdnDomainRequest() (request *AddEcdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "AddEcdnDomain")
+    
     return
 }
 
@@ -96,6 +97,7 @@ func NewDeleteEcdnDomainRequest() (request *DeleteEcdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DeleteEcdnDomain")
+    
     return
 }
 
@@ -134,6 +136,7 @@ func NewDescribeDomainsRequest() (request *DescribeDomainsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeDomains")
+    
     return
 }
 
@@ -171,6 +174,7 @@ func NewDescribeDomainsConfigRequest() (request *DescribeDomainsConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeDomainsConfig")
+    
     return
 }
 
@@ -210,6 +214,7 @@ func NewDescribeEcdnDomainLogsRequest() (request *DescribeEcdnDomainLogsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeEcdnDomainLogs")
+    
     return
 }
 
@@ -251,6 +256,7 @@ func NewDescribeEcdnDomainStatisticsRequest() (request *DescribeEcdnDomainStatis
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeEcdnDomainStatistics")
+    
     return
 }
 
@@ -306,6 +312,7 @@ func NewDescribeEcdnStatisticsRequest() (request *DescribeEcdnStatisticsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeEcdnStatistics")
+    
     return
 }
 
@@ -380,6 +387,7 @@ func NewDescribeIpStatusRequest() (request *DescribeIpStatusRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeIpStatus")
+    
     return
 }
 
@@ -418,6 +426,7 @@ func NewDescribePurgeQuotaRequest() (request *DescribePurgeQuotaRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribePurgeQuota")
+    
     return
 }
 
@@ -454,6 +463,7 @@ func NewDescribePurgeTasksRequest() (request *DescribePurgeTasksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribePurgeTasks")
+    
     return
 }
 
@@ -489,6 +499,7 @@ func NewPurgePathCacheRequest() (request *PurgePathCacheRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "PurgePathCache")
+    
     return
 }
 
@@ -532,6 +543,7 @@ func NewPurgeUrlsCacheRequest() (request *PurgeUrlsCacheRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "PurgeUrlsCache")
+    
     return
 }
 
@@ -576,6 +588,7 @@ func NewStartEcdnDomainRequest() (request *StartEcdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "StartEcdnDomain")
+    
     return
 }
 
@@ -614,6 +627,7 @@ func NewStopEcdnDomainRequest() (request *StopEcdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "StopEcdnDomain")
+    
     return
 }
 
@@ -653,6 +667,7 @@ func NewUpdateDomainConfigRequest() (request *UpdateDomainConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "UpdateDomainConfig")
+    
     return
 }
 

@@ -48,6 +48,7 @@ func NewAllocateHostsRequest() (request *AllocateHostsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "AllocateHosts")
+    
     return
 }
 
@@ -84,6 +85,7 @@ func NewAssociateInstancesKeyPairsRequest() (request *AssociateInstancesKeyPairs
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "AssociateInstancesKeyPairs")
+    
     return
 }
 
@@ -143,6 +145,7 @@ func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "AssociateSecurityGroups")
+    
     return
 }
 
@@ -184,6 +187,7 @@ func NewCreateDisasterRecoverGroupRequest() (request *CreateDisasterRecoverGroup
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "CreateDisasterRecoverGroup")
+    
     return
 }
 
@@ -214,6 +218,7 @@ func NewCreateImageRequest() (request *CreateImageRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "CreateImage")
+    
     return
 }
 
@@ -274,6 +279,7 @@ func NewCreateKeyPairRequest() (request *CreateKeyPairRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "CreateKeyPair")
+    
     return
 }
 
@@ -321,6 +327,7 @@ func NewDeleteDisasterRecoverGroupsRequest() (request *DeleteDisasterRecoverGrou
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DeleteDisasterRecoverGroups")
+    
     return
 }
 
@@ -353,6 +360,7 @@ func NewDeleteImagesRequest() (request *DeleteImagesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DeleteImages")
+    
     return
 }
 
@@ -396,6 +404,7 @@ func NewDeleteKeyPairsRequest() (request *DeleteKeyPairsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DeleteKeyPairs")
+    
     return
 }
 
@@ -438,6 +447,7 @@ func NewDescribeDisasterRecoverGroupQuotaRequest() (request *DescribeDisasterRec
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeDisasterRecoverGroupQuota")
+    
     return
 }
 
@@ -474,6 +484,7 @@ func NewDescribeDisasterRecoverGroupsRequest() (request *DescribeDisasterRecover
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeDisasterRecoverGroups")
+    
     return
 }
 
@@ -510,6 +521,7 @@ func NewDescribeHostsRequest() (request *DescribeHostsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeHosts")
+    
     return
 }
 
@@ -543,6 +555,7 @@ func NewDescribeImageQuotaRequest() (request *DescribeImageQuotaRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeImageQuota")
+    
     return
 }
 
@@ -576,6 +589,7 @@ func NewDescribeImageSharePermissionRequest() (request *DescribeImageSharePermis
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeImageSharePermission")
+    
     return
 }
 
@@ -610,6 +624,7 @@ func NewDescribeImagesRequest() (request *DescribeImagesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeImages")
+    
     return
 }
 
@@ -653,6 +668,7 @@ func NewDescribeImportImageOsRequest() (request *DescribeImportImageOsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeImportImageOs")
+    
     return
 }
 
@@ -690,6 +706,7 @@ func NewDescribeInstanceFamilyConfigsRequest() (request *DescribeInstanceFamilyC
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstanceFamilyConfigs")
+    
     return
 }
 
@@ -721,6 +738,7 @@ func NewDescribeInstanceTypeConfigsRequest() (request *DescribeInstanceTypeConfi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstanceTypeConfigs")
+    
     return
 }
 
@@ -760,6 +778,7 @@ func NewDescribeInstanceVncUrlRequest() (request *DescribeInstanceVncUrlRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstanceVncUrl")
+    
     return
 }
 
@@ -835,6 +854,7 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstances")
+    
     return
 }
 
@@ -893,6 +913,7 @@ func NewDescribeInstancesOperationLimitRequest() (request *DescribeInstancesOper
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstancesOperationLimit")
+    
     return
 }
 
@@ -927,6 +948,7 @@ func NewDescribeInstancesStatusRequest() (request *DescribeInstancesStatusReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstancesStatus")
+    
     return
 }
 
@@ -966,6 +988,7 @@ func NewDescribeInternetChargeTypeConfigsRequest() (request *DescribeInternetCha
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInternetChargeTypeConfigs")
+    
     return
 }
 
@@ -999,6 +1022,7 @@ func NewDescribeKeyPairsRequest() (request *DescribeKeyPairsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeKeyPairs")
+    
     return
 }
 
@@ -1041,6 +1065,7 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeRegions")
+    
     return
 }
 
@@ -1079,6 +1104,7 @@ func NewDescribeReservedInstancesRequest() (request *DescribeReservedInstancesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeReservedInstances")
+    
     return
 }
 
@@ -1115,6 +1141,7 @@ func NewDescribeReservedInstancesConfigInfosRequest() (request *DescribeReserved
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeReservedInstancesConfigInfos")
+    
     return
 }
 
@@ -1147,6 +1174,7 @@ func NewDescribeReservedInstancesOfferingsRequest() (request *DescribeReservedIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeReservedInstancesOfferings")
+    
     return
 }
 
@@ -1183,6 +1211,7 @@ func NewDescribeZoneInstanceConfigInfosRequest() (request *DescribeZoneInstanceC
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeZoneInstanceConfigInfos")
+    
     return
 }
 
@@ -1222,6 +1251,7 @@ func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeZones")
+    
     return
 }
 
@@ -1261,6 +1291,7 @@ func NewDisassociateInstancesKeyPairsRequest() (request *DisassociateInstancesKe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DisassociateInstancesKeyPairs")
+    
     return
 }
 
@@ -1316,6 +1347,7 @@ func NewDisassociateSecurityGroupsRequest() (request *DisassociateSecurityGroups
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DisassociateSecurityGroups")
+    
     return
 }
 
@@ -1353,6 +1385,7 @@ func NewImportImageRequest() (request *ImportImageRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ImportImage")
+    
     return
 }
 
@@ -1388,6 +1421,7 @@ func NewImportKeyPairRequest() (request *ImportKeyPairRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ImportKeyPair")
+    
     return
 }
 
@@ -1435,6 +1469,7 @@ func NewInquirePricePurchaseReservedInstancesOfferingRequest() (request *Inquire
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquirePricePurchaseReservedInstancesOffering")
+    
     return
 }
 
@@ -1466,6 +1501,7 @@ func NewInquiryPriceResetInstanceRequest() (request *InquiryPriceResetInstanceRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquiryPriceResetInstance")
+    
     return
 }
 
@@ -1516,6 +1552,7 @@ func NewInquiryPriceResetInstancesInternetMaxBandwidthRequest() (request *Inquir
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquiryPriceResetInstancesInternetMaxBandwidth")
+    
     return
 }
 
@@ -1565,6 +1602,7 @@ func NewInquiryPriceResetInstancesTypeRequest() (request *InquiryPriceResetInsta
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquiryPriceResetInstancesType")
+    
     return
 }
 
@@ -1619,6 +1657,7 @@ func NewInquiryPriceResizeInstanceDisksRequest() (request *InquiryPriceResizeIns
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquiryPriceResizeInstanceDisks")
+    
     return
 }
 
@@ -1666,6 +1705,7 @@ func NewInquiryPriceRunInstancesRequest() (request *InquiryPriceRunInstancesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquiryPriceRunInstances")
+    
     return
 }
 
@@ -1745,6 +1785,7 @@ func NewModifyDisasterRecoverGroupAttributeRequest() (request *ModifyDisasterRec
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyDisasterRecoverGroupAttribute")
+    
     return
 }
 
@@ -1774,6 +1815,7 @@ func NewModifyHostsAttributeRequest() (request *ModifyHostsAttributeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyHostsAttribute")
+    
     return
 }
 
@@ -1805,6 +1847,7 @@ func NewModifyImageAttributeRequest() (request *ModifyImageAttributeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyImageAttribute")
+    
     return
 }
 
@@ -1843,6 +1886,7 @@ func NewModifyImageSharePermissionRequest() (request *ModifyImageSharePermission
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyImageSharePermission")
+    
     return
 }
 
@@ -1896,6 +1940,7 @@ func NewModifyInstancesAttributeRequest() (request *ModifyInstancesAttributeRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyInstancesAttribute")
+    
     return
 }
 
@@ -1964,6 +2009,7 @@ func NewModifyInstancesProjectRequest() (request *ModifyInstancesProjectRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyInstancesProject")
+    
     return
 }
 
@@ -2015,6 +2061,7 @@ func NewModifyInstancesVpcAttributeRequest() (request *ModifyInstancesVpcAttribu
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyInstancesVpcAttribute")
+    
     return
 }
 
@@ -2074,6 +2121,7 @@ func NewModifyKeyPairAttributeRequest() (request *ModifyKeyPairAttributeRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyKeyPairAttribute")
+    
     return
 }
 
@@ -2117,6 +2165,7 @@ func NewPurchaseReservedInstancesOfferingRequest() (request *PurchaseReservedIns
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "PurchaseReservedInstancesOffering")
+    
     return
 }
 
@@ -2153,6 +2202,7 @@ func NewRebootInstancesRequest() (request *RebootInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "RebootInstances")
+    
     return
 }
 
@@ -2216,6 +2266,7 @@ func NewResetInstanceRequest() (request *ResetInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ResetInstance")
+    
     return
 }
 
@@ -2301,6 +2352,7 @@ func NewResetInstancesInternetMaxBandwidthRequest() (request *ResetInstancesInte
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ResetInstancesInternetMaxBandwidth")
+    
     return
 }
 
@@ -2360,6 +2412,7 @@ func NewResetInstancesPasswordRequest() (request *ResetInstancesPasswordRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ResetInstancesPassword")
+    
     return
 }
 
@@ -2422,6 +2475,7 @@ func NewResetInstancesTypeRequest() (request *ResetInstancesTypeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ResetInstancesType")
+    
     return
 }
 
@@ -2494,6 +2548,7 @@ func NewResizeInstanceDisksRequest() (request *ResizeInstanceDisksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ResizeInstanceDisks")
+    
     return
 }
 
@@ -2548,6 +2603,7 @@ func NewRunInstancesRequest() (request *RunInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "RunInstances")
+    
     return
 }
 
@@ -2684,6 +2740,7 @@ func NewStartInstancesRequest() (request *StartInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "StartInstances")
+    
     return
 }
 
@@ -2743,6 +2800,7 @@ func NewStopInstancesRequest() (request *StopInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "StopInstances")
+    
     return
 }
 
@@ -2809,6 +2867,7 @@ func NewSyncImagesRequest() (request *SyncImagesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "SyncImages")
+    
     return
 }
 
@@ -2857,6 +2916,7 @@ func NewTerminateInstancesRequest() (request *TerminateInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "TerminateInstances")
+    
     return
 }
 

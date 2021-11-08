@@ -48,6 +48,7 @@ func NewBatchCreateAclRequest() (request *BatchCreateAclRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "BatchCreateAcl")
+    
     return
 }
 
@@ -78,6 +79,7 @@ func NewCreateAclRequest() (request *CreateAclRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "CreateAcl")
+    
     return
 }
 
@@ -119,6 +121,7 @@ func NewCreatePartitionRequest() (request *CreatePartitionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "CreatePartition")
+    
     return
 }
 
@@ -160,6 +163,7 @@ func NewCreateTopicRequest() (request *CreateTopicRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "CreateTopic")
+    
     return
 }
 
@@ -201,6 +205,7 @@ func NewCreateTopicIpWhiteListRequest() (request *CreateTopicIpWhiteListRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "CreateTopicIpWhiteList")
+    
     return
 }
 
@@ -242,6 +247,7 @@ func NewCreateUserRequest() (request *CreateUserRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "CreateUser")
+    
     return
 }
 
@@ -283,6 +289,7 @@ func NewDeleteAclRequest() (request *DeleteAclRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DeleteAcl")
+    
     return
 }
 
@@ -324,6 +331,7 @@ func NewDeleteRouteTriggerTimeRequest() (request *DeleteRouteTriggerTimeRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DeleteRouteTriggerTime")
+    
     return
 }
 
@@ -357,6 +365,7 @@ func NewDeleteTopicRequest() (request *DeleteTopicRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DeleteTopic")
+    
     return
 }
 
@@ -399,6 +408,7 @@ func NewDeleteTopicIpWhiteListRequest() (request *DeleteTopicIpWhiteListRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DeleteTopicIpWhiteList")
+    
     return
 }
 
@@ -440,6 +450,7 @@ func NewDeleteUserRequest() (request *DeleteUserRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DeleteUser")
+    
     return
 }
 
@@ -481,6 +492,7 @@ func NewDescribeACLRequest() (request *DescribeACLRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeACL")
+    
     return
 }
 
@@ -522,6 +534,7 @@ func NewDescribeAppInfoRequest() (request *DescribeAppInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeAppInfo")
+    
     return
 }
 
@@ -563,6 +576,7 @@ func NewDescribeCkafkaZoneRequest() (request *DescribeCkafkaZoneRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeCkafkaZone")
+    
     return
 }
 
@@ -604,6 +618,7 @@ func NewDescribeConsumerGroupRequest() (request *DescribeConsumerGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeConsumerGroup")
+    
     return
 }
 
@@ -645,6 +660,7 @@ func NewDescribeGroupRequest() (request *DescribeGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeGroup")
+    
     return
 }
 
@@ -686,6 +702,7 @@ func NewDescribeGroupInfoRequest() (request *DescribeGroupInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeGroupInfo")
+    
     return
 }
 
@@ -727,6 +744,7 @@ func NewDescribeGroupOffsetsRequest() (request *DescribeGroupOffsetsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeGroupOffsets")
+    
     return
 }
 
@@ -768,6 +786,7 @@ func NewDescribeInstanceAttributesRequest() (request *DescribeInstanceAttributes
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeInstanceAttributes")
+    
     return
 }
 
@@ -809,6 +828,7 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeInstances")
+    
     return
 }
 
@@ -846,6 +866,7 @@ func NewDescribeInstancesDetailRequest() (request *DescribeInstancesDetailReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeInstancesDetail")
+    
     return
 }
 
@@ -887,6 +908,7 @@ func NewDescribeRegionRequest() (request *DescribeRegionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeRegion")
+    
     return
 }
 
@@ -928,6 +950,7 @@ func NewDescribeRouteRequest() (request *DescribeRouteRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeRoute")
+    
     return
 }
 
@@ -969,6 +992,7 @@ func NewDescribeTopicRequest() (request *DescribeTopicRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeTopic")
+    
     return
 }
 
@@ -1012,6 +1036,7 @@ func NewDescribeTopicAttributesRequest() (request *DescribeTopicAttributesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeTopicAttributes")
+    
     return
 }
 
@@ -1053,6 +1078,7 @@ func NewDescribeTopicDetailRequest() (request *DescribeTopicDetailRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeTopicDetail")
+    
     return
 }
 
@@ -1089,6 +1115,7 @@ func NewDescribeTopicSubscribeGroupRequest() (request *DescribeTopicSubscribeGro
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeTopicSubscribeGroup")
+    
     return
 }
 
@@ -1136,6 +1163,7 @@ func NewDescribeTopicSyncReplicaRequest() (request *DescribeTopicSyncReplicaRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeTopicSyncReplica")
+    
     return
 }
 
@@ -1168,6 +1196,7 @@ func NewDescribeUserRequest() (request *DescribeUserRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "DescribeUser")
+    
     return
 }
 
@@ -1209,6 +1238,7 @@ func NewFetchMessageByOffsetRequest() (request *FetchMessageByOffsetRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "FetchMessageByOffset")
+    
     return
 }
 
@@ -1238,6 +1268,7 @@ func NewModifyGroupOffsetsRequest() (request *ModifyGroupOffsetsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "ModifyGroupOffsets")
+    
     return
 }
 
@@ -1279,6 +1310,7 @@ func NewModifyInstanceAttributesRequest() (request *ModifyInstanceAttributesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "ModifyInstanceAttributes")
+    
     return
 }
 
@@ -1320,6 +1352,7 @@ func NewModifyPasswordRequest() (request *ModifyPasswordRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "ModifyPassword")
+    
     return
 }
 
@@ -1361,6 +1394,7 @@ func NewModifyTopicAttributesRequest() (request *ModifyTopicAttributesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ckafka", APIVersion, "ModifyTopicAttributes")
+    
     return
 }
 

@@ -48,6 +48,7 @@ func NewBankCardOCRRequest() (request *BankCardOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "BankCardOCR")
+    
     return
 }
 
@@ -89,6 +90,7 @@ func NewGeneralAccurateOCRRequest() (request *GeneralAccurateOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "GeneralAccurateOCR")
+    
     return
 }
 
@@ -143,6 +145,7 @@ func NewGeneralBasicOCRRequest() (request *GeneralBasicOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "GeneralBasicOCR")
+    
     return
 }
 
@@ -195,6 +198,7 @@ func NewHKIDCardOCRRequest() (request *HKIDCardOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "HKIDCardOCR")
+    
     return
 }
 
@@ -236,6 +240,7 @@ func NewMLIDCardOCRRequest() (request *MLIDCardOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "MLIDCardOCR")
+    
     return
 }
 
@@ -277,6 +282,7 @@ func NewMLIDPassportOCRRequest() (request *MLIDPassportOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "MLIDPassportOCR")
+    
     return
 }
 
@@ -318,6 +324,7 @@ func NewTableOCRRequest() (request *TableOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "TableOCR")
+    
     return
 }
 

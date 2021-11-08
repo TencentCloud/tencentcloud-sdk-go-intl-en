@@ -1216,16 +1216,22 @@ type DrmSettingsInfo struct {
 	// DRM encryption is supported only for HLS, DASH, HLS_ARCHIVE, DASH_ARCHIVE, HLS_MEDIAPACKAGE, and DASH_MEDIAPACKAGE outputs.
 	State *string `json:"State,omitempty" name:"State"`
 
-	// This parameter can be set to `CustomDRMKeys` or left empty.
-	// CustomDRMKeys means encryption keys customized by users.
+	// Valid values: `CustomDRMKeys` (default value), `SDMCDRM`
+	// `CustomDRMKeys` means encryption keys customized by users.
+	// `SDMCDRM` means the DRM key management system of SDMC.
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 
-	// If `Scheme` is set to `CustomDRMKeys`, this parameter is required and should be specified by the user.
+	// If `Scheme` is set to `CustomDRMKeys`, this parameter is required.
+	// If `Scheme` is set to `SDMCDRM`, this parameter is optional. It supports digits, letters, hyphens, and underscores and must contain 1 to 36 characters. If it is not specified, the value of `ChannelId` will be used.
 	ContentId *string `json:"ContentId,omitempty" name:"ContentId"`
 
 	// The key customized by the content user, which is required when `Scheme` is set to CustomDRMKeys.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Keys []*DrmKey `json:"Keys,omitempty" name:"Keys"`
+
+	// SDMC key configuration. This parameter is used when `Scheme` is set to `SDMCDRM`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	SDMCSettings *SDMCSettingsInfo `json:"SDMCSettings,omitempty" name:"SDMCSettings"`
 }
 
 type EventSettingsReq struct {
@@ -1659,6 +1665,34 @@ type RegionInfo struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
+type SDMCSettingsInfo struct {
+
+	// User ID in the SDMC DRM system
+	Uid *string `json:"Uid,omitempty" name:"Uid"`
+
+	// Tracks of the SDMC DRM system. This parameter is valid for DASH output groups.
+	// `1`: audio
+	// `2`: SD
+	// `4`: HD
+	// `8`: UHD1
+	// `16`: UHD2
+	// 
+	// Default value: `31` (audio + SD + HD + UHD1 + UHD2)
+	Tracks *int64 `json:"Tracks,omitempty" name:"Tracks"`
+
+	// Key ID in the SDMC DRM system; required
+	SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
+
+	// Key in the SDMC DRM system; required
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+	// Key request URL of the SDMC DRM system, which is `https://uat.multidrm.tv/cpix/2.2/getcontentkey` by default
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Token name in an SDMC key request URL, which is `token` by default
+	TokenName *string `json:"TokenName,omitempty" name:"TokenName"`
+}
+
 type Scte35SettingsInfo struct {
 
 	// Whether to pass through SCTE-35 information. Valid values: NO_PASSTHROUGH/PASSTHROUGH. Default value: NO_PASSTHROUGH.
@@ -1856,6 +1890,10 @@ type StreamLiveOutputGroupsInfo struct {
 	// StreamPackage configuration information, which is required if the output type is StreamPackage
 	// Note: this field may return `null`, indicating that no valid value was found.
 	StreamPackageSettings *StreamPackageSettingsInfo `json:"StreamPackageSettings,omitempty" name:"StreamPackageSettings"`
+
+	// Time-shift configuration information
+	// Note: This field may return `null`, indicating that no valid value was found.
+	TimeShiftSettings *TimeShiftSettingsInfo `json:"TimeShiftSettings,omitempty" name:"TimeShiftSettings"`
 }
 
 type StreamLiveRegionInfo struct {
@@ -1904,6 +1942,21 @@ type StreamVideoInfo struct {
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 }
 
+type TimeShiftSettingsInfo struct {
+
+	// Whether to enable time shifting. Valid values: `OPEN`; `CLOSE`
+	// Note: This field may return `null`, indicating that no valid value was found.
+	State *string `json:"State,omitempty" name:"State"`
+
+	// Domain name bound for time shifting
+	// Note: This field may return `null`, indicating that no valid value was found.
+	PlayDomain *string `json:"PlayDomain,omitempty" name:"PlayDomain"`
+
+	// Allowable time-shift period (s). Value range: [600, 1209600]. Default value: 300
+	// Note: This field may return `null`, indicating that no valid value was found.
+	StartoverWindow *int64 `json:"StartoverWindow,omitempty" name:"StartoverWindow"`
+}
+
 type TimingSettingsReq struct {
 
 	// Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`
@@ -1922,6 +1975,14 @@ type TimingSettingsResp struct {
 	// Not empty if `StartType` is `FIXED_TIME`
 	// UTC time, such as `2020-01-01T12:00:00Z`
 	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
+	// It indicates the start time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the current time.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
+	// It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the start time for recording.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type VideoPipelineInputStatistics struct {

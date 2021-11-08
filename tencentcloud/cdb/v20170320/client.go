@@ -48,6 +48,7 @@ func NewAddTimeWindowRequest() (request *AddTimeWindowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "AddTimeWindow")
+    
     return
 }
 
@@ -79,6 +80,7 @@ func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "AssociateSecurityGroups")
+    
     return
 }
 
@@ -114,6 +116,7 @@ func NewBalanceRoGroupLoadRequest() (request *BalanceRoGroupLoadRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "BalanceRoGroupLoad")
+    
     return
 }
 
@@ -147,6 +150,7 @@ func NewCloseWanServiceRequest() (request *CloseWanServiceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "CloseWanService")
+    
     return
 }
 
@@ -181,6 +185,7 @@ func NewCreateAccountsRequest() (request *CreateAccountsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "CreateAccounts")
+    
     return
 }
 
@@ -240,6 +245,7 @@ func NewCreateAuditPolicyRequest() (request *CreateAuditPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "CreateAuditPolicy")
+    
     return
 }
 
@@ -300,6 +306,7 @@ func NewCreateBackupRequest() (request *CreateBackupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "CreateBackup")
+    
     return
 }
 
@@ -339,6 +346,7 @@ func NewCreateCloneInstanceRequest() (request *CreateCloneInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "CreateCloneInstance")
+    
     return
 }
 
@@ -376,6 +384,7 @@ func NewCreateDBImportJobRequest() (request *CreateDBImportJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "CreateDBImportJob")
+    
     return
 }
 
@@ -417,6 +426,7 @@ func NewCreateDBInstanceHourRequest() (request *CreateDBInstanceHourRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "CreateDBInstanceHour")
+    
     return
 }
 
@@ -474,6 +484,7 @@ func NewCreateDeployGroupRequest() (request *CreateDeployGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "CreateDeployGroup")
+    
     return
 }
 
@@ -509,6 +520,7 @@ func NewCreateParamTemplateRequest() (request *CreateParamTemplateRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "CreateParamTemplate")
+    
     return
 }
 
@@ -544,6 +556,7 @@ func NewCreateRoInstanceIpRequest() (request *CreateRoInstanceIpRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "CreateRoInstanceIp")
+    
     return
 }
 
@@ -586,6 +599,7 @@ func NewDeleteAccountsRequest() (request *DeleteAccountsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DeleteAccounts")
+    
     return
 }
 
@@ -642,6 +656,7 @@ func NewDeleteBackupRequest() (request *DeleteBackupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DeleteBackup")
+    
     return
 }
 
@@ -676,6 +691,7 @@ func NewDeleteDeployGroupsRequest() (request *DeleteDeployGroupsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DeleteDeployGroups")
+    
     return
 }
 
@@ -710,6 +726,7 @@ func NewDeleteParamTemplateRequest() (request *DeleteParamTemplateRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DeleteParamTemplate")
+    
     return
 }
 
@@ -740,6 +757,7 @@ func NewDeleteTimeWindowRequest() (request *DeleteTimeWindowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DeleteTimeWindow")
+    
     return
 }
 
@@ -770,6 +788,7 @@ func NewDescribeAccountPrivilegesRequest() (request *DescribeAccountPrivilegesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeAccountPrivileges")
+    
     return
 }
 
@@ -829,6 +848,7 @@ func NewDescribeAccountsRequest() (request *DescribeAccountsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeAccounts")
+    
     return
 }
 
@@ -890,6 +910,7 @@ func NewDescribeAsyncRequestInfoRequest() (request *DescribeAsyncRequestInfoRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeAsyncRequestInfo")
+    
     return
 }
 
@@ -925,6 +946,7 @@ func NewDescribeBackupConfigRequest() (request *DescribeBackupConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeBackupConfig")
+    
     return
 }
 
@@ -961,6 +983,7 @@ func NewDescribeBackupOverviewRequest() (request *DescribeBackupOverviewRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeBackupOverview")
+    
     return
 }
 
@@ -992,6 +1015,7 @@ func NewDescribeBackupSummariesRequest() (request *DescribeBackupSummariesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeBackupSummaries")
+    
     return
 }
 
@@ -1024,6 +1048,7 @@ func NewDescribeBackupsRequest() (request *DescribeBackupsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeBackups")
+    
     return
 }
 
@@ -1061,6 +1086,7 @@ func NewDescribeBinlogBackupOverviewRequest() (request *DescribeBinlogBackupOver
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeBinlogBackupOverview")
+    
     return
 }
 
@@ -1092,6 +1118,7 @@ func NewDescribeBinlogsRequest() (request *DescribeBinlogsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeBinlogs")
+    
     return
 }
 
@@ -1125,6 +1152,7 @@ func NewDescribeCloneListRequest() (request *DescribeCloneListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeCloneList")
+    
     return
 }
 
@@ -1155,6 +1183,7 @@ func NewDescribeDBImportRecordsRequest() (request *DescribeDBImportRecordsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBImportRecords")
+    
     return
 }
 
@@ -1186,6 +1215,7 @@ func NewDescribeDBInstanceCharsetRequest() (request *DescribeDBInstanceCharsetRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBInstanceCharset")
+    
     return
 }
 
@@ -1222,6 +1252,7 @@ func NewDescribeDBInstanceConfigRequest() (request *DescribeDBInstanceConfigRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBInstanceConfig")
+    
     return
 }
 
@@ -1258,6 +1289,7 @@ func NewDescribeDBInstanceGTIDRequest() (request *DescribeDBInstanceGTIDRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBInstanceGTID")
+    
     return
 }
 
@@ -1291,6 +1323,7 @@ func NewDescribeDBInstanceInfoRequest() (request *DescribeDBInstanceInfoRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBInstanceInfo")
+    
     return
 }
 
@@ -1321,6 +1354,7 @@ func NewDescribeDBInstanceRebootTimeRequest() (request *DescribeDBInstanceReboot
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBInstanceRebootTime")
+    
     return
 }
 
@@ -1350,6 +1384,7 @@ func NewDescribeDBInstancesRequest() (request *DescribeDBInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBInstances")
+    
     return
 }
 
@@ -1392,6 +1427,7 @@ func NewDescribeDBSecurityGroupsRequest() (request *DescribeDBSecurityGroupsRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBSecurityGroups")
+    
     return
 }
 
@@ -1431,6 +1467,7 @@ func NewDescribeDBSwitchRecordsRequest() (request *DescribeDBSwitchRecordsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBSwitchRecords")
+    
     return
 }
 
@@ -1462,6 +1499,7 @@ func NewDescribeDBZoneConfigRequest() (request *DescribeDBZoneConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBZoneConfig")
+    
     return
 }
 
@@ -1493,6 +1531,7 @@ func NewDescribeDataBackupOverviewRequest() (request *DescribeDataBackupOverview
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDataBackupOverview")
+    
     return
 }
 
@@ -1523,6 +1562,7 @@ func NewDescribeDatabasesRequest() (request *DescribeDatabasesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDatabases")
+    
     return
 }
 
@@ -1561,6 +1601,7 @@ func NewDescribeDefaultParamsRequest() (request *DescribeDefaultParamsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDefaultParams")
+    
     return
 }
 
@@ -1594,6 +1635,7 @@ func NewDescribeDeployGroupListRequest() (request *DescribeDeployGroupListReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDeployGroupList")
+    
     return
 }
 
@@ -1629,6 +1671,7 @@ func NewDescribeDeviceMonitorInfoRequest() (request *DescribeDeviceMonitorInfoRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeDeviceMonitorInfo")
+    
     return
 }
 
@@ -1669,6 +1712,7 @@ func NewDescribeErrorLogDataRequest() (request *DescribeErrorLogDataRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeErrorLogData")
+    
     return
 }
 
@@ -1709,6 +1753,7 @@ func NewDescribeInstanceParamRecordsRequest() (request *DescribeInstanceParamRec
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeInstanceParamRecords")
+    
     return
 }
 
@@ -1741,6 +1786,7 @@ func NewDescribeInstanceParamsRequest() (request *DescribeInstanceParamsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeInstanceParams")
+    
     return
 }
 
@@ -1774,6 +1820,7 @@ func NewDescribeParamTemplateInfoRequest() (request *DescribeParamTemplateInfoRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeParamTemplateInfo")
+    
     return
 }
 
@@ -1806,6 +1853,7 @@ func NewDescribeParamTemplatesRequest() (request *DescribeParamTemplatesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeParamTemplates")
+    
     return
 }
 
@@ -1837,6 +1885,7 @@ func NewDescribeProjectSecurityGroupsRequest() (request *DescribeProjectSecurity
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeProjectSecurityGroups")
+    
     return
 }
 
@@ -1871,6 +1920,7 @@ func NewDescribeRoGroupsRequest() (request *DescribeRoGroupsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeRoGroups")
+    
     return
 }
 
@@ -1907,6 +1957,7 @@ func NewDescribeRoMinScaleRequest() (request *DescribeRoMinScaleRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeRoMinScale")
+    
     return
 }
 
@@ -1939,6 +1990,7 @@ func NewDescribeRollbackRangeTimeRequest() (request *DescribeRollbackRangeTimeRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeRollbackRangeTime")
+    
     return
 }
 
@@ -1971,6 +2023,7 @@ func NewDescribeRollbackTaskDetailRequest() (request *DescribeRollbackTaskDetail
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeRollbackTaskDetail")
+    
     return
 }
 
@@ -2003,6 +2056,7 @@ func NewDescribeSlowLogDataRequest() (request *DescribeSlowLogDataRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeSlowLogData")
+    
     return
 }
 
@@ -2044,6 +2098,7 @@ func NewDescribeSlowLogsRequest() (request *DescribeSlowLogsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeSlowLogs")
+    
     return
 }
 
@@ -2081,6 +2136,7 @@ func NewDescribeSupportedPrivilegesRequest() (request *DescribeSupportedPrivileg
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeSupportedPrivileges")
+    
     return
 }
 
@@ -2135,6 +2191,7 @@ func NewDescribeTablesRequest() (request *DescribeTablesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeTables")
+    
     return
 }
 
@@ -2168,6 +2225,7 @@ func NewDescribeTagsOfInstanceIdsRequest() (request *DescribeTagsOfInstanceIdsRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeTagsOfInstanceIds")
+    
     return
 }
 
@@ -2205,6 +2263,7 @@ func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeTasks")
+    
     return
 }
 
@@ -2242,6 +2301,7 @@ func NewDescribeTimeWindowRequest() (request *DescribeTimeWindowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeTimeWindow")
+    
     return
 }
 
@@ -2272,6 +2332,7 @@ func NewDescribeUploadedFilesRequest() (request *DescribeUploadedFilesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DescribeUploadedFiles")
+    
     return
 }
 
@@ -2302,6 +2363,7 @@ func NewDisassociateSecurityGroupsRequest() (request *DisassociateSecurityGroups
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "DisassociateSecurityGroups")
+    
     return
 }
 
@@ -2335,6 +2397,7 @@ func NewInitDBInstancesRequest() (request *InitDBInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "InitDBInstances")
+    
     return
 }
 
@@ -2367,6 +2430,7 @@ func NewIsolateDBInstanceRequest() (request *IsolateDBInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "IsolateDBInstance")
+    
     return
 }
 
@@ -2410,6 +2474,7 @@ func NewModifyAccountDescriptionRequest() (request *ModifyAccountDescriptionRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyAccountDescription")
+    
     return
 }
 
@@ -2466,6 +2531,7 @@ func NewModifyAccountMaxUserConnectionsRequest() (request *ModifyAccountMaxUserC
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyAccountMaxUserConnections")
+    
     return
 }
 
@@ -2498,6 +2564,7 @@ func NewModifyAccountPasswordRequest() (request *ModifyAccountPasswordRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyAccountPassword")
+    
     return
 }
 
@@ -2556,6 +2623,7 @@ func NewModifyAccountPrivilegesRequest() (request *ModifyAccountPrivilegesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyAccountPrivileges")
+    
     return
 }
 
@@ -2620,6 +2688,7 @@ func NewModifyAutoRenewFlagRequest() (request *ModifyAutoRenewFlagRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyAutoRenewFlag")
+    
     return
 }
 
@@ -2651,6 +2720,7 @@ func NewModifyBackupConfigRequest() (request *ModifyBackupConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyBackupConfig")
+    
     return
 }
 
@@ -2684,6 +2754,7 @@ func NewModifyDBInstanceNameRequest() (request *ModifyDBInstanceNameRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyDBInstanceName")
+    
     return
 }
 
@@ -2716,6 +2787,7 @@ func NewModifyDBInstanceProjectRequest() (request *ModifyDBInstanceProjectReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyDBInstanceProject")
+    
     return
 }
 
@@ -2747,6 +2819,7 @@ func NewModifyDBInstanceSecurityGroupsRequest() (request *ModifyDBInstanceSecuri
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyDBInstanceSecurityGroups")
+    
     return
 }
 
@@ -2780,6 +2853,7 @@ func NewModifyDBInstanceVipVportRequest() (request *ModifyDBInstanceVipVportRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyDBInstanceVipVport")
+    
     return
 }
 
@@ -2812,6 +2886,7 @@ func NewModifyInstanceParamRequest() (request *ModifyInstanceParamRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyInstanceParam")
+    
     return
 }
 
@@ -2848,6 +2923,7 @@ func NewModifyInstanceTagRequest() (request *ModifyInstanceTagRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyInstanceTag")
+    
     return
 }
 
@@ -2890,6 +2966,7 @@ func NewModifyNameOrDescByDpIdRequest() (request *ModifyNameOrDescByDpIdRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyNameOrDescByDpId")
+    
     return
 }
 
@@ -2924,6 +3001,7 @@ func NewModifyParamTemplateRequest() (request *ModifyParamTemplateRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyParamTemplate")
+    
     return
 }
 
@@ -2957,6 +3035,7 @@ func NewModifyRoGroupInfoRequest() (request *ModifyRoGroupInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyRoGroupInfo")
+    
     return
 }
 
@@ -2994,6 +3073,7 @@ func NewModifyRoReplicationDelayRequest() (request *ModifyRoReplicationDelayRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyRoReplicationDelay")
+    
     return
 }
 
@@ -3025,48 +3105,12 @@ func (c *Client) ModifyRoReplicationDelay(request *ModifyRoReplicationDelayReque
     return
 }
 
-func NewModifyRoTypeRequest() (request *ModifyRoTypeRequest) {
-    request = &ModifyRoTypeRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "ModifyRoType")
-    return
-}
-
-func NewModifyRoTypeResponse() (response *ModifyRoTypeResponse) {
-    response = &ModifyRoTypeResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyRoType
-// This API is used to change a general RO replica to delayed RO replica.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
-//  FAILEDOPERATION_OPERATIONREPLICATIONERROR = "FailedOperation.OperationReplicationError"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_DUETIMEWRONG = "InvalidParameterValue.DueTimeWrong"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_SRCTYPEEQUALDSTTYPE = "InvalidParameterValue.SrcTypeEqualDstType"
-//  INVALIDPARAMETERVALUE_SRCTYPENOTEQUALDSTTYPE = "InvalidParameterValue.SrcTypeNotEqualDstType"
-//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
-//  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
-func (c *Client) ModifyRoType(request *ModifyRoTypeRequest) (response *ModifyRoTypeResponse, err error) {
-    if request == nil {
-        request = NewModifyRoTypeRequest()
-    }
-    response = NewModifyRoTypeResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewModifyTimeWindowRequest() (request *ModifyTimeWindowRequest) {
     request = &ModifyTimeWindowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ModifyTimeWindow")
+    
     return
 }
 
@@ -3101,6 +3145,7 @@ func NewOfflineIsolatedInstancesRequest() (request *OfflineIsolatedInstancesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "OfflineIsolatedInstances")
+    
     return
 }
 
@@ -3139,6 +3184,7 @@ func NewOpenDBInstanceGTIDRequest() (request *OpenDBInstanceGTIDRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "OpenDBInstanceGTID")
+    
     return
 }
 
@@ -3170,6 +3216,7 @@ func NewOpenWanServiceRequest() (request *OpenWanServiceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "OpenWanService")
+    
     return
 }
 
@@ -3209,6 +3256,7 @@ func NewReleaseIsolatedDBInstancesRequest() (request *ReleaseIsolatedDBInstances
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "ReleaseIsolatedDBInstances")
+    
     return
 }
 
@@ -3243,6 +3291,7 @@ func NewRestartDBInstancesRequest() (request *RestartDBInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "RestartDBInstances")
+    
     return
 }
 
@@ -3286,6 +3335,7 @@ func NewStartBatchRollbackRequest() (request *StartBatchRollbackRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "StartBatchRollback")
+    
     return
 }
 
@@ -3322,6 +3372,7 @@ func NewStartDelayReplicationRequest() (request *StartDelayReplicationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "StartDelayReplication")
+    
     return
 }
 
@@ -3359,6 +3410,7 @@ func NewStopDBImportJobRequest() (request *StopDBImportJobRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "StopDBImportJob")
+    
     return
 }
 
@@ -3391,6 +3443,7 @@ func NewStopDelayReplicationRequest() (request *StopDelayReplicationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "StopDelayReplication")
+    
     return
 }
 
@@ -3427,6 +3480,7 @@ func NewStopRollbackRequest() (request *StopRollbackRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "StopRollback")
+    
     return
 }
 
@@ -3462,6 +3516,7 @@ func NewSwitchDBInstanceMasterSlaveRequest() (request *SwitchDBInstanceMasterSla
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "SwitchDBInstanceMasterSlave")
+    
     return
 }
 
@@ -3498,6 +3553,7 @@ func NewSwitchDrInstanceToMasterRequest() (request *SwitchDrInstanceToMasterRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "SwitchDrInstanceToMaster")
+    
     return
 }
 
@@ -3530,6 +3586,7 @@ func NewSwitchForUpgradeRequest() (request *SwitchForUpgradeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "SwitchForUpgrade")
+    
     return
 }
 
@@ -3562,6 +3619,7 @@ func NewUpgradeDBInstanceRequest() (request *UpgradeDBInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "UpgradeDBInstance")
+    
     return
 }
 
@@ -3598,6 +3656,7 @@ func NewUpgradeDBInstanceEngineVersionRequest() (request *UpgradeDBInstanceEngin
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cdb", APIVersion, "UpgradeDBInstanceEngineVersion")
+    
     return
 }
 

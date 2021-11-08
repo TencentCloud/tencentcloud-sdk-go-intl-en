@@ -236,6 +236,9 @@ type BackupInfo struct {
 
 	// Backup mode. Valid values: `manual` (manual backup), `automatic` (automatic backup).
 	Way *string `json:"Way,omitempty" name:"Way"`
+
+	// Manual backup alias
+	ManualBackupName *string `json:"ManualBackupName,omitempty" name:"ManualBackupName"`
 }
 
 type BackupItem struct {
@@ -613,6 +616,9 @@ type CreateBackupRequest struct {
 	// Information of the table to be backed up. If this parameter is not set, the entire instance will be backed up by default. It can be set only in logical backup (i.e., BackupMethod = logical). The specified table must exist; otherwise, backup may fail.
 	// For example, if you want to backup tb1 and tb2 in db1 and the entire db2, you should set the parameter as [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"} ].
 	BackupDBTableList []*BackupItem `json:"BackupDBTableList,omitempty" name:"BackupDBTableList"`
+
+	// Manual backup alias
+	ManualBackupName *string `json:"ManualBackupName,omitempty" name:"ManualBackupName"`
 }
 
 func (r *CreateBackupRequest) ToJsonString() string {
@@ -630,6 +636,7 @@ func (r *CreateBackupRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "BackupMethod")
 	delete(f, "BackupDBTableList")
+	delete(f, "ManualBackupName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBackupRequest has unknown keys!", "")
 	}
@@ -716,6 +723,9 @@ type CreateCloneInstanceRequest struct {
 
 	// Placement group ID.
 	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
+
+	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
 }
 
 func (r *CreateCloneInstanceRequest) ToJsonString() string {
@@ -748,6 +758,7 @@ func (r *CreateCloneInstanceRequest) FromJsonString(s string) error {
 	delete(f, "DeviceType")
 	delete(f, "InstanceNodes")
 	delete(f, "DeployGroupId")
+	delete(f, "DryRun")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloneInstanceRequest has unknown keys!", "")
 	}
@@ -783,7 +794,7 @@ type CreateDBImportJobRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Filename. The file should have already been uploaded to Tencent Cloud.
+	// Filename. The file must be a .sql file uploaded to Tencent Cloud.
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
 	// TencentDB username
@@ -940,6 +951,12 @@ type CreateDBInstanceHourRequest struct {
 
 	// Financial cage ID.
 	CageId *string `json:"CageId,omitempty" name:"CageId"`
+
+	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
+	AlarmPolicyIdList []*string `json:"AlarmPolicyIdList,omitempty" name:"AlarmPolicyIdList"`
+
+	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
 }
 
 func (r *CreateDBInstanceHourRequest) ToJsonString() string {
@@ -986,6 +1003,8 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 	delete(f, "Cpu")
 	delete(f, "AutoSyncFlag")
 	delete(f, "CageId")
+	delete(f, "AlarmPolicyIdList")
+	delete(f, "DryRun")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceHourRequest has unknown keys!", "")
 	}
@@ -5720,64 +5739,6 @@ func (r *ModifyRoReplicationDelayResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyRoReplicationDelayResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyRoTypeRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// The original type of an RO replica. Valid values: `NORMAL` (do not support delayed replication), `DELAY_REPLICATION` (support delayed replication).
-	SrcRoInstType *string `json:"SrcRoInstType,omitempty" name:"SrcRoInstType"`
-
-	// The target type of an RO replica. Valid values: `NORMAL` (do not support delayed replication), `DELAY_REPLICATION` (support delayed replication).
-	DstRoInstType *string `json:"DstRoInstType,omitempty" name:"DstRoInstType"`
-
-	// Replication delay in seconds. This parameter is required when a regular RO replica is switched to a delayed one. Value range: 1 to 259200.
-	ReplicationDelay *int64 `json:"ReplicationDelay,omitempty" name:"ReplicationDelay"`
-}
-
-func (r *ModifyRoTypeRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyRoTypeRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "SrcRoInstType")
-	delete(f, "DstRoInstType")
-	delete(f, "ReplicationDelay")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRoTypeRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyRoTypeResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ModifyRoTypeResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyRoTypeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

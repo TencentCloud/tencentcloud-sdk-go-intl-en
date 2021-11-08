@@ -48,6 +48,7 @@ func NewCreateCosTokenV2Request() (request *CreateCosTokenV2Request) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "CreateCosTokenV2")
+    
     return
 }
 
@@ -74,6 +75,7 @@ func NewCreateNamespaceRequest() (request *CreateNamespaceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "CreateNamespace")
+    
     return
 }
 
@@ -100,6 +102,7 @@ func NewCreateResourceRequest() (request *CreateResourceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "CreateResource")
+    
     return
 }
 
@@ -126,6 +129,7 @@ func NewCreateServiceV2Request() (request *CreateServiceV2Request) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "CreateServiceV2")
+    
     return
 }
 
@@ -155,6 +159,7 @@ func NewDeleteIngressRequest() (request *DeleteIngressRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DeleteIngress")
+    
     return
 }
 
@@ -184,6 +189,7 @@ func NewDeployServiceV2Request() (request *DeployServiceV2Request) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DeployServiceV2")
+    
     return
 }
 
@@ -213,6 +219,7 @@ func NewDescribeIngressRequest() (request *DescribeIngressRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DescribeIngress")
+    
     return
 }
 
@@ -242,6 +249,7 @@ func NewDescribeIngressesRequest() (request *DescribeIngressesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DescribeIngresses")
+    
     return
 }
 
@@ -271,6 +279,7 @@ func NewDescribeNamespacesRequest() (request *DescribeNamespacesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DescribeNamespaces")
+    
     return
 }
 
@@ -300,6 +309,7 @@ func NewDescribeRelatedIngressesRequest() (request *DescribeRelatedIngressesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DescribeRelatedIngresses")
+    
     return
 }
 
@@ -329,6 +339,7 @@ func NewDescribeServiceRunPodListV2Request() (request *DescribeServiceRunPodList
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DescribeServiceRunPodListV2")
+    
     return
 }
 
@@ -358,6 +369,7 @@ func NewGenerateDownloadUrlRequest() (request *GenerateDownloadUrlRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "GenerateDownloadUrl")
+    
     return
 }
 
@@ -387,6 +399,7 @@ func NewModifyIngressRequest() (request *ModifyIngressRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "ModifyIngress")
+    
     return
 }
 
@@ -416,6 +429,7 @@ func NewModifyNamespaceRequest() (request *ModifyNamespaceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "ModifyNamespace")
+    
     return
 }
 
@@ -445,6 +459,7 @@ func NewModifyServiceInfoRequest() (request *ModifyServiceInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "ModifyServiceInfo")
+    
     return
 }
 
@@ -474,6 +489,7 @@ func NewRestartServiceRunPodRequest() (request *RestartServiceRunPodRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "RestartServiceRunPod")
+    
     return
 }
 
