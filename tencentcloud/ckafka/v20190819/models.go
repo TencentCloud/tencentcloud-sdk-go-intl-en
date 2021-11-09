@@ -267,6 +267,10 @@ type Config struct {
 	// Maximum number of message bytes
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MaxMessageBytes *int64 `json:"MaxMessageBytes,omitempty" name:"MaxMessageBytes"`
+
+	// Message retention file size.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RetentionBytes *int64 `json:"RetentionBytes,omitempty" name:"RetentionBytes"`
 }
 
 type ConsumerGroup struct {
@@ -542,7 +546,7 @@ type CreateTopicRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Topic name string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`)
+	// Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
 	// Number of partitions, which should be greater than 0
@@ -580,6 +584,9 @@ type CreateTopicRequest struct {
 
 	// Name of the preset ACL rule.
 	AclRuleName *string `json:"AclRuleName,omitempty" name:"AclRuleName"`
+
+	// Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
+	RetentionBytes *int64 `json:"RetentionBytes,omitempty" name:"RetentionBytes"`
 }
 
 func (r *CreateTopicRequest) ToJsonString() string {
@@ -608,6 +615,7 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	delete(f, "SegmentMs")
 	delete(f, "EnableAclRule")
 	delete(f, "AclRuleName")
+	delete(f, "RetentionBytes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTopicRequest has unknown keys!", "")
 	}
@@ -2803,6 +2811,9 @@ type ModifyTopicAttributesRequest struct {
 
 	// Name of the preset ACL rule.
 	AclRuleName *string `json:"AclRuleName,omitempty" name:"AclRuleName"`
+
+	// Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
+	RetentionBytes *int64 `json:"RetentionBytes,omitempty" name:"RetentionBytes"`
 }
 
 func (r *ModifyTopicAttributesRequest) ToJsonString() string {
@@ -2830,6 +2841,7 @@ func (r *ModifyTopicAttributesRequest) FromJsonString(s string) error {
 	delete(f, "IpWhiteList")
 	delete(f, "EnableAclRule")
 	delete(f, "AclRuleName")
+	delete(f, "RetentionBytes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTopicAttributesRequest has unknown keys!", "")
 	}

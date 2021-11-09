@@ -59,6 +59,9 @@ const (
 	// Failed to get the VPC.
 	INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
 
+	// 
+	INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+
 	// Failed to query instances by security group.
 	INTERNALERROR_LISTINSTANCEFAILED = "InternalError.ListInstanceFailed"
 
@@ -145,6 +148,9 @@ const (
 
 	// Insufficient account balance.
 	OPERATIONDENIED_INSUFFICIENTBALANCEERROR = "OperationDenied.InsufficientBalanceError"
+
+	// For the serverless cluster in this status ({{1}}), the operation is not allowed.
+	OPERATIONDENIED_SERVERLESSCLUSTERSTATUSDENIED = "OperationDenied.ServerlessClusterStatusDenied"
 
 	// For the serverless instance in this status ({{1}}), the operation is not allowed.
 	OPERATIONDENIED_SERVERLESSINSTANCESTATUSDENIED = "OperationDenied.ServerlessInstanceStatusDenied"

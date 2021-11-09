@@ -561,6 +561,9 @@ type CynosdbCluster struct {
 
 	// The maximum storage corresponding to the compute specifications of the cluster
 	MaxStorageSize *int64 `json:"MaxStorageSize,omitempty" name:"MaxStorageSize"`
+
+	// Network information of the cluster
+	NetAddrs []*NetAddr `json:"NetAddrs,omitempty" name:"NetAddrs"`
 }
 
 type CynosdbClusterDetail struct {
@@ -1997,6 +2000,59 @@ func (r *ModifyBackupConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyClusterParamRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of parameters to be modified
+	ParamList []*ParamItem `json:"ParamList,omitempty" name:"ParamList"`
+}
+
+func (r *ModifyClusterParamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterParamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "ParamList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterParamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyClusterParamResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async request ID used to query the result
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyClusterParamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterParamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyDBInstanceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
@@ -2107,6 +2163,29 @@ func (r *ModifyMaintainPeriodConfigResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyMaintainPeriodConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type NetAddr struct {
+
+	// Private network IP
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Private network port number
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Public network domain name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	WanDomain *string `json:"WanDomain,omitempty" name:"WanDomain"`
+
+	// Public network port number
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	WanPort *int64 `json:"WanPort,omitempty" name:"WanPort"`
+
+	// Network type. Valid values: `ro` (read-only), `rw` or `ha` (read-write)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NetType *string `json:"NetType,omitempty" name:"NetType"`
 }
 
 type ObjectTask struct {
