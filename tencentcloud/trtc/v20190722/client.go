@@ -373,135 +373,47 @@ func (c *Client) DescribePicture(request *DescribePictureRequest) (response *Des
     return
 }
 
-func NewDescribeRealtimeNetworkRequest() (request *DescribeRealtimeNetworkRequest) {
-    request = &DescribeRealtimeNetworkRequest{
+func NewDescribeRecordStatisticRequest() (request *DescribeRecordStatisticRequest) {
+    request = &DescribeRecordStatisticRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRealtimeNetwork")
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRecordStatistic")
     
     return
 }
 
-func NewDescribeRealtimeNetworkResponse() (response *DescribeRealtimeNetworkResponse) {
-    response = &DescribeRealtimeNetworkResponse{
+func NewDescribeRecordStatisticResponse() (response *DescribeRecordStatisticResponse) {
+    response = &DescribeRecordStatisticResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// DescribeRealtimeNetwork
-// This API is used to query the network conditions of an `SDKAppID`, including upstream and downstream packet loss, in the last 24 hours on a per-minute basis. The query period must be 1-60 minutes.
+// DescribeRecordStatistic
+// This API is used to query billable on-cloud recording durations.
+//
+// 
+//
+// - If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
+//
+// - The period queried in a request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - In the daily pay-as-you-go mode, bills for a day are generated the next morning. Therefore, we recommend you query the statistics after 9 AM the next day.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
-//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
-//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
-//  INTERNALERROR_MONITORQUERYERR = "InternalError.MonitorQueryErr"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
-//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
-//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_APPID = "InvalidParameter.AppId"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
-//  INVALIDPARAMETER_STARTTIMEEXPIRE = "InvalidParameter.StartTimeExpire"
-//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
-//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
-//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
-func (c *Client) DescribeRealtimeNetwork(request *DescribeRealtimeNetworkRequest) (response *DescribeRealtimeNetworkResponse, err error) {
+func (c *Client) DescribeRecordStatistic(request *DescribeRecordStatisticRequest) (response *DescribeRecordStatisticResponse, err error) {
     if request == nil {
-        request = NewDescribeRealtimeNetworkRequest()
+        request = NewDescribeRecordStatisticRequest()
     }
-    response = NewDescribeRealtimeNetworkResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeRealtimeQualityRequest() (request *DescribeRealtimeQualityRequest) {
-    request = &DescribeRealtimeQualityRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRealtimeQuality")
-    
-    return
-}
-
-func NewDescribeRealtimeQualityResponse() (response *DescribeRealtimeQualityResponse) {
-    response = &DescribeRealtimeQualityResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeRealtimeQuality
-// This API is used to query the quality metrics of an `SDKAppID` in the last 24 hours on a per-minute basis, including room entry success rate, instant playback rate of the first frame, and audio/video lag rate. The query period must be 1-60 minutes.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
-//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
-//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
-//  INTERNALERROR_MONITORQUERYERR = "InternalError.MonitorQueryErr"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
-//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
-//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
-//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
-//  INVALIDPARAMETER_STARTTIMEEXPIRE = "InvalidParameter.StartTimeExpire"
-//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
-//  INVALIDPARAMETER_URLPARAMSERROR = "InvalidParameter.UrlParamsError"
-//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
-//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
-//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
-func (c *Client) DescribeRealtimeQuality(request *DescribeRealtimeQualityRequest) (response *DescribeRealtimeQualityResponse, err error) {
-    if request == nil {
-        request = NewDescribeRealtimeQualityRequest()
-    }
-    response = NewDescribeRealtimeQualityResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeRealtimeScaleRequest() (request *DescribeRealtimeScaleRequest) {
-    request = &DescribeRealtimeScaleRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRealtimeScale")
-    
-    return
-}
-
-func NewDescribeRealtimeScaleResponse() (response *DescribeRealtimeScaleResponse) {
-    response = &DescribeRealtimeScaleResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeRealtimeScale
-//  This API is used to query the scale of an `SDKAppID` in the last 24 hours on a per-minute basis. The query period must be 1-60 minutes.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
-//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
-//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
-//  INTERNALERROR_MONITORQUERYERR = "InternalError.MonitorQueryErr"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
-//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
-//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
-//  INVALIDPARAMETER_STARTTIMEEXPIRE = "InvalidParameter.StartTimeExpire"
-//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
-//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
-//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
-//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
-func (c *Client) DescribeRealtimeScale(request *DescribeRealtimeScaleRequest) (response *DescribeRealtimeScaleResponse, err error) {
-    if request == nil {
-        request = NewDescribeRealtimeScaleRequest()
-    }
-    response = NewDescribeRealtimeScaleResponse()
+    response = NewDescribeRecordStatisticResponse()
     err = c.Send(request, response)
     return
 }
@@ -555,6 +467,88 @@ func (c *Client) DescribeRoomInformation(request *DescribeRoomInformationRequest
         request = NewDescribeRoomInformationRequest()
     }
     response = NewDescribeRoomInformationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTrtcInteractiveTimeRequest() (request *DescribeTrtcInteractiveTimeRequest) {
+    request = &DescribeTrtcInteractiveTimeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeTrtcInteractiveTime")
+    
+    return
+}
+
+func NewDescribeTrtcInteractiveTimeResponse() (response *DescribeTrtcInteractiveTimeResponse) {
+    response = &DescribeTrtcInteractiveTimeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTrtcInteractiveTime
+// This API is used to query billable audio/video interaction durations.
+//
+// - If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
+//
+// - The period queried in a request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - In the daily pay-as-you-go mode, bills for a day are generated the next morning. Therefore, we recommend you query the statistics after 9 AM the next day.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeTrtcInteractiveTime(request *DescribeTrtcInteractiveTimeRequest) (response *DescribeTrtcInteractiveTimeResponse, err error) {
+    if request == nil {
+        request = NewDescribeTrtcInteractiveTimeRequest()
+    }
+    response = NewDescribeTrtcInteractiveTimeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTrtcMcuTranscodeTimeRequest() (request *DescribeTrtcMcuTranscodeTimeRequest) {
+    request = &DescribeTrtcMcuTranscodeTimeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeTrtcMcuTranscodeTime")
+    
+    return
+}
+
+func NewDescribeTrtcMcuTranscodeTimeResponse() (response *DescribeTrtcMcuTranscodeTimeResponse) {
+    response = &DescribeTrtcMcuTranscodeTimeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTrtcMcuTranscodeTime
+// This API is used to query billable relaying and transcoding durations.
+//
+// - If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
+//
+// - The period queried in a request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - In the daily pay-as-you-go mode, bills for a day are generated the next morning. Therefore, we recommend you query the statistics after 9 AM the next day.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeTrtcMcuTranscodeTime(request *DescribeTrtcMcuTranscodeTimeRequest) (response *DescribeTrtcMcuTranscodeTimeResponse, err error) {
+    if request == nil {
+        request = NewDescribeTrtcMcuTranscodeTimeRequest()
+    }
+    response = NewDescribeTrtcMcuTranscodeTimeResponse()
     err = c.Send(request, response)
     return
 }

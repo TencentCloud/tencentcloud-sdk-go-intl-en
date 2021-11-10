@@ -2315,6 +2315,9 @@ type ComposeMediaTask struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
+	// Progress of a media file composing task. Value range: [0, 100]
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+
 	// Input of media file composing task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Input *ComposeMediaTaskInput `json:"Input,omitempty" name:"Input"`
@@ -2327,11 +2330,11 @@ type ComposeMediaTask struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
 
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
-	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
-
 	// ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 }
 
 type ComposeMediaTaskInput struct {
@@ -3784,7 +3787,7 @@ type CreateVodDomainRequest struct {
 	// <li>`Chinese Mainland`</li>
 	// <li>`Outside Chinese Mainland`</li>
 	// <li>`Global`</li>
-	// If `AccelerateArea` is not set, VOD will enable acceleration in `Chinese Mainland` or `Outside Chinese Mainland` according to the region set under the user’s Tencent Cloud account. To enable acceleration in Chinese mainland for a domain name, please finish [ICP filing](https://intl.cloud.tencent.com/document/product/243/18905?from_cn_redirect=1) for it first.
+	// If `AccelerateArea` is not specified, VOD will enable acceleration in or outside Chinese mainland based on the regional information a user has configured with Tencent Cloud.
 	AccelerateArea *string `json:"AccelerateArea,omitempty" name:"AccelerateArea"`
 
 	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
@@ -7158,6 +7161,9 @@ type EditMediaTask struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
+	// Progress of a video editing task. Value range: [0, 100]
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+
 	// Input of video editing task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Input *EditMediaTaskInput `json:"Input,omitempty" name:"Input"`
@@ -7166,20 +7172,20 @@ type EditMediaTask struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *EditMediaTaskOutput `json:"Output,omitempty" name:"Output"`
 
+	// Metadata of a source video
+	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
+
 	// If a video processing flow is specified when a video editing task is initiated, this field will be the ID of the task flow.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProcedureTaskId *string `json:"ProcedureTaskId,omitempty" name:"ProcedureTaskId"`
-
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
-	// Metadata of a source video
-	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 }
 
 type EditMediaTaskInput struct {
@@ -10315,7 +10321,6 @@ type ModifyVodDomainAccelerateConfigRequest struct {
 	// Whether to enable or disable domain name acceleration for the selected region. Valid values:
 	// <li>`Enabled`: enable</li>
 	// <li>`Disabled`: disable</li>
-	// To enable acceleration in Chinese mainland for a domain name, please finish [ICP filing](https://intl.cloud.tencent.com/document/product/243/18905?from_cn_redirect=1) for it first.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.

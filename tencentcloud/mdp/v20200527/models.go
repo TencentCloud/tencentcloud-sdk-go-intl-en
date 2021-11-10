@@ -117,7 +117,7 @@ type CreateStreamPackageChannelEndpointRequest struct {
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Channel name
+	// Endpoint name, which must contain 1 to 32 characters and supports digits, letters, and underscores
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Authentication information

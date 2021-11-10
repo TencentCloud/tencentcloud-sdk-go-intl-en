@@ -602,32 +602,28 @@ func (r *DescribePictureResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeRealtimeNetworkRequest struct {
+type DescribeRecordStatisticRequest struct {
 	*tchttp.BaseRequest
 
-	// Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 24 hours.
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+	// Query start date in the format of YYYY-MM-DD
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+	// Query end date in the format of YYYY-MM-DD
+	// The period queried in a request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// User `sdkappid`
-	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
-
-	// Type of data to query
-	// sendLossRateRaw: upstream packet loss rate;
-	// recvLossRateRaw: downstream packet loss rate.
-	DataType []*string `json:"DataType,omitempty" name:"DataType"`
+	// Application ID, which is optional. If it is specified, duration statistics for the specified application are returned; otherwise, the total durations of all applications are returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 }
 
-func (r *DescribeRealtimeNetworkRequest) ToJsonString() string {
+func (r *DescribeRecordStatisticRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeRealtimeNetworkRequest) FromJsonString(s string) error {
+func (r *DescribeRecordStatisticRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
@@ -635,161 +631,32 @@ func (r *DescribeRealtimeNetworkRequest) FromJsonString(s string) error {
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	delete(f, "SdkAppId")
-	delete(f, "DataType")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRealtimeNetworkRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRecordStatisticRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeRealtimeNetworkResponse struct {
+type DescribeRecordStatisticResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Data returned by query
-		Data []*RealtimeData `json:"Data,omitempty" name:"Data"`
+		// Duration statistics of the queried application(s)
+		SdkAppIdUsages []*SdkAppIdRecordUsage `json:"SdkAppIdUsages,omitempty" name:"SdkAppIdUsages"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *DescribeRealtimeNetworkResponse) ToJsonString() string {
+func (r *DescribeRecordStatisticResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeRealtimeNetworkResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRealtimeQualityRequest struct {
-	*tchttp.BaseRequest
-
-	// Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 24 hours.
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
-
-	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
-
-	// User `sdkappid`
-	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
-
-	// Type of data to query
-	// enterTotalSuccPercent: room entry success rate;
-	// fistFreamInSecRate: instant playback rate of the first frame;
-	// blockPercent: video lag rate;
-	// audioBlockPercent: audio lag rate.
-	DataType []*string `json:"DataType,omitempty" name:"DataType"`
-}
-
-func (r *DescribeRealtimeQualityRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRealtimeQualityRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "SdkAppId")
-	delete(f, "DataType")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRealtimeQualityRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRealtimeQualityResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Type of returned data
-		Data []*RealtimeData `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeRealtimeQualityResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRealtimeQualityResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRealtimeScaleRequest struct {
-	*tchttp.BaseRequest
-
-	// Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 24 hours.
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
-
-	// Query end time in the format of local UNIX timestamp, such as 1588031999s.
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
-
-	// User `sdkappid`
-	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
-
-	// Type of data to query
-	// `UserNum: number of users in call;
-	// RoomNum: number of rooms.
-	DataType []*string `json:"DataType,omitempty" name:"DataType"`
-}
-
-func (r *DescribeRealtimeScaleRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRealtimeScaleRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "SdkAppId")
-	delete(f, "DataType")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRealtimeScaleRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRealtimeScaleResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned data array
-		Data []*RealtimeData `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeRealtimeScaleResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRealtimeScaleResponse) FromJsonString(s string) error {
+func (r *DescribeRecordStatisticResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -862,6 +729,122 @@ func (r *DescribeRoomInformationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeRoomInformationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTrtcInteractiveTimeRequest struct {
+	*tchttp.BaseRequest
+
+	// Query start date in the format of YYYY-MM-DD
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end date in the format of YYYY-MM-DD
+	// The period queried in a request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Application ID, which is optional. If it is specified, duration statistics for the specified application are returned; otherwise, the total durations of all applications are returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+func (r *DescribeTrtcInteractiveTimeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTrtcInteractiveTimeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTrtcInteractiveTimeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTrtcInteractiveTimeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Duration statistics of the queried application(s)
+		Usages []*OneSdkAppIdUsagesInfo `json:"Usages,omitempty" name:"Usages"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTrtcInteractiveTimeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTrtcInteractiveTimeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTrtcMcuTranscodeTimeRequest struct {
+	*tchttp.BaseRequest
+
+	// Query start date in the format of YYYY-MM-DD
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end date in the format of YYYY-MM-DD
+	// The period queried in a request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Application ID, which is optional. If it is specified, duration statistics for the specified application are returned; otherwise, the total durations of all applications are returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+func (r *DescribeTrtcMcuTranscodeTimeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTrtcMcuTranscodeTimeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTrtcMcuTranscodeTimeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTrtcMcuTranscodeTimeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Duration statistics of the queried application(s)
+		Usages []*OneSdkAppIdTranscodeTimeUsagesInfo `json:"Usages,omitempty" name:"Usages"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeTrtcMcuTranscodeTimeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTrtcMcuTranscodeTimeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1218,6 +1201,30 @@ func (r *ModifyPictureResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type OneSdkAppIdTranscodeTimeUsagesInfo struct {
+
+	// Array of relaying and transcoding durations
+	SdkAppIdTranscodeTimeUsages []*SdkAppIdTrtcMcuTranscodeTimeUsage `json:"SdkAppIdTranscodeTimeUsages,omitempty" name:"SdkAppIdTranscodeTimeUsages"`
+
+	// Number of records returned
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// ID of the application queried. Its value may be an application ID or `total`, which indicates that the total durations of all applications are queried.
+	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+type OneSdkAppIdUsagesInfo struct {
+
+	// Number of records returned for the `SdkAppId`
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// Array of durations
+	SdkAppIdTrtcTimeUsages []*SdkAppIdTrtcUsage `json:"SdkAppIdTrtcTimeUsages,omitempty" name:"SdkAppIdTrtcTimeUsages"`
+
+	// Application ID
+	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
 type OutputParams struct {
 
 	// Custom live stream ID, which must be different from the ID of relayed stream.
@@ -1311,13 +1318,22 @@ type QualityData struct {
 	DataType *string `json:"DataType,omitempty" name:"DataType"`
 }
 
-type RealtimeData struct {
+type RecordUsage struct {
 
-	// Returned data
-	Content []*TimeValue `json:"Content,omitempty" name:"Content"`
+	// Time point for the statistics, e.g., `2020-09-07` or `2020-09-07 00:05:05`
+	TimeKey *string `json:"TimeKey,omitempty" name:"TimeKey"`
 
-	// Data type field
-	DataType *string `json:"DataType,omitempty" name:"DataType"`
+	// SD video duration (s)
+	Class1VideoTime *uint64 `json:"Class1VideoTime,omitempty" name:"Class1VideoTime"`
+
+	// HD video duration (s)
+	Class2VideoTime *uint64 `json:"Class2VideoTime,omitempty" name:"Class2VideoTime"`
+
+	// FHD video duration (s)
+	Class3VideoTime *uint64 `json:"Class3VideoTime,omitempty" name:"Class3VideoTime"`
+
+	// Audio duration (s)
+	AudioTime *uint64 `json:"AudioTime,omitempty" name:"AudioTime"`
 }
 
 type RemoveUserByStrRoomIdRequest struct {
@@ -1465,6 +1481,55 @@ type ScaleInfomation struct {
 	// Number of rooms under `sdkappid` on a day
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RoomNumbers *uint64 `json:"RoomNumbers,omitempty" name:"RoomNumbers"`
+}
+
+type SdkAppIdRecordUsage struct {
+
+	// Application ID
+	SdkAppId *string `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Durations for the period queried
+	Usages []*RecordUsage `json:"Usages,omitempty" name:"Usages"`
+}
+
+type SdkAppIdTrtcMcuTranscodeTimeUsage struct {
+
+	// Time point for the statistics. e.g., `2020-09-07` or `2020-09-07 00:05:05`
+	TimeKey *string `json:"TimeKey,omitempty" name:"TimeKey"`
+
+	// Audio duration (s)
+	AudioTime *uint64 `json:"AudioTime,omitempty" name:"AudioTime"`
+
+	// SD video duration (s)
+	VideoTimeSd *uint64 `json:"VideoTimeSd,omitempty" name:"VideoTimeSd"`
+
+	// HD video duration (s)
+	VideoTimeHd *uint64 `json:"VideoTimeHd,omitempty" name:"VideoTimeHd"`
+
+	// FHD video duration (s)
+	VideoTimeFhd *uint64 `json:"VideoTimeFhd,omitempty" name:"VideoTimeFhd"`
+}
+
+type SdkAppIdTrtcUsage struct {
+
+	// Time point for the statistics. e.g., `2020-09-07` or `2020-09-07 00:05:05`
+	TimeKey *string `json:"TimeKey,omitempty" name:"TimeKey"`
+
+	// Audio duration (s)
+	AudioTime *uint64 `json:"AudioTime,omitempty" name:"AudioTime"`
+
+	// Audio/Video duration (s)
+	// This parameter is returned only for users who signed up before October 11, 2019 and have not switched to the [new billing standards](https://intl.cloud.tencent.com/document/product/647/17157?from_cn_redirect=1).
+	AudioVideoTime *uint64 `json:"AudioVideoTime,omitempty" name:"AudioVideoTime"`
+
+	// SD video duration (s)
+	VideoTimeSd *uint64 `json:"VideoTimeSd,omitempty" name:"VideoTimeSd"`
+
+	// HD video duration (s)
+	VideoTimeHd *uint64 `json:"VideoTimeHd,omitempty" name:"VideoTimeHd"`
+
+	// FHD video duration (s)
+	VideoTimeHdp *uint64 `json:"VideoTimeHdp,omitempty" name:"VideoTimeHdp"`
 }
 
 type SmallVideoLayoutParams struct {
