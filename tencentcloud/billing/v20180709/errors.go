@@ -17,6 +17,9 @@ package v20180709
 const (
 	// error codes for specific actions
 
+	// 
+	AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+
 	// Summary is being built. Please try again later.
 	FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
 

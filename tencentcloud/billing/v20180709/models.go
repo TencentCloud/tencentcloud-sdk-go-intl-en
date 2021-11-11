@@ -45,6 +45,9 @@ type ActionSummaryOverviewItem struct {
 
 	// Billing month, e.g. `2019-08`
 	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+
+	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }
 
 type BillDetail struct {
@@ -240,7 +243,8 @@ type BillResourceSummary struct {
 	// Cost, in USD
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 
-	// Discount rate
+	// Discount
+	// If different discounts or contract prices are applied, `-` will be returned for this parameter.
 	Discount *string `json:"Discount,omitempty" name:"Discount"`
 
 	// Offer type
@@ -325,6 +329,9 @@ type BusinessSummaryOverviewItem struct {
 
 	// Billing month, e.g. `2019-08`
 	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+
+	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }
 
 type BusinessSummaryTotal struct {
@@ -340,6 +347,9 @@ type BusinessSummaryTotal struct {
 
 	// Cash amount
 	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
+
+	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }
 
 type DescribeBillDetailRequest struct {
@@ -449,17 +459,46 @@ type DescribeBillResourceSummaryRequest struct {
 	// Quantity, maximum is 1000
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The period type. byUsedTime: By usage period; byPayTime: by payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
-	PeriodType *string `json:"PeriodType,omitempty" name:"PeriodType"`
-
 	// Month; format: yyyy-mm. This value cannot be earlier than the month when Bill 2.0 is enabled. Last 24 months data are available.
 	Month *string `json:"Month,omitempty" name:"Month"`
+
+	// The period type. byUsedTime: By usage period; byPayTime: by payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
+	PeriodType *string `json:"PeriodType,omitempty" name:"PeriodType"`
 
 	// Indicates whether or not the total number of records of accessing the list is required, used for frontend pages.
 	// 1 = yes, 0 = no
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitempty" name:"NeedRecordNum"`
 
-	// 
+	// Action type to query. Valid values:
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
+	//  
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 
 	// ID of the instance to be queried
@@ -483,8 +522,8 @@ func (r *DescribeBillResourceSummaryRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Offset")
 	delete(f, "Limit")
-	delete(f, "PeriodType")
 	delete(f, "Month")
+	delete(f, "PeriodType")
 	delete(f, "NeedRecordNum")
 	delete(f, "ActionType")
 	delete(f, "ResourceId")
@@ -784,6 +823,9 @@ type DescribeBillSummaryByTagRequest struct {
 
 	// Payer UIN
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
+
+	// Resource tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 func (r *DescribeBillSummaryByTagRequest) ToJsonString() string {
@@ -802,6 +844,7 @@ func (r *DescribeBillSummaryByTagRequest) FromJsonString(s string) error {
 	delete(f, "EndTime")
 	delete(f, "TagKey")
 	delete(f, "PayerUin")
+	delete(f, "TagValue")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillSummaryByTagRequest has unknown keys!", "")
 	}
@@ -818,6 +861,10 @@ type DescribeBillSummaryByTagResponse struct {
 		// Details about cost distribution over different tags
 	// Note: This field may return null, indicating that no valid values can be obtained.
 		SummaryOverview []*TagSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+
+		// Total cost
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		SummaryTotal *SummaryTotal `json:"SummaryTotal,omitempty" name:"SummaryTotal"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -860,6 +907,9 @@ type PayModeSummaryOverviewItem struct {
 
 	// Voucher amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }
 
 type ProjectSummaryOverviewItem struct {
@@ -887,6 +937,9 @@ type ProjectSummaryOverviewItem struct {
 
 	// Billing month, e.g. `2019-08`
 	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+
+	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }
 
 type RegionSummaryOverviewItem struct {
@@ -915,6 +968,20 @@ type RegionSummaryOverviewItem struct {
 
 	// Billing month, e.g. `2019-08`
 	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+
+	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+}
+
+type SummaryTotal struct {
+
+	// Total cost
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }
 
 type TagSummaryOverviewItem struct {
@@ -930,4 +997,8 @@ type TagSummaryOverviewItem struct {
 	// Cost percentage rounded to two decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RealTotalCostRatio *string `json:"RealTotalCostRatio,omitempty" name:"RealTotalCostRatio"`
+
+	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }

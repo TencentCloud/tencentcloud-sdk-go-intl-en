@@ -1234,13 +1234,34 @@ type DrmSettingsInfo struct {
 	SDMCSettings *SDMCSettingsInfo `json:"SDMCSettings,omitempty" name:"SDMCSettings"`
 }
 
+type EventSettingsDestinationReq struct {
+
+	// URL of the COS bucket to save recording files
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
+type EventSettingsDestinationResp struct {
+
+	// URL of the COS bucket where recording files are saved
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
 type EventSettingsReq struct {
 
-	// Only `INPUT_SWITCH` is supported currently. If you do not specify this parameter, `INPUT_SWITCH` will be used.
+	// Valid values: `INPUT_SWITCH`, `TIMED_RECORD`. If it is not specified, `INPUT_SWITCH` will be used.
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
 	// ID of the input to attach, which is required if `EventType` is `INPUT_SWITCH`
 	InputAttachment *string `json:"InputAttachment,omitempty" name:"InputAttachment"`
+
+	// Name of the output group to attach. This parameter is required if `EventType` is `TIMED_RECORD`.
+	OutputGroupName *string `json:"OutputGroupName,omitempty" name:"OutputGroupName"`
+
+	// Name of the manifest file for timed recording, which must end with `.m3u8` for HLS and `.mpd` for DASH. This parameter is required if `EventType` is `TIMED_RECORD`.
+	ManifestName *string `json:"ManifestName,omitempty" name:"ManifestName"`
+
+	// URL of the COS bucket to save recording files. This parameter is required if `EventType` is `TIMED_RECORD`. It may contain 1 or 2 URLs. The first URL corresponds to pipeline 0 and the second pipeline 1.
+	Destinations []*EventSettingsDestinationReq `json:"Destinations,omitempty" name:"Destinations"`
 }
 
 type EventSettingsResp struct {
@@ -1250,6 +1271,15 @@ type EventSettingsResp struct {
 
 	// ID of the input attached, which is not empty if `EventType` is `INPUT_SWITCH`
 	InputAttachment *string `json:"InputAttachment,omitempty" name:"InputAttachment"`
+
+	// Name of the output group attached. This parameter is not empty if `EventType` is `TIMED_RECORD`.
+	OutputGroupName *string `json:"OutputGroupName,omitempty" name:"OutputGroupName"`
+
+	// Name of the manifest file for timed recording, which ends with `.m3u8` for HLS and `.mpd` for DASH. This parameter is not empty if `EventType` is `TIMED_RECORD`.
+	ManifestName *string `json:"ManifestName,omitempty" name:"ManifestName"`
+
+	// URL of the COS bucket where recording files are saved. This parameter is not empty if `EventType` is `TIMED_RECORD`. It may contain 1 or 2 URLs. The first URL corresponds to pipeline 0 and the second pipeline 1.
+	Destinations []*EventSettingsDestinationResp `json:"Destinations,omitempty" name:"Destinations"`
 }
 
 type FailOverSettings struct {
@@ -1959,12 +1989,20 @@ type TimeShiftSettingsInfo struct {
 
 type TimingSettingsReq struct {
 
-	// Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`
+	// Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`. This parameter is required if `EventType` is `INPUT_SWITCH`.
 	StartType *string `json:"StartType,omitempty" name:"StartType"`
 
-	// Required if `StartType` is `FIXED_TIME`
-	// UTC time, such as `2020-01-01T12:00:00Z`
+	// This parameter is required if `EventType` is `INPUT_SWITCH` and `StartType` is `FIXED_TIME`.
+	// It must be in UTC format, e.g., `2020-01-01T12:00:00Z`.
 	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// This parameter is required if `EventType` is `TIMED_RECORD`.
+	// It specifies the recording start time in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the current time.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// This parameter is required if `EventType` is `TIMED_RECORD`.
+	// It specifies the recording end time in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the recording start time.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type TimingSettingsResp struct {

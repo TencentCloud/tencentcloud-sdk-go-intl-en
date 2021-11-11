@@ -652,7 +652,7 @@ type ConcurrentRecordStreamNum struct {
 type CreateCommonMixStreamRequest struct {
 	*tchttp.BaseRequest
 
-	// ID of stream mix session (from applying for stream mix to canceling stream mix).
+	// ID of a stream mix session (from applying for the stream mix to cancelling it). This parameter can contain up to 80 bytes of letters, digits, and underscores.
 	MixStreamSessionId *string `json:"MixStreamSessionId,omitempty" name:"MixStreamSessionId"`
 
 	// Input stream list for stream mix.
@@ -3404,6 +3404,12 @@ type DescribeLiveDomainsRequest struct {
 
 	// Domain name prefix.
 	DomainPrefix *string `json:"DomainPrefix,omitempty" name:"DomainPrefix"`
+
+	// Playback region. This parameter is valid only when `DomainType` is set to `1`.
+	// `1`: Chinese mainland
+	// `2`: global
+	// `3`: outside Chinese mainland
+	PlayType *uint64 `json:"PlayType,omitempty" name:"PlayType"`
 }
 
 func (r *DescribeLiveDomainsRequest) ToJsonString() string {
@@ -3424,6 +3430,7 @@ func (r *DescribeLiveDomainsRequest) FromJsonString(s string) error {
 	delete(f, "PageNum")
 	delete(f, "IsDelayLive")
 	delete(f, "DomainPrefix")
+	delete(f, "PlayType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLiveDomainsRequest has unknown keys!", "")
 	}
@@ -3471,7 +3478,7 @@ type DescribeLiveForbidStreamListRequest struct {
 	// Default value: 10.
 	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
 
-	// The stream name to search for
+	// Stream name for query
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 }
 
@@ -5122,7 +5129,7 @@ type DescribeScreenShotSheetNumListRequest struct {
 	// Push domain name (data at the domain name level after November 1, 2019 can be queried).
 	PushDomains []*string `json:"PushDomains,omitempty" name:"PushDomains"`
 
-	// Data dimension. The data has a delay of one and a half hours. Valid values: 1. Minute (5-minute granularity, which supports a maximum query time range of 31 days); 2. Day (1-day granularity, which is the default value and supports a maximum query time range of 186 days).
+	// Data granularity. There is a 1.5-hour delay in data reporting. Valid values: `Minute` (5-minute granularity; query period of up to 31 days); `Day` (1-day granularity based on UTC+8:00; query period of up to 186 days)
 	Granularity *string `json:"Granularity,omitempty" name:"Granularity"`
 }
 
@@ -5340,7 +5347,7 @@ type DescribeStreamPushInfoListRequest struct {
 	// Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time point in the format of `yyyy-mm-dd HH:MM:SS`. The maximum time span is 6 hours. Data for the last 6 days can be queried.
+	// End time in the format of yyyy-mm-dd HH:MM:SS. You can query data in the past 7 days. You’re advised to set the query period to up to 3 hours.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Push domain name.

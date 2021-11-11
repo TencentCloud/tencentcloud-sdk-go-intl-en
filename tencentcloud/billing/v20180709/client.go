@@ -161,6 +161,7 @@ func NewDescribeBillSummaryByProductResponse() (response *DescribeBillSummaryByP
 // Gets the bill summarized according to product
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 //  INVALIDPARAMETER = "InvalidParameter"

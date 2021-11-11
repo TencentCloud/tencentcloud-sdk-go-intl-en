@@ -60,13 +60,11 @@ func NewAddDelayLiveStreamResponse() (response *AddDelayLiveStreamResponse) {
 }
 
 // AddDelayLiveStream
-// This API is used to set the delay time for a stream.
+// This API is used to set a delay in playing the images of large live streaming events, in case of emergencies.
 //
-// Note: if you want to set delayed playback before pushing, you need to do so 5 minutes in advance.
+// 
 //
-// Currently, this API only supports stream granularity, and the feature supporting domain name and application granularities will be available in the future.
-//
-// Use case: for important live streams, you can set delayed playback in advance to avoid contingency issues.
+// Note: if you are to set the delay before stream push, set it at least 5 minutes before the push. This API supports configuration only by stream.
 //
 // error code that may be returned:
 //  DRYRUNOPERATION = "DryRunOperation"
@@ -2118,7 +2116,11 @@ func NewDescribeLiveForbidStreamListResponse() (response *DescribeLiveForbidStre
 }
 
 // DescribeLiveForbidStreamList
-// This API is used to get the forbidden stream list.
+// This API is used to get the list of disabled streams.
+//
+// 
+//
+// Note: this API is used for query only and should not be relied too much upon in important business scenarios.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
@@ -2478,11 +2480,15 @@ func NewDescribeLiveStreamEventListResponse() (response *DescribeLiveStreamEvent
 }
 
 // DescribeLiveStreamEventList
-// This API is used to query streaming events.<br>
+// This API is used to query stream push/interruption events.<br>
 //
 // 
 //
-// Note: This API can filter by IsFilter and return the push history.
+// Notes:
+//
+// 1. This API is used to query stream push/interruption records, and should not be relied too much upon in important business scenarios.
+//
+// 2. You can use the `IsFilter` parameter of this API to filter and get required push records.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2517,9 +2523,15 @@ func NewDescribeLiveStreamOnlineListResponse() (response *DescribeLiveStreamOnli
 }
 
 // DescribeLiveStreamOnlineList
-// This API is used to return a list of live streams. It queries the information of live streams after they are pushed successfully.
+// This API is used to get the list of ongoing live streams. It queries the information of live streams after they are pushed successfully. 
 //
-// Note: this API can query up to 20,000 streams. If you want to query more than 20,000 streams, please contact after-sales service.
+// 
+//
+// Notes:
+//
+// 1. This API is used to query the list of active live streams only, and should not be relied too much upon in important business scenarios.
+//
+// 2. This API can query up to 20,000 streams. To query more streams, please contact our after-sales service team.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
@@ -2645,7 +2657,23 @@ func NewDescribeLiveStreamStateResponse() (response *DescribeLiveStreamStateResp
 }
 
 // DescribeLiveStreamState
-// This API is used to return the stream status such as active, inactive, or forbidden.
+// This API is used to get the stream status, such as active, inactive, or disabled.
+//
+// Note: this API is used to query the stream status, and should not be relied too much upon in important business scenarios.
+//
+// 
+//
+// Notes:
+//
+// 1. You should not rely on the results returned by this API to initiate/interrupt live streams.
+//
+// 2. The application can get and store the status of live rooms via [Stream Push and Interruption Event Notification](https://intl.cloud.tencent.com/document/product/267/47025?from_cn_redirect=1).
+//
+// 3. You can use the [DescribeLiveStreamOnlineList](https://intl.cloud.tencent.com/document/product/267/20472?from_cn_redirect=1) API to regularly (with the interval larger than 1 minute) check the status of live rooms monitored by the application.
+//
+// 4. If you find that a stream is inactive using the stream status query API, you can use other above-mentioned methods to check its status.
+//
+// 5. If access or resolution errors occur when you use the API to query, you can regard the stream as active, and do not perform operations on the application.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3898,7 +3926,7 @@ func NewResumeDelayLiveStreamResponse() (response *ResumeDelayLiveStreamResponse
 }
 
 // ResumeDelayLiveStream
-// This API is used to resume a delayed playback.
+// This API is used to cancel the delay setting and recover the real-time display of the live streaming image.
 //
 // error code that may be returned:
 //  DRYRUNOPERATION = "DryRunOperation"
