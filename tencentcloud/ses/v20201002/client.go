@@ -43,6 +43,47 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewBatchSendEmailRequest() (request *BatchSendEmailRequest) {
+    request = &BatchSendEmailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ses", APIVersion, "BatchSendEmail")
+    
+    return
+}
+
+func NewBatchSendEmailResponse() (response *BatchSendEmailResponse) {
+    response = &BatchSendEmailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchSendEmail
+// This API is used to send a TEXT or HTML email to multiple recipients at a time for marketing or notification purposes. By default, you can send emails using a template only. To send custom content, please contact your sales rep to enable this feature. You need to create a recipient group with email addresses first and then send emails by group ID. SES supports scheduled and recurring email sending tasks. You need to pass in `TimedParam` for a scheduled task and `CycleParam` for a recurring one.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EMAILCONTENTTOOLARGE = "FailedOperation.EmailContentToolarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_BEGINTIMEBEFORENOW = "InvalidParameterValue.BeginTimeBeforeNow"
+//  INVALIDPARAMETERVALUE_EMAILCONTENTISWRONG = "InvalidParameterValue.EmailContentIsWrong"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
+//  MISSINGPARAMETER_CYCLEPARAMNECESSARY = "MissingParameter.CycleParamNecessary"
+//  MISSINGPARAMETER_SENDPARAMNECESSARY = "MissingParameter.SendParamNecessary"
+//  MISSINGPARAMETER_TIMEDPARAMNECESSARY = "MissingParameter.TimedParamNecessary"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
+//  OPERATIONDENIED_RECEIVERSTATUSERROR = "OperationDenied.ReceiverStatusError"
+//  OPERATIONDENIED_SENDADDRESSSTATUSERROR = "OperationDenied.SendAddressStatusError"
+//  OPERATIONDENIED_TEMPLATESTATUSERROR = "OperationDenied.TemplateStatusError"
+func (c *Client) BatchSendEmail(request *BatchSendEmailRequest) (response *BatchSendEmailResponse, err error) {
+    if request == nil {
+        request = NewBatchSendEmailRequest()
+    }
+    response = NewBatchSendEmailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateEmailAddressRequest() (request *CreateEmailAddressRequest) {
     request = &CreateEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -459,7 +500,7 @@ func NewGetStatisticsReportResponse() (response *GetStatisticsReportResponse) {
 }
 
 // GetStatisticsReport
-// This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on. The maximum time span is 14 days.
+// This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -637,7 +678,7 @@ func NewSendEmailResponse() (response *SendEmailResponse) {
 }
 
 // SendEmail
-// This API is used to send a TEXT or HTML email. By default, you can only send emails using a template. To send custom content, please contact your sales rep to enable this feature.
+// This API is used to send a TEXT or HTML email triggered for authentication or transaction. By default, you can send emails using a template only. To send custom content, please contact your sales rep to enable this feature.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ATTACHCONTENTTOOLARGE = "FailedOperation.AttachContentToolarge"
@@ -647,6 +688,7 @@ func NewSendEmailResponse() (response *SendEmailResponse) {
 //  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
 //  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
 //  FAILEDOPERATION_INCORRECTEMAIL = "FailedOperation.IncorrectEmail"
+//  FAILEDOPERATION_INCORRECTSENDER = "FailedOperation.IncorrectSender"
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
 //  FAILEDOPERATION_INSUFFICIENTQUOTA = "FailedOperation.InsufficientQuota"
 //  FAILEDOPERATION_INVALIDATTACHNAME = "FailedOperation.InvalidAttachName"
@@ -655,6 +697,7 @@ func NewSendEmailResponse() (response *SendEmailResponse) {
 //  FAILEDOPERATION_NOATTACHPERMISSION = "FailedOperation.NoAttachPermission"
 //  FAILEDOPERATION_NOTAUTHENTICATEDSENDER = "FailedOperation.NotAuthenticatedSender"
 //  FAILEDOPERATION_PROTOCOLCHECKERR = "FailedOperation.ProtocolCheckErr"
+//  FAILEDOPERATION_SENDEMAILERR = "FailedOperation.SendEmailErr"
 //  FAILEDOPERATION_TEMPORARYBLOCKED = "FailedOperation.TemporaryBlocked"
 //  FAILEDOPERATION_TOOMANYATTACHMENTS = "FailedOperation.TooManyAttachments"
 //  FAILEDOPERATION_TOOMANYRECIPIENTS = "FailedOperation.TooManyRecipients"

@@ -29,6 +29,93 @@ type Attachment struct {
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
+type BatchSendEmailRequest struct {
+	*tchttp.BaseRequest
+
+	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format:
+	// Sender <email address>, for example:
+	// Tencent Cloud team <noreply@mail.qcloud.com>
+	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
+
+	// Recipient group ID
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// Email subject
+	Subject *string `json:"Subject,omitempty" name:"Subject"`
+
+	// Task type. Valid values: `1`: batch; `2`: scheduled; `3`: recurring
+	TaskType *uint64 `json:"TaskType,omitempty" name:"TaskType"`
+
+	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will be sent to Tencent Cloud.
+	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
+
+	// Template when emails are sent using a template
+	Template *Template `json:"Template,omitempty" name:"Template"`
+
+	// Email content when emails are sent by calling the API
+	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
+
+	// Email attachments
+	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments"`
+
+	// Parameter required for a recurring sending task
+	CycleParam *CycleEmailParam `json:"CycleParam,omitempty" name:"CycleParam"`
+
+	// Parameter required for a scheduled sending task
+	TimedParam *TimedEmailParam `json:"TimedParam,omitempty" name:"TimedParam"`
+}
+
+func (r *BatchSendEmailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchSendEmailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FromEmailAddress")
+	delete(f, "ReceiverId")
+	delete(f, "Subject")
+	delete(f, "TaskType")
+	delete(f, "ReplyToAddresses")
+	delete(f, "Template")
+	delete(f, "Simple")
+	delete(f, "Attachments")
+	delete(f, "CycleParam")
+	delete(f, "TimedParam")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BatchSendEmailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BatchSendEmailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Sending task ID
+		TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BatchSendEmailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchSendEmailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type BlackEmailAddress struct {
 
 	// Time when the email address is blocklisted.
@@ -191,6 +278,15 @@ func (r *CreateEmailTemplateResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateEmailTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CycleEmailParam struct {
+
+	// Start time of the task
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// Task recurrence in hours
+	IntervalTime *uint64 `json:"IntervalTime,omitempty" name:"IntervalTime"`
 }
 
 type DNSAttributes struct {
@@ -876,9 +972,9 @@ func (r *ListEmailTemplatesResponse) FromJsonString(s string) error {
 type SendEmailRequest struct {
 	*tchttp.BaseRequest
 
-	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format:  
-	// sender &lt;email address&gt;. For example: 
-	// Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;
+	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format: 
+	// Sender <email address>, for example:
+	// Tencent Cloud team <noreply@mail.qcloud.com>
 	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
 
 	// Recipient email addresses. You can send an email to up to 50 recipients at a time. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
@@ -1057,6 +1153,12 @@ type TemplatesMetadata struct {
 
 	// Review reply
 	ReviewReason *string `json:"ReviewReason,omitempty" name:"ReviewReason"`
+}
+
+type TimedEmailParam struct {
+
+	// Start time of a scheduled sending task
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 }
 
 type UpdateEmailIdentityRequest struct {
