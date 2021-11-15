@@ -289,6 +289,38 @@ func (c *Client) DeleteStreamLiveInputSecurityGroup(request *DeleteStreamLiveInp
     return
 }
 
+func NewDeleteStreamLivePlanRequest() (request *DeleteStreamLivePlanRequest) {
+    request = &DeleteStreamLivePlanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLivePlan")
+    
+    return
+}
+
+func NewDeleteStreamLivePlanResponse() (response *DeleteStreamLivePlanResponse) {
+    response = &DeleteStreamLivePlanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteStreamLivePlan
+// This API is used to delete a StreamLive event.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PLAN = "InvalidParameter.Plan"
+func (c *Client) DeleteStreamLivePlan(request *DeleteStreamLivePlanRequest) (response *DeleteStreamLivePlanResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamLivePlanRequest()
+    }
+    response = NewDeleteStreamLivePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamLiveChannelRequest() (request *DescribeStreamLiveChannelRequest) {
     request = &DescribeStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
