@@ -48,6 +48,15 @@ type AccessRegionDetial struct {
 
 	// Value array of the available bandwidth
 	BandwidthList []*int64 `json:"BandwidthList,omitempty" name:"BandwidthList"`
+
+	// Region where the data center locates
+	RegionArea *string `json:"RegionArea,omitempty" name:"RegionArea"`
+
+	// Name of the region where the data center locates
+	RegionAreaName *string `json:"RegionAreaName,omitempty" name:"RegionAreaName"`
+
+	// Data center type. `dc`: data center; `ec`: edge server.
+	IDCType *string `json:"IDCType,omitempty" name:"IDCType"`
 }
 
 type AccessRegionDomainConf struct {
@@ -2977,6 +2986,20 @@ type DescribeProxiesRequest struct {
 	// When this field is 0, only grouped connections are pulled.
 	// When this field does not exist, all connections are pulled, including both not-grouped and grouped connections.
 	Independent *int64 `json:"Independent,omitempty" name:"Independent"`
+
+	// Specifies how connections are listed. Valid values:
+	// `asc`: ascending order
+	// `desc`: descending order
+	// Default: `desc`
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Sorting field. Valid values:
+	// `create_time`: sort by the creation time
+	// `proxy_id`: sort by the connection ID
+	// `bandwidth`:sort by the bandwidth limit
+	// `concurrent_connections`: sort by the number of concurrent connections
+	// Default: `create_time`
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
 }
 
 func (r *DescribeProxiesRequest) ToJsonString() string {
@@ -2998,6 +3021,8 @@ func (r *DescribeProxiesRequest) FromJsonString(s string) error {
 	delete(f, "ProxyIds")
 	delete(f, "TagSet")
 	delete(f, "Independent")
+	delete(f, "Order")
+	delete(f, "OrderField")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProxiesRequest has unknown keys!", "")
 	}
@@ -4549,6 +4574,18 @@ type HttpHeaderParam struct {
 	HeaderValue *string `json:"HeaderValue,omitempty" name:"HeaderValue"`
 }
 
+type IPDetail struct {
+
+	// IP string
+	IP *string `json:"IP,omitempty" name:"IP"`
+
+	// Network provider. `BGP`: Tencent Cloud BGP (default); `CMCC`: China Mobile; `CUCC`: China Unicom; `CTCC`: China Telecom.
+	Provider *string `json:"Provider,omitempty" name:"Provider"`
+
+	// Max bandwidth
+	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+}
+
 type InquiryPriceCreateProxyRequest struct {
 	*tchttp.BaseRequest
 
@@ -5975,17 +6012,17 @@ type ProxyInfo struct {
 	// Concurrence. Unit: requests/second.
 	Concurrent *int64 `json:"Concurrent,omitempty" name:"Concurrent"`
 
-	// Connection status:
-	// RUNNING: running;
-	// CREATING: creating;
-	// DESTROYING: terminating;
-	// OPENING: enabling;
-	// CLOSING: disabling;
-	// CLOSED: disabled;
-	// ADJUSTING: adjusting configuration
-	// ISOLATING: isolating (it's triggered when the account is in arrears);
-	// ISOLATED: isolated (it's triggered when the account is in arrears);
-	// UNKNOWN: unknown status.
+	// Connection status. Valid values:
+	// `RUNNING`: running
+	// `CREATING`: creating
+	// `DESTROYING`: terminating
+	// `OPENING`: enabling
+	// `CLOSING`: disabling
+	// `CLOSED`: disabled
+	// `ADJUSTING`: adjusting configuration
+	// `ISOLATING`: isolating
+	// `ISOLATED`: isolated
+	// `CLONING`: copying
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Accessed domain name.
@@ -6058,7 +6095,7 @@ type ProxyInfo struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 
-	// Network type. Valid values: `normal`, `cn2`
+	// Network type. `normal`: general BGP; `cn2`: dedicated BGP; `triple`: Non-BGP (provided by the top 3 ISPs in the Chinese mainland).
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
@@ -6069,6 +6106,9 @@ type ProxyInfo struct {
 	// Blocking-related status of the domain name. `BANNED`: the domain name is blocked; `RECOVER`: the domain name is unblocked or normal; `BANNING`: the domain name is being blocked; `RECOVERING`: the domain name is being unblocked; `BAN_FAILED`: the blocking fails; RECOVER_FAILED: the unblocking fails.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	BanStatus *string `json:"BanStatus,omitempty" name:"BanStatus"`
+
+	// 
+	IPList []*IPDetail `json:"IPList,omitempty" name:"IPList"`
 }
 
 type ProxySimpleInfo struct {
@@ -6090,16 +6130,15 @@ type ProxyStatus struct {
 
 	// Connection status.
 	// Valid values:
-	// RUNNING: running;
-	// CREATING: creating;
-	// DESTROYING: terminating;
-	// OPENING: enabling;
-	// CLOSING: disabling;
-	// CLOSED: disabled;
-	// ADJUSTING: adjusting configuration;
-	// ISOLATING: isolating;
-	// ISOLATED: isolated;
-	// UNKNOWN: unknown status.
+	// `RUNNING`: running
+	// `CREATING`: creating
+	// `DESTROYING`: terminating
+	// `OPENING`: enabling
+	// `CLOSING`: disabling
+	// `CLOSED`: disabled
+	// `ADJUSTING`: adjusting configuration
+	// `ISOLATING`: isolating
+	// `ISOLATED`: isolated
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -6146,6 +6185,10 @@ type RealServerStatus struct {
 
 	// ID of the connection bound to this origin server. This string is empty if they are not bound.
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// ID of the connection group bound to this origin server. This string is null if no connection groups are bound.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
 
 type RegionDetail struct {
@@ -6155,6 +6198,15 @@ type RegionDetail struct {
 
 	// Region name in Chinese or English
 	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+
+	// Region where the data center locates
+	RegionArea *string `json:"RegionArea,omitempty" name:"RegionArea"`
+
+	// Name of the region where the data center locates
+	RegionAreaName *string `json:"RegionAreaName,omitempty" name:"RegionAreaName"`
+
+	// Data center type. `dc`: data center; `ec`: edge server.
+	IDCType *string `json:"IDCType,omitempty" name:"IDCType"`
 }
 
 type RemoveRealServersRequest struct {

@@ -1321,6 +1321,62 @@ func (r *DescribeDBInstanceAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDBInstanceParametersRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Name of the parameter to be queried. If `ParamName` is left empty or not passed in, the list of all parameters will be returned.
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+}
+
+func (r *DescribeDBInstanceParametersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceParametersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "ParamName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstanceParametersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBInstanceParametersResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of the parameters in the returned list
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Details of the returned parameter list
+		Detail []*ParamInfo `json:"Detail,omitempty" name:"Detail"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBInstanceParametersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceParametersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1640,6 +1696,58 @@ func (r *DescribeOrdersResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeOrdersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeParamsEventRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
+func (r *DescribeParamsEventRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParamsEventRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeParamsEventRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeParamsEventResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of modified parameters
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Details of parameter modification events
+		EventItems []*EventItem `json:"EventItems,omitempty" name:"EventItems"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeParamsEventResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParamsEventResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2228,6 +2336,56 @@ type ErrLogDetail struct {
 	ErrMsg *string `json:"ErrMsg,omitempty" name:"ErrMsg"`
 }
 
+type EventInfo struct {
+
+	// Parameter name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// Original parameter value
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
+
+	// New parameter value in this modification event
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NewValue *string `json:"NewValue,omitempty" name:"NewValue"`
+
+	// Start time of parameter modification
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// Start time when the modified parameter takes effect
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EffectiveTime *string `json:"EffectiveTime,omitempty" name:"EffectiveTime"`
+
+	// Modification status
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	State *string `json:"State,omitempty" name:"State"`
+
+	// Operator (generally, the value is the UIN of a sub-user)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// Event log
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EventLog *string `json:"EventLog,omitempty" name:"EventLog"`
+}
+
+type EventItem struct {
+
+	// Parameter name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// The number of modification events
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EventCount *int64 `json:"EventCount,omitempty" name:"EventCount"`
+
+	// Modification event details
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EventDetail []*EventInfo `json:"EventDetail,omitempty" name:"EventDetail"`
+}
+
 type Filter struct {
 
 	// Filter name.
@@ -2644,6 +2802,56 @@ func (r *ModifyDBInstanceNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyDBInstanceParametersRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Parameters to be modified and their new values
+	ParamList []*ParamEntry `json:"ParamList,omitempty" name:"ParamList"`
+}
+
+func (r *ModifyDBInstanceParametersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceParametersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "ParamList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceParametersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDBInstanceParametersResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDBInstanceParametersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceParametersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyDBInstanceReadOnlyGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -3027,6 +3235,86 @@ func (r *OpenServerlessDBExtranetAccessResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *OpenServerlessDBExtranetAccessResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ParamEntry struct {
+
+	// Parameter name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The new value to which the parameter will be modified. When this parameter is used as an input parameter, its value must be a string, such as `0.1` (decimal), `1000` (integer), and `replica` (enum).
+	ExpectedValue *string `json:"ExpectedValue,omitempty" name:"ExpectedValue"`
+}
+
+type ParamInfo struct {
+
+	// Parameter ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ID *int64 `json:"ID,omitempty" name:"ID"`
+
+	// Parameter name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutil_enum` (this type of parameter can be set to multiple enumerated values)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ParamValueType *string `json:"ParamValueType,omitempty" name:"ParamValueType"`
+
+	// Value unit of the parameter. If the parameter has no unit, this field will return an empty string.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// Default value of the parameter, which is returned as a string
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
+
+	// Current value of the parameter, which is returned as a string
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Value range of the enum parameter
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+
+	// The maximum value of the `integer` or `real` parameter
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Max *float64 `json:"Max,omitempty" name:"Max"`
+
+	// The minimum value of the `integer` or `real` parameter
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Min *float64 `json:"Min,omitempty" name:"Min"`
+
+	// Parameter description in Chinese
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ParamDescriptionCH *string `json:"ParamDescriptionCH,omitempty" name:"ParamDescriptionCH"`
+
+	// Parameter description in English
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ParamDescriptionEN *string `json:"ParamDescriptionEN,omitempty" name:"ParamDescriptionEN"`
+
+	// Whether to restart the instance for the modified parameter to take effect. Valid values: `true` (yes), `false` (no)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NeedReboot *bool `json:"NeedReboot,omitempty" name:"NeedReboot"`
+
+	// Parameter category in Chinese
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClassificationCN *string `json:"ClassificationCN,omitempty" name:"ClassificationCN"`
+
+	// Parameter category in English
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClassificationEN *string `json:"ClassificationEN,omitempty" name:"ClassificationEN"`
+
+	// Whether the parameter is related to specifications. Valid values: `true` (yes), `false` (no)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SpecRelated *bool `json:"SpecRelated,omitempty" name:"SpecRelated"`
+
+	// Whether it is a key parameter. Valid values: `true` (yes, and modifying it may affect instance performance), `false` (no)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Advanced *bool `json:"Advanced,omitempty" name:"Advanced"`
+
+	// The last modified time of the parameter
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	LastModifyTime *string `json:"LastModifyTime,omitempty" name:"LastModifyTime"`
 }
 
 type PgDeal struct {

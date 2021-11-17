@@ -1247,6 +1247,44 @@ func (c *Client) DescribeCustomizedConfigList(request *DescribeCustomizedConfigL
     return
 }
 
+func NewDescribeLBListenersRequest() (request *DescribeLBListenersRequest) {
+    request = &DescribeLBListenersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "DescribeLBListeners")
+    
+    return
+}
+
+func NewDescribeLBListenersResponse() (response *DescribeLBListenersResponse) {
+    response = &DescribeLBListenersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeLBListeners
+// This API is used to query CLB instances bound to the CVM or ENI.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeLBListeners(request *DescribeLBListenersRequest) (response *DescribeLBListenersResponse, err error) {
+    if request == nil {
+        request = NewDescribeLBListenersRequest()
+    }
+    response = NewDescribeLBListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeListenersRequest() (request *DescribeListenersRequest) {
     request = &DescribeListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},

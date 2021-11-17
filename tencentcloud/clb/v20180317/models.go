@@ -859,7 +859,9 @@ type CreateLoadBalancerRequest struct {
 	// Exclusive cluster information. This parameter is required for creating exclusive clusters of CLB instances.
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
 
-	// 
+	// Creates an LCU-supported CLB instance
+	// <ul><li>To create an LCU-supported CLB, this field is required and the value is `SLA`. LCU-supports CLBs adopt the pay-as-you-go model and their performance is guaranteed.</li>
+	// <li>It’s not required for a shared CLB instance.</li></ul>
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
@@ -880,6 +882,9 @@ type CreateLoadBalancerRequest struct {
 
 	// Unique ID of an EIP, which can only be used when binding the EIP of a private network CLB instance. E.g., `eip-11112222`.
 	EipAddressId *string `json:"EipAddressId,omitempty" name:"EipAddressId"`
+
+	// Whether to allow CLB traffic to the target group. `true`: allows CLB traffic to the target group and verifies security groups only on CLB; `false`: denies CLB traffic to the target group and verifies security groups on both CLB and backend instances.
+	LoadBalancerPassToTarget *bool `json:"LoadBalancerPassToTarget,omitempty" name:"LoadBalancerPassToTarget"`
 }
 
 func (r *CreateLoadBalancerRequest) ToJsonString() string {
@@ -917,6 +922,7 @@ func (r *CreateLoadBalancerRequest) FromJsonString(s string) error {
 	delete(f, "ClusterTag")
 	delete(f, "SlaveZoneId")
 	delete(f, "EipAddressId")
+	delete(f, "LoadBalancerPassToTarget")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLoadBalancerRequest has unknown keys!", "")
 	}
@@ -954,6 +960,9 @@ type CreateLoadBalancerSnatIpsRequest struct {
 
 	// Information of the SNAT IP to be added. You can apply for a specified IP or apply for an automatically assigned IP by specifying a subnet.
 	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps"`
+
+	// Number of SNAT IPs to be added. This parameter is used in conjunction with `SnatIps`. Note that if `Ip` is specified in `SnapIps`, this parameter is not available.
+	Number *uint64 `json:"Number,omitempty" name:"Number"`
 }
 
 func (r *CreateLoadBalancerSnatIpsRequest) ToJsonString() string {
@@ -970,6 +979,7 @@ func (r *CreateLoadBalancerSnatIpsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "LoadBalancerId")
 	delete(f, "SnatIps")
+	delete(f, "Number")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLoadBalancerSnatIpsRequest has unknown keys!", "")
 	}
@@ -2220,6 +2230,55 @@ func (r *DescribeCustomizedConfigListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeLBListenersRequest struct {
+	*tchttp.BaseRequest
+
+	// List of private network IPs to be queried.
+	Backends []*LbRsItem `json:"Backends,omitempty" name:"Backends"`
+}
+
+func (r *DescribeLBListenersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLBListenersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Backends")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLBListenersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLBListenersResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Listener rule associated with the real server.
+		LoadBalancers []*LBItem `json:"LoadBalancers,omitempty" name:"LoadBalancers"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLBListenersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLBListenersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeListenersRequest struct {
 	*tchttp.BaseRequest
 
@@ -3186,6 +3245,10 @@ type HealthCheck struct {
 	// Health check protocol (a custom check parameter), which is required if the value of CheckType is HTTP. This parameter represents the HTTP version of the real server. Value range: HTTP/1.0, HTTP/1.1. (Applicable only to TCP listeners.)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HttpVersion *string `json:"HttpVersion,omitempty" name:"HttpVersion"`
+
+	// Specifies the source IP for health check. `0`: use the CLB VIP as the source IP; `1`: IP range starting with 100.64 serving as the source IP. Default: `0`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SourceIpType *int64 `json:"SourceIpType,omitempty" name:"SourceIpType"`
 }
 
 type InternetAccessible struct {
@@ -3211,6 +3274,50 @@ type LBChargePrepaid struct {
 	// Cycle, indicating the number of months (reserved field)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
+}
+
+type LBItem struct {
+
+	// String ID of the CLB instance.
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// VIP of the CLB instance.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Listener rule.
+	Listeners []*ListenerItem `json:"Listeners,omitempty" name:"Listeners"`
+
+	// Region of the CLB instance
+	Region *string `json:"Region,omitempty" name:"Region"`
+}
+
+type LbRsItem struct {
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Private network IP to be queried, which can be of the CVM or ENI.
+	PrivateIp *string `json:"PrivateIp,omitempty" name:"PrivateIp"`
+}
+
+type LbRsTargets struct {
+
+	// Private network IP type, which can be `cvm` or `eni`.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Private network IP of the real server.
+	PrivateIp *string `json:"PrivateIp,omitempty" name:"PrivateIp"`
+
+	// Port bound to the real server.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// VPC ID of the real server.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VpcId *int64 `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Weight of the real server.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 }
 
 type Listener struct {
@@ -3327,6 +3434,30 @@ type ListenerHealth struct {
 	// List of forwarding rules of the listener
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Rules []*RuleHealth `json:"Rules,omitempty" name:"Rules"`
+}
+
+type ListenerItem struct {
+
+	// Listener ID.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Listener protocol.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Listener port.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Bound rule.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Rules []*RulesItems `json:"Rules,omitempty" name:"Rules"`
+
+	// Object bound to the layer-4 listener.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Targets []*LbRsTargets `json:"Targets,omitempty" name:"Targets"`
+
+	// End port of the listener.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EndPort *int64 `json:"EndPort,omitempty" name:"EndPort"`
 }
 
 type LoadBalancer struct {
@@ -3997,6 +4128,9 @@ type ModifyListenerRequest struct {
 
 	// Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
 	DeregisterTargetRst *bool `json:"DeregisterTargetRst,omitempty" name:"DeregisterTargetRst"`
+
+	// Session persistence type. `NORMAL`: default session persistence type (L4/L7 session persistence); `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners.
+	SessionType *string `json:"SessionType,omitempty" name:"SessionType"`
 }
 
 func (r *ModifyListenerRequest) ToJsonString() string {
@@ -4021,6 +4155,7 @@ func (r *ModifyListenerRequest) FromJsonString(s string) error {
 	delete(f, "SniSwitch")
 	delete(f, "KeepaliveEnable")
 	delete(f, "DeregisterTargetRst")
+	delete(f, "SessionType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyListenerRequest has unknown keys!", "")
 	}
@@ -4947,6 +5082,21 @@ type RuleTargets struct {
 	// Real server information
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Targets []*Backend `json:"Targets,omitempty" name:"Targets"`
+}
+
+type RulesItems struct {
+
+	// Rule ID.
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Uri
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Object bound to the real server.
+	Targets []*LbRsTargets `json:"Targets,omitempty" name:"Targets"`
 }
 
 type SetLoadBalancerClsLogRequest struct {

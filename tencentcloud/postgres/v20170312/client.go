@@ -884,6 +884,39 @@ func (c *Client) DescribeDBInstanceAttribute(request *DescribeDBInstanceAttribut
     return
 }
 
+func NewDescribeDBInstanceParametersRequest() (request *DescribeDBInstanceParametersRequest) {
+    request = &DescribeDBInstanceParametersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeDBInstanceParameters")
+    
+    return
+}
+
+func NewDescribeDBInstanceParametersResponse() (response *DescribeDBInstanceParametersResponse) {
+    response = &DescribeDBInstanceParametersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDBInstanceParameters
+// This API is used to get the list of modifiable parameters of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeDBInstanceParameters(request *DescribeDBInstanceParametersRequest) (response *DescribeDBInstanceParametersResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceParametersRequest()
+    }
+    response = NewDescribeDBInstanceParametersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBInstancesRequest() (request *DescribeDBInstancesRequest) {
     request = &DescribeDBInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -951,7 +984,7 @@ func NewDescribeDBSlowlogsResponse() (response *DescribeDBSlowlogsResponse) {
 }
 
 // DescribeDBSlowlogs
-// This API is used to get slow query logs.
+// This API was used to get slow query logs. Since it was deprecated on September 1, 2021, it has no longer returned data. Please use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -1115,6 +1148,39 @@ func (c *Client) DescribeOrders(request *DescribeOrdersRequest) (response *Descr
         request = NewDescribeOrdersRequest()
     }
     response = NewDescribeOrdersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeParamsEventRequest() (request *DescribeParamsEventRequest) {
+    request = &DescribeParamsEventRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeParamsEvent")
+    
+    return
+}
+
+func NewDescribeParamsEventResponse() (response *DescribeParamsEventResponse) {
+    response = &DescribeParamsEventResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeParamsEvent
+// This API is used to get the details of parameter modification events.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeParamsEvent(request *DescribeParamsEventRequest) (response *DescribeParamsEventResponse, err error) {
+    if request == nil {
+        request = NewDescribeParamsEventRequest()
+    }
+    response = NewDescribeParamsEventResponse()
     err = c.Send(request, response)
     return
 }
@@ -1316,7 +1382,7 @@ func NewDescribeSlowQueryAnalysisResponse() (response *DescribeSlowQueryAnalysis
 }
 
 // DescribeSlowQueryAnalysis
-// This API is used to analyze slow query statements with abstract parameter values and return aggregated statistical analysis results.
+// This API is used to count and analyze slow query statements during the specified period of time and return aggregated statistical analysis results which are classified by statement with abstract parameter values.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -1347,10 +1413,10 @@ func NewDescribeSlowQueryListResponse() (response *DescribeSlowQueryListResponse
 }
 
 // DescribeSlowQueryList
-// This API is used to get the slow query list.
+// This API is used to get the slow queries during the specified period of time.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
@@ -1877,6 +1943,38 @@ func (c *Client) ModifyDBInstanceName(request *ModifyDBInstanceNameRequest) (res
         request = NewModifyDBInstanceNameRequest()
     }
     response = NewModifyDBInstanceNameResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDBInstanceParametersRequest() (request *ModifyDBInstanceParametersRequest) {
+    request = &ModifyDBInstanceParametersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyDBInstanceParameters")
+    
+    return
+}
+
+func NewModifyDBInstanceParametersResponse() (response *ModifyDBInstanceParametersResponse) {
+    response = &ModifyDBInstanceParametersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDBInstanceParameters
+// This API is used to modify parameters in batches.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyDBInstanceParameters(request *ModifyDBInstanceParametersRequest) (response *ModifyDBInstanceParametersResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceParametersRequest()
+    }
+    response = NewModifyDBInstanceParametersResponse()
     err = c.Send(request, response)
     return
 }

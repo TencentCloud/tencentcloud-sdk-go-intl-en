@@ -265,6 +265,15 @@ type AutoScalingNotification struct {
 
 	// Event notification ID.
 	AutoScalingNotificationId *string `json:"AutoScalingNotificationId,omitempty" name:"AutoScalingNotificationId"`
+
+	// Notification receiver type.
+	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
+
+	// CMQ queue name.
+	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+
+	// CMQ topic name.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
 type ClearLaunchConfigurationAttributesRequest struct {
@@ -482,10 +491,10 @@ type CreateAutoScalingGroupRequest struct {
 	// List of classic CLB IDs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
 
-	// Project ID
+	// Project ID of an instance in a scaling group. The default project is used if it’s left blank.
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// List of CLBs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
+	// List of application CLBs. Up to 50 CLBs are allowed. You cannot specify `loadBalancerIds` and `ForwardLoadBalancers` at the same time.
 	ForwardLoadBalancers []*ForwardLoadBalancer `json:"ForwardLoadBalancers,omitempty" name:"ForwardLoadBalancers"`
 
 	// List of subnet IDs. A subnet must be specified in the VPC scenario. If multiple subnets are entered, their priority will be determined by the order in which they are entered, and they will be tried one by one until instances can be successfully created.
@@ -630,7 +639,8 @@ type CreateLaunchConfigurationRequest struct {
 	// Valid [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-8toqc6s3`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the image IDs; for `marketplace images`, query the image IDs through [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>This value can be obtained from the `ImageId` field in the return value of the [DescribeImages API](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1).</li>
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
-	// ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` field in the returned values of [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1). If this is left empty, default project is used.
+	// Project ID of the launch configuration. The default project is used if it’s left blank.
+	// Note that this project ID is not the same as the project ID of the scaling group. 
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Instance model. Different instance models specify different resource specifications. The specific value can be obtained by calling the [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) API to get the latest specification table or referring to the descriptions in [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
@@ -856,6 +866,15 @@ type CreateNotificationConfigurationRequest struct {
 
 	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
 	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
+
+	// Notification receiver type. Values: `USER_GROUP`，`CMQ_QUEUE`，`CMQ_TOPIC`. Default: `USER_GROUP`.
+	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
+
+	// CMQ queue name. This field is required when `TargetType` is `CMQ_QUEUE`.
+	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+
+	// CMQ topic name. This field is required when `TargetType` is `CMQ_TOPIC`.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
 func (r *CreateNotificationConfigurationRequest) ToJsonString() string {
@@ -873,6 +892,9 @@ func (r *CreateNotificationConfigurationRequest) FromJsonString(s string) error 
 	delete(f, "AutoScalingGroupId")
 	delete(f, "NotificationTypes")
 	delete(f, "NotificationUserGroupIds")
+	delete(f, "TargetType")
+	delete(f, "QueueName")
+	delete(f, "TopicName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNotificationConfigurationRequest has unknown keys!", "")
 	}
@@ -1736,15 +1758,11 @@ type DescribeLifecycleHooksRequest struct {
 	// Queries by one or more lifecycle hook IDs in the format of `ash-8azjzxcl`. The maximum quantity per request is 100. This parameter does not support specifying both `LifecycleHookIds` and `Filters` at the same time.
 	LifecycleHookIds []*string `json:"LifecycleHookIds,omitempty" name:"LifecycleHookIds"`
 
-	// Filter.
-	// <li> lifecycle-hook-id - String - Required: No - (Filter) Filter by lifecycle hook ID.</li>
-	// <li> lifecycle-hook-name - String - Required: No - (Filter) Filter by lifecycle hook name.</li>
-	// <li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-	// Filter.
-	// <li> lifecycle-hook-id - String - Required: No - (Filter) Filter by lifecycle hook ID.</li>
-	// <li> lifecycle-hook-name - String - Required: No - (Filter) Filter by lifecycle hook name.</li>
-	// <li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-	// The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `LifecycleHookIds` and `Filters` at the same time.
+	// Filters.
+	// <li> `lifecycle-hook-id` - String - Required: No - (Filter) Filter by lifecycle hook ID.</li>
+	// <li> `lifecycle-hook-name` - String - Required: No - (Filter) Filter by lifecycle hook name.</li>
+	// <li> `auto-scaling-group-id` - String - Required: No - (Filter) Filter by scaling group ID.</li>
+	// Up to 10 filters can be included in a request and up to 5 values for each filter. It cannot be specified with `LifecycleHookIds` at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -2859,6 +2877,9 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// If this field is configured in a launch configuration, the `InstanceName` of a CVM created by the scaling group will be generated according to the configuration; otherwise, it will be in the `as-{{AutoScalingGroupName }}` format.
 	// This field requires passing in the `InstanceName` field. Other fields that are not passed in will use their default values.
 	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitempty" name:"InstanceNameSettings"`
+
+	// Specifies whether to enable additional services, such as security services and monitoring service.
+	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
 }
 
 func (r *ModifyLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -2889,6 +2910,7 @@ func (r *ModifyLaunchConfigurationAttributesRequest) FromJsonString(s string) er
 	delete(f, "DataDisks")
 	delete(f, "HostNameSettings")
 	delete(f, "InstanceNameSettings")
+	delete(f, "EnhancedService")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}
@@ -2924,7 +2946,7 @@ type ModifyLoadBalancersRequest struct {
 	// List of classic CLB IDs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
 
-	// List of CLBs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
+	// List of application CLBs. Up to 50 CLBs are allowed. You cannot specify `loadBalancerIds` and `ForwardLoadBalancers` at the same time.
 	ForwardLoadBalancers []*ForwardLoadBalancer `json:"ForwardLoadBalancers,omitempty" name:"ForwardLoadBalancers"`
 
 	// CLB verification policy. Valid values: "ALL" and "DIFF". Default value: "ALL"
@@ -2995,6 +3017,12 @@ type ModifyNotificationConfigurationRequest struct {
 
 	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
 	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
+
+	// CMQ queue name.
+	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+
+	// CMQ topic name.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
 func (r *ModifyNotificationConfigurationRequest) ToJsonString() string {
@@ -3012,6 +3040,8 @@ func (r *ModifyNotificationConfigurationRequest) FromJsonString(s string) error 
 	delete(f, "AutoScalingNotificationId")
 	delete(f, "NotificationTypes")
 	delete(f, "NotificationUserGroupIds")
+	delete(f, "QueueName")
+	delete(f, "TopicName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNotificationConfigurationRequest has unknown keys!", "")
 	}
@@ -3454,7 +3484,7 @@ type SetInstancesProtectionRequest struct {
 	// Instance ID.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Whether the instance needs to be protected from scale-in.
+	// Whether to enable scale-in protection for this instance
 	ProtectedFromScaleIn *bool `json:"ProtectedFromScaleIn,omitempty" name:"ProtectedFromScaleIn"`
 }
 
@@ -3724,7 +3754,7 @@ type UpgradeLaunchConfigurationRequest struct {
 	// Login settings of the instance. This parameter is used to set the login password and key for the instance, or to keep the original login settings for the image. By default, a random password is generated and sent to the user via the internal message.
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
 
-	// Project ID of the instance. This parameter can be obtained from the `projectId` field in the returned values of [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1). If this is left empty, default project is used.
+	// Project ID of the instance. Leave it blank as the default.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// The security group of instance. This parameter can be obtained by calling the `SecurityGroupId` field in the returned value of [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1). If this parameter is not specified, no security group will be bound by default.
