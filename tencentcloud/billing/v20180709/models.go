@@ -470,35 +470,26 @@ type DescribeBillResourceSummaryRequest struct {
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitempty" name:"NeedRecordNum"`
 
 	// Action type to query. Valid values:
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
-	//  
+	// Purchase
+	// Renewal
+	// Modify
+	// Refund
+	// Deduction
+	// Hourly settlement
+	// Daily settlement
+	// Monthly settlement
+	// Offline project deduction
+	// Offline deduction
+	// adjust-CR
+	// adjust-DR
+	// One-off RI Fee
+	// Spot
+	// Hourly RI fee
+	// New monthly subscription
+	// Monthly subscription renewal
+	// Monthly subscription specification adjustment
+	// Monthly subscription specification adjustment
+	// Monthly subscription refund
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 
 	// ID of the instance to be queried
@@ -633,6 +624,14 @@ type DescribeBillSummaryByProductRequest struct {
 
 	// Queries bill data user's UIN
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
+
+	// A bill type, which corresponds to a subtotal type of L0 bills.
+	// This parameter has become valid since v3.0 bills took effect in May 2021.
+	// Valid values:
+	// `consume`: consumption
+	// `refund`: refund
+	// `adjustment`: bill adjustment
+	PayType *string `json:"PayType,omitempty" name:"PayType"`
 }
 
 func (r *DescribeBillSummaryByProductRequest) ToJsonString() string {
@@ -650,6 +649,7 @@ func (r *DescribeBillSummaryByProductRequest) FromJsonString(s string) error {
 	delete(f, "BeginTime")
 	delete(f, "EndTime")
 	delete(f, "PayerUin")
+	delete(f, "PayType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillSummaryByProductRequest has unknown keys!", "")
 	}

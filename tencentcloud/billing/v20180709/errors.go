@@ -17,7 +17,7 @@ package v20180709
 const (
 	// error codes for specific actions
 
-	// 
+	// No permission.
 	AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 
 	// Summary is being built. Please try again later.
