@@ -850,13 +850,13 @@ type DescribeBackupUrlResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Download address on the public network (valid for 6 hours)
+		// Public network download address (valid for six hours). This field will be deprecated soon.
 		DownloadUrl []*string `json:"DownloadUrl,omitempty" name:"DownloadUrl"`
 
-		// Download address on the private network (valid for 6 hours)
+		// Private network download address (valid for six hours). This field will be deprecated soon.
 		InnerDownloadUrl []*string `json:"InnerDownloadUrl,omitempty" name:"InnerDownloadUrl"`
 
-		// File name (only valid for TencentDB for Tendis instances)
+		// Filename. This field will be deprecated soon.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		Filenames []*string `json:"Filenames,omitempty" name:"Filenames"`
 
@@ -3077,8 +3077,9 @@ type DisableReplicaReadonlyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// ERROR: failure; OK: success
-		Status *string `json:"Status,omitempty" name:"Status"`
+		// Task ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3184,8 +3185,13 @@ type EnableReplicaReadonlyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// ERROR: erroneous; OK: correct.
+		// Valid values: `ERROR`, `OK`. This field has been deprecated.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		Status *string `json:"Status,omitempty" name:"Status"`
+
+		// Task ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3264,13 +3270,13 @@ type InquiryPriceCreateInstanceRequest struct {
 	// ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Number of instance shards. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, Redis 2.8 in standalone architecture, and Redis 4.0 in standard architecture.
+	// Instance shard quantity. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, Redis 2.8 standalone edition, and Redis 4.0 standard architecture.
 	RedisShardNum *int64 `json:"RedisShardNum,omitempty" name:"RedisShardNum"`
 
-	// Number of instance replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+	// Instance replica quantity. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, and Redis 2.8 standalone edition.
 	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitempty" name:"RedisReplicasNum"`
 
-	// Whether to support read-only replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+	// Whether to support read-only replicas. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, and Redis 2.8 standalone edition.
 	ReplicasReadonly *bool `json:"ReplicasReadonly,omitempty" name:"ReplicasReadonly"`
 
 	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
@@ -3309,7 +3315,7 @@ type InquiryPriceCreateInstanceResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Price. Unit: USD
+		// Price in USD
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		Price *float64 `json:"Price,omitempty" name:"Price"`
 
@@ -4012,7 +4018,7 @@ type ModifyAutoBackupConfigRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Date. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+	// Date. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. However, this parameter is now invalid.
 	WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays"`
 
 	// Time period. Value range: 00:00-01:00, 01:00-02:00...... 23:00-00:00
@@ -4467,13 +4473,13 @@ type ModifyParamTemplateRequest struct {
 	// ID of the parameter template to be modified.
 	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// New name of the parameter template.
+	// New name after the parameter template is modified.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// New description of the parameter template.
+	// New description after the parameter template is modified.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// List of new parameters.
+	// New parameter list after the parameter template is modified.
 	ParamList []*InstanceParam `json:"ParamList,omitempty" name:"ParamList"`
 }
 
@@ -5278,13 +5284,13 @@ type UpgradeInstanceRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Shard size in MB
+	// Shard size in MB. This parameter cannot be passed in at the same time as `RedisShardNum`/`RedisReplicasNum`.
 	MemSize *uint64 `json:"MemSize,omitempty" name:"MemSize"`
 
-	// Number of shards. This parameter can be left blank for Redis 2.8 primary-secondary edition, CKV primary-secondary edition, and Redis 2.8 standalone edition
+	// Shard quantity. This parameter is not required by standard architecture instances and cannot be passed in at the same time as `RedisReplicasNum`/`MemSize`.
 	RedisShardNum *uint64 `json:"RedisShardNum,omitempty" name:"RedisShardNum"`
 
-	// Number of replicas. This parameter can be left blank for Redis 2.8 primary-secondary edition, CKV primary-secondary edition, and Redis 2.8 standalone edition
+	// Replica quantity. This parameter cannot be passed in at the same time as `RedisShardNum`/`MemSize`. To modify the number of replicas in a multi-AZ instance, `NodeSet` must be passed in.
 	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitempty" name:"RedisReplicasNum"`
 
 	// The information of the replica to be added to a multi-AZ instance, such as replica availability zone and replica type (`NodeType` should be `1`). This parameter is required only when multi-AZ instances add replicas.
