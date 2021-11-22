@@ -190,6 +190,9 @@ type CreateStreamLiveChannelRequest struct {
 
 	// Audio/Video transcoding templates. Quantity: [1, 10]
 	AVTemplates []*AVTemplate `json:"AVTemplates,omitempty" name:"AVTemplates"`
+
+	// Event settings
+	PlanSettings *PlanSettings `json:"PlanSettings,omitempty" name:"PlanSettings"`
 }
 
 func (r *CreateStreamLiveChannelRequest) ToJsonString() string {
@@ -210,6 +213,7 @@ func (r *CreateStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "AudioTemplates")
 	delete(f, "VideoTemplates")
 	delete(f, "AVTemplates")
+	delete(f, "PlanSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -1482,6 +1486,9 @@ type ModifyStreamLiveChannelRequest struct {
 
 	// Audio/Video transcoding templates. Quantity: [1, 10]
 	AVTemplates []*AVTemplate `json:"AVTemplates,omitempty" name:"AVTemplates"`
+
+	// Event settings
+	PlanSettings *PlanSettings `json:"PlanSettings,omitempty" name:"PlanSettings"`
 }
 
 func (r *ModifyStreamLiveChannelRequest) ToJsonString() string {
@@ -1503,6 +1510,7 @@ func (r *ModifyStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "AudioTemplates")
 	delete(f, "VideoTemplates")
 	delete(f, "AVTemplates")
+	delete(f, "PlanSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -1739,6 +1747,13 @@ type PlanResp struct {
 	EventSettings *EventSettingsResp `json:"EventSettings,omitempty" name:"EventSettings"`
 }
 
+type PlanSettings struct {
+
+	// Timed recording settings
+	// Note: This field may return `null`, indicating that no valid value was found.
+	TimedRecordSettings *TimedRecordSettings `json:"TimedRecordSettings,omitempty" name:"TimedRecordSettings"`
+}
+
 type RegionInfo struct {
 
 	// Region name
@@ -1937,6 +1952,10 @@ type StreamLiveChannelInfo struct {
 	// Audio/Video transcoding templates
 	// Note: this field may return `null`, indicating that no valid value was found.
 	AVTemplates []*AVTemplate `json:"AVTemplates,omitempty" name:"AVTemplates"`
+
+	// Event settings
+	// Note: This field may return `null`, indicating that no valid value was found.
+	PlanSettings *PlanSettings `json:"PlanSettings,omitempty" name:"PlanSettings"`
 }
 
 type StreamLiveOutputGroupsInfo struct {
@@ -2035,6 +2054,14 @@ type TimeShiftSettingsInfo struct {
 	// Allowable time-shift period (s). Value range: [600, 1209600]. Default value: 300
 	// Note: This field may return `null`, indicating that no valid value was found.
 	StartoverWindow *int64 `json:"StartoverWindow,omitempty" name:"StartoverWindow"`
+}
+
+type TimedRecordSettings struct {
+
+	// Whether to automatically delete finished recording events. Valid values: `CLOSE`, `OPEN`. If this parameter is left empty, `CLOSE` will be used.
+	// If it is set to `OPEN`, a recording event will be deleted 7 days after it is finished.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	AutoClear *string `json:"AutoClear,omitempty" name:"AutoClear"`
 }
 
 type TimingSettingsReq struct {

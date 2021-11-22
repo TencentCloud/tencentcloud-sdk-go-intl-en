@@ -2027,6 +2027,43 @@ func (c *Client) ModifyDBInstanceReadOnlyGroup(request *ModifyDBInstanceReadOnly
     return
 }
 
+func NewModifyDBInstanceSpecRequest() (request *ModifyDBInstanceSpecRequest) {
+    request = &ModifyDBInstanceSpecRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyDBInstanceSpec")
+    
+    return
+}
+
+func NewModifyDBInstanceSpecResponse() (response *ModifyDBInstanceSpecResponse) {
+    response = &ModifyDBInstanceSpecResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDBInstanceSpec
+// This API is used to modify instance specifications including memory and disk size.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_PAYORDERFAILED = "FailedOperation.PayOrderFailed"
+//  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
+//  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
+func (c *Client) ModifyDBInstanceSpec(request *ModifyDBInstanceSpecRequest) (response *ModifyDBInstanceSpecResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceSpecRequest()
+    }
+    response = NewModifyDBInstanceSpecResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstancesProjectRequest() (request *ModifyDBInstancesProjectRequest) {
     request = &ModifyDBInstancesProjectRequest{
         BaseRequest: &tchttp.BaseRequest{},

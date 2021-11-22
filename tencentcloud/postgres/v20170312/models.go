@@ -2909,6 +2909,90 @@ func (r *ModifyDBInstanceReadOnlyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyDBInstanceSpecRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of postgres-6bwgamo3.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance memory size in GiB after modification.
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GiB after modification.
+	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list. Currently, you can specify only one voucher.
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Campaign ID.
+	ActivityId *uint64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+	SwitchTag *uint64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
+
+	// The earliest time to start a switch.
+	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
+
+	// The latest time to start a switch.
+	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
+}
+
+func (r *ModifyDBInstanceSpecRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceSpecRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "Memory")
+	delete(f, "Storage")
+	delete(f, "AutoVoucher")
+	delete(f, "VoucherIds")
+	delete(f, "ActivityId")
+	delete(f, "SwitchTag")
+	delete(f, "SwitchStartTime")
+	delete(f, "SwitchEndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceSpecRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDBInstanceSpecResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Order ID.
+		DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+		// Bill ID of frozen fees.
+		BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDBInstanceSpecResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceSpecResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyDBInstancesProjectRequest struct {
 	*tchttp.BaseRequest
 

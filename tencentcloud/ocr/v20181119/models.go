@@ -178,6 +178,12 @@ type GeneralAccurateOCRRequest struct {
 
 	// Whether to slice the input image to enhance the recognition effects for scenarios where the whole image is big, but the size of a single character is small (e.g., test papers). This feature is disabled by default.
 	EnableDetectSplit *bool `json:"EnableDetectSplit,omitempty" name:"EnableDetectSplit"`
+
+	// Whether to enable PDF recognition. Default value: `false`. If you enable this feature, both images and PDF files can be recognized.
+	IsPdf *bool `json:"IsPdf,omitempty" name:"IsPdf"`
+
+	// Number of a PDF page that needs to be recognized. Currently, only one single page can be recognized. This parameter takes effect only if a PDF file is uploaded and `IsPdf` is set to `true`. Default value: `1`
+	PdfPageNumber *uint64 `json:"PdfPageNumber,omitempty" name:"PdfPageNumber"`
 }
 
 func (r *GeneralAccurateOCRRequest) ToJsonString() string {
@@ -196,6 +202,8 @@ func (r *GeneralAccurateOCRRequest) FromJsonString(s string) error {
 	delete(f, "ImageUrl")
 	delete(f, "IsWords")
 	delete(f, "EnableDetectSplit")
+	delete(f, "IsPdf")
+	delete(f, "PdfPageNumber")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GeneralAccurateOCRRequest has unknown keys!", "")
 	}
@@ -347,9 +355,9 @@ type HKIDCardOCRRequest struct {
 	// Whether to return identity photo.
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitempty" name:"ReturnHeadImage"`
 
-	// Base64-encoded value of image.
-	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-	// Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+	// Base64 string of the image
+	// Supported image formats: PNG, JPG, JPEG. GIF is not supported yet.
+	// Supported image size: The downloaded image cannot exceed 7 MB after being Base64-encoded, and it cannot take longer than 3 seconds to download the image.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
 
 	// URL address of image. (This field is not supported outside Chinese mainland)
