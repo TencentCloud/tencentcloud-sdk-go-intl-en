@@ -978,6 +978,37 @@ func (c *Client) DescribeBackupConfig(request *DescribeBackupConfigRequest) (res
     return
 }
 
+func NewDescribeBackupDownloadRestrictionRequest() (request *DescribeBackupDownloadRestrictionRequest) {
+    request = &DescribeBackupDownloadRestrictionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeBackupDownloadRestriction")
+    
+    return
+}
+
+func NewDescribeBackupDownloadRestrictionResponse() (response *DescribeBackupDownloadRestrictionResponse) {
+    response = &DescribeBackupDownloadRestrictionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBackupDownloadRestriction
+// This API is used to query the restrictions of downloading backups in a region.
+//
+// error code that may be returned:
+//  INTERNALERROR_AUTHERROR = "InternalError.AuthError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+func (c *Client) DescribeBackupDownloadRestriction(request *DescribeBackupDownloadRestrictionRequest) (response *DescribeBackupDownloadRestrictionResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupDownloadRestrictionRequest()
+    }
+    response = NewDescribeBackupDownloadRestrictionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBackupOverviewRequest() (request *DescribeBackupOverviewRequest) {
     request = &DescribeBackupOverviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2745,6 +2776,37 @@ func (c *Client) ModifyBackupConfig(request *ModifyBackupConfigRequest) (respons
         request = NewModifyBackupConfigRequest()
     }
     response = NewModifyBackupConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyBackupDownloadRestrictionRequest() (request *ModifyBackupDownloadRestrictionRequest) {
+    request = &ModifyBackupDownloadRestrictionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "ModifyBackupDownloadRestriction")
+    
+    return
+}
+
+func NewModifyBackupDownloadRestrictionResponse() (response *ModifyBackupDownloadRestrictionResponse) {
+    response = &ModifyBackupDownloadRestrictionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyBackupDownloadRestriction
+// This API is used to modify the restrictions of downloading backups in a region. You can specify which types of networks (private, or both private and public), VPCs, and IPs to download backups.
+//
+// error code that may be returned:
+//  INTERNALERROR_AUTHERROR = "InternalError.AuthError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+func (c *Client) ModifyBackupDownloadRestriction(request *ModifyBackupDownloadRestrictionRequest) (response *ModifyBackupDownloadRestrictionResponse, err error) {
+    if request == nil {
+        request = NewModifyBackupDownloadRestrictionRequest()
+    }
+    response = NewModifyBackupDownloadRestrictionResponse()
     err = c.Send(request, response)
     return
 }

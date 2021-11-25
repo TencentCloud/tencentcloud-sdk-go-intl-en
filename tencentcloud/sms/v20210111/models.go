@@ -34,12 +34,13 @@ type AddSmsSignRequest struct {
 	SignName *string `json:"SignName,omitempty" name:"SignName"`
 
 	// Signature type. Each of these types is followed by their `DocumentType` (identity certificate type) option:
-	// 0: company. Valid values of `DocumentType` include 0, 1, 2, and 3.
+	// 0: company. Valid values of `DocumentType` include 0 and 1.
 	// 1: app. Valid values of `DocumentType` include 0, 1, 2, 3, and 4.
 	// 2: website. Valid values of `DocumentType` include 0, 1, 2, 3, and 5.
-	// 3: WeChat Official Account or WeChat Mini Program. Valid values of `DocumentType` include 0, 1, 2, 3, and 6.
+	// 3: WeChat Official Account. Valid values of `DocumentType` include 0, 1, 2, 3, and 8.
 	// 4: trademark. Valid values of `DocumentType` include 7.
 	// 5: government/public institution/other. Valid values of `DocumentType` include 2 and 3.
+	// 6: WeChat Mini Program. Valid values of `DocumentType` include 0, 1, 2, 3, and 6.
 	// Note: the identity certificate type must be selected according to the correspondence; otherwise, the review will fail.
 	SignType *uint64 `json:"SignType,omitempty" name:"SignType"`
 
@@ -52,7 +53,7 @@ type AddSmsSignRequest struct {
 	// 5: screenshot of website ICP filing backend (for personal website).
 	// 6: screenshot of WeChat Mini Program settings page (for personal WeChat Mini Program).
 	// 7: trademark registration certificate.
-	// Note: the corresponding `DocumentType` must be selected according to `SignType`.
+	// 8: screenshot of WeChat Official Account settings page (for personal WeChat Official Account).
 	DocumentType *uint64 `json:"DocumentType,omitempty" name:"DocumentType"`
 
 	// Whether it is Global SMS:
@@ -544,14 +545,22 @@ func (r *DescribeSmsSignListResponse) FromJsonString(s string) error {
 type DescribeSmsTemplateListRequest struct {
 	*tchttp.BaseRequest
 
-	// Template ID array.
-	// <dx-alert infotype="notice" title="Note">The max array length is 100 by default.</dx-alert>
-	TemplateIdSet []*uint64 `json:"TemplateIdSet,omitempty" name:"TemplateIdSet"`
-
 	// Whether it is Global SMS:
 	// 0: Mainland China SMS.
 	// 1: Global SMS.
 	International *uint64 `json:"International,omitempty" name:"International"`
+
+	// Array of template IDs. If the array is empty, the template list information will be queried by default (only allowed for root accounts). You need to use the `Limit` and `Offset` fields to set the query range.
+	// <dx-alert infotype="notice" title="Note">The default array length can be up to 100</dx-alert>
+	TemplateIdSet []*uint64 `json:"TemplateIdSet,omitempty" name:"TemplateIdSet"`
+
+	// Upper limit. Maximum value: 100.
+	// Note: it is 0 by default and is enabled when `TemplateIdSet` is empty.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset.
+	// Note: it is 0 by default and is enabled when `TemplateIdSet` is empty.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 }
 
 func (r *DescribeSmsTemplateListRequest) ToJsonString() string {
@@ -566,8 +575,10 @@ func (r *DescribeSmsTemplateListRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "TemplateIdSet")
 	delete(f, "International")
+	delete(f, "TemplateIdSet")
+	delete(f, "Limit")
+	delete(f, "Offset")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSmsTemplateListRequest has unknown keys!", "")
 	}
@@ -637,12 +648,13 @@ type ModifySmsSignRequest struct {
 	SignName *string `json:"SignName,omitempty" name:"SignName"`
 
 	// Signature type. Each of these types is followed by their `DocumentType` (identity certificate type) option:
-	// 0: company. Valid values of `DocumentType` include 0, 1, 2, and 3.
+	// 0: company. Valid values of `DocumentType` include 0 and 1.
 	// 1: app. Valid values of `DocumentType` include 0, 1, 2, 3, and 4.
 	// 2: website. Valid values of `DocumentType` include 0, 1, 2, 3, and 5.
-	// 3: WeChat Official Account or WeChat Mini Program. Valid values of `DocumentType` include 0, 1, 2, 3, and 6.
+	// 3: WeChat Official Account. Valid values of `DocumentType` include 0, 1, 2, 3, and 8.
 	// 4: trademark. Valid values of `DocumentType` include 7.
 	// 5: government/public institution/other. Valid values of `DocumentType` include 2 and 3.
+	// 6: WeChat Mini Program. Valid values of `DocumentType` include 0, 1, 2, 3, and 6.
 	// Note: the identity certificate type must be selected according to the correspondence; otherwise, the review will fail.
 	SignType *uint64 `json:"SignType,omitempty" name:"SignType"`
 
@@ -655,7 +667,7 @@ type ModifySmsSignRequest struct {
 	// 5: screenshot of website ICP filing backend (for personal website).
 	// 6: screenshot of WeChat Mini Program settings page (for personal WeChat Mini Program).
 	// 7: trademark registration certificate.
-	// Note: the corresponding `DocumentType` must be selected according to `SignType`.
+	// 8: screenshot of WeChat Official Account settings page (for personal WeChat Official Account).
 	DocumentType *uint64 `json:"DocumentType,omitempty" name:"DocumentType"`
 
 	// A parameter used to specify whether it is Global SMS:
@@ -1139,25 +1151,25 @@ type SendSmsRequest struct {
 	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
 	SmsSdkAppId *string `json:"SmsSdkAppId,omitempty" name:"SmsSdkAppId"`
 
-	// Template ID. You must enter the ID of an approved template, which can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2). If you need to send SMS messages to global mobile numbers, you can only use a Global SMS template.
+	// Template ID. You must enter the ID of an approved template, which can be viewed on the [Mainland China SMS](https://console.cloud.tencent.com/smsv2/csms-template) or [Global SMS](https://console.cloud.tencent.com/smsv2/isms-template) body template management page. If you need to send SMS messages to global mobile numbers, you can only use a Global SMS template.
 	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// SMS signature information which is encoded in UTF-8. You must enter an approved signature (such as Tencent Cloud). The signing information can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2).
-	// <dx-alert infotype="notice" title="Note">This parameter is required for Chinese mainland SMS.</dx-alert>
+	// Content of the SMS signature, which should be encoded in UTF-8. You must enter an approved signature, such as Tencent Cloud. The signature information can be viewed on the [Mainland China SMS](https://console.cloud.tencent.com/smsv2/csms-sign) or [Global SMS](https://console.cloud.tencent.com/smsv2/isms-sign) signature management page.
+	// <dx-alert infotype="notice" title="Note">This parameter is required for Mainland China SMS.</dx-alert>
 	SignName *string `json:"SignName,omitempty" name:"SignName"`
 
 	// Template parameter. If there is no template parameter, leave this field empty.
 	// <dx-alert infotype="notice" title="Note">The number of template parameters should be consistent with that of the template variables of `TemplateId`.</dx-alert>
 	TemplateParamSet []*string `json:"TemplateParamSet,omitempty" name:"TemplateParamSet"`
 
-	// SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+	// SMS code number extension, which is not activated by default. If you need to activate it, you can contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
 	ExtendCode *string `json:"ExtendCode,omitempty" name:"ExtendCode"`
 
 	// User session content, which can carry context information such as user-side ID and will be returned as-is by the server.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
 	// This parameter is not required for Mainland China SMS. For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.
-	// Note: if your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+	// Note: if your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
 	SenderId *string `json:"SenderId,omitempty" name:"SenderId"`
 }
 
@@ -1218,13 +1230,13 @@ type SendStatus struct {
 	// Mobile number in the E.164 standard (+[country/region code][mobile number]), such as +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
 	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
 
-	// Number of billable SMS messages. For billing rules, please see [Billing Policy](https://intl.cloud.tencent.com/document/product/382/36135?from_cn_redirect=1).
+	// Number of billable SMS messages. For billing rules, see Billing Policy.
 	Fee *uint64 `json:"Fee,omitempty" name:"Fee"`
 
 	// User session content.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// SMS request error code. For details, see [Error Codes](https://intl.cloud.tencent.com/document/api/382/55981?from_cn_redirect=1#6.-.E9.94.99.E8.AF.AF.E7.A0.81). `Ok` will be returned if the request is successful.
+	// SMS request error code. For specific meanings, see [Error Codes](https://intl.cloud.tencent.com/zh/document/product/382/40536#6.-error-code). `Ok` will be returned for successful delivery.
 	Code *string `json:"Code,omitempty" name:"Code"`
 
 	// SMS request error message.

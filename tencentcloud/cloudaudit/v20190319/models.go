@@ -80,6 +80,10 @@ type DescribeEventsResponse struct {
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 		Events []*Event `json:"Events,omitempty" name:"Events"`
 
+		// Total number of events.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
