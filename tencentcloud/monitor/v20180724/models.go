@@ -599,7 +599,7 @@ type CreateAlarmPolicyRequest struct {
 	// Monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring)
 	MonitorType *string `json:"MonitorType,omitempty" name:"MonitorType"`
 
-	// Type of alarm policy, which can be obtained via [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1). An example value is `cvm_device`.
+	// Type of alarm policy, which can be obtained via [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1). For the monitoring of Tencent Cloud services, the value of this parameter is `QceNamespacesNew.N.Id` of the output parameter of `DescribeAllNamespaces`, for example, `cvm_device`.
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
 	// Remarks with up to 100 letters, digits, underscores, and hyphens
@@ -1209,14 +1209,12 @@ type DescribeAlarmHistoriesRequest struct {
 	AlarmStatus []*string `json:"AlarmStatus,omitempty" name:"AlarmStatus"`
 
 	// Filter by project ID. Valid values: `-1` (no project), `0` (default project)
-	// You can query [Project Management](https://console.cloud.tencent.com/project) on this page.
 	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// Filter by instance group ID
 	InstanceGroupIds []*int64 `json:"InstanceGroupIds,omitempty" name:"InstanceGroupIds"`
 
 	// Filter by policy type. Monitoring type and policy type are first-level and second-level filters respectively and both need to be passed in. For example, `[{"MonitorType": "MT_QCE", "Namespace": "cvm_device"}]`
-	// This parameter can be queried with the API [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1).
 	Namespaces []*MonitorTypeNamespace `json:"Namespaces,omitempty" name:"Namespaces"`
 
 	// Filter by metric name
@@ -1228,10 +1226,10 @@ type DescribeAlarmHistoriesRequest struct {
 	// Fuzzy search by alarm content
 	Content *string `json:"Content,omitempty" name:"Content"`
 
-	// Search by recipient. You can get the user list with the API [ListUsers](https://intl.cloud.tencent.com/document/product/598/34587?from_cn_redirect=1) in “Cloud Access Management” or query the sub-user information with the API [GetUser](https://intl.cloud.tencent.com/document/product/598/34590?from_cn_redirect=1). The `Uid` field in the returned result should be entered here.
+	// Search by recipient
 	ReceiverUids []*int64 `json:"ReceiverUids,omitempty" name:"ReceiverUids"`
 
-	// Search by recipient group. You can get the user group list with the API [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) in “Cloud Access Management” or query the user group list where a sub-user is in with the API [ListGroupsForUser](https://intl.cloud.tencent.com/document/product/598/34588?from_cn_redirect=1). The `GroupId` field in the returned result should be entered here.
+	// Search by recipient group
 	ReceiverGroups []*int64 `json:"ReceiverGroups,omitempty" name:"ReceiverGroups"`
 
 	// Search by alarm policy ID list
@@ -3083,7 +3081,7 @@ type DescribeProductEventListRequest struct {
 	// Filter by dimension, such as by public IP: 10.0.0.1.
 	Dimensions []*DescribeProductEventListDimensions `json:"Dimensions,omitempty" name:"Dimensions"`
 
-	// Region filter parameter for service events, such as `gz`. For region abbreviations, please see [Region List](https://intl.cloud.tencent.com/document/product/248/50863?from_cn_redirect=1)
+	// Region filter parameter for service events.
 	RegionList []*string `json:"RegionList,omitempty" name:"RegionList"`
 
 	// Filter by event type. Valid values: ["status_change","abnormal"], which indicate events whose statuses have changed and events with exceptions respectively.
