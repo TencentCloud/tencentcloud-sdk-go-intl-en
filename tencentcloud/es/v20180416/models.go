@@ -126,6 +126,9 @@ type CreateInstanceRequest struct {
 
 	// Visual node configuration
 	WebNodeTypeInfo *WebNodeTypeInfo `json:"WebNodeTypeInfo,omitempty" name:"WebNodeTypeInfo"`
+
+	// Valid values: `https`, `http` (default)
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -169,6 +172,7 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "BasicSecurityType")
 	delete(f, "SceneType")
 	delete(f, "WebNodeTypeInfo")
+	delete(f, "Protocol")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
 	}
@@ -772,6 +776,14 @@ type InstanceInfo struct {
 	// JDK type. Valid values: `oracle`, `kona`
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Jdk *string `json:"Jdk,omitempty" name:"Jdk"`
+
+	// Cluster network communication protocol
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Security group ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecurityGroups []*string `json:"SecurityGroups,omitempty" name:"SecurityGroups"`
 }
 
 type InstanceLog struct {
@@ -1207,6 +1219,18 @@ type UpdateInstanceRequest struct {
 
 	// Visual node configuration
 	WebNodeTypeInfo *WebNodeTypeInfo `json:"WebNodeTypeInfo,omitempty" name:"WebNodeTypeInfo"`
+
+	// Whether to switch to the new network architecture
+	SwitchPrivateLink *string `json:"SwitchPrivateLink,omitempty" name:"SwitchPrivateLink"`
+
+	// Whether to enable Cerebro
+	EnableCerebro *bool `json:"EnableCerebro,omitempty" name:"EnableCerebro"`
+
+	// Cerebro public network access status
+	CerebroPublicAccess *string `json:"CerebroPublicAccess,omitempty" name:"CerebroPublicAccess"`
+
+	// Cerebro private network access status
+	CerebroPrivateAccess *string `json:"CerebroPrivateAccess,omitempty" name:"CerebroPrivateAccess"`
 }
 
 func (r *UpdateInstanceRequest) ToJsonString() string {
@@ -1246,6 +1270,10 @@ func (r *UpdateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "SceneType")
 	delete(f, "KibanaConfig")
 	delete(f, "WebNodeTypeInfo")
+	delete(f, "SwitchPrivateLink")
+	delete(f, "EnableCerebro")
+	delete(f, "CerebroPublicAccess")
+	delete(f, "CerebroPrivateAccess")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateInstanceRequest has unknown keys!", "")
 	}
