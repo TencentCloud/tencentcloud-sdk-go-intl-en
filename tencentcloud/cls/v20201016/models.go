@@ -3276,7 +3276,7 @@ type GetAlarmLogRequest struct {
 	// Order of the logs sorted by time returned by the log API. Valid values: `asc`: ascending; `desc`: descending. Default value: `desc`
 	Sort *string `json:"Sort,omitempty" name:"Sort"`
 
-	// 
+	// If the value is `true`, the new search method will be used, and the response parameters `AnalysisRecords` and `Columns` will be valid. If the value is `false`, the old search method will be used, and `AnalysisResults` and `ColNames` will be valid.
 	UseNewAnalysis *bool `json:"UseNewAnalysis,omitempty" name:"UseNewAnalysis"`
 }
 
@@ -3330,10 +3330,12 @@ type GetAlarmLogResponse struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		AnalysisResults []*LogItems `json:"AnalysisResults,omitempty" name:"AnalysisResults"`
 
-		// 
+		// New log analysis result, which will be valid if `UseNewAnalysis` is `true`
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		AnalysisRecords []*string `json:"AnalysisRecords,omitempty" name:"AnalysisRecords"`
 
-		// 
+		// Column attribute of log analysis, which will be valid if `UseNewAnalysis` is `true`
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		Columns []*Column `json:"Columns,omitempty" name:"Columns"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4595,6 +4597,15 @@ type TopicInfo struct {
 
 type UploadLogRequest struct {
 	*tchttp.BaseRequest
+
+	// Topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Topic partition where data will be written into by `HashKey` 
+	HashKey *string `json:"HashKey,omitempty" name:"HashKey"`
+
+	// Compression type
+	CompressType *string `json:"CompressType,omitempty" name:"CompressType"`
 }
 
 func (r *UploadLogRequest) ToJsonString() string {
@@ -4609,6 +4620,9 @@ func (r *UploadLogRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "TopicId")
+	delete(f, "HashKey")
+	delete(f, "CompressType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UploadLogRequest has unknown keys!", "")
 	}

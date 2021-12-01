@@ -213,6 +213,16 @@ type AddressChargePrepaid struct {
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 }
 
+type AddressInfo struct {
+
+	// IP address
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// Remarks
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type AddressTemplate struct {
 
 	// IP address template name.
@@ -226,6 +236,9 @@ type AddressTemplate struct {
 
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// IP address information with remarks
+	AddressExtraSet []*AddressInfo `json:"AddressExtraSet,omitempty" name:"AddressExtraSet"`
 }
 
 type AddressTemplateGroup struct {
@@ -1659,8 +1672,11 @@ type CreateAddressTemplateRequest struct {
 	// The name of the IP address template
 	AddressTemplateName *string `json:"AddressTemplateName,omitempty" name:"AddressTemplateName"`
 
-	// Address information, including IP, CIDR and IP address range.
+	// The address information can be presented by the IP, CIDR block or IP address range. Either Addresses or AddressesExtra is required.
 	Addresses []*string `json:"Addresses,omitempty" name:"Addresses"`
+
+	// The address information can contain remarks and be presented by the IP, CIDR block or IP address range. Either Addresses or AddressesExtra is required.
+	AddressesExtra []*AddressInfo `json:"AddressesExtra,omitempty" name:"AddressesExtra"`
 }
 
 func (r *CreateAddressTemplateRequest) ToJsonString() string {
@@ -1677,6 +1693,7 @@ func (r *CreateAddressTemplateRequest) FromJsonString(s string) error {
 	}
 	delete(f, "AddressTemplateName")
 	delete(f, "Addresses")
+	delete(f, "AddressesExtra")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAddressTemplateRequest has unknown keys!", "")
 	}
@@ -3167,8 +3184,11 @@ type CreateServiceTemplateRequest struct {
 	// Template name of the protocol port
 	ServiceTemplateName *string `json:"ServiceTemplateName,omitempty" name:"ServiceTemplateName"`
 
-	// It supports single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP, and GRE.
+	// Supported ports inlcude single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP and GRE. Either Services or ServicesExtra is required.
 	Services []*string `json:"Services,omitempty" name:"Services"`
+
+	// You can add remarks. Supported ports include single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP and GRE. Either Services or ServicesExtra is required.
+	ServicesExtra []*ServicesInfo `json:"ServicesExtra,omitempty" name:"ServicesExtra"`
 }
 
 func (r *CreateServiceTemplateRequest) ToJsonString() string {
@@ -3185,6 +3205,7 @@ func (r *CreateServiceTemplateRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ServiceTemplateName")
 	delete(f, "Services")
+	delete(f, "ServicesExtra")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateServiceTemplateRequest has unknown keys!", "")
 	}
@@ -3720,11 +3741,17 @@ type CreateVpnGatewayRequest struct {
 	// The availability zone, such as `ap-guangzhou-2`.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// VPN gateway type. Value: `CCN`, indicates CCN-type VPN gateway
+	// VPN gateway type. Values: `CCN` (CCN VPN gateway), `SSL` (SSL VPN gateway)
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+
+	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
+	MaxConnection *uint64 `json:"MaxConnection,omitempty" name:"MaxConnection"`
 }
 
 func (r *CreateVpnGatewayRequest) ToJsonString() string {
@@ -3747,6 +3774,8 @@ func (r *CreateVpnGatewayRequest) FromJsonString(s string) error {
 	delete(f, "Zone")
 	delete(f, "Type")
 	delete(f, "Tags")
+	delete(f, "CdcId")
+	delete(f, "MaxConnection")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpnGatewayRequest has unknown keys!", "")
 	}
@@ -5605,9 +5634,10 @@ func (r *DescribeAddressTemplateGroupsResponse) FromJsonString(s string) error {
 type DescribeAddressTemplatesRequest struct {
 	*tchttp.BaseRequest
 
-	// Filter conditions.
-	// <li>address-template-name - String - (Filter condition) IP address template name.</li>
-	// <li>address-template-id - String - (Filter condition) IP address template instance ID, such as `ipm-mdunqeb6`.</li>
+	// Filters
+	// <li>address-template-name - IP address template name.</li>
+	// <li>address-template-id - IP address template ID, such as `ipm-mdunqeb6`.</li>
+	// <li>address-ip - IP address.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. The default value is 0.
@@ -7181,10 +7211,10 @@ func (r *DescribeIpGeolocationDatabaseUrlResponse) FromJsonString(s string) erro
 type DescribeIpGeolocationInfosRequest struct {
 	*tchttp.BaseRequest
 
-	// IP addresses to be queried. Both IPv4 and IPv6 addresses are supported.
+	// The list of IP addresses (only IPv4 addresses are available currently) to be queried; upper limit: 100
 	AddressIps []*string `json:"AddressIps,omitempty" name:"AddressIps"`
 
-	// Fields of the IP addresses to be queried, including `Country`, `Province`, `City`, `Region`, `Isp`, `AsName` and `AsId`
+	// Fields of the IP addresses to be queried.
 	Fields *IpField `json:"Fields,omitempty" name:"Fields"`
 }
 
@@ -8194,9 +8224,10 @@ func (r *DescribeServiceTemplateGroupsResponse) FromJsonString(s string) error {
 type DescribeServiceTemplatesRequest struct {
 	*tchttp.BaseRequest
 
-	// Filter conditions.
-	// <li>service-template-name - String - (Filter condition) Protocol port template name.</li>
-	// <li>service-template-id - String - (Filter condition) Protocol port template instance ID, such as `ppm-e6dy460g`.</li>
+	// Filters
+	// <li>service-template-name - Protocol port template name.</li>
+	// <li>service-template-id - Protocol port template ID, such as `ppm-e6dy460g`.</li>
+	// <li>service-port-Protocol port.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. The default value is 0.
@@ -11100,6 +11131,9 @@ type ModifyAddressTemplateAttributeRequest struct {
 
 	// Address information, including IP, CIDR and IP address range.
 	Addresses []*string `json:"Addresses,omitempty" name:"Addresses"`
+
+	// Address information with remarks, including the IP, CIDR block or IP address range.
+	AddressesExtra []*AddressInfo `json:"AddressesExtra,omitempty" name:"AddressesExtra"`
 }
 
 func (r *ModifyAddressTemplateAttributeRequest) ToJsonString() string {
@@ -11117,6 +11151,7 @@ func (r *ModifyAddressTemplateAttributeRequest) FromJsonString(s string) error {
 	delete(f, "AddressTemplateId")
 	delete(f, "AddressTemplateName")
 	delete(f, "Addresses")
+	delete(f, "AddressesExtra")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAddressTemplateAttributeRequest has unknown keys!", "")
 	}
@@ -11327,6 +11362,9 @@ type ModifyBandwidthPackageAttributeRequest struct {
 
 	// The billing mode of the bandwidth package.
 	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
+
+	// When a monthly-subscribed bandwidth package is returned, whether to convert it to a pay-as-you-go bandwidth packages. Default value: `No`
+	MigrateOnRefund *bool `json:"MigrateOnRefund,omitempty" name:"MigrateOnRefund"`
 }
 
 func (r *ModifyBandwidthPackageAttributeRequest) ToJsonString() string {
@@ -11344,6 +11382,7 @@ func (r *ModifyBandwidthPackageAttributeRequest) FromJsonString(s string) error 
 	delete(f, "BandwidthPackageId")
 	delete(f, "BandwidthPackageName")
 	delete(f, "ChargeType")
+	delete(f, "MigrateOnRefund")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBandwidthPackageAttributeRequest has unknown keys!", "")
 	}
@@ -11426,10 +11465,10 @@ type ModifyCcnAttributeRequest struct {
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
-	// The name of the CCN. The maximum length is 60 characters.
+	// The name of CCN instance. Up to 60 characters allowed. It can contain up to 60 bytes. Either `CcnName` or `CcnDescription` must be specified.
 	CcnName *string `json:"CcnName,omitempty" name:"CcnName"`
 
-	// The description of the CCN. The maximum length is 100 characters.
+	// The description of CCN instance. Up to 100 characters allowed. It can contain up to 60 bytes. Either `CcnName` or `CcnDescription` must be specified.
 	CcnDescription *string `json:"CcnDescription,omitempty" name:"CcnDescription"`
 }
 
@@ -12524,6 +12563,9 @@ type ModifyServiceTemplateAttributeRequest struct {
 
 	// It supports single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP, and GRE.
 	Services []*string `json:"Services,omitempty" name:"Services"`
+
+	// Protocol port information with remarks. Supported ports include single port, multiple ports, consecutive ports and other ports. Supported protocols include TCP, UDP, ICMP, and GRE.
+	ServicesExtra []*ServicesInfo `json:"ServicesExtra,omitempty" name:"ServicesExtra"`
 }
 
 func (r *ModifyServiceTemplateAttributeRequest) ToJsonString() string {
@@ -12541,6 +12583,7 @@ func (r *ModifyServiceTemplateAttributeRequest) FromJsonString(s string) error {
 	delete(f, "ServiceTemplateId")
 	delete(f, "ServiceTemplateName")
 	delete(f, "Services")
+	delete(f, "ServicesExtra")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyServiceTemplateAttributeRequest has unknown keys!", "")
 	}
@@ -14515,6 +14558,10 @@ type SecurityGroup struct {
 
 	// Tag key-value pairs.
 	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
+
+	// Security group update time.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
 type SecurityGroupAssociationStatistics struct {
@@ -14614,6 +14661,9 @@ type ServiceTemplate struct {
 
 	// Creation Time.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Protocol port template information with remarks
+	ServiceExtraSet []*ServicesInfo `json:"ServiceExtraSet,omitempty" name:"ServiceExtraSet"`
 }
 
 type ServiceTemplateGroup struct {
@@ -14641,6 +14691,16 @@ type ServiceTemplateSpecification struct {
 
 	// Protocol port group ID, such as `ppmg-f5n1f8da`.
 	ServiceGroupId *string `json:"ServiceGroupId,omitempty" name:"ServiceGroupId"`
+}
+
+type ServicesInfo struct {
+
+	// Protocol port
+	Service *string `json:"Service,omitempty" name:"Service"`
+
+	// Remarks
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type SetCcnRegionBandwidthLimitsRequest struct {
@@ -15017,6 +15077,9 @@ type UnassignPrivateIpAddressesRequest struct {
 
 	// The information of the specified private IPs. You can specify a maximum of 10 each time.
 	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
+
+	// Instance ID of the server bound with this IP. This parameter is only applicable when you need to return an IP and unbind the related servers.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 func (r *UnassignPrivateIpAddressesRequest) ToJsonString() string {
@@ -15033,6 +15096,7 @@ func (r *UnassignPrivateIpAddressesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "NetworkInterfaceId")
 	delete(f, "PrivateIpAddresses")
+	delete(f, "InstanceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnassignPrivateIpAddressesRequest has unknown keys!", "")
 	}
@@ -15265,6 +15329,12 @@ type VpnGateway struct {
 
 	// CCN instance ID when the value of Type is CCN.
 	NetworkInstanceId *string `json:"NetworkInstanceId,omitempty" name:"NetworkInstanceId"`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+
+	// Maximum number of connected clients allowed for the SSL VPN gateway.
+	MaxConnection *uint64 `json:"MaxConnection,omitempty" name:"MaxConnection"`
 }
 
 type VpnGatewayQuota struct {

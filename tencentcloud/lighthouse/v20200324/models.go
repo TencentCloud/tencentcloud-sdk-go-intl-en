@@ -825,6 +825,9 @@ type DescribeBlueprintsRequest struct {
 	// <li>blueprint-name</li>Filter by **image name**.
 	// Type: String
 	// Required: no
+	// <li>blueprint-state</li>Filter by **image status**.
+	// Type: String
+	// Required: no
 	// 
 	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
@@ -1717,6 +1720,9 @@ type DescribeResetInstanceBlueprintsRequest struct {
 	// Type: String
 	// Required: no
 	// <li>blueprint-name</li>Filter by **image name**.
+	// Type: String
+	// Required: no
+	// <li>blueprint-state</li>Filter by **image status**.
 	// Type: String
 	// Required: no
 	// 
@@ -3074,8 +3080,8 @@ type ResetInstancesPasswordRequest struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Instance login password. Different OS types have different limits on password complexity as detailed below:
-	// The password of a `LINUX_UNIX` instance must contain 8–30 characters (above 12 characters preferably) in at least three of the following types and cannot begin with "/": <br><li>Lowercase letters: [a–z]<br><li>Uppercase letters: [A–Z]<br><li>Digits: 0–9<br><li>Special symbols: ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/
+	// Login password of the instance(s). The password requirements vary among different operating systems:
+	// The password of a `LINUX_UNIX` instance must contain 8–30 characters (above 12 characters preferably) in at least three of the following types and cannot begin with "/": <br><li>Lowercase letters: [a–z]<br><li>Uppercase letters: [A–Z]<br><li>Digits: 0–9<br><li>Special symbols: ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/</li>
 	// The password of a `WINDOWS` instance must contain 12–30 characters in at least three of the following types and cannot begin with "/" or include the username: <br><li>Lowercase letters: [a–z]<br><li>Uppercase letters: [A–Z]<br><li>Digits: 0–9<br><li>Special symbols: ()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<br><li>If both `LINUX_UNIX` and `WINDOWS` instances exist, the requirements for password complexity of `WINDOWS` instances shall prevail.
 	Password *string `json:"Password,omitempty" name:"Password"`
 

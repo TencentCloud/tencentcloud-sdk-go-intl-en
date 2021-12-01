@@ -2029,7 +2029,11 @@ func NewResetInstancesPasswordResponse() (response *ResetInstancesPasswordRespon
 //
 // * Batch operations are supported. You can reset the passwords of multiple instances to the same one. The maximum number of instances in each request is 100.
 //
+// * It’s recommended to shut down the instance first and then reset the password. If the instance is running, this API will try to shut it down normally. If the attempt fails, it will force to instance to shut down.
+//
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// Note: Just like powering off a physical PC, a forced shutdown may cause data loss or the corruption of file system.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
@@ -2172,13 +2176,13 @@ func NewTerminateInstancesResponse() (response *TerminateInstancesResponse) {
 }
 
 // TerminateInstances
-// This API is used to return instances.
+// This API is used to terminate one or more instances.
 //
 // 
 //
 // * Instances in `SHUTDOWN` status can be terminated through this API and cannot be recovered.
 //
-// * Batch operations are supported. The maximum number of instances in each request is 100.
+// * Batch operations are supported. The allowed maximum number of instances in each request is 100.
 //
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //

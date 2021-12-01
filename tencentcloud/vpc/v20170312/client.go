@@ -104,8 +104,15 @@ func NewAddBandwidthPackageResourcesResponse() (response *AddBandwidthPackageRes
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_RESOURCEALREADYEXISTED = "InvalidParameterValue.ResourceAlreadyExisted"
+//  INVALIDPARAMETERVALUE_RESOURCEIDMALFORMED = "InvalidParameterValue.ResourceIdMalformed"
+//  INVALIDPARAMETERVALUE_RESOURCENOTFOUND = "InvalidParameterValue.ResourceNotFound"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
+//  UNSUPPORTEDOPERATION_INVALIDRESOURCEINTERNETCHARGETYPE = "UnsupportedOperation.InvalidResourceInternetChargeType"
+//  UNSUPPORTEDOPERATION_INVALIDRESOURCEPROTOCOL = "UnsupportedOperation.InvalidResourceProtocol"
 func (c *Client) AddBandwidthPackageResources(request *AddBandwidthPackageResourcesRequest) (response *AddBandwidthPackageResourcesResponse, err error) {
     if request == nil {
         request = NewAddBandwidthPackageResourcesRequest()
@@ -146,11 +153,16 @@ func NewAllocateAddressesResponse() (response *AllocateAddressesResponse) {
 //  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
 //  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
 //  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTAVAILABLE = "InvalidParameterValue.AddressIpNotAvailable"
 //  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
 //  INVALIDPARAMETERVALUE_BANDWIDTHTOOSMALL = "InvalidParameterValue.BandwidthTooSmall"
 //  INVALIDPARAMETERVALUE_INVALIDDEDICATEDCLUSTERID = "InvalidParameterValue.InvalidDedicatedClusterId"
 //  INVALIDPARAMETERVALUE_INVALIDTAG = "InvalidParameterValue.InvalidTag"
+//  INVALIDPARAMETERVALUE_MIXEDADDRESSIPSETTYPE = "InvalidParameterValue.MixedAddressIpSetType"
+//  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 func (c *Client) AllocateAddresses(request *AllocateAddressesRequest) (response *AllocateAddressesResponse, err error) {
     if request == nil {
         request = NewAllocateAddressesRequest()
@@ -376,6 +388,8 @@ func NewAssociateAddressResponse() (response *AssociateAddressResponse) {
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDNETWORKINTERFACEID_NOTFOUND = "InvalidNetworkInterfaceId.NotFound"
 //  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTAPPLICABLE = "InvalidParameterValue.AddressNotApplicable"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
 //  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
 //  INVALIDPARAMETERVALUE_INSTANCEDOESNOTSUPPORTANYCAST = "InvalidParameterValue.InstanceDoesNotSupportAnycast"
 //  INVALIDPARAMETERVALUE_INSTANCEHASWANIP = "InvalidParameterValue.InstanceHasWanIP"
@@ -384,6 +398,7 @@ func NewAssociateAddressResponse() (response *AssociateAddressResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEINTERNETCHARGETYPE = "InvalidParameterValue.InvalidInstanceInternetChargeType"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCESTATE = "InvalidParameterValue.InvalidInstanceState"
 //  INVALIDPARAMETERVALUE_LBALREADYBINDEIP = "InvalidParameterValue.LBAlreadyBindEip"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACENOTFOUND = "InvalidParameterValue.NetworkInterfaceNotFound"
 //  INVALIDPRIVATEIPADDRESS_ALREADYBINDEIP = "InvalidPrivateIpAddress.AlreadyBindEip"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) AssociateAddress(request *AssociateAddressRequest) (response *AssociateAddressResponse, err error) {
@@ -1015,7 +1030,9 @@ func NewCreateBandwidthPackageResponse() (response *CreateBandwidthPackageRespon
 //  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDRESOURCEINTERNETCHARGETYPE = "UnsupportedOperation.InvalidResourceInternetChargeType"
 func (c *Client) CreateBandwidthPackage(request *CreateBandwidthPackageRequest) (response *CreateBandwidthPackageResponse, err error) {
     if request == nil {
         request = NewCreateBandwidthPackageRequest()
@@ -2430,6 +2447,9 @@ func NewDeleteBandwidthPackageResponse() (response *DeleteBandwidthPackageRespon
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEINUSE = "InvalidParameterValue.BandwidthPackageInUse"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 func (c *Client) DeleteBandwidthPackage(request *DeleteBandwidthPackageRequest) (response *DeleteBandwidthPackageResponse, err error) {
     if request == nil {
         request = NewDeleteBandwidthPackageRequest()
@@ -3580,10 +3600,8 @@ func NewDescribeBandwidthPackageBillUsageResponse() (response *DescribeBandwidth
 // This API is used to query the current billable usage of a pay-as-you-go bandwidth package.
 //
 // error code that may be returned:
-//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 func (c *Client) DescribeBandwidthPackageBillUsage(request *DescribeBandwidthPackageBillUsageRequest) (response *DescribeBandwidthPackageBillUsageResponse, err error) {
     if request == nil {
         request = NewDescribeBandwidthPackageBillUsageRequest()
@@ -3613,10 +3631,8 @@ func NewDescribeBandwidthPackageQuotaResponse() (response *DescribeBandwidthPack
 // This API is used to query the maximum and used number of bandwidth packages under the account in the current region.
 //
 // error code that may be returned:
-//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 func (c *Client) DescribeBandwidthPackageQuota(request *DescribeBandwidthPackageQuotaRequest) (response *DescribeBandwidthPackageQuotaResponse, err error) {
     if request == nil {
         request = NewDescribeBandwidthPackageQuotaRequest()
@@ -3647,6 +3663,8 @@ func NewDescribeBandwidthPackageResourcesResponse() (response *DescribeBandwidth
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  INVALIDPARAMETERVALUE_RESOURCEIDMALFORMED = "InvalidParameterValue.ResourceIdMalformed"
 func (c *Client) DescribeBandwidthPackageResources(request *DescribeBandwidthPackageResourcesRequest) (response *DescribeBandwidthPackageResourcesResponse, err error) {
     if request == nil {
         request = NewDescribeBandwidthPackageResourcesRequest()
@@ -4230,7 +4248,9 @@ func NewDescribeIpGeolocationInfosResponse() (response *DescribeIpGeolocationInf
 }
 
 // DescribeIpGeolocationInfos
-// This API is used to query the information of IP addresses, including their geographical locations and networks.
+// This API is used to query the location and network information of one or more IP addresses.
+//
+// This API is currently in beta test. To use it, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=660&source=0&data_title=%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91%20EIP&level3_id=662&queue=96&scene_code=16400&step=2).
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -5508,6 +5528,7 @@ func NewDisassociateAddressResponse() (response *DisassociateAddressResponse) {
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
 //  INVALIDPARAMETERVALUE_ONLYSUPPORTEDFORMASTERNETWORKCARD = "InvalidParameterValue.OnlySupportedForMasterNetworkCard"
 func (c *Client) DisassociateAddress(request *DisassociateAddressRequest) (response *DisassociateAddressResponse, err error) {
     if request == nil {
@@ -6144,6 +6165,7 @@ func NewModifyAddressAttributeResponse() (response *ModifyAddressAttributeRespon
 //  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
 //  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 func (c *Client) ModifyAddressAttribute(request *ModifyAddressAttributeRequest) (response *ModifyAddressAttributeResponse, err error) {
     if request == nil {
@@ -6185,6 +6207,8 @@ func NewModifyAddressInternetChargeTypeResponse() (response *ModifyAddressIntern
 //  INVALIDADDRESSSTATE = "InvalidAddressState"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTCALCIP = "InvalidParameterValue.AddressNotCalcIP"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) ModifyAddressInternetChargeType(request *ModifyAddressInternetChargeTypeRequest) (response *ModifyAddressInternetChargeTypeResponse, err error) {
@@ -6288,10 +6312,13 @@ func NewModifyAddressesBandwidthResponse() (response *ModifyAddressesBandwidthRe
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
 //  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
 //  INVALIDPARAMETERVALUE_BANDWIDTHTOOSMALL = "InvalidParameterValue.BandwidthTooSmall"
+//  INVALIDPARAMETERVALUE_INCONSISTENTINSTANCEINTERNETCHARGETYPE = "InvalidParameterValue.InconsistentInstanceInternetChargeType"
 //  INVALIDPARAMETERVALUE_INSTANCENOCALCIP = "InvalidParameterValue.InstanceNoCalcIP"
 //  INVALIDPARAMETERVALUE_INSTANCENOWANIP = "InvalidParameterValue.InstanceNoWanIP"
+//  INVALIDPARAMETERVALUE_RESOURCENOTEXISTED = "InvalidParameterValue.ResourceNotExisted"
 func (c *Client) ModifyAddressesBandwidth(request *ModifyAddressesBandwidthRequest) (response *ModifyAddressesBandwidthResponse, err error) {
     if request == nil {
         request = NewModifyAddressesBandwidthRequest()
@@ -6361,6 +6388,8 @@ func NewModifyBandwidthPackageAttributeResponse() (response *ModifyBandwidthPack
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDBANDWIDTHPACKAGECHARGETYPE = "InvalidParameterValue.InvalidBandwidthPackageChargeType"
 func (c *Client) ModifyBandwidthPackageAttribute(request *ModifyBandwidthPackageAttributeRequest) (response *ModifyBandwidthPackageAttributeResponse, err error) {
     if request == nil {
         request = NewModifyBandwidthPackageAttributeRequest()
@@ -7127,7 +7156,6 @@ func NewModifyServiceTemplateAttributeResponse() (response *ModifyServiceTemplat
 // This API (ModifyServiceTemplateAttribute) is used to modify a protocol port template.
 //
 // error code that may be returned:
-//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -7574,6 +7602,8 @@ func NewReleaseAddressesResponse() (response *ReleaseAddressesResponse) {
 //  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
 //  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
 //  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INVALIDPARAMETERVALUE_ADDRESSINTERNETCHARGETYPECONFLICT = "InvalidParameterValue.AddressInternetChargeTypeConflict"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
 func (c *Client) ReleaseAddresses(request *ReleaseAddressesRequest) (response *ReleaseAddressesResponse, err error) {
     if request == nil {
         request = NewReleaseAddressesRequest()
@@ -7603,9 +7633,12 @@ func NewRemoveBandwidthPackageResourcesResponse() (response *RemoveBandwidthPack
 // This API is used to delete a bandwidth package resource, including [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1), [Cloud Load Balancer](https://intl.cloud.tencent.com/document/product/214/517?from_cn_redirect=1), and so on.
 //
 // error code that may be returned:
-//  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
-//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
-//  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  INVALIDPARAMETERVALUE_RESOURCEIDMALFORMED = "InvalidParameterValue.ResourceIdMalformed"
+//  INVALIDPARAMETERVALUE_RESOURCENOTEXISTED = "InvalidParameterValue.ResourceNotExisted"
+//  INVALIDPARAMETERVALUE_RESOURCENOTFOUND = "InvalidParameterValue.ResourceNotFound"
+//  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
+//  UNSUPPORTEDOPERATION_INVALIDRESOURCEPROTOCOL = "UnsupportedOperation.InvalidResourceProtocol"
 func (c *Client) RemoveBandwidthPackageResources(request *RemoveBandwidthPackageResourcesRequest) (response *RemoveBandwidthPackageResourcesResponse, err error) {
     if request == nil {
         request = NewRemoveBandwidthPackageResourcesRequest()

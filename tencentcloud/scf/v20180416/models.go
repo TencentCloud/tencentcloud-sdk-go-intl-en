@@ -128,7 +128,7 @@ type Code struct {
 	// Object bucket name (enter the custom part of the bucket name without `-appid`)
 	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
 
-	// COS object path
+	// File path of code package stored in COS, which should start with “/”
 	CosObjectName *string `json:"CosObjectName,omitempty" name:"CosObjectName"`
 
 	// This parameter contains a .zip file (up to 50 MB) of the function code file and its dependencies. When this API is used, the content of the .zip file needs to be Base64-encoded
@@ -2905,6 +2905,9 @@ type PutProvisionedConcurrencyConfigRequest struct {
 
 	// Function namespace. Default value: `default`
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Scheduled provisioned concurrency scaling action
+	TriggerActions []*TriggerAction `json:"TriggerActions,omitempty" name:"TriggerActions"`
 }
 
 func (r *PutProvisionedConcurrencyConfigRequest) ToJsonString() string {
@@ -2923,6 +2926,7 @@ func (r *PutProvisionedConcurrencyConfigRequest) FromJsonString(s string) error 
 	delete(f, "Qualifier")
 	delete(f, "VersionProvisionedConcurrencyNum")
 	delete(f, "Namespace")
+	delete(f, "TriggerActions")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PutProvisionedConcurrencyConfigRequest has unknown keys!", "")
 	}
@@ -3133,6 +3137,9 @@ type TerminateAsyncEventRequest struct {
 
 	// Namespace
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Specifies whether to enable graceful shutdown
+	GraceShutdown *bool `json:"GraceShutdown,omitempty" name:"GraceShutdown"`
 }
 
 func (r *TerminateAsyncEventRequest) ToJsonString() string {
@@ -3150,6 +3157,7 @@ func (r *TerminateAsyncEventRequest) FromJsonString(s string) error {
 	delete(f, "FunctionName")
 	delete(f, "InvokeRequestId")
 	delete(f, "Namespace")
+	delete(f, "GraceShutdown")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateAsyncEventRequest has unknown keys!", "")
 	}
@@ -3222,6 +3230,21 @@ type Trigger struct {
 
 	// The alias or version bound with the trigger
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+}
+
+type TriggerAction struct {
+
+	// Scheduled action name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TriggerName *string `json:"TriggerName,omitempty" name:"TriggerName"`
+
+	// Target provisioned concurrency of the scheduled scaling action 
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TriggerProvisionedConcurrencyNum *uint64 `json:"TriggerProvisionedConcurrencyNum,omitempty" name:"TriggerProvisionedConcurrencyNum"`
+
+	// Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TriggerCronConfig *string `json:"TriggerCronConfig,omitempty" name:"TriggerCronConfig"`
 }
 
 type TriggerCount struct {
@@ -3735,6 +3758,10 @@ type VersionProvisionedConcurrencyInfo struct {
 
 	// Function version number
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+	// List of scheduled provisioned concurrency scaling actions
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TriggerActions []*TriggerAction `json:"TriggerActions,omitempty" name:"TriggerActions"`
 }
 
 type VersionWeight struct {

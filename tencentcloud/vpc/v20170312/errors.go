@@ -77,7 +77,7 @@ const (
 	// The specified filter value should be a list.
 	INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
 
-	// 
+	// The filter rule is invalid.
 	INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
 
 	// The next hop type does not match with the next hop gateway.
@@ -89,8 +89,29 @@ const (
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
+	// The billing mode of this IP address conflicts with that of other IP addresses.
+	INVALIDPARAMETERVALUE_ADDRESSINTERNETCHARGETYPECONFLICT = "InvalidParameterValue.AddressInternetChargeTypeConflict"
+
+	// The IP address is not available now.
+	INVALIDPARAMETERVALUE_ADDRESSIPNOTAVAILABLE = "InvalidParameterValue.AddressIpNotAvailable"
+
+	// An EIP cannot be bound with this type of instance.
+	INVALIDPARAMETERVALUE_ADDRESSNOTAPPLICABLE = "InvalidParameterValue.AddressNotApplicable"
+
+	// This IP address is not a CalcIP (device IP).
+	INVALIDPARAMETERVALUE_ADDRESSNOTCALCIP = "InvalidParameterValue.AddressNotCalcIP"
+
+	// Unable to find the address.
+	INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
+
 	// The bandwidth exceeds the limit.
 	INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+
+	// The bandwidth package is in use.
+	INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEINUSE = "InvalidParameterValue.BandwidthPackageInUse"
+
+	// Failed to query the bandwidth package
+	INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
 
 	// The selected bandwidth is smaller than the minimum permissible range.
 	INVALIDPARAMETERVALUE_BANDWIDTHTOOSMALL = "InvalidParameterValue.BandwidthTooSmall"
@@ -110,34 +131,40 @@ const (
 	// Missing parameters.
 	INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 
-	// 
+	// The billing mode of this instance is different from that of others.
+	INVALIDPARAMETERVALUE_INCONSISTENTINSTANCEINTERNETCHARGETYPE = "InvalidParameterValue.InconsistentInstanceInternetChargeType"
+
+	// This instance does not support an Anycast EIP.
 	INVALIDPARAMETERVALUE_INSTANCEDOESNOTSUPPORTANYCAST = "InvalidParameterValue.InstanceDoesNotSupportAnycast"
 
-	// 
+	// This instance already has a WanIP (public IP).
 	INVALIDPARAMETERVALUE_INSTANCEHASWANIP = "InvalidParameterValue.InstanceHasWanIP"
 
-	// 
+	// Request failed: this instance does not have a CalcIP (device IP).
 	INVALIDPARAMETERVALUE_INSTANCENOCALCIP = "InvalidParameterValue.InstanceNoCalcIP"
 
-	// 
+	// Request failed: this instance does not have a WanIP (public IP).
 	INVALIDPARAMETERVALUE_INSTANCENOWANIP = "InvalidParameterValue.InstanceNoWanIP"
 
-	// 
+	// Failed to bind: this IP is restricted
 	INVALIDPARAMETERVALUE_INSTANCENORMALPUBLICIPBLOCKED = "InvalidParameterValue.InstanceNormalPublicIpBlocked"
+
+	// Invalid billing mode of bandwidth package
+	INVALIDPARAMETERVALUE_INVALIDBANDWIDTHPACKAGECHARGETYPE = "InvalidParameterValue.InvalidBandwidthPackageChargeType"
 
 	// Invalid DedicatedClusterId.
 	INVALIDPARAMETERVALUE_INVALIDDEDICATEDCLUSTERID = "InvalidParameterValue.InvalidDedicatedClusterId"
 
-	// 
+	// This IP is applicable only for pay-as-you-go instances that billed by hourly traffic and instances with bandwidth package.
 	INVALIDPARAMETERVALUE_INVALIDINSTANCEINTERNETCHARGETYPE = "InvalidParameterValue.InvalidInstanceInternetChargeType"
 
-	// 
+	// Operation failed: the status of the instance does not allow this operation.
 	INVALIDPARAMETERVALUE_INVALIDINSTANCESTATE = "InvalidParameterValue.InvalidInstanceState"
 
-	// 
+	// This Tag is invalid.
 	INVALIDPARAMETERVALUE_INVALIDTAG = "InvalidParameterValue.InvalidTag"
 
-	// 
+	// This CLB instance is already bound with an EIP.
 	INVALIDPARAMETERVALUE_LBALREADYBINDEIP = "InvalidParameterValue.LBAlreadyBindEip"
 
 	// The parameter value exceeds the limit.
@@ -146,11 +173,17 @@ const (
 	// Invalid input parameter format.
 	INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 
+	// A request cannot contain IP addresses with different cluster types.
+	INVALIDPARAMETERVALUE_MIXEDADDRESSIPSETTYPE = "InvalidParameterValue.MixedAddressIpSetType"
+
 	// The NAT Gateway already has an identical SNAT rule.
 	INVALIDPARAMETERVALUE_NATSNATRULEEXISTS = "InvalidParameterValue.NatSnatRuleExists"
 
 	// The detection destination IP address is the same as that of another network detection instance under the same subnet in the same VPC.
 	INVALIDPARAMETERVALUE_NETDETECTSAMEIP = "InvalidParameterValue.NetDetectSameIp"
+
+	// The network interface ID was not found. The private IP address may not be configured on the network interface.
+	INVALIDPARAMETERVALUE_NETWORKINTERFACENOTFOUND = "InvalidParameterValue.NetworkInterfaceNotFound"
 
 	// This operation is only available for primary ENIs.
 	INVALIDPARAMETERVALUE_ONLYSUPPORTEDFORMASTERNETWORKCARD = "InvalidParameterValue.OnlySupportedForMasterNetworkCard"
@@ -161,11 +194,26 @@ const (
 	// The parameter value is retained by the system.
 	INVALIDPARAMETERVALUE_RESERVED = "InvalidParameterValue.Reserved"
 
+	// The resource has already added to another bandwidth package.
+	INVALIDPARAMETERVALUE_RESOURCEALREADYEXISTED = "InvalidParameterValue.ResourceAlreadyExisted"
+
+	// The resource ID is incorrect.
+	INVALIDPARAMETERVALUE_RESOURCEIDMALFORMED = "InvalidParameterValue.ResourceIdMalformed"
+
+	// The resource is not associated with this bandwidth package. 
+	INVALIDPARAMETERVALUE_RESOURCENOTEXISTED = "InvalidParameterValue.ResourceNotExisted"
+
+	// This resource is not found.
+	INVALIDPARAMETERVALUE_RESOURCENOTFOUND = "InvalidParameterValue.ResourceNotFound"
+
 	// Subnet CIDR conflict.
 	INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
 
 	// Invalid subnet CIDR.
 	INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+
+	// The tag and value do not exist.
+	INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
 
 	// Invalid parameter value. The parameter value is too long.
 	INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
@@ -173,13 +221,13 @@ const (
 	// Destination IP address range conflicts with CIDR of the current VPC.
 	INVALIDPARAMETERVALUE_VPCCIDRCONFLICT = "InvalidParameterValue.VpcCidrConflict"
 
-	// 
+	// This feature is not available for this direct connect gateway.
 	INVALIDPARAMETERVALUE_VPGTYPENOTMATCH = "InvalidParameterValue.VpgTypeNotMatch"
 
 	// Destination IP address range conflicts with CIDR block of the current VPC tunnel.
 	INVALIDPARAMETERVALUE_VPNCONNCIDRCONFLICT = "InvalidParameterValue.VpnConnCidrConflict"
 
-	// 
+	// The destination IP of the probe cannot be within the IP range of the VPC.
 	INVALIDPARAMETERVALUE_VPNCONNHEALTHCHECKIPCONFLICT = "InvalidParameterValue.VpnConnHealthCheckIpConflict"
 
 	// The `Zone` parameter value should be the zone where CDC resides.
@@ -287,7 +335,7 @@ const (
 	// The port does not exist.
 	UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
 
-	// 
+	// The resource is not under the specified AppId.
 	UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
 
 	// The EIP is already bound to a CVM.
@@ -298,6 +346,9 @@ const (
 
 	// Unable to delete the current CCN instance: its monthly-subscribed bandwidth does not expire. 
 	UNSUPPORTEDOPERATION_BANDWIDTHNOTEXPIRED = "UnsupportedOperation.BandwidthNotExpired"
+
+	// This bandwidth package does not support this operation.
+	UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 
 	// EIP has already been bound.
 	UNSUPPORTEDOPERATION_BINDEIP = "UnsupportedOperation.BindEIP"
@@ -355,6 +406,12 @@ const (
 
 	// Invalid instance status.
 	UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+
+	// This operation is not allowed under this billing mode.
+	UNSUPPORTEDOPERATION_INVALIDRESOURCEINTERNETCHARGETYPE = "UnsupportedOperation.InvalidResourceInternetChargeType"
+
+	// Bandwidth packages inapplicable to this protocol
+	UNSUPPORTEDOPERATION_INVALIDRESOURCEPROTOCOL = "UnsupportedOperation.InvalidResourceProtocol"
 
 	// Invalid resource status.
 	UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
@@ -425,7 +482,7 @@ const (
 	// EIP is not bound.
 	UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
 
-	// 
+	// Overdue payments are found under this account. Please complete the payment first.
 	UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
 
 	// The specified instance type does not support ENIs.

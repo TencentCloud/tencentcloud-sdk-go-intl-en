@@ -172,6 +172,7 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APMCONFIGINSTANCEID = "FailedOperation.ApmConfigInstanceId"
 //  FAILEDOPERATION_CREATEFUNCTION = "FailedOperation.CreateFunction"
 //  FAILEDOPERATION_NAMESPACE = "FailedOperation.Namespace"
 //  FAILEDOPERATION_OPENSERVICE = "FailedOperation.OpenService"
@@ -185,6 +186,9 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
+//  INVALIDPARAMETERVALUE_APMCONFIG = "InvalidParameterValue.ApmConfig"
+//  INVALIDPARAMETERVALUE_APMCONFIGINSTANCEID = "InvalidParameterValue.ApmConfigInstanceId"
+//  INVALIDPARAMETERVALUE_APMCONFIGREGION = "InvalidParameterValue.ApmConfigRegion"
 //  INVALIDPARAMETERVALUE_CFSPARAMETERDUPLICATE = "InvalidParameterValue.CfsParameterDuplicate"
 //  INVALIDPARAMETERVALUE_CFSPARAMETERERROR = "InvalidParameterValue.CfsParameterError"
 //  INVALIDPARAMETERVALUE_CLS = "InvalidParameterValue.Cls"
@@ -239,6 +243,7 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  RESOURCENOTFOUND_DEMO = "ResourceNotFound.Demo"
 //  RESOURCENOTFOUND_GETCFSMOUNTINSERROR = "ResourceNotFound.GetCfsMountInsError"
 //  RESOURCENOTFOUND_GETCFSNOTMATCH = "ResourceNotFound.GetCfsNotMatch"
+//  RESOURCENOTFOUND_IMAGECONFIG = "ResourceNotFound.ImageConfig"
 //  RESOURCENOTFOUND_LAYER = "ResourceNotFound.Layer"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
@@ -1791,6 +1796,7 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APMCONFIGINSTANCEID = "FailedOperation.ApmConfigInstanceId"
 //  FAILEDOPERATION_DEBUGMODEUPDATETIMEOUTFAIL = "FailedOperation.DebugModeUpdateTimeOutFail"
 //  FAILEDOPERATION_RESERVEDINPROGRESS = "FailedOperation.ReservedInProgress"
 //  FAILEDOPERATION_UPDATEFUNCTIONCONFIGURATION = "FailedOperation.UpdateFunctionConfiguration"
@@ -1798,6 +1804,9 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_APMCONFIG = "InvalidParameterValue.ApmConfig"
+//  INVALIDPARAMETERVALUE_APMCONFIGINSTANCEID = "InvalidParameterValue.ApmConfigInstanceId"
+//  INVALIDPARAMETERVALUE_APMCONFIGREGION = "InvalidParameterValue.ApmConfigRegion"
 //  INVALIDPARAMETERVALUE_CFSPARAMETERDUPLICATE = "InvalidParameterValue.CfsParameterDuplicate"
 //  INVALIDPARAMETERVALUE_CFSPARAMETERERROR = "InvalidParameterValue.CfsParameterError"
 //  INVALIDPARAMETERVALUE_CLS = "InvalidParameterValue.Cls"

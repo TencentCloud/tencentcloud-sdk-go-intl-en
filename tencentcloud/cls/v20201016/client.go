@@ -112,6 +112,7 @@ func NewCreateAlarmResponse() (response *CreateAlarmResponse) {
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_ALARMNOTSUPPORTFORSEARCHLOW = "OperationDenied.AlarmNotSupportForSearchLow"
 //  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) CreateAlarm(request *CreateAlarmRequest) (response *CreateAlarmResponse, err error) {
@@ -342,6 +343,7 @@ func NewCreateIndexResponse() (response *CreateIndexResponse) {
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDINDEXRULEFORSEARCHLOW = "InvalidParameter.InValidIndexRuleForSearchLow"
 //  INVALIDPARAMETER_INDEXCONFLICT = "InvalidParameter.IndexConflict"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -983,6 +985,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_TOPICHASDATAFORMTASK = "OperationDenied.TopicHasDataFormTask"
 //  OPERATIONDENIED_TOPICHASDELIVERFUNCTION = "OperationDenied.TopicHasDeliverFunction"
 //  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
@@ -1845,6 +1848,7 @@ func NewModifyAlarmResponse() (response *ModifyAlarmResponse) {
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_ALARMNOTSUPPORTFORSEARCHLOW = "OperationDenied.AlarmNotSupportForSearchLow"
 //  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
 //  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
@@ -1963,6 +1967,7 @@ func NewModifyIndexResponse() (response *ModifyIndexResponse) {
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDINDEXRULEFORSEARCHLOW = "InvalidParameter.InValidIndexRuleForSearchLow"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
@@ -2301,7 +2306,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// This API is used to write a log to the specified log topic.
+// This API is used to write logs to a specified log topic.
 //
 // 
 //
@@ -2321,55 +2326,25 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// In this mode, data will be written to a target partition that meets the range requirements based on the hash value (X-CLS-HashKey) carried by data. For example, a log source can be bound to a topic partition through `hashkey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
+// In this mode, data will be written to a target partition that meets the range requirements based on the hash value (`X-CLS-HashKey`) carried by data. For example, a log source can be bound to a topic partition through `HashKey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
 //
 // 
 //
 // In addition, CLS allows you to upload logs in the following two modes:
 //
-// 
+//                  
 //
 // 
 //
-// ## Request
+// #### Input parameters (pb binary streams in `body`)
 //
 // 
 //
-// #### Request header parameters
-//
-// 
-//
-// The `X-CLS-HashKey` request header indicates that logs are written to the CLS topic partitions with a range corresponding to the hashkey route, strictly guaranteeing the write sequence of logs to each topic partition for sequential consumption.
-//
-// 
-//
-// | Field | Type | Location | Required | Description |
-//
-// | ------------------ | ------ | ------ | -------- | ------------------------------------------------------------ |
-//
-// | X-CLS-HashKey | string | header | No       | Logs are written to the corresponding topic partition according to `hashkey` |
-//
-// | X-CLS-TopicId      | String | header | Yes       | Topic ID                                                       |                                                 |
-//
-// | Content-Type | String | header | Yes | Protocol type of the request parameter. Currently, only the PB protocol is supported. Please enter "application/octet-stream". |
-//
-// | X-TC-Action | String |	header | Yes | Common parameter. The value used for this API: UploadLog.                   
-//
-// | X-TC-Region | String | header | Yes	  | Common parameter. This parameter is not required for this API.                       
-//
-// | X-TC-Version | String | header | Yes | Common parameter. The value used for this API: 2020-10-16.                  
-//
-// 
-//
-// #### Input parameters (PB protocol)
-//
-// 
-//
-// | Field | Type | Location | Required | Description |
+// | Parameter | Type | Location | Required | Description |
 //
 // | ------------ | ------- | ---- | ---- | ------------------------------------------------------------ |
 //
-// | logGroupList | message | pb    | Yes   | The logGroup list, which describes the encapsulated log groups. No more than five `logGroup` values are recommended.                     |
+// | logGroupList | message | pb    | Yes   | The `logGroup` list, which describes the encapsulated log groups. We recommend you enter up to 5 `logGroup` values.                     |
 //
 // 
 //
@@ -2377,19 +2352,19 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// | Field | Required | Description |
+// | Parameter     | Required | Description                                                         |
 //
 // | ----------- | -------- | ------------------------------------------------------------ |
 //
 // | logs        | Yes       | Log array consisting of multiple `Log` values. The `Log` indicates a log, and a `LogGroup` can contain up to 10,000 `Log` values. |
 //
-// | contextFlow | No       | Unique LogGroup ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: a 64-bit integer hex string that continuously increases, such as "102700A66102516A-59F59".                        |
+// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: a 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
 //
 // | filename    | No       | Log filename                                                   |
 //
-// | source      | No       | Log source, which is generally the server IP                           |
+// | source      | No       | Log source, which is generally the machine IP                           |
 //
-// | logTags     | No       | Tag list of the log                                               |
+// | logTags     | No       | Tag list of logs                                               |
 //
 // 
 //
@@ -2397,13 +2372,13 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// | Field | Required | Description |
+// | Parameter | Required | Description |
 //
 // | -------- | -------- | ------------------------------------------------------------ |
 //
-// | time | Yes | UNIX timestamp of log time in seconds or milliseconds (recommended) |
+// | time | Yes | Unix timestamp of log time in seconds or milliseconds (recommended) |
 //
-// | contents | No | Log content in `key-value` format. A log can contain multiple `key-value` pairs. |
+// | contents | No | Log content in key-value format. A log can contain multiple key-value pairs. |
 //
 // 
 //
@@ -2411,13 +2386,13 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// | Field | Required | Description |
+// | Parameter | Required | Description |
 //
 // | ------ | -------- | ------------------------------------------------------------ |
 //
 // | key    | Yes       | Key of a field group in one log, which cannot start with `_`.                 |
 //
-// | value  | Yes       | Value of a field group, which cannot exceed 1 MB in one log. The total value cannot exceed 5 MB in `LogGroup`. |
+// | value  | Yes       | Value of a field group. The `value` of one log cannot exceed 1 MB and the total `value` in `LogGroup` cannot exceed 5 MB. |
 //
 // 
 //
@@ -2425,21 +2400,21 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// | Field | Required | Description |
+// | Parameter     | Required | Description                                                         |
 //
 // | ------ | -------- | -------------------------------- |
 //
-// | key    | Yes       | Key of a custom tag                 |
+// | key    | Yes       | Key of a custom tag             |
 //
 // | value  | Yes       | Value corresponding to the custom tag key |
 //
 // 
 //
-// ## PB Compilation Sample
+// ## pb Compilation Sample
 //
 // 
 //
-// This sample describes how to use the protoc compiler to compile the PB description file into a log upload API in C++.
+// This sample describes how to use the protoc compiler to compile the pb description file into a log upload API in C++.
 //
 // 
 //
@@ -2447,11 +2422,11 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// #### 1. Install Protocol Buffer
+// #### 1. Install Protocol Buffers
 //
 // 
 //
-// Download [Protocol Buffer](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and enter the directory:
+// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and enter the directory:
 //
 // 
 //
@@ -2493,23 +2468,23 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// #### 2. Create a PB description file
+// #### 2. Create a pb description file
 //
 // 
 //
-// A PB description file is an agreed-on data exchange format for communication. To upload logs, please compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, please see [protoc](https://github.com/protocolbuffers/protobuf).
+// A pb description file is an agreed-on data interchange format for communication. To upload logs, please compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, please see [protoc](https://github.com/protocolbuffers/protobuf).
 //
 // 
 //
-// Create a PB message description file `cls.proto` based on the PB data format content specified by CLS.
+// Create a pb message description file `cls.proto` based on the pb data format content specified by CLS.
 //
 // 
 //
-// > !The PB description file content cannot be modified, and the filename must end with `.proto`.
+// > !The pb description file content cannot be modified, and the filename must end with `.proto`.
 //
 // 
 //
-// The content of `cls.proto` (PB description file) is as follows:
+// The content of `cls.proto` (pb description file) is as follows:
 //
 // 
 //
@@ -2535,7 +2510,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 //     required int64   time     = 1; // Unix timestamp
 //
-//     repeated Content contents = 2; // Multiple `key-value` pairs in one log
+//     repeated Content contents = 2; // Multiple key-value pairs in one log
 //
 // }
 //
@@ -2563,7 +2538,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 //     optional string filename    = 3; // Log filename
 //
-//     optional string source      = 4; // Log source, which is generally the server IP
+//     optional string source      = 4; // Log source, which is generally the machine IP
 //
 //     repeated LogTag logTags     = 5;
 //
@@ -2599,11 +2574,11 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// > ?`--cpp_out=./` indicates that the file will be compiled in cpp format and output to the current directory. `./cls.proto` indicates the `cls.proto` description file in the current directory.
+// > ?`--cpp_out=./ ` indicates that the file will be compiled in cpp format and output to the current directory. `./cls.proto` indicates the `cls.proto` description file in the current directory.
 //
 // 
 //
-// After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and [cls.pb.cc](http://cls.pb.cc) code implementation file as shown below:
+// After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and `cls.pb.cc` code implementation file as shown below:
 //
 // 
 //
@@ -2619,11 +2594,11 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// #### 4. Call
+// #### 4. Call the API
 //
 // 
 //
-// Import the generated `cls.pb.h` header file into the code and call the API for data format encapsulation.
+// Import the generated `cls.pb.h` header file into the code and call the API for data encapsulation.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
