@@ -196,6 +196,7 @@ func NewCloseDBExtranetAccessResponse() (response *CloseDBExtranetAccessResponse
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INTERNALERROR_WANSERVICEFAILED = "InternalError.WanServiceFailed"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  RESOURCENOTFOUND_NOINSTANCEFOUND = "ResourceNotFound.NoInstanceFound"
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
@@ -510,6 +511,7 @@ func NewDescribeDBLogFilesResponse() (response *DescribeDBLogFilesResponse) {
 //  INTERNALERROR_HDFSERROR = "InternalError.HDFSError"
 //  INTERNALERROR_INNERCONFIGURATIONMISSING = "InternalError.InnerConfigurationMissing"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_SHARDRESOURCEIDNOTFOUND = "InvalidParameter.ShardResourceIdNotFound"
 //  RESOURCEUNAVAILABLE_COSAPIFAILED = "ResourceUnavailable.CosApiFailed"
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
@@ -745,6 +747,7 @@ func NewDescribeDBSecurityGroupsResponse() (response *DescribeDBSecurityGroupsRe
 //  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  RESOURCENOTFOUND_PRODUCTCONFIGNOTEXISTEDERROR = "ResourceNotFound.ProductConfigNotExistedError"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -820,6 +823,7 @@ func NewDescribeDatabasesResponse() (response *DescribeDatabasesResponse) {
 //  INTERNALERROR_GETDBLISTFAILED = "InternalError.GetDbListFailed"
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response *DescribeDatabasesResponse, err error) {
     if request == nil {
         request = NewDescribeDatabasesRequest()
@@ -1435,6 +1439,46 @@ func (c *Client) ModifyDBParameters(request *ModifyDBParametersRequest) (respons
     return
 }
 
+func NewModifyDBSyncModeRequest() (request *ModifyDBSyncModeRequest) {
+    request = &ModifyDBSyncModeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mariadb", APIVersion, "ModifyDBSyncMode")
+    
+    return
+}
+
+func NewModifyDBSyncModeResponse() (response *ModifyDBSyncModeResponse) {
+    response = &ModifyDBSyncModeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDBSyncMode
+// This API is used to modify the sync mode of a TencentDB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_GETINSTANCEINFOFAILED = "InternalError.GetInstanceInfoFailed"
+//  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_BADSYNCMODE = "InvalidParameterValue.BadSyncMode"
+//  RESOURCENOTFOUND_NOINSTANCEFOUND = "ResourceNotFound.NoInstanceFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
+func (c *Client) ModifyDBSyncMode(request *ModifyDBSyncModeRequest) (response *ModifyDBSyncModeResponse, err error) {
+    if request == nil {
+        request = NewModifyDBSyncModeRequest()
+    }
+    response = NewModifyDBSyncModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyLogFileRetentionPeriodRequest() (request *ModifyLogFileRetentionPeriodRequest) {
     request = &ModifyLogFileRetentionPeriodRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1468,6 +1512,38 @@ func (c *Client) ModifyLogFileRetentionPeriod(request *ModifyLogFileRetentionPer
         request = NewModifyLogFileRetentionPeriodRequest()
     }
     response = NewModifyLogFileRetentionPeriodResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySyncTaskAttributeRequest() (request *ModifySyncTaskAttributeRequest) {
+    request = &ModifySyncTaskAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mariadb", APIVersion, "ModifySyncTaskAttribute")
+    
+    return
+}
+
+func NewModifySyncTaskAttributeResponse() (response *ModifySyncTaskAttributeResponse) {
+    response = &ModifySyncTaskAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifySyncTaskAttribute
+// This API is used to modify sync task attributes (currently, only the task name can be modified).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  RESOURCENOTFOUND_SYNCTASKDELETED = "ResourceNotFound.SyncTaskDeleted"
+func (c *Client) ModifySyncTaskAttribute(request *ModifySyncTaskAttributeRequest) (response *ModifySyncTaskAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifySyncTaskAttributeRequest()
+    }
+    response = NewModifySyncTaskAttributeResponse()
     err = c.Send(request, response)
     return
 }
