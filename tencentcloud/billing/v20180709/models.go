@@ -386,11 +386,35 @@ type DescribeBillDetailRequest struct {
 	// Queries information on a specified resource
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
-	// 
+	// Action type to query. Valid values:
+	// Purchase
+	// Renewal
+	// Modify
+	// Refund
+	// Deduction
+	// Hourly settlement
+	// Daily settlement
+	// Monthly settlement
+	// Offline project deduction
+	// Offline deduction
+	// adjust-CR
+	// adjust-DR
+	// One-off RI Fee
+	// Spot
+	// Hourly RI fee
+	// New monthly subscription
+	// Monthly subscription renewal
+	// Monthly subscription specification adjustment
+	// Monthly subscription specification adjustment
+	// Monthly subscription refund
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 
 	// Project ID: ID of the project to which the resource belongs
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Business code
+	// Note: To query business codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 }
 
 func (r *DescribeBillDetailRequest) ToJsonString() string {
@@ -417,6 +441,7 @@ func (r *DescribeBillDetailRequest) FromJsonString(s string) error {
 	delete(f, "ResourceId")
 	delete(f, "ActionType")
 	delete(f, "ProjectId")
+	delete(f, "BusinessCode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillDetailRequest has unknown keys!", "")
 	}
@@ -497,6 +522,10 @@ type DescribeBillResourceSummaryRequest struct {
 
 	// Billing mode. Valid values: `prePay` (prepaid), `postPay` (postpaid)
 	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Business code
+	// Note: To query business codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 }
 
 func (r *DescribeBillResourceSummaryRequest) ToJsonString() string {
@@ -519,6 +548,7 @@ func (r *DescribeBillResourceSummaryRequest) FromJsonString(s string) error {
 	delete(f, "ActionType")
 	delete(f, "ResourceId")
 	delete(f, "PayMode")
+	delete(f, "BusinessCode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillResourceSummaryRequest has unknown keys!", "")
 	}

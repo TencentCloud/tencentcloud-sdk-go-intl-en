@@ -5760,6 +5760,10 @@ type MediaProcessTaskTranscodeResult struct {
 	// Output of a transcoding task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *MediaTranscodeItem `json:"Output,omitempty" name:"Output"`
+
+	// Transcoding progress. Value range: 0-100
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type MediaSampleSnapshotItem struct {

@@ -1636,10 +1636,10 @@ func (r *CreateIPStrategyResponse) FromJsonString(s string) error {
 type CreatePluginRequest struct {
 	*tchttp.BaseRequest
 
-	// Custom plugin name. A plugin name contain up to 50 characters out of a-z, A-Z, 0-9, and _, which must begin with a letter and end with a letter or a number.
+	// Custom plugin name. A plugin name should contain 2-50 characters out of a-z, A-Z, 0-9, and _, which must begin with a letter and end with a letter or a number.
 	PluginName *string `json:"PluginName,omitempty" name:"PluginName"`
 
-	// Plugin type. Valid value: `IPControl`.
+	// Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`
 	PluginType *string `json:"PluginType,omitempty" name:"PluginType"`
 
 	// Plugin definition statement in json format
@@ -4178,6 +4178,14 @@ type DescribeServiceResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		SetType *string `json:"SetType,omitempty" name:"SetType"`
 
+		// Cluster type for service deployment
+	// Note: this field may return null, indicating that no valid values found.
+		DeploymentType *string `json:"DeploymentType,omitempty" name:"DeploymentType"`
+
+		// Whether it’s for special usage
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		SpecialUse *string `json:"SpecialUse,omitempty" name:"SpecialUse"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -4773,7 +4781,7 @@ type DomainSetList struct {
 	// Domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Domain name resolution status. True: success; False: failure.
+	// Domain name resolution status. `1`: normal, `0`: failed
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Certificate ID.
@@ -6287,6 +6295,10 @@ type Service struct {
 	// Cluster type
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SetType *string `json:"SetType,omitempty" name:"SetType"`
+
+	// Cluster type for service deployment
+	// Note: this field may return null, indicating that no valid values found.
+	DeploymentType *string `json:"DeploymentType,omitempty" name:"DeploymentType"`
 }
 
 type ServiceConfig struct {
