@@ -207,6 +207,12 @@ type BGPIPInstance struct {
 	// Recommended domain name for clients to access.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Whether to enable Sec-MCA. Valid values: `1` (enabled) and `0` (disabled).
+	DamDDoSStatus *uint64 `json:"DamDDoSStatus,omitempty" name:"DamDDoSStatus"`
+
+	// 
+	V6Flag *uint64 `json:"V6Flag,omitempty" name:"V6Flag"`
 }
 
 type BGPIPInstanceSpecification struct {
@@ -1646,7 +1652,7 @@ type DescribeCCTrendRequest struct {
 	// End of the time range for the query
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Metric. Valid values: `inqps`: total peak requests; `dropqps`: peak attack requests
+	// Metric. Valid values: `inqps` (total QPS peaks), `dropqps` (attack QPS peaks), `incount` (total number of requests), and `dropcount` (number of attack requests).
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 	// (Optional) Domain name
@@ -1711,7 +1717,7 @@ type DescribeCCTrendResponse struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		Id *string `json:"Id,omitempty" name:"Id"`
 
-		// Metric. Valid values: `inqps`: total peak requests; `dropqps`: peak attack requests
+		// Metric. Valid values: `inqps` (total QPS peaks), `dropqps` (attack QPS peaks), `incount` (total number of requests), and `dropcount` (number of attack requests).
 		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1975,6 +1981,9 @@ type DescribeListBGPIPInstancesRequest struct {
 
 	// Anti-DDoS Advanced instance binding status filter. Valid values: `BINDING`, `BIND`, `UNBINDING`, `UNBIND`. This filter is only valid when `FilterEipType = 1`.
 	FilterEipEipAddressStatus []*string `json:"FilterEipEipAddressStatus,omitempty" name:"FilterEipEipAddressStatus"`
+
+	// Whether to obtain only Anti-DDoS instances with Sec-MCA enabled. Valid values: `1` (only obtain Anti-DDoS instances with Sec-MCA enabled) and `0` (obtain other Anti-DDoS instances).
+	FilterDamDDoSStatus *int64 `json:"FilterDamDDoSStatus,omitempty" name:"FilterDamDDoSStatus"`
 }
 
 func (r *DescribeListBGPIPInstancesRequest) ToJsonString() string {
@@ -1998,6 +2007,7 @@ func (r *DescribeListBGPIPInstancesRequest) FromJsonString(s string) error {
 	delete(f, "FilterName")
 	delete(f, "FilterEipType")
 	delete(f, "FilterEipEipAddressStatus")
+	delete(f, "FilterDamDDoSStatus")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListBGPIPInstancesRequest has unknown keys!", "")
 	}
@@ -3002,6 +3012,19 @@ type KeyValue struct {
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
+type L4RuleSource struct {
+
+	// IP or domain name for forwarding.
+	Source *string `json:"Source,omitempty" name:"Source"`
+
+	// Weight. Value range: [0,100].
+	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
+
+	// 8000
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+}
+
 type Layer4Rule struct {
 
 	// Real server port. Value range: 1–65535.
@@ -3203,6 +3226,63 @@ func (r *ModifyDomainUsrNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyNewDomainRulesRequest struct {
+	*tchttp.BaseRequest
+
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Domain name forwarding rule.
+	Rule *NewL7RuleEntry `json:"Rule,omitempty" name:"Rule"`
+}
+
+func (r *ModifyNewDomainRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNewDomainRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Business")
+	delete(f, "Id")
+	delete(f, "Rule")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNewDomainRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNewDomainRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Success code.
+		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyNewDomainRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNewDomainRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyPacketFilterConfigRequest struct {
 	*tchttp.BaseRequest
 
@@ -3251,6 +3331,82 @@ func (r *ModifyPacketFilterConfigResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyPacketFilterConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type NewL7RuleEntry struct {
+
+	// Session persistence duration, in seconds.
+	KeepTime *uint64 `json:"KeepTime,omitempty" name:"KeepTime"`
+
+	// Load balancing method. Valid value: `1` (weighed polling).
+	LbType *uint64 `json:"LbType,omitempty" name:"LbType"`
+
+	// List of origins
+	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList"`
+
+	// Whether session persistence is enabled. Valid values: `0` (disabled) and `1` (enabled).
+	KeepEnable *uint64 `json:"KeepEnable,omitempty" name:"KeepEnable"`
+
+	// Forwarding domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Forwarding protocol. Valid values: `http` and `https`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Forwarding method. Valid values: `1` (by domain name); `2` (by IP).
+	SourceType *uint64 `json:"SourceType,omitempty" name:"SourceType"`
+
+	// Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disabled) and `1` (enabled). It defaults to `0`.
+	HttpsToHttpEnable *uint64 `json:"HttpsToHttpEnable,omitempty" name:"HttpsToHttpEnable"`
+
+	// Rule status. Valid values: `0` (the rule was successfully configured), `1` (configuring the rule), `2` (rule configuration failed), `3` (deleting the rule), `5` (failed to delete rule), `6` (rule awaiting configuration), `7` (rule awaiting deletion), and `8` (rule awaiting certificate configuration).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// CC protection level based on HTTPS.
+	CCLevel *string `json:"CCLevel,omitempty" name:"CCLevel"`
+
+	// CC protection status based on HTTPS. Valid values: `0` (disabled) and `1` (enabled).
+	CCEnable *uint64 `json:"CCEnable,omitempty" name:"CCEnable"`
+
+	// CC protection threshold based on HTTPS.
+	CCThreshold *uint64 `json:"CCThreshold,omitempty" name:"CCThreshold"`
+
+	// Region code.
+	Region *uint64 `json:"Region,omitempty" name:"Region"`
+
+	// Rule description.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// [Disused] When the certificate is an external certificate, the certificate content should be provided here. 
+	Cert *string `json:"Cert,omitempty" name:"Cert"`
+
+	// Modification time.
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// Rule ID. This field is not required for adding a rule, but is required for modifying or deleting a rule.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Anti-DDoS instance IP address.
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// [Disused] When the certificate is an external certificate, the certificate key should be provided here. 
+	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
+
+	// Certificate source. When the forwarding protocol is HTTPS, this field must be set to `2` (Tencent Cloud managed certificate), and for HTTP protocol, it can be set to `0`.
+	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
+
+	// Access port number.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VirtualPort *uint64 `json:"VirtualPort,omitempty" name:"VirtualPort"`
+
+	// CC protection status. Valid values: `0` (disabled) and `1` (enabled).
+	CCStatus *uint64 `json:"CCStatus,omitempty" name:"CCStatus"`
+
+	// When the certificate is managed by Tencent Cloud, this field must be set to the ID of the managed certificate.
+	SSLId *string `json:"SSLId,omitempty" name:"SSLId"`
+
+	// Resource ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
 type PackInfo struct {

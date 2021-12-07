@@ -864,7 +864,7 @@ func NewDescribeCCTrendResponse() (response *DescribeCCTrendResponse) {
 }
 
 // DescribeCCTrend
-// This API is used to get CC attack data, including total peak requests (QPS) and attack requests (QPS).
+// This API is used to get CC attack data, including total QPS peaks, attack QPS, total number of requests and number of attack requests.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1640,6 +1640,37 @@ func (c *Client) ModifyDomainUsrName(request *ModifyDomainUsrNameRequest) (respo
     return
 }
 
+func NewModifyNewDomainRulesRequest() (request *ModifyNewDomainRulesRequest) {
+    request = &ModifyNewDomainRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "ModifyNewDomainRules")
+    
+    return
+}
+
+func NewModifyNewDomainRulesResponse() (response *ModifyNewDomainRulesResponse) {
+    response = &ModifyNewDomainRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyNewDomainRules
+// This API is used to modify layer-7 forwarding rules.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNewDomainRules(request *ModifyNewDomainRulesRequest) (response *ModifyNewDomainRulesResponse, err error) {
+    if request == nil {
+        request = NewModifyNewDomainRulesRequest()
+    }
+    response = NewModifyNewDomainRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyPacketFilterConfigRequest() (request *ModifyPacketFilterConfigRequest) {
     request = &ModifyPacketFilterConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1660,7 +1691,8 @@ func NewModifyPacketFilterConfigResponse() (response *ModifyPacketFilterConfigRe
 // This API is used to modify Anti-DDoS feature filtering rules.
 //
 // error code that may be returned:
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyPacketFilterConfig(request *ModifyPacketFilterConfigRequest) (response *ModifyPacketFilterConfigResponse, err error) {
     if request == nil {
         request = NewModifyPacketFilterConfigRequest()

@@ -1936,6 +1936,68 @@ func (c *Client) DescribeVpcCniPodLimits(request *DescribeVpcCniPodLimitsRequest
     return
 }
 
+func NewDisableClusterDeletionProtectionRequest() (request *DisableClusterDeletionProtectionRequest) {
+    request = &DisableClusterDeletionProtectionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DisableClusterDeletionProtection")
+    
+    return
+}
+
+func NewDisableClusterDeletionProtectionResponse() (response *DisableClusterDeletionProtectionResponse) {
+    response = &DisableClusterDeletionProtectionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DisableClusterDeletionProtection
+// This API is used to disable cluster deletion protection.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DisableClusterDeletionProtection(request *DisableClusterDeletionProtectionRequest) (response *DisableClusterDeletionProtectionResponse, err error) {
+    if request == nil {
+        request = NewDisableClusterDeletionProtectionRequest()
+    }
+    response = NewDisableClusterDeletionProtectionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableClusterDeletionProtectionRequest() (request *EnableClusterDeletionProtectionRequest) {
+    request = &EnableClusterDeletionProtectionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "EnableClusterDeletionProtection")
+    
+    return
+}
+
+func NewEnableClusterDeletionProtectionResponse() (response *EnableClusterDeletionProtectionResponse) {
+    response = &EnableClusterDeletionProtectionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// EnableClusterDeletionProtection
+// This API is used to enable cluster deletion protection.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) EnableClusterDeletionProtection(request *EnableClusterDeletionProtectionRequest) (response *EnableClusterDeletionProtectionResponse, err error) {
+    if request == nil {
+        request = NewEnableClusterDeletionProtectionRequest()
+    }
+    response = NewEnableClusterDeletionProtectionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableVpcCniNetworkTypeRequest() (request *EnableVpcCniNetworkTypeRequest) {
     request = &EnableVpcCniNetworkTypeRequest{
         BaseRequest: &tchttp.BaseRequest{},
