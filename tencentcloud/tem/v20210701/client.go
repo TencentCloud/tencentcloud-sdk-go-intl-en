@@ -49,6 +49,7 @@ func NewCreateApplicationRequest() (request *CreateApplicationRequest) {
     }
     request.Init().WithApiInfo("tem", APIVersion, "CreateApplication")
     
+    
     return
 }
 
@@ -69,6 +70,7 @@ func (c *Client) CreateApplication(request *CreateApplicationRequest) (response 
     if request == nil {
         request = NewCreateApplicationRequest()
     }
+    
     response = NewCreateApplicationResponse()
     err = c.Send(request, response)
     return
@@ -79,6 +81,7 @@ func NewCreateCosTokenRequest() (request *CreateCosTokenRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "CreateCosToken")
+    
     
     return
 }
@@ -100,6 +103,7 @@ func (c *Client) CreateCosToken(request *CreateCosTokenRequest) (response *Creat
     if request == nil {
         request = NewCreateCosTokenRequest()
     }
+    
     response = NewCreateCosTokenResponse()
     err = c.Send(request, response)
     return
@@ -110,6 +114,7 @@ func NewCreateEnvironmentRequest() (request *CreateEnvironmentRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "CreateEnvironment")
+    
     
     return
 }
@@ -131,6 +136,7 @@ func (c *Client) CreateEnvironment(request *CreateEnvironmentRequest) (response 
     if request == nil {
         request = NewCreateEnvironmentRequest()
     }
+    
     response = NewCreateEnvironmentResponse()
     err = c.Send(request, response)
     return
@@ -141,6 +147,7 @@ func NewCreateResourceRequest() (request *CreateResourceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "CreateResource")
+    
     
     return
 }
@@ -162,6 +169,7 @@ func (c *Client) CreateResource(request *CreateResourceRequest) (response *Creat
     if request == nil {
         request = NewCreateResourceRequest()
     }
+    
     response = NewCreateResourceResponse()
     err = c.Send(request, response)
     return
@@ -172,6 +180,7 @@ func NewDeleteIngressRequest() (request *DeleteIngressRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DeleteIngress")
+    
     
     return
 }
@@ -193,6 +202,7 @@ func (c *Client) DeleteIngress(request *DeleteIngressRequest) (response *DeleteI
     if request == nil {
         request = NewDeleteIngressRequest()
     }
+    
     response = NewDeleteIngressResponse()
     err = c.Send(request, response)
     return
@@ -203,6 +213,7 @@ func NewDeployApplicationRequest() (request *DeployApplicationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DeployApplication")
+    
     
     return
 }
@@ -224,6 +235,7 @@ func (c *Client) DeployApplication(request *DeployApplicationRequest) (response 
     if request == nil {
         request = NewDeployApplicationRequest()
     }
+    
     response = NewDeployApplicationResponse()
     err = c.Send(request, response)
     return
@@ -234,6 +246,7 @@ func NewDescribeApplicationPodsRequest() (request *DescribeApplicationPodsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DescribeApplicationPods")
+    
     
     return
 }
@@ -255,6 +268,7 @@ func (c *Client) DescribeApplicationPods(request *DescribeApplicationPodsRequest
     if request == nil {
         request = NewDescribeApplicationPodsRequest()
     }
+    
     response = NewDescribeApplicationPodsResponse()
     err = c.Send(request, response)
     return
@@ -265,6 +279,7 @@ func NewDescribeEnvironmentsRequest() (request *DescribeEnvironmentsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DescribeEnvironments")
+    
     
     return
 }
@@ -286,6 +301,7 @@ func (c *Client) DescribeEnvironments(request *DescribeEnvironmentsRequest) (res
     if request == nil {
         request = NewDescribeEnvironmentsRequest()
     }
+    
     response = NewDescribeEnvironmentsResponse()
     err = c.Send(request, response)
     return
@@ -296,6 +312,7 @@ func NewDescribeIngressRequest() (request *DescribeIngressRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DescribeIngress")
+    
     
     return
 }
@@ -317,6 +334,7 @@ func (c *Client) DescribeIngress(request *DescribeIngressRequest) (response *Des
     if request == nil {
         request = NewDescribeIngressRequest()
     }
+    
     response = NewDescribeIngressResponse()
     err = c.Send(request, response)
     return
@@ -327,6 +345,7 @@ func NewDescribeIngressesRequest() (request *DescribeIngressesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DescribeIngresses")
+    
     
     return
 }
@@ -348,6 +367,7 @@ func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response 
     if request == nil {
         request = NewDescribeIngressesRequest()
     }
+    
     response = NewDescribeIngressesResponse()
     err = c.Send(request, response)
     return
@@ -358,6 +378,7 @@ func NewDescribeRelatedIngressesRequest() (request *DescribeRelatedIngressesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "DescribeRelatedIngresses")
+    
     
     return
 }
@@ -379,6 +400,7 @@ func (c *Client) DescribeRelatedIngresses(request *DescribeRelatedIngressesReque
     if request == nil {
         request = NewDescribeRelatedIngressesRequest()
     }
+    
     response = NewDescribeRelatedIngressesResponse()
     err = c.Send(request, response)
     return
@@ -389,6 +411,7 @@ func NewGenerateApplicationPackageDownloadUrlRequest() (request *GenerateApplica
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "GenerateApplicationPackageDownloadUrl")
+    
     
     return
 }
@@ -410,6 +433,7 @@ func (c *Client) GenerateApplicationPackageDownloadUrl(request *GenerateApplicat
     if request == nil {
         request = NewGenerateApplicationPackageDownloadUrlRequest()
     }
+    
     response = NewGenerateApplicationPackageDownloadUrlResponse()
     err = c.Send(request, response)
     return
@@ -420,6 +444,7 @@ func NewModifyApplicationInfoRequest() (request *ModifyApplicationInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "ModifyApplicationInfo")
+    
     
     return
 }
@@ -440,6 +465,7 @@ func (c *Client) ModifyApplicationInfo(request *ModifyApplicationInfoRequest) (r
     if request == nil {
         request = NewModifyApplicationInfoRequest()
     }
+    
     response = NewModifyApplicationInfoResponse()
     err = c.Send(request, response)
     return
@@ -450,6 +476,7 @@ func NewModifyEnvironmentRequest() (request *ModifyEnvironmentRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "ModifyEnvironment")
+    
     
     return
 }
@@ -470,6 +497,7 @@ func (c *Client) ModifyEnvironment(request *ModifyEnvironmentRequest) (response 
     if request == nil {
         request = NewModifyEnvironmentRequest()
     }
+    
     response = NewModifyEnvironmentResponse()
     err = c.Send(request, response)
     return
@@ -480,6 +508,7 @@ func NewModifyIngressRequest() (request *ModifyIngressRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "ModifyIngress")
+    
     
     return
 }
@@ -500,6 +529,7 @@ func (c *Client) ModifyIngress(request *ModifyIngressRequest) (response *ModifyI
     if request == nil {
         request = NewModifyIngressRequest()
     }
+    
     response = NewModifyIngressResponse()
     err = c.Send(request, response)
     return
@@ -510,6 +540,7 @@ func NewRestartApplicationPodRequest() (request *RestartApplicationPodRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tem", APIVersion, "RestartApplicationPod")
+    
     
     return
 }
@@ -530,6 +561,7 @@ func (c *Client) RestartApplicationPod(request *RestartApplicationPodRequest) (r
     if request == nil {
         request = NewRestartApplicationPodRequest()
     }
+    
     response = NewRestartApplicationPodResponse()
     err = c.Send(request, response)
     return

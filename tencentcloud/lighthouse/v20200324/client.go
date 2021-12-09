@@ -49,6 +49,7 @@ func NewApplyInstanceSnapshotRequest() (request *ApplyInstanceSnapshotRequest) {
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ApplyInstanceSnapshot")
     
+    
     return
 }
 
@@ -88,6 +89,7 @@ func (c *Client) ApplyInstanceSnapshot(request *ApplyInstanceSnapshotRequest) (r
     if request == nil {
         request = NewApplyInstanceSnapshotRequest()
     }
+    
     response = NewApplyInstanceSnapshotResponse()
     err = c.Send(request, response)
     return
@@ -98,6 +100,7 @@ func NewAssociateInstancesKeyPairsRequest() (request *AssociateInstancesKeyPairs
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "AssociateInstancesKeyPairs")
+    
     
     return
 }
@@ -146,6 +149,7 @@ func (c *Client) AssociateInstancesKeyPairs(request *AssociateInstancesKeyPairsR
     if request == nil {
         request = NewAssociateInstancesKeyPairsRequest()
     }
+    
     response = NewAssociateInstancesKeyPairsResponse()
     err = c.Send(request, response)
     return
@@ -156,6 +160,7 @@ func NewAttachCcnRequest() (request *AttachCcnRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "AttachCcn")
+    
     
     return
 }
@@ -181,6 +186,7 @@ func (c *Client) AttachCcn(request *AttachCcnRequest) (response *AttachCcnRespon
     if request == nil {
         request = NewAttachCcnRequest()
     }
+    
     response = NewAttachCcnResponse()
     err = c.Send(request, response)
     return
@@ -191,6 +197,7 @@ func NewCreateBlueprintRequest() (request *CreateBlueprintRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "CreateBlueprint")
+    
     
     return
 }
@@ -217,6 +224,7 @@ func (c *Client) CreateBlueprint(request *CreateBlueprintRequest) (response *Cre
     if request == nil {
         request = NewCreateBlueprintRequest()
     }
+    
     response = NewCreateBlueprintResponse()
     err = c.Send(request, response)
     return
@@ -227,6 +235,7 @@ func NewCreateFirewallRulesRequest() (request *CreateFirewallRulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "CreateFirewallRules")
+    
     
     return
 }
@@ -277,6 +286,7 @@ func (c *Client) CreateFirewallRules(request *CreateFirewallRulesRequest) (respo
     if request == nil {
         request = NewCreateFirewallRulesRequest()
     }
+    
     response = NewCreateFirewallRulesResponse()
     err = c.Send(request, response)
     return
@@ -287,6 +297,7 @@ func NewCreateInstanceSnapshotRequest() (request *CreateInstanceSnapshotRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "CreateInstanceSnapshot")
+    
     
     return
 }
@@ -318,6 +329,7 @@ func (c *Client) CreateInstanceSnapshot(request *CreateInstanceSnapshotRequest) 
     if request == nil {
         request = NewCreateInstanceSnapshotRequest()
     }
+    
     response = NewCreateInstanceSnapshotResponse()
     err = c.Send(request, response)
     return
@@ -328,6 +340,7 @@ func NewCreateKeyPairRequest() (request *CreateKeyPairRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "CreateKeyPair")
+    
     
     return
 }
@@ -353,6 +366,7 @@ func (c *Client) CreateKeyPair(request *CreateKeyPairRequest) (response *CreateK
     if request == nil {
         request = NewCreateKeyPairRequest()
     }
+    
     response = NewCreateKeyPairResponse()
     err = c.Send(request, response)
     return
@@ -363,6 +377,7 @@ func NewDeleteBlueprintsRequest() (request *DeleteBlueprintsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DeleteBlueprints")
+    
     
     return
 }
@@ -393,6 +408,7 @@ func (c *Client) DeleteBlueprints(request *DeleteBlueprintsRequest) (response *D
     if request == nil {
         request = NewDeleteBlueprintsRequest()
     }
+    
     response = NewDeleteBlueprintsResponse()
     err = c.Send(request, response)
     return
@@ -403,6 +419,7 @@ func NewDeleteFirewallRulesRequest() (request *DeleteFirewallRulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DeleteFirewallRules")
+    
     
     return
 }
@@ -450,6 +467,7 @@ func (c *Client) DeleteFirewallRules(request *DeleteFirewallRulesRequest) (respo
     if request == nil {
         request = NewDeleteFirewallRulesRequest()
     }
+    
     response = NewDeleteFirewallRulesResponse()
     err = c.Send(request, response)
     return
@@ -460,6 +478,7 @@ func NewDeleteKeyPairsRequest() (request *DeleteKeyPairsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DeleteKeyPairs")
+    
     
     return
 }
@@ -485,6 +504,7 @@ func (c *Client) DeleteKeyPairs(request *DeleteKeyPairsRequest) (response *Delet
     if request == nil {
         request = NewDeleteKeyPairsRequest()
     }
+    
     response = NewDeleteKeyPairsResponse()
     err = c.Send(request, response)
     return
@@ -495,6 +515,7 @@ func NewDeleteSnapshotsRequest() (request *DeleteSnapshotsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DeleteSnapshots")
+    
     
     return
 }
@@ -524,6 +545,7 @@ func (c *Client) DeleteSnapshots(request *DeleteSnapshotsRequest) (response *Del
     if request == nil {
         request = NewDeleteSnapshotsRequest()
     }
+    
     response = NewDeleteSnapshotsResponse()
     err = c.Send(request, response)
     return
@@ -534,6 +556,7 @@ func NewDescribeBlueprintInstancesRequest() (request *DescribeBlueprintInstances
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeBlueprintInstances")
+    
     
     return
 }
@@ -560,6 +583,7 @@ func (c *Client) DescribeBlueprintInstances(request *DescribeBlueprintInstancesR
     if request == nil {
         request = NewDescribeBlueprintInstancesRequest()
     }
+    
     response = NewDescribeBlueprintInstancesResponse()
     err = c.Send(request, response)
     return
@@ -570,6 +594,7 @@ func NewDescribeBlueprintsRequest() (request *DescribeBlueprintsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeBlueprints")
+    
     
     return
 }
@@ -605,6 +630,7 @@ func (c *Client) DescribeBlueprints(request *DescribeBlueprintsRequest) (respons
     if request == nil {
         request = NewDescribeBlueprintsRequest()
     }
+    
     response = NewDescribeBlueprintsResponse()
     err = c.Send(request, response)
     return
@@ -615,6 +641,7 @@ func NewDescribeBundlesRequest() (request *DescribeBundlesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeBundles")
+    
     
     return
 }
@@ -652,6 +679,7 @@ func (c *Client) DescribeBundles(request *DescribeBundlesRequest) (response *Des
     if request == nil {
         request = NewDescribeBundlesRequest()
     }
+    
     response = NewDescribeBundlesResponse()
     err = c.Send(request, response)
     return
@@ -662,6 +690,7 @@ func NewDescribeCcnAttachedInstancesRequest() (request *DescribeCcnAttachedInsta
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeCcnAttachedInstances")
+    
     
     return
 }
@@ -685,6 +714,7 @@ func (c *Client) DescribeCcnAttachedInstances(request *DescribeCcnAttachedInstan
     if request == nil {
         request = NewDescribeCcnAttachedInstancesRequest()
     }
+    
     response = NewDescribeCcnAttachedInstancesResponse()
     err = c.Send(request, response)
     return
@@ -695,6 +725,7 @@ func NewDescribeFirewallRulesRequest() (request *DescribeFirewallRulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeFirewallRules")
+    
     
     return
 }
@@ -719,6 +750,7 @@ func (c *Client) DescribeFirewallRules(request *DescribeFirewallRulesRequest) (r
     if request == nil {
         request = NewDescribeFirewallRulesRequest()
     }
+    
     response = NewDescribeFirewallRulesResponse()
     err = c.Send(request, response)
     return
@@ -729,6 +761,7 @@ func NewDescribeFirewallRulesTemplateRequest() (request *DescribeFirewallRulesTe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeFirewallRulesTemplate")
+    
     
     return
 }
@@ -753,6 +786,7 @@ func (c *Client) DescribeFirewallRulesTemplate(request *DescribeFirewallRulesTem
     if request == nil {
         request = NewDescribeFirewallRulesTemplateRequest()
     }
+    
     response = NewDescribeFirewallRulesTemplateResponse()
     err = c.Send(request, response)
     return
@@ -763,6 +797,7 @@ func NewDescribeGeneralResourceQuotasRequest() (request *DescribeGeneralResource
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeGeneralResourceQuotas")
+    
     
     return
 }
@@ -783,6 +818,7 @@ func (c *Client) DescribeGeneralResourceQuotas(request *DescribeGeneralResourceQ
     if request == nil {
         request = NewDescribeGeneralResourceQuotasRequest()
     }
+    
     response = NewDescribeGeneralResourceQuotasResponse()
     err = c.Send(request, response)
     return
@@ -793,6 +829,7 @@ func NewDescribeInstanceLoginKeyPairAttributeRequest() (request *DescribeInstanc
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeInstanceLoginKeyPairAttribute")
+    
     
     return
 }
@@ -814,6 +851,7 @@ func (c *Client) DescribeInstanceLoginKeyPairAttribute(request *DescribeInstance
     if request == nil {
         request = NewDescribeInstanceLoginKeyPairAttributeRequest()
     }
+    
     response = NewDescribeInstanceLoginKeyPairAttributeResponse()
     err = c.Send(request, response)
     return
@@ -824,6 +862,7 @@ func NewDescribeInstanceVncUrlRequest() (request *DescribeInstanceVncUrlRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeInstanceVncUrl")
+    
     
     return
 }
@@ -861,6 +900,7 @@ func (c *Client) DescribeInstanceVncUrl(request *DescribeInstanceVncUrlRequest) 
     if request == nil {
         request = NewDescribeInstanceVncUrlRequest()
     }
+    
     response = NewDescribeInstanceVncUrlResponse()
     err = c.Send(request, response)
     return
@@ -871,6 +911,7 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeInstances")
+    
     
     return
 }
@@ -918,6 +959,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
     if request == nil {
         request = NewDescribeInstancesRequest()
     }
+    
     response = NewDescribeInstancesResponse()
     err = c.Send(request, response)
     return
@@ -928,6 +970,7 @@ func NewDescribeInstancesDeniedActionsRequest() (request *DescribeInstancesDenie
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeInstancesDeniedActions")
+    
     
     return
 }
@@ -954,6 +997,7 @@ func (c *Client) DescribeInstancesDeniedActions(request *DescribeInstancesDenied
     if request == nil {
         request = NewDescribeInstancesDeniedActionsRequest()
     }
+    
     response = NewDescribeInstancesDeniedActionsResponse()
     err = c.Send(request, response)
     return
@@ -964,6 +1008,7 @@ func NewDescribeInstancesReturnableRequest() (request *DescribeInstancesReturnab
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeInstancesReturnable")
+    
     
     return
 }
@@ -991,6 +1036,7 @@ func (c *Client) DescribeInstancesReturnable(request *DescribeInstancesReturnabl
     if request == nil {
         request = NewDescribeInstancesReturnableRequest()
     }
+    
     response = NewDescribeInstancesReturnableResponse()
     err = c.Send(request, response)
     return
@@ -1001,6 +1047,7 @@ func NewDescribeInstancesTrafficPackagesRequest() (request *DescribeInstancesTra
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeInstancesTrafficPackages")
+    
     
     return
 }
@@ -1026,6 +1073,7 @@ func (c *Client) DescribeInstancesTrafficPackages(request *DescribeInstancesTraf
     if request == nil {
         request = NewDescribeInstancesTrafficPackagesRequest()
     }
+    
     response = NewDescribeInstancesTrafficPackagesResponse()
     err = c.Send(request, response)
     return
@@ -1036,6 +1084,7 @@ func NewDescribeKeyPairsRequest() (request *DescribeKeyPairsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeKeyPairs")
+    
     
     return
 }
@@ -1062,6 +1111,7 @@ func (c *Client) DescribeKeyPairs(request *DescribeKeyPairsRequest) (response *D
     if request == nil {
         request = NewDescribeKeyPairsRequest()
     }
+    
     response = NewDescribeKeyPairsResponse()
     err = c.Send(request, response)
     return
@@ -1072,6 +1122,7 @@ func NewDescribeModifyInstanceBundlesRequest() (request *DescribeModifyInstanceB
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeModifyInstanceBundles")
+    
     
     return
 }
@@ -1113,6 +1164,7 @@ func (c *Client) DescribeModifyInstanceBundles(request *DescribeModifyInstanceBu
     if request == nil {
         request = NewDescribeModifyInstanceBundlesRequest()
     }
+    
     response = NewDescribeModifyInstanceBundlesResponse()
     err = c.Send(request, response)
     return
@@ -1123,6 +1175,7 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeRegions")
+    
     
     return
 }
@@ -1164,6 +1217,7 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
     if request == nil {
         request = NewDescribeRegionsRequest()
     }
+    
     response = NewDescribeRegionsResponse()
     err = c.Send(request, response)
     return
@@ -1174,6 +1228,7 @@ func NewDescribeResetInstanceBlueprintsRequest() (request *DescribeResetInstance
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeResetInstanceBlueprints")
+    
     
     return
 }
@@ -1210,6 +1265,7 @@ func (c *Client) DescribeResetInstanceBlueprints(request *DescribeResetInstanceB
     if request == nil {
         request = NewDescribeResetInstanceBlueprintsRequest()
     }
+    
     response = NewDescribeResetInstanceBlueprintsResponse()
     err = c.Send(request, response)
     return
@@ -1220,6 +1276,7 @@ func NewDescribeSnapshotsRequest() (request *DescribeSnapshotsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeSnapshots")
+    
     
     return
 }
@@ -1254,6 +1311,7 @@ func (c *Client) DescribeSnapshots(request *DescribeSnapshotsRequest) (response 
     if request == nil {
         request = NewDescribeSnapshotsRequest()
     }
+    
     response = NewDescribeSnapshotsResponse()
     err = c.Send(request, response)
     return
@@ -1264,6 +1322,7 @@ func NewDescribeSnapshotsDeniedActionsRequest() (request *DescribeSnapshotsDenie
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeSnapshotsDeniedActions")
+    
     
     return
 }
@@ -1287,6 +1346,7 @@ func (c *Client) DescribeSnapshotsDeniedActions(request *DescribeSnapshotsDenied
     if request == nil {
         request = NewDescribeSnapshotsDeniedActionsRequest()
     }
+    
     response = NewDescribeSnapshotsDeniedActionsResponse()
     err = c.Send(request, response)
     return
@@ -1297,6 +1357,7 @@ func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeZones")
+    
     
     return
 }
@@ -1320,6 +1381,7 @@ func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *Describ
     if request == nil {
         request = NewDescribeZonesRequest()
     }
+    
     response = NewDescribeZonesResponse()
     err = c.Send(request, response)
     return
@@ -1330,6 +1392,7 @@ func NewDetachCcnRequest() (request *DetachCcnRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DetachCcn")
+    
     
     return
 }
@@ -1354,6 +1417,7 @@ func (c *Client) DetachCcn(request *DetachCcnRequest) (response *DetachCcnRespon
     if request == nil {
         request = NewDetachCcnRequest()
     }
+    
     response = NewDetachCcnResponse()
     err = c.Send(request, response)
     return
@@ -1364,6 +1428,7 @@ func NewDisassociateInstancesKeyPairsRequest() (request *DisassociateInstancesKe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "DisassociateInstancesKeyPairs")
+    
     
     return
 }
@@ -1410,6 +1475,7 @@ func (c *Client) DisassociateInstancesKeyPairs(request *DisassociateInstancesKey
     if request == nil {
         request = NewDisassociateInstancesKeyPairsRequest()
     }
+    
     response = NewDisassociateInstancesKeyPairsResponse()
     err = c.Send(request, response)
     return
@@ -1420,6 +1486,7 @@ func NewImportKeyPairRequest() (request *ImportKeyPairRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ImportKeyPair")
+    
     
     return
 }
@@ -1448,6 +1515,7 @@ func (c *Client) ImportKeyPair(request *ImportKeyPairRequest) (response *ImportK
     if request == nil {
         request = NewImportKeyPairRequest()
     }
+    
     response = NewImportKeyPairResponse()
     err = c.Send(request, response)
     return
@@ -1458,6 +1526,7 @@ func NewInquirePriceCreateBlueprintRequest() (request *InquirePriceCreateBluepri
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "InquirePriceCreateBlueprint")
+    
     
     return
 }
@@ -1479,6 +1548,7 @@ func (c *Client) InquirePriceCreateBlueprint(request *InquirePriceCreateBlueprin
     if request == nil {
         request = NewInquirePriceCreateBlueprintRequest()
     }
+    
     response = NewInquirePriceCreateBlueprintResponse()
     err = c.Send(request, response)
     return
@@ -1489,6 +1559,7 @@ func NewInquirePriceCreateInstancesRequest() (request *InquirePriceCreateInstanc
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "InquirePriceCreateInstances")
+    
     
     return
 }
@@ -1513,6 +1584,7 @@ func (c *Client) InquirePriceCreateInstances(request *InquirePriceCreateInstance
     if request == nil {
         request = NewInquirePriceCreateInstancesRequest()
     }
+    
     response = NewInquirePriceCreateInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1523,6 +1595,7 @@ func NewInquirePriceRenewInstancesRequest() (request *InquirePriceRenewInstances
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "InquirePriceRenewInstances")
+    
     
     return
 }
@@ -1547,6 +1620,7 @@ func (c *Client) InquirePriceRenewInstances(request *InquirePriceRenewInstancesR
     if request == nil {
         request = NewInquirePriceRenewInstancesRequest()
     }
+    
     response = NewInquirePriceRenewInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1557,6 +1631,7 @@ func NewModifyBlueprintAttributeRequest() (request *ModifyBlueprintAttributeRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ModifyBlueprintAttribute")
+    
     
     return
 }
@@ -1583,6 +1658,7 @@ func (c *Client) ModifyBlueprintAttribute(request *ModifyBlueprintAttributeReque
     if request == nil {
         request = NewModifyBlueprintAttributeRequest()
     }
+    
     response = NewModifyBlueprintAttributeResponse()
     err = c.Send(request, response)
     return
@@ -1593,6 +1669,7 @@ func NewModifyFirewallRuleDescriptionRequest() (request *ModifyFirewallRuleDescr
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ModifyFirewallRuleDescription")
+    
     
     return
 }
@@ -1637,6 +1714,7 @@ func (c *Client) ModifyFirewallRuleDescription(request *ModifyFirewallRuleDescri
     if request == nil {
         request = NewModifyFirewallRuleDescriptionRequest()
     }
+    
     response = NewModifyFirewallRuleDescriptionResponse()
     err = c.Send(request, response)
     return
@@ -1647,6 +1725,7 @@ func NewModifyFirewallRulesRequest() (request *ModifyFirewallRulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ModifyFirewallRules")
+    
     
     return
 }
@@ -1698,6 +1777,7 @@ func (c *Client) ModifyFirewallRules(request *ModifyFirewallRulesRequest) (respo
     if request == nil {
         request = NewModifyFirewallRulesRequest()
     }
+    
     response = NewModifyFirewallRulesResponse()
     err = c.Send(request, response)
     return
@@ -1708,6 +1788,7 @@ func NewModifyInstancesAttributeRequest() (request *ModifyInstancesAttributeRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ModifyInstancesAttribute")
+    
     
     return
 }
@@ -1746,6 +1827,7 @@ func (c *Client) ModifyInstancesAttribute(request *ModifyInstancesAttributeReque
     if request == nil {
         request = NewModifyInstancesAttributeRequest()
     }
+    
     response = NewModifyInstancesAttributeResponse()
     err = c.Send(request, response)
     return
@@ -1756,6 +1838,7 @@ func NewModifyInstancesLoginKeyPairAttributeRequest() (request *ModifyInstancesL
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ModifyInstancesLoginKeyPairAttribute")
+    
     
     return
 }
@@ -1782,6 +1865,7 @@ func (c *Client) ModifyInstancesLoginKeyPairAttribute(request *ModifyInstancesLo
     if request == nil {
         request = NewModifyInstancesLoginKeyPairAttributeRequest()
     }
+    
     response = NewModifyInstancesLoginKeyPairAttributeResponse()
     err = c.Send(request, response)
     return
@@ -1792,6 +1876,7 @@ func NewModifyInstancesRenewFlagRequest() (request *ModifyInstancesRenewFlagRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ModifyInstancesRenewFlag")
+    
     
     return
 }
@@ -1824,6 +1909,7 @@ func (c *Client) ModifyInstancesRenewFlag(request *ModifyInstancesRenewFlagReque
     if request == nil {
         request = NewModifyInstancesRenewFlagRequest()
     }
+    
     response = NewModifyInstancesRenewFlagResponse()
     err = c.Send(request, response)
     return
@@ -1834,6 +1920,7 @@ func NewModifySnapshotAttributeRequest() (request *ModifySnapshotAttributeReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ModifySnapshotAttribute")
+    
     
     return
 }
@@ -1858,6 +1945,7 @@ func (c *Client) ModifySnapshotAttribute(request *ModifySnapshotAttributeRequest
     if request == nil {
         request = NewModifySnapshotAttributeRequest()
     }
+    
     response = NewModifySnapshotAttributeResponse()
     err = c.Send(request, response)
     return
@@ -1868,6 +1956,7 @@ func NewRebootInstancesRequest() (request *RebootInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "RebootInstances")
+    
     
     return
 }
@@ -1909,6 +1998,7 @@ func (c *Client) RebootInstances(request *RebootInstancesRequest) (response *Reb
     if request == nil {
         request = NewRebootInstancesRequest()
     }
+    
     response = NewRebootInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1919,6 +2009,7 @@ func NewResetAttachCcnRequest() (request *ResetAttachCcnRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ResetAttachCcn")
+    
     
     return
 }
@@ -1944,6 +2035,7 @@ func (c *Client) ResetAttachCcn(request *ResetAttachCcnRequest) (response *Reset
     if request == nil {
         request = NewResetAttachCcnRequest()
     }
+    
     response = NewResetAttachCcnResponse()
     err = c.Send(request, response)
     return
@@ -1954,6 +2046,7 @@ func NewResetInstanceRequest() (request *ResetInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ResetInstance")
+    
     
     return
 }
@@ -2001,6 +2094,7 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
     if request == nil {
         request = NewResetInstanceRequest()
     }
+    
     response = NewResetInstanceResponse()
     err = c.Send(request, response)
     return
@@ -2011,6 +2105,7 @@ func NewResetInstancesPasswordRequest() (request *ResetInstancesPasswordRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "ResetInstancesPassword")
+    
     
     return
 }
@@ -2054,6 +2149,7 @@ func (c *Client) ResetInstancesPassword(request *ResetInstancesPasswordRequest) 
     if request == nil {
         request = NewResetInstancesPasswordRequest()
     }
+    
     response = NewResetInstancesPasswordResponse()
     err = c.Send(request, response)
     return
@@ -2064,6 +2160,7 @@ func NewStartInstancesRequest() (request *StartInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "StartInstances")
+    
     
     return
 }
@@ -2105,6 +2202,7 @@ func (c *Client) StartInstances(request *StartInstancesRequest) (response *Start
     if request == nil {
         request = NewStartInstancesRequest()
     }
+    
     response = NewStartInstancesResponse()
     err = c.Send(request, response)
     return
@@ -2115,6 +2213,7 @@ func NewStopInstancesRequest() (request *StopInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "StopInstances")
+    
     
     return
 }
@@ -2154,6 +2253,7 @@ func (c *Client) StopInstances(request *StopInstancesRequest) (response *StopIns
     if request == nil {
         request = NewStopInstancesRequest()
     }
+    
     response = NewStopInstancesResponse()
     err = c.Send(request, response)
     return
@@ -2164,6 +2264,7 @@ func NewTerminateInstancesRequest() (request *TerminateInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("lighthouse", APIVersion, "TerminateInstances")
+    
     
     return
 }
@@ -2199,6 +2300,7 @@ func (c *Client) TerminateInstances(request *TerminateInstancesRequest) (respons
     if request == nil {
         request = NewTerminateInstancesRequest()
     }
+    
     response = NewTerminateInstancesResponse()
     err = c.Send(request, response)
     return

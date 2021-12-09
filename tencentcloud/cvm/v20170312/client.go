@@ -49,6 +49,7 @@ func NewAllocateHostsRequest() (request *AllocateHostsRequest) {
     }
     request.Init().WithApiInfo("cvm", APIVersion, "AllocateHosts")
     
+    
     return
 }
 
@@ -75,6 +76,7 @@ func (c *Client) AllocateHosts(request *AllocateHostsRequest) (response *Allocat
     if request == nil {
         request = NewAllocateHostsRequest()
     }
+    
     response = NewAllocateHostsResponse()
     err = c.Send(request, response)
     return
@@ -85,6 +87,7 @@ func NewAssociateInstancesKeyPairsRequest() (request *AssociateInstancesKeyPairs
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "AssociateInstancesKeyPairs")
+    
     
     return
 }
@@ -135,6 +138,7 @@ func (c *Client) AssociateInstancesKeyPairs(request *AssociateInstancesKeyPairsR
     if request == nil {
         request = NewAssociateInstancesKeyPairsRequest()
     }
+    
     response = NewAssociateInstancesKeyPairsResponse()
     err = c.Send(request, response)
     return
@@ -145,6 +149,7 @@ func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "AssociateSecurityGroups")
+    
     
     return
 }
@@ -177,6 +182,7 @@ func (c *Client) AssociateSecurityGroups(request *AssociateSecurityGroupsRequest
     if request == nil {
         request = NewAssociateSecurityGroupsRequest()
     }
+    
     response = NewAssociateSecurityGroupsResponse()
     err = c.Send(request, response)
     return
@@ -187,6 +193,7 @@ func NewCreateDisasterRecoverGroupRequest() (request *CreateDisasterRecoverGroup
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "CreateDisasterRecoverGroup")
+    
     
     return
 }
@@ -208,6 +215,7 @@ func (c *Client) CreateDisasterRecoverGroup(request *CreateDisasterRecoverGroupR
     if request == nil {
         request = NewCreateDisasterRecoverGroupRequest()
     }
+    
     response = NewCreateDisasterRecoverGroupResponse()
     err = c.Send(request, response)
     return
@@ -218,6 +226,7 @@ func NewCreateImageRequest() (request *CreateImageRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "CreateImage")
+    
     
     return
 }
@@ -269,6 +278,7 @@ func (c *Client) CreateImage(request *CreateImageRequest) (response *CreateImage
     if request == nil {
         request = NewCreateImageRequest()
     }
+    
     response = NewCreateImageResponse()
     err = c.Send(request, response)
     return
@@ -279,6 +289,7 @@ func NewCreateKeyPairRequest() (request *CreateKeyPairRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "CreateKeyPair")
+    
     
     return
 }
@@ -317,6 +328,7 @@ func (c *Client) CreateKeyPair(request *CreateKeyPairRequest) (response *CreateK
     if request == nil {
         request = NewCreateKeyPairRequest()
     }
+    
     response = NewCreateKeyPairResponse()
     err = c.Send(request, response)
     return
@@ -327,6 +339,7 @@ func NewDeleteDisasterRecoverGroupsRequest() (request *DeleteDisasterRecoverGrou
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DeleteDisasterRecoverGroups")
+    
     
     return
 }
@@ -350,6 +363,7 @@ func (c *Client) DeleteDisasterRecoverGroups(request *DeleteDisasterRecoverGroup
     if request == nil {
         request = NewDeleteDisasterRecoverGroupsRequest()
     }
+    
     response = NewDeleteDisasterRecoverGroupsResponse()
     err = c.Send(request, response)
     return
@@ -360,6 +374,7 @@ func NewDeleteImagesRequest() (request *DeleteImagesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DeleteImages")
+    
     
     return
 }
@@ -394,6 +409,7 @@ func (c *Client) DeleteImages(request *DeleteImagesRequest) (response *DeleteIma
     if request == nil {
         request = NewDeleteImagesRequest()
     }
+    
     response = NewDeleteImagesResponse()
     err = c.Send(request, response)
     return
@@ -404,6 +420,7 @@ func NewDeleteKeyPairsRequest() (request *DeleteKeyPairsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DeleteKeyPairs")
+    
     
     return
 }
@@ -437,6 +454,7 @@ func (c *Client) DeleteKeyPairs(request *DeleteKeyPairsRequest) (response *Delet
     if request == nil {
         request = NewDeleteKeyPairsRequest()
     }
+    
     response = NewDeleteKeyPairsResponse()
     err = c.Send(request, response)
     return
@@ -447,6 +465,7 @@ func NewDescribeDisasterRecoverGroupQuotaRequest() (request *DescribeDisasterRec
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeDisasterRecoverGroupQuota")
+    
     
     return
 }
@@ -474,6 +493,7 @@ func (c *Client) DescribeDisasterRecoverGroupQuota(request *DescribeDisasterReco
     if request == nil {
         request = NewDescribeDisasterRecoverGroupQuotaRequest()
     }
+    
     response = NewDescribeDisasterRecoverGroupQuotaResponse()
     err = c.Send(request, response)
     return
@@ -484,6 +504,7 @@ func NewDescribeDisasterRecoverGroupsRequest() (request *DescribeDisasterRecover
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeDisasterRecoverGroups")
+    
     
     return
 }
@@ -511,6 +532,7 @@ func (c *Client) DescribeDisasterRecoverGroups(request *DescribeDisasterRecoverG
     if request == nil {
         request = NewDescribeDisasterRecoverGroupsRequest()
     }
+    
     response = NewDescribeDisasterRecoverGroupsResponse()
     err = c.Send(request, response)
     return
@@ -521,6 +543,7 @@ func NewDescribeHostsRequest() (request *DescribeHostsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeHosts")
+    
     
     return
 }
@@ -545,6 +568,7 @@ func (c *Client) DescribeHosts(request *DescribeHostsRequest) (response *Describ
     if request == nil {
         request = NewDescribeHostsRequest()
     }
+    
     response = NewDescribeHostsResponse()
     err = c.Send(request, response)
     return
@@ -555,6 +579,7 @@ func NewDescribeImageQuotaRequest() (request *DescribeImageQuotaRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeImageQuota")
+    
     
     return
 }
@@ -579,6 +604,7 @@ func (c *Client) DescribeImageQuota(request *DescribeImageQuotaRequest) (respons
     if request == nil {
         request = NewDescribeImageQuotaRequest()
     }
+    
     response = NewDescribeImageQuotaResponse()
     err = c.Send(request, response)
     return
@@ -589,6 +615,7 @@ func NewDescribeImageSharePermissionRequest() (request *DescribeImageSharePermis
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeImageSharePermission")
+    
     
     return
 }
@@ -614,6 +641,7 @@ func (c *Client) DescribeImageSharePermission(request *DescribeImageSharePermiss
     if request == nil {
         request = NewDescribeImageSharePermissionRequest()
     }
+    
     response = NewDescribeImageSharePermissionResponse()
     err = c.Send(request, response)
     return
@@ -624,6 +652,7 @@ func NewDescribeImagesRequest() (request *DescribeImagesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeImages")
+    
     
     return
 }
@@ -658,6 +687,7 @@ func (c *Client) DescribeImages(request *DescribeImagesRequest) (response *Descr
     if request == nil {
         request = NewDescribeImagesRequest()
     }
+    
     response = NewDescribeImagesResponse()
     err = c.Send(request, response)
     return
@@ -668,6 +698,7 @@ func NewDescribeImportImageOsRequest() (request *DescribeImportImageOsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeImportImageOs")
+    
     
     return
 }
@@ -696,6 +727,7 @@ func (c *Client) DescribeImportImageOs(request *DescribeImportImageOsRequest) (r
     if request == nil {
         request = NewDescribeImportImageOsRequest()
     }
+    
     response = NewDescribeImportImageOsResponse()
     err = c.Send(request, response)
     return
@@ -706,6 +738,7 @@ func NewDescribeInstanceFamilyConfigsRequest() (request *DescribeInstanceFamilyC
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstanceFamilyConfigs")
+    
     
     return
 }
@@ -728,6 +761,7 @@ func (c *Client) DescribeInstanceFamilyConfigs(request *DescribeInstanceFamilyCo
     if request == nil {
         request = NewDescribeInstanceFamilyConfigsRequest()
     }
+    
     response = NewDescribeInstanceFamilyConfigsResponse()
     err = c.Send(request, response)
     return
@@ -738,6 +772,7 @@ func NewDescribeInstanceTypeConfigsRequest() (request *DescribeInstanceTypeConfi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstanceTypeConfigs")
+    
     
     return
 }
@@ -768,6 +803,7 @@ func (c *Client) DescribeInstanceTypeConfigs(request *DescribeInstanceTypeConfig
     if request == nil {
         request = NewDescribeInstanceTypeConfigsRequest()
     }
+    
     response = NewDescribeInstanceTypeConfigsResponse()
     err = c.Send(request, response)
     return
@@ -778,6 +814,7 @@ func NewDescribeInstanceVncUrlRequest() (request *DescribeInstanceVncUrlRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstanceVncUrl")
+    
     
     return
 }
@@ -844,6 +881,7 @@ func (c *Client) DescribeInstanceVncUrl(request *DescribeInstanceVncUrlRequest) 
     if request == nil {
         request = NewDescribeInstanceVncUrlRequest()
     }
+    
     response = NewDescribeInstanceVncUrlResponse()
     err = c.Send(request, response)
     return
@@ -854,6 +892,7 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstances")
+    
     
     return
 }
@@ -903,6 +942,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
     if request == nil {
         request = NewDescribeInstancesRequest()
     }
+    
     response = NewDescribeInstancesResponse()
     err = c.Send(request, response)
     return
@@ -913,6 +953,7 @@ func NewDescribeInstancesOperationLimitRequest() (request *DescribeInstancesOper
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstancesOperationLimit")
+    
     
     return
 }
@@ -938,6 +979,7 @@ func (c *Client) DescribeInstancesOperationLimit(request *DescribeInstancesOpera
     if request == nil {
         request = NewDescribeInstancesOperationLimitRequest()
     }
+    
     response = NewDescribeInstancesOperationLimitResponse()
     err = c.Send(request, response)
     return
@@ -948,6 +990,7 @@ func NewDescribeInstancesStatusRequest() (request *DescribeInstancesStatusReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstancesStatus")
+    
     
     return
 }
@@ -978,6 +1021,7 @@ func (c *Client) DescribeInstancesStatus(request *DescribeInstancesStatusRequest
     if request == nil {
         request = NewDescribeInstancesStatusRequest()
     }
+    
     response = NewDescribeInstancesStatusResponse()
     err = c.Send(request, response)
     return
@@ -988,6 +1032,7 @@ func NewDescribeInternetChargeTypeConfigsRequest() (request *DescribeInternetCha
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeInternetChargeTypeConfigs")
+    
     
     return
 }
@@ -1012,6 +1057,7 @@ func (c *Client) DescribeInternetChargeTypeConfigs(request *DescribeInternetChar
     if request == nil {
         request = NewDescribeInternetChargeTypeConfigsRequest()
     }
+    
     response = NewDescribeInternetChargeTypeConfigsResponse()
     err = c.Send(request, response)
     return
@@ -1022,6 +1068,7 @@ func NewDescribeKeyPairsRequest() (request *DescribeKeyPairsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeKeyPairs")
+    
     
     return
 }
@@ -1055,6 +1102,7 @@ func (c *Client) DescribeKeyPairs(request *DescribeKeyPairsRequest) (response *D
     if request == nil {
         request = NewDescribeKeyPairsRequest()
     }
+    
     response = NewDescribeKeyPairsResponse()
     err = c.Send(request, response)
     return
@@ -1065,6 +1113,7 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeRegions")
+    
     
     return
 }
@@ -1094,6 +1143,7 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
     if request == nil {
         request = NewDescribeRegionsRequest()
     }
+    
     response = NewDescribeRegionsResponse()
     err = c.Send(request, response)
     return
@@ -1104,6 +1154,7 @@ func NewDescribeReservedInstancesRequest() (request *DescribeReservedInstancesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeReservedInstances")
+    
     
     return
 }
@@ -1131,6 +1182,7 @@ func (c *Client) DescribeReservedInstances(request *DescribeReservedInstancesReq
     if request == nil {
         request = NewDescribeReservedInstancesRequest()
     }
+    
     response = NewDescribeReservedInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1141,6 +1193,7 @@ func NewDescribeReservedInstancesConfigInfosRequest() (request *DescribeReserved
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeReservedInstancesConfigInfos")
+    
     
     return
 }
@@ -1164,6 +1217,7 @@ func (c *Client) DescribeReservedInstancesConfigInfos(request *DescribeReservedI
     if request == nil {
         request = NewDescribeReservedInstancesConfigInfosRequest()
     }
+    
     response = NewDescribeReservedInstancesConfigInfosResponse()
     err = c.Send(request, response)
     return
@@ -1174,6 +1228,7 @@ func NewDescribeReservedInstancesOfferingsRequest() (request *DescribeReservedIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeReservedInstancesOfferings")
+    
     
     return
 }
@@ -1201,6 +1256,7 @@ func (c *Client) DescribeReservedInstancesOfferings(request *DescribeReservedIns
     if request == nil {
         request = NewDescribeReservedInstancesOfferingsRequest()
     }
+    
     response = NewDescribeReservedInstancesOfferingsResponse()
     err = c.Send(request, response)
     return
@@ -1211,6 +1267,7 @@ func NewDescribeZoneInstanceConfigInfosRequest() (request *DescribeZoneInstanceC
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeZoneInstanceConfigInfos")
+    
     
     return
 }
@@ -1241,6 +1298,7 @@ func (c *Client) DescribeZoneInstanceConfigInfos(request *DescribeZoneInstanceCo
     if request == nil {
         request = NewDescribeZoneInstanceConfigInfosRequest()
     }
+    
     response = NewDescribeZoneInstanceConfigInfosResponse()
     err = c.Send(request, response)
     return
@@ -1251,6 +1309,7 @@ func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DescribeZones")
+    
     
     return
 }
@@ -1281,6 +1340,7 @@ func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *Describ
     if request == nil {
         request = NewDescribeZonesRequest()
     }
+    
     response = NewDescribeZonesResponse()
     err = c.Send(request, response)
     return
@@ -1291,6 +1351,7 @@ func NewDisassociateInstancesKeyPairsRequest() (request *DisassociateInstancesKe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DisassociateInstancesKeyPairs")
+    
     
     return
 }
@@ -1337,6 +1398,7 @@ func (c *Client) DisassociateInstancesKeyPairs(request *DisassociateInstancesKey
     if request == nil {
         request = NewDisassociateInstancesKeyPairsRequest()
     }
+    
     response = NewDisassociateInstancesKeyPairsResponse()
     err = c.Send(request, response)
     return
@@ -1347,6 +1409,7 @@ func NewDisassociateSecurityGroupsRequest() (request *DisassociateSecurityGroups
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "DisassociateSecurityGroups")
+    
     
     return
 }
@@ -1375,6 +1438,7 @@ func (c *Client) DisassociateSecurityGroups(request *DisassociateSecurityGroupsR
     if request == nil {
         request = NewDisassociateSecurityGroupsRequest()
     }
+    
     response = NewDisassociateSecurityGroupsResponse()
     err = c.Send(request, response)
     return
@@ -1385,6 +1449,7 @@ func NewImportImageRequest() (request *ImportImageRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ImportImage")
+    
     
     return
 }
@@ -1411,6 +1476,7 @@ func (c *Client) ImportImage(request *ImportImageRequest) (response *ImportImage
     if request == nil {
         request = NewImportImageRequest()
     }
+    
     response = NewImportImageResponse()
     err = c.Send(request, response)
     return
@@ -1421,6 +1487,7 @@ func NewImportKeyPairRequest() (request *ImportKeyPairRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ImportKeyPair")
+    
     
     return
 }
@@ -1459,6 +1526,7 @@ func (c *Client) ImportKeyPair(request *ImportKeyPairRequest) (response *ImportK
     if request == nil {
         request = NewImportKeyPairRequest()
     }
+    
     response = NewImportKeyPairResponse()
     err = c.Send(request, response)
     return
@@ -1469,6 +1537,7 @@ func NewInquirePricePurchaseReservedInstancesOfferingRequest() (request *Inquire
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquirePricePurchaseReservedInstancesOffering")
+    
     
     return
 }
@@ -1491,6 +1560,7 @@ func (c *Client) InquirePricePurchaseReservedInstancesOffering(request *InquireP
     if request == nil {
         request = NewInquirePricePurchaseReservedInstancesOfferingRequest()
     }
+    
     response = NewInquirePricePurchaseReservedInstancesOfferingResponse()
     err = c.Send(request, response)
     return
@@ -1501,6 +1571,7 @@ func NewInquiryPriceResetInstanceRequest() (request *InquiryPriceResetInstanceRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquiryPriceResetInstance")
+    
     
     return
 }
@@ -1542,6 +1613,7 @@ func (c *Client) InquiryPriceResetInstance(request *InquiryPriceResetInstanceReq
     if request == nil {
         request = NewInquiryPriceResetInstanceRequest()
     }
+    
     response = NewInquiryPriceResetInstanceResponse()
     err = c.Send(request, response)
     return
@@ -1552,6 +1624,7 @@ func NewInquiryPriceResetInstancesInternetMaxBandwidthRequest() (request *Inquir
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquiryPriceResetInstancesInternetMaxBandwidth")
+    
     
     return
 }
@@ -1592,6 +1665,7 @@ func (c *Client) InquiryPriceResetInstancesInternetMaxBandwidth(request *Inquiry
     if request == nil {
         request = NewInquiryPriceResetInstancesInternetMaxBandwidthRequest()
     }
+    
     response = NewInquiryPriceResetInstancesInternetMaxBandwidthResponse()
     err = c.Send(request, response)
     return
@@ -1602,6 +1676,7 @@ func NewInquiryPriceResetInstancesTypeRequest() (request *InquiryPriceResetInsta
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquiryPriceResetInstancesType")
+    
     
     return
 }
@@ -1647,6 +1722,7 @@ func (c *Client) InquiryPriceResetInstancesType(request *InquiryPriceResetInstan
     if request == nil {
         request = NewInquiryPriceResetInstancesTypeRequest()
     }
+    
     response = NewInquiryPriceResetInstancesTypeResponse()
     err = c.Send(request, response)
     return
@@ -1657,6 +1733,7 @@ func NewInquiryPriceResizeInstanceDisksRequest() (request *InquiryPriceResizeIns
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquiryPriceResizeInstanceDisks")
+    
     
     return
 }
@@ -1695,6 +1772,7 @@ func (c *Client) InquiryPriceResizeInstanceDisks(request *InquiryPriceResizeInst
     if request == nil {
         request = NewInquiryPriceResizeInstanceDisksRequest()
     }
+    
     response = NewInquiryPriceResizeInstanceDisksResponse()
     err = c.Send(request, response)
     return
@@ -1705,6 +1783,7 @@ func NewInquiryPriceRunInstancesRequest() (request *InquiryPriceRunInstancesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "InquiryPriceRunInstances")
+    
     
     return
 }
@@ -1775,6 +1854,7 @@ func (c *Client) InquiryPriceRunInstances(request *InquiryPriceRunInstancesReque
     if request == nil {
         request = NewInquiryPriceRunInstancesRequest()
     }
+    
     response = NewInquiryPriceRunInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1785,6 +1865,7 @@ func NewModifyDisasterRecoverGroupAttributeRequest() (request *ModifyDisasterRec
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyDisasterRecoverGroupAttribute")
+    
     
     return
 }
@@ -1805,6 +1886,7 @@ func (c *Client) ModifyDisasterRecoverGroupAttribute(request *ModifyDisasterReco
     if request == nil {
         request = NewModifyDisasterRecoverGroupAttributeRequest()
     }
+    
     response = NewModifyDisasterRecoverGroupAttributeResponse()
     err = c.Send(request, response)
     return
@@ -1815,6 +1897,7 @@ func NewModifyHostsAttributeRequest() (request *ModifyHostsAttributeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyHostsAttribute")
+    
     
     return
 }
@@ -1837,6 +1920,7 @@ func (c *Client) ModifyHostsAttribute(request *ModifyHostsAttributeRequest) (res
     if request == nil {
         request = NewModifyHostsAttributeRequest()
     }
+    
     response = NewModifyHostsAttributeResponse()
     err = c.Send(request, response)
     return
@@ -1847,6 +1931,7 @@ func NewModifyImageAttributeRequest() (request *ModifyImageAttributeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyImageAttribute")
+    
     
     return
 }
@@ -1876,6 +1961,7 @@ func (c *Client) ModifyImageAttribute(request *ModifyImageAttributeRequest) (res
     if request == nil {
         request = NewModifyImageAttributeRequest()
     }
+    
     response = NewModifyImageAttributeResponse()
     err = c.Send(request, response)
     return
@@ -1886,6 +1972,7 @@ func NewModifyImageSharePermissionRequest() (request *ModifyImageSharePermission
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyImageSharePermission")
+    
     
     return
 }
@@ -1930,6 +2017,7 @@ func (c *Client) ModifyImageSharePermission(request *ModifyImageSharePermissionR
     if request == nil {
         request = NewModifyImageSharePermissionRequest()
     }
+    
     response = NewModifyImageSharePermissionResponse()
     err = c.Send(request, response)
     return
@@ -1940,6 +2028,7 @@ func NewModifyInstancesAttributeRequest() (request *ModifyInstancesAttributeRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyInstancesAttribute")
+    
     
     return
 }
@@ -1999,6 +2088,7 @@ func (c *Client) ModifyInstancesAttribute(request *ModifyInstancesAttributeReque
     if request == nil {
         request = NewModifyInstancesAttributeRequest()
     }
+    
     response = NewModifyInstancesAttributeResponse()
     err = c.Send(request, response)
     return
@@ -2009,6 +2099,7 @@ func NewModifyInstancesProjectRequest() (request *ModifyInstancesProjectRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyInstancesProject")
+    
     
     return
 }
@@ -2051,6 +2142,7 @@ func (c *Client) ModifyInstancesProject(request *ModifyInstancesProjectRequest) 
     if request == nil {
         request = NewModifyInstancesProjectRequest()
     }
+    
     response = NewModifyInstancesProjectResponse()
     err = c.Send(request, response)
     return
@@ -2061,6 +2153,7 @@ func NewModifyInstancesVpcAttributeRequest() (request *ModifyInstancesVpcAttribu
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyInstancesVpcAttribute")
+    
     
     return
 }
@@ -2111,6 +2204,7 @@ func (c *Client) ModifyInstancesVpcAttribute(request *ModifyInstancesVpcAttribut
     if request == nil {
         request = NewModifyInstancesVpcAttributeRequest()
     }
+    
     response = NewModifyInstancesVpcAttributeResponse()
     err = c.Send(request, response)
     return
@@ -2121,6 +2215,7 @@ func NewModifyKeyPairAttributeRequest() (request *ModifyKeyPairAttributeRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ModifyKeyPairAttribute")
+    
     
     return
 }
@@ -2155,6 +2250,7 @@ func (c *Client) ModifyKeyPairAttribute(request *ModifyKeyPairAttributeRequest) 
     if request == nil {
         request = NewModifyKeyPairAttributeRequest()
     }
+    
     response = NewModifyKeyPairAttributeResponse()
     err = c.Send(request, response)
     return
@@ -2165,6 +2261,7 @@ func NewPurchaseReservedInstancesOfferingRequest() (request *PurchaseReservedIns
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "PurchaseReservedInstancesOffering")
+    
     
     return
 }
@@ -2192,6 +2289,7 @@ func (c *Client) PurchaseReservedInstancesOffering(request *PurchaseReservedInst
     if request == nil {
         request = NewPurchaseReservedInstancesOfferingRequest()
     }
+    
     response = NewPurchaseReservedInstancesOfferingResponse()
     err = c.Send(request, response)
     return
@@ -2202,6 +2300,7 @@ func NewRebootInstancesRequest() (request *RebootInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "RebootInstances")
+    
     
     return
 }
@@ -2256,6 +2355,7 @@ func (c *Client) RebootInstances(request *RebootInstancesRequest) (response *Reb
     if request == nil {
         request = NewRebootInstancesRequest()
     }
+    
     response = NewRebootInstancesResponse()
     err = c.Send(request, response)
     return
@@ -2266,6 +2366,7 @@ func NewResetInstanceRequest() (request *ResetInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ResetInstance")
+    
     
     return
 }
@@ -2342,6 +2443,7 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
     if request == nil {
         request = NewResetInstanceRequest()
     }
+    
     response = NewResetInstanceResponse()
     err = c.Send(request, response)
     return
@@ -2352,6 +2454,7 @@ func NewResetInstancesInternetMaxBandwidthRequest() (request *ResetInstancesInte
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ResetInstancesInternetMaxBandwidth")
+    
     
     return
 }
@@ -2402,6 +2505,7 @@ func (c *Client) ResetInstancesInternetMaxBandwidth(request *ResetInstancesInter
     if request == nil {
         request = NewResetInstancesInternetMaxBandwidthRequest()
     }
+    
     response = NewResetInstancesInternetMaxBandwidthResponse()
     err = c.Send(request, response)
     return
@@ -2412,6 +2516,7 @@ func NewResetInstancesPasswordRequest() (request *ResetInstancesPasswordRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ResetInstancesPassword")
+    
     
     return
 }
@@ -2465,6 +2570,7 @@ func (c *Client) ResetInstancesPassword(request *ResetInstancesPasswordRequest) 
     if request == nil {
         request = NewResetInstancesPasswordRequest()
     }
+    
     response = NewResetInstancesPasswordResponse()
     err = c.Send(request, response)
     return
@@ -2475,6 +2581,7 @@ func NewResetInstancesTypeRequest() (request *ResetInstancesTypeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ResetInstancesType")
+    
     
     return
 }
@@ -2538,6 +2645,7 @@ func (c *Client) ResetInstancesType(request *ResetInstancesTypeRequest) (respons
     if request == nil {
         request = NewResetInstancesTypeRequest()
     }
+    
     response = NewResetInstancesTypeResponse()
     err = c.Send(request, response)
     return
@@ -2548,6 +2656,7 @@ func NewResizeInstanceDisksRequest() (request *ResizeInstanceDisksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "ResizeInstanceDisks")
+    
     
     return
 }
@@ -2593,6 +2702,7 @@ func (c *Client) ResizeInstanceDisks(request *ResizeInstanceDisksRequest) (respo
     if request == nil {
         request = NewResizeInstanceDisksRequest()
     }
+    
     response = NewResizeInstanceDisksResponse()
     err = c.Send(request, response)
     return
@@ -2603,6 +2713,7 @@ func NewRunInstancesRequest() (request *RunInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "RunInstances")
+    
     
     return
 }
@@ -2730,6 +2841,7 @@ func (c *Client) RunInstances(request *RunInstancesRequest) (response *RunInstan
     if request == nil {
         request = NewRunInstancesRequest()
     }
+    
     response = NewRunInstancesResponse()
     err = c.Send(request, response)
     return
@@ -2740,6 +2852,7 @@ func NewStartInstancesRequest() (request *StartInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "StartInstances")
+    
     
     return
 }
@@ -2790,6 +2903,7 @@ func (c *Client) StartInstances(request *StartInstancesRequest) (response *Start
     if request == nil {
         request = NewStartInstancesRequest()
     }
+    
     response = NewStartInstancesResponse()
     err = c.Send(request, response)
     return
@@ -2800,6 +2914,7 @@ func NewStopInstancesRequest() (request *StopInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "StopInstances")
+    
     
     return
 }
@@ -2857,6 +2972,7 @@ func (c *Client) StopInstances(request *StopInstancesRequest) (response *StopIns
     if request == nil {
         request = NewStopInstancesRequest()
     }
+    
     response = NewStopInstancesResponse()
     err = c.Send(request, response)
     return
@@ -2867,6 +2983,7 @@ func NewSyncImagesRequest() (request *SyncImagesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "SyncImages")
+    
     
     return
 }
@@ -2906,6 +3023,7 @@ func (c *Client) SyncImages(request *SyncImagesRequest) (response *SyncImagesRes
     if request == nil {
         request = NewSyncImagesRequest()
     }
+    
     response = NewSyncImagesResponse()
     err = c.Send(request, response)
     return
@@ -2916,6 +3034,7 @@ func NewTerminateInstancesRequest() (request *TerminateInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cvm", APIVersion, "TerminateInstances")
+    
     
     return
 }
@@ -2977,6 +3096,7 @@ func (c *Client) TerminateInstances(request *TerminateInstancesRequest) (respons
     if request == nil {
         request = NewTerminateInstancesRequest()
     }
+    
     response = NewTerminateInstancesResponse()
     err = c.Send(request, response)
     return

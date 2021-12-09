@@ -49,6 +49,7 @@ func NewAddUserRequest() (request *AddUserRequest) {
     }
     request.Init().WithApiInfo("cam", APIVersion, "AddUser")
     
+    
     return
 }
 
@@ -74,6 +75,7 @@ func (c *Client) AddUser(request *AddUserRequest) (response *AddUserResponse, er
     if request == nil {
         request = NewAddUserRequest()
     }
+    
     response = NewAddUserResponse()
     err = c.Send(request, response)
     return
@@ -84,6 +86,7 @@ func NewAddUserToGroupRequest() (request *AddUserToGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "AddUserToGroup")
+    
     
     return
 }
@@ -108,6 +111,7 @@ func (c *Client) AddUserToGroup(request *AddUserToGroupRequest) (response *AddUs
     if request == nil {
         request = NewAddUserToGroupRequest()
     }
+    
     response = NewAddUserToGroupResponse()
     err = c.Send(request, response)
     return
@@ -118,6 +122,7 @@ func NewAttachGroupPolicyRequest() (request *AttachGroupPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "AttachGroupPolicy")
+    
     
     return
 }
@@ -147,6 +152,7 @@ func (c *Client) AttachGroupPolicy(request *AttachGroupPolicyRequest) (response 
     if request == nil {
         request = NewAttachGroupPolicyRequest()
     }
+    
     response = NewAttachGroupPolicyResponse()
     err = c.Send(request, response)
     return
@@ -157,6 +163,7 @@ func NewAttachRolePolicyRequest() (request *AttachRolePolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "AttachRolePolicy")
+    
     
     return
 }
@@ -183,6 +190,7 @@ func (c *Client) AttachRolePolicy(request *AttachRolePolicyRequest) (response *A
     if request == nil {
         request = NewAttachRolePolicyRequest()
     }
+    
     response = NewAttachRolePolicyResponse()
     err = c.Send(request, response)
     return
@@ -193,6 +201,7 @@ func NewAttachUserPolicyRequest() (request *AttachUserPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "AttachUserPolicy")
+    
     
     return
 }
@@ -221,6 +230,7 @@ func (c *Client) AttachUserPolicy(request *AttachUserPolicyRequest) (response *A
     if request == nil {
         request = NewAttachUserPolicyRequest()
     }
+    
     response = NewAttachUserPolicyResponse()
     err = c.Send(request, response)
     return
@@ -231,6 +241,7 @@ func NewConsumeCustomMFATokenRequest() (request *ConsumeCustomMFATokenRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ConsumeCustomMFAToken")
+    
     
     return
 }
@@ -251,6 +262,7 @@ func (c *Client) ConsumeCustomMFAToken(request *ConsumeCustomMFATokenRequest) (r
     if request == nil {
         request = NewConsumeCustomMFATokenRequest()
     }
+    
     response = NewConsumeCustomMFATokenResponse()
     err = c.Send(request, response)
     return
@@ -261,6 +273,7 @@ func NewCreateGroupRequest() (request *CreateGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "CreateGroup")
+    
     
     return
 }
@@ -282,6 +295,7 @@ func (c *Client) CreateGroup(request *CreateGroupRequest) (response *CreateGroup
     if request == nil {
         request = NewCreateGroupRequest()
     }
+    
     response = NewCreateGroupResponse()
     err = c.Send(request, response)
     return
@@ -292,6 +306,7 @@ func NewCreatePolicyRequest() (request *CreatePolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "CreatePolicy")
+    
     
     return
 }
@@ -343,6 +358,7 @@ func (c *Client) CreatePolicy(request *CreatePolicyRequest) (response *CreatePol
     if request == nil {
         request = NewCreatePolicyRequest()
     }
+    
     response = NewCreatePolicyResponse()
     err = c.Send(request, response)
     return
@@ -353,6 +369,7 @@ func NewCreatePolicyVersionRequest() (request *CreatePolicyVersionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "CreatePolicyVersion")
+    
     
     return
 }
@@ -406,6 +423,7 @@ func (c *Client) CreatePolicyVersion(request *CreatePolicyVersionRequest) (respo
     if request == nil {
         request = NewCreatePolicyVersionRequest()
     }
+    
     response = NewCreatePolicyVersionResponse()
     err = c.Send(request, response)
     return
@@ -416,6 +434,7 @@ func NewCreateRoleRequest() (request *CreateRoleRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "CreateRole")
+    
     
     return
 }
@@ -456,6 +475,7 @@ func (c *Client) CreateRole(request *CreateRoleRequest) (response *CreateRoleRes
     if request == nil {
         request = NewCreateRoleRequest()
     }
+    
     response = NewCreateRoleResponse()
     err = c.Send(request, response)
     return
@@ -466,6 +486,7 @@ func NewCreateSAMLProviderRequest() (request *CreateSAMLProviderRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "CreateSAMLProvider")
+    
     
     return
 }
@@ -490,6 +511,7 @@ func (c *Client) CreateSAMLProvider(request *CreateSAMLProviderRequest) (respons
     if request == nil {
         request = NewCreateSAMLProviderRequest()
     }
+    
     response = NewCreateSAMLProviderResponse()
     err = c.Send(request, response)
     return
@@ -500,6 +522,7 @@ func NewCreateServiceLinkedRoleRequest() (request *CreateServiceLinkedRoleReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "CreateServiceLinkedRole")
+    
     
     return
 }
@@ -524,6 +547,7 @@ func (c *Client) CreateServiceLinkedRole(request *CreateServiceLinkedRoleRequest
     if request == nil {
         request = NewCreateServiceLinkedRoleRequest()
     }
+    
     response = NewCreateServiceLinkedRoleResponse()
     err = c.Send(request, response)
     return
@@ -534,6 +558,7 @@ func NewCreateUserSAMLConfigRequest() (request *CreateUserSAMLConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "CreateUserSAMLConfig")
+    
     
     return
 }
@@ -554,6 +579,7 @@ func (c *Client) CreateUserSAMLConfig(request *CreateUserSAMLConfigRequest) (res
     if request == nil {
         request = NewCreateUserSAMLConfigRequest()
     }
+    
     response = NewCreateUserSAMLConfigResponse()
     err = c.Send(request, response)
     return
@@ -564,6 +590,7 @@ func NewDeleteGroupRequest() (request *DeleteGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DeleteGroup")
+    
     
     return
 }
@@ -584,6 +611,7 @@ func (c *Client) DeleteGroup(request *DeleteGroupRequest) (response *DeleteGroup
     if request == nil {
         request = NewDeleteGroupRequest()
     }
+    
     response = NewDeleteGroupResponse()
     err = c.Send(request, response)
     return
@@ -594,6 +622,7 @@ func NewDeletePolicyRequest() (request *DeletePolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DeletePolicy")
+    
     
     return
 }
@@ -619,6 +648,7 @@ func (c *Client) DeletePolicy(request *DeletePolicyRequest) (response *DeletePol
     if request == nil {
         request = NewDeletePolicyRequest()
     }
+    
     response = NewDeletePolicyResponse()
     err = c.Send(request, response)
     return
@@ -629,6 +659,7 @@ func NewDeletePolicyVersionRequest() (request *DeletePolicyVersionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DeletePolicyVersion")
+    
     
     return
 }
@@ -673,6 +704,7 @@ func (c *Client) DeletePolicyVersion(request *DeletePolicyVersionRequest) (respo
     if request == nil {
         request = NewDeletePolicyVersionRequest()
     }
+    
     response = NewDeletePolicyVersionResponse()
     err = c.Send(request, response)
     return
@@ -683,6 +715,7 @@ func NewDeleteRoleRequest() (request *DeleteRoleRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DeleteRole")
+    
     
     return
 }
@@ -706,6 +739,7 @@ func (c *Client) DeleteRole(request *DeleteRoleRequest) (response *DeleteRoleRes
     if request == nil {
         request = NewDeleteRoleRequest()
     }
+    
     response = NewDeleteRoleResponse()
     err = c.Send(request, response)
     return
@@ -716,6 +750,7 @@ func NewDeleteRolePermissionsBoundaryRequest() (request *DeleteRolePermissionsBo
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DeleteRolePermissionsBoundary")
+    
     
     return
 }
@@ -743,6 +778,7 @@ func (c *Client) DeleteRolePermissionsBoundary(request *DeleteRolePermissionsBou
     if request == nil {
         request = NewDeleteRolePermissionsBoundaryRequest()
     }
+    
     response = NewDeleteRolePermissionsBoundaryResponse()
     err = c.Send(request, response)
     return
@@ -753,6 +789,7 @@ func NewDeleteSAMLProviderRequest() (request *DeleteSAMLProviderRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DeleteSAMLProvider")
+    
     
     return
 }
@@ -774,6 +811,7 @@ func (c *Client) DeleteSAMLProvider(request *DeleteSAMLProviderRequest) (respons
     if request == nil {
         request = NewDeleteSAMLProviderRequest()
     }
+    
     response = NewDeleteSAMLProviderResponse()
     err = c.Send(request, response)
     return
@@ -784,6 +822,7 @@ func NewDeleteServiceLinkedRoleRequest() (request *DeleteServiceLinkedRoleReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DeleteServiceLinkedRole")
+    
     
     return
 }
@@ -806,6 +845,7 @@ func (c *Client) DeleteServiceLinkedRole(request *DeleteServiceLinkedRoleRequest
     if request == nil {
         request = NewDeleteServiceLinkedRoleRequest()
     }
+    
     response = NewDeleteServiceLinkedRoleResponse()
     err = c.Send(request, response)
     return
@@ -816,6 +856,7 @@ func NewDeleteUserRequest() (request *DeleteUserRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DeleteUser")
+    
     
     return
 }
@@ -840,6 +881,7 @@ func (c *Client) DeleteUser(request *DeleteUserRequest) (response *DeleteUserRes
     if request == nil {
         request = NewDeleteUserRequest()
     }
+    
     response = NewDeleteUserResponse()
     err = c.Send(request, response)
     return
@@ -850,6 +892,7 @@ func NewDeleteUserPermissionsBoundaryRequest() (request *DeleteUserPermissionsBo
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DeleteUserPermissionsBoundary")
+    
     
     return
 }
@@ -875,6 +918,7 @@ func (c *Client) DeleteUserPermissionsBoundary(request *DeleteUserPermissionsBou
     if request == nil {
         request = NewDeleteUserPermissionsBoundaryRequest()
     }
+    
     response = NewDeleteUserPermissionsBoundaryResponse()
     err = c.Send(request, response)
     return
@@ -885,6 +929,7 @@ func NewDescribeRoleListRequest() (request *DescribeRoleListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DescribeRoleList")
+    
     
     return
 }
@@ -906,6 +951,7 @@ func (c *Client) DescribeRoleList(request *DescribeRoleListRequest) (response *D
     if request == nil {
         request = NewDescribeRoleListRequest()
     }
+    
     response = NewDescribeRoleListResponse()
     err = c.Send(request, response)
     return
@@ -916,6 +962,7 @@ func NewDescribeSafeAuthFlagRequest() (request *DescribeSafeAuthFlagRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DescribeSafeAuthFlag")
+    
     
     return
 }
@@ -938,6 +985,7 @@ func (c *Client) DescribeSafeAuthFlag(request *DescribeSafeAuthFlagRequest) (res
     if request == nil {
         request = NewDescribeSafeAuthFlagRequest()
     }
+    
     response = NewDescribeSafeAuthFlagResponse()
     err = c.Send(request, response)
     return
@@ -948,6 +996,7 @@ func NewDescribeSafeAuthFlagCollRequest() (request *DescribeSafeAuthFlagCollRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DescribeSafeAuthFlagColl")
+    
     
     return
 }
@@ -970,6 +1019,7 @@ func (c *Client) DescribeSafeAuthFlagColl(request *DescribeSafeAuthFlagCollReque
     if request == nil {
         request = NewDescribeSafeAuthFlagCollRequest()
     }
+    
     response = NewDescribeSafeAuthFlagCollResponse()
     err = c.Send(request, response)
     return
@@ -980,6 +1030,7 @@ func NewDescribeSafeAuthFlagIntlRequest() (request *DescribeSafeAuthFlagIntlRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DescribeSafeAuthFlagIntl")
+    
     
     return
 }
@@ -1002,6 +1053,7 @@ func (c *Client) DescribeSafeAuthFlagIntl(request *DescribeSafeAuthFlagIntlReque
     if request == nil {
         request = NewDescribeSafeAuthFlagIntlRequest()
     }
+    
     response = NewDescribeSafeAuthFlagIntlResponse()
     err = c.Send(request, response)
     return
@@ -1012,6 +1064,7 @@ func NewDescribeSubAccountsRequest() (request *DescribeSubAccountsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DescribeSubAccounts")
+    
     
     return
 }
@@ -1034,6 +1087,7 @@ func (c *Client) DescribeSubAccounts(request *DescribeSubAccountsRequest) (respo
     if request == nil {
         request = NewDescribeSubAccountsRequest()
     }
+    
     response = NewDescribeSubAccountsResponse()
     err = c.Send(request, response)
     return
@@ -1044,6 +1098,7 @@ func NewDescribeUserSAMLConfigRequest() (request *DescribeUserSAMLConfigRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DescribeUserSAMLConfig")
+    
     
     return
 }
@@ -1066,6 +1121,7 @@ func (c *Client) DescribeUserSAMLConfig(request *DescribeUserSAMLConfigRequest) 
     if request == nil {
         request = NewDescribeUserSAMLConfigRequest()
     }
+    
     response = NewDescribeUserSAMLConfigResponse()
     err = c.Send(request, response)
     return
@@ -1076,6 +1132,7 @@ func NewDetachGroupPolicyRequest() (request *DetachGroupPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DetachGroupPolicy")
+    
     
     return
 }
@@ -1102,6 +1159,7 @@ func (c *Client) DetachGroupPolicy(request *DetachGroupPolicyRequest) (response 
     if request == nil {
         request = NewDetachGroupPolicyRequest()
     }
+    
     response = NewDetachGroupPolicyResponse()
     err = c.Send(request, response)
     return
@@ -1112,6 +1170,7 @@ func NewDetachRolePolicyRequest() (request *DetachRolePolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DetachRolePolicy")
+    
     
     return
 }
@@ -1135,6 +1194,7 @@ func (c *Client) DetachRolePolicy(request *DetachRolePolicyRequest) (response *D
     if request == nil {
         request = NewDetachRolePolicyRequest()
     }
+    
     response = NewDetachRolePolicyResponse()
     err = c.Send(request, response)
     return
@@ -1145,6 +1205,7 @@ func NewDetachUserPolicyRequest() (request *DetachUserPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "DetachUserPolicy")
+    
     
     return
 }
@@ -1172,6 +1233,7 @@ func (c *Client) DetachUserPolicy(request *DetachUserPolicyRequest) (response *D
     if request == nil {
         request = NewDetachUserPolicyRequest()
     }
+    
     response = NewDetachUserPolicyResponse()
     err = c.Send(request, response)
     return
@@ -1182,6 +1244,7 @@ func NewGetAccountSummaryRequest() (request *GetAccountSummaryRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "GetAccountSummary")
+    
     
     return
 }
@@ -1202,6 +1265,7 @@ func (c *Client) GetAccountSummary(request *GetAccountSummaryRequest) (response 
     if request == nil {
         request = NewGetAccountSummaryRequest()
     }
+    
     response = NewGetAccountSummaryResponse()
     err = c.Send(request, response)
     return
@@ -1212,6 +1276,7 @@ func NewGetCustomMFATokenInfoRequest() (request *GetCustomMFATokenInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "GetCustomMFATokenInfo")
+    
     
     return
 }
@@ -1232,6 +1297,7 @@ func (c *Client) GetCustomMFATokenInfo(request *GetCustomMFATokenInfoRequest) (r
     if request == nil {
         request = NewGetCustomMFATokenInfoRequest()
     }
+    
     response = NewGetCustomMFATokenInfoResponse()
     err = c.Send(request, response)
     return
@@ -1242,6 +1308,7 @@ func NewGetGroupRequest() (request *GetGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "GetGroup")
+    
     
     return
 }
@@ -1263,6 +1330,7 @@ func (c *Client) GetGroup(request *GetGroupRequest) (response *GetGroupResponse,
     if request == nil {
         request = NewGetGroupRequest()
     }
+    
     response = NewGetGroupResponse()
     err = c.Send(request, response)
     return
@@ -1273,6 +1341,7 @@ func NewGetPolicyRequest() (request *GetPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "GetPolicy")
+    
     
     return
 }
@@ -1296,6 +1365,7 @@ func (c *Client) GetPolicy(request *GetPolicyRequest) (response *GetPolicyRespon
     if request == nil {
         request = NewGetPolicyRequest()
     }
+    
     response = NewGetPolicyResponse()
     err = c.Send(request, response)
     return
@@ -1306,6 +1376,7 @@ func NewGetPolicyVersionRequest() (request *GetPolicyVersionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "GetPolicyVersion")
+    
     
     return
 }
@@ -1330,6 +1401,7 @@ func (c *Client) GetPolicyVersion(request *GetPolicyVersionRequest) (response *G
     if request == nil {
         request = NewGetPolicyVersionRequest()
     }
+    
     response = NewGetPolicyVersionResponse()
     err = c.Send(request, response)
     return
@@ -1340,6 +1412,7 @@ func NewGetRoleRequest() (request *GetRoleRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "GetRole")
+    
     
     return
 }
@@ -1362,6 +1435,7 @@ func (c *Client) GetRole(request *GetRoleRequest) (response *GetRoleResponse, er
     if request == nil {
         request = NewGetRoleRequest()
     }
+    
     response = NewGetRoleResponse()
     err = c.Send(request, response)
     return
@@ -1372,6 +1446,7 @@ func NewGetSAMLProviderRequest() (request *GetSAMLProviderRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "GetSAMLProvider")
+    
     
     return
 }
@@ -1393,6 +1468,7 @@ func (c *Client) GetSAMLProvider(request *GetSAMLProviderRequest) (response *Get
     if request == nil {
         request = NewGetSAMLProviderRequest()
     }
+    
     response = NewGetSAMLProviderResponse()
     err = c.Send(request, response)
     return
@@ -1403,6 +1479,7 @@ func NewGetSecurityLastUsedRequest() (request *GetSecurityLastUsedRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "GetSecurityLastUsed")
+    
     
     return
 }
@@ -1424,6 +1501,7 @@ func (c *Client) GetSecurityLastUsed(request *GetSecurityLastUsedRequest) (respo
     if request == nil {
         request = NewGetSecurityLastUsedRequest()
     }
+    
     response = NewGetSecurityLastUsedResponse()
     err = c.Send(request, response)
     return
@@ -1434,6 +1512,7 @@ func NewGetServiceLinkedRoleDeletionStatusRequest() (request *GetServiceLinkedRo
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "GetServiceLinkedRoleDeletionStatus")
+    
     
     return
 }
@@ -1456,6 +1535,7 @@ func (c *Client) GetServiceLinkedRoleDeletionStatus(request *GetServiceLinkedRol
     if request == nil {
         request = NewGetServiceLinkedRoleDeletionStatusRequest()
     }
+    
     response = NewGetServiceLinkedRoleDeletionStatusResponse()
     err = c.Send(request, response)
     return
@@ -1466,6 +1546,7 @@ func NewGetUserRequest() (request *GetUserRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "GetUser")
+    
     
     return
 }
@@ -1487,6 +1568,7 @@ func (c *Client) GetUser(request *GetUserRequest) (response *GetUserResponse, er
     if request == nil {
         request = NewGetUserRequest()
     }
+    
     response = NewGetUserResponse()
     err = c.Send(request, response)
     return
@@ -1497,6 +1579,7 @@ func NewListAccessKeysRequest() (request *ListAccessKeysRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListAccessKeys")
+    
     
     return
 }
@@ -1522,6 +1605,7 @@ func (c *Client) ListAccessKeys(request *ListAccessKeysRequest) (response *ListA
     if request == nil {
         request = NewListAccessKeysRequest()
     }
+    
     response = NewListAccessKeysResponse()
     err = c.Send(request, response)
     return
@@ -1532,6 +1616,7 @@ func NewListAttachedGroupPoliciesRequest() (request *ListAttachedGroupPoliciesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListAttachedGroupPolicies")
+    
     
     return
 }
@@ -1553,6 +1638,7 @@ func (c *Client) ListAttachedGroupPolicies(request *ListAttachedGroupPoliciesReq
     if request == nil {
         request = NewListAttachedGroupPoliciesRequest()
     }
+    
     response = NewListAttachedGroupPoliciesResponse()
     err = c.Send(request, response)
     return
@@ -1563,6 +1649,7 @@ func NewListAttachedRolePoliciesRequest() (request *ListAttachedRolePoliciesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListAttachedRolePolicies")
+    
     
     return
 }
@@ -1584,6 +1671,7 @@ func (c *Client) ListAttachedRolePolicies(request *ListAttachedRolePoliciesReque
     if request == nil {
         request = NewListAttachedRolePoliciesRequest()
     }
+    
     response = NewListAttachedRolePoliciesResponse()
     err = c.Send(request, response)
     return
@@ -1594,6 +1682,7 @@ func NewListAttachedUserPoliciesRequest() (request *ListAttachedUserPoliciesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListAttachedUserPolicies")
+    
     
     return
 }
@@ -1615,6 +1704,7 @@ func (c *Client) ListAttachedUserPolicies(request *ListAttachedUserPoliciesReque
     if request == nil {
         request = NewListAttachedUserPoliciesRequest()
     }
+    
     response = NewListAttachedUserPoliciesResponse()
     err = c.Send(request, response)
     return
@@ -1625,6 +1715,7 @@ func NewListCollaboratorsRequest() (request *ListCollaboratorsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListCollaborators")
+    
     
     return
 }
@@ -1645,6 +1736,7 @@ func (c *Client) ListCollaborators(request *ListCollaboratorsRequest) (response 
     if request == nil {
         request = NewListCollaboratorsRequest()
     }
+    
     response = NewListCollaboratorsResponse()
     err = c.Send(request, response)
     return
@@ -1655,6 +1747,7 @@ func NewListEntitiesForPolicyRequest() (request *ListEntitiesForPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListEntitiesForPolicy")
+    
     
     return
 }
@@ -1678,6 +1771,7 @@ func (c *Client) ListEntitiesForPolicy(request *ListEntitiesForPolicyRequest) (r
     if request == nil {
         request = NewListEntitiesForPolicyRequest()
     }
+    
     response = NewListEntitiesForPolicyResponse()
     err = c.Send(request, response)
     return
@@ -1688,6 +1782,7 @@ func NewListGroupsRequest() (request *ListGroupsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListGroups")
+    
     
     return
 }
@@ -1711,6 +1806,7 @@ func (c *Client) ListGroups(request *ListGroupsRequest) (response *ListGroupsRes
     if request == nil {
         request = NewListGroupsRequest()
     }
+    
     response = NewListGroupsResponse()
     err = c.Send(request, response)
     return
@@ -1721,6 +1817,7 @@ func NewListGroupsForUserRequest() (request *ListGroupsForUserRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListGroupsForUser")
+    
     
     return
 }
@@ -1741,6 +1838,7 @@ func (c *Client) ListGroupsForUser(request *ListGroupsForUserRequest) (response 
     if request == nil {
         request = NewListGroupsForUserRequest()
     }
+    
     response = NewListGroupsForUserResponse()
     err = c.Send(request, response)
     return
@@ -1751,6 +1849,7 @@ func NewListPoliciesRequest() (request *ListPoliciesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListPolicies")
+    
     
     return
 }
@@ -1777,6 +1876,7 @@ func (c *Client) ListPolicies(request *ListPoliciesRequest) (response *ListPolic
     if request == nil {
         request = NewListPoliciesRequest()
     }
+    
     response = NewListPoliciesResponse()
     err = c.Send(request, response)
     return
@@ -1787,6 +1887,7 @@ func NewListPolicyVersionsRequest() (request *ListPolicyVersionsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListPolicyVersions")
+    
     
     return
 }
@@ -1810,6 +1911,7 @@ func (c *Client) ListPolicyVersions(request *ListPolicyVersionsRequest) (respons
     if request == nil {
         request = NewListPolicyVersionsRequest()
     }
+    
     response = NewListPolicyVersionsResponse()
     err = c.Send(request, response)
     return
@@ -1820,6 +1922,7 @@ func NewListSAMLProvidersRequest() (request *ListSAMLProvidersRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListSAMLProviders")
+    
     
     return
 }
@@ -1843,6 +1946,7 @@ func (c *Client) ListSAMLProviders(request *ListSAMLProvidersRequest) (response 
     if request == nil {
         request = NewListSAMLProvidersRequest()
     }
+    
     response = NewListSAMLProvidersResponse()
     err = c.Send(request, response)
     return
@@ -1853,6 +1957,7 @@ func NewListUsersRequest() (request *ListUsersRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListUsers")
+    
     
     return
 }
@@ -1873,6 +1978,7 @@ func (c *Client) ListUsers(request *ListUsersRequest) (response *ListUsersRespon
     if request == nil {
         request = NewListUsersRequest()
     }
+    
     response = NewListUsersResponse()
     err = c.Send(request, response)
     return
@@ -1883,6 +1989,7 @@ func NewListUsersForGroupRequest() (request *ListUsersForGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "ListUsersForGroup")
+    
     
     return
 }
@@ -1903,6 +2010,7 @@ func (c *Client) ListUsersForGroup(request *ListUsersForGroupRequest) (response 
     if request == nil {
         request = NewListUsersForGroupRequest()
     }
+    
     response = NewListUsersForGroupResponse()
     err = c.Send(request, response)
     return
@@ -1913,6 +2021,7 @@ func NewPutRolePermissionsBoundaryRequest() (request *PutRolePermissionsBoundary
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "PutRolePermissionsBoundary")
+    
     
     return
 }
@@ -1941,6 +2050,7 @@ func (c *Client) PutRolePermissionsBoundary(request *PutRolePermissionsBoundaryR
     if request == nil {
         request = NewPutRolePermissionsBoundaryRequest()
     }
+    
     response = NewPutRolePermissionsBoundaryResponse()
     err = c.Send(request, response)
     return
@@ -1951,6 +2061,7 @@ func NewPutUserPermissionsBoundaryRequest() (request *PutUserPermissionsBoundary
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "PutUserPermissionsBoundary")
+    
     
     return
 }
@@ -1978,6 +2089,7 @@ func (c *Client) PutUserPermissionsBoundary(request *PutUserPermissionsBoundaryR
     if request == nil {
         request = NewPutUserPermissionsBoundaryRequest()
     }
+    
     response = NewPutUserPermissionsBoundaryResponse()
     err = c.Send(request, response)
     return
@@ -1988,6 +2100,7 @@ func NewRemoveUserFromGroupRequest() (request *RemoveUserFromGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "RemoveUserFromGroup")
+    
     
     return
 }
@@ -2008,6 +2121,7 @@ func (c *Client) RemoveUserFromGroup(request *RemoveUserFromGroupRequest) (respo
     if request == nil {
         request = NewRemoveUserFromGroupRequest()
     }
+    
     response = NewRemoveUserFromGroupResponse()
     err = c.Send(request, response)
     return
@@ -2018,6 +2132,7 @@ func NewSetDefaultPolicyVersionRequest() (request *SetDefaultPolicyVersionReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "SetDefaultPolicyVersion")
+    
     
     return
 }
@@ -2066,6 +2181,7 @@ func (c *Client) SetDefaultPolicyVersion(request *SetDefaultPolicyVersionRequest
     if request == nil {
         request = NewSetDefaultPolicyVersionRequest()
     }
+    
     response = NewSetDefaultPolicyVersionResponse()
     err = c.Send(request, response)
     return
@@ -2076,6 +2192,7 @@ func NewSetMfaFlagRequest() (request *SetMfaFlagRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "SetMfaFlag")
+    
     
     return
 }
@@ -2101,6 +2218,7 @@ func (c *Client) SetMfaFlag(request *SetMfaFlagRequest) (response *SetMfaFlagRes
     if request == nil {
         request = NewSetMfaFlagRequest()
     }
+    
     response = NewSetMfaFlagResponse()
     err = c.Send(request, response)
     return
@@ -2111,6 +2229,7 @@ func NewUpdateAssumeRolePolicyRequest() (request *UpdateAssumeRolePolicyRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "UpdateAssumeRolePolicy")
+    
     
     return
 }
@@ -2148,6 +2267,7 @@ func (c *Client) UpdateAssumeRolePolicy(request *UpdateAssumeRolePolicyRequest) 
     if request == nil {
         request = NewUpdateAssumeRolePolicyRequest()
     }
+    
     response = NewUpdateAssumeRolePolicyResponse()
     err = c.Send(request, response)
     return
@@ -2158,6 +2278,7 @@ func NewUpdateGroupRequest() (request *UpdateGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "UpdateGroup")
+    
     
     return
 }
@@ -2181,6 +2302,7 @@ func (c *Client) UpdateGroup(request *UpdateGroupRequest) (response *UpdateGroup
     if request == nil {
         request = NewUpdateGroupRequest()
     }
+    
     response = NewUpdateGroupResponse()
     err = c.Send(request, response)
     return
@@ -2191,6 +2313,7 @@ func NewUpdatePolicyRequest() (request *UpdatePolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "UpdatePolicy")
+    
     
     return
 }
@@ -2246,6 +2369,7 @@ func (c *Client) UpdatePolicy(request *UpdatePolicyRequest) (response *UpdatePol
     if request == nil {
         request = NewUpdatePolicyRequest()
     }
+    
     response = NewUpdatePolicyResponse()
     err = c.Send(request, response)
     return
@@ -2256,6 +2380,7 @@ func NewUpdateRoleConsoleLoginRequest() (request *UpdateRoleConsoleLoginRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "UpdateRoleConsoleLogin")
+    
     
     return
 }
@@ -2278,6 +2403,7 @@ func (c *Client) UpdateRoleConsoleLogin(request *UpdateRoleConsoleLoginRequest) 
     if request == nil {
         request = NewUpdateRoleConsoleLoginRequest()
     }
+    
     response = NewUpdateRoleConsoleLoginResponse()
     err = c.Send(request, response)
     return
@@ -2288,6 +2414,7 @@ func NewUpdateRoleDescriptionRequest() (request *UpdateRoleDescriptionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "UpdateRoleDescription")
+    
     
     return
 }
@@ -2311,6 +2438,7 @@ func (c *Client) UpdateRoleDescription(request *UpdateRoleDescriptionRequest) (r
     if request == nil {
         request = NewUpdateRoleDescriptionRequest()
     }
+    
     response = NewUpdateRoleDescriptionResponse()
     err = c.Send(request, response)
     return
@@ -2321,6 +2449,7 @@ func NewUpdateSAMLProviderRequest() (request *UpdateSAMLProviderRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "UpdateSAMLProvider")
+    
     
     return
 }
@@ -2342,6 +2471,7 @@ func (c *Client) UpdateSAMLProvider(request *UpdateSAMLProviderRequest) (respons
     if request == nil {
         request = NewUpdateSAMLProviderRequest()
     }
+    
     response = NewUpdateSAMLProviderResponse()
     err = c.Send(request, response)
     return
@@ -2352,6 +2482,7 @@ func NewUpdateUserRequest() (request *UpdateUserRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "UpdateUser")
+    
     
     return
 }
@@ -2373,6 +2504,7 @@ func (c *Client) UpdateUser(request *UpdateUserRequest) (response *UpdateUserRes
     if request == nil {
         request = NewUpdateUserRequest()
     }
+    
     response = NewUpdateUserResponse()
     err = c.Send(request, response)
     return
@@ -2383,6 +2515,7 @@ func NewUpdateUserSAMLConfigRequest() (request *UpdateUserSAMLConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("cam", APIVersion, "UpdateUserSAMLConfig")
+    
     
     return
 }
@@ -2404,6 +2537,7 @@ func (c *Client) UpdateUserSAMLConfig(request *UpdateUserSAMLConfigRequest) (res
     if request == nil {
         request = NewUpdateUserSAMLConfigRequest()
     }
+    
     response = NewUpdateUserSAMLConfigResponse()
     err = c.Send(request, response)
     return

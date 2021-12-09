@@ -49,6 +49,7 @@ func NewDescribeEventsRequest() (request *DescribeEventsRequest) {
     }
     request.Init().WithApiInfo("cloudaudit", APIVersion, "DescribeEvents")
     
+    
     return
 }
 
@@ -69,6 +70,7 @@ func (c *Client) DescribeEvents(request *DescribeEventsRequest) (response *Descr
     if request == nil {
         request = NewDescribeEventsRequest()
     }
+    
     response = NewDescribeEventsResponse()
     err = c.Send(request, response)
     return

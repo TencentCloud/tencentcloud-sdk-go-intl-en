@@ -49,6 +49,7 @@ func NewAddLoginWhiteListRequest() (request *AddLoginWhiteListRequest) {
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "AddLoginWhiteList")
     
+    
     return
 }
 
@@ -71,6 +72,7 @@ func (c *Client) AddLoginWhiteList(request *AddLoginWhiteListRequest) (response 
     if request == nil {
         request = NewAddLoginWhiteListRequest()
     }
+    
     response = NewAddLoginWhiteListResponse()
     err = c.Send(request, response)
     return
@@ -81,6 +83,7 @@ func NewAddMachineTagRequest() (request *AddMachineTagRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "AddMachineTag")
+    
     
     return
 }
@@ -104,6 +107,7 @@ func (c *Client) AddMachineTag(request *AddMachineTagRequest) (response *AddMach
     if request == nil {
         request = NewAddMachineTagRequest()
     }
+    
     response = NewAddMachineTagResponse()
     err = c.Send(request, response)
     return
@@ -114,6 +118,7 @@ func NewCloseProVersionRequest() (request *CloseProVersionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "CloseProVersion")
+    
     
     return
 }
@@ -141,6 +146,7 @@ func (c *Client) CloseProVersion(request *CloseProVersionRequest) (response *Clo
     if request == nil {
         request = NewCloseProVersionRequest()
     }
+    
     response = NewCloseProVersionResponse()
     err = c.Send(request, response)
     return
@@ -151,6 +157,7 @@ func NewCreateOpenPortTaskRequest() (request *CreateOpenPortTaskRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "CreateOpenPortTask")
+    
     
     return
 }
@@ -175,6 +182,7 @@ func (c *Client) CreateOpenPortTask(request *CreateOpenPortTaskRequest) (respons
     if request == nil {
         request = NewCreateOpenPortTaskRequest()
     }
+    
     response = NewCreateOpenPortTaskResponse()
     err = c.Send(request, response)
     return
@@ -185,6 +193,7 @@ func NewCreateProcessTaskRequest() (request *CreateProcessTaskRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "CreateProcessTask")
+    
     
     return
 }
@@ -211,6 +220,7 @@ func (c *Client) CreateProcessTask(request *CreateProcessTaskRequest) (response 
     if request == nil {
         request = NewCreateProcessTaskRequest()
     }
+    
     response = NewCreateProcessTaskResponse()
     err = c.Send(request, response)
     return
@@ -221,6 +231,7 @@ func NewCreateUsualLoginPlacesRequest() (request *CreateUsualLoginPlacesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "CreateUsualLoginPlaces")
+    
     
     return
 }
@@ -245,6 +256,7 @@ func (c *Client) CreateUsualLoginPlaces(request *CreateUsualLoginPlacesRequest) 
     if request == nil {
         request = NewCreateUsualLoginPlacesRequest()
     }
+    
     response = NewCreateUsualLoginPlacesResponse()
     err = c.Send(request, response)
     return
@@ -255,6 +267,7 @@ func NewDeleteBruteAttacksRequest() (request *DeleteBruteAttacksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DeleteBruteAttacks")
+    
     
     return
 }
@@ -278,6 +291,7 @@ func (c *Client) DeleteBruteAttacks(request *DeleteBruteAttacksRequest) (respons
     if request == nil {
         request = NewDeleteBruteAttacksRequest()
     }
+    
     response = NewDeleteBruteAttacksResponse()
     err = c.Send(request, response)
     return
@@ -288,6 +302,7 @@ func NewDeleteLoginWhiteListRequest() (request *DeleteLoginWhiteListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DeleteLoginWhiteList")
+    
     
     return
 }
@@ -311,6 +326,7 @@ func (c *Client) DeleteLoginWhiteList(request *DeleteLoginWhiteListRequest) (res
     if request == nil {
         request = NewDeleteLoginWhiteListRequest()
     }
+    
     response = NewDeleteLoginWhiteListResponse()
     err = c.Send(request, response)
     return
@@ -321,6 +337,7 @@ func NewDeleteMachineRequest() (request *DeleteMachineRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DeleteMachine")
+    
     
     return
 }
@@ -346,6 +363,7 @@ func (c *Client) DeleteMachine(request *DeleteMachineRequest) (response *DeleteM
     if request == nil {
         request = NewDeleteMachineRequest()
     }
+    
     response = NewDeleteMachineResponse()
     err = c.Send(request, response)
     return
@@ -356,6 +374,7 @@ func NewDeleteMachineTagRequest() (request *DeleteMachineTagRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DeleteMachineTag")
+    
     
     return
 }
@@ -379,6 +398,7 @@ func (c *Client) DeleteMachineTag(request *DeleteMachineTagRequest) (response *D
     if request == nil {
         request = NewDeleteMachineTagRequest()
     }
+    
     response = NewDeleteMachineTagResponse()
     err = c.Send(request, response)
     return
@@ -389,6 +409,7 @@ func NewDeleteMaliciousRequestsRequest() (request *DeleteMaliciousRequestsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DeleteMaliciousRequests")
+    
     
     return
 }
@@ -410,6 +431,7 @@ func (c *Client) DeleteMaliciousRequests(request *DeleteMaliciousRequestsRequest
     if request == nil {
         request = NewDeleteMaliciousRequestsRequest()
     }
+    
     response = NewDeleteMaliciousRequestsResponse()
     err = c.Send(request, response)
     return
@@ -420,6 +442,7 @@ func NewDeleteMalwaresRequest() (request *DeleteMalwaresRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DeleteMalwares")
+    
     
     return
 }
@@ -443,6 +466,7 @@ func (c *Client) DeleteMalwares(request *DeleteMalwaresRequest) (response *Delet
     if request == nil {
         request = NewDeleteMalwaresRequest()
     }
+    
     response = NewDeleteMalwaresResponse()
     err = c.Send(request, response)
     return
@@ -453,6 +477,7 @@ func NewDeleteNonlocalLoginPlacesRequest() (request *DeleteNonlocalLoginPlacesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DeleteNonlocalLoginPlaces")
+    
     
     return
 }
@@ -476,6 +501,7 @@ func (c *Client) DeleteNonlocalLoginPlaces(request *DeleteNonlocalLoginPlacesReq
     if request == nil {
         request = NewDeleteNonlocalLoginPlacesRequest()
     }
+    
     response = NewDeleteNonlocalLoginPlacesResponse()
     err = c.Send(request, response)
     return
@@ -486,6 +512,7 @@ func NewDeleteUsualLoginPlacesRequest() (request *DeleteUsualLoginPlacesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DeleteUsualLoginPlaces")
+    
     
     return
 }
@@ -509,6 +536,7 @@ func (c *Client) DeleteUsualLoginPlaces(request *DeleteUsualLoginPlacesRequest) 
     if request == nil {
         request = NewDeleteUsualLoginPlacesRequest()
     }
+    
     response = NewDeleteUsualLoginPlacesResponse()
     err = c.Send(request, response)
     return
@@ -519,6 +547,7 @@ func NewDescribeAccountStatisticsRequest() (request *DescribeAccountStatisticsRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeAccountStatistics")
+    
     
     return
 }
@@ -543,6 +572,7 @@ func (c *Client) DescribeAccountStatistics(request *DescribeAccountStatisticsReq
     if request == nil {
         request = NewDescribeAccountStatisticsRequest()
     }
+    
     response = NewDescribeAccountStatisticsResponse()
     err = c.Send(request, response)
     return
@@ -553,6 +583,7 @@ func NewDescribeAccountsRequest() (request *DescribeAccountsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeAccounts")
+    
     
     return
 }
@@ -576,6 +607,7 @@ func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *D
     if request == nil {
         request = NewDescribeAccountsRequest()
     }
+    
     response = NewDescribeAccountsResponse()
     err = c.Send(request, response)
     return
@@ -586,6 +618,7 @@ func NewDescribeAgentVulsRequest() (request *DescribeAgentVulsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeAgentVuls")
+    
     
     return
 }
@@ -609,6 +642,7 @@ func (c *Client) DescribeAgentVuls(request *DescribeAgentVulsRequest) (response 
     if request == nil {
         request = NewDescribeAgentVulsRequest()
     }
+    
     response = NewDescribeAgentVulsResponse()
     err = c.Send(request, response)
     return
@@ -619,6 +653,7 @@ func NewDescribeAlarmAttributeRequest() (request *DescribeAlarmAttributeRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeAlarmAttribute")
+    
     
     return
 }
@@ -639,6 +674,7 @@ func (c *Client) DescribeAlarmAttribute(request *DescribeAlarmAttributeRequest) 
     if request == nil {
         request = NewDescribeAlarmAttributeRequest()
     }
+    
     response = NewDescribeAlarmAttributeResponse()
     err = c.Send(request, response)
     return
@@ -649,6 +685,7 @@ func NewDescribeBruteAttacksRequest() (request *DescribeBruteAttacksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeBruteAttacks")
+    
     
     return
 }
@@ -672,6 +709,7 @@ func (c *Client) DescribeBruteAttacks(request *DescribeBruteAttacksRequest) (res
     if request == nil {
         request = NewDescribeBruteAttacksRequest()
     }
+    
     response = NewDescribeBruteAttacksResponse()
     err = c.Send(request, response)
     return
@@ -682,6 +720,7 @@ func NewDescribeComponentInfoRequest() (request *DescribeComponentInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeComponentInfo")
+    
     
     return
 }
@@ -707,6 +746,7 @@ func (c *Client) DescribeComponentInfo(request *DescribeComponentInfoRequest) (r
     if request == nil {
         request = NewDescribeComponentInfoRequest()
     }
+    
     response = NewDescribeComponentInfoResponse()
     err = c.Send(request, response)
     return
@@ -717,6 +757,7 @@ func NewDescribeComponentStatisticsRequest() (request *DescribeComponentStatisti
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeComponentStatistics")
+    
     
     return
 }
@@ -741,6 +782,7 @@ func (c *Client) DescribeComponentStatistics(request *DescribeComponentStatistic
     if request == nil {
         request = NewDescribeComponentStatisticsRequest()
     }
+    
     response = NewDescribeComponentStatisticsResponse()
     err = c.Send(request, response)
     return
@@ -751,6 +793,7 @@ func NewDescribeComponentsRequest() (request *DescribeComponentsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeComponents")
+    
     
     return
 }
@@ -774,6 +817,7 @@ func (c *Client) DescribeComponents(request *DescribeComponentsRequest) (respons
     if request == nil {
         request = NewDescribeComponentsRequest()
     }
+    
     response = NewDescribeComponentsResponse()
     err = c.Send(request, response)
     return
@@ -784,6 +828,7 @@ func NewDescribeHistoryAccountsRequest() (request *DescribeHistoryAccountsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeHistoryAccounts")
+    
     
     return
 }
@@ -808,6 +853,7 @@ func (c *Client) DescribeHistoryAccounts(request *DescribeHistoryAccountsRequest
     if request == nil {
         request = NewDescribeHistoryAccountsRequest()
     }
+    
     response = NewDescribeHistoryAccountsResponse()
     err = c.Send(request, response)
     return
@@ -818,6 +864,7 @@ func NewDescribeImpactedHostsRequest() (request *DescribeImpactedHostsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeImpactedHosts")
+    
     
     return
 }
@@ -841,6 +888,7 @@ func (c *Client) DescribeImpactedHosts(request *DescribeImpactedHostsRequest) (r
     if request == nil {
         request = NewDescribeImpactedHostsRequest()
     }
+    
     response = NewDescribeImpactedHostsResponse()
     err = c.Send(request, response)
     return
@@ -851,6 +899,7 @@ func NewDescribeLoginWhiteListRequest() (request *DescribeLoginWhiteListRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeLoginWhiteList")
+    
     
     return
 }
@@ -874,6 +923,7 @@ func (c *Client) DescribeLoginWhiteList(request *DescribeLoginWhiteListRequest) 
     if request == nil {
         request = NewDescribeLoginWhiteListRequest()
     }
+    
     response = NewDescribeLoginWhiteListResponse()
     err = c.Send(request, response)
     return
@@ -884,6 +934,7 @@ func NewDescribeMachineInfoRequest() (request *DescribeMachineInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeMachineInfo")
+    
     
     return
 }
@@ -908,6 +959,7 @@ func (c *Client) DescribeMachineInfo(request *DescribeMachineInfoRequest) (respo
     if request == nil {
         request = NewDescribeMachineInfoRequest()
     }
+    
     response = NewDescribeMachineInfoResponse()
     err = c.Send(request, response)
     return
@@ -918,6 +970,7 @@ func NewDescribeMachinesRequest() (request *DescribeMachinesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeMachines")
+    
     
     return
 }
@@ -942,6 +995,7 @@ func (c *Client) DescribeMachines(request *DescribeMachinesRequest) (response *D
     if request == nil {
         request = NewDescribeMachinesRequest()
     }
+    
     response = NewDescribeMachinesResponse()
     err = c.Send(request, response)
     return
@@ -952,6 +1006,7 @@ func NewDescribeMaliciousRequestsRequest() (request *DescribeMaliciousRequestsRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeMaliciousRequests")
+    
     
     return
 }
@@ -973,6 +1028,7 @@ func (c *Client) DescribeMaliciousRequests(request *DescribeMaliciousRequestsReq
     if request == nil {
         request = NewDescribeMaliciousRequestsRequest()
     }
+    
     response = NewDescribeMaliciousRequestsResponse()
     err = c.Send(request, response)
     return
@@ -983,6 +1039,7 @@ func NewDescribeMalwaresRequest() (request *DescribeMalwaresRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeMalwares")
+    
     
     return
 }
@@ -1006,6 +1063,7 @@ func (c *Client) DescribeMalwares(request *DescribeMalwaresRequest) (response *D
     if request == nil {
         request = NewDescribeMalwaresRequest()
     }
+    
     response = NewDescribeMalwaresResponse()
     err = c.Send(request, response)
     return
@@ -1016,6 +1074,7 @@ func NewDescribeNonlocalLoginPlacesRequest() (request *DescribeNonlocalLoginPlac
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeNonlocalLoginPlaces")
+    
     
     return
 }
@@ -1039,6 +1098,7 @@ func (c *Client) DescribeNonlocalLoginPlaces(request *DescribeNonlocalLoginPlace
     if request == nil {
         request = NewDescribeNonlocalLoginPlacesRequest()
     }
+    
     response = NewDescribeNonlocalLoginPlacesResponse()
     err = c.Send(request, response)
     return
@@ -1049,6 +1109,7 @@ func NewDescribeOpenPortStatisticsRequest() (request *DescribeOpenPortStatistics
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeOpenPortStatistics")
+    
     
     return
 }
@@ -1071,6 +1132,7 @@ func (c *Client) DescribeOpenPortStatistics(request *DescribeOpenPortStatisticsR
     if request == nil {
         request = NewDescribeOpenPortStatisticsRequest()
     }
+    
     response = NewDescribeOpenPortStatisticsResponse()
     err = c.Send(request, response)
     return
@@ -1081,6 +1143,7 @@ func NewDescribeOpenPortTaskStatusRequest() (request *DescribeOpenPortTaskStatus
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeOpenPortTaskStatus")
+    
     
     return
 }
@@ -1105,6 +1168,7 @@ func (c *Client) DescribeOpenPortTaskStatus(request *DescribeOpenPortTaskStatusR
     if request == nil {
         request = NewDescribeOpenPortTaskStatusRequest()
     }
+    
     response = NewDescribeOpenPortTaskStatusResponse()
     err = c.Send(request, response)
     return
@@ -1115,6 +1179,7 @@ func NewDescribeOpenPortsRequest() (request *DescribeOpenPortsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeOpenPorts")
+    
     
     return
 }
@@ -1138,6 +1203,7 @@ func (c *Client) DescribeOpenPorts(request *DescribeOpenPortsRequest) (response 
     if request == nil {
         request = NewDescribeOpenPortsRequest()
     }
+    
     response = NewDescribeOpenPortsResponse()
     err = c.Send(request, response)
     return
@@ -1148,6 +1214,7 @@ func NewDescribeOverviewStatisticsRequest() (request *DescribeOverviewStatistics
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeOverviewStatistics")
+    
     
     return
 }
@@ -1170,6 +1237,7 @@ func (c *Client) DescribeOverviewStatistics(request *DescribeOverviewStatisticsR
     if request == nil {
         request = NewDescribeOverviewStatisticsRequest()
     }
+    
     response = NewDescribeOverviewStatisticsResponse()
     err = c.Send(request, response)
     return
@@ -1180,6 +1248,7 @@ func NewDescribeProVersionInfoRequest() (request *DescribeProVersionInfoRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeProVersionInfo")
+    
     
     return
 }
@@ -1200,6 +1269,7 @@ func (c *Client) DescribeProVersionInfo(request *DescribeProVersionInfoRequest) 
     if request == nil {
         request = NewDescribeProVersionInfoRequest()
     }
+    
     response = NewDescribeProVersionInfoResponse()
     err = c.Send(request, response)
     return
@@ -1210,6 +1280,7 @@ func NewDescribeProcessStatisticsRequest() (request *DescribeProcessStatisticsRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeProcessStatistics")
+    
     
     return
 }
@@ -1234,6 +1305,7 @@ func (c *Client) DescribeProcessStatistics(request *DescribeProcessStatisticsReq
     if request == nil {
         request = NewDescribeProcessStatisticsRequest()
     }
+    
     response = NewDescribeProcessStatisticsResponse()
     err = c.Send(request, response)
     return
@@ -1244,6 +1316,7 @@ func NewDescribeProcessTaskStatusRequest() (request *DescribeProcessTaskStatusRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeProcessTaskStatus")
+    
     
     return
 }
@@ -1270,6 +1343,7 @@ func (c *Client) DescribeProcessTaskStatus(request *DescribeProcessTaskStatusReq
     if request == nil {
         request = NewDescribeProcessTaskStatusRequest()
     }
+    
     response = NewDescribeProcessTaskStatusResponse()
     err = c.Send(request, response)
     return
@@ -1280,6 +1354,7 @@ func NewDescribeProcessesRequest() (request *DescribeProcessesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeProcesses")
+    
     
     return
 }
@@ -1304,6 +1379,7 @@ func (c *Client) DescribeProcesses(request *DescribeProcessesRequest) (response 
     if request == nil {
         request = NewDescribeProcessesRequest()
     }
+    
     response = NewDescribeProcessesResponse()
     err = c.Send(request, response)
     return
@@ -1314,6 +1390,7 @@ func NewDescribeSecurityDynamicsRequest() (request *DescribeSecurityDynamicsRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeSecurityDynamics")
+    
     
     return
 }
@@ -1336,6 +1413,7 @@ func (c *Client) DescribeSecurityDynamics(request *DescribeSecurityDynamicsReque
     if request == nil {
         request = NewDescribeSecurityDynamicsRequest()
     }
+    
     response = NewDescribeSecurityDynamicsResponse()
     err = c.Send(request, response)
     return
@@ -1346,6 +1424,7 @@ func NewDescribeSecurityTrendsRequest() (request *DescribeSecurityTrendsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeSecurityTrends")
+    
     
     return
 }
@@ -1369,6 +1448,7 @@ func (c *Client) DescribeSecurityTrends(request *DescribeSecurityTrendsRequest) 
     if request == nil {
         request = NewDescribeSecurityTrendsRequest()
     }
+    
     response = NewDescribeSecurityTrendsResponse()
     err = c.Send(request, response)
     return
@@ -1379,6 +1459,7 @@ func NewDescribeTagMachinesRequest() (request *DescribeTagMachinesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeTagMachines")
+    
     
     return
 }
@@ -1402,6 +1483,7 @@ func (c *Client) DescribeTagMachines(request *DescribeTagMachinesRequest) (respo
     if request == nil {
         request = NewDescribeTagMachinesRequest()
     }
+    
     response = NewDescribeTagMachinesResponse()
     err = c.Send(request, response)
     return
@@ -1412,6 +1494,7 @@ func NewDescribeTagsRequest() (request *DescribeTagsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeTags")
+    
     
     return
 }
@@ -1436,6 +1519,7 @@ func (c *Client) DescribeTags(request *DescribeTagsRequest) (response *DescribeT
     if request == nil {
         request = NewDescribeTagsRequest()
     }
+    
     response = NewDescribeTagsResponse()
     err = c.Send(request, response)
     return
@@ -1446,6 +1530,7 @@ func NewDescribeUsualLoginPlacesRequest() (request *DescribeUsualLoginPlacesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeUsualLoginPlaces")
+    
     
     return
 }
@@ -1470,6 +1555,7 @@ func (c *Client) DescribeUsualLoginPlaces(request *DescribeUsualLoginPlacesReque
     if request == nil {
         request = NewDescribeUsualLoginPlacesRequest()
     }
+    
     response = NewDescribeUsualLoginPlacesResponse()
     err = c.Send(request, response)
     return
@@ -1480,6 +1566,7 @@ func NewDescribeVulInfoRequest() (request *DescribeVulInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeVulInfo")
+    
     
     return
 }
@@ -1504,6 +1591,7 @@ func (c *Client) DescribeVulInfo(request *DescribeVulInfoRequest) (response *Des
     if request == nil {
         request = NewDescribeVulInfoRequest()
     }
+    
     response = NewDescribeVulInfoResponse()
     err = c.Send(request, response)
     return
@@ -1514,6 +1602,7 @@ func NewDescribeVulScanResultRequest() (request *DescribeVulScanResultRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeVulScanResult")
+    
     
     return
 }
@@ -1537,6 +1626,7 @@ func (c *Client) DescribeVulScanResult(request *DescribeVulScanResultRequest) (r
     if request == nil {
         request = NewDescribeVulScanResultRequest()
     }
+    
     response = NewDescribeVulScanResultResponse()
     err = c.Send(request, response)
     return
@@ -1547,6 +1637,7 @@ func NewDescribeVulsRequest() (request *DescribeVulsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeVuls")
+    
     
     return
 }
@@ -1569,6 +1660,7 @@ func (c *Client) DescribeVuls(request *DescribeVulsRequest) (response *DescribeV
     if request == nil {
         request = NewDescribeVulsRequest()
     }
+    
     response = NewDescribeVulsResponse()
     err = c.Send(request, response)
     return
@@ -1579,6 +1671,7 @@ func NewDescribeWeeklyReportBruteAttacksRequest() (request *DescribeWeeklyReport
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeWeeklyReportBruteAttacks")
+    
     
     return
 }
@@ -1601,6 +1694,7 @@ func (c *Client) DescribeWeeklyReportBruteAttacks(request *DescribeWeeklyReportB
     if request == nil {
         request = NewDescribeWeeklyReportBruteAttacksRequest()
     }
+    
     response = NewDescribeWeeklyReportBruteAttacksResponse()
     err = c.Send(request, response)
     return
@@ -1611,6 +1705,7 @@ func NewDescribeWeeklyReportInfoRequest() (request *DescribeWeeklyReportInfoRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeWeeklyReportInfo")
+    
     
     return
 }
@@ -1632,6 +1727,7 @@ func (c *Client) DescribeWeeklyReportInfo(request *DescribeWeeklyReportInfoReque
     if request == nil {
         request = NewDescribeWeeklyReportInfoRequest()
     }
+    
     response = NewDescribeWeeklyReportInfoResponse()
     err = c.Send(request, response)
     return
@@ -1642,6 +1738,7 @@ func NewDescribeWeeklyReportMalwaresRequest() (request *DescribeWeeklyReportMalw
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeWeeklyReportMalwares")
+    
     
     return
 }
@@ -1664,6 +1761,7 @@ func (c *Client) DescribeWeeklyReportMalwares(request *DescribeWeeklyReportMalwa
     if request == nil {
         request = NewDescribeWeeklyReportMalwaresRequest()
     }
+    
     response = NewDescribeWeeklyReportMalwaresResponse()
     err = c.Send(request, response)
     return
@@ -1674,6 +1772,7 @@ func NewDescribeWeeklyReportNonlocalLoginPlacesRequest() (request *DescribeWeekl
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeWeeklyReportNonlocalLoginPlaces")
+    
     
     return
 }
@@ -1696,6 +1795,7 @@ func (c *Client) DescribeWeeklyReportNonlocalLoginPlaces(request *DescribeWeekly
     if request == nil {
         request = NewDescribeWeeklyReportNonlocalLoginPlacesRequest()
     }
+    
     response = NewDescribeWeeklyReportNonlocalLoginPlacesResponse()
     err = c.Send(request, response)
     return
@@ -1706,6 +1806,7 @@ func NewDescribeWeeklyReportVulsRequest() (request *DescribeWeeklyReportVulsRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeWeeklyReportVuls")
+    
     
     return
 }
@@ -1728,6 +1829,7 @@ func (c *Client) DescribeWeeklyReportVuls(request *DescribeWeeklyReportVulsReque
     if request == nil {
         request = NewDescribeWeeklyReportVulsRequest()
     }
+    
     response = NewDescribeWeeklyReportVulsResponse()
     err = c.Send(request, response)
     return
@@ -1738,6 +1840,7 @@ func NewDescribeWeeklyReportsRequest() (request *DescribeWeeklyReportsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "DescribeWeeklyReports")
+    
     
     return
 }
@@ -1759,6 +1862,7 @@ func (c *Client) DescribeWeeklyReports(request *DescribeWeeklyReportsRequest) (r
     if request == nil {
         request = NewDescribeWeeklyReportsRequest()
     }
+    
     response = NewDescribeWeeklyReportsResponse()
     err = c.Send(request, response)
     return
@@ -1769,6 +1873,7 @@ func NewEditTagsRequest() (request *EditTagsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "EditTags")
+    
     
     return
 }
@@ -1794,6 +1899,7 @@ func (c *Client) EditTags(request *EditTagsRequest) (response *EditTagsResponse,
     if request == nil {
         request = NewEditTagsRequest()
     }
+    
     response = NewEditTagsResponse()
     err = c.Send(request, response)
     return
@@ -1804,6 +1910,7 @@ func NewExportBruteAttacksRequest() (request *ExportBruteAttacksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "ExportBruteAttacks")
+    
     
     return
 }
@@ -1825,6 +1932,7 @@ func (c *Client) ExportBruteAttacks(request *ExportBruteAttacksRequest) (respons
     if request == nil {
         request = NewExportBruteAttacksRequest()
     }
+    
     response = NewExportBruteAttacksResponse()
     err = c.Send(request, response)
     return
@@ -1835,6 +1943,7 @@ func NewExportMaliciousRequestsRequest() (request *ExportMaliciousRequestsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "ExportMaliciousRequests")
+    
     
     return
 }
@@ -1856,6 +1965,7 @@ func (c *Client) ExportMaliciousRequests(request *ExportMaliciousRequestsRequest
     if request == nil {
         request = NewExportMaliciousRequestsRequest()
     }
+    
     response = NewExportMaliciousRequestsResponse()
     err = c.Send(request, response)
     return
@@ -1866,6 +1976,7 @@ func NewExportMalwaresRequest() (request *ExportMalwaresRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "ExportMalwares")
+    
     
     return
 }
@@ -1887,6 +1998,7 @@ func (c *Client) ExportMalwares(request *ExportMalwaresRequest) (response *Expor
     if request == nil {
         request = NewExportMalwaresRequest()
     }
+    
     response = NewExportMalwaresResponse()
     err = c.Send(request, response)
     return
@@ -1897,6 +2009,7 @@ func NewExportNonlocalLoginPlacesRequest() (request *ExportNonlocalLoginPlacesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "ExportNonlocalLoginPlaces")
+    
     
     return
 }
@@ -1918,6 +2031,7 @@ func (c *Client) ExportNonlocalLoginPlaces(request *ExportNonlocalLoginPlacesReq
     if request == nil {
         request = NewExportNonlocalLoginPlacesRequest()
     }
+    
     response = NewExportNonlocalLoginPlacesResponse()
     err = c.Send(request, response)
     return
@@ -1928,6 +2042,7 @@ func NewIgnoreImpactedHostsRequest() (request *IgnoreImpactedHostsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "IgnoreImpactedHosts")
+    
     
     return
 }
@@ -1952,6 +2067,7 @@ func (c *Client) IgnoreImpactedHosts(request *IgnoreImpactedHostsRequest) (respo
     if request == nil {
         request = NewIgnoreImpactedHostsRequest()
     }
+    
     response = NewIgnoreImpactedHostsResponse()
     err = c.Send(request, response)
     return
@@ -1962,6 +2078,7 @@ func NewMisAlarmNonlocalLoginPlacesRequest() (request *MisAlarmNonlocalLoginPlac
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "MisAlarmNonlocalLoginPlaces")
+    
     
     return
 }
@@ -1985,6 +2102,7 @@ func (c *Client) MisAlarmNonlocalLoginPlaces(request *MisAlarmNonlocalLoginPlace
     if request == nil {
         request = NewMisAlarmNonlocalLoginPlacesRequest()
     }
+    
     response = NewMisAlarmNonlocalLoginPlacesResponse()
     err = c.Send(request, response)
     return
@@ -1995,6 +2113,7 @@ func NewModifyAlarmAttributeRequest() (request *ModifyAlarmAttributeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "ModifyAlarmAttribute")
+    
     
     return
 }
@@ -2018,6 +2137,7 @@ func (c *Client) ModifyAlarmAttribute(request *ModifyAlarmAttributeRequest) (res
     if request == nil {
         request = NewModifyAlarmAttributeRequest()
     }
+    
     response = NewModifyAlarmAttributeResponse()
     err = c.Send(request, response)
     return
@@ -2028,6 +2148,7 @@ func NewModifyAutoOpenProVersionConfigRequest() (request *ModifyAutoOpenProVersi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "ModifyAutoOpenProVersionConfig")
+    
     
     return
 }
@@ -2048,6 +2169,7 @@ func (c *Client) ModifyAutoOpenProVersionConfig(request *ModifyAutoOpenProVersio
     if request == nil {
         request = NewModifyAutoOpenProVersionConfigRequest()
     }
+    
     response = NewModifyAutoOpenProVersionConfigResponse()
     err = c.Send(request, response)
     return
@@ -2058,6 +2180,7 @@ func NewModifyLoginWhiteListRequest() (request *ModifyLoginWhiteListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "ModifyLoginWhiteList")
+    
     
     return
 }
@@ -2081,6 +2204,7 @@ func (c *Client) ModifyLoginWhiteList(request *ModifyLoginWhiteListRequest) (res
     if request == nil {
         request = NewModifyLoginWhiteListRequest()
     }
+    
     response = NewModifyLoginWhiteListResponse()
     err = c.Send(request, response)
     return
@@ -2091,6 +2215,7 @@ func NewModifyProVersionRenewFlagRequest() (request *ModifyProVersionRenewFlagRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "ModifyProVersionRenewFlag")
+    
     
     return
 }
@@ -2113,6 +2238,7 @@ func (c *Client) ModifyProVersionRenewFlag(request *ModifyProVersionRenewFlagReq
     if request == nil {
         request = NewModifyProVersionRenewFlagRequest()
     }
+    
     response = NewModifyProVersionRenewFlagResponse()
     err = c.Send(request, response)
     return
@@ -2123,6 +2249,7 @@ func NewOpenProVersionRequest() (request *OpenProVersionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "OpenProVersion")
+    
     
     return
 }
@@ -2149,6 +2276,7 @@ func (c *Client) OpenProVersion(request *OpenProVersionRequest) (response *OpenP
     if request == nil {
         request = NewOpenProVersionRequest()
     }
+    
     response = NewOpenProVersionResponse()
     err = c.Send(request, response)
     return
@@ -2159,6 +2287,7 @@ func NewRecoverMalwaresRequest() (request *RecoverMalwaresRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "RecoverMalwares")
+    
     
     return
 }
@@ -2183,6 +2312,7 @@ func (c *Client) RecoverMalwares(request *RecoverMalwaresRequest) (response *Rec
     if request == nil {
         request = NewRecoverMalwaresRequest()
     }
+    
     response = NewRecoverMalwaresResponse()
     err = c.Send(request, response)
     return
@@ -2193,6 +2323,7 @@ func NewRescanImpactedHostRequest() (request *RescanImpactedHostRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "RescanImpactedHost")
+    
     
     return
 }
@@ -2219,6 +2350,7 @@ func (c *Client) RescanImpactedHost(request *RescanImpactedHostRequest) (respons
     if request == nil {
         request = NewRescanImpactedHostRequest()
     }
+    
     response = NewRescanImpactedHostResponse()
     err = c.Send(request, response)
     return
@@ -2229,6 +2361,7 @@ func NewSeparateMalwaresRequest() (request *SeparateMalwaresRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "SeparateMalwares")
+    
     
     return
 }
@@ -2254,6 +2387,7 @@ func (c *Client) SeparateMalwares(request *SeparateMalwaresRequest) (response *S
     if request == nil {
         request = NewSeparateMalwaresRequest()
     }
+    
     response = NewSeparateMalwaresResponse()
     err = c.Send(request, response)
     return
@@ -2264,6 +2398,7 @@ func NewTrustMaliciousRequestRequest() (request *TrustMaliciousRequestRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "TrustMaliciousRequest")
+    
     
     return
 }
@@ -2285,6 +2420,7 @@ func (c *Client) TrustMaliciousRequest(request *TrustMaliciousRequestRequest) (r
     if request == nil {
         request = NewTrustMaliciousRequestRequest()
     }
+    
     response = NewTrustMaliciousRequestResponse()
     err = c.Send(request, response)
     return
@@ -2295,6 +2431,7 @@ func NewTrustMalwaresRequest() (request *TrustMalwaresRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "TrustMalwares")
+    
     
     return
 }
@@ -2319,6 +2456,7 @@ func (c *Client) TrustMalwares(request *TrustMalwaresRequest) (response *TrustMa
     if request == nil {
         request = NewTrustMalwaresRequest()
     }
+    
     response = NewTrustMalwaresResponse()
     err = c.Send(request, response)
     return
@@ -2329,6 +2467,7 @@ func NewUntrustMaliciousRequestRequest() (request *UntrustMaliciousRequestReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "UntrustMaliciousRequest")
+    
     
     return
 }
@@ -2351,6 +2490,7 @@ func (c *Client) UntrustMaliciousRequest(request *UntrustMaliciousRequestRequest
     if request == nil {
         request = NewUntrustMaliciousRequestRequest()
     }
+    
     response = NewUntrustMaliciousRequestResponse()
     err = c.Send(request, response)
     return
@@ -2361,6 +2501,7 @@ func NewUntrustMalwaresRequest() (request *UntrustMalwaresRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("yunjing", APIVersion, "UntrustMalwares")
+    
     
     return
 }
@@ -2384,6 +2525,7 @@ func (c *Client) UntrustMalwares(request *UntrustMalwaresRequest) (response *Unt
     if request == nil {
         request = NewUntrustMalwaresRequest()
     }
+    
     response = NewUntrustMalwaresResponse()
     err = c.Send(request, response)
     return

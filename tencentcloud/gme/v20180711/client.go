@@ -49,6 +49,7 @@ func NewCreateAppRequest() (request *CreateAppRequest) {
     }
     request.Init().WithApiInfo("gme", APIVersion, "CreateApp")
     
+    
     return
 }
 
@@ -78,6 +79,7 @@ func (c *Client) CreateApp(request *CreateAppRequest) (response *CreateAppRespon
     if request == nil {
         request = NewCreateAppRequest()
     }
+    
     response = NewCreateAppResponse()
     err = c.Send(request, response)
     return
@@ -88,6 +90,7 @@ func NewDescribeAppStatisticsRequest() (request *DescribeAppStatisticsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gme", APIVersion, "DescribeAppStatistics")
+    
     
     return
 }
@@ -117,6 +120,7 @@ func (c *Client) DescribeAppStatistics(request *DescribeAppStatisticsRequest) (r
     if request == nil {
         request = NewDescribeAppStatisticsRequest()
     }
+    
     response = NewDescribeAppStatisticsResponse()
     err = c.Send(request, response)
     return
@@ -127,6 +131,7 @@ func NewDescribeApplicationDataRequest() (request *DescribeApplicationDataReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gme", APIVersion, "DescribeApplicationData")
+    
     
     return
 }
@@ -151,6 +156,7 @@ func (c *Client) DescribeApplicationData(request *DescribeApplicationDataRequest
     if request == nil {
         request = NewDescribeApplicationDataRequest()
     }
+    
     response = NewDescribeApplicationDataResponse()
     err = c.Send(request, response)
     return
@@ -161,6 +167,7 @@ func NewDescribeScanResultListRequest() (request *DescribeScanResultListRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gme", APIVersion, "DescribeScanResultList")
+    
     
     return
 }
@@ -192,6 +199,7 @@ func (c *Client) DescribeScanResultList(request *DescribeScanResultListRequest) 
     if request == nil {
         request = NewDescribeScanResultListRequest()
     }
+    
     response = NewDescribeScanResultListResponse()
     err = c.Send(request, response)
     return
@@ -202,6 +210,7 @@ func NewModifyAppStatusRequest() (request *ModifyAppStatusRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gme", APIVersion, "ModifyAppStatus")
+    
     
     return
 }
@@ -231,6 +240,7 @@ func (c *Client) ModifyAppStatus(request *ModifyAppStatusRequest) (response *Mod
     if request == nil {
         request = NewModifyAppStatusRequest()
     }
+    
     response = NewModifyAppStatusResponse()
     err = c.Send(request, response)
     return
@@ -241,6 +251,7 @@ func NewScanVoiceRequest() (request *ScanVoiceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gme", APIVersion, "ScanVoice")
+    
     
     return
 }
@@ -542,6 +553,7 @@ func (c *Client) ScanVoice(request *ScanVoiceRequest) (response *ScanVoiceRespon
     if request == nil {
         request = NewScanVoiceRequest()
     }
+    
     response = NewScanVoiceResponse()
     err = c.Send(request, response)
     return

@@ -49,6 +49,7 @@ func NewBankCardOCRRequest() (request *BankCardOCRRequest) {
     }
     request.Init().WithApiInfo("ocr", APIVersion, "BankCardOCR")
     
+    
     return
 }
 
@@ -80,6 +81,7 @@ func (c *Client) BankCardOCR(request *BankCardOCRRequest) (response *BankCardOCR
     if request == nil {
         request = NewBankCardOCRRequest()
     }
+    
     response = NewBankCardOCRResponse()
     err = c.Send(request, response)
     return
@@ -90,6 +92,7 @@ func NewGeneralAccurateOCRRequest() (request *GeneralAccurateOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "GeneralAccurateOCR")
+    
     
     return
 }
@@ -135,6 +138,7 @@ func (c *Client) GeneralAccurateOCR(request *GeneralAccurateOCRRequest) (respons
     if request == nil {
         request = NewGeneralAccurateOCRRequest()
     }
+    
     response = NewGeneralAccurateOCRResponse()
     err = c.Send(request, response)
     return
@@ -145,6 +149,7 @@ func NewGeneralBasicOCRRequest() (request *GeneralBasicOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "GeneralBasicOCR")
+    
     
     return
 }
@@ -188,6 +193,7 @@ func (c *Client) GeneralBasicOCR(request *GeneralBasicOCRRequest) (response *Gen
     if request == nil {
         request = NewGeneralBasicOCRRequest()
     }
+    
     response = NewGeneralBasicOCRResponse()
     err = c.Send(request, response)
     return
@@ -198,6 +204,7 @@ func NewHKIDCardOCRRequest() (request *HKIDCardOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "HKIDCardOCR")
+    
     
     return
 }
@@ -230,6 +237,7 @@ func (c *Client) HKIDCardOCR(request *HKIDCardOCRRequest) (response *HKIDCardOCR
     if request == nil {
         request = NewHKIDCardOCRRequest()
     }
+    
     response = NewHKIDCardOCRResponse()
     err = c.Send(request, response)
     return
@@ -240,6 +248,7 @@ func NewMLIDCardOCRRequest() (request *MLIDCardOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "MLIDCardOCR")
+    
     
     return
 }
@@ -272,6 +281,7 @@ func (c *Client) MLIDCardOCR(request *MLIDCardOCRRequest) (response *MLIDCardOCR
     if request == nil {
         request = NewMLIDCardOCRRequest()
     }
+    
     response = NewMLIDCardOCRResponse()
     err = c.Send(request, response)
     return
@@ -282,6 +292,7 @@ func NewMLIDPassportOCRRequest() (request *MLIDPassportOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "MLIDPassportOCR")
+    
     
     return
 }
@@ -314,6 +325,7 @@ func (c *Client) MLIDPassportOCR(request *MLIDPassportOCRRequest) (response *MLI
     if request == nil {
         request = NewMLIDPassportOCRRequest()
     }
+    
     response = NewMLIDPassportOCRResponse()
     err = c.Send(request, response)
     return
@@ -324,6 +336,7 @@ func NewTableOCRRequest() (request *TableOCRRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ocr", APIVersion, "TableOCR")
+    
     
     return
 }
@@ -358,6 +371,7 @@ func (c *Client) TableOCR(request *TableOCRRequest) (response *TableOCRResponse,
     if request == nil {
         request = NewTableOCRRequest()
     }
+    
     response = NewTableOCRResponse()
     err = c.Send(request, response)
     return

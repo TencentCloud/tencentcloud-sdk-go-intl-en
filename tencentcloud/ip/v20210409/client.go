@@ -49,6 +49,7 @@ func NewAllocateCustomerCreditRequest() (request *AllocateCustomerCreditRequest)
     }
     request.Init().WithApiInfo("ip", APIVersion, "AllocateCustomerCredit")
     
+    
     return
 }
 
@@ -76,6 +77,7 @@ func (c *Client) AllocateCustomerCredit(request *AllocateCustomerCreditRequest) 
     if request == nil {
         request = NewAllocateCustomerCreditRequest()
     }
+    
     response = NewAllocateCustomerCreditResponse()
     err = c.Send(request, response)
     return
@@ -86,6 +88,7 @@ func NewCreateAccountRequest() (request *CreateAccountRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ip", APIVersion, "CreateAccount")
+    
     
     return
 }
@@ -118,6 +121,7 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
     if request == nil {
         request = NewCreateAccountRequest()
     }
+    
     response = NewCreateAccountResponse()
     err = c.Send(request, response)
     return
@@ -128,6 +132,7 @@ func NewGetCountryCodesRequest() (request *GetCountryCodesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ip", APIVersion, "GetCountryCodes")
+    
     
     return
 }
@@ -148,6 +153,7 @@ func (c *Client) GetCountryCodes(request *GetCountryCodesRequest) (response *Get
     if request == nil {
         request = NewGetCountryCodesRequest()
     }
+    
     response = NewGetCountryCodesResponse()
     err = c.Send(request, response)
     return
@@ -158,6 +164,7 @@ func NewQueryCreditAllocationHistoryRequest() (request *QueryCreditAllocationHis
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ip", APIVersion, "QueryCreditAllocationHistory")
+    
     
     return
 }
@@ -178,6 +185,7 @@ func (c *Client) QueryCreditAllocationHistory(request *QueryCreditAllocationHist
     if request == nil {
         request = NewQueryCreditAllocationHistoryRequest()
     }
+    
     response = NewQueryCreditAllocationHistoryResponse()
     err = c.Send(request, response)
     return
@@ -188,6 +196,7 @@ func NewQueryCustomersCreditRequest() (request *QueryCustomersCreditRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ip", APIVersion, "QueryCustomersCredit")
+    
     
     return
 }
@@ -208,6 +217,7 @@ func (c *Client) QueryCustomersCredit(request *QueryCustomersCreditRequest) (res
     if request == nil {
         request = NewQueryCustomersCreditRequest()
     }
+    
     response = NewQueryCustomersCreditResponse()
     err = c.Send(request, response)
     return
@@ -218,6 +228,7 @@ func NewQueryPartnerCreditRequest() (request *QueryPartnerCreditRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ip", APIVersion, "QueryPartnerCredit")
+    
     
     return
 }
@@ -238,6 +249,7 @@ func (c *Client) QueryPartnerCredit(request *QueryPartnerCreditRequest) (respons
     if request == nil {
         request = NewQueryPartnerCreditRequest()
     }
+    
     response = NewQueryPartnerCreditResponse()
     err = c.Send(request, response)
     return

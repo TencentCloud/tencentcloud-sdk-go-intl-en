@@ -49,6 +49,7 @@ func NewLivenessCompareRequest() (request *LivenessCompareRequest) {
     }
     request.Init().WithApiInfo("faceid", APIVersion, "LivenessCompare")
     
+    
     return
 }
 
@@ -117,6 +118,7 @@ func (c *Client) LivenessCompare(request *LivenessCompareRequest) (response *Liv
     if request == nil {
         request = NewLivenessCompareRequest()
     }
+    
     response = NewLivenessCompareResponse()
     err = c.Send(request, response)
     return

@@ -49,6 +49,7 @@ func NewSendEmailRequest() (request *SendEmailRequest) {
     }
     request.Init().WithApiInfo("dms", APIVersion, "SendEmail")
     
+    
     return
 }
 
@@ -83,6 +84,7 @@ func (c *Client) SendEmail(request *SendEmailRequest) (response *SendEmailRespon
     if request == nil {
         request = NewSendEmailRequest()
     }
+    
     response = NewSendEmailResponse()
     err = c.Send(request, response)
     return
@@ -93,6 +95,7 @@ func NewSendTemplatedEmailRequest() (request *SendTemplatedEmailRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dms", APIVersion, "SendTemplatedEmail")
+    
     
     return
 }
@@ -132,6 +135,7 @@ func (c *Client) SendTemplatedEmail(request *SendTemplatedEmailRequest) (respons
     if request == nil {
         request = NewSendTemplatedEmailRequest()
     }
+    
     response = NewSendTemplatedEmailResponse()
     err = c.Send(request, response)
     return

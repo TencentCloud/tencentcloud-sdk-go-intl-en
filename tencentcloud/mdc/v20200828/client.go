@@ -49,6 +49,7 @@ func NewCreateStreamLinkFlowRequest() (request *CreateStreamLinkFlowRequest) {
     }
     request.Init().WithApiInfo("mdc", APIVersion, "CreateStreamLinkFlow")
     
+    
     return
 }
 
@@ -73,6 +74,7 @@ func (c *Client) CreateStreamLinkFlow(request *CreateStreamLinkFlowRequest) (res
     if request == nil {
         request = NewCreateStreamLinkFlowRequest()
     }
+    
     response = NewCreateStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
@@ -83,6 +85,7 @@ func NewDeleteStreamLinkFlowRequest() (request *DeleteStreamLinkFlowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "DeleteStreamLinkFlow")
+    
     
     return
 }
@@ -104,6 +107,7 @@ func (c *Client) DeleteStreamLinkFlow(request *DeleteStreamLinkFlowRequest) (res
     if request == nil {
         request = NewDeleteStreamLinkFlowRequest()
     }
+    
     response = NewDeleteStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
@@ -114,6 +118,7 @@ func NewDeleteStreamLinkOutputRequest() (request *DeleteStreamLinkOutputRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "DeleteStreamLinkOutput")
+    
     
     return
 }
@@ -137,6 +142,7 @@ func (c *Client) DeleteStreamLinkOutput(request *DeleteStreamLinkOutputRequest) 
     if request == nil {
         request = NewDeleteStreamLinkOutputRequest()
     }
+    
     response = NewDeleteStreamLinkOutputResponse()
     err = c.Send(request, response)
     return
@@ -147,6 +153,7 @@ func NewDescribeStreamLinkFlowRequest() (request *DescribeStreamLinkFlowRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlow")
+    
     
     return
 }
@@ -168,6 +175,7 @@ func (c *Client) DescribeStreamLinkFlow(request *DescribeStreamLinkFlowRequest) 
     if request == nil {
         request = NewDescribeStreamLinkFlowRequest()
     }
+    
     response = NewDescribeStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
@@ -178,6 +186,7 @@ func NewDescribeStreamLinkFlowsRequest() (request *DescribeStreamLinkFlowsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlows")
+    
     
     return
 }
@@ -201,6 +210,7 @@ func (c *Client) DescribeStreamLinkFlows(request *DescribeStreamLinkFlowsRequest
     if request == nil {
         request = NewDescribeStreamLinkFlowsRequest()
     }
+    
     response = NewDescribeStreamLinkFlowsResponse()
     err = c.Send(request, response)
     return
@@ -211,6 +221,7 @@ func NewDescribeStreamLinkRegionsRequest() (request *DescribeStreamLinkRegionsRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkRegions")
+    
     
     return
 }
@@ -231,6 +242,7 @@ func (c *Client) DescribeStreamLinkRegions(request *DescribeStreamLinkRegionsReq
     if request == nil {
         request = NewDescribeStreamLinkRegionsRequest()
     }
+    
     response = NewDescribeStreamLinkRegionsResponse()
     err = c.Send(request, response)
     return
@@ -241,6 +253,7 @@ func NewModifyStreamLinkFlowRequest() (request *ModifyStreamLinkFlowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "ModifyStreamLinkFlow")
+    
     
     return
 }
@@ -264,6 +277,7 @@ func (c *Client) ModifyStreamLinkFlow(request *ModifyStreamLinkFlowRequest) (res
     if request == nil {
         request = NewModifyStreamLinkFlowRequest()
     }
+    
     response = NewModifyStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
@@ -274,6 +288,7 @@ func NewStartStreamLinkFlowRequest() (request *StartStreamLinkFlowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "StartStreamLinkFlow")
+    
     
     return
 }
@@ -297,6 +312,7 @@ func (c *Client) StartStreamLinkFlow(request *StartStreamLinkFlowRequest) (respo
     if request == nil {
         request = NewStartStreamLinkFlowRequest()
     }
+    
     response = NewStartStreamLinkFlowResponse()
     err = c.Send(request, response)
     return
@@ -307,6 +323,7 @@ func NewStopStreamLinkFlowRequest() (request *StopStreamLinkFlowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdc", APIVersion, "StopStreamLinkFlow")
+    
     
     return
 }
@@ -329,6 +346,7 @@ func (c *Client) StopStreamLinkFlow(request *StopStreamLinkFlowRequest) (respons
     if request == nil {
         request = NewStopStreamLinkFlowRequest()
     }
+    
     response = NewStopStreamLinkFlowResponse()
     err = c.Send(request, response)
     return

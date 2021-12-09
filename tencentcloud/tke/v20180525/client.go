@@ -49,6 +49,7 @@ func NewAcquireClusterAdminRoleRequest() (request *AcquireClusterAdminRoleReques
     }
     request.Init().WithApiInfo("tke", APIVersion, "AcquireClusterAdminRole")
     
+    
     return
 }
 
@@ -78,6 +79,7 @@ func (c *Client) AcquireClusterAdminRole(request *AcquireClusterAdminRoleRequest
     if request == nil {
         request = NewAcquireClusterAdminRoleRequest()
     }
+    
     response = NewAcquireClusterAdminRoleResponse()
     err = c.Send(request, response)
     return
@@ -88,6 +90,7 @@ func NewAddExistedInstancesRequest() (request *AddExistedInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "AddExistedInstances")
+    
     
     return
 }
@@ -118,6 +121,7 @@ func (c *Client) AddExistedInstances(request *AddExistedInstancesRequest) (respo
     if request == nil {
         request = NewAddExistedInstancesRequest()
     }
+    
     response = NewAddExistedInstancesResponse()
     err = c.Send(request, response)
     return
@@ -128,6 +132,7 @@ func NewAddNodeToNodePoolRequest() (request *AddNodeToNodePoolRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "AddNodeToNodePool")
+    
     
     return
 }
@@ -148,6 +153,7 @@ func (c *Client) AddNodeToNodePool(request *AddNodeToNodePoolRequest) (response 
     if request == nil {
         request = NewAddNodeToNodePoolRequest()
     }
+    
     response = NewAddNodeToNodePoolResponse()
     err = c.Send(request, response)
     return
@@ -158,6 +164,7 @@ func NewAddVpcCniSubnetsRequest() (request *AddVpcCniSubnetsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "AddVpcCniSubnets")
+    
     
     return
 }
@@ -187,6 +194,7 @@ func (c *Client) AddVpcCniSubnets(request *AddVpcCniSubnetsRequest) (response *A
     if request == nil {
         request = NewAddVpcCniSubnetsRequest()
     }
+    
     response = NewAddVpcCniSubnetsResponse()
     err = c.Send(request, response)
     return
@@ -197,6 +205,7 @@ func NewCheckInstancesUpgradeAbleRequest() (request *CheckInstancesUpgradeAbleRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "CheckInstancesUpgradeAble")
+    
     
     return
 }
@@ -225,6 +234,7 @@ func (c *Client) CheckInstancesUpgradeAble(request *CheckInstancesUpgradeAbleReq
     if request == nil {
         request = NewCheckInstancesUpgradeAbleRequest()
     }
+    
     response = NewCheckInstancesUpgradeAbleResponse()
     err = c.Send(request, response)
     return
@@ -235,6 +245,7 @@ func NewCreateClusterRequest() (request *CreateClusterRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "CreateCluster")
+    
     
     return
 }
@@ -291,6 +302,7 @@ func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateC
     if request == nil {
         request = NewCreateClusterRequest()
     }
+    
     response = NewCreateClusterResponse()
     err = c.Send(request, response)
     return
@@ -301,6 +313,7 @@ func NewCreateClusterAsGroupRequest() (request *CreateClusterAsGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterAsGroup")
+    
     
     return
 }
@@ -338,6 +351,7 @@ func (c *Client) CreateClusterAsGroup(request *CreateClusterAsGroupRequest) (res
     if request == nil {
         request = NewCreateClusterAsGroupRequest()
     }
+    
     response = NewCreateClusterAsGroupResponse()
     err = c.Send(request, response)
     return
@@ -348,6 +362,7 @@ func NewCreateClusterEndpointRequest() (request *CreateClusterEndpointRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterEndpoint")
+    
     
     return
 }
@@ -386,6 +401,7 @@ func (c *Client) CreateClusterEndpoint(request *CreateClusterEndpointRequest) (r
     if request == nil {
         request = NewCreateClusterEndpointRequest()
     }
+    
     response = NewCreateClusterEndpointResponse()
     err = c.Send(request, response)
     return
@@ -396,6 +412,7 @@ func NewCreateClusterEndpointVipRequest() (request *CreateClusterEndpointVipRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterEndpointVip")
+    
     
     return
 }
@@ -433,6 +450,7 @@ func (c *Client) CreateClusterEndpointVip(request *CreateClusterEndpointVipReque
     if request == nil {
         request = NewCreateClusterEndpointVipRequest()
     }
+    
     response = NewCreateClusterEndpointVipResponse()
     err = c.Send(request, response)
     return
@@ -443,6 +461,7 @@ func NewCreateClusterInstancesRequest() (request *CreateClusterInstancesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterInstances")
+    
     
     return
 }
@@ -493,6 +512,7 @@ func (c *Client) CreateClusterInstances(request *CreateClusterInstancesRequest) 
     if request == nil {
         request = NewCreateClusterInstancesRequest()
     }
+    
     response = NewCreateClusterInstancesResponse()
     err = c.Send(request, response)
     return
@@ -503,6 +523,7 @@ func NewCreateClusterNodePoolRequest() (request *CreateClusterNodePoolRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterNodePool")
+    
     
     return
 }
@@ -529,6 +550,7 @@ func (c *Client) CreateClusterNodePool(request *CreateClusterNodePoolRequest) (r
     if request == nil {
         request = NewCreateClusterNodePoolRequest()
     }
+    
     response = NewCreateClusterNodePoolResponse()
     err = c.Send(request, response)
     return
@@ -539,6 +561,7 @@ func NewCreateClusterNodePoolFromExistingAsgRequest() (request *CreateClusterNod
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterNodePoolFromExistingAsg")
+    
     
     return
 }
@@ -559,6 +582,7 @@ func (c *Client) CreateClusterNodePoolFromExistingAsg(request *CreateClusterNode
     if request == nil {
         request = NewCreateClusterNodePoolFromExistingAsgRequest()
     }
+    
     response = NewCreateClusterNodePoolFromExistingAsgResponse()
     err = c.Send(request, response)
     return
@@ -569,6 +593,7 @@ func NewCreateClusterRouteTableRequest() (request *CreateClusterRouteTableReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterRouteTable")
+    
     
     return
 }
@@ -602,6 +627,7 @@ func (c *Client) CreateClusterRouteTable(request *CreateClusterRouteTableRequest
     if request == nil {
         request = NewCreateClusterRouteTableRequest()
     }
+    
     response = NewCreateClusterRouteTableResponse()
     err = c.Send(request, response)
     return
@@ -612,6 +638,7 @@ func NewCreatePrometheusAlertRuleRequest() (request *CreatePrometheusAlertRuleRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "CreatePrometheusAlertRule")
+    
     
     return
 }
@@ -635,6 +662,7 @@ func (c *Client) CreatePrometheusAlertRule(request *CreatePrometheusAlertRuleReq
     if request == nil {
         request = NewCreatePrometheusAlertRuleRequest()
     }
+    
     response = NewCreatePrometheusAlertRuleResponse()
     err = c.Send(request, response)
     return
@@ -645,6 +673,7 @@ func NewDeleteClusterRequest() (request *DeleteClusterRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DeleteCluster")
+    
     
     return
 }
@@ -675,6 +704,7 @@ func (c *Client) DeleteCluster(request *DeleteClusterRequest) (response *DeleteC
     if request == nil {
         request = NewDeleteClusterRequest()
     }
+    
     response = NewDeleteClusterResponse()
     err = c.Send(request, response)
     return
@@ -685,6 +715,7 @@ func NewDeleteClusterAsGroupsRequest() (request *DeleteClusterAsGroupsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterAsGroups")
+    
     
     return
 }
@@ -721,6 +752,7 @@ func (c *Client) DeleteClusterAsGroups(request *DeleteClusterAsGroupsRequest) (r
     if request == nil {
         request = NewDeleteClusterAsGroupsRequest()
     }
+    
     response = NewDeleteClusterAsGroupsResponse()
     err = c.Send(request, response)
     return
@@ -731,6 +763,7 @@ func NewDeleteClusterEndpointRequest() (request *DeleteClusterEndpointRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterEndpoint")
+    
     
     return
 }
@@ -772,6 +805,7 @@ func (c *Client) DeleteClusterEndpoint(request *DeleteClusterEndpointRequest) (r
     if request == nil {
         request = NewDeleteClusterEndpointRequest()
     }
+    
     response = NewDeleteClusterEndpointResponse()
     err = c.Send(request, response)
     return
@@ -782,6 +816,7 @@ func NewDeleteClusterEndpointVipRequest() (request *DeleteClusterEndpointVipRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterEndpointVip")
+    
     
     return
 }
@@ -820,6 +855,7 @@ func (c *Client) DeleteClusterEndpointVip(request *DeleteClusterEndpointVipReque
     if request == nil {
         request = NewDeleteClusterEndpointVipRequest()
     }
+    
     response = NewDeleteClusterEndpointVipResponse()
     err = c.Send(request, response)
     return
@@ -830,6 +866,7 @@ func NewDeleteClusterInstancesRequest() (request *DeleteClusterInstancesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterInstances")
+    
     
     return
 }
@@ -859,6 +896,7 @@ func (c *Client) DeleteClusterInstances(request *DeleteClusterInstancesRequest) 
     if request == nil {
         request = NewDeleteClusterInstancesRequest()
     }
+    
     response = NewDeleteClusterInstancesResponse()
     err = c.Send(request, response)
     return
@@ -869,6 +907,7 @@ func NewDeleteClusterNodePoolRequest() (request *DeleteClusterNodePoolRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterNodePool")
+    
     
     return
 }
@@ -891,6 +930,7 @@ func (c *Client) DeleteClusterNodePool(request *DeleteClusterNodePoolRequest) (r
     if request == nil {
         request = NewDeleteClusterNodePoolRequest()
     }
+    
     response = NewDeleteClusterNodePoolResponse()
     err = c.Send(request, response)
     return
@@ -901,6 +941,7 @@ func NewDeleteClusterRouteRequest() (request *DeleteClusterRouteRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterRoute")
+    
     
     return
 }
@@ -926,6 +967,7 @@ func (c *Client) DeleteClusterRoute(request *DeleteClusterRouteRequest) (respons
     if request == nil {
         request = NewDeleteClusterRouteRequest()
     }
+    
     response = NewDeleteClusterRouteResponse()
     err = c.Send(request, response)
     return
@@ -936,6 +978,7 @@ func NewDeleteClusterRouteTableRequest() (request *DeleteClusterRouteTableReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterRouteTable")
+    
     
     return
 }
@@ -961,6 +1004,7 @@ func (c *Client) DeleteClusterRouteTable(request *DeleteClusterRouteTableRequest
     if request == nil {
         request = NewDeleteClusterRouteTableRequest()
     }
+    
     response = NewDeleteClusterRouteTableResponse()
     err = c.Send(request, response)
     return
@@ -971,6 +1015,7 @@ func NewDeletePrometheusAlertRuleRequest() (request *DeletePrometheusAlertRuleRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DeletePrometheusAlertRule")
+    
     
     return
 }
@@ -994,6 +1039,7 @@ func (c *Client) DeletePrometheusAlertRule(request *DeletePrometheusAlertRuleReq
     if request == nil {
         request = NewDeletePrometheusAlertRuleRequest()
     }
+    
     response = NewDeletePrometheusAlertRuleResponse()
     err = c.Send(request, response)
     return
@@ -1004,6 +1050,7 @@ func NewDescribeAvailableClusterVersionRequest() (request *DescribeAvailableClus
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeAvailableClusterVersion")
+    
     
     return
 }
@@ -1029,6 +1076,7 @@ func (c *Client) DescribeAvailableClusterVersion(request *DescribeAvailableClust
     if request == nil {
         request = NewDescribeAvailableClusterVersionRequest()
     }
+    
     response = NewDescribeAvailableClusterVersionResponse()
     err = c.Send(request, response)
     return
@@ -1039,6 +1087,7 @@ func NewDescribeClusterAsGroupOptionRequest() (request *DescribeClusterAsGroupOp
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterAsGroupOption")
+    
     
     return
 }
@@ -1069,6 +1118,7 @@ func (c *Client) DescribeClusterAsGroupOption(request *DescribeClusterAsGroupOpt
     if request == nil {
         request = NewDescribeClusterAsGroupOptionRequest()
     }
+    
     response = NewDescribeClusterAsGroupOptionResponse()
     err = c.Send(request, response)
     return
@@ -1079,6 +1129,7 @@ func NewDescribeClusterAsGroupsRequest() (request *DescribeClusterAsGroupsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterAsGroups")
+    
     
     return
 }
@@ -1111,6 +1162,7 @@ func (c *Client) DescribeClusterAsGroups(request *DescribeClusterAsGroupsRequest
     if request == nil {
         request = NewDescribeClusterAsGroupsRequest()
     }
+    
     response = NewDescribeClusterAsGroupsResponse()
     err = c.Send(request, response)
     return
@@ -1121,6 +1173,7 @@ func NewDescribeClusterAuthenticationOptionsRequest() (request *DescribeClusterA
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterAuthenticationOptions")
+    
     
     return
 }
@@ -1144,6 +1197,7 @@ func (c *Client) DescribeClusterAuthenticationOptions(request *DescribeClusterAu
     if request == nil {
         request = NewDescribeClusterAuthenticationOptionsRequest()
     }
+    
     response = NewDescribeClusterAuthenticationOptionsResponse()
     err = c.Send(request, response)
     return
@@ -1154,6 +1208,7 @@ func NewDescribeClusterCommonNamesRequest() (request *DescribeClusterCommonNames
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterCommonNames")
+    
     
     return
 }
@@ -1181,6 +1236,7 @@ func (c *Client) DescribeClusterCommonNames(request *DescribeClusterCommonNamesR
     if request == nil {
         request = NewDescribeClusterCommonNamesRequest()
     }
+    
     response = NewDescribeClusterCommonNamesResponse()
     err = c.Send(request, response)
     return
@@ -1191,6 +1247,7 @@ func NewDescribeClusterEndpointStatusRequest() (request *DescribeClusterEndpoint
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterEndpointStatus")
+    
     
     return
 }
@@ -1232,6 +1289,7 @@ func (c *Client) DescribeClusterEndpointStatus(request *DescribeClusterEndpointS
     if request == nil {
         request = NewDescribeClusterEndpointStatusRequest()
     }
+    
     response = NewDescribeClusterEndpointStatusResponse()
     err = c.Send(request, response)
     return
@@ -1242,6 +1300,7 @@ func NewDescribeClusterEndpointVipStatusRequest() (request *DescribeClusterEndpo
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterEndpointVipStatus")
+    
     
     return
 }
@@ -1283,6 +1342,7 @@ func (c *Client) DescribeClusterEndpointVipStatus(request *DescribeClusterEndpoi
     if request == nil {
         request = NewDescribeClusterEndpointVipStatusRequest()
     }
+    
     response = NewDescribeClusterEndpointVipStatusResponse()
     err = c.Send(request, response)
     return
@@ -1293,6 +1353,7 @@ func NewDescribeClusterInstancesRequest() (request *DescribeClusterInstancesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterInstances")
+    
     
     return
 }
@@ -1322,6 +1383,7 @@ func (c *Client) DescribeClusterInstances(request *DescribeClusterInstancesReque
     if request == nil {
         request = NewDescribeClusterInstancesRequest()
     }
+    
     response = NewDescribeClusterInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1332,6 +1394,7 @@ func NewDescribeClusterKubeconfigRequest() (request *DescribeClusterKubeconfigRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterKubeconfig")
+    
     
     return
 }
@@ -1365,6 +1428,7 @@ func (c *Client) DescribeClusterKubeconfig(request *DescribeClusterKubeconfigReq
     if request == nil {
         request = NewDescribeClusterKubeconfigRequest()
     }
+    
     response = NewDescribeClusterKubeconfigResponse()
     err = c.Send(request, response)
     return
@@ -1375,6 +1439,7 @@ func NewDescribeClusterNodePoolDetailRequest() (request *DescribeClusterNodePool
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterNodePoolDetail")
+    
     
     return
 }
@@ -1399,6 +1464,7 @@ func (c *Client) DescribeClusterNodePoolDetail(request *DescribeClusterNodePoolD
     if request == nil {
         request = NewDescribeClusterNodePoolDetailRequest()
     }
+    
     response = NewDescribeClusterNodePoolDetailResponse()
     err = c.Send(request, response)
     return
@@ -1409,6 +1475,7 @@ func NewDescribeClusterNodePoolsRequest() (request *DescribeClusterNodePoolsRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterNodePools")
+    
     
     return
 }
@@ -1433,6 +1500,7 @@ func (c *Client) DescribeClusterNodePools(request *DescribeClusterNodePoolsReque
     if request == nil {
         request = NewDescribeClusterNodePoolsRequest()
     }
+    
     response = NewDescribeClusterNodePoolsResponse()
     err = c.Send(request, response)
     return
@@ -1443,6 +1511,7 @@ func NewDescribeClusterRouteTablesRequest() (request *DescribeClusterRouteTables
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterRouteTables")
+    
     
     return
 }
@@ -1463,6 +1532,7 @@ func (c *Client) DescribeClusterRouteTables(request *DescribeClusterRouteTablesR
     if request == nil {
         request = NewDescribeClusterRouteTablesRequest()
     }
+    
     response = NewDescribeClusterRouteTablesResponse()
     err = c.Send(request, response)
     return
@@ -1473,6 +1543,7 @@ func NewDescribeClusterRoutesRequest() (request *DescribeClusterRoutesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterRoutes")
+    
     
     return
 }
@@ -1495,6 +1566,7 @@ func (c *Client) DescribeClusterRoutes(request *DescribeClusterRoutesRequest) (r
     if request == nil {
         request = NewDescribeClusterRoutesRequest()
     }
+    
     response = NewDescribeClusterRoutesResponse()
     err = c.Send(request, response)
     return
@@ -1505,6 +1577,7 @@ func NewDescribeClusterSecurityRequest() (request *DescribeClusterSecurityReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterSecurity")
+    
     
     return
 }
@@ -1548,6 +1621,7 @@ func (c *Client) DescribeClusterSecurity(request *DescribeClusterSecurityRequest
     if request == nil {
         request = NewDescribeClusterSecurityRequest()
     }
+    
     response = NewDescribeClusterSecurityResponse()
     err = c.Send(request, response)
     return
@@ -1558,6 +1632,7 @@ func NewDescribeClustersRequest() (request *DescribeClustersRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusters")
+    
     
     return
 }
@@ -1591,6 +1666,7 @@ func (c *Client) DescribeClusters(request *DescribeClustersRequest) (response *D
     if request == nil {
         request = NewDescribeClustersRequest()
     }
+    
     response = NewDescribeClustersResponse()
     err = c.Send(request, response)
     return
@@ -1601,6 +1677,7 @@ func NewDescribeEnableVpcCniProgressRequest() (request *DescribeEnableVpcCniProg
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeEnableVpcCniProgress")
+    
     
     return
 }
@@ -1621,6 +1698,7 @@ func (c *Client) DescribeEnableVpcCniProgress(request *DescribeEnableVpcCniProgr
     if request == nil {
         request = NewDescribeEnableVpcCniProgressRequest()
     }
+    
     response = NewDescribeEnableVpcCniProgressResponse()
     err = c.Send(request, response)
     return
@@ -1631,6 +1709,7 @@ func NewDescribeExistedInstancesRequest() (request *DescribeExistedInstancesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeExistedInstances")
+    
     
     return
 }
@@ -1679,6 +1758,7 @@ func (c *Client) DescribeExistedInstances(request *DescribeExistedInstancesReque
     if request == nil {
         request = NewDescribeExistedInstancesRequest()
     }
+    
     response = NewDescribeExistedInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1689,6 +1769,7 @@ func NewDescribeImagesRequest() (request *DescribeImagesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeImages")
+    
     
     return
 }
@@ -1726,6 +1807,7 @@ func (c *Client) DescribeImages(request *DescribeImagesRequest) (response *Descr
     if request == nil {
         request = NewDescribeImagesRequest()
     }
+    
     response = NewDescribeImagesResponse()
     err = c.Send(request, response)
     return
@@ -1736,6 +1818,7 @@ func NewDescribePrometheusInstanceRequest() (request *DescribePrometheusInstance
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribePrometheusInstance")
+    
     
     return
 }
@@ -1762,6 +1845,7 @@ func (c *Client) DescribePrometheusInstance(request *DescribePrometheusInstanceR
     if request == nil {
         request = NewDescribePrometheusInstanceRequest()
     }
+    
     response = NewDescribePrometheusInstanceResponse()
     err = c.Send(request, response)
     return
@@ -1772,6 +1856,7 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeRegions")
+    
     
     return
 }
@@ -1807,6 +1892,7 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
     if request == nil {
         request = NewDescribeRegionsRequest()
     }
+    
     response = NewDescribeRegionsResponse()
     err = c.Send(request, response)
     return
@@ -1817,6 +1903,7 @@ func NewDescribeRouteTableConflictsRequest() (request *DescribeRouteTableConflic
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeRouteTableConflicts")
+    
     
     return
 }
@@ -1843,6 +1930,7 @@ func (c *Client) DescribeRouteTableConflicts(request *DescribeRouteTableConflict
     if request == nil {
         request = NewDescribeRouteTableConflictsRequest()
     }
+    
     response = NewDescribeRouteTableConflictsResponse()
     err = c.Send(request, response)
     return
@@ -1853,6 +1941,7 @@ func NewDescribeVersionsRequest() (request *DescribeVersionsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeVersions")
+    
     
     return
 }
@@ -1889,6 +1978,7 @@ func (c *Client) DescribeVersions(request *DescribeVersionsRequest) (response *D
     if request == nil {
         request = NewDescribeVersionsRequest()
     }
+    
     response = NewDescribeVersionsResponse()
     err = c.Send(request, response)
     return
@@ -1899,6 +1989,7 @@ func NewDescribeVpcCniPodLimitsRequest() (request *DescribeVpcCniPodLimitsReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DescribeVpcCniPodLimits")
+    
     
     return
 }
@@ -1931,6 +2022,7 @@ func (c *Client) DescribeVpcCniPodLimits(request *DescribeVpcCniPodLimitsRequest
     if request == nil {
         request = NewDescribeVpcCniPodLimitsRequest()
     }
+    
     response = NewDescribeVpcCniPodLimitsResponse()
     err = c.Send(request, response)
     return
@@ -1941,6 +2033,7 @@ func NewDisableClusterDeletionProtectionRequest() (request *DisableClusterDeleti
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "DisableClusterDeletionProtection")
+    
     
     return
 }
@@ -1962,6 +2055,7 @@ func (c *Client) DisableClusterDeletionProtection(request *DisableClusterDeletio
     if request == nil {
         request = NewDisableClusterDeletionProtectionRequest()
     }
+    
     response = NewDisableClusterDeletionProtectionResponse()
     err = c.Send(request, response)
     return
@@ -1972,6 +2066,7 @@ func NewEnableClusterDeletionProtectionRequest() (request *EnableClusterDeletion
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "EnableClusterDeletionProtection")
+    
     
     return
 }
@@ -1993,6 +2088,7 @@ func (c *Client) EnableClusterDeletionProtection(request *EnableClusterDeletionP
     if request == nil {
         request = NewEnableClusterDeletionProtectionRequest()
     }
+    
     response = NewEnableClusterDeletionProtectionResponse()
     err = c.Send(request, response)
     return
@@ -2003,6 +2099,7 @@ func NewEnableVpcCniNetworkTypeRequest() (request *EnableVpcCniNetworkTypeReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "EnableVpcCniNetworkType")
+    
     
     return
 }
@@ -2024,6 +2121,7 @@ func (c *Client) EnableVpcCniNetworkType(request *EnableVpcCniNetworkTypeRequest
     if request == nil {
         request = NewEnableVpcCniNetworkTypeRequest()
     }
+    
     response = NewEnableVpcCniNetworkTypeResponse()
     err = c.Send(request, response)
     return
@@ -2034,6 +2132,7 @@ func NewGetUpgradeInstanceProgressRequest() (request *GetUpgradeInstanceProgress
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "GetUpgradeInstanceProgress")
+    
     
     return
 }
@@ -2055,6 +2154,7 @@ func (c *Client) GetUpgradeInstanceProgress(request *GetUpgradeInstanceProgressR
     if request == nil {
         request = NewGetUpgradeInstanceProgressRequest()
     }
+    
     response = NewGetUpgradeInstanceProgressResponse()
     err = c.Send(request, response)
     return
@@ -2065,6 +2165,7 @@ func NewModifyClusterAsGroupAttributeRequest() (request *ModifyClusterAsGroupAtt
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterAsGroupAttribute")
+    
     
     return
 }
@@ -2105,6 +2206,7 @@ func (c *Client) ModifyClusterAsGroupAttribute(request *ModifyClusterAsGroupAttr
     if request == nil {
         request = NewModifyClusterAsGroupAttributeRequest()
     }
+    
     response = NewModifyClusterAsGroupAttributeResponse()
     err = c.Send(request, response)
     return
@@ -2115,6 +2217,7 @@ func NewModifyClusterAsGroupOptionAttributeRequest() (request *ModifyClusterAsGr
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterAsGroupOptionAttribute")
+    
     
     return
 }
@@ -2151,6 +2254,7 @@ func (c *Client) ModifyClusterAsGroupOptionAttribute(request *ModifyClusterAsGro
     if request == nil {
         request = NewModifyClusterAsGroupOptionAttributeRequest()
     }
+    
     response = NewModifyClusterAsGroupOptionAttributeResponse()
     err = c.Send(request, response)
     return
@@ -2161,6 +2265,7 @@ func NewModifyClusterAttributeRequest() (request *ModifyClusterAttributeRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterAttribute")
+    
     
     return
 }
@@ -2191,6 +2296,7 @@ func (c *Client) ModifyClusterAttribute(request *ModifyClusterAttributeRequest) 
     if request == nil {
         request = NewModifyClusterAttributeRequest()
     }
+    
     response = NewModifyClusterAttributeResponse()
     err = c.Send(request, response)
     return
@@ -2201,6 +2307,7 @@ func NewModifyClusterAuthenticationOptionsRequest() (request *ModifyClusterAuthe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterAuthenticationOptions")
+    
     
     return
 }
@@ -2224,6 +2331,7 @@ func (c *Client) ModifyClusterAuthenticationOptions(request *ModifyClusterAuthen
     if request == nil {
         request = NewModifyClusterAuthenticationOptionsRequest()
     }
+    
     response = NewModifyClusterAuthenticationOptionsResponse()
     err = c.Send(request, response)
     return
@@ -2234,6 +2342,7 @@ func NewModifyClusterEndpointSPRequest() (request *ModifyClusterEndpointSPReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterEndpointSP")
+    
     
     return
 }
@@ -2272,6 +2381,7 @@ func (c *Client) ModifyClusterEndpointSP(request *ModifyClusterEndpointSPRequest
     if request == nil {
         request = NewModifyClusterEndpointSPRequest()
     }
+    
     response = NewModifyClusterEndpointSPResponse()
     err = c.Send(request, response)
     return
@@ -2282,6 +2392,7 @@ func NewModifyClusterNodePoolRequest() (request *ModifyClusterNodePoolRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterNodePool")
+    
     
     return
 }
@@ -2306,6 +2417,7 @@ func (c *Client) ModifyClusterNodePool(request *ModifyClusterNodePoolRequest) (r
     if request == nil {
         request = NewModifyClusterNodePoolRequest()
     }
+    
     response = NewModifyClusterNodePoolResponse()
     err = c.Send(request, response)
     return
@@ -2316,6 +2428,7 @@ func NewModifyNodePoolInstanceTypesRequest() (request *ModifyNodePoolInstanceTyp
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "ModifyNodePoolInstanceTypes")
+    
     
     return
 }
@@ -2345,6 +2458,7 @@ func (c *Client) ModifyNodePoolInstanceTypes(request *ModifyNodePoolInstanceType
     if request == nil {
         request = NewModifyNodePoolInstanceTypesRequest()
     }
+    
     response = NewModifyNodePoolInstanceTypesResponse()
     err = c.Send(request, response)
     return
@@ -2355,6 +2469,7 @@ func NewModifyPrometheusAlertRuleRequest() (request *ModifyPrometheusAlertRuleRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "ModifyPrometheusAlertRule")
+    
     
     return
 }
@@ -2379,6 +2494,7 @@ func (c *Client) ModifyPrometheusAlertRule(request *ModifyPrometheusAlertRuleReq
     if request == nil {
         request = NewModifyPrometheusAlertRuleRequest()
     }
+    
     response = NewModifyPrometheusAlertRuleResponse()
     err = c.Send(request, response)
     return
@@ -2389,6 +2505,7 @@ func NewRemoveNodeFromNodePoolRequest() (request *RemoveNodeFromNodePoolRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "RemoveNodeFromNodePool")
+    
     
     return
 }
@@ -2410,6 +2527,7 @@ func (c *Client) RemoveNodeFromNodePool(request *RemoveNodeFromNodePoolRequest) 
     if request == nil {
         request = NewRemoveNodeFromNodePoolRequest()
     }
+    
     response = NewRemoveNodeFromNodePoolResponse()
     err = c.Send(request, response)
     return
@@ -2420,6 +2538,7 @@ func NewSetNodePoolNodeProtectionRequest() (request *SetNodePoolNodeProtectionRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "SetNodePoolNodeProtection")
+    
     
     return
 }
@@ -2449,6 +2568,7 @@ func (c *Client) SetNodePoolNodeProtection(request *SetNodePoolNodeProtectionReq
     if request == nil {
         request = NewSetNodePoolNodeProtectionRequest()
     }
+    
     response = NewSetNodePoolNodeProtectionResponse()
     err = c.Send(request, response)
     return
@@ -2459,6 +2579,7 @@ func NewUpdateClusterVersionRequest() (request *UpdateClusterVersionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "UpdateClusterVersion")
+    
     
     return
 }
@@ -2485,6 +2606,7 @@ func (c *Client) UpdateClusterVersion(request *UpdateClusterVersionRequest) (res
     if request == nil {
         request = NewUpdateClusterVersionRequest()
     }
+    
     response = NewUpdateClusterVersionResponse()
     err = c.Send(request, response)
     return
@@ -2495,6 +2617,7 @@ func NewUpgradeClusterInstancesRequest() (request *UpgradeClusterInstancesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tke", APIVersion, "UpgradeClusterInstances")
+    
     
     return
 }
@@ -2521,6 +2644,7 @@ func (c *Client) UpgradeClusterInstances(request *UpgradeClusterInstancesRequest
     if request == nil {
         request = NewUpgradeClusterInstancesRequest()
     }
+    
     response = NewUpgradeClusterInstancesResponse()
     err = c.Send(request, response)
     return

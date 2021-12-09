@@ -49,6 +49,7 @@ func NewCreateBasicDDoSAlarmThresholdRequest() (request *CreateBasicDDoSAlarmThr
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateBasicDDoSAlarmThreshold")
     
+    
     return
 }
 
@@ -65,6 +66,7 @@ func (c *Client) CreateBasicDDoSAlarmThreshold(request *CreateBasicDDoSAlarmThre
     if request == nil {
         request = NewCreateBasicDDoSAlarmThresholdRequest()
     }
+    
     response = NewCreateBasicDDoSAlarmThresholdResponse()
     err = c.Send(request, response)
     return
@@ -75,6 +77,7 @@ func NewCreateBoundIPRequest() (request *CreateBoundIPRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateBoundIP")
+    
     
     return
 }
@@ -97,6 +100,7 @@ func (c *Client) CreateBoundIP(request *CreateBoundIPRequest) (response *CreateB
     if request == nil {
         request = NewCreateBoundIPRequest()
     }
+    
     response = NewCreateBoundIPResponse()
     err = c.Send(request, response)
     return
@@ -107,6 +111,7 @@ func NewCreateCCFrequencyRulesRequest() (request *CreateCCFrequencyRulesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateCCFrequencyRules")
+    
     
     return
 }
@@ -129,6 +134,7 @@ func (c *Client) CreateCCFrequencyRules(request *CreateCCFrequencyRulesRequest) 
     if request == nil {
         request = NewCreateCCFrequencyRulesRequest()
     }
+    
     response = NewCreateCCFrequencyRulesResponse()
     err = c.Send(request, response)
     return
@@ -139,6 +145,7 @@ func NewCreateCCSelfDefinePolicyRequest() (request *CreateCCSelfDefinePolicyRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateCCSelfDefinePolicy")
+    
     
     return
 }
@@ -167,6 +174,7 @@ func (c *Client) CreateCCSelfDefinePolicy(request *CreateCCSelfDefinePolicyReque
     if request == nil {
         request = NewCreateCCSelfDefinePolicyRequest()
     }
+    
     response = NewCreateCCSelfDefinePolicyResponse()
     err = c.Send(request, response)
     return
@@ -177,6 +185,7 @@ func NewCreateDDoSPolicyRequest() (request *CreateDDoSPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateDDoSPolicy")
+    
     
     return
 }
@@ -205,6 +214,7 @@ func (c *Client) CreateDDoSPolicy(request *CreateDDoSPolicyRequest) (response *C
     if request == nil {
         request = NewCreateDDoSPolicyRequest()
     }
+    
     response = NewCreateDDoSPolicyResponse()
     err = c.Send(request, response)
     return
@@ -215,6 +225,7 @@ func NewCreateDDoSPolicyCaseRequest() (request *CreateDDoSPolicyCaseRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateDDoSPolicyCase")
+    
     
     return
 }
@@ -243,6 +254,7 @@ func (c *Client) CreateDDoSPolicyCase(request *CreateDDoSPolicyCaseRequest) (res
     if request == nil {
         request = NewCreateDDoSPolicyCaseRequest()
     }
+    
     response = NewCreateDDoSPolicyCaseResponse()
     err = c.Send(request, response)
     return
@@ -253,6 +265,7 @@ func NewCreateInstanceNameRequest() (request *CreateInstanceNameRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateInstanceName")
+    
     
     return
 }
@@ -281,6 +294,7 @@ func (c *Client) CreateInstanceName(request *CreateInstanceNameRequest) (respons
     if request == nil {
         request = NewCreateInstanceNameRequest()
     }
+    
     response = NewCreateInstanceNameResponse()
     err = c.Send(request, response)
     return
@@ -291,6 +305,7 @@ func NewCreateL4HealthConfigRequest() (request *CreateL4HealthConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL4HealthConfig")
+    
     
     return
 }
@@ -319,6 +334,7 @@ func (c *Client) CreateL4HealthConfig(request *CreateL4HealthConfigRequest) (res
     if request == nil {
         request = NewCreateL4HealthConfigRequest()
     }
+    
     response = NewCreateL4HealthConfigResponse()
     err = c.Send(request, response)
     return
@@ -329,6 +345,7 @@ func NewCreateL4RulesRequest() (request *CreateL4RulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL4Rules")
+    
     
     return
 }
@@ -357,6 +374,7 @@ func (c *Client) CreateL4Rules(request *CreateL4RulesRequest) (response *CreateL
     if request == nil {
         request = NewCreateL4RulesRequest()
     }
+    
     response = NewCreateL4RulesResponse()
     err = c.Send(request, response)
     return
@@ -367,6 +385,7 @@ func NewCreateL7CCRuleRequest() (request *CreateL7CCRuleRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL7CCRule")
+    
     
     return
 }
@@ -395,6 +414,7 @@ func (c *Client) CreateL7CCRule(request *CreateL7CCRuleRequest) (response *Creat
     if request == nil {
         request = NewCreateL7CCRuleRequest()
     }
+    
     response = NewCreateL7CCRuleResponse()
     err = c.Send(request, response)
     return
@@ -405,6 +425,7 @@ func NewCreateL7HealthConfigRequest() (request *CreateL7HealthConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL7HealthConfig")
+    
     
     return
 }
@@ -433,6 +454,7 @@ func (c *Client) CreateL7HealthConfig(request *CreateL7HealthConfigRequest) (res
     if request == nil {
         request = NewCreateL7HealthConfigRequest()
     }
+    
     response = NewCreateL7HealthConfigResponse()
     err = c.Send(request, response)
     return
@@ -443,6 +465,7 @@ func NewCreateL7RuleCertRequest() (request *CreateL7RuleCertRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL7RuleCert")
+    
     
     return
 }
@@ -463,6 +486,7 @@ func (c *Client) CreateL7RuleCert(request *CreateL7RuleCertRequest) (response *C
     if request == nil {
         request = NewCreateL7RuleCertRequest()
     }
+    
     response = NewCreateL7RuleCertResponse()
     err = c.Send(request, response)
     return
@@ -473,6 +497,7 @@ func NewCreateL7RulesRequest() (request *CreateL7RulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL7Rules")
+    
     
     return
 }
@@ -493,6 +518,7 @@ func (c *Client) CreateL7Rules(request *CreateL7RulesRequest) (response *CreateL
     if request == nil {
         request = NewCreateL7RulesRequest()
     }
+    
     response = NewCreateL7RulesResponse()
     err = c.Send(request, response)
     return
@@ -503,6 +529,7 @@ func NewCreateL7RulesUploadRequest() (request *CreateL7RulesUploadRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL7RulesUpload")
+    
     
     return
 }
@@ -532,6 +559,7 @@ func (c *Client) CreateL7RulesUpload(request *CreateL7RulesUploadRequest) (respo
     if request == nil {
         request = NewCreateL7RulesUploadRequest()
     }
+    
     response = NewCreateL7RulesUploadResponse()
     err = c.Send(request, response)
     return
@@ -542,6 +570,7 @@ func NewCreateNetReturnRequest() (request *CreateNetReturnRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateNetReturn")
+    
     
     return
 }
@@ -571,6 +600,7 @@ func (c *Client) CreateNetReturn(request *CreateNetReturnRequest) (response *Cre
     if request == nil {
         request = NewCreateNetReturnRequest()
     }
+    
     response = NewCreateNetReturnResponse()
     err = c.Send(request, response)
     return
@@ -581,6 +611,7 @@ func NewCreateNewL7RulesUploadRequest() (request *CreateNewL7RulesUploadRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateNewL7RulesUpload")
+    
     
     return
 }
@@ -601,6 +632,7 @@ func (c *Client) CreateNewL7RulesUpload(request *CreateNewL7RulesUploadRequest) 
     if request == nil {
         request = NewCreateNewL7RulesUploadRequest()
     }
+    
     response = NewCreateNewL7RulesUploadResponse()
     err = c.Send(request, response)
     return
@@ -611,6 +643,7 @@ func NewCreateUnblockIpRequest() (request *CreateUnblockIpRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "CreateUnblockIp")
+    
     
     return
 }
@@ -631,6 +664,7 @@ func (c *Client) CreateUnblockIp(request *CreateUnblockIpRequest) (response *Cre
     if request == nil {
         request = NewCreateUnblockIpRequest()
     }
+    
     response = NewCreateUnblockIpResponse()
     err = c.Send(request, response)
     return
@@ -641,6 +675,7 @@ func NewDeleteCCFrequencyRulesRequest() (request *DeleteCCFrequencyRulesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteCCFrequencyRules")
+    
     
     return
 }
@@ -661,6 +696,7 @@ func (c *Client) DeleteCCFrequencyRules(request *DeleteCCFrequencyRulesRequest) 
     if request == nil {
         request = NewDeleteCCFrequencyRulesRequest()
     }
+    
     response = NewDeleteCCFrequencyRulesResponse()
     err = c.Send(request, response)
     return
@@ -671,6 +707,7 @@ func NewDeleteCCSelfDefinePolicyRequest() (request *DeleteCCSelfDefinePolicyRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteCCSelfDefinePolicy")
+    
     
     return
 }
@@ -699,6 +736,7 @@ func (c *Client) DeleteCCSelfDefinePolicy(request *DeleteCCSelfDefinePolicyReque
     if request == nil {
         request = NewDeleteCCSelfDefinePolicyRequest()
     }
+    
     response = NewDeleteCCSelfDefinePolicyResponse()
     err = c.Send(request, response)
     return
@@ -709,6 +747,7 @@ func NewDeleteDDoSPolicyRequest() (request *DeleteDDoSPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteDDoSPolicy")
+    
     
     return
 }
@@ -729,6 +768,7 @@ func (c *Client) DeleteDDoSPolicy(request *DeleteDDoSPolicyRequest) (response *D
     if request == nil {
         request = NewDeleteDDoSPolicyRequest()
     }
+    
     response = NewDeleteDDoSPolicyResponse()
     err = c.Send(request, response)
     return
@@ -739,6 +779,7 @@ func NewDeleteDDoSPolicyCaseRequest() (request *DeleteDDoSPolicyCaseRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteDDoSPolicyCase")
+    
     
     return
 }
@@ -759,6 +800,7 @@ func (c *Client) DeleteDDoSPolicyCase(request *DeleteDDoSPolicyCaseRequest) (res
     if request == nil {
         request = NewDeleteDDoSPolicyCaseRequest()
     }
+    
     response = NewDeleteDDoSPolicyCaseResponse()
     err = c.Send(request, response)
     return
@@ -769,6 +811,7 @@ func NewDeleteL4RulesRequest() (request *DeleteL4RulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteL4Rules")
+    
     
     return
 }
@@ -789,6 +832,7 @@ func (c *Client) DeleteL4Rules(request *DeleteL4RulesRequest) (response *DeleteL
     if request == nil {
         request = NewDeleteL4RulesRequest()
     }
+    
     response = NewDeleteL4RulesResponse()
     err = c.Send(request, response)
     return
@@ -799,6 +843,7 @@ func NewDeleteL7RulesRequest() (request *DeleteL7RulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteL7Rules")
+    
     
     return
 }
@@ -819,6 +864,7 @@ func (c *Client) DeleteL7Rules(request *DeleteL7RulesRequest) (response *DeleteL
     if request == nil {
         request = NewDeleteL7RulesRequest()
     }
+    
     response = NewDeleteL7RulesResponse()
     err = c.Send(request, response)
     return
@@ -829,6 +875,7 @@ func NewDescribeActionLogRequest() (request *DescribeActionLogRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeActionLog")
+    
     
     return
 }
@@ -849,6 +896,7 @@ func (c *Client) DescribeActionLog(request *DescribeActionLogRequest) (response 
     if request == nil {
         request = NewDescribeActionLogRequest()
     }
+    
     response = NewDescribeActionLogResponse()
     err = c.Send(request, response)
     return
@@ -859,6 +907,7 @@ func NewDescribeBGPIPL7RuleMaxCntRequest() (request *DescribeBGPIPL7RuleMaxCntRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeBGPIPL7RuleMaxCnt")
+    
     
     return
 }
@@ -879,6 +928,7 @@ func (c *Client) DescribeBGPIPL7RuleMaxCnt(request *DescribeBGPIPL7RuleMaxCntReq
     if request == nil {
         request = NewDescribeBGPIPL7RuleMaxCntRequest()
     }
+    
     response = NewDescribeBGPIPL7RuleMaxCntResponse()
     err = c.Send(request, response)
     return
@@ -889,6 +939,7 @@ func NewDescribeBaradDataRequest() (request *DescribeBaradDataRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeBaradData")
+    
     
     return
 }
@@ -909,6 +960,7 @@ func (c *Client) DescribeBaradData(request *DescribeBaradDataRequest) (response 
     if request == nil {
         request = NewDescribeBaradDataRequest()
     }
+    
     response = NewDescribeBaradDataResponse()
     err = c.Send(request, response)
     return
@@ -919,6 +971,7 @@ func NewDescribeBasicCCThresholdRequest() (request *DescribeBasicCCThresholdRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeBasicCCThreshold")
+    
     
     return
 }
@@ -948,6 +1001,7 @@ func (c *Client) DescribeBasicCCThreshold(request *DescribeBasicCCThresholdReque
     if request == nil {
         request = NewDescribeBasicCCThresholdRequest()
     }
+    
     response = NewDescribeBasicCCThresholdResponse()
     err = c.Send(request, response)
     return
@@ -958,6 +1012,7 @@ func NewDescribeBasicDeviceThresholdRequest() (request *DescribeBasicDeviceThres
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeBasicDeviceThreshold")
+    
     
     return
 }
@@ -987,6 +1042,7 @@ func (c *Client) DescribeBasicDeviceThreshold(request *DescribeBasicDeviceThresh
     if request == nil {
         request = NewDescribeBasicDeviceThresholdRequest()
     }
+    
     response = NewDescribeBasicDeviceThresholdResponse()
     err = c.Send(request, response)
     return
@@ -997,6 +1053,7 @@ func NewDescribeBizHttpStatusRequest() (request *DescribeBizHttpStatusRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeBizHttpStatus")
+    
     
     return
 }
@@ -1026,6 +1083,7 @@ func (c *Client) DescribeBizHttpStatus(request *DescribeBizHttpStatusRequest) (r
     if request == nil {
         request = NewDescribeBizHttpStatusRequest()
     }
+    
     response = NewDescribeBizHttpStatusResponse()
     err = c.Send(request, response)
     return
@@ -1036,6 +1094,7 @@ func NewDescribeCCAlarmThresholdRequest() (request *DescribeCCAlarmThresholdRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCAlarmThreshold")
+    
     
     return
 }
@@ -1065,6 +1124,7 @@ func (c *Client) DescribeCCAlarmThreshold(request *DescribeCCAlarmThresholdReque
     if request == nil {
         request = NewDescribeCCAlarmThresholdRequest()
     }
+    
     response = NewDescribeCCAlarmThresholdResponse()
     err = c.Send(request, response)
     return
@@ -1075,6 +1135,7 @@ func NewDescribeCCEvListRequest() (request *DescribeCCEvListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCEvList")
+    
     
     return
 }
@@ -1104,6 +1165,7 @@ func (c *Client) DescribeCCEvList(request *DescribeCCEvListRequest) (response *D
     if request == nil {
         request = NewDescribeCCEvListRequest()
     }
+    
     response = NewDescribeCCEvListResponse()
     err = c.Send(request, response)
     return
@@ -1114,6 +1176,7 @@ func NewDescribeCCFrequencyRulesRequest() (request *DescribeCCFrequencyRulesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCFrequencyRules")
+    
     
     return
 }
@@ -1143,6 +1206,7 @@ func (c *Client) DescribeCCFrequencyRules(request *DescribeCCFrequencyRulesReque
     if request == nil {
         request = NewDescribeCCFrequencyRulesRequest()
     }
+    
     response = NewDescribeCCFrequencyRulesResponse()
     err = c.Send(request, response)
     return
@@ -1153,6 +1217,7 @@ func NewDescribeCCIpAllowDenyRequest() (request *DescribeCCIpAllowDenyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCIpAllowDeny")
+    
     
     return
 }
@@ -1182,6 +1247,7 @@ func (c *Client) DescribeCCIpAllowDeny(request *DescribeCCIpAllowDenyRequest) (r
     if request == nil {
         request = NewDescribeCCIpAllowDenyRequest()
     }
+    
     response = NewDescribeCCIpAllowDenyResponse()
     err = c.Send(request, response)
     return
@@ -1192,6 +1258,7 @@ func NewDescribeCCSelfDefinePolicyRequest() (request *DescribeCCSelfDefinePolicy
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCSelfDefinePolicy")
+    
     
     return
 }
@@ -1220,6 +1287,7 @@ func (c *Client) DescribeCCSelfDefinePolicy(request *DescribeCCSelfDefinePolicyR
     if request == nil {
         request = NewDescribeCCSelfDefinePolicyRequest()
     }
+    
     response = NewDescribeCCSelfDefinePolicyResponse()
     err = c.Send(request, response)
     return
@@ -1230,6 +1298,7 @@ func NewDescribeCCTrendRequest() (request *DescribeCCTrendRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCTrend")
+    
     
     return
 }
@@ -1258,6 +1327,7 @@ func (c *Client) DescribeCCTrend(request *DescribeCCTrendRequest) (response *Des
     if request == nil {
         request = NewDescribeCCTrendRequest()
     }
+    
     response = NewDescribeCCTrendResponse()
     err = c.Send(request, response)
     return
@@ -1268,6 +1338,7 @@ func NewDescribeCCUrlAllowRequest() (request *DescribeCCUrlAllowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCUrlAllow")
+    
     
     return
 }
@@ -1296,6 +1367,7 @@ func (c *Client) DescribeCCUrlAllow(request *DescribeCCUrlAllowRequest) (respons
     if request == nil {
         request = NewDescribeCCUrlAllowRequest()
     }
+    
     response = NewDescribeCCUrlAllowResponse()
     err = c.Send(request, response)
     return
@@ -1306,6 +1378,7 @@ func NewDescribeDDoSAlarmThresholdRequest() (request *DescribeDDoSAlarmThreshold
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSAlarmThreshold")
+    
     
     return
 }
@@ -1334,6 +1407,7 @@ func (c *Client) DescribeDDoSAlarmThreshold(request *DescribeDDoSAlarmThresholdR
     if request == nil {
         request = NewDescribeDDoSAlarmThresholdRequest()
     }
+    
     response = NewDescribeDDoSAlarmThresholdResponse()
     err = c.Send(request, response)
     return
@@ -1344,6 +1418,7 @@ func NewDescribeDDoSAttackIPRegionMapRequest() (request *DescribeDDoSAttackIPReg
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSAttackIPRegionMap")
+    
     
     return
 }
@@ -1370,6 +1445,7 @@ func (c *Client) DescribeDDoSAttackIPRegionMap(request *DescribeDDoSAttackIPRegi
     if request == nil {
         request = NewDescribeDDoSAttackIPRegionMapRequest()
     }
+    
     response = NewDescribeDDoSAttackIPRegionMapResponse()
     err = c.Send(request, response)
     return
@@ -1380,6 +1456,7 @@ func NewDescribeDDoSAttackSourceRequest() (request *DescribeDDoSAttackSourceRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSAttackSource")
+    
     
     return
 }
@@ -1409,6 +1486,7 @@ func (c *Client) DescribeDDoSAttackSource(request *DescribeDDoSAttackSourceReque
     if request == nil {
         request = NewDescribeDDoSAttackSourceRequest()
     }
+    
     response = NewDescribeDDoSAttackSourceResponse()
     err = c.Send(request, response)
     return
@@ -1419,6 +1497,7 @@ func NewDescribeDDoSCountRequest() (request *DescribeDDoSCountRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSCount")
+    
     
     return
 }
@@ -1448,6 +1527,7 @@ func (c *Client) DescribeDDoSCount(request *DescribeDDoSCountRequest) (response 
     if request == nil {
         request = NewDescribeDDoSCountRequest()
     }
+    
     response = NewDescribeDDoSCountResponse()
     err = c.Send(request, response)
     return
@@ -1458,6 +1538,7 @@ func NewDescribeDDoSDefendStatusRequest() (request *DescribeDDoSDefendStatusRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSDefendStatus")
+    
     
     return
 }
@@ -1487,6 +1568,7 @@ func (c *Client) DescribeDDoSDefendStatus(request *DescribeDDoSDefendStatusReque
     if request == nil {
         request = NewDescribeDDoSDefendStatusRequest()
     }
+    
     response = NewDescribeDDoSDefendStatusResponse()
     err = c.Send(request, response)
     return
@@ -1497,6 +1579,7 @@ func NewDescribeDDoSEvInfoRequest() (request *DescribeDDoSEvInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSEvInfo")
+    
     
     return
 }
@@ -1526,6 +1609,7 @@ func (c *Client) DescribeDDoSEvInfo(request *DescribeDDoSEvInfoRequest) (respons
     if request == nil {
         request = NewDescribeDDoSEvInfoRequest()
     }
+    
     response = NewDescribeDDoSEvInfoResponse()
     err = c.Send(request, response)
     return
@@ -1536,6 +1620,7 @@ func NewDescribeDDoSEvListRequest() (request *DescribeDDoSEvListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSEvList")
+    
     
     return
 }
@@ -1565,6 +1650,7 @@ func (c *Client) DescribeDDoSEvList(request *DescribeDDoSEvListRequest) (respons
     if request == nil {
         request = NewDescribeDDoSEvListRequest()
     }
+    
     response = NewDescribeDDoSEvListResponse()
     err = c.Send(request, response)
     return
@@ -1575,6 +1661,7 @@ func NewDescribeDDoSIpLogRequest() (request *DescribeDDoSIpLogRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSIpLog")
+    
     
     return
 }
@@ -1604,6 +1691,7 @@ func (c *Client) DescribeDDoSIpLog(request *DescribeDDoSIpLogRequest) (response 
     if request == nil {
         request = NewDescribeDDoSIpLogRequest()
     }
+    
     response = NewDescribeDDoSIpLogResponse()
     err = c.Send(request, response)
     return
@@ -1614,6 +1702,7 @@ func NewDescribeDDoSNetCountRequest() (request *DescribeDDoSNetCountRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSNetCount")
+    
     
     return
 }
@@ -1643,6 +1732,7 @@ func (c *Client) DescribeDDoSNetCount(request *DescribeDDoSNetCountRequest) (res
     if request == nil {
         request = NewDescribeDDoSNetCountRequest()
     }
+    
     response = NewDescribeDDoSNetCountResponse()
     err = c.Send(request, response)
     return
@@ -1653,6 +1743,7 @@ func NewDescribeDDoSNetEvInfoRequest() (request *DescribeDDoSNetEvInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSNetEvInfo")
+    
     
     return
 }
@@ -1682,6 +1773,7 @@ func (c *Client) DescribeDDoSNetEvInfo(request *DescribeDDoSNetEvInfoRequest) (r
     if request == nil {
         request = NewDescribeDDoSNetEvInfoRequest()
     }
+    
     response = NewDescribeDDoSNetEvInfoResponse()
     err = c.Send(request, response)
     return
@@ -1692,6 +1784,7 @@ func NewDescribeDDoSNetEvListRequest() (request *DescribeDDoSNetEvListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSNetEvList")
+    
     
     return
 }
@@ -1721,6 +1814,7 @@ func (c *Client) DescribeDDoSNetEvList(request *DescribeDDoSNetEvListRequest) (r
     if request == nil {
         request = NewDescribeDDoSNetEvListRequest()
     }
+    
     response = NewDescribeDDoSNetEvListResponse()
     err = c.Send(request, response)
     return
@@ -1731,6 +1825,7 @@ func NewDescribeDDoSNetIpLogRequest() (request *DescribeDDoSNetIpLogRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSNetIpLog")
+    
     
     return
 }
@@ -1760,6 +1855,7 @@ func (c *Client) DescribeDDoSNetIpLog(request *DescribeDDoSNetIpLogRequest) (res
     if request == nil {
         request = NewDescribeDDoSNetIpLogRequest()
     }
+    
     response = NewDescribeDDoSNetIpLogResponse()
     err = c.Send(request, response)
     return
@@ -1770,6 +1866,7 @@ func NewDescribeDDoSNetTrendRequest() (request *DescribeDDoSNetTrendRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSNetTrend")
+    
     
     return
 }
@@ -1799,6 +1896,7 @@ func (c *Client) DescribeDDoSNetTrend(request *DescribeDDoSNetTrendRequest) (res
     if request == nil {
         request = NewDescribeDDoSNetTrendRequest()
     }
+    
     response = NewDescribeDDoSNetTrendResponse()
     err = c.Send(request, response)
     return
@@ -1809,6 +1907,7 @@ func NewDescribeDDoSPolicyRequest() (request *DescribeDDoSPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSPolicy")
+    
     
     return
 }
@@ -1838,6 +1937,7 @@ func (c *Client) DescribeDDoSPolicy(request *DescribeDDoSPolicyRequest) (respons
     if request == nil {
         request = NewDescribeDDoSPolicyRequest()
     }
+    
     response = NewDescribeDDoSPolicyResponse()
     err = c.Send(request, response)
     return
@@ -1848,6 +1948,7 @@ func NewDescribeDDoSTrendRequest() (request *DescribeDDoSTrendRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSTrend")
+    
     
     return
 }
@@ -1877,6 +1978,7 @@ func (c *Client) DescribeDDoSTrend(request *DescribeDDoSTrendRequest) (response 
     if request == nil {
         request = NewDescribeDDoSTrendRequest()
     }
+    
     response = NewDescribeDDoSTrendResponse()
     err = c.Send(request, response)
     return
@@ -1887,6 +1989,7 @@ func NewDescribeDDoSUsedStatisRequest() (request *DescribeDDoSUsedStatisRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSUsedStatis")
+    
     
     return
 }
@@ -1916,6 +2019,7 @@ func (c *Client) DescribeDDoSUsedStatis(request *DescribeDDoSUsedStatisRequest) 
     if request == nil {
         request = NewDescribeDDoSUsedStatisRequest()
     }
+    
     response = NewDescribeDDoSUsedStatisResponse()
     err = c.Send(request, response)
     return
@@ -1926,6 +2030,7 @@ func NewDescribeIPProductInfoRequest() (request *DescribeIPProductInfoRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeIPProductInfo")
+    
     
     return
 }
@@ -1955,6 +2060,7 @@ func (c *Client) DescribeIPProductInfo(request *DescribeIPProductInfoRequest) (r
     if request == nil {
         request = NewDescribeIPProductInfoRequest()
     }
+    
     response = NewDescribeIPProductInfoResponse()
     err = c.Send(request, response)
     return
@@ -1965,6 +2071,7 @@ func NewDescribeInsurePacksRequest() (request *DescribeInsurePacksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeInsurePacks")
+    
     
     return
 }
@@ -1994,6 +2101,7 @@ func (c *Client) DescribeInsurePacks(request *DescribeInsurePacksRequest) (respo
     if request == nil {
         request = NewDescribeInsurePacksRequest()
     }
+    
     response = NewDescribeInsurePacksResponse()
     err = c.Send(request, response)
     return
@@ -2004,6 +2112,7 @@ func NewDescribeIpBlockListRequest() (request *DescribeIpBlockListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeIpBlockList")
+    
     
     return
 }
@@ -2033,6 +2142,7 @@ func (c *Client) DescribeIpBlockList(request *DescribeIpBlockListRequest) (respo
     if request == nil {
         request = NewDescribeIpBlockListRequest()
     }
+    
     response = NewDescribeIpBlockListResponse()
     err = c.Send(request, response)
     return
@@ -2043,6 +2153,7 @@ func NewDescribeIpUnBlockListRequest() (request *DescribeIpUnBlockListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeIpUnBlockList")
+    
     
     return
 }
@@ -2072,6 +2183,7 @@ func (c *Client) DescribeIpUnBlockList(request *DescribeIpUnBlockListRequest) (r
     if request == nil {
         request = NewDescribeIpUnBlockListRequest()
     }
+    
     response = NewDescribeIpUnBlockListResponse()
     err = c.Send(request, response)
     return
@@ -2082,6 +2194,7 @@ func NewDescribeL4HealthConfigRequest() (request *DescribeL4HealthConfigRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeL4HealthConfig")
+    
     
     return
 }
@@ -2111,6 +2224,7 @@ func (c *Client) DescribeL4HealthConfig(request *DescribeL4HealthConfigRequest) 
     if request == nil {
         request = NewDescribeL4HealthConfigRequest()
     }
+    
     response = NewDescribeL4HealthConfigResponse()
     err = c.Send(request, response)
     return
@@ -2121,6 +2235,7 @@ func NewDescribeL4RulesErrHealthRequest() (request *DescribeL4RulesErrHealthRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeL4RulesErrHealth")
+    
     
     return
 }
@@ -2150,6 +2265,7 @@ func (c *Client) DescribeL4RulesErrHealth(request *DescribeL4RulesErrHealthReque
     if request == nil {
         request = NewDescribeL4RulesErrHealthRequest()
     }
+    
     response = NewDescribeL4RulesErrHealthResponse()
     err = c.Send(request, response)
     return
@@ -2160,6 +2276,7 @@ func NewDescribeL7HealthConfigRequest() (request *DescribeL7HealthConfigRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeL7HealthConfig")
+    
     
     return
 }
@@ -2189,6 +2306,7 @@ func (c *Client) DescribeL7HealthConfig(request *DescribeL7HealthConfigRequest) 
     if request == nil {
         request = NewDescribeL7HealthConfigRequest()
     }
+    
     response = NewDescribeL7HealthConfigResponse()
     err = c.Send(request, response)
     return
@@ -2199,6 +2317,7 @@ func NewDescribePackIndexRequest() (request *DescribePackIndexRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribePackIndex")
+    
     
     return
 }
@@ -2228,6 +2347,7 @@ func (c *Client) DescribePackIndex(request *DescribePackIndexRequest) (response 
     if request == nil {
         request = NewDescribePackIndexRequest()
     }
+    
     response = NewDescribePackIndexResponse()
     err = c.Send(request, response)
     return
@@ -2238,6 +2358,7 @@ func NewDescribePcapRequest() (request *DescribePcapRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribePcap")
+    
     
     return
 }
@@ -2267,6 +2388,7 @@ func (c *Client) DescribePcap(request *DescribePcapRequest) (response *DescribeP
     if request == nil {
         request = NewDescribePcapRequest()
     }
+    
     response = NewDescribePcapResponse()
     err = c.Send(request, response)
     return
@@ -2277,6 +2399,7 @@ func NewDescribePolicyCaseRequest() (request *DescribePolicyCaseRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribePolicyCase")
+    
     
     return
 }
@@ -2306,6 +2429,7 @@ func (c *Client) DescribePolicyCase(request *DescribePolicyCaseRequest) (respons
     if request == nil {
         request = NewDescribePolicyCaseRequest()
     }
+    
     response = NewDescribePolicyCaseResponse()
     err = c.Send(request, response)
     return
@@ -2316,6 +2440,7 @@ func NewDescribeResIpListRequest() (request *DescribeResIpListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeResIpList")
+    
     
     return
 }
@@ -2345,6 +2470,7 @@ func (c *Client) DescribeResIpList(request *DescribeResIpListRequest) (response 
     if request == nil {
         request = NewDescribeResIpListRequest()
     }
+    
     response = NewDescribeResIpListResponse()
     err = c.Send(request, response)
     return
@@ -2355,6 +2481,7 @@ func NewDescribeResourceListRequest() (request *DescribeResourceListRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeResourceList")
+    
     
     return
 }
@@ -2384,6 +2511,7 @@ func (c *Client) DescribeResourceList(request *DescribeResourceListRequest) (res
     if request == nil {
         request = NewDescribeResourceListRequest()
     }
+    
     response = NewDescribeResourceListResponse()
     err = c.Send(request, response)
     return
@@ -2394,6 +2522,7 @@ func NewDescribeRuleSetsRequest() (request *DescribeRuleSetsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeRuleSets")
+    
     
     return
 }
@@ -2423,6 +2552,7 @@ func (c *Client) DescribeRuleSets(request *DescribeRuleSetsRequest) (response *D
     if request == nil {
         request = NewDescribeRuleSetsRequest()
     }
+    
     response = NewDescribeRuleSetsResponse()
     err = c.Send(request, response)
     return
@@ -2433,6 +2563,7 @@ func NewDescribeSchedulingDomainListRequest() (request *DescribeSchedulingDomain
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeSchedulingDomainList")
+    
     
     return
 }
@@ -2462,6 +2593,7 @@ func (c *Client) DescribeSchedulingDomainList(request *DescribeSchedulingDomainL
     if request == nil {
         request = NewDescribeSchedulingDomainListRequest()
     }
+    
     response = NewDescribeSchedulingDomainListResponse()
     err = c.Send(request, response)
     return
@@ -2472,6 +2604,7 @@ func NewDescribeSecIndexRequest() (request *DescribeSecIndexRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeSecIndex")
+    
     
     return
 }
@@ -2501,6 +2634,7 @@ func (c *Client) DescribeSecIndex(request *DescribeSecIndexRequest) (response *D
     if request == nil {
         request = NewDescribeSecIndexRequest()
     }
+    
     response = NewDescribeSecIndexResponse()
     err = c.Send(request, response)
     return
@@ -2511,6 +2645,7 @@ func NewDescribeSourceIpSegmentRequest() (request *DescribeSourceIpSegmentReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeSourceIpSegment")
+    
     
     return
 }
@@ -2540,6 +2675,7 @@ func (c *Client) DescribeSourceIpSegment(request *DescribeSourceIpSegmentRequest
     if request == nil {
         request = NewDescribeSourceIpSegmentRequest()
     }
+    
     response = NewDescribeSourceIpSegmentResponse()
     err = c.Send(request, response)
     return
@@ -2550,6 +2686,7 @@ func NewDescribeTransmitStatisRequest() (request *DescribeTransmitStatisRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeTransmitStatis")
+    
     
     return
 }
@@ -2570,6 +2707,7 @@ func (c *Client) DescribeTransmitStatis(request *DescribeTransmitStatisRequest) 
     if request == nil {
         request = NewDescribeTransmitStatisRequest()
     }
+    
     response = NewDescribeTransmitStatisResponse()
     err = c.Send(request, response)
     return
@@ -2580,6 +2718,7 @@ func NewDescribeUnBlockStatisRequest() (request *DescribeUnBlockStatisRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeUnBlockStatis")
+    
     
     return
 }
@@ -2600,6 +2739,7 @@ func (c *Client) DescribeUnBlockStatis(request *DescribeUnBlockStatisRequest) (r
     if request == nil {
         request = NewDescribeUnBlockStatisRequest()
     }
+    
     response = NewDescribeUnBlockStatisResponse()
     err = c.Send(request, response)
     return
@@ -2610,6 +2750,7 @@ func NewDescribleL4RulesRequest() (request *DescribleL4RulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribleL4Rules")
+    
     
     return
 }
@@ -2630,6 +2771,7 @@ func (c *Client) DescribleL4Rules(request *DescribleL4RulesRequest) (response *D
     if request == nil {
         request = NewDescribleL4RulesRequest()
     }
+    
     response = NewDescribleL4RulesResponse()
     err = c.Send(request, response)
     return
@@ -2640,6 +2782,7 @@ func NewDescribleL7RulesRequest() (request *DescribleL7RulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribleL7Rules")
+    
     
     return
 }
@@ -2660,6 +2803,7 @@ func (c *Client) DescribleL7Rules(request *DescribleL7RulesRequest) (response *D
     if request == nil {
         request = NewDescribleL7RulesRequest()
     }
+    
     response = NewDescribleL7RulesResponse()
     err = c.Send(request, response)
     return
@@ -2670,6 +2814,7 @@ func NewDescribleRegionCountRequest() (request *DescribleRegionCountRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "DescribleRegionCount")
+    
     
     return
 }
@@ -2690,6 +2835,7 @@ func (c *Client) DescribleRegionCount(request *DescribleRegionCountRequest) (res
     if request == nil {
         request = NewDescribleRegionCountRequest()
     }
+    
     response = NewDescribleRegionCountResponse()
     err = c.Send(request, response)
     return
@@ -2700,6 +2846,7 @@ func NewModifyCCAlarmThresholdRequest() (request *ModifyCCAlarmThresholdRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCAlarmThreshold")
+    
     
     return
 }
@@ -2720,6 +2867,7 @@ func (c *Client) ModifyCCAlarmThreshold(request *ModifyCCAlarmThresholdRequest) 
     if request == nil {
         request = NewModifyCCAlarmThresholdRequest()
     }
+    
     response = NewModifyCCAlarmThresholdResponse()
     err = c.Send(request, response)
     return
@@ -2730,6 +2878,7 @@ func NewModifyCCFrequencyRulesRequest() (request *ModifyCCFrequencyRulesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCFrequencyRules")
+    
     
     return
 }
@@ -2750,6 +2899,7 @@ func (c *Client) ModifyCCFrequencyRules(request *ModifyCCFrequencyRulesRequest) 
     if request == nil {
         request = NewModifyCCFrequencyRulesRequest()
     }
+    
     response = NewModifyCCFrequencyRulesResponse()
     err = c.Send(request, response)
     return
@@ -2760,6 +2910,7 @@ func NewModifyCCFrequencyRulesStatusRequest() (request *ModifyCCFrequencyRulesSt
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCFrequencyRulesStatus")
+    
     
     return
 }
@@ -2780,6 +2931,7 @@ func (c *Client) ModifyCCFrequencyRulesStatus(request *ModifyCCFrequencyRulesSta
     if request == nil {
         request = NewModifyCCFrequencyRulesStatusRequest()
     }
+    
     response = NewModifyCCFrequencyRulesStatusResponse()
     err = c.Send(request, response)
     return
@@ -2790,6 +2942,7 @@ func NewModifyCCHostProtectionRequest() (request *ModifyCCHostProtectionRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCHostProtection")
+    
     
     return
 }
@@ -2810,6 +2963,7 @@ func (c *Client) ModifyCCHostProtection(request *ModifyCCHostProtectionRequest) 
     if request == nil {
         request = NewModifyCCHostProtectionRequest()
     }
+    
     response = NewModifyCCHostProtectionResponse()
     err = c.Send(request, response)
     return
@@ -2820,6 +2974,7 @@ func NewModifyCCIpAllowDenyRequest() (request *ModifyCCIpAllowDenyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCIpAllowDeny")
+    
     
     return
 }
@@ -2840,6 +2995,7 @@ func (c *Client) ModifyCCIpAllowDeny(request *ModifyCCIpAllowDenyRequest) (respo
     if request == nil {
         request = NewModifyCCIpAllowDenyRequest()
     }
+    
     response = NewModifyCCIpAllowDenyResponse()
     err = c.Send(request, response)
     return
@@ -2850,6 +3006,7 @@ func NewModifyCCLevelRequest() (request *ModifyCCLevelRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCLevel")
+    
     
     return
 }
@@ -2870,6 +3027,7 @@ func (c *Client) ModifyCCLevel(request *ModifyCCLevelRequest) (response *ModifyC
     if request == nil {
         request = NewModifyCCLevelRequest()
     }
+    
     response = NewModifyCCLevelResponse()
     err = c.Send(request, response)
     return
@@ -2880,6 +3038,7 @@ func NewModifyCCPolicySwitchRequest() (request *ModifyCCPolicySwitchRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCPolicySwitch")
+    
     
     return
 }
@@ -2908,6 +3067,7 @@ func (c *Client) ModifyCCPolicySwitch(request *ModifyCCPolicySwitchRequest) (res
     if request == nil {
         request = NewModifyCCPolicySwitchRequest()
     }
+    
     response = NewModifyCCPolicySwitchResponse()
     err = c.Send(request, response)
     return
@@ -2918,6 +3078,7 @@ func NewModifyCCSelfDefinePolicyRequest() (request *ModifyCCSelfDefinePolicyRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCSelfDefinePolicy")
+    
     
     return
 }
@@ -2946,6 +3107,7 @@ func (c *Client) ModifyCCSelfDefinePolicy(request *ModifyCCSelfDefinePolicyReque
     if request == nil {
         request = NewModifyCCSelfDefinePolicyRequest()
     }
+    
     response = NewModifyCCSelfDefinePolicyResponse()
     err = c.Send(request, response)
     return
@@ -2956,6 +3118,7 @@ func NewModifyCCThresholdRequest() (request *ModifyCCThresholdRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCThreshold")
+    
     
     return
 }
@@ -2976,6 +3139,7 @@ func (c *Client) ModifyCCThreshold(request *ModifyCCThresholdRequest) (response 
     if request == nil {
         request = NewModifyCCThresholdRequest()
     }
+    
     response = NewModifyCCThresholdResponse()
     err = c.Send(request, response)
     return
@@ -2986,6 +3150,7 @@ func NewModifyCCUrlAllowRequest() (request *ModifyCCUrlAllowRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCUrlAllow")
+    
     
     return
 }
@@ -3006,6 +3171,7 @@ func (c *Client) ModifyCCUrlAllow(request *ModifyCCUrlAllowRequest) (response *M
     if request == nil {
         request = NewModifyCCUrlAllowRequest()
     }
+    
     response = NewModifyCCUrlAllowResponse()
     err = c.Send(request, response)
     return
@@ -3016,6 +3182,7 @@ func NewModifyDDoSAIStatusRequest() (request *ModifyDDoSAIStatusRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSAIStatus")
+    
     
     return
 }
@@ -3036,6 +3203,7 @@ func (c *Client) ModifyDDoSAIStatus(request *ModifyDDoSAIStatusRequest) (respons
     if request == nil {
         request = NewModifyDDoSAIStatusRequest()
     }
+    
     response = NewModifyDDoSAIStatusResponse()
     err = c.Send(request, response)
     return
@@ -3046,6 +3214,7 @@ func NewModifyDDoSAlarmThresholdRequest() (request *ModifyDDoSAlarmThresholdRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSAlarmThreshold")
+    
     
     return
 }
@@ -3066,6 +3235,7 @@ func (c *Client) ModifyDDoSAlarmThreshold(request *ModifyDDoSAlarmThresholdReque
     if request == nil {
         request = NewModifyDDoSAlarmThresholdRequest()
     }
+    
     response = NewModifyDDoSAlarmThresholdResponse()
     err = c.Send(request, response)
     return
@@ -3076,6 +3246,7 @@ func NewModifyDDoSDefendStatusRequest() (request *ModifyDDoSDefendStatusRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSDefendStatus")
+    
     
     return
 }
@@ -3096,6 +3267,7 @@ func (c *Client) ModifyDDoSDefendStatus(request *ModifyDDoSDefendStatusRequest) 
     if request == nil {
         request = NewModifyDDoSDefendStatusRequest()
     }
+    
     response = NewModifyDDoSDefendStatusResponse()
     err = c.Send(request, response)
     return
@@ -3106,6 +3278,7 @@ func NewModifyDDoSLevelRequest() (request *ModifyDDoSLevelRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSLevel")
+    
     
     return
 }
@@ -3126,6 +3299,7 @@ func (c *Client) ModifyDDoSLevel(request *ModifyDDoSLevelRequest) (response *Mod
     if request == nil {
         request = NewModifyDDoSLevelRequest()
     }
+    
     response = NewModifyDDoSLevelResponse()
     err = c.Send(request, response)
     return
@@ -3136,6 +3310,7 @@ func NewModifyDDoSPolicyRequest() (request *ModifyDDoSPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSPolicy")
+    
     
     return
 }
@@ -3156,6 +3331,7 @@ func (c *Client) ModifyDDoSPolicy(request *ModifyDDoSPolicyRequest) (response *M
     if request == nil {
         request = NewModifyDDoSPolicyRequest()
     }
+    
     response = NewModifyDDoSPolicyResponse()
     err = c.Send(request, response)
     return
@@ -3166,6 +3342,7 @@ func NewModifyDDoSPolicyCaseRequest() (request *ModifyDDoSPolicyCaseRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSPolicyCase")
+    
     
     return
 }
@@ -3186,6 +3363,7 @@ func (c *Client) ModifyDDoSPolicyCase(request *ModifyDDoSPolicyCaseRequest) (res
     if request == nil {
         request = NewModifyDDoSPolicyCaseRequest()
     }
+    
     response = NewModifyDDoSPolicyCaseResponse()
     err = c.Send(request, response)
     return
@@ -3196,6 +3374,7 @@ func NewModifyDDoSPolicyNameRequest() (request *ModifyDDoSPolicyNameRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSPolicyName")
+    
     
     return
 }
@@ -3216,6 +3395,7 @@ func (c *Client) ModifyDDoSPolicyName(request *ModifyDDoSPolicyNameRequest) (res
     if request == nil {
         request = NewModifyDDoSPolicyNameRequest()
     }
+    
     response = NewModifyDDoSPolicyNameResponse()
     err = c.Send(request, response)
     return
@@ -3226,6 +3406,7 @@ func NewModifyDDoSSwitchRequest() (request *ModifyDDoSSwitchRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSSwitch")
+    
     
     return
 }
@@ -3246,6 +3427,7 @@ func (c *Client) ModifyDDoSSwitch(request *ModifyDDoSSwitchRequest) (response *M
     if request == nil {
         request = NewModifyDDoSSwitchRequest()
     }
+    
     response = NewModifyDDoSSwitchResponse()
     err = c.Send(request, response)
     return
@@ -3256,6 +3438,7 @@ func NewModifyDDoSThresholdRequest() (request *ModifyDDoSThresholdRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSThreshold")
+    
     
     return
 }
@@ -3276,6 +3459,7 @@ func (c *Client) ModifyDDoSThreshold(request *ModifyDDoSThresholdRequest) (respo
     if request == nil {
         request = NewModifyDDoSThresholdRequest()
     }
+    
     response = NewModifyDDoSThresholdResponse()
     err = c.Send(request, response)
     return
@@ -3286,6 +3470,7 @@ func NewModifyDDoSWaterKeyRequest() (request *ModifyDDoSWaterKeyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSWaterKey")
+    
     
     return
 }
@@ -3306,6 +3491,7 @@ func (c *Client) ModifyDDoSWaterKey(request *ModifyDDoSWaterKeyRequest) (respons
     if request == nil {
         request = NewModifyDDoSWaterKeyRequest()
     }
+    
     response = NewModifyDDoSWaterKeyResponse()
     err = c.Send(request, response)
     return
@@ -3316,6 +3502,7 @@ func NewModifyElasticLimitRequest() (request *ModifyElasticLimitRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyElasticLimit")
+    
     
     return
 }
@@ -3336,6 +3523,7 @@ func (c *Client) ModifyElasticLimit(request *ModifyElasticLimitRequest) (respons
     if request == nil {
         request = NewModifyElasticLimitRequest()
     }
+    
     response = NewModifyElasticLimitResponse()
     err = c.Send(request, response)
     return
@@ -3346,6 +3534,7 @@ func NewModifyL4HealthRequest() (request *ModifyL4HealthRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyL4Health")
+    
     
     return
 }
@@ -3366,6 +3555,7 @@ func (c *Client) ModifyL4Health(request *ModifyL4HealthRequest) (response *Modif
     if request == nil {
         request = NewModifyL4HealthRequest()
     }
+    
     response = NewModifyL4HealthResponse()
     err = c.Send(request, response)
     return
@@ -3376,6 +3566,7 @@ func NewModifyL4KeepTimeRequest() (request *ModifyL4KeepTimeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyL4KeepTime")
+    
     
     return
 }
@@ -3396,6 +3587,7 @@ func (c *Client) ModifyL4KeepTime(request *ModifyL4KeepTimeRequest) (response *M
     if request == nil {
         request = NewModifyL4KeepTimeRequest()
     }
+    
     response = NewModifyL4KeepTimeResponse()
     err = c.Send(request, response)
     return
@@ -3406,6 +3598,7 @@ func NewModifyL4RulesRequest() (request *ModifyL4RulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyL4Rules")
+    
     
     return
 }
@@ -3426,6 +3619,7 @@ func (c *Client) ModifyL4Rules(request *ModifyL4RulesRequest) (response *ModifyL
     if request == nil {
         request = NewModifyL4RulesRequest()
     }
+    
     response = NewModifyL4RulesResponse()
     err = c.Send(request, response)
     return
@@ -3436,6 +3630,7 @@ func NewModifyL7RulesRequest() (request *ModifyL7RulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyL7Rules")
+    
     
     return
 }
@@ -3457,6 +3652,7 @@ func (c *Client) ModifyL7Rules(request *ModifyL7RulesRequest) (response *ModifyL
     if request == nil {
         request = NewModifyL7RulesRequest()
     }
+    
     response = NewModifyL7RulesResponse()
     err = c.Send(request, response)
     return
@@ -3467,6 +3663,7 @@ func NewModifyNetReturnSwitchRequest() (request *ModifyNetReturnSwitchRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyNetReturnSwitch")
+    
     
     return
 }
@@ -3488,6 +3685,7 @@ func (c *Client) ModifyNetReturnSwitch(request *ModifyNetReturnSwitchRequest) (r
     if request == nil {
         request = NewModifyNetReturnSwitchRequest()
     }
+    
     response = NewModifyNetReturnSwitchResponse()
     err = c.Send(request, response)
     return
@@ -3498,6 +3696,7 @@ func NewModifyNewDomainRulesRequest() (request *ModifyNewDomainRulesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyNewDomainRules")
+    
     
     return
 }
@@ -3518,6 +3717,7 @@ func (c *Client) ModifyNewDomainRules(request *ModifyNewDomainRulesRequest) (res
     if request == nil {
         request = NewModifyNewDomainRulesRequest()
     }
+    
     response = NewModifyNewDomainRulesResponse()
     err = c.Send(request, response)
     return
@@ -3528,6 +3728,7 @@ func NewModifyNewL4RuleRequest() (request *ModifyNewL4RuleRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyNewL4Rule")
+    
     
     return
 }
@@ -3548,6 +3749,7 @@ func (c *Client) ModifyNewL4Rule(request *ModifyNewL4RuleRequest) (response *Mod
     if request == nil {
         request = NewModifyNewL4RuleRequest()
     }
+    
     response = NewModifyNewL4RuleResponse()
     err = c.Send(request, response)
     return
@@ -3558,6 +3760,7 @@ func NewModifyResBindDDoSPolicyRequest() (request *ModifyResBindDDoSPolicyReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyResBindDDoSPolicy")
+    
     
     return
 }
@@ -3578,6 +3781,7 @@ func (c *Client) ModifyResBindDDoSPolicy(request *ModifyResBindDDoSPolicyRequest
     if request == nil {
         request = NewModifyResBindDDoSPolicyRequest()
     }
+    
     response = NewModifyResBindDDoSPolicyResponse()
     err = c.Send(request, response)
     return
@@ -3588,6 +3792,7 @@ func NewModifyResourceRenewFlagRequest() (request *ModifyResourceRenewFlagReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyResourceRenewFlag")
+    
     
     return
 }
@@ -3617,6 +3822,7 @@ func (c *Client) ModifyResourceRenewFlag(request *ModifyResourceRenewFlagRequest
     if request == nil {
         request = NewModifyResourceRenewFlagRequest()
     }
+    
     response = NewModifyResourceRenewFlagResponse()
     err = c.Send(request, response)
     return

@@ -49,6 +49,7 @@ func NewAttachInstancesRequest() (request *AttachInstancesRequest) {
     }
     request.Init().WithApiInfo("as", APIVersion, "AttachInstances")
     
+    
     return
 }
 
@@ -81,6 +82,7 @@ func (c *Client) AttachInstances(request *AttachInstancesRequest) (response *Att
     if request == nil {
         request = NewAttachInstancesRequest()
     }
+    
     response = NewAttachInstancesResponse()
     err = c.Send(request, response)
     return
@@ -91,6 +93,7 @@ func NewClearLaunchConfigurationAttributesRequest() (request *ClearLaunchConfigu
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ClearLaunchConfigurationAttributes")
+    
     
     return
 }
@@ -111,6 +114,7 @@ func (c *Client) ClearLaunchConfigurationAttributes(request *ClearLaunchConfigur
     if request == nil {
         request = NewClearLaunchConfigurationAttributesRequest()
     }
+    
     response = NewClearLaunchConfigurationAttributesResponse()
     err = c.Send(request, response)
     return
@@ -121,6 +125,7 @@ func NewCompleteLifecycleActionRequest() (request *CompleteLifecycleActionReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "CompleteLifecycleAction")
+    
     
     return
 }
@@ -153,6 +158,7 @@ func (c *Client) CompleteLifecycleAction(request *CompleteLifecycleActionRequest
     if request == nil {
         request = NewCompleteLifecycleActionRequest()
     }
+    
     response = NewCompleteLifecycleActionResponse()
     err = c.Send(request, response)
     return
@@ -163,6 +169,7 @@ func NewCreateAutoScalingGroupRequest() (request *CreateAutoScalingGroupRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "CreateAutoScalingGroup")
+    
     
     return
 }
@@ -221,6 +228,7 @@ func (c *Client) CreateAutoScalingGroup(request *CreateAutoScalingGroupRequest) 
     if request == nil {
         request = NewCreateAutoScalingGroupRequest()
     }
+    
     response = NewCreateAutoScalingGroupResponse()
     err = c.Send(request, response)
     return
@@ -231,6 +239,7 @@ func NewCreateAutoScalingGroupFromInstanceRequest() (request *CreateAutoScalingG
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "CreateAutoScalingGroupFromInstance")
+    
     
     return
 }
@@ -276,6 +285,7 @@ func (c *Client) CreateAutoScalingGroupFromInstance(request *CreateAutoScalingGr
     if request == nil {
         request = NewCreateAutoScalingGroupFromInstanceRequest()
     }
+    
     response = NewCreateAutoScalingGroupFromInstanceResponse()
     err = c.Send(request, response)
     return
@@ -286,6 +296,7 @@ func NewCreateLaunchConfigurationRequest() (request *CreateLaunchConfigurationRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "CreateLaunchConfiguration")
+    
     
     return
 }
@@ -337,6 +348,7 @@ func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationReq
     if request == nil {
         request = NewCreateLaunchConfigurationRequest()
     }
+    
     response = NewCreateLaunchConfigurationResponse()
     err = c.Send(request, response)
     return
@@ -347,6 +359,7 @@ func NewCreateLifecycleHookRequest() (request *CreateLifecycleHookRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "CreateLifecycleHook")
+    
     
     return
 }
@@ -415,6 +428,7 @@ func (c *Client) CreateLifecycleHook(request *CreateLifecycleHookRequest) (respo
     if request == nil {
         request = NewCreateLifecycleHookRequest()
     }
+    
     response = NewCreateLifecycleHookResponse()
     err = c.Send(request, response)
     return
@@ -425,6 +439,7 @@ func NewCreateNotificationConfigurationRequest() (request *CreateNotificationCon
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "CreateNotificationConfiguration")
+    
     
     return
 }
@@ -507,6 +522,7 @@ func (c *Client) CreateNotificationConfiguration(request *CreateNotificationConf
     if request == nil {
         request = NewCreateNotificationConfigurationRequest()
     }
+    
     response = NewCreateNotificationConfigurationResponse()
     err = c.Send(request, response)
     return
@@ -517,6 +533,7 @@ func NewCreateScalingPolicyRequest() (request *CreateScalingPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "CreateScalingPolicy")
+    
     
     return
 }
@@ -547,6 +564,7 @@ func (c *Client) CreateScalingPolicy(request *CreateScalingPolicyRequest) (respo
     if request == nil {
         request = NewCreateScalingPolicyRequest()
     }
+    
     response = NewCreateScalingPolicyResponse()
     err = c.Send(request, response)
     return
@@ -557,6 +575,7 @@ func NewCreateScheduledActionRequest() (request *CreateScheduledActionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "CreateScheduledAction")
+    
     
     return
 }
@@ -593,6 +612,7 @@ func (c *Client) CreateScheduledAction(request *CreateScheduledActionRequest) (r
     if request == nil {
         request = NewCreateScheduledActionRequest()
     }
+    
     response = NewCreateScheduledActionResponse()
     err = c.Send(request, response)
     return
@@ -603,6 +623,7 @@ func NewDeleteAutoScalingGroupRequest() (request *DeleteAutoScalingGroupRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DeleteAutoScalingGroup")
+    
     
     return
 }
@@ -631,6 +652,7 @@ func (c *Client) DeleteAutoScalingGroup(request *DeleteAutoScalingGroupRequest) 
     if request == nil {
         request = NewDeleteAutoScalingGroupRequest()
     }
+    
     response = NewDeleteAutoScalingGroupResponse()
     err = c.Send(request, response)
     return
@@ -641,6 +663,7 @@ func NewDeleteLaunchConfigurationRequest() (request *DeleteLaunchConfigurationRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DeleteLaunchConfiguration")
+    
     
     return
 }
@@ -667,6 +690,7 @@ func (c *Client) DeleteLaunchConfiguration(request *DeleteLaunchConfigurationReq
     if request == nil {
         request = NewDeleteLaunchConfigurationRequest()
     }
+    
     response = NewDeleteLaunchConfigurationResponse()
     err = c.Send(request, response)
     return
@@ -677,6 +701,7 @@ func NewDeleteLifecycleHookRequest() (request *DeleteLifecycleHookRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DeleteLifecycleHook")
+    
     
     return
 }
@@ -701,6 +726,7 @@ func (c *Client) DeleteLifecycleHook(request *DeleteLifecycleHookRequest) (respo
     if request == nil {
         request = NewDeleteLifecycleHookRequest()
     }
+    
     response = NewDeleteLifecycleHookResponse()
     err = c.Send(request, response)
     return
@@ -711,6 +737,7 @@ func NewDeleteNotificationConfigurationRequest() (request *DeleteNotificationCon
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DeleteNotificationConfiguration")
+    
     
     return
 }
@@ -732,6 +759,7 @@ func (c *Client) DeleteNotificationConfiguration(request *DeleteNotificationConf
     if request == nil {
         request = NewDeleteNotificationConfigurationRequest()
     }
+    
     response = NewDeleteNotificationConfigurationResponse()
     err = c.Send(request, response)
     return
@@ -742,6 +770,7 @@ func NewDeleteScalingPolicyRequest() (request *DeleteScalingPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DeleteScalingPolicy")
+    
     
     return
 }
@@ -763,6 +792,7 @@ func (c *Client) DeleteScalingPolicy(request *DeleteScalingPolicyRequest) (respo
     if request == nil {
         request = NewDeleteScalingPolicyRequest()
     }
+    
     response = NewDeleteScalingPolicyResponse()
     err = c.Send(request, response)
     return
@@ -773,6 +803,7 @@ func NewDeleteScheduledActionRequest() (request *DeleteScheduledActionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DeleteScheduledAction")
+    
     
     return
 }
@@ -794,6 +825,7 @@ func (c *Client) DeleteScheduledAction(request *DeleteScheduledActionRequest) (r
     if request == nil {
         request = NewDeleteScheduledActionRequest()
     }
+    
     response = NewDeleteScheduledActionResponse()
     err = c.Send(request, response)
     return
@@ -804,6 +836,7 @@ func NewDescribeAccountLimitsRequest() (request *DescribeAccountLimitsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DescribeAccountLimits")
+    
     
     return
 }
@@ -824,6 +857,7 @@ func (c *Client) DescribeAccountLimits(request *DescribeAccountLimitsRequest) (r
     if request == nil {
         request = NewDescribeAccountLimitsRequest()
     }
+    
     response = NewDescribeAccountLimitsResponse()
     err = c.Send(request, response)
     return
@@ -834,6 +868,7 @@ func NewDescribeAutoScalingActivitiesRequest() (request *DescribeAutoScalingActi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DescribeAutoScalingActivities")
+    
     
     return
 }
@@ -861,6 +896,7 @@ func (c *Client) DescribeAutoScalingActivities(request *DescribeAutoScalingActiv
     if request == nil {
         request = NewDescribeAutoScalingActivitiesRequest()
     }
+    
     response = NewDescribeAutoScalingActivitiesResponse()
     err = c.Send(request, response)
     return
@@ -871,6 +907,7 @@ func NewDescribeAutoScalingGroupLastActivitiesRequest() (request *DescribeAutoSc
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DescribeAutoScalingGroupLastActivities")
+    
     
     return
 }
@@ -893,6 +930,7 @@ func (c *Client) DescribeAutoScalingGroupLastActivities(request *DescribeAutoSca
     if request == nil {
         request = NewDescribeAutoScalingGroupLastActivitiesRequest()
     }
+    
     response = NewDescribeAutoScalingGroupLastActivitiesResponse()
     err = c.Send(request, response)
     return
@@ -903,6 +941,7 @@ func NewDescribeAutoScalingGroupsRequest() (request *DescribeAutoScalingGroupsRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DescribeAutoScalingGroups")
+    
     
     return
 }
@@ -937,6 +976,7 @@ func (c *Client) DescribeAutoScalingGroups(request *DescribeAutoScalingGroupsReq
     if request == nil {
         request = NewDescribeAutoScalingGroupsRequest()
     }
+    
     response = NewDescribeAutoScalingGroupsResponse()
     err = c.Send(request, response)
     return
@@ -947,6 +987,7 @@ func NewDescribeAutoScalingInstancesRequest() (request *DescribeAutoScalingInsta
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DescribeAutoScalingInstances")
+    
     
     return
 }
@@ -978,6 +1019,7 @@ func (c *Client) DescribeAutoScalingInstances(request *DescribeAutoScalingInstan
     if request == nil {
         request = NewDescribeAutoScalingInstancesRequest()
     }
+    
     response = NewDescribeAutoScalingInstancesResponse()
     err = c.Send(request, response)
     return
@@ -988,6 +1030,7 @@ func NewDescribeLaunchConfigurationsRequest() (request *DescribeLaunchConfigurat
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DescribeLaunchConfigurations")
+    
     
     return
 }
@@ -1019,6 +1062,7 @@ func (c *Client) DescribeLaunchConfigurations(request *DescribeLaunchConfigurati
     if request == nil {
         request = NewDescribeLaunchConfigurationsRequest()
     }
+    
     response = NewDescribeLaunchConfigurationsResponse()
     err = c.Send(request, response)
     return
@@ -1029,6 +1073,7 @@ func NewDescribeLifecycleHooksRequest() (request *DescribeLifecycleHooksRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DescribeLifecycleHooks")
+    
     
     return
 }
@@ -1061,6 +1106,7 @@ func (c *Client) DescribeLifecycleHooks(request *DescribeLifecycleHooksRequest) 
     if request == nil {
         request = NewDescribeLifecycleHooksRequest()
     }
+    
     response = NewDescribeLifecycleHooksResponse()
     err = c.Send(request, response)
     return
@@ -1071,6 +1117,7 @@ func NewDescribeNotificationConfigurationsRequest() (request *DescribeNotificati
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DescribeNotificationConfigurations")
+    
     
     return
 }
@@ -1100,6 +1147,7 @@ func (c *Client) DescribeNotificationConfigurations(request *DescribeNotificatio
     if request == nil {
         request = NewDescribeNotificationConfigurationsRequest()
     }
+    
     response = NewDescribeNotificationConfigurationsResponse()
     err = c.Send(request, response)
     return
@@ -1110,6 +1158,7 @@ func NewDescribeScalingPoliciesRequest() (request *DescribeScalingPoliciesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DescribeScalingPolicies")
+    
     
     return
 }
@@ -1136,6 +1185,7 @@ func (c *Client) DescribeScalingPolicies(request *DescribeScalingPoliciesRequest
     if request == nil {
         request = NewDescribeScalingPoliciesRequest()
     }
+    
     response = NewDescribeScalingPoliciesResponse()
     err = c.Send(request, response)
     return
@@ -1146,6 +1196,7 @@ func NewDescribeScheduledActionsRequest() (request *DescribeScheduledActionsRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DescribeScheduledActions")
+    
     
     return
 }
@@ -1177,6 +1228,7 @@ func (c *Client) DescribeScheduledActions(request *DescribeScheduledActionsReque
     if request == nil {
         request = NewDescribeScheduledActionsRequest()
     }
+    
     response = NewDescribeScheduledActionsResponse()
     err = c.Send(request, response)
     return
@@ -1187,6 +1239,7 @@ func NewDetachInstancesRequest() (request *DetachInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DetachInstances")
+    
     
     return
 }
@@ -1224,6 +1277,7 @@ func (c *Client) DetachInstances(request *DetachInstancesRequest) (response *Det
     if request == nil {
         request = NewDetachInstancesRequest()
     }
+    
     response = NewDetachInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1234,6 +1288,7 @@ func NewDisableAutoScalingGroupRequest() (request *DisableAutoScalingGroupReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "DisableAutoScalingGroup")
+    
     
     return
 }
@@ -1256,6 +1311,7 @@ func (c *Client) DisableAutoScalingGroup(request *DisableAutoScalingGroupRequest
     if request == nil {
         request = NewDisableAutoScalingGroupRequest()
     }
+    
     response = NewDisableAutoScalingGroupResponse()
     err = c.Send(request, response)
     return
@@ -1266,6 +1322,7 @@ func NewEnableAutoScalingGroupRequest() (request *EnableAutoScalingGroupRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "EnableAutoScalingGroup")
+    
     
     return
 }
@@ -1288,6 +1345,7 @@ func (c *Client) EnableAutoScalingGroup(request *EnableAutoScalingGroupRequest) 
     if request == nil {
         request = NewEnableAutoScalingGroupRequest()
     }
+    
     response = NewEnableAutoScalingGroupResponse()
     err = c.Send(request, response)
     return
@@ -1298,6 +1356,7 @@ func NewExecuteScalingPolicyRequest() (request *ExecuteScalingPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ExecuteScalingPolicy")
+    
     
     return
 }
@@ -1331,6 +1390,7 @@ func (c *Client) ExecuteScalingPolicy(request *ExecuteScalingPolicyRequest) (res
     if request == nil {
         request = NewExecuteScalingPolicyRequest()
     }
+    
     response = NewExecuteScalingPolicyResponse()
     err = c.Send(request, response)
     return
@@ -1341,6 +1401,7 @@ func NewModifyAutoScalingGroupRequest() (request *ModifyAutoScalingGroupRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ModifyAutoScalingGroup")
+    
     
     return
 }
@@ -1388,6 +1449,7 @@ func (c *Client) ModifyAutoScalingGroup(request *ModifyAutoScalingGroupRequest) 
     if request == nil {
         request = NewModifyAutoScalingGroupRequest()
     }
+    
     response = NewModifyAutoScalingGroupResponse()
     err = c.Send(request, response)
     return
@@ -1398,6 +1460,7 @@ func NewModifyDesiredCapacityRequest() (request *ModifyDesiredCapacityRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ModifyDesiredCapacity")
+    
     
     return
 }
@@ -1424,6 +1487,7 @@ func (c *Client) ModifyDesiredCapacity(request *ModifyDesiredCapacityRequest) (r
     if request == nil {
         request = NewModifyDesiredCapacityRequest()
     }
+    
     response = NewModifyDesiredCapacityResponse()
     err = c.Send(request, response)
     return
@@ -1434,6 +1498,7 @@ func NewModifyLaunchConfigurationAttributesRequest() (request *ModifyLaunchConfi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ModifyLaunchConfigurationAttributes")
+    
     
     return
 }
@@ -1479,6 +1544,7 @@ func (c *Client) ModifyLaunchConfigurationAttributes(request *ModifyLaunchConfig
     if request == nil {
         request = NewModifyLaunchConfigurationAttributesRequest()
     }
+    
     response = NewModifyLaunchConfigurationAttributesResponse()
     err = c.Send(request, response)
     return
@@ -1489,6 +1555,7 @@ func NewModifyLoadBalancersRequest() (request *ModifyLoadBalancersRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ModifyLoadBalancers")
+    
     
     return
 }
@@ -1535,6 +1602,7 @@ func (c *Client) ModifyLoadBalancers(request *ModifyLoadBalancersRequest) (respo
     if request == nil {
         request = NewModifyLoadBalancersRequest()
     }
+    
     response = NewModifyLoadBalancersResponse()
     err = c.Send(request, response)
     return
@@ -1545,6 +1613,7 @@ func NewModifyNotificationConfigurationRequest() (request *ModifyNotificationCon
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ModifyNotificationConfiguration")
+    
     
     return
 }
@@ -1571,6 +1640,7 @@ func (c *Client) ModifyNotificationConfiguration(request *ModifyNotificationConf
     if request == nil {
         request = NewModifyNotificationConfigurationRequest()
     }
+    
     response = NewModifyNotificationConfigurationResponse()
     err = c.Send(request, response)
     return
@@ -1581,6 +1651,7 @@ func NewModifyScalingPolicyRequest() (request *ModifyScalingPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ModifyScalingPolicy")
+    
     
     return
 }
@@ -1606,6 +1677,7 @@ func (c *Client) ModifyScalingPolicy(request *ModifyScalingPolicyRequest) (respo
     if request == nil {
         request = NewModifyScalingPolicyRequest()
     }
+    
     response = NewModifyScalingPolicyResponse()
     err = c.Send(request, response)
     return
@@ -1616,6 +1688,7 @@ func NewModifyScheduledActionRequest() (request *ModifyScheduledActionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ModifyScheduledAction")
+    
     
     return
 }
@@ -1650,6 +1723,7 @@ func (c *Client) ModifyScheduledAction(request *ModifyScheduledActionRequest) (r
     if request == nil {
         request = NewModifyScheduledActionRequest()
     }
+    
     response = NewModifyScheduledActionResponse()
     err = c.Send(request, response)
     return
@@ -1660,6 +1734,7 @@ func NewRemoveInstancesRequest() (request *RemoveInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "RemoveInstances")
+    
     
     return
 }
@@ -1695,6 +1770,7 @@ func (c *Client) RemoveInstances(request *RemoveInstancesRequest) (response *Rem
     if request == nil {
         request = NewRemoveInstancesRequest()
     }
+    
     response = NewRemoveInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1705,6 +1781,7 @@ func NewScaleInInstancesRequest() (request *ScaleInInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ScaleInInstances")
+    
     
     return
 }
@@ -1740,6 +1817,7 @@ func (c *Client) ScaleInInstances(request *ScaleInInstancesRequest) (response *S
     if request == nil {
         request = NewScaleInInstancesRequest()
     }
+    
     response = NewScaleInInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1750,6 +1828,7 @@ func NewScaleOutInstancesRequest() (request *ScaleOutInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "ScaleOutInstances")
+    
     
     return
 }
@@ -1781,6 +1860,7 @@ func (c *Client) ScaleOutInstances(request *ScaleOutInstancesRequest) (response 
     if request == nil {
         request = NewScaleOutInstancesRequest()
     }
+    
     response = NewScaleOutInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1791,6 +1871,7 @@ func NewSetInstancesProtectionRequest() (request *SetInstancesProtectionRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "SetInstancesProtection")
+    
     
     return
 }
@@ -1816,6 +1897,7 @@ func (c *Client) SetInstancesProtection(request *SetInstancesProtectionRequest) 
     if request == nil {
         request = NewSetInstancesProtectionRequest()
     }
+    
     response = NewSetInstancesProtectionResponse()
     err = c.Send(request, response)
     return
@@ -1826,6 +1908,7 @@ func NewStartAutoScalingInstancesRequest() (request *StartAutoScalingInstancesRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "StartAutoScalingInstances")
+    
     
     return
 }
@@ -1858,6 +1941,7 @@ func (c *Client) StartAutoScalingInstances(request *StartAutoScalingInstancesReq
     if request == nil {
         request = NewStartAutoScalingInstancesRequest()
     }
+    
     response = NewStartAutoScalingInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1868,6 +1952,7 @@ func NewStopAutoScalingInstancesRequest() (request *StopAutoScalingInstancesRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "StopAutoScalingInstances")
+    
     
     return
 }
@@ -1908,6 +1993,7 @@ func (c *Client) StopAutoScalingInstances(request *StopAutoScalingInstancesReque
     if request == nil {
         request = NewStopAutoScalingInstancesRequest()
     }
+    
     response = NewStopAutoScalingInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1918,6 +2004,7 @@ func NewUpgradeLaunchConfigurationRequest() (request *UpgradeLaunchConfiguration
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "UpgradeLaunchConfiguration")
+    
     
     return
 }
@@ -1966,6 +2053,7 @@ func (c *Client) UpgradeLaunchConfiguration(request *UpgradeLaunchConfigurationR
     if request == nil {
         request = NewUpgradeLaunchConfigurationRequest()
     }
+    
     response = NewUpgradeLaunchConfigurationResponse()
     err = c.Send(request, response)
     return
@@ -1976,6 +2064,7 @@ func NewUpgradeLifecycleHookRequest() (request *UpgradeLifecycleHookRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("as", APIVersion, "UpgradeLifecycleHook")
+    
     
     return
 }
@@ -2011,6 +2100,7 @@ func (c *Client) UpgradeLifecycleHook(request *UpgradeLifecycleHookRequest) (res
     if request == nil {
         request = NewUpgradeLifecycleHookRequest()
     }
+    
     response = NewUpgradeLifecycleHookResponse()
     err = c.Send(request, response)
     return

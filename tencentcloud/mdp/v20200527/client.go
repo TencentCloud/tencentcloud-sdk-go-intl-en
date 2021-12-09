@@ -49,6 +49,7 @@ func NewBindNewLVBDomainWithChannelRequest() (request *BindNewLVBDomainWithChann
     }
     request.Init().WithApiInfo("mdp", APIVersion, "BindNewLVBDomainWithChannel")
     
+    
     return
 }
 
@@ -69,6 +70,7 @@ func (c *Client) BindNewLVBDomainWithChannel(request *BindNewLVBDomainWithChanne
     if request == nil {
         request = NewBindNewLVBDomainWithChannelRequest()
     }
+    
     response = NewBindNewLVBDomainWithChannelResponse()
     err = c.Send(request, response)
     return
@@ -79,6 +81,7 @@ func NewCreateStreamPackageChannelRequest() (request *CreateStreamPackageChannel
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageChannel")
+    
     
     return
 }
@@ -103,6 +106,7 @@ func (c *Client) CreateStreamPackageChannel(request *CreateStreamPackageChannelR
     if request == nil {
         request = NewCreateStreamPackageChannelRequest()
     }
+    
     response = NewCreateStreamPackageChannelResponse()
     err = c.Send(request, response)
     return
@@ -113,6 +117,7 @@ func NewCreateStreamPackageChannelEndpointRequest() (request *CreateStreamPackag
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageChannelEndpoint")
+    
     
     return
 }
@@ -138,6 +143,7 @@ func (c *Client) CreateStreamPackageChannelEndpoint(request *CreateStreamPackage
     if request == nil {
         request = NewCreateStreamPackageChannelEndpointRequest()
     }
+    
     response = NewCreateStreamPackageChannelEndpointResponse()
     err = c.Send(request, response)
     return
@@ -148,6 +154,7 @@ func NewDeleteStreamPackageChannelEndpointsRequest() (request *DeleteStreamPacka
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageChannelEndpoints")
+    
     
     return
 }
@@ -171,6 +178,7 @@ func (c *Client) DeleteStreamPackageChannelEndpoints(request *DeleteStreamPackag
     if request == nil {
         request = NewDeleteStreamPackageChannelEndpointsRequest()
     }
+    
     response = NewDeleteStreamPackageChannelEndpointsResponse()
     err = c.Send(request, response)
     return
@@ -181,6 +189,7 @@ func NewDeleteStreamPackageChannelsRequest() (request *DeleteStreamPackageChanne
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageChannels")
+    
     
     return
 }
@@ -204,6 +213,7 @@ func (c *Client) DeleteStreamPackageChannels(request *DeleteStreamPackageChannel
     if request == nil {
         request = NewDeleteStreamPackageChannelsRequest()
     }
+    
     response = NewDeleteStreamPackageChannelsResponse()
     err = c.Send(request, response)
     return
@@ -214,6 +224,7 @@ func NewDescribeStreamPackageChannelRequest() (request *DescribeStreamPackageCha
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageChannel")
+    
     
     return
 }
@@ -236,6 +247,7 @@ func (c *Client) DescribeStreamPackageChannel(request *DescribeStreamPackageChan
     if request == nil {
         request = NewDescribeStreamPackageChannelRequest()
     }
+    
     response = NewDescribeStreamPackageChannelResponse()
     err = c.Send(request, response)
     return
@@ -246,6 +258,7 @@ func NewDescribeStreamPackageChannelsRequest() (request *DescribeStreamPackageCh
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageChannels")
+    
     
     return
 }
@@ -271,6 +284,7 @@ func (c *Client) DescribeStreamPackageChannels(request *DescribeStreamPackageCha
     if request == nil {
         request = NewDescribeStreamPackageChannelsRequest()
     }
+    
     response = NewDescribeStreamPackageChannelsResponse()
     err = c.Send(request, response)
     return
@@ -281,6 +295,7 @@ func NewModifyStreamPackageChannelRequest() (request *ModifyStreamPackageChannel
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageChannel")
+    
     
     return
 }
@@ -305,6 +320,7 @@ func (c *Client) ModifyStreamPackageChannel(request *ModifyStreamPackageChannelR
     if request == nil {
         request = NewModifyStreamPackageChannelRequest()
     }
+    
     response = NewModifyStreamPackageChannelResponse()
     err = c.Send(request, response)
     return
@@ -315,6 +331,7 @@ func NewModifyStreamPackageChannelEndpointRequest() (request *ModifyStreamPackag
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageChannelEndpoint")
+    
     
     return
 }
@@ -340,6 +357,7 @@ func (c *Client) ModifyStreamPackageChannelEndpoint(request *ModifyStreamPackage
     if request == nil {
         request = NewModifyStreamPackageChannelEndpointRequest()
     }
+    
     response = NewModifyStreamPackageChannelEndpointResponse()
     err = c.Send(request, response)
     return
@@ -350,6 +368,7 @@ func NewModifyStreamPackageChannelInputAuthInfoRequest() (request *ModifyStreamP
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageChannelInputAuthInfo")
+    
     
     return
 }
@@ -373,6 +392,7 @@ func (c *Client) ModifyStreamPackageChannelInputAuthInfo(request *ModifyStreamPa
     if request == nil {
         request = NewModifyStreamPackageChannelInputAuthInfoRequest()
     }
+    
     response = NewModifyStreamPackageChannelInputAuthInfoResponse()
     err = c.Send(request, response)
     return
@@ -383,6 +403,7 @@ func NewUnbindCdnDomainWithChannelRequest() (request *UnbindCdnDomainWithChannel
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdp", APIVersion, "UnbindCdnDomainWithChannel")
+    
     
     return
 }
@@ -406,6 +427,7 @@ func (c *Client) UnbindCdnDomainWithChannel(request *UnbindCdnDomainWithChannelR
     if request == nil {
         request = NewUnbindCdnDomainWithChannelRequest()
     }
+    
     response = NewUnbindCdnDomainWithChannelResponse()
     err = c.Send(request, response)
     return

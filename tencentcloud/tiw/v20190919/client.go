@@ -49,6 +49,7 @@ func NewCreateTranscodeRequest() (request *CreateTranscodeRequest) {
     }
     request.Init().WithApiInfo("tiw", APIVersion, "CreateTranscode")
     
+    
     return
 }
 
@@ -76,6 +77,7 @@ func (c *Client) CreateTranscode(request *CreateTranscodeRequest) (response *Cre
     if request == nil {
         request = NewCreateTranscodeRequest()
     }
+    
     response = NewCreateTranscodeResponse()
     err = c.Send(request, response)
     return
@@ -86,6 +88,7 @@ func NewDescribeOnlineRecordRequest() (request *DescribeOnlineRecordRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "DescribeOnlineRecord")
+    
     
     return
 }
@@ -111,6 +114,7 @@ func (c *Client) DescribeOnlineRecord(request *DescribeOnlineRecordRequest) (res
     if request == nil {
         request = NewDescribeOnlineRecordRequest()
     }
+    
     response = NewDescribeOnlineRecordResponse()
     err = c.Send(request, response)
     return
@@ -121,6 +125,7 @@ func NewDescribeOnlineRecordCallbackRequest() (request *DescribeOnlineRecordCall
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "DescribeOnlineRecordCallback")
+    
     
     return
 }
@@ -145,6 +150,7 @@ func (c *Client) DescribeOnlineRecordCallback(request *DescribeOnlineRecordCallb
     if request == nil {
         request = NewDescribeOnlineRecordCallbackRequest()
     }
+    
     response = NewDescribeOnlineRecordCallbackResponse()
     err = c.Send(request, response)
     return
@@ -155,6 +161,7 @@ func NewDescribeTranscodeRequest() (request *DescribeTranscodeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "DescribeTranscode")
+    
     
     return
 }
@@ -189,6 +196,7 @@ func (c *Client) DescribeTranscode(request *DescribeTranscodeRequest) (response 
     if request == nil {
         request = NewDescribeTranscodeRequest()
     }
+    
     response = NewDescribeTranscodeResponse()
     err = c.Send(request, response)
     return
@@ -199,6 +207,7 @@ func NewDescribeTranscodeCallbackRequest() (request *DescribeTranscodeCallbackRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "DescribeTranscodeCallback")
+    
     
     return
 }
@@ -223,6 +232,7 @@ func (c *Client) DescribeTranscodeCallback(request *DescribeTranscodeCallbackReq
     if request == nil {
         request = NewDescribeTranscodeCallbackRequest()
     }
+    
     response = NewDescribeTranscodeCallbackResponse()
     err = c.Send(request, response)
     return
@@ -233,6 +243,7 @@ func NewPauseOnlineRecordRequest() (request *PauseOnlineRecordRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "PauseOnlineRecord")
+    
     
     return
 }
@@ -259,6 +270,7 @@ func (c *Client) PauseOnlineRecord(request *PauseOnlineRecordRequest) (response 
     if request == nil {
         request = NewPauseOnlineRecordRequest()
     }
+    
     response = NewPauseOnlineRecordResponse()
     err = c.Send(request, response)
     return
@@ -269,6 +281,7 @@ func NewResumeOnlineRecordRequest() (request *ResumeOnlineRecordRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "ResumeOnlineRecord")
+    
     
     return
 }
@@ -295,6 +308,7 @@ func (c *Client) ResumeOnlineRecord(request *ResumeOnlineRecordRequest) (respons
     if request == nil {
         request = NewResumeOnlineRecordRequest()
     }
+    
     response = NewResumeOnlineRecordResponse()
     err = c.Send(request, response)
     return
@@ -305,6 +319,7 @@ func NewSetOnlineRecordCallbackRequest() (request *SetOnlineRecordCallbackReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "SetOnlineRecordCallback")
+    
     
     return
 }
@@ -329,6 +344,7 @@ func (c *Client) SetOnlineRecordCallback(request *SetOnlineRecordCallbackRequest
     if request == nil {
         request = NewSetOnlineRecordCallbackRequest()
     }
+    
     response = NewSetOnlineRecordCallbackResponse()
     err = c.Send(request, response)
     return
@@ -339,6 +355,7 @@ func NewSetOnlineRecordCallbackKeyRequest() (request *SetOnlineRecordCallbackKey
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "SetOnlineRecordCallbackKey")
+    
     
     return
 }
@@ -363,6 +380,7 @@ func (c *Client) SetOnlineRecordCallbackKey(request *SetOnlineRecordCallbackKeyR
     if request == nil {
         request = NewSetOnlineRecordCallbackKeyRequest()
     }
+    
     response = NewSetOnlineRecordCallbackKeyResponse()
     err = c.Send(request, response)
     return
@@ -373,6 +391,7 @@ func NewSetTranscodeCallbackRequest() (request *SetTranscodeCallbackRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "SetTranscodeCallback")
+    
     
     return
 }
@@ -397,6 +416,7 @@ func (c *Client) SetTranscodeCallback(request *SetTranscodeCallbackRequest) (res
     if request == nil {
         request = NewSetTranscodeCallbackRequest()
     }
+    
     response = NewSetTranscodeCallbackResponse()
     err = c.Send(request, response)
     return
@@ -407,6 +427,7 @@ func NewSetTranscodeCallbackKeyRequest() (request *SetTranscodeCallbackKeyReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "SetTranscodeCallbackKey")
+    
     
     return
 }
@@ -431,6 +452,7 @@ func (c *Client) SetTranscodeCallbackKey(request *SetTranscodeCallbackKeyRequest
     if request == nil {
         request = NewSetTranscodeCallbackKeyRequest()
     }
+    
     response = NewSetTranscodeCallbackKeyResponse()
     err = c.Send(request, response)
     return
@@ -441,6 +463,7 @@ func NewStartOnlineRecordRequest() (request *StartOnlineRecordRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "StartOnlineRecord")
+    
     
     return
 }
@@ -469,6 +492,7 @@ func (c *Client) StartOnlineRecord(request *StartOnlineRecordRequest) (response 
     if request == nil {
         request = NewStartOnlineRecordRequest()
     }
+    
     response = NewStartOnlineRecordResponse()
     err = c.Send(request, response)
     return
@@ -479,6 +503,7 @@ func NewStopOnlineRecordRequest() (request *StopOnlineRecordRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("tiw", APIVersion, "StopOnlineRecord")
+    
     
     return
 }
@@ -504,6 +529,7 @@ func (c *Client) StopOnlineRecord(request *StopOnlineRecordRequest) (response *S
     if request == nil {
         request = NewStopOnlineRecordRequest()
     }
+    
     response = NewStopOnlineRecordResponse()
     err = c.Send(request, response)
     return

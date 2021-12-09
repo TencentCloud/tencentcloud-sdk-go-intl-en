@@ -49,6 +49,7 @@ func NewAddEcdnDomainRequest() (request *AddEcdnDomainRequest) {
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "AddEcdnDomain")
     
+    
     return
 }
 
@@ -87,6 +88,7 @@ func (c *Client) AddEcdnDomain(request *AddEcdnDomainRequest) (response *AddEcdn
     if request == nil {
         request = NewAddEcdnDomainRequest()
     }
+    
     response = NewAddEcdnDomainResponse()
     err = c.Send(request, response)
     return
@@ -97,6 +99,7 @@ func NewDeleteEcdnDomainRequest() (request *DeleteEcdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DeleteEcdnDomain")
+    
     
     return
 }
@@ -126,6 +129,7 @@ func (c *Client) DeleteEcdnDomain(request *DeleteEcdnDomainRequest) (response *D
     if request == nil {
         request = NewDeleteEcdnDomainRequest()
     }
+    
     response = NewDeleteEcdnDomainResponse()
     err = c.Send(request, response)
     return
@@ -136,6 +140,7 @@ func NewDescribeDomainsRequest() (request *DescribeDomainsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeDomains")
+    
     
     return
 }
@@ -164,6 +169,7 @@ func (c *Client) DescribeDomains(request *DescribeDomainsRequest) (response *Des
     if request == nil {
         request = NewDescribeDomainsRequest()
     }
+    
     response = NewDescribeDomainsResponse()
     err = c.Send(request, response)
     return
@@ -174,6 +180,7 @@ func NewDescribeDomainsConfigRequest() (request *DescribeDomainsConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeDomainsConfig")
+    
     
     return
 }
@@ -204,6 +211,7 @@ func (c *Client) DescribeDomainsConfig(request *DescribeDomainsConfigRequest) (r
     if request == nil {
         request = NewDescribeDomainsConfigRequest()
     }
+    
     response = NewDescribeDomainsConfigResponse()
     err = c.Send(request, response)
     return
@@ -214,6 +222,7 @@ func NewDescribeEcdnDomainLogsRequest() (request *DescribeEcdnDomainLogsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeEcdnDomainLogs")
+    
     
     return
 }
@@ -246,6 +255,7 @@ func (c *Client) DescribeEcdnDomainLogs(request *DescribeEcdnDomainLogsRequest) 
     if request == nil {
         request = NewDescribeEcdnDomainLogsRequest()
     }
+    
     response = NewDescribeEcdnDomainLogsResponse()
     err = c.Send(request, response)
     return
@@ -256,6 +266,7 @@ func NewDescribeEcdnDomainStatisticsRequest() (request *DescribeEcdnDomainStatis
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeEcdnDomainStatistics")
+    
     
     return
 }
@@ -302,6 +313,7 @@ func (c *Client) DescribeEcdnDomainStatistics(request *DescribeEcdnDomainStatist
     if request == nil {
         request = NewDescribeEcdnDomainStatisticsRequest()
     }
+    
     response = NewDescribeEcdnDomainStatisticsResponse()
     err = c.Send(request, response)
     return
@@ -312,6 +324,7 @@ func NewDescribeEcdnStatisticsRequest() (request *DescribeEcdnStatisticsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeEcdnStatistics")
+    
     
     return
 }
@@ -377,6 +390,7 @@ func (c *Client) DescribeEcdnStatistics(request *DescribeEcdnStatisticsRequest) 
     if request == nil {
         request = NewDescribeEcdnStatisticsRequest()
     }
+    
     response = NewDescribeEcdnStatisticsResponse()
     err = c.Send(request, response)
     return
@@ -387,6 +401,7 @@ func NewDescribeIpStatusRequest() (request *DescribeIpStatusRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeIpStatus")
+    
     
     return
 }
@@ -416,6 +431,7 @@ func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *D
     if request == nil {
         request = NewDescribeIpStatusRequest()
     }
+    
     response = NewDescribeIpStatusResponse()
     err = c.Send(request, response)
     return
@@ -426,6 +442,7 @@ func NewDescribePurgeQuotaRequest() (request *DescribePurgeQuotaRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribePurgeQuota")
+    
     
     return
 }
@@ -453,6 +470,7 @@ func (c *Client) DescribePurgeQuota(request *DescribePurgeQuotaRequest) (respons
     if request == nil {
         request = NewDescribePurgeQuotaRequest()
     }
+    
     response = NewDescribePurgeQuotaResponse()
     err = c.Send(request, response)
     return
@@ -463,6 +481,7 @@ func NewDescribePurgeTasksRequest() (request *DescribePurgeTasksRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribePurgeTasks")
+    
     
     return
 }
@@ -489,6 +508,7 @@ func (c *Client) DescribePurgeTasks(request *DescribePurgeTasksRequest) (respons
     if request == nil {
         request = NewDescribePurgeTasksRequest()
     }
+    
     response = NewDescribePurgeTasksResponse()
     err = c.Send(request, response)
     return
@@ -499,6 +519,7 @@ func NewPurgePathCacheRequest() (request *PurgePathCacheRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "PurgePathCache")
+    
     
     return
 }
@@ -533,6 +554,7 @@ func (c *Client) PurgePathCache(request *PurgePathCacheRequest) (response *Purge
     if request == nil {
         request = NewPurgePathCacheRequest()
     }
+    
     response = NewPurgePathCacheResponse()
     err = c.Send(request, response)
     return
@@ -543,6 +565,7 @@ func NewPurgeUrlsCacheRequest() (request *PurgeUrlsCacheRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "PurgeUrlsCache")
+    
     
     return
 }
@@ -578,6 +601,7 @@ func (c *Client) PurgeUrlsCache(request *PurgeUrlsCacheRequest) (response *Purge
     if request == nil {
         request = NewPurgeUrlsCacheRequest()
     }
+    
     response = NewPurgeUrlsCacheResponse()
     err = c.Send(request, response)
     return
@@ -588,6 +612,7 @@ func NewStartEcdnDomainRequest() (request *StartEcdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "StartEcdnDomain")
+    
     
     return
 }
@@ -617,6 +642,7 @@ func (c *Client) StartEcdnDomain(request *StartEcdnDomainRequest) (response *Sta
     if request == nil {
         request = NewStartEcdnDomainRequest()
     }
+    
     response = NewStartEcdnDomainResponse()
     err = c.Send(request, response)
     return
@@ -627,6 +653,7 @@ func NewStopEcdnDomainRequest() (request *StopEcdnDomainRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "StopEcdnDomain")
+    
     
     return
 }
@@ -657,6 +684,7 @@ func (c *Client) StopEcdnDomain(request *StopEcdnDomainRequest) (response *StopE
     if request == nil {
         request = NewStopEcdnDomainRequest()
     }
+    
     response = NewStopEcdnDomainResponse()
     err = c.Send(request, response)
     return
@@ -667,6 +695,7 @@ func NewUpdateDomainConfigRequest() (request *UpdateDomainConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("ecdn", APIVersion, "UpdateDomainConfig")
+    
     
     return
 }
@@ -705,6 +734,7 @@ func (c *Client) UpdateDomainConfig(request *UpdateDomainConfigRequest) (respons
     if request == nil {
         request = NewUpdateDomainConfigRequest()
     }
+    
     response = NewUpdateDomainConfigResponse()
     err = c.Send(request, response)
     return

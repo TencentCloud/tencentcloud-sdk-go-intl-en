@@ -49,6 +49,7 @@ func NewAddUserContactRequest() (request *AddUserContactRequest) {
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "AddUserContact")
     
+    
     return
 }
 
@@ -77,6 +78,7 @@ func (c *Client) AddUserContact(request *AddUserContactRequest) (response *AddUs
     if request == nil {
         request = NewAddUserContactRequest()
     }
+    
     response = NewAddUserContactResponse()
     err = c.Send(request, response)
     return
@@ -87,6 +89,7 @@ func NewCreateDBDiagReportTaskRequest() (request *CreateDBDiagReportTaskRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "CreateDBDiagReportTask")
+    
     
     return
 }
@@ -109,6 +112,7 @@ func (c *Client) CreateDBDiagReportTask(request *CreateDBDiagReportTaskRequest) 
     if request == nil {
         request = NewCreateDBDiagReportTaskRequest()
     }
+    
     response = NewCreateDBDiagReportTaskResponse()
     err = c.Send(request, response)
     return
@@ -119,6 +123,7 @@ func NewCreateDBDiagReportUrlRequest() (request *CreateDBDiagReportUrlRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "CreateDBDiagReportUrl")
+    
     
     return
 }
@@ -146,6 +151,7 @@ func (c *Client) CreateDBDiagReportUrl(request *CreateDBDiagReportUrlRequest) (r
     if request == nil {
         request = NewCreateDBDiagReportUrlRequest()
     }
+    
     response = NewCreateDBDiagReportUrlResponse()
     err = c.Send(request, response)
     return
@@ -156,6 +162,7 @@ func NewCreateMailProfileRequest() (request *CreateMailProfileRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "CreateMailProfile")
+    
     
     return
 }
@@ -185,6 +192,7 @@ func (c *Client) CreateMailProfile(request *CreateMailProfileRequest) (response 
     if request == nil {
         request = NewCreateMailProfileRequest()
     }
+    
     response = NewCreateMailProfileResponse()
     err = c.Send(request, response)
     return
@@ -195,6 +203,7 @@ func NewCreateSchedulerMailProfileRequest() (request *CreateSchedulerMailProfile
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "CreateSchedulerMailProfile")
+    
     
     return
 }
@@ -224,6 +233,7 @@ func (c *Client) CreateSchedulerMailProfile(request *CreateSchedulerMailProfileR
     if request == nil {
         request = NewCreateSchedulerMailProfileRequest()
     }
+    
     response = NewCreateSchedulerMailProfileResponse()
     err = c.Send(request, response)
     return
@@ -234,6 +244,7 @@ func NewDescribeAllUserContactRequest() (request *DescribeAllUserContactRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeAllUserContact")
+    
     
     return
 }
@@ -259,6 +270,7 @@ func (c *Client) DescribeAllUserContact(request *DescribeAllUserContactRequest) 
     if request == nil {
         request = NewDescribeAllUserContactRequest()
     }
+    
     response = NewDescribeAllUserContactResponse()
     err = c.Send(request, response)
     return
@@ -269,6 +281,7 @@ func NewDescribeAllUserGroupRequest() (request *DescribeAllUserGroupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeAllUserGroup")
+    
     
     return
 }
@@ -292,6 +305,7 @@ func (c *Client) DescribeAllUserGroup(request *DescribeAllUserGroupRequest) (res
     if request == nil {
         request = NewDescribeAllUserGroupRequest()
     }
+    
     response = NewDescribeAllUserGroupResponse()
     err = c.Send(request, response)
     return
@@ -302,6 +316,7 @@ func NewDescribeDBDiagEventRequest() (request *DescribeDBDiagEventRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeDBDiagEvent")
+    
     
     return
 }
@@ -326,6 +341,7 @@ func (c *Client) DescribeDBDiagEvent(request *DescribeDBDiagEventRequest) (respo
     if request == nil {
         request = NewDescribeDBDiagEventRequest()
     }
+    
     response = NewDescribeDBDiagEventResponse()
     err = c.Send(request, response)
     return
@@ -336,6 +352,7 @@ func NewDescribeDBDiagHistoryRequest() (request *DescribeDBDiagHistoryRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeDBDiagHistory")
+    
     
     return
 }
@@ -360,6 +377,7 @@ func (c *Client) DescribeDBDiagHistory(request *DescribeDBDiagHistoryRequest) (r
     if request == nil {
         request = NewDescribeDBDiagHistoryRequest()
     }
+    
     response = NewDescribeDBDiagHistoryResponse()
     err = c.Send(request, response)
     return
@@ -370,6 +388,7 @@ func NewDescribeDBDiagReportTasksRequest() (request *DescribeDBDiagReportTasksRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeDBDiagReportTasks")
+    
     
     return
 }
@@ -395,6 +414,7 @@ func (c *Client) DescribeDBDiagReportTasks(request *DescribeDBDiagReportTasksReq
     if request == nil {
         request = NewDescribeDBDiagReportTasksRequest()
     }
+    
     response = NewDescribeDBDiagReportTasksResponse()
     err = c.Send(request, response)
     return
@@ -405,6 +425,7 @@ func NewDescribeDBSpaceStatusRequest() (request *DescribeDBSpaceStatusRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeDBSpaceStatus")
+    
     
     return
 }
@@ -429,6 +450,7 @@ func (c *Client) DescribeDBSpaceStatus(request *DescribeDBSpaceStatusRequest) (r
     if request == nil {
         request = NewDescribeDBSpaceStatusRequest()
     }
+    
     response = NewDescribeDBSpaceStatusResponse()
     err = c.Send(request, response)
     return
@@ -439,6 +461,7 @@ func NewDescribeDiagDBInstancesRequest() (request *DescribeDiagDBInstancesReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeDiagDBInstances")
+    
     
     return
 }
@@ -467,6 +490,7 @@ func (c *Client) DescribeDiagDBInstances(request *DescribeDiagDBInstancesRequest
     if request == nil {
         request = NewDescribeDiagDBInstancesRequest()
     }
+    
     response = NewDescribeDiagDBInstancesResponse()
     err = c.Send(request, response)
     return
@@ -477,6 +501,7 @@ func NewDescribeHealthScoreRequest() (request *DescribeHealthScoreRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeHealthScore")
+    
     
     return
 }
@@ -506,6 +531,7 @@ func (c *Client) DescribeHealthScore(request *DescribeHealthScoreRequest) (respo
     if request == nil {
         request = NewDescribeHealthScoreRequest()
     }
+    
     response = NewDescribeHealthScoreResponse()
     err = c.Send(request, response)
     return
@@ -516,6 +542,7 @@ func NewDescribeMailProfileRequest() (request *DescribeMailProfileRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeMailProfile")
+    
     
     return
 }
@@ -538,6 +565,7 @@ func (c *Client) DescribeMailProfile(request *DescribeMailProfileRequest) (respo
     if request == nil {
         request = NewDescribeMailProfileRequest()
     }
+    
     response = NewDescribeMailProfileResponse()
     err = c.Send(request, response)
     return
@@ -548,6 +576,7 @@ func NewDescribeSlowLogTimeSeriesStatsRequest() (request *DescribeSlowLogTimeSer
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeSlowLogTimeSeriesStats")
+    
     
     return
 }
@@ -568,6 +597,7 @@ func (c *Client) DescribeSlowLogTimeSeriesStats(request *DescribeSlowLogTimeSeri
     if request == nil {
         request = NewDescribeSlowLogTimeSeriesStatsRequest()
     }
+    
     response = NewDescribeSlowLogTimeSeriesStatsResponse()
     err = c.Send(request, response)
     return
@@ -578,6 +608,7 @@ func NewDescribeSlowLogTopSqlsRequest() (request *DescribeSlowLogTopSqlsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeSlowLogTopSqls")
+    
     
     return
 }
@@ -601,6 +632,7 @@ func (c *Client) DescribeSlowLogTopSqls(request *DescribeSlowLogTopSqlsRequest) 
     if request == nil {
         request = NewDescribeSlowLogTopSqlsRequest()
     }
+    
     response = NewDescribeSlowLogTopSqlsResponse()
     err = c.Send(request, response)
     return
@@ -611,6 +643,7 @@ func NewDescribeSlowLogUserHostStatsRequest() (request *DescribeSlowLogUserHostS
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeSlowLogUserHostStats")
+    
     
     return
 }
@@ -635,6 +668,7 @@ func (c *Client) DescribeSlowLogUserHostStats(request *DescribeSlowLogUserHostSt
     if request == nil {
         request = NewDescribeSlowLogUserHostStatsRequest()
     }
+    
     response = NewDescribeSlowLogUserHostStatsResponse()
     err = c.Send(request, response)
     return
@@ -645,6 +679,7 @@ func NewDescribeTopSpaceSchemaTimeSeriesRequest() (request *DescribeTopSpaceSche
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeTopSpaceSchemaTimeSeries")
+    
     
     return
 }
@@ -671,6 +706,7 @@ func (c *Client) DescribeTopSpaceSchemaTimeSeries(request *DescribeTopSpaceSchem
     if request == nil {
         request = NewDescribeTopSpaceSchemaTimeSeriesRequest()
     }
+    
     response = NewDescribeTopSpaceSchemaTimeSeriesResponse()
     err = c.Send(request, response)
     return
@@ -681,6 +717,7 @@ func NewDescribeTopSpaceSchemasRequest() (request *DescribeTopSpaceSchemasReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeTopSpaceSchemas")
+    
     
     return
 }
@@ -707,6 +744,7 @@ func (c *Client) DescribeTopSpaceSchemas(request *DescribeTopSpaceSchemasRequest
     if request == nil {
         request = NewDescribeTopSpaceSchemasRequest()
     }
+    
     response = NewDescribeTopSpaceSchemasResponse()
     err = c.Send(request, response)
     return
@@ -717,6 +755,7 @@ func NewDescribeTopSpaceTableTimeSeriesRequest() (request *DescribeTopSpaceTable
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeTopSpaceTableTimeSeries")
+    
     
     return
 }
@@ -740,6 +779,7 @@ func (c *Client) DescribeTopSpaceTableTimeSeries(request *DescribeTopSpaceTableT
     if request == nil {
         request = NewDescribeTopSpaceTableTimeSeriesRequest()
     }
+    
     response = NewDescribeTopSpaceTableTimeSeriesResponse()
     err = c.Send(request, response)
     return
@@ -750,6 +790,7 @@ func NewDescribeTopSpaceTablesRequest() (request *DescribeTopSpaceTablesRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeTopSpaceTables")
+    
     
     return
 }
@@ -773,6 +814,7 @@ func (c *Client) DescribeTopSpaceTables(request *DescribeTopSpaceTablesRequest) 
     if request == nil {
         request = NewDescribeTopSpaceTablesRequest()
     }
+    
     response = NewDescribeTopSpaceTablesResponse()
     err = c.Send(request, response)
     return
@@ -783,6 +825,7 @@ func NewDescribeUserSqlAdviceRequest() (request *DescribeUserSqlAdviceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeUserSqlAdvice")
+    
     
     return
 }
@@ -809,6 +852,7 @@ func (c *Client) DescribeUserSqlAdvice(request *DescribeUserSqlAdviceRequest) (r
     if request == nil {
         request = NewDescribeUserSqlAdviceRequest()
     }
+    
     response = NewDescribeUserSqlAdviceResponse()
     err = c.Send(request, response)
     return
@@ -819,6 +863,7 @@ func NewModifyDiagDBInstanceConfRequest() (request *ModifyDiagDBInstanceConfRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("dbbrain", APIVersion, "ModifyDiagDBInstanceConf")
+    
     
     return
 }
@@ -843,6 +888,7 @@ func (c *Client) ModifyDiagDBInstanceConf(request *ModifyDiagDBInstanceConfReque
     if request == nil {
         request = NewModifyDiagDBInstanceConfRequest()
     }
+    
     response = NewModifyDiagDBInstanceConfResponse()
     err = c.Send(request, response)
     return

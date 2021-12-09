@@ -49,6 +49,7 @@ func NewCopyFleetRequest() (request *CopyFleetRequest) {
     }
     request.Init().WithApiInfo("gse", APIVersion, "CopyFleet")
     
+    
     return
 }
 
@@ -85,6 +86,7 @@ func (c *Client) CopyFleet(request *CopyFleetRequest) (response *CopyFleetRespon
     if request == nil {
         request = NewCopyFleetRequest()
     }
+    
     response = NewCopyFleetResponse()
     err = c.Send(request, response)
     return
@@ -95,6 +97,7 @@ func NewCreateGameServerSessionRequest() (request *CreateGameServerSessionReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "CreateGameServerSession")
+    
     
     return
 }
@@ -124,6 +127,7 @@ func (c *Client) CreateGameServerSession(request *CreateGameServerSessionRequest
     if request == nil {
         request = NewCreateGameServerSessionRequest()
     }
+    
     response = NewCreateGameServerSessionResponse()
     err = c.Send(request, response)
     return
@@ -134,6 +138,7 @@ func NewDeleteTimerScalingPolicyRequest() (request *DeleteTimerScalingPolicyRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "DeleteTimerScalingPolicy")
+    
     
     return
 }
@@ -160,6 +165,7 @@ func (c *Client) DeleteTimerScalingPolicy(request *DeleteTimerScalingPolicyReque
     if request == nil {
         request = NewDeleteTimerScalingPolicyRequest()
     }
+    
     response = NewDeleteTimerScalingPolicyResponse()
     err = c.Send(request, response)
     return
@@ -170,6 +176,7 @@ func NewDescribeGameServerSessionDetailsRequest() (request *DescribeGameServerSe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "DescribeGameServerSessionDetails")
+    
     
     return
 }
@@ -197,6 +204,7 @@ func (c *Client) DescribeGameServerSessionDetails(request *DescribeGameServerSes
     if request == nil {
         request = NewDescribeGameServerSessionDetailsRequest()
     }
+    
     response = NewDescribeGameServerSessionDetailsResponse()
     err = c.Send(request, response)
     return
@@ -207,6 +215,7 @@ func NewDescribeGameServerSessionPlacementRequest() (request *DescribeGameServer
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "DescribeGameServerSessionPlacement")
+    
     
     return
 }
@@ -231,6 +240,7 @@ func (c *Client) DescribeGameServerSessionPlacement(request *DescribeGameServerS
     if request == nil {
         request = NewDescribeGameServerSessionPlacementRequest()
     }
+    
     response = NewDescribeGameServerSessionPlacementResponse()
     err = c.Send(request, response)
     return
@@ -241,6 +251,7 @@ func NewDescribeGameServerSessionsRequest() (request *DescribeGameServerSessions
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "DescribeGameServerSessions")
+    
     
     return
 }
@@ -268,6 +279,7 @@ func (c *Client) DescribeGameServerSessions(request *DescribeGameServerSessionsR
     if request == nil {
         request = NewDescribeGameServerSessionsRequest()
     }
+    
     response = NewDescribeGameServerSessionsResponse()
     err = c.Send(request, response)
     return
@@ -278,6 +290,7 @@ func NewDescribeInstanceTypesRequest() (request *DescribeInstanceTypesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "DescribeInstanceTypes")
+    
     
     return
 }
@@ -302,6 +315,7 @@ func (c *Client) DescribeInstanceTypes(request *DescribeInstanceTypesRequest) (r
     if request == nil {
         request = NewDescribeInstanceTypesRequest()
     }
+    
     response = NewDescribeInstanceTypesResponse()
     err = c.Send(request, response)
     return
@@ -312,6 +326,7 @@ func NewDescribePlayerSessionsRequest() (request *DescribePlayerSessionsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "DescribePlayerSessions")
+    
     
     return
 }
@@ -338,6 +353,7 @@ func (c *Client) DescribePlayerSessions(request *DescribePlayerSessionsRequest) 
     if request == nil {
         request = NewDescribePlayerSessionsRequest()
     }
+    
     response = NewDescribePlayerSessionsResponse()
     err = c.Send(request, response)
     return
@@ -348,6 +364,7 @@ func NewDescribeTimerScalingPoliciesRequest() (request *DescribeTimerScalingPoli
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "DescribeTimerScalingPolicies")
+    
     
     return
 }
@@ -374,6 +391,7 @@ func (c *Client) DescribeTimerScalingPolicies(request *DescribeTimerScalingPolic
     if request == nil {
         request = NewDescribeTimerScalingPoliciesRequest()
     }
+    
     response = NewDescribeTimerScalingPoliciesResponse()
     err = c.Send(request, response)
     return
@@ -384,6 +402,7 @@ func NewEndGameServerSessionAndProcessRequest() (request *EndGameServerSessionAn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "EndGameServerSessionAndProcess")
+    
     
     return
 }
@@ -407,6 +426,7 @@ func (c *Client) EndGameServerSessionAndProcess(request *EndGameServerSessionAnd
     if request == nil {
         request = NewEndGameServerSessionAndProcessRequest()
     }
+    
     response = NewEndGameServerSessionAndProcessResponse()
     err = c.Send(request, response)
     return
@@ -417,6 +437,7 @@ func NewGetGameServerSessionLogUrlRequest() (request *GetGameServerSessionLogUrl
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "GetGameServerSessionLogUrl")
+    
     
     return
 }
@@ -443,6 +464,7 @@ func (c *Client) GetGameServerSessionLogUrl(request *GetGameServerSessionLogUrlR
     if request == nil {
         request = NewGetGameServerSessionLogUrlRequest()
     }
+    
     response = NewGetGameServerSessionLogUrlResponse()
     err = c.Send(request, response)
     return
@@ -453,6 +475,7 @@ func NewGetInstanceAccessRequest() (request *GetInstanceAccessRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "GetInstanceAccess")
+    
     
     return
 }
@@ -485,6 +508,7 @@ func (c *Client) GetInstanceAccess(request *GetInstanceAccessRequest) (response 
     if request == nil {
         request = NewGetInstanceAccessRequest()
     }
+    
     response = NewGetInstanceAccessResponse()
     err = c.Send(request, response)
     return
@@ -495,6 +519,7 @@ func NewJoinGameServerSessionRequest() (request *JoinGameServerSessionRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "JoinGameServerSession")
+    
     
     return
 }
@@ -524,6 +549,7 @@ func (c *Client) JoinGameServerSession(request *JoinGameServerSessionRequest) (r
     if request == nil {
         request = NewJoinGameServerSessionRequest()
     }
+    
     response = NewJoinGameServerSessionResponse()
     err = c.Send(request, response)
     return
@@ -534,6 +560,7 @@ func NewJoinGameServerSessionBatchRequest() (request *JoinGameServerSessionBatch
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "JoinGameServerSessionBatch")
+    
     
     return
 }
@@ -562,6 +589,7 @@ func (c *Client) JoinGameServerSessionBatch(request *JoinGameServerSessionBatchR
     if request == nil {
         request = NewJoinGameServerSessionBatchRequest()
     }
+    
     response = NewJoinGameServerSessionBatchResponse()
     err = c.Send(request, response)
     return
@@ -572,6 +600,7 @@ func NewPutTimerScalingPolicyRequest() (request *PutTimerScalingPolicyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "PutTimerScalingPolicy")
+    
     
     return
 }
@@ -603,6 +632,7 @@ func (c *Client) PutTimerScalingPolicy(request *PutTimerScalingPolicyRequest) (r
     if request == nil {
         request = NewPutTimerScalingPolicyRequest()
     }
+    
     response = NewPutTimerScalingPolicyResponse()
     err = c.Send(request, response)
     return
@@ -613,6 +643,7 @@ func NewSearchGameServerSessionsRequest() (request *SearchGameServerSessionsRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "SearchGameServerSessions")
+    
     
     return
 }
@@ -639,6 +670,7 @@ func (c *Client) SearchGameServerSessions(request *SearchGameServerSessionsReque
     if request == nil {
         request = NewSearchGameServerSessionsRequest()
     }
+    
     response = NewSearchGameServerSessionsResponse()
     err = c.Send(request, response)
     return
@@ -649,6 +681,7 @@ func NewSetServerReservedRequest() (request *SetServerReservedRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "SetServerReserved")
+    
     
     return
 }
@@ -680,6 +713,7 @@ func (c *Client) SetServerReserved(request *SetServerReservedRequest) (response 
     if request == nil {
         request = NewSetServerReservedRequest()
     }
+    
     response = NewSetServerReservedResponse()
     err = c.Send(request, response)
     return
@@ -690,6 +724,7 @@ func NewStartGameServerSessionPlacementRequest() (request *StartGameServerSessio
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "StartGameServerSessionPlacement")
+    
     
     return
 }
@@ -716,6 +751,7 @@ func (c *Client) StartGameServerSessionPlacement(request *StartGameServerSession
     if request == nil {
         request = NewStartGameServerSessionPlacementRequest()
     }
+    
     response = NewStartGameServerSessionPlacementResponse()
     err = c.Send(request, response)
     return
@@ -726,6 +762,7 @@ func NewStopGameServerSessionPlacementRequest() (request *StopGameServerSessionP
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "StopGameServerSessionPlacement")
+    
     
     return
 }
@@ -749,6 +786,7 @@ func (c *Client) StopGameServerSessionPlacement(request *StopGameServerSessionPl
     if request == nil {
         request = NewStopGameServerSessionPlacementRequest()
     }
+    
     response = NewStopGameServerSessionPlacementResponse()
     err = c.Send(request, response)
     return
@@ -759,6 +797,7 @@ func NewUpdateBucketAccelerateOptRequest() (request *UpdateBucketAccelerateOptRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "UpdateBucketAccelerateOpt")
+    
     
     return
 }
@@ -784,6 +823,7 @@ func (c *Client) UpdateBucketAccelerateOpt(request *UpdateBucketAccelerateOptReq
     if request == nil {
         request = NewUpdateBucketAccelerateOptRequest()
     }
+    
     response = NewUpdateBucketAccelerateOptResponse()
     err = c.Send(request, response)
     return
@@ -794,6 +834,7 @@ func NewUpdateBucketCORSOptRequest() (request *UpdateBucketCORSOptRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "UpdateBucketCORSOpt")
+    
     
     return
 }
@@ -820,6 +861,7 @@ func (c *Client) UpdateBucketCORSOpt(request *UpdateBucketCORSOptRequest) (respo
     if request == nil {
         request = NewUpdateBucketCORSOptRequest()
     }
+    
     response = NewUpdateBucketCORSOptResponse()
     err = c.Send(request, response)
     return
@@ -830,6 +872,7 @@ func NewUpdateGameServerSessionRequest() (request *UpdateGameServerSessionReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("gse", APIVersion, "UpdateGameServerSession")
+    
     
     return
 }
@@ -855,6 +898,7 @@ func (c *Client) UpdateGameServerSession(request *UpdateGameServerSessionRequest
     if request == nil {
         request = NewUpdateGameServerSessionRequest()
     }
+    
     response = NewUpdateGameServerSessionResponse()
     err = c.Send(request, response)
     return

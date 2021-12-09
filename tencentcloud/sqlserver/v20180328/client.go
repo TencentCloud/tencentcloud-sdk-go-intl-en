@@ -49,6 +49,7 @@ func NewCloneDBRequest() (request *CloneDBRequest) {
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CloneDB")
     
+    
     return
 }
 
@@ -88,6 +89,7 @@ func (c *Client) CloneDB(request *CloneDBRequest) (response *CloneDBResponse, er
     if request == nil {
         request = NewCloneDBRequest()
     }
+    
     response = NewCloneDBResponse()
     err = c.Send(request, response)
     return
@@ -98,6 +100,7 @@ func NewCreateAccountRequest() (request *CreateAccountRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateAccount")
+    
     
     return
 }
@@ -129,6 +132,7 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
     if request == nil {
         request = NewCreateAccountRequest()
     }
+    
     response = NewCreateAccountResponse()
     err = c.Send(request, response)
     return
@@ -139,6 +143,7 @@ func NewCreateBackupRequest() (request *CreateBackupRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateBackup")
+    
     
     return
 }
@@ -173,6 +178,7 @@ func (c *Client) CreateBackup(request *CreateBackupRequest) (response *CreateBac
     if request == nil {
         request = NewCreateBackupRequest()
     }
+    
     response = NewCreateBackupResponse()
     err = c.Send(request, response)
     return
@@ -183,6 +189,7 @@ func NewCreateBackupMigrationRequest() (request *CreateBackupMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateBackupMigration")
+    
     
     return
 }
@@ -210,6 +217,7 @@ func (c *Client) CreateBackupMigration(request *CreateBackupMigrationRequest) (r
     if request == nil {
         request = NewCreateBackupMigrationRequest()
     }
+    
     response = NewCreateBackupMigrationResponse()
     err = c.Send(request, response)
     return
@@ -220,6 +228,7 @@ func NewCreateDBRequest() (request *CreateDBRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateDB")
+    
     
     return
 }
@@ -254,6 +263,7 @@ func (c *Client) CreateDB(request *CreateDBRequest) (response *CreateDBResponse,
     if request == nil {
         request = NewCreateDBRequest()
     }
+    
     response = NewCreateDBResponse()
     err = c.Send(request, response)
     return
@@ -264,6 +274,7 @@ func NewCreateDBInstancesRequest() (request *CreateDBInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateDBInstances")
+    
     
     return
 }
@@ -296,6 +307,7 @@ func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response 
     if request == nil {
         request = NewCreateDBInstancesRequest()
     }
+    
     response = NewCreateDBInstancesResponse()
     err = c.Send(request, response)
     return
@@ -306,6 +318,7 @@ func NewCreateIncrementalMigrationRequest() (request *CreateIncrementalMigration
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateIncrementalMigration")
+    
     
     return
 }
@@ -336,6 +349,7 @@ func (c *Client) CreateIncrementalMigration(request *CreateIncrementalMigrationR
     if request == nil {
         request = NewCreateIncrementalMigrationRequest()
     }
+    
     response = NewCreateIncrementalMigrationResponse()
     err = c.Send(request, response)
     return
@@ -346,6 +360,7 @@ func NewCreateMigrationRequest() (request *CreateMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "CreateMigration")
+    
     
     return
 }
@@ -382,6 +397,7 @@ func (c *Client) CreateMigration(request *CreateMigrationRequest) (response *Cre
     if request == nil {
         request = NewCreateMigrationRequest()
     }
+    
     response = NewCreateMigrationResponse()
     err = c.Send(request, response)
     return
@@ -392,6 +408,7 @@ func NewDeleteAccountRequest() (request *DeleteAccountRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteAccount")
+    
     
     return
 }
@@ -420,6 +437,7 @@ func (c *Client) DeleteAccount(request *DeleteAccountRequest) (response *DeleteA
     if request == nil {
         request = NewDeleteAccountRequest()
     }
+    
     response = NewDeleteAccountResponse()
     err = c.Send(request, response)
     return
@@ -430,6 +448,7 @@ func NewDeleteBackupMigrationRequest() (request *DeleteBackupMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteBackupMigration")
+    
     
     return
 }
@@ -454,6 +473,7 @@ func (c *Client) DeleteBackupMigration(request *DeleteBackupMigrationRequest) (r
     if request == nil {
         request = NewDeleteBackupMigrationRequest()
     }
+    
     response = NewDeleteBackupMigrationResponse()
     err = c.Send(request, response)
     return
@@ -464,6 +484,7 @@ func NewDeleteDBRequest() (request *DeleteDBRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteDB")
+    
     
     return
 }
@@ -491,6 +512,7 @@ func (c *Client) DeleteDB(request *DeleteDBRequest) (response *DeleteDBResponse,
     if request == nil {
         request = NewDeleteDBRequest()
     }
+    
     response = NewDeleteDBResponse()
     err = c.Send(request, response)
     return
@@ -501,6 +523,7 @@ func NewDeleteIncrementalMigrationRequest() (request *DeleteIncrementalMigration
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteIncrementalMigration")
+    
     
     return
 }
@@ -526,6 +549,7 @@ func (c *Client) DeleteIncrementalMigration(request *DeleteIncrementalMigrationR
     if request == nil {
         request = NewDeleteIncrementalMigrationRequest()
     }
+    
     response = NewDeleteIncrementalMigrationResponse()
     err = c.Send(request, response)
     return
@@ -536,6 +560,7 @@ func NewDeleteMigrationRequest() (request *DeleteMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteMigration")
+    
     
     return
 }
@@ -564,6 +589,7 @@ func (c *Client) DeleteMigration(request *DeleteMigrationRequest) (response *Del
     if request == nil {
         request = NewDeleteMigrationRequest()
     }
+    
     response = NewDeleteMigrationResponse()
     err = c.Send(request, response)
     return
@@ -574,6 +600,7 @@ func NewDescribeAccountsRequest() (request *DescribeAccountsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeAccounts")
+    
     
     return
 }
@@ -600,6 +627,7 @@ func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *D
     if request == nil {
         request = NewDescribeAccountsRequest()
     }
+    
     response = NewDescribeAccountsResponse()
     err = c.Send(request, response)
     return
@@ -610,6 +638,7 @@ func NewDescribeBackupCommandRequest() (request *DescribeBackupCommandRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupCommand")
+    
     
     return
 }
@@ -632,6 +661,7 @@ func (c *Client) DescribeBackupCommand(request *DescribeBackupCommandRequest) (r
     if request == nil {
         request = NewDescribeBackupCommandRequest()
     }
+    
     response = NewDescribeBackupCommandResponse()
     err = c.Send(request, response)
     return
@@ -642,6 +672,7 @@ func NewDescribeBackupFilesRequest() (request *DescribeBackupFilesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupFiles")
+    
     
     return
 }
@@ -672,6 +703,7 @@ func (c *Client) DescribeBackupFiles(request *DescribeBackupFilesRequest) (respo
     if request == nil {
         request = NewDescribeBackupFilesRequest()
     }
+    
     response = NewDescribeBackupFilesResponse()
     err = c.Send(request, response)
     return
@@ -682,6 +714,7 @@ func NewDescribeBackupMigrationRequest() (request *DescribeBackupMigrationReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupMigration")
+    
     
     return
 }
@@ -705,6 +738,7 @@ func (c *Client) DescribeBackupMigration(request *DescribeBackupMigrationRequest
     if request == nil {
         request = NewDescribeBackupMigrationRequest()
     }
+    
     response = NewDescribeBackupMigrationResponse()
     err = c.Send(request, response)
     return
@@ -715,6 +749,7 @@ func NewDescribeBackupUploadSizeRequest() (request *DescribeBackupUploadSizeRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackupUploadSize")
+    
     
     return
 }
@@ -741,6 +776,7 @@ func (c *Client) DescribeBackupUploadSize(request *DescribeBackupUploadSizeReque
     if request == nil {
         request = NewDescribeBackupUploadSizeRequest()
     }
+    
     response = NewDescribeBackupUploadSizeResponse()
     err = c.Send(request, response)
     return
@@ -751,6 +787,7 @@ func NewDescribeBackupsRequest() (request *DescribeBackupsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeBackups")
+    
     
     return
 }
@@ -781,6 +818,7 @@ func (c *Client) DescribeBackups(request *DescribeBackupsRequest) (response *Des
     if request == nil {
         request = NewDescribeBackupsRequest()
     }
+    
     response = NewDescribeBackupsResponse()
     err = c.Send(request, response)
     return
@@ -791,6 +829,7 @@ func NewDescribeDBCharsetsRequest() (request *DescribeDBCharsetsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDBCharsets")
+    
     
     return
 }
@@ -825,6 +864,7 @@ func (c *Client) DescribeDBCharsets(request *DescribeDBCharsetsRequest) (respons
     if request == nil {
         request = NewDescribeDBCharsetsRequest()
     }
+    
     response = NewDescribeDBCharsetsResponse()
     err = c.Send(request, response)
     return
@@ -835,6 +875,7 @@ func NewDescribeDBInstancesRequest() (request *DescribeDBInstancesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDBInstances")
+    
     
     return
 }
@@ -865,6 +906,7 @@ func (c *Client) DescribeDBInstances(request *DescribeDBInstancesRequest) (respo
     if request == nil {
         request = NewDescribeDBInstancesRequest()
     }
+    
     response = NewDescribeDBInstancesResponse()
     err = c.Send(request, response)
     return
@@ -875,6 +917,7 @@ func NewDescribeDBsRequest() (request *DescribeDBsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDBs")
+    
     
     return
 }
@@ -900,6 +943,7 @@ func (c *Client) DescribeDBs(request *DescribeDBsRequest) (response *DescribeDBs
     if request == nil {
         request = NewDescribeDBsRequest()
     }
+    
     response = NewDescribeDBsResponse()
     err = c.Send(request, response)
     return
@@ -910,6 +954,7 @@ func NewDescribeDBsNormalRequest() (request *DescribeDBsNormalRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDBsNormal")
+    
     
     return
 }
@@ -935,6 +980,7 @@ func (c *Client) DescribeDBsNormal(request *DescribeDBsNormalRequest) (response 
     if request == nil {
         request = NewDescribeDBsNormalRequest()
     }
+    
     response = NewDescribeDBsNormalResponse()
     err = c.Send(request, response)
     return
@@ -945,6 +991,7 @@ func NewDescribeFlowStatusRequest() (request *DescribeFlowStatusRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeFlowStatus")
+    
     
     return
 }
@@ -971,6 +1018,7 @@ func (c *Client) DescribeFlowStatus(request *DescribeFlowStatusRequest) (respons
     if request == nil {
         request = NewDescribeFlowStatusRequest()
     }
+    
     response = NewDescribeFlowStatusResponse()
     err = c.Send(request, response)
     return
@@ -981,6 +1029,7 @@ func NewDescribeIncrementalMigrationRequest() (request *DescribeIncrementalMigra
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeIncrementalMigration")
+    
     
     return
 }
@@ -1004,6 +1053,7 @@ func (c *Client) DescribeIncrementalMigration(request *DescribeIncrementalMigrat
     if request == nil {
         request = NewDescribeIncrementalMigrationRequest()
     }
+    
     response = NewDescribeIncrementalMigrationResponse()
     err = c.Send(request, response)
     return
@@ -1014,6 +1064,7 @@ func NewDescribeInstanceParamRecordsRequest() (request *DescribeInstanceParamRec
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeInstanceParamRecords")
+    
     
     return
 }
@@ -1040,6 +1091,7 @@ func (c *Client) DescribeInstanceParamRecords(request *DescribeInstanceParamReco
     if request == nil {
         request = NewDescribeInstanceParamRecordsRequest()
     }
+    
     response = NewDescribeInstanceParamRecordsResponse()
     err = c.Send(request, response)
     return
@@ -1050,6 +1102,7 @@ func NewDescribeInstanceParamsRequest() (request *DescribeInstanceParamsRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeInstanceParams")
+    
     
     return
 }
@@ -1077,6 +1130,7 @@ func (c *Client) DescribeInstanceParams(request *DescribeInstanceParamsRequest) 
     if request == nil {
         request = NewDescribeInstanceParamsRequest()
     }
+    
     response = NewDescribeInstanceParamsResponse()
     err = c.Send(request, response)
     return
@@ -1087,6 +1141,7 @@ func NewDescribeMigrationDetailRequest() (request *DescribeMigrationDetailReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeMigrationDetail")
+    
     
     return
 }
@@ -1114,6 +1169,7 @@ func (c *Client) DescribeMigrationDetail(request *DescribeMigrationDetailRequest
     if request == nil {
         request = NewDescribeMigrationDetailRequest()
     }
+    
     response = NewDescribeMigrationDetailResponse()
     err = c.Send(request, response)
     return
@@ -1124,6 +1180,7 @@ func NewDescribeMigrationsRequest() (request *DescribeMigrationsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeMigrations")
+    
     
     return
 }
@@ -1150,6 +1207,7 @@ func (c *Client) DescribeMigrations(request *DescribeMigrationsRequest) (respons
     if request == nil {
         request = NewDescribeMigrationsRequest()
     }
+    
     response = NewDescribeMigrationsResponse()
     err = c.Send(request, response)
     return
@@ -1160,6 +1218,7 @@ func NewDescribeOrdersRequest() (request *DescribeOrdersRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeOrders")
+    
     
     return
 }
@@ -1184,6 +1243,7 @@ func (c *Client) DescribeOrders(request *DescribeOrdersRequest) (response *Descr
     if request == nil {
         request = NewDescribeOrdersRequest()
     }
+    
     response = NewDescribeOrdersResponse()
     err = c.Send(request, response)
     return
@@ -1194,6 +1254,7 @@ func NewDescribeProductConfigRequest() (request *DescribeProductConfigRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeProductConfig")
+    
     
     return
 }
@@ -1220,6 +1281,7 @@ func (c *Client) DescribeProductConfig(request *DescribeProductConfigRequest) (r
     if request == nil {
         request = NewDescribeProductConfigRequest()
     }
+    
     response = NewDescribeProductConfigResponse()
     err = c.Send(request, response)
     return
@@ -1230,6 +1292,7 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeRegions")
+    
     
     return
 }
@@ -1255,6 +1318,7 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
     if request == nil {
         request = NewDescribeRegionsRequest()
     }
+    
     response = NewDescribeRegionsResponse()
     err = c.Send(request, response)
     return
@@ -1265,6 +1329,7 @@ func NewDescribeRollbackTimeRequest() (request *DescribeRollbackTimeRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeRollbackTime")
+    
     
     return
 }
@@ -1291,6 +1356,7 @@ func (c *Client) DescribeRollbackTime(request *DescribeRollbackTimeRequest) (res
     if request == nil {
         request = NewDescribeRollbackTimeRequest()
     }
+    
     response = NewDescribeRollbackTimeResponse()
     err = c.Send(request, response)
     return
@@ -1301,6 +1367,7 @@ func NewDescribeSlowlogsRequest() (request *DescribeSlowlogsRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeSlowlogs")
+    
     
     return
 }
@@ -1328,6 +1395,7 @@ func (c *Client) DescribeSlowlogs(request *DescribeSlowlogsRequest) (response *D
     if request == nil {
         request = NewDescribeSlowlogsRequest()
     }
+    
     response = NewDescribeSlowlogsResponse()
     err = c.Send(request, response)
     return
@@ -1338,6 +1406,7 @@ func NewDescribeUploadBackupInfoRequest() (request *DescribeUploadBackupInfoRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeUploadBackupInfo")
+    
     
     return
 }
@@ -1368,6 +1437,7 @@ func (c *Client) DescribeUploadBackupInfo(request *DescribeUploadBackupInfoReque
     if request == nil {
         request = NewDescribeUploadBackupInfoRequest()
     }
+    
     response = NewDescribeUploadBackupInfoResponse()
     err = c.Send(request, response)
     return
@@ -1378,6 +1448,7 @@ func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeZones")
+    
     
     return
 }
@@ -1403,6 +1474,7 @@ func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *Describ
     if request == nil {
         request = NewDescribeZonesRequest()
     }
+    
     response = NewDescribeZonesResponse()
     err = c.Send(request, response)
     return
@@ -1413,6 +1485,7 @@ func NewInquiryPriceCreateDBInstancesRequest() (request *InquiryPriceCreateDBIns
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "InquiryPriceCreateDBInstances")
+    
     
     return
 }
@@ -1443,6 +1516,7 @@ func (c *Client) InquiryPriceCreateDBInstances(request *InquiryPriceCreateDBInst
     if request == nil {
         request = NewInquiryPriceCreateDBInstancesRequest()
     }
+    
     response = NewInquiryPriceCreateDBInstancesResponse()
     err = c.Send(request, response)
     return
@@ -1453,6 +1527,7 @@ func NewInquiryPriceUpgradeDBInstanceRequest() (request *InquiryPriceUpgradeDBIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "InquiryPriceUpgradeDBInstance")
+    
     
     return
 }
@@ -1483,6 +1558,7 @@ func (c *Client) InquiryPriceUpgradeDBInstance(request *InquiryPriceUpgradeDBIns
     if request == nil {
         request = NewInquiryPriceUpgradeDBInstanceRequest()
     }
+    
     response = NewInquiryPriceUpgradeDBInstanceResponse()
     err = c.Send(request, response)
     return
@@ -1493,6 +1569,7 @@ func NewModifyAccountPrivilegeRequest() (request *ModifyAccountPrivilegeRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyAccountPrivilege")
+    
     
     return
 }
@@ -1524,6 +1601,7 @@ func (c *Client) ModifyAccountPrivilege(request *ModifyAccountPrivilegeRequest) 
     if request == nil {
         request = NewModifyAccountPrivilegeRequest()
     }
+    
     response = NewModifyAccountPrivilegeResponse()
     err = c.Send(request, response)
     return
@@ -1534,6 +1612,7 @@ func NewModifyAccountRemarkRequest() (request *ModifyAccountRemarkRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyAccountRemark")
+    
     
     return
 }
@@ -1562,6 +1641,7 @@ func (c *Client) ModifyAccountRemark(request *ModifyAccountRemarkRequest) (respo
     if request == nil {
         request = NewModifyAccountRemarkRequest()
     }
+    
     response = NewModifyAccountRemarkResponse()
     err = c.Send(request, response)
     return
@@ -1572,6 +1652,7 @@ func NewModifyBackupMigrationRequest() (request *ModifyBackupMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyBackupMigration")
+    
     
     return
 }
@@ -1602,6 +1683,7 @@ func (c *Client) ModifyBackupMigration(request *ModifyBackupMigrationRequest) (r
     if request == nil {
         request = NewModifyBackupMigrationRequest()
     }
+    
     response = NewModifyBackupMigrationResponse()
     err = c.Send(request, response)
     return
@@ -1612,6 +1694,7 @@ func NewModifyBackupStrategyRequest() (request *ModifyBackupStrategyRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyBackupStrategy")
+    
     
     return
 }
@@ -1637,6 +1720,7 @@ func (c *Client) ModifyBackupStrategy(request *ModifyBackupStrategyRequest) (res
     if request == nil {
         request = NewModifyBackupStrategyRequest()
     }
+    
     response = NewModifyBackupStrategyResponse()
     err = c.Send(request, response)
     return
@@ -1647,6 +1731,7 @@ func NewModifyDBInstanceNameRequest() (request *ModifyDBInstanceNameRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBInstanceName")
+    
     
     return
 }
@@ -1673,6 +1758,7 @@ func (c *Client) ModifyDBInstanceName(request *ModifyDBInstanceNameRequest) (res
     if request == nil {
         request = NewModifyDBInstanceNameRequest()
     }
+    
     response = NewModifyDBInstanceNameResponse()
     err = c.Send(request, response)
     return
@@ -1683,6 +1769,7 @@ func NewModifyDBInstanceNetworkRequest() (request *ModifyDBInstanceNetworkReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBInstanceNetwork")
+    
     
     return
 }
@@ -1722,6 +1809,7 @@ func (c *Client) ModifyDBInstanceNetwork(request *ModifyDBInstanceNetworkRequest
     if request == nil {
         request = NewModifyDBInstanceNetworkRequest()
     }
+    
     response = NewModifyDBInstanceNetworkResponse()
     err = c.Send(request, response)
     return
@@ -1732,6 +1820,7 @@ func NewModifyDBInstanceProjectRequest() (request *ModifyDBInstanceProjectReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBInstanceProject")
+    
     
     return
 }
@@ -1757,6 +1846,7 @@ func (c *Client) ModifyDBInstanceProject(request *ModifyDBInstanceProjectRequest
     if request == nil {
         request = NewModifyDBInstanceProjectRequest()
     }
+    
     response = NewModifyDBInstanceProjectResponse()
     err = c.Send(request, response)
     return
@@ -1767,6 +1857,7 @@ func NewModifyDBNameRequest() (request *ModifyDBNameRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBName")
+    
     
     return
 }
@@ -1799,6 +1890,7 @@ func (c *Client) ModifyDBName(request *ModifyDBNameRequest) (response *ModifyDBN
     if request == nil {
         request = NewModifyDBNameRequest()
     }
+    
     response = NewModifyDBNameResponse()
     err = c.Send(request, response)
     return
@@ -1809,6 +1901,7 @@ func NewModifyDBRemarkRequest() (request *ModifyDBRemarkRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBRemark")
+    
     
     return
 }
@@ -1838,6 +1931,7 @@ func (c *Client) ModifyDBRemark(request *ModifyDBRemarkRequest) (response *Modif
     if request == nil {
         request = NewModifyDBRemarkRequest()
     }
+    
     response = NewModifyDBRemarkResponse()
     err = c.Send(request, response)
     return
@@ -1848,6 +1942,7 @@ func NewModifyDatabaseCDCRequest() (request *ModifyDatabaseCDCRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDatabaseCDC")
+    
     
     return
 }
@@ -1875,6 +1970,7 @@ func (c *Client) ModifyDatabaseCDC(request *ModifyDatabaseCDCRequest) (response 
     if request == nil {
         request = NewModifyDatabaseCDCRequest()
     }
+    
     response = NewModifyDatabaseCDCResponse()
     err = c.Send(request, response)
     return
@@ -1885,6 +1981,7 @@ func NewModifyDatabaseCTRequest() (request *ModifyDatabaseCTRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDatabaseCT")
+    
     
     return
 }
@@ -1912,6 +2009,7 @@ func (c *Client) ModifyDatabaseCT(request *ModifyDatabaseCTRequest) (response *M
     if request == nil {
         request = NewModifyDatabaseCTRequest()
     }
+    
     response = NewModifyDatabaseCTResponse()
     err = c.Send(request, response)
     return
@@ -1922,6 +2020,7 @@ func NewModifyDatabaseMdfRequest() (request *ModifyDatabaseMdfRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDatabaseMdf")
+    
     
     return
 }
@@ -1948,6 +2047,7 @@ func (c *Client) ModifyDatabaseMdf(request *ModifyDatabaseMdfRequest) (response 
     if request == nil {
         request = NewModifyDatabaseMdfRequest()
     }
+    
     response = NewModifyDatabaseMdfResponse()
     err = c.Send(request, response)
     return
@@ -1958,6 +2058,7 @@ func NewModifyIncrementalMigrationRequest() (request *ModifyIncrementalMigration
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyIncrementalMigration")
+    
     
     return
 }
@@ -1988,6 +2089,7 @@ func (c *Client) ModifyIncrementalMigration(request *ModifyIncrementalMigrationR
     if request == nil {
         request = NewModifyIncrementalMigrationRequest()
     }
+    
     response = NewModifyIncrementalMigrationResponse()
     err = c.Send(request, response)
     return
@@ -1998,6 +2100,7 @@ func NewModifyInstanceParamRequest() (request *ModifyInstanceParamRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyInstanceParam")
+    
     
     return
 }
@@ -2028,6 +2131,7 @@ func (c *Client) ModifyInstanceParam(request *ModifyInstanceParamRequest) (respo
     if request == nil {
         request = NewModifyInstanceParamRequest()
     }
+    
     response = NewModifyInstanceParamResponse()
     err = c.Send(request, response)
     return
@@ -2038,6 +2142,7 @@ func NewModifyMigrationRequest() (request *ModifyMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyMigration")
+    
     
     return
 }
@@ -2072,6 +2177,7 @@ func (c *Client) ModifyMigration(request *ModifyMigrationRequest) (response *Mod
     if request == nil {
         request = NewModifyMigrationRequest()
     }
+    
     response = NewModifyMigrationResponse()
     err = c.Send(request, response)
     return
@@ -2082,6 +2188,7 @@ func NewRecycleDBInstanceRequest() (request *RecycleDBInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "RecycleDBInstance")
+    
     
     return
 }
@@ -2107,6 +2214,7 @@ func (c *Client) RecycleDBInstance(request *RecycleDBInstanceRequest) (response 
     if request == nil {
         request = NewRecycleDBInstanceRequest()
     }
+    
     response = NewRecycleDBInstanceResponse()
     err = c.Send(request, response)
     return
@@ -2117,6 +2225,7 @@ func NewResetAccountPasswordRequest() (request *ResetAccountPasswordRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "ResetAccountPassword")
+    
     
     return
 }
@@ -2146,6 +2255,7 @@ func (c *Client) ResetAccountPassword(request *ResetAccountPasswordRequest) (res
     if request == nil {
         request = NewResetAccountPasswordRequest()
     }
+    
     response = NewResetAccountPasswordResponse()
     err = c.Send(request, response)
     return
@@ -2156,6 +2266,7 @@ func NewRestartDBInstanceRequest() (request *RestartDBInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "RestartDBInstance")
+    
     
     return
 }
@@ -2182,6 +2293,7 @@ func (c *Client) RestartDBInstance(request *RestartDBInstanceRequest) (response 
     if request == nil {
         request = NewRestartDBInstanceRequest()
     }
+    
     response = NewRestartDBInstanceResponse()
     err = c.Send(request, response)
     return
@@ -2192,6 +2304,7 @@ func NewRestoreInstanceRequest() (request *RestoreInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "RestoreInstance")
+    
     
     return
 }
@@ -2220,6 +2333,7 @@ func (c *Client) RestoreInstance(request *RestoreInstanceRequest) (response *Res
     if request == nil {
         request = NewRestoreInstanceRequest()
     }
+    
     response = NewRestoreInstanceResponse()
     err = c.Send(request, response)
     return
@@ -2230,6 +2344,7 @@ func NewRollbackInstanceRequest() (request *RollbackInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "RollbackInstance")
+    
     
     return
 }
@@ -2257,6 +2372,7 @@ func (c *Client) RollbackInstance(request *RollbackInstanceRequest) (response *R
     if request == nil {
         request = NewRollbackInstanceRequest()
     }
+    
     response = NewRollbackInstanceResponse()
     err = c.Send(request, response)
     return
@@ -2267,6 +2383,7 @@ func NewRunMigrationRequest() (request *RunMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "RunMigration")
+    
     
     return
 }
@@ -2295,6 +2412,7 @@ func (c *Client) RunMigration(request *RunMigrationRequest) (response *RunMigrat
     if request == nil {
         request = NewRunMigrationRequest()
     }
+    
     response = NewRunMigrationResponse()
     err = c.Send(request, response)
     return
@@ -2305,6 +2423,7 @@ func NewStartBackupMigrationRequest() (request *StartBackupMigrationRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "StartBackupMigration")
+    
     
     return
 }
@@ -2335,6 +2454,7 @@ func (c *Client) StartBackupMigration(request *StartBackupMigrationRequest) (res
     if request == nil {
         request = NewStartBackupMigrationRequest()
     }
+    
     response = NewStartBackupMigrationResponse()
     err = c.Send(request, response)
     return
@@ -2345,6 +2465,7 @@ func NewStartIncrementalMigrationRequest() (request *StartIncrementalMigrationRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "StartIncrementalMigration")
+    
     
     return
 }
@@ -2375,6 +2496,7 @@ func (c *Client) StartIncrementalMigration(request *StartIncrementalMigrationReq
     if request == nil {
         request = NewStartIncrementalMigrationRequest()
     }
+    
     response = NewStartIncrementalMigrationResponse()
     err = c.Send(request, response)
     return
@@ -2385,6 +2507,7 @@ func NewTerminateDBInstanceRequest() (request *TerminateDBInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "TerminateDBInstance")
+    
     
     return
 }
@@ -2408,6 +2531,7 @@ func (c *Client) TerminateDBInstance(request *TerminateDBInstanceRequest) (respo
     if request == nil {
         request = NewTerminateDBInstanceRequest()
     }
+    
     response = NewTerminateDBInstanceResponse()
     err = c.Send(request, response)
     return
@@ -2418,6 +2542,7 @@ func NewUpgradeDBInstanceRequest() (request *UpgradeDBInstanceRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("sqlserver", APIVersion, "UpgradeDBInstance")
+    
     
     return
 }
@@ -2446,6 +2571,7 @@ func (c *Client) UpgradeDBInstance(request *UpgradeDBInstanceRequest) (response 
     if request == nil {
         request = NewUpgradeDBInstanceRequest()
     }
+    
     response = NewUpgradeDBInstanceResponse()
     err = c.Send(request, response)
     return

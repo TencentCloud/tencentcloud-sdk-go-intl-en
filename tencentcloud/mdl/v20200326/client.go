@@ -49,6 +49,7 @@ func NewCreateStreamLiveChannelRequest() (request *CreateStreamLiveChannelReques
     }
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveChannel")
     
+    
     return
 }
 
@@ -78,6 +79,7 @@ func (c *Client) CreateStreamLiveChannel(request *CreateStreamLiveChannelRequest
     if request == nil {
         request = NewCreateStreamLiveChannelRequest()
     }
+    
     response = NewCreateStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
@@ -88,6 +90,7 @@ func NewCreateStreamLiveInputRequest() (request *CreateStreamLiveInputRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveInput")
+    
     
     return
 }
@@ -115,6 +118,7 @@ func (c *Client) CreateStreamLiveInput(request *CreateStreamLiveInputRequest) (r
     if request == nil {
         request = NewCreateStreamLiveInputRequest()
     }
+    
     response = NewCreateStreamLiveInputResponse()
     err = c.Send(request, response)
     return
@@ -125,6 +129,7 @@ func NewCreateStreamLiveInputSecurityGroupRequest() (request *CreateStreamLiveIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveInputSecurityGroup")
+    
     
     return
 }
@@ -149,6 +154,7 @@ func (c *Client) CreateStreamLiveInputSecurityGroup(request *CreateStreamLiveInp
     if request == nil {
         request = NewCreateStreamLiveInputSecurityGroupRequest()
     }
+    
     response = NewCreateStreamLiveInputSecurityGroupResponse()
     err = c.Send(request, response)
     return
@@ -159,6 +165,7 @@ func NewCreateStreamLivePlanRequest() (request *CreateStreamLivePlanRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLivePlan")
+    
     
     return
 }
@@ -181,6 +188,7 @@ func (c *Client) CreateStreamLivePlan(request *CreateStreamLivePlanRequest) (res
     if request == nil {
         request = NewCreateStreamLivePlanRequest()
     }
+    
     response = NewCreateStreamLivePlanResponse()
     err = c.Send(request, response)
     return
@@ -191,6 +199,7 @@ func NewDeleteStreamLiveChannelRequest() (request *DeleteStreamLiveChannelReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveChannel")
+    
     
     return
 }
@@ -216,6 +225,7 @@ func (c *Client) DeleteStreamLiveChannel(request *DeleteStreamLiveChannelRequest
     if request == nil {
         request = NewDeleteStreamLiveChannelRequest()
     }
+    
     response = NewDeleteStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
@@ -226,6 +236,7 @@ func NewDeleteStreamLiveInputRequest() (request *DeleteStreamLiveInputRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveInput")
+    
     
     return
 }
@@ -250,6 +261,7 @@ func (c *Client) DeleteStreamLiveInput(request *DeleteStreamLiveInputRequest) (r
     if request == nil {
         request = NewDeleteStreamLiveInputRequest()
     }
+    
     response = NewDeleteStreamLiveInputResponse()
     err = c.Send(request, response)
     return
@@ -260,6 +272,7 @@ func NewDeleteStreamLiveInputSecurityGroupRequest() (request *DeleteStreamLiveIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveInputSecurityGroup")
+    
     
     return
 }
@@ -284,6 +297,7 @@ func (c *Client) DeleteStreamLiveInputSecurityGroup(request *DeleteStreamLiveInp
     if request == nil {
         request = NewDeleteStreamLiveInputSecurityGroupRequest()
     }
+    
     response = NewDeleteStreamLiveInputSecurityGroupResponse()
     err = c.Send(request, response)
     return
@@ -294,6 +308,7 @@ func NewDeleteStreamLivePlanRequest() (request *DeleteStreamLivePlanRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLivePlan")
+    
     
     return
 }
@@ -316,6 +331,7 @@ func (c *Client) DeleteStreamLivePlan(request *DeleteStreamLivePlanRequest) (res
     if request == nil {
         request = NewDeleteStreamLivePlanRequest()
     }
+    
     response = NewDeleteStreamLivePlanResponse()
     err = c.Send(request, response)
     return
@@ -326,6 +342,7 @@ func NewDescribeStreamLiveChannelRequest() (request *DescribeStreamLiveChannelRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannel")
+    
     
     return
 }
@@ -347,6 +364,7 @@ func (c *Client) DescribeStreamLiveChannel(request *DescribeStreamLiveChannelReq
     if request == nil {
         request = NewDescribeStreamLiveChannelRequest()
     }
+    
     response = NewDescribeStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
@@ -357,6 +375,7 @@ func NewDescribeStreamLiveChannelAlertsRequest() (request *DescribeStreamLiveCha
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelAlerts")
+    
     
     return
 }
@@ -378,6 +397,7 @@ func (c *Client) DescribeStreamLiveChannelAlerts(request *DescribeStreamLiveChan
     if request == nil {
         request = NewDescribeStreamLiveChannelAlertsRequest()
     }
+    
     response = NewDescribeStreamLiveChannelAlertsResponse()
     err = c.Send(request, response)
     return
@@ -388,6 +408,7 @@ func NewDescribeStreamLiveChannelInputStatisticsRequest() (request *DescribeStre
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelInputStatistics")
+    
     
     return
 }
@@ -411,6 +432,7 @@ func (c *Client) DescribeStreamLiveChannelInputStatistics(request *DescribeStrea
     if request == nil {
         request = NewDescribeStreamLiveChannelInputStatisticsRequest()
     }
+    
     response = NewDescribeStreamLiveChannelInputStatisticsResponse()
     err = c.Send(request, response)
     return
@@ -421,6 +443,7 @@ func NewDescribeStreamLiveChannelLogsRequest() (request *DescribeStreamLiveChann
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelLogs")
+    
     
     return
 }
@@ -444,6 +467,7 @@ func (c *Client) DescribeStreamLiveChannelLogs(request *DescribeStreamLiveChanne
     if request == nil {
         request = NewDescribeStreamLiveChannelLogsRequest()
     }
+    
     response = NewDescribeStreamLiveChannelLogsResponse()
     err = c.Send(request, response)
     return
@@ -454,6 +478,7 @@ func NewDescribeStreamLiveChannelOutputStatisticsRequest() (request *DescribeStr
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelOutputStatistics")
+    
     
     return
 }
@@ -478,6 +503,7 @@ func (c *Client) DescribeStreamLiveChannelOutputStatistics(request *DescribeStre
     if request == nil {
         request = NewDescribeStreamLiveChannelOutputStatisticsRequest()
     }
+    
     response = NewDescribeStreamLiveChannelOutputStatisticsResponse()
     err = c.Send(request, response)
     return
@@ -488,6 +514,7 @@ func NewDescribeStreamLiveChannelsRequest() (request *DescribeStreamLiveChannels
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannels")
+    
     
     return
 }
@@ -508,6 +535,7 @@ func (c *Client) DescribeStreamLiveChannels(request *DescribeStreamLiveChannelsR
     if request == nil {
         request = NewDescribeStreamLiveChannelsRequest()
     }
+    
     response = NewDescribeStreamLiveChannelsResponse()
     err = c.Send(request, response)
     return
@@ -518,6 +546,7 @@ func NewDescribeStreamLiveInputRequest() (request *DescribeStreamLiveInputReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInput")
+    
     
     return
 }
@@ -541,6 +570,7 @@ func (c *Client) DescribeStreamLiveInput(request *DescribeStreamLiveInputRequest
     if request == nil {
         request = NewDescribeStreamLiveInputRequest()
     }
+    
     response = NewDescribeStreamLiveInputResponse()
     err = c.Send(request, response)
     return
@@ -551,6 +581,7 @@ func NewDescribeStreamLiveInputSecurityGroupRequest() (request *DescribeStreamLi
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputSecurityGroup")
+    
     
     return
 }
@@ -574,6 +605,7 @@ func (c *Client) DescribeStreamLiveInputSecurityGroup(request *DescribeStreamLiv
     if request == nil {
         request = NewDescribeStreamLiveInputSecurityGroupRequest()
     }
+    
     response = NewDescribeStreamLiveInputSecurityGroupResponse()
     err = c.Send(request, response)
     return
@@ -584,6 +616,7 @@ func NewDescribeStreamLiveInputSecurityGroupsRequest() (request *DescribeStreamL
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputSecurityGroups")
+    
     
     return
 }
@@ -604,6 +637,7 @@ func (c *Client) DescribeStreamLiveInputSecurityGroups(request *DescribeStreamLi
     if request == nil {
         request = NewDescribeStreamLiveInputSecurityGroupsRequest()
     }
+    
     response = NewDescribeStreamLiveInputSecurityGroupsResponse()
     err = c.Send(request, response)
     return
@@ -614,6 +648,7 @@ func NewDescribeStreamLiveInputsRequest() (request *DescribeStreamLiveInputsRequ
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputs")
+    
     
     return
 }
@@ -634,6 +669,7 @@ func (c *Client) DescribeStreamLiveInputs(request *DescribeStreamLiveInputsReque
     if request == nil {
         request = NewDescribeStreamLiveInputsRequest()
     }
+    
     response = NewDescribeStreamLiveInputsResponse()
     err = c.Send(request, response)
     return
@@ -644,6 +680,7 @@ func NewDescribeStreamLivePlansRequest() (request *DescribeStreamLivePlansReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLivePlans")
+    
     
     return
 }
@@ -665,6 +702,7 @@ func (c *Client) DescribeStreamLivePlans(request *DescribeStreamLivePlansRequest
     if request == nil {
         request = NewDescribeStreamLivePlansRequest()
     }
+    
     response = NewDescribeStreamLivePlansResponse()
     err = c.Send(request, response)
     return
@@ -675,6 +713,7 @@ func NewDescribeStreamLiveRegionsRequest() (request *DescribeStreamLiveRegionsRe
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveRegions")
+    
     
     return
 }
@@ -695,6 +734,7 @@ func (c *Client) DescribeStreamLiveRegions(request *DescribeStreamLiveRegionsReq
     if request == nil {
         request = NewDescribeStreamLiveRegionsRequest()
     }
+    
     response = NewDescribeStreamLiveRegionsResponse()
     err = c.Send(request, response)
     return
@@ -705,6 +745,7 @@ func NewModifyStreamLiveChannelRequest() (request *ModifyStreamLiveChannelReques
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveChannel")
+    
     
     return
 }
@@ -735,6 +776,7 @@ func (c *Client) ModifyStreamLiveChannel(request *ModifyStreamLiveChannelRequest
     if request == nil {
         request = NewModifyStreamLiveChannelRequest()
     }
+    
     response = NewModifyStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
@@ -745,6 +787,7 @@ func NewModifyStreamLiveInputRequest() (request *ModifyStreamLiveInputRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveInput")
+    
     
     return
 }
@@ -772,6 +815,7 @@ func (c *Client) ModifyStreamLiveInput(request *ModifyStreamLiveInputRequest) (r
     if request == nil {
         request = NewModifyStreamLiveInputRequest()
     }
+    
     response = NewModifyStreamLiveInputResponse()
     err = c.Send(request, response)
     return
@@ -782,6 +826,7 @@ func NewModifyStreamLiveInputSecurityGroupRequest() (request *ModifyStreamLiveIn
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveInputSecurityGroup")
+    
     
     return
 }
@@ -807,6 +852,7 @@ func (c *Client) ModifyStreamLiveInputSecurityGroup(request *ModifyStreamLiveInp
     if request == nil {
         request = NewModifyStreamLiveInputSecurityGroupRequest()
     }
+    
     response = NewModifyStreamLiveInputSecurityGroupResponse()
     err = c.Send(request, response)
     return
@@ -817,6 +863,7 @@ func NewStartStreamLiveChannelRequest() (request *StartStreamLiveChannelRequest)
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "StartStreamLiveChannel")
+    
     
     return
 }
@@ -841,6 +888,7 @@ func (c *Client) StartStreamLiveChannel(request *StartStreamLiveChannelRequest) 
     if request == nil {
         request = NewStartStreamLiveChannelRequest()
     }
+    
     response = NewStartStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
@@ -851,6 +899,7 @@ func NewStopStreamLiveChannelRequest() (request *StopStreamLiveChannelRequest) {
         BaseRequest: &tchttp.BaseRequest{},
     }
     request.Init().WithApiInfo("mdl", APIVersion, "StopStreamLiveChannel")
+    
     
     return
 }
@@ -875,6 +924,7 @@ func (c *Client) StopStreamLiveChannel(request *StopStreamLiveChannelRequest) (r
     if request == nil {
         request = NewStopStreamLiveChannelRequest()
     }
+    
     response = NewStopStreamLiveChannelResponse()
     err = c.Send(request, response)
     return
