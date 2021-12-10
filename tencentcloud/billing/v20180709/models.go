@@ -513,7 +513,6 @@ type DescribeBillResourceSummaryRequest struct {
 	// New monthly subscription
 	// Monthly subscription renewal
 	// Monthly subscription specification adjustment
-	// Monthly subscription specification adjustment
 	// Monthly subscription refund
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 

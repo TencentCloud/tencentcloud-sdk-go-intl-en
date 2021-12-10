@@ -23,19 +23,23 @@ import (
 type LivenessCompareRequest struct {
 	*tchttp.BaseRequest
 
-	// Base64 string of the image for face comparison.
-	// The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
-	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
-	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
-
-	// Base64 string of the video for liveness detection.
-	// The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
-	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
-	VideoBase64 *string `json:"VideoBase64,omitempty" name:"VideoBase64"`
-
 	// Liveness detection type. Valid values: LIP/ACTION/SILENT.
 	// LIP: numeric mode; ACTION: motion mode; SILENT: silent mode. You need to select a mode to input.
 	LivenessType *string `json:"LivenessType,omitempty" name:"LivenessType"`
+
+	// Base64 string of the image for face comparison.
+	// The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
+	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
+	// 
+	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// URL of the image for face comparison. The size of the downloaded image after Base64 encoding can be up to 3 MB. JPG and PNG formats are supported.
+	// 
+	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
+	// 
+	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 
 	// Lip mode: set this parameter to a custom 4-digit verification code.
 	// Action mode: set this parameter to a custom action sequence (e.g., `2,1` or `1,2`).
@@ -47,6 +51,20 @@ type LivenessCompareRequest struct {
 	// "BestFrameNum": 2  // Return multiple best screenshots. Value range: 2−10
 	// }
 	Optional *string `json:"Optional,omitempty" name:"Optional"`
+
+	// Base64 string of the video for liveness detection.
+	// The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
+	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
+	// 
+	// Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
+	VideoBase64 *string `json:"VideoBase64,omitempty" name:"VideoBase64"`
+
+	// URL of the video for liveness detection. The size of the downloaded video after Base64 encoding can be up to 8 MB. It takes no more than 4 seconds to download. MP4, AVI, and FLV formats are supported.
+	// 
+	// Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
+	// 
+	// We recommend you store the video in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
 }
 
 func (r *LivenessCompareRequest) ToJsonString() string {
@@ -61,11 +79,13 @@ func (r *LivenessCompareRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "ImageBase64")
-	delete(f, "VideoBase64")
 	delete(f, "LivenessType")
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
 	delete(f, "ValidateData")
 	delete(f, "Optional")
+	delete(f, "VideoBase64")
+	delete(f, "VideoUrl")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "LivenessCompareRequest has unknown keys!", "")
 	}

@@ -131,7 +131,7 @@ func (r *AddUserResponse) FromJsonString(s string) error {
 type AddUserToGroupRequest struct {
 	*tchttp.BaseRequest
 
-	// How sub-user UIDs are associated with the ID of the user group they are added to.
+	// The association between the user group ID and the sub-user UIN/UID.
 	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info"`
 }
 
@@ -2369,11 +2369,14 @@ func (r *GetUserResponse) FromJsonString(s string) error {
 
 type GroupIdOfUidInfo struct {
 
+	// User Group ID
+	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+
 	// Sub-user UID
 	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
 
-	// User Group ID
-	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+	// Sub-user UIN. For UIN and UID, at least one of them is required.
+	Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
 }
 
 type GroupInfo struct {
@@ -3409,7 +3412,7 @@ func (r *PutUserPermissionsBoundaryResponse) FromJsonString(s string) error {
 type RemoveUserFromGroupRequest struct {
 	*tchttp.BaseRequest
 
-	// The UID of the user to be deleted and an array corresponding to the User Group IDs
+	// The user’s UIN/UID to be deleted and the array corresponding to the user group ID.
 	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info"`
 }
 

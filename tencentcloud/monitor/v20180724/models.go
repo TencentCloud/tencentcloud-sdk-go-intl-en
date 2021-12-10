@@ -417,20 +417,20 @@ type BindingPolicyObjectDimension struct {
 type BindingPolicyObjectRequest struct {
 	*tchttp.BaseRequest
 
-	// Policy group ID. If `PolicyId` is used, this parameter will be ignored, and any value, e.g., 0, can be passed in.
-	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
-
 	// Required. The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// Policy group ID, such as `4739573`. This parameter will be disused soon. Another parameter `PolicyId` is recommended.
+	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Alarm policy ID, such as `policy-gh892hg0`. At least one of the two parameters, `PolicyId` and `GroupId`, must be specified; otherwise, an error will be reported. `PolicyId` is preferred over `GroupId` when both of them are specified.
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// Instance group ID.
 	InstanceGroupId *int64 `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
 
 	// Dimensions of an object to be bound.
 	Dimensions []*BindingPolicyObjectDimension `json:"Dimensions,omitempty" name:"Dimensions"`
-
-	// Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
-	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
 func (r *BindingPolicyObjectRequest) ToJsonString() string {
@@ -445,11 +445,11 @@ func (r *BindingPolicyObjectRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "GroupId")
 	delete(f, "Module")
+	delete(f, "GroupId")
+	delete(f, "PolicyId")
 	delete(f, "InstanceGroupId")
 	delete(f, "Dimensions")
-	delete(f, "PolicyId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindingPolicyObjectRequest has unknown keys!", "")
 	}

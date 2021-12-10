@@ -56,6 +56,12 @@ const (
 	// Error calling the comparison engine API.
 	FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
 
+	// File download failed.
+	FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+
+	// File download timed out.
+	FAILEDOPERATION_DOWNLOADTIMEOUTERROR = "FailedOperation.DownLoadTimeoutError"
+
 	// Multiple faces are detected.
 	FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
 

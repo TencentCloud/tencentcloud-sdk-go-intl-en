@@ -106,6 +106,7 @@ func NewAddUserToGroupResponse() (response *AddUserToGroupResponse) {
 //  INVALIDPARAMETER_GROUPNOTEXIST = "InvalidParameter.GroupNotExist"
 //  INVALIDPARAMETER_GROUPUSERFULL = "InvalidParameter.GroupUserFull"
 //  INVALIDPARAMETER_USERGROUPFULL = "InvalidParameter.UserGroupFull"
+//  INVALIDPARAMETER_USERUINANDUINNOTALLNULL = "InvalidParameter.UserUinAndUinNotAllNull"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) AddUserToGroup(request *AddUserToGroupRequest) (response *AddUserToGroupResponse, err error) {
     if request == nil {
@@ -2116,6 +2117,7 @@ func NewRemoveUserFromGroupResponse() (response *RemoveUserFromGroupResponse) {
 // This API is used to delete users from a user group.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_USERUINANDUINNOTALLNULL = "InvalidParameter.UserUinAndUinNotAllNull"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) RemoveUserFromGroup(request *RemoveUserFromGroupRequest) (response *RemoveUserFromGroupResponse, err error) {
     if request == nil {

@@ -77,6 +77,8 @@ func NewLivenessCompareResponse() (response *LivenessCompareResponse) {
 //  FAILEDOPERATION_COMPAREFAIL = "FailedOperation.CompareFail"
 //  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
 //  FAILEDOPERATION_COMPARESYSTEMERROR = "FailedOperation.CompareSystemError"
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_DOWNLOADTIMEOUTERROR = "FailedOperation.DownLoadTimeoutError"
 //  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
 //  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
 //  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"

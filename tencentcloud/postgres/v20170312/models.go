@@ -881,7 +881,7 @@ type DBInstance struct {
 	// Instance database character set
 	DBCharset *string `json:"DBCharset,omitempty" name:"DBCharset"`
 
-	// PostgreSQL kernel version
+	// PostgreSQL major version
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Instance creation time
@@ -936,6 +936,14 @@ type DBInstance struct {
 	// Elimination time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OfflineTime *string `json:"OfflineTime,omitempty" name:"OfflineTime"`
+
+	// Database kernel version
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
+
+	// Network information list of the instance
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NetworkAccessList []*NetworkAccess `json:"NetworkAccessList,omitempty" name:"NetworkAccessList"`
 }
 
 type DBInstanceNetInfo struct {
@@ -1997,16 +2005,16 @@ type DescribeSlowQueryAnalysisRequest struct {
 	// Filter by database name. This parameter is optional.
 	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
 
-	// Sort by field. Valid values: `CallNum`, `CostTime`, `AvgCostTime`.
+	// Sort by field. Valid values: `CallNum`, `CostTime`, `AvgCostTime`. Default value: `CallNum`.
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
-	// Sorting order. Valid values: `asc` (ascending), `desc` (descending).
+	// Sorting order. Valid values: `asc` (ascending), `desc` (descending). Default value: `desc`.
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 
-	// Number of entries per page. Value range: [1,100].
+	// Number of entries per page. Value range: [1,100]. Default value: `50`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Pagination offset. Value range: [0,INF).
+	// Pagination offset. Value range: [0,INF). Default value: `0`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 
@@ -2933,10 +2941,10 @@ type ModifyDBInstanceSpecRequest struct {
 	// Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
 	SwitchTag *uint64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
 
-	// The earliest time to start a switch.
+	// The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
 	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
 
-	// The latest time to start a switch.
+	// The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
 	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
 }
 
@@ -3170,6 +3178,41 @@ func (r *ModifySwitchTimePeriodResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type NetworkAccess struct {
+
+	// Network resource ID, instance ID or RO group ID (this field has been deprecated)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Resource type. Valid values: `1` (instance), `2` (RO group) (this field has been deprecated)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceType *uint64 `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// VPC ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// IPv4 address
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// IPv6 address
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Vip6 *string `json:"Vip6,omitempty" name:"Vip6"`
+
+	// Access port
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Subnet ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Network status. Valid values: `1` (applying), `2` (in use), `3` (deleting), `4` (deleted)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VpcStatus *int64 `json:"VpcStatus,omitempty" name:"VpcStatus"`
+}
+
 type NormalQueryItem struct {
 
 	// Username
@@ -3340,7 +3383,10 @@ type ParamInfo struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutil_enum` (this type of parameter can be set to multiple enumerated values)
+	// Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutil_enum` (this type of parameter can be set to multiple enumerated values).
+	// For an `integer` or `real` parameter, the `Min` field represents the minimum value and the `Max` field the maximum value. 
+	// For a `bool` parameter, the valid values include `true` and `false`; 
+	// For an `enum` or `mutil_enum` parameter, the `EnumValue` field represents the valid values.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ParamValueType *string `json:"ParamValueType,omitempty" name:"ParamValueType"`
 
@@ -3501,6 +3547,10 @@ type ReadOnlyGroup struct {
 
 	// Network information
 	DBInstanceNetInfo []*DBInstanceNetInfo `json:"DBInstanceNetInfo,omitempty" name:"DBInstanceNetInfo"`
+
+	// Network information list of the RO group
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NetworkAccessList []*NetworkAccess `json:"NetworkAccessList,omitempty" name:"NetworkAccessList"`
 }
 
 type RebalanceReadOnlyGroupRequest struct {
@@ -3861,6 +3911,10 @@ type ServerlessDBInstance struct {
 	// The array of tags bound to an instance
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TagList []*Tag `json:"TagList,omitempty" name:"TagList"`
+
+	// Database kernel version
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
 }
 
 type ServerlessDBInstanceNetInfo struct {
