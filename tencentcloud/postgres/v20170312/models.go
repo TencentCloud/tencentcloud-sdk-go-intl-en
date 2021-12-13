@@ -941,7 +941,7 @@ type DBInstance struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
 
-	// Network information list of the instance
+	// Network access list of the instance
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	NetworkAccessList []*NetworkAccess `json:"NetworkAccessList,omitempty" name:"NetworkAccessList"`
 }
@@ -3548,7 +3548,7 @@ type ReadOnlyGroup struct {
 	// Network information
 	DBInstanceNetInfo []*DBInstanceNetInfo `json:"DBInstanceNetInfo,omitempty" name:"DBInstanceNetInfo"`
 
-	// Network information list of the RO group
+	// Network access list of the RO group
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	NetworkAccessList []*NetworkAccess `json:"NetworkAccessList,omitempty" name:"NetworkAccessList"`
 }
