@@ -352,6 +352,9 @@ type CreateFunctionRequest struct {
 	// Role bound to the function
 	Role *string `json:"Role,omitempty" name:"Role"`
 
+	// Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
+	InstallDependency *string `json:"InstallDependency,omitempty" name:"InstallDependency"`
+
 	// CLS Logset ID to which the function logs are shipped
 	ClsLogsetId *string `json:"ClsLogsetId,omitempty" name:"ClsLogsetId"`
 
@@ -387,6 +390,12 @@ type CreateFunctionRequest struct {
 
 	// Whether to enable event tracking. TRUE: yes; FALSE: no
 	TraceEnable *string `json:"TraceEnable,omitempty" name:"TraceEnable"`
+
+	// Protocols supported by HTTP-triggered functions. Valid value: `WS` (WebSockets)
+	ProtocolType *string `json:"ProtocolType,omitempty" name:"ProtocolType"`
+
+	// Parameters of the specified protocol
+	ProtocolParams *ProtocolParams `json:"ProtocolParams,omitempty" name:"ProtocolParams"`
 }
 
 func (r *CreateFunctionRequest) ToJsonString() string {
@@ -412,6 +421,7 @@ func (r *CreateFunctionRequest) FromJsonString(s string) error {
 	delete(f, "VpcConfig")
 	delete(f, "Namespace")
 	delete(f, "Role")
+	delete(f, "InstallDependency")
 	delete(f, "ClsLogsetId")
 	delete(f, "ClsTopicId")
 	delete(f, "Type")
@@ -424,6 +434,8 @@ func (r *CreateFunctionRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "AsyncRunEnable")
 	delete(f, "TraceEnable")
+	delete(f, "ProtocolType")
+	delete(f, "ProtocolParams")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateFunctionRequest has unknown keys!", "")
 	}
@@ -1629,6 +1641,14 @@ type GetFunctionResponse struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		TraceEnable *string `json:"TraceEnable,omitempty" name:"TraceEnable"`
 
+		// Protocols supported by HTTP-triggered functions. It supports WebSockets for now.
+	// Note: This field may return null, indicating that no valid value was found.
+		ProtocolType *string `json:"ProtocolType,omitempty" name:"ProtocolType"`
+
+		// Parameters of the specified protocol
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ProtocolParams *ProtocolParams `json:"ProtocolParams,omitempty" name:"ProtocolParams"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -2730,6 +2750,13 @@ type NamespaceUsage struct {
 	FunctionsCount *int64 `json:"FunctionsCount,omitempty" name:"FunctionsCount"`
 }
 
+type ProtocolParams struct {
+
+	// Parameters of WebSockets protocol
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	WSParams *WSParams `json:"WSParams,omitempty" name:"WSParams"`
+}
+
 type PublicNetConfigIn struct {
 
 	// Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
@@ -3505,6 +3532,9 @@ type UpdateFunctionConfigurationRequest struct {
 	// Role bound to the function
 	Role *string `json:"Role,omitempty" name:"Role"`
 
+	// Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
+	InstallDependency *string `json:"InstallDependency,omitempty" name:"InstallDependency"`
+
 	// CLS logset ID to which logs are shipped
 	ClsLogsetId *string `json:"ClsLogsetId,omitempty" name:"ClsLogsetId"`
 
@@ -3531,6 +3561,9 @@ type UpdateFunctionConfigurationRequest struct {
 
 	// The function initialization timeout period
 	InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
+
+	// Parameters of the specified protocol
+	ProtocolParams *ProtocolParams `json:"ProtocolParams,omitempty" name:"ProtocolParams"`
 }
 
 func (r *UpdateFunctionConfigurationRequest) ToJsonString() string {
@@ -3554,6 +3587,7 @@ func (r *UpdateFunctionConfigurationRequest) FromJsonString(s string) error {
 	delete(f, "Namespace")
 	delete(f, "VpcConfig")
 	delete(f, "Role")
+	delete(f, "InstallDependency")
 	delete(f, "ClsLogsetId")
 	delete(f, "ClsTopicId")
 	delete(f, "Publish")
@@ -3563,6 +3597,7 @@ func (r *UpdateFunctionConfigurationRequest) FromJsonString(s string) error {
 	delete(f, "PublicNetConfig")
 	delete(f, "CfsConfig")
 	delete(f, "InitTimeout")
+	delete(f, "ProtocolParams")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateFunctionConfigurationRequest has unknown keys!", "")
 	}
@@ -3780,4 +3815,11 @@ type VpcConfig struct {
 
 	// Subnet ID
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
+type WSParams struct {
+
+	// Idle timeout period in seconds. Default: 15; range: 1 to 1800
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	IdleTimeOut *uint64 `json:"IdleTimeOut,omitempty" name:"IdleTimeOut"`
 }
