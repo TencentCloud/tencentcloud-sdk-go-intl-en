@@ -122,7 +122,7 @@ const (
 	// The domain name is configured with special configurations, please submit a ticket.
 	INVALIDPARAMETER_CDNHOSTHASSPECIALCONFIG = "InvalidParameter.CdnHostHasSpecialConfig"
 
-	// Internal domain names cannot be connected.
+	// This domain name is internal and cannot be accessed.
 	INVALIDPARAMETER_CDNHOSTINTERNALHOST = "InvalidParameter.CdnHostInternalHost"
 
 	// Incorrect intermediate server configuration.
@@ -221,6 +221,12 @@ const (
 	// API internal error. Please try again or contact the customer service for assistance.
 	INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
 
+	// This platform does not support remote authentication.
+	INVALIDPARAMETER_REMOTEAUTHINVALIDPLATFORM = "InvalidParameter.RemoteAuthInvalidPlatform"
+
+	// This platform does not support remote access to an authentication address via the HTTPS protocol.
+	INVALIDPARAMETER_REMOTEAUTHINVALIDPROTOCOL = "InvalidParameter.RemoteAuthInvalidProtocol"
+
 	// Unable to recreate: the task has expired.
 	INVALIDPARAMETER_SCDNLOGTASKEXPIRED = "InvalidParameter.ScdnLogTaskExpired"
 
@@ -250,6 +256,9 @@ const (
 
 	// This account has created too many topics.
 	LIMITEXCEEDED_CDNCLSTOOMANYTOPICS = "LimitExceeded.CdnClsTooManyTopics"
+
+	// The number of cache validity configuration rules exceeds the limit.
+	LIMITEXCEEDED_CDNCONFIGTOOMANYCACHERULES = "LimitExceeded.CdnConfigTooManyCacheRules"
 
 	// Domain name operations are too frequent.
 	LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"

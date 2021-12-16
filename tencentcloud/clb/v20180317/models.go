@@ -958,10 +958,10 @@ type CreateLoadBalancerSnatIpsRequest struct {
 	// Unique ID of a CLB instance, e.g., lb-12345678.
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// Information of the SNAT IP to be added. You can apply for a specified IP or apply for an automatically assigned IP by specifying a subnet.
+	// Information of the SNAT IP to be added. You can specify a SNAT IP or use the one automatically assigned by a subnet.
 	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps"`
 
-	// Number of SNAT IPs to be added. This parameter is used in conjunction with `SnatIps`. Note that if `Ip` is specified in `SnapIps`, this parameter is not available.
+	// Number of SNAT IPs to be added. This parameter is used in conjunction with `SnatIps`. Note that if `Ip` is specified in `SnapIps`, this parameter is not available. It defaults to `1` and the upper limit is `10`.
 	Number *uint64 `json:"Number,omitempty" name:"Number"`
 }
 
@@ -4256,6 +4256,52 @@ func (r *ModifyLoadBalancerAttributesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyLoadBalancerSlaRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the LCU-supported CLB instance, and the target specification
+	LoadBalancerSla []*SlaUpdateParam `json:"LoadBalancerSla,omitempty" name:"LoadBalancerSla"`
+}
+
+func (r *ModifyLoadBalancerSlaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLoadBalancerSlaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LoadBalancerSla")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLoadBalancerSlaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLoadBalancerSlaResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLoadBalancerSlaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLoadBalancerSlaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyRuleRequest struct {
 	*tchttp.BaseRequest
 
@@ -5106,12 +5152,19 @@ type SetLoadBalancerClsLogRequest struct {
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
 	// CLS logset ID
+	// <li>Enter the ID of logset you need to add or update. You can acquire the ID by invoking [DescribeLogsets](https://intl.cloud.tencent.com/document/product/614/56454?from_cn_redirect=1).</li>
+	// <li>To delete the log set, set this parameter to `null`.</li>
 	LogSetId *string `json:"LogSetId,omitempty" name:"LogSetId"`
 
 	// CLS log topic ID
+	// <li>Enter the ID of log topic you need to add or update. You can acquire the ID by invoking [DescribeTopics](https://intl.cloud.tencent.com/document/product/614/56454?from_cn_redirect=1).</li>
+	// <li>To delete the log set, set this parameter to `null`.</li>
 	LogTopicId *string `json:"LogTopicId,omitempty" name:"LogTopicId"`
 
-	// Log type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
+	// Log type:
+	// <li>`ACCESS`: access logs</li>
+	// <li>`HEALTH`: health check logs</li>
+	// Default: `ACCESS`
 	LogType *string `json:"LogType,omitempty" name:"LogType"`
 }
 
@@ -5260,6 +5313,15 @@ func (r *SetSecurityGroupForLoadbalancersResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SetSecurityGroupForLoadbalancersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type SlaUpdateParam struct {
+
+	// ID of the CLB instance
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// Target instance specification
+	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 }
 
 type SnatIp struct {

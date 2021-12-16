@@ -6705,8 +6705,8 @@ type SlowLogItem struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
 
-	// SQL execution duration.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// SQL execution duration in seconds.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	QueryTime *float64 `json:"QueryTime,omitempty" name:"QueryTime"`
 
 	// SQL statement.
@@ -6725,8 +6725,8 @@ type SlowLogItem struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Database *string `json:"Database,omitempty" name:"Database"`
 
-	// Lock duration.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Lock duration in seconds.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LockTime *float64 `json:"LockTime,omitempty" name:"LockTime"`
 
 	// Number of scanned rows.
@@ -7294,6 +7294,9 @@ type UpgradeDBInstanceEngineVersionRequest struct {
 
 	// Whether to upgrade kernel minor version. Valid values: 1 (upgrade kernel minor version), 0 (upgrade database engine).
 	UpgradeSubversion *int64 `json:"UpgradeSubversion,omitempty" name:"UpgradeSubversion"`
+
+	// Delay threshold. Value range: 1-10
+	MaxDelayTime *int64 `json:"MaxDelayTime,omitempty" name:"MaxDelayTime"`
 }
 
 func (r *UpgradeDBInstanceEngineVersionRequest) ToJsonString() string {
@@ -7312,6 +7315,7 @@ func (r *UpgradeDBInstanceEngineVersionRequest) FromJsonString(s string) error {
 	delete(f, "EngineVersion")
 	delete(f, "WaitSwitch")
 	delete(f, "UpgradeSubversion")
+	delete(f, "MaxDelayTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceEngineVersionRequest has unknown keys!", "")
 	}
@@ -7382,6 +7386,9 @@ type UpgradeDBInstanceRequest struct {
 
 	// Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
 	FastUpgrade *int64 `json:"FastUpgrade,omitempty" name:"FastUpgrade"`
+
+	// Delay threshold. Value range: 1-10. Default value: `10`.
+	MaxDelayTime *int64 `json:"MaxDelayTime,omitempty" name:"MaxDelayTime"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {
@@ -7409,6 +7416,7 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "DeviceType")
 	delete(f, "Cpu")
 	delete(f, "FastUpgrade")
+	delete(f, "MaxDelayTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceRequest has unknown keys!", "")
 	}

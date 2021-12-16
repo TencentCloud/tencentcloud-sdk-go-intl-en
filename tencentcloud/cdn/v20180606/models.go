@@ -288,6 +288,27 @@ type AdvanceConfig struct {
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
+type AdvanceHttps struct {
+
+	// 
+	CustomTlsStatus *string `json:"CustomTlsStatus,omitempty" name:"CustomTlsStatus"`
+
+	// 
+	TlsVersion []*string `json:"TlsVersion,omitempty" name:"TlsVersion"`
+
+	// 
+	Cipher *string `json:"Cipher,omitempty" name:"Cipher"`
+
+	// 
+	VerifyOriginType *string `json:"VerifyOriginType,omitempty" name:"VerifyOriginType"`
+
+	// 
+	CertInfo *ServerCert `json:"CertInfo,omitempty" name:"CertInfo"`
+
+	// 
+	OriginCertInfo *ClientCert `json:"OriginCertInfo,omitempty" name:"OriginCertInfo"`
+}
+
 type AdvancedAuthentication struct {
 
 	// Hotlink protection configuration switch (which can be on or off). If it is enabled, only one mode can and must be configured, while other modes are null.
@@ -467,6 +488,40 @@ type AdvancedAuthenticationTypeF struct {
 	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
 }
 
+type AdvancedCCRules struct {
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Detection duration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DetectionTime *uint64 `json:"DetectionTime,omitempty" name:"DetectionTime"`
+
+	// Detection frequency threshold
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FrequencyLimit *uint64 `json:"FrequencyLimit,omitempty" name:"FrequencyLimit"`
+
+	// Whether to enable IP penalty. Valid values: `on` and `off`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PunishmentSwitch *string `json:"PunishmentSwitch,omitempty" name:"PunishmentSwitch"`
+
+	// IP penalty duration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PunishmentTime *uint64 `json:"PunishmentTime,omitempty" name:"PunishmentTime"`
+
+	// Action. Valid values: `intercept` and `redirect`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// A redirection URL used when Action is `redirect`
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
+
+	// Layer-7 rule configuration for CC frequency limiting
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Configure []*ScdnSevenLayerRules `json:"Configure,omitempty" name:"Configure"`
+}
+
 type AdvancedCache struct {
 
 	// Cache expiration rule
@@ -487,6 +542,279 @@ type AdvancedCache struct {
 	// It is disabled by default.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	IgnoreSetCookie *string `json:"IgnoreSetCookie,omitempty" name:"IgnoreSetCookie"`
+}
+
+type AdvancedScdnAclGroup struct {
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Specific configurations
+	Configure []*AdvancedScdnAclRule `json:"Configure,omitempty" name:"Configure"`
+
+	// Action. Valid values: `intercept` and `redirect`.
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// Whether the rule is activated. Valid values: `active` and `inactive`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Error page configuration
+	ErrorPage *ScdnErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
+}
+
+type AdvancedScdnAclRule struct {
+
+	// Keyword. Valid values:
+	// `protocol`: HTTP protocol
+	// `httpVersion`: HTTP version
+	// `method`: request method
+	// `ip`: requester IP
+	// `ipAsn`: ASN of the requester IP
+	// `ipCountry`: country/region of the requester IP
+	// `ipArea`: region of the requester IP
+	// `xForwardFor`: X-Forward-For request header
+	// `directory`: path
+	// `index`: homepage
+	// `path`: full path of a file
+	// `file`: file extension
+	// `param`: request parameter
+	// `referer`: Referer request header
+	// `cookie`: Cookie request header
+	// `userAgent`: User-Agent request header
+	// `head`: custom request header
+	MatchKey *string `json:"MatchKey,omitempty" name:"MatchKey"`
+
+	// Logical operator. Valid values:
+	// `exclude`: the keyword is not included
+	// `include`: the keyword is included
+	// `notequal`: not the same as the keyword
+	// `equal`: the same as the keyword
+	// `matching`: the prefix is matched
+	// `null`: empty or does not exist
+	LogicOperator *string `json:"LogicOperator,omitempty" name:"LogicOperator"`
+
+	// Match value
+	// When `MatchKey` is `protocol`,
+	// Values: `HTTP` and `HTTPS`.
+	// 
+	// When `MatchKey` is `httpVersion`,
+	// Values: `HTTP/1.0`, `HTTP/1.1`, `HTTP/1.2`, `HTTP/2`, and `HTTP/3`.
+	// 
+	// When `MatchKey` is `method`,
+	// Values: `HEAD`, `GET`, `POST`, `PUT`, `OPTIONS`, `TRACE`, `DELETE`, `PATCH` and `CONNECT`.
+	// 
+	// When `MatchKey` is `ipCountry`, valid values include:
+	// `OTHER`: other countries/regions
+	// `VE`: Venezuela
+	// `UY`: Uruguay
+	// `SR`: Suriname
+	// `PY`: Paraguay
+	// `PE`: Peru
+	// `GY`: Guyana
+	// `EC`: Ecuador
+	// `CO`: Colombia
+	// `CL`: Chile
+	// `BR`: Brazil
+	// `BO`: Bolivia
+	// `AR`: Argentina
+	// `NZ`: New Zealand
+	// `WS`: Samoa
+	// `VU`: Vanuatu
+	// `TV`: Tuvalu
+	// `TO`: Tonga
+	// `TK`: Tokelau
+	// `PW`: Palau
+	// `NU`: Niue
+	// `NR`: Nauru
+	// `KI`: Kiribati
+	// `GU`: Guam
+	// `FM`: Micronesia
+	// `AU`: Australia
+	// `US`: United States
+	// `PR`: Puerto Rico
+	// `DO`: Dominican Republic
+	// `CR`: Costa Rica
+	// `AS`: American Samoa
+	// `AG`: Antigua and Barbuda
+	// `PA`: Panama
+	// `NI`: Nicaragua
+	// `MX`: Mexico
+	// `JM`: Jamaica
+	// `HT`: Haiti
+	// `HN`: Honduras
+	// `GT`: Guatemala
+	// `GP`: Guadeloupe
+	// `GL`: Greenland
+	// `GD`: Grenada
+	// `CU`: Cuba
+	// `CA`: Canada
+	// `BZ`: Belize
+	// `BS`: Bahamas
+	// `BM`: Bermuda
+	// `BB`: Barbados
+	// `AW`: Aruba
+	// `AI`: Anguilla
+	// `VA`: Vatican
+	// `SK`: Slovakia
+	// `RU`: Russia
+	// `GB`: United Kingdom
+	// `CZ`: Czech Republic
+	// `UA`: Ukraine
+	// `TR`: Turkey
+	// `SI`: Slovenia
+	// `SE`: Sweden
+	// `RS`: Republic of Serbia
+	// `RO`: Romania
+	// `PT`: Portugal
+	// `PL`: Poland
+	// `NO`: Norway
+	// `NL`: Netherlands
+	// `MT`: Malta
+	// `MK`: Macedonia
+	// `ME`: Montenegro
+	// `MD`: Moldova
+	// `MC`: Monaco
+	// `LV`: Latvia
+	// `LU`: Luxembourg
+	// `LT`: Lithuania
+	// `LI`: Liechtenstein
+	// `KZ`: Kazakhstan
+	// `IT`: Italy
+	// `IS`: Iceland
+	// `IE`: Ireland
+	// `HU`: Hungary
+	// `HR`: Croatia
+	// `GR`: Greece
+	// `GI`: Gibraltar
+	// `GG`: Guernsey
+	// `GE`: Georgia
+	// `FR`: France
+	// `FI`: Finland
+	// `ES`: Spain
+	// `EE`: Estonia
+	// `DK`: Denmark
+	// `DE`: Germany
+	// `CY`: Cyprus
+	// `CH`: Switzerland
+	// `BY`: Belarus
+	// `BG`: Bulgaria
+	// `BE`: Belgium
+	// `AZ`: Azerbaijan
+	// `AT`: Austria
+	// `AM`: Armenia
+	// `AL`: Albania
+	// `AD`: Andorra
+	// `TL`: East Timor
+	// `SY`: Syria
+	// `SA`: Saudi Arabia
+	// `PS`: Palestine
+	// `LK`: Sri Lanka
+	// `LK`: Sri Lanka
+	// `KP`: North Korea
+	// `KG`: Kyrgyzstan
+	// `HK`: Hong Kong, China
+	// `BN`: Brunei
+	// `BD`: Bangladesh
+	// `AE`: United Arab Emirates
+	// `YE`: Yemen
+	// `VN`: Vietnam
+	// `UZ`: Uzbekistan
+	// `TW`: Taiwan, China
+	// `TM`: Turkmenistan
+	// `TJ`: Tajikistan
+	// `TH`: Thailand
+	// `SG`: Singapore
+	// `QA`: Qatar
+	// `PK`: Pakistan
+	// `PH`: Philippines
+	// `OM`: Oman
+	// `NP`: Nepal
+	// `MY`: Malaysia
+	// `MV`: Maldives
+	// `MO`: Macao, China
+	// `MN`: Mongolia
+	// `MM`: Myanmar
+	// `LB`: Lebanon
+	// `KW`: Kuwait
+	// `KR`: South Korea
+	// `KH`: Cambodia
+	// `JP`: Japan
+	// `JO`: Jordan
+	// `IR`: Iran
+	// `IQ`: Iraq
+	// `IN`: India
+	// `IL`: Israel
+	// `ID`: Indonesia
+	// `CN`: China
+	// `BT`: Bhutan
+	// `BH`: Bahrain
+	// `AF`: Afghanistan
+	// `LY`: Libya
+	// `CD`: Democratic Republic of the Congo
+	// `RE`: La Réunion
+	// `SZ`: Swaziland
+	// `ZW`: Zimbabwe
+	// `ZM`: Zambia
+	// `YT`: Mayotte
+	// `UG`: Uganda
+	// `TZ`: Tanzania
+	// `TN`: Tunisia
+	// `TG`: Togo
+	// `TD`: Chad
+	// `SO`: Somalia
+	// `SN`: Senegal
+	// `SD`: Sudan
+	// `SC`: Seychelles
+	// `RW`: Rwanda
+	// `NG`: Nigeria
+	// `NE`: Niger
+	// `NA`: Namibia
+	// `MZ`: Mozambique
+	// `MW`: Malawi
+	// `MU`: Mauritius
+	// `MR`: Mauritania
+	// `ML`: Mali
+	// `MG`: Madagascar
+	// `MA`: Morocco
+	// `LS`: Lesotho
+	// `LR`: Liberia
+	// `KM`: Comoros
+	// `KE`: Kenya
+	// `GN`: Guinea
+	// `GM`: Gambia
+	// `GH`: Ghana
+	// `GA`: Gabon
+	// `ET`: Ethiopia
+	// `ER`: Eritrea
+	// `EG`: Egypt
+	// `DZ`: Algeria
+	// `DJ`: Djibouti
+	// `CM`: Cameroon
+	// `CG`: Republic of the Congo
+	// `BW`: Botswana
+	// `BJ`: Benin
+	// `BI`: Burundi
+	// `AO`: Angola
+	// 
+	// When MatchKey is `ipArea`, valid values include:
+	// `OTHER`: other areas
+	// `AS`: Asia
+	// `EU`: Europe
+	// `AN`: Antarctica
+	// `AF`: Africa
+	// `OC`: Oceania
+	// `NA`: North America
+	// `SA`: South America
+	// 
+	// When MatchKey is `index`,
+	// valid value is `/;/index.html`.
+	MatchValue []*string `json:"MatchValue,omitempty" name:"MatchValue"`
+
+	// Whether to distinguish uppercase or lowercase letters. `true`: case sensitive; `false`: case insensitive.
+	CaseSensitive *bool `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
+
+	// This field is required when `MatchKey` is `param` or `cookie`. For `param`, it indicates a key value of the request parameter if MatchKey is `param`, while a key value of the Cookie request header if MatchKey is `cookie`.
+	MatchKeyParam *string `json:"MatchKeyParam,omitempty" name:"MatchKeyParam"`
 }
 
 type Authentication struct {
@@ -536,6 +864,11 @@ type AuthenticationTypeA struct {
 	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+	// Backup key, which is used to calculate a signature.
+	// 6-32 characters. Only digits and letters are allowed. 
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
 }
 
 type AuthenticationTypeB struct {
@@ -556,6 +889,11 @@ type AuthenticationTypeB struct {
 	// allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 	// blacklist: indicates that only the file types in the FileExtensions list are authenticated
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+	// Backup key, which is used to calculate a signature.
+	// 6-32 characters. Only digits and letters are allowed. 
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
 }
 
 type AuthenticationTypeC struct {
@@ -582,6 +920,11 @@ type AuthenticationTypeC struct {
 	// hex: hexadecimal
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+
+	// Backup key, which is used to calculate a signature.
+	// 6-32 characters. Only digits and letters are allowed. 
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
 }
 
 type AuthenticationTypeD struct {
@@ -615,6 +958,11 @@ type AuthenticationTypeD struct {
 	// dec: decimal
 	// hex: hexadecimal
 	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+
+	// Backup key, which is used to calculate a signature.
+	// 6-32 characters. Only digits and letters are allowed. 
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
 }
 
 type AwsPrivateAccess struct {
@@ -1081,11 +1429,6 @@ type CompressionRule struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Compress *bool `json:"Compress,omitempty" name:"Compress"`
 
-	// Compress according to the file suffix type
-	// Such as: jpg, txt
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
-
 	// The minimum file size to trigger compression (in bytes)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MinLength *int64 `json:"MinLength,omitempty" name:"MinLength"`
@@ -1100,6 +1443,30 @@ type CompressionRule struct {
 	// brotli: specifies Brotli compression
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Algorithms []*string `json:"Algorithms,omitempty" name:"Algorithms"`
+
+	// Compress according to the file suffix type
+	// Such as: jpg, txt
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
+
+	// Rule types:
+	// `all`: effective for all files.
+	// `file`: effective for specified file suffixes.
+	// `directory`: effective for specified paths.
+	// `path`: effective for specified absolute paths.
+	// `contentType`: effective when the `ContentType` is specified
+	// If this field is specified, `FileExtensions` does not take effect.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Content for each `CacheType`:
+	// For `all`, enter a wildcard `*`.
+	// For `file`, enter a suffix, e.g., `jpg` or `txt`.
+	// For `directory`, enter a path, e.g., `/xxx/test/`.
+	// For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+	// For `contentType`, enter `text/html`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 }
 
 type CookieKey struct {
@@ -2845,8 +3212,8 @@ type DetailDomain struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FollowRedirect *FollowRedirect `json:"FollowRedirect,omitempty" name:"FollowRedirect"`
 
-	// Custom error page configuration (in beta)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Configuration of custom error page
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ErrorPage *ErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
 
 	// Custom request header configuration
@@ -2994,15 +3361,15 @@ type DetailDomain struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
 
-	// Advanced configuration set
+	// Advanced configuration settings
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AdvanceSet []*AdvanceConfig `json:"AdvanceSet,omitempty" name:"AdvanceSet"`
 
-	// Offline cache
+	// Offline cache (only available to beta users)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
 
-	// Merging pull requests
+	// Merging origin-pull requests (only available to beta users)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginCombine *OriginCombine `json:"OriginCombine,omitempty" name:"OriginCombine"`
 
@@ -3021,6 +3388,14 @@ type DetailDomain struct {
 	// WebSocket configuration.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
+
+	// Remote authentication configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RemoteAuthentication *RemoteAuthentication `json:"RemoteAuthentication,omitempty" name:"RemoteAuthentication"`
+
+	// Shared CNAME configuration (only available to beta users)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ShareCname *ShareCname `json:"ShareCname,omitempty" name:"ShareCname"`
 }
 
 type DisableCachesRequest struct {
@@ -3234,6 +3609,10 @@ type EnableCachesResponse struct {
 		// Result list
 	// Note: This field may return null, indicating that no valid values can be obtained.
 		CacheOptResult *CacheOptResult `json:"CacheOptResult,omitempty" name:"CacheOptResult"`
+
+		// Task ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3622,6 +4001,11 @@ type IpFilter struct {
 	// IP blocklist/allowlist path-based configuration. This feature is only available to selected beta customers.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	FilterRules []*IpFilterPathRule `json:"FilterRules,omitempty" name:"FilterRules"`
+
+	// HTTP code returned when the IP allowlist/blocklist verification fails
+	// Valid values: 400-499
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
 }
 
 type IpFilterPathRule struct {
@@ -3934,6 +4318,9 @@ type ListTopDataRequest struct {
 
 	// Specifies the product to query, either `cdn` (default) or `ecdn`.
 	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Returns the first N data entries. The default value is 100 if this parameter is not specified, whereas 1000 if `Metric` is `url`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
 func (r *ListTopDataRequest) ToJsonString() string {
@@ -3959,6 +4346,7 @@ func (r *ListTopDataRequest) FromJsonString(s string) error {
 	delete(f, "Area")
 	delete(f, "AreaType")
 	delete(f, "Product")
+	delete(f, "Limit")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListTopDataRequest has unknown keys!", "")
 	}
@@ -4236,19 +4624,22 @@ type Origin struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Origins []*string `json:"Origins,omitempty" name:"Origins"`
 
-	// Master origin server type
-	// The following types are supported for input parameters:
-	// domain: domain name type
-	// cos: COS origin
-	// ip: IP list used as origin server
-	// ipv6: origin server list is a single IPv6 address
-	// ip_ipv6: origin server list is multiple IPv4 addresses and an IPv6 address
-	// The following types of output parameters are added:
-	// image: Cloud Infinite origin
-	// ftp: legacy FTP origin, which is no longer maintained.
-	// When modifying `Origins`, you need to enter the corresponding OriginType.
-	// The IPv6 feature is not generally available yet. Please send in a whitelist application to use this feature.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Primary origin server type
+	// Input:
+	// `domain`: domain name
+	// `cos`: COS bucket address
+	// `ip`: IP address
+	// `ipv6`: a single IPv6 address
+	// `ip_ipv6`: multiple IPv4 addresses and one IPv6 address
+	// `ip_domain`: both IP addresses and domain names (only available to beta users)
+	// `ipv6_domain`: multiple IPv6 addresses and one domain name
+	// `ip_ipv6_domain`: multiple IPv4 and IPv6 addresses and one domain name
+	// Output: 
+	// `image`: Cloud Infinite origin
+	// `ftp`: FTP origin (disused)
+	// When modifying `Origins`, you need to enter the corresponding `OriginType`.
+	// The IPv6 feature is now only available to beta users. Please submit an application to use this feature.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
 	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
@@ -4273,11 +4664,16 @@ type Origin struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupOrigins []*string `json:"BackupOrigins,omitempty" name:"BackupOrigins"`
 
-	// Backup origin server type, which supports the following types:
-	// domain: domain name type
-	// ip: IP list used as origin server
-	// When modifying BackupOrigins, you need to enter the corresponding BackupOriginType.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Secondary origin type. Values:
+	// `domain`: domain name
+	// `ip`: IP address
+	// When modifying `BackupOrigins`, you need to enter the corresponding `BackupOriginType`.
+	// The following backup origin servers are only available to beta users. Submit an application if you want to become a beta user.
+	// `ipv6_domain`: multiple IPv6 addresses and one domain name
+	// `ip_ipv6`: multiple IPv4 addresses and one IPv6 address
+	// `ipv6_domain`: multiple IPv6 addresses and one domain name
+	// `ip_ipv6_domain`: multiple IPv4 and IPv6 addresses and one domain name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	BackupOriginType *string `json:"BackupOriginType,omitempty" name:"BackupOriginType"`
 
 	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
@@ -4294,6 +4690,9 @@ type Origin struct {
 	// Path-based origin-pull configurations
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	PathBasedOrigin []*PathBasedOriginRule `json:"PathBasedOrigin,omitempty" name:"PathBasedOrigin"`
+
+	// 
+	AdvanceHttps *AdvanceHttps `json:"AdvanceHttps,omitempty" name:"AdvanceHttps"`
 }
 
 type OriginAuthentication struct {
@@ -4838,6 +5237,30 @@ type RangeOriginPull struct {
 	// on: enabled
 	// off: disabled
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Range GETs configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RangeRules []*RangeOriginPullRule `json:"RangeRules,omitempty" name:"RangeRules"`
+}
+
+type RangeOriginPullRule struct {
+
+	// Specifies whether Range GETs is enabled
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Rule types:
+	// `file`: effective for specified file suffixes.
+	// `directory`: effective for specified paths.
+	// `path`: effective for specified absolute paths.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Content for each `RuleType`:
+	// For `file`, enter a suffix, e.g., `jpg` or `txt`.
+	// For `directory`, enter a path, e.g., `/xxx/test/`.
+	// For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 }
 
 type Referer struct {
@@ -4889,6 +5312,63 @@ type RegionMapRelation struct {
 
 	// List of sub-region IDs
 	SubRegionIdList []*int64 `json:"SubRegionIdList,omitempty" name:"SubRegionIdList"`
+}
+
+type RemoteAuthentication struct {
+
+	// Remote authentication switch
+	// `on`: enable
+	// `off`: disable
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Remote authentication rule configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RemoteAuthenticationRules []*RemoteAuthenticationRule `json:"RemoteAuthenticationRules,omitempty" name:"RemoteAuthenticationRules"`
+
+	// Remote authentication server
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Server *string `json:"Server,omitempty" name:"Server"`
+}
+
+type RemoteAuthenticationRule struct {
+
+	// Remote authentication server
+	// The server configured in `RemoteAutherntication` is used by default.
+	Server *string `json:"Server,omitempty" name:"Server"`
+
+	// HTTP method used by the remote authentication server. Valid values: `get`, `post`, `head`, and `all`. 
+	// `all`: the remote authentication server follows the client request method.
+	// Default: `all`
+	AuthMethod *string `json:"AuthMethod,omitempty" name:"AuthMethod"`
+
+	// Rule types:
+	// `all`: apply to all files
+	// `file`: apply to files with the specified suffixes
+	// `directory`: apply to the specified directories
+	// `path`: apply to the specified absolute paths
+	// Default: `all`.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Content for each `RuleType`:
+	// For `all`, enter a wildcard `*`.
+	// For `file`, enter a suffix, e.g., `jpg` or `txt`.
+	// For `directory`, enter a path, e.g., `/xxx/test/`.
+	// For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+	// For `index`, enter a forward slash `/`.
+	// Default: `*`
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
+
+	// Timeout period of the remote authentication server. Unit: ms.
+	// Value range: [1, 30,000]
+	// Default: 20000
+	AuthTimeout *int64 `json:"AuthTimeout,omitempty" name:"AuthTimeout"`
+
+	// Whether to deny or allow the request when the remote authentication server is timed out:
+	// `RETURN_200`: the request is allowed when the remote authentication server is timed out.
+	// `RETURN_403`: the request is denied when the remote authentication server is timed out.
+	// Default: `RETURN_200`
+	AuthTimeoutAction *string `json:"AuthTimeoutAction,omitempty" name:"AuthTimeoutAction"`
 }
 
 type ReportData struct {
@@ -5054,13 +5534,17 @@ type ScdnAclConfig struct {
 	// Whether to enable. Valid values: `on` and `off`.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// ACL rule group, which is required when the access control is on.
+	// This field is disused. Please use `AdvancedScriptData` instead.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ScriptData []*ScdnAclGroup `json:"ScriptData,omitempty" name:"ScriptData"`
 
 	// Error page configuration
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ErrorPage *ScdnErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
+
+	// ACL rule group, which is required when the access control is on.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AdvancedScriptData []*AdvancedScdnAclGroup `json:"AdvancedScriptData,omitempty" name:"AdvancedScriptData"`
 }
 
 type ScdnAclGroup struct {
@@ -5071,7 +5555,7 @@ type ScdnAclGroup struct {
 	// Specific configurations
 	Configure []*ScdnAclRule `json:"Configure,omitempty" name:"Configure"`
 
-	// Rule action, which can be `refuse` or `redirect`.
+	// Action. Valid values: `intercept` and `redirect`.
 	Result *string `json:"Result,omitempty" name:"Result"`
 
 	// Whether the rule is effective. Valid values: `active` and `inactive`.
@@ -5084,13 +5568,13 @@ type ScdnAclGroup struct {
 
 type ScdnAclRule struct {
 
-	// Match keywords. Valid values: `params`, `url`, `ip`, `referer`, and `user-agent`.
+	// Keyword
 	MatchKey *string `json:"MatchKey,omitempty" name:"MatchKey"`
 
-	// Logical operator. Valid values: `exclude`, `include`, `notequal`, `equal`, `len-less`, `len-equal`, and `len-more`.
+	// Logical operator. Valid values:
 	LogiOperator *string `json:"LogiOperator,omitempty" name:"LogiOperator"`
 
-	// Match value
+	// Matched value
 	MatchValue *string `json:"MatchValue,omitempty" name:"MatchValue"`
 }
 
@@ -5157,6 +5641,10 @@ type ScdnConfig struct {
 	// Custom CC attack defense rule
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Rules []*ScdnCCRules `json:"Rules,omitempty" name:"Rules"`
+
+	// Advanced custom CC attack defense rule
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AdvancedRules []*AdvancedCCRules `json:"AdvancedRules,omitempty" name:"AdvancedRules"`
 }
 
 type ScdnDdosConfig struct {
@@ -5168,10 +5656,51 @@ type ScdnDdosConfig struct {
 type ScdnErrorPage struct {
 
 	// Status code
+	// `403` is passed in when the action is `intercept`.
+	// `301` is passed in when the action is `redirect`.
 	RedirectCode *int64 `json:"RedirectCode,omitempty" name:"RedirectCode"`
 
 	// Redirection URL
 	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
+}
+
+type ScdnSevenLayerRules struct {
+
+	// Whether values are case sensitive
+	CaseSensitive *bool `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
+
+	// Rule types:
+	// `protocol`: protocol. Valid values: `HTTP` and `HTTPS`.
+	// `method`: request method. Valid values: `HEAD`, `GET`, `POST`, `PUT`, `OPTIONS`, `TRACE`, `DELETE`, `PATCH` and `CONNECT`.
+	// `all`: domain name. The matching content is `*` and cannot be edited.
+	// `ip`: IP in CIDR format.
+	// `directory`: path starting with a slash (/). You can specify a directory or specific path using up to 128 characters.
+	// `index`: default homepage, which is specified by `/;/index.html` and cannot be edited.
+	// `path`: full path of the file, such as `/acb/test.png`. Wildcard is supported, such as `/abc/*.jpg`.
+	// `file`: file extension, such as `jpg`, `png` and `css`.
+	// `param`: request parameter. The value can contain up to 512 characters.
+	// `referer`: Referer. The value can contain up to 512 characters.
+	// `cookie`: Cookie. The value can contain up to 512 characters.
+	// `user-agent`: User-Agent. The value can contain up to 512 characters.
+	// `head`: custom header. The value can contain up to 512 characters. If the matching content is blank or does not exist, enter the matching parameter directly.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Logical operator, which connects the relation between RuleType and RuleValue. Valid values:
+	// `exclude`: the rule value is not contained. 
+	// `include`: the rule value is contained. 
+	// `notequal`: the rule value is not equal to the specified rule type. 
+	// `equal`: the rule value is equal to the specified rule type. 
+	// `matching`: the rule value matches with the prefix of the specified rule type.
+	// `null`: the rule value is empty or does not exist.
+	LogicOperator *string `json:"LogicOperator,omitempty" name:"LogicOperator"`
+
+	// Rule value
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RuleValue []*string `json:"RuleValue,omitempty" name:"RuleValue"`
+
+	// Matched parameter. Only request parameters, Cookie, and custom request headers have a value.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RuleParam *string `json:"RuleParam,omitempty" name:"RuleParam"`
 }
 
 type ScdnWafConfig struct {
@@ -5351,6 +5880,18 @@ type ServerCert struct {
 	// Certificate remarks
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
+}
+
+type ShareCname struct {
+
+	// Specifies whether to enable Shared CNAME. If it is set to `off`, the default CNAME is used. If it is set to `on`, a shared CNAME is used.
+	// 
+	// * ShareCname is only available to beta users. To use this feature, please submit a ticket for application.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Shared CNAME to be configured
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Cname *string `json:"Cname,omitempty" name:"Cname"`
 }
 
 type SimpleCache struct {
@@ -5727,9 +6268,10 @@ type UpdateDomainConfigRequest struct {
 	SpecificConfig *SpecificConfig `json:"SpecificConfig,omitempty" name:"SpecificConfig"`
 
 	// Domain name acceleration region
-	// mainland: acceleration inside mainland China
-	// overseas: acceleration outside mainland China
-	// global: global acceleration
+	// `mainland`: acceleration inside the Chinese mainland
+	// `overseas`: acceleration outside the Chinese mainland
+	// `global`: global acceleration
+	// When you change it to from `mainland`/`overseas` to `global`, configurations of the domain name will be deployed to the region inside or outside the Chinese mainland. The deployment will take some time as this domain name has special settings.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
 	// Origin-pull timeout configuration
@@ -5744,7 +6286,7 @@ type UpdateDomainConfigRequest struct {
 	// Access control
 	AccessControl *AccessControl `json:"AccessControl,omitempty" name:"AccessControl"`
 
-	// URL redirect configuration
+	// Configuration of URL rewriting
 	UrlRedirect *UrlRedirect `json:"UrlRedirect,omitempty" name:"UrlRedirect"`
 
 	// Access port configuration
@@ -5773,6 +6315,12 @@ type UpdateDomainConfigRequest struct {
 
 	// WebSocket configuration.
 	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
+
+	// Configuration of remote authentication
+	RemoteAuthentication *RemoteAuthentication `json:"RemoteAuthentication,omitempty" name:"RemoteAuthentication"`
+
+	// Shared CNAME configuration (only available to beta users)
+	ShareCname *ShareCname `json:"ShareCname,omitempty" name:"ShareCname"`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {
@@ -5829,6 +6377,8 @@ func (r *UpdateDomainConfigRequest) FromJsonString(s string) error {
 	delete(f, "Quic")
 	delete(f, "OssPrivateAccess")
 	delete(f, "WebSocket")
+	delete(f, "RemoteAuthentication")
+	delete(f, "ShareCname")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateDomainConfigRequest has unknown keys!", "")
 	}
@@ -6019,6 +6569,10 @@ type UrlRedirectRule struct {
 	// Target host. It should be a standard domain name starting with `http://` or `https://`. If it is left empty, “http://[current domain name]” will be used by default.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	RedirectHost *string `json:"RedirectHost,omitempty" name:"RedirectHost"`
+
+	// Whether to use full-path matching or arbitrary matching
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FullMatch *bool `json:"FullMatch,omitempty" name:"FullMatch"`
 }
 
 type UserAgentFilter struct {
