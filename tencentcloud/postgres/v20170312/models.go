@@ -368,9 +368,6 @@ type CreateInstancesRequest struct {
 	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
-	// PostgreSQL kernel version. Valid values: `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
-	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
-
 	// Instance storage capacity in GB
 	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
 
@@ -394,6 +391,9 @@ type CreateInstancesRequest struct {
 
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// PostgreSQL major version. Valid values: `9.3`, `9.5`, `10`, `11`, `12`, `13`, `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
@@ -427,6 +427,12 @@ type CreateInstancesRequest struct {
 
 	// Security group IDs
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// 
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// 
+	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -442,7 +448,6 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "SpecCode")
-	delete(f, "DBVersion")
 	delete(f, "Storage")
 	delete(f, "InstanceCount")
 	delete(f, "Period")
@@ -451,6 +456,7 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "AdminName")
 	delete(f, "AdminPassword")
 	delete(f, "ProjectId")
+	delete(f, "DBVersion")
 	delete(f, "InstanceChargeType")
 	delete(f, "AutoVoucher")
 	delete(f, "VoucherIds")
@@ -462,6 +468,8 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "NeedSupportIpv6")
 	delete(f, "TagList")
 	delete(f, "SecurityGroupIds")
+	delete(f, "DBMajorVersion")
+	delete(f, "DBKernelVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
@@ -857,7 +865,7 @@ type DBInstance struct {
 	// Instance name
 	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
 
-	// Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`
+	// Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`
 	DBInstanceStatus *string `json:"DBInstanceStatus,omitempty" name:"DBInstanceStatus"`
 
 	// Assigned instance memory size in GB
@@ -941,9 +949,12 @@ type DBInstance struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
 
-	// Network access list of the instance
+	// Network access list of the instance (this field has been deprecated)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	NetworkAccessList []*NetworkAccess `json:"NetworkAccessList,omitempty" name:"NetworkAccessList"`
+
+	// 
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
 }
 
 type DBInstanceNetInfo struct {
@@ -960,8 +971,16 @@ type DBInstanceNetInfo struct {
 	// Network type. 1: inner (private network address), 2: public (public network address)
 	NetType *string `json:"NetType,omitempty" name:"NetType"`
 
-	// Network connection status
+	// Network connection status. Valid values: `initing` (never enabled before), `opened` (enabled), `closed` (disabled), `opening` (enabling), `closing` (disabling)
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// VPC ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }
 
 type DeleteReadOnlyGroupRequest struct {
@@ -3180,11 +3199,11 @@ func (r *ModifySwitchTimePeriodResponse) FromJsonString(s string) error {
 
 type NetworkAccess struct {
 
-	// Network resource ID, instance ID or RO group ID (this field has been deprecated)
+	// Network resource ID, instance ID, or RO group ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
-	// Resource type. Valid values: `1` (instance), `2` (RO group) (this field has been deprecated)
+	// Resource type. Valid values: `1` (instance), `2` (RO group)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ResourceType *uint64 `json:"ResourceType,omitempty" name:"ResourceType"`
 
@@ -3548,7 +3567,7 @@ type ReadOnlyGroup struct {
 	// Network information
 	DBInstanceNetInfo []*DBInstanceNetInfo `json:"DBInstanceNetInfo,omitempty" name:"DBInstanceNetInfo"`
 
-	// Network access list of the RO group
+	// Network access list of the RO group (this field has been deprecated)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	NetworkAccessList []*NetworkAccess `json:"NetworkAccessList,omitempty" name:"NetworkAccessList"`
 }

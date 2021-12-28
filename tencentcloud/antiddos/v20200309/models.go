@@ -211,7 +211,8 @@ type BGPIPInstance struct {
 	// Whether to enable Sec-MCA. Valid values: `1` (enabled) and `0` (disabled).
 	DamDDoSStatus *uint64 `json:"DamDDoSStatus,omitempty" name:"DamDDoSStatus"`
 
-	// 
+	// Whether it’s an IPv6 address. `1`: Yes; `0`: No.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	V6Flag *uint64 `json:"V6Flag,omitempty" name:"V6Flag"`
 }
 

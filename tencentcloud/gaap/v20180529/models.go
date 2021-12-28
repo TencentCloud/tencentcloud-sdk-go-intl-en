@@ -3425,6 +3425,9 @@ type DescribeProxyStatisticsRequest struct {
 	// Time range: <= 7 days, supported minimum granularity: 3,600 seconds;
 	// Time range: <= 30 days, supported minimum granularity: 86,400 seconds;
 	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
+
+	// Specifies the ISP. Valid values: `CMCC`, `CUCC`, and `CTCC`. If it is not specified, all ISP data will be returned. Note that this field is valid only when a non-BGP connection is used.
+	Isp *string `json:"Isp,omitempty" name:"Isp"`
 }
 
 func (r *DescribeProxyStatisticsRequest) ToJsonString() string {
@@ -3444,6 +3447,7 @@ func (r *DescribeProxyStatisticsRequest) FromJsonString(s string) error {
 	delete(f, "EndTime")
 	delete(f, "MetricNames")
 	delete(f, "Granularity")
+	delete(f, "Isp")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProxyStatisticsRequest has unknown keys!", "")
 	}

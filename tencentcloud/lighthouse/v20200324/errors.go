@@ -182,6 +182,9 @@ const (
 	// Incorrect quota resource name.
 	INVALIDPARAMETERVALUE_INVALIDRESOURCEQUOTARESOURCENAME = "InvalidParameterValue.InvalidResourceQuotaResourceName"
 
+	// Invalid `Zone` value.
+	INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
+
 	// Invalid parametric value: the key pair ID format is invalid.
 	INVALIDPARAMETERVALUE_KEYPAIRIDMALFORMED = "InvalidParameterValue.KeyPairIdMalformed"
 

@@ -1461,6 +1461,18 @@ type CreateApiRequest struct {
 
 	// SCF function type, which takes effect if the backend type is `SCF`. Valid values: `EVENT` and `HTTP`.
 	ServiceScfFunctionType *string `json:"ServiceScfFunctionType,omitempty" name:"ServiceScfFunctionType"`
+
+	// EIAM application type.
+	EIAMAppType *string `json:"EIAMAppType,omitempty" name:"EIAMAppType"`
+
+	// EIAM application authentication type. Valid values: `AuthenticationOnly`, `Authentication`, `Authorization`.
+	EIAMAuthType *string `json:"EIAMAuthType,omitempty" name:"EIAMAuthType"`
+
+	// Validity of the EIAM application token. Unit: second. Default value: `7200`.
+	TokenTimeout *int64 `json:"TokenTimeout,omitempty" name:"TokenTimeout"`
+
+	// EIAM application ID.
+	EIAMAppId *string `json:"EIAMAppId,omitempty" name:"EIAMAppId"`
 }
 
 func (r *CreateApiRequest) ToJsonString() string {
@@ -1522,6 +1534,10 @@ func (r *CreateApiRequest) FromJsonString(s string) error {
 	delete(f, "UserType")
 	delete(f, "IsBase64Encoded")
 	delete(f, "ServiceScfFunctionType")
+	delete(f, "EIAMAppType")
+	delete(f, "EIAMAuthType")
+	delete(f, "TokenTimeout")
+	delete(f, "EIAMAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApiRequest has unknown keys!", "")
 	}
@@ -1639,7 +1655,7 @@ type CreatePluginRequest struct {
 	// Custom plugin name. A plugin name should contain 2-50 characters out of a-z, A-Z, 0-9, and _, which must begin with a letter and end with a letter or a number.
 	PluginName *string `json:"PluginName,omitempty" name:"PluginName"`
 
-	// Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`
+	// Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`, `Routing`, `TrafficControlByParameter`.
 	PluginType *string `json:"PluginType,omitempty" name:"PluginType"`
 
 	// Plugin definition statement in json format
@@ -4379,7 +4395,7 @@ type DescribeServicesStatusRequest struct {
 	// Offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Filter. Valid values: ServiceId, ServiceName, NotUsagePlanId, Environment, IpVersion, InstanceId
+	// Filter. Valid values: `ServiceId`, `ServiceName`, `NotUsagePlanId`, `Environment`, `IpVersion`, `InstanceId`, `NetType`, `EIAMAppId`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
