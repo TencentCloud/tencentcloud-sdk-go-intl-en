@@ -3712,6 +3712,17 @@ type ErrorPageRule struct {
 	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
 }
 
+type ExtraLogset struct {
+
+	// Logset information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Logset *LogSetInfo `json:"Logset,omitempty" name:"Logset"`
+
+	// Log topic information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Topics []*TopicInfo `json:"Topics,omitempty" name:"Topics"`
+}
+
 type FollowRedirect struct {
 
 	// Origin-pull follow-redirect switch
@@ -4153,12 +4164,16 @@ type ListClsLogTopicsResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Logset information
+		// Information of logsets in the Shanghai region
 		Logset *LogSetInfo `json:"Logset,omitempty" name:"Logset"`
 
-		// Log topic information list
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Information of log topics in the Shanghai region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		Topics []*TopicInfo `json:"Topics,omitempty" name:"Topics"`
+
+		// Information on logsets in regions except Shanghai
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		ExtraLogset []*ExtraLogset `json:"ExtraLogset,omitempty" name:"ExtraLogset"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4402,6 +4417,14 @@ type LogSetInfo struct {
 
 	// Region
 	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Whether the logset has been removed from CLS
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Deleted *string `json:"Deleted,omitempty" name:"Deleted"`
+
+	// Whether English is used in this region
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RegionEn *string `json:"RegionEn,omitempty" name:"RegionEn"`
 }
 
 type MainlandConfig struct {
@@ -6170,6 +6193,10 @@ type TopicInfo struct {
 	// Either `cdn` or `ecdn`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Channel *string `json:"Channel,omitempty" name:"Channel"`
+
+	// Whether the log topic has been removed from CLS
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Deleted *string `json:"Deleted,omitempty" name:"Deleted"`
 }
 
 type TpgAdapter struct {

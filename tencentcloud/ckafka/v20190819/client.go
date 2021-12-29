@@ -1144,6 +1144,7 @@ func NewDescribeTopicDetailResponse() (response *DescribeTopicDetailResponse) {
 // This API is used to get topic list details (only for call in the console).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"

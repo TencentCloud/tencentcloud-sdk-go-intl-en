@@ -259,8 +259,15 @@ type AiAnalysisTaskClassificationInput struct {
 
 type AiAnalysisTaskClassificationOutput struct {
 
-	// List of intelligently generated video categories.
+	// List of intelligently generated video categories
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `ClassificationSetFileUrl`.
 	ClassificationSet []*MediaAiAnalysisClassificationItem `json:"ClassificationSet,omitempty" name:"ClassificationSet"`
+
+	// URL to the file for intelligently generated video categories. The file is in JSON format and has the same data structure as `ClassificationSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `ClassificationSetFileUrlExpireTime`.
+	ClassificationSetFileUrl *string `json:"ClassificationSetFileUrl,omitempty" name:"ClassificationSetFileUrl"`
+
+	// Expiration time of the URL to the file for intelligently generated video categories, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	ClassificationSetFileUrlExpireTime *string `json:"ClassificationSetFileUrlExpireTime,omitempty" name:"ClassificationSetFileUrlExpireTime"`
 }
 
 type AiAnalysisTaskClassificationResult struct {
@@ -293,8 +300,15 @@ type AiAnalysisTaskCoverInput struct {
 
 type AiAnalysisTaskCoverOutput struct {
 
-	// List of intelligently generated covers.
+	// List of intelligently generated thumbnails
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `CoverSetFileUrl`.
 	CoverSet []*MediaAiAnalysisCoverItem `json:"CoverSet,omitempty" name:"CoverSet"`
+
+	// URL to the file for intelligently generated thumbnails. The file is in JSON format and has the same data structure as `CoverSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `CoverSetFileUrlExpireTime`.
+	CoverSetFileUrl *string `json:"CoverSetFileUrl,omitempty" name:"CoverSetFileUrl"`
+
+	// Expiration time of the URL to the file for intelligently generated thumbnails, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	CoverSetFileUrlExpireTime *string `json:"CoverSetFileUrlExpireTime,omitempty" name:"CoverSetFileUrlExpireTime"`
 }
 
 type AiAnalysisTaskCoverResult struct {
@@ -327,8 +341,15 @@ type AiAnalysisTaskFrameTagInput struct {
 
 type AiAnalysisTaskFrameTagOutput struct {
 
-	// List of frame-specific video tags.
+	// List of frame-specific video tags
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaAiAnalysisFrameTagSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for frame-specific video tags. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file for frame-specific video tags, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiAnalysisTaskFrameTagResult struct {
@@ -361,8 +382,15 @@ type AiAnalysisTaskHighlightInput struct {
 
 type AiAnalysisTaskHighlightOutput struct {
 
-	// List of intelligently generated highlights.
+	// List of intelligently generated highlights
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `HighlightSetFileUrl`.
 	HighlightSet []*MediaAiAnalysisHighlightItem `json:"HighlightSet,omitempty" name:"HighlightSet"`
+
+	// URL to the file for intelligently generated highlights. The file is in JSON format and has the same data structure as `HighlightSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `HighlightSetFileUrlExpireTime`.
+	HighlightSetFileUrl *string `json:"HighlightSetFileUrl,omitempty" name:"HighlightSetFileUrl"`
+
+	// Expiration time of the URL to the file for intelligently generated highlights, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	HighlightSetFileUrlExpireTime *string `json:"HighlightSetFileUrlExpireTime,omitempty" name:"HighlightSetFileUrlExpireTime"`
 }
 
 type AiAnalysisTaskHighlightResult struct {
@@ -401,8 +429,15 @@ type AiAnalysisTaskTagInput struct {
 
 type AiAnalysisTaskTagOutput struct {
 
-	// List of intelligently generated video tags.
+	// List of intelligently generated video tags
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `TagSetFileUrl`.
 	TagSet []*MediaAiAnalysisTagItem `json:"TagSet,omitempty" name:"TagSet"`
+
+	// URL to the file for intelligently generated video tags. The file is in JSON format and has the same data structure as `TagSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `TagSetFileUrlExpireTime`.
+	TagSetFileUrl *string `json:"TagSetFileUrl,omitempty" name:"TagSetFileUrl"`
+
+	// Expiration time of the URL to the file for intelligently generated video tags, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	TagSetFileUrlExpireTime *string `json:"TagSetFileUrlExpireTime,omitempty" name:"TagSetFileUrlExpireTime"`
 }
 
 type AiAnalysisTaskTagResult struct {
@@ -1063,8 +1098,15 @@ type AiReviewPoliticalAsrTaskOutput struct {
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain ASR-detected politically sensitive information in speech.
+	// List of video segments that contain ASR-detected politically sensitive information
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for video segments that contain ASR-detected politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file for video segments that contain ASR-detected politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewPoliticalOcrTaskInput struct {
@@ -1084,8 +1126,15 @@ type AiReviewPoliticalOcrTaskOutput struct {
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain OCR-detected politically sensitive information in text.
+	// List of video segments that contain OCR-detected politically sensitive information
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for video segments that contain OCR-detected politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file for video segments that contain OCR-detected politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewPoliticalTaskInput struct {
@@ -1114,9 +1163,15 @@ type AiReviewPoliticalTaskOutput struct {
 	// <li>politician: political figure.</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
-	// List of video segments that contain the detected politically sensitive information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// List of video segments that contain politically sensitive information
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewPoliticalSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for video segments that contain politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file for video segments that contain politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewPornAsrTaskInput struct {
@@ -1136,8 +1191,15 @@ type AiReviewPornAsrTaskOutput struct {
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain the ASR-detected porn information in speech.
+	// List of video segments that contain ASR-detected porn information
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for video segments that contain ASR-detected porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file for video segments that contain ASR-detected porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewPornOcrTaskInput struct {
@@ -1157,8 +1219,15 @@ type AiReviewPornOcrTaskOutput struct {
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain the OCR-detected porn information in text.
+	// List of video segments that contain OCR-detected porn information
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for video segments that contain OCR-detected porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file for video segments that contain OCR-detected porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewPornTaskInput struct {
@@ -1188,9 +1257,15 @@ type AiReviewPornTaskOutput struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Label *string `json:"Label,omitempty" name:"Label"`
 
-	// List of video segments that contain the detected porn information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// List of video segments that contain porn information
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for video segments that contain porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file of for video segments that contain porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewProhibitedAsrTaskInput struct {
@@ -1210,8 +1285,15 @@ type AiReviewProhibitedAsrTaskOutput struct {
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain the ASR-detected prohibited information in speech.
+	// List of video segments that contain ASR-detected prohibited information
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for video segments that contain ASR-detected prohibited information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file for video segments that contain ASR-detected prohibited information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewProhibitedOcrTaskInput struct {
@@ -1231,8 +1313,15 @@ type AiReviewProhibitedOcrTaskOutput struct {
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain the OCR-detected prohibited information in text.
+	// List of video segments that contain OCR-detected prohibited information
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for video segments that contain OCR-detected prohibited information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL for video segments that contain OCR-detected prohibited information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewTaskPoliticalAsrResult struct {
@@ -1478,8 +1567,15 @@ type AiReviewTerrorismOcrTaskOutput struct {
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain OCR-detected terrorism information in text.
+	// List of video segments that contain OCR-detected terrorism information
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for video segments that contain OCR-detected terrorism information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file for video segments that contain OCR-detected terrorism information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewTerrorismTaskInput struct {
@@ -1513,9 +1609,15 @@ type AiReviewTerrorismTaskOutput struct {
 	// <li>`scenario`: terrorism images</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
-	// List of video segments that contain the detected terrorism information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// List of video segments that contain terrorism information
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// URL to the file for video segments that contain terrorism information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// Expiration time of the URL to the file for video segments that contain terrorism information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiSampleFaceInfo struct {
@@ -7314,6 +7416,10 @@ type EventContent struct {
 	// Release on WeChat Mini Program task completion event, which is valid if the event type is `WechatMiniProgramPublishComplete`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WechatMiniProgramPublishCompleteEvent *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishCompleteEvent,omitempty" name:"WechatMiniProgramPublishCompleteEvent"`
+
+	// Callback for video retrieval. This parameter is valid when the event type is `RestoreMediaComplete`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RestoreMediaCompleteEvent *RestoreMediaTask `json:"RestoreMediaCompleteEvent,omitempty" name:"RestoreMediaCompleteEvent"`
 }
 
 type ExecuteFunctionRequest struct {
@@ -8835,12 +8941,12 @@ type MediaSnapshotByTimePicInfoItem struct {
 
 type MediaSourceData struct {
 
-	// Source category of media file:
-	// <li>Record: recording, such as LVB recording and LVB time shifting recording.</li>
-	// <li>Upload: upload, such as pull for upload, upload from server, and UCG upload from client.</li>
-	// <li>VideoProcessing: video processing, such as video splicing and video clipping.</li>
-	// <li>Unknown: unknown source.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Source of a media file:
+	// <li>`Record`: recording, such as live or time-shift recording</li>
+	// <li>`Upload`: upload, such as pull for upload, upload from server, and UGC upload from client</li>
+	// <li>`VideoProcessing`: video processing, such as video splicing and video clipping</li>
+	// <li>`WebPageRecord`: panoramic recording </li>
+	// <li>`Unknown`: unknown source</li>
 	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
 
 	// Field passed through when a file is created.
@@ -11905,6 +12011,33 @@ type ResourceTag struct {
 
 	// Tag value.
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type RestoreMediaTask struct {
+
+	// File ID
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// Original storage class
+	OriginalStorageClass *string `json:"OriginalStorageClass,omitempty" name:"OriginalStorageClass"`
+
+	// Target storage class. For temporary retrieval, the target storage class is the same as the original.
+	TargetStorageClass *string `json:"TargetStorageClass,omitempty" name:"TargetStorageClass"`
+
+	// Retrieval mode. Valid values:
+	// <li>Expedited</li>
+	// <li>Standard</li>
+	// <li>Bulk</li>
+	RestoreTier *string `json:"RestoreTier,omitempty" name:"RestoreTier"`
+
+	// Validity period (days) for a temporary copy. `0` indicates permanent retrieval.
+	RestoreDay *int64 `json:"RestoreDay,omitempty" name:"RestoreDay"`
+
+	// This field has been disused.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// This field has been disused.
+	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
 type SampleSnapshotTaskInput struct {

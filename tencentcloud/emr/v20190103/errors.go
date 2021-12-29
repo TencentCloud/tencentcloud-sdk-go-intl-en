@@ -80,7 +80,7 @@ const (
 	// An error occurred while calling another service API.
 	INTERNALERROR_VPCERROR = "InternalError.VpcError"
 
-	// An error occurred when calling the Woodpecker server.
+	// An error occurred while calling another service API.
 	INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
 
 	// Invalid parameter.
@@ -122,7 +122,7 @@ const (
 	// An individual scaling-out request only applies to task nodes or core nodes.
 	INVALIDPARAMETER_INVALIDCOUNTNUM = "InvalidParameter.InvalidCountNum"
 
-	// Container account or container parameter verification error.
+	// Error message: Invalid PodParameter.
 	INVALIDPARAMETER_INVALIDCUSTOMIZEDPODPARAM = "InvalidParameter.InvalidCustomizedPodParam"
 
 	// Invalid disk size.
@@ -285,6 +285,9 @@ const (
 	RESOURCENOTFOUND_TAGSNOTFOUND = "ResourceNotFound.TagsNotFound"
 
 	// There is no default specification for the current resource specification.
+	RESOURCEUNAVAILABLE_RESOURCESPECNOTDEFAULTSPEC = "ResourceUnavailable.ResourceSpecNotDefaultSpec"
+
+	// There is no default specification for the current resource specification.
 	RESOURCEUNAVAILABLE_RESOURCESPEC_NOTDEFAULTSPEC = "ResourceUnavailable.ResourceSpec_NotDefaultSpec"
 
 	// The resources have been sold out.
@@ -301,4 +304,7 @@ const (
 
 	// Unsupported operation.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
+
+	// This operation is not supported.
+	UNSUPPORTEDOPERATION_SERVICENOTSUPPORT = "UnsupportedOperation.ServiceNotSupport"
 )

@@ -355,16 +355,16 @@ type CreateAclRequest struct {
 	// Instance ID information
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// ACL resource type. 0: UNKNOWN, 1: ANY, 2: TOPIC, 3: GROUP, 4: CLUSTER, 5: TRANSACTIONAL_ID. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka
+	// ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
 	ResourceType *int64 `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// ACL operation mode. 0: UNKNOWN, 1: ANY, 2: ALL, 3: READ, 4: WRITE, 5: CREATE, 6: DELETE, 7: ALTER, 8: DESCRIBE, 9: CLUSTER_ACTION, 10: DESCRIBE_CONFIGS, 11: ALTER_CONFIGS
+	// ACL operation type (`2`: ALL, `3`: READ, `4`: WRITE, `5`: CREATE, `6`: DELETE, `7`: ALTER, `8`: DESCRIBE, `9`: CLUSTER_ACTION, `10`: DESCRIBE_CONFIGS, `11`: ALTER_CONFIGS, `12`: IDEMPOTENT_WRITE).
 	Operation *int64 `json:"Operation,omitempty" name:"Operation"`
 
-	// Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to allowlist), and other fields will be used for future ACLs compatible with open-source Kafka
+	// Permission type (`2`: DENY, `3`: ALLOW). CKafka currently supports `ALLOW`, which is equivalent to allowlist. `DENY` will be supported for ACLs compatible with open-source Kafka.
 	PermissionType *int64 `json:"PermissionType,omitempty" name:"PermissionType"`
 
-	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name
+	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name; if `resourceType` is `CLUSTER`, this field can be left empty.
 	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
 
 	// The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
@@ -714,16 +714,16 @@ type DeleteAclRequest struct {
 	// Instance ID information
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// ACL resource type. 0: UNKNOWN, 1: ANY, 2: TOPIC, 3: GROUP, 4: CLUSTER, 5: TRANSACTIONAL_ID. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka
+	// ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
 	ResourceType *int64 `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name
+	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name; if `resourceType` is `CLUSTER`, this field can be left empty.
 	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
 
-	// ACL operation mode. 0: UNKNOWN, 1: ANY, 2: ALL, 3: READ, 4: WRITE, 5: CREATE, 6: DELETE, 7: ALTER, 8: DESCRIBE, 9: CLUSTER_ACTION, 10: DESCRIBE_CONFIGS, 11: ALTER_CONFIGS, 12: IDEMPOTEN_WRITE. Currently, CKafka only supports `READ` and `WRITE`, and other values will be used for future ACLs compatible with open-source Kafka
+	// ACL operation type (`2`: ALL, `3`: READ, `4`: WRITE, `5`: CREATE, `6`: DELETE, `7`: ALTER, `8`: DESCRIBE, `9`: CLUSTER_ACTION, `10`: DESCRIBE_CONFIGS, `11`: ALTER_CONFIGS, `12`: IDEMPOTENT_WRITE).
 	Operation *int64 `json:"Operation,omitempty" name:"Operation"`
 
-	// Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to allowlist), and other fields will be used for future ACLs compatible with open-source Kafka
+	// Permission type (`2`: DENY, `3`: ALLOW). CKafka currently supports `ALLOW`, which is equivalent to allowlist. `DENY` will be supported for ACLs compatible with open-source Kafka.
 	PermissionType *int64 `json:"PermissionType,omitempty" name:"PermissionType"`
 
 	// The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
@@ -996,10 +996,10 @@ type DescribeACLRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// ACL resource type. 0: UNKNOWN, 1: ANY, 2: TOPIC, 3: GROUP, 4: CLUSTER, 5: TRANSACTIONAL_ID. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka
+	// ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
 	ResourceType *int64 `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name
+	// Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name; if `resourceType` is `CLUSTER`, this field can be left empty.
 	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
 
 	// Offset position
@@ -1555,7 +1555,7 @@ type DescribeInstancesRequest struct {
 	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Tag key match.
+	// Tag key value (this field has been deprecated).
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 }
 
@@ -2084,6 +2084,21 @@ func (r *DescribeUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DynamicDiskConfig struct {
+
+	// 
+	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+
+	// 
+	StepForwardPercentage *int64 `json:"StepForwardPercentage,omitempty" name:"StepForwardPercentage"`
+
+	// 
+	DiskQuotaPercentage *int64 `json:"DiskQuotaPercentage,omitempty" name:"DiskQuotaPercentage"`
+
+	// 
+	MaxDiskSpace *int64 `json:"MaxDiskSpace,omitempty" name:"MaxDiskSpace"`
+}
+
 type DynamicRetentionTime struct {
 
 	// Whether the dynamic message retention time configuration is enabled. 0: disabled; 1: enabled
@@ -2408,6 +2423,17 @@ type InstanceAttributesResponse struct {
 	// Time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeleteRouteTimestamp *string `json:"DeleteRouteTimestamp,omitempty" name:"DeleteRouteTimestamp"`
+
+	// Number of remaining creatable partitions
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RemainingPartitions *int64 `json:"RemainingPartitions,omitempty" name:"RemainingPartitions"`
+
+	// Number of remaining creatable topics
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RemainingTopics *int64 `json:"RemainingTopics,omitempty" name:"RemainingTopics"`
+
+	// 
+	DynamicDiskConfig *DynamicDiskConfig `json:"DynamicDiskConfig,omitempty" name:"DynamicDiskConfig"`
 }
 
 type InstanceConfigDO struct {

@@ -243,6 +243,30 @@ type ClusterInstancesInfo struct {
 	// Availability zone
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Scenario name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	SceneName *string `json:"SceneName,omitempty" name:"SceneName"`
+
+	// Scenario-based cluster type
+	// Note: This field may return `null`, indicating that no valid value was found.
+	SceneServiceClass *string `json:"SceneServiceClass,omitempty" name:"SceneServiceClass"`
+
+	// Scenario-based EMR version
+	// Note: This field may return `null`, indicating that no valid value was found.
+	SceneEmrVersion *string `json:"SceneEmrVersion,omitempty" name:"SceneEmrVersion"`
+
+	// Scenario-based cluster type
+	// Note: This field may return `null`, indicating that no valid value was found.
+	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+
+	// VPC name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+
+	// Subnet name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
 }
 
 type CreateInstanceRequest struct {
@@ -368,6 +392,13 @@ type CreateInstanceRequest struct {
 
 	// Custom application role.
 	ApplicationRole *string `json:"ApplicationRole,omitempty" name:"ApplicationRole"`
+
+	// Scenario-based values:
+	// Hadoop-Kudu
+	// Hadoop-Zookeeper
+	// Hadoop-Presto
+	// Hadoop-Hbase
+	SceneName *string `json:"SceneName,omitempty" name:"SceneName"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -409,6 +440,7 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "UnifyMetaInstanceId")
 	delete(f, "MetaDBInfo")
 	delete(f, "ApplicationRole")
+	delete(f, "SceneName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
 	}
@@ -784,6 +816,13 @@ type InquiryPriceCreateInstanceRequest struct {
 	// <li>4: EMR v2.1.0.</li>
 	// <li>7: EMR v3.0.0.</li>
 	ProductId *uint64 `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Scenario-based values:
+	// Hadoop-Kudu
+	// Hadoop-Zookeeper
+	// Hadoop-Presto
+	// Hadoop-Hbase
+	SceneName *string `json:"SceneName,omitempty" name:"SceneName"`
 }
 
 func (r *InquiryPriceCreateInstanceRequest) ToJsonString() string {
@@ -811,6 +850,7 @@ func (r *InquiryPriceCreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "UnifyMetaInstanceId")
 	delete(f, "MetaDBInfo")
 	delete(f, "ProductId")
+	delete(f, "SceneName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateInstanceRequest has unknown keys!", "")
 	}
